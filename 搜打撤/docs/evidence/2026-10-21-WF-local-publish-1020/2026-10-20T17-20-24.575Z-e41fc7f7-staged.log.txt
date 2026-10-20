@@ -1,0 +1,684 @@
+{"mode":"full","paths":["game/assets/README.md","game/assets/asset-manifest.json","game/assets/cards/equip-tt13-astrolabe.webp","game/assets/cards/equip-tt13-flame-staff.webp","game/assets/cards/equip-tt13-magazine.webp","game/assets/cards/equip-tt13-poor-meal.webp","game/assets/cards/equip-tt13-scale-armor.webp","game/assets/cards/martial-tt13-guard.webp","game/assets/cards/martial-tt13-mercy.webp","game/assets/cards/martial-tt13-snipe.webp","game/assets/cards/spell-tt13-bitter-rain.webp","game/assets/cards/spell-tt13-chaos-deck.webp","game/assets/cards/spell-tt13-mind-control.webp","game/assets/cards/spell-tt13-soul-contract.webp","game/assets/cards/spell-tt13-spring.webp","game/assets/cards/spell-tt13-stellar-divination.webp","game/assets/reconstruction/wallpaper-wu-bass-1020.webp","game/assets/thumbs/cards/equip-tt13-astrolabe.webp","game/assets/thumbs/cards/equip-tt13-flame-staff.webp","game/assets/thumbs/cards/equip-tt13-magazine.webp","game/assets/thumbs/cards/equip-tt13-poor-meal.webp","game/assets/thumbs/cards/equip-tt13-scale-armor.webp","game/assets/thumbs/cards/martial-tt13-guard.webp","game/assets/thumbs/cards/martial-tt13-mercy.webp","game/assets/thumbs/cards/martial-tt13-snipe.webp","game/assets/thumbs/cards/spell-tt13-bitter-rain.webp","game/assets/thumbs/cards/spell-tt13-chaos-deck.webp","game/assets/thumbs/cards/spell-tt13-mind-control.webp","game/assets/thumbs/cards/spell-tt13-soul-contract.webp","game/assets/thumbs/cards/spell-tt13-spring.webp","game/assets/thumbs/cards/spell-tt13-stellar-divination.webp","game/data/art-mapping.json","game/data/beginner-guide.json","game/src/README.md","game/src/agent/agent.js","game/src/agent/agent.policy.js","game/src/agent/agent.recorder.js","game/src/agent/agent.replay-state.js","game/src/agent/agent.replay.js","game/src/agent/agent.runner.js","game/src/agent/agent.scenes.runtime.js","game/src/agent/agent.state.js","game/src/battle/bag/battle.bag.domain.js","game/src/battle/bag/battle.bag.js","game/src/battle/bag/battle.consumed-pile.js","game/src/battle/bag/battle.deck.factory.js","game/src/battle/bag/battle.deck.js","game/src/battle/bag/battle.equipment.domain.js","game/src/battle/bag/battle.equipment.js","game/src/battle/battle.snapshot.types.d.ts","game/src/battle/core/battle.card-play.domain.js","game/src/battle/core/battle.card-play.js","game/src/battle/core/battle.core.js","game/src/battle/core/battle.damage.domain.js","game/src/battle/core/battle.damage.js","game/src/battle/core/battle.default-context.js","game/src/battle/core/battle.draw.domain.js","game/src/battle/core/battle.draw.js","game/src/battle/core/battle.enemy-intent.js","game/src/battle/core/battle.enemy-phase.domain.js","game/src/battle/core/battle.enemy-phase.js","game/src/battle/core/battle.enemy-plan.js","game/src/battle/core/battle.engine.factory.domain.js","game/src/battle/core/battle.engine.factory.js","game/src/battle/core/battle.engine.instance.js","game/src/battle/core/battle.engine.js","game/src/battle/core/battle.exec-play.domain.js","game/src/battle/core/battle.exec-play.js","game/src/battle/core/battle.facts.js","game/src/battle/core/battle.foe-lifecycle.domain.js","game/src/battle/core/battle.foe-lifecycle.js","game/src/battle/core/battle.hand-selection.js","game/src/battle/core/battle.hand.js","game/src/battle/core/battle.lifecycle.domain.js","game/src/battle/core/battle.lifecycle.js","game/src/battle/core/battle.resolution.domain.js","game/src/battle/core/battle.resolution.js","game/src/battle/core/battle.selection-flow.domain.js","game/src/battle/core/battle.selection-flow.js","game/src/battle/core/battle.summary.factory.js","game/src/battle/core/battle.summary.js","game/src/battle/core/battle.turn-continuation.js","game/src/battle/core/battle.turn-start.js","game/src/battle/core/combat.factory.js","game/src/battle/core/combat.js","game/src/battle/effects/battle.card-cost.js","game/src/battle/effects/battle.card-inspection.domain.js","game/src/battle/effects/battle.card-inspection.js","game/src/battle/effects/battle.cost-modifiers.js","game/src/battle/effects/battle.discover-flow.js","game/src/battle/effects/battle.discover-state.js","game/src/battle/effects/battle.effects.js","game/src/battle/effects/battle.foe-fight.js","game/src/battle/effects/battle.hosted.js","game/src/battle/effects/battle.infusion.domain.js","game/src/battle/effects/battle.infusion.js","game/src/battle/effects/battle.rule-guard.js","game/src/battle/effects/battle.target-rules.js","game/src/battle/effects/battle.trigger-source.js","game/src/battle/effects/battle.triggers.m2.domain.js","game/src/battle/effects/battle.triggers.m2.js","game/src/battle/effects/card-semantic-operations.js","game/src/battle/effects/choice-semantic-operations.js","game/src/battle/effects/effect-steps.audit.js","game/src/battle/effects/effect-steps.ctx.js","game/src/battle/effects/effect-steps.damage.js","game/src/battle/effects/effect-steps.deck.js","game/src/battle/effects/effect-steps.gates.js","game/src/battle/effects/effect-steps.js","game/src/battle/effects/effect-steps.kills.js","game/src/battle/effects/effect-steps.m1.domain.js","game/src/battle/effects/effect-steps.m1.js","game/src/battle/effects/effect-steps.m2.domain.js","game/src/battle/effects/effect-steps.m2.js","game/src/battle/effects/effect-steps.recovery.js","game/src/battle/effects/effect-verbs.js","game/src/battle/effects/equipment-semantic-operations.js","game/src/battle/effects/requested-card-runtime.domain.js","game/src/battle/effects/requested-card-runtime.js","game/src/battle/runtime/battle.action-runner.js","game/src/battle/runtime/battle.browser-presentation.js","game/src/battle/runtime/battle.host-scheduling.js","game/src/battle/runtime/battle.playback.js","game/src/battle/runtime/battle.presentation-ports.js","game/src/battle/runtime/battle.runtime.default.js","game/src/battle/runtime/battle.runtime.effects.js","game/src/battle/runtime/battle.runtime.factory.js","game/src/battle/runtime/battle.runtime.interaction.js","game/src/battle/runtime/battle.runtime.piles.js","game/src/battle/runtime/battle.runtime.presentation.js","game/src/battle/runtime/battle.runtime.session.js","game/src/battle/runtime/battle.snapshot.js","game/src/battle/runtime/battle.staged-playback.js","game/src/battle/view/battle.action-timing.js","game/src/battle/view/battle.anim.view.js","game/src/battle/view/battle.attack-cues.js","game/src/battle/view/battle.attack-profiles.js","game/src/battle/view/battle.decision-content.js","game/src/battle/view/battle.enemy-motion.js","game/src/battle/view/battle.frames.js","game/src/battle/view/battle.hover.js","game/src/battle/view/battle.infusion-view.js","game/src/battle/view/battle.layers.js","game/src/battle/view/battle.piles.view.js","game/src/battle/view/battle.preview.js","game/src/battle/view/battle.turn-forecast.js","game/src/battle/view/battle.vfx.js","game/src/battle/view/battle.victory.js","game/src/battle/view/battle.view.js","game/src/boot-order.js","game/src/cards/builtin-card-execution.js","game/src/cards/builtin-card-field-defaults.js","game/src/cards/builtin-card-identities.js","game/src/cards/builtin-card-numeric-fields.js","game/src/cards/builtin-card-previous-rules.js","game/src/cards/builtin-card-previous-variants.js","game/src/cards/builtin-choice-execution.js","game/src/cards/builtin-equipment-execution.js","game/src/cards/builtin-equipment-previous-rules.js","game/src/cards/card-battle-start-explanation.js","game/src/cards/card-description-links.js","game/src/cards/card-description-text.js","game/src/cards/card-execution-plan.js","game/src/cards/card-execution-plan.types.d.ts","game/src/cards/card-frame-presentation.js","game/src/cards/card-instance-fields.js","game/src/cards/card-instance.js","game/src/cards/card-rules.capability.js","game/src/cards/card-rules.capability.types.d.ts","game/src/cards/card-rules.schema.js","game/src/cards/card-semantic-contract.js","game/src/cards/card-trigger-contract.js","game/src/cards/cards.data.js","game/src/cards/cards.js","game/src/cards/cards.rules.js","game/src/cards/cards.sync.builtin.js","game/src/cards/cards.sync.face-refresh.js","game/src/cards/cards.sync.js","game/src/cards/cards.sync.m2.js","game/src/cards/cards.sync.m3.js","game/src/cards/cards.view.js","game/src/cards/pierce-arrow-revision.js","game/src/cards/structured-card-description.js","game/src/core/asset-url.js","game/src/core/card-capacity.js","game/src/core/performance-settings.js","game/src/core/random-service.js","game/src/core/random.js","game/src/core/run-checkpoint.js","game/src/core/runtime-trace-stages.local.js","game/src/core/runtime-trace.local.js","game/src/game.boot.js","game/src/generated/art-manifest.js","game/src/generated/thumb-manifest.js","game/src/hub/bag-pane-view.js","game/src/hub/base-departure.commands.js","game/src/hub/base.commands.js","game/src/hub/base.js","game/src/hub/courtyard-vendor/KoiPond.js","game/src/hub/departure-persistence.js","game/src/hub/departure.summary.js","game/src/hub/game.bag.drag.js","game/src/hub/game.bag.js","game/src/hub/game.bag.settle.js","game/src/hub/game.cardslib.designer.js","game/src/hub/game.hub.depart.js","game/src/hub/game.hub.pages.js","game/src/hub/game.hub.preparation.js","game/src/hub/game.hub.runtime.js","game/src/hub/game.storage.js","game/src/hub/hub.archive-v3.js","game/src/hub/hub.archive.js","game/src/hub/hub.collection-v4.js","game/src/hub/hub.personnel.js","game/src/hub/hub.trade-shop-v5.js","game/src/hub/hub.warehouse.js","game/src/hub/meta.js","game/src/hub/recovery.commands.js","game/src/hub/slot-write-lock.js","game/src/hub/terminal.commands.js","game/src/hub/versioned-slot-reader.js","game/src/main.js","game/src/run/chest-opening-art.js","game/src/run/chests.js","game/src/run/event-card-choice.js","game/src/run/event-commands.js","game/src/run/event-recode-candidates.js","game/src/run/game.nest.js","game/src/run/game.run.class-choice.page.js","game/src/run/game.run.dev.js","game/src/run/game.run.events.js","game/src/run/game.run.flow.js","game/src/run/game.run.resources.js","game/src/run/game.run.scenes.js","game/src/run/game.run.shop.js","game/src/run/game.session.bag.js","game/src/run/game.session.death.js","game/src/run/game.session.js","game/src/run/map-snapshot.js","game/src/run/node-reward-state.js","game/src/run/run-domain-commands.types.d.ts","game/src/run/shop-browse-state.js","game/src/run/shop-commands.js","game/src/run/shop-commission.js","game/src/ui/achievement-gallery.js","game/src/ui/battle-hud-info.js","game/src/ui/beginner-guide-diagrams.js","game/src/ui/card-browser.js","game/src/ui/equipment-info.js","game/src/ui/event-dice.js","game/src/ui/event-option-state.js","game/src/ui/game.menu.js","game/src/ui/game.menu.pages.js","game/src/ui/home-menu-motion.js","game/src/ui/interface-motion.js","game/src/ui/overlay.js","game/src/ui/page-motion-profiles.js","game/src/ui/page-visual-ready.js","game/src/ui/performance-settings.js","game/src/ui/reward-acquisition-motion.js","game/src/ui/reward-card-feedback.js","game/src/ui/reward-scene-view.js","game/src/ui/settings-battle-restart.js","game/src/ui/settings-navigation.js","game/src/ui/term-tips.js","game/src/ui/transitions-director.js","jsconfig.framework-boundaries.json","jsconfig.framework-ports.json","scripts/architecture-graph.mjs","scripts/check-types.mjs","scripts/gate-plan.mjs","scripts/generate-compendium.mjs","scripts/runtime-asset-redundancy-review.mjs","scripts/runtime-trace-alignment.mjs","scripts/sync-cards-from-live.mjs","scripts/video-review.mjs","scripts/workflow-evidence.mjs","tests/abyss-sovereign.test.js","tests/achievement-gallery-close.test.js","tests/achievement-gallery.test.js","tests/agent-command-results.test.js","tests/agent-console-jump.test.js","tests/agent-scenes.test.js","tests/architecture-boundaries.test.js","tests/archive-progress-rendering.test.js","tests/armup-mode.test.js","tests/bag-help-return-continuity.test.js","tests/bag-item-rule-baseline.test.js","tests/bag-page-lifecycle-review.test.js","tests/bag-pouch-capacity.test.js","tests/bag-structured-rule-migration.test.js","tests/base-corrupt-field.test.js","tests/base-direct-write-convergence.test.js","tests/base-elapsed.test.js","tests/base-hub-business-lifecycle-audit.test.js","tests/base-inventory-lifecycle-audit.test.js","tests/base-material-rule-baseline.test.js","tests/base-meta.test.js","tests/base-mutation.test.js","tests/base-pet-egg.test.js","tests/base-save-snapshot.test.js","tests/base-sticky-issue-fix.test.js","tests/base-storage-read-failure.test.js","tests/base-write-lock.test.js","tests/battle-action-timing.test.js","tests/battle-architecture.test.js","tests/battle-card-inspection.test.js","tests/battle-decision-redesign.test.js","tests/battle-direct-trigger-source.test.js","tests/battle-discover-result-source.test.js","tests/battle-effect-damage-boundary.test.js","tests/battle-engine-decomposition.test.js","tests/battle-engine-facade.test.js","tests/battle-entry-view.test.js","tests/battle-equipment-skill-synthesis.test.js","tests/battle-frames-lifecycle.test.js","tests/battle-hand-content-diff.test.js","tests/battle-hand-group-index.test.js","tests/battle-hand-inspector.test.js","tests/battle-hover-play-availability.test.js","tests/battle-hud-info.test.js","tests/battle-infusion-action-layout.test.js","tests/battle-modules.test.js","tests/battle-nature-staff-cost.test.js","tests/battle-pile-readability.test.js","tests/battle-pouch-entry.test.js","tests/battle-preview-trust-boundary.test.js","tests/battle-pure-rules.test.js","tests/battle-query-cost-benchmark.test.js","tests/battle-render-derivation.test.js","tests/battle-resolution.test.js","tests/battle-rule-audit-1014.test.js","tests/battle-runtime-completion-1014.test.js","tests/battle-runtime-state-guard.test.js","tests/battle-scenery-secondary-ready.test.js","tests/battle-selection-consumer.test.js","tests/battle-selection-flow-boundary.test.js","tests/battle-settlement-recovery.test.js","tests/battle-staged-timing.test.js","tests/battle-status-preview.test.js","tests/battle-structured-authority-unification.test.js","tests/battle-temp-item-destination.test.js","tests/battle-tools-lifecycle.test.js","tests/battle-trigger-lifecycle-unification.test.js","tests/battle-victory-presentation.test.js","tests/boot.test.js","tests/boss-rescue-pool.test.js","tests/builtin-card-acquisition.test.js","tests/builtin-card-execution-battle.test.js","tests/builtin-card-execution.test.js","tests/card-battle-start-explanation.test.js","tests/card-browser-deferred-art.test.js","tests/card-browser-state.test.js","tests/card-description-audit-battle.test.js","tests/card-description-fix-lifecycle.test.js","tests/card-description-fix-pools.test.js","tests/card-description-fix-target-effects.test.js","tests/card-description-text.test.js","tests/card-effect-semantics.test.js","tests/card-execution-plan.test.js","tests/card-face-presentation.test.js","tests/chest-acquired-gift-cloud.test.js","tests/chest-callback-lifecycle-audit.test.js","tests/chest-click-flow.test.js","tests/chest-extra-rewards-choice.test.js","tests/chest-multi-queue-regression.test.js","tests/choice-semantic-operations.test.js","tests/collection-room.test.js","tests/combat-status-boundary-unification.test.js","tests/compact-reward-layout.test.js","tests/compendium.test.js","tests/contracts.test.js","tests/courtyard-koi.test.js","tests/departure-browse-state.test.js","tests/departure-class-confirmation.test.js","tests/departure-persistence.test.js","tests/departure-real-session-review.test.js","tests/departure-render-performance.test.js","tests/departure-stack-lifecycle-review.test.js","tests/dev-tools-lazy-entry.test.js","tests/direct-cast.test.js","tests/e4-async-entry.test.js","tests/e5-session-recovery.test.js","tests/e6-card-rules-capability.test.js","tests/e8-card-inventory.test.js","tests/effect-verbs.test.js","tests/ember-burst-rot-seed.test.js","tests/energy-crystal-restoration.test.js","tests/equipment-semantic-operations.test.js","tests/event-callback-lifecycle-audit.test.js","tests/event-choice-acquired-gift-cloud.test.js","tests/event-node-binding-cloud.test.js","tests/event-option-state.test.js","tests/event-recode-selection-continuity.test.js","tests/event-settlement-unification.test.js","tests/event-signal-puzzle-integration.test.js","tests/events-0919.test.js","tests/expedition-battle-presentation.test.js","tests/extra-legend-reward-persistence.test.js","tests/extraction-receipt-idempotency.test.js","tests/extraction-record-saved-cards-cloud.test.js","tests/extraction-recovery-ui.test.js","tests/extraction-recovery.test.js","tests/extraction-session-resume.test.js","tests/facade-snapshot-drift.test.js","tests/first-explore-marking.test.js","tests/fixtures/approved-card-batch-20261020.json","tests/fixtures/builtin-execution-approved-20261020.json","tests/fixtures/card-effect-audit-known.json","tests/four-player-chest-reload.test.js","tests/four-player-semantics-regressions.test.js","tests/framework-battle-engine-services.test.js","tests/framework-battle-ports-types.fixture.ts","tests/framework-boundaries-types.fixture.ts","tests/framework-independent-battles.test.js","tests/framework-runtime-instances.test.js","tests/full-review-regressions-battle.test.js","tests/game-hub-preparation-feature.test.js","tests/game-session-elapsed.test.js","tests/ghostblade-stealth-break.test.js","tests/helpers/card-catalog-approved-revisions.js","tests/helpers/e8-card-inventory.js","tests/helpers/main-lifecycle.js","tests/helpers/web-locks.js","tests/hero-cards.test.js","tests/home-menu-motion.test.js","tests/hub-architecture.test.js","tests/hub-archive-v3.test.js","tests/hub-collection-v4.test.js","tests/hub-flow-regression.test.js","tests/hub-pages-rework.test.js","tests/hub-personnel-navigation.test.js","tests/hub-trade-shop-v5.test.js","tests/hub-visible-card-faces.test.js","tests/infuse-free-paths.test.js","tests/last-stand-poison-burst.test.js","tests/leave-run-menu.test.js","tests/m-batch-production.test.js","tests/m-hosted-contract.test.js","tests/m01-base-commit.test.js","tests/m02-collection-commands.test.js","tests/m05-home-presenter.test.js","tests/m1-contract.test.js","tests/m2-data.test.js","tests/m3-data.test.js","tests/main-lifecycle.test.js","tests/map-snapshot-copy-cost.test.js","tests/menu-pages-lazy-entry.test.js","tests/menu-recovery-entry.test.js","tests/message-batch-0917.test.js","tests/message-batch-0920-late.test.js","tests/message-fixes.test.js","tests/motion-ownership.test.js","tests/mystery-potion-observation.test.js","tests/nest-node-lifecycle-audit.test.js","tests/nest-settlement-transaction.test.js","tests/node-retrigger.test.js","tests/normal-effects-deck-regression.test.js","tests/normal-starter-deck.test.js","tests/overlay-mount-cost.test.js","tests/page-perf-hub.test.js","tests/page-perf-shared.test.js","tests/page-surface-lifetime.test.js","tests/partner-interaction.test.js","tests/pearl-storage-interface.test.js","tests/performance-settings.test.js","tests/pet-egg-chest.test.js","tests/pierce-arrow-revision.test.js","tests/pocket-restore-interface.test.js","tests/potion-tip-lifecycle.test.js","tests/potion-tip.test.js","tests/preparation-adapter-review.test.js","tests/preparation-slot-review.test.js","tests/r2a-commands.test.js","tests/r3-a-preview.test.js","tests/r3-b-action-boundary.repro.test.js","tests/r5a-session-menu.test.js","tests/r6-story-flow.repro.test.js","tests/r6-story.test.js","tests/reactive-draw-cast-continuation.test.js","tests/requested-card-integration.test.js","tests/resource-presentation-benchmark.test.js","tests/resource-presentation-cache.test.js","tests/restoration-potion-observation.test.js","tests/reward-acquisition-motion.test.js","tests/reward-atomicity-cloud.test.js","tests/reward-coins-overview.test.js","tests/reward-completion-receipt.test.js","tests/reward-picker-continuity.test.js","tests/reward-presentation-contract.test.js","tests/reward-save-interruptions.test.js","tests/reward-settlement-unification.test.js","tests/run-battle-stats-persistence-cloud.test.js","tests/run-domain-commands.test.js","tests/run-event-controller-ownership.test.js","tests/runtime-event-timing.local.test.js","tests/runtime-trace-alignment.test.js","tests/runtime-trace-stages.local.test.js","tests/runtime-trace.local.test.js","tests/save-compat.test.js","tests/save-slot-delete-results.test.js","tests/schema-op-coverage.test.js","tests/session-base-persistence.test.js","tests/settings-page.test.js","tests/shop-detail-focus.test.js","tests/shop-settlement-unification.test.js","tests/shop-transaction-lifecycle.test.js","tests/skull-sword-effective-session.test.js","tests/stellar-divination.test.js","tests/strict-selection-types.fixture.ts","tests/structured-backupcell.test.js","tests/structured-effect-authority.test.js","tests/structured-onplay-battle.test.js","tests/sts-attack-presentation.test.js","tests/sts2-agent-replay.test.js","tests/sts2-battle-settings-restart.test.js","tests/sts2-card-instance.test.js","tests/sts2-combat-facts.test.js","tests/sts2-consumed-items.test.js","tests/sts2-consumed-pile.test.js","tests/sts2-consumed-rules.test.js","tests/sts2-cost-lifecycle.test.js","tests/sts2-enemy-plan.test.js","tests/sts2-hand-selection-contract.test.js","tests/sts2-random-boundary.test.js","tests/sts2-structured-description.test.js","tests/sts2-unified-consumed-pile.test.js","tests/sword-consume-trigger.test.js","tests/sync-cards-from-live.test.js","tests/sys03-base-key-restore.test.js","tests/term-tip-rule-copy.test.js","tests/term-tips-lifecycle.test.js","tests/terminal-death.test.js","tests/terminal-persistence.test.js","tests/terminal-retry-copy.test.js","tests/trade-stack-identity-audit.test.js","tests/transition-gate-lifetime.test.js","tests/tt12-structured-battle.test.js","tests/tt12-structured-preplay.test.js","tests/warehouse-art-window.test.js","tests/workflow-cli-integration.test.js","tests/workflow-doctor.test.js","tests/workflow-tools.test.js","tests/xart-z1-batch1.test.js"],"reasons":["质量配置或提交钩子变更需要完整静态检查与全量测试","tests/framework-battle-ports-types.fixture.ts 没有引用它的测试，无法定向","tests/framework-boundaries-types.fixture.ts 没有引用它的测试，无法定向","tests/strict-selection-types.fixture.ts 没有引用它的测试，无法定向","公共状态、启动、规则或迁移边界变更需要全量测试"],"tests":[]}
+[gate] 模式：full
+[gate] 变更：game/assets/README.md
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/cards/equip-tt13-astrolabe.webp
+[gate] 变更：game/assets/cards/equip-tt13-flame-staff.webp
+[gate] 变更：game/assets/cards/equip-tt13-magazine.webp
+[gate] 变更：game/assets/cards/equip-tt13-poor-meal.webp
+[gate] 变更：game/assets/cards/equip-tt13-scale-armor.webp
+[gate] 变更：game/assets/cards/martial-tt13-guard.webp
+[gate] 变更：game/assets/cards/martial-tt13-mercy.webp
+[gate] 变更：game/assets/cards/martial-tt13-snipe.webp
+[gate] 变更：game/assets/cards/spell-tt13-bitter-rain.webp
+[gate] 变更：game/assets/cards/spell-tt13-chaos-deck.webp
+[gate] 变更：game/assets/cards/spell-tt13-mind-control.webp
+[gate] 变更：game/assets/cards/spell-tt13-soul-contract.webp
+[gate] 变更：game/assets/cards/spell-tt13-spring.webp
+[gate] 变更：game/assets/cards/spell-tt13-stellar-divination.webp
+[gate] 变更：game/assets/reconstruction/wallpaper-wu-bass-1020.webp
+[gate] 变更：game/assets/thumbs/cards/equip-tt13-astrolabe.webp
+[gate] 变更：game/assets/thumbs/cards/equip-tt13-flame-staff.webp
+[gate] 变更：game/assets/thumbs/cards/equip-tt13-magazine.webp
+[gate] 变更：game/assets/thumbs/cards/equip-tt13-poor-meal.webp
+[gate] 变更：game/assets/thumbs/cards/equip-tt13-scale-armor.webp
+[gate] 变更：game/assets/thumbs/cards/martial-tt13-guard.webp
+[gate] 变更：game/assets/thumbs/cards/martial-tt13-mercy.webp
+[gate] 变更：game/assets/thumbs/cards/martial-tt13-snipe.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-bitter-rain.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-chaos-deck.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-mind-control.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-soul-contract.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-spring.webp
+[gate] 变更：game/assets/thumbs/cards/spell-tt13-stellar-divination.webp
+[gate] 变更：game/data/art-mapping.json
+[gate] 变更：game/data/beginner-guide.json
+[gate] 变更：game/src/README.md
+[gate] 变更：game/src/agent/agent.js
+[gate] 变更：game/src/agent/agent.policy.js
+[gate] 变更：game/src/agent/agent.recorder.js
+[gate] 变更：game/src/agent/agent.replay-state.js
+[gate] 变更：game/src/agent/agent.replay.js
+[gate] 变更：game/src/agent/agent.runner.js
+[gate] 变更：game/src/agent/agent.scenes.runtime.js
+[gate] 变更：game/src/agent/agent.state.js
+[gate] 变更：game/src/battle/bag/battle.bag.domain.js
+[gate] 变更：game/src/battle/bag/battle.bag.js
+[gate] 变更：game/src/battle/bag/battle.consumed-pile.js
+[gate] 变更：game/src/battle/bag/battle.deck.factory.js
+[gate] 变更：game/src/battle/bag/battle.deck.js
+[gate] 变更：game/src/battle/bag/battle.equipment.domain.js
+[gate] 变更：game/src/battle/bag/battle.equipment.js
+[gate] 变更：game/src/battle/battle.snapshot.types.d.ts
+[gate] 变更：game/src/battle/core/battle.card-play.domain.js
+[gate] 变更：game/src/battle/core/battle.card-play.js
+[gate] 变更：game/src/battle/core/battle.core.js
+[gate] 变更：game/src/battle/core/battle.damage.domain.js
+[gate] 变更：game/src/battle/core/battle.damage.js
+[gate] 变更：game/src/battle/core/battle.default-context.js
+[gate] 变更：game/src/battle/core/battle.draw.domain.js
+[gate] 变更：game/src/battle/core/battle.draw.js
+[gate] 变更：game/src/battle/core/battle.enemy-intent.js
+[gate] 变更：game/src/battle/core/battle.enemy-phase.domain.js
+[gate] 变更：game/src/battle/core/battle.enemy-phase.js
+[gate] 变更：game/src/battle/core/battle.enemy-plan.js
+[gate] 变更：game/src/battle/core/battle.engine.factory.domain.js
+[gate] 变更：game/src/battle/core/battle.engine.factory.js
+[gate] 变更：game/src/battle/core/battle.engine.instance.js
+[gate] 变更：game/src/battle/core/battle.engine.js
+[gate] 变更：game/src/battle/core/battle.exec-play.domain.js
+[gate] 变更：game/src/battle/core/battle.exec-play.js
+[gate] 变更：game/src/battle/core/battle.facts.js
+[gate] 变更：game/src/battle/core/battle.foe-lifecycle.domain.js
+[gate] 变更：game/src/battle/core/battle.foe-lifecycle.js
+[gate] 变更：game/src/battle/core/battle.hand-selection.js
+[gate] 变更：game/src/battle/core/battle.hand.js
+[gate] 变更：game/src/battle/core/battle.lifecycle.domain.js
+[gate] 变更：game/src/battle/core/battle.lifecycle.js
+[gate] 变更：game/src/battle/core/battle.resolution.domain.js
+[gate] 变更：game/src/battle/core/battle.resolution.js
+[gate] 变更：game/src/battle/core/battle.selection-flow.domain.js
+[gate] 变更：game/src/battle/core/battle.selection-flow.js
+[gate] 变更：game/src/battle/core/battle.summary.factory.js
+[gate] 变更：game/src/battle/core/battle.summary.js
+[gate] 变更：game/src/battle/core/battle.turn-continuation.js
+[gate] 变更：game/src/battle/core/battle.turn-start.js
+[gate] 变更：game/src/battle/core/combat.factory.js
+[gate] 变更：game/src/battle/core/combat.js
+[gate] 变更：game/src/battle/effects/battle.card-cost.js
+[gate] 变更：game/src/battle/effects/battle.card-inspection.domain.js
+[gate] 变更：game/src/battle/effects/battle.card-inspection.js
+[gate] 变更：game/src/battle/effects/battle.cost-modifiers.js
+[gate] 变更：game/src/battle/effects/battle.discover-flow.js
+[gate] 变更：game/src/battle/effects/battle.discover-state.js
+[gate] 变更：game/src/battle/effects/battle.effects.js
+[gate] 变更：game/src/battle/effects/battle.foe-fight.js
+[gate] 变更：game/src/battle/effects/battle.hosted.js
+[gate] 变更：game/src/battle/effects/battle.infusion.domain.js
+[gate] 变更：game/src/battle/effects/battle.infusion.js
+[gate] 变更：game/src/battle/effects/battle.rule-guard.js
+[gate] 变更：game/src/battle/effects/battle.target-rules.js
+[gate] 变更：game/src/battle/effects/battle.trigger-source.js
+[gate] 变更：game/src/battle/effects/battle.triggers.m2.domain.js
+[gate] 变更：game/src/battle/effects/battle.triggers.m2.js
+[gate] 变更：game/src/battle/effects/card-semantic-operations.js
+[gate] 变更：game/src/battle/effects/choice-semantic-operations.js
+[gate] 变更：game/src/battle/effects/effect-steps.audit.js
+[gate] 变更：game/src/battle/effects/effect-steps.ctx.js
+[gate] 变更：game/src/battle/effects/effect-steps.damage.js
+[gate] 变更：game/src/battle/effects/effect-steps.deck.js
+[gate] 变更：game/src/battle/effects/effect-steps.gates.js
+[gate] 变更：game/src/battle/effects/effect-steps.js
+[gate] 变更：game/src/battle/effects/effect-steps.kills.js
+[gate] 变更：game/src/battle/effects/effect-steps.m1.domain.js
+[gate] 变更：game/src/battle/effects/effect-steps.m1.js
+[gate] 变更：game/src/battle/effects/effect-steps.m2.domain.js
+[gate] 变更：game/src/battle/effects/effect-steps.m2.js
+[gate] 变更：game/src/battle/effects/effect-steps.recovery.js
+[gate] 变更：game/src/battle/effects/effect-verbs.js
+[gate] 变更：game/src/battle/effects/equipment-semantic-operations.js
+[gate] 变更：game/src/battle/effects/requested-card-runtime.domain.js
+[gate] 变更：game/src/battle/effects/requested-card-runtime.js
+[gate] 变更：game/src/battle/runtime/battle.action-runner.js
+[gate] 变更：game/src/battle/runtime/battle.browser-presentation.js
+[gate] 变更：game/src/battle/runtime/battle.host-scheduling.js
+[gate] 变更：game/src/battle/runtime/battle.playback.js
+[gate] 变更：game/src/battle/runtime/battle.presentation-ports.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.default.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.effects.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.factory.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.interaction.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.piles.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.presentation.js
+[gate] 变更：game/src/battle/runtime/battle.runtime.session.js
+[gate] 变更：game/src/battle/runtime/battle.snapshot.js
+[gate] 变更：game/src/battle/runtime/battle.staged-playback.js
+[gate] 变更：game/src/battle/view/battle.action-timing.js
+[gate] 变更：game/src/battle/view/battle.anim.view.js
+[gate] 变更：game/src/battle/view/battle.attack-cues.js
+[gate] 变更：game/src/battle/view/battle.attack-profiles.js
+[gate] 变更：game/src/battle/view/battle.decision-content.js
+[gate] 变更：game/src/battle/view/battle.enemy-motion.js
+[gate] 变更：game/src/battle/view/battle.frames.js
+[gate] 变更：game/src/battle/view/battle.hover.js
+[gate] 变更：game/src/battle/view/battle.infusion-view.js
+[gate] 变更：game/src/battle/view/battle.layers.js
+[gate] 变更：game/src/battle/view/battle.piles.view.js
+[gate] 变更：game/src/battle/view/battle.preview.js
+[gate] 变更：game/src/battle/view/battle.turn-forecast.js
+[gate] 变更：game/src/battle/view/battle.vfx.js
+[gate] 变更：game/src/battle/view/battle.victory.js
+[gate] 变更：game/src/battle/view/battle.view.js
+[gate] 变更：game/src/boot-order.js
+[gate] 变更：game/src/cards/builtin-card-execution.js
+[gate] 变更：game/src/cards/builtin-card-field-defaults.js
+[gate] 变更：game/src/cards/builtin-card-identities.js
+[gate] 变更：game/src/cards/builtin-card-numeric-fields.js
+[gate] 变更：game/src/cards/builtin-card-previous-rules.js
+[gate] 变更：game/src/cards/builtin-card-previous-variants.js
+[gate] 变更：game/src/cards/builtin-choice-execution.js
+[gate] 变更：game/src/cards/builtin-equipment-execution.js
+[gate] 变更：game/src/cards/builtin-equipment-previous-rules.js
+[gate] 变更：game/src/cards/card-battle-start-explanation.js
+[gate] 变更：game/src/cards/card-description-links.js
+[gate] 变更：game/src/cards/card-description-text.js
+[gate] 变更：game/src/cards/card-execution-plan.js
+[gate] 变更：game/src/cards/card-execution-plan.types.d.ts
+[gate] 变更：game/src/cards/card-frame-presentation.js
+[gate] 变更：game/src/cards/card-instance-fields.js
+[gate] 变更：game/src/cards/card-instance.js
+[gate] 变更：game/src/cards/card-rules.capability.js
+[gate] 变更：game/src/cards/card-rules.capability.types.d.ts
+[gate] 变更：game/src/cards/card-rules.schema.js
+[gate] 变更：game/src/cards/card-semantic-contract.js
+[gate] 变更：game/src/cards/card-trigger-contract.js
+[gate] 变更：game/src/cards/cards.data.js
+[gate] 变更：game/src/cards/cards.js
+[gate] 变更：game/src/cards/cards.rules.js
+[gate] 变更：game/src/cards/cards.sync.builtin.js
+[gate] 变更：game/src/cards/cards.sync.face-refresh.js
+[gate] 变更：game/src/cards/cards.sync.js
+[gate] 变更：game/src/cards/cards.sync.m2.js
+[gate] 变更：game/src/cards/cards.sync.m3.js
+[gate] 变更：game/src/cards/cards.view.js
+[gate] 变更：game/src/cards/pierce-arrow-revision.js
+[gate] 变更：game/src/cards/structured-card-description.js
+[gate] 变更：game/src/core/asset-url.js
+[gate] 变更：game/src/core/card-capacity.js
+[gate] 变更：game/src/core/performance-settings.js
+[gate] 变更：game/src/core/random-service.js
+[gate] 变更：game/src/core/random.js
+[gate] 变更：game/src/core/run-checkpoint.js
+[gate] 变更：game/src/core/runtime-trace-stages.local.js
+[gate] 变更：game/src/core/runtime-trace.local.js
+[gate] 变更：game/src/game.boot.js
+[gate] 变更：game/src/generated/art-manifest.js
+[gate] 变更：game/src/generated/thumb-manifest.js
+[gate] 变更：game/src/hub/bag-pane-view.js
+[gate] 变更：game/src/hub/base-departure.commands.js
+[gate] 变更：game/src/hub/base.commands.js
+[gate] 变更：game/src/hub/base.js
+[gate] 变更：game/src/hub/courtyard-vendor/KoiPond.js
+[gate] 变更：game/src/hub/departure-persistence.js
+[gate] 变更：game/src/hub/departure.summary.js
+[gate] 变更：game/src/hub/game.bag.drag.js
+[gate] 变更：game/src/hub/game.bag.js
+[gate] 变更：game/src/hub/game.bag.settle.js
+[gate] 变更：game/src/hub/game.cardslib.designer.js
+[gate] 变更：game/src/hub/game.hub.depart.js
+[gate] 变更：game/src/hub/game.hub.pages.js
+[gate] 变更：game/src/hub/game.hub.preparation.js
+[gate] 变更：game/src/hub/game.hub.runtime.js
+[gate] 变更：game/src/hub/game.storage.js
+[gate] 变更：game/src/hub/hub.archive-v3.js
+[gate] 变更：game/src/hub/hub.archive.js
+[gate] 变更：game/src/hub/hub.collection-v4.js
+[gate] 变更：game/src/hub/hub.personnel.js
+[gate] 变更：game/src/hub/hub.trade-shop-v5.js
+[gate] 变更：game/src/hub/hub.warehouse.js
+[gate] 变更：game/src/hub/meta.js
+[gate] 变更：game/src/hub/recovery.commands.js
+[gate] 变更：game/src/hub/slot-write-lock.js
+[gate] 变更：game/src/hub/terminal.commands.js
+[gate] 变更：game/src/hub/versioned-slot-reader.js
+[gate] 变更：game/src/main.js
+[gate] 变更：game/src/run/chest-opening-art.js
+[gate] 变更：game/src/run/chests.js
+[gate] 变更：game/src/run/event-card-choice.js
+[gate] 变更：game/src/run/event-commands.js
+[gate] 变更：game/src/run/event-recode-candidates.js
+[gate] 变更：game/src/run/game.nest.js
+[gate] 变更：game/src/run/game.run.class-choice.page.js
+[gate] 变更：game/src/run/game.run.dev.js
+[gate] 变更：game/src/run/game.run.events.js
+[gate] 变更：game/src/run/game.run.flow.js
+[gate] 变更：game/src/run/game.run.resources.js
+[gate] 变更：game/src/run/game.run.scenes.js
+[gate] 变更：game/src/run/game.run.shop.js
+[gate] 变更：game/src/run/game.session.bag.js
+[gate] 变更：game/src/run/game.session.death.js
+[gate] 变更：game/src/run/game.session.js
+[gate] 变更：game/src/run/map-snapshot.js
+[gate] 变更：game/src/run/node-reward-state.js
+[gate] 变更：game/src/run/run-domain-commands.types.d.ts
+[gate] 变更：game/src/run/shop-browse-state.js
+[gate] 变更：game/src/run/shop-commands.js
+[gate] 变更：game/src/run/shop-commission.js
+[gate] 变更：game/src/ui/achievement-gallery.js
+[gate] 变更：game/src/ui/battle-hud-info.js
+[gate] 变更：game/src/ui/beginner-guide-diagrams.js
+[gate] 变更：game/src/ui/card-browser.js
+[gate] 变更：game/src/ui/equipment-info.js
+[gate] 变更：game/src/ui/event-dice.js
+[gate] 变更：game/src/ui/event-option-state.js
+[gate] 变更：game/src/ui/game.menu.js
+[gate] 变更：game/src/ui/game.menu.pages.js
+[gate] 变更：game/src/ui/home-menu-motion.js
+[gate] 变更：game/src/ui/interface-motion.js
+[gate] 变更：game/src/ui/overlay.js
+[gate] 变更：game/src/ui/page-motion-profiles.js
+[gate] 变更：game/src/ui/page-visual-ready.js
+[gate] 变更：game/src/ui/performance-settings.js
+[gate] 变更：game/src/ui/reward-acquisition-motion.js
+[gate] 变更：game/src/ui/reward-card-feedback.js
+[gate] 变更：game/src/ui/reward-scene-view.js
+[gate] 变更：game/src/ui/settings-battle-restart.js
+[gate] 变更：game/src/ui/settings-navigation.js
+[gate] 变更：game/src/ui/term-tips.js
+[gate] 变更：game/src/ui/transitions-director.js
+[gate] 变更：jsconfig.framework-boundaries.json
+[gate] 变更：jsconfig.framework-ports.json
+[gate] 变更：scripts/architecture-graph.mjs
+[gate] 变更：scripts/check-types.mjs
+[gate] 变更：scripts/gate-plan.mjs
+[gate] 变更：scripts/generate-compendium.mjs
+[gate] 变更：scripts/runtime-asset-redundancy-review.mjs
+[gate] 变更：scripts/runtime-trace-alignment.mjs
+[gate] 变更：scripts/sync-cards-from-live.mjs
+[gate] 变更：scripts/video-review.mjs
+[gate] 变更：scripts/workflow-evidence.mjs
+[gate] 变更：tests/abyss-sovereign.test.js
+[gate] 变更：tests/achievement-gallery-close.test.js
+[gate] 变更：tests/achievement-gallery.test.js
+[gate] 变更：tests/agent-command-results.test.js
+[gate] 变更：tests/agent-console-jump.test.js
+[gate] 变更：tests/agent-scenes.test.js
+[gate] 变更：tests/architecture-boundaries.test.js
+[gate] 变更：tests/archive-progress-rendering.test.js
+[gate] 变更：tests/armup-mode.test.js
+[gate] 变更：tests/bag-help-return-continuity.test.js
+[gate] 变更：tests/bag-item-rule-baseline.test.js
+[gate] 变更：tests/bag-page-lifecycle-review.test.js
+[gate] 变更：tests/bag-pouch-capacity.test.js
+[gate] 变更：tests/bag-structured-rule-migration.test.js
+[gate] 变更：tests/base-corrupt-field.test.js
+[gate] 变更：tests/base-direct-write-convergence.test.js
+[gate] 变更：tests/base-elapsed.test.js
+[gate] 变更：tests/base-hub-business-lifecycle-audit.test.js
+[gate] 变更：tests/base-inventory-lifecycle-audit.test.js
+[gate] 变更：tests/base-material-rule-baseline.test.js
+[gate] 变更：tests/base-meta.test.js
+[gate] 变更：tests/base-mutation.test.js
+[gate] 变更：tests/base-pet-egg.test.js
+[gate] 变更：tests/base-save-snapshot.test.js
+[gate] 变更：tests/base-sticky-issue-fix.test.js
+[gate] 变更：tests/base-storage-read-failure.test.js
+[gate] 变更：tests/base-write-lock.test.js
+[gate] 变更：tests/battle-action-timing.test.js
+[gate] 变更：tests/battle-architecture.test.js
+[gate] 变更：tests/battle-card-inspection.test.js
+[gate] 变更：tests/battle-decision-redesign.test.js
+[gate] 变更：tests/battle-direct-trigger-source.test.js
+[gate] 变更：tests/battle-discover-result-source.test.js
+[gate] 变更：tests/battle-effect-damage-boundary.test.js
+[gate] 变更：tests/battle-engine-decomposition.test.js
+[gate] 变更：tests/battle-engine-facade.test.js
+[gate] 变更：tests/battle-entry-view.test.js
+[gate] 变更：tests/battle-equipment-skill-synthesis.test.js
+[gate] 变更：tests/battle-frames-lifecycle.test.js
+[gate] 变更：tests/battle-hand-content-diff.test.js
+[gate] 变更：tests/battle-hand-group-index.test.js
+[gate] 变更：tests/battle-hand-inspector.test.js
+[gate] 变更：tests/battle-hover-play-availability.test.js
+[gate] 变更：tests/battle-hud-info.test.js
+[gate] 变更：tests/battle-infusion-action-layout.test.js
+[gate] 变更：tests/battle-modules.test.js
+[gate] 变更：tests/battle-nature-staff-cost.test.js
+[gate] 变更：tests/battle-pile-readability.test.js
+[gate] 变更：tests/battle-pouch-entry.test.js
+[gate] 变更：tests/battle-preview-trust-boundary.test.js
+[gate] 变更：tests/battle-pure-rules.test.js
+[gate] 变更：tests/battle-query-cost-benchmark.test.js
+[gate] 变更：tests/battle-render-derivation.test.js
+[gate] 变更：tests/battle-resolution.test.js
+[gate] 变更：tests/battle-rule-audit-1014.test.js
+[gate] 变更：tests/battle-runtime-completion-1014.test.js
+[gate] 变更：tests/battle-runtime-state-guard.test.js
+[gate] 变更：tests/battle-scenery-secondary-ready.test.js
+[gate] 变更：tests/battle-selection-consumer.test.js
+[gate] 变更：tests/battle-selection-flow-boundary.test.js
+[gate] 变更：tests/battle-settlement-recovery.test.js
+[gate] 变更：tests/battle-staged-timing.test.js
+[gate] 变更：tests/battle-status-preview.test.js
+[gate] 变更：tests/battle-structured-authority-unification.test.js
+[gate] 变更：tests/battle-temp-item-destination.test.js
+[gate] 变更：tests/battle-tools-lifecycle.test.js
+[gate] 变更：tests/battle-trigger-lifecycle-unification.test.js
+[gate] 变更：tests/battle-victory-presentation.test.js
+[gate] 变更：tests/boot.test.js
+[gate] 变更：tests/boss-rescue-pool.test.js
+[gate] 变更：tests/builtin-card-acquisition.test.js
+[gate] 变更：tests/builtin-card-execution-battle.test.js
+[gate] 变更：tests/builtin-card-execution.test.js
+[gate] 变更：tests/card-battle-start-explanation.test.js
+[gate] 变更：tests/card-browser-deferred-art.test.js
+[gate] 变更：tests/card-browser-state.test.js
+[gate] 变更：tests/card-description-audit-battle.test.js
+[gate] 变更：tests/card-description-fix-lifecycle.test.js
+[gate] 变更：tests/card-description-fix-pools.test.js
+[gate] 变更：tests/card-description-fix-target-effects.test.js
+[gate] 变更：tests/card-description-text.test.js
+[gate] 变更：tests/card-effect-semantics.test.js
+[gate] 变更：tests/card-execution-plan.test.js
+[gate] 变更：tests/card-face-presentation.test.js
+[gate] 变更：tests/chest-acquired-gift-cloud.test.js
+[gate] 变更：tests/chest-callback-lifecycle-audit.test.js
+[gate] 变更：tests/chest-click-flow.test.js
+[gate] 变更：tests/chest-extra-rewards-choice.test.js
+[gate] 变更：tests/chest-multi-queue-regression.test.js
+[gate] 变更：tests/choice-semantic-operations.test.js
+[gate] 变更：tests/collection-room.test.js
+[gate] 变更：tests/combat-status-boundary-unification.test.js
+[gate] 变更：tests/compact-reward-layout.test.js
+[gate] 变更：tests/compendium.test.js
+[gate] 变更：tests/contracts.test.js
+[gate] 变更：tests/courtyard-koi.test.js
+[gate] 变更：tests/departure-browse-state.test.js
+[gate] 变更：tests/departure-class-confirmation.test.js
+[gate] 变更：tests/departure-persistence.test.js
+[gate] 变更：tests/departure-real-session-review.test.js
+[gate] 变更：tests/departure-render-performance.test.js
+[gate] 变更：tests/departure-stack-lifecycle-review.test.js
+[gate] 变更：tests/dev-tools-lazy-entry.test.js
+[gate] 变更：tests/direct-cast.test.js
+[gate] 变更：tests/e4-async-entry.test.js
+[gate] 变更：tests/e5-session-recovery.test.js
+[gate] 变更：tests/e6-card-rules-capability.test.js
+[gate] 变更：tests/e8-card-inventory.test.js
+[gate] 变更：tests/effect-verbs.test.js
+[gate] 变更：tests/ember-burst-rot-seed.test.js
+[gate] 变更：tests/energy-crystal-restoration.test.js
+[gate] 变更：tests/equipment-semantic-operations.test.js
+[gate] 变更：tests/event-callback-lifecycle-audit.test.js
+[gate] 变更：tests/event-choice-acquired-gift-cloud.test.js
+[gate] 变更：tests/event-node-binding-cloud.test.js
+[gate] 变更：tests/event-option-state.test.js
+[gate] 变更：tests/event-recode-selection-continuity.test.js
+[gate] 变更：tests/event-settlement-unification.test.js
+[gate] 变更：tests/event-signal-puzzle-integration.test.js
+[gate] 变更：tests/events-0919.test.js
+[gate] 变更：tests/expedition-battle-presentation.test.js
+[gate] 变更：tests/extra-legend-reward-persistence.test.js
+[gate] 变更：tests/extraction-receipt-idempotency.test.js
+[gate] 变更：tests/extraction-record-saved-cards-cloud.test.js
+[gate] 变更：tests/extraction-recovery-ui.test.js
+[gate] 变更：tests/extraction-recovery.test.js
+[gate] 变更：tests/extraction-session-resume.test.js
+[gate] 变更：tests/facade-snapshot-drift.test.js
+[gate] 变更：tests/first-explore-marking.test.js
+[gate] 变更：tests/fixtures/approved-card-batch-20261020.json
+[gate] 变更：tests/fixtures/builtin-execution-approved-20261020.json
+[gate] 变更：tests/fixtures/card-effect-audit-known.json
+[gate] 变更：tests/four-player-chest-reload.test.js
+[gate] 变更：tests/four-player-semantics-regressions.test.js
+[gate] 变更：tests/framework-battle-engine-services.test.js
+[gate] 变更：tests/framework-battle-ports-types.fixture.ts
+[gate] 变更：tests/framework-boundaries-types.fixture.ts
+[gate] 变更：tests/framework-independent-battles.test.js
+[gate] 变更：tests/framework-runtime-instances.test.js
+[gate] 变更：tests/full-review-regressions-battle.test.js
+[gate] 变更：tests/game-hub-preparation-feature.test.js
+[gate] 变更：tests/game-session-elapsed.test.js
+[gate] 变更：tests/ghostblade-stealth-break.test.js
+[gate] 变更：tests/helpers/card-catalog-approved-revisions.js
+[gate] 变更：tests/helpers/e8-card-inventory.js
+[gate] 变更：tests/helpers/main-lifecycle.js
+[gate] 变更：tests/helpers/web-locks.js
+[gate] 变更：tests/hero-cards.test.js
+[gate] 变更：tests/home-menu-motion.test.js
+[gate] 变更：tests/hub-architecture.test.js
+[gate] 变更：tests/hub-archive-v3.test.js
+[gate] 变更：tests/hub-collection-v4.test.js
+[gate] 变更：tests/hub-flow-regression.test.js
+[gate] 变更：tests/hub-pages-rework.test.js
+[gate] 变更：tests/hub-personnel-navigation.test.js
+[gate] 变更：tests/hub-trade-shop-v5.test.js
+[gate] 变更：tests/hub-visible-card-faces.test.js
+[gate] 变更：tests/infuse-free-paths.test.js
+[gate] 变更：tests/last-stand-poison-burst.test.js
+[gate] 变更：tests/leave-run-menu.test.js
+[gate] 变更：tests/m-batch-production.test.js
+[gate] 变更：tests/m-hosted-contract.test.js
+[gate] 变更：tests/m01-base-commit.test.js
+[gate] 变更：tests/m02-collection-commands.test.js
+[gate] 变更：tests/m05-home-presenter.test.js
+[gate] 变更：tests/m1-contract.test.js
+[gate] 变更：tests/m2-data.test.js
+[gate] 变更：tests/m3-data.test.js
+[gate] 变更：tests/main-lifecycle.test.js
+[gate] 变更：tests/map-snapshot-copy-cost.test.js
+[gate] 变更：tests/menu-pages-lazy-entry.test.js
+[gate] 变更：tests/menu-recovery-entry.test.js
+[gate] 变更：tests/message-batch-0917.test.js
+[gate] 变更：tests/message-batch-0920-late.test.js
+[gate] 变更：tests/message-fixes.test.js
+[gate] 变更：tests/motion-ownership.test.js
+[gate] 变更：tests/mystery-potion-observation.test.js
+[gate] 变更：tests/nest-node-lifecycle-audit.test.js
+[gate] 变更：tests/nest-settlement-transaction.test.js
+[gate] 变更：tests/node-retrigger.test.js
+[gate] 变更：tests/normal-effects-deck-regression.test.js
+[gate] 变更：tests/normal-starter-deck.test.js
+[gate] 变更：tests/overlay-mount-cost.test.js
+[gate] 变更：tests/page-perf-hub.test.js
+[gate] 变更：tests/page-perf-shared.test.js
+[gate] 变更：tests/page-surface-lifetime.test.js
+[gate] 变更：tests/partner-interaction.test.js
+[gate] 变更：tests/pearl-storage-interface.test.js
+[gate] 变更：tests/performance-settings.test.js
+[gate] 变更：tests/pet-egg-chest.test.js
+[gate] 变更：tests/pierce-arrow-revision.test.js
+[gate] 变更：tests/pocket-restore-interface.test.js
+[gate] 变更：tests/potion-tip-lifecycle.test.js
+[gate] 变更：tests/potion-tip.test.js
+[gate] 变更：tests/preparation-adapter-review.test.js
+[gate] 变更：tests/preparation-slot-review.test.js
+[gate] 变更：tests/r2a-commands.test.js
+[gate] 变更：tests/r3-a-preview.test.js
+[gate] 变更：tests/r3-b-action-boundary.repro.test.js
+[gate] 变更：tests/r5a-session-menu.test.js
+[gate] 变更：tests/r6-story-flow.repro.test.js
+[gate] 变更：tests/r6-story.test.js
+[gate] 变更：tests/reactive-draw-cast-continuation.test.js
+[gate] 变更：tests/requested-card-integration.test.js
+[gate] 变更：tests/resource-presentation-benchmark.test.js
+[gate] 变更：tests/resource-presentation-cache.test.js
+[gate] 变更：tests/restoration-potion-observation.test.js
+[gate] 变更：tests/reward-acquisition-motion.test.js
+[gate] 变更：tests/reward-atomicity-cloud.test.js
+[gate] 变更：tests/reward-coins-overview.test.js
+[gate] 变更：tests/reward-completion-receipt.test.js
+[gate] 变更：tests/reward-picker-continuity.test.js
+[gate] 变更：tests/reward-presentation-contract.test.js
+[gate] 变更：tests/reward-save-interruptions.test.js
+[gate] 变更：tests/reward-settlement-unification.test.js
+[gate] 变更：tests/run-battle-stats-persistence-cloud.test.js
+[gate] 变更：tests/run-domain-commands.test.js
+[gate] 变更：tests/run-event-controller-ownership.test.js
+[gate] 变更：tests/runtime-event-timing.local.test.js
+[gate] 变更：tests/runtime-trace-alignment.test.js
+[gate] 变更：tests/runtime-trace-stages.local.test.js
+[gate] 变更：tests/runtime-trace.local.test.js
+[gate] 变更：tests/save-compat.test.js
+[gate] 变更：tests/save-slot-delete-results.test.js
+[gate] 变更：tests/schema-op-coverage.test.js
+[gate] 变更：tests/session-base-persistence.test.js
+[gate] 变更：tests/settings-page.test.js
+[gate] 变更：tests/shop-detail-focus.test.js
+[gate] 变更：tests/shop-settlement-unification.test.js
+[gate] 变更：tests/shop-transaction-lifecycle.test.js
+[gate] 变更：tests/skull-sword-effective-session.test.js
+[gate] 变更：tests/stellar-divination.test.js
+[gate] 变更：tests/strict-selection-types.fixture.ts
+[gate] 变更：tests/structured-backupcell.test.js
+[gate] 变更：tests/structured-effect-authority.test.js
+[gate] 变更：tests/structured-onplay-battle.test.js
+[gate] 变更：tests/sts-attack-presentation.test.js
+[gate] 变更：tests/sts2-agent-replay.test.js
+[gate] 变更：tests/sts2-battle-settings-restart.test.js
+[gate] 变更：tests/sts2-card-instance.test.js
+[gate] 变更：tests/sts2-combat-facts.test.js
+[gate] 变更：tests/sts2-consumed-items.test.js
+[gate] 变更：tests/sts2-consumed-pile.test.js
+[gate] 变更：tests/sts2-consumed-rules.test.js
+[gate] 变更：tests/sts2-cost-lifecycle.test.js
+[gate] 变更：tests/sts2-enemy-plan.test.js
+[gate] 变更：tests/sts2-hand-selection-contract.test.js
+[gate] 变更：tests/sts2-random-boundary.test.js
+[gate] 变更：tests/sts2-structured-description.test.js
+[gate] 变更：tests/sts2-unified-consumed-pile.test.js
+[gate] 变更：tests/sword-consume-trigger.test.js
+[gate] 变更：tests/sync-cards-from-live.test.js
+[gate] 变更：tests/sys03-base-key-restore.test.js
+[gate] 变更：tests/term-tip-rule-copy.test.js
+[gate] 变更：tests/term-tips-lifecycle.test.js
+[gate] 变更：tests/terminal-death.test.js
+[gate] 变更：tests/terminal-persistence.test.js
+[gate] 变更：tests/terminal-retry-copy.test.js
+[gate] 变更：tests/trade-stack-identity-audit.test.js
+[gate] 变更：tests/transition-gate-lifetime.test.js
+[gate] 变更：tests/tt12-structured-battle.test.js
+[gate] 变更：tests/tt12-structured-preplay.test.js
+[gate] 变更：tests/warehouse-art-window.test.js
+[gate] 变更：tests/workflow-cli-integration.test.js
+[gate] 变更：tests/workflow-doctor.test.js
+[gate] 变更：tests/workflow-tools.test.js
+[gate] 变更：tests/xart-z1-batch1.test.js
+[gate] 说明：质量配置或提交钩子变更需要完整静态检查与全量测试
+[gate] 说明：tests/framework-battle-ports-types.fixture.ts 没有引用它的测试，无法定向
+[gate] 说明：tests/framework-boundaries-types.fixture.ts 没有引用它的测试，无法定向
+[gate] 说明：tests/strict-selection-types.fixture.ts 没有引用它的测试，无法定向
+[gate] 说明：公共状态、启动、规则或迁移边界变更需要全量测试
+[gate] 剧情编译
+Compiled narrative: narrative\events.ink -> game\src\generated\narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (589 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 C:/Users/太平/AppData/Local/Temp/sdt-staged-AQjdkE/snapshot/搜打撤
+
+··············································································································································································································································································································································································································································································································-··········································································································································································································································································································································································································-·······-·········-······-····-············--······-·········-············-······-··-··-··································································-·····-··-··-·-·········---····-··-···-·····-··-····-·····--···-··································-···-·····-·-·····································································································-{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·fixture gate passed
+···················································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+···················································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+··fixture gate passed
+··················································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+··fixture gate passed
+····························{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+···············································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-··········································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-·····································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································{"mode":"quick","paths":["package.json"],"reasons":["package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过"],"tests":["tests/architecture-boundaries.test.js","tests/contracts.test.js"]}
+··[gate] 模式：quick
+[gate] 变更：package.json
+[gate] 说明：package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+··[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture runner pass
+
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+·fixture runner pass
+··[gate] PASS：quick 验收完成
+·········································································{"mode":"quick","paths":["game/assets/asset-manifest.json"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+·········································[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+···············································································{"mode":"quick","paths":["game/assets/asset-manifest.json","game/assets/new.png"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+-····[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/new.png
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+·[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+··[gate] PASS：quick 验收完成
+·········-·····{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·······················fixture targeted check
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+···snapshot passed
+···············································-··········································{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/architecture-graph.mjs","scripts/gate-plan.mjs","scripts/impact-query.mjs","scripts/index-validation.mjs","scripts/value.txt","scripts/workflow-archive.mjs","scripts/workflow-browser.mjs","scripts/workflow-change-advice.mjs","scripts/workflow-change-review.mjs","scripts/workflow-dependencies.mjs","scripts/workflow-doctor.mjs","scripts/workflow-evidence.mjs","scripts/workflow-gate-receipt.mjs","scripts/workflow-ledger.mjs","scripts/workflow-memory.mjs","scripts/workflow-ship.mjs","scripts/workflow-staged.mjs","scripts/workflow-status.mjs","scripts/workflow-task-input.mjs","scripts/workflow-task.mjs","scripts/workflow.mjs"],"reasons":[],"tests":[]}
+snapshot passed
+······fixture full executed
+··························{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+···························································································································{"mode":"quick","paths":["scripts/acceptance-gate.mjs","scripts/deleted.txt","scripts/new-name.txt","scripts/old-name.txt"],"reasons":[],"tests":[]}
+···snapshot passed
+·································································································-····································································································{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+·····························{"mode":"full","paths":["docs/evidence/2026-09-30-fixture/2026-10-20T17-28-36.167Z-3c06c2bc-staged.json","docs/evidence/2026-09-30-fixture/2026-10-20T17-28-36.167Z-3c06c2bc-staged.log","scripts/value.txt"],"reasons":[],"tests":[]}
+·····································································{"mode":"skip","tests":[]}
+····{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":[]}
+···changed index
+···························································{"mode":"skip","paths":["note.md"],"reasons":[],"tests":[]}
+··············································································································{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+·······················································································································{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":["tests/contracts.test.js"]}
+·······snapshot passed
+··································································································
+
+ Test Files  747 passed | 1 skipped (748)
+      Tests  7650 passed | 42 skipped (7692)
+   Start at  01:22:59
+   Duration  353.02s (transform 7.38s, setup 0ms, collect 139.41s, tests 530.76s, environment 532.55s, prepare 80.72s)
+
+[gate] PASS：full 验收完成
