@@ -8,7 +8,7 @@
 
 - `settings-module-wait`：冷面板工厂入口 `await loadPages()` 的等待区间。包含模块请求、评估及调度等待，不能称CPU时间；不含加载遮罩前两次帧等待。面板控制器已存在的热入口不产生此行；失败也会完成此阶段，不能据此断言打开成功。
 - `settings-overlay-sync`：设置 HTML 已生成之后，实际 `UI.showOverlay` 同步调用区间，包含其同步包装器。模板字符串生成不包含在此段。
-- `settings-navigation-sync`：`initSettingsNavigation` 同步调用区间，包括节点重组、首选页签布局读取、surface注册及装饰切幕启动；不包含切幕异步资源加载和980ms展示时间。
+- `settings-navigation-sync`：`initSettingsNavigation` 同步调用区间，包括最终节点绑定、首选页签布局读取、surface注册及装饰切幕启动（设置结构已随HTML一次挂载，不再在此阶段重组节点）；不包含切幕异步资源加载和980ms展示时间。
 - `settings-visual-wait`：仅设置页面的 `stagePageVisual` 内 `waitPageVisual` 等待，首个layout帧之后开始、reveal之前结束。包括可见图片/页面背景/字体及最终帧调度；不等于纯网络耗时，也不包含独立装饰切幕的 `prepareCityCut` 或外层 `runPageLoading` 的等待。
 
 四段不覆盖全部点击延迟，不能直接求和当作总延迟或FPS。取消或失败可产生已耗时的阶段行，阶段行只表示计时结束，不表示操作成功；结合DOM变化、交互轨迹及真实页面验证成功。没有当前已采集输入时不创建阶段，避免伪造interaction。

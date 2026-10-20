@@ -10,6 +10,11 @@ import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnSta
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 
+const OVERLAY_FOCUS_SELECTOR =
+  'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
+  'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], details > summary:first-of-type, ' +
+  '[tabindex]:not([tabindex="-1"])';
+
 export const overlayMethods = {
   helpTopics: {},  // pageId -> { title, html, before?, back }（? 帮助弹层主题，页面渲染时注册）
   _overlayReturnFocus: null,
@@ -127,12 +132,6 @@ export const overlayMethods = {
     const prevMode = this._lastMode;
     this._lastMode = mode;
     this.el.overlay.hidden = false;
-    // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）。
-    // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
-    // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
-    // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
-    // 背包页同理（2026-10-15 老板：退出键复用 archive-back 放左上，多余的退出键删除）
-    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
     this._isolateOverlayBackground();
     // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
     // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
@@ -145,6 +144,12 @@ export const overlayMethods = {
     // 替代 winter.css 的 body:has(#overlay.opaque) 选择器：:has 会在 overlay 子树
     // 每次重建时放大整页样式失效范围，body 类只触发一次单类切换
     document.body.classList.toggle('page-opaque', this.el.overlay.classList.contains('opaque'));
+    // 取消入口的可见性检查会读取样式；先完成背景隔离和页面模式写入，避免读写交错。
+    // 右上角 × 显隐：只有能被取消类入口安全关闭的浮层才显示（必选流程/战斗页自动隐藏）。
+    // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
+    // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
+    // 背包页同理（2026-10-15 老板：退出键复用 archive-back 放左上，多余的退出键删除）
+    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
     // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
     // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
     // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
@@ -188,6 +193,8 @@ export const overlayMethods = {
     if (!host) return;
     // Photo IMG loading is owned by the card-art queue, not a CSS background.
     if (host.tagName === 'IMG' && host.closest('.photo-studio-v3')) return;
+    // Icons.img 的位图内容由 src 加载，不是页面 CSS 背景。其他 IMG 仍按原逻辑检查。
+    if (host.matches('img.ic[data-asset-key^="icon-"]')) return;
     const m = /url\("?([^")]+)"?\)/.exec(getComputedStyle(host).backgroundImage || '');
     if (!m) return;
     const url = m[1];
@@ -364,11 +371,7 @@ export const overlayMethods = {
   _overlayFocusable() {
     const styles = new Map();
     const root = this.el.ovBody || this.el.overlay;
-    return [...root.querySelectorAll(
-      'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
-      'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], details > summary:first-of-type, ' +
-      '[tabindex]:not([tabindex="-1"])'
-    )].filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
+    return [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)].filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
   },
 
   _resolveOverlayInitialFocus(initialFocus) {
@@ -382,15 +385,18 @@ export const overlayMethods = {
     if (!target) target = root.querySelector('[data-initial-focus]');
     if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"], details > summary:first-of-type')) target = null;
     if (target && !isAvailableOverlayFocusTarget(target)) target = null;
-    const focusables = this._overlayFocusable();
-    if (!target) {
-      // 取消/保留/返回优先；同一规则覆盖「确认丢弃」「放弃对局」等危险弹窗。
-      target = focusables.find((el) => {
-        const text = `${el.textContent || ''} ${el.getAttribute('aria-label') || ''} ${el.title || ''} ${el.dataset.act || ''}`;
-        return /取消|返回|关闭|继续|放回|保留|不删除|不清空|留下/.test(text);
-      });
-    }
-    return target || focusables[0] || null;
+    if (target) return target;
+    // 首焦点只需要一个有效目标；先按语义筛候选，再读可见性，避免为整页表单
+    // 的每个输入都计算样式。缓存只活在本次调用，Tab/下一次解析仍读取当前 DOM。
+    const styles = new Map();
+    const candidates = [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)]
+      .filter(el => !(el.hasAttribute('tabindex') && el.tabIndex < 0));
+    const preferred = candidates.find(el => {
+      const text = `${el.textContent || ''} ${el.getAttribute('aria-label') || ''} ${el.title || ''} ${el.dataset.act || ''}`;
+      return /取消|返回|关闭|继续|放回|保留|不删除|不清空|留下/.test(text)
+        && isAvailableOverlayFocusTarget(el, styles);
+    });
+    return preferred || candidates.find(el => isAvailableOverlayFocusTarget(el, styles)) || null;
   },
 
   _trapOverlayFocus(e) {

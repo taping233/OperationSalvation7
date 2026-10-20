@@ -10,7 +10,7 @@ import { achievementGalleryHTML, bindAchievementGallery } from './achievement-ga
 import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide } from './beginner-guide.js';
 import { SLOT_EMBLEMS } from './slot-emblems.js';
 import { bindSettingsAudio } from './settings-audio.js';
-import { initSettingsNavigation } from './settings-navigation.js';
+import { initSettingsNavigation, settingsLayoutHTML } from './settings-navigation.js';
 import { enterAchievementCut } from './camp-entry.js';
 import { reduceMotion } from '../core/motion.js';
 import '../../css/title-achievements.css';
@@ -859,52 +859,46 @@ export function createGameMenuPages(deps, shell) {
     cancelPendingPageEntries('menu');
     const prev = game.state;
     game.state = 'modal';
-    const settingsHTML = `
-      <div class="pg settings-page ui-scale-system">
-        <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
-             （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
-        ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
-        <header class="pg-head"><h2>设置</h2><span class="pg-spacer"></span></header>
-        <div class="settings settings-layout">
-        <section class="settings-group settings-general">
+    const groups = {
+      general: `<section class="settings-group settings-general">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
-        <label class="chk"><input type="checkbox" id="setIndex" ${game.toggles.index ? 'checked' : ''}> 结点编号 <span class="set-en">NODE NUMBERS</span></label>
-        <label class="chk"><input type="checkbox" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
-        <label class="chk"><input type="checkbox" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
-        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></label>
-        </section>
-        <section class="settings-group settings-display">
+        <label class="chk"><span class="settings-row-copy"> 结点编号 <span class="set-en">NODE NUMBERS</span></span><input type="checkbox" role="switch" id="setIndex" ${game.toggles.index ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 底部操作提示条 <span class="set-en">HINT BAR</span></span><input type="checkbox" role="switch" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 环层横幅 <span class="set-en">LAYER BANNER</span></span><input type="checkbox" role="switch" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></span><input type="checkbox" role="switch" id="setDev" ${game.devMode ? 'checked' : ''}></label>
+        </section>`,
+      display: `<section class="settings-group settings-display">
         <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
         ${performanceSettingsHTML()}
-        <label class="chk"><input type="checkbox" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
-        <label class="chk"><input type="checkbox" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
-        </section>
-        <section class="settings-group settings-audio">
+        <label class="chk"><span class="settings-row-copy"> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></span><input type="checkbox" role="switch" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}></label>
+        <label class="chk"><span class="settings-row-copy"> 减少动态效果 <span class="set-en">REDUCE MOTION</span></span><input type="checkbox" role="switch" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}></label>
+        </section>`,
+      audio: `<section class="settings-group settings-audio">
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
-        <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
+        <label class="chk"><span class="settings-row-copy"> 背景音乐 <span class="set-en">MUSIC</span></span><input type="checkbox" role="switch" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <div class="settings-music-recovery">
           <p class="hint" id="setMusicStatus" role="status" aria-live="polite"></p>
           <button class="mini-btn" type="button" id="setMusicRetry" hidden>重试加载音乐</button>
         </div>
-        <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
+        <label class="chk"><span class="settings-row-copy"> 音效 <span class="set-en">SOUND FX</span></span><input type="checkbox" role="switch" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">音乐与音效可分别调节，修改自动保存。侧边栏按钮控制全局静音。</p>
-        </section>
-        <section class="settings-group settings-credits">
+        </section>`,
+      credits: `<section class="settings-group settings-credits">
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
         <p class="hint"><strong>图标</strong><span>game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion<br><span class="license">CC-BY 3.0</span></span></p>
         <p class="hint"><strong>战斗音效</strong><span>rubberduck、Tinysized、Kenney 等创作者<br><span class="license">CC0</span></span></p>
         <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源 <span class="settings-external" aria-hidden="true">↗</span></a></p>
-        </section>
-        <section class="settings-group settings-records">
+        </section>`,
+      records: `<section class="settings-group settings-records">
         <h3 class="set-h">[[icon:book]] 留言信箱 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
         <!-- W1-01：数据页原唯一入口=Alt+9 不可发现，设置页加可见入口 -->
         <div class="btn-row"><button class="mini-btn" data-act="openDataPageUi">查看跑局数据</button></div>
-        </section>
-        <section class="settings-group settings-danger">
+        </section>`,
+      danger: `<section class="settings-group settings-danger">
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
         <!-- W1-08：三枚不可逆钮原同排等权——按危险度分级：低危两枚一排，清档独占一排加重 -->
         <div class="btn-row">
@@ -915,8 +909,15 @@ export function createGameMenuPages(deps, shell) {
           <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
         </div>
         <p class="hint">清空后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
-        </section>
-        </div><!-- /.settings -->
+        </section>`,
+    };
+    const settingsHTML = `
+      <div class="pg settings-page settings-tabbed ui-scale-system" data-settings-category="general" data-settings-motion="entry">
+        <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
+             （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
+        ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
+        <header class="pg-head"><h2>设置</h2><span class="pg-spacer"></span></header>
+        ${settingsLayoutHTML(groups)}
       </div><!-- /.pg -->`;
     const finishOverlay = beginRuntimeStage('settings-overlay-sync');
     try { UI.showOverlay('', settingsHTML, 'page'); } finally { finishOverlay(); }

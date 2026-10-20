@@ -261,7 +261,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   },
   opaqueConsumers: {
     "game/src/audio/sfx-review.js": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
-    "game/src/ui/game.menu.pages.js": "011ee8b4f8ffeeda3e35daa4d48c7f8b7a65e0d9deae4f60b3aacd09cb60adbc",
+    "game/src/ui/game.menu.pages.js": "b5a1c52bab264651e512b61598b5e63950fc30bdf65e2307d223bdd63e6ed826",
     "game/src/hub/hub.personnel.js": "f363ac2ad34b21fe99a1b650642deb2537e397c918175f58d5325ad4366bbe72",
     "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
     "game/src/hub/game.bag.view2.js": "22d64eb1d194e29b6542bc9d1f4ab63f096c04bc6e92b02ce05ef1da3ff3800d",
