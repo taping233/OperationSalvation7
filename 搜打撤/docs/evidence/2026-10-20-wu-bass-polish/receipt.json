@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a157e7-0b27-77b2-9462-0fecb53cc289\\exec-538882d3-be58-4f3c-8c28-695a84dd0aba.png",
+  "source_sha256": "843be6195699ca6f28b97e338e2f218f4993ccace7f90e7db5e69ab4f7101d3e",
+  "asset": "game\\assets\\reconstruction\\wallpaper-wu-bass-1020.webp",
+  "sha256": "9e435d8b6e635cc7810fa1ee77f1b5d93c6941f0f7120e54e61d07f4a216892a",
+  "bytes": 270978,
+  "size": [
+    1672,
+    941
+  ],
+  "backup": "D:\\素材\\代号柒\\.tmp\\imagegen\\wu-bass-polish-1020\\before.webp",
+  "previous_sha256": "bc6296abbe97d51a31e4f9fda360817634cc9564cce1b5fdc000e1369c575950",
+  "verification": "Selected asset audit passed; built-in browser http://127.0.0.1:5200 current window shows fourth wallpaper and wallpaper-only mode, error log empty; screenshot home-installed.png. No build/full tests/commit.",
+  "polish_source": "C:\\Users\\太平\\.codex\\generated_images\\01a157e7-0b27-77b2-9462-0fecb53cc289\\exec-aeb23844-d595-49dc-a583-4e52941cbc28.png",
+  "hand_fix": "Canvas-left fretting hand redrawn, thumb behind neck, four curved fingers; generated output visually inspected."
+}

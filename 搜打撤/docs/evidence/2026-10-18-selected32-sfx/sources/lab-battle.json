@@ -1,0 +1,805 @@
+{
+  "url": "https://soundeffect-lab.info/sound/battle/",
+  "items": [
+    {
+      "label": "剣で斬る1「ザシン」という金属感ある斬撃音",
+      "href": "mp3/sword-slash1.mp3"
+    },
+    {
+      "label": "剣で斬る2ゲーム向けの短めの音",
+      "href": "mp3/sword-slash2.mp3"
+    },
+    {
+      "label": "剣で斬る3モンスターを斬る",
+      "href": "mp3/sword-slash3.mp3"
+    },
+    {
+      "label": "剣で斬る42連続",
+      "href": "mp3/sword-slash4.mp3"
+    },
+    {
+      "label": "剣で斬る5乱舞攻撃。5連続",
+      "href": "mp3/sword-slash5.mp3"
+    },
+    {
+      "label": "剣で斬る6力を溜めてから斬り裂く",
+      "href": "mp3/sword-slash6.mp3"
+    },
+    {
+      "label": "大剣で斬る3m近い剣。重さを利用し叩きつける",
+      "href": "mp3/large-sword-slash1.mp3"
+    },
+    {
+      "label": "剣を抜く鋭く響く金属音",
+      "href": "mp3/sword-drawn1.mp3"
+    },
+    {
+      "label": "剣を鞘にしまう緩急をつけてパチンと収める",
+      "href": "mp3/sword-storage1.mp3"
+    },
+    {
+      "label": "剣の戦い激しく何度も打ち合う",
+      "href": "mp3/sword-battle1.mp3"
+    },
+    {
+      "label": "剣で打ち合う1鋭い高音",
+      "href": "mp3/sword-clash1.mp3"
+    },
+    {
+      "label": "剣で打ち合う2カキイン",
+      "href": "mp3/sword-clash2.mp3"
+    },
+    {
+      "label": "剣で打ち合う3地面が揺れるほどの衝撃",
+      "href": "mp3/sword-clash3.mp3"
+    },
+    {
+      "label": "剣で打ち合う4リアル系",
+      "href": "mp3/sword-clash4.mp3"
+    },
+    {
+      "label": "剣の素振り1大剣を振る",
+      "href": "mp3/sword-gesture1.mp3"
+    },
+    {
+      "label": "剣の素振り2剣を振る",
+      "href": "mp3/sword-gesture2.mp3"
+    },
+    {
+      "label": "剣の素振り3小剣を振る",
+      "href": "mp3/sword-gesture3.mp3"
+    },
+    {
+      "label": "鎧の騎士が歩くガチャガチャと音が鳴る",
+      "href": "mp3/armor-work-1.mp3"
+    },
+    {
+      "label": "鎧の騎士が走る実際に身にまとって収録",
+      "href": "mp3/armor-dash-2.mp3"
+    },
+    {
+      "label": "盾で防御鉄壁の守り",
+      "href": "mp3/shield1.mp3"
+    },
+    {
+      "label": "刀で斬る1時代劇の斬撃音",
+      "href": "mp3/katana-slash1.mp3"
+    },
+    {
+      "label": "刀で斬る2重い一撃",
+      "href": "mp3/katana-slash2.mp3"
+    },
+    {
+      "label": "刀で斬る3引き裂く",
+      "href": "mp3/katana-slash3.mp3"
+    },
+    {
+      "label": "刀で斬る4突くイメージ",
+      "href": "mp3/katana-slash4.mp3"
+    },
+    {
+      "label": "刀で斬る5切れ味抜群の刀",
+      "href": "mp3/katana-slash5.mp3"
+    },
+    {
+      "label": "刀の素振り1素振り",
+      "href": "mp3/katana-gesture1.mp3"
+    },
+    {
+      "label": "刀の素振り2ピュッ",
+      "href": "mp3/katana-gesture2.mp3"
+    },
+    {
+      "label": "刀の連続素振り相手の刀をひたすら避ける",
+      "href": "mp3/katana-continuity1.mp3"
+    },
+    {
+      "label": "居合抜き1一閃",
+      "href": "mp3/iainuki1.mp3"
+    },
+    {
+      "label": "刀を構えるチャキッ",
+      "href": "mp3/katana-hold1.mp3"
+    },
+    {
+      "label": "刀を鞘にしまう1パチン",
+      "href": "mp3/katana-storage1.mp3"
+    },
+    {
+      "label": "刀を鞘にしまう2チャイン",
+      "href": "mp3/katana-storage2.mp3"
+    },
+    {
+      "label": "刀で打ち合う1時代劇のチャンバラ",
+      "href": "mp3/katana-clash1.mp3"
+    },
+    {
+      "label": "刀で打ち合う2鈍いチャンバラ音",
+      "href": "mp3/katana-clash2.mp3"
+    },
+    {
+      "label": "刀で打ち合う3低いチャンバラ音",
+      "href": "mp3/katana-clash3.mp3"
+    },
+    {
+      "label": "刀で打ち合う4斬りつけるも弾き返される",
+      "href": "mp3/katana-clash4.mp3"
+    },
+    {
+      "label": "鞘を持つ金具が鳴る",
+      "href": "mp3/sheath1.mp3"
+    },
+    {
+      "label": "ナイフで切る軽めの斬撃音",
+      "href": "mp3/knife-slash-1.mp3"
+    },
+    {
+      "label": "ナイフで突き刺す1血が出る音入り",
+      "href": "mp3/knife-stab-1.mp3"
+    },
+    {
+      "label": "ナイフで突き刺す2鈍い音",
+      "href": "mp3/knife-stab-2.mp3"
+    },
+    {
+      "label": "ナイフで突き刺す3グサッ",
+      "href": "mp3/knife-stab-3.mp3"
+    },
+    {
+      "label": "血がたれる1ビチャビチャッ",
+      "href": "mp3/blood-drips1.mp3"
+    },
+    {
+      "label": "血がたれる2ポタポタ",
+      "href": "mp3/blood-drips2.mp3"
+    },
+    {
+      "label": "斧で斬る1パワーのある重い一撃",
+      "href": "mp3/ax-slash-1.mp3"
+    },
+    {
+      "label": "斧で斬る2クリティカルヒット時",
+      "href": "mp3/ax-slash-2.mp3"
+    },
+    {
+      "label": "鞭で攻撃1本物の鞭の炸裂音",
+      "href": "mp3/whip-attack-1.mp3"
+    },
+    {
+      "label": "鞭で攻撃2先端が音速を超える",
+      "href": "mp3/whip-attack-2.mp3"
+    },
+    {
+      "label": "鞭で攻撃3ビシビシと2回連続で叩く",
+      "href": "mp3/whip-attack-3.mp3"
+    },
+    {
+      "label": "鞭で攻撃4数発連続して打ち付ける",
+      "href": "mp3/whip-attack-4.mp3"
+    },
+    {
+      "label": "鞭で攻撃5エコー入り。女王様のイメージ",
+      "href": "mp3/whip-attack-5.mp3"
+    },
+    {
+      "label": "鞭を振り回す1ヒュッ",
+      "href": "mp3/whip-gesture1.mp3"
+    },
+    {
+      "label": "鞭を振り回す22回転",
+      "href": "mp3/whip-gesture2.mp3"
+    },
+    {
+      "label": "鞭を振り回す310回転",
+      "href": "mp3/whip-gesture3.mp3"
+    },
+    {
+      "label": "弓を引き絞る1ギリギリギリ…",
+      "href": "mp3/bow-draw1.mp3"
+    },
+    {
+      "label": "弓を引き絞る2長め",
+      "href": "mp3/bow-draw2.mp3"
+    },
+    {
+      "label": "弓矢を放つヒュッ",
+      "href": "mp3/arrow-release1.mp3"
+    },
+    {
+      "label": "弓矢が刺さるドスッ",
+      "href": "mp3/arrow-pierce1.mp3"
+    },
+    {
+      "label": "ドラゴンの鳴き声1恐竜や怪獣の声にも使える",
+      "href": "mp3/dragon-cry1.mp3"
+    },
+    {
+      "label": "ドラゴンの鳴き声2短め。巨大生物感ある響き",
+      "href": "mp3/dragon-cry2.mp3"
+    },
+    {
+      "label": "ドラゴンの羽ばたきバサッ",
+      "href": "mp3/dragon-wing1.mp3"
+    },
+    {
+      "label": "ドラゴンが火を吐くブレス攻撃",
+      "href": "mp3/dragon-fire1.mp3"
+    },
+    {
+      "label": "ゴブリンの鳴き声1人間大のモンスター",
+      "href": "mp3/goblin-cry1.mp3"
+    },
+    {
+      "label": "ゴブリンの鳴き声2グアーッと威嚇",
+      "href": "mp3/goblin-cry2.mp3"
+    },
+    {
+      "label": "ゴブリンの鳴き声3グルルル…。唸り声",
+      "href": "mp3/goblin-cry3.mp3"
+    },
+    {
+      "label": "翼竜の鳴き声1キーッ。鋭く高い声",
+      "href": "mp3/pterosaur-cry1.mp3"
+    },
+    {
+      "label": "翼竜の鳴き声2クアーッ",
+      "href": "mp3/pterosaur-cry2.mp3"
+    },
+    {
+      "label": "怪獣の足音ズシンと地響きが起こる",
+      "href": "mp3/monster-footstep1.mp3"
+    },
+    {
+      "label": "眠りこけるモンスター大きないびき",
+      "href": "mp3/monster-sleep1.mp3"
+    },
+    {
+      "label": "ドラキュラの羽ばたき6回羽ばたく",
+      "href": "mp3/dracula-wing1.mp3"
+    },
+    {
+      "label": "スライムの攻撃チュピピ",
+      "href": "mp3/slime1.mp3"
+    },
+    {
+      "label": "うごめく触手大量の触手",
+      "href": "mp3/tentacle1.mp3"
+    },
+    {
+      "label": "地響き体重で地割れ発生",
+      "href": "mp3/earth-tremor1.mp3"
+    },
+    {
+      "label": "人がモンスターに変化グロテスクに変わる",
+      "href": "mp3/transform-monster1.mp3"
+    },
+    {
+      "label": "打撃1顔を殴る",
+      "href": "mp3/blow1.mp3"
+    },
+    {
+      "label": "打撃2攻撃全般に使いやすい",
+      "href": "mp3/blow2.mp3"
+    },
+    {
+      "label": "打撃3ドン",
+      "href": "mp3/blow3.mp3"
+    },
+    {
+      "label": "打撃4岩を砕く",
+      "href": "mp3/blow4.mp3"
+    },
+    {
+      "label": "打撃5斧で攻撃",
+      "href": "mp3/blow5.mp3"
+    },
+    {
+      "label": "打撃6ドカッ",
+      "href": "mp3/blow6.mp3"
+    },
+    {
+      "label": "打撃7血が飛び散る",
+      "href": "mp3/blow7.mp3"
+    },
+    {
+      "label": "打撃8グチャッ",
+      "href": "mp3/blow8.mp3"
+    },
+    {
+      "label": "ガラスが割れる1大型ガラスが粉々になる",
+      "href": "/sound/various/mp3/glass-break1.mp3"
+    },
+    {
+      "label": "ガラスが割れる2窓ガラスの破片が飛び散る",
+      "href": "/sound/various/mp3/glass-break2.mp3"
+    },
+    {
+      "label": "ガラスが割れる3ワイングラス",
+      "href": "/sound/various/mp3/glass-break3.mp3"
+    },
+    {
+      "label": "ガラスにひびが入るピシッ",
+      "href": "/sound/various/mp3/glass-crack1.mp3"
+    },
+    {
+      "label": "石が砕ける何かの力で砕け散る",
+      "href": "/sound/various/mp3/stone-break1.mp3"
+    },
+    {
+      "label": "岩にヒビが入るビキビキビキ…",
+      "href": "mp3/rock-crack1.mp3"
+    },
+    {
+      "label": "岩が真っ二つに割れる巨大な岩",
+      "href": "mp3/rock-break1.mp3"
+    },
+    {
+      "label": "パンチで壁を破壊パラパラと木材が落ちる",
+      "href": "mp3/wall-destruction1.mp3"
+    },
+    {
+      "label": "ペットボトルを握りつぶすメキョメキョ",
+      "href": "/sound/various/mp3/petbottle-hold1.mp3"
+    },
+    {
+      "label": "建物が少し崩れる1破片が落ちてくる",
+      "href": "mp3/building-collapse-little1.mp3"
+    },
+    {
+      "label": "建物が少し崩れる2パラパラ",
+      "href": "mp3/building-collapse-little2.mp3"
+    },
+    {
+      "label": "建物が大きく崩れる1揺れる+ヒビも入る",
+      "href": "mp3/building-collapse1.mp3"
+    },
+    {
+      "label": "建物が大きく崩れる2大きな破片が降ってくる",
+      "href": "mp3/building-collapse2.mp3"
+    },
+    {
+      "label": "崖崩れ地盤沈下、地割れ、地震",
+      "href": "/sound/various/mp3/cliff-failure1.mp3"
+    },
+    {
+      "label": "軽いパンチ1アニメ風ではない殴打音",
+      "href": "mp3/punch-light1.mp3"
+    },
+    {
+      "label": "軽いパンチ2服越しに殴る",
+      "href": "mp3/punch-light2.mp3"
+    },
+    {
+      "label": "重いパンチ1強烈な殴打",
+      "href": "mp3/punch-heavy1.mp3"
+    },
+    {
+      "label": "重いパンチ2顔面を殴る",
+      "href": "mp3/punch-heavy2.mp3"
+    },
+    {
+      "label": "重いパンチ3メキメキと顔面にめり込む",
+      "href": "mp3/punch-heavy3.mp3"
+    },
+    {
+      "label": "軽いキック1パンチより重めの音",
+      "href": "mp3/kick-light1.mp3"
+    },
+    {
+      "label": "軽いキック2ズン",
+      "href": "mp3/kick-light2.mp3"
+    },
+    {
+      "label": "重いキック1重低音強め",
+      "href": "mp3/kick-heavy1.mp3"
+    },
+    {
+      "label": "激しい格闘シーン11秒間戦い続ける",
+      "href": "mp3/fighting-scene1.mp3"
+    },
+    {
+      "label": "ロボットを殴る1鈍い金属音",
+      "href": "mp3/machine-hit1.mp3"
+    },
+    {
+      "label": "ロボットを殴る2ガン",
+      "href": "mp3/machine-hit2.mp3"
+    },
+    {
+      "label": "ロボットを殴る3金属の衝突",
+      "href": "mp3/machine-hit3.mp3"
+    },
+    {
+      "label": "ロボットを強く殴る1ガキン",
+      "href": "mp3/machine-hard-hit1.mp3"
+    },
+    {
+      "label": "ロボットを強く殴る2火花が散る",
+      "href": "mp3/machine-hard-hit2.mp3"
+    },
+    {
+      "label": "ロボットを強く殴る3重い一撃",
+      "href": "mp3/machine-hard-hit3.mp3"
+    },
+    {
+      "label": "パンチの素振り1少し重め",
+      "href": "mp3/punch-real-swing1.mp3"
+    },
+    {
+      "label": "パンチの素振り2フック",
+      "href": "mp3/punch-real-swing2.mp3"
+    },
+    {
+      "label": "パンチの素振り3鋭い風切り音",
+      "href": "mp3/punch-real-swing3.mp3"
+    },
+    {
+      "label": "キックの素振り1ブォン",
+      "href": "mp3/kick-real-swing1.mp3"
+    },
+    {
+      "label": "キックの素振り2風圧が来る",
+      "href": "mp3/kick-real-swing2.mp3"
+    },
+    {
+      "label": "キックの素振り3蹴り以外の動作音にも",
+      "href": "mp3/kick-real-swing3.mp3"
+    },
+    {
+      "label": "パンチの衣擦れ1バッ",
+      "href": "mp3/rubbing-clothes-punch1.mp3"
+    },
+    {
+      "label": "パンチの衣擦れ2ボッ",
+      "href": "mp3/rubbing-clothes-punch2.mp3"
+    },
+    {
+      "label": "キックの衣擦れ1長めの衣擦れ音",
+      "href": "mp3/rubbing-clothes-kick1.mp3"
+    },
+    {
+      "label": "キックの衣擦れ2ジャンプ音などにも使える",
+      "href": "mp3/rubbing-clothes-kick2.mp3"
+    },
+    {
+      "label": "パンチの風切り音（スローモーション）1映画風",
+      "href": "mp3/punch-slow1.mp3"
+    },
+    {
+      "label": "パンチの風切り音（スローモーション）2アクションシーンの表現に",
+      "href": "mp3/punch-slow2.mp3"
+    },
+    {
+      "label": "パンチの風切り音（スローモーション）3ジャンプ音としても使える",
+      "href": "mp3/punch-slow3.mp3"
+    },
+    {
+      "label": "パンチの風切り音（スローモーション）4素振り音としても使える",
+      "href": "mp3/punch-slow4.mp3"
+    },
+    {
+      "label": "スローモーション突入ドギュン",
+      "href": "/sound/anime/mp3/text-impact2.mp3"
+    },
+    {
+      "label": "スローモーション時が止まった表現にも",
+      "href": "mp3/slow-motion1.mp3"
+    },
+    {
+      "label": "スローモーション終了ズオオオ",
+      "href": "mp3/slow-motion-end1.mp3"
+    },
+    {
+      "label": "背負い投げ1柔道の代表的な技",
+      "href": "mp3/shoulder-throw1.mp3"
+    },
+    {
+      "label": "背負い投げ2巨大モンスターを投げる",
+      "href": "mp3/shoulder-throw2.mp3"
+    },
+    {
+      "label": "倒れるドサッ",
+      "href": "mp3/real-down1.mp3"
+    },
+    {
+      "label": "小パンチビシッと炸裂するジャブ",
+      "href": "mp3/punch-middle2.mp3"
+    },
+    {
+      "label": "中パンチボディブロー",
+      "href": "mp3/punch-high1.mp3"
+    },
+    {
+      "label": "大パンチ必殺技ヒット",
+      "href": "mp3/punch-high2.mp3"
+    },
+    {
+      "label": "小キックローキック",
+      "href": "mp3/kick-low1.mp3"
+    },
+    {
+      "label": "中キックミドルキック",
+      "href": "mp3/kick-middle1.mp3"
+    },
+    {
+      "label": "大キック全力での重い蹴り",
+      "href": "mp3/kick-high1.mp3"
+    },
+    {
+      "label": "必殺技ヒットとてつもなく重い一撃",
+      "href": "mp3/super-arts-hit1.mp3"
+    },
+    {
+      "label": "パンチを受け止める攻撃をブロック",
+      "href": "mp3/punch-stop1.mp3"
+    },
+    {
+      "label": "超必殺技発動一瞬の隙を見抜く",
+      "href": "mp3/super-arts-motion1.mp3"
+    },
+    {
+      "label": "K.O.フィニッシュ",
+      "href": "mp3/ko1.mp3"
+    },
+    {
+      "label": "バタンと倒れるダウン",
+      "href": "mp3/down1.mp3"
+    },
+    {
+      "label": "ジャンプ風を切る音",
+      "href": "mp3/jump1.mp3"
+    },
+    {
+      "label": "ジャンプの着地スタッ",
+      "href": "mp3/landing1.mp3"
+    },
+    {
+      "label": "パンチ素振りフォッ",
+      "href": "mp3/punch-swing1.mp3"
+    },
+    {
+      "label": "パンチ寸止め当たるううう",
+      "href": "mp3/dimension-stop.mp3"
+    },
+    {
+      "label": "構えを取るシュタッ",
+      "href": "mp3/setup1.mp3"
+    },
+    {
+      "label": "高速移動シュン",
+      "href": "mp3/highspeed-movement1.mp3"
+    },
+    {
+      "label": "腕を鳴らすボキボキ",
+      "href": "mp3/play-the-arm1.mp3"
+    },
+    {
+      "label": "胸ぐらをつかむ投げ技をかける",
+      "href": "mp3/grap1.mp3"
+    },
+    {
+      "label": "気弾1腹に打ち込むイメージ",
+      "href": "mp3/qigong1.mp3"
+    },
+    {
+      "label": "気弾2溜めてから発射",
+      "href": "mp3/qigong2.mp3"
+    },
+    {
+      "label": "気弾のせめぎ合いエネルギーの衝突",
+      "href": "mp3/qigong-fight1.mp3"
+    },
+    {
+      "label": "ズザーッと押し戻される敵の攻撃に押される",
+      "href": "mp3/pushed-back1.mp3"
+    },
+    {
+      "label": "締め付ける1ギューッ",
+      "href": "mp3/constriction1.mp3"
+    },
+    {
+      "label": "締め付ける2超強力な締め付け",
+      "href": "mp3/constriction2.mp3"
+    },
+    {
+      "label": "骨を折る全身複雑骨折",
+      "href": "mp3/fracture1.mp3"
+    },
+    {
+      "label": "踏み込むズザッ",
+      "href": "mp3/step-into1.mp3"
+    },
+    {
+      "label": "全力で踏み込むドガッ",
+      "href": "mp3/best-step-into1.mp3"
+    },
+    {
+      "label": "平手打ち1ピシ",
+      "href": "mp3/slap1.mp3"
+    },
+    {
+      "label": "オーラ1光を身にまとう",
+      "href": "mp3/aura1.mp3"
+    },
+    {
+      "label": "オーラ2ほとばしるエネルギー",
+      "href": "mp3/aura2.mp3"
+    },
+    {
+      "label": "火炎魔法1火の球を飛ばす",
+      "href": "mp3/magic-flame1.mp3"
+    },
+    {
+      "label": "火炎魔法2強烈な火炎放射",
+      "href": "mp3/magic-flame2.mp3"
+    },
+    {
+      "label": "火炎魔法3地獄の業火",
+      "href": "mp3/magic-flame3.mp3"
+    },
+    {
+      "label": "氷魔法1氷のつぶて",
+      "href": "mp3/magic-ice1.mp3"
+    },
+    {
+      "label": "氷魔法2凍結させる",
+      "href": "mp3/magic-ice2.mp3"
+    },
+    {
+      "label": "氷魔法3巨大な氷に閉じ込める",
+      "href": "mp3/magic-ice3.mp3"
+    },
+    {
+      "label": "氷魔法で凍結体がだんだん凍っていく",
+      "href": "mp3/magic-ice-frozen1.mp3"
+    },
+    {
+      "label": "雷魔法1電気発生",
+      "href": "mp3/magic-electron1.mp3"
+    },
+    {
+      "label": "雷魔法2小雷撃",
+      "href": "mp3/magic-electron2.mp3"
+    },
+    {
+      "label": "雷魔法3電撃がほとばしる",
+      "href": "mp3/magic-electron3.mp3"
+    },
+    {
+      "label": "雷魔法4太い雷が落ちる",
+      "href": "mp3/magic-electron4.mp3"
+    },
+    {
+      "label": "暗黒魔法ブラックホール発生",
+      "href": "mp3/magic-attack-darkness1.mp3"
+    },
+    {
+      "label": "聖魔法悪を浄化する裁きの光",
+      "href": "mp3/magic-attack-holy1.mp3"
+    },
+    {
+      "label": "風魔法1かまいたち",
+      "href": "mp3/magic-wind1.mp3"
+    },
+    {
+      "label": "風魔法2風を圧縮した玉",
+      "href": "mp3/magic-wind2.mp3"
+    },
+    {
+      "label": "毒魔法1毒を浴びる",
+      "href": "mp3/magic-poison1.mp3"
+    },
+    {
+      "label": "毒魔法2まとわりつく液体",
+      "href": "mp3/magic-poison2.mp3"
+    },
+    {
+      "label": "重力魔法1押しつぶされる",
+      "href": "mp3/magic-gravity1.mp3"
+    },
+    {
+      "label": "重力魔法2反重力の玉",
+      "href": "mp3/magic-gravity2.mp3"
+    },
+    {
+      "label": "地震魔法1地響き",
+      "href": "mp3/magic-quake1.mp3"
+    },
+    {
+      "label": "地震魔法2地割れ発生",
+      "href": "mp3/magic-quake2.mp3"
+    },
+    {
+      "label": "魔法の弾を次々にかわす空中戦などに",
+      "href": "mp3/magic-ball-dodge1.mp3"
+    },
+    {
+      "label": "魔法使いが空を飛ぶ服がバタバタと音を立てる",
+      "href": "mp3/wizard-flight1.mp3"
+    },
+    {
+      "label": "回復魔法1小回復",
+      "href": "mp3/magic-cure1.mp3"
+    },
+    {
+      "label": "回復魔法2中回復",
+      "href": "mp3/magic-cure2.mp3"
+    },
+    {
+      "label": "回復魔法3大回復",
+      "href": "mp3/magic-cure3.mp3"
+    },
+    {
+      "label": "回復魔法4神聖な光",
+      "href": "mp3/magic-cure4.mp3"
+    },
+    {
+      "label": "ステータス治療1毒回復",
+      "href": "mp3/magic-status-cure1.mp3"
+    },
+    {
+      "label": "ステータス治療2ステータス全回復",
+      "href": "mp3/magic-status-cure2.mp3"
+    },
+    {
+      "label": "魔法反射光の壁発生",
+      "href": "mp3/magic-reflection1.mp3"
+    },
+    {
+      "label": "HP吸収魔法1何かを吸い取るイメージ",
+      "href": "mp3/magic-drain1.mp3"
+    },
+    {
+      "label": "HP吸収魔法2エナジードレイン",
+      "href": "mp3/magic-drain2.mp3"
+    },
+    {
+      "label": "魔法のステッキ魔法少女のイメージ",
+      "href": "mp3/magic-stick1.mp3"
+    },
+    {
+      "label": "錫杖で地面を突く杖に付けられた輪で音が鳴る",
+      "href": "mp3/tin-cane1.mp3"
+    },
+    {
+      "label": "パワーチャージ集中",
+      "href": "mp3/magic-charge1.mp3"
+    },
+    {
+      "label": "ワープ消えるイメージ",
+      "href": "mp3/magic-worp1.mp3"
+    },
+    {
+      "label": "魔法陣を展開呪文を詠唱するシーンに",
+      "href": "mp3/magic-circle1.mp3"
+    },
+    {
+      "label": "ステータス上昇魔法1理力が集中する",
+      "href": "mp3/magic-statusup1.mp3"
+    },
+    {
+      "label": "ステータス上昇魔法2上昇するイメージ",
+      "href": "mp3/magic-statusup2.mp3"
+    }
+  ]
+}

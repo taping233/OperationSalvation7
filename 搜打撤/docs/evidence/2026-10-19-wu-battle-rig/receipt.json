@@ -1,0 +1,133 @@
+{
+  "task": "WF-wu-battle-rig-1019",
+  "stage": "pose-and-parts-review",
+  "status": "candidate-pose-and-parts-awaiting-owner-review",
+  "images": [
+    {
+      "path": "game/art-source/characters/wu-battle-rig-20261019/pose-v1.png",
+      "source": "C:/Users/太平/.codex/generated_images/01a1503e-cc98-78e1-be24-0f2648a5b75d/exec-0d7ca9b9-5fd1-47e9-8c61-01061b41d21a.png",
+      "acquisition": "built-in image_gen; copied byte-for-byte; prompt in request.json",
+      "bytes": 1744102,
+      "sha256": "8b42aad69dcae4c7cc43ef4b5ef107ebe4a2ac1da4eb9a3baf2a5d8cf8f7fd98",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixelFraction": 0.67592,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        1535,
+        1024
+      ]
+    },
+    {
+      "path": "game/art-source/characters/wu-battle-rig-20261019/pose-v2.png",
+      "source": "C:/Users/太平/.codex/generated_images/01a1503e-cc98-78e1-be24-0f2648a5b75d/exec-4f7826e7-ba9e-473f-9888-253dbe05db4a.png",
+      "acquisition": "built-in image_gen; copied byte-for-byte; prompt in request.json",
+      "bytes": 1571653,
+      "sha256": "de094b93a0ca2e2fb654ca6ef256d4a8c7a9c59a948154ed942343cfb554bcb1",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixelFraction": 0.73766,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        208,
+        0,
+        1523,
+        1013
+      ]
+    },
+    {
+      "path": "game/art-source/characters/wu-battle-rig-20261019/parts-review-v1.png",
+      "source": "C:/Users/太平/.codex/generated_images/01a1503e-cc98-78e1-be24-0f2648a5b75d/exec-146033cb-2e99-479c-9d57-f91916424a3e.png",
+      "acquisition": "built-in image_gen; copied byte-for-byte; prompt in request.json",
+      "bytes": 2009391,
+      "sha256": "a6a8f698ffe553ac88effff344c31213e237693c0e6295c6d7e45b1796d6ae10",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixelFraction": 0.53817,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        1523,
+        1024
+      ]
+    },
+    {
+      "path": "game/art-source/characters/wu-battle-rig-20261019/pose-v3.png",
+      "source": "C:/Users/太平/.codex/generated_images/01a1503e-cc98-78e1-be24-0f2648a5b75d/exec-30bc110e-3d2f-40f5-902d-4d6026208631.png",
+      "acquisition": "built-in image_gen; copied byte-for-byte; prompt in request.json",
+      "bytes": 1445451,
+      "sha256": "6af0a91da85a606953e68f891d221feaacf1e991c89fa0ed752409ca891a2f31",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixelFraction": 0.78613,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        41,
+        0,
+        1486,
+        1015
+      ]
+    },
+    {
+      "path": "game/art-source/characters/wu-battle-rig-20261019/pose-v4.png",
+      "source": "C:/Users/太平/.codex/generated_images/01a1503e-cc98-78e1-be24-0f2648a5b75d/exec-eb025f5e-4c0a-4020-8c8e-93d8fa2800dd.png",
+      "acquisition": "built-in image_gen; copied byte-for-byte; prompt in request.json",
+      "bytes": 1419849,
+      "sha256": "3a4c93916f5dc4fbaa9f10e82d864b6f6cace384e7975851550cedd2b92e46e6",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparentPixelFraction": 0.79777,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        53,
+        0,
+        1496,
+        1024
+      ]
+    }
+  ],
+  "checks": [
+    "PNG readable; 1536x1024 RGBA",
+    "source copies SHA-equivalent",
+    "transparent pixels present; subject alpha reaches at least 250"
+  ],
+  "limits": [
+    "No pixel-perfect production split or rig.",
+    "AI parts board has overlapping head/hair content and incomplete waist area.",
+    "No Spine installed/license confirmed in checked locations; portable location not excluded.",
+    "No motion, runtime integration, build, or gameplay verification."
+  ]
+}

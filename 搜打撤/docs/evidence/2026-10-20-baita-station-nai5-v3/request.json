@@ -1,0 +1,118 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1.35::a station stairwell divided into THREE parallel lanes by TWO TALL SOLID METAL PARTITIONS::, central fixed stone staircase, crowded side passages, 1girl, solo focus, high-angle full body,\n\nEach solid brushed-steel partition is a broad continuous opaque sloping wall, chest-high beside the woman. The two silver walls extend diagonally from the lower foreground toward the rear concourse, enclosing the central stair flight. Slim straight brass handrails and spaced vertical posts are attached INSIDE these solid walls. 1.2::commuters fill the separate passages OUTSIDE both metal walls::, busy tiled concourse behind.\n\nCamera above the stairs looks down toward the concourse. The woman climbs toward us BETWEEN the two metal walls; her entire body occupies three quarters of image height, both loafers and one lower tread visible. One shoe supports her on a stone tread; other knee lifts toward the next step. Face lifts for brief eye contact. Right hand at screen-left holds a ticket down beside her thigh, left hand grips bag strap. Dark blurred shoulders overlap bottom corners, crisp woman at middle depth, smaller soft crowds behind.\n\nLow sunlight from behind, narrow hair rim, cool sage frontal shadows. Long brass-post shadows cross stone treads toward foreground. Oatmeal wool, dusty-blue knit, brown leather, subdued silver panels, small gold reflections.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1402076391,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, open staircase without side walls, curved central balustrade, cropped feet, floating feet, animal ears, magic circle, floating books",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, very long dark brown wavy hair, heavy side-swept bangs completely covering the eye on the viewer-left, only the viewer-right green eye visible, two slim gold hairclips on the exposed-eye side, human ears, gentle bookish face, oatmeal knee-length wool coat, dusty-blue turtleneck sweater dress, brown tights, brown loafers, dark brown shoulder satchel",
+          "uc": "animal ears, blue eyes, pale hair, hat, both eyes visible",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.35::a station stairwell divided into THREE parallel lanes by TWO TALL SOLID METAL PARTITIONS::, central fixed stone staircase, crowded side passages, 1girl, solo focus, high-angle full body,\n\nEach solid brushed-steel partition is a broad continuous opaque sloping wall, chest-high beside the woman. The two silver walls extend diagonally from the lower foreground toward the rear concourse, enclosing the central stair flight. Slim straight brass handrails and spaced vertical posts are attached INSIDE these solid walls. 1.2::commuters fill the separate passages OUTSIDE both metal walls::, busy tiled concourse behind.\n\nCamera above the stairs looks down toward the concourse. The woman climbs toward us BETWEEN the two metal walls; her entire body occupies three quarters of image height, both loafers and one lower tread visible. One shoe supports her on a stone tread; other knee lifts toward the next step. Face lifts for brief eye contact. Right hand at screen-left holds a ticket down beside her thigh, left hand grips bag strap. Dark blurred shoulders overlap bottom corners, crisp woman at middle depth, smaller soft crowds behind.\n\nLow sunlight from behind, narrow hair rim, cool sage frontal shadows. Long brass-post shadows cross stone treads toward foreground. Oatmeal wool, dusty-blue knit, brown leather, subdued silver panels, small gold reflections.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, very long dark brown wavy hair, heavy side-swept bangs completely covering the eye on the viewer-left, only the viewer-right green eye visible, two slim gold hairclips on the exposed-eye side, human ears, gentle bookish face, oatmeal knee-length wool coat, dusty-blue turtleneck sweater dress, brown tights, brown loafers, dark brown shoulder satchel",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, open staircase without side walls, curved central balustrade, cropped feet, floating feet, animal ears, magic circle, floating books",
+          "char_captions": [
+            {
+              "char_caption": "animal ears, blue eyes, pale hair, hat, both eyes visible",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\baita-station-nai5-v3-20261020\\candidate.png",
+  "changes": "Architecture promoted to first phrase with modest emphasis: TWO broad opaque chest-high silver divider walls; fine inner rails distinguished from solid walls; dense side crowds. Removed global escalator UC to avoid suppressing side-route architecture. Identity/model/seed/sampling/size/coordinates retained from v2.",
+  "previous_request_sha256": "1c108540e76394585a6ea0583942ba51c7736e644b938a40d7145b210345704d",
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\06603d0465bec94f7eb4598e7cdf67e3236908.png",
+      "sha256": "4b00f38ac0318762bb8d5497647adddb6c269f6f35de65ac2131949654da7b47",
+      "uploaded": false
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\character-bible\\baita.md",
+      "sha256": "925bd2c2aa02b89b6bd860314f74cadc898e851ac2e022e75cd6d4528e8419b2",
+      "uploaded": false
+    }
+  ],
+  "scope": "One NAI5 candidate only; no image upload, built-in redraw, runtime replacement, tests, build or commit",
+  "seed": 1402076391,
+  "sha256": "16289b313393332142e75713d20235e78c384aaa1d7868848025a5d2ff144a57",
+  "visual_observation": {
+    "improved": [
+      "Two solid silver panels and fine attached inner brass rails now appear",
+      "Full-body ascending pose with both shoes, ticket and bag strap",
+      "One-eye Baita identity retained"
+    ],
+    "deviations": [
+      "Panels are too tall and too close, forming narrow corridor instead of chest-high dividers",
+      "Side crowds mostly hidden; three-route layout still not legible",
+      "Knee lift too high for relaxed walking",
+      "Warm reference atmosphere weakened; silver surfaces dominate"
+    ],
+    "approval": "Assistant observation only; architecture emphasis overshot; awaiting user evaluation"
+  },
+  "user_feedback": "Selected by user for built-in default-style redraw; see redraw-request.json"
+}

@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "output": ".tmp\\nai\\xingyue-reeds-nai5-20261020\\redraw-arknights.png",
+  "sha256": "3dbe261860f0762ac3343d62227bb9fb259f6cfa7dbd7b4624ae9bbe1d1c7a5d",
+  "size": [
+    1659,
+    948
+  ],
+  "source": ".tmp/nai/xingyue-reeds-nai5-20261020/redraw-default-style.png",
+  "visual_review": {
+    "matched": [
+      "星月、衣装、摊掌与原构图保留",
+      "线条与材质更细、冷暖夕照和景深增强"
+    ],
+    "remaining": [
+      "仍保留部分原图块面笔触",
+      "手指局部细节及画风相似度待老板审阅"
+    ]
+  },
+  "approval": "候选待审阅"
+}

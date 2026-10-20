@@ -1,0 +1,28 @@
+{
+  "status": "installed",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1553b-f44e-7e61-bece-55bb5e785c1a\\exec-052bd237-9839-4d9a-b392-02dbd843eafd.png",
+  "original": "D:/素材/代号柒/.tmp/nai/baita-station-nai5-v3-20261020/ticket-hand-fixed.png",
+  "prompt": "OUTPAINT the supplied APPROVED finished illustration to a wider 16:9 LANDSCAPE WALLPAPER canvas. Target aspect is 16:9, matching 1672 by 941 game wallpapers. Expand the left and right edges, preserving the entire existing illustration uncut and at unchanged proportions in the center. Do not crop the shoes, head, rails or people, do not zoom in, do not stretch the woman, do not change her size relative to the stairs. Add only enough side scene to reach wide wallpaper format, with a little extra safe margin at bottom if needed to keep both shoes comfortably visible. Continue the existing tall silver metal partitions, their natural edges/painted reflections and the softly blurred dark foreground commuters at the sides. Keep the established high-angle station geometry and lighting.\n\nSTRICT CONTENT LOCK: adult Baita with long dark brown wavy hair, side fringe covering viewer-left eye, visible viewer-right GREEN eye, two gold hairclips. Oatmeal coat, dusty-blue sweater dress, brown tights/shoes/satchel, raised knee and planted shoe. Preserve both hands and the newly repaired viewer-left ticket pinch exactly as in the input; the ticket hangs down, do not redraw the finger logic. Preserve the hand-painted anime opaque layered brushwork, facial expression, subdued cool/warm palette, cast shadows and metal panel proportions. This is canvas expansion only, not a redraw or new composition. Integrate the added side areas in the same directional block-paint technique and contrast hierarchy. No new props, readable text, signatures, watermarks, border or UI. The final delivered whole image must be wide 16:9.",
+  "outpaint_tool": "built-in image_gen",
+  "asset": "game/assets/reconstruction/wallpaper-baita-station-1020.webp",
+  "wallpaper_id": "baita-station",
+  "scope": "Add fifth title wallpaper; preserve prior wallpaper choices/default/crossfade; no commit/build.",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 300640,
+  "sha256": "d83710e93845c24a60d2918bbda5fb7502c673c7ea47fb7903a544ad44c0fdb6",
+  "source_sha256": "0311960400ac6b248c773534bec4abbfcd31009b7dbab07e4c7ab783aad82019",
+  "original_sha256": "37e4abb420415794faa40fc7ee527ca71275be6d238b15f91f13718d07a1412b",
+  "encoding": "RGB WebP quality94 method6; no cropping or resizing",
+  "revisions": [
+    {
+      "source": "C:/Users/太平/.codex/generated_images/01a1553b-f44e-7e61-bece-55bb5e785c1a/exec-61c4244c-c234-443e-93a6-1a90b542ff1a.png",
+      "sha256": "6d7787512c6801839551857657ce40f502228bd31d042129140a377fef6dae65",
+      "backup": "..\\.tmp\\nai\\baita-station-wallpaper\\pre-stair-fix.webp",
+      "reason": "User requested dedicated staircase perspective repair"
+    }
+  ],
+  "stair_revision": "stairs-request.json"
+}

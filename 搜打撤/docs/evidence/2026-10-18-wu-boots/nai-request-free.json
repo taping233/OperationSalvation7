@@ -1,0 +1,88 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "1girl, solo, adult woman, full body, sitting, looking at viewer, confident smile, removing footwear, dramatic foreshortening, low angle, wide-angle perspective.\nShe sits on a simple low angular seat facing the camera. Her raised left leg extends diagonally toward the lower foreground, bent naturally at the knee. Both hands pull a short black sock over the left heel toward her toes; the sock is still around the front of the foot, leaving the heel and ankle visible. Her right foot still wears a black ankle boot and rests on the floor. The removed matching left boot stands beside the seat. Her face remains large, clearly readable and sharply resolved in the upper center. A complete coherent figure with two legs, two feet and two hands; skirt covers her lap naturally.\n\nPremium Arknights character illustration, elegant diagonal silhouette, full silhouette and ponytail inside the portrait canvas. Pale cool gray studio background with subtle architectural geometric shapes, no lettering. Highly detailed face and hands, anatomically convincing fingers grasping the stretched sock opening, physically coherent cloth tension, precise boot seams, small metal zipper and leather folds. Black dress ruffles painted in crisp angular planes, silver hair in layered flowing strands, restrained cool daylight and delicate warm skin bounce light, luminous cyan eyes, selective fine detail, mature adult proportions.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1888047490,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, baby face, erotic, nude, underwear, upskirt, spread legs, extra legs, extra feet, fused toes, malformed feet, goggles, long skirt, dress train, blue star pattern, thighhighs, pantyhose, cropped head, cropped feet, duplicate boots",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, silver white long hair, high ponytail tied with blue satin ribbon bow, parted bangs, both cyan blue eyes visible, black rose at her left temple, black round sunglasses pushed up on head, thin black frames and dark round lenses, confident small fang smile, fair skin, black charcoal off-shoulder long sleeved short dress, layered ruffles at neckline cuffs and above-knee skirt, tied black waist, bare thighs and knees, short black socks, black ankle boots, a single long straight black sheathed sword secured diagonally behind her back",
+          "uc": "goggles, child, teen",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, full body, sitting, looking at viewer, confident smile, removing footwear, dramatic foreshortening, low angle, wide-angle perspective.\nShe sits on a simple low angular seat facing the camera. Her raised left leg extends diagonally toward the lower foreground, bent naturally at the knee. Both hands pull a short black sock over the left heel toward her toes; the sock is still around the front of the foot, leaving the heel and ankle visible. Her right foot still wears a black ankle boot and rests on the floor. The removed matching left boot stands beside the seat. Her face remains large, clearly readable and sharply resolved in the upper center. A complete coherent figure with two legs, two feet and two hands; skirt covers her lap naturally.\n\nPremium Arknights character illustration, elegant diagonal silhouette, full silhouette and ponytail inside the portrait canvas. Pale cool gray studio background with subtle architectural geometric shapes, no lettering. Highly detailed face and hands, anatomically convincing fingers grasping the stretched sock opening, physically coherent cloth tension, precise boot seams, small metal zipper and leather folds. Black dress ruffles painted in crisp angular planes, silver hair in layered flowing strands, restrained cool daylight and delicate warm skin bounce light, luminous cyan eyes, selective fine detail, mature adult proportions.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, silver white long hair, high ponytail tied with blue satin ribbon bow, parted bangs, both cyan blue eyes visible, black rose at her left temple, black round sunglasses pushed up on head, thin black frames and dark round lenses, confident small fang smile, fair skin, black charcoal off-shoulder long sleeved short dress, layered ruffles at neckline cuffs and above-knee skirt, tied black waist, bare thighs and knees, short black socks, black ankle boots, a single long straight black sheathed sword secured diagonally behind her back",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, baby face, erotic, nude, underwear, upskirt, spread legs, extra legs, extra feet, fused toes, malformed feet, goggles, long skirt, dress train, blue star pattern, thighhighs, pantyhose, cropped head, cropped feet, duplicate boots",
+          "char_captions": [
+            {
+              "char_caption": "goggles, child, teen",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "identity_reference": "搜打撤/game/assets/portraits/full/wu.webp",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-boots-1018\\wu-nai-base-free.png",
+  "seed": 1888047490,
+  "sha256": "6500ea8b8e451c76a0fdf359e7bdd0ca664fe45bf39c374a3632d7810f79adf8"
+}

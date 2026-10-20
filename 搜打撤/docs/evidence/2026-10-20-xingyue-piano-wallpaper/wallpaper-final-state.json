@@ -1,0 +1,21 @@
+{
+  "id": "xingyue-piano",
+  "layers": [
+    {
+      "class": "title-bg",
+      "opacity": "0",
+      "transition": "opacity 0.5s ease-in-out"
+    },
+    {
+      "class": "title-bg title-bg-alternate",
+      "opacity": "0",
+      "transition": "opacity 0.5s ease-in-out"
+    },
+    {
+      "class": "title-bg title-bg-piano",
+      "opacity": "1",
+      "transition": "opacity 0.5s ease-in-out"
+    }
+  ],
+  "mode": "home-composed wallpaper-only"
+}

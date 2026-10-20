@@ -1,0 +1,115 @@
+{
+  "status": "generated",
+  "character": "baita",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, full body, seated on an ornate dark wooden armchair, three-quarter front view. Left hand supports a small plate of strawberry cake; right hand holds a silver fork just before her lips. A large closed antique grimoire rests firmly across her lap, gold ribbon bookmarks hanging down. Two small open books float beside her shoulders. A faint gold magic circle lies beneath the chair.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1326307801,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, quiet scholarly expression, green eye, very long dark brown wavy curly hair. Thick side-swept bangs completely cover the eye on the viewer-left side; only the viewer-right green eye is visible. Two slender gold hair clips on the exposed-eye side. White long-sleeved buttoned blouse with gathered cuffs, dark forest-green suspender maxi dress, gold buckles, white ankle socks, black Mary Jane shoes.",
+          "uc": "both eyes visible, uncovered left eye, short hair, standing",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, full body, seated on an ornate dark wooden armchair, three-quarter front view. Left hand supports a small plate of strawberry cake; right hand holds a silver fork just before her lips. A large closed antique grimoire rests firmly across her lap, gold ribbon bookmarks hanging down. Two small open books float beside her shoulders. A faint gold magic circle lies beneath the chair.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, quiet scholarly expression, green eye, very long dark brown wavy curly hair. Thick side-swept bangs completely cover the eye on the viewer-left side; only the viewer-right green eye is visible. Two slender gold hair clips on the exposed-eye side. White long-sleeved buttoned blouse with gathered cuffs, dark forest-green suspender maxi dress, gold buckles, white ankle socks, black Mary Jane shoes.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+          "char_captions": [
+            {
+              "char_caption": "both eyes visible, uncovered left eye, short hair, standing",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp\\nai\\roster-nai5-redo-20261020\\baita.png",
+  "references": [
+    {
+      "path": "game\\assets\\portraits\\full\\baita.webp",
+      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
+      "role": "current appearance, outfit and pose",
+      "uploaded": false
+    },
+    {
+      "path": "docs\\character-bible\\baita.md",
+      "sha256": "925bd2c2aa02b89b6bd860314f74cadc898e851ac2e022e75cd6d4528e8419b2",
+      "role": "current identity; newest explicit anchors override old illustration",
+      "uploaded": false
+    }
+  ],
+  "integration": "candidate only, no runtime assets replaced",
+  "seed": 1326307801,
+  "sha256": "87e2c86b84e455c7a9b8fcf5b4cf3662114ebf1f69ac24e0a39d1376b29ae169",
+  "size_bytes": 1355328,
+  "acquisition": "nai_gen/nai_guard, one candidate",
+  "visual_review": {
+    "matched": "Long dark-brown curls, green visible eye, twin gold clips, blouse/green suspender dress, seated cake/fork, lap grimoire, floating books, ground circle, complete shoes.",
+    "deviations": "Covered-eye orientation is mirrored versus current confirmed anchor; unrequested green beret appeared; fork is away from lips.",
+    "approval": "pending"
+  },
+  "user_feedback": {
+    "beret": "User explicitly asked to retain the beret.",
+    "covered_eye_orientation": "No user decision yet; generated side mirrored from current written anchor."
+  }
+}

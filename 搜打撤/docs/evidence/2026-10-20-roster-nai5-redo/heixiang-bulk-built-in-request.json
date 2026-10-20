@@ -1,0 +1,23 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "prompt": "heixiang-bulk-built-in-prompt.txt",
+  "inputs": [
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\roster-nai5-redo-20261020\\heixiang.png",
+      "sha256": "796a680c96b82632c08d1f9e29c8eff3e7ba4cea6be66ed63416477c6e130368"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp",
+      "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa"
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\roster-nai5-redo-20261020\\heixiang-muscular-built-in.png",
+  "sha256": "26bec4bbcfa2af090bd7aa4846f21b8e2ceb91e0e118cfaacbaac43d5df40c76",
+  "size": [
+    1037,
+    1516
+  ],
+  "visual_review": "Broader shoulders, much thicker chest/arms/thighs and heavier muscular silhouette visible. Face, pose, cup/saucer, outfit and back sword retained. Pending user review.",
+  "integration": "candidate only"
+}

@@ -1,0 +1,129 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, playing an old upright piano beneath a collapsed theater balcony, body leaning slightly forward, wrists relaxed, left hand resting in the lower register while the right continues a delicate phrase, composed expression softened by quiet sadness, wide horizontal composition, close view looking along the keyboard toward her profile, foreground keys enlarged by perspective, empty private boxes and torn curtains fading into the background, a large opening in the roof revealing amber clouds, narrow sunset beams catching her fingers and the edges of her hair, fine dust drifting between her and the camera, weathered wood, faded upholstery and dull brass details, warm ivory and old gold against cool gray shadows, painterly anime rendering, suspended silence around the music, no text\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.0,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "native",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 0,
+      "negative_prompt": "",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale blonde long hair, straight bangs, long sidelocks, a long thick braid tied low behind her head, golden eyes, calm reserved expression, a white crescent moon hairpin clipped flat into the hair just above the bangs, slightly off-center to the viewer's right, tilted and resting against the hair, a newly designed ivory sleeveless high-neck blouse, a loose cool-gray cropped jacket draped off the shoulders with pale cyan-blue lining, simple charcoal cuffs, dark brown fitted leather gloves, a few small brushed-silver clasps, ivory skirt, subtle practical layered tailoring",
+          "uc": "",
+          "center": {
+            "x": 0.4,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, playing an old upright piano beneath a collapsed theater balcony, body leaning slightly forward, wrists relaxed, left hand resting in the lower register while the right continues a delicate phrase, composed expression softened by quiet sadness, wide horizontal composition, close view looking along the keyboard toward her profile, foreground keys enlarged by perspective, empty private boxes and torn curtains fading into the background, a large opening in the roof revealing amber clouds, narrow sunset beams catching her fingers and the edges of her hair, fine dust drifting between her and the camera, weathered wood, faded upholstery and dull brass details, warm ivory and old gold against cool gray shadows, painterly anime rendering, suspended silence around the music, no text\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale blonde long hair, straight bangs, long sidelocks, a long thick braid tied low behind her head, golden eyes, calm reserved expression, a white crescent moon hairpin clipped flat into the hair just above the bangs, slightly off-center to the viewer's right, tilted and resting against the hair, a newly designed ivory sleeveless high-neck blouse, a loose cool-gray cropped jacket draped off the shoulders with pale cyan-blue lining, simple charcoal cuffs, dark brown fitted leather gloves, a few small brushed-silver clasps, ivory skirt, subtle practical layered tailoring",
+              "centers": [
+                {
+                  "x": 0.4,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.4,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "original_metadata": {
+    "prompt": "1girl, solo, perlica (arknights), arknights: endfield, official outfit, canonical character design and accessories, long ash-gray hair, blue eyes, playing an old upright piano beneath a collapsed theater balcony, body leaning slightly forward, wrists relaxed, left hand resting in the lower register while the right continues a delicate phrase, composed expression softened by quiet sadness, wide horizontal composition, close view looking along the keyboard toward her profile, foreground keys enlarged by perspective, empty private boxes and torn curtains fading into the background, a large opening in the roof revealing amber clouds, narrow sunset beams catching her fingers and the edges of her hair, fine dust drifting between her and the camera, weathered wood, faded upholstery and dull brass details, warm ivory and old gold against cool gray shadows, painterly anime rendering, suspended silence around the music, no text",
+    "uc": "",
+    "steps": 28,
+    "scale": 5.0,
+    "seed": 0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "native",
+    "cfg_rescale": 0.0,
+    "strength": 0.7,
+    "noise": 0.0,
+    "sm": false,
+    "sm_dyn": false,
+    "width": 1516,
+    "height": 1037
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-piano-20261019\\candidate-free-20261020.png",
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\f1028251bddd6238348e1b8979fa1847236908.png",
+      "sha256": "83e80419e05e5f47724394ca9c17159c765206e8c82690b7ed8ef916c74d3139",
+      "uploaded": false
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "uploaded": false
+    }
+  ],
+  "changes": {
+    "identity": "Current Xingyue; no Perlica identity or animal ears",
+    "costume": "New tailoring, reference ivory/cool-gray/pale-cyan palette and brown gloves; no uniform emblems or hat",
+    "style": "Current project artist chain, style and quality; original scene prose retained",
+    "dimensions": "1344x768 free landscape size explicitly requested by user",
+    "unused": "strength=0.7 and noise=0 are not applied to text-to-image; no image input or reference upload"
+  },
+  "scope": "One candidate only; no runtime asset replacement",
+  "seed": 0,
+  "sha256": "626f022bdb9fe36d68b308105d7cc6eaf5ecc621552ff6ff4ddef0512cd81d89",
+  "visual_observation": {
+    "identity": "Pale blonde hair, golden eyes, long low braid and white crescent visible; ivory/gray/cyan outfit and brown gloves visible.",
+    "deviations": "Camera reverses the reference layout: piano at left and figure at right, wider side view. Foreground fingers are excessively elongated and distorted.",
+    "approval": "Candidate only; user has not reviewed. No runtime integration."
+  }
+}

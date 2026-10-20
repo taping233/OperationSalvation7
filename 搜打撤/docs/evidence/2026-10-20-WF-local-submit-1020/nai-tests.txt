@@ -1,0 +1,14 @@
+HTTP 200 seed=43 2048x1152 channel=0(--noproxy)
+SAVED C:\Users\̫ƽ\AppData\Local\Temp\nai-offline-32y90j1l\same-output.png 2048x1152 40 bytes
+HTTP 200 seed=42 832x1216 channel=0(--noproxy)
+SAVED C:\Users\̫ƽ\AppData\Local\Temp\nai-offline-32y90j1l\same-output.png 832x1216 39 bytes
+HTTP 429 seed=42 1344x768 channel=0(--noproxy)
+HTTP 000 seed=42 2048x1152 channel=0(--noproxy)
+HTTP 200 seed=42 2048x1152 channel=1(-x)
+SAVED C:\Users\̫ƽ\AppData\Local\Temp\nai-offline-vf2lpr1x\offline & output.png 2048x1152 24 bytes
+NAI vibe HTTP 201
+...........s..........................
+----------------------------------------------------------------------
+Ran 38 tests in 2.399s
+
+OK (skipped=1)

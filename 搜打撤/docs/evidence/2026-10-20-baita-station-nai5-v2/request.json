@@ -1,0 +1,123 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo focus, full body, high angle, looking up, walking up stairs toward the camera, caught mid-step, quiet reserved expression,\n\nBusy railway station entrance. A lower tiled concourse with small commuters recedes behind her.\n\n1.2::three separate parallel routes, a central fixed stone staircase between two side commuter routes::, straight sloping metal dividers separate the routes; slim brass handrails on vertical posts line the INNER sides of the central stairs. Camera on the upper landing looks down the stair flight. Regular stone treads recede toward the concourse. She is centered, entire body inside frame, clear steps below both shoes. One foot planted on a tread, the other knee bends to reach the next higher tread. Right hand at screen-left loosely pinches a train ticket beside her thigh; left hand at screen-right holds her bag strap. Large dark blurred shoulders frame the two foreground corners; sharp woman in the middle distance; smaller softer commuters behind.\n\nLow warm sunlight from the concourse behind her, narrow hair rim light, cool sage face and stair shadows. Long thin railing shadows cross successive treads toward the foreground; shoe contact shadows. Oatmeal beige, dusty blue, muted brass, brown leather; quiet broad wool folds, subtle knit texture.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1402076391,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, escalator, curved balustrade, cropped feet, standing still, floating feet, animal ears, magic circle, floating books",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, very long dark brown wavy hair, heavy side-swept bangs completely covering the eye on the viewer-left, only the viewer-right green eye visible, two slim gold hairclips on the exposed-eye side, human ears, gentle bookish face, oatmeal knee-length wool coat, dusty-blue turtleneck sweater dress, brown tights, brown loafers, dark brown shoulder satchel",
+          "uc": "animal ears, blue eyes, pale hair, hat, both eyes visible",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo focus, full body, high angle, looking up, walking up stairs toward the camera, caught mid-step, quiet reserved expression,\n\nBusy railway station entrance. A lower tiled concourse with small commuters recedes behind her.\n\n1.2::three separate parallel routes, a central fixed stone staircase between two side commuter routes::, straight sloping metal dividers separate the routes; slim brass handrails on vertical posts line the INNER sides of the central stairs. Camera on the upper landing looks down the stair flight. Regular stone treads recede toward the concourse. She is centered, entire body inside frame, clear steps below both shoes. One foot planted on a tread, the other knee bends to reach the next higher tread. Right hand at screen-left loosely pinches a train ticket beside her thigh; left hand at screen-right holds her bag strap. Large dark blurred shoulders frame the two foreground corners; sharp woman in the middle distance; smaller softer commuters behind.\n\nLow warm sunlight from the concourse behind her, narrow hair rim light, cool sage face and stair shadows. Long thin railing shadows cross successive treads toward the foreground; shoe contact shadows. Oatmeal beige, dusty blue, muted brass, brown leather; quiet broad wool folds, subtle knit texture.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, very long dark brown wavy hair, heavy side-swept bangs completely covering the eye on the viewer-left, only the viewer-right green eye visible, two slim gold hairclips on the exposed-eye side, human ears, gentle bookish face, oatmeal knee-length wool coat, dusty-blue turtleneck sweater dress, brown tights, brown loafers, dark brown shoulder satchel",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, escalator, curved balustrade, cropped feet, standing still, floating feet, animal ears, magic circle, floating books",
+          "char_captions": [
+            {
+              "char_caption": "animal ears, blue eyes, pale hair, hat, both eyes visible",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\baita-station-nai5-v2-20261020\\candidate.png",
+  "revision": "Prompt-led NAI5 regeneration; previous sampler/model/seed/size retained; changed scene/identity text and targeted UC together, not a single-variable test.",
+  "priorities": [
+    "High-angle full-body composition with foreground/middle/background depth",
+    "Three routes separated by straight panels, central fixed steps and slim inner rails",
+    "Ascending supported gait, ticket and strap hand relations",
+    "Baita updated one-eye fringe identity; original commuter palette"
+  ],
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\06603d0465bec94f7eb4598e7cdf67e3236908.png",
+      "sha256": "4b00f38ac0318762bb8d5497647adddb6c269f6f35de65ac2131949654da7b47",
+      "uploaded": false
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\character-bible\\baita.md",
+      "sha256": "925bd2c2aa02b89b6bd860314f74cadc898e851ac2e022e75cd6d4528e8419b2",
+      "uploaded": false
+    }
+  ],
+  "scope": "One NAI5 candidate only; no built-in redraw, runtime replacement, build, tests, or commit",
+  "seed": 1402076391,
+  "sha256": "7a19cbeafe972ef3297c65d6d70e369ece326e0719d65c664b228a5d6d9653e4",
+  "visual_observation": {
+    "matched": [
+      "High-angle full-body framing and both shoes visible",
+      "Clear lifted knee/step and ticket/strap hand actions",
+      "Large dark foreground shoulders, sharper central figure, softer background",
+      "One-eye fringe, green iris, gold clips, commuter palette"
+    ],
+    "deviations": [
+      "Tall metal dividers and three distinct route architecture not realized; simple open stair instead",
+      "Background crowd much sparser than original",
+      "Ticket hand reaches forward more than requested",
+      "Cloth and hair highlights remain dense"
+    ],
+    "approval": "Assistant observations only; structural prompt not fully realized; awaiting user feedback"
+  }
+}

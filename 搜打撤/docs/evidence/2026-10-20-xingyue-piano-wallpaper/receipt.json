@@ -1,0 +1,41 @@
+{
+  "status": "installed",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15531-5eb2-78d1-8c55-f9682db767a0\\exec-b559bd76-32b1-4bbd-84a3-e0573e473fdd.png",
+  "source_sha256": "3e351ab5d23e5f16886463212c28f0ece5b1a92285748f2d7a4dc24a896c6545",
+  "source_method": "Built-in image_gen outpaint of approved original block-painted version; full canvas preserved",
+  "asset": "game/assets/reconstruction/wallpaper-xingyue-piano-1020.webp",
+  "sha256": "5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393",
+  "bytes": 484368,
+  "size": [
+    1672,
+    941
+  ],
+  "encoding": {
+    "format": "WebP",
+    "quality": 95,
+    "method": 6
+  },
+  "wallpaper_id": "xingyue-piano",
+  "order": 3,
+  "default_wallpaper": "snow-road",
+  "verification": {
+    "selected_asset": "passed; global asset audit still reports 95 unrelated errors and 570 historical warnings",
+    "tests": "tests/title-wallpaper.test.js: 9 passed before final layer patch; final rerun in checks-final.json",
+    "browser": {
+      "platform": "Codex current in-app browser",
+      "url": "http://127.0.0.1:5200/",
+      "input": "real clicks; 1->2->3->1 cycle; reload restored third wallpaper; wallpaper-only toggled",
+      "transition": {
+        "duration": "0.5s",
+        "second_opacity": 0.839917,
+        "third_opacity": 0.160083,
+        "final_third_opacity": 1
+      },
+      "final_screenshot": "wallpaper-final.png",
+      "state": "wallpaper-final-state.json",
+      "errors": []
+    },
+    "scope": "current window only; no build or commit"
+  },
+  "committed": false
+}

@@ -1,0 +1,51 @@
+{
+  "status": "installed",
+  "source": ".tmp\\nai\\xingyue-reeds-light-wallpaper-20261020\\wallpaper.png",
+  "source_sha256": "b0c0ab71d6fa1f7ca505a69acfea0aef42b7e216f7a64d89d4276fe9f19fcb8b",
+  "asset": "game/assets/reconstruction/wallpaper-xingyue-reeds-1020.webp",
+  "wallpaper_id": "xingyue-reeds",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 441772,
+  "sha256": "a0a603507f5b11c20fc74a57e34641bf0faf631bac036dd0c8bdb5cd715d53b5",
+  "encoding": "RGB WebP quality95 method6, no crop/resize",
+  "order": 6,
+  "default_wallpaper": "wu-bass",
+  "committed": false,
+  "verification": {
+    "tests": {
+      "command": "npm run test:target -- tests/title-wallpaper.test.js",
+      "passed": 13
+    },
+    "asset_audit": {
+      "selected": "passed",
+      "global_existing_errors": 95,
+      "historical_warnings": 570
+    },
+    "diff_check": "passed",
+    "browser": {
+      "platform": "Codex in-app browser via cua",
+      "url": "http://localhost:5200/",
+      "viewport": [
+        1523,
+        956
+      ],
+      "input": "真实点击切换壁纸、刷新、只看壁纸/恢复界面",
+      "selected": "xingyue-reeds",
+      "counter": "6/6",
+      "refresh_persisted": true,
+      "only_wallpaper_menu_opacity": "0",
+      "selected_layer_opacity": "1",
+      "other_layers_opacity": "0",
+      "console_errors": [],
+      "screenshot": "install-home.jpg"
+    },
+    "not_run": [
+      "全量测试",
+      "构建",
+      "提交"
+    ]
+  }
+}

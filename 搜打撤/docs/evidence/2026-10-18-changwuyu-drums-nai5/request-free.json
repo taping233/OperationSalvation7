@@ -1,0 +1,107 @@
+{
+  "status": "failed",
+  "recipe_version": "3.4",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1boy, solo, adult male, seated behind a compact drum kit, legs apart, torso leaning forward slightly, elbows near knees, each hand loosely holding one drumstick across his lap, the two sticks crossing below his hands, head turned toward screen-left, quiet tired expression,\n\nA quiet rehearsal studio after a loud performance. Drum kit around the seated drummer, amplifiers on both sides, acoustic wall panels behind him, a guitar leaning against the right amplifier, microphone stands and floor cables.\n\nWide horizontal composition, full body seated at center, shoes visible. Low front view through the gap between the bass drum and cymbal stands. Foreground drum hardware partially frames him without hiding his face. Large cymbals on both sides above the toms, bass drum below his lap.\n\nSingle warm overhead spotlight casting a pale circle on the wall behind him, warm light on his face and hands, narrow golden sheen along cymbal edges, surrounding amplifiers fading into shadow. Muted olive, gunmetal and warm ivory colors, stillness after a performance.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1375806249,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, girl, female, animal ears, cat ears, teal hair, braids, staff, magic wand, extra drumsticks",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, masculine face, silver-gray long hair tied in a low bun, long sidelocks hanging over shoulders, yellow eyes, pointy elf ears, thin round metal-framed eyeglasses, black wide-brimmed witch hat with a long bent pointed tip and purple underside, dark gray T-shirt, thin open olive overshirt with rolled sleeves, loose black work trousers, plain sneakers",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1boy, solo, adult male, seated behind a compact drum kit, legs apart, torso leaning forward slightly, elbows near knees, each hand loosely holding one drumstick across his lap, the two sticks crossing below his hands, head turned toward screen-left, quiet tired expression,\n\nA quiet rehearsal studio after a loud performance. Drum kit around the seated drummer, amplifiers on both sides, acoustic wall panels behind him, a guitar leaning against the right amplifier, microphone stands and floor cables.\n\nWide horizontal composition, full body seated at center, shoes visible. Low front view through the gap between the bass drum and cymbal stands. Foreground drum hardware partially frames him without hiding his face. Large cymbals on both sides above the toms, bass drum below his lap.\n\nSingle warm overhead spotlight casting a pale circle on the wall behind him, warm light on his face and hands, narrow golden sheen along cymbal edges, surrounding amplifiers fading into shadow. Muted olive, gunmetal and warm ivory colors, stillness after a performance.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, masculine face, silver-gray long hair tied in a low bun, long sidelocks hanging over shoulders, yellow eyes, pointy elf ears, thin round metal-framed eyeglasses, black wide-brimmed witch hat with a long bent pointed tip and purple underside, dark gray T-shirt, thin open olive overshirt with rolled sleeves, loose black work trousers, plain sneakers",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, girl, female, animal ears, cat ears, teal hair, braids, staff, magic wand, extra drumsticks",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\b3f3a54dfbcff93d8a11f0d6f2795082236908.png",
+      "purpose": "Composition, scene, pose, casual clothes; original embedded prompt read; not uploaded",
+      "sha256": "06fd6dec10661a6cdc2af05a572b173cd9c2328ceb4ef3016418429b4894e781",
+      "uploaded": false
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+      "purpose": "Current identity visually inspected; not uploaded",
+      "sha256": "156d3889d6b4c92d95d29eb67440d951f0234b5f325c22d4f3ee27027180a1ff",
+      "uploaded": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\changwuyu-drums-20261018\\candidate-free.png",
+  "source_request": "docs\\evidence\\2026-10-18-changwuyu-drums-nai5\\request.json",
+  "change": "User authorized free-tier landscape size; only width/height changed.",
+  "scope": "One candidate only; no runtime asset replacement",
+  "error_type": "SystemExit",
+  "http_status": 429,
+  "failure": "Rate limited; shared 15-minute cooldown recorded by nai_guard; no image produced; no automatic retry"
+}

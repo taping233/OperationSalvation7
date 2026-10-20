@@ -1,0 +1,94 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman, looking at viewer, confident smile, sitting on a low modern bench, removing footwear, barefoot, bare legs, holding boots, holding socks. Her right hand holds one removed black ankle boot beside her right hip; her left hand holds one removed black sock beside her left hip, both hands clearly visible. The other boot and sock rest together on the floor beside the bench.\n\nFull-body character illustration, Arknights-inspired refined anime game illustration, highly detailed.\n\nPortrait composition, dramatic foreshortening, low three-quarter camera, one bent knee closer to camera, both bare feet visible on the floor, face and hands unobstructed, entire figure in frame. Skirt covers her lap naturally.\n\nMinimal cool pale gray studio backdrop, soft directional light, blue rim light, refined silver hair, clear leather seams, soft black knit sock folds, precise eyes and hands.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 181018326,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, goggles, long skirt, dress train, blue star pattern, worn socks, worn boots, pantyhose, thighhighs, underwear, upskirt, extra limbs, duplicated footwear, cropped head, cropped feet",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, silver white long hair, high ponytail, blue ribbon bow, blue eyes, parted bangs, small fang, black round sunglasses on head, dark tinted lenses, thin frames, black rose above her left temple, black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline cuffs and skirt, black tied waist, skirt hems above knees, bare legs, barefoot, black sheathed straight sword strapped diagonally behind her back",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, looking at viewer, confident smile, sitting on a low modern bench, removing footwear, barefoot, bare legs, holding boots, holding socks. Her right hand holds one removed black ankle boot beside her right hip; her left hand holds one removed black sock beside her left hip, both hands clearly visible. The other boot and sock rest together on the floor beside the bench.\n\nFull-body character illustration, Arknights-inspired refined anime game illustration, highly detailed.\n\nPortrait composition, dramatic foreshortening, low three-quarter camera, one bent knee closer to camera, both bare feet visible on the floor, face and hands unobstructed, entire figure in frame. Skirt covers her lap naturally.\n\nMinimal cool pale gray studio backdrop, soft directional light, blue rim light, refined silver hair, clear leather seams, soft black knit sock folds, precise eyes and hands.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, silver white long hair, high ponytail, blue ribbon bow, blue eyes, parted bangs, small fang, black round sunglasses on head, dark tinted lenses, thin frames, black rose above her left temple, black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline cuffs and skirt, black tied waist, skirt hems above knees, bare legs, barefoot, black sheathed straight sword strapped diagonally behind her back",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, goggles, long skirt, dress train, blue star pattern, worn socks, worn boots, pantyhose, thighhighs, underwear, upskirt, extra limbs, duplicated footwear, cropped head, cropped feet",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp\\nai\\wu-boots-socks-1018\\nai-base.png",
+  "references": [
+    {
+      "path": "搜打撤/game/assets/portraits/full/wu.webp",
+      "purpose": "identity checked visually; not uploaded to NAI"
+    }
+  ],
+  "seed": 181018326,
+  "sha256": "0d0343f3a3d1c50dfa36111a107722bd64112d61e28aceaf9a060521341d5d4d"
+}

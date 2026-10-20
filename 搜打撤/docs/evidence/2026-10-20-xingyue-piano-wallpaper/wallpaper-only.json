@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "status": "inconclusive",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T17:45:07.061Z",
+  "inputKind": "real-input",
+  "detail": "真实点击只看壁纸，界面隐藏，恢复界面按钮可见；CSS背景非img，images字段不代表解码状态，另保存计算样式。",
+  "screenshot": {
+    "path": "wallpaper-only.png",
+    "bytes": 77080,
+    "sha256": "7a2beffecfd99a8f29ae69cc6e6ed443bd53c5dfb17f3e32d6e89371cf2ddf71"
+  },
+  "errors": [
+    "Capture shows snow-road homepage after intervening page state change; not evidence for Xingyue wallpaper-only. Use wallpaper-final.png and wallpaper-final-state.json."
+  ],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    },
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    },
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    }
+  ],
+  "console": []
+}

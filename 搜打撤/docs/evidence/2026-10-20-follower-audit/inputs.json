@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-10-20T00:38:12+08:00",
+  "head": "9b0fe799969b81bd2d6ae7642f36450fd8c1b360",
+  "scope": "Current mixed working tree; read-only gameplay audit",
+  "baselineTests": {
+    "failed": 0,
+    "passed": 42,
+    "exitCode": 0
+  },
+  "auditTests": {
+    "failed": 4,
+    "passed": 4,
+    "exitCode": 1
+  },
+  "browser": "Unavailable: no callable built-in browser interaction tool in this session",
+  "inputs": [
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "b111a34ec12c9a296d57fded9fea85b1ac4be2291e9a5c276a64db2694942900"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "c5e9631b8051aec2b54c8c43e350b4e9b44bcd96b7d7320e60eb22a28bed05d1"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "fe7868167cacbb102a3b86222bc9b70caeb38f8a04751c61d8e8787666d9012e"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "1f438814d23f7f60a555f6369bf013cb12366c5763b5636696c4c6f790491127"
+    },
+    {
+      "path": "game/src/battle/effects/random-blessings.js",
+      "sha256": "5c16d1ce8c608f1890ff440d3c88e16b7242267fbf38798ccd27ed2d09658b61"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "sha256": "7f8739b4316533c9b5b34309954cdbae2f32e0e62bd8a76e30a8e0ae1ed1fb42"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-follower-audit/probe.test.js",
+      "sha256": "e1da2e5858e9ea15b970d19d0c4e29a4adb16e84a010dd86d3114c439109b6b7"
+    }
+  ]
+}

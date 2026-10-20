@@ -1,0 +1,31 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "prompt": "default-outpaint-prompt.txt",
+  "inputs": [
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-remix-20261020\\redraw-default-style.png",
+      "sha256": "7d67a7634a4b90819ae6e33611c537ba05494afc376fc5a5511170884b7c284b"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-default-art-style\\reference-detail.png",
+      "sha256": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-07.jpg",
+      "sha256": "23eedd926340a1f84082a40ea78d9c30116d3bbf8b865c251964b30f65ee7b72"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-08.jpg",
+      "sha256": "8242e77dcbf5edd0acef6eff33815e11e872114cbe851378db8e56e3efb301ea"
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-remix-20261020\\default-style-wallpaper.png",
+  "sha256": "f8123c8f042e8d8689dcf5e42380154315c9c06d48e577537e827d771c679470",
+  "size": [
+    1672,
+    941
+  ],
+  "visual_review": "Unified opaque painterly layers and directional facets; full bass headstock and additional room/rug visible. Identity, lounge outfit and supine bass pose retained. Pending user review.",
+  "integration": "none"
+}

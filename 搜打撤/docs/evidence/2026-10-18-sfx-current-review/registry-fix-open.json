@@ -1,0 +1,1 @@
+{"cells":["Friday（试听页资源地址修复 WF-sfx-review-playback-fix-1018）","game/src/audio/sfx-review.js资源读取段；docs/evidence/2026-10-18-sfx-current-review/修复记录","修正Vite把动态new URL转换成不含深层音源的glob映射；改用现有assetUrl；不改游戏音效映射，不启停已有5200，不build或跑游戏验收","2026-10-18","编辑中"]}

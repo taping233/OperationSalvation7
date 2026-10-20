@@ -1,0 +1,16 @@
+{
+  "tool": "built-in image_gen",
+  "output": ".tmp\\nai\\xingyue-reeds-nai5-20261020\\arknights-original-hair.png",
+  "sha256": "4802c6b973fd2ba08f94a7f78145d069a630be013f087e8df3066ef4e811b984",
+  "size": [
+    1660,
+    948
+  ],
+  "edit_target": "redraw-arknights.png",
+  "hair_reference": "candidate.png",
+  "visual_review": [
+    "头顶与长辫粗碎切面减少，发束连续明暗与细发丝恢复",
+    "其余场景、衣装和摊掌构图视觉保留，非像素级锁定"
+  ],
+  "approval": "候选待审阅"
+}

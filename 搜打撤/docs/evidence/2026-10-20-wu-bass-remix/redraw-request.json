@@ -1,0 +1,27 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "prompt": "redraw-prompt.txt",
+  "inputs": [
+    {
+      "sha256": "99816397BD663BFE2EBD4758B00C570E6680FAF4F7DF96DB9C3E9365787860D9",
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-remix-20261020\\candidate.png"
+    },
+    {
+      "sha256": "E65A46495CF6C9B6C562BE49B7E6EF9A91A5C1AA2976A7E0B949BFD4FCB5C985",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-default-art-style\\reference-detail.png"
+    },
+    {
+      "sha256": "23EEDD926340A1F84082A40EA78D9C30116D3BBF8B865C251964B30F65EE7B72",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-07.jpg"
+    },
+    {
+      "sha256": "8242E77DCBF5EDD0ACEF6EFF33815E11E872114CBE851378DB8E56E3EFB301EA",
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-08.jpg"
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-remix-20261020\\redraw-default-style.png",
+  "sha256": "7D67A7634A4B90819AE6E33611C537BA05494AFC376FC5A5511170884B7C284B",
+  "visual_review": "Layered directional brush planes, chromatic gray cloth, selective lines and refined anime eyes visible; identity, costume, supine bass composition retained. Feet still on rug and hand contact imperfect. Pending user review.",
+  "integration": "none"
+}

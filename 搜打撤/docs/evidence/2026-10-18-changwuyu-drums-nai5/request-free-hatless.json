@@ -1,0 +1,123 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1boy, solo, full body, seated behind a compact drum kit, relaxed shoulders rolled forward, slightly hunched upper back, torso leaning forward. Elbows near knees, each hand loosely holding one drumstick across lap, sticks crossing below hands. Head turned toward screen-left, calm tired expression.\n\nQuiet rehearsal studio after a loud performance, amplifiers on both sides, acoustic wall panels, guitar leaning at image-right, microphones and floor cables.\n\nWide horizontal view, drummer centered, shoes visible, knees apart. Low frontal camera, bass drum below lap, toms beside torso, large cymbals above both sides. Foreground hardware frames him without obscuring face or hands.\n\nWarm overhead spotlight, pale rounded light pool on rear wall, coherent bare-head shadow. Warm face and hands, narrow golden cymbal reflections, muted olive, gunmetal and ivory palette, surrounding room in shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1375806249,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, girl, female, animal ears, cat ears, teal hair, braids, hat, witch hat, headwear, elongated neck, tiny head, staff, magic wand, extra drumsticks",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, refined masculine anime face, silver-gray long hair in a low bun, long sidelocks, yellow eyes, pointy elf ears, thin round metal-framed eyeglasses, bare head, natural adult head size, full hair volume, short natural neck, dark gray crew-neck T-shirt covering neck base, thin open olive overshirt with rolled sleeves, loose black work trousers, plain pale sneakers",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1boy, solo, full body, seated behind a compact drum kit, relaxed shoulders rolled forward, slightly hunched upper back, torso leaning forward. Elbows near knees, each hand loosely holding one drumstick across lap, sticks crossing below hands. Head turned toward screen-left, calm tired expression.\n\nQuiet rehearsal studio after a loud performance, amplifiers on both sides, acoustic wall panels, guitar leaning at image-right, microphones and floor cables.\n\nWide horizontal view, drummer centered, shoes visible, knees apart. Low frontal camera, bass drum below lap, toms beside torso, large cymbals above both sides. Foreground hardware frames him without obscuring face or hands.\n\nWarm overhead spotlight, pale rounded light pool on rear wall, coherent bare-head shadow. Warm face and hands, narrow golden cymbal reflections, muted olive, gunmetal and ivory palette, surrounding room in shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, refined masculine anime face, silver-gray long hair in a low bun, long sidelocks, yellow eyes, pointy elf ears, thin round metal-framed eyeglasses, bare head, natural adult head size, full hair volume, short natural neck, dark gray crew-neck T-shirt covering neck base, thin open olive overshirt with rolled sleeves, loose black work trousers, plain pale sneakers",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, girl, female, animal ears, cat ears, teal hair, braids, hat, witch hat, headwear, elongated neck, tiny head, staff, magic wand, extra drumsticks",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\b3f3a54dfbcff93d8a11f0d6f2795082236908.png",
+      "purpose": "Original scene, relaxed seated pose and casual clothes; local reference only",
+      "sha256": "06fd6dec10661a6cdc2af05a572b173cd9c2328ceb4ef3016418429b4894e781",
+      "uploaded": false
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+      "purpose": "Current adult male identity, gray low bun, yellow eyes, elf ears, round glasses; hat explicitly omitted by user",
+      "sha256": "156d3889d6b4c92d95d29eb67440d951f0234b5f325c22d4f3ee27027180a1ff",
+      "uploaded": false
+    },
+    {
+      "path": "C:\\Users\\太平\\.codex\\generated_images\\01a14f3d-d115-7002-98d2-5af998ea575a\\exec-d043d0c5-26ba-4d70-99f9-6b82b600f120.png",
+      "purpose": "Built-in anatomy revision reviewed before NAI continuation; local reference only",
+      "sha256": "c7d3b3dadd30375771fc4355023a8caf1b2aab2c80eb0d60b5c2f151d9285025",
+      "uploaded": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\changwuyu-drums-20261018\\candidate-free-hatless.png",
+  "scope": "User authorized one NAI5 free-tier landscape draft after cooldown; hatless and corrected seated anatomy; no runtime asset replacement",
+  "seed": 1375806249,
+  "sha256": "7299b13c0d864377decf2e6a335f98498596d7ee9467daf1d5a732b3687dad7c",
+  "http_status": 200,
+  "assistant_observation": {
+    "hits": [
+      "gray low bun, yellow eyes, elf ears, round glasses, no hat",
+      "casual outfit and seated drum studio theme"
+    ],
+    "deviations": [
+      "drum arrangement simplified relative to original",
+      "neck remains relatively long",
+      "fine-line rendering more prominent than original"
+    ]
+  },
+  "user_feedback": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "status": "installed",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1553b-f44e-7e61-bece-55bb5e785c1a\\exec-5401c077-0086-418b-9328-a34b7c65a8c7.png",
+  "source_sha256": "ccd648656ae10ae1f7d1378a94ca4e8a15b96950313864bc4f6f54b1ec8ca277",
+  "asset": "game\\assets\\reconstruction\\wallpaper-baita-station-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 429580,
+  "sha256": "a93b0c9c35b3a73536b27d106f0ef6148b6b2dcb09071f2c4d9fc925ed4d261f",
+  "backup": "..\\.tmp\\nai\\baita-first-style-1020\\pre-selected-wallpaper.webp",
+  "previous_sha256": "d83710e93845c24a60d2918bbda5fb7502c673c7ea47fb7903a544ad44c0fdb6",
+  "encoding": "RGB WebP quality94 method6; no crop, resize or redraw",
+  "selection": "User explicitly chose exec-5401c077 as wallpaper; supersedes simplified candidate for this use.",
+  "scope": "Fifth wallpaper only; no portrait/character-reference change, build or commit",
+  "verification": {
+    "asset_audit": "selected asset passed; global95 historical errors outside scope",
+    "browser": "Codex built-in current window; real clicks6->1->2->3->4->5, wallpaper-only mode; selected-5401-1020 layer opacity1, transition0.5s, captured console errors empty",
+    "screenshot": "selected-wallpaper-installed.png",
+    "limits": "Image/cache change only; prior wallpaper behavior tests reused; no full tests, build, commit, or portrait changes"
+  }
+}
