@@ -8,7 +8,7 @@ vi.mock('../game/src/battle/core/battle.core.js', () => ({
 vi.mock('../game/src/battle/view/battle.preview.js', () => ({
   cardRuleHint: () => '',
   previewAction: ({ cardContext }) => ({ legal: cardContext.legal !== false, cost: 1, damage: null,
-    reasons: cardContext.legal === false ? [cardContext.illegalReason] : [], unknownEffects: [] }),
+    reasons: cardContext.legal === false ? [cardContext.illegalReason] : [], knownEffects: cardContext.knownEffects || [], unknownEffects: cardContext.unknownEffects || [] }),
 }));
 const sound = vi.fn();
 window.SDT = { Sound: { sfx: sound } };
@@ -64,4 +64,16 @@ it.each(['missing-uid', 'not-in-hand', 'item', 'slam', 'dart', 'free-cast', 'oth
 it.each(['能量不足（需要2，当前1）', '还需要1张注能材料'])('uses the current authoritative rejection: %s', message => {
   availability.mockReturnValue({ status: 'rejected', reason: { message } });
   expect(show()).toContain(message); expect(foes[0].textContent).not.toContain('点击该敌人打出');
+});
+
+it('shows declared status effects ahead of unsupported damage wording and escapes content', () => {
+  availability.mockReturnValue({ status: 'ready' });
+  state.context = { legal: true, knownEffects: ['目标附加 2 层中毒', '自己获得 6 点护甲', '<img src=x>'], unknownEffects: ['声明效果未模拟'] };
+  const text = show();
+  expect(text).toContain('卡牌效果');
+  expect(text).toContain('目标附加 2 层中毒'); expect(text).toContain('自己获得 6 点护甲');
+  expect(text).toContain('声明效果未模拟'); expect(text).not.toContain('无法精算');
+  expect(foes[0].querySelector('img')).toBeNull();
+  availability.mockReturnValue({ status: 'rejected', reason: { message: '能量不足' } });
+  expect(show()).not.toContain('卡牌效果');
 });

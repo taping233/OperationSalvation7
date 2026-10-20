@@ -391,3 +391,20 @@ describe('R3-a 可信伤害预览', () => {
     });
   });
 });
+
+it('孢子城墙按有效卡的结构化声明展示中毒与护甲，不虚构直接伤害', () => {
+  const card = Cards.all().find(entry => entry.id === 'tt12-sporewall');
+  expect(card).toBeTruthy();
+  const { game, uid } = gameWith(card);
+  expect(restore(game, uid, { hp: 20 })).toBe(true);
+  const before = BattleSession.getSnapshot();
+  const result = preview(uid);
+  expect(result).toMatchObject({ confidence: 'unknown', damage: null, reasons: [],
+    knownEffects: ['目标附加 2 层中毒', '自己获得 6 点护甲'] });
+  const el = document.createElement('div'); el.className = 'bt-foe'; document.body.append(el);
+  showFoePreview(el, 0, uid, card, 'click');
+  expect(el.textContent).toContain('卡牌效果');
+  expect(el.textContent).not.toContain('无法精算');
+  expect(BattleSession.getSnapshot().foes).toEqual(before.foes);
+  el.remove();
+});

@@ -795,6 +795,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     showTitle();          // 开机进入《代号7》标题界面
     // The title covers the map loop; desktop readiness must not wait for that loop.
     document.body.dataset.state = game.state;
+    if (new URLSearchParams(location.search).get('runtimeTrace') === '1') {
+      import('./core/runtime-trace.local.js')
+        .then(({ installRuntimeTrace }) => installRuntimeTrace())
+        .catch(() => console.warn('[runtime-trace] 本地诊断加载失败'));
+    }
     if (import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')) {
       import('./core/perf-probe.local.js')
         .then(({ installPerfProbe }) => installPerfProbe({ SDT, game, canvas, renderScheduler }))
