@@ -11,6 +11,7 @@ export function alignRuntimeTrace(trace, { marker, videoSeconds }) {
     marker, videoSeconds, anchorMs,
     dropped: Number.isSafeInteger(trace.dropped) && trace.dropped >= 0 ? trace.dropped : null,
     longTaskSupport: ['supported', 'unsupported', 'unavailable'].includes(trace.longTaskSupport) ? trace.longTaskSupport : 'unknown',
+    eventTiming: summarizeEventTiming(trace, records),
     records: records.filter(row => Number.isFinite(row.tMs)).map(row => ({ ...row, videoSeconds: videoSeconds + (row.tMs - anchorMs) / 1000 })) };
 }
 
@@ -19,6 +20,21 @@ const stats = values => {
   return { n, medianMs: n ? (sorted[Math.floor((n - 1) / 2)] + sorted[Math.floor(n / 2)]) / 2 : null,
     minMs: n ? sorted[0] : null, maxMs: n ? sorted[n - 1] : null };
 };
+export function summarizeEventTiming(trace, rows = trace.records.map(sanitizeTraceRow)) {
+  const events = rows.filter(row => row.kind === 'event-timing' && row.visible === true
+    && ['tMs', 'durationMs', 'inputDelayMs', 'processingMs'].every(key => Number.isFinite(row[key]))
+    && Number.isSafeInteger(row.interaction) && row.interaction > 0);
+  return {
+    support: ['supported', 'unsupported', 'unavailable'].includes(trace.eventTimingSupport) ? trace.eventTimingSupport : 'unknown',
+    requestedDurationThresholdMs: trace.eventDurationThresholdMs === 16 ? 16 : null,
+    duration: stats(events.map(row => row.durationMs)),
+    inputDelay: stats(events.map(row => row.inputDelayMs)),
+    processing: stats(events.map(row => row.processingMs)),
+    anonymousGroups: new Set(events.map(row => row.browserInteraction).filter(id => Number.isSafeInteger(id) && id > 0)).size,
+    ungroupedRecords: events.filter(row => !Number.isSafeInteger(row.browserInteraction) || row.browserInteraction < 1).length,
+    limitations: 'Only uniquely matched visible eligible inputs above the browser reporting threshold; missing entries are not zero latency. Duration is browser-reported and quantized (8ms), not exact paint, complete async response, FPS or page INP. Browser groups are local to this trace; do not sum grouped durations or compare IDs across sessions.',
+  };
+}
 export function summarizeRuntimeStages(trace) {
   if (trace?.schema !== 'sdt-runtime-trace-v1' || !Array.isArray(trace.records) || trace.records.length > TRACE_LIMIT) throw new Error('Invalid or oversized runtime trace');
   const rows = trace.records.map(sanitizeTraceRow);
@@ -40,7 +56,7 @@ export function summarizeRuntimeStages(trace) {
       moduleWaitObserved: group.some(row => row.stage === 'settings-module-wait') });
   }
   const names = [...new Set(stages.map(row => row.stage))].sort();
-  return { stages: Object.fromEntries(names.map(name => [name, stats(stages.filter(row => row.stage === name).map(row => row.durationMs))])),
+  return { eventTiming: summarizeEventTiming(trace, rows), stages: Object.fromEntries(names.map(name => [name, stats(stages.filter(row => row.stage === name).map(row => row.durationMs))])),
     synchronousSettings: { ...stats(paired.map(row => row.durationMs)), samples: paired,
       moduleWaitObserved: stats(paired.filter(row => row.moduleWaitObserved).map(row => row.durationMs)),
       noModuleWaitObserved: stats(paired.filter(row => !row.moduleWaitObserved).map(row => row.durationMs)),
@@ -62,7 +78,7 @@ export function compareRuntimeStages(before, after) {
       'Synchronous totals pair exactly one overlay and navigation stage per interaction; asynchronous module/visual waits are never added to CPU totals.',
       'No module-wait record means unobserved, not proven warm. Stage intervals may overlap; do not sum arbitrary stages.',
       'Long-task overlap is correlation, not attribution. Unsupported API or zero records does not prove no blocking, and session counts have different observation lengths.',
-      'This is trace analysis, not video alignment, FPS, input latency or animation completion measurement.',
+      'Stage analysis is not input latency measurement. Event Timing inputDelay is reported separately for the thresholded, matched subset; neither section proves FPS, exact paint or animation completion.',
     ] };
 }
 
