@@ -1,0 +1,32 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-boot-readiness-d682/搜打撤
+
+ ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded invalidate cannot run against the empty UI cache 2ms
+ ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded visibilitychange cannot run against the empty UI cache 1ms
+ ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > keeps early wakes dormant through asynchronous boot, then explicitly starts once ready 16ms
+ ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > coalesces repeated ready wakes and keeps idle visibility resumption responsive 1ms
+ ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > retains real drawing after startup, background coverage, and once-only initialization 1ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 菜单冷加载的Escape走取消端口，输入法组合中的Escape保留给输入法 2ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > lostpointercapture 取消当前拖动，新的指针可继续拖动 2ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 窗口失焦取消拖动，不能保留旧 pointer 归属 1ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 正常拖动和 pointerup 保持效果，自动 lost 事件收尾幂等 1ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 旧 pointer 的 lost/cancel/up 不清除新 pointer 归属 1ms
+ ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 短点击仍先预览再确认当前格；取消和失焦不确认 2ms
+ ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > never creates startup scene warm tasks or enumerates unvisited catalogues 1ms
+ ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > menu entry and the main loop are available before the HTTP prefetch finishes 1ms
+ ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > prefetches all six scenes plus thirteen frames at concurrency four without gating entry 3ms
+ ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > prefetch failure is handled and menu entry remains available without restarting the boot chain 1ms
+ ✓ tests/render-scheduler.test.js > RenderScheduler > 空闲只在失效时绘制，活动状态允许 120 FPS 1ms
+ ✓ tests/render-scheduler.test.js > RenderScheduler > 被不透明页面覆盖时不绘制 0ms
+ ✓ tests/render-scheduler.test.js > RenderScheduler > 失效时唤醒外层主循环，解除回图与输入的巡检延迟 0ms
+ ✓ tests/render-scheduler.test.js > RenderScheduler > 按绝对 deadline 推进，高刷新屏上不因晚到帧持续漂移 0ms
+ ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 30 on a 165 Hz display 0ms
+ ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 60 on a 165 Hz display 0ms
+ ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 120 on a 165 Hz display 0ms
+ ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > does not defer direct input, preserves hidden dirty work and returns to idle 0ms
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  12:03:00
+   Duration  3.17s (transform 336ms, setup 0ms, collect 147ms, tests 964ms, environment 1.28s, prepare 239ms)
+

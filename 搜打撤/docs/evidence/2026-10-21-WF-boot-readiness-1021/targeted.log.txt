@@ -1,0 +1,60 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 pretest
+> npm run narrative:compile && node scripts/validate-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+> codename7-soudache-game@0.60.0 test
+> vitest run --reporter=dot tests/boot-frame-readiness.test.js tests/light-startup-boot.test.js tests/global-boot-pointer-lifecycle.test.js tests/render-scheduler.test.js --reporter=verbose --reporter=json --outputFile=/workspace/scratch/b7a53a06c872/performance-boot-integration-eaa-20261021/targeted.json
+
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+· ✓ tests/render-scheduler.test.js > RenderScheduler > 空闲只在失效时绘制，活动状态允许 120 FPS 1ms
+· ✓ tests/render-scheduler.test.js > RenderScheduler > 被不透明页面覆盖时不绘制 0ms
+· ✓ tests/render-scheduler.test.js > RenderScheduler > 失效时唤醒外层主循环，解除回图与输入的巡检延迟 0ms
+· ✓ tests/render-scheduler.test.js > RenderScheduler > 按绝对 deadline 推进，高刷新屏上不因晚到帧持续漂移 0ms
+· ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 30 on a 165 Hz display 0ms
+· ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 60 on a 165 Hz display 0ms
+· ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > caps active and decorative invalidation draws at 120 on a 165 Hz display 0ms
+· ✓ tests/render-scheduler.test.js > render budget preserves input responsiveness > does not defer direct input, preserves hidden dirty work and returns to idle 0ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 菜单冷加载的Escape走取消端口，输入法组合中的Escape保留给输入法 2ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > lostpointercapture 取消当前拖动，新的指针可继续拖动 2ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 窗口失焦取消拖动，不能保留旧 pointer 归属 1ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 正常拖动和 pointerup 保持效果，自动 lost 事件收尾幂等 1ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 旧 pointer 的 lost/cancel/up 不清除新 pointer 归属 1ms
+· ✓ tests/global-boot-pointer-lifecycle.test.js > 真实 boot Canvas 被中断的指针输入 > 短点击仍先预览再确认当前格；取消和失焦不确认 1ms
+· ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded invalidate cannot run against the empty UI cache 3ms
+· ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded visibilitychange cannot run against the empty UI cache 1ms
+· ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > keeps early wakes dormant through asynchronous boot, then explicitly starts once ready 20ms
+· ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > coalesces repeated ready wakes and keeps idle visibility resumption responsive 2ms
+· ✓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > retains real drawing after startup, background coverage, and once-only initialization 1ms
+· ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > never creates startup scene warm tasks or enumerates unvisited catalogues 2ms
+· ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > menu entry and the main loop are available before the HTTP prefetch finishes 1ms
+· ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > prefetches all six scenes plus thirteen frames at concurrency four without gating entry 4ms
+· ✓ tests/light-startup-boot.test.js > light startup uses actual boot wiring without gating menu entry > prefetch failure is handled and menu entry remains available without restarting the boot chain 2ms
+
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  12:56:26
+   Duration  1.15s (transform 321ms, setup 0ms, collect 230ms, tests 1.32s, environment 1.11s, prepare 268ms)
+
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  12:56:26
+   Duration  1.15s (transform 321ms, setup 0ms, collect 230ms, tests 1.32s, environment 1.11s, prepare 268ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-boot-integration-eaa-20261021/targeted.json

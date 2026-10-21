@@ -500,8 +500,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   let coverTitle = null, coverExit = null;   // 标题 / 退出界面（DOMContentLoaded 时缓存）
   let wasCanvasCovered = true;
   let loopFrame = 0, idleLoopTimer = 0;
+  let loopReady = false;
 
   function requestLoopFrame() {
+    // 资源加载或 visibilitychange 可早于 DOMContentLoaded；启动完成前只保留 dirty 状态。
+    if (!loopReady) return;
     // 输入法/环境守卫（nightshift U15）：测试环境拆除后 idle 链（scheduleNextLoop 的
     // 250ms setTimeout）仍会触发本函数，node 无 requestAnimationFrame 直接裸引即炸
     // unhandled 并污染同 worker 用例（批次⑥全量实锤）。与 U1/U5-a 守卫同构。
@@ -837,5 +840,6 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     } else {
       try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch { /* 预取降级失败：不阻塞启动 */ }
     }
+    loopReady = true;
     requestLoopFrame();
   }, { once: true });
