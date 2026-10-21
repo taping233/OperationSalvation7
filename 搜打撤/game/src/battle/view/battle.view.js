@@ -769,6 +769,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (preserveAim) resumeAimAfterRender(snapshot);
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲
     const anim = animateBattleTransition(prevView, body, animEvents, handAnim.flightMs);
+    if (!isCurrent()) return;
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）+ 开始动画（暗幕+立绘+名号亮相，约 1.5s）
     if (opts.isBoss && !dreadShown) {
       markDreadShown();

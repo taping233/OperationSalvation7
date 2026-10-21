@@ -1,0 +1,130 @@
+{
+  "baseline": {
+    "description-operation-counts": [
+      {
+        "label": "cold",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "badge": "4'"
+      },
+      {
+        "label": "warm",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "badge": "4'"
+      },
+      {
+        "label": "bonus-change",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 10 点法术伤害；对目标附加冰冻。",
+        "badge": "6'"
+      },
+      {
+        "label": "inactive",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 2 点法术伤害；对目标附加冰冻。",
+        "badge": "2'"
+      }
+    ],
+    "description-same-options-counts": [
+      {
+        "label": "same-opts-cold",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-bonus-change",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 10 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-bonus-return",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-inactive",
+        "provider": 2,
+        "normalization": 2,
+        "description": "造成 2 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-reactivated",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。"
+      }
+    ]
+  },
+  "candidate": {
+    "description-operation-counts": [
+      {
+        "label": "cold",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "badge": "4'"
+      },
+      {
+        "label": "warm",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "badge": "4'"
+      },
+      {
+        "label": "bonus-change",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "badge": "6'"
+      },
+      {
+        "label": "inactive",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 2 点法术伤害；对目标附加冰冻。",
+        "badge": "2'"
+      }
+    ],
+    "description-same-options-counts": [
+      {
+        "label": "same-opts-cold",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 4 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-bonus-change",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 6 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-bonus-return",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 4 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-inactive",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 2 点法术伤害；对目标附加冰冻。"
+      },
+      {
+        "label": "same-opts-reactivated",
+        "provider": 1,
+        "normalization": 1,
+        "description": "造成 4 点法术伤害；对目标附加冰冻。"
+      }
+    ]
+  }
+}

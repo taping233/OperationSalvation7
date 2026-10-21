@@ -1,0 +1,426 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/guard-only-positive/搜打撤
+
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a same token render 233ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a new token render 132ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a same token render 105ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a new token render 97ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > patches warm energy, HP and phase without whole-stage parse, outerHTML comparison or body-wide mount lookup 123ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not write unchanged live HUD text, attributes or child lists 36ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > shares only safely acquired warm snapshots and refreshes after cold and restored host boundaries 131ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > keeps expanded options, focus, runtime animation classes, energy artwork and unrelated HUD identities 64ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs controlled text, classes, ARIA and disabled state even with identical presentation inputs 65ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs owner-controlled root classes and button attributes without leaving duplicate damaged components 48ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs the class of the owned .sts-arena container without recreating scenery or mounts 43ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs the class of the owned .sts-hud container without recreating scenery or mounts 74ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs changed energy child structure and attributes without replacing surviving artwork 40ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs a displaced stage root before updating its unit and hand owners 56ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > removes the real previous phase class even if the public phase attribute was corrupted 49ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-energy-wrap without losing the stage or unit/hand ownership 57ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-hud-r without losing the stage or unit/hand ownership 51ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-tactics without losing the stage or unit/hand ownership 63ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-hand-tools without losing the stage or unit/hand ownership 53ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced #btSelf mount and keeps later updates live 69ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="allies"] mount and keeps later updates live 68ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="foes"] mount and keeps later updates live 77ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced .sts-hand mount and keeps later updates live 53ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > updates pile counts and forecast without replacing their persistent controls or transient animation classes 52ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > keeps the timed flee confirmation armed across unrelated patches and restores its original label 61ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not overwrite a newer synchronous render from showOverlay or bind stale controls 66ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cannot relabel or populate a newer battle when cold showOverlay starts a new epoch 90ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not reinsert a departed stage after a opening modal host hook starts another battle 73ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not reinsert a departed stage after a restoring modal host hook starts another battle 69ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a departed scene immediately when a opening modal hook only queues a new battle 94ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a departed scene immediately when a restoring modal hook only queues a new battle 57ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: false) 55ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: true) 84ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not repaint a page opened synchronously by the restored focus target 42ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a stale public snapshot without invalidating the current battle modal guard 68ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > reads the latest potion popup description from a retained current control 111ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > preserves the exact current potion popup through unchanged render without using the item 61ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects cloned popup ownership and lets the retained source open a fresh current inspection 64ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > reacquires a replaced overlay body without retaining the departed stage owner 83ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > captures equivalent HUD semantics across the complete synchronous field matrix 137ms
+ ✓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > passes live interaction state to hand-hit while a grave panel paints a masked background 41ms
+ ✓ tests/battle-hand-inspector.test.js > clicking with 1 enemies only inspects; explicit use still requires target confirmation 230ms
+ ✓ tests/battle-hand-inspector.test.js > clicking with 2 enemies only inspects; explicit use still requires target confirmation 130ms
+ ✓ tests/battle-hand-inspector.test.js > keeps untargeted cards read-only until explicit use, and a repeated old confirmation cannot spend twice 82ms
+ ✓ tests/battle-hand-inspector.test.js > opens from number/Enter keys, traps focus and blocks combat hotkeys until Escape restores the hand 36ms
+ ✓ tests/battle-hand-inspector.test.js > keeps nine hand identities and stable corner controls while rerendering the battlefield 66ms
+ ✓ tests/battle-hand-inspector.test.js > selects a target on one face pointer tap and suppresses the following synthetic click 30ms
+ ✓ tests/battle-hand-inspector.test.js > selects a target on one bridge pointer tap and suppresses the following synthetic click 349ms
+ ✓ tests/battle-hand-inspector.test.js > starts self-target equipment selection from the stable folded slot without spending or requiring a second click 349ms
+ ✓ tests/battle-hand-inspector.test.js > moves distinct material UIDs from the hand and ignores a detached repeated card 434ms
+ ✓ tests/battle-hand-inspector.test.js > keeps unavailable cards readable and prevents stale confirmations after a battle switch 68ms
+ ✓ tests/battle-hand-inspector.test.js > removes the inspector and restores inert state when the whole overlay is hidden 26ms
+ ✓ tests/battle-hand-inspector.test.js > inspects the source before entry and preserves selected material strip while reading main-card details 63ms
+ ✓ tests/battle-hand-inspector.test.js > keeps distinct hand groups keyed by cost and removes only the card actually played 155ms
+ ✓ tests/battle-hand-inspector.test.js > keeps distinct hand groups keyed by id and removes only the card actually played 150ms
+ ✓ tests/battle-hand-inspector.test.js > keeps distinct hand groups keyed by desc and removes only the card actually played 150ms
+ ✓ tests/battle-hand-inspector.test.js > leaves the original playable when its generated zero-cost copy is played first 139ms
+ ✓ tests/battle-hand-inspector.test.js > reuses one stable slot for unchanged groups and clears it when the final copy leaves the hand 125ms
+ ✓ tests/battle-hand-inspector.test.js > keeps short card rules in the single large card without a redundant full-rule hand entry 27ms
+ ✓ tests/battle-hand-inspector.test.js > renders every long-rule condition through the shared safe rich-text copy without spending or changing focus contracts 24ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":5} 26ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":3,"affix":"frenzy"} 20ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":3,"affix":"frenzy"} 39ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":0} 28ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":4,"evenAttack":true} 20ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":4,"status":{"freeze":1}} 28ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":4,"behavior":"strike"} 19ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":5,"behavior":"general"} 22ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":6,"behavior":"curse"} 30ms
+ ✓ tests/battle-hand-inspector.test.js > separates the actual next action from base attack and keeps detailed conditions for {"atk":4,"affix":"aegis"} 22ms
+ ✓ tests/battle-hand-inspector.test.js > keeps a long enemy name intact and exposes base attack through keyboard intent details without confirming a target 30ms
+ ✓ tests/battle-hand-inspector.test.js > keeps each player combat stat and its actual bonus in a compact unbroken group 19ms
+ ✓ tests/battle-hand-inspector.test.js > presents 侠客 skill effect, available state and fee without changing its action 29ms
+ ✓ tests/battle-hand-inspector.test.js > presents 战士 skill effect, available state and fee without changing its action 28ms
+ ✓ tests/battle-hand-inspector.test.js > presents 法师 skill effect, available state and fee without changing its action 30ms
+ ✓ tests/battle-hand-inspector.test.js > presents 牧师 skill effect, available state and fee without changing its action 36ms
+ ✓ tests/battle-hand-inspector.test.js > presents 降临者 skill effect, available state and fee without changing its action 45ms
+ ✓ tests/battle-hand-inspector.test.js > presents skill target selection, once-per-turn use and restored readiness through the existing command chain 82ms
+ ✓ tests/battle-hand-inspector.test.js > retains the enemy target label and Enter action across redraw and a modal return 110ms
+ ✓ tests/battle-hand-inspector.test.js > retains the self target label and Enter action across redraw and a modal return 73ms
+ ✓ tests/battle-hand-inspector.test.js > rejects synthetic enemy target input while covered, then accepts a fresh selection after return 95ms
+ ✓ tests/battle-hand-inspector.test.js > rejects synthetic self target input while covered, then accepts a fresh selection after return 80ms
+ ✓ tests/battle-hand-inspector.test.js > emphasizes forecast damage and remaining HP as separate values and keeps the actual forecast semantics 32ms
+ ✓ tests/battle-hand-inspector.test.js > renders real unit icon bitmaps synchronously before observer/rAF hydration and reuses unchanged sections 23ms
+ ✓ tests/battle-hand-inspector.test.js > single click selects a target and details stay separately accessible 65ms
+ ✓ tests/battle-hand-inspector.test.js > adds and returns a material by its card face without inspection or resource spending 51ms
+ ✓ tests/battle-hand-inspector.test.js > keeps remaining shortcut numbers after a lower slot leaves 74ms
+ ✓ tests/battle-hand-inspector.test.js > shows and executes a structured raygun skill once despite repeated input 126ms
+ ✓ tests/battle-hand-inspector.test.js > calculates defense before warning and provides return or continue only for lethal turns 26ms
+ ✓ tests/battle-hand-inspector.test.js > warns only on lethal end turn and lets the player return or proceed 51ms
+ ✓ tests/battle-hand-inspector.test.js > 低能量卡的可访问说明与禁用原因一致，恢复后重新提示可用且拒绝不扣费 39ms
+ ✓ tests/battle-hand-inspector.test.js > 特殊禁用原因仍优先于能量提示，不回退成可用操作 21ms
+ ✓ tests/battle-hand-inspector.test.js > two real equipped cards block the next card and ARIA before submission, preserving rejection code and resources 106ms
+ ✓ tests/battle-hand-inspector.test.js > legacy passive gear occupies slots and rune capacity remains dynamic 40ms
+ ✓ tests/battle-hand-inspector.test.js > 普通战武装共享提示明确从本场牌库抽取对应类型，仍可使用 30ms
+ ✓ tests/battle-hand-inspector.test.js > navigates three bounded hand pages without changing cards or combat state 1175ms
+ ✓ tests/battle-hand-inspector.test.js > does not show pagination help for a single hand page 33ms
+ ✓ tests/battle-hand-inspector.test.js > keeps mouse untargeted pickup pending until field confirmation or Escape 24ms
+ ✓ tests/battle-hand-inspector.test.js > keeps touch untargeted pickup pending until field confirmation or Escape 339ms
+ ✓ tests/battle-hand-inspector.test.js > directly plays an untargeted card from focused card-face Enter 363ms
+ ✓ tests/battle-hand-inspector.test.js > directly plays an untargeted card from focused card-face   56ms
+ ✓ tests/battle-hand-inspector.test.js > updates the entire career skill help across busy and energy changes 87ms
+ ✓ tests/battle-hand-inspector.test.js > 同名材料按独立UID移入移出，达到上限后不能继续加入 97ms
+ ✓ tests/battle-hand-inspector.test.js > 更新后旧材料卡与撤回回调失效，当前卡面继续选取独立UID 51ms
+ ✓ tests/battle-hand-inspector.test.js > 工作区数字键按固定UID选材与撤选，取消保留全部手牌和能量 58ms
+ ✓ tests/battle-hand-inspector.test.js > 同屏材料复用手牌且旧入口不能选择本轮材料 110ms
+ ✓ tests/battle-hand-inspector.test.js > 选择变化保留主卡、已选区滚动与焦点，更换材料不提前消耗 82ms
+ ✓ tests/battle-hand-inspector.test.js > 取消或切换战斗后旧工作区确认、直打、选量与详情回调均失效 80ms
+ ✓ tests/battle-hand-inspector.test.js > pending infusion recreates its actual battlefield when restored without a mounted scene 73ms
+ ✓ tests/battle-hand-inspector.test.js > choice backdrop refreshes paid energy and removed hand card, and survives the real overlay mode event 49ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌真实双选：首点保留手牌，排除已选敌人高亮，第二点才扣费互殴 89ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌首选后Esc撤销不消费，只有一敌时不能空耗卡牌 65ms
+ ✓ tests/battle-hand-inspector.test.js > keeps an actively held touch owned when a different primary mouse or pen presses 20ms
+ ✓ tests/battle-hand-inspector.test.js > allows a new primary pointer to continue a pickup only after its owner releases 351ms
+ ✓ tests/battle-hand-inspector.test.js > lets real window aim cancellation consume the down before the retained hand can pick up another card 342ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌 398ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌同种双敌取消后可反向重选，无遗留实例排除 109ms
+ ✓ tests/battle-hand-inspector.test.js > 普通战流光斩可选择目标，确认前不消耗牌或能量 22ms
+ ✓ tests/battle-hand-inspector.test.js > 禁用理由占用单个提示槽，能量变化更新数值，恢复后还原补充规则 32ms
+ ✓ tests/battle-hand-inspector.test.js > 卡文已包含禁用原因时不追加相同阅读提示 18ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌 Esc 取消后恢复 enemy 原卡面焦点且不消费 26ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌 Esc 取消后恢复 self 原卡面焦点且不消费 26ms
+ ✓ tests/battle-hand-inspector.test.js > 鼠标来源选牌即便目标获得焦点，Esc 也不抢回手牌 35ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：removed-card 22ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：changed-token 22ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：detached-stage 20ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：hidden-overlay 22ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：inert-stage 23ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘取消不恢复已失效来源：busy 32ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌后主动转焦其他控件，Esc 不抢走新焦点 33ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘正常确认出牌不恢复原卡焦点 63ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌首个目标后提供可点击取消，清提示和高亮且不消费 49ms
+ ✓ tests/battle-hand-inspector.test.js > 扰敌触屏取消条转义牌名，正常第二次选靶完成后移除 85ms
+ ✓ tests/battle-hand-inspector.test.js > 点击选牌、职业技能和卡牌目标共用唯一可见取消条 45ms
+ ✓ tests/battle-hand-inspector.test.js > 旧取消按钮不能撤销同场新选择，当前按钮仍可正常取消 27ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌后焦点转到取消控件，Escape 按来源恢复焦点 23ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌后焦点转到取消控件，Enter 按来源恢复焦点 22ms
+ ✓ tests/battle-hand-inspector.test.js > 键盘选牌后焦点转到取消控件，pointer 按来源恢复焦点 24ms
+ ✓ tests/battle-hand-inspector.test.js > 普通战从空本场消耗牌堆到实际注能材料均可查看，返回保持战斗 105ms
+ ✓ tests/battle-hand-inspector.test.js > shows only active player rules via readonly snapshot and clears retained chips immediately 33ms
+ ✓ tests/battle-hand-inspector.test.js > shares one raw-hand eligibility context per synchronous render and creates a fresh one next render 25ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > moves actual copies to the selected area and restores the exact withdrawn copy 355ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > uses stable UID shortcuts for both copies and selected-card withdrawal 237ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > describes the actual pointer and keyboard infusion entrances for tt7-holyheal 71ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > describes the actual pointer and keyboard infusion entrances for tt3sp-bloodstorm 61ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > does not consume browser shortcuts or editable text as material selection 67ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > moves keyboard focus with the selected material into its withdrawal button 99ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > rejects covered battle actions and closing infusion actions without changing resources 114ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > invalidates pile callbacks after returning and reopening the same pile 65ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > rejects old selection callbacks after cancelling and reopening the same source UID 141ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > disables direct play for a required infusion card, retaining selection and resources 56ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > keeps the card rules, count and actions without repeating instructions 50ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > keeps the main card visible while actual material cards move between hand and selection 89ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > suspends overlay frames without adding combat readouts to the card workspace 89ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > updates exact material counts and preserves the disabled, cancel and reentry paths 90ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > still dispatches direct play without consuming the selected materials 142ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > still confirms the selected materials and spends them only after target confirmation 129ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > previews infused area damage without spending, then consumes materials and energy once on an empty-field drop 147ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > keeps infused materials and energy intact on invalid area-drop cancellation 62ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > keeps infused materials and energy intact on escape area-drop cancellation 47ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > revalidates energy at final infused area drop without partial spending 41ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > revalidates material at final infused area drop without partial spending 60ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > escapes long card names and keeps counters correct through an ordinary rerender 88ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > uses the same two groups for targeted items and preserves cancellation without spending the item 91ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > locks the potion rail during material selection and restores it after cancellation 85ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > keeps the damage estimate visible and exposes excluded actions through focused details 45ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > does not let an old lethal confirmation end the turn after returning to play 39ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > ignores detached settings inputs after returning to the battlefield 63ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > keeps old settings and rules returns from dismissing newer secondary pages 53ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > keeps possible-death language and the same estimate in the confirmation dialog 63ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > keeps the shared bar below the top header with wrapping copy and a separate action group 21ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > gives every action a readable minimum hit size and prevents vertical word wrapping or flex crushing 9ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > keeps the forecast limitation readable in the existing auto-sized tactics column 6ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > projects both owned and temporary deck-bottom UIDs without changing cards or discovery state 55ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > shows pouch origin and immediate casting without calling it a temporary reward 38ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > keeps random free-cast discovery distinct from pouch origin: play 31ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > keeps random free-cast discovery distinct from pouch origin: potion 36ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > keeps the random-discovery temporary-card copy and supplied faces unchanged 51ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > falls back to the supplied face without inventing ownership for an unresolved source UID 30ms
+ ✓ tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > states the item and equipment exceptions on the ordinary-battle grave badge 8ms
+ ✓ tests/battle-infusion-action-layout.test.js > focused infusion workspace layout contract > keeps source and selected cards over the retained battlefield with a separate hand rail 7ms
+ ✓ tests/battle-infusion-action-layout.test.js > focused infusion workspace layout contract > gives selected cards a distinct outline and full-card withdrawal affordance 8ms
+ ✓ tests/battle-infusion-action-layout.test.js > focused infusion workspace layout contract > blurs only the selection background and suspends external foreground layers 7ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw 385ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one current set after repeated grave open/return and incremental patches 298ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one current set after repeated settings open/return and incremental patches 224ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > 普通战背包按钮与命令均被锁定，手牌和独立道具快捷栏不受影响 79ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from the real lamp enemy-target choice with one ready set through the next turn 251ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from real discovery with one current set and preserves subsequent updates 617ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one set when target or infusion is cancelled, and when the lethal warning returns 195ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > does not duplicate paging or gesture listeners across patches and full redraws 358ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > spends for the real skill once after repeated returns, retains used state, then resets next turn 271ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > removes and reintroduces paging through one shared set and starts the next battle cleanly 137ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > moves a retained pager out of the old player tools without duplicating it 77ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > pointerup收起只读说明，后续终止事件不触碰旧面板 194ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > pointercancel收起只读说明，后续终止事件不触碰旧面板 63ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > mouseleave收起只读说明，后续终止事件不触碰旧面板 59ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > replace在未松手时清理说明，旧节点不能提交或重新打开 65ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > mode在未松手时清理说明，旧节点不能提交或重新打开 39ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > close在未松手时清理说明，旧节点不能提交或重新打开 43ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > new-stage在未松手时清理说明，旧节点不能提交或重新打开 59ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 100次普通按下/松开及药水栏替换不保留旧cancel回调 885ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 离开后的旧药水节点不重新绑定document监听 25ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 同UID数量更新保留当前入口，旧确认失效，新说明使用当前数量且不消费 28ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 被替换UID的已打开确认与入口都失效，当前入口仍可读取 26ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 同一药水栏重复渲染保留节点，悬停/移开仍可使用 39ms
+ ✓ tests/potion-tip-lifecycle.test.js > 药水说明与确认生命周期 > 确认多敌道具后进入公共选靶，取消保持原UID和槽位 62ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 关键玩法数值保持冻结且与现行规则一致 3ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果文本按立即、回合开始、整场和被注能时分类 1ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 限定技能句独立成桶（装备打出只穿戴，技能由按钮发动） 0ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果执行器只通过端口修改战斗状态 4ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > GameStore 提供稳定的可读快照，且不暴露可变集合 2ms
+ ✓ tests/contracts.test.js > 旧对局存档迁移 > v1 迁入空的档位 1，并保留已有 v2 数据 1ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > src 模块不存在循环依赖 968ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > game.session 不反向导入页面功能模块 1ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > battle.core 不访问 DOM 或反向导入战斗视图 0ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > window.SDT 只允许在 sdt-facade.js 初始化 20ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 核心机制层不访问 DOM 1ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js） 0ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 实机卡库批次数据外置到 game/data/cards-sync.json（批次 6） 1ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 桌面开发态只加载 Vite 构建产物，不直接加载含裸模块导入的源码 1ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 首页监听在 DOMContentLoaded 的易失败初始化链之前绑定 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 双击启动器会先刷新构建产物，避免桌面端长期运行旧前端 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > HTML 只经 main.js 装配全部生产模块，不漏载或旁路新增模块入口 84ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > main.js 完整页面装配顺序与 boot-order.js 的 BOOT_ORDER 逐项一致 3ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新增战斗实例域不能捕获默认运行态、全局随机或浏览器，视图也不能直接调用 6ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 战斗实例允许纯状态工厂和同实例域依赖 3ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > run/future-commands.js 未登记也禁止页面与全局门面 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > hub/future.commands.js 未登记也禁止页面与全局门面 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 未登记的新纯执行计划禁止动态依赖运行态和捕获浏览器 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新命令禁止旁路依赖战斗全局运行内核 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.card-play 工厂禁止导入全局session状态 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.turn-continuation 工厂禁止导入全局session状态 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.turn-start 工厂禁止导入全局session状态 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.damage 工厂禁止导入全局session状态 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > game.run.events 工厂禁止导入状态门面或捕获DOM 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > game.run.resources 工厂禁止导入状态门面或捕获DOM 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 战斗引擎工厂不能重新捕获浏览器门面，视图也不能旁路调用它 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新命令和工厂允许显式端口以及纯规则依赖 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 旧命令的特定浏览器债务不会放行新增DOM依赖 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不得恢复门面属性捕获：import SDT from '../core/sdt-facade.js'; const MAP = SDT.MAP; 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不得恢复门面属性捕获：import facade from '../core/sdt-facade.js'; const MAP = facade.MAP; 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不得恢复门面属性捕获：import { default as facade } from '../core/sdt-facade.js'; const FX = facade.FX; 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不得恢复门面属性捕获：import * as facade from '../core/sdt-facade.js'; const FX = facade.default.FX; 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核允许显式业务依赖与兼容发布，基础依赖禁止浏览器捕获 2ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不能重新接入 DOM 或浏览器适配器 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地模型与规则配置不得反向读取存储、门面或全局浏览器 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 识别静态导入、重导出、动态字面量与嵌套目录，不误判注释 3ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 能定位经动态导入与重导出形成的环 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 无法分析的动态路径与缺失源码不能悄悄略过 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 数据和 npm 导入不伪装成项目 JS 模块 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 允许既有状态装配模块读取 runtime，禁止视图旁路 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能借全局门面或反向 import 访问运行时，说明文字不误报 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域必须通过装配端口访问服务，不能重新读取浏览器门面 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域不能重新静态导入带 UI 等待的整段播放模块 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能反向依赖流程域目录（hub/run） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > M 批命令适配器仅供 resolver 装配，视图和快照仍不可调用 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 独立领域模块不能通过视图切片接入界面 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, import './game.cardslib.page.js';） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, export { open } from './game.cardslib.page.js';） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.hub.js, import('./game.cardslib.page.js');） 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（game.boot.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地轻门面的动态入口合法 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆轻门面的动态入口合法 0ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向 1055ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 守卫判据键自检：每个键必须命中真实文件，杜绝规则死、测试绿 2ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 自检本身能红：文件改名（或删除）会让对应判据键被判死 1ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > does not call timing APIs without a captured diagnostic context 129ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > keeps the exact readiness promise while closing all phases before returning 100ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > includes snapshot acquisition and closes the total on its original exception 47ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > closes an early departed-snapshot invocation without fabricating subphases 45ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > closes measured intervals when restore throws 44ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > closes measured intervals when shell throws 39ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > closes measured intervals when hand throws 35ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > shares context with recursive background refresh and emits only one outer total 57ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > measures a successful secondary restoration and preserves the original scene 43ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > closes restoration before a synchronous ownership change returns early 29ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > keeps independent totals when restoring a modal reenters rendering 26ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > retains renderer context when a show hook changes the latest diagnostic input 49ms
+ ✓ tests/battle-render-runtime-trace.test.js > opt-in synchronous battle render phases > retains independent overlapping totals for genuinely reentrant renders 34ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > 按下/轻点/双击图标只读说明，使用按钮仅在click提交一次 84ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > button取消保持道具原槽、能量及手牌 15ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > escape取消保持道具原槽、能量及手牌 14ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > outside取消保持道具原槽、能量及手牌 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > right-click取消保持道具原槽、能量及手牌 12ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > Enter键只打开确认框，长按不会连用 14ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 >  键只打开确认框，长按不会连用 8ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > 不可用道具可看说明和原因，无法触发使用 11ms
+ ✓ tests/sts2-potion-use-1021.test.js > 道具先检查再确认 > 展示使用当前渲染描述，确认仍按当前UID重新验证，文字不作为HTML执行 17ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > busy期间拒绝新开框与旧确认按钮 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > queue期间拒绝新开框与旧确认按钮 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > enemy期间拒绝新开框与旧确认按钮 12ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > start期间拒绝新开框与旧确认按钮 10ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > finished期间拒绝新开框与旧确认按钮 26ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > targeting期间拒绝新开框与旧确认按钮 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > infusion期间拒绝新开框与旧确认按钮 8ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > discover期间拒绝新开框与旧确认按钮 6ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > choice期间拒绝新开框与旧确认按钮 6ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > hand-select期间拒绝新开框与旧确认按钮 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > deck-select期间拒绝新开框与旧确认按钮 5ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > deck期间拒绝新开框与旧确认按钮 4ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > grave期间拒绝新开框与旧确认按钮 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > bag期间拒绝新开框与旧确认按钮 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > card-target期间拒绝新开框与旧确认按钮 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > item-target期间拒绝新开框与旧确认按钮 8ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > slam期间拒绝新开框与旧确认按钮 10ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > dart期间拒绝新开框与旧确认按钮 14ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > battle-token使旧确认按钮失效 5ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > stage-token使旧确认按钮失效 4ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > stage-replaced使旧确认按钮失效 11ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > bar-replaced使旧确认按钮失效 15ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > hidden使旧确认按钮失效 11ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > inert使旧确认按钮失效 5ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > css-hidden使旧确认按钮失效 8ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > ancestor-css-hidden使旧确认按钮失效 5ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > source-hidden使旧确认按钮失效 8ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > source-css-hidden使旧确认按钮失效 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > closing使旧确认按钮失效 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > mode使旧确认按钮失效 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > missing-uid使旧确认按钮失效 5ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > unusable使旧确认按钮失效 7ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > 旧战斗与旧弹层同名UID的延迟事件不能提交新战道具 13ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > 100次同舞台sync不累积监听，节点复用后仍只响应当前数据 17ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > 换页卸载清理确认、监听和旧节点，返回后可重新绑定 9ms
+ ✓ tests/sts2-potion-use-1021.test.js > 仅当前战场当前道具可提交 > 窗口失焦收起详情，回到当前舞台后仍可查看 5ms
+ ✓ tests/battle-effect-feedback.test.js > aggregates every new UID into an existing same-name stack without adding a flight 34ms
+ ✓ tests/battle-effect-feedback.test.js > delegates acquired new slots to nonblocking card feedback and avoids a second label 7ms
+ ✓ tests/battle-effect-feedback.test.js > preserves the ordinary deck-draw flight 6ms
+ ✓ tests/battle-effect-feedback.test.js > does not label a play-and-return UID as a new copy of its old stack 4ms
+ ✓ tests/battle-effect-feedback.test.js > keeps unseen UID counts on the page button through renders without switching pages 11ms
+ ✓ tests/battle-effect-feedback.test.js > removes off-page counts when those cards leave hand and survives page-button replacement 8ms
+ ✓ tests/battle-effect-feedback.test.js > does not mislabel pouch cards as retained acquisitions even before they leave hand 5ms
+ ✓ tests/battle-effect-feedback.test.js > does not mislabel discover-cast cards as retained acquisitions even before they leave hand 5ms
+ ✓ tests/battle-effect-feedback.test.js > does not mislabel effect-cast cards as retained acquisitions even before they leave hand 6ms
+ ✓ tests/battle-effect-feedback.test.js > ignores draw UIDs absent from hand and stale token events 5ms
+ ✓ tests/battle-effect-feedback.test.js > shows only the real extra-turn event through the existing short banner without sound or waits 6ms
+ ✓ tests/battle-effect-feedback.test.js > labels additional card executions and scopes damage-only repeats precisely 17ms
+ ✓ tests/battle-effect-feedback.test.js > deduplicates event IDs and keeps same-batch repeats to one latest local notice 8ms
+ ✓ tests/battle-effect-feedback.test.js > rejects old monotonic event IDs even after more than 128 later events 174ms
+ ✓ tests/battle-effect-feedback.test.js > uses static short notices when the app requests reduced motion 9ms
+ ✓ tests/battle-effect-feedback.test.js > replaces reduced-motion new-slot flights with static acquisition labels without adding a battle wait 6ms
+ ✓ tests/battle-effect-feedback.test.js > preserves distinct recast sources in three bounded, separated slots above the hand 8ms
+ ✓ tests/battle-effect-feedback.test.js > cleans up old notices and page counts on a battle-token change 9ms
+ ✓ tests/battle-effect-feedback.test.js > cleans up presentations when the overlay becomes inactive via close 6ms
+ ✓ tests/battle-effect-feedback.test.js > cleans up presentations when the overlay becomes inactive via mode 5ms
+ ✓ tests/battle-effect-feedback.test.js > cleans up presentations when the overlay becomes inactive via hidden 4ms
+ ✓ tests/battle-effect-feedback.test.js > cleans up presentations when the overlay becomes inactive via detach 4ms
+ ✓ tests/battle-effect-feedback.test.js > bounds retained transient nodes and renders supplied card names as text 5ms
+ ✓ tests/battle-effect-feedback.test.js > keeps a simultaneous original play and recast to one legacy flight and one local notice 8ms
+ ✓ tests/battle-effect-feedback.test.js > keeps all new visual layers non-interactive and provides CSS reduced-motion fallbacks 2ms
+ ✓ tests/battle-effect-feedback.test.js > keeps decorative Lucide icons when acquisition counts change, reduced=false 14ms
+ ✓ tests/battle-effect-feedback.test.js > keeps decorative Lucide icons when acquisition counts change, reduced=true 8ms
+ ✓ tests/battle-effect-feedback.test.js > vendors exactly one reviewed SVG and the complete upstream license 13ms
+ ✓ tests/battle-effect-feedback.test.js > lays out three distinct recasts with one hand scan and seven rect reads 8ms
+ ✓ tests/battle-effect-feedback.test.js > does not fly a queued pouch card into a new hand slot 7ms
+ ✓ tests/battle-effect-feedback.test.js > does not fly a queued discover-cast card into a new hand slot 10ms
+ ✓ tests/battle-effect-feedback.test.js > does not fly a queued effect-cast card into a new hand slot 4ms
+ ✓ tests/battle-effect-feedback.test.js > does not copy stack or held UIDs or filter stacks during eventless acquisition-idle renders 40ms
+ ✓ tests/battle-effect-feedback.test.js > skips old-UID snapshots for queued casts and unrelated events but keeps original submission poses 6ms
+ ✓ tests/battle-effect-feedback.test.js > reconciles pending pages with no previous-UID snapshot and clears them before returning idle 5ms
+ ✓ tests/battle-effect-feedback.test.js > runs feedback token cleanup on an eventless render before considering idle acquisition work 8ms
+ ✓ tests/battle-effect-feedback.test.js > removes expired disconnected notices on an eventless render without clearing live notices early 8ms
+ ✓ tests/battle-effect-feedback.test.js > resumes arrivals after idle renders and snapshots old memberships before group replacement 9ms
+ ✓ tests/battle-scenery-secondary-ready.test.js > handles delayed scenery under a restarted infusion panel (decode failure: false) 241ms
+ ✓ tests/battle-scenery-secondary-ready.test.js > handles delayed scenery under a restarted infusion panel (decode failure: true) 131ms
+ ✓ tests/battle-scenery-secondary-ready.test.js > does not revive departed scenery when its decode finishes under a newer panel 61ms
+ ✓ tests/battle-stage-validator.test.js > allocation-light stage validation > uses previous desired class ownership after a whole component is externally cloned 57ms
+ ✓ tests/battle-stage-validator.test.js > allocation-light stage validation > carries cold class ownership down sibling traversal after a descendant clone 18ms
+ ✓ tests/battle-stage-validator.test.js > allocation-light stage validation > validates attributes and all siblings synchronously after external edits 24ms
+ ✓ tests/battle-stage-validator.test.js > allocation-light stage validation > repairs injected controlled states without erasing runtime effects or confirmation ownership 29ms
+ ✓ tests/battle-stage-validator.test.js > allocation-light stage validation > retains only the real feedback-owned badge through warm updates, new arrivals and paging 32ms
+ ✓ tests/battle-stage-mounts.test.js > validates cached mounts without any body-wide mount queries on warm updates 18ms
+ ✓ tests/battle-stage-mounts.test.js > keeps focus, temporary classes and independent mount calls on the same stage 8ms
+ ✓ tests/battle-stage-mounts.test.js > preserves and repairs hand group semantics without unchanged attribute writes 8ms
+ ✓ tests/battle-stage-mounts.test.js > repairs removed and replaced mounts instead of freezing cached layers 7ms
+ ✓ tests/battle-stage-mounts.test.js > recovers arena and HUD identity after external subtree replacement 5ms
+ ✓ tests/battle-stage-mounts.test.js > repairs controlled mount classes and identities in place without duplicate subtrees 9ms
+ ✓ tests/battle-stage-mounts.test.js > rejects stale stage, token and body owners without moving retained nodes 8ms
+ ✓ tests/battle-stage-mounts.test.js > uses explicit live interaction state rather than masked presentation and keeps fallback fresh 7ms
+ ✓ tests/battle-stage-mounts.test.js > reuses only the selection sync input while later cancellation reads current state 4ms
+ ✓ tests/battle-pile-timers.test.js > cancels the earlier draw cleanup and keeps the full 1600ms replay 18ms
+ ✓ tests/battle-pile-timers.test.js > keeps draw and shuffle lifecycles independent without the old blocking shuffle flight 5ms
+ ✓ tests/battle-pile-timers.test.js > cancels pending cleanup on close 3ms
+ ✓ tests/battle-pile-timers.test.js > cancels pending cleanup on mode 4ms
+ ✓ tests/battle-pile-timers.test.js > cancels pending cleanup on hidden 3ms
+ ✓ tests/battle-pile-timers.test.js > cancels pending cleanup on detach 2ms
+ ✓ tests/battle-pile-timers.test.js > cancels pending cleanup on replace 3ms
+ ✓ tests/battle-pile-timers.test.js > keeps active effects when staying in battle and allows a fresh cycle after expiry 2ms
+ ✓ tests/battle-pile-timers.test.js > releases its observer after expiry and does not affect a replacement pile 3ms
+ ✓ tests/wf-feedback1021-b-hand-phase.test.js > 敌→玩家且本渲染无出牌事件时，仍收回沉底动画并升起手牌 17ms
+ ✓ tests/wf-feedback1021-b-hand-phase.test.js > 敌方相位内的无事件渲染不打断沉底终态 4ms
+ ✓ tests/wf-feedback1021-b-hand-phase.test.js > 敌→目标态同样升回；已在基位的相位切换不建多余动画 6ms
+ ✓ tests/wf-feedback1021-b-hand-phase.test.js > 带采样的正常敌→玩家仍走同一条升回路径 3ms
+ ✓ tests/wf-feedback1021-b-hand-phase.test.js > 减少动态偏好下全部动画被丢弃，不留下任何终态持有 3ms
+ ✓ tests/battle-presentation.test.js > battle presentation queue > plays hit feedback in enqueue order and resolves only after the queue drains 2ms
+ ✓ tests/battle-presentation.test.js > battle presentation queue > drops stale feedback after the battle queue is cleared 0ms
+ ✓ tests/battle-presentation.test.js > battle presentation queue > keeps each multi-hit shake inside its scaled beat interval 1ms
+ ✓ tests/battle-scenery.test.js > selects layer index 0 as winter-platform-minimal 1ms
+ ✓ tests/battle-scenery.test.js > selects layer index 1 as winter-platform-minimal 0ms
+ ✓ tests/battle-scenery.test.js > selects layer index 2 as winter-platform-minimal 0ms
+ ✓ tests/battle-scenery.test.js > selects layer index 3 as winter-platform-minimal 0ms
+ ✓ tests/battle-scenery.test.js > uses the approved three-layer platform for bosses and every expedition layer 1ms
+ ✓ tests/battle-scenery.test.js > captures the layer and boss identity once per battle token, with explicit opts taking priority 1ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps straight shared-card hosts and distinct resting and reading states 68ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps the stable bottom bridge behind the card and disables it during dragging 34ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > retires the winter hover conflict and leaves inline drag transforms alone 86ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps the battlefield free of the retired secondary selection caption 14ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps card copy sizing out of the hand skin while detail reading keeps the shared tokens 12ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps object labels on a local dark reading surface and career controls at the player feet 50ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > reads the printed card directly without an overlapping folded-name label 9ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps compact enemy HUDs, wrapping compound intentions and local details outside layout flow 25ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps piles and tactics in distinct auto-sized rows when the lethal forecast grows 6ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps the skill icon, fee and disabled state legible with the explanation supplied by hover/focus 13ms
+ ✓ tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps full long rules scrollable and uses the same copy tokens with fixed footer controls 3ms
+
+ Test Files  18 passed (18)
+      Tests  416 passed (416)
+   Start at  06:13:04
+   Duration  42.70s (transform 1.43s, setup 0ms, collect 7.37s, tests 24.71s, environment 6.52s, prepare 1.08s)
+

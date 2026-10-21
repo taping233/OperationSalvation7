@@ -1,0 +1,19 @@
+{
+  "card": {
+    "baseline-r2-failing.log": "baseline-r2-failing.log.txt",
+    "eslint-r2.log": "eslint-r2.log.txt",
+    "focused-r2.log": "focused-r2.log.txt",
+    "runtime-checkjs-r2.log": "runtime-checkjs-r2.log.txt",
+    "syntax-source-r2.log": "syntax-source-r2.log.txt",
+    "syntax-test-r2.log": "syntax-test-r2.log.txt"
+  },
+  "guard": {
+    "focused.log": "guard-focused.log.txt",
+    "baseline-fails.log": "guard-baseline-fails.log.txt",
+    "runtime-checkjs.log": "guard-runtime-checkjs.log.txt",
+    "targeted-eslint.log": "guard-targeted-eslint.log.txt",
+    "syntax-view.log": "guard-syntax-view.log.txt",
+    "syntax-test.log": "guard-syntax-test.log.txt"
+  },
+  "note": "Raw bytes unchanged; .txt suffix permits normal Git staging under existing ignore rules. Command receipts keep original producer-local log names."
+}

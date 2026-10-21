@@ -1,0 +1,81 @@
+
+ RUN  v3.2.7 /tmp/card-description-zoom-v1/baseline
+
+stdout | tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes
+linked-zoom-operation-counts [{"label":"cold","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3},{"label":"reopen","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3},{"label":"bonus-change","description":"造成 10 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3},{"label":"bonus-return","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3},{"label":"inactive","description":"造成 2 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3},{"label":"reactivated","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":3,"normalization":3}]
+
+ × tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes 98ms
+   → expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(5) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(5) ]
+stdout | tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping
+linked-fragment-operation-counts {"provider":4,"normalization":4}
+
+ × tests/card-description-linked-zoom.test.js > real reference navigation and back preserve links and refresh live values with the same renderer 19ms
+   → expected '造成 8 点法术伤害；将 2 张「火球」置入你的手牌。' to be '造成 6 点法术伤害；将 2 张「火球」置入你的手牌。' // Object.is equality
+ × tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping 10ms
+   → expected "spy" to be called 1 times, but got 4 times
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes
+AssertionError: expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(5) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(5) ]
+
+- Expected
++ Received
+
+  [
+-   "造成 4 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+    "造成 6 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 10 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+    "造成 2 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+  ]
+
+ ❯ tests/card-description-linked-zoom.test.js:50:46
+     48|     values = { ...values, active: true }; open('reactivated');
+     49|     console.log('linked-zoom-operation-counts', JSON.stringify(rows));
+     50|     expect(rows.map(row => row.description)).toEqual([
+       |                                              ^
+     51|       '造成 4 点法术伤害；对目标附加冰冻。', '造成 4 点法术伤害；对目标附加冰冻。',
+     52|       '造成 6 点法术伤害；对目标附加冰冻。', '造成 4 点法术伤害；对目标附加冰冻。',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/card-description-linked-zoom.test.js > real reference navigation and back preserve links and refresh live values with the same renderer
+AssertionError: expected '造成 8 点法术伤害；将 2 张「火球」置入你的手牌。' to be '造成 6 点法术伤害；将 2 张「火球」置入你的手牌。' // Object.is equality
+
+Expected: "造成 6 点法术伤害；将 2 张「火球」置入你的手牌。"
+Received: "造成 8 点法术伤害；将 2 张「火球」置入你的手牌。"
+
+ ❯ tests/card-description-linked-zoom.test.js:69:20
+     67|   try {
+     68|     UI.showCardZoom(card, options);
+     69|     expect(copy()).toBe('造成 6 点法术伤害；将 2 张「火球」置入你的手牌。');
+       |                    ^
+     70|     const link = zoom().querySelector('[data-card-reference="tt3-fireb…
+     71|     expect(link.textContent).toBe('火球'); expect(link.querySelector('ma…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping
+AssertionError: expected "spy" to be called 1 times, but got 4 times
+ ❯ tests/card-description-linked-zoom.test.js:106:22
+    104|     const node = plain(renderer.render(raw, 'custom-card', '护甲2'));
+    105|     console.log('linked-fragment-operation-counts', JSON.stringify({ p…
+    106|     expect(provider).toHaveBeenCalledTimes(1);
+       |                      ^
+    107|     expect(descriptionModule.displayCardDescription).toHaveBeenCalledT…
+    108|     expect(node.textContent).toBe('造成 4 点法术伤害；获得「护甲2」。<img src=x onerr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  06:49:37
+   Duration  1.72s (transform 448ms, setup 0ms, collect 200ms, tests 851ms, environment 425ms, prepare 81ms)
+

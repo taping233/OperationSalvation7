@@ -1,0 +1,24 @@
+{
+  "outcome": "failed",
+  "reportPath": "/tmp/next-verified-main-batch-20261021/source/搜打撤/docs/evidence/2026-10-21-WF-next-verified-main-1021/2026-10-21T22-01-32.254Z-53e0ea3a-staged.json",
+  "reportSha256": "5fcda139fa61aebd344a46d67f8a09200c0d902e1fd9e6e3a14e6af15efa2f1d",
+  "snapshotDirectory": "/tmp/sdt-staged-nFdZV2",
+  "indexLogicalAfter": "1ac6b666dd29ba409886978c0376fd133748f1da66b5e2771887d0c01de59de6",
+  "sourceTreeAfter": "01cd4afbde876750182650151130b4acdb17d5cb",
+  "fullRan": false,
+  "buildRan": false,
+  "receiptReusable": false,
+  "failure": "runtime-hotpaths compileDescription VM fixture retains new named helper export",
+  "originalLogSha256": "3829f548122fc2d3f405f12795104cad4adba4c2964889fc391d142b10264e4c",
+  "snapshotTrackedMutations": [],
+  "snapshotIndexContentSha256": "72801ffb31bfa0c1b74ddd36749e37e219418a1c6ed0939e9538ca79ac01bf72",
+  "snapshotIndexExpectedSha256": "72801ffb31bfa0c1b74ddd36749e37e219418a1c6ed0939e9538ca79ac01bf72",
+  "originalValidation": {
+    "executed": true,
+    "passed": false,
+    "reusableReceipt": false,
+    "reason": "STAGED_FAILED"
+  },
+  "commandExitCode": 1,
+  "signal": null
+}

@@ -1,0 +1,37 @@
+
+ RUN  v3.2.7 /tmp/card-description-vm-fixture-v1/negative-memo-disabled
+
+ ↓ tests/runtime-hotpaths.test.js > bounded rich description reuse > is byte-identical for revised, escaped, numeric and custom input
+ ↓ tests/runtime-hotpaths.test.js > bounded rich description reuse > reuses text across card ids, evicts oldest after 256 entries, and bypasses long text
+ × tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing 138ms
+   → expected 2560000 to be 25600 // Object.is equality
+ ↓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs
+ ↓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > does no reads or writes after detach
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+AssertionError: expected 2560000 to be 25600 // Object.is equality
+
+- Expected
++ Received
+
+- 25600
++ 2560000
+
+ ❯ tests/runtime-hotpaths.test.js:60:37
+     58|     const afterRender = compileDescription(readFileSync('game/src/card…
+     59|     const before = { ...measure(beforeRender), ...beforeStats }, after…
+     60|     expect(after.termLookups * 100).toBe(before.termLookups);
+       |                                     ^
+     61|     expect(after.bytes).toBe(before.bytes);
+     62|     console.log('HOTPATH description 6400 calls / 64 texts', JSON.stri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 skipped (5)
+   Start at  07:06:47
+   Duration  879ms (transform 115ms, setup 0ms, collect 145ms, tests 139ms, environment 336ms, prepare 82ms)
+

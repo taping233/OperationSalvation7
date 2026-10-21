@@ -1,0 +1,74 @@
+
+ RUN  v3.2.7 /tmp/card-description-zoom-v1/candidate
+
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 所有旧牌堆名称统一展示为消耗牌堆，保留旧结算原文 10ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 明确护甲损失、费用归属、受伤判断和受益人 1ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 吸血展示明确结算后伤害含过量且不改结算原文：tt2-bloodblade 4ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 吸血展示明确结算后伤害含过量且不改结算原文：tt3sp-bloodstorm 4ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 吸血展示明确结算后伤害含过量且不改结算原文：tt7-bloodpotion 2ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 同一原文在不同 ID 下只更新已审阅的卡，玩家改文案时原样返回 0ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 共同入口使用同一文案，源卡、费用、规则与卡库存储保持原字节 824ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 战斗费用与伤害角标覆盖不改写展示原文或卡牌 4ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 按新的显示文字计算长文案密度 2ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：选择 '火球' 并抽 1 张牌。 1ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：<img src="x" data-x='2'> & 抽 1 张牌。 2ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：字面 &#39; 与 ' 不得混淆；造成 4-6 点法术伤害。 1ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：注能（2）：获得 '火球'。 0ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：造成 -1、+2、⁺3、⁻4、2.5、4-6 点伤害。 2ms
+ ✓ tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 自定义规则富文本逐字保留转义文本：<b>甲 +9</b>，造成 4 点法术伤害。 3ms
+ ✓ tests/card-description-text.test.js > 照相馆引用与搜索文案 > 先统一文案，再保护卡名链接和数字高亮；详情与大图共用结果 5ms
+ ✓ tests/card-description-text.test.js > 照相馆引用与搜索文案 > 已统一的分句再次渲染不丢失目标与新增主语 1ms
+ ✓ tests/card-description-text.test.js > 照相馆引用与搜索文案 > 改写卡牌和自定义 HTML 仍保持转义，引用保护不被统一模块改写 1ms
+ ✓ tests/card-description-text.test.js > 照相馆引用与搜索文案 > 引用链接与搜索强调不改变单引号或产生实体伪数值 1ms
+stdout | tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes
+linked-zoom-operation-counts [{"label":"cold","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"reopen","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"bonus-change","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"bonus-return","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"inactive","description":"造成 2 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"reactivated","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2}]
+
+ ✓ tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes 86ms
+stdout | tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping
+linked-fragment-operation-counts {"provider":1,"normalization":1}
+
+ ✓ tests/card-description-linked-zoom.test.js > real reference navigation and back preserve links and refresh live values with the same renderer 52ms
+ ✓ tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping 17ms
+stdout | tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive
+description-operation-counts [{"label":"cold","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"warm","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"bonus-change","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。","badge":"6'"},{"label":"inactive","provider":1,"normalization":1,"description":"造成 2 点法术伤害；对目标附加冰冻。","badge":"2'"}]
+
+stdout | tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation
+description-same-options-counts [{"label":"same-opts-cold","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-change","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-return","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-inactive","provider":1,"normalization":1,"description":"造成 2 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-reactivated","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"}]
+
+ ✓ tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive 44ms
+ ✓ tests/card-description-single-resolution.test.js > public descRich still resolves raw/id/card input once and preserves structured fields 3ms
+ ✓ tests/card-description-single-resolution.test.js > cardHTML retains escaping and numeric/term highlighting when rendering resolved text 5ms
+ ✓ tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation 32ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 当前卡库和已审阅样本逐字保留，读取不修改卡牌 12ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 规则字段变化同步进入卡面、富文本和照相馆搜索：tt3-bandage 31ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 规则字段变化同步进入卡面、富文本和照相馆搜索：tt3-hold-fast 7ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 同一卡对象的规则数值变化不会被卡面或照相馆文案缓存遮住 8ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 字面量操作使用执行声明的数值，不接受与现有字段冲突的声明 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 无规则 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 未知规则版本 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 不完整字段 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 无效数值 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 不支持的小数数值 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 空声明 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 缺失操作 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 未覆盖操作 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 重复操作 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 其他时点 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 触发重放 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 护甲衰减 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 注能 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 额外伤害字段 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 额外战斗规则 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 敌方目标 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 未知操作参数 整段保留已有文案 0ms
+ ✓ tests/sts2-structured-description.test.js > 简单结构化规则与现行描述同源 > 自定义文本、错配ID和复杂完整句都不被简单模板覆盖 0ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 未注册提供器时，伤害数字逐字静态（地图/图鉴/文档生成口径） 2ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 提供器存在但战斗未激活时仍走静态 0ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 攻击句/法术句按 atk 与法伤重算；无法伤时与基础值一致 1ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 真实战斗：手牌/悬停长描述随攻击强化祝福变化，战斗结束后回落静态 106ms
+
+ Test Files  5 passed (5)
+      Tests  53 passed (53)
+   Start at  06:49:39
+   Duration  7.39s (transform 905ms, setup 0ms, collect 1.18s, tests 2.97s, environment 1.96s, prepare 317ms)
+

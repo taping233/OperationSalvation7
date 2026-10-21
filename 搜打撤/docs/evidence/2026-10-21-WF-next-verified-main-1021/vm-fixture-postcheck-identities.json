@@ -1,0 +1,161 @@
+{
+  "checked": [
+    {
+      "path": "/tmp/sdt-staged-nFdZV2/snapshot/\u641c\u6253\u64a4/tests/runtime-hotpaths.test.js",
+      "expected": {
+        "bytes": 6281,
+        "sha256": "159efe05760ac993e9d29fdbcd3fb6c766b2bd78d11f2db9cc359a50c9819787",
+        "git_blob": "a929deef135da21b43964f946cda9afa90c5b79c"
+      },
+      "actual": {
+        "bytes": 6281,
+        "sha256": "159efe05760ac993e9d29fdbcd3fb6c766b2bd78d11f2db9cc359a50c9819787",
+        "git_blob": "a929deef135da21b43964f946cda9afa90c5b79c"
+      },
+      "matches": true
+    },
+    {
+      "path": "/tmp/sdt-staged-nFdZV2/snapshot/\u641c\u6253\u64a4/game/src/cards/cards.view.js",
+      "expected": {
+        "bytes": 13141,
+        "sha256": "bfd7ee7d647b0332cde2b571f5bb031188375a761272082d2aadff15111afa8f",
+        "git_blob": "42d6d07fb48b67deac39828d85c05dd8abafcb7b"
+      },
+      "actual": {
+        "bytes": 13141,
+        "sha256": "bfd7ee7d647b0332cde2b571f5bb031188375a761272082d2aadff15111afa8f",
+        "git_blob": "42d6d07fb48b67deac39828d85c05dd8abafcb7b"
+      },
+      "matches": true
+    },
+    {
+      "path": "/tmp/sdt-staged-nFdZV2/snapshot/\u641c\u6253\u64a4/game/src/cards/card-description-links.js",
+      "expected": {
+        "bytes": 4593,
+        "sha256": "ba4a5e14494d5a482ba57b970626032f8320ce5c23ab21d3d38d7590695afce1",
+        "git_blob": "6e4ae1e2199caca448fdc9af558017e4af2fdc38"
+      },
+      "actual": {
+        "bytes": 4593,
+        "sha256": "ba4a5e14494d5a482ba57b970626032f8320ce5c23ab21d3d38d7590695afce1",
+        "git_blob": "6e4ae1e2199caca448fdc9af558017e4af2fdc38"
+      },
+      "matches": true
+    },
+    {
+      "path": "/tmp/sdt-staged-nFdZV2/snapshot/\u641c\u6253\u64a4/docs/evidence/2026-10-17-runtime-hotpaths/cards.view.before.txt",
+      "expected": {
+        "bytes": 12077,
+        "sha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074",
+        "git_blob": "1d8a46a1d88386f81aa416b0649f85e8fec2ae91"
+      },
+      "actual": {
+        "bytes": 12077,
+        "sha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074",
+        "git_blob": "1d8a46a1d88386f81aa416b0649f85e8fec2ae91"
+      },
+      "matches": true
+    },
+    {
+      "path": "/tmp/sdt-staged-nFdZV2/snapshot/\u641c\u6253\u64a4/docs/evidence/2026-10-17-runtime-hotpaths/card-browser.before.txt",
+      "expected": {
+        "bytes": 4026,
+        "sha256": "c3ef040f3dc04a056f4f1c64463e6f658eb70201a23cad9a4062a00b4342d9c2",
+        "git_blob": "1dda3516b1ee8a852f93db5f0e28c689b37d8edf"
+      },
+      "actual": {
+        "bytes": 4026,
+        "sha256": "c3ef040f3dc04a056f4f1c64463e6f658eb70201a23cad9a4062a00b4342d9c2",
+        "git_blob": "1dda3516b1ee8a852f93db5f0e28c689b37d8edf"
+      },
+      "matches": true
+    },
+    {
+      "path": "/workspace/shared/card-description-vm-fixture-20261021/candidate/tests/runtime-hotpaths.test.js",
+      "expected": {
+        "bytes": 6368,
+        "sha256": "71a6b7ba088eebad9c2c8eca2163f348fd711c81b797ac02110fae878c171abd",
+        "git_blob": "b47924b73c190834c554c7df49a4f7700cf5cf2e"
+      },
+      "actual": {
+        "bytes": 6368,
+        "sha256": "71a6b7ba088eebad9c2c8eca2163f348fd711c81b797ac02110fae878c171abd",
+        "git_blob": "b47924b73c190834c554c7df49a4f7700cf5cf2e"
+      },
+      "matches": true
+    },
+    {
+      "path": "/workspace/shared/card-description-vm-fixture-20261021/runtime-hotpaths-named-export-fixture.patch",
+      "expected": {
+        "bytes": 1131,
+        "sha256": "fa282d9efe1287aa9061864a241c8635c0389fe6620b045f6231af8df7c755ef",
+        "git_blob": "e0a4707e0f7fb7db42dbb8090979a646a69d0989"
+      },
+      "actual": {
+        "bytes": 1131,
+        "sha256": "fa282d9efe1287aa9061864a241c8635c0389fe6620b045f6231af8df7c755ef",
+        "git_blob": "e0a4707e0f7fb7db42dbb8090979a646a69d0989"
+      },
+      "matches": true
+    }
+  ],
+  "production_mutation": false,
+  "all_assertions_unchanged": true,
+  "only_change": ".replace('export function richResolvedDescription', 'function richResolvedDescription')",
+  "existing_frozen_artifact_identities": [
+    {
+      "path": "/workspace/shared/card-description-singlepass-20261021/frozen-manifest.json",
+      "bytes": 1091,
+      "sha256": "32241df91126ac13aa46ce3543085a23b4c0a1019da1c0bad8b12ea4d504655d",
+      "git_blob": "4087b078ee62ab300475968e429827b4afeffb6b"
+    },
+    {
+      "path": "/workspace/shared/card-description-singlepass-20261021/card-description-single-resolution.patch",
+      "bytes": 8817,
+      "sha256": "47a20beb557397428b1f60e5871e46a87d34de70479cd05c66377ee3096cbef3",
+      "git_blob": "5e153c704695e4b82a5cb255129afb544669da22"
+    },
+    {
+      "path": "/workspace/shared/card-description-singlepass-20261021/candidate/game/src/cards/cards.view.js",
+      "bytes": 13116,
+      "sha256": "80e829a4bcc553b54e3bfe1daf21d63223649b37a50dfc6959bfeeda7ee4767c",
+      "git_blob": "0aa03e734a2b057dfd78926b4903dab1baf28dff"
+    },
+    {
+      "path": "/workspace/shared/card-description-singlepass-20261021/tests/card-description-single-resolution.test.js",
+      "bytes": 6708,
+      "sha256": "78ac14a5bfbd40c750d9d6a4655b3cf013da96bc71d6a15dd0c52f5537070e06",
+      "git_blob": "28c47fae769992648c020d36189f93d2368eb139"
+    },
+    {
+      "path": "/workspace/shared/card-description-linked-zoom-20261021/frozen-manifest.json",
+      "bytes": 1604,
+      "sha256": "242deb79bbb2f0e32392f72dc4fe4be43b6e4d552ad70ff8ae4c05d2ae45b994",
+      "git_blob": "a63a54af19cb0be95884794a9eaa44d1ee854d42"
+    },
+    {
+      "path": "/workspace/shared/card-description-linked-zoom-20261021/linked-zoom-follow-on.patch",
+      "bytes": 9005,
+      "sha256": "4d4368b59b75c7ad4be02979e0abfdbb44d10dfa2c7d34e73e4eadac92612eb5",
+      "git_blob": "30f7b5beecddac33d4505873c10ab1a8a7ce4514"
+    },
+    {
+      "path": "/workspace/shared/card-description-linked-zoom-20261021/candidate/game/src/cards/card-description-links.js",
+      "bytes": 4593,
+      "sha256": "ba4a5e14494d5a482ba57b970626032f8320ce5c23ab21d3d38d7590695afce1",
+      "git_blob": "6e4ae1e2199caca448fdc9af558017e4af2fdc38"
+    },
+    {
+      "path": "/workspace/shared/card-description-linked-zoom-20261021/candidate/game/src/cards/cards.view.js",
+      "bytes": 13141,
+      "sha256": "bfd7ee7d647b0332cde2b571f5bb031188375a761272082d2aadff15111afa8f",
+      "git_blob": "42d6d07fb48b67deac39828d85c05dd8abafcb7b"
+    },
+    {
+      "path": "/workspace/shared/card-description-linked-zoom-20261021/tests/card-description-linked-zoom.test.js",
+      "bytes": 7457,
+      "sha256": "e1e49a3a5881c4233adcdef8ca5cb9d0d11bf113f94cb7aa20c3f235926f50d3",
+      "git_blob": "55e0da5f9b68432946783126d09674d9e2c7b1e4"
+    }
+  ]
+}

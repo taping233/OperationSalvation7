@@ -1,0 +1,93 @@
+[
+  {
+    "name": "baseline-failing",
+    "cwd": "/tmp/card-description-vm-fixture-v1/baseline",
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/runtime-hotpaths.test.js",
+      "--reporter=verbose"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 1.852,
+    "log": "/workspace/shared/card-description-vm-fixture-20261021/verification/baseline-failing.log"
+  },
+  {
+    "name": "candidate-focused",
+    "cwd": "/tmp/card-description-vm-fixture-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/runtime-hotpaths.test.js",
+      "tests/card-description-single-resolution.test.js",
+      "tests/card-description-linked-zoom.test.js",
+      "--reporter=verbose"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 4.228,
+    "log": "/workspace/shared/card-description-vm-fixture-20261021/verification/candidate-focused.log"
+  },
+  {
+    "name": "negative-memo-disabled",
+    "cwd": "/tmp/card-description-vm-fixture-v1/negative-memo-disabled",
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/runtime-hotpaths.test.js",
+      "-t",
+      "6400",
+      "--reporter=verbose"
+    ],
+    "exit": 1,
+    "elapsed_seconds": 1.377,
+    "log": "/workspace/shared/card-description-vm-fixture-20261021/verification/negative-memo-disabled.log"
+  },
+  {
+    "name": "eslint",
+    "cwd": "/tmp/card-description-vm-fixture-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "tests/runtime-hotpaths.test.js"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.281,
+    "log": "/workspace/shared/card-description-vm-fixture-20261021/verification/eslint.log"
+  },
+  {
+    "name": "syntax",
+    "cwd": "/tmp/card-description-vm-fixture-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "node",
+      "--check",
+      "tests/runtime-hotpaths.test.js"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.062,
+    "log": "/workspace/shared/card-description-vm-fixture-20261021/verification/syntax.log"
+  }
+]

@@ -1,0 +1,90 @@
+{
+  "baseline": {
+    "linked-zoom-operation-counts": [
+      {
+        "label": "cold",
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      },
+      {
+        "label": "reopen",
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      },
+      {
+        "label": "bonus-change",
+        "description": "造成 10 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      },
+      {
+        "label": "bonus-return",
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      },
+      {
+        "label": "inactive",
+        "description": "造成 2 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      },
+      {
+        "label": "reactivated",
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "provider": 3,
+        "normalization": 3
+      }
+    ],
+    "linked-fragment-operation-counts": {
+      "provider": 4,
+      "normalization": 4
+    }
+  },
+  "candidate": {
+    "linked-zoom-operation-counts": [
+      {
+        "label": "cold",
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      },
+      {
+        "label": "reopen",
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      },
+      {
+        "label": "bonus-change",
+        "description": "造成 6 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      },
+      {
+        "label": "bonus-return",
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      },
+      {
+        "label": "inactive",
+        "description": "造成 2 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      },
+      {
+        "label": "reactivated",
+        "description": "造成 4 点法术伤害；对目标附加冰冻。",
+        "provider": 2,
+        "normalization": 2
+      }
+    ],
+    "linked-fragment-operation-counts": {
+      "provider": 1,
+      "normalization": 1
+    }
+  }
+}

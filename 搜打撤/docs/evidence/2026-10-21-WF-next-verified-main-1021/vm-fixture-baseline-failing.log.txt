@@ -1,0 +1,46 @@
+
+ RUN  v3.2.7 /tmp/card-description-vm-fixture-v1/baseline
+
+stdout | tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs
+HOTPATH browser 100 unchanged refreshes / 96 cards {"beforeMutations":9100,"afterMutations":0}
+
+ ✓ tests/runtime-hotpaths.test.js > bounded rich description reuse > is byte-identical for revised, escaped, numeric and custom input 4ms
+ ✓ tests/runtime-hotpaths.test.js > bounded rich description reuse > reuses text across card ids, evicts oldest after 256 entries, and bypasses long text 4ms
+ × tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing 14ms
+   → Unexpected token 'export'
+ ✓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs 449ms
+ ✓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > does no reads or writes after detach 16ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+SyntaxError: Unexpected token 'export'
+ ❯ compileDescription tests/runtime-hotpaths.test.js:14:10
+
+ ❯ tests/runtime-hotpaths.test.js:58:25
+
+Module evalmachine.<anonymous>:26 seems to be an ES Module but shipped in a CommonJS package. You might want to create an issue to the package "evalmachine.<anonymous>:26" asking them to ship the file in .mjs extension or add "type": "module" in their package.json.
+
+As a temporary workaround you can try to inline the package by updating your config:
+
+// vitest.config.js
+export default {
+  test: {
+    server: {
+      deps: {
+        inline: [
+          "evalmachine.<anonymous>:26"
+        ]
+      }
+    }
+  }
+}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  07:06:41
+   Duration  1.32s (transform 128ms, setup 0ms, collect 159ms, tests 489ms, environment 365ms, prepare 98ms)
+

@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/game/src/battle/view/battle.anim.view.js",
+    "sha256": "f8250a85cb54878caee265c31f55417db6eca7507e1bb733466d2bde208eb571"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/game/src/battle/view/battle.effect-feedback.js",
+    "sha256": "5acce344be5a6d705e79830334162facd7a9fa07919fc4ead1fd91926aca0f7a"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/game/src/battle/view/battle.layers.js",
+    "sha256": "29faf01f6965934381e128d91dea7ef94c1ae13a0afc32ee545cf9c79f9ff551"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/game/src/battle/view/battle.presentation-mounts.js",
+    "sha256": "69f0e1084afad58524d8c30974f60adc18e8d939a7fccd87c01f073cc451513f"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/game/src/battle/view/battle.view.js",
+    "sha256": "c43a8fa2bd3e55ae61768c5e96138638fb1454db648aeef622747eb6d454d99f"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/tests/battle-persistent-stage.test.js",
+    "sha256": "0a5838b958a3dcd7b67e87175daadcdb81fd203c9c83ca4b6550409bc25b1565"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/tests/battle-presentation-mounts.test.js",
+    "sha256": "9eee817c754a37bf41b47ee056683eb9fb628d0b68cb8acbc6555a245f9598f2"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/candidate/搜打撤/tests/battle-stage-mounts.test.js",
+    "sha256": "f7bfa8741d25d37ae6137cc00a3b7c4ab89d03d6259d549d547e0fe6713871ce"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/guard-only/candidate/搜打撤/game/src/battle/view/battle.view.js",
+    "sha256": "571b7945626abd28d58243ffb9d59cb9e07d6efde31418ebedef3c2a9b72499e"
+  },
+  {
+    "path": "/workspace/shared/rebased-battle-mounts-v37-20261021/guard-only/candidate/搜打撤/tests/battle-persistent-stage.test.js",
+    "sha256": "a2e4eca934bcb8cd9ebfedbe4bdc5e17675e92fcd551628adfd3e19f2c9ad534"
+  }
+]

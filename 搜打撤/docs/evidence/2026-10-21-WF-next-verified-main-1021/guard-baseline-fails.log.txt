@@ -1,0 +1,88 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/guard-only-exact-baseline-negative/搜打撤
+
+ × tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a same token render 273ms
+   → expected { dread: 1, floats: 3, ready: 3, …(1) } to deeply equal { Object (dread, floats, ...) }
+ × tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a new token render 173ms
+   → expected { dread: 1, floats: 3, ready: 3, …(1) } to deeply equal { Object (dread, floats, ...) }
+ × tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a same token render 129ms
+   → expected { dread: 1, floats: 3, ready: 3, …(1) } to deeply equal { Object (dread, floats, ...) }
+ × tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a new token render 113ms
+   → expected { dread: 1, floats: 3, ready: 3, …(1) } to deeply equal { Object (dread, floats, ...) }
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > patches warm energy, HP and phase without whole-stage parse, outerHTML comparison or body-wide mount lookup
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not write unchanged live HUD text, attributes or child lists
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > shares only safely acquired warm snapshots and refreshes after cold and restored host boundaries
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > keeps expanded options, focus, runtime animation classes, energy artwork and unrelated HUD identities
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs controlled text, classes, ARIA and disabled state even with identical presentation inputs
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs owner-controlled root classes and button attributes without leaving duplicate damaged components
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs the class of the owned .sts-arena container without recreating scenery or mounts
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs the class of the owned .sts-hud container without recreating scenery or mounts
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs changed energy child structure and attributes without replacing surviving artwork
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs a displaced stage root before updating its unit and hand owners
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > removes the real previous phase class even if the public phase attribute was corrupted
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-energy-wrap without losing the stage or unit/hand ownership
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-hud-r without losing the stage or unit/hand ownership
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-tactics without losing the stage or unit/hand ownership
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs removed .sts-hand-tools without losing the stage or unit/hand ownership
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced #btSelf mount and keeps later updates live
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="allies"] mount and keeps later updates live
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="foes"] mount and keeps later updates live
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > repairs an externally replaced .sts-hand mount and keeps later updates live
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > updates pile counts and forecast without replacing their persistent controls or transient animation classes
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > keeps the timed flee confirmation armed across unrelated patches and restores its original label
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not overwrite a newer synchronous render from showOverlay or bind stale controls
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cannot relabel or populate a newer battle when cold showOverlay starts a new epoch
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not reinsert a departed stage after a opening modal host hook starts another battle
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not reinsert a departed stage after a restoring modal host hook starts another battle
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a departed scene immediately when a opening modal hook only queues a new battle
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a departed scene immediately when a restoring modal hook only queues a new battle
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: false)
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: true)
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > does not repaint a page opened synchronously by the restored focus target
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects a stale public snapshot without invalidating the current battle modal guard
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > reads the latest potion popup description from a retained current control
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > preserves the exact current potion popup through unchanged render without using the item
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > rejects cloned popup ownership and lets the retained source open a fresh current inspection
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > reacquires a replaced overlay body without retaining the departed stage owner
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > captures equivalent HUD semantics across the complete synchronous field matrix
+ ↓ tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > passes live interaction state to hand-hit while a grave panel paints a masked background
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a same token render
+ FAIL  tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked energyDown collaborator reentry into a new token render
+ FAIL  tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a same token render
+ FAIL  tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > stops stale boss/floats/refresh/readiness after mocked phase collaborator reentry into a new token render
+AssertionError: expected { dread: 1, floats: 3, ready: 3, …(1) } to deeply equal { Object (dread, floats, ...) }
+
+- Expected
++ Received
+
+  {
+-   "dread": 0,
+-   "floats": 2,
+-   "ready": 2,
+-   "refresh": 1,
++   "dread": 1,
++   "floats": 3,
++   "ready": 3,
++   "refresh": 2,
+  }
+
+ ❯ tests/battle-persistent-stage.test.js:154:22
+    152|     render({ ...projected, opts: { ...projected.opts, isBoss: true }, …
+    153|     expect(calls).toBe(1); expect(afterNested).not.toBeNull();
+    154|     expect(counts()).toEqual(afterNested);
+       |                      ^
+    155|     expect(stage()).toBe(activeStage); expect(stage()._battleToken).to…
+    156|     expect(activeToken === oldToken).toBe(epoch === 'same');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 37 skipped (41)
+   Start at  06:13:51
+   Duration  3.31s (transform 990ms, setup 0ms, collect 1.84s, tests 689ms, environment 440ms, prepare 103ms)
+

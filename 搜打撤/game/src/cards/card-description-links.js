@@ -1,4 +1,4 @@
-import { descRich } from './cards.view.js';
+import { richResolvedDescription } from './cards.view.js';
 import { displayCardDescription } from './card-description-text.js';
 import { termKeyFor } from '../ui/term-tips.js';
 import { esc, escAttr } from '../core/shared.js';
@@ -72,7 +72,7 @@ export function createCardDescriptionRenderer(cards = []) {
       replacements.push([token, link]);
       return token;
     }) : text;
-    let html = descRich(protectedText);
+    let html = richResolvedDescription(protectedText);
     for (const [token, link] of replacements) html = html.split(token).join(link);
     return html;
   }

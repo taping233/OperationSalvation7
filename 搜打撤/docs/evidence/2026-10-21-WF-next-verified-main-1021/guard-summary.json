@@ -1,0 +1,53 @@
+{
+  "patchSha256": "05b9d011fa2cf878ac636df28f87b07976301c44f85c0eed5fb28b8a96d5d5b0",
+  "baseTree": "442bfad9c26df27edcc8dd01257eeb1edc221d25",
+  "focused": {
+    "suites": 18,
+    "passed": 416,
+    "vitestSeconds": 42.7,
+    "wallSeconds": 43.235
+  },
+  "runtimeCheckJs": {
+    "exitCode": 0,
+    "wallSeconds": 3.574
+  },
+  "targetedEslint": {
+    "files": 2,
+    "exitCode": 0,
+    "wallSeconds": 0.667
+  },
+  "syntax": {
+    "files": 2,
+    "exitCodes": [
+      0,
+      0
+    ]
+  },
+  "baselineFails": {
+    "expectedAssertionFailures": 4,
+    "skipped": 37,
+    "countersExpected": {
+      "dread": 0,
+      "floats": 2,
+      "ready": 2,
+      "refresh": 1
+    },
+    "countersReceived": {
+      "dread": 1,
+      "floats": 3,
+      "ready": 3,
+      "refresh": 2
+    }
+  },
+  "scope": "mocked Sound collaborator synchronous reentry; synthetic projected boss; real dread state; only float/ready invocation suppression",
+  "sourceHashesUnchanged": true,
+  "lookupDependencies": [],
+  "notRun": [
+    "full gate",
+    "full multiconfig type coverage",
+    "build",
+    "browser",
+    "timing A/B"
+  ],
+  "publication": "none"
+}

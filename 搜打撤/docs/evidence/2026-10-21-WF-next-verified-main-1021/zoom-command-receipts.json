@@ -1,0 +1,118 @@
+[
+  {
+    "name": "baseline-final-failing",
+    "cwd": "/tmp/card-description-zoom-v1/baseline",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/card-description-linked-zoom.test.js",
+      "--reporter=verbose"
+    ],
+    "exitCode": 1,
+    "log": "baseline-final-failing.log"
+  },
+  {
+    "name": "focused",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/card-description-linked-zoom.test.js",
+      "tests/card-description-single-resolution.test.js",
+      "tests/card-description-text.test.js",
+      "tests/sts2-structured-description.test.js",
+      "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "--reporter=verbose"
+    ],
+    "exitCode": 0,
+    "log": "focused.log"
+  },
+  {
+    "name": "eslint",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "game/src/cards/cards.view.js",
+      "game/src/cards/card-description-links.js",
+      "tests/card-description-linked-zoom.test.js"
+    ],
+    "exitCode": 0,
+    "log": "eslint.log"
+  },
+  {
+    "name": "runtime-checkjs",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "jsconfig.runtime.json",
+      "--pretty",
+      "false"
+    ],
+    "exitCode": 0,
+    "log": "runtime-checkjs.log"
+  },
+  {
+    "name": "syntax-view",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "game/src/cards/cards.view.js"
+    ],
+    "exitCode": 0,
+    "log": "syntax-view.log"
+  },
+  {
+    "name": "syntax-links",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "game/src/cards/card-description-links.js"
+    ],
+    "exitCode": 0,
+    "log": "syntax-links.log"
+  },
+  {
+    "name": "syntax-test",
+    "cwd": "/tmp/card-description-zoom-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "tests/card-description-linked-zoom.test.js"
+    ],
+    "exitCode": 0,
+    "log": "syntax-test.log"
+  }
+]

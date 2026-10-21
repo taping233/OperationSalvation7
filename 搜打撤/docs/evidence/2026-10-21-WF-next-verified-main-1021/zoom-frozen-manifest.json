@@ -1,0 +1,43 @@
+{
+  "baseCommit": "17013cc69237f5b2f64120f8ddc4dbfdef66d409",
+  "tree": "442bfad9c26df27edcc8dd01257eeb1edc221d25",
+  "baseOverlay": "card R2 source blob0aa03e734a2b057dfd78926b4903dab1baf28dff",
+  "files": [
+    {
+      "path": "baseline-cards.view.js",
+      "sha256": "80e829a4bcc553b54e3bfe1daf21d63223649b37a50dfc6959bfeeda7ee4767c",
+      "gitBlob": "0aa03e734a2b057dfd78926b4903dab1baf28dff",
+      "bytes": 13116
+    },
+    {
+      "path": "candidate/game/src/cards/cards.view.js",
+      "sha256": "bfd7ee7d647b0332cde2b571f5bb031188375a761272082d2aadff15111afa8f",
+      "gitBlob": "42d6d07fb48b67deac39828d85c05dd8abafcb7b",
+      "bytes": 13141
+    },
+    {
+      "path": "baseline-card-description-links.js",
+      "sha256": "af54cb8952247371d8a63a40e3213063050540a49972907bd9759e14547b53a8",
+      "gitBlob": "7a91b934cf426ad2ee925d755bae5ce0538184c0",
+      "bytes": 4563
+    },
+    {
+      "path": "candidate/game/src/cards/card-description-links.js",
+      "sha256": "ba4a5e14494d5a482ba57b970626032f8320ce5c23ab21d3d38d7590695afce1",
+      "gitBlob": "6e4ae1e2199caca448fdc9af558017e4af2fdc38",
+      "bytes": 4593
+    },
+    {
+      "path": "tests/card-description-linked-zoom.test.js",
+      "sha256": "e1e49a3a5881c4233adcdef8ca5cb9d0d11bf113f94cb7aa20c3f235926f50d3",
+      "gitBlob": "55e0da5f9b68432946783126d09674d9e2c7b1e4",
+      "bytes": 7457
+    },
+    {
+      "path": "linked-zoom-follow-on.patch",
+      "sha256": "4d4368b59b75c7ad4be02979e0abfdbb44d10dfa2c7d34e73e4eadac92612eb5",
+      "gitBlob": "30f7b5beecddac33d4505873c10ab1a8a7ce4514",
+      "bytes": 9005
+    }
+  ]
+}

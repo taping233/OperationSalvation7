@@ -1,0 +1,130 @@
+[
+  {
+    "stage": "focused",
+    "exitCode": 0,
+    "expectedExitCode": 0,
+    "durationSeconds": 43.235,
+    "cwd": "/tmp/guard-only-positive/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--maxWorkers=1",
+      "--minWorkers=1",
+      "--reporter=verbose",
+      "tests/battle-stage-mounts.test.js",
+      "tests/battle-persistent-stage.test.js",
+      "tests/battle-stage-validator.test.js",
+      "tests/wf-feedback1021-b-hand-phase.test.js",
+      "tests/battle-effect-feedback.test.js",
+      "tests/battle-pile-timers.test.js",
+      "tests/battle-render-runtime-trace.test.js",
+      "tests/battle-hand-inspector.test.js",
+      "tests/battle-tools-lifecycle.test.js",
+      "tests/sts2-potion-use-1021.test.js",
+      "tests/potion-tip-lifecycle.test.js",
+      "tests/battle-scenery-secondary-ready.test.js",
+      "tests/battle-scenery.test.js",
+      "tests/battle-presentation.test.js",
+      "tests/battle-decision-readability.test.js",
+      "tests/battle-infusion-action-layout.test.js",
+      "tests/contracts.test.js",
+      "tests/architecture-boundaries.test.js"
+    ],
+    "log": "focused.log"
+  },
+  {
+    "stage": "runtime-checkjs",
+    "exitCode": 0,
+    "expectedExitCode": 0,
+    "durationSeconds": 3.574,
+    "cwd": "/tmp/guard-only-positive/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "jsconfig.runtime.json",
+      "--pretty",
+      "false"
+    ],
+    "log": "runtime-checkjs.log"
+  },
+  {
+    "stage": "targeted-eslint",
+    "exitCode": 0,
+    "expectedExitCode": 0,
+    "durationSeconds": 0.667,
+    "cwd": "/tmp/guard-only-positive/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "game/src/battle/view/battle.view.js",
+      "tests/battle-persistent-stage.test.js"
+    ],
+    "log": "targeted-eslint.log"
+  },
+  {
+    "stage": "syntax-view",
+    "exitCode": 0,
+    "expectedExitCode": 0,
+    "durationSeconds": 0.07,
+    "cwd": "/tmp/guard-only-positive/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "game/src/battle/view/battle.view.js"
+    ],
+    "log": "syntax-view.log"
+  },
+  {
+    "stage": "syntax-test",
+    "exitCode": 0,
+    "expectedExitCode": 0,
+    "durationSeconds": 0.073,
+    "cwd": "/tmp/guard-only-positive/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "tests/battle-persistent-stage.test.js"
+    ],
+    "log": "syntax-test.log"
+  },
+  {
+    "stage": "baseline-fails",
+    "exitCode": 1,
+    "expectedExitCode": 1,
+    "durationSeconds": 3.862,
+    "cwd": "/tmp/guard-only-exact-baseline-negative/\u641c\u6253\u64a4",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--maxWorkers=1",
+      "--minWorkers=1",
+      "--reporter=verbose",
+      "tests/battle-persistent-stage.test.js",
+      "-t",
+      "stops stale boss/floats/refresh/readiness"
+    ],
+    "log": "baseline-fails.log"
+  }
+]

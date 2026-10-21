@@ -1,0 +1,93 @@
+
+ RUN  v3.2.7 /tmp/card-description-singlepass-v1/baseline
+
+stdout | tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive
+description-operation-counts [{"label":"cold","provider":2,"normalization":2,"description":"造成 6 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"warm","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"bonus-change","provider":2,"normalization":2,"description":"造成 10 点法术伤害；对目标附加冰冻。","badge":"6'"},{"label":"inactive","provider":2,"normalization":2,"description":"造成 2 点法术伤害；对目标附加冰冻。","badge":"2'"}]
+
+stdout | tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation
+description-same-options-counts [{"label":"same-opts-cold","provider":2,"normalization":2,"description":"造成 6 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-change","provider":2,"normalization":2,"description":"造成 10 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-return","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-inactive","provider":2,"normalization":2,"description":"造成 2 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-reactivated","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。"}]
+
+ × tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive 56ms
+   → expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(3) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(3) ]
+ ✓ tests/card-description-single-resolution.test.js > public descRich still resolves raw/id/card input once and preserves structured fields 9ms
+ × tests/card-description-single-resolution.test.js > cardHTML retains escaping and numeric/term highlighting when rendering resolved text 4ms
+   → expected '<img src=x onerror=alert(1)> & "单引号\'…' to be '<img src=x onerror=alert(1)> & "单引号\'…' // Object.is equality
+ × tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation 37ms
+   → expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(4) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(4) ]
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive
+AssertionError: expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(3) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(3) ]
+
+- Expected
++ Received
+
+  [
+-   "造成 4 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+    "造成 6 点法术伤害；对目标附加冰冻。",
++   "造成 10 点法术伤害；对目标附加冰冻。",
+    "造成 2 点法术伤害；对目标附加冰冻。",
+  ]
+
+ ❯ tests/card-description-single-resolution.test.js:55:46
+     53|     console.log('description-operation-counts', JSON.stringify(rows));
+     54|     expect(warm).toBe(cold);
+     55|     expect(rows.map(row => row.description)).toEqual([
+       |                                              ^
+     56|       '造成 4 点法术伤害；对目标附加冰冻。',
+     57|       '造成 4 点法术伤害；对目标附加冰冻。',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/card-description-single-resolution.test.js > cardHTML retains escaping and numeric/term highlighting when rendering resolved text
+AssertionError: expected '<img src=x onerror=alert(1)> & "单引号\'…' to be '<img src=x onerror=alert(1)> & "单引号\'…' // Object.is equality
+
+Expected: "<img src=x onerror=alert(1)> & "单引号'"；造成 4 点法术伤害。"
+Received: "<img src=x onerror=alert(1)> & "单引号'"；造成 6 点法术伤害。"
+
+ ❯ tests/card-description-single-resolution.test.js:88:37
+     86|     const holder = plain(cardHTML(card, 'sm'));
+     87|     const description = holder.querySelector('.hsc-desc');
+     88|     expect(description.textContent).toBe('<img src=x onerror=alert(1)>…
+       |                                     ^
+     89|     expect(description.querySelector('img, script, iframe')).toBeNull(…
+     90|     expect([...description.querySelectorAll('.d-num')].map(node => nod…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation
+AssertionError: expected [ '造成 6 点法术伤害；对目标附加冰冻。', …(4) ] to deeply equal [ '造成 4 点法术伤害；对目标附加冰冻。', …(4) ]
+
+- Expected
++ Received
+
+  [
+-   "造成 4 点法术伤害；对目标附加冰冻。",
+    "造成 6 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 10 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+    "造成 2 点法术伤害；对目标附加冰冻。",
+-   "造成 4 点法术伤害；对目标附加冰冻。",
++   "造成 6 点法术伤害；对目标附加冰冻。",
+  ]
+
+ ❯ tests/card-description-single-resolution.test.js:123:46
+    121|     expect(restored).toBe(initial);
+    122|     expect(reactivated).toBe(initial);
+    123|     expect(rows.map(row => row.description)).toEqual([
+       |                                              ^
+    124|       '造成 4 点法术伤害；对目标附加冰冻。',
+    125|       '造成 6 点法术伤害；对目标附加冰冻。',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  06:24:54
+   Duration  1.35s (transform 310ms, setup 0ms, collect 248ms, tests 422ms, environment 378ms, prepare 82ms)
+

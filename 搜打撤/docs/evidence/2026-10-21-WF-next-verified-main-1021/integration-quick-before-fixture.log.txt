@@ -1,0 +1,106 @@
+{"mode":"quick","paths":["game/src/battle/view/battle.view.js","game/src/cards/card-description-links.js","game/src/cards/cards.view.js","tests/battle-persistent-stage.test.js","tests/card-description-linked-zoom.test.js","tests/card-description-single-resolution.test.js"],"reasons":["game/src/battle/view/battle.view.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担","game/src/cards/card-description-links.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担","game/src/cards/cards.view.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担"],"tests":["tests/architecture-boundaries.test.js","tests/battle-ally-dom-order.test.js","tests/battle-area-hover-hand-context.test.js","tests/battle-entry-view.test.js","tests/battle-hand-content-diff.test.js","tests/battle-hand-inspector.test.js","tests/battle-infusion-action-layout.test.js","tests/battle-persistent-stage.test.js","tests/battle-render-derivation.test.js","tests/battle-render-runtime-trace.test.js","tests/battle-rules-settlement.test.js","tests/battle-scenery-secondary-ready.test.js","tests/battle-target-dom.test.js","tests/battle-tools-lifecycle.test.js","tests/battle-unit-metadata.test.js","tests/card-description-linked-zoom.test.js","tests/card-description-single-resolution.test.js","tests/card-description-text.test.js","tests/contracts.test.js","tests/e2-view-hp.test.js","tests/e7-rule-warning-view.test.js","tests/page-perf-battle.test.js","tests/photo-page-lifecycle-audit.test.js","tests/potion-tip-lifecycle.test.js","tests/runtime-hotpaths.test.js","tests/skull-sword-effective-session.test.js","tests/stealth-term.test.js","tests/sts2-structured-description.test.js","tests/warehouse-art-window.test.js","tests/wf-feedback1021-b-status-icons.test.js"]}
+[gate] 模式：quick
+[gate] 变更：game/src/battle/view/battle.view.js
+[gate] 变更：game/src/cards/card-description-links.js
+[gate] 变更：game/src/cards/cards.view.js
+[gate] 变更：tests/battle-persistent-stage.test.js
+[gate] 变更：tests/card-description-linked-zoom.test.js
+[gate] 变更：tests/card-description-single-resolution.test.js
+[gate] 说明：game/src/battle/view/battle.view.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担
+[gate] 说明：game/src/cards/card-description-links.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担
+[gate] 说明：game/src/cards/cards.view.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/battle-ally-dom-order.test.js
+[gate] 测试：tests/battle-area-hover-hand-context.test.js
+[gate] 测试：tests/battle-entry-view.test.js
+[gate] 测试：tests/battle-hand-content-diff.test.js
+[gate] 测试：tests/battle-hand-inspector.test.js
+[gate] 测试：tests/battle-infusion-action-layout.test.js
+[gate] 测试：tests/battle-persistent-stage.test.js
+[gate] 测试：tests/battle-render-derivation.test.js
+[gate] 测试：tests/battle-render-runtime-trace.test.js
+[gate] 测试：tests/battle-rules-settlement.test.js
+[gate] 测试：tests/battle-scenery-secondary-ready.test.js
+[gate] 测试：tests/battle-target-dom.test.js
+[gate] 测试：tests/battle-tools-lifecycle.test.js
+[gate] 测试：tests/battle-unit-metadata.test.js
+[gate] 测试：tests/card-description-linked-zoom.test.js
+[gate] 测试：tests/card-description-single-resolution.test.js
+[gate] 测试：tests/card-description-text.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 测试：tests/e2-view-hp.test.js
+[gate] 测试：tests/e7-rule-warning-view.test.js
+[gate] 测试：tests/page-perf-battle.test.js
+[gate] 测试：tests/photo-page-lifecycle-audit.test.js
+[gate] 测试：tests/potion-tip-lifecycle.test.js
+[gate] 测试：tests/runtime-hotpaths.test.js
+[gate] 测试：tests/skull-sword-effective-session.test.js
+[gate] 测试：tests/stealth-term.test.js
+[gate] 测试：tests/sts2-structured-description.test.js
+[gate] 测试：tests/warehouse-art-window.test.js
+[gate] 测试：tests/wf-feedback1021-b-status-icons.test.js
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (620 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+Type-checking jsconfig.runtime.json
+Implementation type coverage: 560/560; strict: 51/560
+
+[gate] ESLint：OK
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-nFdZV2/snapshot/搜打撤
+
+···············································································································································································································································································································································································································································································x·····
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+SyntaxError: Unexpected token 'export'
+ ❯ compileDescription tests/runtime-hotpaths.test.js:14:10
+
+ ❯ tests/runtime-hotpaths.test.js:58:25
+
+Module evalmachine.<anonymous>:26 seems to be an ES Module but shipped in a CommonJS package. You might want to create an issue to the package "evalmachine.<anonymous>:26" asking them to ship the file in .mjs extension or add "type": "module" in their package.json.
+
+As a temporary workaround you can try to inline the package by updating your config:
+
+// vitest.config.js
+export default {
+  test: {
+    server: {
+      deps: {
+        inline: [
+          "evalmachine.<anonymous>:26"
+        ]
+      }
+    }
+  }
+}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 29 passed (30)
+      Tests  1 failed | 468 passed (469)
+   Start at  07:02:39
+   Duration  74.29s (transform 1.78s, setup 0ms, collect 15.27s, tests 41.03s, environment 11.16s, prepare 1.99s)
+
+[gate] FAIL：定向 Vitest（完整测试留给 CI/阶段收尾） 失败（exit 1）

@@ -1,0 +1,24 @@
+{
+  "revision": "guard-only-r1",
+  "remoteBaseCommit": "17013cc69237f5b2f64120f8ddc4dbfdef66d409",
+  "baseTree": "442bfad9c26df27edcc8dd01257eeb1edc221d25",
+  "status": "isolated separate verification passed; not integrated or organically reproduced gameplay bug",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "baselineSha256": "94621272e91cf5e6ce1e997bdb00bb7f24b78d968d126ef65790ccfffb34638e",
+      "candidateSha256": "571b7945626abd28d58243ffb9d59cb9e07d6efde31418ebedef3c2a9b72499e",
+      "bytes": 59357
+    },
+    {
+      "path": "搜打撤/tests/battle-persistent-stage.test.js",
+      "baselineSha256": "48cd6a517d77b571fd580d359b42ec234ec6acb8c6583ac71f18f3325bfe851b",
+      "candidateSha256": "a2e4eca934bcb8cd9ebfedbe4bdc5e17675e92fcd551628adfd3e19f2c9ad534",
+      "bytes": 32325
+    }
+  ],
+  "scope": "defensive synchronous collaborator-reentry parent continuation guard; no demonstrated organic audio reentry",
+  "excluded": "internal transition/feedback/WAAPI global bookkeeping, async readiness, float queue consumption, lookup optimization",
+  "patchSha256": "05b9d011fa2cf878ac636df28f87b07976301c44f85c0eed5fb28b8a96d5d5b0",
+  "verificationSummary": "verification/summary.json"
+}

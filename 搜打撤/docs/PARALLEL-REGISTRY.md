@@ -8,6 +8,7 @@
 
 ## 活跃登记
 
+
 Friday / 合并更新 master 与已验证云端改进 WF-master-merge-1021：在独立 `/tmp/merge-master-b7207a28-assembly` 与独立 Git/index 中，以 `b7207a2846` 为正本，按逐文件兼容性审查重施已验收改进；保持旧云端 main/index/HEAD、v36 构建与证据不变。属地为本次合并后的运行时、配套测试、类型与文档；不复活旧注能分组、未验收选择提示/挂载候选或被拒手牌缓存。无服务；代码与定向/静态检查完成，独立最终复核通过，待正常 FULL 冻结验收；构建另核实际余量，远端写入由受理会话控制。
 
 Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：老板已授权修复后推送；持有失败测试对应的背包/战斗/奖励/火堆/地图/转场与资源审定修复、配套测试/文档及Git暂存提交，完整边界见`docs/evidence/2026-10-21-WF-github-ship-1021/`。保留全部现有完成增量，先按共因修复并定向反馈，再冻结门禁、提交和推送；不处理待定美术或未完成PV，不更改其他服务。
@@ -23,6 +24,7 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday（已验证增量准备 WF-next-verified-main-1021） | `game/src/cards/cards.view.js`、`game/src/cards/card-description-links.js`、`tests/card-description-linked-zoom.test.js`、`tests/runtime-hotpaths.test.js`、`tests/card-description-single-resolution.test.js`、`game/src/battle/view/battle.view.js`、`tests/battle-persistent-stage.test.js`、`docs/architecture.md`、本条登记、`docs/evidence/2026-10-21-WF-next-verified-main-1021/`；独立 `/tmp/next-verified-main-batch-20261021/source` / Git/index，无服务 | 以17013cc/tree442bfad9完整19,532 blob为基底；卡面/正常缩放单次解析和单行陈旧父呈现续跑守卫，保留原候选证据；mock重入压力不冒充自然音频bug或速度收益；完整挂载查询R2独立保留，不混入 | 2026-10-21 | 待验收：精确候选源/测试已核；旧quick中断/失败均保留不可复用；仅适配既有VM夹具的命名导出，原断言未改；待新冻结，FULL/构建/当前窗口实页/提交推送未运行；旧云端HEAD/index及历史证据不变 |
 | Friday（奖励总览重设计 WF-reward-overview-1021） | `game/css/chest-reward-overview.css`、`game/src/ui/chest-reward-overview.js`、`game/src/ui/reward-scene-view.js`、`game/src/run/chests.js`、定向测试、dev复核页、自有证据；Vite 5301，exec会话72327，创建会话01a15dc5 | 老板授权配色、布局与阅读层级整改；保留原未提交内容及领取规则 | 2026-10-21 | 完成未提交，编辑释放；自建5301服务收官停止；老板要求删除计数后不再验证 |
 
 

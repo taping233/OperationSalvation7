@@ -1,0 +1,102 @@
+[
+  {
+    "name": "baseline-r2-failing",
+    "cwd": "/tmp/card-description-singlepass-v1/baseline",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/card-description-single-resolution.test.js",
+      "--reporter=verbose"
+    ],
+    "exitCode": 1,
+    "log": "baseline-r2-failing.log"
+  },
+  {
+    "name": "focused-r2",
+    "cwd": "/tmp/card-description-singlepass-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "vitest.audit.config.mjs",
+      "tests/card-description-single-resolution.test.js",
+      "tests/card-description-text.test.js",
+      "tests/sts2-structured-description.test.js",
+      "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "--reporter=verbose"
+    ],
+    "exitCode": 0,
+    "log": "focused-r2.log"
+  },
+  {
+    "name": "eslint-r2",
+    "cwd": "/tmp/card-description-singlepass-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "game/src/cards/cards.view.js",
+      "tests/card-description-single-resolution.test.js"
+    ],
+    "exitCode": 0,
+    "log": "eslint-r2.log"
+  },
+  {
+    "name": "runtime-checkjs-r2",
+    "cwd": "/tmp/card-description-singlepass-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "jsconfig.runtime.json",
+      "--pretty",
+      "false"
+    ],
+    "exitCode": 0,
+    "log": "runtime-checkjs-r2.log"
+  },
+  {
+    "name": "syntax-source-r2",
+    "cwd": "/tmp/card-description-singlepass-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "game/src/cards/cards.view.js"
+    ],
+    "exitCode": 0,
+    "log": "syntax-source-r2.log"
+  },
+  {
+    "name": "syntax-test-r2",
+    "cwd": "/tmp/card-description-singlepass-v1/candidate",
+    "command": [
+      "taskset",
+      "-c",
+      "1",
+      "node",
+      "--check",
+      "tests/card-description-single-resolution.test.js"
+    ],
+    "exitCode": 0,
+    "log": "syntax-test-r2.log"
+  }
+]

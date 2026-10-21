@@ -37,7 +37,11 @@ const richDescriptionMemo = new Map();
 const RICH_DESCRIPTION_LIMIT = 256;
 const RICH_DESCRIPTION_MAX_LENGTH = 2048;
 export function descRich(desc, cardId, card) {
-  const text = displayCardDescription(desc, cardId, card);
+  return richResolvedDescription(displayCardDescription(desc, cardId, card));
+}
+
+// 已解析的纯文本只做转义与富文本标记；调用方不应再次套用战斗数值加成。
+export function richResolvedDescription(text) {
   if (richDescriptionMemo.has(text)) return richDescriptionMemo.get(text);
   const keyword = text.match(/^([^<>：\n]{1,10})：/);
   const html = keyword
@@ -167,7 +171,7 @@ const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
     <div class="hsc-type"><span class="hsc-type-label"><span class="hsc-type-primary">${c.type === '能力卡' ? '<span data-term="ability">能力卡</span>' : esc(c.type || '?')}</span><span class="hsc-type-secondary">${esc(c.cls || ro)}</span></span></div>
     <div class="hsc-copy">
     <div class="hsc-name"><span>${esc(c.name || '未命名卡牌')}</span></div>
-    <div class="hsc-desc${descLenCls(description)}"${ruleDensity === 'dense' || ruleDensity === 'very-dense' ? ' tabindex="0" aria-label="完整卡牌规则，可滚动阅读"' : ''}>${description ? `<span>${descRich(description)}</span>` : ''}</div>
+    <div class="hsc-desc${descLenCls(description)}"${ruleDensity === 'dense' || ruleDensity === 'very-dense' ? ' tabindex="0" aria-label="完整卡牌规则，可滚动阅读"' : ''}>${description ? `<span>${richResolvedDescription(description)}</span>` : ''}</div>
     ${kwHTML}</div></div>
     <img class="hsc-frame" src="${escAttr(frame.src)}" width="${frame.width}" height="${frame.height}" alt="" aria-hidden="true" decoding="async"${opts?.defer ? ' loading="lazy"' : ''}>
     ${showDmg ? `<div class="hsc-dmg${dmgUp ? ' dmg-up' : ''}" title="${escAttr(dmgUp

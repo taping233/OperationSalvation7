@@ -1,13 +1,19 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { writeFileSync } from 'node:fs';
 
-const observed = vi.hoisted(() => ({ handStates: [], snapshots: 0 }));
+const observed = vi.hoisted(() => ({ handStates: [], snapshots: 0, dreadMarks: 0, floats: [], ready: [] }));
 vi.mock('../game/src/battle/core/battle.core.js', async importOriginal => {
   const actual = await importOriginal();
-  return { ...actual, getSnapshot(...args) { observed.snapshots++; return actual.getSnapshot(...args); } };
+  return { ...actual, getSnapshot(...args) { observed.snapshots++; return actual.getSnapshot(...args); },
+    markDreadShown(...args) { observed.dreadMarks++; return actual.markDreadShown(...args); } };
+});
+vi.mock('../game/src/battle/view/battle.vfx.js', async importOriginal => {
+  const actual = await importOriginal();
+  return { ...actual, spawnFloats(...args) { observed.floats.push(args); return actual.spawnFloats(...args); } };
 });
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
-  createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }),
+  createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false,
+    ready: (...args) => { observed.ready.push(args); return true; } }),
   waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
@@ -50,6 +56,7 @@ const { Random } = await import('../game/src/core/random.js');
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const { set$energy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
+const runtimePresentation = await import('../game/src/battle/runtime/battle.runtime.presentation.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 const catalog = Cards.all();
@@ -82,6 +89,7 @@ function bodyFixture() {
 }
 beforeEach(() => {
   frames = []; onOverlay = null; observed.handStates.length = 0; vi.clearAllMocks();
+  observed.dreadMarks = 0; observed.floats.length = 0; observed.ready.length = 0;
   Random.reseed('battle-persistent-stage');
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
@@ -117,6 +125,41 @@ function operations(run) {
 }
 
 describe('session-owned battle stage production contracts', () => {
+  it.each([
+    ['energyDown', 'same'], ['energyDown', 'new'], ['phase', 'same'], ['phase', 'new'],
+  ])('stops stale boss/floats/refresh/readiness after mocked %s collaborator reentry into a %s token render', (soundKind, epoch) => {
+    start(); const oldToken = snapshot().battleToken;
+    const refresh = vi.spyOn(UI, 'refresh');
+    const counts = () => ({ dread: observed.dreadMarks, floats: observed.floats.length,
+      ready: observed.ready.length, refresh: refresh.mock.calls.length });
+    let afterNested = null, activeStage, activeToken, calls = 0;
+    vi.spyOn(window.SDT.Sound, 'sfx').mockImplementation(kind => {
+      if (kind !== soundKind || calls) return;
+      calls++;
+      if (epoch === 'new') start({ many: false, suffix: '-callback-new' });
+      else render();
+      activeStage = stage(); activeToken = snapshot().battleToken; afterNested = counts();
+    });
+    // Defensive stress fixture: real transition/feedback call sites invoke a
+    // mocked Sound.sfx that reenters; current real audio has no such callback.
+    // The projected boss snapshot is synthetic, not a normal player sequence.
+    // Assert float/ready call suppression, not queue or async gate semantics.
+    set$energy(7);
+    runtimePresentation.cardAnims.push(soundKind === 'phase'
+      ? { kind: 'player-turn-start', battleToken: oldToken, turn: 2 }
+      : { kind: 'shuffle', uid: 'reentry-probe', battleToken: oldToken });
+    const projected = snapshot();
+    render({ ...projected, opts: { ...projected.opts, isBoss: true }, dreadShown: false });
+    expect(calls).toBe(1); expect(afterNested).not.toBeNull();
+    expect(counts()).toEqual(afterNested);
+    expect(stage()).toBe(activeStage); expect(stage()._battleToken).toBe(activeToken);
+    expect(activeToken === oldToken).toBe(epoch === 'same');
+    expect(stage().dataset.boss).toBe('0');
+    expect(snapshot().dreadShown).toBe(false);
+    expect(document.querySelector('.boss-intro')).toBeNull();
+    expect(observed.ready.at(-1)).toEqual([activeStage, activeToken]);
+  });
+
   it('patches warm energy, HP and phase without whole-stage parse, outerHTML comparison or body-wide mount lookup', () => {
     start(); render();
     const scene = stage(), image = node('.battle-energy-emblem'), self = node('#btSelf'), hand = node('.sts-hand');

@@ -66,6 +66,7 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 - 基地 `home.scene.js` 与 Pixi 在首次打开基地场景时动态加载；请求序号和挂载节点检查阻止已关闭页面的加载结果继续挂载。稳定卡牌数据打为 `game-card-catalog` 缓存分块，仍是同步启动依赖，计入首屏脚本预算。预算值由 `scripts/perf-budget.cjs` 维护，实际产物大小与构建状态见对应任务证据。
 - `cards.js`（壳）+ `cards.data.js` / `cards.rules.js` / `cards.sync.js` / `cards.consts.js`：卡池数据、推导与经济规则、迁移播种、共享常量；`window.SDT.Cards` 键面与数据字节不变。
 - `structured-card-description.js` 从完整的自指向 `onPlay` 声明读取包扎、坚守两种已审阅句式的治疗、护甲和抽牌数值；`displayCardDescription` 接受兼容的可选整卡参数，卡面与照相馆引用渲染器消费该结果。未知字段、不完整或复杂声明以及自定义文案保留原描述；卡牌数据和效果执行不由展示层改写。
+- `cardHTML` 先解析当前卡牌描述一次，再把结果交给内部富文本标记；不重复叠加实时战斗数值。缩放引用渲染器也在单次解析后复用 `richResolvedDescription`，不把已解析文本交回原文解析接口。公共 `descRich(raw, id, card)` 仍独立解析一次，富文本缓存与整卡缓存的原有容量、键和转义规则保持不变。
 - `cards.sync.js` 的 TT10/TT11 历史批次重播优先使用 `cards-sync.json` 同 id 定版字段，并服从其退役清单；定版未提供的仓库元数据仍保留。迁移标记存在时不覆盖玩家后续编辑。
 - `game/data/cards-sync.json` 是生成数据，使用 `scripts/sync-cards-from-live.mjs` 更新，不手改；改卡牌描述时递增版本，退役卡进入退役名单并递增版本。新增卡必须进入同步数据，保证历史批次重播可解析。
 - TT10/TT11 内联历史快照须与同步数据保持一致，由 `tests/cards-sync-snapshot-guard.test.js` 守卫；卡牌效果审计例外与回归入口见 `docs/quality-gates.md`。
@@ -167,4 +168,4 @@ runtime 基线通过 `core/sdt-facade.typecheck.d.ts` 和 `runtime-env.d.ts` 读
 
 ## 战斗呈现归属与持久场景
 
-战斗视图在同一场次保留场景根与可修复的挂载区；每次同步呈现共用当次快照，下一次重新读取。动作仍在提交时复查实时状态。设置、规则及牌堆等次级弹层只替换场景外的内容，保存原场景并保护遮罩、焦点和导航归属；返回仍须通过当前场次、DOM 连通性与视图代际检查。新 master 的有界分页、逐实体注能与药剂确认接口保持不变。合并边界与验收记录见[master 合并](evidence/2026-10-21-WF-master-merge-1021/README.md)。
+战斗视图在同一场次保留场景根与可修复的挂载区；每次同步呈现共用当次快照，下一次重新读取。动作仍在提交时复查实时状态。同步转场调用返回后再次核对当前呈现代际，协作者重入时不继续陈旧父调用的后续呈现。设置、规则及牌堆等次级弹层只替换场景外的内容，保存原场景并保护遮罩、焦点和导航归属；返回仍须通过当前场次、DOM 连通性与视图代际检查。新 master 的有界分页、逐实体注能与药剂确认接口保持不变。合并边界与验收记录见[master 合并](evidence/2026-10-21-WF-master-merge-1021/README.md)。

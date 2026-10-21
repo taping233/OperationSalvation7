@@ -11,7 +11,7 @@ import { bindCardBrowser, cardBrowserHTML, refreshCardBrowser } from '../game/sr
 const evidence = 'docs/evidence/2026-10-17-runtime-hotpaths/';
 const beforeView = readFileSync(evidence + 'cards.view.before.txt', 'utf8');
 function compileDescription(source, stats) {
-  return runInNewContext(source.slice(source.indexOf('const DESC_TERMS'), source.indexOf('// 卡背渲染：')).replace('export function descRich', 'function descRich') + '\ndescRich;', { esc, termKeyFor: word => { if (stats) stats.termLookups++; return termKeyFor(word); }, displayCardDescription });
+  return runInNewContext(source.slice(source.indexOf('const DESC_TERMS'), source.indexOf('// 卡背渲染：')).replace('export function descRich', 'function descRich').replace('export function richResolvedDescription', 'function richResolvedDescription') + '\ndescRich;', { esc, termKeyFor: word => { if (stats) stats.termLookups++; return termKeyFor(word); }, displayCardDescription });
 }
 const descBefore = compileDescription(beforeView);
 const beforeBrowser = readFileSync(evidence + 'card-browser.before.txt', 'utf8');

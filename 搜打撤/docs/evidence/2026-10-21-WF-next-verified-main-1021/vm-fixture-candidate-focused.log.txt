@@ -1,0 +1,39 @@
+
+ RUN  v3.2.7 /tmp/card-description-vm-fixture-v1/candidate
+
+stdout | tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes
+linked-zoom-operation-counts [{"label":"cold","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"reopen","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"bonus-change","description":"造成 6 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"bonus-return","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"inactive","description":"造成 2 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2},{"label":"reactivated","description":"造成 4 点法术伤害；对目标附加冰冻。","provider":2,"normalization":2}]
+
+ ✓ tests/card-description-linked-zoom.test.js > real non-photo UI.showCardZoom resolves its replacement description once with live bonus changes 85ms
+stdout | tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping
+linked-fragment-operation-counts {"provider":1,"normalization":1}
+
+ ✓ tests/card-description-linked-zoom.test.js > real reference navigation and back preserve links and refresh live values with the same renderer 55ms
+ ✓ tests/card-description-linked-zoom.test.js > linked renderer keeps ID/structured rules, custom text, protected numeric names and escaping 17ms
+stdout | tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive
+description-operation-counts [{"label":"cold","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"warm","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。","badge":"4'"},{"label":"bonus-change","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。","badge":"6'"},{"label":"inactive","provider":1,"normalization":1,"description":"造成 2 点法术伤害；对目标附加冰冻。","badge":"2'"}]
+
+stdout | tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation
+description-same-options-counts [{"label":"same-opts-cold","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-change","provider":1,"normalization":1,"description":"造成 6 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-bonus-return","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-inactive","provider":1,"normalization":1,"description":"造成 2 点法术伤害；对目标附加冰冻。"},{"label":"same-opts-reactivated","provider":1,"normalization":1,"description":"造成 4 点法术伤害；对目标附加冰冻。"}]
+
+ ✓ tests/card-description-single-resolution.test.js > a legal normal-battle spell resolves once through public cardHTML: cold, warm, changed bonus, inactive 39ms
+ ✓ tests/card-description-single-resolution.test.js > public descRich still resolves raw/id/card input once and preserves structured fields 4ms
+ ✓ tests/card-description-single-resolution.test.js > cardHTML retains escaping and numeric/term highlighting when rendering resolved text 5ms
+ ✓ tests/card-description-single-resolution.test.js > identical card and options refresh from provider values and reuse prior variants after return/reactivation 21ms
+stdout | tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+HOTPATH description 6400 calls / 64 texts {"before":{"ms":65.492,"bytes":1599000,"termLookups":25600},"after":{"ms":8.596,"bytes":1599000,"termLookups":256}}
+
+stdout | tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs
+HOTPATH browser 100 unchanged refreshes / 96 cards {"beforeMutations":9100,"afterMutations":0}
+
+ ✓ tests/runtime-hotpaths.test.js > bounded rich description reuse > is byte-identical for revised, escaped, numeric and custom input 3ms
+ ✓ tests/runtime-hotpaths.test.js > bounded rich description reuse > reuses text across card ids, evicts oldest after 256 entries, and bypasses long text 4ms
+ ✓ tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing 77ms
+ ✓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs 420ms
+ ✓ tests/runtime-hotpaths.test.js > card browser differential DOM writes > does no reads or writes after detach 15ms
+
+ Test Files  3 passed (3)
+      Tests  12 passed (12)
+   Start at  07:06:43
+   Duration  3.76s (transform 512ms, setup 0ms, collect 301ms, tests 1.71s, environment 1.04s, prepare 200ms)
+
