@@ -217,7 +217,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   let discoverSrcRect = null;
   const discoverInput = createDiscoverInputGate();
 
-  function combatStateCopy(snapshot, handCards) {
+  function combatStateCopy(snapshot, handCards, handRuleContext) {
     const { phase = 'player', energy = 0, infusing, choosing, handSelecting,
       pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
     if (phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动', tone: 'foe' };
@@ -228,7 +228,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // Reuse this render's resolved effective hand. The next render resolves it anew.
     // Eligibility and effective costs still read current rules below.
     const playable = handCards.some(entry => {
-      if (unplayableReason(entry.card)) return false;
+      if (unplayableReason(entry.card, handRuleContext)) return false;
       return effCostOf(entry.card, entry.uid) <= energy;
     });
     if (playable) return { label: '你的行动', detail: '', tone: 'self' };
@@ -467,6 +467,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       return;
     }
     const cards = hand.map(findCard).filter(Boolean);
+    // Fresh for this synchronous render only; never retained by input callbacks.
+    const handRuleContext = {};
     const infusingNow = !!infusing;
     // —— 法伤加成同步（2026-09-09 需求）：有法伤加成时，造成法术伤害的招式卡面
     // 数值实时显示为「卡面值 + 法伤加成」，数字略微放大（口径同 combat.dealDamage）
@@ -526,7 +528,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
-    const combatState = combatStateCopy(snapshot, cards);
+    const combatState = combatStateCopy(snapshot, cards, handRuleContext);
     // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
     const slamSkillInfo = slamSkillOf();
     const skillState = busy || infusingNow ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';
@@ -774,7 +776,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const paintedReady = syncBattleScenery(entryStage, snapshot.battleToken, captureBattleScenery(snapshot, SDT.game?.layerIdx || 0));
     mountHandLayer(body, tip, snapshot.battleToken, playHandCard);
     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
-    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
+    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext });
     if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);
     if (battleEntry.pending(entryStage)) {
       const images = waitForBattleImages(entryStage);

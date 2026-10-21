@@ -1,0 +1,174 @@
+{
+  "method": "Unmodified repository Acorn AST module graph; relative game/src JavaScript only; counts include root, static imports/reexports, and optionally literal dynamic imports; excludes npm/CSS/assets; not emitted chunks or a runtime timing measurement.",
+  "beforeModules": 541,
+  "afterModules": 542,
+  "counts": [
+    {
+      "root": "main.js",
+      "modes": [
+        {
+          "mode": "staticImportsAndReexports",
+          "before": 275,
+          "after": 275,
+          "retiredBefore": 0,
+          "retiredAfter": 0,
+          "removed": [],
+          "added": []
+        },
+        {
+          "mode": "includingLiteralDynamicImports",
+          "before": 510,
+          "after": 505,
+          "retiredBefore": 6,
+          "retiredAfter": 0,
+          "removed": [
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js",
+            "home/home.scene.js",
+            "home/home.visuals.js",
+            "hub/game.hub.home-scene.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        }
+      ]
+    },
+    {
+      "root": "hub/game.hub.runtime.js",
+      "modes": [
+        {
+          "mode": "staticImportsAndReexports",
+          "before": 159,
+          "after": 156,
+          "retiredBefore": 4,
+          "retiredAfter": 0,
+          "removed": [
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js",
+            "hub/game.hub.home-scene.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        },
+        {
+          "mode": "includingLiteralDynamicImports",
+          "before": 353,
+          "after": 348,
+          "retiredBefore": 6,
+          "retiredAfter": 0,
+          "removed": [
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js",
+            "home/home.scene.js",
+            "home/home.visuals.js",
+            "hub/game.hub.home-scene.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        }
+      ]
+    },
+    {
+      "root": "hub/game.hub.pages.js",
+      "modes": [
+        {
+          "mode": "staticImportsAndReexports",
+          "before": 139,
+          "after": 137,
+          "retiredBefore": 3,
+          "retiredAfter": 0,
+          "removed": [
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        },
+        {
+          "mode": "includingLiteralDynamicImports",
+          "before": 328,
+          "after": 326,
+          "retiredBefore": 3,
+          "retiredAfter": 0,
+          "removed": [
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        }
+      ]
+    },
+    {
+      "root": "hub/game.hub.preparation-ports.js",
+      "modes": [
+        {
+          "mode": "staticImportsAndReexports",
+          "before": 47,
+          "after": 33,
+          "retiredBefore": 3,
+          "retiredAfter": 0,
+          "removed": [
+            "core/art-preload-plan.js",
+            "core/art.js",
+            "core/asset-url.js",
+            "core/image-decode.js",
+            "core/performance-budgets.js",
+            "core/performance-settings.js",
+            "core/storage.js",
+            "generated/art-manifest.js",
+            "generated/thumb-manifest.js",
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js",
+            "hub/collection-conversion.js",
+            "hub/collection.commands.js",
+            "hub/meta.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        },
+        {
+          "mode": "includingLiteralDynamicImports",
+          "before": 47,
+          "after": 33,
+          "retiredBefore": 3,
+          "retiredAfter": 0,
+          "removed": [
+            "core/art-preload-plan.js",
+            "core/art.js",
+            "core/asset-url.js",
+            "core/image-decode.js",
+            "core/performance-budgets.js",
+            "core/performance-settings.js",
+            "core/storage.js",
+            "generated/art-manifest.js",
+            "generated/thumb-manifest.js",
+            "home/home.catalog.js",
+            "home/home.commands.js",
+            "home/home.presenter.js",
+            "hub/collection-conversion.js",
+            "hub/collection.commands.js",
+            "hub/meta.js"
+          ],
+          "added": [
+            "hub/command-errors.js"
+          ]
+        }
+      ]
+    }
+  ],
+  "afterArchitectureViolations": [],
+  "afterDeadGuardKeys": []
+}

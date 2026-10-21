@@ -1,0 +1,156 @@
+{
+  "baselineHashMatches": [
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.runtime.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.preparation-ports.js",
+    "game/src/home/home.presenter.js",
+    "tests/hub-architecture.test.js",
+    "tests/home-async-lifecycle.test.js",
+    "tests/base-hub-business-lifecycle-audit.test.js",
+    "tests/base-inventory-lifecycle-audit.test.js",
+    "tests/preparation-adapter-review.test.js",
+    "tests/base-save-snapshot.test.js",
+    "tests/m05-home-presenter.test.js",
+    "tests/hub-lazy-entry.test.js",
+    "docs/architecture.md",
+    "docs/performance.md"
+  ],
+  "changed": [
+    {
+      "path": "game/src/hub/game.hub.js",
+      "beforeSha256": "6f2860fbd2a538325fa05863b8fe43b33610f25b449b2c35d3cdae394ce31839",
+      "afterSha256": "2cc26246cd5770368973cbae2e8d4b4a560b252eaeca01210ba9270a7c7cc4bf",
+      "beforeBytes": 5459,
+      "afterBytes": 5529
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "beforeSha256": "a9fdecca84e7587312e9767d0061c38f26f85476bb49cb5dac41674d0d6b98f6",
+      "afterSha256": "66564b0c7cd7a9e86aaa02803f074b3a34171d4447c413e44f1f455574f79b96",
+      "beforeBytes": 26593,
+      "afterBytes": 26179
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "beforeSha256": "d2d9b6aabed1d3a5478982d92b63bc8112c98d30b850def5e822f295ac31e9a5",
+      "afterSha256": "fa6715004b2390f09f1166403d9b2b104a04f5d808fc476c093b394eb56a3b6f",
+      "beforeBytes": 20990,
+      "afterBytes": 20984
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation-ports.js",
+      "beforeSha256": "690f08708ab330522a3d309ffe57461c1e2dd83c60f5eeb8eac8fdaaffe86701",
+      "afterSha256": "d61577df77d3722a1a9f5382a743beb1918e94d42bf78b0c7fed3f750e759604",
+      "beforeBytes": 1611,
+      "afterBytes": 1605
+    },
+    {
+      "path": "game/src/home/home.presenter.js",
+      "beforeSha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88",
+      "afterSha256": "7b8d8ba4384089f88d036b248e581bb0ab6ec581f0981468c10224d132246d46",
+      "beforeBytes": 1577,
+      "afterBytes": 1189
+    },
+    {
+      "path": "tests/hub-architecture.test.js",
+      "beforeSha256": "f8f78744a3e6d0836b4f234fa9a300b2c43d7bf559b43d3c5461242aa61991b0",
+      "afterSha256": "5de8de22efda5bf5132d570b5e423d4681b64d030c5242dfebcb9a90279befa7",
+      "beforeBytes": 7372,
+      "afterBytes": 7601
+    },
+    {
+      "path": "tests/home-async-lifecycle.test.js",
+      "beforeSha256": "fb6121fb7e133ca1ad19ee7eb86f37e09bb3c0ed8eea312fe410afa8d2890315",
+      "afterSha256": "139f5575713642158eb57982a127eccf4c79a089560ecc873da836e87e7d818a",
+      "beforeBytes": 7057,
+      "afterBytes": 5849
+    },
+    {
+      "path": "tests/base-hub-business-lifecycle-audit.test.js",
+      "beforeSha256": "99b303c3cca9b6acb436ac87ff9a09c85b5deb71c2efa291fe0e2691762854a1",
+      "afterSha256": "09210f1f30364dfda479520e249dbe3ba5f9775701789aa39aadd1c5560fee9e",
+      "beforeBytes": 13083,
+      "afterBytes": 13531
+    },
+    {
+      "path": "tests/base-inventory-lifecycle-audit.test.js",
+      "beforeSha256": "4aea86171fb625ff285642791c3014b362cb43c3cf9c1c6b36df8eda4c1cbabe",
+      "afterSha256": "38ce1883dee97f4f441ec7e89ebe8f07584f4b7316627260d98e911b120bbea9",
+      "beforeBytes": 26539,
+      "afterBytes": 27267
+    },
+    {
+      "path": "tests/preparation-adapter-review.test.js",
+      "beforeSha256": "c5fb27c90ff08fd9e0ab2a9d2f6f381b2bce47093f4bc270ab8b02dd6ab6f535",
+      "afterSha256": "47dcb954eff7788833af53dc00ec13df8f5c43c4236315ec2db5f7f84952e100",
+      "beforeBytes": 4168,
+      "afterBytes": 5034
+    },
+    {
+      "path": "tests/base-save-snapshot.test.js",
+      "beforeSha256": "93125094e7cf3b6c3a4e23f25845a4e7b74d6a62423ee1d695ba153e377feccb",
+      "afterSha256": "f586f0edeb83534c12d8d47675599c8f7cabb417014e355a2be1eaf33d9d7f9d",
+      "beforeBytes": 6625,
+      "afterBytes": 8015
+    },
+    {
+      "path": "tests/m05-home-presenter.test.js",
+      "beforeSha256": "7e0ff958c387ebdc5db5c45c658a708967b8f11b7fd7ec68e266247afd65fb21",
+      "afterSha256": "c095939bddc00785e9848589e3452078a2289e0530d7c0243ce92aaa5e5cc205",
+      "beforeBytes": 2437,
+      "afterBytes": 2653
+    },
+    {
+      "path": "tests/hub-lazy-entry.test.js",
+      "beforeSha256": "5bfb00c4bf0dcbba8a7f6ff4749fa0b1daaa2da4badf6f5864033ff989e7f4d1",
+      "afterSha256": "c674fee31ed854212954fa7b6a555aa0be3a4e4e560fbad45e1b47f02cfa85fb",
+      "beforeBytes": 13224,
+      "afterBytes": 14279
+    },
+    {
+      "path": "docs/architecture.md",
+      "beforeSha256": "8736c1f69a2246228e447895ddc8b51bf716a5a18eb36893a258a1f1d238d2c1",
+      "afterSha256": "fc313b975ea9c9849ef7a9af6e9db9e2a222bd4cdfee2f4662543c43dab0924b",
+      "beforeBytes": 39147,
+      "afterBytes": 39250
+    },
+    {
+      "path": "docs/performance.md",
+      "beforeSha256": "cafdc82d04c31841d7b7e28946982c257b321bd01260cc4dd3a032dee206ed43",
+      "afterSha256": "6fb8f0d5596099ed2dfc5a134077d92737b4f43ac5cf35282f880eda5010cc32",
+      "beforeBytes": 29908,
+      "afterBytes": 29833
+    },
+    {
+      "path": "game/src/hub/command-errors.js",
+      "beforeSha256": null,
+      "afterSha256": "83af3a1232bb986bf894af116ebac334b01ef0d543ce70317c245bbeb2363efb",
+      "beforeBytes": 0,
+      "afterBytes": 531
+    },
+    {
+      "path": "tests/hub-command-errors.test.js",
+      "beforeSha256": null,
+      "afterSha256": "40828926aaa4cd66d4ba0249c4983133ff8ee1581956d7b697b7846225ad6ad1",
+      "beforeBytes": 0,
+      "afterBytes": 998
+    }
+  ],
+  "formatterFunctionByteIdentical": true,
+  "preserved": [
+    "game/src/home/home.commands.js",
+    "game/src/home/home.catalog.js",
+    "game/src/home/home.scene.js",
+    "game/src/home/home.visuals.js",
+    "game/src/hub/game.hub.home-scene.js",
+    "game/src/hub/base-state.js",
+    "game/src/hub/base.js",
+    "game/src/hub/base.commands.js",
+    "game/src/hub/game.hub.bridge.js"
+  ],
+  "patchSha256": "4a1c2c77c6f431891457bf481c7a73b2e78bae3fa81599d880ef25f458d9246c",
+  "patchApplyCheck": "PASS: git apply --check in isolated patch-check baseline directory",
+  "finalBaselineHashCheck": "PASS: all 15 copied baseline paths unchanged",
+  "verificationProductionSourceMatchesCandidate": true
+}

@@ -1232,3 +1232,28 @@ it('shows only active player rules via readonly snapshot and clears retained chi
   expect(runtime.delayed).toHaveLength(1);
   expect(snapshot.playerEffects).toHaveLength(8);
 });
+
+it('shares one raw-hand eligibility context per synchronous render and creates a fresh one next render', async () => {
+  start();
+  const core = await import('../game/src/battle/core/battle.core.js');
+  const eligibility = vi.spyOn(core, 'unplayableReason');
+  try {
+    render();
+    const first = eligibility.mock.calls.map(call => call[1]);
+    expect(first.length).toBeGreaterThan(1);
+    expect(first.every(context => context === first[0])).toBe(true);
+    expect(first[0].handCards.length).toBeGreaterThan(0);
+    eligibility.mockClear();
+    set$energy(0);
+    render();
+    const second = eligibility.mock.calls.map(call => call[1]);
+    expect(second.length).toBeGreaterThan(1);
+    expect(second.every(context => context === second[0])).toBe(true);
+    expect(second[0]).not.toBe(first[0]);
+    expect(second[0].handCards).not.toBe(first[0].handCards);
+    expect(core.unplayableReason(Cards.SHA)).toBeNull();
+    expect(eligibility.mock.calls.at(-1)).toHaveLength(1);
+  } finally {
+    eligibility.mockRestore();
+  }
+});

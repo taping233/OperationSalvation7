@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-render-dependencies-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "集中整合当轮手牌判定复用与退役家具静态依赖断开，保留存档与旧收据",
+  "paths": [
+    "game/src/battle/core/battle.card-play.domain.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.layers.js",
+    "tests/battle-hand-inspector.test.js",
+    "tests/battle-hand-rule-context.test.js",
+    "game/src/hub/game.hub.js",
+    "game/src/hub/game.hub.runtime.js",
+    "game/src/hub/game.hub.pages.js",
+    "game/src/hub/game.hub.preparation-ports.js",
+    "game/src/home/home.presenter.js",
+    "tests/hub-architecture.test.js",
+    "tests/home-async-lifecycle.test.js",
+    "tests/base-hub-business-lifecycle-audit.test.js",
+    "tests/base-inventory-lifecycle-audit.test.js",
+    "tests/preparation-adapter-review.test.js",
+    "tests/base-save-snapshot.test.js",
+    "tests/m05-home-presenter.test.js",
+    "tests/hub-lazy-entry.test.js",
+    "docs/architecture.md",
+    "docs/performance.md",
+    "game/src/hub/command-errors.js",
+    "tests/hub-command-errors.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/runtime-asset-redundancy.test.js"
+  ],
+  "doneWhen": [
+    "两原补丁精确接入0bf真实基线且生产源码冻结",
+    "集中原full/build/hook通过，预算不放宽",
+    "旧模块/数据/收据兼容及家具入口不恢复，区分代码/构建/实页证据"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "两个独立补丁及22路径前后SHA逐一匹配；手牌203项定向、2728返回值比较零差异；退役依赖22文件270项及最终3文件35项通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "标准build通过固定预算，1595文件171874323字节；资源守卫39项与静态闭环通过；一次真实消费者SHA复核已保存",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "本批集成代码的实际内置浏览器实页与远端CI未核验；尚未部署",
+    "最终精确index门和构建结果单独记录，独立操作/依赖图计数不算帧时或包体收益"
+  ],
+  "updatedAt": "2026-10-21T04:25:38.505331+00:00"
+}

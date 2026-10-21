@@ -2,9 +2,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({
   readBase: vi.fn(),
-  buyFurniture: vi.fn(),
-  mountHome: vi.fn(),
-  mounts: [],
   actions: {},
   view: { revision: 1, home: { placements: [] } },
 }));
@@ -19,9 +16,11 @@ vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, configureCardNavig
 vi.mock('../game/src/core/random.js', () => ({ Random: {} }));
 vi.mock('../game/src/hub/base.commands.js', () => ({ readBase: (...args) => state.readBase(...args), readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
 vi.mock('../game/src/hub/collection.commands.js', () => ({ convertCollection: vi.fn(), getCharacter: vi.fn(), getCollection: vi.fn(), selectSkin: vi.fn(), stackKeyOf: vi.fn() }));
-vi.mock('../game/src/home/home.commands.js', () => ({ createHomeCommands: () => ({ buyFurniture: (...args) => state.buyFurniture(...args), saveLayout: vi.fn(), setDisplay: vi.fn() }) }));
-vi.mock('../game/src/home/home.presenter.js', () => ({ presentHome: (value) => value, homeErrorMessage: (value) => value?.message || 'error' }));
-vi.mock('../game/src/home/home.visuals.js', () => ({ getM04VisualPack: () => ({}) }));
+vi.mock('../game/src/home/home.commands.js', () => { throw new Error('Retired Home commands evaluated'); });
+vi.mock('../game/src/home/home.presenter.js', () => { throw new Error('Retired Home presenter evaluated'); });
+vi.mock('../game/src/home/home.visuals.js', () => { throw new Error('Retired Home visuals evaluated'); });
+vi.mock('../game/src/home/home.catalog.js', () => { throw new Error('Retired furniture catalog evaluated'); });
+vi.mock('../game/src/hub/game.hub.home-scene.js', () => { throw new Error('Retired Home controller evaluated'); });
 vi.mock('../game/src/home/story.last-lamp.js', () => ({ validateLastLampState: vi.fn() }));
 vi.mock('../game/src/hub/preparation.commands.js', () => ({ createPreparationCommands: () => ({}), getPreparation: vi.fn(), previewDeployment: vi.fn() }));
 vi.mock('../game/src/hub/preparation.view.js', () => ({ buildPreparationViewModel: vi.fn(), mountPreparationView: vi.fn() }));
@@ -31,11 +30,7 @@ vi.mock('../game/src/hub/game.hub.pages.js', () => ({
   hubShopHTML: () => '', hubStashHTML: () => '', openStashCardView: vi.fn(), openRawItem: vi.fn(),
   hubUpgradeHTML: () => '', hubClassesHTML: () => '', hubAchHTML: () => '', HUB_SHOP_GOODS: [], hubShopGoodsCard: vi.fn(),
 }));
-vi.mock('../game/src/home/home.scene.js', () => ({ mountHome: (...args) => state.mountHome(...args) }));
-
-function makeController() {
-  return { update: vi.fn(), dispose: vi.fn() };
-}
+vi.mock('../game/src/home/home.scene.js', () => { throw new Error('Retired Home scene evaluated'); });
 
 async function loadHub() {
   if (!window.SDT?.__homeLifecycleTest) window.SDT = {
@@ -55,21 +50,14 @@ async function loadHub() {
   return state.hub;
 }
 
-describe('基地 Home 异步生命周期', () => {
+describe('退役家具入口与普通基地隔离', () => {
   beforeEach(async () => {
     await vi.dynamicImportSettled();
     state.hub?.closeBase();
     await vi.dynamicImportSettled();
     document.body.innerHTML = '';
     state.readBase.mockReset().mockReturnValue({ ok: true, value: state.view, revision: 1 });
-    state.buyFurniture.mockReset();
-    state.mounts.length = 0;
     for (const key of Object.keys(state.actions)) delete state.actions[key];
-    state.mountHome.mockReset().mockImplementation((config) => {
-      const controller = makeController();
-      state.mounts.push({ config, controller });
-      return controller;
-    });
   });
 
   it('进入基地直接显示普通出发页，不加载 2.5D 场景', async () => {
@@ -80,63 +68,37 @@ describe('基地 Home 异步生命周期', () => {
     expect(document.getElementById('hubMain')).not.toBeNull();
     expect(document.querySelector('[data-tab="home"]')).toBeNull();
     expect(document.getElementById('homeSceneHost')).toBeNull();
-    expect(state.mounts).toHaveLength(0);
   });
 
-  it('退出并重复打开时只挂载最新的 Home 宿主', async () => {
+  it('退役 runtime 出口重复调用不创建页面、不读取命令也不写存档', async () => {
     const hub = await loadHub();
-    hub.renderHomeScene();
-    hub.closeBase();
-    await vi.dynamicImportSettled();
-    expect(state.mounts).toHaveLength(0);
-
-    hub.renderHomeScene();
-    const latestHost = document.getElementById('homeSceneHost');
-    await vi.dynamicImportSettled();
-    await vi.waitFor(() => expect(state.mounts).toHaveLength(1));
-
-    expect(state.mounts).toHaveLength(1);
-    expect(state.mounts[0].config.host).toBe(latestHost);
-    expect(state.mounts[0].config.host.isConnected).toBe(true);
+    const before = structuredClone(window.SDT.Base.data);
+    const write = vi.spyOn(Storage.prototype, 'setItem');
+    try {
+      expect(hub.renderHomeScene()).toBe(false);
+      expect(hub.renderHomeScene()).toBe(false);
+      await vi.dynamicImportSettled();
+      expect(document.body.innerHTML).toBe('');
+      expect(state.readBase).not.toHaveBeenCalled();
+      expect(window.SDT.Base.data).toEqual(before);
+      expect(write).not.toHaveBeenCalled();
+    } finally { write.mockRestore(); }
   });
 
-  it('旧场景的 onIntent 等待结束后不会更新新控制器', async () => {
-    let finishPurchase;
-    state.buyFurniture.mockReturnValue(new Promise((resolve) => { finishPurchase = resolve; }));
+  it('普通基地打开后调用退役出口保留原页面、焦点和现行导航', async () => {
     const hub = await loadHub();
-    hub.renderHomeScene();
+    hub.openBaseHub('deploy');
+    const root = document.getElementById('hubMain');
+    const button = root.querySelector('button');
+    button.focus();
+    const markup = root.outerHTML;
+    expect(hub.renderHomeScene()).toBe(false);
     await vi.dynamicImportSettled();
-    const oldMount = state.mounts[0];
-    const oldIntent = oldMount.config.onIntent({ type: 'buyFurniture', expectedRevision: 1 });
-
-    hub.renderHomeScene();
-    await vi.dynamicImportSettled();
-    const newMount = state.mounts[1];
-    expect(await oldMount.config.onIntent({ type: 'buyFurniture', expectedRevision: 1 })).toBeNull();
-    expect(state.buyFurniture).toHaveBeenCalledTimes(1);
-    finishPurchase({ ok: true });
-    await expect(oldIntent).resolves.toEqual({ ok: true });
-
-    expect(oldMount.controller.update).not.toHaveBeenCalled();
-    expect(newMount.controller.update).not.toHaveBeenCalled();
-  });
-
-  it('Pixi 场景挂载失败后回到普通基地，旧 home 页签不再重开场景', async () => {
-    state.mountHome.mockImplementationOnce(() => { throw new Error('pixi init failed'); }).mockImplementation((config) => {
-      const controller = makeController();
-      state.mounts.push({ config, controller });
-      return controller;
-    });
-    const hub = await loadHub();
-    hub.renderHomeScene();
-    await vi.dynamicImportSettled();
-
-    expect(document.getElementById('hubMain')).not.toBeNull();
+    expect(document.getElementById('hubMain')).toBe(root);
+    expect(root.outerHTML).toBe(markup);
+    expect(document.activeElement).toBe(button);
     state.actions.hubTab({ tab: 'home' });
-    await vi.dynamicImportSettled();
-
-    expect(state.mounts).toHaveLength(0);
-    expect(document.getElementById('hubMain')).not.toBeNull();
+    expect(document.getElementById('hubMain').dataset.page).toBe('deploy');
     expect(document.getElementById('homeSceneHost')).toBeNull();
   });
 });

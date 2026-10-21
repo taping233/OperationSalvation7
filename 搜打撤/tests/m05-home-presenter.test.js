@@ -2,6 +2,7 @@ import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { describe, expect, it } from 'vitest';
 import { presentHome, homeErrorMessage } from '../game/src/home/home.presenter.js';
+import { homeErrorMessage as sharedErrorMessage } from '../game/src/hub/command-errors.js';
 import { readBase } from '../game/src/hub/base.commands.js';
 import { buyFurniture } from '../game/src/home/home.commands.js';
 
@@ -46,3 +47,5 @@ describe('M05 presenter', () => {
     expect(homeErrorMessage({ ok: false, code: 'STALE_REVISION' })).toContain('刷新');
   });
 });
+
+it('旧 presenter 保留错误函数的同一导出身份', () => { expect(homeErrorMessage).toBe(sharedErrorMessage); });

@@ -1,0 +1,22 @@
+{
+  "scope": "Exactly one opaqueConsumers SHA refresh for battle.layers.js; guard algorithm and budgets unchanged.",
+  "oldSha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+  "newSha256": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+  "independentReview": "Two changes only: forward ctx.handRuleContext and store extra.handRuleContext. Ally portrait selector and assetUrl(source) unchanged. Independent read-only review approved the one-line refresh.",
+  "proof": "consumer-review-proof.json",
+  "negativeControl": "Actual current battle.layers source in memory: changing assetUrl(source) expression or removing its approval both retain all candidates and emit the exact unreviewed-consumer warning. Unchanged approved source excludes all three fixture candidates. Production positive control excludes exactly286 with zero warnings.",
+  "targeted": {
+    "filesPassed": 2,
+    "testsPassed": 39,
+    "failed": 0,
+    "log": "asset-guard-targeted.log.txt"
+  },
+  "firstBuild": {
+    "exitCode": 0,
+    "budgetsPassed": true,
+    "releaseAccepted": false,
+    "reason": "Changed whole-file fingerprint correctly triggered fail-closed fallback, restoring old reviewed images. This output was not accepted as the final build.",
+    "packageBytes": 226392433,
+    "log": "build-before-review-refresh.log.txt"
+  }
+}

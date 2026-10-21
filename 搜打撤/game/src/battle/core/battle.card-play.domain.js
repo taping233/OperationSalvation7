@@ -61,10 +61,14 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
   // 资源/事件卡任何战斗都打不出；牌库/墓地类词条只有对战 BOSS 才生效
   // （普通战斗没有牌库与墓地概念）；道具卡只能在普通战斗中使用。
   // 2026-09-09 老板 #14：手牌代价（消耗 N 张 X / 选择 N 张手牌）不足时同样不可打出。
-  function unplayableReason(card) {
+  function unplayableReason(card, renderContext = null) {
     if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
     if (isFoeFightCard(card) && alive().length < 2) return '场上敌人不足两名，无法互相攻击';
-    const handCards = readState().hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
+    // Only a single synchronous render shares this raw-hand projection. Commands
+    // and previews omit the context and always resolve the current live hand.
+    // Keep raw card identity and findCard's legacy repairs, not effective faces.
+    const handCards = renderContext?.handCards || readState().hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
+    if (renderContext) renderContext.handCards = handCards;
     return unplayableReasonFor(card, readState().mode, { handCards, selfCard: card });
   }
 
@@ -74,8 +78,8 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
     const worn = readState().equipped.length;
     return worn >= cap ? { card, cap, worn, reason: { code:'EQUIPMENT_FULL', message:`最多同时装配 ${cap} 件装备（已装配 ${worn} 件）——本场无法再穿戴` } } : null;
   }
-  function handUnplayableReason(card) {
-    return unplayableReason(card) || equipmentPlayLimit(card)?.reason.message || null;
+  function handUnplayableReason(card, renderContext = null) {
+    return unplayableReason(card, renderContext) || equipmentPlayLimit(card)?.reason.message || null;
   }
 
   function inspectCardPlay(uid) {

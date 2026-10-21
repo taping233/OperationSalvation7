@@ -19,7 +19,7 @@ import { convertCollection, stackKeyOf } from './collection.commands.js';
 import { previewCollectionConversion } from './collection-conversion.js';
 import { collectionConversionHTML, conversionSignature } from './collection-conversion-view.js';
 import { isCollectionProtected } from './collection-protection.js';
-import { homeErrorMessage } from '../home/home.presenter.js';
+import { homeErrorMessage } from './command-errors.js';
 import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
   // 特殊收藏品：传说卡与桌游珍宝——[[icon:sparkles]]收藏后完成对应成就

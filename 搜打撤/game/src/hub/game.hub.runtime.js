@@ -9,8 +9,7 @@ import { game, getActiveSlot, setLobby, startNewGame } from '../run/game.session
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { readBase } from './base.commands.js';
 import { selectSkin, stackKeyOf } from './collection.commands.js';
-import { homeErrorMessage } from '../home/home.presenter.js';
-import { createHubHomeScene } from './game.hub.home-scene.js';
+import { homeErrorMessage } from './command-errors.js';
 import { createHubPreparationAdapter } from './game.hub.preparation-ports.js';
 import '../../css/base-camp-rework.css';
 import { presentHub, bindHubBrowse, restoreHubFocus } from './hub.presentation.js';
@@ -67,17 +66,11 @@ const notice = (text, type = 'ok') => {
   const plain = document.createElement('template'); plain.innerHTML = String(text);
   hubNotice = plain.content.textContent || ''; hubNoticeType = type;
 };
-const homeScene = createHubHomeScene({ UI, disposePreparation, renderHub, closeBase, openPanel: panel => {
-  hubTab = ({ collection: 'ach', characters: 'classes', pets: 'classes' }[panel] || panel);
-  if (panel === 'pets') setPersonnelGroup('pets');
-  renderHub();
-} });
-const disposeHome = () => homeScene.dispose();
 preparationFeature = createHubPreparationAdapter({
   SDT, UI,
   returnToBase: () => { hubTab = 'deploy'; renderHub(); },
   applyPicks: setDeployPick,
-  openDeparture: () => { disposeHome(); openDepartPrep(); },
+  openDeparture: openDepartPrep,
 });
   function openBaseHub(tab) {
     hubNotice = '';
@@ -102,7 +95,8 @@ preparationFeature = createHubPreparationAdapter({
     renderHub();
   }
 
-  function renderHomeScene() { homeScene.render(); }
+  // Retained import compatibility only; the furniture room is retired.
+  function renderHomeScene() { return false; }
 
   function hubBackTarget() {
     if (hubTab === 'classes') return personnelBackTarget();
@@ -128,7 +122,6 @@ preparationFeature = createHubPreparationAdapter({
     const currentFocus = focused ? { ...focused.dataset } : null;
     disposeCourtyard(); disposeCourtyard = () => {};
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
-    homeScene.leave();
     disposePreparation();
     const B = SDT.Base;
     const M = SDT.Meta;
@@ -414,7 +407,6 @@ preparationFeature = createHubPreparationAdapter({
   }
 
   function openPreparationPanel() {
-    disposeHome();
     preparationFeature.open();
   }
 
@@ -425,7 +417,6 @@ preparationFeature = createHubPreparationAdapter({
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = null;
-    homeScene.leave();
     _set_cardPageOpen(false);
     UI.hideOverlay();
     startNewGame();   // 基地返回选档，不触碰当前档案或对局存档

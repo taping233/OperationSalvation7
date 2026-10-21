@@ -1,6 +1,6 @@
 import { CHARACTERS } from '../core/characters.js';
 import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
-import { homeErrorMessage } from '../home/home.presenter.js';
+import { homeErrorMessage } from './command-errors.js';
 import { homeRequestId } from './game.hub.bridge.js';
 import { createHubPreparationFeature } from './game.hub.preparation.js';
 import '../../css/preparation.css';

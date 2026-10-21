@@ -60,6 +60,27 @@ it('keeps reviewed asset decisions identical across Git LF and Windows CRLF sour
 });
 
 describe('reviewed production-only asset omissions', () => {
+  it('retains every candidate if the reviewed battle-layer asset consumer changes or loses approval', () => {
+    const f = fixture();
+    const consumerPath = 'game/src/battle/view/battle.layers.js';
+    const code = readFileSync(new URL(`../${consumerPath}`, import.meta.url), 'utf8');
+    f.sources[1] = { path: consumerPath, code };
+    f.review.opaqueConsumers = { [consumerPath]: RUNTIME_REDUNDANCY_REVIEW.opaqueConsumers[consumerPath] };
+    expect(plan(f).warnings).toEqual([]);
+    expect(plan(f).excludedAssets.size).toBe(3);
+
+    const warning = `Unreviewed dynamic asset consumer ${consumerPath}; retaining reviewed assets.`;
+    expect(code).toContain('assetUrl(source)');
+    f.sources[1].code = code.replace('assetUrl(source)', 'assetUrl(source + "?guard-negative")');
+    expect(plan(f).excludedAssets.size).toBe(0);
+    expect(plan(f).warnings).toContain(warning);
+
+    f.sources[1].code = code;
+    delete f.review.opaqueConsumers[consumerPath];
+    expect(plan(f).excludedAssets.size).toBe(0);
+    expect(plan(f).warnings).toContain(warning);
+  });
+
   it('preserves 195 historical exclusions and adds exactly 91 source-retained images', () => {
     expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(286);
     expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(286);

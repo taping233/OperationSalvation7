@@ -66,9 +66,9 @@ async function createBrowsingHarness() {
   vi.doMock('../game/src/hub/collection.commands.js', () => ({
     convertCollection: vi.fn(), getCharacter: vi.fn(), getCollection: vi.fn(), selectSkin: ports.select, stackKeyOf: stack => `card:${stack.card.id}${stack.card.variantKey ? ':' + stack.card.variantKey : ''}`,
   }));
-  vi.doMock('../game/src/home/home.commands.js', () => ({ createHomeCommands: () => ({}) }));
-  vi.doMock('../game/src/home/home.presenter.js', () => ({ presentHome: value => value, homeErrorMessage: value => value.message }));
-  vi.doMock('../game/src/home/home.visuals.js', () => ({ getM04VisualPack: () => ({}) }));
+  for (const retired of ['home/home.commands', 'home/home.presenter', 'home/home.catalog', 'home/home.scene', 'home/home.visuals', 'hub/game.hub.home-scene']) {
+    vi.doMock(`../game/src/${retired}.js`, () => { throw new Error(`Retired module evaluated: ${retired}`); });
+  }
   vi.doMock('../game/src/home/story.last-lamp.js', () => ({ validateLastLampState: vi.fn() }));
   vi.doMock('../game/src/hub/game.hub.preparation.js', () => ({
     createHubPreparationFeature: () => ({ open: vi.fn(), dispose: vi.fn(), returnToBase: vi.fn() }),
@@ -196,4 +196,13 @@ it('当前返回基地动作仍到出发主页；换档后的旧返回不抢新�
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.hubHome;
   const root=harness.host.querySelector('#hubMain'); harness.useSlot(2); (await previous()); expect(harness.host.querySelector('#hubMain')).toBe(root);
   harness.runtime.openBaseHub('stash'); (await harness.ui._acts.hubHome()); expect(harness.host.querySelector('#hubMain').dataset.page).toBe('deploy');
+});
+
+it('现行皮肤选择读取失败仍使用原错误文案且不调用选择命令', async () => {
+  harness = await createBrowsingHarness();
+  harness.runtime.openBaseHub('stash');
+  ports.read.mockReturnValue({ ok: false, code: 'STALE_REVISION' });
+  await harness.ui._acts.selectCharacterSkin({ character: 'wu', skin: 'casual' });
+  expect(harness.ui.log).toHaveBeenCalledWith('基地资料已变化，请刷新后重试。', 'warn');
+  expect(ports.select).not.toHaveBeenCalled();
 });

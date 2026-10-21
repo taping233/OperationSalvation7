@@ -263,7 +263,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
     const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
     const effCost = effCostOf(g.card, uid);
-    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
+    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card, ctx.handRuleContext);   // 无法使用的卡：虚化禁用
     const blockedReason = blocked || (infusingNow ? '' : busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
     const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
     // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
@@ -382,6 +382,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy, playedMovesThisTurn: snapshot.playedMovesThisTurn,
       spellBonus: (extra && extra.spellBonus) || 0,
       mode: extra && extra.mode,
+      handRuleContext: extra && extra.handRuleContext,
     };
     // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
     handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径

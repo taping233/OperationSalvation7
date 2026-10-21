@@ -146,3 +146,27 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(Base.peek(1).stash[0].count).toBe(2);
   });
 });
+
+it('普通基地操作与保存保留退役家具、旧消费收据及未知字段', async () => {
+  const home = { owned: { chair: 2, 'future-owned': { note: '保留' } },
+    placements: [{ instanceId: 'chair-legacy-1', furnitureId: 'chair', x: 2, y: 3 }],
+    displays: [{ slotId: 'display-left', ref: { kind: 'collection', refId: 'old-card' } }],
+    futureHome: { revision: 7 } };
+  const requests = {
+    'home.purchase:old-request': { fingerprint: 'old-payload', result: { ok: true, value: { costCoins: 3, instanceIds: ['chair-legacy-1'] }, revision: 3 } },
+    'home.commitLayout:old-layout': { fingerprint: 'old-layout-payload', result: { ok: true, revision: 3 } },
+    'home.setDisplay:old-display': { fingerprint: 'old-display-payload', result: { ok: true, revision: 3 } },
+  };
+  const original = { ...persisted(), home, unknownFeature: { saved: true }, _m01: { revision: 4, requests } };
+  localStorage.setItem(key, JSON.stringify(original));
+  Base.use(1);
+  expect(Base.peek(1).home).toEqual(home);
+  expect(await Base.unlockBack('retired-data-check')).toBe(true);
+  expect(await Base.save()).toBe(true);
+  const saved = persisted();
+  expect(saved.home).toEqual(home);
+  expect(saved._m01.requests).toEqual(requests);
+  expect(saved.unknownFeature).toEqual(original.unknownFeature);
+  expect(saved.coins).toBe(original.coins);
+  expect(Base.use(1).home).toEqual(home);
+});

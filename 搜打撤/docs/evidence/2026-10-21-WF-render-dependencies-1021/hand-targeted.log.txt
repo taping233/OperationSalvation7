@@ -1,0 +1,40 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤
+
+·······················stdout | tests/skull-sword-effective-session.test.js > 内部免费释放按已显示不朽斩结算并同UID回手
+DIRECT_RELEASE {"shown":"不朽斩","raw":"初始攻击","delta":5,"retained":true,"energyDelta":0}
+
+··stdout | tests/skull-sword-effective-session.test.js > 内部免费释放缺少转换模板时不能回退初始攻击
+MISSING_RELEASE {"delta":0,"retained":true,"raw":"初始攻击"}
+
+······stdout | tests/skull-sword-effective-session.test.js > 玩家已提交有效副本，支付前新规则缺模板仍拒绝扣费与打出
+PLAYER_SOURCE_RACE {"delta":0,"energyDelta":0,"retained":true}
+
+······stderr | tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量1，足费才打出
+Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)
+    at module.exports (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at HTMLCanvasElementImpl.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js:42:5)
+    at HTMLCanvasElement.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/generated/HTMLCanvasElement.js:131:58)
+    at foeAttackLine (/workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:190:20)
+    at fire (/workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:289:61)
+    at /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:432:15
+    at /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.feedback.js:28:5 undefined
+
+······stderr | tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量2，足费才打出
+Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)
+    at module.exports (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at HTMLCanvasElementImpl.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js:42:5)
+    at HTMLCanvasElement.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/generated/HTMLCanvasElement.js:131:58)
+    at foeAttackLine (/workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:190:20)
+    at fire (/workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:289:61)
+    at /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.vfx.js:432:15
+    at /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤/game/src/battle/view/battle.feedback.js:28:5 undefined
+
+······················································································································································
+
+ Test Files  10 passed (10)
+      Tests  193 passed (193)
+   Start at  13:00:56
+   Duration  12.33s (transform 1.32s, setup 0ms, collect 5.14s, tests 13.12s, environment 3.15s, prepare 629ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/target-tests.json

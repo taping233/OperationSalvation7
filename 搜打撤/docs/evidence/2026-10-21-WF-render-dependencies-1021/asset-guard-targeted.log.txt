@@ -1,0 +1,273 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 pretest
+> npm run narrative:compile && node scripts/validate-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+> codename7-soudache-game@0.60.0 test
+> vitest run --reporter=dot tests/runtime-asset-redundancy.test.js tests/runtime-asset-redundancy-plugin.test.js --reporter=verbose
+
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 256
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 256
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key 417ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category 515ms
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects selector changes between alias injection and manifest generation before touching output 50ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 285
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 285
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection 167ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps all 91 reviewed source bytes while excluding their production copies, metadata and stale alias keys
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps all 91 reviewed source bytes while excluding their production copies, metadata and stale alias keys
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config 525ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores the whole high-resolution family after redraw and leaves every injected alias canonical published
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 200
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 113 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores the whole high-resolution family after redraw and leaves every injected alias canonical published
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 200
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 113 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores the whole high-resolution family after redraw and leaves every injected alias canonical published
+[assets] Changed/missing reviewed source bytes for original-chest-rigs; retaining its source assets.
+
+stderr | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores the whole high-resolution family after redraw and leaves every injected alias canonical published
+[assets] Changed/missing reviewed source bytes for original-chest-rigs; retaining its source assets.
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps all 91 reviewed source bytes while excluding their production copies, metadata and stale alias keys 247ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores all five weather source images after one changes, while preserving their source bytes
+[assets] reviewed unused production images omitted: 281
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 44 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores all five weather source images after one changes, while preserving their source bytes
+[assets] reviewed unused production images omitted: 281
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 44 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores all five weather source images after one changes, while preserving their source bytes
+[assets] Changed/missing reviewed source bytes for slot-weather; retaining its source assets.
+
+stderr | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores all five weather source images after one changes, while preserving their source bytes
+[assets] Changed/missing reviewed source bytes for slot-weather; retaining its source assets.
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores the whole high-resolution family after redraw and leaves every injected alias canonical published 501ms
+· ✓ tests/runtime-asset-redundancy.test.js > keeps reviewed asset decisions identical across Git LF and Windows CRLF sources 7ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate if the reviewed battle-layer asset consumer changes or loses approval 56ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images 2691ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects source edits between config, buildStart and closeBundle, without reusing a stale source hash
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects source edits between config, buildStart and closeBundle, without reusing a stale source hash
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores all five weather source images after one changes, while preserving their source bytes 250ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects a late generated raw image.src path even when family words were split before joining
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects a late generated raw image.src path even when family words were split before joining
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects source edits between config, buildStart and closeBundle, without reusing a stale source hash 218ms
+· ✓ tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > rejects a late generated raw image.src path even when family words were split before joining 193ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs 2415ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references 125ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > keeps the current safe timeline and restores any referenced or changed retired rig selector 1ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits only unused reviewed files and retains future static or configured references 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > reads all catalog sequence and static fallback names on every decision, including restored legacy frames 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: undefined 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {} 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{}} 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[]}} 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[0]}} 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":["sprite-v1/frame-001"]},"staticFallback":1} 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains a whole category after a selector changes or disappears 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate for new or changed opaque constructors and syntax/read uncertainty 1ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > does not treat ordinary static assets or unrelated template strings as opaque 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > checks the complete Rollup graph including async modules and generated manifests 1ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > rejects a selection change between early manifest generation and final copy 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > accepts only static license URLs and inert raw SVG exports while rejecting restored asset references 1ms
+· ✓ tests/runtime-asset-redundancy.test.js > pins indirect URL inputs even when their change has no recognizable asset constructor 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > retains all candidates when an explicit path dependency or its owning consumer is missing 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > keeps the reviewed sample callback and catalog in the explicit sound path dependency set 0ms
+· ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > requires valid fixed source bytes, retains the whole affected family, and leaves other families independent 2ms
+· ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains split directory/token references and rejects asset-root arrays, including raw image.src joins 3ms
+· ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains weather after either SVG selector changes/disappears without loosening the chest source guard 1ms
+· ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family 2ms
+· ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > preserves active safe/supply frames and rejects late restored family tokens and root joins in the graph 1ms
+
+
+ Test Files  2 passed (2)
+      Tests  39 passed (39)
+   Start at  13:23:35
+   Duration  5.65s (transform 149ms, setup 0ms, collect 188ms, tests 8.40s, environment 3ms, prepare 111ms)
+
+
+ Test Files  2 passed (2)
+      Tests  39 passed (39)
+   Start at  13:23:35
+   Duration  5.66s (transform 149ms, setup 0ms, collect 188ms, tests 8.40s, environment 3ms, prepare 111ms)
+

@@ -1,0 +1,60 @@
+{
+  "sourceHead": "eaa27f33c4ca3781118e7289707da3b22927ff2a",
+  "scenario": "9 distinct cards, status scans all 9, then 9 visible groups; 18 production domain eligibility calls",
+  "before": {
+    "counters": {
+      "lookups": 162,
+      "handMaps": 18,
+      "handFilters": 18
+    },
+    "results": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "after": {
+    "counters": {
+      "lookups": 9,
+      "handMaps": 1,
+      "handFilters": 1
+    },
+    "results": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "resultsEqual": true,
+  "scope": "Deterministic operation counts, not FPS/frame-time measurements"
+}

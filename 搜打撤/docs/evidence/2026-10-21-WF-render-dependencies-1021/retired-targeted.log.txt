@@ -1,0 +1,68 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification
+
+···············································································································stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 加载失败释放覆盖/开关/缓存；同页重试成功
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/page-loading.js:77:22 {
+  cause: Error: network unavailable
+      at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/hub-lazy-entry.test.js:212:22
+      at file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 终局首次下载失败保留原回基地按钮，可直接再次点击重试
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/page-loading.js:77:22 {
+  cause: Error: first fetch failed
+      at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/hub-lazy-entry.test.js:233:22
+      at file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+·············································································stderr | tests/base-corrupt-field.test.js > 基地档字段类型损坏兜底（F1） > 损坏档存在时选档页五档全渲染、不抛异常
+[base] 存档字段 stats 类型损坏（string），已回落默认值
+[base] 存档字段 characters 类型损坏（number），已回落默认值
+[base] 存档字段 stats 类型损坏（string），已回落默认值
+[base] 存档字段 characters 类型损坏（number），已回落默认值
+
+stderr | tests/base-corrupt-field.test.js > 基地档字段类型损坏兜底（F1） > 单档 peek 抛异常时选档页仍渲染其余档位并给出可见错误（原档不写回）
+[menu] 档位 3 存档渲染异常，原档已保留未写回： TypeError: Cannot create property 'bossKills' on string 'junk'
+    at Object.peek (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/base-corrupt-field.test.js:99:28)
+    at openSlotPicker (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/game.menu.pages.js:390:35)
+    at Object.startNewGame (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/game.menu.pages.js:681:29)
+    at enterMenuPage (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/game.menu.js:42:54)
+    at Object.startNewGame (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/game.menu.js:93:36)
+    at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/base-corrupt-field.test.js:104:29
+    at Proxy.assertThrows (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:2767:5)
+    at Proxy.methodWrapper (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)
+    at Proxy.<anonymous> (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1088:12)
+    at Proxy.overwritingMethodWrapper (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1735:33)
+[menu] 档位 03 存档数据异常，已保留原档未写回
+
+··········stderr | tests/m01-base-commit.test.js > M01 基地快照与提交边界 > M01-A：未来版本与损坏档拒绝被历史 save 或新门面覆盖
+[base] 档位 1 存档版本(3)新于当前游戏(2)，拒绝读取
+
+stderr | tests/m01-base-commit.test.js > M01 基地快照与提交边界 > M01-A：未来版本与损坏档拒绝被历史 save 或新门面覆盖
+[base] 档位 1 存档版本(3)新于当前游戏(2)，拒绝读取
+
+stderr | tests/m01-base-commit.test.js > M01 基地快照与提交边界 > M01-A：未来版本与损坏档拒绝被历史 save 或新门面覆盖
+[base] 档位 1 存档版本(3)新于当前游戏(2)，拒绝读取
+
+stderr | tests/m01-base-commit.test.js > M01 基地快照与提交边界 > M01-A：未来版本与损坏档拒绝被历史 save 或新门面覆盖
+[base] 档位 2 存档数据损坏，原档已保留，备份等待存档锁
+
+········································································
+
+ Test Files  22 passed (22)
+      Tests  270 passed (270)
+   Start at  13:13:23
+   Duration  18.79s (transform 792ms, setup 0ms, collect 1.59s, tests 7.43s, environment 5.78s, prepare 1.11s)
+

@@ -1,0 +1,8 @@
+{
+  "file": "game/src/battle/view/battle.layers.js",
+  "beforeSha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+  "afterSha256": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+  "allStringAndTemplateQuasisUnchanged": true,
+  "comparedNodes": 587,
+  "exactDelta": "Only forwards handRuleContext into unplayableReason and copies extra.handRuleContext into render context; asset path expressions untouched."
+}
