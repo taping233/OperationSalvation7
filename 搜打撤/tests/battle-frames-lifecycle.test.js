@@ -22,7 +22,7 @@ const pixi = vi.hoisted(() => {
           view.height = Math.round(height * this.resolution);
           this.screen = { width: view.width / this.resolution, height: view.height / this.resolution };
         }),
-        render() { pixi.rendered += 1; } };
+        render() { pixi.rendered += 1; pixi.onRender?.(); } };
     }
     stop() {}
     start() {}
@@ -38,7 +38,7 @@ const pixi = vi.hoisted(() => {
   }
   return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite,
     unloadGate: null, finishUnload: null, loadGate: null, finishLoad: null,
-    idleEnabled: true, idlePaths: new Set(), rendered: 0, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
+    idleEnabled: true, idlePaths: new Set(), rendered: 0, onRender: null, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
     blocked: null, missing: new Set() };
 });
 
@@ -109,6 +109,7 @@ describe('battle frame lifecycle', () => {
     pixi.inFlight = 0;
     pixi.maxInFlight = 0;
     pixi.rendered = 0;
+    pixi.onRender = null;
     pixi.blocked = null;
     pixi.missing.clear();
     document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img /></div></div></div></div><div id="unitFrames"></div></div>';
@@ -152,6 +153,61 @@ describe('battle frame lifecycle', () => {
     expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
     setPerformanceSettings({ fps: 120 });
     expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+  });
+
+  it.each(['cold', 'reattach'])('does not resubmit an unchanged frame after synchronous %s paint', async path => {
+    vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    vi.spyOn(body.querySelector('.sts-figure'), 'getBoundingClientRect').mockReturnValue({ left: 50, top: 60, width: 100, height: 150 });
+    await attach(body); await finishFrames('changwuyu');
+    if (path === 'reattach') await attach(body);
+    const painted = pixi.rendered;
+    expect(painted).toBe(path === 'cold' ? 1 : 2);
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted);
+  });
+
+  it.each(['cold', 'reattach', 'ticker'])('preserves invalidation raised during %s paint', async path => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    if (path !== 'cold') { await attach(body); await finishFrames('changwuyu'); }
+    pixi.onRender = () => { pixi.onRender = null; setPerformanceSettings({ quality: path === 'ticker' ? 'high' : 'low', fps: 30 }); };
+    if (path === 'ticker') { play('atk'); setPerformanceSettings({ quality: 'low', fps: 30 }); clock.mockReturnValue(1000); pixi.tick(); }
+    else { await attach(body); await finishFrames('changwuyu'); }
+    const painted = pixi.rendered;
+    // Still before the next animation frame; the quality change nevertheless needs repaint.
+    clock.mockReturnValue(path === 'ticker' ? 1040 : 1000); pixi.tick();
+    expect(pixi.rendered).toBe(painted + 1);
+  });
+
+  it.each(['cold', 'reattach', 'ticker'])('retains retry work and the original error when %s paint throws', async path => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    if (path !== 'cold') { await attach(body); await finishFrames('changwuyu'); }
+    const error = new Error('controlled render failure');
+    pixi.onRender = () => { pixi.onRender = null; throw error; };
+    if (path === 'ticker') { play('atk'); setPerformanceSettings({ quality: 'low', fps: 30 }); clock.mockReturnValue(1000); expect(() => pixi.tick()).toThrow(error); }
+    else await expect(attach(body)).rejects.toBe(error);
+    const painted = pixi.rendered;
+    clock.mockReturnValue(path === 'ticker' ? 1040 : 1000); pixi.tick();
+    expect(pixi.rendered).toBe(painted + 1);
+    expect(document.getElementById('unitFrames').hidden).toBe(false);
+  });
+
+  it('does not revive a frame owner released by a throwing paint hook', async () => {
+    vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    await attach(body); await finishFrames('changwuyu');
+    const error = new Error('departed renderer');
+    let released;
+    pixi.onRender = () => { pixi.onRender = null; released = hide(); throw error; };
+    await expect(attach(body)).rejects.toBe(error);
+    await released;
+    const painted = pixi.rendered;
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted);
+    expect(cacheStats().activeFrameSessions).toBe(0);
+    expect(document.getElementById('unitFrames').hidden).toBe(true);
   });
 
   it('continues a live combo action and reads its remaining contact time from the player clock', async () => {

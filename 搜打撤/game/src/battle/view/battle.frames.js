@@ -514,6 +514,18 @@ function tickLoop() {
   }
 }
 
+// Consume only the invalidation being painted. A render hook may dirty this frame
+// again; never clear that newer work after render, and retain retries on failure.
+function commitFrame(app) {
+  const frame = cur;
+  if (frame) frame.dirty = false;
+  try { app.renderer.render(app.stage); }
+  catch (error) {
+    if (cur === frame && frame) frame.dirty = true;
+    throw error;
+  }
+}
+
 function startLoop() {
   appPromise.then(rt => {
     if (!rt) return;
@@ -526,8 +538,7 @@ function startLoop() {
       // 上一帧内容继续显示（两种 canvas 后端均保留已绘画面）；帧率按角色封顶。
       if (wanted && cur && cur.dirty && cur.fig && cur.fig.isConnected
           && frameDrawScheduler.shouldDraw(performance.now(), { active: true, covered: document.hidden })) {
-        cur.dirty = false;
-        app.renderer.render(app.stage);
+        commitFrame(app);
       }
     });
     app.stop();   // autoStart=false：只在 wakeRenderer 拉起时跑
@@ -587,7 +598,7 @@ function attach(body) {
           && liveFrameApp && !reduceMotion() && !staticDiagnostic()) {
         img.style.visibility = 'hidden';
         syncFrameSurface(true); layout();
-        liveFrameApp.renderer.render(liveFrameApp.stage);
+        commitFrame(liveFrameApp);
         const host = document.getElementById('unitFrames');
         if (host) host.hidden = false;
         startGeometryPolling(); wakeRenderer(600);
@@ -651,7 +662,7 @@ async function attachCurrent(body) {
     cur.portraitFill = fill; cur.lastRect = null;
     img.style.visibility = 'hidden';
     layout();
-    rt.app.renderer.render(rt.app.stage);
+    commitFrame(rt.app);
     return true;
   }
   const ov = document.getElementById('overlay');
@@ -669,7 +680,7 @@ async function attachCurrent(body) {
   frameDrawScheduler.invalidate();
   startLoop();
   playSeq('idle', fixedFrameRole(role) ? 0 : Random.random('fx'));
-  rt.app.renderer.render(rt.app.stage);   // 就绪 Promise 兑现前真正提交角色首帧。
+  commitFrame(rt.app);   // 就绪 Promise 兑现前真正提交角色首帧。
   wakeRenderer(600);
   return true;
 }

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-frame-commit-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_frame_commit_release",
+  "goal": "Consume completed frame-paint dirty work without losing reentrant invalidation, and cover existing Rules settlement behavior",
+  "paths": [
+    "game/src/battle/view/battle.frames.js",
+    "tests/battle-frames-lifecycle.test.js",
+    "tests/battle-frames-ownership.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/performance.md",
+    "docs/evidence/2026-10-21-frame-paint-commit/README.md",
+    "tests/battle-rules-settlement.test.js"
+  ],
+  "doneWhen": [
+    "Reviewed exact patch and normal frozen full gate with original build budgets verified; formal browser QA parent-owned"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "155 frame/asset focused tests and27 real-UI policy tests, lint, mutation controls;812 build inputs and1595 outputs reconciled",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Normal frozen FULL and ordinary hook pending; formal browser comparison and publication not performed"
+  ],
+  "updatedAt": "2026-10-21T13:09:00.000Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

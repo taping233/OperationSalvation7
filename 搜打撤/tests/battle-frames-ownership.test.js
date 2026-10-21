@@ -13,7 +13,7 @@ const pixi = vi.hoisted(() => {
       this.view = document.createElement('canvas');
       this.stage = { addChild() {} };
       this.ticker = { maxFPS: 0, stop() {}, start() {}, add(fn) { pixi.tick = fn; } };
-      this.renderer = { type: 1, render() { pixi.rendered += 1; } };
+      this.renderer = { type: 1, render() { pixi.rendered += 1; pixi.onRender?.(); } };
     }
     stop() { pixi.stopped += 1; }
     start() { pixi.started += 1; }
@@ -31,7 +31,7 @@ const pixi = vi.hoisted(() => {
   }
   return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite,
     unloadGate: null, finishUnload: null, loadGate: null, finishLoad: null,
-    idleEnabled: true, idlePaths: new Set(), rendered: 0, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
+    idleEnabled: true, idlePaths: new Set(), rendered: 0, onRender: null, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
     blocked: null, missing: new Set(), failInit: false, failSprite: false, destroyed: 0, started: 0, stopped: 0 };
 });
 
@@ -67,6 +67,7 @@ vi.mock('pixi.js', () => ({
   },
 }));
 
+import { setPerformanceSettings } from '../game/src/core/performance-settings.js';
 import { emit as emitBattleEvent } from '../game/src/core/event-bus.js';
 import { createBattleDecisionPresenter, restoreCombatScene } from '../game/src/battle/view/battle.decision-shell.js';
 import { attach, cacheStats, hide, play, presentDeath } from '../game/src/battle/view/battle.frames.js';
@@ -99,7 +100,7 @@ function mount(token = 1) {
   document.querySelector('.battle-stage')._battleToken = token;
   return document.getElementById('ovBody');
 }
-beforeEach(() => { pixi.loaded.length = 0; pixi.unloaded.length = 0; pixi.inFlight = 0; pixi.started = 0; pixi.stopped = 0; });
+beforeEach(() => { pixi.onRender = null; pixi.loaded.length = 0; pixi.unloaded.length = 0; pixi.inFlight = 0; pixi.started = 0; pixi.stopped = 0; });
 afterEach(async () => { for (const release of releaseProbes) release(); releaseProbes.clear(); globalThis.fetch = probeFetchFallback; pixi.finishLoad?.(); pixi.loadGate = null; await hide(); document.querySelectorAll('#unitFrames').forEach(host => { if (!host.querySelector('canvas')) host.remove(); }); vi.restoreAllMocks(); vi.useRealTimers(); });
 it('does not leave failed Pixi hosts behind after repeated initialization failures', async () => {
   pixi.failInit = true;
@@ -351,6 +352,45 @@ it.each(['settings', true])('retains one role through repeated same-battle setti
   console.info('[frame-settings-operation-counts]', JSON.stringify({ initial: baseline,
     repeatedSettings: 3, addedLoads: pixi.loaded.length - baseline.loads,
     addedSettingsUnloads: baseline.unloads, actualCloseUnloads: pixi.unloaded.length }));
+});
+
+it('does not resubmit an unchanged frame after a synchronous warm return paint', async () => {
+  const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+  const body = mount(110);
+  let left = 50;
+  vi.spyOn(body.querySelector('.sts-figure'), 'getBoundingClientRect').mockImplementation(() => ({ left, top: 60, width: 100, height: 150 }));
+  await attach(body); await finishFrames('changwuyu');
+  pixi.tick(); // Settle the first paint before the separately measured warm return.
+  const back = settingsPanel(body);
+  left = 80; // Covered geometry changed: the mandatory warm paint must include it.
+  await flush(); expect(back()).toBe(true);
+  const before = pixi.rendered;
+  const ready = attach(body);
+  expect(pixi.rendered).toBe(before + 1);
+  expect(await ready).toBe(true);
+  clock.mockReturnValue(1017); // Next draw budget, still before the next idle frame.
+  pixi.tick();
+  expect(pixi.rendered).toBe(before + 1);
+});
+
+it.each(['invalidate', 'throw'])('retains new work during a warm paint (%s)', async behavior => {
+  vi.spyOn(performance, 'now').mockReturnValue(1000);
+  const body = mount(111);
+  await attach(body); await finishFrames('changwuyu');
+  const back = settingsPanel(body); await flush(); expect(back()).toBe(true);
+  const error = new Error('warm paint failure');
+  pixi.onRender = () => {
+    pixi.onRender = null;
+    if (behavior === 'throw') throw error;
+    setPerformanceSettings({ quality: 'low', fps: 30 });
+  };
+  try {
+    if (behavior === 'throw') expect(() => attach(body)).toThrow(error);
+    else expect(await attach(body)).toBe(true);
+    const painted = pixi.rendered;
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted + 1);
+  } finally { setPerformanceSettings({ quality: 'balanced', fps: 60 }); }
 });
 
 it('returns during a pending first-frame load without duplicate loads or old callback resurrection', async () => {
