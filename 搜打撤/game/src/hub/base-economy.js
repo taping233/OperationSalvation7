@@ -7,7 +7,7 @@
 /** @typedef {{ card: BaseEconomyCard, count?: number }} BaseEconomyCardInput */
 /** @typedef {{ coins: number, wood: number, rations: number, keys: number, stash: BaseEconomyCardStack[], achClaimed: Record<string, boolean>, collClaimed: Record<string, boolean>, backs: Record<string, boolean> }} BaseEconomyState */
 /** @typedef {{ ok: false, why: 'save', msg: string }} BaseEconomySaveFailure */
-/** @typedef {{ ok: false, why: 'invalid' | 'poor' | 'full' | 'empty' | 'claimed' }} BaseEconomyFailure */
+/** @typedef {{ ok: false, why: 'invalid' | 'poor' | 'full' | 'empty' | 'claimed', msg?: string }} BaseEconomyFailure */
 /** @typedef {{ ok: true }} BaseEconomySuccess */
 /** @typedef {'wood' | 'rations' | 'keys'} BaseEconomyMaterial */
 /** @typedef {{ wood?: number, rations?: number, keys?: number }} BaseEconomyReward */

@@ -8,22 +8,24 @@ export const DIRECT_TRIGGER_POINTS = Object.freeze(['onAcquire', 'onDraw', 'onCo
 export const BATTLE_TRIGGER_POINTS = Object.freeze(['onPlay', ...REGISTERED_TRIGGER_POINTS, ...DIRECT_TRIGGER_POINTS]);
 
 /** 出牌执行视图可剥离其他时点；预检仍读取保留下来的完整声明。
- * @param {import('./card-execution-plan.types').ExecutionCard | null | undefined} card */
+ * @template TOperation
+ * @param {import('./card-execution-plan.types').ExecutionCard<TOperation> | null | undefined} card */
 export function triggerDeclarations(card) {
   return card?._registeredTriggers ?? card?.rules?.triggers;
 }
 
 /** 显式空容器同样拥有该时点，不能回退到卡面文本。
- * @param {import('./card-execution-plan.types').ExecutionCard | null | undefined} card
- * @param {import('./card-execution-plan.types').TriggerPoint} point */
+ * @template TOperation
+ * @param {import('./card-execution-plan.types').ExecutionCard<TOperation> | null | undefined} card
+ * @param {keyof import('./card-execution-plan.types').TriggerDeclarations} point */
 export function hasStructuredTrigger(card, point) {
   const triggers = triggerDeclarations(card);
   return (triggers != null && Object.prototype.hasOwnProperty.call(triggers, point))
     || ownsBuiltinExecutionDomain(card);
 }
 
-/** @param {import('./card-execution-plan.types').ExecutionCard | null | undefined} card
- * @param {import('./card-execution-plan.types').EquipmentPoint} key */
+/** @template TOperation @param {import('./card-execution-plan.types').ExecutionCard<TOperation> | null | undefined} card
+ * @param {keyof import('./card-execution-plan.types').EquipmentDeclarations} key */
 export function hasStructuredEquipField(card, key) {
   const equip = card?.rules?.equip;
   return (equip != null && Object.prototype.hasOwnProperty.call(equip, key))

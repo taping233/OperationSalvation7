@@ -4,15 +4,16 @@ export const consumedPileUids = snapshot => snapshot.consumedPile || readConsume
 
 /* 牌堆视图适配：只负责牌堆徽标 HTML，不参与牌堆逻辑。 */
 
-function renderPileBadge({ className = '', dataAct = '', title = '', count = 0, cardBackHTML = '', suffix = '', cap = '' }, escAttr) {
+function renderPileBadge({ className = '', dataAct = '', title = '', count = 0, cardBackHTML = '', suffix = '', cap = '', tooltip = false }, escAttr) {
   const safeTitle = typeof escAttr === 'function' ? escAttr(title) : title;
   // 数量附带牌堆名称；旧动作名仅用于兼容现有点击入口。
   const tag = dataAct ? 'button' : 'span';
-  return `<${tag}${dataAct ? ` type="button" data-act="${dataAct}" aria-label="${safeTitle}"` : ''} class="bt-pile${className ? ` ${className}` : ''}" title="${safeTitle}"><span class="bt-pilecard">${cardBackHTML}</span>${suffix}<b>${count}</b>${cap ? `<i class="bt-pile-cap">${cap}</i>` : ''}</${tag}>`;
+  const help = tooltip ? `data-ui-tip data-ui-tip-title="牌库" data-ui-tip-text="${safeTitle}"` : `title="${safeTitle}"`;
+  return `<${tag}${dataAct ? ` type="button" data-act="${dataAct}" aria-label="${safeTitle}"` : ''} class="bt-pile${className ? ` ${className}` : ''}" ${help}><span class="bt-pilecard" aria-hidden="true">${cardBackHTML}</span>${suffix}<b>${count}</b>${cap ? `<i class="bt-pile-cap">${cap}</i>` : ''}</${tag}>`;
 }
 
 function renderCombatPiles({ mode, drawCount, graveCount, pileTip, cardBackHTML, escAttr }) {
-  const draw = renderPileBadge({ className:'clickable', dataAct:'btDeck', title:mode === 'boss' ? `牌库：${pileTip(drawCount)}（点击查看）` : `牌库：${drawCount.length} 张（仅抽牌效果取牌，回合开始不抽牌；点击查看）`, count:drawCount.length, cardBackHTML, cap:'牌库' }, escAttr);
+  const draw = renderPileBadge({ className:'clickable', dataAct:'btDeck', title:mode === 'boss' ? `牌库：${pileTip(drawCount)}（点击查看）` : `牌库：${drawCount.length} 张（仅抽牌效果取牌，回合开始不抽牌；点击查看）`, count:drawCount.length, cardBackHTML, tooltip:true }, escAttr);
   const grave = renderPileBadge({ className:'clickable', dataAct:'btGrave', title:`${BATTLE_CONSUMED_LABEL}：${pileTip(graveCount)}（不自动洗回，仅由卡牌效果取回；点击查看）`, count:graveCount.length, cardBackHTML:`<span class="down">${cardBackHTML}</span>`, suffix:'[[icon:skull]] ', cap:BATTLE_CONSUMED_LABEL }, escAttr);
   return { draw, rest:grave };
 }

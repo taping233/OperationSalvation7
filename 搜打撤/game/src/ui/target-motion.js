@@ -25,7 +25,12 @@ const setStyles = (element, styles) => {
 
 // A finite animation per element. Native Motion.stop() commits the currently
 // displayed values, so a new target continues from that point rather than a seed.
-export function createTargetMotion({ run = animate, reduced = motionReduced } = {}) {
+// The installed map-easing.mjs accepts a string key and preserves its existing
+// fallback for unknown keys. Keep CSS strings unchanged for native and injected runners.
+/** @typedef {ReturnType<typeof animate> & {animations: {animation: Animation}[]}} NativeMotionGroup */
+/** @type {(element: Element, keyframes: Record<string, string | number | (string | number)[]>, options: {duration: number, delay: number, ease: string}) => NativeMotionGroup} */
+const legacyAnimate = /** @type {(element: Element, keyframes: Record<string, string | number | (string | number)[]>, options: {duration: number, delay: number, ease: string}) => NativeMotionGroup} */ (animate);
+export function createTargetMotion({ run = legacyAnimate, reduced = motionReduced } = {}) {
   const states = new WeakMap(), active = new Set();
   const finishedHandle = result => ({ finished:Promise.resolve(result), stop() {} });
 
@@ -57,6 +62,7 @@ export function createTargetMotion({ run = animate, reduced = motionReduced } = 
     states.delete(element);
   }
 
+/** @param {HTMLElement} element @param {Record<string, string | number>} target @param {{duration?: number, easing?: string, delay?: number, from?: Record<string, string | number>}} [options] */
   function retargetVisual(element, target, { duration = motionTiming.change, easing = motionEasing.enter, delay = 0, from } = {}) {
     if (!element?.style || !target) return finishedHandle(false);
     let state = states.get(element);
@@ -89,10 +95,20 @@ export function createTargetMotion({ run = animate, reduced = motionReduced } = 
     const finished = new Promise(done => { resolve = done; });
     state.resolve = resolve;
     try {
-      const keyframes = Object.fromEntries(Object.entries(goal).map(([key, value]) => [key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()), value]));
-      const before = new Set(element.getAnimations?.() || []);
+      const nativeRunner = run === legacyAnimate;
+      // Explicit entrance poses need no computed-style sampling. Motion mini
+      // otherwise reads styles after each region's seed write, flushing layout.
+      const keyframes = Object.fromEntries(Object.entries(goal).map(([key, value]) => [
+        key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()),
+        nativeRunner && seed?.[key] !== undefined ? [seed[key], value] : value,
+      ]));
+      // The bundled Motion runner exposes exactly the native animations it
+      // creates. Enumerating element animations twice forces style resolution.
+      const before = nativeRunner ? null : new Set(element.getAnimations?.() || []);
       const animation = run(element, keyframes, { duration:Math.max(0, duration) / 1000, delay:Math.max(0, delay) / 1000, ease:easing });
-      state.native = new Set((element.getAnimations?.() || []).filter(item => !before.has(item)));
+      state.native = nativeRunner
+        ? new Set(animation.animations.map(item => 'animation' in item ? item.animation : null).filter(Boolean))
+        : new Set((element.getAnimations?.() || []).filter(item => !before.has(item)));
       state.animation = animation;
       active.add(element);
       const handle = { finished, stop() { if (state.animation === animation) stopVisual(element); } };

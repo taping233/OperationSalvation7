@@ -115,11 +115,11 @@ export type BattleSnapshotInput = {
   consumed?: string[];
   consumedPile?: string[];
   handInfuseCounts?: Record<string, number>;
-  infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
+  infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; battleToken?: number; selectionId?: number; targetIndex?: number | null; [key: string]: unknown }) | null;
   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
   handSelecting: ({ candidateUids?: readonly string[]; canCancel?: boolean; srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
   choosing: ({ options: unknown[]; [key: string]: unknown }) | null;
-  pendingTarget: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
+  pendingTarget: ({ uid: string; card?: BattleCardInput | null; fuelUids?: readonly string[]; battleToken?: number; selectionId?: number; [key: string]: unknown }) | null;
   pendingHint: string | null;
   viewingGrave: boolean;
   viewingDeck: boolean;
@@ -201,11 +201,11 @@ export type BattleSnapshot = {
   readonly consumed?: readonly string[];
   readonly consumedPile?: readonly string[];
   readonly handInfuseCounts?: Readonly<Record<string, number>>;
-  readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
+  readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly battleToken?: number; readonly selectionId?: number; readonly targetIndex?: number | null; readonly [key: string]: unknown }) | null;
   readonly discovering: ({ readonly options: readonly SnapshotBattleCard[]; readonly [key: string]: unknown }) | null;
   readonly handSelecting: SnapshotHandSelecting | null;
   readonly choosing: ({ readonly options: readonly unknown[]; readonly [key: string]: unknown }) | null;
-  readonly pendingTarget: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly [key: string]: unknown }) | null;
+  readonly pendingTarget: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly fuelUids?: readonly string[]; readonly battleToken?: number; readonly selectionId?: number; readonly [key: string]: unknown }) | null;
   readonly pendingHint: string | null;
   readonly viewingGrave: boolean;
   readonly viewingDeck: boolean;

@@ -3,54 +3,46 @@ import { Random } from '../core/random.js';
 import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { makeLastLampEventInstanceId } from '../home/story.last-lamp.js';
 import { EVENT_SCENE_META } from './game.run.data.js';
-import { bindNodeEvent, nodeEventAt, nodeActionBinding } from './node-reward-state.js';
+import { bindNodeEvent, nodeEventAt } from './node-reward-state.js';
 import { createSignalPuzzleState, mountEventSignalPuzzle } from '../ui/event-signal-puzzle.js';
 import { recodeEligibleCards, recodeSourceMatches, recodeSourceSnapshot } from './event-recode-candidates.js';
 import { showEventRecodeResult } from '../ui/event-recode-result.js';
 import { settleEventCommand } from './event-commands.js';
+import { createEventLifecycle } from './event-lifecycle.js';
 
 // Owns one event lifecycle: deterministic draw, page ownership, pending choices,
 // reward handoff and save retry. The flow assembly supplies runtime services.
-export function createRunEventController({
-  game, UI, dom, MAP, getCards, sound, serializeReward, eventCommands, createDice, createCardChoice,
-  captureRunContext, getActiveSlot, saveGame, pick, weighted, scaledEnemy,
+export function createRunEventController(ports) {
+const {
+  game, UI, dom, MAP, getCards, sound, serializeReward, eventCommands, createDice,
+  getActiveSlot, saveGame, pick, weighted, scaledEnemy,
   nodeShell, nodeOpt, enterNode, consumeCurrentCell, finishInstant, cancelLegacyChainMove,
   grantEventCard, openFixedRewardsOnCell, openChestsOnCell, openPocketRestore,
   setBagReturnHook, bagSlots, setCardPageOpen, startBattle,
   RunStorage, storyCommands, eventNarrative, lastLampNarrative,
   eventOptionHTML,
-}) {
+} = ports;
+const lifecycle = ports.lifecycle || createEventLifecycle(ports);
+const { eventSettling, captureEventContext, eventPageBinding, eventNodeShell, closeEventFlow,
+  eventCardChoiceController, resumeEventCardChoice } = lifecycle;
+// Only loaded event/story continuations need this presentation ownership probe.
+function captureEventPresentation({ allowClosing = false } = {}) {
+  const body = UI.el?.ovBody, root = body?.firstElementChild, overlay = UI.el?.overlay;
+  const revision = UI._overlayRevision;
+  const closing = () => overlay?.hidden || overlay?.dataset?.uiClosing || overlay?.classList?.contains('closing');
+  const mayClear = allowClosing && (closing() || root?.matches?.('.flow-transition'));
+  return () => !body || (UI.el?.ovBody === body && UI.el?.overlay === overlay
+    && body.isConnected && overlay?.isConnected
+    && (body.firstElementChild === root || (mayClear && !body.firstElementChild))
+    && (UI._overlayRevision === revision || (mayClear && overlay.hidden && !body.firstElementChild && UI._overlayRevision === revision + 1))
+    && (mayClear || !closing()));
+}
 // ---------- 事件卡（第六批桌游事件：只能经事件格触发，背包记录触发历史） ----------
 // 事件卡池 = 卡牌库中类型「事件」的卡；卡牌库无事件卡时退回旧随机事件表。
 // 导出供开发者节点测试面板（game.run.js devJumpNode）直接进事件页，玩法口径与事件格一致。
-let eventRequest = 0;
-const eventSettling = new WeakSet();
-function captureEventContext() {
-  const request = eventRequest;
-  const current = captureRunContext();
-  return () => request === eventRequest && current() && game.state !== 'title';
-}
-
-function eventPageBinding(act, current) {
-  const active = nodeActionBinding(game, UI, act);
-  const surface = UI.el?.ovBody?.firstElementChild;
-  return () => current() && active() && (!surface || UI.el?.ovBody?.firstElementChild === surface);
-}
-
-function eventNodeShell(spec, current = captureEventContext()) {
-  nodeShell(spec);
-  const body = UI.el?.ovBody, surface = body?.firstElementChild;
-  UI.act('eventExit', () => {
-    if (current() && game.state === 'modal' && !eventSettling.has(nodeEventAt(game))
-      && UI.el?.ovBody === body && (!surface || body.firstElementChild === surface)) closeEventFlow();
-  });
-}
-
-async function runEventDeck() {
-  if (eventSettling.has(nodeEventAt(game))) return;
-  eventRequest++;
+async function runEventDeck(current = lifecycle.beginRequest()) {
+  if (!current || !current()) return;
   if (resumeEventCardChoice()) return;
-  const current = captureEventContext();
   const previous = nodeEventAt(game);
   // 已消费的旧档沿 visited 判定；仍有骰子选择的节点继续原流程。
   if (previous?.settled || game.visited?.[`${game.layerIdx},${game.trackPos}`] && !Number.isInteger(previous?.actionChoice)) {
@@ -60,7 +52,7 @@ async function runEventDeck() {
   if (!await enterNode('event', () => true)) return;
   if (!current()) return;
   const bound = nodeEventAt(game);
-  if (!bound && await tryLastLampEvent()) return;
+  if (!bound && await tryLastLampEvent(current)) return;
   if (!current()) return;
   const deck = getCards().all().filter(c => c.type === '事件');
   if (bound) {
@@ -107,6 +99,7 @@ function currentLastLampIdentity(slotId, runId) {
 }
 
 function currentLastLampPage(binding) {
+  if (!binding.current()) return { ok:false, code:'EVENT_CHANGED', message:'当前事件页面已改变。' };
   const identity = currentLastLampIdentity(binding.slotId, binding.runId);
   if (!identity.ok) return identity;
   if (game.layerIdx !== binding.layerIdx || game.trackPos !== binding.trackPos ||
@@ -114,6 +107,11 @@ function currentLastLampPage(binding) {
     return { ok: false, code: 'EVENT_CHANGED', message: '当前事件节点已改变。' };
   }
   return identity;
+}
+
+function lastLampPageBinding(act, current) {
+  const binding = eventPageBinding(act, current), page = captureEventPresentation();
+  return () => binding() && page();
 }
 
 function lastLampResultText(segmentId, choiceId) {
@@ -135,8 +133,9 @@ function renderLastLampResult(record, text, binding, saveError = '') {
       <button class="evt-opt ok" data-act="lastLampFinish"><b>${saveError ? '重试保存节点' : '记下并离开'}</b></button>`,
   });
   setBagReturnHook(() => { if (currentLastLampPage(binding).ok) renderLastLampResult(record, text, binding, saveError); });
+  const active = lastLampPageBinding('lastLampFinish', binding.current);
   UI.act('lastLampFinish', () => {
-    if (finishing) return;
+    if (finishing || !active()) return;
     if (!currentLastLampPage(binding).ok) return;
     finishing = true;
     const key = `${game.layerIdx},${game.trackPos}`;
@@ -154,7 +153,8 @@ function renderLastLampResult(record, text, binding, saveError = '') {
   UI.refresh(game);
 }
 
-async function tryLastLampEvent() {
+async function tryLastLampEvent(current = captureEventContext()) {
+  if (!current()) return true;
   const slotId = getActiveSlot();
   if (!slotId) return false;
   const identity = RunStorage.readIdentity(slotId);
@@ -165,7 +165,8 @@ async function tryLastLampEvent() {
         sub: '该档位存在待恢复事务，当前节点没有被消费。',
         body: '<button class="evt-opt" data-act="lastLampRetry"><b>重试读取</b><span>恢复完成后再继续；不会写入故事或结算原事件</span></button>',
       });
-      UI.act('lastLampRetry', () => runEventDeck());
+      const active = lastLampPageBinding('lastLampRetry', current);
+      UI.act('lastLampRetry', () => { if (active()) return runEventDeck(); });
       UI.refresh(game);
       return true;
     }
@@ -174,7 +175,7 @@ async function tryLastLampEvent() {
   }
   const runId = identity.value.runId;
   const eventInstanceId = makeLastLampEventInstanceId(runId, game.layerIdx, game.trackPos);
-  const binding = { slotId, runId, eventInstanceId, layerIdx: game.layerIdx, trackPos: game.trackPos };
+  const binding = { current, slotId, runId, eventInstanceId, layerIdx: game.layerIdx, trackPos: game.trackPos };
   const status = storyCommands.inspect(slotId, { runId, eventInstanceId });
   if (!status.ok) { console.warn('[story] 故事状态不可用，保留原数据并回退普通事件', status); return false; }
   if (status.value.kind === 'complete' || status.value.kind === 'already-read-this-run') return false;
@@ -183,10 +184,13 @@ async function tryLastLampEvent() {
     return true;
   }
   const segmentId = status.value.segmentId;
+  const waitingPage = captureEventPresentation({ allowClosing:true });
   let narrative = null;
   try { narrative = await lastLampNarrative(segmentId); }
   catch (error) { console.warn('[story] 环境故事运行失败，回退普通事件', error); }
-  if (!currentLastLampPage(binding).ok) return true;
+  // The completed node transition may naturally clear its old surface. A new
+  // page or event request must not receive this late story continuation.
+  if (!currentLastLampPage(binding).ok || !waitingPage()) return true;
   if (!narrative || !narrative.choices?.length) return false; // 原事件照旧结算，不因故事消费节点
   game.state = 'modal';
   let settled = false;
@@ -194,8 +198,9 @@ async function tryLastLampEvent() {
     sub: esc(narrative.intro),
     body: narrative.choices.map((choice, index) => `<button class="evt-opt ${choice.tone || ''}" data-act="lastLampChoice" data-i="${index}"><b>${esc(choice.label)}</b><span>${esc(choice.detail)}</span></button>`).join(''),
   });
+  const activeChoice = lastLampPageBinding('lastLampChoice', current);
   UI.act('lastLampChoice', async d => {
-    if (settled) return;
+    if (settled || !activeChoice()) return;
     const choice = narrative.choices[+d.i];
     if (!choice) return;
     const boundBefore = currentLastLampPage(binding);
@@ -207,6 +212,8 @@ async function tryLastLampEvent() {
     const requestId = `last-lamp:${eventInstanceId}`;
     const result = await storyCommands.record({ slotId, requestId, expectedRevision: fresh.revision },
       { runId, eventInstanceId, segmentId, choiceId: choice.effect });
+    // A committed Base receipt remains valid even when this page has gone.
+    if (!activeChoice()) return;
     if (!result.ok) {
       settled = false;
       if (currentLastLampPage(binding).ok) showChoiceError(result.message || '故事记录保存失败，请重试');
@@ -224,13 +231,14 @@ async function tryLastLampEvent() {
     renderLastLampResult(record, resultText, binding);
   });
   UI.refresh(game);
-  setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(); });
+  setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(current); });
   function showChoiceError(message) {
     if (!currentLastLampPage(binding).ok) return;
     nodeShell({ tone: 'event', asset: 'story-last-lamp', icon: '[[icon:cross]]', title: '最后一盏引路灯', sub: esc(message),
       body: '<button class="evt-opt" data-act="lastLampChoiceRetry"><b>重试选择</b><span>尚未写入故事，也未消费当前节点</span></button>' });
     setBagReturnHook(() => { if (currentLastLampPage(binding).ok) showChoiceError(message); });
-    UI.act('lastLampChoiceRetry', () => { if (!currentLastLampPage(binding).ok) return; settled = false; tryLastLampEvent(); });
+    const activeRetry = lastLampPageBinding('lastLampChoiceRetry', current);
+    UI.act('lastLampChoiceRetry', () => { if (!activeRetry() || !currentLastLampPage(binding).ok) return; settled = false; tryLastLampEvent(current); });
     UI.refresh(game);
   }
   return true;
@@ -396,34 +404,6 @@ function eventPool(types) {
   return getCards().all().filter(c => wanted.has(c.type) && getCards().isRandomObtainable(c));
 }
 
-function closeEventFlow() {
-  game.state = 'idle';
-  if (!saveRunCheckpoint(saveGame)) {
-    renderEventSaveRetry();
-    return false;
-  }
-  setBagReturnHook(null);
-  UI.hideOverlay();
-  UI.refresh(game);
-  return true;
-}
-
-function renderEventSaveRetry() {
-  const current = captureEventContext();
-  const render = () => {
-    if (!current()) return;
-    game.state = 'modal';
-    eventNodeShell({ tone:'event', icon:'[[icon:notes]]', title:'事件进度尚未保存',
-      sub:'本局已完成的领取、花费与投骰结果会保留。请重试保存，成功后返回地图。',
-      body:nodeOpt('eventSaveRetry', '重试保存并返回地图', '本次操作只保存进度，不重新结算') });
-    const active = eventPageBinding('eventSaveRetry', current);
-    setBagReturnHook(render);
-    UI.act('eventSaveRetry', () => { if (active()) closeEventFlow(); });
-    UI.refresh(game);
-  };
-  render();
-}
-
 // 这里只保留本事件节点的预留与承接事实，不回滚已经发放的资源或奖励快照。
 function settleEventAction(run, record = nodeEventAt(game), consume = true) {
   const accepted = settleEventCommand({ state:game, record, settling:eventSettling, run, consume,
@@ -496,16 +476,6 @@ function spendEventCoins(amount, reason, receipt) {
 }
 
 function claimEventCard(card) { return eventCommands.claimCard(card); }
-
-let eventCardChoices = null;
-function eventCardChoiceController() {
-  // Lazy assembly preserves the session/flow import boundary during boot.
-  return eventCardChoices ||= createCardChoice({
-    game, UI, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell, openFixedRewardsOnCell,
-    captureContext: captureEventContext, close: closeEventFlow,
-  });
-}
-function resumeEventCardChoice() { return eventCardChoiceController().resume(); }
 
 function transformCandidates(card) {
   if (!card || !['武术', '法术', '装备'].includes(card.type)) return [];

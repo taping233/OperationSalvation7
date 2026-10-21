@@ -36,7 +36,7 @@ function currentView(root, stash) {
   for (const node of [view.slots, view.summary, view.footer, view.status, ...view.pets]) if (node && !root.contains(node)) return null;
   return view;
 }
-export function bindDepartureFilters(root, stash, { filters = {}, rarities = [], types = [], rarityOf = card => card.rarity, onFiltersChange = () => {}, cells, renderCard } = {}) {
+export function bindDepartureFilters(root, stash, { filters = {}, rarities = [], types = [], rarityOf = card => card.rarity, onFiltersChange = /** @type {(filters:{rarity:string,type:string,cost:string}) => void} */ (() => {}), cells = undefined, renderCard = undefined } = {}) {
   const pool = root?.querySelector('#depPool');
   const selects = {
     rarity: root?.querySelector('#depFilterRarity'),
@@ -70,7 +70,7 @@ export function bindDepartureFilters(root, stash, { filters = {}, rarities = [],
   const reset = root.querySelector('#depFilterReset');
   const notices = [...pool.querySelectorAll('.ov-empty')];
   const apply = () => {
-    const next = Object.fromEntries(Object.entries(selects).map(([key, select]) => [key, select.value]));
+    const next = /** @type {{rarity:string,type:string,cost:string}} */ (Object.fromEntries(Object.entries(selects).map(([key, select]) => [key, select.value])));
     const active = Object.values(next).some(Boolean);
     let visible = 0;
     for (const entry of entries) {
@@ -170,7 +170,7 @@ function reconcileBag(bag, html, rich) {
   while (bag.children.length > next.length) bag.lastElementChild.remove();
 }
 
-export function updateDepartureView(root, { stash, picks, bagHtml, cells, renderCell, renderCard, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
+export function updateDepartureView(root, { stash, picks, bagHtml = undefined, cells, renderCell, renderCard, slots, capacity, capacityHtml, hint, petId, rich, summaryHtml }) {
   const view = currentView(root, stash);
   if (cells && !view) return false;
   const byName = new Map(stash.map(stack => [departureStackKey(stack), stack]));

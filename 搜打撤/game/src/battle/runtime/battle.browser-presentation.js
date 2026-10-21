@@ -6,7 +6,7 @@ import { actionCancellationError, throwIfActionCancelled } from './battle.playba
 function waitForRenderedFrame(signal) {
   throwIfActionCancelled(signal);
   if (typeof requestAnimationFrame !== 'function') return Promise.resolve();
-  return new Promise((resolve, reject) => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     const frame = requestAnimationFrame(done);
     function cleanup() { signal?.removeEventListener('abort', cancel); }
     function done() { cleanup(); resolve(); }

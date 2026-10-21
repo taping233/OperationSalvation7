@@ -17,6 +17,6 @@ function bindRunMixins() {
 // 保留历史公共函数名；首次请求才装载开发实现，Agent 同步门面不受影响。
 function devForceBattle(...args) { return devForceBattleImpl(...args); }
 function devJumpNode(...args) { return devJumpNodeImpl(...args); }
-function openDevConsole(...args) { return openDevConsoleImpl(...args); }
+function openDevConsole(...args) { return /** @type {(...args: unknown[]) => ReturnType<typeof openDevConsoleImpl>} */ (openDevConsoleImpl)(...args); }
 
 export { resumeEventCardChoice, bindRunMixins, moveTo, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, devForceBattle, devJumpNode, openDevConsole };

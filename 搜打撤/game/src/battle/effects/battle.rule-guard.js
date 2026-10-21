@@ -14,11 +14,13 @@ function describeIssues(issues) {
  * @param {unknown} card @returns {void} */
 export function assertCardRulesExecutable(card) {
   const result = inspectCardRuleCapability(card);
-  if (!result.ok) throw new TypeError(`${result.kind === 'invalid' ? 'Invalid' : 'Unsupported'} card rules: ${describeIssues(result.issues)}`);
+  if (result.ok === false) throw new TypeError(`${result.kind === 'invalid' ? 'Invalid' : 'Unsupported'} card rules: ${describeIssues(result.issues)}`);
 }
 
 /** Prepare the same isolated operation view inspected before the action is accepted.
- * @param {object} card @param {readonly object[]} operations */
+ * @template {object} TCard
+ * @template {object} TOperation
+ * @param {TCard} card @param {readonly TOperation[]} operations */
 export function createCardRuleExecution(card, operations) {
   assertCardRulesExecutable(card);
   const execution = createCardRuleExecutionView(card, operations);
@@ -37,7 +39,7 @@ function escapeMessage(value) {
  * @param {unknown} card @param {RuleWarningPort} port @returns {boolean} */
 export function rejectUnsupportedCard(card, port) {
   const result = inspectCardRuleCapability(card);
-  if (result.ok) return false;
+  if (result.ok === true) return false;
   const reason = result.kind === 'invalid' ? '规则格式非法' : '规则尚未支持';
   port.warn(`无法打出：${reason}（${escapeMessage(describeIssues(result.issues))}）`);
   return true;

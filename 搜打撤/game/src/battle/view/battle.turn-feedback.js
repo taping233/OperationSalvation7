@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { FEEDBACK_TIMING, quietFeedback } from '../../ui/feedback-theme.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 
@@ -80,7 +81,7 @@ export function showTurnFeedback(stage, events = []) {
     }
     if (!enemy && !quiet) {
       const incoming = new Set(events.filter(e => e.kind === 'draw' && (e.battleToken == null || e.battleToken === state.token)).map(e => String(e.uid)));
-      const targets = [...stage.querySelectorAll('.sts-energy'), ...[...stage.querySelectorAll('.bt-card[data-uid]')].filter(card => incoming.has(card.dataset.uid))];
+      const targets = [.../** @type {NodeListOf<BattleElement>} */ (stage.querySelectorAll('.sts-energy')), ...[.../** @type {NodeListOf<BattleElement>} */ (stage.querySelectorAll('.bt-card[data-uid]'))].filter(card => incoming.has(card.dataset.uid))];
       for (const target of targets) if (target.animate) state.animations.push(target.animate([
         { outline: '2px solid transparent', outlineOffset: '4px' },
         { outline: '2px solid #b6cbd7', outlineOffset: '7px', offset: .3 },

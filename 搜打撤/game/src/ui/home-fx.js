@@ -2,9 +2,9 @@ import { interfaceReducedMotion } from './interface-motion.js';
 
 // Home cover details: frame-batched pointer parallax and plate spotlight, sparkles, mist, grain, sheen and a status readout.
 const title = document.getElementById('title');
-const inner = title?.querySelector('.title-inner');
-const brand = title?.querySelector('.home-brand');
-const credits = document.getElementById('homeCredits');
+const inner = /** @type {HTMLElement} */ (title?.querySelector('.title-inner'));
+const brand = /** @type {HTMLElement} */ (title?.querySelector('.home-brand'));
+const credits = /** @type {HTMLDialogElement} */ (document.getElementById('homeCredits'));
 
 function sceneInteractive() {
   return !title.hidden && !document.hidden && !credits?.open
@@ -45,6 +45,7 @@ function bindSpotlight() {
     plate.style.setProperty('--my', `${Math.round((y - box.top) * sy)}px`);
   };
   title.addEventListener('pointermove', event => {
+      if (!(event.target instanceof Element)) return;
     if (!sceneInteractive() || interfaceReducedMotion()) return;
     plate = event.target.closest?.('.home-plate');
     x = event.clientX;
@@ -128,12 +129,13 @@ function ripple(button, event) {
 function bindPick() {
   const clear = () => {
     delete title.dataset.homePick;
-    title.querySelector('.is-picked')?.classList.remove('is-picked');
+    /** @type {HTMLElement} */ (title.querySelector('.is-picked'))?.classList.remove('is-picked');
   };
   new MutationObserver(() => { if (title.dataset.homePhase === 'rest') clear(); })
     .observe(title, { attributes: true, attributeFilter: ['data-home-phase'] });
   // Registered ahead of home-menu-motion's handler, so the phase is still the one before this click.
   title.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
     const button = event.target.closest?.('button');
     if (!button || !title.contains(button) || button.closest('dialog') || button.disabled || !PICKS.has(button.id)) return;
     if (title.dataset.homePhase === 'out' || interfaceReducedMotion()) return;
@@ -141,7 +143,7 @@ function bindPick() {
     title.dataset.homePick = button.id;
     button.classList.add('is-picked');
     const from = center(button);
-    for (const plate of title.querySelectorAll('.home-plate')) {
+    for (const plate of /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-plate'))) {
       const at = center(plate);
       const delay = plate === button ? 0 : Math.min(90, Math.hypot(at.x - from.x, at.y - from.y) / 11);
       plate.style.setProperty('--hd', `${Math.round(delay)}ms`);
@@ -166,7 +168,7 @@ if (title && inner && title.classList.contains('home-composed')) {
   link.dataset.homeFx = '1';
   document.head.appendChild(link);
 
-  for (const plate of title.querySelectorAll('.home-plate')) {
+  for (const plate of /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-plate'))) {
     plate.appendChild(make('i', 'home-hover-glow'));
   }
 
@@ -179,13 +181,13 @@ if (title && inner && title.classList.contains('home-composed')) {
   title.insertBefore(make('div', 'home-mist'), inner);
   title.insertBefore(make('div', 'home-grain'), inner);
   title.insertBefore(make('div', 'home-flash'), inner);
-  title.querySelector('.home-start')?.appendChild(make('i', 'home-sheen'));
+  /** @type {HTMLElement} */ (title.querySelector('.home-start'))?.appendChild(make('i', 'home-sheen'));
 
   const readout = make('div', 'home-readout');
   readout.innerHTML = '<i class="home-readout-dot"></i><span>LOCAL <b data-clock>--:--:--</b></span><span>ASCENSION COUNCIL <b data-version></b></span>';
   inner.appendChild(readout);
-  const clock = readout.querySelector('[data-clock]');
-  const version = readout.querySelector('[data-version]');
+  const clock = /** @type {HTMLElement} */ (readout.querySelector('[data-clock]'));
+  const version = /** @type {HTMLElement} */ (readout.querySelector('[data-version]'));
   const tick = () => {
     if (!sceneInteractive()) return;
     const time = new Date().toLocaleTimeString('en-GB');

@@ -96,7 +96,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
 
     controller = mountView(panelRoot, {
       model: makeModel(current.value, getPreparation(current.value)),
-      onIntent: async ({ type, payload = {} }) => {
+      onIntent: async (/** @type {import('./preparation.types.js').Intent} */ { type, payload = {} }) => {
         if (!isCurrent(token) || busy) return;
         const slot = slotId;
         const fresh = data.readBase(slot);

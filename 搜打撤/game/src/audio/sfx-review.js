@@ -3,7 +3,9 @@ import { CUE_LABELS, GROUP_LABELS } from './sfx-review.labels.js';
 import { SOURCE_INFO } from './sfx-review.sources.js';
 import { assetUrl } from '../core/asset-url.js';
 
-const $ = id => document.getElementById(id), storageKey = 'sdt-sfx-review-v1';
+/** @typedef {{'playing': HTMLElement, 'selected-count': HTMLElement, 'export': HTMLButtonElement, 'search': HTMLInputElement, 'only-marked': HTMLInputElement, 'categories': HTMLElement, 'by-sound': HTMLElement, 'by-cue': HTMLElement, 'list-title': HTMLElement, 'list-count': HTMLElement, 'view-note': HTMLElement, 'list': HTMLElement, 'volume': HTMLInputElement, 'volume-value': HTMLElement, 'stop': HTMLElement, 'export-text': HTMLTextAreaElement, 'copy-status': HTMLElement, 'export-dialog': HTMLDialogElement, 'dialog-close': HTMLElement, 'copy': HTMLElement, 'totals': HTMLElement}} PageElements */
+/** @template {keyof PageElements} K @param {K} id @returns {PageElements[K]} */
+const $ = id => /** @type {PageElements[K]} */ (document.getElementById(id)), storageKey = 'sdt-sfx-review-v1';
 const label = id => CUE_LABELS[id] || id, pad = (n, width = 2) => String(n).padStart(width, '0');
 const cues = Object.entries(SAMPLE_CUES).map(([id, cue], i) => ({ ...cue, id, number:`E${pad(i + 1, 3)}` }));
 const grouped = new Map();

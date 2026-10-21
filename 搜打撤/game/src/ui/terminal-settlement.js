@@ -21,7 +21,7 @@ import { esc } from '../core/shared.js';
  * @param {string} p.command
  * @param {string} p.retryAct
  * @param {(number|string)} [p.slotId]
- * @param {object} p.extraPayload  追加进 createAttempt/projectEphemeral 的附加字段
+ * @param {object} [p.extraPayload]  追加进 createAttempt/projectEphemeral 的附加字段
  * @param {?({projectEphemeral: (input: object) => *, createAttempt: (input: object) => Promise<{ok: boolean, message?: string, replay?: boolean, attempt?: *, receipt?: {output?: {levelsGained?: number}}}>, commitAttempt: (attempt: *) => Promise<{ok: boolean, message?: string, receipt?: {output?: {levelsGained?: number}}}>})} p.terminalCommands
  */
 export function runTerminalSettlement({ token, current, game, UI, finish, command, retryAct, slotId, extraPayload, terminalCommands }) {
@@ -37,8 +37,8 @@ export function runTerminalSettlement({ token, current, game, UI, finish, comman
       '<p class="ov-note">你的对局进度和能抢运的卡牌都还保留在本档位里，不会丢失；下面重试不会重复扣牌、也不会重复发奖。若暂时重试不成，退出游戏再进入也能继续。</p>' +
       `<button class="ov-btn ok" data-terminal-retry data-act="${retryAct}">重试结算</button>` +
       '<p class="ov-note" data-terminal-retry-status role="status" aria-live="polite"></p>');
-    const button = UI.el?.ovBody?.querySelector('button[data-terminal-retry]');
-    const status = UI.el?.ovBody?.querySelector('[data-terminal-retry-status]');
+    const button = /** @type {HTMLButtonElement} */ (UI.el?.ovBody?.querySelector('button[data-terminal-retry]'));
+    const status = /** @type {HTMLElement} */ (UI.el?.ovBody?.querySelector('[data-terminal-retry-status]'));
     UI.act(retryAct, () => {
       if (!current() || token.busy) return;
       // Both death and abandon reuse native button states; transaction ownership stays below.

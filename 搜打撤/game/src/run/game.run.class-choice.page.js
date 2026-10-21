@@ -98,18 +98,18 @@ export function openClassChoice(options = {}) {
                   <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
                 </div>
               </div>
-              </details><details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；首脑战规则在入场前说明。</p></details>
+              </details><details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>用过的牌进入<b>消耗区</b>，复原后可再用。方法见背包。</p></details>
               ${!mechanism ? `<p class="cls2-story">${esc(CLASS_STORY[story.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>` : ''}
               ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
                 <div class="cls2-skins-wrap">
-                  <div class="cls2-sub">皮肤 <i>SKINS</i></div>
+                  <div class="cls2-sub">皮肤 </div>
                   <div class="cls2-skins">
                     ${[{ id:'default', name:'标准' }, ...SDT.Art.listSkins(displaySel)].map(s => `
                       <button class="cls2-skin-btn${SDT.Art.getSkin(displaySel) === s.id ? ' sel' : ''}" data-act="clsSkin" data-cls="${escAttr(displaySel)}" data-skin="${escAttr(s.id)}" aria-pressed="${SDT.Art.getSkin(displaySel) === s.id}" title="${escAttr(s.name)}"><span class="cls2-skin-preview"><img src="${escAttr(SDT.Art.skinUrl(displaySel, s.id))}" alt="" loading="lazy" decoding="async"></span><span class="cls2-skin-label">${esc(s.name)}</span></button>`).join('')}
                   </div>
                 </div>` : ''}
               <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`
-            : '<p class="cls2-hint">[[icon:medal]]<br>从下方选择一名角色</p>'}
+            : '<p class="cls2-hint">[[icon:medal]]<br>选择人物</p>'}
           </aside>
         </div>
         <div class="cls2-strip">${roster.map(({ cl, c }) => `
@@ -132,7 +132,7 @@ export function openClassChoice(options = {}) {
         }
       }
       mounted.querySelectorAll('.cls2-face').forEach(button => {
-        const selected = button.dataset.cls === sel;
+        const selected = /** @type {HTMLElement} */ (button).dataset.cls === sel;
         button.classList.toggle('sel', selected);
         button.setAttribute('aria-pressed', String(selected));
       });
@@ -180,16 +180,16 @@ export function openClassChoice(options = {}) {
     document.querySelectorAll('.cls-pool-page .hsc-desc, body:has(.cls-pool-page) #cardZoom:not(.cz-photo) .hsc-desc').forEach(desc => {
       const text = desc.querySelector('span');
       if (!text || !desc.clientHeight) return;
-      desc.style.removeProperty('--pool-desc-size');
+      /** @type {HTMLElement} */ (desc).style.removeProperty('--pool-desc-size');
       let size = parseFloat(getComputedStyle(desc).fontSize);
       while (text.scrollHeight > desc.clientHeight && size > 4) {
         size = Math.max(4, size - .25);
-        desc.style.setProperty('--pool-desc-size', `${size}px`);
+        /** @type {HTMLElement} */ (desc).style.setProperty('--pool-desc-size', `${size}px`);
       }
     });
   });
   const poolPreviewHTML = (c) => {
-    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择右侧卡牌<br>这里会显示档案预览</p>';
+    if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择卡牌查看</p>';
     return SDT.Cards.cardHTML(c, 'lg');
   };
   const poolGridHTML = () => {
@@ -259,7 +259,7 @@ export function openClassChoice(options = {}) {
             <div class="pv-body" id="poolPreview" aria-live="polite">${poolPreviewHTML(pool[0])}</div>
           </aside>
           <section class="pool-catalog" aria-label="角色卡档案">
-            <div class="pool-catalog-head"><div><span class="pool-catalog-kicker">COLLECTION INDEX</span><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
+            <div class="pool-catalog-head"><div><b>分类索引</b></div><div class="pool-result-summary">当前档案 <strong id="poolResultCount">${pool.length}</strong> 张</div></div>
             <nav class="pool-filters" id="poolFilters" aria-label="按卡牌类型筛选">${poolFilterHTML(pool)}</nav>
             ${poolGridHTML()}
           </section>
@@ -295,16 +295,16 @@ export function openClassChoice(options = {}) {
     if (!grid || grid.dataset.previewBound) return;
     grid.dataset.previewBound = '1';
     grid.addEventListener('focusin', (e) => {
-      const card = e.target.closest && e.target.closest('[data-act="poolZoom"]');
+      const card = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('[data-act="poolZoom"]');
       if (card) showPoolPreview(card);
     });
   };
   // 悬停大图预览（炉石式，同卡牌库）：mouseover 因子元素冒泡重复触发，90ms 去抖
   let poolPreviewTimer = null;
   UI._hoverHandler = (e) => {
-    const w = e.target.closest ? e.target.closest('#poolGrid [data-act="poolZoom"]') : null;
+    const w = /** @type {Element} */ (e.target).closest ? /** @type {Element} */ (e.target).closest('#poolGrid [data-act="poolZoom"]') : null;
     if (!w || !visible()) return;   // 移出卡面：保留当前预览不动
-    const i = Number(w.dataset.i);
+    const i = Number(/** @type {HTMLElement} */ (w).dataset.i);
     if (poolPreviewTimer) clearTimeout(poolPreviewTimer);
     poolPreviewTimer = setTimeout(() => {
       poolPreviewTimer = null;
@@ -360,13 +360,13 @@ export function openClassChoice(options = {}) {
     const portrait = document.querySelector('#overlay .cls2-fullart');
     const next = portrait?.cloneNode(true);
     if (next) {
-      next.innerHTML = `<div class="roster-art-surface">${SDT.Art.classFullArt(d.cls)}</div>`;
-      next.dataset.skin = d.skin;
-      next.dataset.character = characterFor(d.cls)?.id || '';
+      /** @type {HTMLElement} */ (next).innerHTML = `<div class="roster-art-surface">${SDT.Art.classFullArt(d.cls)}</div>`;
+      /** @type {HTMLElement} */ (next).dataset.skin = d.skin;
+      /** @type {HTMLElement} */ (next).dataset.character = characterFor(d.cls)?.id || '';
     }
     characterMotion.swapPortrait(portrait, next);
     document.querySelectorAll(`.cls2-skin-btn[data-cls="${d.cls}"]`)
-      .forEach(b => { const active = b.dataset.skin === d.skin; b.classList.toggle('sel', active); b.setAttribute('aria-pressed', String(active)); });
+      .forEach(b => { const active = /** @type {HTMLElement} */ (b).dataset.skin === d.skin; b.classList.toggle('sel', active); b.setAttribute('aria-pressed', String(active)); });
     Sfx.tick();
   });
   act('cls2Quit', () => {   // 基地选角按入口回流；独立进入时回标题

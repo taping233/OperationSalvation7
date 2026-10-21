@@ -1,4 +1,4 @@
-import { createCityCut, playPreparedCut } from './camp-entry.js';
+import { createCityCut, playPreparedCut, cityCutDuration } from './camp-entry.js';
 import { interfaceReducedMotion } from './interface-motion.js';
 
 const sceneryURL = new URL('../../assets/ui/settings-shutter-1011.webp', import.meta.url).href;
@@ -16,7 +16,7 @@ export function enterSettingsCut(page) {
   if (interfaceReducedMotion() || !overlay || !card) return;
   const cut = createCityCut({ archive: '系统档案', title: '设置',
     subtitle: 'SETTINGS / 界面与反馈', destination: 'SETTINGS', watermark: 'SYSTEM' });
-  cut.querySelector('.camp-entry-scenery img').src = sceneryURL;
-  const finish = playPreparedCut(page, cut, 980, () => { if (cleanup === finish) cleanup = null; });
+  /** @type {HTMLImageElement} */ (cut.querySelector('.camp-entry-scenery img')).src = sceneryURL;
+  const finish = playPreparedCut(page, cut, cityCutDuration, () => { if (cleanup === finish) cleanup = null; });
   cleanup = finish;
 }

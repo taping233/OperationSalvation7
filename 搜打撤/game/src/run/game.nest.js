@@ -151,9 +151,9 @@ export function openNestPrep() {
       const result = await Bn.unlockNestGate();
       if (!active()) return;
       if (!result.ok) {
-        if (result.code === 'INSUFFICIENT_KEYS') {
-          UI.log(`[[icon:lock]] 钥匙不足：开门需要 <b>${result.need}</b> 把钥匙（现有 ${result.available}）`, 'warn');
-        } else if (result.code === 'INVALID_STATE') UI.log('[[icon:cross]] 基地钥匙数据异常，未扣除钥匙；请返回基地检查存档', 'warn');
+        if (/** @type {Extract<typeof result, {ok:false}>} */ (result).code === 'INSUFFICIENT_KEYS') {
+          UI.log(`[[icon:lock]] 钥匙不足：开门需要 <b>${/** @type {Extract<typeof result, {code:'INSUFFICIENT_KEYS'}>} */ (result).need}</b> 把钥匙（现有 ${/** @type {Extract<typeof result, {code:'INSUFFICIENT_KEYS'}>} */ (result).available}）`, 'warn');
+        } else if (/** @type {Extract<typeof result, {ok:false}>} */ (result).code === 'INVALID_STATE') UI.log('[[icon:cross]] 基地钥匙数据异常，未扣除钥匙；请返回基地检查存档', 'warn');
         else UI.log('[[icon:cross]] 研究所开门未能保存，钥匙未扣除，请稍后重试', 'warn');
         return;
       }
@@ -338,6 +338,7 @@ function advance() {
 }
 
 /* —— 龙巢战斗：牌盒即牌库（BOSS 制式：开局 5 张、每回合 2 费抽 1 张）—— */
+/** @type {(...args: Parameters<typeof startBattle>) => ReturnType<typeof startBattle> | boolean} */
 let battleStartFn = startBattle;
 export function bindBattleStart(fn) { battleStartFn = fn; }
 
@@ -375,7 +376,7 @@ function startNestBattle(def, battleCell = cell()) {
   if (!battleStartFn) return failedStart();
   try {
     const started = battleStartFn(game, foeDefs, options);
-    return started?.then ? started.then(result => result === false ? failedStart() : result, failedStart)
+    return /** @type {Promise<unknown>} */ (started)?.then ? /** @type {Promise<unknown>} */ (started).then(result => result === false ? failedStart() : result, failedStart)
       : started === false ? failedStart() : started;
   } catch (error) { return failedStart(error); }
 }
@@ -706,7 +707,7 @@ function doNestExtract() {
       });
       if (!sameNestExtractionView(pending)) return false;
       if (!result.ok) {
-        showNestExtractRetry(pending, result.message || result.code || '存档暂不可用');
+        showNestExtractRetry(pending, /** @type {Extract<typeof result, {ok:false}>} */ (result).message || /** @type {Extract<typeof result, {ok:false}>} */ (result).code || '存档暂不可用');
         return false;
       }
       if (!sameNestExtractionView(pending)) return false;
@@ -756,4 +757,4 @@ function showLabSettlement(s, st) {
   UI.act('labScoreBack', () => exitToTitle());
 }
 
-sdtDefine('Nest', { openNestPrep, bindBattleStart, startNestBattle, doNestExtract, renderNestMap });
+export const Nest = sdtDefine('Nest', { openNestPrep, bindBattleStart, startNestBattle, doNestExtract, renderNestMap });

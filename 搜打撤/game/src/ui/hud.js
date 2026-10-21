@@ -26,13 +26,13 @@ const $ = (id) => document.getElementById(id);
  * @property {number} maxHp
  * @property {number} coins
  * @property {number} atk
- * @property {(string|undefined)} myClass
- * @property {(boolean|undefined)} runActive
+ * @property {string} [myClass]
+ * @property {boolean} [runActive]
  * @property {Array<{value: number, count?: number}>} inventory
  * @property {(() => ({name: string, nameEn?: string}|null))} [curLayer]  当前层切片（无层为 null）
  * @property {(() => number)} [usedSlots]  背包已占格数（缺省回落 inventory.length）
  * @property {(() => number)} [bagCap]  背包容量（缺省回落 map.rules.bagSize）
- * @property {{rules: {bagSize: number}}} map
+ * @property {{rules: {bagSize?: number}}} map
  */
 
 /** hudMethods 装配进 UI 壳后的 this 切面：el 由 ui.js 注入；_last* 与 _roomActive 为
@@ -56,9 +56,8 @@ const $ = (id) => document.getElementById(id);
 export const hudMethods = {
   /** @param {HudGameView} game @this {HudThis} */
   refresh(game) {
-    // 战斗渲染末尾也会走 UI.refresh：battle 模式下路线面板被整页盖住，直接跳过
-    // （F8 补充；_lastMode==='battle' 的可靠性同 overlay.js 对 page-covered 的既有判断）
-    if (this._lastMode !== 'battle') renderExpeditionPanel($('routePanel'), game, /** @type {(name: string) => string} */ (name => SDT.Icons.img(name)));
+    // 地图工具只属于真实地图界面；非地图刷新也要卸载旧工具，避免浮层后残留。
+    renderExpeditionPanel($('routePanel'), game, /** @type {(name: string) => string} */ (name => SDT.Icons.img(name)));
     // 格子结算链回到 idle，才真正退出房间页；战斗→宝箱等中间切页不会闪回地图。
     if (game.state === 'idle' && this._roomActive) this.endRoom();
     const layer = game.curLayer ? game.curLayer() : null;

@@ -125,7 +125,7 @@ function rememberLibBrowse() {
   const anchor = [...grid.children].find(node => node.classList.contains('lib-item') && node.getBoundingClientRect().bottom > rect.top + 1);
   libBrowseHistory.remember(libRenderedFilter, {
     selectedId: libSelectedId,
-    anchorId: anchor?.dataset.cardId || anchor?.querySelector('[data-card]')?.dataset.card || null,
+    anchorId: /** @type {HTMLElement} */ (anchor)?.dataset.cardId || /** @type {HTMLElement} */ (anchor?.querySelector('[data-card]'))?.dataset.card || null,
     offset: anchor ? (anchor.getBoundingClientRect().top - rect.top) / scale : 0,
     scrollTop: grid.scrollTop,
   });
@@ -261,7 +261,7 @@ function libReferenceOptions(card) {
 }
 
 function libPreviewHTML(c) {
-  if (!c) return `<div class="studio-preview-empty"><div class="pv-empty">${STUDIO_SHUTTER_ICON}</div><p class="pv-hint">暂无选片<br>请调整筛选或搜索条件</p></div>`;
+  if (!c) return `<div class="studio-preview-empty"><div class="pv-empty">${STUDIO_SHUTTER_ICON}</div><p class="pv-hint">暂无选片</p></div>`;
   const damage = +(c.dmg || 0);
   const showDamage = DMG_TYPES.includes(c.type) && (damage > 0 || (damage < 0 && c.dmgType === 'attack'));
   const drawN = +(c.draw || 0) || SDT.Cards.deriveDraw(c);
@@ -601,10 +601,10 @@ function setLibSelection(id, playSound = false, refreshPreview = false, motion =
       dossier.querySelector('.studio-dossier-scroll').innerHTML = template.content.querySelector('.studio-dossier-scroll').innerHTML;
       const freshActions = template.content.querySelector('.studio-preview-actions');
       const actions = dossier.querySelector('.studio-preview-actions');
-      actions.querySelector('.studio-browse-controls').hidden = freshActions.querySelector('.studio-browse-controls').hidden;
+      /** @type {HTMLElement} */ (actions.querySelector('.studio-browse-controls')).hidden = /** @type {HTMLElement} */ (freshActions.querySelector('.studio-browse-controls')).hidden;
       for (const action of ['libPrev', 'libNext', 'libInspect']) {
-        const existing = actions.querySelector(`[data-act="${action}"]`);
-        const fresh = freshActions.querySelector(`[data-act="${action}"]`);
+        const existing = /** @type {HTMLButtonElement} */ (actions.querySelector(`[data-act="${action}"]`));
+        const fresh = /** @type {HTMLButtonElement} */ (freshActions.querySelector(`[data-act="${action}"]`));
         existing.disabled = fresh.disabled;
         if (action === 'libInspect') existing.dataset.card = card.id;
       }
@@ -646,8 +646,8 @@ function bindLibGridNavigation() {
   }, { passive: true });
   grid.addEventListener('focusin', (e) => {
     if (!isCurrentLibPage(session)) return;
-    const card = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
-    if (card) setLibSelection(card.dataset.card);
+    const card = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('.lib-cardwrap[data-card]');
+    if (card) setLibSelection(/** @type {HTMLElement} */ (card).dataset.card);
   });
   grid.addEventListener('pointermove', e => {
     if (!isCurrentLibPage(session)) return;
@@ -656,9 +656,9 @@ function bindLibGridNavigation() {
   grid.addEventListener('keydown', (e) => {
     if (!isCurrentLibPage(session)) return;
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
-    const current = e.target.closest && e.target.closest('.lib-cardwrap[data-card]');
+    const current = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('.lib-cardwrap[data-card]');
     const item = current?.closest('.lib-item');
-    const index = Number(item?.dataset.i);
+    const index = Number(/** @type {HTMLElement} */ (item)?.dataset.i);
     if (!current || !Number.isInteger(index)) return;
     const all = libFiltered();
     const cols = Math.max(1, getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length || 4);
@@ -702,7 +702,7 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
   if (resultCount) {
     // 全量时隐藏「陈列」组（09-23 计数语义：馆藏=总量，陈列只在筛选分家后有意义）
     const showWrap = resultCount.closest('.lib-show');
-    if (showWrap) showWrap.hidden = (n === libCards.length);
+    if (showWrap) /** @type {HTMLElement} */ (showWrap).hidden = (n === libCards.length);
     resultCount.textContent = n;
   }
   if (grid) {
@@ -735,22 +735,22 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
 
 // 侧栏筛选控件同步到当前 libFilter（局部重绘时不重建侧栏，得手动回写控件状态）
 function syncLibFilterUI() {
-  const q = document.getElementById('cardSearch'); if (q) q.value = libFilter.q;
-  const rar = document.getElementById('libRar'); if (rar) rar.value = libFilter.rar;
-  const cls = document.getElementById('libCls'); if (cls) cls.value = libFilter.cls;
-  const sort = document.getElementById('libSort'); if (sort) sort.value = libFilter.sort;
+  const q = document.getElementById('cardSearch'); if (q) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (q).value = libFilter.q;
+  const rar = document.getElementById('libRar'); if (rar) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (rar).value = libFilter.rar;
+  const cls = document.getElementById('libCls'); if (cls) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (cls).value = libFilter.cls;
+  const sort = document.getElementById('libSort'); if (sort) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (sort).value = libFilter.sort;
   const counts = libCategoryCounts();
   document.querySelectorAll('.clib-tabs .type-tab').forEach(b => {
-    const active = b.dataset.t === libFilter.tab;
+    const active = /** @type {HTMLElement} */ (b).dataset.t === libFilter.tab;
     b.classList.toggle('on', active);
     b.setAttribute('aria-pressed', String(active));
     b.setAttribute('aria-selected', String(active));
-    b.tabIndex = active ? 0 : -1;
-    b.setAttribute('aria-label', `${b.dataset.t === '能力卡' ? '能力' : b.dataset.t}，${counts[b.dataset.t] || 0}张`);
+    /** @type {HTMLElement} */ (b).tabIndex = active ? 0 : -1;
+    b.setAttribute('aria-label', `${/** @type {HTMLElement} */ (b).dataset.t === '能力卡' ? '能力' : /** @type {HTMLElement} */ (b).dataset.t}，${counts[/** @type {HTMLElement} */ (b).dataset.t] || 0}张`);
     if (active) document.getElementById('libGrid')?.setAttribute('aria-labelledby', b.id);
   });
   const hasCondition = libFilter.tab !== '全部' || libFilter.rar !== '全部' || libFilter.cls !== '全部' || !!libFilter.q.trim() || libFilter.sort !== 'rarity';
-  document.querySelectorAll('.studio-clear').forEach(button => { button.disabled = !hasCondition; });
+  document.querySelectorAll('.studio-clear').forEach(button => { /** @type {HTMLButtonElement} */ (button).disabled = !hasCondition; });
   refreshPhotoStudioControls(document.querySelector('.studio-unified'));
   syncStudioTabMarker();
 }
@@ -814,6 +814,7 @@ function renderCardLibrary() {
       </div>
     </div>`, 'page');
   const page = document.querySelector('.card-library-page');
+  /** @type {{root: Element, slot: number|null, actions: Map<string, (...args: unknown[]) => unknown>, inputHandler?: EventListener, hoverHandler?: EventListener}} */
   const session = libPageSession = { root: page, slot: SDT.Base?.slot, actions: new Map() };
   const signal = libFilterKeyController.signal;
   document.addEventListener('sdt-overlay-mode', () => {
@@ -935,11 +936,11 @@ function renderCardLibrary() {
   });
   libAct('delCard', (d) => {
     if (!CARD_DESIGNER_WRITES_ENABLED) return;
-    const btn = [...document.querySelectorAll('.card-library-page [data-act="delCard"][data-id]')].find(el => el.dataset.id === d.id);
-    if (btn && !btn.dataset.confirm) {
-      btn.dataset.confirm = '1'; btn.textContent = '确认删除？'; btn.classList.add('arm');
+    const btn = [...document.querySelectorAll('.card-library-page [data-act="delCard"][data-id]')].find(el => /** @type {HTMLElement} */ (el).dataset.id === d.id);
+    if (btn && !/** @type {HTMLElement} */ (btn).dataset.confirm) {
+      /** @type {HTMLElement} */ (btn).dataset.confirm = '1'; btn.textContent = '确认删除？'; btn.classList.add('arm');
       setTimeout(() => {
-        if (btn.isConnected) { delete btn.dataset.confirm; btn.textContent = '删除'; btn.classList.remove('arm'); }
+        if (btn.isConnected) { delete /** @type {HTMLElement} */ (btn).dataset.confirm; btn.textContent = '删除'; btn.classList.remove('arm'); }
       }, 2600);
       return;
     }
@@ -966,18 +967,18 @@ function renderCardLibrary() {
   UI._inputHandler = session.inputHandler = (e) => {
     if (!isCurrentLibPage(session)) return;
     let prism = false;   // 彩蛋 2 的触发条件：筛到「棱彩」
-    if (e.target.id === 'cardSearch') {
-      libFilter.q = e.target.value;
+    if (/** @type {HTMLElement} */ (e.target).id === 'cardSearch') {
+      libFilter.q = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value;
       clearTimeout(libSearchTimer);
       libSearchTimer = null;
-      if (!e.isComposing && !libSearchComposing) libSearchTimer = setTimeout(() => renderLibGrid({ reason: 'search' }), 120);
+      if (!/** @type {KeyboardEvent} */ (e).isComposing && !libSearchComposing) libSearchTimer = setTimeout(() => renderLibGrid({ reason: 'search' }), 120);
       return;
     }
-    else if (e.target.id === 'libRar') { libFilter.rar = e.target.value; prism = e.target.value === '棱彩'; }
-    else if (e.target.id === 'libCls') { libFilter.cls = e.target.value; }
-    else if (e.target.id === 'libSort') { libFilter.sort = e.target.value; }
+    else if (/** @type {HTMLElement} */ (e.target).id === 'libRar') { libFilter.rar = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; prism = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value === '棱彩'; }
+    else if (/** @type {HTMLElement} */ (e.target).id === 'libCls') { libFilter.cls = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; }
+    else if (/** @type {HTMLElement} */ (e.target).id === 'libSort') { libFilter.sort = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; }
     else return;
-    renderLibGrid({ reason: e.target.id === 'libSort' ? 'sort' : 'filter' });
+    renderLibGrid({ reason: /** @type {HTMLElement} */ (e.target).id === 'libSort' ? 'sort' : 'filter' });
     if (prism) libHoloEgg();
   };
   // 悬停大图预览（炉石式）。mouseover 会因子元素冒泡重复触发：
@@ -989,8 +990,8 @@ function renderCardLibrary() {
   UI._hoverHandler = session.hoverHandler = (e) => {
     if (!isCurrentLibPage(session)) return;
     if (Date.now() < libHoverBlockedUntil) return;
-    const w = e.target.closest ? e.target.closest('[data-card]') : null;
-    const id = w ? w.dataset.card : null;
+    const w = /** @type {Element} */ (e.target).closest ? /** @type {Element} */ (e.target).closest('[data-card]') : null;
+    const id = w ? /** @type {HTMLElement} */ (w).dataset.card : null;
     if (id === libHoveredId) return;
     libHoveredId = id;
     if (libPreviewTimer) clearTimeout(libPreviewTimer);
@@ -1013,7 +1014,7 @@ function renderCardLibrary() {
   search?.addEventListener('compositionend', () => {
     if (!isCurrentLibPage(session)) return;
     libSearchComposing = false;
-    libFilter.q = search.value;
+    libFilter.q = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (search).value;
     clearTimeout(libSearchTimer);
     libSearchTimer = setTimeout(() => renderLibGrid({ reason: 'search' }), 120);
   });
@@ -1031,8 +1032,8 @@ function renderCardLibrary() {
   }, { capture: true, signal: libFilterKeyController.signal });
   if (page) page.addEventListener('keydown', (e) => {
     if (!isCurrentLibPage(session)) return;
-    if (e.isComposing) { e.stopPropagation(); return; }
-    if (e.key !== '/' || e.ctrlKey || e.metaKey || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    if (/** @type {KeyboardEvent} */ (e).isComposing) { e.stopPropagation(); return; }
+    if (/** @type {KeyboardEvent} */ (e).key !== '/' || /** @type {KeyboardEvent} */ (e).ctrlKey || /** @type {KeyboardEvent} */ (e).metaKey || /INPUT|SELECT|TEXTAREA/.test(/** @type {Element} */ (e.target).tagName)) return;
     e.preventDefault(); document.getElementById('cardSearch')?.focus();
   });
   UI.refresh(game);
@@ -1058,17 +1059,17 @@ export async function preparePhotoStudioEntry(signal) {
   });
   const cleanup = [];
   let finish;
-  const timeout = new Promise(resolve => { finish = resolve; });
+  const timeout = new Promise(/** @param {(value?: void) => void} resolve */ resolve => { finish = resolve; });
   const timer = setTimeout(finish, 2200);
   const abort = () => finish();
   signal?.addEventListener('abort', abort, { once: true });
   try {
     const ready = images.map(image => {
-      if (image.complete && image.naturalWidth) {
-        try { return Promise.resolve(image.decode?.()).catch(() => {}); }
+      if (/** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth) {
+        try { return Promise.resolve(/** @type {HTMLImageElement} */ (image).decode?.()).catch(() => {}); }
         catch { return undefined; }
       }
-      return new Promise(resolve => {
+      return new Promise(/** @param {(value?: void) => void} resolve */ resolve => {
         const done = () => resolve();
         image.addEventListener('load', done, { once: true });
         image.addEventListener('error', done, { once: true });

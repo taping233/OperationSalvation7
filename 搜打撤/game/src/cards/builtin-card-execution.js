@@ -183,7 +183,7 @@ freezeBuiltinData(BUILTIN_PREVIOUS_VARIANTS);
 
 // Missing native points are explicitly inert. Custom/unknown cards and native
 // declarations still awaiting migration retain the separate legacy adapter.
-/** @param {import('./card-execution-plan.types').ExecutionCard | null | undefined} card */
+/** @template TOperation @param {import('./card-execution-plan.types').ExecutionCard<TOperation> | null | undefined} card */
 export function ownsBuiltinExecutionDomain(card) {
   return !!card && isBuiltinExecutableCard(card) && !!card.rules
     && !card.rules?.battle?.hosted?.length;

@@ -1,6 +1,6 @@
 import { RULES } from './rules.js';
 import { sdtDefine } from './sdt-facade.js';
-import mapData from '../../data/map.json';
+import mapData from '../../data/map.json' with { type: 'json' };
 
 /* ============================================================
  * 搜打撤 —— 地图静态数据表
@@ -14,7 +14,8 @@ import mapData from '../../data/map.json';
  * ============================================================ */
 
 /* ESM 垫片：命名空间由 sdt-facade.js 唯一创建 */
-sdtDefine('MAP', {
+/** @type {typeof mapData & {items:typeof mapData.items & {rations:typeof mapData.items.rations & {count?:number}},rules:{-readonly [K in keyof typeof RULES]:typeof RULES[K]},rollCount:(size:number[],rand:()=>number)=>number}} */
+export const MAP = sdtDefine('MAP', {
   ...mapData,
 
   // 对局模式会临时调整治疗等数值，因此地图持有基线规则的可变副本。

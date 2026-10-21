@@ -133,6 +133,6 @@ import { sdtDefine } from './sdt-facade.js';
     } catch { return fail(step + '失败，原内容与未完成现场已保留'); }
   }
 
-  sdtDefine('Notes', { all, get, set, clearAll, migrateLegacyCoordinates });
+  export const Notes = sdtDefine('Notes', { all, get, set, clearAll, migrateLegacyCoordinates });
 
 export { KEY };

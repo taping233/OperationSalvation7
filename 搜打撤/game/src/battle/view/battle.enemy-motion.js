@@ -4,7 +4,7 @@ import '../../../css/battle-attack-profiles.css';
 // One enemy sample using its existing illustration. Other enemy families retain their motion.
 const active = new WeakMap();
 export function playEnemyMotion(figure, action) {
-  const image = figure?.querySelector('img');
+  const image = /** @type {HTMLImageElement} */ (figure?.querySelector('img'));
   if (!image?.getAttribute('src')?.includes('/bandit.webp') || !image.animate
     || window.SDT?.Motion?.reduceMotion?.()) return false;
   const frames = action === 'attack' ? [

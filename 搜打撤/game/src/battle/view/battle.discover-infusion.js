@@ -1,9 +1,8 @@
-import { requiresInfusion } from '../effects/battle.infusion.js';
 // Presentation only; effectiveInfuse comes from the shared inspection API, including waivers.
-export function discoverInfusionNote(act, effectiveInfuse, card) {
-  if (effectiveInfuse > 0 && requiresInfusion(card)) {
-    if (act === 'pouch') return '未注能，无法施放；锦囊牌不会消耗';
-    if (['play', 'potion', 'playKeep'].includes(act)) return '未注能，无法直接施放；所选牌将留在手牌';
-  }
-  return ['play', 'potion', 'playKeep', 'pouch'].includes(act) && effectiveInfuse > 0 ? '未注能' : '';
+// 反馈1021·5：「直接释放/直接施放」词条释放注能卡视为已注能（docs/rules.md:98），
+// 面板不再提示「无法施放/留手」的旧拒绝语义，只说明直释按已注能结算；
+// 文案以「未注能」开头以沿用发现面板的短徽标裁剪（battle.discover-view.js）。
+export function discoverInfusionNote(act, effectiveInfuse) {
+  if (!['play', 'potion', 'playKeep', 'pouch'].includes(act)) return '';
+  return effectiveInfuse > 0 ? '未注能，直释视为已注能' : '';
 }

@@ -1,6 +1,6 @@
 // Long BGM uses the browser media backend; never falls back to whole-file WebAudio decoding.
 export class SceneMusicPlayer {
-  constructor(createTrack, { fadeInMs = 1100, fadeOutMs = 900, backend = 'html5', onError = () => {}, onStateChange = () => {} } = {}) {
+  constructor(createTrack, { fadeInMs = 1100, fadeOutMs = 900, backend = 'html5', onError = /** @type {(scene:string,error:unknown)=>void} */ (() => {}), onStateChange = () => {} } = {}) {
     if (!['html5', 'webaudio'].includes(backend)) throw new Error('Unsupported music backend');
     this.backend = backend;
     this.lastError = null;

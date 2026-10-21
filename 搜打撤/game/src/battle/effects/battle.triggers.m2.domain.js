@@ -22,7 +22,7 @@ const instanceRuntime = context.runtime;
 function createTriggerRunner({
   resolveCard, log, esc, getAliveFoes, addEnergy,
   isBattleActive = () => true, getBattleToken = () => null,
-  getActionSignal = () => null, throwIfCancelled = () => {}, hasPlayerCurse = () => false,
+  getActionSignal = () => null, throwIfCancelled = /** @type {(signal: AbortSignal) => void} */ (() => {}), hasPlayerCurse = () => false,
 }) {
   /** uid -> { card, points, left }；points: 时点名 -> ops 数组；left: duration 剩余次数 */
   const registry = new Map();

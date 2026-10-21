@@ -57,6 +57,11 @@ body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-board {
   backdrop-filter:blur(16px) saturate(1.04); -webkit-backdrop-filter:blur(16px) saturate(1.04); scrollbar-color:#91c2c666 transparent;
 }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile { border-radius:0; background:transparent; }
+/* Card artwork supplies its own frame; suppress the slot and motion outline. */
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.card-face {
+  border-color:transparent; box-shadow:none; outline:none !important;
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.card-face:focus-visible .hs-card { filter:brightness(1.08); }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile::before { border-radius:0; background:none; }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile:not(.card-face) { background:#244c5659; border-bottom-color:var(--ui-line); }
 body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.sel { border-color:var(--bag-gold); box-shadow:0 0 0 1.5px var(--bag-gold),0 10px 30px #00000059; }

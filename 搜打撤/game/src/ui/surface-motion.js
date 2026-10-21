@@ -26,9 +26,9 @@ function releaseVisual(root) {
 function targetSurface(root, regions, profile, fast, restart, phase) {
   // Fast close preparation can omit the page profile. Read the live content too,
   // so archive dealing and saved-run cuts never receive inline animation:none.
-  const dedicatedScene = root.id === 'overlay' && root.querySelector(
+  const dedicatedScene = root.id === 'overlay' && /** @type {HTMLElement} */ (root.querySelector(
     '#ovBody .slot-page:not(.camp-entry-ghost), #ovBody .city-run-transition, #ovBody .expedition-cut',
-  );
+  ));
   if (root.id === 'title' || dedicatedLayouts.has(profile?.key) || dedicatedScene) {
     releaseVisual(root);
     return;
@@ -47,7 +47,7 @@ function targetSurface(root, regions, profile, fast, restart, phase) {
     : profile?.duration ?? (root.dataset.uiMotion === 'panel' || root.dataset.uiMotion === 'confirm'
       ? motionTiming.detailEnter : surfaceTiming.enter);
   const entries = new Map();
-  const panel = root.id === 'overlay' ? root.querySelector(':scope > .card') : root;
+  const panel = root.id === 'overlay' ? /** @type {HTMLElement} */ (root.querySelector(':scope > .card')) : root;
   // One opacity owner per content chain: the surface reveals/hides the whole layer.
   // Shells and regions only move, so their alpha curves cannot multiply the veil.
   entries.set(root, { from: { opacity: profile ? 1 : 0 }, target: { opacity: 1 }, exit: { opacity: 0 }, delay: 0 });
@@ -116,8 +116,8 @@ function reduced() {
 }
 
 function blocks(root) {
-  if (root.id === 'title') return [...root.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout')];
-  const content = root.id === 'overlay' ? root.querySelector('#ovBody') : root;
+  if (root.id === 'title') return [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout'))];
+  const content = root.id === 'overlay' ? /** @type {HTMLElement} */ (root.querySelector('#ovBody')) : root;
   if (!content) return [];
   const visible = el => !el.matches('script, style, link, dialog, [hidden], [aria-hidden="true"]');
   const children = [...content.children].filter(visible);
@@ -133,7 +133,7 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
   const phase = root.dataset.surfacePhase;
   const next = restart || !phase || phase === 'out' ? (phase === 'a' ? 'b' : 'a') : phase;
   const profile = root.id === 'overlay' && (!fast || (!restart && root.dataset.surfaceLayout))
-    ? pageMotionProfile(root.querySelector('#ovBody')) : null;
+    ? pageMotionProfile(/** @type {HTMLElement} */ (root.querySelector('#ovBody'))) : null;
   if (profile) root.dataset.surfaceLayout = profile.key;
   else delete root.dataset.surfaceLayout;
   if (profile?.expedition) root.dataset.surfaceContext = 'expedition';
@@ -150,7 +150,7 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
   }
   const regions = profile ? choreography.map(region => region.el) : blocks(root);
   if (profile) {
-    profile.page.querySelectorAll('.page-in').forEach(el => el.classList.remove('page-in'));
+    /** @type {NodeListOf<HTMLElement>} */ (profile.page.querySelectorAll('.page-in')).forEach(el => el.classList.remove('page-in'));
     // 只让选中的信息区展开，祖先布局容器不叠加旧的大幅滑入。
     for (const el of regions) {
       for (let frame = el.parentElement; frame && profile.page.contains(frame); frame = frame.parentElement) {
@@ -363,8 +363,8 @@ window.matchMedia?.('(prefers-reduced-motion: reduce)').addEventListener?.('chan
 
 // Home and native dialogs own their lifecycle outside UI.showOverlay/showScreen.
 const title = document.getElementById('title');
-const credits = document.getElementById('homeCredits');
-const sug = document.getElementById('sugLayer');
+const credits = /** @type {HTMLDialogElement} */ (document.getElementById('homeCredits'));
+const sug = /** @type {import("./ui.dom.types.js").UIElement} */ (document.getElementById('sugLayer'));
 const lifecycle = new MutationObserver(records => {
   for (const { target, attributeName } of records) {
     if (target === title && attributeName === 'data-home-phase') {

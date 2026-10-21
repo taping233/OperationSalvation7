@@ -80,7 +80,7 @@ function collectUiActions() {
 function findUiElement(name, params) {
   const body = overlayBody();
   if (!body) return null;
-  for (const el of body.querySelectorAll('[data-act]')) {
+  for (const el of /** @type {NodeListOf<HTMLElement & {disabled?:boolean}>} */ (body.querySelectorAll('[data-act]'))) {
     if (el.getAttribute('data-act') !== name) continue;
     const dataset = el.dataset;
     const matched = Object.entries(params || {}).every(([k, v]) => String(dataset[k] ?? '') === String(v ?? ''));
@@ -97,7 +97,7 @@ function collectActionKeys() {
   if (zoom) out.push('czClose:{}');
   const body = overlayBody();
   if (!body || !overlayVisible()) return out;
-  for (const el of body.querySelectorAll('[data-act]')) {
+  for (const el of /** @type {NodeListOf<HTMLElement & {disabled?:boolean}>} */ (body.querySelectorAll('[data-act]'))) {
     const act = el.getAttribute('data-act');
     if (!act) continue;
     if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;

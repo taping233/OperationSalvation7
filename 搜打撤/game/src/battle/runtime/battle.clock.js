@@ -13,7 +13,7 @@ function isTestRuntime() {
 
 function waitPresentationMs(ms, signal) {
   if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
-  return new Promise((resolve, reject) => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     if (signal?.aborted) { reject(signal.reason || new Error('Battle presentation cancelled')); return; }
     const waiter = { remaining: ms, started: 0, timer: 0, done: false };
     const cleanup = () => {
@@ -44,7 +44,7 @@ function waitPresentationMs(ms, signal) {
 function waitHitStop(ms, signal) {
   if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   const release = pausePresentation();
-  return new Promise((resolve, reject) => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     if (signal?.aborted) { release(); reject(signal.reason || new Error('Battle presentation cancelled')); return; }
     const timer = setTimeout(done, demoMs(ms));
     function cleanup() { clearTimeout(timer); signal?.removeEventListener('abort', cancel); release(); }

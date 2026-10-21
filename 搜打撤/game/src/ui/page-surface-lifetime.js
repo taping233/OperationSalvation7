@@ -1,5 +1,6 @@
 // Presentation ownership only. Business entry arbitration remains in page-entry-cancellation.
 // A detached/replaced/closing destination must never receive an old reveal callback.
+/** @param {HTMLElement} page @param {{overlay?: HTMLElement, getRevision?: () => unknown, onInvalidate?: () => void}} [options] */
 export function createPageSurfaceLifetime(page, { overlay = page?.closest('#overlay'), getRevision, onInvalidate } = {}) {
   const controller = new AbortController();
   const revision = getRevision?.();

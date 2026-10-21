@@ -58,3 +58,4 @@ const Agent = Object.freeze({
 });
 
 sdtDefine('Agent', Agent);
+export { Agent };

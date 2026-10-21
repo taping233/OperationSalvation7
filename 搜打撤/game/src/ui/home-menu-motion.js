@@ -3,9 +3,9 @@ import { motionTiming, motionEasing } from './motion-presets.js';
 import '../../css/home-ui-tokens.css';
 
 // Home-menu choreography accompanies the shared interface transitions.
-const title = document.getElementById('title');
+const title = /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'));
 const overlay = document.getElementById('overlay');
-const credits = document.getElementById('homeCredits');
+const credits = /** @type {HTMLDialogElement} */ (document.getElementById('homeCredits'));
 const routes = new Set(['mStart', 'mGuide', 'mAch', 'btnCardLib', 'mSettings', 'mInbox']);
 const homePages = '.slot-page, .beginner-guide, .achievement-gallery, .card-library-page, .settings-page';
 // Only hover/leave feedback is slower; menu actions retain their original dispatch timing.
@@ -47,12 +47,12 @@ export function restoreHomeFromWallpaper() {
   const token = ++returnToken;
   homeHasEntered = true;
   revealVersion = !revealVersion;
-  title.querySelector('.is-picked')?.classList.remove('is-picked');
+  /** @type {import("./ui.dom.types.js").UIElement} */ (title.querySelector('.is-picked'))?.classList.remove('is-picked');
   delete title.dataset.homePick;
   title.style.setProperty('--home-console-duration', '640ms');
   title.style.setProperty('--home-console-delay', '280ms');
   let finishAt = 920;
-  title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout').forEach(region => {
+  /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout')).forEach(region => {
     const delay = region.classList.contains('home-brand') ? 80
       : region.classList.contains('home-footer') ? 880
         : region.classList.contains('home-readout') ? 820 : homeRestoreDelays.get(region.id) ?? 590;
@@ -91,7 +91,7 @@ export function returnHome() {
   title.style.setProperty('--home-console-duration', firstEntry ? '850ms' : '500ms');
   title.style.setProperty('--home-console-delay', firstEntry ? '220ms' : '240ms');
   let finishAt = entryDuration;
-  title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout').forEach(region => {
+  /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-brand, .home-plate, .home-footer, .home-readout')).forEach(region => {
     const plate = region.classList.contains('home-plate');
     const duration = region.classList.contains('home-brand') ? (firstEntry ? 1100 : 640) : plate ? entryDuration : (firstEntry ? 700 : 500);
     const entryDelay = region.classList.contains('home-brand') ? 0
@@ -145,11 +145,11 @@ function watchNavigation() {
       return;
     }
     // A cancelled cold entry removes its cover without ever opening #overlay.
-    if (!document.querySelector('.page-loading') && !credits?.open) { clearRoute(); returnHome(); }
+    if (!/** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.page-loading')) && !credits?.open) { clearRoute(); returnHome(); }
   });
   navigationObserver.observe(document.body, { childList: true });
   setTimeout(() => {
-    if (routeVersion === requested && overlay.hidden && !credits?.open && !document.querySelector('.page-loading')) { clearRoute(); returnHome(); }
+    if (routeVersion === requested && overlay.hidden && !credits?.open && !/** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.page-loading'))) { clearRoute(); returnHome(); }
   }, 1800);
 }
 
@@ -202,12 +202,13 @@ if (title && overlay) {
   document.head.appendChild(link);
 
   title.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
     const button = event.target.closest?.('button');
     if (!button || !title.contains(button) || button.closest('dialog') || button.disabled) return;
     if (button.id === 'btnTitleExit') { animateExit(event, button); return; }
     if (route && title.dataset.homePhase === 'out') {
       // The next click can precede the cover-removal observer after Escape.
-      if (overlay.hidden && !document.querySelector('.page-loading')) clearRoute();
+      if (overlay.hidden && !/** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.page-loading'))) clearRoute();
       else {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -224,13 +225,13 @@ if (title && overlay) {
     tapFeedback(button);
   }, true);
 
-  document.addEventListener('sdt-overlay-mode', event => {
+  document.addEventListener('sdt-overlay-mode', (/** @type {CustomEvent} */ event) => {
     if (!route) return;
     navigationObserver?.disconnect();
     navigationObserver = null;
     const body = document.getElementById('ovBody');
     if (body?.querySelector(homePages)) { leavingHome(); enterPage(); return; }
-    if (event.detail === 'battle' || body?.querySelector('#hubMain, #depMain, .flow-transition, .cls2-page')) {
+    if (event.detail === 'battle' || /** @type {import("./ui.dom.types.js").UIElement} */ (body?.querySelector('#hubMain, #depMain, .flow-transition, .cls2-page'))) {
       clearRoute();
     }
   });

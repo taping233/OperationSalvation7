@@ -1,8 +1,31 @@
 import { rotSeedDescription } from './rot-seed-revision.js';
 import { structuredCardDescription } from './structured-card-description.js';
+import { readBattleValues } from './battle-value-context.js';
 // 卡牌展示文案。只替换已审阅的 id + 原始描述；简单结构化句式从规则填数值。
 // 自定义或复杂描述保留原入口行为；旧存档腐化之种沿现行定版。
 // 文案审阅依据：docs/evidence/2026-10-11-card-description-unification/。
+
+/* 反馈#11（2026-10-21）：战斗内数值按当前实际加成计算显示。
+ * 只改伤害数字句（攻击/法术——固定与真实伤害本就无加成，原文即实际值）；
+ * 加成 = 基础属性 + 本场祝福（与 combat.dealDamage 同口径：atk+atkUp、spellPower+spellUp），
+ * 目标侧（流血加成/冰冻增伤/暗羁绊）随目标变化，不在静态描述里预判。
+ * 非战斗场景（地图/图鉴/文档生成）readBattleValues() 返回 null → 逐字静态。 */
+function applyBattleValues(text, values) {
+  if (!values || !text) return text;
+  const atk = (Number(values.atk) || 0);
+  const spell = (Number(values.spellPower) || 0);
+  return text
+    // 攻击伤害句：造成（你的攻击力 ±N）点攻击伤害 → 实际值（与 dealDamage 同为下限 0）
+    .replace(/造成（你的攻击力\s*([+-])\s*(\d+)）点攻击伤害/g,
+      (_match, sign, bonus) => `造成 ${Math.max(0, atk + (sign === '-' ? -1 : 1) * Number(bonus))} 点攻击伤害`)
+    // 「造成等同于你的攻击力的攻击伤害」（初始攻击等）→ 实际值
+    .replace(/造成等同于你的攻击力的攻击伤害/g, () => `造成 ${Math.max(0, atk)} 点攻击伤害`)
+    // 法术伤害句：造成 N 点法术伤害 → N + 法伤加成
+    .replace(/造成\s*(\d+)\s*点法术伤害/g, (_match, n) => `造成 ${Number(n) + spell} 点法术伤害`)
+    // 未审阅卡面的原始素记号「N′」同样是法术伤害 → 实际值（保留素记号形状）
+    .replace(/(\d+)′/g, (prime, n) => `${Number(n) + spell}′`);
+}
+
 const descriptions = new Map([
   ["starter-emergency-bandage", ["回复12 点生命。", "你回复 12 点生命。"]],
   ["starter-attack", ["攻（+0）：造成等同于攻击力的伤害。", "造成等同于你的攻击力的攻击伤害。"]],
@@ -60,7 +83,7 @@ const descriptions = new Map([
   ["tt3-demon-potion", ["法伤 +2。持续 1 回合。", "你的法伤增加 2 点，持续 1 回合。"]],
   ["tt3-nuke-ray", ["造成8点法术伤害，对其附加3种随机诅咒", "造成 8 点法术伤害；对目标附加 3 种随机诅咒。"]],
   ["tt3-petal", ["回合开始时额外抽1张牌并回复 3 点生命，持续 3 回合。", "回合开始时，你额外抽 1 张牌并回复 3 点生命，持续 3 回合。"]],
-  ["tt3-magic-lamp", ["抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。", "抉择：①发现 1 张卡牌并直接施放；②消灭 1 名受伤的非 BOSS 敌人；③冰冻 2 名角色，你获得 5 点护甲。"]],
+  ["tt3-magic-lamp", ["抉择：1° 发现招式并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。", "抉择：①发现 1 张招式并直接施放；②消灭 1 名受伤的非 BOSS 敌人；③冰冻 2 名角色，你获得 5 点护甲。"]],
   ["tt3-thornfield", ["对所有敌人附加 2 层中毒，并立即触发1次毒伤。", "对全体敌人附加 2 层中毒，并立即触发每名敌人的 1 次毒伤。"]],
   ["tt3-turnabout-potion", ["对所有敌人附加1层中毒。", "对全体敌人附加 1 层中毒。"]],
   ["tt3-firm-barrier", ["延长 1 名角色的冰冻 1 回合，抽1张牌。", "使 1 名角色的冰冻延长 1 回合，并抽 1 张牌。"]],
@@ -238,10 +261,11 @@ export function displayCardDescription(value, id, card) {
   const approvedCard = card && String(card.id) === String(id) && revision &&
     (card.desc === revision[0] || card.desc === revision[1]);
   const text = approvedSource && approvedCard ? structuredCardDescription(card, reviewed) ?? reviewed : reviewed;
-  return text.replace('（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）', '')
+  const cleaned = text.replace('（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）', '')
     .replaceAll('本场战斗消耗牌中', '消耗牌堆中')
     .replaceAll('从本场消耗牌复原', '从消耗牌堆复原')
     .replaceAll('对应消耗区为空时', '对应牌区为空时')
     .replaceAll('弃牌堆', '消耗牌堆').replaceAll('墓地', '消耗牌堆')
     .replaceAll('消耗牌堆或消耗牌堆', '消耗牌堆');
+  return applyBattleValues(cleaned, readBattleValues());
 }

@@ -62,8 +62,9 @@ async function jump(id) {
 function installQuickNav() {
   window.addEventListener('keydown', (e) => {
     if (!e.altKey || e.ctrlKey || e.metaKey) return;
-    const tag = e.target?.tagName;
-    if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
+    const target = e.target instanceof Element ? e.target : null;
+    const tag = target?.tagName;
+    if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || (target instanceof HTMLElement && target.isContentEditable)) return;
     const page = PAGES.find(p => p.key === e.key);
     if (!page) return;
     e.preventDefault();

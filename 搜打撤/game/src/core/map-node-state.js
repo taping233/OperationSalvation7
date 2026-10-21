@@ -2,6 +2,8 @@ import { nodeRestoreAt } from '../run/node-restore-state.js';
 export const BOSS_ALTAR_REQUIREMENT = '先前往污染祭坛，选择「弃 3 张 · 激活祭坛」（普通背包卡牌），或献上 2 枚员工通行证A碎片。仅献祭道具不会激活祭坛。';
 // Display projection only; consuming a cell remains owned by the run flow.
 const CONSUMABLE_TYPES = new Set(['battle', 'shop', 'coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource']);
+const fireRestPending = reward => reward?.type === 'fire' && reward.healUsed !== undefined
+  && !reward.continued && (!reward.healUsed || !reward.restoreUsed);
 
 const status = (id, label, detail, tone, icon) => ({ id, label, detail, tone, icon });
 const rewardHandled = reward => {
@@ -24,6 +26,7 @@ export function mapNodeStatus(game, node) {
   const entryPending = supply?.layerIdx === node.li && supply.trackPos === node.idx
     && Array.isArray(supply.cardIds) && Array.isArray(supply.taken) && supply.taken.length < supply.cardIds.length;
   const restorePending = nodeRestoreAt(game, node.li, node.idx);
+  if (fireRestPending(reward)) return status('pending', '待休整', '回血与复原各可使用一次，未用机会保留。', 'warm', 'fire');
   if (chest || ['event-choice','resource'].includes(reward?.type) && reward.taken === null || entryPending || restorePending
     || type === 'altar' && game.altarActivated && game.altarRewardPending) {
     return status('pending', '待领奖', chest && chestRewardsHandled(chest)
@@ -50,10 +53,11 @@ export function mapNodeStatus(game, node) {
 
 export function isConsumedMapNode(game, node) {
   if (!node) return false;
+  const reward = game.nodeRewards?.[`${node.li},${node.idx}`];
+  if (fireRestPending(reward)) return false;
   if (nodeRestoreAt(game, node.li, node.idx)) return false;
   if (game.nodeChestRewards?.[`${node.li},${node.idx}`]
-    || game.nodeRewards?.[`${node.li},${node.idx}`]?.type === 'event-choice'
-      && game.nodeRewards[`${node.li},${node.idx}`].taken === null) return false;
+    || reward?.type === 'event-choice' && reward.taken === null) return false;
   const isDoor = game.doorKeys?.has(`${node.li},${node.idx}`) ||
     game.layerData?.[node.li]?.doors?.some(door => door.at === node.idx);
   if (isDoor) return false;

@@ -3,6 +3,7 @@ import { createBattleState, transitionBattle, cancelTargeting } from './battle.s
 import { createCombatRuntime } from '../core/combat.factory.js';
 
 /** Each write updates this instance and its compatibility live bindings synchronously. */
+/** @param {{combat?: import('../core/battle.core-ports.types.js').CombatPort}} [options] */
 export function createBattleRuntime({ combat = createCombatRuntime() } = {}) {
 const Combat = combat;
 const subscribers = new Set();
@@ -260,11 +261,7 @@ function resetCastOverrides() {
 /** @typedef {import('../effects/battle.discover-state.js').DiscoveringState} DiscoveringState */
 /** @typedef {import('../effects/battle.discover-state.js').DiscoverQueueJob} DiscoverQueueJob */
 
-/** @type {DiscoveringState} */
 
-/** @type {DiscoverQueueJob[]} */
-
-/** @type {HandSelectionState} */
 
 
 

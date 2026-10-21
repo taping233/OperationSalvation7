@@ -77,6 +77,7 @@ async function startBattle(game, foes, options) {
   }
 }
 
-sdtDefine('BattleLoader', Object.freeze({ ensure: ensureBattleReady, start: startBattle }));
+export const BattleLoader = Object.freeze({ ensure: ensureBattleReady, start: startBattle });
+sdtDefine('BattleLoader', BattleLoader);
 
 export { ensureBattleReady, startBattle };

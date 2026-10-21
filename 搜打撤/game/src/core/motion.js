@@ -1,5 +1,8 @@
 import { sdtDefine } from './sdt-facade.js';
-import { animate } from 'motion/mini';
+import { animate as motionAnimate } from 'motion/mini';
+/** The installed implementation accepts strings and maps unrecognised names to its native default. Preserve the existing CSS input.
+ * @type {(element:Parameters<typeof motionAnimate>[0],keyframes:Parameters<typeof motionAnimate>[1],options:Omit<Parameters<typeof motionAnimate>[2], 'ease'> & {ease?:'ease-out' | NonNullable<Parameters<typeof motionAnimate>[2]>['ease']})=>ReturnType<typeof motionAnimate>} */
+const animate = motionAnimate;
 import '../../css/combat-feedback.css';
 
 
@@ -42,10 +45,22 @@ function pop(element) {
   animate(element, { scale: [1, 1.16, 0.98, 1] }, { duration: 0.32, ease: 'ease-out' });
 }
 
+const overlayAnimations = new WeakMap();
+function cancelOverlayIn(element) {
+  const animation = overlayAnimations.get(element);
+  if (!animation) return false;
+  overlayAnimations.delete(element);
+  animation.cancel();
+  return true;
+}
 function overlayIn(element) {
   if (!canAnimate(element)) return;
-  animate(element, { opacity: [0, 1], y: [18, 0], scale: [0.985, 1] },
+  cancelOverlayIn(element);
+  const animation = animate(element, { opacity: [0, 1], y: [18, 0], scale: [0.985, 1] },
     { duration: 0.28, ease: [0.22, 1, 0.36, 1] });
+  overlayAnimations.set(element, animation);
+  const release = () => { if (overlayAnimations.get(element) === animation) overlayAnimations.delete(element); };
+  animation.finished.then(release, release);
   const options = element.querySelectorAll('.evt-opt, .mode-card, .cls-card');
   if (options.length) {
     options.forEach((option, index) => animate(option, { opacity: [0, 1], x: [14, 0] },
@@ -53,6 +68,6 @@ function overlayIn(element) {
   }
 }
 
-sdtDefine('Motion', Object.freeze({ pop, overlayIn, reduceMotion, refreshReduceMotion }));
+export const Motion = sdtDefine('Motion', Object.freeze({ pop, overlayIn, cancelOverlayIn, reduceMotion, refreshReduceMotion }));
 
-export { overlayIn, pop, reduceMotion, refreshReduceMotion, resolveReducedMotion };
+export { overlayIn, cancelOverlayIn, pop, reduceMotion, refreshReduceMotion, resolveReducedMotion };

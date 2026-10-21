@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { isHandArrivalEvent } from '../core/battle.card-presentation.js';
 import { createAcquisitionIcon } from '../../ui/lucide-acquisition-icon.js';
 import { rect as uiRect } from '../../ui/ui-scale.js';
@@ -67,32 +68,35 @@ function dismissMatching(state, selector) {
 export function updateHandAcquisitionFeedback(stage, snapshot, records, previousUids, events = []) {
   const state = stateFor(stage, snapshot.battleToken);
   if (!state) return;
-  const held = new Set(snapshot.hand);
-  const visible = new Set(records.flatMap(record => record.group.uids));
-  const incoming = new Set(events.filter(event => isHandArrivalEvent(event) && held.has(event.uid)
-    && (event.battleToken == null || event.battleToken === snapshot.battleToken)).map(event => event.uid));
-  for (const uid of incoming) if (!visible.has(uid)) state.pending.add(uid);
-  for (const uid of state.pending) if (!held.has(uid) || visible.has(uid)) state.pending.delete(uid);
+  // Pending off-page arrivals still reconcile on eventless page/hand changes.
+  if (state.pending.size || events.some(isHandArrivalEvent)) {
+    const held = new Set(snapshot.hand);
+    const visible = new Set(records.flatMap(record => record.group.uids));
+    const incoming = new Set(events.filter(event => isHandArrivalEvent(event) && held.has(event.uid)
+      && (event.battleToken == null || event.battleToken === snapshot.battleToken)).map(event => event.uid));
+    for (const uid of incoming) if (!visible.has(uid)) state.pending.add(uid);
+    for (const uid of state.pending) if (!held.has(uid) || visible.has(uid)) state.pending.delete(uid);
 
-  for (const record of records) {
-    const before = previousUids.get(record.slot);
-    if (!before && !reducedMotion()) continue; // New slots already have the original draw flight.
-    const count = record.group.uids.filter(uid => incoming.has(uid) && !before?.has(uid)).length;
-    if (!count) continue;
-    const old = record.slot.querySelector('.bt-hand-acquired');
-    if (old) state.notices.get(old)?.();
-    const label = document.createElement('span');
-    label.className = 'bt-hand-acquired';
-    label.dataset.reducedMotion = String(reducedMotion());
-    const text = document.createElement('span');
-    text.textContent = `入手 +${count}`;
-    label.append(createAcquisitionIcon(), text);
-    label.setAttribute('role', 'status');
-    record.slot.appendChild(label);
-    retainBattleFeedback(stage, label, 1100);
+    if (incoming.size) for (const record of records) {
+      const before = previousUids.get(record.slot);
+      if (!before && !reducedMotion()) continue; // New slots already have the original draw flight.
+      const count = record.group.uids.filter(uid => incoming.has(uid) && !before?.has(uid)).length;
+      if (!count) continue;
+      const old = /** @type {BattleElement} */ (record.slot.querySelector('.bt-hand-acquired'));
+      if (old) state.notices.get(old)?.();
+      const label = document.createElement('span');
+      label.className = 'bt-hand-acquired';
+      label.dataset.reducedMotion = String(reducedMotion());
+      const text = document.createElement('span');
+      text.textContent = `入手 +${count}`;
+      label.append(createAcquisitionIcon(), text);
+      label.setAttribute('role', 'status');
+      record.slot.appendChild(label);
+      retainBattleFeedback(stage, label, 1100);
+    }
   }
 
-  const button = stage.querySelector('.bt-hand-page');
+  const button = /** @type {BattleElement} */ (stage.querySelector('.bt-hand-page'));
   if (state.pageBadge?.parentElement !== button) { state.pageBadge?.remove(); state.pageBadge = null; }
   if (!button) return;
   const baseLabel = (button.getAttribute('aria-label') || '').replace(/，其他栏新增 \d+ 张手牌$/, '');
@@ -111,18 +115,18 @@ export function updateHandAcquisitionFeedback(stage, snapshot, records, previous
     button.appendChild(state.pageBadge);
   }
   const text = `新增 ${state.pending.size}`;
-  const textNode = state.pageBadge.querySelector('.bt-hand-page-new-text');
+  const textNode = /** @type {BattleElement} */ (state.pageBadge.querySelector('.bt-hand-page-new-text'));
   if (textNode.textContent !== text) textNode.textContent = text;
   button.setAttribute('aria-label', `${baseLabel}，其他栏新增 ${state.pending.size} 张手牌`);
 }
 
 function placeRecast(stage, node, event, prev) {
   const stageRect = uiRect(stage), hostRect = uiRect(stage.closest('#overlay') || stage.parentElement);
-  const current = [...stage.querySelectorAll('.bt-card[data-uid]')].find(card => card.dataset.uid === String(event.uid));
+  const current = [.../** @type {NodeListOf<BattleElement>} */ (stage.querySelectorAll('.bt-card[data-uid]'))].find(card => card.dataset.uid === String(event.uid));
   const old = prev?.cards?.[event.uid]?.rect;
   const anchor = current ? uiRect(current) : old
     ? { ...old, left: old.left + hostRect.left, top: old.top + hostRect.top }
-    : uiRect(stage.querySelector('.sts-hand') || stage);
+    : uiRect(/** @type {BattleElement} */ (stage.querySelector('.sts-hand')) || stage);
   const x = anchor.left - stageRect.left + anchor.width / 2;
   const y = anchor.top - stageRect.top - 74;
   node.style.left = `${Math.max(116, Math.min(stageRect.width - 116, x))}px`;
@@ -131,7 +135,7 @@ function placeRecast(stage, node, event, prev) {
 
 function layoutRecasts(stage, notices) {
   if (notices.length < 2) return;
-  const stageRect = uiRect(stage), handRect = uiRect(stage.querySelector('.sts-hand') || stage);
+  const stageRect = uiRect(stage), handRect = uiRect(/** @type {BattleElement} */ (stage.querySelector('.sts-hand')) || stage);
   const center = handRect.left - stageRect.left + handRect.width / 2;
   const y = Math.max(stageRect.height * .61, Math.min(stageRect.height - 180, handRect.top - stageRect.top - 110));
   notices.forEach((node, index) => {

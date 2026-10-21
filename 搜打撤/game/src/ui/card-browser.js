@@ -12,7 +12,7 @@ export function cardBrowserHTML(id, label, itemsHTML, { rows = 2, columns = 0 } 
 export function refreshCardBrowser(root, { reset = false, items: suppliedItems = null, page: requestedPage = null } = {}) {
   const state = instances.get(root);
   if (!state || !isCardBrowserCurrent(root)) return;
-  const track = root.querySelector('.card-browser-track');
+  const track = /** @type {HTMLElement} */ (root.querySelector('.card-browser-track'));
   const style = getComputedStyle(track);
   const minimum = parseFloat(style.getPropertyValue('--card-browser-min')) || 210;
   const gap = parseFloat(style.columnGap) || 20;
@@ -43,7 +43,7 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   // Prepare every new face before changing the visible page or its saved position.
   // A genuine renderer error propagates, leaving the previous page usable for retry.
   if (art) for (const item of visible.slice(first, first + perPage)) {
-    const host = item.querySelector('[data-browser-art]');
+    const host = /** @type {HTMLElement} */ (item.querySelector('[data-browser-art]'));
     if (!host || art.rendered.has(host)) continue;
     const html = art.render(item);
     if (html != null) pendingArt.push([host, window.SDT?.Icons?.rich?.(html) ?? html]);
@@ -63,20 +63,21 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   }
   const empty = String(!visible.length);
   if (root.dataset.empty !== empty) root.dataset.empty = empty;
-  const previous = root.querySelector('[data-browser-page="previous"]');
-  const next = root.querySelector('[data-browser-page="next"]');
-  const position = root.querySelector('.card-browser-position');
+  const previous = /** @type {HTMLButtonElement} */ (root.querySelector('[data-browser-page="previous"]'));
+  const next = /** @type {HTMLButtonElement} */ (root.querySelector('[data-browser-page="next"]'));
+  const position = /** @type {HTMLElement} */ (root.querySelector('.card-browser-position'));
   if (previous.disabled !== (state.page === 0)) previous.disabled = state.page === 0;
   if (next.disabled !== (state.page >= pages - 1)) next.disabled = state.page >= pages - 1;
   const label = visible.length ? `${state.page + 1} / ${pages}` : '暂无卡牌';
   if (position.textContent !== label) position.textContent = label;
   // Paging/filtering must not strand keyboard focus in a newly hidden card or disabled arrow.
-  if (root.contains(focused) && ((focusedItem && focusedItem.hidden) || focused?.matches?.('[data-browser-page]:disabled'))) {
+  if (root.contains(focused) && ((focusedItem instanceof HTMLElement && focusedItem.hidden) || focused?.matches?.('[data-browser-page]:disabled'))) {
     const target = visible[first] || [previous, next].find(button => !button.disabled);
     if (target) target.focus({ preventScroll:true });
     else { root.tabIndex = -1; root.focus({ preventScroll:true }); }
   }
 }
+/** @param {HTMLElement} root @param {{onOpen?: (key: string, item: HTMLElement) => void, onPage?: () => void, renderArt?: (item: HTMLElement) => string}} [options] */
 export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
   if (!root || instances.has(root)) return;
   const key = `${window.SDT?.Base?.slot || ''}/${root.dataset.cardBrowser}`;
@@ -86,7 +87,7 @@ export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
   instances.set(root, state);
   if (renderArt) artRenderers.set(root, { render: renderArt, rendered: new WeakSet() });
   let loadFrame = 0, disposed = false;
-  const track = root.querySelector('.card-browser-track');
+  const track = /** @type {HTMLElement} */ (root.querySelector('.card-browser-track'));
   let measuredWidth = track.clientWidth;
   const schedule = () => {
     if (disposed || !isCardBrowserCurrent(root) || loadFrame || track.clientWidth <= 0) return;
@@ -119,20 +120,22 @@ export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
   });
   lifetime.observe(root.ownerDocument, { childList: true, subtree: true });
   root.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
     if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
-    const paging = event.target.closest('[data-browser-page]');
+    const paging = /** @type {HTMLButtonElement} */ (event.target.closest('[data-browser-page]'));
     if (paging && root.contains(paging) && !paging.disabled) {
       refreshCardBrowser(root, { page: state.page + (paging.dataset.browserPage === 'next' ? 1 : -1) });
       onPage?.(); return;
     }
-    const item = event.target.closest('[data-browser-key]');
+    const item = /** @type {HTMLElement} */ (event.target.closest('[data-browser-key]'));
     if (item && root.contains(item) && !item.hidden) onOpen?.(item.dataset.browserKey, item);
   });
   root.addEventListener('keydown', event => {
+      if (!(event.target instanceof Element)) return;
     if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
     if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.target?.closest?.('input, textarea, select, [contenteditable="true"]')) return;
     const direction = event.key === 'PageDown' ? 'next' : event.key === 'PageUp' ? 'previous' : null;
-    if (direction) { event.preventDefault(); root.querySelector(`[data-browser-page="${direction}"]`).click(); }
+    if (direction) { event.preventDefault(); /** @type {HTMLButtonElement} */ (root.querySelector(`[data-browser-page="${direction}"]`)).click(); }
   });
   root.addEventListener('load', schedule, true);
   refreshCardBrowser(root);

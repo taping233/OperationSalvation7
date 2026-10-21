@@ -75,7 +75,7 @@ export function patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly) {
   const sameZone = grid.dataset.zone === bagZone;
   const scroll = board.scrollTop;
   const focused = previous.contains(document.activeElement) ? document.activeElement : null;
-  const focusData = focused ? { ...focused.dataset } : null;
+  const focusData = focused ? { .../** @type {HTMLElement} */ (focused).dataset } : null;
   const focusIndex = focused ? [...grid.children].indexOf(focused) : -1;
   if (!sameZone) previous.replaceWith(next);
   else {

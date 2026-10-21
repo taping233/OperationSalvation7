@@ -3,6 +3,7 @@ import { isTurbo } from '../core/turbo.js';
 import { visualFrame } from './page-visual-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import '../../css/map-passage.css';
+import { transitionHeadingHTML } from './transition-heading.js';
 
 let active = null;
 export function cancelLayerPassage() { active?.dispose(); }
@@ -11,7 +12,7 @@ export function isLayerPassageActive(game) {
   return active?.game === game;
 }
 function delay(ms, signal) {
-  return new Promise(resolve => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve) => {
     const finish = () => { clearTimeout(timer); signal.removeEventListener('abort', finish); resolve(); };
     const timer = setTimeout(finish, ms);
     signal.addEventListener('abort', finish, { once: true });
@@ -28,12 +29,11 @@ export function showLayerPassage(game, from, to) {
   const layer = document.createElement('div');
   layer.className = 'map-layer-passage';
   layer.setAttribute('role', 'status'); layer.setAttribute('aria-live', 'polite');
-  const kicker = document.createElement('small'); kicker.textContent = 'DEPTH TRANSFER';
-  const title = document.createElement('b'); title.textContent = `第 ${to + 1} 层`;
-  const trail = document.createElement('span'); trail.textContent = `第 ${from + 1} 层 → 第 ${to + 1} 层`;
-  layer.append(kicker, title, trail); document.body.append(layer);
+  layer.setAttribute('aria-label', `第 ${from + 1} 层 → 第 ${to + 1} 层`);
+  layer.innerHTML = transitionHeadingHTML(`第 ${to + 1} 层`);
+  document.body.append(layer);
   let settled = false, complete;
-  const done = new Promise(resolve => { complete = resolve; });
+  const done = new Promise((/** @type {(value?: void) => void} */ resolve) => { complete = resolve; });
   const current = () => !settled && active === operation && lifetime.current()
     && game.runActive && game.discoveredPairs === token && game.layerData === map
     && !game.battleActive && !game.nestActive && ['idle', 'moving'].includes(game.state)

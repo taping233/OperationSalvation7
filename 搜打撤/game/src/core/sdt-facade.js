@@ -7,9 +7,9 @@
  * 门面定位：桌面调试、devTools 与既有测试的兼容层；模块内部新代码
  * 优先使用 ESM 显式 import。
  * ============================================================ */
-/** @typedef {Window & { SDT?: Record<string, unknown> }} SdtWindow */
+/** @typedef {Omit<Window, 'SDT'> & { SDT?: Record<string, unknown> }} SdtWindow */
 /** @type {SdtWindow | null} */
-const browserWindow = (typeof window !== 'undefined') ? /** @type {SdtWindow} */ (window) : null;
+const browserWindow = (typeof window !== 'undefined') ? /** @type {SdtWindow} */ (/** @type {unknown} */ (window)) : null;
 /** @type {Record<string, unknown>} */
 const SDT = browserWindow ? (browserWindow.SDT = browserWindow.SDT || {}) : {};
 

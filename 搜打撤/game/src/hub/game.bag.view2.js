@@ -3,6 +3,7 @@
    架构约束（tests/bag-architecture.test.js）：切片不得 import 壳，互调只经桥。 */
 import SDT from '../core/sdt-facade.js';
 import { esc, escAttr } from '../core/shared.js';
+import { linkedBackHTML } from '../ui/home-linked-interactions.js';
 import '../../css/bag-design-system.css';
 import { bagUseLocation } from './game.bag.rules.js';
 import '../../css/feedback-1018.css';
@@ -117,18 +118,11 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
       </div>` : '';
   const board = `
       <div class="bag-board">
-        ${m.receipt ? `<p class="bag-receipt" role="status">${esc(m.receipt)}</p>` : ''}
+        ${m.receiptHTML || ''}
         <div class="bag-grid" data-zone="${m.bagZone}">${m.tiles.map(tile => tileHTML(tile, resourceCards)).join('')}</div>
         ${m.tiles.length ? '' : `<p class="bag-empty2">${m.bagZone === 'bag' && m.bagFilter !== 'all' ? '该分类没有卡牌或物资。<button class="bag-pill" data-act="bagFilter" data-f="all">显示全部</button>' : `（${zoneNames[m.bagZone]}是空的）`}</p>`}
       </div>`;
-  const exit = `<button class="archive-back" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
-        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>`;
+  const exit = linkedBackHTML('closeBag', '关闭背包', '', 'button', { shortcut:'B / Esc' });
   return `<div class="bag-view bag-v2 ui-design-system bag-art-v3">
       <img class="bag-bg" src="assets/scenes/map-nodes/map-atmosphere-is7-1012.webp" alt="" aria-hidden="true">
       <div class="bag-shell">

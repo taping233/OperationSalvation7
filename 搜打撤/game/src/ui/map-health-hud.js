@@ -2,8 +2,8 @@
 const mounted = new WeakMap();
 
 export function mountMapHealthHud(root) {
-  const body = root.querySelector('.hp-hud-body');
-  const tip = root.querySelector('#mapHealthTip');
+  const body = /** @type {HTMLElement} */ (root.querySelector('.hp-hud-body'));
+  const tip = /** @type {HTMLElement} */ (root.querySelector('#mapHealthTip'));
   if (!body || !tip) return null;
   const doc = root.ownerDocument;
   const abort = new doc.defaultView.AbortController();
@@ -68,7 +68,7 @@ export function mountMapHealthHud(root) {
       label.lastElementChild.textContent = current === 0 ? '耗尽' : low ? '偏低' : '';
       root.setAttribute('aria-label', `生命 ${current}，上限 ${maximum}${low ? '，生命偏低' : ''}`);
       tip.innerHTML = `<strong>生命值</strong><span>当前 ${current} / 上限 ${maximum}</span>`;
-      const bar = root.querySelector('#hpBar');
+      const bar = /** @type {HTMLElement} */ (root.querySelector('#hpBar'));
       if (bar) bar.style.width = `${(pct * 100).toFixed(1)}%`;
       if (!active || instant) { clearFeedback(); setOpen(false); }
       if (active && wasActive && !instant && previous !== null && current !== previous) {

@@ -19,7 +19,7 @@ const choiceSemantics = createChoiceSemanticOperations(context);
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
 
 /**
- * @param {{ cards: SelectionCardsPort, deny: () => void, random01: () => number, throwIfActionCancelled: (signal: AbortSignal | undefined) => void, session: { handSelectQueue: unknown[], choiceQueue: unknown[], resumeTurnEnd?: () => boolean }, [key: string]: unknown }} ports
+ * @param {import('./battle.core-ports.types.js').SelectionPorts} ports
  */
 function createBattleSelectionFlow({
   cards, deny, random01, throwIfActionCancelled,
@@ -82,7 +82,7 @@ function createBattleSelectionFlow({
     },
     output: { log: (message, kind) => instanceRuntime.G.log(message, kind) },
   });
-  const randomDiscoverCard = (...args) => discoverFlow.randomDiscoverCard(...args);
+  const randomDiscoverCard = (/** @type {Parameters<typeof discoverFlow.randomDiscoverCard>} */ ...args) => discoverFlow.randomDiscoverCard(...args);
   const processDiscoverQueue = () => {
     // 空池或不支持的发现任务会自行跳过；继续排队任务，不能留下无人处理的回合续接。
     do { discoverFlow.processDiscoverQueue(); }
@@ -164,7 +164,7 @@ function createBattleSelectionFlow({
         requestBattleRender();
         return;
       }
-      const { uid: cardUid, card, fuelUids, target, freeCost, onResolved } = instanceRuntime.handSelecting.payment || {};
+      const { uid: cardUid, card, fuelUids, target, freeCost, onResolved, directRelease } = instanceRuntime.handSelecting.payment || {};
       const payment = nextSelected;
       const seenPaymentUids = new Set();
       const valid = card && handUids.has(cardUid) && payment.length ===
@@ -186,14 +186,15 @@ function createBattleSelectionFlow({
         requestBattleRender();
         return;
       }
-      if (queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment, onResolved) === false) settleSelections();
+      if (queueCardExecution(cardUid, card, fuelUids || [], target || null, !!freeCost, true, payment, onResolved, null, !!directRelease) === false) settleSelections();
       return;
     }
     // 所有效果选牌都只接受当前手牌中的合格候选；旧按钮不能重复消耗已移出的 UID。
     if (!instanceRuntime.hand.includes(uid) || !matchesHandSelectKey(entry.card, instanceRuntime.handSelecting.type)) return;
     if (instanceRuntime.handSelecting.act === 'play') {
       instanceRuntime.set$handSelecting(null);
-      if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true) === false) settleSelections();   // 选卡施放：不扣费
+      // 选卡施放：不扣费；「直接释放」词条（剑荡妖邪）——注能卡视为已注能（反馈#5b 老板定版）
+      if (queueCardExecution(uid, entry.card, [], alive()[0] || null, true, false, [], null, null, true) === false) settleSelections();
       return;
     }
     if (instanceRuntime.handSelecting.act === 'copy') {

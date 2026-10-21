@@ -1,13 +1,13 @@
 export function courtyardV3HTML() {
   const rain = true;
   return `<section class="courtyard-v3 courtyard-zzz" data-courtyard="${rain ? 'rain' : 'koi'}">
-    <header class="courtyard-v3-heading"><h2>庭院</h2><span>雨中锦鲤池</span></header>
-    <div class="courtyard-zzz-workspace"><nav class="courtyard-v3-modes" aria-label="庭院景观"><b>雨中锦鲤池</b></nav>
+    <header class="courtyard-v3-heading"><h2>庭院</h2></header>
+    <div class="courtyard-zzz-workspace"><nav class="courtyard-v3-modes" aria-label="庭院景观"></nav>
     <div class="courtyard-v3-scene"><canvas class="courtyard-v3-backdrop" aria-hidden="true"></canvas>
       <canvas class="courtyard-v3-canvas" tabindex="0" role="button" aria-label="锦鲤池：点击投喂并泛起雨圈"></canvas><canvas class="courtyard-v3-rain-layer" aria-hidden="true"></canvas>
       <span class="courtyard-v3-status" role="status" aria-live="polite"></span>
     </div>
-    <aside class="courtyard-v3-controls"><h3>锦鲤与雨</h3>
+    <aside class="courtyard-v3-controls">
       <span class="courtyard-v3-hint">轻点水面投喂 · 划过锦鲤发现它们</span>
       <div class="courtyard-v3-progress"><span data-pond-found>发现锦鲤 0 / 9</span><span data-pond-eaten>吃食 0 次</span></div>
       <button type="button" class="courtyard-v3-rain-toggle" data-courtyard-control="rain" aria-pressed="true">关闭雨</button>

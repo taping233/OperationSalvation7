@@ -110,6 +110,7 @@ function deepFreeze(value) {
 const validation = validateRuleConfig(DEFAULT_RULE_CONFIG);
 if (!validation.ok) throw new TypeError(`Invalid default game rules: ${validation.errors.join('; ')}`);
 
+/** @type {typeof DEFAULT_RULE_CONFIG & {stashRuneSlotFrom?:number,stashRuneSlotCost?:number}} */
 const RULE_CONFIG = deepFreeze(DEFAULT_RULE_CONFIG);
 
 export { RULE_CONFIG, validateRuleConfig };

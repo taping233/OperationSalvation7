@@ -108,7 +108,7 @@ function assertValidCardRules(cards) {
     }
   }
 }
-  SDT.Cards = {
+  export const Cards = SDT.Cards = {
     ...rulesSlice,
     ...dataSlice,
 

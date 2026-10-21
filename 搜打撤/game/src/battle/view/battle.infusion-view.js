@@ -1,117 +1,161 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import '../../../css/battle-infusion.css';
-import { esc, escAttr } from '../../core/shared.js';
-import { displayCardDescription } from '../../cards/card-description-text.js';
-import { descRich } from '../../cards/cards.view.js';
-import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
-
+import { escAttr } from '../../core/shared.js';
 import { isInteractiveBattlePage } from './battle.page-activity.js';
 import { cancelSelection } from './battle.selection-ui.js';
-import { infusionMaterialState } from './battle.infusion-material-state.js';
+import { infusionHandCards, infusionMaterialState } from './battle.infusion-material-state.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
 
 let keyCleanup = null;
 if (import.meta.hot) import.meta.hot.dispose(() => { keyCleanup?.(); keyCleanup = null; });
 
-// Selection is presentation only. The battle commands remain the authority for
-// eligibility, counts, final target confirmation and atomic resource spending.
-export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, showBattleDecision, cardHTML }) {
+// The ordinary hand stays mounted. Only its projection and selected-card
+// container change; commands retain eligibility and atomic resource spending.
+export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, targetSide, commands, cardHTML, focusedHandUid = null }) {
   keyCleanup?.(); keyCleanup = null;
+  const stage = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-stage.sts'));
+  if (!stage) return;
+  const previous = /** @type {BattleElement} */ (stage.querySelector('[data-infusion-workspace]'));
   const infusion = snapshot.infusing;
-  const entries = snapshot.hand.map(findCard).filter(Boolean);
-  const groups = orderHandGroups(groupHandCards(entries, infusion)).filter(group => !group.self);
+  const locks = stage.querySelectorAll('.sts-arena, .sts-topbar, .bt-potions, .sts-tactics, .sts-hud-l, .sts-hud-r, .sts-energy-wrap, .sts-hand-tools');
+  locks.forEach((/** @type {HTMLElement} */ node) => { node.inert = !!infusion; });
+  stage.toggleAttribute('data-infusion-mode', !!infusion);
+  const hand = /** @type {BattleElement} */ (stage.querySelector('.sts-hand'));
+  hand?.setAttribute('aria-label', infusion ? '选择注能材料的手牌，点击一张移入已选区' : '当前手牌');
+  if (!infusion) {
+    previous?.remove();
+    // The shared hand may still be fading out the prior selection projection.
+    hand?.querySelectorAll('.infusion-copy-count').forEach(node => node.closest('.bt-slot')?.remove());
+    return;
+  }
+  const cards = infusionHandCards(snapshot.hand.map(findCard).filter(Boolean), infusion);
   const picked = infusion.picked;
+  const candidateUids = new Set(cards.filter(entry => !picked.includes(entry.uids[0])).map(entry => entry.uids[0]));
+  const displayedUids = new Set();
+  // Selected cards have already left the layer's logical slots. Remove their
+  // 240 ms exit remnants so one physical card cannot appear in both containers.
+  [.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll(':scope > .bt-slot') || [])].reverse().forEach(slot => {
+    const uid = slot.dataset.uid;
+    if (!candidateUids.has(uid) || displayedUids.has(uid)) slot.remove();
+    else displayedUids.add(uid);
+  });
+  // 2026-10-21 老板反馈 #4：注能候选按同名叠收敛——每叠只展示首张未选副本的
+  // 槽位，其余副本保留在 DOM（data-uid、数字键 1-9、点击轮转与已选区撤回全部
+  // 不变），只隐藏展示并标注 ×N；代表副本被选走后，下一张副本在下一轮渲染
+  // 自动接替为可见代表，因此整叠仍然逐张可达、手中全部卡牌不丢。
+  const stackKeyOf = entry => entry.key.replace(/\|uid:.*$/, '');
+  const repOfStack = new Map();
+  cards.forEach(entry => {
+    if (!candidateUids.has(entry.uids[0])) return;
+    const stack = stackKeyOf(entry);
+    if (!repOfStack.has(stack)) repOfStack.set(stack, entry.uids[0]);
+  });
+  [.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll(':scope > .bt-slot') || [])].forEach(slot => {
+    const entry = cards.find(card => card.uids[0] === slot.dataset.uid);
+    const dup = !!entry && candidateUids.has(slot.dataset.uid) && repOfStack.get(stackKeyOf(entry)) !== slot.dataset.uid;
+    slot.classList.toggle('infusion-dup', dup);
+    if (dup) slot.setAttribute('aria-hidden', 'true');
+    else slot.removeAttribute('aria-hidden');
+  });
   const required = requiresInfusion(infusion.card);
   const remaining = Math.max(0, infusion.need - picked.length);
-  const targetNext = targetSide(infusion.card) === 'enemy' && snapshot.foes.filter(foe => foe.hp > 0).length > 1;
-  const previous = UI.el.ovBody.querySelector('[data-infusion-workspace]');
+  const retainedTarget = Number.isInteger(infusion.targetIndex) && snapshot.foes[infusion.targetIndex]?.hp > 0 && !snapshot.foes[infusion.targetIndex]?.dead;
+  const targetNext = targetSide(infusion.card) === 'enemy' && snapshot.foes.filter(foe => foe.hp > 0).length > 1 && !retainedTarget;
   const same = previous?._battleToken === snapshot.battleToken && previous?._sourceUid === infusion.uid;
-  const scroll = same ? previous.querySelector('.infusion-materials')?.scrollTop || 0 : 0;
-  const sourceExpanded = same && previous.querySelector('.infusion-source-details')?.open;
-  const focused = same && previous.contains(document.activeElement) ? { ...document.activeElement.dataset, summary:document.activeElement.tagName === 'SUMMARY' } : null;
-  const materialHTML = groups.map((group, i) => {
-    const { selected, unavailable:reason, addReason, remove, canAdjust } = infusionMaterialState(group, infusion, snapshot.hand, infusionFuelReason);
-    const note = addReason ? `${addReason}${selected.length ? '；点击卡面或减号减少一张' : ''}` : '';
-    return `<article class="infusion-material${selected.length ? ' is-selected' : ''}${reason ? ' is-unavailable' : ''}">
-      <div class="infusion-material-heading"><b>${i < 9 ? `<small class="infusion-key">${i + 1}</small> ` : ''}${esc(group.card.name)}</b><button class="infusion-detail" data-act="btInfuseInspect" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}">详情</button></div>
-      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="增加一张${escAttr(group.card.name)}" ${addReason ? `disabled title="${escAttr(addReason)}"` : ''}>＋</button></div>
-      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdjust" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="${remove ? '减少' : '选择'}一张${escAttr(group.card.name)}作为材料，已选${selected.length}张" ${canAdjust ? '' : `disabled title="${escAttr(addReason)}"`}>${cardHTML(group.card, 'sm')}</button>
-      ${note ? `<p class="infusion-material-note">${esc(note)}</p>` : ''}
-    </article>`;
-  }).join('');
-  const chosen = groups.filter(group => group.uids.some(uid => picked.includes(uid))).map(group => `${esc(group.card.name)} ×${group.uids.filter(uid => picked.includes(uid)).length}`).join('、');
-  showBattleDecision('注能', `<div data-decision-content="infusion" data-infusion-workspace>
-    <aside class="infusion-source"><span class="infusion-eyebrow">将要使用</span><h4>${esc(infusion.card.name)}</h4><p class="infusion-cost">消耗 ${effCostOf(infusion.card, infusion.uid)} 点能量 + ${infusion.need} 张材料</p>
-      <div class="infusion-rules"><h5>打出效果</h5><p>${descRich(displayCardDescription(infusion.card.desc || '暂无规则描述', infusion.card.id), infusion.card.id)}</p></div>
-      <details class="infusion-source-details" ${sourceExpanded ? 'open' : ''}><summary>查看卡面</summary><div class="infusion-source-card">${cardHTML(infusion.card, 'sm')}</div></details>
-      <p class="infusion-destination">材料进入消耗牌堆，不自动洗回，仅由卡牌效果取回；战后进入消耗区。道具、装备不可在火堆复原。</p>
-    </aside>
-    <section class="infusion-selection"><header><div><h4>选择 ${infusion.need} 张材料</h4></div><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status">已选 ${picked.length}/${infusion.need}${remaining ? '' : '<small>材料已齐</small>'}</strong></header>
-      <div class="infusion-materials">${materialHTML || '<p>没有可选材料</p>'}</div>
-      <div class="infusion-selection-summary"><span>本次材料</span><p>${chosen || '尚未选择材料'}</p></div>
-    </section></div>
-    <div class="ov-btns infusion-footer"><button class="ov-btn" data-act="btInfuseCancel">返回战斗</button><button class="ov-btn infusion-direct" data-act="btInfuseDirect" data-uid="${escAttr(infusion.uid)}" ${required ? 'disabled title="未注能时没有效果，必须先注能"' : ''}>${required ? '必须注能后打出' : '不注能直接打出'}</button><p>${targetNext ? '下一步选目标，有效打出后才消耗' : '确认后打出，并消耗所选材料'}</p><button class="ov-btn ok" data-act="btInfuseGo" ${remaining ? 'disabled' : ''}>${remaining ? `还需 ${remaining} 张材料` : targetNext ? '确认材料 · 选择目标' : '确认注能并打出'}</button></div>`, 'discover', snapshot);
-  const page = UI.el.ovBody.querySelector('.battle-decision[data-decision-kind="infusion"]');
-  const workspace = page?.querySelector('[data-infusion-workspace]');
-  if (!workspace) return;
+  const sourceCard = same ? previous.querySelector('.infusion-source-card') : null;
+  const sourceFocus = sourceCard?.contains(document.activeElement) && document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const selectedScroll = same ? /** @type {BattleElement} */ (previous.querySelector('.infusion-selected-cards'))?.scrollLeft || 0 : 0;
+  const focused = same && previous.contains(document.activeElement) && document.activeElement instanceof HTMLElement ? { ...document.activeElement.dataset } : null;
+  const chosen = picked.map(uid => cards.find(card => card.uids[0] === uid)).filter(Boolean);
+  const selectedHTML = chosen.map(entry => `<article class="infusion-selected-card" data-selected-uid="${escAttr(entry.uids[0])}">
+      <button type="button" class="infusion-card-face" data-act="btInfuseRemove" data-uid="${escAttr(entry.uids[0])}" aria-label="撤回${escAttr(entry.card.name)}第${entry.copyIndex}张，同名已选${entry.selectedCopies}/${entry.totalCopies}张">
+        ${cardHTML(entry.card, 'sm')}<span class="infusion-card-return">↙</span>
+      </button>
+    </article>`).join('');
+  const workspace = /** @type {BattleElement} */ (document.createElement('section'));
+  workspace.setAttribute('data-infusion-workspace', '');
+  workspace.setAttribute('aria-label', '注能材料选择');
+  workspace.innerHTML = window.SDT.Icons.rich(`<header class="infusion-heading"><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status" aria-label="已选 ${picked.length}/${infusion.need} 张材料">${picked.length}/${infusion.need}</strong></header>
+    <aside class="infusion-source"><div class="infusion-source-card">${cardHTML(infusion.card, 'lg')}</div><button type="button" class="infusion-detail" data-act="btInfuseInspect" data-uid="${escAttr(infusion.uid)}" aria-label="查看主卡详情">⌕</button></aside>
+    <section class="infusion-selection" aria-label="已选材料"><div class="infusion-selected-cards" role="group" aria-label="已选材料，点击卡面撤回">${selectedHTML}</div></section>
+    <footer class="infusion-footer"><div class="infusion-actions"><button class="ov-btn" data-act="btInfuseCancel">返回</button>${required ? '' : `<button class="ov-btn infusion-direct" data-act="btInfuseDirect" data-uid="${escAttr(infusion.uid)}">不注能直接打出</button>`}<button class="ov-btn ok" data-act="btInfuseGo" aria-label="${targetNext ? '确认材料，继续选择目标' : '确认注能并打出'}" ${remaining ? 'disabled' : ''}>确认</button></div></footer>`);
   workspace._battleToken = snapshot.battleToken; workspace._sourceUid = infusion.uid;
-  workspace.querySelector('.infusion-materials').scrollTop = scroll;
-  if (focused?.summary) workspace.querySelector('.infusion-source-details summary')?.focus({ preventScroll:true });
+  // Material picks must not reset a long main-card rule or reload its artwork.
+  if (sourceCard) workspace.querySelector('.infusion-source-card').replaceWith(sourceCard);
+  if (previous) previous.replaceWith(workspace); else stage.appendChild(workspace);
+  workspace.querySelectorAll('.infusion-card-face [tabindex]').forEach((/** @type {HTMLElement} */ node) => { node.tabIndex = -1; });
+  const emptyHand = hand?.querySelector('.ov-empty');
+  if (emptyHand) emptyHand.textContent = '';
+  /** @type {BattleElement} */ (workspace.querySelector('.infusion-selected-cards')).scrollLeft = selectedScroll;
+  if (focusedHandUid && picked.includes(focusedHandUid)) [.../** @type {NodeListOf<HTMLButtonElement>} */ (workspace.querySelectorAll('[data-act="btInfuseRemove"]'))].find(button => button.dataset.uid === focusedHandUid)?.focus({ preventScroll:true });
+  if (sourceFocus) sourceFocus.focus({ preventScroll:true });
   else if (focused) {
-    const available = [...page.querySelectorAll('button:not(:disabled)')];
-    const sameGroup = button => button.dataset.groupUid === focused.groupUid;
-    const exact = available.find(button => button.dataset.act === focused.act && sameGroup(button));
-    const fallback = focused.groupUid && available.find(button => sameGroup(button) && button.dataset.act === 'btInfuseInspect');
-    (exact || fallback || page.querySelector('[data-act="btInfuseCancel"]'))?.focus({ preventScroll:true });
+    const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (workspace.querySelectorAll('button:not(:disabled)'))];
+    (buttons.find(button => button.dataset.act === focused.act && button.dataset.uid === focused.uid)
+      || /** @type {HTMLElement} */ ([.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll('.bt-card') || [])].find(node => node.dataset.uid === focused.uid)?.querySelector('.hs-card'))
+      || buttons.find(button => button.dataset.act === 'btInfuseCancel'))?.focus({ preventScroll:true });
   }
-  // A snapshot checks all current values; share it only within this synchronous
-  // input. Later inputs must see in-place state changes before the next render.
+  // Each face owns an actual UID; captions make same-name copies explicit.
+  cards.filter(entry => !picked.includes(entry.uids[0])).forEach(entry => {
+    const uid = entry.uids[0];
+    const state = infusionMaterialState(entry, infusion, snapshot.hand, infusionFuelReason);
+    const card = [.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll('.bt-card') || [])].find(node => node.dataset.uid === uid);
+    if (!card) return;
+    card.querySelector('.infusion-copy-count')?.remove();
+    card.querySelector('.infusion-stack-count')?.remove();
+    const caption = document.createElement('span'); caption.className = 'infusion-copy-count';
+    caption.textContent = entry.shortcut ? String(entry.shortcut) : '';
+    card.appendChild(caption);
+    // 代表卡（同叠首张未选副本）标注整叠数量，隐藏副本不标注。
+    if (entry.totalCopies > 1 && repOfStack.get(stackKeyOf(entry)) === uid) {
+      const badge = document.createElement('span'); badge.className = 'infusion-stack-count';
+      badge.textContent = `×${entry.totalCopies}`;
+      card.appendChild(badge);
+    }
+    card.classList.toggle('infusion-at-limit', !state.canAdjust);
+    card.setAttribute('aria-label', `${entry.card.name}，第${entry.copyIndex}/${entry.totalCopies}张，同名已选${entry.selectedCopies}张。${state.addReason || '点击选择为材料'}`);
+    const face = card.querySelector('.hs-card');
+    face?.setAttribute('aria-label', card.getAttribute('aria-label'));
+    face?.setAttribute('aria-disabled', state.canAdjust ? 'false' : 'true');
+  });
   const current = () => {
-    if (!isInteractiveBattlePage(UI, page) || UI.el.ovBody.querySelector('.battle-decision') !== page
+    if (!isInteractiveBattlePage(UI, workspace) || stage.querySelector('[data-infusion-workspace]') !== workspace
       || document.getElementById('cardZoom')) return null;
     const now = getSnapshot();
     return now.battleToken === snapshot.battleToken && now.infusing?.uid === infusion.uid
-      && !now.busy && ['player', 'targeting'].includes(now.phase) ? now : null;
+      && now.infusing.selectionId === infusion.selectionId && !now.busy && ['player', 'targeting'].includes(now.phase) ? now : null;
   };
-  const adjust = (data, remove, now = current()) => {
-    if (!now) return;
-    const group = groups[Number(data.i)];
-    if (!group) return;
-    const uid = remove ? group.uids.find(id => now.infusing.picked.includes(id))
-      : now.infusing.picked.length < now.infusing.need && group.uids.find(id => now.hand.includes(id) && !now.infusing.picked.includes(id) && !infusionFuelReason(id));
-    if (uid) commands.selectInfusion(uid);
+  const toggle = (uid, now = current()) => {
+    if (!now || !cards.some(entry => entry.uids[0] === uid)) return;
+    if (now.infusing.picked.includes(uid) || (now.hand.includes(uid) && now.infusing.picked.length < now.infusing.need && !infusionFuelReason(uid))) commands.selectInfusion(uid);
   };
-  const adjustFace = (data, now = current()) => {
-    const group = groups[Number(data.i)];
-    if (!now || !group) return;
-    const state = infusionMaterialState(group, now.infusing, now.hand, infusionFuelReason);
-    if (state.canAdjust) adjust(data, state.remove, now);
-  };
-  UI.act('btPlay', () => {});
-  UI.act('btInfuseAdjust', data => adjustFace(data));
-  UI.act('btInfuseAdd', data => adjust(data, false));
-  UI.act('btInfuseRemove', data => adjust(data, true));
+  UI.act('btInfuseRemove', data => { const now = current(); if (now?.infusing.picked.includes(data.uid)) toggle(data.uid, now); });
   UI.act('btInfuseInspect', data => {
     if (!current()) return;
-    const group = groups[Number(data.i)];
-    const entry = group && findCard(group.uids[0]);
-    if (entry) UI.showCardZoom(entry.card, { returnFocus:page.querySelector(`[data-act="btInfuseInspect"][data-i="${Number(data.i)}"]`) });
+    const entry = findCard(data.uid);
+    if (entry) UI.showCardZoom(entry.card, { returnFocus:workspace.querySelector('[data-act="btInfuseInspect"]') });
   });
   const cancel = () => { const now = current(); return !!now && cancelSelection({ snapshot:now, commands }); };
   UI.act('btInfuseCancel', cancel);
   UI.act('btInfuseDirect', () => { if (current() && !required) commands.playDirect(infusion.uid); });
   UI.act('btInfuseGo', () => { const now = current(); if (now && now.infusing.picked.length === now.infusing.need) commands.confirmInfusion(); });
   const onKey = event => {
-    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
-    const materialKey = /^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.target?.closest?.('[contenteditable="true"]') && !event.shiftKey;
+    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented) return;
+    const materialKey = /^[1-9]$/.test(event.key);
     if (event.key !== 'Escape' && !materialKey) return;
-    const now = current();
-    if (!now) return;
-    if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); cancel(); }
-    // Detached hand-layer shortcuts must not select a hidden material.
-    if (materialKey) {
-      event.preventDefault(); event.stopImmediatePropagation();
-      adjustFace({ i:Number(event.key) - 1 }, now);
+    // Suppress the ordinary hand shortcut behind this mode without preventing
+    // browser shortcuts or editing text in an input/contenteditable region.
+    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || /INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') || event.target?.closest?.('[contenteditable="true"]')) {
+      event.stopImmediatePropagation(); return;
     }
+    const now = current();
+    if (!now) {
+      if (materialKey || !document.getElementById('cardZoom')) event.stopImmediatePropagation();
+      return;
+    }
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (event.key === 'Escape') cancel();
+    else toggle(cards[Number(event.key) - 1]?.uids[0], now);
   };
   document.addEventListener('keydown', onKey, true);
   const cleanup = () => {
@@ -123,5 +167,4 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
   document.addEventListener('sdt-overlay-mode', cleanup);
   document.addEventListener('sdt-overlay-close', cleanup);
   keyCleanup = cleanup;
-  UI.refresh(window.SDT.game);
 }

@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：战斗特效（飘字/抖动/红闪/火花——自闭合，唯一对外入口 spawnFloats）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
@@ -24,7 +25,7 @@ const shakeAnimations = new WeakMap();
 function stageKillBeat() {
   if (storeGet('sdt-reduce-shake') === '1') return;
   if (SDT.Motion?.reduceMotion?.()) return;
-  const stage = document.querySelector('#overlay .battle-stage');
+  const stage = /** @type {BattleElement} */ (document.querySelector('#overlay .battle-stage'));
   if (!stage || typeof stage.animate !== 'function') return;
   const kf = [];
   for (let i = 0; i <= 8; i++) {
@@ -73,7 +74,7 @@ function stageKillBeat() {
   }
   function playFoeHurtFrame(figEl) {
     const unit = figEl.closest('.sts-foe');
-    const img = figEl.querySelector('img');
+    const img = /** @type {HTMLImageElement} */ (figEl.querySelector('img'));
     if (!unit || !img) return;
     foeHurtTimers.get(unit)?.();
     unit.classList.remove('fx-hit');
@@ -173,7 +174,7 @@ function stageKillBeat() {
   //（多敌混战时读得出这一刀是谁砍的；一次性 canvas，与指向施法的 #aimArrow 无关）
   function foeAttackLine(body, figEl) {
     const ov = UI.el.overlay;
-    const me = body.querySelector('#btSelf .sts-figure');
+    const me = /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'));
     if (!ov || !me) return;
     const ovR = uiRect(ov);
     const a = uiRect(figEl), b = uiRect(me);
@@ -229,10 +230,10 @@ function stageKillBeat() {
   function presentHitHealth(body, unit, hp, maxHp, instant = false) {
     if (unit == null || !(maxHp > 0) || !Number.isFinite(Number(hp))) return;
     const target = body.querySelector(`.sts-foe[data-eidx="${unit}"]`);
-    const wrap = target && target.querySelector('.bt-hpwrap');
+    const wrap = target && /** @type {BattleElement} */ (target.querySelector('.bt-hpwrap'));
     if (!wrap) return;
     const pct = `${Math.max(0, Math.min(100, Number(hp) / maxHp * 100)).toFixed(1)}%`;
-    const bars = [wrap.querySelector('.sts-hp-main'), wrap.querySelector('.sts-hp-ghost')].filter(Boolean);
+    const bars = [/** @type {BattleElement} */ (wrap.querySelector('.sts-hp-main')), /** @type {BattleElement} */ (wrap.querySelector('.sts-hp-ghost'))].filter(Boolean);
     for (const bar of bars) {
       if (instant) {
         bar.style.transition = 'none';
@@ -241,7 +242,7 @@ function stageKillBeat() {
         bar.style.transition = '';
       } else bar.style.width = pct;
     }
-    const text = wrap.querySelector('span');
+    const text = /** @type {BattleElement} */ (wrap.querySelector('span'));
     if (text) text.textContent = `${Math.max(0, hp)}/${maxHp}`;
   }
   function spawnFloats(body, baseDelay = 0) {
@@ -269,7 +270,7 @@ function stageKillBeat() {
       const isSelf = f.unit === 'self';
       const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];   // 随从替伤：battle.core 推 'ally:N'
       const figEl = isSelf
-        ? body.querySelector('#btSelf .sts-figure')
+        ? /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'))
         : allyI != null
           ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
           : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
@@ -339,7 +340,7 @@ function stageKillBeat() {
       // 掉血血条槽体红闪（样式 winter.css .hp-dropping；320ms 错峰配 300ms 清除避免竞态）
       if (damage && !reduced) {
         const unitEl = figEl.closest('.sts-unit');
-        const bar = unitEl && unitEl.querySelector('.bt-hpwrap');
+        const bar = unitEl && /** @type {BattleElement} */ (unitEl.querySelector('.bt-hpwrap'));
         if (bar) {
           bar.classList.remove('hp-dropping');
           void bar.offsetWidth;   // 强制 reflow，让连续掉血重播闪红
@@ -391,7 +392,7 @@ function stageKillBeat() {
         span.appendChild(document.createTextNode(f.text));
       }
       // 活跃文字占用四个相邻槽位；多段结算仍沿原队列，不以动画结束阻塞规则。
-      const used = new Set(Array.from(ov.querySelectorAll('.sts-float[data-feedback-unit]'))
+      const used = new Set(Array.from(/** @type {NodeListOf<BattleElement>} */ (ov.querySelectorAll('.sts-float[data-feedback-unit]')))
         .filter(el => el.dataset.feedbackUnit === String(f.unit)).map(el => Number(el.dataset.feedbackLane)));
       const lane = [0, 1, 2, 3].find(index => !used.has(index)) ?? 0;
       const [dx, dy] = [[-38, 0], [38, 0], [-20, -32], [20, -32]][lane];
@@ -419,7 +420,7 @@ function stageKillBeat() {
         const isSelf = f.unit === 'self';
         const allyI = isSelf ? null : (/^ally:(\d+)$/.exec(String(f.unit)) || [])[1];
         const fig = isSelf
-          ? body.querySelector('#btSelf .sts-figure')
+          ? /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'))
           : allyI != null
             ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
             : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);

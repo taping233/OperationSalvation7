@@ -19,8 +19,8 @@ export function partnerInteractionHTML(portrait, { id, name }) {
 // Display-only and deliberately independent of Base, session, commands and RNG.
 // The owner calls dispose before page replacement or exit; one tap replaces the last.
 export function mountPartnerInteraction(root) {
-  const target = root?.querySelector('.partner-play-target');
-  const reply = root?.querySelector('.partner-play-reply');
+  const target = /** @type {HTMLElement} */ (root?.querySelector('.partner-play-target'));
+  const reply = /** @type {HTMLElement} */ (root?.querySelector('.partner-play-reply'));
   if (!target || !reply) return () => {};
   let next = 0, timer = null, disposed = false;
   const reset = () => {

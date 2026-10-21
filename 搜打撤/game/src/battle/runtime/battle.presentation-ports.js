@@ -3,7 +3,7 @@ import { actionCancellationError } from './battle.playback.js';
 function waitMs(ms, signal) {
   if (signal?.aborted) return Promise.reject(actionCancellationError(signal));
   if (!(ms > 0)) return Promise.resolve();
-  return new Promise((resolve, reject) => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     const cleanup = () => { clearTimeout(timer); signal?.removeEventListener('abort', cancel); };
     const done = () => { cleanup(); resolve(); };
     const cancel = () => { cleanup(); reject(actionCancellationError(signal)); };

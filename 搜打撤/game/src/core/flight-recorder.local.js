@@ -65,6 +65,7 @@ export function readFlight(storage) {
     return Array.isArray(parsed) ? parsed.slice(-FLIGHT_LIMIT).map(sanitizeFlight) : [];
   } catch { return []; }
 }
+/** @param {{storage?:Pick<Storage,"getItem"|"setItem">,now?:()=>number}} [options] */
 export function createFlightRecorder({ storage, now = Date.now } = {}) {
   let rows = readFlight(storage);
   let persisted = true;
@@ -80,6 +81,7 @@ export function createFlightRecorder({ storage, now = Date.now } = {}) {
   };
 }
 
+/** @param {{SDT?:RuntimeFacade,game?:import("../hub/game.store.types").GameState,host?:Window & typeof globalThis,doc?:Document}} [options] */
 export function installFlightRecorder({ SDT, game, host = window, doc = document } = {}) {
   let storage;
   try { storage = host.localStorage; } catch { /* denied storage keeps bounded memory */ }

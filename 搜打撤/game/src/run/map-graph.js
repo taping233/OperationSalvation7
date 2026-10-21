@@ -14,7 +14,7 @@
  * @typedef {Object} MapLayer
  * @property {{ next?: [number, number][] }[]} logical   每层逻辑结点；next 为 [目标层号, 层内序号]（生成器图才带）
  * @property {{ pair?: string, at: number, toLayer: number, arriveAt: number }[]} [doors]   环间门（显式图按记录方向，旧图双向）
- * @property {{ at: number }[]} [altarEntrances]         祭坛入口（连向中央结点 '-1,0'）
+ * @property {(number | { at: number })[]} [altarEntrances]         祭坛入口（连向中央结点 '-1,0'）
  * @property {number[]} [entrances]                      第 0 层授权图的玩家入口序号
  */
 
@@ -56,7 +56,7 @@
       // Door actions call enterLayer directly, so metadata is a real edge even
       // without next, but an authored door does not create a return action.
       (ld.doors || []).forEach(d => link(key(li, d.at), key(d.toLayer, d.arriveAt), !authoredGraph));
-      (ld.altarEntrances || []).forEach(a => link(key(li, a.at), key(-1, 0)));   // 祭坛入口 → 中央
+      (ld.altarEntrances || []).forEach(a => link(key(li, /** @type {{at:number}} */ (a).at), key(-1, 0)));   // 祭坛入口 → 中央
     });
     return { adj, key };
   }

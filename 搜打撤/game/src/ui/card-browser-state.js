@@ -9,7 +9,7 @@ export function cardBrowserItems(root, candidate = null) {
   // Reused nodes must still belong to this track. Never retain an earlier page's list.
   if (candidate && candidate.length === root.children.length
     && candidate.every((item, index) => item === root.children[index] && item.matches('[data-browser-key]'))) return candidate;
-  return [...root.querySelectorAll('[data-browser-key]')];
+  return [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-browser-key]'))];
 }
 
 export function filterCardBrowserItems(root, matches) {

@@ -19,7 +19,7 @@ import { convertCollection, stackKeyOf } from './collection.commands.js';
 import { previewCollectionConversion } from './collection-conversion.js';
 import { collectionConversionHTML, conversionSignature } from './collection-conversion-view.js';
 import { isCollectionProtected } from './collection-protection.js';
-import { homeErrorMessage } from '../home/home.presenter.js';
+import { homeErrorMessage } from './command-errors.js';
 import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
   // 特殊收藏品：传说卡与桌游珍宝——[[icon:sparkles]]收藏后完成对应成就
@@ -32,6 +32,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   // 火球为衍生牌不外售，故货架只放可入库的基础招式/装备/资源卡。
   // 2026-09-17 留言「买的木材没到账」：口粮/木材改为直接折入基地物资（老板预期=看物资计数），
   // 卡牌货架只留基础招式/装备
+  /** @type {{id?:string, price:number, tip:string, material?:import('./base-economy.js').BaseEconomyMaterial, name?:string}[]} */
   const HUB_SHOP_GOODS = [
     { id: 'tt3-skewer',  price: 6, tip: '基础招式 · 造成 2 点伤害，无视护甲' },
     { id: 'tt3-staff',   price: 6, tip: '基础装备 · 法伤 +1' },
@@ -49,6 +50,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   // 大图，没有第二层小卡弹窗。不可回退操作（高价/最后一张/整堆/收藏用掉）改按钮
   // 就地二次确认（变红 2.6s 内再点才执行），不再跳确认页。动作前按稳定库存引用重读仓库
   // 按稳定库存引用重读堆；收藏后就地刷新页脚，出售统一由交易所负责。
+  /** @param {number} i @param {{from?: HTMLElement}} [options] */
   function openStashCardView(i, { from } = {}) {
     const B = SDT.Base;
     const s = B.data.stash[i];
@@ -56,11 +58,11 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     const card = s.card;
     const slotId = B.slot, stackKey = stackKeyOf(s);
     const host = document.getElementById('hubMain');
-    const viewKey = host?.querySelector('.hub-page')?.dataset.view;
+    const viewKey = /** @type {HTMLElement} */ (host?.querySelector('.hub-page'))?.dataset.view;
     let zoom;
     const currentDetail = () => SDT.Base === B && B.slot === slotId && !!zoom &&
       document.getElementById('cardZoom') === zoom && !zoom.classList.contains('cz-out') &&
-      (!host || document.getElementById('hubMain') === host && host.querySelector('.hub-page')?.dataset.view === viewKey);
+      (!host || document.getElementById('hubMain') === host && /** @type {HTMLElement} */ (host.querySelector('.hub-page'))?.dataset.view === viewKey);
     let detailWriting = false;
     const detailAct = (name, action) => UI.act(name, async (...args) => {
       if (!currentDetail() || detailWriting) return false;
@@ -114,7 +116,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         : convertType ? conversion.registrationOnly ? '人物熟练度已满，首次收录图鉴只消耗 1 张，不再增加经验。'
           : conversion.code === 'CHARACTER_MAXED' ? '人物熟练度已满且图鉴已收录，已停止经验转化，卡牌保留。'
           : `${marked ? '图鉴已收录；重复卡仍可转化经验。' : '首次转化会同时收录图鉴。'}${n > conversion.maxCount && conversion.maxCount > 0 ? `批量最多消耗 ${conversion.maxCount} 张，余下 ${n - conversion.maxCount} 张保留。` : ''}`
-        : protectedCard ? '卡牌受保护；取消保护会保留图鉴收录。' : '保护标记不消耗卡牌、不发放人物经验；图鉴收录独立保留。';
+        : protectedCard ? '取消保护不影响图鉴收录。' : '保护不消耗卡牌，不增加经验。';
       return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '图鉴已收录' : '尚未收录'}${protectedCard ? ' · 已保护' : ''}</span></div><p class="inspect-collection-hint">${hint}</p>${conversion ? `<p class="inspect-collection-hint" data-conversion-preview role="status">${collectionConversionHTML(conversion)}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
     };
     const refreshZoom = () => {
@@ -228,7 +230,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       }
       const r = await B.useStashMaterial(card.name, all);
       if (!currentDetail()) return false;
-      if (r.ok) { Sfx.ding(); UI.log(r.msg, 'loot'); closeZoom(); hubBridge.renderHub(); }
+      if (r.ok === true) { Sfx.ding(); UI.log(r.msg, 'loot'); closeZoom(); hubBridge.renderHub(); }
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
       if (!r.ok) refreshZoom();
     };
@@ -246,7 +248,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       if (B.data.stash.filter(stack => stack.card.id === card.id).length !== 1) { UI.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
       const r = await B.hatchPet();
       if (!currentDetail()) return false;
-      if (r.ok) {
+      if (r.ok === true) {
         Sfx.ding();
         UI.log(`[[icon:paw]] 孵化成功！获得宠物<b>「${esc(r.pet.name)}」</b>——${esc(r.pet.desc)}（可在仓库页携带 / 升级页升级）`, 'loot');
         await SDT.Meta.checkUnlocks();
@@ -255,7 +257,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       else if (r.why === 'all') UI.log('[[icon:paw]] 已经集齐全部宠物了', 'dim');
       else if (r.why === 'save') UI.log('基地存档未保存，宠物蛋与储备币均未消耗', 'warn');
       else UI.log('[[icon:crystal]] 仓库里没有宠物蛋了', 'warn');
-      if (r.ok) { closeZoom(); hubBridge.renderHub(); }
+      if (r.ok === true) { closeZoom(); hubBridge.renderHub(); }
       else refreshZoom();
     }));
 
@@ -274,7 +276,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       }
       const result = await B.openCardPack(card.id, cards);
       if (!currentDetail()) return false;
-      if (!result.ok) { UI.log(result.msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
+      if (!result.ok) { UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).msg || '卡包已变化，请重新打开仓库', 'warn'); return; }
       UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
       closeZoom();
       hubBridge.renderHub();
@@ -290,6 +292,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
     decorateInventoryZoom(card);
   }
   // 基地物资（木材/口粮）：材料不可卖出换币（2026-09-08 定版）——只作展示说明
+  /** @param {string} kind @param {{from?: HTMLElement}} [options] */
   function openRawItem(kind, { from } = {}) {
     if (!['wood', 'rations'].includes(kind)) return;
     const label = kind === 'wood' ? '木材' : '口粮';
@@ -297,7 +300,7 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       || SDT.Cards.all().find(item => SDT.Base.materialInfo?.(item)?.kind === kind)
       || { id: `base-material-${kind}`, name: label, type: '基地材料', rarity: '初始', cost: 0, desc: kind === 'wood' ? '用于扩建出征背包与仓库。' : '用于培养远征伙伴，提升安全格。' };
     const target = kind === 'wood' ? 'upgrade' : 'classes';
-    const footer = `<div class="raw-material-actions"><b>基地${label}库存 ${SDT.Base.data[kind] || 0} 份</b><p>这里显示已折入的基地材料，不含仓库里的资源卡。资源卡需在仓库详情使用后才增加库存；散装物资与资源卡分别结算。</p><button class="mini-btn ok" data-act="hubTab" data-tab="${target}"${kind === 'wood' ? '' : ' data-group="pets"'}>${kind === 'wood' ? '扩建' : '伙伴培养'} →</button><button class="mini-btn" data-act="hubTab" data-tab="shop">补给 →</button></div>`;
+    const footer = `<div class="raw-material-actions"><b>基地${label}库存 ${SDT.Base.data[kind] || 0} 份</b><p>不含未使用的资源卡；在仓库使用后计入。</p><button class="mini-btn ok" data-act="hubTab" data-tab="${target}"${kind === 'wood' ? '' : ' data-group="pets"'}>${kind === 'wood' ? '扩建' : '伙伴培养'} →</button><button class="mini-btn" data-act="hubTab" data-tab="shop">补给 →</button></div>`;
     UI.showCardZoom(card, { presentation:'inventory', footer, from, returnFocus:from });
     decorateInventoryZoom(card, { description:kind === 'wood' ? '用于扩建出征背包与仓库。' : '用于培养远征伙伴，提升安全格。' });
   }
@@ -310,6 +313,6 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
   // —— 职业收藏室（2026-09-09：成就系统 → 成就与职业收藏室系统）——
   // 仓库中收藏的职业卡与能力卡陈列于此；进度只计不同的职业卡 + 能力卡，
   // 达成 5/15/30/45/全收集里程碑可各领一次奖励（见 meta.js COLL_MILESTONES）。
-  function hubAchHTML(hubCollectionView) { return archiveV3HTML({ base:SDT.Base, meta:SDT.Meta, cards:SDT.Cards, art:SDT.Art, view:hubCollectionView }); }
+  function hubAchHTML(hubCollectionView) { return /** @type {(options: Parameters<typeof archiveV3HTML>[0] & {art?:unknown}) => ReturnType<typeof archiveV3HTML>} */ (archiveV3HTML)({ base:SDT.Base, meta:SDT.Meta, cards:SDT.Cards, art:SDT.Art, view:hubCollectionView }); }
 
 export { hubShopHTML, hubStashHTML, openStashCardView, openRawItem, hubUpgradeHTML, hubClassesHTML, hubAchHTML, HUB_SHOP_GOODS, hubShopGoodsCard };

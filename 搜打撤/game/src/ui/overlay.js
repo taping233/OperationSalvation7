@@ -6,6 +6,7 @@
 // 注入 css/motion-transitions.css <link>（恒在 winter.css 等静态样式之后生效）
 import './motion-transitions.js';
 import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
+import { clearExpeditionPanel, renderExpeditionPanel } from '../run/expedition.view.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -33,11 +34,11 @@ export const overlayMethods = {
   showHelp(page) {
     const t = this.helpTopics[page];
     if (!t) return;
-    const focusTarget = [...this.el.ovBody.querySelectorAll('[data-act="openHelp"]')].find(element => element.dataset.page === page);
+    const focusTarget = [.../** @type {NodeListOf<HTMLElement>} */ (this.el.ovBody.querySelectorAll('[data-act="openHelp"]'))].find(element => element.dataset.page === page);
     const presentation = captureOverlayReturnState(this.el.overlay, focusTarget);
     const returnState = typeof t.before === 'function' ? t.before() : undefined;
     this.showOverlay(`[[icon:question]] ${t.title}`, `
-      <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><small>FIELD MANUAL / 01</small><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
+      <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
       <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack" data-cancel="true">↩ 返回</button></div>`, true);
     this.act('helpBack', createOverlayReturn({
       revision: this._overlayRevision, getRevision: () => this._overlayRevision,
@@ -66,13 +67,13 @@ export const overlayMethods = {
     const revision = this._overlayRevision = (this._overlayRevision || 0) + 1;
     this._cancelPageBg?.();
     this.hideTooltip?.();
-    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
     // 失败/清空类标题用红色语义
     if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
     this._finishHide = null;
     const wasOpen = !this.el.overlay.hidden;
     const refreshHub = wasOpen && mode === 'page' &&
-      !!this.el.ovBody.querySelector('#hubMain') && bodyHtml.includes('id="hubMain"');
+      !!/** @type {HTMLElement} */ (this.el.ovBody.querySelector('#hubMain')) && bodyHtml.includes('id="hubMain"');
     if (!wasOpen) {
       const active = document.activeElement;
       this._overlayReturnFocus = active && active !== document.body ? active : null;
@@ -132,6 +133,7 @@ export const overlayMethods = {
     const prevMode = this._lastMode;
     this._lastMode = mode;
     this.el.overlay.hidden = false;
+    clearExpeditionPanel(this.el.overlay.ownerDocument);
     this._isolateOverlayBackground();
     // 全屏覆盖型页面（卡牌库/整备整页/战斗房间/宝箱）：被盖住的主页动画一律暂停
     // （2026-09-07 老板：动画不出现在画面中就暂停，回到页面再恢复）。
@@ -149,7 +151,7 @@ export const overlayMethods = {
     // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
     // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
     // 背包页同理（2026-10-15 老板：退出键复用 archive-back 放左上，多余的退出键删除）
-    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
+    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!/** @type {HTMLElement} */ (this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view'));
     // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
     // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
     // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
@@ -159,9 +161,9 @@ export const overlayMethods = {
     // 主控 10-04 复核处置：glass 模式整体按确认小窗档（hub 材料/仓库确认窗
     // 同为 mode'glass' 而 markup 无 .glass-panel 锚点，按模式判定防漏）。
     if (!document.body.classList.contains('interface-motion') && (!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage' && mode !== 'glass' &&
-        !(mode === 'discover' || card.querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]'))) SDT.Motion.overlayIn(card);
+        !(mode === 'discover' || /** @type {HTMLElement} */ (card.querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]')))) SDT.Motion.overlayIn(card);
     // 开窗音效判定与文末场景音取景共用这一次查询（两者间无 DOM 增删，结果一致）
-    const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
+    const soundScene = /** @type {HTMLElement} */ (this.el.ovBody.querySelector('.node-pg, .flow-transition'));
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
       if (!soundScene) SDT.Sound.sfx('open');
@@ -170,7 +172,7 @@ export const overlayMethods = {
     // 显式首焦点仍优先，关闭或较新页面则取消本次延后聚焦。
     requestAnimationFrame(() => {
       if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
-      const explicitFocus = options.initialFocus || this.el.ovBody.querySelector('[data-initial-focus]');
+      const explicitFocus = options.initialFocus || /** @type {HTMLElement} */ (this.el.ovBody.querySelector('[data-initial-focus]'));
       if (!explicitFocus && this.el.overlay.contains(document.activeElement)) return;
       const target = this._resolveOverlayInitialFocus(options.initialFocus);
       if (target) target.focus({ preventScroll: true });
@@ -189,7 +191,7 @@ export const overlayMethods = {
   _checkPageBg() {
     this._cancelPageBg?.();
     this._pageBgReady = Promise.resolve();
-    const host = this.el.ovBody.querySelector('[data-asset-key]');
+    const host = /** @type {HTMLElement} */ (this.el.ovBody.querySelector('[data-asset-key]'));
     if (!host) return;
     // Photo IMG loading is owned by the card-art queue, not a CSS background.
     if (host.tagName === 'IMG' && host.closest('.photo-studio-v3')) return;
@@ -202,7 +204,7 @@ export const overlayMethods = {
     if (!this._bgReady) this._bgReady = new Set();
     const probe = new Image();
     let resolveReady;
-    this._pageBgReady = new Promise(resolve => { resolveReady = resolve; });
+    this._pageBgReady = new Promise((/** @type {(value?: void) => void} */ resolve) => { resolveReady = resolve; });
     let active = true;
     let timeout;
     const cancel = () => {
@@ -232,7 +234,7 @@ export const overlayMethods = {
     host.setAttribute('aria-busy', 'true');
     timeout = setTimeout(() => finish(false), 8000);
     probe.src = url;
-    if (probe.complete && probe.naturalWidth > 0) probe.onload();
+    if (probe.complete && probe.naturalWidth > 0) probe.onload(new Event("load"));
   },
 
   // 背包关闭回调（game.bag bindBagMixins 晚绑定注册，避免 ui→bag 静态成环）：
@@ -253,7 +255,7 @@ export const overlayMethods = {
     this._overlayRevision = (this._overlayRevision || 0) + 1;
     this._cancelPageBg?.();
     this.hideTooltip?.();
-    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
     document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
     this._lastMode = null;
     this._acts = {};
@@ -270,7 +272,7 @@ export const overlayMethods = {
     // 容器不播整屏淡出，留言 #33 的整屏重合成口径保持），到点同步收场。
     // immediate（exitToTitle 收口）同样走同步：跳转不允许留任何异步尾巴
     const btFastClose = !immediate && this.el.overlay.classList.contains('room-view') &&
-      !!card.querySelector?.('.bt-settings, .bt-gy-list, .glass-panel');
+      !!/** @type {HTMLElement} */ (card.querySelector?.('.bt-settings, .bt-gy-list, .glass-panel'));
     const instant = immediate || document.body.classList.contains('reduce-motion') ||
       (this.el.overlay.classList.contains('room-view') && !btFastClose);
     const finish = () => {
@@ -295,6 +297,7 @@ export const overlayMethods = {
       this.el.overlay.classList.remove('pick-veil', 'room-view');
       this.el.overlay.hidden = true;
       this._restoreOverlayBackground();
+      if (SDT.game) renderExpeditionPanel(document.getElementById('routePanel'), SDT.game, name => SDT.Icons.img(name));
       // 隐藏不等于释放：卡牌库一次可生成 5k+ DOM 节点与数百张 <img>。关闭后若仍留在
       // ovBody，会长期占用 JS/DOM/图片资源，反复开关虽不线性叠加但峰值永不回落。
       // showOverlay 每次都会完整重建内容，因此关闭动画完成后可以安全清空。
@@ -302,8 +305,14 @@ export const overlayMethods = {
       this._hasBattleStage = false;
       // 关闭不透明页面后，Canvas 从低频巡检态立即醒来补一帧，避免最多 250ms 的回图延迟。
       SDT.RenderScheduler?.invalidate?.();
-      const returnFocus = this._overlayReturnFocus;
+      let returnFocus = this._overlayReturnFocus;
       this._overlayReturnFocus = null;
+      // 工具已随开层卸载，回地图后把焦点交给同一动作的新按钮。
+      if (returnFocus?.dataset?.expeditionTool && !returnFocus.isConnected) {
+        const returnTool = returnFocus.dataset.expeditionTool;
+        returnFocus = [...document.querySelectorAll('[data-expedition-tool]')].find(element =>
+          /** @type {HTMLElement} */ (element).dataset.expeditionTool === returnTool);
+      }
       if (returnFocus && returnFocus.isConnected && !returnFocus.closest('[inert]') && !returnFocus.hidden) {
         returnFocus.focus({ preventScroll: true });
       }
@@ -350,7 +359,7 @@ export const overlayMethods = {
   // 面板内「取消语义」按钮探测（Esc / 右上角 × / 遮罩点击共用）
   _findCancelBtn() {
     const styles = new Map();
-    const buttons = [...this.el.ovBody.querySelectorAll('button')]
+    const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (this.el.ovBody.querySelectorAll('button'))]
       .filter(b => b.dataset.cancel !== 'false')
       // Card rules can contain 返回/离开; inspection or selection is never an inferred cancel.
       .filter(b => b.dataset.cancel === 'true' || !b.matches('.reward-card, .event-choice-card, .bt-card'));
@@ -382,7 +391,7 @@ export const overlayMethods = {
       try { target = root.querySelector(initialFocus); } catch { target = null; }
     }
     // HTML 中的 data-initial-focus 是调用方无需接触 DOM 引用的安全显式入口。
-    if (!target) target = root.querySelector('[data-initial-focus]');
+    if (!target) target = /** @type {HTMLElement} */ (root.querySelector('[data-initial-focus]'));
     if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"], details > summary:first-of-type')) target = null;
     if (target && !isAvailableOverlayFocusTarget(target)) target = null;
     if (target) return target;
@@ -452,7 +461,7 @@ function isAvailableOverlayFocusTarget(element, styles = new Map()) {
     // A closed disclosure exposes only its first direct summary, even when a
     // nested details is open. The details element itself remains visible.
     if (node !== element && node.matches('details:not([open])')) {
-      const summary = node.querySelector(':scope > summary');
+      const summary = /** @type {HTMLElement} */ (node.querySelector(':scope > summary'));
       if (!summary?.contains(element)) return false;
     }
   }

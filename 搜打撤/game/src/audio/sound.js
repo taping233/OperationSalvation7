@@ -66,7 +66,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
       fetch(job.url, { signal: soundEvents.signal })
         .then(r => {
           if (disposed) throw new Error('Sound disposed');
-          if (!r.ok) throw new Error(r.status);
+          if (!r.ok) throw new Error(String(r.status));
           return r.arrayBuffer();
         })
         .then(ab => {
@@ -231,24 +231,24 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   const silentNavigationButtons = '.home-plate, #mBack, #btnHome, #btnHelp, '
     + '[data-expedition-tool="bag"], [data-expedition-tool="safe"], [data-expedition-tool="pocket"]';
   document.addEventListener('pointerdown', (e) => {
-    const button = e.target?.closest?.('button');
+    const button = (/** @type {Element | null} */ (e.target))?.closest?.('button');
     if (button && !button.disabled && !button.matches(silentNavigationButtons)) sfx('click');
   }, { signal: soundEvents.signal });
   // 全局事件委托：菜单按钮掠过播放悬停音（pointerover 会因子元素冒泡重复触发，去重）
   let lastHoverBtn = null;
   document.addEventListener('pointerover', (e) => {
-    if (!e.target || !e.target.closest) return;
-    const btn = e.target.closest('button');
+    if (!e.target || !(/** @type {Element} */ (e.target)).closest) return;
+    const btn = (/** @type {Element} */ (e.target)).closest('button');
     if (!btn || btn === lastHoverBtn || btn.disabled || btn.matches(silentNavigationButtons)) return;
     lastHoverBtn = btn;
     sfx('hover');
   }, { signal: soundEvents.signal });
   document.addEventListener('pointerout', (e) => {
-    if (lastHoverBtn && e.target && e.target.closest && e.target.closest('button') === lastHoverBtn) lastHoverBtn = null;
+    if (lastHoverBtn && e.target && (/** @type {Element} */ (e.target)).closest && (/** @type {Element} */ (e.target)).closest('button') === lastHoverBtn) lastHoverBtn = null;
   }, { signal: soundEvents.signal });
   // 全局事件委托：复选框/开关切换播放开关音
   document.addEventListener('change', (e) => {
-    if (e.target && e.target.type === 'checkbox') sfx('switch');
+    if (e.target && (/** @type {HTMLInputElement} */ (e.target)).type === 'checkbox') sfx('switch');
   }, { signal: soundEvents.signal });
 
   function dispose() {
@@ -267,7 +267,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   }
   if (import.meta.hot) import.meta.hot.dispose(dispose);
 
-  sdtDefine('Sound', {
+  export const Sound = sdtDefine('Sound', {
     sfx, music, scene, retryMusic, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },

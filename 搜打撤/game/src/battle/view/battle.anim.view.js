@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：牌局动画（离场克隆飞行 / 回合横幅 / 幸存者归位 / 手牌区显隐）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
@@ -56,16 +57,16 @@ function replayPileClass(pile, cls, ms) {
   function captureBattleView() {
     const ov = UI.el.overlay;
     if (!ov || ov.hidden) return null;
-    const handEl = ov.querySelector('.sts-hand');
+    const handEl = /** @type {BattleElement} */ (ov.querySelector('.sts-hand'));
     if (!handEl) return null;
     const ovR = uiRect(ov);   // 布局口径：rect 存档供飞行动画消费
-    const stage = handEl.closest('.battle-stage');
+    const stage = /** @type {BattleElement} */ (handEl.closest('.battle-stage'));
     const cards = {};
-    handEl.querySelectorAll('.bt-card[data-uid]').forEach(el => {
+    /** @type {NodeListOf<BattleElement>} */ (handEl.querySelectorAll('.bt-card[data-uid]')).forEach(el => {
       const r = uiRect(el);
       cards[el.dataset.uid] = {
         html: el.outerHTML,
-        name: ((el.querySelector('.hsc-name') || {}).textContent || '').trim(),
+        name: ((/** @type {BattleElement} */ (el.querySelector('.hsc-name')) || {}).textContent || '').trim(),
         rect: { left: r.left - ovR.left, top: r.top - ovR.top, width: r.width, height: r.height },
       };
     });
@@ -75,7 +76,7 @@ function replayPileClass(pile, cls, ms) {
       const r = uiRect(el);
       return { left: r.left - ovR.left, top: r.top - ovR.top, width: r.width, height: r.height };
     };
-    const energyEl = stage ? stage.querySelector('.sts-energy b') : null;
+    const energyEl = stage ? /** @type {BattleElement} */ (stage.querySelector('.sts-energy b')) : null;
     return {
       cards,
       phase: stage ? stage.dataset.phase : null,
@@ -95,14 +96,14 @@ function replayPileClass(pile, cls, ms) {
         if (foe) return { ...centerOf(foe), scale: 0.42, dur: 400, fade: 0.08 };
       }
       if (ev.side === 'self') {
-        const me = body.querySelector('#btSelf .sts-figure');
+        const me = /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'));
         if (me) return { ...centerOf(me), scale: 0.42, dur: 400, fade: 0.08 };
       }
-      const disc = document.querySelector('.sts-hud-r .bt-pile');
+      const disc = /** @type {BattleElement} */ (document.querySelector('.sts-hud-r .bt-pile'));
       if (disc) return { ...centerOf(disc), scale: 0.3, dur: 380, fade: 0.25 };
     }
     if (ev.kind === 'dump') {
-      const disc = document.querySelector('.sts-hud-r .bt-pile');
+      const disc = /** @type {BattleElement} */ (document.querySelector('.sts-hud-r .bt-pile'));
       if (disc) return { ...centerOf(disc), scale: 0.3, dur: 380, fade: 0.25 };
     }
     return { x: rect.left + rect.width / 2, y: rect.top - 80, scale: 0.5, dur: 460, fade: 0, burn: true };
@@ -127,15 +128,23 @@ function replayPileClass(pile, cls, ms) {
   // 手牌区沉/升动画追踪（09-12 实机 bug：下沉动画 fill:forwards 在常驻节点上永续保持，
   // 升回动画无 fill、播完效果消失，沉下终态随即复活＝「你的回合」手牌升上来又沉回去）。
   // 同刻至多一对动画：创建新动画前先 cancel 旧的；升回也用 forwards 保持终态（=CSS 默认位）。
+  // 反馈1021·12（偶发「卡牌区在下方没升上来并且虚化」）：prevView 只在本渲染带有出牌事件时
+  // 才采样（battle.view.js takeCardAnims→captureBattleView），敌→玩家那一帧常常没有事件 →
+  // 既不建升回动画、也不 cancel 旧的下沉动画，fill:forwards 就把常驻手牌层永久钉在
+  // translateY(72%)/opacity .08（data-phase 已回 player，声明式 CSS 抢不回 WAAPI 构造层）。
+  // 修复：本模块自己记住这组动画朝向的相位终态，采样缺席时用它补出相位差——该升就升；
+  // 拿不到任何相位信息且终态与当前阶段不符时 cancel，交回声明式 CSS（两端态就是目标态）。
   let handPhaseAnims = [];
+  let handPhaseTarget = null;
   function cancelHandPhaseAnims() {
     handPhaseAnims.forEach(a => { try { a.cancel(); } catch { /* 已结束动画 cancel 不抛 */ } });
     handPhaseAnims = [];
+    handPhaseTarget = null;
   }
   function animateBattleTransition(prev, body, events = [], extraFlightMs = 0) {
     let flightMs = extraFlightMs;
-    const handEl = body.querySelector('.sts-hand');
-    const stage = body.querySelector('.battle-stage');
+    const handEl = /** @type {BattleElement} */ (body.querySelector('.sts-hand'));
+    const stage = /** @type {BattleElement} */ (body.querySelector('.battle-stage'));
     showBattleCardResults(stage, events);
     showBattleEffectFeedback(stage, events, prev);
     showTurnFeedback(stage, events);
@@ -143,28 +152,41 @@ function replayPileClass(pile, cls, ms) {
     // 回合标题由真实事件单独驱动；手牌位移仍沿阶段差分。
     const quiet = quietFeedback();
     if (quiet) cancelHandPhaseAnims();
-    if (!quiet && handEl && stage && prev && prev.phase != null && handEl.animate) {
+    if (handEl && stage && handEl.animate) {
       const ph = stage.dataset.phase;
-      if (ph === 'enemy' && prev.phase !== 'enemy') {
+      const prevPhase = prev && prev.phase != null ? prev.phase : handPhaseTarget;
+      // 只有 data-phase="enemy" 会由声明式 CSS 下沉，其余相位手牌基位＝升起；
+      // 因此动画只在「下沉↔基位」这一维发生翻转时才需要，targeting/胜利等相位与 player 同基位。
+      const sinkNow = ph === 'enemy';
+      if (!quiet && prevPhase != null && sinkNow !== (prevPhase === 'enemy')) {
         cancelHandPhaseAnims();
-        handPhaseAnims.push(animateSafe(handEl,
-          [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(72%)', opacity: 0.08 }],
-          { duration: 300, easing: 'ease-in', fill: 'forwards' }));
-      } else if (ph && ph !== 'enemy' && prev.phase === 'enemy') {
+        if (sinkNow) {
+          handPhaseAnims.push(animateSafe(handEl,
+            [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(72%)', opacity: 0.08 }],
+            { duration: 300, easing: 'ease-in', fill: 'forwards' }));
+        } else {
+          handPhaseAnims.push(animateSafe(handEl,
+            [{ transform: 'translateY(72%)', opacity: 0.08 }, { transform: 'translateY(0)', opacity: 1 }],
+            { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
+        }
+        handPhaseTarget = ph;
+      } else if (handPhaseAnims.length && ((handPhaseTarget === 'enemy') !== sinkNow)) {
+        // 相位没有可判定的翻转（prev 缺席且无历史终态），或终态与当前阶段的沉/升维度不符：
+        // 陈旧动画不能继续按 fill:forwards 覆盖声明式 CSS。
         cancelHandPhaseAnims();
-        handPhaseAnims.push(animateSafe(handEl,
-          [{ transform: 'translateY(72%)', opacity: 0.08 }, { transform: 'translateY(0)', opacity: 1 }],
-          { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
       }
     }
     // —— 能量变化脉冲（花费/回复都闪一下）——
     if (stage && prev && prev.energy != null) {
-      const energyEl = stage.querySelector('.sts-energy b');
+      const energyEl = /** @type {BattleElement} */ (stage.querySelector('.sts-energy b'));
       const now = energyEl ? parseInt(energyEl.textContent, 10) : NaN;
-      const orb = stage.querySelector('.sts-energy');
+      const orb = /** @type {BattleElement} */ (stage.querySelector('.sts-energy'));
       if (!isNaN(now) && now !== prev.energy && orb) {
         SDT.Sound.sfx(now > prev.energy ? 'energyUp' : 'energyDown');
         if (!quiet && orb.animate && !events.some(event => ['player-turn-start', 'extra-turn-start'].includes(event.kind))) {
+          if (energyEl) animateSafe(energyEl,
+            [{ transform:'scale(1)', filter:'brightness(1)' }, { transform:'scale(1.24)', filter:'brightness(1.6)' }, { transform:'scale(1)', filter:'brightness(1)' }],
+            { duration:380, easing:'cubic-bezier(.2,.8,.3,1)' });
           orb.animate(
             [{ filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
             { duration: 380, easing: 'ease-out' });
@@ -186,7 +208,7 @@ function replayPileClass(pile, cls, ms) {
     // —— 牌库图标动画（2026-09-11 需求，约 1.5s）：抽牌脉冲 / 洗入旋光 ——
     // 重播辅助：1.6s 内同类二次触发要摘类+reflow 再挂（类已挂时 add 无效=动画不重播），
     // 并清旧定时器（否则旧 timer 到点摘类截断新一轮）
-    const pileEl = body.querySelector('.sts-hud-l .bt-pile');
+    const pileEl = /** @type {BattleElement} */ (body.querySelector('.sts-hud-l .bt-pile'));
     if (pileEl) {
       if (drawn.size) replayPileClass(pileEl, 'pile-pulse', 1600);
       if (shuffles.length) replayPileClass(pileEl, 'pile-shuffle', 900);

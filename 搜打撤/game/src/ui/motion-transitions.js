@@ -10,7 +10,7 @@ import './transitions-director.js';
 
 const HREF = new URL('../../css/motion-transitions.css', import.meta.url).href;
 
-if (typeof document !== 'undefined' && !document.querySelector('link[data-motion-transitions]')) {
+if (typeof document !== 'undefined' && !/** @type {HTMLElement} */ (document.querySelector('link[data-motion-transitions]'))) {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = HREF;

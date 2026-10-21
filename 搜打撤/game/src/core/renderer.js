@@ -8,6 +8,7 @@ import { renderScheduler } from './render-scheduler.js';
 import { mapNodeInfo } from './node-info.js';
 import { isConsumedMapNode, mapNodeStatus } from './map-node-state.js';
 import { createMapCityAtmosphere } from './map-city-atmosphere.js';
+import { mapLayerAtmosphere, drawMapLayerHaze } from './map-layer-atmosphere.js';
 import { drawMapNodeBadge, drawMapFogBadge, drawMapTraveller, mapViewportScale, prepareMapNodeArt } from './map-node-art.js';
 import { noteGlowPulse, glowPulse } from './map-node-glow.js';
 import { entrySupplyGate } from '../run/node-reward-state.js';
@@ -26,6 +27,8 @@ const SDT = window.SDT;
   mapAtmosphere.decoding='async';
   mapAtmosphere.onload=()=>{if(rendererDisposed)return;backdropCanvas=null;SDT.RenderScheduler?.invalidate();};
   mapAtmosphere.src=new URL('../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp',import.meta.url).href;
+  /** @overload @param {number} [layer] @returns {{img:HTMLImageElement}} */
+  /** @returns {{img:HTMLImageElement}} */
   function backdropFor(){return {img:mapAtmosphere};}
   let backdropCanvas = null;               // 壁纸合成层（尺寸/层或就绪状态变化时重建）
   const drawMapCityAtmosphere = createMapCityAtmosphere(() => {
@@ -105,14 +108,11 @@ const SDT = window.SDT;
     if(ready){
       const scale=Math.max(cam.viewW/img.naturalWidth,cam.viewH/img.naturalHeight);
       const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;
-      b.filter='grayscale(.9) brightness(.34) contrast(1.14)';
+      b.filter=mapLayerAtmosphere(li).filter;
       b.drawImage(img,(cam.viewW-dw)/2,(cam.viewH-dh)/2,dw,dh);b.filter='none';
     }
-    drawMapCityAtmosphere(b, cam.viewW, cam.viewH);
-    b.fillStyle='rgba(1,10,17,.25)';b.fillRect(0,0,cam.viewW,cam.viewH);
-    const cold=b.createRadialGradient(cam.viewW*.22,cam.viewH*.20,0,cam.viewW*.22,cam.viewH*.20,cam.viewW*.62);
-    cold.addColorStop(0,'rgba(34,71,97,.20)');cold.addColorStop(1,'rgba(9,20,30,0)');
-    b.fillStyle=cold;b.fillRect(0,0,cam.viewW,cam.viewH);
+    drawMapCityAtmosphere(b, cam.viewW, cam.viewH, li);
+    drawMapLayerHaze(b, cam.viewW, cam.viewH, li);
     // Quiet winter scenery supports the routes; no separate beams or node-coloured particles.
     b.globalAlpha=1;
     backdropCanvas = c;
@@ -436,8 +436,9 @@ const SDT = window.SDT;
       }
       const road=descriptor.paint;
       const chosen=planned.has(road.edgeKey),legal=road.legal;
+      const explored=!!game.explored?.[road.fromKey]&&!!game.explored?.[road.toKey];
       const color=chosen?'#79c9c4':legal?'#c7d1ca':'#b9c8c2';
-      drawMapBrushRoad(ctx,road,unit/z,{alpha:chosen?(moving?.45:.95):legal?.8:.45});
+      drawMapBrushRoad(ctx,road,unit/z,{alpha:chosen?(moving?.46:.82):legal?.58:explored?.30:.17});
       if(chosen||road.legal){
         const forward=chosen?planned.get(road.edgeKey)===road.fromKey:road.fromKey===`${game.layerIdx},${game.trackPos}`;
         const c=road.section,tip=forward?c.to:c.from,control=forward?c.c2:c.c1;
@@ -469,7 +470,7 @@ const SDT = window.SDT;
   // ---------- 火堆结点（辉光环 + 摇曳火焰） ----------
   // ---------- 编号（当前环结点，顶部长小字） ----------
   function drawIndexes(ctx, game, g) {
-    if (!game.toggles.index) return;
+    if (!game.devMode || !game.toggles.index) return;
     ctx.font = font(game.cam, 9);
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
@@ -495,6 +496,7 @@ const SDT = window.SDT;
     const cam = game.cam;
     // The environment remains readable beneath routes and is cached by viewport/layer.
     ctx.drawImage(ensureBackdrop(cam, game.layerIdx), 0, 0, cam.viewW, cam.viewH);
+    drawMapCityAtmosphere.drawEnvironment(ctx,cam.viewW,cam.viewH,game.layerIdx,cam.zoom);
     // 换层溶解：旧层壁纸叠在新层上淡出（snap 画布同视口尺寸，直接铺）
     if (backdropFade.snap) {
       const u = Math.min(1, (performance.now() - backdropFade.t0) / BACKDROP_FADE_MS);
@@ -560,12 +562,12 @@ const SDT = window.SDT;
     if (backdropFadeFrame) cancelAnimationFrame(backdropFadeFrame);
     backdropFadeFrame = 0; backdropFadeDriving = false;
     backdropCanvas = null; backdropFade.snap = null;
-    const canvas = document.getElementById('game');
+    const canvas = /** @type {HTMLCanvasElement | null} */ (document.getElementById('game'));
     const ctx = canvas?.getContext('2d');
     if (!ctx || !game.cam || !game.nodes?.length) return false;
     draw(ctx, game);
     return true;
   }
 
-  SDT.Renderer = { draw, dispose, warm, prepare, nodeLabelBounds };
+  export const Renderer = SDT.Renderer = { draw, dispose, warm, prepare, nodeLabelBounds };
   if (import.meta.hot) import.meta.hot.dispose(dispose);

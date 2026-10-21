@@ -35,7 +35,7 @@ function samplePhotoFps(label, duration = 2500, requireOpen = true) {
     : null;
   try { observer?.observe({ type: 'longtask', buffered: false }); } catch { /* 环境不支持 longtask 条目：性能探针降级 */ }
   const frameObserver = typeof PerformanceObserver === 'function'
-    ? new PerformanceObserver(list => list.getEntries().forEach(entry => longAnimationFrames.push({
+    ? new PerformanceObserver(list => list.getEntries().forEach((/** @type {PerformanceEntry & {renderStart:number,styleAndLayoutStart:number,scripts?:{duration:number,invoker?:string}[]}} */ entry) => longAnimationFrames.push({
       duration: +entry.duration.toFixed(1),
       renderMs: +(entry.duration - (entry.renderStart - entry.startTime)).toFixed(1),
       layoutMs: +(entry.duration - (entry.styleAndLayoutStart - entry.startTime)).toFixed(1),

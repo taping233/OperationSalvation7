@@ -16,7 +16,7 @@ function updateCoverContext() {
   const body = document.getElementById('ovBody');
   const visibleBody = overlay && !overlay.hidden ? body : null;
   const researchView = !!visibleBody?.querySelector(researchRoots) || !!document.getElementById('labEnding')
-    || (!!game?.nestActive && !!visibleBody?.querySelector('.battle-stage.sts'));
+    || (!!game?.nestActive && !!/** @type {HTMLElement} */ (visibleBody?.querySelector('.battle-stage.sts')));
   const titleBoundary = game?.state === 'title' && overlay?.hidden;
   const ordinaryView = !!visibleBody?.querySelector(ordinaryRoots) || titleBoundary
     || (!!game && !game.nestActive && overlay?.hidden && !document.getElementById('cardZoom'));

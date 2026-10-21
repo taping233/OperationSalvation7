@@ -18,6 +18,7 @@ export default [
   "cards/equip-tt13-astrolabe.webp",
   "cards/equip-tt13-flame-staff.webp",
   "cards/equip-tt13-magazine.webp",
+  "cards/equip-tt13-poor-meal.webp",
   "cards/equip-tt13-scale-armor.webp",
   "cards/equip-tt2-apollo.webp",
   "cards/equip-tt2-frostsword.webp",

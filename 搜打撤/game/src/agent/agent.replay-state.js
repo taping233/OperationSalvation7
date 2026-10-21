@@ -42,12 +42,29 @@ function rulesRng(snapshot) {
     .filter(([name]) => !NON_RULE_STREAMS.has(name))) };
 }
 
+// Rebuilt fixtures have fresh interaction identities. Keep current/stale battle
+// membership and every rule field, without comparing process-local sequence IDs.
+function replayInteraction(value, currentToken) {
+  if (!value) return value;
+  const out = { ...value };
+  delete out.selectionId;
+  if (out.battleToken != null) out.battleToken = out.battleToken === currentToken ? 'current-battle' : 'stale-battle';
+  return out;
+}
+
 function readReplayState(obs = observe()) {
   const diagnostics = window.SDT?.Battle?.getReplayState?.();
   if (!diagnostics) throw new Error('Battle replay diagnostics are unavailable');
-  const battle = diagnostics.battle;
+  const currentToken = window.SDT?.Battle?.getSnapshot?.().battleToken;
+  const battle = { ...diagnostics.battle,
+    pendingTarget: replayInteraction(diagnostics.battle.pendingTarget, currentToken),
+    infusing: replayInteraction(diagnostics.battle.infusing, currentToken) };
+  const interaction = diagnostics.rules.interaction;
+  const battleRules = { ...diagnostics.rules, interaction: { ...interaction,
+    interaction: replayInteraction(interaction.interaction, currentToken),
+    infusing: replayInteraction(interaction.infusing, currentToken) } };
   return plainData({ phase: obs.phase, turbo: isTurbo(), battle,
-    battleRules: diagnostics.rules,
+    battleRules,
     run: Object.fromEntries(RUN_KEYS.filter(key => game[key] !== undefined).map(key => [key, game[key]])),
     rules: window.SDT?.MAP?.rules || {}, rng: rulesRng(Random.snapshot()) }, true);
 }

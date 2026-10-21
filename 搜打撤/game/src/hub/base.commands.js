@@ -59,7 +59,7 @@ async function commitBase(context, preparedChange) {
   const locked = await withSlotWriteLock(context.slotId,
     lease => commitBaseLocked(context, preparedChange, lease),
     { isCurrent: () => Base() === base && base.slot === context.slotId });
-  return locked.ok ? locked.value : locked;
+  return locked.ok === true ? locked.value : locked;
 }
 
 function commitBaseLocked(context, preparedChange, lease) {

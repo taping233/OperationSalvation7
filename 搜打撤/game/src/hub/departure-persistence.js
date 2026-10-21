@@ -7,6 +7,7 @@ export const DEPARTURE_COMMAND = 'departureStart';
 let departureNonce = 0;
 
 // A departure creates an exploration; settlement journals require an existing one.
+/** @returns {import('./recoverable-pair.js').JournalValidationResult} */
 export function validateDepartureJournal(journal, baseVersion, runVersion) {
   try {
     const beforeBase = journal.before.baseRaw === null ? null : JSON.parse(journal.before.baseRaw);
@@ -32,7 +33,7 @@ export function validateDepartureJournal(journal, baseVersion, runVersion) {
   } catch { return fail('RECOVERY_BLOCKED', '出征日志损坏，已保留原存档'); }
 }
 
-export function createDeparturePersistence({ storage, baseApi, runStore, txKey, failpoint, lockManager = globalThis.navigator?.locks }) {
+export function createDeparturePersistence({ storage, baseApi, runStore, txKey, failpoint = undefined, lockManager = globalThis.navigator?.locks }) {
   const keys = slotId => ({ base: baseApi.SLOT_KEY(slotId), run: runStore.key(slotId), journal: txKey(slotId) });
   let writeOwner = null;
   const guardedStorage = guardSlotStorage(storage, key => writeOwner && Object.values(keys(writeOwner.slotId)).includes(key) ? writeOwner : null);
@@ -75,6 +76,7 @@ export function createDeparturePersistence({ storage, baseApi, runStore, txKey, 
     afterBase.version = baseApi.BASE_VERSION;
     afterBase._m01 = { revision, requests: { ...(afterBase._m01?.requests || {}), [`${DEPARTURE_COMMAND}:${runId}`]: { fingerprint, result: receipt } } };
     const afterRun = { ...run, version: runStore.SAVE_VERSION, _r2: { runId, revision: 0 } };
+    /** @type {import('./recoverable-pair.js').Journal} */
     const journal = {
       version: 1, txId: `${slotId}:${runId}:departure`, slotId, requestId: runId,
       command: DEPARTURE_COMMAND, fingerprint, runId,

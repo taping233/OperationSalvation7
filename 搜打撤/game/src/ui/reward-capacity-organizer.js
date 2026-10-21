@@ -3,14 +3,14 @@ import { rewardReturnHTML } from './reward-scene-view.js';
 
 // Organization actions commit independently. The reward is granted only by its owner.
 export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, capacity,
-  moveToSafe, discardOne, current, onReturn, onClaim, onFullBag, safeAvailability = () => ({ok:true,reason:''}) }) {
+  moveToSafe, discardOne, current, onReturn, onClaim, onFullBag, safeAvailability = (/** @type {{card: import("../hub/game.store.types.js").CardSnapshot, count: number, uids?: string[]}} */ _stack) => { void _stack; return {ok:true,reason:''}; } }) {
   let receipt = '', pending = null, revision = 0;
   UI.showOverlay('腾出位置', '<section class="reward-capacity-organizer"></section>', 'chest');
-  const root = UI.el.ovBody.querySelector('.reward-capacity-organizer');
+  const root = /** @type {HTMLElement} */ (UI.el.ovBody.querySelector('.reward-capacity-organizer'));
   const live = () => current() && root.isConnected && UI.el.ovBody.contains(root)
     && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
   function render(focus = null) {
-    const previousList = root.querySelector('.reward-organizer-list');
+    const previousList = /** @type {HTMLElement} */ (root.querySelector('.reward-organizer-list'));
     const scrollTop = previousList?.scrollTop || 0, scrollLeft = previousList?.scrollLeft || 0;
     const version = ++revision, stacks = readStacks(), fits = canReceive();
     const safeStates = stacks.map(safeAvailability);
@@ -27,9 +27,9 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
       <footer>${rewardReturnHTML({ action:"return", organize:true })}
       <button type="button" data-organize="bag">完整背包</button>
       <button type="button" class="ok" data-organize="claim"${fits ? '' : ' disabled'}>${fits ? '收下此牌' : '还需腾出位置'}</button></footer>`;
-    const list = root.querySelector('.reward-organizer-list');
+    const list = /** @type {HTMLElement} */ (root.querySelector('.reward-organizer-list'));
     list.scrollTop = scrollTop; list.scrollLeft = scrollLeft;
-    root.querySelectorAll('[data-organize]').forEach(button => button.addEventListener('click', () => {
+    /** @type {NodeListOf<HTMLButtonElement>} */ (root.querySelectorAll('[data-organize]')).forEach(button => button.addEventListener('click', () => {
       if (!live() || revision !== version || !root.contains(button) || button.disabled) return;
       const action = button.dataset.organize;
       if (action === 'return' || action === 'bag' || action === 'claim') {
@@ -66,10 +66,10 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
         target = root.querySelector(`[data-organize="${focus.action}"][data-index="${index}"]:not(:disabled)`)
           || root.querySelector(`[data-organize="discard"][data-index="${index}"]`);
       }
-      (target || root.querySelector('[data-organize="return"]'))?.focus({ preventScroll:true });
+      (target || /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]')))?.focus({ preventScroll:true });
     }
   }
   render();
-  root.querySelector('[data-organize="return"]')?.focus();
+  /** @type {HTMLElement} */ (root.querySelector('[data-organize="return"]'))?.focus();
   return root;
 }

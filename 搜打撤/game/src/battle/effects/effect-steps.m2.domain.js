@@ -22,6 +22,7 @@ const instanceRuntime = context.runtime;
 /** 手牌招式诅咒：规则优先，未迁移卡沿旧描述识别；叠层求和、计时取最大。 */
 function scanHandMoveCurses(deps) {
   const merged = new Map();
+  /** @type {[string, RegExp, number][]} */
   const legacySpecs = [
     ['bleed', /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, 1],
     ['poison', /(?:附加|施加)\s*(?:(\d+)\s*层)?\s*中毒/, 1],

@@ -4,12 +4,10 @@
  * 由 game.run.js 拆出。层位最高（L2）：依赖 scenes（L0）与 altar（L1），不被二者依赖。
  * ============================================================ */
 import { MAP, cellCenter, curLayer, gainCoins, game, getActiveSlot, markSeen, modeCfg, pick, saveGame, scaledEnemy, weighted } from './game.session.js';
-import { _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random } from '../core/random.js';
-import { eventNarrative, lastLampNarrative } from '../home/narrative.js';
+import { _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
-import { storyCommands } from '../home/story.commands.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { isTurbo } from '../core/turbo.js';
@@ -21,11 +19,8 @@ import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, fini
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { entrySupplyAt, entrySupplyGate, nodeActionBinding } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
+import { createEventLifecycle, createLazyEventEntry } from './event-lifecycle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
-import { createEventDiceController } from '../ui/event-dice.js';
-import { createEventCommands } from './event-commands.js';
-import { createRunEventController } from './game.run.events.js';
-import { eventOptionHTML } from '../ui/event-option-state.js';
 import { createRunResourceController } from './game.run.resources.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -348,30 +343,30 @@ function runInstant(def, after) {
   }
 }
 
-// Event runtime is assembled lazily, after the session and scene ports exist.
+// Pending choices remain synchronous; ordinary event content loads only on entry.
 let events;
 function eventController() {
-  return events ||= createRunEventController({
-    eventOptionHTML,
-    game, UI, dom:document, MAP, getCards:() => SDT.Cards, sound:key => SDT.Sound.sfx(key),
-    serializeReward:state => SDT.Chests?.serialize?.(state),
-    eventCommands:createEventCommands({ state:game, gainCoins,
-      heal:amount => game.heal(amount), damage:(amount, reason) => game.damage(amount, reason),
-      grantCard:(card, options) => grantEventCard(card, options) }),
-    createDice:ports => createEventDiceController({ ...ports, SDT }),
-    createCardChoice:ports => createEventCardChoiceController({ ...ports, SDT }),
+  if (events) return events;
+  const ports = {
+    game, UI, SDT, dom:document, MAP, getCards:() => SDT.Cards, sound:key => SDT.Sound.sfx(key),
+    serializeReward:state => SDT.Chests?.serialize?.(state), gainCoins,
+    createCardChoice:options => createEventCardChoiceController({ ...options, SDT }),
     captureRunContext:() => captureBattleContext(game, getActiveSlot),
-    getActiveSlot, saveGame, pick:items => pick(items), weighted:items => weighted(items),
+    getActiveSlot, saveGame, RunStorage, setCardPageOpen:value => _set_cardPageOpen(value),
+    pick:items => pick(items), weighted:items => weighted(items),
     scaledEnemy:enemy => scaledEnemy(enemy),
-    nodeShell:spec => nodeShell(spec), nodeOpt:(...args) => nodeOpt(...args),
+    nodeShell:spec => nodeShell(spec), nodeOpt:/** @param {Parameters<typeof nodeOpt>} args */ (...args) => nodeOpt(...args),
     enterNode:(...args) => enterNode(...args), consumeCurrentCell:() => consumeCurrentCell(),
     finishInstant:(...args) => finishInstant(...args), cancelLegacyChainMove:() => cancelLegacyChainMove(),
-    grantEventCard:(...args) => grantEventCard(...args),
+    grantEventCard:/** @param {Parameters<typeof grantEventCard>} args */ (...args) => grantEventCard(...args),
     openFixedRewardsOnCell:(...args) => openFixedRewardsOnCell(...args),
-    openChestsOnCell:(...args) => openChestsOnCell(...args), openPocketRestore:(...args) => openPocketRestore(...args),
-    setBagReturnHook, bagSlots, setCardPageOpen:value => _set_cardPageOpen(value),
-    startBattle:(...args) => startBattle(...args), RunStorage, storyCommands,
-    eventNarrative:id => eventNarrative(id), lastLampNarrative:id => lastLampNarrative(id),
+    openChestsOnCell:(...args) => openChestsOnCell(...args), openPocketRestore:/** @param {Parameters<typeof openPocketRestore>} args */ (...args) => openPocketRestore(...args),
+    setBagReturnHook, bagSlots, startBattle:(...args) => startBattle(...args),
+  };
+  const lifecycle = createEventLifecycle(ports);
+  return events = createLazyEventEntry({ ...ports, lifecycle,
+    load:() => import('./event-runtime.js'),
+    create:module => module.createRunEventRuntime(ports, lifecycle),
   });
 }
 export async function runEventDeck() { return eventController().runEventDeck(); }

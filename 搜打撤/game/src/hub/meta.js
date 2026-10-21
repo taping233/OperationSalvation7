@@ -351,7 +351,7 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     });
   }
 
-  SDT.Meta = {
+  export const Meta = SDT.Meta = {
     LEVEL_MAX, xpForNext, perkText,
     addXpToProgress, collectionXpFor,
     classList, classLv, classXP, addXP, classSummary,

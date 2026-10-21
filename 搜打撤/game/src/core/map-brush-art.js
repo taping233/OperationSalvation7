@@ -36,7 +36,7 @@ function point(c, t) {
 // A cubic stays inside its control-point bounds. Include the widest ribbon's
 // transparent fringe so a trail crossing the viewport is never dropped.
 export function mapBrushRoadInView(curve, scale, view) {
-  const pad = 12 * scale / (193 / 1024) + 2 * scale;
+  const pad = 9.6 * scale / (193 / 1024) + 2 * scale;
   const xs = [curve.from.x, curve.c1.x, curve.c2.x, curve.to.x];
   const ys = [curve.from.y, curve.c1.y, curve.c2.y, curve.to.y];
   return Math.max(...xs) + pad >= view.left && Math.min(...xs) - pad <= view.right
@@ -64,7 +64,7 @@ export function drawMapBrushRoad(ctx, road, scale, {alpha = .65, view = null} = 
     const c = road.section;
     // Normalize to the visible pigment band; retain the original soft alpha outside it.
     const pigmentRatio = [193/1024,237/1024,216/1024][variant];
-    const ribbonHeight = 24 * scale / pigmentRatio;
+    const ribbonHeight = 19.2 * scale / pigmentRatio;
     const pad = ribbonHeight / 2 + 2 * scale;
     const xs = [c.from.x,c.c1.x,c.c2.x,c.to.x], ys = [c.from.y,c.c1.y,c.c2.y,c.to.y];
     const x = Math.min(...xs)-pad, y = Math.min(...ys)-pad;

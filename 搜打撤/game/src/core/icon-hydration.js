@@ -24,7 +24,7 @@ export function observeIconHydration(body, { hydrate, scrubAttrs, hasTokens }) {
         if (node.nodeType === Node.TEXT_NODE && !hasTokens(node.nodeValue)) continue;
         if (node.nodeType !== Node.TEXT_NODE && node.nodeType !== Node.ELEMENT_NODE) continue;
         // Generated bitmap icons have no text or token-bearing attributes.
-        if (node.nodeType === Node.ELEMENT_NODE && node.matches('img.ic')) {
+        if (node.nodeType === Node.ELEMENT_NODE && (/** @type {Element} */ (node)).matches('img.ic')) {
           scrubAttrs(node);
           continue;
         }

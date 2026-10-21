@@ -163,6 +163,7 @@ function defaultCandidate(seed, attempt) {
 }
 
 /** @param {string | number} seed */
+/** @param {string | number} [seed] @param {typeof defaultCandidate} [buildCandidate] */
 export function generateCurrentLayeredMap(seed = 0, buildCandidate = defaultCandidate) {
   for (let attempt = 0; attempt < MAX_CURRENT_MAP_ATTEMPTS; attempt++) {
     try {

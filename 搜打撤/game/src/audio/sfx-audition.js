@@ -1,4 +1,7 @@
-const $ = id => document.getElementById(id);
+export {};
+/** @typedef {{'audio': HTMLAudioElement, 'search': HTMLInputElement, 'pack-panel': HTMLElement, 'pack-buttons': HTMLElement, 'pack-note': HTMLElement, 'status': HTMLElement, 'variant': HTMLButtonElement, 'total': HTMLElement, 'now-title': HTMLElement, 'now-detail': HTMLElement, 'grid': HTMLElement, 'categories': HTMLElement, 'section-title': HTMLElement, 'count': HTMLElement, 'toggle': HTMLButtonElement, 'signal': HTMLElement, 'elapsed': HTMLElement, 'duration': HTMLElement, 'progress': HTMLInputElement, 'sequence': HTMLElement, 'loop': HTMLInputElement, 'volume': HTMLInputElement, 'previous': HTMLButtonElement, 'next': HTMLButtonElement, 'stop': HTMLElement, 'volume-value': HTMLElement, 'variant-key-tip': HTMLElement}} PageElements */
+/** @template {keyof PageElements} K @param {K} id @returns {PageElements[K]} */
+const $ = id => /** @type {PageElements[K]} */ (document.getElementById(id));
 const audio = $('audio');
 let favorites = new Set(['click', 'card', 'hit', 'eventEnter', 'bossReveal']);
 let featuredLabel = '旧版五样', featuredTitle = '旧版声音，仅供对照';

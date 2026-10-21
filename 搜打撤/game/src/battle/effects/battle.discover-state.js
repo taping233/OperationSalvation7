@@ -1,7 +1,7 @@
 // @ts-check
 /** Pure, typed builders for the distinct discovery jobs and popup states. */
 
-/** @typedef {import('../battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: DiscoverCard[] }} DiscoverCard */
+/** @typedef {import('../battle.snapshot.types.js').BattleCardInput & { name: string, rarity?: string, cls?: string, _pouch?: DiscoverCard[] }} DiscoverCard */
 /** @typedef {(card: DiscoverCard) => boolean} DiscoverCardPredicate */
 /** @typedef {{ kind: string, cost?: number }} StructuredDiscoverPool */
 

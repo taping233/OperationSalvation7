@@ -58,6 +58,7 @@ function stashCount(baseSnapshot, ref) {
   }, 0);
 }
 
+/** @param {import('./preparation.types.js').PreviewOptions} [options] */
 export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity, starterCount = 5, starterCard } = {}) {
   const picks = normalizePicks(preset?.picks);
   if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
@@ -112,6 +113,7 @@ export function createPreparationCommands(deps = {}) {
     return port.commitBase(context, { beforeRevision: current.revision, command, payload, afterState: next, events: [{ type: `preparation.${command}`, payload }], output });
   };
 
+  /** @param {object} context @param {{targetIds?: string[]}} [input] */
   const setTrackedGoals = async (context, { targetIds } = {}) => {
     if (!Array.isArray(targetIds) || targetIds.some(id => typeof id !== 'string' || !id.trim())) return fail('INVALID_ARGUMENT', 'targetIds 必须是稳定 ID 数组');
     const unique = [...new Set(targetIds.map(id => id.trim()))];

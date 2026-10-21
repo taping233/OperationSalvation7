@@ -120,7 +120,7 @@ check('BOSS·胜利领奖完成后直接保存结算', (() => {
 // 2026-10-01（ROOT-06）：「未选卡牌从 ownedCards 删除」属已退役的整理背包页契约；
 // Item 16 后该页彻底移除，改守护「退役入口无残留调用」。
 check('BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）', !/showBossPackCleanup\s*\(/.test(gameSource), true);
-check('档位概览仅展示游玩时间与已解锁成就', /PLAYTIME/.test(gameSource) && /ACHIEVEMENTS/.test(gameSource), true);
+check('档位概览仅展示游玩时间与已解锁成就', /游玩时间/.test(gameSource) && /已解锁成就/.test(gameSource), true);
 check('背包入口支持再次点击关闭', /if \(!refreshOnly && backpackOpen/.test(gameSource), true);
 check('背包缩略卡点击进入详情', /data-act="inspectStack"/.test(gameSource) && /function showBagCardDetail/.test(gameSource), true);
 check('道具使用入口只在详情页生成', !/data-act="useStack"/.test(gameSource) && /data-act="useDetailCard"/.test(gameSource), true);

@@ -1,4 +1,5 @@
 // Warm actual renderer images; failed resources keep their existing fallback presentation.
+/** @param {HTMLImageElement} image @param {{signal?:AbortSignal,timeout?:number}} [options] */
 export function mapImageReady(image, { timeout = 3000, signal } = {}) {
   if (!image) return Promise.resolve(false);
   return new Promise(resolve => {

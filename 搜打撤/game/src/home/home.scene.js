@@ -121,6 +121,7 @@ function markup(v) {
 }
 
 function drawScene(host, view, assets) {
+  /** @type {Application & {setHomeActive?:(active:boolean)=>void,disposeHomePaint?:()=>void,redrawHome?:(next:typeof view,placements?:typeof view.home.placements,editing?:boolean)=>void,homeProjection?:ReturnType<typeof createHomeProjection>}} */
   const app = new Application({
       resizeTo: host,
       autoStart: false,
@@ -186,7 +187,7 @@ function drawScene(host, view, assets) {
     atmosphere.addChild(back);
   }
   const sprite = (parent, spec, point, scale) => {
-    const s = new Sprite(textureFor(spec));
+    const s = /** @type {Sprite & {__depth?:number}} */ (new Sprite(textureFor(spec)));
     s.anchor.set(spec.pivot?.x ?? 0.5, spec.pivot?.y ?? 1);
     s.position.set(point.x, point.y);
     s.scale.set(scale);
@@ -249,7 +250,7 @@ function drawScene(host, view, assets) {
         );
       item.__depth = point.y;
     }
-    objects.children.sort((a, b) => (a.__depth || 0) - (b.__depth || 0));
+    objects.children.sort((a, b) => (/** @type {import("pixi.js").DisplayObject & {__depth?:number}} */ (a).__depth || 0) - (/** @type {import("pixi.js").DisplayObject & {__depth?:number}} */ (b).__depth || 0));
     app.homeProjection = p;
     requestPaint();
   };
@@ -408,8 +409,8 @@ export function mountHome({ host, view, assets = null, onIntent }) {
           placed = draft.find((a) => a.x === x && a.y === y),
           b = document.createElement("button");
         b.className = `home-grid-cell ${y ? "floor" : "wall"} ${placed ? "occupied" : ""}`;
-        b.dataset.gridX = x;
-        b.dataset.gridY = y;
+        b.dataset.gridX = String(x);
+        b.dataset.gridY = String(y);
         if (placed) b.dataset.instance = placed.instanceId;
         b.title = placed ? name(placed.furnitureId) : "";
         b.setAttribute(

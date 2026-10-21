@@ -37,6 +37,7 @@ function runWith(policyName) {
 // ---------- Agent 页签 ----------
 function agentTabHTML() {
   const A = Agent();
+  /** @type {Partial<ReturnType<RuntimeFacade['Agent']['llm']['loadConfig']>>} */
   const cfg = A?.llm.loadConfig() || {};
   const enabled = !!(cfg.apiKey && cfg.model);
   const turbo = A?.isTurbo();
@@ -93,7 +94,7 @@ function bindAgentTab(render) {
   UI.act('devcRunStop', () => { A?.stopRun(); statusLine('已请求停止（当前步收口后退出）'); });
   UI.act('devcTurbo', () => { A?.setTurbo(!A.isTurbo()); render(); });
   UI.act('devcLlmSave', () => {
-    const val = id => document.getElementById(id)?.value?.trim() || '';
+    const val = id => (/** @type {HTMLInputElement | null} */ (document.getElementById(id)))?.value?.trim() || '';
     A?.llm.saveConfig({ baseUrl: val('devcLlmUrl'), apiKey: val('devcLlmKey'), model: val('devcLlmModel') });
     UI.log('[[icon:tools]] LLM 配置已保存（仅本机 localStorage）', 'sys');
     render();

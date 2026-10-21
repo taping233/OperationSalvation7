@@ -48,16 +48,16 @@ function screenHTML(state) {
 
 // The caller keeps this UI-only state across bag returns. No rewards, storage or game actions are accepted.
 export function mountEventSignalPuzzle(scene, state, current = () => true) {
-  const host = scene?.querySelector('.node-summary');
-  if (!host || !state || host.querySelector('.event-signal-puzzle')) return null;
+  const host = /** @type {HTMLElement} */ (scene?.querySelector('.node-summary'));
+  if (!host || !state || /** @type {HTMLElement} */ (host.querySelector('.event-signal-puzzle'))) return null;
   const panel = document.createElement('details');
   panel.className = 'event-signal-puzzle';
   panel.innerHTML = screenHTML(state);
   panel.open = state.open;
   host.append(panel);
-  const summary = panel.querySelector('summary');
-  const status = panel.querySelector('.signal-puzzle-status');
-  const tiles = [...panel.querySelectorAll('[data-signal-tile]')];
+  const summary = /** @type {HTMLElement} */ (panel.querySelector('summary'));
+  const status = /** @type {HTMLElement} */ (panel.querySelector('.signal-puzzle-status'));
+  const tiles = [.../** @type {NodeListOf<HTMLElement>} */ (panel.querySelectorAll('[data-signal-tile]'))];
   const view = panel.ownerDocument.defaultView;
   const scroller = panel.closest('.node-main');
   let scrollBeforeOpen = null;
@@ -65,7 +65,7 @@ export function mountEventSignalPuzzle(scene, state, current = () => true) {
     if (!scroller) return;
     // Move only this event's inner reading area, never the page or fixed action footer.
     const target = panel.getBoundingClientRect().height <= scroller.clientHeight
-      ? panel : panel.querySelector('.signal-puzzle-screen');
+      ? panel : /** @type {HTMLElement} */ (panel.querySelector('.signal-puzzle-screen'));
     const top = target.getBoundingClientRect().top - scroller.getBoundingClientRect().top - scroller.clientTop;
     scroller.scrollTop = Math.max(0, Math.min(scroller.scrollHeight - scroller.clientHeight, scroller.scrollTop + top));
   };
@@ -135,7 +135,7 @@ export function mountEventSignalPuzzle(scene, state, current = () => true) {
     state.open = panel.open;
     updateEscape();
   });
-  panel.querySelector('.signal-puzzle-close').addEventListener('click', close);
+  /** @type {HTMLElement} */ (panel.querySelector('.signal-puzzle-close')).addEventListener('click', close);
   const dispose = () => {
     if (disposed) return;
     disposed = true;

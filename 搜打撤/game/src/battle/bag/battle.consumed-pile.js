@@ -1,8 +1,11 @@
 // Legacy arrays retain their original settlement categories. This projection is
 // the shared current location from which card effects may retrieve an existing UID.
+/** @typedef {{ hand: string[], drawPile: string[], played: string[], consumed: string[], discard: string[], grave: string[] }} ConsumedPiles */
+/** @type {(keyof ConsumedPiles)[]} */
 const sourcePiles = ['played', 'consumed', 'discard', 'grave'];
 const uidsIn = value => Array.isArray(value) ? value : [];
 
+/** @param {ConsumedPiles} state @param {Iterable<string>} [excludedUids] */
 export function readConsumedPile(state, excludedUids = []) {
   if (!state) return [];
   const unavailable = new Set([
@@ -23,7 +26,7 @@ export function readConsumedPile(state, excludedUids = []) {
 /** Move the original UID; draw means the top of drawPile (drawCards uses pop).
  * A successful retrieval removes that UID's old spent bookkeeping. Its next play
  * or consumption will enter the existing settlement categories again.
- * @param {object} state
+ * @param {ConsumedPiles} state
  * @param {string} uid
  * @param {'hand' | 'draw'} destination
  * @param {Iterable<string>} excludedUids

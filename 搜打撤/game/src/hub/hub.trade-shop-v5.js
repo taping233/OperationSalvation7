@@ -1,6 +1,7 @@
 import { esc, escAttr } from '../core/shared.js';
 import { resourceValueHTML } from './hub.materials.js';
 import { departureStackKey } from './base-departure.commands.js';
+import { stashSalePrice as salePrice } from './stash-sale-price.js';
 
 const MATERIAL_CARD_IDS = { wood: 'tt-wood', rations: 'tt-rations' };
 const GOOD_KEY = good => String(good.material || good.id || '');
@@ -10,7 +11,6 @@ const protectedStack = (base, stack) => typeof base.isCollectionProtected === 'f
   ? !!base.isCollectionProtected(stack.card) : !!base.isCollected?.(stack.card);
 const sellableStack = (base, stack) => quantity(stack) > 0 && stack.card.id !== base.PET_EGG_ID
   && stack.card.id !== 'tt-econpack' && !base.materialInfo?.(stack.card);
-const salePrice = (cards, card) => Math.max(0, Number(cards.sellPrice(card)) || 0);
 const goodCard = (cards, good) => good.material ? cards.all().find(card => card.id === MATERIAL_CARD_IDS[good.material])
   : good.id === 'sha' ? cards.SHA : cards.all().find(card => card.id === good.id);
 const illustration = (cards, card) => card ? cards.cardHTML(card, 'sm') : '<span class="trade-v5-no-art">暂无卡牌</span>';
@@ -39,7 +39,7 @@ function purchaseBlock(base, cards, good) {
   return issues.join(' · ');
 }
 
-function itemHTML({ key, selected, act, card, name, count, price, protectedItem, cards, material }) {
+function itemHTML({ key, selected, act, card, name, count, price, protectedItem = false, cards, material = false }) {
   return `<button type="button" class="trade-v5-item${selected ? ' is-selected' : ''}${protectedItem ? ' is-protected' : ''}${material ? ' trade-v5-item--material' : ''}" data-act="${act}" data-key="${escAttr(key)}"${selected ? ' data-focus-fallback' : ''} aria-pressed="${selected}" aria-label="${escAttr(name)}，持有 ${count}${protectedItem ? '，收藏保护' : ''}">
     <span class="trade-v5-thumb">${illustration(cards, card)}</span><span class="trade-v5-item-label"><b>${esc(name)}</b><span>持有 ${count}${protectedItem ? ' · 收藏保护' : ''}</span></span><span class="trade-v5-item-price">${coinHTML(price)}</span>
   </button>`;
@@ -85,7 +85,7 @@ export function tradeShopV5HTML({ base, cards, art, goods, state }) {
   }) : stacks.map(stack => itemHTML({ key: STACK_KEY(stack), selected: STACK_KEY(stack) === state.sellKey, act: 'tradeShopSelectStack', card: stack.card, name: stack.card.name, count: quantity(stack), price: salePrice(cards, stack.card), protectedItem: protectedStack(base, stack), cards }));
   return `<div class="trade-v5 trade-v12" data-mode="${state.mode}"><header class="trade-v5-heading"><h2>交易所</h2><div class="trade-v5-wallet">${coinHTML(base.data.coins)}</div></header>
     <div class="trade-v12-layout"><nav class="trade-v5-modes" aria-label="交易方式">${[['buy', '购入商品', '▣'], ['sell', '出售卡牌', '⇄']].map(([mode, label, icon]) => `<button type="button" class="base-link${state.mode === mode ? ' is-selected' : ''}" data-act="tradeShopMode" data-mode="${mode}"${!items.length && state.mode === mode ? ' data-focus-fallback' : ''} aria-pressed="${state.mode === mode}"><span aria-hidden="true">${icon}</span><b>${label}</b></button>`).join('')}<button type="button" class="base-link trade-v12-stash-link" data-act="hubTab" data-tab="stash" data-view="cards"><span aria-hidden="true">▦</span><b>后勤仓库</b></button></nav>
-    <div class="trade-v5-workspace"><section class="trade-v5-rail" aria-label="${buying ? '在售商品' : '仓库卡牌'}"><nav class="trade-v12-categories" aria-label="商品类别">${[['', '全部'], ['supplies', '基地补给'], ['battle', '战斗卡牌']].map(([category, label]) => `<button type="button" class="${state.category === category ? 'on' : ''}" data-act="tradeShopCategory" data-category="${category}" aria-pressed="${state.category === category}">${label}</button>`).join('')}</nav><div class="trade-v12-shelf-heading"><b>${buying ? '在售商品' : '仓库可售卡牌'}</b><span>${items.length} 种</span></div><div class="trade-v5-list">${items.join('') || '<p class="trade-v12-no-items">该类别暂无物品</p>'}</div></section>${deskHTML({ base, cards, art, goods:shownGoods, state, stacks })}</div></div>
+    <div class="trade-v5-workspace"><section class="trade-v5-rail" aria-label="${buying ? '在售商品' : '仓库卡牌'}"><nav class="trade-v12-categories" aria-label="商品类别">${[['', '全部'], ['supplies', '基地补给'], ['battle', '战斗卡牌']].map(([category, label]) => `<button type="button" class="${state.category === category ? 'on' : ''}" data-act="tradeShopCategory" data-category="${category}" aria-pressed="${state.category === category}">${label}</button>`).join('')}</nav><div class="trade-v12-shelf-heading"><b>${buying ? '在售商品' : '仓库可售卡牌'}</b><span>${items.length} 种</span></div><div class="trade-v5-list">${items.join('') || '<p class="trade-v12-no-items">该类别暂无物品</p>'}</div></section>${/** @type {(options: Parameters<typeof deskHTML>[0] & {art?:unknown}) => ReturnType<typeof deskHTML>} */ (deskHTML)({ base, cards, art, goods:shownGoods, state, stacks })}</div></div>
   </div>`;
 }
 

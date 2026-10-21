@@ -61,6 +61,12 @@ function growthHTML(receipt) {
   </section>`;
 }
 
+/** @typedef {import('../hub/game.store.types.js').CardSnapshot} ExtractionCard
+ * @typedef {{card: ExtractionCard, count: number}} ExtractionStack
+ * @typedef {{cardHTML: (card: ExtractionCard, size: string) => string, rarityOf: (card: ExtractionCard) => string}} ExtractionRenderers
+ * @typedef {Partial<ReturnType<typeof import('../hub/extraction.commands.js').buildExtractionReceipt>>} ExtractionReceipt
+ */
+/** @param {Partial<ExtractionRenderers & {remainingCards: ExtractionStack[], savedCards: ExtractionStack[], keptPocket: ExtractionStack[], pocketKept: number, pocketLost: number, pocketRuleLost: number, wood: number, rations: number, stashUsed: number, stashCap: number, room: number, coins: number, shaN: number, starterSha: number, otherN: number, broughtByName: Map<string, number>, help: string, notice: string, confirmFinish: boolean}>} [options] */
 export function extractionStashHTML({ remainingCards = [], savedCards = [], keptPocket = [], pocketKept = 0, pocketLost = 0, pocketRuleLost = 0,
   wood = 0, rations = 0, stashUsed = 0, stashCap = 0, room = 0, coins = 0, shaN = 0, starterSha = 0, otherN = 0,
   broughtByName = new Map(), cardHTML, rarityOf, help = '', notice = '', confirmFinish = false } = {}) {
@@ -71,9 +77,9 @@ export function extractionStashHTML({ remainingCards = [], savedCards = [], kept
     : allFit ? `<button type="button" class="exr-button exr-primary" data-act="exAll">全部入库 <b>${remaining} 张</b></button>`
       : `<button type="button" class="exr-button exr-primary" data-act="exSmart" ${canStore ? '' : 'disabled'} title="${smartDescription}" aria-label="${smartDescription}"><span>${canStore ? `按估值入库 ${canStore} 张` : '仓库已满'}</span></button>`;
   return `<div class="pg exr-page sdt-feedback-theme" id="exMain" data-unclaimed-cards="${remaining}" data-reveal="${!notice}">
-    <header class="exr-header"><div><p class="exr-eyebrow">安全撤离 / 整理战利品</p><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span class="is-current">01</span><i></i><span>02</span>${help}</div></header>
+    <header class="exr-header"><div><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span class="is-current">01</span><i></i><span>02</span>${help}</div></header>
     <div class="exr-layout"><section class="exr-loot" aria-label="本次战利品">
-      <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div>${remaining ? '<p>选择要留下的卡牌</p>' : ''}</div>
+      <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div></div>
       <p class="exr-notice" role="status" aria-live="polite">${esc(notice)}</p>
       <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room, broughtByName }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
         ${saved ? `<details class="exr-saved-shelf"><summary>[[icon:check]] 本次已入库 ${saved} 张 </summary><div class="exr-card-grid">${cardGrid(savedCards, { cardHTML, rarityOf, action: 'exSavedInspect' })}</div></details>` : ''}
@@ -89,14 +95,17 @@ export function extractionStashHTML({ remainingCards = [], savedCards = [], kept
     </footer></div>`;
 }
 
+/** @param {Partial<ExtractionRenderers & {receipt: ExtractionReceipt, stashUsed: number, stashCap: number, collectionCount: number, baseCoins: number, hp: number, maxHp: number}>} [options] */
 export function extractionDoneHTML({ receipt = {}, stashUsed = 0, stashCap = 0, collectionCount = 0, baseCoins = 0, hp = 0, maxHp = 0, cardHTML, rarityOf } = {}) {
-  const r = receipt, net = r.netTake || {}, loss = r.losses || {};
+  const r = receipt;
+  /** @type {Partial<NonNullable<ExtractionReceipt["netTake"]>>} */ const net = r.netTake || {};
+  /** @type {Partial<NonNullable<ExtractionReceipt["losses"]>>} */ const loss = r.losses || {};
   const savedCards = Array.isArray(r.savedCards) ? r.savedCards : [];
   const s = Math.max(0, Math.floor(Number(r.durationSec) || 0));
   const time = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
   const clear = r.outcome === 'clear';
   return `<div class="pg exr-page exr-done sdt-feedback-theme" id="exDone" data-reveal="true">
-    <header class="exr-header"><div><p class="exr-eyebrow">${clear ? '首脑突破' : '安全撤离'} / 收获已保存</p><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span>01</span><i></i><span class="is-current">02</span></div></header>
+    <header class="exr-header"><div><p class="exr-eyebrow">${clear ? '首脑突破 · 已保存' : '收获已保存'}</p><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span>01</span><i></i><span class="is-current">02</span></div></header>
 
     <div class="exr-layout"><section class="exr-loot" aria-label="本局真实入库">
       <div class="exr-section-title"><div><h3>已入库 <b>${net.cardsStashed ?? 0}</b><small> 张</small></h3></div></div>

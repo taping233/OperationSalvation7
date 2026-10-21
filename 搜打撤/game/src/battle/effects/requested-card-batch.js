@@ -24,7 +24,7 @@ export function nextChaosRarity(rarity) {
  * Unsupported rarity and empty replacement pools remain unchanged and do not exchange costs.
  * The caller supplies eligibility (class/token/random-pool policy) and the exact deck scope.
  */
-export function transformChaosDeck(cards, pool, { random, eligible = () => true }) {
+export function transformChaosDeck(cards, pool, { random, eligible = /** @type {(candidate: object, card: object) => boolean} */ (() => true) }) {
   const transformed = [];
   const result = cards.map((card, index) => {
     const rarity = nextChaosRarity(card.rarity);

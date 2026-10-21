@@ -1,12 +1,15 @@
 import { reduceMotion } from '../core/motion.js';
-import { createCityCut, cityCutDuration, prepareCityCut } from './camp-entry.js';
+import { createCityCut, prepareCityCut } from './camp-entry.js';
+import { revealTransition } from './transition-handoff.js';
 import '../../css/page-loading.css';
 import { waitPageVisual, visualFrame } from './page-visual-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
+import { TRANSITION_ART } from './transition-art.js';
 
 let pending = null;
 
 /** Show the shared page cover before preparing an expensive destination. */
+/** @param {{title: string, detail: string, open: () => unknown, signal?: AbortSignal, presentation?: string, onRevealStart?: () => void}} options */
 export function runPageLoading({ title, detail, open, signal, presentation, onRevealStart }) {
   if (signal?.aborted) return Promise.resolve(false);
   if (pending) return pending.promise;
@@ -14,21 +17,21 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
   cover.className = 'page-loading';
   cover.setAttribute('role', 'status');
   cover.setAttribute('aria-live', 'polite');
-  const cityPresentation = presentation === 'city-cut';
-  const cityCut = cityPresentation && !reduceMotion();
+  const cityCut = !reduceMotion();
   let cut = null;
-  if (cityPresentation) {
-    cover.classList.add('page-loading--city');
-    cover.dataset.loadingDetail = detail;
-    cover.setAttribute('aria-label', `${title}：${detail}`);
-    if (cityCut) cut = createCityCut({ archive: '馆藏档案', title,
-      subtitle: 'PHOTO STUDIO / 冬日影像档案', edition: 'WINTER RECORDS / VII',
-      destination: 'PHOTO STUDIO', watermark: 'PHOTO', scene: 'photo' });
-    if (cut) { cut.classList.add('page-cut-waiting'); cover.append(cut); }
-  } else {
-    cover.innerHTML = '<div class="page-loading-copy"><small>WINTER ARCHIVE</small><h2></h2><p></p><div class="page-loading-track" aria-hidden="true"><i></i><i></i><i></i></div></div>';
-    cover.querySelector('h2').textContent = title;
-    cover.querySelector('p').textContent = detail;
+  cover.classList.add('page-loading--city');
+  cover.dataset.loadingDetail = detail;
+  cover.setAttribute('aria-label', `${title}：${detail}`);
+  if (cityCut) cut = createCityCut({ archive: presentation === 'city-cut' ? '馆藏档案' : '远征档案', title,
+    subtitle: presentation === 'city-cut' ? 'PHOTO STUDIO / 冬日影像档案' : detail, edition: 'WINTER RECORDS / VII',
+    destination: presentation === 'city-cut' ? 'PHOTO STUDIO' : title,
+    watermark: presentation === 'city-cut' ? 'PHOTO' : 'VII', scene: presentation === 'city-cut' ? 'photo' : 'general' });
+  if (cut) {
+    if (presentation !== 'city-cut') {
+      const image = /** @type {HTMLImageElement} */ (cut.querySelector('.camp-entry-scenery img'));
+      image.src = TRANSITION_ART.loading;
+    }
+    cut.classList.add('page-cut-waiting'); cover.append(cut);
   }
   document.body.appendChild(cover);
   const busyHost = document.getElementById('viewport');
@@ -79,12 +82,17 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
       if (result === false) return false;
       const mounted = performance.now();
       const body = document.getElementById('ovBody');
+      // Page adapters may supply their richer, page-specific artwork to this
+      // existing cover. Keep that image instead of overwriting it with general art.
+      const activeCut = /** @type {HTMLElement} */ (cover.querySelector('.camp-entry-cut'));
+      const artworkReady = activeCut && activeCut !== cut
+        ? prepareCityCut(activeCut, { signal:cutController.signal }) : curtainReady;
       // Non-overlay clients keep the existing loading-only contract.
       // Overlay clients bind readiness and reveal to the exact mounted page.
-      if (body) surface = createPageSurfaceLifetime(body.firstElementChild || body, { onInvalidate: onAbort });
+      if (body) surface = createPageSurfaceLifetime(/** @type {HTMLElement} */ (body.firstElementChild || body), { onInvalidate: onAbort });
       const current = () => !cutController.signal.aborted && (!surface || surface.current());
       const ready = await Promise.race([
-        Promise.all([curtainReady, body
+        Promise.all([artworkReady, body
           ? waitPageVisual(body, { signal: cutController.signal, background: window.SDT?.UI?._pageBgReady })
           : true]), cancelled,
       ]);
@@ -97,21 +105,12 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
           visible: document.visibilityState,
         }));
       }
-      if (!reduceMotion()) {
-        // The ready curtain has already painted; reveal only after the destination
-        // and its first-screen resources have settled underneath it.
-        if (cut && result !== false) cut.classList.remove('page-cut-waiting');
-        // Initialize the destination while it is still covered. Starting it after
-        // cleanup would hide an already visible page again and look like a refresh.
-        if (current()) onRevealStart?.();
-        cover.classList.add('leaving');
-        releaseInput();
-        await Promise.race([new Promise(resolve => setTimeout(resolve, cityCut ? cityCutDuration : 180)), cancelled]);
-      } else if (current()) {
-        onRevealStart?.();
-        if (cityPresentation) cover.classList.add('leaving');
-        releaseInput();
-      }
+      await revealTransition(cover, { signal:cutController.signal, isCurrent:current, painted:true,
+        onReveal:() => {
+          cut?.classList.remove('page-cut-waiting');
+          onRevealStart?.();
+          releaseInput();
+        } });
       return result;
     } finally {
       signal?.removeEventListener('abort', onAbort);

@@ -18,7 +18,7 @@ const CURSE_SCAN = [
   { key: 'healban', re: /禁疗/, def: 2 },
 ];
 
-/** @param {{cards: object, readState: () => object, curseMeta: object}} deps */
+/** @param {{cards: import('../core/battle.core-ports.types.js').InspectionCards, readState: () => import('../core/battle.core-ports.types.js').InspectionState, curseMeta: Record<string, {stack?: boolean}>}} deps */
 function createBattleCardInspection({ cards, readState, curseMeta }) {
   function repairLegacyTT7Card(card) {
     if (!card || !['tt7-thundergrudge', 'tt7-meteorrain'].includes(card.id)) return card;

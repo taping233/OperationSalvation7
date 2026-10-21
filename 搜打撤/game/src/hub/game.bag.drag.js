@@ -90,8 +90,8 @@ import { containerRuleOf, containerAccepts } from '../core/card-capacity.js';
       if (board) return { kind: 'area', el: board };   // 网格空处 = 放到卡牌区末尾
       return null;
     }
-    if (cell.dataset.stack && cell !== srcCell) {
-      return { kind: 'stack', el: cell, name: cell.dataset.stack };
+    if (/** @type {HTMLElement} */ (cell).dataset.stack && cell !== srcCell) {
+      return { kind: 'stack', el: cell, name: /** @type {HTMLElement} */ (cell).dataset.stack };
     }
     return { kind: 'area', el: cell };   // 物资格 / 原格 = 放到卡牌区末尾
   }

@@ -2,8 +2,9 @@
 const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './hub/game.notes.js';
-import { menuPageLoading, cancelPendingMenuPageOpen } from './ui/game.menu.js';
+import { menuPageLoading, cancelPendingMenuPageOpen, preloadMenuPages } from './ui/game.menu.js';
 import { MAP } from './run/game.session.js';
+import { FX } from './core/renderer.fx.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
 import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, resumeEventCardChoice } from './run/game.run.js';
 import { entrySupplyGate } from './run/node-reward-state.js';
@@ -173,7 +174,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     }, { passive: false });
 
     // 键盘走动作映射层（src/input.js）：玩法读动作，键位是数据（可改键/可接手柄）
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', (/** @type {KeyboardEvent & {target: Element & {isContentEditable?:boolean}}} */ e) => {
       if (e.defaultPrevented || (e.key === 'Escape' && e.repeat)) return;
       // #22 开发者控制台：战斗/对局中 Ctrl+L 开关（不走动作映射，避免与改键层耦合）
       if (e.ctrlKey && !e.altKey && !e.metaKey && (e.key === 'l' || e.key === 'L')) {
@@ -204,8 +205,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         closeCardPageTop();
         return;
       }
-      const tag = e.target && e.target.tagName;
-      if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || e.target?.isContentEditable) return;
+      const tag = e.target && /** @type {Element} */ (e.target).tagName;
+      if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT' || /** @type {HTMLElement} */ (e.target)?.isContentEditable) return;
       // Native buttons own Space/Enter. Do not let map shortcuts swallow keyboard activation.
       if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button,summary,[role="button"]')) return;
       const action = SDT.Input && SDT.Input.actionFor(e);
@@ -226,7 +227,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
           // 否则会把底下的背包/整备页一起关掉、特写残留在画面上
           {
             const zoom = document.getElementById('cardZoom');
-            if (zoom) { zoom.querySelector('.cz-backdrop')?.click(); break; }
+            if (zoom) { /** @type {HTMLElement} */ (zoom.querySelector('.cz-backdrop'))?.click(); break; }
           }
           // 浮层打开时 Esc 优先关浮层（战斗页内部不受影响），否则清移动目标
           if (!UI.el.overlay.hidden && UI.closeTopOverlayByEsc()) break;
@@ -237,32 +238,32 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         case 'camOverview': cam.frameExploration(game, true); renderScheduler.invalidate(); break;
         case 'camFocus': cam.frameExploration(game); renderScheduler.invalidate(); break;
         case 'backpack': showBackpack(); break;
-        case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); break;
+        case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) /** @type {HTMLInputElement} */ (UI.el.tglIndex).checked = game.toggles.index; renderScheduler.invalidate(); break;
       }
     });
 
     // 底栏背包按钮已删（2026-09-19）；全局浮动背包键已删（2026-10-15 老板：背包页自带左上退出键）
     // 背包入口=B 快捷键与各流程动作（resBag/chestOpenBag/entrySupplyBag 直调 bagSlots.showBackpack）
     document.getElementById('sidebar')?.addEventListener('click', e => {
-      const location = e.target.closest('button[data-route-select]');
+      const location = /** @type {Element} */ (e.target).closest('button[data-route-select]');
       if (location) {
-        if (location.disabled || game.state !== 'idle') return;
-        const li = Number(location.dataset.li), idx = Number(location.dataset.idx);
+        if (/** @type {HTMLButtonElement} */ (location).disabled || game.state !== 'idle') return;
+        const li = Number(/** @type {HTMLElement} */ (location).dataset.li), idx = Number(/** @type {HTMLElement} */ (location).dataset.idx);
         const node = game.nodes.find(n => n.li === li && n.idx === idx);
         const fogOn = Object.keys(game.seen || {}).length > 0;
         if (!node || li !== game.layerIdx || (fogOn && game.seen[`${li},${idx}`] !== 1)) return;
         if (idx === game.trackPos || isReachable(node)) showTarget(node);
         return;
       }
-      const routeButton = e.target.closest('.expedition-map-preview button');
+      const routeButton = /** @type {Element} */ (e.target).closest('.expedition-map-preview button');
       if (routeButton) {
-        if (routeButton.disabled || game.state !== 'idle') return;
-        if (routeButton.dataset.routeClose) { clearTarget(); return; }
-        if (routeButton.dataset.routeEnter) { confirmTarget(); return; }
+        if (/** @type {HTMLButtonElement} */ (routeButton).disabled || game.state !== 'idle') return;
+        if (/** @type {HTMLElement} */ (routeButton).dataset.routeClose) { clearTarget(); return; }
+        if (/** @type {HTMLElement} */ (routeButton).dataset.routeEnter) { confirmTarget(); return; }
       }
-      const button = e.target.closest('button[data-expedition-tool]');
-      if (!button || button.disabled || game.state !== 'idle') return;
-      const tool = button.dataset.expeditionTool;
+      const button = /** @type {Element} */ (e.target).closest('button[data-expedition-tool]');
+      if (!button || /** @type {HTMLButtonElement} */ (button).disabled || game.state !== 'idle') return;
+      const tool = /** @type {HTMLElement} */ (button).dataset.expeditionTool;
       if (['bag', 'safe', 'pocket'].includes(tool)) showBackpackSection(tool);
       else if (tool === 'focus' || tool === 'overview') {
         cam.frameExploration(game, tool === 'overview');
@@ -301,7 +302,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     const vpEl = UI.el.viewport;
     document.querySelectorAll('#resHud .chip-mini[data-tip]').forEach(chip => {
       const hasCoins = !!chip.querySelector('#charCoins');
-      const tip = chip.dataset.tip;
+      const tip = /** @type {HTMLElement} */ (chip).dataset.tip;
       let r = null;
       const show = (e) => {
         if (!r) r = vpEl.getBoundingClientRect();
@@ -313,7 +314,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       chip.addEventListener('mouseleave', () => UI.hideTooltip());
     });
 
-    if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = e.target.checked; });
+    if (UI.el.tglIndex) UI.el.tglIndex.addEventListener('change', e => { game.toggles.index = /** @type {HTMLInputElement} */ (e.target).checked; });
     if (UI.el.btnExport) UI.el.btnExport.addEventListener('click', showExportOverlay);
     if (UI.el.btnImport) UI.el.btnImport.addEventListener('click', showImportOverlay);
     if (UI.el.btnClear) UI.el.btnClear.addEventListener('click', showClearOverlay);
@@ -323,8 +324,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (UI.el.devBoss) UI.el.devBoss.addEventListener('click', () => devForceBattle(true));
     // 开发者节点测试面板（标题页 #titleDev，仅 devMode 可见）：一键跳到商店/事件/BOSS 等各类节点
     if (UI.el.titleDev) UI.el.titleDev.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-dev-node]');
-      if (btn) devJumpNode(btn.dataset.devNode);
+      const btn = /** @type {Element} */ (e.target).closest('[data-dev-node]');
+      if (btn) devJumpNode(/** @type {HTMLElement} */ (btn).dataset.devNode);
     });
 
     // 卡牌大页面：Esc 关闭 / 点击深色背景关闭
@@ -465,6 +466,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     UI.showTooltip(e.clientX - r.left, e.clientY - r.top, ...hoverInfo(n));
   }
 
+  /** @returns {[string, string[]]} */
   function hoverInfo(node) {
     const lines = [];
     let title;
@@ -473,7 +475,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       title = `${loc.layer.name} · #${loc.idx}`;
       const def = node.def;
       const door = (loc.layer.doors || []).find(d => d.at === loc.idx);
-      const altarE = (loc.layer.altarEntrances || []).find(a => a.at === loc.idx);
+      const altarE = (loc.layer.altarEntrances || []).find(a => a['at'] === loc.idx);
       const eIdx = (loc.layer.entrances || []).indexOf(loc.idx);
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
       if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
@@ -500,8 +502,11 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   let coverTitle = null, coverExit = null;   // 标题 / 退出界面（DOMContentLoaded 时缓存）
   let wasCanvasCovered = true;
   let loopFrame = 0, idleLoopTimer = 0;
+  let loopReady = false;
 
   function requestLoopFrame() {
+    // 资源加载或 visibilitychange 可早于 DOMContentLoaded；启动完成前只保留 dirty 状态。
+    if (!loopReady) return;
     // 输入法/环境守卫（nightshift U15）：测试环境拆除后 idle 链（scheduleNextLoop 的
     // 250ms setTimeout）仍会触发本函数，node 无 requestAnimationFrame 直接裸引即炸
     // unhandled 并污染同 worker 用例（批次⑥全量实锤）。与 U1/U5-a 守卫同构。
@@ -559,7 +564,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       wasCanvasCovered = false;
       renderScheduler.invalidate();
     }
-    const ts = (SDT.FX && SDT.FX.timeScale) || 1;
+    const ts = FX.timeScale || 1;
     const sdt = dt * ts;   // hit-stop 冻结世界：逻辑时间缩放，rAF 与恢复计时仍走真实时间
     // 空闲循环降到 4Hz 后，视觉时钟/游玩计时仍按真实经过时间推进；物理式插值继续用钳制 dt，
     // 避免切回前台时一次性跨过过长时间。
@@ -717,7 +722,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       for (const m of muts) {
         if (m.type === 'attributes') {
           // 单点属性变更即时摘除（无子树扫描成本）
-          if (m.target && m.target.getAttribute && m.target.getAttribute('title') != null) m.target.removeAttribute('title');
+          if (m.target && /** @type {Element} */ (m.target).getAttribute && /** @type {Element} */ (m.target).getAttribute('title') != null) /** @type {Element} */ (m.target).removeAttribute('title');
         } else if (m.type === 'childList') {
           m.addedNodes.forEach(n => { if (n.nodeType === 1) titleDirtyRoots.add(n); });
         }
@@ -777,7 +782,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     bindInput();
     // 镜头快捷键按钮（旋转/定位/全景）已按 2026-09-06 留言删除，键盘 Q/E/F/G 仍可用
     const quality=document.getElementById('sceneQuality');
-    if(quality){if(SDT.Renderer.metrics)quality.value=SDT.Renderer.metrics.quality;quality.addEventListener('change',()=>SDT.Renderer.setQuality?.(quality.value));}
+    if(quality){if(SDT.Renderer.metrics)/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (quality).value=SDT.Renderer.metrics.quality;quality.addEventListener('change',()=>SDT.Renderer.setQuality?.(/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (quality).value));}
     // sceneFps 死监听删除（迭代评审 09-20 D-P3）：该元素在 index.html/ui.js 中均不存在，
     // 且直改 activeInterval 绕过封装无校验；若将来恢复节奏档，走战斗设置 2× 档（battle.pace.js）
   SDT.Cards.ensureStarters();    // 补入初始牌（缺失时）
@@ -815,7 +820,15 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       im.src = new URL('../assets/scenes/hub-wallpaper.webp', import.meta.url).href;
     };
     if ('requestIdleCallback' in window) window.requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
-    else window.setTimeout(warmHubWallpaper, 2000);
+    else /** @type {Window} */ (window).setTimeout(warmHubWallpaper, 2000);
+    // Prepare menu code/CSS while the title is idle; no page factory, DOM or
+    // save action runs here. A failed preload remains retryable on real entry.
+    const prepareMenu = () => {
+      if (game.state !== 'title' || document.hidden) return;
+      preloadMenuPages().catch(() => {});
+    };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(prepareMenu);
+    else /** @type {Window} */ (window).setTimeout(prepareMenu, 2000);
     // 启动只HTTP预取六张常见场景和现行卡框；图片解码沿页面入口按需执行。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
@@ -837,5 +850,6 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     } else {
       try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch { /* 预取降级失败：不阻塞启动 */ }
     }
+    loopReady = true;
     requestLoopFrame();
   }, { once: true });

@@ -11,7 +11,10 @@ const ARROW_TOKEN = { id: 'token-arrow', name: '箭', cost: 0, rarity: '衍生',
 
 /* ---------- 限制卡池解析（老板 2026-09-08 定版池子清单） ----------
  * 「发现 / 随机获取 / 获得 N 张 ____卡/牌」句式中的名词短语 → 卡池谓词。
- * 返回 null = 未识别出限定（走通用随机池，isRandomObtainable 过滤）。 */
+ * 返回 null = 未识别出限定（走通用随机池，isRandomObtainable 过滤）。
+ * 职业卡门（2026-10-21 反馈#2）：名词明确写「本职业/其它职业」= 显式职业池，
+ * 返回的谓词带 allowClassCards 标记（buildDiscoverPool 据此放行职业卡）；
+ * 其余名词一律不放行——随机获得类效果不得产出职业卡。 */
 export const POOL_NUM_MAP = { '一': 1, '两': 2, '二': 2, '三': 3, '四': 4, '五': 5 };
 const CURSE_DESC_RE = /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗/;
 const CURSE_CAPABLE = (c) => ['武术', '法术', '装备', '能力卡'].includes(c.type) &&
@@ -23,6 +26,7 @@ export function parsePoolNoun(raw, myClass) {
   s = s.replace(/的$/, '');
   if (!s || s === '随机' || s === '另' || s === '任意' || s === '等量随机') return null;
   const preds = [];
+  let classNoun = false;   // 显式职业池名词（本职业/其它职业）→ 谓词带 allowClassCards
   const cm = s.match(/^([0-5一二三四五])费/);
   if (cm) {
     const n = POOL_NUM_MAP[cm[1]] != null ? POOL_NUM_MAP[cm[1]] : +cm[1];
@@ -33,8 +37,8 @@ export function parsePoolNoun(raw, myClass) {
     s = s.replace(/^能施加诅咒的?/, '');
     preds.push(CURSE_CAPABLE);
   }
-  if (/^(其它|其他)职业/.test(s)) { s = ''; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
-  else if (/^本职业/.test(s)) { s = ''; preds.push(c => !!c.cls && c.cls === myClass); }
+  if (/^(其它|其他)职业/.test(s)) { s = ''; classNoun = true; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
+  else if (/^本职业/.test(s)) { s = ''; classNoun = true; preds.push(c => !!c.cls && c.cls === myClass); }
   if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => ['武术', '法术'].includes(c.type)); }
   // 复合池必须带「或」；纯稀有度名词仅按品质过滤。
   // 「发现一张传说或能力卡」的名词会被上层后缀匹配吃掉「能力卡」只剩「传说或」，
@@ -62,7 +66,11 @@ export function parsePoolNoun(raw, myClass) {
   }
   if (/^注能/.test(s)) { s = ''; preds.push(c => +(c.infuse || 0) > 0 || /注能/.test(String(c.desc || ''))); }
   if (!preds.length || s) return null;   // 有未识别的残留名词 → 交回通用池，避免误配
-  return c => preds.every(p => p(c));
+  const pred = /** @type {((card: unknown) => boolean) & { allowClassCards?: boolean }} */ (
+    (card) => preds.every(p => p(card))
+  );
+  if (classNoun) pred.allowClassCards = true;   // 显式职业池：buildDiscoverPool 放行职业卡
+  return pred;
 }
 
 const CN_NUM = { '一': 1, '两': 2, '二': 2, '三': 3, '四': 4, '五': 5 };

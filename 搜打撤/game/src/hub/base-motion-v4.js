@@ -5,6 +5,7 @@ import { navigationTiming } from '../ui/navigation-motion.js';
 
 const bound = new WeakSet();
 const current = new WeakMap();
+/** @param {Element} target @param {Keyframe[]} frames @param {number} [duration] @param {number} [delay] */
 function change(target, frames, duration = motionTiming.change, delay = 0) {
   if (!target?.isConnected || motionReduced()) return;
   current.get(target)?.cancel();

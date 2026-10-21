@@ -21,6 +21,8 @@ const ALLOWED_TRANSITIONS = Object.freeze({
 });
 
 let battleSeq = 0;
+/** @typedef {{token: number, phase: string, round: number, mode?: string}} BattleState */
+/** @param {Partial<BattleState>} [seed] @returns {BattleState} */
 function createBattleState(seed = {}) {
   return {
     token: ++battleSeq,   // 战斗实例令牌：视图层常驻节点（手牌/单位区）跨渲染复用与换场重置的依据

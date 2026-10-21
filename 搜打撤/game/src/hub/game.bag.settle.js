@@ -12,6 +12,7 @@ import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from './recovery
 import { Random } from '../core/random.js';
 import { on as busOn } from '../core/event-bus.js';
 import { showRunTransition } from '../run/game.run.js';
+import { TRANSITION_ART } from '../ui/transition-art.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { validBattleRewardContinuation } from '../run/chest-reward-save.js';
 let restoreBattleReward = null;
@@ -83,7 +84,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       game.state = 'battleSettlement';
       const prior = await battleSettlementCommands.readReceipt({ slotId: settlement.slotId, node: settlement.node });
       if (!sameRun()) return false;
-      if (!prior.ok) return retry(new Error(prior.message || prior.code));
+      if (!prior.ok) return retry(new Error(/** @type {Extract<typeof prior, {ok:false}>} */ (prior).message || /** @type {Extract<typeof prior, {ok:false}>} */ (prior).code));
       settlement.receiptChecked = true;
       if (prior.replay) {
         settlement.phase = 'done';
@@ -227,8 +228,8 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
               victoryProgress: settlement.victoryProgress,
             });
             if (!sameRun()) return false;
-            if (!prepared.ok) return retry(new Error(prepared.message || prepared.code));
-            if (prepared.replay) {
+            if (!prepared.ok) return retry(new Error(/** @type {Extract<typeof prepared, {ok:false}>} */ (prepared).message || /** @type {Extract<typeof prepared, {ok:false}>} */ (prepared).code));
+            if (prepared.replay === true) {
               settlement.phase = 'done';
               UI.log('[[icon:cross]] 本节点结算已由另一个会话完成，请重新载入当前档位', 'warn');
               return false;
@@ -239,7 +240,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
           if (!sameRun()) return false;
           if (!committed.ok) {
             if (settlement.victoryProgress) settlement.progressNeedsPublication = true;
-            return retry(new Error(committed.message || committed.code));
+            return retry(new Error(/** @type {Extract<typeof committed, {ok:false}>} */ (committed).message || /** @type {Extract<typeof committed, {ok:false}>} */ (committed).code));
           }
           if (settlement.victoryProgress && !settlement.progressPublished &&
               (!committed.replay || settlement.progressNeedsPublication)) {
@@ -295,7 +296,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       // 2026-09-07 留言：撤退要有文案和动画——复用启程过渡（撤离点场景）
       if (settlement.phase === 'pocket') {
         const shown = await showRunTransition({
-          tone: 'exit', asset: 'scene-extract-bg',
+          tone: 'exit', asset: 'scene-extract-bg', art: TRANSITION_ART.retreat, presentation: 'node-cut',
           eyebrow: 'TACTICAL RETREAT', title: '全身而退',
           detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
           duration: 1050,

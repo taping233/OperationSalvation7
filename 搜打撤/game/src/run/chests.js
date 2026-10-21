@@ -141,10 +141,10 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     if (openingTimer != null) clearTimeout(openingTimer);
     openingTimer = null;
     const image = UI.el.ovBody.querySelector('.ps-chest');
-    const effect = UI.el.ovBody.querySelector('.safe-burst');
+    const effect = /** @type {HTMLImageElement} */ (UI.el.ovBody.querySelector('.safe-burst'));
     const reduced = SDT.Motion?.reduceMotion?.() || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     if (skip || reduced || isTurbo() || context.frames.length < 2) {
-      if (image && context.frames.length) image.src = context.frames.at(-1);
+      if (image && context.frames.length) /** @type {HTMLImageElement} */ (image).src = context.frames.at(-1);
       revealOnce(context); return;
     }
     if (!context.framesReady) { context.pendingOpen = true; return; }
@@ -155,7 +155,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const step = () => {
       if (!isCurrentPresentation(context)) return;
       if (frame >= context.frames.length) { revealOnce(context); return; }
-      if (image) { image.src = context.frames[frame]; image.dataset.chestFrame = String(frame); }
+      if (image) { /** @type {HTMLImageElement} */ (image).src = context.frames[frame]; /** @type {HTMLElement} */ (image).dataset.chestFrame = String(frame); }
       if (effect && context.effects?.[frame]) effect.src = context.effects[frame];
       const phase = context.phases?.[frame] || (frame >= Math.ceil(context.frames.length * .8) ? 'settle'
         : frame >= Math.floor(context.frames.length * .55) ? 'burst' : 'opening');
@@ -450,19 +450,16 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
         ? hasCoins ? '继续领取并收金币' : '继续领取'
         : hasCoins ? '开箱并收金币' : '打开宝箱';
     };
-    const claimedCards = queue.flatMap(slot => slot.reward ? rewardProgress(slot.reward.cards, slot.reward.taken, slot.reward.lost).received : []);
     const complete = !queue.length || allBoxesResolved();
     return chestRewardOverviewHTML({
       title:queue.some(box => box.battleSummary) ? '战斗胜利' : '本次收获',
       source:'', complete,
-      claimedCards,
       coins:queue.reduce((sum, slot) => {
         sum.total += slot.reward?.coins || 0;
         if (!slot.reward?.coinsReceived) sum.pending += slot.reward?.coins || 0;
         return sum;
       }, { total:0, pending:0 }),
       primaryAction:nextIndex < 0 ? null : { index:nextIndex, label:openLabel(queue[nextIndex]) },
-      progress:{ pending:queue.filter(pendingBox).length, total:queue.length },
       notice:returnNotice,
       boxes:queue.map((slot, index) => {
         const K = KINDS()[slot.kind] || KINDS().small;
@@ -540,6 +537,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const K = KINDS()[cur.kind];
     const tok = ++searchSeq;
     const frames = frameArtOf(cur);
+    /** @type {{sequence: number, box: typeof cur, game: typeof G, seed: typeof G.seed, revealed: boolean, frames:string[], fps:number, effects?:string[], phases?:string[], durationsMs?:number[], framesReady?:boolean, pendingOpen?:boolean, surface?: HTMLElement}} */
     const context = openingPresentation = { sequence: tok, box: cur, game: G, seed: G.seed, revealed: false,
       frames:frames.frames.slice(), fps:frames.fps,
       effects:frames.effects?.slice(), phases:frames.phases?.slice(), durationsMs:frames.durationsMs?.slice() };
@@ -557,7 +555,6 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     }
     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
     const opening = `
-      <p class="evt-sts-desc">${cur.isClass ? '职业补给：本职业专属卡牌' : '正在解锁封存物资。'}</p>
       ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1,
         effect:context.effects?.[0], effectFrames:!!context.effects })}`;
     UI.showOverlay(`[[icon:archive]] 开启${K.name}`, chestRewardFrameHTML({ overview:overviewHTML(), picker:opening, label:'开启宝箱' }), 'chest');
@@ -589,18 +586,24 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const isPick = choice && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
     const selected = Number.isInteger(cur.selected) ? cur.selected : null;
     const compact = cur.cards.length === 1 && cur.claimMode !== 'one' && (overviewMode || !cur.coins);
+    const progress = rewardProgress(cur.cards, taken, lost);
+    const chosenCard = choice ? cur.cards.find((_, i) => isChoice(i) && taken.has(i)) : null;
+    const bonusPending = choice ? cur.cards.filter((_, i) => !isChoice(i) && !taken.has(i) && !lost.has(i)).length : 0;
     let compactAction = '';
     const cardsHTML = cur.cards.map((card, i) => {
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
-      const action = rewardClaimHTML({ index:i, cardName:card.name, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm });
+      const category = isChoice(i) ? 'choice' : choice ? 'bonus' : 'loot';
+      const action = rewardClaimHTML({ index:i, cardName:card.name, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm, claimMode:cur.claimMode, bonus:category === 'bonus' });
       if (compact) compactAction = action;
-      return `<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(rewardRarity(card))}">
+      const heading = choice && cur.cards.length > choiceCount && i === 0 ? `<header class="reward-group-heading reward-choice-heading" data-reward-group="choice"><strong>基础候选</strong><span>${isPick ? `${choiceCount} 张中只选 1 张` : chosenCard ? '已选定，其余候选已放弃' : '本组已结束'}</span></header>`
+        : choice && i === choiceCount ? `<header class="reward-group-heading reward-bonus-heading" data-reward-group="bonus"><strong>独立附赠</strong><span>${bonusPending ? `剩余 ${bonusPending} 张 · 可逐张收下` : '附赠已处理'}</span></header>` : '';
+      return `${heading}<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(rewardRarity(card))}" data-reward-category="${category}"${choice ? '' : ' role="listitem"'}>
         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${compact ? '' : action}</article>`;
     }).join('');
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 按实际顺序模拟同名分堆/占格；成功收到珍珠盒后，后续资源可使用其扩格。
-    const rest = rewardProgress(cur.cards, taken, lost).pending;
+    const rest = progress.pending;
     let cant = 0;
     if (!isPick) {
       ({ cant } = previewCardRewards(rest, {
@@ -634,7 +637,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const coins = !overviewMode && cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
     const finalNotice = [taken.size ? `${taken.size} 张${REWARD_RECEIVED}` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
       !overviewMode && cur.coins ? cur.coinsReceived ? '金币已入账' : '金币待领取' : ''].filter(Boolean).join(' · ') || '已处理';
-    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${returnNotice ? '<button type="button" class="reward-bag" data-act="chestRetrySave">重试保存</button>' : ''}${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm && !(compact && overviewMode) ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图</button>' : ''}${!finished && !cur.leaveConfirm ? `${compact ? '<details class="reward-secondary-options"><summary>其他操作</summary>' : ''}<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>${compact ? '</details>' : ''}` : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
+    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${returnNotice ? '<button type="button" class="reward-bag" data-act="chestRetrySave">重试保存</button>' : ''}${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm && !overviewMode ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图</button>' : ''}${!finished && !cur.leaveConfirm ? `<details class="reward-secondary-options"><summary>其他操作</summary><button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button></details>` : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
     const extraCount = Math.max(0, cur.cards.length - (cur.choiceCount ?? cur.cards.length))
       + (cur.claimMode !== 'one' && cur.eggHit ? 1 : 0);
     const countLabel = isPick && extraCount ? `附赠 ${extraCount} 张` : '';
@@ -642,9 +645,8 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       title:overviewMode ? rewardPickerTitle({ finished, isPick, choice, count:cur.cards.length, randomSingle:cur.kind === 'small' && !cur.isClass && K.cards === 1 && !K.pickFrom }) : cur.title || (cur.battleSummary ? '战斗胜利' : isPick ? '选择收获' : '搜刮完成'),
       source:`${cur.source || (cur.isClass ? '职业补给' : K.name)}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
       countLabel,
-      rule:finished ? '' : isPick ? cur.cards.length > choiceCount
-        ? '任选1张，其余放弃；附赠另领'
-        : '任选1张，其余放弃' : '',
+      claimMode:cur.claimMode,
+      progress:{ total:cur.cards.length, pending:rest.length, received:progress.takenCount, choiceCount, choicePending:isPick, choiceName:chosenCard?.name || '', bonusPending },
       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
       actions:`${compactAction}${ops}${bulk}`, coins, footer, compact, warning:returnNotice ? `<p class="reward-notice" role="status">${esc(returnNotice)}</p>` : '', details, count:cur.cards.length + (coins ? 1 : 0),
       className:`reward-v14${overviewMode ? '' : ' reward-standalone-picker'}${taken.size || lost.size ? ' no-anim' : ''}`,
@@ -652,7 +654,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
     const currentBody = UI.el?.ovBody;
     const active = currentBody?.contains(document.activeElement) ? document.activeElement.closest('[data-act]') : null;
-    const focus = focusIntent || (active ? { action:active.dataset.act, index:active.dataset.i } : null);
+    const focus = focusIntent || (active ? { action:/** @type {HTMLElement} */ (active).dataset.act, index:/** @type {HTMLElement} */ (active).dataset.i } : null);
     if (currentBody?.querySelector('.reward-v14') && !UI.el?.overlay?.hidden) {
       rememberRewardPosition();
       if (!patchRewardScene(currentBody, SDT.Icons.rich(body))) currentBody.innerHTML = SDT.Icons.rich(body);
@@ -662,9 +664,9 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     restoreRewardPosition();
     if (focusIntent || (focus && !active?.isConnected)) restoreRewardActionFocus(UI.el.ovBody, focus);
     else if (!focus && rewardPositions.has(cur) && Number.isInteger(cur.selected)) {
-      UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${cur.selected}"]`)?.focus({ preventScroll:true });
+      /** @type {HTMLElement} */ (UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${cur.selected}"]`))?.focus({ preventScroll:true });
     }
-    if (cur.leaveConfirm) UI.el.ovBody.querySelector('[data-act="chestStay"]')?.focus({ preventScroll:true });
+    if (cur.leaveConfirm) /** @type {HTMLElement} */ (UI.el.ovBody.querySelector('[data-act="chestStay"]'))?.focus({ preventScroll:true });
     markChestTier(cur);
     const renderedBox = cur;
     const renderedVersion = ++rewardViewVersion;
@@ -692,9 +694,9 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       const card = cur.cards[i];
       const available = !cur.taken.has(i) && !cur.lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
-      const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
+      const source = /** @type {HTMLElement} */ (UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`));
       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
-        footer:available ? rewardClaimHTML({ index:i, cardName:card.name, choice:isChoice(i), fits, disabled:cur.leaveConfirm, zoom:true }) : '' });
+        footer:available ? rewardClaimHTML({ index:i, cardName:card.name, choice:isChoice(i), fits, disabled:cur.leaveConfirm, zoom:true, claimMode:cur.claimMode, bonus:choice && !isChoice(i) }) : '' });
       rewardZoom = document.getElementById('cardZoom');
     });
     UI.act('chestTake1', d => {
@@ -880,6 +882,6 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     cancelPresentation();
     if (typeof document !== 'undefined') document.removeEventListener('sdt-overlay-mode', cancelOnModeChange);
   });
-  sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => isCurrentRewardRun() && !!(cur || queue.length), suspend, resume, serialize, restore });
+  export const Chests = sdtDefine('Chests', { rollDrops, dropText, open, rollContents, configureFrameArt, isOpen: () => isCurrentRewardRun() && !!(cur || queue.length), suspend, resume, serialize, restore });
 
 export { SDT };

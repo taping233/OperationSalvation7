@@ -111,4 +111,5 @@ export function evaluateSlots(slots) {
   return syn;
 }
 
-sdtDefine('Runes', { RUNE_ATTRIBUTES, RUNE_KINDS, RUNE_RARITY_WEIGHTS, rollRune, rollRuneKind, rollAttribute, synergyOf, evaluateSlots, DUAL_CHANCE });
+export const Runes = { RUNE_ATTRIBUTES, RUNE_KINDS, RUNE_RARITY_WEIGHTS, rollRune, rollRuneKind, rollAttribute, synergyOf, evaluateSlots, DUAL_CHANCE };
+sdtDefine('Runes', Runes);

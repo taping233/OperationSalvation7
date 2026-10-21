@@ -16,7 +16,7 @@ const cardCatalog = context.cards;
  */
 
 /**
- * @param {object} ports engine 装配端口。resolveCard/applyTextEffects/triggersM2 在引擎中
+ * @param {import('./battle.core-ports.types.js').DrawPorts} ports engine 装配端口。resolveCard/applyTextEffects/triggersM2 在引擎中
  *   为晚定义常量，以惰性包装传入；其余为引擎既有一等件。
  * @returns {{ drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType }}
  */
@@ -38,6 +38,7 @@ function castDrawnCopy(uid, card) {
     const queued = queueCardExecution(uid, card, [], alive()[0] || null, true);
     if (queued === false) {
       // 免费不等于免注能；失败保留实体供补足条件，不制造一次性免注能。
+      // 反馈#5b 边界：「抽到时施放」不是「直接释放/直接施放」词条，不适用直释视为已注能口径。
       if (!instanceRuntime.hand.includes(uid)) instanceRuntime.hand.push(uid);
       instanceRuntime.lastDrawnUids.push(uid);
       instanceRuntime.cardAnims.push({ kind: 'draw', uid, name: card.name });
@@ -79,11 +80,13 @@ function drawCards(n) {
       // entry 可为 null（uid 无法解析，同函数 118/150 行口径）：2026-09-28 审计补漏
       if (instanceRuntime.mode === 'boss' && instanceRuntime.hand.length >= instanceRuntime.effectiveHandMax(R().battleHandMax)) {
         if (instanceRuntime.ashRune && entry && ['武术', '法术'].includes(entry.card.type)) {
+          // 反馈#5b（2026-10-21 老板定版）：「直接释放」词条（灰烬满手直释）释放注能卡时视为已注能——
+          // 允许释放、按已注能效果结算；不消耗注能材料，也不增加累计注能材料数，不因缺注能被拦。
           instanceRuntime.G.log('[[icon:fire]] <b>灰烬符文</b>：手牌已满，直接释放【' + esc(entry.card.name) + '】', 'sys');
           // 直释视同已打出：uid 必须留在牌堆簿记里，否则从所有牌区消失、无法洗回
           // （09-30 深审 BC-02；与 execPlay 普通打出的 discard.push 同口径）
           instanceRuntime.discard.push(uid);
-          resolveCard(entry.card, alive()[0] || null, false, 0);
+          resolveCard(entry.card, alive()[0] || null, true, 0);
           got++;
           continue;
         }
@@ -198,8 +201,9 @@ function releaseHandMatches(key, drawEach, max) {
       if (max && released >= max) break;
       const o = findCard(uid);
       if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
+      // 反馈#5b：「直接释放」词条（连弩/逆弓）——注能卡视为已注能释放
       const queued = queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
-        drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null);
+        drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null, null, true);
       if (queued !== false) released++;
     }
     return released;
@@ -211,7 +215,8 @@ function autoPlayHandType(type) {
       if (!instanceRuntime.hand.includes(uid)) continue;
       const o = findCard(uid);
       if (!o || o.card.type !== type) continue;
-      if (queueCardExecution(uid, o.card, [], alive()[0] || null, true) !== false) played++;
+      // 反馈#5b：「直接释放」词条（万剑归宗）——注能卡视为已注能释放
+      if (queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [], null, null, true) !== false) played++;
     }
     return played;
   }

@@ -1,4 +1,6 @@
 import { esc } from '../core/shared.js';
+import { expeditionToolArt } from './expedition-tool-art.js';
+import '../../css/map-floating-tools.css';
 import { previousRoutePlan, routeChoicePreview } from './route-choice-preview.js';
 import { mapNodeInfo } from '../core/node-info.js';
 import { isConsumedMapNode, mapNodeStatus } from '../core/map-node-state.js';
@@ -94,11 +96,25 @@ export function expeditionObjective(game) {
   return { tone: 'quiet', text: '搜集补给，寻找通往下一层的闸门' };
 }
 
+export function clearExpeditionPanel(doc = document) {
+  const sidebar = doc.getElementById('sidebar');
+  if (!sidebar) return;
+  sidebar.querySelector('.expedition-nav-summary')?.remove();
+  sidebar.querySelector('.expedition-map-preview')?.remove();
+  if (sidebar.dataset.expeditionLayout !== 'map') sidebar.dataset.expeditionLayout = 'map';
+  if (!sidebar.hidden) sidebar.hidden = true;
+}
+
 export function renderExpeditionPanel(panel, game, iconHTML) {
-  if (!game.runActive) return;
   const doc = panel?.ownerDocument || document;
+  const overlay = doc.getElementById('overlay');
+  const mapVisible = game.runActive && !game.battleActive && ['idle','moving'].includes(game.state)
+    && (!overlay || overlay.hidden) && !doc.body?.classList.contains('lobby')
+    && !doc.body?.classList.contains('scene-battle-3d');
+  if (!mapVisible) { clearExpeditionPanel(doc); return; }
   const sidebar = panel?.closest('#sidebar') || doc.getElementById('sidebar');
   if (sidebar) {
+    if (sidebar.hidden) sidebar.hidden = false;
     sidebar.dataset.expeditionLayout = 'map';
     const log = doc.getElementById('logPanel');
     if (log && log.parentElement !== sidebar) sidebar.append(log);
@@ -116,15 +132,19 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
     const disabled = game.state !== 'idle';
     const toolbarKey = `${used}:${cap}:${safe}:${safeCap}:${pocket}:${disabled}`;
     const capacityState = used >= cap ? 'full' : used / Math.max(1, cap) >= .75 ? 'tight' : used ? 'ready' : 'empty';
+    const capacityFill = Math.max(0, Math.min(100, used / Math.max(1, cap) * 100));
     if (summary.dataset.toolbarKey !== toolbarKey) {
       summary.dataset.toolbarKey = toolbarKey;
       summary.innerHTML = `<nav class="expedition-toolbar" aria-label="远征工具">
-        <button data-expedition-tool="bag" data-capacity-state="${capacityState}" style="--bag-fill:${Math.min(100, used / Math.max(1, cap) * 100)}%" aria-label="背包：占格 ${used}/${cap}，${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}" ${disabled ? 'disabled' : ''}>${iconHTML('bag')}<span>背包</span><strong>${used}<small>/${cap}</small></strong><kbd>B</kbd><span class="expedition-bag-meter" aria-hidden="true">${[1, 2, 3, 4].map(step => `<i${used > (step - 1) * cap / 4 ? ' class="is-filled"' : ''}></i>`).join('')}</span></button>
-        <button data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${iconHTML('lock')}<span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></button>
-        <button data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${iconHTML('cards')}<span>消耗区</span><strong>${pocket}</strong></button>
-        <span class="expedition-toolbar-space"></span>
-        <button class="map-view-tool" data-expedition-tool="focus" title="回到当前位置与相邻路线 · F" aria-label="定位：当前位置与相邻路线" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>定位</span><kbd>F</kbd></button>
-        <button class="map-view-tool" data-expedition-tool="overview" title="查看整层路线，未探明地点仅显示剪影 · G" aria-label="全景：整层路线，未知地点保留迷雾" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>全景</span><kbd>G</kbd></button>
+        <div class="expedition-tool-group" role="group" aria-label="携行物资">
+          <button type="button" data-expedition-tool="bag" data-capacity-state="${capacityState}" aria-label="背包：占格 ${used}/${cap}，${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('bag')}<span class="expedition-tool-copy"><span>背包</span><strong>${used}<small>/${cap}</small></strong><span class="expedition-bag-capacity" aria-hidden="true"><i style="width:${capacityFill}%"></i></span></span><kbd>B</kbd></button>
+          <button type="button" data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('safe')}<span class="expedition-tool-copy"><span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></span></button>
+          <button type="button" data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${expeditionToolArt('pocket')}<span class="expedition-tool-copy"><span>消耗区</span><strong>${pocket}</strong></span></button>
+        </div>
+        <div class="expedition-tool-group expedition-view-tools" role="group" aria-label="地图视野">
+          <button type="button" class="map-view-tool" data-expedition-tool="focus" title="回到当前位置与相邻路线 · F" aria-label="定位：当前位置与相邻路线" ${disabled ? 'disabled' : ''}>${expeditionToolArt('focus')}<span class="expedition-tool-copy">定位</span><kbd>F</kbd></button>
+          <button type="button" class="map-view-tool" data-expedition-tool="overview" title="查看整层路线，未探明地点仅显示剪影 · G" aria-label="全景：整层路线，未知地点保留迷雾" ${disabled ? 'disabled' : ''}>${expeditionToolArt('overview')}<span class="expedition-tool-copy">全景</span><kbd>G</kbd></button>
+        </div>
       </nav>`;
     }
 
@@ -172,7 +192,8 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const cam = game.cam;
   const previousInset = cam?.detailInset || 0;
   // 移动事务持有镜头；侧栏变化不能打断跟随或硬切取景。
-  if (cam?.frameMode !== 'travel') cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0);
+  const automaticFrame = !['manual', 'travel'].includes(cam?.frameMode);
+  if (cam?.frameMode !== 'travel') cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0, { deferFrame:automaticFrame });
   if (cam?.frameExploration && previousInset !== cam.detailInset && !['manual', 'travel'].includes(cam.frameMode)) {
     cam.frameExploration(game, cam.frameMode === 'overview', { glide:true });
   }

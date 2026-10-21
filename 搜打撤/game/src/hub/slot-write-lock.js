@@ -7,6 +7,13 @@ export function assertSlotWriteLease(lease, slotId) {
 }
 
 // The callback is synchronous: no browser event can borrow its short-lived write capability.
+/**
+ * @template T
+ * @param {number} slotId
+ * @param {(lease: object) => T} work
+ * @param {{lockManager?: LockManager, isCurrent?: () => boolean}} [options]
+ * @returns {Promise<{ok: true, value: T} | ReturnType<typeof fail>>}
+ */
 export async function withSlotWriteLock(slotId, work, { lockManager = globalThis.navigator?.locks, isCurrent = () => true } = {}) {
   if (!validSlot(slotId)) return fail('INVALID_ARGUMENT', '档位必须是 1～5');
   if (!lockManager?.request) return fail('CAPABILITY_UNAVAILABLE', '浏览器不支持存档事务锁，未写入存档');
@@ -17,11 +24,11 @@ export async function withSlotWriteLock(slotId, work, { lockManager = globalThis
       owners.set(lease, slotId);
       try {
         const value = work(lease);
-        if (value && typeof value.then === 'function') {
+        if (value && typeof /** @type {{then?:unknown}} */ (value).then === 'function') {
           Promise.resolve(value).catch(() => {});
           throw new TypeError('slot write callbacks must be synchronous');
         }
-        return { ok: true, value };
+        return { ok: /** @type {true} */ (true), value };
       } finally { owners.delete(lease); }
     });
   } catch { return fail('LOCK_FAILED', '存档操作未确认完成，请重试', true); }

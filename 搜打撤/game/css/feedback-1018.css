@@ -24,19 +24,6 @@ body #overlay .bag-guide .help-item b { display:block; margin-bottom:var(--ui-sp
 body #overlay .bag-guide details { grid-column:1/-1; padding:var(--ui-space-4); color:var(--ui-muted); }
 body #overlay .bag-guide summary { min-height:var(--ui-control-compact); cursor:pointer; font:500 var(--ui-text-body)/var(--ui-leading-body) var(--font-ui); }
 body #overlay .bag-guide summary:focus-visible { outline:var(--ui-focus-width) solid var(--ui-blue); outline-offset:var(--ui-focus-offset); }
-.expedition-toolbar [data-expedition-tool="bag"] { position:relative; overflow:hidden; border-bottom:3px solid #718d9b; }
-.expedition-toolbar [data-expedition-tool="bag"]::after { content:''; position:absolute; bottom:0; left:0; height:3px; width:var(--bag-fill); background:#c4dde6; pointer-events:none; }
-.expedition-toolbar .expedition-bag-meter { display:inline-flex; align-items:flex-end; gap:3px; height:20px; margin-left:4px; color:#b9d3de; }
-.expedition-toolbar .expedition-bag-meter i { width:4px; height:8px; border:1px solid currentColor; opacity:.35; }
-.expedition-toolbar .expedition-bag-meter i:nth-child(2) { height:12px; }
-.expedition-toolbar .expedition-bag-meter i:nth-child(3) { height:16px; }
-.expedition-toolbar .expedition-bag-meter i:nth-child(4) { height:20px; }
-.expedition-toolbar .expedition-bag-meter .is-filled { background:currentColor; opacity:1; }
-.expedition-toolbar [data-capacity-state="tight"] { border-color:#d5be85; }
-.expedition-toolbar [data-capacity-state="tight"] .expedition-bag-meter { color:#efdaa7; }
-.expedition-toolbar [data-capacity-state="full"] { border-color:#d78d7e; background:#472b2de8; }
-.expedition-toolbar [data-capacity-state="full"] .expedition-bag-meter { color:#ffd2bc; }
-.expedition-toolbar [data-capacity-state="full"] .expedition-bag-meter { border-top:2px solid currentColor; padding-top:2px; }
 body #overlay#overlay #hubMain .facilities-v12 .facility-tile { min-width:0; overflow:hidden; padding-right:38px; }
 body #overlay#overlay #hubMain .facilities-v12 .facility-tile > b { display:flex; flex-wrap:wrap; gap:4px 8px; min-width:0; max-width:100%; font-size:28px; line-height:1.4; white-space:normal; }
 body #overlay#overlay #hubMain .facilities-v12 .facility-tile > b small { font-size:18px; white-space:normal; }

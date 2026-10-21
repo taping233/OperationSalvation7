@@ -1,4 +1,5 @@
 import { foeFightTargets } from './battle.foe-fight.js';
+import { isClassCard } from '../../cards/card-rarity.js';
 // Step order is semantic; shared combat ports are injected by the pipeline.
 export function killsSteps(s) {
   const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
@@ -232,6 +233,7 @@ export function killsSteps(s) {
           const wantMoves = m[2] === '招式';
           const pool = allCards().filter(c =>
             c.rarity !== '衍生' && ['武术', '法术', '装备', '能力卡'].includes(c.type) &&
+            !isClassCard(c) &&   // 反馈#2：随机获取不产出职业卡（能力卡按类型规则保留）
             (!wantMoves || ['武术', '法术'].includes(c.type)) &&
             /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗/.test(String(c.desc || '')));
           let got = 0;

@@ -118,6 +118,7 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
       const current = read(slotId);
       return current.ok ? { ok: true, value: getHome(current.value, furnitureCatalog), revision: current.revision } : current;
     },
+    /** @param {{slotId?:number}} context @param {{furnitureId?:string,quantity?:number}} [payload] */
     async buyFurniture(context, { furnitureId, quantity = 1 } = {}) {
       const payload = { furnitureId, quantity };
       const replayed = await replay(context, 'home.purchase', payload);
@@ -136,6 +137,7 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
       const result = await commit(context, current, 'home.purchase', payload, state, { ...receipt }, receipt);
       return result;
     },
+    /** @param {{slotId?:number}} context @param {{placements?:object[]}} [payload] */
     async saveLayout(context, { placements } = {}) {
       const payload = { placements };
       const replayed = await replay(context, 'home.commitLayout', payload);
@@ -148,6 +150,7 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
       home.placements = clone(placements); state.home = home;
       return commit(context, current, 'home.commitLayout', payload, state, { placements: clone(placements) }, getHome(state, furnitureCatalog));
     },
+    /** @param {{slotId?:number}} context @param {{displaySlotId?:string,ref?:{kind:string,refId:string}|null}} [payload] */
     async setDisplay(context, { displaySlotId, ref } = {}) {
       const payload = { displaySlotId, ref };
       const replayed = await replay(context, 'home.setDisplay', payload);
@@ -174,6 +177,9 @@ export function createHomeCommands({ readBase, readBaseReceipt = null, commitBas
 // M12 可直接接入的生产门面。收藏永久记录的默认判定读取现有 collection 真源；
 // 接入 M02 后可用 createHomeCommands 注入 getCollection，以支持 variantKey。
 const defaultCommands = createHomeCommands({ readBase, readBaseReceipt, commitBase });
+/** @param {Parameters<typeof defaultCommands.buyFurniture>} args */
 export const buyFurniture = (...args) => defaultCommands.buyFurniture(...args);
+/** @param {Parameters<typeof defaultCommands.saveLayout>} args */
 export const saveLayout = (...args) => defaultCommands.saveLayout(...args);
+/** @param {Parameters<typeof defaultCommands.setDisplay>} args */
 export const setDisplay = (...args) => defaultCommands.setDisplay(...args);

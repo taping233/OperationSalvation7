@@ -160,7 +160,7 @@ function openDevConsole(originCheckpoint) {
   };
   const devBattle = () => !!(game.battleActive && SDT.Battle?.commands?.dev);
   const routeInfo = () => {
-    const plan=game.routePlan || {};
+    const plan=game.routePlan || /** @type {Partial<import('../hub/game.store.types.js').RoutePlan>} */ ({});
     return `mapSeed=${esc(game.mapSeed ?? '—')} · snapshot=${esc(game.routeVersion ? 'v2' : 'v1')} · routeVersion=${esc(game.routeVersion ?? 'none')} · status=${esc(plan.status ?? 'legacy')} · fallbackReason=${esc(plan.fallbackReason ?? 'none')}`;
   };
   const hitsHTML = () => {
@@ -174,13 +174,13 @@ function openDevConsole(originCheckpoint) {
   const notInRun = () => !game.runActive && !game.battleActive;
   const debugBody = () => `
     <div class="devc-grid">
-      <p class="ov-note">修改会立即写入本局存档，别在正经挑战里用；执行记录写入左侧日志（带「开发者：」前缀，可追溯目标与结果）。</p>
+      <p class="ov-note">资源修改和战斗外发卡写入本局存档；战斗内发卡为临时卡，战后消散。执行记录写入左侧日志。</p>
       ${notInRun() ? '<p class="ov-note">资源/发卡/战斗调试仅在对局或战斗中生效——先开一局再回来。</p>' : ''}
       <section class="devc-sec"><b class="devc-h">资源 <span class="devc-scope">写入本局存档</span></b><div class="devc-btns">
         <button class="hs-btn" data-act="devcCoin" data-n="50">+50 币</button><button class="hs-btn" data-act="devcCoin" data-n="200">+200 币</button>
         <button class="hs-btn" data-act="devcHeal" data-n="10">回 10 血</button><button class="hs-btn" data-act="devcHeal" data-n="999">回满血</button>
       </div></section>
-      <section class="devc-sec"><b class="devc-h">指定卡牌 <span class="devc-scope">发牌写入本局</span></b>
+      <section class="devc-sec"><b class="devc-h">指定卡牌 <span class="devc-scope">${devBattle() ? '当前战斗临时卡；道具进入快捷栏' : '发牌写入本局'}</span></b>
         <input id="devcSearch" class="clib-search" placeholder="输入卡名搜索，如：江湖救急" value="${esc(query.q)}">
         <div class="devc-hits" id="devcHits">${hitsHTML()}</div>
       </section>
@@ -210,7 +210,20 @@ function openDevConsole(originCheckpoint) {
       // devcB 不在此记——SDT.Battle.commands.dev 漏斗自报（debug-command），避免双计。
       UI.act('devcCoin', data => { if (!session.isCurrent() || notInRun()) return; const n = +data.n || 50; game.coins += n; SDT.Agent?.recorder?.noteIntervention?.('dev-console', `加币:${n}`); UI.log(`[[icon:coin]] 开发者：+${n} 币（现有 ${game.coins}）`, 'coin'); saveGameDev(); render(); });
       UI.act('devcHeal', data => { if (!session.isCurrent() || notInRun()) return; const n = +data.n || 10; game.hp = n >= 999 ? game.maxHp : Math.min(game.maxHp, game.hp + n); SDT.Agent?.recorder?.noteIntervention?.('dev-console', n >= 999 ? '回满血' : `回血:${n}`); UI.log(`[[icon:heart]] 开发者：生命 ${game.hp}/${game.maxHp}`, 'ok'); saveGameDev(); render(); });
-      UI.act('devcCard', data => { if (!session.isCurrent() || notInRun()) return; const card = hitCards()[+data.i]; if (card && game.grantCard) { SDT.Agent?.recorder?.noteIntervention?.('dev-console', `发卡:${card.name}`); game.grantCard(card); } render(); });
+      UI.act('devcCard', data => {
+        if (!session.isCurrent() || notInRun()) return;
+        const card = hitCards()[+data.i];
+        if (!card) return;
+        if (devBattle()) {
+          if (SDT.Battle.commands.dev('card', card.id)) session.close();
+          return;
+        }
+        if (game.grantCard?.(card)) {
+          SDT.Agent?.recorder?.noteIntervention?.('dev-console', `发卡:${card.name}`);
+          saveGameDev();
+        }
+        render();
+      });
       UI.act('devcB', data => { if (!session.isCurrent() || !devBattle()) return; SDT.Battle.commands.dev(data.k, data.n); setTimeout(() => { if (session.isCurrent()) render(); }, 80); });
     } else if (tab === 'agent') {
       bindAgentTab(render);

@@ -1,6 +1,7 @@
 import { createCityCut, playPreparedCut } from './camp-entry.js';
 import { waitPageVisual } from './page-visual-ready.js';
 import { motionReduced } from './motion-presets.js';
+import { revealTransition, transitionFrame } from './transition-handoff.js';
 import '../../css/expedition-transitions.css';
 
 let handoff = null;
@@ -17,7 +18,7 @@ export function startDepartureHandoff(start, source) {
   window.addEventListener('keydown', block, true);
   const operation = { promise: null };
   handoff = operation;
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const delay = ms => new Promise((/** @type {(value?: void) => void} */ resolve) => setTimeout(resolve, ms));
   operation.promise = (async () => {
     try {
       if (!motionReduced()) await delay(160);
@@ -31,12 +32,8 @@ export function startDepartureHandoff(start, source) {
         }
       }
       // 给已挂载过场/地图两个绘制机会；后台窗口仍有时间上限。
-      await new Promise(resolve => {
-        const timer = setTimeout(resolve, 160);
-        requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(timer); resolve(); }));
-      });
-      curtain.classList.add('leaving');
-      if (!motionReduced()) await delay(140);
+      await transitionFrame();
+      await revealTransition(curtain, { painted:true, isCurrent:() => handoff === operation });
       return result !== false;
     } finally {
       curtain.remove();

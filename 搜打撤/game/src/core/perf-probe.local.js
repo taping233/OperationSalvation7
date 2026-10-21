@@ -163,18 +163,18 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
     });
     overlayVisibilityObserver.observe(overlay, { attributes: true, attributeFilter: ['hidden'] });
   }
-  const content = panel.querySelector('[data-perf-panel]');
-  const result = panel.querySelector('#vitePerfResult');
+  const content = /** @type {HTMLElement | null} */ (panel.querySelector('[data-perf-panel]'));
+  const result = /** @type {HTMLElement | null} */ (panel.querySelector('#vitePerfResult'));
   let busy = false;
   let abortCurrentSample = null;
   let destroyed = false;
   let musicReadAt = -Infinity;
-  const musicResult = panel.querySelector('#vitePerfMusic');
+  const musicResult = /** @type {HTMLElement | null} */ (panel.querySelector('#vitePerfMusic'));
   function refreshMusic(now = performance.now(), force = false) {
     if (destroyed || !panel.isConnected || content.hidden || document.visibilityState !== 'visible') return;
     if (!force && now - musicReadAt < 1000) return;
     musicReadAt = now;
-    const frameResult = panel.querySelector('#vitePerfFrames');
+    const frameResult = /** @type {HTMLElement | null} */ (panel.querySelector('#vitePerfFrames'));
     let frames;
     try { frames = SDT.Battle?._perf?.frameCacheStats?.() ?? { available: false, phase: 'before-entry',
       staticDiagnostic: framesDiagnosticStatic(import.meta.env.DEV, location.search) }; }
@@ -231,7 +231,7 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
     const loopStart = SDT.__frameStats?.loopTicks || 0;
     const started = performance.now();
     const pageStart = mode === 'page' ? pageDomSnapshot() : null;
-    const resourceEntriesStart = mode === 'page' ? performance.getEntriesByType('resource').length : 0;
+    const resourceEntriesStart = mode === 'page' ? /** @type {PerformanceResourceTiming[]} */ (performance.getEntriesByType('resource')).length : 0;
     const gaps = [], draws = [], longTasks = [];
     let previousFrame = 0;
     const originalDraw = SDT.Renderer.draw;
@@ -286,7 +286,7 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
       const summary = summarizePerfSample({ mode, elapsed: ended - started, gaps, draws, longTasks,
         viewport, loopTicks: (SDT.__frameStats?.loopTicks || 0) - loopStart });
       if (mode === 'page') {
-        const resources = performance.getEntriesByType('resource');
+        const resources = /** @type {PerformanceResourceTiming[]} */ (performance.getEntriesByType('resource'));
         const sampleResources = resources.filter(entry => entry.startTime >= started && entry.startTime <= ended);
         const pageEnd = pageDomSnapshot();
         Object.assign(summary, {
@@ -337,7 +337,7 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
       panel.style.padding = collapsed ? '0' : '8px';
       panel.style.transform = collapsed ? 'translateY(-50%)' : 'none';
       panel.querySelectorAll('[data-perf-toggle]').forEach(button => button.setAttribute('aria-expanded', String(!collapsed)));
-      const handle = panel.querySelector('[data-perf-handle]');
+      const handle = /** @type {HTMLElement | null} */ (panel.querySelector('[data-perf-handle]'));
       handle.textContent = collapsed ? '性能' : '性能探针 ▾';
       handle.setAttribute('aria-label', collapsed ? '展开性能探针' : '折叠性能探针');
       handle.style.width = collapsed ? '24px' : 'auto';
@@ -354,8 +354,8 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
     if (busy) return;
     refreshMusic(performance.now(), true);
     if (mode === 'loads') {
-      const navigation = performance.getEntriesByType('navigation')[0];
-      const resources = performance.getEntriesByType('resource');
+      const navigation = /** @type {PerformanceNavigationTiming | undefined} */ (performance.getEntriesByType('navigation')[0]);
+      const resources = /** @type {PerformanceResourceTiming[]} */ (performance.getEntriesByType('resource'));
       const summary = {
         mode: 'loads',
         rafMetricLabel: 'rAF callback rate; not screen FPS',

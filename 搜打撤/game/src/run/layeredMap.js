@@ -8,6 +8,7 @@ const LAYER_NAMES_EN = ['Outer Wastes', 'Blizzard Watchline', 'Permafrost Ruins'
 const LAYER_COLORS = ['#78b9d6', '#9fcf8d', '#d8ae68', '#b77ad8'];
 
 // 3/9 历史重建入口逐字冻结；下方终局注释保留历史原文，不作为新版拓扑保证。
+/** @param {string | number} [seed] */
 export function createLayeredMap(seed = 0) {
   const generated = generateLayeredMap(seed);
   // 第四层（li=3）由生成器直接产出「祭坛 → 首脑」终局三连格（弃3激活祭坛选奖励、
@@ -26,6 +27,7 @@ export function createLayeredMap(seed = 0) {
 }
 
 // 新局入口独立，避免更改旧局无快照重建使用的适配函数。
+/** @param {string | number} [seed] */
 export function createCurrentLayeredMap(seed = 0) {
   const generated = generateCurrentLayeredMap(seed);
   // 4/9 按入口真实图距离安排祭坛、首脑和撤离，连边保持双向；流程锁仍由原业务控制。

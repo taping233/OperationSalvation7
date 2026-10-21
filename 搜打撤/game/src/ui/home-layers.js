@@ -1,6 +1,6 @@
 // Composition layers for the home cover: diagonal slab, corner brackets, ghost word, side rail, beams, plate index and sweep.
 const title = document.getElementById('title');
-const inner = title?.querySelector('.title-inner');
+const inner = /** @type {HTMLElement} */ (title?.querySelector('.title-inner'));
 
 function make(tag, className) {
   const el = document.createElement(tag);
@@ -37,7 +37,7 @@ if (title && inner && title.classList.contains('home-composed')) {
   rail.innerHTML = '<span class="home-rail-text">Winter Speculation · Ascension Council · 2026</span><span class="home-rail-ruler"></span>';
   inner.appendChild(rail);
 
-  title.querySelectorAll('.home-primary > .home-plate, .home-secondary > .home-plate').forEach((plate, i) => {
+  /** @type {NodeListOf<HTMLElement>} */ (title.querySelectorAll('.home-primary > .home-plate, .home-secondary > .home-plate')).forEach((plate, i) => {
     const index = make('span', 'home-index');
     index.textContent = String(i + 1).padStart(2, '0');
     plate.appendChild(index);

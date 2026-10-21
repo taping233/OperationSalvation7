@@ -6,17 +6,17 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after {
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::before {
   background-image:radial-gradient(circle .8px at 36px 48px,#dceaf0a8 70%,transparent),radial-gradient(circle 1px at 253px 86px,#d2e5eb90 70%,transparent),radial-gradient(circle .7px at 72px 249px,#c2dbe680 70%,transparent),radial-gradient(circle 1px at 171px 178px,#e8f3f0a0 70%,transparent),radial-gradient(circle .8px at 344px 224px,#dceaf090 70%,transparent);
-  background-size:397px 293px; animation:map-snow-far 24s linear infinite; opacity:.55;
+  background-size:517px 383px; animation:map-snow-far 24s linear infinite; opacity:.32;
 }
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport::after {
   background-image:radial-gradient(circle 1.8px at 57px 79px,#eff8f0cc 45%,#dceaf030 75%,transparent),radial-gradient(circle 2.3px at 279px 238px,#eff8f0c0 40%,#dceaf028 75%,transparent),radial-gradient(circle 1.4px at 163px 367px,#eaf5f0b0 55%,transparent),radial-gradient(circle 2px at 409px 139px,#f0f7f0b8 40%,#dceaf028 75%,transparent);
-  background-size:487px 421px; animation:map-snow-near 15s linear infinite; animation-delay:-7s; opacity:.65;
+  background-size:487px 421px; animation:map-snow-near 15s linear infinite; animation-delay:-7s; opacity:.36;
 }
 /* A whole vertical tile per loop makes the wrap continuous; a little sway suggests wind. */
 @keyframes map-snow-far {
   0% { transform:translate3d(0,-180px,0); }
-  50% { transform:translate3d(-14px,-33.5px,0); }
-  100% { transform:translate3d(0,113px,0); }
+  50% { transform:translate3d(-14px,11.5px,0); }
+  100% { transform:translate3d(0,203px,0); }
 }
 @keyframes map-snow-near {
   0% { transform:translate3d(0,-220px,0); }
@@ -43,9 +43,9 @@ body:has(#exitScr:not([hidden])) #viewport::after { visibility:hidden; animation
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) .map-volumetric-light { display:block; }
 .map-volumetric-light i {
   position:absolute; top:-20%; left:14%; width:18%; height:130%;
-  background:linear-gradient(90deg,transparent,rgba(178,217,230,.07) 24%,rgba(227,244,240,.15) 48%,rgba(178,217,230,.06) 73%,transparent);
+  background:linear-gradient(90deg,transparent,rgba(178,217,230,.018) 24%,rgba(227,244,240,.04) 48%,rgba(178,217,230,.015) 73%,transparent);
   clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
-  filter:blur(12px); transform-origin:50% 0; transform:rotate(21deg);
+  filter:blur(24px); transform-origin:50% 0; transform:rotate(21deg);
   animation:map-light-breathe 18s ease-in-out infinite alternate;
 }
 .map-volumetric-light i:nth-child(2) { left:49%; width:12%; top:-28%; opacity:.55; animation-duration:23s; animation-delay:-9s; }
@@ -55,8 +55,8 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) .map-volumetric-light {
   to { transform:rotate(23deg); opacity:.72; }
 }
 /* Each shaft retains its own intensity while the shared animation slowly breathes. */
-.map-volumetric-light i:nth-child(2) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.035) 24%,rgba(227,244,240,.08) 48%,rgba(178,217,230,.03) 73%,transparent); }
-.map-volumetric-light i:nth-child(3) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.025) 24%,rgba(227,244,240,.06) 48%,rgba(178,217,230,.025) 73%,transparent); }
+.map-volumetric-light i:nth-child(2) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.009) 24%,rgba(227,244,240,.02) 48%,rgba(178,217,230,.008) 73%,transparent); }
+.map-volumetric-light i:nth-child(3) { background:linear-gradient(90deg,transparent,rgba(178,217,230,.006) 24%,rgba(227,244,240,.015) 48%,rgba(178,217,230,.006) 73%,transparent); }
 body:has(#overlay:not([hidden])) .map-volumetric-light,
 body:has(#title:not([hidden])) .map-volumetric-light,
 body:has(#exitScr:not([hidden])) .map-volumetric-light { visibility:hidden; }

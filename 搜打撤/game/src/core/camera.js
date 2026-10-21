@@ -4,6 +4,7 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
 
   const SDT = window.SDT;
 
+  /** @constructor */
   function Camera(map, viewW, viewH) {
     this.map = map;
     this.viewW = viewW;
@@ -12,6 +13,7 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
     this.cy = map.rows * map.tile / 2;
     this.zoom = 1;
     this.frameMode = 'routes';
+    this.panFrameMode = 'routes';
     this.detailInset = 0;
     this._pan = createMapDragMotion(this, {
       invalidate: active => active ? renderScheduler.invalidateAnimation() : renderScheduler.invalidate(),
@@ -87,6 +89,7 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
     if (this._glide) { this._glide.dead = true; this._glide = null; }
   };
 
+  /** @param {number} tx @param {number} ty @param {{zoom?:number,dur?:number}} [options] */
   Camera.prototype.glideTo = function (tx, ty, { zoom, dur = 460 } = {}) {
     this._stopGlide();
     const from = { cx: this.cx, cy: this.cy, zoom: this.zoom };
@@ -142,13 +145,15 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
   };
 
   // Reserve a side panel without changing world coordinates, hit testing or legal nodes.
-  Camera.prototype.setDetailInset = function (width) {
+  Camera.prototype.setDetailInset = function (width, { deferFrame = false } = {}) {
     const next = Math.min(this.viewW * .38, Math.max(0, Number(width) || 0));
     const old = this.detailInset || 0;
     if (next === old) return;
     this._stopGlide();
-    this.cx += (next - old) / (2 * this.zoom);
     this.detailInset = next;
+    // Automatic framing starts from the displayed camera, without a preliminary jump.
+    if (deferFrame) return;
+    this.cx += (next - old) / (2 * this.zoom);
     this.clamp();
     renderScheduler.invalidate();
   };
@@ -159,6 +164,7 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
     const points = game?.nodePos?.[li];
     const current = game?.layerData?.[li]?.logical?.[game.trackPos];
     if (!points?.length || !current) return false;
+    if (!overview && !points[game.trackPos]) return false;
     const indices = new Set([game.trackPos]);
     for (const [nl, idx] of current.next || []) if (nl === li) indices.add(idx);
     // Full-layer framing changes only the camera: the renderer retains fog silhouettes
@@ -177,14 +183,26 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
     const bottom = Math.min(this.viewH * .30, 190 * unit);
     const safeW = Math.max(1, availableW - side * 2);
     const safeH = Math.max(1, this.viewH - top - bottom);
-    const zoom = Math.min(overview ? 2.45 : 3.4, Math.max(.08, Math.min(
+    let zoom = Math.min(overview ? 2.45 : 3.4, Math.max(.08, Math.min(
       safeW / Math.max(1, maxX - minX), safeH / Math.max(1, maxY - minY))));
-    const cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
-    const cy = (minY + maxY) / 2 + (bottom - top) / (2 * zoom);
+    let cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
+    let cy = (minY + maxY) / 2 + (bottom - top) / (2 * zoom);
+    if (!overview) {
+      // Entry/current location stays in the centre, with at least one map step
+      // of context on every side; asymmetric branches must not pull it aside.
+      const anchor = points[game.trackPos];
+      const halfW = Math.max(180, ...visible.map(p => Math.abs(p.x - anchor.x))) + 36;
+      const halfH = Math.max(180, ...visible.map(p => Math.abs(p.y - anchor.y))) + 36;
+      zoom = Math.min(2.45, Math.max(.08, Math.min(
+        safeW / (halfW * 2), Math.max(1, Math.min(this.viewH / 2 - top, this.viewH / 2 - bottom)) / halfH)));
+      cx = anchor.x + (this.detailInset || 0) / (2 * zoom);
+      cy = anchor.y;
+    }
     // 显式定位默认同步落定；需要过渡的入口传入 glide。
     if (opts?.glide) this.glideTo(cx, cy, { zoom, dur: opts.dur });
     else { this._stopGlide(); this.zoom = zoom; this.cx = cx; this.cy = cy; }
     this.frameMode = overview ? 'overview' : 'routes';
+    this.panFrameMode = this.frameMode;
     return true;
   };
 
@@ -231,9 +249,11 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
     const from = { cx: this.cx, cy: this.cy, zoom: this.zoom };
     this.frameExploration(game);
     const zoom = Math.min(from.zoom, this.zoom);
-    const cx = this.cx, cy = this.cy;
+    // The final zoom may be capped below the fitted zoom; keep the inset anchor
+    // consistent with that final scale so arrival does not slide back sideways.
+    const cx = this.cx + (this.detailInset || 0) / 2 * (1 / zoom - 1 / this.zoom), cy = this.cy;
     Object.assign(this, from);
-    if (animate) this.glideTo(cx, cy, { zoom, dur: 180 });
+    if (animate) this.glideTo(cx, cy, { zoom, dur: 360 });
     else { this.zoom = zoom; this.focus(cx, cy); }
   };
 
@@ -243,4 +263,4 @@ import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
 
   SDT.Camera = Camera;
 
-export { nodeHitRadius };
+export { nodeHitRadius, Camera };

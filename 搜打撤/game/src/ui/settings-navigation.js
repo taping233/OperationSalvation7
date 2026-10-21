@@ -3,21 +3,22 @@ import '../../css/home-ui-tokens.css';
 import { enterSurface } from './surface-motion.js';
 import { enterSettingsCut } from './settings-transition.js';
 
+/** @type {[string, string, string[]][]} */
 const CATEGORIES = [
-  ['general', '通用', 'GENERAL', '界面信息与辅助功能', ['general']],
-  ['display', '画面与反馈', 'DISPLAY', '画质、动画绘制上限与动作反馈', ['display']],
-  ['audio', '音频', 'AUDIO', '音乐与音效独立调节，修改自动保存', ['audio']],
-  ['data', '数据管理', 'DATA', '查看记录与管理本地数据', ['records', 'danger']],
-  ['about', '关于', 'ABOUT', '创作来源与鸣谢', ['credits']],
+  ['general', '通用', ['general']],
+  ['display', '画面与反馈', ['display']],
+  ['audio', '音频', ['audio']],
+  ['data', '数据管理', ['records', 'danger']],
+  ['about', '关于', ['credits']],
 ];
 
 // Build the final structure before the overlay mounts: no connected group moves or
 // checkbox reparenting. Callers supply trusted, freshly rendered control HTML.
 export function settingsLayoutHTML(groups) {
-  const tabs = CATEGORIES.map(([key, title, english], index) =>
-    `<button type="button" class="settings-tab" id="settings-tab-${key}" role="tab" aria-controls="settings-panel-${key}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><span>${title}</span><small>${english}</small></button>`).join('');
-  const panels = CATEGORIES.map(([key, title, english, description, names], index) =>
-    `<section class="settings-panel" id="settings-panel-${key}" role="tabpanel" aria-labelledby="settings-tab-${key}"${index ? ' hidden' : ''}><header class="settings-panel-head"><small>${english}</small><h3>${title}</h3><p>${description}</p></header>${names.map(name => groups[name]).join('')}</section>`).join('');
+  const tabs = CATEGORIES.map(([key, title], index) =>
+    `<button type="button" class="settings-tab" id="settings-tab-${key}" role="tab" aria-controls="settings-panel-${key}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><span>${title}</span></button>`).join('');
+  const panels = CATEGORIES.map(([key, title, names], index) =>
+    `<section class="settings-panel" id="settings-panel-${key}" role="tabpanel" aria-labelledby="settings-tab-${key}"${index ? ' hidden' : ''}><header class="settings-panel-head"><h3>${title}</h3></header>${names.map(name => groups[name]).join('')}</section>`).join('');
   return `<div class="settings settings-layout"><nav class="settings-nav" role="tablist" aria-label="设置分类" aria-orientation="vertical">${tabs}</nav><div class="settings-content">${panels}</div></div>`;
 }
 
@@ -26,12 +27,12 @@ export function initSettingsNavigation(root) {
   if (!root || initialized.has(root)) return;
   initialized.add(root);
   root.dataset.settingsWallpaper = document.getElementById('title')?.dataset.homeWallpaper || 'snow-road';
-  const nav = root.querySelector('.settings-nav');
-  const content = root.querySelector('.settings-content');
-  const tabs = [...nav.querySelectorAll('.settings-tab')];
-  const panels = [...content.querySelectorAll('.settings-panel')];
+  const nav = /** @type {HTMLElement} */ (root.querySelector('.settings-nav'));
+  const content = /** @type {HTMLElement} */ (root.querySelector('.settings-content'));
+  const tabs = [.../** @type {NodeListOf<HTMLElement>} */ (nav.querySelectorAll('.settings-tab'))];
+  const panels = [.../** @type {NodeListOf<HTMLElement>} */ (content.querySelectorAll('.settings-panel'))];
   panels.forEach(panel => {
-    panel.querySelectorAll('.chk, .btn-row, .hint').forEach((item, index) => {
+    /** @type {NodeListOf<HTMLButtonElement>} */ (panel.querySelectorAll('.chk, .btn-row, .hint')).forEach((item, index) => {
       item.style.setProperty('--settings-order', String(Math.min(index + 1, 3)));
     });
   });

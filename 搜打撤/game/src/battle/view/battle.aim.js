@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 /* 指向施法：鼠标起拖，单体过线停靠、群体跟随；松空转点击确认，取消回手牌布局。
  * 点击选目标，展开手牌直接阅读；拖拽释放到合法目标直接提交。 */
 const SDT = window.SDT;
@@ -35,7 +36,7 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
   function showHandCardDetails() { return false; }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession, isTargetableEnemy } from '../core/battle.target-session.js';
-import { isAreaEffect, isRandomEnemyEffect } from '../effects/battle.target-rules.js';
+import { isAreaEffect, isRandomEnemyEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { cancelSelection, syncSelectionPrompt } from './battle.selection-ui.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
@@ -115,7 +116,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   }
 
   function aimCanvasEnsure() {
-    let canvas = document.getElementById('aimArrow');
+    let canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('aimArrow'));
     if (!canvas) {
       canvas = document.createElement('canvas');
       canvas.id = 'aimArrow';
@@ -201,7 +202,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
         if (previous) {
           previous.el.classList.remove('drag-over', 'drop-here', 'drop-any');
           if (previous.kind === 'enemy') clearFoePreview(previous.el);
-          if (a.fieldPlayable && a.side === 'enemy') a.stage.querySelectorAll('.bt-foe').forEach(clearFoePreview);
+          if (a.fieldPlayable && a.side === 'enemy') /** @type {NodeListOf<BattleElement>} */ (a.stage.querySelectorAll('.bt-foe')).forEach(clearFoePreview);
         }
         a.hover = next;
         if (!next) return;
@@ -215,9 +216,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
             // One synchronous hover transition shares current state; a later
             // pointer transition or renderer refresh takes a new snapshot.
             const hoverSnapshot = getSnapshot();
-            a.stage.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
+            const handRuleContext = {};
+            /** @type {NodeListOf<BattleElement>} */ (a.stage.querySelectorAll('.bt-foe[data-eidx]')).forEach(el => {
               const idx = +el.dataset.eidx;
-              if (!hoverSnapshot.foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag', hoverSnapshot);
+              if (!hoverSnapshot.foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag', hoverSnapshot, handRuleContext);
             });
           }
         }
@@ -253,7 +255,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const a = aim;
     if (!a) return;
     if (!a.el.isConnected || !a.stage?.isConnected || !a.targetSession?.isCurrent()) { cancelAim(); return; }
-    const stage = UI.el.ovBody?.querySelector('.battle-stage');
+    const stage = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage'));
     const entry = findCard(a.uid);
     if (!stage || !a.el.isConnected || !stage.contains(a.el) || a.el.dataset.uid !== a.uid || !entry) { cancelAim(); return; }
     if (a.moved) a.el.classList.add('aim-lift'); // updateHand 会重写 className
@@ -271,7 +273,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.fieldPlayable = a.follow && (a.side === 'self' || isAreaEffect(entry.card) || isRandomEnemyEffect(entry.card));
     a.stage = stage;
     a.vr = UI.el.overlay.getBoundingClientRect();
-    a.playBlockedReason = cardPlayBlockedReason(a.uid, a.side === 'self' ? 'self' : undefined, a.side !== 'any');
+    a.playBlockedReason = cardPlayBlockedReason(a.uid, a.side === 'self' ? 'self' : undefined);
     if (a.reasonShown) {
       if (a.playBlockedReason) showThoughtBubble(a.playBlockedReason, true);
       else { clearThoughtBubble(); a.reasonShown = false; }
@@ -302,9 +304,9 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     clickTargetSession = null;
     if (clickSelectedUid == null) return false;
     clickSelectedUid = null;
-    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+    /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.sts-hand .bt-card.click-selected')).forEach(el => {
       el.classList.remove('click-selected');
-      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
+      /** @type {BattleElement} */ (el.querySelector('.hs-card'))?.setAttribute('aria-pressed', 'false');
       el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     updateClickSelectionUI();
@@ -315,22 +317,24 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (snapshot && origin.stage.isConnected && origin.stage._battleToken === origin.token
       && snapshot.battleToken === origin.token && !snapshot.busy
       && ['player', 'targeting'].includes(snapshot.phase) && snapshot.hand?.includes(origin.uid)) {
-      const card = [...origin.stage.querySelectorAll('.sts-hand .bt-card')].find(el => el.dataset.uid === origin.uid);
-      if (card && !card.closest('[inert], [hidden]')) card.querySelector('.hs-card[role="button"]')?.focus({ preventScroll: true });
+      const card = [.../** @type {NodeListOf<BattleElement>} */ (origin.stage.querySelectorAll('.sts-hand .bt-card'))].find(el => el.dataset.uid === origin.uid);
+      if (card && !card.closest('[inert], [hidden]')) /** @type {BattleElement} */ (card.querySelector('.hs-card[role="button"]'))?.focus({ preventScroll: true });
     }
     return true;
   }
   function setTargetable(el, enabled, label) {
     if (!el) return;
-    el.classList.toggle('can-target', enabled);
+    // Read the live DOM rather than caching eligibility: retained targets may
+    // be renamed or have their attributes changed between render passes.
+    if (el.classList.contains('can-target') !== !!enabled) el.classList.toggle('can-target', enabled);
     if (enabled) {
-      el.setAttribute('role', 'button');
-      el.tabIndex = 0;
-      el.setAttribute('aria-label', label);
+      if (el.getAttribute('role') !== 'button') el.setAttribute('role', 'button');
+      if (el.getAttribute('tabindex') !== '0') el.tabIndex = 0;
+      if (el.getAttribute('aria-label') !== String(label)) el.setAttribute('aria-label', label);
     } else {
-      el.removeAttribute('role');
-      el.removeAttribute('tabindex');
-      el.removeAttribute('aria-label');
+      if (el.hasAttribute('role')) el.removeAttribute('role');
+      if (el.hasAttribute('tabindex')) el.removeAttribute('tabindex');
+      if (el.hasAttribute('aria-label')) el.removeAttribute('aria-label');
     }
   }
   function syncClickTargetPreviews() {
@@ -340,9 +344,9 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       clickTargetSession = null;
       clickFocusOrigin = null;
       clickSelectedUid = null;
-      document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+      /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.sts-hand .bt-card.click-selected')).forEach(el => {
         el.classList.remove('click-selected');
-        el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
+        /** @type {BattleElement} */ (el.querySelector('.hs-card'))?.setAttribute('aria-pressed', 'false');
         el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
       });
       updateClickSelectionUI();
@@ -353,9 +357,12 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     const pendingSide = pendingEntry && targetSide(pendingEntry.card);
     // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具（回复类，targetSide!=='enemy'）
     // 不再让全体敌人可点（高亮=攻击性误导，评审读码+W3 复核）；slam/dart 语义正确保留。
-    const pendingItemSide = snapshot.pendingItem && snapshot.pendingItem.card ? targetSide(snapshot.pendingItem.card) : null;
+    // 反馈1021·9：道具进点选态的唯一判据是 itemTargetSideFor（usePotion/bag 同源）——
+    // targetSideFor 只看招式卡的 triggers.onPlay / 卡面字段，对「冰冻药水/流血药水」这类
+    // 只有 rules.bag.use 的道具恒返回 null，会让点选态一个敌人都不亮，玩家无从收口。
+    const pendingItemSide = snapshot.pendingItem && snapshot.pendingItem.card ? itemTargetSideFor(snapshot.pendingItem.card) : null;
     setTargetable(document.getElementById('btSelf'), selectedSide === 'self' || pendingSide === 'self' || pendingItemSide === 'self', '自己，按 Enter 确认目标');
-    document.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
+    /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.bt-foe[data-eidx]')).forEach(el => {
       clearFoePreview(el);
       const idx = +el.dataset.eidx;
       const foe = snapshot.foes[idx];
@@ -373,10 +380,15 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     return cancelled;
   }
   function updateClickSelectionUI() {
-    syncSelectionPrompt(UI.el.ovBody?.querySelector('.battle-stage'), getSnapshot(), {
+    syncSelectionPrompt(/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage')), getSnapshot(), {
       clickUid:clickSelectedUid, findCard,
-      getCurrent:() => ({ snapshot:getSnapshot(), clickUid:clickSelectedUid, stage:UI.el.ovBody?.querySelector('.battle-stage') }),
+      getCurrent:() => ({ snapshot:getSnapshot(), clickUid:clickSelectedUid, stage:/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage')) }),
       onCancel:({ restoreFocus }) => cancelBattleSelection({ restoreFocus }),
+      onReturnToInfusion:uid => {
+        cancelClickSelection();
+        commands.beginInfusion(uid);
+        updateClickSelectionUI();
+      },
     });
   }
   function selectCardByClick(uid, focusTarget = false, { autoSingleTarget = true } = {}) {
@@ -414,17 +426,17 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       isBattleCurrent: () => targetSessionBattleCurrent(snap.battleToken),
       getTargets: () => getSnapshot().foes,
     });
-    document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
+    /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.sts-hand .bt-card.click-selected')).forEach(el => {
       el.classList.remove('click-selected');
-      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'false');
+      /** @type {BattleElement} */ (el.querySelector('.hs-card'))?.setAttribute('aria-pressed', 'false');
       el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
-    const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
+    const el = [.../** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.sts-hand .bt-card'))].find(x => x.dataset.uid === uid);
     clickFocusOrigin = focusTarget && el?.closest('.battle-stage')
       ? { uid, token: snap.battleToken, stage: el.closest('.battle-stage') } : null;
     if (el) {
       el.classList.add('click-selected');
-      el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'true');
+      /** @type {BattleElement} */ (el.querySelector('.hs-card'))?.setAttribute('aria-pressed', 'true');
       el.dataset.handState = 'selected';
       if (focusTarget) flashCardPickup(el);
     }
@@ -432,10 +444,12 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (focusTarget) SDT.Sound.sfx('cardSelect');
     updateClickSelectionUI();
     syncClickTargetPreviews();
-    if (focusTarget) document.querySelector(side === 'self' ? '#btSelf.can-target' : '.bt-foe.can-target')?.focus();
+    if (focusTarget) /** @type {BattleElement} */ (document.querySelector(side === 'self' ? '#btSelf.can-target' : '.bt-foe.can-target'))?.focus();
   }
   function clickSelectedTarget(side, idx) {
     const snapshot = getSnapshot();
+    if (!snapshot || snapshot.busy || snapshot.infusing || snapshot.discovering || snapshot.choosing || snapshot.handSelecting
+      || !targetSessionBattleCurrent(snapshot.battleToken)) return false;
     const pending = snapshot.pendingTarget;
     if (clickSelectedUid == null && !pending) return false;
     const uid = pending?.uid ?? clickSelectedUid;
@@ -448,7 +462,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       // W3-03（2026-09-27 R2）：误指反馈贴操作点——气泡挂在 #btSelf（英雄侧），
       // 被点的敌人本身零反馈，紧张局里玩家感知不到「点错了哪里」（评审死亡局实录×4）。
       // 呈现层追加：被点敌人红框+抖动一次；拒绝逻辑/log/气泡原样不动。
-      const foeEl = document.querySelector(`.bt-foe[data-eidx="${idx}"]`);
+      const foeEl = /** @type {BattleElement} */ (document.querySelector(`.bt-foe[data-eidx="${idx}"]`));
       if (foeEl) {
         if (foeEl._misTimer) clearTimeout(foeEl._misTimer);   // 旧 timer 先清：650ms 内重抖不被上一轮腰斩
         foeEl.classList.remove('mis-target');
@@ -479,7 +493,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
 
   function startAim(e, el, kind) {
     if (e.button !== 0 || e.isPrimary === false || e.isComposing) return;
-    if (document.querySelector('#overlay .bt-hand-detail')) return;
+    if (/** @type {BattleElement} */ (document.querySelector('#overlay .bt-hand-detail'))) return;
     const snap = getSnapshot();
     const { busy, infusing, discovering, choosing } = snap;
     syncSubmittedCardPoses();
@@ -497,10 +511,9 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (!entry) return;
     cancelClickSelection();
     const side = (kind === 'potion' || isSlam) ? 'enemy' : (targetSide(entry.card) || 'any');   // null = 无目标招式：拖到中间空地即可
-    // Aimed enemy/self plays skip optional infusion; an untargeted pickup keeps
-    // the original infusion entry. Match that intent in the read-only query.
+    // Default pointer and keyboard submissions share the same infusion entry.
     const playBlockedReason = !isSlam && kind !== 'potion'
-      ? cardPlayBlockedReason(uid, side === 'self' ? 'self' : undefined, side !== 'any') : '';
+      ? cardPlayBlockedReason(uid, side === 'self' ? 'self' : undefined) : '';
     const isCard = kind !== 'potion' && !isSlam;
     const vr = UI.el.overlay.getBoundingClientRect();
     const r = el.getBoundingClientRect();
@@ -730,7 +743,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (live?.battleToken !== ticket.battleToken
       || ![BATTLE_PHASES.PLAYER, BATTLE_PHASES.TARGETING, BATTLE_PHASES.RESOLVING].includes(live.phase)
       || UI.el.overlay.hidden) return false;
-    const stage = UI.el.ovBody?.querySelector('.battle-stage');
+    const stage = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage'));
     if (!stage) return false;
     const a = ticket.pose;
     return !a || a.stage === stage && a.el.isConnected && stage.contains(a.el) && a.el.dataset.uid === ticket.uid;

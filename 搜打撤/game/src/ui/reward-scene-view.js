@@ -1,14 +1,20 @@
 import { esc, escAttr } from '../core/shared.js';
+/** @typedef {{ total?: number, pending?: number, received?: number, choiceCount?: number, choicePending?: boolean, choiceName?: string, bonusPending?: number }} RewardModeProgress */
 
 export function rewardExitHTML(act, label = '继续探索', extraClass = '') {
   return `<button type="button" class="reward-exit ${escAttr(extraClass)}" data-act="${escAttr(act)}"><span class="reward-exit-icon" aria-hidden="true">[[icon:exit]]</span><span>${esc(label)}</span></button>`;
 }
 
 // Cards contain their own names and rules. This frame adds only acquisition actions.
-export function rewardSceneHTML({ title, source = '', countLabel = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0, compact = false }) {
-  return `<section class="${escAttr(className)}${compact ? ' reward-compact' : ''} reward-replica${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}">
-    <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${countLabel ? `<p class="reward-count">${esc(countLabel)}</p>` : ''}${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>
-    <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects">${coins}${cards}</div>${warning}${details}</div></div>
+export function rewardSceneHTML({ title, source = '', countLabel = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0, compact = false, claimMode = '', progress = /** @type {RewardModeProgress} */ ({}) }) {
+  const mode = claimMode === 'one' || claimMode === 'all' ? claimMode : '';
+  const choiceState = progress.choicePending ? 'pending' : progress.choiceName ? 'selected' : 'forfeited';
+  const modeHeader = mode === 'one'
+    ? `<div class="reward-mode-banner reward-mode-choice"><span class="reward-mode-mark" aria-hidden="true">1</span><div><span>${progress.choicePending ? `${progress.choiceCount || 0} 张候选 · 选取后其余永久放弃` : progress.choiceName ? `已选定「${esc(progress.choiceName)}」` : '本组已放弃'}</span></div></div>`
+    : mode === 'all' ? `<div class="reward-mode-banner reward-mode-collection" role="status" aria-live="polite"><span class="reward-mode-mark">${progress.pending || 0}</span><div><b>${progress.pending ? '张待收下' : !progress.total ? '无卡牌待领' : progress.received === progress.total ? '卡牌已收齐' : '卡牌已处理'}</b><span>已收下 ${progress.received || 0} / ${progress.total || 0} 张</span></div></div>` : '';
+  return `<section class="${escAttr(className)}${compact ? ' reward-compact' : ''} reward-replica${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}"${mode ? ` data-reward-mode="${mode}"${mode === 'one' ? ` data-reward-choice-state="${choiceState}"` : ''}` : ''}>
+    <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${compact && mode === 'all' ? '' : modeHeader}${countLabel ? `<p class="reward-count">${esc(countLabel)}</p>` : ''}${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>
+    <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects"${mode === 'one' ? ' role="group" aria-label="互斥候选与独立附赠"' : mode === 'all' ? ' role="list" aria-label="可逐张收下的战利品"' : ''}>${coins}${cards}</div>${warning}${details}</div></div>
     ${footer || actions ? `<footer class="reward-foot"><div class="reward-footer-info">${footer}</div><aside class="loot-actions" aria-label="奖励操作">${actions}</aside></footer>` : ''}
   </section>`;
 }
@@ -16,25 +22,27 @@ export function rewardSceneHTML({ title, source = '', countLabel = '', rule = ''
 // A receipt changes card state, not its artwork. Keep the live cards and scroll
 // containers connected while updating their controls and the surrounding facts.
 export function patchRewardScene(host, html) {
-  const current = host?.querySelector('.reward-v14');
+  const current = /** @type {HTMLElement} */ (host?.querySelector('.reward-v14'));
   if (!current) return false;
   const template = document.createElement('template');
   template.innerHTML = html;
-  const next = template.content.querySelector('.reward-v14');
-  if (!next || !!host.querySelector('.cqo-frame') !== !!template.content.querySelector('.cqo-frame')) return false;
-  const objects = current.querySelector('.reward-objects');
-  const incoming = next.querySelector('.reward-objects');
+  const next = /** @type {HTMLElement} */ (template.content.querySelector('.reward-v14'));
+  if (!next || !!/** @type {HTMLElement} */ (host.querySelector('.cqo-frame')) !== !!/** @type {HTMLElement} */ (template.content.querySelector('.cqo-frame'))) return false;
+  const objects = /** @type {HTMLElement} */ (current.querySelector('.reward-objects'));
+  const incoming = /** @type {HTMLElement} */ (next.querySelector('.reward-objects'));
   if (!objects || !incoming) return false;
-  const key = unit => unit.dataset.rewardIndex == null ? 'coins' : `${unit.dataset.rewardIndex}:${unit.dataset.rewardCard}`;
-  const existing = new Map([...objects.children].map(unit => [key(unit), unit]));
-  const units = [...incoming.children].map(fresh => {
-    const unit = existing.get(key(fresh)), card = unit?.querySelector('.reward-card');
-    if (!card || !fresh.querySelector('.reward-card')) return fresh;
+  const key = unit => unit.dataset.rewardGroup ? `group:${unit.dataset.rewardGroup}` : unit.dataset.rewardIndex == null ? 'coins' : `${unit.dataset.rewardIndex}:${unit.dataset.rewardCard}`;
+  const existing = new Map([.../** @type {HTMLCollectionOf<HTMLElement>} */ (objects.children)].map(unit => [key(unit), unit]));
+  const units = [.../** @type {HTMLCollectionOf<HTMLElement>} */ (incoming.children)].map(fresh => {
+    const unit = existing.get(key(fresh)), card = /** @type {HTMLElement} */ (unit?.querySelector('.reward-card'));
+    if (!card || !/** @type {HTMLElement} */ (fresh.querySelector('.reward-card'))) return fresh;
     unit.className = fresh.className;
     unit.dataset.rewardRarity = fresh.dataset.rewardRarity;
+    if (fresh.dataset.rewardCategory) unit.dataset.rewardCategory = fresh.dataset.rewardCategory;
+    else delete unit.dataset.rewardCategory;
     let previous = card;
-    for (const child of [...fresh.children].filter(child => !child.matches('.reward-card'))) {
-      const old = previous.nextElementSibling;
+    for (const child of [.../** @type {HTMLCollectionOf<HTMLElement>} */ (fresh.children)].filter(child => !child.matches('.reward-card'))) {
+      const old = /** @type {HTMLElement} */ (previous.nextElementSibling);
       if (old?.outerHTML === child.outerHTML) previous = old;
       else { if (old) old.replaceWith(child); else unit.append(child); previous = child; }
     }
@@ -45,7 +53,7 @@ export function patchRewardScene(host, html) {
     if (objects.children[index] !== unit) objects.insertBefore(unit, objects.children[index] || null);
   }
   while (objects.children.length > units.length) objects.lastElementChild.remove();
-  const stage = current.querySelector('.reward-stage'), nextStage = next.querySelector('.reward-stage');
+  const stage = /** @type {HTMLElement} */ (current.querySelector('.reward-stage')), nextStage = /** @type {HTMLElement} */ (next.querySelector('.reward-stage'));
   const tail = [...stage.children].filter(child => child !== objects);
   const nextTail = [...nextStage.children].filter(child => child !== incoming);
   for (const [index, fresh] of nextTail.entries()) {
@@ -57,21 +65,25 @@ export function patchRewardScene(host, html) {
   tail.slice(nextTail.length).forEach(child => child.remove());
   current.className = next.className;
   current.dataset.rewardCount = next.dataset.rewardCount;
+  for (const attribute of ['data-reward-mode', 'data-reward-choice-state']) {
+    if (next.hasAttribute(attribute)) current.setAttribute(attribute, next.getAttribute(attribute));
+    else current.removeAttribute(attribute);
+  }
   for (const selector of ['.reward-head', '.loot-actions', '.reward-foot']) {
     const old = current.querySelector(selector), fresh = next.querySelector(selector);
     if (old && fresh && old.innerHTML !== fresh.innerHTML) old.innerHTML = fresh.innerHTML;
     else if (old && !fresh) old.remove();
     else if (!old && fresh) current.append(fresh);
   }
-  const background = host.querySelector('.cqo-background');
-  const nextBackground = template.content.querySelector('.cqo-background');
+  const background = /** @type {HTMLElement} */ (host.querySelector('.cqo-background'));
+  const nextBackground = /** @type {HTMLElement} */ (template.content.querySelector('.cqo-background'));
   if (background && nextBackground && background.innerHTML !== nextBackground.innerHTML) background.innerHTML = nextBackground.innerHTML;
   return true;
 }
 
 export function restoreRewardActionFocus(host, focus) {
   if (!focus) return;
-  const buttons = [...host.querySelectorAll('[data-act]:not(:disabled)')];
+  const buttons = [.../** @type {NodeListOf<HTMLElement>} */ (host.querySelectorAll('[data-act]:not(:disabled)'))];
   const same = buttons.find(button => button.dataset.act === focus.action && button.dataset.i === focus.index);
   const claims = buttons.filter(button => ['chestTake1', 'chestPick', 'chestMakeRoom'].includes(button.dataset.act));
   const next = claims.find(button => Number(button.dataset.i) > Number(focus.index)) || claims[0];
@@ -97,7 +109,14 @@ export function restoreRewardActionFocus(host, focus) {
 }
 
 // Both the card face and its zoom use this exact action; no business callbacks live here.
-export function rewardClaimHTML({ index, cardName = '卡牌', state = 'pending', choice = false, fits = true, disabled = false, zoom = false, actions = {} }) {
+export function rewardClaimHTML({ index, cardName = '卡牌', state = 'pending', choice = false, fits = true, disabled = false, zoom = false, claimMode = '', bonus = false, actions = /** @type {{pick?: string, take?: string, organize?: string}} */ ({}) }) {
+  if (claimMode === 'one' || claimMode === 'all') {
+    const mode = choice ? 'one' : 'all';
+    if (state !== 'pending') return `<span class="reward-unit-state reward-state-${mode} is-${state}" role="status"><span class="reward-claim-mark" aria-hidden="true">${state === 'received' ? '✓' : '×'}</span><span>${state === 'received' ? choice ? '已选定 · 已入背包' : '已收下' : choice ? '未选择 · 已放弃' : '已放弃'}</span></span>`;
+    const action = fits ? choice ? actions.pick || 'chestPick' : actions.take || 'chestTake1' : actions.organize || 'chestMakeRoom';
+    const label = fits ? choice ? '选择这张' : bonus ? '收下附赠' : '收下' : '整理背包';
+    return `${zoom && choice ? '<p class="reward-choice-warning">选定后，其余基础候选将放弃。</p>' : ''}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'} reward-claim-${mode}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false" aria-label="${escAttr(`${label}：${cardName || '卡牌'}`)}"${choice && fits ? ' aria-description="其余候选将永久放弃"' : ''}${disabled ? ' disabled' : ''}>${label}</button>`;
+  }
   if (state !== 'pending') return `<span class="reward-unit-state">${state === 'received' ? choice ? '已选择' : '已收下' : '已放弃'}</span>`;
   const action = fits ? choice ? actions.pick || 'chestPick' : actions.take || 'chestTake1' : actions.organize || 'chestMakeRoom';
   const label = fits ? choice ? '选择这张' : '收下' : '整理背包';

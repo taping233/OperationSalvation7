@@ -83,6 +83,7 @@ export function createPhotoStudioMotion() {
       const release = () => cancel(layer);
       animation.finished.then(release, release);
     },
+    /** @param {HTMLElement} node @param {{reason?:string,direction?:number,axis?:string,delay?:number,surface?:string,width?:number}} [options] */
     play(node, { reason = 'filter', direction = 0, axis = 'x', delay = 0, surface = 'grid', width } = {}) {
       if (!node) return;
       cancel(node);

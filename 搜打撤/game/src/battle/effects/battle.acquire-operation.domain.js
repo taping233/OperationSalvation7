@@ -1,0 +1,168 @@
+import { parsePoolNoun } from './effect-steps.ctx.js';
+
+/** Card acquisition uses the caller's discover queue, deck and random source. */
+export function createAcquireOperation({ getAllCards, getMyClass, deckBottomCount, takeDeckBottom,
+  findCard, queueDiscoverTracked, randomDiscoverCard, addDeckCard, shuffleDeck, addTempCard, esc, log }) {
+  // —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 acquire/coins 结算 ——
+  // 语义真源：docs/cards/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
+  // 池谓词（B6 定版「池谓词复用 parsePoolNoun 语义；注意 isRandomObtainable 口径」）：
+  //   {kind:'moves', cost?} —— v1 discover 结构化池形状，与 selection-flow structuredPred 同款（武术/法术 + 可选费用）；
+  //   其他非空 kind —— 中文池名词直透 parsePoolNoun（'武术'/'装备'/'火球'/'2费招式'/'能施加诅咒的招式'/
+  //   '传说或能力卡'…）；parsePoolNoun 未识别时再试 named 具体卡名通道（'二次爆炸'/'流光照影'——
+  //   文本路径 deck.gainNamed 的 find-by-name 口径，parsePoolNoun 名词清单不含具体卡名）；
+  //   仍无命中 → null = 通用随机池。
+  // 随机抽卡单源 randomDiscoverCard（battle.discover-flow → buildDiscoverPool）：
+  //   pred 指定池排除 生物/事件/资源/衍生，非职业卡沿历史口径不叠 isRandomObtainable
+  //   （三重火球「2 张火球」等指定获取语义不受资格门影响）；
+  //   职业卡门（2026-10-21 反馈#2）：指定池里的职业卡（isClassCard，含带 cls 的卡）
+  //   必须再过 isRandomObtainable——生产口径恒 false，除非谓词带 allowClassCards
+  //   （parsePoolNoun「本职业/其它职业」等显式声明职业池的名词）；
+  //   无 pred 通用池仍走 isRandomObtainable（排除 初始/职业/衍生/棱彩/能力卡/生物/unrandom）
+  //   并另排 道具/资源——与文本路径发现/随机获取同源。
+  function acquirePoolPred(pool, myClass) {
+    if (!pool || typeof pool !== 'object' || typeof pool.kind !== 'string' || !pool.kind.trim()) return null;
+    if (pool.kind === 'moves') {
+      const cost = pool.cost;
+      return card => ['武术', '法术'].includes(card.type) && (cost === undefined || (+card.cost || 0) === cost);
+    }
+    const noun = parsePoolNoun(pool.kind, myClass);
+    if (noun) return noun;
+    // named 具体卡名（熔岩爆破「获得 1 张『二次爆炸』」/流光斩「将流光照影洗入牌库」）：
+    // 精确同名卡存在才收窄为指定池，否则维持 null 交回通用池（与文本路径「未识别 → 通用池」一致）
+    const named = typeof getAllCards === 'function' && getAllCards().find(c => c.name === pool.kind);
+    return named ? card => card.name === pool.kind : null;
+  }
+
+  // dest 三向（G3 行「去向 hand|deck|discover」，缺省 discover——发现面板三选一是本域辨识度最高的
+  // 获取途径，与 v1 discover op 口径连续）：
+  //   'hand'    随机/指定直发置入手牌（addTempCard；江湖救急-改/基础开发/厄运/三重火球先例），同名可重复；
+  //   'deck'    洗入本场真实牌库（addDeckCard + shuffleDeck，所有模式共用）；
+  //   'discover' 走发现面板 queueDiscover（面板原生 n 展开、防重、act/费用修饰）。
+  // act 修饰（G3 行「动作 play|playKeep|dup|zeroCost|costMinusOne|decay|noInfuse」）按 dest×act 组合门放行：
+  //   discover：play/playKeep/dup（面板原生 act，pickDiscover 直接施放/施放+入手/×2 置手）、
+  //             zeroCost/decay（面板 zeroCost/decayEachTurn 费用修饰）——全部有既有机制承载；
+  //             noInfuse：进入发现选择，仅所选临时实例免注能（不修改候选模板）。
+  //   hand：dup（本体+复制 ×2 置手，二刀流语义）、noInfuse（模板透传 _noInfuse，灵能召唤先例）；
+  //         play/playKeep 需要面板外的直接施放执行通道（既有文本路径一律经发现面板承载）——pending；
+  //         zeroCost/decay 需 cardOverrides/费用衰减登记（selection-flow 内部态，无对外端口）——pending。
+  //   deck：dup（×2 洗入）、zeroCost（固定0费）、costMinusOne（原费用减1，最低0）、
+  //         noInfuse（模板透传）；费用只修改本次获取的副本，牌库模板保持原值。
+  //         play/playKeep 同 hand 理由 pending；decay（逐回合 -1 费）对牌库中的卡无结算观测点——pending。
+  // dest×act and unconsumed filter are rejected by the complete-list capability guard.
+  function resolveAcquireOperation(card, operation) {
+    const myClass = typeof getMyClass === 'function' ? getMyClass() : null;
+    // M2：pool.kind '牌库底'——只从本场实际牌库底发现，空库不降级随机获取。
+    // 搜索大宝箱的旧迁移仍声明随机入手三张；该精确旧形状沿已定版 BOSS 牌库底三选一。
+    const legacySearchChest = card.id === 'cmtn28jv33wx' && operation.n === 3 &&
+      operation.pool?.kind === '随机' && operation.dest === 'hand' && operation.act === undefined && operation.filter === undefined;
+    if (operation.pool?.kind === '牌库底' || legacySearchChest) {
+      // 挖宝的旧实例曾存 n:1；它表示选一张，实际候选固定读取底部三张。
+      const takeCount = card.id === 'tt3-dig-treasure' ? 3 : operation.n;
+      const take = Math.min(takeCount, deckBottomCount());
+      const uids = takeDeckBottom(take);
+      const cards = uids.map(u => { const o = findCard(u); return o ? o.card : null; }).filter(Boolean);
+      if (cards.length) {
+        queueDiscoverTracked({ n: 1, explicit: cards, explicitUids: uids, deckBottom: true, sourceCardId: card.id });
+        log(`[[icon:question]] <b>${esc(card.name)}</b>：翻开牌库底 ${cards.length} 张——选 1 张入手，其余放回牌库底`, 'loot');
+      }
+      else log(`[[icon:cards]] <b>${esc(card.name)}</b>：牌库底没有可取的卡牌`, 'dim');
+      return true;
+    }
+    // M1：filter 基础扩展——在池谓词上叠加 { type, cost, costMax } 约束（武装「抽 2 张装备牌」、
+    // ev19 箭系列式需求的第一批）。named 具体卡名直取不受 filter 影响（指定获取语义，
+    // 「获得 1 张『二次爆炸』」不存在再过滤）。filter 存在时随机抽卡走指定池口径
+    // （randomDiscoverCard 的 pred 分支，排除 生物/事件/资源/衍生）。
+    const basePred = acquirePoolPred(operation.pool, myClass);
+    const filter = operation.filter;
+    const filterPred = filter ? candidate => {
+      if (filter.type !== undefined && candidate.type !== filter.type) return false;
+      if (filter.cost !== undefined && (+candidate.cost || 0) !== filter.cost) return false;
+      if (filter.costMax !== undefined && (+candidate.cost || 0) > filter.costMax) return false;
+      if (Array.isArray(filter.exceptIds) && filter.exceptIds.includes(candidate.id)) return false;
+      return true;
+    } : null;
+    const pred = basePred && filterPred ? candidate => basePred(candidate) && filterPred(candidate)
+      : (filterPred || basePred);
+    const dest = operation.dest || 'discover';
+    const act = operation.act;
+    // 面板日志的池名（文本路径 discover.pool 同款：名词去尾「的」+ 限制池括注）
+    const label = pred ? String(operation.pool.kind === 'moves' ? '招式' : operation.pool.kind).replace(/的$/, '') : '';
+    const poolSuffix = pred ? `【${esc(label)}】（限制卡池）` : '';
+    // named 精确同名卡优先直取：「获得/将指定卡…」（熔岩爆破二次爆炸/三重火球火球/流光斩流光照影）
+    // 是指定获取语义，与文本路径 deck.gainNamed/insertHand 同款——不得被发现池的
+    // rarity=衍生/职业/unrandom 资格边界滤空（pred 谓词来自 named 兜底分支时才走此捷径，
+    // parsePoolNoun 类型/系列谓词仍走随机池口径）。仅影响 acquire 路径，不碰 discover op。
+    const namedExact = typeof getAllCards === 'function' && pred
+      ? getAllCards().find(c => c.name === operation.pool.kind) : null;
+    const drawOne = namedExact ? () => ({ ...namedExact }) : () => randomDiscoverCard(pred);
+    // act 在直发路径的模板修饰：zeroCost 固定为0，costMinusOne 原费用减1；noInfuse 透传 _noInfuse
+    const decorate = tpl => {
+      if (act === 'zeroCost') return { ...tpl, cost: 0 };
+      if (act === 'costMinusOne') return { ...tpl, cost: Math.max(0, (+tpl.cost || 0) - 1) };
+      if (act === 'noInfuse') return { ...tpl, _noInfuse: true };
+      return { ...tpl };
+    };
+
+    if (dest === 'discover') {
+      queueDiscoverTracked({
+        n: operation.n,
+        pred,
+        act: ['play', 'playKeep', 'dup', 'noInfuse'].includes(act) ? act : undefined,
+        zeroCost: act === 'zeroCost' ? true : undefined,
+        decayEachTurn: act === 'decay' ? true : undefined,
+        sourceCardId: card.id,
+      });
+      const actLabel = act === 'play' ? '发现并直接施放' : act === 'playKeep' ? '发现（施放 1 张，其余入手）'
+        : act === 'noInfuse' ? '发现（所选牌无需注能）' : act === 'zeroCost' ? '发现（入手后费用变为 0）' : act === 'decay' ? '发现（每回合开始费用 -1）' : '发现';
+      log(`[[icon:question]] <b>${esc(card.name)}</b>：${actLabel} ${operation.n} 张${poolSuffix}卡牌`, 'sys');
+      return true;
+    }
+
+    if (dest === 'deck') {
+      // 所有模式都洗入真实牌库，不改变为直接入手。
+      const gained = [];
+      for (let k = 0; k < operation.n; k++) {
+        const c = drawOne();
+        if (!c) break;
+        const tpl = decorate(c);
+        for (let copy = 0; copy < (act === 'dup' ? 2 : 1); copy++) {
+          addDeckCard(act === 'dup' && copy === 1 ? { ...tpl } : tpl);
+        }
+        gained.push(c.name);
+      }
+      if (gained.length) {
+        const counts = {};
+        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+        const deckSize = shuffleDeck();
+        log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
+      } else {
+        log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+      }
+      return true;
+    }
+
+    // dest:'hand'——随机/指定直发置入手牌（同名可重复：三重火球「2 张火球」必需）
+    const gained = [];
+    for (let k = 0; k < operation.n; k++) {
+      const c = drawOne();
+      if (!c) break;
+      // dup 复制体同样基于 decorate 后的模板（与 deck 路径对齐）：否则 zeroCost/noInfuse 修饰只在首张生效
+      const tpl = decorate(c);
+      addTempCard(tpl);
+      if (act === 'dup') addTempCard({ ...tpl });
+      gained.push(c.name);
+    }
+    if (gained.length) {
+      const counts = {};
+      gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+      const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+      log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
+    } else {
+      log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+    }
+    return true;
+  }
+
+  return { resolveAcquireOperation };
+}

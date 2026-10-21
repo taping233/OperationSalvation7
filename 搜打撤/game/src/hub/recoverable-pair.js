@@ -68,7 +68,7 @@ export function createRecoverablePair(options) {
       /** @type {unknown} */
       const value = JSON.parse(raw);
       const checked = validate(value, slotId);
-      if (checked.ok === false) return checked;
+      if (!checked.ok) return /** @type {Extract<typeof checked, {ok:false}>} */ (checked);
       return { ok: true, value: /** @type {Journal} */ (value) };
     } catch { return fail('RECOVERY_BLOCKED', '恢复日志无法解析', false, { slotId }); }
   };
@@ -93,7 +93,7 @@ export function createRecoverablePair(options) {
     if (!read.ok || !read.value) return read;
     const journal = read.value;
     const checked = stateOf(slotId, journal);
-    if (!checked.ok) return checked;
+    if (checked.ok === false) return checked;
     const { keys, current } = checked.value;
     try {
       if (current.baseRaw === journal.before.baseRaw) writeRaw(storage, keys.base, journal.after.baseRaw);

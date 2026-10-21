@@ -28,32 +28,32 @@ export function createAchievementProgressReader(base) {
 export function achievementProgressText(id, base) {
   return createAchievementProgressReader(base)(id);
 }
-export function bindArchive(ui, { openAchievements = () => document.querySelector('#hubMain [data-act="hubCollectionView"][data-view="achievements"]')?.click() } = {}) {
+export function bindArchive(ui, { openAchievements = () => /** @type {HTMLElement} */ (document.querySelector('#hubMain [data-act="hubCollectionView"][data-view="achievements"]'))?.click() } = {}) {
   storyRequest++;
   const apply = () => {
-    for (const row of document.querySelectorAll('#hubMain .ach-row[data-status]')) row.hidden = (status !== 'all' && row.dataset.status !== status) || (!!query.trim() && !row.textContent.includes(query.trim()));
-    const empty = document.querySelector('#hubMain .archive-empty');
-    if (empty) { empty.hidden = [...document.querySelectorAll('#hubMain .ach-row')].some(row => !row.hidden); empty.innerHTML = `<h3>${query.trim() ? '没有匹配的成就' : status === 'claimable' ? '当前没有待领取奖励' : status === 'done' ? '尚未领取成就奖励' : '当前分类没有成就'}</h3><p>${query.trim() ? '调整关键词，或查看全部目标。' : status === 'claimable' ? '完成下方目标后，奖励会出现在这里。' : '可以返回全部目标继续浏览。'}</p><button class="mini-btn" data-act="archiveReset">查看全部目标</button>`; }
-    for (const button of document.querySelectorAll('#hubMain [data-act="archiveStatus"]')) { button.classList.toggle('ok', button.dataset.status === status); button.setAttribute('aria-pressed', String(button.dataset.status === status)); }
+    for (const row of document.querySelectorAll('#hubMain .ach-row[data-status]')) /** @type {HTMLElement} */ (row).hidden = (status !== 'all' && /** @type {HTMLElement} */ (row).dataset.status !== status) || (!!query.trim() && !row.textContent.includes(query.trim()));
+    const empty = /** @type {HTMLElement} */ (document.querySelector('#hubMain .archive-empty'));
+    if (empty) { empty.hidden = [...document.querySelectorAll('#hubMain .ach-row')].some(row => !/** @type {HTMLElement} */ (row).hidden); empty.innerHTML = `<h3>${query.trim() ? '没有匹配的成就' : status === 'claimable' ? '当前没有待领取奖励' : status === 'done' ? '尚未领取成就奖励' : '当前分类没有成就'}</h3><button class="mini-btn" data-act="archiveReset">查看全部目标</button>`; }
+    for (const button of document.querySelectorAll('#hubMain [data-act="archiveStatus"]')) { button.classList.toggle('ok', /** @type {HTMLElement} */ (button).dataset.status === status); button.setAttribute('aria-pressed', String(/** @type {HTMLElement} */ (button).dataset.status === status)); }
     // A local notification lets list/detail views reconcile after every filter path.
     document.querySelector('#hubMain .archive-toolbar')?.dispatchEvent(new Event('archive-filter-change', { bubbles: true }));
   };
   apply();
-  document.querySelector('#hubMain .archive-search')?.addEventListener('input', event => { query = event.target.value; apply(); });
-  ui.act('archiveReset', () => { status = 'all'; query = ''; const input = document.querySelector('#hubMain .archive-search'); if (input) input.value = ''; apply(); });
+  document.querySelector('#hubMain .archive-search')?.addEventListener('input', event => { query = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (event.target).value; apply(); });
+  ui.act('archiveReset', () => { status = 'all'; query = ''; const input = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (document.querySelector('#hubMain .archive-search')); if (input) input.value = ''; apply(); });
   ui.act('archiveStatus', data => { if (!['all', 'claimable', 'progress', 'done'].includes(data.status)) return; status = data.status; apply(); });
   ui.act('archiveLocate', data => {
     status = 'all'; query = '';
     openAchievements();
-    const row = [...document.querySelectorAll('#hubMain .ach-row')].find(item => item.dataset.achievement === data.id);
-    row?.scrollIntoView({ block: 'center', behavior: 'auto' }); row?.focus({ preventScroll: true });
+    const row = [...document.querySelectorAll('#hubMain .ach-row')].find(item => /** @type {HTMLElement} */ (item).dataset.achievement === data.id);
+    row?.scrollIntoView({ block: 'center', behavior: 'auto' }); /** @type {HTMLElement} */ (row)?.focus({ preventScroll: true });
   });
   ui.act('archiveStoryPick', async data => {
     const base = window.SDT.Base, checked = validateLastLampState(base.data.story), segment = Number(data.segment);
     if (!checked.ok || ![1, 2, 3].includes(segment) || segment > checked.value.stage) return;
     const reader = document.querySelector('#hubMain .story-reader'), currentSlot = base.slot, request = ++storyRequest;
     if (!reader) return;
-    for (const button of document.querySelectorAll('#hubMain .story-entry')) button.classList.toggle('on', Number(button.dataset.segment) === segment);
+    for (const button of document.querySelectorAll('#hubMain .story-entry')) button.classList.toggle('on', Number(/** @type {HTMLElement} */ (button).dataset.segment) === segment);
     reader.innerHTML = '<p>正在打开已记录的见闻…</p>';
     let narrative;
     try { narrative = await lastLampNarrative(segment); } catch { narrative = null; }

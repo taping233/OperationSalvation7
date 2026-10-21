@@ -118,7 +118,7 @@ function bindDataActions(render) {
   UI.act('dataClear', (d) => {
     if (d.confirm !== '1') {
       // 两步确认：首点变「确认清空？」，与危险操作同款防误触
-      const btn = document.querySelector('#ovBody [data-act="dataClear"]');
+      const btn = /** @type {HTMLElement | null} */ (document.querySelector('#ovBody [data-act="dataClear"]'));
       if (btn) { btn.dataset.confirm = '1'; btn.textContent = '确认清空？'; btn.classList.add('arm'); }
       return;
     }

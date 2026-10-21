@@ -11,13 +11,15 @@ export function installExpeditionFeedback({ isCurrentCell }) {
     panel = null;
   };
   const onNavigate = event => {
+      if (!(event.target instanceof Element)) return;
     if (panel && !panel.contains(event.target) && event.target.closest?.('#routePanel button, #game, #btnHome')) dismiss();
   };
   const observer = new MutationObserver(() => {
     if (panel && overlay && !overlay.hidden) dismiss();
   });
   if (overlay) observer.observe(overlay, { attributes:true, attributeFilter:['hidden'] });
-  const show = ({ detail }) => {
+  const show = (/** @type {CustomEvent} */ event) => {
+    const { detail } = event;
     if (!detail || detail.kind !== 'fire' || !isCurrentCell(detail.cellKey)) return;
     dismiss();
     panel = document.createElement('section');
@@ -29,7 +31,7 @@ export function installExpeditionFeedback({ isCurrentCell }) {
     panel.innerHTML = `<header><b>${esc(detail.title || '探索反馈')}</b><button type="button" aria-label="关闭探索反馈">×</button></header>
       <p>${esc(summary)}</p>${detail.reason ? `<small>${esc(detail.reason)}</small>` : ''}
       `;
-    panel.querySelectorAll('button').forEach(button => button.addEventListener('click', dismiss));
+    /** @type {NodeListOf<HTMLButtonElement>} */ (panel.querySelectorAll('button')).forEach(button => button.addEventListener('click', dismiss));
     document.getElementById('viewport')?.append(panel);
     timer = setTimeout(dismiss, 6000);
   };

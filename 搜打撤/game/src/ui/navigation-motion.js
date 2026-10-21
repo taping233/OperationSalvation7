@@ -5,9 +5,9 @@ export const navigationTiming = Object.freeze({ enter: motionTiming.navigation, 
 const rooms = ['deploy', 'classes', 'stash', 'shop', 'ach', 'upgrade', 'courtyard'];
 const sections = ['cards', 'pocket', 'profile', 'pool', 'appearance', 'collection', 'pets', 'rewards', 'achievements', 'backs', 'stories'];
 export function navigationState(root) {
-  const page = root?.querySelector('.hub-page');
+  const page = /** @type {HTMLElement} */ (root?.querySelector('.hub-page'));
   return {
-    room: root?.querySelector('.hub-tab.on')?.dataset.tab || root?.dataset.page || '',
+    room: /** @type {HTMLElement} */ (root?.querySelector('.hub-tab.on'))?.dataset.tab || root?.dataset.page || '',
     view: page?.dataset.motionView || page?.dataset.view || '',
   };
 }

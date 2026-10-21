@@ -20,6 +20,7 @@ import scenes from '../../data/scenes.json';
 import mapData from '../../data/map.json';
 import cardsSync from '../../data/cards-sync.json';
 
+/** @template T @param {T} value @returns {T} */
 const deepFreeze = (value) => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     for (const key of Object.keys(value)) deepFreeze(value[key]);

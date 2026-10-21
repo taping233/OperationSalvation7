@@ -6,6 +6,7 @@ function createActionQueue() {
   let current = null;
   const idleWaiters = new Set();
 
+  /** @param {unknown} [reason] */
   function cancellationError(reason = 'battle action queue cleared') {
     const error = reason instanceof Error ? reason : new Error(String(reason));
     if (error.name === 'Error') error.name = 'BattleActionCancelledError';

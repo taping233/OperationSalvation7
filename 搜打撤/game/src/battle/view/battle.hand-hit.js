@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 // Shared hand policy: static rectangles in original paint order; no nearest-card snapping.
 export function pickStaticHandRegion(regions, x, y) {
   for (let i = regions.length - 1; i >= 0; i--) {
@@ -33,7 +34,7 @@ export function createHandHitController(root, { getCards, scale, isAiming, onPoi
   }
   const liveCards = () => getCards().filter(card => root.contains(card)
     && !card.closest('[hidden],[aria-hidden="true"],[inert]'));
-  const cardOf = target => target?.closest?.('.bt-card') || target?.closest?.('.bt-slot')?.querySelector('.bt-card');
+  const cardOf = target => target?.closest?.('.bt-card') || /** @type {BattleElement} */ (target?.closest?.('.bt-slot')?.querySelector('.bt-card'));
   function paint(uid) {
     ownerUid = uid;
     for (const card of getCards()) card.closest('.bt-slot')?.classList.toggle('hand-reading', card.dataset.uid === uid);
@@ -57,7 +58,7 @@ export function createHandHitController(root, { getCards, scale, isAiming, onPoi
       accessBands = readingAccessBands({ uid: ownerUid, left: r.left, right: r.right,
         raisedTop: r.top, restDrop: (parseFloat(slot.style.getPropertyValue('--hand-rest')) || 0) * zoom,
         cardTop: owner.getBoundingClientRect().top,
-        controls: [...owner.querySelectorAll('.bt-infchip,.hsc-desc')].map(el => el.getBoundingClientRect()) });
+        controls: [.../** @type {NodeListOf<BattleElement>} */ (owner.querySelectorAll('.bt-infchip,.hsc-desc'))].map(el => el.getBoundingClientRect()) });
     }
     return resolveHandHit({ regions, x: event.clientX, y: event.clientY, actualUid,
       interactive: !!event.target?.closest?.(CONTROL), ownerUid: owner?.dataset.uid, accessBands });

@@ -33,6 +33,7 @@ function sameSnapshot(left, right) {
  *   canonicalTableById?: Map<string, string>,
  *   canonicalOrder?: string[],
  *   faceFieldsById?: Map<string, string[]>,
+ *   previousRulesById?: Map<string, object>,
  * }} spec
  *   - faceFieldsById（可选，m5 形态）：id → definition 上点名的卡面字段；深相等校验通过后、
  *     双门校验前，以 definition 上字段值覆盖卡面（用于 canonical 本身缺定版值的场景）；
@@ -121,7 +122,7 @@ export function createRuleBackfiller({ label, markerKey, definitions, canonicalT
         const capability = inspectCardRuleCapability(nextCard);
         if (!capability.ok) {
           throw new Error(`${label} rule migration capability unsupported for ${card.id}: `
-            + capability.issues.map(issue => `${issue.path}: ${issue.message}`).join('; '));
+            + (/** @type {Extract<import("./card-rules.capability.types").CardRuleCapability,{ok:false}>} */ (capability)).issues.map(issue => `${issue.path}: ${issue.message}`).join('; '));
         }
         dirty = true;
         return nextCard;

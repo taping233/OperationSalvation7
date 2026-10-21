@@ -1,4 +1,18 @@
 /* Shared card face. Hosts own width, placement, selection and drag behaviour only. */
+/* Painted frame artwork is the card edge. Hosts must never add a rectangular rim,
+   including hover, focus, selection and acquisition states. Keep border space so
+   removing its paint does not change the card's placement or hit target. */
+body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,
+  .battle-pile-card,.entry-card-preview,.infusion-card-face,.card-tile,
+  .lib-cardwrap:not(.studio-photo),.reward-acquisition-arrival,
+  :has(> .hs-card[data-card-layout="split"])) {
+  outline:none!important; border-color:transparent!important; box-shadow:none!important;
+}
+body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,
+  .battle-pile-card,.entry-card-preview,.infusion-card-face,.card-tile,
+  .lib-cardwrap:not(.studio-photo),:has(> .hs-card[data-card-layout="split"])):focus-visible {
+  filter:brightness(1.08);
+}
 @font-face {
   font-family: 'Card Oxanium';
   src: url('../assets/fonts/oxanium-latin-700-normal.woff2') format('woff2');

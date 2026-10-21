@@ -2,9 +2,10 @@ import { hasStructuredTrigger, hasStructuredEquipField, triggerDeclarations, REG
 
 /** Select a trigger's sole authority. Empty declarations still suppress legacy text.
  * Invalid declarations remain visible to preflight rather than becoming text fallback.
- * @param {import('./card-execution-plan.types').ExecutionCard} card
+ * @template [TOperation=import('./card-execution-plan.types').ExecutionOperation]
+ * @param {import('./card-execution-plan.types').ExecutionCard<NoInfer<TOperation>>} card
  * @param {import('./card-execution-plan.types').TriggerPoint} point
- * @returns {import('./card-execution-plan.types').ExecutionPlan} */
+ * @returns {import('./card-execution-plan.types').ExecutionPlan<TOperation>} */
 export function triggerExecutionPlan(card, point) {
   const declared = hasStructuredTrigger(card, point);
   // Migrated equipment retains its existing consume-text suppression contract.
@@ -15,10 +16,16 @@ export function triggerExecutionPlan(card, point) {
     ops: explicit ? declarations[point] : [] };
 }
 
+/** @overload @param {import('./card-execution-plan.types').ExecutionCard} card @param {'passive'} point
+ * @returns {{kind:'structured'|'text',ops:import('./card-execution-plan.types').EquipmentDeclarations['passive'] | []}} */
+/** @overload @param {import('./card-execution-plan.types').ExecutionCard} card @param {import('./card-execution-plan.types').EquipmentPoint} point
+ * @returns {import('./card-execution-plan.types').ExecutionPlan} */
+/** @overload @param {import('./card-execution-plan.types').ExecutionCard} card @param {import('./card-execution-plan.types').EquipmentPoint | 'passive'} point
+ * @returns {{kind:'structured'|'text',ops:import('./card-execution-plan.types').ExecutionOperation[] | import('./card-execution-plan.types').EquipmentDeclarations['passive'] | undefined}} */
 /** Equipment actions use the same ownership rule as trigger actions.
  * @param {import('./card-execution-plan.types').ExecutionCard} card
- * @param {import('./card-execution-plan.types').EquipmentPoint} point
- * @returns {import('./card-execution-plan.types').ExecutionPlan} */
+ * @param {keyof import('./card-execution-plan.types').EquipmentDeclarations} point
+ * @returns {{kind:'structured'|'text',ops:import('./card-execution-plan.types').ExecutionOperation[] | import('./card-execution-plan.types').EquipmentDeclarations['passive'] | undefined}} */
 export function equipmentExecutionPlan(card, point) {
   const structured = hasStructuredEquipField(card, point);
   const equip = card.rules?.equip;
@@ -64,7 +71,7 @@ export function assertPlayExecutionView(card) {
  * @param {import('./card-execution-plan.types').ExecutionCard} card */
 export function cardPlayExecutionPlan(card) {
   const onPlay = triggerExecutionPlan(card, 'onPlay');
-  /** @param {import('./card-execution-plan.types').EquipmentPoint} point */
+  /** @param {import('./card-execution-plan.types').EquipmentPoint | 'passive'} point */
   const equipment = point => equipmentExecutionPlan(card, point);
   /** @param {import('./card-execution-plan.types').NumericCardField} field */
   const ownsField = field => /** @type {const} */ (['onEquip', 'battleStart', 'skill']).some(point => {
@@ -78,6 +85,9 @@ export function cardPlayExecutionPlan(card) {
     suppressImmediateText: onPlay.kind === 'structured' || equipment('onEquip').kind === 'structured' || !!venomStaffPassive };
 }
 
+/** @template {object} T @template {keyof T & string} K @overload @param {T} value @param {K} key @returns {T[K]} */
+/** @template {object} T @overload @param {T} value @param {string} key @returns {T[keyof T] | undefined} */
+/** @overload @param {unknown} value @param {string} key @returns {unknown} */
 /** Read an unvalidated declaration without claiming that its schema has passed.
  * @param {unknown} value @param {string} key @returns {unknown} */
 function declarationField(value, key) {
@@ -85,7 +95,8 @@ function declarationField(value, key) {
 }
 
 /** Builds an unvalidated view; capability/schema preflight checks the result.
- * @param {object} card @param {readonly unknown[]} operations */
+ * @template {{type?:unknown,dmgType?:unknown}} TCard @template TOperation
+ * @param {TCard} card @param {readonly TOperation[]} operations */
 export function createCardRuleExecutionView(card, operations) {
   const ops = operations.map(operation => {
     const op = declarationField(operation, 'op');

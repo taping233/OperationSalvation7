@@ -11,10 +11,10 @@ export function diceStep(owner, key, outcomes, sides = outcomes.length) {
   return owner.dice[key];
 }
 
-export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, setReturn }) {
+export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, setReturn = undefined }) {
   let sequence = 0;
   const persist = () => saveRunCheckpoint(save);
-  function open({ owner, key, title, outcomes, sides, done, beforeRoll = () => true, current:context = () => true }) {
+  function open({ owner, key, title, outcomes, sides = undefined, done, beforeRoll = () => true, current:context = () => true }) {
     if (!context()) return false;
     const step = diceStep(owner, key, outcomes, sides);
     const token = ++sequence;
@@ -61,8 +61,8 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
           return;
         }
         SDT.Sound?.sfx?.('scene');
-        const die = UI.el?.ovBody?.querySelector('[data-event-die]');
-        UI.el?.ovBody?.querySelectorAll('button').forEach(button => button.disabled = true);
+        const die = /** @type {HTMLElement} */ (UI.el?.ovBody?.querySelector('[data-event-die]'));
+        /** @type {NodeListOf<HTMLButtonElement>} */ (UI.el?.ovBody?.querySelectorAll('button') || []).forEach(button => button.disabled = true);
         if (die && !SDT.Motion?.reduceMotion?.() && typeof die.animate === 'function') {
           const frames = Array.from({ length:19 }, (_, i) => {
             const t = i / 18, p = hopPoint(t, {x:0,y:0}, {x:0,y:0}, {height:74,curve:ease.smoother});

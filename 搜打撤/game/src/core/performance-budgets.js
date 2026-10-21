@@ -5,19 +5,15 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   startupPreloadMax: 40,
   retainedImageCountMax: 96,
   retainedImageBytesMax: 192 * 1024 * 1024,
-  // 2026-10-20 老板批准提高四项构建上限；固定参考基准：已发布 9b0fe799 同依赖隔离生产构建，
-  // entry 356092 B / initial 404522 B / CSS 226967 B / package 222424745 B。
-  // 固定上限分别保留约 3.52% / 3.79% / 3.77% / 3.71% 余量；不随新构建自动上移。
-  // 对照与证据：docs/evidence/2026-10-20-approved-build-budgets/README.md。
-  packagedDuplicateBytesMax: 904 * 1024,
-  entryGzipBytesMax: 360 * 1024,
-  initialJsGzipBytesMax: 410 * 1024,
-  // 09-25 实测（CI run 36121460624 生产构建）：battle feature chunk gzip 102.1 KiB，
-  // b3846cf 卡库三发现批增量顶破 102.0 旧预算后按同日口径重定。
-  featureChunkGzipBytesMax: 104 * 1024,
-  narrativeChunkGzipBytesMax: 50 * 1024,
-  cssGzipBytesMax: 230 * 1024,
-  packageBytesMax: 220 * 1024 * 1024,
+  // 2026-10-21 老板批准全部构建体积上限在前值基础上提高50%；固定上限，不随构建自动上移。
+  // 运行时预热及图片保留策略保持原值；授权与验证见 docs/evidence/2026-10-21-WF-portable-clean-1021/README.md。
+  packagedDuplicateBytesMax: 1356 * 1024,
+  entryGzipBytesMax: 540 * 1024,
+  initialJsGzipBytesMax: 615 * 1024,
+  featureChunkGzipBytesMax: 156 * 1024,
+  narrativeChunkGzipBytesMax: 75 * 1024,
+  cssGzipBytesMax: 345 * 1024,
+  packageBytesMax: 330 * 1024 * 1024,
 });
 
 // 启动仅预热首轮高频遭遇场景；人物、卡图和图鉴由页面入口按需加载。

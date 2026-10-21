@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { showCardFeedback } from './battle.card-feedback.js';
 import { esc } from '../../core/shared.js';
 
@@ -29,7 +30,7 @@ export function showBattleCardResults(stage, events = []) {
   if (!overlay) return;
   let history = histories.get(overlay);
   if (!history || history.token !== stage._battleToken) {
-    stage.querySelector('.bt-card-results')?.remove();
+    /** @type {BattleElement} */ (stage.querySelector('.bt-card-results'))?.remove();
     history = { token: stage._battleToken, rows: [] };
     histories.set(overlay, history);
   }
@@ -37,7 +38,7 @@ export function showBattleCardResults(stage, events = []) {
   history.rows.push(...added);
   history.rows = history.rows.slice(-6);
   if (!history.rows.length) return;
-  let panel = stage.querySelector('.bt-card-results');
+  let panel = /** @type {BattleElement} */ (stage.querySelector('.bt-card-results'));
   if (panel && !added.length) return;
   if (!panel) {
     panel = document.createElement('details');

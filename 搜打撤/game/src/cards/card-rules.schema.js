@@ -52,6 +52,7 @@ export const HOSTED_CARD_RULES = Object.freeze({
   'tt-token-color': 'class-ability-acquire', 'tt-medneedle': 'delayed-heal-item',
   'tt7-arcanebolt': 'damage-and-draw', 'tt7-provoke': 'foe-fight-select',
 });
+/** @type {Set<string>} */
 export const HOSTED_BATTLE_RULES = new Set(Object.values(HOSTED_CARD_RULES));
 // M3：bag.use 支持的 op 集（战斗侧 battle.bag 结构化分派 + 地图侧 game.bag useStructuredBagRule）。
 // 单源定义处（capability.js 侧 import 消费，2026-10-02 审计 A 档消双写漂移面）。

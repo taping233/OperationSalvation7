@@ -111,7 +111,7 @@ function savedExtractionCards(game, remaining, isSha) {
 
 // The pending snapshot preserves every original roll. Only the same cards accepted by
 // base.pocket count as brought back; successful rolls of initial/career cards are rule losses.
-export function extractionPocketOutcome(pending, isSha = () => false) {
+export function extractionPocketOutcome(pending, isSha = /** @type {(card: import('./game.store.types.js').CardSnapshot) => boolean} */ (() => false)) {
   const total = Number.isInteger(pending?.totalPocketCount) ? pending.totalPocketCount : 0;
   const randomLost = Number.isInteger(pending?.lostPocketCount) ? pending.lostPocketCount : 0;
   if (!Array.isArray(pending?.keptPocket)) {
@@ -129,7 +129,7 @@ export function extractionPocketOutcome(pending, isSha = () => false) {
 // 结算页、跑局记录、Agent 导出三方读同一份事实。只读持久态（pending 的净带回/散失）
 // 与终局态（game 的结局/层/行动/时长），刷新后从存档重建 attempt 仍得到同一结果；
 // 已提交过的事务 replay 直接返回存档收据原值，回执不重复累计。
-export function buildExtractionReceipt({ game, pending, isSha = () => false, xpMul = 1 }) {
+export function buildExtractionReceipt({ game, pending, isSha = /** @type {(card: import('./game.store.types.js').CardSnapshot) => boolean} */ (() => false), xpMul = 1 }) {
   const moves = firstExploreMoves(game);
   const remaining = pending && Array.isArray(pending.remainingCards) ? pending.remainingCards : [];
   const remainingCount = remaining.reduce((n, s) => n + (s.count || 0), 0);
@@ -210,7 +210,7 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
 
 export function createExtractionCommands({
   getActiveSlot, runStore, baseApi, recovery, game, random,
-  makePocketStream = null, restoreRandom = () => {},
+  makePocketStream = null, restoreRandom = /** @type {(state:unknown) => void} */ (() => {}),
   characterFor = () => null, addXpToProgress = () => ({ after: { lv: 1, xp: 0 } }), xpMultiplier = () => 1,
 }) {
   let beginAttempt = null;
@@ -235,7 +235,8 @@ export function createExtractionCommands({
     if (!run || !base) return fail('INVALID_STATE', '无法读取撤离整理所需的基地或对局快照');
     return { ok: true, slotId, identity: identity.value, run, base };
   };
-  const makeAttempt = (slotId, current, requestId, command, payload, afterBase, afterRun, local = {}) => ({
+  /** @template {object} T @param {T} [local] */
+  const makeAttempt = (slotId, current, requestId, command, payload, afterBase, afterRun, local = /** @type {T} */ ({})) => ({
     slotId, context: { slotId, requestId, expectedBaseRevision: current.base._m01.revision, expectedRunRevision: current.identity.revision },
     command, payload, runId: current.identity.runId, afterBase, afterRun, ...local,
   });

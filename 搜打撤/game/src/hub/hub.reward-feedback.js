@@ -88,18 +88,18 @@ function paint(root, base) {
   if (!receipt || receipt.slot !== base.slot) return;
   const panel = document.createElement('section');
   panel.className = 'reward-receipt';
-  panel._receipt = receipt;
+  /** @type {HTMLElement & {_receipt?: unknown}} */ (panel)._receipt = receipt;
   panel.setAttribute('role', 'status');
   panel.setAttribute('aria-label', '奖励领取结果');
   panel.tabIndex = -1;
   panel.dataset.outcome = receipt.failed ? 'unclaimed' : 'claimed';
-  panel.innerHTML = `<header><span>${receipt.failed ? '尚未领取' : '已领取'}</span><h3>${esc(receipt.name)}</h3></header>${receipt.failed ? `<p>奖励尚未领取，领取记录未改变。</p>${receipt.reason ? `<p>${esc(receipt.reason)}</p>` : ''}` : `<ul>${receipt.items.map(item => `<li><b>${esc(item.name)} <em>×${item.count}</em></b><span>${esc(item.destination)}</span></li>`).join('')}</ul>${receipt.items.length ? '' : '<p>领取记录已确认。物资明细请查看基地资源、后勤与卡背档案。</p>'}`}<button type="button" class="mini-btn base-command" data-reward-close aria-label="关闭领取结果">确认 · 返回浏览</button>`;
+  panel.innerHTML = `<header><span>${receipt.failed ? '尚未领取' : '已领取'}</span><h3>${esc(receipt.name)}</h3></header>${receipt.failed ? `${receipt.reason ? `<p>${esc(receipt.reason)}</p>` : ''}` : `<ul>${receipt.items.map(item => `<li><b>${esc(item.name)} <em>×${item.count}</em></b><span>${esc(item.destination)}</span></li>`).join('')}</ul>${receipt.items.length ? '' : '<p>已领取，明细见对应库存。</p>'}`}<button type="button" class="mini-btn base-command" data-reward-close aria-label="关闭领取结果">确认</button>`;
   const close = () => {
     receipts.delete(base); panel.remove();
     if (activeReceipt?.deref() === panel) activeReceipt = undefined;
     root.querySelector('[data-act="archiveV12Record"].on, [data-act="archiveV3Medal"][aria-pressed="true"], .av12-directory [aria-pressed="true"]')?.focus({ preventScroll: true });
   };
-  panel._closeRewardReceipt = close;
+  /** @type {HTMLElement & {_closeRewardReceipt?: () => void}} */ (panel)._closeRewardReceipt = close;
   panel.querySelector('[data-reward-close]').addEventListener('click', close);
   root.querySelector('.av12-content')?.prepend(panel);
   bindReceiptEsc(panel);

@@ -18,13 +18,13 @@ export function battleRestartHTML({ SDT, game, buttonClass = 'mini-btn' }) {
 
 /** The local page owns one restart request; the public battle checkpoint API owns all restoration. */
 export function bindBattleRestart({ SDT, UI, game, page, isCurrentContext = () => SDT.game === game }) {
-  const button = page?.querySelector('[data-act="restartCurrentBattle"]');
+  const button = /** @type {HTMLButtonElement} */ (page?.querySelector('[data-act="restartCurrentBattle"]'));
   if (!button) return;
   const battle = SDT.Battle;
   const token = battle.getSnapshot()?.battleToken;
   let used = false;
   const feedback = message => {
-    const status = page.querySelector('[data-battle-restart-feedback]');
+    const status = /** @type {HTMLElement} */ (page.querySelector('[data-battle-restart-feedback]'));
     if (status) status.textContent = message;
   };
   const current = () => isCurrentContext() && game.battleActive && !game.terminalPending

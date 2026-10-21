@@ -8,11 +8,19 @@
 
 本目录存放 Vite 版游戏的图片、字体和音频。是否在当前运行时被引用，应核对 `game/data/art-mapping.json`、`game/src/` 的加载路径与 `game/assets/asset-manifest.json`；仅凭文件存在或清单条目不能判断素材可删。
 
+普通战与首脑战的入口过场分别复用 `scenes/transition-battle-v2.webp` 和 `scenes/transition-boss-v2.webp`；选图由 `camp-entry.js` 与 `enterNode` 维护，现有文案、时长和战场准备流程沿用。接入与验证边界见[专用过场恢复记录](../../docs/evidence/2026-10-21-battle-cuts-reuse/README.md)。
+
+战斗撤退、大门、祭坛、商店的过场使用 `scenes/transitions-1021/{retreat,door,altar,shop}.webp`，由 `transition-art.js` 维护独立映射；节点内容页与紧急撤离点仍沿用原背景。四图来源与接入验证见[重绘记录](../../docs/evidence/2026-10-21-four-transition-redraw/README.md)。
+
+紧急撤离点、事件入口使用 `scenes/transitions-1021/{emergency-exit,event}.webp`，由 `transition-art.js` 选图；跨层、返回探索分别使用同目录 `layer-passage.webp`、`map-return.webp`，由 `transition-illustrations.css` 装饰现有遮层；普通加载等待通过 `page-loading.js` 显式选用 `loading.webp`，HTML预载三张公共图。内容页背景、照相馆专用切幕及原流程时长沿用；标题统一由 `transition-heading.js/css` 管理，随插画切幕一起退出。五图经NAI4.5起稿、默认画风内置简化重绘，[来源与接入记录](../../docs/evidence/2026-10-21-transition-12-16-remake/README.md)。
+
 第一层普通战斗使用 `scenes/battle/stage-reset-1015/{backdrop,ground,foreground}.webp` 三层独立场景，来源为 NAI 起稿后内置重绘，接入见 `src/battle/view/battle.scenery.js`。地板的远沿过渡由 `css/battle-stage.css` 维护；后续章节及首脑场景仍按场景目录选择。[来源与实装记录](../../docs/evidence/2026-10-15-battle-stage-reset/README.md)注明本轮按老板要求未做实装验收。
 
 `ui/home-nodes-1015/` 保留首页节点图标试作，当前首页使用原SVG线框图标；原稿、提示词与转换图SHA见[试作记录](../../docs/evidence/2026-10-15-home-nodes-set/README.md)。
 
 可编辑原稿与生成过程放在 `game/art-source/`；人物定稿时点的参考快照放在 `docs/character-bible/ref-images/`；设计比较图、历史截图和验收证据放在 `docs/previews/`、`docs/evidence/` 等目录。它们与本目录的运行素材用途不同。以上路径均相对项目根目录。
+
+旧宝箱高分辨率帧与内联天气替代源图共91项仍保留登记，构建只在源字节与消费者审查都匹配时省略发布，规则见[性能说明](../../docs/performance.md#生产资源发布规则)。本地未跟踪的4份旧大箱原帧另存 `game/art-source/chests/large-rig-v1-local/`，保留原大小与SHA、不进Git；原位置与恢复依据见[档案记录](../../docs/evidence/2026-10-21-WF-github-perf-integrate-1021/local-source-archive.json)。
 
 新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。
 

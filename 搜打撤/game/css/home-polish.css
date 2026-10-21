@@ -219,12 +219,12 @@ body #title.home-composed .home-secondary .home-plate {
   box-shadow: none;
 }
 body #title.home-composed .home-collection { gap: 22px; }
-body #title.home-composed .home-collection .home-plate { padding: 12px 16px; --plate-accent: #c6d7e6; }
-body #title.home-composed .home-collection .home-ach { width: 90%; margin-left: auto; --plate-accent: #decca1; }
+body #title.home-composed .home-collection .home-plate { padding: 12px 16px; --plate-accent: transparent; }
+body #title.home-composed .home-collection .home-ach { width: 90%; margin-left: auto; --plate-accent: transparent; }
 body #title.home-composed .home-collection .home-line-icon { width: 46px; height: 46px; flex-basis: 46px; }
 body #title.home-composed .home-collection .home-plate::before {
   inset: auto 0 0 24%; height: 2px; border: 0; clip-path: none;
-  background: linear-gradient(90deg,transparent 32%,#d6effa 47%,#f5fcff 50%,transparent 64%) 100% 0 / 240% 100%,linear-gradient(90deg,transparent,#b7d6e460);
+  background: none;
   filter: drop-shadow(0 0 6px #bcddea99); animation: homeHeaderTrace 9s linear infinite;
 }
 body #title.home-composed .home-collection .home-library::before { animation-delay: -4.5s; }
@@ -247,8 +247,9 @@ body #title.home-composed .home-system .home-exit:is(:hover,:focus-visible) .hom
 body #title.home-composed .home-primary { gap: 20px; }
 body #title.home-composed .home-primary .home-guide { }
 body #title.home-composed .home-guide { --plate-fill: rgba(8,16,28,.65); }
-body #title.home-composed .home-plate::before { background: rgba(255,255,255,.17); }
-body #title.home-composed .home-plate::after { inset: 1px; }
+body #title.home-composed :is(.home-plate,.home-tool)::before { background: none; }
+body #title.home-composed :is(.home-plate,.home-tool)::after { inset: 0; }
+body #title.home-composed .home-tool::after { background: rgba(12,14,17,.86); }
 body #title.home-composed .home-button-cn { font-size: var(--home-ui-label); }
 body #title.home-composed .home-system .home-button-cn { letter-spacing: .1em; }
 /* System navigation is one quiet group beneath the two collection destinations. */
@@ -265,14 +266,14 @@ body #title.home-composed .home-system :is(.home-settings,.home-makers,.home-exi
 body #title.home-composed .home-start .home-button-cn { font-size: var(--home-ui-title); }
 /* The city action keeps its established pale gold face beside the cold beacon. */
 body #title.home-composed .home-start { --plate-fill: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%); height: 108px; color: #14120a; }
-body #title.home-composed .home-start::before { background: #e9e4d1 !important; }
-body #title.home-composed .home-start:hover::before { background: #fff !important; }
+body #title.home-composed .home-start::before { background: none !important; }
+body #title.home-composed .home-start:hover::before { background: none !important; }
 body #title.home-composed .home-start::after { background: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%) !important; }
 body #title.home-composed .home-start:hover::after { background: linear-gradient(105deg,#bbcbd2,#e1d6b2 72%) !important; }
 body #title.home-composed .home-start > .home-hover-glow { background: linear-gradient(105deg,#dae7ec,#fff0c9 70%); }
 body #title.home-composed .home-start .home-line-icon { color: #14120a; }
 body #title.home-composed .home-start .home-arrow { opacity: 0; }
-body #title.home-composed .home-primary .home-guide { width: 82%; height: 72px; padding-left: 16px; --plate-accent: #becedb; --plate-fill: linear-gradient(90deg, #14202dbd, #14202d00); box-shadow: none; }
+body #title.home-composed .home-primary .home-guide { width: 82%; height: 72px; padding-left: 16px; --plate-accent: transparent; --plate-fill: linear-gradient(90deg, #14202dbd, #14202d00); box-shadow: none; }
 body #title.home-composed .home-primary .home-guide::before {
   background: radial-gradient(ellipse 45px 30px at 25px 50%,#c1e2f246,transparent 85%);
   clip-path: none;
@@ -284,8 +285,13 @@ body #title.home-composed .home-button-copy::after { font-size: var(--home-ui-su
 body #title.home-composed .home-system .home-button-copy::after { color: #acbdca; }
 body #title.home-composed .home-start .home-button-copy::after { content: 'ENTER THE CITY'; color: #14120a; opacity: .78; }
 body #title.home-composed .home-library .home-button-copy::after { content: 'PHOTO STUDIO'; }
-/* The city entry keeps its plate without the decorative beacon or scene glow. */
-body #title.home-composed .home-sheen { display: none; }
+/* A short, infrequent sheen preserves the primary plate without becoming the scene's pulse. */
+body #title.home-composed .home-sheen {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden; clip-path: var(--plate-shape);
+  background: linear-gradient(105deg, transparent 40%, #ffffff8c 50%, transparent 60%) 170% 0 / 260% 100% no-repeat;
+  animation: homeSheen 24s ease-in-out 3s infinite;
+}
+@keyframes homeSheen { 0% { background-position: 170% 0; } 10%, 100% { background-position: -70% 0; } }
 body #title.home-composed .home-start .home-city-current {
   display: none;
   position: absolute; right: -76px; top: -79px; width: 220px; height: 240px;
@@ -304,7 +310,7 @@ body #title.home-composed .mote-b { animation-delay: -4.5s; }
 @keyframes citySnow { 0%,100% { opacity: 0; } 20%,70% { opacity: .6; } to { transform: translate(5px,35px); } }
 /* Secondary destinations catch small, staggered glints; system tools remain quiet. */
 body #title.home-composed .home-collection .home-plate::after {
-  background: radial-gradient(ellipse 3px 9px at 99% 48%,#dcecf2,transparent),linear-gradient(270deg,#b4c9d730,transparent 22%),var(--plate-fill);
+  background: linear-gradient(270deg,#b4c9d730,transparent 22%),var(--plate-fill);
 }
 body #title.home-composed .home-collection .home-line-icon { color: #dbeaf0; filter: drop-shadow(0 0 3px #def4ffb3) drop-shadow(0 0 11px #a6d2e680); animation: homeDestinationLight 9s ease-in-out infinite; }
 body #title.home-composed .home-library .home-line-icon { animation-delay: -4.5s; }
@@ -391,7 +397,7 @@ body #title#title.home-composed[data-surface-motion][data-surface-phase]:not([da
 
 /* ---------- Press feedback ---------- */
 body #title.home-composed .home-plate:active::after, body #title.home-composed .home-tool:active::after { filter: brightness(.82); }
-body #title.home-composed .home-plate:focus-visible { outline-offset: 4px; }
+body #title.home-composed :is(.home-plate,.home-tool):focus-visible { outline: none; filter: drop-shadow(0 0 12px #4bade0c4); }
 
 /* Original utility plates retain their geometry and styling; only deepen the glass blur. */
 body #title.home-composed :is(#btnTitleMute, #mInbox)::after {

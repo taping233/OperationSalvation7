@@ -4,15 +4,15 @@ import { hideHomeForWallpaper, restoreHomeFromWallpaper } from './home-menu-moti
 const preferenceKey = 'sdt-title-wallpaper';
 const wallpapers = ['snow-road', 'baita-heixiang', 'xingyue-piano', 'wu-bass', 'baita-station', 'xingyue-reeds'];
 const title = document.getElementById('title');
-const button = document.getElementById('btnTitleWallpaper');
-const viewButton = document.getElementById('btnTitleWallpaperView');
+const button = /** @type {HTMLButtonElement} */ (document.getElementById('btnTitleWallpaper'));
+const viewButton = /** @type {HTMLButtonElement} */ (document.getElementById('btnTitleWallpaperView'));
 
 if (title && viewButton) {
   viewButton.addEventListener('click', () => {
     const viewing = title.classList.toggle('wallpaper-only');
-    title.querySelector('.title-inner').toggleAttribute('inert', viewing);
+    /** @type {HTMLElement} */ (title.querySelector('.title-inner')).toggleAttribute('inert', viewing);
     viewButton.setAttribute('aria-pressed', String(viewing));
-    viewButton.querySelector('span').textContent = viewing ? '恢复界面' : '只看壁纸';
+    /** @type {HTMLElement} */ (viewButton.querySelector('span')).textContent = viewing ? '恢复界面' : '只看壁纸';
     viewButton.title = viewing ? '恢复主页界面' : '隐藏界面，只看壁纸';
     if (viewing) hideHomeForWallpaper();
     else restoreHomeFromWallpaper();
@@ -26,7 +26,7 @@ if (title && button) {
     title.dataset.homeWallpaper = wallpapers[index];
     const count = `${index + 1}/${wallpapers.length}`;
     const label = `切换壁纸，当前第${index + 1}张，共${wallpapers.length}张`;
-    button.querySelector('[data-wallpaper-count]').textContent = count;
+    /** @type {HTMLElement} */ (button.querySelector('[data-wallpaper-count]')).textContent = count;
     button.setAttribute('aria-label', label);
     button.title = label;
   };

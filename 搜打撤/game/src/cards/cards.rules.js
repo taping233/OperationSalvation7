@@ -4,7 +4,7 @@ const SDT = window.SDT;   // ESM 垫片（与 cards.js 同源，main.js 加载�
 import { CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
-import { isHeroLine, rarityOf } from './card-rarity.js';
+import { isHeroLine, rarityOf, isClassCard } from './card-rarity.js';
 import { nativeNumericField, nativeDamageType } from './builtin-card-numeric-fields.js';
 
 let fixedCardIdSet;
@@ -246,10 +246,13 @@ export const rulesSlice = {
     // 2026-09-05 增补：能力卡 / 生物图鉴 / 棱彩稀有度（含元素之门等英雄衍生物）同样排除；
     // 2026-09-08 增补（老板定版）：初始 / 职业 / 衍生 / 棱彩稀有度与生物类别的卡牌
     // 一律不进一般发现或随机池（除非效果特意说明，如「发现 1 张其它职业的卡牌」
-    // ——那类指定池走 parsePoolNoun / classPool，不经本判定）
+    // ——那类指定池走 parsePoolNoun / classPool，不经本判定）；
+    // 2026-10-21 增补（反馈#2）：带 cls 归属的卡按职业卡同口径排除（isClassCard，
+    // 含稀有度未迁移的旧档/自制卡）——随机获得类发放不得产出职业卡，除非文本明确声明职业池。
     isRandomObtainable(card) {
       if (['初始', '职业', '衍生', '棱彩'].includes(card.rarity)) return false;
       if (card.type === '能力卡' || card.type === '生物') return false;
+      if (isClassCard(card)) return false;
       return !card.unrandom;
     },
 

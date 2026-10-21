@@ -1,0 +1,74 @@
+/* Rich city/photo cuts retain their artwork, masks and complete animation. */
+/* Resume is a quiet profile of the same handoff: stable artwork while loading,
+   then one fade. It never starts scenery/title entrance during departure. */
+#overlay .flow-transition[data-handoff-profile="resume"] {
+  background:#10171b!important; opacity:1;
+  animation:none!important; transform:none!important;
+  transition:opacity var(--motion-resume-exit,360ms) var(--motion-ease-exit,ease-out)!important;
+}
+#overlay .flow-transition[data-handoff-profile="resume"].leaving { background:#10171b!important; opacity:0!important; }
+#overlay [data-handoff-profile="resume"] .camp-entry-cut {
+  animation:none!important; transform:none!important;
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+}
+#overlay [data-handoff-profile="resume"] .camp-entry-scenery {
+  animation:none!important; opacity:.85; transform:none;
+}
+#overlay [data-handoff-profile="resume"] .camp-entry-cut::before,
+#overlay [data-handoff-profile="resume"] .camp-entry-cut::after { display:none; }
+#overlay [data-handoff-profile="resume"] .transition-heading { transition:opacity var(--motion-change,160ms) ease-out; }
+#overlay [data-handoff-profile="resume"] .transition-heading * { animation:none!important; }
+#overlay [data-handoff-profile="resume"].leaving .transition-heading { opacity:0; }
+body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud) {
+  visibility:hidden!important; pointer-events:none!important;
+}
+body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud),
+body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud) * {
+  animation:none!important; transition:none!important;
+}
+.reduce-motion #overlay .flow-transition[data-handoff-profile="resume"] { transition:none!important; }
+@media (prefers-reduced-motion:reduce) {
+  #overlay .flow-transition[data-handoff-profile="resume"] { transition:none!important; }
+}
+.transition-handoff-rich:not(.leaving),
+.transition-handoff-rich:not(.leaving) * { animation-play-state:paused!important; }
+.transition-handoff-rich.leaving { pointer-events:none; }
+#overlay .city-run-transition.resume-hold.transition-handoff-rich.leaving { background:transparent!important; }
+#overlay .city-run-transition.resume-hold.transition-handoff-rich.leaving .camp-entry-cut { animation:campCutReveal .8s cubic-bezier(.65,0,.2,1) both!important; }
+#overlay .page-visual-scene.transition-handoff-rich.leaving { background:transparent; transition:none; }
+#overlay .transition-handoff-rich.leaving .city-run-transition.resume-hold { background:transparent!important; }
+#overlay .transition-handoff-rich.leaving .city-run-transition.resume-hold .camp-entry-cut { animation:campCutReveal .8s cubic-bezier(.65,0,.2,1) both!important; }
+#overlay .card.scene:has(.city-run-transition) { background:transparent!important; }
+/* Plain covers use the same readiness boundary and a compositor fade. */
+.transition-handoff.transition-handoff:not(.page-visual-return) { opacity:1!important; transform:none!important; animation:none!important; transition:opacity var(--motion-handoff,180ms) var(--motion-ease-enter,ease-out)!important; }
+.transition-handoff.transition-handoff-leaving { pointer-events:none!important; }
+.transition-handoff.transition-handoff-leaving:not(.page-visual-return),
+.page-visual-return[data-kind="panel"].transition-handoff-leaving { opacity:0!important; }
+.transition-handoff-leaving > i { transform:none!important; }
+/* Every full-page return fades through its cover, including pages without artwork. */
+.page-visual-return.page-visual-return:not([data-kind="panel"]) {
+  animation:mapReturnCoverIn var(--motion-map-return-enter,420ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both!important;
+}
+.page-visual-return.page-visual-return.transition-handoff-leaving:not([data-kind="panel"]) {
+  animation:mapReturnCoverOut var(--motion-map-return-exit,420ms) var(--motion-ease-exit,ease-out) both!important;
+}
+@keyframes mapReturnCoverIn {
+  from { opacity:0; transform:translateX(-24px) scale(1.025); }
+  to { opacity:1; transform:translateX(0) scale(1); }
+}
+@keyframes mapReturnCoverOut {
+  from { opacity:1; transform:translateX(0) scale(1); }
+  to { opacity:0; transform:translateX(24px) scale(1.015); }
+}
+.reduce-motion .transition-handoff { transition:none!important; }
+@media (prefers-reduced-motion:reduce) { .transition-handoff { transition:none!important; } }
+body.reduce-motion .page-visual-return.page-visual-return.page-visual-return {
+  animation:none!important; transition:none!important; transform:none!important;
+}
+body.reduce-motion .page-visual-return.transition-handoff-leaving { opacity:0!important; }
+@media (prefers-reduced-motion:reduce) {
+  .page-visual-return.page-visual-return.page-visual-return {
+    animation:none!important; transition:none!important; transform:none!important;
+  }
+  .page-visual-return.transition-handoff-leaving { opacity:0!important; }
+}

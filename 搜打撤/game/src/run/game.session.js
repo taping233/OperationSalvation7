@@ -266,8 +266,8 @@ function syncPlayTime() {
   // Reserve the checkpoint before waiting for the lock so overlapping saves never count the same seconds twice.
   game.elapsedSynced = now;
   const result = Promise.resolve(SDT.Base.syncPlayTime(now, previous));
-  recordBaseSaveForLoad('play_time_sync', result.then(value => !value.changed || value.persisted === true));
-  result.then(value => { if (value.persisted === false) UI.log('[[icon:cross]] 游玩时间尚未保存；本局内存进度保留，请重试保存', 'warn'); });
+  recordBaseSaveForLoad('play_time_sync', result.then(value => value.changed === false || value.persisted === true));
+  result.then(value => { if ('persisted' in value && value.persisted === false) UI.log('[[icon:cross]] 游玩时间尚未保存；本局内存进度保留，请重试保存', 'warn'); });
   return result;
 }
 
@@ -425,7 +425,7 @@ function restoreGame(slot) {
   // 旧存档只有本局 elapsed：首次读取时按 max 语义迁入累计游玩时间。
   if ((Number(SDT.Base.data.stats.playSeconds) || 0) < (Number(game.elapsed) || 0)) {
     const elapsedMigration = Promise.resolve(SDT.Base.migrateElapsed(game.elapsed));
-    recordBaseSaveForLoad('elapsed_migration', elapsedMigration.then(value => !value.changed || value.persisted === true));
+    recordBaseSaveForLoad('elapsed_migration', elapsedMigration.then(value => value.changed === false || value.persisted === true));
   }
   game.elapsedSynced = Number(game.elapsed) || 0;
   game.extractionPending = null;
@@ -507,8 +507,9 @@ const newUid = () => 'o' + Date.now().toString(36) +
 // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠）+ 1 张「火球」
 // brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）
 // 2026-09-09 需求 #4 宠物加成：变形机器人 +2 张杀；火焰精灵把 5 张杀化为 5 张火球
-function grantStarterSha(log = (...args) => UI.log(...args)) {
+function grantStarterSha(log = /** @param {Parameters<typeof UI.log>} args */ (...args) => UI.log(...args)) {
   const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
+  /** @type {{extraSha?: number, shaToFireball?: boolean}} */
   const effect = (pet && pet.effect) || {};
   const shaN = MAP.rules.starterSha + (effect.extraSha || 0);
   const sha = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
@@ -544,7 +545,7 @@ function publishDeparture(candidate, options) {
   setLobby(false);
   SDT.Sound.music('board');
   UI.clearLog();
-  candidate.logs.forEach(args => UI.log(...args));
+  candidate.logs.forEach(args => UI.log(.../** @type {Parameters<typeof UI.log>} */ (args)));
   enterLayer(game.layerIdx, game.trackPos, { preserveBossPlan: true, deferSave: true });
   if (!options.skipClassChoice) return runtime.openClassChoice();
 }

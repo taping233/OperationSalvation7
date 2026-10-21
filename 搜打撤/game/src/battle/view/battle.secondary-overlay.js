@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import '../../ui/feedback-theme.js';
 import '../../../css/battle-secondary-overlay.css';
 
@@ -14,7 +15,7 @@ export function mountCombatOverlay(UI, title, html, mode, scene) {
   UI._hasBattleStage = true;
   // Capture also blocks direct pointer listeners and global shortcuts. Tab and
   // Escape continue through the existing modal/cancellation implementation.
-  const layer = UI.el.ovBody.querySelector('.battle-secondary-layer');
+  const layer = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-secondary-layer'));
   layer.addEventListener('pointerdown', event => event.stopPropagation());
   layer.addEventListener('click', event => {
     if (event.target === layer) event.stopPropagation();
@@ -22,8 +23,8 @@ export function mountCombatOverlay(UI, title, html, mode, scene) {
 }
 
 export function restoreCombatScene(UI, token) {
-  const layer = UI.el.ovBody?.querySelector('.battle-secondary-layer');
-  const scene = UI.el.ovBody?.querySelector('.battle-stage');
+  const layer = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-secondary-layer'));
+  const scene = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage'));
   if (!layer || !scene || scene._battleToken !== token) return false;
   scene.remove();
   UI.showOverlay('', '', 'battle');

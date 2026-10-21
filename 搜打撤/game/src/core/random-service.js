@@ -1,4 +1,5 @@
 import { hashSeed, nextRandom } from './random-core.js';
+/** @param {unknown} seed */
 function normalizeSeed(seed) {
   return typeof seed === 'number' && Number.isFinite(seed) ? seed >>> 0 : hashSeed(seed);
 }
@@ -12,8 +13,10 @@ function generateSeed() {
 }
 
 class SeededRandomService {
+  /** @param {unknown} [seed] */
   constructor(seed = generateSeed()) { this.reseed(seed); }
 
+  /** @param {unknown} [seed] */
   reseed(seed = generateSeed()) {
     this.seed = normalizeSeed(seed);
     this.streams = Object.create(null);

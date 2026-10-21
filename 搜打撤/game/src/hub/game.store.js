@@ -9,7 +9,7 @@ import { sdtDefine } from '../core/sdt-facade.js';
 function createGameState(map) {
   return {
     map,
-    toggles: { index: true },
+    toggles: { index: false },
     rings: [],
     layerIdx: 0,
     trackPos: 0,
@@ -51,42 +51,53 @@ class GameStore {
   /** @returns {GameSnapshot} */
   getSnapshot() {
     const state = this.state;
-    return Object.freeze({
-      ...state,
-      toggles: Object.freeze({ ...state.toggles }),
-      rings: freezeRows(state.rings),
-      pos: Object.freeze({ ...state.pos }),
-      ownedCards: freezeDataRows(state.ownedCards),
-      cardOrder: Object.freeze(state.cardOrder.slice()),
-      usedPocket: freezeDataRows(state.usedPocket),
-      shopStock: freezeDataRows(state.shopStock),
-      ...(state.shopStocks ? { shopStocks: freezeDataValue(state.shopStocks) } : {}),
-      inventory: freezeRows(state.inventory),
-      discoveredPairs: Object.freeze([...state.discoveredPairs]),
-    });
+    const copies = new WeakMap();
+    // 新增普通数据字段默认隔离；这些地图/交互对象明确保留运行态引用。
+    const runtimeKeys = new Set(['map', 'altarFrom', 'hover', 'moveTarget']);
+    /** @type {GameSnapshot} */
+    const snapshot = Object.create(Object.getPrototypeOf(state));
+    copies.set(state, snapshot);
+    for (const key of Reflect.ownKeys(state)) {
+      const property = Object.getOwnPropertyDescriptor(state, key);
+      if (!property.enumerable) continue;
+      if ('value' in property) {
+        const value = property.value;
+        property.value = key === 'rings' ? freezeRows(value)
+          : key === 'discoveredPairs' ? Object.freeze([...value])
+          : typeof key === 'string' && runtimeKeys.has(key) ? value
+          : freezeDataValue(value, copies);
+      }
+      // 顶层和嵌套数据均保留访问器端口，不求值其动态结果。
+      Object.defineProperty(snapshot, key, property);
+    }
+    return Object.freeze(snapshot);
   }
 }
 
-// 一层行快照；适用于 inventory 这类目前只有标量字段的集合。
+// rings 保留既有一层行复制：行内节点/渲染对象仍是运行态引用。
 function freezeRows(rows) {
   return Object.freeze((rows || []).map((row) => {
     return (row && typeof row === 'object') ? Object.freeze({ ...row }) : row;
   }));
 }
 
-// 卡牌、货架与消耗区包含嵌套纯数据，应逐层隔离；带原型对象保留引用。
-function freezeDataRows(rows) {
-  return Object.freeze((rows || []).map((row) => freezeDataValue(row)));
-}
-
-function freezeDataValue(value) {
+// 普通对象/数组逐层隔离（含未知扩展字段）；函数及带原型对象作为不透明
+// 运行态引用，不遍历、不冻结。WeakMap 保留共享/循环图，只冻结新副本。
+function freezeDataValue(value, copies) {
   if (!value || typeof value !== 'object') return value;
   const prototype = Object.getPrototypeOf(value);
   if (!Array.isArray(value) && prototype !== Object.prototype && prototype !== null) return value;
-
-  const copy = Array.isArray(value)
-    ? value.map(freezeDataValue)
-    : Object.fromEntries(Object.entries(value).map(([key, child]) => [key, freezeDataValue(child)]));
+  if (copies.has(value)) return copies.get(value);
+  const copy = Array.isArray(value) ? new Array(value.length) : Object.create(prototype);
+  copies.set(value, copy);
+  for (const key of Reflect.ownKeys(value)) {
+    const property = Object.getOwnPropertyDescriptor(value, key);
+    if (!property.enumerable) continue;
+    // 不执行 getter；访问器也是运行态端口，保持其原有描述符。
+    Object.defineProperty(copy, key, 'value' in property
+      ? { ...property, value: freezeDataValue(property.value, copies) }
+      : property);
+  }
   return Object.freeze(copy);
 }
 

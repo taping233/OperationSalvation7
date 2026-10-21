@@ -5,7 +5,7 @@ import '../../css/base-home-v7.css';
 export function actionModeName(id) { return id === 'elite' ? '直入敌腹' : '正常入城'; }
 function baseAffairsHTML(base, pendingRewards) {
   const rows = [];
-  if (!base.data.ammoTaught) rows.push(`<button type="button" class="base-home-affair base-home-first-objective" data-act="deploy"><span class="base-home-affair-copy"><b>首次目标：带回一份收获</b><small>正常入城探索，撤离带回资源卡；在后勤使用后，再去建设扩建。背包记得留空格。</small></span><span aria-hidden="true">→</span></button>`);
+  if (!base.data.ammoTaught) rows.push(`<button type="button" class="base-home-affair base-home-first-objective" data-act="deploy"><span class="base-home-affair-copy"><b>首次目标：带回一份收获</b><small>撤离带回资源卡 → 后勤使用 → 建设扩建。背包留空格。</small></span><span aria-hidden="true">→</span></button>`);
   const facilities = [
     { id:'stash', name:'基地仓库', ready:base.canUpgradeStash?.(), have:base.stashCap?.() || 0 },
     { id:'bag', name:'出征背包', ready:base.canUpgradeBag?.(), have:base.bagCap?.() || 0 },
@@ -29,7 +29,7 @@ export function baseHomeV3HTML({ base, meta, modes, mode, prepared, character, p
     ${baseAffairsHTML(base, pendingRewards)}
     <div class="base-home-launch${prepared ? ' has-draft' : ''}">${prepared ? `<span class="base-home-action-caption">${esc(character.name)} · ${picks} 张卡牌</span>` : ''}<button type="button" id="btnDeploy" data-act="deploy">${baseHomeIconV10('deploy')}<b>${prepared ? '继续整备' : '出征整备'}</b><span class="base-command-arrow" aria-hidden="true">→</span></button></div>
     <footer class="base-home-utility">
-      <div class="base-home-mode"><div role="group" aria-label="行动难度"><span class="base-mode-indicator" aria-hidden="true"></span>${Object.values(modes).map(item => `<button type="button" class="${item.id === mode ? 'on' : ''}" data-act="selMode" data-mode="${item.id}" aria-pressed="${item.id === mode}">${actionModeName(item.id)}</button>`).join('')}</div>${mode === 'elite' ? `<p>同样四层探索；敌人与首脑 ×${modes.elite.enemyMul} · 战斗金币 ×${modes.elite.coinMul} · 人物经验 ×${modes.elite.xpMul} · 高稀有度掉率 +20%。建议熟悉防御与卡牌损耗后挑战。</p>` : '<p>首局推荐正常入城：完整四层探索，敌人、战斗金币、人物经验均为基础倍率。</p>'}</div>
+      <div class="base-home-mode"><div role="group" aria-label="行动难度"><span class="base-mode-indicator" aria-hidden="true"></span>${Object.values(modes).map(item => `<button type="button" class="${item.id === mode ? 'on' : ''}" data-act="selMode" data-mode="${item.id}" aria-pressed="${item.id === mode}">${actionModeName(item.id)}</button>`).join('')}</div>${mode === 'elite' ? `<p>四层探索 · 敌人与首脑 ×${modes.elite.enemyMul} · 战斗金币 ×${modes.elite.coinMul} · 人物经验 ×${modes.elite.xpMul} · 高稀有度掉率 +20%。</p>` : '<p>四层探索 · 基础难度</p>'}</div>
       ${base.data.nestUnlocked || restore ? `<nav class="base-home-services" aria-label="基地其他操作">${base.data.nestUnlocked ? '<button type="button" id="btnNest" data-act="nestDeploy">研究所远征 →</button>' : ''}${restore ? `<button type="button" class="base-home-pending" data-act="hubTab" data-tab="stash" data-view="pocket">待复原 <b>${restore}</b> →</button>` : ''}</nav>` : ''}
     </footer></div>`;
 }

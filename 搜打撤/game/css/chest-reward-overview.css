@@ -11,12 +11,12 @@ body #overlay .card .cqo-frame.reward-replica {
   overflow:hidden;
   color:var(--cqo-ink);
   text-align:left;
-  --cqo-ink:#e3ece8;
-  --cqo-muted:#9fb9bd;
-  --cqo-accent:#91c2c6;
-  --cqo-line:#91c2c638;
-  --cqo-glass:rgba(22,45,54,.72);
-  background:#15313a;
+  --cqo-ink:#ebe9e2;
+  --cqo-muted:#a7adb4;
+  --cqo-accent:#aab5bf;
+  --cqo-line:#aab5bf38;
+  --cqo-glass:rgba(30,38,48,.8);
+  background:#1b2027;
 }
 /* Blur and tone only the scene layer; card faces and text remain sharp. */
 body #overlay .card .cqo-frame.reward-replica,
@@ -26,8 +26,8 @@ body #overlay .card .cqo-frame.reward-replica::before,
 body #overlay .card .cqo-frame .cqp-dialog .reward-replica::before,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica::before {
   content:''; position:absolute; inset:-24px; z-index:-1; pointer-events:none;
-  background:linear-gradient(112deg,rgba(16,39,46,.62),rgba(23,49,59,.55)),url('../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp') center/cover;
-  filter:blur(14px) brightness(.68) saturate(.58);
+  background:linear-gradient(112deg,rgba(23,27,34,.78),rgba(24,30,38,.72)),url('../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp') center/cover;
+  filter:blur(14px) brightness(.68) saturate(.22);
 }
 body #overlay .card .cqo-frame.cqo-picker-open .cqo-background { visibility:hidden; }
 body #overlay .card .cqo-frame .cqo-background {
@@ -46,7 +46,6 @@ body #overlay .card .cqo-frame .cqo-overview {
   overflow:hidden;
   color:var(--cqo-ink);
   display:grid;
-  grid-template-columns:300px minmax(0,1fr);
   grid-template-rows:minmax(0,1fr) auto auto;
   gap:0;
   padding:0;
@@ -55,6 +54,7 @@ body #overlay .card .cqo-frame .cqo-overview {
   border-radius:10px;
   background:rgba(9,30,37,.16);
   box-shadow:0 14px 34px #03171d36;
+  grid-template-columns:280px minmax(0,1fr);
 }
 body #overlay .card .cqo-frame .cqo-heading {
   display:grid;
@@ -70,7 +70,7 @@ body #overlay .card .cqo-frame .cqo-source {
   font-size:18px;
   letter-spacing:.04em;
   margin-bottom:14px;
-  color:#9fb9bd;
+  color:#a7adb4;
 }
 body #overlay .card .cqo-frame .cqo-title {
   margin:0;
@@ -79,22 +79,22 @@ body #overlay .card .cqo-frame .cqo-title {
   font-weight:600;
   line-height:1.2;
   letter-spacing:0;
-  color:#e3ece8;
+  color:#ebe9e2;
 }
 body #overlay .card .cqo-frame .cqo-progress {
   display:flex;
   align-items:baseline;
-  flex-wrap:wrap; white-space:normal; justify-content:flex-start; gap:8px 12px; color:#9fb9bd;
+  flex-wrap:wrap; white-space:normal; justify-content:flex-start; gap:8px 12px; color:#a7adb4;
 }
 body #overlay .card .cqo-frame .cqo-progress b {
   font:600 30px/1.1 var(--font-num,var(--font-ui,sans-serif));
   font-variant-numeric:tabular-nums;
   font-size:56px;
   font-weight:400;
-  color:#c9dcd5;
+  color:#d5d8d8;
 }
 body #overlay .card .cqo-frame .cqo-progress span { font-size:22px; line-height:1.5; }
-body #overlay .card .cqo-frame .cqo-progress small { font-size:18px; line-height:1.5; display:block; color:#9fb9bd; }
+body #overlay .card .cqo-frame .cqo-progress small { font-size:18px; line-height:1.5; display:block; color:#a7adb4; }
 body #overlay .card .cqo-frame .cqo-notice {
   grid-column:1/-1;
   flex:none;
@@ -117,7 +117,7 @@ body #overlay .card .cqo-frame .cqo-summary {
   font-size:22px;
   line-height:1.5;
   max-height:none;
-  color:#9fb9bd;
+  color:#a7adb4;
 }
 body #overlay .card .cqo-frame .cqo-summary > :first-child { margin-top:0; }
 body #overlay .card .cqo-frame .cqo-summary > :last-child { margin-bottom:0; }
@@ -129,42 +129,46 @@ body #overlay .card .cqo-frame .cqo-summary :is(.battle-loot-summary,.loot-outco
   background:none;
   font-size:22px;
   letter-spacing:0;
-  color:#9fb9bd;
+  color:#a7adb4;
 }
 body #overlay .card .cqo-frame .cqo-summary b {
-  color:#e3ece8; }
+  color:#ebe9e2; }
 body #overlay .card .cqo-frame .cqo-rewards {
-  display:flex;
   flex:1 1 auto;
   min-height:0;
   overflow:auto;
   grid-column:2;
   grid-row:1;
-  padding:32px 36px 16px;
-  gap:24px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto minmax(0,1fr);
+  gap:12px;
+  padding:28px 36px 16px;
 }
 body #overlay .card .cqo-frame .cqo-coins {
   display:flex;
-  flex:0 0 240px;
-  flex-direction:column;
   align-items:center;
-  justify-content:center;
-  gap:16px;
-  padding:16px;
-  color:#c9b477;
+  color:#b7a785;
   background:none;
-  border-right:1px solid #91c2c62e;
+  flex:none;
+  flex-direction:row;
+  justify-content:flex-start;
+  gap:12px;
+  padding:0 0 18px;
+  border:0;
+  border-right:0;
+  border-bottom:1px solid #aab5bf2e;
 }
 body #overlay .card .cqo-frame .cqo-coin-art {
   display:flex;
   align-items:center;
   justify-content:center;
-  width:150px;
-  height:150px;
+  width:52px;
+  height:52px;
 }
 body #overlay .card .cqo-frame .cqo-coin-art > * { width:100%; height:100%; object-fit:contain; }
 body #overlay .card .cqo-frame .cqo-coins strong { color:var(--cqo-ink); font-size:21px; }
-body #overlay .card .cqo-frame .cqo-coins b { max-width:100%; overflow-wrap:anywhere; text-align:center; font:600 30px/1.2 var(--font-num,var(--font-ui,sans-serif)); }
+body #overlay .card .cqo-frame .cqo-coins b { max-width:100%; overflow-wrap:anywhere; font:600 30px/1.2 var(--font-num,var(--font-ui,sans-serif)); font-size:24px; text-align:left; }
 body #overlay .card .cqo-frame .cqo-coins-received { color:#c6d9cd; font-size:16px; }
 body #overlay .card .cqo-frame .cqo-boxes {
   display:flex;
@@ -176,8 +180,9 @@ body #overlay .card .cqo-frame .cqo-boxes {
   overflow:auto;
   overscroll-behavior:contain;
   scrollbar-gutter:stable;
-  gap:32px;
-  padding:16px 12px 28px;
+  grid-row:2;
+  gap:28px;
+  padding:12px 12px 24px;
 }
 body #overlay .card .cqo-frame .cqo-box {
   position:relative;
@@ -192,20 +197,20 @@ body #overlay .card .cqo-frame .cqo-box {
   box-shadow:none;
   cursor:pointer;
   transition:background .16s ease,border-color .16s ease;
-  flex:0 0 280px;
   min-height:350px;
-  gap:14px;
-  padding:16px 0 20px;
   border:0;
   border-bottom:2px solid #ffffff24;
   border-radius:0;
-  background:none;
   align-items:stretch;
   text-align:left;
+  flex:0 0 320px;
+  padding:20px 22px 24px;
+  gap:12px;
+  background:linear-gradient(0deg,#779d9b12,transparent 75%);
 }
 body #overlay .card .cqo-frame .cqo-box:not(:disabled):hover,
 body #overlay .card .cqo-frame .cqo-box-active {
-  border-color:#c9b477;
+  border-color:#b7a785;
   background:linear-gradient(0deg,#8dc1bd14,transparent 70%);
 }
 body #overlay .card .cqo-frame .cqo-box:disabled { opacity:1; cursor:default; }
@@ -213,7 +218,7 @@ body #overlay .card .cqo-frame .cqo-box-status {
   align-self:flex-start;
   line-height:1.4;
   font-size:22px;
-  color:#b9d0d1;
+  color:#b5bcc4;
 }
 body #overlay .card .cqo-frame .cqo-box-complete .cqo-box-status { color:#c6d9cd; }
 body #overlay .card .cqo-frame .cqo-box-art {
@@ -222,16 +227,16 @@ body #overlay .card .cqo-frame .cqo-box-art {
   justify-content:center;
   width:100%;
   pointer-events:none;
-  height:clamp(180px,24vh,250px);
-  min-height:180px;
   filter:none;
+  height:clamp(200px,27vh,280px);
+  min-height:200px;
 }
 body #overlay .card .cqo-frame .cqo-box-complete .cqo-box-art { opacity:.72; filter:saturate(.5) contrast(.88); }
 body #overlay .card .cqo-frame .cqo-box-art > *,
 body #overlay .card .cqo-frame .cqo-box-art img { max-width:100%; max-height:100%; object-fit:contain; }
 body #overlay .card .cqo-frame .cqo-box-name { color:var(--cqo-ink); font-weight:600; line-height:1.4; font-size:26px; }
 body #overlay .card .cqo-frame .cqo-box-rule { min-height:1.5em; color:var(--cqo-muted); line-height:1.5; font-size:22px; }
-body #overlay .card .cqo-frame .cqo-box-action { display:flex; align-items:center; gap:12px; font-size:22px; line-height:1.5; margin-top:12px; color:#c5dfda; }
+body #overlay .card .cqo-frame .cqo-box-action { display:flex; align-items:center; gap:12px; font-size:22px; line-height:1.5; margin-top:12px; color:#d8c58f; border-top:1px solid #bca97345; padding-top:16px; justify-content:space-between; }
 body #overlay .card .cqo-frame .cqo-box-action > span { font-size:21px; }
 body #overlay .card .cqo-frame .cqo-empty { margin:auto; color:var(--cqo-muted); font-size:17px; line-height:1.6; }
 body #overlay .card .cqo-frame .cqo-footer {
@@ -245,13 +250,13 @@ body #overlay .card .cqo-frame .cqo-footer {
   grid-column:1 / -1;
   grid-row:3;
   padding:18px 24px;
-  background:linear-gradient(110deg,rgba(49,79,87,.7),rgba(22,45,54,.78));
-  backdrop-filter:blur(18px) saturate(1.15);
   border-top:1px solid #bddbd32e;
   box-shadow:inset 0 1px 0 #e0fff016,0 -5px 18px #04161a18;
-  color:#e3ece8;
+  color:#ebe9e2;
+  background:linear-gradient(110deg,#2c3540ed,#1c242eed);
+  backdrop-filter:none;
 }
-body #overlay .card .cqo-frame .cqo-footer-note { flex:1 1 170px; min-width:0; font-size:22px; line-height:1.5; color:#b9d0d1; }
+body #overlay .card .cqo-frame .cqo-footer-note { flex:1 1 170px; min-width:0; font-size:22px; line-height:1.5; color:#b5bcc4; }
 body #overlay .card .cqo-frame .cqo-actions { display:flex; flex-wrap:wrap; gap:10px; margin-left:auto; max-width:100%; }
 body #overlay .card .cqo-frame :is(.cqo-button,.cqp-close) {
   display:inline-flex;
@@ -266,16 +271,16 @@ body #overlay .card .cqo-frame :is(.cqo-button,.cqp-close) {
   font:600 var(--ui-text-label)/1.5 var(--font-ui,sans-serif);
   cursor:pointer;
   border-radius:6px;
-  background:rgba(49,79,87,.44);
-  color:#d8e8e4;
-  border-color:#91c2c647;
+  background:rgba(61,71,84,.55);
+  color:#e1e3e2;
+  border-color:#aab5bf47;
   box-shadow:inset 0 1px 0 #e0fff012,0 4px 10px #03171d20;
 }
 /* Overview copy uses the available space; picker controls keep their own scale. */
 body #overlay .card .cqo-frame .cqo-button { min-height:60px; max-width:100%; font-size:24px; white-space:normal; overflow-wrap:anywhere; }
 body #overlay .card .cqo-frame :is(.cqo-notice,.cqo-summary,.cqo-footer-note,.cqo-box-name,.cqo-box-rule,.cqo-box-status) { overflow-wrap:anywhere; }
 body #overlay .card .cqo-frame :is(.cqo-button-primary,[data-act="chestNext"]) {
-  background:linear-gradient(135deg,#668f93,#3f6b76);
+  background:linear-gradient(135deg,#606c79,#465362);
   color:#f0f4e9;
   border-color:#abc8bf80;
 }
@@ -322,7 +327,7 @@ body #overlay .card .cqo-frame .cqp-toolbar {
   padding:0 0 14px;
   border-bottom:0;
 }
-body #overlay .card .cqo-frame .cqp-close { min-height:42px; padding:8px 14px; background:rgba(22,45,54,.72); color:#d8e8e4; border-color:#91c2c647; backdrop-filter:blur(14px); }
+body #overlay .card .cqo-frame .cqp-close { min-height:42px; padding:8px 14px; background:rgba(30,38,48,.8); color:#e1e3e2; border-color:#aab5bf47; backdrop-filter:blur(14px); }
 body #overlay .card .cqo-frame .cqp-label { color:var(--cqo-ink); font-size:var(--ui-text-body); font-weight:600; line-height:1.5; display:none; }
 /* This structural slot does not scroll: only the card stage inside it does. */
 body #overlay .card .cqo-frame .cqp-scroll {
@@ -349,28 +354,28 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   max-height:none;
   padding:0;
   border:0;
-  --cqo-ink:#e3ece8;
-  --cqo-muted:#9fb9bd;
-  --cqo-accent:#91c2c6;
-  --cqo-line:#91c2c638;
-  --cqo-glass:rgba(22,45,54,.72);
-  background:#15313a;
+  --cqo-ink:#ebe9e2;
+  --cqo-muted:#a7adb4;
+  --cqo-accent:#aab5bf;
+  --cqo-line:#aab5bf38;
+  --cqo-glass:rgba(30,38,48,.8);
+  background:#1b2027;
   border-radius:10px;
-  box-shadow:0 14px 34px #03171d36;
+  box-shadow:none;
 }
 body #overlay .card .cqo-frame .cqp-dialog .reward-head,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-head { display:block; flex:none; margin:0; border:0; grid-column:1; grid-row:1; padding:38px 28px; overflow:auto; background:linear-gradient(130deg,#49757e4d,rgba(22,45,54,.72)); backdrop-filter:blur(18px) saturate(1.15); box-shadow:inset 1px 1px 0 #def7ed20,0 7px 18px #04161a26; color:#e3ece8; border-right:1px solid #91c2c629; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-head { display:block; flex:none; margin:0; border:0; grid-column:1; grid-row:1; padding:38px 28px; overflow:auto; background:linear-gradient(130deg,#4955624d,rgba(30,38,48,.8)); backdrop-filter:blur(18px) saturate(1.15); box-shadow:none; color:#ebe9e2; border-right:1px solid #aab5bf29; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-head .reward-source {
   display:block;
   font-size:18px;
   line-height:1.5;
   margin-bottom:18px;
   letter-spacing:.04em;
-  color:#9fb9bd; }
+  color:#a7adb4; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-head h3,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-head h3 { display:block; font-size:44px; font-weight:600; letter-spacing:0; line-height:1.2; margin:0 0 28px; color:#e3ece8; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-head h3 { display:block; font-size:44px; font-weight:600; letter-spacing:0; line-height:1.2; margin:0 0 28px; color:#ebe9e2; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-count,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-count { font-size:22px; margin:0 0 18px; line-height:1.5; color:#b9d0d1; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-count { font-size:22px; margin:0 0 18px; line-height:1.5; color:#b5bcc4; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-rule,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-rule { margin:0; font-size:22px; line-height:1.65; color:#adc5c6; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-main,
@@ -481,13 +486,13 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   cursor:pointer;
   font-size:22px;
   border-radius:6px;
-  border:1px solid #91c2c666;
-  background:linear-gradient(135deg,#527f89ba,#345e6bba);
+  border:1px solid #aab5bf66;
+  background:linear-gradient(135deg,#56616ee6,#414b59e6);
   color:#e8f0e8;
-  box-shadow:inset 0 1px 0 #e0fff01f,0 5px 12px #03171d30;
+  box-shadow:none;
 }
 body #overlay .card .cqo-frame .cqp-dialog .reward-claim:hover:not(:disabled),
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-claim:hover:not(:disabled) { filter:none; background:linear-gradient(135deg,#65969dbd,#497783d4); color:#f1f6ed; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-claim:hover:not(:disabled) { filter:none; background:linear-gradient(135deg,#6b7683,#505d6c); color:#f1f6ed; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-claim:disabled,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-claim:disabled { opacity:1; background:var(--ui-disabled); color:var(--cqo-muted); border-color:var(--cqo-line); cursor:default; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-unit-state,
@@ -545,13 +550,13 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   cursor:pointer;
   font-size:20px;
   border-radius:6px;
-  background:rgba(49,79,87,.44);
-  color:#d8e8e4;
-  border-color:#91c2c647;
-  box-shadow:inset 0 1px 0 #e0fff012,0 4px 10px #03171d20;
+  background:rgba(61,71,84,.55);
+  color:#e1e3e2;
+  border-color:#aab5bf47;
+  box-shadow:none;
 }
 body #overlay .card .cqo-frame .cqp-dialog :is(.reward-exit,.reward-secondary,.reward-bag):hover,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica :is(.reward-exit,.reward-secondary,.reward-bag):hover { background:rgba(75,112,120,.58); color:#eef4ec; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica :is(.reward-exit,.reward-secondary,.reward-bag):hover { background:rgba(81,93,108,.7); color:#eef4ec; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-exit-icon,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-exit-icon { display:grid; place-items:center; width:21px; height:21px; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-exit-icon .ic,
@@ -577,11 +582,11 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   padding:18px 24px;
   gap:18px 28px;
   justify-content:space-between;
-  background:linear-gradient(110deg,rgba(49,79,87,.7),rgba(22,45,54,.78));
+  background:linear-gradient(110deg,rgba(45,52,63,.94),rgba(29,36,46,.96));
   backdrop-filter:blur(18px) saturate(1.15);
   border-top:1px solid #bddbd32e;
-  box-shadow:inset 0 1px 0 #e0fff016,0 -5px 18px #04161a18;
-  color:#e3ece8;
+  box-shadow:none;
+  color:#ebe9e2;
 }
 body #overlay .card .cqo-frame .cqp-dialog .reward-capacity,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-capacity { font-variant-numeric:tabular-nums; font-size:22px; color:#bfd4d1; }
@@ -603,7 +608,7 @@ body #overlay .card .cqo-frame .cqp-dialog .reward-bag,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-bag {
   margin-left:0; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-bag.is-primary,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-bag.is-primary { font-weight:600; background:linear-gradient(135deg,#668f93,#3f6b76); color:#f0f4e9; border-color:#abc8bf80; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-bag.is-primary { font-weight:600; background:linear-gradient(135deg,#606c79,#465362); color:#f0f4e9; border-color:#abc8bf80; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-bag.is-primary:hover,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-bag.is-primary:hover { filter:brightness(1.08); background:linear-gradient(135deg,#719fa1,#4b7883); color:#f0f4e9; }
 body #overlay .card .cqo-frame .cqp-dialog :is(.reward-notice,.reward-final),
@@ -611,21 +616,16 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
 body #overlay .card .cqo-frame .cqp-dialog .reward-empty,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-empty { padding:36px 10px; color:var(--cqo-muted); font-size:20px; }
 @media (prefers-reduced-motion:reduce) {
-  body #overlay .card .cqo-frame .cqo-box { transition:none; flex:0 0 280px; min-height:350px; gap:14px; padding:16px 0 20px; border:0; border-bottom:2px solid #ffffff24; border-radius:0; background:none; align-items:stretch; text-align:left; }
+  body #overlay .card .cqo-frame .cqo-box { transition:none; min-height:350px; border:0; border-bottom:2px solid #ffffff24; border-radius:0; align-items:stretch; text-align:left; flex:0 0 320px; padding:20px 22px 24px; gap:12px; background:linear-gradient(0deg,#779d9b12,transparent 75%); }
 }
-
-/* Current reward receipts derive only from successful claims, and remain readable after completion. */
-body #overlay .card .cqo-frame .cqo-receipt{flex:none;overflow:auto;color:var(--cqo-ink);font-size:22px;line-height:1.45;grid-column:2;grid-row:2;padding:12px 36px 22px;border:0;border-radius:0;background:none;max-height:150px}
-body #overlay .card .cqo-frame .cqo-receipt ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;margin:8px 0 0;padding:0}
-body #overlay .card .cqo-frame .cqo-receipt li{overflow-wrap:anywhere;padding:4px 12px;border-left:2px solid #c9b477;background:none}
 body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-objects,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica[data-reward-count="4"] .reward-objects {max-width:none;grid-template-columns:repeat(4,280px)}
 body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-card,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica[data-reward-count="4"] .reward-card {margin:16px auto 18px}
 body #overlay .card .cqo-frame .cqp-dialog .reward-unit.is-pending-target,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-unit.is-pending-target {outline:none;outline-offset:0;border-bottom:2px solid #c9b477;background:linear-gradient(0deg,#88b6af0d,transparent 60%)}
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-unit.is-pending-target {outline:none;outline-offset:0;border-bottom:2px solid #b7a785;background:linear-gradient(0deg,#88b6af0d,transparent 60%)}
 body #overlay .card .cqo-frame .cqp-dialog .reward-target-label,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-target-label {font-size:20px;text-align:center;line-height:1.3;color:#c9b477}
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-target-label {font-size:20px;text-align:center;line-height:1.3;color:#b7a785}
 body #overlay .card .cqo-frame .cqp-dialog .reward-objects:has(> .reward-unit:nth-child(5)),
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-objects:has(> .reward-unit:nth-child(5)) {grid-template-columns:none;grid-auto-flow:column;max-width:100%;overflow-x:auto;scrollbar-gutter:stable;grid-auto-columns:280px;padding:6px 6px 14px;justify-content:start}
 body #overlay .card .cqo-frame .cqp-dialog .reward-objects:has(> .reward-unit:nth-child(5)) .reward-card,
@@ -633,15 +633,7 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
 
 /* 数量与附赠提示独立于重复来源标题，picker 内保持可见。 */
 body #overlay .card .cqo-frame .cqp-dialog .reward-count,
-body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-count { display:block; font-size:22px; margin:0 0 18px; line-height:1.5; color:#b9d0d1; }
-
-/* Persistent receipt uses settled taken records; no animation, preload or extra card art. */
-body #overlay .card .cqo-frame .cqo-receipt-heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-body #overlay .card .cqo-frame .cqo-receipt-icon{display:inline-flex;width:28px;height:28px;flex:none}
-body #overlay .card .cqo-frame .cqo-receipt-icon img{width:100%;height:100%;object-fit:contain}
-body #overlay .card .cqo-frame .cqo-receipt-count{margin-left:10px;font-variant-numeric:tabular-nums;color:#c9b477}
-body #overlay .card .cqo-frame .cqo-receipt-destination{margin-left:auto;font-size:18px;color:var(--cqo-muted)}
-body #overlay .card .cqo-frame .cqo-receipt li{padding:4px 12px;border-left:2px solid #c9b477;background:none}
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-count { display:block; font-size:22px; margin:0 0 18px; line-height:1.5; color:#b5bcc4; }
 
 /* Fixed event receipts share picker controls without creating an overview or changing commands. */
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica {
@@ -653,12 +645,12 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   max-height:none;
   padding:0;
   border:0;
-  --cqo-ink:#e3ece8;
-  --cqo-muted:#9fb9bd;
-  --cqo-accent:#91c2c6;
-  --cqo-line:#91c2c638;
-  --cqo-glass:rgba(22,45,54,.72);
-  background:#15313a;
+  --cqo-ink:#ebe9e2;
+  --cqo-muted:#a7adb4;
+  --cqo-accent:#aab5bf;
+  --cqo-line:#aab5bf38;
+  --cqo-glass:rgba(30,38,48,.8);
+  background:#1b2027;
   border-radius:10px;
   box-shadow:0 14px 34px #03171d36;
 }
@@ -671,15 +663,15 @@ body #overlay .card .cqo-frame .cqo-intro{
   grid-row:1 / 3;
   display:flex;
   flex-direction:column;
-  gap:26px;
   min-height:0;
-  padding:38px 28px;
   overflow:auto;
-  background:linear-gradient(130deg,#49757e4d,rgba(22,45,54,.72));
   backdrop-filter:blur(18px) saturate(1.15);
   box-shadow:inset 1px 1px 0 #def7ed20,0 7px 18px #04161a26;
-  color:#e3ece8;
-  border-right:1px solid #91c2c629;
+  color:#ebe9e2;
+  border-right:1px solid #aab5bf29;
+  padding:38px 28px;
+  gap:24px;
+  background:linear-gradient(155deg,#343d48b3,#202730b8);
 }
 body #overlay .card .cqo-frame .cqp-dialog .reward-footer-info, body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-footer-info{
   display:flex;
@@ -693,10 +685,10 @@ body #overlay .card .cqo-frame .cqp-dialog .loot-actions :is(.reward-exit,.rewar
   min-width:200px;
   min-height:56px;
   font-size:22px;
-  background:linear-gradient(135deg,#668f93,#3f6b76);
+  background:linear-gradient(135deg,#606c79,#465362);
   color:#f0f4e9;
   border-color:#abc8bf80;
-  box-shadow:inset 0 1px 0 #edfff12b,0 5px 12px #03171d38;
+  box-shadow:none;
 }
 body #overlay .card .cqo-frame .cqp-dialog .reward-bag.danger, body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-bag.danger{
   color:#e7b4a6;
@@ -708,11 +700,11 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
   line-height:1.5;
   margin-bottom:18px;
   letter-spacing:.04em;
-  color:#9fb9bd;
+  color:#a7adb4;
 }
 
 /* Single, non-choice rewards share one compact surface instead of a spare sidebar. */
-body #overlay .card .cqo-frame .cqp-dialog:has(.reward-compact) { width:min(660px,100%); height:min(720px,100%); background:#15313a; }
+body #overlay .card .cqo-frame .cqp-dialog:has(.reward-compact) { width:min(660px,100%); height:min(720px,100%); background:#1b2027; }
 body #overlay .card .cqo-frame .cqp-dialog:has(.reward-compact) .cqp-toolbar { padding:12px 16px 0; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-compact,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact { width:100%; height:100%; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; box-shadow:none; }
@@ -745,3 +737,188 @@ body #overlay .card .cqo-frame .cqp-dialog .reward-compact .loot-actions,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .loot-actions { flex:0 0 auto; }
 body #overlay .card .cqo-frame .cqp-dialog .reward-compact .loot-actions .reward-claim,
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .loot-actions .reward-claim { width:auto; min-width:160px; }
+
+/* Chest claim modes opt in explicitly; other reward surfaces keep their layout. */
+body #overlay .card .cqo-box .cqo-box-mode {
+  display:flex; align-items:center; gap:10px; align-self:flex-start; min-height:34px;
+  padding:5px 12px 5px 7px; border:1px solid #b7c9c849; border-radius:3px;
+  font:600 18px/1.3 var(--font-ui,sans-serif); color:#cbe5dc; background:#163c35;
+}
+body #overlay .card .cqo-box .cqo-box-mode b {
+  display:grid; place-items:center; width:26px; height:26px; border:1px solid currentColor;
+  font-size:20px; line-height:1; border-radius:3px;
+}
+body #overlay .card .cqo-box[data-claim-mode="one"] .cqo-box-mode { color:#f0d491; background:#493b22; border-color:#bba16a7a; }
+body #overlay .card .cqo-box[data-claim-mode="one"] .cqo-box-mode b { border-radius:50%; }
+
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-mode-banner {
+  display:flex; align-items:center; gap:18px; margin:0 0 26px; color:#d8dedc;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-mode-mark {
+  display:grid; place-items:center; flex:none; width:84px; height:84px;
+  border:2px solid #819596; border-radius:8px; color:#dce3df; background:#273338;
+  font:650 60px/1 var(--font-ui,sans-serif); font-variant-numeric:tabular-nums;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-mode-banner b {
+  display:block; margin:0 0 8px; font:600 27px/1.3 var(--font-ui,sans-serif); color:inherit;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-mode-banner span:not(.reward-mode-mark) {
+  display:block; font-size:18px; line-height:1.5; color:#a7b4b1; overflow-wrap:anywhere;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-unit-copy h4 {
+  margin:9px 0; color:#e1eee7; font:600 27px/1.35 var(--font-ui,sans-serif); overflow-wrap:anywhere;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] :is(.reward-item-index,.reward-item-kind) {
+  display:block; color:#9bbab2; font-size:18px; line-height:1.5; font-variant-numeric:tabular-nums;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] :is(.reward-claim,.reward-unit-state) {
+  display:flex; align-items:center; justify-content:center; gap:12px; min-height:58px; box-sizing:border-box;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-claim-mark,
+body #cardZoom :is(.reward-claim-one,.reward-claim-all) .reward-claim-mark {
+  display:grid; place-items:center; flex:none; width:28px; height:28px;
+  border:1px solid currentColor; border-radius:4px; font:600 23px/1 var(--font-ui,sans-serif);
+}
+
+/* One choice: a shared horizontal candidate set, then separately claimable extras. */
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] {
+  grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto;
+  background:#20252b; border-top:3px solid #c9ab6f;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-head {
+  grid-column:1; grid-row:1; padding:22px 32px 18px; border:0; border-bottom:1px solid #c5ab6b42;
+  background:linear-gradient(110deg,#42464b80,#20252b 75%); box-shadow:none; overflow:visible;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-head > div {
+  display:grid; align-items:center; grid-template-columns:minmax(0,1fr) minmax(240px,460px); column-gap:28px;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-mode-banner { margin:0; grid-column:2; grid-row:1 / 4; color:#b8ac91;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-mode-mark {
+  width:76px; height:76px; border-radius:50%; border-color:#d7bc7d; background:#544429; color:#f5dfaa; display:none;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-mode-banner span:not(.reward-mode-mark) { color:#d0bd96; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-head :is(.reward-source,h3,.reward-count,.reward-rule) {
+  grid-column:1; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-head h3 { margin:4px 0; color:#ebe9e2; font-size:32px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] :is(.reward-source,.reward-count) { margin:0; font-size:18px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-main { grid-column:1; grid-row:2; padding:12px 28px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-foot { grid-column:1; grid-row:3; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-objects {
+  display:grid; grid-auto-flow:row; grid-auto-columns:auto; grid-template-columns:repeat(3,280px);
+  justify-content:safe center; align-content:start; gap:16px 32px; min-height:0; padding:0 6px 24px; overflow:visible;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-group-heading {
+  display:flex; grid-column:1 / -1; align-items:baseline; justify-content:space-between;
+  flex-wrap:wrap; gap:10px 24px; width:100%; padding:14px 0 10px; border-bottom:1px solid #c5ab6b57;
+  color:#e0c98f; font-size:20px; line-height:1.4; box-sizing:border-box;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-group-heading strong { font-weight:600; font-size:23px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"] {
+  gap:10px; padding:12px 0 16px; border-bottom:2px solid #c9ab6f70; background:linear-gradient(0deg,#a58b4d15,transparent 70%);
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"] .reward-card { margin:8px auto 12px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"] .reward-unit-copy { order:-1; text-align:center; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"] .reward-item-index { color:#d4c197; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-claim-one,
+body #cardZoom .reward-claim-one {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  border:1px solid #c4b89f; border-radius:3px; background:#b8ac91; color:#20252b;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-claim-one:hover:not(:disabled),
+body #cardZoom .reward-claim-one:hover:not(:disabled) { background:#c8bca2; color:#20252b; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] :is(.reward-claim-one,.reward-state-one) .reward-claim-mark,
+body #cardZoom .reward-claim-one .reward-claim-mark { border-radius:50%; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"].got {
+  border-color:#ebca7c; background:linear-gradient(0deg,#c5a05236,transparent 75%); box-shadow:none;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"].got .reward-card { opacity:1; filter:none; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-state-one.is-received { color:#f1d798; background:#5e4b2b; border-radius:3px; font-size:20px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"].dropped { border-color:#6e777654; background:none; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"].dropped .reward-card { opacity:.25; filter:grayscale(1); }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="choice"].dropped .reward-unit-copy { opacity:.55; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-bonus-heading { margin-top:22px; color:#b1ddc7; border-color:#82b69a66; }
+
+/* All rewards and choice bonuses use independent receipt rows. */
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) {
+  grid-template-columns:260px minmax(0,1fr); background:#1b2329; border-top:3px solid #98aaa7;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-head {
+  padding:32px 24px; background:linear-gradient(155deg,#35414b8c,#202a32); border-right:1px solid #8bb59d3b;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-mode-banner { flex-direction:row; align-items:center; gap:14px; margin-bottom:24px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-mode-mark { width:60px; height:60px; font-size:38px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-head h3 { font-size:32px; margin:0 0 18px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-main { padding:18px 24px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-objects { flex-wrap:nowrap; align-items:stretch; overflow:visible; grid-auto-flow:row; display:grid; grid-template-columns:repeat(3,280px); flex-direction:row; gap:28px; min-height:100%; align-content:center; justify-content:safe center; padding:0 0 16px;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit:not(.reward-coin-unit),
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] { grid-template-columns:150px minmax(120px,1fr) 190px; grid-template-rows:auto; flex:none; min-width:0; border-left:4px solid #8b9aa5; border-radius:4px; display:flex; flex-direction:column; grid-column:auto; width:280px; max-width:280px; gap:12px; padding:12px 0 16px; background:transparent; border:0; border-bottom:1px solid #aab5bf35; align-items:stretch;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit:not(.reward-coin-unit) .reward-card,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] .reward-card {
+  grid-column:1; grid-row:1 / 3; justify-self:start; width:280px; min-width:280px; max-width:280px; margin:8px auto 12px;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit:not(.reward-coin-unit) .reward-card .hs-card,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] .reward-card .hs-card { font-size:18px; width:280px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit-copy,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] .reward-unit-copy { grid-column:2; grid-row:1; min-width:0; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit:not(.reward-coin-unit) :is(.reward-claim,.reward-unit-state),
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] :is(.reward-claim,.reward-unit-state) {
+  grid-column:3; grid-row:1; width:100%; margin:0; font-size:21px; line-height:1.4;
+}
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-claim-all,
+body #cardZoom .reward-claim-all { display:flex; align-items:center; justify-content:center; gap:12px; background:#536171; border:1px solid #8998a5; color:#eceeea; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-claim-all:hover:not(:disabled),
+body #cardZoom .reward-claim-all:hover:not(:disabled) { background:#657587; color:#ffffff; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-state-all.is-received { color:#bbe6cb; background:#234b38; border:1px solid #7cab8b70; border-radius:4px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-state-all.is-received .reward-claim-mark { color:#e6e8e5; background:#518160; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit.got,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"].got { background:#242d34; border-color:#638c7370; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-unit.got .reward-card,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"].got .reward-card { opacity:.65; filter:saturate(.65); }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="all"]:not(.reward-compact) .reward-target-label,
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode="one"] .reward-unit[data-reward-category="bonus"] .reward-target-label { grid-column:2; grid-row:2; align-self:start; justify-self:start; font-size:18px; color:#b8d7c5; }
+
+/* Single rewards retain their compact card surface. */
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode].reward-compact .reward-mode-banner { gap:12px; margin:0 0 12px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode].reward-compact .reward-mode-mark { width:48px; height:48px; font-size:32px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode].reward-compact .reward-mode-banner b { font-size:21px; margin-bottom:2px; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode].reward-compact .reward-unit-copy { display:none; }
+body #overlay .card :is(.cqo-frame .cqp-dialog .reward-replica,.reward-standalone-picker.reward-replica)[data-reward-mode] .reward-claim:disabled,
+body #cardZoom :is(.reward-claim-one,.reward-claim-all):disabled { background:#3a4441; border-color:#7e91876b; color:#9eaea5; box-shadow:none; cursor:default; }
+body #overlay .card .cqo-frame .cqo-overview .cqo-button-primary { background:#b8ac91; border-color:#c4b89f; color:#20252b; box-shadow:none; }
+body #overlay .card .cqo-frame .cqo-overview .cqo-button-quiet { background:transparent; border-color:transparent; box-shadow:none; }
+body #overlay .card .cqo-frame .cqo-overview .cqo-box-complete .cqo-box-mode { background:#29403f; border-color:#9db8aa55; color:#b7cdc2; }
+
+/* 2026-10-21 老板反馈 #3「获得奖励界面不要有上下滑动栏」：1280×720 主分辨率下
+   箱格与单卡拾取区按视口高度自适应收紧（间距/字号不降级到不可读），内容收缩进
+   首屏，不出现纵向滚动条；1920×1080 走基线规则不受影响。只收紧排版 chrome，
+   不改领取规则、按钮结构与 280px 卡面口径。 */
+@media (max-height:880px) {
+  body #overlay .card .cqo-frame .cqo-background { padding:16px 24px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-rewards { padding:18px 28px 10px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-coins { padding:0 0 12px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-boxes { padding:8px 12px 14px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-box { min-height:280px; padding:14px 18px 16px; gap:8px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-box-art { height:clamp(130px,22vh,240px); min-height:130px; }
+  body #overlay .card .cqo-frame .cqo-overview .cqo-box-action { margin-top:8px; padding-top:12px; }
+  body #overlay .card .cqo-frame .cqo-footer { padding:12px 24px; }
+  body #overlay .card .cqo-frame .cqp-shade { padding:16px 24px; }
+  body #overlay .card .cqo-frame .cqp-dialog .cqp-toolbar { padding:0 0 8px; }
+  body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-head,
+  body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-head { padding:8px 20px; }
+  body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-main,
+  body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-main { padding:4px 16px; }
+  body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-foot,
+  body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-foot { padding:8px 20px; }
+  body #overlay .card .cqo-frame .cqp-dialog .reward-stage,
+  body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica .reward-stage { padding:4px 10px 6px; }
+}
+/* 2026-10-21 老板反馈 #8：「返回地图」在页脚按钮行内固定为最右一枚。
+   行级右对齐由 entry-events.css 的 .node-foot flex-end 统一；这里是奖励总览
+   自己的行动行（.cqo-actions 已 margin-left:auto 靠右）与 A 组 chests.js 只读
+   footer 的兜底：靠 order 把 chestReturn 顶到行末，不动 chests.js 文件。 */
+body #overlay .card .cqo-frame .cqo-overview .cqo-actions > [data-act="chestReturn"] { order:9; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-footer-info > [data-act="chestReturn"],
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker .reward-footer-info > [data-act="chestReturn"] { order:9; margin-left:auto; }

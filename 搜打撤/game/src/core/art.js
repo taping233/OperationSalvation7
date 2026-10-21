@@ -158,8 +158,9 @@ import { createForegroundImageYield } from './art-preload-plan.js';
       im.src = url;
     }
   }
+  /** @param {string[]} urls @param {boolean | {retain?:boolean}} [options] */
   function warm(urls, options = true) {
-    const retain = typeof options === 'object' ? options.retain !== false : options !== false;
+    const retain = typeof options === 'object' ? (/** @type {{retain?:boolean}} */ (options)).retain !== false : options !== false;
     for (const url of urls) {
       if (!url || warmedUrls.has(url)) continue;
       warmedUrls.add(url);
@@ -305,7 +306,7 @@ function characterArt(value, full=false, useDefault=false) {
  return `<span role="img" aria-label="${c.name}" class="roster-portrait ${full?'art-full':'art-portrait'}" style="background-image:url('${rosterUrl}');background-size:${1672/width*100}% 100%;background-position:${position}% center;--portrait-ratio:${width}/941;--roster-size:${1672/width*100}% 100%;--roster-position:${position}% center"></span>`;
 }
 
-  sdtDefine('Art', {
+  export const Art = sdtDefine('Art', {
     // 提前预载/解码位图（传 <img> 同款最终 URL），翻页/切页前调用可消掉首帧解码卡顿。
     // opts.retain（默认 true）：把解码位图钉进预热池；CSS 背景图传 false——浏览器对
     // CSS background 有自己的图片缓存，JS 持引用帮不到它，只会白占内存。
@@ -406,7 +407,7 @@ function characterArt(value, full=false, useDefault=false) {
       let done = grand - list.length;   // 已预热过的先计入完成
       if (onProgress && grand) onProgress(done, grand);
       let i = 0;
-      return new Promise((resolve) => {
+      return new Promise(/** @param {(value?: void) => void} resolve */ (resolve) => {
         const scheduleNext = () => {
           const run = () => {
             if (document.body?.classList.contains('cardlib-open')) {
@@ -457,7 +458,7 @@ function characterArt(value, full=false, useDefault=false) {
       if (onProgress && grand) onProgress(done, grand);
       let i = 0;
       const foregroundImagesPending = createForegroundImageYield();
-      return new Promise((resolve) => {
+      return new Promise(/** @param {(value?: void) => void} resolve */ (resolve) => {
         const scheduleNext = () => {
           const run = () => {
             if (document.hidden || document.body?.dataset.state === 'moving'

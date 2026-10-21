@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { createFrameAssets } from './battle.frame-assets.js';
 import { recordFrameStage } from '../../core/flight-recorder.local.js';
 import { RenderScheduler } from '../../core/render-scheduler.js';
@@ -58,6 +59,7 @@ let sprite = null;
 let emptyTexture = null;
 let cur = null;             // { role, fig, img, set, seqs, play, fi, tNext, lastRect }
 let pausedAt = 0;
+let suspended = null;       // Only a retained same-battle settings scene may keep textures while covered.
 let wanted = false;         // 已 attach（战斗进行中）
 let pollTimer = 0;
 let renderHoldT = 0;
@@ -497,7 +499,7 @@ function stopForReducedMotion() {
 }
 
 function tickLoop() {
-  if (!cur || document.hidden || stopForReducedMotion()) return;
+  if (!wanted || !cur || document.hidden || stopForReducedMotion()) return;
   syncFrameSurface();
   const geometry = cur.fig && uiRect(cur.fig);
   tickGeometry = geometry;
@@ -523,7 +525,7 @@ function startLoop() {
       tickLoop();
       // 脏标记跳帧：纹理与 rect 都没变的 tick 直接跳过 renderer.render，
       // 上一帧内容继续显示（两种 canvas 后端均保留已绘画面）；帧率按角色封顶。
-      if (cur && cur.dirty && cur.fig && cur.fig.isConnected
+      if (wanted && cur && cur.dirty && cur.fig && cur.fig.isConnected
           && frameDrawScheduler.shouldDraw(performance.now(), { active: true, covered: document.hidden })) {
         cur.dirty = false;
         app.renderer.render(app.stage);
@@ -538,9 +540,9 @@ function stopGeometryPolling() {
   if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
 }
 function startGeometryPolling() {
-  if (!pollTimer && cur && !document.hidden) {
+  if (!pollTimer && wanted && cur && !document.hidden) {
     pollTimer = setInterval(() => {   // 静止期轮询：rect 变了（回合沉浮/hover）拉起渲染
-      if (!cur || document.hidden || stopForReducedMotion()) return;
+      if (!wanted || !cur || document.hidden || stopForReducedMotion()) return;
       syncFrameSurface();
       const r = cur.fig && uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
       if (!r || !r.width) return;
@@ -564,10 +566,36 @@ function figureRole(img) {
   return key ? key[1] : source && source[1];
 }
 function attach(body) {
-  const fig = body?.querySelector('#btSelf .sts-figure');
-  const img = fig?.querySelector('img');
+  const fig = /** @type {BattleElement} */ (body?.querySelector('#btSelf .sts-figure'));
+  const img = /** @type {HTMLImageElement} */ (fig?.querySelector('img'));
   const role = figureRole(img);
-  const battleToken = fig?.closest('.battle-stage')?._battleToken;
+  const stage = /** @type {BattleElement} */ (fig?.closest('.battle-stage'));
+  const battleToken = stage?._battleToken;
+  if (suspended) {
+    const overlay = document.getElementById('overlay');
+    const sameScene = suspended.stage === stage && suspended.battleToken === battleToken
+      && suspended.body === body && stage?.isConnected && body === document.getElementById('ovBody')
+      && overlay === suspended.overlay && overlay?.isConnected && !overlay.hidden && overlay.contains(body)
+      && !body.querySelector('.battle-secondary-layer');
+    if (!sameScene) hide();
+    else {
+      clearSuspension();
+      wanted = true;
+      setPaused(false);
+      if (cur && (cur.fig !== fig || cur.img !== img)) clearCurrentFigure();
+      // A warm return can commit the retained frame synchronously, without a blank reload window.
+      if (cur?.fig === fig && cur.img === img && cur.role === role && cur.battleToken === battleToken
+          && liveFrameApp && !reduceMotion() && !staticDiagnostic()) {
+        img.style.visibility = 'hidden';
+        syncFrameSurface(true); layout();
+        liveFrameApp.renderer.render(liveFrameApp.stage);
+        const host = document.getElementById('unitFrames');
+        if (host) host.hidden = false;
+        startGeometryPolling(); wakeRenderer(600);
+        return Promise.resolve(true);
+      }
+    }
+  }
   if (pendingAttach?.battleToken === battleToken && pendingAttach?.body === body && pendingAttach.fig === fig && pendingAttach.img === img && pendingAttach.role === role) return pendingAttach.promise;
   const request = { body, fig, img, role, battleToken, promise: null };
   pendingAttach = request;
@@ -577,11 +605,11 @@ function attach(body) {
 async function attachCurrent(body) {
   const token = ++lifecycle;
   wanted = true;
-  const fig = body && body.querySelector('#btSelf .sts-figure');
-  const img = fig && fig.querySelector('img');
+  const fig = body && /** @type {BattleElement} */ (body.querySelector('#btSelf .sts-figure'));
+  const img = fig && /** @type {HTMLImageElement} */ (fig.querySelector('img'));
   if (!fig || !img) { hide(); return; }
   const role = figureRole(img);
-  const stage = fig.closest('.battle-stage');
+  const stage = /** @type {BattleElement} */ (fig.closest('.battle-stage'));
   const battleToken = stage?._battleToken;
   const isCurrentFigure = () => stage?._battleToken === battleToken && isLiveBattleFigure(body, fig);
   if (cur && (cur.role !== role || cur.battleToken !== battleToken)) clearCurrentFigure();
@@ -649,7 +677,7 @@ async function attachCurrent(body) {
 
 // 动作触发：'atk' 攻击（起手连命中）/ 'cast' 施法 / 'hurt' 受击
 function play(name, { continueActive = false } = {}) {
-  if (!cur || !cur.set || cur.dying || document.hidden || stopForReducedMotion()) return false;
+  if (!wanted || !cur || !cur.set || cur.dying || document.hidden || stopForReducedMotion()) return false;
   if (!ACT_SEQS[name]) return false;
   if (continueActive && cur.action === name && cur.play && !cur.play.loop) return true;
   if (fixedFrameRole(cur.role)) {
@@ -669,24 +697,24 @@ function play(name, { continueActive = false } = {}) {
 }
 
 export function actionImpactRemaining(cue, battleToken) {
-  if (!cur?.play || cur.battleToken !== battleToken || cur.dying || document.hidden
+  if (!wanted || !cur?.play || cur.battleToken !== battleToken || cur.dying || document.hidden
     || reduceMotion() || cur.action !== cueAction(cue) || !cur.fig?.isConnected) return null;
   return frameImpactRemaining({ role: cur.role, timeline: cur.play, index: cur.fi,
     nextAt: cur.tNext, now: pausedAt || performance.now() });
 }
 
 function presentDeath(player) {
-  if (!cur || !fixedFrameRole(cur.role) || document.hidden || reduceMotion()) return null;
+  if (!wanted || !cur || !fixedFrameRole(cur.role) || document.hidden || reduceMotion()) return null;
   if (cur.dying) return cur.deathPromise;
   const timeline = buildTimeline('death');
   if (!timeline) return null;
   cur.dying = true; cur.resumeAfter = null;
-  const health = cur.fig.closest('#btSelf')?.querySelector('.bt-hpwrap');
+  const health = /** @type {BattleElement} */ (cur.fig.closest('#btSelf')?.querySelector('.bt-hpwrap'));
   if (health) {
-    const label = health.querySelector('span');
+    const label = /** @type {BattleElement} */ (health.querySelector('span'));
     const maxHp = player?.maxHp ?? label?.textContent.split('/')[1];
     if (label && maxHp != null) label.textContent = `0/${maxHp}`;
-    health.querySelectorAll(':scope > div').forEach(bar => { bar.style.width = '0%'; });
+    /** @type {NodeListOf<BattleElement>} */ (health.querySelectorAll(':scope > div')).forEach(bar => { bar.style.width = '0%'; });
   }
   cur.deathPromise = new Promise(resolve => { cur.deathResolve = resolve; });
   cur.deathStage = cur.fig.closest('.battle-stage');
@@ -719,8 +747,53 @@ function clearCurrentFigure() {
   if (sprite && emptyTexture) sprite.texture = emptyTexture;
 }
 
-// 战斗收尾/弹层挂起：卸下 sprite，恢复静态 img
+function clearSuspension() {
+  suspended?.observer.disconnect();
+  suspended = null;
+}
+
+function suspendSettingsScene(mode) {
+  const body = document.getElementById('ovBody');
+  const overlay = document.getElementById('overlay');
+  const layer = body?.querySelector('.battle-secondary-layer');
+  // The full battle-settings presenter uses boolean wide mode; require its marker.
+  if (mode !== 'settings' && !(mode === true && layer?.querySelector('.bt-settings'))) return false;
+  const fig = pendingAttach?.fig || cur?.fig || suspended?.stage.querySelector('#btSelf .sts-figure');
+  const stage = /** @type {BattleElement} */ (fig?.closest('.battle-stage.sts'));
+  const battleToken = pendingAttach?.battleToken ?? cur?.battleToken ?? suspended?.battleToken;
+  // showOverlay broadcasts while mountCombatOverlay temporarily detaches this scene.
+  // Its synchronous caller must restore that exact scene before the observer checkpoint.
+  if (!overlay || !overlay.contains(body) || !layer || !stage || battleToken == null
+      || stage._battleToken !== battleToken) return false;
+  if (suspended?.stage === stage && suspended.battleToken === battleToken) return true;
+  clearSuspension();
+  lifecycle++;
+  if (pendingAttach?.img) { pendingAttach.img.style.visibility = ''; imageOwners.delete(pendingAttach.img); }
+  pendingAttach = null;
+  wanted = false;
+  setPaused(true);
+  if (cur?.img) cur.img.style.visibility = '';
+  const host = document.getElementById('unitFrames');
+  if (host) host.hidden = true;
+  clearTimeout(renderHoldT); renderHoldT = 0;
+  stopGeometryPolling();
+  liveFrameApp?.stop();
+  const validateScene = () => {
+    if (suspended?.stage === stage && (body !== document.getElementById('ovBody')
+        || !stage.isConnected || stage._battleToken !== battleToken || !body.contains(stage)
+        || overlay !== document.getElementById('overlay') || overlay.hidden || !overlay.contains(body))) hide();
+  };
+  const observer = new MutationObserver(validateScene);
+  suspended = { body, stage, battleToken, overlay, observer };
+  observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
+  queueMicrotask(validateScene);
+  return true;
+}
+
+// Battle exit and unretained pages release resources; retained settings only suspend above.
+/** @param {string | Event} [diagnostic] */
 function hide(diagnostic = 'released') {
+  clearSuspension();
   setPaused(false);
   lifecycle++;
   if (pendingAttach?.img) { pendingAttach.img.style.visibility = ''; imageOwners.delete(pendingAttach.img); }
@@ -774,9 +847,11 @@ function armBattleEndHide() {
   battleEndHideArmed = true;
   busOn('battle:end', () => hide());
 }
-// 2026-09-13 留言（白名单）：人物序列帧只允许出现在 battle 模式的弹层里——
-// 奖励/搜刮/背包/卡牌库等任何其他模式渲染时一律卸下，新增界面默认不在白名单。
-document.addEventListener('sdt-overlay-mode', (e) => { if (e.detail !== 'battle') hide(); });
+// Frames remain visible only in battle mode. Retained settings keep one hidden role set;
+// any other page, discarded scene, overlay close, or battle end still releases ownership.
+document.addEventListener('sdt-overlay-mode', (e) => {
+  if (/** @type {CustomEvent} */ (e).detail !== 'battle' && !suspendSettingsScene(/** @type {CustomEvent} */ (e).detail)) hide();
+});
 document.addEventListener('sdt-overlay-close', hide);
 
 export { attach, play, hide, isLiveBattleFigure, cacheStats, setPaused, presentDeath };

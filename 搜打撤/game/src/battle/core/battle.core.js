@@ -20,6 +20,8 @@ import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { configureBattleEngine, getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
+import { addTempCard } from './battle.engine.js';
+import { esc } from '../../core/shared.js';
 // The browser composition root owns compatibility services; the engine receives narrow ports.
 configureBattleEngine({
   cards: {
@@ -291,7 +293,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
 
   // R3-a 可信预览窄口：只把真实结算所需的当前上下文复制出去，
   // 不暴露内部 Map/Set，不执行卡牌效果、RNG 或 Combat hooks。
-  function getPreviewContext(uid, targetIndex) {
+  // handRuleContext is private to one synchronous hover batch, never a saved preview.
+  function getPreviewContext(uid, targetIndex, handRuleContext = null) {
     const entry = findCard(uid);
     const card = entry && entry.card;
     const target = foes[+targetIndex];
@@ -305,7 +308,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     else if ((battleState.phase !== BATTLE_PHASES.PLAYER && !matchingTargeting) || busy) illegalReason = '当前不能打出卡牌';
     else if (infusing || discovering || choosing || viewingGrave || viewingDeck) illegalReason = '请先完成当前操作';
     else {
-      const why = unplayableReason(card);
+      const why = unplayableReason(card, handRuleContext);
       if (why) illegalReason = `当前无法打出：${why}`;
       else if (need !== 'enemy') illegalReason = '这张牌不能指定敌人';
       else if (target.dead) illegalReason = '该目标已经倒下';
@@ -389,6 +392,15 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   // —— 开发者控制台（2026-09-19 留言 #22：战斗中 Ctrl+L 弹出）——
   // 调试能力统一入口：只有 openDevConsole 的按钮会调用，不进任何常规交互链路
   function devCommand(name, arg) {
+    if (name === 'card') {
+      const card = SDT.Cards.all().find(card => card.id === arg);
+      if (!G?.battleActive || !card) return false;
+      addTempCard(card);
+      SDT.Agent?.recorder?.noteIntervention?.('dev-console', `战斗发卡:${card.name}`);
+      G.log(`[[icon:cards]] 开发者：获得【${esc(card.name)}】（当前战斗临时卡）`, 'sys');
+      requestBattleRender();
+      return true;
+    }
     // 2026-10-03 老板（SYS-11）：战斗调试命令入干预履历（含「直接胜利」钩子）——
     // 只加一行记录，不改任何结算行为；未知命令仍走 default 返回 false，不记。
     if (['energy', 'draw', 'heal', 'freezeAll', 'damageAll', 'win'].includes(name)) {
@@ -459,6 +471,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
       const card = findEffectiveCard(uid)?.card;
       const reason = missingInfusionReason(card, 0, allSpellsInfused);
       if (reason) { G.log(reason, 'warn'); return; }
+      const pending = interactionOf('card');
+      if (pending?.uid === uid) set$interaction({ ...pending, fuelUids:[], foeFightFirst:null });
       cancelInfuse(); play(uid, null, true);
     },
     useEquipSkill,

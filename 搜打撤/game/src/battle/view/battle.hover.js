@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：指向悬停效果预览（layers 与 aim 共用，故独立成片）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
@@ -5,14 +6,14 @@ import { esc } from '../../core/shared.js';
 import { cardRuleHint, previewAction } from './battle.preview.js';
 import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle.core.js';
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
-  function showFoePreview(el, idx, uid, card, interactionMode, hoverSnapshot = null) {
+  function showFoePreview(el, idx, uid, card, interactionMode, hoverSnapshot = null, handRuleContext = null) {
     // 气泡每次都用同一时刻的当前快照/上下文重算，避免拖拽缓存与新 core 状态混用。
     if (interactionMode === 'click') {
-      document.querySelectorAll('.bt-foe .bt-fpreview[data-preview-mode="click"]').forEach(preview => {
+      /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('.bt-foe .bt-fpreview[data-preview-mode="click"]')).forEach(preview => {
         if (preview.parentElement !== el) preview.remove();
       });
     }
-    const existing = el.querySelector('.bt-fpreview');
+    const existing = /** @type {BattleElement} */ (el.querySelector('.bt-fpreview'));
     const previousMode = existing && existing.dataset.previewMode;
     if (existing) existing.remove();
     const snapshot = hoverSnapshot || getSnapshot();
@@ -20,7 +21,7 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
     const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;
     const previewUid = uid || snapshot.pendingTarget?.uid;
-    let context = getPreviewContext(previewUid, idx);
+    let context = getPreviewContext(previewUid, idx, handRuleContext);
     if (!context) return;
     // 仅普通手牌选靶复用真实提交检查；道具/技能/免费施放预览沿用自身上下文。
     const ordinaryHandTarget = previewUid != null
@@ -28,7 +29,9 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
       && snapshot.hand?.some(entry => (typeof entry === 'object' ? entry?.uid : entry) === previewUid)
       && !context.isFreeCast && !snapshot.pendingItem && !snapshot.slamPending && !snapshot.dartPending;
     if (ordinaryHandTarget) {
-      const availability = commands.getCardPlayAvailability(previewUid, idx);
+      const availability = handRuleContext
+        ? commands.getCardPlayAvailability(previewUid, idx, false, handRuleContext)
+        : commands.getCardPlayAvailability(previewUid, idx);
       if (availability.status === 'rejected') context = {
         ...context, legal: false, illegalReason: availability.reason?.message || '当前无法打出这张牌',
       };
@@ -72,16 +75,16 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
     if (result.legal && interactionMode !== 'click' && previousMode !== interactionMode) SDT.Sound.sfx('hover');
   }
   function clearFoePreview(el) {
-    const p = el.querySelector('.bt-fpreview');
+    const p = /** @type {BattleElement} */ (el.querySelector('.bt-fpreview'));
     if (p) p.remove();
   }
 
   let thoughtBubbleTimer = 0;
   function showThoughtBubble(reason, persist = false) {
-    const stage = document.querySelector('#overlay .battle-stage');
-    const speaker = stage && stage.querySelector('#btSelf');
+    const stage = /** @type {BattleElement} */ (document.querySelector('#overlay .battle-stage'));
+    const speaker = stage && /** @type {BattleElement} */ (stage.querySelector('#btSelf'));
     if (!stage || !speaker || !reason) return;
-    const current = speaker.querySelector('.bt-thought-bubble');
+    const current = /** @type {BattleElement} */ (speaker.querySelector('.bt-thought-bubble'));
     if (current?.dataset.reason === reason) {
       clearTimeout(thoughtBubbleTimer);
       thoughtBubbleTimer = persist ? 0 : setTimeout(clearThoughtBubble, 1500);
@@ -99,7 +102,7 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
   function clearThoughtBubble() {
     clearTimeout(thoughtBubbleTimer);
     thoughtBubbleTimer = 0;
-    document.querySelectorAll('#overlay .bt-thought-bubble').forEach(bubble => bubble.remove());
+    /** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('#overlay .bt-thought-bubble')).forEach(bubble => bubble.remove());
   }
 
 export { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble };

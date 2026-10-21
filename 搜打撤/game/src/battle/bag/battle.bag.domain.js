@@ -28,7 +28,7 @@ function createBattleBag({
   processDiscoverQueue, randomDiscoverCard,
   getConsumedPile: readConsumed = () => readConsumedPile({ hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, played: instanceRuntime.played, consumed: instanceRuntime.consumed, discard: instanceRuntime.discard, grave: instanceRuntime.grave }),
   takeConsumedCard = uid => takeFromConsumedPile({ hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, played: instanceRuntime.played, consumed: instanceRuntime.consumed, discard: instanceRuntime.discard, grave: instanceRuntime.grave }, uid, 'hand'),
-  markCardResolving = () => {},
+  markCardResolving = /** @type {(uid: string, marker: object, active: boolean) => void} */ (() => {}),
 }) {
   const pendingItems = new Map();
   const sameBattle = marker => marker?.game === instanceRuntime.G && marker?.token === instanceRuntime.battleState.token;

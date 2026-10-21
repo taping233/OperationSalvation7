@@ -88,3 +88,41 @@ body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-r
   body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card { transition:none; }
 }
 body.reduce-motion #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card { transition:none; }
+
+/* Card-choice composition: a centred card row over the current battlefield.
+   The 350 ms readiness and single-submit policy live in discover-input. */
+/* Retained-stage opacity blends into this opaque combat base, never the map. */
+body #overlay:has(.battle-secondary-layer .battle-discover-panel) #ovBody {
+  background:#10161b!important; isolation:isolate; overflow:hidden!important;
+}
+body #overlay .battle-secondary-layer:has(.battle-discover-panel)::before { content:''; position:absolute; inset:0; z-index:-1; background:#050d1766; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] {
+  width:1700px!important; max-width:100%!important; border:0!important; background:none!important; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head { padding:12px 40px 10px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head h3 { color:#eee3c6; font-size:36px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head>span { color:#c2d3dc; font-size:19px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-summary { padding:0 40px 14px; border:0; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-content { padding:6px 30px 20px; overflow:hidden!important; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-panel { gap:8px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-options { gap:52px!important; padding:16px 20px!important; align-items:start!important; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-slot { display:flex; flex:0 0 300px!important; flex-direction:column; width:300px!important; gap:8px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card.bt-card { width:300px!important; gap:10px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card.bt-card>.hs-card { width:300px!important; max-width:none!important; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card-notes { display:grid; gap:5px; color:#c4d5dd; font:400 18px/1.5 var(--font-ui,sans-serif); }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-equipment-note { margin:0; padding:0 8px; font-size:18px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-card-inspect { align-self:center; min-height:38px; padding:5px 14px; border:0; text-decoration:underline; color:#d1e0e5; font-size:18px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-rules { display:flex; justify-content:center; flex-wrap:wrap; gap:4px 28px; padding:8px 14px 0; font-size:18px; }
+body #overlay .battle-discover-rules p { margin:0; }
+body #overlay:has(.battle-discover-panel) #ovBody > .battle-stage.sts { filter:blur(7px); opacity:.72; }
+/* Discovery keeps the scene, while its cards own the available controls. */
+body #overlay:not([hidden]):has(.battle-secondary-layer [data-battle-discover]) #ovBody > .battle-stage.sts .sts-hud,
+body:has(#overlay:not([hidden]) .battle-secondary-layer [data-battle-discover]) #sidebar {
+  display:none!important;
+}
+body #overlay:has(.battle-discover-panel) > :is(#unitFrames,.battle-scene-foreground) { visibility:hidden!important; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head { display:none; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-summary { justify-content:center; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-progress { color:#eee3c6; font-size:30px; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-card-inspect { min-width:38px; min-height:38px; width:38px; height:38px; padding:0; border:1px solid #9cb5c55e; border-radius:50%; background:#10212b; text-decoration:none; font-size:27px; }
+body #overlay .battle-discover-critical { color:#d9c4a6; text-align:center; font-size:18px; }

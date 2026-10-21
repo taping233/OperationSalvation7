@@ -2,6 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量）；攻击表现 cue 来自白名单模块。 */
 import { attackCue } from '../view/battle.attack-cues.js';
+import { isClassCard } from '../../cards/card-rarity.js';
 export function damageSteps(s) {
   const {combat, getAlive, log, addTempCard, allCards, isRandomObtainable, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
   const drain = steps => {
@@ -189,7 +190,8 @@ export function damageSteps(s) {
         when: (ctx) => ctx.desc.match(/变成\s*(\d+|一)\s*张随机\s*(招式|武术|法术)?\s*卡牌/),
         run: (ctx, m) => {
           const want = m[2] === '招式' ? ['武术', '法术'] : [m[2] === '法术' ? '法术' : '武术'];
-          const pool = allCards().filter(c => want.includes(c.type) &&
+          // 反馈#2：随机获得/变形类卡池一律排除职业卡（isClassCard），招式分支另走完整目录门
+          const pool = allCards().filter(c => want.includes(c.type) && !isClassCard(c) &&
             (m[2] === '招式' ? isRandomObtainable(c) : c.rarity !== '衍生'));
           const c = pool.length ? pool[Math.floor(random01() * pool.length)] : null;
           if (c) {
@@ -206,6 +208,7 @@ export function damageSteps(s) {
           const key = m[2] === '箭矢' ? '箭' : m[2];
           const count = m[1] ? +m[1] : 1;   // 消费数量捕获组（旧实现恒 1 张，未来「获得 2 张」会少给）
           const pool = allCards().filter(c => c.rarity !== '衍生' && !['生物', '事件'].includes(c.type) &&
+            !isClassCard(c) &&   // 反馈#2：随机获得不得产出职业卡（火球/药水等名词池同样收口）
             (key === '杀' ? (c.id === 'starter-attack' || c.name === '杀' || c.name === '初始攻击')
               : key === '招式' ? c.type === '武术'
               : String(c.name || '').includes(key)));

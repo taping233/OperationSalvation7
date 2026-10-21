@@ -15,6 +15,13 @@ export function cameraPanBounds(map, camera = {}) {
   const zoom = camera.zoom || 1, width = camera.viewW || 0, height = camera.viewH || 0;
   const inset = camera.detailInset || 0, available = Math.max(0, width - inset);
   const unit = width / 1280;
+  if (points?.length && camera.frameMode !== 'overview' && camera.panFrameMode !== 'overview') {
+    // Edge nodes can occupy the centre too; retain surrounding space instead
+    // of pushing an entry back inside the full layer's bounding box.
+    const margin = 160 * unit / zoom, shift = inset / (2 * zoom);
+    return { minX:minX + shift - margin, maxX:maxX + shift + margin,
+      minY:minY - margin, maxY:maxY + margin };
+  }
   const side = Math.min(available * .16, 120 * unit);
   const top = Math.min(height * .23, 105 * unit), bottom = Math.min(height * .30, 190 * unit);
   // Keep the padded node envelope inside the usable viewport. If it fits on an
@@ -39,7 +46,7 @@ const rubber = (value, min, max, limit) => {
 // Pointer movement stays direct. Only release uses the existing Motion inertia
 // generator; the camera owns its rAF and can cancel it with any new input.
 export function createMapDragMotion(camera, {
-  invalidate = () => {}, now = () => performance.now(),
+  invalidate = /** @type {(active:boolean)=>void} */ (() => {}), now = () => performance.now(),
   requestFrame = callback => requestAnimationFrame(callback),
   cancelFrame = frame => cancelAnimationFrame(frame), reduced = () => false,
 } = {}) {

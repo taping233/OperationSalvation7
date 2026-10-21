@@ -44,15 +44,15 @@ export function presentHub(ui, html, icons) {
   const template = document.createElement('template');
   template.innerHTML = icons.rich ? icons.rich(html) : html;
   const next = template.content.querySelector('#hubMain');
-  if (current.dataset.page !== next.dataset.page) {
+  if (current.dataset.page !== /** @type {HTMLElement} */ (next).dataset.page) {
     ui.showOverlay('', html, 'page');
     positionNavigation(document.getElementById('hubMain'));
     restoreReading(document.getElementById('hubMain'));
     return;
   }
   const page = current.querySelector('.hub-page');
-  const nextPage = next.querySelector('.hub-page');
-  const changed = (page.dataset.motionView || page.dataset.view) !== (nextPage.dataset.motionView || nextPage.dataset.view);
+  const nextPage = /** @type {HTMLElement} */ (next.querySelector('.hub-page'));
+  const changed = (/** @type {HTMLElement} */ (page).dataset.motionView || /** @type {HTMLElement} */ (page).dataset.view) !== (nextPage.dataset.motionView || nextPage.dataset.view);
   current.className = next.className;
   const back = current.querySelector('.hub-back'), nextBack = next.querySelector('.hub-back');
   if (back && nextBack) for (const name of ['data-act', 'aria-label', 'title']) back.setAttribute(name, nextBack.getAttribute(name));
@@ -64,7 +64,7 @@ export function presentHub(ui, html, icons) {
   const navKey = nav => [...(nav?.querySelectorAll('.hub-tab') || [])].map(button => button.dataset.tab).join('/');
   if (navKey(currentNav) !== navKey(nextNav)) currentNav.innerHTML = nextNav.innerHTML;
   for (const button of current.querySelectorAll('.hub-tab')) {
-    const replacement = next.querySelector(`.hub-tab[data-tab="${button.dataset.tab}"]`);
+    const replacement = next.querySelector(`.hub-tab[data-tab="${/** @type {HTMLElement} */ (button).dataset.tab}"]`);
     button.className = replacement.className;
     button.setAttribute('aria-pressed', replacement.getAttribute('aria-pressed'));
     if (replacement.hasAttribute('aria-current')) button.setAttribute('aria-current', 'page');
@@ -75,11 +75,11 @@ export function presentHub(ui, html, icons) {
   const originalImage = visibleHero?.querySelector('img');
   const oldEcho = visibleHero?.querySelector('[data-portrait-echo]');
   const visibleImage = oldEcho && Number(getComputedStyle(originalImage).opacity) < .5 ? oldEcho : originalImage;
-  const before = { view: page.dataset.view, portrait: visibleHero?.getBoundingClientRect(), source: visibleImage?.currentSrc || visibleImage?.src };
+  const before = { view: /** @type {HTMLElement} */ (page).dataset.view, portrait: visibleHero?.getBoundingClientRect(), source: /** @type {HTMLImageElement} */ (visibleImage)?.currentSrc || /** @type {HTMLImageElement} */ (visibleImage)?.src };
   page.getAnimations?.({ subtree: true }).forEach(animation => animation.cancel());
   page.className = nextPage.className.replace(' page-in', '');
-  page.dataset.view = nextPage.dataset.view;
-  page.dataset.motionView = nextPage.dataset.motionView || nextPage.dataset.view;
+  /** @type {HTMLElement} */ (page).dataset.view = nextPage.dataset.view;
+  /** @type {HTMLElement} */ (page).dataset.motionView = nextPage.dataset.motionView || nextPage.dataset.view;
   const previousRegions = regionContents(page);
   const keptPortrait = updatePersonnel(page, nextPage, reducedMotion(), before);
   if (!keptPortrait) {
@@ -91,7 +91,7 @@ export function presentHub(ui, html, icons) {
   current.querySelector('.camp-notice')?.remove();
   const notice = next.querySelector('.camp-notice');
   if (notice) current.append(notice);
-  ui._acts = { ...(document.getElementById('cardZoom')?._inventoryActions || {}) };
+  ui._acts = { ...(/** @type {HTMLElement & {_inventoryActions?: Record<string, (...args: unknown[]) => unknown>}} */ (document.getElementById('cardZoom'))?._inventoryActions || {}) };
   if (changed && !keptPortrait && !reducedMotion() && page.animate) {
     enterRegions(page, navigationChange(previousNavigation, navigationState(current)));
   }
@@ -310,7 +310,7 @@ function updatePersonnel(page, next, reduced, before) {
 }
 
 export function bindHubBrowse(root, scroll, focus) {
-  const page = root.querySelector('.hub-page');
+  const page = /** @type {HTMLElement} */ (/** @type {HTMLElement} */ (/** @type {HTMLElement} */ (/** @type {HTMLElement} */ (root.querySelector('.hub-page')))));
   page.onscroll = () => scroll.set(page.dataset.view, page.scrollTop);
   if (root.dataset.browseBound) return;
   root.dataset.browseBound = 'true';
@@ -324,7 +324,7 @@ export function bindHubBrowse(root, scroll, focus) {
 
 export function restoreHubFocus(viewKey, focus) {
   const restore = () => {
-    if (document.querySelector('#hubMain .hub-page')?.dataset.view !== viewKey) return;
+    if (/** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-page'))?.dataset.view !== viewKey) return;
     const data = focus.get(viewKey);
     if (!data) return;
     const available = element => !element.matches(':disabled') && !element.closest('[hidden], [inert], [aria-hidden="true"]');
@@ -332,10 +332,10 @@ export function restoreHubFocus(viewKey, focus) {
     // A completed trade can disable or remove its action. Keep keyboard browsing
     // on the page's declared safe target, without activating another transaction.
     const target = controls.find(element =>
-      data.browserKey ? element.dataset.browserKey === data.browserKey : Object.entries(data).every(([key, value]) => key === 'initialFocus' || element.dataset[key] === value))
+      data.browserKey ? /** @type {HTMLElement} */ (element).dataset.browserKey === data.browserKey : Object.entries(data).every(([key, value]) => key === 'initialFocus' || /** @type {HTMLElement} */ (element).dataset[key] === value))
       || controls.find(element => element.hasAttribute('data-focus-fallback'));
     target?.setAttribute('data-initial-focus', '');
-    target?.focus({ preventScroll: true });
+    /** @type {HTMLElement} */ (target)?.focus({ preventScroll: true });
   };
   if (!document.getElementById('cardZoom')) { restore(); return null; }
   const observer = new MutationObserver(() => {

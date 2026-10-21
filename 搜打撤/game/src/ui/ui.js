@@ -7,6 +7,8 @@ import { termKeyFor } from './term-tips.js';
 import { overlayMethods } from './overlay.js';
 import { cinematicsMethods } from './cinematics.js';
 import { hudMethods } from './hud.js';
+import { completeSurfaceMotion } from './motion-completion.js';
+import { motionTiming } from './motion-presets.js';
   /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
@@ -36,7 +38,8 @@ function revealPhotoSource(request) {
  * 弹窗容器/演出过渡/HUD 三块行为拆入 overlay.js / cinematics.js / hud.js 的方法包，
  * 此处展开组装。方法包内部一律走 this，调用方仍经 SDT.UI / import { UI }，导出面不变。 */
   const UI = {
-    el: {},
+    .../** @type {import('./ui.dom.types.js').UILazyState} */ ({}),
+    el: /** @type {Partial<import('./ui.dom.types.js').UIElements>} */ ({}),
     _acts: {},   // 弹窗按钮动作表：data-act → 回调
     _baseActs: {},   // 全局基础动作（页面同名动作优先）
     _roomActive: false, // 地图格子的整段结算都保持为全屏房间页
@@ -51,7 +54,7 @@ function revealPhotoSource(request) {
         logPanel: $('logPanel'),
         overlay: $('overlay'), ovTitle: $('ovTitle'), ovBody: $('ovBody'), ovCloseX: $('ovCloseX'),
         tooltip: $('tooltip'),
-        tglIndex: $('tglIndex'),
+        tglIndex: /** @type {HTMLInputElement} */ ($('tglIndex')),
         btnExport: $('btnExport'), btnImport: $('btnImport'), btnClear: $('btnClear'),
         devTools: $('devTools'),
         devBattle: $('devBattle'), devBoss: $('devBoss'),
@@ -61,7 +64,8 @@ function revealPhotoSource(request) {
         layerZh: $('layerBannerZh'), layerEn: $('layerBannerEn'),
       };
       this.el.ovBody.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-act]');
+      if (!(e.target instanceof Element)) return;
+        const btn = /** @type {HTMLElement} */ (e.target.closest('[data-act]'));
         if (!btn) return;
         const fn = this._acts[btn.dataset.act] || this._baseActs[btn.dataset.act];
         if (fn) {
@@ -98,7 +102,7 @@ function revealPhotoSource(request) {
         if (e.key === 'Escape') {
           // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是关面板
           if (e.isComposing || e.keyCode === 229) return;
-          const zoom = document.getElementById('cardZoom');
+          const zoom = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
           // 特写收回时会把焦点还给来源卡；同一次按键的重复消息仍属于特写。
           if (zoom || e.repeat) {
             if (!e.repeat) zoom?._closeCardZoom?.();
@@ -132,11 +136,11 @@ function revealPhotoSource(request) {
     // 2026-09-12 留言：opts.from 传来源卡元素（或 rect）时走 FLIP——从来源卡的位置与
     // 尺寸放大到居中位，替代统一的中央淡入；未传 from 的调用点维持原 czIn 动画。
     // （本方法被 tests/premium-ui-pages.test.js 源码断言钉死在本文件，不得外移）
-    showCardZoom(card, opts = {}) {
+    showCardZoom(card, opts = /** @type {import("./ui.dom.types.js").CardZoomOptions} */ ({})) {
       if (!card) return;
       const descriptionRenderer = opts.descriptionRenderer || createCardDescriptionRenderer(SDT.Cards?.all?.() || []);
       const referenceTrail = opts.referenceTrail || [];
-      const old = document.getElementById('cardZoom');
+      const old = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
       if (old) {
         if (typeof old._closeCardZoom === 'function') old._closeCardZoom(true);
         else old.remove();
@@ -164,14 +168,14 @@ function revealPhotoSource(request) {
       const photoMode = opts.presentation === 'photo';
       // The gallery opts into the approved take-photo entrance; other zooms keep their timing.
       const photoAtelierMotion = photoMode && opts.photoMotion === 'atelier';
-      const photoEnterMs = photoAtelierMotion ? 420 : 140;
-      const photoCloseMs = 120;
+      const photoEnterMs = photoAtelierMotion ? motionTiming.photoAtelierEnter : motionTiming.photoEnter;
+      const photoCloseMs = motionTiming.photoExit;
       const photoArt = photoMode && SDT.Art?.cardIcon ? SDT.Art.cardIcon(card, { low: true }) : '';
       let photoFullSrc = '';
       if (photoMode && SDT.Art?.cardIcon) {
         const fullArt = document.createElement('template');
         fullArt.innerHTML = SDT.Art.cardIcon(card);
-        photoFullSrc = fullArt.content.querySelector('img')?.getAttribute('src') || '';
+        photoFullSrc = /** @type {HTMLImageElement} */ (fullArt.content.querySelector('img'))?.getAttribute('src') || '';
       }
       const photoRarity = photoMode ? SDT.Cards.rarityOf(card) : '';
       const photoMount = photoMode ? photoMountFor(photoRarity) : null;
@@ -208,7 +212,7 @@ function revealPhotoSource(request) {
           ${noteHTML}
         </aside>
       </div>` : '';
-      const el = document.createElement('div');
+      const el = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.createElement('div'));
       el.id = 'cardZoom';
       if (opts.presentation === 'expedition') el.classList.add('expedition-card-zoom');
       if (opts.presentation === 'inventory') el.classList.add('inventory-zoom');
@@ -221,7 +225,7 @@ function revealPhotoSource(request) {
         if (photoAtelierMotion) el.classList.add('cz-photo-atelier');
         // Reserve the same artwork ratio before the full-resolution image decodes.
         // Thumbnail and original share composition; this avoids a frame jump on first open.
-        const sourceImage = opts.from?.querySelector?.('img');
+        const sourceImage = /** @type {HTMLImageElement} */ (opts.from?.querySelector?.('img'));
         const sourceRatio = sourceImage?.naturalHeight > 0 ? sourceImage.naturalWidth / sourceImage.naturalHeight : 1;
         el.style.setProperty('--cz-photo-ratio', String(sourceRatio > 0 ? sourceRatio : 1));
         if (!reducedMotion) el.classList.add('cz-photo-entering');
@@ -241,10 +245,10 @@ function revealPhotoSource(request) {
         ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}`;
       if (photoMode) {
         // Keep the dismissal control beside the back-sign, within the same photo group.
-        el.querySelector('.cz-photo-info').prepend(el.querySelector('.cz-close'));
+        /** @type {HTMLElement} */ (el.querySelector('.cz-photo-info')).prepend(/** @type {HTMLElement} */ (el.querySelector('.cz-close')));
       }
       if (!photoMode && card.desc) {
-        const description = el.querySelector('.cz-card .hsc-desc');
+        const description = /** @type {HTMLElement} */ (el.querySelector('.cz-card .hsc-desc'));
         if (description) description.innerHTML = '<span>' + descriptionRenderer.render(card.desc, card.id, opts.descriptionQuery || '') + '</span>';
       }
       if (referenceTrail.length) {
@@ -265,9 +269,8 @@ function revealPhotoSource(request) {
       let enterTimer = null;
       let photoSourceTimer = null;
       let photoSourceRequest = null;
-      let closeTimer = null;
+      let cancelCloseMotion = () => {};
       let finishClose = null;
-      let closeTransitionEnd = null;
       let photoLayoutRect = null;
       let photoViewport = null;
       const visiblePhotoSourceRect = () => {
@@ -291,8 +294,8 @@ function revealPhotoSource(request) {
         if (rect.left < left - 1 || rect.top < top - 1 || rect.right > right + 1 || rect.bottom > bottom + 1) return null;
         return SDT.UiScale.rect(source);
       };
-      const noteInput = el.querySelector('.cz-note-input');
-      const noteStatus = el.querySelector('.cz-note-status');
+      const noteInput = /** @type {HTMLTextAreaElement} */ (el.querySelector('.cz-note-input'));
+      const noteStatus = /** @type {HTMLElement} */ (el.querySelector('.cz-note-status'));
       const saveNote = () => {
         if (!noteInput || typeof opts.onNoteSave !== 'function') return;
         const saved = opts.onNoteSave(noteInput.value);
@@ -303,7 +306,7 @@ function revealPhotoSource(request) {
           : persisted ? (noteInput.value.trim() ? '已存档' : '尚未撰写')
             : noteInput.value.trim() ? '保存失败，请重试' : '尚未撰写';
         // 存档章跟随真实内容（批次四：写空=章摘下，写了=章盖上）
-        el.querySelector('.cz-note')?.classList.toggle('has', !!(persisted && noteInput.value.trim()));
+        /** @type {HTMLElement} */ (el.querySelector('.cz-note'))?.classList.toggle('has', !!(persisted && noteInput.value.trim()));
       };
       if (noteInput) {
         noteInput.addEventListener('input', () => {
@@ -321,7 +324,7 @@ function revealPhotoSource(request) {
           if (immediate && !removed) {
             clearTimeout(enterTimer);
             clearTimeout(photoSourceTimer);
-            clearTimeout(closeTimer);
+            cancelCloseMotion();
             removed = true;
             el.remove();
             if (inertHost) inertHost.inert = overlayWasInert;
@@ -336,8 +339,9 @@ function revealPhotoSource(request) {
         el.classList.remove('cz-neg');
         saveNote();
         closed = true;
+        el.inert = true;
         if (photoMode && !immediate && !reducedMotion) {
-          const photoPaper = el.querySelector('.cz-photo-paper');
+          const photoPaper = /** @type {HTMLElement} */ (el.querySelector('.cz-photo-paper'));
           const viewportUnchanged = photoViewport
             && photoViewport.width === window.innerWidth
             && photoViewport.height === window.innerHeight
@@ -363,38 +367,36 @@ function revealPhotoSource(request) {
           finishClose = () => {
             if (removed) return;
             removed = true;
-            clearTimeout(closeTimer);
-            if (photoPaper && closeTransitionEnd) photoPaper.removeEventListener('transitionend', closeTransitionEnd);
+            cancelCloseMotion();
             el.remove();
             if (inertHost) inertHost.inert = overlayWasInert;
             if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
           };
-          closeTransitionEnd = (e) => {
-            if (e.target === photoPaper && e.propertyName === 'transform') finishClose();
-          };
-          photoPaper?.addEventListener('transitionend', closeTransitionEnd);
-          closeTimer = setTimeout(() => finishClose(), photoCloseMs + 60);
+          cancelCloseMotion = completeSurfaceMotion(photoPaper, finishClose, {
+            event:'transitionend', name:'transform', duration:photoCloseMs,
+          });
           return;
         }
         // cz-flip 的 animation:none 会一并压掉 czOut，收回前摘掉它恢复出场动画
         // （inline transform/opacity 一并清掉，防中途收回残留）
-        const cardEl = el.querySelector(photoMode ? '.cz-photo-image' : '.cz-card');
+        const cardEl = /** @type {HTMLElement} */ (el.querySelector(photoMode ? '.cz-photo-image' : '.cz-card'));
         if (cardEl) {
           cardEl.classList.remove('cz-flip');
           cardEl.style.transform = '';
           cardEl.style.opacity = '';
         }
-        if (inertHost) inertHost.inert = overlayWasInert;
-        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
-        if (immediate || (photoMode && reducedMotion)) {
+        finishClose = () => {
+          if (removed) return;
           removed = true;
+          cancelCloseMotion();
           el.remove();
           if (inertHost) inertHost.inert = overlayWasInert;
           if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
-          return;
-        }
+        };
         el.classList.add('cz-out');
-        setTimeout(() => el.remove(), 260);
+        cancelCloseMotion = completeSurfaceMotion(cardEl || el, finishClose, {
+          name:'czOut', duration:motionTiming.zoomExit, immediate:immediate || reducedMotion,
+        });
       };
       el._closeCardZoom = close;
       // 特写挂在 body（overlay 之外），footer 按钮的 data-act 走不到 ovBody 的全局委托；
@@ -402,8 +404,9 @@ function revealPhotoSource(request) {
       // 点击）再也关不掉 → 整页卡死（2026-09-07 老板实测）。故监听常驻：非按钮区域总能收回，
       // footer 按钮（如「移出背包」）在本层直接分发。
       el.addEventListener('click', (e) => {
+      if (!(e.target instanceof Element)) return;
         if (closed) return;
-        const reference = e.target.closest('[data-card-reference]');
+        const reference = /** @type {HTMLElement} */ (e.target.closest('[data-card-reference]'));
         if (reference) {
           e.preventDefault(); e.stopPropagation();
           if (closed) return;
@@ -421,7 +424,7 @@ function revealPhotoSource(request) {
           return;
         }
         if (e.target.closest('.cz-close')) { close(); return; }
-        const btn = e.target.closest('.cz-foot [data-act]');
+        const btn = /** @type {HTMLElement} */ (e.target.closest('.cz-foot [data-act]'));
         if (btn) {
           const fn = this._acts[btn.dataset.act];
           if (fn) fn(btn.dataset);
@@ -449,7 +452,7 @@ function revealPhotoSource(request) {
           return;
         }
         if (e.key !== 'Tab') return;
-        const focusable = [...el.querySelectorAll('button,textarea,[href],[tabindex]:not([tabindex="-1"])')]
+        const focusable = [.../** @type {NodeListOf<HTMLButtonElement>} */ (el.querySelectorAll('button,textarea,[href],[tabindex]:not([tabindex="-1"])'))]
           .filter(node => !node.disabled && node.getClientRects().length);
         if (!focusable.length) { e.preventDefault(); el.focus(); return; }
         const first = focusable[0], last = focusable[focusable.length - 1];
@@ -458,7 +461,7 @@ function revealPhotoSource(request) {
       }, true);
       document.body.appendChild(el);
       if (photoMode) {
-        const image = el.querySelector('.cz-photo-image img');
+        const image = /** @type {HTMLImageElement} */ (el.querySelector('.cz-photo-image img'));
         const syncImageRatio = () => {
           if (el.isConnected && !closed && image?.naturalHeight > 0) {
             el.style.setProperty('--cz-photo-ratio', String(image.naturalWidth / image.naturalHeight));
@@ -469,7 +472,7 @@ function revealPhotoSource(request) {
       }
       if (photoFullSrc) {
         photoSourceTimer = setTimeout(() => {
-          const visibleImage = el.querySelector('.cz-photo-image img');
+          const visibleImage = /** @type {HTMLImageElement} */ (el.querySelector('.cz-photo-image img'));
           if (!visibleImage || !el.isConnected || closed || visibleImage.src === new URL(photoFullSrc, document.baseURI).href) return;
           const fullImage = new Image();
           const request = { image: fullImage, zoom: el, visibleImage };
@@ -495,8 +498,8 @@ function revealPhotoSource(request) {
       });
       ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev =>
         zoomCard?.addEventListener(ev, clearNeg));
-      el.querySelector('.cz-close')?.focus({ preventScroll: true });
-      const photoPaper = photoMode ? el.querySelector('.cz-photo-paper') : null;
+      /** @type {HTMLElement} */ (el.querySelector('.cz-close'))?.focus({ preventScroll: true });
+      const photoPaper = photoMode ? /** @type {HTMLElement} */ (el.querySelector('.cz-photo-paper')) : null;
       if (photoPaper) {
         // Measure the final paper box without its entrance transform; keep this natural rect
         // for reverse FLIP even when the user closes before the entrance finishes.
@@ -535,7 +538,7 @@ function revealPhotoSource(request) {
           if (!reducedMotion) enterTimer = setTimeout(() => el.classList.remove('cz-photo-flipping'), photoEnterMs + 20);
         }
       } else if (fromR && fromR.width > 0) {
-        const cardEl = el.querySelector('.cz-card');
+        const cardEl = /** @type {HTMLElement} */ (el.querySelector('.cz-card'));
         const toR = SDT.UiScale.rect(cardEl);
         if (toR.width > 0) {
           // FLIP：先摆到来源卡位置与等比尺寸（中心对齐），下一帧过渡到居中位。
@@ -559,7 +562,7 @@ function revealPhotoSource(request) {
 
     ...overlayMethods,     // 弹窗容器：帮助/开层/关层/Esc/房间视图/焦点陷阱（实现在 overlay.js）
     ...cinematicsMethods,  // 演出与过渡：popNum/传说特写/奖励演出/屏幕进出（实现在 cinematics.js）
-    ...hudMethods,         // HUD：refresh/日志/tooltip 桩（实现在 hud.js）
+    .../** @type {import('./ui.dom.types.js').MountedHudMethods} */ (hudMethods),         // HUD：refresh/日志/tooltip 桩（实现在 hud.js）
   };
 
   SDT.UI = UI;

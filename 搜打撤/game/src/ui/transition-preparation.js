@@ -6,7 +6,8 @@ export function prepareTransition(prepare, { signal, isCurrent }) {
   let cancel;
   const aborted = new Promise(resolve => { cancel = () => resolve(cancelled); });
   signal?.addEventListener('abort', cancel, { once: true });
-  const work = Promise.resolve().then(() => {
+  /** @typedef {{ok: boolean, value?: unknown, error?: unknown, cancelled?: boolean}} PreparationResult */
+  const work = Promise.resolve().then(/** @returns {PreparationResult | Promise<PreparationResult>} */ () => {
     if (signal?.aborted || !isCurrent()) return cancelled;
     return Promise.resolve(prepare?.(signal)).then(value => ({ ok: true, value }), error => ({ ok: false, error }));
   }).catch(error => ({ ok: false, error }));

@@ -10,10 +10,10 @@ const digest = async text => Array.from(new Uint8Array(await crypto.subtle.diges
 const baselineHash = await digest(baseline);
 const actions = new Map(), records = [];
 const inputEvidence = document.createElement('output');
-inputEvidence.id = 'qaInput'; document.querySelector('.qa-bar').append(inputEvidence);
+inputEvidence.id = 'qaInput'; /** @type {HTMLElement | null} */ (document.querySelector('.qa-bar')).append(inputEvidence);
 document.addEventListener('click', event => {
-  const target = event.target.closest('[data-act],button');
-  inputEvidence.textContent = `最近点击=${target?.dataset.act || target?.textContent || event.target.tagName}；坐标=${event.clientX},${event.clientY}`;
+  const target = /** @type {HTMLElement | null} */ ((/** @type {Element} */ (event.target)).closest('[data-act],button'));
+  inputEvidence.textContent = `最近点击=${target?.dataset.act || target?.textContent || (/** @type {Element} */ (event.target)).tagName}；坐标=${event.clientX},${event.clientY}`;
 }, true);
 const rich = s => String(s).replace(/\[\[icon:[^\]]+\]\]/g, '<span aria-hidden="true">◆</span>');
 const disabled = new Set(['btBag', 'btSettings']);
@@ -22,7 +22,7 @@ const UI = {
   el: { overlay, ovBody, ovTitle }, _lastMode: 'battle',
   showOverlay(title, html, mode) {
     ovTitle.innerHTML = rich(title || ''); ovBody.innerHTML = rich(html);
-    for (const node of ovBody.querySelectorAll('[data-act]')) if (disabled.has(node.dataset.act)) node.setAttribute('disabled', '');
+    for (const node of /** @type {NodeListOf<HTMLElement>} */ (ovBody.querySelectorAll('[data-act]'))) if (disabled.has(node.dataset.act)) node.setAttribute('disabled', '');
     overlay.hidden = false; this._lastMode = mode;
   },
   hideOverlay() { overlay.hidden = true; },
@@ -61,7 +61,7 @@ function inspect(reason) {
   const record = {
     at: new Date().toISOString(), reason, sample, mode: s.mode, phase: s.phase, energy: s.energy,
     battleToken: s.battleToken, busy: s.busy, actionQueueLength: s.actionQueueLength,
-    renderedFoes: Array.from(ovBody.querySelectorAll('.bt-foe')).map(node => ({ index: node.dataset.eidx, name: node.querySelector('.sts-headrow')?.textContent, hp: node.querySelector('.sts-hp > span')?.textContent })),
+    renderedFoes: Array.from(/** @type {NodeListOf<HTMLElement>} */ (ovBody.querySelectorAll('.bt-foe'))).map(node => ({ index: node.dataset.eidx, name: node.querySelector('.sts-headrow')?.textContent, hp: node.querySelector('.sts-hp > span')?.textContent })),
     foes: s.foes?.map(f => ({ id: f.id, name: f.name, hp: f.hp })), hand: s.hand,
     deck: s.deckSelection ? { selected: s.deckSelection.selected, need: s.deckSelection.need, cards: s.deckSelection.cards.map(e => card(e.card)) } : null,
     infusing: s.infusing ? { card: card(s.infusing.card), picked: s.infusing.picked } : null,
@@ -73,7 +73,7 @@ function inspect(reason) {
   digest(now).then(hash => { record.currentSha256 = hash; evidence.textContent = JSON.stringify(records, null, 2); });
 }
 ovBody.addEventListener('click', event => {
-  const node = event.target.closest('[data-act]');
+  const node = /** @type {HTMLElement | null} */ ((/** @type {Element} */ (event.target)).closest('[data-act]'));
   if (node && !node.hasAttribute('disabled') && actions.has(node.dataset.act)) {
     actions.get(node.dataset.act)({ ...node.dataset }); inspect(`click:${node.dataset.act}`);
   }
@@ -106,7 +106,7 @@ function start(kind) {
   session.start(fixture, [{ ...foe }], { isBoss: kind === 'boss', risk: 'E2 内存样本', devSample: true });
   inspect(`start:${kind}`);
 }
-document.querySelectorAll('[data-sample]').forEach(button => button.addEventListener('click', () => start(button.dataset.sample)));
+/** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[data-sample]')).forEach(button => button.addEventListener('click', () => start(button.dataset.sample)));
 el('qaReset').addEventListener('click', () => { session.commands.flee(); overlay.hidden = true; fixture = null; inspect('exit'); });
 el('qaInspect').addEventListener('click', () => inspect('manual-evidence'));
 inspect('ready');

@@ -2,7 +2,7 @@ import type { CardSnapshot, OwnedCard } from '../hub/game.store.types';
 
 export type RunCard = CardSnapshot;
 export type RunOwnedCard = OwnedCard & { stored?: boolean };
-export type ShopSlot = { card?: RunCard; price:number; sold?:boolean; free?:boolean; empty?:boolean; shaReplenish?:number; commissionFree?:boolean };
+export type ShopSlot = { card?: RunCard; price:number; sold?:boolean; free?:boolean; empty?:boolean; shaReplenish?:number; commissionFree?:boolean; mystery?:boolean };
 export type ShopQuote = { slot:ShopSlot; card?:RunCard; price:number; free?:boolean; replenish:boolean };
 export type ShopState = { coins:number; ownedCards:RunOwnedCard[]; shopStock:ShopSlot[] };
 export type TradeRejected = { ok:false; reason:string };
@@ -22,10 +22,10 @@ export type CommissionInput = {
   stock:ShopSlot[]; pending:{ status:string; slots:number[] }; starter?:RunCard;
   quotes:{ slot:ShopSlot; card?:RunCard }[]; current:() => boolean; save:() => unknown;
 };
-export type EventRecord = { settled?:boolean; actionChoice?:number; taken?:number | null; cardIds?:string[] };
+export type EventRecord = { version?:number; type?:string; eventId?:string; settled?:boolean; actionChoice?:number; taken?:number | null; cardIds?:string[] };
 export type EventState = {
   coins:number; fragments?:number; hp:number; maxHp:number; ownedCards:RunOwnedCard[];
-  seed?:number; layerIdx:number; trackPos:number; visited?:Record<string, unknown>;
+  seed?:number|string|null; layerIdx:number; trackPos:number; visited?:Record<string, unknown>;
   nodeRewards?:Record<string, EventRecord>;
 };
 export type EventPorts = {
@@ -38,7 +38,7 @@ export type EventPorts = {
 export type SpendInput = { current?:() => boolean; receipt?:Record<string, unknown>; field?:string; value?:unknown };
 export type ChoiceInput = { record:EventRecord & { taken:number | null; cardIds:string[] }; key:string; index:number; card:RunCard; current:() => boolean };
 export type RecodeSource = { uid:string; id?:string; name?:string; type?:string; rarity?:string };
-export type RewardSnapshot = { seed?:number; layerIdx:number; trackPos:number };
+export type RewardSnapshot = { seed?:number|string|null; layerIdx:number; trackPos:number };
 export type EventSettlementInput = {
   state:EventState; record:EventRecord | null | undefined; settling:WeakSet<EventRecord>;
   run:() => unknown; consume?:boolean; consumeCell:() => unknown;

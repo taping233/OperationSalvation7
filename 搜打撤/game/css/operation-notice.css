@@ -1,0 +1,15 @@
+/* Layout belongs to the host; result meaning and emphasis are shared. */
+body .operation-notice.operation-notice,
+#overlay#overlay#overlay .operation-notice.operation-notice {
+  color:var(--ui-feedback-ok,#c4ddd4);
+  border-color:var(--ui-feedback-ok-line,#91c2c647);
+  transition:color var(--motion-feedback,180ms) var(--motion-ease-enter,ease-out);
+}
+body .operation-notice.operation-notice[data-notice-tone="warn"],
+#overlay#overlay#overlay .operation-notice.operation-notice[data-notice-tone="warn"] {
+  color:var(--ui-feedback-warn,#efc58a);
+  border-color:var(--ui-feedback-warn-line,#efc58a70);
+}
+body .operation-notice.operation-notice:empty { display:none; }
+body.reduce-motion .operation-notice { transition:none; }
+@media (prefers-reduced-motion:reduce) { body .operation-notice { transition:none; } }

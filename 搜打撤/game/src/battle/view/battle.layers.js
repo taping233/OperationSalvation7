@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { isTargetableEnemy } from '../core/battle.target-session.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
 import { isHandArrivalEvent } from '../core/battle.card-presentation.js';
@@ -16,7 +17,7 @@ import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
 import { equipmentInfoHTML } from '../../ui/equipment-info.js';
 import { playerCombatStatsHTML } from '../../ui/battle-hud-info.js';
-import { isAreaEffect } from '../effects/battle.target-rules.js';
+import { isAreaEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
 if (!document.getElementById('stsIntentLegendStyle')) {
@@ -36,7 +37,7 @@ function showIntentLegend({ devSample, battleToken }) {
   }
 
   const host = document.getElementById('overlay') || document.body;
-  if (!host || host.querySelector('.sts-intent-legend')) return false;
+  if (!host || /** @type {BattleElement} */ (host.querySelector('.sts-intent-legend'))) return false;
   const legend = document.createElement('div');
   legend.className = 'sts-intent-legend';
   legend.textContent = '敌方意图 ⚔·数字 = 下回合将对你造成的伤害（冰晶=无法行动）';
@@ -64,11 +65,11 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
   document.addEventListener('keydown', (e) => {
     if (e.isComposing || e.keyCode === 229) return;
-    if (UI.el.ovBody?.querySelector('.battle-secondary-panel')) return;
+    if (/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-secondary-panel'))) return;
     if (e.key === 'Escape') {
       // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是取消瞄准/点选/注能
       if (e.isComposing || e.keyCode === 229) return;
-      if (e.defaultPrevented || !UI.el.ovBody?.querySelector('.battle-stage')) return;
+      if (e.defaultPrevented || !/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage'))) return;
       if (cancelBattleSelection({ restoreFocus:true })) {
         e.preventDefault(); e.stopPropagation();
       }
@@ -76,7 +77,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     }
     if (!handLayer || e.defaultPrevented) return;
     if (e.shiftKey) return;
-    if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.target instanceof Element && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
     if (!/^[1-9]$/.test(e.key)) return;
     const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
     if (!el) return;
@@ -99,7 +100,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       return;
     }
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    const targets = [...document.querySelectorAll('#btSelf.can-target, .bt-foe.can-target')];
+    const targets = [.../** @type {NodeListOf<BattleElement>} */ (document.querySelectorAll('#btSelf.can-target, .bt-foe.can-target'))];
     if (targets.length < 2) return;
     const index = targets.indexOf(e.currentTarget);
     if (index < 0) return;
@@ -151,7 +152,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const entry = [...handSlots.entries()].find(([, rec]) => rec.card.contains(element));
     if (!entry) return null;
     const [key, rec] = entry;
-    const rules = rec.card.querySelector('.hsc-desc');
+    const rules = /** @type {BattleElement} */ (rec.card.querySelector('.hsc-desc'));
     return { element, key, token:handBattleToken, uid:rec.card.dataset.uid,
       uids:[...(rec.group?.uids || [])], order:handLayoutSlots.map(item => item.slot),
       index:handLayoutSlots.indexOf(rec), reading:!!rules?.contains(element), scrollTop:rules?.scrollTop || 0 };
@@ -176,11 +177,11 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       if (nextDistance < distance) { nearest = rec; distance = nextDistance; }
     });
     const rec = same || nearest || visible[Math.min(Math.max(previous.index, 0), visible.length - 1)];
-    const rules = same?.card.querySelector('.hsc-desc');
+    const rules = /** @type {BattleElement} */ (same?.card.querySelector('.hsc-desc'));
     const stage = handLayer.closest('.battle-stage');
     const target = rec
-      ? (previous.reading && same ? same.card.querySelector('.hsc-desc[tabindex]') : null) || rec.card.querySelector('.hs-card[role="button"]')
-      : stage?.querySelector('.bt-hand-page:not(:disabled)') || stage?.querySelector('.sts-options > summary');
+      ? (previous.reading && same ? /** @type {BattleElement} */ (same.card.querySelector('.hsc-desc[tabindex]')) : null) || /** @type {HTMLButtonElement} */ (rec.card.querySelector('.hs-card[role="button"]'))
+      : /** @type {BattleElement} */ (stage?.querySelector('.bt-hand-page:not(:disabled)')) || /** @type {BattleElement} */ (stage?.querySelector('.sts-options > summary'));
     if (!target) return;
     target.focus({ preventScroll:true });
     if (rules) rules.scrollTop = previous.scrollTop;
@@ -263,7 +264,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
     const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
     const effCost = effCostOf(g.card, uid);
-    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
+    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card, ctx.handRuleContext);   // 无法使用的卡：虚化禁用
     const blockedReason = blocked || (infusingNow ? '' : busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
     const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
     // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
@@ -327,14 +328,14 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
           ? { dmgOverride: { bonus: spellBonus } } : {}),
       })
       + cnt + infChip + curseChip;
-    const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
+    const handState = infusingNow ? 'infusing' : blockedReason ? 'blocked' : targeted || clickSelectedUid === uid ? 'selected' : 'ready';
     return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow, effCost };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
   // （不能用 isConnected 判定——showOverlay 整块重建 ovBody，常驻层每次挂载前都脱离文档）
   function mountHandLayer(body, tip, token, onPlay) {
-    const mount = body.querySelector('.sts-hud .sts-hand');
+    const mount = /** @type {BattleElement} */ (body.querySelector('.sts-hud .sts-hand'));
     if (!mount) return null;
     handPlay = onPlay || null;
     if (!handLayer) {
@@ -368,8 +369,6 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   function updateHand(snapshot, prev, pageGroups, events, extra) {
     if (!handLayer) return { flightMs: 0 };
     const previousFocus = captureHandFocus();
-    const previousUids = new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)
-      .map(rec => [rec.slot, new Set(rec.group.uids)]));
     const readable = pageGroups.length <= 6 ? 'true' : 'false';
     if (handLayer.dataset.readable !== readable) handLayer.dataset.readable = readable;
     const evs = events || [];
@@ -377,11 +376,15 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     evs.forEach(ev => { if (isHandArrivalEvent(ev)) drawn.add(ev.uid); else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid); });
     const submitted = new Set(evs.filter(ev => ev.kind === 'play').map(ev => ev.uid));
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
+    // Only arrivals need old stack membership; capture before replacing rec.group.
+    const previousUids = drawn.size ? new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)
+      .map(rec => [rec.slot, new Set(rec.group.uids)])) : null;
     const ctx = {
       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
       pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy, playedMovesThisTurn: snapshot.playedMovesThisTurn,
       spellBonus: (extra && extra.spellBonus) || 0,
       mode: extra && extra.mode,
+      handRuleContext: extra && extra.handRuleContext,
     };
     // 旧槽位现矩形一次量完：目标值更新引发的位移以此为准做补间
     handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径
@@ -402,7 +405,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         rec.card.addEventListener('keydown', (e) => {
           if (e.isComposing || e.keyCode === 229) return;
           if (e.defaultPrevented || e.repeat || (e.key !== 'Enter' && e.key !== ' ')) return;
-          const face = rec.card.querySelector('.hs-card[role="button"]');
+          const face = /** @type {HTMLButtonElement} */ (rec.card.querySelector('.hs-card[role="button"]'));
           // 阅读区与词条子控件保留自己的键盘行为，只有卡面本身负责选牌。
           if (!face || e.target !== face) return;
           e.preventDefault();
@@ -450,8 +453,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       // Keep the face and its controls connected when only the reading hint changes.
       const hintSig = `${st.ruleHint}\u0000${st.blockedReason}`;
       if (rec.hintSig !== hintSig) {
-        const desc = rec.card.querySelector('.hsc-desc');
-        desc?.querySelector('.bt-rulehint')?.remove();
+        const desc = /** @type {BattleElement} */ (rec.card.querySelector('.hsc-desc'));
+        /** @type {BattleElement} */ (desc?.querySelector('.bt-rulehint'))?.remove();
         if (desc && readingHint && !desc.textContent.includes(st.blockedReason || readingHint)) {
           const hint = document.createElement('span');
           hint.className = 'bt-rulehint';
@@ -461,7 +464,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         }
         rec.hintSig = hintSig;
       }
-      const face = rec.card.querySelector('.hs-card');
+      const face = /** @type {BattleElement} */ (rec.card.querySelector('.hs-card'));
       if (face) {
         setHandAttribute(face, 'role', 'button'); setHandAttribute(face, 'tabindex', 0);
         setHandAttribute(face, 'aria-disabled', st.blockedReason ? 'true' : 'false');
@@ -478,12 +481,12 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     handHit?.sync(handBattleToken, getSnapshot());
     handLayoutWidth = handWidth;
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
-    const current = [...handLayer.querySelectorAll('.bt-slot')];
+    const current = [.../** @type {NodeListOf<BattleElement>} */ (handLayer.querySelectorAll('.bt-slot'))];
     if (current.length !== ordered.length || current.some((el, i) => el !== ordered[i].slot)) {
       ordered.forEach(rec => handLayer.appendChild(rec.slot));
     }
     // —— 空手牌提示（原模板 N=0 分支的等价物） ——
-    const emptyHint = handLayer.querySelector('.ov-empty');
+    const emptyHint = /** @type {BattleElement} */ (handLayer.querySelector('.ov-empty'));
     if (!ordered.length) {
       const msg = snapshot.hand.length ? '本栏已空；切换其他栏继续使用手牌。' : extra.mode === 'boss'
         ? (snapshot.drawPile.length ? '手牌已空，下回合开始从牌库抽牌。' : '手牌与牌库已空；消耗牌堆仅由卡牌效果取回。')
@@ -560,9 +563,9 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   const foeSlots = new Map();    // key -> { slot, parts, sig }
 
   function mountUnitLayer(body, token) {
-    const selfMount = body.querySelector('[data-unit-mount="self"]');
-    const alliesMount = body.querySelector('[data-unit-mount="allies"]');
-    const foesMount = body.querySelector('[data-unit-mount="foes"]');
+    const selfMount = /** @type {BattleElement} */ (body.querySelector('[data-unit-mount="self"]'));
+    const alliesMount = /** @type {BattleElement} */ (body.querySelector('[data-unit-mount="allies"]'));
+    const foesMount = /** @type {BattleElement} */ (body.querySelector('[data-unit-mount="foes"]'));
     if (!alliesMount || !foesMount) return null;
     // 09-24 起同场战斗走 showBattleStage 复用（ovBody 不重建），self 挂载点首轮已被
     // replaceWith(selfUnit) 消耗——selfUnit 仍在原位时直接复用，不能再因找不到挂载点
@@ -599,15 +602,15 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // A rebuilt HUD owns the fresh tools; the retained player may still carry the
     // previous stage's tools. Replace those rather than selecting them first.
     // Incremental renders have no HUD placeholder and keep the live tools intact.
-    const careerTools = body.querySelector('.sts-hud > .sts-hand-tools');
+    const careerTools = /** @type {BattleElement} */ (body.querySelector('.sts-hud > .sts-hand-tools'));
     if (careerTools) {
-      const previousTools = selfUnit.querySelector(':scope > .sts-hand-tools');
+      const previousTools = /** @type {BattleElement} */ (selfUnit.querySelector(':scope > .sts-hand-tools'));
       if (previousTools) previousTools.replaceWith(careerTools);
       else selfUnit.appendChild(careerTools);
     }
     return { alliesMount, foesMount };
   }
-  // 单位节点固定骨架：立绘 + 脚下生命条 + 上方属性/状态/装备/敌方意图，各段按签名差分。
+  // 单位节点固定骨架：立绘、脚下生命条与装备图标、上方属性/状态/敌方意图，各段按签名差分。
   function makeUnitSkeleton(slot, opts = {}) {
     const parts = {};
     if (opts.intent) {
@@ -663,7 +666,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       parts.equips = document.createElement('div');
       parts.equips.className = 'sts-equips';
       parts.equips.style.display = 'none';
-      np.appendChild(parts.equips);
+      parts.vitals.appendChild(parts.equips);
     }
     // 姓名、属性、状态与意图仍同组；生命条独立放在立绘之后，由布局锚定脚下。
     // The intent retains its own input handlers and never confirms a target.
@@ -676,6 +679,16 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     if (sig[key] === html) return;
     sig[key] = html;
     el.innerHTML = SDT.Icons.rich(html);
+  }
+  // Compare live DOM values so retained or externally changed nodes stay authoritative.
+  // Unlike optional hand attributes, native metadata setters stringify null/undefined.
+  function setUnitAttribute(node, name, value) {
+    const text = String(value);
+    if (node.getAttribute(name) !== text) node.setAttribute(name, text);
+  }
+  function setUnitVariable(node, name, value) {
+    const text = String(value);
+    if (node.style.getPropertyValue(name) !== text) node.style.setProperty(name, text);
   }
   // 血条局部更新：主条快速过渡；幽灵条走自身延迟过渡形成掉血拖尾（STS2 NHealthBar 口径）。
   // 首次填充禁用两条的过渡，避免从空/满状态滑到位
@@ -711,12 +724,13 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setSection(selfParts.fig, sig, 'fig',
       player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet'));
     const playerName = characterName(player.characterId || player.myClass);
-    selfParts.fig.setAttribute('role', 'img');
-    selfParts.fig.setAttribute('aria-label', playerName);
+    setUnitAttribute(selfParts.fig, 'role', 'img');
+    setUnitAttribute(selfParts.fig, 'aria-label', playerName);
     setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
-    selfParts.armor.hidden = !(pdef.armor > 0);
-    selfParts.armor.textContent = `甲 ${pdef.armor || 0}`;
-    selfParts.armor.setAttribute('aria-label', `护甲 ${pdef.armor || 0}`);
+    if (selfParts.armor.hidden !== !(pdef.armor > 0)) selfParts.armor.hidden = !(pdef.armor > 0);
+    const armorText = `甲 ${pdef.armor || 0}`;
+    if (selfParts.armor.textContent !== armorText) selfParts.armor.textContent = armorText;
+    setUnitAttribute(selfParts.armor, 'aria-label', `护甲 ${pdef.armor || 0}`);
     // 常驻显示合计，强化来源可聚焦查看；护甲已在生命栏旁显示。
     setSection(selfParts.stats, sig, 'stats', playerCombatStatsHTML(player, pdef, pstat.status));
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
@@ -730,7 +744,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy)).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
-    selfParts.equips.style.display = equipsHTML ? '' : 'none';
+    const equipsDisplay = equipsHTML ? '' : 'none';
+    if (selfParts.equips.style.display !== equipsDisplay) selfParts.equips.style.display = equipsDisplay;
     sig.init = true;
   }
   // 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击）
@@ -781,17 +796,19 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       rec.sig.init = true;
       ordered.push(rec);
     });
-    // 移除消失的随从 + 按数组序重排（appendChild 已连接节点只是搬移，不重建）
+    // 移除消失的随从；实际 DOM 顺序一致时保留节点原位，避免无效搬移。
     const kept = new Set(ordered.map(r => r.key));
     allySlots.forEach((rec, key) => {
       if (!kept.has(key)) { rec.slot.remove(); allySlots.delete(key); }
     });
-    ordered.forEach(rec => mount.appendChild(rec.slot));
+    if (mount.children.length !== ordered.length || ordered.some((rec, i) => mount.children[i] !== rec.slot)) {
+      ordered.forEach(rec => mount.appendChild(rec.slot));
+    }
   }
   // 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮）
   function updateFoes(mount, foes, ctx) {
-    mount.style.setProperty('--battle-foe-count', String(Math.max(1, foes.length)));
-    mount.dataset.count = String(foes.length);
+    setUnitVariable(mount, '--battle-foe-count', String(Math.max(1, foes.length)));
+    setUnitAttribute(mount, 'data-count', String(foes.length));
     const ordered = [];
     const seen = {};
     foes.forEach((f, idx) => {
@@ -852,15 +869,17 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
       const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
       // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具不再高亮敌人（与 aim.js 同式）
-      const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && targetSide(ctx.pendingItem.card) === 'enemy');
+      // 反馈1021·9：点选态判据取 itemTargetSideFor（usePotion 进点选的同一条规则），
+      // targetSideFor 对只有 rules.bag.use 的药水恒 null → 一个敌人都不亮，点选永远收不了口。
+      const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && itemTargetSideFor(ctx.pendingItem.card) === 'enemy');
       setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && isTargetableEnemy(f, idx, ctx.pendingTarget?.excludedTargetIndex), `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       if (!slot.classList.contains('can-target')) slot.setAttribute('aria-label', `${f.name}${f.dead ? '，已倒下' : '，敌方单位'}`);
-      slot.dataset.foeId = f.id || f.name;
-      slot.dataset.eidx = idx;
-      slot.style.setProperty('--foe-idle-phase', `${-(idx * 0.61)}s`);
-      slot.title = aff ? aff.name + '：' + aff.desc : '';
+      setUnitAttribute(slot, 'data-foe-id', f.id || f.name);
+      setUnitAttribute(slot, 'data-eidx', idx);
+      setUnitVariable(slot, '--foe-idle-phase', `${-(idx * 0.61)}s`);
+      setUnitAttribute(slot, 'title', aff ? aff.name + '：' + aff.desc : '');
       // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
-      const fp = slot.querySelector('.bt-fpreview');
+      const fp = /** @type {BattleElement} */ (slot.querySelector('.bt-fpreview'));
       if (fp) fp.remove();
       if (!f.dead && clickCard && targetSide(clickCard.card) === 'enemy' && slot.matches(':hover, :focus')) {
         showFoePreview(slot, idx, clickSelectedUid, clickCard.card, 'click');
@@ -870,6 +889,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
       // 状态挂件（P2）：诅咒持续期间的常驻视觉——冰冻青晶边光
       slot.classList.toggle('fx-frozen', frozen);
+      /** @type {{icon: string, label: string, damage?: number | null, kind: string, hits?: number, totalDamage?: number, bleedBonus?: number}[]} */
       const intents = frozen
         ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
         // 意图伤害渲染时现算（U12-b/2026-09-29 夜班 F2）：foe.intent 仍是回合末快照
@@ -891,23 +911,28 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
             return `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short"><span class="bt-intent-action">${esc(actionText)}</span>${condition ? `<span class="bt-intent-condition"> · ${esc(condition)}</span>` : ''}</span></span>`;
           }).join('') +
           `<span class="bt-intent-detail"><span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${esc(baseAttack)}</span><span class="bt-intent-rules">${esc(intentDetail)}</span></span>`);
-        parts.intent.setAttribute('aria-label', `${f.name}的意图：${intentDetail}。${baseAttack}。点击查看完整说明`);
-        parts.intent.style.display = '';
+        setUnitAttribute(parts.intent, 'aria-label', `${f.name}的意图：${intentDetail}。${baseAttack}。点击查看完整说明`);
+        if (parts.intent.style.display !== '') parts.intent.style.display = '';
         // W5-03（2026-09-27 R2，B-4）：一次性解释图例；QA/devSample 与玩家偏好隔离。
         try { showIntentLegend({ devSample: !!ctx.devSample, battleToken: ctx.battleToken }); }
         catch { /* 页面销毁等 DOM 异常时不影响战斗渲染 */ }
-      } else parts.intent.style.display = 'none';
+      } else if (parts.intent.style.display !== 'none') parts.intent.style.display = 'none';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
-      parts.fig.setAttribute('role', 'img');
-      parts.fig.setAttribute('aria-label', f.name);
+      setUnitAttribute(parts.fig, 'role', 'img');
+      setUnitAttribute(parts.fig, 'aria-label', f.name);
       // 姓名保留在可访问身份中；上方呈现攻击、意图和状态，生命条仍在脚下。
       setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
       const simpleAttack = intents.length === 1 && intents[0].label === '攻击'
         && intents[0].damage === Math.max(0, f.atk || 0) && intents[0].hits === 1 && !intents[0].bleedBonus;
       const attackStat = simpleAttack ? '' : `<span class="sts-stat">[[icon:swords]] 攻 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>`;
       setSection(parts.stats, sig, 'stats', `${attackStat}${immune ? '<span class="sts-stat">[[icon:crystal]] 庇幕免伤中</span>' : ''}`);
+      // 反馈1021·10：状态诅咒/祝福与词缀之外，标记类负面状态此前一个角标都不出——
+      // 腐化之种（deathBurst）与灵魂契约（damageEcho / soulContractMarked）在运行时被
+      // 明确当作「已标记」参与结算，视图却只认 rotSeedMarked，敌人身上看不出挂了什么。
+      const echoMark = f.damageEcho || (f.soulContractMarked ? { amount: 2 } : null);
       setSection(parts.chips, sig, 'chips', (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : '')
-        + (f.rotSeedMarked ? '<span class="bt-affix" title="死亡时，对所有敌人造成等同于此时中毒层数的真实伤害">[[icon:skull]] 腐化标记</span>' : '')
+        + (f.rotSeedMarked || f.deathBurst ? '<span class="bt-affix" title="死亡时，对所有敌人造成等同于此时中毒层数的真实伤害">[[icon:skull]] 腐化标记</span>' : '')
+        + (echoMark ? `<span class="bt-affix">[[icon:sparkles]] 契约回响 ${+echoMark.amount || 2}</span>` : '')
         + curseChips(f.status, { compact: true }));
       sig.init = true;
       ordered.push(rec);

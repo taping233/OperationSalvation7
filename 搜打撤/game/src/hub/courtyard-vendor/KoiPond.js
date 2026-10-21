@@ -4,6 +4,7 @@
  * See koi-LICENSE.txt and SOURCE.md. */
 import { Random } from '../../core/random.js';
 
+/** @param {HTMLCanvasElement} canvas @param {{onProgress?: (progress: {found:number,total:number,eaten:number}) => void, random?: () => number}} [options] */
 export function createKoiPond(canvas, { onProgress = () => {}, random = () => Random.random('visual') } = {}) {
   const ctx = canvas.getContext('2d');
   const kois = [], foods = [], ripples = [];

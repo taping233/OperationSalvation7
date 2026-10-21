@@ -1,13 +1,9 @@
 /* The motion service owns transforms while a reward/bag card is being browsed. */
 body #overlay .card .reward-replica .reward-unit .reward-card[data-card-state-motion="true"],
 body [data-card-state-motion="true"].bag-tile.card-face {
-  outline: 1px solid transparent;
-  outline-offset: 3px;
   transition-property: opacity, filter, box-shadow;
   transform-origin: center;
 }
-body #overlay .card .reward-replica .reward-unit .reward-card[data-card-state-motion="true"]:focus-within,
-body [data-card-state-motion="true"].bag-tile.card-face:focus-within { outline-width: 2px; }
 .reward-acquisition-card {
   position: fixed; z-index: 10020; pointer-events: none;
   margin: 0; padding: 0; border: 0; background: none;

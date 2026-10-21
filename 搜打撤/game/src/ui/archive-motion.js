@@ -9,12 +9,13 @@ export function clearArchiveMotion(overlay) {
   if (overlay) delete overlay.dataset.archiveMotion;
 }
 
-export function enterArchive(overlay, body) {
+export function enterArchive(overlay, body, reduced = undefined) {
+  void reduced; // Existing callers pass the current motion preference.
   clearArchiveMotion(overlay);
-  const page = body?.querySelector('.slot-page:not(.camp-entry-ghost)');
+  const page = /** @type {HTMLElement} */ (body?.querySelector('.slot-page:not(.camp-entry-ghost)'));
   if (!page) return;
   overlay.dataset.archiveMotion = '1';
-  const cards = [...page.querySelectorAll('.slot-card')];
+  const cards = [.../** @type {NodeListOf<HTMLElement>} */ (page.querySelectorAll('.slot-card'))];
   cards.forEach((card, index) => {
     card.style.setProperty('--archive-offset', `${(2 - index) * 22}px`);
     card.style.setProperty('--archive-delay', `${220 + index * 50}ms`);
@@ -22,10 +23,11 @@ export function enterArchive(overlay, body) {
   });
   // 捕获真实按钮输入，选中标记也适用于键盘激活和异步读档。
   const pick = event => {
+      if (!(event.target instanceof Element)) return;
     const button = event.target.closest?.('[data-act="enterSlot"], [data-act="newSlot"]');
     const card = button?.closest('.slot-card');
     if (!card || !page.contains(card)) return;
-    page.querySelector('[data-archive-picked]')?.removeAttribute('data-archive-picked');
+    /** @type {HTMLElement} */ (page.querySelector('[data-archive-picked]'))?.removeAttribute('data-archive-picked');
     card.dataset.archivePicked = '1';
   };
   page.addEventListener('click', pick, true);

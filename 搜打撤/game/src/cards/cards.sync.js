@@ -397,7 +397,12 @@ export const syncSlice = {
         const normalizedDesc = card => String(card.desc || '').replace(/\s/g, '');
         const knownDescriptions = new Set([
           ...SDT.Cards.TABLETOP3, ...SDT.Cards.TABLETOP10, ...DATA.cardsSync.cards,
-        ].filter(card => card.id === 'tt3-magic-lamp').map(normalizedDesc));
+        ].filter(card => card.id === 'tt3-magic-lamp').map(normalizedDesc)
+          // 2026-10-21 反馈#5 第 1 项文案改「发现招式」：历史定版卡面仍参与 armor:5 修正判定
+          .concat([
+            '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。',
+            '抉择：1° 发现 1 张牌并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，+5 甲。',
+          ].map(normalizedDesc)));
         let dirty = false;
         const nextCards = cards.map(card => {
           if (card.id !== 'tt3-magic-lamp' || +card.armor !== 5

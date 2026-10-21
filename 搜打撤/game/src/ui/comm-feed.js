@@ -24,7 +24,7 @@ export function commRowHTML(msg) {
 // FLIP 追加：旧行被新行推下的位移用反向 transform 补偿后过渡回 0（只动 transform）。
 // reduce 下（matchMedia 或设置开关，core/motion.js 权威口径）直接就位零动画。
 export function appendCommRow(feed, msg) {
-  const rows = [...feed.querySelectorAll('.comm-row')];
+  const rows = [.../** @type {NodeListOf<HTMLElement>} */ (feed.querySelectorAll('.comm-row'))];
   const prevTops = new Map(rows.map((r) => [r, r.getBoundingClientRect().top]));
   feed.insertAdjacentHTML('beforeend', commRowHTML(msg));
   const newRow = feed.lastElementChild;
@@ -52,7 +52,7 @@ export function commTypingHTML() {
   return '<div class="comm-typing" aria-label="传输中">传输中<i></i><i></i><i></i></div>';
 }
 export function setTyping(feed, on) {
-  const cur = feed.querySelector('.comm-typing');
+  const cur = /** @type {HTMLElement} */ (feed.querySelector('.comm-typing'));
   if (on && !cur) feed.insertAdjacentHTML('beforeend', commTypingHTML());
   if (!on && cur) cur.remove();
 }
@@ -64,10 +64,10 @@ export function commProgressHTML(segs = 6, lit = 0) {
     '</div>';
 }
 export function setProgress(panel, lit) {
-  const bar = panel?.querySelector('.comm-progress');
+  const bar = /** @type {HTMLElement} */ (panel?.querySelector('.comm-progress'));
   if (!bar) return;
   bar.setAttribute('aria-valuenow', String(lit));
-  [...bar.querySelectorAll('.comm-seg')].forEach((seg, i) => seg.classList.toggle('lit', i < lit));
+  [.../** @type {NodeListOf<HTMLElement>} */ (bar.querySelectorAll('.comm-seg'))].forEach((seg, i) => seg.classList.toggle('lit', i < lit));
 }
 
 // ── 演示入口：?commDemo=1 挂载右下面板（≥6 条撤离播报风格示例消息）。
@@ -90,7 +90,7 @@ export function mountCommDemo() {
     '<button type="button" class="comm-demo-close" title="关闭演示">×</button></div>' +
     '<div class="comm-feed"></div>' + commProgressHTML(DEMO_MSGS.length, 0);
   document.body.appendChild(panel);
-  const feed = panel.querySelector('.comm-feed');
+  const feed = /** @type {HTMLElement} */ (panel.querySelector('.comm-feed'));
   let step = 0;
   let timer = null;
   let typingTimer = null;
@@ -112,7 +112,7 @@ export function mountCommDemo() {
     observer.disconnect();
     panel.remove();
   };
-  panel.querySelector('.comm-demo-close').addEventListener('click', close);
+  /** @type {HTMLElement} */ (panel.querySelector('.comm-demo-close')).addEventListener('click', close);
   // 战斗中自动隐藏：demo 是开发演示件，其打字指示循环动画不得出现在战斗画面
   //（战斗域「零常驻循环动画」红线）；离开战斗自动恢复
   document.addEventListener('sdt-overlay-mode', onMode);

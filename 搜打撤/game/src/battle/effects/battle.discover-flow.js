@@ -76,12 +76,16 @@ export function createBattleDiscoverFlow(ports) {
     const legacyPred = job.rarity ? (card => card.rarity === job.rarity)
       : job.otherCls ? (card => card.rarity === '职业' && !!card.cls && card.cls !== battle.currentClass())
       : null;
+    // 显式职业池（其它职业发现，如江湖救急）：谓词带 allowClassCards 标记过职业卡门（反馈#2）
+    if (job.otherCls && legacyPred) {
+      /** @type {{ allowClassCards?: boolean }} */ (/** @type {unknown} */ (legacyPred)).allowClassCards = true;
+    }
     const structuredPool = job.pool;
     /** @type {DiscoverCardPredicate | null} */
     const structuredPred = structuredPool?.kind === 'moves'
       ? card => ['武术', '法术'].includes(card.type || '') && (structuredPool.cost === undefined || (Number(card.cost) || 0) === structuredPool.cost)
-      // 传说池（闪耀通行证「从传说卡中发现」）：资格边界仍由 buildDiscoverPool 的
-      // isRandomObtainable 统一把关（排除衍生/unrandom/生物/事件等）
+      // 传说池（闪耀通行证「从传说卡中发现」）：资格边界由 buildDiscoverPool 收口——
+      // 职业卡过职业卡门（反馈#2），其余资格沿指定池历史口径
       : structuredPool?.kind === 'legendary'
         ? card => card.rarity === '传说'
         : null;
@@ -170,16 +174,11 @@ export function createBattleDiscoverFlow(ports) {
     const sourceCardId = queuedState ? state.sourceCardId : null;
     const pool = queuedState ? state.pool : null;
 
-    const directPlayIssue = ['play', 'potion', 'playKeep', 'pouch'].includes(act || '')
-      ? cards.directPlayReason?.(card) || '' : '';
-    if (act === 'pouch' && directPlayIssue) {
-      // Reject before removing the pouch entry or its persistent owned source.
-      // Close this attempt so a pouch containing only gated cards cannot trap input.
-      interaction.set(null);
-      output.log(`[[icon:cross]] ${esc(directPlayIssue)}；锦囊与背包中的卡牌均未消耗`, 'warn');
-      interaction.requestRender();
-      return;
-    }
+    // 反馈#5b（2026-10-21 老板定版）：「直接释放/直接施放」词条释放注能卡时视为已注能——
+    // 允许释放、按已注能效果结算；不消耗注能材料，也不增加累计注能材料数。
+    // 纯注能牌不再「未注能留手」；留手规则仅保留给不含释放动作的纯发现（无 act）路径。
+    const directRelease = ['play', 'potion', 'playKeep', 'pouch'].includes(act || '');
+    const infusedNote = directRelease && cards.directPlayReason?.(card) ? '（视为已注能，不消耗注能材料）' : '';
     interaction.set(null);
     if (deckBottom && deckBottomUids.length) {
       const pickedUid = deckBottomUids[+index] != null ? deckBottomUids[+index] : null;
@@ -192,17 +191,17 @@ export function createBattleDiscoverFlow(ports) {
     if (act !== 'pouch' && !hasStructuredAcquire) cards.fireCatGift(card);
 
     if (act === 'play' || act === 'potion') {
-      const uid = cards.addTempCard(card, directPlayIssue ? undefined : { source: 'discover-cast' });
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】${directPlayIssue ? '未施放，保留在手牌中等待注能' : '并直接施放'}（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
+      const uid = cards.addTempCard(card, { source: 'discover-cast' });
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放${infusedNote}（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
-      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
+      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true, false, [], null, null, true);
     } else if (act === 'playKeep') {
-      const uid = cards.addTempCard(card, directPlayIssue ? undefined : { source: 'discover-cast' });
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】${directPlayIssue ? '未施放，保留在手牌中等待注能' : '并直接施放'}（本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
+      const uid = cards.addTempCard(card, { source: 'discover-cast' });
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放${infusedNote}（本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
-      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
+      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true, false, [], null, null, true);
       options.filter(option => option.id !== card.id).forEach(option => {
         cards.addTempCard(option);
         output.log(`[[icon:cards]] 其余的【<b>${esc(option.name)}</b>】置入手牌`, 'loot');
@@ -216,10 +215,10 @@ export function createBattleDiscoverFlow(ports) {
       }
       if (card.pouchUid && effects.removeOwnedCard) effects.removeOwnedCard(String(card.pouchUid));   // 09-29 双向同步：施放即消耗背包母本
       const uid = cards.addTempCard(card, { source: 'pouch' });
-      output.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
+      output.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】${infusedNote}（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
-      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
+      cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true, false, [], null, null, true);
     } else if (act === 'stellarCopies' || act === 'copyToDeck') {
       if (!cards.addDeckCard || !effects.shuffleDeck) throw new Error('Missing stellarCopies deck ports');
       cards.addTempCard(clone(card));

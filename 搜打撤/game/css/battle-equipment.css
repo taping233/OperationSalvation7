@@ -1,0 +1,119 @@
+/* Compact power-style equipment icons beneath the player's existing health bar.
+   Full names and rules stay in the shared body-mounted tooltip. */
+#overlay .battle-stage.sts .sts-me .sts-unit-vitals > .sts-equips {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 8;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: max-content;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  overflow: visible;
+  pointer-events: auto;
+}
+#overlay .battle-stage.sts .sts-equips .sts-equip {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  padding: 2px;
+  overflow: hidden;
+  border: 2px solid #a8bec8a6;
+  border-radius: 5px;
+  background: #132733;
+  color: #e8f0f1;
+  box-shadow: 0 2px 7px #051019b8, inset 0 0 0 1px #f2f4e536;
+  cursor: help;
+  vertical-align: middle;
+}
+#overlay .battle-stage.sts .sts-equip .sts-equip-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  pointer-events: none;
+}
+#overlay .battle-stage.sts .sts-equip .sts-equip-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#overlay .battle-stage.sts .sts-equip .sts-equip-art > :is(.ic, svg) {
+  width: 32px;
+  height: 32px;
+  margin: 5px;
+}
+#overlay .battle-stage.sts .sts-equip .sts-equip-disabled-action {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: default;
+  pointer-events: none;
+}
+#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="ready"] {
+  border-color: #e9cb78;
+  cursor: pointer;
+}
+#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="busy"],
+#overlay .battle-stage.sts .sts-equips .sts-equip[data-equip-state="used"] {
+  border-color: #82969e;
+}
+#overlay .battle-stage.sts .sts-equip:is(:hover, :focus-visible) {
+  outline: 2px solid #d8edf1;
+  outline-offset: 2px;
+}
+#overlay .battle-stage.sts .sts-equip:active:not(:disabled)[data-equip-state="ready"] {
+  outline-color: #f8e3a8;
+  outline-offset: 0;
+}
+#overlay .battle-stage.sts .sts-equip:disabled { cursor: default; }
+#overlay .battle-stage.sts .sts-equip[data-equip-state="used"] .sts-equip-art { opacity: .58; }
+#overlay .battle-stage.sts .sts-equip .sts-equip-state {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border-top: 1px solid #fcf0ca;
+  border-left: 1px solid #fcf0ca;
+  border-radius: 3px 0 0 0;
+  background: #d7bc78;
+  color: #18242b;
+  font-size: 12px;
+  line-height: 1;
+  pointer-events: none;
+}
+#overlay .battle-stage.sts .sts-equip[data-equip-state="busy"] .sts-equip-state,
+#overlay .battle-stage.sts .sts-equip[data-equip-state="used"] .sts-equip-state {
+  border-color: #b3c2c5;
+  background: #687e87;
+  color: #edf3f3;
+}
+#overlay .battle-stage.sts .sts-equip .sts-equip-state :is(.ic, svg) {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+}

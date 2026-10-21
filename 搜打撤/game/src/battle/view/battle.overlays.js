@@ -1,10 +1,11 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { bindBattlePageAction } from './battle.page-activity.js';
 import { BATTLE_CONSUMED_LABEL, consumedPileUids } from './battle.piles.view.js';
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：独立弹层渲染（renderDeckSelection / renderGrave / renderBattleBag + 卡身份键）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { createBattleDecisionPresenter } from './battle.decision-shell.js';
+import { createBattleDecisionPresenter, bindBattleDecisionInspection } from './battle.decision-shell.js';
 import { battlePileBodyHTML, pileDetailHTML, cardIdentityKey } from './battle.decision-content.js';
 import { esc } from '../../core/shared.js';
 import { escAttr } from '../../core/shared.js';
@@ -20,21 +21,6 @@ const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!car
 const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R });
 
 
-function installPileInspection(stacks) {
-  const root = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="pile"]');
-  bindBattlePageAction({ UI, getSnapshot, snapshot:getSnapshot() }, 'btInspectPile', data => {
-    const index = +data.i;
-    const stack = stacks[index];
-    if (!stack || !root) return;
-    root.querySelectorAll('.battle-pile-card').forEach(button => {
-      const selected = +button.dataset.i === index;
-      button.classList.toggle('is-inspected', selected);
-      button.setAttribute('aria-pressed', String(selected));
-    });
-    const detail = root.querySelector('.battle-decision-inspect');
-    if (detail) detail.outerHTML = pileDetailHTML(stack);
-  });
-}
   function renderDeckSelection(snapshot) {
     const { deckSelection } = snapshot;
     const selected = deckSelection.selected;
@@ -54,16 +40,16 @@ function installPileInspection(stacks) {
     const boss = deckSelection.boss;
     const affix = boss && boss.affix ? AFFIX_META[boss.affix] : null;
     const ready = selected.length >= need;
-    const mounted = UI.el.ovBody.querySelector('[data-decision-kind="formation"]');
+    const mounted = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('[data-decision-kind="formation"]'));
     const poolKey = JSON.stringify(deckSelection.cards.map(entry => [entry.uid, entry.card]));
     if (mounted?._battleToken === snapshot.battleToken && mounted._formationPoolKey === poolKey) {
-      for (const button of mounted.querySelectorAll('[data-act="bossSel"]')) {
+      for (const button of /** @type {NodeListOf<BattleElement>} */ (mounted.querySelectorAll('[data-act="bossSel"]'))) {
         const on = selected.includes(button.dataset.uid);
         button.classList.toggle('sel', on);
         button.setAttribute('aria-pressed', String(on));
       }
-      mounted.querySelector('.boss-formation-progress strong').innerHTML = `${selected.length}<small> / ${need}</small>`;
-      const confirm = mounted.querySelector('[data-act="bossGo"]');
+      /** @type {BattleElement} */ (mounted.querySelector('.boss-formation-progress strong')).innerHTML = `${selected.length}<small> / ${need}</small>`;
+      const confirm = /** @type {HTMLButtonElement} */ (mounted.querySelector('[data-act="bossGo"]'));
       confirm.disabled = !ready;
       confirm.textContent = ready ? `开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`;
       return;
@@ -81,7 +67,7 @@ function installPileInspection(stacks) {
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
       </div>`, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossSel', data => selectDeckCard(data.uid));
-    const formation = UI.el.ovBody.querySelector('[data-decision-kind="formation"]');
+    const formation = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('[data-decision-kind="formation"]'));
     if (formation) formation._formationPoolKey = poolKey;
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossGo', confirmDeck);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossCancel', cancelDeck);
@@ -93,20 +79,17 @@ function installPileInspection(stacks) {
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'grave', isBoss:!!snapshot.opts.isBoss });
     showBattleDecision(`[[icon:skull]] ${BATTLE_CONSUMED_LABEL}`, html, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGraveBack', closeGrave);
-    installPileInspection(stacks);
+    bindBattleDecisionInspection({ UI, getSnapshot, cards:stacks.map(stack => stack.card), snapshot });
     UI.refresh(SDT.game);
   }
 
-  // 牌库查看（BOSS 战专属，2026-09-13 留言：点击牌堆可看牌库中的卡）。
-  // 2026-09-23 lint 批次补实现：battle.view.js 自引入起即调用本函数但定义从未在任何提交落地，
-  // BOSS 战点牌堆（btDeck）会在 render 里抛 ReferenceError。行样式与 renderGrave 同构；
-  // btDeckBack 关闭动作 battle.view.js 已全局接线，此处按 renderGrave 模式自注册一遍（UI.act 覆盖式，幂等）。
+  // 两种战斗共用只读牌库网格；展示排序与实际抽牌顺序分离。
   function renderDeckPileView(snapshot) {
     const cards = snapshot.drawPile.map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'deck', isBoss:!!snapshot.opts.isBoss });
     showBattleDecision('[[icon:cards]] 剩余牌库', html, true, snapshot);
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeckBack', closeDeckView);
-    installPileInspection(stacks);
+    bindBattleDecisionInspection({ UI, getSnapshot, cards:stacks.map(stack => stack.card), snapshot });
     UI.refresh(SDT.game);
   }
 
@@ -161,11 +144,11 @@ function installPileInspection(stacks) {
       <p class="ov-stats">点击把整组存入安全格；撤离失败时，安全格里的卡牌抢运回基地。</p>
       <div class="bag-grid battle-bag-grid">${safeHTML}</div></section>
       <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true, snapshot);
-    (() => { const card = document.querySelector('#overlay .card'); if (card) card.classList.add('battle-bag'); })();
+    (() => { const card = /** @type {BattleElement} */ (document.querySelector('#overlay .card')); if (card) card.classList.add('battle-bag'); })();
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btUseItem', (d) => useItemCmd(d.uid));
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btInspectBag', data => {
       const stack = inspectCards[+data.i];
-      const detail = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="bag"] .battle-decision-inspect');
+      const detail = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="bag"] .battle-decision-inspect'));
       if (stack && detail) detail.outerHTML = pileDetailHTML({ card:stack.card, count:stack.uids.length });
     });
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btSafeMove', (d) => {

@@ -20,15 +20,16 @@ const captions = { deploy:'绝区零参考：共用底部玻璃目的地，侧�
 const back = '<button class="hub-back" data-preview-home aria-label="返回基地"><svg viewBox="0 0 48 44" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M31 8 15 22l16 14M15 22h28"/></svg></button>';
 function render(changed = true) {
   const home = tab === 'deploy' && !detail;
-  const body = detail ? cardPreviewV7HTML(detail) : home ? baseHomeV3HTML({ base, meta, modes, mode, prepared:document.getElementById('preparedPreview').checked, character:{ name:'无' }, picks:8 }) : tab === 'stash' ? warehousePreviewV7HTML({ group, query }) : tab === 'shop' ? tradePreviewV7HTML({ selected:trade, mode:tradeMode }) : tab === 'classes' ? personnelPreviewV7HTML(person) : collectionPreviewV7HTML();
+  const body = detail ? cardPreviewV7HTML(detail) : home ? baseHomeV3HTML({ base, meta, modes, mode, prepared:/** @type {HTMLInputElement} */ (document.getElementById('preparedPreview')).checked, character:{ name:'无' }, picks:8 }) : tab === 'stash' ? warehousePreviewV7HTML({ group, query }) : tab === 'shop' ? tradePreviewV7HTML({ selected:trade, mode:tradeMode }) : tab === 'classes' ? personnelPreviewV7HTML(person) : collectionPreviewV7HTML();
   host.innerHTML = `<div id="hubMain" class="pg hub hub-${tab} base-camp base-frame-v7 ${home ? 'base-home' : 'base-subpage'}" data-page="${tab}"><header class="hub-head">${back}<div class="camp-brand"><h2>基地</h2></div><span class="hub-slot-label">示例档案 / 01</span><span class="hub-res">${resourceStripHTML(base)}</span></header><div class="hub-body"><main class="hub-page" data-view="${tab}/${detail || ''}">${body}</main>${baseNavigationV7HTML({ tab, pendingRewards:2 })}</div></div>`;
-  host.querySelectorAll('[data-card-browser]').forEach(browser => bindCardBrowser(browser));
-  bindBasePageMotionV7(host.querySelector('#hubMain'), { changed });
+  /** @type {NodeListOf<HTMLElement>} */ (host.querySelectorAll('[data-card-browser]')).forEach(browser => bindCardBrowser(browser));
+  bindBasePageMotionV7(/** @type {HTMLElement} */ (host.querySelector('#hubMain')), { changed });
   document.getElementById('layoutCaption').textContent = detail ? '卡牌进入完整详情画面，返回恢复原房间。' : captions[tab];
-  document.querySelectorAll('[data-page-choice]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.pageChoice === tab && !detail)));
+  /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[data-page-choice]')).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.pageChoice === tab && !detail)));
 }
 function open(next) { tab = next; detail = null; render(); }
 host.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
   const button = event.target.closest('button');
   if (!button) return;
   if (button.hasAttribute('data-preview-home')) { open('deploy'); return; }
@@ -38,29 +39,30 @@ host.addEventListener('click', event => {
   if (button.dataset.previewTrade) { trade = button.dataset.previewTrade; render(false); return; }
   if (button.dataset.previewTradeMode) { tradeMode = button.dataset.previewTradeMode; render(false); return; }
   if (button.dataset.act === 'warehouseGroup') { group = button.dataset.group; render(false); return; }
-  if (button.dataset.act === 'selMode') { const previousMode = mode; mode = button.dataset.mode; render(false); animateBaseModeChangeV12(host.querySelector('#hubMain'), previousMode); return; }
-  if (button.dataset.act === 'deploy') { document.getElementById('preparedPreview').checked = true; open('classes'); return; }
+  if (button.dataset.act === 'selMode') { const previousMode = mode; mode = button.dataset.mode; render(false); animateBaseModeChangeV12(/** @type {HTMLElement} */ (host.querySelector('#hubMain')), previousMode); return; }
+  if (button.dataset.act === 'deploy') { /** @type {HTMLInputElement} */ (document.getElementById('preparedPreview')).checked = true; open('classes'); return; }
   if (button.dataset.act === 'hubTab') {
     if (Object.hasOwn(captions, button.dataset.tab)) open(button.dataset.tab);
     else document.getElementById('layoutCaption').textContent = '建设与庭院保留正式游戏的独立入口，本画板展示基地、仓库、角色、交易所与收藏。';
   }
 });
 host.addEventListener('input', event => {
+      if (!(event.target instanceof HTMLInputElement)) return;
   if (!event.target.hasAttribute('data-preview-search')) return;
   const input = event.target, cursor = input.selectionStart;
   query = input.value; render(false);
-  const next = host.querySelector('[data-preview-search]'); next.focus(); next.setSelectionRange(cursor, cursor);
+  const next = /** @type {HTMLInputElement} */ (host.querySelector('[data-preview-search]')); next.focus(); next.setSelectionRange(cursor, cursor);
 });
-document.querySelectorAll('[data-page-choice]').forEach(button => button.addEventListener('click', () => open(button.dataset.pageChoice)));
-document.getElementById('preparedPreview').addEventListener('change', () => render(false));
-document.getElementById('replayPreview').addEventListener('click', () => render());
-document.querySelectorAll('[data-panel]').forEach(button => button.addEventListener('click', () => {
+/** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[data-page-choice]')).forEach(button => button.addEventListener('click', () => open(button.dataset.pageChoice)));
+/** @type {HTMLInputElement} */ (document.getElementById('preparedPreview')).addEventListener('change', () => render(false));
+/** @type {HTMLButtonElement} */ (document.getElementById('replayPreview')).addEventListener('click', () => render());
+/** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[data-panel]')).forEach(button => button.addEventListener('click', () => {
   document.getElementById('layoutsPanel').hidden = button.dataset.panel !== 'layouts';
   document.getElementById('referencesPanel').hidden = button.dataset.panel !== 'references';
-  document.querySelectorAll('[data-panel]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[data-panel]')).forEach(item => item.setAttribute('aria-pressed', String(item === button)));
 }));
-const stage = document.querySelector('.design-stage');
-new ResizeObserver(() => { stage.style.setProperty('--preview-scale', String(stage.clientWidth / 1920)); host.querySelectorAll('[data-card-browser]').forEach(browser => refreshCardBrowser(browser)); }).observe(stage);
+const stage = /** @type {HTMLElement} */ (document.querySelector('.design-stage'));
+new ResizeObserver(() => { stage.style.setProperty('--preview-scale', String(stage.clientWidth / 1920)); /** @type {NodeListOf<HTMLElement>} */ (host.querySelectorAll('[data-card-browser]')).forEach(browser => refreshCardBrowser(browser)); }).observe(stage);
 render();
 const sources = await fetch(new URL('../../../docs/evidence/2026-10-11-WF-base-redesign-v7/reference-sources.json', import.meta.url)).then(response => response.json()).catch(() => null);
 if (sources) {

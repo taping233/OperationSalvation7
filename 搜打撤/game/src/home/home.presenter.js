@@ -8,6 +8,7 @@ const freeze = value => {
 };
 
 /** 把 M01/M02/M03 的只读快照收敛为 M05 场景唯一输入。 */
+/** @param {{selClass?:string,coins?:number,wood?:number,rations?:number}} baseSnapshot @param {{cardCatalog?:import("../hub/game.store.types").CardSnapshot[],characterId?:string,revision?:number}} [options] */
 export function presentHome(baseSnapshot, { cardCatalog, characterId, revision = 0 } = {}) {
   const home = getHome(baseSnapshot);
   const collection = getCollection(baseSnapshot, cardCatalog)
@@ -27,13 +28,4 @@ export function presentHome(baseSnapshot, { cardCatalog, characterId, revision =
   });
 }
 
-export function homeErrorMessage(result) {
-  if (!result || result.ok) return '';
-  return result.message || ({
-    STALE_REVISION: '基地资料已变化，请刷新后重试。',
-    SAVE_FAILED: '保存失败，原布局仍然保留。',
-    INSUFFICIENT_FUNDS: '储备币不足。',
-    PLACEMENT_OVERLAP: '家具位置重叠。',
-    PLACEMENT_OUT_OF_BOUNDS: '家具超出房间范围。',
-  }[result.code] || '操作失败，请重试。');
-}
+export { homeErrorMessage } from '../hub/command-errors.js';

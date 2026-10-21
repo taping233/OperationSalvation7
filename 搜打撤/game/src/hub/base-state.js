@@ -33,7 +33,7 @@ export function createBaseState() {
     collClaimed: {},        // [收藏里程碑id] => true（每个一次性奖励只能领一次）
     collXp: {},             // [卡牌id] => true（收藏经验已结算，取消重藏不重复发放）
     // ---- 卡背（v0.21）：backs 解锁表 + backSel 当前装备；默认卡背恒解锁 ----
-    backs: { classic: true },
+    backs: /** @type {Record<string, boolean>} */ ({ classic: true }),
     backSel: 'classic',
     // ---- 模块化基地字段（M01 v1） ----
     // 旧收藏、职业经验与仓库仍保留在原字段；这里不复制其真源。

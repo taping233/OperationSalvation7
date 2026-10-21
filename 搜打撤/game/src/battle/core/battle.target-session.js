@@ -1,9 +1,10 @@
+/** @typedef {HTMLElement & {_battleToken?: number, _misTimer?: ReturnType<typeof setTimeout>}} BattleElement */
 // Enemy IDs identify species, not combat instances. Indices stay aligned with
 // the snapshot/DOM foe slots, including dead placeholders, for this battle token.
 export const isTargetableEnemy = (foe, index, excludedIndex = null) => !!foe && !foe.dead
   && Number.isInteger(index) && index >= 0 && index !== excludedIndex;
 // 单次战斗目标会话：负责命中筛选、hover 转换及一次性选择/取消结果。
-export function createTargetSession({ side, snapshot, isBattleCurrent, getTargets, onHover }) {
+export function createTargetSession({ side, snapshot, isBattleCurrent, getTargets, onHover = undefined }) {
   let hover = null;
   let settled = false;
   let resolve;
@@ -29,7 +30,7 @@ export function createTargetSession({ side, snapshot, isBattleCurrent, getTarget
       return { kind: 'any', el: elAt.closest('.battle-stage') };
     }
     if (side === 'enemy') {
-      const el = elAt.closest('.bt-foe[data-eidx]');
+      const el = /** @type {HTMLElement} */ (elAt.closest('.bt-foe[data-eidx]'));
       if (!el) return null;
       const idx = +el.dataset.eidx;
       const foe = snapshot?.foes[idx];

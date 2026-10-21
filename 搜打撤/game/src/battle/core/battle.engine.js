@@ -171,7 +171,7 @@ export function configureBattleEngine(ports) {
   if (engine && !engine.canReconfigure()) throw new Error('Cannot configure an active battle engine');
   const context = createDefaultBattleContext(ports);
   context.audio = { ...context.audio, sfx: ports.sound };
-  const next = createBattleEngine(context);
+  const next = createBattleEngine(/** @type {typeof context & {sound: (name: string) => void, evaluateRunes: (slots: unknown[]) => object}} */ (context));
   if (!next.canReconfigure()) throw new Error('Cannot configure an active battle engine');
   engine = next;
   return next;

@@ -71,7 +71,7 @@ async function runScene(name, options = {}) {
 }
 
 function listScenes() {
-  return Object.entries(SCENE_CATALOG).map(([id, s]) => ({ id, title: s.title, desc: s.desc, turboDefault: !!s.turbo }));
+  return Object.entries(SCENE_CATALOG).map(([id, s]) => ({ id, title: s.title, desc: s.desc, turboDefault: !!(/** @type {typeof s & {turbo?:boolean}} */ (s)).turbo }));
 }
 
 export { runScene, startScene, sceneStatus, listScenes };

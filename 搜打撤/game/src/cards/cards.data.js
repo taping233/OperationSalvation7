@@ -122,7 +122,7 @@ export const dataSlice = {
       { id: 'tt3-nuke-ray',      name: '核爆射线', cost: 2, rarity: '史诗', type: '法术', dmg: 4, desc: '造成 4 点伤害。', value: 4 },
       { id: 'tt3-petal',         name: '花瓣',     cost: 2, rarity: '稀有', type: '法术', desc: '每回合结束回复 2 点生命。', value: 4 },
       // —— 法术 / 药水（第二摞补 11 张）——
-      { id: 'tt3-magic-lamp',    name: '神灯',     cost: 4, rarity: '古朴', type: '法术', desc: '抉择：1° 发现 1 张牌并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，+5 甲。' },
+      { id: 'tt3-magic-lamp',    name: '神灯',     cost: 4, rarity: '古朴', type: '法术', desc: '抉择：1° 发现招式并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，+5 甲。' }, // 2026-10-21 反馈#5：第 1 项只从招式池发现
       { id: 'tt3-thornfield',    name: '棘刺之地', cost: 3, rarity: '古朴', type: '法术', desc: '对所有敌人附加 1 层中毒，+1 甲。' },
       { id: 'tt3-mind-potion',   name: '精神药水', cost: 2, rarity: '稀有', type: '道具', desc: '抽 2 张牌。', value: 4 },
       { id: 'tt3-turnabout-potion', name: '转势药水', cost: 1, rarity: '稀有', type: '道具', desc: '使所有敌人附加陷阱牌。', value: 3 },
@@ -136,7 +136,7 @@ export const dataSlice = {
       { id: 'tt3sp-doom',         name: '毁灭',     cost: 3, rarity: '史诗', type: '法术', desc: '消灭 2 名 5 级及以下小怪，不可复原。' },
       { id: 'tt3sp-silverthorn',  name: '银刺',     cost: 2, rarity: '古朴', type: '法术', desc: "5′；注能(小)：改为 8′。" },
       { id: 'tt3sp-magicoil',     name: '魔法药水', cost: 2, rarity: '古朴', type: '法术', desc: "限定：1′，抽 1 张牌。" },
-      { id: 'tt3sp-shadowbug',    name: '影蛊',     cost: 3, rarity: '古朴', type: '法术', desc: '本回合偷取 1 名敌人的攻击。' },
+      { id: 'tt3sp-shadowbug',    name: '影蛊',     cost: 3, rarity: '史诗', type: '法术', desc: '本回合偷取 1 名敌人的攻击。' }, // 同 id 定版稀有度跟随 TABLETOP10「影噬」（2026-10-21 反馈#1 调史诗）；旧面仅存在于 TT10 覆盖前的播种中间态
       { id: 'tt3sp-flowerzhen',   name: '花鸩',     cost: 4, rarity: '古朴', type: '法术', desc: '使 1 名角色中毒层数效果翻倍。' },
       { id: 'tt3sp-bloodstorm',   name: '血腥风暴', cost: 4, rarity: '稀有', type: '法术', desc: "3′，吸血，对敌方全体；注能(2)：额外施放 1 段。" },
       { id: 'tt3sp-shadowshot',   name: '暗影射击', cost: 2, rarity: '职业', type: '法术', cls: '降临者', unrandom: true, desc: "3′，若对手处于诅咒状态，额外施放 1 次。", value: 2 }, // 2026-09-05 职业整合：原地转为降临者职业卡
@@ -423,7 +423,7 @@ export const dataSlice = {
       "tt3-holy-shield",
       { id: 'tt3-iceheart-potion', name: '冰冻药水', cost: 0, rarity: '稀有', type: '道具', desc: '附加冰冻，持续 1 回合。', dmg: 0, value: 3 },
       { id: 'tt3-demon-potion', name: '法力药水', cost: 0, rarity: '稀有', type: '道具', desc: '法伤 +2。持续 1 回合。', dmg: 0, value: 2 },
-      { id: 'tt3-magic-lamp', name: '神灯', cost: 1, rarity: '史诗', type: '法术', desc: '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。', dmg: 0, value: 4 },
+      { id: 'tt3-magic-lamp', name: '神灯', cost: 1, rarity: '史诗', type: '法术', desc: '抉择：1° 发现招式并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。', dmg: 0, value: 4 }, // 2026-10-21 反馈#5：第 1 项只从招式池发现
       { id: 'tt3-thornfield', name: '棘刺之地', cost: 2, rarity: '稀有', type: '法术', desc: '对所有敌人附加 2 层中毒，并立即触发1次毒伤。', dmg: 0, value: 3 },
       { id: 'tt3-mind-potion', name: '精神药水', cost: 0, rarity: '稀有', type: '道具', desc: '抽 2 张牌。', dmg: 0, draw: 2, value: 3 },
       { id: 'tt3-turnabout-potion', name: '剧毒药水', cost: 0, rarity: '稀有', type: '道具', desc: '对所有敌人附加1层中毒。', dmg: 0, value: 3 },
@@ -436,7 +436,7 @@ export const dataSlice = {
       "tt3sp-doom",
       { id: 'tt3sp-silverthorn', name: '镭射', cost: 1, rarity: '古朴', type: '法术', desc: '造成5点法术伤害；注能(1)：伤害+3。', dmg: 5, dmgType: 'spell', infuse: 1, value: 2 },
       { id: 'tt3sp-magicoil', name: '药水魔法', cost: 1, rarity: '稀有', type: '法术', desc: '发现1瓶药水并直接释放', dmg: 0, value: 3 },
-      { id: 'tt3sp-shadowbug', name: '影噬', cost: 1, rarity: '稀有', type: '武术', desc: '本回合偷取 1 名敌人的攻击力至1点。', dmg: 0, value: 3 },
+      { id: 'tt3sp-shadowbug', name: '影噬', cost: 1, rarity: '史诗', type: '武术', desc: '本回合偷取 1 名敌人的攻击力至1点。', dmg: 0, value: 3 },
       { id: 'tt3sp-flowerzhen', name: '花鸩', cost: 1, rarity: '史诗', type: '法术', desc: '使 1 名角色中毒层数翻倍并立即触发1次毒伤。', dmg: 0, value: 4 },
       { id: 'tt3sp-bloodstorm', name: '血蝠风暴', cost: 2, rarity: '史诗', type: '法术', desc: '3′，目标为全体敌人，回复等量生命；注能(2)：触发 2 次。', dmg: 3, dmgType: 'spell', infuse: 2, value: 3 },
       { id: 'tt3sp-shadowshot', cls: '降临者', name: '暗影射击', cost: 1, rarity: '职业', type: '法术', desc: '3′，若对手处于诅咒状态，额外施放 1 次。', dmg: 3, dmgType: 'spell', unrandom: true },

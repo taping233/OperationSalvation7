@@ -1,62 +1,56 @@
-/* Focused infusion workspace uses the combat decision palette without the
-   generic page's empty full-height shell. Material scrolling is independent. */
-body #overlay .card.card:has(.battle-decision.battle-decision-unified[data-decision-kind="infusion"]) {
-  width:min(1420px,calc(var(--game-layout-width,100vw) - 100px))!important;
-  height:min(820px,calc(var(--game-layout-height,100vh) - 100px))!important;
+/* In-place card selection: the battle remains visible behind the source,
+   selected cards and the same mounted hand. Card faces keep the game theme. */
+body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace] {
+  position:absolute; inset:0; z-index:24; pointer-events:none; color:#e9eff0;
+  font:400 21px/1.45 var(--font-ui,sans-serif);
 }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-head { padding:22px 30px 16px; border-bottom:1px solid #afc4ce26!important; }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-content { display:flex; padding:0; overflow:hidden!important; }
-body #overlay [data-infusion-workspace] { display:grid; grid-template-columns:300px minmax(0,1fr); width:100%; min-height:0; font:400 21px/1.45 var(--font-ui,sans-serif); }
-body #overlay .infusion-source { padding:22px 26px; overflow:auto; background:#0e1a2460; border-right:1px solid #afc4ce26; }
-body #overlay .infusion-eyebrow { font-size:18px; color:#9eafb9; }
-body #overlay [data-infusion-workspace] h4 { margin:5px 0 10px; color:#eee3c6; font-size:29px; line-height:1.3; }
-body #overlay .infusion-cost { margin:0; font-size:20px; color:#c6d6df; }
-body #overlay .infusion-source-card { display:flex; justify-content:center; margin:10px 0; }
-body #overlay .infusion-source-card .hs-card { font-size:12px; }
-body #overlay .infusion-rules h5 { margin:0 0 8px; font-size:19px; color:#c1d5d8; }
-body #overlay .infusion-rules p { margin:0; font-size:21px; line-height:1.5; }
-body #overlay .infusion-destination { margin:14px 0 0; padding-top:12px; border-top:1px solid #afc4ce26; color:#afbec6; font-size:19px; line-height:1.5; }
-body #overlay .infusion-selection { min-width:0; min-height:0; display:flex; flex-direction:column; }
-body #overlay .infusion-selection>header { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:12px 18px 10px; }
-body #overlay .infusion-selection>header p { margin:0; color:#aebfc9; font-size:20px; }
-body #overlay .infusion-progress { flex:none; color:#e5d3a2; font-size:29px; font-variant-numeric:tabular-nums; text-align:right; }
-body #overlay .infusion-progress small { display:block; font-size:19px; font-weight:400; }
-body #overlay .infusion-progress.is-ready { color:#b8dfcf; }
-body #overlay .infusion-materials { flex:1; min-height:0; overflow:auto; scrollbar-gutter:stable; overscroll-behavior:contain; display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); align-content:start; gap:24px; padding:12px 24px 24px; }
-body #overlay .infusion-material { position:relative; display:flex; flex-direction:column; min-width:0; padding:12px 0; border:0; border-bottom:2px solid #8ca7b132; border-radius:0; background:none; }
-body #overlay .infusion-material.is-selected { border-color:#c3e3e5; background:#b6dce50a; box-shadow:none; }
-body #overlay .infusion-material.is-unavailable { opacity:.65; }
-body #overlay .infusion-card-face { display:flex; justify-content:center; width:100%; margin:0; padding:0; border:0; background:none; cursor:pointer; }
-body #overlay .infusion-card-face:disabled { cursor:default; opacity:1; }
-body #overlay .infusion-card-face .hs-card { pointer-events:none; font-size:13px; margin:12px 0; }
-body #overlay .infusion-material-heading { display:flex; gap:8px; align-items:baseline; justify-content:space-between; margin:0 0 6px; font-size:20px; }
-body #overlay .infusion-material-heading b { min-width:0; overflow-wrap:anywhere; color:#e4e9e9; font-size:0; }
-body #overlay .infusion-detail { flex:none; padding:3px 0; border:0; background:none; color:#b9cfd8; font-size:18px; text-decoration:underline; cursor:pointer; }
-body #overlay .infusion-quantity { order:2; display:flex; align-items:center; justify-content:center; gap:14px; padding-top:10px; }
-body #overlay .infusion-quantity>button { flex:none; width:48px; height:46px; padding:0; border:1px solid #b3c6ce60; border-radius:6px; color:#e5edf1; background:#314854; font:500 29px/1 var(--font-ui,sans-serif); cursor:pointer; }
-body #overlay .infusion-quantity>button:disabled { color:#657984; border-color:#6f89932d; background:#1b2a35; cursor:default; }
-body #overlay .infusion-quantity>span { text-align:center; font-size:25px; color:#bacbd2; }
-body #overlay .infusion-quantity b { color:#eddbac; }
-body #overlay .infusion-quantity small { display:block; font-size:16px; }
-body #overlay .infusion-material-note { min-height:24px; margin:9px 0 0; text-align:center; color:#afc1c9; font-size:17px; }
-body #overlay .infusion-material.is-selected .infusion-material-note { color:#e8d5a7; }
-body #overlay .infusion-selection-summary { display:none; }
-body #overlay .infusion-selection-summary>span { color:#94acb9; font-size:17px; white-space:nowrap; }
-body #overlay .infusion-selection-summary p { margin:0; color:#e9dbb6; font-size:18px; max-height:52px; overflow:auto; }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-actions { padding:18px 26px; }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer .ov-btn { min-width:140px; min-height:58px; padding:12px 20px; font-size:22px; }
-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer .ok { min-width:245px; }
-body #overlay .infusion-footer p { flex:1; margin:0 12px; text-align:right; color:#b5c5cd; font-size:18px; max-width:240px; }
+body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace]::before {
+  content:''; position:absolute; inset:0; z-index:-1; background:#050d1766;
+}
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hud { z-index:25; }
+body #overlay .battle-stage.sts[data-infusion-mode] :is(.sts-topbar,.bt-potions,.sts-resource-dock,.sts-hud-r,.sts-hand-tools,.sts-tactics) { visibility:hidden; pointer-events:none; }
+/* Overlay siblings escape the stage stacking context. Suspend only the unit
+   canvas and scenic foreground during this mode; the battlefield stays visible. */
+body #overlay:has(.battle-stage.sts[data-infusion-mode]) > :is(#unitFrames,.battle-scene-foreground),
+body #overlay .battle-stage.sts[data-infusion-mode] > .battle-scene-foreground { visibility:hidden!important; }
+body #overlay .infusion-heading { position:absolute; top:118px; left:430px; right:64px; display:flex; align-items:center; justify-content:flex-end; gap:32px; }
+body #overlay .infusion-progress { flex:none; color:#e5d3a2; font-size:30px; font-variant-numeric:tabular-nums; text-align:right; }
+body #overlay .infusion-source { position:absolute; top:190px; left:64px; width:300px; pointer-events:auto; text-align:center; }
+body #overlay .infusion-source-card { margin:0; }
+body #overlay .infusion-source-card .hs-card { width:300px!important; max-width:none!important; margin:0; font-size:24px; filter:drop-shadow(0 12px 20px #0006); }
+body #overlay .infusion-detail { margin-top:10px; width:38px; height:38px; padding:0; border:1px solid #9cb5c55e; border-radius:50%; background:#10212b; color:#d7e4e8; font:400 27px/1 var(--font-ui,sans-serif); cursor:pointer; }
+body #overlay .infusion-selection { position:absolute; top:220px; left:430px; right:64px; height:352px; min-width:0; pointer-events:auto; }
+body #overlay .infusion-selected-cards { display:flex; align-items:flex-start; justify-content:safe center; gap:24px; height:320px; min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; padding:6px 12px 8px; border-top:1px solid #c6dfe336; border-bottom:1px solid #c6dfe336; }
+body #overlay .infusion-selected-card { flex:0 0 190px; width:190px; min-width:0; text-align:center; }
+body #overlay .infusion-card-face { position:relative; display:block; width:100%; margin:0; padding:0; border:0; background:none; cursor:pointer; }
+body #overlay .infusion-card-face .hs-card { pointer-events:none; width:190px!important; max-width:none!important; margin:0; font-size:20px; outline:2px solid #bfe3e1; outline-offset:3px; }
+body #overlay .infusion-card-return { position:absolute; right:8px; bottom:8px; width:28px; height:28px; padding:4px; border-radius:50%; background:#102831ed; color:#e4f3ed; font:500 18px/1.2 var(--font-ui,sans-serif); }
+body #overlay .infusion-copy-count { display:block; margin-top:7px; color:#d3e2e5; font:400 17px/1.3 var(--font-ui,sans-serif); text-align:center; white-space:nowrap; }
+body #overlay .infusion-footer { position:absolute; top:604px; left:430px; right:64px; pointer-events:auto; }
+body #overlay .infusion-actions { display:flex; align-items:center; gap:16px; }
+body #overlay .infusion-actions .ov-btn { flex:none; min-width:154px; min-height:62px; margin:0; padding:13px 24px; font-size:23px; }
+body #overlay .infusion-actions .ok { margin-left:auto; min-width:290px; }
 body #overlay .infusion-footer .ov-btn:disabled { background:#2b3d48!important; color:#9aaeb8!important; border-color:#6f899344!important; opacity:1; cursor:default; }
-body #overlay .infusion-card-face:focus-visible,body #overlay .infusion-quantity button:focus-visible,body #overlay .infusion-detail:focus-visible { outline:3px solid #e8d4a1; outline-offset:4px; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand {
+  left:420px; right:52px; bottom:20px; height:340px; display:flex!important; align-items:flex-start; justify-content:safe center;
+  gap:22px!important; padding:0 12px 4px!important; overflow:auto!important; overflow-y:hidden!important; overscroll-behavior:contain; pointer-events:auto;
+  scroll-padding-inline:12px; scrollbar-width:thin; border:0; background:none;
+}
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot { position:relative; inset:auto; flex:0 0 204px; width:204px; height:332px; margin:0; transform:none!important; pointer-events:auto; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot::after { content:none; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card { width:204px; height:auto; transform:none!important; touch-action:pan-x; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card>.hs-card { width:204px!important; max-width:none!important; margin:0; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot:hover .bt-card { filter:drop-shadow(0 4px 10px #b4dce52b); }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card.infusion-at-limit { opacity:.6; }
+/* 2026-10-21 老板反馈 #4：同名副本收敛为一张展示——非代表副本不占位（DOM 与
+   uid 保留，数字键/撤回/点击轮转路径不变），代表卡左上角标注 ×N。 */
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot.infusion-dup { display:none; }
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card .infusion-stack-count {
+  position:absolute; top:8px; left:8px; z-index:7; padding:2px 9px;
+  border:1px solid #9cb5c566; border-radius:999px; background:#102831e6;
+  color:#dff2e9; font:600 17px/1.4 var(--font-ui,sans-serif); pointer-events:none;
+}
+body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand>.ov-empty { position:static; margin:auto; color:#bdd0d8; font-size:22px; }
+body #overlay :is(.infusion-card-face,.infusion-detail,.infusion-actions .ov-btn):focus-visible { outline:3px solid #e8d4a1; outline-offset:5px; }
 
-body #overlay .infusion-key { color:#91a8b5; font-size:16px; font-weight:400; }
-
-/* Keep counters before artwork so the first visible row is always actionable. */
-body #overlay .infusion-source-details { margin-top:12px; font-size:18px; color:#b9cfd8; }
-body #overlay .infusion-source-details summary { cursor:pointer; }
-body #overlay .infusion-source-details summary:focus-visible { outline:2px solid #e8d4a1; outline-offset:3px; }
-body #overlay .infusion-rules { margin-top:12px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="infusion"] .battle-decision-content { padding:0; overflow:hidden!important; }
-body #overlay .battle-secondary-panel[data-decision-kind="infusion"] [data-infusion-workspace] { gap:0; }
+body #overlay .battle-stage.sts[data-infusion-mode] > .sts-arena { filter:blur(7px); opacity:.72; }

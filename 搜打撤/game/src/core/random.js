@@ -16,6 +16,7 @@ function setRandomService(next) {
 
 const Random = Object.freeze({
   random: stream => service.random(stream),
+  /** @param {unknown} [seed] */
   reseed: seed => service.reseed(seed),
   snapshot: () => service.snapshot(),
   restore: snapshot => service.restore(snapshot),

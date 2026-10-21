@@ -52,6 +52,7 @@ function getDriver() { return driverTag; }
 // —— SYS-11 干预履历：来源固定三入口（开发者控制台 / 调试命令 / 场景注入），调用点只
 // 加一行记录、不改任何行为；at 快照当时的回合与层，便于回答「被干预过什么、在何时」。
 function noteIntervention(source, action, detail) {
+/** @type {Partial<import('../hub/game.store.types').GameState>} */
   const G = window.SDT?.game || {};
   const item = {
     ts: Date.now(),
@@ -199,6 +200,7 @@ function clearRuns() {
 // 首探经验/净带回/关键损失一律以回执为准（与旧「从 G 现场/ownedCards 反推」口径冲突时回执赢），
 // 原始回执整体随 entry.receipt 留档供 Agent 导出对账；无回执的结局（death/abandon/nest）保持原口径。
 function recordRun(outcome, detail = {}) {
+/** @type {Partial<import('../hub/game.store.types').GameState>} */
   const G = window.SDT?.game || {};
   const receipt = detail.receipt && typeof detail.receipt === 'object' ? detail.receipt : null;
   const cards = detail.carriedCards || detail.savedCards || [];

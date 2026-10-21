@@ -20,8 +20,8 @@ function resolve(root, key) {
 export function captureOverlayReturnState(root, focusTarget) {
   if (!root) return { scroll: [], disclosures: [], focus: null };
   return {
-    disclosures: [...root.querySelectorAll('details')].map(element => ({ key:identity(element), open:element.open })),
-    scroll: [root, ...root.querySelectorAll('*')]
+    disclosures: [.../** @type {NodeListOf<HTMLDetailsElement>} */ (root.querySelectorAll('details'))].map(element => ({ key:identity(element), open:element.open })),
+    scroll: [root, .../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('*'))]
       .filter(element => element.scrollTop || element.scrollLeft)
       .map(element => ({ key: identity(element), top: element.scrollTop, left: element.scrollLeft })),
     focus: identity(focusTarget || (root.contains(root.ownerDocument.activeElement) ? root.ownerDocument.activeElement : null)),

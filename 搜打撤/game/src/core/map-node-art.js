@@ -31,7 +31,7 @@ function nodeImage(url) {
 
 export function prepareMapNodeArt() {
   const urls = Object.values(art).map(entry => entry.url);
-  const portrait = document.querySelector('#heroAva img, #charPanel .hero-ava img');
+  const portrait = /** @type {HTMLImageElement | null} */ (document.querySelector('#heroAva img, #charPanel .hero-ava img'));
   const portraitUrl = portrait?.src || portrait?.currentSrc;
   if (portraitUrl) urls.push(portraitUrl);
   return Promise.all([prepareMapBrushArt(), ...urls.map(url => mapImageReady(nodeImage(url)))]);
@@ -86,7 +86,7 @@ export function mapNodeAppearance(state) {
   return {
     current:{ink:'#caebe6',alpha:1}, selected:{ink:'#f3f6f5',alpha:1},
     legal:{ink:'#d4dfdd',alpha:.92}, route:{ink:'#cfe9e5',alpha:.88},
-    visited:{ink:'#bdc9ca',alpha:.24}, known:{ink:'#bdc9ca',alpha:.38},
+    visited:{ink:'#b7c7c4',alpha:.52}, known:{ink:'#bdc9ca',alpha:.38},
   }[state]||{ink:'#bdc9ca',alpha:.38};
 }
 
@@ -99,7 +99,7 @@ function mapNodeSupport(type){
   const tint={fire:'208,163,91',battle:'111,138,188',shop:'92,176,167',event:'127,169,186',door:'106,173,155',chest:'116,178,193',altar:'146,123,183'}[key]||'127,162,176';
   ctx.translate(64,64);
   const glow=ctx.createRadialGradient(-16,-9,4,-8,-4,48);
-  glow.addColorStop(0,`rgba(${tint},.35)`);glow.addColorStop(.55,`rgba(${tint},.12)`);glow.addColorStop(1,`rgba(${tint},0)`);
+  glow.addColorStop(0,`rgba(${tint},.20)`);glow.addColorStop(.55,`rgba(${tint},.065)`);glow.addColorStop(1,`rgba(${tint},0)`);
   ctx.fillStyle=glow;ctx.fillRect(-56,-56,112,112);
   const disk=ctx.createRadialGradient(-8,-10,2,0,0,34);
   disk.addColorStop(0,'#111e26ee');disk.addColorStop(.85,'#060d14eb');disk.addColorStop(1,'#07111980');
@@ -115,8 +115,8 @@ function drawMapNodeGlow(ctx,type,state,time,pulse){
   const tint=GLOW_TINT[state];if(!tint)return;
   const empty=type==='blank';
   const breath=Math.sin(time*Math.PI*2/2.2+(state==='legal'?.9:0))*pulse;
-  const r=(state==='current'?empty?52:76:empty?44:64)+(state==='current'?4:3)*breath;
-  const a=(state==='current'?.68:.48)+(state==='current'?.12:.10)*breath;
+  const r=(state==='current'?empty?52:76:empty?32:46)+(state==='current'?4:2)*breath;
+  const a=(state==='current'?.68:.24)+(state==='current'?.12:.045)*breath;
   ctx.save();ctx.globalCompositeOperation='lighter';
   const glow=ctx.createRadialGradient(0,0,r*.18,0,0,r);
   glow.addColorStop(0,`rgba(${tint},${a.toFixed(3)})`);
@@ -139,7 +139,7 @@ const CONTENT_STATUS_INK={
 // Content labels have their own opaque support. Position/reachability glow never
 // changes this state colour, and faded visited artwork does not fade the words.
 function drawMapContentStatus(ctx,status,top,scale) {
-  if(!status?.label)return null;
+  if(!status?.label || status.label==='未完成' || status.id==='completed')return null;
   const ink=CONTENT_STATUS_INK[status.id]||CONTENT_STATUS_INK.incomplete;
   ctx.save();ctx.translate(0,top);ctx.scale(scale,scale);
   ctx.font=NODE_STATUS_FONT;ctx.textAlign='center';ctx.textBaseline='middle';
@@ -168,7 +168,7 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
     const width=Math.ceil(ctx.measureText(label).width+12);
     labelBounds={left:-width/2,right:width/2,top:labelY,bottom:labelY+labelHeight};
     if(state==='current'){
-      ctx.strokeStyle='#78c8be88';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(-width/2,labelY+labelHeight+3);ctx.lineTo(width/2,labelY+labelHeight+3);ctx.stroke();
+      ctx.strokeStyle='#78c8be30';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(-width*.30,labelY+labelHeight+3);ctx.lineTo(width*.30,labelY+labelHeight+3);ctx.stroke();
     }
     ctx.fillStyle=style.ink;
     ctx.shadowColor='#030a0e';ctx.shadowBlur=3;
@@ -212,7 +212,7 @@ export function drawMapFogBadge(ctx) {
 
 export function drawMapTraveller(ctx,x,y,zoom,anchor,screenScale=1,arrived=false) {
   // Hidden HUD portraits may remain lazy. The map owns an eager image of that same URL.
-  const portrait=document.querySelector('#heroAva img, #charPanel .hero-ava img');
+  const portrait=/** @type {HTMLImageElement | null} */ (document.querySelector('#heroAva img, #charPanel .hero-ava img'));
   const url=portrait?.src||portrait?.currentSrc;
   const image = url ? nodeImage(url) : null;
   ctx.save(); ctx.translate(x,y); ctx.scale(screenScale/zoom,screenScale/zoom);

@@ -248,7 +248,7 @@ body.reduce-motion #title.home-composed *::after { animation: none; transition: 
 #title.home-composed .home-plate:hover::after { filter: none;
   background: linear-gradient(90deg, var(--ak-blue) 0 6px, transparent 6px), linear-gradient(100deg, rgba(31,178,255,.22), rgba(14,16,19,.9) 60%); }
 #title.home-composed .home-button-cn { font-weight: 800; letter-spacing: .16em; text-shadow: none; }
-#title.home-composed .home-button-copy::after { font: 700 11px/1 var(--font-label); text-transform: uppercase; }
+#title.home-composed .home-button-copy::after { display: none; }
 #title.home-composed .home-guide .home-button-copy::after { content: 'BRIEFING'; }
 #title.home-composed .home-ach .home-button-copy::after { content: 'ACHIEVEMENTS'; }
 #title.home-composed .home-settings .home-button-copy::after { content: 'SYSTEM'; }

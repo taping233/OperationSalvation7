@@ -9,6 +9,7 @@ export function setCardPageOpen(value) { cardPageOpen = !!value; }
 let closeLibraryPage = null;
 let closeDesignerPage = null;
 let cancelPendingPageEntry = null;
+/** @param {{closeLibrary?: () => void, closeDesigner?: () => void}} [options] */
 export function configureCardPageClosers({ closeLibrary, closeDesigner } = {}) {
   closeLibraryPage = closeLibrary || null;
   closeDesignerPage = closeDesigner || null;

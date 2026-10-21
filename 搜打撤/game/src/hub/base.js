@@ -13,6 +13,7 @@ import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 import { createBaseMetaCommands } from './base-meta.commands.js';
 import { isCollectionProtected as collectionProtection } from './collection-protection.js';
+import { stashSalePrice } from './stash-sale-price.js';
 import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
@@ -234,6 +235,9 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
   const elapsedCommands = createBaseElapsedCommands({ read: () => data, persistPlaySeconds });
 
   // 旧同步接口保留返回口径；所有资源变更先在草稿上完成，保存失败不污染运行态。
+  /** @template T, F @overload @param {(draft: typeof data) => T} prepare @param {F} failure @returns {T | F} */
+  /** @template T @overload @param {(draft: typeof data) => T} prepare @returns {T | false} */
+  /** @param {(draft: typeof data) => unknown} prepare @param {unknown} [failure] */
   function mutate(prepare, failure = false) {
     if (!slot) return failure;
     const result = commitBaseMutation(data, prepare, save);
@@ -599,6 +603,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     return mutate(draft => { draft.petSel = id; return true; });
   }
   // 孵化：仓库中的 1 张宠物蛋 + 50 币 → 随机获得 1 只未拥有的宠物
+  /** @returns {{ok: false, why: string} | {ok: true, pet: typeof PETS[number]}} */
   function hatchPet() {
     const i = data.stash.findIndex(x => x.card.id === PET_EGG_ID);
     if (i < 0) return { ok: false, why: 'noegg' };
@@ -613,8 +618,8 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
       draft.coins -= HATCH_COST;
       draft.pets[pet.id] = { lv: 1, ts: Date.now() };
       if (!draft.petSel) draft.petSel = pet.id;
-      return { ok: true, pet };
-    }, { ok: false, why: 'save' });
+      return { ok: /** @type {true} */ (true), pet };
+    }, { ok: /** @type {false} */ (false), why: 'save' });
     if (result.ok) window.SDT.Sound?.sfx('eggHatch');
     return result;
   }
@@ -674,6 +679,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
   };
 
   // 使用仓库材料卡：折入真实物资（木材/口粮/钥匙）。all = true 时整堆使用。
+  /** @returns {{ok: boolean, why?: string, qty?: number, total?: number, label?: string, msg?: string}} */
   function useStashMaterial(name, all) {
     const i = data.stash.findIndex(x => x.card.name === name);
     if (i < 0) return { ok: false, why: 'empty' };
@@ -706,7 +712,7 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
     const stack = data.stash[i];
     if (isCollectionProtected(stack.card)) return { ok: false, why: 'collected' };
     if (materialInfo(stack.card)) return { ok: false, why: 'material' };
-    const price = window.SDT.Cards.sellPrice(stack.card);
+    const price = stashSalePrice(window.SDT.Cards, stack.card);
     const qty = Math.min(Math.max(1, n || 1), stack.count || 1);
     return mutate(draft => {
       draft.stash[i].count -= qty;
@@ -831,9 +837,9 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
         }, { isCurrent: current }).then(result => {
           const persisted = result.ok && result.value === true;
           if (!persisted) {
-            try { window.SDT?.UI?.log(`[[icon:cross]] ${result.message || '本次内存进度尚未保存，请重试保存'}`, 'warn'); } catch { /* 页面尚未就绪 */ }
+            try { window.SDT?.UI?.log(`[[icon:cross]] ${/** @type {typeof result & {message?:string}} */ (result).message || '本次内存进度尚未保存，请重试保存'}`, 'warn'); } catch { /* 页面尚未就绪 */ }
           }
-          return staged && typeof staged === 'object' ? { ...staged, persisted, ...(!result.ok ? { code: result.code } : {}) } : persisted;
+          return staged && typeof staged === 'object' ? { ...staged, persisted, ...(!result.ok ? { code: /** @type {Extract<typeof result,{ok:false}>} */ (result).code } : {}) } : persisted;
         }));
       }
       const candidate = name === 'save' ? (args[0] || data) : null;
@@ -852,10 +858,10 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
           return command(...args);
         } finally { activeWriteLease = null; }
       }, { isCurrent: current }).then(result => {
-        if (result.ok) return result.value;
+        if (result.ok) return /** @type {Extract<typeof result,{ok:true}>} */ (result).value;
         let value = failure;
-        try { window.SDT?.UI?.log(`[[icon:cross]] ${result.message}`, 'warn'); } catch { /* 页面尚未就绪 */ }
-        return value && typeof value === 'object' ? { ...value, code: result.code, persisted: false } : value;
+        try { window.SDT?.UI?.log(`[[icon:cross]] ${/** @type {Extract<typeof result,{ok:false}>} */ (result).message}`, 'warn'); } catch { /* 页面尚未就绪 */ }
+        return value && typeof value === 'object' ? { ...value, code: /** @type {Extract<typeof result,{ok:false}>} */ (result).code, persisted: false } : value;
       });
       return rememberWrite(task);
     };
@@ -863,4 +869,4 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
   api.migrateLegacy = (...args) => rememberWrite(migrateLegacy(...args));
   sdtDefine('Base', api);
 
-export { bagCap, hasSlot, safeCap };
+export { bagCap, hasSlot, safeCap, api as Base };

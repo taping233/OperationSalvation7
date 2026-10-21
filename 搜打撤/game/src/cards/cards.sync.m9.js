@@ -38,6 +38,7 @@ export const M9_HOSTED_BY_ID = {
   "tt8-hero-sword": "sword",
   "tt8-hero-warlock": "warlock"
 };
+/** @type {Map<string, { rules: object }>} */
 const definitions = new Map(Object.entries(M9_HOSTED_BY_ID).map(([id, name]) =>
   [id, { rules: { version: 1, battle: { hosted: [name],
     ...(id === 'tt8-hero-sealer' ? { requirements: [{ kind: 'unplayable' }] } : {}) } } }]));

@@ -58,7 +58,11 @@ body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card { width:20
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .evt-opt.is-selected::after { content:'已选'; top:19px; color:var(--node-accent); font-size:14px; font-weight:600; }
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .event-decisions:has(.evt-opt:only-child),
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed)[data-event-choice-count="1"] .event-decisions { justify-content:flex-end; }
-#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .event-decisions > .node-foot { flex:none; display:flex; flex-wrap:wrap; justify-content:flex-start; gap:12px; min-height:0; margin:0; padding:0; border:0; }
+/* 2026-10-21 老板反馈 #8：「返回地图」页脚统一靠右（与共享 .ov-btns flex-end 惯例、
+   奖励总览 cqo-actions、商店 shop-back、战斗决策 .battle-decision-actions 一致），
+   并把各页返回键钉为行内最右一枚（order:9），全站位置固定在右下角。 */
+#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .event-decisions > .node-foot { flex:none; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; min-height:0; margin:0; padding:0; border:0; }
+#overlay .node-foot > :is([data-act="evtReturn"],[data-act="eventCardReturn"],[data-act="eventEntryCancel"],[data-act="nodeDecisionLeave"],[data-act="fireDone"],[data-act="bossGateBack"],[data-act="bossGateLockedBack"]) { order:9; }
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .node-foot .ov-btn { box-sizing:border-box; min-width:0; min-height:60px; max-width:100%; margin:0; padding:12px 20px; white-space:normal; overflow-wrap:anywhere; border:1px solid #a9c4bc66; background:#10212bb3; color:#dce9e3; box-shadow:none; font:600 22px/1.4 var(--font-ui); }
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .node-foot .ov-btn.ok { border-color:var(--node-accent); background:var(--node-accent); color:#10282a; }
 #overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .node-foot .ov-btn:hover:not(:disabled) { background:#263d46; border-color:var(--node-accent); filter:none; box-shadow:none; }
@@ -119,7 +123,7 @@ body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card { width:20
 #overlay .card.page .pg.node-pg.event-themed .evt-opt:disabled > span { color:#b2bfb9; }
 #overlay .card.page .pg.node-pg.event-themed .evt-opt:disabled::after { content:'不可选'; top:21px; right:12px; color:#344b43; font-size:16px; }
 #overlay .card.page .event-themed .event-decisions:has(.evt-opt:only-child),#overlay .card.page .event-themed[data-event-choice-count="1"] .event-decisions { justify-content:flex-end; }
-#overlay .card.page .event-themed .event-decisions > .node-foot { flex:none; display:flex; flex-wrap:wrap; justify-content:flex-start; gap:12px; min-height:0; margin:0; padding:0; border:0; }
+#overlay .card.page .event-themed .event-decisions > .node-foot { flex:none; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; min-height:0; margin:0; padding:0; border:0; }
 #overlay .card.page .event-themed .node-foot .ov-btn { box-sizing:border-box; min-height:60px; margin:0; padding:12px 20px; border:1px solid #a9c4bc66; background:#10212bb3; color:#dce9e3; box-shadow:none; font:600 22px/1.4 var(--font-ui); }
 #overlay .card.page .event-themed .node-foot .ov-btn.ok { border-color:var(--node-accent); background:var(--node-accent); color:#10282a; }
 #overlay .card.page .event-themed .node-foot .ov-btn:hover:not(:disabled) { background:#263d46; border-color:var(--node-accent); filter:none; box-shadow:none; }

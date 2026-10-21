@@ -1,5 +1,6 @@
-import { createCityCut, prepareCityCut, cityCutDuration } from './camp-entry.js';
+import { createCityCut, prepareCityCut } from './camp-entry.js';
 import { visualFrame } from './page-visual-ready.js';
+import { revealTransition } from './transition-handoff.js';
 import '../../css/startup-transition.css';
 
 let activeCleanup;
@@ -10,7 +11,6 @@ export function installStartupTransition() {
   const root = document.documentElement;
   let cover;
   let cut;
-  let timer;
   let preparing = false;
   let playing = false;
   const controller = new AbortController();
@@ -19,7 +19,6 @@ export function installStartupTransition() {
     event.preventDefault(); event.stopImmediatePropagation();
   };
   const finish = () => {
-    clearTimeout(timer);
     controller.abort();
     cover?.remove();
     observer.disconnect();
@@ -60,7 +59,8 @@ export function installStartupTransition() {
       playing = true;
       cut?.classList.remove('page-cut-waiting');
       const complete = () => { root.dataset.desktopStartup = 'complete'; finish(); };
-      if (cut) timer = setTimeout(complete, cityCutDuration);
+      if (cut) revealTransition(cover, { signal:controller.signal, painted:true,
+        isCurrent:() => root.dataset.desktopStartup === 'playing' }).then(ok => { if (ok) complete(); }, finish);
       else complete();
     } else if (state === 'cancelled') finish();
   };

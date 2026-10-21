@@ -87,7 +87,7 @@ function start() {
   if (!overlay || !ovBody) return;
   lastMark = markOf();
 
-  document.addEventListener('sdt-overlay-mode', (e) => { lastMode = e.detail; });
+  document.addEventListener('sdt-overlay-mode', (e) => { if (e instanceof CustomEvent) lastMode = e.detail; });
 
   // 当前界面控制器拥有页面转场；旧闸门仅供未安装它的独立宿主使用。
   if (!document.body.classList.contains('interface-motion')) {

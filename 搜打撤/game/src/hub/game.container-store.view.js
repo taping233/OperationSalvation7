@@ -33,7 +33,7 @@ export function captureContainerView(root) {
   if (!root) return null;
   const active = root.contains(document.activeElement) ? document.activeElement : null;
   return {
-    focused: active ? { ...active.dataset, summary: active.tagName === 'SUMMARY' } : null,
+    focused: active ? { .../** @type {HTMLElement} */ (active).dataset, summary: active.tagName === 'SUMMARY' } : null,
     helpOpen: !!root.querySelector('details')?.open,
     scroll: [root.parentElement, ...root.querySelectorAll('.battle-decision-content, .pearl-store-list')]
       .map(el => ({ top: el.scrollTop, left: el.scrollLeft })),

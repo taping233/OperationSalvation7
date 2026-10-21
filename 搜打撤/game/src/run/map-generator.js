@@ -306,6 +306,7 @@ function build(seed) { const layers = TARGETS.map((target, li) => makeLayer(li, 
   for (let li = 0; li < 3; li++) { const from = layers[li].nodes[layers[li].exit]; const to = layers[li + 1].nodes[layers[li + 1].entry];
     addEdge(from, to); layers[li].doors = [{ pair: `p${li + 1}`, at: from.idx, toLayer: li + 1, arriveAt: to.idx, exit: false }]; }
   layers[3].doors = []; return layers; }
+/** @param {string | number} [seed] @param {typeof build} [buildImpl] */
 export function generateLayeredMap(seed = 0, buildImpl = build) {
   let lastIssues = []; let lastNote = '';
   for (let round = 0; round < FALLBACK_ROUNDS; round++) {

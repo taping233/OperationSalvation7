@@ -31,5 +31,5 @@ export function eventOptionHTML(choice, index, game) {
   const { state, note } = eventOptionState(choice, game);
   // Keep one detail span so the existing selection summary includes the live warning.
   const detail = [choice.detail, note].filter(Boolean).join('；');
-  return `<button type="button" class="evt-opt ${escAttr(choice.tone || '')}" data-act="evtChoice" data-i="${index}" data-option-state="${state}" data-ui-tip data-ui-tip-title="${escAttr(choice.label)}" data-ui-tip-text="${escAttr(detail)}"><b>${esc(choice.label)}</b>${detail ? `<span>${esc(detail)}</span>` : ''}</button>`;
+  return `<button type="button" class="evt-opt ${escAttr(choice.tone || '')}" data-act="evtChoice" data-i="${index}" data-option-state="${state}"><b>${esc(choice.label)}</b>${detail ? `<span>${esc(detail)}</span>` : ''}</button>`;
 }

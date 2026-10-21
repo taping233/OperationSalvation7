@@ -3,6 +3,7 @@ export function createBattleFacts(legacyDamageTurn = -1) {
   return { version: 1, events: legacyDamageTurn >= 0 ? [{ kind: 'legacyEnemyDamage', turn: legacyDamageTurn }] : [] };
 }
 
+/** @param {{events: object[]}} history @param {{turn: number, targetSide: string, amount: number, target?: {id?: string | number | null, name?: string, hp?: number}, card?: {id?: string, name?: string}}} event */
 export function recordDamageFact(history, { turn, targetSide, amount, target, card }) {
   if (!(amount > 0) || !Number.isFinite(amount)) return null;
   const event = Object.freeze({ kind: 'damage', turn, targetSide, amount,

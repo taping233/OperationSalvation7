@@ -7,23 +7,6 @@ const installations = new WeakMap();
 const blocked = element => element.closest('.dragging,[aria-grabbed="true"],.reward-unit.got,.reward-unit.dropped,.bt-hand,.sts-hand')
   || element.disabled || element.closest('[hidden],[inert]');
 
-function edgeColor(element, active) {
-  const face = element.querySelector('.hs-card');
-  const material = getComputedStyle(face || element);
-  const tile = getComputedStyle(element);
-  const color = material.getPropertyValue('--paper-wash').trim()
-    || material.getPropertyValue('--paper-pigment').trim() || tile.getPropertyValue('--tint').trim()
-    || material.color;
-  const hex = color.match(/^#([\da-f]{3,8})$/i)?.[1];
-  let channels;
-  if (hex && [3,4,6,8].includes(hex.length)) {
-    const rgb = hex.length < 5 ? [...hex.slice(0,3)].map(value => value + value).join('') : hex.slice(0,6);
-    channels = [0,2,4].map(index => parseInt(rgb.slice(index,index + 2),16));
-  } else channels = color.match(/^rgba?\(([^)]+)\)/i)?.[1].split(/[,\s/]+/).slice(0,3).map(Number);
-  if (!channels?.every(Number.isFinite)) channels = [159,176,186];
-  return `rgba(${channels.join(',')},${active ? '.84' : '0'})`;
-}
-
 // Delegation survives reward and bag reconciliation without adding per-page listeners.
 export function installCardStateMotion(root = document.body) {
   if (installations.has(root)) return installations.get(root);
@@ -41,7 +24,6 @@ export function installCardStateMotion(root = document.body) {
     const quiet = motionReduced();
     retargetVisual(element, {
       y: active && !quiet ? -6 : 0, scale: active && !quiet ? 1.02 : 1, rotate: 0,
-      outlineColor: edgeColor(element, active),
     }, { duration: quiet ? 0 : active ? motionTiming.change : motionTiming.cardReturn });
   }
   function release(element) {
@@ -77,7 +59,7 @@ export function installCardStateMotion(root = document.body) {
     syncSelected();
   });
   function syncSelected() {
-    for (const element of root.querySelectorAll('.reward-replica .is-pending-target .reward-card,.reward-replica .reward-card[aria-selected="true"],.bag-tile.card-face[data-stack][aria-selected="true"]')) {
+    for (const element of /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('.reward-replica .is-pending-target .reward-card,.reward-replica .reward-card[aria-selected="true"],.bag-tile.card-face[data-stack][aria-selected="true"]'))) {
       if (!tracked.has(element)) update(element);
     }
   }

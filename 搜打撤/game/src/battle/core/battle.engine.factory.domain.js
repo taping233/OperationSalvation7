@@ -1,3 +1,5 @@
+import { createBattleEffectAssembly } from './battle.effect-assembly.domain.js';
+import { createSetupMechanics } from './battle.setup-mechanics.domain.js';
 import { createDamageDomain } from './battle.damage.domain.js';
 import { createCardPlayDomain } from './battle.card-play.domain.js';
 import { createBattleTurnContinuation } from './battle.turn-continuation.js';
@@ -6,11 +8,11 @@ import { createRequestedDomain } from '../effects/requested-card-runtime.domain.
 import { createM2Domain } from '../effects/effect-steps.m2.domain.js';
 import { buildPouchDiscoverState } from '../effects/battle.discover-state.js';
 import { esc, clone as cloneData } from '../../core/shared.js';
-import { createEffectExecutor, splitEffectClauses } from '../effects/battle.effects.js';
+import { splitEffectClauses } from '../effects/battle.effects.js';
 import { directTriggerSource, hasStructuredTrigger } from '../effects/battle.trigger-source.js';
 import { createDeckOperations } from '../bag/battle.deck.factory.js';
 import '../bag/battle.piles.js';
-import { isAreaEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';
+import { isAreaEffect } from '../effects/battle.target-rules.js';
 import { createBattleExecutionSession } from '../runtime/battle.execution-session.js';
 import { createBattleActionRunner } from '../runtime/battle.action-runner.js';
 import { actionCancellationError, createStagedPlayback, throwIfActionCancelled } from '../runtime/battle.playback.js';
@@ -19,14 +21,13 @@ import {
 } from '../runtime/battle.state.js';
 import { createInspectionDomain } from '../effects/battle.card-inspection.domain.js';
 import { calculateEnemyIntent } from './battle.enemy-intent.js';
-import { projectPlayerEffects } from '../runtime/battle.player-effects.js';
-import { createBattleSnapshot, createBattleSnapshotSignature } from '../runtime/battle.snapshot.js';
+import { createSnapshotProjection } from './battle.snapshot-projection.domain.js';
 import { createResolutionDomain } from './battle.resolution.domain.js';
 import { createBattlePresentation } from './battle.presentation-events.js';
 import { createFoeLifecycleDomain } from './battle.foe-lifecycle.domain.js';
 import { createDrawDomain } from './battle.draw.domain.js';
 import { createSelectionDomain } from './battle.selection-flow.domain.js';
-import { matchesHandSelectKey as matchHandSelectKey, buildHandSelectionContract } from './battle.hand-selection.js';
+import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { createEquipmentDomain } from '../bag/battle.equipment.domain.js';
 import { createBagDomain } from '../bag/battle.bag.domain.js';
 import { readConsumedPile, takeConsumedCard as takeFromConsumedPile } from '../bag/battle.consumed-pile.js';
@@ -35,6 +36,7 @@ import { createExecPlayDomain } from './battle.exec-play.domain.js';
 import { createTriggersDomain } from '../effects/battle.triggers.m2.domain.js';
 import { createEquipmentSemanticOperations } from '../effects/equipment-semantic-operations.js';
 import { createCardRuleExecution } from '../effects/battle.rule-guard.js';
+import { registerBattleValueProvider } from '../../cards/battle-value-context.js';
 
 /** Instance-owned state and host services are captured explicitly. */
 export function createEngineDomain(context) {
@@ -116,8 +118,6 @@ const requestBattleRender = () => {
     }
   };
 const interactionOf = (kind) => (instanceRuntime.interaction && instanceRuntime.interaction.kind === kind ? instanceRuntime.interaction : null);
-const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card, hint: i.hint, excludedTargetIndex: i.foeFightFirst ? instanceRuntime.foes.indexOf(i.foeFightFirst) : null } : null; };
-const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card, hint: i.hint, excludedTargetId: i.foeFightFirst?.id ?? null } : null; };
 function cardIdentity(card) {
     if (card && card.id) return `id:${card.id}`;
     return `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
@@ -156,7 +156,7 @@ const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatc
   resolveCard: (...args) => resolveCard(...args),
   fireDrawn: (...args) => triggersM2.fireDrawn(...args),
   fireAcquire: (...args) => triggersM2.fireAcquire(...args),
-  checkSealTransformation, queueCardExecution, requestBattleRender,
+  checkSealTransformation: (...args) => checkSealTransformation(...args), queueCardExecution, requestBattleRender,
 });
 const equipmentSemantics = createEquipmentSemanticOperations({ runtime: instanceRuntime, combat: Combat,
   random: () => Random.random('battle'), alive, hitFoe, drawCards });
@@ -165,6 +165,10 @@ function intentFor(def, round) {
     return calculateEnemyIntent(def, round, instanceRuntime.pstat && instanceRuntime.pstat.status);
   }
 const shuffle = shuffleCards;
+const { injectSealCards, checkSealTransformation, applyNestRunes, applyVoidRune } = createSetupMechanics({
+  runtime: instanceRuntime, cards, combat: Combat, random: Random, evaluateRunes, esc, shuffle,
+  findCard: (...args) => findCard(...args), addTempCard: (...args) => addTempCard(...args),
+  sweepDead: (...args) => sweepDead(...args), choiceQueue, processChoice });
   // 玩家自伤/受伤入口（文本路径 dmg.negHp 与结构化 heal.selfDamage 共用；黑暗吊坠死亡保险在此生效）
   // U18（2026-09-30 老板拍板 PENDING #15，对齐 STS2 IsAlive=hp>0）：受伤不再钳 0（hp 可为负）；
   // 伤害致 hp<=0 即时死亡判定——免死钩 deathSave 先拦（一次致死拦一次，逻辑逐字保留），
@@ -195,207 +199,58 @@ const shuffle = shuffleCards;
     if (structured && instanceRuntime.G.hp > 0) triggersM2.fireDamaged();
     if (instanceRuntime.G?.battleActive && instanceRuntime.battleState.token === token) requestedPlayerDamaged(amount, { alive, hitFoe, drawCards });
   }
-// 诅咒施加视觉差分（P1）：包装 addCurse——卡牌文本路径与结构化路径（battle.resolution.js curse op）
-// 对敌方施加诅咒时推 cursefx 彩闪（玩家自身中诅咒不闪，仍走日志+角标）。两端口共用同一份对象，
-// 保证两条路径踩的是同一套底层 API。addCurse 回传 combat.addCurse 的结果（叠层后层数/计时剩余，
-// 免疫为 0）——文本路径不消费回传值，结构化路径用它判定日志与生效。
-// Combat 是模块命名空间（属性 only-getter，不能 Object.create 委托），展开为快照普通对象再覆盖——
-// combat.js 导出全是函数/常量，快照安全。
-const combatPort = {
-  ...Combat,
-  tickPoison(target) {
-    const result = Combat.tickPoison(target);
-    if (instanceRuntime.foes.includes(target)) recordRequestedDamage(target, result?.dealt || 0, { name:'中毒' }, { alive, hitFoe });
-    return result;
+const { applyTextEffects, createResolution } = createBattleEffectAssembly({
+  runtime: instanceRuntime, cards, combat: Combat, random: Random, executionSession, createBattleResolution, sound,
+  commands: {
+    recordRequestedDamage: (...args) => recordRequestedDamage(...args),
+    alive: (...args) => alive(...args),
+    hitFoe: (...args) => hitFoe(...args),
+    foeIdx: (...args) => foeIdx(...args),
+    dealEffectDamage: (...args) => dealEffectDamage(...args),
+    drawCards: (...args) => drawCards(...args),
+    grantSha: (...args) => grantSha(...args),
+    addTempCard: (...args) => addTempCard(...args),
+    queueCardExecution: (...args) => queueCardExecution(...args),
+    findCard: (...args) => findCard(...args),
+    randomDiscoverCard: (...args) => randomDiscoverCard(...args),
+    addDeckCard: (...args) => addDeckCard(...args),
+    processHandSelect: (...args) => processHandSelect(...args),
+    restoreConsumed: (...args) => restoreConsumed(...args),
+    processChoice: (...args) => processChoice(...args),
+    shuffle: (...args) => shuffle(...args),
+    deckDraw: (...args) => deckDraw(...args),
+    flee: (...args) => flee(...args),
+    sweepDead: (...args) => sweepDead(...args),
+    releaseHandMatches: (...args) => releaseHandMatches(...args),
+    autoPlayHandType: (...args) => autoPlayHandType(...args),
+    damagePlayer: (...args) => damagePlayer(...args),
+    fireConsumeTriggers: (...args) => fireConsumeTriggers(...args),
+    replaceShaInDeck: (...args) => replaceShaInDeck(...args),
+    summonAlly: (...args) => summonAlly(...args),
+    queuePouchCast: (...args) => queuePouchCast(...args),
+    tryUnlockSeal: (...args) => tryUnlockSeal(...args),
+    checkElementSealProgress: (...args) => checkElementSealProgress(...args),
+    fireCatGift: (...args) => fireCatGift(...args),
+    handCurseSpecs: (...args) => handCurseSpecs(...args),
+    queueSwapCostDiscover: (...args) => queueSwapCostDiscover(...args),
+    resolveRequestedCard: (...args) => resolveRequestedCard(...args),
+    emitRecast: (...args) => emitRecast(...args),
+    getConsumedPile: (...args) => getConsumedPile(...args),
+    onHandConsumed: (...args) => onHandConsumed(...args),
+    splitClauses: (...args) => splitClauses(...args),
+    registerTurnStart: (...args) => registerTurnStart(...args),
+    registerBattle: (...args) => registerBattle(...args),
+    castRandomSpells: (...args) => castRandomSpells(...args),
+    drawOf: (...args) => drawOf(...args),
+    isAOE: (...args) => isAOE(...args),
+    addPlayerCurse: (...args) => addPlayerCurse(...args),
+    resolveBagOperations: (...args) => bag.resolveBagOperations(...args),
+    restoreHeroSkill: () => bag.restoreHeroSkill(),
   },
-  dealDamage(attacker, target, amount, type) {
-    const result = Combat.dealDamage(attacker, target, amount, type);
-    if (instanceRuntime.foes.includes(target)) recordRequestedDamage(target, result.dealt, { name:'伤害' }, { alive, hitFoe });
-    return result;
-  },
-  addCurse(t, key, n) {
-    const applied = Combat.addCurse(t, key, n);
-    if (t && !t.dead && t !== instanceRuntime.pstat) {
-      instanceRuntime.floats.push({ unit: foeIdx(t), text: '', cls: `cursefx curse-${key}` });
-    }
-    return applied;
-  },
-};
-const applyTextEffects = createEffectExecutor({
-    combat: combatPort,
-    dealEffectDamage,
-    getAlive: alive,
-    getAllies: () => instanceRuntime.allies,
-    getFrozenTargetBonus: target => (target?.status?.freeze || 0) > 0
-      ? instanceRuntime.equipped.reduce((sum, eq) => sum + (+eq?.card?.rules?.equip?.passive?.cond?.vsFreeze || 0), 0) : 0,
-    getPlayerStatus: () => instanceRuntime.pstat,
-    getPlayerDefense: () => instanceRuntime.pdef,
-    getMode: () => instanceRuntime.mode,
-    log: (message, kind) => instanceRuntime.G.log(message, kind),
-    escapeHtml: esc,
-    heal: amount => instanceRuntime.G.heal(amount),
-    pushFloat: value => instanceRuntime.floats.push(value),
-    drawCards,
-    grantStarterAttack: grantSha,
-    castStarterAttack: target => {
-      const foes = alive();
-      if (!instanceRuntime.G?.battleActive || instanceRuntime.G.hp <= 0 || !foes.length) return false;
-      const enemy = foes.includes(target) ? target : foes[0];
-      const uid = addTempCard(cards.SHA, { source: 'effect-cast' });
-      return queueCardExecution(uid, findCard(uid).card, [], enemy, true) !== false;
-    },
-    markNoDrawNext: () => { instanceRuntime.set$noDrawNext(true); },
-    queueDiscover: value => instanceRuntime.discoverQueue.push(value),
-    randomDiscoverCard,
-    addTempCard,
-    addDeckCard,
-    queueHandSelect: job => { handSelectQueue.push(job); processHandSelect(); },
-    restoreConsumed: n => restoreConsumed(n),
-    random01: () => Random.random('battle'),
-    allCards: () => cards.all(),
-    // —— 抉择面板（2026-09-08 人工 N 选一）：选项入队并弹出面板 ——
-    queueChoice: job => { choiceQueue.push(job); processChoice(); },
-    // —— 装备嵌入句「回合开始 -N 血」注册为每回合开始的延迟段（留言 #10 通用机制；灭魔之剑已退役）——
-    registerTurnStartText: (text, cardName) => { instanceRuntime.delayed.push({ text, cardName, repeat: true }); },
-    setStealthStrike: v => { instanceRuntime.set$stealthStrike(!!v); },
-    setNextSpellTwice: n => { instanceRuntime.set$nextSpellTwice(n || 0); },
-    shuffleDeck: () => { instanceRuntime.set$drawPile(shuffle(instanceRuntime.drawPile)); return instanceRuntime.drawPile.length; },
-    addEnergy: amount => { instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.energy; },
-    refillEnergy: () => { instanceRuntime.set$energy(instanceRuntime.maxEnergy); return instanceRuntime.maxEnergy; },
-    addEnergyCap: amount => { instanceRuntime.set$maxEnergy(instanceRuntime.maxEnergy + (amount)); instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.maxEnergy; },
-    // 招式池谓词复用卡库判定。
-    isRandomObtainable: c => cards.isRandomObtainable(c),
-    // —— 2026-09-08 补线：以下端口此前从未传入，相关描述一打就崩 ——
-    getPlayerHp: () => instanceRuntime.G.hp,
-    getHandSize: () => instanceRuntime.hand.length,
-    getHandCards: () => instanceRuntime.hand.map(findCard).filter(Boolean),
-    burstPoison: t => combatPort.tickPoison(t),
-    deckDraw,
-    fleeBattle: () => flee(),
-    sweepDead,
-    armorMul: () => instanceRuntime.armorMul,
-    getPlayerClass: () => instanceRuntime.G.myClass || null,
-    getPlayerCaster: () => ({
-      atk: instanceRuntime.G.atk,
-      // spellUp 不预加：status 里带着，combat.dealDamage 只加一次（2026-09-09 修复双重计数）
-      spellPower: instanceRuntime.G.spellPower || 0,
-      status: instanceRuntime.pstat ? instanceRuntime.pstat.status : undefined,
-    }),
-    foeIndexOf: t => instanceRuntime.foes.indexOf(t),
-    releaseHandMatches,
-    autoPlayHandType,
-    setShaTransform: name => { instanceRuntime.set$shaTransform(name || null); },
-    setConsumeFireball: n => { instanceRuntime.set$consumeFireballN(n || 0); },
-    damagePlayer,
-    addPlayerMaxHp: n => {
-      instanceRuntime.G.maxHp += n;
-      instanceRuntime.G.heal(n);
-      instanceRuntime.G.log(`[[icon:heart]] 血量上限 +${n}（当前上限 ${instanceRuntime.G.maxHp}，并回复 ${n} 点）`, 'ok');
-    },
-    dumpHand: () => {
-      const uids = instanceRuntime.hand.slice();
-      instanceRuntime.set$hand([]);
-      const cards = [];
-      uids.forEach(u => {
-        instanceRuntime.consumed.push(u);
-        if (instanceRuntime.mode === 'boss') instanceRuntime.grave.push(u);
-        const o = findCard(u);
-        if (o) cards.push(o.card);
-        instanceRuntime.cardAnims.push({ kind: 'dump', uid: u, name: o ? o.card.name : '' });
-      });
-      cards.forEach(c => fireConsumeTriggers(c, null));   // 09-29 老板拍板：批量消耗也算逐张「消耗该牌时」
-      return uids.length;
-    },
-    // —— 2026-09-09 机制审计补实装端口（Q1-Q8 老板定向批次）——
-    getInfuseFuels: () => instanceRuntime.infuseFuels,
-    getPriceOfLastDrawn: () => {
-      const uid = instanceRuntime.lastDrawnUids[instanceRuntime.lastDrawnUids.length - 1];
-      const o = uid && findCard(uid);
-      return o ? Math.max(0, +(o.card.cost || 0)) : 0;   // 09-29 老板拍板：价格统一按费用（原 sellPrice 卖价口径废弃）
-    },
-    dealAoeFixed: (n, card) => {
-      // Preserve the price-derived amount while sharing immunity, protection, stealth and defeat handling.
-      alive().slice().forEach(t => hitFoe(t, card, n, Combat.TYPES.FIXED, '', { preserveBaseDamage: true, deferDefeat: true }));
-      sweepDead();
-    },
-    replaceShaInDeck,
-    summonAlly,
-    setExtraTurn: v => { instanceRuntime.set$extraTurn(!!v); },
-    setDeathSave: n => { instanceRuntime.set$deathSave(n || 0); },
-    queuePouchCast,
-    registerGrowthCard: card => { if (card && card.name) instanceRuntime.growthNames.add(card.name); },
-    setAllSpellsInfused: v => { instanceRuntime.set$allSpellsInfused(!!v); },
-    setPoisonLegacy: v => { instanceRuntime.set$poisonLegacy(!!v); },
-    setPlayerCurseImmune: v => {
-      instanceRuntime.set$playerCurseImmune(!!v);
-      // 结构化永久免疫与旧日再临同口径；false 保持原撤销语义。
-      if (v) instanceRuntime.delayed.forEach(q => { if (q.special === 'curseImmuneOff') q.restore = true; });
-    },
-    unlockSeal: name => tryUnlockSeal(name),
-    checkElementSealProgress,
-    randomAcquired: card => fireCatGift(card),
-    handCurseSpecs,
-    queueSwapCostDiscover,
-  });
+});
 const isAOE = isAreaEffect;
-/** @returns {import('../battle.snapshot.types.js').BattleSnapshotInput} */
-function captureSnapshotInput() {
-    const pTgt = pendingTargetOf();
-    const pItem = pendingItemOf();
-    // Match findCard's override/owned/granted precedence without its legacy card repair writes.
-    const selectionContract = instanceRuntime.handSelecting ? buildHandSelectionContract(instanceRuntime.handSelecting, instanceRuntime.hand.map(uid => {
-      const stored = instanceRuntime.G?.ownedCards?.find(entry => entry.uid === uid) || instanceRuntime.granted.find(entry => entry.uid === uid);
-      const card = instanceRuntime.cardOverrides.get(uid) || stored?.card;
-      return card ? { uid, card: { name: card.name, type: card.type } } : null;
-    })) : null;
-    const curseImmunityReset = instanceRuntime.delayed.find(q => q.special === 'curseImmuneOff');
-    const potionBar = instanceRuntime.G && !instanceRuntime.selectingDeck ? battleBagItems().reduce((acc, o) => {
-        const g = acc.find(p => p.name === o.card.name);
-        if (g) g.count++;
-        else {
-          const u = itemUsability(o.card);
-          acc.push({ uid: o.uid, name: o.card.name, count: 1, desc: String(o.card.desc || ''), aim: itemTargetSideFor(o.card), usable: u.usable, why: u.why });
-        }
-        return acc;
-      }, []) : null;
-    return {
-      battleToken: instanceRuntime.battleState.token, mode: instanceRuntime.mode, turn: instanceRuntime.turn, energy: instanceRuntime.energy, maxEnergy: instanceRuntime.maxEnergy, busy: instanceRuntime.busy, phase: instanceRuntime.battleState.phase,
-      actionQueueLength: actionQueue.length, playedMovesThisTurn: instanceRuntime.playedMovesThisTurn, endTurnContext: { deathSave: instanceRuntime.deathSave, timeRune: instanceRuntime.timeRune, extraTurn: instanceRuntime.extraTurn },
-      playerEffects: projectPlayerEffects({ playerCurseImmune: instanceRuntime.playerCurseImmune,
-        curseImmunityTemporary: !!curseImmunityReset && !curseImmunityReset.restore,
-        holyRune: instanceRuntime.holyRune, turn: instanceRuntime.turn, spellCost1: instanceRuntime.spellCost1, meleeCost1: instanceRuntime.meleeCost1, nextSpellTwice: instanceRuntime.nextSpellTwice, allSpellsInfused: instanceRuntime.allSpellsInfused,
-        discoverPlus: instanceRuntime.pstat?.status?.discoverPlus, bleedAmp: instanceRuntime.pstat?.status?.bleedAmp, deathSave: instanceRuntime.deathSave, extraTurn: instanceRuntime.extraTurn }),
-      opts: instanceRuntime.opts,
-      player: instanceRuntime.G ? { hp: instanceRuntime.G.hp, maxHp: instanceRuntime.G.maxHp, atk: instanceRuntime.G.atk, spellPower: instanceRuntime.G.spellPower || 0, myClass: instanceRuntime.G.myClass || null, characterId: instanceRuntime.G.characterId || null } : null,
-      handInfuseCounts: instanceRuntime.handInfuseCounts,
-      pdef: instanceRuntime.pdef, pstat: instanceRuntime.pstat, foes: instanceRuntime.foes, deathFxPending: instanceRuntime.foes.map(foe => stagedDeathFx.has(foe)), allies: instanceRuntime.allies, hand: instanceRuntime.hand, drawPile: instanceRuntime.drawPile, discard: instanceRuntime.discard, grave: instanceRuntime.grave, played: instanceRuntime.played, consumed: instanceRuntime.consumed, consumedPile: getConsumedPile(), infusing: instanceRuntime.infusing, discovering: instanceRuntime.discovering,
-      handSelecting: instanceRuntime.handSelecting ? { ...instanceRuntime.handSelecting,
-        ...selectionContract } : null,
-      choosing: instanceRuntime.choosing, pendingTarget: pTgt, pendingHint: instanceRuntime.pendingHint, viewingGrave: instanceRuntime.viewingGrave, viewingDeck: instanceRuntime.viewingDeck, viewingBag: instanceRuntime.viewingBag,
-      dreadShown: instanceRuntime.dreadShown, selectingDeck: instanceRuntime.selectingDeck, deckNeed: Math.min(R().bossDeckSize, instanceRuntime.selPool.filter(o => !equipment.isBattleStartEquip(o.card)).length + Math.min(equipCap(), instanceRuntime.selPool.filter(o => equipment.isBattleStartEquip(o.card)).length)), selDeckMax: instanceRuntime.selDeckMax, selShaN: instanceRuntime.selShaN, sel: instanceRuntime.sel, selPool: instanceRuntime.selPool,
-      potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
-      equipped: instanceRuntime.equipped.map(e => ({
-        uid: e.uid, card: e.card, name: e.card.name, desc: String(e.card.desc || ''),
-        skill: equipSkillText(e.card), used: e.used,
-      })),
-    };
-  }
-function snapshotSignature(input = captureSnapshotInput()) {
-    // The view also reads these rules through battle.core when rendering hand cards.
-    return createBattleSnapshotSignature(input, {
-      handSelectQueueLength: handSelectQueue.length, choiceQueueLength: choiceQueue.length,
-      spellCost1: instanceRuntime.spellCost1, meleeCost1: instanceRuntime.meleeCost1, shaTransform: instanceRuntime.shaTransform, consumeFireballN: instanceRuntime.consumeFireballN, lastPlayedType: instanceRuntime.lastPlayedType,
-      stealthStrike: instanceRuntime.stealthStrike, freeCast: instanceRuntime.freeCast, cardOverrides: instanceRuntime.cardOverrides, zeroFeeUntil: instanceRuntime.zeroFeeUntil, growth: instanceRuntime.growth,
-    });
-  }
-/** @returns {import('../battle.snapshot.types.js').BattleSnapshot} */
-function getSnapshot() {
-    const input = captureSnapshotInput();
-    const sig = snapshotSignature(input);
-    if (instanceRuntime.snapCache && sig === instanceRuntime.snapSig) return instanceRuntime.snapCache;
-    instanceRuntime.storeBattleSnapshot(sig, createBattleSnapshot(input));
-    return instanceRuntime.snapCache;
-  }
+const { getSnapshot, snapshotSignature } = createSnapshotProjection({ runtime: instanceRuntime, executionSession, interactionOf,
+  battleBagItems, itemUsability, getConsumedPile, R, isBattleStartEquip: card => equipment.isBattleStartEquip(card), equipCap, equipSkillText });
   // 瞄准会话的存活判定专用轻查询（09-30 性能审计 F1 最终形态）：完整快照的组装+签名
   // 每次要付全量遍历，而会话存活只依赖 token/phase 两个标量。同步链内变异必须即时
   // 重投影（battle-snapshot-integration 契约），快照缓存不能做链级复用——热路径改走这里。
@@ -506,128 +361,7 @@ function closeBag() { return bag.closeBag(); }
 
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
-  const resolveCard = createBattleResolution({
-    resolveBagOperations: (...args) => bag.resolveBagOperations(...args),
-    autoPlayHandType, queuePouchCast,
-    queueChoice: job => { choiceQueue.push(job); processChoice(); },
-    castStarterAttack: target => {
-      const targets = alive();
-      if (!instanceRuntime.G?.battleActive || instanceRuntime.G.hp <= 0 || !targets.length) return false;
-      const uid = addTempCard(cards.SHA, { source: 'effect-cast' });
-      return queueCardExecution(uid, findCard(uid).card, [], targets.includes(target) ? target : targets[0], true) !== false;
-    },
-    releaseHandMatches,
-    queueHandSelect: job => { handSelectQueue.push(job); processHandSelect(); },
-    queueSwapCostDiscover,
-    resolveRequestedCard,
-    emitRecast,
-    readState: () => ({ mode: instanceRuntime.mode, playedMovesThisTurn: instanceRuntime.playedMovesThisTurn, infuseFuels: instanceRuntime.infuseFuels, grave: getConsumedPile(), allSpellsInfused: instanceRuntime.allSpellsInfused }),
-    restoreHeroSkill: () => bag.restoreHeroSkill(),
-    getHandSize: () => instanceRuntime.hand.length,
-    getPlayerStatus: () => instanceRuntime.pstat,
-    esc,
-    log: (...args) => instanceRuntime.G.log(...args),
-    heal: amount => instanceRuntime.G.heal(amount),
-    addFloat: value => instanceRuntime.floats.push(value),
-    addDelayed: value => instanceRuntime.delayed.push(value),
-    takeDeckBottom: count => instanceRuntime.drawPile.splice(0, count),
-    deckBottomCount: () => instanceRuntime.drawPile.length,
-    startSurge: promise => instanceRuntime.set$surgeWaiter(promise),
-    getAllCards: () => cards.all(),
-    isRandomObtainable: card => cards.isRandomObtainable(card),
-    randomBattle: () => Random.random('battle'),
-    getDamageTypes: () => cards.DMG_TYPES,
-    getDamageTypeMeta: () => cards.DMG_TYPE_META,
-    fixedDamageType: Combat.TYPES.FIXED,
-    hasCurse: foe => Combat.hasCurse(foe),
-    getAliveFoes: alive,
-    getGrowth: uid => instanceRuntime.growth[uid],
-    getHandInfuseCount: uid => instanceRuntime.handInfuseCounts[uid] || 0,
-    getFoeIndex: foeIdx,
-    applyStatus: (foe, status, duration) => {
-      const applied = Combat.addCurse(foe, status, duration);
-      if (applied > 0 && foe && !foe.dead) {
-        instanceRuntime.floats.push({ unit: foeIdx(foe), text: '', cls: `cursefx curse-${status}` });
-        if (status === 'abreak') sound('armorBreak');
-      }
-      return applied;
-    },
-    findCard, addTempCard, sweepDead,
-    onHandConsumed: (card, uid) => onHandConsumed(card, uid),
-    // M3：registerRule discoverPlus（黑暗形态「每当你发现卡牌时，增加 1 个可选项」）——
-    // 旗标经 pstat.status.discoverPlus，发现面板候选数 +N。此前误把 n（选择/获得次数）+1，
-    // 变成多获得一张而不是多看一张（09-30 深审 BC-07）
-    queueDiscover: value => instanceRuntime.discoverQueue.push(
-      (instanceRuntime.pstat.status.discoverPlus || 0) > 0 ? { ...value, optionsPlus: (instanceRuntime.pstat.status.discoverPlus || 0) } : value),
-    splitClauses, applyTextEffects,
-    registerTurnStart, registerBattle, castRandomSpells, drawCards, grantSha, hitFoe,
-    // G3（A3 第三批）：acquire 族端口——洗入牌库与洗混（deck.insert 文本路径同一底层）、
-    // 随机池/指定池单源抽卡（selectionFlow.randomDiscoverCard 转发同一函数）、
-    // 战斗币（与 applyKillRewards/bag 同一 G.coins 计数）、职业名（「本职业/其它职业」池谓词）。
-    addDeckCard,
-    shuffleDeck: () => { instanceRuntime.set$drawPile(shuffle(instanceRuntime.drawPile)); return instanceRuntime.drawPile.length; },
-    randomDiscoverCard,
-    addCoins: n => { instanceRuntime.G.coins = (instanceRuntime.G.coins || 0) + n; },
-    getMyClass: () => instanceRuntime.G.myClass || null,
-    // B7（A3 第三批）：能量/上限资源命令端口——命令体与文本路径 applyTextEffects 的
-    // addEnergy/addEnergyCap、开战被动 addPlayerMaxHp（上限 +n 同时回复 n）逐字同款，
-    // 保证结构化 op 与文本路径对同一引擎状态（energy/maxEnergy/G.maxHp）结算一致。
-    addEnergy: amount => { instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.energy; },
-    refillEnergy: () => { instanceRuntime.set$energy(instanceRuntime.maxEnergy); return instanceRuntime.maxEnergy; },
-    addEnergyCap: amount => { instanceRuntime.set$maxEnergy(instanceRuntime.maxEnergy + (amount)); instanceRuntime.set$energy(instanceRuntime.energy + (amount)); return instanceRuntime.maxEnergy; },
-    addPlayerMaxHp: n => {
-      instanceRuntime.G.maxHp += n;
-      instanceRuntime.G.heal(n);
-      instanceRuntime.G.log(`[[icon:heart]] 血量上限 +${n}（当前上限 ${instanceRuntime.G.maxHp}，并回复 ${n} 点）`, 'ok');
-    },
-    drawOf, isAOE,
-    // B5（A3 第二批）：诅咒族结构化结算与文本路径共用同一包装 combat（cursefx 彩闪 + 同一 addCurse/tickPoison/CURSE_META）
-    combat: combatPort,
-    canApplyPlayerCurse: () => !instanceRuntime.playerCurseImmune && !(instanceRuntime.holyRune && instanceRuntime.turn <= 3),
-    foeDealDamage: (caster, target, amount, card) => dealEffectDamage({ caster, target, amount,
-      type: Combat.TYPES.ATTACK, card, source: 'enemy' }),
-    // B3 端口：自伤走 damagePlayer 命令（死亡保险/不屈符文共用）；回复至需要读玩家当前血量；
-    // 护甲命令扩展 guard 选项（格挡置 pdef.guard，与文本路径 def.guard 同一旗标）；
-    // perSpellHeal 需要「本批抽牌中的法术数」（lastDrawnUids 只记真正入手的牌）。
-    damagePlayer,
-    addPlayerCurse,
-    getPlayerHp: () => instanceRuntime.G.hp,
-    countDrawnSpells: () => instanceRuntime.lastDrawnUids.reduce((n, u) => {
-      const o = findCard(u);
-      return o && o.card.type === '法术' ? n + 1 : n;
-    }, 0),
-    addArmor: (amount, opts) => {
-      instanceRuntime.pdef.armor += amount;
-      if (opts && opts.guard) instanceRuntime.pdef.guard = true;
-    },
-    // M2（2026-09-27）端口：偷取/禁抽/额外回合/持续规则旗标/随从位/价格与牌库定向抽取——
-    // markNoDrawNext/summonAlly/deckDraw/getPriceOfLastDrawn 均为既有引擎件（此处仅透传，
-    // 不新增引擎逻辑；getPriceOfLastDrawn 与上方 effect-steps deps 同口径）。
-    markNoDrawNext: () => { instanceRuntime.set$noDrawNext(true); },
-    setExtraTurn: v => instanceRuntime.set$extraTurn(!!v),
-    setBleedAmp: v => { instanceRuntime.pstat.status.bleedAmp = v ? 1 : 0; },
-    setMeleeCost1: v => instanceRuntime.set$meleeCost1(!!v),
-    setSpellCost1: v => instanceRuntime.set$spellCost1(!!v),
-    setConsumeFireball: v => instanceRuntime.set$consumeFireballN(v || 0),
-    setAllSpellsInfused: v => instanceRuntime.set$allSpellsInfused(!!v),
-    registerGrowthCard: card => { if (card?.name) instanceRuntime.growthNames.add(card.name); },
-    setPoisonLegacy: v => instanceRuntime.set$poisonLegacy(!!v),
-    setPlayerCurseImmune: v => {
-      instanceRuntime.set$playerCurseImmune(!!v);
-      if (v) instanceRuntime.delayed.forEach(q => { if (q.special === 'curseImmuneOff') q.restore = true; });
-    },
-    setStealthStrike: v => instanceRuntime.set$stealthStrike(!!v),
-    summonAlly,
-    deckDraw,
-    getTurn: () => instanceRuntime.turn,
-    getPlayerSpellPower: () => instanceRuntime.G.spellPower || 0,
-    setNextSpellTwice: v => instanceRuntime.set$nextSpellTwice(v || 0),
-    getPriceOfLastDrawn: () => {
-      const uid2 = instanceRuntime.lastDrawnUids[instanceRuntime.lastDrawnUids.length - 1];
-      const o2 = uid2 ? findCard(uid2) : null;
-      return o2 ? Math.max(0, +(o2.card.cost || 0)) : 0;
-    },
-  });
+  const resolveCard = createResolution();
 
   const runStagedSteps = createStagedPlayback({ presentation: context.presentation,
     session: executionSession,
@@ -702,7 +436,7 @@ function closeBag() { return bag.closeBag(); }
   // 演出期间 busy 保持、玩家无法插手。
   const SURGE_WAVE_MS = (typeof process !== 'undefined' && process.env && process.env.VITEST) ? 0 : 850;
   
-  const surgeSleep = (ms, signal) => new Promise((resolve, reject) => {
+  const surgeSleep = (ms, signal) => new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     throwIfActionCancelled(signal);
     const timer = setTimeout(done, ms);
     function cleanup() { signal?.removeEventListener('abort', cancel); }
@@ -871,7 +605,8 @@ function closeBag() { return bag.closeBag(); }
     if (n) instanceRuntime.G.log(`[[icon:flask]] <b>${esc(cardName || '临时卡')}</b>：回合开始，消耗了 ${n} 张临时卡`, 'sys');
     return n;
   }
-  function* onHandConsumed(card) {
+  function* onHandConsumed(card, uid = undefined) {
+    void uid; // Compatibility hook receives the source UID even when this implementation does not inspect it.
     if (!card) return;
     fireConsumeTriggers(card, alive()[0] || null);
     if (instanceRuntime.consumeFireballN > 0) yield* consumeFireballSteps(instanceRuntime.consumeFireballN);
@@ -954,7 +689,7 @@ function closeBag() { return bag.closeBag(); }
     triggersM2,
   });
   const bag = createBattleBag({
-    resolveCardSteps: (...args) => resolveCard.steps(...args),
+    resolveCardSteps: (/** @type {Parameters<typeof resolveCard.steps>} */ ...args) => resolveCard.steps(...args),
     requestBattleRender, clearTargetSession, cancelInteraction, beginSpecialTargeting, interactionOf,
     queueBattleAction, runStagedSteps, singleTargetHitSteps, applyTextEffects, hitFoe,
     sweepDead, finish, alive, addTempCard, addDeckCard, fireCatGift, applyKillRewards,
@@ -1021,67 +756,9 @@ function closeBag() { return bag.closeBag(); }
   // 「无法打出」词条拦截）；手牌集齐 5 张 → 化为「深渊主宰·妲莉薇特」：旧日再临——
   // 抽牌直到手牌 6 张、免疫诅咒、能量上限 +1、法伤 +1、本场法术均已注能；
   // 5 张封印单卡自动消耗，并召唤她的四个衍生物：封印肢体 ×4（4-4）。
-  const SEALED_HERO_ID = 'tt8-hero-sealer';
-  const SEAL_LIMB_IDS = ['tt8-curseimmune', 'tt8-energycap', 'tt8-nofocus', 'tt8-healplus'];
-  const SOVEREIGN_ID = 'tt8-abyss-sovereign';
-
-  function sealCardById(id) { return cards.all().find(c => c.id === id) || null; }
-
-  function sealSetup(card) {
-    if (card?.rules?.battle?.setup) return card.rules.battle.setup;
-    if (!hasStructuredTrigger(card, 'onPlay') && card?.id === SEALED_HERO_ID) {
-      return { mode: 'boss', injectIds: SEAL_LIMB_IDS,
-        collection: { ids: [SEALED_HERO_ID, ...SEAL_LIMB_IDS], into: SOVEREIGN_ID } };
-    }
-    return null;
-  }
-
-  function injectSealCards() {
-    const setups = (instanceRuntime.G.ownedCards || []).filter(entry => instanceRuntime.sel.has(entry.uid))
-      .map(entry => sealSetup(entry.card)).filter(setup => setup && setup.mode === instanceRuntime.mode);
-    if (!setups.length) return;
-    setups.forEach(setup => setup.injectIds.forEach(id => {
-      const tpl = sealCardById(id);
-      if (!tpl) return;
-      const uid = 'bts' + Date.now().toString(36) + instanceRuntime.nextTmpSeq();
-      instanceRuntime.granted.push({ uid, card: { ...tpl } });
-      instanceRuntime.drawPile.push(uid);
-    }));
-    instanceRuntime.set$drawPile(shuffle(instanceRuntime.drawPile));
-    instanceRuntime.G.log('[[icon:skull]] <b>深海封印</b>：「受缚之残影」与四张「封印肢体」沉入牌库——集齐 5 张封印之牌，破除封印！', 'sys');
-  }
-
-  function checkSealTransformation() {
-    if (instanceRuntime.sealDone) return;
-    const ids = new Set(instanceRuntime.hand.map(uid => findCard(uid)?.card?.id));
-    const collection = [...(instanceRuntime.G.ownedCards || []), ...instanceRuntime.granted]
-      .map(entry => sealSetup(entry.card)?.collection)
-      .find(rule => rule && rule.ids.every(id => ids.has(id)));
-    if (!collection) return;
-    const sealedInHand = instanceRuntime.hand.filter(u => {
-      const o = findCard(u);
-      return !!o?.card && collection.ids.includes(o.card.id);
-    });
-    instanceRuntime.set$sealDone(true);
-    // ① 5 张封印单卡自动消耗（进消耗区/墓地，不再可用）
-    sealedInHand.forEach(u => {
-      const o = findCard(u);
-      const i = instanceRuntime.hand.indexOf(u);
-      if (i >= 0) instanceRuntime.hand.splice(i, 1);
-      instanceRuntime.consumed.push(u);
-      if (instanceRuntime.mode === 'boss') instanceRuntime.grave.push(u);
-      instanceRuntime.cardAnims.push({ kind: 'burn', uid: u, name: o ? o.card.name : '' });
-    });
-    instanceRuntime.G.log('[[icon:flask]] 5 张封印之牌在深海的辉光中燃尽……', 'sys');
-    // ② 化为深渊主宰·妲莉薇特（2 费能力卡，由玩家打出引爆「旧日再临」）
-    const tpl = sealCardById(collection.into);
-    if (tpl) addTempCard({ ...tpl });
-    instanceRuntime.G.log('[[icon:helmet]] <b>封印破除——化为深渊主宰·妲莉薇特！打出她，旧日再临。</b>', 'ok');
-    sweepDead();
-  }
-
   // 玩家侧诅咒统一入口：旧日再临后免疫诅咒
-  function addPlayerCurse(key, n) {
+  function addPlayerCurse(key, n, source = undefined) {
+    void source; // Preserve the combat source argument at compatibility ports.
     if (instanceRuntime.playerCurseImmune) {
       // 第十二批（2026-09-23）：邪能护体的本回合临时免疫在场时用中性措辞（深渊主宰的
       // 永久免疫无本条 pending 时维持原口吻；两免疫同场的极端组合按临时措辞展示，仅文案差异）
@@ -1096,80 +773,6 @@ function closeBag() { return bag.closeBag(); }
       return 0;
     }
     return Combat.addCurse(instanceRuntime.pstat, key, n);
-  }
-
-  // —— 龙巢符文开战结算（羁绊 + 符文效果，2026-09-16 Item 定版）——
-  function applyNestRunes() {
-    instanceRuntime.set$nestRunes((instanceRuntime.opts && instanceRuntime.opts.nest && instanceRuntime.opts.nest.runes) || []);
-    if (!instanceRuntime.nestRunes.length) return;
-    instanceRuntime.set$nestSyn(evaluateRunes(instanceRuntime.nestRunes));
-    instanceRuntime.G.log('[[icon:gem]] <b>研究所符文</b>生效：' + instanceRuntime.nestRunes.map(r => esc(r.name + '（' + r.attrs.join('') + '）')).join('、'), 'ok');
-    instanceRuntime.nestRunes.forEach(r => {
-      if (r.kind === 'attack') Combat.addBlessing(instanceRuntime.pstat, 'atkUp', 1);
-      if (r.kind === 'mana') Combat.addBlessing(instanceRuntime.pstat, 'spellUp', 1);
-      instanceRuntime.applyRuneFlag(r.kind);   // 符文规则旗：time/arrow/unyield/ash/infinite/holy/shield/swift/fireball/spacetime
-      if (r.kind === 'bleed') instanceRuntime.foes.forEach(f => { if (!f.dead) Combat.addCurse(f, 'bleed', 1); });
-      if (r.kind === 'poison') instanceRuntime.delayed.push({ text: '对所有敌人附加 1 层中毒', cardName: '中毒符文', repeat: true });
-    });
-    if (instanceRuntime.nestSyn.water1) {
-      const cc = cards.randomClassCard(instanceRuntime.G.myClass);
-      if (cc) { addTempCard({ ...cc }); instanceRuntime.G.log('[[icon:medal]] <b>水 1</b>：获得 1 张本职业卡牌', 'ok'); }
-    }
-    if (instanceRuntime.nestSyn.water3) instanceRuntime.delayed.push({ text: '发现 1 张本职业卡牌', cardName: '水 3 羁绊', repeat: true });
-    if (instanceRuntime.nestSyn.fire1 || instanceRuntime.nestSyn.fire3) {
-      instanceRuntime.set$energy(instanceRuntime.energy + (1));
-      instanceRuntime.G.log('[[icon:fire]] <b>火 1</b>：首回合额外 1 点能量' + (instanceRuntime.nestSyn.fire3 ? '（火 3 每回合开始也会 +1）' : ''), 'ok');
-      if (instanceRuntime.nestSyn.fire3) instanceRuntime.delayed.push({ text: '获得 1 点能量', cardName: '火 3 羁绊', repeat: true });
-    }
-    if (instanceRuntime.nestSyn.grass1 || instanceRuntime.nestSyn.grass3) instanceRuntime.G.log('[[icon:wood]] <b>草' + (instanceRuntime.nestSyn.grass3 ? 3 : 1) + '</b>：装备栏' + (instanceRuntime.nestSyn.grass3 ? '无上限' : '上限 +1'), 'ok');
-    if (instanceRuntime.nestSyn.light1 || instanceRuntime.nestSyn.light3) {
-      const n = instanceRuntime.nestSyn.light3 ? 3 : 1;
-      const pool = cards.all().filter(c => c.rarity === '传说' && ['武术', '法术'].includes(c.type));
-      const picked = [];
-      for (let k = 0; k < n && pool.length; k++) {
-        const c = pool.splice(Math.floor(Random.random('battle') * pool.length), 1)[0];
-        const zero = { ...c, cost: 0 };
-        const uid0 = 'bts' + Date.now().toString(36) + instanceRuntime.nextTmpSeq();
-        instanceRuntime.granted.push({ uid: uid0, card: zero });
-        instanceRuntime.drawPile.push(uid0);
-        picked.push(c.name);
-      }
-      instanceRuntime.set$drawPile(shuffle(instanceRuntime.drawPile));
-      if (picked.length) instanceRuntime.G.log('[[icon:sparkles]] <b>光 ' + n + '</b>：洗入传说招式 ' + picked.join('、') + '（均为 0 费）', 'ok');
-    }
-    if (instanceRuntime.nestSyn.dark1 || instanceRuntime.nestSyn.dark3) instanceRuntime.G.log('[[icon:skull]] <b>暗' + (instanceRuntime.nestSyn.dark3 ? 3 : 1) + '</b>：你的伤害' + (instanceRuntime.nestSyn.dark3 ? '' : '对半血敌人') + ' +1', 'ok');
-    if (instanceRuntime.nestRunes.some(r => r.kind === 'morph')) {
-      const forms = cards.all().filter(c => /形态/.test(String(c.name || '')) && ['武术', '法术'].includes(c.type));
-      const picks = [];
-      for (let k = 0; k < 2 && forms.length; k++) picks.push(forms.splice(Math.floor(Random.random('battle') * forms.length), 1)[0]);
-      if (picks.length === 2) {
-        choiceQueue.push({ cardName: '变身符文', options: picks.map(c => c.desc || c.name) }); processChoice();
-        instanceRuntime.G.log('[[icon:sparkles]] <b>变身符文</b>：从 2 种随机形态中选择 1 张释放', 'sys');
-      }
-    }
-    if (instanceRuntime.nestRunes.some(r => r.kind === 'holy')) instanceRuntime.G.log('[[icon:shield]] <b>圣洁符文</b>：前 3 回合免疫诅咒，回合结束 +4 甲', 'ok');
-  }
-
-  // 虚空符文：开局抽牌后，复制手牌与牌库中的 0 费招式各 1 张
-  function applyVoidRune() {
-    if (!instanceRuntime.nestRunes.some(r => r.kind === 'void')) return;
-    let n = 0;
-    instanceRuntime.hand.forEach(u => {
-      const o = findCard(u);
-      if (o && (o.card.cost || 0) === 0 && ['武术', '法术'].includes(o.card.type)) {
-        addTempCard({ ...o.card }); n++;
-      }
-    });
-    instanceRuntime.drawPile.forEach(u => {
-      const o = findCard(u);
-      if (o && (o.card.cost || 0) === 0 && ['武术', '法术'].includes(o.card.type)) {
-        const uid1 = 'bts' + Date.now().toString(36) + instanceRuntime.nextTmpSeq();
-        instanceRuntime.granted.push({ uid: uid1, card: { ...o.card } });
-        instanceRuntime.drawPile.push(uid1);
-        n++;
-      }
-    });
-    if (n) instanceRuntime.G.log('[[icon:skull]] <b>虚空符文</b>：复制了 ' + n + ' 张 0 费招式', 'ok');
   }
 
   function processChoice() { return selectionFlow.processChoice(); }
@@ -1224,6 +827,18 @@ function closeBag() { return bag.closeBag(); }
     sound('curse');
     instanceRuntime.G.log(`[[icon:skull]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
   }
+
+  // 反馈#11（2026-10-21）：战斗内卡牌描述数值按当前实际加成计算。
+  // 引擎装配即注册；battleActive=false 时提供器返回 active:false，
+  // displayCardDescription 自动回落静态文案（地图/图鉴/文档生成不受影响）。
+  registerBattleValueProvider(() => {
+    const status = instanceRuntime.pstat && instanceRuntime.pstat.status;
+    return {
+      active: !!instanceRuntime.G && !!instanceRuntime.G.battleActive,
+      atk: (Number(instanceRuntime.G && instanceRuntime.G.atk) || 0) + (Number(status && status.atkUp) || 0),
+      spellPower: (Number(instanceRuntime.G && instanceRuntime.G.spellPower) || 0) + (Number(status && status.spellUp) || 0),
+    };
+  });
 
   return Object.freeze({
     getCardPlayAvailability, submitCardPlay, awaitTriggeredActions, emitBattlePresentation, emitRecast, settlePendingSelections, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, handUnplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, notifyPlayerDamaged, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn,

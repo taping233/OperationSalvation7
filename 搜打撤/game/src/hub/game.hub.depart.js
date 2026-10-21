@@ -136,7 +136,7 @@ function renderDepartureCard(card) {
           deploySubmitting = false;
           document.getElementById('depMain')?.classList.remove('dep-tearing');
           const button = document.querySelector('#depMain [data-act="confirmDeploy"]');
-          if (button) button.disabled = false;
+          if (button) /** @type {HTMLButtonElement} */ (button).disabled = false;
           deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。';
           renderDepartPrep();
           return false;
@@ -227,14 +227,14 @@ function renderDepartureCard(card) {
           </svg>
         </button>
         <header class="hub-head">
-          <div class="camp-detail-heading"><small>EXPEDITION / 03</small><h2>出征整备</h2></div>
+          <div class="camp-detail-heading"><h2>出征整备</h2></div>
           <nav class="camp-steps" aria-label="出征步骤"><button data-act="depMode">01 模式</button><button data-act="depBack">02 人物</button><b aria-current="step">03 整备</b></nav>
           <span class="pg-spacer"></span>
         </header>
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
           <aside class="camp-depart-person">
             <div class="camp-depart-person-art" data-character="${escAttr(characterFor(deployCharacter)?.id || '')}" data-skin="${escAttr(SDT.Art?.getSkin?.(deployCharacter) || 'default')}" aria-hidden="true">${SDT.Art?.classFullArt?.(characterFor(deployCharacter)?.id) || ''}</div>
-            <div class="camp-depart-person-copy"><small>DEPARTURE CHECKLIST</small><h3>本次人物：${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
+            <div class="camp-depart-person-copy"><h3>本次人物：${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
           </aside>
           <section class="hub-card dep-storage">
             <h3>仓库候选</h3>
@@ -252,7 +252,7 @@ function renderDepartureCard(card) {
             <h3>本次携带</h3><p class="dep-summary" id="depSummary" aria-live="polite">${summaryHtml}</p>
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 随行宠物</span>${petStrip}</div>` : ''}
-            <details class="dep-survival"${B.data.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；撤离时再确认带回结果。</p></details>
+            <details class="dep-survival"${B.data.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>用过的牌进入<b>消耗区</b>，复原后可再用。方法见背包。</p></details>
           </section>
         </div>
         <p class="dep-status" id="depStatus" role="status"${deployHint ? '' : ' hidden'}>${deployHint}</p>
@@ -288,7 +288,7 @@ function renderDepartureCard(card) {
       replaceDeployPick({ ...deployRecommendation.picks });
       deployUndo = { before, after: JSON.stringify(deployPick) };
       deployRecommendation = null;
-      deployHint = '已应用推荐，尚未扣仓；可拖回仓库调整或点击「撤销推荐」。'; renderDepartPrep();
+      deployHint = '已应用，尚未扣仓；可调整或撤销。'; renderDepartPrep();
     });
     act('depRecommendUndo', () => {
       if (!deployUndo || deployUndo.after !== JSON.stringify(deployPick)) {
@@ -322,7 +322,7 @@ function renderDepartureCard(card) {
       const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
       const sameNameCount = Object.entries(deployPick).reduce((sum, [pickedKey, count]) => sum + (findDepartureStack(B2.data.stash, pickedKey)?.card.name === name ? count : 0), 0);
       if (sameNameCount >= stackCap) {
-        deployHint = `[[icon:cross]] 整备同名卡牌最多携带 ${stackCap} 张（每格叠放上限，局内超出会另占一格，这里不提供）——想多带就分摊到不同卡牌上。`;
+        deployHint = `[[icon:cross]] 整备同名卡牌最多携带 ${stackCap} 张（每格上限）。`;
         renderDepartPrep();
         return;
       }
@@ -412,9 +412,9 @@ function renderDepartureCard(card) {
       pool.addEventListener('keydown', activateOnKey);
       bag.addEventListener('keydown', activateOnKey);
       [pool, bag].forEach(el => el.addEventListener('dragstart', (e) => {
-        const card = e.target.closest && e.target.closest('[data-name][draggable]');
+        const card = /** @type {Element} */ (e.target).closest && /** @type {Element} */ (e.target).closest('[data-name][draggable]');
         if (!card) return;
-        e.dataTransfer.setData('text/plain', card.dataset.stackKey || card.dataset.name);
+        e.dataTransfer.setData('text/plain', /** @type {HTMLElement} */ (card).dataset.stackKey || /** @type {HTMLElement} */ (card).dataset.name);
         e.dataTransfer.effectAllowed = 'copyMove';
       }));
       // 09-25 二波美术：拖动卡池卡牌时，空背包格挂金框呼吸提示（.dep-target-hint），
@@ -443,7 +443,7 @@ function renderDepartureCard(card) {
     act('confirmDeploy', () => {
       if (deploySubmitting || !deployStart) return;
       deploySubmitting = true;
-      const button = document.querySelector('#depMain [data-act="confirmDeploy"]');
+      const button = /** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (/** @type {HTMLButtonElement} */ (document.querySelector('#depMain [data-act="confirmDeploy"]')))));
       if (button) button.disabled = true;
       SDT.Sound.sfx('prepReady');
       if (!deployStart) return;

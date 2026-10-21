@@ -291,7 +291,9 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
     }
 
     // 1 攻击伤害 = 卡面 + 攻击力（无流血）
+    /** @type {import('./battle.core-ports.types.js').CombatCaster} */
     let A = { atk: 4 }, B = { hp: 30 };
+    /** @type {ReturnType<typeof dealDamage> | ReturnType<typeof tickPoison>} */
     let r = dealDamage(A, B, 2, TYPES.ATTACK);
     eq('攻击 2 + 攻击力4', r.dealt, 6);
     eq('  目标剩余 HP', B.hp, 24);

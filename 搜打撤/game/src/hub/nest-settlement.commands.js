@@ -43,7 +43,7 @@ export function createNestSettlementCommands({ getActiveSlot, getBase, getRunSto
 
     const recovery = getRecovery();
     const recovered = await recovery.recoverSlot(slotId);
-    if (!recovered.ok) return recovered;
+    if (!recovered.ok) return /** @type {Extract<typeof recovered, {ok:false}>} */ (recovered);
     if (!currentSlot(slotId)) return fail('STALE_SLOT', '档位已切换，研究所撤离已取消');
 
     // Look up the stable request receipt before requiring a live Run record: afterRun:null
@@ -51,13 +51,13 @@ export function createNestSettlementCommands({ getActiveSlot, getBase, getRunSto
     const payload = { runId };
     const receiptContext = { slotId, requestId: `nest-extract:${runId}`, expectedBaseRevision: 0, expectedRunRevision: 0 };
     const prior = await recovery.readSettlementReceipt(receiptContext, { command: COMMAND, payload, runId });
-    if (!prior.ok) return prior;
+    if (!prior.ok) return /** @type {Extract<typeof prior, {ok:false}>} */ (prior);
     if (prior.value) return { ok: true, value: { replay: true, receipt: prior.value } };
     if (!currentSlot(slotId)) return fail('STALE_SLOT', '档位已切换，研究所撤离已取消');
 
     const runStore = getRunStorage();
     const identity = runStore.readIdentity(slotId);
-    if (!identity.ok) return identity;
+    if (!identity.ok) return /** @type {Extract<typeof identity, {ok:false}>} */ (identity);
     if (identity.value.runId !== runId) return fail('STALE_RUN', '研究所对局已变化，撤离已取消');
 
     const base = getBase();
@@ -124,11 +124,11 @@ export function createNestSettlementCommands({ getActiveSlot, getBase, getRunSto
     if (!currentSlot(context.slotId)) return fail('STALE_SLOT', '档位已切换，研究所撤离已取消');
     const recovery = getRecovery();
     const recovered = await recovery.recoverSlot(context.slotId);
-    if (!recovered.ok) return recovered;
+    if (!recovered.ok) return /** @type {Extract<typeof recovered, {ok:false}>} */ (recovered);
     if (!currentSlot(context.slotId)) return fail('STALE_SLOT', '档位已切换，研究所撤离已取消');
 
     const prior = await recovery.readSettlementReceipt(context, { command: COMMAND, payload, runId });
-    if (!prior.ok) return prior;
+    if (!prior.ok) return /** @type {Extract<typeof prior, {ok:false}>} */ (prior);
     if (prior.value) return { ok: true, value: { replay: true, receipt: prior.value } };
 
     const identity = getRunStorage().readIdentity(context.slotId);
@@ -149,7 +149,7 @@ export function createNestSettlementCommands({ getActiveSlot, getBase, getRunSto
       afterRun: null,
       output: attempt.output,
     });
-    if (!committed.ok) return committed;
+    if (!committed.ok) return /** @type {Extract<typeof committed, {ok:false}>} */ (committed);
     return { ok: true, value: { replay: false, receipt: committed.value } };
   }
 
@@ -166,13 +166,13 @@ export function createNestSettlementCommands({ getActiveSlot, getBase, getRunSto
       let attempt = attempts.get(key);
       if (!attempt) {
         const created = await createAttempt(snapshot);
-        if (!created.ok) return created;
+        if (!created.ok) return /** @type {Extract<typeof created, {ok:false}>} */ (created);
         if ('replay' in created.value) return { ok: /** @type {true} */ (true), value: created.value };
         attempt = created.value;
         attempts.set(key, attempt);
       }
       const result = await commitAttempt(attempt);
-      if (result.ok || ['STALE_SLOT', 'STALE_RUN', 'STALE_REVISION'].includes(result.code)) {
+      if (result.ok === true || ['STALE_SLOT', 'STALE_RUN', 'STALE_REVISION'].includes(result.code)) {
         attempts.delete(key);
       }
       return result;

@@ -61,13 +61,13 @@ function targetFor(stage, event) {
     }
     return null;
   }
-  if (event.kind === 'shuffle') return stage.querySelector('.sts-hud-l .bt-pile');
+  if (event.kind === 'shuffle') return /** @type {HTMLElement} */ (stage.querySelector('.sts-hud-l .bt-pile'));
   if (event.kind === 'draw') {
-    return [...stage.querySelectorAll('.bt-card[data-uid]')].find(el => el.dataset.uid === String(event.uid))
-      || [...stage.querySelectorAll('.bt-card')].find(el => el.querySelector('.hsc-name')?.textContent.trim() === event.name)
-      || stage.querySelector('.bt-hand-page') || stage.querySelector('.sts-hand');
+    return [.../** @type {NodeListOf<HTMLElement>} */ (stage.querySelectorAll('.bt-card[data-uid]'))].find(el => el.dataset.uid === String(event.uid))
+      || [.../** @type {NodeListOf<HTMLElement>} */ (stage.querySelectorAll('.bt-card'))].find(el => /** @type {HTMLElement} */ (el.querySelector('.hsc-name'))?.textContent.trim() === event.name)
+      || /** @type {HTMLElement} */ (stage.querySelector('.bt-hand-page')) || /** @type {HTMLElement} */ (stage.querySelector('.sts-hand'));
   }
-  if (event.side === 'self') return stage.querySelector('#btSelf .sts-figure') || stage.querySelector('#btSelf');
+  if (event.side === 'self') return /** @type {HTMLElement} */ (stage.querySelector('#btSelf .sts-figure')) || /** @type {HTMLElement} */ (stage.querySelector('#btSelf'));
   if (Number.isInteger(event.target) && event.target >= 0)
     return stage.querySelector(`.sts-foe[data-eidx="${event.target}"] .sts-figure`) || stage.querySelector(`.sts-foe[data-eidx="${event.target}"]`);
   return null; // Never invent a target when settlement did not supply one.
@@ -99,7 +99,7 @@ function present(state, item, lane) {
   const caption = document.createElement('span'); caption.className = 'bt-card-reveal-caption';
   caption.textContent = `${rare ? `${rarity} · ` : ''}${labelFor(event)}${count > 1 ? ` ×${count}` : ''}${event.targetName ? ` → ${event.targetName}` : ''}`;
   node.append(face, caption); state.layer.append(node);
-  for (const element of node.querySelectorAll('[tabindex],button,a,input')) element.setAttribute('tabindex','-1');
+  for (const element of /** @type {NodeListOf<HTMLButtonElement>} */ (node.querySelectorAll('[tabindex],button,a,input'))) element.setAttribute('tabindex','-1');
   node.inert = true;
   const quiet = reduced();
   node.dataset.reducedMotion = String(quiet);
@@ -162,7 +162,7 @@ export function showSettledCardFeedback(stage, events = [], options = {}) {
   if (state.queue.length > 8) {
     const overflow = state.queue.splice(0,state.queue.length-8).reduce((sum,item) => sum+item.count,0);
     state.overflow = (state.overflow || 0) + overflow;
-    let badge = state.layer.querySelector('.bt-card-feedback-overflow');
+    let badge = /** @type {HTMLElement} */ (state.layer.querySelector('.bt-card-feedback-overflow'));
     if (!badge) { badge=document.createElement('span'); badge.className='bt-card-feedback-overflow'; state.layer.append(badge); }
     badge.textContent = `另 ${state.overflow} 次卡牌动态已结算`;
     if (state.overflowTimer) { clearTimeout(state.overflowTimer); state.timers.delete(state.overflowTimer); }

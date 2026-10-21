@@ -79,14 +79,14 @@ export function updateBeginnerGuide(root, requestedIndex) {
   const direction = index - Number(root.dataset.guidePage || 0);
   const template = document.createElement('template');
   template.innerHTML = beginnerGuideHTML(index);
-  const next = template.content.querySelector('.beginner-guide');
-  if (!next?.querySelector('.bg-page')) return;
+  const next = /** @type {HTMLElement} */ (template.content.querySelector('.beginner-guide'));
+  if (!/** @type {HTMLElement} */ (next?.querySelector('.bg-page'))) return;
   for (const selector of ['.bg-page', '.bg-pager']) {
     root.querySelector(selector)?.replaceWith(next.querySelector(selector));
   }
   root.dataset.guidePage = String(index);
-  if (!motionReduced()) linkedAnimate(root.querySelector('.bg-page'), changeFrames(direction), { duration: motionTiming.change, easing: motionEasing.enter });
-  root.querySelectorAll('[data-act="guidePage"]').forEach(button => {
+  if (!motionReduced()) linkedAnimate(/** @type {HTMLElement} */ (root.querySelector('.bg-page')), changeFrames(direction), { duration: motionTiming.change, easing: motionEasing.enter });
+  /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-act="guidePage"]')).forEach(button => {
     const current = button.dataset.pageIndex === String(index);
     button.classList.toggle('is-current', current);
     button.setAttribute('aria-current', current ? 'step' : 'false');

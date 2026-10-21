@@ -26,6 +26,7 @@ export function departureSummary({ starterCount, starterCard, fireball, pet, sta
   const effect = pet?.effect || {};
   const starter = effect.shaToFireball && fireball ? fireball : starterCard;
   const count = starterCount + (effect.extraSha || 0);
+  /** @type {Map<string, {card: typeof starter, count: number, stackKey?: string}>} */
   const known = new Map([[starter.name, { card: starter, count }]]);
   let extraCount = 0;
   let resourceBonus = 0;

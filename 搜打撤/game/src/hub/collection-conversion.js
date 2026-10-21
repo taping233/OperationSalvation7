@@ -4,6 +4,7 @@ import { freezeDeep } from './commands.shared.js';
 import { isCollectionProtected } from './collection-protection.js';
 
 // 收藏转换的纯预览：与提交共用数量上限、满级及末张溢出口径，不写库存或经验。
+/** @returns {{canConvert: boolean, code: string, message: string, maxCount: number, cardId?: string, cardName?: string, characterId?: string, characterName?: string, registered?: boolean, protected?: boolean, registrationOnly?: boolean, count?: number, availableCount?: number, neededCount?: number, perCardXp?: number, remainingXp?: number, baseXp?: number, actualXp?: number, overflowXp?: number, before?: {lv: number, xp: number}, after?: {lv: number, xp: number}}} */
 export function previewCollectionConversion({ baseSnapshot, card, availableCount = 0, count = 1 }) {
   const character = characterFor(card?.cls);
   if (!character || !(card.rarity === '职业' || card.type === '能力卡')) {

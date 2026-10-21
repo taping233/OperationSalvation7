@@ -34,7 +34,7 @@ export function createHubHomeScene({ UI, disposePreparation, renderHub, closeBas
     const overlay = host.closest('#overlay');
     const current = () => request === homeSceneRequest && SDT.Base === base && base.slot === slot
       && host.isConnected && document.getElementById('homeSceneHost') === host
-      && !overlay?.hidden && !overlay?.classList.contains('closing') && !overlay?.hasAttribute('data-ui-closing');
+      && !/** @type {HTMLElement} */ (overlay)?.hidden && !overlay?.classList.contains('closing') && !overlay?.hasAttribute('data-ui-closing');
     const refresh = () => {
       if (!current()) return null;
       const next = readHomeView(slot);

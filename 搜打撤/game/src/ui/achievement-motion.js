@@ -7,11 +7,11 @@ const reduced = () => document.body.classList.contains('reduce-motion')
   || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
 export function createAchievementMotion(root) {
-  const scroll = root.querySelector('.ag-scroll');
-  const grid = root.querySelector('.ag-grid');
-  const empty = root.querySelector('.ag-empty');
-  const detail = root.querySelector('.ag-detail');
-  const backdrop = root.querySelector('.ag-detail-backdrop');
+  const scroll = /** @type {HTMLElement} */ (root.querySelector('.ag-scroll'));
+  const grid = /** @type {HTMLElement} */ (root.querySelector('.ag-grid'));
+  const empty = /** @type {HTMLElement} */ (root.querySelector('.ag-empty'));
+  const detail = /** @type {HTMLElement} */ (root.querySelector('.ag-detail'));
+  const backdrop = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-backdrop'));
   let listAnimation = null;
   let detailAnimations = [];
   let detailEpoch = 0;
@@ -20,8 +20,8 @@ export function createAchievementMotion(root) {
   let tileAnimations = [];
   let categoryAnimation = null;
   let categoryMarker = null;
-  const categoryNav = root.querySelector('.ag-categories');
-  const categoryButtons = [...root.querySelectorAll('[data-gallery-category]')];
+  const categoryNav = /** @type {HTMLElement} */ (root.querySelector('.ag-categories'));
+  const categoryButtons = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-category]'))];
   let categoryIndex = Math.max(0, categoryButtons.findIndex(button => button.getAttribute('aria-pressed') === 'true'));
 
   const animate = (el, frames, options) => {
@@ -33,9 +33,9 @@ export function createAchievementMotion(root) {
     detailAnimations = [];
   };
   const settleEntry = () => {
-    root.querySelectorAll('[data-surface-role]').forEach(el => {
+    /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-surface-role]')).forEach(el => {
       el.getAnimations?.().forEach(animation => {
-        if (animation.effect?.target === el && 'animationName' in animation) animation.cancel();
+        if (animation.effect && 'target' in animation.effect && animation.effect.target === el && 'animationName' in animation) animation.cancel();
       });
     });
   };
@@ -46,7 +46,7 @@ export function createAchievementMotion(root) {
   const revealTiles = (initial = false, direction = 1) => {
     cancelTiles();
     const edge = rect(scroll);
-    const visible = [...grid.querySelectorAll('[data-gallery-item]')]
+    const visible = [.../** @type {NodeListOf<HTMLElement>} */ (grid.querySelectorAll('[data-gallery-item]'))]
       .filter(tile => !tile.hidden).map(tile => ({ tile, bounds: rect(tile) }))
       .filter(({ bounds }) => bounds.top + bounds.height > edge.top && bounds.top < edge.top + edge.height)
       .slice(0, 12);
@@ -109,7 +109,7 @@ export function createAchievementMotion(root) {
     listAnimation?.cancel();
     listAnimation = null;
     const edge = rect(scroll);
-    const tiles = [...root.querySelectorAll('[data-gallery-item]')];
+    const tiles = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-item]'))];
     const tile = tiles
       .find(el => {
         if (el.hidden) return false;
@@ -120,7 +120,7 @@ export function createAchievementMotion(root) {
   };
   const restoreAnchor = anchor => {
     if (!anchor?.tile.isConnected) return;
-    const tiles = [...root.querySelectorAll('[data-gallery-item]')];
+    const tiles = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-item]'))];
     const target = anchor.tile.hidden
       ? tiles.slice(anchor.index).find(tile => !tile.hidden) || tiles.slice(0, anchor.index).reverse().find(tile => !tile.hidden)
       : anchor.tile;
@@ -136,8 +136,8 @@ export function createAchievementMotion(root) {
     source?.classList.remove('is-detail-source');
     source = tile;
     source.classList.add('is-detail-source');
-    const art = detail.querySelector('.ag-detail-art');
-    const from = rect(tile.querySelector('.ag-emblem') || tile);
+    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
+    const from = rect(/** @type {HTMLElement} */ (tile.querySelector('.ag-emblem')) || tile);
     const to = rect(art);
     detailOrigin = {
       x: Math.max(-24, Math.min(24, (from.left + from.width / 2 - to.left - to.width / 2) * .12)),
@@ -147,7 +147,7 @@ export function createAchievementMotion(root) {
       animate(backdrop, [{ opacity: 0 }, { opacity: 1 }], { duration: motionTiming.feedback }),
       animate(detail, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
       animate(art, [{ opacity: 0, transform: `translate(${detailOrigin.x}px,${detailOrigin.y}px) scale(.95)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
-      animate(detail.querySelector('.ag-detail-copy'), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter, delay: motionTiming.stagger }),
+      animate(/** @type {HTMLElement} */ (detail.querySelector('.ag-detail-copy')), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter, delay: motionTiming.stagger }),
     ];
   };
   const closeDetail = finish => {
@@ -155,7 +155,7 @@ export function createAchievementMotion(root) {
     // 快速关闭从当前进度收回，不能先取消入场再跳到完全展开状态。
     const current = { opacity: getComputedStyle(detail).opacity, transform: getComputedStyle(detail).transform };
     const shadeOpacity = getComputedStyle(backdrop).opacity;
-    const art = detail.querySelector('.ag-detail-art');
+    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
     const artCurrent = { opacity: getComputedStyle(art).opacity, transform: getComputedStyle(art).transform };
     cancelDetail();
     const animation = animate(detail, [current, { opacity: 0, transform: 'translateY(5px)' }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
@@ -174,10 +174,10 @@ export function createAchievementMotion(root) {
   };
   const enterGallery = () => {
     revealTiles(true);
-    animate(root.querySelector('.ag-progress > span'), [
+    animate(/** @type {HTMLElement} */ (root.querySelector('.ag-progress > span')), [
       { transform: 'scaleX(0)' }, { transform: 'scaleX(1)' },
     ], { duration: motionTiming.pageEnter, delay: motionTiming.stagger * 3 });
-    animate(root.querySelector('.ag-total'), [
+    animate(/** @type {HTMLElement} */ (root.querySelector('.ag-total')), [
       { opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' },
     ], { duration: motionTiming.regionEnter, delay: motionTiming.stagger * 2 });
   };

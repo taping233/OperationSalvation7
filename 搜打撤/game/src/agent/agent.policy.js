@@ -20,6 +20,7 @@ const TERMINATORS = new Set([
 ]);
 
 // ---------- 随机策略：合法动作里等概率（冒烟/对照用；决策随机独立于规则流） ----------
+/** @returns {(obs:ReturnType<typeof import("./agent.state.js").observe>,extras?:{signal?:AbortSignal})=>object|null} */
 function randomPolicy(seed) {
   const roll = seed || (() => Random.random('agent-policy'));
   return (obs) => {
@@ -68,6 +69,7 @@ function strategicPolicy(options = {}) {
 }
 
 // ---------- 贪心策略（v1 基线 / strategic=v2 数据驱动改版） ----------
+/** @returns {(obs:ReturnType<typeof import("./agent.state.js").observe>,extras?:{signal?:AbortSignal})=>object|null} */
 function greedyPolicy({ resetSlots = false, preferNest = false, strategic = false, extractHpRatio = 0.35 } = {}) {
   // 权重向量（09-26 架构升级）：工厂级解析一次——evolve 个体经 globalThis 注入，
   // 每局 factory 调用时取最新；v1 对照组恒拿 DEFAULT（冻结语义）
@@ -176,7 +178,18 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
       }
       return find('cancelPendingTarget') || null;
     }
-    if (b.infusing) return find('playDirect') || find('cancelInfusion') || null;
+    if (b.infusing) {
+      const selection = b.infusing;
+      const key = `infuse:${JSON.stringify([selection.uid, selection.selectionId, selection.picked])}`;
+      // A rejected confirmation must not trap a policy on the same material set.
+      if (tried.has(key)) return find('cancelInfusion') || null;
+      tried.add(key);
+      const invalid = new Set(selection.invalidPickedUids || []);
+      return find('confirmInfusion')
+        || find('selectInfusion', action => invalid.has(action.args?.[0]))
+        || find('selectInfusion', action => !selection.picked?.includes(action.args?.[0]))
+        || find('playDirect') || find('cancelInfusion') || null;
+    }
     if (b.choosing) return find('pickChoice') || acts[0];
     if (b.discovering) {
       // v3 发现三选一：按稀有度降序、同稀有度选低费
@@ -736,6 +749,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
     if (strategic && discards.length) {
       const own = new Map((obs.run?.ownedCards || []).map(o => [o.name, o]));
       const discardKey = (a) => {
+        /** @type {{rarity?:string,type?:string}} */
         const o = own.get(a.args?.[0]) || {};
         return [rarityRank(o.rarity), DECK_TYPES.has(o.type) ? 1 : 0];
       };
@@ -846,7 +860,7 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
         && (obs.run.ownedCards || []).some(o => o.sellable)
         ? (freshPick(ui.filter(a => a.name === 'openSell'))
           || freshPick(ui.filter(a => a.name === 'sellCard').sort((x, y) => {
-            const own = new Map((obs.run.ownedCards || []).map(o => [o.uid, o.card?.rarity]));
+            const own = new Map((obs.run.ownedCards || []).map(o => [o.uid, (/** @type {typeof o & {card?:import("../hub/game.store.types").CardSnapshot}} */ (o)).card?.rarity]));
             return rarityRank(own.get(x.params?.uid)) - rarityRank(own.get(y.params?.uid));
           })))
         : null)

@@ -74,4 +74,4 @@ function reset() {
   bindings = loadBindings();
 }
 
-sdtDefine('Input', Object.freeze({ actionFor, rebind, reset, get bindings() { return bindings; }, DEFAULT_BINDINGS }));
+export const Input = sdtDefine('Input', Object.freeze({ actionFor, rebind, reset, get bindings() { return bindings; }, DEFAULT_BINDINGS }));

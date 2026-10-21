@@ -28,8 +28,8 @@ const keepsCardInHand = card => Object.hasOwn(card?.rules?.battle || {}, 'keepIn
   ? card.rules.battle.keepInHand === true : !hasStructuredTrigger(card, 'onPlay') && /永远被保留在手牌中/.test(String(card?.desc || ''));
 
 function createBattleExecPlay({
-  emitRecast = () => {},
-  markCardResolving = () => {},
+  emitRecast = /** @type {(event: Parameters<import('./battle.core-ports.types.js').EffectCommands['emitRecast']>[0]) => boolean | void} */ (() => {}),
+  markCardResolving = /** @type {(uid: string, marker: object, active: boolean) => void} */ (() => {}),
   warnCardRuleRejection = message => instanceRuntime.G.log(message, 'warn'),
   requestBattleRender, findCard, findEffectiveCard, prepareExecutionCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
@@ -47,14 +47,16 @@ function createBattleExecPlay({
     requestBattleRender();
     return true;
   }
-  function inspectExecution(uid, submittedCard, fuelUids, freeCost, requirementsPaid = false, paymentUids = []) {
+  function inspectExecution(uid, submittedCard, fuelUids, freeCost, requirementsPaid = false, paymentUids = [], directRelease = false) {
     const card = effectiveExecutionCard(uid, submittedCard);
     const fail = (code, message) => ({ card, reason:{ code, message } });
     if (card?._battleTransformMissing) return fail('MISSING_TRANSFORM', `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`);
     const capability = inspectCardRuleCapability(card);
     if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持');
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
-    const infusionIssue = missingInfusionReason(card, (fuelUids || []).length, instanceRuntime.allSpellsInfused);
+    // 反馈#5b（2026-10-21 老板定版）：「直接释放/直接施放」词条释放注能卡时视为已注能——
+    // 不因缺注能材料被拦（rules.md「直接释放视为已注能」条目）；普通出牌与「抽到时施放」仍走注能门。
+    const infusionIssue = directRelease ? '' : missingInfusionReason(card, (fuelUids || []).length, instanceRuntime.allSpellsInfused);
     if (infusionIssue) return fail('INFUSION_REQUIRED', infusionIssue);
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
@@ -127,9 +129,9 @@ function createBattleExecPlay({
     }
     return /** @type {import('../battle.play-submission.types.js').CardPlaySubmission} */ (submission.result);
   }
-  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null, submission = null) {
+  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null, submission = null, directRelease = false) {
     const submittedCard = card;
-    const check = inspectExecution(uid, card, fuelUids, freeCost, requirementsPaid, paymentUids);
+    const check = inspectExecution(uid, card, fuelUids, freeCost, requirementsPaid, paymentUids, directRelease);
     card = check.card;
     if (check.reason) {
       submission?.reject(check.reason.code, check.reason.message);
@@ -147,7 +149,7 @@ function createBattleExecPlay({
       instanceRuntime.set$handSelecting({
         act: 'payment', mandatory: true, n: handRequirement.count, type: handRequirement.type || null,
         excludedUids, selectedUids: [],
-        payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost, onResolved },
+        payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost, onResolved, directRelease },
       });
       submission?.needsInput();
       requestBattleRender();
@@ -158,13 +160,13 @@ function createBattleExecPlay({
     submission?.queued(receipt);
     // 返回动作 promise：调用方（如极速符文回环）可 await 出牌完成
     return queueBattleAction(async signal => {
-      const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids, submission);
+      const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids, submission, directRelease);
       throwIfActionCancelled(signal);
       if (resolved && onResolved && instanceRuntime.G?.battleActive) onResolved();
     }, '出牌动作', submission ? error => submission.error(error) : null);
   }
 
-  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = [], submission = null) {
+  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = [], submission = null, directRelease = false) {
     instanceRuntime.set$activeActionSignal(signal);
     markCardResolving(uid, signal, true);
     try {
@@ -181,7 +183,7 @@ function createBattleExecPlay({
     if (rejectMissingTransform(card)) { submission?.reject('MISSING_TRANSFORM', '转换目标缺失，本次未施放'); return false; }
     // Recheck after queueing: rules may have changed before payment is committed.
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) { submission?.reject('RULE_REJECTED', '规则格式非法或尚未支持'); return false; }
-    const infusionIssue = missingInfusionReason(card, (fuelUids || []).length, instanceRuntime.allSpellsInfused);
+    const infusionIssue = directRelease ? '' : missingInfusionReason(card, (fuelUids || []).length, instanceRuntime.allSpellsInfused);
     if (infusionIssue) {
       submission?.reject('INFUSION_REQUIRED', infusionIssue);
       instanceRuntime.G.log(`[[icon:cross]] ${esc(infusionIssue)}`, 'warn');
@@ -290,8 +292,10 @@ function createBattleExecPlay({
       const o = findCard(f);
       return a + (o ? Math.max(0, +(cardCatalog.sellPrice(o.card) || 0)) : 0);
     }, 0);
-    // 免注能实例与「招式均已注能」均按已注能结算；材料消耗及累计计数仍只由实际燃料驱动。
-    const infusedBase = fuelUids.length > 0 || hasInfusionWaiver(card, instanceRuntime.allSpellsInfused);
+    // 免注能实例、「招式均已注能」与「直接释放/直接施放」词条均按已注能结算（反馈#5b 老板定版：
+    // 直释注能卡视为已注能——允许释放、按已注能效果结算）；材料消耗及累计计数仍只由实际燃料驱动，
+    // 直释不消耗注能材料、不增加累计注能计数。
+    const infusedBase = fuelUids.length > 0 || hasInfusionWaiver(card, instanceRuntime.allSpellsInfused) || directRelease;
     const aliveBefore = alive().length;
     const controlledBefore = instanceRuntime.foes.filter(foe => foe.controlled).length;
     const repeatNextSpell = instanceRuntime.nextSpellTwice > 0 && card.type === '法术';

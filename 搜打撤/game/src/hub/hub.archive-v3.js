@@ -71,7 +71,7 @@ function backsHTML(base, meta, cards) {
   backId = selected.id;
   const unlocked = base.isBackUnlocked(selected.id), equipped = base.backSel() === selected.id;
   const achievement = meta.ACHIEVEMENTS.find(item => item.back === selected.id);
-  return `<div class="av3-backs"><div class="av12-back-stage"><div class="av3-back-display">${cards.cardBackHTML(selected.id)}</div></div><div class="av3-back-shelves">${backs.map(back => `<button type="button" class="av3-back${back.id === selected.id ? ' on' : ''}${base.isBackUnlocked(back.id) ? '' : ' locked'}" data-act="archiveV3Back" data-id="${escAttr(back.id)}" aria-pressed="${back.id === selected.id}" aria-label="预览${escAttr(back.name)}"><span>${cards.cardBackHTML(back.id)}</span><b>${esc(back.name)}</b><small>${base.isBackUnlocked(back.id) ? base.backSel() === back.id ? '使用中' : '已解锁' : '未解锁'}</small></button>`).join('')}</div><aside class="av3-back-detail"><span class="av3-eyebrow">外观预览 · ${equipped ? '使用中' : unlocked ? '已解锁' : '未解锁'}</span><h3>${esc(selected.name)}</h3><p>${esc(selected.from || '默认卡背')}</p><p class="av3-preview-note">${equipped ? '背包翻面与牌库堆正在使用此卡背。' : unlocked ? '当前仅预览，应用后用于背包翻面与牌库堆。' : '当前仅预览，完成目标并领取奖励后可应用。'}</p>${!unlocked && achievement ? `<div class="av3-back-condition"><b>${esc(achievement.name)}</b><p>${esc(achievement.desc)}</p><button type="button" class="mini-btn base-command" data-act="archiveLocate" data-id="${escAttr(achievement.id)}">查看解锁目标 →</button></div>` : ''}<button type="button" class="mini-btn ok base-command base-command-primary av3-primary" data-act="selBack" data-id="${escAttr(selected.id)}"${!unlocked || equipped ? ' disabled' : ''}>${equipped ? '使用中' : unlocked ? '应用卡背' : '未解锁'}</button></aside></div>`;
+  return `<div class="av3-backs"><div class="av12-back-stage"><div class="av3-back-display">${cards.cardBackHTML(selected.id)}</div></div><div class="av3-back-shelves">${backs.map(back => `<button type="button" class="av3-back${back.id === selected.id ? ' on' : ''}${base.isBackUnlocked(back.id) ? '' : ' locked'}" data-act="archiveV3Back" data-id="${escAttr(back.id)}" aria-pressed="${back.id === selected.id}" aria-label="预览${escAttr(back.name)}"><span>${cards.cardBackHTML(back.id)}</span><b>${esc(back.name)}</b><small>${base.isBackUnlocked(back.id) ? base.backSel() === back.id ? '使用中' : '已解锁' : '未解锁'}</small></button>`).join('')}</div><aside class="av3-back-detail"><span class="av3-eyebrow">外观预览 · ${equipped ? '使用中' : unlocked ? '已解锁' : '未解锁'}</span><h3>${esc(selected.name)}</h3><p>${esc(selected.from || '默认卡背')}</p><p class="av3-preview-note">${equipped ? '用于背包与牌库。' : unlocked ? '应用后用于背包与牌库。' : '完成目标并领取奖励后解锁。'}</p>${!unlocked && achievement ? `<div class="av3-back-condition"><b>${esc(achievement.name)}</b><p>${esc(achievement.desc)}</p><button type="button" class="mini-btn base-command" data-act="archiveLocate" data-id="${escAttr(achievement.id)}">查看解锁目标 →</button></div>` : ''}<button type="button" class="mini-btn ok base-command base-command-primary av3-primary" data-act="selBack" data-id="${escAttr(selected.id)}"${!unlocked || equipped ? ' disabled' : ''}>${equipped ? '使用中' : unlocked ? '应用卡背' : '未解锁'}</button></aside></div>`;
 }
 
 function storiesHTML(base) {
@@ -103,18 +103,18 @@ export function refreshArchiveBacks({ base, meta, cards }) {
     if (target && next && target.innerHTML !== next.innerHTML) target.innerHTML = next.innerHTML;
   }
   root.querySelectorAll('[data-act="archiveV3Back"]').forEach(button => {
-    const on = button.dataset.id === backId;
+    const on = /** @type {HTMLElement} */ (button).dataset.id === backId;
     button.classList.toggle('on', on);
     button.setAttribute('aria-pressed', String(on));
-    button.querySelector('small').textContent = base.isBackUnlocked(button.dataset.id)
-      ? base.backSel() === button.dataset.id ? '使用中' : '已解锁' : '未解锁';
+    button.querySelector('small').textContent = base.isBackUnlocked(/** @type {HTMLElement} */ (button).dataset.id)
+      ? base.backSel() === /** @type {HTMLElement} */ (button).dataset.id ? '使用中' : '已解锁' : '未解锁';
   });
   return true;
 }
 
 /** Call after bindArchive(ui), which owns filtering, target location and story loading. */
 export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Meta, cards }) {
-  const root = document.querySelector('#hubMain .hub-archive-v3');
+  const root = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-archive-v3'));
   if (!root) return;
   bindRewardFeedback({ root, base, meta, cards, ui });
   bindCollectionCards({ root, base, cards, ui });
@@ -123,15 +123,15 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
     const detail = root.querySelector('.av12-record-detail');
     if (!source || !detail) return;
     root.querySelectorAll('[data-act="archiveV12Record"]').forEach(button => {
-      const on = button.dataset.index === data.index;
+      const on = /** @type {HTMLElement} */ (button).dataset.index === data.index;
       button.classList.toggle('on', on); button.setAttribute('aria-pressed', String(on));
     });
     detail.innerHTML = source.innerHTML;
   });
   const selectMedal = data => {
-    const row = [...root.querySelectorAll('.av3-medal')].find(item => item.dataset.achievement === data.id);
+    const row = [...root.querySelectorAll('.av3-medal')].find(item => /** @type {HTMLElement} */ (item).dataset.achievement === data.id);
     const source = row?.querySelector('.av3-detail-source'), detail = root.querySelector('.av3-medal-detail');
-    if (!source || !detail || row.hidden) return;
+    if (!source || !detail || /** @type {HTMLElement} */ (row).hidden) return;
     medalId = data.id;
     root.querySelectorAll('.av3-medal').forEach(item => {
       const selected = item === row;
@@ -144,18 +144,18 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
     const detail = root.querySelector('.av3-medal-detail');
     if (!detail) return;
     const rows = [...root.querySelectorAll('.av3-medal')];
-    const visible = rows.filter(row => !row.hidden);
+    const visible = rows.filter(row => !/** @type {HTMLElement} */ (row).hidden);
     // Match the collection-card directory: preserve an available selection,
     // otherwise choose the first result; never leave a hidden item's details.
-    if (visible.some(row => row.dataset.achievement === medalId && row.classList.contains('selected'))) return;
-    if (visible.length) selectMedal({ id: visible[0].dataset.achievement });
+    if (visible.some(row => /** @type {HTMLElement} */ (row).dataset.achievement === medalId && row.classList.contains('selected'))) return;
+    if (visible.length) selectMedal({ id: /** @type {HTMLElement} */ (visible[0]).dataset.achievement });
     else {
       medalId = '';
       rows.forEach(row => {
         row.classList.remove('selected');
         row.querySelector('[data-act="archiveV3Medal"]')?.setAttribute('aria-pressed', 'false');
       });
-      detail.innerHTML = '<h3>没有匹配的成就</h3><p>调整筛选条件，或查看全部目标。</p>';
+      detail.innerHTML = '<h3>没有匹配的成就</h3>';
     }
   };
   root.addEventListener('archive-filter-change', reconcileMedalSelection);
@@ -163,7 +163,7 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
   ui.act('archiveV3Medal', selectMedal);
   // archiveLocate focuses the real target after changing sections; reveal its details with it.
   root.addEventListener('focusin', event => {
-    if (event.target.matches('.av3-medal[data-achievement]')) selectMedal({ id: event.target.dataset.achievement });
+    if (/** @type {Element} */ (event.target).matches('.av3-medal[data-achievement]')) selectMedal({ id: /** @type {HTMLElement} */ (event.target).dataset.achievement });
   });
   ui.act('archiveV3Back', data => {
     if (!(cards.CARD_BACKS || []).some(back => back.id === data.id) || backId === data.id) return;
@@ -171,5 +171,5 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
     refreshArchiveBacks({ base, meta, cards });
   });
   // Keep the reader useful immediately; the parent loader guards slot and async request identity.
-  if (root.dataset.archiveView === 'stories') [...root.querySelectorAll('.story-entry.recorded')].at(-1)?.click();
+  if (root.dataset.archiveView === 'stories') /** @type {HTMLElement} */ ([...root.querySelectorAll('.story-entry.recorded')].at(-1))?.click();
 }

@@ -1,6 +1,7 @@
 
 
 /** Instance-owned state and host services are captured explicitly. */
+/** @typedef {Pick<import('../core/battle.core-ports.types.js').ResolutionPorts, 'getPlayerStatus' | 'log' | 'esc' | 'drawCards' | 'countDrawnSpells' | 'findCard' | 'onHandConsumed'> & {combat: ReturnType<typeof import('../core/combat.factory.js').createCombatRuntime>}} M1Ports */
 export function createM1Domain(context) {
 const instanceRuntime = context.runtime;
 
@@ -25,9 +26,9 @@ const instanceRuntime = context.runtime;
  * 底层 combat.purify 与文本路径 buff.purify（effect-steps.recovery.js）同源，
  * 日志文案逐字对齐（有诅咒逐名列名 / 无诅咒「干干净净」），前置卡名与
  * 结构化 curse 分支同款口径。
- * @param {object} card 打出的卡（仅用于日志名）
+ * @param {import('../core/battle.core-ports.types.js').CoreCard} card 打出的卡（仅用于日志名）
  * @param {{ target?: string }} operation 结构化 cleanse op
- * @param {object} deps { combat, getPlayerStatus, log, esc }
+ * @param {M1Ports} deps { combat, getPlayerStatus, log, esc }
  * @returns {boolean} 是否产生了结算
  */
 function resolveCleanseOperation(card, operation, deps) {
@@ -47,9 +48,9 @@ function resolveCleanseOperation(card, operation, deps) {
 /**
  * draw.untilHandN：抽牌直到手牌达到 N 张。
  * 两种战斗都逐张 drawCards(1)，在牌库空、手牌上限或无入手进度时停止。
- * @param {object} card 打出的卡
+ * @param {import('../core/battle.core-ports.types.js').CoreCard} card 打出的卡
  * @param {{ untilHandN: number }} operation 结构化 draw op
- * @param {object} deps { drawCards, countDrawnSpells, log, esc }
+ * @param {M1Ports} deps { drawCards, countDrawnSpells, log, esc }
  * @returns {number} 本次抽牌入手的法术数增量（供 perSpellHeal 折算基数累计）
  */
 function resolveDrawUntilHandN(card, operation, deps) {
@@ -96,10 +97,10 @@ function resolveDrawUntilHandN(card, operation, deps) {
  *   consumeHand 消耗（consumed 堆，BOSS 战进墓地——与 engine 侧 dumpHand 端口同款语义）
  *   dumpHand    弃置（BOSS 战进弃牌堆参与洗回；普通战无弃牌循环，降级为消耗并注明）
  * capability 门只放行这两个 entry op，其余由守卫拒绝（不静默跳过）。
- * @param {object} card 打出的卡
+ * @param {import('../core/battle.core-ports.types.js').CoreCard} card 打出的卡
  * @param {Array<{ op: string }>} handOps 结构化 handOps 数组
- * @param {object} deps { findCard, log, esc }
- * @returns {void}
+ * @param {M1Ports} deps { findCard, log, esc }
+ * @returns {Generator<import('../core/battle.core-ports.types.js').EffectYield, void>}
  */
 function* resolveDrawHandOps(card, handOps, deps) {
   const name = `<b>${deps.esc(card.name)}</b>`;

@@ -6,12 +6,12 @@ const templates = [
   {
     text: /^你回复 \d+(?:\.\d+)? 点生命，并获得 \d+(?:\.\d+)? 点护甲。$/,
     operations: ['heal', 'armor'],
-    render: ([heal, armor]) => `你回复 ${heal} 点生命，并获得 ${armor} 点护甲。`,
+    render: (/** @type {number[]} */ [heal, armor]) => `你回复 ${heal} 点生命，并获得 ${armor} 点护甲。`,
   },
   {
     text: /^你获得 \d+(?:\.\d+)? 点护甲，并抽 \d+(?:\.\d+)? 张牌。$/,
     operations: ['armor', 'draw'],
-    render: ([armor, draw]) => `你获得 ${armor} 点护甲，并抽 ${draw} 张牌。`,
+    render: (/** @type {number[]} */ [armor, draw]) => `你获得 ${armor} 点护甲，并抽 ${draw} 张牌。`,
   },
 ];
 

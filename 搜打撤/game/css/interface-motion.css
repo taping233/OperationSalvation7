@@ -74,6 +74,9 @@ body.interface-motion #cardZoom .cz-card,
 body.interface-motion #cardZoom .cz-photo-paper { transition-timing-function: var(--ui-in-ease) !important; }
 body.interface-motion #cardZoom.cz-out .cz-card,
 body.interface-motion #cardZoom.cz-photo-closing .cz-photo-paper { transition-timing-function: var(--ui-out-ease) !important; }
+body.interface-motion #cardZoom.cz-out :is(.cz-card,.cz-foot,.cz-note,.cz-hint) {
+  animation-duration:var(--motion-zoom-exit,260ms);
+}
 
 body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]),
 body.reduce-motion.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) > .card,

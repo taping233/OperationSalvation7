@@ -58,5 +58,5 @@ function scale() { return z; }
 /** @returns {{width: number, height: number}} 游戏横屏画面的显示尺寸（CSS 像素），不含留边。 */
 function viewport() { return { width: BASE_W * z, height: BASE_H * z }; }
 
-SDT.UiScale = { rect, scale, viewport, apply, scaleForViewport };
+export const UiScale = SDT.UiScale = { rect, scale, viewport, apply, scaleForViewport };
 export { rect, scale, viewport, apply, scaleForViewport, BASE_W, BASE_H };

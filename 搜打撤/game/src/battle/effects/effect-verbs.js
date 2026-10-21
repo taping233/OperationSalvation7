@@ -197,5 +197,6 @@ function getUnknownEffects() {
 function resetUnknownEffects() { UNKNOWN_EFFECTS.clear(); }
 
 const VerbRegistry = { VERBS, ELSEWHERE, DESIGNER_BLANKS, matchVerbs, matchElsewhere, matchBlank, isRecognized, looksLikeEffect, noteUnknownEffect, getUnknownEffects, resetUnknownEffects };
+export { VerbRegistry as EffectVerbs };
 sdtDefine('EffectVerbs', VerbRegistry);
 export { VERBS, ELSEWHERE, DESIGNER_BLANKS, matchVerbs, matchElsewhere, isRecognized, looksLikeEffect, noteUnknownEffect, getUnknownEffects, resetUnknownEffects };

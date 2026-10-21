@@ -38,8 +38,10 @@ const SUPPLY_EFFECTS = [
 ];
 
 // Hold the lock and half-open poses, then let the full-open flash settle before rewards.
+/** @typedef {{fps:number, frames:string[], effects?:string[], phases?:string[], durationsMs?:number[]}} ChestFrameSet */
 export function createChestFrameSets() {
   const sequence = [0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 3];
+  /** @type {Record<string, ChestFrameSet>} */
   const sets = Object.fromEntries(['class', 'boss'].map(kind =>
     [kind, { fps: 10, frames: sequence.map(index => SAFE_FRAMES[index]) }]));
   for (const [kind, frames] of Object.entries(SUPPLY_FRAMES)) sets[kind] = {

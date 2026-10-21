@@ -67,7 +67,7 @@ function createEffectSteps(deps) {
 /**
  * 创建文本效果执行器（与旧 createEffectExecutor 返回值同签名）。
  * 遍历有序步骤表；哨兵在自然走完时才评估（提前 return 的分支不记哨兵，与旧实现一致）。
- * @param {object} deps 战斗侧显式端口
+ * @param {import('../core/battle.core-ports.types.js').TextEffectPorts} deps 战斗侧显式端口
  */
 export function createEffectPipeline(deps) {
   const steps = createEffectSteps(deps);
@@ -91,7 +91,7 @@ export function createEffectPipeline(deps) {
       if (step.gate !== 'always' && ctx.did) continue;
       const m = step.when(ctx);
       if (!m) continue;
-      const out = step.run.steps ? yield* step.run.steps(ctx, m) : step.run(ctx, m);
+      const out = /** @type {typeof step.run & {steps?: (context: typeof ctx, match: typeof m) => Generator<import('../core/battle.core-ports.types.js').EffectYield, ReturnType<typeof step.run>>}} */ (step.run).steps ? yield* /** @type {typeof step.run & {steps?: (context: typeof ctx, match: typeof m) => Generator<import('../core/battle.core-ports.types.js').EffectYield, ReturnType<typeof step.run>>}} */ (step.run).steps(ctx, m) : step.run(ctx, m);
       if (out && out.halt) return out.result;
     }
     // —— 未识别子句哨兵（批次 3）：牌面像有效果、却既没结算也没被任何层认领 ——

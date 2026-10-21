@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -16,6 +17,8 @@ import { renderCombatPiles, consumedPileUids } from './battle.piles.view.js';
 import { turnForecastHTML } from '../../ui/battle-hud-info.js';
 import { careerSkillButtonHTML } from './battle.skill-view.js';
 import { renderInfusionSelection } from './battle.infusion-view.js';
+import { infusionHandCards } from './battle.infusion-material-state.js';
+import { createBattlePotionUse } from './battle.potion-use.js';
 import { discoverInfusionNote } from './battle.discover-infusion.js';
 import { battleDiscoverBodyHTML } from './battle.discover-view.js';
 import { bindBattleDecisionInspection, restoreCombatScene } from './battle.decision-shell.js';
@@ -27,7 +30,7 @@ import { createBattleSceneryCapture } from './battle.scenery.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
 import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
 import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
-import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE, infusionStackUid } from './battle.layers.js';
+import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
 import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid, updateClickSelectionUI } from './battle.aim.js';
@@ -42,11 +45,10 @@ let sceneryStage = null, sceneryToken = null, sceneryWorld = null, sceneryFront 
 let sceneryReady = null;
 const battleEntry = createBattleEntryGate();
 let sceneryObserver = null, sceneryHideObserver = null, sceneryFrame = 0;
-let activePotionTipCleanup = null;
+const potionUse = createBattlePotionUse({ UI, getSnapshot, commands });
+if (import.meta.hot) import.meta.hot.dispose(() => potionUse.dispose());
 function clearPotionTip() {
-  const cleanup = activePotionTipCleanup;
-  activePotionTipCleanup = null;
-  cleanup?.();
+  potionUse.close();
 }
 function clearBattleScenery() {
   sceneryObserver?.disconnect(); sceneryObserver = null;
@@ -68,7 +70,7 @@ function scheduleSceneryLayout() {
 }
 function layoutBattleScenery() {
   if (!sceneryStage?.isConnected || sceneryStage._battleToken !== sceneryToken || !sceneryWorld || !sceneryConfig) return;
-  const arena = sceneryStage.querySelector('.sts-arena');
+  const arena = /** @type {BattleElement} */ (sceneryStage.querySelector('.sts-arena'));
   if (sceneryConfig.stageLayers) {
     sceneryWorld.style.cssText = 'left:0;top:0;width:100%;height:100%;';
     if (sceneryFront) sceneryFront.style.cssText = 'left:0;top:0;width:100%;height:100%;';
@@ -76,14 +78,14 @@ function layoutBattleScenery() {
   }
   const a = uiRect(arena), overlay = uiRect(UI.el.overlay);
   if (!a.width || !a.height) return;
-  const figure = sceneryStage.querySelector('.sts-me .sts-figure img') || sceneryStage.querySelector('.sts-me .sts-figure');
+  const figure = /** @type {HTMLImageElement} */ (sceneryStage.querySelector('.sts-me .sts-figure img')) || /** @type {BattleElement} */ (sceneryStage.querySelector('.sts-me .sts-figure'));
   const figureRect = figure ? uiRect(figure) : null;
   const localWidth = arena.clientWidth, localHeight = arena.clientHeight;
   if (!localWidth || !localHeight) return;
   const sx = a.width / localWidth, sy = a.height / localHeight;
   // Follow the standing layout, not an attack/entrance transform that would move the floor.
   let footprint = figure, foot = figure?.offsetHeight || 0;
-  while (footprint && footprint !== arena) { foot += footprint.offsetTop; footprint = footprint.offsetParent; }
+  while (footprint && footprint !== arena) { foot += footprint.offsetTop; footprint = /** @type {HTMLElement} */ (footprint.offsetParent); }
   if (!figure?.offsetHeight || footprint !== arena) foot = figureRect?.height ? (figureRect.bottom - a.top) / sy : localHeight - 70;
   const width = Math.max(localWidth, localHeight * sceneryConfig.aspect);
   const height = width / sceneryConfig.aspect;
@@ -94,7 +96,7 @@ function layoutBattleScenery() {
   sceneryFront.style.top = `${a.top - overlay.top + y * sy}px`;
   sceneryFront.style.width = `${width * sx}px`; sceneryFront.style.height = `${height * sy}px`;
   // HUD 本身可透明且零高；只为实际可见控件开孔，保留其余前景覆盖地面。
-  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-infuse, .bt-card, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
+  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-potion-use, .bt-infuse, .bt-card, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
   const holes = [...protectedNodes].map(node => {
     const r = uiRect(node);
     const padding = node.matches('.sts-unit.can-target') ? 10 : 4;
@@ -120,7 +122,7 @@ function syncBattleScenery(stage, token, config) {
       image.className = `battle-scene-layer scene-${key}`; image.alt = ''; image.draggable = false;
       sceneryWorld.appendChild(image);
     }
-    stage.querySelector('.sts-arena').prepend(sceneryWorld);
+    /** @type {BattleElement} */ (stage.querySelector('.sts-arena')).prepend(sceneryWorld);
     if (config.foreground) {
       sceneryFront = document.createElement('img'); sceneryFront.src = config.foreground;
       sceneryFront.className = 'battle-scene-foreground'; sceneryFront.alt = ''; sceneryFront.draggable = false;
@@ -128,8 +130,8 @@ function syncBattleScenery(stage, token, config) {
       sceneryFront.setAttribute('aria-hidden', 'true'); (config.stageLayers ? stage : UI.el.overlay).appendChild(sceneryFront);
     }
     const world = sceneryWorld, front = sceneryFront;
-    const images = [...world.querySelectorAll('img'), ...(front ? [front] : [])];
-    sceneryReady = Promise.all(images.map(image => typeof image.decode === 'function' ? image.decode() : new Promise((resolve, reject) => {
+    const images = [.../** @type {NodeListOf<HTMLImageElement>} */ (world.querySelectorAll('img')), ...(front ? [front] : [])];
+    sceneryReady = Promise.all(images.map(image => typeof image.decode === 'function' ? image.decode() : new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
       if (image.complete && image.naturalWidth) { resolve(); return; }
       image.addEventListener('load', resolve, { once:true });
       image.addEventListener('error', reject, { once:true });
@@ -138,7 +140,7 @@ function syncBattleScenery(stage, token, config) {
         || sceneryWorld !== world || sceneryFront !== front || sceneryConfig !== config || !stage.isConnected || UI.el.overlay.hidden
         // Retained secondary pages are still this battle's live presentation.
         // A successful decode may finish after the panel changes the UI mode.
-        || (UI._lastMode !== 'battle' && !UI.el.ovBody?.querySelector('.battle-secondary-layer'))
+        || (UI._lastMode !== 'battle' && !/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-secondary-layer')))
         || !images.every(image => image.complete && image.naturalWidth > 0)) return false;
       world.hidden = false; if (front) front.hidden = false;
       stage.classList.add('has-painted-scenery'); layoutBattleScenery();
@@ -149,8 +151,8 @@ function syncBattleScenery(stage, token, config) {
     });
     if (typeof ResizeObserver !== 'undefined') {
       sceneryObserver = new ResizeObserver(scheduleSceneryLayout);
-      sceneryObserver.observe(stage); sceneryObserver.observe(stage.querySelector('.sts-arena'));
-      const footprint = stage.querySelector('.sts-me .sts-figure');
+      sceneryObserver.observe(stage); sceneryObserver.observe(/** @type {BattleElement} */ (stage.querySelector('.sts-arena')));
+      const footprint = /** @type {BattleElement} */ (stage.querySelector('.sts-me .sts-figure'));
       if (footprint) sceneryObserver.observe(footprint);
     }
     if (typeof MutationObserver !== 'undefined') {
@@ -166,7 +168,7 @@ function syncBattleScenery(stage, token, config) {
   layoutBattleScenery();
   return sceneryReady;
 }
-const clearSceneryOnMode = event => { clearPotionTip(); if (event.detail !== 'battle' && !UI.el.ovBody?.querySelector('.battle-secondary-layer')) { clearBattleScenery(); battleEntry.cancel(); } };
+const clearSceneryOnMode = event => { clearPotionTip(); if (event.detail !== 'battle' && !/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-secondary-layer'))) { clearBattleScenery(); battleEntry.cancel(); } };
 const closeBattlePresentation = () => { clearPotionTip(); battleEntry.cancel(); };
 document.addEventListener('sdt-overlay-mode', clearSceneryOnMode);
 document.addEventListener('sdt-overlay-close', closeBattlePresentation);
@@ -181,7 +183,7 @@ if (import.meta.hot) import.meta.hot.dispose(() => {
 // put its warning on a newly mounted stage, even while asynchronous work finishes.
 const unsubscribeRuleWarning = onBattleEvent('battle:rule-rejected', event => {
   const overlay = UI.el.overlay;
-  const stage = UI.el.ovBody?.querySelector('.battle-stage.sts');
+  const stage = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage.sts'));
   if (!SDT.game?.battleActive || !overlay?.isConnected || overlay.hidden || UI._lastMode !== 'battle'
     || !stage?.isConnected || !overlay.contains(stage) || stage._battleToken !== event?.battleToken
     || getSnapshot().battleToken !== event?.battleToken) return;
@@ -201,13 +203,16 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   const pickChoice = commands.pickChoice;
   const pickHandSelect = commands.pickHandSelect;
   const skipHandSelect = commands.skipHandSelect;
-  const usePotion = commands.usePotion;
   const useEquipSkill = commands.useEquipSkill;
   // 双击放大已退役（2026-09-12 老板定向：紧凑手牌 + 单击展开完整卡面取代）
 
   // ---------- 渲染 ----------
   // 手牌一栏最多9叠；超出的用分栏按钮切换，单击详情不改变分组与牌序。
   let handPage = 0;
+  let handPageBattleToken = null;
+  let handPageRevision = 0;
+  /** @type {Animation[]} */
+  let handPageAnimations = [];
   const stableHandSlots = createStableHandSlots();
   // HAND_PAGE_SIZE 已随 updateHand 迁往 battle.layers.js（壳经 import 引入——批5）
   // 紧凑手牌（2026-09-12 老板二次定向）：常态只露牌面+名字，**悬停**弹出完整描述，
@@ -217,7 +222,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   let discoverSrcRect = null;
   const discoverInput = createDiscoverInputGate();
 
-  function combatStateCopy(snapshot, handCards) {
+  function combatStateCopy(snapshot, handCards, handRuleContext) {
     const { phase = 'player', energy = 0, infusing, choosing, handSelecting,
       pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
     if (phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动', tone: 'foe' };
@@ -228,7 +233,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // Reuse this render's resolved effective hand. The next render resolves it anew.
     // Eligibility and effective costs still read current rules below.
     const playable = handCards.some(entry => {
-      if (unplayableReason(entry.card)) return false;
+      if (unplayableReason(entry.card, handRuleContext)) return false;
       return effCostOf(entry.card, entry.uid) <= energy;
     });
     if (playable) return { label: '你的行动', detail: '', tone: 'self' };
@@ -275,7 +280,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   function showBattleStage(html, token, backgroundOnly = false) {
     if (!backgroundOnly) restoreCombatScene(UI, token);
     const body = UI.el.ovBody;
-    const stage = body.firstElementChild;
+    const stage = /** @type {BattleElement} */ (body.firstElementChild);
     const canReuse = !UI.el.overlay.hidden && (UI._lastMode === 'battle' || backgroundOnly)
       && stage?.matches('.battle-stage.sts') && stage._battleToken === token
       && stage._battleTemplate && stage.isConnected;
@@ -283,9 +288,9 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       clearPotionTip();
       clearBattleScenery();
       UI.showOverlay('', html, 'battle');
-      const fresh = body.firstElementChild;
+      const fresh = /** @type {BattleElement} */ (body.firstElementChild);
       fresh._battleToken = token;
-      fresh._battleTemplate = fresh.cloneNode(true);
+      fresh._battleTemplate = /** @type {BattleElement} */ (fresh.cloneNode(true));
       fresh._battleHtml = html;   // F4：模板字符串精确签名（见下方复用路径）
       battleEntry.begin(fresh, token, UI.el.overlay);
       fresh.classList.add('bt-entrance');   // 单位入场演出只挂场次首建；复用渲染绝不再带（令牌守卫）
@@ -300,16 +305,16 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     stage._battleHtml = html;
     const template = document.createElement('template');
     template.innerHTML = SDT.Icons.rich(html);
-    const next = template.content.firstElementChild;
+    const next = /** @type {BattleElement} */ (template.content.firstElementChild);
     const previous = stage._battleTemplate;
     // 战场皮肤属于场次；异常切换时回到 showOverlay，保证背景与模式标志同步。
     if (stage.dataset.assetKey !== next.dataset.assetKey || stage.dataset.boss !== next.dataset.boss) {
       clearPotionTip();
       clearBattleScenery();
       UI.showOverlay('', html, 'battle');
-      const fresh = body.firstElementChild;
+      const fresh = /** @type {BattleElement} */ (body.firstElementChild);
       fresh._battleToken = token;
-      fresh._battleTemplate = fresh.cloneNode(true);
+      fresh._battleTemplate = /** @type {BattleElement} */ (fresh.cloneNode(true));
       fresh._battleHtml = html;
       battleEntry.begin(fresh, token, UI.el.overlay);
       fresh.classList.add('bt-entrance');
@@ -331,7 +336,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     syncBattleSlot(stage, previous, next, ':scope > .bt-infuse:not(.bt-pick)', ':scope > .bt-infuse.bt-pick, .sts-hud');
     syncBattleSlot(stage, previous, next, ':scope > .bt-infuse.bt-pick', '.sts-hud');
     syncBattleSlot(stage, previous, next, '.sts-energy-wrap');
-    syncBattleSlot(stage, previous, next, '.bt-hand-page', '.battle-skill-help', true);
+    syncBattleSlot(stage, previous, next, '.bt-hand-page', '.sts-resource-dock > .sts-energy-wrap');
+    const pager = stage.querySelector('.bt-hand-page');
+    const resources = stage.querySelector('.sts-resource-dock');
+    if (pager && pager.parentElement !== resources) resources.insertBefore(pager, resources.querySelector('.sts-energy-wrap'));
     syncBattleSlot(stage, previous, next, '.battle-skill-help');
     syncBattleSlot(stage, previous, next, '.sts-tactics');
     stage._battleTemplate = next;
@@ -341,7 +349,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // This is view-only: phase/resources stay real, and existing selection DOM
     // remains mounted until the presenter captures its focus and scroll.
     const secondary = snapshot.choosing || snapshot.discovering || snapshot.handSelecting
-      || snapshot.infusing || snapshot.viewingGrave || snapshot.viewingDeck || snapshot.viewingBag;
+      || snapshot.viewingGrave || snapshot.viewingDeck || snapshot.viewingBag;
     if (secondary && !snapshot.deckSelection && !backgroundOnly) {
       render({ ...snapshot, choosing:null, discovering:null, handSelecting:null, infusing:null,
         viewingGrave:false, viewingDeck:false, viewingBag:false }, true);
@@ -365,7 +373,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
     // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
     // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
-    if (viewingGrave || viewingBag || choosing || handSelecting || discovering || infusing) hideUnitFrames();
+  if (viewingGrave || viewingDeck || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
     if (deckSelection) { renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
     if (viewingGrave) { renderGrave(snapshot); return; }
     if (viewingDeck) { renderDeckPileView(snapshot); return; }
@@ -404,11 +412,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const discoverModifiers = [
         discovering.zeroCost ? '所选牌费用变为 0' : '',
         discovering.priceArmor ? '同时按所选牌估值获得护甲' : '',
-        discovering.costDecayPerTurn > 0 ? `所选牌每回合费用 -${discovering.costDecayPerTurn}` : discovering.decayEachTurn ? '所选牌每回合费用 -1' : '',
+        /** @type {number} */ (discovering.costDecayPerTurn) > 0 ? `所选牌每回合费用 -${discovering.costDecayPerTurn}` : discovering.decayEachTurn ? '所选牌每回合费用 -1' : '',
         discovering.consumeTempAtTurn ? '所选临时牌在下回合开始时消耗' : '',
         discovering.swapPair ? '两张发现牌入手后交换费用' : '',
       ].filter(Boolean);
-      const fromDeckBottom = discovering.deckBottom && discovering.deckBottomUids?.length;
+      const fromDeckBottom = discovering.deckBottom && /** @type {readonly string[] | undefined} */ (discovering.deckBottomUids)?.length;
       const discoverNote = battleDiscoverLifecycleNote({ act:discovering.act, isBoss:mode === 'boss', fromDeckBottom });
       const candidates = discovering.options.map((option, i) => {
         const sourceUid = fromDeckBottom ? discovering.deckBottomUids[i] : null;
@@ -425,14 +433,12 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         remaining:discovering.n, source:discoverSource, note:discoverNote, modifiers:discoverModifiers, pageToken:inputTicket.pageToken,
       }), 'discover', snapshot);
       bindBattleDecisionInspection({ UI, getSnapshot, cards:candidates.map(entry => entry.card), snapshot });
-      const page = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]');
-      const panel = page?.querySelector('[data-battle-discover]');
-      const buttons = [...(page?.querySelectorAll('[data-act="btDiscover"]') || [])];
+      const page = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]'));
+      const panel = /** @type {BattleElement} */ (page?.querySelector('[data-battle-discover]'));
+      const buttons = [...(/** @type {NodeListOf<BattleElement>} */ (page?.querySelectorAll('[data-act="btDiscover"]')) || [])];
       const isCurrentPage = () => inputTicket.isCurrent() && isInteractiveBattlePage(UI, page)
-        && UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]') === page
+        && /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]')) === page
         && panel?.getAttribute('data-discover-page') === inputTicket.pageToken;
-      const progress = page?.querySelector('.battle-discover-progress');
-      const progressHTML = progress?.innerHTML || '';
       // A bounded visual update follows only this DOM page; no delayed callback
       // can unlock a replacement page or restart the round's admission deadline.
       let previousOpening = null;
@@ -446,7 +452,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
             if (opening) button.setAttribute('aria-disabled', 'true');
             else button.removeAttribute('aria-disabled');
           });
-          if (progress) progress.innerHTML = opening ? '候选展开中' : progressHTML;
         }
         if (opening) requestAnimationFrame(paintInputReadiness);
       };
@@ -462,26 +467,35 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       UI.refresh(SDT.game);
       return;
     }
-    if (infusing) {
-      renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, showBattleDecision, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
-      return;
-    }
     const cards = hand.map(findCard).filter(Boolean);
+    // Fresh for this synchronous render only; never retained by input callbacks.
+    const handRuleContext = {};
     const infusingNow = !!infusing;
     // —— 法伤加成同步（2026-09-09 需求）：有法伤加成时，造成法术伤害的招式卡面
     // 数值实时显示为「卡面值 + 法伤加成」，数字略微放大（口径同 combat.dealDamage）
-    const spellBonus = (player.spellPower || 0) + ((pstat.status && pstat.status.spellUp) || 0);
+    const spellBonus = (player.spellPower || 0) + (/** @type {number} */ ((pstat.status && pstat.status.spellUp) || 0));
     // —— 同名卡堆叠（v0.32 杀戮尖塔式手牌）：同名同描述的卡只占一个位置，显示 ×N ——
-    // 注能中：注能主卡单独一块展示，其同名燃料照常成组（点击组 = 消耗组内一张）
+    // 注能时每个实际 UID 单独成卡；已选材料移到独立容器，主卡保持完整可读。
     // 初始攻击最左、招式在前、装备在后；类别内部保留槽位，不改变hand语义顺序
-    const stable = stableHandSlots(orderHandGroups(groupHandCards(cards, infusingNow ? infusing : null)), snapshot.battleToken, snapshot.turn);
+    const stable = infusingNow
+      ? { groups:infusionHandCards(cards, infusing).filter(group => !infusing.picked.includes(group.uids[0])).map((group, displaySlot) => ({ ...group, displaySlot })), count:cards.length - 1 }
+      : stableHandSlots(orderHandGroups(groupHandCards(cards)), snapshot.battleToken, snapshot.turn);
     const groups = stable.groups;
     const N = stable.count;
     // 分栏切页：只渲染当前栏的9叠，扇形布局按本栏实际张数计算。
-    const handPages = Math.max(1, Math.ceil(N / HAND_PAGE_SIZE));
+    const handPages = infusingNow ? 1 : Math.max(1, Math.ceil(N / HAND_PAGE_SIZE));
+    if (handPageBattleToken !== snapshot.battleToken) {
+      handPageAnimations.forEach(animation => animation.cancel());
+      handPageAnimations = [];
+      handPageBattleToken = snapshot.battleToken;
+      handPage = 0;
+      handPageRevision++;
+    }
     if (handPage >= handPages) handPage = handPages - 1;
     if (handPage < 0) handPage = 0;
-    const pageGroups = groups.filter(g => Math.floor(g.displaySlot / HAND_PAGE_SIZE) === handPage)
+    const pagingLocked = busy || !['player', 'targeting'].includes(phase)
+      || !!(infusingNow || choosing || discovering || handSelecting || viewingGrave || snapshot.viewingDeck || viewingBag);
+    const pageGroups = infusingNow ? groups : groups.filter(g => Math.floor(g.displaySlot / HAND_PAGE_SIZE) === handPage)
       .map(g => ({ ...g, displayIndex: g.displaySlot % HAND_PAGE_SIZE, displayCount: Math.min(HAND_PAGE_SIZE, N - handPage * HAND_PAGE_SIZE) }));
     // 手牌 DOM 由常驻层差分维护（见 mountHandLayer / updateHand）：这里只算分组与目标扇形位，
     // 不再拼整段手牌 HTML（批次A 架构对齐：手牌区不随整屏重渲染重建）
@@ -512,21 +526,20 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       <div class="bt-potions">
         <span class="bt-potions-label">[[icon:flask]] 道具</span>
         ${potions.length ? potions.map((p, pi) => p.usable === false
-          ? `<div class="bt-potion off" data-potion-idx="${pi}">
+          ? `<div class="bt-potion off" role="button" tabindex="0" data-uid="${p.uid}" aria-label="查看${escAttr(p.name)}：${escAttr(p.why || p.desc)}" data-potion-idx="${pi}">
               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
             </div>`
-          : `<div class="bt-potion${p.aim === 'enemy' ? ' need-target' : ''}" role="button" tabindex="0" aria-label="使用${escAttr(p.name)}：${escAttr(p.desc)}${p.aim === 'enemy' ? '，随后选择敌人' : ''}" data-act="btPotion" data-uid="${p.uid}"
+          : `<div class="bt-potion${p.aim === 'enemy' ? ' need-target' : ''}" role="button" tabindex="0" aria-label="查看${escAttr(p.name)}：${escAttr(p.desc)}${p.aim === 'enemy' ? '，使用后选择目标，或拖向敌人' : ''}" data-act="btPotion" data-uid="${p.uid}"
               ${p.aim === 'enemy' ? 'data-potion-aim="1"' : ''}
               data-potion-idx="${pi}">
               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
             </div>`).join('')
           : '<span class="bt-potions-empty">背包里没有道具</span>'}
-        <div class="bt-potion-tip" data-potion-tip hidden></div>
       </div>` : '';
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
-    const combatState = combatStateCopy(snapshot, cards);
+    const combatState = combatStateCopy(snapshot, cards, handRuleContext);
     // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
     const slamSkillInfo = slamSkillOf();
     const skillState = busy || infusingNow ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';
@@ -558,17 +571,19 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       <div class="sts-hud">
         <div class="sts-resource-dock">
         <div class="sts-hud-l" aria-label="抽牌堆">${drawPileHTML}</div>
+          ${handPages > 1 ? `<div class="bt-hand-page has-more" role="group" aria-label="手牌栏位，当前第 ${handPage + 1} 栏，共 ${handPages} 栏">
+            <div class="battle-hand-page-position" role="status" aria-live="polite"><span class="battle-control-icon" aria-hidden="true">[[icon:cards]]</span><span class="battle-control-value"><b>${handPage + 1}</b><span>/${handPages}</span></span></div>
+            <div class="battle-hand-page-nav"><button class="bt-hand-page-step" type="button" data-act="btHandPrev" data-hand-page-step="-1" aria-label="上一栏" ${pagingLocked || handPage === 0 ? 'disabled' : ''}><span aria-hidden="true">‹</span></button><button class="bt-hand-page-step" type="button" data-act="btHandNext" data-hand-page-step="1" aria-label="下一栏" ${pagingLocked || handPage === handPages - 1 ? 'disabled' : ''}><span aria-hidden="true">›</span></button></div>
+          </div>` : ''}
         <div class="sts-energy-wrap">
           <div class="sts-energy" role="group" tabindex="0" aria-label="能量 ${energy}，每回合 ${maxEnergy}" data-ui-tip data-ui-tip-title="能量" data-ui-tip-text="打出卡牌与使用职业技能时消耗。" data-ui-tip-note="回合开始恢复至 ${maxEnergy} 点">
-            <img class="battle-energy-emblem" src="${escAttr(battleEnergyArt)}" alt="" draggable="false" decoding="async"><b>${energy}</b><span>/${maxEnergy}</span>
+            <img class="battle-energy-emblem battle-control-icon" src="${escAttr(battleEnergyArt)}" alt="" draggable="false" decoding="async"><span class="battle-control-value"><b>${energy}</b><span>/${maxEnergy}</span></span>
           </div>
         </div>
         </div>
-        <div class="sts-hand-tools" aria-label="职业技能与手牌分栏">
+        <div class="sts-hand-tools" aria-label="职业技能">
           ${careerSkillButtonHTML({ skill:slamSkillInfo, state:skillState, availability:skillAvailability, effect:skillEffect,
             disabled:busy || infusingNow || slamSkillInfo.used || (energy < slamSkillInfo.cost && !slamPending) })}
-          ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
-            title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠；点击查看下一栏，末栏后回到第一栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         </div>
         <div class="sts-hud-r" aria-label="消耗牌堆">${pilesHTML}</div>
         <div class="bt-hand sts-hand" role="group" aria-label="当前手牌"></div>
@@ -578,16 +593,63 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         </div>
        </div>`, snapshot.battleToken, backgroundOnly);
     updateClickSelectionUI();   // 复用舞台也恢复已结束的点选提示；底层目标状态仍由战斗命令管理。
-    // 手牌分栏切换（2026-09-10 留言 #27）
-    UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
+    // A pager callback belongs to its mounted page and battle, including rapid input.
+    const pageStage = UI.el.ovBody.querySelector('.battle-stage.sts');
+    const pageControl = /** @type {BattleElement} */ (pageStage?.querySelector('.bt-hand-page'));
+    const renderedPage = handPage, renderedRevision = handPageRevision;
+    if (pageControl) pageControl.onfocus = () => {
+      /** @type {HTMLButtonElement} */ (pageControl.querySelector('.bt-hand-page-step:not(:disabled)'))?.focus({ preventScroll:true });
+    };
+    const changeHandPage = step => {
+      const current = getSnapshot();
+      if (!pageControl || !isInteractiveBattlePage(UI, pageControl) || UI.el.ovBody.querySelector('.battle-stage.sts') !== pageStage
+        || pageStage.querySelector('.bt-hand-page') !== pageControl || current.battleToken !== snapshot.battleToken
+        || renderedRevision !== handPageRevision || renderedPage !== handPage || current.busy || current.actionQueueLength
+        || !['player', 'targeting'].includes(current.phase)
+        || current.infusing || current.choosing || current.discovering || current.handSelecting || current.viewingGrave || current.viewingDeck || current.viewingBag) return;
+      const nextPage = renderedPage + step;
+      if (nextPage < 0 || nextPage >= handPages) return;
+      handPageAnimations.forEach(animation => animation.cancel());
+      handPageAnimations = [];
+      cancelAim(); setClickSelectedUid(null);
+      const oldHand = pageStage.querySelector('.sts-hand');
+      // Detached slots take the existing immediate cleanup path in updateHand.
+      // Remove them before rendering so its delayed exit cannot cover the new page.
+      oldHand?.getAnimations?.({ subtree:true }).forEach(animation => animation.cancel());
+      oldHand?.querySelectorAll(':scope > .bt-slot').forEach(slot => slot.remove());
+      handPage = nextPage;
+      handPageRevision++;
+      render();
+      const nextStage = UI.el.ovBody.querySelector('.battle-stage.sts');
+      if (nextStage !== pageStage || getSnapshot().battleToken !== snapshot.battleToken) return;
+      const nextControl = nextStage.querySelector('.bt-hand-page');
+      const focus = /** @type {HTMLButtonElement} */ (nextControl?.querySelector(`[data-hand-page-step="${step}"]:not(:disabled)`)
+        || nextControl?.querySelector('.bt-hand-page-step:not(:disabled)'));
+      focus?.focus({ preventScroll:true });
+      if (!SDT.Motion?.reduceMotion?.()) {
+        const slots = [...nextStage.querySelectorAll('.sts-hand > .bt-slot')];
+        slots.forEach((slot, index) => {
+          const animation = slot.animate?.([
+            { transform:'translateY(140px)', opacity:0 },
+            { transform:'translateY(0px)', opacity:1 },
+          ], {
+            duration:280, delay:index * 65, easing:'cubic-bezier(.22,1,.36,1)', fill:'backwards', composite:'add',
+          });
+          if (animation) handPageAnimations.push(animation);
+        });
+      }
+    };
+    UI.act('btHandPage', () => {}); // Retired cycle action cannot revive an old page button.
+    UI.act('btHandPrev', () => changeHandPage(-1));
+    UI.act('btHandNext', () => changeHandPage(1));
     // sts-note 底部说明行已删（留言 2026-09-06：把下面的文字都去掉）
     const playHandCard = (d) => {
-      if (!UI.el.ovBody?.querySelector('.battle-stage') || UI.el.ovBody.querySelector('.battle-secondary-layer') || getSnapshot().battleToken !== snapshot.battleToken) return;
+      if (!/** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage')) || /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-secondary-layer')) || getSnapshot().battleToken !== snapshot.battleToken) return;
       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
       const snap = getSnapshot();
       if (snap.infusing) {
-        const uid = infusionStackUid(d.uid);
-        if (uid) commands.selectInfusion(uid);
+        if (!infusing || snap.infusing.selectionId !== infusing.selectionId) return;
+        if (groups.some(group => group.uids[0] === d.uid)) commands.selectInfusion(d.uid);
       }
       else selectCardByClick(d.uid, false, { autoSingleTarget: false });
     };
@@ -624,7 +686,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         </div>`, true);
       // 迭代评审 09-20：删除无参 setDucked()——它被 setDucked 内部 !!v 强转成 false，
       // 战斗中关音乐会静默解除侧链压低；setMusicMuted 内部已走 syncBgm，无需额外调用
-      const settingsPage = UI.el.ovBody.querySelector('.battle-decision');
+      const settingsPage = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-decision'));
       bindBattleRestart({ SDT, UI, game: SDT.game, page: settingsPage });
       const onSetting = handler => event => {
         if (isInteractiveBattlePage(UI, settingsPage) && getSnapshot().battleToken === snapshot.battleToken) handler(event);
@@ -651,7 +713,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       // 维度（透镜 #66）。battle.css 冻结、独立片 include 管线未通 → 模块级注入
       // 样式表（head 内 .ov-btn.ghost.arm 规则，!important 压 winter 底式）；实测
       // 异步环节可能剥 style 属性但不动 class，故样式挂类、内联仅作双保险。
-      const btn = document.querySelector('#ovBody [data-act="btFlee"]');
+      const btn = /** @type {BattleElement} */ (document.querySelector('#ovBody [data-act="btFlee"]'));
       if (!btn || btn.dataset.confirm) { surrender(); return; }   // 玩法定版：主动撤离=本局失败（烟雾弹走 fleeBattle 豁免）
       const prev = btn.innerHTML;
       const prevStyle = btn.getAttribute('style') || '';   // 模板自带的 margin:0 12px（危险钮间距分级）还原基准
@@ -670,8 +732,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         }
       }, 2600);
     });
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGrave', openGrave, '.battle-stage');
-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', openDeckView, '.battle-stage');
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGrave', () => { if (!getSnapshot().infusing) openGrave(); }, '.battle-stage');
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', () => { if (!getSnapshot().infusing) openDeckView(); }, '.battle-stage');
     UI.act('btDeckBack', closeDeckView);
     UI.act('btSlam', () => {
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）
@@ -682,76 +744,22 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // —— 药水栏（2026-09-12 老板定向）：点击使用；敌方指向药水按住可拖到敌人身上 ——
     UI.act('btPotion', (d) => {
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽刚松手，忽略残留 click
-      usePotion(d.uid);
+      potionUse.open(d.uid);
     });
     const body = UI.el.ovBody;
     // —— 药水栏/砸击绑定：节点跨渲染保留（syncBattleSlot 差分命中即复用旧节点），dataset 标记
     // 去重防监听器无界累积（此前每次 render 重挂，几十次渲染=同节点 N 套闭包）——
-    body.querySelectorAll('.bt-potion[role="button"]').forEach(el => {
-      if (el.dataset.keyBound) return;
-      el.dataset.keyBound = '1';
-      el.addEventListener('keydown', event => {
-        if (event.isComposing || !['Enter', ' '].includes(event.key)) return;
-        event.preventDefault(); el.click();
-      });
-    });
-    body.querySelectorAll('.bt-potion[data-potion-aim="1"]').forEach(el => {
+    /** @type {NodeListOf<BattleElement>} */ (body.querySelectorAll('.bt-potion[data-potion-aim="1"]')).forEach(el => {
       if (el.dataset.aimBound) return;
       el.dataset.aimBound = '1';
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'potion'); });
     });
     // 砸击拖动释放（09-20 老板）：按住砸击按钮拖到敌人身上松手=结算；轻点仍走 btSlam 点选流
-    body.querySelectorAll('.bt-slam-btn').forEach(el => {
+    /** @type {NodeListOf<HTMLButtonElement>} */ (body.querySelectorAll('.bt-slam-btn')).forEach(el => {
       if (el.dataset.aimBound) return;
       el.dataset.aimBound = '1';
       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'slam'); });
     });
-    // 药水栏点击直接使用兜底（2026-09-16 留言 #11：普通战药水栏点不动）
-    body.querySelectorAll('.bt-potion:not([data-potion-aim="1"]):not(.off)').forEach(el => {
-      if (el.dataset.useBound) return;
-      el.dataset.useBound = '1';
-      el.addEventListener('pointerdown', (e) => {
-        if (e.button !== 0) return;
-        const uid = el.dataset.uid;
-        if (uid) usePotion(uid);
-      });
-    });
-    // 药水自绘文字提示栏（09-20 老板：悬停 / 触摸药水即出说明，不用系统 title）——
-    // 挂在 .bt-potions 容器内贴药水栏正下方；任一终止事件同时解绑 up/cancel，换栏/离页也清理。
-    const potionTip = body.querySelector('[data-potion-tip]');
-    if (potionTip) {
-      const showPotionTip = (p) => {
-        if (!potionTip.isConnected) return;
-        clearPotionTip();
-        activePotionTipCleanup = hidePotionTip;
-        potionTip.innerHTML = p.usable === false
-          ? `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}（不可使用——${esc(p.why)}）`
-          : `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}${p.aim === 'enemy' ? '——点击或拖到敌人身上使用' : '——点击直接使用'}`;
-        potionTip.hidden = false;
-      };
-      const hidePotionTip = () => {
-        potionTip.hidden = true;
-        document.removeEventListener('pointerup', hidePotionTip);
-        document.removeEventListener('pointercancel', hidePotionTip);
-        if (activePotionTipCleanup === hidePotionTip) activePotionTipCleanup = null;
-      };
-      body.querySelectorAll('.bt-potion').forEach(el => {
-        if (el.dataset.tipBound) return;
-        el.dataset.tipBound = '1';
-        // p 惰性现取：potions 数组每渲染重建，去重后的常驻闭包若绑定时就捕获会拿旧数据
-        const potionAt = () => potions[Number(el.dataset.potionIdx)];
-        el.addEventListener('mouseenter', () => { const p = potionAt(); if (p) showPotionTip(p); });
-        el.addEventListener('mouseleave', hidePotionTip);
-        el.addEventListener('pointerdown', (e) => {
-          if (e.button !== 0 && e.pointerType === 'mouse') return;
-          const p = potionAt();
-          if (!p || !potionTip.isConnected) return;
-          showPotionTip(p);
-          document.addEventListener('pointerup', hidePotionTip, { once: true });
-          document.addEventListener('pointercancel', hidePotionTip, { once: true });
-        });
-      });
-    }
     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
     //    松手没目标自动取消回手牌；轻点先放大查看，再明确确认使用。
@@ -764,17 +772,24 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
     if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingTarget, pendingItem, slamPending, dartPending });
     // Selection instructions and cancellation share the status strip; no duplicate bubble.
-    body.querySelector('.bt-thought-bubble[data-target-prompt]')?.remove();
+    /** @type {BattleElement} */ (body.querySelector('.bt-thought-bubble[data-target-prompt]'))?.remove();
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
-    const entryStage = body.querySelector('.battle-stage.sts');
+    const entryStage = /** @type {BattleElement} */ (body.querySelector('.battle-stage.sts'));
     const simplifiedEntry = entryStage?.dataset.battleEntry === 'degraded';
     // 本场已选择简化显示时，选择面板返回也保留该结果，不重新创建失败的 GPU 画面。
-    const framesReady = simplifiedEntry ? true : attachUnitFrames(body);   // 首次揭示等待实际帧首画面。
+    // The frame host is an overlay sibling, above the stage's stacking context.
+    // Selection suspends it while the card workspace owns the foreground.
+    if (infusingNow) hideUnitFrames();
+    const framesReady = infusingNow || simplifiedEntry ? true : attachUnitFrames(body);   // 首次揭示等待实际帧首画面。
     // 静态冬城图层独立于 GPU 单位帧；简化显示仍保留它，面板返回时按场次重建。
     const paintedReady = syncBattleScenery(entryStage, snapshot.battleToken, captureBattleScenery(snapshot, SDT.game?.layerIdx || 0));
     mountHandLayer(body, tip, snapshot.battleToken, playHandCard);
     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
-    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
+    const focusedHandUid = snapshot.infusing && document.activeElement instanceof HTMLElement
+      ? /** @type {BattleElement} */ (document.activeElement.closest('.sts-hand .bt-card'))?.dataset.uid : null;
+    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext });
+    renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, targetSide, commands, focusedHandUid, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
+    potionUse.sync(entryStage, snapshot, potions);
     if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);
     if (battleEntry.pending(entryStage)) {
       const images = waitForBattleImages(entryStage);
@@ -790,7 +805,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // BOSS 登场演出：竖线阴影压过场景 2.4s（每场一次）+ 开始动画（暗幕+立绘+名号亮相，约 1.5s）
     if (opts.isBoss && !dreadShown) {
       markDreadShown();
-      const st = body.querySelector('.battle-stage');
+      const st = /** @type {BattleElement} */ (body.querySelector('.battle-stage'));
       if (st) { st.classList.add('fx-dread'); schedulePresentationMs(() => st.classList.remove('fx-dread'), 2500); }
       const bossFoe = foes[0];
       const bossName = (bossFoe && bossFoe.name) || '???';
@@ -818,11 +833,12 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   }
 
 
-  sdtDefine('Battle', Object.freeze({ ...BattleSession,
+  export const Battle = Object.freeze({ ...BattleSession,
     presentVictory,
     _perf: Object.freeze({ frameCacheStats }),
     _test: Object.freeze({ refillDrawPile }),
-  }));
+  });
+  sdtDefine('Battle', Battle);
 
 configureBattleRenderer(render);
 

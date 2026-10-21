@@ -33,10 +33,6 @@ export function warehouseSectionsHTML(base, view = 'cards') {
 function itemsHTML(base, pocket) {
   return (pocket ? base.data.pocket : base.data.stash).map(stack => `<button type="button" class="stash-cell${inventoryKeyOf(stack) === state.key ? ' selected' : ''}" data-browser-key="${escAttr(inventoryKeyOf(stack))}" data-stack-key="${escAttr(inventoryKeyOf(stack))}" data-name="${escAttr(stack.card.name)}" data-browse-filtered="${pocket ? false : !matches(stack.card)}" aria-pressed="${inventoryKeyOf(stack) === state.key}" aria-label="选择${escAttr(stack.card.name)}，${pocket ? '待复原' : '持有'}${stack.count}张"><span class="warehouse-card-art"></span><span class="stash-card-caption"><b>${esc(stack.card.name)}</b><strong class="stack-count">×${stack.count}</strong></span>${protectedCard(base, stack.card) ? '<span class="warehouse-protected">收藏保护</span>' : ''}</button>`).join('');
 }
-function warehouseSelectionHTML(rows) {
-  const stack = rows.find(item => inventoryKeyOf(item) === state.key);
-  return stack ? `<div><small>当前浏览</small><b>${esc(stack.card.name)}</b><span>${stack.count} 张${protectedCard(window.SDT.Base, stack.card) ? ' · 收藏保护' : ''}</span></div>` : '';
-}
 function refreshWarehouseBrowser(browser, reset = false, suppliedItems = null) {
   const track = browser.querySelector('.card-browser-track');
   const items = cardBrowserItems(track, suppliedItems);
@@ -127,10 +123,10 @@ export function warehouseHTML(view = 'cards') {
   return `<div class="warehouse-v3 warehouse-v2 ui-scale-system" data-pocket="${pocket}"><header class="camp-section-head"><h2>${pocket ? '待复原' : '后勤仓库'}</h2><div class="warehouse-header-actions">${warehouseSectionsHTML(base, view)}${pocket ? `<span class="camp-page-stat" data-warehouse-pocket-count>待复原 ${base.data.pocket.reduce((sum, stack) => sum + stack.count, 0)} 张</span>` : '<button type="button" class="base-link" data-act="rawItem" data-kind="wood">木材 ↗</button><button type="button" class="base-link" data-act="rawItem" data-kind="rations">口粮 ↗</button><button class="base-link" data-act="hubTab" data-tab="shop">交易所 ↗</button>'}<div class="warehouse-capacity"><span class="camp-page-stat">${base.stashUsed()} / ${base.stashCap()} 格</span><button class="base-link" data-act="hubTab" data-tab="upgrade" data-facility="stash">扩建 ↗</button></div></div></header>
     ${uiDisclosure({ className:'warehouse-rules', label:pocket ? '复原说明' : '仓库说明', content:pocket ? '<p>下次出征时，未复原卡牌会清空；出发前请检查待复原数量。</p>' : '<p>卡牌每张占一格。单击木材、口粮、钥匙卡使用一张，折入基地库存；其他卡单击打开操作台。</p>' })}<div class="warehouse-controls-v12">${pocket ? '' : `${warehouseCategoriesV7HTML(state.group)}<div class="warehouse-purpose"${person ? '' : ' hidden'}>${person ? `<b>${esc(person.name)} · 归档培养</b><button class="mini-btn" data-act="hubTab" data-tab="classes" data-group="people" data-section="profile" data-character="${person.id}">返回${esc(person.name)} →</button>` : ''}</div><div class="warehouse-toolbar"><input data-warehouse-filter="query" aria-label="搜索仓库卡牌" placeholder="搜索卡牌" value="${escAttr(state.query)}"><select data-warehouse-filter="type" aria-label="筛选卡牌类型">${options('type', '全部类型')}</select><select data-warehouse-filter="rarity" aria-label="筛选卡牌品质">${options('rarity', '全部品质')}</select><span data-warehouse-count>${rows.length} 种</span></div>`}</div>
     <div class="warehouse-workspace-v12"><section class="warehouse-inventory-v12"><section class="card-browser" data-card-browser="${pocket ? 'warehouse-pocket' : 'warehouse'}" aria-label="${pocket ? '待复原卡牌' : '战利品卡牌'}"><div class="card-browser-track" tabindex="0" aria-label="向下滚动浏览卡牌">${itemsHTML(base, pocket)}</div></section>
-    <div class="warehouse-no-results"${rows.length ? ' hidden' : ''}>${emptyWarehouseHTML(base, pocket)}</div></section><aside class="warehouse-selection-v12" aria-label="当前浏览卡牌">${warehouseSelectionHTML(rows)}</aside></div></div>`;
+    <div class="warehouse-no-results"${rows.length ? ' hidden' : ''}>${emptyWarehouseHTML(base, pocket)}</div></section></div></div>`;
 }
 export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} }) {
-  const root = document.querySelector('.warehouse-v3');
+  const root = /** @type {HTMLElement} */ (document.querySelector('.warehouse-v3'));
   if (!root) return;
   const slotId = base.slot;
   const currentWarehouse = () => window.SDT.Base === base && base.slot === slotId && isCardBrowserCurrent(root) && document.querySelector('.warehouse-v3') === root;
@@ -157,16 +153,14 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
     refreshWarehouseBrowser(browser, reset, items);
     refreshArt();
     if (reset) animateBaseRefresh(browser.querySelector('.card-browser-track'));
-    const empty = root.querySelector('.warehouse-no-results'); empty.hidden = rows.length > 0;
+    const empty = /** @type {HTMLElement} */ (root.querySelector('.warehouse-no-results')); empty.hidden = rows.length > 0;
     if (!rows.length) empty.innerHTML = emptyWarehouseHTML(base, pocket);
-    const selection = root.querySelector('.warehouse-selection-v12');
-    if (selection) selection.innerHTML = warehouseSelectionHTML(rows);
     const count = root.querySelector('[data-warehouse-count]');
     if (count) count.textContent = `${rows.length} 种`;
     const summary = root.querySelector('.warehouse-more-filters summary');
     if (summary) { const active = [state.group, state.type, state.rarity].filter(Boolean).length; summary.textContent = active ? `筛选 · ${active} ▾` : '筛选 ▾'; }
-    for (const button of root.querySelectorAll('[data-act="warehouseGroup"]')) { const on = button.dataset.group === state.group; button.classList.toggle('on', on); button.setAttribute('aria-pressed', String(on)); }
-    const purpose = root.querySelector('.warehouse-purpose');
+    for (const button of root.querySelectorAll('[data-act="warehouseGroup"]')) { const on = /** @type {HTMLElement} */ (button).dataset.group === state.group; button.classList.toggle('on', on); button.setAttribute('aria-pressed', String(on)); }
+    const purpose = /** @type {HTMLElement} */ (root.querySelector('.warehouse-purpose'));
     if (purpose) purpose.hidden = !state.character;
   };
   // 资源单击使用一张；其他卡单击打开对应操作台。
@@ -193,15 +187,15 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
   };
   let usingMaterial = false;
   browser.addEventListener('click', async event => {
-    const item = event.target.closest('[data-browser-key]');
-    if (!item || !browser.contains(item) || item.hidden || !currentWarehouse()) return;
+    const item = /** @type {Element} */ (event.target).closest('[data-browser-key]');
+    if (!item || !browser.contains(item) || /** @type {HTMLElement} */ (item).hidden || !currentWarehouse()) return;
     const rows = pocket ? base.data.pocket : base.data.stash;
-    const matches = rows.filter(stack => inventoryKeyOf(stack) === item.dataset.browserKey);
+    const matches = rows.filter(stack => inventoryKeyOf(stack) === /** @type {HTMLElement} */ (item).dataset.browserKey);
     if (matches.length !== 1) return;
     const stack = matches[0];
     if (!pocket && base.materialInfo?.(stack.card)) {
       if (usingMaterial) return;
-      select(item.dataset.browserKey);
+      select(/** @type {HTMLElement} */ (item).dataset.browserKey);
       if (rows.filter(row => row.card.name === stack.card.name).length !== 1) { ui.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
       usingMaterial = true;
       let result;
@@ -213,9 +207,9 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
       else if (result.msg) ui.log(result.msg, 'warn');
       return;
     }
-    open(item.dataset.browserKey, item);
+    open(/** @type {HTMLElement} */ (item).dataset.browserKey, item);
   });
-  browser.querySelector('.card-browser-track').addEventListener('scroll', event => { if (currentWarehouse()) state.scrollTop = event.target.scrollTop; }, { passive:true });
+  browser.querySelector('.card-browser-track').addEventListener('scroll', event => { if (currentWarehouse()) state.scrollTop = /** @type {HTMLElement} */ (event.target).scrollTop; }, { passive:true });
   let artRefreshFrame = 0;
   browser.addEventListener('load', () => {
     if (!currentWarehouse() || artRefreshFrame) return;
@@ -227,8 +221,8 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
   refreshWarehouseBrowser(browser);
   refreshArt();
   bindCardNavigation(browser.querySelector('.card-browser-track'), '[data-browser-key]', { activate: false });
-  for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!currentWarehouse()) return; state[input.dataset.warehouseFilter] = input.value; update(true); });
+  for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!currentWarehouse()) return; state[/** @type {HTMLElement} */ (input).dataset.warehouseFilter] = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (input).value; update(true); });
   ui.act('warehouseGroup', data => { if (!currentWarehouse()) return; if (!['', 'battle', 'supplies', 'growth'].includes(data.group)) return; state.group = data.group; if (data.group !== 'growth') state.character = ''; update(true); sound.tick(); });
-  ui.act('warehouseReset', () => { if (!currentWarehouse()) return; const character = state.character; clearWarehouseFilters(); if (character) { state.character = character; state.group = 'growth'; } for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.value = ''; update(true); });
-  ui.act('warehousePick', data => open(data.stackKey || data.name, [...browser.querySelectorAll('[data-stack-key]')].find(button => button.dataset.stackKey === (data.stackKey || data.name))));
+  ui.act('warehouseReset', () => { if (!currentWarehouse()) return; const character = state.character; clearWarehouseFilters(); if (character) { state.character = character; state.group = 'growth'; } for (const input of root.querySelectorAll('[data-warehouse-filter]')) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (input).value = ''; update(true); });
+  ui.act('warehousePick', data => open(data.stackKey || data.name, [...browser.querySelectorAll('[data-stack-key]')].find(button => /** @type {HTMLElement} */ (button).dataset.stackKey === (data.stackKey || data.name))));
 }

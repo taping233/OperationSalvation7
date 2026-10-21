@@ -6,17 +6,18 @@
  * 只被其他 game.session.* 模块与 game.session.js 依赖，自身不依赖任何会话模块。
  * 对外仍统一从 game.session.js 具名导出，本模块导出面是会话内部属地。
  * ============================================================ */
-import SDT, { sdtDefine } from '../core/sdt-facade.js';
-import '../core/mapData.js';
+import { sdtDefine } from '../core/sdt-facade.js';
+import { MAP } from '../core/mapData.js';
+import { FX } from '../core/renderer.fx.js';
 import { GameStore } from '../hub/game.store.js';
 import { Random } from '../core/random.js';
 
-// main.js 在本模块前装配 MAP/FX；sdt-facade 在 Node 中也提供同一 ESM 门面，
-// 让会话内核可在没有 window/document 的环境下单独加载。
-export const MAP = SDT.MAP;
-export const FX = SDT.FX || null; // standalone Node kernel 没有渲染层时为空；游戏启动顺序中为真实 FX。
+// 业务依赖由 ESM 装配，不在求值时捕获门面中尚未发布的属性。
+// 兼容内部既有导入；GameStore 与页面持有的仍是源模块的同一个对象。
+export { MAP, FX };
 
 // ---------- 运行时钩子（基地出发整备/选角页等 run 页面入口反向注入） ----------
+/** @type {import('./game.session.kernel.types.js').GameRuntime} */
 export const runtime = {
   openClassChoice: () => {},
   openBaseHub: () => {},
@@ -31,6 +32,7 @@ export const runtime = {
   log: () => {},
 };
 
+/** @param {Partial<import('./game.session.kernel.types.js').GameRuntime> & { canvas?: HTMLCanvasElement, ctx?: CanvasRenderingContext2D }} hooks */
 export function configureGameRuntime(hooks) {
   const ports = hooks || {};
   const { canvas: nextCanvas, ctx: nextContext, log, ...runtimeHooks } = ports;
@@ -56,8 +58,10 @@ game.getSnapshot = () => store.getSnapshot();
 export const curLayer = () => game.layerData[game.layerIdx];
 // 结点地图：pos 与结点坐标一律为世界像素（几何唯一来源见 buildDerived 的 nodePos）
 export const cellCenter = (li, idx) => ({ ...game.nodePos[li][idx] });
+/** @template T @param {T[]} arr @returns {T} */
 export const pick = (arr) => arr[Math.floor(Random.random('gameplay') * arr.length)];
 
+/** @template {{w: number}} T @param {T[]} arr @returns {T} */
 export const weighted = (arr) => {
   const total = arr.reduce((a, b) => a + b.w, 0);
   let r = Random.random('gameplay') * total;
@@ -70,8 +74,11 @@ game.debug = {}; // 调试入口由 game.run.dev.js 等开发工具填充
 sdtDefine('game', game);
 
 // ---------- 主画布由 browser adapter 注入；相机由渲染侧经活绑定回写 ----------
+/** @type {HTMLCanvasElement} */
 export let canvas = null;
+/** @type {CanvasRenderingContext2D} */
 export let ctx = null;
+/** @type {import('../hub/game.store.types.js').CameraPort} */
 export let cam;
 export let dpr = 1;
 

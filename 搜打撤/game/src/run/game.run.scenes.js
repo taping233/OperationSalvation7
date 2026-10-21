@@ -25,10 +25,13 @@ import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
 import { usePlainBattleTransition } from '../ui/transition-diagnostic-policy.js';
 import { reduceMotion } from '../core/motion.js';
-import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
+import { createCityCut, cityCutDuration, prepareCityCut } from '../ui/camp-entry.js';
 import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { prepareTransition } from '../ui/transition-preparation.js';
 import { motionTiming } from '../ui/motion-presets.js';
+import { revealTransition } from '../ui/transition-handoff.js';
+import { TRANSITION_ART } from '../ui/transition-art.js';
+import { transitionHeadingHTML } from '../ui/transition-heading.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -77,9 +80,10 @@ export function preloadCellScene(layer, idx) {
   const immediate = IMMEDIATE_SCENES.has(cellType);
   const type = immediate ? cellType : door ? 'door' : altar ? 'altar' : cellType;
   if (['battle', 'boss', 'bossGeneral', 'bossOrc', 'bossElement'].includes(type)) {
-    preloadSceneList(WINTER_BATTLE_LAYERS);
+    preloadSceneList([...WINTER_BATTLE_LAYERS, TRANSITION_ART.retreat]);
   } else {
     preloadScene(PRELOAD_SCENES[type]);
+    preloadSceneList([TRANSITION_ART[type]]);
   }
 }
 // 兼容旧调用：只预载最常见的即时节点，不再一次吞入全部事件背景。
@@ -162,7 +166,7 @@ document.addEventListener('keydown', event => {
   if (!root?.querySelector('.evt-opt.is-selected')) return;
   event.preventDefault();
   event.stopImmediatePropagation();
-  root._clearEventChoice?.();
+  /** @type {HTMLElement & {_clearEventChoice?: () => void}} */ (root)._clearEventChoice?.();
 }, true);
 // 节点共享场景／叙事与决策两区；只有事件启用原有选择确认机制。
 // o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
@@ -182,7 +186,7 @@ export function nodeShell(o) {
       if (game.state !== 'modal') return;
       const page = UI.el?.ovBody?.querySelector('.event-scene');
       if (!page) return;
-      page._clearEventChoice?.();
+      /** @type {HTMLElement & {_clearEventChoice?: () => void}} */ (page)._clearEventChoice?.();
       setBagReturnHook(null);
       UI.hideOverlay();
       finishInstant();
@@ -201,9 +205,24 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 
 export function consumeCurrentCell() { consumeCell(); }
 
-// 节点短过场沿原定时与跳过生命周期；战斗入口共用通用远征画面。
+// 新增局内过场统一从此入口接入；文字样式由 transition-heading 与公共 CSS 维护。
 let transitionRequest = 0;
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = '', holdVisual = false, prepare }) {
+/**
+ * @param {object} options
+ * @param {string} options.title 中文标题；共用左侧标题与短横线，不接受单页排版。
+ * @param {string} [options.art] 已导入的图片 URL；不传则显示公共暗色底。
+ * @param {number} [options.duration] 原流程的停留时间（ms）。
+ * @param {string} [options.tone]
+ * @param {string} [options.asset] 兼容既有场景资源键。
+ * @param {string} [options.eyebrow] 既有基地抵达表现使用。
+ * @param {string} [options.detail] 标准过场保留为无障碍说明。
+ * @param {string} [options.presentation] 既有切幕运动/基地抵达兼容选项。
+ * @param {string} [options.scene] 既有切幕选图。
+ * @param {boolean} [options.holdVisual]
+ * @param {boolean} [options.resumeVisual]
+ * @param {Function} [options.prepare]
+ */
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = 'node-cut', scene = '', art = '', holdVisual = false, resumeVisual = false, prepare }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
@@ -211,27 +230,34 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   const request = ++transitionRequest;
   let lifetime = null, cancelTransition = null;
   const isCurrent = () => currentContext() && request === transitionRequest && (!holdVisual || !lifetime || lifetime.current());
-  const cityCut = presentation === 'city-cut' && !reduceMotion();
+  const cityCut = (presentation === 'city-cut' || !!art && tone !== 'battle') && !reduceMotion();
   const plainCut = usePlainBattleTransition(import.meta.env.DEV, location.search, tone, presentation);
-  // Keep the original transition timer and held-release delay; only replace its visual DOM.
+  const artwork = art && !plainCut ? `<img class="transition-art" src="${escAttr(art)}" alt="" decoding="async" draggable="false">` : '';
+  // Business dwell/skip stays here; the shared handoff owns artwork readiness and playback.
   let heldSurface = null;
+  let automaticReveal = Promise.resolve(true);
   game.state = 'modal';
   const transition = new Promise(resolve => {
     let done = false;
     let timer = null;
     let surface = null;
     cancelTransition = () => { if (done) return; done = true; clearTimeout(timer); resolve(false); };
-    const finish = () => {
+    const finish = (skip = false) => {
       if (done) return;
       done = true;
       if (timer) clearTimeout(timer);
       if (!isCurrent()) { lifetime?.dispose(); resolve(false); return; }
       // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
       if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface) || (lifetime && !lifetime.current()))) { lifetime?.dispose(); resolve(false); return; }
-      if (!holdVisual) { lifetime?.dispose(); UI.hideOverlay({ immediate: tone === 'battle' }); }
-      // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
-      game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
-      resolve(true);
+      const complete = () => {
+        if (!isCurrent() || !surface?.isConnected || !UI.el.ovBody.contains(surface)) { resolve(false); return; }
+        if (!holdVisual) { lifetime?.dispose(); UI.hideOverlay({ immediate:true }); }
+        // 战斗 modal 态不能被过场降级为 idle。
+        game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
+        resolve(true);
+      };
+      if (!holdVisual && !skip) automaticReveal.then(complete, () => resolve(false));
+      else complete();
     };
     if (cityCut && !plainCut) {
       const battleEntry = tone === 'battle';
@@ -241,18 +267,28 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         subtitle: battleEntry ? 'WINTER EXPEDITION / 冬日远征' : (detail || 'EXPEDITION / 开始探索'),
         edition: battleEntry ? 'WINTER EXPEDITION / VII' : `${eyebrow} / VII`, destination: 'EXPEDITION',
         watermark: 'FIELD',
-        scene: battleEntry ? 'general' : 'field',
+        scene: scene || (battleEntry ? 'battle' : 'field'),
       });
-      UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual ? ' resume-hold' : ''} sc-${escAttr(tone)}"
+      cut.querySelector('.transition-heading')?.remove();
+      cut.querySelector('.camp-entry-register')?.remove();
+      cut.insertAdjacentHTML('beforeend', transitionHeadingHTML(battleEntry ? '旅途继续' : (title || '进入地图')));
+      cut.classList.add('page-cut-waiting');
+      if (art) {
+        const image = /** @type {HTMLImageElement} */ (cut.querySelector('.camp-entry-scenery img'));
+        image.src = art;
+        image.classList.add('transition-art');
+      }
+      UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual && !resumeVisual ? ' resume-hold' : ''}${art ? ' illustrated-cut' : ''} sc-${escAttr(tone)}"
         data-presentation="city-cut" data-act="flowContinue" role="group"
         aria-label="${escAttr(`${title || '进入区域'}。${detail}。点击跳过`)}"
         style="--city-run-duration:${turboMs(duration)}ms">
-        ${cut.outerHTML}<p class="city-run-hint">点击跳过</p>
+        ${cut.outerHTML}
       </div>`, 'scene');
-    } else if (presentation === 'node-cut' || plainCut) {
-      UI.showOverlay('', `<div class="scene flow-transition expedition-cut" data-act="flowContinue" role="status" aria-label="${escAttr(title || '进入节点')}"><div class="expedition-cut-rule" aria-hidden="true"></div><h2>${esc(title || '进入节点')}</h2></div>`, 'scene');
+    } else if (presentation !== 'base-arrival' || plainCut) {
+      UI.showOverlay('', `<div class="scene flow-transition expedition-cut${artwork ? ' illustrated-cut' : ''}" data-asset-key="${escAttr(asset)}" data-act="flowContinue" role="status" aria-label="${escAttr(`${title || '进入节点'}。${detail}。点击跳过`)}">${artwork}${transitionHeadingHTML(title || '进入节点')}</div>`, 'scene');
     } else UI.showOverlay('', `
-      <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
+      <div class="scene flow-transition sc-${escAttr(tone)}${artwork ? ' illustrated-cut' : ''}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
+        ${artwork}
         ${presentation === 'base-arrival' ? '<div class="hub-arrival-card">' : ''}
         <div class="flow-scan" aria-hidden="true"></div>
         <p class="flow-eyebrow">${esc(eyebrow)}</p>
@@ -262,25 +298,39 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         ${presentation === 'base-arrival' ? '</div>' : ''}
         <p class="flow-hint">点击跳过</p>
       </div>`, 'scene');
-    UI.act('flowContinue', finish);
+    UI.act('flowContinue', () => finish(true));
     surface = UI.el.ovBody?.querySelector('.flow-transition');
     heldSurface = surface;
-    timer = setTimeout(finish, reduceMotion() ? 0 : turboMs(duration));
+    if (resumeVisual && surface) surface.dataset.handoffProfile = 'resume';
+    timer = setTimeout(finish, reduceMotion() || resumeVisual ? 0 : turboMs(duration));
     UI.refresh(game);
   });
   if (heldSurface && UI.el.overlay) lifetime = createPageSurfaceLifetime(heldSurface, {
     overlay: UI.el.overlay, onInvalidate: () => cancelTransition?.(),
   });
   const preparation = prepareTransition(prepare, { signal: lifetime?.signal, isCurrent });
+  // Resume artwork loads alongside restoration, rather than after the map is ready.
+  const heldArtwork = resumeVisual && heldSurface?.querySelector('.camp-entry-cut');
+  const resumeArtwork = heldArtwork ? prepareCityCut(heldArtwork, { signal:lifetime?.signal }) : Promise.resolve(true);
+  if (!holdVisual && heldSurface) automaticReveal = revealTransition(heldSurface, {
+    signal:lifetime?.signal, isCurrent, duration:turboMs(duration),
+    ready:async () => {
+      const cut = heldSurface.querySelector('.camp-entry-cut');
+      const results = await Promise.all([preparation, cut ? prepareCityCut(cut, { signal:lifetime?.signal }) : true]);
+      return results[1];
+    },
+  });
   // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
   const ownsSurface = () => request === transitionRequest && heldSurface?.isConnected
     && UI.el.ovBody.contains(heldSurface);
   const release = async ({ immediate = false } = {}) => {
     if (!holdVisual || !ownsSurface()) return;
-    if (!immediate && cityCut && !reduceMotion()) {
-      heldSurface.classList.add('resume-reveal');
-      await new Promise(resolve => setTimeout(resolve, 220));
-    }
+    if (!immediate) await revealTransition(heldSurface, { isCurrent:ownsSurface, painted:true,
+      ready:() => {
+        if (resumeVisual) return resumeArtwork;
+        const cut = heldSurface.querySelector('.camp-entry-cut');
+        return cut ? prepareCityCut(cut, { signal:lifetime?.signal }) : true;
+      } });
     // 恢复战斗/奖励/选角可能已经换页，只收起本次续局自己的过场。
     if (ownsSurface()) UI.hideOverlay({ immediate: true });
   };
@@ -289,8 +339,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
 
 export function enterNode(kind, done) {
   const transitions = {
-    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
-    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
+    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut', scene: 'battle' },
+    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut', scene: 'boss' },
     door: { tone: 'door', asset: 'scene-door-bg', eyebrow: 'GATE SIGNAL', title: '抵达大门', detail: '环层通路正在响应' },
     altar: { tone: 'altar', asset: 'scene-altar-bg', eyebrow: 'CONTAMINATION DETECTED', title: '污染核心', detail: '高危生命信号逼近' },
     emergencyExit: { tone: 'exit', asset: 'scene-extract-bg', eyebrow: 'EXTRACTION POINT', title: '紧急撤离点', detail: '撤离信标已经接通' },
@@ -301,10 +351,15 @@ export function enterNode(kind, done) {
   const combat = kind === 'battle' || kind === 'boss';
   const transition = showRunTransition(combat
     ? { ...spec, duration: motionTiming.sceneEnter, holdVisual: true, prepare: ensureBattleReady }
-    : { ...spec, presentation: 'node-cut', duration: motionTiming.sceneEnter });
+    : { ...spec, art: TRANSITION_ART[kind], presentation: 'node-cut', duration: motionTiming.sceneEnter, holdVisual: true });
   return transition.then(async current => {
     if (!current || !transition.isCurrent()) return false;
-    if (!combat) return done();
+    if (!combat) {
+      // Replace the held scene directly. Closing it first starts a map-return
+      // animation and a second page cover before the destination can mount.
+      try { return await done(); }
+      finally { await transition.release({ immediate: true }); }
+    }
     // Keep the mounted curtain/input state while module preparation completes.
     game.state = 'modal';
     const prepared = await transition.preparation;
@@ -323,6 +378,7 @@ export function enterNode(kind, done) {
 }
 
 // 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档
+/** @type {(completed?: boolean) => void} */
 export function finishInstant() {
   if (game.chainMove) {
     cancelLegacyChainMove();
@@ -360,7 +416,7 @@ export function openPickupPage(kind, gain, onDone, skipSearch = false, transacti
     main.innerHTML = `<div class="node-summary pickup-result"><p class="gain-big">${gain}</p>
       <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button></div>`;
     if (!skipSearch) SDT.Sound.sfx('searchReveal');
-    const go = main.querySelector('[data-act="pickupGo"]');
+    const go = /** @type {HTMLElement} */ (main.querySelector('[data-act="pickupGo"]'));
     if (go) go.focus({ preventScroll: true });
     // 注册随揭晓走：closeBackpack 会清空动作表，背包返回的重入路径（skipSearch）此前
     // 提前 return 不注册，恢复页有按钮无处理器、奖励永远领不出（09-30 深审 WORLD-001）
@@ -382,13 +438,14 @@ export function buildEncounter(layerIdx) {
   const enc = MAP.encounters[layerIdx] || MAP.encounters[0];
   let pool, size;
   const selected=selectEncounterSpec(enc,MAP.monsters,()=>Random.random('enemy'));
-  if(!selected.ok) throw new Error(`遭遇配置无效：${selected.code}`);
+  if(selected.ok === false) throw new Error(`遭遇配置无效：${selected.code}`);
   const spec=selected.value;
   let strategy=spec.strategy, risk=spec.risk;
   // 2026-09-10 玩法定版：每层每种敌人有固定数量区间（一律落在 1~3 只，如 2-3 只），
   // 区间内每个数量等概率生成（MAP.rollCount）；巨兽「荒渊」按层概率刷出（第 3 层 3%、第 4 层 10%），固定单体。
   pool=spec.enemyIds; size=spec.size;
   const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1)));
+  /** @type {(ReturnType<typeof scaledEnemy>[]) & {risk?:string, strategy?:string, encounterId?:string, encounterKind?:string, rewardKind?:string, fallbackReason?:string}} */
   const list = [];
   // 只对新局第三层普通遭遇轮换；独立种子盐不推进地图、掉落或遭遇随机流。
   // 人数沿原掷数；替代只取该层人数区间允许的普通敌人，精英与旧档完全沿原路径。
@@ -517,7 +574,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     if (txn.finished || !txn.current()) return;
     const oldButtons = [...(surface?.querySelectorAll('button[data-act="restoreOne"]') || [])];
     const focused = surface?.contains(document.activeElement) ? document.activeElement : null;
-    const focusedName = focused?.dataset.name;
+    const focusedName = /** @type {HTMLElement} */ (focused)?.dataset.name;
     const focusedIndex = oldButtons.indexOf(focused);
     const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
     const left = record?.left ?? txn.left;

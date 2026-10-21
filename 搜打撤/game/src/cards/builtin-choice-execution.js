@@ -6,7 +6,8 @@ export const BUILTIN_CHOICE_PREVIOUS_RULES = {
 export const BUILTIN_CHOICE_REVISIONS = {
   'tt3-magic-lamp': { rules:{ version:1, battle:{ target:{ side:'enemy', area:false } }, triggers:{ onPlay:[
     { op:'choice', options:[
-      { label:'发现 1 张牌并将其释放', ops:[{ op:'acquire', n:1, pool:{ kind:'随机' }, dest:'discover', act:'play' }] },
+      // 2026-10-21 反馈#5：第 1 项由「任意牌」收窄为招式池（武术/法术，parsePoolNoun 同源谓词）
+      { label:'发现招式并释放', ops:[{ op:'acquire', n:1, pool:{ kind:'招式' }, dest:'discover', act:'play' }] },
       { label:'消灭 1 名受伤敌人（非 BOSS）', ops:[{ op:'execute', cap:{ wounded:true }, count:1 }] },
       { label:'冰冻 2 名角色，获得 5 点护甲', ops:[{ op:'freezeFirstEnemies', count:2, duration:1 }, { op:'armor', amount:5 }] },
     ] },

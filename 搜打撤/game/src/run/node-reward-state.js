@@ -10,6 +10,7 @@ export function validEntrySupply(value) {
     && value.taken.every(i => Number.isInteger(i) && i >= 0 && i < value.cardIds.length);
 }
 
+/** @returns {import('../hub/game.store.types.js').EntrySupply} */
 export function createEntrySupply(game, cards) {
   return { version:1, layerIdx:0, trackPos:game.trackPos,
     cardIds:[...new Set(cards.filter(Boolean).map(card => card.id))], taken:[] };
@@ -85,7 +86,9 @@ export function validNodeRewards(value) {
       && (item.taken === null || (Number.isInteger(item.taken) && item.taken >= 0 && item.taken < item.cardIds.length));
     if (item.type === 'fire') return [item.hpBefore,item.hpAfter,item.hpGain].every(n => Number.isFinite(n) && n >= 0)
       && ids(item.restoredIds) && (item.classCardId === null || typeof item.classCardId === 'string')
-      && typeof item.bonusReceived === 'boolean' && (item.continued === undefined || typeof item.continued === 'boolean');
+      && typeof item.bonusReceived === 'boolean' && (item.continued === undefined || typeof item.continued === 'boolean')
+      && ([item.healUsed,item.restoreUsed,item.bonusRolled].every(flag => flag === undefined)
+        || [item.healUsed,item.restoreUsed,item.bonusRolled].every(flag => typeof flag === 'boolean'));
     return false;
   });
 }

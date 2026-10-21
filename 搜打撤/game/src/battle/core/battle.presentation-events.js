@@ -7,6 +7,7 @@ export function createBattlePresentation({ readState, emitEvent }) {
     emitEvent({ ...event, eventId: ++eventSequence, battleToken });
     return true;
   }
+  /** @param {Parameters<import('./battle.core-ports.types.js').EffectCommands['emitRecast']>[0]} event */
   function emitRecast({ card, uid, source, repeatIndex, repeatTotal, scope = 'card' }) {
     return emitBattlePresentation({ kind: 'recast', uid, name: card.name, card: { ...card },
       source, repeatIndex, repeatTotal, scope });

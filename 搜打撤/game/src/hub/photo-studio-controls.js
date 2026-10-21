@@ -5,13 +5,13 @@ const controls = new WeakMap();
 
 function closeChoices(except) {
   document.querySelectorAll('.studio-unified .studio-choice[open]').forEach(choice => {
-    if (choice !== except) choice.open = false;
+    if (choice !== except) /** @type {HTMLDetailsElement} */ (choice).open = false;
   });
 }
 
 if (typeof document !== 'undefined') {
   document.addEventListener('pointerdown', e => {
-    const inside = e.target?.closest?.('.studio-choice');
+    const inside = /** @type {Element} */ (e.target)?.closest?.('.studio-choice');
     closeChoices(inside);
   });
 }
@@ -147,9 +147,9 @@ function bindChoice(select) {
       trigger.focus({ preventScroll: true });
       return;
     }
-    if (!menu.contains(e.target)) return;
+    if (!menu.contains(/** @type {Node} */ (e.target))) return;
     const enabled = buttons.filter(button => !button.disabled);
-    const current = enabled.indexOf(e.target);
+    const current = enabled.indexOf(/** @type {HTMLButtonElement} */ (e.target));
     let next;
     if (e.key === 'ArrowDown') next = (current + 1) % enabled.length;
     else if (e.key === 'ArrowUp') next = (current - 1 + enabled.length) % enabled.length;

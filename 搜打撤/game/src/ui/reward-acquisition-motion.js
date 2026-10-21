@@ -26,16 +26,17 @@ export function clearRewardAcquisition(host) {
 }
 
 // Called only after the shared successful-grant hook. Missing endpoints use its existing reveal queue.
+/** @param {HTMLElement} stage @param {{id?: string, name?: string}} card @param {{mode?: string, token?: unknown, count?: number, sceneSelector?: string}} [options] */
 export function showRewardAcquisition(stage, card, { mode = 'chest', token, count = 1, sceneSelector = '.reward-replica,.cqo-overview' } = {}) {
   if (!stage?.isConnected || quietFeedback() || motionReduced()) return false;
   if (sceneSelector && !stage.querySelector(sceneSelector)) return false;
-  const source = [...stage.querySelectorAll('[data-reward-card]')]
-    .find(element => element.dataset.rewardCard === String(card.id || card.name))?.querySelector('.reward-card');
-  const findTarget = () => [...stage.querySelectorAll('[data-card-receive-anchor="bag"],.reward-capacity,[data-act="entrySupplyBag"]')].find(visible);
+  const source = /** @type {HTMLElement} */ ([.../** @type {NodeListOf<HTMLElement>} */ (stage.querySelectorAll('[data-reward-card]'))]
+    .find(element => element.dataset.rewardCard === String(card.id || card.name))?.querySelector('.reward-card'));
+  const findTarget = () => [.../** @type {NodeListOf<HTMLElement>} */ (stage.querySelectorAll('[data-card-receive-anchor="bag"],.reward-capacity,[data-act="entrySupplyBag"]'))].find(visible);
   let target = findTarget();
-  const face = source?.querySelector('.hs-card');
+  const face = /** @type {HTMLElement} */ (source?.querySelector('.hs-card'));
   if (!face || !visible(source) || !target) return false;
-  const host = stage.closest('#overlay') || stage.parentElement;
+  const host = /** @type {HTMLElement} */ (stage.closest('#overlay')) || stage.parentElement;
   if (!host || host.hidden) return false;
   // A new run replaces any old run's purely visual receipt.
   for (const flight of [...flights]) if (flight.host === host && (flight.token !== token || flight.mode !== mode)) flight.dispose();
@@ -43,8 +44,8 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
   const node = document.createElement('div');
   node.className = 'reward-acquisition-card'; node.inert = true; node.setAttribute('aria-hidden','true');
   node.style.cssText = `left:${start.left}px;top:${start.top}px;width:${start.width}px;height:${start.height}px`;
-  const clone = face.cloneNode(true);
-  for (const element of [clone, ...clone.querySelectorAll('*')]) {
+  const clone = /** @type {HTMLElement} */ (face.cloneNode(true));
+  for (const element of [clone, .../** @type {NodeListOf<HTMLElement>} */ (clone.querySelectorAll('*'))]) {
     element.removeAttribute('id'); element.removeAttribute('tabindex');
   }
   // The holder keeps its live endpoint; the face plays one short lift/shrink.

@@ -73,10 +73,33 @@ body #overlay .battle-decision.battle-decision-unified .battle-option-index { co
 body #overlay .battle-decision.battle-decision-unified .battle-option-text { flex:1; padding:24px 0; font:500 32px/1.65 var(--font-ui); white-space:pre-wrap; }
 body #overlay .battle-decision.battle-decision-unified .battle-option-action { display:flex; justify-content:space-between; color:#e7d6a8; font:500 23px/1.5 var(--font-ui); }
 body #overlay .battle-decision.battle-decision-unified[data-decision-kind="choice"] .choice-opt:is(:hover,:focus-visible) { border-color:#dfcfa4; outline:2px solid #dfcfa4; outline-offset:3px; background:linear-gradient(145deg,#3b566673,#243947); }
-body #overlay .battle-decision.battle-decision-unified .battle-select-grid.bt-hand { display:grid!important; grid-template-columns:repeat(auto-fit,300px)!important; gap:28px!important; justify-content:center; align-items:start; padding:28px 12px!important; }
-body #overlay .battle-decision.battle-decision-unified .battle-select-slot { display:flex; flex-direction:column; width:300px; gap:10px; }
+/* 2026-10-21 老板反馈 #7「选择手牌界面重做」：候选永远排成一行（不纵向翻页），
+   每格随可用宽度均分放大（少卡更大、卡面上限 520px 槽宽），字号随槽宽缩放，
+   仅当整行总宽超出可视区时由外层 .battle-decision-content 横向滚动兜底
+   （与「发现」候选行同一滚动约定）。同名卡去重渲染归 battle.decision-content.js
+   的 battleHandSelectBodyHTML —— 见 2026-10-21 反馈报告 C组跨组需求。 */
+body #overlay .battle-decision.battle-decision-unified .battle-select-grid.bt-hand {
+  display:grid!important;
+  container-type:size;
+  height:100%;
+  grid-auto-flow:column!important;
+  grid-template-columns:none!important;
+  grid-auto-columns:minmax(190px,1fr);
+  grid-template-rows:minmax(0,1fr);
+  align-content:center;
+  align-items:center;
+  justify-items:center;
+  gap:24px!important;
+  padding:16px 12px!important;
+}
+body #overlay .battle-decision.battle-decision-unified .battle-select-slot { display:flex; flex-direction:column; width:auto; min-width:0; max-width:520px; container-type:inline-size; gap:10px; }
 body #overlay .battle-decision.battle-decision-unified .battle-select-slot .bt-card { width:100%!important; padding:0; }
-body #overlay .battle-decision.battle-decision-unified .battle-select-slot .hs-card { width:100%!important; max-width:none!important; font-size:28px; }
+body #overlay .battle-decision.battle-decision-unified .battle-select-slot .hs-card { width:100%!important; max-width:none!important; font-size:min(30px,calc(100cqw * .096)); }
+/* 手牌选择页压缩壳层留白，把高度让给单行卡面（1280×720 首屏优先）。 */
+body #overlay .battle-decision.battle-decision-unified[data-decision-kind="hand-select"] .battle-decision-head { padding:14px 36px 6px; }
+body #overlay .battle-decision.battle-decision-unified[data-decision-kind="hand-select"] .battle-decision-summary { padding:4px 36px 12px; }
+body #overlay .battle-decision.battle-decision-unified[data-decision-kind="hand-select"] .battle-decision-content { padding:10px 36px 12px; }
+body #overlay .battle-decision.battle-decision-unified[data-decision-kind="hand-select"] .battle-decision-actions { padding:12px 36px; }
 body #overlay .battle-decision.battle-decision-unified .battle-card-action { display:block; margin-top:8px; font-size:22px; color:#e3d3a9; }
 body #overlay .battle-decision.battle-decision-unified .battle-card-inspect { align-self:center; min-height:46px; padding:6px 20px; border:1px solid #a1b9c33d; border-radius:6px; background:#12233099; color:#bbd0dc; font:400 21px/1.5 var(--font-ui); cursor:pointer; }
 body #overlay .battle-decision.battle-decision-unified .battle-card-inspect:is(:hover,:focus-visible) { color:#f0e0b6; border-color:#d2c397; outline:2px solid #d2c397; outline-offset:2px; }

@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { displayCardDescription } from '../../cards/card-description-text.js';
 import { descRich } from '../../cards/cards.view.js';
 import { effCostOf, findEffectiveCard as findCard, infusionFuelReason, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
@@ -35,7 +36,7 @@ export function closeHandInspector({ restoreFocus = true } = {}) {
   previous.panel.remove();
   previous.stage.inert = previous.wasInert;
   if (restoreFocus && previous.stage.isConnected) {
-    const origin = [...previous.stage.querySelectorAll('.sts-hand .bt-card')].find(card => card.dataset.uid === previous.uid);
+    const origin = [.../** @type {NodeListOf<BattleElement>} */ (previous.stage.querySelectorAll('.sts-hand .bt-card'))].find(card => card.dataset.uid === previous.uid);
     (origin || previous.focus)?.focus({ preventScroll: true });
   }
   return true;
@@ -52,12 +53,12 @@ export function syncHandInspector(snapshot = getSnapshot()) {
     return false;
   }
   const action = actionFor(active.uid, snapshot);
-  const button = active.panel.querySelector('.bt-hand-detail-use');
+  const button = /** @type {HTMLButtonElement} */ (active.panel.querySelector('.bt-hand-detail-use'));
   button.disabled = !!action.reason;
   button.textContent = action.label || '暂时无法使用';
-  active.panel.querySelector('.bt-hand-detail-action-note').textContent = action.reason || action.detail;
+  /** @type {BattleElement} */ (active.panel.querySelector('.bt-hand-detail-action-note')).textContent = action.reason || action.detail;
   const entry = findCard(active.uid);
-  const cost = active.panel.querySelector('.hsc-cost');
+  const cost = /** @type {BattleElement} */ (active.panel.querySelector('.hsc-cost'));
   if (cost) cost.textContent = String(effCostOf(entry.card, active.uid));
   return true;
 }
@@ -66,7 +67,7 @@ export function openHandInspector(uid, onUse) {
   const SDT = window.SDT;
   const snapshot = getSnapshot();
   const entry = uid && findCard(uid);
-  const stage = document.querySelector('#overlay .battle-stage');
+  const stage = /** @type {BattleElement} */ (document.querySelector('#overlay .battle-stage'));
   const overlay = document.getElementById('overlay');
   if (!entry || !stage || !overlay || overlay.hidden || !inHand(snapshot, uid)
     || stage._battleToken !== snapshot.battleToken
@@ -86,16 +87,16 @@ export function openHandInspector(uid, onUse) {
     <div class="bt-hand-detail-body"><div class="bt-hand-detail-art">${SDT.Cards.cardHTML(card, 'lg', { costOverride: { v: effCostOf(card, uid), base: card._baseCost ?? card.cost } })}</div>
     ${description.length > 70 ? '<details class="bt-hand-detail-copy" open><summary>完整规则</summary><p class="bt-hand-detail-rules card-rules-copy"></p></details>' : ''}</div>
     <footer><p class="bt-hand-detail-action-note" role="status"></p><button type="button" class="bt-hand-detail-use">使用这张牌</button></footer></div>`;
-  const fullRules = panel.querySelector('.bt-hand-detail-rules');
+  const fullRules = /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-rules'));
   if (fullRules) fullRules.innerHTML = descRich(description, card.id);
   active = { uid, token: snapshot.battleToken, stage, panel, wasInert: !!stage.inert, focus: document.activeElement };
   stage.inert = true;
   panel.addEventListener('pointerdown', event => event.stopPropagation());
   panel.addEventListener('click', event => event.stopPropagation());
   const closeThis = () => { if (active?.panel === panel) closeHandInspector(); };
-  panel.querySelector('.bt-hand-detail-close').addEventListener('click', closeThis);
-  panel.querySelector('.bt-hand-detail-scrim').addEventListener('click', closeThis);
-  panel.querySelector('.bt-hand-detail-use').addEventListener('click', () => {
+  /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-close')).addEventListener('click', closeThis);
+  /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-scrim')).addEventListener('click', closeThis);
+  /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-use')).addEventListener('click', () => {
     if (active?.panel !== panel) return;
     if (!syncHandInspector()) return;
     const action = actionFor(uid, getSnapshot());
@@ -109,7 +110,7 @@ export function openHandInspector(uid, onUse) {
   });
   active.observer.observe(overlay, { attributes: true, attributeFilter: ['hidden'], childList: true, subtree: true });
   syncHandInspector(snapshot);
-  panel.querySelector('.bt-hand-detail-close').focus({ preventScroll: true });
+  /** @type {BattleElement} */ (panel.querySelector('.bt-hand-detail-close')).focus({ preventScroll: true });
   return true;
 }
 
@@ -122,7 +123,7 @@ function onInspectorKey(event) {
     event.preventDefault();
     closeHandInspector();
   } else if (event.key === 'Tab') {
-    const buttons = [...active.panel.querySelectorAll('button:not(:disabled), summary')];
+    const buttons = [.../** @type {NodeListOf<BattleElement>} */ (active.panel.querySelectorAll('button:not(:disabled), summary'))];
     const first = buttons[0], last = buttons.at(-1);
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }

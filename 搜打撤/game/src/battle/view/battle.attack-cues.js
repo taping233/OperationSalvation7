@@ -20,6 +20,7 @@ export function attackCue(damageKind, card, context) {
   if (!['target-damage', 'target-magic'].includes(cue.hit)) return undefined;
   if (cue.hitSound !== null && typeof cue.hitSound !== 'string') return undefined;
   const name = String(card?.name || '');
+  /** @type {[RegExp, string][]} */
   const materialSounds = [
     [/雷|电|射线/, 'attackLightning'], [/火|焰|燃|烟火|余烬|灼/, 'attackFire'],
     [/冰|冻|霜|寒/, 'attackIce'], [/毒|腐化|腐蚀/, 'attackPoison'],

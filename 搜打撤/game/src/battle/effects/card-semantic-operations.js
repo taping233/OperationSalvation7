@@ -4,6 +4,7 @@ import { createM2Domain } from './effect-steps.m2.domain.js';
 import { hasEnemyDamageFact } from '../core/battle.facts.js';
 import { chooseMissingCurse, transformChaosDeck } from './requested-card-batch.js';
 
+/** @param {{ when?: { infused?: boolean, brokeStealth?: boolean, targetStatus?: string, targetUndamagedBeforeCast?: boolean } }} operation @param {{ infused?: boolean, brokeStealth?: boolean, target?: { status?: Record<string, number>, hp: number, maxHp?: number }, hpAtCast?: Map<object, number> }} [state] */
 export function matchesOperationWhen(operation, { infused, brokeStealth, target, hpAtCast } = {}) {
   const when = operation?.when;
   if (!when) return true;

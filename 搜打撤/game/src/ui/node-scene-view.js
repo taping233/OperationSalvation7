@@ -3,8 +3,8 @@ import '../../css/archive-back.css';
 import '../../css/event-choice-feedback.css';
 
 function decorateChoices(template) {
-  for (const [index, option] of [...template.content.querySelectorAll('.evt-opt[data-act]')].entries()) {
-    const label = option.querySelector('b')?.textContent.replace(/\s/g, '') || '';
+  for (const [index, option] of [.../** @type {NodeListOf<HTMLElement>} */ (template.content.querySelectorAll('.evt-opt[data-act]'))].entries()) {
+    const label = /** @type {HTMLElement} */ (option.querySelector('b'))?.textContent.replace(/\s/g, '') || '';
     const kind = /应战|战斗|攻击|反击/.test(label) ? 'combat' : /离开|返回|放弃|绕行|逃/.test(label) ? 'leave'
       : /购买|支付|交易|贿赂|交出/.test(label) ? 'trade' : /治疗|休息|救助|复原/.test(label) ? 'restore' : 'explore';
     option.dataset.choiceKind = kind;
@@ -18,9 +18,9 @@ function decorateChoices(template) {
 }
 
 function mergeSingleOptionDescription(choices, body, narrative) {
-  const options = choices.content.querySelectorAll('.evt-opt');
+  const options = /** @type {NodeListOf<HTMLElement>} */ (choices.content.querySelectorAll('.evt-opt'));
   if (options.length !== 1) return body;
-  const detail = options[0].querySelector(':scope > span');
+  const detail = /** @type {HTMLElement} */ (options[0].querySelector(':scope > span'));
   if (!detail) return body;
   const prose = document.createElement('template');
   prose.innerHTML = narrative;
@@ -39,7 +39,7 @@ export function eventSceneHTML({ tone, icon = '', title, sub = '', body = '', fo
   if (choiceTemplate) choiceTemplate.innerHTML = body;
   if (choiceTemplate) mergeSingleOptionDescription(choiceTemplate, body, sub);
   const choices = choiceTemplate ? decorateChoices(choiceTemplate) : body;
-  const choiceCount = choiceTemplate ? choiceTemplate.content.querySelectorAll('.evt-opt[data-act]').length : 0;
+  const choiceCount = choiceTemplate ? /** @type {NodeListOf<HTMLElement>} */ (choiceTemplate.content.querySelectorAll('.evt-opt[data-act]')).length : 0;
   const eventChoiceFoot = choiceCount > 1 ? `<div class="event-choice-state">
     <div class="event-choice-announcement" role="status" aria-live="polite"><b data-event-choice-name>未选择</b><small data-event-choice-detail></small></div>
     <button type="button" class="event-choice-clear" disabled>取消选择</button>

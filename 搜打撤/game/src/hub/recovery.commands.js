@@ -8,17 +8,17 @@ import { clone, fail, stable, successReceipt, validSlot } from './commands.share
 const Base = () => window.SDT.Base;
 
 function parseVersioned(raw, maxVersion, label) {
-  if (raw === null) return { ok: true, value: null };
+  if (raw === null) return { ok: /** @type {true} */ (true), value: null };
   try {
     const value = JSON.parse(raw);
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error();
     const version = Number(value.version) || 0;
     if (version > maxVersion) return fail('RECOVERY_BLOCKED', `${label}来自未来版本`, false, { version });
-    return { ok: true, value };
+    return { ok: /** @type {true} */ (true), value };
   } catch { return fail('RECOVERY_BLOCKED', `${label}损坏，拒绝事务覆盖`); }
 }
 
-export function createRecoveryCommands({ storage = globalThis.localStorage, lockManager = globalThis.navigator?.locks, failpoint,
+export function createRecoveryCommands({ storage = globalThis.localStorage, lockManager = globalThis.navigator?.locks, failpoint = undefined,
   baseApi = Base(), runStore = RunStorage, keyFactory = null, baseVersion = baseApi.BASE_VERSION, runVersion = SAVE_VERSION } = {}) {
   const keys = keyFactory || (slotId => ({ base: baseApi.SLOT_KEY(slotId), run: RUN_KEY(slotId), journal: TX_KEY(slotId) }));
   let writeOwner = null;
@@ -26,14 +26,17 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
   const validateJournal = journal => {
     if (journal.command === DEPARTURE_COMMAND) return validateDepartureJournal(journal, baseVersion, runVersion);
     const parse = (raw, maxVersion, label, nullable = true) => {
-      if (raw === null) return nullable ? { ok: true, value: null } : fail('RECOVERY_BLOCKED', `${label}不可为空`);
+      if (raw === null) return nullable ? { ok: /** @type {true} */ (true), value: null } : fail('RECOVERY_BLOCKED', `${label}不可为空`);
       return parseVersioned(raw, maxVersion, label);
     };
     const beforeBase = parse(journal.before.baseRaw, baseVersion, '日志中的旧基地存档');
     const afterBase = parse(journal.after.baseRaw, baseVersion, '日志中的新基地存档', false);
     const beforeRun = parse(journal.before.runRaw, runVersion, '日志中的旧对局存档');
     const afterRun = parse(journal.after.runRaw, runVersion, '日志中的新对局存档');
-    for (const checked of [beforeBase, afterBase, beforeRun, afterRun]) if (!checked.ok) return checked;
+    if (beforeBase.ok === false) return beforeBase;
+    if (afterBase.ok === false) return afterBase;
+    if (beforeRun.ok === false) return beforeRun;
+    if (afterRun.ok === false) return afterRun;
     const receipt = journal.receipt;
     const receiptValue = receipt?.ok === true && receipt.value && typeof receipt.value === 'object' ? receipt.value : null;
     const requestKey = `${journal.command}:${journal.requestId}`;
@@ -57,7 +60,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     const beforeBaseRevision = beforeBase.value === null || !Object.hasOwn(beforeBase.value, '_m01')
       ? 0 : beforeBase.value._m01?.revision;
     if (beforeBaseRevision !== journal.expectedBaseRevision) return fail('RECOVERY_BLOCKED', '日志旧基地修订不匹配');
-    return { ok: true };
+    return { ok: /** @type {true} */ (true) };
   };
   const pair = createRecoverablePair({
     storage: guardedStorage, keyFor: keys, failpoint,
@@ -83,7 +86,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     return locked(slotId, () => {
       const recovered = recoverInside(slotId);
       if (!recovered.ok) return recovered;
-      return recovered.value === null ? { ok: true, value: null } : clone(recovered.value);
+      return recovered.value === null ? { ok: /** @type {true} */ (true), value: null } : clone(recovered.value);
     });
   };
 
@@ -92,7 +95,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     let raw;
     try { raw = storage.getItem(keys(slotId).journal); }
     catch { return fail('STORAGE_READ_FAILED', '无法读取恢复日志', true, { slotId }); }
-    if (raw === null) return { ok: true, value: null };
+    if (raw === null) return { ok: /** @type {true} */ (true), value: null };
     return recoverSlot(slotId);
   };
 
@@ -111,7 +114,7 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       try { current = baseApi._readForCommit(context.slotId) || parsed.value; fingerprint = stable({ command: identity.command, payload: identity.payload ?? null, runId: identity.runId ?? null }); }
       catch { return fail('STORAGE_READ_FAILED', '无法读取或序列化基地事务', true); }
       const prior = current?._m01?.requests?.[`${identity.command}:${context.requestId}`];
-      if (!prior) return { ok: true, value: null, revision: current?._m01?.revision || 0 };
+      if (!prior) return { ok: /** @type {true} */ (true), value: null, revision: current?._m01?.revision || 0 };
       if (prior.fingerprint !== fingerprint) return fail('REQUEST_ID_CONFLICT', '同一 requestId 的参数不同');
       return clone(prior.result);
     });
@@ -167,7 +170,8 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
       let afterBaseRaw, afterRunRaw;
       try { afterBaseRaw = JSON.stringify(nextBase); afterRunRaw = nextRun === null ? null : JSON.stringify(nextRun); }
       catch { return fail('INVALID_ARGUMENT', '事务快照无法序列化'); }
-      const journal = {
+      /** @type {import('./recoverable-pair.js').Journal} */
+    const journal = {
         version: 1, txId: `${context.slotId}:${prepared.runId}:${context.requestId}`, slotId: context.slotId,
         requestId: context.requestId, command: prepared.command, fingerprint, runId: prepared.runId,
         expectedBaseRevision: context.expectedBaseRevision, expectedRunRevision: context.expectedRunRevision,

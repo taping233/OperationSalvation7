@@ -49,7 +49,7 @@ import { game } from '../run/game.session.js';
     const info = [];
     if (!isCenter) {
       const door = (ld.doors || []).find(d => d.at === idx);
-      const altarE = (ld.altarEntrances || []).find(a => a.at === idx);
+      const altarE = (ld.altarEntrances || []).find(a => a['at'] === idx);
       const eIdx = (ld.entrances || []).indexOf(idx);
       info.push(`${ld.name} · 轨道编号 <b>${idx}</b>`);
       if (eIdx >= 0) info.push(`[[icon:door]] 出生入口：${ld.entranceNames[eIdx]}`);
@@ -73,7 +73,7 @@ import { game } from '../run/game.session.js';
     UI.act('saveNote', () => {
       if (!rebuildNotes()) return;
       const ta = document.getElementById('ovNote');
-      const saved = SDT.Notes.set(MAP.boardId, li, idx, ta ? ta.value : '');
+      const saved = SDT.Notes.set(MAP.boardId, li, idx, ta ? /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (ta).value : '');
       if (saved === false) {
         // 存储不可写：弹层与输入原样保留，不让用户内容无声丢失
         UI.log('备注保存失败（存储空间可能已满），内容仍留在输入框', 'warn');
@@ -153,7 +153,7 @@ import { game } from '../run/game.session.js';
       if (!rebuildNotes()) return;
       const ta = document.getElementById('ovImport');
       try {
-        const parsed = JSON.parse(ta.value);
+        const parsed = JSON.parse(/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (ta).value);
         const cells = Array.isArray(parsed) ? parsed : parsed.cells;
         let failed = 0;   // 配额中断的写入不再被当成功上报（复核建议）
         const trySet = (...args) => { if (SDT.Notes.set(...args) === false) failed++; };

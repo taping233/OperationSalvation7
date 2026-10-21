@@ -43,7 +43,7 @@ import { observeIconHydration } from './icon-hydration.js';
   add('mouse',[0x1f5b1]); add('flag',[0x1f3f3]); add('slime',[0x1f47e]); add('demon',[0x1f479,0x1f608,0x1f409]); add('runner',[0x1f3c3,0x1f47b,0x1f4a8]);
   add('question',[0x26a0,0x267e,0x221e,0x1f4cc]); add('crystal',[0x2744]);
 
-  const EMOJI_RE = /(?:[\uD83C-\uDBFF][\uDC00-\uDFFF](?:\uFE0F|\u200D[\s\S])?|[\u2300-\u27BF]\uFE0?|[\u2B00-\u2BFF]\uFE0?)/g;
+  const EMOJI_RE = /(?:[\uD83C-\uDBFF][\uDC00-\uDFFF](?:\uFE0F|\u200D[\s\S])?|[\u2300-\u27BF]\x75FE0?|[\u2B00-\u2BFF]\x75FE0?)/g;
   const ICON_TOKEN_RE = /\[\[icon:[a-z-]+\]\]/;
   function hasTokens(text) {
     EMOJI_RE.lastIndex = 0;
@@ -96,9 +96,9 @@ import { observeIconHydration } from './icon-hydration.js';
     observeIconHydration(document.body, { hydrate, scrubAttrs, hasTokens });
   }
   if (typeof window !== 'undefined') window.addEventListener('error', event => {
-    const target=event.target;
+    const target=/** @type {HTMLImageElement | null} */ (event.target);
     if(target&&target.tagName==='IMG'&&target.dataset&&target.dataset.assetKey) reportMissing('file',target.getAttribute('src'));
   }, true);
   // 图标由可见 DOM 按需加载；启动不枚举全图标目录。
   // 旧独立 iconUrls/warmAllIcons 预热链已经退役。
-  sdtDefine('Icons', {img,url,rich,hydrate,TYPE_ART,NAMES});
+  export const Icons = sdtDefine('Icons', {img,url,rich,hydrate,TYPE_ART,NAMES});

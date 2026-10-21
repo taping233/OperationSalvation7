@@ -15,7 +15,7 @@ const Random = context.random;
 const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];
 
 /**
- * @param {object} ports engine 装配端口：alive/foeIdx/finish 与执行会话（executionSession/stagedDeathFx
+ * @param {import('./battle.core-ports.types.js').FoeLifecyclePorts} ports engine 装配端口：alive/foeIdx/finish 与执行会话（executionSession/stagedDeathFx
  *   为引擎内单一实例的内部状态）自引擎注入；其余经 runtime 活绑定直引
  * @returns {{ resolveFoeDefeat, sweepDead, transferPoisonLegacy, nestRevive, nestKillCheck, nestPhase }}
  */

@@ -91,7 +91,7 @@ export function createCardDesigner(deps) {
   // 机制词条改动后：同步描述框 / 字数 / 按钮态 / 卡面预览
   function mechSyncUI() {
     const ta = document.getElementById('cardDesc');
-    if (ta) ta.value = draft.desc;
+    if (ta) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (ta).value = draft.desc;
     const cnt = document.getElementById('descCount');
     if (cnt) cnt.textContent = `${draft.desc.length}/100`;
     const wrap = document.getElementById('mechChips');
@@ -113,7 +113,7 @@ export function createCardDesigner(deps) {
         <div class="cdes-main">
           <div class="cdes-stage" id="cdesStage">
             <div id="cardTilt"><div id="cardPreview"></div></div>
-            <p class="stage-hint">[[icon:mouse]] 移动鼠标可以转动卡牌</p>
+            <p class="stage-hint">[[icon:mouse]] 移动鼠标旋转</p>
           </div>
           <div class="cdes-form">
             <div class="cdes-sec"><span>基础设定</span></div>
@@ -164,7 +164,7 @@ export function createCardDesigner(deps) {
               </div></div>
             <div class="cdes-sec"><span>机制词条</span><em>点击写入规范句式 · 战斗中自动实装</em></div>
             <div class="cdes-row" id="mechChips">${mechChipsHTML()}</div>
-            <p class="dmg-hint" style="margin:-6px 0 22px">[[icon:lantern]] 再点一次叠加次数，到上限后再点移除；句式与战斗结算（battle.core 词条解析）一一对应，也可在描述里手写其他效果。</p>
+            <p class="dmg-hint" style="margin:-6px 0 22px">[[icon:lantern]] 点击叠加，满次后移除；可补写效果描述。</p>
             <div class="cdes-sec"><span>描述与经济</span></div>
             <div class="cdes-row"><label>效果描述 <span class="row-tip">可选</span><span class="pg-spacer"></span><span class="desc-count" id="descCount">${draft.desc.length}/100</span></label>
               <textarea id="cardDesc" rows="4" maxlength="100" placeholder="点上方机制词条自动生成，或手写描述。">${esc(draft.desc)}</textarea></div>
@@ -178,28 +178,28 @@ export function createCardDesigner(deps) {
               </div></div>
             <div class="cdes-row"><label>备注描述 <span class="row-tip">可选 · 点卡放大时展示</span></label>
               <textarea id="cardNote" rows="2" maxlength="200" placeholder="写给自己的备注：使用心得、combo 提示、来源纪念……（与效果描述分开，不影响战斗）">${esc(draft.note)}</textarea></div>
-            <p class="dmg-hint">[[icon:lantern]] 保存后可在商店刷出、在战斗中实装；数据保存在本浏览器。</p>
+            <p class="dmg-hint">[[icon:lantern]] 保存于本浏览器；可在商店和战斗中出现。</p>
           </div>
         </div>
       </div>`, 'page');
     updateDesignerPreview();
     bindDesignerTilt();
     UI._inputHandler = (e) => {
-      if (e.target.id === 'cardName') draft.name = e.target.value;
-      else if (e.target.id === 'cardDesc') {
-        draft.desc = e.target.value;
+      if (/** @type {HTMLElement} */ (e.target).id === 'cardName') draft.name = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value;
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardDesc') {
+        draft.desc = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value;
         const cnt = document.getElementById('descCount');
         if (cnt) cnt.textContent = `${draft.desc.length}/100`;
         // 手动改动描述后同步机制按钮态（不重写 textarea，保持光标）
         const wrap = document.getElementById('mechChips');
         if (wrap) wrap.innerHTML = mechChipsHTML();
       }
-      else if (e.target.id === 'cardDmg') draft.dmg = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
-      else if (e.target.id === 'cardHeal') draft.heal = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
-      else if (e.target.id === 'cardArmor') draft.armor = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
-      else if (e.target.id === 'cardValue') draft.value = Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
-      else if (e.target.id === 'cardSellable') { draft.sellable = e.target.checked; return; }
-      else if (e.target.id === 'cardNote') { draft.note = e.target.value; return; }
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardDmg') draft.dmg = Math.max(0, Math.min(99, Math.floor(+/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value || 0)));
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardHeal') draft.heal = Math.max(0, Math.min(99, Math.floor(+/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value || 0)));
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardArmor') draft.armor = Math.max(0, Math.min(99, Math.floor(+/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value || 0)));
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardValue') draft.value = Math.max(0, Math.min(99, Math.floor(+/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value || 0)));
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardSellable') { draft.sellable = /** @type {HTMLInputElement} */ (e.target).checked; return; }
+      else if (/** @type {HTMLElement} */ (e.target).id === 'cardNote') { draft.note = /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (e.target).value; return; }
       else return;
       updateDesignerPreview();
     };
@@ -229,24 +229,24 @@ export function createCardDesigner(deps) {
   }
 
   function syncDesignerForm() {
-    document.querySelectorAll('#ovBody .type-seg [data-t]').forEach(b => b.classList.toggle('on', b.dataset.t === draft.type));
-    document.querySelectorAll('#ovBody [data-act="pickDmgType"]').forEach(b => b.classList.toggle('on', b.dataset.dt === draft.dmgType));
-    document.querySelectorAll('#ovBody [data-act="pickCost"]').forEach(b => b.classList.toggle('on', +b.dataset.v === draft.cost));
-    document.querySelectorAll('#ovBody [data-act="pickDraw"]').forEach(b => b.classList.toggle('on', +b.dataset.v === draft.draw));
-    document.querySelectorAll('#ovBody [data-act="pickInfuse"]').forEach(b => b.classList.toggle('on', +b.dataset.v === draft.infuse));
-    document.querySelectorAll('#ovBody [data-act="pickRar"]').forEach(b => b.classList.toggle('on', b.dataset.r === draft.rarity));
+    document.querySelectorAll('#ovBody .type-seg [data-t]').forEach(b => b.classList.toggle('on', /** @type {HTMLElement} */ (b).dataset.t === draft.type));
+    document.querySelectorAll('#ovBody [data-act="pickDmgType"]').forEach(b => b.classList.toggle('on', /** @type {HTMLElement} */ (b).dataset.dt === draft.dmgType));
+    document.querySelectorAll('#ovBody [data-act="pickCost"]').forEach(b => b.classList.toggle('on', +/** @type {HTMLElement} */ (b).dataset.v === draft.cost));
+    document.querySelectorAll('#ovBody [data-act="pickDraw"]').forEach(b => b.classList.toggle('on', +/** @type {HTMLElement} */ (b).dataset.v === draft.draw));
+    document.querySelectorAll('#ovBody [data-act="pickInfuse"]').forEach(b => b.classList.toggle('on', +/** @type {HTMLElement} */ (b).dataset.v === draft.infuse));
+    document.querySelectorAll('#ovBody [data-act="pickRar"]').forEach(b => b.classList.toggle('on', /** @type {HTMLElement} */ (b).dataset.r === draft.rarity));
     const row = document.getElementById('rowDmg');
     if (row) row.hidden = !DMG_TYPES.includes(draft.type);
     const dmgInput = document.getElementById('cardDmg');
-    if (dmgInput) dmgInput.value = draft.dmg;
+    if (dmgInput) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (dmgInput).value = draft.dmg;
     const healInput = document.getElementById('cardHeal');
-    if (healInput) healInput.value = draft.heal;
+    if (healInput) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (healInput).value = draft.heal;
     const armorInput = document.getElementById('cardArmor');
-    if (armorInput) armorInput.value = draft.armor;
+    if (armorInput) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (armorInput).value = draft.armor;
     const valRow = document.getElementById('rowValue');
     if (valRow) valRow.hidden = false;
     const valInput = document.getElementById('cardValue');
-    if (valInput) valInput.value = draft.value;
+    if (valInput) /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (valInput).value = draft.value;
     updateDesignerPreview();
   }
 
@@ -341,7 +341,7 @@ export function createCardDesigner(deps) {
       if (!CARD_DESIGNER_WRITES_ENABLED) return;
       const ta = document.getElementById('ovImport');
       try {
-        const parsed = JSON.parse(ta.value);
+        const parsed = JSON.parse(/** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (ta).value);
         const cards = Array.isArray(parsed) ? parsed : parsed.cards;
         if (!Array.isArray(cards)) throw new Error('缺少 cards 数组');
         for (const c of cards) {

@@ -33,7 +33,7 @@ import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/rec
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-installExpeditionFeedback({
+/** @type {(options: Parameters<typeof installExpeditionFeedback>[0] & {cardHTML?:(card: import('../hub/game.store.types.js').CardSnapshot) => string}) => ReturnType<typeof installExpeditionFeedback>} */ (installExpeditionFeedback)({
   isCurrentCell: key => game.runActive && key === `${game.layerIdx},${game.trackPos}`,
   cardHTML: card => SDT.Cards.cardHTML(card),
 });
@@ -63,71 +63,98 @@ export function openFireRest(after = finishInstant) {
   const cellKey = `${game.layerIdx},${game.trackPos}`;
   game.nodeRewards ||= {};
   game.state = 'modal';
-  const leave = () => { setBagReturnHook(null); UI.hideOverlay(); after(false); };
-  const result = () => {
-    const record = game.nodeRewards[cellKey];
-    const restored = record.restoredIds.map(id => SDT.Cards.all().find(card => card.id === id)).filter(Boolean);
-    const bonus = record.bonusReceived && SDT.Cards.all().find(card => card.id === record.classCardId);
-    nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'休整完毕',
-      sub:`生命回复 ${record.hpGain} 点 · ${record.hpAfter}/${game.maxHp}。${restored.length ? `已复原 ${restored.length} 张卡牌。` : '本次没有复原卡牌。'}${bonus ? `余烬中找到「${esc(bonus.name)}」。` : ''}`,
-      body:`<div class="ui-design-system fire-result-layout">${restored.length || bonus ? `<div class="fire-result-cards">${[...restored, ...(bonus ? [bonus] : [])].map((card, i) => `<div><span class="fire-result-label">${i < restored.length ? '已复原' : '额外获得'}</span><button type="button" class="event-choice-card" data-act="fireResultCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card,'sm')}</button></div>`).join('')}</div>` : ''}<button type="button" class="ui-action ui-action-primary" data-act="fireDone">继续探索 <span aria-hidden="true">→</span></button></div>`,
+  /** @type {Extract<import('../hub/game.store.types.js').NodeReward, {type:'fire'}> | null} */
+  let record = game.nodeRewards[cellKey]?.type === 'fire' ? game.nodeRewards[cellKey] : null;
+  // Older fire receipts already granted both effects; they never reopen either action.
+  const used = key => !!record && (record.healUsed === undefined || record[key] === true);
+  const complete = () => used('healUsed') && used('restoreUsed');
+  let resolving = false;
+  const leave = () => {
+    if (complete()) { record.continued = true; consumeCurrentCell(); }
+    saveGame();
+    setBagReturnHook(null); UI.hideOverlay(); after(complete());
+  };
+  const render = () => {
+    const pool = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
+    const restorable = pool.reduce((sum, item) => sum + item.count, 0);
+    const fits = pool.some(item => game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap());
+    const restored = (record?.restoredIds || []).map(id => SDT.Cards.all().find(card => card.id === id)).filter(Boolean);
+    const bonus = record?.bonusReceived && SDT.Cards.all().find(card => card.id === record.classCardId);
+    const cards = [...restored, ...(bonus ? [bonus] : [])];
+    const receipt = cards.length ? `<div class="fire-result-layout"><div class="fire-result-cards">${cards.map((card, i) => `<div><span class="fire-result-label">${i < restored.length ? '已复原' : '额外获得'}</span><button type="button" class="event-choice-card" data-act="fireResultCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card,'sm')}</button></div>`).join('')}</div></div>` : '';
+    nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'营火休整', sub:'',
+      body:fireRestDecisionHTML({ heal:MAP.rules.fireHeal, chance:Math.round(MAP.rules.fireClassCardChance * 100),
+        restorable, fits, capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`,
+        healUsed:used('healUsed'), restoreUsed:used('restoreUsed'), hpFull:game.hp >= game.maxHp,
+        hpGain:record?.hpGain || 0, restoredCount:restored.length }) + receipt,
+      foot:`${complete() ? '' : '<button class="ov-btn" data-act="fireBag">整理背包</button>'}<button class="ov-btn" data-act="fireDone">${complete() ? '继续探索' : '返回地图'}</button>`,
     });
     const active = nodeActionBinding(game, UI, 'fireDone');
-    UI.act('fireDone', () => { if (!active()) return; record.continued = true; setBagReturnHook(null); UI.hideOverlay(); after(true); });
+    UI.act('fireHeal', () => { if (active()) perform('heal'); });
+    UI.act('fireRestore', () => { if (active()) perform('restore'); });
+    UI.act('fireBag', () => { if (active() && !resolving) bagSlots.showBackpack(); });
+    for (const act of ['fireDone','fireLeave','eventExit']) UI.act(act, () => { if (active() && !resolving) leave(); });
     UI.act('fireResultCard', data => {
       if (!active()) return;
-      const card = [...restored, ...(bonus ? [bonus] : [])][Number(data.i)];
+      const card = cards[Number(data.i)];
       if (card) UI.showCardZoom(card, { hideNote:true, presentation:'expedition' });
     });
   };
-  setBagReturnHook(() => openFireRest(after));
-  if (game.nodeRewards[cellKey]?.type === 'fire') { result(); return; }
-  const restorable = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
-  const restorableN = restorable.reduce((sum, item) => sum + item.count, 0);
-  const fits = restorable.some(item => game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap());
-  nodeShell({ tone:'fire', asset:'scene-fire-bg', icon:'[[icon:fire]]', title:'营火休整',
-    sub:'风雪被隔在火光之外。你可以在这里整顿状态，再继续前行。',
-    body:fireRestDecisionHTML({ heal:MAP.rules.fireHeal, chance:Math.round(MAP.rules.fireClassCardChance * 100),
-      restorable:restorableN, fits, capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格` }),
-    foot:'<button class="ov-btn" data-act="fireBag">先整理背包</button><button class="ov-btn" data-act="fireLeave">离开火堆</button>',
-  });
-  const active = nodeActionBinding(game, UI, 'fireRestGo');
-  let resolving = false;
-  UI.act('fireBag', () => { if (active() && !resolving) bagSlots.showBackpack(); });
-  UI.act('fireLeave', () => { if (active() && !resolving) leave(); });
-  UI.act('fireRestGo', () => {
-    if (!active() || resolving || game.nodeRewards[cellKey]?.type === 'fire') return;
+  const perform = kind => {
+    const usage = kind === 'heal' ? 'healUsed' : 'restoreUsed';
+    if (resolving || used(usage) || (kind === 'heal' && game.hp >= game.maxHp)) return;
+    if (kind === 'restore' && !game.usedPocket.some(item => FIRE_RESTORABLE(item.card)
+      && (game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap()))) return;
     resolving = true;
-    const hpBefore = game.hp;
-    game.heal(MAP.rules.fireHeal);
-    const hpGain = Math.max(0, game.hp - hpBefore);
-    let classCardId = null, bonusReceived = false;
-    if (Random.random('card') < MAP.rules.fireClassCardChance) {
-      const card = SDT.Cards.randomClassCard(game.myClass);
-      if (card) { classCardId = card.id; bonusReceived = !!grantEventCard(card, { silent:true }); }
+    record ||= { version:1, type:'fire', hpBefore:game.hp, hpAfter:game.hp, hpGain:0,
+      restoredIds:[], classCardId:null, bonusReceived:false, healUsed:false, restoreUsed:false, bonusRolled:false };
+    game.nodeRewards[cellKey] = record;
+    if (kind === 'heal') {
+      record.hpBefore = game.hp;
+      game.heal(MAP.rules.fireHeal);
+      record.hpAfter = game.hp;
+      record.hpGain = Math.max(0, game.hp - record.hpBefore);
+      record.healUsed = true;
     }
-    const restoredIds = [];
-    for (let i = 0; i < 2; i++) {
-      const pool = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card));
-      if (!pool.length) break;
-      const available = pool.filter(item => game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap());
-      if (!available.length) { SDT.Sound.sfx('deny'); UI.log('[[icon:bag]] 背包已满或可用格不足，可复原卡牌保留在消耗区', 'warn'); break; }
-      const item = available[Math.floor(Random.random('pocket') * available.length)];
-      item.count--;
-      if (item.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(item), 1);
-      game.ownedCards.push({ uid:newUid(), card:{ ...item.card } });
-      restoredIds.push(item.card.id);
+    let bonus = null;
+    if (!record.bonusRolled) {
+      record.bonusRolled = true;
+      if (Random.random('card') < MAP.rules.fireClassCardChance) {
+        const card = SDT.Cards.randomClassCard(game.myClass);
+        if (card) {
+          record.classCardId = card.id;
+          record.bonusReceived = !!grantEventCard(card, { silent:true });
+          if (record.bonusReceived) bonus = card;
+        }
+      }
     }
-    game.nodeRewards[cellKey] = { version:1, type:'fire', hpBefore, hpAfter:game.hp, hpGain, restoredIds, classCardId, bonusReceived };
-    consumeCurrentCell();
+    if (kind === 'restore') {
+      const before = record.restoredIds.length;
+      for (let i = 0; i < 2; i++) {
+        const available = game.usedPocket.filter(item => FIRE_RESTORABLE(item.card)
+          && (game.canReceiveCard ? game.canReceiveCard(item.card) : usedSlots() < bagCap()));
+        if (!available.length) break;
+        const item = available[Math.floor(Random.random('pocket') * available.length)];
+        item.count--;
+        if (item.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(item), 1);
+        game.ownedCards.push({ uid:newUid(), card:{ ...item.card } });
+        record.restoredIds.push(item.card.id);
+      }
+      record.restoreUsed = record.restoredIds.length > before;
+    }
+    if (complete()) consumeCurrentCell();
     saveGame();
-    UI.log(`[[icon:fire]] 营火休整：回复 ${hpGain} 点生命，复原 ${restoredIds.length} 张卡牌`, 'ok');
+    UI.log(kind === 'heal' ? `[[icon:fire]] 回复 ${record.hpGain} 点生命`
+      : `[[icon:fire]] 复原 ${record.restoredIds.length} 张卡牌`, 'ok');
     UI.refresh(game);
-    result();
-    const bonus = bonusReceived && SDT.Cards.all().find(card => card.id === classCardId);
-    if (bonus) showRewardCardFeedback(UI.el?.ovBody, [bonus], { mode:'page', token:game.nodeRewards[cellKey], sceneSelector:'.fire-result-layout' });
-  });
+    resolving = false;
+    render();
+    if (bonus) showRewardCardFeedback(UI.el?.ovBody, [bonus], { mode:'page', token:record, sceneSelector:'.fire-rest-plan' });
+  };
+  setBagReturnHook(() => openFireRest(after));
+  render();
 }
+
 
 export function openEntrySupply() {
   const supply = entrySupplyAt(game);
@@ -145,7 +172,7 @@ export function openEntrySupply() {
     UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), rule:'', count:supply.cardIds.length - supply.taken.length,
       cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>补给已领齐</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue"><span aria-hidden="true">✓</span> 继续探索</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
       actions:`<div class="entry-supply-status" role="status" aria-live="polite"><span>已领取</span><b>${supply.taken.length} / ${supply.cardIds.length}</b></div>`,
-      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${complete ? '' : `<span class="reward-notice" role="status">${claimNotice || '领完补给后可继续探索；放不下时请先整理背包'}</span>`}`,
+      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${complete || !claimNotice ? '' : `<span class="reward-notice" role="status">${claimNotice}</span>`}`,
     }), 'page');
     const active = nodeActionBinding(game, UI, complete ? 'clsEntryContinue' : 'entrySupplyBag');
     UI.act('clsEntryContinue', () => { if (isCurrent() && active() && supply.taken.length === supply.cardIds.length) finish(); });
@@ -158,7 +185,7 @@ export function openEntrySupply() {
     UI.act('entrySupplyTake', data => { if (isCurrent() && active()) take(Number(data.i)); });
     UI.act('entrySupplyBag', () => {
       if (!isCurrent() || !active()) return;
-      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
       bagSlots.showBackpack();
     });
   };
@@ -167,14 +194,14 @@ export function openEntrySupply() {
     const received = claimEntrySupply(game, { findCard:id => SDT.Cards.all().find(card => card.id === id),
       canReceive:card => game.canReceiveCard ? game.canReceiveCard(card) : usedSlots() < bagCap(), newUid, index });
     if (!received.length) {
-      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
       claimNotice = '当前补给未领取，仍保留在入口。请整理背包后再试。';
       UI.log('[[icon:bag]] 当前补给未领取，请整理背包后再试', 'warn');
       showResult();
       return;
     }
     claimNotice = '';
-    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
     if (supply.taken.length === supply.cardIds.length) consumeCurrentCell();
     saveFailed = saveGame() === false;
     UI.refresh(game);
@@ -481,7 +508,7 @@ function openBagSacrifice(n, done, onCancel, filterType) {
         button.setAttribute('aria-pressed', String(selected));
       }
       UI.el.ovBody.querySelector('[data-sac-count]').textContent = String(sel.size);
-      UI.el.ovBody.querySelector('[data-act="sacConfirm"]').disabled = sel.size !== n;
+      /** @type {HTMLButtonElement} */ (UI.el.ovBody.querySelector('[data-act="sacConfirm"]')).disabled = sel.size !== n;
     });
     UI.act('sacCancel', () => {
       if (finished || !active()) return;
@@ -626,7 +653,7 @@ export async function doExtract() {
   extractionStarting = true;
   const initialIdentity = startedFromSlot ? RunStorage.readIdentity(startedFromSlot) : null;
   const pendingToken = continuing
-    ? game.extractionPending : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
+    ? /** @type {{slotId:number,runId:string}} */ (game.extractionPending) : { slotId: startedFromSlot, runId: initialIdentity?.ok ? initialIdentity.value.runId : null };
   game.extractionPending = pendingToken;
   game.state = 'modal';
   try {

@@ -2,8 +2,8 @@ import '../../css/settings-audio.css';
 
 // Live feedback belongs to this settings page only; no polling or automatic download retries.
 export function bindSettingsAudio(root, overlay, sound) {
-  const status = root.querySelector('#setMusicStatus');
-  const retry = root.querySelector('#setMusicRetry');
+  const status = /** @type {HTMLElement} */ (root.querySelector('#setMusicStatus'));
+  const retry = /** @type {HTMLButtonElement} */ (root.querySelector('#setMusicRetry'));
   const events = new AbortController();
   const current = () => root.isConnected && !overlay.hidden && overlay.contains(root);
   const stop = () => { events.abort(); observer.disconnect(); };

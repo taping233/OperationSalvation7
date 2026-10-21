@@ -33,20 +33,21 @@ function renderPreset(preset, model) {
     <div class="prep-add"><select data-role="card-add">${optionList(model.cardOptions, null, '选择仓库卡牌')}</select><input data-role="count-add" type="number" min="1" max="99" value="1" aria-label="数量"><button data-action="preset-pick-add">加入愿望清单</button></div>
     ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · 占 ${preview.costs.slotsUsed}${Number.isFinite(preview.costs.bagCapacity) ? `/${preview.costs.bagCapacity}` : ''} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''} · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span>${qualificationHints(preview.qualification)}${preview.errors?.includes('BAG_CAPACITY_EXCEEDED') ? '<small class="prep-qual-hint">背包容量不足，请减少携带卡牌或扩建背包。</small>' : ''}</div>` : ''}
     <div class="prep-actions"><button data-action="preset-preview">重新预览</button><button data-action="preset-apply"${preview?.canStart ? '' : ' disabled'}>应用到整备</button></div>
-    <p class="prep-empty">应用预设会带入已选人物、宠物和卡牌；先确认人物，再在整备页确认宠物并出发。</p>
+    <p class="prep-empty">应用后，在整备页确认人物、伙伴与卡牌。</p>
   </section>`;
 }
 
 function render(model) {
   return `<section class="preparation-module" aria-label="收藏目标与出征预设">
-    <header><div><small>EXPEDITION INTENT</small><h2>下一局目标与准备</h2></div><span class="prep-count">追踪 ${(model.goals || []).length}/3</span></header>
+    <header><div><h2>目标与预设</h2></div><span class="prep-count">追踪 ${(model.goals || []).length}/3</span></header>
     ${model.error ? `<p class="prep-error" role="alert">${esc(model.error)}</p>` : ''}
-    <div class="prep-goals">${(model.goals || []).map(goal => `<article><div><b>${esc(goal.name || goal.id)}</b><p>${esc(goal.sourceLabel || '来源未确认')}</p></div><button data-action="goal-remove" data-target-id="${esc(goal.id)}">取消追踪</button></article>`).join('') || '<p class="prep-empty">尚未追踪目标。最多选择三项。</p>'}</div>
+    <div class="prep-goals">${(model.goals || []).map(goal => `<article><div><b>${esc(goal.name || goal.id)}</b><p>${esc(goal.sourceLabel || '来源未确认')}</p></div><button data-action="goal-remove" data-target-id="${esc(goal.id)}">取消追踪</button></article>`).join('') || '<p class="prep-empty">未追踪目标</p>'}</div>
     <div class="prep-goal-add"><select data-role="goal-add">${optionList(model.targetOptions, null, '选择收藏目标')}</select><button data-action="goal-add"${(model.goals || []).length >= 3 ? ' disabled' : ''}>加入追踪</button></div>
     <div class="prep-presets">${(model.presets || []).map(preset => renderPreset(preset, model)).join('')}</div>
   </section>`;
 }
 
+/** @param {import('./preparation.types.js').ViewOptions} [options] */
 export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatalog = [], characters = [], pets = [], catalogVersion = 'unknown', mode = 'standard', bagCapacity = Infinity, starterCount = 5, starterCard, busy = false, error = '' } = {}) {
   const prep = preparation || { tracked: [], presets: [] };
   const byId = new Map(cardCatalog.map(card => [card.id, card]));
@@ -62,6 +63,7 @@ export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatal
   return Object.freeze({ goals, targetOptions: cardCatalog.map(card => ({ id: card.id, name: card.name || card.id })), presets, characterOptions, petOptions, cardOptions, busy, error });
 }
 
+/** @param {HTMLElement} root @param {{model?: ReturnType<typeof buildPreparationViewModel>, onIntent?: (intent: import('./preparation.types.js').Intent) => void}} [options] */
 export function mountPreparationView(root, { model, onIntent = () => {} } = {}) {
   if (!root || typeof root.addEventListener !== 'function') throw new TypeError('mountPreparationView 需要 DOM root');
   let current = model || { goals: [], presets: [] };
@@ -70,14 +72,14 @@ export function mountPreparationView(root, { model, onIntent = () => {} } = {}) 
     const button = event.target.closest?.('[data-action]'); if (!button || !root.contains(button) || button.disabled) return;
     const presetRoot = button.closest('[data-preset]'); const presetId = presetRoot?.dataset.preset;
     const action = button.dataset.action;
-    if (action === 'goal-add') emit(action, { targetId: root.querySelector('[data-role="goal-add"]')?.value || '' });
+    if (action === 'goal-add') emit(action, { targetId: /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement} */ (root.querySelector('[data-role="goal-add"]'))?.value || '' });
     else if (action === 'goal-remove') emit(action, { targetId: button.dataset.targetId });
     else if (action === 'preset-pick-add') emit(action, { presetId, cardId: presetRoot.querySelector('[data-role="card-add"]')?.value || '', count: Number(presetRoot.querySelector('[data-role="count-add"]')?.value || 1) });
     else if (action === 'preset-pick-remove') emit(action, { presetId, cardId: button.dataset.cardId });
     else emit(action, { presetId });
   };
   const change = event => { const field = event.target.dataset?.field; const presetId = event.target.closest?.('[data-preset]')?.dataset.preset; if (field && presetId) emit('preset-field', { presetId, field, value: event.target.value }); };
-  const paint = () => { root.innerHTML = render(current); root.setAttribute('aria-busy', current.busy ? 'true' : 'false'); };
+  const paint = () => { root.innerHTML = render(current); root.setAttribute('aria-busy', /** @type {typeof current & {busy?:boolean}} */ (current).busy ? 'true' : 'false'); };
   root.addEventListener('click', click); root.addEventListener('change', change); paint();
   return { update(nextModel) { current = nextModel || { goals: [], presets: [] }; paint(); }, dispose() { root.removeEventListener('click', click); root.removeEventListener('change', change); root.replaceChildren(); } };
 }

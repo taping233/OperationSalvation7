@@ -100,7 +100,7 @@ export const cinematicsMethods = {
       }
       const rarity = rewardRarity(next.card);
       const legendary = rarity === '传说';
-      const combat = !!SDT.game?.battleActive && !!document.querySelector('#overlay .battle-stage, #overlay .battle-decision');
+      const combat = !!SDT.game?.battleActive && !!/** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('#overlay .battle-stage, #overlay .battle-decision'));
       const el = document.createElement('div');
       el.id = 'cardGet';
       el.dataset.combat = combat ? 'true' : 'false';

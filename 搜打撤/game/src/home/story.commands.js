@@ -9,8 +9,8 @@ function createStoryCommands(ports = {}) {
     inspect(slotId, identity) {
       const current = read(slotId);
       if (!current.ok) return current;
-      const inspected = inspectLastLamp(current.value, identity);
-      return inspected.ok ? { ok: true, value: inspected.value, revision: current.revision } : inspected;
+      const inspected = inspectLastLamp((/** @type {Extract<ReturnType<typeof read>,{ok:true}>} */ (current)).value, identity);
+      return inspected.ok ? { ok: true, value: (/** @type {Extract<ReturnType<typeof inspectLastLamp>,{ok:true}>} */ (inspected)).value, revision: current.revision } : inspected;
     },
     async record(context, input) {
       const identity = { command: 'story.recordLastLampChoice', payload: {
@@ -21,9 +21,9 @@ function createStoryCommands(ports = {}) {
       if (!prior.ok || prior.value) return prior;
       const current = read(context.slotId);
       if (!current.ok) return current;
-      const prepared = prepareLastLampChoice(current.value, input);
+      const prepared = prepareLastLampChoice((/** @type {Extract<ReturnType<typeof read>,{ok:true}>} */ (current)).value, input);
       if (!prepared.ok) return prepared;
-      return commit(context, { ...prepared.value, beforeRevision: current.revision });
+      return commit(context, { ...(/** @type {Extract<ReturnType<typeof prepareLastLampChoice>,{ok:true}>} */ (prepared)).value, beforeRevision: current.revision });
     },
   });
 }

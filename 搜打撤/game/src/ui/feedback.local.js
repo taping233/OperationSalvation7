@@ -62,7 +62,7 @@ function storageOrFailure(storage) {
 }
 /** @param {(Storage|null|undefined)} [storage] @returns {(FeedbackReadResult|FeedbackFailure)} */
 function readLocalFeedback(storage) {
-  const port = storageOrFailure(storage); if (!port.ok) return port;
+  const port = storageOrFailure(storage); if (port.ok === false) return port;
   let raw;
   try { raw = port.value.getItem(FEEDBACK_KEY); } catch { return fail('READ_FAILED', '无法读取本地留言'); }
   if (raw == null) return { ok: true, value: [], raw: null };
@@ -75,8 +75,8 @@ function readLocalFeedback(storage) {
 /** @param {FeedbackEntry} entry @param {(Storage|null|undefined)} [storage] @returns {(FeedbackWriteResult|FeedbackFailure)} */
 function appendLocalFeedback(entry, storage) {
   const read = readLocalFeedback(storage);
-  if (!read.ok) return read;
-  const port = storageOrFailure(storage); if (!port.ok) return port;
+  if (read.ok === false) return read;
+  const port = storageOrFailure(storage); if (port.ok === false) return port;
   try { port.value.setItem(FEEDBACK_KEY, JSON.stringify([...read.value, entry])); return { ok: true, value: entry }; }
   catch { return fail('WRITE_FAILED', '本地写入失败，请保留内容后重试'); }
 }
@@ -84,9 +84,9 @@ function appendLocalFeedback(entry, storage) {
 /** @param {string} ts @param {(Storage|null|undefined)} [storage] @returns {(FeedbackReadResult|FeedbackFailure)} */
 function completeLocalFeedback(ts, storage) {
   const read = readLocalFeedback(storage);
-  if (!read.ok) return read;
+  if (read.ok === false) return read;
   if (!read.value.some(entry => entry?.ts === ts)) return fail('NOT_FOUND', '留言已改变，请重新打开信箱');
-  const port = storageOrFailure(storage); if (!port.ok) return port;
+  const port = storageOrFailure(storage); if (port.ok === false) return port;
   const value = read.value.map(entry => entry?.ts === ts ? { ...entry, done: true } : entry);
   const raw = JSON.stringify(value);
   try { port.value.setItem(FEEDBACK_KEY, raw); return { ok: true, value, raw }; }
@@ -100,7 +100,7 @@ function completeLocalFeedback(ts, storage) {
 /** @param {string} ts @param {(Storage|null|undefined)} [storage] @returns {boolean} */
 function removeLocalFeedback(ts, storage) {
   const port = storageOrFailure(storage);
-  if (!port.ok) return false;
+  if (port.ok === false) return false;
   try {
     const list = JSON.parse(port.value.getItem(FEEDBACK_KEY) || '[]').filter(/** @param {*} e */ (e) => e?.ts !== ts);
     port.value.setItem(FEEDBACK_KEY, JSON.stringify(list));

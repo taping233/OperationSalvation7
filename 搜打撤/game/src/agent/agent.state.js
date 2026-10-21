@@ -42,11 +42,46 @@ const briefDesc = (desc) => {
 // 局内授予卡（战斗中发放）不在 game.ownedCards 里；经 battle.core 导出的 findCard 解析。
 // 动态导入保持战斗域按需加载边界：战斗开始后预热一次，首个观察周期可能仍缺详情。
 let battleFindCard = null;
+let battleInfusionTools = null;
 function warmBattleLookups() {
-  if (battleFindCard) return;
-  import('../battle/core/battle.core.js')
-    .then(m => { battleFindCard = m.findCard; })
+  if (battleFindCard && battleInfusionTools) return;
+  Promise.all([import('../battle/core/battle.core.js'), import('../battle/effects/battle.infusion.js'), import('../cards/card-rules.capability.js')])
+    .then(([core, infusion, capability]) => {
+      battleFindCard = core.findCard;
+      battleInfusionTools = {
+        findCard: core.findEffectiveCard, fuelReason: core.infusionFuelReason,
+        need: core.infuseOf, cost: core.effCostOf, unplayable: core.unplayableReason,
+        requires: infusion.requiresInfusion, capability: capability.inspectCardRuleCapability,
+      };
+    })
     .catch(() => { /* 战斗未就绪：下一观察周期再试 */ });
+}
+
+// Project physical candidates through the same live queries used by the command.
+// Cold lookups or an invalid source keep Cancel available, never an illegal cast.
+function infusionView(snap) {
+  if (!snap?.infusing) return null;
+  const selection = snap.infusing;
+  const { uid } = selection;
+  const picked = [...(selection.picked || [])];
+  const tools = battleInfusionTools;
+  const card = tools?.findCard(uid)?.card || selection.card;
+  const need = tools && card ? tools.need(card) : selection.need;
+  const active = !!tools && !!card && game.battleActive && !snap.busy
+    && ['player', 'targeting'].includes(snap.phase) && snap.hand.includes(uid)
+    && (selection.battleToken == null || selection.battleToken === snap.battleToken)
+    && !snap.discovering && !snap.choosing && !snap.handSelecting && !snap.viewingGrave && !snap.viewingDeck
+    && !tools.unplayable(card) && tools.capability(card).ok && tools.cost(card, uid) <= snap.energy;
+  const fuel = picked.slice(0, need);
+  const invalidPickedUids = active ? fuel.filter(fuelUid => fuelUid === uid || tools.fuelReason(fuelUid)) : [];
+  const candidateUids = active && picked.length < need ? snap.hand.filter(handUid =>
+    handUid !== uid && !picked.includes(handUid) && !tools.fuelReason(handUid)) : [];
+  return {
+    uid, name:card?.name || '', picked, need, selectionId:selection.selectionId,
+    candidateUids, invalidPickedUids,
+    canConfirm:active && fuel.length === need && new Set(fuel).size === fuel.length && !invalidPickedUids.length,
+    canPlayDirect:active && (need === 0 || !tools.requires(card)),
+  };
 }
 
 function cardBrief(uid) {
@@ -64,7 +99,7 @@ function cardBrief(uid) {
   };
 }
 
-function battleView(snap) {
+function battleView(snap, infusion) {
   if (!snap) return null;
   return {
     turn: snap.turn,
@@ -96,7 +131,7 @@ function battleView(snap) {
       candidateUids: [...(snap.handSelecting.candidateUids || [])],
       canCancel: snap.handSelecting.canCancel === true,
     } : null,
-    infusing: snap.infusing ? { uid: snap.infusing.uid, name: snap.infusing.card?.name || '', picked: [...(snap.infusing.picked || [])] } : null,
+    infusing: infusion,
     deckSelection: snap.deckSelection ? {
       // need 投影即放行口径 min(need, cards.length)——与 battleActions/引擎一致，
       // 策略第一分支 selected>=need 判定不再拿原始 15 卡死
@@ -123,7 +158,7 @@ function battleView(snap) {
 }
 
 // ---------- 战斗动作面：由快照待选态推导此刻可执行的命令 ----------
-function battleActions(snap) {
+function battleActions(snap, infusion) {
   const acts = [];
   if (!snap || snap.busy) return acts;
   const push = (name, args) => acts.push(withId({ type: 'battle', name, args }));
@@ -140,10 +175,12 @@ function battleActions(snap) {
     return acts;
   }
   if (snap.infusing) {
-    // 「不注能直接打出」是注能态的正出口（playDirect = 退出注能并结算）；
-    // 只留 confirm/cancel 会让驱动在注能条里打转。
-    push('playDirect', [snap.infusing.uid]);
-    push('confirmInfusion', []);
+    // Each offered selection changes the material set; full/invalid sets cannot
+    // advertise a no-op confirm or the forbidden direct exit of a required card.
+    const removable = (infusion?.invalidPickedUids || []).filter(uid => uid !== infusion.uid && battleInfusionTools?.findCard(uid));
+    for (const uid of [...removable, ...(infusion?.candidateUids || [])]) push('selectInfusion', [uid]);
+    if (infusion?.canConfirm) push('confirmInfusion', []);
+    if (infusion?.canPlayDirect) push('playDirect', [snap.infusing.uid]);
     push('cancelInfusion', []);
     return acts;
   }
@@ -187,7 +224,8 @@ function battleActions(snap) {
   for (const uid of snap.hand) {
     push('playCard', [uid]);
     snap.foes.forEach((f, i) => { if (!f.dead) push('playCard', [uid, i]); });
-    push('playDirect', [uid]);
+    const availability = window.SDT?.Battle?.commands?.getCardPlayAvailability?.(uid, undefined, true);
+    if (!availability || availability.status !== 'rejected') push('playDirect', [uid]);
   }
   push('endTurn', []);
   push('flee', []);
@@ -309,9 +347,10 @@ function observe() {
   const phase = phaseOf();
   if (game.battleActive) warmBattleLookups();
   const snap = game.battleActive && window.SDT?.Battle?.getSnapshot ? window.SDT.Battle.getSnapshot() : null;
+  const infusion = infusionView(snap);
   const uiActions = collectUiActions();
   const moveActions = phase === 'map' ? mapActions() : [];
-  const fightActions = phase === 'battle' ? battleActions(snap) : [];
+  const fightActions = phase === 'battle' ? battleActions(snap, infusion) : [];
   const bagDrops = bagActions();
   const sysActions = phase === 'title' ? [withId({ type: 'sys', name: 'startGame', label: '开始探索' })] : [];
   // 背包满开包（09-26 断链修复①）：野外唯一腾格入口。bagBtnFloat 无 data-act 且在
@@ -341,7 +380,7 @@ function observe() {
     phase,
     turn: game.turn ?? 0,
     run: runBrief(),
-    battle: battleView(snap),
+    battle: battleView(snap, infusion),
     ui: {
       open: overlayVisible(),
       title: (document.getElementById('ovTitle')?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60),
@@ -372,7 +411,8 @@ function settleSignature() {
   const snap = game.battleActive && window.SDT?.Battle?.getSnapshot ? window.SDT.Battle.getSnapshot() : null;
   const out = JSON.stringify([
     game.state, game.battleActive, !!game.terminalPending, !!game.pendingExtraction,
-    game.turn, snap ? [snap.busy, snap.actionQueueLength, snap.phase, snap.hand.length, snap.foes.map(f => f.hp)] : null,
+    game.turn, snap ? [snap.busy, snap.actionQueueLength, snap.phase, snap.hand.length, snap.foes.map(f => f.hp),
+      snap.infusing ? [snap.infusing.uid, snap.infusing.selectionId, snap.infusing.picked] : null] : null,
     overlayVisible(),
     collectActionKeys(),   // 轻量键扫描（无 label/textContent）——settle 轮询性能关键
   ]);

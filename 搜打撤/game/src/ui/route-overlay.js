@@ -94,6 +94,7 @@ function candidates(layer) {
  * @param {number} p.generatorVersion  生成器版本（旧 3/5 或新局 6，各走对应版本的最终质量门）
  * @param {number} p.layoutVersion  布局版本（须为 9，否则拒绝输入）
  * @param {MapLayer[]} p.layerData  四层地图数据（createLayeredMap 产物）
+ * @param {string | number} [p.seed] 兼容会话的种子元数据，覆盖层不消费
  * @param {string} [p.routeVersion]  路线协议版本，缺省取 ROUTE_VERSION
  * @returns {OverlayResult}
  */

@@ -8,7 +8,7 @@ const MEMENTOS = Object.freeze({
   shaded_marker: 'last_lamp_shaded_marker',
 });
 
-const fail = (code, message, details) => ({ ok: false, code, message, retryable: false, ...(details ? { details } : {}) });
+const fail = (code, message, details) => ({ ok: /** @type {const} */ (false), code, message, retryable: false, ...(details ? { details } : {}) });
 function makeLastLampEventInstanceId(runId, layerIdx, trackPos) {
   if (typeof runId !== 'string' || !runId || !Number.isInteger(layerIdx) || layerIdx < 0 || !Number.isInteger(trackPos) || trackPos < 0) return null;
   return `r6:last-lamp:v1:${runId}:${layerIdx},${trackPos}`;
@@ -36,7 +36,7 @@ function validateLastLampState(story) {
   }
   const hasState = Object.prototype.hasOwnProperty.call(story.outcomes, STORY_ID);
   const state = story.outcomes[STORY_ID];
-  if (!hasState) return { ok: true, value: { version: 1, stage: 0, ending: null, segments: {}, runs: {} }, exists: false };
+  if (!hasState) return { ok: /** @type {const} */ (true), value: { version: 1, stage: 0, ending: null, segments: {}, runs: {} }, exists: false };
   if (!state || typeof state !== 'object' || Array.isArray(state) || state.version !== 1 ||
       !Number.isInteger(state.stage) || state.stage < 0 || state.stage > 3 ||
       !state.segments || typeof state.segments !== 'object' || Array.isArray(state.segments) ||
@@ -59,38 +59,39 @@ function validateLastLampState(story) {
       (state.stage === 3 && state.segments[3].choiceId !== state.ending)) {
     return fail('INVALID_STORY_STATE', '故事结局与最终选择不一致');
   }
-  return { ok: true, value: clone(state), exists: true };
+  return { ok: /** @type {const} */ (true), value: clone(state), exists: true };
 }
 
+/** @param {{story?:unknown}} baseSnapshot @param {{runId?:string,eventInstanceId?:string}} [identity] */
 function inspectLastLamp(baseSnapshot, { runId, eventInstanceId } = {}) {
   if (!validLastLampEventInstanceId(eventInstanceId, runId)) {
     return fail('INVALID_ARGUMENT', '缺少稳定探索身份或事件实例');
   }
   const checked = validateLastLampState(baseSnapshot?.story);
   if (!checked.ok) return checked;
-  const state = checked.value;
+  const state = (/** @type {Extract<ReturnType<typeof validateLastLampState>,{ok:true}>} */ (checked)).value;
   const runRecord = state.runs[runId] || null;
   if (runRecord) {
     const segment = state.segments[runRecord.segmentId];
-    return { ok: true, value: {
+    return { ok: /** @type {const} */ (true), value: {
       kind: segment.eventInstanceId === eventInstanceId ? 'recover' : 'already-read-this-run',
       state, record: clone(segment), segmentId: runRecord.segmentId,
     } };
   }
-  if (state.stage >= 3) return { ok: true, value: { kind: 'complete', state, segmentId: 3 } };
-  return { ok: true, value: { kind: 'available', state, segmentId: state.stage + 1 } };
+  if (state.stage >= 3) return { ok: /** @type {const} */ (true), value: { kind: 'complete', state, segmentId: 3 } };
+  return { ok: /** @type {const} */ (true), value: { kind: 'available', state, segmentId: state.stage + 1 } };
 }
 
 function prepareLastLampChoice(baseSnapshot, input) {
   const { runId, eventInstanceId, segmentId, choiceId } = input || {};
   const inspected = inspectLastLamp(baseSnapshot, { runId, eventInstanceId });
   if (!inspected.ok) return inspected;
-  if (inspected.value.kind !== 'available') return fail('STORY_NOT_AVAILABLE', '本次探索不能再次推进这条故事');
-  if (inspected.value.segmentId !== segmentId || !CHOICES[segmentId]?.includes(choiceId)) {
+  if ((/** @type {Extract<ReturnType<typeof inspectLastLamp>,{ok:true}>} */ (inspected)).value.kind !== 'available') return fail('STORY_NOT_AVAILABLE', '本次探索不能再次推进这条故事');
+  if ((/** @type {Extract<ReturnType<typeof inspectLastLamp>,{ok:true}>} */ (inspected)).value.segmentId !== segmentId || !CHOICES[segmentId]?.includes(choiceId)) {
     return fail('INVALID_CHOICE', '故事段落或选项与当前进度不符');
   }
   const afterState = clone(baseSnapshot);
-  const state = inspected.value.state;
+  const state = (/** @type {Extract<ReturnType<typeof inspectLastLamp>,{ok:true}>} */ (inspected)).value.state;
   const mementoId = segmentId === 3 ? MEMENTOS[choiceId] : null;
   const record = { segmentId, runId, eventInstanceId, choiceId, mementoId };
   state.stage = segmentId;
@@ -101,7 +102,7 @@ function prepareLastLampChoice(baseSnapshot, input) {
     outcomes: { ...afterState.story.outcomes, [STORY_ID]: state } };
   const output = { storyId: STORY_ID, segmentId, eventInstanceId, runId, choiceId,
     nextStage: Math.min(3, segmentId + 1), ending: state.ending, mementoId };
-  return { ok: true, value: {
+  return { ok: /** @type {const} */ (true), value: {
     command: 'story.recordLastLampChoice', payload: { storyId: STORY_ID, segmentId, eventInstanceId, runId, choiceId },
     afterState, events: [{ type: 'story.lastLampRecorded', payload: output }], output,
   } };

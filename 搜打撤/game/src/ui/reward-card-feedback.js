@@ -3,6 +3,7 @@ import { showSettledCardFeedback } from './card-result-feedback.js';
 import { REWARD_DESTINATION } from './reward-state.js';
 
 // Caller supplies only cards already granted successfully. This never grants or retries.
+/** @param {HTMLElement} stage @param {{id?: string, name?: string}[]} cards @param {{mode?: string, token?: unknown, sceneSelector?: string}} [options] */
 export function showRewardCardFeedback(stage, cards, { mode = 'chest', token, sceneSelector = '.reward-replica,.cqo-overview' } = {}) {
   if (!cards?.length) return;
   const groups = new Map();

@@ -35,7 +35,7 @@ function waitForFeedback(signal) {
   const pending = feedbackTail;
   if (!signal) return pending;
   if (signal.aborted) return Promise.reject(signal.reason || new Error('Battle feedback cancelled'));
-  return new Promise((resolve, reject) => {
+  return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     function cleanup() { signal.removeEventListener('abort', cancel); }
     function done() { cleanup(); resolve(); }
     function cancel() { cleanup(); reject(signal.reason || new Error('Battle feedback cancelled')); }

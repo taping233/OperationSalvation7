@@ -35,7 +35,7 @@ async function waitTriggeredActions(resumePhase) {
   const ready = () => !readState().infusing && !readState().handSelecting && !readState().choosing && !readState().discovering && !readState().interaction &&
     !handSelectQueue.length && !choiceQueue.length && !readState().discoverQueue.length;
   if (ready()) return;
-  await new Promise(resolve => {
+  await new Promise((/** @type {(value?: void) => void} */ resolve) => {
     const accepted = executionSession.deferTurnEnd(() => {
       if (readState().G?.battleActive && readState().battleState.token === token) {
         set$battleState(transitionBattle(readState().battleState, resumePhase));

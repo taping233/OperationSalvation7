@@ -1,7 +1,8 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 // 每个挂载的舞台等待真正的解码/首帧结果；简化显示选择按场次保留。
 export function waitForBattleImages(root) {
   const cleanups = [];
-  const promises = [...root.querySelectorAll('.sts-figure img[src], .sts-hand .hsc-art img[src], .sts-hand .hsc-frame[src]')].map(image => new Promise(resolve => {
+  const promises = [.../** @type {NodeListOf<HTMLImageElement>} */ (root.querySelectorAll('.sts-figure img[src], .sts-hand .hsc-art img[src], .sts-hand .hsc-frame[src]'))].map(image => new Promise(resolve => {
     image.loading = 'eager';
     let currentSource = image.src, settled = false;
     const clean = () => { image.removeEventListener('load', loaded); image.removeEventListener('error', failed); };
@@ -40,15 +41,15 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
   let active = null, completed = null;
   const simplified = stage => {
     // 顶栏常驻，遭遇信息会随回合替换；提示跟随本场次，不能被该局部更新吞掉。
-    const host = stage.querySelector('.sts-topbar') || stage.querySelector('.sts-encounter');
-    if (host && !stage.querySelector('.battle-entry-note')) {
+    const host = /** @type {BattleElement} */ (stage.querySelector('.sts-topbar')) || /** @type {BattleElement} */ (stage.querySelector('.sts-encounter'));
+    if (host && !/** @type {BattleElement} */ (stage.querySelector('.battle-entry-note'))) {
       const note = document.createElement('span'); note.className = 'battle-entry-note'; note.textContent = '部分美术未就绪 · 简化显示';
-      note.setAttribute('role', 'status'); host.insertBefore(note, host.querySelector(':scope > .sts-options'));
+      note.setAttribute('role', 'status'); host.insertBefore(note, /** @type {BattleElement} */ (host.querySelector(':scope > .sts-options')));
     }
-    stage.querySelectorAll('.sts-figure img').forEach(image => {
+    /** @type {NodeListOf<HTMLImageElement>} */ (stage.querySelectorAll('.sts-figure img')).forEach(image => {
       if (image.complete && image.naturalWidth) return;
       image.hidden = true;
-      const figure = image.closest('.sts-figure'); figure.dataset.fallbackLabel = image.alt || '立绘暂不可用';
+      const figure = /** @type {BattleElement} */ (image.closest('.sts-figure')); figure.dataset.fallbackLabel = image.alt || '立绘暂不可用';
       figure.classList.add('battle-figure-fallback');
     });
   };
@@ -77,7 +78,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
       return;
     }
     completed = null;
-    stage.querySelectorAll('.battle-entry-note').forEach(note => note.remove());
+    /** @type {NodeListOf<BattleElement>} */ (stage.querySelectorAll('.battle-entry-note')).forEach(note => note.remove());
     // 通用节点过场由 enterNode 播放；这里只保留资源失败/超时的操作提示。
     const status = document.createElement('div');
     status.className = 'battle-entry-status'; status.hidden = true;
@@ -89,7 +90,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     active = record;
     stage.inert = true; stage.dataset.battleEntry = 'loading'; stage.setAttribute('aria-busy', 'true');
     overlay.appendChild(status);
-    status.querySelector('button').addEventListener('click', () => {
+    /** @type {HTMLButtonElement} */ (status.querySelector('button')).addEventListener('click', () => {
       if (!current(record)) return;
       record.onFallback?.();
       finish(record, 'degraded');
@@ -109,10 +110,11 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     if (reason === 'error') clearTimeout(record.timer);
     record.stage.dataset.battleEntry = 'waiting';
     record.status.hidden = false;
-    record.status.querySelector('h2').textContent = reason === 'timeout' ? '资源准备仍未完成' : '部分画面资源加载失败';
-    record.status.querySelector('p').textContent = '可以继续等待，或使用简化画面继续战斗。';
-    record.status.querySelector('button').hidden = false;
+    /** @type {BattleElement} */ (record.status.querySelector('h2')).textContent = reason === 'timeout' ? '资源准备仍未完成' : '部分画面资源加载失败';
+    /** @type {BattleElement} */ (record.status.querySelector('p')).textContent = '可以继续等待，或使用简化画面继续战斗。';
+    /** @type {HTMLButtonElement} */ (record.status.querySelector('button')).hidden = false;
   }
+  /** @param {HTMLElement} stage @param {number} token @param {Promise<unknown>[]} dependencies @param {{cancelImages?: () => void, onFallback?: () => void}} [options] */
   function wait(stage, token, dependencies, { cancelImages, onFallback } = {}) {
     const record = active;
     if (!record || record.stage !== stage || record.token !== token || record.started) { cancelImages?.(); return; }
@@ -127,7 +129,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     if (!active) return;
     if (!current(active)) { cancel(); return; }
     event.stopImmediatePropagation();
-    if (event.key === 'Tab') { event.preventDefault(); active.status.querySelector('button:not([hidden])')?.focus(); }
+    if (event.key === 'Tab') { event.preventDefault(); /** @type {HTMLButtonElement} */ (active.status.querySelector('button:not([hidden])'))?.focus(); }
   }
   function ready(stage, token) {
     if (active?.stage === stage && active.token === token) return current(active) ? active.ready : Promise.resolve(false);

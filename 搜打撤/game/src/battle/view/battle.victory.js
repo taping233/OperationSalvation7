@@ -1,3 +1,4 @@
+/** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 // 胜利反馈留在当前战场，完成后由原结算续流直接打开领奖页。
 import '../../../css/battle-scene-polish.css';
 
@@ -5,7 +6,7 @@ const presentations = new WeakMap();
 
 export function presentVictory(options = {}, isCurrent = () => true) {
   const overlay = document.getElementById('overlay');
-  const stage = overlay?.querySelector('.battle-stage.sts');
+  const stage = /** @type {BattleElement} */ (overlay?.querySelector('.battle-stage.sts'));
   if (!stage || overlay.hidden || !isCurrent()) return Promise.resolve(true);
   const token = stage._battleToken;
   if (presentations.get(stage)?.token === token) return presentations.get(stage).promise;
@@ -59,7 +60,7 @@ export function presentVictory(options = {}, isCurrent = () => true) {
       animation.finished.then(() => finish(true), () => finish(false));
     }
     // Wait for the actual finite death animations, rather than cutting them at a fixed beat.
-    const deaths = [...stage.querySelectorAll('.sts-foe.dead:not(.bt-death-pending)')]
+    const deaths = [.../** @type {NodeListOf<BattleElement>} */ (stage.querySelectorAll('.sts-foe.dead:not(.bt-death-pending)'))]
       .flatMap(enemy => enemy.getAnimations?.({ subtree: true }) || [])
       .filter(run => run.playState === 'running' && Number.isFinite(run.effect?.getComputedTiming?.().endTime));
     if (!deaths.length) showNotice();

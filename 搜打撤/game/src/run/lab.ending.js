@@ -97,7 +97,7 @@ export function playLabEnding(onDone) {
   };
 
   root.addEventListener('click', (e) => {
-    if (e.target.closest('.lab-end-skip')) { finish(); return; }
+    if (/** @type {Element} */ (e.target).closest('.lab-end-skip')) { finish(); return; }
     advance();
   });
   document.addEventListener('keydown', onKey, true);

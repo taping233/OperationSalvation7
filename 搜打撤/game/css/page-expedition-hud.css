@@ -1,24 +1,7 @@
-/* ═══════════════════════════════════════════════════════════════════
-   远征地图 HUD 美术升级（2026-09-24）——对标 page-slot-select / page-hub /
-   page-deploy 定稿语言：① 冷青统一调色+半透明底（不遮地图视线）
-   ② #e6cb76 暖金装饰（金短线/发丝线/档案编号语言）③ 信息排版仪式感
-   （数值暖米金表格数字、面板金短线标题）④ 交互三档节奏 + 按压快按慢弹 +
-   :focus-visible 金线焦点环 ⑤ 光标自查
-   作用域：仅对局 DOM HUD——#sidebar（底部面板栏）/ #topBtns / #resHud /
-   #logPanel / #expeditionChapter / #layerBanner。
-   硬约束：Pixi 画布（#game / #miniMap）零接触；只覆盖不删除；关键帧动画
-   仅 transform/opacity 且零常驻循环（战斗中常驻界面，克制）；winter.css
-   末尾 09-24 留言批次的 !important 底态用同特异性 + 更晚加载 + !important 覆盖。
-   ═══════════════════════════════════════════════════════════════════ */
+/* 远征HUD：保留资源、生命与节点详情；地图悬浮工具由 map-floating-tools.css 单独维护。 */
 
 /* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
 /* 探索信息层：目标有独立阅读行，路线名称与已知结果分级。 */
-
-/* 地图系统第一轮：连续行动台。空间在主图，身份与当前行动在同一稳定底栏。 */
-body:not(.lobby):not(.scene-battle-3d) #sidebar {
-  grid-template-rows:minmax(0,1fr);
-  border-top:1px solid #869ba5;
-}
 body:not(.lobby):not(.scene-battle-3d) #sidebar::before { content:none; }
 body #sidebar .panel { background:none; box-shadow:none; border:0; min-width:0; padding:0; }
 body #sidebar .panel::before { content:none; }
@@ -31,35 +14,15 @@ body #sidebar #statsPanel .stat-duo { flex-direction:column; align-items:flex-st
 body #sidebar #statsPanel .stat-duo label { font-size:14px; letter-spacing:.04em; color:#c6d2d8; }
 body #sidebar #statsPanel .stat-duo b { font-size:22px; }
 body #sidebar #devPanel { display:none; }
-
-/* IS7第二轮修正版：地图中央 / 节点决策右侧 / 底部薄工具带。 */
 body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
-body #sidebar .expedition-nav-summary { flex-direction:column; justify-content:center; color:#d6e2e5; }
-body #sidebar .expedition-nav-summary b { font-size:16px; }
-body #sidebar .expedition-nav-summary span { font-size:14px; }
-body #sidebar .expedition-nav-summary small { font-size:12px; color:#adbec5; }
 body #sidebar #logPanel { position:absolute; right:104px; left:auto; bottom:24px; width:330px; }
 body #sidebar #logPanel.collapsed { width:130px; min-width:130px; }
 body #sidebar #logPanel:not(.collapsed) { bottom:24px; z-index:10; }
 /* Removed map panels stay absent; compact navigation owns location/help only. */
 body #sidebar #logPanel { display:none!important; }
-body:not(.lobby):not(.scene-battle-3d) #sidebar { background:#090d10f2; border-top-color:#8aa0a22b; box-shadow:none; }
-body #sidebar .expedition-nav-summary { gap:5px; padding-right:110px; }
 body #sidebar #statsPanel { border-right-color:#7b91982b; }
 /* Map tools are actions, not repeated character/location summaries. */
-body:not(.lobby):not(.scene-battle-3d) #sidebar { height:94px; min-height:94px; grid-template-columns:minmax(0,1fr); padding:10px 28px; gap:0; }
 body #sidebar :is(#charPanel,#statsPanel) { display:none; }
-body #sidebar .expedition-nav-summary { padding:0; min-width:0; display:block; }
-body #sidebar .expedition-toolbar { display:flex; align-items:center; gap:18px; height:100%; }
-body #sidebar .expedition-toolbar button { display:flex; align-items:center; gap:12px; min-width:156px; min-height:66px; padding:8px 18px; border:1px solid #617d844d; background:#14242c; color:#e2ecec; text-align:left; cursor:pointer; }
-body #sidebar .expedition-toolbar button > .ic { width:30px; height:30px; }
-body #sidebar .expedition-toolbar button > span { display:flex; flex-direction:column; gap:4px; font:600 20px/1.3 var(--font-ui); }
-body #sidebar .expedition-toolbar button small { color:#9eb5bf; font:400 16px/1.3 var(--font-ui); }
-body #sidebar .expedition-toolbar button:hover { border-color:#bdcfce; background:#203740; }
-body #sidebar .expedition-toolbar button:focus-visible { outline:2px solid #e4d3a1; outline-offset:3px; }
-body #sidebar .expedition-toolbar button:disabled { opacity:.5; cursor:default; }
-body #sidebar .expedition-toolbar-space { flex:1; }
-body #sidebar .expedition-toolbar .map-view-tool { min-width:130px; background:transparent; border-color:#617d842b; }
 body #resHud .res-gold::before { content:'金币'; font-size:14px; color:#e3d6b3; }
 body #resHud .res-atk::before { content:'攻击'; font-size:14px; color:#f0c0b4; }
 body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
@@ -80,20 +43,6 @@ body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
 }
 
 /* ═════════ W1 底部面板栏 #sidebar：档案化质感（冷青半透明 + 顶缘金发丝线） ═════════ */
-
-/* W1a 底栏：实色蓝灰 → 冷青半透明（地图视线透底），顶缘分隔提为暖金族 */
-#sidebar {
-  background: linear-gradient(105deg, rgba(17,18,19,.93), rgba(26,28,30,.9));
-  border-top-color: rgba(230,203,118,.26);
-  box-shadow: 0 -10px 30px rgba(8,9,9,.5), inset 0 1px 0 rgba(223,224,226,.05);
-}
-/* W1a-2 顶缘金发丝线：两端渐隐、中心提亮（档案"封条"，静态不呼吸） */
-#sidebar::before {
-  content: ''; position: absolute; left: 26px; right: 26px; top: -1px; height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, #e6cb76a1 22%, #e6cb76c4 50%, #e6cb76a1 78%, transparent);
-  opacity: .66;
-}
 
 /* W1b 面板竖向分隔发丝线：冷青弱化（原 #464b5080 蓝灰） */
 #sidebar .panel { border-right-color: rgba(170,174,177,.14); }
@@ -301,73 +250,14 @@ body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-ic {
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini b {
   font:500 31px/1 var(--font-num); text-shadow:none;
 }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar {
-  height:108px; min-height:108px; padding:0 70px; gap:0;
-  display:block; background:#292b2ddc; border:0; border-top:1px solid #a1a1a166; box-shadow:none;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-nav-summary { height:100%; padding:0; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar { gap:0; height:100%; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button {
-  align-self:stretch; min-height:0; min-width:210px; padding:12px 24px; gap:16px;
-  background:none; border:0; border-right:1px solid #d6d6d623; box-shadow:none; clip-path:none; color:#e8e8e6;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button > .ic {
-  width:42px; height:42px; opacity:.82; filter:grayscale(1);
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button > span {
-  font:400 21px/1.3 var(--font-ui); gap:5px;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button small {
-  font:400 13px/1.25 var(--font-ui); color:#adb0b3;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar strong {
-  font:500 32px/1 var(--font-num); margin-left:14px; color:#fff; white-space:nowrap;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar strong small { font-size:21px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar kbd {
-  font:400 13px/1 var(--font-num); color:#b0b2b5; background:none; border:0; border-radius:0; padding:0; box-shadow:none; align-self:flex-end; margin-bottom:4px;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button:hover {
-  background:#ffffff0b; color:#fff;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar .map-view-tool {
-  min-width:172px; padding-left:20px; padding-right:20px;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar .map-view-tool > .ic { width:30px; height:30px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar .expedition-toolbar button:last-child { border-right:0; }
-
-/* Map replica: one persistent tool strip and one selected-location side panel. */
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] {
   height:112px; min-height:112px; padding:0 36px; display:block;
   background:#171c20f2; border:0; border-top:1px solid #d4dddf38; box-shadow:none;
 }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-nav-summary { height:100%; padding:0; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar {
-  display:grid; grid-template-columns:repeat(3,minmax(200px,260px)) minmax(40px,1fr) repeat(2,150px);
-  gap:0; align-items:stretch; height:100%;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button {
-  display:flex; align-items:center; min-width:0; min-height:0; padding:0 20px; gap:12px;
-  border:0; border-right:1px solid #d4dddf26; background:transparent; box-shadow:none;
-  border-radius:0; color:#e8edec; clip-path:none; text-align:left; cursor:pointer;
-  transition:background 160ms ease-out,color 160ms ease-out;
-}
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button > .ic { width:38px; height:38px; flex:none; filter:grayscale(1); }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button > span { font:500 24px/1.3 var(--font-ui); white-space:nowrap; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar strong { font:500 32px/1 var(--font-num); margin-left:auto; color:#fff; white-space:nowrap; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar strong small { font:400 21px/1 var(--font-num); color:#a7b3b6; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar kbd { font:400 13px/1 var(--font-num); color:#8b989d; align-self:flex-end; margin:0 0 22px; padding:0; background:none; border:0; box-shadow:none; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool { gap:10px; padding:0 16px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool > .ic { width:30px; height:30px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar .map-view-tool > span { font-size:22px; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:last-child { border:0; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:hover:not(:disabled) { background:#e3f0ee12; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:disabled { opacity:.42; cursor:default; background:transparent; }
-body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-toolbar button:focus-visible { outline:2px solid #69d4d5; outline-offset:-4px; }
 
 body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview {
   position:absolute; z-index:7; right:36px; left:auto; bottom:auto;
-  top:calc(152px - (var(--game-layout-height,1080px) - 112px));
+  top:calc(152px - (var(--game-layout-height,1080px) - 122px));
   transform:none; width:530px; min-height:300px; max-height:720px; box-sizing:border-box;
   display:flex; flex-direction:column; align-items:stretch; gap:0; padding:0;
   color:#ecf1ef; border:0; border-radius:0; background:linear-gradient(90deg,#081118d9,#08111870); box-shadow:none; backdrop-filter:none;

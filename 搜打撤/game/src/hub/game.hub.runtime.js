@@ -4,13 +4,13 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
 import { linkedBackHTML } from '../ui/home-linked-interactions.js';
+import { createOperationNotice } from '../ui/operation-notice.js';
 import { MAP } from '../run/game.session.js';
 import { game, getActiveSlot, setLobby, startNewGame } from '../run/game.session.js';
 import { Sfx, configureCardNavigation, _set_cardPageOpen } from './game.cardslib.js';
 import { readBase } from './base.commands.js';
 import { selectSkin, stackKeyOf } from './collection.commands.js';
-import { homeErrorMessage } from '../home/home.presenter.js';
-import { createHubHomeScene } from './game.hub.home-scene.js';
+import { homeErrorMessage } from './command-errors.js';
 import { createHubPreparationAdapter } from './game.hub.preparation-ports.js';
 import '../../css/base-camp-rework.css';
 import { presentHub, bindHubBrowse, restoreHubFocus } from './hub.presentation.js';
@@ -61,26 +61,19 @@ const hubScroll = new Map();
 const hubFocus = new Map();
 let hubBrowseSlot = null;
 let zoomFocusObserver = null;
-let hubNotice = '';
-let hubNoticeType = 'ok';
+const hubNotice = createOperationNotice();
 const notice = (text, type = 'ok') => {
   const plain = document.createElement('template'); plain.innerHTML = String(text);
-  hubNotice = plain.content.textContent || ''; hubNoticeType = type;
+  hubNotice.set(plain.content.textContent || '', type);
 };
-const homeScene = createHubHomeScene({ UI, disposePreparation, renderHub, closeBase, openPanel: panel => {
-  hubTab = ({ collection: 'ach', characters: 'classes', pets: 'classes' }[panel] || panel);
-  if (panel === 'pets') setPersonnelGroup('pets');
-  renderHub();
-} });
-const disposeHome = () => homeScene.dispose();
 preparationFeature = createHubPreparationAdapter({
   SDT, UI,
   returnToBase: () => { hubTab = 'deploy'; renderHub(); },
   applyPicks: setDeployPick,
-  openDeparture: () => { disposeHome(); openDepartPrep(); },
+  openDeparture: openDepartPrep,
 });
   function openBaseHub(tab) {
-    hubNotice = '';
+    hubNotice.clear();
     if (hubBrowseSlot !== getActiveSlot()) {
       hubBrowseSlot = getActiveSlot();
       hubScroll.clear();
@@ -102,7 +95,8 @@ preparationFeature = createHubPreparationAdapter({
     renderHub();
   }
 
-  function renderHomeScene() { homeScene.render(); }
+  // Retained import compatibility only; the furniture room is retired.
+  function renderHomeScene() { return false; }
 
   function hubBackTarget() {
     if (hubTab === 'classes') return personnelBackTarget();
@@ -122,13 +116,12 @@ preparationFeature = createHubPreparationAdapter({
 
   function renderHub() {
     const renderRevision = ++hubRenderRevision;
-    const previousPage = document.querySelector('#hubMain .hub-page');
+    const previousPage = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-page'));
     if (previousPage) hubScroll.set(previousPage.dataset.view, previousPage.scrollTop);
     const focused = document.activeElement?.closest?.('#hubMain [data-act], #hubMain [data-browser-key]');
-    const currentFocus = focused ? { ...focused.dataset } : null;
+    const currentFocus = focused ? { .../** @type {HTMLElement} */ (focused).dataset } : null;
     disposeCourtyard(); disposeCourtyard = () => {};
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
-    homeScene.leave();
     disposePreparation();
     const B = SDT.Base;
     const M = SDT.Meta;
@@ -136,17 +129,17 @@ preparationFeature = createHubPreparationAdapter({
     // 页签切换时才播放入场动画（页内操作重渲染不闪）
     const viewKey = `${hubTab}/${hubTab === 'stash' ? hubStashView : hubTab === 'classes' ? `${hubPersonView}/${personnelViewKey()}` : hubTab === 'ach' ? hubCollectionView : hubTab === 'courtyard' ? courtyardView : hubTab === 'shop' ? tradeState.mode : ''}`;
     const motionViewKey = hubTab === 'classes' ? `classes/${personnelPageKey()}` : viewKey;
-    const tabChanged = renderHub._lastMotionView !== motionViewKey;
-    renderHub._lastMotionView = motionViewKey;
-    renderHub._lastView = viewKey;
-    renderHub._lastTab = hubTab;
+    const tabChanged = /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastMotionView !== motionViewKey;
+    /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastMotionView = motionViewKey;
+    /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastView = viewKey;
+    /** @type {(() => void) & {_lastMotionView?: string, _lastView?: string, _lastTab?: string}} */ (renderHub)._lastTab = hubTab;
     const pages = ['deploy', 'stash', 'classes', 'shop', 'ach', 'upgrade', 'courtyard'];
     const body = hubTab === 'deploy' ? hubDeployHTML()
       : hubTab === 'stash' ? hubStashHTML(hubStashView)
       : hubTab === 'shop' ? tradeShopV5HTML({ base:B, cards:SDT.Cards, art:SDT.Art, goods:HUB_SHOP_GOODS, state:tradeState })
       : hubTab === 'upgrade' ? hubUpgradeHTML()
       : hubTab === 'classes' ? hubClassesHTML(hubPersonView)
-      : hubTab === 'courtyard' ? courtyardV3HTML(courtyardView)
+      : hubTab === 'courtyard' ? /** @type {(view?: unknown) => ReturnType<typeof courtyardV3HTML>} */ (courtyardV3HTML)(courtyardView)
       : hubAchHTML(hubCollectionView);
     const back = hubBackTarget();
     presentHub(UI, `
@@ -161,7 +154,7 @@ preparationFeature = createHubPreparationAdapter({
           <main class="hub-page${tabChanged ? ' page-in' : ''}" data-view="${viewKey}" data-motion-view="${motionViewKey}">${body}</main>
           ${baseNavigationV7HTML({ tab:hubTab, pendingRewards:M.pendingColl().length + M.pendingAch().length })}
         </div>
-        ${hubNotice ? `<div class="camp-notice${hubNoticeType === 'warn' ? ' warning' : ''}" role="status">[[icon:${hubNoticeType === 'warn' ? 'question' : 'check'}]] ${esc(hubNotice)}</div>` : ''}
+        ${hubNotice.html({ className:`camp-notice${hubNotice.tone === 'warn' ? ' warning' : ''}`, tag:'div' })}
       </div>`, SDT.Icons);
     const root = document.getElementById('hubMain'), slotId = B.slot;
     const currentHub = () => hubRenderRevision === renderRevision && SDT.Base === B && B.slot === slotId &&
@@ -178,7 +171,7 @@ preparationFeature = createHubPreparationAdapter({
       catch { if (currentHub()) UI.log('基地操作未保存，请重试。', 'warn'); return false; }
       finally { writing = false; }
     });
-    const hubUI = { act: hubAct, isCurrent: currentHub, showCardZoom: (...args) => UI.showCardZoom(...args), log: (...args) => UI.log(...args) };
+    const hubUI = { act: hubAct, isCurrent: currentHub, showCardZoom: (...args) => UI.showCardZoom(...args), log: /** @param {Parameters<typeof UI.log>} args */ (...args) => UI.log(...args) };
     const page = document.querySelector('#hubMain .hub-page');
     if (page) {
       page.scrollTop = hubScroll.get(viewKey) || 0;
@@ -197,9 +190,9 @@ preparationFeature = createHubPreparationAdapter({
       const result = await B.purchase({ price: g.price, material: g.material, card });
       if (!currentHub()) return false;
       if (!result.ok) {
-        UI.log(result.why === 'poor' ? '[[icon:coin]] 储备币不足，无法购买'
-          : result.why === 'full' ? '[[icon:archive]] 仓库已满，无法入库'
-            : result.msg || '商品暂不可购买', 'warn');
+        UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).why === 'poor' ? '[[icon:coin]] 储备币不足，无法购买'
+          : /** @type {Extract<typeof result, {ok:false}>} */ (result).why === 'full' ? '[[icon:archive]] 仓库已满，无法入库'
+            : /** @type {Extract<typeof result, {ok:false}>} */ (result).msg || '商品暂不可购买', 'warn');
         return;
       }
       if (g.material) {
@@ -217,7 +210,7 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('hubTab', (d) => {
       const next = d.tab === 'home' ? 'deploy' : d.tab;
       if (!pages.includes(next)) return;
-      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
       if (next === 'courtyard' && ['rain', 'koi'].includes(d.view)) { if (hubTab === 'courtyard' && d.view === courtyardView) return; courtyardView = d.view; }
       if (next === 'shop' && hubTab !== 'shop') shopParent = ['deploy', 'classes', 'ach', 'stash'].includes(hubTab) ? hubTab : 'stash';
       if (next === 'shop' && ['buy', 'sell'].includes(d.tradeMode)) tradeState.mode = d.tradeMode;
@@ -235,7 +228,7 @@ preparationFeature = createHubPreparationAdapter({
       if (d.group && next === 'classes') setPersonnelGroup(d.group);
       if (d.section && next === 'classes') setPersonnelSection(d.section);
       if (d.facility && next === 'upgrade') selectFacility(d.facility);
-      hubNotice = '';
+      hubNotice.clear();
       if (next !== hubTab) SDT.Sound.sfx('navigate');
       hubTab = next;
       renderHub();
@@ -252,7 +245,7 @@ preparationFeature = createHubPreparationAdapter({
     hubAct('shopPreview', d => {
       const goods = HUB_SHOP_GOODS[Number(d.i)];
       const card = goods && hubShopGoodsCard(goods);
-      const from = document.querySelector(`[data-act="shopPreview"][data-i="${Number(d.i)}"]`);
+      const from = /** @type {HTMLElement} */ (document.querySelector(`[data-act="shopPreview"][data-i="${Number(d.i)}"]`));
       if (card) { UI.showCardZoom(card, { presentation:'inventory', from }); decorateInventoryZoom(card); }
     });
     hubAct('hubCollectionView', (d) => {
@@ -297,7 +290,7 @@ preparationFeature = createHubPreparationAdapter({
       const result = await B.selectMode(d.mode);
       if (!currentHub()) return false;
       if (!result.ok) {
-        UI.log(result.code === 'INVALID_MODE' ? '玩法选项无效，未保存。' : '玩法保存失败，请稍后重试。', 'warn');
+        UI.log(/** @type {Extract<typeof result, {ok:false}>} */ (result).code === 'INVALID_MODE' ? '玩法选项无效，未保存。' : '玩法保存失败，请稍后重试。', 'warn');
         renderHub();
         return;
       }
@@ -356,13 +349,13 @@ preparationFeature = createHubPreparationAdapter({
       const stack = B.data.pocket[index];
       if (!stack) return;
       if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('消耗区数量已变化，请重新打开详情', 'warn'); return; }
-      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (document.getElementById('cardZoom'))?._closeCardZoom?.(true);
       const r = await B.restore(index);
       if (!currentHub()) return false;
       if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
       else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
       else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
-      else if (r && r.why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${r.cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
+      else if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${/** @type {typeof r & {cost?:number}} */ (r).cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
       else if (!r) UI.log('卡牌复原未保存，请重试。', 'warn');
       if (r) renderHub();
     });
@@ -393,28 +386,27 @@ preparationFeature = createHubPreparationAdapter({
       const r = await M.claimColl(d.id);
       if (!currentHub()) return false;
       if (r.ok) { notice('收藏奖励已入账'); Sfx.ding(); renderHub(); }
-      else if (r && r.why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
+      else if (r && /** @type {typeof r & {why?:string,cost?:number}} */ (r).why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
     });
     hubAct('collZoom', (d) => {
       const card = M.collectPool().find(c => c.id === d.id);
-      const from = [...document.querySelectorAll('[data-act="collZoom"]')].find(button => button.dataset.id === d.id && !button.hidden);
+      const from = /** @type {HTMLElement} */ ([...document.querySelectorAll('[data-act="collZoom"]')].find(button => /** @type {HTMLElement} */ (button).dataset.id === d.id && !/** @type {HTMLElement} */ (button).hidden));
       if (card) { UI.showCardZoom(card, { presentation:'inventory', from }); decorateInventoryZoom(card); }
     });
     hubAct('campFacility', d => { selectFacility(d.id); renderHub(); });
-    bindWarehouse({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView });
+    /** @type {(options: Parameters<typeof bindWarehouse>[0] & {cards?:unknown,meta?:unknown,notify?:unknown}) => ReturnType<typeof bindWarehouse>} */ (bindWarehouse)({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView });
     disposePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub });
     bindArchive(hubUI, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
-    bindArchiveV3({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
+    /** @type {(options: Parameters<typeof bindArchiveV3>[0] & {refresh?:unknown}) => ReturnType<typeof bindArchiveV3>} */ (bindArchiveV3)({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
     bindBaseMotion(document.getElementById('hubMain'));
-    if (hubTab === 'shop') disposeTrade = bindTradeShopV5({ root:page.querySelector('.trade-v5'), ui:hubUI, base:B, cards:SDT.Cards, goods:HUB_SHOP_GOODS, state:tradeState, render:renderHub, notice, sound:Sfx,
+    if (hubTab === 'shop') disposeTrade = /** @type {(options: Parameters<typeof bindTradeShopV5>[0] & {preview?:(card: import('./game.store.types.js').CardSnapshot, options:{from?:HTMLElement}) => void}) => ReturnType<typeof bindTradeShopV5>} */ (bindTradeShopV5)({ root:page.querySelector('.trade-v5'), ui:hubUI, base:B, cards:SDT.Cards, goods:HUB_SHOP_GOODS, state:tradeState, render:renderHub, notice, sound:Sfx,
       preview:(card, { from }) => { UI.showCardZoom(card, { presentation:'inventory', from, returnFocus:from }); decorateInventoryZoom(card); } });
-    if (hubTab === 'courtyard') disposeCourtyard = mountCourtyardV3(document.querySelector('.courtyard-v3'), courtyardView);
+    if (hubTab === 'courtyard') disposeCourtyard = /** @type {(root: Parameters<typeof mountCourtyardV3>[0], view?: unknown) => ReturnType<typeof mountCourtyardV3>} */ (mountCourtyardV3)(document.querySelector('.courtyard-v3'), courtyardView);
     hubAct('closeBase', closeBase);
   }
 
   function openPreparationPanel() {
-    disposeHome();
     preparationFeature.open();
   }
 
@@ -425,7 +417,6 @@ preparationFeature = createHubPreparationAdapter({
     disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = null;
-    homeScene.leave();
     _set_cardPageOpen(false);
     UI.hideOverlay();
     startNewGame();   // 基地返回选档，不触碰当前档案或对局存档
@@ -437,7 +428,7 @@ preparationFeature = createHubPreparationAdapter({
 export { closeBase, openBaseHub, renderHub, renderHomeScene };
 configureCardNavigation({
   closeBase: () => {
-    const back = document.querySelector('#hubMain .hub-back');
+    const back = /** @type {HTMLElement} */ (document.querySelector('#hubMain .hub-back'));
     const action = back && UI._acts[back.dataset.act];
     if (action) action({ ...back.dataset }); else closeBase();
   },

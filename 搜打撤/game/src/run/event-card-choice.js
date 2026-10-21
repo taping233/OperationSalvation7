@@ -30,7 +30,7 @@ export function createEventCardChoiceController({
     // 引用卡往返会重建特写 DOM；按当前详情动作的归属关闭，不持有旧节点。
     const zoom = document.getElementById('cardZoom');
     const owner = zoom?.querySelector('.cz-foot [data-act="eventCardPick"][data-choice-view]');
-    if (choiceZoomToken !== null && owner?.dataset.choiceView === choiceZoomToken) zoom._closeCardZoom?.(true);
+    if (choiceZoomToken !== null && /** @type {HTMLElement} */ (owner)?.dataset.choiceView === choiceZoomToken) /** @type {HTMLElement & {_closeCardZoom?: (immediate?: boolean) => void}} */ (zoom)._closeCardZoom?.(true);
     choiceZoomToken = null;
   };
   function renderSaveRetry(record, current = captureContext()) {

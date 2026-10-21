@@ -6,6 +6,10 @@ export const motionTiming = Object.freeze({
   navigation: 260, navigationDetail: 220, navigationStagger: 22, navigationStaggerMax: 66,
   panelExit: 160, handoff: 180, sceneEnter: 450,
   cardReturn: 120, acquire: 340,
+  photoEnter: 140, photoAtelierEnter: 420, photoExit: 120,
+  zoomExit: 260, completionSlack: 60, notice: 3200,
+  mapReturnEnter: 420, mapReturnExit: 420, mapReturnHold: 560,
+  resumeExit: 360,
 });
 export const motionEasing = Object.freeze({
   enter: 'cubic-bezier(.22,1,.36,1)',

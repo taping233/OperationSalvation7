@@ -11,7 +11,7 @@ export function createCharacterViewMotion() {
 
   function page(commit) {
     if (switching) return false;
-    const root = document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page');
+    const root = /** @type {HTMLElement} */ (document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page'));
     if (!root || reduced() || typeof root.animate !== 'function') {
       commit();
       return true;
@@ -49,7 +49,7 @@ export function createCharacterViewMotion() {
   }
 
   function enter() {
-    const root = document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page');
+    const root = /** @type {HTMLElement} */ (document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page'));
     if (!root || reduced() || typeof root.animate !== 'function') return;
     // 共用分区入场已展开时，不能再在祖先叠加整页淡入。
     if (root.closest('[data-surface-layout="character"], [data-surface-layout="card-pool"]')) return;
@@ -61,12 +61,12 @@ export function createCharacterViewMotion() {
   }
 
   function portrait(element, direction = 1) {
-    const target = element?.querySelector('.art-figure-wrap') || element;
+    const target = /** @type {HTMLElement} */ (element?.querySelector('.art-figure-wrap')) || element;
     if (!target || reduced() || typeof target.animate !== 'function') return;
     const request = {};
     portraitRequests.set(target, request);
     previews.get(target)?.cancel();
-    const images = [...target.querySelectorAll('img')];
+    const images = [.../** @type {NodeListOf<HTMLImageElement>} */ (target.querySelectorAll('img'))];
     Promise.all(images.map(image => image.decode?.().catch(() => {}) ?? Promise.resolve())).then(() => {
       if (!target.isConnected || reduced() || portraitRequests.get(target) !== request) return;
       const fade = linkedAnimate(target, [
@@ -91,19 +91,19 @@ export function createCharacterViewMotion() {
     const commit = () => {
       if (!current.isConnected || swaps.get(parent) !== request) return;
       if (reduced()) { current.replaceWith(next); return; }
-      const surface = current.querySelector('.roster-art-surface');
-      const replacement = next.querySelector('.roster-art-surface');
+      const surface = /** @type {HTMLElement} */ (current.querySelector('.roster-art-surface'));
+      const replacement = /** @type {HTMLElement} */ (next.querySelector('.roster-art-surface'));
       if (direction === 0 && surface && replacement) {
         // 换肤保留原画框；两张图共用同一坐标，待机进度也连续。
-        current.querySelectorAll('[data-portrait-outgoing]').forEach(node => node.remove());
-        const idle = surface.querySelector('.art-figure-wrap')?.getAnimations?.()
-          .find(animation => animation.animationName?.startsWith('idle'));
+        /** @type {NodeListOf<HTMLElement>} */ (current.querySelectorAll('[data-portrait-outgoing]')).forEach(node => node.remove());
+        const idle = /** @type {HTMLElement} */ (surface.querySelector('.art-figure-wrap'))?.getAnimations?.()
+          .find(animation => ('animationName' in animation && typeof animation.animationName === 'string' ? animation.animationName : '')?.startsWith('idle'));
         const idleTime = idle?.currentTime;
         current.dataset.skin = next.dataset.skin;
         surface.before(replacement);
         if (idleTime != null) {
-          replacement.querySelector('.art-figure-wrap')?.getAnimations?.()
-            .filter(animation => animation.animationName === idle.animationName)
+          /** @type {HTMLElement} */ (replacement.querySelector('.art-figure-wrap'))?.getAnimations?.()
+            .filter(animation => 'animationName' in animation && 'animationName' in idle && animation.animationName === idle.animationName)
             .forEach(animation => { animation.currentTime = idleTime; });
         }
         surface.dataset.portraitOutgoing = 'true';
@@ -118,13 +118,13 @@ export function createCharacterViewMotion() {
         return;
       }
       const outgoing = current.cloneNode(true);
-      outgoing.querySelectorAll('[data-portrait-outgoing]').forEach(node => node.remove());
+      /** @type {NodeListOf<HTMLElement>} */ (outgoing.querySelectorAll('[data-portrait-outgoing]')).forEach(node => node.remove());
       outgoing.dataset.portraitOutgoing = 'true';
       outgoing.setAttribute('aria-hidden', 'true');
       outgoing.style.cssText += ';position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
       current.replaceWith(next);
       next.append(outgoing);
-      const incoming = next.querySelector('.art-figure-wrap') || next.querySelector('img') || next;
+      const incoming = /** @type {HTMLElement} */ (next.querySelector('.art-figure-wrap')) || /** @type {HTMLImageElement} */ (next.querySelector('img')) || next;
       const offset = Math.sign(direction) * 14;
       linkedAnimate(incoming, [
         { opacity: 0, transform: `translateX(${offset}px)` },
@@ -137,7 +137,7 @@ export function createCharacterViewMotion() {
       fade?.finished.then(() => outgoing.remove(), () => outgoing.remove());
     };
     // Keep the visible portrait until its replacement is decoded; only the latest click wins.
-    Promise.all([...next.querySelectorAll('img')].map(image => image.decode?.().catch(() => {}) ?? Promise.resolve()))
+    Promise.all([.../** @type {NodeListOf<HTMLImageElement>} */ (next.querySelectorAll('img'))].map(image => image.decode?.().catch(() => {}) ?? Promise.resolve()))
       .then(commit);
   }
 

@@ -13,12 +13,12 @@ import { createEnemyPhaseDomain } from './battle.enemy-phase.domain.js';
  * @property {number | string} [seed]
  * @property {(name: string) => void} [sound]
  * @property {(slots: unknown[]) => object} [evaluateRunes]
- * @property {object} [presentation]
- * @property {object} [combat]
- * @property {object} [random]
- * @property {object} [summary]
- * @property {object} [audio]
- * @property {(card: object) => object} [normalizeCard]
+ * @property {Partial<import('./battle.core-ports.types.js').PresentationPort>} [presentation]
+ * @property {import('./battle.core-ports.types.js').CombatPort} [combat]
+ * @property {import('./battle.core-ports.types.js').RandomPort} [random]
+ * @property {import('./battle.core-ports.types.js').SummaryPort} [summary]
+ * @property {Partial<import('./battle.core-ports.types.js').AudioPort>} [audio]
+ * @property {(card: import('./battle.core-ports.types.js').CoreCard) => import('./battle.core-ports.types.js').CoreCard} [normalizeCard]
  * @property {(event: string, value: object) => unknown} [emitEvent]
  * @property {(name: string, work: () => unknown) => unknown} [traceRestoreStep]
  * @property {(player: object) => unknown} [presentBattleDefeat]
@@ -30,7 +30,7 @@ import { createEnemyPhaseDomain } from './battle.enemy-phase.domain.js';
  */
 
 /** A complete battle owns its state, random streams, queue, hooks and presentation waits.
- * @param {BattleEngineOptions} options
+ * @param {BattleEngineOptions | (Partial<BattleEngineOptions> & {cards?: never, readRules?: never})} [options]
  */
 export function createBattleEngineInstance(options = {}) {
   const runtime = options.runtime || createBattleRuntime(options.combat ? { combat: options.combat } : undefined);
@@ -61,7 +61,7 @@ export function createBattleEngineInstance(options = {}) {
   const { createBattleEngine } = createEngineDomain(context);
   const engine = createBattleEngine({ cards: context.cards, readRules: context.readRules,
     sound: context.audio.sfx, evaluateRunes: context.evaluateRunes });
-  context.engine = engine;
+  /** @type {typeof context & {engine?: typeof engine}} */ (context).engine = engine;
   const phase = createEnemyPhaseDomain(context);
   const commands = Object.freeze({
     playCard: engine.play, submitCardPlay: engine.submitCardPlay,
@@ -69,5 +69,5 @@ export function createBattleEngineInstance(options = {}) {
     endTurn: phase.endTurn, flee: engine.flee, surrender: phase.surrender,
   });
   return Object.freeze({ ...engine, ...phase, runtime, random, commands,
-    idle: () => context.executionSession.actionQueue.idle() });
+    idle: () => /** @type {typeof context & {executionSession?: ReturnType<typeof import("../runtime/battle.execution-session.js").createBattleExecutionSession>}} */ (context).executionSession.actionQueue.idle() });
 }

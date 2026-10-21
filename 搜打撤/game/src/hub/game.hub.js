@@ -121,7 +121,8 @@ function enterHub(method, args) {
 }
 
 function openBaseHub(tab) { return enterHub('openBaseHub', [tab]); }
-function renderHomeScene() { return enterHub('renderHomeScene', []); }
+// Retired furniture entry: do not load a page, navigate, or touch saved data.
+function renderHomeScene() { return Promise.resolve(false); }
 function renderHub() { return pageModule?.renderHub() ?? false; }
 function closeBase() {
   if (cancelPendingBaseHubOpen()) return;

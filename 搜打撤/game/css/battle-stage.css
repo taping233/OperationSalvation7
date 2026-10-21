@@ -84,19 +84,21 @@
 #overlay .battle-stage.sts .sts-intent .ic{flex:none;width:26px;height:26px}
 #overlay .battle-stage.sts .can-target:not(.dead){cursor:crosshair}
 #overlay .battle-stage.sts .drag-over:not(.dead){outline:none}
-#overlay .battle-stage.sts .sts-hud{position:absolute;inset:0;box-sizing:border-box;padding:0 48px 40px;margin:0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 264px;grid-template-rows:minmax(0,1fr) auto auto;gap:14px 0;border:0;background:none;box-shadow:none;z-index:9;pointer-events:none}
+/* Hand edges share the occupied control widths; reading a card never enters either side lane. */
+#overlay .battle-stage.sts .sts-hud{--battle-hud-edge:56px;--battle-hud-bottom:40px;--battle-energy-width:176px;--battle-energy-height:76px;--battle-hand-page-height:104px;--battle-resource-copy:20px;--battle-resource-number:26px;--battle-resource-icon:28px;--battle-resource-gap:16px;--battle-tactics-width:248px;--battle-hand-control-gap:64px;position:absolute;inset:0;box-sizing:border-box;padding:0 var(--battle-hud-edge) var(--battle-hud-bottom);margin:0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--battle-tactics-width);grid-template-rows:minmax(0,1fr) auto auto;gap:14px 0;border:0;background:none;box-shadow:none;z-index:9;pointer-events:none}
 #overlay .battle-stage.sts .sts-hud button,#overlay .battle-stage.sts .sts-hud [role="button"]{pointer-events:auto}
-#overlay .battle-stage.sts .sts-resource-dock{position:absolute;left:56px;bottom:40px;width:max-content;max-width:320px;min-height:104px;display:flex;align-items:center;gap:16px;box-sizing:border-box;padding:12px 18px;border:1px solid var(--battle-line);border-radius:14px;background:var(--battle-glass)}
-#overlay .battle-stage.sts .sts-hud-l{position:static;display:flex;gap:6px}
+#overlay .battle-stage.sts .sts-resource-dock{display:contents;--battle-page-space:0px}
+#overlay .battle-stage.sts .sts-resource-dock:has(>.bt-hand-page){--battle-page-space:calc(var(--battle-hand-page-height) + var(--battle-resource-gap))}
+#overlay .battle-stage.sts .sts-hud-l{position:absolute;left:var(--battle-hud-edge);bottom:calc(var(--battle-hud-bottom) + var(--battle-energy-height) + var(--battle-resource-gap) + var(--battle-page-space));width:var(--battle-energy-width);display:flex;justify-content:center;gap:6px;pointer-events:auto}
 #overlay .battle-stage.sts .sts-hud-l:empty{display:none}
-#overlay .battle-stage.sts .sts-energy-wrap{position:static;display:flex;flex-direction:row;align-items:center;gap:8px;transform:none;margin:0;padding:6px 0}
+#overlay .battle-stage.sts .sts-energy-wrap{position:absolute;left:var(--battle-hud-edge);bottom:var(--battle-hud-bottom);width:var(--battle-energy-width);min-height:var(--battle-energy-height);box-sizing:border-box;display:flex;align-items:center;transform:none;margin:0;padding:0;border:0;background:none;color:#d7eaf0;pointer-events:auto}
 #overlay .battle-stage.sts .battle-energy-label{font-size:12px;color:#abc0cf}
-#overlay .battle-stage.sts .sts-energy{position:static;display:flex;align-items:center;gap:10px;width:auto;height:auto;margin:0;padding:0;border:0;background:none;box-shadow:none;clip-path:none;color:#f3e5c6;pointer-events:auto}
+#overlay .battle-stage.sts .sts-energy{position:static;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:auto;margin:0;padding:0;border:0;background:none;box-shadow:none;clip-path:none;color:#f3e5c6;pointer-events:auto}
 #overlay .battle-stage.sts .sts-energy::before,#overlay .battle-stage.sts .sts-energy::after{content:none}
-#overlay .battle-stage.sts .sts-energy>b{font-size:52px;font-weight:600;line-height:1}
-#overlay .battle-stage.sts .sts-energy>span{font-size:22px;color:#c4d8e1}
+#overlay .battle-stage.sts .sts-energy>b{font-size:40px;font-weight:600;line-height:1}
+#overlay .battle-stage.sts .sts-energy>span{font-size:20px;color:#c4d8e1;white-space:nowrap}
 #overlay .battle-stage.sts .sts-energy>.ic{width:26px;height:30px;align-self:center}
-#overlay .battle-stage.sts .sts-energy>.battle-energy-emblem{display:block;width:68px;height:68px;object-fit:contain;pointer-events:none}
+#overlay .battle-stage.sts .sts-energy>.battle-energy-emblem{display:block;flex:none;width:44px;height:44px;object-fit:contain;pointer-events:none}
 #overlay .battle-stage.sts .bt-pile{position:relative;display:inline-flex;align-items:center;gap:7px;min-width:0;min-height:48px;margin:0;padding:7px 9px;border:1px solid var(--battle-line);border-radius:8px;background:var(--battle-glass);color:#e8efed;box-shadow:none;font:inherit;pointer-events:auto}
 #overlay .battle-stage.sts .bt-pile>b{position:static;width:auto;height:auto;padding:0;border:0;background:none;color:#e2eff3;font-size:24px;line-height:1}
 #overlay .battle-stage.sts .bt-pilecard{display:block;width:24px;height:34px;overflow:hidden}
@@ -107,6 +109,7 @@
 #overlay .battle-stage.sts .sts-hud-r:empty{display:none}
 #overlay .battle-stage.sts .sts-hand-tools{position:absolute;left:430px;bottom:455px;display:flex;gap:8px;pointer-events:auto}
 #overlay .battle-stage.sts .bt-hand-page{margin:0;padding:10px 14px;border:1px solid var(--battle-line);border-radius:10px;background:var(--battle-glass);color:#e6eeea;font-size:20px;cursor:pointer;animation:none}
+#overlay .battle-stage.sts .sts-resource-dock>.bt-hand-page{position:absolute;left:var(--battle-hud-edge);bottom:calc(var(--battle-hud-bottom) + var(--battle-energy-height) + var(--battle-resource-gap));width:var(--battle-energy-width);height:var(--battle-hand-page-height);box-sizing:border-box;display:grid;align-content:center;gap:6px;padding:0;white-space:nowrap}
 #overlay .battle-stage.sts #btSelf>.sts-hand-tools{position:absolute;left:4px;top:calc(100% - 170px);bottom:auto;translate:none;z-index:10;width:104px;flex-direction:column;align-items:center;gap:12px}
 #overlay .battle-stage.sts .battle-skill-help{display:block;width:104px;height:104px}
 #overlay .battle-stage.sts .bt-slam-btn{position:relative;display:grid;place-items:center;width:104px;height:104px;min-width:0;min-height:0;box-sizing:border-box;margin:0;padding:4px;border:1px solid #edf2e75c;border-radius:14px;background:var(--battle-glass);color:#f2ebdb;box-shadow:var(--battle-glass-shadow);cursor:pointer;overflow:visible}
@@ -117,7 +120,7 @@
 #overlay .battle-stage.sts .bt-slam-btn:disabled{opacity:1;cursor:default;border-color:#e6ece433;box-shadow:inset 0 1px 0 #f2f8fa14}
 #overlay .battle-stage.sts .bt-slam-btn:disabled .battle-skill-art{opacity:.4;filter:grayscale(.35)}
 #overlay .battle-stage.sts .bt-slam-btn:hover:not(:disabled),#overlay .battle-stage.sts .bt-slam-btn:focus-visible{border-color:#d9d2af;outline:2px solid #d9d2af55;outline-offset:3px}
-#overlay .battle-stage.sts .sts-hand{position:absolute;left:300px;right:330px;bottom:92px;width:auto;height:300px;min-height:0;margin:0;padding:0;display:block;overflow:visible;background:none;border:0;box-shadow:none;pointer-events:none}
+#overlay .battle-stage.sts .sts-hand{position:absolute;left:calc(var(--battle-hud-edge) + var(--battle-energy-width) + var(--battle-hand-control-gap));right:calc(var(--battle-hud-edge) + var(--battle-tactics-width) + var(--battle-hand-control-gap));bottom:92px;width:auto;height:300px;min-height:0;margin:0;padding:0;display:block;overflow:visible;background:none;border:0;box-shadow:none;pointer-events:none}
 #overlay .battle-stage.sts .bt-slot{position:absolute;left:50%;top:0;bottom:auto;width:calc(260px * var(--fs,1));height:calc(390px * var(--fs,1) + 56px);margin:0;outline:none;border:0;background:none;transform:translateX(calc(-50% + var(--fx,0px)));z-index:calc(10 + var(--hand-index,0));pointer-events:none}
 #overlay .battle-stage.sts .bt-slot::after{content:'';position:absolute;left:0;top:calc(390px * var(--fs,1));bottom:0;width:calc(260px * var(--fs,1));z-index:-1;pointer-events:auto}
 #overlay .battle-stage.sts .bt-card{position:relative;isolation:isolate;width:100%;height:calc(390px * var(--fs,1));margin:0;padding:0;background:none;border:0;border-radius:4px;box-shadow:none;transform-origin:center bottom;transition:transform .16s cubic-bezier(.22,.75,.3,1);pointer-events:auto;touch-action:none}
@@ -145,7 +148,7 @@
 #overlay .battle-stage.sts .sts-hand>.ov-empty{position:absolute;top:300px;left:0;right:0;color:#c5d9e2;text-align:center;font-size:22px}
 #overlay .battle-stage.sts[data-phase="enemy"] .sts-hand{opacity:.3;translate:0 90px;pointer-events:none}
 #overlay .battle-stage.sts[data-phase="enemy"] .sts-hand *{pointer-events:none}
-#overlay .battle-stage.sts .sts-tactics{position:static;grid-column:2;grid-row:3;align-self:end;width:264px;box-sizing:border-box;margin:0;padding:16px;display:flex;flex-direction:column;align-items:stretch;gap:14px;background:var(--battle-glass);border:1px solid var(--battle-line);border-radius:14px;pointer-events:auto}
+#overlay .battle-stage.sts .sts-tactics{position:static;grid-column:2;grid-row:3;align-self:end;width:var(--battle-tactics-width);box-sizing:border-box;margin:0;padding:16px;display:flex;flex-direction:column;align-items:stretch;gap:14px;background:var(--battle-glass);border:1px solid var(--battle-line);border-radius:14px;pointer-events:auto}
 #overlay .battle-stage.sts .bt-turn-forecast{display:grid;gap:4px;margin:0;color:#d1e0e7;font-size:20px;text-align:left;line-height:1.3}
 #overlay .battle-stage.sts .bt-forecast-damage{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 #overlay .battle-stage.sts .bt-turn-forecast b{font-size:30px;font-weight:700;color:#edf6f8}
@@ -183,14 +186,36 @@
 
 /* Printed card names remain part of the shared face; battle adds no duplicate strip. */
 #overlay .battle-stage.sts .bt-card[data-hand-state="selected"]{outline:2px solid #c8e8f0;outline-offset:3px}
-#overlay .battle-stage.sts .sts-energy-wrap{color:#d7eaf0}
 
 #overlay .battle-stage.sts .bt-slot:has(.click-selected){z-index:95}
 #overlay .battle-stage.sts .bt-card.click-selected:not(.aim-lift){transform:translateY(0)}
 #overlay .battle-stage.sts[data-phase="enemy"] .bt-turn-forecast{visibility:hidden}
 
 /* Blur is limited to fixed controls; dragged cards and the painted world stay sharp. */
-#overlay .battle-stage.sts :is(.sts-encounter,.sts-options>summary,.sts-resource-dock,.sts-tactics,.bt-pile,.bt-hand-page,.bt-slam-btn,.sts-unit-vitals){backdrop-filter:blur(14px) saturate(115%);box-shadow:var(--battle-glass-shadow)}
+#overlay .battle-stage.sts :is(.sts-encounter,.sts-options>summary,.sts-tactics,.bt-pile,.bt-slam-btn,.sts-unit-vitals){backdrop-filter:blur(14px) saturate(115%);box-shadow:var(--battle-glass-shadow)}
+/* The left resource column is unframed; local scope leaves the right-side controls intact. */
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.sts-hud-l>.bt-pile,.bt-hand-page,.sts-energy-wrap){border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;clip-path:none;color:#e6eeea}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .sts-hud-l .bt-pile>:is(b,.bt-pile-cap){color:inherit}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock{--battle-resource-icon:48px;--battle-resource-number:36px}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.sts-hud-l>.bt-pile,.sts-energy,.battle-hand-page-position){display:grid;grid-template-columns:var(--battle-resource-icon) minmax(0,1fr);align-items:center;column-gap:14px;width:100%;min-height:54px;box-sizing:border-box;padding:0;font-size:var(--battle-resource-copy);line-height:1.2;text-align:left}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.battle-control-label,.bt-pile-cap){font-size:var(--battle-resource-copy);font-weight:400;font-style:normal;line-height:1.2}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .sts-hud-l>.bt-pile>b{grid-column:2;grid-row:1;font-size:var(--battle-resource-number);font-weight:600;line-height:1.2;text-align:right}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .sts-hud-l>.bt-pile>.bt-pile-cap{grid-column:2;grid-row:1}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.battle-control-icon,.bt-pilecard){align-self:center;display:grid;place-items:center;flex:none;width:var(--battle-resource-icon);height:var(--battle-resource-icon);margin:0;object-fit:contain}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-pilecard{grid-column:1;grid-row:1}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-pilecard .hs-back{width:34px;height:48px;margin:0}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .battle-control-icon .ic{width:100%;height:100%;object-fit:contain}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .battle-control-value{display:inline-flex;align-items:baseline;justify-content:flex-end;white-space:nowrap;font-size:var(--battle-resource-number);line-height:1.2;font-variant-numeric:tabular-nums}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .battle-control-value>b{font:600 var(--battle-resource-number)/1.2 var(--font-ui,sans-serif)}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .battle-control-value>span{font-size:20px;color:#a8c0ca}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .sts-energy .battle-control-value>b{display:inline-block;transform-origin:center;color:#fff0b2;font-weight:800;text-shadow:0 0 8px #f3cf7f80,0 0 20px #f3cf7f38}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .battle-hand-page-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-hand-page-step{display:flex;align-items:center;justify-content:center;gap:2px;min-width:0;min-height:34px;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:inherit;font:400 var(--battle-resource-copy)/1.2 var(--font-ui,sans-serif);white-space:nowrap;cursor:pointer}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-hand-page-step>span{flex:none;width:14px;font-size:var(--battle-resource-icon);line-height:1}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-hand-page-step:disabled{opacity:.32;cursor:default}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock .bt-hand-page-step:hover:not(:disabled){color:#fff;text-decoration:underline;text-underline-offset:4px}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock>.bt-hand-page .bt-hand-page-new{justify-self:end;min-height:0;margin:0;padding:1px 0;border:0;background:none;font-size:14px;line-height:1.2}
+body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.bt-pile,.bt-hand-page,.sts-energy,.bt-hand-page-step):focus-visible{outline:2px solid #d2eef5;outline-offset:4px}
 @supports not (backdrop-filter:blur(1px)){#overlay .battle-stage.sts{--battle-panel:#263640a8}}
 
 /* Keep persistent card results in the central HUD lane, clear of items.

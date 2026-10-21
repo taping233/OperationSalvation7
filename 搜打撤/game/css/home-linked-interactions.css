@@ -52,6 +52,14 @@ body.cardlib-open #cardZoom#cardZoom.cz-photo .cz-close:not(:hover):not(:focus-v
 #title#title #homeCredits > form { position: absolute; left: 18px; top: 16px; margin: 0; }
 #title#title #homeCredits > form .archive-back { position: static; }
 
+/* Same return control inside the merchant's existing footer layout. */
+#overlay#overlay#overlay .shop-market-footer .shop-back.archive-back {
+  position:static; inset:auto; width:auto; height:auto; min-width:208px;
+  display:flex; gap:14px; padding:12px 28px; margin:0;
+  clip-path:none; border-radius:0;
+}
+#overlay#overlay#overlay .shop-market-footer .shop-back.archive-back svg { flex:none; width:24px; height:24px; }
+
 /* 双向使用同一过渡，避免离开时突然恢复；只接管视觉属性。 */
 #overlay#overlay#overlay :is(.achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive)
 button:not(:disabled):not([aria-disabled='true']) {

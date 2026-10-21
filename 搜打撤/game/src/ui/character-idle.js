@@ -25,7 +25,7 @@ function unmountCharacterIdle() {
 
 function mountCharacterIdle(host) {
   if (!host || typeof host.querySelector !== 'function') return false;
-  const wrap = host.querySelector('.art-figure-wrap');
+  const wrap = /** @type {HTMLElement} */ (host.querySelector('.art-figure-wrap'));
   const m = wrap && /(?:^|\s)figure-([a-z]+)/.exec(String(wrap.className || ''));
   const spec = m && idleSpecFor(m[1]);
   if (!spec) return false;
@@ -47,7 +47,7 @@ if (typeof document !== 'undefined' && typeof document.addEventListener === 'fun
   // showOverlay 每次重建 ovBody 后广播本事件（ui/overlay.js），选人页开页/切人均会触发；
   // 离开选人页时清理旧宿主标记。
   document.addEventListener('sdt-overlay-mode', () => {
-    const host = document.querySelector('.cls2-fullart');
+    const host = /** @type {HTMLElement} */ (document.querySelector('.cls2-fullart'));
     if (host) mountCharacterIdle(host);
     else unmountCharacterIdle();
   });

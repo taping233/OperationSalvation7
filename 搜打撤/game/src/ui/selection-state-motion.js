@@ -70,7 +70,7 @@ export function installSelectionStateMotion(root = document.body) {
       if (!root.contains(group) || !group.matches(state.definition.group)) release(group, state);
     }
     for (const definition of definitions) {
-      const candidates = [...root.querySelectorAll(definition.group)];
+      const candidates = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll(definition.group))];
       if (root.matches?.(definition.group)) candidates.unshift(root);
       for (const group of candidates) {
         let state = groups.get(group);

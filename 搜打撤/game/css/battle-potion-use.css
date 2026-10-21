@@ -1,0 +1,46 @@
+/* 道具确认在快捷栏旁展开；内容滚动限于HUD区域，不覆盖手牌。 */
+#overlay .battle-stage.sts > .bt-potions { overflow: visible; }
+#overlay .battle-stage.sts .bt-potion.is-inspected { outline: 2px solid #e9cf89; outline-offset: 3px; }
+#overlay .battle-stage.sts .bt-potion-use {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 0;
+  z-index: 32;
+  box-sizing: border-box;
+  width: min(310px, calc(var(--game-layout-width, 100vw) - 124px));
+  max-height: min(255px, calc(var(--game-layout-height, 100vh) * .36));
+  overflow: auto;
+  padding: 13px 15px;
+  border: 1px solid #d4bd78;
+  border-radius: 5px;
+  background: #101d29f5;
+  box-shadow: 0 8px 22px #0009;
+  color: #f0f2f5;
+  text-align: left;
+  text-shadow: none;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: default;
+  pointer-events: auto;
+}
+#overlay .battle-stage.sts .bt-potion-use-name { display: block; color: #ffe1a1; font-size: 16px; }
+#overlay .battle-stage.sts .bt-potion-use-description { margin: 7px 0; white-space: pre-line; overflow-wrap: anywhere; }
+#overlay .battle-stage.sts .bt-potion-use-hint { margin: 7px 0 0; color: #bacad4; font-size: 12px; }
+#overlay .battle-stage.sts .bt-potion-use-actions { display: flex; gap: 8px; margin-top: 12px; }
+#overlay .battle-stage.sts .bt-potion-use-actions[hidden] { display: none; }
+#overlay .battle-stage.sts .bt-potion-use button {
+  min-height: 34px;
+  flex: 1;
+  padding: 5px 12px;
+  border: 1px solid #7f929c;
+  border-radius: 3px;
+  background: #1b3040;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+#overlay .battle-stage.sts .bt-potion-use .bt-potion-use-confirm { border-color: #e1c47a; background: #65532c; }
+#overlay .battle-stage.sts .bt-potion-use button:focus-visible { outline: 2px solid #f8e7b2; outline-offset: 2px; }
+#overlay .battle-stage.sts .bt-potion-use button:disabled { opacity: .45; cursor: default; }
+#overlay .battle-stage.sts .bt-potion-use.is-preview { pointer-events: none; }
+#overlay .battle-stage.sts .bt-potion-use[hidden] { display: none; }

@@ -34,7 +34,7 @@ const MINI_TYPE_COLOR = {
 export function renderMiniMap() {
   const cv = document.getElementById('miniMap');
   if (!cv) return;
-  const ctx = cv.getContext('2d');
+  const ctx = /** @type {HTMLCanvasElement} */ (cv).getContext('2d');
   // 内部分辨率跟随 CSS 显示尺寸（dpr 缩放），内部/显示比例一致才不会拉伸变形
   const rect = cv.getBoundingClientRect();
   // A 1px backing canvas created while the sidebar is hidden becomes a stretched gold block.
@@ -42,7 +42,7 @@ export function renderMiniMap() {
   const dpr = window.devicePixelRatio || 1;
   const W = Math.max(1, Math.round(rect.width * dpr));
   const H = Math.max(1, Math.round(rect.height * dpr));
-  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  if (/** @type {HTMLCanvasElement} */ (cv).width !== W || /** @type {HTMLCanvasElement} */ (cv).height !== H) { /** @type {HTMLCanvasElement} */ (cv).width = W; /** @type {HTMLCanvasElement} */ (cv).height = H; }
   ctx.clearRect(0, 0, W, H);
   const li = game.layerIdx;
   const ld = game.layerData?.[li];

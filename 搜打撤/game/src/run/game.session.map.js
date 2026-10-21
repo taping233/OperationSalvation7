@@ -37,6 +37,7 @@ export function installDerived(layerData, mapSeed, generatorVersion = GENERATOR_
   // 每层使用自己的局部网格坐标，不再把四层横向平移后硬挤进一张图。
   // 生成器保证 x/row 为四向网格；这里仅负责把格心映射为稳定世界坐标。
   game.nodePos = game.layerData.map(ld => {
+    /** @type {Partial<import('../hub/game.store.types.js').RuntimeLayer['gridBounds']>} */
     const grid = ld.gridBounds || {};
     const minX = Number.isFinite(grid.minX) ? grid.minX : Math.min(...ld.logical.map(c => c.x || 0));
     const minRow = Number.isFinite(grid.minRow) ? grid.minRow : Math.min(...ld.logical.map(c => c.row || 0));
@@ -46,6 +47,7 @@ export function installDerived(layerData, mapSeed, generatorVersion = GENERATOR_
     }));
   });
   game.layerBounds = game.nodePos.map((positions, li) => {
+    /** @type {Partial<import('../hub/game.store.types.js').RuntimeLayer['gridBounds']>} */
     const grid = game.layerData[li].gridBounds || {};
     const minX = Math.min(...positions.map(p => p.x));
     const maxX = Math.max(...positions.map(p => p.x));

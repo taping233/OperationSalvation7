@@ -7,6 +7,8 @@ export const MUSIC_TRACKS = Object.freeze({
 });
 
 const SCENE_TRACKS = Object.freeze({ title: 'title', base: 'title', success: 'title', defeat: 'title', shop: 'shop' });
+/** @overload @param {string} mode @param {string} [scene] @param {string} [bossId] @returns {string|null} */
+/** @param {string} mode @param {string} scene */
 export function resolveMusicScene(mode, scene) {
   if (!mode) return null;
   if (mode === 'battle') return 'battle';

@@ -8,7 +8,7 @@ let modulePromise = null;
 let currentEntry = null;
 export let menuPageLoading = false;
 
-function loadMenuPagesModule() {
+export function preloadMenuPages() {
   if (!modulePromise) {
     const loading = import('./game.menu.pages.js');
     const retryable = loading.catch(error => {
@@ -25,7 +25,7 @@ export function cancelPendingMenuPageOpen() {
   return currentEntry?.cancel() || false;
 }
 
-export function createGameMenuController(deps, { pageFactory = null, loadPages = loadMenuPagesModule } = {}) {
+export function createGameMenuController(deps, { pageFactory = null, loadPages = preloadMenuPages } = {}) {
   const { SDT, UI, game, runtime, SLOT_COUNT, readSlot, saveSession, getActiveSlot = () => null, setActiveSlot } = deps;
   let pageController = null;
   const shell = { setLobby, showTitle, hideTitle, pickLatestSlot, fmtPlayTime, describeCurrentPage };
@@ -119,7 +119,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     game.runActive = false;
     setActiveSlot(null);
     setLobby(true);
-    UI.showScreen(document.getElementById('title'));
+    UI.showScreen(/** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title')));
     // 告别屏若还亮着（网页版退出→返回）交叉淡出；本就隐藏时立即返回
     UI.hideScreen(document.getElementById('exitScr'));
     bindTitleExtras();
@@ -144,7 +144,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     } catch { /* localStorage 不可用就不提示 */ }
   }
 
-  function hideTitle() { UI.hideScreen(document.getElementById('title')); }
+  function hideTitle() { UI.hideScreen(/** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'))); }
 
   // ---------- AK 风格主页：标题页附加按钮与真实数据 ----------
   let titleExtrasBound = false;
@@ -152,18 +152,18 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
   function bindTitleExtras() {
     if (titleExtrasBound) return;
     titleExtrasBound = true;
-    document.getElementById('mGuide')?.addEventListener('click', openTitleGuide);
-    document.getElementById('mAch')?.addEventListener('click', openTitleAchievements);
+    /** @type {HTMLButtonElement} */ (document.getElementById('mGuide'))?.addEventListener('click', openTitleGuide);
+    /** @type {HTMLButtonElement} */ (document.getElementById('mAch'))?.addEventListener('click', openTitleAchievements);
     // W1-11：标题页留言信箱入口（fromTitle=true → 返回键回标题而非设置页）
-    document.getElementById('mInbox')?.addEventListener('click', () => openSuggestionInbox(true));
-    const mute = document.getElementById('btnTitleMute');
+    /** @type {HTMLButtonElement} */ (document.getElementById('mInbox'))?.addEventListener('click', () => openSuggestionInbox(true));
+    const mute = /** @type {HTMLButtonElement} */ (document.getElementById('btnTitleMute'));
     if (mute) {
       const syncMute = () => mute.classList.toggle('muted', !!SDT.Sound.muted);
       mute.addEventListener('click', () => { SDT.Sound.setMuted(!SDT.Sound.muted); syncMute(); });
       syncMute();
     }
     // 标题页左上退出键：桌面版走 IPC 退出应用；浏览器版兜底 window.close()
-    document.getElementById('btnTitleExit')?.addEventListener('click', () => {
+    /** @type {HTMLButtonElement} */ (document.getElementById('btnTitleExit'))?.addEventListener('click', () => {
       if (window.sdtDesktop?.isDesktop) window.sdtDesktop.quit();
       else window.close();
     });
@@ -172,27 +172,30 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     if (!titleExtrasBoundGlobal) {
       titleExtrasBoundGlobal = true;
       // 圆形入口（收藏图鉴/设置/成就）点击脉冲：:active 按压只在按住时可见，快click也要有可感知反馈
-      document.getElementById('title')?.addEventListener('click', (e) => {
+      /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'))?.addEventListener('click', (e) => {
+      if (!(e.target instanceof Element)) return;
         const face = e.target.closest?.('.ak-circle');
-        const ring = face?.querySelector('.c-ring');
+        const ring = /** @type {import("./ui.dom.types.js").UIElement} */ (face?.querySelector('.c-ring'));
         if (!ring) return;
         ring.classList.remove('ak-click');
         void ring.offsetWidth;
         ring.classList.add('ak-click');
       });
       // 2026-09-19 留言 #13：标题页可点击互动小动画——字标抖动/撤离次数弹跳/字牌闪金
-      document.getElementById('title')?.addEventListener('click', (e) => {
+      /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'))?.addEventListener('click', (e) => {
+      if (!(e.target instanceof Element)) return;
         const play = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
         const wordmark = e.target.closest?.('.winter-wordmark');
         if (wordmark) { play(wordmark, 'wm-jolt'); SDT.Sound.sfx('hover'); return; }
         const sec = e.target.closest?.('.ak-sec');
-        if (sec) { play(sec.querySelector('b') || sec, 'sec-pop'); SDT.Sound.sfx('gain'); return; }
+        if (sec) { play(/** @type {import("./ui.dom.types.js").UIElement} */ (sec.querySelector('b')) || sec, 'sec-pop'); SDT.Sound.sfx('gain'); return; }
         const word = e.target.closest?.('.ak-word');
         if (word) { play(word, 'word-glint'); return; }
         const kicker = e.target.closest?.('.title-kicker');
         if (kicker) { play(kicker, 'kick-blink'); return; }
       });
       document.addEventListener('contextmenu', (e) => {
+      if (!(e.target instanceof Element)) return;
         if (e.target.closest('#sugLayer')) return;   // 建议层内部右键不重开
         e.preventDefault();
         const page = describeCurrentPage();
@@ -210,19 +213,19 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     const overlay = UI.el && UI.el.overlay;
     if (overlay && !overlay.hidden) {
       const body = UI.el.ovBody;
-      const hub = body && body.querySelector('#hubMain');
+      const hub = body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('#hubMain'));
       if (hub) {
         const tab = Array.from(hub.classList).find(c => c.startsWith('hub-'));
         const key = tab ? tab.slice(4) : '';
         const tabName = { deploy: '出发', stash: '仓库', shop: '商店', upgrade: '升级', classes: '人物', ach: '成就·收藏室' }[key] || key;
         return { id: 'hub-' + key, name: `基地 · ${tabName || '主页'}` };
       }
-      if (body && body.querySelector('#depMain')) return { id: 'depMain', name: '出发整备' };
-      if (body && body.querySelector('.sugin-page')) return { id: 'suginbox', name: '留言信箱' };
-      if (body && body.querySelector('.clib-main')) return { id: 'cardlib', name: '卡牌库' };
-      if (body && body.querySelector('.cdes-main')) return { id: 'cardforge', name: '制作坊' };
-      if (body && body.querySelector('.settings-page')) return { id: 'settings', name: '设置页' };
-      if (body && body.querySelector('.cls2-page')) return { id: 'classselect', name: '选人页' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('#depMain'))) return { id: 'depMain', name: '出发整备' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.sugin-page'))) return { id: 'suginbox', name: '留言信箱' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.clib-main'))) return { id: 'cardlib', name: '卡牌库' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.cdes-main'))) return { id: 'cardforge', name: '制作坊' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.settings-page'))) return { id: 'settings', name: '设置页' };
+      if (body && /** @type {import("./ui.dom.types.js").UIElement} */ (body.querySelector('.cls2-page'))) return { id: 'classselect', name: '选人页' };
       const title = ((UI.el.ovTitle && UI.el.ovTitle.textContent) || '').trim();
       if (title) return { id: 'overlay:' + title, name: title };
       const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
@@ -230,7 +233,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     }
     // 设置→留言库→返回设置的旧状态恢复会留下 idle，但标题屏本身仍真实可见。
     // 页面识别以可见 DOM 为准，同时保留正常 state:title 的稳定 id。
-    const title = document.getElementById('title');
+    const title = /** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title'));
     if (title && !title.hidden && !title._scrHiding) return { id: 'state:title', name: '标题页' };
     const stateName = { boot: '启动', title: '标题页', idle: '对局地图', moving: '对局移动中', modal: '弹层页面', done: '结算页', bossCleanup: 'BOSS 收尾' }[game.state] || game.state;
     return { id: 'state:' + (game.state || ''), name: stateName };
@@ -329,7 +332,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
       window.sdtDesktop.quit(); // 桌面版：存档已保留，真正退出程序
       return;
     }
-    UI.hideScreen(document.getElementById('title'));
+    UI.hideScreen(/** @type {import('./ui.dom.types.js').UIElement} */ (document.getElementById('title')));
     UI.showScreen(document.getElementById('exitScr'));
     // 网页版无法真正关闭程序：显示告别屏即可（存档已保留，可重新进入继续）
   }
