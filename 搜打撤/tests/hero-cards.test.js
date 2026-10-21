@@ -380,20 +380,32 @@ describe('直接释放家族实打', () => {
     await drain(20);
   });
 
-  it('药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）', async () => {
+  it.each([
+    { label: '随机候选', seed: null },
+    { label: '精神药水', seed: 14 },
+  ])('药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）· $label', async ({ seed }) => {
     const ym = C.all().find(c => c.name === '药水魔法');
     expect(Boolean(ym), '卡库应有药水魔法').toBe(true);
     const g = makeGame([ym]);
     BattleSession.start(g, [foe()], { name: '药水' });
     await drain();
     mark(g);
-    BattleSession.commands.playCard(uidOf(g, ym), 'self');
-    const s0 = await waitIdle();
+    const randomState = Random.snapshot();
+    let s0;
+    try {
+      // 保留随机药水覆盖，同时固定覆盖抽牌药水；只控制发现候选并恢复随机流。
+      if (seed !== null) Random.reseed(seed);
+      BattleSession.commands.playCard(uidOf(g, ym), 'self');
+      s0 = await waitIdle();
+    } finally {
+      if (seed !== null) Random.restore(randomState);
+    }
     expect(Boolean(s0.discovering), '应进入发现面板').toBe(true);
     const picked = s0.discovering.options[0];
     expect(Boolean(picked), '发现面板应有候选').toBe(true);
+    if (seed !== null) expect(picked.name, '固定样本必须覆盖抽牌药水').toBe('精神药水');
     BattleSession.commands.pickDiscover(0);
-    await drain();
+    const afterPotion = await drain();
     // 2026-09-11 实机回访 bug：发现选中的药水只被置入手牌，没有按卡面「并直接释放」结算——
     // 旧断言只查日志字样（打出药水魔法时的预告日志就含「直接释放」）而被骗过。
     // 释放语义 = 选中的卡被免费打出：不在手牌残留，且对局有可观测变化（敌掉血 / 敌冰冻 / 我回血 / 随机神秘效果）。
@@ -401,14 +413,23 @@ describe('直接释放家族实打', () => {
     expect(hand.includes(picked.name), `选中的【${picked.name}】应被直接释放而非留在手牌：${slice(g)}`).toBe(false);
     const foe0 = snap().foes[0];
     const st = foe0.status || {};
+    const drawN = picked.draw || 0;
+    const drewCards = drawN > 0 && afterPotion.hand.length > s0.hand.length
+      && afterPotion.drawPile.length < s0.drawPile.length;
+    if (drawN > 0) {
+      const drawnUids = s0.drawPile.slice(-drawN).reverse();
+      expect(drawnUids, '测试牌库应足够兑现药水抽牌').toHaveLength(drawN);
+      expect(afterPotion.hand, '抽牌药水应把原牌库顶的牌真实移入手牌').toEqual([...s0.hand, ...drawnUids]);
+      expect(afterPotion.drawPile, '抽牌药水应从真实牌库扣除相同牌').toEqual(s0.drawPile.slice(0, -drawN));
+    }
     // 药水池（parsePoolNoun('药水')=带「药水」名字的道具）逐瓶的可观测信号：
     //   伤害/诅咒类 → 敌掉血/冰冻/中毒/流血；回复类 → hp>300（满血 99999 不存在）；
-    //   攻击/法伤强化 → atkUp/spellUp；蓝瓶/精神药水抽牌（普通战变获得初始攻击）→「初始攻击」；
+    //   攻击/法伤强化 → atkUp/spellUp；精神药水 → 原牌库顶的牌真实移入手牌；
     //   巨蟒药水 →「召唤」；转势药水「附加陷阱牌」暂无结算分支 → 走「占位」日志（管线确实跑过该牌）。
     //   复原药水在战斗内是合法无操作（本场没有可复原的消耗堆），与满血回复同样豁免。
     const noOpInBattle = picked.name === '复原药水';
     const healingAtFull = picked.name === '恢复药水' && g.hp >= g.maxHp;
-    const observable = noOpInBattle || healingAtFull || foe0.hp < foe0.maxHp
+    const observable = noOpInBattle || healingAtFull || drewCards || foe0.hp < foe0.maxHp
       || (st.freeze || 0) > 0 || (st.poison || 0) > 0 || (st.bleed || 0) > 0
       || g.hp > 300
       || (snap().pstat.status && ((snap().pstat.status.spellUp || 0) > 0 || (snap().pstat.status.atkUp || 0) > 0))

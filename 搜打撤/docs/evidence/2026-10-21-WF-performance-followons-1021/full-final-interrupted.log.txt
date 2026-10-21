@@ -1,0 +1,43 @@
+{"mode":"full","paths":["game/src/battle/core/battle.engine.factory.domain.js","game/src/generated/art-manifest.js","scripts/runtime-asset-redundancy-review.mjs","scripts/runtime-asset-redundancy.mjs","tests/battle-snapshot-phase-cost.test.js","tests/direct-cast.test.js","tests/runtime-asset-aliases.test.js","tests/runtime-asset-redundancy-plugin.test.js","tests/runtime-asset-redundancy.test.js","vite.config.js"],"reasons":["质量配置或提交钩子变更需要完整静态检查与全量测试","包或构建配置变更需要全量测试","公共状态、启动、规则或迁移边界变更需要全量测试"],"tests":[]}
+[gate] 模式：full
+[gate] 变更：game/src/battle/core/battle.engine.factory.domain.js
+[gate] 变更：game/src/generated/art-manifest.js
+[gate] 变更：scripts/runtime-asset-redundancy-review.mjs
+[gate] 变更：scripts/runtime-asset-redundancy.mjs
+[gate] 变更：tests/battle-snapshot-phase-cost.test.js
+[gate] 变更：tests/direct-cast.test.js
+[gate] 变更：tests/runtime-asset-aliases.test.js
+[gate] 变更：tests/runtime-asset-redundancy-plugin.test.js
+[gate] 变更：tests/runtime-asset-redundancy.test.js
+[gate] 变更：vite.config.js
+[gate] 说明：质量配置或提交钩子变更需要完整静态检查与全量测试
+[gate] 说明：包或构建配置变更需要全量测试
+[gate] 说明：公共状态、启动、规则或迁移边界变更需要全量测试
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (600 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-dDPsQf/snapshot/搜打撤
+
+·····························································································································································[gate] FAIL：全量 Vitest 失败（exit null）

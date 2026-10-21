@@ -1,0 +1,89 @@
+{
+  "failedFull": {
+    "filesPassed": 753,
+    "filesFailed": 2,
+    "filesSkipped": 1,
+    "testsPassed": 7853,
+    "testsFailed": 2,
+    "testsSkipped": 7,
+    "rawLog": "full-final-two-fixtures-failed.log.txt",
+    "report": "2026-10-21T03-18-14.276Z-99ce0075-staged.json",
+    "reportSha256": "4e10158a88b8d290dd9047b4ebc6e0b0b0e029a3442a862697c433b0c0e64928",
+    "reportRetrieval": "retained untracked in this directory; over 1 MB so excluded from Git"
+  },
+  "potion": "Seed14 selects spirit potion. Both d682 and current move exact two top-deck UIDs into hand (0 to2, deck99 to97), but original observable whitelist rejects. Minimal test adds actual UID/deck assertions and deterministic sample, retains random sample and original not-left-in-hand assertion. Both log-only and no-cast negative controls fail.",
+  "lifecycle": "Both d682 and current produce three granted cards when Apollo onAcquire adds a child; consumed UID remains exactly once and infusion zero. Existing base-2 quantity case now uses legal ice-spike pool without onAcquire; all original assertions remain. Existing card-description-audit-battle Apollo tests separately verify exact three IDs, hand placement, +1 energy and no repeated expiry reward.",
+  "scope": "Only two test fixtures; no production rules, budget, or gate changes. Final exact-index full and hook remain required.",
+  "logs": [
+    {
+      "path": "potion-fixed-baseline.log.txt",
+      "sha256": "5f929372160055a3430a885dbf03ea2ad67343aad8d75697ae65104437d45abf",
+      "bytes": 2059
+    },
+    {
+      "path": "potion-fixed-current.log.txt",
+      "sha256": "36d095e592568838e2b93524f4eb8483701cb9c81e002c762ab74bb17535073e",
+      "bytes": 2059
+    },
+    {
+      "path": "potion-fixed-final.log.txt",
+      "sha256": "785de7f5a2d1516f49b392513151344edf210773138422103c287eeb771d637d",
+      "bytes": 2059
+    },
+    {
+      "path": "potion-fixture-lint.log.txt",
+      "sha256": "5084569c8dfba67eda6e8702605a9324235c3927602977a35dcf3ca1c4e9e15e",
+      "bytes": 15
+    },
+    {
+      "path": "potion-negative-log-only.log.txt",
+      "sha256": "12bf62ec8c4c115f019a7a8f2af3202b13927f841f8eb7cae32cd9929844066a",
+      "bytes": 3172
+    },
+    {
+      "path": "potion-negative-not-cast.log.txt",
+      "sha256": "fe74535fe3ea8cea0ae3a616dbe794256336a7ac099518cd6ca6d3026bc94b0b",
+      "bytes": 3697
+    },
+    {
+      "path": "potion-old-baseline.log.txt",
+      "sha256": "ae2a8b0d80ab6feb3741996a213756334a0420347db27707e79c8f3c02d65c8e",
+      "bytes": 4177
+    },
+    {
+      "path": "potion-old-current.log.txt",
+      "sha256": "f30b9d82a99693516bcb79be184c456831925d8339ea2b6b2bdcfec629956ec4",
+      "bytes": 4177
+    },
+    {
+      "path": "lifecycle-apollo-baseline.log.txt",
+      "sha256": "152531713845a8f6c538278fe8ed800bec8a5ce17f8a7bc9333cb56390bc11ce",
+      "bytes": 14481
+    },
+    {
+      "path": "lifecycle-apollo-current.log.txt",
+      "sha256": "9b27a9a9f07e4a2460f97a9e34775ffc8a8ea2d95d19adc67a81379aad2e3652",
+      "bytes": 14480
+    },
+    {
+      "path": "lifecycle-diagnostic-baseline.log.txt",
+      "sha256": "7d6f9388b2c4e311fe41b22d55f082774bd950397cb346c12b09984c9d800579",
+      "bytes": 1714
+    },
+    {
+      "path": "lifecycle-diagnostic-current.log.txt",
+      "sha256": "ce1497a0be8bc339ff3f5d093857d61354170e3cdd9c79e5189e4b2c38c30d87",
+      "bytes": 1713
+    },
+    {
+      "path": "lifecycle-fixture-baseline.log.txt",
+      "sha256": "4f2f0d93de8f64c0ec0f3779acd733707749236b7e1a180fc9c3e25fb632e0b1",
+      "bytes": 2141
+    },
+    {
+      "path": "lifecycle-fixture-current.log.txt",
+      "sha256": "2a8431502afe4075b20c1d6d476aee5fefb8a261ada635a45a99aa8584a897d7",
+      "bytes": 2140
+    }
+  ]
+}

@@ -2,7 +2,7 @@
  * 在真实 BattleSession（battle.core，无视图层）里逐条验证「直接释放」链路的语义正确性：
  *   1 无量仙剑·云风（能力卡）——抽 5 张后自动直接释放其中的武术（免费）
  *   2 剑荡妖邪——手选 1 张武术直接释放，选中卡不扣费（isFree）
- *   3 永恒绽放——发现并直接施放 1 张，其余两张入手（playKeep）
+ *   3 永恒绽放——可施放牌免费打出、纯注能牌未注能留手，其余两张入手（playKeep）
  *   4 千变万化——发现并直接施放 1 张，再抽 2 张
  *   5 江湖救急——发现其它职业的卡并直接施放
  *   6 药水魔法——发现 1 瓶药水并直接释放
@@ -22,8 +22,9 @@ window.SDT.MAP = {
   items: { rations: { name: '口粮' }, wood: { name: '木材' } },
 };
 await import('../game/src/cards/cards.js');
-const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { BattleSession, infuseOf } = await import('../game/src/battle/core/battle.core.js');
 const { findCard } = await import('../game/src/battle/core/battle.engine.js');
+const { Random } = await import('../game/src/core/random.js');
 
 const C = window.SDT.Cards;
 
@@ -107,6 +108,31 @@ async function playIt(game, uid, c) {
   return drain();
 }
 
+// 固定合法候选和测试种子，再按 ID 选择；不把发现第 0 张的随机可施放性当作规则。
+// 真实 BattleSession 仍执行发现、免费施放与注能守卫；测试结束恢复卡池和随机状态。
+async function playBloomChoice(g, bloom, chosenId) {
+  const options = ['tt3-ice-spike', 'tt12-raydragon', 'tt12-freezeray'].map(card);
+  const randomBefore = Random.snapshot();
+  const pool = vi.spyOn(C, 'all').mockReturnValue(options);
+  try {
+    Random.reseed('direct-cast-bloom');
+    BattleSession.commands.playCard(g.ownedCards[0].uid, sideFor(bloom));
+    const discovering = (await drain(300, true)).discovering;
+    expect(discovering).toBeTruthy();
+    expect(discovering.act).toBe('playKeep');
+    expect(discovering.n).toBe(1);
+    expect(discovering.options.map(c => c.id).sort()).toEqual(options.map(c => c.id).sort());
+    const index = discovering.options.findIndex(c => c.id === chosenId);
+    expect(index).toBeGreaterThanOrEqual(0);
+    BattleSession.commands.pickDiscover(index);
+    await drain();
+    return options;
+  } finally {
+    pool.mockRestore();
+    Random.restore(randomBefore);
+  }
+}
+
 describe('直接释放 / 直接施放类卡牌专项审计', () => {
 
   it('能力卡·无量仙剑·云风：抽5张后自动直接释放其中的武术（免费）', async () => {
@@ -175,16 +201,55 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     const g = makeGame([bloom], '法师');
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
     await drain();
+    const before = snap();
     const handBefore = snap().hand.length;
-    await playIt(g, g.ownedCards[0].uid, bloom);   // drain 会自动选发现第 0 张
+    const chosenId = 'tt3-ice-spike';
+    expect(infuseOf(card(chosenId))).toBe(0);
+    const options = await playBloomChoice(g, bloom, chosenId);
     await waitLog(() => logsJoin(g).includes('并直接施放'));
     expect(logsJoin(g)).toContain('并直接施放');
     await waitLog(() => logsJoin(g).includes('其余的'));
     expect(logsJoin(g)).toContain('其余的');   // 剩余两张入手
     const s = snap();
     expect(s.hand.length).toBeGreaterThanOrEqual(handBefore + 1);
+    expect(s.hand.map(uid => findCard(uid).card.id).sort())
+      .toEqual(options.filter(c => c.id !== chosenId).map(c => c.id).sort());
+    expect(s.consumedPile.filter(uid => findCard(uid)?.card.id === chosenId)).toHaveLength(1);
+    expect(s.foes[0].hp).toBeLessThan(before.foes[0].hp);
+    expect(s.energy).toBe(before.energy - bloom.cost);
+    expect(s.discovering).toBeFalsy();
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
     endBattle(g);
+    expect(takeAsyncError()).toBeNull();
+  });
+
+  it('永恒绽放：纯注能牌未注能时保留在手牌，其余两张仍入手', async () => {
+    const bloom = card('tt7-bladebloom');
+    const dragon = card('tt12-raydragon');
+    const g = makeGame([bloom], '法师');
+    BattleSession.start(g, [foeDef()], { isBoss: false, name: '直释审计' });
+    await drain();
+    try {
+      const before = snap();
+      expect(infuseOf(dragon)).toBe(1);
+      const options = await playBloomChoice(g, bloom, dragon.id);
+      const s = snap();
+      expect(logsJoin(g)).toContain('未施放，保留在手牌中等待注能');
+      expect(logsJoin(g)).not.toContain('并直接施放');
+      expect(logsJoin(g)).toContain('其余的');
+      expect(s.hand.map(uid => findCard(uid).card.id).sort()).toEqual(options.map(c => c.id).sort());
+      const retained = s.hand.find(uid => findCard(uid).card.id === dragon.id);
+      expect(retained).toBeTruthy();
+      expect(s.consumedPile).not.toContain(retained);
+      expect(s.consumedPile).toEqual([g.ownedCards[0].uid]);
+      expect(s.foes[0].hp).toBe(before.foes[0].hp);
+      expect(s.energy).toBe(before.energy - bloom.cost);
+      expect(s.infusing).toBeFalsy();
+      expect(s.discovering).toBeFalsy();
+      expect(s.busy || s.actionQueueLength > 0).toBe(false);
+    } finally {
+      endBattle(g);
+    }
     expect(takeAsyncError()).toBeNull();
   });
 

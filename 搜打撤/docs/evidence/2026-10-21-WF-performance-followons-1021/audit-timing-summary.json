@@ -1,0 +1,54 @@
+{
+  "scope": "test fixture only; production runtime and fixed budgets unchanged",
+  "originalFullFailures": [
+    {
+      "report": "2026-10-21T02-58-35.500Z-28e29bed-staged.json",
+      "reportSha256": "7f65f87b3897b21001a83da4d4473b4fa1e6b5470bea1ddfb2b23becbbfe34bc",
+      "reportBytes": 4176310,
+      "reportRetrieval": "retained untracked in this task evidence directory; excluded from Git because over 1 MB",
+      "outcome": "failed",
+      "exitCode": 1,
+      "reusableReceipt": false,
+      "log": "full-final-interrupted.log.txt",
+      "logSha256": "a6eceb9da985f56d787f873c7ca50be7fc4b3e1eafd479954ae3f394566ac18a"
+    },
+    {
+      "report": "2026-10-21T03-01-12.493Z-6b6f282a-staged.json",
+      "reportSha256": "d3df56c4488729f975cd802808500446ca9adb700805b09606bfe42baf5138f6",
+      "reportBytes": 4176310,
+      "reportRetrieval": "retained untracked in this task evidence directory; excluded from Git because over 1 MB",
+      "outcome": "failed",
+      "exitCode": 1,
+      "reusableReceipt": false,
+      "log": "full-final-audit-failed.log.txt",
+      "logSha256": "ce8c2113c3887aabb983cc199636eb6ac1d9c27df8b86c916226d3e897190cce"
+    }
+  ],
+  "interruptedRun": "Vitest exit null; no completed assertion report; cause not established",
+  "completedFailedRun": {
+    "testFilesPassed": 754,
+    "testFilesFailed": 1,
+    "testFilesSkipped": 1,
+    "testsPassed": 7852,
+    "testsFailed": 1,
+    "testsSkipped": 7,
+    "failure": "cc-mana-surge busy/queue check after 200 timer polls"
+  },
+  "diagnosis": "Four legitimate tt12-elemburst casts require real RAF time. In both the d682 engine and candidate, 200 timer polls return while busy; the same queue completes later. Exact random sequence of the failed full run was not logged.",
+  "fix": "Use a bounded 5000 ms wall-clock deadline, retain original final busy/queue checks, and throw with RNG state and queue/selection diagnostic on expiry.",
+  "regressions": {
+    "legalFourCasts": "Seed 1 with a legal mana-surge/element-burst pool verifies four real cast log entries and a fully idle queue.",
+    "trueHang": "A permanently busy queue still throws on a 25 ms deadline with state diagnostics.",
+    "oldHelperNegativeControl": "The same four-cast regression with d682 and old 200-poll helper failed as expected (2 casts observed versus 4 required)."
+  },
+  "targeted": {
+    "filesPassed": 4,
+    "testsPassed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "report": "audit-fixture-targeted-final.json"
+  },
+  "lint": "passed",
+  "earlierDiagnosticSetupErrors": "Sparse diagnostic setup first lacked required game data/css/assets; corrected by read-only reuse. The first new fixture imported Random too early; corrected to dynamic import after existing SDT initialization. Original failed logs retained outside Git; none count as product passes.",
+  "finalGate": "Pending exact-index full staged gate and normal pre-commit verification at time this record was frozen."
+}

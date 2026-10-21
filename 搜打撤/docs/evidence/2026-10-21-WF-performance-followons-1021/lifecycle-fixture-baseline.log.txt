@@ -1,0 +1,20 @@
+
+ RUN  v3.2.7 /tmp/lifecycle-audit-diagnostic-20261021/baseline
+
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 射线按UID记录在手事件，离手暂停，回手继续，晚入手不继承全局历史 296ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 实际注能只给当时在手副本计数，不包括消耗钩随后新获得的牌 122ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 新战斗清空计数；旧状态缺字段默认0，新状态恢复按UID隔离 151ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 火球首次打出前按回合成长，各UID只增一次 151ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 正午决战保留第二目标；死亡才回退（死亡=false） 253ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 正午决战保留第二目标；死亡才回退（死亡=true） 249ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > tt2-wreck到期执行普通消耗钩；重复UID/重复任务只触发一次 69ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > tt3-azure-sword到期执行普通消耗钩；重复UID/重复任务只触发一次 117ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > tt3-sapper-bomb到期执行普通消耗钩；重复UID/重复任务只触发一次 65ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > tt7-arcanescroll到期执行普通消耗钩；重复UID/重复任务只触发一次 67ms
+ ✓ tests/card-description-fix-lifecycle.test.js > 卡面描述修复：生命周期 > 到期不误触发被注能钩；取消前不消耗；终局后不处理后续UID 67ms
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  12:27:18
+   Duration  4.64s (transform 485ms, setup 0ms, collect 943ms, tests 1.61s, environment 345ms, prepare 62ms)
+

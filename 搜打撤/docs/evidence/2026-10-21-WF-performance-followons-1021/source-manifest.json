@@ -1,0 +1,97 @@
+{
+  "baseCommit": "d682c4cb0217f15da04aae02ec20a2a3da29b114",
+  "baseTree": "a6fbb3ee1f210265338f3b669403f73378d1219f",
+  "patches": [
+    {
+      "name": "seven-file-retained-assets-alias.patch",
+      "sha256": "5eaa3e2c994a4fd557694992633a39286ae7b4e32bb9acc49b3fceb272935019"
+    },
+    {
+      "name": "snapshot-phase-inputs.patch",
+      "sha256": "f668d9de0681a818e35098760206f3ee34d23b08182aed54f827c7a080ca371d"
+    }
+  ],
+  "sourcePaths": [
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "beforeSha256": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8",
+      "afterSha256": "43a26a0b74dd6091530d1bae4ec2e4394072f29072be8e3fb043d50870ded857",
+      "afterBytes": 83032
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "beforeSha256": "619aed8aa105636624fc205dd2a224f6e362773bf1436d4c10a82dd82bff5c6c",
+      "afterSha256": "6ae765bb40657f887443f365089c7533352bc237c76c87a2f69b6d4e3035abeb",
+      "afterBytes": 40967
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy.mjs",
+      "beforeSha256": "8c84ca869399b79c2261768ce5255df4a7f2b581ff4d4139cd2f16242eece9d4",
+      "afterSha256": "9351046eff16e8f059a327eff04e4e872af912dfff592f4e5099a692f9d1b0a6",
+      "afterBytes": 14547
+    },
+    {
+      "path": "搜打撤/tests/battle-snapshot-phase-cost.test.js",
+      "beforeSha256": null,
+      "afterSha256": "71fddfd8d26519a18521f3753fafc2927785bbc7f2a1da2d846e680bf1203e14",
+      "afterBytes": 8701
+    },
+    {
+      "path": "搜打撤/tests/direct-cast.test.js",
+      "beforeSha256": "34cf0a6fb8ab6079949925c5c758fe73e9f308279b0c3592e5b0d4f57e2daf88",
+      "afterSha256": "c16d4ea7026d88a40d6a33b524f8b6f26c8f851a1cf77989ae0a5377c8502bb7",
+      "afterBytes": 19441
+    },
+    {
+      "path": "搜打撤/tests/runtime-asset-aliases.test.js",
+      "beforeSha256": "adb1a16aae95a48d3bfefdb67c45ee4b9724cfaeede5529511458aeba63a7899",
+      "afterSha256": "c65b25fd165f777ebe833022a1a605410e3831e4e79fe8b0e0fadb532486f55b",
+      "afterBytes": 22496
+    },
+    {
+      "path": "搜打撤/tests/runtime-asset-redundancy-plugin.test.js",
+      "beforeSha256": "333c26f59033f8118bdde5b1480e0043b3a27f450d7591843159fe39de8dc6a9",
+      "afterSha256": "bc132308deba0ccccc10e432096e88bf47393423fd5597df7540ef8b94b3bb72",
+      "afterBytes": 19589
+    },
+    {
+      "path": "搜打撤/tests/runtime-asset-redundancy.test.js",
+      "beforeSha256": "b0372262ac20ff69f2e6aa3d269a9a6a11c8c061ea6b36deb9171ea10603784f",
+      "afterSha256": "f8371c191c42e50947c8db11ebab5cc0dd7bcf3df9ddd3c62fbe0d92096473b8",
+      "afterBytes": 29309
+    },
+    {
+      "path": "搜打撤/vite.config.js",
+      "beforeSha256": "2cb7165c3c125369b8d0078d9a752700e61cde336ca6a0ce107d1afcdf6a14d0",
+      "afterSha256": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4",
+      "afterBytes": 22122
+    },
+    {
+      "path": "搜打撤/game/src/generated/art-manifest.js",
+      "beforeSha256": "f896b1acaaa4832b661cfb4d893f61c19c4b7a28e06d98db12ab87e3f6d14a48",
+      "afterSha256": "1b26adb70f7c46d6448ee0ae69b45dbea16ff2210301121616ddfc201a6cc573",
+      "afterBytes": 39556
+    },
+    {
+      "path": "搜打撤/tests/battle-all-cards.test.js",
+      "beforeSha256": "2f9ef2d64a96df7ebf12b434a934526f68cae155ea6d21c8bc8b133f91e7a937",
+      "afterSha256": "786d8b02cc0095679dd61a4c86d5ded36de8be124117a98c63897794067fc446",
+      "afterBytes": 18631
+    },
+    {
+      "path": "搜打撤/tests/hero-cards.test.js",
+      "beforeSha256": "3b59955b637a2e47a76cbd0b00414420b08533a96a544cc17339214bc2131f33",
+      "afterSha256": "f03db877e6775a80f6ad24b4f114a8124299440aa5876b4ee87dba9c6a8e13c4",
+      "afterBytes": 22586
+    },
+    {
+      "path": "搜打撤/tests/card-description-fix-lifecycle.test.js",
+      "beforeSha256": "d66c1a9f5651cf7a721367a79c0fd307542507d467597d572670471b274de77d",
+      "afterSha256": "708427d926ba3eadd9c9dfab5cc5a6579cccef8b2e6427f68ea2cf635961f261",
+      "afterBytes": 8726
+    }
+  ],
+  "generatedPath": "搜打撤/game/src/generated/art-manifest.js",
+  "generatedExplanation": "Standard npm run build removed 77 omitted published resource names; all source images retained.",
+  "supplementalTestFix": "Bound all-cards audit by elapsed time and retain true-hang failure; deterministic four-cast regression added after diagnosed full-suite flake."
+}

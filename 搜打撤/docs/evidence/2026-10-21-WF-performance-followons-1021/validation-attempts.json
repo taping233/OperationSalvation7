@@ -1,0 +1,8 @@
+{
+  "firstBuild": "build-result.json",
+  "firstBuildOutcome": "failed: original build directory guard rejected output outside project desktop-app; guard unchanged",
+  "prematureClosure": "runtime-asset-closure.json",
+  "prematureClosureOutcome": "failed on partial output from rejected build; not used for publication",
+  "retainedSnapshotInvocation": "node --input-type=module importing unchanged scripts/workflow-staged.mjs runStaged(root,{task,date,json:true,keepSnapshot:true})",
+  "retainedSnapshotReason": "CLI does not expose --keep-snapshot; the unmodified exported function supports keepSnapshot to preserve the fully validated snapshot for standard build in its own desktop-app/game directory"
+}

@@ -1,7 +1,9 @@
 // @vitest-environment node
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   assertExcludedRuntimeAssetReferences, assertRuntimeExclusionPlanUnchanged,
@@ -58,21 +60,35 @@ it('keeps reviewed asset decisions identical across Git LF and Windows CRLF sour
 });
 
 describe('reviewed production-only asset omissions', () => {
-  it('contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files', () => {
-    expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(195);
-    expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(195);
-    const chests = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.category === 'chests');
+  it('preserves 195 historical exclusions and adds exactly 91 source-retained images', () => {
+    expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(286);
+    expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(286);
+    const retained = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.sourceSha256);
+    const historical = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => !candidate.sourceSha256);
+    expect(historical).toHaveLength(195);
+    expect(retained).toHaveLength(91);
+    const chests = historical.filter(candidate => candidate.category === 'chests');
     expect(chests).toHaveLength(90);
     expect(chests.map(candidate => candidate.path).sort()).toEqual(['small', 'medium', 'large', 'class', 'boss']
       .flatMap(kind => Array.from({ length: 18 }, (_, frame) =>
         `scenes/chests/${kind}-rig-640-v1/frame-${String(frame).padStart(2, '0')}.webp`)).sort());
     const current = collectReviewedRuntimeAssetExclusions(projectRoot);
     expect(current.warnings).toEqual([]);
-    expect(current.excludedAssets.size).toBe(195);
+    expect(current.excludedAssets.size).toBe(286);
     for (const asset of current.excludedAssets) {
       expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle|avatars)\/|fonts\/|safe-simple-v7\/|symbol-foreground|map-atmosphere|city-ghost-props|transition-.*-v2/);
-      expectRetiredAsset(asset);
+      const source = retained.find(candidate => candidate.path === asset);
+      if (source) {
+        const bytes = readFileSync(new URL(`../game/assets/${asset}`, import.meta.url));
+        expect(bytes.length).toBe(source.sourceBytes);
+        expect(hash(bytes)).toBe(source.sourceSha256);
+      } else expectRetiredAsset(asset);
     }
+    expect(retained.filter(candidate => candidate.category === 'chests').map(candidate => candidate.path).sort()).toEqual(
+      ['small', 'medium', 'large', 'class', 'boss'].flatMap(kind => Array.from({ length: kind === 'large' ? 14 : 18 },
+        (_, frame) => `scenes/chests/${kind}-rig-v1/frame-${String(frame).padStart(2, '0')}.webp`)).sort());
+    expect(retained.filter(candidate => candidate.category === 'slot-weather').map(candidate => candidate.path).sort()).toEqual(
+      ['partly-cloudy', 'rain', 'snow', 'sunny', 'thunder'].map(kind => `ui/slot-weather/${kind}-v1.webp`).sort());
   });
 
   it('omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs', () => {
@@ -308,4 +324,131 @@ it('keeps the reviewed sample callback and catalog in the explicit sound path de
   for (const [file, expected] of Object.entries(dependencies)) {
     expect(hash(readFileSync(new URL(`../${file}`, import.meta.url), 'utf8').replaceAll('\r\n', '\n'))).toBe(expected);
   }
+});
+
+
+describe('retained high-resolution chest and inline-replaced weather sources', () => {
+  const roots = [];
+  afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
+  const chest = 'scenes/chests/small-rig-v1/frame-00.webp';
+  const alias = 'scenes/chests/small-rig-v1/frame-01.webp';
+  const weather = 'ui/slot-weather/rain-v1.webp';
+  const selectors = ['game/src/run/chest-opening-art.js', 'game/src/ui/slot-emblems.js', 'game/src/ui/game.menu.pages.js'];
+  function retainedFixture() {
+    const sources = selectors.map((filename, i) => ({ path: filename, code: `export const current = ${i};` }));
+    const body = Buffer.from('reviewed image\r\n');
+    const candidates = [chest, alias, weather].map(asset => ({ path: asset,
+      category: asset === weather ? 'slot-weather' : 'chests', sourceBytes: body.length, sourceSha256: hash(body) }));
+    const review = { candidates, consumerFingerprints: {
+      chests: { [selectors[0]]: hash(sources[0].code) },
+      'slot-weather': Object.fromEntries(sources.slice(1).map(source => [source.path, hash(source.code)])),
+    }, opaqueConsumers: {} };
+    const sourceAssets = new Map(candidates.map(candidate => [candidate.path,
+      { bytes: candidate.sourceBytes, sha256: candidate.sourceSha256 }]));
+    return { sources, review, sourceAssets, body };
+  }
+  const inspect = f => planReviewedRuntimeAssetExclusions(f.sources, {}, f.review, f.sourceAssets);
+
+  it('requires valid fixed source bytes, retains the whole affected family, and leaves other families independent', () => {
+    expect(inspect(retainedFixture()).excludedAssets.size).toBe(3);
+    for (const mutate of [
+      f => { f.sourceAssets.delete(chest); },
+      f => { f.sourceAssets.set(chest, { bytes: f.body.length, sha256: hash('redrawn') }); },
+      f => { f.sourceAssets.set(chest, { bytes: 1, sha256: hash(f.body) }); },
+      f => { delete f.review.candidates[0].sourceSha256; },
+      f => { delete f.review.candidates[0].sourceBytes; },
+      f => { f.review.candidates[0].sourceBytes = -1; },
+      f => { f.review.candidates[0].sourceSha256 = 'not-a-digest'; },
+    ]) {
+      const f = retainedFixture(); mutate(f);
+      expect([...inspect(f).excludedAssets]).toEqual([weather]);
+      expect(inspect(f).warnings.join(' ')).toContain('reviewed source bytes for original-chest-rigs');
+    }
+    const f = retainedFixture(); f.sourceAssets.delete(weather);
+    expect([...inspect(f).excludedAssets]).toEqual([chest, alias]);
+    for (const sourceAssets of [null, undefined, {}]) {
+      expect(planReviewedRuntimeAssetExclusions(f.sources, {}, f.review, sourceAssets).excludedAssets.size).toBe(0);
+    }
+  });
+
+  it('retains split directory/token references and rejects asset-root arrays, including raw image.src joins', () => {
+    for (const code of [
+      'const restored = "small-rig-v1";',
+      'const restored = [kind, "rig-v1"].join("-");',
+      'const restored = ["ui", "slot-weather", weather + "-v1.webp"].join("/");',
+      'const restored = "ui/slot-" + "weather/" + weather + "-v1.webp";',
+      'image.src = ["assets", "ui", "slot-weather", weather + "-v1.webp"].join("/");',
+      'image.src = ["assets", "ui", "slot-" + "weather", name].join("/");',
+      'image.src = ["assets", name].join("/");',
+    ]) {
+      const f = retainedFixture(); f.sources.push({ path: 'game/src/lazy-restored.js', code });
+      const p = inspect(f);
+      if (code.includes('rig-v1')) {
+        expect(p.excludedAssets.has(chest)).toBe(false); expect(p.excludedAssets.has(alias)).toBe(false);
+      } else expect(p.excludedAssets.has(weather)).toBe(false);
+    }
+    expect(hasOpaqueAssetPaths('image.src = ["assets", name].join("/");')).toBe(true);
+    expect(hasOpaqueAssetPaths('image.src = ["assets", name]["join"]("/");')).toBe(true);
+    for (const root of ['./assets', '../assets', '../../assets', '/assets', '.\\assets', '..\\assets']) {
+      const code = `image.src = [${JSON.stringify(root)}, "ui", "slot-" + "weather", name].join("/");`;
+      const f = retainedFixture(); f.sources.push({ path: 'game/src/relative-restored.js', code });
+      expect(hasOpaqueAssetPaths(code), root).toBe(true);
+      expect(inspect(f).excludedAssets.size, root).toBe(0);
+      expect(() => assertExcludedRuntimeAssetReferences([{ id: '/game/src/virtual-relative.js', code }], new Set([weather])))
+        .toThrow(/Joined asset root/);
+    }
+    for (const join of ['join("")', 'join(separator)', 'join()']) {
+      const code = `image.src = ["./assets/", "ui/", "slot-" + "weather/", name].${join};`;
+      const f = retainedFixture(); f.sources.push({ path: 'game/src/joined-restored.js', code });
+      expect(hasOpaqueAssetPaths(code), join).toBe(true);
+      expect(inspect(f).excludedAssets.size, join).toBe(0);
+      expect(() => assertExcludedRuntimeAssetReferences([{ id: '/game/src/virtual-joined.js', code }], new Set([weather])))
+        .toThrow(/Joined asset root/);
+    }
+    expect(hasOpaqueAssetPaths('const label = ["hello", name].join(" ");')).toBe(false);
+  });
+
+  it('retains weather after either SVG selector changes/disappears without loosening the chest source guard', () => {
+    for (const filename of selectors.slice(1)) {
+      for (const missing of [false, true]) {
+        const f = retainedFixture();
+        f.sources = missing ? f.sources.filter(source => source.path !== filename)
+          : f.sources.map(source => source.path === filename ? { ...source, code: source.code + '\n// revision' } : source);
+        expect([...inspect(f).excludedAssets]).toEqual([chest, alias]);
+      }
+    }
+  });
+
+  it('rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family', () => {
+    const f = retainedFixture(); const root = mkdtempSync(path.join(tmpdir(), 'asset-source-guard-')); roots.push(root);
+    for (const directory of ['game/src', 'game/data', 'game/css']) mkdirSync(path.join(root, directory), { recursive: true });
+    for (const source of f.sources) {
+      const target = path.join(root, source.path); mkdirSync(path.dirname(target), { recursive: true }); writeFileSync(target, source.code);
+    }
+    for (const candidate of f.review.candidates) {
+      const target = path.join(root, 'game/assets', candidate.path); mkdirSync(path.dirname(target), { recursive: true }); writeFileSync(target, f.body);
+    }
+    const collect = () => collectReviewedRuntimeAssetExclusions(root, f.review);
+    const target = path.join(root, 'game/assets', chest);
+    expect(collect().excludedAssets.size).toBe(3);
+    writeFileSync(target, Buffer.from('redrawn image!\r\n'));
+    expect([...collect().excludedAssets]).toEqual([weather]);
+    writeFileSync(target, f.body); expect(collect().excludedAssets.size).toBe(3);
+    // Binary hashes do not inherit the LF/CRLF normalization used for JS selectors.
+    writeFileSync(target, f.body.toString().replaceAll('\r\n', '\n'));
+    expect([...collect().excludedAssets]).toEqual([weather]);
+    rmSync(target); expect([...collect().excludedAssets]).toEqual([weather]);
+    mkdirSync(target); expect([...collect().excludedAssets]).toEqual([weather]);
+  });
+
+  it('preserves active safe/supply frames and rejects late restored family tokens and root joins in the graph', () => {
+    const excluded = new Set([chest, alias, weather]);
+    const safe = { id: '/game/src/current.js', code: 'const current = ["safe-simple-v7/frame-00.webp", "supply-opening-v6/small/frame-01.webp"];' };
+    expect(() => assertExcludedRuntimeAssetReferences([safe], excluded)).not.toThrow();
+    for (const code of ['const rig = "rig-v1";', 'const directory = "slot-weather";',
+      'image.src = ["assets", "ui", "slot-" + "weather", name].join("/");']) {
+      expect(() => assertExcludedRuntimeAssetReferences([{ id: '/game/src/virtual-lazy.js', code }], excluded))
+        .toThrow(/Excluded runtime asset|Joined asset root/);
+    }
+  });
 });

@@ -66,7 +66,7 @@
 - `cards/card-rarity.js`：英雄线与衍生牌稀有度的纯规则实现，由调用方注入按 ID 查找。Cards 门面继续用 `Array.find` 保持原数组首项优先；`card-render-context.js` 在照相馆一次浅目录快照中构造 first-ID 索引，筛选、排序和各延迟挂载批次共用该快照，页面数据刷新后重建，关闭时释放索引。
 下文战斗模块文件名相对上方五个子目录；具体路径按[源码目录说明](../game/src/README.md)定位。
 
-- `battle.core.js`：浏览器战斗装配与命令门面；默认状态在 `battle.runtime.js`，独立状态由 `battle.runtime.factory.js` 创建。引擎及敌方阶段共用对应领域工厂；纯引擎不访问 DOM 或依赖战斗视图，BOSS 编组和消耗牌堆页面由快照驱动。
+- `battle.core.js`：浏览器战斗装配与命令门面；默认状态在 `battle.runtime.js`，独立状态由 `battle.runtime.factory.js` 创建。引擎及敌方阶段共用对应领域工厂；纯引擎不访问 DOM 或依赖战斗视图，BOSS 编组和消耗牌堆页面由快照驱动。 选牌专用的五项输入仅在选牌阶段参与快照捕获；其他阶段不遍历选牌池，实时选择仍留在运行态用于开战效果和重开恢复。
 - `battle.effects.js` + `effect-steps.js`（有序步骤表本体，拆片 `effect-steps.<节>.js` 按原序 concat——顺序即语义）：文本时点解析与效果执行器；执行器只通过显式端口改变战斗状态，不访问 DOM。
 - `cards/card-trigger-contract.js` 维护时点词表和声明所有权；纯 `cards/card-execution-plan.js` 统一时点、装备与打出效果的来源计划、注册快照、基础字段所有权及隔离执行视图。`battle.trigger-source.js`、触发 runner、装备及 resolver 共同消费该计划；显式空数组仍拥有对应时点，其他尚未迁移的时点保留文本兼容。获取、抽到、消耗由当事卡直调，其余七个触发时点由 runner 登记；打出效果在 resolver 执行。capability 入口恢复执行卡保留的完整声明后预检；schema 保留原执行视图导出。复杂文本效果体仍由原解释器执行。
 - `battle.triggers.m2.js` 按本次事件的登记快照同步派发，执行前预留持续次数，阻止同一登记同一时点的递归重入；战斗身份变化、取消和结束使旧派发失效。回合开始的延迟任务固定当前批次，新产生的任务留给后续回合；恢复仍重演入场检查点，不新增中途触发器存档。

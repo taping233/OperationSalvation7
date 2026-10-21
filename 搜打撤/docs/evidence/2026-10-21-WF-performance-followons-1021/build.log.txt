@@ -1,0 +1,285 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 prebuild
+> npm run narrative:compile && node scripts/validate-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+> codename7-soudache-game@0.60.0 build
+> vite build
+
+vite v6.4.4 building for production...
+[assets] reviewed unused production images omitted: 286
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 947 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 329 images -> game/src/generated/thumb-manifest.js
+transforming...
+✓ 1401 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/preparation.commands.js is dynamically imported by /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/game.hub.depart.js but also statically imported by /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/game.hub.preparation.js, /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/preparation.view.js, dynamic import will not move module into another chunk.
+
+computing gzip size...
+../desktop-app/game/assets/ui/ak/dot-matrix.svg                                         0.15 kB │ gzip:   0.14 kB
+../desktop-app/game/assets/ui/ak/scanline.svg                                           0.15 kB │ gzip:   0.14 kB
+../desktop-app/game/assets/ui/ak/chevrons.svg                                           0.18 kB │ gzip:   0.15 kB
+../desktop-app/game/assets/ui/ak/hatch.svg                                              0.19 kB │ gzip:   0.16 kB
+../desktop-app/game/assets/ui/ak/hazard.svg                                             0.20 kB │ gzip:   0.16 kB
+../desktop-app/game/assets/ui/ak/frame-cut.svg                                          0.21 kB │ gzip:   0.18 kB
+../desktop-app/game/assets/ui/ak/hex-tile.svg                                           0.23 kB │ gzip:   0.19 kB
+../desktop-app/game/assets/ui/ak/grid-fine.svg                                          0.25 kB │ gzip:   0.18 kB
+../desktop-app/game/assets/wall-decoration-clean-CzUsCSeb.svg                           0.30 kB │ gzip:   0.23 kB
+../desktop-app/game/assets/ui/ak/noise.svg                                              0.31 kB │ gzip:   0.22 kB
+../desktop-app/game/assets/chair-clean-C4chRIYo.svg                                     0.32 kB │ gzip:   0.23 kB
+../desktop-app/game/assets/table-lamp-clean-Bik4t4MJ.svg                                0.36 kB │ gzip:   0.25 kB
+../desktop-app/game/assets/work-table-clean-C_57Er6u.svg                                0.36 kB │ gzip:   0.24 kB
+../desktop-app/game/assets/ui/ak/rhodes-mark.svg                                        0.39 kB │ gzip:   0.23 kB
+../desktop-app/game/assets/room-foreground-DKKE__5S.svg                                 0.45 kB │ gzip:   0.30 kB
+../desktop-app/game/assets/woven-rug-clean-tpnFRy6h.svg                                 0.46 kB │ gzip:   0.26 kB
+../desktop-app/game/assets/display-cabinet-clean-B28Wceum.svg                           0.55 kB │ gzip:   0.27 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-proof.svg                    0.76 kB │ gzip:   0.37 kB
+../desktop-app/game/assets/ui/photo-studio/corner-class.svg                             0.77 kB │ gzip:   0.37 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-derived.svg                  0.85 kB │ gzip:   0.42 kB
+../desktop-app/game/assets/room-back-CTnzA3iR.svg                                       0.93 kB │ gzip:   0.49 kB
+../desktop-app/game/assets/ui/photo-studio/mount-proof.svg                              0.99 kB │ gzip:   0.46 kB
+../desktop-app/game/assets/ui/ak/barcode.svg                                            1.01 kB │ gzip:   0.22 kB
+../desktop-app/game/assets/ui/photo-studio/corner-plain.svg                             1.04 kB │ gzip:   0.41 kB
+../desktop-app/game/assets/ui/photo-studio/mount-derived.svg                            1.09 kB │ gzip:   0.52 kB
+../desktop-app/game/assets/ui/photo-studio/corner-rare.svg                              1.15 kB │ gzip:   0.46 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-class.svg                    1.31 kB │ gzip:   0.53 kB
+../desktop-app/game/assets/ui/photo-studio/rails-class.svg                              1.34 kB │ gzip:   0.57 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-plain.svg                    1.54 kB │ gzip:   0.56 kB
+../desktop-app/game/assets/ui/photo-studio/mount-class.svg                              1.55 kB │ gzip:   0.63 kB
+../desktop-app/game/assets/ui/photo-studio/corner-prismatic.svg                         1.58 kB │ gzip:   0.57 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-rare.svg                     1.63 kB │ gzip:   0.60 kB
+../desktop-app/game/assets/ui/photo-studio/rails-plain.svg                              1.69 kB │ gzip:   0.63 kB
+../desktop-app/game/assets/ui/photo-studio/rails-rare.svg                               1.77 kB │ gzip:   0.67 kB
+../desktop-app/game/assets/ui/photo-studio/mount-plain.svg                              1.90 kB │ gzip:   0.68 kB
+../desktop-app/game/assets/ui/photo-studio/mount-rare.svg                               1.97 kB │ gzip:   0.68 kB
+../desktop-app/game/assets/ui/photo-studio/corner-epic.svg                              1.97 kB │ gzip:   0.70 kB
+../desktop-app/game/assets/ui/photo-studio/rails-prismatic.svg                          2.08 kB │ gzip:   0.75 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-prismatic.svg                2.15 kB │ gzip:   0.72 kB
+../desktop-app/game/assets/ui/photo-studio/mount-prismatic.svg                          2.32 kB │ gzip:   0.76 kB
+../desktop-app/game/assets/ui/photo-studio/mount-thumbnail-epic.svg                     2.45 kB │ gzip:   0.83 kB
+../desktop-app/game/assets/ui/photo-studio/rails-epic.svg                               2.51 kB │ gzip:   0.89 kB
+../desktop-app/game/assets/ui/photo-studio/mount-epic.svg                               2.74 kB │ gzip:   0.89 kB
+../desktop-app/game/assets/LICENSE-CzhI6EL-.txt                                         3.21 kB │ gzip:   1.50 kB
+../desktop-app/game/assets/brand-mark-codename7-CMovaXBA.png                            5.16 kB
+../desktop-app/game/assets/ui/map-hud-1015/gold-is7-v2.webp                             7.26 kB
+../desktop-app/game/assets/battle/fx-slash.webp                                         7.58 kB
+../desktop-app/game/assets/oxanium-latin-700-normal-l0hKEjh4.woff2                      8.78 kB
+../desktop-app/game/assets/oxanium-latin-500-normal-tnlOn7Ka.woff2                      9.04 kB
+../desktop-app/game/assets/ui/map-hud-1015/attack-is7-v2.webp                          10.20 kB
+../desktop-app/game/assets/ui/home-icons-v12/achievement-shield.webp                   11.10 kB
+../desktop-app/game/assets/ui/home-icons-v13/home-icon-shield.webp                     12.28 kB
+../desktop-app/game/assets/ui/home-icons-v13/home-icon-camera.webp                     12.91 kB
+../desktop-app/game/assets/ui/photo-studio/paper-grain.png                             12.92 kB
+../desktop-app/game/assets/battle/fx-block.webp                                        14.02 kB
+../desktop-app/game/assets/ui/home-icons-v13/home-icon-gear.webp                       15.37 kB
+../desktop-app/game/assets/rajdhani-latin-700-normal-BPDUZo87.woff2                    15.69 kB
+../desktop-app/game/assets/rajdhani-latin-600-normal-CXCVEoA9.woff2                    15.73 kB
+../desktop-app/game/assets/ui/home-icons-v12/settings-gear.webp                        15.89 kB
+../desktop-app/game/assets/ui/home-icons-v12/photo-orb-book.webp                       17.00 kB
+../desktop-app/game/assets/cascadia-code-400-4hOIIkUE.woff2                            17.48 kB
+../desktop-app/game/assets/cascadia-code-700-xJGW3N9l.woff2                            18.02 kB
+../desktop-app/game/assets/ui/home-icons-v12/explore-sword.webp                        20.42 kB
+../desktop-app/game/index.html                                                         22.93 kB │ gzip:   7.69 kB
+../desktop-app/game/assets/pet-CYpT5bF-.webp                                           30.66 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/heal.webp                     30.99 kB
+../desktop-app/game/assets/boss-pfacD6TL.webp                                          31.07 kB
+../desktop-app/game/assets/wolf-Dv8Fi_2h.webp                                          32.31 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/fixed.webp                    32.66 kB
+../desktop-app/game/assets/altar-BUHmlcOL.webp                                         32.72 kB
+../desktop-app/game/assets/scenes/battle/platform-minimal-1016/far.webp                34.88 kB
+../desktop-app/game/assets/vault-CiEu2vJO.webp                                         36.17 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/fx/frame-00.webp            37.44 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/spell.webp                    37.80 kB
+../desktop-app/game/assets/coin-C1cpntgN.webp                                          40.88 kB
+../desktop-app/game/assets/classic-BwnVMvm2.webp                                       42.43 kB
+../desktop-app/game/assets/scenes/transition-photo-v2.webp                             42.70 kB
+../desktop-app/game/assets/scenes/transition-achievement-v2.webp                       45.51 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/fx/frame-03.webp            46.87 kB
+../desktop-app/game/assets/scenes/transition-camp-v2.webp                              50.01 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/fireball.webp                 51.88 kB
+../desktop-app/game/assets/ui/photo-studio/back.webp                                   52.47 kB
+../desktop-app/game/assets/scenes/battle/platform-minimal-1016/foreground.webp         52.98 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/energy.webp                   53.36 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/acquire.webp                  54.53 kB
+../desktop-app/game/assets/scenes/winter-expedition/outskirts.webp                     60.62 kB
+../desktop-app/game/assets/ui/battle-controls-glass-1016/attack.webp                   66.07 kB
+../desktop-app/game/assets/ui/settings-shutter-1011.webp                               66.83 kB
+../desktop-app/game/assets/scenes/map-nodes/altar-symbol-1017-v2.webp                  68.28 kB
+../desktop-app/game/assets/ui/card-frames/paper-1015/interior.webp                     69.76 kB
+../desktop-app/game/assets/scenes/transition-field-v2.webp                             71.61 kB
+../desktop-app/game/assets/scenes/map-nodes/supply-symbol-foreground-1012-v5.webp      72.07 kB
+../desktop-app/game/assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp        75.16 kB
+../desktop-app/game/assets/scenes/scene-extract-anime-v2.webp                          81.95 kB
+../desktop-app/game/assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp       82.84 kB
+../desktop-app/game/assets/scenes/ui-loop-0925/cls2-stage.webp                         86.59 kB
+../desktop-app/game/assets/portraits/battle/baita.webp                                 90.19 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/fx/frame-01.webp            90.87 kB
+../desktop-app/game/assets/scenes/battle/platform-minimal-1016/ground.webp             91.29 kB
+../desktop-app/game/assets/scenes/map-nodes/passage-symbol-foreground-1012-v5.webp     93.94 kB
+../desktop-app/game/assets/scenes/map-nodes/shop-symbol-foreground-1012-v5.webp        97.30 kB
+../desktop-app/game/assets/scenes/event-last-lamp-1013-v1.webp                         99.11 kB
+../desktop-app/game/assets/scenes/event-tt6-goldmine-1013-v2.webp                     102.10 kB
+../desktop-app/game/assets/portraits/battle/xingyue.webp                              102.70 kB
+../desktop-app/game/assets/scenes/map-nodes/event-symbol-foreground-1012-v5.webp      105.83 kB
+../desktop-app/game/assets/scenes/map-nodes/resource-symbol-1015-v1.webp              107.56 kB
+../desktop-app/game/assets/scenes/map-brush-1015/trail-a.webp                         108.42 kB
+../desktop-app/game/assets/portraits/battle/heixiang.webp                             108.47 kB
+../desktop-app/game/assets/scenes/map-brush-1015/trail-c.webp                         113.94 kB
+../desktop-app/game/assets/scenes/scene-shop-anime-v2.webp                            118.61 kB
+../desktop-app/game/assets/scenes/map-brush-1015/trail-b.webp                         119.62 kB
+../desktop-app/game/assets/scenes/base-operations-v5.webp                             125.05 kB
+../desktop-app/game/assets/scenes/map-nodes/battle-symbol-foreground-1012-v5.webp     125.13 kB
+../desktop-app/game/assets/scenes/scene-pickup-wood-anime-v2.webp                     131.51 kB
+../desktop-app/game/assets/portraits/battle/wu.webp                                   134.20 kB
+../desktop-app/game/assets/scenes/scene-chest-anime-v2.webp                           135.10 kB
+../desktop-app/game/assets/scenes/ui-loop-0925/rewards-convoy-fail.webp               136.23 kB
+../desktop-app/game/assets/scenes/scene-pickup-coin-anime-v2.webp                     140.33 kB
+../desktop-app/game/assets/scenes/chests/safe-simple-v7/burst.webp                    141.71 kB
+../desktop-app/game/assets/scenes/scene-pickup-rations-anime-v2.webp                  143.74 kB
+../desktop-app/game/assets/scenes/map-nodes/map-atmosphere-is7-1012.webp              148.56 kB
+../desktop-app/game/assets/scenes/transition-general-1016.webp                        148.64 kB
+../desktop-app/game/assets/scenes/scene-altar-anime-v2.webp                           156.08 kB
+../desktop-app/game/assets/scenes/event-tt6-systemsupply.webp                         168.11 kB
+../desktop-app/game/assets/scenes/ui-loop-0925/prep-desk.webp                         171.22 kB
+../desktop-app/game/assets/scenes/event-tt6-goldhammer.webp                           178.95 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/small/frame-00.webp        179.46 kB
+../desktop-app/game/assets/ui/achievement-styles/symbol.webp                          180.50 kB
+../desktop-app/game/assets/scenes/chests/safe-simple-v7/frame-02.webp                 180.96 kB
+../desktop-app/game/assets/scenes/chests/safe-simple-v7/frame-01.webp                 183.89 kB
+../desktop-app/game/assets/scenes/scene-pickup-key-anime-v2.webp                      183.92 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/small/frame-01.webp        185.15 kB
+../desktop-app/game/assets/scenes/event-ev19-recode.webp                              186.55 kB
+../desktop-app/game/assets/ui/card-frames/paper-1015/prism.webp                       188.38 kB
+../desktop-app/game/assets/scenes/scene-fire-anime-v2.webp                            191.19 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/medium/frame-00.webp       195.66 kB
+../desktop-app/game/assets/scenes/event-ev19-gamble.webp                              196.25 kB
+../desktop-app/game/assets/scenes/event-ev19-vital.webp                               196.43 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/fx/frame-02.webp           197.19 kB
+../desktop-app/game/assets/scenes/event-tt6-chestdraw.webp                            197.79 kB
+../desktop-app/game/assets/scenes/event-ev19-arrows.webp                              198.22 kB
+../desktop-app/game/assets/ui/card-frames/paper-1015/legendary.webp                   198.32 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/large/frame-00.webp        199.26 kB
+../desktop-app/game/assets/scenes/chests/safe-simple-v7/frame-00.webp                 199.56 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/large/frame-01.webp        204.98 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/medium/frame-01.webp       207.14 kB
+../desktop-app/game/assets/scenes/event-tt6-demondeal.webp                            209.32 kB
+../desktop-app/game/assets/scenes/event-ev19-potions.webp                             210.14 kB
+../desktop-app/game/assets/scenes/event-tt6-relief.webp                               214.69 kB
+../desktop-app/game/assets/portraits/battle/changwuyu.webp                            217.31 kB
+../desktop-app/game/assets/scenes/event-tt6-mystery.webp                              224.21 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/medium/frame-03.webp       224.34 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/small/frame-02.webp        227.37 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/small/frame-03.webp        228.60 kB
+../desktop-app/game/assets/scenes/event-ev19-fireballs.webp                           231.20 kB
+../desktop-app/game/assets/scenes/entry/modern-winter-entry-1011-v2.webp              233.24 kB
+../desktop-app/game/assets/scenes/event-ev19-quartermaster.webp                       235.92 kB
+../desktop-app/game/assets/wallpaper-baita-heixiang-1016-Fe7uBjnv.webp                237.85 kB
+../desktop-app/game/assets/scenes/chests/safe-simple-v7/frame-03.webp                 239.75 kB
+../desktop-app/game/assets/scenes/scene-door-anime-v2.webp                            240.32 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/medium/frame-02.webp       249.30 kB
+../desktop-app/game/assets/scenes/event-cmtn7qttxqo4.webp                             251.20 kB
+../desktop-app/game/assets/notosans-sc-400-Ph3maJeN.woff2                             251.59 kB
+../desktop-app/game/assets/scenes/event-ev19-classchest.webp                          257.06 kB
+../desktop-app/game/assets/notosans-sc-700-B_-MUWwg.woff2                             257.78 kB
+../desktop-app/game/assets/scenes/event-ev19-pearlbox.webp                            258.57 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/large/frame-03.webp        269.76 kB
+../desktop-app/game/assets/scenes/chests/supply-opening-v6/large/frame-02.webp        272.69 kB
+../desktop-app/game/assets/scenes/event-bandits-anime-v2.webp                         273.04 kB
+../desktop-app/game/assets/ui/achievement-styles/painted.webp                         283.82 kB
+../desktop-app/game/assets/ui/achievement-styles/collage.webp                         292.98 kB
+../desktop-app/game/assets/scenes/event-tt6-airdrop.webp                              298.47 kB
+../desktop-app/game/assets/ui/achievement-styles/ink.webp                             320.89 kB
+../desktop-app/game/assets/ui/achievement-styles/gesture.webp                         324.69 kB
+../desktop-app/game/assets/wallpaper-wu-bass-1020-CIkam0Fi.webp                       359.89 kB
+../desktop-app/game/assets/scenes/hub-wallpaper.webp                                  376.15 kB
+../desktop-app/game/assets/wallpaper-baita-station-1020-CorWohBr.webp                 429.58 kB
+../desktop-app/game/assets/wallpaper-xingyue-reeds-1020-VKxrcFhS.webp                 441.77 kB
+../desktop-app/game/assets/scenes/map-nodes/city-ghost-props-a-1012.webp              478.88 kB
+../desktop-app/game/assets/wallpaper-xingyue-piano-1020-Djmmjtl6.webp                 484.37 kB
+../desktop-app/game/assets/slot-bg-knight-fantasy-CDI2HVgW.webp                       490.05 kB
+../desktop-app/game/assets/wallpaper-snow-road-1016-CK4hcaRU.webp                     569.20 kB
+../desktop-app/game/assets/room-direction-candidate-B2IgpU2u.webp                     607.27 kB
+../desktop-app/game/assets/05-shop-lamplight-deal-v3-ChB2vbnD.ogg                     773.26 kB
+../desktop-app/game/assets/02-explore-ashline-B--HRlnu.ogg                            838.68 kB
+../desktop-app/game/assets/01-title-frostglass-v12-CP1hqFy8.ogg                       915.13 kB
+../desktop-app/game/assets/scenes/shop/shop-cardstyle-approved-1011.webp            1,181.46 kB
+../desktop-app/game/assets/ui/photo-studio/frame-atelier-v1.png                     1,367.19 kB
+../desktop-app/game/assets/title-wordmark-BkFOXJKL.png                              1,964.40 kB
+../desktop-app/game/assets/ui/title-plaque-metal-v1.png                             2,727.04 kB
+../desktop-app/game/assets/03-battle-shadowtide-full-v2-CzDFcFcy.ogg                2,738.41 kB
+../desktop-app/game/assets/HarmonyOS_Sans_SC_Bold-DTtO5jJ5.ttf                      8,159.00 kB
+../desktop-app/game/assets/HarmonyOS_Sans_SC_Regular-DdsgBYS9.ttf                   8,261.13 kB
+../desktop-app/game/assets/home-menu-motion-ChDSp1Xr.css                                5.35 kB │ gzip:   0.97 kB
+../desktop-app/game/assets/event-runtime-pkAM33Fm.css                                   5.35 kB │ gzip:   1.58 kB
+../desktop-app/game/assets/interface-motion-Bm6-0oA9.css                                6.17 kB │ gzip:   0.99 kB
+../desktop-app/game/assets/home-djRd51SW.css                                            6.28 kB │ gzip:   1.97 kB
+../desktop-app/game/assets/motion-transitions-BdxbKqrz.css                              6.99 kB │ gzip:   2.00 kB
+../desktop-app/game/assets/home-layers-CGeD3b0U.css                                     7.06 kB │ gzip:   1.77 kB
+../desktop-app/game/assets/home-polish-BIhQrbgT.css                                    32.53 kB │ gzip:   6.62 kB
+../desktop-app/game/assets/battle-DqZxQKzE.css                                         35.64 kB │ gzip:   6.66 kB
+../desktop-app/game/assets/game.menu-C64TLC-N.css                                      51.46 kB │ gzip:  10.66 kB
+../desktop-app/game/assets/game.cardslib-yC5B5_9s.css                                  72.63 kB │ gzip:  13.14 kB
+../desktop-app/game/assets/index-DCYhmUCW.css                                       1,044.17 kB │ gzip: 182.40 kB
+../desktop-app/game/assets/js/flight-recorder.local-AiaLn9EF.js                         0.06 kB │ gzip:   0.07 kB
+../desktop-app/game/assets/js/achievement-medals-BWdjVapR.js                            1.60 kB │ gzip:   0.74 kB
+../desktop-app/game/assets/js/settings-battle-restart-UehbF5fK.js                       2.36 kB │ gzip:   1.24 kB
+../desktop-app/game/assets/js/agent.llm.runtime-DSjDtB-1.js                             3.52 kB │ gzip:   2.12 kB
+../desktop-app/game/assets/js/comm-feed-CNLAHE6k.js                                     3.55 kB │ gzip:   1.91 kB
+../desktop-app/game/assets/js/home.visuals-_VLxZp8j.js                                  6.36 kB │ gzip:   2.45 kB
+../desktop-app/game/assets/js/agent.runner.runtime-DsNwiKfV.js                          6.70 kB │ gzip:   3.12 kB
+../desktop-app/game/assets/js/agent.replay.runtime-B-6FlXCk.js                          7.40 kB │ gzip:   3.02 kB
+../desktop-app/game/assets/js/term-tips.runtime-COW5hpXM.js                             7.74 kB │ gzip:   3.65 kB
+../desktop-app/game/assets/js/narrative-events-BHI-l50Z.js                              7.85 kB │ gzip:   3.79 kB
+../desktop-app/game/assets/js/runtime-trace.local-Bu7cGHu-.js                           8.22 kB │ gzip:   3.60 kB
+../desktop-app/game/assets/js/story.last-lamp-DbsFOF6z.js                              10.14 kB │ gzip:   3.98 kB
+../desktop-app/game/assets/js/agent.scenes.runtime-BKzxWaIi.js                         10.67 kB │ gzip:   4.69 kB
+../desktop-app/game/assets/js/home.scene-D6IR3wNE.js                                   15.24 kB │ gzip:   6.44 kB
+../desktop-app/game/assets/js/game.run.dev-D5g8H1yc.js                                 16.02 kB │ gzip:   6.72 kB
+../desktop-app/game/assets/js/hub.courtyard-runtime-CMabRGNL.js                        18.57 kB │ gzip:   8.00 kB
+../desktop-app/game/assets/js/game.run.class-choice.page-DPxWzMJ3.js                   20.99 kB │ gzip:   8.39 kB
+../desktop-app/game/assets/js/event-runtime-BzcJ09Ps.js                                35.43 kB │ gzip:  14.99 kB
+../desktop-app/game/assets/js/vendor-render-canvas-BOz4VrgZ.js                         41.58 kB │ gzip:  13.40 kB
+../desktop-app/game/assets/js/vendor-runtime-Bplpvbef.js                               49.20 kB │ gzip:  14.80 kB
+../desktop-app/game/assets/js/game.cardslib.page-C6NQ_IsR.js                           51.35 kB │ gzip:  18.63 kB
+../desktop-app/game/assets/js/game.menu.pages-CweBzRrg.js                              82.89 kB │ gzip:  30.30 kB
+../desktop-app/game/assets/js/vendor-narrative-BRMhodx6.js                            127.95 kB │ gzip:  31.70 kB
+../desktop-app/game/assets/js/game-card-catalog-DwTnfdDp.js                           128.94 kB │ gzip:  34.90 kB
+../desktop-app/game/assets/js/battle.view-D2aux-Cx.js                                 177.23 kB │ gzip:  62.99 kB
+../desktop-app/game/assets/js/game.hub.runtime-BeVkL9XE.js                            205.70 kB │ gzip:  72.11 kB
+../desktop-app/game/assets/js/battle.core-DWzUUHt-.js                                 395.85 kB │ gzip: 132.28 kB
+../desktop-app/game/assets/js/vendor-render-BPsdiYmP.js                               498.64 kB │ gzip: 151.31 kB
+../desktop-app/game/assets/js/index-TcMUEZEC.js                                     1,106.87 kB │ gzip: 368.11 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 8.09s
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 3
+[assets] asset URLs versioned: ?v=0.60.0
+
+> codename7-soudache-game@0.60.0 postbuild
+> node scripts/perf-budget.cjs
+
+[perf-budget:composition] {"categories":[{"extension":".webp","bytes":102514584,"files":1152},{"extension":".png","bytes":20841492,"files":80},{"extension":".wav","bytes":20476045,"files":104},{"extension":".ttf","bytes":16420124,"files":2},{"extension":".ogg","bytes":6367105,"files":113},{"extension":".js","bytes":3048597,"files":29},{"extension":".css","bytes":1273627,"files":11},{"extension":".svg","bytes":720261,"files":67},{"extension":".woff2","bytes":594112,"files":8},{"extension":".json","bytes":133679,"files":9},{"extension":".txt","bytes":47275,"files":9},{"extension":".md","bytes":25334,"files":15},{"extension":".html","bytes":22925,"files":1},{"extension":".mp3","bytes":20979,"files":1},{"extension":".jpg","bytes":18680,"files":1},{"extension":"(no extension)","bytes":438,"files":5}],"largest":[{"file":"assets/HarmonyOS_Sans_SC_Regular-DdsgBYS9.ttf","bytes":8261128},{"file":"assets/HarmonyOS_Sans_SC_Bold-DTtO5jJ5.ttf","bytes":8158996},{"file":"assets/ui/photo-studio/leather-archive-v1.png","bytes":3243582},{"file":"assets/03-battle-shadowtide-full-v2-CzDFcFcy.ogg","bytes":2738407},{"file":"assets/ui/title-plaque-metal-v1.png","bytes":2727038},{"file":"assets/title-wordmark-BkFOXJKL.png","bytes":1964396},{"file":"assets/sfx/mixkit-1018/2589.wav","bytes":1961588},{"file":"assets/ui/photo-studio/note-atelier-v1.png","bytes":1941342},{"file":"assets/sfx/mixkit-1018/2345.wav","bytes":1546400},{"file":"assets/ui/emblems/profession-emblem-baita.png","bytes":1447038},{"file":"assets/ui/emblems/profession-emblem-wu.png","bytes":1419235},{"file":"assets/ui/photo-studio/frame-atelier-v1.png","bytes":1367190}],"duplicateGroups":[{"files":["assets/ui/card-frames/paper-1015/initial.webp","assets/ui/card-frames/paper-1015/neutral.webp"],"copies":2,"filesTruncated":false,"wastedBytes":105624},{"files":["assets/sfx/battle/additions/card-discard.ogg","assets/sfx/interface-soft/drop_001.ogg"],"copies":2,"filesTruncated":false,"wastedBytes":5859},{"files":["assets/sfx/battle/additions/card-select.ogg","assets/sfx/interface-soft/select_001.ogg"],"copies":2,"filesTruncated":false,"wastedBytes":5468},{"files":["assets/portraits/frames/baita/sprite-v1/animations.json","assets/portraits/frames/xingyue/sprite-v1/animations.json"],"copies":2,"filesTruncated":false,"wastedBytes":5052},{"files":["assets/ui/icons/book.png","assets/ui/icons/cards.png","assets/ui/icons/notes.png","assets/ui/icons/save.png","assets/ui/icons/scroll.png"],"copies":5,"filesTruncated":false,"wastedBytes":2092},{"files":["assets/ui/icons/helmet.png","assets/ui/icons/plate.png","assets/ui/icons/shield.png"],"copies":3,"filesTruncated":false,"wastedBytes":1604},{"files":["assets/ui/icons/broom.png","assets/ui/icons/pen.png","assets/ui/icons/tools.png"],"copies":3,"filesTruncated":false,"wastedBytes":1356},{"files":["assets/ui/icons/bag.png","assets/ui/icons/pocket.png","assets/ui/icons/pouch.png"],"copies":3,"filesTruncated":false,"wastedBytes":1052},{"files":["assets/ui/icons/crystal.png","assets/ui/icons/gem.png"],"copies":2,"filesTruncated":false,"wastedBytes":1029},{"files":["assets/ui/icons/archive.png","assets/ui/icons/folder.png","assets/ui/icons/trash.png"],"copies":3,"filesTruncated":false,"wastedBytes":1016},{"files":["assets/ui/icons/arrow.png","assets/ui/icons/exit.png","assets/ui/icons/upload.png"],"copies":3,"filesTruncated":false,"wastedBytes":860},{"files":["assets/ui/icons/hourglass.png","assets/ui/icons/mouse.png"],"copies":2,"filesTruncated":false,"wastedBytes":768}],"scope":"Completed build bytes, not startup downloads or decoded runtime memory. Duplicate groups are candidates, not deletion permission."}
+[perf-budget] startup=6/40
+[perf-budget] package=164.53 MiB, duplicates=0.13 MiB
+[perf-budget] entry-gzip=359.5 KiB, initial-js-gzip=408.0 KiB, battle-gzip=61.5 KiB, narrative-gzip=31.0 KiB, css-gzip=223.4 KiB
+[perf-budget] PASS
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

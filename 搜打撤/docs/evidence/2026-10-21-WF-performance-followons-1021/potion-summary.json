@@ -1,0 +1,123 @@
+{
+  "conclusion": "The pre-existing observable whitelist misses real deck drawing. This is an RNG-exposed test false negative, not a snapshot-phase production regression.",
+  "engineHashes": {
+    "d682c4cb": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8",
+    "current": "43a26a0b74dd6091530d1bae4ec2e4394072f29072be8e3fb043d50870ded857"
+  },
+  "isolatedCopy": {
+    "path": "/tmp/potion-audit-diagnostic-20261021",
+    "from": "Copied game/ from /tmp/mana-surge-audit-diagnostic-20261021 with symlinks preserved; separate tests/config/package. Did not edit that original directory.",
+    "sharedSymlinks": [
+      "game/assets -> integration/搜打撤/game/assets",
+      "node_modules -> integration/搜打撤/node_modules"
+    ],
+    "baselineScope": "Only engine file is substituted with git show d682c4cb:搜打撤/game/src/battle/core/battle.engine.factory.domain.js; this is an engine A/B, not a full checkout of d682.",
+    "sourceFilesComparedToCurrent": 555,
+    "sourceDifferencesFromCurrent": [],
+    "integrationEdited": false
+  },
+  "deterministicFixture": {
+    "seed": 14,
+    "when": "Immediately before playing 药水魔法",
+    "selected": "精神药水",
+    "stateBothEngines": {
+      "hand": "0 -> 2",
+      "drawPile": "99 -> 97",
+      "drawnUids": "Exactly the original top two deck UIDs in draw order"
+    }
+  },
+  "checks": [
+    {
+      "name": "old-baseline",
+      "engine": "d682c4cb",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-old-baseline.log 2>&1",
+      "observedVitestSummary": "1 failed, 11 skipped",
+      "expectedExitCode": 1,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Original observable whitelist must fail on a successfully drawn spirit potion.",
+      "log": "potion-old-baseline.log"
+    },
+    {
+      "name": "old-current",
+      "engine": "current",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-old-current.log 2>&1",
+      "observedVitestSummary": "1 failed, 11 skipped",
+      "expectedExitCode": 1,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Same failure and state with snapshot-phase patch.",
+      "log": "potion-old-current.log"
+    },
+    {
+      "name": "fixed-baseline",
+      "engine": "d682c4cb",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-fixed-baseline.log 2>&1",
+      "observedVitestSummary": "2 passed, 11 skipped",
+      "expectedExitCode": 0,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Random and deterministic spirit-potion cases pass.",
+      "log": "potion-fixed-baseline.log"
+    },
+    {
+      "name": "fixed-current",
+      "engine": "current",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-fixed-current.log 2>&1",
+      "observedVitestSummary": "2 passed, 11 skipped",
+      "expectedExitCode": 0,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Random and deterministic spirit-potion cases pass.",
+      "log": "potion-fixed-current.log"
+    },
+    {
+      "name": "negative-log-only",
+      "engine": "current",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法.*精神药水' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-negative-log-only.log 2>&1",
+      "observedVitestSummary": "1 failed, 12 skipped",
+      "expectedExitCode": 1,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Failure at exact UID transfer assertion: fake successful draw log does not suffice.",
+      "log": "potion-negative-log-only.log"
+    },
+    {
+      "name": "negative-not-cast",
+      "engine": "current",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法.*精神药水' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-negative-not-cast.log 2>&1",
+      "observedVitestSummary": "1 failed, 12 skipped",
+      "expectedExitCode": 1,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Failure at original potion-not-left-in-hand assertion.",
+      "log": "potion-negative-not-cast.log"
+    },
+    {
+      "name": "fixed-final",
+      "engine": "current",
+      "command": "node /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/vitest/vitest.mjs run --root /tmp/potion-audit-diagnostic-20261021 --config /tmp/potion-audit-diagnostic-20261021/vite.config.js -t '药水魔法' --reporter=verbose > /workspace/scratch/b7a53a06c872/performance-followons-20261021/potion-fixed-final.log 2>&1",
+      "observedVitestSummary": "2 passed, 11 skipped",
+      "expectedExitCode": 0,
+      "observedProcessExitCode": null,
+      "exitCaptureNote": "Child Vitest exit code was not separately persisted; output summary establishes pass/fail. Shell ended with output inspection/next command. No extra runs performed to recreate numeric status.",
+      "expectedResult": "Both potion cases pass after restoring both diagnostic mutations.",
+      "log": "potion-fixed-final.log"
+    }
+  ],
+  "negativeControls": {
+    "logOnly": "In isolated battle.bag.domain.js, replaced drawCards(n) with n while leaving the success log. Restored afterward.",
+    "notCast": "In isolated battle.discover-flow.js, removed queueCardExecution only from the play/potion branch. Restored afterward."
+  },
+  "lint": {
+    "command": "cd /tmp/potion-audit-diagnostic-20261021 && node node_modules/eslint/bin/eslint.js tests/hero-cards.test.js",
+    "exitCode": 0,
+    "log": "potion-fixture-lint.log"
+  },
+  "patch": {
+    "path": "potion-fixture.patch",
+    "sha256": "31cdb24b5f778830dcef86a9a096dd526ec478f637b8f16a2f93bf08686ec0ed",
+    "scope": "Only 搜打撤/tests/hero-cards.test.js; original observable and no-residual-potion assertions preserved, exact real-deck transfer checks and a deterministic spirit-potion row added."
+  },
+  "limits": "No build or full suite run; only 药水魔法 subset. No production correction proposed."
+}

@@ -1,0 +1,883 @@
+{
+  "output": "/tmp/performance-followons-build-20261021",
+  "checkedOutputFiles": 1526,
+  "excludedAssets": 286,
+  "exclusionWarnings": [],
+  "artManifestEntries": 1024,
+  "thumbManifestEntries": 329,
+  "injectedAliases": {
+    "assets/portraits/frames/changwuyu/sprite-v1/f000.webp": "assets/portraits/battle/changwuyu.webp",
+    "assets/portraits/frames/changwuyu/sprite-v1/neutral.webp": "assets/portraits/battle/changwuyu.webp",
+    "assets/cards/expedition-starters/rations.webp": "assets/cards/resources/ration.webp",
+    "assets/thumbs/cards/expedition-starters/rations.webp": "assets/thumbs/cards/resources/ration.webp"
+  },
+  "counts": {
+    "artManifest": 1024,
+    "thumbManifest": 329,
+    "injectedAlias": 4,
+    "activeChest": 21
+  },
+  "uniqueLocalTargets": 1352,
+  "missingTargets": [
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-00.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-03.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-04.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-05.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-06.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-07.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-08.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-09.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-10.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-11.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-12.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-13.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-14.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-15.webp"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/boss-rig-v1/frame-16.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-00.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-03.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-04.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-05.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-06.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-07.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-08.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-09.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-10.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-11.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-12.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-13.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-14.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-15.webp"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/class-rig-v1/frame-16.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-00.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-03.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-04.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-05.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-06.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-07.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-08.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-09.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-10.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-11.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-12.webp"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/large-rig-v1/frame-13.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-00.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-03.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-04.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-05.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-06.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-07.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-08.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-09.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-10.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-11.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-12.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-13.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-14.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-15.webp"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/medium-rig-v1/frame-16.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-00.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-03.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-04.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-05.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-06.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-07.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-08.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-09.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-10.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-11.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-12.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-13.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-14.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-15.webp"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/scenes/chests/small-rig-v1/frame-16.webp"
+    },
+    {
+      "target": "assets/ui/slot-weather/partly-cloudy-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/ui/slot-weather/partly-cloudy-v1.webp"
+    },
+    {
+      "target": "assets/ui/slot-weather/rain-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/ui/slot-weather/rain-v1.webp"
+    },
+    {
+      "target": "assets/ui/slot-weather/snow-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/ui/slot-weather/snow-v1.webp"
+    },
+    {
+      "target": "assets/ui/slot-weather/sunny-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/ui/slot-weather/sunny-v1.webp"
+    },
+    {
+      "target": "assets/ui/slot-weather/thunder-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest",
+      "literal": "assets/ui/slot-weather/thunder-v1.webp"
+    }
+  ],
+  "remainingReviewedReferences": [
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/boss-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/class-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/large-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/medium-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-00.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-03.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-04.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-05.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-06.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-07.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-08.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-09.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-10.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-11.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-12.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-13.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-14.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-15.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/scenes/chests/small-rig-v1/frame-16.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/ui/slot-weather/partly-cloudy-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/ui/slot-weather/rain-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/ui/slot-weather/snow-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/ui/slot-weather/sunny-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    },
+    {
+      "target": "assets/ui/slot-weather/thunder-v1.webp",
+      "source": "generated/art-manifest",
+      "kind": "artManifest"
+    }
+  ],
+  "activeChestFiles": 21,
+  "activeChestOutputFiles": 21,
+  "limits": [
+    "Static URLs/manifests/imports and current active chest files only; not arbitrary dynamic JavaScript or browser network coverage.",
+    "Lifecycle guards run in virtual-filesystem tests; this real build verifies unchanged inputs only."
+  ],
+  "parsers": {
+    "html": "JSDOM with scripts/resources disabled",
+    "css": "PostCSS + postcss-value-parser",
+    "js": "Acorn AST + acorn-walk"
+  }
+}

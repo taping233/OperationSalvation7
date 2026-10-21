@@ -1,0 +1,182 @@
+{"mode":"full","paths":["game/src/battle/core/battle.engine.factory.domain.js","game/src/generated/art-manifest.js","scripts/runtime-asset-redundancy-review.mjs","scripts/runtime-asset-redundancy.mjs","tests/battle-snapshot-phase-cost.test.js","tests/direct-cast.test.js","tests/runtime-asset-aliases.test.js","tests/runtime-asset-redundancy-plugin.test.js","tests/runtime-asset-redundancy.test.js","vite.config.js"],"reasons":["质量配置或提交钩子变更需要完整静态检查与全量测试","包或构建配置变更需要全量测试","公共状态、启动、规则或迁移边界变更需要全量测试"],"tests":[]}
+[gate] 模式：full
+[gate] 变更：game/src/battle/core/battle.engine.factory.domain.js
+[gate] 变更：game/src/generated/art-manifest.js
+[gate] 变更：scripts/runtime-asset-redundancy-review.mjs
+[gate] 变更：scripts/runtime-asset-redundancy.mjs
+[gate] 变更：tests/battle-snapshot-phase-cost.test.js
+[gate] 变更：tests/direct-cast.test.js
+[gate] 变更：tests/runtime-asset-aliases.test.js
+[gate] 变更：tests/runtime-asset-redundancy-plugin.test.js
+[gate] 变更：tests/runtime-asset-redundancy.test.js
+[gate] 变更：vite.config.js
+[gate] 说明：质量配置或提交钩子变更需要完整静态检查与全量测试
+[gate] 说明：包或构建配置变更需要全量测试
+[gate] 说明：公共状态、启动、规则或迁移边界变更需要全量测试
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (600 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-yzobKg/snapshot/搜打撤
+
+············································································································································································································································································································································································································································································································································-···············································································································································································································································································································································································································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+········{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+···fixture gate passed
+··············{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+···fixture gate passed
+············{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·····fixture gate passed
+{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·fixture gate passed
+··{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+······························································fixture gate passed
+······················································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································x···················································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-····························································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-··································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································{"mode":"quick","paths":["package.json"],"reasons":["package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过"],"tests":["tests/architecture-boundaries.test.js","tests/contracts.test.js"]}
+·····[gate] 模式：quick
+[gate] 变更：package.json
+[gate] 说明：package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 剧情编译
+······fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+··[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture runner pass
+
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+fixture runner pass
+[gate] PASS：quick 验收完成
+··············{"mode":"quick","paths":["game/assets/asset-manifest.json"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+·······[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+····fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+{"mode":"quick","paths":["game/assets/asset-manifest.json","game/assets/new.png"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/new.png
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+·····························································································[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+·················{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+······{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/architecture-graph.mjs","scripts/gate-plan.mjs","scripts/impact-query.mjs","scripts/index-validation.mjs","scripts/value.txt","scripts/workflow-archive.mjs","scripts/workflow-browser.mjs","scripts/workflow-change-advice.mjs","scripts/workflow-change-review.mjs","scripts/workflow-dependencies.mjs","scripts/workflow-doctor.mjs","scripts/workflow-evidence.mjs","scripts/workflow-gate-receipt.mjs","scripts/workflow-ledger.mjs","scripts/workflow-memory.mjs","scripts/workflow-ship.mjs","scripts/workflow-staged.mjs","scripts/workflow-status.mjs","scripts/workflow-task-input.mjs","scripts/workflow-task.mjs","scripts/workflow.mjs"],"reasons":[],"tests":[]}
+····snapshot passed
+······················{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"quick","paths":["scripts/acceptance-gate.mjs","scripts/deleted.txt","scripts/new-name.txt","scripts/old-name.txt"],"reasons":[],"tests":[]}
+snapshot passed
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+{"mode":"full","paths":["docs/evidence/2026-09-30-fixture/2026-10-21T03-04-46.001Z-97c28d35-staged.json","docs/evidence/2026-09-30-fixture/2026-10-21T03-04-46.001Z-97c28d35-staged.log","scripts/value.txt"],"reasons":[],"tests":[]}
+··{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":[]}
+··changed index
+·{"mode":"skip","paths":["note.md"],"reasons":[],"tests":[]}
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":["tests/contracts.test.js"]}
+snapshot passed
+································································································································································································-·············-·························································-·····fixture targeted check
+····································fixture full executed
+·························································································································································································································································-························································································································context canceled
+··············································································{"mode":"skip","tests":[]}
+···················context canceled
+··························································································································································································································································································································································································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 每张卡都能在真实战斗中打出/使用且不崩不卡死
+AssertionError: expected [ { id: 'cc-mana-surge', …(4) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "id": "cc-mana-surge",
++     "name": "法力奔涌",
++     "path": "A-手牌",
++     "problem": "结算悬挂（busy/队列未清）",
++     "type": "法术",
++   },
++ ]
+
+ ❯ tests/battle-all-cards.test.js:322:18
+    320|       console.log('—— 零效果警告（人工复核，不判失败）——\n' + soft.map(r => `【${r.name…
+    321|     }
+    322|     expect(hard).toEqual([]);
+       |                  ^
+    323|   });
+    324| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 754 passed | 1 skipped (756)
+      Tests  1 failed | 7852 passed | 7 skipped (7860)
+   Start at  12:01:45
+   Duration  198.57s (transform 8.67s, setup 0ms, collect 90.18s, tests 351.42s, environment 204.25s, prepare 42.59s)
+
+[gate] FAIL：全量 Vitest 失败（exit 1）

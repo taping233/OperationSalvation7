@@ -1,0 +1,121 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 pretest
+> npm run narrative:compile && node scripts/validate-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+> codename7-soudache-game@0.60.0 test
+> vitest run --reporter=dot tests/battle-all-cards.test.js tests/battle-snapshot-phase-cost.test.js tests/battle-snapshot.test.js tests/battle-snapshot-integration.test.js --reporter=verbose --reporter=json --outputFile=/workspace/scratch/b7a53a06c872/performance-followons-20261021/audit-fixture-targeted-final.json
+
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+· ✓ tests/battle-snapshot.test.js > battle snapshot builder > preserves absent and explicit null cards in optional battle projections 2ms
+· ✓ tests/battle-snapshot.test.js > battle snapshot builder > isolates nested state and freezes collections without mutating source values 2ms
+· ✓ tests/battle-snapshot.test.js > battle snapshot builder > deeply isolates and freezes every card-bearing projection while preserving undefined 5ms
+· ✓ tests/battle-snapshot-integration.test.js > 真实 BattleSession 快照卡牌隔离 > 复用稳定快照，并在源卡嵌套规则变化后重新投影待选目标卡 11ms
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable normal snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"normal","reads":50,"poolSize":0,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable normal snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"normal","reads":50,"poolSize":0,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable confirmed boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"confirmed boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable confirmed boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"confirmed boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable direct boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"direct boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable direct boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"direct boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable nest snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"nest","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable nest snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"nest","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > continues reading the live formation pool and capacity while selection is active
+SNAPSHOT_PHASE_COUNTS {"label":"active formation","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":100,"poolFilterVisits":12000,"poolMapCalls":50,"poolMapVisits":6000,"ownedForEachCalls":50,"ownedForEachVisits":6000}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > continues reading the live formation pool and capacity while selection is active
+SNAPSHOT_PHASE_COUNTS {"label":"active formation","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":100,"poolFilterVisits":12000,"poolMapCalls":50,"poolMapVisits":6000,"ownedForEachCalls":50,"ownedForEachVisits":6000}
+
+· ✓ tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable normal snapshots 24ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable confirmed boss snapshots 35ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable direct boss snapshots 10ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable nest snapshots 14ms
+stdout | tests/battle-snapshot-phase-cost.test.js > skips the retained old pool after exiting a boss battle and entering ordinary combat
+SNAPSHOT_PHASE_COUNTS {"label":"normal after boss","reads":50,"poolSize":120,"ownedSize":6,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > skips the retained old pool after exiting a boss battle and entering ordinary combat
+SNAPSHOT_PHASE_COUNTS {"label":"normal after boss","reads":50,"poolSize":120,"ownedSize":6,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > restarts a confirmed boss deck without losing its saved choice or recapturing formation work
+SNAPSHOT_PHASE_COUNTS {"label":"restarted boss","reads":50,"poolSize":5,"ownedSize":5,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > restarts a confirmed boss deck without losing its saved choice or recapturing formation work
+SNAPSHOT_PHASE_COUNTS {"label":"restarted boss","reads":50,"poolSize":5,"ownedSize":5,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+· ✓ tests/battle-snapshot-phase-cost.test.js > continues reading the live formation pool and capacity while selection is active 138ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > preserves runtime selections, ignores inactive pool-only changes, and reprojects after reentry 3ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > continues invalidating in-place card rules in a pending target outside formation 4ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > preserves equipped-card invalidation when the same card is also retained in the inactive pool 4ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > skips the retained old pool after exiting a boss battle and entering ordinary combat 30ms
+· ✓ tests/battle-snapshot-phase-cost.test.js > restarts a confirmed boss deck without losing its saved choice or recapturing formation work 8ms
+· ✓ tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 四次合法多段随机法术跨过旧轮询上限后仍完整结算 678ms
+stdout | tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 每张卡都能在真实战斗中打出/使用且不崩不卡死
+
+===== 实打结果：共 282 张，硬失败 0，零效果警告 5 =====
+—— 零效果警告（人工复核，不判失败）——
+【能源结晶】(道具) C-道具
+【铸甲】(武术) A-手牌
+【快意恩仇】(武术) A-手牌
+【复原药水】(道具) C-道具
+【精神控制】(法术) A-手牌
+
+stdout | tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 每张卡都能在真实战斗中打出/使用且不崩不卡死
+
+===== 实打结果：共 282 张，硬失败 0，零效果警告 5 =====
+—— 零效果警告（人工复核，不判失败）——
+【能源结晶】(道具) C-道具
+【铸甲】(武术) A-手牌
+【快意恩仇】(武术) A-手牌
+【复原药水】(道具) C-道具
+【精神控制】(法术) A-手牌
+
+· ✓ tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 不会结束的队列仍在真实期限后失败并报告状态 25ms
+· ✓ tests/battle-all-cards.test.js > 全卡库真实战斗实打审计 > 每张卡都能在真实战斗中打出/使用且不崩不卡死 12706ms
+
+
+ Test Files  4 passed (4)
+      Tests  17 passed (17)
+   Start at  12:13:38
+   Duration  15.05s (transform 633ms, setup 0ms, collect 2.86s, tests 13.97s, environment 988ms, prepare 245ms)
+
+
+ Test Files  4 passed (4)
+      Tests  17 passed (17)
+   Start at  12:13:38
+   Duration  15.05s (transform 633ms, setup 0ms, collect 2.86s, tests 13.97s, environment 988ms, prepare 245ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-followons-20261021/audit-fixture-targeted-final.json
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

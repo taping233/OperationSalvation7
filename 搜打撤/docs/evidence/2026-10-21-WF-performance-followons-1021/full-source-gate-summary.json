@@ -1,0 +1,24 @@
+{
+  "outcome": "passed",
+  "mode": "full",
+  "passedTestFiles": 755,
+  "skippedTestFiles": 1,
+  "passedTests": 7853,
+  "skippedTests": 7,
+  "failedTests": 0,
+  "indexSha256": "1e9b4dc74d35179d3120e3c17b569848c6235c1639c3872012f61344c8b493ac",
+  "scope": "Initial nine-file source index before generated art-manifest and documentation were staged. Final publication index must be revalidated.",
+  "rawReport": {
+    "relativePath": "docs/evidence/2026-10-21-WF-performance-followons-1021/2026-10-21T02-51-33.165Z-c775d48b-staged.json",
+    "sha256": "8bf68dfbb46ca8a01f05cf86f4d4323007ace99a2f0f0aea3afc7362ce1a1cef",
+    "bytes": 4333119,
+    "availability": "Retained in integration workspace; excluded from Git because it exceeds 1 MB. Ask the task owner for this raw receipt."
+  },
+  "snapshotTrackedMutations": [],
+  "validation": {
+    "executed": true,
+    "passed": true,
+    "reusableReceipt": true,
+    "reason": "STAGED_PASSED"
+  }
+}

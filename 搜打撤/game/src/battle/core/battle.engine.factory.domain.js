@@ -338,10 +338,22 @@ const applyTextEffects = createEffectExecutor({
     queueSwapCostDiscover,
   });
 const isAOE = isAreaEffect;
+// Formation-only inputs have no projection outside deck selection. Keep these
+// empty values private to this engine; the live selection remains in runtime
+// for battle-start effects and checkpoint restoration.
+const inactiveDeckSelectionInput = {
+  deckNeed: 0, selDeckMax: 0, selShaN: 0, sel: new Set(), selPool: [],
+};
 /** @returns {import('../battle.snapshot.types.js').BattleSnapshotInput} */
 function captureSnapshotInput() {
     const pTgt = pendingTargetOf();
     const pItem = pendingItemOf();
+    const selectingDeck = instanceRuntime.selectingDeck;
+    const deckSelectionInput = selectingDeck ? {
+      deckNeed: Math.min(R().bossDeckSize, instanceRuntime.selPool.filter(o => !equipment.isBattleStartEquip(o.card)).length + Math.min(equipCap(), instanceRuntime.selPool.filter(o => equipment.isBattleStartEquip(o.card)).length)),
+      selDeckMax: instanceRuntime.selDeckMax, selShaN: instanceRuntime.selShaN,
+      sel: instanceRuntime.sel, selPool: instanceRuntime.selPool,
+    } : inactiveDeckSelectionInput;
     // Match findCard's override/owned/granted precedence without its legacy card repair writes.
     const selectionContract = instanceRuntime.handSelecting ? buildHandSelectionContract(instanceRuntime.handSelecting, instanceRuntime.hand.map(uid => {
       const stored = instanceRuntime.G?.ownedCards?.find(entry => entry.uid === uid) || instanceRuntime.granted.find(entry => entry.uid === uid);
@@ -372,7 +384,7 @@ function captureSnapshotInput() {
       handSelecting: instanceRuntime.handSelecting ? { ...instanceRuntime.handSelecting,
         ...selectionContract } : null,
       choosing: instanceRuntime.choosing, pendingTarget: pTgt, pendingHint: instanceRuntime.pendingHint, viewingGrave: instanceRuntime.viewingGrave, viewingDeck: instanceRuntime.viewingDeck, viewingBag: instanceRuntime.viewingBag,
-      dreadShown: instanceRuntime.dreadShown, selectingDeck: instanceRuntime.selectingDeck, deckNeed: Math.min(R().bossDeckSize, instanceRuntime.selPool.filter(o => !equipment.isBattleStartEquip(o.card)).length + Math.min(equipCap(), instanceRuntime.selPool.filter(o => equipment.isBattleStartEquip(o.card)).length)), selDeckMax: instanceRuntime.selDeckMax, selShaN: instanceRuntime.selShaN, sel: instanceRuntime.sel, selPool: instanceRuntime.selPool,
+      dreadShown: instanceRuntime.dreadShown, selectingDeck, ...deckSelectionInput,
       potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
       equipped: instanceRuntime.equipped.map(e => ({
         uid: e.uid, card: e.card, name: e.card.name, desc: String(e.card.desc || ''),

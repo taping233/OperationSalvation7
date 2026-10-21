@@ -1,0 +1,87 @@
+
+ RUN  v3.2.7 /tmp/lifecycle-audit-diagnostic-20261021/current
+
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > starter-attack：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cc-chase-slash：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cc-cursed-blade：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cc-double-boom：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cc-ember-burst：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cc-lava-blast：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-bloodblade：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-comboarrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-forestarrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-piercearrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-shoot：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-swiftarrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-armor-rush：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-arrow-rain：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-bandage：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-blood-arrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-double-shot：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-frost-slash：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-hold-fast：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-life-arrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-purify-arrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-reshot：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-skewer：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-venom-arrow：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-wave-slash：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-bulwark：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-demonbreaker：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-fullstrike：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-ironcharge：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-meteorrain：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-sneak：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-throwblade：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-whirlwind：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt8-dragonblade：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cmtna0nb1yxt：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-barriermend：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-elemburst：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-firecracker：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-infectray：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-sporewall：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-unstableray：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-chain-lightning：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-fireball：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-flame-storm：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-holy-shield：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-holy-water：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-ice-spike：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-thunderblast：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-toxin：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-treasure-hunt：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3sp-shadowshot：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-bloodpotion：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-burnharvest：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-livingwater：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-twinfireball：实际分段伤害/附带数值与卡面相符
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 破甲箭：先结算本次伤害，再施加破甲，使后续伤害穿过护甲
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 铁甲阵：真实 acquire 将2费模板减1费成为1费
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-basicdev：招式池包含符合费用/诅咒的法术
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-breakthrough：招式池包含符合费用/诅咒的法术
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt12-magicfind：招式池包含符合费用/诅咒的法术
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > cmtn1gfhczzj：招式池包含符合费用/诅咒的法术
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 高端研发：实际发现流程2费moves池同时包含武术与法术
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 充能射线：新入手副本不读取入手前本场注能历史
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 寒冰剑：实际装配后攻击冰冻敌人获得+2
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 飞身劈：本次攻击流血加成翻倍，后续攻击恢复普通加成
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 充能火球：首次打出前跨过回合开始增长1点
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 正午决战：选择第二名存活目标，延迟四枪仍打该目标
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt2-wreck：临时卡到期消耗触发一次“本牌被消耗时”
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-azure-sword：临时卡到期消耗触发一次“本牌被消耗时”
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt3-sapper-bomb：临时卡到期消耗触发一次“本牌被消耗时”
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > tt7-arcanescroll：临时卡到期消耗触发一次“本牌被消耗时”
+ ✓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 沉船宝盒到期消耗：基础2张抽中阿猫，派生额外1张并回复1能量 109ms
+ ✓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 沉船宝盒正常消耗：基础2张抽中阿猫，派生额外1张并回复1能量 66ms
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 闪避：真实Combat避开首段固定伤害并消耗闪避
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 惩击：半血增伤先乘基础10，再加法伤2
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 连续射击：此前0张/2张招式时实际0段/2段
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 恶魔之力：末敌死亡后的自伤被已有终局规则中止
+ ↓ tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 可见描述已澄清骷髅王剑与斩杀，避免原始简写误报
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 76 skipped (78)
+   Start at  12:27:15
+   Duration  3.26s (transform 435ms, setup 0ms, collect 863ms, tests 177ms, environment 301ms, prepare 60ms)
+

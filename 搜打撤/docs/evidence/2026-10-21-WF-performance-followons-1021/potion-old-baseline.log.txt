@@ -1,0 +1,56 @@
+
+ RUN  v3.2.7 /tmp/potion-audit-diagnostic-20261021
+
+stdout | tests/hero-cards.test.js > 直接释放家族实打 > 药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）
+POTION_SEED 14 POOL [
+  '神秘药水', '恢复药水',
+  '火焰药水', '狂暴药水',
+  '冰冻药水', '法力药水',
+  '精神药水', '剧毒药水',
+  '流血药水', '复原药水'
+]
+
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 侠客 > 白梅落影·妄：净化+潜行2回合；破隐一击伤害翻倍且攻击后破除
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 侠客 > 无量仙剑·云风（BOSS战）：抽牌并直接释放其中武术
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 侠客 > 天剑诛魔·云阳（BOSS战）：断念把天启剑与诛魔剑洗入牌库，抽到时触发
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 战士 > 圣剑化身：能量上限 +1、装备上限 +1
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 战士 > 青龙化身：初始攻击化为青龙偃月斩并被直接释放
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 牧师 > 禁术解放（BOSS战）：四张禁咒洗入牌库，洗混后「然后抽 2 张」
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 牧师 > 浪掷风吟：置入随机卡牌直至手牌6张，每置入1张法术回复3血
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 法师 > 明灯千里·孔明：法伤 +1，回合开始时发现 1 张卡牌
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 法师 > 神话终章·雷修斯：元素潮汐抉择两扇门，两回合后开启未选的门
+ ↓ tests/hero-cards.test.js > 英雄卡实打 · 降临者 > 充能火山：法伤+1，每消耗 1 张卡牌自动施放火球
+ ↓ tests/hero-cards.test.js > 直接释放家族实打 > 剑荡妖邪：选择手牌中 1 张武术卡直接释放
+stdout | tests/hero-cards.test.js > 直接释放家族实打 > 药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）
+POTION_STATE {"picked":"精神药水","beforeHand":0,"afterHand":2,"beforeDeck":99,"afterDeck":97,"beforeDeckUids":["normal-sha-2-97","normal-sha-2-98"],"afterHandUids":["normal-sha-2-98","normal-sha-2-97"],"logs":" <b>药水魔法</b>：发现并直接施放 1 张【药水】（限制卡池）卡牌| 发现：【<b>精神药水</b>】并直接施放（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）| 抽了 2 张牌"}
+
+ × tests/hero-cards.test.js > 直接释放家族实打 > 药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌） 691ms
+   → 释放应有可观测效果： <b>药水魔法</b>：发现并直接施放 1 张【药水】（限制卡池）卡牌| 发现：【<b>精神药水</b>】并直接施放（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）| 抽了 2 张牌: expected false to be true // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/hero-cards.test.js > 直接释放家族实打 > 药水魔法：发现 1 瓶药水并真正直接释放（不得只置入手牌）
+AssertionError: 释放应有可观测效果： <b>药水魔法</b>：发现并直接施放 1 张【药水】（限制卡池）卡牌| 发现：【<b>精神药水</b>】并直接施放（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）| 抽了 2 张牌: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/hero-cards.test.js:429:49
+    427|       || slice(g).includes('召唤')
+    428|       || slice(g).includes('占位');
+    429|     expect(observable, `释放应有可观测效果：${slice(g)}`).toBe(true);
+       |                                                 ^
+    430|     BattleSession.commands.flee();
+    431|     await drain(20);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 skipped (12)
+   Start at  12:24:35
+   Duration  2.22s (transform 490ms, setup 0ms, collect 890ms, tests 801ms, environment 316ms, prepare 62ms)
+
