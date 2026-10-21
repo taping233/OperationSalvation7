@@ -12,8 +12,10 @@ const body = overlay.querySelector('#ovBody'), actions = new Map();
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const UI = {
   el: { overlay, ovBody: body, ovTitle: overlay.querySelector('#ovTitle') }, _lastMode: null,
-  showOverlay(title, html, mode) {
-    body.innerHTML = rich(html); overlay.hidden = false; this._lastMode = mode;
+  showOverlay(title, html, mode, options = {}) {
+    this._overlayRevision = (this._overlayRevision || 0) + 1;
+    if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
+    else body.innerHTML = rich(html); overlay.hidden = false; this._lastMode = mode;
     document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
   },
   hideOverlay() { overlay.hidden = true; document.dispatchEvent(new CustomEvent('sdt-overlay-close')); },

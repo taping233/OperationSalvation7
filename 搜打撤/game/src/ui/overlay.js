@@ -68,6 +68,7 @@ export const overlayMethods = {
     this._cancelPageBg?.();
     this.hideTooltip?.();
     document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    if (options.battleBody && !options.battleBody()) return;
     // 失败/清空类标题用红色语义
     if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
     this._finishHide = null;
@@ -88,17 +89,21 @@ export const overlayMethods = {
     const victoryCard = this.el.ovBody.parentElement;
     victoryCard?.classList.remove('fx-victory');
     if (victoryCard && /搜刮！/.test(title)) { victoryCard.classList.remove('fx-victory'); void victoryCard.offsetWidth; victoryCard.classList.add('fx-victory'); }
-    this.el.ovBody.innerHTML = SDT.Icons.rich(bodyHtml);
+    // Internal battle path replaces only secondary siblings, never the live scene.
+    const content = options.battleBody ? options.battleBody(SDT.Icons.rich(bodyHtml)) : this.el.ovBody;
+    if (!content) return;
+    if (!options.battleBody) content.innerHTML = SDT.Icons.rich(bodyHtml);
     // 广播当前弹层模式：战斗序列帧层据此做白名单（只有 battle 模式可见，2026-09-13 留言）
     document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
+    if (options.battleBody && !options.battleBody()) return;
     // 主循环每帧读此标志判断“战斗页是否盖在画布上”；battle-stage 只会经这里进
     // overlay（ovBody 无其他写入点），按内容缓存一次，免去每帧全子树 querySelector
-    this._hasBattleStage = bodyHtml.includes('battle-stage');
+    this._hasBattleStage = !!options.battleBody || bodyHtml.includes('battle-stage');
     const card = this.el.ovBody.parentElement;
     card.classList.toggle('wide', mode === true || mode === 'wide' || mode === 'chest' || mode === 'discover');
     card.classList.toggle('chest', mode === 'chest');   // 战利品/开箱浮层专属类（2026-09-09 重做放大）
     card.classList.toggle('discover', mode === 'discover');   // 发现浮层（2026-09-09 留言 #12：虚化背景而非纯黑）
-    card.classList.toggle('battle', mode === 'battle');
+    card.classList.toggle('battle', mode === 'battle' || !!options.battleBody);
     card.classList.toggle('bag-modal', mode === 'bag');
     card.classList.toggle('bag-page', mode === 'bagpage');
     card.classList.toggle('page', mode === 'page');
@@ -150,7 +155,7 @@ export const overlayMethods = {
     // 卡牌库整页头部自带关闭钮（photo-studio v3 的 pg-close），全局 × 与它并排重复
     // （2026-09-20 老板：卡牌库有两个退出键）——该页隐藏全局 ×，Esc 仍走页内钮关闭
     // 背包页同理（2026-10-15 老板：退出键复用 archive-back 放左上，多余的退出键删除）
-    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
+    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!content.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
     // page 全屏页自带 CSS 入场动画（.card.page 的 pgIn），WAAPI 再叠一层会与
     // CSS 动画互相覆盖造成过渡期跳帧——这里只跑 CSS 那套。
     // bagpage 背包页同理（2026-09-19 留言 #3：展开动画走 .card.bag-page 的 bagIn）
@@ -160,9 +165,9 @@ export const overlayMethods = {
     // 主控 10-04 复核处置：glass 模式整体按确认小窗档（hub 材料/仓库确认窗
     // 同为 mode'glass' 而 markup 无 .glass-panel 锚点，按模式判定防漏）。
     if (!document.body.classList.contains('interface-motion') && (!wasOpen || prevMode !== mode) && SDT.Motion && mode !== 'page' && mode !== 'bagpage' && mode !== 'glass' &&
-        !(mode === 'discover' || card.querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]'))) SDT.Motion.overlayIn(card);
+        !(mode === 'discover' || (options.battleBody ? content : card).querySelector('.bt-settings, .bt-gy-list, .glass-panel, [data-act="leaveSave"]'))) SDT.Motion.overlayIn(card);
     // 开窗音效判定与文末场景音取景共用这一次查询（两者间无 DOM 增删，结果一致）
-    const soundScene = this.el.ovBody.querySelector('.node-pg, .flow-transition');
+    const soundScene = content.querySelector('.node-pg, .flow-transition');
     // 只在弹窗真正打开/切换模式时播开窗音效——战斗内反复 render 不刷音效
     if (!wasOpen || prevMode !== mode) {
       if (!soundScene) SDT.Sound.sfx('open');
@@ -171,26 +176,26 @@ export const overlayMethods = {
     // 显式首焦点仍优先，关闭或较新页面则取消本次延后聚焦。
     requestAnimationFrame(() => {
       if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
-      const explicitFocus = options.initialFocus || this.el.ovBody.querySelector('[data-initial-focus]');
-      if (!explicitFocus && this.el.overlay.contains(document.activeElement)) return;
-      const target = this._resolveOverlayInitialFocus(options.initialFocus);
+      const explicitFocus = options.initialFocus || content.querySelector('[data-initial-focus]');
+      if (!explicitFocus && this.el.overlay.contains(document.activeElement) && !document.activeElement.closest('[inert]')) return;
+      const target = this._resolveOverlayInitialFocus(explicitFocus);
       if (target) target.focus({ preventScroll: true });
       else this.el.overlay.focus({ preventScroll: true });
     });
     // U1（2026-09-19 交互走查）：整页节点/场景壳的背景大图首次打开才发请求，
     // 解码期间页面近乎纯黑、无任何反馈。这里读出 data-asset-key 元素的背景 URL，
     // 未就绪时挂 bg-loading 类（CSS 显示「正在进入…」微提示），图片到齐后自动摘除。
-    this._checkPageBg();
+    this._checkPageBg(content);
     const soundTone = soundScene && [...soundScene.classList].find(name => name.startsWith('sc-'));
     SDT.Sound.scene?.(soundScene?.dataset.musicScene || (soundTone ? soundTone.slice(3) : null), soundScene?.dataset.assetKey || '', { mode });
   },
 
   // U1：整页背景就绪检测。_bgReady 缓存已确认加载过的 URL，重复打开零开销。
   _bgReady: null,
-  _checkPageBg() {
+  _checkPageBg(root = this.el.ovBody) {
     this._cancelPageBg?.();
     this._pageBgReady = Promise.resolve();
-    const host = this.el.ovBody.querySelector('[data-asset-key]');
+    const host = root.querySelector('[data-asset-key]');
     if (!host) return;
     // Photo IMG loading is owned by the card-art queue, not a CSS background.
     if (host.tagName === 'IMG' && host.closest('.photo-studio-v3')) return;

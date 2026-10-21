@@ -11,7 +11,9 @@ vi.mock('../game/src/battle/view/battle.frames.js', () => ({
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const UI = {
   el: {}, _lastMode: null, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act() {},
-  showOverlay(title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
+  showOverlay(title, html, mode, options = {}) { this._overlayRevision = (this._overlayRevision || 0) + 1;
+    if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
+    else this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
   hideOverlay() { this.el.overlay.hidden = true; document.dispatchEvent(new Event('sdt-overlay-close')); },
 };
 window.SDT = {

@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import postcss from 'postcss';
+import { mountCombatOverlay } from '../game/src/battle/view/battle.secondary-overlay.js';
 import { createBattleDecisionPresenter, restoreCombatScene } from '../game/src/battle/view/battle.decision-shell.js';
 const SDT=(await import('../game/src/core/sdt-facade.js')).default;
 const {UI}=await import('../game/src/ui/ui.js');
@@ -86,4 +87,98 @@ it('full-screen secondary card clears legacy discover filters without changing s
   expect(document.querySelector('.battle-secondary-panel').matches(selector)).toBe(false);
   document.querySelector('.battle-secondary-layer').replaceWith(document.createElement('section'));
   expect(card.matches(selector)).toBe(false);
+});
+
+
+it('never disconnects the retained scene or its descendants across repeated secondary transitions',()=>{
+  const marker=document.createElement('i');scene.append(marker);
+  const observer=new MutationObserver(()=>{});observer.observe(UI.el.ovBody,{childList:true,subtree:true});
+  const atMode=[];const onMode=()=>atMode.push([scene.isConnected,marker.isConnected,scene.hasAttribute('inert')]);
+  document.addEventListener('sdt-overlay-mode',onMode);
+  for(let i=0;i<3;i++){
+    show('规则','<button data-act="back" data-cancel="true">返回</button>','discover');
+    expect(restoreCombatScene(UI,7)).toBe(true);
+  }
+  document.removeEventListener('sdt-overlay-mode',onMode);
+  const removed=observer.takeRecords().flatMap(record=>[...record.removedNodes]);observer.disconnect();
+  expect(removed.some(node=>node===scene || node.contains?.(scene) || node===marker)).toBe(false);
+  expect(atMode).toEqual(Array.from({length:6},()=>[true,true,true]));
+});
+it('moves focus out of the shielded scene and restores the exact trigger after return',()=>{
+  const trigger=document.querySelector('#battleAction');trigger.focus();
+  show('规则','<button data-act="back" data-cancel="true">返回</button>','discover');
+  vi.runOnlyPendingTimers();
+  expect(document.activeElement.dataset.act).toBe('back');
+  expect(UI._overlayFocusable()).not.toContain(trigger);
+  expect(restoreCombatScene(UI,7)).toBe(true);
+  vi.runOnlyPendingTimers();expect(document.activeElement).toBe(trigger);
+});
+it('does not leak retained background assets or sound selectors into secondary lifecycle',()=>{
+  scene.insertAdjacentHTML('beforeend','<div class="node-pg sc-forbidden" data-asset-key="forbidden" data-music-scene="forbidden"></div>');
+  const bg=vi.spyOn(UI,'_checkPageBg');SDT.Sound.scene=vi.fn();
+  show('规则','<button data-act="back">返回</button>','discover');
+  expect(bg.mock.calls.at(-1)[0]).toBe(document.querySelector('.battle-secondary-layer'));
+  expect(SDT.Sound.scene).toHaveBeenLastCalledWith(null,'',{mode:'discover'});
+  expect(restoreCombatScene(UI,7)).toBe(true);
+  expect(bg.mock.calls.at(-1)[0].querySelector('[data-asset-key]')).toBeNull();
+  expect(SDT.Sound.scene).toHaveBeenLastCalledWith(null,'',{mode:'battle'});bg.mockRestore();
+});
+it('does not clobber a newer ordinary overlay opened synchronously by the mode hook',()=>{
+  const onMode=()=>{document.removeEventListener('sdt-overlay-mode',onMode);UI.showOverlay('新页面','<button id="newPage">继续</button>','page');};
+  document.addEventListener('sdt-overlay-mode',onMode);
+  expect(mountCombatOverlay(UI,'规则','<button>返回</button>','discover',scene)).toBe(false);
+  expect(UI._lastMode).toBe('page');expect(UI.el.ovTitle.textContent).toBe('新页面');
+  expect(document.querySelector('#newPage')).not.toBeNull();expect(scene.isConnected).toBe(false);
+  expect(UI.el.ovBody.parentElement.classList.contains('battle')).toBe(false);
+});
+it('abandons a stale restore when the mode hook changes token or currentness',()=>{
+  show('规则','<button>返回</button>','discover');
+  let current=true;
+  const onMode=()=>{current=false;scene._battleToken=8;};
+  document.addEventListener('sdt-overlay-mode',onMode,{once:true});
+  expect(restoreCombatScene(UI,7,{isCurrent:()=>current})).toBe(false);
+  expect(scene.hasAttribute('inert')).toBe(true);
+  expect(UI._lastMode).toBe('discover');
+});
+it('ordinary overlays still replace old content and focus their own initial target',()=>{
+  document.querySelector('#battleAction').focus();
+  UI.showOverlay('普通','<button id="ordinary" data-initial-focus>继续</button>','page');
+  vi.runOnlyPendingTimers();expect(scene.isConnected).toBe(false);
+  expect(document.activeElement.id).toBe('ordinary');expect(UI._hasBattleStage).toBe(false);
+});
+
+it('honors a non-first modal initial focus even when the retained scene has an explicit marker',()=>{
+  document.querySelector('#battleAction').setAttribute('data-initial-focus','');
+  document.querySelector('#battleAction').focus();
+  show('规则','<button data-act="back">返回</button><button id="modalExplicit" data-initial-focus>指定操作</button>','discover');
+  vi.runOnlyPendingTimers();expect(document.activeElement.id).toBe('modalExplicit');
+});
+it('a hook that queues replacement invalidates only the departed retained scene',()=>{
+  let current=true;scene._battleRenderCurrent=()=>current;
+  const onMode=()=>{current=false;};document.addEventListener('sdt-overlay-mode',onMode,{once:true});
+  expect(mountCombatOverlay(UI,'规则','<button>返回</button>','discover',scene)).toBe(false);
+  expect(scene.isConnected).toBe(false);expect(UI._hasBattleStage).toBe(false);
+});
+it('a newer renderer claiming the same scene is not removed by the departed callback',()=>{
+  let current=true;scene._battleRenderCurrent=()=>current;
+  const onMode=()=>{current=false;scene._battleRenderCurrent=()=>true;};document.addEventListener('sdt-overlay-mode',onMode,{once:true});
+  expect(mountCombatOverlay(UI,'规则','<button>返回</button>','discover',scene)).toBe(false);
+  expect(scene.isConnected).toBe(true);
+});
+
+it('abandons old title and body writes after a pre-mount hook opens another overlay',()=>{
+  const tooltip=vi.spyOn(UI,'hideTooltip').mockImplementationOnce(()=>UI.showOverlay('较新页面','<button id="newBefore">继续</button>','page'));
+  expect(mountCombatOverlay(UI,'旧规则','<button>返回</button>','discover',scene)).toBe(false);
+  expect(UI.el.ovTitle.textContent).toBe('较新页面');expect(document.querySelector('#newBefore')).not.toBeNull();
+  expect(UI._lastMode).toBe('page');tooltip.mockRestore();
+});
+it.each(['revision','body'])('does not discard a scene after a newer %s owner takes over',kind=>{
+  let current=true;scene._battleRenderCurrent=()=>current;
+  document.addEventListener('sdt-overlay-mode',()=>{
+    current=false;
+    if(kind==='revision') UI._overlayRevision++;
+    else {const next=document.createElement('div');UI.el.ovBody.after(next);UI.el.ovBody=next;}
+  },{once:true});
+  expect(mountCombatOverlay(UI,'规则','<button>返回</button>','discover',scene)).toBe(false);
+  expect(scene.isConnected).toBe(true);
 });

@@ -303,8 +303,10 @@ function settingsPanel(body, mode = 'settings') {
   const scene = body.querySelector('.battle-stage');
   const UI = {
     el: { ovBody: body },
-    showOverlay(title, html, nextMode) {
-      body.innerHTML = html;
+    showOverlay(title, html, nextMode, options = {}) {
+      this._overlayRevision = (this._overlayRevision || 0) + 1;
+      if (options.battleBody) { if (!options.battleBody(html)) return; }
+      else body.innerHTML = html;
       document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: nextMode }));
     },
   };

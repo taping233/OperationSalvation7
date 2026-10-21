@@ -760,8 +760,8 @@ function suspendSettingsScene(mode) {
   const fig = pendingAttach?.fig || cur?.fig || suspended?.stage.querySelector('#btSelf .sts-figure');
   const stage = fig?.closest('.battle-stage.sts');
   const battleToken = pendingAttach?.battleToken ?? cur?.battleToken ?? suspended?.battleToken;
-  // showOverlay broadcasts while mountCombatOverlay temporarily detaches this scene.
-  // Its synchronous caller must restore that exact scene before the observer checkpoint.
+  // The secondary layer is installed before showOverlay broadcasts; the scene stays connected.
+  // The observer still validates its token and ownership at the next checkpoint.
   if (!overlay || !overlay.contains(body) || !layer || !stage || battleToken == null
       || stage._battleToken !== battleToken) return false;
   if (suspended?.stage === stage && suspended.battleToken === battleToken) return true;

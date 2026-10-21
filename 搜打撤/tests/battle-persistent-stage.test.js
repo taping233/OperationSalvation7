@@ -28,8 +28,10 @@ const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 let onOverlay = null;
 const UI = {
   el: {}, _lastMode: null,
-  showOverlay(title, html, mode) {
-    this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode;
+  showOverlay(title, html, mode, options = {}) {
+    this._overlayRevision = (this._overlayRevision || 0) + 1;
+    if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
+    else this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode;
     const hook = onOverlay; onOverlay = null; hook?.();
   },
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
