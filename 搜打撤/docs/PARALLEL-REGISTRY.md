@@ -47,6 +47,10 @@
 
 ## 近期已释放
 
+### 2026-10-21 AOE悬停手牌投影 / Friday WF-preview-context-1021
+
+七文件补丁精确接入已发布56efd4d3，源码编辑冻结、占用释放；单次同步投影保持逐目标及最终提交实时检查。独立555项与57项overlay哨兵、生命周期审查、唯一标准build原预算及1595文件静态资源闭环通过。正常冻结门/hook随后由[证据](evidence/2026-10-21-WF-preview-context-1021/README.md)指向不可变报告；无本批实页/远端CI/部署结论，无服务。
+
 ### 2026-10-21 战斗目标DOM守卫 / Friday WF-target-dom-1021
 
 源码编辑冻结、占用释放，待正常冻结门记录。属地：battle.aim.js、tests/battle-target-dom.test.js、docs/performance.md与自有证据；双文件匹配已发布b5a59762基线补丁。独立17文件352项及旧实现4项优化负控保留；唯一标准build所有原预算、1595文件静态资源闭环通过。目标资格与名称保持实时，180次目标属性重复写入降0、60次类切换调用降0各自统计，不代表FPS。正常门/hook结果由[证据入口](evidence/2026-10-21-WF-target-dom-1021/README.md)指向后续不可变报告；无服务/实页/远端CI/发布结论。

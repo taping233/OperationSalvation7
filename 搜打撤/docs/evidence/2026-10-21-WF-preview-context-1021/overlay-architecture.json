@@ -1,0 +1,12 @@
+{
+  "sourceModuleCount": 542,
+  "overlayHashes": {
+    "battle/view/battle.aim.js": "2a3125ab1a0959de1892163bf2d5813434af73a9deb4143269e89c3eb87fa983",
+    "battle/view/battle.hover.js": "0cf5df4bbdd762bf4259b432bec4443d218aed3033aaf1f3870e26569546e78b",
+    "battle/core/battle.core.js": "1181815dfd08c413787b121acd355e301037486482885d16cac35e137f4a2117",
+    "battle/core/battle.card-play.domain.js": "118f04da0f9368dc88d97b58f1e94aa6c9d66cf86db764b58da975480d7d21e9"
+  },
+  "acyclicModuleCount": 542,
+  "violations": [],
+  "deadGuardKeys": []
+}

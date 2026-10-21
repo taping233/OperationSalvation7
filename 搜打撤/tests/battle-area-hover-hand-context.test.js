@@ -1,0 +1,195 @@
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
+  createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }),
+  waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
+}));
+vi.mock('../game/src/battle/view/battle.frames.js', () => ({
+  attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}), play() {}, setPaused() {},
+  presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
+}));
+vi.mock('../game/src/ui/ui-scale.js', async importOriginal => ({ ...(await importOriginal()), scale: () => 1, viewport: () => ({ width: 1920, height: 1080 }) }));
+const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
+const UI = { el: {}, _lastMode: null, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act() {},
+  showOverlay(_title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
+  hideOverlay() { this.el.overlay.hidden = true; document.dispatchEvent(new Event('sdt-overlay-close')); },
+};
+window.SDT = {
+  UI, Icons: { img: () => '', rich, TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
+  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
+  Meta: { track() {} }, Motion: { reduceMotion: () => true },
+  MAP: { rules: { battleEnergy: 99, battleHandMax: 99, bossDeckSize: 15, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+};
+await import('../game/src/cards/cards.js');
+const { BattleSession, commands, findCard } = await import('../game/src/battle/core/battle.core.js');
+const Runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+const { render } = await import('../game/src/battle/view/battle.view.js');
+const Aim = await import('../game/src/battle/view/battle.aim.js');
+const { showFoePreview } = await import('../game/src/battle/view/battle.hover.js');
+const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
+const Cards = window.SDT.Cards;
+Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
+const areaCard = i => ({ id: `hover-context-${i}`, name: `群体招式${i}`, type: '法术', cost: 1, dmg: 3, dmgType: 'spell', desc: '',
+  rules: { version: 1, battle: { target: { side: 'enemy', area: true } }, triggers: { onPlay: [{ op: 'damage', amount: 3, target: 'allEnemies' }] } } });
+let frames, frameId, clock, game, hit;
+const stage = () => document.querySelector('.battle-stage');
+const foeNodes = () => [...document.querySelectorAll('.bt-foe[data-eidx]')];
+const previews = () => foeNodes().map(node => node.querySelector('.bt-fpreview')?.textContent || '');
+const step = () => { clock += 16; const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback(clock)); };
+function pointer(type, x = 800, y = 700) {
+  const event = new MouseEvent(type, { clientX: x, clientY: y, button: 0, bubbles: true, cancelable: true });
+  Object.defineProperty(event, 'pointerId', { value: 1 }); return event;
+}
+function enter() { hit = stage(); window.dispatchEvent(pointer('pointermove')); step(); }
+function leave() { hit = document.querySelector('.sts-hud'); window.dispatchEvent(pointer('pointermove')); step(); }
+function begin() {
+  const card = document.querySelector('.bt-card[data-uid="u0"]');
+  expect(card).not.toBeNull();
+  const rect = () => ({ left: 200, top: 800, width: 220, height: 300 });
+  card.getBoundingClientRect = rect; card.parentElement.getBoundingClientRect = rect;
+  Aim.startAim(pointer('pointerdown', 320, 950), card);
+  expect(Aim.aim?.uid).toBe('u0');
+}
+function restore(count = 9, first = areaCard(0), overrides = {}) {
+  const ownedCards = Array.from({ length: count }, (_, i) => ({ uid: `u${i}`, card: i ? areaCard(i) : first }));
+  game = { ownedCards, inventory: [], usedPocket: [], hp: 99, maxHp: 99, atk: 4, spellPower: 0, coins: 0, myClass: '战士',
+    state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
+  window.SDT.game = game;
+  expect(BattleSession.restore(game, {
+    opts: { isBoss: false, name: '群体悬停检查' }, mode: 'normal', turn: 1, maxEnergy: 99, energy: 99,
+    hand: ownedCards.map(entry => entry.uid), drawPile: [], discard: [], grave: [], played: [], consumed: [], granted: [],
+    pdef: { shield: 0, armor: 0, guard: false }, pstat: { status: {} },
+    foes: Array.from({ length: 4 }, (_, i) => ({ id: `hover-foe-${i}`, name: `敌人${i}`, hp: 30, maxHp: 30, atk: 1,
+      dead: false, status: {}, defense: { shield: 0, armor: 0, guard: false } })),
+    delayed: [], growth: {}, growthNames: [], zeroFeeUntil: [], cardOverrides: [], ...overrides,
+  })).toBe(true);
+  render(); step(); step();
+  return first;
+}
+function measure(action) {
+  let uidReads = 0;
+  game.ownedCards.forEach((entry, i) => Object.defineProperty(entry, 'uid', {
+    configurable: true, enumerable: true, get() { uidReads++; return `u${i}`; },
+  }));
+  globalThis.__previewHandCounts = { lookups: 0, cost: 0, capability: 0, handProjection: 0 };
+  action();
+  const counts = { ...(globalThis.__previewHandCounts.lookups ? globalThis.__previewHandCounts : {}), uidReads };
+  globalThis.__previewHandCounts = null;
+  game.ownedCards.forEach((entry, i) => Object.defineProperty(entry, 'uid', { configurable: true, enumerable: true, writable: true, value: `u${i}` }));
+  return counts;
+}
+beforeEach(() => {
+  frames = new Map(); frameId = 0; clock = 0; hit = null;
+  vi.stubGlobal('requestAnimationFrame', callback => { frames.set(++frameId, callback); return frameId; });
+  vi.stubGlobal('cancelAnimationFrame', id => frames.delete(id));
+  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(new Proxy({}, { get: () => () => {} }));
+  document.elementFromPoint = () => hit;
+  localStorage.setItem('sdt-intent-legend', '1');
+  document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
+  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
+  UI._lastMode = null;
+  UI.el.overlay.getBoundingClientRect = () => ({ left: 0, top: 0, width: 1920, height: 1080 });
+  UI.el.overlay.setPointerCapture = () => {}; UI.el.overlay.hasPointerCapture = () => true; UI.el.overlay.releasePointerCapture = () => {};
+});
+afterEach(() => {
+  globalThis.__previewHandCounts = null;
+  Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
+  if (game?.battleActive) commands.flee();
+  for (let i = 0; i < 100 && frames.size; i++) step();
+  UI.hideOverlay(); vi.restoreAllMocks(); vi.unstubAllGlobals();
+});
+
+it.each([9, 30, 60])('one real empty-field pointer hover resolves %i raw hand entries once, not per target', count => {
+  restore(count); begin();
+  const before = BattleSession.serialize();
+  const counts = measure(enter);
+  expect(previews()).toHaveLength(4);
+  previews().forEach(text => { expect(text).toContain('直接伤害：3'); expect(text).toContain('松手打出'); });
+  expect(BattleSession.serialize()).toEqual(before);
+  console.info('POINTER_HAND_COUNTS', JSON.stringify({ cards: count, ...counts, text: previews() }));
+  // Owned UID reads include the non-shared per-target preview/availability lookups.
+  expect(counts.uidReads).toBe(count * (count + 1) / 2 + 20);
+  if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: count + 16, cost: 8, capability: 8 });
+  expect(measure(step).uidReads).toBe(0); // No new transition: no batch at all.
+  leave();
+  expect(measure(enter)).toEqual(counts); // A new entry materializes a new projection, even without a state edit.
+  if (count === 9) {
+    const dragged = Aim.aim.el; render(); expect(Aim.aim?.el).toBe(dragged);
+    expect(measure(enter)).toEqual(counts); // Renderer-preserved aim still starts a new batch.
+  }
+});
+
+it('uses the current catalog 风暴火球 with unchanged damage, cost and play wording', () => {
+  const card = structuredClone(Cards.all().find(entry => entry.id === 'tt3-flame-storm'));
+  restore(9, card); begin();
+  const counts = measure(enter);
+  console.info('CATALOG_POINTER_HAND_COUNTS', JSON.stringify({ cardId: card.id, ...counts, text: previews() }));
+  previews().forEach(text => { expect(text).toContain('直接伤害：4'); expect(text).toContain('费2'); expect(text).toContain('松手打出'); });
+  expect(counts.uidReads).toBe(65);
+  if (counts.lookups != null) expect(counts).toMatchObject({ handProjection: 1, lookups: 25, cost: 8, capability: 8 });
+});
+
+it('new pointer entries see changed hand, raw overrides, requirements, energy and target death', () => {
+  const card = restore(); begin(); enter();
+  card.rules.battle.requirements = [{ kind: 'handCards', count: 8, type: '法术' }];
+  leave(); enter(); previews().forEach(text => expect(text).toContain('松手打出'));
+  Runtime.hand.pop(); leave(); enter();
+  previews().forEach(text => { expect(text).toContain('当前无法打出'); expect(text).toContain('现有 7 张'); });
+  Runtime.hand.push('u8');
+  Runtime.cardOverrides.set('u8', { ...areaCard(8), type: '武术' }); leave(); enter();
+  previews().forEach(text => expect(text).toContain('现有 7 张'));
+  Runtime.cardOverrides.delete('u8'); card.rules.battle.requirements[0].count = 9; leave(); enter();
+  previews().forEach(text => expect(text).toContain('现有 8 张'));
+  card.rules.battle.requirements = []; Runtime.set$energy(0); Runtime.foes[1].dead = true; leave(); enter();
+  expect(previews()[1]).toBe('');
+  previews().filter(Boolean).forEach(text => expect(text).toContain('能量不足'));
+  Runtime.set$energy(99); leave(); enter();
+  previews().filter(Boolean).forEach(text => expect(text).toContain('松手打出'));
+  // Cancelling and grabbing again must not retain any old hand projection either.
+  Aim.cancelAim(); Runtime.hand.splice(0, 1); render();
+  expect(Aim.aim).toBeNull();
+  expect(commands.getCardPlayAvailability('u0', 0).reason.code).toBe('NOT_IN_HAND');
+});
+
+it('real renderer refresh discards the hover batch and keeps fresh target/self modifiers', () => {
+  restore(); begin(); enter();
+  const dragged = Aim.aim.el;
+  game.spellPower = 2; Runtime.foes[0].defense.shield = 2; Runtime.foes[1].status.immune = 1;
+  Runtime.foes[2].status.dodge = 1; Runtime.foes[3].dead = true;
+  render();
+  expect(Aim.aim?.el).toBe(dragged);
+  enter();
+  expect(previews()[0]).toContain('直接伤害：3'); expect(previews()[0]).toContain('护盾 2→0');
+  expect(previews()[1]).toContain('直接伤害：0'); expect(previews()[2]).toContain('直接伤害：0');
+  expect(previews()[2]).toContain('闪避'); expect(previews()[3]).toBe('');
+  Runtime.hand.pop(); render(); expect(Aim.aim).toBeNull();
+});
+
+it('standalone preview calls and final pointer release recheck the live hand instead of using the last batch', () => {
+  const card = restore(); begin(); enter();
+  card.rules.battle.requirements = [{ kind: 'handCards', count: 8, type: '法术' }];
+  Runtime.hand.pop();
+  showFoePreview(foeNodes()[0], 0, 'u0', card, 'click');
+  expect(previews()[0]).toContain('现有 7 张');
+  Runtime.hand.push('u8'); showFoePreview(foeNodes()[0], 0, 'u0', card, 'click');
+  expect(previews()[0]).toContain('点击该敌人打出');
+  Runtime.hand.pop();
+  const before = BattleSession.serialize();
+  window.dispatchEvent(pointer('pointerup'));
+  expect(BattleSession.serialize()).toEqual(before);
+  expect(BattleSession.getSnapshot().hand).toContain('u0');
+  expect(document.querySelector('.bt-thought-bubble')?.textContent).toContain('现有 7 张');
+});
+
+it('fresh batch uses replacement card identity and does not survive a new battle token', () => {
+  restore(); begin(); enter();
+  const replacement = areaCard(0);
+  replacement.rules.battle.requirements = [{ kind: 'handCards', count: 9, type: '法术' }];
+  Runtime.cardOverrides.set('u0', replacement); leave(); enter();
+  previews().forEach(text => expect(text).toContain('现有 8 张'));
+  expect(findCard('u0').card).toBe(replacement);
+  const token = BattleSession.getSnapshot().battleToken;
+  restore(); expect(BattleSession.getSnapshot().battleToken).not.toBe(token);
+  step(); expect(Aim.aim).toBeNull();
+  begin(); enter(); previews().forEach(text => expect(text).toContain('松手打出'));
+});

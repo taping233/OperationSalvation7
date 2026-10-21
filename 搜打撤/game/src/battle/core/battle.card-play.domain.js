@@ -64,8 +64,8 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
   function unplayableReason(card, renderContext = null) {
     if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
     if (isFoeFightCard(card) && alive().length < 2) return '场上敌人不足两名，无法互相攻击';
-    // Only a single synchronous render shares this raw-hand projection. Commands
-    // and previews omit the context and always resolve the current live hand.
+    // Only a single synchronous render or hover batch shares this raw-hand projection.
+    // Standalone queries and submissions omit it and resolve the current live hand.
     // Keep raw card identity and findCard's legacy repairs, not effective faces.
     const handCards = renderContext?.handCards || readState().hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
     if (renderContext) renderContext.handCards = handCards;
@@ -82,7 +82,7 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
     return unplayableReason(card, renderContext) || equipmentPlayLimit(card)?.reason.message || null;
   }
 
-  function inspectCardPlay(uid) {
+  function inspectCardPlay(uid, handRuleContext = null) {
     const fail = (code, message, card = null) => ({ card, reason:{ code, message } });
     if (!readState().hand.includes(uid)) return fail('NOT_IN_HAND', '这张牌已不在当前手牌中');
     if (readState().busy || readState().infusing || readState().discovering || readState().choosing || readState().handSelecting || readState().viewingGrave || readState().viewingDeck) return fail('INPUT_BUSY', '当前动作或选择尚未结束');
@@ -92,7 +92,7 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
     const card = entry.card;
     const capability = inspectCardRuleCapability(card);
     if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持', card);
-    const why = unplayableReason(card);
+    const why = unplayableReason(card, handRuleContext);
     if (why) return fail('CARD_UNPLAYABLE', `【${card.name}】无法打出：${why}`, card);
     const effCost = effCostOf(card, uid);
     if (effCost > readState().energy) return fail('INSUFFICIENT_ENERGY', `能量不足：【${card.name}】需要 ${effCost} 点能量`, card);
@@ -113,11 +113,12 @@ function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightF
    * @param {import('../battle.play-submission.types.js').CardPlayUid} uid
    * @param {string|number|null} [side]
    * @param {boolean} [forceDirect]
+   * @param {{handCards?: Array<{uid: string|number, card: object}>}|null} [handRuleContext] One synchronous query batch only.
    * @returns {import('../battle.play-submission.types.js').CardPlayAvailability}
    */
-  function getCardPlayAvailability(uid, side = undefined, forceDirect = false) {
+  function getCardPlayAvailability(uid, side = undefined, forceDirect = false, handRuleContext = null) {
     if (!readState().G?.battleActive) return cardPlayRejected(uid, { code:'NO_ACTIVE_BATTLE', message:'当前战斗已经结束' });
-    const check = inspectCardPlay(uid);
+    const check = inspectCardPlay(uid, handRuleContext);
     if (check.reason) return cardPlayRejected(uid, check.reason);
     const card = check.card;
     if (!forceDirect && side == null && infuseOf(card) > 0) {

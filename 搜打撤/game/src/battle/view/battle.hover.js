@@ -5,7 +5,7 @@ import { esc } from '../../core/shared.js';
 import { cardRuleHint, previewAction } from './battle.preview.js';
 import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle.core.js';
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
-  function showFoePreview(el, idx, uid, card, interactionMode, hoverSnapshot = null) {
+  function showFoePreview(el, idx, uid, card, interactionMode, hoverSnapshot = null, handRuleContext = null) {
     // 气泡每次都用同一时刻的当前快照/上下文重算，避免拖拽缓存与新 core 状态混用。
     if (interactionMode === 'click') {
       document.querySelectorAll('.bt-foe .bt-fpreview[data-preview-mode="click"]').forEach(preview => {
@@ -20,7 +20,7 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
     const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;
     const previewUid = uid || snapshot.pendingTarget?.uid;
-    let context = getPreviewContext(previewUid, idx);
+    let context = getPreviewContext(previewUid, idx, handRuleContext);
     if (!context) return;
     // 仅普通手牌选靶复用真实提交检查；道具/技能/免费施放预览沿用自身上下文。
     const ordinaryHandTarget = previewUid != null
@@ -28,7 +28,9 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
       && snapshot.hand?.some(entry => (typeof entry === 'object' ? entry?.uid : entry) === previewUid)
       && !context.isFreeCast && !snapshot.pendingItem && !snapshot.slamPending && !snapshot.dartPending;
     if (ordinaryHandTarget) {
-      const availability = commands.getCardPlayAvailability(previewUid, idx);
+      const availability = handRuleContext
+        ? commands.getCardPlayAvailability(previewUid, idx, false, handRuleContext)
+        : commands.getCardPlayAvailability(previewUid, idx);
       if (availability.status === 'rejected') context = {
         ...context, legal: false, illegalReason: availability.reason?.message || '当前无法打出这张牌',
       };

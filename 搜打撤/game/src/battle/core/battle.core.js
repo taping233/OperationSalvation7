@@ -291,7 +291,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
 
   // R3-a 可信预览窄口：只把真实结算所需的当前上下文复制出去，
   // 不暴露内部 Map/Set，不执行卡牌效果、RNG 或 Combat hooks。
-  function getPreviewContext(uid, targetIndex) {
+  // handRuleContext is private to one synchronous hover batch, never a saved preview.
+  function getPreviewContext(uid, targetIndex, handRuleContext = null) {
     const entry = findCard(uid);
     const card = entry && entry.card;
     const target = foes[+targetIndex];
@@ -305,7 +306,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     else if ((battleState.phase !== BATTLE_PHASES.PLAYER && !matchingTargeting) || busy) illegalReason = '当前不能打出卡牌';
     else if (infusing || discovering || choosing || viewingGrave || viewingDeck) illegalReason = '请先完成当前操作';
     else {
-      const why = unplayableReason(card);
+      const why = unplayableReason(card, handRuleContext);
       if (why) illegalReason = `当前无法打出：${why}`;
       else if (need !== 'enemy') illegalReason = '这张牌不能指定敌人';
       else if (target.dead) illegalReason = '该目标已经倒下';

@@ -1,0 +1,30 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-preview-hand-context-20261021/搜打撤
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 9 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":9,"lookups":25,"cost":8,"capability":8,"handProjection":1,"uidReads":65,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 30 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":30,"lookups":46,"cost":8,"capability":8,"handProjection":1,"uidReads":485,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 60 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":60,"lookups":76,"cost":8,"capability":8,"handProjection":1,"uidReads":1850,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+ ✓ tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 9 raw hand entries once, not per target 151ms
+ ✓ tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 30 raw hand entries once, not per target 62ms
+stdout | tests/battle-area-hover-hand-context.test.js > uses the current catalog 风暴火球 with unchanged damage, cost and play wording
+CATALOG_POINTER_HAND_COUNTS {"cardId":"tt3-flame-storm","lookups":25,"cost":8,"capability":8,"handProjection":1,"uidReads":65,"text":["[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——"]}
+
+ ✓ tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 60 raw hand entries once, not per target 64ms
+ ✓ tests/battle-area-hover-hand-context.test.js > uses the current catalog 风暴火球 with unchanged damage, cost and play wording 41ms
+ ✓ tests/battle-area-hover-hand-context.test.js > new pointer entries see changed hand, raw overrides, requirements, energy and target death 80ms
+ ✓ tests/battle-area-hover-hand-context.test.js > real renderer refresh discards the hover batch and keeps fresh target/self modifiers 59ms
+ ✓ tests/battle-area-hover-hand-context.test.js > standalone preview calls and final pointer release recheck the live hand instead of using the last batch 38ms
+ ✓ tests/battle-area-hover-hand-context.test.js > fresh batch uses replacement card identity and does not survive a new battle token 79ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  16:21:12
+   Duration  2.76s (transform 693ms, setup 0ms, collect 1.45s, tests 575ms, environment 338ms, prepare 67ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-preview-hand-context-20261021/ab-delivery/candidate.json

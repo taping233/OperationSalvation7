@@ -1,0 +1,35 @@
+{
+  "patch": "/workspace/scratch/b7a53a06c872/performance-preview-hand-context-20261021/preview-hand-context.patch",
+  "patchSha256": "8ecfc3a9f1f39b7622bfaf1c175256bd83d429bc7de6a5921d498104cbf533f7",
+  "all7CandidateFileHashesMatched": true,
+  "files": {
+    "搜打撤/game/src/battle/view/battle.aim.js": {
+      "beforeSha256": "105444eb12a7e3e52c545455d2b7a8d567444e29d6b779a2b03e3b731d02424c",
+      "afterSha256": "2a3125ab1a0959de1892163bf2d5813434af73a9deb4143269e89c3eb87fa983"
+    },
+    "搜打撤/game/src/battle/view/battle.hover.js": {
+      "beforeSha256": "00f93ca719835a11a83529a439655d905774f5a5cc078e06feff43ac7d1e0340",
+      "afterSha256": "0cf5df4bbdd762bf4259b432bec4443d218aed3033aaf1f3870e26569546e78b"
+    },
+    "搜打撤/game/src/battle/core/battle.core.js": {
+      "beforeSha256": "e10598b5bb102a7e18dfa7a2ec7a1777f3dc1f58ede4b32b5dee7ec9c50079b0",
+      "afterSha256": "1181815dfd08c413787b121acd355e301037486482885d16cac35e137f4a2117"
+    },
+    "搜打撤/game/src/battle/core/battle.card-play.domain.js": {
+      "beforeSha256": "8639792497c48936221a090e87c8c403dd93ee47986522fa91551fae575f42b9",
+      "afterSha256": "118f04da0f9368dc88d97b58f1e94aa6c9d66cf86db764b58da975480d7d21e9"
+    },
+    "搜打撤/tests/battle-drag-reference.test.js": {
+      "beforeSha256": "24dc366f3e7f2949c5ba0c10abc1ffa96bdd182f25d0fac917dbfcf85997274a",
+      "afterSha256": "62ca79186b9b37014b0950d7d6168b7897253c2125d9d685173122a32ed047ac"
+    },
+    "搜打撤/tests/battle-area-hover-hand-context.test.js": {
+      "beforeSha256": null,
+      "afterSha256": "bcbfa3545e5a7cf54b8a465f0cb94697ad66ef9b1b115ba0e49cdb74c486edc2"
+    },
+    "搜打撤/tests/battle-preview-hand-context.test.js": {
+      "beforeSha256": null,
+      "afterSha256": "3147c049f94659ca2a39a7f1a79beb7b9d0a58ba7a06c2f6a00872ef9688b1a3"
+    }
+  }
+}

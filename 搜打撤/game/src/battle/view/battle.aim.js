@@ -215,9 +215,10 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
             // One synchronous hover transition shares current state; a later
             // pointer transition or renderer refresh takes a new snapshot.
             const hoverSnapshot = getSnapshot();
+            const handRuleContext = {};
             a.stage.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
               const idx = +el.dataset.eidx;
-              if (!hoverSnapshot.foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag', hoverSnapshot);
+              if (!hoverSnapshot.foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag', hoverSnapshot, handRuleContext);
             });
           }
         }

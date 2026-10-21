@@ -1,0 +1,117 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-preview-hand-context-20261021/搜打撤
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 9 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":9,"lookups":25,"cost":8,"capability":8,"handProjection":1,"uidReads":65,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 30 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":30,"lookups":46,"cost":8,"capability":8,"handProjection":1,"uidReads":485,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+stdout | tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 60 raw hand entries once, not per target
+POINTER_HAND_COUNTS {"cards":60,"lookups":76,"cost":8,"capability":8,"handProjection":1,"uidReads":1850,"text":["[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——","[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"]}
+
+ × tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 9 raw hand entries once, not per target 145ms
+   → expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 25, cost: 8, …(3) }
+ × tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 30 raw hand entries once, not per target 66ms
+   → expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 46, cost: 8, …(3) }
+stdout | tests/battle-area-hover-hand-context.test.js > uses the current catalog 风暴火球 with unchanged damage, cost and play wording
+CATALOG_POINTER_HAND_COUNTS {"cardId":"tt3-flame-storm","lookups":25,"cost":8,"capability":8,"handProjection":1,"uidReads":65,"text":["[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——","[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——"]}
+
+ × tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 60 raw hand entries once, not per target 68ms
+   → expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 76, cost: 8, …(3) }
+ ✓ tests/battle-area-hover-hand-context.test.js > uses the current catalog 风暴火球 with unchanged damage, cost and play wording 49ms
+ ✓ tests/battle-area-hover-hand-context.test.js > new pointer entries see changed hand, raw overrides, requirements, energy and target death 94ms
+ ✓ tests/battle-area-hover-hand-context.test.js > real renderer refresh discards the hover batch and keeps fresh target/self modifiers 69ms
+ ✓ tests/battle-area-hover-hand-context.test.js > standalone preview calls and final pointer release recheck the live hand instead of using the last batch 40ms
+ ✓ tests/battle-area-hover-hand-context.test.js > fresh batch uses replacement card identity and does not survive a new battle token 72ms
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 5 passed (8)
+   Start at  16:21:09
+   Duration  2.97s (transform 773ms, setup 0ms, collect 1.56s, tests 605ms, environment 381ms, prepare 79ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-preview-hand-context-20261021/ab-delivery/stale-aim-context.json
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 9 raw hand entries once, not per target
+AssertionError: expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 25, cost: 8, …(3) }
+
+- Expected
++ Received
+
+  {
+    "capability": 8,
+    "cost": 8,
+-   "handProjection": 1,
+-   "lookups": 25,
+-   "uidReads": 65,
++   "handProjection": 0,
++   "lookups": 16,
++   "uidReads": 20,
+  }
+
+ ❯ tests/battle-area-hover-hand-context.test.js:115:26
+    113|   expect(measure(step).uidReads).toBe(0); // No new transition: no bat…
+    114|   leave();
+    115|   expect(measure(enter)).toEqual(counts); // A new entry materializes …
+       |                          ^
+    116|   if (count === 9) {
+    117|     const dragged = Aim.aim.el; render(); expect(Aim.aim?.el).toBe(dra…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 30 raw hand entries once, not per target
+AssertionError: expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 46, cost: 8, …(3) }
+
+- Expected
++ Received
+
+  {
+    "capability": 8,
+    "cost": 8,
+-   "handProjection": 1,
+-   "lookups": 46,
+-   "uidReads": 485,
++   "handProjection": 0,
++   "lookups": 16,
++   "uidReads": 20,
+  }
+
+ ❯ tests/battle-area-hover-hand-context.test.js:115:26
+    113|   expect(measure(step).uidReads).toBe(0); // No new transition: no bat…
+    114|   leave();
+    115|   expect(measure(enter)).toEqual(counts); // A new entry materializes …
+       |                          ^
+    116|   if (count === 9) {
+    117|     const dragged = Aim.aim.el; render(); expect(Aim.aim?.el).toBe(dra…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/battle-area-hover-hand-context.test.js > one real empty-field pointer hover resolves 60 raw hand entries once, not per target
+AssertionError: expected { lookups: 16, cost: 8, …(3) } to deeply equal { lookups: 76, cost: 8, …(3) }
+
+- Expected
++ Received
+
+  {
+    "capability": 8,
+    "cost": 8,
+-   "handProjection": 1,
+-   "lookups": 76,
+-   "uidReads": 1850,
++   "handProjection": 0,
++   "lookups": 16,
++   "uidReads": 20,
+  }
+
+ ❯ tests/battle-area-hover-hand-context.test.js:115:26
+    113|   expect(measure(step).uidReads).toBe(0); // No new transition: no bat…
+    114|   leave();
+    115|   expect(measure(enter)).toEqual(counts); // A new entry materializes …
+       |                          ^
+    116|   if (count === 9) {
+    117|     const dragged = Aim.aim.el; render(); expect(Aim.aim?.el).toBe(dra…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
