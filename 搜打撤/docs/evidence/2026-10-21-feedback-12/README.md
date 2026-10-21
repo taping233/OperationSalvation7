@@ -60,3 +60,18 @@
 5. 720p 中/大箱三选一残留纵滚（条 3 范围外）；正文 nodeOpt 选项卡与顶栏退出图标的「返回地图」保持原位（条 8 若需一并右移另开条目）。
 6. 反馈 11 数值实算仅覆盖伤害句 4 类；扩展范围待拍板。
 7. 神灯仍保留「发现并释放」直释动作（仅文案与池改定版）；若要改为发现入手需连带改 `battle-end-turn-selection` 链，待授权。
+
+## 附录：2026-10-22 提交推送记录
+
+老板拍板「提交与推送吧」。按打包提交默认打包当时工作树全部完成未提交改动，按子系统四笔提交并推送 origin/master（`e817a3aa..a677441f`）：
+
+| 提交 | 组 | 规模 |
+|---|---|---|
+| `50b13f8d` feat(game) | game 源码/样式/资源 | 386 文件 |
+| `57a3db33` test(game) | tests（含 wf-feedback1021 十二套） | 162 文件 |
+| `4ff2435a` chore(tooling) | scripts + jsconfig + vite.config | 10 文件 |
+| `a677441f` docs | docs + README（证据/台账/文档） | 423 文件 |
+
+**排除（共 120 项，逐文件核对）**：`搜打撤/pv/` 未完成 PV、`2026-10-15-WF-arknights-skill-forward-test/` 进行中实验、109 个 >1MB 文件（门禁大报告 staged.json、超限截图等，留本地）、`sonniss-mirror-tail.bin`、`.codex/config.toml.bak-nai-*`×4 与 `nul`（无主登记）、`.tmp-ship-plan*.json` 中间文件、`css/runtime/undefined` 产物。`*.log` 门禁日志本就被 `搜打撤/.gitignore` 覆盖，未入提交。
+
+**验证口径**：本地 pre-commit 门禁经 `SKIP_FULL_TESTS=1` 显式绕过（基线 133 项失败未全量修复，PENDING #50 已决回写），四笔提交按 UNVERIFIED 记录，全量验证以远端 CI（master push）为准。首页流光恢复（`home-polish.css`）随 game 组入库。
