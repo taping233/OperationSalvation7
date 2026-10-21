@@ -67,6 +67,8 @@ vi.mock('pixi.js', () => ({
   },
 }));
 
+import { emit as emitBattleEvent } from '../game/src/core/event-bus.js';
+import { createBattleDecisionPresenter, restoreCombatScene } from '../game/src/battle/view/battle.decision-shell.js';
 import { attach, cacheStats, hide, play, presentDeath } from '../game/src/battle/view/battle.frames.js';
 import { WU_FRAME_SEQUENCES } from '../game/src/battle/view/battle.frame-catalog.js';
 import { CHANGWUYU_FRAME_SEQUENCES } from '../game/src/battle/view/battle.frame-catalog-changwuyu.js';
@@ -294,4 +296,249 @@ it('measures the next available idle when the first texture is missing and relea
     expect(pixi.unloaded.some(url => url.includes(`/${missing}.webp`))).toBe(false);
     expect(cacheStats().roles).toBe(0);
   } finally { pixi.missing.clear(); globalThis.createImageBitmap = bitmapBefore; }
+});
+
+
+function settingsPanel(body, mode = 'settings') {
+  const scene = body.querySelector('.battle-stage');
+  const UI = {
+    el: { ovBody: body },
+    showOverlay(title, html, nextMode) {
+      body.innerHTML = html;
+      document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: nextMode }));
+    },
+  };
+  const snapshot = { battleToken: scene._battleToken, turn: 1, energy: 2, maxEnergy: 2, opts: {} };
+  const present = createBattleDecisionPresenter({ UI, getSnapshot: () => snapshot, R: () => ({ battleEnergy: 2 }) });
+  const content = mode === true ? '<div class="bt-settings">音效设置</div>' : '<p>战斗规则</p>';
+  present('规则与设置', content + '<div class="ov-btns"><button>返回战斗</button></div>', mode);
+  return () => restoreCombatScene(UI, scene._battleToken);
+}
+
+it.each(['settings', true])('retains one role through repeated same-battle settings and releases it on actual close (mode: %s)', async mode => {
+  const body = mount(100);
+  await attach(body); await finishFrames('changwuyu');
+  const baseline = { loads: pixi.loaded.length, unloads: pixi.unloaded.length };
+  const textureCount = cacheStats().textureCount;
+  const frame = pixi.sprites.at(-1).texture;
+  for (let i = 0; i < 3; i++) {
+    const back = settingsPanel(body, mode);
+    await flush();
+    expect(cacheStats()).toMatchObject({ roles: 1, textureCount, activeFrameSessions: 0 });
+    expect(document.getElementById('unitFrames').hidden).toBe(true);
+    expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+    const painted = pixi.rendered;
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted);
+    expect(play('atk')).toBe(false);
+    expect(pixi.stopped).toBeGreaterThan(0);
+    expect(back()).toBe(true);
+    const ready = attach(body);
+    // A retained, already-painted frame is visible before yielding to the return promise.
+    expect(document.getElementById('unitFrames').hidden).toBe(false);
+    expect(pixi.sprites.at(-1).texture).toBe(frame);
+    expect(await ready).toBe(true);
+    expect(cacheStats().activeFrameSessions).toBe(1);
+  }
+  expect(pixi.loaded).toHaveLength(baseline.loads);
+  expect(pixi.unloaded).toHaveLength(baseline.unloads);
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, textureCount: 0, activeFrameSessions: 0 });
+  expect(pixi.unloaded).toHaveLength(baseline.loads);
+  console.info('[frame-settings-operation-counts]', JSON.stringify({ initial: baseline,
+    repeatedSettings: 3, addedLoads: pixi.loaded.length - baseline.loads,
+    addedSettingsUnloads: baseline.unloads, actualCloseUnloads: pixi.unloaded.length }));
+});
+
+it('returns during a pending first-frame load without duplicate loads or old callback resurrection', async () => {
+  const body = mount(101);
+  pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+  const oldAttach = attach(body);
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+  const back = settingsPanel(body);
+  expect(back()).toBe(true);
+  const resumed = attach(body);
+  expect(resumed).not.toBe(oldAttach);
+  pixi.finishLoad(); pixi.loadGate = null;
+  expect(await oldAttach).not.toBe(true);
+  expect(await resumed).toBe(true);
+  await finishFrames('changwuyu');
+  expect(new Set(pixi.loaded).size).toBe(pixi.loaded.length);
+  expect(pixi.unloaded).toEqual([]);
+  expect(document.getElementById('unitFrames').hidden).toBe(false);
+  expect(cacheStats().activeFrameSessions).toBe(1);
+});
+
+it('keeps a completed pending load hidden under settings, including a second settings panel', async () => {
+  const body = mount(102);
+  pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+  const oldAttach = attach(body);
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+  settingsPanel(body);
+  const back = settingsPanel(body);
+  pixi.finishLoad(); pixi.loadGate = null;
+  expect(await oldAttach).not.toBe(true);
+  await finishFrames('changwuyu');
+  expect(cacheStats()).toMatchObject({ roles: 1, activeFrameSessions: 0 });
+  expect(document.getElementById('unitFrames').hidden).toBe(true);
+  expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+  expect(pixi.unloaded).toEqual([]);
+  const loads = pixi.loaded.length;
+  expect(back()).toBe(true);
+  expect(await attach(body)).toBe(true);
+  expect(pixi.loaded).toHaveLength(loads);
+});
+
+it('releases a suspended role when its retained stage is removed without a mode event', async () => {
+  const body = mount(103);
+  await attach(body); await finishFrames('changwuyu');
+  settingsPanel(body);
+  body.querySelector('.battle-stage').remove();
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0, textureCount: 0 });
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+  expect(document.getElementById('unitFrames').hidden).toBe(true);
+});
+
+it('releases pending suspended ownership before a new battle and ignores the old completion', async () => {
+  const body = mount(104);
+  let finishOld;
+  pixi.loadGate = new Promise(resolve => { finishOld = resolve; pixi.finishLoad = resolve; });
+  const oldAttach = attach(body);
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+  settingsPanel(body);
+  const next = mount(105);
+  pixi.loadGate = null;
+  const currentAttach = attach(next);
+  finishOld();
+  expect(await oldAttach).not.toBe(true);
+  expect(await currentAttach).toBe(true);
+  await flush();
+  expect(document.querySelector('.battle-stage')._battleToken).toBe(105);
+  expect(cacheStats()).toMatchObject({ roles: 1, activeFrameSessions: 1 });
+  expect(document.getElementById('unitFrames').hidden).toBe(false);
+  expect(document.querySelector('#btSelf img').style.visibility).toBe('hidden');
+});
+
+it('still releases textures for a retained non-settings page', async () => {
+  const body = mount(106);
+  await attach(body); await finishFrames('changwuyu');
+  settingsPanel(body, 'bag');
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0, textureCount: 0 });
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+});
+
+
+it('releases a settings-shaped page that does not actually restore the retained stage', async () => {
+  const body = mount(107);
+  await attach(body); await finishFrames('changwuyu');
+  body.innerHTML = '<div class="battle-secondary-layer">Unretained settings</div>';
+  document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: 'settings' }));
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0 });
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+});
+
+it('releases retained textures when the entire overlay is removed', async () => {
+  const body = mount(108);
+  await attach(body); await finishFrames('changwuyu');
+  settingsPanel(body);
+  const overlay = document.getElementById('overlay');
+  overlay.remove();
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0 });
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+  // Restore the singleton app host for the test fixture, not the disposed stage.
+  overlay.querySelector('#ovBody').replaceChildren();
+  document.body.append(overlay);
+});
+
+
+it('releases the suspended role immediately on the real battle-end event', async () => {
+  const body = mount(109);
+  await attach(body); await finishFrames('changwuyu');
+  settingsPanel(body);
+  emitBattleEvent('battle:end', { win: true });
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0 });
+  expect(document.getElementById('unitFrames').hidden).toBe(true);
+  await flush();
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+});
+
+it('counts complete settings roundtrips without repeated texture load or release operations', async () => {
+  const body = mount(110);
+  await attach(body); await finishFrames('changwuyu');
+  const initialLoads = pixi.loaded.length;
+  for (let i = 0; i < 3; i++) {
+    const back = settingsPanel(body);
+    await flush();
+    back();
+    await attach(body);
+    await vi.waitFor(() => expect(cacheStats().phase).toBe('all-ready'));
+  }
+  const settingsLoads = pixi.loaded.length - initialLoads;
+  const settingsUnloads = pixi.unloaded.length;
+  emitBattleEvent('battle:end', { win: true });
+  await flush();
+  const afterExitUnloads = pixi.unloaded.length;
+  console.info('[frame-settings-complete-roundtrips]', JSON.stringify({ initialLoads,
+    roundtrips: 3, settingsLoads, settingsUnloads, actualExitUnloads: afterExitUnloads - settingsUnloads,
+    totalUnloads: afterExitUnloads, remainingTextures: cacheStats().textureCount }));
+  expect(settingsLoads).toBe(0);
+  expect(settingsUnloads).toBe(0);
+  expect(afterExitUnloads).toBe(initialLoads);
+});
+
+
+it.each(['settings', true])('stops geometry polling and queued renderer wakes for the entire settings suspension (mode: %s)', async mode => {
+  vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval', 'setTimeout', 'clearTimeout'] });
+  const body = mount(111);
+  await attach(body); await flush();
+  expect(vi.getTimerCount()).toBeGreaterThan(0);
+  const back = settingsPanel(body, mode);
+  await flush();
+  expect(vi.getTimerCount()).toBe(0);
+  const started = pixi.started;
+  window.dispatchEvent(new Event('resize'));
+  document.dispatchEvent(new Event('visibilitychange'));
+  await flush();
+  expect(vi.getTimerCount()).toBe(0);
+  expect(pixi.started).toBe(started);
+  expect(back()).toBe(true);
+  expect(await attach(body)).toBe(true);
+  await flush();
+  expect(vi.getTimerCount()).toBeGreaterThan(0);
+  expect(pixi.started).toBeGreaterThan(started);
+});
+
+
+it('does not retain textures for a generic boolean-wide page without battle settings', async () => {
+  const body = mount(112);
+  await attach(body); await finishFrames('changwuyu');
+  const scene = body.querySelector('.battle-stage'); scene.remove();
+  body.innerHTML = '<div class="battle-secondary-layer">Other wide page</div>';
+  document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: true }));
+  body.prepend(scene);
+  await flush();
+  expect(cacheStats()).toMatchObject({ roles: 0, activeFrameSessions: 0 });
+  expect(pixi.unloaded).toHaveLength(pixi.loaded.length);
+});
+
+it('reattaches a replaced image in the retained stage without leaving the frame host hidden', async () => {
+  const body = mount(113);
+  await attach(body); await finishFrames('changwuyu');
+  const initialLoads = pixi.loaded.length;
+  const back = settingsPanel(body, true);
+  const img = body.querySelector('#btSelf img');
+  img.replaceWith(img.cloneNode(true));
+  await flush();
+  expect(back()).toBe(true);
+  expect(await attach(body)).toBe(true);
+  await flush();
+  expect(document.getElementById('unitFrames').hidden).toBe(false);
+  expect(cacheStats()).toMatchObject({ roles: 1, activeFrameSessions: 1 });
+  expect(pixi.loaded).toHaveLength(initialLoads);
+  expect(pixi.unloaded).toEqual([]);
 });

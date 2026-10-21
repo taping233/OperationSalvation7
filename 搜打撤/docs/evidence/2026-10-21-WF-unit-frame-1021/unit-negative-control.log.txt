@@ -1,0 +1,214 @@
+
+ RUN  v3.2.7 /workspace/shared/unit-metadata-82770803
+
+stdout | tests/battle-unit-metadata.test.js > avoids repeated self and foe metadata mutations in 100 warm production updates
+BATTLE_UNIT_METADATA_COUNTS {"updates":100,"foes":4,"allMutations":3900,"guardedMetadataMutations":2900}
+
+stdout | tests/battle-unit-metadata.test.js > avoids repeated CSS and hidden/text setter calls at the guarded sites
+BATTLE_UNIT_SETTER_COUNTS {"updates":10,"guardedCalls":[10,10,10,10,10,10,10,10,10,10,10,10]}
+
+ × tests/battle-unit-metadata.test.js > avoids repeated self and foe metadata mutations in 100 warm production updates 252ms
+   → expected [ MutationRecord{ …(1) }, …(2899) ] to have a length of +0 but got 2900
+ × tests/battle-unit-metadata.test.js > avoids repeated CSS and hidden/text setter calls at the guarded sites 54ms
+   → expected "setProperty" to not be called at all, but actually been called 10 times
+
+Received: 
+
+  1st setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  2nd setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  3rd setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  4th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  5th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  6th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  7th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  8th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  9th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  10th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+
+Number of calls: 10
+
+ ✓ tests/battle-unit-metadata.test.js > updates armor visibility, text and labels without stale HP or character identity 38ms
+ ✓ tests/battle-unit-metadata.test.js > updates foe names, intent damage, status and death while retaining slots 40ms
+ ✓ tests/battle-unit-metadata.test.js > updates count, index, idle phase and affix title after reordering and removal 39ms
+ ✓ tests/battle-unit-metadata.test.js > keeps self and enemy target transitions and disabled labels live 36ms
+ ✓ tests/battle-unit-metadata.test.js > toggles equipment visibility and preserves busy/used descriptions 35ms
+ ✓ tests/battle-unit-metadata.test.js > repairs live DOM metadata, text and styles even when the snapshot is unchanged 33ms
+ ✓ tests/battle-unit-metadata.test.js > retains native string conversion for null and undefined foe names 35ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-unit-metadata.test.js > avoids repeated self and foe metadata mutations in 100 warm production updates
+AssertionError: expected [ MutationRecord{ …(1) }, …(2899) ] to have a length of +0 but got 2900
+
+- Expected
++ Received
+
+- 0
++ 2900
+
+ ❯ tests/battle-unit-metadata.test.js:89:20
+     87|   const targeted = records.filter(record => !(record.type === 'attribu…
+     88|   console.info('BATTLE_UNIT_METADATA_COUNTS', JSON.stringify({ updates…
+     89|   expect(targeted).toHaveLength(0);
+       |                    ^
+     90|   expect(records).toHaveLength(1000); // Existing targeting clear/reap…
+     91|   expect([self(), ...foes()]).toEqual(kept);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/battle-unit-metadata.test.js > avoids repeated CSS and hidden/text setter calls at the guarded sites
+AssertionError: expected "setProperty" to not be called at all, but actually been called 10 times
+
+Received: 
+
+  1st setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  2nd setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  3rd setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  4th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  5th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  6th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  7th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  8th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  9th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+  10th setProperty call:
+
+    Array [
+      "--battle-foe-count",
+      "4",
+    ]
+
+
+Number of calls: 10
+
+ ❯ tests/battle-unit-metadata.test.js:103:42
+    101|   for (let i = 0; i < 10; i++) paint(snapshot);
+    102|   console.info('BATTLE_UNIT_SETTER_COUNTS', JSON.stringify({ updates: …
+    103|   guarded.forEach(spy => expect(spy).not.toHaveBeenCalled());
+       |                                          ^
+    104| });
+    105| 
+ ❯ tests/battle-unit-metadata.test.js:103:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 7 passed (9)
+   Start at  14:48:53
+   Duration  3.20s (transform 633ms, setup 0ms, collect 1.31s, tests 564ms, environment 327ms, prepare 63ms)
+
+JSON report written to /workspace/shared/unit-metadata-82770803/unit-negative-control.json

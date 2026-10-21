@@ -81,6 +81,61 @@ describe('reviewed production-only asset omissions', () => {
     expect(plan(f).warnings).toContain(warning);
   });
 
+  it('fails closed for either real frame URL changing or its opaque approval disappearing', () => {
+    const f = fixture();
+    const consumerPath = 'game/src/battle/view/battle.frames.js';
+    const code = readFileSync(new URL(`../${consumerPath}`, import.meta.url), 'utf8');
+    f.sources[1] = { path: consumerPath, code };
+    f.review.opaqueConsumers = { [consumerPath]: RUNTIME_REDUNDANCY_REVIEW.opaqueConsumers[consumerPath] };
+    expect(plan(f).warnings).toEqual([]);
+    expect(plan(f).excludedAssets.size).toBe(3);
+    const warning = `Unreviewed dynamic asset consumer ${consumerPath}; retaining reviewed assets.`;
+    for (const expression of ['assetUrl(`assets/portraits/frames/${role}/${name}.webp`)',
+      'assetUrl(`assets/portraits/frames/${role}/sprite-v1/neutral.webp`)']) {
+      expect(code).toContain(expression);
+      f.sources[1].code = code.replace(expression, expression.slice(0, -1) + ' + "?guard-negative")');
+      expect(plan(f).excludedAssets.size).toBe(0);
+      expect(plan(f).warnings).toEqual([warning]);
+    }
+    f.sources[1].code = code;
+    delete f.review.opaqueConsumers[consumerPath];
+    expect(plan(f).excludedAssets.size).toBe(0);
+    expect(plan(f).warnings).toEqual([warning]);
+  });
+
+  it('independently guards all real frame selector pins even with current opaque approval', () => {
+    const f = fixture();
+    const consumerPath = 'game/src/battle/view/battle.frames.js';
+    const pins = RUNTIME_REDUNDANCY_REVIEW.consumerFingerprints.frames;
+    f.sources = [f.sources[0], ...Object.keys(pins).map(source => ({ path: source,
+      code: readFileSync(new URL(`../${source}`, import.meta.url), 'utf8') }))];
+    f.review.opaqueConsumers = { [consumerPath]: RUNTIME_REDUNDANCY_REVIEW.opaqueConsumers[consumerPath] };
+    f.review.consumerFingerprints.frames = { ...pins };
+    expect(plan(f).warnings).toEqual([]);
+    expect(plan(f).excludedAssets.size).toBe(3);
+    const expectOnlyFramesRetained = () => {
+      const result = plan(f);
+      expect(result.warnings).toEqual(['Changed/missing frames selector; retaining its reviewed assets.']);
+      expect(result.excludedAssets.has(legacy)).toBe(false);
+      expect([...result.excludedAssets].sort()).toEqual([oldMap, oldTransition].sort());
+    };
+    f.review.consumerFingerprints.frames[consumerPath] = '53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e';
+    expectOnlyFramesRetained();
+    f.review.consumerFingerprints.frames[consumerPath] = pins[consumerPath];
+    for (const source of f.sources.slice(1)) {
+      const code = source.code;
+      source.code += '\n// changed selector negative control';
+      if (source.path === consumerPath) f.review.opaqueConsumers[consumerPath] = hash(source.code.replaceAll('\r\n', '\n'));
+      expectOnlyFramesRetained();
+      source.code = code;
+      f.review.opaqueConsumers[consumerPath] = RUNTIME_REDUNDANCY_REVIEW.opaqueConsumers[consumerPath];
+      const sources = f.sources;
+      f.sources = sources.filter(entry => entry !== source);
+      expectOnlyFramesRetained();
+      f.sources = sources;
+    }
+  });
+
   it('preserves 195 historical exclusions and adds exactly 91 source-retained images', () => {
     expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(286);
     expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(286);

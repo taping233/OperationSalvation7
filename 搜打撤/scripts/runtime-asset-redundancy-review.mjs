@@ -334,7 +334,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+      "game/src/battle/view/battle.frames.js": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
@@ -372,8 +372,8 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
     "game/src/audio/sound.js": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
-    "game/src/battle/view/battle.frames.js": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
-    "game/src/battle/view/battle.layers.js": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+    "game/src/battle/view/battle.frames.js": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d",
+    "game/src/battle/view/battle.layers.js": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
     "game/src/battle/view/battle.vfx.js": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687",
     "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
     "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",

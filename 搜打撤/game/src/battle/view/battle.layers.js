@@ -678,6 +678,16 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     sig[key] = html;
     el.innerHTML = SDT.Icons.rich(html);
   }
+  // Compare live DOM values so retained or externally changed nodes stay authoritative.
+  // Unlike optional hand attributes, native metadata setters stringify null/undefined.
+  function setUnitAttribute(node, name, value) {
+    const text = String(value);
+    if (node.getAttribute(name) !== text) node.setAttribute(name, text);
+  }
+  function setUnitVariable(node, name, value) {
+    const text = String(value);
+    if (node.style.getPropertyValue(name) !== text) node.style.setProperty(name, text);
+  }
   // 血条局部更新：主条快速过渡；幽灵条走自身延迟过渡形成掉血拖尾（STS2 NHealthBar 口径）。
   // 首次填充禁用两条的过渡，避免从空/满状态滑到位
   function setUnitHP(parts, sig, hp, maxHp, instant) {
@@ -712,12 +722,13 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setSection(selfParts.fig, sig, 'fig',
       player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet'));
     const playerName = characterName(player.characterId || player.myClass);
-    selfParts.fig.setAttribute('role', 'img');
-    selfParts.fig.setAttribute('aria-label', playerName);
+    setUnitAttribute(selfParts.fig, 'role', 'img');
+    setUnitAttribute(selfParts.fig, 'aria-label', playerName);
     setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
-    selfParts.armor.hidden = !(pdef.armor > 0);
-    selfParts.armor.textContent = `甲 ${pdef.armor || 0}`;
-    selfParts.armor.setAttribute('aria-label', `护甲 ${pdef.armor || 0}`);
+    if (selfParts.armor.hidden !== !(pdef.armor > 0)) selfParts.armor.hidden = !(pdef.armor > 0);
+    const armorText = `甲 ${pdef.armor || 0}`;
+    if (selfParts.armor.textContent !== armorText) selfParts.armor.textContent = armorText;
+    setUnitAttribute(selfParts.armor, 'aria-label', `护甲 ${pdef.armor || 0}`);
     // 常驻显示合计，强化来源可聚焦查看；护甲已在生命栏旁显示。
     setSection(selfParts.stats, sig, 'stats', playerCombatStatsHTML(player, pdef, pstat.status));
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
@@ -731,7 +742,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
     const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy)).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
-    selfParts.equips.style.display = equipsHTML ? '' : 'none';
+    const equipsDisplay = equipsHTML ? '' : 'none';
+    if (selfParts.equips.style.display !== equipsDisplay) selfParts.equips.style.display = equipsDisplay;
     sig.init = true;
   }
   // 随从位（Q4 老板定向：征召步兵等——替你承伤、每回合自动攻击）
@@ -793,8 +805,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   }
   // 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮）
   function updateFoes(mount, foes, ctx) {
-    mount.style.setProperty('--battle-foe-count', String(Math.max(1, foes.length)));
-    mount.dataset.count = String(foes.length);
+    setUnitVariable(mount, '--battle-foe-count', String(Math.max(1, foes.length)));
+    setUnitAttribute(mount, 'data-count', String(foes.length));
     const ordered = [];
     const seen = {};
     foes.forEach((f, idx) => {
@@ -858,10 +870,10 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && targetSide(ctx.pendingItem.card) === 'enemy');
       setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && isTargetableEnemy(f, idx, ctx.pendingTarget?.excludedTargetIndex), `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       if (!slot.classList.contains('can-target')) slot.setAttribute('aria-label', `${f.name}${f.dead ? '，已倒下' : '，敌方单位'}`);
-      slot.dataset.foeId = f.id || f.name;
-      slot.dataset.eidx = idx;
-      slot.style.setProperty('--foe-idle-phase', `${-(idx * 0.61)}s`);
-      slot.title = aff ? aff.name + '：' + aff.desc : '';
+      setUnitAttribute(slot, 'data-foe-id', f.id || f.name);
+      setUnitAttribute(slot, 'data-eidx', idx);
+      setUnitVariable(slot, '--foe-idle-phase', `${-(idx * 0.61)}s`);
+      setUnitAttribute(slot, 'title', aff ? aff.name + '：' + aff.desc : '');
       // 残留的指向预览气泡清掉（常驻节点上它不会随重建消失）
       const fp = slot.querySelector('.bt-fpreview');
       if (fp) fp.remove();
@@ -894,15 +906,15 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
             return `<span class="bt-intent-part" data-intent-kind="${escAttr(intent.kind)}">${intent.icon}<span class="bt-intent-short"><span class="bt-intent-action">${esc(actionText)}</span>${condition ? `<span class="bt-intent-condition"> · ${esc(condition)}</span>` : ''}</span></span>`;
           }).join('') +
           `<span class="bt-intent-detail"><span class="sts-atkbadge"${f.affix === 'frenzy' ? ' data-term="frenzy"' : ''}>[[icon:swords]] ${esc(baseAttack)}</span><span class="bt-intent-rules">${esc(intentDetail)}</span></span>`);
-        parts.intent.setAttribute('aria-label', `${f.name}的意图：${intentDetail}。${baseAttack}。点击查看完整说明`);
-        parts.intent.style.display = '';
+        setUnitAttribute(parts.intent, 'aria-label', `${f.name}的意图：${intentDetail}。${baseAttack}。点击查看完整说明`);
+        if (parts.intent.style.display !== '') parts.intent.style.display = '';
         // W5-03（2026-09-27 R2，B-4）：一次性解释图例；QA/devSample 与玩家偏好隔离。
         try { showIntentLegend({ devSample: !!ctx.devSample, battleToken: ctx.battleToken }); }
         catch { /* 页面销毁等 DOM 异常时不影响战斗渲染 */ }
-      } else parts.intent.style.display = 'none';
+      } else if (parts.intent.style.display !== 'none') parts.intent.style.display = 'none';
       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
-      parts.fig.setAttribute('role', 'img');
-      parts.fig.setAttribute('aria-label', f.name);
+      setUnitAttribute(parts.fig, 'role', 'img');
+      setUnitAttribute(parts.fig, 'aria-label', f.name);
       // 姓名保留在可访问身份中；上方呈现攻击、意图和状态，生命条仍在脚下。
       setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
       const simpleAttack = intents.length === 1 && intents[0].label === '攻击'

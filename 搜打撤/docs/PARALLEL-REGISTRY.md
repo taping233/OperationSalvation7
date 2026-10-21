@@ -8,6 +8,10 @@
 
 ## 活跃登记
 
+### 2026-10-21 单位元数据与设置纹理 / Friday WF-unit-frame-1021
+
+真实82770803基线上已精确接入两个冻结补丁，独立作者均释放；整合者仅拥有所列四个源码/测试路径、必要资源指纹与相关负控和说明，源码现已冻结。标准build、资源守卫及静态闭环通过，待原选择器暂存门与普通hook，未声明实页或帧率收益；不改读档从战斗起点重开规则。无本批服务。
+
 ### 2026-10-21 随从DOM顺序 / Friday WF-ally-order-1021
 
 两路径独立补丁已在真实a4cd6990基线接入；仅实际完整children顺序一致时跳过append，失配保留原路径，未改玩法。生产编辑冻结，资源消费者SHA已同轮审查更新；标准build及集成50项通过，待标准冻结quick门及普通hook。独立221项定向与旧实现负控保留于[记录](evidence/2026-10-21-WF-ally-order-1021/README.md)。当前批尚无实页/帧时结论；未开服务。
@@ -16,6 +20,8 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday / inspect_active_render_hotspots / WF-unit-metadata-1021 | 冻结补丁`/workspace/shared/unit-metadata-82770803/battle-unit-metadata.patch`：`game/src/battle/view/battle.layers.js`、`tests/battle-unit-metadata.test.js`；共享integration只读 | 17处实时DOM值守卫；独立12文件190项及lint通过，旧实现负控7项功能通过/2项计数预期失败；补丁SHA ba30aba7…bb2cf1 | 2026-10-21 05:51 UTC | 完成未提交（独立补丁）；待frame补丁合并验收，未接入/build/发布 |
+| Friday / trace_portrait_reload_behavior | 冻结`frame-settings-suspend-20261021/frame-settings-suspend.patch`：`game/src/battle/view/battle.frames.js`、`tests/battle-frames-ownership.test.js` | 同场设置/规则面板隐藏暂停，保留当前角色纹理；真正离场释放；87项定向与5项旧实现负控通过 | 2026-10-21 05:55 UTC | 完成未提交（独立补丁）；已交整合，未独立build/实页 |
 | Friday / WF-performance-e817a3aa-1020 | 独立集成 `performance-e817a3aa-integration`、精确基线 `performance-e817a3aa-baseline-build`；完整51路径见任务记录，含背包/就绪/Agent/事件/词条、资产登记与相应测试/说明 | 固定e817技术集成已冻结，交正式保存与B档实页负责人；保留原失败证据和两份A/B产物；入库日志已按忽略规则改用 .log.txt，原件外置保留 | 2026-10-20 | 待验收；源码编辑已结束，task partial。原full 754文件/7797项通过（1文件/3项原跳过），原build全部预算PASS：entry359.9KiB、initial408.5KiB，entry仅余52B；实页/正常staged提交门/远端CI未核验。[证据](evidence/2026-10-20-WF-performance-e817a3aa-1020/README.md)，无本会话服务、无提交推送 |
 | Friday / 主线启动 01a159f7 | Vite `D:/素材/代号柒/搜打撤`、5200、PID13008；本会话 `npm run web -- --skip-compile` 创建；`node_modules/.cache/web-up-5200.json` | 老板授权拉起主线；后台隐藏启动，入口及资源响应通过，沿用现有剧情产物；服务保留供试玩 | 2026-10-20 | 已交付 |
 | Friday / 星月芦苇原图画风重绘 01a15548 | 自有`docs/evidence/2026-10-20-xingyue-reeds-nai5/redraw-*`、根`.tmp/nai/xingyue-reeds-nai5-20261020/redraw.png` | 原图画风重绘，月饰移至观众右侧、修双手，单张内置候选 | 2026-10-20 | 待验收 |

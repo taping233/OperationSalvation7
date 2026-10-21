@@ -1,0 +1,137 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021
+
+ ↓ tests/battle-frames-ownership.test.js > does not leave failed Pixi hosts behind after repeated initialization failures
+ ↓ tests/battle-frames-ownership.test.js > releases frame ownership when the overlay is explicitly closed
+ ↓ tests/battle-frames-ownership.test.js > resets a same-role death presentation when a newer battle reuses the overlay
+ ↓ tests/battle-frames-ownership.test.js > aborts pending alpha probes on close so a subsequent battle is not blocked on them
+ ↓ tests/battle-frames-ownership.test.js > does not restart rendering from a queued action wake after synchronous close
+ ↓ tests/battle-frames-ownership.test.js > shares normal same-token rerenders without interrupting an attack
+ ↓ tests/battle-frames-ownership.test.js > shares a cancelled pending URL with its new owner and unloads only after that owner exits
+ ↓ tests/battle-frames-ownership.test.js > aborts an old pending alpha probe on role replacement and does not share its attachment
+ ↓ tests/battle-frames-ownership.test.js > aborts an old pending alpha probe on token replacement and does not share its attachment
+ ↓ tests/battle-frames-ownership.test.js > settles a cancelled bitmap probe immediately and closes the late bitmap without changing the next role
+ ↓ tests/battle-frames-ownership.test.js > settles a dying old role and hides its frame layer while a replacement role loads
+ ↓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas wu, retaining all delivered texture frames
+ ↓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas changwuyu, retaining all delivered texture frames
+ ↓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas baita, retaining all delivered texture frames
+ ↓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas heixiang, retaining all delivered texture frames
+ ↓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas xingyue, retaining all delivered texture frames
+ ↓ tests/battle-frames-ownership.test.js > measures the next available idle when the first texture is missing and releases all successful textures
+ × tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: settings) 97ms
+   → expected { roles: +0, roleNames: [], …(13) } to match object { roles: 1, textureCount: 63, …(1) }
+(12 matching properties omitted from actual)
+ × tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: true) 62ms
+   → expected { roles: +0, roleNames: [], …(13) } to match object { roles: 1, textureCount: 63, …(1) }
+(12 matching properties omitted from actual)
+ × tests/battle-frames-ownership.test.js > returns during a pending first-frame load without duplicate loads or old callback resurrection 1064ms
+   → expected [ …(64) ] to have a length of 63 but got 64
+ × tests/battle-frames-ownership.test.js > keeps a completed pending load hidden under settings, including a second settings panel 1061ms
+   → expected [ Array(1) ] to have a length of 63 but got 1
+ ↓ tests/battle-frames-ownership.test.js > releases a suspended role when its retained stage is removed without a mode event
+ ↓ tests/battle-frames-ownership.test.js > releases pending suspended ownership before a new battle and ignores the old completion
+ ↓ tests/battle-frames-ownership.test.js > still releases textures for a retained non-settings page
+ ↓ tests/battle-frames-ownership.test.js > releases a settings-shaped page that does not actually restore the retained stage
+ ↓ tests/battle-frames-ownership.test.js > releases retained textures when the entire overlay is removed
+ ↓ tests/battle-frames-ownership.test.js > releases the suspended role immediately on the real battle-end event
+stdout | tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations
+[frame-settings-complete-roundtrips] {"initialLoads":63,"roundtrips":3,"settingsLoads":189,"settingsUnloads":189,"actualExitUnloads":63,"totalUnloads":252,"remainingTextures":0}
+
+ × tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations 228ms
+   → expected 189 to be +0 // Object.is equality
+ ↓ tests/battle-frames-ownership.test.js > stops geometry polling and queued renderer wakes for the entire settings suspension (mode: settings)
+ ↓ tests/battle-frames-ownership.test.js > stops geometry polling and queued renderer wakes for the entire settings suspension (mode: true)
+ ↓ tests/battle-frames-ownership.test.js > does not retain textures for a generic boolean-wide page without battle settings
+ ↓ tests/battle-frames-ownership.test.js > reattaches a replaced image in the retained stage without leaving the frame host hidden
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: settings)
+ FAIL  tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: true)
+AssertionError: expected { roles: +0, roleNames: [], …(13) } to match object { roles: 1, textureCount: 63, …(1) }
+(12 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "activeFrameSessions": 0,
+-   "roles": 1,
+-   "textureCount": 63,
++   "roles": 0,
++   "textureCount": 0,
+  }
+
+ ❯ tests/battle-frames-ownership.test.js:327:26
+    325|     const back = settingsPanel(body, mode);
+    326|     await flush();
+    327|     expect(cacheStats()).toMatchObject({ roles: 1, textureCount, activ…
+       |                          ^
+    328|     expect(document.getElementById('unitFrames').hidden).toBe(true);
+    329|     expect(document.querySelector('#btSelf img').style.visibility).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/battle-frames-ownership.test.js > returns during a pending first-frame load without duplicate loads or old callback resurrection
+AssertionError: expected [ …(64) ] to have a length of 63 but got 64
+
+- Expected
++ Received
+
+- 63
++ 64
+
+ ❯ tests/battle-frames-ownership.test.js:84:94
+     82| const deliveredNames = role => [...new Set(Object.values(runtimeSequen…
+     83| const finishFrames = async role => {
+     84|   await vi.waitFor(() => expect(pixi.loaded.filter(url => url.includes…
+       |                                                                                              ^
+     85|   await vi.waitFor(() => expect(pixi.inFlight).toBe(0));
+     86| };
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/battle-frames-ownership.test.js > keeps a completed pending load hidden under settings, including a second settings panel
+AssertionError: expected [ Array(1) ] to have a length of 63 but got 1
+
+- Expected
++ Received
+
+- 63
++ 1
+
+ ❯ tests/battle-frames-ownership.test.js:84:94
+     82| const deliveredNames = role => [...new Set(Object.values(runtimeSequen…
+     83| const finishFrames = async role => {
+     84|   await vi.waitFor(() => expect(pixi.loaded.filter(url => url.includes…
+       |                                                                                              ^
+     85|   await vi.waitFor(() => expect(pixi.inFlight).toBe(0));
+     86| };
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations
+AssertionError: expected 189 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 189
+
+ ❯ tests/battle-frames-ownership.test.js:489:25
+    487|     roundtrips: 3, settingsLoads, settingsUnloads, actualExitUnloads: …
+    488|     totalUnloads: afterExitUnloads, remainingTextures: cacheStats().te…
+    489|   expect(settingsLoads).toBe(0);
+       |                         ^
+    490|   expect(settingsUnloads).toBe(0);
+    491|   expect(afterExitUnloads).toBe(initialLoads);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 27 skipped (32)
+   Start at  14:54:10
+   Duration  3.22s (transform 157ms, setup 0ms, collect 217ms, tests 2.51s, environment 308ms, prepare 57ms)
+

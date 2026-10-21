@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-unit-frame-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "合并单位元数据实时值守卫及同场设置角色纹理保留，保护既有玩法和离场释放",
+  "paths": [
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.frames.js",
+    "tests/battle-unit-metadata.test.js",
+    "tests/battle-frames-ownership.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/runtime-asset-redundancy.test.js",
+    "docs/performance.md",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "两原补丁精确接入真实827基线，三审查SHA复核且负控保留",
+    "标准选择器暂存门/普通hook和固定预算build通过"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "独立单位190项、frames87项及旧实现负控；资源守卫41项、标准build和静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "本批未额外full，按正常选择器验收；未实页或远端CI",
+    "所有计数为受控操作量，不是FPS/网络/内存收益"
+  ],
+  "updatedAt": "2026-10-21T06:01:34.620695+00:00"
+}
