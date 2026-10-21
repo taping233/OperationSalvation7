@@ -6,6 +6,7 @@
 // 注入 css/motion-transitions.css <link>（恒在 winter.css 等静态样式之后生效）
 import './motion-transitions.js';
 import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
+import { getOverlayRuntimeTracePanel, syncRuntimeTracePanel } from '../core/runtime-trace-panel.local.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -371,7 +372,10 @@ export const overlayMethods = {
   _overlayFocusable() {
     const styles = new Map();
     const root = this.el.ovBody || this.el.overlay;
-    return [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)].filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
+    const focusables = [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)];
+    const panel = getOverlayRuntimeTracePanel(this.el.overlay);
+    if (panel && !root.contains(panel)) focusables.push(...panel.querySelectorAll(OVERLAY_FOCUS_SELECTOR));
+    return focusables.filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
   },
 
   _resolveOverlayInitialFocus(initialFocus) {
@@ -416,6 +420,8 @@ export const overlayMethods = {
   },
 
   _isolateOverlayBackground() {
+    // The registered opt-in controls stay inside the modal, not exempt siblings.
+    syncRuntimeTracePanel(this.el.overlay);
     if (this._overlayInerted.length) return;
     let node = this.el.overlay;
     while (node && node.parentElement) {
@@ -433,6 +439,7 @@ export const overlayMethods = {
 
   _restoreOverlayBackground() {
     for (const el of this._overlayInerted.splice(0)) el.removeAttribute('inert');
+    syncRuntimeTracePanel(this.el.overlay);
   },
 };
 

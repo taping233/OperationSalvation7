@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-runtime-trace-modal-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "修复关闭设置后诊断采样控件的独立停止、清空和导出，以获取真实战斗基线",
+  "paths": [
+    "game/src/core/runtime-trace-panel.local.js",
+    "game/src/core/runtime-trace.local.js",
+    "game/src/ui/overlay.js",
+    "tests/runtime-trace-modal.test.js",
+    "docs/runtime-trace.md"
+  ],
+  "doneWhen": [
+    "精确五文件补丁且正常门与hook及原预算单次构建通过",
+    "仅候选分支发布并复用冻结产物部署同一owner-only站点，实页由父会话验收"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "精确五路径、独立133项、唯一完成标准构建原预算及静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "正常冻结门/hook、候选发布部署和父会话实页验收尚待完成"
+  ],
+  "updatedAt": "2026-10-21T08:26:16.172Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

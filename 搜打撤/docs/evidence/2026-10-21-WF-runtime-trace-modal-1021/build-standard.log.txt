@@ -1,0 +1,40 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 prebuild
+> npm run narrative:compile && node scripts/validate-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 narrative:compile
+> node scripts/compile-narrative.mjs
+
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+> codename7-soudache-game@0.60.0 build
+> vite build
+
+vite v6.4.4 building for production...
+[assets] reviewed unused production images omitted: 286
+✓ 0 modules transformed.
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 3
+[assets] asset URLs versioned: ?v=0.60.0
+✗ Build failed in 5.63s
+error during build:
+[copy-static] Refusing to clear unexpected build directory: /tmp/runtime-trace-modal-release-20261021/build
+    at clearGeneratedDir (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite-temp/vite.config.js.timestamp-1792570984170-bf0916c15a573.mjs:769:11)
+    at Object.buildStart (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite-temp/vite.config.js.timestamp-1792570984170-bf0916c15a573.mjs:916:7)
+    at Object.handler (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:46876:15)
+    at file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/rollup/dist/es/shared/node-entry.js:22861:40
+    at async Promise.all (index 5)
+    at async PluginDriver.hookParallel (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/rollup/dist/es/shared/node-entry.js:22771:9)
+    at async file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/rollup/dist/es/shared/node-entry.js:23745:13
+    at async catchUnfinishedHookActions (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/rollup/dist/es/shared/node-entry.js:23215:16)
+    at async rollupInternal (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/rollup/dist/es/shared/node-entry.js:23742:5)
+    at async buildEnvironment (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:46553:14)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

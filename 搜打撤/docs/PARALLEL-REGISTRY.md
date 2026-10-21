@@ -47,6 +47,11 @@
 
 ## 近期已释放
 
+### 2026-10-21 诊断面板模态修复 / Friday WF-runtime-trace-modal-1021
+
+独立五路径诊断补丁接入已发布91052c8b；属地仅runtime-trace两个模块、overlay.js、对应测试和说明。仅显式开启诊断时将面板放入当前模态焦点域，默认关闭、不联网、普通背景隔离不变；源码编辑冻结、占用释放；独立133项、唯一完成标准构建原预算及静态资源闭环通过，正常冻结门/hook随后验证。不含stage/infusion补丁，无本会话服务；详见[记录](evidence/2026-10-21-WF-runtime-trace-modal-1021/README.md)。
+
+
 ### 2026-10-21 AOE悬停手牌投影 / Friday WF-preview-context-1021
 
 七文件补丁精确接入已发布56efd4d3，源码编辑冻结、占用释放；单次同步投影保持逐目标及最终提交实时检查。独立555项与57项overlay哨兵、生命周期审查、唯一标准build原预算及1595文件静态资源闭环通过。正常冻结门/hook随后由[证据](evidence/2026-10-21-WF-preview-context-1021/README.md)指向不可变报告；无本批实页/远端CI/部署结论，无服务。
