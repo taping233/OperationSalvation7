@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-target-dom-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "战斗目标稳定时不重复写DOM属性；保持实时资格、命名及键盘选目标",
+  "paths": [
+    "game/src/battle/view/battle.aim.js",
+    "tests/battle-target-dom.test.js",
+    "docs/performance.md",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "独立双文件补丁精确接入b5a59762已发布基线",
+    "普通选择器冻结quick门及原预算标准build通过；保留实页未核验边界"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "双文件SHA精确；独立17文件352项与旧实现4项负控；唯一标准build及1595文件静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "源码证据预冻结后运行普通选择器门与hook，最终结果见外部release manifest与本目录自动staged报告",
+    "无当前批实页/远端CI/部署；操作数不是FPS/耗时/内存"
+  ],
+  "updatedAt": "2026-10-21T07:05:18.715Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

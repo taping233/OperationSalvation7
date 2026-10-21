@@ -1,0 +1,45 @@
+[
+  {
+    "mode": "baseline",
+    "sourceSha256": "c27e19db922c9bb206121eadf938e95b320206f6968ef82c287085349649c055",
+    "exitCode": 1,
+    "counts": {
+      "renders": 20,
+      "enabledFoes": 3,
+      "attributeMutations": 180,
+      "targetAttributeWrites": 180,
+      "canTargetToggleCalls": 60
+    },
+    "tests": {
+      "total": 6,
+      "passed": 2,
+      "failed": 4,
+      "skipped": 0
+    },
+    "failedAssertions": [
+      "leaves enabled target attributes untouched across 20 real battle renders",
+      "updates a renamed selected foe and clears a dead target without caching eligibility",
+      "repairs current DOM attributes rather than trusting a previous enabled-state signature",
+      "refreshes the selected self label when character identity changes"
+    ]
+  },
+  {
+    "mode": "candidate",
+    "sourceSha256": "105444eb12a7e3e52c545455d2b7a8d567444e29d6b779a2b03e3b731d02424c",
+    "exitCode": 0,
+    "counts": {
+      "renders": 20,
+      "enabledFoes": 3,
+      "attributeMutations": 0,
+      "targetAttributeWrites": 0,
+      "canTargetToggleCalls": 0
+    },
+    "tests": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "failedAssertions": []
+  }
+]

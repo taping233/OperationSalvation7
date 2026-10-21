@@ -1,0 +1,16 @@
+{
+  "base": "b5a59762b7a7942e52fcd2da28222ef06a300dcf",
+  "patchSha256": "f92ed6af769ead12c290ebdadd23e0e34ebabddbb32995ce83fd27ec1dab72a1",
+  "paths": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "bytes": 49206,
+      "sha256": "105444eb12a7e3e52c545455d2b7a8d567444e29d6b779a2b03e3b731d02424c"
+    },
+    {
+      "path": "搜打撤/tests/battle-target-dom.test.js",
+      "bytes": 11350,
+      "sha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff"
+    }
+  ]
+}

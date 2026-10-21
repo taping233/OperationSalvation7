@@ -1,0 +1,19 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-target-dom-b5a59762/搜打撤
+
+stdout | tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders
+BATTLE_TARGET_DOM_COUNTS {"renders":20,"enabledFoes":3,"attributeMutations":0,"targetAttributeWrites":0,"canTargetToggleCalls":0}
+
+ ✓ tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders 242ms
+ ✓ tests/battle-target-dom.test.js > updates a renamed selected foe and clears a dead target without caching eligibility 101ms
+ ✓ tests/battle-target-dom.test.js > repairs current DOM attributes rather than trusting a previous enabled-state signature 4ms
+ ✓ tests/battle-target-dom.test.js > retains explicit tabindex and label coercion on a fresh naturally-focusable target 1ms
+ ✓ tests/battle-target-dom.test.js > still cancels and submits a freshly validated target after repeated renders 212ms
+ ✓ tests/battle-target-dom.test.js > refreshes the selected self label when character identity changes 71ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  15:57:37
+   Duration  3.00s (transform 753ms, setup 0ms, collect 1.64s, tests 633ms, environment 337ms, prepare 64ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-target-dom-b5a59762/ab-final/candidate-tests.json

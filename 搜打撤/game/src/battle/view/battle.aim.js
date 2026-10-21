@@ -322,15 +322,17 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   }
   function setTargetable(el, enabled, label) {
     if (!el) return;
-    el.classList.toggle('can-target', enabled);
+    // Read the live DOM rather than caching eligibility: retained targets may
+    // be renamed or have their attributes changed between render passes.
+    if (el.classList.contains('can-target') !== !!enabled) el.classList.toggle('can-target', enabled);
     if (enabled) {
-      el.setAttribute('role', 'button');
-      el.tabIndex = 0;
-      el.setAttribute('aria-label', label);
+      if (el.getAttribute('role') !== 'button') el.setAttribute('role', 'button');
+      if (el.getAttribute('tabindex') !== '0') el.tabIndex = 0;
+      if (el.getAttribute('aria-label') !== String(label)) el.setAttribute('aria-label', label);
     } else {
-      el.removeAttribute('role');
-      el.removeAttribute('tabindex');
-      el.removeAttribute('aria-label');
+      if (el.hasAttribute('role')) el.removeAttribute('role');
+      if (el.hasAttribute('tabindex')) el.removeAttribute('tabindex');
+      if (el.hasAttribute('aria-label')) el.removeAttribute('aria-label');
     }
   }
   function syncClickTargetPreviews() {

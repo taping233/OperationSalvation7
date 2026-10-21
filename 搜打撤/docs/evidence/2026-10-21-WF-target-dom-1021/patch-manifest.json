@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "commit": "b5a59762",
+    "tree": "d30bc098f7d785a4b78dcca27f2e13270d03e290",
+    "checkoutHead": "306376b7a80021a1820ad8d3d1047cae74d9020c"
+  },
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "beforeSha256": "c27e19db922c9bb206121eadf938e95b320206f6968ef82c287085349649c055",
+      "afterSha256": "105444eb12a7e3e52c545455d2b7a8d567444e29d6b779a2b03e3b731d02424c"
+    },
+    {
+      "path": "搜打撤/tests/battle-target-dom.test.js",
+      "beforeSha256": null,
+      "afterSha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff"
+    }
+  ],
+  "patchSha256": "f92ed6af769ead12c290ebdadd23e0e34ebabddbb32995ce83fd27ec1dab72a1"
+}
