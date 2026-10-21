@@ -333,8 +333,45 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
   // （不能用 isConnected 判定——showOverlay 整块重建 ovBody，常驻层每次挂载前都脱离文档）
-  function mountHandLayer(body, tip, token, onPlay) {
-    const mount = body.querySelector('.sts-hud .sts-hand');
+  // A supplied owner is a capability for this exact mounted stage, never a
+  // hint that can silently fall through to a newer battle's DOM.
+  function currentMountOwner(body, token, mounts) {
+    return mounts && mounts.body === body && mounts.token === token
+      && mounts.stage && mounts.stage._battleToken === token
+      && mounts.stage.parentElement === body && body.firstElementChild === mounts.stage;
+  }
+  function ensureMountClass(node, className) {
+    for (const name of className.split(' ')) if (!node.classList.contains(name)) node.classList.add(name);
+  }
+  function ownedMountRoot(mounts, key, selector) {
+    const root = mounts[key];
+    if (root?.parentElement === mounts.stage) {
+      ensureMountClass(root, selector.slice(1));
+      return root;
+    }
+    return (mounts[key] = mounts.stage.querySelector(`:scope > ${selector}`));
+  }
+  function repairOwnedMount(parent, cached, selector, className, unitName) {
+    // Identity and placement prove ownership; a corrupted class/attribute is
+    // repaired in place, not mistaken for absence and duplicated beside itself.
+    const attached = cached?.parentElement === parent;
+    const node = attached ? cached : [...parent.children].find(node => node.matches(selector))
+      || (cached?.nodeType === 1 ? cached : document.createElement('div'));
+    if (className) ensureMountClass(node, className);
+    if (unitName === 'self' && node === selfUnit) {
+      if (node.id !== 'btSelf') node.id = 'btSelf';
+      ensureMountClass(node, 'sts-unit sts-me');
+    } else if (unitName && node.dataset.unitMount !== unitName) node.dataset.unitMount = unitName;
+    if (node.parentElement !== parent) parent.appendChild(node);
+    return node;
+  }
+  function mountHandLayer(body, tip, token, onPlay, mounts) {
+    if (mounts && !currentMountOwner(body, token, mounts)) return null;
+    const hud = mounts ? ownedMountRoot(mounts, 'hud', '.sts-hud') : null;
+    if (mounts && !hud) return null;
+    const mount = mounts
+      ? (mounts.hand = repairOwnedMount(hud, mounts.hand, '.sts-hand', 'bt-hand sts-hand'))
+      : body.querySelector('.sts-hud .sts-hand');
     if (!mount) return null;
     handPlay = onPlay || null;
     if (!handLayer) {
@@ -346,7 +383,12 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         onPlay: uid => handPlay?.({ uid }),
       });
     }
-    handLayer.className = 'bt-hand sts-hand';
+    if (token === handBattleToken) {
+      if (!handLayer.classList.contains('bt-hand')) handLayer.classList.add('bt-hand');
+      if (!handLayer.classList.contains('sts-hand')) handLayer.classList.add('sts-hand');
+    } else handLayer.className = 'bt-hand sts-hand';
+    setHandAttribute(handLayer, 'role', 'group');
+    setHandAttribute(handLayer, 'aria-label', '当前手牌');
     if (token !== handBattleToken) {
       handHit.reset();
       handSlots.forEach(rec => rec.slot.remove());
@@ -361,6 +403,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     // The normal stage diff already contains this persistent layer. Replacing
     // it with itself would detach its focused descendant before updateHand.
     if (mount !== handLayer) mount.replaceWith(handLayer);
+    if (mounts) mounts.hand = handLayer;
     observeHandWidth();
     return handLayer;
   }
@@ -477,7 +520,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     handLayoutSlots = ordered;
     // Background-only rendering masks selection fields; use the live state so
     // entering and leaving those overlays still invalidates an old gesture.
-    handHit?.sync(handBattleToken, getSnapshot());
+    handHit?.sync(handBattleToken, extra?.liveInteractionSnapshot ?? getSnapshot());
     handLayoutWidth = handWidth;
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
     const current = [...handLayer.querySelectorAll('.bt-slot')];
@@ -561,10 +604,20 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   const allySlots = new Map();   // key -> { slot, parts, sig }
   const foeSlots = new Map();    // key -> { slot, parts, sig }
 
-  function mountUnitLayer(body, token) {
-    const selfMount = body.querySelector('[data-unit-mount="self"]');
-    const alliesMount = body.querySelector('[data-unit-mount="allies"]');
-    const foesMount = body.querySelector('[data-unit-mount="foes"]');
+  function mountUnitLayer(body, token, mounts) {
+    if (mounts && !currentMountOwner(body, token, mounts)) return null;
+    const arena = mounts ? ownedMountRoot(mounts, 'arena', '.sts-arena') : null;
+    const hud = mounts ? ownedMountRoot(mounts, 'hud', '.sts-hud') : null;
+    if (mounts && (!arena || !hud)) return null;
+    const selfMount = mounts
+      ? (mounts.self = repairOwnedMount(arena, mounts.self, '[data-unit-mount="self"], #btSelf', '', 'self'))
+      : body.querySelector('[data-unit-mount="self"]');
+    const alliesMount = mounts
+      ? (mounts.allies = repairOwnedMount(arena, mounts.allies, '[data-unit-mount="allies"]', 'sts-allies', 'allies'))
+      : body.querySelector('[data-unit-mount="allies"]');
+    const foesMount = mounts
+      ? (mounts.foes = repairOwnedMount(arena, mounts.foes, '[data-unit-mount="foes"]', 'sts-foes', 'foes'))
+      : body.querySelector('[data-unit-mount="foes"]');
     if (!alliesMount || !foesMount) return null;
     // 09-24 起同场战斗走 showBattleStage 复用（ovBody 不重建），self 挂载点首轮已被
     // replaceWith(selfUnit) 消耗——selfUnit 仍在原位时直接复用，不能再因找不到挂载点
@@ -598,15 +651,24 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       selfSig = {};
     }
     if (selfAnchor !== selfUnit) selfAnchor.replaceWith(selfUnit);
+    if (mounts) mounts.self = selfUnit;
     // A rebuilt HUD owns the fresh tools; the retained player may still carry the
     // previous stage's tools. Replace those rather than selecting them first.
     // Incremental renders have no HUD placeholder and keep the live tools intact.
-    const careerTools = body.querySelector('.sts-hud > .sts-hand-tools');
-    if (careerTools) {
+    const cachedTools = mounts?.tools;
+    const validTools = cachedTools && (cachedTools.parentElement === hud || cachedTools.parentElement === selfUnit);
+    if (validTools) ensureMountClass(cachedTools, 'sts-hand-tools');
+    const careerTools = mounts
+      ? (validTools ? cachedTools : hud.querySelector(':scope > .sts-hand-tools') || selfUnit.querySelector(':scope > .sts-hand-tools')
+        || (cachedTools?.nodeType === 1 ? cachedTools : null))
+      : body.querySelector('.sts-hud > .sts-hand-tools');
+    if (careerTools) ensureMountClass(careerTools, 'sts-hand-tools');
+    if (careerTools && careerTools.parentElement !== selfUnit) {
       const previousTools = selfUnit.querySelector(':scope > .sts-hand-tools');
       if (previousTools) previousTools.replaceWith(careerTools);
       else selfUnit.appendChild(careerTools);
     }
+    if (mounts) mounts.tools = careerTools;
     return { alliesMount, foesMount };
   }
   // 单位节点固定骨架：立绘 + 脚下生命条 + 上方属性/状态/装备/敌方意图，各段按签名差分。

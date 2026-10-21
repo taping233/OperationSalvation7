@@ -16,9 +16,14 @@ it('loads isolated real view, plays one card, ends and exits without storage wri
   document.querySelector('[data-sample="l2-archer-cavalry"]').click();await tick(40);
   expect(document.querySelector('[data-act="btBag"]')).toBeNull();
   expect(document.querySelector('[data-act="btSettings"]')?.disabled).toBe(true);
+  expect(document.querySelector('[data-act="btSettings"]').getAttribute('aria-disabled')).toBe('true');
+  expect(document.querySelector('[data-act="btSettings"]').title).toBe('隔离验收页未接入此功能');
   for(const name of ['btSettings']){const blocked=document.querySelector(`[data-act="${name}"]`);blocked.disabled=false;blocked.click();expect(document.getElementById('log').textContent).toContain('隔离验收页未接入此功能');}
   expect(document.querySelectorAll('.sts-foe')).toHaveLength(2);expect(document.querySelectorAll('.sts-hand .bt-card').length).toBeGreaterThan(0);
   const card=document.querySelector('.sts-hand .bt-card'),foe=document.querySelector('.sts-foe');card.click();foe.click();await tick(80);
-  document.getElementById('qaEnd').click();await tick(1100);document.getElementById('qaReset').click();
+  document.getElementById('qaEnd').click();await tick(1100);
+  expect(document.querySelector('[data-act="btSettings"]')?.disabled).toBe(true);
+  expect(document.querySelector('[data-act="btSettings"]').getAttribute('aria-disabled')).toBe('true');
+  document.getElementById('qaReset').click();
   expect(localStorage.getItem('existing-player-save')).toBe('KEEP');expect(writes).not.toHaveBeenCalled();expect(document.getElementById('qaState').textContent).toContain('存储快照=未变化');
 }, 15000); // Real module import and animation waits can exceed the default 5s under full-suite load.

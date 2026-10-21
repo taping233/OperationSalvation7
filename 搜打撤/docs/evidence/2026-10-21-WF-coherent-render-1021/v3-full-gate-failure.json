@@ -1,0 +1,29 @@
+{
+  "candidate": "v3 + diagnostic + infusion (rejected)",
+  "tree": "3a1ff0fa4ad457469d5106e1ac8954b04820e654",
+  "reportPath": "/workspace/scratch/b7a53a06c872/coherent-render-integration-20261021/failed-v3/full-gate-report.json",
+  "reportSHA256": "13249e4ec57050c9642bf526c88c69d50f40ed5ef0c6f379e65bd99be4f0435c",
+  "gate": "normal selected FULL",
+  "result": {
+    "filesPassed": 766,
+    "filesFailed": 2,
+    "filesSkipped": 1,
+    "testsPassed": 8045,
+    "testsFailed": 3,
+    "testsSkipped": 7
+  },
+  "failedTests": [
+    "potion-tip-lifecycle: new-stage old tip cleanup",
+    "potion-tip-lifecycle: old control document listener ownership",
+    "r7a-qa-live: settings disabled host contract"
+  ],
+  "reproducedFocused": {
+    "files": 2,
+    "failed": 3,
+    "passed": 8
+  },
+  "snapshotRemoved": true,
+  "indexUnchanged": true,
+  "originalPatchesAndIndexArchive": "/workspace/scratch/b7a53a06c872/coherent-render-integration-20261021/failed-v3",
+  "correction": "Exact six-file delta 58561fef26ac1244353734a4baafa08335bf2eff412bf5a6c4a63c801251e44e; live token/root identity, exact potion owner/control, QA host-owned disabled policy. Count-change live node still retained; detached fixture made explicit, assertion not weakened."
+}

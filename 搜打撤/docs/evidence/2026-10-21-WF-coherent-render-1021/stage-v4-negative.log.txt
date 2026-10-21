@@ -1,0 +1,183 @@
+
+ RUN  v3.2.7 /tmp/persistent-battle-stage-v4-ea0da5c7
+
+ ❯ tests/battle-persistent-stage.test.js (36 tests | 1 failed) 2175ms
+   ✓ session-owned battle stage production contracts > patches warm energy, HP and phase without whole-stage parse, outerHTML comparison or body-wide mount lookup 218ms
+   ✓ session-owned battle stage production contracts > does not write unchanged live HUD text, attributes or child lists 58ms
+   ✓ session-owned battle stage production contracts > shares only safely acquired warm snapshots and refreshes after cold and restored host boundaries 123ms
+   ✓ session-owned battle stage production contracts > keeps expanded options, focus, runtime animation classes, energy artwork and unrelated HUD identities 89ms
+   ✓ session-owned battle stage production contracts > repairs controlled text, classes, ARIA and disabled state even with identical presentation inputs 51ms
+   ✓ session-owned battle stage production contracts > repairs owner-controlled root classes and button attributes without leaving duplicate damaged components 49ms
+   ✓ session-owned battle stage production contracts > repairs the class of the owned .sts-arena container without recreating scenery or mounts 39ms
+   ✓ session-owned battle stage production contracts > repairs the class of the owned .sts-hud container without recreating scenery or mounts 42ms
+   ✓ session-owned battle stage production contracts > repairs changed energy child structure and attributes without replacing surviving artwork 65ms
+   × session-owned battle stage production contracts > cold-repairs a displaced stage root before updating its unit and hand owners 49ms
+     → expected '80/80' to be '37/80' // Object.is equality
+   ✓ session-owned battle stage production contracts > removes the real previous phase class even if the public phase attribute was corrupted 44ms
+   ✓ session-owned battle stage production contracts > cold-repairs removed .sts-energy-wrap without losing the stage or unit/hand ownership 40ms
+   ✓ session-owned battle stage production contracts > cold-repairs removed .sts-hud-r without losing the stage or unit/hand ownership 44ms
+   ✓ session-owned battle stage production contracts > cold-repairs removed .sts-tactics without losing the stage or unit/hand ownership 50ms
+   ✓ session-owned battle stage production contracts > cold-repairs removed .sts-hand-tools without losing the stage or unit/hand ownership 39ms
+   ✓ session-owned battle stage production contracts > repairs an externally replaced #btSelf mount and keeps later updates live 38ms
+   ✓ session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="allies"] mount and keeps later updates live 33ms
+   ✓ session-owned battle stage production contracts > repairs an externally replaced [data-unit-mount="foes"] mount and keeps later updates live 68ms
+   ✓ session-owned battle stage production contracts > repairs an externally replaced .sts-hand mount and keeps later updates live 34ms
+   ✓ session-owned battle stage production contracts > updates pile counts and forecast without replacing their persistent controls or transient animation classes 35ms
+   ✓ session-owned battle stage production contracts > keeps the timed flee confirmation armed across unrelated patches and restores its original label 47ms
+   ✓ session-owned battle stage production contracts > does not overwrite a newer synchronous render from showOverlay or bind stale controls 89ms
+   ✓ session-owned battle stage production contracts > cannot relabel or populate a newer battle when cold showOverlay starts a new epoch 70ms
+   ✓ session-owned battle stage production contracts > does not reinsert a departed stage after a opening modal host hook starts another battle 52ms
+   ✓ session-owned battle stage production contracts > does not reinsert a departed stage after a restoring modal host hook starts another battle 82ms
+   ✓ session-owned battle stage production contracts > rejects a departed scene immediately when a opening modal hook only queues a new battle 57ms
+   ✓ session-owned battle stage production contracts > rejects a departed scene immediately when a restoring modal hook only queues a new battle 49ms
+   ✓ session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: false) 66ms
+   ✓ session-owned battle stage production contracts > does not stamp a newer nonfloating decision with departed title/token (new battle: true) 52ms
+   ✓ session-owned battle stage production contracts > rejects a stale public snapshot without invalidating the current battle modal guard 88ms
+   ✓ session-owned battle stage production contracts > reads the latest potion description in listeners retained across equal visible markup 34ms
+   ✓ session-owned battle stage production contracts > preserves a visible potion tooltip through an unchanged render 31ms
+   ✓ session-owned battle stage production contracts > refreshes retained tooltip listeners after an external tooltip-node replacement 35ms
+   ✓ session-owned battle stage production contracts > reacquires a replaced overlay body without retaining the departed stage owner 86ms
+   ✓ session-owned battle stage production contracts > captures equivalent HUD semantics across the complete synchronous field matrix 103ms
+   ✓ session-owned battle stage production contracts > passes live interaction state to hand-hit while a grave panel paints a masked background 22ms
+ ❯ tests/potion-tip-lifecycle.test.js (15 tests | 5 failed) 1113ms
+   ✓ 药水提示全局监听生命周期 > pointerup同时移除两个终止监听，并保持提示显隐 81ms
+   ✓ 药水提示全局监听生命周期 > pointercancel同时移除两个终止监听，并保持提示显隐 44ms
+   ✓ 药水提示全局监听生命周期 > mouseleave同时移除两个终止监听，并保持提示显隐 45ms
+   ✓ 药水提示全局监听生命周期 > replace在指针未释放时清理旧提示及双监听 59ms
+   ✓ 药水提示全局监听生命周期 > mode在指针未释放时清理旧提示及双监听 32ms
+   ✓ 药水提示全局监听生命周期 > close在指针未释放时清理旧提示及双监听 44ms
+   × 药水提示全局监听生命周期 > new-stage在指针未释放时清理旧提示及双监听 43ms
+     → expected false to be true // Object.is equality
+   ✓ 药水提示全局监听生命周期 > 100次普通按下/松开及药水栏替换不保留旧cancel回调  580ms
+   × 药水提示全局监听生命周期 > 离开后的旧药水节点不重新绑定document监听 28ms
+     → expected [ [ 'pointerup', …(2) ], …(1) ] to deeply equal []
+   ✓ 药水提示全局监听生命周期 > 数量变化保留当前药水节点，旧闭包读取最新数量且仍可使用 25ms
+   × 药水提示全局监听生命周期 > close后旧节点不得通过连接的新提示恢复document监听 21ms
+     → expected false to be true // Object.is equality
+   ✓ 药水提示全局监听生命周期 > mode后旧节点不得通过连接的新提示恢复document监听 19ms
+   × 药水提示全局监听生命周期 > token后旧节点不得通过连接的新提示恢复document监听 17ms
+     → expected false to be true // Object.is equality
+   × 药水提示全局监听生命周期 > battle后旧节点不得通过连接的新提示恢复document监听 53ms
+     → expected false to be true // Object.is equality
+   ✓ 药水提示全局监听生命周期 > 同一药水栏重复渲染保留节点，悬停/移开仍可使用 22ms
+ ❯ tests/r7a-qa-live.test.js (1 test | 1 failed) 733ms
+   × loads isolated real view, plays one card, ends and exits without storage writes 730ms
+     → expected false to be true // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-persistent-stage.test.js > session-owned battle stage production contracts > cold-repairs a displaced stage root before updating its unit and hand owners
+AssertionError: expected '80/80' to be '37/80' // Object.is equality
+
+Expected: "37/80"
+Received: "80/80"
+
+ ❯ tests/battle-persistent-stage.test.js:223:54
+    221|     start(); const scene = stage(), extra = document.createElement('as…
+    222|     UI.el.ovBody.prepend(extra); game.hp = 37; set$energy(4); render();
+    223|     expect(node('#btSelf .sts-hp span').textContent).toBe('37/80');
+       |                                                      ^
+    224|     expect(UI.el.ovBody.firstElementChild).toBe(stage());
+    225|     expect(stage()).not.toBe(scene); expect(extra.isConnected).toBe(fa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > new-stage在指针未释放时清理旧提示及双监听
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/potion-tip-lifecycle.test.js:86:24
+     84|     if (action === 'close') UI.hideOverlay();
+     85|     if (action === 'new-stage') { body.firstElementChild._battleToken …
+     86|     expect(tip.hidden).toBe(true);
+       |                        ^
+     87|     expect(remove).toHaveBeenCalledWith('pointerup', release);
+     88|     expect(remove).toHaveBeenCalledWith('pointercancel', release);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > 离开后的旧药水节点不重新绑定document监听
+AssertionError: expected [ [ 'pointerup', …(2) ], …(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   [
++     "pointerup",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++   [
++     "pointercancel",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++ ]
+
+ ❯ tests/potion-tip-lifecycle.test.js:113:100
+    111|     const add = vi.spyOn(document, 'addEventListener');
+    112|     pointer('pointerdown', potion);
+    113|     expect(add.mock.calls.filter(([event]) => event === 'pointerup' ||…
+       |                                                                                                    ^
+    114|   });
+    115| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > close后旧节点不得通过连接的新提示恢复document监听
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > token后旧节点不得通过连接的新提示恢复document监听
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > battle后旧节点不得通过连接的新提示恢复document监听
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/potion-tip-lifecycle.test.js:133:26
+    131|     try {
+    132|       pointer('pointerdown', potion); pointer('mouseenter', potion);
+    133|       expect(tip.hidden).toBe(true);
+       |                          ^
+    134|       expect(add.mock.calls.filter(([event]) => event === 'pointerup' …
+    135|     } finally {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/r7a-qa-live.test.js > loads isolated real view, plays one card, ends and exits without storage writes
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/r7a-qa-live.test.js:18:71
+     16|   document.querySelector('[data-sample="l2-archer-cavalry"]').click();…
+     17|   expect(document.querySelector('[data-act="btBag"]')).toBeNull();
+     18|   expect(document.querySelector('[data-act="btSettings"]')?.disabled).…
+       |                                                                       ^
+     19|   expect(document.querySelector('[data-act="btSettings"]').getAttribut…
+     20|   expect(document.querySelector('[data-act="btSettings"]').title).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  7 failed | 45 passed (52)
+   Start at  18:32:44
+   Duration  8.46s (transform 992ms, setup 0ms, collect 2.30s, tests 4.02s, environment 1.16s, prepare 193ms)
+

@@ -147,7 +147,7 @@ describe('single-render raw-hand eligibility context', () => {
     const layers = readFileSync('game/src/battle/view/battle.layers.js', 'utf8');
     expect(view.slice(view.indexOf('function render('))).toContain('const handRuleContext = {};');
     expect(view).toContain('combatStateCopy(snapshot, cards, handRuleContext)');
-    expect(view).toContain('{ spellBonus, mode, discoverSrcRect, handRuleContext }');
+    expect(view).toContain('{ spellBonus, mode, discoverSrcRect, handRuleContext, liveInteractionSnapshot }');
     expect(layers).toContain('unplayableReason(g.card, ctx.handRuleContext)');
     expect(layers).toContain('handRuleContext: extra && extra.handRuleContext');
     expect(view.match(/handRuleContext/g)).toHaveLength(5);

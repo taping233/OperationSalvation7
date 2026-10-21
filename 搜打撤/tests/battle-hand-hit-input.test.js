@@ -79,7 +79,7 @@ it('shares the production command callback and keeps production CSS scoped away 
   const view=readFileSync('game/src/battle/view/battle.view.js','utf8');
   const layers=readFileSync('game/src/battle/view/battle.layers.js','utf8');
   const css=readFileSync('game/css/battle-stage.css','utf8');
-  expect(view).toContain("UI.act('btPlay', playHandCard)");expect(view).toContain('mountHandLayer(body, tip, snapshot.battleToken, playHandCard)');
+  expect(view).toContain("UI.act('btPlay', playHandCard)");expect(view).toContain('mountHandLayer(body, tip, snapshot.battleToken, playHandCard, stageOwner)');
   expect(layers).toContain("onPointerDown: (event, card) => { if (card.dataset.aim === '1') startAim(event, card); }");
   expect(layers).not.toContain("rec.slot.addEventListener('pointerdown'");
   expect(css).toContain(':where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover');

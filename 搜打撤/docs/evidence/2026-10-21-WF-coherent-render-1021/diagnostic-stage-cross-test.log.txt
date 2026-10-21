@@ -1,0 +1,12 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+ ✓ tests/runtime-trace-modal.test.js (13 tests) 620ms
+ ✓ tests/battle-stage-validator.test.js (5 tests) 185ms
+
+ Test Files  2 passed (2)
+      Tests  18 passed (18)
+   Start at  18:06:05
+   Duration  2.77s (transform 313ms, setup 0ms, collect 574ms, tests 804ms, environment 840ms, prepare 138ms)
+

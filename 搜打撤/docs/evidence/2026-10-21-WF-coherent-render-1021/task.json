@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-coherent-render-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / integrate_coherent_render_batch",
+  "goal": "Integrate exact persistent battle stage v3 and infusion existence as one coherent batch, preserve diagnostic prerequisite and original budgets, freeze full gate without publishing",
+  "paths": [
+    "game/src/battle/view",
+    "tests/battle-persistent-stage.test.js",
+    "tests/battle-stage-mounts.test.js",
+    "tests/battle-stage-validator.test.js",
+    "tests/battle-hand-hit-input.test.js",
+    "tests/battle-hand-rule-context.test.js",
+    "tests/battle-infusion-material-state.test.js",
+    "tests/battle-infusion-existence.test.js",
+    "docs/architecture.md",
+    "docs/infusion-material-controls.md",
+    "docs/evidence/2026-10-21-WF-coherent-render-1021",
+    "tests/runtime-trace-modal.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs"
+  ],
+  "doneWhen": [
+    "Both exact patches preserved; standard build original budgets and selected gate checked; frozen manifest and hook delivered without publication"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "19 exact patch file hashes, diagnostic source preservation, corrected standard build original budgets, 18 combined diagnostic-stage contracts; first build failure and original logs retained",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Candidate current-window browser acceptance and eventual publication/deployment are parent-owned; no remote CI in this task"
+  ],
+  "updatedAt": "2026-10-21T09:07:24.724Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

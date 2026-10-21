@@ -46,6 +46,16 @@ if (import.meta.hot) import.meta.hot.dispose(() => {
   document.removeEventListener('sdt-overlay-mode', onMode);
 });
 
+// Read-only boundary for the persistent page component; matching classes alone
+// never authorize an external node to bypass structural repair.
+export function ownsHandPageFeedback(button, node) {
+  if (!node || node.parentElement !== button || button.tagName !== 'BUTTON' || !button.matches('.bt-hand-page[data-act="btHandPage"]')) return false;
+  const stage = button.closest('.battle-stage');
+  const host = stage?.closest('#overlay') || stage?.parentElement, state = states.get(host);
+  return !!state && stage.isConnected && !host.hidden && state.stage === stage
+    && state.token === stage._battleToken && state.pageBadge === node;
+}
+
 export function retainBattleFeedback(stage, node, ms) {
   const state = stateFor(stage);
   if (!state) { node.remove(); return; }

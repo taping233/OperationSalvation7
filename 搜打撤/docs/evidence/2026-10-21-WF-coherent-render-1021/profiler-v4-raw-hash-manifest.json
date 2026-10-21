@@ -1,0 +1,780 @@
+{
+  "rawRoot": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021",
+  "durableWorkspace": true,
+  "files": [
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/ab-summary.json",
+      "relativeToRawRoot": "ab-summary.json",
+      "bytes": 995926,
+      "sha256": "d83d07232c121dd850daf58160ce8f1b7264edc748802a159e08cb5fb90fc99b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/analyze.py",
+      "relativeToRawRoot": "analyze.py",
+      "bytes": 7164,
+      "sha256": "74ea60e681037bfcf8d122cb6e14520baa2e1b75420ffe145e13a9e6b2a97995"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/raw/high.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block1/raw/high.cpuprofile",
+      "bytes": 755664,
+      "sha256": "8c944139904d063f5e77dc06b0331e87549e15184555108e658a62ee56bf1a28"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/raw/high.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block1/raw/high.heapprofile",
+      "bytes": 1132715,
+      "sha256": "50de5bac4524e28e0cb3efc9f8862923af49d9286110d8cd988a6098a0ac06e1"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/raw/typical.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block1/raw/typical.cpuprofile",
+      "bytes": 755480,
+      "sha256": "9e82edcefd77a55cb1a4c8933282b0909a39408cc7d84f812f448cab4cd74d0c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/raw/typical.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block1/raw/typical.heapprofile",
+      "bytes": 1148798,
+      "sha256": "01184265750e13b1d4fa583830bcf8a46b6a5cedb75f832ad08d9836a7836202"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/baseline.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/baseline.json",
+      "bytes": 79627,
+      "sha256": "7dc39c350c92575186108dd0be6840f55d281662d688fe998cceb7cb2bb49fd4"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/high.flameox-cpu.json",
+      "bytes": 452171,
+      "sha256": "ab038b788473bf900073b38591b34e292e726b336271fea9b89a1c984d4ef9e2"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/high.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/high.flameox-heap.json",
+      "bytes": 401796,
+      "sha256": "7e026e4ecd16b30fadd229c0efc9e58e823db98c1602f2af538744a2671c1da2"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/oracle.json",
+      "bytes": 4802984,
+      "sha256": "a9c84791a9536e21430ac74e6b966907a834bb7780704e9ce4e129f11afba8a8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/typical.flameox-cpu.json",
+      "bytes": 438418,
+      "sha256": "d9be378f24a8a190269e575f783bd95b51b2eebc8ae6d7ee5531066436b39a33"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block1/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block1/results/typical.flameox-heap.json",
+      "bytes": 427103,
+      "sha256": "f68808be75442b4f6f9013861880eb3f7568c84de0b7c1c70fe3e79484de47d8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/raw/high.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block2/raw/high.cpuprofile",
+      "bytes": 788608,
+      "sha256": "4c0cda4a75a59150e06b0d20319d3276321143178d36e3772d6c745edae94a74"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/raw/high.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block2/raw/high.heapprofile",
+      "bytes": 1127043,
+      "sha256": "8c4d2ff302a23e7a969c024cd25365835faba57cf13c0f002a6bf40dcd9289c1"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/raw/typical.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block2/raw/typical.cpuprofile",
+      "bytes": 719704,
+      "sha256": "c8427aa5a7a45db9503144cfd832c097f6d7a3b4b51f3ab104035eb2bba74dcd"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/raw/typical.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block2/raw/typical.heapprofile",
+      "bytes": 1153095,
+      "sha256": "7343e5cfaf7e4eb6c371f282b5850fcbfec7b1193568909fa46ce4ab521d5c3f"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/baseline.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/baseline.json",
+      "bytes": 79741,
+      "sha256": "bf960653dc2ad8085bf182962a6bf820b97389a109208a5af61cf126178a2cf3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/high.flameox-cpu.json",
+      "bytes": 446454,
+      "sha256": "df80dc412f1f3f849277ce4e4e5684c1f04b31079421084144cdc92cbb5e8d51"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/high.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/high.flameox-heap.json",
+      "bytes": 405698,
+      "sha256": "06b1ef47a3b02a31ba1a80ae4a63cca656a9667b77981ec49f5a87f80f9f46e3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/oracle.json",
+      "bytes": 4802984,
+      "sha256": "a9c84791a9536e21430ac74e6b966907a834bb7780704e9ce4e129f11afba8a8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/typical.flameox-cpu.json",
+      "bytes": 439034,
+      "sha256": "3df6c9fbb87b96e65206fdb8ede96cfc02d8b87a386a0a44965e38e87feaad93"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block2/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block2/results/typical.flameox-heap.json",
+      "bytes": 424485,
+      "sha256": "005cf7133072f58118141014c9c52cb5305e46a082ffaa6ff87373bd4cc1b22b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/raw/high.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block3/raw/high.cpuprofile",
+      "bytes": 778707,
+      "sha256": "2aa98b0711ef3805262e918af597728bcea6672669bcfaa861e2bf07eb56ede1"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/raw/high.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block3/raw/high.heapprofile",
+      "bytes": 1118950,
+      "sha256": "b7d84199e8c5168f34fdfabaeee5248a202603f0baa86927ed1210d42f751ce2"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/raw/typical.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block3/raw/typical.cpuprofile",
+      "bytes": 691446,
+      "sha256": "fd23b25c2823881c68291b283f1f7dc6d86c71e44a9bc1d13bedee98df20a648"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/raw/typical.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block3/raw/typical.heapprofile",
+      "bytes": 1127832,
+      "sha256": "116240af77ffed28b936830dcaf25f6d683202edbc252b53faf079d4dccb42c9"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/baseline.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/baseline.json",
+      "bytes": 79499,
+      "sha256": "d356736da1c9f5ec15508b855ef4d17293dccee223fbc33c799a81019a6d4b33"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/high.flameox-cpu.json",
+      "bytes": 455548,
+      "sha256": "abf024154b0653f26b62c199c4f7549aaad8d255dfe388f3cb49d0eda2bb56f1"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/high.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/high.flameox-heap.json",
+      "bytes": 415212,
+      "sha256": "28715328f314743707f9eb4ac80ef384d77d7cfdb25315b71d10c9db56c256cf"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/oracle.json",
+      "bytes": 4802984,
+      "sha256": "a9c84791a9536e21430ac74e6b966907a834bb7780704e9ce4e129f11afba8a8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/typical.flameox-cpu.json",
+      "bytes": 403605,
+      "sha256": "2be853220c113d1ede6abb6000366f89f7e42aa59326bee5d175389b6aa2bcea"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block3/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block3/results/typical.flameox-heap.json",
+      "bytes": 406489,
+      "sha256": "3313c1995a5d4077fdef761e47260159b29f069b6d344ee5ec568375f8d27f4f"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/raw/high.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block4/raw/high.cpuprofile",
+      "bytes": 701205,
+      "sha256": "d2b408bbc8977a83252e3b7e3d0b5ff07fe08ab4c0bfd436bbc49c356d7e8adf"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/raw/high.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block4/raw/high.heapprofile",
+      "bytes": 1139007,
+      "sha256": "b9e908a8492675f0d4f87bc84fc9bdb8ae81f95536248b9f4e771db429603090"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/raw/typical.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/block4/raw/typical.cpuprofile",
+      "bytes": 741521,
+      "sha256": "10953a2d0d977130e39edcfc776edd3ce0faa7bf20a718fb3eb51aac4f5a1117"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/raw/typical.heapprofile",
+      "relativeToRawRoot": "baseline/runs/block4/raw/typical.heapprofile",
+      "bytes": 1158900,
+      "sha256": "d2137984709a3a00bab84d4e92d426e53ddb12c691176d878a98d95c4235e1ae"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/baseline.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/baseline.json",
+      "bytes": 79650,
+      "sha256": "d229315c536a730528d3e71e80d491f0b14e9ecd66bdd23185eea4d7ef6b4c8a"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/high.flameox-cpu.json",
+      "bytes": 450423,
+      "sha256": "dbeeb77cfd6073e55d74fb12ee2363b2159d9ffe72899713315b8a514125b494"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/high.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/high.flameox-heap.json",
+      "bytes": 414512,
+      "sha256": "ba5c2aef64cc6123c51d7edc538098504c8e91df9367e587f99fbb9b7e82b526"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/oracle.json",
+      "bytes": 4802984,
+      "sha256": "a9c84791a9536e21430ac74e6b966907a834bb7780704e9ce4e129f11afba8a8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/typical.flameox-cpu.json",
+      "bytes": 434527,
+      "sha256": "327de25e544f25d54b127b7825760c95bb02d9e8ba0f0839e8d8bdb51bace108"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/block4/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "baseline/runs/block4/results/typical.flameox-heap.json",
+      "bytes": 425697,
+      "sha256": "6e6e6f50acacdfd26e0513b266a479e70a29fda94be1a0163de2c7d6d969186b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle1/raw/idle.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/idle1/raw/idle.cpuprofile",
+      "bytes": 235875,
+      "sha256": "dd56522fd021deff0ac68b47a9e7b0b188706a21c4957d1a44b09240818c0ce6"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle1/raw/idle.heapprofile",
+      "relativeToRawRoot": "baseline/runs/idle1/raw/idle.heapprofile",
+      "bytes": 476829,
+      "sha256": "5f81e889e237ba5dd6459ae3a422b89efc77fa14c38133d6e7014209068385d5"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle1/results/idle.json",
+      "relativeToRawRoot": "baseline/runs/idle1/results/idle.json",
+      "bytes": 243961,
+      "sha256": "7fd952fb6478e248b87f97f1fbea56ac951580d8068b718216e17cdbc2694a18"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle1/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/idle1/results/oracle.json",
+      "bytes": 190797,
+      "sha256": "1f3a6b6d02e5d94ee800bba377104be2439533061aa04e7779509e31086e800c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle2/raw/idle.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/idle2/raw/idle.cpuprofile",
+      "bytes": 242522,
+      "sha256": "0f7848df762673644f56b456949cd0575d5229c3c14a7e70bb7fc3637ecf8aaa"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle2/raw/idle.heapprofile",
+      "relativeToRawRoot": "baseline/runs/idle2/raw/idle.heapprofile",
+      "bytes": 498044,
+      "sha256": "a7da6997ea7e1312aa948e9481fd3cdf011d59f38655014126c76670e289210c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle2/results/idle.json",
+      "relativeToRawRoot": "baseline/runs/idle2/results/idle.json",
+      "bytes": 243681,
+      "sha256": "0d86a2703522565d0ac8590f95989d2e728570bc6fd66810725cbb421b5f6826"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle2/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/idle2/results/oracle.json",
+      "bytes": 190797,
+      "sha256": "1f3a6b6d02e5d94ee800bba377104be2439533061aa04e7779509e31086e800c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle3/raw/idle.cpuprofile",
+      "relativeToRawRoot": "baseline/runs/idle3/raw/idle.cpuprofile",
+      "bytes": 238391,
+      "sha256": "46f79fef5b302298a4e43de45e2a30bdcfa885eb79e7bce1a9cbcc82a9530ae7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle3/raw/idle.heapprofile",
+      "relativeToRawRoot": "baseline/runs/idle3/raw/idle.heapprofile",
+      "bytes": 482778,
+      "sha256": "6e391a43b6414af5ce85d6b720523721bb9ac9c9e7d9a885c32be34d77919f1a"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle3/results/idle.json",
+      "relativeToRawRoot": "baseline/runs/idle3/results/idle.json",
+      "bytes": 243502,
+      "sha256": "df3bc77dd8c0f15a2e55d6c46ee93a5afe63fc3172c68e2f2474ac32cd442a6b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/runs/idle3/results/oracle.json",
+      "relativeToRawRoot": "baseline/runs/idle3/results/oracle.json",
+      "bytes": 190797,
+      "sha256": "1f3a6b6d02e5d94ee800bba377104be2439533061aa04e7779509e31086e800c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/tests/idle.test.js",
+      "relativeToRawRoot": "baseline/tests/idle.test.js",
+      "bytes": 12339,
+      "sha256": "afe51710639c0112a51bd743e03cf7a682cd671ffb314f3f2a4c4e1d9db71710"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/baseline/tests/profile.test.js",
+      "relativeToRawRoot": "baseline/tests/profile.test.js",
+      "bytes": 16095,
+      "sha256": "d437a8aa58c0c4a2e0646e108b926ea530beecb65c6bca2d195a0913421faa49"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/block1-oracle-diff.json",
+      "relativeToRawRoot": "block1-oracle-diff.json",
+      "bytes": 8376,
+      "sha256": "1f0e15b53c3479fc7f04fe5f969201ae50710fc035d078621fbba0ead800880e"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/block2-oracle-diff.json",
+      "relativeToRawRoot": "block2-oracle-diff.json",
+      "bytes": 8376,
+      "sha256": "96d2f0bf5f1ec2f2910971510903e5bc78757db130e894f38cefb862800a11d3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/block3-oracle-diff.json",
+      "relativeToRawRoot": "block3-oracle-diff.json",
+      "bytes": 8376,
+      "sha256": "3668fb31ce69c348f53c5ad691bb98136ffdaca94d3607e605709a04dbad3356"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/block4-oracle-diff.json",
+      "relativeToRawRoot": "block4-oracle-diff.json",
+      "bytes": 8376,
+      "sha256": "65a0eaed9602e2b6464a7324ffb30cb5f925ef2960f296c1374b8a1bc940d5b4"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/contract-source-manifest.json",
+      "relativeToRawRoot": "candidate/contract-source-manifest.json",
+      "bytes": 669,
+      "sha256": "78f4139699376333827e561ae570c375a81014b98e590f7cc4f8898531ec81bf"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/contracts-complete.log",
+      "relativeToRawRoot": "candidate/contracts-complete.log",
+      "bytes": 415,
+      "sha256": "8a37f1ab2f961e32812021eaa88dbf5b266e1ee35f3b6876c6329252beb4d6f7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/raw/high.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block1/raw/high.cpuprofile",
+      "bytes": 569691,
+      "sha256": "e703410592ac35b4d49c13c5c8197b3418b48572e62a8006188c47dc98c21de0"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/raw/high.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block1/raw/high.heapprofile",
+      "bytes": 723730,
+      "sha256": "7957f1a82c58638af4ea28b06e49d677ee84af8bc0ae68233629aeb8e6244909"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/raw/typical.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block1/raw/typical.cpuprofile",
+      "bytes": 516105,
+      "sha256": "3dfe38f9c257dbd08533a0eb5935db76a30d6e39bc4de5c7c4b0d07d78c2b57c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/raw/typical.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block1/raw/typical.heapprofile",
+      "bytes": 838686,
+      "sha256": "a9dd3a4963c81767ab554c922bce80c15586ebd4511c3dc3bd06c00fa67cecec"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/baseline.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/baseline.json",
+      "bytes": 79419,
+      "sha256": "45ecd032557af7d11093f308bcff9b68b4fec7c9d1e77436ff7d6d8d5c6f67da"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/high.flameox-cpu.json",
+      "bytes": 422534,
+      "sha256": "e037849fc73a20b424e4e16f17be20b8b91601ac5c472ae677bd60c36d88c51f"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/high.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/high.flameox-heap.json",
+      "bytes": 402533,
+      "sha256": "334049b7691e1b79682ec2786c6ae3582007da22beb850aedee3ccbea599bda7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/oracle.json",
+      "bytes": 4805246,
+      "sha256": "3a3855a5165d99e609c1341d2e271153b474cea664b66c4335f56cd2d450d3ce"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/typical.flameox-cpu.json",
+      "bytes": 418799,
+      "sha256": "48b67a668298de1cc6019d884c67629b85b8a67ad15f66966f4df87ca0105abf"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block1/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block1/results/typical.flameox-heap.json",
+      "bytes": 430405,
+      "sha256": "247fa48407c3aaf03804f1a9120370c0eac3cc1e67fee410b38dfcb8cd97d06e"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/raw/high.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block2/raw/high.cpuprofile",
+      "bytes": 617561,
+      "sha256": "b7780fbcb91d5b1c71560adc9a8be79e2cf5b2385e39b7e86e1611859b75a8e5"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/raw/high.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block2/raw/high.heapprofile",
+      "bytes": 755971,
+      "sha256": "611edbc52ee9050d12061824413cfc5b4faed5820e87fe0a2b605fd08a77eb68"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/raw/typical.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block2/raw/typical.cpuprofile",
+      "bytes": 458280,
+      "sha256": "ced871ace6bbc420a6324ebf9b902663d12800742b328d6bf9d00ca50437d0e1"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/raw/typical.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block2/raw/typical.heapprofile",
+      "bytes": 828078,
+      "sha256": "5e7ed00d2f338b08d2ba55cf8babcb89c1eac4e16c3a437ed387c1ce177cd1a0"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/baseline.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/baseline.json",
+      "bytes": 79590,
+      "sha256": "5d3c74fe69f04838f5b3854a875725060ac4bdac8d604c67aa2a8082ab96b7b7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/high.flameox-cpu.json",
+      "bytes": 457381,
+      "sha256": "15c79fdca0f7f19b70d35995357b38acc1ecf5b7ccc942f4a79fe930d2db6d5a"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/high.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/high.flameox-heap.json",
+      "bytes": 401347,
+      "sha256": "0f252db37926208f50177ab894ac99bc6bc0a5cf0e310438be723d5e0554e1e7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/oracle.json",
+      "bytes": 4805246,
+      "sha256": "3a3855a5165d99e609c1341d2e271153b474cea664b66c4335f56cd2d450d3ce"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/typical.flameox-cpu.json",
+      "bytes": 391092,
+      "sha256": "3258c7bb0685c372f15d1c79860c7d4c4bb684afca911536813d0dc5d4e81915"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block2/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block2/results/typical.flameox-heap.json",
+      "bytes": 425739,
+      "sha256": "3246fcd4d250724191b6e8b6d25f8666cec68815f6c5558cd5d7da8bcbdff7ef"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/raw/high.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block3/raw/high.cpuprofile",
+      "bytes": 537016,
+      "sha256": "b1b3ada8719e7adb8e02a91f9a95298e25bcda040d4566ba6f3009979d131b5b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/raw/high.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block3/raw/high.heapprofile",
+      "bytes": 718469,
+      "sha256": "e157f1062a2323fc72deb29fa48fcf6c8f3c5228cd85b91f10681975036d0322"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/raw/typical.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block3/raw/typical.cpuprofile",
+      "bytes": 513092,
+      "sha256": "f2e1063ac399caa9d1b28462ca33be4d2dc67e63fe81ee902fc19426841d7cd3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/raw/typical.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block3/raw/typical.heapprofile",
+      "bytes": 818012,
+      "sha256": "a82e43b631c87635e59100615bc5a7a72f4f960719526dad44a01f031fe046e6"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/baseline.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/baseline.json",
+      "bytes": 79431,
+      "sha256": "c6f4bd6eff4d6ee35e3e1c8813dfcd6d56796df6521085bd36020c9a2a3fa168"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/high.flameox-cpu.json",
+      "bytes": 405873,
+      "sha256": "d4b8ddeabd904800a09f1aa5010a465616acc3dbb53029ed0f3eb21d77063df3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/high.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/high.flameox-heap.json",
+      "bytes": 407083,
+      "sha256": "58b9e97ac578d1334fa581be7f30cbc233e23bd45dd881af2f719f708fd1d61c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/oracle.json",
+      "bytes": 4805246,
+      "sha256": "3a3855a5165d99e609c1341d2e271153b474cea664b66c4335f56cd2d450d3ce"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/typical.flameox-cpu.json",
+      "bytes": 414267,
+      "sha256": "3a59fdd9abd3ce4ad724f6260c641ac67584a6b1a95dcd3144fcae5731c34275"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block3/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block3/results/typical.flameox-heap.json",
+      "bytes": 398114,
+      "sha256": "9254a07639b6c0e16ef68f81c1be65525c0dae4fc7a8cff2069af70a62520c2b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/raw/high.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block4/raw/high.cpuprofile",
+      "bytes": 539708,
+      "sha256": "2db6084ec22ca99a5ba3912e47822f95184dac06f47cd9beb80d65cc6ad1a932"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/raw/high.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block4/raw/high.heapprofile",
+      "bytes": 728098,
+      "sha256": "c68a044496c649a94cf4d5aab2238199b448600e064f23e7c96bccc1d0dd0124"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/raw/typical.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/block4/raw/typical.cpuprofile",
+      "bytes": 485404,
+      "sha256": "371413a1b3b05ac7f13732f9d89c284bb86639be1a1c76584c4382ca5d6f3ea3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/raw/typical.heapprofile",
+      "relativeToRawRoot": "candidate/runs/block4/raw/typical.heapprofile",
+      "bytes": 828454,
+      "sha256": "25b39c504427ba6ed4cff6c53a04917d2864781ec7351c313f3a55ba80e5b7ab"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/baseline.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/baseline.json",
+      "bytes": 79593,
+      "sha256": "c6953b865c0a5bde0ff0ab7917e83d117b270920922700f28353998720090cd8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/high.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/high.flameox-cpu.json",
+      "bytes": 412057,
+      "sha256": "5c74d078c765fea675bdec6646056884113e0adc816cef892cb0a4ea4563b0fe"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/high.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/high.flameox-heap.json",
+      "bytes": 393706,
+      "sha256": "7a6fd8e025f229dcbae32f114bf0c42ef7dd3fb3125162554a3ad4df82da3ae0"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/oracle.json",
+      "bytes": 4805246,
+      "sha256": "3a3855a5165d99e609c1341d2e271153b474cea664b66c4335f56cd2d450d3ce"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/typical.flameox-cpu.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/typical.flameox-cpu.json",
+      "bytes": 401649,
+      "sha256": "1bf3d48218f4f86f654ceb888ce3b8b4bb35a667d50c43a886e3d9cc03c4ec38"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/block4/results/typical.flameox-heap.json",
+      "relativeToRawRoot": "candidate/runs/block4/results/typical.flameox-heap.json",
+      "bytes": 415932,
+      "sha256": "0f1f3f69e80d1f1cd9df26582af445c1839124636c9a77c7dc38d313dac0fab8"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle1/raw/idle.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/idle1/raw/idle.cpuprofile",
+      "bytes": 234982,
+      "sha256": "7306f5bae5060f9e2d58f0288632b4447af95765d8e47e4383d04e56a73f50ee"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle1/raw/idle.heapprofile",
+      "relativeToRawRoot": "candidate/runs/idle1/raw/idle.heapprofile",
+      "bytes": 362220,
+      "sha256": "329181cabd882e85fa6883108a83675a6642ecebb75b9e046b3dc1cee00fc683"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle1/results/idle.json",
+      "relativeToRawRoot": "candidate/runs/idle1/results/idle.json",
+      "bytes": 243643,
+      "sha256": "0ff16d87b51cd50a19ff496d6fad7db75500a876dc176270ec8a85c65e20cf8b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle1/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/idle1/results/oracle.json",
+      "bytes": 190884,
+      "sha256": "898ae082209e4f01024619039e2f4134db98ed5247e8e2499534d546ff842b28"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle2/raw/idle.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/idle2/raw/idle.cpuprofile",
+      "bytes": 254546,
+      "sha256": "498dbc265dd574a002454cb9e4ca9bac259615912451c5059aa68c09f94ab1f6"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle2/raw/idle.heapprofile",
+      "relativeToRawRoot": "candidate/runs/idle2/raw/idle.heapprofile",
+      "bytes": 345516,
+      "sha256": "0bdf4a849db16caa7cce4c40bc67b408628d2c02c0dde53edf86719eb281a6fa"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle2/results/idle.json",
+      "relativeToRawRoot": "candidate/runs/idle2/results/idle.json",
+      "bytes": 243538,
+      "sha256": "ece6de48f52a051c6934035c62843b057118623241a9e04f859f45fec7c1167b"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle2/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/idle2/results/oracle.json",
+      "bytes": 190884,
+      "sha256": "898ae082209e4f01024619039e2f4134db98ed5247e8e2499534d546ff842b28"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle3/raw/idle.cpuprofile",
+      "relativeToRawRoot": "candidate/runs/idle3/raw/idle.cpuprofile",
+      "bytes": 241365,
+      "sha256": "1185726beaa222408328531aa7a85eeca12e2a9645435883a877e28601adde71"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle3/raw/idle.heapprofile",
+      "relativeToRawRoot": "candidate/runs/idle3/raw/idle.heapprofile",
+      "bytes": 360029,
+      "sha256": "080866b2c73cf38fee4cb9ec04742eab89e259e62e4237f842a97588dda91bad"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle3/results/idle.json",
+      "relativeToRawRoot": "candidate/runs/idle3/results/idle.json",
+      "bytes": 243654,
+      "sha256": "39b57fb255bb84c7d8cb473ee4721d132561466958eebe770ef38737a83672eb"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/runs/idle3/results/oracle.json",
+      "relativeToRawRoot": "candidate/runs/idle3/results/oracle.json",
+      "bytes": 190884,
+      "sha256": "898ae082209e4f01024619039e2f4134db98ed5247e8e2499534d546ff842b28"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/supplemental-contract-data.json",
+      "relativeToRawRoot": "candidate/supplemental-contract-data.json",
+      "bytes": 1094,
+      "sha256": "380689c447b59527334bde6be4b130336e2e245c57d9165f2272f8108a6fa12c"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/battle-persistent-stage.test.js",
+      "relativeToRawRoot": "candidate/tests/battle-persistent-stage.test.js",
+      "bytes": 29126,
+      "sha256": "4b7e0659bdc69b70b61f3b2967cd1bf82f8010f75b3076eeba477747da0451e2"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/battle-stage-mounts.test.js",
+      "relativeToRawRoot": "candidate/tests/battle-stage-mounts.test.js",
+      "bytes": 10486,
+      "sha256": "7892015b04c46d3dc95744e69d944c2959833d159c6dc107ef49214a52cc38f3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/battle-stage-validator.test.js",
+      "relativeToRawRoot": "candidate/tests/battle-stage-validator.test.js",
+      "bytes": 7973,
+      "sha256": "d061fc304d458247872bba1778dec9ee7dda254de219a6805c861a0834d935a9"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/idle.test.js",
+      "relativeToRawRoot": "candidate/tests/idle.test.js",
+      "bytes": 12339,
+      "sha256": "afe51710639c0112a51bd743e03cf7a682cd671ffb314f3f2a4c4e1d9db71710"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/potion-tip-lifecycle.test.js",
+      "relativeToRawRoot": "candidate/tests/potion-tip-lifecycle.test.js",
+      "bytes": 7971,
+      "sha256": "f48f5405ea23be46205e92ca24b18dec0d12b98f93965c5c64543659e663d0a4"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/profile.test.js",
+      "relativeToRawRoot": "candidate/tests/profile.test.js",
+      "bytes": 16095,
+      "sha256": "d437a8aa58c0c4a2e0646e108b926ea530beecb65c6bca2d195a0913421faa49"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate/tests/r7a-qa-live.test.js",
+      "relativeToRawRoot": "candidate/tests/r7a-qa-live.test.js",
+      "bytes": 2650,
+      "sha256": "59bcca54113d5148e3861ea298ccd5a7d8cb88a4b553975a3dfa5932d65a5835"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/candidate.patch",
+      "relativeToRawRoot": "candidate.patch",
+      "bytes": 61571,
+      "sha256": "43d5ed9a248c46e8febe121432910f1a6e79af3c77bf5873f68457cba808f22e"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/finalize-analysis.py",
+      "relativeToRawRoot": "finalize-analysis.py",
+      "bytes": 7513,
+      "sha256": "df404104246bda9cebb3174743d50ae6b5af51bfb1c1b0bc97b712c9a1a004b3"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/hotspot-comparison.json",
+      "relativeToRawRoot": "hotspot-comparison.json",
+      "bytes": 4920,
+      "sha256": "665df34a1d76698ff1ee1bdac3e3811926d8e97489e1324bcddfc469fb41e33d"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/idle-oracle-diff.json",
+      "relativeToRawRoot": "idle-oracle-diff.json",
+      "bytes": 2103,
+      "sha256": "5807f3096320334099ba3f58660ec687b9d825acee42d86bb37126bf491f5087"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/idle-summary.json",
+      "relativeToRawRoot": "idle-summary.json",
+      "bytes": 11320,
+      "sha256": "35f8f76504daac244712e425066f9c8a83af48ff05f80d3162774179aabe24bb"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/postprocess.py",
+      "relativeToRawRoot": "postprocess.py",
+      "bytes": 2695,
+      "sha256": "12f86932166f233a66fb534235fcf0137cd5fb41b165a26a5f7fa22e771feb43"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/external-runtime-ab-stagev4-20261021/prepare.py",
+      "relativeToRawRoot": "prepare.py",
+      "bytes": 4865,
+      "sha256": "9652279869dad2850845906906c70221285e9e6624a18d3f6d93beac8752626a"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { installRuntimeTrace } from '../game/src/core/runtime-trace.local.js';
 import { getOverlayRuntimeTracePanel } from '../game/src/core/runtime-trace-panel.local.js';
+import { createBattleStageView } from '../game/src/battle/view/battle.stage-view.js';
 
 window.SDT = { Icons: { rich: value => value }, Sound: { sfx() {} } };
 const { UI } = await import('../game/src/ui/ui.js');
@@ -98,6 +99,50 @@ describe('explicit local diagnostic controls within the modal boundary', () => {
     }
     vi.advanceTimersByTime(20);
     expect(document.activeElement.id).toBe('gameFirst');
+  });
+
+  it.each([false, true])('keeps the persistent stage and diagnostic modal ownership separate (opted in: %s)', optedIn => {
+    if (optedIn) install();
+    else {
+      expect(installRuntimeTrace()).toBeNull();
+      document.body.insertAdjacentHTML('beforeend', '<aside id="sdtRuntimeTrace"><button>非注册面板</button></aside>');
+    }
+    const original = panel();
+    const presenter = createBattleStageView({ UI, rich: value => value });
+    const state = {
+      token: 7, assetKey: 'battle-normal', isBoss: false, phase: 'player',
+      combatState: { tone: 'self', label: '你的行动' }, turn: 1,
+      energy: 3, maxEnergy: 3, energyArt: '/energy.webp', mode: 'normal', locked: false,
+      potionsHTML: '', drawHTML: '', restHTML: '', skillHTML: '', pageHTML: '', forecastHTML: '',
+    };
+    const assertBoundary = () => {
+      expect(panel()).toBe(original);
+      expect(UI.el.ovBody.contains(original)).toBe(false);
+      expect(getOverlayRuntimeTracePanel(UI.el.overlay)).toBe(optedIn ? original : null);
+      expect(original.parentElement).toBe(optedIn ? UI.el.overlay : document.body);
+      expect(original.closest('[inert], [hidden]')).toBe(optedIn ? null : original);
+      for (const id of ['opener', 'background', 'outside']) expect(document.getElementById(id).hasAttribute('inert')).toBe(true);
+    };
+    const first = presenter.show(state).owner.stage;
+    assertBoundary();
+    const energy = first.querySelector('.sts-energy');
+    expect(presenter.show({ ...state, energy: 2 }).owner.stage).toBe(first);
+    expect(first.querySelector('.sts-energy')).toBe(energy);
+    expect(energy.querySelector('b').textContent).toBe('2');
+    assertBoundary();
+    open('page'); // The real UI replaces only ovBody for settings.
+    expect(first.isConnected).toBe(false);
+    assertBoundary();
+    const restored = presenter.show({ ...state, energy: 2 }).owner.stage;
+    expect(restored).not.toBe(first);
+    expect(presenter.show({ ...state, energy: 1 }).owner.stage).toBe(restored);
+    assertBoundary();
+    if (optedIn) {
+      expect(UI._overlayFocusable()).toContain(control('sync'));
+      control('sync').click();
+      expect(trace.read().records.at(-1)).toMatchObject({ kind: 'sync', marker: 1 });
+    } else expect(UI._overlayFocusable()).not.toContain(original.querySelector('button'));
+    presenter.dispose();
   });
 
   it('restores panel location, original inert state and opener after close, including interrupted close/reopen', () => {

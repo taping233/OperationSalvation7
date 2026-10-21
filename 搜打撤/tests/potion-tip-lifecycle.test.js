@@ -105,10 +105,37 @@ describe('药水提示全局监听生命周期', () => {
   });
 
   it('离开后的旧药水节点不重新绑定document监听', () => {
-    const { potion } = showPotions(); showPotions(2);
+    const { potion } = showPotions();
+    // Count changes retain the current control; leaving means a genuinely detached node.
+    potion.remove(); showPotions(2); expect(potion.isConnected).toBe(false);
     const add = vi.spyOn(document, 'addEventListener');
     pointer('pointerdown', potion);
     expect(add.mock.calls.filter(([event]) => event === 'pointerup' || event === 'pointercancel')).toEqual([]);
+  });
+
+  it('数量变化保留当前药水节点，旧闭包读取最新数量且仍可使用', () => {
+    const first = showPotions(), next = showPotions(2);
+    expect(next.potion).toBe(first.potion);
+    pointer('pointerdown', first.potion);
+    expect(next.tip.hidden).toBe(false); expect(next.tip.textContent).toContain('×2');
+    pointer('pointercancel'); expect(next.tip.hidden).toBe(true);
+  });
+
+  it.each(['close', 'mode', 'token', 'battle'])('%s后旧节点不得通过连接的新提示恢复document监听', action => {
+    const { potion, tip } = showPotions();
+    if (action === 'close') UI.hideOverlay();
+    if (action === 'mode') UI.showOverlay('', '<p>设置</p>', 'settings');
+    if (action === 'token') body.firstElementChild._battleToken = Symbol('departed-stage');
+    if (action === 'battle') BattleSession.start(window.SDT.game, [{id:'new-tip-foe', name:'新场次', hp:50, atk:1}], {isBoss:false});
+    const add = vi.spyOn(document, 'addEventListener');
+    try {
+      pointer('pointerdown', potion); pointer('mouseenter', potion);
+      expect(tip.hidden).toBe(true);
+      expect(add.mock.calls.filter(([event]) => event === 'pointerup' || event === 'pointercancel')).toEqual([]);
+    } finally {
+      // Drain the new battle's queued render even when this negative control fails.
+      if (action === 'battle') frames.shift()?.(performance.now());
+    }
   });
 
   it('同一药水栏重复渲染保留节点，悬停/移开仍可使用', () => {

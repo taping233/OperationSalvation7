@@ -47,6 +47,14 @@
 
 ## 近期已释放
 
+### 2026-10-21 常驻战斗舞台 v4 窄修正 / Friday WF-coherent-render-fix-1021
+
+旧v3完整门3断言失败已独立复现并原样留档，不可发布；精确六文件增量补实时token/root归属、药水旧控制守卫与隔离QA host禁用策略，数量变化继续保留当前节点。作者39文件586项与源负控、混合main8文件101项、v4标准构建原预算全部通过；外部工具用精确v4重新采样，未沿用v3性能数字。源码/编辑冻结释放；最后完整门与普通hook以冻结交付manifest为准。未提交/推送/部署，无本会话服务；[统一证据](evidence/2026-10-21-WF-coherent-render-1021/README.md)。
+
+### 2026-10-21 常驻战斗舞台与注入存在性集成 / Friday WF-coherent-render-1021
+
+精确35228afa基线批量接入stage v3与infusion，19补丁文件哈希完全保留；诊断+stage补充测试仅改测试，无生产漂移。原资产表达式审核后仅更新layers opaque指纹。纠正构建原预算通过；首构建前置控制失败及其失败日志均保留。源码编辑冻结、占用释放，正常冻结门及hook以交付manifest为准；未提交/推送/部署，无本会话服务。[记录](evidence/2026-10-21-WF-coherent-render-1021/README.md)。
+
 ### 2026-10-21 诊断面板模态修复 / Friday WF-runtime-trace-modal-1021
 
 独立五路径诊断补丁接入已发布91052c8b；属地仅runtime-trace两个模块、overlay.js、对应测试和说明。仅显式开启诊断时将面板放入当前模态焦点域，默认关闭、不联网、普通背景隔离不变；源码编辑冻结、占用释放；独立133项、唯一完成标准构建原预算及静态资源闭环通过，正常冻结门/hook随后验证。不含stage/infusion补丁，无本会话服务；详见[记录](evidence/2026-10-21-WF-runtime-trace-modal-1021/README.md)。

@@ -4,9 +4,12 @@ import '../../../css/battle-secondary-overlay.css';
 // Keep the live battlefield, including its hand/unit/scenery mounts. The
 // transparent input shield belongs to the secondary page, never the engine.
 export function mountCombatOverlay(UI, title, html, mode, scene) {
+  const isCurrent = scene._battleRenderCurrent || (() => true);
+  const body = UI.el.ovBody;
   if (scene.contains(document.activeElement)) scene._secondaryReturnFocus = document.activeElement;
   scene.remove();
   UI.showOverlay(title, `<div class="battle-secondary-layer">${html}</div>`, mode);
+  if (!isCurrent() || UI.el.ovBody !== body) return false;
   scene.setAttribute('inert', '');
   scene.setAttribute('aria-hidden', 'true');
   UI.el.ovBody.prepend(scene);
@@ -19,14 +22,17 @@ export function mountCombatOverlay(UI, title, html, mode, scene) {
   layer.addEventListener('click', event => {
     if (event.target === layer) event.stopPropagation();
   });
+  return true;
 }
 
-export function restoreCombatScene(UI, token) {
+export function restoreCombatScene(UI, token, { isCurrent = () => true } = {}) {
+  const body = UI.el.ovBody;
   const layer = UI.el.ovBody?.querySelector('.battle-secondary-layer');
   const scene = UI.el.ovBody?.querySelector('.battle-stage');
   if (!layer || !scene || scene._battleToken !== token) return false;
   scene.remove();
   UI.showOverlay('', '', 'battle');
+  if (!isCurrent() || UI.el.ovBody !== body) return false;
   scene.removeAttribute('inert');
   scene.removeAttribute('aria-hidden');
   UI.el.ovBody.append(scene);

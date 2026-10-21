@@ -1,0 +1,67 @@
+{
+  "counts": [
+    {
+      "fixture": "stacked-9",
+      "synthetic": false,
+      "before": {
+        "fuelChecks": 8,
+        "lookups": 17,
+        "uidReads": 108
+      },
+      "after": {
+        "fuelChecks": 1,
+        "lookups": 10,
+        "uidReads": 66
+      },
+      "htmlSha256": "e7519cba98542caf9a8aae4de304e89c7ac4c9b9b5515ff69e8941c707e8d4f0"
+    },
+    {
+      "fixture": "stacked-30",
+      "synthetic": true,
+      "before": {
+        "fuelChecks": 29,
+        "lookups": 59,
+        "uidReads": 990
+      },
+      "after": {
+        "fuelChecks": 1,
+        "lookups": 31,
+        "uidReads": 528
+      },
+      "htmlSha256": "be9d090f85ae74afba962711ae3026cd69d258a921bb0c32228b26c2659d20eb"
+    },
+    {
+      "fixture": "stacked-60",
+      "synthetic": true,
+      "before": {
+        "fuelChecks": 59,
+        "lookups": 119,
+        "uidReads": 3780
+      },
+      "after": {
+        "fuelChecks": 1,
+        "lookups": 61,
+        "uidReads": 1953
+      },
+      "htmlSha256": "76485df6e199f0a23900bffcbe8b92adef887df5de68302dc181f41ec893d76d"
+    },
+    {
+      "fixture": "mixed-9",
+      "synthetic": false,
+      "before": {
+        "fuelChecks": 8,
+        "lookups": 17,
+        "uidReads": 108
+      },
+      "after": {
+        "fuelChecks": 4,
+        "lookups": 13,
+        "uidReads": 90
+      },
+      "htmlSha256": "29ab87a3c7ddce1fcbabb29593a2cba9d7298791c70e11b0c2c54e45321f0642"
+    }
+  ],
+  "renderHtmlTextAndButtonsIdentical": true,
+  "fiveActionRenderSummariesIdentical": true,
+  "matrixCases": 5120
+}

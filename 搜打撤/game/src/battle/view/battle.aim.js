@@ -375,8 +375,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (cancelled) updateClickSelectionUI();
     return cancelled;
   }
-  function updateClickSelectionUI() {
-    syncSelectionPrompt(UI.el.ovBody?.querySelector('.battle-stage'), getSnapshot(), {
+  function updateClickSelectionUI(snapshot = getSnapshot()) {
+    syncSelectionPrompt(UI.el.ovBody?.querySelector('.battle-stage'), snapshot, {
       clickUid:clickSelectedUid, findCard,
       getCurrent:() => ({ snapshot:getSnapshot(), clickUid:clickSelectedUid, stage:UI.el.ovBody?.querySelector('.battle-stage') }),
       onCancel:({ restoreFocus }) => cancelBattleSelection({ restoreFocus }),

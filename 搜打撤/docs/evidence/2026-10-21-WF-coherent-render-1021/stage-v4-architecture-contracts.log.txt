@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 /tmp/persistent-battle-stage-v4-ea0da5c7
+
+ ✓ tests/architecture-boundaries.test.js (39 tests) 1080ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  1044ms
+
+ Test Files  1 passed (1)
+      Tests  39 passed (39)
+   Start at  18:36:45
+   Duration  2.12s (transform 60ms, setup 0ms, collect 103ms, tests 1.08s, environment 387ms, prepare 84ms)
+

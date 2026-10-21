@@ -1,0 +1,225 @@
+{"mode":"full","paths":["game/src/battle/view/battle.aim.js","game/src/battle/view/battle.decision-shell.js","game/src/battle/view/battle.effect-feedback.js","game/src/battle/view/battle.infusion-material-state.js","game/src/battle/view/battle.layers.js","game/src/battle/view/battle.secondary-overlay.js","game/src/battle/view/battle.stage-view.js","game/src/battle/view/battle.view.js","scripts/runtime-asset-redundancy-review.mjs","tests/battle-hand-hit-input.test.js","tests/battle-hand-rule-context.test.js","tests/battle-infusion-existence.test.js","tests/battle-infusion-material-state.test.js","tests/battle-persistent-stage.test.js","tests/battle-stage-mounts.test.js","tests/battle-stage-validator.test.js","tests/runtime-trace-modal.test.js"],"reasons":["定向测试超过 30 个文件"],"tests":[]}
+[gate] 模式：full
+[gate] 变更：game/src/battle/view/battle.aim.js
+[gate] 变更：game/src/battle/view/battle.decision-shell.js
+[gate] 变更：game/src/battle/view/battle.effect-feedback.js
+[gate] 变更：game/src/battle/view/battle.infusion-material-state.js
+[gate] 变更：game/src/battle/view/battle.layers.js
+[gate] 变更：game/src/battle/view/battle.secondary-overlay.js
+[gate] 变更：game/src/battle/view/battle.stage-view.js
+[gate] 变更：game/src/battle/view/battle.view.js
+[gate] 变更：scripts/runtime-asset-redundancy-review.mjs
+[gate] 变更：tests/battle-hand-hit-input.test.js
+[gate] 变更：tests/battle-hand-rule-context.test.js
+[gate] 变更：tests/battle-infusion-existence.test.js
+[gate] 变更：tests/battle-infusion-material-state.test.js
+[gate] 变更：tests/battle-persistent-stage.test.js
+[gate] 变更：tests/battle-stage-mounts.test.js
+[gate] 变更：tests/battle-stage-validator.test.js
+[gate] 变更：tests/runtime-trace-modal.test.js
+[gate] 说明：定向测试超过 30 个文件
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (603 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-5tTKwQ/snapshot/搜打撤
+
+···································································································································································································································································································································································································································································································-·································································································································································································································································································································································································································································································································································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·························································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-··································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································x·x·······················································································································································································································································································································-·························································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································x································································································································································································································································································································································{"mode":"quick","paths":["package.json"],"reasons":["package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过"],"tests":["tests/architecture-boundaries.test.js","tests/contracts.test.js"]}
+[gate] 模式：quick
+[gate] 变更：package.json
+[gate] 说明：package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture runner pass
+
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+fixture runner pass
+[gate] PASS：quick 验收完成
+·{"mode":"quick","paths":["game/assets/asset-manifest.json"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+{"mode":"quick","paths":["game/assets/asset-manifest.json","game/assets/new.png"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/new.png
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/architecture-graph.mjs","scripts/gate-plan.mjs","scripts/impact-query.mjs","scripts/index-validation.mjs","scripts/value.txt","scripts/workflow-archive.mjs","scripts/workflow-browser.mjs","scripts/workflow-change-advice.mjs","scripts/workflow-change-review.mjs","scripts/workflow-dependencies.mjs","scripts/workflow-doctor.mjs","scripts/workflow-evidence.mjs","scripts/workflow-gate-receipt.mjs","scripts/workflow-ledger.mjs","scripts/workflow-memory.mjs","scripts/workflow-ship.mjs","scripts/workflow-staged.mjs","scripts/workflow-status.mjs","scripts/workflow-task-input.mjs","scripts/workflow-task.mjs","scripts/workflow.mjs"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"quick","paths":["scripts/acceptance-gate.mjs","scripts/deleted.txt","scripts/new-name.txt","scripts/old-name.txt"],"reasons":[],"tests":[]}
+snapshot passed
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+{"mode":"full","paths":["docs/evidence/2026-09-30-fixture/2026-10-21T09-22-49.861Z-f357bb5f-staged.json","docs/evidence/2026-09-30-fixture/2026-10-21T09-22-49.861Z-f357bb5f-staged.log","scripts/value.txt"],"reasons":[],"tests":[]}
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":[]}
+changed index
+·{"mode":"skip","paths":["note.md"],"reasons":[],"tests":[]}
+··{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":["tests/contracts.test.js"]}
+snapshot passed
+···················································································································································································································································································-········-···········fixture targeted check
+······································································-······························fixture full executed
+········································································································································································································································-···············································································································································································{"mode":"skip","tests":[]}
+·········································································································································································································································································································································································································································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > new-stage在指针未释放时清理旧提示及双监听
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/potion-tip-lifecycle.test.js:86:24
+     84|     if (action === 'close') UI.hideOverlay();
+     85|     if (action === 'new-stage') { body.firstElementChild._battleToken …
+     86|     expect(tip.hidden).toBe(true);
+       |                        ^
+     87|     expect(remove).toHaveBeenCalledWith('pointerup', release);
+     88|     expect(remove).toHaveBeenCalledWith('pointercancel', release);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > 离开后的旧药水节点不重新绑定document监听
+AssertionError: expected [ [ 'pointerup', …(2) ], …(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   [
++     "pointerup",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++   [
++     "pointercancel",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++ ]
+
+ ❯ tests/potion-tip-lifecycle.test.js:111:100
+    109|     const add = vi.spyOn(document, 'addEventListener');
+    110|     pointer('pointerdown', potion);
+    111|     expect(add.mock.calls.filter(([event]) => event === 'pointerup' ||…
+       |                                                                                                    ^
+    112|   });
+    113| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/r7a-qa-live.test.js > loads isolated real view, plays one card, ends and exits without storage writes
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/r7a-qa-live.test.js:18:71
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 766 passed | 1 skipped (769)
+      Tests  3 failed | 8045 passed | 7 skipped (8055)
+   Start at  18:08:47
+   Duration  909.62s (transform 9.53s, setup 0ms, collect 101.52s, tests 409.47s, environment 233.35s, prepare 50.65s)
+
+[gate] FAIL：全量 Vitest 失败（exit 1）

@@ -1,0 +1,96 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+ ❯ tests/potion-tip-lifecycle.test.js (10 tests | 2 failed) 1066ms
+   ✓ 药水提示全局监听生命周期 > pointerup同时移除两个终止监听，并保持提示显隐 99ms
+   ✓ 药水提示全局监听生命周期 > pointercancel同时移除两个终止监听，并保持提示显隐 49ms
+   ✓ 药水提示全局监听生命周期 > mouseleave同时移除两个终止监听，并保持提示显隐 60ms
+   ✓ 药水提示全局监听生命周期 > replace在指针未释放时清理旧提示及双监听 47ms
+   ✓ 药水提示全局监听生命周期 > mode在指针未释放时清理旧提示及双监听 36ms
+   ✓ 药水提示全局监听生命周期 > close在指针未释放时清理旧提示及双监听 45ms
+   × 药水提示全局监听生命周期 > new-stage在指针未释放时清理旧提示及双监听 50ms
+     → expected false to be true // Object.is equality
+   ✓ 药水提示全局监听生命周期 > 100次普通按下/松开及药水栏替换不保留旧cancel回调  630ms
+   × 药水提示全局监听生命周期 > 离开后的旧药水节点不重新绑定document监听 29ms
+     → expected [ [ 'pointerup', …(2) ], …(1) ] to deeply equal []
+   ✓ 药水提示全局监听生命周期 > 同一药水栏重复渲染保留节点，悬停/移开仍可使用 22ms
+ ❯ tests/r7a-qa-live.test.js (1 test | 1 failed) 741ms
+   × loads isolated real view, plays one card, ends and exits without storage writes 740ms
+     → expected false to be true // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > new-stage在指针未释放时清理旧提示及双监听
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/potion-tip-lifecycle.test.js:86:24
+     84|     if (action === 'close') UI.hideOverlay();
+     85|     if (action === 'new-stage') { body.firstElementChild._battleToken …
+     86|     expect(tip.hidden).toBe(true);
+       |                        ^
+     87|     expect(remove).toHaveBeenCalledWith('pointerup', release);
+     88|     expect(remove).toHaveBeenCalledWith('pointercancel', release);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/potion-tip-lifecycle.test.js > 药水提示全局监听生命周期 > 离开后的旧药水节点不重新绑定document监听
+AssertionError: expected [ [ 'pointerup', …(2) ], …(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   [
++     "pointerup",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++   [
++     "pointercancel",
++     [Function hidePotionTip],
++     {
++       "once": true,
++     },
++   ],
++ ]
+
+ ❯ tests/potion-tip-lifecycle.test.js:111:100
+    109|     const add = vi.spyOn(document, 'addEventListener');
+    110|     pointer('pointerdown', potion);
+    111|     expect(add.mock.calls.filter(([event]) => event === 'pointerup' ||…
+       |                                                                                                    ^
+    112|   });
+    113| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/r7a-qa-live.test.js > loads isolated real view, plays one card, ends and exits without storage writes
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/r7a-qa-live.test.js:18:71
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 8 passed (11)
+   Start at  18:25:02
+   Duration  4.94s (transform 1.05s, setup 0ms, collect 1.77s, tests 1.81s, environment 831ms, prepare 144ms)
+
