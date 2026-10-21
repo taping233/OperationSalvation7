@@ -182,3 +182,67 @@ it.each(['revision','body'])('does not discard a scene after a newer %s owner ta
   expect(mountCombatOverlay(UI,'规则','<button>返回</button>','discover',scene)).toBe(false);
   expect(scene.isConnected).toBe(true);
 });
+
+it.each(['settings','discover','chest','wide'])('retained %s keeps coverage without borrowing room-view or changing its public mode',mode=>{
+  expect(document.body.classList.contains('page-covered')).toBe(true);
+  expect(mountCombatOverlay(UI,'面板','<button data-act="back">返回</button>',mode,scene)).toBe(true);
+  expect(UI._lastMode).toBe(mode);
+  expect(UI.el.overlay.classList.contains('room-view')).toBe(false);
+  expect(UI.el.overlay.classList.contains('pick-veil')).toBe(['discover','chest'].includes(mode));
+  expect(document.body.classList.contains('page-covered')).toBe(true);
+  expect(restoreCombatScene(UI,7)).toBe(true);
+  expect(document.body.classList.contains('page-covered')).toBe(true);
+  UI.showOverlay('普通','<button>继续</button>','settings');
+  expect(document.body.classList.contains('page-covered')).toBe(false);
+  expect(UI.el.overlay.matches('body #overlay:has(> .card > #ovBody > .battle-secondary-layer)')).toBe(false);
+});
+it.each(['settings','discover','chest','formation'])('ordinary %s retains its preexisting veil and coverage policy',mode=>{
+  UI.showOverlay('普通','<button>继续</button>',mode);
+  expect(UI.el.overlay.classList.contains('room-view')).toBe(false);
+  expect(UI.el.overlay.classList.contains('pick-veil')).toBe(['discover','chest'].includes(mode));
+  expect(document.body.classList.contains('page-covered')).toBe(mode==='chest');
+  expect(UI.el.ovBody.parentElement.classList.contains('battle')).toBe(false);
+});
+it('a newer ordinary hook owns coverage rather than the abandoned retained callback',()=>{
+  document.addEventListener('sdt-overlay-mode',()=>UI.showOverlay('普通','<button>继续</button>','settings'),{once:true});
+  expect(mountCombatOverlay(UI,'规则','<button>返回</button>','settings',scene)).toBe(false);
+  expect(document.body.classList.contains('page-covered')).toBe(false);
+  expect(UI.el.overlay.matches('body #overlay:has(> .card > #ovBody > .battle-secondary-layer)')).toBe(false);
+});
+it.each(['rules','settings','discover'])('native DOM styles keep %s shield in viewport with block battle geometry',kind=>{
+  // jsdom checks CSS declarations/selector lifecycle, not layout, pixels or timings.
+  const style=document.createElement('style');
+  style.textContent=['overlays','battle-stage','expedition-battle','battle-decision','battle-secondary-overlay'].map(name=>
+    readFileSync(`game/css/${name}.css`,'utf8').replace(/@import[^;]+;/g,'')).join('\n');
+  document.head.append(style);
+  try {
+    show('面板',`<section data-decision-content="${kind}"><button>返回</button></section>`,kind==='discover'?'discover':'settings');
+    const overlay=getComputedStyle(UI.el.overlay),card=getComputedStyle(UI.el.ovBody.parentElement),body=getComputedStyle(UI.el.ovBody);
+    expect(overlay.position).toBe('fixed');expect(overlay.inset).toBe('0');expect(overlay.padding).toBe('0px');
+    expect(card.position).toBe('relative');expect(card.display).toBe('block');expect(card.overflow).toBe('clip');
+    expect(card.width).toBe('100%');expect(card.height).toBe('100%');expect(card.flexDirection).toBe('row');
+    expect(body.display).toBe('block');expect(body.height).toBe('100%');expect(body.overflow).toBe('clip');
+    expect(restoreCombatScene(UI,7)).toBe(true);
+    expect(UI.el.overlay.classList.contains('room-view')).toBe(true);
+    expect(getComputedStyle(UI.el.ovBody.parentElement).display).toBe('block');
+  } finally {style.remove();}
+});
+it('formation presenter does not borrow retained viewport ownership',()=>{
+  show('编队','<section data-decision-content="formation"><button data-act="bossGo">开战</button></section>','wide');
+  expect(scene.isConnected).toBe(false);
+  expect(document.querySelector('.battle-secondary-layer')).toBeNull();
+  expect(document.body.classList.contains('page-covered')).toBe(false);
+  expect(UI.el.ovBody.parentElement.classList.contains('battle')).toBe(false);
+});
+it('immediate exit releases retained coverage and layer before a new battle starts',()=>{
+  show('规则','<section data-decision-content="rules"><button>返回</button></section>','settings');
+  UI.hideOverlay({immediate:true});
+  expect(document.body.classList.contains('page-covered')).toBe(false);
+  expect(UI.el.overlay.hidden).toBe(true);expect(scene.isConnected).toBe(false);
+  expect(document.querySelector('.battle-secondary-layer')).toBeNull();
+  UI.showOverlay('','<div class="battle-stage sts" id="newBattle"></div>','battle');
+  expect(UI.el.overlay.classList.contains('room-view')).toBe(true);
+  expect(document.body.classList.contains('page-covered')).toBe(true);
+  expect(document.querySelector('#newBattle')).not.toBeNull();
+  expect(restoreCombatScene(UI,7)).toBe(false);
+});

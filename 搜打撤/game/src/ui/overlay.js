@@ -144,7 +144,7 @@ export const overlayMethods = {
     // 实测卡牌库打开时标题雪花+余烬继续跑，帧率被拖到 10fps。
     // 半透明弹窗（背包/事件/场景）底下画面可见，不置位。
     document.body.classList.toggle('page-covered',
-      this.el.overlay.classList.contains('opaque') ||
+      !!options.battleBody || this.el.overlay.classList.contains('opaque') ||
       this.el.overlay.classList.contains('room-view') ||
       mode === 'chest');
     // 替代 winter.css 的 body:has(#overlay.opaque) 选择器：:has 会在 overlay 子树
