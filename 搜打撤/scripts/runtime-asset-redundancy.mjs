@@ -9,16 +9,37 @@ import { RUNTIME_REDUNDANCY_REVIEW } from './runtime-asset-redundancy-review.mjs
 const sha256 = code => createHash('sha256').update(code.replaceAll('\r\n', '\n')).digest('hex');
 const posix = value => String(value).replace(/\\/g, '/');
 const JS_SOURCE_RE = /\.(?:[cm]?js|jsx|tsx?)$/;
-const ROOT_RE = /(?:assets\/|portraits\/frames\/|scenes\/|map-nodes\/)/;
+const ROOT_RE = /(?:assets\/|portraits\/frames\/|scenes\/|map-nodes\/|ui\/slot-)/;
 const isString = node => node?.type === 'Literal' && typeof node.value === 'string';
-const LEGACY_CHEST_FRAME_RE = /^scenes\/chests\/(?:small|medium|large|class|boss)-rig-640-v1\/frame-\d{2}\.webp$/;
+const LEGACY_CHEST_FRAME_RE = /^scenes\/chests\/(?:small|medium|large|class|boss)-rig-(?:640-v1|v1)\/frame-\d{2}\.webp$/;
 // Legacy and current safe timelines share frame-00 names. Match the retired rig
 // directory as well, so keeping safe-simple-v7 cannot restore unrelated rigs.
 const referenceNeedle = asset => LEGACY_CHEST_FRAME_RE.test(asset)
   ? path.posix.basename(path.posix.dirname(asset)) : path.posix.basename(asset);
+// These candidates retain their source bytes. A changed/missing source must be
+// reviewed again before omitting its whole family from a later production build.
+const retainedSourceFamily = asset => LEGACY_CHEST_FRAME_RE.test(asset) && asset.includes('-rig-v1/')
+  ? 'original-chest-rigs' : asset.startsWith('ui/slot-weather/') ? 'slot-weather' : null;
+const referenceNeedles = asset => {
+  const family = retainedSourceFamily(asset);
+  return [asset, referenceNeedle(asset), ...(family
+    ? [family === 'original-chest-rigs' ? 'rig-v1' : 'slot-weather'] : [])];
+};
 const pathNeedle = candidate => candidate.category === 'chests'
   ? referenceNeedle(candidate.path) : candidate.category === 'frames'
     ? path.posix.basename(candidate.path) : path.posix.basename(candidate.path, '.webp');
+
+const isJoinedAssetRoot = node => node.type === 'CallExpression' && node.callee.type === 'MemberExpression'
+  && (node.callee.property.name === 'join' || node.callee.property.value === 'join')
+  && node.callee.object.type === 'ArrayExpression'
+  && node.callee.object.elements.some(part => isString(part) && /^(?:\.{1,2}[\/\\])*[\/\\]?assets(?:[\/\\]|$)/.test(part.value));
+function hasJoinedAssetRoot(code) {
+  let found = false;
+  full(parse(code, { ecmaVersion: 'latest', sourceType: 'module' }), node => {
+    if (isJoinedAssetRoot(node)) found = true;
+  });
+  return found;
+}
 
 // Opaque paths cannot be proved unused by searching for filenames. Every
 // module constructing dynamic asset URLs needs an unchanged reviewed consumer.
@@ -46,6 +67,9 @@ export function hasOpaqueAssetPaths(code) {
       && node.quasis.some(part => ROOT_RE.test(part.value.cooked || part.value.raw))) opaque = true;
     if (node.type === 'BinaryExpression' && node.operator === '+'
       && [node.left, node.right].some(part => isString(part) && ROOT_RE.test(part.value))) opaque = true;
+    // Split asset roots can bypass template/concatenation matching entirely.
+    // Treat joined arrays rooted at assets as opaque, even when currently static.
+    if (isJoinedAssetRoot(node)) opaque = true;
   });
   return opaque;
 }
@@ -97,7 +121,7 @@ function catalogPaths(catalog) {
   return paths;
 }
 
-export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = RUNTIME_REDUNDANCY_REVIEW) {
+export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = RUNTIME_REDUNDANCY_REVIEW, sourceAssets = null) {
   const excludedAssets = new Set();
   const warnings = [];
   if (!sources) return { excludedAssets, warnings: ['Runtime source scan unavailable; retaining reviewed assets.'] };
@@ -133,6 +157,21 @@ export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = R
   }
   if (warnings.length) return { excludedAssets, warnings };
 
+  const changedSourceFamilies = new Set();
+  for (const candidate of review.candidates) {
+    const family = retainedSourceFamily(candidate.path);
+    if (!family) continue;
+    const actual = sourceAssets instanceof Map ? sourceAssets.get(candidate.path) : null;
+    if (!/^[a-f0-9]{64}$/.test(candidate.sourceSha256 || '')
+      || !Number.isSafeInteger(candidate.sourceBytes) || candidate.sourceBytes <= 0
+      || actual?.sha256 !== candidate.sourceSha256 || actual?.bytes !== candidate.sourceBytes) {
+      changedSourceFamilies.add(family);
+    }
+  }
+  for (const family of changedSourceFamilies) {
+    warnings.push(`Changed/missing reviewed source bytes for ${family}; retaining its source assets.`);
+  }
+
   const unverified = new Set();
   for (const [category, fingerprints] of Object.entries(review.consumerFingerprints)) {
     if (Object.entries(fingerprints).some(([filename, expected]) => !matchesFingerprint(filename, expected))) {
@@ -142,21 +181,21 @@ export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = R
   }
   const sourceText = [...records.values()];
   for (const candidate of review.candidates) {
-    if (unverified.has(candidate.category)) continue;
+    if (unverified.has(candidate.category) || changedSourceFamilies.has(retainedSourceFamily(candidate.path))) continue;
     if (candidate.category === 'frames') {
       const required = catalogPaths(catalogs?.[candidate.role]);
       if (!required) continue;
       const relative = candidate.path.slice(`portraits/frames/${candidate.role}/`.length);
       if (required.has(relative)) continue;
     }
-    const needle = pathNeedle(candidate);
-    if (sourceText.some(code => code.includes(candidate.path) || code.includes(needle))) continue;
+    const needles = [...referenceNeedles(candidate.path), pathNeedle(candidate)];
+    if (sourceText.some(code => needles.some(needle => code.includes(needle)))) continue;
     excludedAssets.add(candidate.path);
   }
   return { excludedAssets, warnings };
 }
 
-export function collectReviewedRuntimeAssetExclusions(projectRoot) {
+export function collectReviewedRuntimeAssetExclusions(projectRoot, review = RUNTIME_REDUNDANCY_REVIEW) {
   let sources;
   try { sources = readRuntimeReviewSources(projectRoot); }
   catch (error) {
@@ -169,7 +208,19 @@ export function collectReviewedRuntimeAssetExclusions(projectRoot) {
         `game/assets/portraits/frames/${role}/sprite-v1/animations.json`), 'utf8'));
     } catch { /* An absent/unknown catalog retains that role's legacy files. */ }
   }
-  return planReviewedRuntimeAssetExclusions(sources, catalogs);
+  // No cross-call cache: config/buildStart/closeBundle must observe source edits.
+  // Only retained source candidates carry this contract; historical approved
+  // deletions remain absent and must not be treated as unreadable source assets.
+  const sourceAssets = new Map();
+  for (const candidate of review.candidates) {
+    if (!retainedSourceFamily(candidate.path)) continue;
+    try {
+      const bytes = readFileSync(path.join(projectRoot, 'game/assets', candidate.path));
+      sourceAssets.set(candidate.path, { bytes: bytes.length,
+        sha256: createHash('sha256').update(bytes).digest('hex') });
+    } catch { /* Missing/unreadable bytes retain the complete reviewed family. */ }
+  }
+  return planReviewedRuntimeAssetExclusions(sources, catalogs, review, sourceAssets);
 }
 
 // The early manifest decision and the actual complete Rollup graph must agree.
@@ -205,8 +256,11 @@ export function assertExcludedRuntimeAssetReferences(modules, excludedAssets) {
       && hasOpaqueAssetPaths(code)) {
       throw new Error(`Unscanned dynamic game asset consumer ${id}; restore publication before building.`);
     }
+    if (id.includes('/game/') && JS_SOURCE_RE.test(id) && code.includes('join') && hasJoinedAssetRoot(code)) {
+      throw new Error(`Joined asset root in runtime graph ${id}; restore publication before building.`);
+    }
     for (const asset of excludedAssets) {
-      if (id.endsWith(`/assets/${asset}`) || code.includes(asset) || code.includes(referenceNeedle(asset))) {
+      if (id.endsWith(`/assets/${asset}`) || referenceNeedles(asset).some(needle => code.includes(needle))) {
         throw new Error(`Excluded runtime asset referenced by ${id}: ${asset}. Restore publication or review the selector before building.`);
       }
     }

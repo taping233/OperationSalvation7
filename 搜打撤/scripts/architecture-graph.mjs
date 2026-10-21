@@ -78,6 +78,7 @@ const BROWSER_ISOLATION_FORBIDDEN_IMPORTS = new Map([
 ]);
 const SESSION_KERNEL = 'run/game.session.kernel.js';
 const SESSION_BROWSER = 'run/game.session.browser.js';
+const SESSION_DEPENDENCIES = new Set(['core/mapData.js', 'core/renderer.fx.js']);
 const VIEW_MODULES = new Set([
   'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',
   'battle/view/battle.vfx.js', 'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js',
@@ -86,7 +87,7 @@ const VIEW_MODULES = new Set([
 // 流程域（基地/局外 + 局内流程）——纯规则/快照模块不得反向依赖。
 const FLOW_PREFIXES = ['hub/', 'run/'];
 // 规则里作为“依赖目标”写死的路径，同样纳入防失效自检。
-const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js', SESSION_KERNEL, SESSION_BROWSER]);
+const PROTECTED_TARGETS = new Set([...RUNTIME_SURFACE, 'core/sdt-facade.js', SESSION_KERNEL, SESSION_BROWSER, ...SESSION_DEPENDENCIES]);
 // 照相馆页面是大块首屏外模块，只允许轻门面动态加载；防止新增静态边把页面拉回首屏。
 const LAZY_PAGE_ENTRIES = new Map([
   ['hub/game.cardslib.page.js', 'hub/game.cardslib.js'],
@@ -139,6 +140,7 @@ export function analyzeModule(source, filename = '<module>') {
   const imports = [];
   const browserGlobals = [];
   const facadeGlobals = [];
+  const facadeImports = [];
   const add = (node, kind) => {
     const specifier = typeof node.source.value === 'string' ? node.source.value
       : node.source.type === 'TemplateLiteral' && !node.source.expressions.length
@@ -147,7 +149,16 @@ export function analyzeModule(source, filename = '<module>') {
     imports.push({ specifier, kind, line: node.loc.start.line });
   };
   simple(ast, {
-    ImportDeclaration: node => add(node, 'static'),
+    ImportDeclaration: node => {
+      add(node, 'static');
+      if (node.source.value.endsWith('/sdt-facade.js')) {
+        for (const binding of node.specifiers) {
+          if (binding.type !== 'ImportSpecifier' || binding.imported.name !== 'sdtDefine') {
+            facadeImports.push(`${binding.local.name}:${node.loc.start.line}`);
+          }
+        }
+      }
+    },
     ExportNamedDeclaration: node => { if (node.source) add(node, 'reexport'); },
     ExportAllDeclaration: node => add(node, 'reexport'),
     ImportExpression: node => add(node, 'dynamic'),
@@ -158,7 +169,7 @@ export function analyzeModule(source, filename = '<module>') {
       }
     },
   });
-  return { imports, browserGlobals, facadeGlobals };
+  return { imports, browserGlobals, facadeGlobals, facadeImports };
 }
 
 export function buildModuleGraph(sources) {
@@ -256,6 +267,12 @@ export function architectureViolations(graph) {
     }
     if (name === SESSION_KERNEL && module.browserGlobals.length) {
       violations.push(`${name}: 会话内核必须通过注入端口访问浏览器 ${module.browserGlobals.join(', ')}`);
+    }
+    if (name === SESSION_KERNEL && (module.facadeGlobals.length || module.facadeImports.length)) {
+      violations.push(`${name}: 会话内核只允许 sdtDefine 兼容发布，业务依赖须直接导入`);
+    }
+    if (SESSION_DEPENDENCIES.has(name) && module.browserGlobals.length) {
+      violations.push(`${name}: 会话基础依赖必须可在无浏览器环境求值 ${module.browserGlobals.join(', ')}`);
     }
   }
   return violations;

@@ -18,6 +18,7 @@ const AGENT_TOOL_TESTS = new Map([
 ]);
 // Known tools have direct contracts; other scripts retain contract/reference/sentinel fallback.
 export const WORKFLOW_TESTS = new Map([
+  ['scripts/check-type-coverage.mjs', ['tests/type-coverage.test.js', 'tests/workflow-cli-integration.test.js']],
   ['scripts/build-artifact-manifest.mjs', ['tests/build-artifact-manifest.test.js']],
   ['scripts/video-review.mjs', ['tests/video-review.test.js']],
   ['scripts/runtime-trace-alignment.mjs', ['tests/runtime-trace-alignment.test.js']],

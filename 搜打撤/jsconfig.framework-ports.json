@@ -4,5 +4,9 @@
     "lib": ["ESNext", "DOM"], "allowJs": true, "checkJs": false,
     "strict": true, "skipLibCheck": true, "noEmit": true, "types": []
   },
-  "files": ["tests/framework-battle-ports-types.fixture.ts"]
+  "files": [
+    "tests/framework-battle-ports-types.fixture.ts",
+    "game/src/battle/core/battle.effect-assembly.domain.js",
+    "game/src/battle/core/battle.snapshot-projection.domain.js"
+  ]
 }

@@ -1,23 +1,9 @@
 import { spawn } from 'node:child_process';
+import { auditTypeCoverage, TYPE_CONFIGS } from './check-type-coverage.mjs';
 import { fileURLToPath } from 'node:url';
 
 const tscPath = fileURLToPath(new URL('../node_modules/typescript/bin/tsc', import.meta.url));
-const configs = [
-  'jsconfig.framework-boundaries.json',
-  // Battle command/receipt contracts only; the legacy factory body is outside strict checking.
-  'jsconfig.framework-ports.json',
-  'jsconfig.json',
-  'jsconfig.battle-settlement.json',
-  'jsconfig.battle-snapshot.json',
-  'jsconfig.card-rules.json',
-  'jsconfig.strict-foundations.json',
-  // Checks only the new selection-flow external ports via its fixture; its legacy runtime body is not strict-checked.
-  'jsconfig.strict-selection.json',
-  // Strict-checks pure hand-selection/discovery rules, not the legacy battle runtime integration.
-  'jsconfig.strict-hand-selection.json',
-  // DEBT-2 strict 扩面第一批（10-02）：ui 域四文件纯注释级达标，tsc 门常驻。
-  'jsconfig.strict-ui.json',
-];
+const configs = TYPE_CONFIGS;
 
 // configs 清单中的配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。
 function runConfig(config) {
@@ -40,4 +26,11 @@ for (const result of results) {
   if (!result.ok) failed = true;
 }
 
+const coverage = await auditTypeCoverage();
+const missing = coverage.files.filter(file => !file.checkedBy.length);
+process.stdout.write(`Implementation type coverage: ${coverage.implementationChecked}/${coverage.denominator}; strict: ${coverage.strictChecked}/${coverage.denominator}\n`);
+if (missing.length) {
+  process.stderr.write(`Unchecked implementation files:\n${missing.map(file => file.file).join('\n')}\n`);
+  failed = true;
+}
 process.exitCode = failed ? 1 : 0;

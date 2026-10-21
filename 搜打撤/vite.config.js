@@ -77,21 +77,41 @@ function getVerifiedRuntimeAssetAliases() {
 }
 
 // 已核验的宝箱/立绘帧及权威 itemArt 等字节别名，从发布清单与副本中省略旧键文件。
-// 若映射被恢复为独立素材，或两份源文件发生分歧，则自动保留两份。
-function getAliasedDuplicateAssets() {
-  if (aliasedDuplicateAssets) return aliasedDuplicateAssets;
-  aliasedDuplicateAssets = new Set(getVerifiedRuntimeAssetAliases().keys());
+// 完整配置时若映射已恢复或源文件分歧，则保留两份；构建阶段内变化须重新配置。
+function collectAliasedDuplicateAssets(aliases) {
+  const duplicates = new Set(aliases.keys());
   const mapping = JSON.parse(readFileSync(path.join(GAME_ROOT, 'data', 'art-mapping.json'), 'utf8'));
-  if (mapping.itemArt?.[ITEM_ART_ALIAS.id] !== ITEM_ART_ALIAS.target) return aliasedDuplicateAssets;
+  if (mapping.itemArt?.[ITEM_ART_ALIAS.id] !== ITEM_ART_ALIAS.target) return duplicates;
   for (const prefix of ['cards/items', 'thumbs/cards/items']) {
     const oldAsset = `${prefix}/${ITEM_ART_ALIAS.id}.webp`;
     const targetAsset = `${prefix}/${ITEM_ART_ALIAS.target}.webp`;
     const oldPath = path.join(ASSETS_ROOT, ...oldAsset.split('/'));
     const targetPath = path.join(ASSETS_ROOT, ...targetAsset.split('/'));
     if (existsSync(oldPath) && existsSync(targetPath)
-      && readFileSync(oldPath).equals(readFileSync(targetPath))) aliasedDuplicateAssets.add(oldAsset);
+      && readFileSync(oldPath).equals(readFileSync(targetPath))) duplicates.add(oldAsset);
   }
+  return duplicates;
+}
+
+function getAliasedDuplicateAssets() {
+  if (!aliasedDuplicateAssets) aliasedDuplicateAssets = collectAliasedDuplicateAssets(getVerifiedRuntimeAssetAliases());
   return aliasedDuplicateAssets;
+}
+
+function collectRuntimeAssetAliasPlan() {
+  // Fresh evidence, independent of both the scanner's result and active caches.
+  const aliases = new Map(collectVerifiedRuntimeAssetAliases(ASSETS_ROOT));
+  return { aliases, omitted: new Set(collectAliasedDuplicateAssets(aliases)) };
+}
+
+function assertRuntimeAssetAliasPlanUnchanged(expected, actual, phase) {
+  const sameAliases = expected.aliases.size === actual.aliases.size
+    && [...expected.aliases].every(([alias, canonical]) => actual.aliases.has(alias) && actual.aliases.get(alias) === canonical);
+  const sameOmissions = expected.omitted.size === actual.omitted.size
+    && [...expected.omitted].every(asset => actual.omitted.has(asset));
+  if (!sameAliases || !sameOmissions) {
+    throw new Error(`[assets] ${phase}: runtime asset alias/omission plan changed; restart with a fresh build configuration.`);
+  }
 }
 
 // 递归收集目录下图片文件，返回相对 assets/ 的 POSIX 路径
@@ -170,16 +190,23 @@ function assetFileName(assetInfo) {
 // 只复制无法由 Vite 静态分析的动态资源族；其余图片、场景和音乐交给
 // new URL(..., import.meta.url) / CSS 管线哈希，避免产物同时保留哈希版和原始版。
 function copyStatic() {
+  let aliasPlan = null;
   return {
     name: 'copy-static',
     apply: 'build',
     config(_config, { command }) {
       verifiedRuntimeAssetAliases = null;
       aliasedDuplicateAssets = null;
+      aliasPlan = null;
       reviewedRuntimeAssetExclusions = command === 'build'
         ? collectReviewedRuntimeAssetExclusions(ROOT).excludedAssets : new Set();
       configuredRuntimeAssetExclusions = command === 'build'
         ? new Set(reviewedRuntimeAssetExclusions) : null;
+      if (command === 'build') {
+        aliasPlan = collectRuntimeAssetAliasPlan();
+        verifiedRuntimeAssetAliases = new Map(aliasPlan.aliases);
+        aliasedDuplicateAssets = new Set(aliasPlan.omitted);
+      }
       return {
         define: {
           __RUNTIME_ASSET_ALIASES__: JSON.stringify(command === 'build'
@@ -191,16 +218,20 @@ function copyStatic() {
       };
     },
     buildStart() {
-      // Config instances can be reused: changed source frames must be rechecked,
-      // rather than inheriting an alias decision from the previous build.
-      verifiedRuntimeAssetAliases = null;
-      aliasedDuplicateAssets = null;
+      // Define injection already used this plan. Recheck before any cleanup or
+      // manifest writes; never silently refresh one half of a configured build.
+      const freshAliasPlan = collectRuntimeAssetAliasPlan();
+      if (aliasPlan) assertRuntimeAssetAliasPlanUnchanged(aliasPlan, freshAliasPlan, 'buildStart');
       const publication = collectReviewedRuntimeAssetExclusions(ROOT);
       // The injected alias dictionary and generated manifests must describe the
       // same selection. Changed sources require a fresh build configuration.
       if (configuredRuntimeAssetExclusions) {
         assertRuntimeExclusionPlanUnchanged(configuredRuntimeAssetExclusions, publication.excludedAssets);
       }
+      // Direct hook callers without config establish their initial plan here.
+      aliasPlan = freshAliasPlan;
+      verifiedRuntimeAssetAliases = new Map(aliasPlan.aliases);
+      aliasedDuplicateAssets = new Set(aliasPlan.omitted);
       reviewedRuntimeAssetExclusions = publication.excludedAssets;
       for (const warning of publication.warnings) console.warn(`[assets] ${warning}`);
       console.log(`[assets] reviewed unused production images omitted: ${reviewedRuntimeAssetExclusions.size}`);
@@ -211,6 +242,9 @@ function copyStatic() {
       writeThumbManifest();
     },
     closeBundle() {
+      // Rollup may already have emitted files. Reject before copy/version writes;
+      // this relationship guard does not freeze bytes or eliminate scan/copy races.
+      if (aliasPlan) assertRuntimeAssetAliasPlanUnchanged(aliasPlan, collectRuntimeAssetAliasPlan(), 'closeBundle');
       const srcAssets = path.join(GAME_ROOT, 'assets');
       const runtimeModules = typeof this?.getModuleIds === 'function'
         ? [...this.getModuleIds()].map(id => this.getModuleInfo(id)).filter(Boolean)
