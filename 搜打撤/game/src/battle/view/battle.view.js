@@ -496,7 +496,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     let restored = false;
     if (!backgroundOnly) {
       const finishRestore = traceContext && beginRuntimeStage('battle-restore-sync', traceContext);
-      try { restored = restoreCombatScene(UI, snapshot.battleToken, { isCurrent }); }
+      try { restored = restoreCombatScene(UI, snapshot.battleToken, { isCurrent, traceContext }); }
       finally { finishRestore && finishRestore(); }
     }
     if (!isCurrent()) return;

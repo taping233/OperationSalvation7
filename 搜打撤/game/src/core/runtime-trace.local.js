@@ -2,7 +2,7 @@ import { connectRuntimeStages, RUNTIME_STAGES } from './runtime-trace-stages.loc
 import { registerRuntimeTracePanel } from './runtime-trace-panel.local.js';
 // Explicit opt-in, local-only evidence. No game state, text, URLs or identifying content collected.
 export const TRACE_LIMIT = 400;
-export const TRACE_REVISION = 'runtime-interactions-20261021-5';
+export const TRACE_REVISION = 'runtime-interactions-20261021-6';
 const KINDS = new Set(['start', 'input', 'dom-update', 'frame-opportunity', 'longtask', 'sync', 'visibility', 'stop', 'stage', 'event-timing']);
 const ACTIONS = new Set(['card', 'button', 'escape', 'other']);
 const PAGES = new Set(['battle', 'hub', 'departure', 'overlay', 'base']);

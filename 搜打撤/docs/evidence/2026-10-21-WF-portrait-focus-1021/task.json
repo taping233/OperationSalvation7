@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-portrait-focus-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_portrait_focus_batch",
+  "goal": "Atomic portrait handoff and nested restore diagnostic boundaries",
+  "paths": [
+    "game/src/battle/view/battle.frames.js",
+    "tests/battle-frames-ownership.test.js",
+    "tests/battle-frames-lifecycle.test.js",
+    "game/src/battle/view/battle.secondary-overlay.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/core/runtime-trace-stages.local.js",
+    "game/src/core/runtime-trace.local.js",
+    "tests/battle-render-runtime-trace.test.js",
+    "tests/battle-restore-boundaries.test.js",
+    "tests/runtime-trace-stages.local.test.js",
+    "docs/runtime-trace.md",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "Exact reviewed batch and normal frozen FULL",
+    "New-SHA private browser verifies cold/Discover handoff and original viewport and focus"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Merged201 tests; standard build original budgets;813 inputs1595 outputs reconciled",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Frozen FULL/hook external receipt pending; publication and browser parent-owned"
+  ],
+  "updatedAt": "2026-10-21T16:26:00.000Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

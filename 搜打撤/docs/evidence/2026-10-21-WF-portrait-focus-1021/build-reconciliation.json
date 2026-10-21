@@ -1,0 +1,22 @@
+{
+  "buildReusedNotRerun": false,
+  "inputCount": 812,
+  "extraNarrativeInputCount": 1,
+  "outputCount": 1595,
+  "outputBytes": 171890556,
+  "chunks": {
+    "entry": {
+      "path": "assets/js/index-DWHGfEfj.js",
+      "gzipBytes": 368491,
+      "bytes": 1107897
+    },
+    "battle": {
+      "path": "assets/js/battle.view-BG2CcRl5.js",
+      "gzipBytes": 67135,
+      "bytes": 189638
+    }
+  },
+  "entryBudgetBytes": 368640,
+  "sameDependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "buildOutputDirectory": "/tmp/portrait-focus-build-20261021/desktop-app/game"
+}

@@ -1,4 +1,5 @@
 import '../../ui/feedback-theme.js';
+import { beginRuntimeStage } from '../../core/runtime-trace-stages.local.js';
 import '../../../css/battle-secondary-overlay.css';
 
 // The callback runs at the normal overlay body-write boundary, after its hooks.
@@ -48,19 +49,24 @@ export function mountCombatOverlay(UI, title, html, mode, scene) {
   return true;
 }
 
-export function restoreCombatScene(UI, token, { isCurrent = () => true } = {}) {
+export function restoreCombatScene(UI, token, { isCurrent = () => true, traceContext } = {}) {
   const body = UI.el.ovBody;
   const layer = UI.el.ovBody?.querySelector('.battle-secondary-layer');
   const scene = UI.el.ovBody?.querySelector('.battle-stage');
   if (!layer || !scene || scene._battleToken !== token) return false;
   const battleBody = retainedBody(UI, body, scene, isCurrent);
-  UI.showOverlay('', '', 'battle', { battleBody });
+  const finishShow = traceContext && beginRuntimeStage('battle-restore-show-sync', traceContext);
+  try { UI.showOverlay('', '', 'battle', { battleBody }); }
+  finally { if (finishShow) finishShow(); }
   if (!battleBody()) return false;
-  scene.removeAttribute('inert');
-  scene.removeAttribute('aria-hidden');
-  const target = scene._secondaryReturnFocus;
-  delete scene._secondaryReturnFocus;
-  if (target?.isConnected && scene.contains(target) && !target.matches(':disabled') && !target.closest('[hidden], [inert], [aria-hidden="true"]')) target.focus({ preventScroll:true });
+  const finishFocus = traceContext && beginRuntimeStage('battle-restore-focus-sync', traceContext);
+  try {
+    scene.removeAttribute('inert');
+    scene.removeAttribute('aria-hidden');
+    const target = scene._secondaryReturnFocus;
+    delete scene._secondaryReturnFocus;
+    if (target?.isConnected && scene.contains(target) && !target.matches(':disabled') && !target.closest('[hidden], [inert], [aria-hidden="true"]')) target.focus({ preventScroll:true });
+  } finally { if (finishFocus) finishFocus(); }
   UI._hasBattleStage = true;
   return true;
 }

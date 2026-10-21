@@ -115,15 +115,16 @@ afterEach(() => {
 
 function collect() {
   const rows = [], context = { interaction: 1 };
+  let latest = context;
   disconnect = connectRuntimeStages({
-    capture: () => context,
+    capture: () => latest,
     begin(stage, captured) {
       const row = { stage, context: captured, finished: false }; rows.push(row);
       return () => { expect(row.finished).toBe(false); row.finished = true; };
     },
   });
   observed.captures = observed.begins = 0;
-  return { rows, context };
+  return { rows, context, setContext(value) { latest = value; } };
 }
 const labels = rows => rows.map(row => row.stage);
 const finished = rows => rows.every(row => row.finished);
@@ -160,7 +161,7 @@ describe('opt-in synchronous battle render phases', () => {
     else if (phase === 'shell') { UI.showOverlay('cold', '<p>cold</p>', 'settings'); onOverlay = () => { throw error; }; }
     else observed.handError = error;
     const { rows } = collect(); expect(() => render()).toThrow(error);
-    expect(labels(rows)).toEqual(phase === 'restore' ? ['battle-render-sync', 'battle-restore-sync'] : phase === 'shell'
+    expect(labels(rows)).toEqual(phase === 'restore' ? ['battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync'] : phase === 'shell'
       ? ['battle-render-sync', 'battle-restore-sync', 'battle-shell-sync']
       : ['battle-render-sync', 'battle-restore-sync', 'battle-shell-sync', 'battle-hand-sync']);
     expect(finished(rows)).toBe(true);
@@ -177,7 +178,7 @@ describe('opt-in synchronous battle render phases', () => {
     start({ many: false }); const scene = stage(); actions.get('btBossRules')();
     expect(UI.el.ovBody.querySelector('.battle-secondary-layer')).not.toBeNull();
     const { rows, context } = collect(); render();
-    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-shell-sync', 'battle-hand-sync']);
+    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync', 'battle-restore-focus-sync', 'battle-shell-sync', 'battle-hand-sync']);
     expect(stage()).toBe(scene); expect(scene.hasAttribute('inert')).toBe(false);
     expect(UI.el.ovBody.querySelector('.battle-secondary-layer')).toBeNull();
     expect(finished(rows)).toBe(true); expect(rows.every(row => row.context === context)).toBe(true);
@@ -186,16 +187,24 @@ describe('opt-in synchronous battle render phases', () => {
     start({ many: false }); actions.get('btBossRules')();
     const { rows } = collect(); onOverlay = () => start({ many:false, suffix:'new', flushFrames:false });
     render();
-    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync']);
+    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync']);
     expect(finished(rows)).toBe(true);
   });
   it('keeps independent totals when restoring a modal reenters rendering', () => {
     start({ many: false }); actions.get('btBossRules')();
     const { rows } = collect(); onOverlay = () => { set$energy(4); render(); };
     render();
-    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-render-sync', 'battle-restore-sync', 'battle-shell-sync', 'battle-hand-sync']);
+    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync', 'battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync', 'battle-restore-focus-sync', 'battle-shell-sync', 'battle-hand-sync']);
     expect(observed.captures).toBe(2); expect(finished(rows)).toBe(true);
     expect(node('.sts-energy b').textContent).toBe('4');
+  });
+  it('retains renderer context when a show hook changes the latest diagnostic input', () => {
+    start({ many: false }); actions.get('btBossRules')();
+    const { rows, context, setContext } = collect();
+    onOverlay = () => setContext({ interaction: 2 }); render();
+    expect(labels(rows)).toEqual(['battle-render-sync', 'battle-restore-sync', 'battle-restore-show-sync', 'battle-restore-focus-sync', 'battle-shell-sync', 'battle-hand-sync']);
+    expect(rows.every(row => row.context === context && row.finished)).toBe(true);
+    expect(observed.captures).toBe(1);
   });
   it('retains independent overlapping totals for genuinely reentrant renders', () => {
     start({ many: false }); UI.showOverlay('cold', '<p>cold</p>', 'settings');

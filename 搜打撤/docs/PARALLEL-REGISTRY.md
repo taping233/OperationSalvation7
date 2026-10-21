@@ -1237,3 +1237,7 @@ Friday 2026-10-21 13:09 UTC / WF-frame-commit-1021：两个已独审候选按冻
 Friday 2026-10-21 14:31 UTC / WF-restore-phase-1021：单标签恢复计时按已审字节整合，编辑释放；本会话仅持有自有验收目录及冻结 index 验证进程。78 项定向、812+ narrative 输入与1595产物已核对，正常 FULL 未预报通过；正式浏览器测量留父会话，旧候选和其他属地保留。
 
 Friday 2026-10-21 15:30 UTC / WF-retained-viewport-1021：已审视口/背景覆盖补丁整合，编辑释放；本会话仅持有自有验收目录及冻结 index 验证进程。73项定向与812+1输入/1595产物核对，正常 FULL 未预报通过；正式私有浏览器由父会话核验，其他候选和属地保留。
+
+Friday 2026-10-21 16:24 UTC / WF-portrait-focus-1021：整合已审静态立绘首帧交接与 show/focus 诊断子段；持有本批源码、架构/台账、自有证据及 /tmp/portrait-focus-build-20261021（无端口）。保留 v35 viewport；集中 focused/build/FULL 待验，不推送部署。
+
+Friday 2026-10-21 16:26 UTC / WF-portrait-focus-1021：源码编辑释放，持有自有验收目录/冻结 index；合并201项定向和标准构建原预算通过，812+1输入/1595输出已核。正常 FULL/hook 未预报通过；正式新 SHA 实页交父会话，其他属地不动。

@@ -101,7 +101,7 @@ function mount(token = 1) {
   return document.getElementById('ovBody');
 }
 beforeEach(() => { pixi.onRender = null; pixi.loaded.length = 0; pixi.unloaded.length = 0; pixi.inFlight = 0; pixi.started = 0; pixi.stopped = 0; });
-afterEach(async () => { for (const release of releaseProbes) release(); releaseProbes.clear(); globalThis.fetch = probeFetchFallback; pixi.finishLoad?.(); pixi.loadGate = null; await hide(); document.querySelectorAll('#unitFrames').forEach(host => { if (!host.querySelector('canvas')) host.remove(); }); vi.restoreAllMocks(); vi.useRealTimers(); });
+afterEach(async () => { pixi.finishUnload?.(); pixi.unloadGate = null; for (const release of releaseProbes) release(); releaseProbes.clear(); globalThis.fetch = probeFetchFallback; pixi.finishLoad?.(); pixi.loadGate = null; await hide(); document.querySelectorAll('#unitFrames').forEach(host => { if (!host.querySelector('canvas')) host.remove(); }); vi.restoreAllMocks(); vi.useRealTimers(); });
 it('does not leave failed Pixi hosts behind after repeated initialization failures', async () => {
   pixi.failInit = true;
   const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
@@ -189,7 +189,7 @@ it('shares a cancelled pending URL with its new owner and unloads only after tha
   document.getElementById('overlay').hidden = true; body.replaceChildren();
   expect(oldImg.style.visibility).toBe(''); expect(cacheStats().roles).toBe(0);
   mount(51); const next = attach(body), img = body.querySelector('img');
-  await flush(); expect(pixi.loaded).toHaveLength(1); expect(img.style.visibility).toBe('hidden');
+  await flush(); expect(pixi.loaded).toHaveLength(1); expect(img.style.visibility).toBe('');
   pixi.finishLoad(); pixi.loadGate = null;
   expect(await first).toBe(false); expect(await next).toBe(true);
   expect(pixi.unloaded).not.toContain(oldLoad); expect(img.style.visibility).toBe('hidden');
@@ -583,4 +583,136 @@ it('reattaches a replaced image in the retained stage without leaving the frame 
   expect(cacheStats()).toMatchObject({ roles: 1, activeFrameSessions: 1 });
   expect(pixi.loaded).toHaveLength(initialLoads);
   expect(pixi.unloaded).toEqual([]);
+});
+
+it('keeps the static portrait until reload first paint, including release/load/probe waits', async () => {
+  const body = mount(301); await attach(body); await finishFrames('changwuyu');
+  const initialLoads = pixi.loaded.length;
+  pixi.unloadGate = new Promise(resolve => { pixi.finishUnload = resolve; });
+  const release = hide();
+  pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+  const img = body.querySelector('img');
+  const pending = attach(body);
+  expect(attach(body)).toBe(pending);
+  expect(img.style.visibility).toBe('');
+  expect(document.getElementById('unitFrames').hidden).toBe(true);
+  let releaseProbe;
+  globalThis.fetch = vi.fn(() => new Promise((resolve, reject) => {
+    releaseProbe = () => reject(new Error('controlled probe fallback')); releaseProbes.add(releaseProbe);
+  }));
+  pixi.finishUnload(); pixi.unloadGate = null; await release;
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+  expect(img.style.visibility).toBe('');
+  pixi.finishLoad(); pixi.loadGate = null;
+  await vi.waitFor(() => expect(releaseProbe).toBeTypeOf('function'));
+  expect(img.style.visibility).toBe('');
+  expect(document.getElementById('unitFrames').hidden).toBe(true);
+  pixi.onRender = () => {
+    expect(img.style.visibility).toBe('');
+    expect(document.getElementById('unitFrames').hidden).toBe(true);
+    pixi.onRender = null;
+  };
+  releaseProbe();
+  expect(await pending).toBe(true);
+  expect(img.style.visibility).toBe('hidden');
+  expect(document.getElementById('unitFrames').hidden).toBe(false);
+  globalThis.fetch = probeFetchFallback;
+  await vi.waitFor(() => expect(pixi.loaded.length).toBe(initialLoads * 2));
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(0));
+  expect(pixi.unloaded.length).toBe(initialLoads);
+  console.info('[portrait-handoff-resource-counts]', JSON.stringify({ initialLoads, reloadLoads: pixi.loaded.length - initialLoads, unloads: pixi.unloaded.length }));
+});
+
+it.each(['cold', 'reattach', 'warm'])('keeps static fallback through a failed %s paint and hands off if a later ticker retry occurs', async mode => {
+  vi.spyOn(performance, 'now').mockReturnValue(1000);
+  const body = mount(302);
+  if (mode !== 'cold') { await attach(body); await finishFrames('changwuyu'); }
+  if (mode === 'reattach') mount(302);
+  if (mode === 'warm') { const back = settingsPanel(body); await flush(); expect(back()).toBe(true); }
+  const img = body.querySelector('img');
+  const error = new Error('first paint rejected');
+  pixi.onRender = () => { pixi.onRender = null; expect(img.style.visibility).toBe(''); throw error; };
+  if (mode === 'warm') expect(() => attach(body)).toThrow(error);
+  else await expect(attach(body)).rejects.toBe(error);
+  expect(img.style.visibility).toBe('');
+  // Explicitly drive a later tick: a thrown cold/stopped warm paint need not restart itself.
+  pixi.tick();
+  expect(img.style.visibility).toBe('hidden');
+  expect(document.getElementById('unitFrames').hidden).toBe(false);
+});
+
+it.each(['hide', 'remove', 'token', 'figure', 'new-attach'])('does not hand off a paint whose owner changes during render (%s)', async change => {
+  const body = mount(303), img = body.querySelector('img');
+  let next;
+  pixi.onRender = () => {
+    pixi.onRender = null;
+    if (change === 'hide') hide();
+    if (change === 'remove') body.replaceChildren();
+    if (change === 'token') body.querySelector('.battle-stage')._battleToken = 304;
+    if (change === 'figure' || change === 'new-attach') {
+      mount(304);
+      if (change === 'new-attach') next = attach(body);
+    }
+  };
+  expect(await attach(body)).not.toBe(true);
+  expect(img.style.visibility).toBe('');
+  if (next) {
+    expect(await next).toBe(true);
+    expect(body.querySelector('img').style.visibility).toBe('hidden');
+  } else expect(document.getElementById('unitFrames').hidden).toBe(true);
+});
+
+it('does not repeat presentation DOM writes on subsequent animated paints', async () => {
+  const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+  const body = mount(305); await attach(body); await finishFrames('changwuyu');
+  const img = body.querySelector('img'), host = document.getElementById('unitFrames');
+  const staticWrites = vi.spyOn(img.style, 'visibility', 'set');
+  const hostWrites = vi.spyOn(host, 'hidden', 'set');
+  const ownershipQueries = vi.spyOn(body.querySelector('.sts-figure'), 'querySelector');
+  const mutations = [];
+  const observer = new MutationObserver(records => mutations.push(...records));
+  observer.observe(img, { attributes: true, attributeFilter: ['style'] });
+  observer.observe(host, { attributes: true, attributeFilter: ['hidden'] });
+  const rendered = pixi.rendered, loads = pixi.loaded.length, unloads = pixi.unloaded.length;
+  for (let i = 1; i <= 4; i++) { play(i % 2 ? 'atk' : 'hurt'); clock.mockReturnValue(1000 + i * 200); pixi.tick(); }
+  await flush(); observer.disconnect();
+  expect(pixi.rendered).toBeGreaterThan(rendered);
+  expect(mutations).toEqual([]);
+  expect(staticWrites).not.toHaveBeenCalled();
+  expect(hostWrites).not.toHaveBeenCalled();
+  expect(ownershipQueries).not.toHaveBeenCalled();
+  expect(pixi.loaded).toHaveLength(loads); expect(pixi.unloaded).toHaveLength(unloads);
+});
+
+
+it('keeps the fallback through a failed texture load and a later successful retry', async () => {
+  const body = mount(306), img = body.querySelector('img');
+  pixi.idleEnabled = false;
+  pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+  try {
+    const first = attach(body);
+    await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+    expect(img.style.visibility).toBe('');
+    pixi.finishLoad(); pixi.loadGate = null;
+    expect(await first).toBe(false);
+    expect(img.style.visibility).toBe('');
+    expect(document.getElementById('unitFrames').hidden).toBe(true);
+    pixi.idleEnabled = true;
+    // A failed set retains its existing cached result until the normal release boundary.
+    expect(await attach(body)).toBe(false);
+    await hide();
+    expect(await attach(body)).toBe(true);
+    expect(img.style.visibility).toBe('hidden');
+  } finally { pixi.idleEnabled = true; }
+});
+
+it('counts unchanged complete release/reload operations for the same battle', async () => {
+  const body = mount(307); await attach(body); await finishFrames('changwuyu');
+  const loads = pixi.loaded.length;
+  await hide();
+  expect(await attach(body)).toBe(true);
+  await vi.waitFor(() => expect(pixi.loaded).toHaveLength(loads * 2));
+  await vi.waitFor(() => expect(pixi.inFlight).toBe(0));
+  expect(pixi.unloaded).toHaveLength(loads);
+  console.info('[portrait-reload-complete-counts]', JSON.stringify({ initialLoads: loads, reloadLoads: pixi.loaded.length - loads, unloads: pixi.unloaded.length }));
 });

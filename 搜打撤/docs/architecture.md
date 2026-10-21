@@ -97,7 +97,7 @@
 - `renderer.js`：Canvas 地图编排与视觉特效；`renderer.primitives.js` 提供纯绘图工具；`render-scheduler.js` 决定何时绘制。
 - `audio/sound.js`：音频门面，装配 `sound.music.catalog.js`、`sound.music.player.js` 与 `sound.samples.player.js`。原创配乐按场景加载和切换；短音效仅播放已解码采样，未就绪时静默。旧声景和采样实现已退役清理。具体曲目与混音行为见[音频说明](audio-system.md)。
 - `motion.js`：基于 Motion Mini 的 DOM 微动效门面，并统一处理减少动态效果偏好。
-- `battle/view/battle.frames.js`：按需加载 PixiJS 播放战斗序列帧；`battle.vfx.js` 的轻量受击火花使用 WAAPI 动画。
+- `battle/view/battle.frames.js`：按需加载 PixiJS 播放战斗序列帧。attach 等待时保留静态兜底，当前 owner 的同步 render 成功返回后一次性交接宿主与静态图；交接记录随后清除，后续动画不重复交接 DOM 查询/写入。错误与加载/卸载策略不变，同步 render 返回不代表 GPU 呈现完成。`battle.vfx.js` 的轻量受击火花使用 WAAPI 动画。
 - `narrative.js`：使用 inkjs 读取预编译剧情；全部 10 个 tt6 事件（选项、文案与效果标注）定义在 `narrative/events.ink`，构建、测试和开发启动前由 `scripts/compile-narrative.mjs` 生成运行时代码；效果结算通过 `game.run.js` 的效果端口表执行。
 - 事件节点在核心结算前预留完成凭据，使首次待领奖保存同时记录事件完成；未承接且尚未发放时恢复原选择，已经发放的内容不因保存失败重新结算。事件选牌、骰子和重编的旧回调核对当前上下文；保存失败留页重试，原骰结果及已支付事实保留。
 
