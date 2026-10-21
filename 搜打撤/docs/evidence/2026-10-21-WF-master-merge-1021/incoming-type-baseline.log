@@ -1,0 +1,61 @@
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/cards/battle-value-context.js(21,45): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+game/src/cards/battle-value-context.js(28,42): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+Type-checking jsconfig.strict-hand-selection.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+Type-checking jsconfig.strict-ui.json
+game/src/cards/battle-value-context.js(21,45): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+game/src/cards/battle-value-context.js(28,42): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+Type-checking jsconfig.runtime.json
+game/src/battle/core/battle.engine.factory.domain.js(213,57): error TS2554: Expected 0-8 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/view/battle.frame-catalog-changwuyu.js(1,23): error TS2307: Cannot find module '../../../assets/portraits/frames/changwuyu/sprite-v1/animations.json' or its corresponding type declarations.
+game/src/battle/view/battle.frame-catalog-three-role.js(1,19): error TS2307: Cannot find module '../../../assets/portraits/frames/baita/sprite-v1/animations.json' or its corresponding type declarations.
+game/src/battle/view/battle.frame-catalog-three-role.js(2,22): error TS2307: Cannot find module '../../../assets/portraits/frames/heixiang/sprite-v1/animations.json' or its corresponding type declarations.
+game/src/battle/view/battle.frame-catalog-three-role.js(3,21): error TS2307: Cannot find module '../../../assets/portraits/frames/xingyue/sprite-v1/animations.json' or its corresponding type declarations.
+game/src/battle/view/battle.frame-catalog.js(1,16): error TS2307: Cannot find module '../../../assets/portraits/frames/wu/sprite-v1/animations.json' or its corresponding type declarations.
+game/src/battle/view/battle.view.js(428,102): error TS2554: Expected 0-2 arguments, but got 3.
+game/src/cards/card-frame-presentation.js(1,20): error TS2307: Cannot find module '../../data/card-frame-layout.json' or its corresponding type declarations.
+game/src/cards/card-photo-notes.js(12,23): error TS2307: Cannot find module '../../data/card-notes.json' or its corresponding type declarations.
+game/src/core/art-preload-plan.js(1,20): error TS2307: Cannot find module '../../data/card-frame-layout.json' or its corresponding type declarations.
+game/src/core/data-loader.js(16,18): error TS2307: Cannot find module '../../data/pets.json' or its corresponding type declarations.
+game/src/core/data-loader.js(17,26): error TS2307: Cannot find module '../../data/achievements.json' or its corresponding type declarations.
+game/src/core/data-loader.js(18,24): error TS2307: Cannot find module '../../data/art-mapping.json' or its corresponding type declarations.
+game/src/core/data-loader.js(19,20): error TS2307: Cannot find module '../../data/scenes.json' or its corresponding type declarations.
+game/src/core/data-loader.js(20,21): error TS2307: Cannot find module '../../data/map.json' or its corresponding type declarations.
+game/src/core/data-loader.js(21,23): error TS2307: Cannot find module '../../data/cards-sync.json' or its corresponding type declarations.
+game/src/core/mapData.js(3,21): error TS2307: Cannot find module '../../data/map.json' or its corresponding type declarations.
+game/src/ui/beginner-guide.js(1,23): error TS2307: Cannot find module '../../data/beginner-guide.json' or its corresponding type declarations.
+node:fs:1631
+  const result = binding.readdir(
+                         ^
+
+Error: ENOENT: no such file or directory, scandir '/tmp/merge-master-b7207a28-type-baseline/game/data'
+    at Object.readdirSync (node:fs:1631:26)
+    at filesUnder (file:///tmp/merge-master-b7207a28-type-baseline/scripts/check-type-coverage.mjs:15:13)
+    at auditTypeCoverage (file:///tmp/merge-master-b7207a28-type-baseline/scripts/check-type-coverage.mjs:29:26)
+    at file:///tmp/merge-master-b7207a28-type-baseline/scripts/check-types.mjs:29:24 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/tmp/merge-master-b7207a28-type-baseline/game/data'
+}
+
+Node.js v24.19.0

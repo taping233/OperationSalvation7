@@ -1,0 +1,529 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/runtime-trace-modal-controls-91052c8b/搜打撤
+
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on / or exempt a lookalike ID 73ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on /?runtimeTrace=0 or exempt a lookalike ID 15ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on /?runtimeTrace=true or exempt a lookalike ID 12ms
+ × tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > moves the exact opted-in panel inside the dialog while keeping every ordinary background inert 33ms
+   → expected <body class="page-covered">…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+ × tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > supports installation during a modal and survives repeated battle/settings body replacement 23ms
+   → expected <body …(1)>…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+ × tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > restores panel location, original inert state and opener after close, including interrupted close/reopen 20ms
+   → expected <body …(1)>…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+ × tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > includes only the registered diagnostic controls in the existing keyboard cycle 14ms
+   → expected [ 'gameFirst', 'gameLast' ] to deeply equal [ 'gameFirst', 'gameLast', …(4) ]
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening 518ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > keeps clear/stop/download on their normal click handlers without triggering gameplay or collecting diagnostic input 20ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not count diagnostic subtree updates or relocation as gameplay mutations, but keeps mixed app changes 11ms
+ × tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not resurrect removed panels and can destroy/reinstall while a modal remains open 13ms
+   → expected null to be <aside id="sdtRuntimeTrace" …(1)>…(4)</aside> // Object.is equality
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > exposes diagnostic buttons and live status inside the accessible modal 106ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order 53ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported 18ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable 12ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测 6ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > sets dialog semantics, isolates the background, traps Tab, and restores the opener 270ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > honors an explicit safe initialFocus selector and closes through Escape 268ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 收回大卡后的按键重复不会触发底层奖励离开 44ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌reward-card正文含返回/离开不会成为取消按钮 12ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌event-choice-card正文含返回/离开不会成为取消按钮 8ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌bt-card正文含返回/离开不会成为取消按钮 8ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 显式安全取消优先于猜测文案，并由 Esc 调用原返回操作 7ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过 4ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > closes immediately when reduced motion is enabled 3ms
+ ✓ tests/runtime-event-timing.local.test.js > matches timestamps/types, reports separate delays and remaps groups without touching private entry fields 8ms
+ ✓ tests/runtime-event-timing.local.test.js > drops unknown, ambiguous, mismatched and invalid timings, bounds matching and clears pending work 1ms
+ ✓ tests/runtime-event-timing.local.test.js > whitelists event fields in online and offline paths and leaves old traces compatible 2ms
+ ✓ tests/runtime-event-timing.local.test.js > registers only while opted in, degrades failures, disconnects and does not leak generic keyboard entries 33ms
+ ✓ tests/runtime-event-timing.local.test.js > collects matched inputs only and rejects stale entries across clear, visibility and stop 11ms
+ ✓ tests/runtime-event-timing.local.test.js > bounds anonymous mapping without reusing evicted or cleared group identities 6ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > does nothing without exact opt-in, including observer, frame, listeners and panel 12ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > exports the controlled build label without collecting the page URL 32ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > bounds memory, scrubs arbitrary text and clears counters 2ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > captures real event pathway, overlay update and frame opportunity with shared interaction ID, not text 12ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > records long tasks by entry time and disconnects all collection on pagehide 5ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > cancels pending frame intervals when visibility changes 4ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > tracks card drag start/release outside the hand without reading card identity 5ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > requires visible sync action, clear cancels old frame callbacks, download is explicit 6ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > collapsed reward shelf exposes its summary, not its hidden card actions 54ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > only the first direct summary is a native tab stop, including explicit initial focus 7ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > nested closed disclosures hide descendants but preserve actions within their first summary 12ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > Tab wraps through the visible summary rather than a collapsed action 9ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > Esc ignores inert, fieldset-disabled, collapsed and CSS-hidden cancellation actions 12ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > CSS-hidden targets are skipped while explicitly visible descendants remain available 11ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > is inert before explicit trace installation, with no clock or listener work 8ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > accepts only four fixed labels and strips arbitrary payloads 43ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > keeps async stages and subsequent scoped sync work on their original input 6ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > does not fabricate an interaction when no input was observed 4ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on clear 6ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on visibility 5ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on stop 4ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on destroy 3ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > restores scope after throw and rejects context from an earlier installation 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > moves the exact opted-in panel inside the dialog while keeping every ordinary background inert
+AssertionError: expected <body class="page-covered">…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,6 +1,38 @@
++ <body
++   class="page-covered"
++ >
++   
++     
++   <main
++     id="viewport"
++   >
++     
++       
++     <div
++       id="heroAva"
++       inert=""
++     >
++       旅
++     </div>
++     
++       
++     <button
++       id="opener"
++       inert=""
++     >
++       打开
++     </button>
+      <div
++       id="alreadyInert"
++       inert=""
++     >
++       原本不可交互
++     </div>
++     
++       
++     <div
+        aria-labelledby="ovTitle"
+        aria-modal="true"
+        class="room-view"
+        id="overlay"
+        role="dialog"
+@@ -28,9 +60,69 @@
+              id="gameLast"
+            >
+              查看
+            </button>
+          </div>
++       </div>
++       
++       
+      </div>
+      
+        
++     <button
++       id="background"
++       inert=""
++     >
++       背景操作
++     </button>
++     
++     
++   </main>
++   <button
++     id="outside"
++     inert=""
++   >
++     外部背景
++   </button>
++   <aside
++     id="sdtRuntimeTrace"
++     inert=""
++     style="position: fixed; right: 8px; bottom: 8px; z-index: 100000; background: rgb(17, 17, 17); color: white; padding: 8px; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: monospace; font: 12px monospace; max-width: 300px;"
++   >
++     <strong>
++       本地交互诊断
++     </strong>
++     <div>
++       未记录文字/存档；帧回调不是FPS或实际呈现。
+      </div>
++     <output
++       aria-live="polite"
++     >
++       记录中；长任务不可用（降级）；事件时序不可用（降级）
++     </output>
++     <div>
++       <button
++         data-trace="sync"
++       >
++         视频对时
++       </button>
++        
++       <button
++         data-trace="export"
++       >
++         下载JSON
++       </button>
++        
++       <button
++         data-trace="stop"
++       >
++         停止
++       </button>
++        
++       <button
++         data-trace="clear"
++       >
++         清空
++       </button>
++     </div>
++   </aside>
++ </body>
+
+ ❯ tests/runtime-trace-modal.test.js:71:36
+     69|     open();
+     70|     expect(panel()).toBe(original);
+     71|     expect(original.parentElement).toBe(UI.el.overlay);
+       |                                    ^
+     72|     expect(UI.el.ovBody.contains(original)).toBe(false);
+     73|     expect(original.closest('[role="dialog"][aria-modal="true"]')).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > supports installation during a modal and survives repeated battle/settings body replacement
+AssertionError: expected <body …(1)>…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,6 +1,38 @@
++ <body
++   class="page-covered page-opaque"
++ >
++   
++     
++   <main
++     id="viewport"
++   >
++     
++       
+      <div
++       id="heroAva"
++       inert=""
++     >
++       旅
++     </div>
++     
++       
++     <button
++       id="opener"
++       inert=""
++     >
++       打开
++     </button>
++     <div
++       id="alreadyInert"
++       inert=""
++     >
++       原本不可交互
++     </div>
++     
++       
++     <div
+        aria-labelledby="ovTitle"
+        aria-modal="true"
+        class="opaque"
+        id="overlay"
+        role="dialog"
+@@ -32,5 +64,64 @@
+          </div>
+        </div>
+        
+        
+      </div>
++     
++       
++     <button
++       id="background"
++       inert=""
++     >
++       背景操作
++     </button>
++     
++     
++   </main>
++   <button
++     id="outside"
++     inert=""
++   >
++     外部背景
++   </button>
++   <aside
++     id="sdtRuntimeTrace"
++     style="position: fixed; right: 8px; bottom: 8px; z-index: 100000; background: rgb(17, 17, 17); color: white; padding: 8px; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: monospace; font: 12px monospace; max-width: 300px;"
++   >
++     <strong>
++       本地交互诊断
++     </strong>
++     <div>
++       未记录文字/存档；帧回调不是FPS或实际呈现。
++     </div>
++     <output
++       aria-live="polite"
++     >
++       记录中；长任务不可用（降级）；事件时序不可用（降级）
++     </output>
++     <div>
++       <button
++         data-trace="sync"
++       >
++         视频对时
++       </button>
++        
++       <button
++         data-trace="export"
++       >
++         下载JSON
++       </button>
++        
++       <button
++         data-trace="stop"
++       >
++         停止
++       </button>
++        
++       <button
++         data-trace="clear"
++       >
++         清空
++       </button>
++     </div>
++   </aside>
++ </body>
+
+ ❯ tests/runtime-trace-modal.test.js:94:38
+     92|       open(mode);
+     93|       expect(panel()).toBe(original);
+     94|       expect(original.parentElement).toBe(UI.el.overlay);
+       |                                      ^
+     95|       expect(original.closest('[inert], [hidden]')).toBeNull();
+     96|       expect(UI._resolveOverlayInitialFocus()).toBe(document.getElemen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > restores panel location, original inert state and opener after close, including interrupted close/reopen
+AssertionError: expected <body …(1)>…(3)</body> to be <div id="overlay" …(5)>…(1)</div> // Object.is equality
+
+- Expected
++ Received
+
+@@ -1,6 +1,38 @@
++ <body
++   class="page-covered page-opaque"
++ >
++   
++     
++   <main
++     id="viewport"
++   >
++     
++       
++     <div
++       id="heroAva"
++       inert=""
++     >
++       旅
++     </div>
++     
++       
++     <button
++       id="opener"
++       inert=""
++     >
++       打开
++     </button>
+      <div
++       id="alreadyInert"
++       inert=""
++     >
++       原本不可交互
++     </div>
++     
++       
++     <div
+        aria-labelledby="ovTitle"
+        aria-modal="true"
+        class="opaque closing"
+        id="overlay"
+        role="dialog"
+@@ -28,9 +60,69 @@
+              id="gameLast"
+            >
+              查看
+            </button>
+          </div>
++       </div>
++       
++       
+      </div>
+      
+        
++     <button
++       id="background"
++       inert=""
++     >
++       背景操作
++     </button>
++     
++     
++   </main>
++   <button
++     id="outside"
++     inert=""
++   >
++     外部背景
++   </button>
++   <aside
++     id="sdtRuntimeTrace"
++     inert=""
++     style="position: fixed; right: 8px; bottom: 8px; z-index: 100000; background: rgb(17, 17, 17); color: white; padding: 8px; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: monospace; font: 12px monospace; max-width: 300px;"
++   >
++     <strong>
++       本地交互诊断
++     </strong>
++     <div>
++       未记录文字/存档；帧回调不是FPS或实际呈现。
+      </div>
++     <output
++       aria-live="polite"
++     >
++       记录中；长任务不可用（降级）；事件时序不可用（降级）
++     </output>
++     <div>
++       <button
++         data-trace="sync"
++       >
++         视频对时
++       </button>
++        
++       <button
++         data-trace="export"
++       >
++         下载JSON
++       </button>
++        
++       <button
++         data-trace="stop"
++       >
++         停止
++       </button>
++        
++       <button
++         data-trace="clear"
++       >
++         清空
++       </button>
++     </div>
++   </aside>
++ </body>
+
+ ❯ tests/runtime-trace-modal.test.js:108:36
+    106|     open('page'); vi.advanceTimersByTime(20);
+    107|     UI.hideOverlay();
+    108|     expect(original.parentElement).toBe(UI.el.overlay);
+       |                                    ^
+    109|     open('page'); vi.advanceTimersByTime(300);
+    110|     expect(UI.el.overlay.hidden).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > includes only the registered diagnostic controls in the existing keyboard cycle
+AssertionError: expected [ 'gameFirst', 'gameLast' ] to deeply equal [ 'gameFirst', 'gameLast', …(4) ]
+
+- Expected
++ Received
+
+  [
+    "gameFirst",
+    "gameLast",
+-   "sync",
+-   "export",
+-   "stop",
+-   "clear",
+  ]
+
+ ❯ tests/runtime-trace-modal.test.js:126:8
+    124|     install(); open();
+    125|     expect(UI._overlayFocusable().map(node => node.id || node.dataset.…
+    126|       .toEqual(['gameFirst', 'gameLast', 'sync', 'export', 'stop', 'cl…
+       |        ^
+    127|     control('clear').focus();
+    128|     const forward = new KeyboardEvent('keydown', { key: 'Tab', bubbles…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not resurrect removed panels and can destroy/reinstall while a modal remains open
+AssertionError: expected null to be <aside id="sdtRuntimeTrace" …(1)>…(4)</aside> // Object.is equality
+
+- Expected: 
+<aside
+  id="sdtRuntimeTrace"
+  style="position: fixed; right: 8px; bottom: 8px; z-index: 100000; background: rgb(17, 17, 17); color: white; padding: 8px; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: monospace; font: 12px monospace; max-width: 300px;"
+>
+  <strong>
+    本地交互诊断
+  </strong>
+  <div>
+    未记录文字/存档；帧回调不是FPS或实际呈现。
+  </div>
+  <output
+    aria-live="polite"
+  >
+    记录中；长任务不可用（降级）；事件时序不可用（降级）
+  </output>
+  <div>
+    <button
+      data-trace="sync"
+    >
+      视频对时
+    </button>
+     
+    <button
+      data-trace="export"
+    >
+      下载JSON
+    </button>
+     
+    <button
+      data-trace="stop"
+    >
+      停止
+    </button>
+     
+    <button
+      data-trace="clear"
+    >
+      清空
+    </button>
+  </div>
+</aside>
+
++ Received: 
+null
+
+ ❯ tests/runtime-trace-modal.test.js:197:56
+    195|     const oldTrace = trace; install(); const replacement = panel();
+    196|     oldTrace.destroy();
+    197|     expect(getOverlayRuntimeTracePanel(UI.el.overlay)).toBe(replacemen…
+       |                                                        ^
+    198|     trace.stop(); open();
+    199|     expect(getOverlayRuntimeTracePanel(UI.el.overlay)).toBe(replacemen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  5 failed | 49 passed (54)
+   Start at  17:17:44
+   Duration  3.40s (transform 216ms, setup 0ms, collect 551ms, tests 1.91s, environment 2.15s, prepare 368ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/runtime-trace-modal-controls-91052c8b/negative-control.json

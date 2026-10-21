@@ -1,0 +1,41 @@
+{
+  "patchSha256": "d06a2dc002448ef99d3ad38cbc46ec2664b2544d75a198b7cdb31f8cae1bd490",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+      "beforeSha256": "3a002f792baaeb59b859ebb6ca3367aa3d189b268f55193c878194da6ce64c6a",
+      "afterSha256": "6244796ead695b0c26d01a6b47221e85b98689c514376691ea9f00da95db09a8",
+      "bytes": 1071
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-material-state.test.js",
+      "beforeSha256": "fef77bf7bd9b845c966377b193fb9679b492d70ec8a5304f88172b64e9a3f55d",
+      "afterSha256": "c5a62ae5d1af84fb3fcc7e575cfd2b62b479339854fe53654c18003a9e2d6f39",
+      "bytes": 5187
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-existence.test.js",
+      "beforeSha256": null,
+      "afterSha256": "9a36b03a15dd14d247446af5d0aa8cc4d2b7eb8a3fb628e4c80f1999a1943bfd",
+      "bytes": 10681
+    },
+    {
+      "path": "搜打撤/docs/infusion-material-controls.md",
+      "beforeSha256": "5010e4305ce69af93462d501845043ff2f6be2dffe65278b3130dee08cda90a6",
+      "afterSha256": "800fa21eb7202974498b0d47b9337bc2127b491104035e21d8066f75fa5c77f1",
+      "bytes": 1376
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-infusion-existence-1021/README.md",
+      "beforeSha256": null,
+      "afterSha256": "92d900a7b161090704b69283d9019870592c4d2d0a4edc4c6fbd69cb8f6b66dd",
+      "bytes": 3550
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-infusion-existence-1021/counts.json",
+      "beforeSha256": null,
+      "afterSha256": "3fffc7e42acf06b4f647d69b1c5b36bbd07c4fc80f816019f9a4a36c580b9e48",
+      "bytes": 1548
+    }
+  ]
+}

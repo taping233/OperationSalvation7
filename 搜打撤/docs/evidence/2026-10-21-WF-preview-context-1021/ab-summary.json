@@ -1,0 +1,206 @@
+{
+  "original": {
+    "exitCode": 1,
+    "passed": 4,
+    "failed": 4,
+    "total": 8,
+    "counts": [
+      {
+        "cards": 9,
+        "lookups": 88,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 8,
+        "uidReads": 380,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 30,
+        "lookups": 256,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 8,
+        "uidReads": 3740,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 60,
+        "lookups": 496,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 8,
+        "uidReads": 14660,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cardId": "tt3-flame-storm",
+        "lookups": 88,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 8,
+        "uidReads": 380,
+        "text": [
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——"
+        ]
+      }
+    ],
+    "failures": [
+      "one real empty-field pointer hover resolves 9 raw hand entries once, not per target",
+      "one real empty-field pointer hover resolves 30 raw hand entries once, not per target",
+      "one real empty-field pointer hover resolves 60 raw hand entries once, not per target",
+      "uses the current catalog 风暴火球 with unchanged damage, cost and play wording"
+    ]
+  },
+  "stale-aim-context": {
+    "exitCode": 1,
+    "passed": 5,
+    "failed": 3,
+    "total": 8,
+    "counts": [
+      {
+        "cards": 9,
+        "lookups": 25,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 65,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 30,
+        "lookups": 46,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 485,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 60,
+        "lookups": 76,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 1850,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cardId": "tt3-flame-storm",
+        "lookups": 25,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 65,
+        "text": [
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——"
+        ]
+      }
+    ],
+    "failures": [
+      "one real empty-field pointer hover resolves 9 raw hand entries once, not per target",
+      "one real empty-field pointer hover resolves 30 raw hand entries once, not per target",
+      "one real empty-field pointer hover resolves 60 raw hand entries once, not per target"
+    ]
+  },
+  "candidate": {
+    "exitCode": 0,
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "counts": [
+      {
+        "cards": 9,
+        "lookups": 25,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 65,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 30,
+        "lookups": 46,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 485,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cards": 60,
+        "lookups": 76,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 1850,
+        "text": [
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：3 点法术伤害 费1—— 松手打出 ——"
+        ]
+      },
+      {
+        "cardId": "tt3-flame-storm",
+        "lookups": 25,
+        "cost": 8,
+        "capability": 8,
+        "handProjection": 1,
+        "uidReads": 65,
+        "text": [
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——",
+          "[[icon:bolt]] 直接伤害：4 点法术伤害 费2—— 松手打出 ——"
+        ]
+      }
+    ],
+    "failures": []
+  }
+}

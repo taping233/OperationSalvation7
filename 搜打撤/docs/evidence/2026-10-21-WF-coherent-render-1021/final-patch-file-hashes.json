@@ -1,0 +1,90 @@
+[
+  {
+    "path": "搜打撤/docs/architecture.md",
+    "sha256": "a331814b55735dadf53b11fee70a7663c25ebb493c3e5041d5910ec659b8d540"
+  },
+  {
+    "path": "搜打撤/docs/evidence/2026-10-21-WF-infusion-existence-1021/README.md",
+    "sha256": "92d900a7b161090704b69283d9019870592c4d2d0a4edc4c6fbd69cb8f6b66dd"
+  },
+  {
+    "path": "搜打撤/docs/evidence/2026-10-21-WF-infusion-existence-1021/counts.json",
+    "sha256": "3fffc7e42acf06b4f647d69b1c5b36bbd07c4fc80f816019f9a4a36c580b9e48"
+  },
+  {
+    "path": "搜打撤/docs/infusion-material-controls.md",
+    "sha256": "800fa21eb7202974498b0d47b9337bc2127b491104035e21d8066f75fa5c77f1"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.aim.js",
+    "sha256": "2ffd13e9c24b4f5693211b7187fb54990273e3709d45df2b7e0398086e5d3244"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.decision-shell.js",
+    "sha256": "ea6e1c6e61fd1204db2edc995a9c79f0ba81cdc6d9b405b39caa5300c3a19cc0"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+    "sha256": "9dd5695c7d9fa94c0df6cbce793bfae57cd387ef9d6bce61fffaf382d0d4fb70"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+    "sha256": "6244796ead695b0c26d01a6b47221e85b98689c514376691ea9f00da95db09a8"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.layers.js",
+    "sha256": "e827314d3990df56946e459881171b11dcd0264325a71b15c0a52d4529fd2ff6"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.secondary-overlay.js",
+    "sha256": "63c519344a614c3f063d0e8ed8ced2945f8faa13e87fde72b0b8515b5c1d6ebd"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+    "sha256": "4e8ceaecab7e92929ad2eb294a7c573c5619ec853f5dcb323ea756368dab6b20"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.view.js",
+    "sha256": "d055c894886f05638cb43f409f0e9fe8edd91e7645eb079c0a7cf124257d2e07"
+  },
+  {
+    "path": "搜打撤/game/src/r7a.qa.js",
+    "sha256": "88e1a5abb6d77d957571f1965a9067771f0b891f47e87ba5bccd1ff37e329e37"
+  },
+  {
+    "path": "搜打撤/tests/battle-hand-hit-input.test.js",
+    "sha256": "84ea7f7290b4fdd231775e7592717703afbc7453573c807345594e9664eb0654"
+  },
+  {
+    "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+    "sha256": "bf5b93f742b2d7b7ad5650e4861180d4c0d7801ec34057e91965842adcb1e702"
+  },
+  {
+    "path": "搜打撤/tests/battle-infusion-existence.test.js",
+    "sha256": "9a36b03a15dd14d247446af5d0aa8cc4d2b7eb8a3fb628e4c80f1999a1943bfd"
+  },
+  {
+    "path": "搜打撤/tests/battle-infusion-material-state.test.js",
+    "sha256": "c5a62ae5d1af84fb3fcc7e575cfd2b62b479339854fe53654c18003a9e2d6f39"
+  },
+  {
+    "path": "搜打撤/tests/battle-persistent-stage.test.js",
+    "sha256": "4b7e0659bdc69b70b61f3b2967cd1bf82f8010f75b3076eeba477747da0451e2"
+  },
+  {
+    "path": "搜打撤/tests/battle-stage-mounts.test.js",
+    "sha256": "7892015b04c46d3dc95744e69d944c2959833d159c6dc107ef49214a52cc38f3"
+  },
+  {
+    "path": "搜打撤/tests/battle-stage-validator.test.js",
+    "sha256": "d061fc304d458247872bba1778dec9ee7dda254de219a6805c861a0834d935a9"
+  },
+  {
+    "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+    "sha256": "f48f5405ea23be46205e92ca24b18dec0d12b98f93965c5c64543659e663d0a4"
+  },
+  {
+    "path": "搜打撤/tests/r7a-qa-live.test.js",
+    "sha256": "59bcca54113d5148e3861ea298ccd5a7d8cb88a4b553975a3dfa5932d65a5835"
+  }
+]

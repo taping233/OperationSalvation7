@@ -1,0 +1,25 @@
+{
+  "buildReusedNotRerun": true,
+  "authorManifestSha256": "ce046bb07720ee5ba19ea1001530a9b6d3418d1c29b761c1f38c26a309c793e0",
+  "inputCount": 812,
+  "extraNarrativeInputCount": 1,
+  "outputCount": 1595,
+  "outputBytes": 171889892,
+  "chunks": [
+    {
+      "path": "assets/js/battle.view-D3cxiYg_.js",
+      "gzipBytes": 67072
+    },
+    {
+      "path": "assets/js/index-5M_Abe4y.js",
+      "gzipBytes": 368483
+    }
+  ],
+  "entryBudgetBytes": 368640,
+  "sameDependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "changedBuildInputs": [
+    "搜打撤/game/css/battle-secondary-overlay.css",
+    "搜打撤/game/src/ui/overlay.js"
+  ],
+  "publicationRequiresRegularFilesFollowingLinks": true
+}

@@ -1,0 +1,33 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-type-baseline
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js [ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js ]
+Error: Failed to resolve import "../../css/performance-settings.css" from "game/src/core/performance-settings.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /tmp/merge-master-b7207a28-type-baseline/game/src/core/performance-settings.js:2:9
+  1  |  import { storeGet, storeSet } from './storage.js';
+  2  |  import '../../css/performance-settings.css';
+     |          ^
+  3  |  
+  4  |  export const QUALITY_PRESETS = Object.freeze({
+ ❯ TransformPluginContext._formatLog ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41
+ ❯ TransformPluginContext.error ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16
+ ❯ normalizeUrl ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23
+ ❯ ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+ ❯ TransformPluginContext.transform ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7
+ ❯ EnvironmentPluginContainer.transform ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18
+ ❯ loadAndTransform ../../workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  02:47:01
+   Duration  1.70s (transform 576ms, setup 0ms, collect 0ms, tests 0ms, environment 372ms, prepare 67ms)
+

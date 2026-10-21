@@ -1,0 +1,9 @@
+{
+  "path": "game/src/battle/view/battle.layers.js",
+  "oldSha256": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+  "newSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+  "literalAndTemplateCount": 584,
+  "allLiteralAndTemplateValuesIdentical": true,
+  "delta": "Only updateAllies removal/comment and actual children sequence comparison; existing append-all fallback unchanged.",
+  "assetUrlCall": 1
+}

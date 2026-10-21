@@ -1,0 +1,30 @@
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/cards/battle-value-context.js(21,45): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+game/src/cards/battle-value-context.js(28,42): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+Type-checking jsconfig.strict-hand-selection.json
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+Type-checking jsconfig.strict-ui.json
+game/src/cards/battle-value-context.js(21,45): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+game/src/cards/battle-value-context.js(28,42): error TS7006: Parameter 'fn' implicitly has an 'any' type.
+Type-checking jsconfig.runtime.json
+game/src/battle/core/battle.engine.factory.domain.js(213,57): error TS2554: Expected 0-8 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(198,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(204,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/effects/battle.discover-flow.js(221,86): error TS2554: Expected 5 arguments, but got 10.
+game/src/battle/view/battle.view.js(428,102): error TS2554: Expected 0-2 arguments, but got 3.
+Implementation type coverage: 558/558; strict: 51/558

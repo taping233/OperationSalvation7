@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-performance-e817a3aa-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "集成固定e817a3aa的背包派生、页面视觉就绪与可选执行入口优化，保留玩法、同步合同并核对原预算",
+  "paths": [
+    "game/src/core/bag-render-derivation.js",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.rules.js",
+    "game/src/run/game.session.bag.js",
+    "game/src/ui/page-visual-ready.js",
+    "game/src/ui/camp-entry.js",
+    "game/src/ui/page-visual-readiness-sharing.js",
+    "tests/bag-render-derivation.test.js",
+    "tests/bag-render-snapshot.test.js",
+    "tests/page-visual-readiness-sharing.test.js",
+    "docs/architecture.md",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "game/assets/asset-manifest.json",
+    "game/src/generated/art-manifest.js",
+    "game/src/generated/thumb-manifest.js",
+    "game/src/agent/agent.runner.js",
+    "game/src/agent/agent.action-router.js",
+    "game/src/agent/agent.run-control.js",
+    "game/src/agent/agent.runner.runtime.js",
+    "game/src/agent/agent.replay.js",
+    "game/src/agent/agent.replay.runtime.js",
+    "game/src/agent/agent.llm.js",
+    "game/src/agent/agent.llm-parser.js",
+    "game/src/agent/agent.llm.runtime.js",
+    "tests/agent-runner-lazy-boundary.test.js",
+    "tests/agent-optional-lazy-boundary.test.js",
+    "docs/agent-protocol.md",
+    "game/src/run/game.run.flow.js",
+    "game/src/run/game.run.events.js",
+    "game/src/run/event-lifecycle.js",
+    "game/src/run/event-runtime.js",
+    "tests/event-callback-lifecycle-audit.test.js",
+    "tests/event-choice-acquired-gift-cloud.test.js",
+    "tests/event-choice-recovery-cloud.test.js",
+    "tests/event-node-binding-cloud.test.js",
+    "tests/event-recode-selection-continuity.test.js",
+    "tests/event-settlement-unification.test.js",
+    "tests/event-signal-puzzle-integration.test.js",
+    "tests/events-lazy-entry.test.js",
+    "tests/events-lazy-story-ownership.test.js",
+    "tests/four-player-event-regressions.test.js",
+    "tests/r6-story.test.js",
+    "tests/blackmarket-card-preview.test.js",
+    "game/src/ui/term-tips.js",
+    "game/src/ui/term-tips.runtime.js",
+    "tests/term-tips-lazy-boundary.test.js",
+    "tests/term-tips-lifecycle.test.js",
+    "tests/term-tip-rule-copy.test.js",
+    "tests/battle-hand-keyword-interaction.test.js",
+    "tests/map-facilities-burn-removal.test.js",
+    "tests/stealth-term.test.js"
+  ],
+  "doneWhen": [
+    "两补丁经语义审查并集中定向回归通过，性能收益有确定性操作计数",
+    "使用完整固定输入执行原版snapshot选择器要求的门禁并报告真实状态",
+    "生产构建与当前窗口内置浏览器完成，或准确登记阻塞和未核验范围"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/2026-10-20T17-59-59.587Z-d0881315.json",
+      "result": "passed",
+      "sha256": "71d88684d93e9d562d16eb42e1abf9e102fc46f31529e46181b80b7efc0273ce",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/2026-10-20T18-14-14.574Z-fdf79d30.json",
+      "result": "passed",
+      "sha256": "6b8d9a911847bd732409673b3571128b68ff40b43e90bec2aadf737abbe0ad04",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/2026-10-20T18-17-28.139Z-061d6d84.json",
+      "result": "passed",
+      "sha256": "c78863ad012ec0edf7b5b5f14ecf2945529356d79f33351187a7ce713dbd33ff",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "正式91项补登记后原asset audit返回0 errors、570 unchanged historical warnings；manifest真实blob及逐项证据已核验",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "原完整Vitest 7711 passed、3 skipped、2 Git环境fail；真实Git后所属13项通过，但统一full尚未重跑",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "精确e817和本批两优化npm run build均编译成功、原postbuild入口/首屏gzip预算失败",
+      "result": "failed"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/2026-10-20T19-00-23.794Z-b4739ef3.json",
+      "result": "failed",
+      "sha256": "c73e626e885ba22ccf339793f827c936449976bf8a7898661bb45610908a4534",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "恢复UiScale同步依赖后原3失败组与词条/哨兵10文件160项通过；真实冷UI.showCardZoom使用真实rect，tooltip runtime仍未加载",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "最终UiScale修复版原npm run build退出0，entry359.9KiB/initial408.5KiB全部原预算PASS；基线1677输出SHA不变",
+      "result": "passed"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/2026-10-20T19-10-55.283Z-ee180957.json",
+      "result": "passed",
+      "sha256": "390ccfb96ca171ee6588b341cd3b997fcbd24615f23f4eee83c8f1d91b97c89e",
+      "verification": "recorded-result-only-not-current-freshness"
+    }
+  ],
+  "unverified": [
+    "当前窗口内置浏览器B档与精确e817同场景A/B交统一负责人；词条首次冷交互和浏览器同URL失败恢复仍待验",
+    "真实e817 index仍原树，未暂存当前候选；成功full是工作树候选，非正常staged/隔离提交门收据",
+    "远端CI未运行；未提交、未推送、未发布。正式保存与实页由后续负责人承接"
+  ],
+  "updatedAt": "2026-10-20T19:17:23.050Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

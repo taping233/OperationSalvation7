@@ -1,0 +1,389 @@
+{
+  "caveat": "Same production harness/inputs under Node/jsdom; no browser FPS/GPU inference. Existing frame/card caches unchanged. Public render() safe acquired snapshot:1; explicit snapshot render fresh-live:1 additional; cold/modal restore:2. No timing claims in this counter comparison.",
+  "rows": [
+    {
+      "variant": "baseline",
+      "load": "typical",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 495,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "typical",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 66682,
+        "outerReads": 252,
+        "outerChars": 108472,
+        "queries": 817,
+        "replacementNodes": 14,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "typical",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 66682,
+        "outerReads": 252,
+        "outerChars": 108472,
+        "queries": 817,
+        "replacementNodes": 14,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "typical",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 71445,
+        "outerReads": 270,
+        "outerChars": 116220,
+        "queries": 984,
+        "replacementNodes": 15,
+        "cardFaceWrites": 93
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "high",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 525,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "high",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 66696,
+        "outerReads": 252,
+        "outerChars": 108500,
+        "queries": 847,
+        "replacementNodes": 14,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "high",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 66696,
+        "outerReads": 252,
+        "outerChars": 108500,
+        "queries": 847,
+        "replacementNodes": 14,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "baseline",
+      "load": "high",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 71460,
+        "outerReads": 270,
+        "outerChars": 116250,
+        "queries": 1068,
+        "replacementNodes": 15,
+        "cardFaceWrites": 111
+      },
+      "renderOwnedSnapshotCalls": 3
+    },
+    {
+      "variant": "v2",
+      "load": "typical",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "typical",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "typical",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 3556,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "typical",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 2385,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 564,
+        "replacementNodes": 0,
+        "cardFaceWrites": 93
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "high",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "high",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "high",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 3570,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v2",
+      "load": "high",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 2385,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 648,
+        "replacementNodes": 0,
+        "cardFaceWrites": 111
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "typical",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "typical",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "typical",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 3556,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 420,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "typical",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 2385,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 564,
+        "replacementNodes": 0,
+        "cardFaceWrites": 93
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "high",
+      "operation": "render.no-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "high",
+      "operation": "render.energy-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 0,
+        "templateChars": 0,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "high",
+      "operation": "render.hp-change",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 14,
+        "templateChars": 3570,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 450,
+        "replacementNodes": 0,
+        "cardFaceWrites": 0
+      },
+      "renderOwnedSnapshotCalls": 1
+    },
+    {
+      "variant": "v3",
+      "load": "high",
+      "operation": "render.hand-page",
+      "sampleCount": 15,
+      "domWork": {
+        "templateParses": 15,
+        "templateChars": 2385,
+        "outerReads": 0,
+        "outerChars": 0,
+        "queries": 648,
+        "replacementNodes": 0,
+        "cardFaceWrites": 111
+      },
+      "renderOwnedSnapshotCalls": 1
+    }
+  ]
+}

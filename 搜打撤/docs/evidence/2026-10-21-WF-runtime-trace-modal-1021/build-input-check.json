@@ -1,0 +1,10 @@
+{
+  "buildInputs": 810,
+  "unchanged": true,
+  "budgetConfigurationUnchanged": true,
+  "completedBuildRuns": 1,
+  "failedStartupAttempts": [
+    "wrong cwd before npm package resolution",
+    "unsupported tmp outDir: Vite0 modules transformed"
+  ]
+}

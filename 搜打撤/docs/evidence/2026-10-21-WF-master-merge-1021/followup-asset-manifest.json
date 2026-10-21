@@ -1,0 +1,91 @@
+{
+  "incoming": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "decision": "Independent resource-surface reapproval complete; minimal8fingerprint patch requires second reviewer/integrator then normal full gate/build.",
+  "guardPath": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+  "beforeSha256": "5a43467e6d713b6d56242efa7b86f738288589bcbf879c38023aaef5ba4d0aa6",
+  "afterSha256": "ee8372de0d338ca30829a31a52b09957910ad94b79a54cb9982168ed92f73190",
+  "modifiedHashEntries": 8,
+  "modifiedConsumerFiles": [
+    "game/src/ui/game.menu.pages.js",
+    "game/src/run/game.run.scenes.js",
+    "game/css/entry-events.css",
+    "game/css/scenes.css",
+    "game/src/core/map-node-art.js",
+    "game/src/core/renderer.js",
+    "game/src/core/map-city-atmosphere.js",
+    "game/src/ui/camp-entry.js"
+  ],
+  "changedProductionSources": [],
+  "policyUnchanged": true,
+  "oldInactiveOpaqueApprovalsUnchanged": true,
+  "artifacts": {
+    "asset-guard-incremental.patch": {
+      "sha256": "1982e09104c8be3a0732b72793d9c10f1f10bbe6969031d36ebaafd229cd4449",
+      "bytes": 3577
+    },
+    "current-review.mjs": {
+      "sha256": "5a43467e6d713b6d56242efa7b86f738288589bcbf879c38023aaef5ba4d0aa6",
+      "bytes": 41195
+    },
+    "candidate-review.mjs": {
+      "sha256": "ee8372de0d338ca30829a31a52b09957910ad94b79a54cb9982168ed92f73190",
+      "bytes": 41195
+    },
+    "guard-scan-proof.json": {
+      "sha256": "0e3572bda55a87c95d26923f14a038bb8b5871f922e27397aeb4a52cfb611410",
+      "bytes": 29146
+    },
+    "resource-expression-proof.json": {
+      "sha256": "a6a0590218adc239d870207f15e4c92adf90964fd02ad6f41808c1e517036783",
+      "bytes": 55771
+    },
+    "baseline-tests.log": {
+      "sha256": "289fa9165f23f5d88d2afbef4c31f7753809e3201817db24a913878142d5945d",
+      "bytes": 9126
+    },
+    "candidate-tests.log": {
+      "sha256": "2b2c8473775742c526238ba297e5c835eae0b008e82aed18f6a461c78c049318",
+      "bytes": 6732
+    },
+    "source-diffs.patch": {
+      "sha256": "70f34a1091d763deb4f9da2ea40ddd34daf503d5e4fc365bbf3d7f0835a85f06",
+      "bytes": 90873
+    },
+    "apply-check.log": {
+      "sha256": "16e3edbe92d848d09637b5ec0801d01a735a0deb44c99bc4c374f0865de6acd8",
+      "bytes": 11
+    }
+  },
+  "tests": [
+    {
+      "path": "tests/retired-scenes-publication.test.js",
+      "sha256": "c7aafa650bfd4f8280ff4a8cc8be1d8eadff6819f67c52c5184977d00d80e440",
+      "unchanged": true
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "sha256": "c0c43c3c0aaed9dadae67fd5e8adc3808674be9cdd3648d8dd014c033437f96a",
+      "unchanged": true
+    }
+  ],
+  "validation": {
+    "baseline": {
+      "filesFailed": 2,
+      "testsFailed": 2,
+      "testsPassed": 33,
+      "scope": "Exact incoming8selectors/current acceptedframes+layers guard; original2targeted suites and Vite config, no test code edits."
+    },
+    "candidate": {
+      "filesPassed": 2,
+      "testsPassed": 35,
+      "warnings": [],
+      "excludedAssets": 286,
+      "newCurrentAssetsRetained": 14
+    },
+    "fullGate": "not rerun by reviewer",
+    "build": "not run",
+    "browser": "not run"
+  },
+  "limitations": "No blanket equality asserted for real new asset changes.7selectors have exact approvede817 baseline; menu independently re-reviewed current full asset surface and literal inlineSVG dependency. Source/map/transition URLs and new assets preserved. Only original consumerFingerprints values changed; candidates/categories/sourceHashes/opaque/dependency lists/algorithm unchanged. Isolated symlink/readthrough validation not a staged acceptance receipt."
+}

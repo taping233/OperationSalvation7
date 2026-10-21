@@ -1,0 +1,168 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：确认后上锁+道具移除+复原页打开，复原 min(2, 可复原数) 张后回流祭坛 725ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：取消分支不上锁、道具不丢，回流祭坛面板 108ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：锁定后重复触发只播报不再开选卡器 95ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 弃 3 激活：卡不足 3 张拒开选卡器；满 3 张确认后激活+消耗本格+进奖励面板 170ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 奖励② 传说+装备：满包时两张保留，整理后领取一次并可继续探索 163ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 碎片兑换：满包拒收不扣 2 碎片不上锁；有格时发卡+扣碎片+激活 95ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 紧急撤离：卡不足 3 张时 payExit 直调被拒、不开选卡器、卡不变 59ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 复原页：picks=1（修鞋铺口径）复原 1 张自动收尾；未复原直接离开也收尾 63ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 复原页：满包拒绝——口袋不动、卡不进包、可继续点收尾 35ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆：确认才回血复原，结算落盘且重入不重复；继续才回图 72ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆：满包时不扣口袋（先检后扣），deny 播报后照常收格 66ms
+ ✓ tests/sys03-altar-restore-txn.test.js > A3文案：祭坛回赠复原保持祭坛身份，继续仍走原回调 76ms
+ ✓ tests/sys03-altar-restore-txn.test.js > A3文案：满包火堆准确报告容量，不能谎报没有可复原牌 64ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 拾取页背包返回重注册仍只结算一次，旧回调不能领取或关闭新结果页 38ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆取消休整保留收益，再进入必须重新确认 55ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给直接展示待领卡牌，逐张领取与刷新满包规则保持 82ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 零领取存档恢复直接展示卡牌，旧页领取回调失效且重复点击不多领 62ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给仅有 0 张时仍按实际总数显示并在全部收下后确认 45ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给仅有 1 张时仍按实际总数显示并在全部收下后确认 50ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑未解封：保留可见激活步骤和返回，重复进入/旧回调不影响新页面 67ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑已解封：照常显示迎战入口，旧封印页回调不能关闭迎战页 46ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑地图状态展示前置但仍是未完成节点；已激活/已击败状态保持原语义 7ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-raydragon rejects uninfused manual, direct, free and queue entries without spending 124ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-felguard rejects uninfused manual, direct, free and queue entries without spending 112ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-holyheal rejects uninfused manual, direct, free and queue entries without spending 114ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-meteorstrong rejects uninfused manual, direct, free and queue entries without spending 116ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > zero available materials cannot start or bypass required infusion 112ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > direct button command retains selected materials; cancel spends nothing; valid infusion spends once 162ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-silverthorn retains its uninfused base effect 159ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-bloodstorm retains its uninfused base effect 160ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > does not reject a base-effect card just because the target is immune 161ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > instance infusion waiver still permits pure infusion 161ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > global infusion waiver still permits pure infusion 157ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > explicit pouch release grants infusion, consumes only its stored source and spends no fuel 161ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rechecks required infusion after queue acceptance before touching resources 83ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > uses hosted rules despite edited descriptions, and preserves independent structured or legacy effects 37ms
+ ✓ tests/expedition-battle-presentation.test.js > highlights targets without reviving the retired secondary caption and clears access on cancel 34ms
+ ✓ tests/expedition-battle-presentation.test.js > keeps the canonical full rule when inspecting the deck surface 48ms
+ ✓ tests/expedition-battle-presentation.test.js > keeps the canonical full rule when inspecting the bag surface 32ms
+ ✓ tests/expedition-battle-presentation.test.js > rejects obsolete deck inspection without spending or opening zoom: reopen 38ms
+ ✓ tests/expedition-battle-presentation.test.js > rejects obsolete deck inspection without spending or opening zoom: hidden 10ms
+ ✓ tests/expedition-battle-presentation.test.js > rejects obsolete deck inspection without spending or opening zoom: inert 12ms
+ ✓ tests/expedition-battle-presentation.test.js > rejects obsolete deck inspection without spending or opening zoom: closing 12ms
+ ✓ tests/expedition-battle-presentation.test.js > rejects obsolete deck inspection without spending or opening zoom: other-page 8ms
+ ✓ tests/expedition-battle-presentation.test.js > stores only the visible carried group when stored cards share the same id 23ms
+ ✓ tests/expedition-battle-presentation.test.js > keeps all cards unchanged when the carried group does not fit in the safe capacity 13ms
+ ✓ tests/expedition-battle-presentation.test.js > does not expose a purely stored group or mutate it through a stale safe-move action 9ms
+ ✓ tests/expedition-battle-presentation.test.js > transfers the complete carried group while preserving existing safe and stored entries 16ms
+ ✓ tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: reopen 21ms
+ ✓ tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: hidden 8ms
+ ✓ tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: inert 8ms
+ ✓ tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: closing 13ms
+ ✓ tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: other-page 8ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > does not capture a battle snapshot for unrelated infusion keys 20ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > shares one fresh snapshot per material shortcut and sees in-place changes before repaint 11ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > checks physical material selection, pointer withdrawal and confirmation once and blocks zoom/hidden inputs 18ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > rejects stale physical withdrawal and confirmation after new-selection 10ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > rejects stale physical withdrawal and confirmation after new-workspace 15ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > releases the active infusion key listener on sdt-overlay-mode 4ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > releases the active infusion key listener on sdt-overlay-close 12ms
+stdout | tests/page-perf-battle.test.js > battle page input and DOM work > measures stable nine-stack hand writes and infusion snapshot traversals
+BATTLE_PAGE_PERF {"repeats":20,"groups":9,"handWrites":0,"unrelatedSnapshots":0,"materialSnapshots":1}
+
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > re-rendering infusion owns exactly one live keyboard handler 13ms
+stdout | tests/page-perf-battle.test.js > battle page input and DOM work > measures discovery readiness commits without changing its 350 ms admission window
+BATTLE_DISCOVER_PERF {"openingFrames":20,"candidates":2,"openingWrites":0,"readyWrites":3}
+
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > measures stable nine-stack hand writes and infusion snapshot traversals 103ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > measures discovery readiness commits without changing its 350 ms admission window 104ms
+ ✓ tests/page-perf-battle.test.js > battle page input and DOM work > updates live cost, content, order and external attribute changes after an unchanged hand render 18ms
+stdout | tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications
+E8 inventory counts {"production":{"total":282,"withRules":231,"withoutRules":51,"schema":{"valid":282},"schemaPending":0,"capability":{"legacy":51,"supported":231},"domains":{"bag":19,"base":8,"battle":157,"equip":39,"triggers":192},"triggers":{"duration":1,"onAcquire":1,"onConsume":4,"onDraw":6,"onFreezeDealt":1,"onKill":1,"onPlay":166,"onTurnStart":8,"replay":1},"ops":{"acquire":35,"adjustCurse":2,"armor":18,"blessing":12,"castDrawn":1,"castRandomSpells":1,"castStored":1,"choice":2,"cleanse":4,"consumeHand":3,"copyRandom":1,"curse":37,"damage":81,"deckCap":1,"discover":2,"discoverCopies":1,"draw":33,"energy":3,"energyCap":3,"execute":5,"extraTurn":1,"fillHand":1,"flee":1,"foeFight":1,"freezeFirstEnemies":1,"handSelect":3,"heal":13,"insertCards":2,"markEnemy":2,"maxHp":1,"noDrawNext":1,"randomBlessing":1,"randomCurse":1,"recruitEnemy":1,"refillEnergy":1,"registerInfusionBonus":1,"registerRule":11,"release":2,"restoreConsumed":2,"restoreHeroSkill":1,"schedule":1,"status":1,"stealAtk":2,"summon":2,"swapDiscoverCosts":1,"transform":2,"transformCards":1}},"cardsSync":{"total":57,"withRules":2,"withoutRules":55,"schema":{"valid":57},"schemaPending":0,"capability":{"legacy":55,"supported":2},"domains":{"battle":2,"triggers":2},"triggers":{"onPlay":2},"ops":{"acquire":1,"armor":1,"damage":1}},"orderComparison":{"equivalent":true,"bootOnly":[],"e6Only":[],"changed":[]}}
+
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications 4ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > fails on duplicate/missing IDs, omitted entries, counts and missing classifications 27ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > changes only approved migrations and the exact backupcell draw/refill revision 67ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 本批只允许14个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝 776ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 火焰形态仅批准精确旧规则到新文案与宿主，数值/规则/额外字段漂移拒绝 59ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1 117ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 五条生产修订精确锁定旧值与新值，规则、费用、回退旧文案或额外字段均拒绝 349ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 事件与腐化之种只接受精确批准字段，回退、扩效与额外字段均拒绝 433ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝 80ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 后备能源只批准术语修订与固定抽牌回满规则，费用、其他字段及扩效均拒绝 247ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 影噬只批准稀有到史诗及精确既有 M3 声明，其他卡面与规则漂移拒绝 121ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明 199ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > accepts only an explicit after generation selector; before evidence is frozen 1ms
+ ↓ tests/e8-card-inventory.test.js > E8 isolated production inventory > explicitly generates only after evidence
+stdout | tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy
+M missing target rules []
+
+ ✓ tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy 38ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > preserves every original ID and only changes explicitly migrated fields 12ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 五条批准文案和名称修订只改变精确字段，现有规则与数值保持原值 0ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 事件与腐化之种投影精确批准值，生产初始化不扩展字段白名单 1ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 神秘药水文案只同步主动战斗与下回合时点，使用批准的延迟结构声明 0ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > repeated production initialization preserves every migrated rule 34ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选 192ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 机器人额外初始牌也计占格，预留三格且禁带职业卡 59ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 预览后库存变化必须重新预览，继续手调后撤销不覆盖手选 56ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 首次整备在出发按钮之前明示统一消耗去向与复原入口 31ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 预设人物作为选角初值，预设宠物通过正常保存入口应用 19ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 预设宠物保存失败时保留原卡牌选择和人物初值 16ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 切换slot后不沿用上一档的预设人物和卡牌 27ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 点第二堆预览其卡面和数量，确认出征只扣第二堆 35ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 正常pointer拖动保留第二堆稳定身份，取消拖动不新增选择 42ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 同id不同堆级variant也只扣选择的变体 26ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 第二堆筛选按自己的类型和费用，选后不改第一堆剩余数量 43ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 同卡超过一格的预设保持每个格子独立，数量更新不丢节点 24ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧pickAdd动作不执行 25ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depPet动作不执行 20ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧confirmDeploy动作不执行 26ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depBack动作不执行 40ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depMode动作不执行 25ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 返回模式后原整备handler和已排队确认不能抢回页面 26ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 返回模式再进整备可正常确认，原handoff不会在重进后执行 46ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 已选择堆被替换后显示失败并保留仓库及口袋 109ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 准备保存失败不扣任何堆，重试只扣正确堆一次 26ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出发最终动作旁保留动态待复原清空风险，不折叠到说明中 17ms
+ ✓ tests/runtime-asset-redundancy.test.js > keeps reviewed asset decisions identical across Git LF and Windows CRLF sources 8ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate if the reviewed battle-layer asset consumer changes or loses approval 166ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > fails closed for either real frame URL changing or its opaque approval disappearing 107ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > independently guards all real frame selector pins even with current opaque approval 94ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images 3157ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs 2744ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references 149ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > keeps the current safe timeline and restores any referenced or changed retired rig selector 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits only unused reviewed files and retains future static or configured references 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > reads all catalog sequence and static fallback names on every decision, including restored legacy frames 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: undefined 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[]}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[0]}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":["sprite-v1/frame-001"]},"staticFallback":1} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains a whole category after a selector changes or disappears 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate for new or changed opaque constructors and syntax/read uncertainty 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > does not treat ordinary static assets or unrelated template strings as opaque 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > checks the complete Rollup graph including async modules and generated manifests 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > rejects a selection change between early manifest generation and final copy 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > accepts only static license URLs and inert raw SVG exports while rejecting restored asset references 2ms
+ ✓ tests/runtime-asset-redundancy.test.js > pins indirect URL inputs even when their change has no recognizable asset constructor 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > retains all candidates when an explicit path dependency or its owning consumer is missing 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > keeps the reviewed sample callback and catalog in the explicit sound path dependency set 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > requires valid fixed source bytes, retains the whole affected family, and leaves other families independent 9ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains split directory/token references and rejects asset-root arrays, including raw image.src joins 5ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains weather after either SVG selector changes/disappears without loosening the chest source guard 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family 4ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > preserves active safe/supply frames and rejects late restored family tokens and root joins in the graph 1ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > is DEV-only, with no game module import, canvas, media, storage or network machinery 93ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > preserves actual title IDs, SVG art, wordmark and complete base stylesheet order 103ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > observes image requests without creating images and exposes live pulses 84ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > toggles CSS pause without changing DOM/assets, supports cold paused and wallpaper query cases 56ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > cleans its sole interval and listeners on pagehide, idempotently 58ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > registers exactly the 19 retired R2 paths and verifies their approved deletion fingerprints 7ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants 9ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > restores new static references and rejects them in the complete async module graph 13ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > retains the category for changed mappings or selectors and all assets for new opaque consumers 4ms
+
+ Test Files  10 passed (10)
+      Tests  145 passed | 1 skipped (146)
+   Start at  03:42:48
+   Duration  24.38s (transform 1.52s, setup 0ms, collect 3.45s, tests 15.97s, environment 2.69s, prepare 562ms)
+

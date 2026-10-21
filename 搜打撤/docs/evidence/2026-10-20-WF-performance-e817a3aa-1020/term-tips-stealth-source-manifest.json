@@ -1,0 +1,8 @@
+{
+  "patch": "term-tips-stealth-test-increment.patch",
+  "sha256": "a6e8b5d179248c2eab5b4ceca66b565a77534ea63abf93d3fa5a5aa4d2305240",
+  "path": "tests/stealth-term.test.js",
+  "before_sha256": "133d50f7003d72e8d45d8cc4a27370ee6820e65b38276d54b98e96c51d654150",
+  "after_sha256": "8d2638c3412b20dbbb795a7d0b83c23c79cdf53128af655b9e6799397f07cb4c",
+  "validation": "term-tips-stealth-final.log: 3 files / 34 tests pass; ESLint pass; production source unchanged"
+}

@@ -1,0 +1,202 @@
+
+ RUN  v3.2.7 /tmp/persistent-battle-stage-v4-ea0da5c7
+
+ ✓ tests/battle-infusion-material-state.test.js (5 tests) 6ms
+ ✓ tests/battle-hand-inspector.test.js (98 tests) 9559ms
+   ✓ selects a target on one bridge pointer tap and suppresses the following synthetic click  401ms
+   ✓ starts self-target equipment selection from the stable folded slot without spending or requiring a second click  352ms
+   ✓ adds distinct material UIDs through the workspace and ignores a detached repeated button  442ms
+   ✓ describes and cycles three hand pages without changing cards or combat state  1149ms
+   ✓ keeps touch untargeted pickup pending until field confirmation or Escape  358ms
+   ✓ directly plays an untargeted card from focused card-face Enter  368ms
+   ✓ allows a new primary pointer to continue a pickup only after its owner releases  349ms
+   ✓ lets real window aim cancellation consume the down before the retained hand can pick up another card  338ms
+   ✓ 扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌  399ms
+ ✓ tests/battle-tools-lifecycle.test.js (10 tests) 2559ms
+   ✓ battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw  322ms
+   ✓ battle tools template ownership > returns from real discovery with one current set and preserves subsequent updates  587ms
+   ✓ battle tools template ownership > does not duplicate paging or gesture listeners across patches and full redraws  461ms
+ ✓ tests/battle-persistent-stage.test.js (36 tests) 2354ms
+ ✓ tests/battle-frames-lifecycle.test.js (46 tests) 2337ms
+ ✓ tests/r7a-qa-live.test.js (1 test) 1816ms
+   ✓ loads isolated real view, plays one card, ends and exits without storage writes  1815ms
+stdout | tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: settings)
+[frame-settings-operation-counts] {"initial":{"loads":63,"unloads":0},"repeatedSettings":3,"addedLoads":0,"addedSettingsUnloads":0,"actualCloseUnloads":63}
+
+stdout | tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: true)
+[frame-settings-operation-counts] {"initial":{"loads":63,"unloads":0},"repeatedSettings":3,"addedLoads":0,"addedSettingsUnloads":0,"actualCloseUnloads":63}
+
+stdout | tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations
+[frame-settings-complete-roundtrips] {"initialLoads":63,"roundtrips":3,"settingsLoads":0,"settingsUnloads":0,"actualExitUnloads":63,"totalUnloads":63,"remainingTextures":0}
+
+ ✓ tests/battle-frames-ownership.test.js (32 tests) 1922ms
+ ✓ tests/potion-tip-lifecycle.test.js (15 tests) 1295ms
+   ✓ 药水提示全局监听生命周期 > 100次普通按下/松开及药水栏替换不保留旧cancel回调  696ms
+ ✓ tests/battle-entry-view.test.js (13 tests) 1073ms
+ ✓ tests/battle-hand-content-diff.test.js (9 tests) 759ms
+stderr | tests/potion-tip.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[music] load failed battle No codec support for selected audio sources.
+
+stderr | tests/potion-tip.test.js > 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /tmp/persistent-battle-stage-v4-ea0da5c7/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+
+stderr | tests/potion-tip.test.js
+[music] load failed board No codec support for selected audio sources.
+
+ ✓ tests/potion-tip.test.js (1 test) 636ms
+   ✓ 药水自绘文字提示栏 > 药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法  558ms
+ ✓ tests/battle-potion-bar-layout.test.js (5 tests) 843ms
+   ✓ battle potion left-anchor cascade > keeps count, label and emphasized tooltip text light on the dark item surfaces  589ms
+stdout | tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders
+BATTLE_TARGET_DOM_COUNTS {"renders":20,"enabledFoes":3,"attributeMutations":0,"targetAttributeWrites":0,"canTargetToggleCalls":0}
+
+ ✓ tests/battle-target-dom.test.js (6 tests) 666ms
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable normal snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"normal","reads":50,"poolSize":0,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable confirmed boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"confirmed boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable direct boss snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"direct boss","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > does no inactive formation work on stable nest snapshots
+SNAPSHOT_PHASE_COUNTS {"label":"nest","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > continues reading the live formation pool and capacity while selection is active
+SNAPSHOT_PHASE_COUNTS {"label":"active formation","reads":50,"poolSize":120,"ownedSize":120,"poolFilterCalls":100,"poolFilterVisits":12000,"poolMapCalls":50,"poolMapVisits":6000,"ownedForEachCalls":50,"ownedForEachVisits":6000}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > skips the retained old pool after exiting a boss battle and entering ordinary combat
+SNAPSHOT_PHASE_COUNTS {"label":"normal after boss","reads":50,"poolSize":120,"ownedSize":6,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+stdout | tests/battle-snapshot-phase-cost.test.js > restarts a confirmed boss deck without losing its saved choice or recapturing formation work
+SNAPSHOT_PHASE_COUNTS {"label":"restarted boss","reads":50,"poolSize":5,"ownedSize":5,"poolFilterCalls":0,"poolFilterVisits":0,"poolMapCalls":0,"poolMapVisits":0,"ownedForEachCalls":0,"ownedForEachVisits":0}
+
+ ✓ tests/battle-snapshot-phase-cost.test.js (10 tests) 603ms
+stdout | tests/battle-render-derivation.test.js > compares real mixed combat inputs without keeping derived rules across renders
+BATTLE_DERIVATION_MIXED {"checkpoints":[{"label":"ready","cost":10,"effective":9},{"label":"energy-zero","cost":18,"effective":9},{"label":"energy-restored","cost":10,"effective":9},{"label":"target-selection","cost":10,"effective":13},{"label":"cancel-selection","cost":10,"effective":9},{"label":"play","cost":9,"effective":8},{"label":"open-pile","cost":9,"effective":9},{"label":"close-pile","cost":9,"effective":8},{"label":"next-turn","cost":9,"effective":8},{"label":"live-card-replacement","cost":9,"effective":8}],"totals":{"cost":103,"effective":90}}
+
+ ✓ tests/battle-render-derivation.test.js (1 test) 604ms
+   ✓ compares real mixed combat inputs without keeping derived rules across renders  603ms
+ ✓ tests/battle-hand-keyword-interaction.test.js (12 tests) 493ms
+ ✓ tests/battle-effect-feedback.test.js (38 tests) 447ms
+ ✓ tests/battle-end-turn-selection.test.js (14 tests) 447ms
+ ✓ tests/battle-scenery-secondary-ready.test.js (3 tests) 398ms
+ ✓ tests/battle-secondary-overlay.test.js (14 tests) 237ms
+ ✓ tests/battle-decision-lifecycle.test.js (9 tests) 268ms
+ ✓ tests/battle-entry-readiness.test.js (24 tests) 210ms
+ ✓ tests/battle-hand-hit-input.test.js (29 tests) 173ms
+ ✓ tests/battle-decision-redesign.test.js (15 tests) 183ms
+ ✓ tests/battle-stage-validator.test.js (5 tests) 159ms
+ ✓ tests/battle-selection-ui.test.js (28 tests) 100ms
+ ✓ tests/battle-decision-shell-review.test.js (9 tests) 84ms
+ ✓ tests/battle-discover-result-source.test.js (5 tests) 69ms
+ ✓ tests/battle-stage-mounts.test.js (9 tests) 71ms
+ ✓ tests/battle-discover-retained-feedback.test.js (6 tests) 44ms
+ ✓ tests/battle-frames-pending-release.test.js (2 tests) 38ms
+ ✓ tests/battle-hand-rule-context.test.js (21 tests) 25ms
+ ✓ tests/battle-architecture.test.js (13 tests) 16ms
+ ✓ tests/battle-snapshot-integration.test.js (1 test) 14ms
+ ✓ tests/battle-action-runner-readiness.test.js (9 tests) 13ms
+ ✓ tests/battle-hand-layout.test.js (12 tests) 10ms
+ ✓ tests/r7a-qa-host.test.js (1 test) 4ms
+ ✓ tests/battle-decision-readability.test.js (11 tests) 309ms
+ ✓ tests/battle-selection-consumer.test.js (8 tests) 18ms
+
+ Test Files  39 passed (39)
+      Tests  586 passed (586)
+   Start at  18:34:53
+   Duration  67.99s (transform 2.41s, setup 0ms, collect 13.20s, tests 30.87s, environment 14.70s, prepare 2.38s)
+

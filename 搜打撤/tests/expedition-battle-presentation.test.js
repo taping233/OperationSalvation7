@@ -1,9 +1,9 @@
-import { beforeEach, afterEach, expect, it } from 'vitest';
+import { beforeEach, afterEach, expect, it, vi } from 'vitest';
 
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const actions = new Map();
 const UI = {
-  el: {}, act: (name, fn) => actions.set(name, fn), refresh() {}, log() {},
+  el: {}, showCardZoom: vi.fn(), act: (name, fn) => actions.set(name, fn), refresh() {}, log() {},
   showOverlay(title, html) { this.el.ovBody.innerHTML = rich(html); },
 };
 window.SDT = {
@@ -15,11 +15,15 @@ await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { selectCardByClick, cancelClickSelection } = await import('../game/src/battle/view/battle.aim.js');
 const { renderDeckPileView, renderBattleBag } = await import('../game/src/battle/view/battle.overlays.js');
+const { UI: zoomUI } = await import('../game/src/ui/ui.js');
+UI.showCardZoom = vi.fn(zoomUI.showCardZoom);
+window.SDT.UI = UI;
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 let game;
 
 beforeEach(() => {
+  UI.showCardZoom.mockClear();
   document.body.innerHTML = '<div id="overlay"><div id="ovBody"></div></div>';
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody') };
   game = {
@@ -32,6 +36,7 @@ beforeEach(() => {
   BattleSession.start(game, [{ id: 'left', name: '左敌人', hp: 40, atk: 1 }, { id: 'right', name: '右敌人', hp: 40, atk: 1 }], { isBoss: false });
 });
 afterEach(() => {
+  document.getElementById('cardZoom')?._closeCardZoom(true);
   cancelClickSelection();
   if (game.battleActive) BattleSession.commands.flee();
   actions.clear();
@@ -52,14 +57,46 @@ it('highlights targets without reviving the retired secondary caption and clears
 });
 
 it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s surface', kind => {
-  const snapshot = { ...BattleSession.getSnapshot(), drawPile: ['view-1'] };
+  const before = BattleSession.getSnapshot(), ownedUids = game.ownedCards.map(entry => entry.uid);
+  const snapshot = { ...before, drawPile: ['view-1'] };
   if (kind === 'deck') renderDeckPileView(snapshot);
   else renderBattleBag(snapshot);
-  if (kind === 'deck') actions.get('btDecisionInspect')({ i:0 });
-  const rules = kind === 'deck' ? UI.zoomCard.desc : UI.el.ovBody.querySelector('.battle-decision-inspect-rules').textContent;
+  const root = UI.el.ovBody.querySelector('.battle-decision');
+  let rules;
+  if (kind === 'deck') {
+    const trigger = root.querySelector('[data-act="btDecisionInspect"]');
+    actions.get('btDecisionInspect')(trigger.dataset);
+    expect(UI.showCardZoom).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ id: 'tt12-backupcell' }), { returnFocus: trigger });
+    const zoom = document.getElementById('cardZoom');
+    expect(zoom.getAttribute('role')).toBe('dialog');
+    rules = zoom.querySelector('.hsc-desc').textContent;
+    zoom._closeCardZoom(true);
+    expect(document.activeElement).toBe(trigger);
+  } else {
+    expect(UI.showCardZoom).not.toHaveBeenCalled();
+    rules = root.querySelector('.battle-decision-inspect-rules').textContent;
+  }
+  expect(UI.el.ovBody.querySelector('.battle-decision')).toBe(root);
+  expect(BattleSession.getSnapshot()).toEqual(before);
+  expect(game.ownedCards.map(entry => entry.uid)).toEqual(ownedUids);
   expect(rules).toBe('抽 2 张牌，并回复你的全部能量；消耗牌堆中每有 1 张法术牌，本牌费用减少 1 点。');
   expect(rules).toContain('消耗牌堆中每有 1 张法术牌');
   expect(rules).toContain('抽 2 张牌，并回复你的全部能量');
+});
+
+it.each(['reopen', 'hidden', 'inert', 'closing', 'other-page'])('rejects obsolete deck inspection without spending or opening zoom: %s', state => {
+  const before = BattleSession.getSnapshot(), snapshot = { ...before, drawPile: ['view-1'] };
+  renderDeckPileView(snapshot);
+  const trigger = UI.el.ovBody.querySelector('[data-act="btDecisionInspect"]');
+  const oldInspect = actions.get('btDecisionInspect'), data = { ...trigger.dataset };
+  if (state === 'reopen') renderDeckPileView(snapshot);
+  if (state === 'other-page') UI.showOverlay('其他页面', '<button>返回</button>');
+  if (state === 'hidden') UI.el.overlay.hidden = true;
+  if (state === 'inert') UI.el.overlay.setAttribute('inert', '');
+  if (state === 'closing') UI.el.overlay.classList.add('closing');
+  oldInspect(data);
+  expect(UI.showCardZoom).not.toHaveBeenCalled();
+  expect(BattleSession.getSnapshot()).toEqual(before);
 });
 
 it('stores only the visible carried group when stored cards share the same id', () => {

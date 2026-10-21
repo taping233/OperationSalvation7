@@ -1,0 +1,36 @@
+{
+  "buildReusedNotRerun": true,
+  "allInputHashesMatch": 812,
+  "allOutputHashesMatch": 1595,
+  "outputBytes": 171889538,
+  "outputDirectory": "/tmp/connected-battle-overlay-20261021/desktop-app/game",
+  "configs": [
+    {
+      "path": "package.json",
+      "sha256": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4"
+    },
+    {
+      "path": "scripts/perf-budget.cjs",
+      "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "e569f473d3a9d5c2ebec781086c1f50f208c456eca27111153dc3431070e7a16"
+    }
+  ],
+  "dependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "authorManifestSha256": "d2caf98b25f1b0f0a030c7df9b77dddfb89720baa8eace184cdacf2d82494cf5",
+  "buildLogSha256": "ff5047020e7218e8eec54a95f572e317766dba9dada944f15f516565a09d1235",
+  "entryGzip": 368472,
+  "entryBudget": 368640,
+  "battleGzip": 67038,
+  "finalSecondarySha256": "444b01a084a7afc89419423b964ac09d995fee1d66ff08a388727b19e3ff9217"
+}

@@ -1,0 +1,121 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-ally-order-a4cd6990/搜打撤
+
+ × tests/battle-ally-dom-order.test.js > keeps real summoned allies in place through unchanged, energy and busy renders 264ms
+   → expected { appendChildCalls: 16, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+ × tests/battle-ally-dom-order.test.js > performs zero ally moves across 100 unchanged production unit updates 175ms
+   → expected { appendChildCalls: 400, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+ ✓ tests/battle-ally-dom-order.test.js > uses the original append-all fallback for additions and keeps survivors on removal 29ms
+ ✓ tests/battle-ally-dom-order.test.js > keeps occurrence-based identities for duplicate names and updates their indexes 27ms
+ ✓ tests/battle-ally-dom-order.test.js > fully restores reverse order rather than conditionally appending each index 29ms
+ ✓ tests/battle-ally-dom-order.test.js > repairs externally displaced DOM nodes even when names and count are unchanged 27ms
+ × tests/battle-ally-dom-order.test.js > updates HP, death and statless presentation without moving retained allies 31ms
+   → expected { appendChildCalls: 4, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+ ✓ tests/battle-ally-dom-order.test.js > clears an empty list and does not retain removed-node ownership 28ms
+ ✓ tests/battle-ally-dom-order.test.js > reattaches retained allies into a replacement mount and abandons the old owner 27ms
+ × tests/battle-ally-dom-order.test.js > keeps the same allies across a retained deck overlay and its return 43ms
+   → expected { appendChildCalls: 4, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+ ✓ tests/battle-ally-dom-order.test.js > resets ally ownership for a new battle token even with identical names and count 50ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-ally-dom-order.test.js > keeps real summoned allies in place through unchanged, energy and busy renders
+AssertionError: expected { appendChildCalls: 16, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "appendChildCalls": 0,
+-   "childListRecords": 0,
++   "appendChildCalls": 16,
++   "childListRecords": 32,
+  }
+
+ ❯ tests/battle-ally-dom-order.test.js:103:26
+    101|   render(); Runtime.set$energy(0); render(); Runtime.set$busy(true); r…
+    102|   expectSameNodes(nodes(), kept);
+    103|   expect(moves.counts()).toEqual({ appendChildCalls: 0, childListRecor…
+       |                          ^
+    104|   moves.close();
+    105| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/battle-ally-dom-order.test.js > performs zero ally moves across 100 unchanged production unit updates
+AssertionError: expected { appendChildCalls: 400, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "appendChildCalls": 0,
+-   "childListRecords": 0,
++   "appendChildCalls": 400,
++   "childListRecords": 800,
+  }
+
+ ❯ tests/battle-ally-dom-order.test.js:113:26
+    111|   for (let i = 0; i < 100; i++) paint(allies);
+    112|   expectSameNodes(nodes(), kept);
+    113|   expect(moves.counts()).toEqual({ appendChildCalls: 0, childListRecor…
+       |                          ^
+    114|   moves.close();
+    115| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/battle-ally-dom-order.test.js > updates HP, death and statless presentation without moving retained allies
+AssertionError: expected { appendChildCalls: 4, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "appendChildCalls": 0,
+-   "childListRecords": 0,
++   "appendChildCalls": 4,
++   "childListRecords": 8,
+  }
+
+ ❯ tests/battle-ally-dom-order.test.js:169:26
+    167|   expect(kept[0].querySelector('.sts-hp span').textContent).toBe('0/4'…
+    168|   expect(kept[1].querySelector('.sts-unit-vitals').hidden).toBe(true);
+    169|   expect(moves.counts()).toEqual({ appendChildCalls: 0, childListRecor…
+       |                          ^
+    170|   moves.close();
+    171| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/battle-ally-dom-order.test.js > keeps the same allies across a retained deck overlay and its return
+AssertionError: expected { appendChildCalls: 4, …(1) } to deeply equal { appendChildCalls: +0, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "appendChildCalls": 0,
+-   "childListRecords": 0,
++   "appendChildCalls": 4,
++   "childListRecords": 8,
+  }
+
+ ❯ tests/battle-ally-dom-order.test.js:205:26
+    203|   Runtime.set$viewingDeck(false); render();
+    204|   expectSameNodes(nodes(), kept); expect(mount()).toBe(owner);
+    205|   expect(moves.counts()).toEqual({ appendChildCalls: 0, childListRecor…
+       |                          ^
+    206| });
+    207| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 7 passed (11)
+   Start at  14:05:05
+   Duration  2.56s (transform 619ms, setup 0ms, collect 1.30s, tests 731ms, environment 306ms, prepare 58ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-ally-order-a4cd6990/ally-baseline-control-result.json

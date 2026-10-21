@@ -1,0 +1,11 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+·································································································································································
+
+ Test Files  4 passed (4)
+      Tests  161 passed (161)
+   Start at  03:01:15
+   Duration  21.41s (transform 1.37s, setup 0ms, collect 3.75s, tests 15.01s, environment 1.61s, prepare 265ms)
+

@@ -1,0 +1,60 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 显式空 onDraw 合法且抑制描述触发，卡牌正常入手 11ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 非空 onDraw 只结算一次结构化效果，沿用离手和入弃牌堆语义 6ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 未声明 onDraw 仍兼容旧文本触发：undefined 8ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 未声明 onDraw 仍兼容旧文本触发：{"onPlay":[]} 4ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 手牌上限仍先于 onDraw 判断，满手时不抽取或触发 6ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 灰烬满手直释仍先于旧文本 onDraw，不额外回放触发句 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onConsume":[{"op":"energy","n":2}]}} 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onConsume":[]}} 1ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"equip":{"onEquip":[]}} 1ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onPlay":[]}} 1ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：null 1ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 未注册提供器时，伤害数字逐字静态（地图/图鉴/文档生成口径） 2ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 提供器存在但战斗未激活时仍走静态 0ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 攻击句/法术句按 atk 与法伤重算；无法伤时与基础值一致 1ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 真实战斗：手牌/悬停长描述随攻击强化祝福变化，战斗结束后回落静态 107ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①直接施放可选注能招式：按已注能效果结算（5+注能3+法伤2=10），材料不消耗 163ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①遇纯注能招式：视为已注能直接施放（不再留手），效果照常结算 112ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 灰烬符文满手直释：注能卡视为已注能直接释放并按注能效果结算 104ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 定版两处定义与展示文案同步为「发现招式」，抉择标签与招式池一致 3ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 抉择①发现面板只给招式（武术/法术），装备与道具不进池 116ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 能力卡·无量仙剑·云风：抽5张后自动直接释放其中的武术（免费） 535ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 剑荡妖邪：手选的武术直接释放且不扣费 170ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 永恒绽放：施放 1 张，其余两张入手 151ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 永恒绽放：纯注能牌直接施放视为已注能（释放成功、按注能效果结算、材料不消耗） 116ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 千变万化：发现并直接施放，再抽 2 张 75ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 江湖救急：发现其它职业的卡并直接施放 69ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 药水魔法：发现 1 瓶药水并直接释放 115ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 法师锦囊：空锦囊无效果；预存法术后打出选 1 释放（2026-09-16 定版） 101ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 连弩 × 天狼长弓：回合开始获得「箭」令牌，限定技能直接释放全部箭并逐张抽牌 227ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 阿波罗的礼物：运行时卡面（设计者定版）不含「可直接施放」词条——哨兵用例 0ms
+ ✓ tests/battle-queue-direct-release-forwarding.test.js > real engine queue facade forwards submission and direct-release ownership > freeCost alone does not grant infusion and the ninth argument observes rejection 9ms
+ × tests/battle-queue-direct-release-forwarding.test.js > real engine queue facade forwards submission and direct-release ownership > the tenth argument grants direct-release infusion without spending materials and preserves submission callbacks 18ms
+   → expected "spy" to be called 1 times, but got 0 times
+ ✓ tests/battle-queue-direct-release-forwarding.test.js > real engine queue facade forwards submission and direct-release ownership > legacy five-argument free casts retain ordinary effects and defaults 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-queue-direct-release-forwarding.test.js > real engine queue facade forwards submission and direct-release ownership > the tenth argument grants direct-release infusion without spending materials and preserves submission callbacks
+AssertionError: expected "spy" to be called 1 times, but got 0 times
+ ❯ tests/battle-queue-direct-release-forwarding.test.js:39:121
+     37|     expect(runtime.energy).toBe(energy); expect(runtime.infuseFuels).t…
+     38|     expect(submission.queued).toHaveBeenCalledTimes(1); expect(submiss…
+     39|     expect(submission.reject).not.toHaveBeenCalled(); expect(submissio…
+       |                                                                                                                         ^
+     40|   });
+     41|   it('legacy five-argument free casts retain ordinary effects and defa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  1 failed | 32 passed (33)
+   Start at  02:49:59
+   Duration  4.59s (transform 934ms, setup 0ms, collect 5.19s, tests 2.68s, environment 2.02s, prepare 378ms)
+

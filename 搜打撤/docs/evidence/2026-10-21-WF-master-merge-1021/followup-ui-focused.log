@@ -1,0 +1,58 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/merge-ui-fixtures-b7207a28/candidate/搜打撤
+
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：确认后上锁+道具移除+复原页打开，复原 min(2, 可复原数) 张后回流祭坛 600ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：取消分支不上锁、道具不丢，回流祭坛面板 88ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 献祭道具：锁定后重复触发只播报不再开选卡器 68ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 弃 3 激活：卡不足 3 张拒开选卡器；满 3 张确认后激活+消耗本格+进奖励面板 89ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 奖励② 传说+装备：满包时两张保留，整理后领取一次并可继续探索 131ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 碎片兑换：满包拒收不扣 2 碎片不上锁；有格时发卡+扣碎片+激活 60ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 紧急撤离：卡不足 3 张时 payExit 直调被拒、不开选卡器、卡不变 59ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 复原页：picks=1（修鞋铺口径）复原 1 张自动收尾；未复原直接离开也收尾 49ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 复原页：满包拒绝——口袋不动、卡不进包、可继续点收尾 38ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆：确认才回血复原，结算落盘且重入不重复；继续才回图 70ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆：满包时不扣口袋（先检后扣），deny 播报后照常收格 66ms
+ ✓ tests/sys03-altar-restore-txn.test.js > A3文案：祭坛回赠复原保持祭坛身份，继续仍走原回调 69ms
+ ✓ tests/sys03-altar-restore-txn.test.js > A3文案：满包火堆准确报告容量，不能谎报没有可复原牌 70ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 拾取页背包返回重注册仍只结算一次，旧回调不能领取或关闭新结果页 36ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 火堆取消休整保留收益，再进入必须重新确认 62ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给直接展示待领卡牌，逐张领取与刷新满包规则保持 71ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 零领取存档恢复直接展示卡牌，旧页领取回调失效且重复点击不多领 72ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给仅有 0 张时仍按实际总数显示并在全部收下后确认 50ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 入城补给仅有 1 张时仍按实际总数显示并在全部收下后确认 52ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑未解封：保留可见激活步骤和返回，重复进入/旧回调不影响新页面 53ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑已解封：照常显示迎战入口，旧封印页回调不能关闭迎战页 59ms
+ ✓ tests/sys03-altar-restore-txn.test.js > 首脑地图状态展示前置但仍是未完成节点；已激活/已击败状态保持原语义 6ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选 162ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 机器人额外初始牌也计占格，预留三格且禁带职业卡 39ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 预览后库存变化必须重新预览，继续手调后撤销不覆盖手选 50ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 首次整备在出发按钮之前明示统一消耗去向与复原入口 29ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 预设人物作为选角初值，预设宠物通过正常保存入口应用 19ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 预设宠物保存失败时保留原卡牌选择和人物初值 18ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 切换slot后不沿用上一档的预设人物和卡牌 16ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 点第二堆预览其卡面和数量，确认出征只扣第二堆 35ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 正常pointer拖动保留第二堆稳定身份，取消拖动不新增选择 38ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 同id不同堆级variant也只扣选择的变体 24ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 第二堆筛选按自己的类型和费用，选后不改第一堆剩余数量 28ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 同卡超过一格的预设保持每个格子独立，数量更新不丢节点 24ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧pickAdd动作不执行 31ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depPet动作不执行 35ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧confirmDeploy动作不执行 24ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depBack动作不执行 37ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 换slot后旧depMode动作不执行 17ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 返回模式后原整备handler和已排队确认不能抢回页面 21ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 返回模式再进整备可正常确认，原handoff不会在重进后执行 25ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 已选择堆被替换后显示失败并保留仓库及口袋 45ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出征真实页面选择与扣仓身份 > 准备保存失败不扣任何堆，重试只扣正确堆一次 23ms
+ ✓ tests/departure-stack-lifecycle-review.test.js > 出发最终动作旁保留动态待复原清空风险，不折叠到说明中 18ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > is DEV-only, with no game module import, canvas, media, storage or network machinery 41ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > preserves actual title IDs, SVG art, wordmark and complete base stylesheet order 108ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > observes image requests without creating images and exposes live pulses 58ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > toggles CSS pause without changing DOM/assets, supports cold paused and wallpaper query cases 49ms
+ ✓ tests/title-resource-review.test.js > isolated title CSS/image diagnostic > cleans its sole interval and listeners on pagehide, idempotently 37ms
+
+ Test Files  3 passed (3)
+      Tests  49 passed (49)
+   Start at  03:35:05
+   Duration  4.74s (transform 414ms, setup 0ms, collect 500ms, tests 2.97s, environment 657ms, prepare 212ms)
+

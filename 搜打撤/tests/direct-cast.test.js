@@ -245,7 +245,9 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
         .toEqual(options.filter(c => c.id !== dragon.id).map(c => c.id).sort());
       // 龙焰射线唯一效果是「注能（1）：造成 11 点法术伤害」——视为已注能 → 11 + 法伤 2 = 13
       expect(before.foes[0].hp - s.foes[0].hp).toBe(13);
-      expect(s.consumedPile).toEqual([g.ownedCards[0].uid]);
+      const consumedDragon = s.consumedPile.filter(uid => findCard(uid)?.card.id === dragon.id);
+      expect(consumedDragon).toHaveLength(1);
+      expect(s.consumedPile).toEqual([g.ownedCards[0].uid, consumedDragon[0]]);
       expect(s.energy).toBe(before.energy - bloom.cost);
       expect(s.infusing).toBeFalsy();
       expect(s.discovering).toBeFalsy();

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-coherent-render-fix-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / integrate_coherent_render_batch",
+  "goal": "Close the three real FULL gate failures and proven root ownership gap with exact frozen stage v4 delta, then rebuild and freeze normal FULL gate without publication",
+  "paths": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.stage-view.js",
+    "game/src/r7a.qa.js",
+    "tests/battle-persistent-stage.test.js",
+    "tests/potion-tip-lifecycle.test.js",
+    "tests/r7a-qa-live.test.js",
+    "docs/evidence/2026-10-21-WF-coherent-render-1021",
+    "docs/evidence/2026-10-21-WF-coherent-render-fix-1021"
+  ],
+  "doneWhen": [
+    "Exact author delta plus infusion/diagnostic preserved; focused failed contracts, original build budgets and normal frozen full gate established"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Exact six-file correction, immutable author 39 files/586 tests and negative controls, mixed main 8 files/101 tests, original-budget v4 standard build, final source and build-input hashes verified",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Candidate current-window browser acceptance and eventual publication/deployment are parent-owned; remote CI not run by this worker"
+  ],
+  "updatedAt": "2026-10-21T09:43:51.938Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

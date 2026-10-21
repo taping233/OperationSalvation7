@@ -1,0 +1,41 @@
+{
+  "baseCommit": "eaa27f33c4ca3781118e7289707da3b22927ff2a",
+  "files": [
+    {
+      "path": "\u641c\u6253\u64a4/game/src/battle/core/battle.card-play.domain.js",
+      "originalSha256": "a1366680a5349650c293c0cde40279ccda533d3fcbc8e25b56610462a85db8f2",
+      "candidateSha256": "8639792497c48936221a090e87c8c403dd93ee47986522fa91551fae575f42b9",
+      "originalBytes": 18350,
+      "candidateBytes": 18740
+    },
+    {
+      "path": "\u641c\u6253\u64a4/game/src/battle/view/battle.view.js",
+      "originalSha256": "11abf8a89ce5bfba68cffa55cdf896cda7b823eeb35f36eb8fa7fedb975fdfd2",
+      "candidateSha256": "04f24d6cec0171a2134820c4343ca87ea9969e6228409f8fbc47d4129f27ab29",
+      "originalBytes": 58112,
+      "candidateBytes": 58294
+    },
+    {
+      "path": "\u641c\u6253\u64a4/game/src/battle/view/battle.layers.js",
+      "originalSha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+      "candidateSha256": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+      "originalBytes": 57353,
+      "candidateBytes": 57429
+    },
+    {
+      "path": "\u641c\u6253\u64a4/tests/battle-hand-inspector.test.js",
+      "originalSha256": "cef644f9aba6106dc0aaf5788099b107f33eef3193d8bf22dbe84e89031a125b",
+      "candidateSha256": "b00bb30df97e4f71ef009e8507617c6d804e70c0cff8e75287f80057bc342dd1",
+      "originalBytes": 77007,
+      "candidateBytes": 78040
+    },
+    {
+      "path": "\u641c\u6253\u64a4/tests/battle-hand-rule-context.test.js",
+      "originalSha256": null,
+      "candidateSha256": "7ac22116c6cf7d0abec00b93fb0f718a67b8cf351b59fc06467038cf0ff4188a",
+      "originalBytes": 0,
+      "candidateBytes": 8943
+    }
+  ],
+  "patchSha256": "4eeafcf51d2868e28bd374242b93987221184750b5a67d5de15f4ab35947ccbd"
+}

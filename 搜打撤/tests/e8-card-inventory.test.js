@@ -376,11 +376,34 @@ describe('E8 isolated production inventory', () => {
       HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('changed IDs differ from approved IDs');
   });
 
+  it('影噬只批准稀有到史诗及精确既有 M3 声明，其他卡面与规则漂移拒绝', () => {
+    const compare = (baseline, changed) => compareMigrationInventories(baseline, changed, APPROVED_IDS,
+      HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
+    expect(() => compare(currentBaseline, inventory)).not.toThrow();
+    for (const mutate of [
+      card => { card.rarity = '传说'; }, card => { card.cost++; }, card => { card.desc += '额外'; },
+      card => { card.rules.triggers.onPlay[0].capTo = 0; },
+      card => { card.rules.triggers.onPlay.push({ op: 'armor', amount: 1 }); },
+      card => { card.unknown = true; },
+    ]) {
+      const changed = clone(inventory);
+      mutate(changed.production.cards.find(row => row.id === 'tt3sp-shadowbug').card);
+      expect(() => compare(currentBaseline, changed)).toThrow('tt3sp-shadowbug changed beyond approved rules addition');
+    }
+    for (const mutate of [card => { card.rarity = '古朴'; }, card => { card.rules = {}; }]) {
+      const changedBefore = clone(currentBaseline);
+      mutate(changedBefore.production.cards.find(row => row.id === 'tt3sp-shadowbug').card);
+      expect(() => compare(changedBefore, inventory)).toThrow('tt3sp-shadowbug changed beyond approved rules addition');
+    }
+  });
+
   it('神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明', () => {
     for (const change of [
       card => { card.armor = 0; }, card => { card.armor = 5; }, card => { card.armor = 7; },
       card => { card.armor = undefined; }, card => { card.desc += '自定义'; },
       card => { card.cost++; }, card => { card.rules.battle.hosted = ['other-choice']; },
+      card => { card.rules.triggers.onPlay[0].options[0].ops[0].pool.kind = '随机'; },
+      card => { card.rules.triggers.onPlay[0].options[2].ops[1].amount = 6; },
     ]) {
       const changed = clone(inventory);
       change(changed.production.cards.find(row => row.id === 'tt3-magic-lamp').card);

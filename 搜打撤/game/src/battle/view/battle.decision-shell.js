@@ -1,3 +1,4 @@
+import { getBattleRenderGuard } from './battle.stage-view.js';
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import { bindBattlePageAction } from './battle.page-activity.js';
 import '../../../css/battle-decision.css';
@@ -7,6 +8,7 @@ export { restoreCombatScene };
 // Shared presentation only: commands and cancellation eligibility stay with each caller.
 export function createBattleDecisionPresenter({ UI, getSnapshot, R }) {
 return function showBattleDecision(title, body, mode, snapshot = getSnapshot()) {
+  const isCurrent = getBattleRenderGuard(UI), bodyOwner = UI.el.ovBody;
   const previous = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision'));
   const localRefresh = previous?._decisionTitle === title && previous._battleToken === snapshot.battleToken;
   const scrollTop = localRefresh ? /** @type {BattleElement} */ (previous.querySelector('.battle-decision-content'))?.scrollTop || 0 : 0;
@@ -28,8 +30,9 @@ return function showBattleDecision(title, body, mode, snapshot = getSnapshot()) 
   const scene = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-stage'));
   const floating = kind !== 'formation' && !!scene && scene._battleToken === snapshot.battleToken;
   const html = `<section class="battle-decision battle-decision-unified${floating ? ' battle-secondary-panel sdt-feedback-theme' : ''}${compact ? ' battle-decision-compact' : ''}" data-decision-kind="${kind}" data-boss="${snapshot.opts?.isBoss ? '1' : '0'}"><header class="battle-decision-head"><h3>${title}</h3><span${kind === 'pile' ? ' class="battle-pile-total"' : ''}>${phaseLabel}</span></header>${summaryHTML ? `<div class="battle-decision-summary">${summaryHTML}</div>` : ''}<div class="battle-decision-content">${content.innerHTML}</div>${actions ? `<footer class="battle-decision-actions">${actions}</footer>` : ''}</section>`;
-  if (floating) mountCombatOverlay(UI, title, html, mode, scene);
-  else UI.showOverlay(title, html, mode);
+  if (floating && !mountCombatOverlay(UI, title, html, mode, scene)) return;
+  else if (!floating) UI.showOverlay(title, html, mode);
+  if (!isCurrent() || UI.el.ovBody !== bodyOwner) return;
   const next = /** @type {BattleElement} */ (UI.el?.ovBody?.querySelector('.battle-decision'));
   if (next) { next._battleToken = snapshot.battleToken; next._decisionTitle = title; }
   if (next && localRefresh) {

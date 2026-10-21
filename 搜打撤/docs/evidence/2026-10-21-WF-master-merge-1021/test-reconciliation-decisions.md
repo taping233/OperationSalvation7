@@ -1,0 +1,25 @@
+# Three-suite fixture reconciliation
+
+Result: test-only incremental `battle-tests-incremental.patch` passes 3 suites / 134 assertions, scoped lint, syntax, and `git apply --check`. No production source or central assembly edits. All three original test blobs independently match exact incoming master b7207a28 and the assembly at freeze time. Manifest records before/after git blob SHA1 and SHA256.
+
+## Diagnoses and decisions
+
+- **battle-hand-inspector (3 central failures):** the test's three-argument `showOverlay` mock always replaces `ovBody.innerHTML`, ignoring the accepted connected-overlay `options.battleBody` contract. Thus modal opening destroys the very stage whose target and backdrop identity the incoming tests require. Update only the mock to increment overlay revision and invoke guarded retained-body mounting. Original enemy/self target retention, accessible labels, Enter execution, paid energy, removed hand, scenery identity and mode-event assertions remain. Add explicit retained scene/connected target assertions. Separately add two synthetic covered-target safety tests: browser-inert can be bypassed by script-dispatched input, but no cards/resources may be spent; a fresh selection after modal return remains usable. Existing production may cancel a rejected synthetic selection, so the new case does not conflate preservation of a normal untouched modal selection with persistence after deliberately invalid scripted input.
+- **battle-hand-rule-context (1 central failure):** the literal string `{ spellBonus, mode, discoverSrcRect, handRuleContext }` excludes the accepted synchronous snapshot reuse field. It does not indicate lost context wiring. Replace only that whole-literal assertion with AST inspection of the actual single `updateHand` call's fifth argument: require the same `handRuleContext` identifier and `liveInteractionSnapshot`, plus unchanged other fields. Keep fresh context creation, combat status hand context, downstream context and occurrence-count assertions, and all 20 domain/cache tests.
+- **potion-tip-lifecycle (1 central failure):** `showPotions(2)` changes count but keeps the first item's same UID, role and aim. The persistent stage correctly retains that source control; treating a new event from it as stale is invalid. For actual replacement coverage, supply different physical UIDs and assert old source disconnection before replay. Keep all old popup hiding/detachment, no consumption, no rebinding, mode/close/token and cancel-listener protections. Add distinct same-UID count refresh coverage (live source stays usable, current count appears, old pinned confirmation cannot consume) and actual replaced-UID pinned confirmation/source replay coverage (new source can open, old controls cannot consume).
+
+## Evidence
+
+- `evidence/closure-manifest.json`: 663 code/test/fixture files, 6,120,358 bytes, recursively sourced from the latest central assembly, no full asset tree copied. No mutations of assembly or node_modules.
+- `evidence/tests-candidate.log`: initial 132/132 pass.
+- `evidence/tests-final-strengthened.log`: final **134/134 pass**, 3 files (inspector 100, hand context 21, potion lifecycle 13).
+- `evidence/lint-final-strengthened.log`: exit 0. All three candidate files also pass `node --check`.
+- `evidence/negative-potion-uid.log`: transform-only removal of the stage's physical UID compatibility guard fails the new actual replacement test because current and old source become the same node (1 expected failure, 12 skipped).
+- `evidence/negative-stale-confirm.log`: transform-only removal of the popup's current-inspection/connected-panel gate fails the no-consumption assertion by actually consuming `tip-fixture-0` through the stale pinned confirm (1 expected failure, 12 skipped).
+- Harness `validation/搜打撤/vitest.negative.config.mjs`; candidate/production source bytes are not mutated by these controls.
+- Earlier attempt evidence retained: `tests-first.log` is a wrong-working-directory command setup failure (no test executed). `tests-final.log` records an experimental combined assertion that incorrectly required selection to survive intentionally synthetic invalid input; resource no-spend passed, post-return selected highlight did not. Final tests separate ordinary modal identity retention from synthetic safety and explicit reselection instead of changing production rules.
+- Original failures remain in `/tmp/merge-master-b7207a28-evidence/combined-focused-65.log`. No full gate, build, browser, commit or push performed by this worker.
+
+## Independent review
+
+2026-10-21 18:01 UTC: `/root/review_master_merge_compatibility` gives GO for patch b7078440…; independently verifies all three before/after hashes and original assertion preservation, new UID/current-popup distinctions, AST context wiring, 134/3 pass log and meaningful negative failures. Final post-negative verification finds all 660 dependency source/fixture hashes unchanged and all three validated tests byte-identical to candidate. Central notified; this worker's narrow follow-up is complete.

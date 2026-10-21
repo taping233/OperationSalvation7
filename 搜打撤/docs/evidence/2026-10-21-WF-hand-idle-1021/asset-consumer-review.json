@@ -1,0 +1,11 @@
+{
+  "scope": "Exactly one opaqueConsumers.layers SHA refreshed; all other pins, algorithms, exclusion candidates and budgets unchanged.",
+  "independentReview": "Exact patch/source identities match. Asset expression assetUrl(source) and ally portrait mapping unchanged; feedback module has no asset expression or reviewed fingerprint. In the production caller incoming arrivals are a subset of the same events populating drawn, so nonempty incoming guarantees oldUID snapshot exists. Eventless pending reconciliation never dereferences it.",
+  "proof": "consumer-review-proof.json",
+  "negativeControls": "Existing maintained real layers changed-asset-expression and missing-approval controls remain unchanged and pass; independent frame controls also remain.",
+  "targeted": {
+    "filesPassed": 2,
+    "testsPassed": 41,
+    "failed": 0
+  }
+}

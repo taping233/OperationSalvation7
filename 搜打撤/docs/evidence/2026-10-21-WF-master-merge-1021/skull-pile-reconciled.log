@@ -1,0 +1,67 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+ ✓ tests/skull-sword-effective-session.test.js > BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重复回手不污染原卡 322ms
+ ✓ tests/skull-sword-effective-session.test.js > 不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌 415ms
+ ✓ tests/skull-sword-effective-session.test.js > 材料已选后变形：确认前重验并清除非法选择，原卡和能量不动 75ms
+ ✓ tests/skull-sword-effective-session.test.js > 缺失变形模板fail-closed，拒绝出牌与材料，保持原UID和背包 49ms
+ ✓ tests/skull-sword-effective-session.test.js > 普通战持有剑仍不触发，下次普通战不继承前场变形 120ms
+ ✓ tests/skull-sword-effective-session.test.js > 注能进入动作队列后才变形：最终支付屏障拒绝，不扣能量、不移牌 43ms
+ ✓ tests/skull-sword-effective-session.test.js > 原UID免能量与非初始override优先级沿用，后登记青龙形态替换不朽规则 97ms
+ ✓ tests/skull-sword-effective-session.test.js > 真实青龙化身在剑后生效、再穿戴剑覆盖青龙：解析与结算沿用最后登记规则 120ms
+ ✓ tests/skull-sword-effective-session.test.js > BOSS仅持有但未编入剑：初始攻击不变形 61ms
+ ✓ tests/skull-sword-effective-session.test.js > 注能入口只统计可用材料，四张不朽斩不能凑足两张燃料 39ms
+ ✓ tests/skull-sword-effective-session.test.js > 其他手牌支付保持原有初始攻击资格，同时选牌面显示有效不朽斩 174ms
+stdout | tests/skull-sword-effective-session.test.js > 内部免费释放按已显示不朽斩结算并同UID回手
+DIRECT_RELEASE {"shown":"不朽斩","raw":"初始攻击","delta":5,"retained":true,"energyDelta":0}
+
+ ✓ tests/skull-sword-effective-session.test.js > 内部免费释放按已显示不朽斩结算并同UID回手 154ms
+stdout | tests/skull-sword-effective-session.test.js > 内部免费释放缺少转换模板时不能回退初始攻击
+MISSING_RELEASE {"delta":0,"retained":true,"raw":"初始攻击"}
+
+ ✓ tests/skull-sword-effective-session.test.js > 内部免费释放缺少转换模板时不能回退初始攻击 112ms
+ ✓ tests/skull-sword-effective-session.test.js > draw释放全部初始攻击使用统一有效卡，免费释放且每UID只保留一份 246ms
+ ✓ tests/skull-sword-effective-session.test.js > draw抽牌后自动释放其中武术使用有效不朽斩并免费回手 88ms
+ ✓ tests/skull-sword-effective-session.test.js > draw灰烬满手同步直释也采用有效卡，保留原UID弃牌和手牌上限 31ms
+ ✓ tests/skull-sword-effective-session.test.js > draw缺目标模板在普通抽牌/灰烬直释均fail-closed（灰烬=false） 33ms
+ ✓ tests/skull-sword-effective-session.test.js > draw缺目标模板在普通抽牌/灰烬直释均fail-closed（灰烬=true） 31ms
+stdout | tests/skull-sword-effective-session.test.js > 玩家已提交有效副本，支付前新规则缺模板仍拒绝扣费与打出
+PLAYER_SOURCE_RACE {"delta":0,"energyDelta":0,"retained":true}
+
+stderr | tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量1，足费才打出
+Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)
+    at module.exports (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at HTMLCanvasElementImpl.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js:42:5)
+    at HTMLCanvasElement.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/generated/HTMLCanvasElement.js:131:58)
+    at foeAttackLine (/tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:191:20)
+    at fire (/tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:290:61)
+    at /tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:433:15
+    at /tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.feedback.js:28:5 undefined
+
+ ✓ tests/skull-sword-effective-session.test.js > 玩家已提交有效副本，支付前新规则缺模板仍拒绝扣费与打出 42ms
+ ✓ tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量1，足费才打出 66ms
+stderr | tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量2，足费才打出
+Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)
+    at module.exports (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at HTMLCanvasElementImpl.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js:42:5)
+    at HTMLCanvasElement.getContext (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules/jsdom/lib/jsdom/living/generated/HTMLCanvasElement.js:131:58)
+    at foeAttackLine (/tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:191:20)
+    at fire (/tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:290:61)
+    at /tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.vfx.js:433:15
+    at /tmp/merge-master-b7207a28-assembly/搜打撤/game/src/battle/view/battle.feedback.js:28:5 undefined
+
+ ✓ tests/skull-sword-effective-session.test.js > 极速按有效青龙费用预检：当前能量2，足费才打出 116ms
+ ✓ tests/skull-sword-effective-session.test.js > 免费内部青龙释放在零能量仍正常，不影响非免费支付不足拒绝 128ms
+ ✓ tests/skull-sword-effective-session.test.js > 非免费动作入队后能量不足：真正支付前拒绝，UID/手牌/伤害不变 39ms
+ ✓ tests/skull-sword-effective-session.test.js > 原raw已入队后新增非初始override：支付前按当前UID有效卡结算 82ms
+ ✓ tests/skull-sword-effective-session.test.js > 显式自定义raw同名执行候选不会被后来的UID override吞掉cost和rules 50ms
+ ✓ tests/skull-sword-effective-session.test.js > BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID 106ms
+ ✓ tests/skull-sword-effective-session.test.js > 堆摘要实时跟随青龙/取消变形和非初始override，普通战持剑仍报初始攻击 63ms
+
+ Test Files  1 passed (1)
+      Tests  27 passed (27)
+   Start at  02:56:26
+   Duration  5.47s (transform 967ms, setup 0ms, collect 1.98s, tests 2.90s, environment 331ms, prepare 64ms)
+

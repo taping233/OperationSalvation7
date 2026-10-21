@@ -1,0 +1,182 @@
+{
+  "decision": "FINAL SOURCE GO for frozen-source one normal FULL gate and build, not publication or completed full validation",
+  "incoming": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "validatedCloudTree": "86f43ce681cd2e49972e75c9095f546bfd378468",
+  "patches": [
+    {
+      "path": "merge-battle-render-b7207a28/battle-new-master.patch",
+      "sha256": "8a3b06a74d59fd46d568df745838b1c8a4e873f2ca8309b22eefbd948d8cda08"
+    },
+    {
+      "path": "merge-battle-render-b7207a28/battle-types-incremental.patch",
+      "sha256": "649bebaf613659dc7380fe55a356cecc436bc8eaaff0fb210229378245f25b20"
+    },
+    {
+      "path": "merge-connected-overlay-b7207a28/connected-overlay-master-relative.patch",
+      "sha256": "1c6007a11fde62ad37ce39a60daf37ea771323816dfd493926fb1e0559a6256a"
+    }
+  ],
+  "assemblyObserved": [
+    {
+      "path": "搜打撤/game/css/battle-secondary-overlay.css",
+      "assemblySha256": "7d73cb2c4d14dca4fe66c0574ed504ea246ed75a73bae3d89e20072fef847d02"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "assemblySha256": "9194ad7df74479e376edde1f160e194bcc898787ff3aa2dadfecc29545966836"
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.domain.js",
+      "assemblySha256": "d9923304e683431540cab87664869742ae552ec6ff3ea7c9acd945851751d701"
+    },
+    {
+      "path": "搜打撤/game/src/battle/effects/battle.discover-flow.js",
+      "assemblySha256": "4eaf445e229a31e1340e681569a008f95bb28219c11fc5983406407d014570b8"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "assemblySha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.decision-shell.js",
+      "assemblySha256": "26d149b1d98676b1998dc9c042ede68fab313d68ff86211253946904d275d36f"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+      "assemblySha256": "facfdaa9ecc4ab55c7188026f70eb8f9870a67613191ade9ba5d64f9ca79fc32"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "assemblySha256": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+      "assemblySha256": "50e042e57d6589c13e439171227f061a4a37596b14a8a4ba04709b2e21d0f843"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "assemblySha256": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.potion-use.js",
+      "assemblySha256": "a7ad3dd93e32d591c79cedc48b54d1df7a3a51a23e3634f7021e04c2da4047d7"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.secondary-overlay.js",
+      "assemblySha256": "5977103aa9818fdf2603b21f53c6c42ced76d35f0a11214c81a8ad4ce31cdcee"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+      "assemblySha256": "3c8c521f634264a1c1239d78524cf6f918458664f5cbbce18eff0ad8ed3947dd"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "assemblySha256": "94621272e91cf5e6ce1e997bdb00bb7f24b78d968d126ef65790ccfffb34638e"
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-panel.local.js",
+      "assemblySha256": "49e06eeae73b04ebb64deb8e08e93ed8f46c787d58c7ecb16bf2ac0dfe444ec3"
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-stages.local.js",
+      "assemblySha256": "987f709e1f51dd9d0023e4aface0e5e390850e08a1ac9b5af2dac6bc6a481d4e"
+    },
+    {
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "assemblySha256": "6e528f33630d1f2ccf4c147ecf8cf3a0a3d27387ab4bb82f505410982e7643a8"
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "assemblySha256": "5a43467e6d713b6d56242efa7b86f738288589bcbf879c38023aaef5ba4d0aa6"
+    },
+    {
+      "path": "搜打撤/tests/battle-ally-dom-order.test.js",
+      "assemblySha256": "5d047c338ca608a47d000edcbba464288bfb40890cca7ffc43024266d130ed0b"
+    },
+    {
+      "path": "搜打撤/tests/battle-entry-view.test.js",
+      "assemblySha256": "f5926d756087d3f245a5482c7dd5d9adbbc1e226deb4fce8a9b1a9f117cf5b88"
+    },
+    {
+      "path": "搜打撤/tests/battle-frames-ownership.test.js",
+      "assemblySha256": "132425542a6ef7ab2dd36cc464ddf5b011cec5f827fe90bcaa7dee8ca6efa8a0"
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-action-layout.test.js",
+      "assemblySha256": "2e5bee5402e8aa39abbea24d2854654705de9b224c42edab76d185146dec008a"
+    },
+    {
+      "path": "搜打撤/tests/battle-persistent-stage.test.js",
+      "assemblySha256": "48cd6a517d77b571fd580d359b42ec234ec6acb8c6583ac71f18f3325bfe851b"
+    },
+    {
+      "path": "搜打撤/tests/battle-queue-direct-release-forwarding.test.js",
+      "assemblySha256": "b2a94eb546e68d0e1463fb880bb854f978f384bed34567cfacabbefa69b87c74"
+    },
+    {
+      "path": "搜打撤/tests/battle-render-runtime-trace.test.js",
+      "assemblySha256": "b3cb8ad18a9e6a5fce1ca62cb2b527e9989a1de643207367925e6cd152cff776"
+    },
+    {
+      "path": "搜打撤/tests/battle-restore-boundaries.test.js",
+      "assemblySha256": "d680694a8589ad8da6fbaa52a5744d359266c70892cfbe725930016faef12f87"
+    },
+    {
+      "path": "搜打撤/tests/battle-scenery-secondary-ready.test.js",
+      "assemblySha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549"
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-mounts.test.js",
+      "assemblySha256": "7892015b04c46d3dc95744e69d944c2959833d159c6dc107ef49214a52cc38f3"
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-validator.test.js",
+      "assemblySha256": "2aecc1ca3a84e961e4baca825fbabf8cc16f0fad7f55a5e21b22392cbaa2f36a"
+    },
+    {
+      "path": "搜打撤/tests/battle-tools-lifecycle.test.js",
+      "assemblySha256": "4e4ef6a202eff3656e21b190cb0e3e4d8b0d951524fb84437f0f95177af89e62"
+    },
+    {
+      "path": "搜打撤/tests/direct-cast.test.js",
+      "assemblySha256": "615042dbec1be015887ccfced7ffddae8de5905b694b5f05e145aea8c01d8729"
+    },
+    {
+      "path": "搜打撤/tests/overlay-connected-master-merge.test.js",
+      "assemblySha256": "a9779ef019b2a17bb53d58328e9cc4485a2b30f840853f5dc676d9ac54e5a721"
+    }
+  ],
+  "semanticReview": [
+    "New master physical-UID infusion and inline material workspace retained; no obsolete grouped +/- behavior, selectionId and live target/revision guards preserved.",
+    "New master direct-release-as-infused semantics retained. Separate preexisting factory.domain shim dropped args9/10; reviewed exact2-line correction forwards submission=null,directRelease=false without changing callers/default manual behavior. This is a runtime bug repair, not merely typing.",
+    "Newest potionUse lifecycle retained. ownsPanel grants retention only for exact current inspection.panel, parent/bar/current page; sync closes detached panel. No old direct-use/hover listeners.",
+    "Pager remains master DIV role=group in resource dock with bounded prev/next and revision-bound callbacks. Displaced exact pager restores identity rather than duplicates; old cycle-button semantics not restored.",
+    "Latest player equipment/vitals ordering, dynamic card values, new enemy badges, pile display/scroll and readiness retained.",
+    "Validated owner/generation/coherent snapshot protections, frame retry/dirty-consuming commit, static portrait through first owned successful paint, connected overlay viewport/content focus and fixed diagnostic timing scopes restored.",
+    "Restore callback verifies exact owner after overlay hooks and focus. Renderer aborts eligible same-token covered restore if abandoned, rather than cold-repainting user navigation.",
+    "Unaccepted selection-prompt-direct-child, fresh validated-battle-mounts, rejected bounded hand pool and obsolete infusion-existence/no-available tests excluded."
+  ],
+  "negativeControlsRead": [
+    "Removing abandoned-restore abort fails live #focus-navigation retention assertion.",
+    "Removing ownsPotionPanel retention fails exact popup-node identity assertion."
+  ],
+  "evidenceAccounting": [
+    "Renderer22files318tests passed before final guard addition; affected3files51tests passed after guard. Do not claim a second full318test run.",
+    "Frames47tests pass and local lint reported; secondary final34tests/lint/syntax pass reported. Reviewer read sources/evidence; did not execute tests/build/browser.",
+    "Incoming CI pass not established; prior local gate explicitly unverified. One normal FULL gate+build remains required after frozen central integration.",
+    "Final annotation increments use actual named options formals and immediate identical destructuring; reviewed neutral. First secondary JSDoc-only TS8024 attempt superseded, not counted passed. Final central original11configuration typecheck560/560 PASS at precheck-types-final.log.",
+    "Read repaired-direct-release-confirmed.log:5suites33PASS including3realengine facade regression cases (free-only rejection/ninth observer; direct-release tenth effect with callbacks/no material spend; legacy5arg defaults). No exec-play implementation changes.",
+    "Final direct-cast expectation uses exact ordered[bloomUID,one identified tempDragonUID] consumed pile. New13damage, energy, hand/selection assertions retained. Discover direct-release note follows actualdirectRelease flag, fixing prior pure-only classification omission; no gameplay flag expansion.",
+    "Final asset guard diff has exactly3approved fingerprint substitutions (frames category+opaque and layers opaque), actual current hashes match. No candidate/category/source asset hash/dependency/fail-closed algorithm changed."
+  ],
+  "requiredValidation": [
+    "Facade and updated direct-release targeted regression satisfied in5suite33PASS. Full suite must still run normally as frozen integration gate.",
+    "Full normal test/type/lint/asset gates, unchanged test policy/config/thresholds.",
+    "Production build/asset closure with exact final asset-review fingerprints; no expanded omission policy.",
+    "Focused browser smoke later: cold battle/static portrait→owned animation; settings cover/restore/focus-navigation; unchanged potion popup/target use; pager/migration; physical UID infusion; dynamic descriptions; readiness/timer cleanup."
+  ],
+  "resourceApproval": "layers-approved-resource-chain.json approves exact final layersbc24fc0b… from approved-base747706… resource surface16/16 and broad incoming→candidate50/50 equivalence. Frames64/64 equal. No additional asset exclusions approved.",
+  "limitations": "Source GO is not permission to skip full gate/build, claim CI/browser pass, replace incoming gameplay or modify protected main/index/HEAD. Reviewer ran no tests/build/browser; all reported pass evidence belongs to implementation/integration workers.",
+  "observedUtc": "2026-10-21T17:51:10Z"
+}

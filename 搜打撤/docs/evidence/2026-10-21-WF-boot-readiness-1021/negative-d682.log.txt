@@ -1,0 +1,39 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-boot-readiness-d682/搜打撤
+
+ × tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded invalidate cannot run against the empty UI cache 8ms
+   → expected [Function] to not throw an error but 'TypeError: Cannot read properties of …' was thrown
+ × tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded visibilitychange cannot run against the empty UI cache 1ms
+   → expected [Function] to not throw an error but 'TypeError: Cannot read properties of …' was thrown
+ ↓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > keeps early wakes dormant through asynchronous boot, then explicitly starts once ready
+ ↓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > coalesces repeated ready wakes and keeps idle visibility resumption responsive
+ ↓ tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > retains real drawing after startup, background coverage, and once-only initialization
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded invalidate cannot run against the empty UI cache
+ FAIL  tests/boot-frame-readiness.test.js > main loop starts only after boot initialization > pre-DOMContentLoaded visibilitychange cannot run against the empty UI cache
+AssertionError: expected [Function] to not throw an error but 'TypeError: Cannot read properties of …' was thrown
+
+- Expected: 
+undefined
+
++ Received: 
+"TypeError: Cannot read properties of undefined (reading 'hidden')"
+
+ ❯ tests/boot-frame-readiness.test.js:83:34
+     81|     if (trigger === 'invalidate') renderScheduler.invalidate();
+     82|     else document.dispatchEvent(new Event('visibilitychange'));
+     83|     expect(() => runFrame()).not.toThrow();
+       |                                  ^
+     84|     expect(window.SDT.__frameStats).toBeUndefined();
+     85|     expect(requestAnimationFrame).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 skipped (5)
+   Start at  12:02:58
+   Duration  1.19s (transform 289ms, setup 0ms, collect 72ms, tests 501ms, environment 361ms, prepare 90ms)
+

@@ -1,0 +1,105 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021
+
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > diagnostic static gate keeps neutral art and skips Pixi loads without global reduced motion 23ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > applies the frame limit to a live character and preserves action timing 67ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > continues a live combo action and reads its remaining contact time from the player clock 59ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > stops hidden geometry polling and resumes only one interval for a live figure 61ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > syncs output pixels on resize, DPR-only ticks, visible recovery and app reuse 8ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > keeps the death completion deadline at 30 FPS 58ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > keeps the death completion deadline at 60 FPS 56ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > keeps the death completion deadline at 120 FPS 57ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > limits actual render submissions even while geometry updates every 60 Hz tick 58ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > measures the figure once when a ticker update advances a frame 56ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > requests only the delivered wu frame URLs, in declared loading order 63ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > requests only the delivered changwuyu frame URLs, in declared loading order 60ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > requests only the delivered baita frame URLs, in declared loading order 58ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > requests only the delivered heixiang frame URLs, in declared loading order 58ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > requests only the delivered xingyue frame URLs, in declared loading order 57ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > keeps characters without delivered frames visible, even with an old supported URL 2ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > holds wu fallen after death and ignores later hurt/attack interruptions 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > holds changwuyu fallen after death and ignores later hurt/attack interruptions 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > holds baita fallen after death and ignores later hurt/attack interruptions 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > holds heixiang fallen after death and ignores later hurt/attack interruptions 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > holds xingyue fallen after death and ignores later hurt/attack interruptions 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > returns wu to the shared initial idle texture after an attack 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > returns changwuyu to the shared initial idle texture after an attack 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > returns baita to the shared initial idle texture after an attack 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > returns heixiang to the shared initial idle texture after an attack 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > returns xingyue to the shared initial idle texture after an attack 53ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > restores the portrait when a pending attach loses its battle DOM 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > rejects a late resource callback after hide or overlay replacement 2ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > unloads the active frame texture set on hide and allows a later battle to reload it 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > probes only idle when none is usable and clears a sprite even after the cache is empty 3ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > bounds simultaneous frame loads while preserving a usable idle frame 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > commits a drawable first idle before background frames finish, and can play a partial action 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > uses the next delivered idle when the first is missing instead of rejecting the whole role 53ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > keeps partial idle and action sequences usable after a missing noncritical frame 53ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > cancels old background batches and unloads them before a different role takes over 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > does not reuse a pending attachment when the same image slot changes role 105ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > reports actual single-app/session and completed frame count without starting more loads 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > skips all texture work with reduced motion while leaving the static figure visible 1ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > restores static art when reduced motion changes while the first texture is pending 52ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > retires live character frames on reduced motion before the next tick 56ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > retires live character frames on reduced motion before the next action 55ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > retires live character frames on reduced motion before the next poll 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > waits for pending frame batches to unload before a new attach 54ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > hides the static portrait synchronously on first attach, before async texture loading 3ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > shares one pending attachment across repeated renders of the same live figure 53ms
+ ✓ tests/battle-frames-lifecycle.test.js > battle frame lifecycle > restores the static portrait when no playable frame set exists (fallback, no permanent blank) 4ms
+ ✓ tests/battle-frames-ownership.test.js > does not leave failed Pixi hosts behind after repeated initialization failures 31ms
+ ✓ tests/battle-frames-ownership.test.js > releases frame ownership when the overlay is explicitly closed 8ms
+ ✓ tests/battle-frames-ownership.test.js > resets a same-role death presentation when a newer battle reuses the overlay 64ms
+ ✓ tests/battle-frames-ownership.test.js > aborts pending alpha probes on close so a subsequent battle is not blocked on them 57ms
+ ✓ tests/battle-frames-ownership.test.js > does not restart rendering from a queued action wake after synchronous close 3ms
+ ✓ tests/battle-frames-ownership.test.js > shares normal same-token rerenders without interrupting an attack 55ms
+ ✓ tests/battle-frames-ownership.test.js > shares a cancelled pending URL with its new owner and unloads only after that owner exits 58ms
+ ✓ tests/battle-frames-ownership.test.js > aborts an old pending alpha probe on role replacement and does not share its attachment 55ms
+ ✓ tests/battle-frames-ownership.test.js > aborts an old pending alpha probe on token replacement and does not share its attachment 55ms
+ ✓ tests/battle-frames-ownership.test.js > settles a cancelled bitmap probe immediately and closes the late bitmap without changing the next role 107ms
+ ✓ tests/battle-frames-ownership.test.js > settles a dying old role and hides its frame layer while a replacement role loads 56ms
+ ✓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas wu, retaining all delivered texture frames 56ms
+ ✓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas changwuyu, retaining all delivered texture frames 55ms
+ ✓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas baita, retaining all delivered texture frames 55ms
+ ✓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas heixiang, retaining all delivered texture frames 55ms
+ ✓ tests/battle-frames-ownership.test.js > measures only the geometry anchor for fixed-canvas xingyue, retaining all delivered texture frames 54ms
+stdout | tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: settings)
+[frame-settings-operation-counts] {"initial":{"loads":63,"unloads":0},"repeatedSettings":3,"addedLoads":0,"addedSettingsUnloads":0,"actualCloseUnloads":63}
+
+ ✓ tests/battle-frames-ownership.test.js > measures the next available idle when the first texture is missing and releases all successful textures 55ms
+ ✓ tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: settings) 74ms
+stdout | tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: true)
+[frame-settings-operation-counts] {"initial":{"loads":63,"unloads":0},"repeatedSettings":3,"addedLoads":0,"addedSettingsUnloads":0,"actualCloseUnloads":63}
+
+ ✓ tests/battle-frames-ownership.test.js > retains one role through repeated same-battle settings and releases it on actual close (mode: true) 64ms
+ ✓ tests/battle-frames-ownership.test.js > returns during a pending first-frame load without duplicate loads or old callback resurrection 108ms
+ ✓ tests/battle-frames-ownership.test.js > keeps a completed pending load hidden under settings, including a second settings panel 114ms
+ ✓ tests/battle-frames-ownership.test.js > releases a suspended role when its retained stage is removed without a mode event 62ms
+ ✓ tests/battle-frames-ownership.test.js > releases pending suspended ownership before a new battle and ignores the old completion 57ms
+ ✓ tests/battle-frames-ownership.test.js > still releases textures for a retained non-settings page 57ms
+ ✓ tests/battle-frames-ownership.test.js > releases a settings-shaped page that does not actually restore the retained stage 53ms
+ ✓ tests/battle-frames-ownership.test.js > releases retained textures when the entire overlay is removed 59ms
+stdout | tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations
+[frame-settings-complete-roundtrips] {"initialLoads":63,"roundtrips":3,"settingsLoads":0,"settingsUnloads":0,"actualExitUnloads":63,"totalUnloads":63,"remainingTextures":0}
+
+ ✓ tests/battle-frames-ownership.test.js > releases the suspended role immediately on the real battle-end event 57ms
+ ✓ tests/battle-frames-ownership.test.js > counts complete settings roundtrips without repeated texture load or release operations 67ms
+ ✓ tests/battle-frames-ownership.test.js > stops geometry polling and queued renderer wakes for the entire settings suspension (mode: settings) 6ms
+ ✓ tests/battle-frames-ownership.test.js > stops geometry polling and queued renderer wakes for the entire settings suspension (mode: true) 5ms
+ ✓ tests/battle-frames-ownership.test.js > does not retain textures for a generic boolean-wide page without battle settings 54ms
+ ✓ tests/battle-frames-ownership.test.js > reattaches a replaced image in the retained stage without leaving the frame host hidden 57ms
+ ✓ tests/battle-frames-pending-release.test.js > hide releases completed textures even while one unrelated frame load never settles 23ms
+ ✓ tests/battle-frames-pending-release.test.js > late cleanup from the old session cannot destroy a same-URL texture claimed by the new session 8ms
+ ✓ tests/battle-frame-assets.test.js > releases settled URLs without waiting for a pending URL, then unloads its late completion 3ms
+ ✓ tests/battle-frame-assets.test.js > a new owner of an inflight URL protects its shared texture from old cleanup 1ms
+ ✓ tests/battle-frame-assets.test.js > serializes only an unloading URL before reentry and respects cancellation while waiting 1ms
+ ✓ tests/battle-frame-assets.test.js > failed loads are retryable and repeated release never unloads twice 1ms
+ ✓ tests/battle-frames-diagnostic-policy.test.js > frame diagnostic policy and non-loading texture accounting > requires DEV, both explicit probes and static query 2ms
+ ✓ tests/battle-frames-diagnostic-policy.test.js > frame diagnostic policy and non-loading texture accounting > deduplicates BaseTexture identity across texture slots and records using integer physical dimensions 1ms
+ ✓ tests/battle-frames-diagnostic-policy.test.js > frame diagnostic policy and non-loading texture accounting > ignores invalid dimensions and never treats absent base textures as image pixels 0ms
+
+ Test Files  5 passed (5)
+      Tests  87 passed (87)
+   Start at  14:53:29
+   Duration  7.01s (transform 234ms, setup 0ms, collect 403ms, tests 4.04s, environment 1.61s, prepare 285ms)
+

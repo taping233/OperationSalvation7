@@ -1,0 +1,33 @@
+{
+  "description": "Executed current production mountHandLayer/updateHand and full production acquisition feedback in jsdom. Dependencies limited to rendering/core/animation test doubles; target function bodies and lifecycle execute without behavior changes, only allocation observers. Array literals and array-returning calls are AST wrapped; Map and Set construction observed by subclasses. No browser/FPS claim.",
+  "hashes": [
+    {
+      "name": "battle.layers.js",
+      "sha256": "766374c9c091fe5fe1e858534c098b3cc34ec77ff42ca93dbd8541e35195638c"
+    },
+    {
+      "name": "battle.effect-feedback.js",
+      "sha256": "da526926165bb1e996bfee433ce8a48b237601d1c94059e67bf800cd0b854464"
+    }
+  ],
+  "repeats": 20,
+  "groups": 9,
+  "domUnchanged": true,
+  "target": {},
+  "totalTarget": {
+    "Array": 0,
+    "Set": 0,
+    "Map": 0
+  },
+  "allObserved": {
+    "Set at updateHand (battle.layers.js:374:19)": 20,
+    "Set at updateHand (battle.layers.js:374:39)": 20,
+    "Array battle.layers.js:376:map": 20,
+    "Array battle.layers.js:376:filter": 20,
+    "Set at updateHand (battle.layers.js:376:23)": 20,
+    "Array battle.layers.js:391:literal": 20,
+    "Array battle.layers.js:483:literal": 20,
+    "Array battle.layers.js:533:map": 20,
+    "Set at updateHand (battle.layers.js:533:22)": 20
+  }
+}

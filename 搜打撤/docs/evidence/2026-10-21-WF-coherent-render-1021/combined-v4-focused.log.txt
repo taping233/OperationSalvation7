@@ -1,0 +1,20 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+ ✓ tests/battle-persistent-stage.test.js (36 tests) 2225ms
+ ✓ tests/battle-infusion-existence.test.js (12 tests) 436ms
+ ✓ tests/battle-stage-mounts.test.js (9 tests) 72ms
+ ✓ tests/potion-tip-lifecycle.test.js (15 tests) 1089ms
+   ✓ 药水提示全局监听生命周期 > 100次普通按下/松开及药水栏替换不保留旧cancel回调  546ms
+ ✓ tests/runtime-trace-modal.test.js (13 tests) 537ms
+ ✓ tests/battle-stage-validator.test.js (5 tests) 159ms
+ ✓ tests/battle-infusion-material-state.test.js (10 tests) 173ms
+ ✓ tests/r7a-qa-live.test.js (1 test) 1759ms
+   ✓ loads isolated real view, plays one card, ends and exits without storage writes  1758ms
+
+ Test Files  8 passed (8)
+      Tests  101 passed (101)
+   Start at  18:37:03
+   Duration  14.64s (transform 1.09s, setup 0ms, collect 3.29s, tests 6.45s, environment 3.03s, prepare 467ms)
+

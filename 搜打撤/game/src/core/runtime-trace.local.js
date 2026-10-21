@@ -1,7 +1,8 @@
 import { connectRuntimeStages, RUNTIME_STAGES } from './runtime-trace-stages.local.js';
+import { registerRuntimeTracePanel } from './runtime-trace-panel.local.js';
 // Explicit opt-in, local-only evidence. No game state, text, URLs or identifying content collected.
 export const TRACE_LIMIT = 400;
-export const TRACE_REVISION = 'runtime-interactions-20261020-3';
+export const TRACE_REVISION = 'runtime-interactions-20261021-6';
 const KINDS = new Set(['start', 'input', 'dom-update', 'frame-opportunity', 'longtask', 'sync', 'visibility', 'stop', 'stage', 'event-timing']);
 const ACTIONS = new Set(['card', 'button', 'escape', 'other']);
 const PAGES = new Set(['battle', 'hub', 'departure', 'overlay', 'base']);
@@ -100,6 +101,7 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   panel.style.cssText = 'position:fixed;right:8px;bottom:8px;z-index:100000;background:#111;color:white;padding:8px;font:12px monospace;max-width:300px';
   panel.innerHTML = '<strong>本地交互诊断</strong><div>未记录文字/存档；帧回调不是FPS或实际呈现。</div><output aria-live="polite">记录中</output><div><button data-trace="sync">视频对时</button> <button data-trace="export">下载JSON</button> <button data-trace="stop">停止</button> <button data-trace="clear">清空</button></div>';
   doc.body.append(panel);
+  const unregisterPanel = registerRuntimeTracePanel(panel);
   const status = panel.querySelector('output');
   function input(event) {
     if (!active || doc.visibilityState !== 'visible' || panel.contains(event.target)) return;
@@ -133,10 +135,13 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   const visibility = () => { eventMatcher.clear(); eventCollectedAfter = perf.now(); stageGeneration++; lastInput = null; cardGesture = false; cancelFrames(); record('visibility'); };
   doc.addEventListener('visibilitychange', visibility);
   host.addEventListener('pagehide', stop);
-  // Only gameplay overlay changes. The panel is outside this subtree.
+  // Only gameplay overlay changes: ignore the diagnostic panel's own updates
+  // and relocation, including when it joins the active dialog for accessibility.
   const overlay = doc.getElementById('overlay');
-  const mutations = overlay && new host.MutationObserver(() => {
-    if (active && lastInput && perf.now() - lastInput.start <= 10000) {
+  const mutations = overlay && new host.MutationObserver(records => {
+    const gameplayChanged = records.some(({ target, addedNodes, removedNodes }) =>
+      !panel.contains(target) && [...addedNodes, ...removedNodes].some(node => node !== panel));
+    if (gameplayChanged && active && lastInput && perf.now() - lastInput.start <= 10000) {
       record('dom-update', { interaction: lastInput.id, durationMs: perf.now() - lastInput.start, page: page() });
     }
   });
@@ -202,5 +207,5 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   panel.addEventListener('click', controls);
   record('start', { page: page() });
   status.textContent = `记录中；长任务${longTaskSupport === 'supported' ? '可用' : '不可用（降级）'}；事件时序${eventTimingSupport === 'supported' ? '可用' : '不可用（降级）'}`;
-  return { read, stop, destroy() { stop(); panel.removeEventListener('click', controls); panel.remove(); } };
+  return { read, stop, destroy() { stop(); unregisterPanel(); panel.removeEventListener('click', controls); panel.remove(); } };
 }

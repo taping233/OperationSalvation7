@@ -1,0 +1,69 @@
+{
+  "task": "WF-unit-metadata-1021",
+  "baselinePublishedCommit": "82770803b2c15d67d505ed15273f9a2689cf0c72",
+  "frozen": true,
+  "source": {
+    "path": "搜打撤/game/src/battle/view/battle.layers.js",
+    "beforeSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+    "afterSha256": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
+    "integrationStillMatchesBefore": true
+  },
+  "tests": {
+    "path": "搜打撤/tests/battle-unit-metadata.test.js",
+    "sha256": "b36c95fc80246266d09d7542451a6fc19efe98458a7eb70cb7e17031cb83ce4c"
+  },
+  "patch": {
+    "path": "battle-unit-metadata.patch",
+    "sha256": "ba30aba76bbdb9ae089cb3373827f0424a5a41ff29a1f879e0fecab78fbb2cf1"
+  },
+  "checks": {
+    "focused": {
+      "files": 1,
+      "passed": 9
+    },
+    "neighborsIncludingFocused": {
+      "files": 12,
+      "passed": 190
+    },
+    "lint": {
+      "exitCode": 0
+    },
+    "negativeControl": {
+      "passedBehavioral": 7,
+      "failedPerformanceExpected": 2
+    },
+    "patchApply": {
+      "checkExitCode": 0,
+      "applyExitCode": 0,
+      "appliedHashesMatch": true
+    }
+  },
+  "operationCounts": {
+    "foes": 4,
+    "unchangedUpdates": 100,
+    "allMutationRecords": {
+      "before": 3900,
+      "after": 1000
+    },
+    "guardedMetadataMutationRecords": {
+      "before": 2900,
+      "after": 0
+    },
+    "tenUpdateGuardedSetterCalls": {
+      "before": 120,
+      "after": 0
+    }
+  },
+  "boundaries": [
+    "17 setter sites in updateSelfUnit/updateFoes only; two small live-value setter helpers",
+    "No HP signature, target selection, ally, hand eligibility, intent computation or gameplay changes",
+    "No integration writes, build, publication or browser/FPS measurement"
+  ],
+  "reports": {
+    "unit-targeted-final.log.txt": "2e3083eb1570cfda09b907891b1ed7990ae2a6bd81ea81bfad93d41e883287cc",
+    "unit-negative-control.log.txt": "51c8cbab1555a78c41a8ba3c457ddcb124d13e3208942542859326698cdda569",
+    "unit-neighbor-final.log.txt": "ccdffb33230d42dc8af3baba757af73836277f8363a09fb9049a1529211a3239",
+    "unit-lint.log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "preservation": "preservation-check.json"
+}

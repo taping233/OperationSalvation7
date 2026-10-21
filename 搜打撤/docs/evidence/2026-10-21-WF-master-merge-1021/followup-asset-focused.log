@@ -1,0 +1,45 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/master-merge-compatibility-review-20261021/asset-followup/validation
+
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > registers exactly the 19 retired R2 paths and verifies their approved deletion fingerprints 7ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants 15ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > restores new static references and rejects them in the complete async module graph 11ms
+ ✓ tests/retired-scenes-publication.test.js > exact retired scene publication review > retains the category for changed mappings or selectors and all assets for new opaque consumers 3ms
+ ✓ tests/runtime-asset-redundancy.test.js > keeps reviewed asset decisions identical across Git LF and Windows CRLF sources 8ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate if the reviewed battle-layer asset consumer changes or loses approval 78ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > fails closed for either real frame URL changing or its opaque approval disappearing 58ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > independently guards all real frame selector pins even with current opaque approval 57ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images 2911ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs 2708ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references 153ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > keeps the current safe timeline and restores any referenced or changed retired rig selector 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits only unused reviewed files and retains future static or configured references 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > reads all catalog sequence and static fallback names on every decision, including restored legacy frames 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: undefined 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[]}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[0]}} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":["sprite-v1/frame-001"]},"staticFallback":1} 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains a whole category after a selector changes or disappears 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > retains every candidate for new or changed opaque constructors and syntax/read uncertainty 2ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > does not treat ordinary static assets or unrelated template strings as opaque 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > checks the complete Rollup graph including async modules and generated manifests 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > rejects a selection change between early manifest generation and final copy 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > accepts only static license URLs and inert raw SVG exports while rejecting restored asset references 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > pins indirect URL inputs even when their change has no recognizable asset constructor 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > retains all candidates when an explicit path dependency or its owning consumer is missing 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > keeps the reviewed sample callback and catalog in the explicit sound path dependency set 0ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > requires valid fixed source bytes, retains the whole affected family, and leaves other families independent 3ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains split directory/token references and rejects asset-root arrays, including raw image.src joins 3ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > retains weather after either SVG selector changes/disappears without loosening the chest source guard 1ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family 3ms
+ ✓ tests/runtime-asset-redundancy.test.js > retained high-resolution chest and inline-replaced weather sources > preserves active safe/supply frames and rejects late restored family tokens and root joins in the graph 1ms
+
+ Test Files  2 passed (2)
+      Tests  35 passed (35)
+   Start at  03:36:55
+   Duration  6.28s (transform 81ms, setup 0ms, collect 160ms, tests 6.03s, environment 0ms, prepare 137ms)
+

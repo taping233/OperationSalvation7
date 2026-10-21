@@ -1,0 +1,143 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/runtime-trace-modal-controls-91052c8b/搜打撤
+
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新增战斗实例域不能捕获默认运行态、全局随机或浏览器，视图也不能直接调用 6ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 战斗实例允许纯状态工厂和同实例域依赖 2ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > run/future-commands.js 未登记也禁止页面与全局门面 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > hub/future.commands.js 未登记也禁止页面与全局门面 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 未登记的新纯执行计划禁止动态依赖运行态和捕获浏览器 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新命令禁止旁路依赖战斗全局运行内核 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.card-play 工厂禁止导入全局session状态 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.turn-continuation 工厂禁止导入全局session状态 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.turn-start 工厂禁止导入全局session状态 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > battle.damage 工厂禁止导入全局session状态 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > game.run.events 工厂禁止导入状态门面或捕获DOM 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > game.run.resources 工厂禁止导入状态门面或捕获DOM 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 战斗引擎工厂不能重新捕获浏览器门面，视图也不能旁路调用它 0ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 新命令和工厂允许显式端口以及纯规则依赖 1ms
+ ✓ tests/architecture-boundaries.test.js > 新增领域模块的默认保护 > 旧命令的特定浏览器债务不会放行新增DOM依赖 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不能重新接入 DOM 或浏览器适配器 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地模型与规则配置不得反向读取存储、门面或全局浏览器 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 识别静态导入、重导出、动态字面量与嵌套目录，不误判注释 2ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 能定位经动态导入与重导出形成的环 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 无法分析的动态路径与缺失源码不能悄悄略过 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 数据和 npm 导入不伪装成项目 JS 模块 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 允许既有状态装配模块读取 runtime，禁止视图旁路 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能借全局门面或反向 import 访问运行时，说明文字不误报 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域必须通过装配端口访问服务，不能重新读取浏览器门面 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域不能重新静态导入带 UI 等待的整段播放模块 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能反向依赖流程域目录（hub/run） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > M 批命令适配器仅供 resolver 装配，视图和快照仍不可调用 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 独立领域模块不能通过视图切片接入界面 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, import './game.cardslib.page.js';） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, export { open } from './game.cardslib.page.js';） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.hub.js, import('./game.cardslib.page.js');） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（game.boot.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地轻门面的动态入口合法 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆轻门面的动态入口合法 0ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向 519ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 守卫判据键自检：每个键必须命中真实文件，杜绝规则死、测试绿 0ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 自检本身能红：文件改名（或删除）会让对应判据键被判死 1ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening 588ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order 46ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported 9ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable 8ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测 5ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > sets dialog semantics, isolates the background, traps Tab, and restores the opener 269ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > honors an explicit safe initialFocus selector and closes through Escape 266ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 收回大卡后的按键重复不会触发底层奖励离开 42ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌reward-card正文含返回/离开不会成为取消按钮 10ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌event-choice-card正文含返回/离开不会成为取消按钮 9ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 卡牌bt-card正文含返回/离开不会成为取消按钮 7ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 显式安全取消优先于猜测文案，并由 Esc 调用原返回操作 7ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > 强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过 4ms
+ ✓ tests/overlay-dialog.test.js > overlay dialog accessibility contract > closes immediately when reduced motion is enabled 2ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on / or exempt a lookalike ID 59ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on /?runtimeTrace=0 or exempt a lookalike ID 12ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not install on /?runtimeTrace=true or exempt a lookalike ID 10ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > moves the exact opted-in panel inside the dialog while keeping every ordinary background inert 25ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > supports installation during a modal and survives repeated battle/settings body replacement 32ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > restores panel location, original inert state and opener after close, including interrupted close/reopen 15ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > includes only the registered diagnostic controls in the existing keyboard cycle 30ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > keeps clear/stop/download on their normal click handlers without triggering gameplay or collecting diagnostic input 20ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not count diagnostic subtree updates or relocation as gameplay mutations, but keeps mixed app changes 13ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > does not resurrect removed panels and can destroy/reinstall while a modal remains open 18ms
+ ✓ tests/runtime-trace-modal.test.js > explicit local diagnostic controls within the modal boundary > exposes diagnostic buttons and live status inside the accessible modal 132ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > is inert before explicit trace installation, with no clock or listener work 9ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > accepts only four fixed labels and strips arbitrary payloads 46ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > keeps async stages and subsequent scoped sync work on their original input 9ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > does not fabricate an interaction when no input was observed 5ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on clear 6ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on visibility 5ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on stop 4ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > invalidates pending and captured stages on destroy 3ms
+ ✓ tests/runtime-trace-stages.local.test.js > bounded local stage instrumentation > restores scope after throw and rejects context from an earlier installation 6ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 关键玩法数值保持冻结且与现行规则一致 5ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果文本按立即、回合开始、整场和被注能时分类 1ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 限定技能句独立成桶（装备打出只穿戴，技能由按钮发动） 0ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果执行器只通过端口修改战斗状态 10ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > GameStore 提供稳定的可读快照，且不暴露可变集合 3ms
+ ✓ tests/contracts.test.js > 旧对局存档迁移 > v1 迁入空的档位 1，并保留已有 v2 数据 1ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > src 模块不存在循环依赖 730ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > game.session 不反向导入页面功能模块 0ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > battle.core 不访问 DOM 或反向导入战斗视图 0ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > window.SDT 只允许在 sdt-facade.js 初始化 20ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 核心机制层不访问 DOM 1ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js） 0ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 实机卡库批次数据外置到 game/data/cards-sync.json（批次 6） 1ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 桌面开发态只加载 Vite 构建产物，不直接加载含裸模块导入的源码 1ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 首页监听在 DOMContentLoaded 的易失败初始化链之前绑定 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 双击启动器会先刷新构建产物，避免桌面端长期运行旧前端 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > HTML 只经 main.js 装配全部生产模块，不漏载或旁路新增模块入口 52ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > main.js 完整页面装配顺序与 boot-order.js 的 BOOT_ORDER 逐项一致 2ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > does nothing without exact opt-in, including observer, frame, listeners and panel 11ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > exports the controlled build label without collecting the page URL 38ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > bounds memory, scrubs arbitrary text and clears counters 3ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > captures real event pathway, overlay update and frame opportunity with shared interaction ID, not text 13ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > records long tasks by entry time and disconnects all collection on pagehide 5ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > cancels pending frame intervals when visibility changes 8ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > tracks card drag start/release outside the hand without reading card identity 6ms
+ ✓ tests/runtime-trace.local.test.js > opt-in local runtime trace > requires visible sync action, clear cancels old frame callbacks, download is explicit 9ms
+ ✓ tests/runtime-event-timing.local.test.js > matches timestamps/types, reports separate delays and remaps groups without touching private entry fields 8ms
+ ✓ tests/runtime-event-timing.local.test.js > drops unknown, ambiguous, mismatched and invalid timings, bounds matching and clears pending work 2ms
+ ✓ tests/runtime-event-timing.local.test.js > whitelists event fields in online and offline paths and leaves old traces compatible 3ms
+ ✓ tests/runtime-event-timing.local.test.js > registers only while opted in, degrades failures, disconnects and does not leak generic keyboard entries 35ms
+ ✓ tests/runtime-event-timing.local.test.js > collects matched inputs only and rejects stale entries across clear, visibility and stop 11ms
+ ✓ tests/runtime-event-timing.local.test.js > bounds anonymous mapping without reusing evicted or cleared group identities 8ms
+ ✓ tests/battle-secondary-overlay.test.js > choice keeps the exact live scene and isolates only background controls 84ms
+ ✓ tests/battle-secondary-overlay.test.js > discover keeps the exact live scene and isolates only background controls 18ms
+ ✓ tests/battle-secondary-overlay.test.js > hand-select keeps the exact live scene and isolates only background controls 14ms
+ ✓ tests/battle-secondary-overlay.test.js > infusion keeps the exact live scene and isolates only background controls 17ms
+ ✓ tests/battle-secondary-overlay.test.js > pile keeps the exact live scene and isolates only background controls 11ms
+ ✓ tests/battle-secondary-overlay.test.js > settings keeps the exact live scene and isolates only background controls 11ms
+ ✓ tests/battle-secondary-overlay.test.js > rules keeps the exact live scene and isolates only background controls 11ms
+ ✓ tests/battle-secondary-overlay.test.js > other keeps the exact live scene and isolates only background controls 10ms
+ ✓ tests/battle-secondary-overlay.test.js > bag keeps the exact live scene and isolates only background controls 10ms
+ ✓ tests/battle-secondary-overlay.test.js > refresh preserves scene, scroll and focused selection; returning reuses same scene 14ms
+ ✓ tests/battle-secondary-overlay.test.js > optional cancellation uses existing return action; blank shield does not choose or cancel 14ms
+ ✓ tests/battle-secondary-overlay.test.js > new battle and noncombat navigation never recover a stale retained scene 7ms
+ ✓ tests/battle-secondary-overlay.test.js > shared CSS has transparent shield and content-sized panel without full-height surface 9ms
+ ✓ tests/battle-secondary-overlay.test.js > full-screen secondary card clears legacy discover filters without changing small panels 12ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > collapsed reward shelf exposes its summary, not its hidden card actions 59ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > only the first direct summary is a native tab stop, including explicit initial focus 8ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > nested closed disclosures hide descendants but preserve actions within their first summary 11ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > Tab wraps through the visible summary rather than a collapsed action 8ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > Esc ignores inert, fieldset-disabled, collapsed and CSS-hidden cancellation actions 16ms
+ ✓ tests/overlay-disclosure-focus.test.js > shared overlay native disclosure keyboard contract > CSS-hidden targets are skipped while explicitly visible descendants remain available 16ms
+ ✓ tests/overlay-mount-cost.test.js > overlay mount work stays bounded without caching visibility > finishes mode and inert writes before checking cancel visibility 48ms
+ ✓ tests/overlay-mount-cost.test.js > overlay mount work stays bounded without caching visibility > does not compute styles for unrelated controls to select the safe initial focus 25ms
+ ✓ tests/overlay-mount-cost.test.js > overlay mount work stays bounded without caching visibility > valid explicit focus avoids a full sequential-focus scan, including tabindex minus one 11ms
+ ✓ tests/overlay-mount-cost.test.js > overlay mount work stays bounded without caching visibility > invalid preferred and explicit targets fall back using current styles and disclosure state 16ms
+ ✓ tests/overlay-mount-cost.test.js > overlay mount work stays bounded without caching visibility > only known bitmap icons skip CSS-background probing; ordinary background IMG stays supported 7ms
+ ✓ tests/card-feedback-fixture.test.js > card-feedback-review.html keeps controls inside the modal boundary and outside replaceable content 28ms
+ ✓ tests/card-feedback-fixture.test.js > infusion-review.html keeps controls inside the modal boundary and outside replaceable content 12ms
+ ✓ tests/card-feedback-fixture.test.js > mounts runtime-created restore controls in the same modal boundary 0ms
+
+ Test Files  11 passed (11)
+      Tests  133 passed (133)
+   Start at  17:18:32
+   Duration  6.06s (transform 381ms, setup 0ms, collect 1.09s, tests 3.78s, environment 3.90s, prepare 656ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/runtime-trace-modal-controls-91052c8b/targeted-final.json

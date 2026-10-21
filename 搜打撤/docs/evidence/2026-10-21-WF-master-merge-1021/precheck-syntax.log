@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 check:syntax
+> node scripts/check-syntax.mjs
+
+Syntax check passed (620 project files).

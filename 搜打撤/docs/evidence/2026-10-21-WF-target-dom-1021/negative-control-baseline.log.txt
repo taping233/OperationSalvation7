@@ -1,0 +1,1586 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-target-dom-b5a59762/搜打撤
+
+stdout | tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders
+BATTLE_TARGET_DOM_COUNTS {"renders":20,"enabledFoes":3,"attributeMutations":180,"targetAttributeWrites":180,"canTargetToggleCalls":60}
+
+ × tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders 224ms
+   → expected [ MutationRecord{ …(1) }, …(179) ] to have a length of +0 but got 180
+ × tests/battle-target-dom.test.js > updates a renamed selected foe and clears a dead target without caching eligibility 80ms
+   → expected [ …(9) ] to deeply equal [ [ <div …(8)>…(3)</div>, …(1) ] ]
+ × tests/battle-target-dom.test.js > repairs current DOM attributes rather than trusting a previous enabled-state signature 6ms
+   → expected "removeAttribute" to not be called at all, but actually been called 60 times
+
+Received: 
+
+  1st removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  2nd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  3rd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  4th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  5th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  6th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  7th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  8th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  9th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  10th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  11th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  12th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  13th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  14th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  15th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  16th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  17th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  18th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  19th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  20th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  21st removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  22nd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  23rd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  24th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  25th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  26th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  27th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  28th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  29th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  30th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  31st removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  32nd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  33rd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  34th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  35th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  36th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  37th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  38th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  39th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  40th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  41st removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  42nd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  43rd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  44th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  45th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  46th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  47th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  48th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  49th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  50th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  51st removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  52nd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  53rd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  54th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  55th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  56th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  57th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  58th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  59th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  60th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+
+Number of calls: 60
+
+ ✓ tests/battle-target-dom.test.js > retains explicit tabindex and label coercion on a fresh naturally-focusable target 4ms
+ ✓ tests/battle-target-dom.test.js > still cancels and submits a freshly validated target after repeated renders 205ms
+ × tests/battle-target-dom.test.js > refreshes the selected self label when character identity changes 81ms
+   → expected [ MutationRecord{ …(1) }, …(29) ] to have a length of +0 but got 30
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 2 passed (6)
+   Start at  15:57:33
+   Duration  2.92s (transform 706ms, setup 0ms, collect 1.51s, tests 602ms, environment 349ms, prepare 79ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-target-dom-b5a59762/ab-final/baseline-tests.json
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-target-dom.test.js > leaves enabled target attributes untouched across 20 real battle renders
+AssertionError: expected [ MutationRecord{ …(1) }, …(179) ] to have a length of +0 but got 180
+
+- Expected
++ Received
+
+- 0
++ 180
+
+ ❯ tests/battle-target-dom.test.js:87:19
+     85|     canTargetToggleCalls: calls.reduce((sum, call) => sum + call.toggl…
+     86|   console.info('BATTLE_TARGET_DOM_COUNTS', JSON.stringify(counts));
+     87|   expect(records).toHaveLength(0);
+       |                   ^
+     88|   expect(counts.targetAttributeWrites).toBe(0);
+     89|   expect(counts.canTargetToggleCalls).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/battle-target-dom.test.js > updates a renamed selected foe and clears a dead target without caching eligibility
+AssertionError: expected [ …(9) ] to deeply equal [ [ <div …(8)>…(3)</div>, …(1) ] ]
+
+- Expected
++ Received
+
+@@ -89,8 +89,760 @@
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>,
++     "role",
++   ],
++   [
++     <div
++       aria-label="改名后的训练靶，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="0"
++       data-foe-id="target-0"
++       role="button"
++       style="--foe-idle-phase: 0s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="改名后的训练靶"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="改名后的训练靶的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "tabindex",
++   ],
++   [
++     <div
++       aria-label="改名后的训练靶，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="0"
++       data-foe-id="target-0"
++       role="button"
++       style="--foe-idle-phase: 0s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="改名后的训练靶"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="改名后的训练靶的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "aria-label",
++   ],
++   [
++     <div
++       aria-label="训练靶1，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="1"
++       data-foe-id="target-1"
++       role="button"
++       style="--foe-idle-phase: -0.61s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶1"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶1的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "role",
++   ],
++   [
++     <div
++       aria-label="训练靶1，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="1"
++       data-foe-id="target-1"
++       role="button"
++       style="--foe-idle-phase: -0.61s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶1"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶1的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "tabindex",
++   ],
++   [
++     <div
++       aria-label="训练靶1，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="1"
++       data-foe-id="target-1"
++       role="button"
++       style="--foe-idle-phase: -0.61s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶1"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶1的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "aria-label",
++   ],
++   [
++     <div
++       aria-label="训练靶2，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="2"
++       data-foe-id="target-2"
++       role="button"
++       style="--foe-idle-phase: -1.22s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶2"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶2的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "role",
++   ],
++   [
++     <div
++       aria-label="训练靶2，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="2"
++       data-foe-id="target-2"
++       role="button"
++       style="--foe-idle-phase: -1.22s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶2"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶2的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
++     "tabindex",
++   ],
++   [
++     <div
++       aria-label="训练靶2，按 Enter 确认目标"
++       class="sts-unit sts-foe bt-foe can-target"
++       data-eidx="2"
++       data-foe-id="target-2"
++       role="button"
++       style="--foe-idle-phase: -1.22s;"
++       tabindex="0"
++       title=""
++     >
++       <div
++         aria-label="训练靶2"
++         class="sts-figure"
++         role="img"
++       />
++       <div
++         class="sts-unit-vitals"
++       >
++         <div
++           class="bt-hpwrap sts-hp"
++         >
++           <i
++             class="sts-hp-ghost"
++             style="width: 100%;"
++           />
++           <i
++             class="sts-hp-main"
++             style="width: 100%;"
++           />
++           <span>
++             120/120
++           </span>
++           <b
++             class="sts-hp-armor"
++             hidden=""
++           />
++         </div>
++       </div>
++       <div
++         class="sts-nameplate"
++       >
++         <div
++           class="sts-headrow"
++           hidden=""
++           style="display: none;"
++         />
++         <div
++           class="sts-stats"
++         />
++         <div
++           class="sts-chips"
++         />
++         <div
++           aria-expanded="false"
++           aria-label="训练靶2的意图：攻击 · 3。基础攻击 3。点击查看完整说明"
++           class="sts-intent"
++           role="button"
++           style=""
++           tabindex="0"
++         >
++           <span
++             class="bt-intent-part"
++             data-intent-kind="strike"
++           >
++             <span
++               class="bt-intent-short"
++             >
++               <span
++                 class="bt-intent-action"
++               >
++                 攻击 3
++               </span>
++             </span>
++           </span>
++           <span
++             class="bt-intent-detail"
++           >
++             <span
++               class="sts-atkbadge"
++             >
++                基础攻击 3
++             </span>
++             <span
++               class="bt-intent-rules"
++             >
++               攻击 · 3
++             </span>
++           </span>
++         </div>
++       </div>
++     </div>,
+      "aria-label",
+    ],
+  ]
+
+ ❯ tests/battle-target-dom.test.js:104:72
+    102|   render(snap);
+    103|   const renamed = observer.records();
+    104|   expect(renamed.map(record => [record.target, record.attributeName]))…
+       |                                                                        ^
+    105|   expect(kept[0].getAttribute('aria-label')).toBe('改名后的训练靶，按 Enter 确认目…
+    106|   snap.foes[0] = { ...snap.foes[0], dead: true, hp: 0 }; render(snap);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/battle-target-dom.test.js > repairs current DOM attributes rather than trusting a previous enabled-state signature
+AssertionError: expected "removeAttribute" to not be called at all, but actually been called 60 times
+
+Received: 
+
+  1st removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  2nd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  3rd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  4th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  5th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  6th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  7th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  8th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  9th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  10th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  11th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  12th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  13th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  14th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  15th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  16th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  17th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  18th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  19th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  20th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  21st removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  22nd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  23rd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  24th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  25th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  26th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  27th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  28th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  29th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  30th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  31st removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  32nd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  33rd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  34th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  35th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  36th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  37th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  38th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  39th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  40th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  41st removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  42nd removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  43rd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  44th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  45th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  46th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  47th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  48th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  49th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  50th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  51st removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  52nd removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  53rd removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  54th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  55th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  56th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  57th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+  58th removeAttribute call:
+
+    Array [
+      "role",
+    ]
+
+  59th removeAttribute call:
+
+    Array [
+      "tabindex",
+    ]
+
+  60th removeAttribute call:
+
+    Array [
+      "aria-label",
+    ]
+
+
+Number of calls: 60
+
+ ❯ tests/battle-target-dom.test.js:135:22
+    133|   const remove = vi.spyOn(node, 'removeAttribute'), toggle = vi.spyOn(…
+    134|   for (let i = 0; i < 20; i++) Aim.setTargetable(node, false, '不应保留');
+    135|   expect(remove).not.toHaveBeenCalled(); expect(toggle).not.toHaveBeen…
+       |                      ^
+    136|   expect(() => Aim.setTargetable(null, true, '不存在')).not.toThrow();
+    137| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/battle-target-dom.test.js > refreshes the selected self label when character identity changes
+AssertionError: expected [ MutationRecord{ …(1) }, …(29) ] to have a length of +0 but got 30
+
+- Expected
++ Received
+
+- 0
++ 30
+
+ ❯ tests/battle-target-dom.test.js:184:30
+    182|   const observer = observe([node]);
+    183|   for (let i = 0; i < 10; i++) render(snapshot);
+    184|   expect(observer.records()).toHaveLength(0); observer.close();
+       |                              ^
+    185| });
+    186| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+

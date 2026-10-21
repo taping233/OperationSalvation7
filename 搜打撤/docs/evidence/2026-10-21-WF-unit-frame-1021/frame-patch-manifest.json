@@ -1,0 +1,42 @@
+{
+  "task": "trace_portrait_reload_behavior",
+  "status": "frozen",
+  "date": "2026-10-21",
+  "integration_modified": false,
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "base_sha256": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+      "candidate_sha256": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d",
+      "candidate_path": "/workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021/game/src/battle/view/battle.frames.js"
+    },
+    {
+      "path": "搜打撤/tests/battle-frames-ownership.test.js",
+      "base_sha256": "fb1f8bb4510a720fc7340f200315482780febd6c4acc47113b17cff3c398d01f",
+      "candidate_sha256": "565cf3cb2fb7957c6b0be634b4489d61a77f30effd56d49369350c1d94fd0025",
+      "candidate_path": "/workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021/tests/battle-frames-ownership.test.js"
+    }
+  ],
+  "patch": "/workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021/frame-settings-suspend.patch",
+  "patch_sha256": "3c87e308945a9abb9189b89201f76b91094379de3448bff0b0f0fabc0df6918c",
+  "checks": {
+    "focused_vitest": "87 passed across 5 files",
+    "eslint": "2 candidate files passed",
+    "syntax": "node --check passed",
+    "old_source_negative_control": "5 selected tests failed as expected",
+    "browser": "not run",
+    "build": "not run",
+    "publication": "not performed"
+  },
+  "operation_counts": {
+    "initial_textures": 63,
+    "settings_roundtrips": 3,
+    "old_added_loads": 189,
+    "old_added_unloads": 189,
+    "candidate_added_loads": 0,
+    "candidate_added_unloads": 0,
+    "candidate_actual_exit_unloads": 63,
+    "candidate_remaining_textures": 0
+  },
+  "review": "Independent read-only source review completed; no remaining high-risk findings."
+}

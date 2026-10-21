@@ -1,0 +1,18 @@
+{
+  "againstPatchSha256": "8a3b06a74d59fd46d568df745838b1c8a4e873f2ca8309b22eefbd948d8cda08",
+  "patchSha256": "649bebaf613659dc7380fe55a356cecc436bc8eaaff0fb210229378245f25b20",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "beforeSha256": "fa9345e35ff7efe737b2f8046bbb369c189a7e6959376b7e873f8c1b207cd5c2",
+      "afterSha256": "94621272e91cf5e6ce1e997bdb00bb7f24b78d968d126ef65790ccfffb34638e",
+      "afterBlobSha1": "dbbe89d9eb0528f61eea72dbd22d3229ce92ba6d"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+      "beforeSha256": "b77ac58a7ed8a3c15f26dc588a3df688b314132ec69e6e6e47ea9c5067d36ea7",
+      "afterSha256": "3c8c521f634264a1c1239d78524cf6f918458664f5cbbce18eff0ad8ed3947dd",
+      "afterBlobSha1": "0b3e004dda0c055c6b7252821caab0875c1816ce"
+    }
+  ]
+}

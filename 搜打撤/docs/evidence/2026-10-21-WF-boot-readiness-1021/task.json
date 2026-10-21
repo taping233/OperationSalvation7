@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-boot-readiness-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "在已发布eaa27f33候选上修复初始化前主循环唤醒竞争，仅整合boot与回归测试",
+  "paths": [
+    "game/src/game.boot.js",
+    "tests/boot-frame-readiness.test.js",
+    "docs/performance.md"
+  ],
+  "doneWhen": [
+    "原独立两文件补丁逐字接入，保留早期dirty状态和就绪后绘制",
+    "适用原门及标准构建通过，固定预算不变",
+    "区分代码回归、构建、远端CI和实页覆盖"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原d682负对照2项失败；独立修复5项及18邻测通过；当前eaa基线整合复验另跑",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "eaa整合后的标准npm test：4文件23项通过，0失败0跳过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "标准npm run build及原预算全部通过；1607文件/172525273字节",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "本启动修复尚未部署或内置浏览器实页验收；远端CI待对应提交核查",
+    "最终发布以随后生成的精确index full收据及正常hook为准"
+  ],
+  "updatedAt": "2026-10-21T03:57:00Z"
+}

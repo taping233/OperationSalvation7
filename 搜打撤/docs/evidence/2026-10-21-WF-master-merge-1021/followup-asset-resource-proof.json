@@ -1,0 +1,1267 @@
+{
+  "method": "Acorn normalized complete URL/Image constructors,src assignments,asset load calls,selector imports,static asset strings; CSS URL tokens. Diffs explicitly reviewed, not asserted globally equal.",
+  "files": [
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "baseSha256": "a1cfbe80aa8bf1d9eafc929f38503df3dc640035f26520cea2d129bf8d9e3225",
+      "incomingSha256": "2dbc43a4b707e6dbdbdd1ee18c58df424d9a43739594cc885f3fd0ccc4a0c92d",
+      "baseCount": 3,
+      "currentCount": 3,
+      "removed": [],
+      "added": [],
+      "currentSurface": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { SLOT_EMBLEMS } from './slot-emblems.js';",
+          "signature": "8931f6eca6be16c054f9f01b8ca594cfcad8d505a8fb9f599d3640a21506901c"
+        },
+        {
+          "kind": "HTML-asset-literal",
+          "text": "assets/ui/sugin-mail-empty.webp",
+          "signature": "assets/ui/sugin-mail-empty.webp"
+        },
+        {
+          "kind": "HTML-asset-literal",
+          "text": "./assets/sfx/battle/SOURCES.md",
+          "signature": "./assets/sfx/battle/SOURCES.md"
+        }
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "baseSha256": "c250bdc2fec20371637a60421506697e53162d0e7d06cccdad8f8f9fbf21e5ad",
+      "incomingSha256": "30156d27125bd99479aed07b2c0d1483288a70592ab28f3ef243215008a7ca5e",
+      "baseCount": 8,
+      "currentCount": 11,
+      "removed": [
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList(WINTER_BATTLE_LAYERS)",
+          "signature": "e8a3f05067e885728414d9dc728ffde49e4d0dd07d5a19b6a3bfb3663230ffc3"
+        }
+      ],
+      "added": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { TRANSITION_ART } from '../ui/transition-art.js';",
+          "signature": "e95bed5df7b0b119d62bbb0852f0748f9ab2c62b5c0e9382e4e27fbbf2303b9a"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList([...WINTER_BATTLE_LAYERS, TRANSITION_ART.retreat])",
+          "signature": "7f8679728f8369ed5af28bb2fb21cb50b47725190300505ea8bd0a20a85dd48a"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList([TRANSITION_ART[type]])",
+          "signature": "7de6f1c9ce399788c1627249d9c1fc201f3216f4451783cedf4a15e8b40cee6a"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = art",
+          "signature": "fb1ab075bda6fea5b4f00ce913ff446b04b4183fc6272f20c7ae86f7319ec8bb"
+        }
+      ],
+      "currentSurface": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BATTLE_LAYERS } from './game.run.data.js';",
+          "signature": "a7b1258e293800aab03c695e6a7c11c53112626c8c5823002e018da43dac2e05"
+        },
+        {
+          "kind": "selector-dependency",
+          "text": "import { TRANSITION_ART } from '../ui/transition-art.js';",
+          "signature": "e95bed5df7b0b119d62bbb0852f0748f9ab2c62b5c0e9382e4e27fbbf2303b9a"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "img.src = name",
+          "signature": "3b5b0670c002626e016ad9107fe2c38dbf3c7050438d5e388667e029fce69620"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList([...WINTER_BATTLE_LAYERS, TRANSITION_ART.retreat])",
+          "signature": "7f8679728f8369ed5af28bb2fb21cb50b47725190300505ea8bd0a20a85dd48a"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadScene(PRELOAD_SCENES[type])",
+          "signature": "7f46a9e47191300cf21d7f9f9e0aefec1a5b5347b542d9a289386fbe57bf6cd5"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList([TRANSITION_ART[type]])",
+          "signature": "7de6f1c9ce399788c1627249d9c1fc201f3216f4451783cedf4a15e8b40cee6a"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "img.src = url",
+          "signature": "afbf400bde8337dab0fe4d233142f031a1a90b3cd7a8a4f50f5ed619915919b7"
+        },
+        {
+          "kind": "load-call",
+          "text": "preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean))",
+          "signature": "196d7c82fd3ccb1c83a5c7e943b2852bc3a361180206374503aa1318dec9e909"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = art",
+          "signature": "fb1ab075bda6fea5b4f00ce913ff446b04b4183fc6272f20c7ae86f7319ec8bb"
+        }
+      ]
+    },
+    {
+      "path": "game/css/entry-events.css",
+      "baseSha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
+      "incomingSha256": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
+      "baseCount": 2,
+      "currentCount": 2,
+      "removed": [],
+      "added": [],
+      "currentSurface": [
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/entry/modern-winter-entry-1011-v2.webp",
+          "signature": "../assets/scenes/entry/modern-winter-entry-1011-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/entry/modern-winter-entry-1011-v2.webp",
+          "signature": "../assets/scenes/entry/modern-winter-entry-1011-v2.webp"
+        }
+      ]
+    },
+    {
+      "path": "game/css/scenes.css",
+      "baseSha256": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6",
+      "incomingSha256": "73f3fff72ac854241af55a9a21a3694a6a7f97ccb9f8684c5c48862341eb8bd9",
+      "baseCount": 68,
+      "currentCount": 68,
+      "removed": [
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-fire-anime-v2.webp",
+          "signature": "../assets/scenes/scene-fire-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-fire-anime-v2.webp",
+          "signature": "../assets/scenes/scene-fire-anime-v2.webp"
+        }
+      ],
+      "added": [
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/fire-rest-1021/city-campfire.webp",
+          "signature": "../assets/scenes/fire-rest-1021/city-campfire.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/fire-rest-1021/city-campfire.webp",
+          "signature": "../assets/scenes/fire-rest-1021/city-campfire.webp"
+        }
+      ],
+      "currentSurface": [
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/classic.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/classic.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/wolf.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/wolf.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/coin.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/coin.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/vault.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/vault.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/boss.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/boss.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/altar.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/altar.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/card-backs/pet.webp?v=cardbacks-border-20261012",
+          "signature": "../assets/card-backs/pet.webp?v=cardbacks-border-20261012"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/battle/platform-minimal-1016/foreground.webp",
+          "signature": "../assets/scenes/battle/platform-minimal-1016/foreground.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/battle/platform-minimal-1016/ground.webp",
+          "signature": "../assets/scenes/battle/platform-minimal-1016/ground.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/battle/platform-minimal-1016/far.webp",
+          "signature": "../assets/scenes/battle/platform-minimal-1016/far.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-shop-anime-v2.webp",
+          "signature": "../assets/scenes/scene-shop-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/fire-rest-1021/city-campfire.webp",
+          "signature": "../assets/scenes/fire-rest-1021/city-campfire.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-chest-anime-v2.webp",
+          "signature": "../assets/scenes/scene-chest-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-door-anime-v2.webp",
+          "signature": "../assets/scenes/scene-door-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-altar-anime-v2.webp",
+          "signature": "../assets/scenes/scene-altar-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-extract-anime-v2.webp",
+          "signature": "../assets/scenes/scene-extract-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-coin-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-coin-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-wood-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-wood-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-rations-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-rations-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-key-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-key-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-demondeal.webp",
+          "signature": "../assets/scenes/event-tt6-demondeal.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-bandits-anime-v2.webp",
+          "signature": "../assets/scenes/event-bandits-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-goldmine-1013-v2.webp",
+          "signature": "../assets/scenes/event-tt6-goldmine-1013-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-goldhammer.webp",
+          "signature": "../assets/scenes/event-tt6-goldhammer.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-relief.webp",
+          "signature": "../assets/scenes/event-tt6-relief.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-airdrop.webp",
+          "signature": "../assets/scenes/event-tt6-airdrop.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-chestdraw.webp",
+          "signature": "../assets/scenes/event-tt6-chestdraw.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-systemsupply.webp",
+          "signature": "../assets/scenes/event-tt6-systemsupply.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/winter-expedition/outskirts.webp",
+          "signature": "../assets/scenes/winter-expedition/outskirts.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-chest-anime-v2.webp",
+          "signature": "../assets/scenes/scene-chest-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-door-anime-v2.webp",
+          "signature": "../assets/scenes/scene-door-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-altar-anime-v2.webp",
+          "signature": "../assets/scenes/scene-altar-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/fire-rest-1021/city-campfire.webp",
+          "signature": "../assets/scenes/fire-rest-1021/city-campfire.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-extract-anime-v2.webp",
+          "signature": "../assets/scenes/scene-extract-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-shop-anime-v2.webp",
+          "signature": "../assets/scenes/scene-shop-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-coin-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-coin-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-wood-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-wood-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-rations-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-rations-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/scene-pickup-key-anime-v2.webp",
+          "signature": "../assets/scenes/scene-pickup-key-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-demondeal.webp",
+          "signature": "../assets/scenes/event-tt6-demondeal.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-bandits-anime-v2.webp",
+          "signature": "../assets/scenes/event-bandits-anime-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-goldmine-1013-v2.webp",
+          "signature": "../assets/scenes/event-tt6-goldmine-1013-v2.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-goldhammer.webp",
+          "signature": "../assets/scenes/event-tt6-goldhammer.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-relief.webp",
+          "signature": "../assets/scenes/event-tt6-relief.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-airdrop.webp",
+          "signature": "../assets/scenes/event-tt6-airdrop.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-chestdraw.webp",
+          "signature": "../assets/scenes/event-tt6-chestdraw.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-systemsupply.webp",
+          "signature": "../assets/scenes/event-tt6-systemsupply.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-airdrop.webp",
+          "signature": "../assets/scenes/event-tt6-airdrop.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-tt6-relief.webp",
+          "signature": "../assets/scenes/event-tt6-relief.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-last-lamp-1013-v1.webp",
+          "signature": "../assets/scenes/event-last-lamp-1013-v1.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-vital.webp",
+          "signature": "../assets/scenes/event-ev19-vital.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-pearlbox.webp",
+          "signature": "../assets/scenes/event-ev19-pearlbox.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-fireballs.webp",
+          "signature": "../assets/scenes/event-ev19-fireballs.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-classchest.webp",
+          "signature": "../assets/scenes/event-ev19-classchest.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-recode.webp",
+          "signature": "../assets/scenes/event-ev19-recode.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-potions.webp",
+          "signature": "../assets/scenes/event-ev19-potions.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-arrows.webp",
+          "signature": "../assets/scenes/event-ev19-arrows.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-gamble.webp",
+          "signature": "../assets/scenes/event-ev19-gamble.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-ev19-quartermaster.webp",
+          "signature": "../assets/scenes/event-ev19-quartermaster.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-cmtn7qttxqo4.webp",
+          "signature": "../assets/scenes/event-cmtn7qttxqo4.webp"
+        },
+        {
+          "kind": "CSS URL",
+          "text": "../assets/scenes/event-cmtn7qttxqo4.webp",
+          "signature": "../assets/scenes/event-cmtn7qttxqo4.webp"
+        }
+      ]
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "baseSha256": "d84fa6332489b6b7980568bdb8e23953f4f42ddc65fde956fd3e8239d6625f33",
+      "incomingSha256": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609",
+      "baseCount": 26,
+      "currentCount": 26,
+      "removed": [],
+      "added": [],
+      "currentSurface": [
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/altar-symbol-1017-v2.webp',import.meta.url)",
+          "signature": "549446684b076d572dff5ddba825937fb259a46a87849cb53c515b01b5563f3f"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/altar-symbol-1017-v2.webp",
+          "signature": "../../assets/scenes/map-nodes/altar-symbol-1017-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp',import.meta.url)",
+          "signature": "6d8e2f93c82174bce7b353b0885f759ccfd43e988d554907783982b241593d6b"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp",
+          "signature": "../../assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "408265598ed4d391eb5bf92d978456868e270c2c00c4be2d332a9fb2a7a28dc0"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/battle-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "0aeb5ce6ea9ff715ee7d3dffc5a9f4042044c14919d919ac3dd91e16a3c48be7"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/battle-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/battle-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/shop-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "26d5c052f25b499fa3313c955234bae75b0e9a8e77926d2fd69f3f6640428bcf"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/shop-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/shop-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/event-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "6c3491456c43212f2db57147b9d7219d2eba530c4005d03ad960d0d634c37cea"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/event-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/event-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/passage-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "68c048d280a9e5ab0912cc3c218f50d4bdbbd2055f9620b116f0cf877d84e039"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/passage-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/passage-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/supply-symbol-foreground-1012-v5.webp',import.meta.url)",
+          "signature": "2dd038a361e7004dc64f2810a8fd19fc3026d34ed5fcbbd8bdbdcabfcf1da42f"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/supply-symbol-foreground-1012-v5.webp",
+          "signature": "../../assets/scenes/map-nodes/supply-symbol-foreground-1012-v5.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/resource-symbol-1015-v1.webp',import.meta.url)",
+          "signature": "baffc2a11a06d05e00be11955b08ead16ed5681194000b34e5b1531009d5f244"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/resource-symbol-1015-v1.webp",
+          "signature": "../../assets/scenes/map-nodes/resource-symbol-1015-v1.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/ui/map-hud-1015/gold-is7-v2.webp',import.meta.url)",
+          "signature": "d63b9898c31999f877cd03672c1a534111c2cf8996c2c4df098e23df16385187"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/ui/map-hud-1015/gold-is7-v2.webp",
+          "signature": "../../assets/ui/map-hud-1015/gold-is7-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = url",
+          "signature": "e7d3b4db6ffc4667ad9053aad57845054f5ead172eb054ab576df48c4313077d"
+        },
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(nodeImage(url))",
+          "signature": "49dcea65bb03c88c461cd9dd2beffb21aa57c80b097c94a26de4157748028d3b"
+        },
+        {
+          "kind": "load-call",
+          "text": "nodeImage(url)",
+          "signature": "917095cf349dfe0b141c7974d8642d5d05bb6664669bf3e228b64f8f2b1127c9"
+        },
+        {
+          "kind": "load-call",
+          "text": "nodeImage(entry.url)",
+          "signature": "22515e7c0cceb63f7ff4a75ccd269dd6d1f68eb191995947552c072ed6d9ab61"
+        },
+        {
+          "kind": "load-call",
+          "text": "nodeImage(url)",
+          "signature": "917095cf349dfe0b141c7974d8642d5d05bb6664669bf3e228b64f8f2b1127c9"
+        }
+      ]
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "baseSha256": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34",
+      "incomingSha256": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7",
+      "baseCount": 5,
+      "currentCount": 6,
+      "removed": [],
+      "added": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { mapLayerAtmosphere, drawMapLayerHaze } from './map-layer-atmosphere.js';",
+          "signature": "3805316657455cae8a94e78a7e2cfa3c0617e08bd66478466c36c60e3ab64cad"
+        }
+      ],
+      "currentSurface": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { mapLayerAtmosphere, drawMapLayerHaze } from './map-layer-atmosphere.js';",
+          "signature": "3805316657455cae8a94e78a7e2cfa3c0617e08bd66478466c36c60e3ab64cad"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "mapAtmosphere.src=new URL('../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp',import.meta.url).href",
+          "signature": "7745e182530f2a8c495fe2223237f3f22b2db227d2135bd356b06197320703cf"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp',import.meta.url)",
+          "signature": "22cccc360169ddc64771f93524a33e7b0516ec316e619852cefc9594e61a0adb"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp",
+          "signature": "../../assets/scenes/map-nodes/map-atmosphere-is7-1012.webp"
+        },
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(mapAtmosphere)",
+          "signature": "2a8646daf667935e0f937cd752f9c3331ba0bc9ea3337dec8cbb169ba3e0d2a0"
+        }
+      ]
+    },
+    {
+      "path": "game/src/core/map-city-atmosphere.js",
+      "baseSha256": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb",
+      "incomingSha256": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02",
+      "baseCount": 5,
+      "currentCount": 16,
+      "removed": [
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(props)",
+          "signature": "e5861e79adbcd13d0fb38e3719c80eb9c41a0c345478c19c68643251562f7940"
+        }
+      ],
+      "added": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { mapLayerAtmosphere } from './map-layer-atmosphere.js';",
+          "signature": "f4000764a5fd6c9d10e326c517f050c9184c3fb01c19b8a2a057e66c0a44485c"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/outskirts-simple.webp',import.meta.url)",
+          "signature": "0a8b0e7f19f9b24b0064d966429db9a87f931b28fb4ecb9342789be9bcac6768"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/outskirts-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/outskirts-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/watchline-simple.webp',import.meta.url)",
+          "signature": "a18b76f30d99cc21ee9a8231c325261cad6ad84ceef7b791bc1953d3dbd576a6"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/watchline-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/watchline-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/ruins-simple.webp',import.meta.url)",
+          "signature": "b0296cbaf58692726cd6d1d4155f1ca512964ac88fad8223f7ca82426f24fa85"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/ruins-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/ruins-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/core-simple.webp',import.meta.url)",
+          "signature": "d47333662e4f6c6f0eab1493e1c3728cc44a75928db1d6b6e2481e02d100d94f"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/core-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/core-simple.webp"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = url",
+          "signature": "e7d3b4db6ffc4667ad9053aad57845054f5ead172eb054ab576df48c4313077d"
+        },
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(image)",
+          "signature": "c83c171802a6ac0a9ee51955f96fff0e4d5720b1069543d9016c6950fd58f993"
+        }
+      ],
+      "currentSurface": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { mapLayerAtmosphere } from './map-layer-atmosphere.js';",
+          "signature": "f4000764a5fd6c9d10e326c517f050c9184c3fb01c19b8a2a057e66c0a44485c"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/outskirts-simple.webp',import.meta.url)",
+          "signature": "0a8b0e7f19f9b24b0064d966429db9a87f931b28fb4ecb9342789be9bcac6768"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/outskirts-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/outskirts-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/watchline-simple.webp',import.meta.url)",
+          "signature": "a18b76f30d99cc21ee9a8231c325261cad6ad84ceef7b791bc1953d3dbd576a6"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/watchline-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/watchline-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/ruins-simple.webp',import.meta.url)",
+          "signature": "b0296cbaf58692726cd6d1d4155f1ca512964ac88fad8223f7ca82426f24fa85"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/ruins-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/ruins-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-environment-1021/core-simple.webp',import.meta.url)",
+          "signature": "d47333662e4f6c6f0eab1493e1c3728cc44a75928db1d6b6e2481e02d100d94f"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-environment-1021/core-simple.webp",
+          "signature": "../../assets/scenes/map-environment-1021/core-simple.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "props.src = new URL('../../assets/scenes/map-nodes/city-ghost-props-a-1012.webp', import.meta.url).href",
+          "signature": "a3a25b6334a817dfe48e54f2625324db2c71e788f7c461a567f2d6992c3d932b"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/map-nodes/city-ghost-props-a-1012.webp', import.meta.url)",
+          "signature": "1c48dd16ab3725b470a1b69ac84fec3158723b8c4cd85b3905f6dd70f3b0a0b8"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/map-nodes/city-ghost-props-a-1012.webp",
+          "signature": "../../assets/scenes/map-nodes/city-ghost-props-a-1012.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = url",
+          "signature": "e7d3b4db6ffc4667ad9053aad57845054f5ead172eb054ab576df48c4313077d"
+        },
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(image)",
+          "signature": "c83c171802a6ac0a9ee51955f96fff0e4d5720b1069543d9016c6950fd58f993"
+        }
+      ]
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "baseSha256": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0",
+      "incomingSha256": "ccee99b0505c2b35cc6fa8c04ef69a41ea2f2b23a23abbbc7d503f2d15c7c384",
+      "baseCount": 13,
+      "currentCount": 17,
+      "removed": [],
+      "added": [
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-battle-v2.webp', import.meta.url)",
+          "signature": "6d68423d7618388a046b6dd7fa858316cfa641f0897f64942f6b51fbf606ca78"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-battle-v2.webp",
+          "signature": "../../assets/scenes/transition-battle-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-boss-v2.webp', import.meta.url)",
+          "signature": "3ed8d8f5aede0e25f928ee8d1a5b7633caf9b27daeef087897ba27132205e5e1"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-boss-v2.webp",
+          "signature": "../../assets/scenes/transition-boss-v2.webp"
+        }
+      ],
+      "currentSurface": [
+        {
+          "kind": "selector-dependency",
+          "text": "import { GENERAL_TRANSITION_ART } from './general-transition.js';",
+          "signature": "c9279add2bd170fa560d7a496ba042879d897a17221541772364e4fc496d375d"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url)",
+          "signature": "824e7ddf87ddd2c7e54e1bd57b9424f31adbda4bff9338b47ed7bca692484ab8"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-camp-v2.webp",
+          "signature": "../../assets/scenes/transition-camp-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url)",
+          "signature": "d79819304bb77df98a1a0ceb32b435766e033e3aba8f4543d2b14905a032cda3"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-photo-v2.webp",
+          "signature": "../../assets/scenes/transition-photo-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-field-v2.webp', import.meta.url)",
+          "signature": "b695acdad6dc2d06399057b8f9ecaab221349bbf0bb1b08ea7c5a4ef619956c0"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-field-v2.webp",
+          "signature": "../../assets/scenes/transition-field-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-battle-v2.webp', import.meta.url)",
+          "signature": "6d68423d7618388a046b6dd7fa858316cfa641f0897f64942f6b51fbf606ca78"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-battle-v2.webp",
+          "signature": "../../assets/scenes/transition-battle-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-boss-v2.webp', import.meta.url)",
+          "signature": "3ed8d8f5aede0e25f928ee8d1a5b7633caf9b27daeef087897ba27132205e5e1"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-boss-v2.webp",
+          "signature": "../../assets/scenes/transition-boss-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-achievement-v2.webp', import.meta.url)",
+          "signature": "98c102e1e2790202e8d27f03bfc27f963963e4bf319fb367d7dea414b9b5f83c"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-achievement-v2.webp",
+          "signature": "../../assets/scenes/transition-achievement-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new Image()",
+          "signature": "bee6c3c36ffdfd18d6946749fda59bd06a7d4881d9ac05f4a42c5400171e5124"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = src",
+          "signature": "8e15c9534dda4fc222fb7112f743c6da8494f4778c7a388cec408d175e3870e5"
+        },
+        {
+          "kind": "image-source",
+          "text": "image.src = CUT_SCENES[scene] || CUT_SCENES.camp",
+          "signature": "ae283a1294215ea6dbb5bf2a2e25e518d8d93f5951ac4b759ab97d3c57fc8bf8"
+        },
+        {
+          "kind": "load-call",
+          "text": "mapImageReady(image, { signal, timeout: 3000 })",
+          "signature": "f9d438995e344eb18f597763e273f80d636f0cb4f8ee62b1ff9d5611efbc3c35"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "game/src/ui/slot-emblems.js",
+      "sha256": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a",
+      "surface": [],
+      "incomingGitSha": "7eb18477f922cec1fe3e2c21b173883d3fde6067",
+      "actualGitSha": "7eb18477f922cec1fe3e2c21b173883d3fde6067"
+    },
+    {
+      "path": "game/src/ui/transition-art.js",
+      "sha256": "3b1c168303ff639c7d04395314e6396e7b80237585985983271b702e4e8a4222",
+      "surface": [
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/retreat.webp', import.meta.url)",
+          "signature": "d00c6f21ec8bf92663a7c768370506e697a1a2dd3d48fcb26e7c3e00751b5fb9"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/retreat.webp",
+          "signature": "../../assets/scenes/transitions-1021/retreat.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/door.webp', import.meta.url)",
+          "signature": "fecd95f4604cbeb1d793c7e52c7fa19f120a2cb7281ea307101246edd8ecb38d"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/door.webp",
+          "signature": "../../assets/scenes/transitions-1021/door.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/altar.webp', import.meta.url)",
+          "signature": "97ed183058351732eaca8951b3b224be630f03cc678bde21b926cd2fcd77e7d5"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/altar.webp",
+          "signature": "../../assets/scenes/transitions-1021/altar.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/shop.webp', import.meta.url)",
+          "signature": "6c721b58bce1b5c6cc174a5b8aee2b887ca60de3d09304fbc14d546550d34ca0"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/shop.webp",
+          "signature": "../../assets/scenes/transitions-1021/shop.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/emergency-exit.webp', import.meta.url)",
+          "signature": "0d97e9ccf8dfd5cbe87637c22c82a69bf2663c2d4fc6a3937bfa748c317a83ae"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/emergency-exit.webp",
+          "signature": "../../assets/scenes/transitions-1021/emergency-exit.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/event.webp', import.meta.url)",
+          "signature": "91b064446346edfa99690e17bfe5d697fe58a4d28adfaf4b3f5ad753380d593a"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/event.webp",
+          "signature": "../../assets/scenes/transitions-1021/event.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transitions-1021/loading.webp', import.meta.url)",
+          "signature": "558b4bff69f426dbfa582e25ac579eb342f1e72dc78fde437497c8aed758600b"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transitions-1021/loading.webp",
+          "signature": "../../assets/scenes/transitions-1021/loading.webp"
+        }
+      ],
+      "incomingGitSha": "f6bad58ea799ab321934154cbab38296e5ed7a32",
+      "actualGitSha": "f6bad58ea799ab321934154cbab38296e5ed7a32"
+    },
+    {
+      "path": "game/src/ui/general-transition.js",
+      "sha256": "73ba11f673b79f5948056013cb0c1fafd0eca1f5d7ad4034d579a74ca904b6af",
+      "surface": [
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/transition-general-1016.webp', import.meta.url)",
+          "signature": "cccdfc499f4e8c37de9341183b44b275991a21d388d4e3ad1808785ebfd2fde0"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/transition-general-1016.webp",
+          "signature": "../../assets/scenes/transition-general-1016.webp"
+        }
+      ],
+      "incomingGitSha": "51a7a08cc521c2a2ba31c1cdef1ad3232f1c89e3",
+      "actualGitSha": "51a7a08cc521c2a2ba31c1cdef1ad3232f1c89e3"
+    },
+    {
+      "path": "game/src/core/map-layer-atmosphere.js",
+      "sha256": "9c598e8d971a224415e1e41ce5dc1f8055bb70c9a96d715762f493650eed9cd5",
+      "surface": [],
+      "incomingGitSha": "c77087f82a60e7a2111014338c4cdd06b41b995b",
+      "actualGitSha": "c77087f82a60e7a2111014338c4cdd06b41b995b"
+    },
+    {
+      "path": "game/src/run/game.run.data.js",
+      "sha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
+      "surface": [
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/battle/platform-minimal-1016/far.webp', import.meta.url)",
+          "signature": "4210500d0815468409b1113d54ed3b1db164afec6ea8a72b244e5c70e803d267"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/battle/platform-minimal-1016/far.webp",
+          "signature": "../../assets/scenes/battle/platform-minimal-1016/far.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/battle/platform-minimal-1016/ground.webp', import.meta.url)",
+          "signature": "0519c4cabf81fa2da1cbb3a674722a31a8c7706f5d6906bd90cd776c207bb7b5"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/battle/platform-minimal-1016/ground.webp",
+          "signature": "../../assets/scenes/battle/platform-minimal-1016/ground.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/battle/platform-minimal-1016/foreground.webp', import.meta.url)",
+          "signature": "5dc93e5d26a8828fe7e2adfacb3133a106d9bfc93fef96e18c2bbee29cfba184"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/battle/platform-minimal-1016/foreground.webp",
+          "signature": "../../assets/scenes/battle/platform-minimal-1016/foreground.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-pickup-coin-anime-v2.webp', import.meta.url)",
+          "signature": "80776bab6e2d6bf671bc44df5f6d8d2d3f649eda4896834d3b8fe79fbca5aa22"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-pickup-coin-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-pickup-coin-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-pickup-wood-anime-v2.webp', import.meta.url)",
+          "signature": "e1911e8a18f403f07310ce16786a85e67a3209648193645c98b8b186a84d195e"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-pickup-wood-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-pickup-wood-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-pickup-rations-anime-v2.webp', import.meta.url)",
+          "signature": "fe4cb179243ed7b19d2aa22ab286d505a55caf1c6f88baa1b84cd90026e9bb39"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-pickup-rations-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-pickup-rations-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-pickup-key-anime-v2.webp', import.meta.url)",
+          "signature": "372698b81f1ef5e51c818189a9e919b43cba7a8d3dda951ba83ff1c23fd8d79f"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-pickup-key-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-pickup-key-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-fire-anime-v2.webp', import.meta.url)",
+          "signature": "1dcf594204bcfdbfea6b5731c2cfbb9ebb863ed60726f840c4f6281ed4700ebd"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-fire-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-fire-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-shop-anime-v2.webp', import.meta.url)",
+          "signature": "97d24bad71af6e2cee73d2513747a0797ec8b57ff6c91aa2416fa1e70540f3fb"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-shop-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-shop-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-extract-anime-v2.webp', import.meta.url)",
+          "signature": "aab59a9c1fdbf1b2dbc43aadff503e356966e16ee7afe0397925a9daea836cfa"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-extract-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-extract-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-door-anime-v2.webp', import.meta.url)",
+          "signature": "9e586caa1e440fbf989252005fce7ff7a46a951727a640f284bc765f2f11c312"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-door-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-door-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-altar-anime-v2.webp', import.meta.url)",
+          "signature": "aaa41ab70699223970803b79aa1638443941119243bf7f9016c9fb7f682f4144"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-altar-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-altar-anime-v2.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/event-tt6-mystery.webp', import.meta.url)",
+          "signature": "5f3e3fe0390a1b30827c8405b3a4c7507a192b9dd4a2847480f4994827f81970"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/event-tt6-mystery.webp",
+          "signature": "../../assets/scenes/event-tt6-mystery.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/event-tt6-airdrop.webp', import.meta.url)",
+          "signature": "5ef614deda1e44f77abf87b8d9efd06c80410656f66c3042db7835264a6f2d77"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/event-tt6-airdrop.webp",
+          "signature": "../../assets/scenes/event-tt6-airdrop.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/event-tt6-relief.webp', import.meta.url)",
+          "signature": "a2182ebdef10aae17cc512672b2970844856a0f4bcda127446feb6fc8cb7968e"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/event-tt6-relief.webp",
+          "signature": "../../assets/scenes/event-tt6-relief.webp"
+        },
+        {
+          "kind": "URL/image-constructor",
+          "text": "new URL('../../assets/scenes/scene-chest-anime-v2.webp', import.meta.url)",
+          "signature": "6a81488710c8a7c6ae653b7eb8193df40d8fcd422e8bbb93bf9fdb6cd24dcbff"
+        },
+        {
+          "kind": "asset-literal",
+          "text": "../../assets/scenes/scene-chest-anime-v2.webp",
+          "signature": "../../assets/scenes/scene-chest-anime-v2.webp"
+        }
+      ],
+      "incomingGitSha": "f6e7e4b85f4c2a5b8669ddbef5a981111e6a6586",
+      "actualGitSha": "f6e7e4b85f4c2a5b8669ddbef5a981111e6a6586"
+    }
+  ],
+  "manualResourceReviews": {
+    "game/src/ui/game.menu.pages.js": "Independent current selector review (do not claim exact historical approval): SLOT_EMBLEMS static import→SLOT_ICONS alias→slot-card-art interpolation unchanged; dependency is five literal inline SVG strings with no external href/src. Full constructor/load/path surface matches exact e817/cloud resource surface (counts recorded separately). Only two explicit static asset paths remain mail-empty and audio SOURCES.md, unrelated to slot-weather. New resume handling delegates to already reviewed bounded transition flow; no old weather filename or URL constructor.",
+    "game/src/run/game.run.scenes.js": "Exact approved e817 source anchor. Existing scene imports/maps and preload Image.src=name/url unchanged. New preload list adds only TRANSITION_ART.retreat and TRANSITION_ART[type]; new showRunTransition art parameter reaches img src via escaped template and image.src=art. Every current call inspected: enterNode uses TRANSITION_ART[kind], retreat uses TRANSITION_ART.retreat; menu/class-choice omit art and use closed CUT_SCENES. TRANSITION_ART is frozen7static new URL literals, all retained/current. Battle/boss scene selectors now choose v2 art; existing data-asset-key remains resolved by unchanged approved mapping. No retired path restored; new lifecycle/rules not modified.",
+    "game/css/entry-events.css": "Exact approved e817 bytes anchor. Full diff only footer alignment and rightmost return order, comments; all CSS URL tokens unchanged. No asset selection added.",
+    "game/css/scenes.css": "Exact approved e817 bytes anchor. Exactly2 URL occurrences for scene-fire-bg change scene-fire-anime-v2.webp→fire-rest-1021/city-campfire.webp. Selectors unchanged; new path exactincoming asset hash verified, not retired candidate, retained. All other URLs unchanged.",
+    "game/src/core/map-node-art.js": "Exact approved e817 source anchor. All URL/Image constructors, image.src assignments, loader calls, literal paths unchanged. Static art/aliases table and portrait source selection unchanged. Only typing/color/opacity/status-label presentation changes; no candidate path restored.",
+    "game/src/core/renderer.js": "Exact approved e817 source anchor. Existing map atmosphere URL/Image source unchanged. New map-layer-atmosphere dependency has no asset constructors/paths, only numeric colors/filter/geometry arrays; environment drawing delegates to separately reviewed map-city-atmosphere. No asset omitted by this patch.",
+    "game/src/core/map-city-atmosphere.js": "Exact approved e817 source anchor. Existing city-ghost-props URL remains. Adds bounded4element environmentUrls static URL array; images map directly from that array, layer index uses range-checked fallback0. Canvas cache/filters/readiness do not construct file paths.4current map-environment-1021 assets verified exactincoming bytes, absent candidates and retained.",
+    "game/src/ui/camp-entry.js": "Exact approved e817 source anchor. Closed CUT_SCENES retains camp/photo/field/general/achievement; battle/boss now static transition-battle-v2 / transition-boss-v2 (not excludedv1). Existing image.src=CUT_SCENES[scene]||camp and all preloader paths remain. New lifecycle/reveal functions add no resource selector. Bothv2assets verified exactincoming and retained."
+  },
+  "historicalApprovalLimit": "Seven source hashes match exact e817 consumerFingerprints. Menu e817 source does not match historical opaque approval and slot-weather category was not present then; menu receives a fresh complete current-selector review, not fictional approved-byte equivalence."
+}

@@ -1,0 +1,36 @@
+{
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "incoming": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "incoming_tree": "b04beecba7049a042a268455968ff432585c84c0",
+  "preserved_cloud_tree": "86f43ce681cd2e49972e75c9095f546bfd378468",
+  "files": [
+    {
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "master_sha": "b05579922d00d8ee86324c18dc7d76ae388aaec9",
+      "candidate_git_sha": "87fbf337b59abe0516f8da65a4f88318db66e8f0",
+      "candidate_sha256": "6e528f33630d1f2ccf4c147ecf8cf3a0a3d27387ab4bb82f505410982e7643a8",
+      "bytes": 30320
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.secondary-overlay.js",
+      "master_sha": "f0dd252bf3ec6341d97871e9412d72b9ecfe03d0",
+      "candidate_git_sha": "ef00761d69025ffe514b39a2ce63710c92f8a9c5",
+      "candidate_sha256": "5977103aa9818fdf2603b21f53c6c42ced76d35f0a11214c81a8ad4ce31cdcee",
+      "bytes": 4562
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-panel.local.js",
+      "master_sha": null,
+      "candidate_git_sha": "2046a8a3ba8b064a7b77e605e64653b687f215a0",
+      "candidate_sha256": "49e06eeae73b04ebb64deb8e08e93ed8f46c787d58c7ecb16bf2ac0dfe444ec3",
+      "bytes": 1030
+    },
+    {
+      "path": "搜打撤/tests/overlay-connected-master-merge.test.js",
+      "master_sha": null,
+      "candidate_git_sha": "facd521d50e84c61d0a9779fe4d93a4e96602786",
+      "candidate_sha256": "a9779ef019b2a17bb53d58328e9cc4485a2b30f840853f5dc676d9ac54e5a721",
+      "bytes": 11381
+    }
+  ]
+}

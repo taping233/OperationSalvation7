@@ -1,0 +1,137 @@
+{
+  "priorTree": "2c51b365a9703a5f9d4ab7e5e250d2c5a4bba388",
+  "priorReportSha256": "dfe62cddbc78e7361b56933021f48bc87d2cc500868bf801f278469d3a4880f0",
+  "priorReportName": "2026-10-21T18-13-51.657Z-fcfeef46-staged.json",
+  "priorReportNotStagedReason": "Original authentic4.44MB report exceeds1MB/file policy; preserved local unchanged, not a reusable receipt",
+  "priorOutcome": {
+    "passed": false,
+    "filesPassed": 790,
+    "filesFailed": 10,
+    "filesSkipped": 1,
+    "testsPassed": 8332,
+    "testsFailed": 12,
+    "testsSkipped": 7,
+    "vitestSeconds": 1008.69,
+    "staticCoverage": "560/560",
+    "buildExecuted": false
+  },
+  "classifications": [
+    {
+      "group": "lamp inventory guards",
+      "failures": 4,
+      "classification": "exact incoming baseline reproduces; expected projected description inconsistent with old comparator; masked shadowbug guard also omitted prior M3 rules addition; independent fixed expectations and negative mutations retain fail-closed scope"
+    },
+    {
+      "group": "battle deck/physical infusion fixtures",
+      "failures": 2,
+      "classification": "tests and failing functions exact incoming; old mocks omitted real zoom and retired grouped action; current real rendering/UID flow tested with stronger stale/no-spend assertions"
+    },
+    {
+      "group": "required pouch release",
+      "failures": 1,
+      "classification": "exact incoming also fails stale reject assertion; current explicit tenth-argument directRelease contract requires effect without fuel; real stored-source and exact damage/temp-consumption checked"
+    },
+    {
+      "group": "asset publication guards",
+      "failures": 2,
+      "classification": "8 exact incoming source hashes stale; explicit resource review preserves14 new assets; only reviewed fingerprint values change, no omission candidates/categories/scanner relaxation"
+    },
+    {
+      "group": "departure/supply/title fixtures",
+      "failures": 3,
+      "classification": "exact incoming reproduces; intended concise hint, absent cleared notice, diagnostic experimental stylesheet alignment; production main/CSS unchanged"
+    }
+  ],
+  "nextValidation": "Final independent asset review, combined10suite check, original normal frozen FULL and standard build still required; no success claim",
+  "evidence": [
+    {
+      "file": "followup-central-manifest.json",
+      "bytes": 2076,
+      "sha256": "82f3d844746662cd770cba288dce7a24d5825a8743d86a03792a2439b0c8767f"
+    },
+    {
+      "file": "followup-central-decisions.md",
+      "bytes": 3219,
+      "sha256": "08fcd52cf75b906e855edfa58c41a2c1f72e5bb904cf671f9eb877c5fe220b53"
+    },
+    {
+      "file": "followup-renderer-manifest.json",
+      "bytes": 1084,
+      "sha256": "7a4ea24ce481ab8ca64e3a5c51679a4178a830df60fa04ea8e7f7f05bf9121f1"
+    },
+    {
+      "file": "followup-ui-manifest.json",
+      "bytes": 1359,
+      "sha256": "06cd94c9f73796a70efb1ca2d321de024eb1c5bfb1d525cfb95caaa72018826f"
+    },
+    {
+      "file": "followup-ui-decisions.md",
+      "bytes": 3227,
+      "sha256": "23b8b8b5ffbe94770f534794cb76660e9dfe91b7be98b02c29c3d45ecfb72014"
+    },
+    {
+      "file": "followup-asset-manifest.json",
+      "bytes": 3628,
+      "sha256": "794557c274c4bd6ad2cf945cb0bc1f597ba597ce5e934ea27ebc2aa4538e7fc9"
+    },
+    {
+      "file": "followup-asset-resource-proof.json",
+      "bytes": 55771,
+      "sha256": "a6a0590218adc239d870207f15e4c92adf90964fd02ad6f41808c1e517036783"
+    },
+    {
+      "file": "followup-asset-scan-proof.json",
+      "bytes": 29146,
+      "sha256": "0e3572bda55a87c95d26923f14a038bb8b5871f922e27397aeb4a52cfb611410"
+    },
+    {
+      "file": "full-gate-2c51-failed.log",
+      "bytes": 41742,
+      "sha256": "22f7a7470c454f6ba7b83319113732b40944b9f84f07849dd2fde797fb5438c4"
+    },
+    {
+      "file": "full-gate-2c51-resources.json",
+      "bytes": 377,
+      "sha256": "80afcea7a90026ca692f64a82913183a515be9f467bdcde5ff3b8083a89b2dfd"
+    },
+    {
+      "file": "incoming-inventory-pouch-baseline.log",
+      "bytes": 13126,
+      "sha256": "f59b2146b05502cb994180fd576c0dd4ef5d7bed6f4fa7d1944d9083755f5107"
+    },
+    {
+      "file": "followup-central-focused.log",
+      "bytes": 8189,
+      "sha256": "3da2d4bdd98604907f97eff151e62ccf029de455d1533957e668f39a049e78a1"
+    },
+    {
+      "file": "followup-pouch-negative.log",
+      "bytes": 4020,
+      "sha256": "3ed2c26f4bb6d1a3844f775467c61ce265962e31880e01777e531d62e4e2f79c"
+    },
+    {
+      "file": "followup-ui-focused.log",
+      "bytes": 7584,
+      "sha256": "f5d0f091173e29cb1e243a93205a3ecd202db827eecb25eede330650ec93c417"
+    },
+    {
+      "file": "followup-asset-focused.log",
+      "bytes": 6732,
+      "sha256": "2b2c8473775742c526238ba297e5c835eae0b008e82aed18f6a461c78c049318"
+    },
+    {
+      "file": "followup-typecheck.log",
+      "bytes": 520,
+      "sha256": "f60661b331e919f0265d593bce2b1e5ef5d3b69d0b3977a49ab1fb4961b938c4"
+    }
+  ],
+  "followupValidation": {
+    "combinedFilesPassed": 10,
+    "combinedTestsPassed": 145,
+    "combinedExistingOptInSkip": 1,
+    "seconds": 24.38,
+    "implementationTypeCoverage": "560/560; strict51/560",
+    "independentReview": "central and asset patches GO; renderer/UI patches independently reviewed; records included",
+    "fullGateAndBuild": "pending new frozen run; not a pass"
+  }
+}

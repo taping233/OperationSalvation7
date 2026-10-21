@@ -1,0 +1,57 @@
+{
+  "baseLabel": "parent-frozen-91052c8b/tree-ea0da5c7; exact materialized file hashes below are authoritative",
+  "patchSha256": "171543a3edb968d288b743eb7dd890165e2d74a72c29167803444c2ad5a94bbb",
+  "files": [
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-panel.local.js",
+      "beforeSha256": null,
+      "afterSha256": "49e06eeae73b04ebb64deb8e08e93ed8f46c787d58c7ecb16bf2ac0dfe444ec3"
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace.local.js",
+      "beforeSha256": "c347c939e4b6af0e1c67d357295d075f73b6abf6968e63d89ffaca4338d1364a",
+      "afterSha256": "073d7a1c342688753eae9b90760dd38680a8c0809c29a15c6db4017510072c4c"
+    },
+    {
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "beforeSha256": "24f461fb2a5d4cc21c92a2c3b66c2411b6cda8052be59020d65e538d4a78ce95",
+      "afterSha256": "0c559526b0c7bf3bcca07f54245f950a25286eff711ea6d0791fb37cce1e9017"
+    },
+    {
+      "path": "搜打撤/tests/runtime-trace-modal.test.js",
+      "beforeSha256": null,
+      "afterSha256": "3f2b51f68ca680db3ad7887fb3ce3f559c659261967f86b16d3c6a174bf3bfc5"
+    },
+    {
+      "path": "搜打撤/docs/runtime-trace.md",
+      "beforeSha256": "c9d26b26136cd67581d7ddd9a3b416c49ebcc7440cd9085441408f9b19386c1b",
+      "afterSha256": "791a9fbfd2c093bba0874d8a7a410f4cbc9526986265c635894952e31ebc3988"
+    }
+  ],
+  "applyCheckDirectory": "/tmp/runtime-trace-modal-applycheck-d3glwf9t",
+  "applyCheck": [
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/scratch/b7a53a06c872/runtime-trace-modal-controls-91052c8b/runtime-trace-modal.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "appliedBytesMatch": true,
+  "buildRun": false,
+  "mainEdited": false
+}

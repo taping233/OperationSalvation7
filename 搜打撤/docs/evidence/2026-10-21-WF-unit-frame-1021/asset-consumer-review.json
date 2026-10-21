@@ -1,0 +1,15 @@
+{
+  "scope": "Two source SHA refreshes in three existing entries: opaqueConsumers.layers, opaqueConsumers.frames and consumerFingerprints.frames. No other review values, algorithms or budgets changed.",
+  "independentReview": "Against real827 commit, assetUrl and SDT.Art/Icons calls and imports unchanged. Frame catalogs, role selection, candidateNames/loadSet/figureRole/attachCurrent and ally portrait mapping unchanged.",
+  "proof": "consumer-review-proof.json",
+  "negativeControls": "Both real frame assetUrl expressions mutated independently and missing opaque approval retain all candidates. With valid opaque approval, stale frames selector and changes/removals of each of four actual selector sources retain only frame candidates. Existing layer real-consumer control retained.",
+  "targeted": {
+    "filesPassed": 2,
+    "testsPassed": 41,
+    "failed": 0
+  },
+  "sourceHashes": {
+    "game/src/battle/view/battle.layers.js": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
+    "game/src/battle/view/battle.frames.js": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d"
+  }
+}

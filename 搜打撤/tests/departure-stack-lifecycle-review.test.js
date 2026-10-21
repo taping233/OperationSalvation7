@@ -78,8 +78,8 @@ describe('新手可调整推荐装配', () => {
   it('首次整备在出发按钮之前明示统一消耗去向与复原入口', () => {
     open(); const rules = document.querySelector('.dep-survival'); expect(rules.open).toBe(true);
     expect(rules.textContent).toContain('用过的牌进入消耗区，复原后可再用');
-    expect(rules.textContent).toContain('复原方法在背包查看');
-    expect(rules.textContent).toContain('撤离时再确认带回结果');
+    expect(rules.querySelector('summary').textContent).toBe('用过的牌去哪了？');
+    expect(rules.textContent).toContain('方法见背包');
     expect(rules.compareDocumentPosition(document.querySelector('#btnDeploy')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

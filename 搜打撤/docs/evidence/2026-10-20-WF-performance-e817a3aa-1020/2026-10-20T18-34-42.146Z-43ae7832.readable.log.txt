@@ -1,0 +1,11 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+························································································
+
+ Test Files  6 passed (6)
+      Tests  88 passed (88)
+   Start at  03:34:43
+   Duration  2.39s (transform 458ms, setup 0ms, collect 896ms, tests 2.23s, environment 1.78s, prepare 381ms)

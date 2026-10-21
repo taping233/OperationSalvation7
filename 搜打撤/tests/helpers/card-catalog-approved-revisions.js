@@ -1,8 +1,9 @@
 // 在内存投影已批准的卡面修订；历史 E8 before 文件保持原字节。
 import frozenInventory from '../../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
-import nativeExecution from '../fixtures/builtin-execution-approved-20261020.json';
-import { dataSlice } from '../../game/src/cards/cards.data.js';
-import { BUILTIN_EXECUTION_REVISIONS } from '../../game/src/cards/builtin-card-execution.js';
+import approvedExecution from '../fixtures/builtin-execution-approved-20261020.json';
+
+// 反馈 #5 的独立批准值；不得从待验证的生产数据/规则反推测试期望。
+const APPROVED_LAMP_DESC = '抉择：1° 发现招式并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。';
 
 export const RETIRED_1010 = new Set(['tt-medneedle', 'tt-token-color', 'tt3-deep-seal', 'tt3eq-boiler']);
 // 2026-10-18 老板批准的事件选择与腐化之种死亡真伤；仅投影生产副本，CARDS_SYNC 不变。
@@ -24,18 +25,16 @@ const revisions = {
   'tt4-shine-token': { rarity: '传说' },
   // 2026-10-21 反馈#5：神灯第 1 项文案改「发现招式」——基线同步新文案，
   // armor:5 删除与规则改写仍由 isApprovedLampArmorRemoval 单独守护。
-  'tt3-magic-lamp': { desc: dataSlice.TABLETOP10.find(row => row?.id === 'tt3-magic-lamp')?.desc },
+  'tt3-magic-lamp': { desc: APPROVED_LAMP_DESC },
 };
 const sorted = value => Array.isArray(value) ? value.map(sorted) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(k => [k, sorted(value[k])])) : value;
-const lampCanonical = dataSlice.TABLETOP10.find(row => row?.id === 'tt3-magic-lamp');
-const lampBefore = frozenInventory.production.cards.find(row => row.id === 'tt3-magic-lamp').card;
+// compareMigrationInventories 接收已投影新文案的 before，仍锁原有 armor:5 与全部其余字段。
+const lampBefore = { ...frozenInventory.production.cards.find(row => row.id === 'tt3-magic-lamp').card,
+  desc: APPROVED_LAMP_DESC };
 const lampFace = { ...lampBefore };
 delete lampFace.armor;
-// 2026-10-21 反馈#5（老板实测 12 条）：第 1 项文案与抉择池改「发现招式」——
-// 批准卡面/批准规则同步现行定版（描述取 TABLETOP10 定版，规则取 BUILTIN_EXECUTION_REVISIONS）。
-if (lampCanonical?.desc) lampFace.desc = lampCanonical.desc;
-const lampAfter = { ...lampFace, rules: BUILTIN_EXECUTION_REVISIONS['tt3-magic-lamp'].rules };
+const lampAfter = { ...lampFace, rules: approvedExecution['tt3-magic-lamp'].rules };
 
 // 仅放行已冻结的生产神灯 armor:5 → 字段不存在（连同已批准的第 1 项文案/抉择池修订），
 // 其余卡面字节语义与现行定版声明必须一致。

@@ -1,0 +1,36 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification
+
+·············stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 加载失败释放覆盖/开关/缓存；同页重试成功
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/page-loading.js:77:22 {
+  cause: Error: network unavailable
+      at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/hub-lazy-entry.test.js:212:22
+      at file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 终局首次下载失败保留原回基地按钮，可直接再次点击重试
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/game/src/ui/page-loading.js:77:22 {
+  cause: Error: first fetch failed
+      at /workspace/scratch/b7a53a06c872/performance-retired-home-dependencies-eaa27f33/architecture-verification/tests/hub-lazy-entry.test.js:233:22
+      at file:///workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+······················
+
+ Test Files  3 passed (3)
+      Tests  35 passed (35)
+   Start at  13:14:39
+   Duration  3.30s (transform 399ms, setup 0ms, collect 188ms, tests 1.29s, environment 982ms, prepare 171ms)
+

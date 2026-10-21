@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { parse } from 'acorn';
+import { simple as walk } from 'acorn-walk';
 import { createCardPlayDomain } from '../game/src/battle/core/battle.card-play.domain.js';
 import { createInspectionDomain } from '../game/src/battle/effects/battle.card-inspection.domain.js';
 
@@ -147,7 +149,18 @@ describe('single-render raw-hand eligibility context', () => {
     const layers = readFileSync('game/src/battle/view/battle.layers.js', 'utf8');
     expect(view.slice(view.indexOf('function render('))).toContain('const handRuleContext = {};');
     expect(view).toContain('combatStateCopy(snapshot, cards, handRuleContext)');
-    expect(view).toContain('{ spellBonus, mode, discoverSrcRect, handRuleContext }');
+    // Additional synchronous render inputs must not invalidate this context
+    // contract; inspect the actual argument instead of the whole literal text.
+    const calls = [];
+    walk(parse(view, { ecmaVersion: 'latest', sourceType: 'module' }), {
+      CallExpression(node) { if (node.callee.type === 'Identifier' && node.callee.name === 'updateHand') calls.push(node); },
+    });
+    expect(calls).toHaveLength(1);
+    const options = calls[0].arguments[4];
+    expect(options.type).toBe('ObjectExpression');
+    const fields = Object.fromEntries(options.properties.map(property => [property.key.name, property.value.name]));
+    expect(fields).toMatchObject({ spellBonus: 'spellBonus', mode: 'mode', discoverSrcRect: 'discoverSrcRect',
+      handRuleContext: 'handRuleContext', liveInteractionSnapshot: 'liveInteractionSnapshot' });
     expect(layers).toContain('unplayableReason(g.card, ctx.handRuleContext)');
     expect(layers).toContain('handRuleContext: extra && extra.handRuleContext');
     expect(view.match(/handRuleContext/g)).toHaveLength(5);

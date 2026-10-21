@@ -1,0 +1,13 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { readModuleSources, buildModuleGraph, assertAcyclic, architectureViolations, deadGuardKeys } from './搜打撤/scripts/architecture-graph.mjs';
+const source = '/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src';
+const changed = ['battle/view/battle.aim.js'];
+const sources = readModuleSources(source);
+for (const file of changed) sources.set(file, readFileSync(`game/src/${file}`, 'utf8'));
+const graph = buildModuleGraph(sources);
+const count = assertAcyclic(graph);
+const violations = architectureViolations(graph), dead = deadGuardKeys(sources);
+const report = { sourceModuleCount:sources.size, overlayFiles:changed, acyclicModuleCount:count, violations, deadGuardKeys:dead };
+writeFileSync('../overlay-architecture.json', JSON.stringify(report,null,2)+'\n');
+if (sources.size < 500 || violations.length || dead.length) throw Error(JSON.stringify(report));
+console.log(JSON.stringify(report));

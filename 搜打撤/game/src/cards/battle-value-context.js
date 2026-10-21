@@ -17,6 +17,7 @@ let provider = null;
 /**
  * 注册战斗数值提供器（引擎装配时调用；后注册者覆盖前者，符合单引擎运行口径）。
  * 返回上一个提供器，便于测试注册后原样恢复，不清掉引擎已注册的提供器。
+ * @param {(() => BattleValues | null) | null} fn
  */
 export function registerBattleValueProvider(fn) {
   const previous = provider;
@@ -24,7 +25,9 @@ export function registerBattleValueProvider(fn) {
   return previous;
 }
 
-/** 清除提供器（测试收尾/引擎卸载可选；battleActive=false 时 provider 自行返回 null）。 */
+/** 清除提供器（测试收尾/引擎卸载可选；battleActive=false 时 provider 自行返回 null）。
+ * @param {(() => BattleValues | null) | null} [fn]
+ */
 export function clearBattleValueProvider(fn) {
   if (!fn || provider === fn) provider = null;
 }

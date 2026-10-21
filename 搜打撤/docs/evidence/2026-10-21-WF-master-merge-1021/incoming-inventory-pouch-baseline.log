@@ -1,0 +1,149 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-type-baseline
+
+stdout | tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications
+E8 inventory counts {"production":{"total":282,"withRules":231,"withoutRules":51,"schema":{"valid":282},"schemaPending":0,"capability":{"legacy":51,"supported":231},"domains":{"bag":19,"base":8,"battle":157,"equip":39,"triggers":192},"triggers":{"duration":1,"onAcquire":1,"onConsume":4,"onDraw":6,"onFreezeDealt":1,"onKill":1,"onPlay":166,"onTurnStart":8,"replay":1},"ops":{"acquire":35,"adjustCurse":2,"armor":18,"blessing":12,"castDrawn":1,"castRandomSpells":1,"castStored":1,"choice":2,"cleanse":4,"consumeHand":3,"copyRandom":1,"curse":37,"damage":81,"deckCap":1,"discover":2,"discoverCopies":1,"draw":33,"energy":3,"energyCap":3,"execute":5,"extraTurn":1,"fillHand":1,"flee":1,"foeFight":1,"freezeFirstEnemies":1,"handSelect":3,"heal":13,"insertCards":2,"markEnemy":2,"maxHp":1,"noDrawNext":1,"randomBlessing":1,"randomCurse":1,"recruitEnemy":1,"refillEnergy":1,"registerInfusionBonus":1,"registerRule":11,"release":2,"restoreConsumed":2,"restoreHeroSkill":1,"schedule":1,"status":1,"stealAtk":2,"summon":2,"swapDiscoverCosts":1,"transform":2,"transformCards":1}},"cardsSync":{"total":57,"withRules":2,"withoutRules":55,"schema":{"valid":57},"schemaPending":0,"capability":{"legacy":55,"supported":2},"domains":{"battle":2,"triggers":2},"triggers":{"onPlay":2},"ops":{"acquire":1,"armor":1,"damage":1}},"orderComparison":{"equivalent":true,"bootOnly":[],"e6Only":[],"changed":[]}}
+
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications 3ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > fails on duplicate/missing IDs, omitted entries, counts and missing classifications 28ms
+ × tests/e8-card-inventory.test.js > E8 isolated production inventory > changes only approved migrations and the exact backupcell draw/refill revision 43ms
+   → migration: tt3-magic-lamp changed beyond approved rules addition
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 本批只允许14个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝 786ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 火焰形态仅批准精确旧规则到新文案与宿主，数值/规则/额外字段漂移拒绝 68ms
+ × tests/e8-card-inventory.test.js > E8 isolated production inventory > 铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1 27ms
+   → expected [Function] to throw error including 'tt7-ironphalanx changed beyond approv…' but got 'migration: tt3-magic-lamp changed bey…'
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 五条生产修订精确锁定旧值与新值，规则、费用、回退旧文案或额外字段均拒绝 326ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 事件与腐化之种只接受精确批准字段，回退、扩效与额外字段均拒绝 455ms
+ × tests/e8-card-inventory.test.js > E8 isolated production inventory > 神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝 15ms
+   → expected [Function] to throw error including 'tt3-mystery-potion changed beyond app…' but got 'migration: tt3-magic-lamp changed bey…'
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 后备能源只批准术语修订与固定抽牌回满规则，费用、其他字段及扩效均拒绝 268ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明 148ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > accepts only an explicit after generation selector; before evidence is frozen 0ms
+ ↓ tests/e8-card-inventory.test.js > E8 isolated production inventory > explicitly generates only after evidence
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-raydragon rejects uninfused manual, direct, free and queue entries without spending 124ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-felguard rejects uninfused manual, direct, free and queue entries without spending 112ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-holyheal rejects uninfused manual, direct, free and queue entries without spending 113ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-meteorstrong rejects uninfused manual, direct, free and queue entries without spending 113ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > zero available materials cannot start or bypass required infusion 117ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > direct button command retains selected materials; cancel spends nothing; valid infusion spends once 160ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-silverthorn retains its uninfused base effect 160ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-bloodstorm retains its uninfused base effect 158ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > does not reject a base-effect card just because the target is immune 162ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > instance infusion waiver still permits pure infusion 159ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > global infusion waiver still permits pure infusion 158ms
+ × tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rejects pouch release before removing the pouch entry or owned source 128ms
+   → expected { hand: [ 'u0', 'u1', …(1) ], …(5) } to deeply equal { hand: [ 'u0', 'u1' ], …(5) }
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rechecks required infusion after queue acceptance before touching resources 79ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > uses hosted rules despite edited descriptions, and preserves independent structured or legacy effects 37ms
+stdout | tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy
+M missing target rules []
+
+ ✓ tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy 50ms
+ × tests/m-batch-production.test.js > M batch production boot > preserves every original ID and only changes explicitly migrated fields 19ms
+   → expected false to be true // Object.is equality
+ ✓ tests/m-batch-production.test.js > M batch production boot > 五条批准文案和名称修订只改变精确字段，现有规则与数值保持原值 1ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 事件与腐化之种投影精确批准值，生产初始化不扩展字段白名单 1ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 神秘药水文案只同步主动战斗与下回合时点，使用批准的延迟结构声明 0ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > repeated production initialization preserves every migrated rule 51ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > changes only approved migrations and the exact backupcell draw/refill revision
+Error: migration: tt3-magic-lamp changed beyond approved rules addition
+ ❯ tests/helpers/e8-card-inventory.js:208:13
+    206|         || Object.entries(expectedFace).some(([key, value]) => !equal(…
+    207|         || (expected !== null && !equal(nextCard.rules, expected))) {
+    208|       throw new Error(`migration: ${id} changed beyond approved rules …
+       |             ^
+    209|     }
+    210|     return { id, fields, before: clone(oldCard), after: clone(nextCard…
+ ❯ compareMigrationInventories tests/helpers/e8-card-inventory.js:176:33
+ ❯ tests/e8-card-inventory.test.js:214:51
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > 铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1
+AssertionError: expected [Function] to throw error including 'tt7-ironphalanx changed beyond approv…' but got 'migration: tt3-magic-lamp changed bey…'
+
+Expected: "tt7-ironphalanx changed beyond approved rules addition"
+Received: "migration: tt3-magic-lamp changed beyond approved rules addition"
+
+ ❯ tests/e8-card-inventory.test.js:279:10
+    277|       expect(() => compareMigrationInventories(currentBaseline, change…
+    278|         HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+    279|         .toThrow('tt7-ironphalanx changed beyond approved rules additi…
+       |          ^
+    280|     }
+    281|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > 神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝
+AssertionError: expected [Function] to throw error including 'tt3-mystery-potion changed beyond app…' but got 'migration: tt3-magic-lamp changed bey…'
+
+Expected: "tt3-mystery-potion changed beyond approved rules addition"
+Received: "migration: tt3-magic-lamp changed beyond approved rules addition"
+
+ ❯ tests/e8-card-inventory.test.js:331:65
+    329|       mutate(changed.production.cards.find(row => row.id === 'tt3-myst…
+    330|       expect(() => compareMigrationInventories(currentBaseline, change…
+    331|         HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThro…
+       |                                                                 ^
+    332|     }
+    333|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/m-batch-production.test.js > M batch production boot > preserves every original ID and only changes explicitly migrated fields
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/m-batch-production.test.js:84:99
+     82|       const fields = Object.keys({ ...previous, ...current }).filter(k…
+     83|         JSON.stringify(previous[key]) !== JSON.stringify(current[key])…
+     84|       if (previous.id === 'tt3-magic-lamp') expect(isApprovedLampArmor…
+       |                                                                                                   ^
+     85|       const allowed = previous.id === 'tt3-dig-treasure' ? ['rules', '…
+     86|         : previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rejects pouch release before removing the pouch entry or owned source
+AssertionError: expected { hand: [ 'u0', 'u1', …(1) ], …(5) } to deeply equal { hand: [ 'u0', 'u1' ], …(5) }
+
+- Expected
++ Received
+
+@@ -4,8 +4,9 @@
+    "energy": 10,
+    "grave": [],
+    "hand": [
+      "u0",
+      "u1",
++     "btsmvigair80",
+    ],
+    "infuseFuels": 0,
+  }
+
+ ❯ tests/required-infusion-play.test.js:128:25
+    126|     runtime.set$discovering({ options: [dragon], n: 1, act: 'pouch', p…
+    127|     BattleSession.commands.pickDiscover(0); await drain();
+    128|     expect(resources()).toEqual(before); expect(pouch._pouch).toEqual(…
+       |                         ^
+    129|     expect(game.ownedCards).toHaveLength(2); expect(runtime.discoverin…
+    130|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  5 failed | 27 passed | 1 skipped (33)
+   Start at  03:33:31
+   Duration  8.25s (transform 775ms, setup 0ms, collect 1.24s, tests 5.00s, environment 1.20s, prepare 187ms)
+

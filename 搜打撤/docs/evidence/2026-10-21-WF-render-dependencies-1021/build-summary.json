@@ -1,0 +1,37 @@
+{
+  "baseCommit": "0bf320704f01985314ef9c7661cd8479a5bd8090",
+  "command": "npm run build",
+  "exitCode": 0,
+  "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game",
+  "files": 1595,
+  "packageBytes": 171874323,
+  "entryGzipBytes": 368128,
+  "initialJsGzipBytes": 417830,
+  "cssGzipBytes": 226802,
+  "entryFiles": [
+    "assets/js/index-C1GyacNq.js"
+  ],
+  "initialJsFiles": [
+    "assets/js/index-C1GyacNq.js",
+    "assets/js/vendor-runtime-Bplpvbef.js",
+    "assets/js/game-card-catalog-DwTnfdDp.js"
+  ],
+  "initialFailures": [],
+  "budgets": {
+    "entry": 368640,
+    "initialJs": 419840,
+    "css": 235520,
+    "package": 230686720
+  },
+  "scope": "Built output bytes only; not network transfer, runtime memory or FPS.",
+  "comparison": {
+    "baseCommit": "0bf320704f01985314ef9c7661cd8479a5bd8090",
+    "baseBytes": 172525273,
+    "savedBytes": 650950,
+    "entryGzipDeltaBytes": 1,
+    "initialJsGzipDeltaBytes": 1,
+    "cssGzipDeltaBytes": -1973,
+    "fileDelta": -12
+  },
+  "allBudgetsPassed": true
+}

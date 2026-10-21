@@ -1,0 +1,21 @@
+[
+  {
+    "path": "game/src/battle/view/battle.layers.js",
+    "beforeSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+    "afterSha256": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
+    "assetExpressionsUnchanged": true,
+    "expressions": [
+      "assetUrl(source)"
+    ]
+  },
+  {
+    "path": "game/src/battle/view/battle.frames.js",
+    "beforeSha256": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+    "afterSha256": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d",
+    "assetExpressionsUnchanged": true,
+    "expressions": [
+      "assetUrl(`assets/portraits/frames/${role}/${name}.webp`)",
+      "assetUrl(`assets/portraits/frames/${role}/sprite-v1/neutral.webp`)"
+    ]
+  }
+]

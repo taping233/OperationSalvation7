@@ -1,0 +1,47 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-pouch-negative
+
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-raydragon rejects uninfused manual, direct, free and queue entries without spending
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-felguard rejects uninfused manual, direct, free and queue entries without spending
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-holyheal rejects uninfused manual, direct, free and queue entries without spending
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-meteorstrong rejects uninfused manual, direct, free and queue entries without spending
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > zero available materials cannot start or bypass required infusion
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > direct button command retains selected materials; cancel spends nothing; valid infusion spends once
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-silverthorn retains its uninfused base effect
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-bloodstorm retains its uninfused base effect
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > does not reject a base-effect card just because the target is immune
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > instance infusion waiver still permits pure infusion
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > global infusion waiver still permits pure infusion
+ × tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > explicit pouch release grants infusion, consumes only its stored source and spends no fuel 147ms
+   → expected 999 to be 988 // Object.is equality
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rechecks required infusion after queue acceptance before touching resources
+ ↓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > uses hosted rules despite edited descriptions, and preserves independent structured or legacy effects
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > explicit pouch release grants infusion, consumes only its stored source and spends no fuel
+AssertionError: expected 999 to be 988 // Object.is equality
+
+- Expected
++ Received
+
+- 988
++ 999
+
+ ❯ tests/required-infusion-play.test.js:131:32
+    129|     runtime.set$discovering({ options: [dragon], n: 1, act: 'pouch', p…
+    130|     BattleSession.commands.pickDiscover(0); await drain();
+    131|     expect(runtime.foes[0].hp).toBe(988);
+       |                                ^
+    132|     expect(resources()).toEqual(before);
+    133|     expect(pouch._pouch).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 13 skipped (14)
+   Start at  03:37:32
+   Duration  2.03s (transform 673ms, setup 0ms, collect 1.07s, tests 316ms, environment 376ms, prepare 90ms)
+

@@ -1,0 +1,29 @@
+{
+  "baseCommit": "35228afacc4ced8dcc93cb619eb1f02cf53dfac5",
+  "command": "npm run build",
+  "exitCode": 1,
+  "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/\u641c\u6253\u64a4/desktop-app/game",
+  "files": 1672,
+  "packageBytes": 226406142,
+  "entryGzipBytes": 368850,
+  "initialJsGzipBytes": 418552,
+  "cssGzipBytes": 226802,
+  "entryFiles": [
+    "assets/js/index-CaxpBEkf.js"
+  ],
+  "initialJsFiles": [
+    "assets/js/index-CaxpBEkf.js",
+    "assets/js/vendor-runtime-Bplpvbef.js",
+    "assets/js/game-card-catalog-DwTnfdDp.js"
+  ],
+  "initialFailures": [],
+  "budgets": {
+    "entry": 368640,
+    "initialJs": 419840,
+    "css": 235520,
+    "package": 230686720
+  },
+  "scope": "Built output bytes only; not network transfer, runtime memory or FPS.",
+  "validReleaseBuild": false,
+  "cause": "Old layers opaque fingerprint invalidated reviewed exclusions. Preflight count assertion failed, shell did not fail fast, so build wrongly continued. All first-failure evidence retained; corrected fail-fast chain reviewed unchanged asset expressions and exact hash before second build."
+}

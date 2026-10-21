@@ -1,0 +1,28 @@
+{
+  "buildReusedNotRerun": true,
+  "authorManifestSha256": "9a6bb8ecd2f44ebc191720b21a9148d71cb8b4f7d5b8d49cac6087b7932e774f",
+  "inputCount": 812,
+  "outputCount": 1595,
+  "summary": {
+    "files": 1595,
+    "bytes": 171889545,
+    "entryGzipBytes": 368483,
+    "entryBudgetBytes": 368640,
+    "battleGzipBytes": 67039
+  },
+  "sameDependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "paths": [
+    "搜打撤/game/src/battle/view/battle.frames.js",
+    "搜打撤/scripts/runtime-asset-redundancy-review.mjs"
+  ],
+  "patches": [
+    {
+      "path": "frame-paint-commit-20261021/frame-paint-commit.patch",
+      "sha256": "5541088c0de199cf3577d99ab123c4fef3194e236d9565d2688b2a3c1d46889d"
+    },
+    {
+      "path": "rules-settlement-policy-20261021/rules-settlement.patch",
+      "sha256": "5afea1b145ed097fd8a2507aab6402fb016b05675ca30852987dc4eeb86f45c4"
+    }
+  ]
+}

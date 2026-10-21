@@ -6,7 +6,14 @@ const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const actions = new Map();
 const UI = {
   el: {}, _lastMode: null,
-  showOverlay(title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
+  showOverlay(title, html, mode, options = {}) {
+    this._overlayRevision = (this._overlayRevision || 0) + 1;
+    // The real overlay mounts secondary content through its guarded retained-body
+    // callback. Replacing ovBody here would destroy the scene under test.
+    if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
+    else this.el.ovBody.innerHTML = rich(html);
+    this.el.overlay.hidden = false; this._lastMode = mode;
+  },
   showCardZoom: vi.fn(),
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
   act: (name, fn) => actions.set(name, fn),
@@ -439,7 +446,10 @@ it.each(['enemy', 'self'])('retains the %s target label and Enter action across 
   expect(target.getAttribute('tabindex')).toBe('0'); expect(document.activeElement).toBe(target);
   render();
   expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toContain(label);
-  BattleSession.commands.openGrave(); flush(); expect(stage().hasAttribute('inert')).toBe(true);
+  const retainedStage = stage();
+  BattleSession.commands.openGrave(); flush();
+  expect(stage()).toBe(retainedStage); expect(stage().hasAttribute('inert')).toBe(true);
+  expect(stage().querySelector(selector)).toBe(target); expect(target.isConnected).toBe(true);
   BattleSession.commands.closeGrave(); flush();
   expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toContain(label);
   expect(target.getAttribute('tabindex')).toBe('0');
@@ -449,6 +459,31 @@ it.each(['enemy', 'self'])('retains the %s target label and Enter action across 
   if (side === 'self') expect(BattleSession.getSnapshot().equipped.some(item => item.uid === 'inspect-card')).toBe(true);
   else expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
   expect(Aim.clickSelectedUid).toBeNull();
+});
+
+it.each(['enemy', 'self'])('rejects synthetic %s target input while covered, then accepts a fresh selection after return', async side => {
+  const entry = side === 'self' ? Cards.all().find(item => item.id === 'tt3-longsword') : Cards.SHA;
+  start(2, entry);
+  const enter = () => new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+  card().querySelector('.hs-card').dispatchEvent(enter());
+  const selector = side === 'self' ? '#btSelf' : '.bt-foe[data-eidx="0"]';
+  const target = stage().querySelector(selector);
+  BattleSession.commands.openGrave(); flush();
+  const covered = infusionResources();
+  expect(target.isConnected).toBe(true); expect(target.closest('[inert]')).toBe(stage());
+  // Script-dispatched input bypasses browser inert. Domain guards must still
+  // reject spending; a rejected stale attempt need not retain selection state.
+  target.dispatchEvent(enter()); await settle();
+  expect(infusionResources()).toEqual(covered);
+  BattleSession.commands.closeGrave(); flush();
+  expect(stage().querySelector(selector)).toBe(target);
+  Aim.cancelClickSelection();
+  card().querySelector('.hs-card').dispatchEvent(enter());
+  expect(target.classList.contains('can-target')).toBe(true);
+  target.dispatchEvent(enter()); await settle();
+  expect(BattleSession.getSnapshot().hand).not.toContain('inspect-card');
+  if (side === 'self') expect(BattleSession.getSnapshot().equipped.some(item => item.uid === 'inspect-card')).toBe(true);
+  else expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
 });
 
 it('emphasizes forecast damage and remaining HP as separate values and keeps the actual forecast semantics', () => {

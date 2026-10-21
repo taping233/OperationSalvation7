@@ -1,0 +1,92 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 显式空 onDraw 合法且抑制描述触发，卡牌正常入手 9ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 非空 onDraw 只结算一次结构化效果，沿用离手和入弃牌堆语义 6ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 未声明 onDraw 仍兼容旧文本触发：undefined 12ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 未声明 onDraw 仍兼容旧文本触发：{"onPlay":[]} 6ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 手牌上限仍先于 onDraw 判断，满手时不抽取或触发 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 灰烬满手直释仍先于旧文本 onDraw，不额外回放触发句 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onConsume":[{"op":"energy","n":2}]}} 3ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onConsume":[]}} 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"equip":{"onEquip":[]}} 1ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：{"triggers":{"onPlay":[]}} 2ms
+ ✓ tests/battle-direct-trigger-source.test.js > direct trigger source in the real battle engine > 消耗触发与抽到触发共用互斥来源，保留装备抑制：null 1ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 未注册提供器时，伤害数字逐字静态（地图/图鉴/文档生成口径） 2ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 非战斗场景保持静态 > 提供器存在但战斗未激活时仍走静态 0ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 攻击句/法术句按 atk 与法伤重算；无法伤时与基础值一致 1ms
+ ✓ tests/wf-feedback1021-a-battle-dynamic-values.test.js > 反馈#11 战斗内按当前实际加成计算 > 真实战斗：手牌/悬停长描述随攻击强化祝福变化，战斗结束后回落静态 107ms
+ × tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①直接施放可选注能招式：按已注能效果结算（5+注能3+法伤2=10），材料不消耗 162ms
+   → 注能卡直释应提示视为已注能: expected ' <b>遭遇战【直释注能靶(1-99999)】</b>\n 随身 <b>1…' to contain '视为已注能'
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 能力卡·无量仙剑·云风：抽5张后自动直接释放其中的武术（免费） 306ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①遇纯注能招式：视为已注能直接施放（不再留手），效果照常结算 116ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 灰烬符文满手直释：注能卡视为已注能直接释放并按注能效果结算 103ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 定版两处定义与展示文案同步为「发现招式」，抉择标签与招式池一致 2ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 抉择①发现面板只给招式（武术/法术），装备与道具不进池 130ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 剑荡妖邪：手选的武术直接释放且不扣费 176ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 永恒绽放：施放 1 张，其余两张入手 158ms
+ × tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 永恒绽放：纯注能牌直接施放视为已注能（释放成功、按注能效果结算、材料不消耗） 125ms
+   → expected [ 'g35', 'btsmvieo68e8' ] to deeply equal [ 'g35' ]
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 千变万化：发现并直接施放，再抽 2 张 73ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 江湖救急：发现其它职业的卡并直接施放 117ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 药水魔法：发现 1 瓶药水并直接释放 115ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 法师锦囊：空锦囊无效果；预存法术后打出选 1 释放（2026-09-16 定版） 99ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 连弩 × 天狼长弓：回合开始获得「箭」令牌，限定技能直接释放全部箭并逐张抽牌 235ms
+ ✓ tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 阿波罗的礼物：运行时卡面（设计者定版）不含「可直接施放」词条——哨兵用例 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/direct-cast.test.js > 直接释放 / 直接施放类卡牌专项审计 > 永恒绽放：纯注能牌直接施放视为已注能（释放成功、按注能效果结算、材料不消耗）
+AssertionError: expected [ 'g35', 'btsmvieo68e8' ] to deeply equal [ 'g35' ]
+
+- Expected
++ Received
+
+  [
+    "g35",
++   "btsmvieo68e8",
+  ]
+
+ ❯ tests/direct-cast.test.js:248:30
+    246|       // 龙焰射线唯一效果是「注能（1）：造成 11 点法术伤害」——视为已注能 → 11 + 法伤 2 = 13
+    247|       expect(before.foes[0].hp - s.foes[0].hp).toBe(13);
+    248|       expect(s.consumedPile).toEqual([g.ownedCards[0].uid]);
+       |                              ^
+    249|       expect(s.energy).toBe(before.energy - bloom.cost);
+    250|       expect(s.infusing).toBeFalsy();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①直接施放可选注能招式：按已注能效果结算（5+注能3+法伤2=10），材料不消耗
+AssertionError: 注能卡直释应提示视为已注能: expected ' <b>遭遇战【直释注能靶(1-99999)】</b>\n 随身 <b>1…' to contain '视为已注能'
+
+- Expected
++ Received
+
+- 视为已注能
++  <b>遭遇战【直释注能靶(1-99999)】</b>
++  随身 <b>1</b> 张战斗卡直接入手；另有 <b>99</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>99</b> 费
++  <b>抉择</b>（【神灯】）：你选择了「发现招式并释放」
++  <b>神灯</b>：发现并直接施放 1 张【招式】（限制卡池）卡牌
++  发现：【<b>直释可选注能靶</b>】并直接施放（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）
++  <b>直释可选注能靶</b>：注能加成，伤害 +3
++  <b>直释可选注能靶</b> → 直释注能靶：造成 <b>10</b> 点法术伤害（法伤加成 +2）
+
+ ❯ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js:136:42
+    134|     expect(dealt, `直释注能卡应按已注能结算（5+3+法伤2=10），实际 ${dealt}`).toBe(10);
+    135|     expect(logsJoin(g)).toContain('并直接施放');
+    136|     expect(logsJoin(g), '注能卡直释应提示视为已注能').toContain('视为已注能');
+       |                                          ^
+    137|     expect(R.infuseFuels, '视为已注能：不消耗注能材料、不增加累计计数').toBe(0);
+    138|     endBattle(g);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  2 failed | 28 passed (30)
+   Start at  02:48:13
+   Duration  3.80s (transform 948ms, setup 0ms, collect 5.23s, tests 2.67s, environment 2.09s, prepare 391ms)
+

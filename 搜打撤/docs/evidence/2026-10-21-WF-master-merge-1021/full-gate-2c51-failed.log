@@ -1,0 +1,436 @@
+{"mode":"full","paths":["game/src/battle/core/battle.engine.factory.domain.js","game/src/battle/effects/battle.discover-flow.js","game/src/battle/view/battle.aim.js","game/src/battle/view/battle.decision-shell.js","game/src/battle/view/battle.dom.types.d.ts","game/src/battle/view/battle.effect-feedback.js","game/src/battle/view/battle.frames.js","game/src/battle/view/battle.layers.js","game/src/battle/view/battle.potion-use.js","game/src/battle/view/battle.secondary-overlay.js","game/src/battle/view/battle.stage-view.js","game/src/battle/view/battle.view.js","game/src/cards/battle-value-context.js","game/src/core/runtime-trace-panel.local.js","game/src/core/runtime-trace-stages.local.js","game/src/core/runtime-trace.local.js","game/src/r7a.qa.js","game/src/ui/overlay.js","scripts/runtime-asset-redundancy-review.mjs","scripts/runtime-trace-alignment.mjs","tests/battle-ally-dom-order.test.js","tests/battle-entry-view.test.js","tests/battle-frames-lifecycle.test.js","tests/battle-frames-ownership.test.js","tests/battle-hand-hit-input.test.js","tests/battle-hand-inspector.test.js","tests/battle-hand-rule-context.test.js","tests/battle-infusion-action-layout.test.js","tests/battle-persistent-stage.test.js","tests/battle-queue-direct-release-forwarding.test.js","tests/battle-render-runtime-trace.test.js","tests/battle-restore-boundaries.test.js","tests/battle-rules-settlement.test.js","tests/battle-secondary-overlay.test.js","tests/battle-stage-mounts.test.js","tests/battle-stage-validator.test.js","tests/battle-tools-lifecycle.test.js","tests/direct-cast.test.js","tests/expedition-view.test.js","tests/helpers/card-catalog-approved-revisions.js","tests/overlay-connected-master-merge.test.js","tests/potion-tip-lifecycle.test.js","tests/r7a-qa-live.test.js","tests/runtime-trace-alignment.test.js","tests/runtime-trace-modal.test.js","tests/runtime-trace-stages.local.test.js","tests/skull-sword-effective-session.test.js","tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js"],"reasons":["公共状态、启动、规则或迁移边界变更需要全量测试"],"tests":[]}
+[gate] 模式：full
+[gate] 变更：game/src/battle/core/battle.engine.factory.domain.js
+[gate] 变更：game/src/battle/effects/battle.discover-flow.js
+[gate] 变更：game/src/battle/view/battle.aim.js
+[gate] 变更：game/src/battle/view/battle.decision-shell.js
+[gate] 变更：game/src/battle/view/battle.dom.types.d.ts
+[gate] 变更：game/src/battle/view/battle.effect-feedback.js
+[gate] 变更：game/src/battle/view/battle.frames.js
+[gate] 变更：game/src/battle/view/battle.layers.js
+[gate] 变更：game/src/battle/view/battle.potion-use.js
+[gate] 变更：game/src/battle/view/battle.secondary-overlay.js
+[gate] 变更：game/src/battle/view/battle.stage-view.js
+[gate] 变更：game/src/battle/view/battle.view.js
+[gate] 变更：game/src/cards/battle-value-context.js
+[gate] 变更：game/src/core/runtime-trace-panel.local.js
+[gate] 变更：game/src/core/runtime-trace-stages.local.js
+[gate] 变更：game/src/core/runtime-trace.local.js
+[gate] 变更：game/src/r7a.qa.js
+[gate] 变更：game/src/ui/overlay.js
+[gate] 变更：scripts/runtime-asset-redundancy-review.mjs
+[gate] 变更：scripts/runtime-trace-alignment.mjs
+[gate] 变更：tests/battle-ally-dom-order.test.js
+[gate] 变更：tests/battle-entry-view.test.js
+[gate] 变更：tests/battle-frames-lifecycle.test.js
+[gate] 变更：tests/battle-frames-ownership.test.js
+[gate] 变更：tests/battle-hand-hit-input.test.js
+[gate] 变更：tests/battle-hand-inspector.test.js
+[gate] 变更：tests/battle-hand-rule-context.test.js
+[gate] 变更：tests/battle-infusion-action-layout.test.js
+[gate] 变更：tests/battle-persistent-stage.test.js
+[gate] 变更：tests/battle-queue-direct-release-forwarding.test.js
+[gate] 变更：tests/battle-render-runtime-trace.test.js
+[gate] 变更：tests/battle-restore-boundaries.test.js
+[gate] 变更：tests/battle-rules-settlement.test.js
+[gate] 变更：tests/battle-secondary-overlay.test.js
+[gate] 变更：tests/battle-stage-mounts.test.js
+[gate] 变更：tests/battle-stage-validator.test.js
+[gate] 变更：tests/battle-tools-lifecycle.test.js
+[gate] 变更：tests/direct-cast.test.js
+[gate] 变更：tests/expedition-view.test.js
+[gate] 变更：tests/helpers/card-catalog-approved-revisions.js
+[gate] 变更：tests/overlay-connected-master-merge.test.js
+[gate] 变更：tests/potion-tip-lifecycle.test.js
+[gate] 变更：tests/r7a-qa-live.test.js
+[gate] 变更：tests/runtime-trace-alignment.test.js
+[gate] 变更：tests/runtime-trace-modal.test.js
+[gate] 变更：tests/runtime-trace-stages.local.test.js
+[gate] 变更：tests/skull-sword-effective-session.test.js
+[gate] 变更：tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js
+[gate] 说明：公共状态、启动、规则或迁移边界变更需要全量测试
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (620 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+Type-checking jsconfig.runtime.json
+Implementation type coverage: 560/560; strict: 51/560
+
+[gate] ESLint：OK
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-4V4alm/snapshot/搜打撤
+
+···················································································································································································································································································································································································································································································································································································x········x··x··x···-········································································································································································································································································································································································································································································································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+··{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+···············································································································································································································································································································································································································································································································································································································································x···········································································································································································································································································································································································································································································································································································································································································································································································································································x················································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-····························································································································································································································································································································································x··········································································································x···············································································································································································································································································································································································································································x·······································································································································································································································································································································································································································································································································································································································································································································································································································-···························································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································x························································································································{"mode":"quick","paths":["package.json"],"reasons":["package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过"],"tests":["tests/architecture-boundaries.test.js","tests/contracts.test.js"]}
+[gate] 模式：quick
+[gate] 变更：package.json
+[gate] 说明：package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture runner pass
+
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+fixture runner pass
+[gate] PASS：quick 验收完成
+·{"mode":"quick","paths":["game/assets/asset-manifest.json"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+{"mode":"quick","paths":["game/assets/asset-manifest.json","game/assets/new.png"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/new.png
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/architecture-graph.mjs","scripts/gate-plan.mjs","scripts/impact-query.mjs","scripts/index-validation.mjs","scripts/value.txt","scripts/workflow-archive.mjs","scripts/workflow-browser.mjs","scripts/workflow-change-advice.mjs","scripts/workflow-change-review.mjs","scripts/workflow-dependencies.mjs","scripts/workflow-doctor.mjs","scripts/workflow-evidence.mjs","scripts/workflow-gate-receipt.mjs","scripts/workflow-ledger.mjs","scripts/workflow-memory.mjs","scripts/workflow-ship.mjs","scripts/workflow-staged.mjs","scripts/workflow-status.mjs","scripts/workflow-task-input.mjs","scripts/workflow-task.mjs","scripts/workflow.mjs"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"quick","paths":["scripts/acceptance-gate.mjs","scripts/deleted.txt","scripts/new-name.txt","scripts/old-name.txt"],"reasons":[],"tests":[]}
+snapshot passed
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+{"mode":"full","paths":["docs/evidence/2026-09-30-fixture/2026-10-21T18-30-35.998Z-a62f7515-staged.json","docs/evidence/2026-09-30-fixture/2026-10-21T18-30-35.998Z-a62f7515-staged.log","scripts/value.txt"],"reasons":[],"tests":[]}
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":[]}
+changed index
+{"mode":"skip","paths":["note.md"],"reasons":[],"tests":[]}
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":["tests/contracts.test.js"]}
+snapshot passed
+····························································································································································································································-········-··································································fixture targeted check
+······································································-······························fixture full executed
+········································································································································································································································-··········································································································································x····································{"mode":"skip","tests":[]}
+··········································x············································································································································································································································································································································································································
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 首次整备在出发按钮之前明示统一消耗去向与复原入口
+AssertionError: expected '用过的牌去哪了？用过的牌进入消耗区，复原后可再用。方法见背包。' to contain '复原方法在背包查看'
+
+Expected: "复原方法在背包查看"
+Received: "用过的牌去哪了？用过的牌进入消耗区，复原后可再用。方法见背包。"
+
+ ❯ tests/departure-stack-lifecycle-review.test.js:81:31
+     79|     open(); const rules = document.querySelector('.dep-survival'); exp…
+     80|     expect(rules.textContent).toContain('用过的牌进入消耗区，复原后可再用');
+     81|     expect(rules.textContent).toContain('复原方法在背包查看');
+       |                               ^
+     82|     expect(rules.textContent).toContain('撤离时再确认带回结果');
+     83|     expect(rules.compareDocumentPosition(document.querySelector('#btnD…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > changes only approved migrations and the exact backupcell draw/refill revision
+Error: migration: tt3-magic-lamp changed beyond approved rules addition
+ ❯ tests/helpers/e8-card-inventory.js:208:13
+    206|         || Object.entries(expectedFace).some(([key, value]) => !equal(…
+    207|         || (expected !== null && !equal(nextCard.rules, expected))) {
+    208|       throw new Error(`migration: ${id} changed beyond approved rules …
+       |             ^
+    209|     }
+    210|     return { id, fields, before: clone(oldCard), after: clone(nextCard…
+ ❯ compareMigrationInventories tests/helpers/e8-card-inventory.js:176:33
+ ❯ tests/e8-card-inventory.test.js:214:51
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > 铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1
+AssertionError: expected [Function] to throw error including 'tt7-ironphalanx changed beyond approv…' but got 'migration: tt3-magic-lamp changed bey…'
+
+Expected: "tt7-ironphalanx changed beyond approved rules addition"
+Received: "migration: tt3-magic-lamp changed beyond approved rules addition"
+
+ ❯ tests/e8-card-inventory.test.js:279:10
+    277|       expect(() => compareMigrationInventories(currentBaseline, change…
+    278|         HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+    279|         .toThrow('tt7-ironphalanx changed beyond approved rules additi…
+       |          ^
+    280|     }
+    281|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  tests/e8-card-inventory.test.js > E8 isolated production inventory > 神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝
+AssertionError: expected [Function] to throw error including 'tt3-mystery-potion changed beyond app…' but got 'migration: tt3-magic-lamp changed bey…'
+
+Expected: "tt3-mystery-potion changed beyond approved rules addition"
+Received: "migration: tt3-magic-lamp changed beyond approved rules addition"
+
+ ❯ tests/e8-card-inventory.test.js:331:65
+    329|       mutate(changed.production.cards.find(row => row.id === 'tt3-myst…
+    330|       expect(() => compareMigrationInventories(currentBaseline, change…
+    331|         HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThro…
+       |                                                                 ^
+    332|     }
+    333|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  tests/expedition-battle-presentation.test.js > keeps the canonical full rule when inspecting the deck surface
+TypeError: UI.showCardZoom is not a function
+ ❯ game/src/battle/view/battle.decision-shell.js:56:18
+     54|   bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDecisionInspe…
+     55|     const card = cards[+data.i];
+     56|     if (card) UI.showCardZoom(card, { returnFocus:root.querySelector(`…
+       |                  ^
+     57|   });
+     58| }
+ ❯ game/src/battle/view/battle.page-activity.js:13:12
+ ❯ tests/expedition-battle-presentation.test.js:58:56
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  tests/m-batch-production.test.js > M batch production boot > preserves every original ID and only changes explicitly migrated fields
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/m-batch-production.test.js:84:99
+     82|       const fields = Object.keys({ ...previous, ...current }).filter(k…
+     83|         JSON.stringify(previous[key]) !== JSON.stringify(current[key])…
+     84|       if (previous.id === 'tt3-magic-lamp') expect(isApprovedLampArmor…
+       |                                                                                                   ^
+     85|       const allowed = previous.id === 'tt3-dig-treasure' ? ['rules', '…
+     86|         : previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > checks confirmation and pointer adjustments once and blocks zoom/hidden inputs
+TypeError: actions.get(...) is not a function
+ ❯ tests/page-perf-battle.test.js:95:31
+     93|   it('checks confirmation and pointer adjustments once and blocks zoom…
+     94|     const { getSnapshot, commands, snapshot } = infusionPage();
+     95|     actions.get('btInfuseAdd')({ i: '0' });
+       |                               ^
+     96|     actions.get('btInfuseAdd')({ i: '0' });
+     97|     actions.get('btInfuseGo')();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rejects pouch release before removing the pouch entry or owned source
+AssertionError: expected [] to deeply equal [ { id: 'tt12-raydragon', …(10) } ]
+
+- Expected
++ Received
+
+- [
+-   {
+-     "cost": 2,
+-     "desc": "注能（1）：造成11点法伤",
+-     "dmg": 11,
+-     "dmgType": "spell",
+-     "id": "tt12-raydragon",
+-     "infuse": 1,
+-     "name": "龙焰射线",
+-     "pouchUid": "u1",
+-     "rarity": "古朴",
+-     "rules": {
+-       "battle": {
+-         "requirements": [
+-           {
+-             "kind": "infused",
+-           },
+-         ],
+-         "target": {
+-           "area": false,
+-           "side": "enemy",
+-         },
+-       },
+-       "triggers": {
+-         "onPlay": [
+-           {
+-             "amountField": "dmg",
+-             "op": "damage",
+-             "target": "chosenEnemy",
+-             "when": {
+-               "infused": true,
+-             },
+-           },
+-         ],
+-       },
+-       "version": 1,
+-     },
+-     "type": "法术",
+-   },
+- ]
++ []
+
+ ❯ tests/required-infusion-play.test.js:128:63
+    126|     runtime.set$discovering({ options: [dragon], n: 1, act: 'pouch', p…
+    127|     BattleSession.commands.pickDiscover(0); await drain();
+    128|     expect(resources()).toEqual(before); expect(pouch._pouch).toEqual(…
+       |                                                               ^
+    129|     expect(game.ownedCards).toHaveLength(2); expect(runtime.discoverin…
+    130|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+ FAIL  tests/retired-scenes-publication.test.js > exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants
+AssertionError: game/src/run/game.run.scenes.js: expected '30156d27125bd99479aed07b2c0d1483288a7…' to be '3a181d7746dfb8abbb56000452b68c716ebbe…' // Object.is equality
+
+Expected: "3a181d7746dfb8abbb56000452b68c716ebbeecae509a905b4ccf2aed4397ff0"
+Received: "30156d27125bd99479aed07b2c0d1483288a70592ab28f3ef243215008a7ca5e"
+
+ ❯ tests/retired-scenes-publication.test.js:53:74
+     51|     expect(fingerprints['game/src/core/art.js']).toBeDefined();
+     52|     for (const [file, fingerprint] of Object.entries(fingerprints)) {
+     53|       expect(hash(read(file).toString().replaceAll('\r\n', '\n')), fil…
+       |                                                                          ^
+     54|     }
+     55|     const omitted = inspect(fixture()).excludedAssets;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯
+
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images
+AssertionError: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "Changed/missing slot-weather selector; retaining its reviewed assets.",
++   "Changed/missing retired-scenes selector; retaining its reviewed assets.",
++   "Changed/missing map selector; retaining its reviewed assets.",
++   "Changed/missing transitions selector; retaining its reviewed assets.",
++ ]
+
+ ❯ tests/runtime-asset-redundancy.test.js:152:30
+    150|         `scenes/chests/${kind}-rig-640-v1/frame-${String(frame).padSta…
+    151|     const current = collectReviewedRuntimeAssetExclusions(projectRoot);
+    152|     expect(current.warnings).toEqual([]);
+       |                              ^
+    153|     expect(current.excludedAssets.size).toBe(286);
+    154|     for (const asset of current.excludedAssets) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  tests/sys03-altar-restore-txn.test.js > 入城补给直接展示待领卡牌，逐张领取与刷新满包规则保持
+TypeError: Cannot read properties of null (reading 'textContent')
+ ❯ tests/sys03-altar-restore-txn.test.js:475:50
+    473|   expect(document.querySelectorAll('.entry-supply-strips .reward-unit'…
+    474|   expect(document.querySelector('.entry-supply-status b').textContent)…
+    475|   expect(document.querySelector('.reward-notice').textContent).not.toC…
+       |                                                  ^
+    476|   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBe…
+    477|   acts.clsEntryContinue();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  tests/title-resource-review.test.js > isolated title CSS/image diagnostic > preserves actual title IDs, SVG art, wordmark and complete base stylesheet order
+AssertionError: expected [ 'css/base.css', …(40) ] to deeply equal [ 'css/base.css', …(40) ]
+
+- Expected
++ Received
+
+@@ -31,13 +31,13 @@
+    "css/experience-loot.css",
+    "css/page-events.css",
+    "css/page-rewards-bag-help.css",
+    "css/page-battle-ui.css",
+    "css/character-idle.css",
++   "css/cover-remaining.css",
+    "css/page-transitions.css",
+    "css/ak-skin.css",
+    "css/base-camp.css",
+    "css/base-camp-compact.css",
+    "css/card-layout-selected.css",
+    "css/battle-stage.css",
+-   "css/transition-illustrations.css",
+  ]
+
+ ❯ tests/title-resource-review.test.js:44:44
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  10 failed | 790 passed | 1 skipped (801)
+      Tests  12 failed | 8332 passed | 7 skipped (8351)
+   Start at  03:15:04
+   Duration  1008.69s (transform 10.36s, setup 0ms, collect 113.11s, tests 474.70s, environment 245.98s, prepare 53.69s)
+
+[gate] FAIL：全量 Vitest 失败（exit 1）
+{"report":"docs/evidence/2026-10-21-WF-master-merge-1021/2026-10-21T18-13-51.657Z-fcfeef46-staged.json","exitCode":1,"outcome":"failed","plan":{"mode":"full","paths":["game/src/battle/core/battle.engine.factory.domain.js","game/src/battle/effects/battle.discover-flow.js","game/src/battle/view/battle.aim.js","game/src/battle/view/battle.decision-shell.js","game/src/battle/view/battle.dom.types.d.ts","game/src/battle/view/battle.effect-feedback.js","game/src/battle/view/battle.frames.js","game/src/battle/view/battle.layers.js","game/src/battle/view/battle.potion-use.js","game/src/battle/view/battle.secondary-overlay.js","game/src/battle/view/battle.stage-view.js","game/src/battle/view/battle.view.js","game/src/cards/battle-value-context.js","game/src/core/runtime-trace-panel.local.js","game/src/core/runtime-trace-stages.local.js","game/src/core/runtime-trace.local.js","game/src/r7a.qa.js","game/src/ui/overlay.js","scripts/runtime-asset-redundancy-review.mjs","scripts/runtime-trace-alignment.mjs","tests/battle-ally-dom-order.test.js","tests/battle-entry-view.test.js","tests/battle-frames-lifecycle.test.js","tests/battle-frames-ownership.test.js","tests/battle-hand-hit-input.test.js","tests/battle-hand-inspector.test.js","tests/battle-hand-rule-context.test.js","tests/battle-infusion-action-layout.test.js","tests/battle-persistent-stage.test.js","tests/battle-queue-direct-release-forwarding.test.js","tests/battle-render-runtime-trace.test.js","tests/battle-restore-boundaries.test.js","tests/battle-rules-settlement.test.js","tests/battle-secondary-overlay.test.js","tests/battle-stage-mounts.test.js","tests/battle-stage-validator.test.js","tests/battle-tools-lifecycle.test.js","tests/direct-cast.test.js","tests/expedition-view.test.js","tests/helpers/card-catalog-approved-revisions.js","tests/overlay-connected-master-merge.test.js","tests/potion-tip-lifecycle.test.js","tests/r7a-qa-live.test.js","tests/runtime-trace-alignment.test.js","tests/runtime-trace-modal.test.js","tests/runtime-trace-stages.local.test.js","tests/skull-sword-effective-session.test.js","tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js"],"reasons":["公共状态、启动、规则或迁移边界变更需要全量测试"],"tests":[]},"validation":{"executed":true,"passed":false,"reusableReceipt":false,"reason":"STAGED_FAILED"},"nextAction":"inspect-preserved-state-and-revalidate"}

@@ -29,7 +29,7 @@ import {
  *   addTempCard: (card: DiscoverCard, presentation?: { source: 'pouch' | 'discover-cast' }) => string,
  *   addDeckCard?: (card: DiscoverCard) => string,
  *   moveDeckCardToHand?: (uid: string) => boolean,
- *   queueCardExecution: (uid: string, card: DiscoverCard, fuelUids: string[], target: unknown, freeCost: boolean) => unknown,
+ *   queueCardExecution: (uid: string, card: DiscoverCard, fuelUids: string[], target: unknown, freeCost: boolean, requirementsPaid?: boolean, paymentUids?: string[], onResolved?: (() => void) | null, submission?: unknown, directRelease?: boolean) => unknown,
  *   directPlayReason?: (card: DiscoverCard) => string,
  *   fireCatGift: (card: DiscoverCard) => void
  * }} cards
@@ -178,7 +178,7 @@ export function createBattleDiscoverFlow(ports) {
     // 允许释放、按已注能效果结算；不消耗注能材料，也不增加累计注能材料数。
     // 纯注能牌不再「未注能留手」；留手规则仅保留给不含释放动作的纯发现（无 act）路径。
     const directRelease = ['play', 'potion', 'playKeep', 'pouch'].includes(act || '');
-    const infusedNote = directRelease && cards.directPlayReason?.(card) ? '（视为已注能，不消耗注能材料）' : '';
+    const infusedNote = directRelease ? '（视为已注能，不消耗注能材料）' : '';
     interaction.set(null);
     if (deckBottom && deckBottomUids.length) {
       const pickedUid = deckBottomUids[+index] != null ? deckBottomUids[+index] : null;

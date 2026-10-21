@@ -1,0 +1,18 @@
+{
+  "exitCode": 0,
+  "files": 1607,
+  "totalBytes": 172525273,
+  "entry": [
+    "assets/js/index-CLYugUOK.js"
+  ],
+  "entryGzip": 368127,
+  "initialJsGzip": 417829,
+  "cssGzip": 228775,
+  "limits": {
+    "entryGzip": 368640,
+    "initialJsGzip": 419840,
+    "cssGzip": 235520,
+    "totalBytes": 230686720
+  },
+  "allBudgetsPassed": true
+}

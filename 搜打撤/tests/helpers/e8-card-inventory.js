@@ -187,12 +187,14 @@ export function compareMigrationInventories(before, after, approvedIds, expected
       && equal(oldCard.rules, { ...expected, triggers: { onPlay: expected.triggers.onPlay.map((op, index) =>
         index === 1 ? { ...op, act: 'zeroCost' } : op) } })
       && equal(nextCard, { ...oldCard, rules: expected });
-    // 2026-10-21 反馈#1（老板实测 12 条）：影噬 tt3sp-shadowbug 稀有度 稀有→史诗——
-    // 仅此一个字段变化，其余卡面（含 M3 规则）逐字保持。
+    // E8 before 尚无 M3 声明；现行迁移同时包含已批准 M3 规则及反馈 #1 的稀有度修订。
+    // 固定精确规则，不能仅放宽字段白名单或从待验生产值反推期望。
+    const shadowbugRules = { version: 1, battle: { target: { side: 'enemy', area: false } },
+      triggers: { onPlay: [{ op: 'stealAtk', capTo: 1, target: 'chosenEnemy' }] } };
     const shadowbugRevision = id === 'tt3sp-shadowbug'
-      && equal(fields, ['rarity'])
-      && oldCard?.rarity === '稀有' && nextCard?.rarity === '史诗'
-      && equal({ ...nextCard, rarity: oldCard.rarity }, oldCard);
+      && equal(fields, ['rarity', 'rules'])
+      && oldCard?.rarity === '稀有' && oldCard.rules === undefined
+      && equal(nextCard, { ...oldCard, rarity: '史诗', rules: shadowbugRules });
     const flameRevision = id === approvedBatch.flame.id
       && equal(oldCard, { ...approvedBatch.flame, desc:'本局对战中，法伤+1', rules:{ version:1, battle:{ target:{ side:'self', area:false } }, triggers:{ onPlay:[{ op:'blessing', key:'spellUp' }] } } })
       && equal(nextCard, approvedExecutionCard(approvedBatch.flame));

@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "passedFunctionalTests": 7,
+    "expectedCountOnlyFailures": 4,
+    "exitCode": 1,
+    "unchanged100Updates": {
+      "appendChildCalls": 400,
+      "childListRecords": 800
+    }
+  },
+  "candidate": {
+    "unchanged100Updates": {
+      "appendChildCalls": 0,
+      "childListRecords": 0
+    },
+    "sourceSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+    "testSha256": "70b6f265dbc4c86c9fd1888789b7a8c71d0977c12ab12c2b53e01cd2e51da7e4"
+  },
+  "failedTestNames": [
+    "keeps real summoned allies in place through unchanged, energy and busy renders",
+    "performs zero ally moves across 100 unchanged production unit updates",
+    "updates HP, death and statless presentation without moving retained allies",
+    "keeps the same allies across a retained deck overlay and its return"
+  ],
+  "caveat": "Operation-count proof in production modules under jsdom; no browser frame-time or visual proof."
+}

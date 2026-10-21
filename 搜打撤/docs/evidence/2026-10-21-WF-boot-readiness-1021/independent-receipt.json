@@ -1,0 +1,42 @@
+{
+  "task": "Boot frame initialization readiness",
+  "baselineCommit": "d682c4cb0217f15da04aae02ec20a2a3da29b114",
+  "files": {
+    "搜打撤/game/src/game.boot.js": {
+      "beforeSha256": "9b9386b90a39ea1e443f7f9006f10fe6c6c1c7676dd52e2f3e6c4b6ff8c5b545",
+      "afterSha256": "950f40c9e284257077e4f8cc6e6ecfbc480cd8c08726bb040ffad7704a852aea"
+    },
+    "搜打撤/tests/boot-frame-readiness.test.js": {
+      "afterSha256": "d4976d301f5db49137432af4cc5e896928b324381084e4481a7dee503449735c"
+    }
+  },
+  "patchSha256": "62e41cb1ef48fe68607d6371d4590087f72897f30a9adf46a142250ec308ae3e",
+  "checks": {
+    "negativeControl": {
+      "expectedFailedTests": 2,
+      "error": "TypeError: Cannot read properties of undefined (reading 'hidden')",
+      "log": "readiness-negative-d682.log"
+    },
+    "positiveAndNeighbors": {
+      "testFiles": 4,
+      "passedTests": 23,
+      "failedTests": 0,
+      "log": "readiness-neighbors-final.log"
+    },
+    "lint": {
+      "exitCode": 0,
+      "files": 2,
+      "log": "lint-final.log"
+    },
+    "syntax": {
+      "exitCode": 0,
+      "files": 2
+    }
+  },
+  "limits": [
+    "Actual live initiating wake event was not captured; both pre-DOMContentLoaded wake paths reproduce the same fault.",
+    "Dependency directories and neighbor tests are read-only symlinks to the integration snapshot; edited boot and new test are independent real files.",
+    "No production build, private-site redeployment, or browser acceptance of patched code.",
+    "No integration source/index/output files edited; no commits or uploads."
+  ]
+}

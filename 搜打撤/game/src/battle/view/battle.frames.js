@@ -515,6 +515,32 @@ function tickLoop() {
   }
 }
 
+// Consume only the invalidation being painted. A render hook may dirty this frame
+// again; never clear that newer work after render, and retain retries on failure.
+function commitFrame(app) {
+  const frame = cur;
+  const presentation = frame?.presentation;
+  if (frame) frame.dirty = false;
+  try { app.renderer.render(app.stage); }
+  catch (error) {
+    if (cur === frame && frame) frame.dirty = true;
+    throw error;
+  }
+  // Only an attach needs a handoff; ordinary animated paints do no extra DOM work.
+  if (!presentation) return true;
+  const { token, body, fig, img, battleToken } = presentation;
+  if (cur !== frame || frame.presentation !== presentation || token !== lifecycle
+      || frame.fig !== fig || frame.img !== img || imageOwners.get(img) !== token
+      || /** @type {BattleElement} */ (fig.closest('.battle-stage'))?._battleToken !== battleToken
+      || fig.querySelector('img') !== img || !isLiveBattleFigure(body, fig)) return false;
+  const host = document.getElementById('unitFrames');
+  if (!host) return false;
+  host.hidden = false;
+  img.style.visibility = 'hidden';
+  frame.presentation = null;
+  return true;
+}
+
 function startLoop() {
   appPromise.then(rt => {
     if (!rt) return;
@@ -527,8 +553,7 @@ function startLoop() {
       // 上一帧内容继续显示（两种 canvas 后端均保留已绘画面）；帧率按角色封顶。
       if (wanted && cur && cur.dirty && cur.fig && cur.fig.isConnected
           && frameDrawScheduler.shouldDraw(performance.now(), { active: true, covered: document.hidden })) {
-        cur.dirty = false;
-        app.renderer.render(app.stage);
+        commitFrame(app);
       }
     });
     app.stop();   // autoStart=false：只在 wakeRenderer 拉起时跑
@@ -586,11 +611,10 @@ function attach(body) {
       // A warm return can commit the retained frame synchronously, without a blank reload window.
       if (cur?.fig === fig && cur.img === img && cur.role === role && cur.battleToken === battleToken
           && liveFrameApp && !reduceMotion() && !staticDiagnostic()) {
-        img.style.visibility = 'hidden';
+        imageOwners.set(img, lifecycle);
+        cur.presentation = { token: lifecycle, body, fig, img, battleToken };
         syncFrameSurface(true); layout();
-        liveFrameApp.renderer.render(liveFrameApp.stage);
-        const host = document.getElementById('unitFrames');
-        if (host) host.hidden = false;
+        if (!commitFrame(liveFrameApp)) return Promise.resolve(false);
         startGeometryPolling(); wakeRenderer(600);
         return Promise.resolve(true);
       }
@@ -626,10 +650,8 @@ async function attachCurrent(body) {
   }
   if (staticDiagnostic()) { hide('static'); return true; }
   if (reduceMotion()) { hide(); return; }
-  // 确认有帧集后立刻藏静态 img：纹理异步装载期间静态立绘会露一脸、就绪后跳切序列帧
-  // （老板 09-20 实机反馈首次进场「闪一下」）。visibility 只藏内容不塌布局，
-  // 装载失败/战斗已结束的原路恢复显示，静态立绘兜底不受影响。
-  img.style.visibility = 'hidden';
+  // Keep the static portrait until this attachment successfully paints its first GPU frame.
+  img.style.visibility = '';
   imageOwners.set(img, token);
   const restoreStatic = () => { if (imageOwners.get(img) === token) { img.style.visibility = ''; imageOwners.delete(img); } };
   const cancelled = () => token !== lifecycle || stopForReducedMotion();
@@ -650,27 +672,24 @@ async function attachCurrent(body) {
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
     cur.fig = fig; cur.img = img;
     cur.portraitFill = fill; cur.lastRect = null;
-    img.style.visibility = 'hidden';
+    cur.presentation = { token, body, fig, img, battleToken };
     layout();
-    rt.app.renderer.render(rt.app.stage);
-    return true;
+    return commitFrame(rt.app);
   }
   const ov = document.getElementById('overlay');
   const ovR = ov ? uiRect(ov) : { left: 0, top: 0 };   // 布局口径：layout() 里 sprite 换算用
   cur = {
-    role, battleToken, fig, img, set: set.set, seqs: set.seqs, boxes: set.boxes,
+    role, battleToken, fig, img, presentation: { token, body, fig, img, battleToken }, set: set.set, seqs: set.seqs, boxes: set.boxes,
     portraitFill: fill, curBox: null, baseCharH: 0, imgBottom: 0, centerX: 0,
     play: null, fi: 0, tNext: 0, resumeAfter: null,
     fallback: set.seqs.get('idle')[0], lastRect: null, ovLeft: ovR.left, ovTop: ovR.top,
     dirty: true,   // 首帧必须渲染
   };
-  img.style.visibility = 'hidden';   // 保布局，内容由 sprite 呈现
-  hostVisible(true);
   rt.app.ticker.maxFPS = fixedFrameRole(role) ? 60 : 30;
   frameDrawScheduler.invalidate();
   startLoop();
   playSeq('idle', fixedFrameRole(role) ? 0 : Random.random('fx'));
-  rt.app.renderer.render(rt.app.stage);   // 就绪 Promise 兑现前真正提交角色首帧。
+  if (!commitFrame(rt.app)) return false;   // Readiness requires a successful current-owner paint.
   wakeRenderer(600);
   return true;
 }
@@ -761,8 +780,8 @@ function suspendSettingsScene(mode) {
   const fig = pendingAttach?.fig || cur?.fig || suspended?.stage.querySelector('#btSelf .sts-figure');
   const stage = /** @type {BattleElement} */ (fig?.closest('.battle-stage.sts'));
   const battleToken = pendingAttach?.battleToken ?? cur?.battleToken ?? suspended?.battleToken;
-  // showOverlay broadcasts while mountCombatOverlay temporarily detaches this scene.
-  // Its synchronous caller must restore that exact scene before the observer checkpoint.
+  // The secondary layer is installed before showOverlay broadcasts; the scene stays connected.
+  // The observer still validates its token and ownership at the next checkpoint.
   if (!overlay || !overlay.contains(body) || !layer || !stage || battleToken == null
       || stage._battleToken !== battleToken) return false;
   if (suspended?.stage === stage && suspended.battleToken === battleToken) return true;

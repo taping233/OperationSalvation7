@@ -1,0 +1,37 @@
+{
+  "baseCommit": "82770803b2c15d67d505ed15273f9a2689cf0c72",
+  "patches": [
+    {
+      "path": "/workspace/shared/unit-metadata-82770803/battle-unit-metadata.patch",
+      "sha": "ba30aba76bbdb9ae089cb3373827f0424a5a41ff29a1f879e0fecab78fbb2cf1",
+      "files": [
+        {
+          "path": "搜打撤/game/src/battle/view/battle.layers.js",
+          "before": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
+          "after": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8"
+        },
+        {
+          "path": "搜打撤/tests/battle-unit-metadata.test.js",
+          "before": null,
+          "after": "b36c95fc80246266d09d7542451a6fc19efe98458a7eb70cb7e17031cb83ce4c"
+        }
+      ]
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/frame-settings-suspend-20261021/frame-settings-suspend.patch",
+      "sha": "3c87e308945a9abb9189b89201f76b91094379de3448bff0b0f0fabc0df6918c",
+      "files": [
+        {
+          "path": "搜打撤/game/src/battle/view/battle.frames.js",
+          "before": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+          "after": "c1391385ae738fb45e5aefd3a23565acfa66a6d2b81ca7c87051605fadcef61d"
+        },
+        {
+          "path": "搜打撤/tests/battle-frames-ownership.test.js",
+          "before": "fb1f8bb4510a720fc7340f200315482780febd6c4acc47113b17cff3c398d01f",
+          "after": "565cf3cb2fb7957c6b0be634b4489d61a77f30effd56d49369350c1d94fd0025"
+        }
+      ]
+    }
+  ]
+}

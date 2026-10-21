@@ -1,0 +1,50 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-central-repairs
+
+stdout | tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications
+E8 inventory counts {"production":{"total":282,"withRules":231,"withoutRules":51,"schema":{"valid":282},"schemaPending":0,"capability":{"legacy":51,"supported":231},"domains":{"bag":19,"base":8,"battle":157,"equip":39,"triggers":192},"triggers":{"duration":1,"onAcquire":1,"onConsume":4,"onDraw":6,"onFreezeDealt":1,"onKill":1,"onPlay":166,"onTurnStart":8,"replay":1},"ops":{"acquire":35,"adjustCurse":2,"armor":18,"blessing":12,"castDrawn":1,"castRandomSpells":1,"castStored":1,"choice":2,"cleanse":4,"consumeHand":3,"copyRandom":1,"curse":37,"damage":81,"deckCap":1,"discover":2,"discoverCopies":1,"draw":33,"energy":3,"energyCap":3,"execute":5,"extraTurn":1,"fillHand":1,"flee":1,"foeFight":1,"freezeFirstEnemies":1,"handSelect":3,"heal":13,"insertCards":2,"markEnemy":2,"maxHp":1,"noDrawNext":1,"randomBlessing":1,"randomCurse":1,"recruitEnemy":1,"refillEnergy":1,"registerInfusionBonus":1,"registerRule":11,"release":2,"restoreConsumed":2,"restoreHeroSkill":1,"schedule":1,"status":1,"stealAtk":2,"summon":2,"swapDiscoverCosts":1,"transform":2,"transformCards":1}},"cardsSync":{"total":57,"withRules":2,"withoutRules":55,"schema":{"valid":57},"schemaPending":0,"capability":{"legacy":55,"supported":2},"domains":{"battle":2,"triggers":2},"triggers":{"onPlay":2},"ops":{"acquire":1,"armor":1,"damage":1}},"orderComparison":{"equivalent":true,"bootOnly":[],"e6Only":[],"changed":[]}}
+
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > exports every initialized card and the separate immutable CARDS_SYNC source with complete classifications 3ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > fails on duplicate/missing IDs, omitted entries, counts and missing classifications 29ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > changes only approved migrations and the exact backupcell draw/refill revision 66ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 本批只允许14个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝 881ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 火焰形态仅批准精确旧规则到新文案与宿主，数值/规则/额外字段漂移拒绝 64ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1 123ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 五条生产修订精确锁定旧值与新值，规则、费用、回退旧文案或额外字段均拒绝 345ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 事件与腐化之种只接受精确批准字段，回退、扩效与额外字段均拒绝 462ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝 84ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 后备能源只批准术语修订与固定抽牌回满规则，费用、其他字段及扩效均拒绝 249ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 影噬只批准稀有到史诗及精确既有 M3 声明，其他卡面与规则漂移拒绝 122ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > 神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明 182ms
+ ✓ tests/e8-card-inventory.test.js > E8 isolated production inventory > accepts only an explicit after generation selector; before evidence is frozen 1ms
+ ↓ tests/e8-card-inventory.test.js > E8 isolated production inventory > explicitly generates only after evidence
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-raydragon rejects uninfused manual, direct, free and queue entries without spending 143ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt12-felguard rejects uninfused manual, direct, free and queue entries without spending 119ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-holyheal rejects uninfused manual, direct, free and queue entries without spending 111ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt7-meteorstrong rejects uninfused manual, direct, free and queue entries without spending 113ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > zero available materials cannot start or bypass required infusion 112ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > direct button command retains selected materials; cancel spends nothing; valid infusion spends once 158ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-silverthorn retains its uninfused base effect 154ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > tt3sp-bloodstorm retains its uninfused base effect 157ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > does not reject a base-effect card just because the target is immune 158ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > instance infusion waiver still permits pure infusion 161ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > global infusion waiver still permits pure infusion 156ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > explicit pouch release grants infusion, consumes only its stored source and spends no fuel 160ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > rechecks required infusion after queue acceptance before touching resources 79ms
+ ✓ tests/required-infusion-play.test.js > required infusion is validated before every payment and direct-play entry > uses hosted rules despite edited descriptions, and preserves independent structured or legacy effects 37ms
+stdout | tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy
+M missing target rules []
+
+ ✓ tests/m-batch-production.test.js > M batch production boot > covers the agreed 150-card target and leaves exactly the 51 exclusions legacy 45ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > preserves every original ID and only changes explicitly migrated fields 13ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 五条批准文案和名称修订只改变精确字段，现有规则与数值保持原值 0ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 事件与腐化之种投影精确批准值，生产初始化不扩展字段白名单 1ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > 神秘药水文案只同步主动战斗与下回合时点，使用批准的延迟结构声明 0ms
+ ✓ tests/m-batch-production.test.js > M batch production boot > repeated production initialization preserves every migrated rule 40ms
+
+ Test Files  3 passed (3)
+      Tests  33 passed | 1 skipped (34)
+   Start at  03:36:42
+   Duration  8.66s (transform 775ms, setup 0ms, collect 1.07s, tests 5.66s, environment 1.16s, prepare 190ms)
+

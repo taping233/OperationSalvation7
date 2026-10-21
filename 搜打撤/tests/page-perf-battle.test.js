@@ -50,7 +50,7 @@ function infusionPage() {
   const main = { ...Cards.all().find(card => card.id === 'tt3sp-bloodstorm') };
   const entries = [{ uid: 'main', card: main }, { uid: 'a', card: Cards.SHA }, { uid: 'b', card: Cards.SHA }];
   const snapshot = { battleToken: 42, hand: entries.map(entry => entry.uid), foes: [], phase: 'player', busy: false,
-    infusing: { uid: 'main', card: main, need: 2, picked: [] } };
+    infusing: { uid: 'main', card: main, need: 2, picked: [], selectionId: 1 } };
   const getSnapshot = vi.fn(() => snapshot);
   const commands = { selectInfusion: vi.fn(uid => {
     const index = snapshot.infusing.picked.indexOf(uid);
@@ -60,10 +60,6 @@ function infusionPage() {
     findCard: uid => entries.find(entry => entry.uid === uid), infusionFuelReason: () => '',
     effCostOf: card => card.cost, targetSide: () => 'enemy', commands,
     cardHTML: card => `<div class="hs-card"><div class="hsc-desc">${card.desc}</div></div>`,
-    showBattleDecision(title, body) {
-      UI.el.ovBody.innerHTML = `<section class="battle-decision battle-secondary-panel" data-decision-kind="infusion">${body}</section>`;
-      document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: 'discover' }));
-    },
   });
   draw(); getSnapshot.mockClear();
   return { snapshot, getSnapshot, commands, draw };
@@ -90,21 +86,53 @@ describe('battle page input and DOM work', () => {
     expect(commands.selectInfusion).toHaveBeenCalledTimes(3);
   });
 
-  it('checks confirmation and pointer adjustments once and blocks zoom/hidden inputs', () => {
-    const { getSnapshot, commands, snapshot } = infusionPage();
-    actions.get('btInfuseAdd')({ i: '0' });
-    actions.get('btInfuseAdd')({ i: '0' });
-    actions.get('btInfuseGo')();
+  it('checks physical material selection, pointer withdrawal and confirmation once and blocks zoom/hidden inputs', () => {
+    const { getSnapshot, commands, snapshot, draw } = infusionPage();
+    const hand = snapshot.hand.slice();
+    // Same-name copies have different shortcuts and UIDs, not a grouped +/- action.
+    key('1'); key('2'); actions.get('btInfuseGo')();
+    expect(commands.selectInfusion.mock.calls).toEqual([['a'], ['b']]);
+    expect(snapshot.infusing.picked).toEqual(['a', 'b']);
     expect(commands.confirmInfusion).toHaveBeenCalledOnce();
     expect(getSnapshot).toHaveBeenCalledTimes(3);
-    snapshot.infusing.picked.pop(); actions.get('btInfuseGo')();
+    draw();
+    const remove = UI.el.ovBody.querySelector('[data-act="btInfuseRemove"][data-uid="b"]');
+    expect(remove).not.toBeNull();
+    getSnapshot.mockClear();
+    actions.get('btInfuseRemove')(remove.dataset);
+    expect(commands.selectInfusion).toHaveBeenLastCalledWith('b');
+    expect(snapshot.infusing.picked).toEqual(['a']);
+    expect(getSnapshot).toHaveBeenCalledOnce();
+    actions.get('btInfuseRemove')(remove.dataset); actions.get('btInfuseGo')();
+    expect(commands.selectInfusion).toHaveBeenCalledTimes(3);
     expect(commands.confirmInfusion).toHaveBeenCalledOnce();
+    expect(getSnapshot).toHaveBeenCalledTimes(3);
+    expect(snapshot.hand).toEqual(hand);
     getSnapshot.mockClear();
     UI.el.overlay.appendChild(Object.assign(document.createElement('div'), { id: 'cardZoom' }));
-    key('1'); key('2');
+    key('1'); key('2'); actions.get('btInfuseRemove')({ uid: 'a' }); actions.get('btInfuseGo')();
     expect(getSnapshot).not.toHaveBeenCalled();
     document.getElementById('cardZoom').remove(); UI.el.overlay.hidden = true;
-    key('1'); expect(getSnapshot).not.toHaveBeenCalled();
+    key('1'); actions.get('btInfuseRemove')({ uid: 'a' }); actions.get('btInfuseGo')();
+    expect(getSnapshot).not.toHaveBeenCalled();
+    expect(snapshot.infusing.picked).toEqual(['a']);
+    expect(commands.selectInfusion).toHaveBeenCalledTimes(3);
+    expect(commands.confirmInfusion).toHaveBeenCalledOnce();
+  });
+
+  it.each(['new-selection', 'new-workspace'])('rejects stale physical withdrawal and confirmation after %s', invalidation => {
+    const { snapshot, commands, getSnapshot, draw } = infusionPage();
+    key('1'); key('2'); draw();
+    const oldRemove = actions.get('btInfuseRemove'), oldConfirm = actions.get('btInfuseGo');
+    if (invalidation === 'new-selection') snapshot.infusing = { ...snapshot.infusing, selectionId: 2 };
+    else draw();
+    commands.selectInfusion.mockClear(); getSnapshot.mockClear();
+    oldRemove({ uid: 'a' }); oldConfirm();
+    expect(snapshot.infusing.picked).toEqual(['a', 'b']);
+    expect(commands.selectInfusion).not.toHaveBeenCalled();
+    expect(commands.confirmInfusion).not.toHaveBeenCalled();
+    expect(snapshot.hand).toEqual(['main', 'a', 'b']);
+    expect(getSnapshot).toHaveBeenCalledTimes(invalidation === 'new-selection' ? 2 : 0);
   });
 
   it.each(['sdt-overlay-mode', 'sdt-overlay-close'])('releases the active infusion key listener on %s', event => {

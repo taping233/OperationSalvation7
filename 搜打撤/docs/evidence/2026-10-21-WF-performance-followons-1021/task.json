@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-performance-followons-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "在已发布d682c4cb候选上集中接入资源发布保护与战斗快照阶段裁剪，验证后交发布负责人",
+  "paths": [
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "scripts/runtime-asset-redundancy.mjs",
+    "tests/battle-snapshot-phase-cost.test.js",
+    "tests/direct-cast.test.js",
+    "tests/runtime-asset-aliases.test.js",
+    "tests/runtime-asset-redundancy-plugin.test.js",
+    "tests/runtime-asset-redundancy.test.js",
+    "vite.config.js",
+    "game/src/generated/art-manifest.js",
+    "docs/architecture.md",
+    "docs/performance.md",
+    "tests/battle-all-cards.test.js",
+    "tests/hero-cards.test.js",
+    "tests/card-description-fix-lifecycle.test.js"
+  ],
+  "doneWhen": [
+    "九文件补丁逐字一致，原玩法与源素材保留",
+    "原冻结index全量门与标准构建通过，预算不放宽",
+    "记录静态引用闭包、实页与远端CI的真实覆盖边界"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "九文件初次正式冻结full：755文件/7853项通过，1文件/7项跳过，0失败；最终index另复验",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "标准npm run build与全部原预算通过；静态闭包1367目标缺失0；独立复核无阻断",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "原最终门保留一次exit null及一次法力奔涌断言失败；已用旧新引擎对照确认轮询次数截止过早，有限真实截止夹具及真挂起回归17项通过，最终full待复验",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "生命周期/精神药水两项旧测试假阴性已完成d682与当前确定性对照；最小测试修复及保留规则断言/负控通过，最终full另核",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "当前内置浏览器实页与远端CI未覆盖本批；尚未推送或部署",
+    "本记录先于最终冻结门落盘，最终发布以冻结index收据及pre-commit核验为准"
+  ],
+  "updatedAt": "2026-10-21T03:28:00Z"
+}

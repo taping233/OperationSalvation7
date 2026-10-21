@@ -1,0 +1,47 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+·················································································································································································································································································stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 真实loadGame在主卡未领和附赠待领两阶段均优先恢复chest，不重付或重领
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 完全满包也只锁定主卡待领，不实际发本体或附赠；整理后才发
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+·stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing-serialize时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器false时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+···stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器throw-before时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接已建立并保存后才抛异常时保留已锁选择与待领，不回滚成可重选
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+····stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接单次保存失败序列[]：同一快照含锁定与chest，失败保留待领并可完整补存
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+············stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接单次保存失败序列[1]：同一快照含锁定与chest，失败保留待领并可完整补存
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接单次保存失败序列[1]：同一快照含锁定与chest，失败保留待领并可完整补存
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 普通非阿猫选择保持原即时发卡/关闭/保存，不依赖固定领奖端口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+··stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 整理返回同候选、交接后旧背包回调不覆盖固定领奖页，完成重进无新付款
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+··························································································
+
+ Test Files  27 passed (27)
+      Tests  385 passed (385)
+   Start at  03:42:49
+   Duration  9.40s (transform 1.96s, setup 0ms, collect 3.34s, tests 16.71s, environment 9.19s, prepare 1.73s)

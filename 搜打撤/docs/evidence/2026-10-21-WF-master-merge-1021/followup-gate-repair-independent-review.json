@@ -1,0 +1,100 @@
+{
+  "reviewer": "/root/review_gate_repair_evidence",
+  "reviewedAtUtc": "2026-10-21T18:41:49Z",
+  "recordedAtUtc": "2026-10-21T18:45:51Z",
+  "scope": "Independent read-only review of two test/guard-only repairs; no production edits, test runs, full gate, build, browser or publication performed by reviewer.",
+  "reviewBaseTree": "2c51b365a9703a5f9d4ab7e5e250d2c5a4bba388",
+  "incomingCommit": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "decision": "GO for integration of these exact two patches; not release acceptance.",
+  "centralInventory": {
+    "patchPath": "merge-central-inventory-b7207a28/central-inventory-incremental.patch",
+    "patchSha256": "a3ac54a4899165a4c0a381ed6c15c9515e81d0d3e11727fce862624265fedd97",
+    "decision": "GO",
+    "hashVerification": "All four before/after SHA256 and Git blobs independently matched manifest and candidate files.",
+    "approvedExecutionFixture": {
+      "path": "搜打撤/tests/fixtures/builtin-execution-approved-20261020.json",
+      "sha256": "1812c70bcd32322cd1776433cbdec3b047ef3a0828b4631a543166f4fe83becf",
+      "gitBlob": "cd1c58dee4c5cca0c678acb69deb0362a0f78250",
+      "incomingMatch": true,
+      "unchanged": true
+    },
+    "historicalInventory": {
+      "path": "搜打撤/docs/evidence/e8-card-migration-2026-09-27/catalog-before.json",
+      "sha256": "c8016a81a58add42b484b3f8045714d8bde01238896f07f1984bcd31038a7d07",
+      "gitBlob": "7aa77f02e8b894d6838a3b29d3890954cc0c8d01",
+      "incomingMatch": true,
+      "unchanged": true
+    },
+    "findings": [
+      "Lamp guard now compares the complete projected before card (fixed approved description and armor:5) and complete exact after card (armor property absent, rules from independent existing frozen fixture); removed live-production-derived expectations. Existing before/after mutations retained, with random pool and armor-effect mutations added.",
+      "Shadowbug special-case is reachable because it is absent from approvedExecution fixture. E8 before lacks rules; permitted change is exactly rarity 稀有 to 史诗 plus version:1 enemy/non-area onPlay stealAtk capTo:1 chosenEnemy rule. Full next-card equality rejects additional field or rule changes. Six after-card and two before-card negative mutations are present.",
+      "Pouch case uses an actual stored ownership entry with pouchOf and verifies it was not in the hand. It asserts exact enemy hp 999 to 988, unchanged hand/energy/discard/grave/raw-consumed/infuseFuels, empty source pouch, only stored ownership entry removed, exact retained pouch/material identities, one identified consumed temporary spell and accurate no-material direct-release log.",
+      "Ordinary required-infusion manual/direct/free/queue guards remain covered; this test does not redefine their semantics.",
+      "Patch changes no production gameplay source, test config, budgets or skip conditions; new boss/elite sidebranch is outside this review."
+    ],
+    "existingLogsInspected": [
+      {
+        "path": "/tmp/merge-master-b7207a28-evidence/incoming-inventory-pouch-baseline.log",
+        "result": "5 failed, 27 passed, 1 existing opt-in inventory-generation skip"
+      },
+      {
+        "path": "/tmp/merge-master-b7207a28-evidence/central-inventory-pouch-repair-final.log",
+        "result": "3 suites passed, 33 passed, 1 existing opt-in inventory-generation skip; all 14 required-infusion cases executed"
+      },
+      {
+        "path": "/tmp/merge-master-b7207a28-evidence/central-pouch-old-facade-negative.log",
+        "result": "New pouch test fails against incoming eight-argument facade at intended hp assertion: actual 999 versus expected 988; other 13 cases are unselected by test-name filtering"
+      }
+    ]
+  },
+  "assetGuard": {
+    "patchPath": "master-merge-compatibility-review-20261021/asset-followup/asset-guard-incremental.patch",
+    "patchSha256": "1982e09104c8be3a0732b72793d9c10f1f10bbe6969031d36ebaafd229cd4449",
+    "guardPath": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+    "beforeGuardSha256": "5a43467e6d713b6d56242efa7b86f738288589bcbf879c38023aaef5ba4d0aa6",
+    "finalGuardSha256": "ee8372de0d338ca30829a31a52b09957910ad94b79a54cb9982168ed92f73190",
+    "manifestSha256": "794557c274c4bd6ad2cf945cb0bc1f597ba597ce5e934ea27ebc2aa4538e7fc9",
+    "decision": "GO",
+    "independentChecks": [
+      "All artifact SHA256 values match manifest. Exactly eight consumerFingerprints values change across slot-weather, retired-scenes, map and transitions; selector key/path sets unchanged. All other policy fields are identical, including candidates, source byte/hash contracts, opaque consumer approvals and dependency maps.",
+      "All eight current selector files match incoming Git blobs. All eight historical base files and base-review.mjs match exact e817a3aa manifest Git blobs. Seven historical files have exact approved anchors; menu is explicitly fresh current semantic review, not invented historical approval.",
+      "Independently invoked unchanged read-only exclusion scanner against candidate review: exactly 286 exclusion paths, warnings empty, exact path set matches supplied proof. Original candidates are not expanded.",
+      "Independently hashed all 14 new current resource files and matched incoming Git blobs plus proof SHA256. All remain outside candidate list and exclusion result.",
+      "Both original focused test files remain unchanged; existing baseline/candidate log hashes match artifact manifest."
+    ],
+    "semanticFindings": {
+      "slotWeather": "Menu uses SLOT_EMBLEMS through SLOT_ICONS and slot-card-art. Dependency contains five literal inline SVGs without external resource references; no old weather path. Current menu resource surface and resume transition caller reviewed directly.",
+      "retiredScenes": "Entry CSS URL tokens unchanged. Scenes CSS has exactly two scene-fire-bg URL substitutions to retained city-campfire. Run scene loader adds only closed TRANSITION_ART references; all actual showRunTransition callers traced: enterNode selects catalog art, retreat supplies catalog retreat, resume/class-choice omit art and use closed cut scenes.",
+      "map": "Map-node URL table, aliases and portrait source selection unchanged. Renderer new map-layer module is numeric colors/filter/geometry only. Map-city adds exactly four literal environment URLs, mapped into Images with bounded layer fallback; original ghost-props remains.",
+      "transitions": "Camp closed CUT_SCENES changes battle/boss to retained v2 literal URLs; other entries and image selection preserved. TRANSITION_ART is seven frozen literal URL entries. New heading/handoff modules have no new resource selectors."
+    },
+    "retainedResources": {
+      "count": 14,
+      "groups": [
+        "one city-campfire",
+        "two battle/boss v2 transitions",
+        "four map-environment-1021 images",
+        "seven transitions-1021 images"
+      ],
+      "gitAndSha256Verified": true
+    },
+    "existingLogsInspected": [
+      {
+        "path": "master-merge-compatibility-review-20261021/asset-followup/baseline-tests.log",
+        "sha256": "289fa9165f23f5d88d2afbef4c31f7753809e3201817db24a913878142d5945d",
+        "result": "2 failed, 33 passed; four expected stale-selector category warnings"
+      },
+      {
+        "path": "master-merge-compatibility-review-20261021/asset-followup/candidate-tests.log",
+        "sha256": "2b2c8473775742c526238ba297e5c835eae0b008e82aed18f6a461c78c049318",
+        "result": "2 suites passed, 35 tests passed"
+      }
+    ]
+  },
+  "acceptanceConditions": [
+    "Integrator must apply exact reviewed patch/file hashes and validate final frozen tree with unchanged original full gate and build/budgets.",
+    "Existing isolated/readthrough focused logs and this semantic review do not establish staged-tree full acceptance.",
+    "Preserve authentic original full failure evidence; do not bypass gates or remove new incoming art/resources.",
+    "Post-review integration results reported by assembly are not independently reverified in this record."
+  ]
+}

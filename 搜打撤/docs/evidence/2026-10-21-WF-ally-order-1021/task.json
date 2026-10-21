@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-ally-order-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "只减少实际顺序未变的随从DOM搬移，保留原失配路径",
+  "paths": [
+    "game/src/battle/view/battle.layers.js",
+    "tests/battle-ally-dom-order.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/performance.md",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "原两路径补丁精确接入真实a4cd基线，消费者SHA独立复核",
+    "原预算build、标准暂存quick门及普通hook通过"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "独立221项及基线负对照、集成50项、标准build和静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "本小批实页与远端CI尚未核验；不以操作计数声称FPS改善",
+    "本批未额外运行full；标准选择器为quick"
+  ],
+  "updatedAt": "2026-10-21T05:11:06.702097+00:00"
+}

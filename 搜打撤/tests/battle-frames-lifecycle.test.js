@@ -22,7 +22,7 @@ const pixi = vi.hoisted(() => {
           view.height = Math.round(height * this.resolution);
           this.screen = { width: view.width / this.resolution, height: view.height / this.resolution };
         }),
-        render() { pixi.rendered += 1; } };
+        render() { pixi.rendered += 1; pixi.onRender?.(); } };
     }
     stop() {}
     start() {}
@@ -38,7 +38,7 @@ const pixi = vi.hoisted(() => {
   }
   return { unloaded, loaded, sprites, idleTexture, extraTexture, emptyTexture, Application, Sprite,
     unloadGate: null, finishUnload: null, loadGate: null, finishLoad: null,
-    idleEnabled: true, idlePaths: new Set(), rendered: 0, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
+    idleEnabled: true, idlePaths: new Set(), rendered: 0, onRender: null, loadDelayMs: 0, inFlight: 0, maxInFlight: 0, tick: null,
     blocked: null, missing: new Set() };
 });
 
@@ -109,6 +109,7 @@ describe('battle frame lifecycle', () => {
     pixi.inFlight = 0;
     pixi.maxInFlight = 0;
     pixi.rendered = 0;
+    pixi.onRender = null;
     pixi.blocked = null;
     pixi.missing.clear();
     document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img /></div></div></div></div><div id="unitFrames"></div></div>';
@@ -152,6 +153,61 @@ describe('battle frame lifecycle', () => {
     expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
     setPerformanceSettings({ fps: 120 });
     expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+  });
+
+  it.each(['cold', 'reattach'])('does not resubmit an unchanged frame after synchronous %s paint', async path => {
+    vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    vi.spyOn(body.querySelector('.sts-figure'), 'getBoundingClientRect').mockReturnValue({ left: 50, top: 60, width: 100, height: 150 });
+    await attach(body); await finishFrames('changwuyu');
+    if (path === 'reattach') await attach(body);
+    const painted = pixi.rendered;
+    expect(painted).toBe(path === 'cold' ? 1 : 2);
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted);
+  });
+
+  it.each(['cold', 'reattach', 'ticker'])('preserves invalidation raised during %s paint', async path => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    if (path !== 'cold') { await attach(body); await finishFrames('changwuyu'); }
+    pixi.onRender = () => { pixi.onRender = null; setPerformanceSettings({ quality: path === 'ticker' ? 'high' : 'low', fps: 30 }); };
+    if (path === 'ticker') { play('atk'); setPerformanceSettings({ quality: 'low', fps: 30 }); clock.mockReturnValue(1000); pixi.tick(); }
+    else { await attach(body); await finishFrames('changwuyu'); }
+    const painted = pixi.rendered;
+    // Still before the next animation frame; the quality change nevertheless needs repaint.
+    clock.mockReturnValue(path === 'ticker' ? 1040 : 1000); pixi.tick();
+    expect(pixi.rendered).toBe(painted + 1);
+  });
+
+  it.each(['cold', 'reattach', 'ticker'])('retains retry work and the original error when %s paint throws', async path => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    if (path !== 'cold') { await attach(body); await finishFrames('changwuyu'); }
+    const error = new Error('controlled render failure');
+    pixi.onRender = () => { pixi.onRender = null; throw error; };
+    if (path === 'ticker') { play('atk'); setPerformanceSettings({ quality: 'low', fps: 30 }); clock.mockReturnValue(1000); expect(() => pixi.tick()).toThrow(error); }
+    else await expect(attach(body)).rejects.toBe(error);
+    const painted = pixi.rendered;
+    clock.mockReturnValue(path === 'ticker' ? 1040 : 1000); pixi.tick();
+    expect(pixi.rendered).toBe(painted + 1);
+    expect(document.getElementById('unitFrames').hidden).toBe(false);
+  });
+
+  it('does not revive a frame owner released by a throwing paint hook', async () => {
+    vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    await attach(body); await finishFrames('changwuyu');
+    const error = new Error('departed renderer');
+    let released;
+    pixi.onRender = () => { pixi.onRender = null; released = hide(); throw error; };
+    await expect(attach(body)).rejects.toBe(error);
+    await released;
+    const painted = pixi.rendered;
+    pixi.tick();
+    expect(pixi.rendered).toBe(painted);
+    expect(cacheStats().activeFrameSessions).toBe(0);
+    expect(document.getElementById('unitFrames').hidden).toBe(true);
   });
 
   it('continues a live combo action and reads its remaining contact time from the player clock', async () => {
@@ -613,19 +669,15 @@ describe('battle frame lifecycle', () => {
     hide();
   });
 
-  // —— 首进场不闪（a59e2ff 回归钉，老板 09-20 实机「首次进场闪一下」）——
-  // 机理：attach 同步段（首个 await 之前）确认角色在 HAS_FRAMES 白名单后立即
-  // visibility='hidden' 藏静态立绘，序列帧纹理异步装载就绪后由 Pixi sprite 接管。
-  // 若藏 img 的时机被挪到任何 await 之后，装载窗口内静态 img 会露一帧再跳切序列帧=闪。
-  it('hides the static portrait synchronously on first attach, before async texture loading', async () => {
+  // Loading keeps the aligned static portrait present; successful GPU paint replaces it atomically.
+  it('keeps the static portrait until first paint completes on initial attach', async () => {
     hide();
     await new Promise(resolve => setTimeout(resolve, 0));
     const body = document.getElementById('ovBody');
     const img = document.querySelector('#btSelf img');
     const attachPromise = attach(body);
-    // 同步断言：attach() 返回 promise 的时刻（未 await）img 必须已藏——
-    // 这是「装载期间不露静态立绘」的观测点，任何把隐藏挪后到异步段的回归在此变红。
-    expect(img.style.visibility).toBe('hidden');
+    // Pending attachment must keep the static fallback; successful paint owns the handoff.
+    expect(img.style.visibility).toBe('');
     await attachPromise;
     // 接管终态：img 保持隐藏（不与 sprite 双层叠影）、sprite 已挂待机帧——
     // 藏了静态图就必须有序列帧顶上，两头都断防止「闪」与「人物消失」两个方向的回归。

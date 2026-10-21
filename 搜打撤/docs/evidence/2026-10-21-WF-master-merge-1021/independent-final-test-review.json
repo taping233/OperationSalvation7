@@ -1,0 +1,46 @@
+{
+  "decision": "GO test-only reconciliation; normal FULL+build still required",
+  "observedUtc": "2026-10-21T18:02:16Z",
+  "patch": "merge-battle-render-b7207a28/followup/battle-tests-incremental.patch",
+  "patchSha256": "b7078440f7b9570150ee9782cb769d37a89a05405eb9a72f07741c0538ff0a93",
+  "files": [
+    {
+      "path": "搜打撤/tests/battle-hand-inspector.test.js",
+      "assemblySha256": "7c85634e60bdbf27712e5345b208e40e4d23e7050b6766ebe195bcee3a6a33bd"
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+      "assemblySha256": "4784a312f22f84e5a18b07495da482262c9c9af64687d40dfb73c395e53d65f1"
+    },
+    {
+      "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+      "assemblySha256": "43f5f8e67a4449602730418f7f3f558c35fd54a2c2a010bc16c89db7c558f517"
+    },
+    {
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+      "assemblySha256": "9f34a1c4f276cd1736d3d99a9e61e73d51618486e59a2e2de08aaa1e83b081b6"
+    },
+    {
+      "path": "搜打撤/tests/helpers/card-catalog-approved-revisions.js",
+      "assemblySha256": "7de2d6b2c6a48a394e200b425a7b1de93efab3c3a7899095178599ea4f5806bf"
+    }
+  ],
+  "independentVerification": [
+    "All3 renderer base GitSHAs match exact incoming remote-tree; base and candidate SHA256s match supplied manifest.",
+    "Compared assembly production paths with prior final-source-review.json: no production-source drift. No production changes in this follow-up.",
+    "Inspector retained-body mock now follows real options.battleBody/revision contract, original modal target-selection identity remains; added synthetic covered input checks player/foe/energy/pile/hand/coin immutability then fresh valid selection.",
+    "Hand-rule-context replacement inspects actual fifth updateHand argument AST and requires allprior field-to-identifier bindings plus liveInteractionSnapshot; all runtime and context-use-count assertions remain.",
+    "Potion lifecycle separately tests retained sameUID count changes and genuinely replacedUID detached controls, stale confirm refusal, current count, no consumption and cleanup. Negative transforms removing UID compatibility and popup ownership fail identity and actual consumedUID assertions.",
+    "Skull-sword exact incoming baseline fails obsolete label/order assertion. Final test follows exact incoming pile sorting/aria-label and shared CardZoom, exercises both grouped cards; all before/after UID,pile,energy,ownedCards invariants remain.",
+    "Helper deletion is exactly one unused nativeExecution JSON import; zero remaining references in old helper, no executable revision logic changed."
+  ],
+  "evidenceRead": [
+    "merge-battle-render-b7207a28/followup/evidence/tests-final-strengthened.log:3files134testsPASS",
+    "merge-battle-render-b7207a28/followup/evidence/negative-potion-uid.log:meaningful expected assertion failure",
+    "merge-battle-render-b7207a28/followup/evidence/negative-stale-confirm.log:meaningful expected ownership/no-spend failure",
+    "/tmp/merge-master-b7207a28-evidence/incoming-skull-pile-baseline-complete.log:exact incoming existing mismatch reproduced",
+    "/tmp/merge-master-b7207a28-evidence/combined-repaired-four.log:4files161testsPASS",
+    "/tmp/merge-master-b7207a28-evidence/precheck-lint-final.log:full lintPASS"
+  ],
+  "limits": "Reviewer read code/hashes/evidence only, ran no tests/build/browser. No removed suite, skipped test, weaker testpolicy, source rollback or exclusion change approved."
+}

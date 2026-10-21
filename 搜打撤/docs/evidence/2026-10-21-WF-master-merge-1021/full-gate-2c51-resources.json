@@ -1,0 +1,10 @@
+{
+  "start": "2026-10-21T18:13:51.463Z",
+  "end": "2026-10-21T18:32:00.681Z",
+  "minTmpFreeBytes": 628617216,
+  "minMemAvailableBytes": 1569890304,
+  "peakObservedProcessRssBytes": 1214476288,
+  "oomKillBefore": 167,
+  "oomKillAfter": 167,
+  "outcome": "full suite failed:10 files/12 tests; static succeeded; not a pass; OOM cause of prior first attempt remains unconfirmed"
+}

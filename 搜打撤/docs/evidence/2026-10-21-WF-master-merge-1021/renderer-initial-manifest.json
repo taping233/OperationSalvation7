@@ -1,0 +1,206 @@
+{
+  "baseCommit": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "baseTree": "b04beecba7049a042a268455968ff432585c84c0",
+  "cloudSourceTree": "86f43ce681cd2e49972e75c9095f546bfd378468",
+  "patchSha256": "8a3b06a74d59fd46d568df745838b1c8a4e873f2ca8309b22eefbd948d8cda08",
+  "files": [
+    {
+      "path": "搜打撤/game/css/battle-secondary-overlay.css",
+      "changed": true,
+      "incomingBlobSha1": "d42a08d373c537c86ed0b336dbf9f7c062ee1051",
+      "incomingSha256": "d9885f94fed74865dcb2f8939de1b87a1ebdd28c2a6ea74de357c232afeb08ea",
+      "candidateBlobSha1": "6fca2a37f8e39e4e6b514e582b79a38a8775f8d2",
+      "candidateSha256": "7d73cb2c4d14dca4fe66c0574ed504ea246ed75a73bae3d89e20072fef847d02",
+      "bytes": 9930
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "changed": true,
+      "incomingBlobSha1": "67e01c565733bf228ee76af7ccbaeb626f952d2f",
+      "incomingSha256": "f8ae55c8fded4f81a492046c95e274a4bb1a2a0b6b417be33fa67f1b89dfca53",
+      "candidateBlobSha1": "3156bbd047eb6f0398a5d4c43606b1eb967053f6",
+      "candidateSha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087",
+      "bytes": 50709
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.decision-shell.js",
+      "changed": true,
+      "incomingBlobSha1": "af3b177c9c55186e1c55b9a492877b29e5452016",
+      "incomingSha256": "18f4b66dba173c25c3fdfd54141844fd7db67c0558141d3ff13427f551dc8079",
+      "candidateBlobSha1": "dd10c1632695071dc99f6e9fdf4cfc048e9292bf",
+      "candidateSha256": "26d149b1d98676b1998dc9c042ede68fab313d68ff86211253946904d275d36f",
+      "bytes": 5961
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+      "changed": true,
+      "incomingBlobSha1": "e2fab0c32d8ab1fd603294e673134e56939a0cad",
+      "incomingSha256": "0136fe59fad9fe8b5ab102f2355bce5e50662d8b42054bf79230127c0ef89d45",
+      "candidateBlobSha1": "c1389e9af702dc3a46c5c305f8af2d239a55cece",
+      "candidateSha256": "facfdaa9ecc4ab55c7188026f70eb8f9870a67613191ade9ba5d64f9ca79fc32",
+      "bytes": 10738
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "changed": true,
+      "incomingBlobSha1": "65e78a457a71ed6d3b136f163b981ee9f47056e5",
+      "incomingSha256": "8e27402e8ecd2558bb7ddc770b413d25ebb47aaf72e1a21635719ff8f848d009",
+      "candidateBlobSha1": "f963b34e10403f03d77e776f4bf8d6712ae15fa8",
+      "candidateSha256": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+      "bytes": 42170
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+      "changed": false,
+      "incomingBlobSha1": "73c1aa9eb90b384cb89471b8303f10d9fd9e433a",
+      "incomingSha256": "50e042e57d6589c13e439171227f061a4a37596b14a8a4ba04709b2e21d0f843",
+      "candidateBlobSha1": "73c1aa9eb90b384cb89471b8303f10d9fd9e433a",
+      "candidateSha256": "50e042e57d6589c13e439171227f061a4a37596b14a8a4ba04709b2e21d0f843",
+      "bytes": 1693
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "changed": true,
+      "incomingBlobSha1": "355778e2ed3bbe6d5f2e08a24da99ec38c42cd3b",
+      "incomingSha256": "c4dd6d5d5729d699823b280c829f60ccc193933d85cf90fc6ba5af85aec8504f",
+      "candidateBlobSha1": "0c30bb629ec75c2608131364760efa2338c906ba",
+      "candidateSha256": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47",
+      "bytes": 63925
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.potion-use.js",
+      "changed": true,
+      "incomingBlobSha1": "5e0dfa7b7981f7e449b52c512ac59fd77108f7a4",
+      "incomingSha256": "a598c460a0db9b0b195d17c76199393b75edb67bed44d92b0c45940d8c79d819",
+      "candidateBlobSha1": "d4f9d7a043bcf385b89ff84ab5452a9ce6f8b36b",
+      "candidateSha256": "a7ad3dd93e32d591c79cedc48b54d1df7a3a51a23e3634f7021e04c2da4047d7",
+      "bytes": 12553
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "4507df834798891ead18b8e546b8fa736ee1a36f",
+      "candidateSha256": "b77ac58a7ed8a3c15f26dc588a3df688b314132ec69e6e6e47ea9c5067d36ea7",
+      "bytes": 18002
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "changed": true,
+      "incomingBlobSha1": "cc6777453aed705dc7b254fe0adb08ca06f6cb3c",
+      "incomingSha256": "6f2b55c8a164be0c85d9d28804053b7c351c7c3c1fbef3b65c300d1a45e74288",
+      "candidateBlobSha1": "de77ba48f1e1c6ee95c53085763648f9e6856df7",
+      "candidateSha256": "fa9345e35ff7efe737b2f8046bbb369c189a7e6959376b7e873f8c1b207cd5c2",
+      "bytes": 59330
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-stages.local.js",
+      "changed": true,
+      "incomingBlobSha1": "d5ad2cfa79a1bbf65e442353a8a8bf537e182e47",
+      "incomingSha256": "0ba4cd9ef9fdd78b3a05ea33afe6abdaed6611fde37cee3fc09746970306f6ae",
+      "candidateBlobSha1": "71eae299f2d5a5b74391ad539d084c17b759828c",
+      "candidateSha256": "987f709e1f51dd9d0023e4aface0e5e390850e08a1ac9b5af2dac6bc6a481d4e",
+      "bytes": 1047
+    },
+    {
+      "path": "搜打撤/tests/battle-ally-dom-order.test.js",
+      "changed": true,
+      "incomingBlobSha1": "81ff6ef23bb895eb318a7f4b461d0c4f59e6a097",
+      "incomingSha256": "70b6f265dbc4c86c9fd1888789b7a8c71d0977c12ab12c2b53e01cd2e51da7e4",
+      "candidateBlobSha1": "1261d43438567e638bf3d2990dcdb26f6dcb819f",
+      "candidateSha256": "5d047c338ca608a47d000edcbba464288bfb40890cca7ffc43024266d130ed0b",
+      "bytes": 11504
+    },
+    {
+      "path": "搜打撤/tests/battle-entry-view.test.js",
+      "changed": true,
+      "incomingBlobSha1": "ee9a5c974f6a9188f53cd9f8d404f2e8ff75b613",
+      "incomingSha256": "53b7e10f40e3ef71d95198c4abf405dd741c1d9ffb290cb54277466bb78d3690",
+      "candidateBlobSha1": "4d1f15a0efea0339514ff5d7bf1a2da59edc1382",
+      "candidateSha256": "f5926d756087d3f245a5482c7dd5d9adbbc1e226deb4fce8a9b1a9f117cf5b88",
+      "bytes": 20892
+    },
+    {
+      "path": "搜打撤/tests/battle-frames-ownership.test.js",
+      "changed": true,
+      "incomingBlobSha1": "02551b4772485307767085c015fbfd5e825e542d",
+      "incomingSha256": "565cf3cb2fb7957c6b0be634b4489d61a77f30effd56d49369350c1d94fd0025",
+      "candidateBlobSha1": "d83a0b8d02e17df9bd88b0b5564893e816af2008",
+      "candidateSha256": "132425542a6ef7ab2dd36cc464ddf5b011cec5f827fe90bcaa7dee8ca6efa8a0",
+      "bytes": 36513
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-action-layout.test.js",
+      "changed": true,
+      "incomingBlobSha1": "b0b7f409d9fd0a54de77e21e2e91df7a958a6e85",
+      "incomingSha256": "5e65f3d741770208969d74a3c893ca10deb18e5bed035561193cc0a769f52134",
+      "candidateBlobSha1": "b24498ea4baeec3149695745f2e91bb30579042b",
+      "candidateSha256": "2e5bee5402e8aa39abbea24d2854654705de9b224c42edab76d185146dec008a",
+      "bytes": 36893
+    },
+    {
+      "path": "搜打撤/tests/battle-persistent-stage.test.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "2a7b8070e170117a1cb08cebdf5217e344de49df",
+      "candidateSha256": "48cd6a517d77b571fd580d359b42ec234ec6acb8c6583ac71f18f3325bfe851b",
+      "bytes": 29685
+    },
+    {
+      "path": "搜打撤/tests/battle-render-runtime-trace.test.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "570af32fe769cc18d0c7efdc948ebe12ef1015b5",
+      "candidateSha256": "b3cb8ad18a9e6a5fce1ca62cb2b527e9989a1de643207367925e6cd152cff776",
+      "bytes": 13128
+    },
+    {
+      "path": "搜打撤/tests/battle-restore-boundaries.test.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "03f625b61c79f138f3b2bc7cf658046688965821",
+      "candidateSha256": "d680694a8589ad8da6fbaa52a5744d359266c70892cfbe725930016faef12f87",
+      "bytes": 5840
+    },
+    {
+      "path": "搜打撤/tests/battle-scenery-secondary-ready.test.js",
+      "changed": false,
+      "incomingBlobSha1": "92f9aa7417b44fc289dafddcba2e856369e167d2",
+      "incomingSha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549",
+      "candidateBlobSha1": "92f9aa7417b44fc289dafddcba2e856369e167d2",
+      "candidateSha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549",
+      "bytes": 8480
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-mounts.test.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "02934901740fd93ed07bf2cbd37ac5970653b89a",
+      "candidateSha256": "7892015b04c46d3dc95744e69d944c2959833d159c6dc107ef49214a52cc38f3",
+      "bytes": 10486
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-validator.test.js",
+      "changed": true,
+      "incomingBlobSha1": null,
+      "incomingSha256": null,
+      "candidateBlobSha1": "6f28d8a783fad6794ea6df3a60a55fc6deb3a63a",
+      "candidateSha256": "2aecc1ca3a84e961e4baca825fbabf8cc16f0fad7f55a5e21b22392cbaa2f36a",
+      "bytes": 8131
+    },
+    {
+      "path": "搜打撤/tests/battle-tools-lifecycle.test.js",
+      "changed": true,
+      "incomingBlobSha1": "e11e7247411b4e74d5e2ce54ea21f68d5a5819dc",
+      "incomingSha256": "6adf89d8bce3a263347d446240ee3c825258fae75c9feaab74bf4f5427d68806",
+      "candidateBlobSha1": "dd2346fd55fe11860be26f14a5d59ea4981dac03",
+      "candidateSha256": "4e4ef6a202eff3656e21b190cb0e3e4d8b0d951524fb84437f0f95177af89e62",
+      "bytes": 15332
+    }
+  ]
+}

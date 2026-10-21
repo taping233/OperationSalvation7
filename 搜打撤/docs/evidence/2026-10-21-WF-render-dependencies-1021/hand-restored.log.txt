@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/搜打撤
+
+·································································································································
+
+ Test Files  3 passed (3)
+      Tests  129 passed (129)
+   Start at  13:02:29
+   Duration  10.71s (transform 854ms, setup 0ms, collect 2.45s, tests 9.58s, environment 941ms, prepare 174ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-hand-eligibility-eaa27f33/restored-final-tests.json

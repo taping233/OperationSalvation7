@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-preview-context-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "一次AOE同步悬停共用原始手牌投影，保持每目标实时资格与最终提交重查",
+  "paths": [
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.hover.js",
+    "game/src/battle/core/battle.core.js",
+    "game/src/battle/core/battle.card-play.domain.js",
+    "tests/battle-drag-reference.test.js",
+    "tests/battle-area-hover-hand-context.test.js",
+    "tests/battle-preview-hand-context.test.js",
+    "docs/performance.md"
+  ],
+  "doneWhen": [
+    "精确七文件补丁及独立证据一致",
+    "标准build原预算和正常选择门及hook通过，范围如实记录"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "七文件SHA精确；独立555项和57项overlay哨兵与负控；唯一标准build原预算及1595文件静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "预冻结后运行正常选择器门与普通hook，最终结果见外部release manifest及不可变staged报告",
+    "当前批实页与远端CI未核验；无耗时/FPS/堆字节结论"
+  ],
+  "updatedAt": "2026-10-21T07:27:35.794Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

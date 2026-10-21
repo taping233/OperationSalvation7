@@ -210,7 +210,15 @@ export function createBattlePotionUse({ UI, getSnapshot, commands }) {
       }
     }
     presented = potions || [];
-    if (inspection && (!currentSnapshot()?.potionBar?.some(potion => potion.uid === inspection?.uid) || !inspection.source.isConnected)) close();
+    if (inspection && (!currentSnapshot()?.potionBar?.some(potion => potion.uid === inspection?.uid)
+      || !inspection.source.isConnected || !inspection.panel.isConnected || !bar?.contains(inspection.panel))) close();
   }
-  return { sync, open, close: () => close(), dispose() { leavePage(); disposed = true; } };
+  // Only the live inspection may extend the persistent potion region. A matching
+  // class or cloned panel never grants a structural-repair exemption.
+  /** @param {HTMLElement} parent @param {Node} node */
+  function ownsPanel(parent, node) {
+    return !!inspection && inspection.panel === node && bar === parent
+      && node.parentNode === parent && currentPage();
+  }
+  return { sync, open, ownsPanel, close: () => close(), dispose() { leavePage(); disposed = true; } };
 }

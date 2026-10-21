@@ -1,0 +1,39 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-assembly/搜打撤
+
+ ✓ tests/expedition-view.test.js > expedition view route projection > 只列当前层相邻节点，去重并过滤跨层/非法边 3ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 已访问普通节点仍可通行但标为已探索；门、撤离点保留专用状态 1ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 目标和低血量目标文案随状态变化 0ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 第三层同时说明紧急撤离代价和第四层深入目标 0ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 第四层按祭坛未激活、奖励待领和首脑已解锁分别提示下一步 0ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 首脑胜利后的低血量仍提示终局撤离通关，未胜利仍提示治疗 0ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 同名相邻路线获得稳定的可视与无障碍区分，并保留节点索引 0ms
+ ✓ tests/expedition-view.test.js > expedition view route projection > 只在路线起点标出补给支路和交战支路 0ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 背包占格0用进度条展示状态，读屏仍获得准确容量 29ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 背包占格4用进度条展示状态，读屏仍获得准确容量 8ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 背包占格12用进度条展示状态，读屏仍获得准确容量 6ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 背包占格16用进度条展示状态，读屏仍获得准确容量 5ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 背包占格20用进度条展示状态，读屏仍获得准确容量 5ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 默认只保留工具带，不创建路线目录或显示空预览 7ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 选中相邻节点时只显示该节点身份、可达状态与明确进入动作 9ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 已消耗的相邻节点与脚下节点保留原类型并明确已完成，仍可进入 9ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 行动中保留单节点信息，但进入动作不可用 8ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 已知但不相邻节点可读类别和受限状态，不能从预览进入 6ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 低生命战斗预览给出风险提示，恢复后更新且不改变游戏状态 8ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 闸门覆盖底层战斗类型时，预览使用通道身份而非危险标记 6ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 预览绑定当前位置，换节点后旧选择失效 8ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 相同状态保留预览节点，已探索与门身份变化后更新单节点内容 8ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 工具带复用日志DOM，位置摘要不写入game状态且不重复创建 4ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 当前位置预览有查看本地内容入口，且转义可变层名 5ms
+ ✓ tests/expedition-view.test.js > expedition view DOM rendering > 地图不渲染操作图例和地点列表，消耗区保持原标签 4ms
+ ✓ tests/expedition-view.test.js > 地图取景入口语义 > 全景与定位公开范围和快捷键，未知地点不承诺揭示 4ms
+ ✓ tests/expedition-view.test.js > 移动期间侧栏不改取景与inset，抵达后的侧栏改动平滑取景 11ms
+ ✓ tests/r7a-qa-live.test.js > loads isolated real view, plays one card, ends and exits without storage writes 3041ms
+
+ Test Files  2 passed (2)
+      Tests  28 passed (28)
+   Start at  02:40:54
+   Duration  3.81s (transform 1.04s, setup 0ms, collect 314ms, tests 3.20s, environment 832ms, prepare 155ms)
+

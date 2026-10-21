@@ -738,8 +738,8 @@ function closeBag() { return bag.closeBag(); }
     // M2：打出卡登记 triggers + onPlayCard 触发
     triggersM2,
   });
-  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
-    return execPlayFlow.queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved);
+  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null, submission = null, directRelease = false) {
+    return execPlayFlow.queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved, submission, directRelease);
   }
 
   // M2：onTurnEnd 触发转发（enemy-phase 回合结束管线调用；triggersM2 为模块闭包件）

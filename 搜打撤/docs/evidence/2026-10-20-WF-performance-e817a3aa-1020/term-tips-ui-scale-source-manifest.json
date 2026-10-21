@@ -1,0 +1,17 @@
+{
+  "patch": "term-tips-ui-scale-from-v2.patch",
+  "sha256": "1e6b347bfd45aad6a6a64ed3962289c1f35ed8ab254d84f5326aef8352aabbda",
+  "paths": [
+    {
+      "path": "game/src/ui/term-tips.js",
+      "v2_sha256": "0ebc39ee92b753328cc1754537a43387d27246292f80536fe87444ea37b9874b",
+      "new_sha256": "6e2dc6f80f93fa486d7e82fcf21d5a12e6d265aa10e9618930fe3e6310652bfe"
+    },
+    {
+      "path": "tests/term-tips-lazy-boundary.test.js",
+      "v2_sha256": "532b3b9211f34364184933b38182ecd52b1fb9560dff8b1b180074910fbffd99",
+      "new_sha256": "3448c60bf1243d6ab544bf6be87168d45cbdf178e5dfed58cb6c2951beff89c9"
+    }
+  ],
+  "validation": "term-tips-ui-scale-regression.log: 8 files / 103 tests pass; targeted ESLint and syntax pass"
+}

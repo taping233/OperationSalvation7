@@ -42,9 +42,9 @@ afterEach(async () => {
 });
 
 const cardById = id => Cards.all().find(card => card.id === id);
-async function start(card, extra = [Cards.SHA, Cards.SHA]) {
+async function start(card, extra = [Cards.SHA, Cards.SHA], storedEntries = []) {
   const game = {
-    ownedCards: [card, ...extra].map((card, i) => ({ uid: `u${i}`, card })),
+    ownedCards: [...[card, ...extra].map((card, i) => ({ uid: `u${i}`, card })), ...storedEntries],
     hp: 20, maxHp: 50, atk: 0, spellPower: 0, coins: 0,
     myClass: null, state: 'idle', battleActive: false, log: vi.fn(),
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {},
@@ -118,15 +118,28 @@ describe('required infusion is validated before every payment and direct-play en
     expect(runtime.infuseFuels).toBe(0);
   });
 
-  it('rejects pouch release before removing the pouch entry or owned source', async () => {
-    const dragon = { ...cardById('tt12-raydragon'), pouchUid: 'u1' };
+  it('explicit pouch release grants infusion, consumes only its stored source and spends no fuel', async () => {
+    const dragon = { ...cardById('tt12-raydragon'), pouchUid: 'stored-dragon' };
     const pouch = { id: 'pouch-test', name: '锦囊', type: '装备', cost: 0, desc: '', _pouch: [dragon] };
-    const game = await start(pouch, [dragon]);
+    const storedSource = { uid: 'stored-dragon', card: dragon, pouchOf: pouch.id };
+    const game = await start(pouch, [Cards.SHA], [storedSource]);
     const before = resources();
+    expect(before.hand).not.toContain(storedSource.uid);
+    expect(game.ownedCards).toContain(storedSource);
     runtime.set$discovering({ options: [dragon], n: 1, act: 'pouch', pouchUid: 'u0', pred: null });
     BattleSession.commands.pickDiscover(0); await drain();
-    expect(resources()).toEqual(before); expect(pouch._pouch).toEqual([dragon]);
-    expect(game.ownedCards).toHaveLength(2); expect(runtime.discovering).toBeNull();
+    expect(runtime.foes[0].hp).toBe(988);
+    expect(resources()).toEqual(before);
+    expect(pouch._pouch).toEqual([]);
+    expect(game.ownedCards.map(entry => entry.uid)).toEqual(['u0', 'u1']);
+    expect(game.ownedCards[0].card).toBe(pouch);
+    expect(game.ownedCards[1].card).toBe(Cards.SHA);
+    expect(runtime.discovering).toBeNull();
+    const consumed = BattleSession.getSnapshot().consumedPile;
+    expect(consumed).toHaveLength(1);
+    expect(consumed[0]).not.toBe(storedSource.uid);
+    expect(E.findCard(consumed[0])?.card.id).toBe(dragon.id);
+    expect(game.log.mock.calls.flat().join(' ')).toContain('视为已注能，不消耗注能材料');
   });
 
   it('rechecks required infusion after queue acceptance before touching resources', async () => {

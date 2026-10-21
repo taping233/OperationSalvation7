@@ -1,0 +1,30 @@
+{
+  "patch": "battle-ally-dom-order.patch",
+  "patchSha256": "0e7f6b872d6502d1650dc5782f18e6bb5320d95f7edef4327b7f30922353ffb6",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "baseSha256": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+      "candidateSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679"
+    },
+    {
+      "path": "搜打撤/tests/battle-ally-dom-order.test.js",
+      "base": null,
+      "candidateSha256": "70b6f265dbc4c86c9fd1888789b7a8c71d0977c12ab12c2b53e01cd2e51da7e4"
+    }
+  ],
+  "verification": {
+    "newRegressionCases": 11,
+    "neighborFiles": 11,
+    "neighborTests": 221,
+    "neighborFailures": 0,
+    "lintExitCode": 0,
+    "baselineNegativeControlPassedFunctionalCases": 7,
+    "baselineExpectedCountOnlyFailures": 4,
+    "isolatedPatchApplyCheckExitCode": 0
+  },
+  "integrationSourceUnchanged": true,
+  "integrationIndexWritten": false,
+  "buildOrOutputChanges": false,
+  "browserVerification": "not run"
+}

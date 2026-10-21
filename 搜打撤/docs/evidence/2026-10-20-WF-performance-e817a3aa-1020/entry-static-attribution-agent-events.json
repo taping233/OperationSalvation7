@@ -1,0 +1,2908 @@
+{
+  "kind": "static import graph + isolated module minify/gzip; not Rollup rendered-size or additive savings",
+  "source": "e817 with bag, visual, Agent and event candidates",
+  "modules": 275,
+  "files": [
+    {
+      "path": "game/src/cards/cards.data.js",
+      "rawBytes": 104568,
+      "minifiedBytes": 100298,
+      "individualGzipBytes": 19120,
+      "staticImports": [
+        "game/src/cards/cards.catalog.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "rawBytes": 52174,
+      "minifiedBytes": 36762,
+      "individualGzipBytes": 12151,
+      "staticImports": [
+        "game/src/core/map-node-state.js",
+        "game/src/core/characters.js",
+        "game/src/ui/expedition-feedback.js",
+        "game/src/ui/map-passage.js",
+        "game/src/run/game.run.class-choice.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/node-decision-view.js",
+        "game/src/ui/fire-rest-view.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.hub.js",
+        "game/src/ui/extraction-rewards-view.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/core/random.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recovery.commands.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "rawBytes": 77142,
+      "minifiedBytes": 40864,
+      "individualGzipBytes": 11001,
+      "staticImports": [
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-execution-plan.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "rawBytes": 36377,
+      "minifiedBytes": 60586,
+      "individualGzipBytes": 10711,
+      "staticImports": [
+        "game/src/cards/rot-seed-revision.js",
+        "game/src/cards/structured-card-description.js"
+      ]
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "rawBytes": 49907,
+      "minifiedBytes": 27230,
+      "individualGzipBytes": 10414,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/random.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/shared.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-picker-heading.js",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/chest-reward-overview.js",
+        "game/src/core/turbo.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/chest-opening-art.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "rawBytes": 46319,
+      "minifiedBytes": 29056,
+      "individualGzipBytes": 9723,
+      "staticImports": [
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/ui-disclosure.js",
+        "game/src/core/random.js",
+        "game/src/core/shared.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/run/shop-browse-state.js",
+        "game/src/run/shop-commission.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/run/shop-commands.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "rawBytes": 42329,
+      "minifiedBytes": 29804,
+      "individualGzipBytes": 9721,
+      "staticImports": [
+        "game/src/core/random.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/ui.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/nest-settlement.commands.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/runes.js",
+        "game/src/core/event-bus.js",
+        "game/src/run/lab.ending.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "rawBytes": 45949,
+      "minifiedBytes": 29945,
+      "individualGzipBytes": 9488,
+      "staticImports": [
+        "game/src/hub/game.bag.token-craft.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/hub/game.container-store.view.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/bag-render-derivation.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/core/random.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/hub/game.bag.settle.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "rawBytes": 41445,
+      "minifiedBytes": 24494,
+      "individualGzipBytes": 8884,
+      "staticImports": [
+        "game/src/core/flight-recorder.local.js",
+        "game/src/core/shared.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/ui/game.menu.js",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/random.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/core/card-capacity.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.board.js"
+      ]
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "rawBytes": 44381,
+      "minifiedBytes": 21060,
+      "individualGzipBytes": 8246,
+      "staticImports": [
+        "game/src/hub/game.notes.js",
+        "game/src/ui/game.menu.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.run.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/game.run.dev-loader.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/art-preload-plan.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.bag.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/camera.js",
+        "game/src/core/storage.js",
+        "game/src/run/game.session.js",
+        "game/src/run/expedition.view.js",
+        "game/src/core/map-node-state.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/agent/agent.js",
+        "game/src/ui/quick-nav.js",
+        "game/src/experience/pocket-strip.js",
+        "game/src/run/game.session.browser.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "rawBytes": 34828,
+      "minifiedBytes": 20491,
+      "individualGzipBytes": 8180,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/cards/card-instance.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/run/game.run.data.js",
+        "game/src/core/random.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/random-core.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/core/turbo.js",
+        "game/src/ui/transition-diagnostic-policy.js",
+        "game/src/core/motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/transition-preparation.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/node-scene-view.js",
+        "game/css/entry-events.css",
+        "game/css/expedition-transitions.css"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "rawBytes": 59565,
+      "minifiedBytes": 25940,
+      "individualGzipBytes": 8036,
+      "staticImports": [
+        "game/src/cards/cards.consts.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "rawBytes": 55570,
+      "minifiedBytes": 17645,
+      "individualGzipBytes": 7093,
+      "staticImports": [
+        "game/src/core/random.js",
+        "game/src/agent/agent.weights.js",
+        "game/src/battle/bag/battle.slam-skill.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "rawBytes": 43074,
+      "minifiedBytes": 17783,
+      "individualGzipBytes": 7051,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/hub/base-state.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/collection-protection.js",
+        "game/src/hub/slot-write-lock.js"
+      ]
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "rawBytes": 30801,
+      "minifiedBytes": 14299,
+      "individualGzipBytes": 6305,
+      "staticImports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.primitives.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/node-info.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/run/expedition.view.js"
+      ]
+    },
+    {
+      "path": "game/src/generated/art-manifest.js",
+      "rawBytes": 43051,
+      "minifiedBytes": 39783,
+      "individualGzipBytes": 5953,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "rawBytes": 31800,
+      "minifiedBytes": 15544,
+      "individualGzipBytes": 5536,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/motion.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-draw-explanation.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/hud.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "rawBytes": 28156,
+      "minifiedBytes": 15116,
+      "individualGzipBytes": 5338,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/rule-config.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/core/random.js",
+        "game/src/core/event-bus.js",
+        "game/src/run/game.run.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/chest-reward-save.js"
+      ]
+    },
+    {
+      "path": "game/src/core/art.js",
+      "rawBytes": 32824,
+      "minifiedBytes": 13262,
+      "individualGzipBytes": 5337,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/characters.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/data-loader.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/core/shared.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/performance-settings.js",
+        "game/src/core/image-decode.js",
+        "game/src/core/art-preload-plan.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "rawBytes": 26358,
+      "minifiedBytes": 15094,
+      "individualGzipBytes": 5044,
+      "staticImports": [
+        "game/src/hub/commands.shared.js",
+        "game/src/core/rule-config.js",
+        "game/src/hub/meta-progression.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "rawBytes": 17272,
+      "minifiedBytes": 11833,
+      "individualGzipBytes": 4768,
+      "staticImports": [
+        "game/src/ui/terminal-settlement.js",
+        "game/src/core/characters.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/extraction-rewards-view.js",
+      "rawBytes": 13851,
+      "minifiedBytes": 13725,
+      "individualGzipBytes": 4763,
+      "staticImports": [
+        "game/src/ui/ui-disclosure.js",
+        "game/src/core/shared.js",
+        "game/css/extraction-rewards.css"
+      ]
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "rawBytes": 15622,
+      "minifiedBytes": 11004,
+      "individualGzipBytes": 4690,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/run/route-choice-preview.js",
+        "game/src/core/node-info.js",
+        "game/src/core/map-node-state.js",
+        "game/css/map-node-status.css",
+        "game/src/core/map-node-art.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/map-travel-path.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "rawBytes": 19021,
+      "minifiedBytes": 10060,
+      "individualGzipBytes": 4397,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/core/random.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/turbo.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/map-travel-motion.js",
+        "game/src/ui/map-passage.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/event-lifecycle.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/game.run.resources.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "rawBytes": 17489,
+      "minifiedBytes": 12044,
+      "individualGzipBytes": 4394,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-generation-rules.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "rawBytes": 28158,
+      "minifiedBytes": 12387,
+      "individualGzipBytes": 4370,
+      "staticImports": [
+        "game/src/ui/motion-transitions.js",
+        "game/src/ui/overlay-return-state.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "rawBytes": 16865,
+      "minifiedBytes": 13076,
+      "individualGzipBytes": 4339,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/ui/ui-scale.js"
+      ]
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "rawBytes": 23484,
+      "minifiedBytes": 13368,
+      "individualGzipBytes": 4337,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/surface-motion.js",
+      "rawBytes": 22603,
+      "minifiedBytes": 16500,
+      "individualGzipBytes": 4277,
+      "staticImports": [
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/target-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "rawBytes": 18782,
+      "minifiedBytes": 9824,
+      "individualGzipBytes": 4266,
+      "staticImports": [
+        "game/src/core/runtime-trace-stages.local.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/storage.js",
+        "game/src/ui/page-loading.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/meta.js",
+      "rawBytes": 19441,
+      "minifiedBytes": 10726,
+      "individualGzipBytes": 3986,
+      "staticImports": [
+        "game/src/core/data-loader.js",
+        "game/src/core/characters.js",
+        "game/src/core/random.js",
+        "game/src/hub/meta-progression.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "rawBytes": 15082,
+      "minifiedBytes": 10227,
+      "individualGzipBytes": 3920,
+      "staticImports": [
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/map-image-ready.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "rawBytes": 23965,
+      "minifiedBytes": 9557,
+      "individualGzipBytes": 3847,
+      "staticImports": [
+        "game/src/core/random-core.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-route-v2.js",
+      "rawBytes": 15393,
+      "minifiedBytes": 9103,
+      "individualGzipBytes": 3823,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/random-core.js",
+        "game/src/run/map-generation-rules.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "rawBytes": 11529,
+      "minifiedBytes": 9558,
+      "individualGzipBytes": 3677,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/css/bag-design-system.css",
+        "game/src/hub/game.bag.rules.js",
+        "game/css/feedback-1018.css"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.rules.js",
+      "rawBytes": 13643,
+      "minifiedBytes": 9879,
+      "individualGzipBytes": 3657,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/card-capacity.js",
+        "game/src/ui/reward-scene-view.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "rawBytes": 19156,
+      "minifiedBytes": 8978,
+      "individualGzipBytes": 3381,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.recorder.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "rawBytes": 11245,
+      "minifiedBytes": 8442,
+      "individualGzipBytes": 3303,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.js"
+      ]
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "rawBytes": 12061,
+      "minifiedBytes": 8018,
+      "individualGzipBytes": 3242,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/run/event-commands.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/card-result-feedback.js",
+      "rawBytes": 11221,
+      "minifiedBytes": 7149,
+      "individualGzipBytes": 3142,
+      "staticImports": [
+        "game/src/ui/feedback-theme.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/reward-acquisition-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "rawBytes": 12950,
+      "minifiedBytes": 6796,
+      "individualGzipBytes": 3010,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/ui/term-tips.js",
+        "game/src/core/shared.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/cards/card-frame-presentation.js"
+      ]
+    },
+    {
+      "path": "game/src/core/flight-recorder.local.js",
+      "rawBytes": 10299,
+      "minifiedBytes": 6586,
+      "individualGzipBytes": 2964,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/recovery.commands.js",
+      "rawBytes": 12569,
+      "minifiedBytes": 8233,
+      "individualGzipBytes": 2886,
+      "staticImports": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/commands.shared.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "rawBytes": 18342,
+      "minifiedBytes": 6918,
+      "individualGzipBytes": 2862,
+      "staticImports": [
+        "game/src/cards/cards.consts.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/builtin-card-numeric-fields.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-semantic-contract.js",
+      "rawBytes": 12094,
+      "minifiedBytes": 8096,
+      "individualGzipBytes": 2816,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "rawBytes": 13963,
+      "minifiedBytes": 7190,
+      "individualGzipBytes": 2719,
+      "staticImports": [
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/target-motion.js",
+        "game/src/ui/card-state-motion.js",
+        "game/src/ui/selection-state-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-card-execution.js",
+      "rawBytes": 12059,
+      "minifiedBytes": 8097,
+      "individualGzipBytes": 2680,
+      "staticImports": [
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-card-previous-variants.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "rawBytes": 11236,
+      "minifiedBytes": 6697,
+      "individualGzipBytes": 2661,
+      "staticImports": [
+        "game/css/camp-entry.css",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/ui/general-transition.js"
+      ]
+    },
+    {
+      "path": "game/src/core/icons-bitmap.js",
+      "rawBytes": 8223,
+      "minifiedBytes": 5360,
+      "individualGzipBytes": 2660,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/shared.js",
+        "game/src/core/icon-hydration.js"
+      ]
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "rawBytes": 14874,
+      "minifiedBytes": 6201,
+      "individualGzipBytes": 2635,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/asset-url.js",
+        "game/src/audio/sound.samples.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.diagnostic-policy.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "rawBytes": 7929,
+      "minifiedBytes": 6402,
+      "individualGzipBytes": 2615,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js"
+      ]
+    },
+    {
+      "path": "game/src/run/shop-commission.js",
+      "rawBytes": 7509,
+      "minifiedBytes": 6287,
+      "individualGzipBytes": 2573,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/ui/event-dice.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/run/shop-commands.js",
+        "game/src/run/shop-commands.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.action-router.js",
+      "rawBytes": 9709,
+      "minifiedBytes": 5798,
+      "individualGzipBytes": 2538,
+      "staticImports": [
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.state.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.session.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "rawBytes": 15871,
+      "minifiedBytes": 5775,
+      "individualGzipBytes": 2525,
+      "staticImports": [
+        "game/src/core/random.js",
+        "game/src/agent/agent.battle-stats.js"
+      ]
+    },
+    {
+      "path": "game/src/generated/thumb-manifest.js",
+      "rawBytes": 12435,
+      "minifiedBytes": 11253,
+      "individualGzipBytes": 2484,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "rawBytes": 19795,
+      "minifiedBytes": 6215,
+      "individualGzipBytes": 2449,
+      "staticImports": [
+        "game/src/core/random.js",
+        "game/src/cards/rot-seed-revision.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/cards/cards.sync.m1.js",
+        "game/src/cards/cards.sync.m2.js",
+        "game/src/cards/cards.sync.m3.js",
+        "game/src/cards/cards.sync.m4.js",
+        "game/src/cards/cards.sync.m5.js",
+        "game/src/cards/cards.sync.m6.js",
+        "game/src/cards/cards.sync.m7.js",
+        "game/src/cards/cards.sync.m8.js",
+        "game/src/cards/cards.sync.face-refresh.js",
+        "game/src/cards/cards.sync.m9.js",
+        "game/src/cards/cards.sync.m10.js",
+        "game/src/cards/cards.sync.m11.js",
+        "game/src/cards/cards.sync.builtin.js",
+        "game/src/cards/card-rules.schema.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-generator-v4.js",
+      "rawBytes": 9614,
+      "minifiedBytes": 4924,
+      "individualGzipBytes": 2447,
+      "staticImports": [
+        "game/src/run/map-generator.js",
+        "game/src/core/random-core.js",
+        "game/src/core/shared.js",
+        "game/src/run/map-generation-rules.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.js",
+      "rawBytes": 16283,
+      "minifiedBytes": 8687,
+      "individualGzipBytes": 2415,
+      "staticImports": [
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/battle-victory-progress.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.drag.js",
+      "rawBytes": 10974,
+      "minifiedBytes": 5632,
+      "individualGzipBytes": 2387,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/card-capacity.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/home-fx.js",
+      "rawBytes": 9217,
+      "minifiedBytes": 5821,
+      "individualGzipBytes": 2384,
+      "staticImports": [
+        "game/src/ui/interface-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "rawBytes": 15536,
+      "minifiedBytes": 5816,
+      "individualGzipBytes": 2325,
+      "staticImports": [
+        "game/src/core/characters.js",
+        "game/src/hub/versioned-slot-reader.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.resources.js",
+      "rawBytes": 6176,
+      "minifiedBytes": 4494,
+      "individualGzipBytes": 2265,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/random.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/ui/reward-scene-view.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "rawBytes": 12385,
+      "minifiedBytes": 5297,
+      "individualGzipBytes": 2265,
+      "staticImports": [
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-semantic-contract.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/reward-scene-view.js",
+      "rawBytes": 7949,
+      "minifiedBytes": 5157,
+      "individualGzipBytes": 2205,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/run/event-lifecycle.js",
+      "rawBytes": 9210,
+      "minifiedBytes": 5345,
+      "individualGzipBytes": 2195,
+      "staticImports": [
+        "game/src/core/run-checkpoint.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-entry-cancellation.js"
+      ]
+    },
+    {
+      "path": "game/src/core/camera.js",
+      "rawBytes": 10954,
+      "minifiedBytes": 5956,
+      "individualGzipBytes": 2135,
+      "staticImports": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/map-drag-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-card-field-defaults.js",
+      "rawBytes": 8988,
+      "minifiedBytes": 7200,
+      "individualGzipBytes": 2097,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/home-menu-motion.js",
+      "rawBytes": 9811,
+      "minifiedBytes": 5475,
+      "individualGzipBytes": 2086,
+      "staticImports": [
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/motion-presets.js",
+        "game/css/home-ui-tokens.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/reward-acquisition-motion.js",
+      "rawBytes": 7526,
+      "minifiedBytes": 4311,
+      "individualGzipBytes": 1992,
+      "staticImports": [
+        "game/src/ui/target-motion.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/feedback-theme.js",
+        "game/css/card-state-motion.css"
+      ]
+    },
+    {
+      "path": "game/src/hub/departure-persistence.js",
+      "rawBytes": 6249,
+      "minifiedBytes": 4291,
+      "individualGzipBytes": 1961,
+      "staticImports": [
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/slot-write-lock.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/page-visual-ready.js",
+      "rawBytes": 7980,
+      "minifiedBytes": 4510,
+      "individualGzipBytes": 1937,
+      "staticImports": [
+        "game/src/core/runtime-trace-stages.local.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-visual-readiness-sharing.js",
+        "game/src/ui/motion-presets.js",
+        "game/css/page-visual-ready.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/chest-reward-overview.js",
+      "rawBytes": 5567,
+      "minifiedBytes": 4797,
+      "individualGzipBytes": 1899,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/css/chest-reward-overview.css",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/reward-scene-view.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/reward-capacity-organizer.js",
+      "rawBytes": 5717,
+      "minifiedBytes": 4391,
+      "individualGzipBytes": 1890,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/ui/reward-scene-view.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/node-scene-view.js",
+      "rawBytes": 4876,
+      "minifiedBytes": 3752,
+      "individualGzipBytes": 1884,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/css/archive-back.css",
+        "game/css/event-choice-feedback.css"
+      ]
+    },
+    {
+      "path": "game/src/battle/runes.js",
+      "rawBytes": 6627,
+      "minifiedBytes": 5135,
+      "individualGzipBytes": 1880,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/node-decision-view.js",
+      "rawBytes": 3934,
+      "minifiedBytes": 4996,
+      "individualGzipBytes": 1792,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js",
+        "game/src/ui/ui-decision.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/event-dice.js",
+      "rawBytes": 4950,
+      "minifiedBytes": 3609,
+      "individualGzipBytes": 1749,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/random.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/run-checkpoint.js",
+        "game/css/event-dice.css"
+      ]
+    },
+    {
+      "path": "game/src/hub/terminal.commands.js",
+      "rawBytes": 7630,
+      "minifiedBytes": 4632,
+      "individualGzipBytes": 1707,
+      "staticImports": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/commands.shared.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/page-motion-profiles.js",
+      "rawBytes": 6245,
+      "minifiedBytes": 4761,
+      "individualGzipBytes": 1696,
+      "staticImports": [
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/bag-pane-view.js",
+      "rawBytes": 7748,
+      "minifiedBytes": 4457,
+      "individualGzipBytes": 1684,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/target-motion.js",
+      "rawBytes": 6783,
+      "minifiedBytes": 3505,
+      "individualGzipBytes": 1628,
+      "staticImports": [
+        "game/src/ui/motion-presets.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-card-identities.js",
+      "rawBytes": 4417,
+      "minifiedBytes": 3896,
+      "individualGzipBytes": 1617,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/map-node-state.js",
+      "rawBytes": 4494,
+      "minifiedBytes": 3546,
+      "individualGzipBytes": 1603,
+      "staticImports": [
+        "game/src/run/node-restore-state.js"
+      ]
+    },
+    {
+      "path": "game/src/run/chest-reward-save.js",
+      "rawBytes": 7129,
+      "minifiedBytes": 4123,
+      "individualGzipBytes": 1600,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/audio/sound.music.player.js",
+      "rawBytes": 8429,
+      "minifiedBytes": 4886,
+      "individualGzipBytes": 1599,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/nest-settlement.commands.js",
+      "rawBytes": 9761,
+      "minifiedBytes": 4769,
+      "individualGzipBytes": 1592,
+      "staticImports": [
+        "game/src/hub/commands.shared.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.container-store.view.js",
+      "rawBytes": 4285,
+      "minifiedBytes": 3715,
+      "individualGzipBytes": 1564,
+      "staticImports": [
+        "game/css/battle-decision.css",
+        "game/css/container-store.css",
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/recoverable-pair.js",
+      "rawBytes": 8591,
+      "minifiedBytes": 4133,
+      "individualGzipBytes": 1560,
+      "staticImports": [
+        "game/src/hub/commands.shared.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/page-loading.js",
+      "rawBytes": 5861,
+      "minifiedBytes": 3044,
+      "individualGzipBytes": 1543,
+      "staticImports": [
+        "game/src/core/motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/css/page-loading.css",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/page-surface-lifetime.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/route-overlay.js",
+      "rawBytes": 8192,
+      "minifiedBytes": 3187,
+      "individualGzipBytes": 1497,
+      "staticImports": [
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.js",
+      "rawBytes": 5252,
+      "minifiedBytes": 3283,
+      "individualGzipBytes": 1496,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-generation-rules.js",
+      "rawBytes": 6297,
+      "minifiedBytes": 3525,
+      "individualGzipBytes": 1475,
+      "staticImports": [
+        "game/src/run/map-generator.js"
+      ]
+    },
+    {
+      "path": "game/src/run/node-reward-state.js",
+      "rawBytes": 5893,
+      "minifiedBytes": 3655,
+      "individualGzipBytes": 1453,
+      "staticImports": [
+        "game/src/run/node-restore-state.js"
+      ]
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "rawBytes": 4706,
+      "minifiedBytes": 2971,
+      "individualGzipBytes": 1452,
+      "staticImports": [
+        "game/src/core/asset-url.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/turbo.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "rawBytes": 5459,
+      "minifiedBytes": 3425,
+      "individualGzipBytes": 1448,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/card-browser.css",
+        "game/css/inventory-zoom.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css",
+        "game/src/hub/departure.selection-state.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.bag.js",
+      "rawBytes": 6003,
+      "minifiedBytes": 2895,
+      "individualGzipBytes": 1446,
+      "staticImports": [
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/bag-render-derivation.js",
+        "game/src/cards/card-instance.js",
+        "game/src/core/card-capacity.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.cardslib.js",
+      "rawBytes": 6530,
+      "minifiedBytes": 3258,
+      "individualGzipBytes": 1443,
+      "staticImports": [
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/ui/surface-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/card-state-motion.js",
+      "rawBytes": 5388,
+      "minifiedBytes": 3155,
+      "individualGzipBytes": 1443,
+      "staticImports": [
+        "game/src/ui/target-motion.js",
+        "game/src/ui/motion-presets.js",
+        "game/css/card-state-motion.css"
+      ]
+    },
+    {
+      "path": "game/src/core/diagnostics.local.js",
+      "rawBytes": 7556,
+      "minifiedBytes": 3275,
+      "individualGzipBytes": 1427,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/cinematics.js",
+      "rawBytes": 8608,
+      "minifiedBytes": 3386,
+      "individualGzipBytes": 1419,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/ui/rarity-reveal.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-description-links.js",
+      "rawBytes": 4563,
+      "minifiedBytes": 2519,
+      "individualGzipBytes": 1399,
+      "staticImports": [
+        "game/src/cards/cards.view.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/ui/term-tips.js",
+        "game/src/core/shared.js",
+        "game/css/card-description-links.css"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "rawBytes": 5248,
+      "minifiedBytes": 2881,
+      "individualGzipBytes": 1381,
+      "staticImports": [
+        "game/src/agent/agent.action-router.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.run-control.js",
+        "game/src/core/turbo.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.run.dev-loader.js",
+      "rawBytes": 5051,
+      "minifiedBytes": 2946,
+      "individualGzipBytes": 1355,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/ui/page-entry-cancellation.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-execution-plan.js",
+      "rawBytes": 6965,
+      "minifiedBytes": 2759,
+      "individualGzipBytes": 1324,
+      "staticImports": [
+        "game/src/cards/card-trigger-contract.js"
+      ]
+    },
+    {
+      "path": "game/src/run/event-commands.js",
+      "rawBytes": 6792,
+      "minifiedBytes": 2615,
+      "individualGzipBytes": 1322,
+      "staticImports": [
+        "game/src/run/event-recode-candidates.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.map.js",
+      "rawBytes": 5627,
+      "minifiedBytes": 2732,
+      "individualGzipBytes": 1312,
+      "staticImports": [
+        "game/src/core/random.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/game.session.kernel.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "rawBytes": 12420,
+      "minifiedBytes": 3610,
+      "individualGzipBytes": 1312,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/selection-state-motion.js",
+      "rawBytes": 5267,
+      "minifiedBytes": 2706,
+      "individualGzipBytes": 1310,
+      "staticImports": [
+        "game/css/selection-state-motion.css",
+        "game/src/ui/target-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/hud.js",
+      "rawBytes": 9154,
+      "minifiedBytes": 2901,
+      "individualGzipBytes": 1298,
+      "staticImports": [
+        "game/src/ui/map-health-hud.js",
+        "game/src/core/storage.js",
+        "game/src/run/expedition.view.js"
+      ]
+    },
+    {
+      "path": "game/src/audio/sound.samples.catalog.js",
+      "rawBytes": 10044,
+      "minifiedBytes": 8710,
+      "individualGzipBytes": 1277,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/shop-commands.js",
+      "rawBytes": 5995,
+      "minifiedBytes": 2877,
+      "individualGzipBytes": 1251,
+      "staticImports": [
+        "game/src/core/run-checkpoint.js",
+        "game/src/cards/card-instance.js"
+      ]
+    },
+    {
+      "path": "game/src/core/notes.js",
+      "rawBytes": 6028,
+      "minifiedBytes": 4024,
+      "individualGzipBytes": 1251,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/run-save-validation.js",
+      "rawBytes": 5202,
+      "minifiedBytes": 2971,
+      "individualGzipBytes": 1240,
+      "staticImports": [
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/node-reward-state.js"
+      ]
+    },
+    {
+      "path": "game/src/core/node-info.js",
+      "rawBytes": 2246,
+      "minifiedBytes": 2389,
+      "individualGzipBytes": 1238,
+      "staticImports": [
+        "game/src/core/map-node-state.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-brush-art.js",
+      "rawBytes": 4465,
+      "minifiedBytes": 2434,
+      "individualGzipBytes": 1224,
+      "staticImports": [
+        "game/src/core/map-image-ready.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/map-health-hud.js",
+      "rawBytes": 4330,
+      "minifiedBytes": 2632,
+      "individualGzipBytes": 1222,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "rawBytes": 8270,
+      "minifiedBytes": 2824,
+      "individualGzipBytes": 1222,
+      "staticImports": [
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-rules.capability.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.board.js",
+      "rawBytes": 5355,
+      "minifiedBytes": 2381,
+      "individualGzipBytes": 1210,
+      "staticImports": [
+        "game/src/run/game.session.kernel.js",
+        "game/src/core/map-reveals.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-drag-motion.js",
+      "rawBytes": 4884,
+      "minifiedBytes": 2182,
+      "individualGzipBytes": 1208,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/terminal-settlement.js",
+      "rawBytes": 5907,
+      "minifiedBytes": 2417,
+      "individualGzipBytes": 1189,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/core/rule-config.js",
+      "rawBytes": 5452,
+      "minifiedBytes": 3057,
+      "individualGzipBytes": 1179,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/agent/agent.protocol.js",
+      "rawBytes": 5175,
+      "minifiedBytes": 2692,
+      "individualGzipBytes": 1143,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/map-passage.js",
+      "rawBytes": 3814,
+      "minifiedBytes": 2247,
+      "individualGzipBytes": 1138,
+      "staticImports": [
+        "game/src/core/motion.js",
+        "game/src/core/turbo.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/css/map-passage.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/quick-nav.js",
+      "rawBytes": 3682,
+      "minifiedBytes": 2555,
+      "individualGzipBytes": 1130,
+      "staticImports": [
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.cardslib.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/versioned-slot-reader.js",
+      "rawBytes": 6988,
+      "minifiedBytes": 2339,
+      "individualGzipBytes": 1128,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "rawBytes": 6208,
+      "minifiedBytes": 2204,
+      "individualGzipBytes": 1105,
+      "staticImports": [
+        "game/src/core/motion.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-execution.js",
+      "rawBytes": 2982,
+      "minifiedBytes": 2283,
+      "individualGzipBytes": 1074,
+      "staticImports": [
+        "game/src/cards/builtin-equipment-previous-rules.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-state.js",
+      "rawBytes": 6728,
+      "minifiedBytes": 2456,
+      "individualGzipBytes": 1068,
+      "staticImports": [
+        "game/src/core/characters.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.llm.js",
+      "rawBytes": 4087,
+      "minifiedBytes": 1942,
+      "individualGzipBytes": 1049,
+      "staticImports": [
+        "game/src/agent/agent.llm-parser.js",
+        "game/src/agent/agent.policy.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-card-previous-rules.js",
+      "rawBytes": 7355,
+      "minifiedBytes": 3844,
+      "individualGzipBytes": 1034,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/audio/sound.samples.player.js",
+      "rawBytes": 3569,
+      "minifiedBytes": 2185,
+      "individualGzipBytes": 1012,
+      "staticImports": [
+        "game/src/audio/sound.samples.catalog.js",
+        "game/src/audio/sound.policy.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.battle-stats.js",
+      "rawBytes": 3158,
+      "minifiedBytes": 1816,
+      "individualGzipBytes": 1002,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/agent/agent.surface.js",
+      "rawBytes": 5908,
+      "minifiedBytes": 2128,
+      "individualGzipBytes": 996,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/map-travel-path.js",
+      "rawBytes": 3851,
+      "minifiedBytes": 1850,
+      "individualGzipBytes": 990,
+      "staticImports": [
+        "game/src/core/map-node-state.js",
+        "game/src/run/node-reward-state.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-meta.commands.js",
+      "rawBytes": 6780,
+      "minifiedBytes": 2135,
+      "individualGzipBytes": 976,
+      "staticImports": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ]
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "rawBytes": 2968,
+      "minifiedBytes": 2056,
+      "individualGzipBytes": 961,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/performance-settings.js",
+      "rawBytes": 2616,
+      "minifiedBytes": 2131,
+      "individualGzipBytes": 960,
+      "staticImports": [
+        "game/src/core/storage.js",
+        "game/css/performance-settings.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/startup-transition.js",
+      "rawBytes": 3013,
+      "minifiedBytes": 1871,
+      "individualGzipBytes": 950,
+      "staticImports": [
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/css/startup-transition.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/home-layers.js",
+      "rawBytes": 2534,
+      "minifiedBytes": 1978,
+      "individualGzipBytes": 946,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/map-travel-motion.js",
+      "rawBytes": 2936,
+      "minifiedBytes": 1698,
+      "individualGzipBytes": 940,
+      "staticImports": [
+        "game/src/run/map-travel-path.js",
+        "game/src/core/motion-primitives.js"
+      ]
+    },
+    {
+      "path": "game/src/run/chest-opening-art.js",
+      "rawBytes": 3896,
+      "minifiedBytes": 3304,
+      "individualGzipBytes": 930,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/css/chest-opening.css"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.stats.js",
+      "rawBytes": 4173,
+      "minifiedBytes": 1892,
+      "individualGzipBytes": 923,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/bag-render-derivation.js",
+      "rawBytes": 3239,
+      "minifiedBytes": 1640,
+      "individualGzipBytes": 921,
+      "staticImports": [
+        "game/src/core/card-capacity.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "rawBytes": 8427,
+      "minifiedBytes": 2413,
+      "individualGzipBytes": 920,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/battle/battle-loader.js",
+      "rawBytes": 4074,
+      "minifiedBytes": 1999,
+      "individualGzipBytes": 918,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/diagnostics.local.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/home-linked-interactions.js",
+      "rawBytes": 2903,
+      "minifiedBytes": 1680,
+      "individualGzipBytes": 898,
+      "staticImports": [
+        "game/css/home-linked-interactions.css",
+        "game/src/ui/motion-presets.js",
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/run/node-restore-state.js",
+      "rawBytes": 2890,
+      "minifiedBytes": 1772,
+      "individualGzipBytes": 863,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/structured-card-description.js",
+      "rawBytes": 2928,
+      "minifiedBytes": 1629,
+      "individualGzipBytes": 857,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/game.session.kernel.js",
+      "rawBytes": 3716,
+      "minifiedBytes": 1423,
+      "individualGzipBytes": 851,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/mapData.js",
+        "game/src/hub/game.store.js",
+        "game/src/core/random.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/slot-write-lock.js",
+      "rawBytes": 1836,
+      "minifiedBytes": 1371,
+      "individualGzipBytes": 840,
+      "staticImports": [
+        "game/src/hub/commands.shared.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m7.js",
+      "rawBytes": 4007,
+      "minifiedBytes": 2215,
+      "individualGzipBytes": 835,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/fire-rest-view.js",
+      "rawBytes": 1431,
+      "minifiedBytes": 1694,
+      "individualGzipBytes": 834,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js"
+      ]
+    },
+    {
+      "path": "game/src/run/shop-browse-state.js",
+      "rawBytes": 2903,
+      "minifiedBytes": 1771,
+      "individualGzipBytes": 821,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/expedition-feedback.js",
+      "rawBytes": 2014,
+      "minifiedBytes": 1397,
+      "individualGzipBytes": 812,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/experience/pocket-strip.js",
+      "rawBytes": 3619,
+      "minifiedBytes": 1441,
+      "individualGzipBytes": 811,
+      "staticImports": [
+        "game/css/pocket-strip.css",
+        "game/src/run/encounter-meta.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-departure.commands.js",
+      "rawBytes": 4486,
+      "minifiedBytes": 1596,
+      "individualGzipBytes": 808,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "rawBytes": 2856,
+      "minifiedBytes": 2425,
+      "individualGzipBytes": 805,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/card-capacity.js",
+      "rawBytes": 3122,
+      "minifiedBytes": 1503,
+      "individualGzipBytes": 796,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.m9.js",
+      "rawBytes": 3104,
+      "minifiedBytes": 1538,
+      "individualGzipBytes": 778,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/cover-context.js",
+      "rawBytes": 2753,
+      "minifiedBytes": 1532,
+      "individualGzipBytes": 770,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/page-visual-readiness-sharing.js",
+      "rawBytes": 2867,
+      "minifiedBytes": 1381,
+      "individualGzipBytes": 748,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/inventory-zoom.js",
+      "rawBytes": 1646,
+      "minifiedBytes": 1331,
+      "individualGzipBytes": 746,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/cards/card-battle-start-explanation.js",
+        "game/src/cards/cards.view.js",
+        "game/css/inventory-zoom.css"
+      ]
+    },
+    {
+      "path": "game/src/run/encounter-selector.js",
+      "rawBytes": 3591,
+      "minifiedBytes": 1828,
+      "individualGzipBytes": 744,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/game.store.js",
+      "rawBytes": 2844,
+      "minifiedBytes": 1482,
+      "individualGzipBytes": 743,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.weights.js",
+      "rawBytes": 6702,
+      "minifiedBytes": 1252,
+      "individualGzipBytes": 740,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/base-economy.js",
+      "rawBytes": 4555,
+      "minifiedBytes": 1321,
+      "individualGzipBytes": 725,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/agent/agent.scenes.js",
+      "rawBytes": 3408,
+      "minifiedBytes": 1230,
+      "individualGzipBytes": 722,
+      "staticImports": [
+        "game/src/agent/agent.scenes.catalog.js"
+      ]
+    },
+    {
+      "path": "game/src/run/game.session.modes.js",
+      "rawBytes": 1591,
+      "minifiedBytes": 1252,
+      "individualGzipBytes": 707,
+      "staticImports": [
+        "game/src/run/game.session.kernel.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "rawBytes": 2157,
+      "minifiedBytes": 1201,
+      "individualGzipBytes": 703,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-choice-execution.js",
+      "rawBytes": 1413,
+      "minifiedBytes": 1313,
+      "individualGzipBytes": 700,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/audio/sound.policy.js",
+      "rawBytes": 2487,
+      "minifiedBytes": 1364,
+      "individualGzipBytes": 696,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "rawBytes": 3125,
+      "minifiedBytes": 1705,
+      "individualGzipBytes": 692,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/core/turbo.js",
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.llm.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/agent/agent.scenes.js",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.replay.js"
+      ]
+    },
+    {
+      "path": "game/src/core/input.js",
+      "rawBytes": 2953,
+      "minifiedBytes": 1272,
+      "individualGzipBytes": 689,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/core/motion.js",
+      "rawBytes": 2548,
+      "minifiedBytes": 1250,
+      "individualGzipBytes": 687,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/css/combat-feedback.css"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.consts.js",
+      "rawBytes": 6057,
+      "minifiedBytes": 1536,
+      "individualGzipBytes": 678,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/reward-card-feedback.js",
+      "rawBytes": 1933,
+      "minifiedBytes": 1159,
+      "individualGzipBytes": 676,
+      "staticImports": [
+        "game/css/reward-completion-receipt.css",
+        "game/src/ui/card-result-feedback.js",
+        "game/src/ui/reward-state.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/character-idle.js",
+      "rawBytes": 2476,
+      "minifiedBytes": 1282,
+      "individualGzipBytes": 675,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m8.js",
+      "rawBytes": 3389,
+      "minifiedBytes": 1979,
+      "individualGzipBytes": 671,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/overlay-return-state.js",
+      "rawBytes": 2727,
+      "minifiedBytes": 1280,
+      "individualGzipBytes": 665,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/game.reward-organizer.js",
+      "rawBytes": 1689,
+      "minifiedBytes": 1090,
+      "individualGzipBytes": 664,
+      "staticImports": [
+        "game/src/core/card-capacity.js",
+        "game/src/ui/reward-capacity-organizer.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/pierce-arrow-revision.js",
+      "rawBytes": 1614,
+      "minifiedBytes": 1002,
+      "individualGzipBytes": 651,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/title-wallpaper.js",
+      "rawBytes": 1732,
+      "minifiedBytes": 1198,
+      "individualGzipBytes": 645,
+      "staticImports": [
+        "game/src/core/storage.js",
+        "game/src/ui/home-menu-motion.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/game.bag.token-craft.js",
+      "rawBytes": 1607,
+      "minifiedBytes": 1447,
+      "individualGzipBytes": 643,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.m6.js",
+      "rawBytes": 6144,
+      "minifiedBytes": 1694,
+      "individualGzipBytes": 637,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/core/art-preload-plan.js",
+      "rawBytes": 2241,
+      "minifiedBytes": 1034,
+      "individualGzipBytes": 622,
+      "staticImports": [
+        "game/data/card-frame-layout.json",
+        "game/src/core/asset-url.js"
+      ]
+    },
+    {
+      "path": "game/src/run/route-choice-preview.js",
+      "rawBytes": 1291,
+      "minifiedBytes": 1166,
+      "individualGzipBytes": 616,
+      "staticImports": [
+        "game/src/run/map-route-v2.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/motion-presets.js",
+      "rawBytes": 1466,
+      "minifiedBytes": 1103,
+      "individualGzipBytes": 601,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "rawBytes": 2772,
+      "minifiedBytes": 1523,
+      "individualGzipBytes": 599,
+      "staticImports": [
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generator-v4.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/reward-state.js",
+      "rawBytes": 1600,
+      "minifiedBytes": 1034,
+      "individualGzipBytes": 595,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/game.run.data.js",
+      "rawBytes": 3142,
+      "minifiedBytes": 1971,
+      "individualGzipBytes": 575,
+      "staticImports": [
+        "game/src/core/data-loader.js",
+        "game/src/core/performance-budgets.js"
+      ]
+    },
+    {
+      "path": "game/src/core/render-scheduler.js",
+      "rawBytes": 2808,
+      "minifiedBytes": 1335,
+      "individualGzipBytes": 552,
+      "staticImports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-frame-presentation.js",
+      "rawBytes": 1517,
+      "minifiedBytes": 814,
+      "individualGzipBytes": 550,
+      "staticImports": [
+        "game/data/card-frame-layout.json",
+        "game/src/core/asset-url.js"
+      ]
+    },
+    {
+      "path": "game/src/run/map-graph.js",
+      "rawBytes": 4079,
+      "minifiedBytes": 999,
+      "individualGzipBytes": 547,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/image-decode.js",
+      "rawBytes": 1992,
+      "minifiedBytes": 1060,
+      "individualGzipBytes": 547,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "rawBytes": 8936,
+      "minifiedBytes": 1403,
+      "individualGzipBytes": 544,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.scenes.catalog.js",
+      "rawBytes": 973,
+      "minifiedBytes": 1301,
+      "individualGzipBytes": 543,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/event-bus.js",
+      "rawBytes": 2627,
+      "minifiedBytes": 895,
+      "individualGzipBytes": 531,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/diagnostics.local.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-card-numeric-fields.js",
+      "rawBytes": 1585,
+      "minifiedBytes": 875,
+      "individualGzipBytes": 528,
+      "staticImports": [
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-field-defaults.js"
+      ]
+    },
+    {
+      "path": "game/src/core/renderer.icons.js",
+      "rawBytes": 2933,
+      "minifiedBytes": 1523,
+      "individualGzipBytes": 521,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.catalog.js",
+      "rawBytes": 1750,
+      "minifiedBytes": 1117,
+      "individualGzipBytes": 520,
+      "staticImports": [
+        "game/src/core/data-loader.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/rot-seed-revision.js",
+      "rawBytes": 909,
+      "minifiedBytes": 732,
+      "individualGzipBytes": 517,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/game.cardslib.common.js",
+      "rawBytes": 2683,
+      "minifiedBytes": 925,
+      "individualGzipBytes": 515,
+      "staticImports": [
+        "game/src/ui/page-entry-cancellation.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m10.js",
+      "rawBytes": 1804,
+      "minifiedBytes": 911,
+      "individualGzipBytes": 513,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/core/renderer.primitives.js",
+      "rawBytes": 1563,
+      "minifiedBytes": 990,
+      "individualGzipBytes": 509,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/navigation-motion.js",
+      "rawBytes": 1388,
+      "minifiedBytes": 883,
+      "individualGzipBytes": 505,
+      "staticImports": [
+        "game/src/ui/motion-presets.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/ui-scale.js",
+      "rawBytes": 2982,
+      "minifiedBytes": 927,
+      "individualGzipBytes": 504,
+      "staticImports": [
+        "game/src/core/sdt-facade.js"
+      ]
+    },
+    {
+      "path": "game/src/core/random-service.js",
+      "rawBytes": 1414,
+      "minifiedBytes": 890,
+      "individualGzipBytes": 502,
+      "staticImports": [
+        "game/src/core/random-core.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/battle-victory-progress.js",
+      "rawBytes": 2960,
+      "minifiedBytes": 860,
+      "individualGzipBytes": 502,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ]
+    },
+    {
+      "path": "game/src/core/icon-hydration.js",
+      "rawBytes": 1751,
+      "minifiedBytes": 871,
+      "individualGzipBytes": 490,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/motion-primitives.js",
+      "rawBytes": 3287,
+      "minifiedBytes": 862,
+      "individualGzipBytes": 481,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/event-recode-candidates.js",
+      "rawBytes": 2129,
+      "minifiedBytes": 790,
+      "individualGzipBytes": 469,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/title-credits.js",
+      "rawBytes": 1458,
+      "minifiedBytes": 848,
+      "individualGzipBytes": 459,
+      "staticImports": [
+        "game/src/ui/home-fx.js",
+        "game/src/ui/home-menu-motion.js",
+        "game/src/ui/home-layers.js",
+        "game/css/title-credits.css",
+        "game/src/ui/home-linked-interactions.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-city-atmosphere.js",
+      "rawBytes": 1345,
+      "minifiedBytes": 684,
+      "individualGzipBytes": 458,
+      "staticImports": [
+        "game/src/core/map-image-ready.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.m1.js",
+      "rawBytes": 4083,
+      "minifiedBytes": 969,
+      "individualGzipBytes": 451,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/archive-motion.js",
+      "rawBytes": 1355,
+      "minifiedBytes": 830,
+      "individualGzipBytes": 450,
+      "staticImports": [
+        "game/css/archive-motion.css"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-progression.commands.js",
+      "rawBytes": 2327,
+      "minifiedBytes": 808,
+      "individualGzipBytes": 419,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/audio/sound.music.catalog.js",
+      "rawBytes": 1250,
+      "minifiedBytes": 790,
+      "individualGzipBytes": 416,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/random.js",
+      "rawBytes": 1061,
+      "minifiedBytes": 703,
+      "individualGzipBytes": 412,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random-service.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-previous-rules.js",
+      "rawBytes": 2650,
+      "minifiedBytes": 1369,
+      "individualGzipBytes": 411,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.face-refresh.js",
+      "rawBytes": 2953,
+      "minifiedBytes": 631,
+      "individualGzipBytes": 411,
+      "staticImports": [
+        "game/src/cards/pierce-arrow-revision.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/page-surface-lifetime.js",
+      "rawBytes": 1330,
+      "minifiedBytes": 649,
+      "individualGzipBytes": 408,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/commands.shared.js",
+      "rawBytes": 2782,
+      "minifiedBytes": 572,
+      "individualGzipBytes": 400,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/core/rules.js",
+      "rawBytes": 1323,
+      "minifiedBytes": 879,
+      "individualGzipBytes": 398,
+      "staticImports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/rule-config.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-trigger-contract.js",
+      "rawBytes": 1711,
+      "minifiedBytes": 715,
+      "individualGzipBytes": 396,
+      "staticImports": [
+        "game/src/cards/builtin-card-execution.js"
+      ]
+    },
+    {
+      "path": "game/src/run/encounter-meta.js",
+      "rawBytes": 1964,
+      "minifiedBytes": 724,
+      "individualGzipBytes": 393,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/base-mutation.js",
+      "rawBytes": 1915,
+      "minifiedBytes": 592,
+      "individualGzipBytes": 392,
+      "staticImports": [
+        "game/src/core/shared.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-reveals.js",
+      "rawBytes": 1889,
+      "minifiedBytes": 615,
+      "individualGzipBytes": 389,
+      "staticImports": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js"
+      ]
+    },
+    {
+      "path": "game/src/core/asset-url.js",
+      "rawBytes": 2342,
+      "minifiedBytes": 540,
+      "individualGzipBytes": 383,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/map-node-glow.js",
+      "rawBytes": 1901,
+      "minifiedBytes": 640,
+      "individualGzipBytes": 382,
+      "staticImports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/meta-progression.js",
+      "rawBytes": 1870,
+      "minifiedBytes": 665,
+      "individualGzipBytes": 379,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "rawBytes": 690,
+      "minifiedBytes": 680,
+      "individualGzipBytes": 379,
+      "staticImports": [
+        "game/src/battle/core/combat.factory.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/photo-studio-presentation.js",
+      "rawBytes": 770,
+      "minifiedBytes": 720,
+      "individualGzipBytes": 363,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/card-draw-explanation.js",
+      "rawBytes": 444,
+      "minifiedBytes": 382,
+      "individualGzipBytes": 356,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/card-battle-start-explanation.js",
+      "rawBytes": 523,
+      "minifiedBytes": 422,
+      "individualGzipBytes": 350,
+      "staticImports": [
+        "game/src/cards/card-trigger-contract.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.llm-parser.js",
+      "rawBytes": 794,
+      "minifiedBytes": 443,
+      "individualGzipBytes": 347,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/game.run.js",
+      "rawBytes": 1231,
+      "minifiedBytes": 739,
+      "individualGzipBytes": 343,
+      "staticImports": [
+        "game/src/run/game.session.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.dev-loader.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/ui-decision.js",
+      "rawBytes": 678,
+      "minifiedBytes": 492,
+      "individualGzipBytes": 330,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/css/ui-design-system.css"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-pet-egg.commands.js",
+      "rawBytes": 2407,
+      "minifiedBytes": 493,
+      "individualGzipBytes": 323,
+      "staticImports": [
+        "game/src/core/rule-config.js"
+      ]
+    },
+    {
+      "path": "game/src/core/map-image-ready.js",
+      "rawBytes": 1125,
+      "minifiedBytes": 569,
+      "individualGzipBytes": 320,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/main.js",
+      "rawBytes": 2259,
+      "minifiedBytes": 1059,
+      "individualGzipBytes": 307,
+      "staticImports": [
+        "game/src/ui/title-credits.js",
+        "game/src/ui/title-wallpaper.js",
+        "game/src/ui/ui-scale.js",
+        "game/src/core/random.js",
+        "game/src/core/rules.js",
+        "game/src/core/mapData.js",
+        "game/src/core/art.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/audio/sound.js",
+        "game/src/core/camera.js",
+        "game/src/core/motion.js",
+        "game/src/core/input.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/notes.js",
+        "game/src/cards/cards.js",
+        "game/src/battle/core/combat.js",
+        "game/src/hub/base.js",
+        "game/src/hub/meta.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.fx.js",
+        "game/src/core/renderer.js",
+        "game/src/ui/ui.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/character-idle.js",
+        "game/src/core/shared.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/run/chests.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/game.boot.js",
+        "game/src/ui/startup-transition.js",
+        "game/src/ui/cover-context.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.sync.builtin.js",
+      "rawBytes": 844,
+      "minifiedBytes": 434,
+      "individualGzipBytes": 304,
+      "staticImports": [
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/card-rules.schema.js"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-instance-fields.js",
+      "rawBytes": 959,
+      "minifiedBytes": 426,
+      "individualGzipBytes": 299,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/performance-budgets.js",
+      "rawBytes": 1508,
+      "minifiedBytes": 427,
+      "individualGzipBytes": 299,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/runtime-trace-stages.local.js",
+      "rawBytes": 902,
+      "minifiedBytes": 489,
+      "individualGzipBytes": 298,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/cards.sync.m4.js",
+      "rawBytes": 5057,
+      "minifiedBytes": 381,
+      "individualGzipBytes": 292,
+      "staticImports": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ]
+    },
+    {
+      "path": "game/src/hub/base-elapsed.commands.js",
+      "rawBytes": 2044,
+      "minifiedBytes": 563,
+      "individualGzipBytes": 290,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/feedback-theme.js",
+      "rawBytes": 468,
+      "minifiedBytes": 356,
+      "individualGzipBytes": 290,
+      "staticImports": [
+        "game/css/feedback-theme.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/transition-preparation.js",
+      "rawBytes": 880,
+      "minifiedBytes": 457,
+      "individualGzipBytes": 279,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/card-instance.js",
+      "rawBytes": 1302,
+      "minifiedBytes": 432,
+      "individualGzipBytes": 278,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/src/cards/card-instance-fields.js"
+      ]
+    },
+    {
+      "path": "game/src/agent/agent.replay.js",
+      "rawBytes": 769,
+      "minifiedBytes": 381,
+      "individualGzipBytes": 271,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/data-loader.js",
+      "rawBytes": 1804,
+      "minifiedBytes": 455,
+      "individualGzipBytes": 259,
+      "staticImports": [
+        "game/data/pets.json",
+        "game/data/achievements.json",
+        "game/data/art-mapping.json",
+        "game/data/scenes.json",
+        "game/data/map.json",
+        "game/data/cards-sync.json"
+      ]
+    },
+    {
+      "path": "game/src/core/random-core.js",
+      "rawBytes": 1529,
+      "minifiedBytes": 356,
+      "individualGzipBytes": 255,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/cards/builtin-card-previous-variants.js",
+      "rawBytes": 509,
+      "minifiedBytes": 358,
+      "individualGzipBytes": 253,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/renderer.fx.js",
+      "rawBytes": 1523,
+      "minifiedBytes": 364,
+      "individualGzipBytes": 245,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/ui-disclosure.js",
+      "rawBytes": 436,
+      "minifiedBytes": 313,
+      "individualGzipBytes": 242,
+      "staticImports": [
+        "game/src/core/shared.js",
+        "game/css/ui-design-system.css"
+      ]
+    },
+    {
+      "path": "game/src/cards/card-rarity.js",
+      "rawBytes": 1591,
+      "minifiedBytes": 374,
+      "individualGzipBytes": 235,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/reward-picker-heading.js",
+      "rawBytes": 492,
+      "minifiedBytes": 275,
+      "individualGzipBytes": 229,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/motion-transitions.js",
+      "rawBytes": 1083,
+      "minifiedBytes": 318,
+      "individualGzipBytes": 224,
+      "staticImports": [
+        "game/src/ui/transitions-director.js"
+      ]
+    },
+    {
+      "path": "game/src/ui/transition-diagnostic-policy.js",
+      "rawBytes": 564,
+      "minifiedBytes": 319,
+      "individualGzipBytes": 223,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/rarity-reveal.js",
+      "rawBytes": 244,
+      "minifiedBytes": 236,
+      "individualGzipBytes": 212,
+      "staticImports": [
+        "game/css/rarity-reveal.css"
+      ]
+    },
+    {
+      "path": "game/src/ui/page-entry-cancellation.js",
+      "rawBytes": 608,
+      "minifiedBytes": 268,
+      "individualGzipBytes": 193,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/turbo.js",
+      "rawBytes": 1354,
+      "minifiedBytes": 261,
+      "individualGzipBytes": 188,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/mapData.js",
+      "rawBytes": 1269,
+      "minifiedBytes": 206,
+      "individualGzipBytes": 180,
+      "staticImports": [
+        "game/src/core/rules.js",
+        "game/src/core/sdt-facade.js",
+        "game/data/map.json"
+      ]
+    },
+    {
+      "path": "game/src/core/shared.js",
+      "rawBytes": 2064,
+      "minifiedBytes": 209,
+      "individualGzipBytes": 180,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/audio/sound.diagnostic-policy.js",
+      "rawBytes": 298,
+      "minifiedBytes": 173,
+      "individualGzipBytes": 156,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/ui/general-transition.js",
+      "rawBytes": 230,
+      "minifiedBytes": 126,
+      "individualGzipBytes": 141,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/sdt-facade.js",
+      "rawBytes": 1092,
+      "minifiedBytes": 138,
+      "individualGzipBytes": 139,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/run/game.session.browser.js",
+      "rawBytes": 540,
+      "minifiedBytes": 133,
+      "individualGzipBytes": 136,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/storage.js",
+      "rawBytes": 1025,
+      "minifiedBytes": 180,
+      "individualGzipBytes": 135,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/bag-return-hook.js",
+      "rawBytes": 762,
+      "minifiedBytes": 148,
+      "individualGzipBytes": 128,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/collection-protection.js",
+      "rawBytes": 259,
+      "minifiedBytes": 121,
+      "individualGzipBytes": 124,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/agent/agent.run-control.js",
+      "rawBytes": 333,
+      "minifiedBytes": 99,
+      "individualGzipBytes": 107,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/core/run-checkpoint.js",
+      "rawBytes": 375,
+      "minifiedBytes": 82,
+      "individualGzipBytes": 97,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/departure.selection-state.js",
+      "rawBytes": 284,
+      "minifiedBytes": 77,
+      "individualGzipBytes": 87,
+      "staticImports": []
+    },
+    {
+      "path": "game/src/hub/game.bag.bridge.js",
+      "rawBytes": 514,
+      "minifiedBytes": 34,
+      "individualGzipBytes": 54,
+      "staticImports": []
+    }
+  ]
+}

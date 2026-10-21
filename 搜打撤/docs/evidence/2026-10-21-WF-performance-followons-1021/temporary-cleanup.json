@@ -1,0 +1,15 @@
+{
+  "authorizedTargets": [
+    "/tmp/sdt-staged-54jWMu",
+    "/tmp/performance-followons-build-20261021"
+  ],
+  "verification": "Exact task-created paths verified against preserved initial staged receipt and failed-build result; final 1607 output hashes and all 28 staged-file hashes verified before removal. Raw receipts/logs and final source/output remain in workspace.",
+  "memoryCause": "Unconfirmed; not asserted as OOM.",
+  "beforeTmpFreeBytes": 3215212544,
+  "removed": [
+    "/tmp/sdt-staged-54jWMu",
+    "/tmp/performance-followons-build-20261021"
+  ],
+  "afterTmpFreeBytes": 5177069568,
+  "reclaimedBytes": 1961857024
+}

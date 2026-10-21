@@ -1,0 +1,30 @@
+{
+  "baseCandidate": "v3",
+  "patchSHA256": "58561fef26ac1244353734a4baafa08335bf2eff412bf5a6c4a63c801251e44e",
+  "files": {
+    "game/src/battle/view/battle.view.js": {
+      "v3SHA256": "05cad4f36e88f4fee1a5943f59350919adb2ae124ad6d8ccfc2f388cab303779",
+      "candidateSHA256": "d055c894886f05638cb43f409f0e9fe8edd91e7645eb079c0a7cf124257d2e07"
+    },
+    "game/src/battle/view/battle.stage-view.js": {
+      "v3SHA256": "9b6f0a2c44c694904d0b9700063a4b316f33fcc7235e6849025bbf0331d56217",
+      "candidateSHA256": "4e8ceaecab7e92929ad2eb294a7c573c5619ec853f5dcb323ea756368dab6b20"
+    },
+    "game/src/r7a.qa.js": {
+      "v3SHA256": "2b203fe77f5d013a0b4068bfbc6286abe6629aa3dbdde22745135b047e4c0ae6",
+      "candidateSHA256": "88e1a5abb6d77d957571f1965a9067771f0b891f47e87ba5bccd1ff37e329e37"
+    },
+    "tests/battle-persistent-stage.test.js": {
+      "v3SHA256": "d3a18f7ea2fa1bd7b28ffacd95e5595364b14e1ec177871a297c853e1b236a47",
+      "candidateSHA256": "4b7e0659bdc69b70b61f3b2967cd1bf82f8010f75b3076eeba477747da0451e2"
+    },
+    "tests/potion-tip-lifecycle.test.js": {
+      "v3SHA256": "43ee8b8d759789b9157247d0c7ba14ea2301ac6ce5506329b3924d3698d8c728",
+      "candidateSHA256": "f48f5405ea23be46205e92ca24b18dec0d12b98f93965c5c64543659e663d0a4"
+    },
+    "tests/r7a-qa-live.test.js": {
+      "v3SHA256": "b288be3c3671ec37afe85b2e2436c2a592a6224d9fc11cd93284c69f8c4b0a6b",
+      "candidateSHA256": "59bcca54113d5148e3861ea298ccd5a7d8cb88a4b553975a3dfa5932d65a5835"
+    }
+  }
+}

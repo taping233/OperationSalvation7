@@ -1,0 +1,59 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/merge-master-b7207a28-type-baseline
+
+ × tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①直接施放可选注能招式：按已注能效果结算（5+注能3+法伤2=10），材料不消耗 133ms
+   → 直释注能卡应按已注能结算（5+3+法伤2=10），实际 7: expected 7 to be 10 // Object.is equality
+ × tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①遇纯注能招式：视为已注能直接施放（不再留手），效果照常结算 74ms
+   → 纯注能牌按已注能结算：回复 7 点生命: expected 50 to be 57 // Object.is equality
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 灰烬符文满手直释：注能卡视为已注能直接释放并按注能效果结算 111ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 定版两处定义与展示文案同步为「发现招式」，抉择标签与招式池一致 2ms
+ ✓ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(a) 神灯第 1 项改为发现招式 > 抉择①发现面板只给招式（武术/法术），装备与道具不进池 154ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①直接施放可选注能招式：按已注能效果结算（5+注能3+法伤2=10），材料不消耗
+AssertionError: 直释注能卡应按已注能结算（5+3+法伤2=10），实际 7: expected 7 to be 10 // Object.is equality
+
+- Expected
++ Received
+
+- 10
++ 7
+
+ ❯ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js:133:59
+    131|     const dealt = hpBefore - snap().foes[0].hp;
+    132|     // 视为已注能 → 注能(1) 的 +3 加成生效：基础 5 + 3 + 法伤 2 = 10
+    133|     expect(dealt, `直释注能卡应按已注能结算（5+3+法伤2=10），实际 ${dealt}`).toBe(10);
+       |                                                           ^
+    134|     expect(logsJoin(g)).toContain('并直接施放');
+    135|     expect(logsJoin(g), '注能卡直释应提示视为已注能').toContain('视为已注能');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js > 反馈#5(b) 直接释放注能卡视为已注能（老板 10-21 定版口径） > 神灯①遇纯注能招式：视为已注能直接施放（不再留手），效果照常结算
+AssertionError: 纯注能牌按已注能结算：回复 7 点生命: expected 50 to be 57 // Object.is equality
+
+- Expected
++ Received
+
+- 57
++ 50
+
+ ❯ tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js:153:41
+    151|     expect(logsJoin(g), '注能卡直释应提示视为已注能').toContain('视为已注能');
+    152|     expect(logsJoin(g), '纯注能牌不再未注能留手').not.toContain('未施放，保留在手牌中等待注能');
+    153|     expect(g.hp, '纯注能牌按已注能结算：回复 7 点生命').toBe(57);
+       |                                         ^
+    154|     expect(s.consumedPile.filter(uid => findCard(uid)?.card.id === PUR…
+    155|     endBattle(g);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  02:47:14
+   Duration  2.28s (transform 574ms, setup 0ms, collect 1.07s, tests 592ms, environment 379ms, prepare 74ms)
+

@@ -1,0 +1,2487 @@
+{
+  "sourceCommit": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "sourceTree": "e89af07b7c0d2e09a871831f4453f2dcb84c9c2f",
+  "baselineManifestGitBlobSha": "03f343407caa266d44e22715e6d400e96aebcc8d",
+  "baselineManifestSha256": "a612d0409b7ab82a876e5844bf6a451898919864de082658a259a92d62491047",
+  "proposedManifestGitBlobSha": "d1b1a641c875e8c6b3d0a0589faf05cc96a27020",
+  "proposedManifestSha256": "1ff80d6ac7dcce5d60c9fa3003396586774bf051fd1426fe6e1e94831265feff",
+  "patchSha256": "c1f4eca5d584588c80012e236463c96b1b943f4526d0cc56f7a2c3cf24da5b3c",
+  "registeredBefore": 1500,
+  "registeredAfter": 1591,
+  "added": 91,
+  "oldEntriesPreserved": true,
+  "sourceAssetsChanged": false,
+  "historicalDebtChanged": false,
+  "runtimeSelectionChanged": false,
+  "allRecordsVerified": true,
+  "sourceBytes": 64799326,
+  "groups": {
+    "chest-original-rig": {
+      "files": 86,
+      "bytes": 64482788
+    },
+    "weather-legacy-webp": {
+      "files": 5,
+      "bytes": 316538
+    }
+  },
+  "records": [
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+      "group": "chest-original-rig",
+      "bytes": 751734,
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "gitBlobSha": "e594ede5bf2211e860072f7495e0c4795454d060",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+        "ext": "webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+      "group": "chest-original-rig",
+      "bytes": 751734,
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "gitBlobSha": "e594ede5bf2211e860072f7495e0c4795454d060",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+        "ext": "webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+      "group": "chest-original-rig",
+      "bytes": 751734,
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "gitBlobSha": "e594ede5bf2211e860072f7495e0c4795454d060",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+        "ext": "webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+      "group": "chest-original-rig",
+      "bytes": 750080,
+      "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+      "gitBlobSha": "20966e850d8d2e875c8a8d1eb439f7d3698eaa89",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+        "ext": "webp",
+        "bytes": 750080,
+        "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+      "group": "chest-original-rig",
+      "bytes": 748088,
+      "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+      "gitBlobSha": "04ca55ada3d26d069a733c5a52d8e6446105a6d7",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+        "ext": "webp",
+        "bytes": 748088,
+        "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+      "group": "chest-original-rig",
+      "bytes": 740294,
+      "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+      "gitBlobSha": "bf7aff8df0dfcf8e4e7d325d31ef8886e91ed8f3",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[5]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+        "ext": "webp",
+        "bytes": 740294,
+        "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+      "group": "chest-original-rig",
+      "bytes": 721984,
+      "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+      "gitBlobSha": "2767c976ff882da955ab62703659e55604571700",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[6]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+        "ext": "webp",
+        "bytes": 721984,
+        "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+      "group": "chest-original-rig",
+      "bytes": 704586,
+      "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+      "gitBlobSha": "3269cf766aad3756d9ba6a86634b377d5fcaa7f7",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[7]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+        "ext": "webp",
+        "bytes": 704586,
+        "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+      "group": "chest-original-rig",
+      "bytes": 672068,
+      "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+      "gitBlobSha": "57b1d237d077e0cffc9ecab176fd59f039769608",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[8]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+        "ext": "webp",
+        "bytes": 672068,
+        "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+      "group": "chest-original-rig",
+      "bytes": 732554,
+      "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+      "gitBlobSha": "3f831b579d8a407aea37de55dc3826aeaf60966e",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[9]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+        "ext": "webp",
+        "bytes": 732554,
+        "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+      "group": "chest-original-rig",
+      "bytes": 817668,
+      "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+      "gitBlobSha": "ce2f119b2074e3168f3e0fad45bb4818a92a2d8d",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[10]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+        "ext": "webp",
+        "bytes": 817668,
+        "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+      "group": "chest-original-rig",
+      "bytes": 869646,
+      "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+      "gitBlobSha": "fc0a4bd5b0885cca42e4c4fe2183e36d0c9a72d1",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[11]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+        "ext": "webp",
+        "bytes": 869646,
+        "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+      "group": "chest-original-rig",
+      "bytes": 910658,
+      "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+      "gitBlobSha": "2ad48de2d75bab176ac8089c6f80d20d7e0c28c5",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[12]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+        "ext": "webp",
+        "bytes": 910658,
+        "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+      "group": "chest-original-rig",
+      "bytes": 940500,
+      "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+      "gitBlobSha": "7048b55ec3a23d4fdaf0dc9c3c8250b2c81782af",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[13]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+        "ext": "webp",
+        "bytes": 940500,
+        "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+      "group": "chest-original-rig",
+      "bytes": 954970,
+      "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+      "gitBlobSha": "049485a415af18dd4fa450ac8b6e668231d906fe",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[14]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+        "ext": "webp",
+        "bytes": 954970,
+        "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+      "group": "chest-original-rig",
+      "bytes": 966790,
+      "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+      "gitBlobSha": "c988fe383ad64a19cc2cf9ee716cea282a99a21d",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[15]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+        "ext": "webp",
+        "bytes": 966790,
+        "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+      "group": "chest-original-rig",
+      "bytes": 972700,
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "gitBlobSha": "da272439e57dc0c60d1cb760ff90edbbd47bb97b",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[16]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+        "ext": "webp",
+        "bytes": 972700,
+        "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+      "group": "chest-original-rig",
+      "bytes": 972700,
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "gitBlobSha": "da272439e57dc0c60d1cb760ff90edbbd47bb97b",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "receiptBlobSha": "6a869b792676c6f409b1f6c1884f45998520b0cf",
+      "receiptRecord": "framesReceipt[17]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+        "ext": "webp",
+        "bytes": 972700,
+        "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/boss-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-00.webp",
+      "group": "chest-original-rig",
+      "bytes": 648016,
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "gitBlobSha": "e5090eaafac3f9a7836791458d641f288dd8bfc8",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-00.webp",
+        "ext": "webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-01.webp",
+      "group": "chest-original-rig",
+      "bytes": 648016,
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "gitBlobSha": "e5090eaafac3f9a7836791458d641f288dd8bfc8",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-01.webp",
+        "ext": "webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-02.webp",
+      "group": "chest-original-rig",
+      "bytes": 648016,
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "gitBlobSha": "e5090eaafac3f9a7836791458d641f288dd8bfc8",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-02.webp",
+        "ext": "webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-03.webp",
+      "group": "chest-original-rig",
+      "bytes": 639192,
+      "sha256": "b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4",
+      "gitBlobSha": "1cb9b71097f64bcad2c1ac29a17a42fbb5870ac0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-03.webp",
+        "ext": "webp",
+        "bytes": 639192,
+        "sha256": "b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-04.webp",
+      "group": "chest-original-rig",
+      "bytes": 633806,
+      "sha256": "68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df",
+      "gitBlobSha": "c959e229eb3341fad6ef6d29c8253cf8567ef24a",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-04.webp",
+        "ext": "webp",
+        "bytes": 633806,
+        "sha256": "68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-05.webp",
+      "group": "chest-original-rig",
+      "bytes": 620352,
+      "sha256": "c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13",
+      "gitBlobSha": "a1fcd9cb3fcd489ac5f463e6d204ccfeca4440e6",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[5]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-05.webp",
+        "ext": "webp",
+        "bytes": 620352,
+        "sha256": "c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-06.webp",
+      "group": "chest-original-rig",
+      "bytes": 610920,
+      "sha256": "70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a",
+      "gitBlobSha": "cdce685718a4e6651f766cf9c9f379718e8d24e0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[6]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-06.webp",
+        "ext": "webp",
+        "bytes": 610920,
+        "sha256": "70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-07.webp",
+      "group": "chest-original-rig",
+      "bytes": 591430,
+      "sha256": "fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f",
+      "gitBlobSha": "e45c3ae8b640e2fbee954cf1f1f94ee929b1a613",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[7]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-07.webp",
+        "ext": "webp",
+        "bytes": 591430,
+        "sha256": "fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-08.webp",
+      "group": "chest-original-rig",
+      "bytes": 626874,
+      "sha256": "f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0",
+      "gitBlobSha": "dbb3c1290bf6b451a52f38208f00a85645cccf48",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[8]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-08.webp",
+        "ext": "webp",
+        "bytes": 626874,
+        "sha256": "f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-09.webp",
+      "group": "chest-original-rig",
+      "bytes": 711226,
+      "sha256": "bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c",
+      "gitBlobSha": "f0af4e220a249995cd73c1e6257aa904884ed94c",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[9]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-09.webp",
+        "ext": "webp",
+        "bytes": 711226,
+        "sha256": "bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-10.webp",
+      "group": "chest-original-rig",
+      "bytes": 783548,
+      "sha256": "fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088",
+      "gitBlobSha": "49069561157c4b55268245a10a6520465b154c62",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[10]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-10.webp",
+        "ext": "webp",
+        "bytes": 783548,
+        "sha256": "fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-11.webp",
+      "group": "chest-original-rig",
+      "bytes": 835788,
+      "sha256": "c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15",
+      "gitBlobSha": "599b93fa4f44a01bcca293371349d4ad34172cd9",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[11]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-11.webp",
+        "ext": "webp",
+        "bytes": 835788,
+        "sha256": "c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-12.webp",
+      "group": "chest-original-rig",
+      "bytes": 872292,
+      "sha256": "58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb",
+      "gitBlobSha": "0a2ba1af501afe032fae9bb654bf4e2fe5db312d",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[12]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-12.webp",
+        "ext": "webp",
+        "bytes": 872292,
+        "sha256": "58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-13.webp",
+      "group": "chest-original-rig",
+      "bytes": 891564,
+      "sha256": "e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8",
+      "gitBlobSha": "c1f286eecada8891330705351aa743c2bb2ef311",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[13]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-13.webp",
+        "ext": "webp",
+        "bytes": 891564,
+        "sha256": "e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-14.webp",
+      "group": "chest-original-rig",
+      "bytes": 907492,
+      "sha256": "d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab",
+      "gitBlobSha": "b75aa2be83f2e6ccd854162c19d0e1429c6a9dcc",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[14]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-14.webp",
+        "ext": "webp",
+        "bytes": 907492,
+        "sha256": "d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-15.webp",
+      "group": "chest-original-rig",
+      "bytes": 914936,
+      "sha256": "93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94",
+      "gitBlobSha": "28f2695155c458b7c9c817953bdf8f44a896326a",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[15]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-15.webp",
+        "ext": "webp",
+        "bytes": 914936,
+        "sha256": "93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-16.webp",
+      "group": "chest-original-rig",
+      "bytes": 917980,
+      "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+      "gitBlobSha": "42b267305f0aaa952a8df527c80247d340a68a25",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[16]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-16.webp",
+        "ext": "webp",
+        "bytes": 917980,
+        "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/class-rig-v1/frame-17.webp",
+      "group": "chest-original-rig",
+      "bytes": 917980,
+      "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+      "gitBlobSha": "42b267305f0aaa952a8df527c80247d340a68a25",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "receiptBlobSha": "ceb7fc161be34173f1856a3b94d745e25f0e406e",
+      "receiptRecord": "framesReceipt[17]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/class-rig-v1/frame-17.webp",
+        "ext": "webp",
+        "bytes": 917980,
+        "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/class-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-00.webp",
+      "group": "chest-original-rig",
+      "bytes": 766072,
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "gitBlobSha": "e09c4f2a84c3b8f6f70014837521d95ab244a5ca",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-00.webp",
+        "ext": "webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-01.webp",
+      "group": "chest-original-rig",
+      "bytes": 766072,
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "gitBlobSha": "e09c4f2a84c3b8f6f70014837521d95ab244a5ca",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-01.webp",
+        "ext": "webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-02.webp",
+      "group": "chest-original-rig",
+      "bytes": 766072,
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "gitBlobSha": "e09c4f2a84c3b8f6f70014837521d95ab244a5ca",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-02.webp",
+        "ext": "webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-03.webp",
+      "group": "chest-original-rig",
+      "bytes": 765548,
+      "sha256": "acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa",
+      "gitBlobSha": "74a8c1b8ba1d4847dd0a6d69ce2f5c91fdab2348",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-03.webp",
+        "ext": "webp",
+        "bytes": 765548,
+        "sha256": "acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-04.webp",
+      "group": "chest-original-rig",
+      "bytes": 762668,
+      "sha256": "62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4",
+      "gitBlobSha": "02a921a1dc271a2a2dcf4ff1efacd52f95215bcc",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-04.webp",
+        "ext": "webp",
+        "bytes": 762668,
+        "sha256": "62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-05.webp",
+      "group": "chest-original-rig",
+      "bytes": 754590,
+      "sha256": "d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0",
+      "gitBlobSha": "bc5aba28fd42bfc828dbbfacc53b48e280950552",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[5]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-05.webp",
+        "ext": "webp",
+        "bytes": 754590,
+        "sha256": "d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-06.webp",
+      "group": "chest-original-rig",
+      "bytes": 747762,
+      "sha256": "6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b",
+      "gitBlobSha": "79c08ec84ba3d314a603e3473b599184f9e05002",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[6]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-06.webp",
+        "ext": "webp",
+        "bytes": 747762,
+        "sha256": "6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-07.webp",
+      "group": "chest-original-rig",
+      "bytes": 729294,
+      "sha256": "fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380",
+      "gitBlobSha": "90101d0c9fc6ca1e076b425cf6927cb084b786a0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[7]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-07.webp",
+        "ext": "webp",
+        "bytes": 729294,
+        "sha256": "fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-08.webp",
+      "group": "chest-original-rig",
+      "bytes": 711808,
+      "sha256": "f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3",
+      "gitBlobSha": "452af85a99e3848b5cf2e9576c8189aa7499f65f",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[8]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-08.webp",
+        "ext": "webp",
+        "bytes": 711808,
+        "sha256": "f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-09.webp",
+      "group": "chest-original-rig",
+      "bytes": 779662,
+      "sha256": "a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff",
+      "gitBlobSha": "d9b5aa81f56c832329f8d14608e1b48b60506e8e",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[9]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-09.webp",
+        "ext": "webp",
+        "bytes": 779662,
+        "sha256": "a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-10.webp",
+      "group": "chest-original-rig",
+      "bytes": 861496,
+      "sha256": "c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603",
+      "gitBlobSha": "3a5f1dc998c300f4a826b43adfc06b21c94244f6",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[10]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-10.webp",
+        "ext": "webp",
+        "bytes": 861496,
+        "sha256": "c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-11.webp",
+      "group": "chest-original-rig",
+      "bytes": 922416,
+      "sha256": "defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976",
+      "gitBlobSha": "a69087b6ac93a2a7365fc21e0d366ebeb24f3f85",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[11]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-11.webp",
+        "ext": "webp",
+        "bytes": 922416,
+        "sha256": "defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-12.webp",
+      "group": "chest-original-rig",
+      "bytes": 969988,
+      "sha256": "2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12",
+      "gitBlobSha": "418a23fbce726c44cebc4a4842326223ac2bf049",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[12]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-12.webp",
+        "ext": "webp",
+        "bytes": 969988,
+        "sha256": "2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-13.webp",
+      "group": "chest-original-rig",
+      "bytes": 997556,
+      "sha256": "6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea",
+      "gitBlobSha": "bc2c8b360a60aaec68cae644bbb458f71859fc3e",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "receiptBlobSha": "c68646509c6bd1b607cacf9a943a4d8c8a3fcbc5",
+      "receiptRecord": "framesReceipt[13]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/large-rig-v1/frame-13.webp",
+        "ext": "webp",
+        "bytes": 997556,
+        "sha256": "6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/large-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+      "group": "chest-original-rig",
+      "bytes": 643182,
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "gitBlobSha": "a5e5f75bc33b67d610e6a911a6370cab0300d86c",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+        "ext": "webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+      "group": "chest-original-rig",
+      "bytes": 643182,
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "gitBlobSha": "a5e5f75bc33b67d610e6a911a6370cab0300d86c",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+        "ext": "webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+      "group": "chest-original-rig",
+      "bytes": 643182,
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "gitBlobSha": "a5e5f75bc33b67d610e6a911a6370cab0300d86c",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+        "ext": "webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+      "group": "chest-original-rig",
+      "bytes": 643518,
+      "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+      "gitBlobSha": "8c5ecda32e29d2a08caa753693fb2439b0222398",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+        "ext": "webp",
+        "bytes": 643518,
+        "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+      "group": "chest-original-rig",
+      "bytes": 646744,
+      "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+      "gitBlobSha": "43e773485f181f8278f1e53b9ebaa76c5769d316",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+        "ext": "webp",
+        "bytes": 646744,
+        "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+      "group": "chest-original-rig",
+      "bytes": 629792,
+      "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+      "gitBlobSha": "bf4cc8449fe42f746da1a8b89883842935408c9b",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[5]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+        "ext": "webp",
+        "bytes": 629792,
+        "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+      "group": "chest-original-rig",
+      "bytes": 612078,
+      "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+      "gitBlobSha": "2cc7c3b5d6337457d84b9e4316c1b2836a82deba",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[6]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+        "ext": "webp",
+        "bytes": 612078,
+        "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+      "group": "chest-original-rig",
+      "bytes": 589424,
+      "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+      "gitBlobSha": "e788c17bba6e8754fe8abdf447ec4468f9eaf0ac",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[7]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+        "ext": "webp",
+        "bytes": 589424,
+        "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+      "group": "chest-original-rig",
+      "bytes": 631424,
+      "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+      "gitBlobSha": "d5bf0b9399535a9815768e288618b37ccd5c6e74",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[8]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+        "ext": "webp",
+        "bytes": 631424,
+        "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+      "group": "chest-original-rig",
+      "bytes": 721898,
+      "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+      "gitBlobSha": "85a387d3d286a43e62d502866478913ad82c14e2",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[9]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+        "ext": "webp",
+        "bytes": 721898,
+        "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+      "group": "chest-original-rig",
+      "bytes": 801686,
+      "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+      "gitBlobSha": "9435efa4eec2e6296d7dd9beda9cf1423440708e",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[10]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+        "ext": "webp",
+        "bytes": 801686,
+        "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+      "group": "chest-original-rig",
+      "bytes": 859722,
+      "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+      "gitBlobSha": "717719707758de19294e76d9a25d6b60b92ded7c",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[11]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+        "ext": "webp",
+        "bytes": 859722,
+        "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+      "group": "chest-original-rig",
+      "bytes": 903232,
+      "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+      "gitBlobSha": "3a84a58b9201fb6d1d221a450ad2309c9c91a507",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[12]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+        "ext": "webp",
+        "bytes": 903232,
+        "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+      "group": "chest-original-rig",
+      "bytes": 924400,
+      "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+      "gitBlobSha": "7a029fe0ee58bb251ce0b45af158611b5ef6de2f",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[13]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+        "ext": "webp",
+        "bytes": 924400,
+        "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+      "group": "chest-original-rig",
+      "bytes": 944076,
+      "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+      "gitBlobSha": "ef7db18f33c4d7018a697200fec7e8f0296bdc97",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[14]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+        "ext": "webp",
+        "bytes": 944076,
+        "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+      "group": "chest-original-rig",
+      "bytes": 954854,
+      "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+      "gitBlobSha": "1282bd0a68f4830af4afa5014a391edb48180e54",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[15]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+        "ext": "webp",
+        "bytes": 954854,
+        "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+      "group": "chest-original-rig",
+      "bytes": 958186,
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "gitBlobSha": "a673e212f3bab7a8b554cf19a97c9a9012c52ed3",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[16]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+        "ext": "webp",
+        "bytes": 958186,
+        "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+      "group": "chest-original-rig",
+      "bytes": 958186,
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "gitBlobSha": "a673e212f3bab7a8b554cf19a97c9a9012c52ed3",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "receiptBlobSha": "434f54cded89298b80e91214fb751de25a3bf093",
+      "receiptRecord": "framesReceipt[17]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+        "ext": "webp",
+        "bytes": 958186,
+        "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/medium-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-00.webp",
+      "group": "chest-original-rig",
+      "bytes": 487716,
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "gitBlobSha": "a75b5cd3f090177a1b613c336c88c595f4a114a0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-00.webp",
+        "ext": "webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-01.webp",
+      "group": "chest-original-rig",
+      "bytes": 487716,
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "gitBlobSha": "a75b5cd3f090177a1b613c336c88c595f4a114a0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-01.webp",
+        "ext": "webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-02.webp",
+      "group": "chest-original-rig",
+      "bytes": 487716,
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "gitBlobSha": "a75b5cd3f090177a1b613c336c88c595f4a114a0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-02.webp",
+        "ext": "webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-03.webp",
+      "group": "chest-original-rig",
+      "bytes": 494282,
+      "sha256": "5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af",
+      "gitBlobSha": "24e20b923613a9debb45092b9ecc9e4d63ec7794",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-03.webp",
+        "ext": "webp",
+        "bytes": 494282,
+        "sha256": "5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-04.webp",
+      "group": "chest-original-rig",
+      "bytes": 496444,
+      "sha256": "b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1",
+      "gitBlobSha": "f4491428a3f2f480eca52c8889c7e8e657095524",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-04.webp",
+        "ext": "webp",
+        "bytes": 496444,
+        "sha256": "b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-05.webp",
+      "group": "chest-original-rig",
+      "bytes": 488200,
+      "sha256": "21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a",
+      "gitBlobSha": "8b42cad0db745cb2e374a621d0db1a2f66f0e1a0",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[5]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-05.webp",
+        "ext": "webp",
+        "bytes": 488200,
+        "sha256": "21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-06.webp",
+      "group": "chest-original-rig",
+      "bytes": 475914,
+      "sha256": "875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0",
+      "gitBlobSha": "1e1135e1368d946343a3bbea289aef12eb5e8602",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[6]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-06.webp",
+        "ext": "webp",
+        "bytes": 475914,
+        "sha256": "875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-07.webp",
+      "group": "chest-original-rig",
+      "bytes": 448244,
+      "sha256": "19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de",
+      "gitBlobSha": "45af8932dce8a4da70f5b7c96d17b22bb50f99f3",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[7]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-07.webp",
+        "ext": "webp",
+        "bytes": 448244,
+        "sha256": "19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-08.webp",
+      "group": "chest-original-rig",
+      "bytes": 492662,
+      "sha256": "5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af",
+      "gitBlobSha": "29d936d368b9f9ae7e83b02b18b0b6dd44f692e4",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[8]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-08.webp",
+        "ext": "webp",
+        "bytes": 492662,
+        "sha256": "5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-09.webp",
+      "group": "chest-original-rig",
+      "bytes": 592628,
+      "sha256": "4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f",
+      "gitBlobSha": "b005732300b74bab4b728f1ddb2ad21e1d8cfefa",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[9]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-09.webp",
+        "ext": "webp",
+        "bytes": 592628,
+        "sha256": "4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-10.webp",
+      "group": "chest-original-rig",
+      "bytes": 675322,
+      "sha256": "7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39",
+      "gitBlobSha": "e621d682e516c3595f32145755dbe8e8f7a49d25",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[10]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-10.webp",
+        "ext": "webp",
+        "bytes": 675322,
+        "sha256": "7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-11.webp",
+      "group": "chest-original-rig",
+      "bytes": 742316,
+      "sha256": "4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37",
+      "gitBlobSha": "db53af5cfd99773f67e86b18ec46c037fca5db83",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[11]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-11.webp",
+        "ext": "webp",
+        "bytes": 742316,
+        "sha256": "4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-12.webp",
+      "group": "chest-original-rig",
+      "bytes": 785162,
+      "sha256": "0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09",
+      "gitBlobSha": "7f8c04f647318fd2e0bbfa3fe758594d9db93db1",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[12]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-12.webp",
+        "ext": "webp",
+        "bytes": 785162,
+        "sha256": "0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-13.webp",
+      "group": "chest-original-rig",
+      "bytes": 813230,
+      "sha256": "d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4",
+      "gitBlobSha": "12489929a16e036c6576ebfe0742021cb91f858b",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[13]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-13.webp",
+        "ext": "webp",
+        "bytes": 813230,
+        "sha256": "d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-14.webp",
+      "group": "chest-original-rig",
+      "bytes": 828056,
+      "sha256": "1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6",
+      "gitBlobSha": "9d3172952008c48c9e22981c0ce7085ec99863b2",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[14]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-14.webp",
+        "ext": "webp",
+        "bytes": 828056,
+        "sha256": "1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-15.webp",
+      "group": "chest-original-rig",
+      "bytes": 840346,
+      "sha256": "3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424",
+      "gitBlobSha": "9f173cc56ecbc1805019e2f4c67562d474a51033",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[15]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-15.webp",
+        "ext": "webp",
+        "bytes": 840346,
+        "sha256": "3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-16.webp",
+      "group": "chest-original-rig",
+      "bytes": 843574,
+      "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+      "gitBlobSha": "4275bc7473e04fa5bd40615793af47e55f1f30ba",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[16]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-16.webp",
+        "ext": "webp",
+        "bytes": 843574,
+        "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "scenes/chests/small-rig-v1/frame-17.webp",
+      "group": "chest-original-rig",
+      "bytes": 843574,
+      "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+      "gitBlobSha": "4275bc7473e04fa5bd40615793af47e55f1f30ba",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "receiptBlobSha": "ad2efb9668f9c1667f8a8db64ed938a9a0e958c7",
+      "receiptRecord": "framesReceipt[17]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+      "registration": {
+        "path": "scenes/chests/small-rig-v1/frame-17.webp",
+        "ext": "webp",
+        "bytes": 843574,
+        "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+        "license": "项目生成/处理素材（来源与当前字节SHA256匹配任务回执）",
+        "source": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-chest-continue/small-rig-receipt.json",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "ui/slot-weather/partly-cloudy-v1.webp",
+      "group": "weather-legacy-webp",
+      "bytes": 64090,
+      "sha256": "ae0a4016512b06daf7a1ff43bcf7f26cd834f7b0a893171b309d91e413e3521c",
+      "gitBlobSha": "11cb2970ec8e2bf82a22c653e2491d0dadacadc1",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-15-slot-weather/receipt.json",
+      "receiptBlobSha": "7d18e8931600bfc255e7f4f7b5111c6f95a0e04b",
+      "receiptRecord": "[1]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-15-slot-weather/install.py",
+      "registration": {
+        "path": "ui/slot-weather/partly-cloudy-v1.webp",
+        "ext": "webp",
+        "bytes": 64090,
+        "sha256": "ae0a4016512b06daf7a1ff43bcf7f26cd834f7b0a893171b309d91e413e3521c",
+        "license": "老板授权原创天气图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+        "source": "docs/evidence/2026-10-15-slot-weather/README.md",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "ae0a4016512b06daf7a1ff43bcf7f26cd834f7b0a893171b309d91e413e3521c",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "ui/slot-weather/rain-v1.webp",
+      "group": "weather-legacy-webp",
+      "bytes": 47544,
+      "sha256": "c9d49a6786b0914a1e4174285f9cd2b37cc6096049608afad93d88452f0e44f0",
+      "gitBlobSha": "bcebe48ebddec8e9c5191b0653d256cdfceb6c29",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-15-slot-weather/receipt.json",
+      "receiptBlobSha": "7d18e8931600bfc255e7f4f7b5111c6f95a0e04b",
+      "receiptRecord": "[2]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-15-slot-weather/install.py",
+      "registration": {
+        "path": "ui/slot-weather/rain-v1.webp",
+        "ext": "webp",
+        "bytes": 47544,
+        "sha256": "c9d49a6786b0914a1e4174285f9cd2b37cc6096049608afad93d88452f0e44f0",
+        "license": "老板授权原创天气图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+        "source": "docs/evidence/2026-10-15-slot-weather/README.md",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "c9d49a6786b0914a1e4174285f9cd2b37cc6096049608afad93d88452f0e44f0",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "ui/slot-weather/snow-v1.webp",
+      "group": "weather-legacy-webp",
+      "bytes": 60878,
+      "sha256": "e5756c78c6b6bc3dc6bc3495e6568507fa5c4d49b1e08c63a439bf23e1cf72b7",
+      "gitBlobSha": "1649c4205d85034e389cb09c3111ff228d5188e5",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-15-slot-weather/receipt.json",
+      "receiptBlobSha": "7d18e8931600bfc255e7f4f7b5111c6f95a0e04b",
+      "receiptRecord": "[4]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-15-slot-weather/install.py",
+      "registration": {
+        "path": "ui/slot-weather/snow-v1.webp",
+        "ext": "webp",
+        "bytes": 60878,
+        "sha256": "e5756c78c6b6bc3dc6bc3495e6568507fa5c4d49b1e08c63a439bf23e1cf72b7",
+        "license": "老板授权原创天气图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+        "source": "docs/evidence/2026-10-15-slot-weather/README.md",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "e5756c78c6b6bc3dc6bc3495e6568507fa5c4d49b1e08c63a439bf23e1cf72b7",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "ui/slot-weather/sunny-v1.webp",
+      "group": "weather-legacy-webp",
+      "bytes": 68902,
+      "sha256": "fa4831a614e8445460734dceb52c054bed22c6b01370c1aacb9292bfdb3746c2",
+      "gitBlobSha": "c08848d355a4290e133602f1d01590a9c4b5e645",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-15-slot-weather/receipt.json",
+      "receiptBlobSha": "7d18e8931600bfc255e7f4f7b5111c6f95a0e04b",
+      "receiptRecord": "[0]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-15-slot-weather/install.py",
+      "registration": {
+        "path": "ui/slot-weather/sunny-v1.webp",
+        "ext": "webp",
+        "bytes": 68902,
+        "sha256": "fa4831a614e8445460734dceb52c054bed22c6b01370c1aacb9292bfdb3746c2",
+        "license": "老板授权原创天气图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+        "source": "docs/evidence/2026-10-15-slot-weather/README.md",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "fa4831a614e8445460734dceb52c054bed22c6b01370c1aacb9292bfdb3746c2",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    },
+    {
+      "path": "ui/slot-weather/thunder-v1.webp",
+      "group": "weather-legacy-webp",
+      "bytes": 75124,
+      "sha256": "fa3fc896250f12eb54e8d52ca7a0ab80fb6b115194a5293c046103152765e96b",
+      "gitBlobSha": "5c54e97af4e49ff76bd20b7c682a7e8f7b912866",
+      "sourceMode": "100644",
+      "unchangedSince9b0": true,
+      "receipt": "docs/evidence/2026-10-15-slot-weather/receipt.json",
+      "receiptBlobSha": "7d18e8931600bfc255e7f4f7b5111c6f95a0e04b",
+      "receiptRecord": "[3]",
+      "receiptBytesAndHashMatch": true,
+      "licenseBasis": "docs/evidence/2026-10-15-slot-weather/install.py",
+      "registration": {
+        "path": "ui/slot-weather/thunder-v1.webp",
+        "ext": "webp",
+        "bytes": 75124,
+        "sha256": "fa3fc896250f12eb54e8d52ca7a0ab80fb6b115194a5293c046103152765e96b",
+        "license": "老板授权原创天气图标；Codex内置image_gen生成；方舟节点仅作视觉关系参考",
+        "source": "docs/evidence/2026-10-15-slot-weather/README.md",
+        "provenance": {
+          "kind": "exact-recorded-output-hash",
+          "sha256": "fa3fc896250f12eb54e8d52ca7a0ab80fb6b115194a5293c046103152765e96b",
+          "publicationScope": "沿用原任务来源限制，仅本次私有项目交付；不代表第三方公开授权"
+        }
+      }
+    }
+  ]
+}

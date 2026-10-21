@@ -1,0 +1,129 @@
+{
+  "baseline": "d682c4cb0217f15da04aae02ec20a2a3da29b114",
+  "diagnosis": "The exact total-granted=2 assertion is invalid when either of the two legal random acquisitions is tt2-apollo, whose onAcquire grants another card. Forced full-pool random choices reproduce total 3 with one consumed UID on both candidate and baseline; safe choices yield 2 on both.",
+  "historicalFailureLimit": "The raw failed run did not persist its RNG seed or acquired IDs, so the precise original draw cannot be recovered. This comparison proves the legal branch yielding the same failed assertion and shows no candidate-only lifecycle behavior.",
+  "productionSourceScope": "git diff d682c4cb -- game/src listed only battle.engine.factory.domain.js snapshot-input change and generated/art-manifest.js; the baseline copy restores both exact git blobs. Other lifecycle/acquire/consume sources were unchanged.",
+  "source_sha256": {
+    "current": {
+      "game/src/battle/core/battle.engine.factory.domain.js": "43a26a0b74dd6091530d1bae4ec2e4394072f29072be8e3fb043d50870ded857",
+      "game/src/generated/art-manifest.js": "1b26adb70f7c46d6448ee0ae69b45dbea16ff2210301121616ddfc201a6cc573"
+    },
+    "baseline": {
+      "game/src/battle/core/battle.engine.factory.domain.js": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8",
+      "game/src/generated/art-manifest.js": "f896b1acaaa4832b661cfb4d893f61c19c4b7a28e06d98db12ab87e3f6d14a48"
+    }
+  },
+  "deterministicResults": {
+    "current": [
+      {
+        "withApollo": false,
+        "gained": [
+          "tt2-pearlbox",
+          "tt2-pearlbox"
+        ],
+        "gainCount": 2,
+        "consumed": 1,
+        "infuseFuels": 0,
+        "calls": 2,
+        "busy": false,
+        "logs": [
+          "[[icon:cards]] <b>沉船宝盒</b>：获得 【珍珠盒】×2（战斗内临时卡，战后消散）",
+          "[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"
+        ]
+      },
+      {
+        "withApollo": true,
+        "gained": [
+          "tt2-apollo",
+          "tt2-pearlbox",
+          "tt2-pearlbox"
+        ],
+        "gainCount": 3,
+        "consumed": 1,
+        "infuseFuels": 0,
+        "calls": 3,
+        "busy": false,
+        "logs": [
+          "[[icon:bolt]] 获得 1 点能量（当前 100）",
+          "[[icon:cards]] <b>阿猫的礼物</b>：获得 【珍珠盒】×1（随机池）（战斗内临时卡，战后消散）",
+          "[[icon:cards]] <b>沉船宝盒</b>：获得 【阿猫的礼物】×1、【珍珠盒】×1（战斗内临时卡，战后消散）",
+          "[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"
+        ]
+      }
+    ],
+    "baseline": [
+      {
+        "withApollo": false,
+        "gained": [
+          "tt2-pearlbox",
+          "tt2-pearlbox"
+        ],
+        "gainCount": 2,
+        "consumed": 1,
+        "infuseFuels": 0,
+        "calls": 2,
+        "busy": false,
+        "logs": [
+          "[[icon:cards]] <b>沉船宝盒</b>：获得 【珍珠盒】×2（战斗内临时卡，战后消散）",
+          "[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"
+        ]
+      },
+      {
+        "withApollo": true,
+        "gained": [
+          "tt2-apollo",
+          "tt2-pearlbox",
+          "tt2-pearlbox"
+        ],
+        "gainCount": 3,
+        "consumed": 1,
+        "infuseFuels": 0,
+        "calls": 3,
+        "busy": false,
+        "logs": [
+          "[[icon:bolt]] 获得 1 点能量（当前 100）",
+          "[[icon:cards]] <b>阿猫的礼物</b>：获得 【珍珠盒】×1（随机池）（战斗内临时卡，战后消散）",
+          "[[icon:cards]] <b>沉船宝盒</b>：获得 【阿猫的礼物】×1、【珍珠盒】×1（战斗内临时卡，战后消散）",
+          "[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"
+        ]
+      }
+    ]
+  },
+  "fixturePatch": "lifecycle-fixture.patch",
+  "fixtureScope": "Only tt2-wreck in the lifecycle four-case test receives a legal tt3-ice-spike-only catalog, checked random-obtainable and without onAcquire. Original exact count, consumed UID once and infuseFuels=0 assertions are unchanged. The spy is restored in finally. No production edits.",
+  "targetedValidation": {
+    "current": {
+      "lifecycle": 11,
+      "Apollo": 2
+    },
+    "baseline": {
+      "lifecycle": 11,
+      "Apollo": 2
+    }
+  },
+  "reusedApolloRegression": {
+    "file": "tests/card-description-audit-battle.test.js",
+    "lines": "233-264",
+    "variants": [
+      "到期",
+      "正常"
+    ],
+    "assertions": [
+      "exact acquired IDs [tt2-apollo,tt3-ice-spike,tt3-ice-spike]",
+      "all acquired UID values enter hand",
+      "energy increases exactly 1",
+      "expired source is consumed",
+      "repeated expiry leaves acquired entries and energy unchanged"
+    ]
+  },
+  "commands": [
+    "./node_modules/.bin/vitest run tests/lifecycle-diagnostic.test.js --reporter=verbose",
+    "CARD_DESCRIPTION_FIX_EVIDENCE=0 ./node_modules/.bin/vitest run tests/card-description-fix-lifecycle.test.js --reporter=verbose",
+    "CARD_DESCRIPTION_FIX_EVIDENCE=0 ./node_modules/.bin/vitest run tests/card-description-audit-battle.test.js -t '沉船宝盒.*消耗：基础2张抽中阿猫' --reporter=verbose"
+  ],
+  "workingDirectories": [
+    "/tmp/lifecycle-audit-diagnostic-20261021/current",
+    "/tmp/lifecycle-audit-diagnostic-20261021/baseline"
+  ],
+  "originalFailureLog": "docs/evidence/2026-10-21-WF-performance-followons-1021/2026-10-21T03-18-14.276Z-99ce0075-staged.log:150-165"
+}

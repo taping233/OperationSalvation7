@@ -1,0 +1,35 @@
+
+ RUN  v3.2.7 /tmp/mana-surge-audit-diagnostic-20261021
+
+ × tests/audit.test.js > 全卡库真实战斗实打审计 > 四次合法多段随机法术跨过旧轮询上限后仍完整结算 302ms
+   → expected [ …(2) ] to have a length of 4 but got 2
+ ↓ tests/audit.test.js > 全卡库真实战斗实打审计 > 不会结束的队列仍在真实期限后失败并报告状态
+ ↓ tests/audit.test.js > 全卡库真实战斗实打审计 > 每张卡都能在真实战斗中打出/使用且不崩不卡死
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/audit.test.js > 全卡库真实战斗实打审计 > 四次合法多段随机法术跨过旧轮询上限后仍完整结算
+AssertionError: expected [ …(2) ] to have a length of 4 but got 2
+
+- Expected
++ Received
+
+- 4
++ 2
+
+ ❯ tests/audit.test.js:321:73
+    319|       Random.reseed(1);
+    320|       const game = await auditOne(mana);
+    321|       expect(game.logs.filter(line => /法力奔涌.*第 [1-4]\/4 发/.test(line))…
+       |                                                                         ^
+    322|       expect(results.slice(resultStart)).toEqual([]);
+    323|       expect(snap().busy).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 skipped (3)
+   Start at  12:13:39
+   Duration  1.97s (transform 578ms, setup 0ms, collect 998ms, tests 415ms, environment 348ms, prepare 67ms)
+

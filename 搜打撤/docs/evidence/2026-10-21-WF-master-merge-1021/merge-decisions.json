@@ -1,0 +1,938 @@
+{
+  "review_kind": "static semantic review, not execution acceptance",
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "remote": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "validated_cloud_tree": "86f43ce681cd2e49972e75c9095f546bfd378468",
+  "counts": {
+    "remote_only": 871,
+    "both_changed_different": 59,
+    "cloud_only": 353,
+    "same_change": 51
+  },
+  "overlaps": [
+    {
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "base": "09bc56b3b1fceb44f0057db67a26036bda05fd57",
+      "cloud": "a5e0df51714d19c3c7c42fbe740337fc0ec483c9",
+      "remote": "32644d32c785b583bd087bce1b1e127bfba3c4f4",
+      "incoming_local_path": "sync-b7207a28/blobs/32644d32c785b583bd087bce1b1e127bfba3c4f4",
+      "incoming_sha256": "91edb70771d59a2e14ea7011c678bfd2507e5236efe3bff4fb27a52431089a9d",
+      "textual_merge_exit": 4,
+      "textual_conflict_regions": 4,
+      "decision": "manual-current-doc-reconcile",
+      "reason": "Master current rules/features are authoritative; add only validated retained behavior and new evidence, do not restore obsolete gameplay or stale status."
+    },
+    {
+      "path": "搜打撤/docs/agent-protocol.md",
+      "base": "097beeb0208624d62d2967c7432f59aa0a7d5943",
+      "cloud": "a357461550e70c0147aaaaf73026bc6af6eb6d13",
+      "remote": "9d91e1209014283731f085cb158899e31d77eeb9",
+      "incoming_local_path": "sync-b7207a28/blobs/9d91e1209014283731f085cb158899e31d77eeb9",
+      "incoming_sha256": "62d12b3f3ffd28e89b3cd9ae1479cfa0f2707fba1a90400dd69e780d766a8234",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "manual-current-doc-reconcile",
+      "reason": "Master current rules/features are authoritative; add only validated retained behavior and new evidence, do not restore obsolete gameplay or stale status."
+    },
+    {
+      "path": "搜打撤/docs/architecture.md",
+      "base": "941de515523a0baf5f4f897c2519f47e692fd76c",
+      "cloud": "9c2ab594b45b475d42ea2d44a80097bd2d880008",
+      "remote": "c04490bd9150cf6e022cf8ca764e7a28bf1d2820",
+      "incoming_local_path": "sync-b7207a28/blobs/c04490bd9150cf6e022cf8ca764e7a28bf1d2820",
+      "incoming_sha256": "32d59b28de1fca823feaad1381ab0823a052e28403b2bbf7e7afda3f9af45f92",
+      "textual_merge_exit": 4,
+      "textual_conflict_regions": 4,
+      "decision": "manual-current-doc-reconcile",
+      "reason": "Master current rules/features are authoritative; add only validated retained behavior and new evidence, do not restore obsolete gameplay or stale status."
+    },
+    {
+      "path": "搜打撤/docs/infusion-material-controls.md",
+      "base": "cc9965fbdbdbf7663e3a0c26bf045c09eadd6c8d",
+      "cloud": "84ac433cf8cf74d7fb71dea9b7e7d233986f8ecb",
+      "remote": "53952e8c6da20763cfee9fa02101218da673c5dc",
+      "incoming_local_path": "sync-b7207a28/blobs/53952e8c6da20763cfee9fa02101218da673c5dc",
+      "incoming_sha256": "684d54b1da7ec5f72c5222e443de565801c0657b5bb84e6c14c835c98e824515",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "manual-current-doc-reconcile",
+      "reason": "Master current rules/features are authoritative; add only validated retained behavior and new evidence, do not restore obsolete gameplay or stale status."
+    },
+    {
+      "path": "搜打撤/docs/performance.md",
+      "base": "07c18daa81727c7dbe2a2edcb8a66d03fa5f087d",
+      "cloud": "84a03ae60c0badc2effe8143596259f6efd69c63",
+      "remote": "156c842ac34cc7252507d67b35c0f5e829a95cf0",
+      "incoming_local_path": "sync-b7207a28/blobs/156c842ac34cc7252507d67b35c0f5e829a95cf0",
+      "incoming_sha256": "33e630b2c16637b491abbe4c6091953598fbbb5d8ca2aaff264b9ea521ff4ef2",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "manual-current-doc-reconcile",
+      "reason": "Master current rules/features are authoritative; add only validated retained behavior and new evidence, do not restore obsolete gameplay or stale status."
+    },
+    {
+      "path": "搜打撤/game/assets/asset-manifest.json",
+      "base": "03f343407caa266d44e22715e6d400e96aebcc8d",
+      "cloud": "d1b1a641c875e8c6b3d0a0589faf05cc96a27020",
+      "remote": "35f4678bdfcf6e8aa901e871416fc4aa205f4fc3",
+      "incoming_local_path": "sync-b7207a28/blobs/35f4678bdfcf6e8aa901e871416fc4aa205f4fc3",
+      "incoming_sha256": "2abe6a2f0f0fa2a7500c568b3192e9f1e088be5705aeb114857f1653d1f442ad",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-reviewed",
+      "reason": "All 1591 cloud entries retained exactly by asset path; incoming adds 10 transition/fire-rest entries, no removals or value changes."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.action-router.js",
+      "base": null,
+      "cloud": "9cfac13a46ea211c808427632320228d91b513e4",
+      "remote": "744fece33275ca82adffa6f3e712b55d8efc6336",
+      "incoming_local_path": "sync-b7207a28/blobs/744fece33275ca82adffa6f3e712b55d8efc6336",
+      "incoming_sha256": "510381075b0611b6bd48058a783752f180c7d08698dc2505f91b0406dd87c92f",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.replay.js",
+      "base": "07e70f83ff173a9aac4b1fc8737c6330916bee95",
+      "cloud": "19a2af020eeddce8542245aee0e2b3fa62a9aa02",
+      "remote": "e555b0d7b20f5d8b95fa1de7b6936d5bf42dd359",
+      "incoming_local_path": "sync-b7207a28/blobs/e555b0d7b20f5d8b95fa1de7b6936d5bf42dd359",
+      "incoming_sha256": "154ec3c3fbcc5b40950941466bcab471a1bbc64c8d194cd64aa49c0e9ee7e4ed",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.replay.runtime.js",
+      "base": null,
+      "cloud": "07e70f83ff173a9aac4b1fc8737c6330916bee95",
+      "remote": "19f33d48e5a06d19b998e435c626900b8036954c",
+      "incoming_local_path": "sync-b7207a28/blobs/19f33d48e5a06d19b998e435c626900b8036954c",
+      "incoming_sha256": "4653911ff258372bc3a59fb3196f2e20b3acba9564aafe5ac8da607cbbc97392",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.runner.js",
+      "base": "0eace5448681504dd4f7f2eabdce25e7507a3662",
+      "cloud": "4812392718a929260f31dfb7fda5fab0f2011997",
+      "remote": "7452743b72dc1a20593e540d12b9d56979494d11",
+      "incoming_local_path": "sync-b7207a28/blobs/7452743b72dc1a20593e540d12b9d56979494d11",
+      "incoming_sha256": "e6b296436adcbc339937e88fe8aa67d1afaa48f8efd3663105232737fd49b8e0",
+      "textual_merge_exit": 3,
+      "textual_conflict_regions": 3,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.runner.runtime.js",
+      "base": null,
+      "cloud": "e9014696c63af4d3bfb7ab88e52d98692b9ad580",
+      "remote": "29b4bd03fe51009d7aa163bfc775710b2e4ea138",
+      "incoming_local_path": "sync-b7207a28/blobs/29b4bd03fe51009d7aa163bfc775710b2e4ea138",
+      "incoming_sha256": "bf88856fcd559726afa654f96e34282c47125b2d2d2ecad4095ee922aa9e500f",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.card-play.domain.js",
+      "base": "15d0a341ff20631dd3a1b31bc301d6a6a5c0b268",
+      "cloud": "659419a7cd43fc60bbc3c08aa4bd000746945692",
+      "remote": "7386e419fa351e715e022aed2a7b7ac7b02ec9d2",
+      "incoming_local_path": "sync-b7207a28/blobs/7386e419fa351e715e022aed2a7b7ac7b02ec9d2",
+      "incoming_sha256": "0ab1b2b0ad687e3b4c4808ba6df7fffaa883eff2acbe2ccb3fa8305c36ab7f70",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.core.js",
+      "base": "a283a4710d7f2b7458f5764dcb64e3211e010ebf",
+      "cloud": "67f99265a808314e7c984e7adaa9c046a5047298",
+      "remote": "c6ba1055c053319d1762409d900e18d37d7aa62e",
+      "incoming_local_path": "sync-b7207a28/blobs/c6ba1055c053319d1762409d900e18d37d7aa62e",
+      "incoming_sha256": "1c365bc4fd0d7af3cfaf220d61735d7b345c28380237c27fec035be586aa01cd",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "base": "e06806635271945f5abe0dbf1fc0cc68543cd441",
+      "cloud": "3f2fc28c3faaa758130c6f4ead563798526e40eb",
+      "remote": "16d9df9d76254cfc6864309e969209512df47afe",
+      "incoming_local_path": "sync-b7207a28/blobs/16d9df9d76254cfc6864309e969209512df47afe",
+      "incoming_sha256": "34ec3a5771dc0cafb88f791b9045c46472e6555c1991e3b237cc619f397d3610",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "base": "bd2b20a35f2b59b6d026485137129f88d24d4ac3",
+      "cloud": "85608591947542556a12f219eef2d7af169e5aac",
+      "remote": "67e01c565733bf228ee76af7ccbaeb626f952d2f",
+      "incoming_local_path": "sync-b7207a28/blobs/67e01c565733bf228ee76af7ccbaeb626f952d2f",
+      "incoming_sha256": "f8ae55c8fded4f81a492046c95e274a4bb1a2a0b6b417be33fa67f1b89dfca53",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Retain master targeting/infusion behavior; reapply optional snapshot argument to updateClickSelectionUI without stale input callbacks."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.decision-shell.js",
+      "base": "d7bb63f3f87bddc5e87432414bc1a0276e3efa25",
+      "cloud": "86fe3277cfe6f8c0925544d34c20e76ad6edd0b7",
+      "remote": "af3b177c9c55186e1c55b9a492877b29e5452016",
+      "incoming_local_path": "sync-b7207a28/blobs/af3b177c9c55186e1c55b9a492877b29e5452016",
+      "incoming_sha256": "18f4b66dba173c25c3fdfd54141844fd7db67c0558141d3ff13427f551dc8079",
+      "textual_merge_exit": 3,
+      "textual_conflict_regions": 3,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply render/body ownership guard; preserve master pile-grid scroll/count and inspection tab order."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+      "base": "7c6b29d295fc3d6d466c20ab539e9d1de6187e9e",
+      "cloud": "86dabb7881b9e90afe1b21b111cb4ba64dad2ed6",
+      "remote": "e2fab0c32d8ab1fd603294e673134e56939a0cad",
+      "incoming_local_path": "sync-b7207a28/blobs/e2fab0c32d8ab1fd603294e673134e56939a0cad",
+      "incoming_sha256": "0136fe59fad9fe8b5ab102f2355bce5e50662d8b42054bf79230127c0ef89d45",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply badge ownership helper adapted to exact master DIV pager rather than retired BUTTON action."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "base": "a5b18297145ab2289a60891058165e439f5d3819",
+      "cloud": "817d9300bd25e65b1b5166c4911013c54bcb5ad6",
+      "remote": "65e78a457a71ed6d3b136f163b981ee9f47056e5",
+      "incoming_local_path": "sync-b7207a28/blobs/65e78a457a71ed6d3b136f163b981ee9f47056e5",
+      "incoming_sha256": "8e27402e8ecd2558bb7ddc770b413d25ebb47aaf72e1a21635719ff8f848d009",
+      "textual_merge_exit": 3,
+      "textual_conflict_regions": 3,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply validated commitFrame dirty/retry semantics and owner-checked static portrait handoff over master annotations."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.hover.js",
+      "base": "a5ad05afbf5a385edb5d6534106600ecb501cfc7",
+      "cloud": "47d898bb4d42805bfa3ae9a43748eac8a6fcc155",
+      "remote": "d1e612713dbcc0717885c61110b14555683b392c",
+      "incoming_local_path": "sync-b7207a28/blobs/d1e612713dbcc0717885c61110b14555683b392c",
+      "incoming_sha256": "bb36f07f0fa84ae0571f8655709f7523526ab79c2495496cce3c7545e50a44bf",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js",
+      "base": "44a41165a45e14d0f6b3dc9d255cfc6548977a69",
+      "cloud": "06fc7656ebd8baa6caaf800b821106fb7701844c",
+      "remote": "73c1aa9eb90b384cb89471b8303f10d9fd9e433a",
+      "incoming_local_path": "sync-b7207a28/blobs/73c1aa9eb90b384cb89471b8303f10d9fd9e433a",
+      "incoming_sha256": "50e042e57d6589c13e439171227f061a4a37596b14a8a4ba04709b2e21d0f843",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "base": "86c06fa6362e101a073d94b10d6083487fcd02cf",
+      "cloud": "c56a0f57cfb4dda0c187433e5bac01836bc45f15",
+      "remote": "355778e2ed3bbe6d5f2e08a24da99ec38c42cd3b",
+      "incoming_local_path": "sync-b7207a28/blobs/355778e2ed3bbe6d5f2e08a24da99ec38c42cd3b",
+      "incoming_sha256": "c4dd6d5d5729d699823b280c829f60ccc193933d85cf90fc6ba5af85aec8504f",
+      "textual_merge_exit": 3,
+      "textual_conflict_regions": 3,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply validated owned mount capabilities, focus/identity repairs and liveInteractionSnapshot only; preserve master blocked-state order, equipment under vitals, item target rules and mark badges."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.secondary-overlay.js",
+      "base": "85106d5a925679023e4848f19cc8051f63add871",
+      "cloud": "85418a4c0f0d26bb7511b76c3d16b0d7d8680173",
+      "remote": "f0dd252bf3ec6341d97871e9412d72b9ecfe03d0",
+      "incoming_local_path": "sync-b7207a28/blobs/f0dd252bf3ec6341d97871e9412d72b9ecfe03d0",
+      "incoming_sha256": "364daa61d27965388041fd3438bbb1e2a34ec0c5924c53fd7218e288f242d622",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply connected retained-body revision/owner guard and restore timing; preserve master annotations."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "base": "f2ef3a51d45875dad63dea0edc4294d5dedd8933",
+      "cloud": "4512d58ee30a19dc6117d08fb7a463b25330af89",
+      "remote": "cc6777453aed705dc7b254fe0adb08ca06f6cb3c",
+      "incoming_local_path": "sync-b7207a28/blobs/cc6777453aed705dc7b254fe0adb08ca06f6cb3c",
+      "incoming_sha256": "6f2b55c8a164be0c85d9d28804053b7c351c7c3c1fbef3b65c300d1a45e74288",
+      "textual_merge_exit": 8,
+      "textual_conflict_regions": 8,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply validated render transaction/ownership/persistent-stage guards over master, preserving physical infusion, bounded prev-next pager, potionUse, new card values and exports."
+    },
+    {
+      "path": "搜打撤/game/src/game.boot.js",
+      "base": "e7f5440f01d65324e5770193a936b89a4a8a2a88",
+      "cloud": "f5139e9d89f29bdae44baf1ce7a58b9b1890948c",
+      "remote": "272138dd6cf0b9a378e27f51caaec2de0c0b2523",
+      "incoming_local_path": "sync-b7207a28/blobs/272138dd6cf0b9a378e27f51caaec2de0c0b2523",
+      "incoming_sha256": "7d004de0acc5b7dd532a52469ba588c0d9d14638373ac2a27aa80c111086af45",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/generated/art-manifest.js",
+      "base": "2e86bfb460f67155d71d015c05766f502120aeac",
+      "cloud": "bca4db00241c2673679852d709030eff5d6bc60a",
+      "remote": "6e462ce0755ab7c31ca09c735b999336f7430058",
+      "incoming_local_path": "sync-b7207a28/blobs/6e462ce0755ab7c31ca09c735b999336f7430058",
+      "incoming_sha256": "90643fff48fb389cb33ad481af1033dcfee62700be8d945bde48fcc86bdea08d",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/home/home.presenter.js",
+      "base": "b582e42a432683e014990ebf0fea09a43fcb8d55",
+      "cloud": "22f480d2582d685c75013ad2bba26a7fe5baa925",
+      "remote": "21356fc69419a5bc8a98777398740c5d036adce5",
+      "incoming_local_path": "sync-b7207a28/blobs/21356fc69419a5bc8a98777398740c5d036adce5",
+      "incoming_sha256": "509ee82673e641d91f1f013c3693c47acd6936caa1e30dbadc5f9a80e8baa5cd",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.js",
+      "base": "7e7f53ba6f81b130f539f5bc9f0ac541213ccf82",
+      "cloud": "27feaae9573e08836a795b1c77f9bcad650dae4a",
+      "remote": "58851b65907ec1fe59cd1d1eaf9000d42621d2d4",
+      "incoming_local_path": "sync-b7207a28/blobs/58851b65907ec1fe59cd1d1eaf9000d42621d2d4",
+      "incoming_sha256": "013ec0c6bd120a0bc6b5e81bb9788b50bf1ca09f08bba491f0da0f5d7bae585f",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.rules.js",
+      "base": "732f2294653d256a132b647ec37c234aef858496",
+      "cloud": "f3246b70282f96a2b0e5805b0bb0310ecfe1744d",
+      "remote": "a146f8e0b51717afa301fa58efec82e23e8e8c64",
+      "incoming_local_path": "sync-b7207a28/blobs/a146f8e0b51717afa301fa58efec82e23e8e8c64",
+      "incoming_sha256": "7763a2a63a29f4e4ee9b66617d2b9e3ba38833edf6936c8123d2b1db6c40568c",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.pages.js",
+      "base": "ea7bc7a7271ae543b0a42713a38fb01708bb2837",
+      "cloud": "fb59055ec74842ae809dbe5321c9baf5565e03a7",
+      "remote": "08af0dc576d2a06f35d73d2854e59d879680926a",
+      "incoming_local_path": "sync-b7207a28/blobs/08af0dc576d2a06f35d73d2854e59d879680926a",
+      "incoming_sha256": "0e4f154da57f0c34596eddd234b916c4e712dcd6ceb53d568a9f5ad14dd06de9",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+      "base": "0ebc210cd1b17affe45d224761337cb1aea467cf",
+      "cloud": "d3aa68e7daa074940eda347a64c35c35ef753083",
+      "remote": "90bf6ff109413e09a69b74ace7e02b5043cffefe",
+      "incoming_local_path": "sync-b7207a28/blobs/90bf6ff109413e09a69b74ace7e02b5043cffefe",
+      "incoming_sha256": "3985ab14e42809a03ac8ad6fcb5a3afab77f544eb7611d9b383b674423ba67b0",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/r7a.qa.js",
+      "base": "ed2edd9cef3b159e50f4ba5092fe29de4962bd8b",
+      "cloud": "4609885030df0a1104a906cfa333bce3bc1361b4",
+      "remote": "ea48a223793a0cc92e9f24e9efd3301a1e7a6fe9",
+      "incoming_local_path": "sync-b7207a28/blobs/ea48a223793a0cc92e9f24e9efd3301a1e7a6fe9",
+      "incoming_sha256": "5026a6e7699deb8967e990008830386af6bd2754001b4fe1b623f6dee3ac770a",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "manual-semantic-reconcile",
+      "reason": "CENTRAL EXCEPTION: restore validated UI.act disabling loop for btBag/btSettings after persistent region mount; preserve master casts."
+    },
+    {
+      "path": "搜打撤/game/src/run/event-lifecycle.js",
+      "base": null,
+      "cloud": "9d8d7e397dfc0aff341a94ba11206565f0e6ed3f",
+      "remote": "eddfc9fbe2cce9db25dd67749e77e18aafd58c19",
+      "incoming_local_path": "sync-b7207a28/blobs/eddfc9fbe2cce9db25dd67749e77e18aafd58c19",
+      "incoming_sha256": "e3bc8a0e95a5fb3b10a8bbe847b00bf1ded7d20fac6797f9aabc267bc959c26c",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.events.js",
+      "base": "d6c2d0a7ee44e7a6f38c8b30accdb7a3c7a1442b",
+      "cloud": "0c2b275d4a925b1ba05bb97a97d762e490688976",
+      "remote": "9629de23844915020a840840eeb991b511687c58",
+      "incoming_local_path": "sync-b7207a28/blobs/9629de23844915020a840840eeb991b511687c58",
+      "incoming_sha256": "84918fbeafb203da1b45d4823032cba10e1efabcfc4d12544b6c4427cef10733",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.flow.js",
+      "base": "4886b649142133f9932cad21f840200cc29889b7",
+      "cloud": "5d6fcbf00b203b3042460ff85fd143d27830042a",
+      "remote": "306f39a8b041e68df006ff2a77b070ac61e1083a",
+      "incoming_local_path": "sync-b7207a28/blobs/306f39a8b041e68df006ff2a77b070ac61e1083a",
+      "incoming_sha256": "aca036012d368df4544f8710c76d6f185ba38a1c86f715e7b86597ab5cbd92fc",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/ui/camp-entry.js",
+      "base": "41286d3e312847ee95e43843add4af3a45cda9c9",
+      "cloud": "1e5c67651a1a22c5a641316cd6fc17be79d5f1d0",
+      "remote": "bc11821107f5bc89e32005389ac4bff2c9c3c758",
+      "incoming_local_path": "sync-b7207a28/blobs/bc11821107f5bc89e32005389ac4bff2c9c3c758",
+      "incoming_sha256": "ccee99b0505c2b35cc6fa8c04ef69a41ea2f2b23a23abbbc7d503f2d15c7c384",
+      "textual_merge_exit": 4,
+      "textual_conflict_regions": 4,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "base": "2644f7c8633b231ac81b2013d7198e28464503df",
+      "cloud": "d612987aa5fa9cdbb794aa0d23b70b192b67d34d",
+      "remote": "b05579922d00d8ee86324c18dc7d76ae388aaec9",
+      "incoming_local_path": "sync-b7207a28/blobs/b05579922d00d8ee86324c18dc7d76ae388aaec9",
+      "incoming_sha256": "d21defe82a2532d94d0f9c294a5f9e1fe7097af719067dd099c38354f0ed9385",
+      "textual_merge_exit": 7,
+      "textual_conflict_regions": 7,
+      "decision": "manual-semantic-reconcile",
+      "reason": "Reapply connected body-write/content-scoped focus/bg/cancel/sound and trace-panel modal ownership; preserve master expedition panel lifecycle/focus remap, headings and types."
+    },
+    {
+      "path": "搜打撤/game/src/ui/page-visual-ready.js",
+      "base": "c4722ea625726bf105cad4a1650a84782cc43b17",
+      "cloud": "041a7e088eed9d7477e74b357d3120d4ac304323",
+      "remote": "c102817b34b332a3a18a84b38a4c0b4bb94a7fa1",
+      "incoming_local_path": "sync-b7207a28/blobs/c102817b34b332a3a18a84b38a4c0b4bb94a7fa1",
+      "incoming_sha256": "6fd72cbe7c138cd7caa98108258fecda90e54a56409e7b9f03a5a35050ec1d99",
+      "textual_merge_exit": 4,
+      "textual_conflict_regions": 4,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/ui/term-tips.js",
+      "base": "237b25d85e895ea870cf459d4c99c1f0b035042c",
+      "cloud": "d6df317c32bfeac6f6d4e51116b2d02dc1647e57",
+      "remote": "f1c200f13a882035078b61f23aa774f1021b10f3",
+      "incoming_local_path": "sync-b7207a28/blobs/f1c200f13a882035078b61f23aa774f1021b10f3",
+      "incoming_sha256": "b992d921ac3edf935c50dc47fad6323653b42ec7e18ee6046cb9935deb5a7222",
+      "textual_merge_exit": 4,
+      "textual_conflict_regions": 4,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/game/src/ui/term-tips.runtime.js",
+      "base": null,
+      "cloud": "32b33040aa1b34be0e2ad7cbb7f64d91ccabf919",
+      "remote": "c7a71d71d9b26bb9dc59d2562c68fe89471cee1b",
+      "incoming_local_path": "sync-b7207a28/blobs/c7a71d71d9b26bb9dc59d2562c68fe89471cee1b",
+      "incoming_sha256": "c9146f1a13b28a0fc216a3f62bc3296299539baa22f4e51d5d97ebf3a548a6ab",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-reviewed",
+      "reason": "Incoming already preserves the validated cloud behavior; retain newer gameplay/features/types. See report and gameplay subreview."
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "base": "d2d6f2bd413f60c9b629eb8e0ad6ddc07b7f2051",
+      "cloud": "291e4789b54207815b423d0983d0eed57aab1e07",
+      "remote": "8dbce590ba8e133f7fcaa98963c56ccf66ab0633",
+      "incoming_local_path": "sync-b7207a28/blobs/8dbce590ba8e133f7fcaa98963c56ccf66ab0633",
+      "incoming_sha256": "a081d5bbb4b11c48af65997d251a51cdda649be84d2036c013bca1e8930996a9",
+      "textual_merge_exit": 5,
+      "textual_conflict_regions": 5,
+      "decision": "retain-incoming-and-final-review",
+      "reason": "Keep newer reviewed inventory/exclusions; prove final changed asset constructor expressions and update only existing exact source fingerprints."
+    },
+    {
+      "path": "搜打撤/tests/base-inventory-lifecycle-audit.test.js",
+      "base": "fb0dd9df93a70831fbf84fdac1ef285ca8c4c698",
+      "cloud": "94ce369b5bed67332e6e8240b219e173c899a4ae",
+      "remote": "17138cb76563c16600910dfbe67862e22e9d3ae2",
+      "incoming_local_path": "sync-b7207a28/blobs/17138cb76563c16600910dfbe67862e22e9d3ae2",
+      "incoming_sha256": "bac61ccb54d9e636c5eaca15c6acbe84a228da20449152af9a0a1f34ac79eb90",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-ally-dom-order.test.js",
+      "base": null,
+      "cloud": "8ab55d276f408d9ff85885b208051907d7cb3bf7",
+      "remote": "81ff6ef23bb895eb318a7f4b461d0c4f59e6a097",
+      "incoming_local_path": "sync-b7207a28/blobs/81ff6ef23bb895eb318a7f4b461d0c4f59e6a097",
+      "incoming_sha256": "70b6f265dbc4c86c9fd1888789b7a8c71d0977c12ab12c2b53e01cd2e51da7e4",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-frames-ownership.test.js",
+      "base": "acf047ee6659bc97e69c0c8f2f26da47096b0149",
+      "cloud": "d83a0b8d02e17df9bd88b0b5564893e816af2008",
+      "remote": "02551b4772485307767085c015fbfd5e825e542d",
+      "incoming_local_path": "sync-b7207a28/blobs/02551b4772485307767085c015fbfd5e825e542d",
+      "incoming_sha256": "565cf3cb2fb7957c6b0be634b4489d61a77f30effd56d49369350c1d94fd0025",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-inspector.test.js",
+      "base": "5117fb7a79330214ca805c4e877a14ef8562d5ad",
+      "cloud": "babf9e16f27ecc8ca78f1db94862b8415ab644b5",
+      "remote": "c500e6bd3ab328bf18e34d2a1cf9deb97293a3e4",
+      "incoming_local_path": "sync-b7207a28/blobs/c500e6bd3ab328bf18e34d2a1cf9deb97293a3e4",
+      "incoming_sha256": "aff7fd1130b55e88f12276879f6263dd64817adabe11919b976057678d80fa93",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-keyword-interaction.test.js",
+      "base": "aa663efd3dd936f050e01522f18ce98d79f70cae",
+      "cloud": "97ed5cba48f110dc2dc2a75b6613f58e4611ecd1",
+      "remote": "cf50f27e5fa8b64837a3e2e4d6fb78caa18030ac",
+      "incoming_local_path": "sync-b7207a28/blobs/cf50f27e5fa8b64837a3e2e4d6fb78caa18030ac",
+      "incoming_sha256": "08e65addb57f8c741137ca99cda25e522dfeffc3d7c579f7fe2bc3b426f4cb50",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+      "base": null,
+      "cloud": "0ee1a5f994c05a993fa75c7ee9c7aee716cc2769",
+      "remote": "3f4ea806ff327ddca08f8a7016c48cc3030265c2",
+      "incoming_local_path": "sync-b7207a28/blobs/3f4ea806ff327ddca08f8a7016c48cc3030265c2",
+      "incoming_sha256": "7ac22116c6cf7d0abec00b93fb0f718a67b8cf351b59fc06467038cf0ff4188a",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-action-layout.test.js",
+      "base": "fb87bc4146514a44c40b90ea550812bdba51e921",
+      "cloud": "f3169d3489c22b75d93ef56c395367dfb1419d5c",
+      "remote": "b0b7f409d9fd0a54de77e21e2e91df7a958a6e85",
+      "incoming_local_path": "sync-b7207a28/blobs/b0b7f409d9fd0a54de77e21e2e91df7a958a6e85",
+      "incoming_sha256": "5e65f3d741770208969d74a3c893ca10deb18e5bed035561193cc0a769f52134",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-preview-hand-context.test.js",
+      "base": null,
+      "cloud": "604fb78332fbc280efd1b3e879c1cb61b65fc73b",
+      "remote": "b443d263f2101e2485e190c7fd3f6d04905f3332",
+      "incoming_local_path": "sync-b7207a28/blobs/b443d263f2101e2485e190c7fd3f6d04905f3332",
+      "incoming_sha256": "71b86f2ba36f2b88082361f7141252ddd1a278fea058b8aa888676754013f651",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-scenery-secondary-ready.test.js",
+      "base": "566d297db8b8bcc334846bb70ee9b7e06d8d4c1e",
+      "cloud": "730810c70bd781030559969ee6492844fbd97680",
+      "remote": "92f9aa7417b44fc289dafddcba2e856369e167d2",
+      "incoming_local_path": "sync-b7207a28/blobs/92f9aa7417b44fc289dafddcba2e856369e167d2",
+      "incoming_sha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/battle-tools-lifecycle.test.js",
+      "base": "915bbf271ace9ed949ae88c0cb916bb0cd7d722d",
+      "cloud": "121b83861df277e75b284cca4e806ae682fcf8a2",
+      "remote": "e11e7247411b4e74d5e2ce54ea21f68d5a5819dc",
+      "incoming_local_path": "sync-b7207a28/blobs/e11e7247411b4e74d5e2ce54ea21f68d5a5819dc",
+      "incoming_sha256": "6adf89d8bce3a263347d446240ee3c825258fae75c9feaab74bf4f5427d68806",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/blackmarket-card-preview.test.js",
+      "base": "172763aa0dd1be1fab2cec28a099362f1b112168",
+      "cloud": "195ad5cfbeb42388b55cfee8234df08cfddf3ff0",
+      "remote": "2ecebdeb94b3b5847289791204e4a0b0fde73b46",
+      "incoming_local_path": "sync-b7207a28/blobs/2ecebdeb94b3b5847289791204e4a0b0fde73b46",
+      "incoming_sha256": "b2c55db0bf3b3997ee18c9d055f16d8fbbb9bad002f3c4cb73c2ab26732d8afa",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/direct-cast.test.js",
+      "base": "62161f03e52c53c82d3b13fffa7f0f5a96ee794b",
+      "cloud": "05e37e6e1fbb2a10f367dfa8d00d32d435c46c7f",
+      "remote": "d8edd844b2762d2383fb31230986ea36ac5ad4c6",
+      "incoming_local_path": "sync-b7207a28/blobs/d8edd844b2762d2383fb31230986ea36ac5ad4c6",
+      "incoming_sha256": "a2f6ef176f51a570b67bdc19d9f1ed799be6caa60e8f90994546ce6dea8919b6",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/event-callback-lifecycle-audit.test.js",
+      "base": "f43501800585aa448ab7b3d30e7882ca0607a160",
+      "cloud": "810a9f3991a163b5e47376141cfc8569034a610f",
+      "remote": "c2f0eb2c7d1b5730d72d1b654704596b22e363b3",
+      "incoming_local_path": "sync-b7207a28/blobs/c2f0eb2c7d1b5730d72d1b654704596b22e363b3",
+      "incoming_sha256": "d28b62c25df792c585291601297e545bed11b4566a51bb80da3012b6f5a232db",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/events-lazy-entry.test.js",
+      "base": null,
+      "cloud": "024c54f850ce5fc7fd654a6bc70c4791d2ae7fcb",
+      "remote": "b9031a1be7f0267be3728084833464722be101aa",
+      "incoming_local_path": "sync-b7207a28/blobs/b9031a1be7f0267be3728084833464722be101aa",
+      "incoming_sha256": "dcedf12fdb483f29d6c7856b32578671dac14b0beea05d450fe826b2aa3cf720",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/hero-cards.test.js",
+      "base": "3a63ecaa24d300e719e0c15150064b618bce7b0a",
+      "cloud": "df45ae785ac2fabac94ec0871daafcbdb69e0a8c",
+      "remote": "8e9d2a4c47aa6f3482f5099a1e1bf5894334ee5d",
+      "incoming_local_path": "sync-b7207a28/blobs/8e9d2a4c47aa6f3482f5099a1e1bf5894334ee5d",
+      "incoming_sha256": "ab44578e600689b656d61593127b54ba28cb47afc9d896ec039426057399f50e",
+      "textual_merge_exit": 2,
+      "textual_conflict_regions": 2,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/page-visual-readiness-sharing.test.js",
+      "base": null,
+      "cloud": "2eb9716ccc6c7fc55b3e2f6b85bd78ae38346300",
+      "remote": "a9c763cc50282df666726e39bf9ca33588729d2a",
+      "incoming_local_path": "sync-b7207a28/blobs/a9c763cc50282df666726e39bf9ca33588729d2a",
+      "incoming_sha256": "9747a6744c5ca0f47321eb2f52b4085f99d25e85710cea9070205677e02ea787",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+      "base": "83191bc87059a1c00e1572f62adf3101c04a9bdb",
+      "cloud": "7e6cc13417624c01de4b7d1c068b73256b019c6b",
+      "remote": "797f3ed57b79ca27158255d7122fb2940db82d47",
+      "incoming_local_path": "sync-b7207a28/blobs/797f3ed57b79ca27158255d7122fb2940db82d47",
+      "incoming_sha256": "1a71bb03a73efd6817ccdbfb2b8eaf77eb0508ff71856bd1b2abddd20d95e4d1",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/runtime-asset-redundancy.test.js",
+      "base": "87b02c123631326c042ac33b7bc22677703292ba",
+      "cloud": "ebe213816e65a5a72fe577cc4b97c4b6c183e8b0",
+      "remote": "79841e49e7ccd3d01d1934a53cf960310f00cfef",
+      "incoming_local_path": "sync-b7207a28/blobs/79841e49e7ccd3d01d1934a53cf960310f00cfef",
+      "incoming_sha256": "c0c43c3c0aaed9dadae67fd5e8adc3808674be9cdd3648d8dd014c033437f96a",
+      "textual_merge_exit": 1,
+      "textual_conflict_regions": 1,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    },
+    {
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+      "base": "b625e72328cc864d4db2f0efd791daa502e04bf9",
+      "cloud": "61a1658d5c99f59f28569aca1dcb58d2d277fd12",
+      "remote": "058833827cc88187730db9bb1a17cb7c10f0edac",
+      "incoming_local_path": "sync-b7207a28/blobs/058833827cc88187730db9bb1a17cb7c10f0edac",
+      "incoming_sha256": "f0dc989ddba139f3cf442b6c3a9e62c24369da2bfd31e0314d2e76061e1a1e06",
+      "textual_merge_exit": 0,
+      "textual_conflict_regions": 0,
+      "decision": "retain-incoming-assertions-reconcile-mocks",
+      "reason": "Do not blanket replace newer tests. Preserve new gameplay assertions; add connected overlay mock contract/accepted invariants only where needed."
+    }
+  ],
+  "cloud_only_source_and_tests": [
+    {
+      "path": "搜打撤/game/css/battle-secondary-overlay.css",
+      "cloud": "6fca2a37f8e39e4e6b514e582b79a38a8775f8d2",
+      "base": "d42a08d373c537c86ed0b336dbf9f7c062ee1051",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.stage-view.js",
+      "cloud": "1e9d9dea5c42d4a71a1c5c40b398491351d5af91",
+      "base": null,
+      "decision": "adapt-to-master-contract",
+      "reason": "Keep validated ownership/repair/patch mechanism; adapt pager parent to dock, DIV prev-next shape, energy markup and potion integration. This is accepted v36 file, not new unaccepted validated-mounts patch."
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-panel.local.js",
+      "cloud": "2046a8a3ba8b064a7b77e605e64653b687f215a0",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace-stages.local.js",
+      "cloud": "71eae299f2d5a5b74391ad539d084c17b759828c",
+      "base": "d5ad2cfa79a1bbf65e442353a8a8bf537e182e47",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/game/src/core/runtime-trace.local.js",
+      "cloud": "213ca7002b8826def5e0dde1b48d7cc6489adf58",
+      "base": "b320a6c55483ab3facadac25448dfef7d2350fdc",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/scripts/runtime-trace-alignment.mjs",
+      "cloud": "05bcc7bdf46e2988919fdfca8d8e738fa74276f3",
+      "base": "2c17971354cbcb434a125bc8efd8dba8f9037ebb",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-entry-view.test.js",
+      "cloud": "4d1f15a0efea0339514ff5d7bf1a2da59edc1382",
+      "base": "ee9a5c974f6a9188f53cd9f8d404f2e8ff75b613",
+      "decision": "retain-validated",
+      "reason": "Retain _overlayRevision/options.battleBody mock contract, with new actual battle-entry readiness integration."
+    },
+    {
+      "path": "搜打撤/tests/battle-frames-lifecycle.test.js",
+      "cloud": "69d662d54e64ef40fedfffcd4506c35639b93d29",
+      "base": "31f1baadc4d773020c492aeffa066e39d779a699",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-hit-input.test.js",
+      "cloud": "d7809abd24e5ac8f74d14166d5e8d2aa514ce5f8",
+      "base": "7cc36d302f582add6171c1bd1d84a9dc8259323d",
+      "decision": "retain-validated",
+      "reason": "Retain staged-owner argument source-shape check when final integration uses it; preserve behavior assertions."
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-existence.test.js",
+      "cloud": "10278794ad72f8d71dcd91225002af48574b0a6a",
+      "base": null,
+      "decision": "superseded-do-not-reapply-cloud-delta",
+      "reason": "Grouped early-existence/no-available API and +/- pane are obsolete under master per-UID inline selection. Keep incoming material-state tests; carry only relevant no-spend/stale-input/revalidation invariants into new flow tests, not old count/UI expectations."
+    },
+    {
+      "path": "搜打撤/tests/battle-infusion-material-state.test.js",
+      "cloud": "ce582395422911dbdfd8f355047b11bbbf41cbb1",
+      "base": "11d80a9498d117d22a3b78a11266b1285f63820d",
+      "decision": "superseded-do-not-reapply-cloud-delta",
+      "reason": "Grouped early-existence/no-available API and +/- pane are obsolete under master per-UID inline selection. Keep incoming material-state tests; carry only relevant no-spend/stale-input/revalidation invariants into new flow tests, not old count/UI expectations."
+    },
+    {
+      "path": "搜打撤/tests/battle-persistent-stage.test.js",
+      "cloud": "e221a5c7f8a5232329746b756bfcc1a3021e8191",
+      "base": null,
+      "decision": "retain-invariants-adapt-fixtures",
+      "reason": "Preserve identity/repair/guard/no-unchanged-write/badge ownership tests, adapt old cycle pager BUTTON and data-potion-tip fixtures to master DIV bounded nav/new potion-use behavior."
+    },
+    {
+      "path": "搜打撤/tests/battle-render-runtime-trace.test.js",
+      "cloud": "570af32fe769cc18d0c7efdc948ebe12ef1015b5",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-restore-boundaries.test.js",
+      "cloud": "03f625b61c79f138f3b2bc7cf658046688965821",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-rules-settlement.test.js",
+      "cloud": "9a4493a642768f2e8a66573c635e6397c0f309f0",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-secondary-overlay.test.js",
+      "cloud": "bfe3d15762a383d568bf5176925043c01ef89794",
+      "base": "25cb6f122bf95b254ae5f0194706fbb83ef8dc39",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-mounts.test.js",
+      "cloud": "02934901740fd93ed07bf2cbd37ac5970653b89a",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/battle-stage-validator.test.js",
+      "cloud": "78dd4e06adbbecf31fa00b2e16e821407d84de53",
+      "base": null,
+      "decision": "retain-invariants-adapt-fixtures",
+      "reason": "Preserve identity/repair/guard/no-unchanged-write/badge ownership tests, adapt old cycle pager BUTTON and data-potion-tip fixtures to master DIV bounded nav/new potion-use behavior."
+    },
+    {
+      "path": "搜打撤/tests/r7a-qa-live.test.js",
+      "cloud": "968447fc1467577b0e9ace671920b117ea63e805",
+      "base": "27a08f8de49a168524831c6a264bd56725086ae8",
+      "decision": "retain-validated",
+      "reason": "Required aria-disabled/title/repeated-render assertion for central r7a UI.act loop exception."
+    },
+    {
+      "path": "搜打撤/tests/runtime-trace-alignment.test.js",
+      "cloud": "3a31084ecc12bb9b030e8aef4af3d34f31b01560",
+      "base": "49e47fa0c9df989628d820f3d323f87c1568860f",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/runtime-trace-modal.test.js",
+      "cloud": "e57eea4d85fbf381151d2517628e4a0a48cdf12e",
+      "base": null,
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    },
+    {
+      "path": "搜打撤/tests/runtime-trace-stages.local.test.js",
+      "cloud": "2b50c99dcd33217add43f2554b45b1ef27cd1578",
+      "base": "5a960a75136f16d2856def74fe3ad961fc73a28d",
+      "decision": "retain-validated",
+      "reason": "Retain accepted v36 behavior/coverage; verify against merged source."
+    }
+  ],
+  "explicit_exclusions": [
+    "selection-prompt-direct-child-20261021 NEW UNACCEPTED candidate",
+    "validated-battle-mounts-v36-20261021 NEW UNACCEPTED candidate",
+    "bounded-hand-pool-20261021 REJECTED candidate"
+  ],
+  "production_source_writes": false,
+  "build_test_browser_runs": false,
+  "remote_writes": false,
+  "ci_pass_evidence": false,
+  "gameplay_subreview": "../master-merge-gameplay-review-20261021/gameplay-review.json",
+  "central_integration_exceptions": [
+    {
+      "path": "搜打撤/game/src/r7a.qa.js",
+      "change": "Reapply validated UI.act disable loop after persistent-region mounting; preserve incoming casts.",
+      "evidence_test": "搜打撤/tests/r7a-qa-live.test.js"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.dom.types.d.ts",
+      "change": "Review narrow ownership-field type additions required by final accepted render/overlay reapplication; incoming interface lacks _battleRenderCurrent. Do not suppress type errors or loosen unrelated types.",
+      "incoming_blob": "7edaa7df07800fab65bf30aeb3383f79f1ae9b88"
+    },
+    {
+      "path": "搜打撤/tests/expedition-view.test.js",
+      "change": "Remove only stale line97 --bag-fill button-property assertion; current exact inner width, capacity state, aria-hidden, visible counter and accessible label assertions remain. Adding an absent legacy-variable assertion is optional. No production change needed.",
+      "incoming_blob": "e30f102e6edd0172911e86de4f1c9099e29c9a64",
+      "source_blob": "38faeae4304b6dc5d2e70867ba186aadeb3936ff",
+      "css_blob": "7407e2b480866fed356832f5f06a821728bc8d77",
+      "static_search": {
+        "incoming_runtime_js_css_scanned": 727,
+        "missing": 0,
+        "bag_fill_consumers": 0
+      },
+      "external_baseline_log": "../merge-connected-overlay-b7207a28/incoming-expedition-baseline.log",
+      "external_baseline_results": {
+        "passed": 22,
+        "failed": 5,
+        "all_failures": "same stale line97 CSS-variable assertion"
+      },
+      "reviewer_executed_test": false
+    },
+    {
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "change": "Retain incoming inventory and exclusions; re-review final modified frames/layers resource expressions and update only existing corresponding fingerprints with exact proof. Preserve fail-closed tests and budgets."
+    },
+    {
+      "paths": [
+        "搜打撤/docs/PARALLEL-REGISTRY.md",
+        "搜打撤/docs/agent-protocol.md",
+        "搜打撤/docs/architecture.md",
+        "搜打撤/docs/infusion-material-controls.md",
+        "搜打撤/docs/performance.md"
+      ],
+      "change": "Retain master current rules/features and append only newly reconciled accepted behavior/evidence. Keep incoming inline per-UID infusion description; do not restore retired grouped selection/existence performance claims."
+    }
+  ],
+  "precision_notes": [
+    "Incoming infusionMaterialState returns available[], but all currently located production consumers use flags rather than the available array directly. Earlier message saying a new consumer uses available was corrected. Per-UID groups make old multi-copy existential short-circuit rationale obsolete.",
+    "Dynamic values are a focused test requirement, not a demonstrated bug: current handGroupState recomputes cardHTML per render and compares resulting inner HTML; preserve that freshness.",
+    "Review metadata contains textual diff3 conflicts, not evidence that all such files need manual code changes. Many master files already integrated cloud changes."
+  ]
+}

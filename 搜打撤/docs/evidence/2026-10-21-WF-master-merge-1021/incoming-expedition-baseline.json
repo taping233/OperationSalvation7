@@ -1,0 +1,112 @@
+{
+  "incoming_commit": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "cwd": "/workspace/scratch/b7a53a06c872/merge-connected-overlay-b7207a28/candidate/搜打撤",
+  "command": "./node_modules/.bin/vitest run --config vitest.merge.config.mjs tests/expedition-view.test.js --reporter=verbose",
+  "exit_code": 1,
+  "passed": 22,
+  "failed": 5,
+  "log": "incoming-expedition-baseline.log",
+  "classification": "incoming test retains obsolete --bag-fill assertion in addition to passing new child i width assertion; visual failure not established",
+  "dependencies": [
+    {
+      "path": "搜打撤/tests/expedition-view.test.js",
+      "incoming_sha": "e30f102e6edd0172911e86de4f1c9099e29c9a64",
+      "verified_sha": "e30f102e6edd0172911e86de4f1c9099e29c9a64"
+    },
+    {
+      "path": "搜打撤/game/src/run/expedition.view.js",
+      "incoming_sha": "38faeae4304b6dc5d2e70867ba186aadeb3936ff",
+      "verified_sha": "38faeae4304b6dc5d2e70867ba186aadeb3936ff"
+    },
+    {
+      "path": "搜打撤/game/src/core/shared.js",
+      "incoming_sha": "bc4000623ef3435f08bc50d7ba99823cb3706e10",
+      "verified_sha": "bc4000623ef3435f08bc50d7ba99823cb3706e10"
+    },
+    {
+      "path": "搜打撤/game/src/run/expedition-tool-art.js",
+      "incoming_sha": "1bb7b6663cc8e63ddc67b56b19dcea875a26db40",
+      "verified_sha": "1bb7b6663cc8e63ddc67b56b19dcea875a26db40"
+    },
+    {
+      "path": "搜打撤/game/css/map-floating-tools.css",
+      "incoming_sha": "7407e2b480866fed356832f5f06a821728bc8d77",
+      "verified_sha": "7407e2b480866fed356832f5f06a821728bc8d77"
+    },
+    {
+      "path": "搜打撤/game/src/run/route-choice-preview.js",
+      "incoming_sha": "ed0c97833479ca181d7cded932d23c51825098b2",
+      "verified_sha": "ed0c97833479ca181d7cded932d23c51825098b2"
+    },
+    {
+      "path": "搜打撤/game/src/run/map-route-v2.js",
+      "incoming_sha": "fd105be6582cea9623fc8ea201d37d842b6c64a8",
+      "verified_sha": "fd105be6582cea9623fc8ea201d37d842b6c64a8"
+    },
+    {
+      "path": "搜打撤/game/src/core/random-core.js",
+      "incoming_sha": "92c0c14dba8ea27fabfa515a766ddcce85d7dd54",
+      "verified_sha": "92c0c14dba8ea27fabfa515a766ddcce85d7dd54"
+    },
+    {
+      "path": "搜打撤/game/src/run/map-generation-rules.js",
+      "incoming_sha": "3aeae20b91bf682c4cb003e534bbd7a7b7c844c3",
+      "verified_sha": "3aeae20b91bf682c4cb003e534bbd7a7b7c844c3"
+    },
+    {
+      "path": "搜打撤/game/src/run/map-generator.js",
+      "incoming_sha": "f00bc5cec0a7154e5759d5754bda007671f82822",
+      "verified_sha": "f00bc5cec0a7154e5759d5754bda007671f82822"
+    },
+    {
+      "path": "搜打撤/game/src/core/node-info.js",
+      "incoming_sha": "b1c5972a805c184d623c4bf1a1781b54bec92f7c",
+      "verified_sha": "b1c5972a805c184d623c4bf1a1781b54bec92f7c"
+    },
+    {
+      "path": "搜打撤/game/src/core/map-node-state.js",
+      "incoming_sha": "9ff54c4b970430fc353f91fcebb959e8bfaddac1",
+      "verified_sha": "9ff54c4b970430fc353f91fcebb959e8bfaddac1"
+    },
+    {
+      "path": "搜打撤/game/src/run/node-restore-state.js",
+      "incoming_sha": "40dc2020ea755561ddc0e05b2bc0e737cbae9383",
+      "verified_sha": "40dc2020ea755561ddc0e05b2bc0e737cbae9383"
+    },
+    {
+      "path": "搜打撤/game/css/map-node-status.css",
+      "incoming_sha": "4a884935cda6d57fa15f0e3b8535d76fda14d3f3",
+      "verified_sha": "4a884935cda6d57fa15f0e3b8535d76fda14d3f3"
+    },
+    {
+      "path": "搜打撤/game/src/core/map-node-art.js",
+      "incoming_sha": "e4778dd2545ed39e1690ae0f0c33511e88abc7a1",
+      "verified_sha": "e4778dd2545ed39e1690ae0f0c33511e88abc7a1"
+    },
+    {
+      "path": "搜打撤/game/src/core/map-brush-art.js",
+      "incoming_sha": "8216f47ee2a244183099c53d88c2c4ba58443c6b",
+      "verified_sha": "8216f47ee2a244183099c53d88c2c4ba58443c6b"
+    },
+    {
+      "path": "搜打撤/game/src/core/map-image-ready.js",
+      "incoming_sha": "e219836e3013631b7cb7605c9a420227609984ed",
+      "verified_sha": "e219836e3013631b7cb7605c9a420227609984ed"
+    },
+    {
+      "path": "搜打撤/game/src/core/renderer.icons.js",
+      "incoming_sha": "de97b2befd0bff08fdf5ec5694828c0df2e42ad8",
+      "verified_sha": "de97b2befd0bff08fdf5ec5694828c0df2e42ad8"
+    },
+    {
+      "path": "搜打撤/game/src/run/map-travel-path.js",
+      "incoming_sha": "a78fed0f2ca21d4663ead498f70dac7e50d02c34",
+      "verified_sha": "a78fed0f2ca21d4663ead498f70dac7e50d02c34"
+    },
+    {
+      "path": "搜打撤/game/src/run/node-reward-state.js",
+      "incoming_sha": "2183d4a0e65278d09bbbc755c716c3dea19aacd6",
+      "verified_sha": "2183d4a0e65278d09bbbc755c716c3dea19aacd6"
+    }
+  ]
+}

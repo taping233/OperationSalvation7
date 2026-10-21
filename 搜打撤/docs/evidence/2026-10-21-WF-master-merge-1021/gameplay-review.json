@@ -1,0 +1,183 @@
+{
+  "kind": "Read-only semantic compatibility review, not execution validation",
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "cloud_tree": "86f43ce681cd2e49972e75c9095f546bfd378468",
+  "remote": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "source_scope": [
+    {
+      "path": "搜打撤/game/src/agent/agent.action-router.js",
+      "base": null,
+      "cloud": "9cfac13a46ea211c808427632320228d91b513e4",
+      "remote": "744fece33275ca82adffa6f3e712b55d8efc6336",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.replay.js",
+      "base": "07e70f83ff173a9aac4b1fc8737c6330916bee95",
+      "cloud": "19a2af020eeddce8542245aee0e2b3fa62a9aa02",
+      "remote": "e555b0d7b20f5d8b95fa1de7b6936d5bf42dd359",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.replay.runtime.js",
+      "base": null,
+      "cloud": "07e70f83ff173a9aac4b1fc8737c6330916bee95",
+      "remote": "19f33d48e5a06d19b998e435c626900b8036954c",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.runner.js",
+      "base": "0eace5448681504dd4f7f2eabdce25e7507a3662",
+      "cloud": "4812392718a929260f31dfb7fda5fab0f2011997",
+      "remote": "7452743b72dc1a20593e540d12b9d56979494d11",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/agent/agent.runner.runtime.js",
+      "base": null,
+      "cloud": "e9014696c63af4d3bfb7ab88e52d98692b9ad580",
+      "remote": "29b4bd03fe51009d7aa163bfc775710b2e4ea138",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.card-play.domain.js",
+      "base": "15d0a341ff20631dd3a1b31bc301d6a6a5c0b268",
+      "cloud": "659419a7cd43fc60bbc3c08aa4bd000746945692",
+      "remote": "7386e419fa351e715e022aed2a7b7ac7b02ec9d2",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.core.js",
+      "base": "a283a4710d7f2b7458f5764dcb64e3211e010ebf",
+      "cloud": "67f99265a808314e7c984e7adaa9c046a5047298",
+      "remote": "c6ba1055c053319d1762409d900e18d37d7aa62e",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+      "base": "e06806635271945f5abe0dbf1fc0cc68543cd441",
+      "cloud": "3f2fc28c3faaa758130c6f4ead563798526e40eb",
+      "remote": "16d9df9d76254cfc6864309e969209512df47afe",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present, with upstream changes retained. Engine snapshot improvement is relocated to new snapshot-projection module."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.js",
+      "base": "7e7f53ba6f81b130f539f5bc9f0ac541213ccf82",
+      "cloud": "27feaae9573e08836a795b1c77f9bcad650dae4a",
+      "remote": "58851b65907ec1fe59cd1d1eaf9000d42621d2d4",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.bag.rules.js",
+      "base": "732f2294653d256a132b647ec37c234aef858496",
+      "cloud": "f3246b70282f96a2b0e5805b0bb0310ecfe1744d",
+      "remote": "a146f8e0b51717afa301fa58efec82e23e8e8c64",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.pages.js",
+      "base": "ea7bc7a7271ae543b0a42713a38fb01708bb2837",
+      "cloud": "fb59055ec74842ae809dbe5321c9baf5565e03a7",
+      "remote": "08af0dc576d2a06f35d73d2854e59d879680926a",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js",
+      "base": "0ebc210cd1b17affe45d224761337cb1aea467cf",
+      "cloud": "d3aa68e7daa074940eda347a64c35c35ef753083",
+      "remote": "90bf6ff109413e09a69b74ace7e02b5043cffefe",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/run/event-lifecycle.js",
+      "base": null,
+      "cloud": "9d8d7e397dfc0aff341a94ba11206565f0e6ed3f",
+      "remote": "eddfc9fbe2cce9db25dd67749e77e18aafd58c19",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.events.js",
+      "base": "d6c2d0a7ee44e7a6f38c8b30accdb7a3c7a1442b",
+      "cloud": "0c2b275d4a925b1ba05bb97a97d762e490688976",
+      "remote": "9629de23844915020a840840eeb991b511687c58",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    },
+    {
+      "path": "搜打撤/game/src/run/game.run.flow.js",
+      "base": "4886b649142133f9932cad21f840200cc29889b7",
+      "cloud": "5d6fcbf00b203b3042460ff85fd143d27830042a",
+      "remote": "306f39a8b041e68df006ff2a77b070ac61e1083a",
+      "recommendation": "Keep reviewed incoming implementation: cloud improvement is already present; preserve upstream additions."
+    }
+  ],
+  "excluded": [
+    "selection-prompt-direct-child candidate",
+    "validated-battle-mounts candidate",
+    "bounded hand pool rejected candidate"
+  ],
+  "critical_preservation": [
+    {
+      "area": "Infusion and targeting",
+      "sources": [
+        "搜打撤/game/src/battle/core/battle.card-play.domain.js",
+        "搜打撤/game/src/battle/core/battle.core.js",
+        "搜打撤/game/src/battle/core/battle.snapshot-projection.domain.js"
+      ],
+      "finding": "Incoming retains render-only raw-hand projection optimization. Keep inspectCardPlay(uid, allowInfusing=false, handRuleContext=null) and getCardPlayAvailability -> inspectCardPlay(uid,false,handRuleContext). Preserve incoming selectionSeq/battleToken/selectionId, pointer target WeakMap, selected-fuel/phase/liveness validation, drag-to-material workflow, confirm -> submitCardPlay, cancel -> resumeTurnEnd, and direct-play clearing of prior fuel. Snapshot pendingTarget now projects immutable fuelUids plus ownership identifiers."
+    },
+    {
+      "area": "Effect-driven direct release",
+      "sources": [
+        "搜打撤/tests/direct-cast.test.js",
+        "搜打撤/game/src/battle/core/battle.selection-flow.domain.js"
+      ],
+      "finding": "Upstream test explicitly records feedback#5b decision: direct release/cast treats infusion cards as infused without spending materials, replacing cloud old retained-in-hand behavior. Preserve directRelease propagation in execution/selection/acquire closure. Keep new bloom/raydragon damage13 and hand/energy/consumed assertions. Do not restore cloud old assertion."
+    },
+    {
+      "area": "Snapshot extraction",
+      "sources": [
+        "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+        "搜打撤/game/src/battle/core/battle.snapshot-projection.domain.js"
+      ],
+      "finding": "Incoming extracted createSnapshotProjection retains cloud inactiveDeckSelectionInput and skips formation projections outside selectingDeck; retains instance-owned signature/cache. Do not reintroduce old inline implementation or undo effect/setup module extractions."
+    },
+    {
+      "area": "Event lazy lifecycle",
+      "sources": [
+        "搜打撤/game/src/run/event-lifecycle.js",
+        "搜打撤/game/src/run/game.run.events.js",
+        "搜打撤/game/src/run/game.run.flow.js"
+      ],
+      "finding": "Incoming already includes cloud lazy entry, cancellation and story ownership changes; identical captureEventPresentation moved from eager lifecycle to lazy controller. Keep move as a unit, plus loading/failure actions moved body->foot and related mock supporting foot."
+    },
+    {
+      "area": "Agent and hub splits",
+      "sources": [
+        "搜打撤/game/src/agent/agent.action-router.js",
+        "搜打撤/game/src/agent/agent.replay.js",
+        "搜打撤/game/src/agent/agent.replay.runtime.js",
+        "搜打撤/game/src/agent/agent.runner.js",
+        "搜打撤/game/src/agent/agent.runner.runtime.js",
+        "搜打撤/game/src/hub/game.bag.js",
+        "搜打撤/game/src/hub/game.bag.rules.js",
+        "搜打撤/game/src/hub/game.hub.pages.js",
+        "搜打撤/game/src/hub/game.hub.runtime.js"
+      ],
+      "finding": "Incoming already preserves agent lazy splits, hub command-errors boundary, retired home-scene, bag render derivation/maps and live action checks. Additional agent differences are types/equivalent error creation. Keep new operation-notice and receiptHTML contract, tightened result.ok===true, text changes and optional renderState defaults."
+    }
+  ],
+  "cross_file_risks": [
+    "Incoming registerBattleValueProvider exposes live attack/spell power for card descriptions: validate retained HTML/preview signatures refresh on atkUp/spellUp changes without card identity/desc mutation. Parent renderer reviewer owns this audit.",
+    "New pendingTarget fuelUids/selectionId and infusion state may be projected into coherent render/cache signatures; keep upstream ownership fields end-to-end.",
+    "hand-rule-context source string test differs because upstream does not contain cloud liveInteractionSnapshot; reconcile source-shape assertion to final implementation without weakening behavior.",
+    "All findings are static comparisons. No build, tests, browser, CI claim, source/index modifications, commit, remote write or publication performed."
+  ],
+  "focused_validation_recommendations": [
+    "battle-hand-rule-context.test.js; battle-preview-hand-context.test.js; battle-snapshot-phase-cost.test.js; engine instance/snapshot tests",
+    "sts2-infusion-flow-1021.test.js; sts2-agent-infusion-1021.test.js; required-infusion-play.test.js; direct-cast.test.js; wf-feedback1021-a-lamp-direct-cast-infusion.test.js; wf-feedback1021-c-infusion-dedupe.test.js",
+    "hero-cards.test.js: fixed catalog fixture explicitly preserves cloud original-draw-pile UID proof; do not fall back to brittle seeded random expectation",
+    "events-lazy-entry.test.js; events-lazy-story-ownership.test.js; event-callback-lifecycle-audit.test.js; run-event-controller-ownership.test.js",
+    "bag-render-derivation.test.js; bag-render-snapshot.test.js; bag-structured-use.test.js; bag-token-discover.test.js; relevant operation-notice/language tests",
+    "After merge: normal original full quality gate and original build/budgets; real authorized browser workflows for changed interaction paths."
+  ]
+}

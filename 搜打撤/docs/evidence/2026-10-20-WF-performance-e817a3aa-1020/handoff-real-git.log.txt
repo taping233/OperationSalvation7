@@ -1,0 +1,18 @@
+接手：全局摘要｜HEAD e817a3aa2a
+相关变更 6471（省略 0）；编辑占用 3（省略 0）；完成未提交 0；待拍板 11（省略 0）；疑点 2
+任务元数据跳过 2 项（无效/过大/链接），不能据此推断任务不存在；详情 --json
+变更  T ../.ui-art-loop-0925/nai-out/boss-arena.png
+变更  T ../.ui-art-loop-0925/nai-out/cls2-stage.png
+变更  T ../.ui-art-loop-0925/nai-out/expedition-banner.png
+另 6468 条相关变更用 --json 查看
+占用 Friday / WF-performance-e817a3aa-1020｜编辑中；两域407定向通过，资产补登记后原audit 0错/570历史警告、相关134定向通过；完整套件7711通过/2项Git环境失败待真实元数据复
+占用 Friday / 星月芦苇原图画风重绘 01a15548｜待验收
+拍板 43｜研究所牌盒满容量玩法需确定：现行说明为容量 30（混沌之眼为 35）且满时一换一，领取/商店等实现尚未提供完整换牌流程；确认换牌交互与取消时奖励/付款保留方式后实施
+拍板 44｜地图设施不相邻与战斗聚集约束是否升级为硬约束：现生成器在无候选时存在软回退，修正规则会改变同种子的布局；需确定新地图生成版本及旧 v3/v9 存档重建兼容策略
+疑点 unconfirmed-commit｜docs/PARALLEL-REGISTRY.md
+疑点 unconfirmed-commit｜docs/PARALLEL-REGISTRY.md
+活账老化：达 7 天 11 项｜最老 9 22天、10 22天、16 21天（仅提示，不自动降级或销账）
+证据候选 docs/evidence/2026-10-20-WF-performance-e817a3aa-1020/README.md
+维护审计：已落库待移行 6／已决待移行 0；无主 2（范围外省略 0，勿动）；省略条目用 --json 查看
+入口：docs/PARALLEL-REGISTRY.md；docs/PENDING.md；docs/WORKFLOW-TOOLS.md；记忆按需 npm run memory:discover
+限制：完成未提交仍保护归属；省略范围不代表无问题；证据仅入口；远端/留言/实页未核验。维护疑点用 --details，完整审计用 --json。

@@ -43,6 +43,7 @@ export function summarizeRuntimeStages(trace) {
   const longTasks = rows.filter(row => row.kind === 'longtask' && row.visible === true && Number.isFinite(row.tMs) && Number.isFinite(row.durationMs));
   const groups = new Map();
   for (const row of stages) {
+    if (!row.stage.startsWith('settings-')) continue;
     if (!groups.has(row.interaction)) groups.set(row.interaction, []);
     groups.get(row.interaction).push(row);
   }

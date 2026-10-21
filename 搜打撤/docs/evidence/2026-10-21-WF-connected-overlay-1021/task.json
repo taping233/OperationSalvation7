@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-connected-overlay-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_connected_overlay_release",
+  "goal": "Preserve connected battle scenes through secondary overlays without altering gameplay, focus isolation, ownership or original gates",
+  "paths": [
+    "game/src/ui/overlay.js",
+    "game/src/battle/view/battle.secondary-overlay.js",
+    "game/src/battle/view/battle.frames.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/battle-secondary-overlay.test.js",
+    "tests/battle-frames-ownership.test.js",
+    "tests/battle-hand-inspector.test.js",
+    "tests/battle-infusion-action-layout.test.js",
+    "tests/battle-persistent-stage.test.js",
+    "tests/battle-tools-lifecycle.test.js",
+    "tests/battle-scenery-secondary-ready.test.js"
+  ],
+  "doneWhen": [
+    "Exact reviewed patch and source hashes, normal frozen full gate and unchanged original build budgets verified; formal browser comparison parent-owned"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Exact reviewed12-file patch and347 focused tests, lint,3 mutation controls,812 build inputs and1595 original-budget outputs reconciled",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Normal frozen FULL and ordinary hook pending; formal private browser comparison, publication and remote CI not performed"
+  ],
+  "updatedAt": "2026-10-21T11:56:08.751Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

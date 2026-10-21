@@ -1,0 +1,31 @@
+{
+  "incoming": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "source": "latest central assembly; all3 base test blobs independently match exact incoming",
+  "patchSha256": "b7078440f7b9570150ee9782cb769d37a89a05405eb9a72f07741c0538ff0a93",
+  "files": [
+    {
+      "path": "搜打撤/tests/battle-hand-inspector.test.js",
+      "beforeBlobSha1": "c500e6bd3ab328bf18e34d2a1cf9deb97293a3e4",
+      "beforeSha256": "aff7fd1130b55e88f12276879f6263dd64817adabe11919b976057678d80fa93",
+      "afterBlobSha1": "e54557c4b212a3b5367d7d47a2813acb0540128a",
+      "afterSha256": "7c85634e60bdbf27712e5345b208e40e4d23e7050b6766ebe195bcee3a6a33bd",
+      "bytes": 80711
+    },
+    {
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js",
+      "beforeBlobSha1": "3f4ea806ff327ddca08f8a7016c48cc3030265c2",
+      "beforeSha256": "7ac22116c6cf7d0abec00b93fb0f718a67b8cf351b59fc06467038cf0ff4188a",
+      "afterBlobSha1": "239702f924985e86fd33c8421b53c85eb34e0f63",
+      "afterSha256": "4784a312f22f84e5a18b07495da482262c9c9af64687d40dfb73c395e53d65f1",
+      "bytes": 9773
+    },
+    {
+      "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+      "beforeBlobSha1": "797f3ed57b79ca27158255d7122fb2940db82d47",
+      "beforeSha256": "1a71bb03a73efd6817ccdbfb2b8eaf77eb0508ff71856bd1b2abddd20d95e4d1",
+      "afterBlobSha1": "8e62e840be0c184dacd76cec065fb9a1c191e0cf",
+      "afterSha256": "43f5f8e67a4449602730418f7f3f558c35fd54a2c2a010bc16c89db7c558f517",
+      "bytes": 10231
+    }
+  ]
+}

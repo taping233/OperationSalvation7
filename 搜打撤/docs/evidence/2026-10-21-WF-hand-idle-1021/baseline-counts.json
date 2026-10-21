@@ -1,0 +1,60 @@
+{
+  "description": "Executed current production mountHandLayer/updateHand and full production acquisition feedback in jsdom. Dependencies limited to rendering/core/animation test doubles; target function bodies and lifecycle execute without behavior changes, only allocation observers. Array literals and array-returning calls are AST wrapped; Map and Set construction observed by subclasses. No browser/FPS claim.",
+  "hashes": [
+    {
+      "name": "battle.layers.js",
+      "sha256": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8"
+    },
+    {
+      "name": "battle.effect-feedback.js",
+      "sha256": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a"
+    }
+  ],
+  "repeats": 20,
+  "groups": 9,
+  "domUnchanged": true,
+  "target": {
+    "Array battle.layers.js:371:map": 20,
+    "Array battle.layers.js:371:filter": 20,
+    "Set at battle.layers.js:372:69": 180,
+    "Array battle.layers.js:372:literal": 180,
+    "Array battle.layers.js:371:literal": 20,
+    "Map at updateHand (battle.layers.js:371:26)": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:70:16)": 20,
+    "Array battle.effect-feedback.js:71:flatMap": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:71:19)": 20,
+    "Array battle.effect-feedback.js:72:map": 20,
+    "Array battle.effect-feedback.js:72:filter": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:72:20)": 20,
+    "Array battle.effect-feedback.js:80:filter": 180
+  },
+  "totalTarget": {
+    "Array": 480,
+    "Set": 240,
+    "Map": 20
+  },
+  "allObserved": {
+    "Array battle.layers.js:371:map": 20,
+    "Array battle.layers.js:371:filter": 20,
+    "Set at battle.layers.js:372:69": 180,
+    "Array battle.layers.js:372:literal": 180,
+    "Array battle.layers.js:371:literal": 20,
+    "Map at updateHand (battle.layers.js:371:26)": 20,
+    "Set at updateHand (battle.layers.js:376:19)": 20,
+    "Set at updateHand (battle.layers.js:376:39)": 20,
+    "Array battle.layers.js:378:map": 20,
+    "Array battle.layers.js:378:filter": 20,
+    "Set at updateHand (battle.layers.js:378:23)": 20,
+    "Array battle.layers.js:390:literal": 20,
+    "Array battle.layers.js:482:literal": 20,
+    "Array battle.layers.js:532:map": 20,
+    "Set at updateHand (battle.layers.js:532:22)": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:70:16)": 20,
+    "Array battle.effect-feedback.js:71:flatMap": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:71:19)": 20,
+    "Array battle.effect-feedback.js:72:map": 20,
+    "Array battle.effect-feedback.js:72:filter": 20,
+    "Set at updateHandAcquisitionFeedback (battle.effect-feedback.js:72:20)": 20,
+    "Array battle.effect-feedback.js:80:filter": 180
+  }
+}

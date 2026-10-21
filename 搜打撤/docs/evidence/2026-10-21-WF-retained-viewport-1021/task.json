@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-retained-viewport-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_retained_viewport_release",
+  "goal": "Preserve retained battle viewport and covered background without changing gameplay",
+  "paths": [
+    "game/src/ui/overlay.js",
+    "game/css/battle-secondary-overlay.css",
+    "tests/battle-secondary-overlay.test.js"
+  ],
+  "doneWhen": [
+    "Exact reviewed input and normal frozen FULL, unchanged build budget; formal private browser geometry and same-scene timing verified"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "73 focused tests, lint, independent review, negative controls;812+1 inputs/1595 outputs reconciled",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Frozen FULL and ordinary hook pending; publication and formal browser comparison parent-owned"
+  ],
+  "updatedAt": "2026-10-21T15:30:00.000Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

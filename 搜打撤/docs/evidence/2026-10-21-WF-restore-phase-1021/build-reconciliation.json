@@ -1,0 +1,20 @@
+{
+  "buildReusedNotRerun": true,
+  "authorManifestSha256": "946f96abe673fbca3993687d1d1fbc2b5f7f133ab3f489855d2b70a400d80a34",
+  "inputCount": 812,
+  "extraNarrativeInputCount": 1,
+  "outputCount": 1595,
+  "summary": {
+    "outputFiles": 1595,
+    "totalBytes": 171889639,
+    "entryGzipBytes": 368477,
+    "battleGzipBytes": 67073,
+    "entryBudgetBytes": 368640
+  },
+  "sameDependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "changedBuildInputs": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/core/runtime-trace-stages.local.js",
+    "game/src/core/runtime-trace.local.js"
+  ]
+}

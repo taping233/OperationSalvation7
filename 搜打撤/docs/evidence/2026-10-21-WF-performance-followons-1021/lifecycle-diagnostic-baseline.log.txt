@@ -1,0 +1,17 @@
+
+ RUN  v3.2.7 /tmp/lifecycle-audit-diagnostic-20261021/baseline
+
+stdout | tests/lifecycle-diagnostic.test.js > deterministic lifecycle diagnosis > legal random acquisition includes Apollo descendants: false
+LIFECYCLE_DIAGNOSTIC {"withApollo":false,"gained":["tt2-pearlbox","tt2-pearlbox"],"gainCount":2,"consumed":1,"infuseFuels":0,"calls":2,"busy":false,"logs":["[[icon:cards]] <b>沉船宝盒</b>：获得 【珍珠盒】×2（战斗内临时卡，战后消散）","[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"]}
+
+stdout | tests/lifecycle-diagnostic.test.js > deterministic lifecycle diagnosis > legal random acquisition includes Apollo descendants: true
+LIFECYCLE_DIAGNOSTIC {"withApollo":true,"gained":["tt2-apollo","tt2-pearlbox","tt2-pearlbox"],"gainCount":3,"consumed":1,"infuseFuels":0,"calls":3,"busy":false,"logs":["[[icon:bolt]] 获得 1 点能量（当前 100）","[[icon:cards]] <b>阿猫的礼物</b>：获得 【珍珠盒】×1（随机池）（战斗内临时卡，战后消散）","[[icon:cards]] <b>沉船宝盒</b>：获得 【阿猫的礼物】×1、【珍珠盒】×1（战斗内临时卡，战后消散）","[[icon:flask]] <b>江湖救急</b>：回合开始，消耗了 1 张临时卡"]}
+
+ ✓ tests/lifecycle-diagnostic.test.js > deterministic lifecycle diagnosis > legal random acquisition includes Apollo descendants: false 78ms
+ ✓ tests/lifecycle-diagnostic.test.js > deterministic lifecycle diagnosis > legal random acquisition includes Apollo descendants: true 68ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  12:25:30
+   Duration  3.14s (transform 482ms, setup 0ms, collect 937ms, tests 148ms, environment 309ms, prepare 60ms)
+

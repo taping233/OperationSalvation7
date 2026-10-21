@@ -1,16 +1,43 @@
 /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
 import '../../ui/feedback-theme.js';
+import { beginRuntimeStage } from '../../core/runtime-trace-stages.local.js';
 import '../../../css/battle-secondary-overlay.css';
+
+// The callback runs at the normal overlay body-write boundary, after its hooks.
+// Detached parsing preserves the scene connection and existing animation nodes.
+function retainedBody(UI, body, scene, isCurrent) {
+  const token = scene._battleToken, revision = (UI._overlayRevision || 0) + 1, owner = scene._battleRenderCurrent;
+  return html => {
+    const current = isCurrent();
+    // A queued replacement battle may not have painted yet. Discard only this
+    // departed scene, never a same-node scene already claimed by a newer render.
+    if (!current && UI._overlayRevision === revision && UI.el.ovBody === body && scene.parentNode === body && scene._battleToken === token && scene._battleRenderCurrent === owner) {
+      scene.remove(); UI._hasBattleStage = !!body.querySelector('.battle-stage');
+    }
+    if (!current || UI.el.ovBody !== body || scene.parentNode !== body || scene._battleToken !== token || scene._battleRenderCurrent !== owner || UI._overlayRevision !== revision) return null;
+    // With no HTML the overlay asks whether synchronous hooks retained ownership.
+    if (html === undefined) return true;
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    const content = template.content.firstElementChild || template.content;
+    for (const child of [...body.childNodes]) if (child !== scene) child.remove();
+    body.append(template.content);
+    return content;
+  };
+}
 
 // Keep the live battlefield, including its hand/unit/scenery mounts. The
 // transparent input shield belongs to the secondary page, never the engine.
 export function mountCombatOverlay(UI, title, html, mode, scene) {
+  const isCurrent = scene._battleRenderCurrent || (() => true);
+  const body = UI.el.ovBody;
+  if (!isCurrent() || scene.parentNode !== body) return false;
   if (scene.contains(document.activeElement)) scene._secondaryReturnFocus = document.activeElement;
-  scene.remove();
-  UI.showOverlay(title, `<div class="battle-secondary-layer">${html}</div>`, mode);
   scene.setAttribute('inert', '');
   scene.setAttribute('aria-hidden', 'true');
-  UI.el.ovBody.prepend(scene);
+  const battleBody = retainedBody(UI, body, scene, isCurrent);
+  UI.showOverlay(title, `<div class="battle-secondary-layer">${html}</div>`, mode, { battleBody });
+  if (!battleBody()) return false;
   UI.el.ovBody.parentElement.classList.add('battle');
   UI._hasBattleStage = true;
   // Capture also blocks direct pointer listeners and global shortcuts. Tab and
@@ -20,20 +47,35 @@ export function mountCombatOverlay(UI, title, html, mode, scene) {
   layer.addEventListener('click', event => {
     if (event.target === layer) event.stopPropagation();
   });
+  return true;
 }
 
-export function restoreCombatScene(UI, token) {
+/**
+ * The trace context is an opaque opt-in token, forwarded without inspecting it.
+ * @param {{ isCurrent?: () => boolean, traceContext?: object | null }} [options]
+ * @returns {boolean}
+ */
+export function restoreCombatScene(UI, token, options = {}) {
+  const { isCurrent = () => true, traceContext } = options;
+  const body = UI.el.ovBody;
   const layer = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-secondary-layer'));
   const scene = /** @type {BattleElement} */ (UI.el.ovBody?.querySelector('.battle-stage'));
   if (!layer || !scene || scene._battleToken !== token) return false;
-  scene.remove();
-  UI.showOverlay('', '', 'battle');
-  scene.removeAttribute('inert');
-  scene.removeAttribute('aria-hidden');
-  UI.el.ovBody.append(scene);
-  const target = scene._secondaryReturnFocus;
-  delete scene._secondaryReturnFocus;
-  if (target?.isConnected && scene.contains(target) && !target.matches(':disabled') && !target.closest('[hidden], [inert], [aria-hidden="true"]')) target.focus({ preventScroll:true });
+  const battleBody = retainedBody(UI, body, scene, isCurrent);
+  const finishShow = traceContext && beginRuntimeStage('battle-restore-show-sync', traceContext);
+  try { UI.showOverlay('', '', 'battle', { battleBody }); }
+  finally { if (finishShow) finishShow(); }
+  if (!battleBody()) return false;
+  const finishFocus = traceContext && beginRuntimeStage('battle-restore-focus-sync', traceContext);
+  try {
+    scene.removeAttribute('inert');
+    scene.removeAttribute('aria-hidden');
+    const target = scene._secondaryReturnFocus;
+    delete scene._secondaryReturnFocus;
+    if (target?.isConnected && scene.contains(target) && !target.matches(':disabled') && !target.closest('[hidden], [inert], [aria-hidden="true"]')) target.focus({ preventScroll:true });
+  } finally { if (finishFocus) finishFocus(); }
+  // Focusing the old trigger can synchronously navigate or start a newer render.
+  if (!battleBody()) return false;
   UI._hasBattleStage = true;
   return true;
 }

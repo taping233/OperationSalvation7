@@ -472,7 +472,7 @@ it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保�
   expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('传说 · 已入背包');
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(1);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('1 / 2');
-  expect(document.querySelector('.reward-notice').textContent).not.toContain('仍保留在入口');
+  expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
   acts.clsEntryContinue();
   expect(game.state).toBe('modal');

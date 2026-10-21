@@ -313,7 +313,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   consumerFingerprints: {
     "slot-weather": {
       "game/src/ui/slot-emblems.js": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a",
-      "game/src/ui/game.menu.pages.js": "28b5da3f5e4fccb656b7b0a59334d992473afcf9de8dcfaef783474b0fbcad67"
+      "game/src/ui/game.menu.pages.js": "2dbc43a4b707e6dbdbdd1ee18c58df424d9a43739594cc885f3fd0ccc4a0c92d"
     },
     "shadowed-card-art": {
       "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
@@ -326,31 +326,31 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/run/chests.js": "0ba9d81b735786027eba8d29e79665b8b0bb8ee32d83893f5105b26fa89114b1",
       "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
-      "game/src/run/game.run.scenes.js": "3a181d7746dfb8abbb56000452b68c716ebbeecae509a905b4ccf2aed4397ff0",
+      "game/src/run/game.run.scenes.js": "30156d27125bd99479aed07b2c0d1483288a70592ab28f3ef243215008a7ca5e",
       "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
       "game/src/run/game.session.death.js": "3f6c1730a96401615a6b19d059a210f2ac8ec9a821bfde85cce6c49c428dcadc",
-      "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
-      "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
+      "game/css/entry-events.css": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
+      "game/css/scenes.css": "73f3fff72ac854241af55a9a21a3694a6a7f97ccb9f8684c5c48862341eb8bd9"
     },
     "chests": {
       "game/src/run/chests.js": "0ba9d81b735786027eba8d29e79665b8b0bb8ee32d83893f5105b26fa89114b1",
       "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "8e27402e8ecd2558bb7ddc770b413d25ebb47aaf72e1a21635719ff8f848d009",
+      "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
     },
     "map": {
-      "game/src/core/map-node-art.js": "7da237011a3bb1348780d1379cbd15570da5fbd1a5152ad2588a8007a66c80b8",
-      "game/src/core/renderer.js": "f9ede7df06ae15857b8947d9411627a72344a1ebbf92b6a09074b41749e829af",
-      "game/src/core/map-city-atmosphere.js": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb",
+      "game/src/core/map-node-art.js": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609",
+      "game/src/core/renderer.js": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7",
+      "game/src/core/map-city-atmosphere.js": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02",
       "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     },
     "transitions": {
-      "game/src/ui/camp-entry.js": "7cdac6a9720a2ca64328fcefd90321dedc6ebbba2bb5da63a84c73b96ad06e99",
+      "game/src/ui/camp-entry.js": "ccee99b0505c2b35cc6fa8c04ef69a41ea2f2b23a23abbbc7d503f2d15c7c384",
       "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     }
@@ -375,8 +375,8 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4",
     "game/src/audio/sound.js": "5aa85e7c58a7445a19f8a09357b15f7ccab50a58ab3327532caba22ed679c509",
-    "game/src/battle/view/battle.frames.js": "8e27402e8ecd2558bb7ddc770b413d25ebb47aaf72e1a21635719ff8f848d009",
-    "game/src/battle/view/battle.layers.js": "22d818dbcc304a099a782db85468b2f5b6956515b6888a61b66219fcf7a61c64",
+    "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+    "game/src/battle/view/battle.layers.js": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47",
     "game/src/battle/view/battle.vfx.js": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
     "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
     "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",

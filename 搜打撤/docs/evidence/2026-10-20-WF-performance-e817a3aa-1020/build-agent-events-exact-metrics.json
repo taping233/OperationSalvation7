@@ -1,0 +1,50 @@
+[
+  {
+    "stage": "exact e817 baseline",
+    "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/desktop-app/game",
+    "entryGzipBytes": 390883,
+    "initialGzipBytes": 440585,
+    "inputs": [
+      {
+        "file": "assets/js/index-BFA86mSD.js",
+        "bytes": 1169219,
+        "gzipBytes": 390883
+      },
+      {
+        "file": "assets/js/vendor-runtime-Bplpvbef.js",
+        "bytes": 49201,
+        "gzipBytes": 14802
+      },
+      {
+        "file": "assets/js/game-card-catalog-DwTnfdDp.js",
+        "bytes": 128939,
+        "gzipBytes": 34900
+      }
+    ],
+    "failures": []
+  },
+  {
+    "stage": "all integrated performance candidates",
+    "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game",
+    "entryGzipBytes": 371166,
+    "initialGzipBytes": 420868,
+    "inputs": [
+      {
+        "file": "assets/js/index-DqegwFnY.js",
+        "bytes": 1118127,
+        "gzipBytes": 371166
+      },
+      {
+        "file": "assets/js/vendor-runtime-Bplpvbef.js",
+        "bytes": 49201,
+        "gzipBytes": 14802
+      },
+      {
+        "file": "assets/js/game-card-catalog-DwTnfdDp.js",
+        "bytes": 128939,
+        "gzipBytes": 34900
+      }
+    ],
+    "failures": []
+  }
+]

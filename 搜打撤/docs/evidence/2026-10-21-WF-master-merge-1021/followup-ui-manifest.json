@@ -1,0 +1,35 @@
+{
+  "incoming_commit": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "files": [
+    {
+      "path": "搜打撤/tests/departure-stack-lifecycle-review.test.js",
+      "incoming_sha": "64867fd90e9abe69ae21e393aa37819c08117b2f",
+      "before_assembly_sha": "64867fd90e9abe69ae21e393aa37819c08117b2f",
+      "after_sha": "fc43c04fb335f6fddfffc121f1be2d465cece236",
+      "sha256": "c833c9583c8c5b9f776535e3ff8591b966062bc8aeba70b664adaa03f8e24a55",
+      "bytes": 16028
+    },
+    {
+      "path": "搜打撤/tests/sys03-altar-restore-txn.test.js",
+      "incoming_sha": "c2b33e2951ef55af53d13e4ed873ac978dc75f02",
+      "before_assembly_sha": "c2b33e2951ef55af53d13e4ed873ac978dc75f02",
+      "after_sha": "4053985708d074e503028365d833f1c578908162",
+      "sha256": "49e973586d4aeb21a6ffe2ae8b08a0f84b35facce624f20b66fe32d7cc4e454a",
+      "bytes": 29282
+    },
+    {
+      "path": "搜打撤/game/dev/title-resource-review.html",
+      "incoming_sha": "0967d3cef313a58516eae75458edb1fc57a9eb77",
+      "before_assembly_sha": "0967d3cef313a58516eae75458edb1fc57a9eb77",
+      "after_sha": "7489ab8c2fdcc087c51361153603fa48ea329e68",
+      "sha256": "06456f486284d2bd7506202a09f9138976d71cf89c380db42a4474610d1cd78e",
+      "bytes": 19784
+    }
+  ],
+  "focused_tests": {
+    "files": 3,
+    "passed": 49,
+    "failed": 0
+  },
+  "assembly_source_changed": false
+}

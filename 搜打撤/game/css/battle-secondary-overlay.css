@@ -1,12 +1,17 @@
 @import url('./secondary-ui-tokens.css');
 /* Combat secondary pages share a transparent shield over the retained scene.
    The panel grows with content; no full-page paint or fixed empty height. */
-body #overlay:has(.battle-secondary-layer) { background:transparent!important; backdrop-filter:none!important; }
+/* Keep the retained battlefield in its viewport, not the shorter expedition
+   content box. Ownership follows the existing layer; ordinary pick veils stay unchanged. */
+body #overlay:has(> .card > #ovBody > .battle-secondary-layer) {
+  position:fixed!important; inset:0!important; padding:0!important; z-index:100; overflow:clip;
+  background:transparent!important; backdrop-filter:none!important;
+}
 body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) {
-  position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
-  min-width:0!important; min-height:0!important; max-width:none!important; max-height:none!important;
+  position:relative!important; inset:auto!important; display:block!important; flex-direction:row!important; width:100%!important; height:100%!important;
+  min-width:auto!important; min-height:auto!important; max-width:none!important; max-height:none!important;
   padding:0!important; margin:0!important; border:0!important; border-radius:0!important;
-  background:transparent!important; box-shadow:none!important; overflow:hidden!important; animation:none!important;
+  background:transparent!important; box-shadow:none!important; overflow:clip!important; animation:none!important;
   /* This full-screen shield is not the discover glass panel. */
   backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
 }
@@ -14,7 +19,7 @@ body #overlay .card.card:has(> #ovBody > .battle-secondary-layer)::before { cont
 body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) > :is(h2,.ov-x) { display:none!important; }
 body #overlay .card.card:has(> #ovBody > .battle-secondary-layer) > #ovBody {
   position:relative!important; display:block!important; width:100%!important; height:100%!important;
-  max-width:none!important; max-height:none!important; margin:0!important; padding:0!important; overflow:hidden!important;
+  min-width:auto!important; min-height:auto!important; flex:0 1 auto!important; max-width:none!important; max-height:none!important; margin:0!important; padding:0!important; overflow:clip!important;
 }
 body #overlay .battle-secondary-layer {
   position:absolute; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;

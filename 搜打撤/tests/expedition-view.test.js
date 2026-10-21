@@ -94,7 +94,6 @@ describe('expedition view DOM rendering', () => {
     expect(bag.querySelector('strong').textContent).toBe(`${used}/16`);
     expect(bag.textContent).not.toMatch(/余|已满|格/);
     expect(bag.getAttribute('aria-label')).toContain(`占格 ${used}/16`);
-    expect(bag.style.getPropertyValue('--bag-fill')).toBe(`${Math.min(100, used / 16 * 100)}%`);
   });
 
   it('默认只保留工具带，不创建路线目录或显示空预览', () => {

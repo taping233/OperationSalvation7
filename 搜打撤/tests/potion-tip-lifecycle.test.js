@@ -37,8 +37,8 @@ Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureD
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 let frames;
-function showPotions(count = 1) {
-  window.SDT.game.ownedCards = Array.from({ length: count }, (_unused, index) => ({ uid: `tip-fixture-${index}`,
+function showPotions(count = 1, prefix = 'tip-fixture') {
+  window.SDT.game.ownedCards = Array.from({ length: count }, (_unused, index) => ({ uid: `${prefix}-${index}`,
     card: { id: 'tip-fixture', type: '道具', name: '提示药水', desc: '回复 5 点生命。' } }));
   render(getSnapshot());
   return body.querySelector('.bt-potion');
@@ -83,7 +83,10 @@ describe('药水说明与确认生命周期', () => {
     const potion = showPotions();
     pointer('pointerdown', potion);
     const tip = popup(), oldUse = tip.querySelector('.bt-potion-use-confirm');
-    if (action === 'replace') showPotions(2);
+    if (action === 'replace') {
+      showPotions(2, 'replacement');
+      expect(potion.isConnected).toBe(false);
+    }
     if (action === 'mode') UI.showOverlay('', '<p>设置</p>', 'settings');
     if (action === 'close') UI.hideOverlay();
     if (action === 'new-stage') { body.firstElementChild._battleToken = Symbol('old-stage'); showPotions(); }
@@ -110,10 +113,48 @@ describe('药水说明与确认生命周期', () => {
   });
 
   it('离开后的旧药水节点不重新绑定document监听', () => {
-    const potion = showPotions(); showPotions(2);
+    const potion = showPotions(); showPotions(2, 'replacement');
+    expect(potion.isConnected).toBe(false);
     const add = vi.spyOn(document, 'addEventListener');
     pointer('pointerdown', potion);
     expect(add.mock.calls.filter(([event]) => event === 'pointerup' || event === 'pointercancel')).toEqual([]);
+  });
+
+  it('同UID数量更新保留当前入口，旧确认失效，新说明使用当前数量且不消费', () => {
+    const potion = showPotions();
+    potion.click();
+    const tip = popup(), oldUse = tip.querySelector('.bt-potion-use-confirm');
+    expect(tip.getAttribute('role')).toBe('dialog');
+    const current = showPotions(2);
+    expect(current).toBe(potion); expect(potion.isConnected).toBe(true);
+    expect(tip.hidden).toBe(true); expect(tip.isConnected).toBe(false);
+    const before = window.SDT.game.ownedCards.slice();
+    oldUse.click(); expect(popup()).toBeNull();
+    expect(window.SDT.game.ownedCards).toEqual(before);
+    pointer('pointerdown', current);
+    const preview = popup();
+    expect(preview).not.toBe(tip); expect(preview.textContent).toContain('提示药水 ×2');
+    expect(preview.getAttribute('role')).toBe('status');
+    oldUse.click(); expect(window.SDT.game.ownedCards).toEqual(before);
+    pointer('pointerup'); expect(popup()).toBeNull();
+    const hidden = vi.spyOn(tip, 'hidden', 'set');
+    pointer('pointercancel'); expect(hidden).not.toHaveBeenCalled();
+  });
+
+  it('被替换UID的已打开确认与入口都失效，当前入口仍可读取', () => {
+    const potion = showPotions(); potion.click();
+    const tip = popup(), oldUse = tip.querySelector('.bt-potion-use-confirm');
+    const current = showPotions(2, 'replacement');
+    expect(current).not.toBe(potion); expect(potion.isConnected).toBe(false);
+    expect(tip.hidden).toBe(true); expect(tip.isConnected).toBe(false);
+    const before = window.SDT.game.ownedCards.slice();
+    oldUse.click(); pointer('pointerdown', potion); potion.click();
+    expect(popup()).toBeNull(); expect(window.SDT.game.ownedCards).toEqual(before);
+    current.click(); expect(popup().getAttribute('role')).toBe('dialog');
+    expect(popup().dataset.potionUse).toBe('replacement-0');
+    oldUse.click(); expect(window.SDT.game.ownedCards).toEqual(before);
+    popup().querySelector('.bt-potion-use-cancel').click();
+    expect(popup()).toBeNull();
   });
 
   it('同一药水栏重复渲染保留节点，悬停/移开仍可使用', () => {

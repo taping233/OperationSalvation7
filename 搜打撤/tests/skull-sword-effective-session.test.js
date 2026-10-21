@@ -6,7 +6,12 @@ const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
 const actions = new Map();
 const UI = {
   el: {}, _lastMode: null,
-  showOverlay(title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
+  showOverlay(title, html, mode, options = {}) {
+    this._overlayRevision = (this._overlayRevision || 0) + 1;
+    if (options.battleBody) { if (!options.battleBody(rich(html))) return; }
+    else this.el.ovBody.innerHTML = rich(html);
+    this.el.overlay.hidden = false; this._lastMode = mode;
+  },
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
   act: (name, fn) => actions.set(name, fn),
 };
@@ -522,8 +527,13 @@ it('BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改
   actions.get('btDeckBack')(); await settle();
   actions.get('btGrave')(); await settle();
   const consumedLabels = [...UI.el.ovBody.querySelectorAll('.battle-pile-card')].map(node => node.getAttribute('aria-label'));
-  expect(consumedLabels).toEqual(['查看 骷髅王剑 的完整规则，1 张', '查看 不朽斩 的完整规则，2 张']);
-  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('骷髅王剑');
+  expect(consumedLabels).toEqual(['查看 不朽斩，2 张', '查看 骷髅王剑，1 张']);
+  expect(UI.el.ovBody.querySelector('.battle-decision-inspect')).toBeNull();
+  for (const [i, name] of ['不朽斩', '骷髅王剑'].entries()) {
+    actions.get('btDecisionInspect')({ i });
+    expect(document.getElementById('cardZoom').textContent).toContain(name);
+    document.getElementById('cardZoom')._closeCardZoom(true);
+  }
   const after = BattleSession.getSnapshot();
   expect(after.drawPile).toEqual(before.drawPile);
   expect(after.discard).toEqual(before.discard);

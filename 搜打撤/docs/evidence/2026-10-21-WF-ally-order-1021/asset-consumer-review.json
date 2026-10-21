@@ -1,0 +1,7 @@
+{
+  "scope": "Only battle.layers.js opaqueConsumers SHA updated; candidates, selector hashes, dependencies, algorithm and budgets unchanged.",
+  "independentReview": "Verified one updateAllies hunk and new test only. Asset constructors, allyFigure mapping, assetUrl(source), inputs, classes, attributes and selectors unchanged. Applying hunk in memory matches expected source hash.",
+  "proof": "consumer-review-proof.json",
+  "negativeControls": "Existing real-source regression verifies altered assetUrl expression and removed approval retain all candidates. Integrated 3 files / 50 tests passed; full production plan keeps286 exclusions and zero warnings.",
+  "productionFileSha256": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679"
+}

@@ -1,0 +1,366 @@
+{
+  "path": "搜打撤/game/src/battle/view/battle.layers.js",
+  "method": "Acorn exact normalized AST resource expressions across approved base / cloud / incoming / candidate",
+  "rows": [
+    {
+      "label": "base",
+      "sha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+      "count": 16,
+      "expressions": [
+        {
+          "why": "resource-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';",
+          "ast": "{\"type\":\"ImportDeclaration\",\"specifiers\":[{\"type\":\"ImportSpecifier\",\"imported\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"local\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"}}],\"source\":{\"type\":\"Literal\",\"value\":\"../../core/asset-url.js\"},\"attributes\":[]}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Cards.cardHTML(g.card, 'sm', {\n        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),\n        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0\n          ? { dmgOverride: { bonus: spellBonus } } : {}),\n      })",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Cards\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"cardHTML\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},{\"type\":\"Literal\",\"value\":\"sm\"},{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"Identifier\",\"name\":\"costDiff\"},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"costOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"v\"},\"value\":{\"type\":\"Identifier\",\"name\":\"effCost\"},\"kind\":\"init\"},{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"base\"},\"value\":{\"type\":\"Identifier\",\"name\":\"baseCost\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}},{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmgType\"},\"computed\":false,\"optional\":false},\"operator\":\"===\",\"right\":{\"type\":\"Literal\",\"value\":\"spell\"}}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"UnaryExpression\",\"operator\":\"+\",\"prefix\":true,\"argument\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmg\"},\"computed\":false,\"optional\":false},\"operator\":\"||\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"dmgOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"bonus\"},\"value\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}}]}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.decodeIn(handLayer)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"decodeIn\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"handLayer\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.battleArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"battleArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.classArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"classArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('helmet')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"helmet\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-patrol-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-patrol-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-shooter-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-shooter-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/sealed-limb-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/sealed-limb-v1.webp\"}"
+        },
+        {
+          "why": "resource-call",
+          "source": "assetUrl(source)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"source\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.monsterArt(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"monsterArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('slime')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"slime\"}],\"optional\":false}"
+        }
+      ]
+    },
+    {
+      "label": "cloud",
+      "sha256": "e827314d3990df56946e459881171b11dcd0264325a71b15c0a52d4529fd2ff6",
+      "count": 16,
+      "expressions": [
+        {
+          "why": "resource-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';",
+          "ast": "{\"type\":\"ImportDeclaration\",\"specifiers\":[{\"type\":\"ImportSpecifier\",\"imported\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"local\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"}}],\"source\":{\"type\":\"Literal\",\"value\":\"../../core/asset-url.js\"},\"attributes\":[]}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Cards.cardHTML(g.card, 'sm', {\n        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),\n        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0\n          ? { dmgOverride: { bonus: spellBonus } } : {}),\n      })",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Cards\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"cardHTML\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},{\"type\":\"Literal\",\"value\":\"sm\"},{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"Identifier\",\"name\":\"costDiff\"},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"costOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"v\"},\"value\":{\"type\":\"Identifier\",\"name\":\"effCost\"},\"kind\":\"init\"},{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"base\"},\"value\":{\"type\":\"Identifier\",\"name\":\"baseCost\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}},{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmgType\"},\"computed\":false,\"optional\":false},\"operator\":\"===\",\"right\":{\"type\":\"Literal\",\"value\":\"spell\"}}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"UnaryExpression\",\"operator\":\"+\",\"prefix\":true,\"argument\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmg\"},\"computed\":false,\"optional\":false},\"operator\":\"||\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"dmgOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"bonus\"},\"value\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}}]}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.decodeIn(handLayer)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"decodeIn\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"handLayer\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.battleArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"battleArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.classArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"classArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('helmet')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"helmet\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-patrol-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-patrol-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-shooter-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-shooter-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/sealed-limb-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/sealed-limb-v1.webp\"}"
+        },
+        {
+          "why": "resource-call",
+          "source": "assetUrl(source)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"source\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.monsterArt(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"monsterArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('slime')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"slime\"}],\"optional\":false}"
+        }
+      ]
+    },
+    {
+      "label": "incoming",
+      "sha256": "c4dd6d5d5729d699823b280c829f60ccc193933d85cf90fc6ba5af85aec8504f",
+      "count": 16,
+      "expressions": [
+        {
+          "why": "resource-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';",
+          "ast": "{\"type\":\"ImportDeclaration\",\"specifiers\":[{\"type\":\"ImportSpecifier\",\"imported\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"local\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"}}],\"source\":{\"type\":\"Literal\",\"value\":\"../../core/asset-url.js\"},\"attributes\":[]}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Cards.cardHTML(g.card, 'sm', {\n        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),\n        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0\n          ? { dmgOverride: { bonus: spellBonus } } : {}),\n      })",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Cards\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"cardHTML\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},{\"type\":\"Literal\",\"value\":\"sm\"},{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"Identifier\",\"name\":\"costDiff\"},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"costOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"v\"},\"value\":{\"type\":\"Identifier\",\"name\":\"effCost\"},\"kind\":\"init\"},{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"base\"},\"value\":{\"type\":\"Identifier\",\"name\":\"baseCost\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}},{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmgType\"},\"computed\":false,\"optional\":false},\"operator\":\"===\",\"right\":{\"type\":\"Literal\",\"value\":\"spell\"}}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"UnaryExpression\",\"operator\":\"+\",\"prefix\":true,\"argument\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmg\"},\"computed\":false,\"optional\":false},\"operator\":\"||\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"dmgOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"bonus\"},\"value\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}}]}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.decodeIn(handLayer)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"decodeIn\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"handLayer\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.battleArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"battleArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.classArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"classArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('helmet')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"helmet\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-patrol-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-patrol-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-shooter-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-shooter-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/sealed-limb-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/sealed-limb-v1.webp\"}"
+        },
+        {
+          "why": "resource-call",
+          "source": "assetUrl(source)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"source\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.monsterArt(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"monsterArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('slime')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"slime\"}],\"optional\":false}"
+        }
+      ]
+    },
+    {
+      "label": "candidate",
+      "sha256": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47",
+      "count": 16,
+      "expressions": [
+        {
+          "why": "resource-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';",
+          "ast": "{\"type\":\"ImportDeclaration\",\"specifiers\":[{\"type\":\"ImportSpecifier\",\"imported\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"local\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"}}],\"source\":{\"type\":\"Literal\",\"value\":\"../../core/asset-url.js\"},\"attributes\":[]}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Cards.cardHTML(g.card, 'sm', {\n        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),\n        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0\n          ? { dmgOverride: { bonus: spellBonus } } : {}),\n      })",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Cards\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"cardHTML\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},{\"type\":\"Literal\",\"value\":\"sm\"},{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"Identifier\",\"name\":\"costDiff\"},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"costOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"v\"},\"value\":{\"type\":\"Identifier\",\"name\":\"effCost\"},\"kind\":\"init\"},{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"base\"},\"value\":{\"type\":\"Identifier\",\"name\":\"baseCost\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}},{\"type\":\"SpreadElement\",\"argument\":{\"type\":\"ConditionalExpression\",\"test\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmgType\"},\"computed\":false,\"optional\":false},\"operator\":\"===\",\"right\":{\"type\":\"Literal\",\"value\":\"spell\"}}},\"operator\":\"&&\",\"right\":{\"type\":\"BinaryExpression\",\"left\":{\"type\":\"UnaryExpression\",\"operator\":\"+\",\"prefix\":true,\"argument\":{\"type\":\"LogicalExpression\",\"left\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"g\"},\"property\":{\"type\":\"Identifier\",\"name\":\"card\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"dmg\"},\"computed\":false,\"optional\":false},\"operator\":\"||\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"operator\":\">\",\"right\":{\"type\":\"Literal\",\"value\":0}}},\"consequent\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"dmgOverride\"},\"value\":{\"type\":\"ObjectExpression\",\"properties\":[{\"type\":\"Property\",\"method\":false,\"shorthand\":false,\"computed\":false,\"key\":{\"type\":\"Identifier\",\"name\":\"bonus\"},\"value\":{\"type\":\"Identifier\",\"name\":\"spellBonus\"},\"kind\":\"init\"}]},\"kind\":\"init\"}]},\"alternate\":{\"type\":\"ObjectExpression\",\"properties\":[]}}}]}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.decodeIn(handLayer)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"decodeIn\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"handLayer\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.battleArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"battleArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.classArt(player.myClass)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"classArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"player\"},\"property\":{\"type\":\"Identifier\",\"name\":\"myClass\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('helmet')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"helmet\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-patrol-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-patrol-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/federal-shooter-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/federal-shooter-v1.webp\"}"
+        },
+        {
+          "why": "resource-literal",
+          "source": "'assets/portraits/allies/sealed-limb-v1.webp'",
+          "ast": "{\"type\":\"Literal\",\"value\":\"assets/portraits/allies/sealed-limb-v1.webp\"}"
+        },
+        {
+          "why": "resource-call",
+          "source": "assetUrl(source)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"Identifier\",\"name\":\"assetUrl\"},\"arguments\":[{\"type\":\"Identifier\",\"name\":\"source\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('runner')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"runner\"}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.has(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"has\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Art.monsterArt(f.id)",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Art\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"monsterArt\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"f\"},\"property\":{\"type\":\"Identifier\",\"name\":\"id\"},\"computed\":false,\"optional\":false}],\"optional\":false}"
+        },
+        {
+          "why": "resource-call",
+          "source": "SDT.Icons.img('slime')",
+          "ast": "{\"type\":\"CallExpression\",\"callee\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"MemberExpression\",\"object\":{\"type\":\"Identifier\",\"name\":\"SDT\"},\"property\":{\"type\":\"Identifier\",\"name\":\"Icons\"},\"computed\":false,\"optional\":false},\"property\":{\"type\":\"Identifier\",\"name\":\"img\"},\"computed\":false,\"optional\":false},\"arguments\":[{\"type\":\"Literal\",\"value\":\"slime\"}],\"optional\":false}"
+        }
+      ]
+    }
+  ],
+  "allFourResourceSurfacesEqual": true,
+  "approvalBasis": "Exact base e817a3aa scripts/runtime-asset-redundancy-review.mjs opaqueConsumers entry equals base layers full-file SHA2567477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee. All16 complete normalized resource AST expressions are identical across base/cloud/incoming/candidate. The narrower source selection is independently complemented by incoming-to-candidate broad50-expression equality in render-resource-review.json.",
+  "priorIncomingFingerprint": "22d818dbcc304a099a782db85468b2f5b6956515b6888a61b66219fcf7a61c64",
+  "priorIncomingDrift": "Actual incoming c4dd6d5d… has0CRLF and does not match22d818db…. Exact22d source unavailable; no false historical-byte equivalence claimed. Incoming evidence describes prior bookkeeping-only approval; this approval is newly grounded in exact older approved source plus full current surface review.",
+  "manualReview": [
+    "The only assetUrl argument is source; its local initializer is exactly the bounded three-ally portrait map, with no assignment path introducing external IDs.",
+    "Player Art selectors consume player.myClass from the current snapshot; foe Art selectors consume f.id, as in approved base. Their has/battleArt/classArt/monsterArt calls and fallbacks are AST-identical.",
+    "Hand cardHTML complete call/options AST is identical; formatting options affect cost/damage display, not asset path construction. decodeIn receives the existing handLayer.",
+    "All constructors and imports in current incoming and candidate also match broader render-resource-review.json comparison. New ownership snapshot/control logic adds no URL, import, image, media, texture or frame-catalog constructor.",
+    "Frames resource proof remains exact approved incoming8e274… to candidate173e414…; actual catalog, role selectors, resource count/lifecycle gate required independently."
+  ],
+  "recommendation": "Approve only final layers opaque fingerprintbc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47. Preserve all incoming candidate paths, source hashes, categories, selector dependencies and fail-closed algorithm. This is not approval of any additional exclusions. Normal full gate and production asset/build closure still required."
+}

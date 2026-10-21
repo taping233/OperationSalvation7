@@ -1,0 +1,55 @@
+{
+  "reviewer": "/root/review_master_merge_compatibility",
+  "decision": "GO for test-only central integration; not a FULL/build pass",
+  "patch": "merge-battle-render-b7207a28/full-followup/battle-full-fixtures-incremental.patch",
+  "patchSha256": "fe0a942dae78ddb046c343b79f31556331be7a7b600c001e9e83790a68554dcb",
+  "manifestSha256": "7a4ea24ce481ab8ca64e3a5c51679a4178a830df60fa04ea8e7f7f05bf9121f1",
+  "files": [
+    {
+      "path": "搜打撤/tests/expedition-battle-presentation.test.js",
+      "beforeBlobSha1": "a50ffdfa3ee86a4e744cb0c257df53c138f3317a",
+      "beforeSha256": "a670b13c3d12d12511641f9929b1609e3b1139b9adc8c7062b9d7a18917d6042",
+      "afterBlobSha1": "4bc3c01297b8706c5bbbc27c1c2b28372e25a758",
+      "afterSha256": "6a360e0336213d1921420b6fcd7627b1e16868e1308a215c00653f2b8f0c8bdb",
+      "bytes": 9378
+    },
+    {
+      "path": "搜打撤/tests/page-perf-battle.test.js",
+      "beforeBlobSha1": "51ea80b17c81c0b7108f99979af1cea2e799ffca",
+      "beforeSha256": "e25de72efcb868da2ab03640bbb5a09617a6a7fbddec8ac0a9e15a0827fa9103",
+      "afterBlobSha1": "c594545a59e58d4f60b0fba037116369cb56c33d",
+      "afterSha256": "87f753f9c26eb7a29ee049f3519a327b00cfffe63be15970540b58ecf4e92c7e",
+      "bytes": 14325
+    }
+  ],
+  "verifiedUnchangedDependencies": 294,
+  "verifiedIncomingContracts": {
+    "搜打撤/game/src/battle/view/battle.infusion-view.js": {
+      "scope": "whole file",
+      "sha256": "63a01a9a706f6c75b11cbc0568030079381ab24a237cf93435b4af12a203ec87",
+      "exactIncomingMatchesAssembly": true
+    },
+    "搜打撤/game/src/battle/view/battle.decision-shell.js": {
+      "scope": "bindBattleDecisionInspection export",
+      "sha256": "d2181bb0c2d86356ec364b52c04bc61686ac3206ddf679b4dc55e18954f57a21",
+      "exactIncomingMatchesAssembly": true
+    }
+  },
+  "evidence": {
+    "baseline": "2 failed / 19 passed exact incoming fixtures against unchanged relevant contracts",
+    "candidate": "28 passed across 2 suites; worker execution, logs independently inspected and hashes verified",
+    "negativeControls": [
+      "bypassed page-owner guard opens zoom from hidden old control",
+      "removed selectionId comparison removes UID a from replacement selection",
+      "bypassed canonical renderer exposes raw shorthand and fails original exact full-rule assertion"
+    ],
+    "applyCheck": "independently passed",
+    "reviewerTestsRun": false
+  },
+  "reasoning": [
+    "Real CardZoom preserves canonical full-text assertions and adds exact parent, return-focus, full snapshot and owned UID invariants. Five stale owner conditions rejected without zoom or battle mutation.",
+    "Physical UID shortcuts a and b, real remove-control data, per-input single snapshot counts, incomplete/stale withdrawal guards, hidden/zoom zero capture, new selection and workspace rejection replace nonexistent grouped actions.",
+    "Original listener cleanup, busy/token guards, zero-write unchanged hand, discovery 350ms admission and dynamic content/cost/order tests remain unchanged.",
+    "No production/config changes or test skipping/expected-rule weakening in patch."
+  ]
+}

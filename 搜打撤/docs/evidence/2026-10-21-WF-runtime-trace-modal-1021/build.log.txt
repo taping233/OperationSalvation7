@@ -1,0 +1,10 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm error code ENOENT
+npm error syscall open
+npm error path /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error Log files were not written due to an error writing to the directory: /home/agent/.npm/_logs
+npm error You can rerun the command with `--loglevel=verbose` to see the logs in your terminal

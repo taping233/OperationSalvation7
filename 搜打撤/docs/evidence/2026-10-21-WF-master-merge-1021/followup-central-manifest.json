@@ -1,0 +1,38 @@
+{
+  "baseTree": "2c51b365a9703a5f9d4ab7e5e250d2c5a4bba388",
+  "patchSha256": "a3ac54a4899165a4c0a381ed6c15c9515e81d0d3e11727fce862624265fedd97",
+  "files": [
+    {
+      "path": "\u641c\u6253\u64a4/tests/helpers/card-catalog-approved-revisions.js",
+      "baseSha256": "7de2d6b2c6a48a394e200b425a7b1de93efab3c3a7899095178599ea4f5806bf",
+      "baseGitBlob": "904d26295361df7c02320220df7788d79436cabe",
+      "candidateSha256": "2d22d355203c5d7b15c043c2cba79d518e3d727191fea438f9090433073cd166",
+      "candidateGitBlob": "9ddf509ce316f1679e9dc3dd627a5500afa27e91"
+    },
+    {
+      "path": "\u641c\u6253\u64a4/tests/helpers/e8-card-inventory.js",
+      "baseSha256": "1ceb95f6a87d8faa5519cf6f020adecffd549242c255578815d559b236ee360c",
+      "baseGitBlob": "4cd07db0da3d71312f581319ab54cf56355b94ad",
+      "candidateSha256": "b82890e6acaa6674d2d62f49deb92e6f6f5591945d251c6bd69174e7fcd581d0",
+      "candidateGitBlob": "0fa2c40baaf1652738bd6cb3b2373c3db2a13e4d"
+    },
+    {
+      "path": "\u641c\u6253\u64a4/tests/e8-card-inventory.test.js",
+      "baseSha256": "e38737e10b9e73561f6c30fcc2e1684b4c6340fdb9f944a05c4ac25b84e5ee7c",
+      "baseGitBlob": "0d6a60fe54863be21daa578a8cbce1f7ee7c98aa",
+      "candidateSha256": "68c65b046980926b86a9f74675e21cf622ba61d5ee5299ae155adbfa58b3e07f",
+      "candidateGitBlob": "3fd0677efa4231da7a5ab6379f4433b4fdba9f08"
+    },
+    {
+      "path": "\u641c\u6253\u64a4/tests/required-infusion-play.test.js",
+      "baseSha256": "a609e44672a15c1cb04fe78c323a4388a6d4080c36b5e85144cd5a77ac198412",
+      "baseGitBlob": "d38e1b2336347c01cb68676bb808558436ec8943",
+      "candidateSha256": "2ae0bc128fff6a3c926586bcd319a772a562e2cffe658c65c291838466d87eb9",
+      "candidateGitBlob": "f49f937d3e4b4d90c294846a95ae4e0a49845191"
+    }
+  ],
+  "productionChanges": false,
+  "baseline": "incoming exact three suites:5fail27pass1existing skip",
+  "candidate": "3suites33pass1existing opt-in inventory-generation skip",
+  "negative": "fixed explicit pouch test on exact incoming engine must fail actual damage999vs988; no new skips/config changes"
+}

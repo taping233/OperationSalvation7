@@ -1,0 +1,39 @@
+{
+  "baseCommit": "35228afacc4ced8dcc93cb619eb1f02cf53dfac5",
+  "command": "npm run build",
+  "exitCode": 0,
+  "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/\u641c\u6253\u64a4/desktop-app/game",
+  "files": 1595,
+  "packageBytes": 171888356,
+  "entryGzipBytes": 368364,
+  "initialJsGzipBytes": 418066,
+  "cssGzipBytes": 226802,
+  "entryFiles": [
+    "assets/js/index--qHiy-uS.js"
+  ],
+  "initialJsFiles": [
+    "assets/js/index--qHiy-uS.js",
+    "assets/js/vendor-runtime-Bplpvbef.js",
+    "assets/js/game-card-catalog-DwTnfdDp.js"
+  ],
+  "initialFailures": [],
+  "budgets": {
+    "entry": 368640,
+    "initialJs": 419840,
+    "css": 235520,
+    "package": 230686720
+  },
+  "scope": "Built output bytes only; not network transfer, runtime memory or FPS.",
+  "candidate": "stage v4 + infusion + diagnostic prerequisite",
+  "completedBuildRuns": 3,
+  "firstBuildFailed": true,
+  "secondV3BuildPassedButFullRejected": true,
+  "allBudgetsPassed": true,
+  "comparison": {
+    "baseEntryGzipBytes": 368360,
+    "entryDeltaBytes": 4,
+    "entryMarginBytes": 276,
+    "initialJsDeltaBytes": 4,
+    "packageDeltaBytes": 10511
+  }
+}

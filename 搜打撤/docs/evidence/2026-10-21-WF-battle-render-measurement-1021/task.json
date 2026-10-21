@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-render-measurement-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_render_measurement_release",
+  "goal": "Integrate fixed-label opt-in synchronous battle render measurement without gameplay or privacy changes; preserve original full gate and budgets",
+  "paths": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/core/runtime-trace-stages.local.js",
+    "game/src/core/runtime-trace.local.js",
+    "scripts/runtime-trace-alignment.mjs",
+    "tests/battle-render-runtime-trace.test.js",
+    "tests/runtime-trace-stages.local.test.js",
+    "tests/runtime-trace-alignment.test.js",
+    "docs/runtime-trace.md"
+  ],
+  "doneWhen": [
+    "Exact patch hashes, normal full staged gate and unchanged standard build budgets verified; browser acceptance remains parent-owned"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "Author exact eight-file patch independently reviewed; focused 84 and sentinels 71 passed; isolated original-budget build passed; integration byte hashes verified",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Normal frozen FULL gate and formal private browser validation pending; final build input reconciliation pending; no publication"
+  ],
+  "updatedAt": "2026-10-21T10:58:16.482Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -1,0 +1,485 @@
+{
+  "kind": "Independent static resource-expression comparison, not build/runtime asset closure",
+  "incomingCommit": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "selection": "All static/dynamic imports; all new expressions; resource-related callee names (asset, FrameAssets, FrameRenderer, Art., .img, cardHTML, cardBackHTML, Texture, Sprite); asset template/string expressions. AST normalized only for offsets/raw notation; no execution performed.",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "incomingSha256": "8e27402e8ecd2558bb7ddc770b413d25ebb47aaf72e1a21635719ff8f848d009",
+      "candidateSha256": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+      "resourceSurfaceASTEqual": true,
+      "incomingCount": 64,
+      "candidateCount": 64,
+      "expressions": [
+        {
+          "why": "module-import",
+          "source": "import { createFrameAssets } from './battle.frame-assets.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { recordFrameStage } from '../../core/flight-recorder.local.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { RenderScheduler } from '../../core/render-scheduler.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { getPerformanceSettings, getQualityPreset, onPerformanceSettingsChange } from '../../core/performance-settings.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import SDT from '../../core/sdt-facade.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { on as busOn } from '../../core/event-bus.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { demoMs, getPace } from '../runtime/battle.pace.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { Random } from '../../core/random.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { WU_FRAME_SEQUENCES, WU_FRAME_SIZE, wuTimeline } from './battle.frame-catalog.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { CHANGWUYU_FRAME_SEQUENCES, CHANGWUYU_FRAME_SIZE, changwuyuTimeline } from './battle.frame-catalog-changwuyu.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { THREE_ROLE_FRAME_SEQUENCES, THREE_ROLE_FRAME_SIZE, threeRoleTimeline } from './battle.frame-catalog-three-role.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { registerDefeatPresenter } from '../core/battle.presentation.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { loadFrameRenderer } from './battle.frame-renderer.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { framesDiagnosticStatic, summarizeFrameTextures } from './battle.frames-diagnostic-policy.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { frameResolutionFor, resizeFrameSurface } from './battle.frame-resolution.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { cueAction, frameImpactRemaining } from './battle.action-timing.js';"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(Object.keys(FRAME_SEQUENCES))"
+        },
+        {
+          "why": "constructor",
+          "source": "new RenderScheduler({ activeFps: getPerformanceSettings().fps })"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "createFrameAssets()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "cancelTextureRecord(record)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const { Texture } = await import('pixi.js');\n    // Detach the sprite before disposing completed URLs; pending loads clean up on arrival.\n    if (sprite) sprite.texture = Texture.EMPTY;\n    await Promise.all(entries.map(([, record]) => frameAssets.release(record)));\n  })().finally(() => {\n    if (releasePromise === pending) releasePromise = null;\n  })"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const { Texture } = await import('pixi.js');\n    // Detach the sprite before disposing completed URLs; pending loads clean up on arrival.\n    if (sprite) sprite.texture = Texture.EMPTY;\n    await Promise.all(entries.map(([, record]) => frameAssets.release(record)));\n  })()"
+        },
+        {
+          "why": "module-import",
+          "source": "import('pixi.js')"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "frameAssets.release(record)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "cancelTextureRecord(record)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "frameAssets.release(record)"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set([...names.filter(name => name !== 'idle-breathe'), ...names.filter(name => name === 'idle-breathe')])"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const { Application, Sprite, Texture, RENDERER_TYPE } = await loadFrameRenderer();\n    const ov = document.getElementById('overlay');\n    host = document.createElement('div');\n    host.id = 'unitFrames';\n    host.hidden = true;\n    host.setAttribute('aria-hidden', 'true');\n    // 铺满 overlay 的绝对层：canvas 与 overlay 坐标一一对应（sprite 直接用视口 rect 定位）；\n    // z-index 6：盖过单位区(2)/手牌常态，低于 hover 卡(9+)/aimArrow(60)/红闪(70)/飘字(80)\n    host.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6;';\n    if (ov) ov.appendChild(host);\n    setDiagnosticPhase('app-init');\n    app = new Application({\n      // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对\n      // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。\n      // Own sizing below: Pixi's ResizePlugin would resize again and render outside our budget.\n      resizeTo: null, backgroundAlpha: 0, antialias: false,\n      // backing 按 DPR×UiScale（允许小于1）采样，仍受所选画质上限约束；\n      // autoDensity 保持 canvas CSS 尺寸=逻辑尺寸，显示仍由 html zoom 等比缩放\n      resolution: frameResolution(),\n      autoDensity: true,\n      autoStart: false, powerPreference: 'low-power',\n    });\n    host.dataset.renderer = app.renderer.type === RENDERER_TYPE.CANVAS ? 'canvas' : app.renderer.type === RENDERER_TYPE.WEBGL ? 'webgl' : 'unknown';\n    rendererBackend = host.dataset.renderer;\n    host.appendChild(app.view);\n    createdSprite = new Sprite();\n    sprite = createdSprite;\n    emptyTexture = Texture.EMPTY;\n    sprite.anchor.set(0.5, 1);   // 底部中心锚点：脚底对齐\n    app.stage.addChild(sprite);\n    // 序列帧节奏最慢 ~1.5s/帧，30fps 上限足够顺滑：不设限就会在 120Hz 屏上按刷新率\n    // 全速渲染全屏透明画布（120 次合成/秒）白烧 GPU。配合脏标记跳帧见 ticker。\n    // Keep the original timeline clock; only GPU submission observes the user budget.\n    app.ticker.maxFPS = 30;\n    // Pixi installs an automatic render callback; remove it so our dirty/budget gate is authoritative.\n    app.ticker.remove?.(app.render, app);\n    liveFrameApp = app;\n    syncFrameSurface(true);\n    setDiagnosticPhase('app-ready');\n    // 画布尺寸变化会清空 WebGL 后备缓冲：置脏补一帧，否则脏标记跳帧会在\n    // resize 后留一帧空画布。\n    if (typeof ResizeObserver !== 'undefined') {\n      resizeObserver = new ResizeObserver(() => { if (cur) cur.dirty = true; });\n      resizeObserver.observe(app.view);\n    }\n    return { app, host };\n  })().catch(error => {\n    // 初始化失败只清理这次创建的资源；重试不能留下重复宿主或旧观察器。\n    liveFrameApp = null;\n    rendererBackend = 'none';\n    resizeObserver?.disconnect();\n    try { app?.destroy(true, { children: true }); } catch { /* 部分初始化的应用可能无法销毁 */ }\n    host?.remove();\n    if (sprite === createdSprite) { sprite = null; emptyTexture = null; }\n    setDiagnosticPhase('failed');\n    console.warn('[SDT.BattleFrames] PixiJS init failed:', error);\n    appPromise = null;\n    return null;\n  })"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const { Application, Sprite, Texture, RENDERER_TYPE } = await loadFrameRenderer();\n    const ov = document.getElementById('overlay');\n    host = document.createElement('div');\n    host.id = 'unitFrames';\n    host.hidden = true;\n    host.setAttribute('aria-hidden', 'true');\n    // 铺满 overlay 的绝对层：canvas 与 overlay 坐标一一对应（sprite 直接用视口 rect 定位）；\n    // z-index 6：盖过单位区(2)/手牌常态，低于 hover 卡(9+)/aimArrow(60)/红闪(70)/飘字(80)\n    host.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:6;';\n    if (ov) ov.appendChild(host);\n    setDiagnosticPhase('app-init');\n    app = new Application({\n      // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对\n      // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。\n      // Own sizing below: Pixi's ResizePlugin would resize again and render outside our budget.\n      resizeTo: null, backgroundAlpha: 0, antialias: false,\n      // backing 按 DPR×UiScale（允许小于1）采样，仍受所选画质上限约束；\n      // autoDensity 保持 canvas CSS 尺寸=逻辑尺寸，显示仍由 html zoom 等比缩放\n      resolution: frameResolution(),\n      autoDensity: true,\n      autoStart: false, powerPreference: 'low-power',\n    });\n    host.dataset.renderer = app.renderer.type === RENDERER_TYPE.CANVAS ? 'canvas' : app.renderer.type === RENDERER_TYPE.WEBGL ? 'webgl' : 'unknown';\n    rendererBackend = host.dataset.renderer;\n    host.appendChild(app.view);\n    createdSprite = new Sprite();\n    sprite = createdSprite;\n    emptyTexture = Texture.EMPTY;\n    sprite.anchor.set(0.5, 1);   // 底部中心锚点：脚底对齐\n    app.stage.addChild(sprite);\n    // 序列帧节奏最慢 ~1.5s/帧，30fps 上限足够顺滑：不设限就会在 120Hz 屏上按刷新率\n    // 全速渲染全屏透明画布（120 次合成/秒）白烧 GPU。配合脏标记跳帧见 ticker。\n    // Keep the original timeline clock; only GPU submission observes the user budget.\n    app.ticker.maxFPS = 30;\n    // Pixi installs an automatic render callback; remove it so our dirty/budget gate is authoritative.\n    app.ticker.remove?.(app.render, app);\n    liveFrameApp = app;\n    syncFrameSurface(true);\n    setDiagnosticPhase('app-ready');\n    // 画布尺寸变化会清空 WebGL 后备缓冲：置脏补一帧，否则脏标记跳帧会在\n    // resize 后留一帧空画布。\n    if (typeof ResizeObserver !== 'undefined') {\n      resizeObserver = new ResizeObserver(() => { if (cur) cur.dirty = true; });\n      resizeObserver.observe(app.view);\n    }\n    return { app, host };\n  })()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "loadFrameRenderer()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Application({\n      // antialias 关闭：帧图是预烘 webp 纹理，纹理采样自带双线性过滤，MSAA 对\n      // 纹理四边形毫无收益，只烧全屏 MSAA 带宽。\n      // Own sizing below: Pixi's ResizePlugin would resize again and render outside our budget.\n      resizeTo: null, backgroundAlpha: 0, antialias: false,\n      // backing 按 DPR×UiScale（允许小于1）采样，仍受所选画质上限约束；\n      // autoDensity 保持 canvas CSS 尺寸=逻辑尺寸，显示仍由 html zoom 等比缩放\n      resolution: frameResolution(),\n      autoDensity: true,\n      autoStart: false, powerPreference: 'low-power',\n    })"
+        },
+        {
+          "why": "constructor",
+          "source": "new Sprite()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "sprite.anchor.set(0.5, 1)"
+        },
+        {
+          "why": "constructor",
+          "source": "new ResizeObserver(() => { if (cur) cur.dirty = true; })"
+        },
+        {
+          "why": "constructor",
+          "source": "new URLSearchParams(location.search)"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "constructor",
+          "source": "new AbortController()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Promise(resolve => { resolveReady = resolve; })"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "cancelTextureRecord(other)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const rt = await ensureApp();\n    if (!rt || record.cancelled) return;\n    const { Assets, Texture } = await import('pixi.js');\n    // 序列帧纹理是 GPU/解码内存的大头。只保留最近\n    // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。\n    await evictOtherTextureSets(role, Texture);\n    if (record.cancelled) return;\n    const loadCandidate = async (name, measureBox = !fixedFrameRole(role)) => {\n      const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);\n      // Fixed-canvas roles use only their first available idle box in applyFrame.\n      // Other textures must not also decode a separate measurement bitmap.\n      // Non-fixed roles retain per-frame geometry probes without relying on Pixi internals.\n      const boxProbe = measureBox ? (async () => {\n        const resp = await fetch(url, { signal: record.controller.signal });\n        const bmp = await createImageBitmap(await resp.blob());\n        try { return record.cancelled ? null : measureAlphaBox(bmp, bmp.width, bmp.height); }\n        finally { bmp.close(); }\n      })().catch(() => null) : Promise.resolve(null);\n      // fetch 可取消，位图解码本身不可取消；停止等待但仍接住迟到位图并释放它。\n      const boxP = new Promise(resolve => {\n        const signal = record.controller.signal;\n        const finish = box => { signal.removeEventListener('abort', cancel); resolve(box); };\n        const cancel = () => finish(null);\n        if (signal.aborted) { resolve(null); return; }\n        signal.addEventListener('abort', cancel, { once: true });\n        boxProbe.then(finish);\n      });\n      try {\n        const tex = await frameAssets.load(url, record, Assets);\n        if (!tex || record.cancelled) return null;\n        return { name, url, tex, box: await boxP };\n      } catch { return null; } // 探测：没这帧就跳过\n    };\n    const add = entry => {\n      if (!entry || record.cancelled) return;\n      record.set.set(entry.name, entry.tex);\n      record.boxes.set(entry.name, entry.box);\n    };\n    // 首个可用 idle 就是入场所需帧；剩余纹理不阻塞 attach 的首画面提交。\n    phase('idle-loading');\n    const triedIdle = new Set();\n    for (const name of FRAME_SEQUENCES[role].idle) {\n      if (record.cancelled) return;\n      if (triedIdle.has(name)) continue;\n      triedIdle.add(name);\n      add(await loadCandidate(name, true));\n      if (record.set.size) break;\n    }\n    if (record.cancelled || !record.set.size) { phase('failed'); return; }\n    refreshSequences();\n    phase('idle-ready');\n    resolveReady(record);\n    const candidates = candidateNames(role).filter(name => !triedIdle.has(name));\n    for (let i = 0; i < candidates.length && !record.cancelled; i += LOAD_BATCH) {\n      phase('frame-batch');\n      const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(name => loadCandidate(name)));\n      batch.forEach(add);\n      if (!record.cancelled) refreshSequences();\n    }\n    phase('all-ready');\n  })().catch(() => { phase('failed'); }).finally(() => resolveReady(null))"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const rt = await ensureApp();\n    if (!rt || record.cancelled) return;\n    const { Assets, Texture } = await import('pixi.js');\n    // 序列帧纹理是 GPU/解码内存的大头。只保留最近\n    // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。\n    await evictOtherTextureSets(role, Texture);\n    if (record.cancelled) return;\n    const loadCandidate = async (name, measureBox = !fixedFrameRole(role)) => {\n      const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);\n      // Fixed-canvas roles use only their first available idle box in applyFrame.\n      // Other textures must not also decode a separate measurement bitmap.\n      // Non-fixed roles retain per-frame geometry probes without relying on Pixi internals.\n      const boxProbe = measureBox ? (async () => {\n        const resp = await fetch(url, { signal: record.controller.signal });\n        const bmp = await createImageBitmap(await resp.blob());\n        try { return record.cancelled ? null : measureAlphaBox(bmp, bmp.width, bmp.height); }\n        finally { bmp.close(); }\n      })().catch(() => null) : Promise.resolve(null);\n      // fetch 可取消，位图解码本身不可取消；停止等待但仍接住迟到位图并释放它。\n      const boxP = new Promise(resolve => {\n        const signal = record.controller.signal;\n        const finish = box => { signal.removeEventListener('abort', cancel); resolve(box); };\n        const cancel = () => finish(null);\n        if (signal.aborted) { resolve(null); return; }\n        signal.addEventListener('abort', cancel, { once: true });\n        boxProbe.then(finish);\n      });\n      try {\n        const tex = await frameAssets.load(url, record, Assets);\n        if (!tex || record.cancelled) return null;\n        return { name, url, tex, box: await boxP };\n      } catch { return null; } // 探测：没这帧就跳过\n    };\n    const add = entry => {\n      if (!entry || record.cancelled) return;\n      record.set.set(entry.name, entry.tex);\n      record.boxes.set(entry.name, entry.box);\n    };\n    // 首个可用 idle 就是入场所需帧；剩余纹理不阻塞 attach 的首画面提交。\n    phase('idle-loading');\n    const triedIdle = new Set();\n    for (const name of FRAME_SEQUENCES[role].idle) {\n      if (record.cancelled) return;\n      if (triedIdle.has(name)) continue;\n      triedIdle.add(name);\n      add(await loadCandidate(name, true));\n      if (record.set.size) break;\n    }\n    if (record.cancelled || !record.set.size) { phase('failed'); return; }\n    refreshSequences();\n    phase('idle-ready');\n    resolveReady(record);\n    const candidates = candidateNames(role).filter(name => !triedIdle.has(name));\n    for (let i = 0; i < candidates.length && !record.cancelled; i += LOAD_BATCH) {\n      phase('frame-batch');\n      const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(name => loadCandidate(name)));\n      batch.forEach(add);\n      if (!record.cancelled) refreshSequences();\n    }\n    phase('all-ready');\n  })().catch(() => { phase('failed'); })"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "(async () => {\n    const rt = await ensureApp();\n    if (!rt || record.cancelled) return;\n    const { Assets, Texture } = await import('pixi.js');\n    // 序列帧纹理是 GPU/解码内存的大头。只保留最近\n    // 使用角色；切换角色时卸载旧套，避免长局把所有角色纹理永久累积。\n    await evictOtherTextureSets(role, Texture);\n    if (record.cancelled) return;\n    const loadCandidate = async (name, measureBox = !fixedFrameRole(role)) => {\n      const url = assetUrl(`assets/portraits/frames/${role}/${name}.webp`);\n      // Fixed-canvas roles use only their first available idle box in applyFrame.\n      // Other textures must not also decode a separate measurement bitmap.\n      // Non-fixed roles retain per-frame geometry probes without relying on Pixi internals.\n      const boxProbe = measureBox ? (async () => {\n        const resp = await fetch(url, { signal: record.controller.signal });\n        const bmp = await createImageBitmap(await resp.blob());\n        try { return record.cancelled ? null : measureAlphaBox(bmp, bmp.width, bmp.height); }\n        finally { bmp.close(); }\n      })().catch(() => null) : Promise.resolve(null);\n      // fetch 可取消，位图解码本身不可取消；停止等待但仍接住迟到位图并释放它。\n      const boxP = new Promise(resolve => {\n        const signal = record.controller.signal;\n        const finish = box => { signal.removeEventListener('abort', cancel); resolve(box); };\n        const cancel = () => finish(null);\n        if (signal.aborted) { resolve(null); return; }\n        signal.addEventListener('abort', cancel, { once: true });\n        boxProbe.then(finish);\n      });\n      try {\n        const tex = await frameAssets.load(url, record, Assets);\n        if (!tex || record.cancelled) return null;\n        return { name, url, tex, box: await boxP };\n      } catch { return null; } // 探测：没这帧就跳过\n    };\n    const add = entry => {\n      if (!entry || record.cancelled) return;\n      record.set.set(entry.name, entry.tex);\n      record.boxes.set(entry.name, entry.box);\n    };\n    // 首个可用 idle 就是入场所需帧；剩余纹理不阻塞 attach 的首画面提交。\n    phase('idle-loading');\n    const triedIdle = new Set();\n    for (const name of FRAME_SEQUENCES[role].idle) {\n      if (record.cancelled) return;\n      if (triedIdle.has(name)) continue;\n      triedIdle.add(name);\n      add(await loadCandidate(name, true));\n      if (record.set.size) break;\n    }\n    if (record.cancelled || !record.set.size) { phase('failed'); return; }\n    refreshSequences();\n    phase('idle-ready');\n    resolveReady(record);\n    const candidates = candidateNames(role).filter(name => !triedIdle.has(name));\n    for (let i = 0; i < candidates.length && !record.cancelled; i += LOAD_BATCH) {\n      phase('frame-batch');\n      const batch = await Promise.all(candidates.slice(i, i + LOAD_BATCH).map(name => loadCandidate(name)));\n      batch.forEach(add);\n      if (!record.cancelled) refreshSequences();\n    }\n    phase('all-ready');\n  })()"
+        },
+        {
+          "why": "module-import",
+          "source": "import('pixi.js')"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "evictOtherTextureSets(role, Texture)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "assetUrl(`assets/portraits/frames/${role}/${name}.webp`)"
+        },
+        {
+          "why": "asset-template",
+          "source": "`assets/portraits/frames/${role}/${name}.webp`"
+        },
+        {
+          "why": "constructor",
+          "source": "new Promise(resolve => {\n        const signal = record.controller.signal;\n        const finish = box => { signal.removeEventListener('abort', cancel); resolve(box); };\n        const cancel = () => finish(null);\n        if (signal.aborted) { resolve(null); return; }\n        signal.addEventListener('abort', cancel, { once: true });\n        boxProbe.then(finish);\n      })"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "frameAssets.load(url, record, Assets)"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "setTexture(tex)"
+        },
+        {
+          "why": "constructor",
+          "source": "new WeakMap()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "releaseTextureSets()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "assetUrl(`assets/portraits/frames/${role}/sprite-v1/neutral.webp`)"
+        },
+        {
+          "why": "asset-template",
+          "source": "`assets/portraits/frames/${role}/sprite-v1/neutral.webp`"
+        },
+        {
+          "why": "constructor",
+          "source": "new Promise(resolve => { cur.deathResolve = resolve; })"
+        },
+        {
+          "why": "constructor",
+          "source": "new MutationObserver(validateScene)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "releaseTextureSets()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "summarizeFrameTextures(texSets.values())"
+        }
+      ]
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "incomingSha256": "c4dd6d5d5729d699823b280c829f60ccc193933d85cf90fc6ba5af85aec8504f",
+      "candidateSha256": "bc24fc0b7e1621821d8dc513e43c21daa24378da6a03c515ae7569c0804b1a47",
+      "resourceSurfaceASTEqual": true,
+      "incomingCount": 50,
+      "candidateCount": 50,
+      "expressions": [
+        {
+          "why": "module-import",
+          "source": "import { isTargetableEnemy } from '../core/battle.target-session.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { requiresInfusion } from '../effects/battle.infusion.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { isHandArrivalEvent } from '../core/battle.card-presentation.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { characterName } from '../../core/characters.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { esc, escAttr } from '../../core/shared.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { assetUrl } from '../../core/asset-url.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { fanLayout } from '../core/battle.hand.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { createHandHitController } from './battle.hand-hit.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { handDisplayLayout as referenceHandLayout } from './battle.hand-layout.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { intentViewModel } from './battle.intent.view.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { equipmentInfoHTML } from '../../ui/equipment-info.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { playerCombatStatsHTML } from '../../ui/battle-hud-info.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { isAreaEffect, itemTargetSideFor } from '../effects/battle.target-rules.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { storeGet, storeSet } from '../../core/storage.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findEffectiveCard as findCard, infusionFuelReason, infuseOf, targetSide, unplayableReason, handCurseSpecs } from '../core/battle.core.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { animateSafe } from './battle.anim.view.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { schedulePresentationMs } from '../runtime/battle.clock.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelBattleSelection, selectCardByClick, syncSubmittedCardPoses } from './battle.aim.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { showFoePreview, clearFoePreview } from './battle.hover.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { cardRuleHint } from './battle.preview.js';"
+        },
+        {
+          "why": "module-import",
+          "source": "import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "constructor",
+          "source": "new ResizeObserver(syncHandWidth)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Cards.cardHTML(g.card, 'sm', {\n        ...(costDiff ? { costOverride: { v: effCost, base: baseCost } } : {}),\n        ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0\n          ? { dmgOverride: { bonus: spellBonus } } : {}),\n      })"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(evs.filter(ev => ev.kind === 'play').map(ev => ev.uid))"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)\n      .map(rec => [rec.slot, new Set(rec.group.uids)]))"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(rec.group.uids)"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(pageGroups.map(handSlotKey))"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.decodeIn(handLayer)"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "constructor",
+          "source": "new Map()"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.has(player.myClass)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.battleArt(player.myClass)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.classArt(player.myClass)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Icons.img('helmet')"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Icons.img('runner')"
+        },
+        {
+          "why": "asset-string",
+          "source": "'assets/portraits/allies/federal-patrol-v1.webp'"
+        },
+        {
+          "why": "asset-string",
+          "source": "'assets/portraits/allies/federal-shooter-v1.webp'"
+        },
+        {
+          "why": "asset-string",
+          "source": "'assets/portraits/allies/sealed-limb-v1.webp'"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "assetUrl(source)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Icons.img('runner')"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(ordered.map(r => r.key))"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.has(f.id)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Art.monsterArt(f.id)"
+        },
+        {
+          "why": "resource-related-call",
+          "source": "SDT.Icons.img('slime')"
+        },
+        {
+          "why": "constructor",
+          "source": "new Set(ordered.map(r => r.key))"
+        }
+      ]
+    }
+  ],
+  "allComparedSurfacesEqual": true,
+  "scopeLimits": "Not a blanket source-equivalence proof; not permission to expand exclusions; final full build and fail-closed asset guard still required."
+}

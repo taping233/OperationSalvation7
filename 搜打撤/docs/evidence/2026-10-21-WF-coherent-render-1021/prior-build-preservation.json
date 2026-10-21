@@ -1,0 +1,12 @@
+{
+  "sourceCommit": "35228afacc4ced8dcc93cb619eb1f02cf53dfac5",
+  "hostingCommit": "cc1601c77c265d089aa5a3c0624a36cc3f442a8c",
+  "files": 1595,
+  "extraHostingPaths": [
+    "build-provenance.json"
+  ],
+  "allHostingCopyHashesMatched": true,
+  "allHostingGitBlobSHA256Matched": true,
+  "manifestSHA256": "7a3675ffc8884d46c62ebd731aa7c29f5dba62452eafef76fad0a3b959dc7c1a",
+  "preservation": "All prior output bytes are retained in unchanged hosting working copy and exact Git objects. Initial pre-build check asserted incorrect total hosting path count and did not complete; this post-failed-build verification establishes actual recoverability, not pre-build verification."
+}

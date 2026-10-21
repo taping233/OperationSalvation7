@@ -1,0 +1,23 @@
+{
+  "incoming": "b7207a2846b4786e5f4c2fce4f1e6e1ff4073c88",
+  "source": "latest central assembly; all2 base test blobs independently match exact incoming",
+  "patchSha256": "fe0a942dae78ddb046c343b79f31556331be7a7b600c001e9e83790a68554dcb",
+  "files": [
+    {
+      "path": "搜打撤/tests/expedition-battle-presentation.test.js",
+      "beforeBlobSha1": "a50ffdfa3ee86a4e744cb0c257df53c138f3317a",
+      "beforeSha256": "a670b13c3d12d12511641f9929b1609e3b1139b9adc8c7062b9d7a18917d6042",
+      "afterBlobSha1": "4bc3c01297b8706c5bbbc27c1c2b28372e25a758",
+      "afterSha256": "6a360e0336213d1921420b6fcd7627b1e16868e1308a215c00653f2b8f0c8bdb",
+      "bytes": 9378
+    },
+    {
+      "path": "搜打撤/tests/page-perf-battle.test.js",
+      "beforeBlobSha1": "51ea80b17c81c0b7108f99979af1cea2e799ffca",
+      "beforeSha256": "e25de72efcb868da2ab03640bbb5a09617a6a7fbddec8ac0a9e15a0827fa9103",
+      "afterBlobSha1": "c594545a59e58d4f60b0fba037116369cb56c33d",
+      "afterSha256": "87f753f9c26eb7a29ee049f3519a327b00cfffe63be15970540b58ecf4e92c7e",
+      "bytes": 14325
+    }
+  ]
+}
