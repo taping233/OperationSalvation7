@@ -1,0 +1,15 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-ally-order-a4cd6990/搜打撤
+
+································································································stdout | tests/abyss-sovereign.test.js > 受缚之残影 → 深渊主宰·妲莉薇特 > BOSS 战实打：肢体洗入 → 集齐化形 → 打出深渊主宰触发旧日再临（无攻血肢体/抽到6张/能量上限+1/法伤+1）
+DEBUG 轮后手牌: ["射击","深渊主宰·妲莉薇特"] battleActive: true turn: 2
+
+·····························································································································
+
+ Test Files  11 passed (11)
+      Tests  221 passed (221)
+   Start at  14:05:09
+   Duration  11.72s (transform 1.52s, setup 0ms, collect 8.09s, tests 13.55s, environment 3.78s, prepare 653ms)
+
+JSON report written to /workspace/scratch/b7a53a06c872/performance-ally-order-a4cd6990/ally-final-neighbor-result.json

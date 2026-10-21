@@ -1,0 +1,38 @@
+{
+  "output": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game",
+  "checkedOutputFiles": 1595,
+  "excludedAssets": 286,
+  "exclusionWarnings": [],
+  "artManifestEntries": 947,
+  "thumbManifestEntries": 329,
+  "injectedAliases": {
+    "assets/portraits/frames/changwuyu/sprite-v1/f000.webp": "assets/portraits/battle/changwuyu.webp",
+    "assets/portraits/frames/changwuyu/sprite-v1/neutral.webp": "assets/portraits/battle/changwuyu.webp",
+    "assets/cards/expedition-starters/rations.webp": "assets/cards/resources/ration.webp",
+    "assets/thumbs/cards/expedition-starters/rations.webp": "assets/thumbs/cards/resources/ration.webp"
+  },
+  "counts": {
+    "artManifest": 947,
+    "thumbManifest": 329,
+    "injectedAlias": 4,
+    "jsImport": 89,
+    "jsAssetLiteral": 120,
+    "cssUrl": 176,
+    "htmlUrl": 13,
+    "activeChest": 21
+  },
+  "uniqueLocalTargets": 1365,
+  "missingTargets": [],
+  "remainingReviewedReferences": [],
+  "activeChestFiles": 21,
+  "activeChestOutputFiles": 21,
+  "limits": [
+    "Static URLs/manifests/imports and current active chest files only; not arbitrary dynamic JavaScript or browser network coverage.",
+    "Lifecycle guards run in virtual-filesystem tests; this real build verifies unchanged inputs only."
+  ],
+  "parsers": {
+    "html": "JSDOM with scripts/resources disabled",
+    "css": "PostCSS + postcss-value-parser",
+    "js": "Acorn AST + acorn-walk"
+  }
+}

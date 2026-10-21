@@ -782,12 +782,14 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       rec.sig.init = true;
       ordered.push(rec);
     });
-    // 移除消失的随从 + 按数组序重排（appendChild 已连接节点只是搬移，不重建）
+    // 移除消失的随从；实际 DOM 顺序一致时保留节点原位，避免无效搬移。
     const kept = new Set(ordered.map(r => r.key));
     allySlots.forEach((rec, key) => {
       if (!kept.has(key)) { rec.slot.remove(); allySlots.delete(key); }
     });
-    ordered.forEach(rec => mount.appendChild(rec.slot));
+    if (mount.children.length !== ordered.length || ordered.some((rec, i) => mount.children[i] !== rec.slot)) {
+      ordered.forEach(rec => mount.appendChild(rec.slot));
+    }
   }
   // 敌方单位（右下站立横排；意图气泡在头顶；词缀角标；免伤高亮）
   function updateFoes(mount, foes, ctx) {

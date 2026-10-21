@@ -373,7 +373,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/audio/sfx-audition.js": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
     "game/src/audio/sound.js": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
     "game/src/battle/view/battle.frames.js": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
-    "game/src/battle/view/battle.layers.js": "9dcf7a5161975db547408b885b16089479f386b92b3b405efccdadefdc38b346",
+    "game/src/battle/view/battle.layers.js": "a69e01352617538ab5490e46d48e49c142036fb89337000f7703bf865de6a679",
     "game/src/battle/view/battle.vfx.js": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687",
     "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
     "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
