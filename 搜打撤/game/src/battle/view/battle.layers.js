@@ -368,8 +368,6 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   function updateHand(snapshot, prev, pageGroups, events, extra) {
     if (!handLayer) return { flightMs: 0 };
     const previousFocus = captureHandFocus();
-    const previousUids = new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)
-      .map(rec => [rec.slot, new Set(rec.group.uids)]));
     const readable = pageGroups.length <= 6 ? 'true' : 'false';
     if (handLayer.dataset.readable !== readable) handLayer.dataset.readable = readable;
     const evs = events || [];
@@ -377,6 +375,9 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     evs.forEach(ev => { if (isHandArrivalEvent(ev)) drawn.add(ev.uid); else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid); });
     const submitted = new Set(evs.filter(ev => ev.kind === 'play').map(ev => ev.uid));
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
+    // Only arrivals need old stack membership; capture before replacing rec.group.
+    const previousUids = drawn.size ? new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)
+      .map(rec => [rec.slot, new Set(rec.group.uids)])) : null;
     const ctx = {
       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
       pendingTarget: snapshot.pendingTarget, energy: snapshot.energy, busy: snapshot.busy, playedMovesThisTurn: snapshot.playedMovesThisTurn,

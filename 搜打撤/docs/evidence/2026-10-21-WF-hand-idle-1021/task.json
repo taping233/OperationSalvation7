@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-hand-idle-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "无到牌/待阅牌时避免入手反馈临时容器，保留有事件与pending行为",
+  "paths": [
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.effect-feedback.js",
+    "tests/battle-effect-feedback.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/performance.md",
+    "docs/PARALLEL-REGISTRY.md"
+  ],
+  "doneWhen": [
+    "三原文件精确接入真实306基线，唯一消费者SHA审查",
+    "标准选择器暂存门/普通hook及原预算build通过"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "独立10文件239项及旧实现3项负控；资源守卫41项、标准build及静态资源闭环通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "不额外full，按原选择器；未本批实页/远端CI",
+    "740→0仅受控入手记账容器计数，不是总分配/FPS/内存测量"
+  ],
+  "updatedAt": "2026-10-21T06:34:25.524354+00:00"
+}

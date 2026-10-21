@@ -1,0 +1,18 @@
+[
+  {
+    "path": "game/src/battle/view/battle.layers.js",
+    "beforeSha256": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
+    "afterSha256": "766374c9c091fe5fe1e858534c098b3cc34ec77ff42ca93dbd8541e35195638c",
+    "assetExpressionsUnchanged": true,
+    "expressions": [
+      "assetUrl(source)"
+    ]
+  },
+  {
+    "path": "game/src/battle/view/battle.effect-feedback.js",
+    "beforeSha256": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a",
+    "afterSha256": "da526926165bb1e996bfee433ce8a48b237601d1c94059e67bf800cd0b854464",
+    "assetExpressionsUnchanged": true,
+    "expressions": []
+  }
+]

@@ -67,29 +67,32 @@ function dismissMatching(state, selector) {
 export function updateHandAcquisitionFeedback(stage, snapshot, records, previousUids, events = []) {
   const state = stateFor(stage, snapshot.battleToken);
   if (!state) return;
-  const held = new Set(snapshot.hand);
-  const visible = new Set(records.flatMap(record => record.group.uids));
-  const incoming = new Set(events.filter(event => isHandArrivalEvent(event) && held.has(event.uid)
-    && (event.battleToken == null || event.battleToken === snapshot.battleToken)).map(event => event.uid));
-  for (const uid of incoming) if (!visible.has(uid)) state.pending.add(uid);
-  for (const uid of state.pending) if (!held.has(uid) || visible.has(uid)) state.pending.delete(uid);
+  // Pending off-page arrivals still reconcile on eventless page/hand changes.
+  if (state.pending.size || events.some(isHandArrivalEvent)) {
+    const held = new Set(snapshot.hand);
+    const visible = new Set(records.flatMap(record => record.group.uids));
+    const incoming = new Set(events.filter(event => isHandArrivalEvent(event) && held.has(event.uid)
+      && (event.battleToken == null || event.battleToken === snapshot.battleToken)).map(event => event.uid));
+    for (const uid of incoming) if (!visible.has(uid)) state.pending.add(uid);
+    for (const uid of state.pending) if (!held.has(uid) || visible.has(uid)) state.pending.delete(uid);
 
-  for (const record of records) {
-    const before = previousUids.get(record.slot);
-    if (!before && !reducedMotion()) continue; // New slots already have the original draw flight.
-    const count = record.group.uids.filter(uid => incoming.has(uid) && !before?.has(uid)).length;
-    if (!count) continue;
-    const old = record.slot.querySelector('.bt-hand-acquired');
-    if (old) state.notices.get(old)?.();
-    const label = document.createElement('span');
-    label.className = 'bt-hand-acquired';
-    label.dataset.reducedMotion = String(reducedMotion());
-    const text = document.createElement('span');
-    text.textContent = `入手 +${count}`;
-    label.append(createAcquisitionIcon(), text);
-    label.setAttribute('role', 'status');
-    record.slot.appendChild(label);
-    retainBattleFeedback(stage, label, 1100);
+    if (incoming.size) for (const record of records) {
+      const before = previousUids.get(record.slot);
+      if (!before && !reducedMotion()) continue; // New slots already have the original draw flight.
+      const count = record.group.uids.filter(uid => incoming.has(uid) && !before?.has(uid)).length;
+      if (!count) continue;
+      const old = record.slot.querySelector('.bt-hand-acquired');
+      if (old) state.notices.get(old)?.();
+      const label = document.createElement('span');
+      label.className = 'bt-hand-acquired';
+      label.dataset.reducedMotion = String(reducedMotion());
+      const text = document.createElement('span');
+      text.textContent = `入手 +${count}`;
+      label.append(createAcquisitionIcon(), text);
+      label.setAttribute('role', 'status');
+      record.slot.appendChild(label);
+      retainBattleFeedback(stage, label, 1100);
+    }
   }
 
   const button = stage.querySelector('.bt-hand-page');

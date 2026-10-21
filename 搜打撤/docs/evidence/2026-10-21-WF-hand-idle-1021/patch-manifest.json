@@ -1,0 +1,49 @@
+{
+  "parentReportedPublishedBaseline": "306376b7 / v25",
+  "localSourceHead": "82770803b2c15d67d505ed15273f9a2689cf0c72",
+  "files": [
+    {
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "before": "5639d783e7d23ed1be2589ce110e706fd29cfc56fb561fbee2e76fd83225e9d8",
+      "after": "766374c9c091fe5fe1e858534c098b3cc34ec77ff42ca93dbd8541e35195638c"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+      "before": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a",
+      "after": "da526926165bb1e996bfee433ce8a48b237601d1c94059e67bf800cd0b854464"
+    },
+    {
+      "path": "搜打撤/tests/battle-effect-feedback.test.js",
+      "before": "de9c41097af0c7e41df7e6cda19695267882adff7cfbd87537de33c3be660d6e",
+      "after": "de4bf6c066aa7f4c79fe488513ae3396497f2173d8856d5268ea9f2e3fac7fa2"
+    }
+  ],
+  "patchSha256": "5a1a47d9fccce4b0445bd45818090b236ac68d7f45ac42b9c743a46c56378a55",
+  "tests": {
+    "files": 10,
+    "passed": 239,
+    "failed": 0
+  },
+  "operations": {
+    "baseline": {
+      "Array": 480,
+      "Set": 240,
+      "Map": 20
+    },
+    "candidate": {
+      "Array": 0,
+      "Set": 0,
+      "Map": 0
+    }
+  },
+  "preservation": {
+    "sourceFilesUnchanged": {
+      "game/src/battle/view/battle.layers.js": true,
+      "tests/battle-effect-feedback.test.js": true,
+      "game/src/battle/view/battle.effect-feedback.js": true,
+      "tests/page-perf-battle.test.js": true
+    },
+    "integrationIndexUnchanged": true,
+    "lockUnchanged": true
+  }
+}

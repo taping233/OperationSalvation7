@@ -37,6 +37,7 @@ window.SDT = {
 };
 const { mountHandLayer, updateHand } = await import('../game/src/battle/view/battle.layers.js');
 const { animateBattleTransition } = await import('../game/src/battle/view/battle.anim.view.js');
+const { syncSubmittedCardPoses } = await import('../game/src/battle/view/battle.aim.js');
 const { retainBattleFeedback, showBattleEffectFeedback } = await import('../game/src/battle/view/battle.effect-feedback.js');
 let stage, token = 0, animate;
 const card = { id: 'same', name: '同名牌', type: '法术', cost: 0, desc: '' };
@@ -337,4 +338,90 @@ it.each(['pouch', 'discover-cast', 'effect-cast'])('does not fly a queued %s car
   expect(result.flightMs).toBe(0);
   expect(animate).not.toHaveBeenCalled();
   expect(document.querySelector('.bt-hand-acquired')).toBeNull();
+});
+
+it('does not copy stack or held UIDs or filter stacks during eventless acquisition-idle renders', () => {
+  const groups = Array.from({ length: 9 }, (_, i) => group([`old-${i}`], `stack-${i}`));
+  const held = groups.flatMap(entry => entry.uids);
+  hand(groups, [], held);
+  const stackCopies = groups.map(entry => vi.spyOn(entry.uids, Symbol.iterator));
+  const stackFilters = groups.map(entry => vi.spyOn(entry.uids, 'filter'));
+  const heldCopies = vi.spyOn(held, Symbol.iterator);
+  const before = document.querySelector('.sts-hand').innerHTML;
+  for (let i = 0; i < 20; i++) hand(groups, [], held);
+  expect(stackCopies.reduce((count, spy) => count + spy.mock.calls.length, 0)).toBe(0);
+  expect(stackFilters.reduce((count, spy) => count + spy.mock.calls.length, 0)).toBe(0);
+  expect(heldCopies).not.toHaveBeenCalled();
+  expect(document.querySelector('.sts-hand').innerHTML).toBe(before);
+});
+
+it('skips old-UID snapshots for queued casts and unrelated events but keeps original submission poses', () => {
+  const groups = [group(['old'])];
+  hand(groups);
+  const copies = vi.spyOn(groups[0].uids, Symbol.iterator);
+  hand(groups, [{ kind: 'play', uid: 'old' }, draw('queued', 'pouch'),
+    draw('queued', 'discover-cast'), draw('queued', 'effect-cast'), { kind: 'recast', uid: 'old' }]);
+  expect(copies).not.toHaveBeenCalled();
+  expect(syncSubmittedCardPoses).toHaveBeenLastCalledWith(new Set(['old']));
+  expect(document.querySelector('.bt-hand-acquired')).toBeNull();
+  expect(document.querySelector('.bt-hand-page-new')).toBeNull();
+});
+
+it('reconciles pending pages with no previous-UID snapshot and clears them before returning idle', async () => {
+  const { updateHandAcquisitionFeedback } = await import('../game/src/battle/view/battle.effect-feedback.js');
+  const groups = [group(['old'])];
+  hand(groups, [draw('hidden-a'), draw('hidden-b')], ['old', 'hidden-a', 'hidden-b']);
+  const button = document.querySelector('.bt-hand-page');
+  button.replaceWith(button.cloneNode(false));
+  const record = { slot: document.querySelector('.bt-slot'), group: groups[0] };
+  updateHandAcquisitionFeedback(stage, state.snapshot, [record], null, []);
+  expect(stage.querySelector('.bt-hand-page-new').textContent).toBe('新增 2');
+  record.group = group(['hidden-a']);
+  updateHandAcquisitionFeedback(stage, state.snapshot, [record], null, []);
+  expect(stage.querySelector('.bt-hand-page-new').textContent).toBe('新增 1');
+  state.snapshot.hand = ['old', 'hidden-a'];
+  updateHandAcquisitionFeedback(stage, state.snapshot, [record], null, []);
+  expect(stage.querySelector('.bt-hand-page-new')).toBeNull();
+  expect(stage.querySelector('.bt-hand-page').getAttribute('aria-label')).not.toContain('新增');
+  const copies = vi.spyOn(state.snapshot.hand, Symbol.iterator);
+  updateHandAcquisitionFeedback(stage, state.snapshot, [record], null, []);
+  expect(copies).not.toHaveBeenCalled();
+});
+
+it('runs feedback token cleanup on an eventless render before considering idle acquisition work', () => {
+  hand([group(['old'])], [draw('hidden')], ['old', 'hidden']);
+  animateBattleTransition(null, UI.el.ovBody, [recast()]);
+  const oldNotice = stage.querySelector('.bt-recast-feedback');
+  state.snapshot.battleToken = ++token; stage._battleToken = token;
+  hand([group(['old'])], [], ['old', 'hidden']);
+  expect(stage.querySelectorAll('.bt-hand-page-new,.bt-recast-feedback')).toHaveLength(0);
+  expect(stage.querySelector('.bt-hand-page').getAttribute('aria-label')).not.toContain('新增');
+  expect(oldNotice._testAnimations[0].cancel).toHaveBeenCalledOnce();
+});
+
+it('removes expired disconnected notices on an eventless render without clearing live notices early', () => {
+  hand([group(['old'])]);
+  animateBattleTransition(null, UI.el.ovBody, [recast()]);
+  const notice = stage.querySelector('.bt-recast-feedback');
+  const timer = timers.at(-1);
+  hand([group(['old'])]);
+  expect(notice.isConnected).toBe(true);
+  expect(timer.cancelled).toBe(false);
+  notice.remove();
+  hand([group(['old'])]);
+  expect(timer.cancelled).toBe(true);
+  expect(notice._testAnimations[0].cancel).toHaveBeenCalledOnce();
+});
+
+it('resumes arrivals after idle renders and snapshots old memberships before group replacement', () => {
+  const old = group(['old']);
+  hand([old]);
+  for (let i = 0; i < 3; i++) hand([old]);
+  const copies = vi.spyOn(old.uids, Symbol.iterator);
+  hand([group(['old', 'new-a', 'new-b'])], [draw('new-a'), draw('new-b'), draw('new-b')]);
+  expect(copies).toHaveBeenCalledOnce();
+  expect(document.querySelector('.bt-hand-acquired').textContent).toBe('入手 +2');
+  const notice = document.querySelector('.bt-hand-acquired');
+  hand([group(['old', 'new-a', 'new-b'])]);
+  expect(document.querySelector('.bt-hand-acquired')).toBe(notice);
 });
