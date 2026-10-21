@@ -67,6 +67,7 @@ describe('battle render stage export and analysis', () => {
     const { summarizeRuntimeStages, compareRuntimeStages } = await import('../scripts/runtime-trace-alignment.mjs');
     const records = [
       { kind:'stage', stage:'battle-render-sync', tMs:100, durationMs:20, interaction:1, visible:true },
+      { kind:'stage', stage:'battle-restore-sync', tMs:101, durationMs:1, interaction:1, visible:true },
       { kind:'stage', stage:'battle-shell-sync', tMs:102, durationMs:3, interaction:1, visible:true },
       { kind:'stage', stage:'battle-hand-sync', tMs:106, durationMs:5, interaction:1, visible:true },
       { kind:'stage', stage:'battle-render-sync', tMs:103, durationMs:10, interaction:1, visible:true },
@@ -74,6 +75,7 @@ describe('battle render stage export and analysis', () => {
     const value = { schema:'sdt-runtime-trace-v1', records, dropped:0 };
     const result = summarizeRuntimeStages(value);
     expect(result.stages['battle-render-sync']).toEqual({ n:2, medianMs:15, minMs:10, maxMs:20 });
+    expect(result.stages['battle-restore-sync'].medianMs).toBe(1);
     expect(result.stages['battle-shell-sync'].medianMs).toBe(3);
     expect(result.stages['battle-hand-sync'].medianMs).toBe(5);
     expect(result.synchronousSettings).toMatchObject({ n:0, medianMs:null, incompleteOrAmbiguousInteractions:0 });

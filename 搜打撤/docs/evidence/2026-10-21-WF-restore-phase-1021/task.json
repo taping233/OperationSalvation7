@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-restore-phase-1021",
+  "date": "2026-10-21",
+  "owner": "Friday / validate_restore_phase_release",
+  "goal": "Isolate existing synchronous battle restoration interval without changing rendering behavior",
+  "paths": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/core/runtime-trace-stages.local.js",
+    "game/src/core/runtime-trace.local.js",
+    "tests/battle-render-runtime-trace.test.js",
+    "tests/runtime-trace-stages.local.test.js",
+    "tests/runtime-trace-alignment.test.js",
+    "docs/runtime-trace.md"
+  ],
+  "doneWhen": [
+    "Exact reviewed input, normal frozen FULL and unchanged original budgets verified; formal browser measurement parent-owned"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "78 focused tests, lint, negative controls and independent review;812+ narrative inputs/1595 outputs reconciled",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Normal frozen FULL and ordinary hook pending; publication and formal browser measurement not performed"
+  ],
+  "updatedAt": "2026-10-21T14:31:00.000Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

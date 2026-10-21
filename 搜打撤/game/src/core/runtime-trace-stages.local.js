@@ -3,7 +3,7 @@
 export const RUNTIME_STAGES = Object.freeze([
   'settings-module-wait', 'settings-overlay-sync',
   'settings-navigation-sync', 'settings-visual-wait',
-  'battle-render-sync', 'battle-shell-sync', 'battle-hand-sync',
+  'battle-render-sync', 'battle-restore-sync', 'battle-shell-sync', 'battle-hand-sync',
 ]);
 let sink = null;
 let context;

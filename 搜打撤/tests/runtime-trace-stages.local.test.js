@@ -16,11 +16,11 @@ describe('bounded local stage instrumentation', () => {
     const finish = beginRuntimeStage('settings-overlay-sync'); finish();
     expect(captureRuntimeStageContext()).toBeUndefined(); expect(now).not.toHaveBeenCalled(); expect(listener).not.toHaveBeenCalled();
   });
-  it('accepts only seven fixed labels and strips arbitrary payloads', () => {
+  it('accepts only eight fixed labels and strips arbitrary payloads', () => {
     install(); input();
     for (const stage of RUNTIME_STAGES) { const finish = beginRuntimeStage(stage); vi.advanceTimersByTime(2); finish(); finish(); }
     beginRuntimeStage('secret-token')();
-    expect(stages()).toHaveLength(7); expect(stages().map(row => row.stage)).toEqual(RUNTIME_STAGES);
+    expect(stages()).toHaveLength(8); expect(stages().map(row => row.stage)).toEqual(RUNTIME_STAGES);
     expect(sanitizeTraceRow({ kind: 'stage', stage: 'password', token: 'secret', durationMs: -1 })).toEqual({ kind: 'stage' });
     expect(sanitizeTraceRow({ kind: 'input', stage: 'settings-overlay-sync' })).toEqual({ kind: 'input' });
   });

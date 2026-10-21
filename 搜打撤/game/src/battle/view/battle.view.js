@@ -493,7 +493,12 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const skillEffect = slamSkillInfo.aimDesc || (slamSkillInfo.heal ? '回复 ' + slamSkillInfo.heal + ' 生命' : '随机获得1张牌');
     const turnForecast = forecastEnemyTurn(snapshot);
     // 战斗标题文字去掉（2026-09-13 留言）
-    const restored = !backgroundOnly && restoreCombatScene(UI, snapshot.battleToken, { isCurrent });
+    let restored = false;
+    if (!backgroundOnly) {
+      const finishRestore = traceContext && beginRuntimeStage('battle-restore-sync', traceContext);
+      try { restored = restoreCombatScene(UI, snapshot.battleToken, { isCurrent }); }
+      finally { finishRestore && finishRestore(); }
+    }
     if (!isCurrent()) return;
     if (restored) tx.live = getSnapshot();
     let mounted;
