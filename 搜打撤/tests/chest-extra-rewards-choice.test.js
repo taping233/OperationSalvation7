@@ -96,7 +96,7 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
       h.reload(); h.reveal(); h.reload();
       expect(h.body.querySelectorAll('[data-act="chestPick"]')).toHaveLength(3);
       expect(h.body.querySelectorAll('[data-act="chestTake1"]')).toHaveLength(withEgg ? 1 : 0);
-      if (withEgg) expect(h.body.textContent).toContain('附赠另领');
+      if (withEgg) expect(h.body.textContent).toContain('附赠');
       const oldPick = h.acts.chestPick;
       h.click('chestPick', 0); oldPick({ i:0 });
       expect(h.saved().current).toMatchObject({ taken:[0], lost:[1, 2], choiceCount:3 });
@@ -187,17 +187,18 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
     expect(h.game.ownedCards.filter(owned => owned.card.id === egg.id)).toHaveLength(1);
   });
 
-  it('真实领取摘要仅保本批taken，部分/完成/重载不从背包反推', async()=>{
+  it('部分领取、完成和重载保留实际库存，不显示入包汇总', async()=>{
     const h=await setup({kind:'large'}); h.reveal();
     const card=h.saved().current.cards[0];
     h.game.ownedCards.push({card:{id:'prior',name:'以前的卡'}});
     h.click('chestTake1',0); h.click('chestClosePicker');
-    expect(h.body.querySelector('.cqo-receipt').textContent).toContain(card.name);
-    expect(h.body.querySelector('.cqo-receipt').textContent).not.toContain('以前的卡');
-    h.reload(); expect(h.body.querySelector('.cqo-receipt').textContent).toContain(card.name);
+    expect(h.body.querySelector('.cqo-receipt')).toBeNull();
+    expect(h.game.ownedCards.some(owned=>owned.card.name===card.name)).toBe(true);
+    h.reload(); expect(h.body.querySelector('.cqo-receipt')).toBeNull();
     h.click('chestOpen',0); h.click('chestTake');
     const received=h.saved().current.cards;
-    for(const got of received) expect(h.body.querySelector('.cqo-receipt').textContent).toContain(got.name);
+    expect(h.body.querySelector('.cqo-receipt')).toBeNull();
+    for(const got of received) expect(h.game.ownedCards.some(owned=>owned.card.id===got.id)).toBe(true);
   });
   it.each(['medium'])('%s 旧快照缺少claimMode/choiceCount时维持原有恢复语义', async kind => {
     const h = await setup({ kind }); const legacy = h.saved();
@@ -301,7 +302,7 @@ describe('三选一与附赠的总览状态连续性', () => {
     expect(rule).toContain('剩余 1 张待处理');
     expect(rule).not.toContain('未领取');
     h.click('chestOpen', 0);
-    expect([...h.body.querySelectorAll('.reward-unit.dropped .reward-unit-state')].map(el => el.textContent)).toEqual(['已放弃', '已放弃']);
+    expect([...h.body.querySelectorAll('.reward-unit.dropped .reward-unit-state')].map(el => el.textContent)).toEqual(['×未选择 · 已放弃', '×未选择 · 已放弃']);
     const before = h.game.grantCard.mock.calls.length;
     oldPick({ i:1 }); h.acts.chestPick({ i:1 });
     expect(h.game.grantCard).toHaveBeenCalledTimes(before);
@@ -330,7 +331,7 @@ describe('真实领奖卡面与详情共用动作', () => {
     expect(button.dataset.act).toBe(original.dataset.act);
     expect(button.textContent).toBe(original.textContent);
     expect(button.dataset.cancel).toBe('false');
-    if (kind === 'medium') expect(footer.textContent).toContain('其余选项将放弃');
+    if (kind === 'medium') expect(footer.textContent).toContain('其余基础候选将放弃');
     expect(h.game.grantCard).not.toHaveBeenCalled();
     expect(h.saved().current).toMatchObject({ taken:[], lost:[] });
   });

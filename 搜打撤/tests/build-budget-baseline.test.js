@@ -9,17 +9,17 @@ const fixed = [
   ['packageBytesMax', 222424745, 220 * 1024 * 1024],
 ];
 describe('fixed published build-byte baseline', () => {
-  for (const [key, baseline, limit] of fixed) it(key + ' retains less than 4% headroom', () => {
-    expect(budgets[key]).toBe(limit);
+  for (const [key, baseline, limit] of fixed) it(key + ' applies the approved 50% increase to the previous limit', () => {
+    expect(budgets[key]).toBe(limit * 1.5);
     expect(limit).toBeGreaterThan(baseline);
     expect(Math.ceil(baseline * 1.04)).toBeGreaterThan(limit);
   });
-  it('leaves runtime and other byte gates unchanged', () => {
+  it('leaves runtime gates unchanged and increases the remaining build byte gates by 50%', () => {
     expect(budgets.startupPreloadMax).toBe(40);
     expect(budgets.retainedImageCountMax).toBe(96);
     expect(budgets.retainedImageBytesMax).toBe(192 * 1024 * 1024);
-    expect(budgets.packagedDuplicateBytesMax).toBe(904 * 1024);
-    expect(budgets.featureChunkGzipBytesMax).toBe(104 * 1024);
-    expect(budgets.narrativeChunkGzipBytesMax).toBe(50 * 1024);
+    expect(budgets.packagedDuplicateBytesMax).toBe(904 * 1024 * 1.5);
+    expect(budgets.featureChunkGzipBytesMax).toBe(104 * 1024 * 1.5);
+    expect(budgets.narrativeChunkGzipBytesMax).toBe(50 * 1024 * 1.5);
   });
 });

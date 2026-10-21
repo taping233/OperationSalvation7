@@ -58,7 +58,6 @@ describe('顶层门面快照漂移守卫', () => {
       'cards/cards.js',
       'cards/cards.rules.js',
       'cards/cards.sync.js',
-      'core/renderer.fx.js',
       'game.boot.js',
       'hub/game.bag.drag.js',
       'hub/game.bag.js',
@@ -79,10 +78,10 @@ describe('顶层门面快照漂移守卫', () => {
     ]);
   });
 
-  it('战斗兼容门面与新工厂均不再捕获浏览器门面快照', () => {
+  it('已迁移的战斗兼容门面、工厂与 FX 不再捕获浏览器门面快照', () => {
     for (const path of ['battle/core/battle.engine.js', 'battle/core/battle.engine.factory.js',
       'battle/bag/battle.bag.js', 'battle/core/battle.enemy-phase.js',
-      'battle/core/battle.exec-play.js', 'battle/core/battle.lifecycle.js']) {
+      'battle/core/battle.exec-play.js', 'battle/core/battle.lifecycle.js', 'core/renderer.fx.js']) {
       expect(list(path).split('\n').some(isTopLevelSdtDeref), path).toBe(false);
     }
   });

@@ -122,7 +122,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     ];
     altar.openFireRest();
     expect(H.game.hp).toBe(1); // 确认前不结算
-    UI._acts.fireRestGo();
+    UI._acts.fireHeal(); UI._acts.fireRestore();
     expect(H.game.hp).toBe(11);   // 回血一次（重入不得重复）
     // 职业卡 + 自动发现两张复原入包；道具卡留在消耗区不可复原（发现顺序随机，排序后比对）
     expect(H.game.ownedCards.map(c => c.card.name).sort()).toEqual(['奖励牌', '烬卡一', '烬卡二'].sort());
@@ -139,11 +139,12 @@ describe('09-30 深审 WORLD 组修复回归', () => {
 
   it('WORLD-002b 火堆空池：只回血掷职业卡并给提示，不再打开复原选牌页', () => {
     altar.openFireRest();
-    expect(UI.el.ovBody.querySelector('[data-act="fireRestGo"]')).not.toBeNull();
-    UI._acts.fireRestGo();
+    expect(UI.el.ovBody.querySelector('[data-act="fireHeal"]')).not.toBeNull();
+    UI._acts.fireHeal(); UI._acts.fireRestore();
     expect(H.game.hp).toBe(11);
     expect(H.game.ownedCards).toHaveLength(1);   // 仅职业卡
-    expect(H.game.visited['0,1']).toBe(1);
+    expect(H.game.visited['0,1']).toBeUndefined();
+    expect(H.game.nodeRewards['0,1']).toMatchObject({healUsed:true,restoreUsed:false});
     expect(H.saves.at(-1).ownedCards).toHaveLength(1);
     expect(UI.el.ovBody.querySelector('[data-act="fireDone"]')).not.toBeNull(); // 结果页，无复原选牌
     expect(UI.el.ovBody.querySelector('[data-act="fireResultCard"]')).not.toBeNull(); // 职业奖励可查看
@@ -155,10 +156,10 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     H.cards.push(restored);
     H.game.usedPocket = [{ card:restored, count:1 }];
     altar.openFireRest();
-    UI._acts.fireRestGo();
+    UI._acts.fireHeal(); UI._acts.fireRestore();
     expect(H.game.nodeRewards['0,1']).toMatchObject({ type:'fire', hpGain:0, hpAfter:H.game.maxHp, restoredIds:['restored'] });
-    expect(UI.el.ovBody.textContent).toContain('生命回复 0 点');
-    expect(UI.el.ovBody.textContent).toContain('已复原 1 张卡牌');
+    expect(UI.el.ovBody.textContent).toContain('生命已满');
+    expect(UI.el.ovBody.textContent).toContain('已复原 1 张');
     expect(UI.el.ovBody.querySelector('[data-act="fireResultCard"]')).not.toBeNull();
     expect(H.saves.at(-1)).not.toHaveProperty('nodeFeedback');
     UI._acts.fireDone();
@@ -176,8 +177,8 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(help.open).toBe(false);
     help.open = true;
     expect(JSON.stringify(H.game)).toBe(before);
-    expect(UI.el.ovBody.querySelector('.ui-risk').closest('details')).toBeNull();
-    UI._acts.fireRestGo();
+    expect(UI.el.ovBody.querySelector('[data-act="fireHeal"]').closest('details')).toBeNull();
+    UI._acts.fireHeal(); UI._acts.fireRestore();
     expect([...UI.el.ovBody.querySelectorAll('.fire-result-label')].map(el => el.textContent)).toEqual(['已复原', '额外获得']);
     expect(UI.el.ovBody.querySelectorAll('[data-act="fireResultCard"]')).toHaveLength(2);
     expect(UI.el.ovBody.querySelector('[data-act="fireDone"]').textContent).toContain('继续探索');
@@ -190,7 +191,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
   it('WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）', () => {
     H.game.usedPocket = [{ uid: 'p1', card: { id: 'x1', name: '孤卡', type: '武术' }, count: 1 }];
     altar.openFireRest();
-    UI._acts.fireRestGo();
+    UI._acts.fireHeal(); UI._acts.fireRestore();
     expect(H.game.ownedCards.map(c => c.card.name)).toEqual(['奖励牌', '孤卡']);
     expect(H.game.usedPocket).toHaveLength(0);
     expect(H.game.visited['0,1']).toBe(1);

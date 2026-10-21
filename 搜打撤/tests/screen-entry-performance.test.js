@@ -34,12 +34,12 @@ it('keeps complex selector semantics and excludes the supplied container itself'
   body().querySelector('.dt-grid').remove(); expect(pageMotionProfile(body()).key).toBe('other-page');
   body().innerHTML = '<main class="pg flow-transition"></main>'; expect(pageMotionProfile(body())).toBeNull();
 });
-it('ready pages reveal after readiness measurement and presentation frames, without a third serial frame', async () => {
+it('ready pages reveal after readiness measurement and presentation frames, with the shared handoff presentation frame', async () => {
   body().innerHTML = '<main class="settings-page">设置</main>';
   const reveal = vi.fn(); stagePageVisual(ui(), reveal);
   await vi.advanceTimersByTimeAsync(16); expect(reveal).not.toHaveBeenCalled();
-  await vi.advanceTimersByTimeAsync(16); expect(reveal).toHaveBeenCalledOnce();
-  expect(requestAnimationFrame).toHaveBeenCalledTimes(2);
+  await vi.advanceTimersByTimeAsync(32); expect(reveal).toHaveBeenCalledOnce();
+  expect(requestAnimationFrame).toHaveBeenCalledTimes(3);
 });
 it('cold visible images and backgrounds still gate reveal, while lazy images do not decode', async () => {
   body().innerHTML = '<main><img src="/portrait.webp"><img src="/lazy.webp" loading="lazy"></main>';
@@ -53,5 +53,5 @@ it('cold visible images and backgrounds still gate reveal, while lazy images do 
   const reveal = vi.fn(); stagePageVisual(state, reveal);
   await vi.advanceTimersByTimeAsync(80); expect(image.decode).toHaveBeenCalledOnce(); expect(lazy.decode).not.toHaveBeenCalled(); expect(reveal).not.toHaveBeenCalled();
   decodeReady(); await vi.advanceTimersByTimeAsync(32); expect(reveal).not.toHaveBeenCalled();
-  backgroundReady(); await vi.advanceTimersByTimeAsync(16); expect(reveal).toHaveBeenCalledOnce();
+  backgroundReady(); await vi.advanceTimersByTimeAsync(32); expect(reveal).toHaveBeenCalledOnce();
 });

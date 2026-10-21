@@ -96,6 +96,31 @@ it('reduced motion preserves synchronous room cleanup', async () => {
   expect(closeSpy).toHaveBeenCalledTimes(1);
 });
 
+it('carries the node illustration through slow destination readiness without a second black veil', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+  const { root, body, ui, closeSpy } = await installOverlay();
+  ui.showOverlay('', '<div class="flow-transition expedition-cut illustrated-cut" data-act="flowContinue"><h2 id="scene-title">拾荒商队</h2></div>', 'scene');
+  let ready;
+  ui._pageBgReady = new Promise(resolve => { ready = resolve; });
+  ui.showOverlay('', '<main class="shop-market">商店</main>', 'page');
+  const cover = root.querySelector(':scope > .page-visual-scene');
+  expect(cover.textContent).toBe('拾荒商队');
+  expect(cover.querySelector('[id], [data-act], i')).toBeNull();
+  expect(document.querySelectorAll('.page-visual-handoff')).toHaveLength(1);
+  expect(closeSpy).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(100);
+  expect(cover.classList.contains('leaving')).toBe(false);
+  ready();
+  await vi.advanceTimersByTimeAsync(32);
+  expect(cover.classList.contains('leaving')).toBe(true);
+  await vi.advanceTimersByTimeAsync(224);
+  expect(cover.isConnected).toBe(false);
+  expect(body.textContent).toBe('商店');
+  expect(root.hidden).toBe(false);
+});
+
 const hubPage = (tab, sub = '') => `<main id="hubMain" class="base-camp"><header class="hub-head">Base</header><div class="hub-body"><nav class="hub-tabs"><button class="hub-tab on" data-tab="${tab}">Tab</button></nav><nav><button class="stash-section-tab on" data-view="${sub}">Section</button></nav><section class="hub-page"><div class="pv12-agent-strip">Strip</div><div class="pv12-agent-data">Data</div>${tab}/${sub}</section></div></main>`;
 
 it('base navigation keeps the veil and shell stable and animates only changed content', async () => {

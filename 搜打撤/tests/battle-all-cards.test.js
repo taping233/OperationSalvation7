@@ -12,7 +12,7 @@
  *   打出后零可观测变化 = 分级（迭代评审 09-20）：手牌代价卡在「审计空手牌」环境下
  *   条件必不满足 → 警告清单（人工复核，句式引自 hand-cost-patterns.js 单一登记点）；
  *   无前置条件的卡零效果 → 硬失败（堵死「描述改成解析不出动词的死卡静默入库」的入口）。 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { targetSideFor, unplayableReasonFor } from '../game/src/battle/effects/battle.target-rules.js';
 import { HAND_COST_PATTERNS } from '../game/src/battle/effects/hand-cost-patterns.js';
 import { requiresInfusion } from '../game/src/battle/effects/battle.infusion.js';
@@ -29,6 +29,7 @@ await import('../game/src/cards/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
 
 const C = window.SDT.Cards;
+const { Random } = await import('../game/src/core/random.js');
 
 beforeAll(() => {
   C.ensureSha();
@@ -61,11 +62,14 @@ const tick = () => new Promise(r => setTimeout(r, 0));
 const nap = (ms) => new Promise(r => setTimeout(r, ms));   // 空闲确认用真实延时（根治负载 flake）
 const snap = () => BattleSession.getSnapshot();
 
-// 抽干动作队列并顺手关掉发现/抉择/手选面板（都选第 0 项），返回最终快照
-async function drain(maxLoops = 200) {
-  for (let i = 0; i < maxLoops; i++) {
+// 多段法术仍等待真实 RAF；轮询次数不能表示可用结算时间。
+// 5 秒是有限失败期限，不改变真实队列或跳过最终 busy/队列断言。
+let auditRandomStart = null;
+async function drain(timeoutMs = 5000, readSnapshot = snap) {
+  const started = Date.now(), deadline = started + timeoutMs;
+  while (Date.now() < deadline) {
     await tick();
-    const s = snap();
+    const s = readSnapshot();
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
@@ -77,12 +81,17 @@ async function drain(maxLoops = 200) {
     }
     if (!s.busy && s.actionQueueLength === 0) {
       await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
-      const fresh = snap();
+      const fresh = readSnapshot();
       if (!fresh.busy && fresh.actionQueueLength === 0) return fresh;
       continue;
     }
   }
-  return snap();
+  const last = readSnapshot();
+  throw new Error('战斗结算超时 ' + JSON.stringify({ timeoutMs, elapsedMs: Date.now() - started,
+    randomStart: auditRandomStart, randomNow: Random.snapshot(), busy: last.busy,
+    actionQueueLength: last.actionQueueLength, discovering: !!last.discovering,
+    choosing: !!last.choosing, handSelecting: !!last.handSelecting,
+    infusing: !!last.infusing, pendingTarget: !!last.pendingTarget }));
 }
 
 // 出牌前后各拍一次状态指纹（含飘字消费），指纹不变 = 零可观测效果
@@ -169,6 +178,7 @@ process.on('unhandledRejection', (e) => { asyncError = e; });
 function takeAsyncError() { const e = asyncError; asyncError = null; return e; }
 
 async function auditOne(card) {
+  auditRandomStart = Random.snapshot();
   const kind = classify(card);
   const need = viewApi.infuseOf(card) || 0;
   const fill = need > 0 ? FILLER_NAMES
@@ -301,9 +311,39 @@ async function auditOne(card) {
     if (game.lastBattleEnd && game.lastBattleEnd.win === false) record(card, 'A-手牌', '打出后意外败北');
   } catch (e) { record(card, 'A-手牌', '崩溃:' + e.message); }
   endBattle(game);
+  return game;
 }
 
 describe('全卡库真实战斗实打审计', () => {
+  it('四次合法多段随机法术跨过旧轮询上限后仍完整结算', async () => {
+    const all = C.all(), mana = all.find(card => card.id === 'cc-mana-surge');
+    const multi = all.find(card => card.id === 'tt12-elemburst');
+    expect(C.isRandomObtainable(multi)).toBe(true);
+    const randomBefore = Random.snapshot(), resultStart = results.length;
+    const catalog = vi.spyOn(C, 'all').mockImplementation(() => [mana, multi]);
+    try {
+      Random.reseed(1);
+      const game = await auditOne(mana);
+      expect(game.logs.filter(line => /法力奔涌.*第 [1-4]\/4 发/.test(line))).toHaveLength(4);
+      expect(results.slice(resultStart)).toEqual([]);
+      expect(snap().busy).toBe(false);
+      expect(snap().actionQueueLength).toBe(0);
+    } finally {
+      catalog.mockRestore();
+      Random.restore(randomBefore);
+    }
+  });
+
+  it('不会结束的队列仍在真实期限后失败并报告状态', async () => {
+    const blocked = () => ({ busy: true, actionQueueLength: 1 });
+    const error = await drain(25, blocked).catch(value => value);
+    expect(error).toBeInstanceOf(Error);
+    expect(error.message).toContain('战斗结算超时');
+    expect(error.message).toContain('"busy":true');
+    expect(error.message).toContain('"actionQueueLength":1');
+    expect(error.message).toContain('"randomNow":');
+  });
+
   it('每张卡都能在真实战斗中打出/使用且不崩不卡死', { timeout: 300_000 }, async () => {
     for (const card of C.all()) {
       await auditOne(card);

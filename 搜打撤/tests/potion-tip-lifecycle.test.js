@@ -9,6 +9,7 @@ vi.mock('../game/src/battle/view/battle.frames.js', () => ({
 document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';
 const overlay = document.getElementById('overlay'), body = document.getElementById('ovBody');
 const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
+const actions = {};
 const UI = {
   el: { overlay, ovBody: body }, _lastMode: null,
   showOverlay(_title, html, mode) {
@@ -16,8 +17,12 @@ const UI = {
     document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: mode }));
   },
   hideOverlay() { overlay.hidden = true; document.dispatchEvent(new CustomEvent('sdt-overlay-close')); },
-  hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act() {},
+  hideTooltip() {}, showTooltip() {}, refresh() {}, log() {}, act(name, handler) { actions[name] = handler; },
 };
+body.addEventListener('click', event => {
+  const source = event.target.closest('[data-act]');
+  if (source) actions[source.dataset.act]?.(source.dataset);
+});
 window.SDT = {
   UI, Icons: { img: () => '', rich, TYPE_ART: {} },
   Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
@@ -32,11 +37,13 @@ Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureD
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 let frames;
-const potionBar = count => [{ uid: 'tip-fixture', name: '提示药水', count, desc: '受控提示说明', usable: false, why: '测试不可用道具' }];
 function showPotions(count = 1) {
-  render({ ...getSnapshot(), potionBar: potionBar(count) });
-  return { potion: body.querySelector('.bt-potion'), tip: body.querySelector('[data-potion-tip]') };
+  window.SDT.game.ownedCards = Array.from({ length: count }, (_unused, index) => ({ uid: `tip-fixture-${index}`,
+    card: { id: 'tip-fixture', type: '道具', name: '提示药水', desc: '回复 5 点生命。' } }));
+  render(getSnapshot());
+  return body.querySelector('.bt-potion');
 }
+const popup = () => body.querySelector('[data-potion-use]');
 function pointer(type, target = document) {
   target.dispatchEvent(new MouseEvent(type, { button: 0, bubbles: true }));
 }
@@ -58,34 +65,32 @@ afterEach(() => {
   vi.restoreAllMocks(); vi.unstubAllGlobals();
 });
 
-describe('药水提示全局监听生命周期', () => {
-  it.each(['pointerup', 'pointercancel', 'mouseleave'])('%s同时移除两个终止监听，并保持提示显隐', type => {
-    const { potion, tip } = showPotions();
-    const add = vi.spyOn(document, 'addEventListener'), remove = vi.spyOn(document, 'removeEventListener');
+describe('药水说明与确认生命周期', () => {
+  it.each(['pointerup', 'pointercancel', 'mouseleave'])('%s收起只读说明，后续终止事件不触碰旧面板', type => {
+    const potion = showPotions();
+    const before = window.SDT.game.ownedCards.slice();
     pointer('pointerdown', potion);
-    expect(tip.hidden).toBe(false); expect(tip.textContent).toContain('受控提示说明');
-    const release = add.mock.calls.find(([event]) => event === 'pointerup')[1];
+    const tip = popup();
+    expect(tip.textContent).toContain('回复 5 点生命');
     pointer(type, type === 'mouseleave' ? potion : document);
-    expect(tip.hidden).toBe(true);
-    expect(remove).toHaveBeenCalledWith('pointerup', release);
-    expect(remove).toHaveBeenCalledWith('pointercancel', release);
+    expect(tip.hidden).toBe(true); expect(tip.isConnected).toBe(false);
     const hidden = vi.spyOn(tip, 'hidden', 'set');
     pointer('pointerup'); pointer('pointercancel');
-    expect(hidden).not.toHaveBeenCalled();
+    expect(hidden).not.toHaveBeenCalled(); expect(window.SDT.game.ownedCards).toEqual(before);
   });
 
-  it.each(['replace', 'mode', 'close', 'new-stage'])('%s在指针未释放时清理旧提示及双监听', action => {
-    const { potion, tip } = showPotions();
-    const add = vi.spyOn(document, 'addEventListener'), remove = vi.spyOn(document, 'removeEventListener');
+  it.each(['replace', 'mode', 'close', 'new-stage'])('%s在未松手时清理说明，旧节点不能提交或重新打开', action => {
+    const potion = showPotions();
     pointer('pointerdown', potion);
-    const release = add.mock.calls.find(([event]) => event === 'pointerup')[1];
+    const tip = popup(), oldUse = tip.querySelector('.bt-potion-use-confirm');
     if (action === 'replace') showPotions(2);
     if (action === 'mode') UI.showOverlay('', '<p>设置</p>', 'settings');
     if (action === 'close') UI.hideOverlay();
     if (action === 'new-stage') { body.firstElementChild._battleToken = Symbol('old-stage'); showPotions(); }
-    expect(tip.hidden).toBe(true);
-    expect(remove).toHaveBeenCalledWith('pointerup', release);
-    expect(remove).toHaveBeenCalledWith('pointercancel', release);
+    expect(tip.hidden).toBe(true); expect(tip.isConnected).toBe(false);
+    const before = window.SDT.game.ownedCards.slice();
+    oldUse.click(); pointer('pointerdown', potion);
+    expect(popup()).toBeNull(); expect(window.SDT.game.ownedCards).toEqual(before);
     const hidden = vi.spyOn(tip, 'hidden', 'set');
     pointer('pointerup'); pointer('pointercancel');
     expect(hidden).not.toHaveBeenCalled();
@@ -94,8 +99,8 @@ describe('药水提示全局监听生命周期', () => {
   it('100次普通按下/松开及药水栏替换不保留旧cancel回调', () => {
     const oldTips = [];
     for (let count = 1; count <= 100; count++) {
-      const { potion, tip } = showPotions(count);
-      pointer('pointerdown', potion); pointer('pointerup');
+      const potion = showPotions(count);
+      pointer('pointerdown', potion); const tip = popup(); pointer('pointerup');
       oldTips.push(vi.spyOn(tip, 'hidden', 'set'));
     }
     UI.showOverlay('', '<p>地图</p>', 'event');
@@ -105,7 +110,7 @@ describe('药水提示全局监听生命周期', () => {
   });
 
   it('离开后的旧药水节点不重新绑定document监听', () => {
-    const { potion } = showPotions(); showPotions(2);
+    const potion = showPotions(); showPotions(2);
     const add = vi.spyOn(document, 'addEventListener');
     pointer('pointerdown', potion);
     expect(add.mock.calls.filter(([event]) => event === 'pointerup' || event === 'pointercancel')).toEqual([]);
@@ -113,8 +118,32 @@ describe('药水提示全局监听生命周期', () => {
 
   it('同一药水栏重复渲染保留节点，悬停/移开仍可使用', () => {
     const first = showPotions(), next = showPotions();
-    expect(next.potion).toBe(first.potion); expect(next.tip).toBe(first.tip);
-    pointer('mouseenter', next.potion); expect(next.tip.hidden).toBe(false);
-    pointer('mouseleave', next.potion); expect(next.tip.hidden).toBe(true);
+    expect(next).toBe(first);
+    pointer('mouseenter', next); expect(popup().textContent).toContain('回复 5 点生命');
+    pointer('mouseleave', next); expect(popup()).toBeNull();
+    next.click(); const use = popup().querySelector('.bt-potion-use-confirm');
+    next.click(); expect(body.querySelectorAll('[data-potion-use]')).toHaveLength(1);
+    popup().querySelector('.bt-potion-use-cancel').click(); use.click();
+    expect(getSnapshot().potionBar.map(potion => potion.uid)).toEqual(['tip-fixture-0']);
+  });
+
+  it('确认多敌道具后进入公共选靶，取消保持原UID和槽位', () => {
+    BattleSession.commands.flee();
+    const card = { id: 'tip-target-item', type: '道具', name: '指向道具', desc: '',
+      rules: { version: 1, bag: { use: [{ op: 'damage', amount: 3, dmgType: 'fixed', target: 'chosenEnemy' }] } } };
+    const game = window.SDT.game;
+    game.ownedCards = [{ uid: 'target-item', card }];
+    BattleSession.start(game, [{ id: 'tip-left', name: '左敌', hp: 50, atk: 0 }, { id: 'tip-right', name: '右敌', hp: 50, atk: 0 }], { isBoss: false });
+    render(getSnapshot());
+    const source = body.querySelector('.bt-potion');
+    source.click(); expect(getSnapshot().pendingItem).toBeNull();
+    popup().querySelector('.bt-potion-use-confirm').click();
+    expect(getSnapshot().pendingItem?.uid).toBe('target-item');
+    expect(game.ownedCards.map(entry => entry.uid)).toEqual(['target-item']);
+    BattleSession.commands.cancelPendingTarget();
+    expect(getSnapshot().pendingItem).toBeNull();
+    expect(getSnapshot().potionBar.map(potion => potion.uid)).toEqual(['target-item']);
+    expect(game.ownedCards.map(entry => entry.uid)).toEqual(['target-item']);
+    expect(body.querySelector('.bt-potion')).toBe(source);
   });
 });

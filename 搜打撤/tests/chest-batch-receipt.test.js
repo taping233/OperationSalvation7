@@ -54,10 +54,7 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
     }
     if (ovBody.querySelector('[data-act="chestClosePicker"]')) actions.chestClosePicker();
     expect.soft(ovBody.querySelector('.cqo-notice').textContent).toBe('');
-    const receipt = ovBody.querySelector('.cqo-receipt');
-    if (claimed) expect([...receipt.querySelectorAll('li')].map(el => el.textContent)).toEqual(
-      distinct && claimed === 2 ? ['队列测试卡 ×1', '队列测试卡二 ×1'] : [`队列测试卡 ×${claimed}`]);
-    else expect(receipt).toBeNull();
+    expect(ovBody.querySelector('.cqo-receipt')).toBeNull();
     expect(game.grantCard).toHaveBeenCalledTimes(claimed);
     expect(game.gainCoins).toHaveBeenCalledTimes(index + 1);
   }

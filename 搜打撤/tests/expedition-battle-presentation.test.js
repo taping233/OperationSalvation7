@@ -55,7 +55,8 @@ it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s s
   const snapshot = { ...BattleSession.getSnapshot(), drawPile: ['view-1'] };
   if (kind === 'deck') renderDeckPileView(snapshot);
   else renderBattleBag(snapshot);
-  const rules = UI.el.ovBody.querySelector('.battle-decision-inspect-rules').textContent;
+  if (kind === 'deck') actions.get('btDecisionInspect')({ i:0 });
+  const rules = kind === 'deck' ? UI.zoomCard.desc : UI.el.ovBody.querySelector('.battle-decision-inspect-rules').textContent;
   expect(rules).toBe('抽 2 张牌，并回复你的全部能量；消耗牌堆中每有 1 张法术牌，本牌费用减少 1 点。');
   expect(rules).toContain('消耗牌堆中每有 1 张法术牌');
   expect(rules).toContain('抽 2 张牌，并回复你的全部能量');

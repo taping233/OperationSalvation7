@@ -95,8 +95,8 @@ describe('L2有战斗门槛与休整时序的route-v2',()=>{
       const v1={...made,layers:previous.baseLayers,routeVersion:'r5-routes-v1',routePlan:made.routePlan.baseRoutePlan};
       expect(validateMapSnapshot(v1).ok).toBe(true);
     }
-    const protectedFiles={'game/src/run/layeredMap.js':'c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600','game/src/ui/route-overlay.js':'1d738d479ccb09f77b60371eb667745790b8029868f1e008aacc8cc8beaa1910'};
-    for(const[path,hash]of Object.entries(protectedFiles))expect(createHash('sha256').update(readFileSync(path)).digest('hex')).toBe(hash);
+    const protectedFiles={'game/src/run/layeredMap.js':'a9bd0bea6807d6402c811aedf658a66e38f0a0e545982ff3bf10459187a671ab','game/src/ui/route-overlay.js':'89e7c2a4b0c952e7de0327df85100f9fffb7bed2dd6eeb491ddd9c282b69eb21'};
+    for(const[path,hash]of Object.entries(protectedFiles))expect(createHash('sha256').update(readFileSync(path,'utf8').replaceAll('\r\n','\n')).digest('hex')).toBe(hash);
   });
   it('指纹不受next数组顺序变化影响，但边或类型改变一定被本例拒绝',()=>{
     const old=base('audit-map-20261017-0'),copy=structuredClone(old.layerData);copy.forEach(l=>l.nodes.forEach(n=>n.next.reverse()));

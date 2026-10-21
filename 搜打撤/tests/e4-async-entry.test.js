@@ -1,13 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 // This suite stubs rendering ports; the motion installer must not replace its spies.
 vi.mock('../game/src/ui/interface-motion.js', () => ({ interfaceReducedMotion: () => true }));
+vi.mock('../game/src/core/map-image-ready.js', () => ({ mapImageReady: async () => true }));
 
 const deferred = () => {
   let resolve, reject;
   const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
   return { promise, resolve, reject };
 };
-let game, UI, SDT, handlers, slot, gate, entered, battle, menu, scenes, saveGame, loadGame, hasSavedRun, clickedAction;
+let game, UI, SDT, handlers, slot, gate, entered, battle, menu, scenes, saveGame, loadGame, hasSavedRun, clickedAction, preflightRunMap;
 
 beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
@@ -15,6 +16,7 @@ beforeEach(async () => {
   localStorage.setItem('sdt-rmb-hint', '1');
   slot = 1; handlers = {}; gate = deferred(); entered = deferred();
   hasSavedRun = true; clickedAction = null;
+  preflightRunMap = vi.fn(() => ({ ok:true }));
   const overlay = document.getElementById('overlay');
   overlay.addEventListener('click', event => {
     const button = event.target.closest('button[data-act]');
@@ -59,15 +61,75 @@ beforeEach(async () => {
     runtime: { resize() {}, showRunTransition: scenes.showRunTransition, openBaseHub: vi.fn() },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame, clearSlot() {}, saveGame,
     clearAllSlots() {}, getActiveSlot: () => slot, setActiveSlot: n => { slot = n; },
-    preflightRunMap: () => ({ ok: true }), RunStorage: { has: () => hasSavedRun, issue() {} }, ensureBattleReady });
+    preflightRunMap, RunStorage: { has: () => hasSavedRun, issue() {} }, ensureBattleReady });
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
 
 describe('E4 real async entry chains (render/storage ports stubbed)', () => {
+  it('restores a verified map-only save without loading the battle module', async () => {
+    preflightRunMap.mockReturnValue({ ok:true, value:{ run:{ battle:null } } });
+    SDT.Renderer = { warm:vi.fn(async () => true), prepare:vi.fn(async () => true) };
+    menu.startNewGame();
+    const request = handlers.enterSlot({ slot:1 });
+    await vi.advanceTimersByTimeAsync(2200);
+    expect(await request).toMatchObject({ ok:true });
+    expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
+    expect(SDT.Battle).toBeUndefined();
+    expect(SDT.Renderer.prepare).toHaveBeenCalledOnce();
+  });
+  it('new transitions use the standard title and art without a presentation option', async () => {
+    const pending = scenes.showRunTransition({ title: '新区域 <入口>', art: '/new-art.webp', detail: '说明', duration: 450 });
+    expect(document.querySelector('.transition-heading h2').textContent).toBe('新区域 <入口>');
+    expect(document.querySelector('.transition-art').getAttribute('src')).toBe('/new-art.webp');
+    expect(document.querySelector('.flow-eyebrow, .flow-detail, .flow-title')).toBeNull();
+    expect(document.querySelector('.flow-transition').getAttribute('aria-label')).toContain('说明');
+    await vi.advanceTimersByTimeAsync(449);
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1);
+    expect(await pending).toBe(true);
+  });
+
+  it.each(['door', 'altar', 'shop'])('%s displays its approved transition art and continues once on skip', async kind => {
+    const done = vi.fn(() => true);
+    const pending = scenes.enterNode(kind, done);
+    expect(document.querySelector('.illustrated-cut .transition-art').src).toContain(`/transitions-1021/${kind}.webp`);
+    expect(done).not.toHaveBeenCalled();
+    handlers.flowContinue();
+    expect(await pending).toBe(true);
+    expect(done).toHaveBeenCalledOnce();
+  });
+
   it('enters a node through the real transition and lazy loader', async () => {
     const request = scenes.enterNode('battle', () => scenes.openBattleCell(null, [{ name: 'foe' }]));
+    expect(document.querySelector('.camp-entry-scenery img').src).toContain('transition-battle-v2.webp');
+    expect(document.querySelector('.transition-heading h2').textContent).toBe('旅途继续');
+    expect(document.querySelector('.camp-entry-caption')).toBeNull();
     handlers.flowContinue(); await entered.promise; gate.resolve();
     expect(await request).toBe(true); expect(battle.start).toHaveBeenCalledOnce();
+  });
+
+  it.each(['shop', 'door', 'event', 'altar'])('%s keeps the old scene until its destination replaces it', async kind => {
+    const mounting = deferred();
+    const done = vi.fn(() => mounting.promise);
+    const pending = scenes.enterNode(kind, done);
+    handlers.flowContinue();
+    await Promise.resolve();
+    expect(done).toHaveBeenCalledOnce();
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    expect(UI.el.overlay.hidden).toBe(false);
+    UI.showOverlay('目标', '<main id="node-destination">目标页</main>', 'page');
+    mounting.resolve(true);
+    expect(await pending).toBe(true);
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    expect(document.getElementById('node-destination')).not.toBeNull();
+  });
+
+  it('releases the held noncombat scene when destination mounting fails', async () => {
+    const pending = scenes.enterNode('shop', () => { throw new Error('mount failed'); });
+    const failure = expect(pending).rejects.toThrow('mount failed');
+    handlers.flowContinue();
+    await failure;
+    expect(UI.hideOverlay).toHaveBeenCalledExactlyOnceWith({ immediate: true });
   });
 
   it('title exit cancels an old transition and its node callback even if flags return', async () => {
@@ -86,7 +148,8 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     const fight = handlers.bossGateFight;
     const request = fight();
     expect(document.querySelector('.city-run-transition')).not.toBeNull();
-    expect(document.querySelector('.camp-entry-caption').textContent).toContain('旅途继续');
+    expect(document.querySelector('.transition-heading h2').textContent).toBe('旅途继续');
+    expect(document.querySelector('.camp-entry-scenery img').src).toContain('transition-boss-v2.webp');
     expect(game.bossPlan).toBeUndefined();
     expect(battle.start).not.toHaveBeenCalled();
     fight();
@@ -123,8 +186,8 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     expect(document.querySelector('.city-run-transition')).not.toBeNull();
     handlers.flowContinue(); await entered.promise;
     expect(loadGame).not.toHaveBeenCalled(); gate.resolve();
-    // 续局首帧揭幕：160ms 布局兜底 + 220ms 揭幕定时器需推进后才完成恢复。
-    await vi.advanceTimersByTimeAsync(600);
+    // 目标布局及首帧完成后播放完整共用斜切，不能缩成无图片的淡出。
+    await vi.advanceTimersByTimeAsync(1600);
     await request;
     expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
   });
@@ -241,8 +304,8 @@ describe('选档消费 pending 选角就绪', () => {
     await expect(handlers.enterSlot({ slot:1 })).resolves.toBe(false);
     expect(loadGame).toHaveBeenCalledOnce();
     choice.resolve(true);
-    // 就绪后续局首帧揭幕含 160ms/220ms 定时器，推进后再等待完成。
-    await vi.advanceTimersByTimeAsync(600);
+    // 目标首帧后播放完整的980ms共用斜切演出，再完成恢复。
+    await vi.advanceTimersByTimeAsync(1600);
     await opening;
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已进入');
   });
@@ -303,7 +366,7 @@ describe('DEV plain battle transition diagnostic', () => {
     await vi.advanceTimersByTimeAsync(449); expect(done).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(1); await request; expect(done).toHaveBeenCalledTimes(1);
   });
-  it('preserves the held transition release delay', async () => {
+  it('uses the shared painted-frame and 180ms reveal for a held transition', async () => {
     history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
     const motion = await import('../game/src/core/motion.js');
     vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
@@ -312,8 +375,8 @@ describe('DEV plain battle transition diagnostic', () => {
     await vi.advanceTimersByTimeAsync(900); await request;
     expect(UI.hideOverlay).not.toHaveBeenCalled();
     const released = request.release();
-    await vi.advanceTimersByTimeAsync(219); expect(UI.hideOverlay).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(1); await released;
+    await vi.advanceTimersByTimeAsync(180); expect(UI.hideOverlay).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(150); await released;
     expect(UI.hideOverlay).toHaveBeenCalledExactlyOnceWith({ immediate: true });
   });
 });

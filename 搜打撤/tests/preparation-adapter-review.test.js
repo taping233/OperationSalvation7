@@ -1,6 +1,9 @@
 import { installImmediateWebLocks } from './helpers/web-locks.js';
 installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+vi.mock('../game/src/home/home.presenter.js', () => { throw new Error('Retired Home presenter evaluated by preparation'); });
+vi.mock('../game/src/home/home.commands.js', () => { throw new Error('Retired Home commands evaluated by preparation'); });
+vi.mock('../game/src/home/home.catalog.js', () => { throw new Error('Retired furniture catalog evaluated by preparation'); });
 window.SDT = { Cards: { all: () => [] } };
 const { RULES } = await import('../game/src/core/rules.js');
 window.SDT.MAP = { rules: RULES };
@@ -55,4 +58,14 @@ describe('整备adapter真实Base读取与DOM视图', () => {
     expect(feature.open()).toBe(true); const oldBack = actions.preparationBack; Base.use(2); oldBack();
     expect(navigation.returnToBase).not.toHaveBeenCalled(); expect(navigation.applyPicks).not.toHaveBeenCalled(); expect(Base.slot).toBe(2);
   });
+});
+
+it('整备读取失败仍经独立错误格式化入口报告原消息', () => {
+  const read = vi.spyOn(Base, '_readForCommit').mockReturnValue(null);
+  const issue = vi.spyOn(Base, 'issue').mockReturnValue('readFailed');
+  try {
+    expect(feature.open()).toBe(false);
+    expect(UI.log).toHaveBeenCalledWith('基地存档读取失败，请重试', 'warn');
+    expect(document.getElementById('preparationRoot')).toBeNull();
+  } finally { read.mockRestore(); issue.mockRestore(); }
 });

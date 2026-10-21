@@ -5,9 +5,13 @@ beforeAll(async () => {
   window.SDT ||= {};
   await import('../game/src/ui/term-tips.js');
 });
-beforeEach(() => {
+beforeEach(async () => {
   vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ x:0, y:0, width:80, height:20 }]);
   document.body.insertAdjacentHTML('beforeend', '<span id="term" data-term="poison">中毒</span>');
+  // Warm-path assertions below stay synchronous; controlled cold loading has its own suite.
+  pointer(document.getElementById('term'), 'pointerover');
+  await vi.dynamicImportSettled();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
 });
 afterEach(() => {
   document.dispatchEvent(new CustomEvent('sdt-overlay-close'));

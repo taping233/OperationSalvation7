@@ -64,9 +64,11 @@ describe('神灯条件护甲：真实目录与战斗管线', () => {
   });
 
   it.each([[0, 0], [1, 0], [2, 5]])('选项 %i 的实际护甲增量为 %i', async (option, armor) => {
-    // 发现候选仍取现行目录，只收窄随机池，避免选项一的随机牌自带护甲干扰断言。
-    vi.spyOn(Cards, 'isRandomObtainable').mockImplementation(card => card.id === 'tt2-shoot');
     start();
+    // 神灯第 1 项已收窄为招式池（2026-10-21 反馈#5）：改用目录 mock 固定候选——
+    // 只留「射击」一张招式进池（神灯不进自己的发现池），避免其它随机招式自带护甲/冰冻干扰断言。
+    const shootCard = catalog('tt2-shoot');
+    vi.spyOn(Cards, 'all').mockReturnValue([shootCard]);
     expect(BattleSession.getSnapshot().pdef.armor).toBe(0);
     BattleSession.commands.playCard('choice-0', 0);
     await settle();

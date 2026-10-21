@@ -50,7 +50,7 @@ describe('道路纹理裁剪与曲率采样', () => {
   it('两个端点都离屏但曲线穿过窗口时保留，透明边缘擦过窗口也保留', () => {
     expect(mapBrushRoadInView({ ...curve, from: { x: -300, y: 0 }, to: { x: 300, y: 0 } }, 1, view)).toBe(true);
     const shift = y => Object.fromEntries(Object.entries(curve).map(([key, p]) => [key, { x: p.x, y: p.y + y }]));
-    expect(mapBrushRoadInView(shift(110), 1, view)).toBe(true);
+    expect(mapBrushRoadInView(shift(101), 1, view)).toBe(true);
     expect(mapBrushRoadInView(shift(200), 1, view)).toBe(false);
     expect(mapBrushRoadInView(shift(110), 2, view)).toBe(true);
   });

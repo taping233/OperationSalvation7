@@ -43,6 +43,30 @@ afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 function closeConsole() { UI._acts.devcClose?.(); }
 
 describe('开发控制台保存来源与关闭生命周期', () => {
+  it('战斗发卡走战斗命令并返回战斗，不再只写背包', () => {
+    fixture.game.battleActive = true;
+    fixture.game.grantCard = vi.fn();
+    const dev = vi.fn(() => true), refreshView = vi.fn();
+    window.SDT.Battle = { commands:{ dev, refreshView } };
+    openDevConsole();
+    const input = document.getElementById('devcSearch');
+    input.value = '测试'; UI._inputHandler({ target:input });
+    document.querySelector('.devc-hit').click();
+    expect(dev).toHaveBeenCalledExactlyOnceWith('card', 'test');
+    expect(fixture.game.grantCard).not.toHaveBeenCalled();
+    expect(refreshView).toHaveBeenCalledOnce();
+  });
+
+  it('战斗外发卡成功保存，拒收时不保存', () => {
+    fixture.game.grantCard = vi.fn().mockReturnValueOnce(true).mockReturnValueOnce(false);
+    openDevConsole();
+    const input = document.getElementById('devcSearch');
+    input.value = '测试'; UI._inputHandler({ target:input });
+    document.querySelector('.devc-hit').click();
+    document.querySelector('.devc-hit').click();
+    expect(fixture.game.persistSave).toHaveBeenCalledOnce();
+  });
+
   it('挂起关闭清理动作表后，控制台仍注册有效关闭动作', () => {
     UI.wipeNextShow = true;
     openDevConsole();

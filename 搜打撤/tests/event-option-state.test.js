@@ -35,6 +35,7 @@ describe('事件选项实时预告', () => {
     root.innerHTML = eventOptionHTML(choice, 0, { hp:1, coins:0 });
     expect(root.querySelector('img')).toBeNull();
     expect(root.querySelector('button').dataset.optionState).toBe('ready');
-    expect(root.querySelector('button').dataset.uiTipTitle).toBe(choice.label);
+    expect(root.querySelector('b').textContent).toBe(choice.label);
+    expect(root.querySelector('[data-ui-tip], [data-ui-tip-title], [data-ui-tip-text], [title]')).toBeNull();
   });
 });

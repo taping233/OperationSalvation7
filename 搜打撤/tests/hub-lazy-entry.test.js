@@ -76,6 +76,31 @@ afterEach(async () => {
 
 beforeEach(setup);
 
+it('退役家具门面冷调用不载入 runtime、不导航、不写数据', async () => {
+  const before = document.body.innerHTML;
+  const data = structuredClone(h.base.data);
+  const write = vi.spyOn(Storage.prototype, 'setItem');
+  try {
+    await expect(h.hub.renderHomeScene()).resolves.toBe(false);
+    await expect(h.hub.renderHomeScene()).resolves.toBe(false);
+    await vi.dynamicImportSettled();
+    expect(h.hubImports).not.toHaveBeenCalled();
+    expect(h.openHub).not.toHaveBeenCalled();
+    expect(h.startNewGame).not.toHaveBeenCalled();
+    expect(document.body.innerHTML).toBe(before);
+    expect(h.base.data).toEqual(data);
+    expect(write).not.toHaveBeenCalled();
+  } finally { write.mockRestore(); }
+});
+
+it('退役门面调用不会取消已经受理的正常基地加载', async () => {
+  const pending = h.hub.openBaseHub('deploy');
+  await expect(h.hub.renderHomeScene()).resolves.toBe(false);
+  await finish(pending);
+  expect(h.openHub).toHaveBeenCalledOnce();
+  expect(document.getElementById('hubMain')).not.toBeNull();
+});
+
 describe('基地真实按需入口', () => {
   it('公开 deployPick 同步读取唯一 live binding，不提前装载整备页面', () => {
     expect(h.hub.deployPick).toBeNull();

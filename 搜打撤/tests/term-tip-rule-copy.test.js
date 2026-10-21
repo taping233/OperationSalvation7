@@ -2,9 +2,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CURSES, CURSE_META } from '../game/src/battle/core/combat.js';
 import '../game/src/ui/term-tips.js';
 
-beforeEach(() => {
+beforeEach(async () => {
   vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ x: 0, y: 0, width: 80, height: 20 }]);
-  document.body.insertAdjacentHTML('beforeend', '<span id="rule-copy-term"></span>');
+  document.body.insertAdjacentHTML('beforeend', '<span id="rule-copy-term" data-term="poison"></span>');
+  document.getElementById('rule-copy-term').dispatchEvent(new MouseEvent('pointerover', { bubbles:true }));
+  await vi.dynamicImportSettled();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
 });
 afterEach(() => {
   document.dispatchEvent(new CustomEvent('sdt-overlay-close'));

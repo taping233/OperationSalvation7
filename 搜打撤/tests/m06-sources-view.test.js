@@ -31,7 +31,7 @@ describe('M06 mountable view', () => {
     expect(root.textContent).toContain('占 5/4 格');
     expect(root.textContent).toContain('背包容量不足');
     expect(root.querySelector('[data-action="preset-apply"]').disabled).toBe(true);
-    expect(root.textContent).toContain('先确认人物，再在整备页确认宠物并出发');
+    expect(root.textContent).toContain('应用后，在整备页确认人物、伙伴与卡牌。');
     expect(root.textContent).not.toContain('人物仍在出发后选择');
     view.dispose();
   });
@@ -48,7 +48,7 @@ describe('M06 mountable view', () => {
     const model = { goals: [{ id: 'random', name: '远行短刃', sourceLabel: '通用随机卡池' }], targetOptions: [], characterOptions: [], petOptions: [], cardOptions: [], presets: [{ id: 'preset-1', name: '猛攻', characterId: null, petId: null, picks: [], preview: null }, { id: 'preset-2', name: '跑刀', characterId: null, petId: null, picks: [], preview: null }] };
     const view = mountPreparationView(root, { model, onIntent });
     expect(root.querySelector('[data-action="preset-start"]')).toBeNull();
-    expect(root.textContent).toContain('在整备页确认宠物并出发');
+    expect(root.textContent).toContain('应用后，在整备页确认人物、伙伴与卡牌。');
     root.querySelector('[data-action="goal-remove"]').click();
     expect(onIntent).toHaveBeenCalledWith({ type: 'goal-remove', payload: { targetId: 'random' } });
     view.update({ ...model, busy: true, error: '状态已变化', goals: [] });

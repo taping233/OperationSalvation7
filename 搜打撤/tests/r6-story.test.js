@@ -128,8 +128,10 @@ describe('R6-a 最后一盏引路灯', () => {
     const submit = source.indexOf('await storyCommands.record');
     expect(source.lastIndexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(-1);
     expect(source.indexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(submit);
-    expect(source).toContain('setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(); })');
+    expect(source).toContain('setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(current); })');
     expect(source).toContain('showChoiceError(result.message');
+    expect(source).toContain('if (!activeChoice()) return;');
+    expect(source).toContain('if (!binding.current())');
     expect(source.match(/asset: 'story-last-lamp'/g)).toHaveLength(4);
   });
 });

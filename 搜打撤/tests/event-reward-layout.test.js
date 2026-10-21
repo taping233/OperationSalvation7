@@ -21,7 +21,7 @@ it('固定事件共享居中舞台与明确操作，空操作栏不占侧列，�
   expect(values(' .reward-claim')['min-height']).toBe('46px');
   expect(values(' .reward-head').display).toBe('block');
   expect(values(' .reward-head .reward-source').display).toBe('block');
-  expect(values('')['--cqo-accent']).toBe('#91c2c6');
+  expect(values('')['--cqo-accent']).toBe('#aab5bf');
 });
 it('共享规则只显式接入独立领取，不改变其他奖励入口或战斗箱既有声明', () => {
   const sceneLayers = new Set([

@@ -7,7 +7,7 @@
  *   departure.selection-state.js —— 不依赖页面的 deployPick 共享 live binding
  *   game.hub.pages.js   —— 六页签 HTML 与 openStashItem/openRawItem 抽屉
  *   game.hub.bridge.js  —— 中立桥：slots.renderHub 注册点 + homeRequestId（bag-return-hook 先例）
- *   game.hub.home-scene.js —— Home 场景读取、命令分派与异步生命周期
+ *   game.hub.home-scene.js —— 退役 Home 模块保留直测，不再接入基地壳
  * 锁定四件事：
  *   1. 壳不再定义被拆走的入口，行数不回涨成 God file；
  *   2. 对外导出面（五件套）不变；
@@ -61,7 +61,12 @@ describe('基地模块分层（批3 拆分）', () => {
     for (const mod of ['game.hub.depart', 'game.hub.pages', 'game.hub.bridge']) {
       expect(importedModules(SHELL), `壳应装配 ${mod}`).toContain(mod);
     }
-    expect(importedModules(SHELL)).toContain('game.hub.home-scene');
+    expect(importedModules(SHELL)).not.toContain('game.hub.home-scene');
+    expect(SHELL).not.toContain('createHubHomeScene');
+    for (const code of [SHELL, PAGES, PREPARATION_PORTS]) {
+      expect(code).toContain("from './command-errors.js'");
+      expect(code).not.toContain("from '../home/home.presenter.js'");
+    }
   });
 
   it('重绘回环只经桥：切片用 hubBridge 别名（防局部 slots 遮蔽），壳完成 slots 注册', () => {
@@ -103,7 +108,7 @@ describe('基地模块分层（批3 拆分）', () => {
       expect(importedModules(PREPARATION)).not.toContain(module);
     }
     expect(SHELL).toContain('applyPicks: setDeployPick');
-    expect(SHELL).toContain('openDeparture: () => { disposeHome(); openDepartPrep(); }');
+    expect(SHELL).toContain('openDeparture: openDepartPrep,');
     expect(PREPARATION_PORTS).toContain('slotId: () => SDT.Base.slot');
     expect(PREPARATION_PORTS).toContain('navigation: { returnToBase, applyPicks, openDeparture }');
     expect(SHELL).not.toContain("from './preparation.commands.js'");

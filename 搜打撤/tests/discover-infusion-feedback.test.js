@@ -29,7 +29,7 @@ async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy
 
 
 
-it.each([false, true])('real raygun→dragon: waiver=%s, free does not imply infusion', async waiver => {
+it.each([false, true])('real raygun→dragon: waiver=%s, direct cast releases as infused', async waiver => {
  const gun=canonical('tt12-raygun'), dragon=canonical('tt12-raydragon');
  const game=makeGame([gun]); BattleSession.start(game,[{id:'foe',name:'靶',hp:40,atk:0}],{isBoss:false});
  R.set$energy(2); R.set$allSpellsInfused(waiver);
@@ -38,33 +38,33 @@ it.each([false, true])('real raygun→dragon: waiver=%s, free does not imply inf
  BattleSession.commands.useEquipSkill('runtime-0'); await settle();
  expect(R.discovering.act).toBe('play'); expect(R.discovering.options[0].id).toBe(dragon.id);
  const note=discoverInfusionNote(R.discovering.act,infuseOf(dragon));
- expect(note).toBe(waiver?'':'未注能');
+ expect(note).toBe(waiver?'':'未注能，直释视为已注能');
  const host=document.createElement('div');host.innerHTML=battleDiscoverBodyHTML({candidates:[{card:dragon,infusionNote:note}],cardHTML:()=>'',action:'选择1张免费施放',remaining:1});
  expect(host.querySelector('button').getAttribute('aria-label').includes('未注能')).toBe(!waiver);
  expect(host.textContent.includes('未注能')).toBe(!waiver);
  BattleSession.commands.pickDiscover(0); await settle();
- expect(R.foes[0].hp).toBe(waiver?29:40); expect(R.energy).toBe(2);
+ // 直释视为已注能：waiver 与否都按已注能结算（11 伤），生成牌均被释放、不留在手牌。
+ expect(R.foes[0].hp).toBe(29); expect(R.energy).toBe(2);
  expect(R.infuseFuels).toBe(0);expect(R.equipped[0].used).toBe(true);
  expect(R.infusing).toBeFalsy();expect(R.interaction).toBeFalsy();
  const generated=R.granted.find(entry=>entry.card.id===dragon.id);
  expect(generated).toBeTruthy();
- if(waiver) expect(R.hand).not.toContain(generated.uid);
- else { expect(R.hand).toContain(generated.uid); expect(R.consumed).not.toContain(generated.uid); }
+ expect(R.hand).not.toContain(generated.uid);
 });
 
 it('labels only direct free-cast candidates and uses effective waiver state without guessing effectiveness',()=>{
  const dragon=canonical('tt12-raydragon');
  expect(discoverInfusionNote('play',infuseOf({...dragon,_noInfuse:true}))).toBe('');
- for(const act of ['play','potion','playKeep','pouch'])expect(discoverInfusionNote(act,1)).toBe('未注能');
+ for(const act of ['play','potion','playKeep','pouch'])expect(discoverInfusionNote(act,1)).toBe('未注能，直释视为已注能');
  for(const act of [undefined,'dup','keep'])expect(discoverInfusionNote(act,1)).toBe('');
  expect(discoverInfusionNote('play',0)).toBe('');
- const mixed=canonical('tt3sp-silverthorn');expect(discoverInfusionNote('play',infuseOf(mixed))).toBe('未注能');
+ const mixed=canonical('tt3sp-silverthorn');expect(discoverInfusionNote('play',infuseOf(mixed))).toBe('未注能，直释视为已注能');
  expect(discoverInfusionNote('play',1)).not.toContain('不生效');
 });
 
-it('explains pure-infusion rejection and retained resources in direct-cast candidate copy', () => {
+it('explains direct-cast treating uninfused cards as infused in candidate copy', () => {
  const card=canonical('tt12-raydragon');
- expect(discoverInfusionNote('play',1,card)).toContain('所选牌将留在手牌');
- expect(discoverInfusionNote('pouch',1,card)).toContain('锦囊牌不会消耗');
+ expect(discoverInfusionNote('play',1,card)).toContain('直释视为已注能');
+ expect(discoverInfusionNote('pouch',1,card)).toContain('直释视为已注能');
  expect(discoverInfusionNote('play',0,card)).toBe('');
 });

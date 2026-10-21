@@ -106,7 +106,8 @@ it('cleans the old handoff before a second camp entry and leaves the new entry a
   enterCamp(overlay, ghost, false);
   const cut = overlay.querySelector('.camp-entry-cut');
   expect(cut.getAttribute('aria-hidden')).toBe('true');
-  expect(cut.querySelector('.camp-entry-caption small').textContent).toBe('档位 01');
+  expect(cut.querySelector('.camp-entry-register').textContent).toContain('档位 01');
+  expect(cut.querySelector('.transition-heading')).not.toBeNull();
   expect(cut.querySelector('[data-act]')).toBeNull();
   await vi.advanceTimersByTimeAsync(300);
   enterCamp(overlay, null, false);

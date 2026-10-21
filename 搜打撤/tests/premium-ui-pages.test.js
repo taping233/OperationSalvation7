@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { parse } from 'acorn';
 
-const src = (path) => readFileSync(path, 'utf8');
+const src = (path) => readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
 describe('基地人物与收藏页的信息架构', () => {
   // 基地采用独立子页；页面职责由真实目标模块维护，旧侧栏/旧解释文案不作为契约。
@@ -16,7 +17,7 @@ describe('基地人物与收藏页的信息架构', () => {
     expect(hub).toContain(`const hubAct = (name, action) => UI.act(name, (...args) => {
       if (!currentHub()) return;
       return action(...args);
-    });`);
+    });`.replace(/\r\n/g, '\n'));
     expect(pages).toContain('return personnelHTML(view)');
     expect(personnel).toContain('aria-label="人物切换"');
     expect(personnel).toContain('class="pv12-agent-art"');
@@ -25,7 +26,17 @@ describe('基地人物与收藏页的信息架构', () => {
   });
 
   it('收藏主页面只展示收藏，其他内容经次级入口沿父导航打开', () => {
-    expect(pages).toContain('return archiveV3HTML(');
+    const runtimeAst = node => JSON.parse(JSON.stringify(node, (key, value) =>
+      ['start', 'end', 'loc', 'raw'].includes(key) ? undefined : value));
+    const options = { ecmaVersion: 'latest', sourceType: 'module' };
+    const actual = parse(pages, options).body.find(node =>
+      node.type === 'FunctionDeclaration' && node.id.name === 'hubAchHTML');
+    const expected = parse(`function hubAchHTML(hubCollectionView) {
+      return archiveV3HTML({ base:SDT.Base, meta:SDT.Meta, cards:SDT.Cards, art:SDT.Art, view:hubCollectionView });
+    }`, options).body[0];
+    // Type-only JSDoc and parentheses may vary; the renderer, five injected
+    // arguments, evaluation order and returned value must remain exact.
+    expect(runtimeAst(actual)).toEqual(runtimeAst(expected));
     expect(hub).toContain("['cards', 'rewards', 'backs', 'achievements', 'classes', 'stories'].includes(d.view)");
     expect(archive).toContain('aria-label="收藏室目录"');
     expect(archive).toContain('data-act="hubCollectionView"');

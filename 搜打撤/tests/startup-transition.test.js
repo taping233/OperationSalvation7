@@ -37,9 +37,9 @@ describe('startup uses the common city cut', () => {
     expect(key.defaultPrevented).toBe(true);
     document.documentElement.dataset.desktopStartup = 'playing'; await flush();
     expect(document.querySelector('.page-cut-waiting')).toBeNull();
-    vi.advanceTimersByTime(979);
+    await vi.advanceTimersByTimeAsync(160);
     expect(document.querySelector('.desktop-startup-cut')).not.toBeNull();
-    vi.advanceTimersByTime(1);
+    await vi.advanceTimersByTimeAsync(980);
     expect(document.querySelector('.desktop-startup-cut')).toBeNull();
     expect(document.documentElement.dataset.desktopStartup).toBe('complete');
     expect(document.getElementById('home')).not.toBeNull();

@@ -337,8 +337,8 @@ it('火堆：确认才回血复原，结算落盘且重入不重复；继续才�
   expect(document.querySelector('[data-act="restoreOne"]')).toBeNull();
   expect(game.hp).toBe(20);
   expect(game.visited['0,0']).toBeUndefined();
-  const rest = acts.fireRestGo;
-  rest(); rest();
+  const rest = acts.fireHeal;
+  rest(); rest(); acts.fireRestore();
   expect(game.hp).toBe(30);   // heal 10 封顶
   expect(game.ownedCards.map(o => o.card.name)).toEqual(['消耗甲']);   // 只有可复原的那张
   expect(game.usedPocket).toHaveLength(1);   // 装备堆仍在
@@ -361,14 +361,15 @@ it('火堆：满包时不扣口袋（先检后扣），deny 播报后照常收�
   game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
-  expect(document.body.textContent).toContain('当前可复原卡均放不下，将复原 0 张');
+  expect(document.body.textContent).toContain('背包空间不足');
   expect(document.querySelector('[data-act="fireBag"]')).not.toBeNull();
   expect(st.game.visited).toEqual({});
-  acts.fireRestGo();
+  acts.fireHeal(); acts.fireRestore();
   expect(game.usedPocket[0].count).toBe(1);   // 口袋未扣
   expect(game.ownedCards).toHaveLength(0);
-  expect(window.SDT.Sound.sfx).toHaveBeenCalledWith('deny');
-  expect(game.visited['0,0']).toBe(1);   // 照常消耗本格不卡流程
+  expect(document.querySelector('[data-act="fireRestore"]').disabled).toBe(true);
+  expect(game.nodeRewards['0,0'].restoreUsed).toBe(false);
+  expect(game.visited['0,0']).toBeUndefined();   // 未用的复原机会保留
 });
 
 /* 钥匙复原链（base.restore + pocketKeyCost）拆至 sys03-base-key-restore.test.js：
@@ -395,13 +396,14 @@ it('A3文案：满包火堆准确报告容量，不能谎报没有可复原牌',
   st.game.usedPocket.push({ card: { id: 'a', name: '消耗甲', type: '法术' }, count: 1 });
   const { openFireRest } = await importAltar();
   openFireRest();
-  acts.fireRestGo();
+  acts.fireHeal(); acts.fireRestore();
   const messages = UI.log.mock.calls.map(c => String(c[0])).join('\n');
-  expect(messages).toContain('背包已满');
+  expect(document.body.textContent).toContain('背包空间不足');
   expect(messages).not.toContain('没有可复原的卡牌');
   expect(st.game.usedPocket[0].count).toBe(1);
   expect(st.game.ownedCards).toHaveLength(0);
-  expect(st.game.visited['0,0']).toBe(1);
+  expect(st.game.visited['0,0']).toBeUndefined();
+  expect(st.game.nodeRewards['0,0'].restoreUsed).toBe(false);
   expect(st.game.state).toBe('modal');
   acts.fireDone();
   expect(st.game.state).toBe('idle');
@@ -426,7 +428,7 @@ it('火堆取消休整保留收益，再进入必须重新确认', async () => {
   const { openFireRest } = await importAltar();
   const done = vi.fn(() => { st.game.state = 'idle'; });
   openFireRest(done);
-  const oldRest = acts.fireRestGo;
+  const oldRest = acts.fireHeal;
   acts.fireLeave();
   expect(st.game.hp).toBe(20);
   expect(st.game.nodeRewards).toEqual({});
@@ -434,7 +436,7 @@ it('火堆取消休整保留收益，再进入必须重新确认', async () => {
   openFireRest(done);
   oldRest();
   expect(st.game.hp).toBe(20);
-  acts.fireRestGo();
+  acts.fireHeal(); acts.fireRestore();
   expect(st.game.hp).toBe(30);
 });
 
@@ -451,7 +453,7 @@ it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保�
   expect(document.querySelector('.entry-supply-status').getAttribute('aria-live')).toBe('polite');
   expect(document.querySelector('.reward-rule')).toBeNull();
   expect(document.querySelector('.entry-supply-status').textContent).toBe('已领取0 / 2');
-  expect(document.querySelector('.reward-notice').textContent).toBe('领完补给后可继续探索；放不下时请先整理背包');
+  expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('.entry-supply-status small')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
   acts.clsEntryContinue();

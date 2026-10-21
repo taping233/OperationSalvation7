@@ -1,7 +1,5 @@
-/* 药水自绘文字提示栏（2026-09-20 老板：悬停/触摸药水要有文字栏提示，不用系统 title）回归：
- *   ① 药水元素不再挂系统 title 属性（悬停延迟且触屏无效）；
- *   ② 药水栏自带 [data-potion-tip] 提示条，初始隐藏，贴药水栏正下方；
- *   ③ 悬停/按下药水 → 提示条显示【名 ×数】效果+用法；移开/松手 → 收起。 */
+/* 真实启动链的道具阅读与确认契约：悬停/按住只读；点击固定详情，
+ * 使用前可取消且保持原道具，明确确认后才进入原有结算/选靶。 */
 import { afterAll, describe, it, expect, vi } from 'vitest';
 import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
 
@@ -72,14 +70,14 @@ trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 
-describe('药水自绘文字提示栏', () => {
-  it('药水无系统 title；悬停/按下显示提示条，移开/松手收起；敌方指向药水带拖拽用法', { timeout: 15_000 }, async () => {
+describe('药水文字说明与使用确认', () => {
+  it('真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次', { timeout: 15_000 }, async () => {
     const game = Object.assign(window.SDT.game, {
       ownedCards: [
         { uid: 'tip-heal', card: { id: 'tip-heal', name: '回血药剂', type: '道具', desc: '回复 12 点生命。' } },
         { uid: 'tip-ice', card: { id: 'tip-ice', name: '冰冻药剂', type: '道具', desc: '造成 3 点固定伤害，附加冰冻。' } },
       ],
-      hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
+      hp: 15, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
       myClass: '侠客', characterId: null, state: 'idle', battleActive: false,
       log() {}, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {},
       onBattleEnd() {},
@@ -98,32 +96,46 @@ describe('药水自绘文字提示栏', () => {
     expect(potions.length).toBe(2);
     for (const el of potions) expect(el.getAttribute('title')).toBeNull();
 
-    const tip = document.querySelector('[data-potion-tip]');
-    expect(tip).not.toBeNull();
-    expect(tip.hidden).toBe(true);
+    const currentTip = () => document.querySelector('[data-potion-use]');
+    expect(currentTip()).toBeNull();
 
     // 悬停：显示名称+效果+用法；移开：收起
     const heal = potions.find(el => el.textContent.includes('回血药剂'));
     heal.dispatchEvent(new MouseEvent('mouseenter'));
-    expect(tip.hidden).toBe(false);
-    expect(tip.textContent).toContain('回血药剂');
-    expect(tip.textContent).toContain('回复 12 点生命');
-    expect(tip.textContent).toContain('点击直接使用');
+    expect(currentTip().textContent).toContain('回血药剂');
+    expect(currentTip().textContent).toContain('回复 12 点生命');
+    expect(currentTip().querySelector('.bt-potion-use-actions').hidden).toBe(true);
     heal.dispatchEvent(new MouseEvent('mouseleave'));
-    expect(tip.hidden).toBe(true);
+    expect(currentTip()).toBeNull();
 
     // 触摸口径：pointerdown 即显，pointerup 收起（jsdom 无 PointerEvent，用 MouseEvent 带 type 派发）
     heal.dispatchEvent(new MouseEvent('pointerdown', { button: 0, bubbles: true }));
-    expect(tip.hidden).toBe(false);
+    expect(currentTip().textContent).toContain('回复 12 点生命');
+    expect(game.hp).toBe(15); expect(game.ownedCards.map(entry => entry.uid)).toEqual(['tip-heal', 'tip-ice']);
     document.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }));
-    expect(tip.hidden).toBe(true);
+    expect(currentTip()).toBeNull();
+
+    heal.click();
+    const first = currentTip(), cancelledUse = first.querySelector('.bt-potion-use-confirm');
+    expect(first.getAttribute('role')).toBe('dialog');
+    expect(first.querySelector('.bt-potion-use-actions').hidden).toBe(false);
+    first.querySelector('.bt-potion-use-cancel').click(); cancelledUse.click();
+    expect(currentTip()).toBeNull(); expect(game.hp).toBe(15);
+    expect(game.ownedCards.map(entry => entry.uid)).toEqual(['tip-heal', 'tip-ice']);
 
     // 敌方指向药水：提示条说明拖到敌人身上的用法
     const ice = potions.find(el => el.textContent.includes('冰冻药剂'));
     ice.dispatchEvent(new MouseEvent('mouseenter'));
-    expect(tip.hidden).toBe(false);
-    expect(tip.textContent).toContain('附加冰冻');
-    expect(tip.textContent).toContain('拖到敌人身上');
+    expect(currentTip().textContent).toContain('附加冰冻');
+    expect(currentTip().textContent).toContain('拖到敌人身上');
+    ice.dispatchEvent(new MouseEvent('mouseleave'));
+
+    heal.click(); const confirmedUse = currentTip().querySelector('.bt-potion-use-confirm');
+    confirmedUse.dispatchEvent(new MouseEvent('pointerdown', { button: 0, bubbles: true }));
+    expect(game.hp).toBe(15);
+    confirmedUse.click(); confirmedUse.click();
+    expect(game.hp).toBe(27); expect(game.ownedCards.map(entry => entry.uid)).toEqual(['tip-ice']);
+    expect(currentTip()).toBeNull();
 
     if (game.battleActive) window.SDT.Battle.commands.flee();
     Element.prototype.animate = oldAnimate;

@@ -29,6 +29,9 @@ const APPROVED_PRODUCTION_FACE_REVISIONS = [
   ["tt-crystal","desc","在背包中才能使用，可以复原最多 3 张卡牌。","地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。"],
   ["tt6-chestdraw","name","熔断双箱","熔断物资箱"],
 ];
+// 2026-10-21 反馈#1/#5（老板实测 12 条）：影噬 rarity 稀有→史诗、神灯第 1 项文案/抉择池改「发现招式」。
+// 两卡都在 M 批矩阵（APPROVED_IDS 已含），不走本列表——影噬由 compareMigrationInventories 的
+// shadowbugRevision 特例守护，神灯由 isApprovedLampArmorRemoval + helper 的基线文案投影守护。
 function approvedProductionFaceBaseline(original) {
   const baseline = approvedRevisionBaseline(original);
   for (const [id, field, previous, current] of APPROVED_PRODUCTION_FACE_REVISIONS) {

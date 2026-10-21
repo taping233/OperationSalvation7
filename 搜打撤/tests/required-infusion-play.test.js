@@ -97,7 +97,7 @@ describe('required infusion is validated before every payment and direct-play en
   it.each(['tt3sp-silverthorn', 'tt3sp-bloodstorm'])('%s retains its uninfused base effect', async id => {
     const card = cardById(id); expect(requiresInfusion(card)).toBe(false);
     await start(card);
-    BattleSession.commands.playCard('u0', 0); await drain();
+    BattleSession.commands.playCard('u0', 0, true); await drain();
     expect(runtime.hand).not.toContain('u0'); expect(runtime.infuseFuels).toBe(0);
     expect(runtime.foes[0].hp).toBeLessThan(999);
   });
@@ -106,7 +106,7 @@ describe('required infusion is validated before every payment and direct-play en
     await start(cardById('tt3sp-silverthorn'));
     runtime.foes[0].status.immune = 1;
     expect(BattleSession.commands.getCardPlayAvailability('u0', 0, true).status).toBe('ready');
-    BattleSession.commands.playCard('u0', 0); await drain();
+    BattleSession.commands.playCard('u0', 0, true); await drain();
     expect(runtime.hand).not.toContain('u0'); expect(runtime.foes[0].hp).toBe(999);
   });
 

@@ -27,7 +27,7 @@ it.each([
 ])('其他 %s 弹窗继续使用各自类型', (kind, body) => {
   showBattleDecision('决策', `${body}<div class="ov-btns"><button>返回</button></div>`, true, { turn: 3, energy: 1, maxEnergy: 2 });
   expect(document.querySelector('.battle-decision').dataset.decisionKind).toBe(kind);
-  expect(document.querySelector('.battle-decision-head span').textContent).toBe('第 3 回合 · 能量 1/2');
+  expect(document.querySelector('.battle-decision-head span').textContent).toBe(kind === 'pile' ? '0 张' : '第 3 回合 · 能量 1/2');
 });
 it('首脑规则实际调用模板也把返回键交给固定操作栏', () => {
   const source = readFileSync('game/src/battle/view/battle.view.js', 'utf8');

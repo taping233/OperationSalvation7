@@ -20,7 +20,8 @@ describe('R7-a real scenes encounter-to-opts chain',()=>{
     vi.stubGlobal('Image',class {set src(value){images.push(value);} decode(){return Promise.resolve();}});
     try {
       scenes.preloadCellScene({logical:[{def:{type:'battle'}}]},0);
-      expect(images).toEqual(['far.webp','mid.webp','ground.webp','foreground.webp']);
+      expect(images).toEqual(['far.webp','mid.webp','ground.webp','foreground.webp',
+        new URL('/game/assets/scenes/transitions-1021/retreat.webp', window.location.href).href]);
     } finally {vi.unstubAllGlobals();}
   });
   it('builds L2 mixed group and forwards identity into battle opts',async()=>{

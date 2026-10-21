@@ -5,7 +5,7 @@
  * 剑荡妖邪（手选直接释放）、药水魔法（发现即释放）、每消耗施放火球（降临者双英雄）。
  * 规则注意：带「洗入/牌库」词条的英雄卡（无极梦魇/天剑诛魔）按规则只在 BOSS 战可用，
  * 普通战斗会以「牌库词条仅 BOSS 生效」拒绝——这两张走 BOSS 编组流程实打。 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -60,6 +60,23 @@ const waitLog = async (pred, ms = 4000) => { const t0 = Date.now(); while (Date.
 const snap = () => BattleSession.getSnapshot();
 const handNames = () => snap().hand.map(u => (viewApi.findCard(u) || {}).card && (viewApi.findCard(u) || {}).card.name);
 const pileNames = () => snap().drawPile.map(u => (viewApi.findCard(u) || {}).card && (viewApi.findCard(u) || {}).card.name);
+
+// 只固定发现池的输入，保留真实发现、临时牌生成及直接施放管线。
+async function discoverFixedPotion(g, spell, potionId) {
+  const catalog = C.all();
+  const potion = catalog.find(card => card.id === potionId);
+  expect(Boolean(potion), `卡库应有 ${potionId}`).toBe(true);
+  const all = vi.spyOn(C, 'all').mockReturnValue(catalog.filter(card =>
+    !(card.type === '道具' && card.name.includes('药水')) || card.id === potionId));
+  try {
+    BattleSession.commands.playCard(uidOf(g, spell), 'self');
+    const state = await waitIdle();
+    expect(state.discovering?.options.map(card => card.id)).toEqual([potionId]);
+    return state;
+  } finally {
+    all.mockRestore();
+  }
+}
 
 async function drain(maxLoops = 400) {
   for (let i = 0; i < maxLoops; i++) {
@@ -387,8 +404,7 @@ describe('直接释放家族实打', () => {
     BattleSession.start(g, [foe()], { name: '药水' });
     await drain();
     mark(g);
-    BattleSession.commands.playCard(uidOf(g, ym), 'self');
-    const s0 = await waitIdle();
+    const s0 = await discoverFixedPotion(g, ym, 'tt3-python-potion');
     expect(Boolean(s0.discovering), '应进入发现面板').toBe(true);
     const picked = s0.discovering.options[0];
     expect(Boolean(picked), '发现面板应有候选').toBe(true);
@@ -403,7 +419,7 @@ describe('直接释放家族实打', () => {
     const st = foe0.status || {};
     // 药水池（parsePoolNoun('药水')=带「药水」名字的道具）逐瓶的可观测信号：
     //   伤害/诅咒类 → 敌掉血/冰冻/中毒/流血；回复类 → hp>300（满血 99999 不存在）；
-    //   攻击/法伤强化 → atkUp/spellUp；蓝瓶/精神药水抽牌（普通战变获得初始攻击）→「初始攻击」；
+    //   攻击/法伤强化 → atkUp/spellUp；抽牌类另以真实牌库 UID 差分精确验证（见下一用例）；
     //   巨蟒药水 →「召唤」；转势药水「附加陷阱牌」暂无结算分支 → 走「占位」日志（管线确实跑过该牌）。
     //   复原药水在战斗内是合法无操作（本场没有可复原的消耗堆），与满血回复同样豁免。
     const noOpInBattle = picked.name === '复原药水';
@@ -418,6 +434,32 @@ describe('直接释放家族实打', () => {
       || slice(g).includes('召唤')
       || slice(g).includes('占位');
     expect(observable, `释放应有可观测效果：${slice(g)}`).toBe(true);
+    expect(picked.name).toBe('火焰药水');
+    expect(foe0.hp).toBe(foe0.maxHp - 2);
+    BattleSession.commands.flee();
+    await drain(20);
+  }, 25000);
+
+  it('药水魔法：精神药水直接施放，从牌库抽出原有的两张 UID', async () => {
+    const ym = C.all().find(card => card.name === '药水魔法');
+    const g = makeGame([ym]);
+    BattleSession.start(g, [foe()], { name: '精神药水' });
+    await drain();
+    const before = await discoverFixedPotion(g, ym, 'tt3-mind-potion');
+    const drawn = before.drawPile.slice(-2).reverse();
+    expect(drawn).toHaveLength(2);
+    expect(new Set(drawn).size).toBe(2);
+    for (const uid of drawn) expect(viewApi.findCard(uid)?.card).toBeTruthy();
+    BattleSession.commands.pickDiscover(0);
+    const after = await drain();
+    expect(after.drawPile).toEqual(before.drawPile.slice(0, -2));
+    expect(after.hand).toEqual([...before.hand, ...drawn]);
+    expect(after.hand.some(uid => viewApi.findCard(uid)?.card.id === 'tt3-mind-potion')).toBe(false);
+    const spentPotions = after.consumedPile.filter(uid =>
+      viewApi.findCard(uid)?.card.id === 'tt3-mind-potion');
+    expect(spentPotions).toHaveLength(1);
+    expect(before.consumedPile).not.toContain(spentPotions[0]);
+    expect(after.hand).not.toContain(spentPotions[0]);
     BattleSession.commands.flee();
     await drain(20);
   }, 25000);

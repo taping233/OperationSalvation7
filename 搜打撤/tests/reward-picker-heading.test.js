@@ -12,12 +12,9 @@ it.each([
   [{count:3},'领取奖励'],
   [{finished:true,isPick:true},'奖励已处理'],
 ])('标题遵循当前模式 %j',(input,expected)=>expect(rewardPickerTitle(input)).toBe(expected));
-it('成功回执按实际入包张数计数，不按候选或去重种类计数',()=>{
-  document.body.innerHTML=chestRewardOverviewHTML({claimedCards:[{name:'冰刺'},{name:'冰刺'}],boxes:[{index:0,lostCount:3,cardCount:5}]});
-  expect(document.querySelector('.cqo-receipt-count').textContent).toBe('2 张');
-  expect(document.querySelectorAll('.cqo-receipt li')).toHaveLength(1);
-  expect(document.querySelector('.cqo-receipt li').textContent).toBe('冰刺 ×2');
-  expect(document.querySelector('.cqo-receipt-icon').textContent).toBe('[[icon:bag]]');
+it('奖励总览不再显示已入背包汇总块',()=>{
+  document.body.innerHTML=chestRewardOverviewHTML({boxes:[{index:0,lostCount:3,cardCount:5}]});
+  expect(document.querySelector('.cqo-receipt')).toBeNull();
   document.body.innerHTML=chestRewardOverviewHTML({boxes:[{index:0,lostCount:3,completed:true}]});
   expect(document.querySelector('.cqo-receipt')).toBeNull();
 });

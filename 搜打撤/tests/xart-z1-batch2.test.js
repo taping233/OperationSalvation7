@@ -92,7 +92,7 @@ describe('A3-PREP-02 预设预览按分段占格计容', () => {
   });
 
   it('整备文案不再把来源封顶说成局内规则（帮助分段已按 10-04 老板令整体移除，保留上限提示口径）', () => {
-    expect(depart).toContain('每格叠放上限，局内超出会另占一格');
+    expect(depart).toContain('同名每格叠放上限');
     expect(depart).not.toContain('超出部分另占一格');
   });
 });

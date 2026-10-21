@@ -43,7 +43,7 @@ let frames, game;
 const stage = () => UI.el.ovBody.querySelector('.battle-stage');
 const snapshot = () => BattleSession.getSnapshot();
 const skill = () => stage().querySelector('[data-act="btSlam"]');
-const page = () => stage().querySelector('[data-act="btHandPage"]');
+const page = () => stage().querySelector('.bt-hand-page-step:not(:disabled)');
 function flush() { for (let i = 0; frames.length && i < 40; i++) frames.shift()(performance.now()); }
 async function settle() {
   for (let i = 0; i < 300; i++) {
@@ -71,7 +71,15 @@ function expectUniqueTools({ ready = true, pages = true } = {}) {
   expect(stage().querySelector('.sts-hud > .sts-hand-tools')).toBeNull();
   expect(stage().querySelectorAll('[data-act="btSlam"]')).toHaveLength(1);
   expect(skill().disabled).toBe(!ready);
-  expect(stage().querySelectorAll('[data-act="btHandPage"]')).toHaveLength(pages ? 1 : 0);
+  expect(stage().querySelectorAll('.bt-hand-page')).toHaveLength(pages ? 1 : 0);
+  expect(tools[0].querySelector('[data-act="btHandPage"]')).toBeNull();
+  const resources = stage().querySelector('.sts-resource-dock');
+  if (pages) {
+    const pager = stage().querySelector('.bt-hand-page');
+    expect(pager.parentElement).toBe(resources);
+    expect(pager.previousElementSibling?.matches('.sts-hud-l')).toBe(true);
+    expect(pager.nextElementSibling?.matches('.sts-energy-wrap')).toBe(true);
+  } else expect(resources.children).toHaveLength(2);
   return tools[0];
 }
 function expectCoveredStage(scene = stage()) {
@@ -180,13 +188,20 @@ describe('battle tools template ownership', () => {
     BattleSession.commands.playCard('tt3-magic-lamp'); flush();
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })); flush();
     expect(snapshot().pendingTarget).toBeNull(); expectUniqueTools();
+    const scene = stage(), hand = scene.querySelector('.sts-hand'), handUids = [...snapshot().hand];
     BattleSession.commands.beginInfusion('tt3sp-bloodstorm'); flush();
-    expectUniqueTools(); expectCoveredStage();
+    expect(stage()).toBe(scene); expect(scene.querySelector('.sts-hand')).toBe(hand);
+    expectUniqueTools({ ready:false, pages:false });
+    expect(scene.querySelector('[data-infusion-workspace]')).not.toBeNull();
+    expect(snapshot().hand).toEqual(handUids);
     const energy = snapshot().energy;
     skill().click();
-    expect(snapshot().energy).toBe(energy); // Retained tools are behind the inert input shield.
+    expect(snapshot().energy).toBe(energy); // The retained career control is disabled during material selection.
     UI.el.ovBody.querySelector('[data-act="btInfuseCancel"]').click(); flush();
     expect(snapshot().infusing).toBeNull(); expectUniqueTools();
+    expect(stage()).toBe(scene); expect(scene.querySelector('.sts-hand')).toBe(hand);
+    expect(scene.querySelector('[data-infusion-workspace]')).toBeNull();
+    expect(snapshot().hand).toEqual(handUids);
     game.hp = 1; render(); UI.el.ovBody.querySelector('[data-act="btEnd"]').click();
     expectCoveredStage();
     UI.el.ovBody.querySelector('[data-act="btRiskBack"]').click();
@@ -201,8 +216,10 @@ describe('battle tools template ownership', () => {
       button.dispatchEvent(new MouseEvent('pointerdown', { button: 0, bubbles: true }));
       expect(startAim).toHaveBeenCalledTimes(cycle + 1);
       expect(startAim.mock.calls[cycle][1]).toBe(button);
-      page().click(); expect(page().textContent).not.toBe(firstPage); expectUniqueTools();
+      page().focus(); page().click(); expect(page().textContent).not.toBe(firstPage); expectUniqueTools();
+      expect(document.activeElement).toBe(page());
       page().click(); expect(page().textContent).toBe(firstPage); expectUniqueTools();
+      expect(document.activeElement).toBe(page());
       UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
       UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
       expect(button.isConnected).toBe(true); expect(skill()).toBe(button); expectUniqueTools();
@@ -240,5 +257,14 @@ describe('battle tools template ownership', () => {
     start({ many: false });
     expectUniqueTools({ pages: false });
     expect(stage().querySelector('#btSelf')).not.toBe(oldSelf); expect(oldTools.isConnected).toBe(false);
+  });
+
+  it('moves a retained pager out of the old player tools without duplicating it', () => {
+    start(); const retained = stage().querySelector('.bt-hand-page');
+    skill().closest('.sts-hand-tools').appendChild(retained);
+    set$energy(0); render();
+    expect(stage().querySelector('.bt-hand-page')).toBe(retained); expectUniqueTools({ ready:false });
+    page().focus(); page().click();
+    expect(document.activeElement).toBe(page()); expectUniqueTools({ ready:false });
   });
 });

@@ -5,9 +5,10 @@ const card = { id:'copy-card', name:'测试卡', rarity:'古朴' };
 const stack = { card, count:2 };
 const cardHTML = () => '<div class="hs-card">测试卡</div>';
 
-it('shows selection guidance only while there are cards to select, preserving saved confirmation', () => {
+it('keeps pending counts and saved confirmation without repeating selection instructions', () => {
   document.body.innerHTML = extractionStashHTML({ cardHTML, remainingCards:[stack], room:2 });
-  expect(document.querySelector('.exr-section-title').textContent).toContain('选择要留下的卡牌');
+  expect(document.querySelector('.exr-section-title').textContent).toContain('待入库 2 张');
+  expect(document.querySelector('.exr-section-title').textContent).not.toContain('选择要留下');
   document.body.innerHTML = extractionStashHTML({ cardHTML, savedCards:[stack] });
   expect(document.querySelector('.exr-section-title').textContent).not.toContain('选择要留下');
   expect(document.querySelector('.exr-store').textContent).not.toContain('卡牌整理完毕');

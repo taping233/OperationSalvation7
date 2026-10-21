@@ -132,11 +132,12 @@ it('previews every living enemy over legal area-drop space and clears on invalid
   const second = foe.cloneNode(true); second.dataset.eidx = '1'; foe.after(second);
   state.snap.foes.push({ hp: 20, dead: false });
   begin(); move(800, 700); step();
-  expect(showFoePreview).toHaveBeenCalledWith(foe, 0, 'drag-card', state.card, 'drag', state.snap);
-  expect(showFoePreview).toHaveBeenCalledWith(second, 1, 'drag-card', state.card, 'drag', state.snap);
+  expect(showFoePreview).toHaveBeenCalledWith(foe, 0, 'drag-card', state.card, 'drag', state.snap, expect.any(Object));
+  expect(showFoePreview).toHaveBeenCalledWith(second, 1, 'drag-card', state.card, 'drag', state.snap, expect.any(Object));
   expect(showFoePreview).toHaveBeenCalledTimes(2);
   expect(showFoePreview.mock.calls[0][5]).toBe(state.snap);
   expect(showFoePreview.mock.calls[1][5]).toBe(showFoePreview.mock.calls[0][5]);
+  expect(showFoePreview.mock.calls[1][6]).toBe(showFoePreview.mock.calls[0][6]);
   expect(commands.submitCardPlay).not.toHaveBeenCalled();
   document.elementFromPoint.mockReturnValue(document.querySelector('.sts-hud'));
   move(800, 650); step();

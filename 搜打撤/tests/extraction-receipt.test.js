@@ -143,7 +143,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
   it('clear 结局：主体文案突出「击破首脑+关键收获」，数字（行动/用时/首探经验）来自回执', async () => {
     await finishUp();
     const text = document.body.textContent;
-    expect(text).toContain('首脑突破 / 收获已保存');
+    expect(text).toContain('首脑突破 · 已保存');
     expect(text).not.toContain('满载而归');
     expect(text).toContain('待复原4 张');
     expect(document.querySelector('[data-act=again]')).toBeNull();
@@ -210,7 +210,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     const text = document.body.textContent;
     expect(text).toContain('撤离成功');
     expect(text).not.toContain('保本返回');
-    expect(text).toContain('安全撤离 / 收获已保存');
+    expect(text).toContain('收获已保存');
     expect(text).not.toContain('首脑突破');
     expect(text).not.toContain('击破第四层首脑');
     expect(text).toContain('行动 20 次');     // 旧档无 explored：actions 仍为 turn-1

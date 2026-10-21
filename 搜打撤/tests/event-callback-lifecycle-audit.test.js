@@ -67,7 +67,7 @@ afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.
 
 async function openEvent(id, rewards = []) {
   H.cards = [{ id, name: '生命周期事件', type: '事件' }, ...rewards];
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000);
   await opening;
 }
@@ -128,7 +128,7 @@ describe('事件等待与回调生命周期审计', () => {
     let resolveNarrative;
     H.narrative = () => new Promise(resolve => resolveNarrative = resolve);
     H.cards = [{ id: 'tt6-mystery', name: '旧事件', type: '事件' }];
-    const pending = flow.runEventDeck();
+    const pending = flow.runEventDeck(); await vi.dynamicImportSettled();
     await vi.advanceTimersByTimeAsync(1000);
     expect(resolveNarrative).toBeTypeOf('function');
     if (change === 'new-run') { H.game.discoveredPairs = new Set(); H.game.layerData = [...H.game.layerData]; }
@@ -200,7 +200,7 @@ describe('事件等待与回调生命周期审计', () => {
     let resolveNarrative;
     H.narrative = () => new Promise(resolve => resolveNarrative = resolve);
     H.cards = [{ id: 'tt6-airdrop', name: '补给', type: '事件' }];
-    const pending = flow.runEventDeck(); await vi.advanceTimersByTimeAsync(1500);
+    const pending = flow.runEventDeck(); await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(1500);
     resolveNarrative(null); await pending;
     UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="2"]').click();
     expect(H.game.hp).toBe(1);
@@ -465,7 +465,7 @@ describe('事件等待与回调生命周期审计', () => {
     const original = window.SDT.Cards.randomClassCard;
     window.SDT.Cards.randomClassCard = () => card;
     try {
-      altar.openFireRest(); UI._acts.fireRestGo();
+      altar.openFireRest(); UI._acts.fireHeal(); UI._acts.fireRestore();
       expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('稀有 · 已入背包');
       const count = H.game.ownedCards.length;
       vi.advanceTimersByTime(10000);
@@ -530,7 +530,7 @@ describe('事件等待与回调生命周期审计', () => {
     saved.current.claimMode = 'one'; saved.current.choiceCount = 3;
     saved.queue[0].reward = saved.current;
     expect(scenes.resumeChestsOnCell(saved)).toBe(true);
-    expect(UI.el.ovBody.textContent).toContain('任选1张，其余放弃');
+    expect(UI.el.ovBody.textContent).toContain('选取后其余永久放弃');
     UI._acts.chestPick({ i:'1' });
     const after = window.SDT.Chests.serialize(H.game);
     expect(after.current.taken).toEqual([1]);

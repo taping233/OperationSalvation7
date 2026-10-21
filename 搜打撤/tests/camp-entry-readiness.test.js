@@ -25,7 +25,7 @@ function start() {
   return { cut, image, onFinish };
 }
 async function expectFinished(cut, onFinish) {
-  await vi.advanceTimersByTimeAsync(cityCutDuration);
+  await vi.advanceTimersByTimeAsync(cityCutDuration + 64);
   expect(cut.isConnected).toBe(false);
   expect(onFinish).toHaveBeenCalledOnce();
   finish();
@@ -37,7 +37,7 @@ describe('achievement curtain with real image-readiness implementation', () => {
     const { cut, image, onFinish } = start();
     Object.defineProperty(image, 'naturalWidth', { value: 640 });
     image.dispatchEvent(new Event('load'));
-    await vi.advanceTimersByTimeAsync(32);
+    await vi.advanceTimersByTimeAsync(64);
     expect(cut.classList.contains('page-cut-waiting')).toBe(false);
     expect(cut.dataset.scenery).toBeUndefined();
     await expectFinished(cut, onFinish);
@@ -45,9 +45,10 @@ describe('achievement curtain with real image-readiness implementation', () => {
   it('reveals the opaque fallback after an image error and removes it once', async () => {
     const { cut, image, onFinish } = start();
     image.dispatchEvent(new Event('error'));
-    await vi.advanceTimersByTimeAsync(32);
+    await vi.advanceTimersByTimeAsync(64);
     expect(cut.dataset.scenery).toBe('fallback');
     expect(image.style.display).toBe('none');
+    await vi.advanceTimersByTimeAsync(16);
     expect(cut.classList.contains('page-cut-waiting')).toBe(false);
     await expectFinished(cut, onFinish);
   });
@@ -59,6 +60,7 @@ describe('achievement curtain with real image-readiness implementation', () => {
     await vi.advanceTimersByTimeAsync(1);
     expect(cut.dataset.scenery).toBe('fallback');
     expect(image.style.display).toBe('none');
+    await vi.advanceTimersByTimeAsync(16);
     expect(cut.classList.contains('page-cut-waiting')).toBe(false);
     await expectFinished(cut, onFinish);
   });

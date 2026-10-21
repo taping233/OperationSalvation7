@@ -85,13 +85,13 @@ describe('expedition view DOM rendering', () => {
     document.body.innerHTML = '<aside id="sidebar"></aside><nav id="expeditionChapter"></nav>';
   });
 
-  it.each([[0, 'empty', 0], [4, 'ready', 1], [12, 'tight', 3], [16, 'full', 4], [20, 'full', 4]])('背包占格%s用图形刻度展示状态，读屏仍获得准确容量', (used, state, filled) => {
+  it.each([[0, 'empty', 0], [4, 'ready', 1], [12, 'tight', 3], [16, 'full', 4], [20, 'full', 4]])('背包占格%s用进度条展示状态，读屏仍获得准确容量', (used, state) => {
     renderExpeditionPanel(null, makeGame({usedSlots:()=>used, bagCap:()=>16}), icon=>icon);
     const bag = document.querySelector('[data-expedition-tool="bag"]');
     expect(bag.dataset.capacityState).toBe(state);
-    expect(bag.querySelectorAll('.expedition-bag-meter i')).toHaveLength(4);
-    expect(bag.querySelectorAll('.expedition-bag-meter .is-filled')).toHaveLength(filled);
-    expect(bag.querySelector('.expedition-bag-meter').getAttribute('aria-hidden')).toBe('true');
+    expect(bag.querySelector('.expedition-bag-capacity i').style.width).toBe(`${Math.min(100, used / 16 * 100)}%`);
+    expect(bag.querySelector('.expedition-bag-capacity').getAttribute('aria-hidden')).toBe('true');
+    expect(bag.querySelector('strong').textContent).toBe(`${used}/16`);
     expect(bag.textContent).not.toMatch(/余|已满|格/);
     expect(bag.getAttribute('aria-label')).toContain(`占格 ${used}/16`);
     expect(bag.style.getPropertyValue('--bag-fill')).toBe(`${Math.min(100, used / 16 * 100)}%`);

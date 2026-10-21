@@ -92,7 +92,7 @@ describe('warehouse bounded work and live inventory', () => {
     fixture.query('修改后');
     const tiles = document.querySelectorAll('.stash-cell');
     expect(tiles[0].hidden).toBe(false); expect(tiles[1].hidden).toBe(true);
-    expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('7 张');
+    expect(tiles[0].getAttribute('aria-pressed')).toBe('true');
     fixture.stacks[0].card.id = 'new-stable-key';
     fixture.query('');
     expect(tiles[0].hidden).toBe(true);
@@ -136,9 +136,9 @@ function bagView(source, catalog) {
   const all = vi.fn(() => catalog);
   const sdt = { Cards:{ all, cardHTML:card => `<b data-card="${card.id}">${card.name}</b>` }, UI:{ helpBtn:() => '<button>帮助</button>' } };
   window.SDT = sdt;
-  const factory = new Function('SDT', 'esc', 'escAttr', 'bagUseLocation', 'uiDisclosure',
+  const factory = new Function('SDT', 'esc', 'escAttr', 'bagUseLocation', 'uiDisclosure', 'linkedBackHTML',
     source.replace(/^import .*;\r?$/gm, '').replace(/export /g, '') + '\nreturn { pageHTML, tileHTML };');
-  return { ...factory(sdt, String, String, () => null, uiDisclosure), all };
+  return { ...factory(sdt, String, String, () => null, uiDisclosure, () => '<button>返回</button>'), all };
 }
 function tileProjection(html) {
   const template = document.createElement('template');

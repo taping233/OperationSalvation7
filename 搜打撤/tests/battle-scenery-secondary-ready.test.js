@@ -112,9 +112,9 @@ it.each([false, true])('handles delayed scenery under a restarted infusion panel
   BattleSession.commands.beginInfusion('delayed-storm');
   while (rafQueue.length) { frame(); await flush(); }
   expect(BattleSession.getSnapshot().infusing).toBeTruthy();
-  expect(body.querySelector('.battle-secondary-layer')).not.toBeNull();
+  expect(body.querySelector('[data-infusion-workspace]')).not.toBeNull();
   expect(stage()).toBe(currentStage);
-  expect(UI._lastMode).not.toBe('battle');
+  expect(UI._lastMode).toBe('battle');
   background.resolve(); await flush();
   if (fail) {
     expect(pendingScenery.every(image => image.hidden)).toBe(true);

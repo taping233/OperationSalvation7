@@ -104,7 +104,7 @@ describe('四线试玩 P1 事件生命周期', () => {
   it('药摊领取前背包返回保留候选，领取后不重开或再次发奖', async () => {
     H.cards = [{ id:'ev19-potions', name:'药摊', type:'事件' }, ...[1,2,3].map(n => ({ id:`p${n}`, name:`药水${n}`, type:'道具', rarity:'普通' }))];
     H.game.layerData[0].logical[1].def.type = 'event';
-    const opening = flow.runEventDeck();
+    const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
     await vi.advanceTimersByTimeAsync(1000);
     await opening;
     UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);

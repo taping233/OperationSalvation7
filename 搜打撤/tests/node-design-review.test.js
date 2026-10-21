@@ -7,8 +7,8 @@ describe('lightweight node design review fixture',()=>{
     const html=readFileSync('game/dev/node-design-review.html','utf8');
     document.body.innerHTML=html.slice(html.indexOf('<body')).replace(/<script[\s\S]*?<\/script>/g,'');
     const {nodeReviewScene}=await import('../game/dev/node-design-review.js');
-    expect(nodeReviewScene('fireFull').body).toContain('将复原 0 张');
-    expect(nodeReviewScene('fireEmpty').body).toContain('可复原 <b>0 张');
+    expect(nodeReviewScene('fireFull').body).toContain('背包空间不足');
+    expect(nodeReviewScene('fireEmpty').body).toContain('暂无可复原卡牌');
     expect(nodeReviewScene('altarLocked').body).toContain('碎片不足');
     expect(nodeReviewScene('rewardEmpty').body).toContain('此项不可选');
     expect(nodeReviewScene('entry').body).toContain('全部领取后才能继续');
@@ -16,7 +16,7 @@ describe('lightweight node design review fixture',()=>{
     expect(source).not.toMatch(/localStorage|sessionStorage|main\.js|Sound|game\.session|saveGame/);
     expect(document.querySelector('.fire-rest-plan')).not.toBeNull();
     expect(document.querySelector('details').open).toBe(false);
-    document.querySelector('[data-act="fireRestGo"]').click();
+    document.querySelector('[data-act="fireHeal"]').click();
     expect(document.querySelector('#reviewOutput').textContent).toContain('不执行授予');
   });
   it('geometry diagnostics do not mutate content or state',()=>{

@@ -75,8 +75,22 @@ describe('battle decision reading CSS contract', () => {
     expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:22px');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('position:relative');
     expect(declarations(battle, `${stage} .sts-intent`)).not.toContain('100% + 120px');
-    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('max-width:320px');
-    expect(declarations(battle, `${stage} .sts-energy>b`)).toContain('font-size:52px');
+    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('display:contents');
+    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('--battle-page-space:0px');
+    const drawPile = declarations(battle, `${stage} .sts-hud-l`);
+    const energy = declarations(battle, `${stage} .sts-energy-wrap`);
+    for (const region of [drawPile, energy]) {
+      expect(region).toContain('left:var(--battle-hud-edge)');
+      expect(region).toContain('width:var(--battle-energy-width)');
+    }
+    expect(drawPile).toContain('bottom:calc(var(--battle-hud-bottom) + var(--battle-energy-height) + var(--battle-resource-gap) + var(--battle-page-space))');
+    expect(energy).toContain('bottom:var(--battle-hud-bottom)');
+    expect(energy).toContain('min-height:var(--battle-energy-height)');
+    const paging = declarations(battle, `${stage} .sts-resource-dock>.bt-hand-page`);
+    expect(paging).toContain('bottom:calc(var(--battle-hud-bottom) + var(--battle-energy-height) + var(--battle-resource-gap))');
+    const unframed = declarations(battle, 'body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.sts-hud-l>.bt-pile,.bt-hand-page,.sts-energy-wrap)');
+    expect(unframed).toContain('border:0'); expect(unframed).toContain('background:none'); expect(unframed).toContain('box-shadow:none');
+    expect(declarations(battle, 'body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.bt-pile,.bt-hand-page,.sts-energy,.bt-hand-page-step):focus-visible')).toContain('outline:2px solid');
     expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('left:4px');
     expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('top:calc(100% - 170px)');
   });
@@ -108,14 +122,18 @@ describe('battle decision reading CSS contract', () => {
     expect(hud).toContain('display:grid');
     expect(hud).toContain('grid-template-rows:minmax(0,1fr) auto auto');
     expect(hud).toContain('gap:14px 0');
-    expect(hud).toContain('padding:0 48px 40px');
+    expect(hud).toContain('padding:0 var(--battle-hud-edge) var(--battle-hud-bottom)');
     const piles = declarations(battle, `${stage} .sts-hud-r`);
     expect(piles).toContain('position:static'); expect(piles).toContain('grid-row:2');
     expect(piles).toContain('flex-wrap:wrap'); expect(piles).not.toContain('bottom:284px');
     const tactics = declarations(battle, `${stage} .sts-tactics`);
     expect(tactics).toContain('position:static'); expect(tactics).toContain('grid-row:3');
     expect(tactics).not.toContain('bottom:40px');
-    expect(declarations(battle, `${stage} .sts-hand`)).toContain('position:absolute');
+    expect(tactics).toContain('width:var(--battle-tactics-width)');
+    const handLane = declarations(battle, `${stage} .sts-hand`);
+    expect(handLane).toContain('position:absolute');
+    expect(handLane).toContain('left:calc(var(--battle-hud-edge) + var(--battle-energy-width) + var(--battle-hand-control-gap))');
+    expect(handLane).toContain('right:calc(var(--battle-hud-edge) + var(--battle-tactics-width) + var(--battle-hand-control-gap))');
   });
 
   it('keeps the skill icon, fee and disabled state legible with the explanation supplied by hover/focus', () => {

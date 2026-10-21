@@ -139,16 +139,15 @@ it('不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不�
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
   expect(infusionFuelReason(originals[0])).toContain('无法用于注能');
   const workspace = UI.el.ovBody.querySelector('[data-infusion-workspace]');
-  const material = [...workspace.querySelectorAll('.infusion-material')]
+  const material = [...UI.el.ovBody.querySelectorAll('.sts-hand .bt-card')]
     .find(entry => entry.querySelector('.hsc-name')?.textContent === '不朽斩');
-  expect(material.classList.contains('is-unavailable')).toBe(true);
-  expect(material.querySelector('.infusion-card-face').disabled).toBe(true);
-  expect(material.querySelector('[data-act="btInfuseAdd"]').disabled).toBe(true);
-  expect(material.querySelector('.infusion-material-note').textContent).toContain('无法用于注能');
-  expect(effectiveNode().closest('.battle-stage').hasAttribute('inert')).toBe(true);
-  material.querySelector('.infusion-card-face').click();
+  expect(material.dataset.handState).toBe('infusing');
+  expect(material.querySelector('.hs-card').getAttribute('aria-disabled')).toBe('true');
+  expect(material.getAttribute('aria-label')).toContain('无法用于注能');
+  expect(effectiveNode().closest('.battle-stage').hasAttribute('inert')).toBe(false);
+  material.click();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
-  material.querySelector('.infusion-detail').click();
+  UI.showCardZoom(findEffectiveCard(originals[0]).card);
   const zoom = document.getElementById('cardZoom');
   expect(zoom.textContent).toContain('不朽斩'); expect(zoom.textContent).toContain('无法用于注能');
   zoom._closeCardZoom(true);
@@ -297,10 +296,13 @@ it('其他手牌支付保持原有初始攻击资格，同时选牌面显示有�
   BattleSession.commands.playCard(source.uid, 0); await settle();
   expect(BattleSession.getSnapshot().handSelecting?.act).toBe('payment');
   const choices = [...document.querySelectorAll('[data-act="btPickHand"]')];
-  expect(choices).toHaveLength(5);
+  // 2026-10-21 反馈 #7：5 张同名有效卡合并为一张 ×N 展示；点击仍按实际 uid 逐张消耗。
+  expect(choices).toHaveLength(1);
+  expect(choices[0].querySelector('.bt-count')?.textContent).toBe('×5');
   for (const choice of choices) {
     expect(choice.textContent).toContain('不朽斩');
     expect(choice.getAttribute('aria-label')).toContain('不朽斩');
+    expect(choice.getAttribute('aria-label')).toContain('同名 5 张');
   }
   BattleSession.commands.pickHandSelect(originals[0]);
   BattleSession.commands.pickHandSelect(originals[1]); await settle();
@@ -317,7 +319,9 @@ it('内部免费释放按已显示不朽斩结算并同UID回手', async () => {
   BattleSession.commands.playCard(source.uid, 0); await settle();
   expect(BattleSession.getSnapshot().handSelecting?.act).toBe('play');
   const uid = originals[0];
-  const option = document.querySelector(`[data-act="btPickHand"][data-uid="${uid}"]`);
+  // 2026-10-21 反馈 #7：同名有效卡合并为一张展示（卡面仍是不朽斩）；实际选择继续按 uid 提交。
+  const option = document.querySelector('[data-act="btPickHand"]');
+  expect(option).not.toBeNull();
   expect(option.textContent).toContain('不朽斩');
   const before = BattleSession.getSnapshot();
   BattleSession.commands.pickHandSelect(uid); await settle();
@@ -501,18 +505,20 @@ it('BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改
   const grave = UI.el.ovBody.querySelector('[data-act="btGrave"]');
   expect([...UI.el.ovBody.querySelectorAll('.bt-pile')].some(node => node.title.startsWith('弃牌堆：'))).toBe(false);
   for (const [node, count] of [[draw, 2], [grave, 3]]) {
-    expect(node.title).toContain('不朽斩×2');
-    expect(node.title).not.toContain('初始攻击');
+    expect(node.getAttribute('aria-label')).toContain('不朽斩×2');
+    expect(node.getAttribute('aria-label')).not.toContain('初始攻击');
     expect(node.querySelector('b').textContent).toBe(String(count));
   }
-  expect(draw.getAttribute('aria-label')).toBe(draw.title);
+  expect(draw.title).toBe('');
   expect(grave.getAttribute('aria-label')).toBe(grave.title);
   expect(pileTip(before.drawPile)).toBe('不朽斩×2');
   expect(before.consumedPile).toHaveLength(3); // Two attacks plus the already played sword.
   expect(pileTip(before.consumedPile)).toContain('不朽斩×2');
   actions.get('btDeck')(); await settle();
   expect(UI.el.ovBody.querySelector('.battle-pile-card').getAttribute('aria-label')).toContain('不朽斩');
-  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('不朽斩');
+  actions.get('btDecisionInspect')({i:0});
+  expect(document.getElementById('cardZoom').textContent).toContain('不朽斩');
+  document.getElementById('cardZoom')._closeCardZoom(true);
   actions.get('btDeckBack')(); await settle();
   actions.get('btGrave')(); await settle();
   const consumedLabels = [...UI.el.ovBody.querySelectorAll('.battle-pile-card')].map(node => node.getAttribute('aria-label'));

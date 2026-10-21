@@ -67,7 +67,7 @@ const events = [
   { id:'tt6-demondeal', name:'隧道血契', type:'事件', desc:'交易或拒绝' },
 ];
 async function openBoundEvent() {
-  const pending = flow.runEventDeck();
+  const pending = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000); await pending;
 }
 

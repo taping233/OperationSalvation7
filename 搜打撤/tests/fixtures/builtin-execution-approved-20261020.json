@@ -371,13 +371,13 @@
             "op": "choice",
             "options": [
               {
-                "label": "发现 1 张牌并将其释放",
+                "label": "发现招式并释放",
                 "ops": [
                   {
                     "op": "acquire",
                     "n": 1,
                     "pool": {
-                      "kind": "随机"
+                      "kind": "招式"
                     },
                     "dest": "discover",
                     "act": "play"

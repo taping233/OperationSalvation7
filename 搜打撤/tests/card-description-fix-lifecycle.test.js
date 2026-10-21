@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -120,12 +120,24 @@ describe('卡面描述修复：生命周期', () => {
     const uid = engine.addTempCard(byId(id));
     const before = runtime.granted.length;
     const beforeHand = runtime.hand.length;
-    runtime.delayed.push({ special: 'consumeTemps', uids: [uid, uid], cardName: '江湖救急' });
-    runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '江湖救急' });
-    await engine.processDelayed(); await drain();
-    expect(runtime.consumed.filter(u => u === uid)).toHaveLength(1);
-    expect(effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - before : 1000 - runtime.foes[0].hp).toBe(amount);
-    expect(runtime.infuseFuels).toBe(0);
+    let randomPool;
+    if (id === 'tt2-wreck') {
+      // 基础2张的数量检查不混入获取派生奖励；阿猫组合由 audit-battle 的精确回归覆盖。
+      const plain = byId('tt3-ice-spike');
+      expect(C.isRandomObtainable(plain)).toBe(true);
+      expect(plain.rules?.triggers?.onAcquire?.length || 0).toBe(0);
+      randomPool = vi.spyOn(C, 'all').mockReturnValue([plain]);
+    }
+    try {
+      runtime.delayed.push({ special: 'consumeTemps', uids: [uid, uid], cardName: '江湖救急' });
+      runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '江湖救急' });
+      await engine.processDelayed(); await drain();
+      expect(runtime.consumed.filter(u => u === uid)).toHaveLength(1);
+      expect(effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - before : 1000 - runtime.foes[0].hp).toBe(amount);
+      expect(runtime.infuseFuels).toBe(0);
+    } finally {
+      randomPool?.mockRestore();
+    }
   });
 
   it('到期不误触发被注能钩；取消前不消耗；终局后不处理后续UID', async () => {

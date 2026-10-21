@@ -35,9 +35,9 @@ it('keeps the selected reward stable after blur and clears removed cards and uni
   dispose(); expect(bag.dataset.cardStateMotion).toBeUndefined();
   motion.retargetVisual.mockClear(); pointer(bag, 'pointerover'); expect(motion.retargetVisual).not.toHaveBeenCalled();
 });
-it('keeps instantaneous edge feedback without movement for reduced motion', () => {
+it('keeps neutral geometry and no outline for reduced motion', () => {
   document.body.classList.add('reduce-motion'); pointer(bag, 'pointerover');
-  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ y: 0, scale: 1, outlineColor: 'rgba(87,168,240,.84)' });
+  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ y: 0, scale: 1, rotate: 0 });
   expect(motion.retargetVisual.mock.lastCall[2]).toEqual({ duration: 0 });
 });
 it('installs once per root and can install again after disposal', () => {
@@ -50,14 +50,15 @@ it('returns a raised card to neutral geometry when the system enables reduced mo
   const media = { matches: false, addEventListener: vi.fn((_type, handler) => { changed = handler; }), removeEventListener: vi.fn() };
   vi.stubGlobal('matchMedia', vi.fn(() => media)); dispose = installCardStateMotion();
   pointer(bag, 'pointerover'); media.matches = true; changed();
-  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ y: 0, scale: 1, outlineColor: 'rgba(87,168,240,.84)' });
+  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ y: 0, scale: 1, rotate: 0 });
   expect(motion.retargetVisual.mock.lastCall[2]).toEqual({ duration: 0 });
   dispose(); expect(media.removeEventListener).toHaveBeenCalledWith('change', changed);
 });
-it('inherits the actual face material ahead of tile tint and keeps its hue on reversal', () => {
+it('preserves face material without creating an outline on hover or reversal', () => {
   bag.innerHTML = '<div class="hs-card" style="--paper-wash:#c79824"></div>';
   pointer(bag, 'pointerover');
-  expect(motion.retargetVisual.mock.lastCall[1].outlineColor).toBe('rgba(199,152,36,.84)');
+  expect(motion.retargetVisual.mock.lastCall[1]).toEqual({y:-6,scale:1.02,rotate:0});
+  expect(bag.querySelector('.hs-card').style.getPropertyValue('--paper-wash')).toBe('#c79824');
   pointer(bag, 'pointerout');
-  expect(motion.retargetVisual.mock.lastCall[1].outlineColor).toBe('rgba(199,152,36,0)');
+  expect(motion.retargetVisual.mock.lastCall[1]).toEqual({y:0,scale:1,rotate:0});
 });

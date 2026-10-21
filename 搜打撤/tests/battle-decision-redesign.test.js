@@ -21,19 +21,18 @@ function setup() {
 afterEach(()=>document.body.replaceChildren());
 
 describe('统一战斗二级界面展示契约',()=>{
-  it.each(['deck','grave'])('%s保留身份分组、首现顺序、数量和只读返回',kind=>{
+  it.each(['deck','grave'])('%s按有效卡面分组、稳定展示数量和只读返回',kind=>{
     const before=JSON.stringify(cards), {show}=setup();
     const {html,stacks}=battlePileBodyHTML({cards,cardHTML:face,kind,isBoss:true});
     show('牌堆',html,true,snapshot);
-    expect(stacks.map(s=>s.card.id)).toEqual(['same','other']);
-    expect(stacks.map(s=>s.count)).toEqual([2,1]);
-    expect(stacks[0].card).toBe(cards[0].card);
+    expect(Object.fromEntries(stacks.map(s=>[s.card.id,s.count]))).toEqual({same:2,other:1});
+    expect(stacks.find(s=>s.card.id==='same').card).toBe(cards[0].card);
+    expect(battlePileBodyHTML({cards:[...cards].reverse(),cardHTML:face,kind}).stacks.map(s=>s.key)).toEqual(stacks.map(s=>s.key));
     expect([...document.querySelectorAll('.battle-pile-card')].map(b=>b.dataset.i)).toEqual(['0','1']);
     expect(document.querySelector('.battle-decision-actions button').dataset.act).toBe(kind==='deck'?'btDeckBack':'btGraveBack');
-    expect(document.querySelector('.battle-pile-summary').textContent).toContain('3');
-    expect(document.querySelector('.battle-pile-context').textContent).toContain('首脑战');
-    expect(document.querySelector('.battle-decision-actions .battle-pile-note')).not.toBeNull();
-    expect(document.querySelector('.battle-decision-content .battle-pile-note')).toBeNull();
+    expect(document.querySelector('.battle-pile-total').textContent).toBe('3 张');
+    expect(document.querySelector('.battle-decision-head').textContent).not.toMatch(/能量|回合/);
+    expect(document.querySelector('.battle-pile-context,.battle-pile-note,.battle-decision-inspect,.battle-decision-summary')).toBeNull();
     expect(JSON.stringify(cards)).toBe(before);
     expect(html).not.toMatch(/下一张|抽牌顺序/);
   });
@@ -41,7 +40,7 @@ describe('统一战斗二级界面展示契约',()=>{
     const {show}=setup();
     show('空牌库',battlePileBodyHTML({cards:[],cardHTML:face,kind:'deck',isBoss:true}).html,true,snapshot);
     expect(document.querySelector('.battle-decision').dataset.decisionKind).toBe('pile');
-    expect(document.querySelector('.battle-decision-empty').textContent).toContain('牌库已空');
+    expect(document.querySelector('.battle-pile-empty').textContent).toBe('牌库已空');
     expect(document.querySelector('.battle-decision-actions [data-act="btDeckBack"]')).not.toBeNull();
     expect(document.querySelectorAll('.battle-pile-card')).toHaveLength(0);
   });

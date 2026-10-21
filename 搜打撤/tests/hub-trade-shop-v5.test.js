@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { restoreHubFocus } from '../game/src/hub/hub.presentation.js';
 import { departureStackKey } from '../game/src/hub/base-departure.commands.js';
 import { bindTradeShopV5, createTradeShopState, tradeShopV5HTML } from '../game/src/hub/hub.trade-shop-v5.js';
+import { stashSalePrice } from '../game/src/hub/stash-sale-price.js';
 
 const cheap = { id: 'cheap', name: '普通卡', type: '武术', rarity: '古朴', value: 2, desc: '造成伤害。' };
 const rare = { id: 'rare', name: '珍贵卡', type: '法术', rarity: '稀有', value: 6, desc: '恢复生命。' };
@@ -36,7 +37,7 @@ beforeEach(() => {
     sellStashCards: vi.fn((name, count, key) => {
       const stack = base.data.stash.find(item => item.card.name === name && (key === undefined || departureStackKey(item) === key));
       if (!stack || protectedIds.has(stack.card.id)) return { ok: false, why: 'collected' };
-      const coins = stack.card.value * count;
+      const coins = stashSalePrice(cards, stack.card) * count;
       stack.count -= count; base.data.stash = base.data.stash.filter(item => item.count > 0); base.data.coins += coins;
       return { ok: true, qty: count, coins };
     }),
@@ -62,6 +63,14 @@ const sellMode = () => ui._acts.tradeShopMode({ mode: 'sell' });
 const selectStack = name => [...host.querySelectorAll('[data-act="tradeShopSelectStack"]')].find(item => item.textContent.includes(name)).click();
 const selectGood = key => ui._acts.tradeShopSelectGood({ key });
 const stashCount = id => base.data.stash.find(stack => stack.card.id === id)?.count || 0;
+
+it.each([['古朴', 2], ['稀有', 3], ['史诗', 4], ['传说', 5]])('仓库%s的单张和整堆报价按统一售价显示', (rarity, price) => {
+  base.data.stash[0].card = { ...cheap, rarity, value: 99 };
+  sellMode();
+  expect(button('tradeShopSellOne').textContent).toContain(`+${price} 币`);
+  expect(button('tradeShopSellAll').textContent).toContain(`+${price * 3} 币`);
+  expect(host.querySelector('.trade-v5-balance').textContent).toContain(`${price} 储备币`);
+});
 
 it('购买等待真实回执，连点不重复成交；迟到回执不刷新新档页面', async () => {
   let finish;
@@ -160,6 +169,7 @@ describe('独立交易所的现行经济与同页交易台', () => {
   });
 
   it('高价和整堆沿用 2.6 秒确认，过期后再点仍是确认', async () => {
+    base.data.stash.find(stack => stack.card.id === rare.id).card = { ...rare, rarity: '传说' };
     sellMode(); selectStack('珍贵卡'); await click('tradeShopSellOne');
     expect(base.sellStashCards).not.toHaveBeenCalled();
     vi.advanceTimersByTime(2600);
@@ -196,7 +206,10 @@ describe('独立交易所的现行经济与同页交易台', () => {
     await click('tradeShopSellAll'); expect(base.sellStashCards).not.toHaveBeenCalled();
     expect(notice).toHaveBeenLastCalledWith('库存已变化，请重新确认', 'warn');
     expect(button('tradeShopSellAll')).toBeNull();
-    await click('tradeShopSellOne'); cards.sellPrice = () => 9; await click('tradeShopSellOne');
+    await click('tradeShopSellOne');
+    const stack = base.data.stash.find(stack => stack.card.id === rare.id);
+    stack.card = { ...stack.card, rarity: '史诗' };
+    await click('tradeShopSellOne');
     expect(base.sellStashCards).not.toHaveBeenCalled();
     expect(notice).toHaveBeenLastCalledWith('库存已变化，请重新确认', 'warn');
     await click('tradeShopSellOne'); protectedIds.add(rare.id); ui._acts.tradeShopSellOne();

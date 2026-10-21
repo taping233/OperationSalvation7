@@ -36,6 +36,16 @@ function failWrites() {
 }
 
 describe('基地同步草稿提交', () => {
+  it.each([['古朴', 2], ['稀有', 3], ['史诗', 4], ['传说', 5]])('仓库%s按稀有度售出，整堆收入保存后读档一致', async (rarity, price) => {
+    Base.data.stash = [{ card: { ...card, rarity, value: 99 }, count: 3 }];
+    await Base.save();
+    expect(await Base.sellStashCards(card.name, 3)).toMatchObject({ ok: true, qty: 3, coins: price * 3 });
+    expect(Base.data.coins).toBe(80 + price * 3);
+    Base.use(1);
+    expect(Base.data.coins).toBe(80 + price * 3);
+    expect(Base.data.stash).toEqual([]);
+  });
+
   it('符文不足时能力判定和执行均拒绝，木材不变', async () => {
     Base.data.stashUp = 9;
     Base.data.runes = [];

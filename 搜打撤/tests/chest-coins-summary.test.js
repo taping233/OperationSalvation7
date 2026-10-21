@@ -31,7 +31,7 @@ it('双箱懒生成：可先独立收币，后箱开箱一并收币且不重复'
   expect(saved().queue[1].reward).toBeUndefined();
   expect(coinText()).toContain('待领 2 · 已领 0');
   actions.chestOverviewCoins();
-  expect(coinText()).toContain('待领 0 · 已领 2');
+  expect(coinText()).toContain('已收下 2');
   expect(coinText()).not.toContain('已领取');
   expect(game.gainCoins.mock.calls).toEqual([[2]]);
   expect(saved().queue[1].reward).toBeUndefined();
@@ -39,14 +39,14 @@ it('双箱懒生成：可先独立收币，后箱开箱一并收币且不重复'
   actions.chestNext(); actions.chestReveal(); actions.chestTake();
   expect(saved().queue[0].reward.coinsReceived).toBe(true);
   expect(saved().queue[1].reward).toBeUndefined();
-  expect(coinText()).toContain('待领 0 · 已领 2');
+  expect(coinText()).toContain('已收下 2');
   actions.chestNext(); actions.chestReveal(); actions.chestTake();
   expect(saved().queue[0].reward.coinsReceived).toBe(true);
   expect(saved().queue[1].reward.coinsReceived).toBe(true);
-  expect(coinText()).toContain('待领 0 · 已领 4');
+  expect(coinText()).toContain('已收下 4');
   expect(game.gainCoins.mock.calls).toEqual([[2], [2]]);
   const claim = actions.chestOverviewCoins; claim(); claim();
-  expect(coinText()).toContain('待领 0 · 已领 4');
+  expect(coinText()).toContain('已收下 4');
   expect(UI.el.ovBody.querySelector('[data-act="chestOverviewCoins"]')).toBeNull();
   expect(saved().queue.every(slot => slot.reward.coinsReceived)).toBe(true);
   expect(game.gainCoins.mock.calls).toEqual([[2], [2]]);
@@ -58,7 +58,7 @@ it('恢复双箱已收币进度，不补抽或重发', () => {
   actions.chestNext(); actions.chestReveal(); actions.chestTake();
   const checkpoint = saved(), drawsBefore = drawn.mock.calls.length;
   expect(Chests.restore(game, checkpoint, vi.fn())).toBe(true);
-  expect(coinText()).toContain('待领 0 · 已领 4');
+  expect(coinText()).toContain('已收下 4');
   expect(drawn).toHaveBeenCalledTimes(drawsBefore);
   expect(game.gainCoins.mock.calls).toEqual([[2], [2]]);
 });

@@ -19,24 +19,25 @@ describe('opt-in winter decision language', () => {
     show();
     expect(visibleText()).toContain('最多 +10');
     expect(visibleText()).toContain('至多 2 张');
-    expect(visibleText()).toContain('30%');
+    expect(document.querySelector('details').textContent).toContain('30%');
     expect(visibleText()).toContain('16/16 格');
-    expect(visibleText()).toContain('可复原 5 张');
-    expect(visibleText()).toContain('休整后本处机会即消耗');
-    expect(visibleText()).toContain('额外职业卡放不下时不会获得');
+    expect(document.querySelector('[data-act="fireRestore"]').disabled).toBe(false);
+    expect(document.querySelector('details').textContent).toContain('各可使用一次');
+    expect(document.querySelector('details').textContent).toContain('额外职业卡放不下时不会获得');
     expect(document.querySelector('details').open).toBe(false);
-    expect(document.querySelector('[data-act="fireRestGo"]')).not.toBeNull();
+    expect(document.querySelector('[data-act="fireHeal"]')).not.toBeNull();
     expect(document.querySelector('[data-act="restoreOne"]')).toBeNull();
   });
   it('shows the zero-capacity outcome without expanding help and keeps rest available', () => {
     show({ fits:false });
-    expect(visibleText()).toContain('将复原 0 张');
-    expect(document.querySelector('[data-act="fireRestGo"]').disabled).toBe(false);
+    expect(visibleText()).toContain('背包空间不足');
+    expect(document.querySelector('[data-act="fireRestore"]').disabled).toBe(true);
+    expect(document.querySelector('[data-act="fireHeal"]').disabled).toBe(false);
   });
   it('does not claim a capacity failure for an empty restore pool', () => {
     show({ restorable:0, fits:false });
-    expect(visibleText()).toContain('可复原 0 张');
-    expect(visibleText()).toContain('至多 0 张');
+    expect(visibleText()).toContain('暂无可复原卡牌');
+    expect(document.querySelector('[data-act="fireRestore"]').disabled).toBe(true);
     expect(visibleText()).not.toContain('当前可复原卡均放不下');
   });
   it('escapes labels/capacity and uses native keyboard-operable disclosure markup', () => {

@@ -44,18 +44,22 @@ describe('战斗信息减负与普通牌库', () => {
     const piles = renderCombatPiles({ mode:'normal', drawCount:draw, discardCount:[], graveCount:consumed, pileTip:pile => `${pile.length}张`, cardBackHTML:'back', escAttr:x => x });
     const deck = surface(piles.draw).querySelector('[data-act=btDeck]');
     expect(deck.querySelector('b').textContent).toBe(String(count));
-    expect(deck.title).toContain('仅抽牌效果取牌');
+    expect(deck.getAttribute('aria-label')).toContain('仅抽牌效果取牌');
+    expect(deck.title).toBe('');
     expect(piles.rest).toContain('btGrave'); expect(piles.rest).not.toContain('弃牌堆');
     expect(JSON.stringify({ draw, consumed })).toBe(before);
   });
 
-  it('普通牌库按同一卡合并99份，抽空说明不承诺洗回或凭空补牌', () => {
+  it('普通牌库按同一卡面合并99份，空库保留返回而不构造假卡', () => {
     const entries = Array.from({ length:99 }, (_, i) => ({ uid:`sha-${i}`, card:{ id:'starter-attack', name:'初始攻击', type:'武术', desc:'攻击' } }));
     const filled = battlePileBodyHTML({ cards:entries, cardHTML:c => c.name, kind:'deck', isBoss:false });
     expect(filled.stacks).toHaveLength(1); expect(filled.stacks[0].count).toBe(99);
-    expect(surface(filled.html).textContent).toContain('仅抽牌效果取牌');
+    expect(surface(filled.html).querySelector('.battle-pile-count').textContent).toBe('×99');
+    expect(surface(filled.html).querySelector('[data-battle-pile-view]').dataset.pileTotal).toBe('99');
     const empty = surface(battlePileBodyHTML({ cards:[], cardHTML:c => c.name, kind:'deck', isBoss:false }).html);
-    expect(empty.querySelector('.battle-decision-empty').textContent).toContain('不会自动补牌');
+    expect(empty.querySelector('.battle-pile-empty').textContent).toBe('牌库已空');
+    expect(empty.querySelectorAll('.battle-pile-card')).toHaveLength(0);
+    expect(empty.querySelector('[data-act="btDeckBack"]')).not.toBeNull();
   });
 
   it('指南说明普通99库和效果抽牌，背包操作放在战前地图', () => {

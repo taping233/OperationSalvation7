@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { RUNTIME_REDUNDANCY_REVIEW } from '../scripts/runtime-asset-redundancy-review.mjs';
 import artMapping from '../game/data/art-mapping.json';
@@ -55,6 +56,35 @@ async function pluginFixture() {
     if (!body) throw new Error(`Unexpected virtual read: ${filename}`);
     return body;
   };
+  // Preserve the real candidate-source guard behind the virtual Vite filesystem.
+  // Fake image bytes have their own explicit review, never production hashes.
+  for (const kind of ['small', 'medium', 'large', 'class', 'boss']) {
+    for (const [frame, canonical] of [['01', '00'], ['02', '00'], ['17', '16']]) {
+      const prefix = `game/assets/scenes/chests/${kind}-rig-v1/`;
+      const alias = path.join(root, `${prefix}frame-${frame}.webp`);
+      const source = files.get(path.join(root, `${prefix}frame-${canonical}.webp`));
+      if (files.has(alias) && source) files.set(alias, Buffer.from(source));
+    }
+  }
+  const selectorSources = {
+    'game/src/run/chest-opening-art.js': 'export const active = "safe-simple-v7";',
+    'game/src/ui/slot-emblems.js': 'export const inline = "svg";',
+    'game/src/ui/game.menu.pages.js': 'export const current = "inline";',
+  };
+  for (const [filename, body] of Object.entries(selectorSources)) add(filename, body);
+  add('game/css/reviewed.css', '.reviewed { display:block; }');
+  const digest = body => createHash('sha256').update(body).digest('hex');
+  const retainedCandidates = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.sourceSha256)
+    .map(candidate => {
+      const body = read(path.join(root, 'game/assets', candidate.path));
+      return { ...candidate, sourceBytes: body.length, sourceSha256: digest(body) };
+    });
+  const retainedPaths = new Set(retainedCandidates.map(candidate => candidate.path));
+  const retainedReview = { candidates: retainedCandidates, opaqueConsumers: {}, consumerFingerprints: {
+    chests: { 'game/src/run/chest-opening-art.js': digest(selectorSources['game/src/run/chest-opening-art.js']) },
+    'slot-weather': Object.fromEntries(Object.entries(selectorSources).filter(([filename]) => filename.includes('/ui/'))
+      .map(([filename, body]) => [filename, digest(body)])),
+  } };
   vi.doMock('node:fs', () => ({
     existsSync: filename => files.has(filename) || directories().has(filename),
     readFileSync: (filename, encoding) => encoding ? read(filename).toString(encoding) : read(filename),
@@ -75,13 +105,17 @@ async function pluginFixture() {
   let selection = new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path));
   vi.doMock('../scripts/runtime-asset-redundancy.mjs', async () => {
     const actual = await vi.importActual('../scripts/runtime-asset-redundancy.mjs');
-    return { ...actual, collectReviewedRuntimeAssetExclusions: () => ({ excludedAssets: new Set(selection), warnings: [] }) };
+    return { ...actual, collectReviewedRuntimeAssetExclusions: () => {
+      const reviewed = actual.collectReviewedRuntimeAssetExclusions(root, retainedReview);
+      return { excludedAssets: new Set([...selection].filter(asset => !retainedPaths.has(asset) || reviewed.excludedAssets.has(asset))),
+        warnings: reviewed.warnings };
+    } };
   });
   const { default: config } = await import('../vite.config.js');
   const plugin = config.plugins.find(entry => entry.name === 'copy-static');
   const modules = [];
   const context = { getModuleIds: () => modules.map(module => module.id), getModuleInfo: id => modules.find(module => module.id === id) };
-  return { files, config, plugin, read, add, context, modules,
+  return { files, config, plugin, read, add, context, modules, retainedCandidates,
     restore: asset => selection.delete(asset),
     generated: name => path.join(gameRoot, `src/generated/${name}-manifest.js`),
     published: asset => path.join(config.build.outDir, 'assets', asset),
@@ -95,7 +129,7 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     const aliases = JSON.parse(f.plugin.config({}, { command: 'build' }).define.__RUNTIME_ASSET_ALIASES__);
     expect(aliases['assets/cards/expedition-starters/rations.webp']).toBe('assets/cards/resources/ration.webp');
     expect(aliases['assets/thumbs/cards/expedition-starters/rations.webp']).toBe('assets/thumbs/cards/resources/ration.webp');
-    expect(Object.entries(aliases).flat().some(asset => asset.includes('-rig-640-v1/'))).toBe(false);
+    expect(Object.entries(aliases).flat().some(asset => /-rig-(?:640-v1|v1)\//.test(asset))).toBe(false);
     f.plugin.buildStart();
     const artManifest = f.read(f.generated('art')).toString();
     const thumbManifest = f.read(f.generated('thumb')).toString();
@@ -196,5 +230,71 @@ describe('reviewed asset omissions through real Vite hooks without a build', () 
     expect(f.files.has(f.published(asset))).toBe(true);
     expect(f.read(f.published('cards/expedition-starters/rations.webp'))).toEqual(Buffer.from('redrawn cards'));
     expect(f.read(f.published('thumbs/cards/expedition-starters/rations.webp'))).toEqual(Buffer.from('redrawn thumbs/cards'));
+  });
+
+
+  it('keeps all 91 reviewed source bytes while excluding their production copies, metadata and stale alias keys', async () => {
+    const f = await pluginFixture();
+    expect(f.retainedCandidates).toHaveLength(91);
+    const sourceHashes = new Map(f.retainedCandidates.map(candidate => [candidate.path, candidate.sourceSha256]));
+    const aliases = JSON.parse(f.plugin.config({}, { command: 'build' }).define.__RUNTIME_ASSET_ALIASES__);
+    f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
+    for (const candidate of f.retainedCandidates) {
+      const bytes = f.read(path.join(gameRoot, 'assets', candidate.path));
+      expect(createHash('sha256').update(bytes).digest('hex')).toBe(sourceHashes.get(candidate.path));
+      expect(f.files.has(f.published(candidate.path))).toBe(false);
+      expect(f.read(f.generated('art')).toString()).not.toContain(candidate.path);
+      expect(aliases[`assets/${candidate.path}`]).toBeUndefined();
+    }
+    expect(Object.values(aliases).some(asset => /rig-v1|slot-weather/.test(asset))).toBe(false);
+  });
+
+  it('restores the whole high-resolution family after redraw and leaves every injected alias canonical published', async () => {
+    const f = await pluginFixture();
+    f.plugin.config({}, { command: 'build' }); f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
+    f.clearOutput();
+    const asset = 'scenes/chests/small-rig-v1/frame-00.webp';
+    f.add(`game/assets/${asset}`, 'redrawn retained frame');
+    const aliases = JSON.parse(f.plugin.config({}, { command: 'build' }).define.__RUNTIME_ASSET_ALIASES__);
+    f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
+    expect(f.read(f.published(asset))).toEqual(Buffer.from('redrawn retained frame'));
+    expect(f.files.has(f.published('scenes/chests/small-rig-v1/frame-01.webp'))).toBe(true);
+    expect(f.files.has(f.published('ui/slot-weather/rain-v1.webp'))).toBe(false);
+    for (const candidate of f.retainedCandidates.filter(item => item.category === 'chests')) {
+      const canonical = aliases[`assets/${candidate.path}`]?.slice('assets/'.length) || candidate.path;
+      expect(f.files.has(f.published(canonical)), canonical).toBe(true);
+      expect(f.read(f.generated('art')).toString()).toContain(canonical);
+    }
+  });
+
+  it('restores all five weather source images after one changes, while preserving their source bytes', async () => {
+    const f = await pluginFixture();
+    const changed = 'ui/slot-weather/rain-v1.webp';
+    f.add(`game/assets/${changed}`, 'redrawn weather');
+    f.plugin.config({}, { command: 'build' }); f.plugin.buildStart(); f.plugin.closeBundle.call(f.context);
+    for (const candidate of f.retainedCandidates.filter(item => item.category === 'slot-weather')) {
+      expect(f.read(f.published(candidate.path))).toEqual(f.read(path.join(gameRoot, 'assets', candidate.path)));
+      expect(f.read(f.generated('art')).toString()).toContain(candidate.path);
+    }
+    expect(f.files.has(f.published('scenes/chests/small-rig-v1/frame-00.webp'))).toBe(false);
+  });
+
+  it('rejects source edits between config, buildStart and closeBundle, without reusing a stale source hash', async () => {
+    for (const phase of ['before-start', 'before-close']) {
+      const f = await pluginFixture(); f.plugin.config({}, { command: 'build' });
+      if (phase === 'before-close') f.plugin.buildStart();
+      f.add('game/assets/ui/slot-weather/rain-v1.webp', 'changed during build');
+      if (phase === 'before-start') {
+        expect(() => f.plugin.buildStart()).toThrow(/changed during build/);
+        expect(f.files.has(f.generated('art'))).toBe(false);
+      } else expect(() => f.plugin.closeBundle.call(f.context)).toThrow(/changed during build/);
+    }
+  });
+
+  it('rejects a late generated raw image.src path even when family words were split before joining', async () => {
+    const f = await pluginFixture();
+    f.plugin.config({}, { command: 'build' }); f.plugin.buildStart();
+    f.modules.push({ id: '/game/src/virtual-late.js', code: 'image.src = ["./assets", "ui", "slot-" + "weather", name].join("/");' });
+    expect(() => f.plugin.closeBundle.call(f.context)).toThrow(/Joined asset root/);
   });
 });

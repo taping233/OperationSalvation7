@@ -16,11 +16,11 @@ describe('新档最短目标与模式差异', () => {
     const steps = entry.querySelector('small').textContent;
     expect(steps.indexOf('撤离带回资源卡')).toBeLessThan(steps.indexOf('后勤使用'));
     expect(steps.indexOf('后勤使用')).toBeLessThan(steps.indexOf('建设扩建'));
-    expect(steps).toContain('背包记得留空格');
+    expect(steps).toContain('背包留空格');
   });
   it('两模式均有就地说明，不把直入敌腹误写成跳过探索', () => {
-    expect(home()).toContain('首局推荐正常入城');
-    expect(home('elite')).toContain('同样四层探索');
+    expect(home()).toContain('四层探索 · 基础难度');
+    expect(home('elite')).toContain('四层探索');
     expect(home('elite')).toContain('敌人与首脑 ×1.5');
     expect(home('elite')).toContain('人物经验 ×1.5');
   });

@@ -187,6 +187,12 @@ export function compareMigrationInventories(before, after, approvedIds, expected
       && equal(oldCard.rules, { ...expected, triggers: { onPlay: expected.triggers.onPlay.map((op, index) =>
         index === 1 ? { ...op, act: 'zeroCost' } : op) } })
       && equal(nextCard, { ...oldCard, rules: expected });
+    // 2026-10-21 反馈#1（老板实测 12 条）：影噬 tt3sp-shadowbug 稀有度 稀有→史诗——
+    // 仅此一个字段变化，其余卡面（含 M3 规则）逐字保持。
+    const shadowbugRevision = id === 'tt3sp-shadowbug'
+      && equal(fields, ['rarity'])
+      && oldCard?.rarity === '稀有' && nextCard?.rarity === '史诗'
+      && equal({ ...nextCard, rarity: oldCard.rarity }, oldCard);
     const flameRevision = id === approvedBatch.flame.id
       && equal(oldCard, { ...approvedBatch.flame, desc:'本局对战中，法伤+1', rules:{ version:1, battle:{ target:{ side:'self', area:false } }, triggers:{ onPlay:[{ op:'blessing', key:'spellUp' }] } } })
       && equal(nextCard, approvedExecutionCard(approvedBatch.flame));
@@ -194,6 +200,7 @@ export function compareMigrationInventories(before, after, approvedIds, expected
     const executionRevision = hasExecutionRevision
       && equal(nextCard, approvedExecutionCard({ ...oldCard, ...expectedFace }));
     if (id === approvedBatch.flame.id ? !flameRevision : hasExecutionRevision ? !executionRevision : id === 'tt7-ironphalanx' ? !ironPhalanxRevision
+      : id === 'tt3sp-shadowbug' ? !shadowbugRevision
       : oldCard.rules !== undefined || !equal(fields, expectedFields)
         || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
         || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))

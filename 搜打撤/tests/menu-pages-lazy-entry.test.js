@@ -95,7 +95,8 @@ describe('菜单真实按需入口', () => {
     const request=h.menu.openSettings();
     expect(h.menu.openSettings()).toBe(request);
     expect(h.facade.menuPageLoading).toBe(true);
-    expect(document.querySelector('.page-loading')?.textContent).toContain('正在准备菜单内容');
+    expect(document.querySelector('.page-loading')?.getAttribute('aria-label')).toContain('正在准备菜单内容');
+    expect(document.querySelector('.page-loading')?.hidden).toBe(false);
     expect(document.getElementById('viewport').getAttribute('aria-busy')).toBe('true');
     await vi.advanceTimersByTimeAsync(32); await finish(request);
     expect(h.imports).toHaveBeenCalledOnce(); expect(h.factory).toHaveBeenCalledOnce();

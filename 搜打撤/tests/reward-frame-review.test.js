@@ -26,7 +26,7 @@ it('箱内领取仅当前层可见，总览保留尺寸且不可交互，返回�
 });
 
 
-it('总览关键说明与操作增大，金币列加宽而箱列表保留独立滚动', () => {
+it('总览关键说明与操作增大，金币收拢为横条而箱列表保留独立滚动', () => {
   const css = postcss.parse(readFileSync('game/css/chest-reward-overview.css', 'utf8'));
   const prefix = 'body #overlay .card .cqo-frame ';
   const decl = suffix => {
@@ -39,7 +39,7 @@ it('总览关键说明与操作增大，金币列加宽而箱列表保留独立�
   }
   expect(decl('.cqo-progress small')['font-size']).toBe('18px');
   expect(decl('.cqo-button')).toMatchObject({'font-size':'24px','min-height':'60px','max-width':'100%','white-space':'normal'});
-  expect(decl('.cqo-coins').flex).toBe('0 0 240px');
+  expect(decl('.cqo-coins')).toMatchObject({flex:'none','flex-direction':'row'});
   expect(decl('.cqo-coins b')).toMatchObject({'max-width':'100%','overflow-wrap':'anywhere'});
   expect(decl('.cqo-footer-note')['min-width']).toBe('0');
   expect(decl('.cqo-boxes')).toMatchObject({'min-width':'0','overflow':'auto'});
@@ -70,6 +70,7 @@ it.each([
   expect(root.querySelector('.cqo-box').disabled).toBe(!!state.completed);
   expect(JSON.stringify(box)).toBe(before);
   if(state.completed) expect(root.textContent).not.toContain('可全部领取');
+  if(state.completed) expect(root.querySelector('.cqo-box-mode').textContent).toBe('✓已处理');
 });
 it('未开启三选一保留规则，不将候选数描述为获得数', () => {
   const root=document.createElement('div');
@@ -110,7 +111,7 @@ it('互斥箱完成只说明本箱已放弃，另一箱仍可继续领取', () =
   ];
   const before = JSON.stringify(boxes);
   const root = document.createElement('div');
-  root.innerHTML = chestRewardOverviewHTML({ boxes, claimedCards:[{name:'实际所得'}], primaryAction:{index:1,label:'继续领取'} });
+  root.innerHTML = chestRewardOverviewHTML({ boxes, primaryAction:{index:1,label:'继续领取'} });
   const [done, pending] = root.querySelectorAll('.cqo-box');
   expect(done.querySelector('.cqo-box-rule').textContent).toBe('已领取 1 张 · 其余 2 张已放弃');
   expect(done.textContent).not.toContain('未领取');
@@ -119,8 +120,8 @@ it('互斥箱完成只说明本箱已放弃，另一箱仍可继续领取', () =
   expect(pending.disabled).toBe(false);
   expect(root.querySelector('[data-act="chestNext"]').dataset.i).toBe('1');
   expect(root.querySelector('[data-act="chestFinish"]')).toBeNull();
-  expect(root.querySelector('.cqo-progress').getAttribute('aria-label')).toBe('1 箱待领，共 2 箱');
-  expect(root.querySelectorAll('.cqo-receipt li')).toHaveLength(1);
-  expect(root.querySelector('.cqo-receipt li').textContent).toBe('实际所得 ×1');
+  expect(root.querySelector('.cqo-progress')).toBeNull();
+  expect(root.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(1);
+  expect(root.querySelector('.cqo-receipt')).toBeNull();
   expect(JSON.stringify(boxes)).toBe(before);
 });

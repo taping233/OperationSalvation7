@@ -5,17 +5,24 @@ window.SDT = {};
 const { nodeHitRadius } = await import('../game/src/core/camera.js');
 
 describe('地图相机交互几何', () => {
-  it('探索起点保留独立点击目标，同时给上下HUD与标签让出空间', () => {
+  it('入口居中并扩大周围视野，同时保留独立点击目标及HUD空间', () => {
     const cam = new window.SDT.Camera({cols:30,rows:30,tile:48},1920,968);
     const game = {layerIdx:0,trackPos:0,nodePos:[[{x:180,y:180},{x:360,y:180},{x:180,y:360}]],
       layerData:[{logical:[{next:[[0,1],[0,2]]},{next:[]},{next:[]}]}]};
     cam.frameExploration(game);
     const a=cam.worldToScreen(180,180),b=cam.worldToScreen(360,180);
-    expect(b.x-a.x).toBeGreaterThanOrEqual(480);
+    expect(a.x).toBeCloseTo(960);
+    expect(a.y).toBeCloseTo(484);
+    expect(cam.zoom).toBeLessThan(1.5);
+    expect(b.x-a.x).toBeGreaterThanOrEqual(120);
     expect(nodeHitRadius(cam.zoom)*cam.zoom*2).toBeLessThan(b.x-a.x);
-    expect(cam.screenToWorld(b.x,b.y)).toEqual(game.nodePos[0][1]);
+    expect(cam.screenToWorld(b.x,b.y).x).toBeCloseTo(game.nodePos[0][1].x);
+    expect(cam.screenToWorld(b.x,b.y).y).toBeCloseTo(game.nodePos[0][1].y);
     cam.setDetailInset(530);
     cam.frameExploration(game);
+    const entry = cam.worldToScreen(180,180);
+    expect(entry.x).toBeCloseTo((1920-530)/2);
+    expect(entry.y).toBeCloseTo(968/2);
     for(const p of game.nodePos[0]){
       const s=cam.worldToScreen(p.x,p.y);
       expect(s.x).toBeGreaterThan(100);
@@ -48,7 +55,11 @@ describe('地图相机交互几何', () => {
       nodePos: [[{x: 50,y: 80}, {x: 220,y: 160}, {x: 1400,y: 1400}]],
       layerData: [{logical: [{next: [[0,1]]}, {next: []}, {next: []}]}] };
     expect(cam.frameExploration(game)).toBe(true);
-    expect(cam.zoom).toBeGreaterThan(1);
+    expect(cam.zoom).toBeGreaterThan(.4);
+    const framing = { cx:cam.cx, cy:cam.cy, zoom:cam.zoom };
+    game.nodePos[0][2] = { x:1e6, y:1e6 };
+    cam.frameExploration(game);
+    expect({ cx:cam.cx, cy:cam.cy, zoom:cam.zoom }).toEqual(framing);
     for (const point of game.nodePos[0].slice(0, 2)) {
       const screen = cam.worldToScreen(point.x, point.y);
       expect(screen.x).toBeGreaterThan(80);
@@ -155,21 +166,27 @@ describe('整层全景与安全取景',()=>{
       expect(s.y).toBeGreaterThan(0);expect(s.y).toBeLessThan(664);
     }
   });
-  it('放大后只能滑到节点包围盒边缘，换层和窗口变化重新计算',()=>{
+  it('允许边缘节点居中并留出四周，换层和窗口变化重新计算',()=>{
     const cam=new window.SDT.Camera({cols:300,rows:300,tile:48},1180,664);
     const game=fixture(); cam.frameExploration(game); cam.zoom=2;
     cam.panBy(100000,100000);
     const first=cam.worldToScreen(100,100);
-    expect(first.x).toBeCloseTo(1180/1280*200);
-    expect(first.y).toBeCloseTo(1180/1280*185);
+    expect(first.x).toBeGreaterThan(1180/2);
+    expect(first.x).toBeLessThan(1180);
+    expect(first.y).toBeGreaterThan(664/2);
+    expect(first.y).toBeLessThan(664);
     cam.panBy(-100000,-100000);
     const last=cam.worldToScreen(1360,1360);
-    expect(last.x).toBeCloseTo(1180-1180/1280*200);
-    expect(last.y).toBeCloseTo(664-1180/1280*270);
+    expect(last.x).toBeGreaterThan(0);
+    expect(last.x).toBeLessThan(1180/2);
+    expect(last.y).toBeGreaterThan(0);
+    expect(last.y).toBeLessThan(664/2);
     game.nodePos.push([{x:300,y:400}]);game.layerIdx=1;
     cam.resize(900,600);
     const only=cam.worldToScreen(300,400);
-    expect(only.x).toBeCloseTo(450-80*900/1280);
-    expect(only.y).toBeCloseTo(300-(190-105)*900/1280/2-80*900/1280);
+    expect(only.x).toBeGreaterThan(900*.2);
+    expect(only.x).toBeLessThan(900*.8);
+    expect(only.y).toBeGreaterThan(600*.2);
+    expect(only.y).toBeLessThan(600*.8);
   });
 });

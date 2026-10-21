@@ -6,11 +6,9 @@ import fs from 'node:fs';
 import postcss from 'postcss';
 
 describe('本批收获摘要与安全格可用性',()=>{
-  it('只按显式领取记录聚合同名，显示去向，不把箱子候选当收获',()=>{
-    document.body.innerHTML=chestRewardOverviewHTML({complete:true,claimedCards:[{name:'冰刺'},{name:'冰刺'},{name:'宠物蛋'}],boxes:[{index:0,name:'箱',completed:true,takenCount:3,lostCount:2}]});
-    const receipt=document.querySelector('.cqo-receipt');
-    expect(receipt.getAttribute('aria-label')).toBe('本次已入背包');
-    expect([...receipt.querySelectorAll('li')].map(el=>el.textContent)).toEqual(['冰刺 ×2','宠物蛋 ×1']);
+  it('领取完成保留继续探索入口，不显示入包汇总块',()=>{
+    document.body.innerHTML=chestRewardOverviewHTML({complete:true,boxes:[{index:0,name:'箱',completed:true,takenCount:3,lostCount:2}]});
+    expect(document.querySelector('.cqo-receipt')).toBeNull();
     expect(document.querySelector('[data-act=chestFinish]')).not.toBeNull();
   });
   it('全部放弃不伪造入背包记录，仍可继续',()=>{
@@ -52,13 +50,11 @@ describe('本批收获摘要与安全格可用性',()=>{
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(document.body.textContent).toContain('整叠需 0 格，安全格余 0 格');
   });
-  it('四项保留四列阅读宽度，完成摘要有限高可滚动',()=>{
+  it('四项保留四列阅读宽度，移除完成摘要样式',()=>{
     const css=postcss.parse(fs.readFileSync('game/css/chest-reward-overview.css','utf8'));
     const values=selector=>{const result={};css.walkRules(rule=>{if(rule.selectors.includes(selector))rule.walkDecls(decl=>result[decl.prop]=decl.value);});return result;};
     expect(values('body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-objects')).toMatchObject({'grid-template-columns':'repeat(4,280px)','max-width':'none'});
     const receipt=values('body #overlay .card .cqo-frame .cqo-receipt');
-    expect(receipt.overflow).toBe('auto');
-    expect(Number.parseFloat(receipt['max-height'])).toBeGreaterThan(0);
-    expect(Number.parseFloat(receipt['max-height'])).toBeLessThanOrEqual(180);
+    expect(receipt).toEqual({});
   });
 });

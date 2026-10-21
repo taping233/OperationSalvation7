@@ -157,9 +157,24 @@ describe('流程入口集成', () => {
     const manifest = fingerprint(project).manifest;
     const runner = parse(readFileSync(path.join(project, 'scripts/check-types.mjs'), 'utf8'),
       { ecmaVersion:'latest', sourceType:'module' });
-    const declaration = runner.body.filter(node => node.type === 'VariableDeclaration')
+    let declaration = runner.body.filter(node => node.type === 'VariableDeclaration')
       .flatMap(node => node.declarations).find(node => node.id.type === 'Identifier' && node.id.name === 'configs');
-    // Fail visibly if the runner stops using a literal list; never infer expected inputs from the fingerprint itself.
+    // Follow only the explicit local named import. The shared declaration must still
+    // be a literal list; expected inputs never come from the fingerprint itself.
+    if (declaration?.init?.type === 'Identifier') {
+      const binding = declaration.init.name;
+      const sharedImport = runner.body.find(node => node.type === 'ImportDeclaration'
+        && node.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && specifier.local.name === binding));
+      expect(sharedImport?.source?.value).toBe('./check-type-coverage.mjs');
+      const importedName = sharedImport.specifiers.find(specifier => specifier.local.name === binding).imported.name;
+      expect(importedName).toBe('TYPE_CONFIGS');
+      const provider = parse(readFileSync(path.join(project, 'scripts/check-type-coverage.mjs'), 'utf8'),
+        { ecmaVersion:'latest', sourceType:'module' });
+      declaration = provider.body.filter(node => node.type === 'ExportNamedDeclaration')
+        .map(node => node.declaration).filter(node => node?.type === 'VariableDeclaration')
+        .flatMap(node => node.declarations).find(node => node.id.type === 'Identifier' && node.id.name === importedName);
+      expect(manifest.some(item => item.file === 'scripts/check-type-coverage.mjs')).toBe(true);
+    }
     expect(declaration?.init?.type).toBe('ArrayExpression');
     const expectedConfigs = declaration.init.elements.map(node => {
       expect(node?.type).toBe('Literal');

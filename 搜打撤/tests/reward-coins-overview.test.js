@@ -77,13 +77,14 @@ it.each(['chestNext', 'chestOpen'])('开箱入口%s只收当前箱金币，卡�
   expect(h.draw).toHaveBeenCalledTimes(1);
   h.click('chestReveal'); h.click('chestTake1');
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([2]);
-  expect(h.body.querySelector('.cqo-progress').textContent).toContain('1箱待领');
+  expect(h.body.querySelector('.cqo-progress')).toBeNull();
+  expect(h.body.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(1);
   const saved = h.save(); expect(h.chests.restore(h.game, saved, done)).toBe(true);
   h.open();
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
   expect(h.draw).toHaveBeenCalledTimes(2);
   h.click('chestTake1');
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 0 · 已领 4');
+  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 4');
   h.click('chestFinish'); h.actions.chestFinish();
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
   expect(done).toHaveBeenCalledTimes(1);
@@ -107,7 +108,7 @@ it('先独立领首箱币，再开两箱只新增第二箱币，返回地图/重
   expect(restoreChestReward(h.game, saved)).toBeTruthy();
   expect(h.chests.restore(h.game, saved, done)).toBe(true);
   h.click('chestNext'); h.click('chestTake1');
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 0 · 已领 4');
+  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 4');
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([2, 2]);
   expect(h.draw).toHaveBeenCalledTimes(2);
 });
@@ -136,7 +137,7 @@ it.each(['chestTake', 'chestLeave'])('直接恢复待领卡牌层后%s不收币�
   h.click('chestOverviewCoins'); staleCoin();
   expect(h.game.gainCoins).toHaveBeenCalledExactlyOnceWith(3);
   expect(h.chests.restore(h.game, h.save(), done)).toBe(true);
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 0 · 已领 3');
+  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 3');
   h.click('chestFinish'); expect(done).toHaveBeenCalledTimes(1);
 });
 
@@ -168,7 +169,7 @@ it('多个已生成快照金币独立汇总，仅收未领箱且不重新抽卡'
   h.click('chestOverviewCoins'); stale();
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([3, 7]);
   expect(h.chests.restore(h.game, h.save(), vi.fn())).toBe(true);
-  expect(h.body.querySelector('.cqo-coins').textContent).toContain('待领 0 · 已领 15');
+  expect(h.body.querySelector('.cqo-coins').textContent).toContain('已收下 15');
   h.actions.chestOverviewCoins();
   expect(h.game.gainCoins.mock.calls.flat()).toEqual([3, 7]);
   expect(h.draw).not.toHaveBeenCalled();

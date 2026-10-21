@@ -30,13 +30,15 @@ const { forecastEnemyTurn } = await import('../game/src/battle/view/battle.turn-
 const { renderCombatPiles } = await import('../game/src/battle/view/battle.piles.view.js');
 const battleRuntime = await import('../game/src/battle/runtime/battle.runtime.js');
 const Aim = await import('../game/src/battle/view/battle.aim.js');
+const UnitFrames = await import('../game/src/battle/view/battle.frames.js');
 const Cards = window.SDT.Cards;
 Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
 const originalRaf = window.requestAnimationFrame;
 const originalAnimate = Element.prototype.animate;
 let frames, game;
 const stage = () => UI.el.ovBody.querySelector('.battle-stage');
-const bar = () => UI.el.ovBody.querySelector('.battle-decision[data-decision-kind="infusion"]') || stage()?.querySelector(':scope > .bt-infuse');
+const bar = () => stage()?.querySelector('[data-infusion-workspace]') || stage()?.querySelector(':scope > .bt-infuse');
+const material = uid => stage()?.querySelector(`.sts-hand .bt-card[data-uid="${uid}"]`);
 const snapshot = () => BattleSession.getSnapshot();
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
 async function settle() {
@@ -80,38 +82,38 @@ afterEach(async () => {
 });
 
 describe('shared infusion action bar', () => {
-  it('keeps the card face usable to reduce a full selection and restores add controls', () => {
+  it('moves actual copies to the selected area and restores the exact withdrawn copy', () => {
     start(); BattleSession.commands.beginInfusion('infusion'); flush();
     const before = snapshot();
-    for (let i = 0; i < 2; i++) { bar().querySelector('.infusion-card-face').click(); flush(); }
-    const face = bar().querySelector('.infusion-card-face');
+    for (const uid of ['fuel-a', 'fuel-b']) { material(uid).click(); flush(); }
+    const face = bar().querySelector('[data-act="btInfuseRemove"][data-uid="fuel-b"]');
     expect(snapshot().infusing.picked).toHaveLength(2);
     expect(face.disabled).toBe(false);
-    expect(face.getAttribute('aria-pressed')).toBe('true');
-    expect(face.getAttribute('aria-label')).toContain('减少一张');
-    expect(bar().querySelector('.infusion-material-note').textContent).toContain('材料已齐');
-    expect(bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]').title).toContain('材料已齐');
+    expect(face.getAttribute('aria-label')).toContain('撤回');
+    expect(bar().querySelector('.infusion-progress').classList.contains('is-ready')).toBe(true);
+    expect(material('fuel-b')).toBeNull();
     face.focus(); face.click(); flush();
     expect(snapshot().infusing.picked).toHaveLength(1);
-    expect(document.activeElement.dataset.act).toBe('btInfuseAdjust');
-    expect(bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]').disabled).toBe(false);
+    expect(document.activeElement.closest('.bt-card').dataset.uid).toBe('fuel-b');
+    expect(material('fuel-b')).not.toBeNull();
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
     expect(snapshot().energy).toBe(before.energy);
     expect(snapshot().hand).toEqual(before.hand);
-    bar().querySelector('.infusion-quantity [data-act="btInfuseRemove"]').click(); flush();
-    expect(bar().querySelector('.infusion-card-face').getAttribute('aria-pressed')).toBe('false');
-    expect(bar().querySelector('.infusion-material').classList.contains('is-selected')).toBe(false);
+    bar().querySelector('[data-act="btInfuseRemove"][data-uid="fuel-a"]').click(); flush();
+    expect(bar().querySelectorAll('.infusion-selected-card')).toHaveLength(0);
+    expect(material('fuel-a')).not.toBeNull();
   });
 
-  it('uses the same full-selection action for number keys and card faces', () => {
+  it('uses stable UID shortcuts for both copies and selected-card withdrawal', () => {
     start(); BattleSession.commands.beginInfusion('infusion'); flush();
-    for (let i = 0; i < 2; i++) { document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush(); }
-    bar().querySelector('.infusion-card-face').click(); flush();
-    expect(snapshot().infusing.picked).toHaveLength(1);
+    for (const key of ['1','2']) { document.dispatchEvent(new KeyboardEvent('keydown', {key, bubbles:true})); flush(); }
+    expect(snapshot().infusing.picked).toEqual(['fuel-a','fuel-b']);
+    bar().querySelector('[data-uid="fuel-b"]').click(); flush();
+    expect(snapshot().infusing.picked).toEqual(['fuel-a']);
     document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
-    expect(snapshot().infusing.picked).toHaveLength(2);
+    expect(snapshot().infusing.picked).toEqual([]);
     document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
-    expect(snapshot().infusing.picked).toHaveLength(1);
+    expect(snapshot().infusing.picked).toEqual(['fuel-a']);
   });
 
   it.each(['tt7-holyheal', 'tt3sp-bloodstorm'])('describes the actual pointer and keyboard infusion entrances for %s', cardId => {
@@ -139,13 +141,14 @@ describe('shared infusion action bar', () => {
     expect(snapshot().infusing.picked).toHaveLength(1);
   });
 
-  it('keeps a usable material focus when adding the last copy disables its button', () => {
+  it('moves keyboard focus with the selected material into its withdrawal button', () => {
     start(); BattleSession.commands.beginInfusion('infusion'); flush();
-    for (let i = 0; i < 2; i++) {
-      const add = bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]'); add.focus(); add.click(); flush();
+    for (const uid of ['fuel-a','fuel-b']) {
+      const face = material(uid).querySelector('.hs-card'); face.focus(); face.dispatchEvent(new KeyboardEvent('keydown', {key:'Enter', bubbles:true})); flush();
     }
     expect(snapshot().infusing.picked).toHaveLength(2);
-    expect(document.activeElement.dataset.act).toBe('btInfuseInspect');
+    expect(document.activeElement.dataset.act).toBe('btInfuseRemove');
+    expect(document.activeElement.dataset.uid).toBe('fuel-b');
     expect(document.activeElement.matches(':disabled')).toBe(false);
     expect(snapshot().energy).toBe(9);
   });
@@ -154,7 +157,7 @@ describe('shared infusion action bar', () => {
     start(); const oldGrave = actions.get('btGrave');
     BattleSession.commands.beginInfusion('infusion'); flush();
     oldGrave(); flush(); expect(snapshot().graveOpen).not.toBe(true); expect(bar()).not.toBeNull();
-    UI.el.overlay.classList.add('closing'); actions.get('btInfuseAdd')({i:'0'}); actions.get('btInfuseCancel')(); flush();
+    UI.el.overlay.classList.add('closing'); actions.get('btInfuseRemove')({uid:'fuel-a'}); actions.get('btInfuseCancel')(); flush();
     expect(snapshot().infusing.picked).toEqual([]); expect(snapshot().energy).toBe(9);
     UI.el.overlay.classList.remove('closing'); actions.get('btInfuseCancel')(); flush();
     expect(snapshot().infusing).toBeFalsy();
@@ -163,7 +166,7 @@ describe('shared infusion action bar', () => {
 
   it('invalidates pile callbacks after returning and reopening the same pile', () => {
     start(); actions.get('btGrave')(); flush();
-    const oldBack = actions.get('btGraveBack'), oldInspect = actions.get('btInspectPile');
+    const oldBack = actions.get('btGraveBack'), oldInspect = actions.get('btDecisionInspect');
     oldBack(); flush(); actions.get('btGrave')(); flush();
     const page = UI.el.ovBody.querySelector('.battle-decision');
     oldBack(); oldInspect({i:'0'}); flush();
@@ -171,14 +174,24 @@ describe('shared infusion action bar', () => {
     actions.get('btGraveBack')(); flush(); expect(UI.el.ovBody.querySelector('.battle-decision')).toBeNull();
   });
 
+  it('rejects old selection callbacks after cancelling and reopening the same source UID', () => {
+    start(); BattleSession.commands.beginInfusion('infusion'); flush();
+    const oldCancel=actions.get('btInfuseCancel'), oldConfirm=actions.get('btInfuseGo'), oldDirect=actions.get('btInfuseDirect'), oldRemove=actions.get('btInfuseRemove');
+    oldCancel(); flush(); BattleSession.commands.beginInfusion('infusion'); flush();
+    BattleSession.commands.selectInfusion('fuel-a'); BattleSession.commands.selectInfusion('fuel-b'); flush();
+    const current=bar(), before=snapshot();
+    oldCancel(); oldConfirm(); oldDirect(); oldRemove({uid:'fuel-a'}); flush();
+    expect(bar()).toBe(current);
+    expect(snapshot().infusing.picked).toEqual(['fuel-a','fuel-b']);
+    expect(snapshot().hand).toEqual(before.hand); expect(snapshot().energy).toBe(before.energy);
+  });
+
   it('disables direct play for a required infusion card, retaining selection and resources', () => {
     start({ cardId: 'tt12-raydragon', name: '龙焰射线' });
     BattleSession.commands.beginInfusion('infusion'); flush();
     const direct = bar().querySelector('[data-act="btInfuseDirect"]');
-    expect(direct.disabled).toBe(true);
-    expect(direct.textContent).toBe('必须注能后打出');
-    expect(direct.title).toContain('未注能时没有效果');
-    direct.click(); flush();
+    expect(direct).toBeNull();
+    actions.get('btInfuseDirect')(); flush();
     expect(snapshot().infusing.uid).toBe('infusion');
     expect(snapshot().energy).toBe(9); expect(snapshot().hand).toContain('infusion');
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
@@ -186,66 +199,81 @@ describe('shared infusion action bar', () => {
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(false);
   });
 
-  it('groups all copy separately from the three original actions and explains the real material cost', () => {
+  it('keeps the card rules, count and actions without repeating instructions', () => {
     start(); BattleSession.commands.beginInfusion('infusion'); flush();
-    expect(bar().querySelector('[data-infusion-workspace]')).not.toBeNull();
-    expect(bar().textContent).toContain('选择 2 张材料');
-    expect(bar().textContent).toContain('已选 0/2');
-    expect(bar().textContent).toContain('材料进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
-    expect(bar().textContent).toContain('道具、装备不可在火堆复原');
-    expect(bar().querySelector('.infusion-rules').textContent).toContain('触发 2 次');
+    expect(bar().hasAttribute('data-infusion-workspace')).toBe(true);
+    expect(bar().querySelector('.infusion-heading h3')).toBeNull();
+    expect(bar().querySelector('.infusion-progress').textContent).toBe('0/2');
+    expect(bar().querySelector('.infusion-destination')).toBeNull();
+    expect(bar().querySelector('.infusion-source h4')).toBeNull();
+    expect(bar().querySelector('.infusion-source-card .hsc-desc').textContent).toContain('触发 2 次');
     expect([...bar().querySelectorAll('.infusion-footer button')].map(button => button.dataset.act)).toEqual(['btInfuseCancel', 'btInfuseDirect', 'btInfuseGo']);
     expect(bar().querySelector('[data-act="btInfuseDirect"]').dataset.uid).toBe('infusion');
   });
 
-  it('puts material controls before artwork and folds duplicate source artwork across updates', () => {
-    start(); BattleSession.commands.beginInfusion('infusion'); flush();
-    const source = bar().querySelector('.infusion-source-details');
-    expect(source.open).toBe(false);
-    expect(source.querySelector('.infusion-source-card')).not.toBeNull();
-    expect(bar().querySelector('.infusion-rules').closest('details')).toBeNull();
-    const material = bar().querySelector('.infusion-material');
-    expect([...material.children].map(node => node.className)).toEqual([
-      'infusion-material-heading', 'infusion-quantity', 'infusion-card-face',
-    ]);
-    expect(material.querySelector('.infusion-quantity').textContent).toContain('已选 / 持有');
-    source.open = true;
-    material.querySelector('.infusion-quantity [data-act="btInfuseAdd"]').click(); flush();
-    expect(bar().querySelector('.infusion-source-details').open).toBe(true);
-    expect(bar().querySelector('.infusion-quantity b').textContent).toBe('1');
-    bar().querySelector('.infusion-quantity [data-act="btInfuseRemove"]').click(); flush();
-    expect(bar().querySelector('.infusion-quantity b').textContent).toBe('0');
-    bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
+  it('keeps the main card visible while actual material cards move between hand and selection', () => {
+    start(); const retainedStage = stage(), retainedHand = stage().querySelector('.sts-hand');
     BattleSession.commands.beginInfusion('infusion'); flush();
-    expect(bar().querySelector('.infusion-source-details').open).toBe(false);
+    expect(stage()).toBe(retainedStage);
+    expect(stage().querySelector('.sts-hand')).toBe(retainedHand);
+    expect(bar().querySelector('.infusion-source-card').closest('details')).toBeNull();
+    const sourceCard=bar().querySelector('.infusion-source-card');
+    const sourceRules=sourceCard.querySelector('.hsc-desc'); sourceRules.scrollTop=30;
+    expect(UI.el.ovBody.querySelector('.battle-secondary-layer')).toBeNull();
+    expect(material('fuel-a').querySelector('.infusion-copy-count').textContent).toBe('1');
+    material('fuel-b').click(); flush();
+    expect(bar().querySelector('.infusion-source-card')).toBe(sourceCard);
+    expect(sourceRules.scrollTop).toBe(30);
+    expect(material('fuel-b')).toBeNull();
+    expect(bar().querySelector('[data-selected-uid="fuel-b"] .infusion-copy-count')).toBeNull();
+    expect(bar().querySelector('[data-selected-uid="fuel-b"] button').getAttribute('aria-label')).toContain('同名已选1/2张');
+    expect(material('fuel-a').getAttribute('aria-label')).toContain('同名已选1张');
+    bar().querySelector('[data-act="btInfuseRemove"]').click(); flush();
+    expect(material('fuel-b')).not.toBeNull();
+    bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
+    expect(stage()).toBe(retainedStage);
+    expect(stage().querySelector('.sts-hand')).toBe(retainedHand);
   });
 
+  it('suspends overlay frames without adding combat readouts to the card workspace', () => {
+    const attach=vi.spyOn(UnitFrames,'attach'), hide=vi.spyOn(UnitFrames,'hide');
+    try {
+      start(); attach.mockClear(); hide.mockClear();
+      BattleSession.commands.beginInfusion('infusion'); flush();
+      expect(hide).toHaveBeenCalled(); expect(attach).not.toHaveBeenCalled();
+      expect(bar().querySelector('.infusion-battle-context,.sts-hp,.sts-intent')).toBeNull();
+      expect(stage().querySelectorAll('.sts-arena .sts-figure')).toHaveLength(3);
+      bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
+      expect(attach).toHaveBeenCalled();
+      expect(stage().querySelector('.infusion-battle-context')).toBeNull();
+    } finally { attach.mockRestore(); hide.mockRestore(); }
+  });
   it('updates exact material counts and preserves the disabled, cancel and reentry paths', () => {
     start(); BattleSession.commands.beginInfusion('infusion'); flush();
     const before = snapshot();
-    expect(bar().querySelector('.infusion-progress').textContent).toBe('已选 0/2');
+    expect(bar().querySelector('.infusion-progress').textContent).toBe('0/2');
     expect(bar().querySelector('.infusion-progress small')).toBeNull();
-    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('还需 2 张材料');
-    expect(bar().querySelector('.infusion-destination').textContent).toContain('仅由卡牌效果取回；战后进入消耗区');
-    expect(bar().querySelector('.infusion-destination').textContent).toContain('道具、装备不可在火堆复原');
-    expect(bar().querySelector('.infusion-footer p').textContent).toBe('下一步选目标，有效打出后才消耗');
+    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('确认');
+    expect(bar().querySelector('.infusion-destination')).toBeNull();
+    expect(bar().querySelector('.infusion-source h4')).toBeNull();
+    expect(bar().querySelector('.infusion-footer p')).toBeNull();
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
     BattleSession.commands.selectInfusion('fuel-a'); flush();
-    expect(bar().textContent).toContain('已选 1/2');
+    expect(bar().textContent).toContain('1/2');
     expect(bar().querySelector('.infusion-progress small')).toBeNull();
     expect(bar().textContent).not.toContain('还差');
-    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('还需 1 张材料');
+    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('确认');
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
     BattleSession.commands.selectInfusion('fuel-b'); flush();
-    expect(bar().textContent).toContain('已选 2/2');
-    expect(bar().querySelector('.infusion-progress small').textContent).toBe('材料已齐');
-    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('确认材料 · 选择目标');
+    expect(bar().textContent).toContain('2/2');
+    expect(bar().querySelector('.infusion-progress').classList.contains('is-ready')).toBe(true);
+    expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('确认');
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(false);
     bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
     expect(bar()).toBeNull(); expect(snapshot().infusing).toBeNull();
     expect(snapshot().energy).toBe(before.energy); expect(snapshot().hand).toEqual(before.hand);
     BattleSession.commands.beginInfusion('infusion'); flush();
-    expect(bar().textContent).toContain('已选 0/2');
+    expect(bar().querySelector('.infusion-progress').textContent).toBe('0/2');
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
   });
 
@@ -331,8 +359,8 @@ describe('shared infusion action bar', () => {
     const name = '<img src=x onerror=alert(1)>很长的注能规则牌名';
     start({ name }); BattleSession.commands.beginInfusion('infusion'); flush();
     render();
-    expect(bar().querySelector('.infusion-source h4').textContent).toContain(name);
-    expect(bar().querySelector('.infusion-source h4 img')).toBeNull();
+    expect(bar().querySelector('.infusion-source .hsc-name').textContent).toContain(name);
+    expect(bar().querySelector('.infusion-source .hsc-name img')).toBeNull();
     expect(bar().querySelectorAll('[data-act="btInfuseCancel"]')).toHaveLength(1);
   });
 
@@ -346,26 +374,20 @@ describe('shared infusion action bar', () => {
     expect(game.ownedCards.some(entry => entry.uid === 'potion')).toBe(true);
   });
 
-  it('hides the whole potion rail only during infusion and restores it after cancellation', () => {
-    const selector = '#overlay .battle-stage.sts:has(>.bt-infuse:not(.bt-pick))>.bt-potions';
-    const style = document.createElement('style');
-    postcss.parse(readFileSync('game/css/battle-stage.css', 'utf8')).walkRules(rule => {
-      if (rule.selector === selector) style.textContent = rule.toString();
-    });
-    expect(style.textContent).toContain('display:none'); document.head.appendChild(style);
+  it('locks the potion rail during material selection and restores it after cancellation', () => {
+    start({ potion:true });
     const potions = () => stage()?.querySelector(':scope > .bt-potions');
-    try {
-      start({ potion: true }); expect(window.getComputedStyle(potions()).display).not.toBe('none');
-      BattleSession.commands.beginInfusion('infusion'); flush();
-      expect(potions().closest('[inert]')).toBe(stage());
-      bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
-      expect(window.getComputedStyle(potions()).display).not.toBe('none');
-      BattleSession.commands.usePotion('potion'); flush();
-      expect(bar().classList.contains('bt-pick')).toBe(true);
-      expect(window.getComputedStyle(potions()).display).not.toBe('none');
-      bar().querySelector('[data-act="btPickCancel"]').click(); flush();
-      expect(window.getComputedStyle(potions()).display).not.toBe('none');
-    } finally { style.remove(); }
+    expect(potions().inert).toBe(false);
+    BattleSession.commands.beginInfusion('infusion'); flush();
+    expect(potions().inert).toBe(true);
+    expect(stage().inert).not.toBe(true);
+    bar().querySelector('[data-act="btInfuseCancel"]').click(); flush();
+    expect(potions().inert).toBe(false);
+    BattleSession.commands.usePotion('potion'); flush();
+    expect(bar().classList.contains('bt-pick')).toBe(true);
+    expect(potions().inert).toBe(false);
+    bar().querySelector('[data-act="btPickCancel"]').click(); flush();
+    expect(potions().inert).toBe(false);
   });
 });
 
@@ -467,7 +489,8 @@ describe('discovery source presentation and restoration copy', () => {
     }
     expect(candidates[0].getAttribute('aria-label')).toContain('随身牌来源');
     expect(candidates[1].getAttribute('aria-label')).toContain('本场临时牌来源');
-    expect(UI.el.ovBody.textContent).toContain('来自当前牌库底 · 选中牌以本场副本入手。使用或消耗后进入消耗牌堆');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('来自当前牌库底');
+    expect(UI.el.ovBody.querySelector('.battle-discover-rules')).toBeNull();
     expect(JSON.stringify(options)).toBe(beforeOptions);
     expect(JSON.stringify(game.ownedCards)).toBe(beforeOwned);
     expect(snapshot()).toEqual(before);
@@ -477,16 +500,17 @@ describe('discovery source presentation and restoration copy', () => {
     const state = { ...snapshot(), discovering: { options:[{ ...Cards.SHA }], n:1, act:'pouch', pouchUid:'pouch', pred:null } };
     const before = JSON.stringify(state);
     render(state);
-    expect(UI.el.ovBody.textContent).toContain('取出后立即施放，无需另付该法术费用');
-    expect(UI.el.ovBody.textContent).toContain('背包原牌随之消耗');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('取出后立即施放');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('背包原牌随之消耗');
     expect(UI.el.ovBody.textContent).not.toContain('战后消散');
     expect(JSON.stringify(state)).toBe(before);
   });
   it.each(['play', 'potion'])('keeps random free-cast discovery distinct from pouch origin: %s', act => {
     start();
     render({ ...snapshot(), discovering: { options:[{ ...Cards.SHA }], n:1, act } });
-    expect(UI.el.ovBody.textContent).toContain('选择 1 张免费施放');
-    expect(UI.el.ovBody.textContent).toContain('本场生成。使用或消耗后进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('选择 1 张免费施放');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('本场生成。使用或消耗后进入消耗牌堆');
+    expect(UI.el.ovBody.querySelector('.battle-discover-rules')).toBeNull();
     expect(UI.el.ovBody.textContent).not.toContain('背包原牌随之消耗');
   });
   it('keeps the random-discovery temporary-card copy and supplied faces unchanged', () => {
@@ -495,7 +519,8 @@ describe('discovery source presentation and restoration copy', () => {
     const candidate = UI.el.ovBody.querySelector('[data-act="btDiscover"]');
     expect(candidate.getAttribute('aria-label')).toContain('初始攻击');
     expect(candidate.title).not.toContain('来源');
-    expect(UI.el.ovBody.textContent).toContain('本场生成。使用或消耗后进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
+    expect(UI.el.ovBody.querySelector('[data-battle-discover]').getAttribute('aria-label')).toContain('本场生成。使用或消耗后进入消耗牌堆');
+    expect(UI.el.ovBody.querySelector('.battle-discover-rules')).toBeNull();
     expect(UI.el.ovBody.textContent).not.toContain('来自当前牌库底');
   });
   it('falls back to the supplied face without inventing ownership for an unresolved source UID', () => {
@@ -520,15 +545,25 @@ describe('focused infusion workspace layout contract', () => {
     css.walkRules(rule => { if (rule.selector === selector) rule.walkDecls(decl => { found[decl.prop] = decl.value; }); });
     return found;
   }
-  it('keeps source rules beside an independently scrolling material grid', () => {
-    expect(declarations('body #overlay [data-infusion-workspace]')).toMatchObject({ display:'grid', 'grid-template-columns':'300px minmax(0,1fr)', 'min-height':'0' });
-    expect(declarations('body #overlay .infusion-materials')).toMatchObject({ overflow:'auto', 'min-height':'0', display:'grid', 'overscroll-behavior':'contain' });
-    expect(declarations('body #overlay .infusion-selection-summary')).toMatchObject({ display:'none' });
-    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ 'font-size':'13px' });
+  it('keeps source and selected cards over the retained battlefield with a separate hand rail', () => {
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace]')).toMatchObject({ position:'absolute', inset:'0', 'pointer-events':'none' });
+    expect(declarations('body #overlay .infusion-selected-cards')).toMatchObject({ overflow:'auto', 'min-height':'0', display:'flex', 'overscroll-behavior':'contain' });
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand')).toMatchObject({ display:'flex', overflow:'auto', height:'340px' });
+    expect(declarations('body #overlay .infusion-source-card .hs-card')).toMatchObject({ width:'300px' });
   });
-  it('keeps quantity buttons distinct and selection visibly outlined', () => {
-    expect(declarations('body #overlay .infusion-quantity>button')).toMatchObject({ width:'48px', height:'46px', flex:'none' });
-    expect(declarations('body #overlay .infusion-material.is-selected')).toMatchObject({ 'border-color':'#c3e3e5' });
-    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ 'pointer-events':'none' });
+  it('gives selected cards a distinct outline and full-card withdrawal affordance', () => {
+    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ outline:'2px solid #bfe3e1', 'pointer-events':'none' });
+    expect(declarations('body #overlay .infusion-card-return')).toMatchObject({ position:'absolute' });
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot')).toMatchObject({ position:'relative', transform:'none' });
+  });
+  it('blurs only the selection background and suspends external foreground layers', () => {
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] :is(.sts-topbar,.bt-potions,.sts-resource-dock,.sts-hud-r,.sts-hand-tools,.sts-tactics)')).toMatchObject({ visibility:'hidden', 'pointer-events':'none' });
+    const scopedForeground=[];
+    css.walkRules(rule=>{ if (rule.selector.includes('> :is(#unitFrames,.battle-scene-foreground)')) { scopedForeground.push(rule); } });
+    expect(scopedForeground).toHaveLength(1);
+    expect(scopedForeground[0].selector).toContain(':has(.battle-stage.sts[data-infusion-mode])');
+    expect(scopedForeground[0].nodes.find(node=>node.prop==='visibility').value).toBe('hidden');
+    expect(declarations('body #overlay .battle-stage.sts[data-infusion-mode] > .sts-arena')).toMatchObject({ filter:'blur(7px)', opacity:'.72' });
+    expect(declarations('body #overlay .infusion-battle-context')).toEqual({});
   });
 });

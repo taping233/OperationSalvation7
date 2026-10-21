@@ -69,7 +69,7 @@ describe('当前/可达节点辉光呼吸窗口', () => {
     drawMapNodeBadge(selected, 'blank', '可以前往', 'selected', { reachable: true, pulse: 0 });
     drawMapNodeBadge(distant, 'blank', '远处', 'known');
     expect(selected.createRadialGradient).toHaveBeenCalledTimes(1);
-    expect(selected.gradient.addColorStop.mock.calls[0][1]).toContain('0.480');
+    expect(selected.gradient.addColorStop.mock.calls[0][1]).toContain('0.240');
     expect(distant.createRadialGradient).not.toHaveBeenCalled();
   });
 });

@@ -100,7 +100,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
     // 当前入口单击普通卡即委派特写，库存变更仍由特写事务动作负责。
     expect(document.getElementById('cardZoom')).not.toBeNull();
     expect(openCard).toHaveBeenCalledTimes(1);
-    expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('乙');
+    expect(source.getAttribute('aria-pressed')).toBe('true');
     expect(JSON.stringify(base.data)).toBe(before);
     const from = source;
     expect(openCard).toHaveBeenCalledWith(1, { from });

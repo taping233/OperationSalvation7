@@ -3,7 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const ports = vi.hoisted(() => ({ convert: vi.fn(), read: vi.fn(), refresh: vi.fn(), ding: vi.fn() }));
 vi.mock('../game/src/hub/base.commands.js', () => ({ readBase: ports.read, readBaseReceipt: vi.fn(), commitBase: vi.fn() }));
-vi.mock('../game/src/home/home.presenter.js', () => ({ homeErrorMessage: result => result.message }));
+vi.mock('../game/src/home/home.presenter.js', () => { throw new Error('Retired Home presenter evaluated by warehouse'); });
+vi.mock('../game/src/home/home.commands.js', () => { throw new Error('Retired Home commands evaluated by warehouse'); });
+vi.mock('../game/src/home/home.catalog.js', () => { throw new Error('Retired furniture catalog evaluated by warehouse'); });
 vi.mock('../game/src/hub/collection.commands.js', () => ({ convertCollection: ports.convert, stackKeyOf: stack => `card:${stack.card.id}${stack.card.variantKey ? ':' + stack.card.variantKey : ''}`, getCharacter: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.bridge.js', () => ({ homeRequestId: () => 'inventory-audit', slots: { renderHub: ports.refresh } }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: { ding: ports.ding } }));
@@ -250,7 +252,7 @@ it.each([[false, 'variant'], [true, 'variant'], [false, 'id'], [true, 'id']])('�
   document.querySelector('.hub-page').innerHTML=feature.warehouseHTML(pocket ? 'pocket' : 'cards');
   feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},openCard:pages.openStashCardView});
   document.querySelectorAll('.stash-cell')[1].click();
-  const selected=document.querySelector('.warehouse-selection-v12'); expect(selected.textContent).toContain('2 张');
+  expect(document.querySelectorAll('.stash-cell')[1].getAttribute('aria-pressed')).toBe('true');
   if(pocket) expect(button('restoreCard').dataset.stackKey).toBe(identity === 'variant' ? 'card:growth:second' : 'card:second');
   else expect(document.querySelector('.inspect-count').textContent).toContain('2');
 });
@@ -271,7 +273,7 @@ it('基地材料入口不依赖标准资源卡存在，关闭后可再次查看�
   pages.openRawItem('wood');
   expect(document.querySelector('#cardZoom .cz-card').textContent).toBe('木材');
   expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('基地木材库存 7 份');
-  expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('资源卡需在仓库详情使用');
+  expect(document.querySelector('#cardZoom .cz-foot').textContent).toContain('在仓库使用后计入');
   document.querySelector('#cardZoom .cz-backdrop').click();
   pages.openRawItem('wood'); expect(document.querySelector('#cardZoom')).not.toBeNull();
   expect(base.data.wood).toBe(7); expect(base.useStashMaterial).not.toHaveBeenCalled();
@@ -381,3 +383,14 @@ it('仓库资源卡单击使用一张，刷新页面，旧页面不能再消费'
 });
 
 function clickAction(element) { ui.lastAction = undefined; element.click(); return ui.lastAction; }
+
+it('仓库确认转换读取失败保留原错误文案与库存', async () => {
+  open(growth);
+  await ui._acts.stashCollectOne();
+  const before = structuredClone(base.data);
+  ports.read.mockReturnValue({ ok: false, code: 'SAVE_FAILED' });
+  await ui._acts.stashCollectOne();
+  expect(ui.log).toHaveBeenCalledWith('保存失败，原布局仍然保留。', 'warn');
+  expect(ports.convert).not.toHaveBeenCalled();
+  expect(base.data).toEqual(before);
+});

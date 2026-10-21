@@ -161,3 +161,9 @@ it('identifies its native animations without claiming an older component tween',
   motion.clearVisual(element);
   expect(motion.ownsVisualAnimation(element, owned)).toBe(false);
 });
+it('keeps the injected runner easing and timing arguments unchanged', () => {
+  const { element, run, motion } = setup();
+  motion.retargetVisual(element, { opacity:1 }, { duration:245, delay:12, easing:'linear' });
+  expect(run).toHaveBeenCalledOnce();
+  expect(run.mock.calls[0][2]).toEqual({ duration:0.245, delay:0.012, ease:'linear' });
+});

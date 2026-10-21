@@ -16,20 +16,20 @@ const actions = new Map();
 const UI = {
   el:{}, act:(name, action) => actions.set(name, action), refresh() {},
   showOverlay(_title, html) { this.el.ovBody.innerHTML = html; },
+  showCardZoom:vi.fn(),
 };
-window.SDT = { UI, Cards:{ cardHTML:card => `<div class="hs-card" data-card-id="${card.id}">${card.name}</div>` } };
+window.SDT = { UI, Cards:{ cardHTML:(card,size) => `<div class="hs-card" data-card-id="${card.id}" data-size="${size}">${card.name}<div class="hsc-desc" tabindex="0">${card.desc}</div></div>` } };
 const { renderDeckPileView, renderGrave } = await import('../game/src/battle/view/battle.overlays.js');
 
-const source = readFileSync('game/css/battle-hand-overhaul.css', 'utf8');
+const source = readFileSync('game/css/battle-pile-view.css', 'utf8');
 const css = postcss.parse(source);
-const scope = 'body #overlay .battle-decision[data-decision-kind="pile"]';
-const shell = 'body #overlay .card:has(.battle-decision[data-decision-kind="pile"])';
-function values(selector, narrow = false) {
+const scope = 'body #overlay .battle-decision.battle-decision-unified[data-decision-kind="pile"]';
+const panel = `${scope}:has([data-battle-pile-view])`;
+function values(selector) {
   const result = {};
   css.walkRules(rule => {
     if (!rule.selector.split(',').map(value => value.trim()).includes(selector)) return;
-    const inNarrowRule = rule.parent.type === 'atrule' && rule.parent.params === '(max-width:900px)';
-    if (inNarrowRule !== narrow) return;
+    if (rule.parent.type === 'atrule') return;
     rule.walkDecls(declaration => { result[declaration.prop] = declaration.value; });
   });
   return result;
@@ -37,8 +37,10 @@ function values(selector, narrow = false) {
 
 beforeEach(() => {
   actions.clear(); fixture.entries.clear();
+  UI.showCardZoom.mockClear();
   document.body.innerHTML = '<div id="overlay"><div class="card"><div id="ovBody"></div></div></div>';
   UI.el.ovBody = document.getElementById('ovBody');
+  UI.el.overlay = document.getElementById('overlay');
   const first = { id:'pile-short', name:'短规则牌', type:'武术', cost:1, desc:'造成 2 点攻击伤害。' };
   const second = { id:'pile-long', name:'长规则牌', type:'装备', cost:2, desc:`对战开始时：${'完整规则需要逐行读完。\n'.repeat(90)}最后一行也必须保留。` };
   fixture.entries.set('first', { uid:'first', card:first });
@@ -51,48 +53,33 @@ beforeEach(() => {
 });
 
 describe('shared deck and consumed-pile reading surface', () => {
-  it('limits the larger shell and readable typography to pile decisions', () => {
-    const start = source.indexOf('/* 牌库与消耗牌共用阅读尺寸');
-    const end = source.indexOf('body #overlay .battle-decision[data-decision-kind="bag"]', start);
-    const patch = postcss.parse(source.slice(start, end));
-    expect(start).toBeGreaterThan(0); expect(end).toBeGreaterThan(start);
-    patch.walkRules(rule => expect(rule.selector).toContain('[data-decision-kind="pile"]'));
-    expect(values(shell)).toMatchObject({ width:'min(1680px,94%)', height:'94%', 'max-width':'94%', 'max-height':'94%', 'min-width':'0' });
-    expect(values(`${scope} .battle-decision-head h3`)['font-size']).toBe('34px');
-    expect(values(`${scope} .battle-decision-inspect-rules`)['font-size']).toBe('var(--card-copy-size,24px)');
-    expect(24 * 1188 / 1920).toBeGreaterThan(14);
-    expect(parseFloat(values(`${scope} .battle-decision-actions .ov-btn`)['min-height']) * 1188 / 1920).toBeGreaterThan(36);
+  it('scopes the centered full-card surface and retained battlefield treatment to pile views', () => {
+    css.walkRules(rule => expect(rule.selector).toContain('[data-battle-pile-view]'));
+    expect(values(panel)).toMatchObject({ width:'1700px', height:'900px', 'max-width':'100%', 'max-height':'100%', 'min-width':'0', 'min-height':'0' });
+    expect(values(`${panel} .battle-decision-head h3`).font).toContain('36px');
+    expect(values('body #overlay:has([data-battle-pile-view]) #ovBody > .battle-stage.sts')).toMatchObject({ filter:'blur(7px)', opacity:'.72' });
+    expect(values('body #overlay .battle-secondary-layer:has([data-battle-pile-view])::before').background).toBe('#050d1766');
   });
 
-  it('fits exactly three 320px card tracks beside a readable rules column at the approved layout', () => {
-    expect(values(`${scope} .battle-pile-layout`)).toMatchObject({ 'grid-template-columns':'minmax(0,1fr) minmax(400px,30%)', gap:'32px' });
-    expect(values(`${scope} .bt-gy-list`)).toMatchObject({ 'grid-template-columns':'repeat(auto-fit,minmax(min(100%,320px),1fr))', gap:'28px', overflow:'visible' });
-    expect(values(`${scope} .battle-pile-card`)).toMatchObject({ width:'320px', 'max-width':'100%', 'min-width':'0', padding:'0' });
-    expect(values(`${scope} .battle-pile-card .hs-card`)).toMatchObject({ width:'100%', 'max-width':'100%', 'font-size':'32px' });
-    const innerWidth = 1680 - 2 - 60 - 17;
-    const listWidth = innerWidth - Math.max(400, innerWidth * .3) - 32;
-    expect(3 * 320 + 2 * 28).toBeLessThanOrEqual(listWidth);
-    expect(4 * 320 + 3 * 28).toBeGreaterThan(listWidth);
+  it('centers full-width card tracks without reserving a duplicate rules sidebar', () => {
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-grid`)).toMatchObject({ 'grid-template-columns':'repeat(auto-fit,280px)', 'justify-content':'center', 'justify-items':'center', gap:'36px 40px' });
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-card`)).toMatchObject({ width:'280px', padding:'0', 'max-width':'none' });
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-card > .hs-card`)).toMatchObject({ width:'280px', 'font-size':'24px', 'pointer-events':'none' });
+    expect(source).not.toContain('.battle-decision-inspect');
   });
 
-  it('keeps long rules scrollable in the middle and gives keyboard-focused cards safe scroll margins', () => {
-    expect(values(scope)).toMatchObject({ flex:'1 1 auto', height:'100%', 'max-height':'none' });
-    expect(values(`${scope} .battle-decision-content`)).toMatchObject({ flex:'1 1 auto', overflow:'auto', 'scroll-padding':'16px', 'min-width':'0' });
-    expect(values(`${scope} .battle-decision-inspect`)).toMatchObject({
-      'max-height':'calc(var(--game-layout-height,100vh) * .94 - 332px)', overflow:'auto', 'overflow-wrap':'anywhere', 'scroll-padding':'12px',
-    });
-    expect(values(`${scope} .battle-pile-card`)['scroll-margin']).toBe('16px');
-    expect(values(`${scope} .battle-decision-inspect-rules`)['overflow-wrap']).toBe('anywhere');
-    const rule = values(`${scope} .battle-decision-inspect-rules`);
-    expect(rule['line-clamp']).toBeUndefined(); expect(rule['-webkit-line-clamp']).toBeUndefined();
+  it('scrolls the grid independently while the title and return remain outside it', () => {
+    expect(values(`${panel} .battle-decision-content`)).toMatchObject({ flex:'1 1 auto', overflow:'hidden', 'min-height':'0' });
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-grid`)).toMatchObject({ 'overflow-y':'auto', 'overflow-x':'hidden', 'overscroll-behavior':'contain' });
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-card`)['scroll-margin-block']).toBe('14px');
+    expect(values(`${panel} .battle-decision-actions`).flex).toBe('none');
+    expect(values(`${panel} .battle-pile-back`)).toMatchObject({ 'min-width':'180px', 'min-height':'60px' });
   });
 
-  it('removes the rules-column minimum and nested scrolling in narrow windows', () => {
-    expect(values(`${scope} .battle-pile-layout`, true)['grid-template-columns']).toBe('minmax(0,1fr)');
-    expect(values(`${scope} .battle-decision-inspect`, true)).toMatchObject({ position:'static', 'max-height':'none', overflow:'visible' });
-    expect(values(`${scope} .battle-decision-actions .ov-btn`, true)).toMatchObject({ 'min-width':'0', width:'100%' });
-    expect(values(`${scope} .battle-decision-head`)['flex-wrap']).toBe('wrap');
-    expect(values(`${scope} .battle-decision-head > span`)['white-space']).toBe('normal');
+  it('keeps quantity and keyboard focus clear without adding motion for reduced-motion users', () => {
+    expect(values('body #overlay [data-battle-pile-view] .battle-pile-count')).toMatchObject({ position:'absolute', top:'10px', right:'12px', 'pointer-events':'none' });
+    expect(values(`${scope} [data-battle-pile-view] .battle-pile-card:focus-visible`).outline).toBe('3px solid #c5e3ed');
+    expect(values('body.reduce-motion #overlay [data-battle-pile-view] .battle-pile-card').transition).toBe('none');
   });
 
   it.each([
@@ -104,18 +91,22 @@ describe('shared deck and consumed-pile reading surface', () => {
     const root = UI.el.ovBody.querySelector('.battle-decision[data-decision-kind="pile"]');
     const cards = [...root.querySelectorAll('.battle-pile-card')];
     expect(cards).toHaveLength(2);
-    expect(cards[0].querySelector('.bt-count').textContent).toBe('×2');
+    const short=cards.find(button=>button.querySelector('[data-card-id="pile-short"]'));
+    const long=cards.find(button=>button.querySelector('[data-card-id="pile-long"]'));
+    expect(short.querySelector('.battle-pile-count').textContent).toBe('×2');
+    expect(cards.every(button=>button.querySelector('.hs-card').dataset.size==='lg')).toBe(true);
+    expect(cards.every(button=>button.querySelector('[tabindex]').tabIndex===-1)).toBe(true);
+    expect(root.querySelector('.battle-pile-total').textContent).toBe('3 张');
+    expect(root.querySelector('.battle-decision-inspect')).toBeNull();
     expect(root.querySelector('.battle-decision-actions').contains(root.querySelector(`[data-act="${backAction}"]`))).toBe(true);
     expect(root.querySelector('.battle-decision-content').contains(root.querySelector(`[data-act="${backAction}"]`))).toBe(false);
-    cards[1].focus(); actions.get('btInspectPile')(cards[1].dataset);
-    expect(document.activeElement).toBe(cards[1]);
-    expect(cards[1].getAttribute('aria-pressed')).toBe('true');
-    expect(cards[0].getAttribute('aria-pressed')).toBe('false');
-    expect(root.querySelector('.battle-decision-inspect-rules').textContent).toBe(fixture.entries.get('second').card.desc);
-    expect(root.querySelector('.battle-decision-inspect .ov-note').textContent).toContain('仅在 BOSS 战编入本场牌库');
-    cards[0].focus(); actions.get('btInspectPile')(cards[0].dataset);
-    expect(document.activeElement).toBe(cards[0]);
-    expect(root.querySelector('.battle-decision-inspect h4').textContent).toBe('短规则牌');
+    long.focus(); actions.get('btDecisionInspect')(long.dataset);
+    expect(document.activeElement).toBe(long);
+    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('second').card,{returnFocus:long});
+    expect(long.querySelector('.hsc-desc').textContent).toBe(fixture.entries.get('second').card.desc);
+    short.focus(); actions.get('btDecisionInspect')(short.dataset);
+    expect(UI.showCardZoom).toHaveBeenLastCalledWith(fixture.entries.get('first').card,{returnFocus:short});
+    expect(UI.el.ovBody.querySelector('.battle-decision')).toBe(root);
     expect(JSON.stringify(fixture.snapshot)).toBe(before);
   });
 });

@@ -36,7 +36,7 @@ let frames, game;
 beforeEach(() => {
   frames = []; actions.clear();
   vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
-  document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"><div class="battle-stage"><div class="sts-hud"><div class="sts-hand"></div></div></div></div></div></div>';
+  document.body.innerHTML = '<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"><div class="battle-stage sts"><div class="sts-hud"><div class="sts-hand"></div></div></div></div></div></div>';
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
   UI._lastMode = null;
 });
@@ -81,8 +81,8 @@ describe('battle page input and DOM work', () => {
   it('shares one fresh snapshot per material shortcut and sees in-place changes before repaint', () => {
     const { getSnapshot, commands, snapshot } = infusionPage();
     key('1'); key('1'); key('1');
-    expect(commands.selectInfusion.mock.calls).toEqual([['a'], ['b'], ['a']]);
-    expect(snapshot.infusing.picked).toEqual(['b']);
+    expect(commands.selectInfusion.mock.calls).toEqual([['a'], ['a'], ['a']]);
+    expect(snapshot.infusing.picked).toEqual(['a']);
     expect(getSnapshot).toHaveBeenCalledTimes(3);
     snapshot.busy = true; key('1');
     expect(commands.selectInfusion).toHaveBeenCalledTimes(3);
@@ -101,7 +101,7 @@ describe('battle page input and DOM work', () => {
     expect(commands.confirmInfusion).toHaveBeenCalledOnce();
     getSnapshot.mockClear();
     UI.el.overlay.appendChild(Object.assign(document.createElement('div'), { id: 'cardZoom' }));
-    key('1'); actions.get('btInfuseAdd')({ i: '0' });
+    key('1'); key('2');
     expect(getSnapshot).not.toHaveBeenCalled();
     document.getElementById('cardZoom').remove(); UI.el.overlay.hidden = true;
     key('1'); expect(getSnapshot).not.toHaveBeenCalled();
@@ -160,7 +160,7 @@ describe('battle page input and DOM work', () => {
     const readyWrites = observer.takeRecords().length; observer.disconnect();
     expect(panel.getAttribute('aria-busy')).toBe('false');
     expect([...panel.querySelectorAll('[data-act="btDiscover"]')].every(button => !button.hasAttribute('aria-disabled'))).toBe(true);
-    expect(UI.el.ovBody.querySelector('.battle-discover-progress').textContent).toContain('剩余');
+    expect(UI.el.ovBody.querySelector('.battle-discover-progress').textContent).toBe('1');
     console.log('BATTLE_DISCOVER_PERF', JSON.stringify({ openingFrames: 20, candidates: 2, openingWrites, readyWrites }));
     if (process.env.BATTLE_PAGE_PERF_BASELINE !== '1') expect(openingWrites).toBe(0);
   });

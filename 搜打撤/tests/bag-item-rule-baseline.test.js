@@ -67,7 +67,8 @@ function setScenario({ hp = 20, maxHp = 100, ownedCards = [], usedPocket = [], i
 }
 
 async function useItem(cardId, uid) {
-  bag.showBackpack();
+  document.getElementById('cardZoom')?._closeCardZoom?.(true);
+  bag.showBackpack(true);
   const card = typeof cardId === 'string' ? window.SDT.Cards.all().find(c => c.id === cardId) : cardId;
   const inspect = [...document.querySelectorAll('.bag-grid [data-act="inspectStack"]')]
     .find(el => el.dataset.name === card.name);
@@ -80,7 +81,7 @@ async function useItem(cardId, uid) {
   use.click();
   // Disabled restoration keeps its detail open; close it before the next isolated scenario.
   if (use.disabled) zoom.querySelector('.cz-backdrop')?.click();
-  await vi.advanceTimersByTimeAsync(280);
+  await vi.advanceTimersByTimeAsync(340);
   return uid;
 }
 
@@ -219,7 +220,8 @@ describe('复原道具满包零收益保护', () => {
     const inventory = Array.from({length:session.bagCap() - 1}, (_, i) => ({name:`满包物资${i}`, count:1}));
     setScenario({ownedCards, inventory, usedPocket:[{card:{...sampleCard}, count:2}]});
     const before = JSON.stringify({owned:game.ownedCards, pocket:game.usedPocket});
-    bag.showBackpack();
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+  bag.showBackpack(true);
     const tile = [...document.querySelectorAll('[data-act="inspectStack"]')].find(el => el.dataset.name === card.name);
     expect(tile.querySelector('.bag-tstate').textContent).toBe('需腾位');
     expect(tile.querySelector('.bag-tstate').title).toContain('背包空间不足');
@@ -239,7 +241,8 @@ describe('复原道具满包零收益保护', () => {
   it('满包只剩一张结晶时可腾出其格，仍允许复原', async () => {
     const inventory = Array.from({length:session.bagCap() - 1}, (_, i) => ({name:`单张物资${i}`, count:1}));
     setScenario({ownedCards:[{uid:'last-crystal', card:crystal}], inventory, usedPocket:[{card:{...sampleCard}, count:2}]});
-    bag.showBackpack();
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+  bag.showBackpack(true);
     const tile = [...document.querySelectorAll('[data-act="inspectStack"]')].find(el => el.dataset.name === crystal.name);
     expect(tile.querySelector('.bag-tstate').textContent).toBe('可用');
     tile.click();

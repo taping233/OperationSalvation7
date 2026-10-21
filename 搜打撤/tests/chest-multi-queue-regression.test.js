@@ -40,7 +40,8 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   };
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
-  expect(ovBody.querySelector('.cqo-progress').getAttribute('aria-label')).toBe('2 箱待领，共 2 箱');
+  expect(ovBody.querySelector('.cqo-progress')).toBeNull();
+  expect(ovBody.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(2);
   ovBody.querySelector('[data-act="chestNext"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();
   const previews = [...ovBody.querySelectorAll('[data-act="chestSelect"]')];
@@ -64,7 +65,8 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   ovBody.querySelector('[data-act="chestLeave"]').click();
   expect(ovBody.querySelector('.cqo-overview')).not.toBeNull();
   continueChestRewards(actions);
-  expect(ovBody.querySelector('.cqo-progress').getAttribute('aria-label')).toBe('1 箱待领，共 2 箱');
+  expect(ovBody.querySelector('.cqo-progress')).toBeNull();
+  expect(ovBody.querySelectorAll('.cqo-box:not(:disabled)')).toHaveLength(1);
   expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
   ovBody.querySelector('[data-act="chestNext"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();

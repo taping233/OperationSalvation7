@@ -73,17 +73,17 @@ it('reduced motion reveals once readiness completes without a decorative exit wa
   document.body.classList.remove('reduce-motion');
 });
 
-it('backpack return retains a transparent input guard until the first map frame', async () => {
+it('backpack return retains the shared page curtain until map readiness and reveal', async () => {
   let ready; const prepare = vi.fn(() => new Promise(resolve => { ready = resolve; }));
   window.SDT = { Renderer: { prepare } };
   const game = { discoveredPairs: [], runActive: true, battleActive: false, nestActive: false };
-  stageMapReturn(ui, game, { kind: 'panel' });
+  stageMapReturn(ui, game);
   ui.el.overlay.hidden = true;
   await vi.advanceTimersByTimeAsync(32);
   const cover = document.querySelector('.page-visual-return');
-  expect(cover.dataset.kind).toBe('panel'); expect(cover.children).toHaveLength(0);
+  expect(cover.dataset.kind).toBe('page'); expect(cover.querySelector('.transition-heading').textContent).toBe('返回探索');
   expect(prepare).toHaveBeenCalledOnce();
-  ready(); await vi.advanceTimersByTimeAsync(300);
+  ready(); await vi.advanceTimersByTimeAsync(2000);
   expect(document.querySelector('.page-visual-return')).toBeNull();
 });
 

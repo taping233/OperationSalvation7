@@ -78,7 +78,7 @@ describe('地图玩家可见编号', () => {
     game.layerData[0].logical = Array.from({ length: idx + 1 }, () => ({ next: [], def: node.def }));
     game.toggles.index = true;
     Renderer.draw(ctx, game);
-    expect(ctx.fillText.mock.calls.filter(([text]) => /^\d+$/.test(text)).map(([text]) => text)).toEqual([String(idx + 1)]);
+    expect(ctx.fillText.mock.calls.filter(([text]) => /^\d+$/.test(text)).map(([text]) => text)).toEqual([]);
     expect(node.idx).toBe(idx); expect(game.trackPos).toBe(idx);
     ctx.fillText.mockClear(); game.toggles.index = false; Renderer.draw(ctx, game);
     expect(ctx.fillText.mock.calls.filter(([text]) => /^\d+$/.test(text))).toEqual([]);

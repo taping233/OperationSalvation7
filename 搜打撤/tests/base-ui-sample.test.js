@@ -98,13 +98,12 @@ describe('base page and inventory return contracts', () => {
     window.SDT.Cards = { cardHTML:item => `<span>${item.name}</span>` };
     document.body.innerHTML = warehouseHTML();
     expect(document.querySelector('.warehouse-protected')).toBeNull();
-    expect(document.querySelector('.warehouse-selection-v12').textContent).not.toContain('收藏保护');
+    expect(document.querySelector('.warehouse-selection-v12')).toBeNull();
     expect(base.isCollected).not.toHaveBeenCalled();
 
     base.isCollectionProtected.mockReturnValue(true);
     document.body.innerHTML = warehouseHTML();
     expect(document.querySelector('.warehouse-protected').textContent).toBe('收藏保护');
-    expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('收藏保护');
   });
 
   it('moves glass regions during base subpage entry without animating opacity', () => {

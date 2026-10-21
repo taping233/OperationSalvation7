@@ -91,6 +91,34 @@ describe('新增领域模块的默认保护', () => {
 });
 
 describe('AST 架构检查的识别与负面场景', () => {
+  it.each([
+    "import SDT from '../core/sdt-facade.js'; const MAP = SDT.MAP;",
+    "import facade from '../core/sdt-facade.js'; const MAP = facade.MAP;",
+    "import { default as facade } from '../core/sdt-facade.js'; const FX = facade.FX;",
+    "import * as facade from '../core/sdt-facade.js'; const FX = facade.default.FX;",
+  ])('会话内核不得恢复门面属性捕获：%s', source => {
+    const problems = architectureViolations(graphOf({
+      'run/game.session.kernel.js': source,
+      'core/sdt-facade.js': 'export default {};',
+    }));
+    expect(problems).toHaveLength(1);
+    expect(problems[0]).toContain('业务依赖须直接导入');
+  });
+
+  it('会话内核允许显式业务依赖与兼容发布，基础依赖禁止浏览器捕获', () => {
+    const files = {
+      'run/game.session.kernel.js': "import { sdtDefine } from '../core/sdt-facade.js'; import { MAP } from '../core/mapData.js'; import { FX } from '../core/renderer.fx.js'; sdtDefine('game', { map: MAP, fx: FX });",
+      'core/sdt-facade.js': 'export const sdtDefine = (name, value) => value;',
+      'core/mapData.js': 'export const MAP = {};',
+      'core/renderer.fx.js': 'export const FX = {};',
+    };
+    expect(architectureViolations(graphOf(files))).toEqual([]);
+    files['core/renderer.fx.js'] = 'export const FX = window.SDT.FX;';
+    expect(architectureViolations(graphOf(files))).toEqual([
+      'core/renderer.fx.js: 会话基础依赖必须可在无浏览器环境求值 window:1',
+    ]);
+  });
+
   it('会话内核不能重新接入 DOM 或浏览器适配器', () => {
     const graph = graphOf({
       'run/game.session.kernel.js': "import './game.session.browser.js'; const el = document.getElementById('game');",

@@ -66,3 +66,14 @@ triggerExecutionPlan({ rules:{ triggers:{ onPlay:[{ op:'typo' }] } } }, 'onPlay'
 createCardRuleExecutionView({}, [{ op:'typo' }]);
 // @ts-expect-error Equipment skills hold an ops container, not a naked operation list.
 equipmentExecutionPlan({ rules:{ equip:{ skill:[] } } }, 'skill');
+// Whole-card replay and passive equipment are declaration containers, not operation lists.
+const replayAndPassive:ExecutionCard = { rules:{ triggers:{ replay:{ on:'lastHand', times:2 } },
+  equip:{ passive:{ heroSkillCost:{maxHand:3,cost:0},damageResponse:{damage:1,drawChance:0.5,draw:1},
+    alternatingRefund:{types:['武术','法术'],amount:1},infusionUnlock:{fuel:3,spellPower:2,draw:1} } } } };
+const passivePlan = cardPlayExecutionPlan(replayAndPassive).equipment('passive');
+void passivePlan.kind;
+// @ts-expect-error A replay declaration has an explicit lastHand trigger condition.
+const invalidReplay:ExecutionCard = {rules:{triggers:{replay:{on:'typo',times:2}}}};
+// @ts-expect-error heroSkillCost stores maxHand/cost, not an operation amount field.
+const invalidPassive:ExecutionCard = {rules:{equip:{passive:{heroSkillCost:{amount:2}}}}};
+void [invalidReplay,invalidPassive];

@@ -78,6 +78,7 @@ describe('U10 M1 settle 过场非当前后续流静默终止', () => {
     const onBattleEnd = await bind();
     await onBattleEnd({ isBoss: false, foeNames: [] }, [], null, []);
     expect(state.transition).toHaveBeenCalledTimes(1);
+    expect(state.transition).toHaveBeenCalledWith(expect.objectContaining({ art: expect.stringContaining('/transitions-1021/retreat.webp'), presentation: 'node-cut', duration: 1050 }));
     expect(window.SDT.UI.log).not.toHaveBeenCalled();
     expect(state.saveGame).not.toHaveBeenCalled();
   });

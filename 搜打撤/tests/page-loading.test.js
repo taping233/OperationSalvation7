@@ -23,7 +23,7 @@ describe('shared page loading cover', () => {
     const repeated = vi.fn();
     expect(runPageLoading({ title: '照相馆', detail: '', open: repeated })).toBe(first);
     expect(document.querySelectorAll('.page-loading')).toHaveLength(1);
-    expect(document.querySelector('[role="status"]').textContent).toContain('正在整理馆藏');
+    expect(document.querySelector('[role="status"]').getAttribute('aria-label')).toContain('正在整理馆藏');
     expect(open).not.toHaveBeenCalled();
     expect(document.getElementById('viewport').getAttribute('aria-busy')).toBe('true');
     await vi.runAllTimersAsync();

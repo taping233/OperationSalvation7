@@ -99,6 +99,25 @@ async function isolateInputFixtureSettlement() {
 afterAll(releaseMainPage);
 
 describe('启动链（DOMContentLoaded → showTitle）', () => {
+  it('真实 main 将同一会话对象接到 MAP、FX、画布、相机和日志端口', async () => {
+    const kernel = await import('../game/src/run/game.session.kernel.js');
+    const { MAP } = await import('../game/src/core/mapData.js');
+    const { FX } = await import('../game/src/core/renderer.fx.js');
+    expect(kernel.game).toBe(window.SDT.game);
+    expect(kernel.game.map).toBe(MAP);
+    expect(kernel.MAP).toBe(MAP);
+    expect(kernel.FX).toBe(FX);
+    expect(window.SDT.MAP).toBe(MAP);
+    expect(window.SDT.FX).toBe(FX);
+    expect(kernel.canvas).toBe(document.getElementById('game'));
+    expect(kernel.ctx).toBeTruthy();
+    expect(kernel.game.cam).toBe(kernel.cam);
+    const log = vi.spyOn(window.SDT.UI, 'log').mockImplementation(() => {});
+    try {
+      kernel.game.log('startup port check', 'info');
+      expect(log).toHaveBeenCalledWith('startup port check', 'info');
+    } finally { log.mockRestore(); }
+  });
   it('标题已可用时立即发布桌面就绪状态，不等待被封面跳过的地图循环', () => {
     expect(window.SDT.game.state).toBe('title');
     expect(document.getElementById('title').dataset.controlsBound).toBe('true');
@@ -541,7 +560,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(game.trackPos).toBe(start);
       expect(getExpeditionPreview(game)).toMatchObject({ li: 0, idx: next });
       expect(game.moveTarget).toMatchObject({ li: 0, idx: next });
-      expect(document.querySelector('.expedition-map-preview').hidden).toBe(false);
+      expect(document.querySelector('.expedition-map-preview')).toBeNull(); // 画布选点预览保留，侧栏预览已移除
       clickNode();
       expect(game.state).toBe('moving');
       expect(getExpeditionPreview(game)).toBeNull();

@@ -88,6 +88,9 @@ describe('M batch production boot', () => {
         : previous.id === 'tt3-petal' ? ['rules', 'desc', 'heal']
         // 2026-10-02 老板拍板：自然形态→满月形态，转牧师职业卡（id 不变）。
         : previous.id === 'tt3-nature-form' ? ['rules', 'name', 'rarity', 'cls', 'unrandom']
+        // 2026-10-21 老板实测 12 条 #1：影噬调史诗（仅 rarity 一格；神灯第 1 项文案改
+        //「发现招式」由 helper 基线投影处理，卡面差集仍是 rules+armor）。
+        : previous.id === 'tt3sp-shadowbug' ? ['rules', 'rarity']
         : previous.id === 'tt3-magic-lamp' ? ['rules', 'armor'] : ['rules'];
       const approvedFields = approvedNativeExecution[previous.id]?.fields || {};
       for (const [key, value] of Object.entries(approvedFields)) expect(current[key], `${previous.id}.${key}`).toEqual(value);
