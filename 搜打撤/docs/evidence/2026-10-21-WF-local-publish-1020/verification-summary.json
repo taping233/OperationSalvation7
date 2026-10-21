@@ -1,0 +1,29 @@
+{
+  "codeCommit": "57dd6c68b9deb1318a500ee458ba08c76830e9ce",
+  "validation": {
+    "executed": true,
+    "passed": true,
+    "reusableReceipt": true,
+    "reason": "STAGED_PASSED"
+  },
+  "mode": "full",
+  "testFiles": {
+    "passed": 747,
+    "skipped": 1
+  },
+  "tests": {
+    "passed": 7650,
+    "skipped": 42
+  },
+  "largeLocalReport": {
+    "path": "docs/evidence/2026-10-21-WF-local-publish-1020/2026-10-20T17-20-24.575Z-e41fc7f7-staged.json",
+    "bytes": 4530832,
+    "sha256": "a38e718132749cc5f7ef2a010cc7c13f9895ea803d58e052b07c0c5ad856da0b",
+    "availability": "retained in original local evidence directory; excluded from Git because >1 MiB"
+  },
+  "log": "2026-10-20T17-20-24.575Z-e41fc7f7-staged.log.txt",
+  "preservedOriginalStaged": 22,
+  "preservedOriginalStagedVerification": "mode/blob/path and working file SHA256 match pre-task backup",
+  "build": "not rerun in mixed working tree; remote CI pending",
+  "browser": "existing task-scoped evidence retained; no new full browser review"
+}

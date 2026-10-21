@@ -146,15 +146,15 @@ it.each([
   expect(find).not.toHaveBeenCalled();
 });
 
-it('counts live consumed spells with duplicates, owned-first precedence, overrides and missing UIDs', () => {
+it('counts live consumed spells once per UID with owned-first precedence, overrides and missing UIDs', () => {
   const { state, inspection, spell } = setup();
   state.consumed = ['spell', 'spell', 'legacy', 'missing', 'granted'];
   state.granted.push({ uid: 'legacy', card: { type: '法术' } });
-  expect(inspection.effCostOf(spell, 'spell')).toBe(2);
+  expect(inspection.effCostOf(spell, 'spell')).toBe(3);
   state.cardOverrides.set('legacy', { type: '法术' });
-  expect(inspection.effCostOf(spell, 'spell')).toBe(1);
+  expect(inspection.effCostOf(spell, 'spell')).toBe(2);
   state.granted[0].card.type = '法术';
-  expect(inspection.effCostOf(spell, 'spell')).toBe(0);
+  expect(inspection.effCostOf(spell, 'spell')).toBe(1);
   state.consumed.splice(0, 4);
   expect(inspection.effCostOf(spell, 'spell')).toBe(3);
 });

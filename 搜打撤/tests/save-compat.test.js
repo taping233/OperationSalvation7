@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -144,11 +146,11 @@ describe('固定旧档兼容样本', () => {
     expect(localStorage.getItem(RunStorage.key(4))).toBe(latest);
   });
 
-  it('旧基地迁移保留仓库、职业、成就和卡背，并补齐新字段', () => {
+  it('旧基地迁移保留仓库、职业、成就和卡背，并补齐新字段', async () => {
     const legacyBase = fixture('base-v1.json');
     localStorage.setItem('sdt-base-v1', JSON.stringify(legacyBase));
     localStorage.setItem('sdt-save-v2-slot1', JSON.stringify(fixture('save-v1-run.json')));
-    Base.migrateLegacy([1]);
+    (await Base.migrateLegacy([1]));
     const data = Base.use(1);
     expect(data.stash).toEqual(legacyBase.stash);
     expect(data.classes['战士']).toEqual({ lv: 4, xp: 12 });
@@ -158,11 +160,11 @@ describe('固定旧档兼容样本', () => {
     expect(data.collection).toEqual({});
   });
 
-  it('基地存档盖章 version；损坏基地备份到 corrupt 键', () => {
+  it('基地存档盖章 version；损坏基地备份到 corrupt 键', async () => {
     const legacyBase = fixture('base-v1.json');
     localStorage.setItem('sdt-base-v2-slot2', JSON.stringify(legacyBase));
     const data = Base.use(2);
-    Base.save();
+    (await Base.save());
     const stored = JSON.parse(localStorage.getItem('sdt-base-v2-slot2'));
     expect(stored.version).toBe(Base.BASE_VERSION);
     expect(data.version).toBe(Base.BASE_VERSION);
@@ -170,20 +172,21 @@ describe('固定旧档兼容样本', () => {
     localStorage.setItem('sdt-base-v2-slot3', '{broken');
     expect(Base.peek(3)).toBeNull();
     expect(Base.issue(3)).toBe('corrupt');
+    await Base.flushWrites();
     expect(localStorage.getItem(Base.CORRUPT_KEY(3))).toBe('{broken');
   });
 
-  it('旧标签页基地数据过期时拒绝覆盖并保留新存档', () => {
+  it('旧标签页基地数据过期时拒绝覆盖并保留新存档', async () => {
     const base = Base.use(4);
     base.wood = 2;
     const newer = JSON.stringify({ version: Base.BASE_VERSION, wood: 19,
       _m01: { revision: 1, requests: {} } });
     localStorage.setItem(Base.SLOT_KEY(4), newer); // 模拟另一标签先写入
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(Base.SLOT_KEY(4))).toBe(newer);
   });
 
-  it('选档时观察为空、另一标签创建基地后拒绝按newSlot重置', () => {
+  it('选档时观察为空、另一标签创建基地后拒绝按newSlot重置', async () => {
     const log = vi.fn();
     window.SDT.UI = { log };
     expect(Base.peek(5)).toBeNull();
@@ -191,7 +194,7 @@ describe('固定旧档兼容样本', () => {
       _m01: { revision: 1, requests: {} } });
     localStorage.setItem(Base.SLOT_KEY(5), newer);
     Base.use(5); // newSlot launch 路径会先进入基地
-    expect(Base.reset(5)).toBe(false);
+    expect((await Base.reset(5))).toBe(false);
     expect(localStorage.getItem(Base.SLOT_KEY(5))).toBe(newer);
     expect(log).toHaveBeenCalledWith(expect.stringContaining('请返回选档重新进入'), 'warn');
   });

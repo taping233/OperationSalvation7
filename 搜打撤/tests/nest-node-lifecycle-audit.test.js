@@ -19,7 +19,9 @@ beforeAll(async () => {
   window.SDT = { game: H.game, UI: H.UI, Icons: { rich: text => text }, Sound: { sfx() {} },
     Cards: { all: () => H.cards, isRandomObtainable: card => card.rarity !== '初始', SHA: { id: 'sha' } },
     Meta: { classLv: () => 1, track() {}, checkUnlocks() {} },
-    Base: { data: {}, isSha: card => card.id === 'sha', save: vi.fn(() => true), carriedPet: () => null },
+    Base: { data: {}, isSha: card => card.id === 'sha', save: vi.fn(() => true), carriedPet: () => null,
+      recordNestBoss: async name => { const kills = window.SDT.Base.data.stats.nestBossKills ||= [];
+        const changed = !kills.includes(name); if (changed) kills.push(name); return { changed, persisted:false }; } },
   };
   await import('../game/src/run/game.nest.js'); Nest = window.SDT.Nest;
   ({ default: Bus } = await import('../game/src/core/event-bus.js'));

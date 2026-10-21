@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -18,21 +20,21 @@ const context = requestId => {
   if (!read.ok) throw new Error(read.message);
   return { slotId: SLOT, requestId, expectedRevision: read.revision };
 };
-const put = (item, count = 1) => {
+const put = async (item, count = 1) => {
   Base.data.stash.push({ card: { ...item }, count });
-  Base.save();
+  (await Base.save());
   return stackKeyOf(Base.data.stash.at(-1));
 };
 
-beforeEach(() => {
-  Base.wipe(SLOT);
+beforeEach(async () => {
+  (await Base.wipe(SLOT));
   Base.use(SLOT);
-  Base.save();
+  (await Base.save());
 });
 
 describe('M02-A/B 收藏转换与幂等事务', () => {
   it('真实职业卡 2→1→0，首次只登记一次，两次都按现行规则增加 10 XP', async () => {
-    const key = put(card(), 2);
+    const key = (await put(card(), 2));
     const first = await convertCollection(context('m02-a-1'), { stackKey: key, count: 1 });
     expect(first.ok).toBe(true);
     expect(first.value.firstRegistrations).toEqual([{ cardId: CARD_ID }]);
@@ -49,7 +51,7 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
   });
 
   it('同请求重试返回原收据且不重复扣卡/加经验；异参冲突', async () => {
-    const key = put(card(), 2);
+    const key = (await put(card(), 2));
     const ctx = context('m02-b-retry');
     const first = await convertCollection(ctx, { stackKey: key, count: 1 });
     const retry = await convertCollection(ctx, { stackKey: key, count: 1 });
@@ -60,7 +62,7 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
   });
 
   it('数量不足和存储失败均不留下部分写入', async () => {
-    const key = put(card(), 1);
+    const key = (await put(card(), 1));
     const beforeShort = JSON.stringify(Base.data);
     const short = await convertCollection(context('m02-b-short'), { stackKey: key, count: 2 });
     expect(short.code).toBe('INSUFFICIENT_CARDS');
@@ -81,13 +83,13 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
   });
 
   it('旧保护记录不能被经验命令绕过；取消保护后收录仍在且可以继续转化', async () => {
-    const key = put(card(), 2);
+    const key = (await put(card(), 2));
     Base.data.collection[CARD_ID] = { name: card().name, rarity: '职业', ts: 1 };
-    Base.save();
+    (await Base.save());
     const before = JSON.stringify(Base.data);
     expect((await convertCollection(context('protected'), { stackKey: key, count: 1 })).code).toBe('COLLECTION_PROTECTED');
     expect(JSON.stringify(Base.data)).toBe(before);
-    expect(Base.collectToggle(card())).toBe(false);
+    expect((await Base.collectToggle(card()))).toBe(false);
     expect(Base.isCollected(card())).toBe(true);
     const result = await convertCollection(context('unprotected'), { stackKey: key, count: 1 });
     expect(result.ok).toBe(true);
@@ -98,10 +100,10 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
   it('批量不能超过到满级所需最少张数，末张溢出按实际经验记收据', async () => {
     const ability = Cards.all().find(item => item.type === '能力卡' && item.cls === '侠客');
     expect(ability).toBeTruthy();
-    const key = put(ability, 3);
+    const key = (await put(ability, 3));
     Base.data.characters ||= {};
     Base.data.characters.wu = { lv: 9, xp: 360 };
-    Base.save();
+    (await Base.save());
     const before = JSON.stringify(Base.data);
     expect((await convertCollection(context('over-cap'), { stackKey: key, count: 2 })).code).toBe('CONVERSION_LIMIT');
     expect(JSON.stringify(Base.data)).toBe(before);
@@ -114,10 +116,10 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
   });
 
   it('满级首次图鉴只允许消耗1张经验0，已收录后拒绝纯经验转化', async () => {
-    const key = put(card(), 3);
+    const key = (await put(card(), 3));
     Base.data.characters ||= {};
     Base.data.characters.wu = { lv: 10, xp: 0 };
-    Base.save();
+    (await Base.save());
     expect((await convertCollection(context('max-first-many'), { stackKey: key, count: 2 })).code).toBe('CONVERSION_LIMIT');
     const first = await convertCollection(context('max-first'), { stackKey: key, count: 1 });
     expect(first.ok).toBe(true);
@@ -133,7 +135,7 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
 
 describe('M02-C/D 永久展示、里程碑与满级', () => {
   it('实体卡耗尽后永久登记仍可展示，但 ownedCount/canConvert 不伪造战力', async () => {
-    const key = put(card(), 1);
+    const key = (await put(card(), 1));
     await convertCollection(context('m02-c'), { stackKey: key, count: 1 });
     const snapshot = readBase(SLOT).value;
     const diskBeforeQuery = localStorage.getItem('sdt-base-v2-slot5');
@@ -143,7 +145,7 @@ describe('M02-C/D 永久展示、里程碑与满级', () => {
     expect(getCharacter(snapshot, 'wu')).toMatchObject({ characterId: 'wu', level: 1, xp: 10 });
     expect(localStorage.getItem('sdt-base-v2-slot5')).toBe(diskBeforeQuery);
     Base.data.collection['retired-card-id'] = { name: '退役收藏', rarity: '职业', ts: 1 };
-    Base.save();
+    (await Base.save());
     expect(getCollection(readBase(SLOT).value, Cards).find(item => item.card.cardId === 'retired-card-id'))
       .toMatchObject({ registered: true, ownedCount: 0, canConvert: false });
   });
@@ -154,7 +156,7 @@ describe('M02-C/D 永久展示、里程碑与满级', () => {
       Base.data.collection[item.id] = { name: item.name, rarity: item.rarity, ts: index + 1 };
     });
     const fifth = pool[4];
-    const key = put(fifth, 1);
+    const key = (await put(fifth, 1));
     const woodBefore = Base.data.wood;
     const result = await convertCollection(context('m02-d-ms'), { stackKey: key, count: 1 });
     expect(result.value.newUnlocks).toContain('m5');
@@ -163,7 +165,7 @@ describe('M02-C/D 永久展示、里程碑与满级', () => {
     expect(Base.data.collClaimed.m5).toBeUndefined();
 
     Base.data.characters.xingyue = { lv: 10, xp: 0 };
-    Base.save();
+    (await Base.save());
     const character = getCharacter(readBase(SLOT).value, 'xingyue');
     expect(character.maxed).toBe(true);
     expect(character).not.toHaveProperty('nextReward');
@@ -187,7 +189,7 @@ describe('M02-E 外观资格与持久化', () => {
   it('已解锁但缺当前场景素材的皮肤保留选择并标记默认图回退', async () => {
     Base.data.appearance ||= { characterSkins: {}, selectedSkins: {} };
     Base.data.appearance.characterSkins.wu = ['legacy-missing-art'];
-    Base.save();
+    (await Base.save());
     const result = await selectSkin(context('m02-e-fallback'), { characterId: 'wu', skinId: 'legacy-missing-art' });
     expect(result.ok).toBe(true);
     expect(result.value).toMatchObject({ selectedSkinId: 'legacy-missing-art', assetFallback: true, fallbackSkinId: 'default' });

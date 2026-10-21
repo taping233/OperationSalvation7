@@ -1,5 +1,6 @@
 // Presentation preview: no random draw, storage write or rule mutation.
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
+import { resourceContainerSlots } from '../core/card-capacity.js';
 
 // 推荐只预览，不抽牌、不写预设、不扣仓；既有选择始终保留。
 export function previewRecommendedDeparture(options) {
@@ -34,7 +35,7 @@ export function departureSummary({ starterCount, starterCard, fireball, pet, sta
     const quantity = Math.min(Math.max(0, Math.floor(Number(requested) || 0)), stack.count);
     if (!quantity) continue;
     extraCount += quantity;
-    if (stack.card.id === 'tt2-pearlbox') resourceBonus += quantity * 9;
+    resourceBonus += quantity * resourceContainerSlots(stack.card);
     const name = stack.card.name;
     const entry = known.get(name) || { card: stack.card, stackKey: departureStackKey(stack), count: 0 };
     entry.count += quantity;

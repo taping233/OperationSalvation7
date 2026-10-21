@@ -1,7 +1,10 @@
 /* INFRA-02 回归：开发者控制台「快捷键」页签点「进入」后，jump 成功开出的目标页
  * 必须存活（_acts 不被 hideOverlay 清掉、overlay 不被隐藏），控制台页被目标页顶替。
  * 走真实链路：openDevConsole → devcTab 切快捷键页签 → 真实 DOM click「进入」按钮。 */
-import { afterEach, describe, it, expect, vi } from 'vitest';
+import { afterAll, afterEach, describe, it, expect, vi } from 'vitest';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
+
+afterAll(releaseMainPage);
 
 // ---- 环境补桩（与 boot.test.js 同款，必须在动态 import main.js 之前就位） ----
 // 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
@@ -65,6 +68,7 @@ vi.doMock('../game/src/ui/game.menu.pages.js', async () => {
 });
 
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 50));
 

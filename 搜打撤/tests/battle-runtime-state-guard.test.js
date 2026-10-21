@@ -73,7 +73,10 @@ function extractExportLets(src) {
 }
 
 function extractSetters(src) {
-  return new Set([...src.matchAll(/^export function set\$(\w+)/gm)].map(m => m[1]));
+  return new Set([
+    ...src.matchAll(/^export function set\$(\w+)/gm),
+    ...src.matchAll(/^export const set\$(\w+) = runtime\.set\$\1;$/gm),
+  ].map(m => m[1]));
 }
 
 // 09-29 knip C 类批豁免（老板批删）：这些字段的 set$ 写入口全仓零调用（生产+测试+动态

@@ -17,7 +17,7 @@ it('shows generic structured declarations without predicting zero damage or muta
 });
 it.each(['normal', 'boss'])('describes draw substitution for %s', mode => {
   const result = previewAction(input([curse, { op: 'draw', amount: 1 }], mode));
-  expect(result.knownEffects[1]).toBe(mode === 'normal' ? '普通战抽牌替代：获得 1 张初始攻击' : '抽 1 张牌');
+  expect(result.knownEffects[1]).toBe(mode === 'normal' ? '从本场牌库抽 1 张牌' : '抽 1 张牌');
 });
 it('distinguishes extending an existing status from applying it', () => {
   const result = previewAction(input([{ op: 'curse', curse: 'freeze', duration: 1, extend: 2, target: 'allEnemies' }]));

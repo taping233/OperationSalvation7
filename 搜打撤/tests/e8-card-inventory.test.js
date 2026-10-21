@@ -1,6 +1,7 @@
 import approvedBatch from './fixtures/approved-card-batch-20261020.json';
+import approvedExecution from './fixtures/builtin-execution-approved-20261020.json';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, isApprovedBackupcellRename, renderCardInventory } from './helpers/e8-card-inventory.js';
+import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, isApprovedBackupcellRevision, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 import { approvedRevisionBaseline, APPROVED_1018_PRODUCTION_REVISIONS, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 import { readFileSync } from 'node:fs';
@@ -52,7 +53,7 @@ const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),
   ...ALL_M_BATCH_IDS.map(id => [id, null]),
   ['cmtn1ntxzoc4', approvedBatch.flame.rules],
-  ['tt3-mystery-potion', { version:1, battle:{ hosted:['mystery-potion'] } }],
+  ['tt3-mystery-potion', approvedExecution['tt3-mystery-potion'].rules],
   ['tt7-ironphalanx', { version: 1, battle: { target: { side: 'self', area: false } },
     triggers: { onPlay: [{ op: 'armor', amount: 10 },
       { op: 'acquire', n: 5, pool: { kind: '随机' }, dest: 'deck', act: 'costMinusOne' }] } }],
@@ -204,7 +205,7 @@ describe('E8 isolated production inventory', () => {
     expect(() => assertInventoryComplete(stageGap, boot)).toThrow('count imbalance');
   });
 
-  it('changes only approved migrations and the exact backupcell terminology revision', () => {
+  it('changes only approved migrations and the exact backupcell draw/refill revision', () => {
     const approvedIds = APPROVED_IDS;
     expect(M_BATCH_ONPLAY_IDS.every(id => ALL_M_BATCH_IDS.includes(id))).toBe(true);
     const comparison = compareMigrationInventories(currentBaseline, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
@@ -220,10 +221,10 @@ describe('E8 isolated production inventory', () => {
       .toThrow('CARDS_SYNC card fields changed');
   });
 
-  it('本批只允许13个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝', () => {
+  it('本批只允许14个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝', () => {
     expect(approvedBatch.additions.map(card => card.id).sort()).toEqual([
       'tt13-astrolabe','tt13-bitter-rain','tt13-chaos-deck','tt13-flame-staff',
-      'tt13-guard','tt13-magazine','tt13-mercy','tt13-mind-control','tt13-scale-armor',
+      'tt13-guard','tt13-magazine','tt13-mercy','tt13-mind-control','tt13-poor-meal','tt13-scale-armor',
       'tt13-snipe','tt13-soul-contract','tt13-spring','tt13-stellar-divination',
     ]);
     const compare = changed => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
@@ -311,7 +312,7 @@ describe('E8 isolated production inventory', () => {
     }
   });
 
-  it('神秘药水只接受主动战斗使用的新文案与精确 M9 宿主，改写和扩效拒绝', () => {
+  it('神秘药水只接受主动战斗使用的新文案与精确延迟产卡声明，改写和扩效拒绝', () => {
     const previous = currentBaseline.production.cards.find(row => row.id === 'tt3-mystery-potion').card;
     expect(previous.desc).toBe('回合开始时：变成1张随机招式卡牌，使其费用为0。');
     const current = inventory.production.cards.find(row => row.id === 'tt3-mystery-potion').card;
@@ -328,20 +329,44 @@ describe('E8 isolated production inventory', () => {
     }
   });
 
-  it('allows only the exact backupcell description rename with its existing rules unchanged', () => {
+  it('后备能源只批准术语修订与固定抽牌回满规则，费用、其他字段及扩效均拒绝', () => {
     const previous = currentBaseline.production.cards.find(row => row.id === 'tt12-backupcell').card;
     const current = inventory.production.cards.find(row => row.id === 'tt12-backupcell').card;
-    expect(isApprovedBackupcellRename(previous, current)).toBe(true);
+    expect(isApprovedBackupcellRevision(previous, current)).toBe(true);
     for (const mutate of [
       card => { card.desc += '额外效果'; }, card => { card.cost++; },
+      card => { card.draw++; }, card => { card.name += '改'; },
+      card => { card.rules.version++; },
       card => { card.rules.battle.costModifiers[0].amount = 2; },
+      card => { card.rules.battle.target.side = 'self'; },
+      card => { card.rules.battle.target.area = true; },
+      card => { delete card.rules.triggers; },
+      card => { card.rules.triggers.onPlay.pop(); },
+      card => { card.rules.triggers.onPlay.reverse(); },
+      card => { card.rules.triggers.onPlay[0] = { op: 'draw', amount: 2 }; },
+      card => { card.rules.triggers.onPlay[1] = { op: 'energy', n: 9 }; },
+      card => { card.rules.triggers.onPlay[1].n = 9; },
+      card => { card.rules.triggers.onPlay.push({ op: 'energy', n: 1 }); },
+      card => { card.rules.triggers.onTurnStart = [{ op: 'refillEnergy' }]; },
       card => { card.extra = true; }, card => { card.id = 'another-card'; },
     ]) {
       const changed = clone(current);
       mutate(changed);
-      expect(isApprovedBackupcellRename(previous, changed)).toBe(false);
+      expect(isApprovedBackupcellRevision(previous, changed)).toBe(false);
+      const changedInventory = clone(inventory);
+      changedInventory.production.cards.find(row => row.id === 'tt12-backupcell').card = changed;
+      expect(() => compareMigrationInventories(currentBaseline, changedInventory, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow();
     }
-    expect(isApprovedBackupcellRename({ ...previous, desc: previous.desc + '其他旧文案' }, current)).toBe(false);
+    for (const mutate of [
+      card => { card.desc += '其他旧文案'; }, card => { card.cost++; },
+      card => { card.rules.battle.costModifiers[0].amount = 2; },
+      card => { card.rules.triggers = { onPlay: [] }; }, card => { card.extra = true; },
+    ]) {
+      const changedBefore = clone(previous);
+      mutate(changedBefore);
+      expect(isApprovedBackupcellRevision(changedBefore, current)).toBe(false);
+    }
     const changed = clone(inventory);
     changed.production.cards.find(row => row.id === 'tt12-backupcell').card.cost++;
     expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,

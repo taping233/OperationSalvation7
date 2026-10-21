@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { continueChestRewards, openChestPicker } from './helpers/chest-actions.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -57,7 +59,7 @@ beforeEach(async () => {
   await import('../game/src/hub/base.js');
   window.SDT.Base.use(1);
   Object.assign(window.SDT.Base.data, { ammoTaught:false, eggBattles:0 });
-  expect(window.SDT.Base.save()).toBe(true);
+  expect((await window.SDT.Base.save())).toBe(true);
   vi.spyOn(window.SDT.Base, 'petEggDropChance').mockReturnValue(0);
   vi.spyOn(window.SDT.Base, 'markAmmoTaught');
   ({ RunStorage } = await import('../game/src/hub/game.storage.js'));
@@ -338,7 +340,7 @@ describe('战后额外传说先持久化待领奖，再原子完成胜利', () =
 
   it('确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡', async () => {
     window.SDT.Base.data.ammoTaught = true;
-    expect(window.SDT.Base.save()).toBe(true);
+    expect((await window.SDT.Base.save())).toBe(true);
     await finishOrdinary({ isBoss:true, foeNames:['首脑'] });
     state.actions.chestTake1({ i:0 });
     const draws = state.random.mock.calls.length;

@@ -1,0 +1,130 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, standing in a vast silver reed field, arms gently spread at waist height, both open palms visible, relaxed fingers. Body turned slightly toward screen-right, face looking back toward the viewer, quiet composed expression.\n\nWide landscape, eye-level three-quarter view, girl near center, visible from head to knees, lower legs hidden by reeds. Dense diagonal windblown reeds fill the foreground with soft out-of-focus plumes, smaller reeds lead toward a low distant horizon. Wind blows her hair, jacket and red pennants toward screen-right. Slender weathered poles with long red ribbons on the left and scattered far behind her; tiny white birds across an expansive dramatic cloudy sky.\n\nSunset after a windy day, dark blue-gray clouds edged with glowing amber light, warm backlight from screen-right, luminous silver reed plumes, golden rim light on hair and shoulders, softly illuminated face and hands, deep cool foreground shadows, cinematic atmosphere, finely resolved face.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1839265147,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, animal ears, cat ears, wolf ears, tail, blue eyes, yellow gloves, military insignia, faction logo, halo, lantern, staff, weapon",
+      "characterPrompts": [
+        {
+          "prompt": "young adult woman, human, pale skin, golden eyes, very pale blonde hair, straight bangs, long side locks, one very long thick braid tied low and streaming in the wind. A white crescent moon hairpin clipped flat into the hair just above the bangs on the viewer's right, tilted against the hair. New outdoor outfit: fitted ivory high-neck sleeveless dress with subtle teal waist tabs, open gray lightweight field jacket slipping below the shoulders, rolled sleeves, dark wrist straps, bare hands, simple brown belt. Calm gaze, closed mouth.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, standing in a vast silver reed field, arms gently spread at waist height, both open palms visible, relaxed fingers. Body turned slightly toward screen-right, face looking back toward the viewer, quiet composed expression.\n\nWide landscape, eye-level three-quarter view, girl near center, visible from head to knees, lower legs hidden by reeds. Dense diagonal windblown reeds fill the foreground with soft out-of-focus plumes, smaller reeds lead toward a low distant horizon. Wind blows her hair, jacket and red pennants toward screen-right. Slender weathered poles with long red ribbons on the left and scattered far behind her; tiny white birds across an expansive dramatic cloudy sky.\n\nSunset after a windy day, dark blue-gray clouds edged with glowing amber light, warm backlight from screen-right, luminous silver reed plumes, golden rim light on hair and shoulders, softly illuminated face and hands, deep cool foreground shadows, cinematic atmosphere, finely resolved face.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "young adult woman, human, pale skin, golden eyes, very pale blonde hair, straight bangs, long side locks, one very long thick braid tied low and streaming in the wind. A white crescent moon hairpin clipped flat into the hair just above the bangs on the viewer's right, tilted against the hair. New outdoor outfit: fitted ivory high-neck sleeveless dress with subtle teal waist tabs, open gray lightweight field jacket slipping below the shoulders, rolled sleeves, dark wrist straps, bare hands, simple brown belt. Calm gaze, closed mouth.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, animal ears, cat ears, wolf ears, tail, blue eyes, yellow gloves, military insignia, faction logo, halo, lantern, staff, weapon",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\89cf6b6a0f5a0ce0a12c367d561cf4b9236908.png",
+      "role": "composition",
+      "sha256": "8146042cfa8e5698e23932015538c9a3510a5514726a176a56d066cc3904933a",
+      "uploaded": false
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\xingyue.webp",
+      "role": "identity",
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "uploaded": false
+    }
+  ],
+  "reference_metadata": {
+    "srgb": 0,
+    "embedded_prompt": null
+  },
+  "preserve": [
+    "夕照芦苇与红飘带",
+    "迎风张臂与掌心展开",
+    "低地平线和前景遮挡"
+  ],
+  "replaced": [
+    "原人物兽耳、发眼色和制服标识",
+    "星月浅金长辫、金瞳、白月发饰",
+    "灰白野外裙装与轻外套"
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-reeds-nai5-20261020\\candidate.png",
+  "acquisition": "nai_gen.generate_image; local textual reconstruction, no image upload",
+  "seed": 1839265147,
+  "sha256": "203c060593012074b53d17b5bbb5fadb4e7168621ecf1ffe82e72e3b521e771b",
+  "visual_review": {
+    "matched": [
+      "浅金长辫、金瞳、白色新月发饰",
+      "去兽耳、换灰白裙与轻外套",
+      "芦苇前景、红飘带、夕照与张臂动作"
+    ],
+    "deviations": [
+      "新月发饰落在观众左侧，与指定右侧不符",
+      "人物偏左、长辫更突出，夕照较原图偏冷",
+      "手指局部仍有生成误差"
+    ],
+    "approval": "候选待老板审阅"
+  }
+}

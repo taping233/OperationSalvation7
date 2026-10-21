@@ -1,0 +1,150 @@
+{
+  "actions": [
+    {
+      "detail": "最终源码同步后重新加载，等待启动完成，从04档真实继续；生命30/35、金币1、背包4格、消耗区2张与战后保存一致",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口1280×720，未改尺寸",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "hpHud"
+      },
+      "identity": "{\"id\":\"hpHud\"}",
+      "key": "hp",
+      "rect": {
+        "height": 41.32500076293945,
+        "width": 74.6624984741211,
+        "x": 121.3000030517578,
+        "y": 10.662500381469728
+      },
+      "selector": "#hpHud",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "61.9875px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "111.994px"
+      },
+      "tag": "DIV",
+      "text": "生命\n          30/35\n          \n        \n        生命值当前 30 / 上限 35"
+    },
+    {
+      "attributes": {
+        "id": "resHud"
+      },
+      "identity": "{\"id\":\"resHud\"}",
+      "key": "resources",
+      "rect": {
+        "height": 42.66250228881836,
+        "width": 190.8625030517578,
+        "x": 1041.1375732421875,
+        "y": 14.662500381469728
+      },
+      "selector": "#resHud",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "63.9937px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "visibility": "visible",
+        "width": "286.294px"
+      },
+      "tag": "DIV",
+      "text": "1\n        金币持有的金币，可用于商店交易。\n      \n      \n        \n        4\n        攻击力攻击伤害按卡牌数值加你的攻击力结算。"
+    },
+    {
+      "attributes": {
+        "id": "expeditionChapter"
+      },
+      "identity": "{\"id\":\"expeditionChapter\"}",
+      "key": "chapter",
+      "rect": {
+        "height": 39.0625,
+        "width": 226.6625061035156,
+        "x": 526.6687622070312,
+        "y": 11.324999809265137
+      },
+      "selector": "#expeditionChapter",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(240, 240, 237)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "58.5937px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "matrix(1, 0, 0, 1, -169.997, 0)",
+        "visibility": "visible",
+        "width": "339.994px"
+      },
+      "tag": "NAV",
+      "text": "外围荒地第 1 层 / 4"
+    }
+  ],
+  "observedAt": "2026-10-20T17:05:30.245Z",
+  "page": {
+    "origin": "http://127.0.0.1:5339",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "framework-closeout-final-restored",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-20-WF-framework-closeout-1020/05-final-restored.png"
+  ],
+  "selectors": [
+    {
+      "key": "hp",
+      "selector": "#hpHud"
+    },
+    {
+      "key": "resources",
+      "selector": "#resHud"
+    },
+    {
+      "key": "chapter",
+      "selector": "#expeditionChapter"
+    }
+  ]
+}

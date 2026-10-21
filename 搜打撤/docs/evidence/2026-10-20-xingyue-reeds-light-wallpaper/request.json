@@ -1,0 +1,25 @@
+{
+  "status": "generated",
+  "tool": "built-in imagegen",
+  "source": ".tmp/nai/xingyue-reeds-nai5-20261020/candidate.png",
+  "output": ".tmp\\nai\\xingyue-reeds-light-wallpaper-20261020\\wallpaper.png",
+  "size": [
+    1672,
+    941
+  ],
+  "sha256": "b0c0ab71d6fa1f7ca505a69acfea0aef42b7e216f7a64d89d4276fe9f19fcb8b",
+  "prompt_file": "prompt.txt",
+  "review": {
+    "matched": [
+      "夕照轮廓光、面部和掌心暖光、衣褶投影增强",
+      "芦苇前中后景与云层光影细化",
+      "星月长辫、金瞳、衣装及张臂保留",
+      "扩图至首页1672:941比例"
+    ],
+    "deviations": [
+      "夕阳光源更明显、云隙增多",
+      "月饰保留原候选左侧位置"
+    ],
+    "integration": "未接入首页"
+  }
+}

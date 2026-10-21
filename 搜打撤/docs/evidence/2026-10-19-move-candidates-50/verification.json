@@ -1,0 +1,41 @@
+{
+  "task": "WF-move-candidates-50-1019",
+  "date": "2026-10-19",
+  "document": "docs/cards/MOVE-CANDIDATES-50-2026-10-19.md",
+  "sha256": "d4409767fcf2c501c81e54c0511b279a8f945789c9f3bc6772a7fa6ab0ccfaef",
+  "checks": {
+    "cards": 50,
+    "consecutiveNumbers": "01-50",
+    "types": {
+      "武术": 25,
+      "法术": 25
+    },
+    "rarities": {
+      "古朴": 20,
+      "稀有": 20,
+      "史诗": 8,
+      "传说": 2
+    },
+    "costs": {
+      "0": 4,
+      "1": 30,
+      "2": 16
+    },
+    "uniqueCandidateNames": 50,
+    "existingNamesChecked": 327,
+    "existingNameCollisions": [],
+    "relativeLinksChecked": 15,
+    "relativeLinks": "passed",
+    "docsCheck": {
+      "command": "npm run docs:check",
+      "exitCode": 0,
+      "ok": true,
+      "scope": "项目文档守卫；docs/cards不在默认扫描范围，已另行检查本次两个文档的全部相对链接"
+    },
+    "whitespaceCheck": {
+      "command": "git diff --check -- docs/cards docs/PARALLEL-REGISTRY.md",
+      "exitCode": 0
+    }
+  },
+  "status": "设计文档完成，未实装，数值未做平衡验证，未提交"
+}

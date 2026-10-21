@@ -1,0 +1,71 @@
+{
+  "note": "定向批次可能重合，按各次时间点记录，不累加；最终统一输入由full-suite.json覆盖。",
+  "runs": [
+    {
+      "path": ".tmp/framework-closeout-1020/integration-owned-final.json",
+      "bytes": 105347,
+      "sha256": "fd561945a4f520a7a58e641bc3f8fcae0c4de9289c0125f7a6504ef96a289724",
+      "files": 16,
+      "total": 309,
+      "passed": 308,
+      "failed": 0,
+      "skipped": 1,
+      "success": true
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/card-regressions-final.json",
+      "bytes": 167331,
+      "sha256": "b46035bfd1d666f178d0a09291691719d1b37232c1eac7d17aacff76bc21bfec",
+      "files": 27,
+      "total": 464,
+      "passed": 464,
+      "failed": 0,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/acquire-pool-final.json",
+      "bytes": 11276,
+      "sha256": "f6b5c98e042bf2073493a59fd701e4b11d413d6f932d9eca083912af88fb3a3f",
+      "files": 4,
+      "total": 33,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/silence-backupcell-final.json",
+      "bytes": 35198,
+      "sha256": "d0fe480486e8fd748c95f6a9f4bbac53bf4340173e455cbbb1a7e9a5bbb7bcf7",
+      "files": 6,
+      "total": 95,
+      "passed": 95,
+      "failed": 0,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "path": ".tmp/framework-closeout-domain/assigned-final.json",
+      "bytes": 102149,
+      "sha256": "209b602b986a9ec202dde53233eedd900494d9288b2ac00d48fd046a8cf897b0",
+      "files": 20,
+      "total": 326,
+      "passed": 326,
+      "failed": 0,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "path": ".tmp/framework-closeout-domain/final-closeout-fixed.json",
+      "bytes": 39165,
+      "sha256": "01f679d58bd985fc5ee13a2ef41edbff846be4608f87bd6c4e81ecc15fc8a511",
+      "files": 7,
+      "total": 107,
+      "passed": 107,
+      "failed": 0,
+      "skipped": 0,
+      "success": true
+    }
+  ]
+}

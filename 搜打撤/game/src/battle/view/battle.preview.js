@@ -61,6 +61,7 @@ function structuredDamageSpec(card) {
   if (sources.length !== 1 || (operation.amountField !== undefined && operation.amountField !== 'dmg')) return { unknown: true };
   const unknownEffects = operations.length > 1 || Object.keys(triggers).some(key => key !== 'onPlay' && key !== 'duration')
     ? ['仅计算直接伤害；附加效果及后续触发未计入'] : [];
+  if (operations.some(item => item.op === 'draw')) unknownEffects.push('敌人全灭时停止余下效果');
   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
   const countSource = operation.hitCount ?? operation.hits?.count;
@@ -87,16 +88,20 @@ function hostedDamageSpec(card, context) {
       Object.keys(rules.battle || {}).some(key => key !== 'hosted') ||
       !Array.isArray(hosted) || hosted.length !== 1 || hosted[0] !== 'damage-and-draw' ||
       normalizeDesc(card.desc) !== "1',抽1张牌") return { unknown: true };
-  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；普通战抽牌改为获得初始攻击，后续触发未计入；敌人全灭时停止余下效果'] };
+  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；后续抽牌与触发未计入；敌人全灭时停止余下效果'] };
 }
 
 /** @param {SnapshotBattleCard | null | undefined} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
 function semanticMatch(card, context) {
   if (!card) return null;
+  const structured = structuredDamageSpec(card);
+  if (structured && !card.rules?.battle?.hosted) {
+    // 奥术弹的 BOSS 抽牌后续仍沿原有保守预览边界。
+    if (card.id === 'tt7-arcanebolt' && context.mode !== 'normal') return { unknown: true };
+    return structured;
+  }
   const hosted = hostedDamageSpec(card, context);
   if (hosted) return hosted;
-  const structured = structuredDamageSpec(card);
-  if (structured) return structured;
   if (card.rules?.equip || card.rules?.bag || card.rules?.battle?.hosted) return null;
   const spec = card.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
@@ -112,7 +117,7 @@ function cardRuleHint(card, mode) {
   const drawsByType = onPlay
     ? onPlay.some(item => item.op === 'draw' && item.filter)
     : /从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/.test(card.desc || '');
-  const drawHint = mode === 'normal' && drawsByType ? '普通战抽牌改为获得初始攻击。' : '';
+  const drawHint = mode === 'normal' && drawsByType ? '从本场牌库抽取符合类型的牌。' : '';
   if (!operation) return drawHint;
   const payment = card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
   const damageHint = payment
@@ -136,7 +141,7 @@ function declaredStatusEffects(card, mode) {
       if (Object.keys(operation).some(key => !['op', 'amount'].includes(key)) ||
           !Number.isInteger(operation.amount) || operation.amount <= 0) return null;
       effects.push(operation.op === 'armor' ? `自己获得 ${operation.amount} 点护甲`
-        : mode === 'normal' ? `普通战抽牌替代：获得 ${operation.amount} 张初始攻击` : `抽 ${operation.amount} 张牌`);
+        : mode === 'normal' ? `从本场牌库抽 ${operation.amount} 张牌` : `抽 ${operation.amount} 张牌`);
     } else if (operation.op === 'curse') {
       if (Object.keys(operation).some(key => !['op', 'curse', 'stacks', 'duration', 'extend', 'target'].includes(key))) return null;
       if (typeof operation.curse !== 'string' || !Object.hasOwn(Combat.CURSE_META, operation.curse) ||

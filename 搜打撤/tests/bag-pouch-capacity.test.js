@@ -47,6 +47,17 @@ function arrange(occupied, bagCopies = 0, storedCopies = 3, withPearl = false) {
 }
 function take() { UI._acts.pouchTake({ name: spell.name }); }
 
+it('锦囊存取读取声明容量和类型，整叠超限不消费卡牌', () => {
+  arrange(4, 3, 0);
+  game.ownedCards[0].card = { ...pouch, rules:{ version:1, equip:{ container:{ slots:2, accepts:'法术' } } } };
+  showBackpack(true);
+  UI._acts.inspectStack({ name:pouch.name, safe:'0' }); UI._acts.pouchStoreZoom();
+  const before = JSON.stringify(game.ownedCards);
+  UI._acts.pouchPut({ name:spell.name });
+  expect(JSON.stringify(game.ownedCards)).toBe(before);
+  expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('0/2'), 'warn');
+});
+
 it.each([0, 3])('满包整叠取出拒绝且锦囊与物资原样保留（已有同名 %i 张）', bagCopies => {
   arrange(16, bagCopies);
   const cards = JSON.stringify(game.ownedCards), items = JSON.stringify(game.inventory);

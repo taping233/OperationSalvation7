@@ -119,11 +119,12 @@ describe('卡面描述修复：生命周期', () => {
     await start([byId('starter-attack')]);
     const uid = engine.addTempCard(byId(id));
     const before = runtime.granted.length;
+    const beforeHand = runtime.hand.length;
     runtime.delayed.push({ special: 'consumeTemps', uids: [uid, uid], cardName: '江湖救急' });
     runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '江湖救急' });
     await engine.processDelayed(); await drain();
     expect(runtime.consumed.filter(u => u === uid)).toHaveLength(1);
-    expect(effect === 'acquire' ? runtime.granted.length - before : 1000 - runtime.foes[0].hp).toBe(amount);
+    expect(effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - before : 1000 - runtime.foes[0].hp).toBe(amount);
     expect(runtime.infuseFuels).toBe(0);
   });
 

@@ -1,0 +1,22 @@
+{
+  "platform": "Codex built-in browser",
+  "origin": "http://127.0.0.1:5317/",
+  "viewport": { "width": 1280, "height": 720 },
+  "inputMethod": "actual UI clicks; no injected game state",
+  "slot": "02 (empty before this task)",
+  "untouchedExistingSlots": ["01", "05"],
+  "observations": [
+    "正常新游戏、选择携带牌、领取入场补给，通过地图相邻节点进入普通战斗",
+    "飞刃偷袭零费用命中：目标生命3到2，附加流血1，能量仍2；普通攻击叠牌5到6",
+    "真实结束回合与敌方攻击：玩家生命35到25，下一回合恢复能量2",
+    "回响箭消耗1能量击杀首敌、获得3护甲；闪电链消耗1能量击杀末敌并正常进入战斗胜利",
+    "领取1金币与魔法新发现，返回原地图：生命25/35、金币1、背包5/16、消耗区3",
+    "后续源码修正引发HMR回到标题后，通过真实存档入口恢复02档，仍为生命25/35、金币1、背包5/16、消耗区3"
+  ],
+  "consoleErrors": [],
+  "screenshots": ["victory-current-window.png", "restored-map-current-window.png"],
+  "limits": [
+    "单个当前窗口代表路径，不等于逐卡、全部触发时点的实页覆盖；其它边界由自动回归覆盖",
+    "首战实页发生于最终延迟句兼容修正前；该次修正涉及正午决战、装备测试夹具与同步工具等，未改变此代表路径；存档恢复已在之后核验"
+  ]
+}

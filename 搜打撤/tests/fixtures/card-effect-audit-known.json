@@ -152,11 +152,27 @@
       }
     },
     {
+      "id": "tt13-poor-meal",
+      "clause": "如果你的手牌数小于等于3，你的英雄技能变为0费",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "持续装备效果由 battle.bag.js 的 slamSkill 按 equipped 与当前 hand.length 派生，逐句即时效果审计不读取英雄技能费用。requested-card-integration.test.js 覆盖真实穿戴、3/4张边界、五职业、0能量结算、每回合一次及移除装备恢复费用。"
+      }
+    },
+    {
       "id": "tt13-chaos-deck",
       "clause": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌",
       "reason": {
         "kind": "audit_context",
         "detail": "由 hosted 结算调用 requested-card-runtime 修改当前抽牌堆及弃手牌；文本审计不调用 hosted。requested-card-batch.test.js 与 requested-card-integration.test.js 覆盖类型、顶级、空池、费用排列和范围。"
+      }
+    },
+    {
+      "id": "tt2-piercearrow",
+      "clause": "造成（你的攻击力 - 1）点攻击伤害",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "穿甲箭使用已批准的明确攻击力减1文案；真实执行由固定 dmg:-1、dmgType:attack 与结构化 damage.amountField:dmg 负责，legacy文本逐句审计不解释该算式。pierce-arrow-revision与message回归验证攻击伤害和破甲时长。"
       }
     }
   ]

@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T07:09:18.820Z",
+  "inputKind": "real-input",
+  "detail": "正式背包腾位后一次关闭返回领奖、双击只收下冰刺一次；模拟保存失败留页，恢复后返回地图并点击原节点继续领奖，冰刺已领和另一张未领状态均保留。夹具使用内存保存端口，实际磁盘恢复由回归覆盖。",
+  "screenshot": {
+    "path": "retry-and-reentry-passed.png",
+    "bytes": 53531,
+    "sha256": "028e5c41a25c4e0f7d5920fb1b96be8a5deed1d4c53c1aa7b4e45457a79186d3"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/dev/feedback-1018-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/archive.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/spell-tt3-ice-spike.webp?art=ice-spike-frozen-gear-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/sparkles.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/martial-tt3-frostfall.webp?art=tt3-frostfall-cropped-action-builtin-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/bag.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": [
+    {
+      "level": "error",
+      "message": "[SDT.Art] missing asset mapping: card:martial-melee",
+      "timestamp": "2026-10-20T06:57:09.392Z",
+      "url": "http://127.0.0.1:5200/src/core/diagnostics.local.js"
+    }
+  ]
+}

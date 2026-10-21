@@ -3,6 +3,9 @@ import { fileURLToPath } from 'node:url';
 
 const tscPath = fileURLToPath(new URL('../node_modules/typescript/bin/tsc', import.meta.url));
 const configs = [
+  'jsconfig.framework-boundaries.json',
+  // Battle command/receipt contracts only; the legacy factory body is outside strict checking.
+  'jsconfig.framework-ports.json',
   'jsconfig.json',
   'jsconfig.battle-settlement.json',
   'jsconfig.battle-snapshot.json',

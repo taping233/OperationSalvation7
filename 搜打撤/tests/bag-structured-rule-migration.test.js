@@ -4,6 +4,10 @@ import { resolve } from 'node:path';
 import { KEY as CARDS_KEY } from '../game/src/cards/cards.consts.js';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { RunStorage } from '../game/src/hub/game.storage.js';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
+
+installImmediateWebLocks();
 
 window.HTMLCanvasElement.prototype.getContext = () => ({
   measureText: () => ({ width: 10 }), clearRect() {}, fillRect() {}, drawImage() {},
@@ -22,6 +26,7 @@ const MIGRATION_KEY = 'sdt-cards-bag-use-v2-seeded';
 let Cards, game, bag, sampleCard;
 beforeAll(async () => {
   await import('../game/src/main.js');
+  trackMainPagePreparation();
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
   await new Promise(resolveTick => setTimeout(resolveTick, 0));
   ({ game } = await import('../game/src/run/game.session.js'));
@@ -29,7 +34,7 @@ beforeAll(async () => {
   Cards = window.SDT.Cards;
   sampleCard = Cards.all().find(card => card.type === '法术' || card.type === '攻击');
 });
-afterAll(() => { vi.restoreAllMocks(); });
+afterAll(async () => { vi.restoreAllMocks(); await releaseMainPage(); });
 
 function setScenario({ hp = 20, maxHp = 100, ownedCards = [], usedPocket = [], inventory = [] } = {}) {
   Object.assign(game, {
@@ -178,14 +183,16 @@ describe('原始定版背包规则与旧档回填', () => {
   });
 
   it('真实旧档 loadGame 刷新无规则 ownedCards 快照，名称与描述采用现行卡库', async () => {
-    const slot = 7;
+    const slot = 5;
     const session = await import('../game/src/run/game.session.js');
     const originalRun = RunStorage.read(slot);
-    const originalBaseRaw = localStorage.getItem(`sdt_base_${slot}`);
+    const baseKey = window.SDT.Base.SLOT_KEY(slot);
+    const originalBaseRaw = localStorage.getItem(baseKey);
     try {
       window.SDT.Base.use(slot);
       session._set_active_slot(slot);
-      session.newRun('standard', [], { skipClassChoice: true });
+      RunStorage.remove(slot);
+      expect(await session.newRun('standard', [], { skipClassChoice: true })).not.toBe(false);
       const source = Cards.all().find(card => card.id === 'tt-crystal');
       const stale = { ...source, name: '旧档旧名', desc: '旧档旧描述。' };
       delete stale.rules;
@@ -201,8 +208,8 @@ describe('原始定版背包规则与旧档回填', () => {
     } finally {
       if (originalRun) RunStorage.write(slot, originalRun);
       else RunStorage.remove(slot);
-      if (originalBaseRaw == null) localStorage.removeItem(`sdt_base_${slot}`);
-      else localStorage.setItem(`sdt_base_${slot}`, originalBaseRaw);
+      if (originalBaseRaw == null) localStorage.removeItem(baseKey);
+      else localStorage.setItem(baseKey, originalBaseRaw);
       session._set_active_slot(null);
     }
   });

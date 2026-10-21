@@ -36,8 +36,8 @@ function richDescriptionFragment(text) {
 const richDescriptionMemo = new Map();
 const RICH_DESCRIPTION_LIMIT = 256;
 const RICH_DESCRIPTION_MAX_LENGTH = 2048;
-export function descRich(desc, cardId) {
-  const text = displayCardDescription(desc, cardId);
+export function descRich(desc, cardId, card) {
+  const text = displayCardDescription(desc, cardId, card);
   if (richDescriptionMemo.has(text)) return richDescriptionMemo.get(text);
   const keyword = text.match(/^([^<>：\n]{1,10})：/);
   const html = keyword
@@ -72,16 +72,18 @@ export function cardBackHTML(backId, cls) {
 // 以卡对象为键的 WeakMap 安全性：对局内卡对象字段不原地改（费用/伤害变化走 opts
 // 传入，见 costOverride/dmgOverride）；制作坊 upsert 是整卡替换新对象，旧键随之作废。
 // opts 不同的调用（hideCost/low/放大查看）各自命中不同 key，互不污染。
+// 规则字段生成的描述参与 key，数值变化不会命中旧文案。
 const cardHTMLMemo = new WeakMap();
 // 卡库对象可存活整个会话，动态费用/加伤的旧变体只保留最近生成的 32 份。
 const CARD_HTML_VARIANTS_LIMIT = 32;
 export function cardHTML(c, cls, opts) {
+  const description = displayCardDescription(c.desc, c.id, c);
   let key;
-  try { key = (cls || '') + '|' + JSON.stringify(opts || null); }
-  catch { return buildCardHTML(c, cls, opts); }   // opts 含循环引用等异常：放弃缓存直算
+  try { key = (cls || '') + '|' + JSON.stringify(opts || null) + '|' + description; }
+  catch { return buildCardHTML(c, cls, opts, description); }   // opts 含循环引用等异常：放弃缓存直算
   let variants = cardHTMLMemo.get(c);
   if (variants?.has(key)) return variants.get(key);
-  const html = buildCardHTML(c, cls, opts);
+  const html = buildCardHTML(c, cls, opts, description);
   if (!variants) {
     variants = new Map();
     cardHTMLMemo.set(c, variants);
@@ -91,8 +93,7 @@ export function cardHTML(c, cls, opts) {
   return html;
 }
 
-function buildCardHTML(c, cls, opts) {
-  const description = displayCardDescription(c.desc, c.id);
+function buildCardHTML(c, cls, opts, description) {
   // 2026-09-28 代码线：体内同名局部 esc/escAttr（3 字符/缺单引号）已删，统一走顶层 core/shared 满配版
   const hideCost = c.type === '资源' || (!!(opts && opts.hideCost) && SDT.Cards.NO_COST_TYPES.includes(c.type));
   const costBase = (opts && opts.costOverride && opts.costOverride.base != null) ? +opts.costOverride.base : (c.cost || 0);
@@ -135,7 +136,7 @@ function descLenCls(description) {
 const drawN = +(c.draw || 0), infN = +(c.infuse || 0);
   const healN = +(c.heal || 0), armN = +(c.armor || 0);
   const kwArr = [];
-  if (drawN > 0) kwArr.push(`<span class="kw-draw" title="抽卡 ${drawN}：BOSS 战从牌库抽 ${drawN} 张 · 普通战斗改为获得 ${drawN} 张初始攻击">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
+  if (drawN > 0) kwArr.push(`<span class="kw-draw" title="从本场牌库抽 ${drawN} 张牌">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);
   if (infN > 0) {
     const alt = SDT.Cards.infuseAlt(c);
     kwArr.push(`<span class="kw-infuse${alt ? ' alt' : ''}" title="${escAttr(alt

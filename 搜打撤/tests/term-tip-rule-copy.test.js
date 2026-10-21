@@ -2,9 +2,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CURSES, CURSE_META } from '../game/src/battle/core/combat.js';
 import '../game/src/ui/term-tips.js';
 
-beforeEach(() => {
+beforeEach(async () => {
   vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ x: 0, y: 0, width: 80, height: 20 }]);
-  document.body.insertAdjacentHTML('beforeend', '<span id="rule-copy-term"></span>');
+  document.body.insertAdjacentHTML('beforeend', '<span id="rule-copy-term" data-term="poison"></span>');
+  document.getElementById('rule-copy-term').dispatchEvent(new MouseEvent('pointerover', { bubbles:true }));
+  await vi.dynamicImportSettled();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
 });
 afterEach(() => {
   document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
@@ -41,10 +44,10 @@ describe('通用词条讲解与当前规则边界', () => {
     expect(text).not.toContain('不注能则按弱效果直接打出');
   });
 
-  it('消耗说明区分对象和BOSS墓地，不承诺本牌打出即消耗', () => {
+  it('消耗说明使用统一牌堆和取回规则，并区分消耗对象', () => {
     const text = showTerm('exhaust');
-    expect(text).toContain('被消耗的牌进入消耗区');
-    expect(text).toContain('BOSS 战中进入墓地，不参与洗回');
+    expect(text).toContain('被消耗的牌进入消耗牌堆');
+    expect(text).toContain('不自动洗回牌库，只能由卡牌效果取回');
     expect(text).toContain('消耗本牌还是其他牌，以卡面说明为准');
     expect(text).not.toContain('此牌打出后进入墓地');
   });

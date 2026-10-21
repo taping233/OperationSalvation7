@@ -42,7 +42,19 @@ const SYNC_JSON = path.join(ROOT, 'game', 'data', 'cards-sync.json');
 const CARDS_MODULE_ORDER = [
   'cards.consts.js',       // 键/常量，无依赖
   'cards.catalog.js',      // resolveCardCatalog（依赖 DATA.cardsSync）
-  'card-rules.schema.js',  // validateCardRules，无依赖
+  'builtin-card-identities.js',
+  'builtin-card-previous-rules.js',
+  'builtin-card-previous-variants.js',
+  'builtin-equipment-previous-rules.js',
+  'builtin-equipment-execution.js',
+  'builtin-choice-execution.js',
+  'builtin-card-execution.js',
+  'builtin-card-field-defaults.js',
+  'builtin-card-numeric-fields.js',
+  'card-semantic-contract.js',
+  'card-trigger-contract.js', // schema/capability 共用的纯时点契约
+  'card-execution-plan.js', // schema re-export 与 capability 共用的纯执行视图
+  'card-rules.schema.js',  // validateCardRules（依赖时点契约）
   'cards.data.js',         // dataSlice（依赖 catalog）
   'cards.rules.js',        // rulesSlice（依赖 consts/Random/DATA/window.SDT）
   'cards.sync.js',         // syncSlice（依赖 consts/Random/DATA/schema/window.SDT）
@@ -64,6 +76,7 @@ const MIGRATION_MODULES = [
   ['cards.sync.m10.js', 'ensureM10HostedEquipmentRules'],
   ['cards.sync.m11.js', 'ensureM11HostedRules'],
   ['rot-seed-revision.js', 'ensureRotSeedRevision'],
+  ['cards.sync.builtin.js', 'ensureBuiltinExecutionRules'],
 ];
 const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
 // 2026-09-29 沙箱失真修复：cards.sync.js 的 backfillStructuredRuleDefinitions 依赖
@@ -101,7 +114,7 @@ function makeStorage() {
 function stripModule(source, seenLines) {
   return source
     .replace(/^\s*import\s+[^;]+;?\s*$/gm, '')
-    .replace(/^\s*export\s*\{[^}]*\};?\s*$/gm, '')
+    .replace(/^\s*export\s*\{[^}]*\}(?:\s+from\s+['"][^'"]+['"])?;?\s*$/gm, '')
     .replace(/^(\s*)export\s+(const|function|let|class)\b/gm, '$1$2')
     .split('\n')
     .filter(line => {

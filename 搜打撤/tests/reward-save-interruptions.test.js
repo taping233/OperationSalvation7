@@ -1,8 +1,10 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 // Isolated jsdom storage only. Real session save/load, grant, capacity and chest controller.
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeAll, beforeEach, expect, it, vi } from 'vitest';
 
-let session, game, UI, Base, Chests, RunStorage, Random, openChestsOnCell;
+let session, game, UI, Base, Chests, RunStorage, Random, scenes, openChestsOnCell;
 const reward = { id:'interruption-reward', name:'中断奖励', type:'法术', rarity:'古朴', desc:'', cost:0 };
 const clone = value => JSON.parse(JSON.stringify(value));
 const ctx = new Proxy({}, { get:() => () => ctx, set:() => true });
@@ -21,7 +23,7 @@ beforeAll(async () => {
   session = await import('../game/src/run/game.session.js');
   ({ RunStorage } = await import('../game/src/hub/game.storage.js'));
   ({ Random } = await import('../game/src/core/random.js'));
-  const scenes = await import('../game/src/run/game.run.scenes.js');
+  scenes = await import('../game/src/run/game.run.scenes.js');
   const { grantEventCard, resumeChestsOnCell } = scenes;
   openChestsOnCell = scenes.openChestsOnCell;
   await import('../game/src/run/chests.js');
@@ -34,9 +36,9 @@ beforeAll(async () => {
   game.persistSave = session.saveGame;
   session.configureGameRuntime({ resumeChestsOnCell, openClassChoice:vi.fn() });
 });
-beforeEach(() => {
+beforeEach(async () => {
   vi.useFakeTimers(); localStorage.clear(); RunStorage.remove(1);
-  Base.use(1); Base.reset(1); session._set_active_slot(1);
+  Base.use(1); (await Base.reset(1)); session._set_active_slot(1);
   game.seed = Random.reseed('reward-interruption');
   session.buildDerived(game.seed);
   Object.assign(game, { runActive:true, nestActive:false, battleActive:false, state:'idle', myClass:'战士',
@@ -119,7 +121,7 @@ it('旧三选一小箱在选择前后真实保存恢复，保留三张候选及�
 });
 
 
-it('授予后的实际写盘失败不写半份奖励，读档回退后可重新领取一次', () => {
+it('授予后的实际写盘失败保留领奖页，读档回退后可重新领取一次', async () => {
   open(); UI._acts.chestReveal();
   const diskBefore = localStorage.getItem(RunStorage.key(1));
   const original = Storage.prototype.setItem;
@@ -131,11 +133,51 @@ it('授予后的实际写盘失败不写半份奖励，读档回退后可重新�
   expect(count(reward.id)).toBe(1);
   expect(Chests.serialize(game).current.taken).toEqual([0]);
   expect(localStorage.getItem(RunStorage.key(1))).toBe(diskBefore);
+  expect(await UI._acts.chestReturn()).toBe(false);
+  expect(game.state).toBe('modal');
+  expect(Chests.serialize(game).current.taken).toEqual([0]);
+  expect(UI.el.overlay.hidden).toBe(false);
+  expect(UI.el.ovBody.textContent).toContain('保存');
   failure.mockRestore(); restore();
   expect(count(reward.id)).toBe(0); expect(Chests.serialize(game).current.taken).toEqual([]);
   UI._acts.chestTake1({i:0}); restore();
   expect(count(reward.id)).toBe(1); expect(game.coins).toBe(1);
   expect(saved().chestReward).toBeNull();
+});
+
+it('单卡自动收尾保存失败时保留领奖页且不显示成功回执', () => {
+  open(); UI._acts.chestReveal();
+  const persist = game.persistSave;
+  const failure = vi.spyOn(game, 'persistSave').mockImplementation(() => Chests.serialize(game) ? persist() : false);
+  UI._acts.chestTake1({i:0});
+  expect(count(reward.id)).toBe(1);
+  expect(game.state).toBe('modal');
+  expect(Chests.serialize(game).current.taken).toEqual([0]);
+  expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
+  expect(document.querySelector('.reward-completion-receipt')).toBeNull();
+  failure.mockRestore(); UI._acts.chestRetrySave(); UI._acts.chestClosePicker(); UI._acts.chestFinish();
+  expect(saved().chestReward).toBeNull();
+  expect(game.state).toBe('idle');
+});
+
+it('固定奖励最终写盘失败保留可重试原页；成功完成时节点和无待领奖状态一起落盘', () => {
+  const key = `${game.layerIdx},${game.trackPos}`;
+  expect(scenes.openFixedRewardsOnCell([reward], '完成检查点', { consumeNode:true })).toBe(true);
+  UI._acts.chestTake1({i:0});
+  const before = localStorage.getItem(RunStorage.key(1)), original = Storage.prototype.setItem;
+  const failure = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (storeKey, value) {
+    if (storeKey === RunStorage.key(1)) throw new Error('isolated finish quota failure');
+    return original.call(this, storeKey, value);
+  });
+  UI._acts.chestContinue();
+  expect(game.state).toBe('modal'); expect(UI.el.overlay.hidden).toBe(false);
+  expect(Chests.serialize(game).current.taken).toEqual([0]);
+  expect(count(reward.id)).toBe(1); expect(localStorage.getItem(RunStorage.key(1))).toBe(before);
+  expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
+  failure.mockRestore(); UI._acts.chestContinue();
+  expect(saved().visited[key]).toBe(1); expect(saved().chestReward).toBeNull();
+  expect(saved().nodeChestRewards[key]).toBeUndefined();
+  restore(); expect(count(reward.id)).toBe(1); expect(Chests.isOpen()).toBe(false);
 });
 
 it('真实宝箱授予经读档进入撤离整理，入库后重建commands再完成只入仓一次', async () => {

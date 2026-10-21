@@ -1,0 +1,106 @@
+{
+  "kind": "read-only candidate attribution, not Rollup chunk removal proof",
+  "staticEntry": "game/src/game.boot.js -> agent/agent.js",
+  "agentStaticModuleCount": 16,
+  "rawBytes": 184855,
+  "individualGzipBytesSum": 33305,
+  "caveat": "Per-module minified gzip sums are not additive final Rollup chunk savings. Preserve synchronous observe/policy/recorder contracts and lazy execution safety before changing imports.",
+  "files": [
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "rawBytes": 55570,
+      "minifiedBytes": 17648,
+      "individualGzipBytes": 7094
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "rawBytes": 33335,
+      "minifiedBytes": 12258,
+      "individualGzipBytes": 5232
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "rawBytes": 19156,
+      "minifiedBytes": 8978,
+      "individualGzipBytes": 3381
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "rawBytes": 7929,
+      "minifiedBytes": 6402,
+      "individualGzipBytes": 2615
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "rawBytes": 15871,
+      "minifiedBytes": 5775,
+      "individualGzipBytes": 2525
+    },
+    {
+      "path": "game/src/agent/agent.llm.js",
+      "rawBytes": 8313,
+      "minifiedBytes": 4922,
+      "individualGzipBytes": 2464
+    },
+    {
+      "path": "game/src/agent/agent.replay.js",
+      "rawBytes": 7600,
+      "minifiedBytes": 4370,
+      "individualGzipBytes": 1845
+    },
+    {
+      "path": "game/src/agent/agent.replay-state.js",
+      "rawBytes": 4459,
+      "minifiedBytes": 2933,
+      "individualGzipBytes": 1388
+    },
+    {
+      "path": "game/src/agent/agent.protocol.js",
+      "rawBytes": 5175,
+      "minifiedBytes": 2692,
+      "individualGzipBytes": 1143
+    },
+    {
+      "path": "game/src/agent/agent.battle-stats.js",
+      "rawBytes": 3158,
+      "minifiedBytes": 1816,
+      "individualGzipBytes": 1002
+    },
+    {
+      "path": "game/src/agent/agent.surface.js",
+      "rawBytes": 5908,
+      "minifiedBytes": 2128,
+      "individualGzipBytes": 996
+    },
+    {
+      "path": "game/src/agent/agent.stats.js",
+      "rawBytes": 4173,
+      "minifiedBytes": 1892,
+      "individualGzipBytes": 923
+    },
+    {
+      "path": "game/src/agent/agent.weights.js",
+      "rawBytes": 6702,
+      "minifiedBytes": 1252,
+      "individualGzipBytes": 740
+    },
+    {
+      "path": "game/src/agent/agent.scenes.js",
+      "rawBytes": 3408,
+      "minifiedBytes": 1230,
+      "individualGzipBytes": 722
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "rawBytes": 3125,
+      "minifiedBytes": 1705,
+      "individualGzipBytes": 692
+    },
+    {
+      "path": "game/src/agent/agent.scenes.catalog.js",
+      "rawBytes": 973,
+      "minifiedBytes": 1301,
+      "individualGzipBytes": 543
+    }
+  ]
+}

@@ -84,7 +84,10 @@ export function createEffectPipeline(deps) {
       durOv: (String(text || '').match(/持续\s*(\d+)\s*回合/) || [])[1],
       curseTarget: target ? (target.dead ? null : target) : deps.getAlive()[0] || null,
     };
+    ctx.silenced = !!(ctx.flags.triggered && (ctx.pstat.status.silence || 0) > 0);
+    if (ctx.silenced) deps.log(`[[icon:cross]] 沉默中：<b>${deps.escapeHtml(card.name)}</b> 的触发技能被封印（只剩伤害生效）`, 'warn');
     for (const step of steps) {
+      if (ctx.silenced && !step.silenceAllowed) continue;
       if (step.gate !== 'always' && ctx.did) continue;
       const m = step.when(ctx);
       if (!m) continue;
@@ -92,8 +95,8 @@ export function createEffectPipeline(deps) {
       if (out && out.halt) return out.result;
     }
     // —— 未识别子句哨兵（批次 3）：牌面像有效果、却既没结算也没被任何层认领 ——
-    const result = { did: ctx.did, drawn: ctx.drawn, healed: ctx.healed, armored: ctx.armored };
-    if (!ctx.did && !ctx.drawn && !ctx.healed && !ctx.armored) noteUnknownEffect(card, ctx.desc);
+    const result = { did: ctx.did || ctx.silenced, drawn: ctx.drawn, healed: ctx.healed, armored: ctx.armored };
+    if (!result.did && !ctx.drawn && !ctx.healed && !ctx.armored) noteUnknownEffect(card, ctx.desc);
     return result;
   }
   // 回合触发等旧调用仍同步结算；玩家出牌可在每次命中间等待反馈。

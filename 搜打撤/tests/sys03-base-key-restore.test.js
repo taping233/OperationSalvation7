@@ -6,6 +6,8 @@
  * 独立无 mock 环境：sys03-altar-restore-txn.test.js 的 game.storage mock 与本链的存档事务冲突。
  * 口径：古朴 1 / 稀有 2 / 史诗 3 / 传说 4，整堆复原 = 单张价 × 张数（base.js POCKET_KEY_COST）。 */
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 
 window.SDT = window.SDT || {};
 window.SDT.Icons = { rich: x => x };
@@ -35,35 +37,35 @@ describe('SYS-03 钥匙复原链（base.restore / pocketKeyCost）', () => {
     expect(BaseApi.pocketKeyCost(null)).toBe(0);
   });
 
-  it('钥匙不足：nokey 拒绝，口袋与钥匙原样不动（未领/已领不搞混）', () => {
+  it('钥匙不足：nokey 拒绝，口袋与钥匙原样不动（未领/已领不搞混）', async () => {
     const stack = freshSlot();
     BaseApi.data.pocket = [stack];
     BaseApi.data.keys = 3;   // 3 < 4
-    expect(BaseApi.restore(0)).toEqual({ why: 'nokey', cost: 4 });
+    expect(await BaseApi.restore(0)).toEqual({ why: 'nokey', cost: 4 });
     expect(BaseApi.data.keys).toBe(3);
     expect(BaseApi.data.pocket).toHaveLength(1);
   });
 
-  it('仓库满：full 拒绝且不扣钥匙', () => {
+  it('仓库满：full 拒绝且不扣钥匙', async () => {
     const stack = freshSlot();
     BaseApi.data.pocket = [stack];
     BaseApi.data.keys = 10;
     BaseApi.data.stash = Array.from({ length: 10 }, (_, i) => ({ card: { id: 'f' + i, name: '满' + i }, count: 1 }));
-    expect(BaseApi.restore(0)).toBe('full');
+    expect(await BaseApi.restore(0)).toBe('full');
     expect(BaseApi.data.keys).toBe(10);
     expect(BaseApi.data.pocket).toHaveLength(1);
   });
 
-  it('复原成功：mutate 事务内扣钥匙+口袋移除+整堆入仓；无效序号不动作', () => {
+  it('复原成功：mutate 事务内扣钥匙+口袋移除+整堆入仓；无效序号不动作', async () => {
     const stack = freshSlot();
     BaseApi.data.pocket = [stack];
     BaseApi.data.keys = 10;
     BaseApi.data.stash = [];
-    expect(BaseApi.restore(0)).toBe(true);
+    expect(await BaseApi.restore(0)).toBe(true);
     expect(BaseApi.data.keys).toBe(6);   // 10 - 4
     expect(BaseApi.data.pocket).toHaveLength(0);
     expect(BaseApi.data.stash).toEqual([{ card: { id: 'k1', name: '消耗卡', rarity: '稀有', type: '法术' }, count: 2 }]);
-    expect(BaseApi.restore(99)).toBe(false);
+    expect(await BaseApi.restore(99)).toBe(false);
     expect(BaseApi.data.keys).toBe(6);
   });
 });

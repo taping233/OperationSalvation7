@@ -48,11 +48,12 @@ it.each([['usePotion', false], ['usePotion', true], ['useItem', false], ['useIte
   expect(R.consumed).toEqual([]);
   expect(JSON.stringify(game.usedPocket)).toBe(mapPocket);
   if (nonempty) {
+    expect(R.hand).toContain('runtime-0');
     expect(R.hand).toContain('runtime-1');
-    expect(game.logs.some(log => log.includes('复原 1 张消耗卡'))).toBe(true);
+    expect(game.logs.some(log => log.includes('复原 2 张消耗牌'))).toBe(true);
   } else {
     expect(R.hand).toEqual(handBefore);
-    expect(game.logs.some(log => log.includes('消耗堆是空的'))).toBe(true);
+    expect(game.logs.some(log => log.includes('消耗牌堆是空的'))).toBe(true);
   }
 });
 
@@ -92,7 +93,7 @@ it('复原药水入队后本场消耗堆被清空，执行前复检保留药水�
   expect(JSON.stringify(game.usedPocket)).toBe(mapBefore);
   expect(R.hand).toEqual([]);
   expect(R.consumed).toEqual([]);
-  expect(game.logs.some(log => log.includes('本场消耗堆是空的') && log.includes('道具未消耗'))).toBe(true);
+  expect(game.logs.some(log => log.includes('本场消耗牌堆是空的') && log.includes('道具未消耗'))).toBe(true);
 });
 
 
@@ -112,7 +113,9 @@ it.each(['legacy', 'current', 'custom'])('已播种旧药水卡库的文案回�
 it('旧药水快照卡面也显示现行双场景说明，自定义文字不替换', async () => {
   const { displayCardDescription } = await import('../game/src/cards/card-description-text.js');
   const legacy = '在背包中才能使用，复原最多两张卡牌';
-  expect(displayCardDescription(legacy, 'cmtn6bge52qt')).toBe(C.TABLETOP11.find(card => card.id === 'cmtn6bge52qt').desc);
+  const rendered = displayCardDescription(legacy, 'cmtn6bge52qt');
+  expect(rendered).toBe(displayCardDescription(C.TABLETOP11.find(card => card.id === 'cmtn6bge52qt').desc, 'cmtn6bge52qt'));
+  expect(rendered).toContain('消耗牌堆');
   expect(displayCardDescription('玩家自定义药水说明', 'cmtn6bge52qt')).toBe('玩家自定义药水说明');
   expect(displayCardDescription(legacy, 'custom-id')).toBe(legacy);
 });

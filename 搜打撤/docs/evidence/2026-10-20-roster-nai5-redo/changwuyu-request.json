@@ -1,0 +1,87 @@
+{
+  "status": "prepared_not_sent",
+  "reason": "Batch stopped on preceding HTTP429.",
+  "request": {
+    "input": "1boy, solo, full body, elegant three-quarter front standing pose, faint calm smile. Right black-gloved fingertips touch the bridge of his round eyeglasses, left arm rests across his waist. An opaque solid black smoky cloud floats on viewer-left at chest height; a round orange fireball with a long comet tail floats on viewer-right. No staff or wand.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1326307804,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, refined androgynous masculine face, yellow eyes, pointed elf ears, silver-gray long hair gathered into a low bun behind head, long loose sidelocks over shoulders, thin round metal eyeglasses. Large black broad-brimmed witch hat with long crooked bent pointed tip and purple underside. Black high-collar long robe and black gloves, long sweeping cape with purple lining and gold edging. White feather and blue sapphire in gold brooch on his left chest, not on hat. Black lace-up boots.",
+          "uc": "staff, wand, walking stick, red eyes, girl, breasts, feather on hat, short hair",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1boy, solo, full body, elegant three-quarter front standing pose, faint calm smile. Right black-gloved fingertips touch the bridge of his round eyeglasses, left arm rests across his waist. An opaque solid black smoky cloud floats on viewer-left at chest height; a round orange fireball with a long comet tail floats on viewer-right. No staff or wand.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, refined androgynous masculine face, yellow eyes, pointed elf ears, silver-gray long hair gathered into a low bun behind head, long loose sidelocks over shoulders, thin round metal eyeglasses. Large black broad-brimmed witch hat with long crooked bent pointed tip and purple underside. Black high-collar long robe and black gloves, long sweeping cape with purple lining and gold edging. White feather and blue sapphire in gold brooch on his left chest, not on hat. Black lace-up boots.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+          "char_captions": [
+            {
+              "char_caption": "staff, wand, walking stick, red eyes, girl, breasts, feather on hat, short hair",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/roster-nai5-redo-20261020/changwuyu.png",
+  "integration": "candidate only"
+}

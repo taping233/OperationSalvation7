@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
 
 const slotId = 1;
 const runKey = `sdt-save-v2-slot${slotId}`;
@@ -38,7 +39,7 @@ async function loadCommands({ initialize = false, lockManager = locks, failpoint
     Base.data.eggBattles = 0;
     Base.data.stats.playSeconds = 40;
     Base.data.ammoTaught = true;
-    expect(Base.save()).toBe(true);
+    expect(await Base.save()).toBe(true);
   } else {
     Base.use(slotId);
   }
@@ -93,7 +94,8 @@ beforeEach(async () => {
   vi.resetModules();
   localStorage.clear();
   activeSlot = slotId;
-  priorLocks = null;
+  priorLocks = Object.getOwnPropertyDescriptor(navigator, 'locks');
+  installImmediateWebLocks();
   window.SDT = { Icons: { img: () => '' } };
   await loadCommands({ initialize: true });
 });
@@ -168,7 +170,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
       env.Base.data.stats.kills = 0;
       env.Base.data.stats.bossKills = [];
       env.Base.data.characters.wu = { lv: 1, xp: 0 };
-      expect(env.Base.save()).toBe(true);
+      expect(await env.Base.save()).toBe(true);
       const progressInput = {
         foeNames: ['首脑', '随行敌人', '随行敌人'], isBoss: true, classId: 'wu', xpMultiplier: 5,
       };
@@ -224,7 +226,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     expect(await env.commands.commitAttempt(attempt)).toMatchObject({ ok: true, replay: true });
     expect(rawSnapshot()).toEqual(beforeReplay);
     env.Base.data.coins += 1;
-    expect(env.Base.save()).toBe(true);
+    expect(await env.Base.save()).toBe(true);
     const currentRun = env.RunStorage.read(slotId);
     expect(env.RunStorage.write(slotId, { ...currentRun, turn: 9 })).toBe(true);
   });
@@ -274,7 +276,7 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     env = await resetAndReload({ initialize: true });
     const baseAttempt = await prepare(env);
     env.Base.data.coins += 1;
-    expect(env.Base.save()).toBe(true);
+    expect(await env.Base.save()).toBe(true);
     expect(await env.commands.commitAttempt(baseAttempt.attempt)).toMatchObject({ ok: false, code: 'STALE_REVISION' });
     expect(env.Base.data.eggBattles).toBe(0);
 
@@ -337,11 +339,10 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
   it('真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励', async () => {
     vi.resetModules();
     delete window.SDT.Base;
-    priorLocks = Object.getOwnPropertyDescriptor(navigator, 'locks');
     Object.defineProperty(navigator, 'locks', { configurable: true, value: locks });
     const env = await loadCommands({ initialize: true });
     env.Base.data.characters.wu = { lv: 1, xp: 0 };
-    expect(env.Base.save()).toBe(true);
+    expect(await env.Base.save()).toBe(true);
     const killsBefore = env.Base.data.stats.kills;
     const bossKillsBefore = [...env.Base.data.stats.bossKills];
     settleHarness.game = {

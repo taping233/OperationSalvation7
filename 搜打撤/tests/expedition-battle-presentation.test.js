@@ -56,9 +56,9 @@ it.each(['deck', 'bag'])('keeps the canonical full rule when inspecting the %s s
   if (kind === 'deck') renderDeckPileView(snapshot);
   else renderBattleBag(snapshot);
   const rules = UI.el.ovBody.querySelector('.battle-decision-inspect-rules').textContent;
-  expect(rules).toContain('本场战斗消耗牌');
-  expect(rules).toContain('不计之前战斗');
-  expect(rules).toContain('仅进入墓地的牌不计');
+  expect(rules).toBe('抽 2 张牌，并回复你的全部能量；消耗牌堆中每有 1 张法术牌，本牌费用减少 1 点。');
+  expect(rules).toContain('消耗牌堆中每有 1 张法术牌');
+  expect(rules).toContain('抽 2 张牌，并回复你的全部能量');
 });
 
 it('stores only the visible carried group when stored cards share the same id', () => {

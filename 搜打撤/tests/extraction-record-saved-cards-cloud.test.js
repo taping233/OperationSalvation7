@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 // Real two-key transaction, recovery, recorder and export modules; isolated jsdom storage only.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 window.SDT = {
@@ -23,9 +25,9 @@ async function harness({ owned, stash = [], clear = true } = {}) {
   localStorage.clear();
   RunStorage.remove(2);
   recorder.resetRunCounters();
-  Base.use(2); Base.reset(2);
+  Base.use(2); (await Base.reset(2));
   Base.data.stash = structuredClone(stash);
-  expect(Base.save()).toBe(true);
+  expect((await Base.save())).toBe(true);
   const game = { pendingExtraction: null, runActive: true, extractionPending: false, mode: 'standard',
     bossKilled: clear, layerIdx: clear ? 3 : 1, turn: 55, coins: 15, elapsed: 8337, hp: 10,
     usedPocket: [], inventory: [], ownedCards: owned.map((c, i) => ({ uid: `saved-audit-${i}`, card: structuredClone(c) })),

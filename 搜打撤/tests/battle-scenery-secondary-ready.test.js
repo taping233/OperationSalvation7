@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
   attach: vi.fn(() => Promise.resolve(false)), hide: vi.fn(), cacheStats: () => ({}),
-  play: vi.fn(), setPaused: vi.fn(), presentDeath: vi.fn(), isLiveBattleFigure: () => false,
+  play: vi.fn(), setPaused: vi.fn(), presentDeath: vi.fn(), isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
 }));
 const frames = await import('../game/src/battle/view/battle.frames.js');
 

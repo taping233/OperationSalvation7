@@ -111,11 +111,13 @@ export type BattleSnapshotInput = {
   drawPile: string[];
   discard: string[];
   grave: string[];
+  played?: string[];
   consumed?: string[];
+  consumedPile?: string[];
   handInfuseCounts?: Record<string, number>;
   infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
-  handSelecting: ({ srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
+  handSelecting: ({ candidateUids?: readonly string[]; canCancel?: boolean; srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
   choosing: ({ options: unknown[]; [key: string]: unknown }) | null;
   pendingTarget: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
   pendingHint: string | null;
@@ -153,6 +155,8 @@ export type SnapshotAlly = {
   readonly [key: string]: unknown;
 };
 export type SnapshotHandSelecting = {
+  readonly candidateUids: readonly string[];
+  readonly canCancel: boolean;
   readonly srcCard?: SnapshotBattleCard | null;
   /** The payment wrapper is shallow-cloned but mutable; other nested values keep their references. Its card projection is recursively readonly. */
   readonly payment?: ({ card?: SnapshotBattleCard | null; [key: string]: unknown }) | null;
@@ -193,7 +197,9 @@ export type BattleSnapshot = {
   readonly drawPile: readonly string[];
   readonly discard: readonly string[];
   readonly grave: readonly string[];
+  readonly played?: readonly string[];
   readonly consumed?: readonly string[];
+  readonly consumedPile?: readonly string[];
   readonly handInfuseCounts?: Readonly<Record<string, number>>;
   readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
   readonly discovering: ({ readonly options: readonly SnapshotBattleCard[]; readonly [key: string]: unknown }) | null;

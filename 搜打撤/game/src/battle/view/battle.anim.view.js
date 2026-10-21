@@ -3,7 +3,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { rect as uiRect } from '../../ui/ui-scale.js';
-import { play as playUnitFrames } from './battle.frames.js';
+import { queueCardAction } from './battle.action-timing.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { showBattleCardResults } from './battle.card-results.js';
 import { showBattleEffectFeedback } from './battle.effect-feedback.js';
@@ -200,10 +200,9 @@ function replayPileClass(pile, cls, ms) {
     playedEvs.forEach(ev => { if (ev.kind === 'play') queueIdx.set(ev.uid, queueIdx.size); });
     const queueN = queueIdx.size;
     playedEvs.forEach(ev => {
-      // 攻击动作随卡牌起飞播（P1 时序修正）：法术=cast 施法舒展、武术=atk 起手连命中——
-      // atk-wind 320ms ≈ 飞行 400ms，hit 帧正好落在伤害数字冒出瞬间（此前在命中后才播，倒挂）
-      if (ev.kind === 'play' && ev.type === '法术') playUnitFrames('cast');   // 批次D：施法动作
-      else if (ev.kind === 'play' && ev.type === '武术') playUnitFrames('atk');
+      // The real damage windup owns the actor action; card flights never restart it.
+      // Non-damaging cards keep their original action after this render's cues are known.
+      if (ev.kind === 'play') queueCardAction(body, ev.type === '法术' ? 'cast' : ev.type === '武术' ? 'atk' : null);
       const old = prev && (prev.cards[ev.uid] || Object.values(prev.cards).find(c => c.name === ev.name));
       if (!old) return;
       const sink = exitSinkFor(ev, old.rect, body, ovR);

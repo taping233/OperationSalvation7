@@ -18,12 +18,13 @@ import '../../css/beginner-guide.css';
 import '../../css/archive-back.css';
 import '../../css/leave-run.css';
 import { linkedBackHTML } from './home-linked-interactions.js';
+import { battleRestartHTML, bindBattleRestart } from './settings-battle-restart.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 
 // 非首屏面板工厂；依赖会话能力与标题回调注入，不静态导入启动/会话模块。
 export function createGameMenuPages(deps, shell) {
   const { SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
-    saveGame, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
+    saveSession, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
     RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands, openDataPage } = deps;
   const { showTitle, hideTitle, pickLatestSlot, fmtPlayTime } = shell;
 
@@ -440,6 +441,9 @@ export function createGameMenuPages(deps, shell) {
         <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
+    let pickerActive = true;
+    const pickerCurrent = page => pickerActive && !!page && page.isConnected && document.querySelector('.slot-page') === page
+      && !UI.el?.overlay?.hidden && !UI.el?.overlay?.classList.contains('closing');
     // F1 兜底（2026-09-24）：有档位渲染异常时在页面上给出可见提示（不阻塞其余档位）
     if (slotErrors.length) {
       const msg = `档位 ${slotErrors.map(i => '0' + i).join('、')} 存档数据异常，已保留原档未写回`;
@@ -456,9 +460,18 @@ export function createGameMenuPages(deps, shell) {
       UI.clearLog();
       setActiveSlot(slot);
       SDT.Base.use(slot);
+      const pickerPage = keepPicker ? document.querySelector('.slot-page') : null;
+      const current = () => getActiveSlot() === slot && SDT.Base.slot === slot && (!pickerPage || pickerCurrent(pickerPage));
       // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：仓库/口袋副本同步更名
       // 2026-09-29 收敛：直改 Base.data 后保存的迁移块移入 Base.applyStoredCardRenames
-      SDT.Base.applyStoredCardRenames();
+      let migrated, flushed;
+      try {
+        migrated = await SDT.Base.applyStoredCardRenames();
+        if (!current()) return false;
+        flushed = await SDT.Base.flushWrites?.();
+      } catch { if (current()) return returnToPicker('基地迁移未保存，原档已保留；请重试进入该档位'); return false; }
+      if (!current()) return false;
+      if (migrated?.persisted === false || flushed?.ok === false) return returnToPicker('基地迁移未保存，原档已保留；请重试进入该档位');
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
@@ -497,7 +510,9 @@ export function createGameMenuPages(deps, shell) {
       try {
         // 初始化先确认落盘；等待页面期间连点不能再次重置档案。
         SDT.Base.use(slot);
-        if (SDT.Base.reset(slot) === false) {
+        const initialized = await SDT.Base.reset(slot);
+        if (!pickerCurrent(picker) || SDT.Base.slot !== slot) return false;
+        if (initialized === false) {
           restoreError('档位初始化未保存，请检查存储空间或档位变化后重试；尚未进入基地');
           return false;
         }
@@ -526,7 +541,7 @@ export function createGameMenuPages(deps, shell) {
           const picker = document.getElementById('slotRestoreError');
           try {
             const recovered = await recoverSlotIfPending(slot);
-            if (!pickerContext() || (picker && !picker.isConnected)) return false;
+            if (!pickerContext() || !pickerCurrent(pickerPage)) return false;
             if (!recovered.ok) {
               restoreError(`${recovered.message || '存档恢复尚未完成'}；原档与恢复记录已保留，请重试进入该档位`);
               return false;
@@ -584,6 +599,9 @@ export function createGameMenuPages(deps, shell) {
                 return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
               }
               const resumedContext = captureBattleContext(game, getActiveSlot);
+              const persisted = await loaded.pendingPersistence;
+              if (!resumedContext()) return false;
+              if (persisted?.ok === false) return returnToPicker(`${persisted.message || '基地迁移未保存'}；原档已保留，请重试进入该档位`);
               if (loaded.classChoiceEntry) {
                 const sourceBody = document.getElementById('ovBody');
                 const sourceRoot = sourceBody?.firstElementChild;
@@ -624,20 +642,32 @@ export function createGameMenuPages(deps, shell) {
         }, !hasSavedRun);
       } finally { enteringSlot = false; }
     });
-    UI.act('overwriteSlot', (d) => {
+    UI.act('overwriteSlot', async (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
-      const cleared = clearSlot(+d.slot);
+      const pickerPage = document.querySelector('.slot-page');
+      enteringSlot = true;
+      let cleared;
+      try { cleared = await clearSlot(+d.slot); }
+      catch { cleared = { ok:false, message:'删除未保存，请重试' }; }
+      finally { enteringSlot = false; }
+      if (!pickerCurrent(pickerPage)) return false;
       if (cleared === false || cleared?.ok === false) {
         restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}；尚未重开`);
         return false;
       }
       return resetAndLaunch(+d.slot);
     });
-    UI.act('delSlot', (d) => {
+    UI.act('delSlot', async (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="delSlot"][data-slot="${d.slot}"]`, '确认删除？', '删除')) return;
-      const cleared = clearSlot(+d.slot);
+      const pickerPage = document.querySelector('.slot-page');
+      enteringSlot = true;
+      let cleared;
+      try { cleared = await clearSlot(+d.slot); }
+      catch { cleared = { ok:false, message:'删除未保存，请重试' }; }
+      finally { enteringSlot = false; }
+      if (!pickerCurrent(pickerPage)) return false;
       if (cleared === false || cleared?.ok === false) {
         restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}`);
         return false;
@@ -645,7 +675,7 @@ export function createGameMenuPages(deps, shell) {
       UI.log(`[[icon:trash]] 已删除【档位 ${d.slot}】的存档（含基地数据）`, 'warn');
       openSlotPicker();   // 重绘档位列表
     });
-    UI.act('slotBack', () => { UI.hideOverlay(); showTitle(); });
+    UI.act('slotBack', () => { pickerActive = false; UI.hideOverlay(); showTitle(); });
   }
 
   function startNewGame() { openSlotPicker(); }
@@ -693,12 +723,12 @@ export function createGameMenuPages(deps, shell) {
       const button = document.querySelector('[data-act="leaveSave"]');
       if (button) button.textContent = '正在保存…';
       game.state = 'idle';
-      let saved = false;
-      try { saved = await saveGame(); }
+      let saved;
+      try { saved = await saveSession(); }
       catch (error) { console.error('[leave-run] 保存退出失败', error); }
       // Saving may finish after another overlay replaces or closes this panel.
       if (!leaveViewMounted(view)) return false;
-      if (saved !== true) {
+      if (!saved?.ok) {
         game.state = 'modal';
         setLeaveBusy(view, false);
         if (button) button.textContent = '重试保存并退出';
@@ -866,6 +896,7 @@ export function createGameMenuPages(deps, shell) {
         <label class="chk"><span class="settings-row-copy"> 底部操作提示条 <span class="set-en">HINT BAR</span></span><input type="checkbox" role="switch" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}></label>
         <label class="chk"><span class="settings-row-copy"> 环层横幅 <span class="set-en">LAYER BANNER</span></span><input type="checkbox" role="switch" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}></label>
         <label class="chk"><span class="settings-row-copy"> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></span><input type="checkbox" role="switch" id="setDev" ${game.devMode ? 'checked' : ''}></label>
+        ${battleRestartHTML({ SDT, game })}
         </section>`,
       display: `<section class="settings-group settings-display">
         <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
@@ -924,6 +955,8 @@ export function createGameMenuPages(deps, shell) {
     const finishNavigation = beginRuntimeStage('settings-navigation-sync');
     try { initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page')); } finally { finishNavigation(); }
     bindPerformanceSettings(UI.el.ovBody);
+    bindBattleRestart({ SDT, UI, game, isCurrentContext: captureBattleContext(game, getActiveSlot),
+      page: UI.el.ovBody.querySelector('.settings-page') });
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
       runtime.syncDevVisibility();
@@ -951,9 +984,15 @@ export function createGameMenuPages(deps, shell) {
       if (!armDanger('wipeCards', '确认清空？')) return;
       SDT.Cards.clearAll(); UI.log('已清空卡牌库', 'warn');
     });
-    UI.act('wipeSave', () => {
+    let wipingSave = false;
+    UI.act('wipeSave', async () => {
+      if (wipingSave) return false;
       if (!armDanger('wipeSave', '确认清空全部？')) return;
-      const cleared = clearAllSlots();
+      wipingSave = true;
+      let cleared;
+      try { cleared = await clearAllSlots(); }
+      catch { cleared = { ok:false }; }
+      finally { wipingSave = false; }
       if (cleared === false || cleared?.ok === false) {
         const failed = cleared?.results?.filter(result => !result.ok) || [];
         const message = failed.map(result => `档位 ${result.slot} ${result.message}`).join('；');

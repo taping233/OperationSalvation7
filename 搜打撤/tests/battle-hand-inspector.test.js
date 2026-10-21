@@ -384,7 +384,12 @@ it('keeps each player combat stat and its actual bonus in a compact unbroken gro
     pdef: { ...before.pdef, shield: 2, armor: 3, guard: true } };
   updateUnits(mountUnitLayer(UI.el.ovBody, before.battleToken), presented, {});
   const groups = [...stage().querySelectorAll('.sts-me .sts-stats>.sts-stat')].map(node => node.textContent.trim());
-  expect(groups).toEqual(['攻 6（含+2）', '法伤 1（含+1）', '盾 2', '甲 3', '格挡中']);
+  expect(groups).toEqual(['攻 6', '法伤 1', '盾 2', '格挡中']);
+  const stats = [...stage().querySelectorAll('.sts-me .sts-stats>.sts-stat')];
+  expect(stats[0].dataset.uiTipText).toBe('基础攻击 4，攻击强化 +2');
+  expect(stats[1].dataset.uiTipText).toBe('基础法伤 0，法术强化 +1');
+  expect(stage().querySelector('.sts-me .sts-hp-armor').textContent).toBe('甲 3');
+  expect(stage().querySelector('.sts-me .sts-hp-armor').getAttribute('aria-label')).toBe('护甲 3');
   expect(BattleSession.getSnapshot()).toEqual(before);
 });
 
@@ -459,7 +464,9 @@ it('emphasizes forecast damage and remaining HP as separate values and keeps the
   expect(forecast.querySelector('.bt-forecast-hp>b').textContent).toBe(String(expected.hpAfter));
   expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
   expect(forecast.querySelector('.bt-forecast-warning').textContent).toBe('可能致死');
-  expect(forecast.title).toBe(expected.note);
+  expect(forecast.dataset.uiTipText).toBe(expected.note);
+  expect(forecast.dataset.uiTipTitle).toBe('承伤估算');
+  expect(forecast.tabIndex).toBe(0);
   expect(game.hp).toBe(1); expect(BattleSession.getSnapshot().busy).toBe(false);
 });
 
@@ -479,7 +486,8 @@ it('renders real unit icon bitmaps synchronously before observer/rAF hydration a
     const stats = stage().querySelector('.sts-me .sts-stats');
     expect(stats.textContent).not.toContain('[[icon:');
     expect(stats.querySelector('[data-asset-key="icon-shield"]')).not.toBeNull();
-    expect(stats.querySelector('[data-asset-key="icon-plate"]')).not.toBeNull();
+    expect(stage().querySelector('.sts-me .sts-hp-armor').hidden).toBe(false);
+    expect(stage().querySelector('.sts-me .sts-hp-armor').getAttribute('aria-label')).toBe('护甲 3');
     const first = head.firstChild;
     updateUnits(mounts, presented, {});
     expect(head.firstChild).toBe(first);
@@ -627,13 +635,13 @@ it('legacy passive gear occupies slots and rune capacity remains dynamic', async
  runtime.set$nestSyn({...runtime.nestSyn,grass3:false});render();expect(card().dataset.handState).toBe('blocked');
 });
 
-it('普通战武装悬浮卡片共享提示明确抽牌替代，仍可使用', () => {
+it('普通战武装共享提示明确从本场牌库抽取对应类型，仍可使用', () => {
   const arm = Cards.all().find(c => c.id === 'tt7-armup');
   start(1, arm);
   render(); flush();
   const handCard = card();
-  expect(handCard.getAttribute('aria-label')).toContain('普通战抽牌改为获得初始攻击');
-  expect(handCard.textContent).toContain('普通战抽牌改为获得初始攻击');
+  expect(handCard.getAttribute('aria-label')).toContain('从本场牌库抽取符合类型的牌');
+  expect(handCard.textContent).toContain('从本场牌库抽取符合类型的牌');
   expect(handCard.getAttribute('aria-disabled')).not.toBe('true');
 });
 
@@ -995,23 +1003,22 @@ it('扰敌同种双敌取消后可反向重选，无遗留实例排除', async (
 });
 
 
-it('普通战流光斩在卡面阅读区显示禁用理由，拒绝后不选目标或消费', () => {
+it('普通战流光斩可选择目标，确认前不消耗牌或能量', () => {
   start(2, Cards.all().find(entry => entry.id === 'tt3-flux-slash'));
-  const reason = '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';
   const desc = card().querySelector('.hsc-desc');
-  expect(desc.querySelectorAll('.bt-rulehint')).toHaveLength(1);
-  expect(desc.firstElementChild.textContent).toBe(`无法打出：${reason}`);
-  expect(card().querySelector('.hs-card').getAttribute('aria-label')).toContain(reason);
+  expect(desc.querySelector('.bt-rulehint')).toBeNull();
+  expect(card().dataset.handState).not.toBe('blocked');
   const before = infusionResources();
   Aim.selectCardByClick(card().dataset.uid); flush();
-  expect(Aim.clickSelectedUid).toBeNull(); expect(Aim.aim).toBeNull();
+  expect(Aim.clickSelectedUid).toBe('inspect-card');
+  expect(stage().querySelectorAll('.bt-foe.can-target')).toHaveLength(2);
   expect(infusionResources()).toEqual(before);
 });
 
 it('禁用理由占用单个提示槽，能量变化更新数值，恢复后还原补充规则', () => {
   start(1, { ...Cards.all().find(entry => entry.id === 'tt7-armup'), cost: 3 });
   const hint = () => card().querySelector('.hsc-desc .bt-rulehint');
-  expect(hint().textContent).toBe('普通战抽牌改为获得初始攻击。');
+  expect(hint().textContent).toBe('从本场牌库抽取符合类型的牌。');
   set$energy(0); render();
   expect(hint().textContent).toContain('能量不足');
   expect(hint().textContent).toContain('当前 0');
@@ -1019,7 +1026,7 @@ it('禁用理由占用单个提示槽，能量变化更新数值，恢复后还�
   set$energy(1); render();
   expect(hint().textContent).toBe('无法打出：能量不足：需要 3，当前 1');
   set$energy(9); render();
-  expect(hint().textContent).toBe('普通战抽牌改为获得初始攻击。');
+  expect(hint().textContent).toBe('从本场牌库抽取符合类型的牌。');
   expect(card().querySelector('.hsc-desc').textContent).not.toContain('能量不足');
 });
 
@@ -1175,16 +1182,17 @@ it('普通战从空本场消耗牌堆到实际注能材料均可查看，返回�
   start(2,{id:'pile-infusion',name:'注能护盾',type:'法术',cost:1,infuse:1,desc:'注能(1)：获得6点护盾。'},[{uid:'pile-fuel',card:Cards.SHA}]);
   const badge=()=>stage().querySelector('[data-act="btGrave"]');
   expect(badge().textContent).toContain('0');badge().click();flush();
-  expect(UI.el.ovBody.textContent).toContain('本场还没有消耗牌');
+  expect(UI.el.ovBody.textContent).toContain('消耗牌堆为空');
   UI.el.ovBody.querySelector('[data-act="btGraveBack"]').click();flush();
   BattleSession.commands.beginInfusion('inspect-card');flush();
   BattleSession.commands.selectInfusion('pile-fuel');flush();
   BattleSession.commands.confirmInfusion();await settle();
   const snap=BattleSession.getSnapshot();
   expect(snap.consumed).toContain('pile-fuel');expect(snap.grave).not.toContain('pile-fuel');
-  expect(badge().textContent).toContain('1');badge().click();flush();
-  expect(UI.el.ovBody.querySelector('.battle-pile-summary').textContent).toContain('1');
-  expect(UI.el.ovBody.querySelector('.battle-pile-card').textContent).toContain('初始攻击');
+  expect(badge().textContent).toContain('2');badge().click();flush();
+  expect(UI.el.ovBody.querySelector('.battle-pile-summary').textContent).toContain('2');
+  expect([...UI.el.ovBody.querySelectorAll('.battle-pile-card')].map(node => node.textContent).join(' ')).toContain('初始攻击');
+  expect(snap.consumedPile).toEqual(['inspect-card', 'pile-fuel']);
   UI.el.ovBody.querySelector('[data-act="btGraveBack"]').click();flush();
   expect(BattleSession.getSnapshot().consumed).toEqual(snap.consumed);
 });

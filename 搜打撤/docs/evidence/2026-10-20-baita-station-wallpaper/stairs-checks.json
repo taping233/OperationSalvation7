@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "steps": [
+    {
+      "name": "selected-assets",
+      "exitCode": 0,
+      "durationMs": 578,
+      "stdout": "{\"scope\":\"selected\",\"ok\":true,\"selected\":[\"reconstruction/wallpaper-baita-station-1020.webp\"],\"errors\":[],\"assets\":[{\"path\":\"reconstruction/wallpaper-baita-station-1020.webp\",\"bytes\":300640,\"sha256\":\"d83710e93845c24a60d2918bbda5fb7502c673c7ea47fb7903a544ad44c0fdb6\"}],\"global\":{\"ok\":false,\"errorCount\":95,\"historicalWarningCount\":570,\"manifestIssues\":[]}}\n",
+      "stderr": ""
+    }
+  ]
+}

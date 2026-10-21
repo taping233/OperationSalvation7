@@ -1,0 +1,10 @@
+{
+  "path": ".tmp/boss-equipment-exe-1019/delivery-final/搜打撤-代号7-装备消耗版-20261019.exe",
+  "bytes": 301428766,
+  "sha256": "80BDC5EB4220D30E63108E07943D6308CC63C27FD3BA610F3F9B438485F396AD",
+  "builderExitCode": 0,
+  "createdAt": "2026-10-19T23:07:39.8423068+08:00",
+  "tests": "未运行（老板要求）",
+  "performanceBudget": "未通过，未放宽预算",
+  "acquisition": "本地Git HEAD快照叠加本次装备修改；Vite编译；Electron44.1.0离线portable打包"
+}

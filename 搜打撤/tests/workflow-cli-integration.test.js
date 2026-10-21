@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync,
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'acorn';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // tsc 子进程类契约测试固有慢：默认 5s 在全量并行负载下必超时（与 boot.test 同族）
@@ -151,13 +152,27 @@ describe('流程入口集成', () => {
     expect(result.scannedFiles).toContain('docs/WORKFLOW-TOOLS.md');
     expect(result.findings.some(item => item.kind === 'broken-link')).toBe(false);
   });
-  it('八份类型配置确实纳入证据指纹（DEBT-2 strict 扩面起随配置数走）', async () => {
+  it('类型编排的全部配置确实纳入证据指纹，并随配置扩展', async () => {
     const { fingerprint } = await import('../scripts/workflow-evidence.mjs');
     const manifest = fingerprint(project).manifest;
-    expect(manifest.some(item => item.file === 'jsconfig.strict-hand-selection.json')).toBe(true);
-    const configs = manifest.filter(item => /^jsconfig.*\.json$/.test(item.file));
-    expect(configs).toHaveLength(8);
-    expect(configs.some(item => item.file === 'jsconfig.strict-ui.json')).toBe(true);
+    const runner = parse(readFileSync(path.join(project, 'scripts/check-types.mjs'), 'utf8'),
+      { ecmaVersion:'latest', sourceType:'module' });
+    const declaration = runner.body.filter(node => node.type === 'VariableDeclaration')
+      .flatMap(node => node.declarations).find(node => node.id.type === 'Identifier' && node.id.name === 'configs');
+    // Fail visibly if the runner stops using a literal list; never infer expected inputs from the fingerprint itself.
+    expect(declaration?.init?.type).toBe('ArrayExpression');
+    const expectedConfigs = declaration.init.elements.map(node => {
+      expect(node?.type).toBe('Literal');
+      expect(typeof node.value).toBe('string');
+      return node.value;
+    });
+    expect(new Set(expectedConfigs).size).toBe(expectedConfigs.length);
+    expect(expectedConfigs).toEqual(expect.arrayContaining([
+      'jsconfig.strict-hand-selection.json', 'jsconfig.strict-ui.json',
+      'jsconfig.framework-boundaries.json', 'jsconfig.framework-ports.json',
+    ]));
+    const fingerprintConfigs = manifest.filter(item => /^jsconfig.*\.json$/.test(item.file)).map(item => item.file);
+    expect(fingerprintConfigs.sort()).toEqual(expectedConfigs.sort());
   });
   it('暂存计划命令返回边界与数量，不倾倒整个仓库index', () => {
     const output = execFileSync(process.execPath, [cli, 'staged', '--plan', '--json'], { encoding: 'utf8', maxBuffer: 2 * 1024 * 1024 });

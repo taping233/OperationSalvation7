@@ -1,7 +1,7 @@
 import { foeFightTargets } from './battle.foe-fight.js';
 // Step order is semantic; shared combat ports are injected by the pipeline.
 export function killsSteps(s) {
-  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, getMode, grantStarterAttack, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
+  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
   const paced = steps => Object.assign((...args) => {
     const iterator = steps(...args);
     let next = iterator.next();
@@ -61,19 +61,19 @@ export function killsSteps(s) {
             return;
           }
           yield { kind: 'windup', targets: [b] };
-          const ra = b.dead ? { dealt: 0 } : hitFoe(ctx, b, 0, combat.TYPES.ATTACK, { atk: a.atk });
+          const ra = b.dead ? { dealt: 0 } : hitFoe(ctx, b, 0, combat.TYPES.ATTACK, { atk: a.atk, source: 'enemy' });
           log(`[[icon:swords]] <b>扰敌</b>：${esc(a.name)} 被迫攻击 ${esc(b.name)}，造成 ${ra.dealt} 点伤害`, 'sys');
           ctx.did = true;
           yield { kind: 'hit' };
-          if (b.dead) return;
+          if (b.dead || b.hp <= 0 || a.dead || a.hp <= 0) return;
           yield { kind: 'windup', targets: [a] };
-          const rb = a.dead ? { dealt: 0 } : hitFoe(ctx, a, 0, combat.TYPES.ATTACK, { atk: b.atk });
+          const rb = a.dead ? { dealt: 0 } : hitFoe(ctx, a, 0, combat.TYPES.ATTACK, { atk: b.atk, source: 'enemy' });
           log(`[[icon:swords]] <b>扰敌</b>：${esc(b.name)} 被迫反击 ${esc(a.name)}，造成 ${rb.dealt} 点伤害`, 'sys');
           yield { kind: 'hit' };
         }),
       },
       {
-        id: 'dmg.attackAll', gate: 'fresh', label: '攻击全体敌人（按攻击力结算）',
+        id: 'dmg.attackAll', gate: 'fresh', silenceAllowed: true, label: '攻击全体敌人（按攻击力结算）',
         when: (ctx) => /攻击全体敌人/.test(ctx.desc) ? true : null,
         run: paced(function* (ctx) {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
@@ -148,7 +148,8 @@ export function killsSteps(s) {
         when: (ctx) => /中毒层数翻倍/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           if (ctx.curseTarget) {
-            combat.addCurse(ctx.curseTarget, 'poison', ctx.curseTarget.status.poison || 0);   // 加倍：再叠自身当前层数
+            const poison = ctx.curseTarget.status.poison || 0;
+            if (poison > 0) combat.addCurse(ctx.curseTarget, 'poison', poison);   // 零层翻倍仍为零，不走缺省一层。
             const burst = burstPoison(ctx.curseTarget) || { dealt: 0 };   // 目标没中毒时端口返回 null，按 0 点毒伤结算
             log(`[[icon:skull]] <b>${esc(ctx.curseTarget.name)}</b> 中毒翻倍至 ${ctx.curseTarget.status.poison} 层并立即触发 ${burst.dealt} 点毒伤`, 'sys');
             ctx.did = true;
@@ -220,12 +221,7 @@ export function killsSteps(s) {
         when: (ctx) => ctx.desc.match(/从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/),
         run: (ctx, m) => {
           const kind = (m[2] === '杀' || m[2] === '初始攻击') ? '杀' : m[2];
-          if (getMode() === 'normal') {
-            grantStarterAttack(+m[1]);
-            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：普通战斗没有牌库，改为获得 ${m[1]} 张【初始攻击】`, 'sys');
-          } else {
-            deckDraw({ n: +m[1], type: kind });
-          }
+          deckDraw({ n: +m[1], type: kind });
           ctx.did = true;
         },
       },

@@ -62,7 +62,7 @@ afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.
 
 async function openEvent(id, rewards = []) {
   H.cards = [{ id, name: '生命周期事件', type: '事件' }, ...rewards];
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000);
   await opening;
 }
@@ -147,11 +147,16 @@ describe('真实无人机事件接入：纯UI与业务边界', () => {
   it('满包整理返回保留完成展示，原互斥奖励仍幂等领取', async () => {
     H.game.canReceiveCard = () => false;
     await openEvent('tt6-systemsupply', [wood]);
+    expect(UI.el.ovBody.querySelector('[data-act=evtChoice][data-i="0"]').dataset.optionState).toBe('limited');
+    expect(UI.el.ovBody.textContent).toContain('选择后可整理背包');
     const panel = openScreen(); connectScreen(panel);
     UI._acts.evtChoice({ i:'0' });
     expect(UI.el.ovBody.textContent).toContain('待领取：木材');
     expect(H.game.fragments).toBe(0); expect(H.game.visited).toEqual({});
+    H.game.canReceiveCard = () => true;
     UI.el.ovBody.querySelector('[data-organize=return]').click();
+    expect(UI.el.ovBody.querySelector('[data-act=evtChoice][data-i="0"]').dataset.optionState).toBe('ready');
+    expect(UI.el.ovBody.textContent).toContain('背包可容纳本次奖励');
     const next = UI.el.ovBody.querySelector('.event-signal-puzzle');
     expect(next.dataset.signalConnected).toBe('true'); expect(next.classList.contains('signal-just-connected')).toBe(false);
     UI._acts.evtChoice({ i:'1' });

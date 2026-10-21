@@ -21,7 +21,7 @@ export function damageSteps(s) {
         log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：第 ${i + 1}/${count} 段未施放，场上已无可攻击的敌人`, 'dim');
         break;
       }
-      const cue = attackCue(type);
+      const cue = attackCue(type, ctx.card, { hitCount: count, amount });
       yield { kind: 'windup', targets: [target], ...(cue ? { cue } : {}) };
       target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
       if (!target) {
@@ -42,7 +42,7 @@ export function damageSteps(s) {
       {
         // 第十二批·元素爆裂（2026-09-23）：对随机敌人 + 区间触发次数——每段随机选一名存活敌人。
         // 必须先于 dmg.direct：本步骤置位 did 后，dmg.direct 另有区间触发排除双保险。
-        id: 'dmg.randomRepeat', gate: 'fresh', label: '对随机敌人造成 N 点法伤、触发 M-K 次（区间随机目标）',
+        id: 'dmg.randomRepeat', gate: 'fresh', silenceAllowed: true, label: '对随机敌人造成 N 点法伤、触发 M-K 次（区间随机目标）',
         when: (ctx) => ctx.desc.match(/对随机敌人造成\s*(\d+)\s*点法(?:术)?伤[，,]\s*触发\s*(\d+)\s*[-–~至]\s*(\d+)\s*次/),
         run: paced(function* (ctx, m) {
           const lo = Math.min(+m[2], +m[3]), hi = Math.max(+m[2], +m[3]);
@@ -54,7 +54,7 @@ export function damageSteps(s) {
             const pool = getAlive().filter(t => t && !t.dead);
             if (!pool.length) break;
             const t = pool[Math.floor(random01() * pool.length)];
-            const cue = attackCue(type);
+            const cue = attackCue(type, ctx.card, { hitCount: times, amount: +m[1] });
             yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };
             const dealt = hitFoe(ctx, t, +m[1], type, caster, i + 1).dealt;
             total += dealt;
@@ -69,7 +69,7 @@ export function damageSteps(s) {
         }),
       },
       {
-        id: 'dmg.direct', gate: 'always', label: '造成 N 点固定/法术/真实/攻击伤害（结构化已结算时跳过）',
+        id: 'dmg.direct', gate: 'always', silenceAllowed: true, label: '造成 N 点固定/法术/真实/攻击伤害（结构化已结算时跳过）',
         // 卡面伤害词条已结算过时跳过，防双倍；「消耗该牌时」前缀句只在消耗触发点结算。
         // 「连开 N 枪」延迟段由 dmg.fourShots 专责结算（2026-09-16 修 09-13 留言「正午决战有bug」：
         // 此前本步骤抢先吃掉「每枪造成2点固定伤害」，四枪只打出一枪 2 点）。
@@ -93,7 +93,7 @@ export function damageSteps(s) {
           const targets = (aoe ? getAlive().slice() : (ctx.curseTarget ? [ctx.curseTarget] : [])).filter(t => t && !t.dead);
           const caster = getPlayerCaster ? getPlayerCaster() : {};
           let total = 0;
-          const cue = attackCue(type);
+          const cue = attackCue(type, ctx.card, { amount });
           if (targets.length) yield { kind: 'windup', targets, ...(cue ? { cue } : {}) };
           for (const t of targets) {
             total += hitFoe(ctx, t, amount, type, caster).dealt;
@@ -106,7 +106,7 @@ export function damageSteps(s) {
         }),
       },
       {
-        id: 'dmg.fourShots', gate: 'fresh', label: '连开四枪（4×2 固定）',
+        id: 'dmg.fourShots', gate: 'fresh', silenceAllowed: true, label: '连开四枪（4×2 固定）',
         when: (ctx) => /连开\s*四\s*枪/.test(ctx.desc) ? true : null,
         run: paced(function* (ctx) {
           const { total, hitTargets } = yield* repeatLiveTargets(ctx, ctx.curseTarget, 4, 2, combat.TYPES.FIXED, {}, '（连开四枪）');
@@ -115,7 +115,7 @@ export function damageSteps(s) {
         }),
       },
       {
-        id: 'dmg.multiAttack', gate: 'fresh', label: '「攻击 N 次」整句（手选消耗后的尾段）',
+        id: 'dmg.multiAttack', gate: 'fresh', silenceAllowed: true, label: '「攻击 N 次」整句（手选消耗后的尾段）',
         when: (ctx) => ctx.desc.match(/^攻击\s*(\d+)\s*次[。.！!]?$/),
         run: paced(function* (ctx, m) {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
@@ -222,26 +222,28 @@ export function damageSteps(s) {
         },
       },
       {
-        id: 'curse.enumeration', gate: 'fresh', label: '诅咒枚举句「(N′)冰冻、流血、中毒」',
+        id: 'curse.enumeration', gate: 'fresh', silenceAllowed: true, label: '诅咒枚举句「(N′)冰冻、流血、中毒」',
         when: (ctx) => ctx.desc.match(/^(?:(\d+)\s*′\s*)?((?:冰冻|流血|中毒|沉默|破甲|禁疗)(?:[、，]\s*(?:冰冻|流血|中毒|沉默|破甲|禁疗))*)$/),
         run: paced(function* (ctx, m) {
           const t = ctx.curseTarget;
           if (t) {
             const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban' };
             if (m[1]) {
-              const cue = attackCue(combat.TYPES.SPELL);
+              const cue = attackCue(combat.TYPES.SPELL, ctx.card, { amount: +m[1] });
               yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };
               hitFoe(ctx, t, +m[1], combat.TYPES.SPELL, getPlayerCaster ? getPlayerCaster() : {});
               yield { kind: 'hit', ...(cue ? { cue } : {}) };
             }
-            m[2].split(/[、，]\s*/).forEach(w => combat.addCurse(t, keyMap[w], 1));
-            log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加：${esc(m[2])}${m[1] ? `（并受到 ${m[1]} 点法术伤害）` : ''}`, 'sys');
+            if (!ctx.silenced) {
+              m[2].split(/[、，]\s*/).forEach(w => combat.addCurse(t, keyMap[w], 1));
+              log(`[[icon:skull]] <b>${esc(t.name)}</b> 附加：${esc(m[2])}${m[1] ? `（并受到 ${m[1]} 点法术伤害）` : ''}`, 'sys');
+            }
             ctx.did = true;
           }
         }),
       },
       {
-        id: 'dmg.fireballN', gate: 'fresh', label: '施放 N 次火球（星陨之力）',
+        id: 'dmg.fireballN', gate: 'fresh', silenceAllowed: true, label: '施放 N 次火球（星陨之力）',
         when: (ctx) => (ctx.curseTarget ? ctx.desc.match(/施放\s*(\d+)\s*次?火球(?:术)?/) : null),
         run: paced(function* (ctx, m) {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
@@ -251,7 +253,7 @@ export function damageSteps(s) {
         }),
       },
       {
-        id: 'dmg.stormFireball', gate: 'fresh', label: '全体敌人每人 1 次火球（风暴火球）',
+        id: 'dmg.stormFireball', gate: 'fresh', silenceAllowed: true, label: '全体敌人每人 1 次火球（风暴火球）',
         when: (ctx) => ctx.desc.match(/(?:每个?敌人|全体敌人|敌方全体)每人?释放\s*(?:(\d+)\s*次)?火球/),
         run: paced(function* (ctx, m) {
           const caster = getPlayerCaster ? getPlayerCaster() : {};
@@ -265,7 +267,7 @@ export function damageSteps(s) {
             for (let k = 0; k < per; k++) {
               let target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
               if (!target) break;
-              const cue = attackCue(combat.TYPES.SPELL);
+              const cue = attackCue(combat.TYPES.SPELL, ctx.card, { hitCount: planned, amount: 4 });
               yield { kind: 'windup', targets: [target], ...(cue ? { cue } : {}) };
               target = preferred && !preferred.dead ? preferred : getAlive().find(foe => foe && !foe.dead);
               if (!target) break;

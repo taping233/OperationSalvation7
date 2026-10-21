@@ -1,0 +1,17 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+········································stdout | tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+HOTPATH description 6400 calls / 64 texts {"before":{"ms":54.843,"bytes":1599000,"termLookups":25600},"after":{"ms":7.58,"bytes":1599000,"termLookups":256}}
+
+··················stdout | tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs
+HOTPATH browser 100 unchanged refreshes / 96 cards {"beforeMutations":9100,"afterMutations":0}
+
+······························································································································································································································-
+
+ Test Files  17 passed | 1 skipped (18)
+      Tests  280 passed | 1 skipped (281)
+   Start at  03:58:46
+   Duration  11.38s (transform 1.36s, setup 0ms, collect 4.27s, tests 11.60s, environment 5.78s, prepare 1.05s)

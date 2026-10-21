@@ -35,7 +35,7 @@ function ensureGate() {
 }
 
 export function gateSweep() {
-  if (gateBusy || reduceMotion()) return;
+  if (document.body.classList.contains('interface-motion') || gateBusy || reduceMotion()) return;
   const gate = ensureGate();
   const overlay = document.getElementById('overlay');
   const arm = gate.firstElementChild;
@@ -89,32 +89,33 @@ function start() {
 
   document.addEventListener('sdt-overlay-mode', (e) => { lastMode = e.detail; });
 
-  // ① flow-transition「点击跳过」：捕获阶段先起闸（click handler 随后同步关层/换页，
-  //    闸门已入场盖住瞬隐），不拦截、不延迟、不改流程语义
-  document.addEventListener('click', (e) => {
-    if (e.target instanceof Element && e.target.closest('[data-act="flowContinue"]')) gateSweep();
-  }, true);
+  // 当前界面控制器拥有页面转场；旧闸门仅供未安装它的独立宿主使用。
+  if (!document.body.classList.contains('interface-motion')) {
+    // ① 捕获点击继续，不拦截或延迟业务流程。
+    document.addEventListener('click', (e) => {
+      if (e.target instanceof Element && e.target.closest('[data-act="flowContinue"]')) gateSweep();
+    }, true);
 
-  // ② 内容标识比对：hubMain↔depMain 互切起闸；flow-transition 出现只记标识
-  new MutationObserver(() => {
-    const next = markOf();
-    if (next === lastMark) return;
-    const prev = lastMark;
-    lastMark = next;
-    if (prev.includes(FLOW_MARK)) return;          // 过场结束的换页已由 ①/③ 起闸
-    if (maybeGateOnSwap(next)) gateSweep();
-  }).observe(ovBody, { childList: true });
+    // ② 基地与整备互切；先比较旧标识，再记录新页。
+    new MutationObserver(() => {
+      const next = markOf();
+      if (next === lastMark) return;
+      const prev = lastMark;
+      const shouldGate = maybeGateOnSwap(next);
+      lastMark = next;
+      if (prev.includes(FLOW_MARK)) return;
+      if (shouldGate) gateSweep();
+    }).observe(ovBody, { childList: true });
 
-  // ③ 关闭链：flow-transition 超时自动结束（无 click 事件）与 depMain 关闭出击
-  //    （→ 露出 #game 画布地图）。opaque 页 closing 类一挂即起闸（盖住 0.24s 淡出）；
-  //    room-view 瞬隐无 closing，落到 hidden 分支兜底（闸门后一帧扫入盖住切换）。
-  new MutationObserver(() => {
-    if (gateBusy || reduceMotion()) return;
-    const flowOrDeploy = lastMark.includes(FLOW_MARK) || lastMark === '#depMain';
-    if (!flowOrDeploy) return;
-    if (!overlay.hidden && overlay.classList.contains('closing')) { gateSweep(); lastMark = ''; return; }
-    if (overlay.hidden) { gateSweep(); lastMark = ''; }
-  }).observe(overlay, { attributes: true, attributeFilter: ['hidden', 'class'] });
+    // ③ 关闭过场或出击页时，为没有点击事件的路径提供兜底。
+    new MutationObserver(() => {
+      if (gateBusy || reduceMotion()) return;
+      const flowOrDeploy = lastMark.includes(FLOW_MARK) || lastMark === '#depMain';
+      if (!flowOrDeploy) return;
+      if (!overlay.hidden && overlay.classList.contains('closing')) { gateSweep(); lastMark = ''; return; }
+      if (overlay.hidden) { gateSweep(); lastMark = ''; }
+    }).observe(overlay, { attributes: true, attributeFilter: ['hidden', 'class'] });
+  }
 
   // D10 demo：URL 参数触发，去参即无痕
   try {

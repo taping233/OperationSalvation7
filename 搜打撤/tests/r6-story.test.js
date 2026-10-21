@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import { RunStorage } from '../game/src/hub/game.storage.js';
@@ -16,7 +18,7 @@ describe('R6-a 最后一盏引路灯', () => {
 
   it.each(['open_beacon', 'shaded_marker'])('真实 M01 存储以三 run 完成 %s，重载幂等且异选冲突', async ending => {
     const Base = window.SDT.Base;
-    Base.use(1); Base.save();
+    Base.use(1); (await Base.save());
     let finalContext;
     for (const [runId, segmentId, choiceId] of [['real:a', 1, 'continue'], ['real:b', 2, 'continue'], ['real:c', 3, ending]]) {
       const eventInstanceId = makeLastLampEventInstanceId(runId, segmentId, 4);
@@ -118,7 +120,7 @@ describe('R6-a 最后一盏引路灯', () => {
   });
 
   it('事件接线先提交 Base，再消费节点；保存失败路径撤销 visited 并保留重试页', () => {
-    const source = fs.readFileSync('game/src/run/game.run.flow.js', 'utf8');
+    const source = fs.readFileSync('game/src/run/game.run.events.js', 'utf8');
     expect(source).toMatch(/await storyCommands\.record[\s\S]*renderLastLampResult\(record, resultText, binding\)/);
     expect(source).toMatch(/UI\.act\('lastLampFinish'[\s\S]*consumeCurrentCell\(\);/);
     expect(source).toContain("if (!wasVisited && game.visited) delete game.visited[key]");
@@ -126,8 +128,10 @@ describe('R6-a 最后一盏引路灯', () => {
     const submit = source.indexOf('await storyCommands.record');
     expect(source.lastIndexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(-1);
     expect(source.indexOf('currentLastLampPage(binding)', submit)).toBeGreaterThan(submit);
-    expect(source).toContain('setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(); })');
+    expect(source).toContain('setBagReturnHook(() => { if (currentLastLampPage(binding).ok) tryLastLampEvent(current); })');
     expect(source).toContain('showChoiceError(result.message');
+    expect(source).toContain('if (!activeChoice()) return;');
+    expect(source).toContain('if (!binding.current())');
     expect(source.match(/asset: 'story-last-lamp'/g)).toHaveLength(4);
   });
 });

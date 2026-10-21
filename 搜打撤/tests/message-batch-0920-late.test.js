@@ -55,17 +55,17 @@ describe('2026-09-20 晚间留言卡牌数据', () => {
   });
 
   it('物资格、药水说明、能力提示与手牌翻页提醒均有界面守卫', () => {
-    const flow = readFileSync(resolve(process.cwd(), 'game/src/run/game.run.flow.js'), 'utf8');
+    const events = readFileSync(resolve(process.cwd(), 'game/src/run/game.run.events.js'), 'utf8');
     const scenes = JSON.parse(readFileSync(resolve(process.cwd(), 'game/data/scenes.json'), 'utf8'));
     // 2026-09-22 battle.view 拆片：断言串（bt-hand-page 在 render 分派段）壳+六片拼接读
     const battleView = ['battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js', 'battle/view/battle.vfx.js',
       'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js', 'battle/view/battle.hover.js']
       .map((f) => readFileSync(resolve(process.cwd(), 'game/src', f), 'utf8')).join('\n');
     const battleCss = readFileSync(resolve(process.cwd(), 'game/css/battle.css'), 'utf8');
-    expect(flow).toContain('EVENT_SCENE_META[card.id]');
+    expect(events).toContain('EVENT_SCENE_META[card.id]');
     expect(scenes.eventSceneMeta['tt6-airdrop']).toContain('scene-event-airdrop');
-    expect(flow).toContain("drawEventCards(card.name,'airdrop-potion',[potionPool]");
-    expect(flow).toContain('投骰前展示全部对应点数');
+    expect(events).toContain("drawEventCards(card.name,'airdrop-potion',[potionPool]");
+    expect(events).toContain('投骰前展示全部对应点数');
     expect(battleView).toContain('bt-hand-page has-more');
     expect(battleCss).toContain('@keyframes handPageReminder');
   });

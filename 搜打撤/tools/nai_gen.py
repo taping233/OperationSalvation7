@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """NAI 生图客户端 —— 全游戏生图 API 权威链路，0919 固化进 git（token 不入库）。
 
-【默认（2026-10-16 老板认可横版）】模型 nai-diffusion-5-full，2048×1152；
+【默认（2026-10-19 老板指定免费横版）】模型 nai-diffusion-5-full，1344×768；
   CFG5.5、28步、Euler Ancestral、Karras、Rescale0、Variety+关闭。**大图一天限额 20 张**：长×宽超过免费档上限
   每次请求（含通道重试）即计一次，工具内按自然日锁定预扣、到顶拒出
   （.tmp/nai/large-usage.json；状态损坏停手核对，宁保守勿超限）。
@@ -37,8 +37,8 @@ from nai_guard import GuardError, RequestGuard
 
 ENDPOINT = 'https://image.novelai.net/ai/generate-image'
 MODEL = 'nai-diffusion-5-full'
-DEFAULT_WIDTH, DEFAULT_HEIGHT = 2048, 1152
-# 2026-10-16 认可请求的采样配置；默认大图仍受现行额度护栏保护。
+DEFAULT_WIDTH, DEFAULT_HEIGHT = 1344, 768
+# 采样沿用认可配置；默认横版用免费尺寸，显式大图仍受额度护栏保护。
 DEFAULTS = dict(steps=28, scale=5.5, cfg_rescale=0.0, sampler='k_euler_ancestral',
                 noise_schedule='karras', variety_plus=False)
 # 仓库根 = 代号柒/（搜打撤/tools/nai_gen.py → 搜打撤 → 代号柒；.tmp/nai 挂在仓库根）

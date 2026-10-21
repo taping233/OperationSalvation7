@@ -1,0 +1,32 @@
+{
+  "authorization": "User requested installing this wallpaper; use latest default-style outpaint candidate.",
+  "source": {
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-remix-20261020\\default-style-wallpaper.png",
+    "sha256": "f8123c8f042e8d8689dcf5e42380154315c9c06d48e577537e827d771c679470"
+  },
+  "output": {
+    "path": "reconstruction/wallpaper-wu-bass-1020.webp",
+    "sha256": "bc6296abbe97d51a31e4f9fda360817634cc9564cce1b5fdc000e1369c575950",
+    "bytes": 527266,
+    "size": [
+      1672,
+      941
+    ],
+    "encoding": "WebP quality95 method6; original dimensions, no crop or repaint"
+  },
+  "behavior": "Fourth wallpaper; default when no valid preference. Existing valid preferences retained.",
+  "verification": {
+    "tests": "vitest title-wallpaper/contracts/architecture-boundaries: 52 passed",
+    "syntax": "node --check passed",
+    "asset": "selected asset audit passed; global 95 unrelated errors left untouched",
+    "browser": {
+      "source": "Codex built-in browser, http://127.0.0.1:5200/, current viewport only",
+      "input": "Real button clicks, sequence piano/bass/snow/pair/piano/bass",
+      "result": "Four settled layers each show only selected image; all computed opacity transitions 0.5s ease-in-out; console errors empty",
+      "limits": "Computed transition configuration and settled states verified; no frame-by-frame animation timing measurement.",
+      "screenshot": "home-installed.png"
+    },
+    "build": "not run, mixed worktree",
+    "commit": "not authorized"
+  }
+}

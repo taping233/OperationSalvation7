@@ -3,6 +3,7 @@
 // 幂等机制本身不在此重建——tests/terminal-persistence.test.js 三失败点矩阵 +
 // tests/terminal-death.test.js 整链用例已钉「失败重试只落一次」，这里只锁玩家可见文案。
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
 
 import { runTerminalSettlement } from '../game/src/ui/terminal-settlement.js';
 
@@ -21,7 +22,7 @@ await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
 await import('../game/src/hub/base.js');
 await import('../game/src/hub/meta.js');
-Object.defineProperty(navigator, 'locks', { configurable: true, value: { request: (_name, _options, callback) => callback() } });
+installImmediateWebLocks();
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const session = await import('../game/src/run/game.session.js');
 const { game, saveGame } = session;
@@ -93,15 +94,15 @@ describe('终局失败页人话文案（SYS-10）', () => {
 });
 
 describe('常规存档写失败提示（saveGame，注入配额满）', () => {
-  it('写失败不落盘、主档原样，日志给出人话原因与处置建议', () => {
+  it('写失败不落盘、主档原样，日志给出人话原因与处置建议', async () => {
     window.localStorage.clear();
     RunStorage.readForLoad(2);   // clear 后重置写基线，防跨用例基线残留触发 STALE_SLOT
     window.SDT.Base.use(2);
-    window.SDT.Base.reset(2);
-    window.SDT.Base.save();
+    (await window.SDT.Base.reset(2));
+    (await window.SDT.Base.save());
     session._set_active_slot(2);
     logs.length = 0;
-    session.newRun('standard', [], { skipClassChoice: true });
+    await session.newRun('standard', [], { skipClassChoice: true });
     game.state = 'idle';
     const runKey = RunStorage.key(2);
     const raw = window.localStorage.getItem(runKey);

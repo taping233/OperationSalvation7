@@ -1,0 +1,476 @@
+[gate] 模式：full
+[gate] 说明：显式完整门：剧情编译、静态检查与完整 Vitest 套件
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (600 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 增量素材检查
+Manifest drift: {"unlisted":533,"ghost":33,"license-pending":4}
+Asset check: 0 errors, 570 unchanged historical warnings (docs/asset-audit-debt.json)
+[gate] 全量 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+·········································································································································································································································································································································································{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·fixture gate passed
+··{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+···{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·fixture gate passed
+········{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+·······{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+fixture gate passed
+···{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+··fixture gate passed
+···{"mode":"quick","paths":["scripts/value.mjs"],"tests":["tests/fixture.test.js"],"reasons":[]}
+·fixture gate passed
+·································································································-·····························································································································································································································································································································································································································································································································································································································x·xxxx·x·xxx···x·····x····················································································xxx···xxxxx·xxxx·········································································································xxxxxx··xxxx·············································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································································-{"mode":"quick","paths":["package.json"],"reasons":["package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过"],"tests":["tests/architecture-boundaries.test.js","tests/contracts.test.js"]}
+[gate] 模式：quick
+[gate] 变更：package.json
+[gate] 说明：package.json 仅 scripts 段变更：运行架构哨兵，scripts 引用校验已通过
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture runner pass
+
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+fixture runner pass
+[gate] PASS：quick 验收完成
+···{"mode":"quick","paths":["game/assets/asset-manifest.json"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+{"mode":"quick","paths":["game/assets/asset-manifest.json","game/assets/new.png"],"reasons":["纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest"],"tests":[]}
+··[gate] 模式：quick
+[gate] 变更：game/assets/asset-manifest.json
+[gate] 变更：game/assets/new.png
+[gate] 说明：纯资产变更：运行编译、静态检查与增量素材检查，跳过 Vitest
+[gate] 剧情编译
+fixture static pass
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+fixture static pass
+
+[gate] 内容数据检查：OK
+fixture static pass
+
+[gate] 类型契约检查：OK
+fixture static pass
+
+[gate] ESLint：OK
+fixture lint pass
+
+[gate] PASS：quick 验收完成
+·{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+··{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+···{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/architecture-graph.mjs","scripts/gate-plan.mjs","scripts/impact-query.mjs","scripts/index-validation.mjs","scripts/value.txt","scripts/workflow-archive.mjs","scripts/workflow-browser.mjs","scripts/workflow-change-advice.mjs","scripts/workflow-change-review.mjs","scripts/workflow-dependencies.mjs","scripts/workflow-doctor.mjs","scripts/workflow-evidence.mjs","scripts/workflow-gate-receipt.mjs","scripts/workflow-ledger.mjs","scripts/workflow-memory.mjs","scripts/workflow-ship.mjs","scripts/workflow-staged.mjs","scripts/workflow-status.mjs","scripts/workflow-task-input.mjs","scripts/workflow-task.mjs","scripts/workflow.mjs"],"reasons":[],"tests":[]}
+snapshot passed
+·····{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+snapshot passed
+·{"mode":"quick","paths":["scripts/acceptance-gate.mjs","scripts/deleted.txt","scripts/new-name.txt","scripts/old-name.txt"],"reasons":[],"tests":[]}
+·snapshot passed
+····{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+····················{"mode":"full","paths":["docs/evidence/2026-09-30-fixture/2026-10-20T19-03-38.598Z-e28844eb-staged.json","docs/evidence/2026-09-30-fixture/2026-10-20T19-03-38.598Z-e28844eb-staged.log","scripts/value.txt"],"reasons":[],"tests":[]}
+··{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":[]}
+changed index
+·{"mode":"skip","paths":["note.md"],"reasons":[],"tests":[]}
+···{"mode":"full","paths":["scripts/value.txt"],"reasons":[],"tests":[]}
+·{"mode":"full","paths":["scripts/acceptance-gate.mjs","scripts/value.txt"],"reasons":[],"tests":["tests/contracts.test.js"]}
+·snapshot passed
+······························fixture targeted check
+···········context canceled
+··················context canceled
+···context canceled
+······context canceled
+··················context canceled
+······························{"mode":"skip","tests":[]}
+········································································fixture full executed
+·······················································································································································································································································································································································································································································································································································································-·············································································································································································································································································································································································································································································································································································
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 33 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 锦囊存取读取声明容量和类型，整叠超限不消费卡牌
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ arrange tests/bag-pouch-capacity.test.js:45:12
+ ❯ tests/bag-pouch-capacity.test.js:51:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 满包整叠取出拒绝且锦囊与物资原样保留（已有同名 0 张）
+ FAIL  tests/bag-pouch-capacity.test.js > 满包整叠取出拒绝且锦囊与物资原样保留（已有同名 3 张）
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ arrange tests/bag-pouch-capacity.test.js:45:12
+ ❯ tests/bag-pouch-capacity.test.js:62:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 正好一个空格可取出整叠，保留卡牌总数及物资
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ arrange tests/bag-pouch-capacity.test.js:45:12
+ ❯ tests/bag-pouch-capacity.test.js:71:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 满包同名叠放还有余位时允许无新增格的取出
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ arrange tests/bag-pouch-capacity.test.js:45:12
+ ❯ tests/bag-pouch-capacity.test.js:80:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 珍珠盒有空扩格也不能让法术占用资源专属格
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ arrange tests/bag-pouch-capacity.test.js:45:12
+ ❯ tests/bag-pouch-capacity.test.js:86:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 真实背包锦囊接受坚冰结界与冰封千里职业法术并可原样取出
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ openCanonicalPouch tests/bag-pouch-capacity.test.js:103:12
+ ❯ tests/bag-pouch-capacity.test.js:107:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 职业法术与普通法术共用3张上限，锦囊自身和非术不能直接命令存入
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ openCanonicalPouch tests/bag-pouch-capacity.test.js:103:12
+ ❯ tests/bag-pouch-capacity.test.js:120:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 安全格与已经存放的职业法术仍不作为背包候选
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ openCanonicalPouch tests/bag-pouch-capacity.test.js:103:12
+ ❯ tests/bag-pouch-capacity.test.js:132:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 真实背包存取两种资源：盒内独立张数不占外部格
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ tests/bag-pouch-capacity.test.js:149:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/33]⎯
+
+ FAIL  tests/bag-pouch-capacity.test.js > 真实箱奖励直接开完整背包，Esc返回无损；存安全格后原grant仅领取一次
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ tests/bag-pouch-capacity.test.js:215:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/33]⎯
+
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 真实容量和存入守卫读取结构声明，改写卡文不改变规则
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 复用远征决策壳和bag模式，不再继承room全屏居中壳
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 存取是带卡名/张数/整叠动作的原生按钮，卡面内部没有嵌套焦点
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 正常按钮存取整叠，盒中计数更新且安全格保护与UID原样保留
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 最后一张同方向按钮消失后焦点回返回键，不跳到相反存取动作
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 同方向仍有候选时重绘维持存取区域的原生焦点
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 盒容量不足仍整叠拒收，按钮不改卡与焦点
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > 背包空间不足仍拒绝整叠取出，不受新布局影响
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > Esc准确探测返回按钮，只回背包；旧回调不能再存取或抢新页面
+ FAIL  tests/pearl-storage-interface.test.js > 珍珠盒可读存取界面 > CSS只加珍珠盒域，说明和控件沿1920逻辑坐标可读，内容保留共享滚动区
+TypeError: Cannot read properties of undefined (reading 'rect')
+ ❯ Object.showCardZoom game/src/ui/ui.js:515:71
+    513|       // FLIP 起点终点都取布局口径（UiScale.rect）：dx/dy 喂 transform（布局值），zoom≠1 才…
+    514|       const fromR = photoMode ? visiblePhotoSourceRect()
+    515|         : opts.from && (opts.from.getBoundingClientRect ? SDT.UiScale.…
+       |                                                                       ^
+    516|       if (photoMode) {
+    517|         if (fromR?.width > 0 && photoLayoutRect?.width > 0 && !reduced…
+ ❯ openBagZoom game/src/hub/game.bag.js:642:8
+ ❯ game/src/hub/game.bag.js:748:33
+ ❯ Object.inspectStack game/src/hub/game.bag.js:38:48
+ ❯ open tests/pearl-storage-interface.test.js:13:12
+ ❯ tests/pearl-storage-interface.test.js:41:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 安全格详情提供真实按钮和当前动作，打开既有两栏存取页而不移动盒子
+TypeError: Cannot read properties of undefined (reading 'pearlStoreZoom')
+ ❯ tests/safe-pearl-access.test.js:61:35
+     59|     const zoom = document.getElementById('cardZoom');
+     60|     expect(zoom.querySelector('[data-act="pearlStoreZoom"]')).not.toBe…
+     61|     expect(zoom._inventoryActions.pearlStoreZoom).toBe(UI._acts.pearlS…
+       |                                   ^
+     62|     button('pearlStoreZoom').click();
+     63|     expect(document.querySelector('.pearl-store-columns')).not.toBeNul…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 19/27时直接整叠存入腾一格，保持safe/stored/UID及收卡限制
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:74:45
+     72|     expect(session.usedSlots()).toBe(19); expect(session.bagCap()).toB…
+     73|     const beforeUids = game.ownedCards.map(o => o.uid);
+     74|     openSafe(); button('pearlPut', key.name).click();
+       |                                             ^
+     75|     expect(session.usedSlots()).toBe(18); expect(session.safeUsed()).t…
+     76|     expect(game.ownedCards.find(o => o.card.id === pearl.id).safe).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > button关闭只回原安全格tab，不关闭背包或改变保护归属
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:87:29
+     85|     openSafe(); const before = snapshot(), close = UI._bagCloseHook = …
+     86|     if (method === 'Esc') expect(UI.closeTopOverlayByEsc()).toBe(true);
+     87|     else button('pearlBack').click();
+       |                             ^
+     88|     expect(document.querySelector('.bag-grid').dataset.zone).toBe('saf…
+     89|     expect(document.querySelector('.bag-rz[data-zone="safe"]').getAttr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 普通背包珍珠盒原入口和关闭tab保持不变
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:98:24
+     96|     game.ownedCards.find(o => o.card.id === pearl.id).safe = false;
+     97|     bag.showBackpack(true); tile(pearl.name).click(); button('pearlSto…
+     98|     button('pearlBack').click();
+       |                        ^
+     99|     expect(document.querySelector('.bag-grid').dataset.zone).toBe('bag…
+    100|     expect(game.ownedCards.find(o => o.card.id === pearl.id).safe).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 安全格打开后盒满仍拒绝整叠存入，原始张数和保护保持
+TypeError: Cannot read properties of undefined (reading 'disabled')
+ ❯ tests/safe-pearl-access.test.js:107:16
+    105|     bag.showBackpack(true); openSafe(); const before = snapshot(), bef…
+    106|     const put = button('pearlPut', key.name);
+    107|     expect(put.disabled).toBe(true);
+       |                ^
+    108|     expect(put.closest('.container-store-slot').querySelector('.contai…
+    109|     expect(put.getAttribute('aria-label')).toContain('剩余 1 张空间，放不下整叠');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 直接取出只解除资源stored，安全格盒子与所有UID保留
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:118:40
+    116|   it('直接取出只解除资源stored，安全格盒子与所有UID保留', () => {
+    117|     openSafe(); const beforeUids = game.ownedCards.map(o => o.uid);
+    118|     button('pearlTake', threeKeys.name).click();
+       |                                        ^
+    119|     expect(game.ownedCards.find(o => o.card.id === threeKeys.id).store…
+    120|     expect(game.ownedCards.find(o => o.card.id === threeKeys.id).safe)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 安全格打开后背包仍放不下整叠时拒绝取出
+TypeError: Cannot read properties of undefined (reading 'disabled')
+ ❯ tests/safe-pearl-access.test.js:131:17
+    129|     expect(session.usedSlots()).toBe(26); expect(session.bagCap()).toB…
+    130|     const take = button('pearlTake', threeKeys.name);
+    131|     expect(take.disabled).toBe(true);
+       |                 ^
+    132|     expect(take.closest('.container-store-slot').querySelector('.conta…
+    133|     expect(take.getAttribute('aria-label')).toContain('背包空间不足，整叠需 3 格'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > pearlPut显式调用仍保留容量守卫，不能绕过disabled移动资源
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > pearlTake显式调用仍保留容量守卫，不能绕过disabled移动资源
+TypeError: Cannot read properties of undefined (reading 'disabled')
+ ❯ tests/safe-pearl-access.test.js:146:32
+    144|     game.ownedCards = [...copies(pearl, 1, { safe: true }), ...copies(…
+    145|     bag.showBackpack(true); openSafe(); const before = snapshot(), bef…
+    146|     expect(button(action, name).disabled).toBe(true);
+       |                                ^
+    147|     UI.log.mockClear(); UI._acts[action]({ name });
+    148|     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining(wa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 安全格旧详情及已返回的存取回调不能抢新页或改变卡牌
+TypeError: oldOpen is not a function
+ ❯ tests/safe-pearl-access.test.js:155:82
+    153|   it('安全格旧详情及已返回的存取回调不能抢新页或改变卡牌', () => {
+    154|     inspectSafe(); const oldOpen = UI._acts.pearlStoreZoom;
+    155|     UI.showOverlay('', '<div id="newPage">新页</div>'); const before = s…
+       |                                                                                  ^
+    156|     expect(document.getElementById('newPage')).not.toBeNull(); expect(…
+    157|     bag.showBackpack(true); openSafe();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 从奖励页整理并开安全盒后，第一次关闭回safe，真正关闭背包才恢复奖励
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:169:33
+    167|     window.SDT.Chests = { isOpen: () => true, suspend, resume };
+    168|     bag.showBackpack(); expect(suspend).toHaveBeenCalledOnce(); openSa…
+    169|     button('pearlPut', key.name).click(); button('pearlBack').click();
+       |                                 ^
+    170|     expect(document.querySelector('.bag-grid').dataset.zone).toBe('saf…
+    171|     button('closeBag').click(); expect(resume).toHaveBeenCalledOnce();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/33]⎯
+
+ FAIL  tests/safe-pearl-access.test.js > 安全格珍珠盒直接存取 > 直接存入安全盒的资源仍进入真实失败抢运清单
+TypeError: Cannot read properties of undefined (reading 'click')
+ ❯ tests/safe-pearl-access.test.js:176:45
+    174|
+    175|   it('直接存入安全盒的资源仍进入真实失败抢运清单', async () => {
+    176|     openSafe(); button('pearlPut', key.name).click();
+       |                                             ^
+    177|     game.hp = 0; game.surrenderedRun = false;
+    178|     expect(await session.doDeath()).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/33]⎯
+
+
+ Test Files  3 failed | 751 passed | 1 skipped (755)
+      Tests  33 failed | 7763 passed | 3 skipped (7799)
+   Start at  04:00:26
+   Duration  209.86s (transform 9.79s, setup 0ms, collect 102.59s, tests 366.55s, environment 210.69s, prepare 44.80s)
+
+[gate] FAIL：全量 Vitest 失败（exit 1）

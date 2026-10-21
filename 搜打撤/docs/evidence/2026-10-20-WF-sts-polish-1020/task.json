@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-sts-polish-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "按尖塔对照实施事件风险提示、说明样板、奖励动效及战斗四类攻击与美术同屏样板",
+  "paths": [
+    "game/src/run/game.run.events.js",
+    "game/src/ui",
+    "game/src/battle/view",
+    "game/src/battle/core/battle.resolution.js",
+    "game/src/battle/effects/effect-steps.damage.js",
+    "game/src/battle/runtime",
+    "game/css",
+    "game/art-source/sts-polish-1020",
+    "tests",
+    "docs/evidence/2026-10-20-WF-sts-polish-1020"
+  ],
+  "doneWhen": [
+    "事件风险与说明、奖励运动、四类攻击样板有定向回归，当前窗口实页范围与限制明确",
+    "同屏美术样板保存并核对，不批量覆盖现行素材"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "17文件184项定向回归、529源码语法、10组类型、目标ESLint与3CSS Stylelint、650链接文档守卫、当前1523x956内置窗口实页通过，边界见README",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "同屏美术样板待老板认可，未批量替换运行美术；全量、生产构建及远端CI未运行；系统减动效与极短时间离开边界主要由DOM回归覆盖"
+  ],
+  "updatedAt": "2026-10-20T14:30:04.280Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

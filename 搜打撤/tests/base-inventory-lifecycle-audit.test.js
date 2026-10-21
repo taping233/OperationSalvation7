@@ -70,7 +70,7 @@ beforeEach(async () => {
       zoom.addEventListener('click', event => {
         if (event.target.closest('.cz-backdrop')) { zoom.remove(); return; }
         const action = event.target.closest('.cz-foot [data-act]');
-        if (action && !action.disabled) ui._acts[action.dataset.act]?.(action.dataset);
+        if (action && !action.disabled) ui.lastAction = ui._acts[action.dataset.act]?.(action.dataset);
       });
       document.body.append(zoom);
     },
@@ -92,7 +92,7 @@ describe('仓库特写操作上下文', () => {
     expect(JSON.stringify(base.data)).toBe(before); expect(ports.refresh).not.toHaveBeenCalled();
   });
   it('换档后旧已确认归档动作不发起新档转换', async () => {
-    open(growth); ui._acts.stashCollectOne(); const previous = ui._acts.stashCollectOne;
+    open(growth); (await ui._acts.stashCollectOne()); const previous = ui._acts.stashCollectOne;
     base.slot = 2; base.data = { stash: [{ card: growth, count: 2 }], collection: {} };
     previous(); await flush();
     expect(ports.read).not.toHaveBeenCalled(); expect(ports.convert).not.toHaveBeenCalled();
@@ -116,66 +116,66 @@ describe('仓库特写操作上下文', () => {
     base.data.stash = [{ card: { ...growth, id: 'other' }, count: 9 }, { card: growth, count: 2 }];
     pages.openStashCardView(1);
     expect(document.querySelector('.inspect-count').textContent).toContain('2');
-    ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    (await ui._acts.stashCollectOne()); (await ui._acts.stashCollectOne());
     expect(ports.convert).toHaveBeenCalledWith(expect.objectContaining({ slotId: 1 }), { stackKey: 'card:growth', count: 1 });
   });
   it('同ID异variant归档必须扣当前预览的真实堆', async () => {
     base.data.stash = [{ card: { ...growth, variantKey: 'first' }, count: 9 }, { card: { ...growth, variantKey: 'second' }, count: 2 }];
-    pages.openStashCardView(1); ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    pages.openStashCardView(1); (await ui._acts.stashCollectOne()); (await ui._acts.stashCollectOne());
     expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth:second', count: 1 });
   });
   it('全部归档确认期间数量变化，要按当前数量重新确认', async () => {
-    open(growth); ui._acts.stashCollectAll(); base.data.stash[0].count = 3; ui._acts.stashCollectAll();
+    open(growth); (await ui._acts.stashCollectAll()); base.data.stash[0].count = 3; (await ui._acts.stashCollectAll());
     expect(ports.convert).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith('库存数量已变化，请重新确认', 'warn');
     expect(document.querySelector('.inspect-count').textContent).toContain('3');
-    ui._acts.stashCollectAll(); expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 3 });
+    (await ui._acts.stashCollectAll()); expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 3 });
   });
-  it('确认2.6秒过期后再点击只重新确认', () => {
-    open(growth); ui._acts.stashCollectOne(); vi.advanceTimersByTime(2601); ui._acts.stashCollectOne();
-    expect(ports.convert).not.toHaveBeenCalled(); ui._acts.stashCollectOne(); expect(ports.convert).toHaveBeenCalledTimes(1);
+  it('确认2.6秒过期后再点击只重新确认', async () => {
+    open(growth); (await ui._acts.stashCollectOne()); vi.advanceTimersByTime(2601); (await ui._acts.stashCollectOne());
+    expect(ports.convert).not.toHaveBeenCalled(); (await ui._acts.stashCollectOne()); expect(ports.convert).toHaveBeenCalledTimes(1);
   });
   it('异步保存重复确认只提交一次；失败后保留库存并可重试', async () => {
     let finish; ports.convert.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    open(growth); ui._acts.stashCollectOne(); ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    open(growth); (await ui._acts.stashCollectOne()); const writing = ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
     expect(ports.convert).toHaveBeenCalledTimes(1); expect(button('stashCollectOne').disabled).toBe(true);
-    finish({ ok: false, message: '写盘失败' }); await flush();
+    finish({ ok: false, message: '写盘失败' }); await writing;
     expect(base.data.stash[0].count).toBe(2); expect(button('stashCollectOne').disabled).toBe(false);
     expect(ui.log).toHaveBeenCalledWith('写盘失败', 'warn');
-    ui._acts.stashCollectOne(); ui._acts.stashCollectOne(); expect(ports.convert).toHaveBeenCalledTimes(2);
+    await ui._acts.stashCollectOne(); ui._acts.stashCollectOne(); expect(ports.convert).toHaveBeenCalledTimes(2);
   });
   it.each(['slot', 'replacement', 'leaving', 'view'])('异步返回发生在 %s 后不重绘或播报旧结果', async kind => {
     let finish; ports.convert.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    const zoom = open(growth); ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    const zoom = open(growth); (await ui._acts.stashCollectOne()); ui._acts.stashCollectOne();
     if (kind === 'slot') base.slot = 2;
     if (kind === 'replacement') ui.showCardZoom(card);
     if (kind === 'leaving') zoom.classList.add('cz-out');
     if (kind === 'view') document.querySelector('.hub-page').dataset.view = 'stash/pocket';
     finish({ ok: true }); await flush(); expect(ports.refresh).not.toHaveBeenCalled(); expect(ui.log).not.toHaveBeenCalled();
   });
-  it('正常收藏刷新并保留卡牌与当前详情', () => {
-    const zoom = open(card); ui._acts.stashCollectToggle();
+  it('正常收藏刷新并保留卡牌与当前详情', async () => {
+    const zoom = open(card); (await ui._acts.stashCollectToggle());
     expect(base.collectToggle).toHaveBeenCalledExactlyOnceWith(card); expect(base.data.stash[0].count).toBe(2);
     expect(document.getElementById('cardZoom')).toBe(zoom); expect(document.querySelector('.inspect-collection-state').textContent).toBe('图鉴已收录 · 已保护');
   });
-  it('已收录未保护的重复卡固定有经验入口，不取消图鉴也不免费发经验', () => {
+  it('已收录未保护的重复卡固定有经验入口，不取消图鉴也不免费发经验', async () => {
     base.data.collection[growth.id] = { name: growth.name, protected: false };
     open(growth);
     expect(button('stashCollectOne').disabled).toBe(false);
     expect(button('stashCollectToggle').textContent).toBe('保护卡牌');
     expect(document.querySelector('[data-conversion-preview]').textContent).toContain('实际经验 +10');
-    ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    (await ui._acts.stashCollectOne()); (await ui._acts.stashCollectOne());
     expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 1 });
     expect(base.collectToggle).not.toHaveBeenCalled();
     expect(window.SDT.Meta.onCollect).not.toHaveBeenCalled();
   });
-  it('旧收藏保护明确禁用经验入口，取消保护保留收录再允许转换', () => {
+  it('旧收藏保护明确禁用经验入口，取消保护保留收录再允许转换', async () => {
     base.data.collection[growth.id] = { name: growth.name, ts: 1 };
     open(growth);
     expect(button('stashCollectOne').disabled).toBe(true);
     expect(button('stashCollectAll').disabled).toBe(true);
-    ui._acts.stashCollectOne();
+    (await ui._acts.stashCollectOne());
     expect(ports.convert).not.toHaveBeenCalled();
-    button('stashCollectToggle').click();
+    (await clickAction(button('stashCollectToggle')));
     expect(base.data.collection[growth.id]).toMatchObject({ ts: 1, protected: false });
     expect(button('stashCollectOne').disabled).toBe(false);
   });
@@ -192,24 +192,24 @@ describe('仓库特写操作上下文', () => {
     expect(document.querySelector('[data-conversion-preview]').textContent).toContain('不再消耗卡牌');
     expect(document.querySelector('#cardZoom .cz-foot').textContent).not.toContain('重复卡仍可转化经验');
   });
-  it('批量确认预览与提交都限制为满级所需张数，并提前说明末张溢出', () => {
+  it('批量确认预览与提交都限制为满级所需张数，并提前说明末张溢出', async () => {
     base.data.characters = { wu: { lv: 9, xp: 345 } };
     open(growth); base.data.stash[0].count = 9; pages.openStashCardView(0);
     expect(button('stashCollectAll').textContent).toBe('批量转化 · 3 张');
-    button('stashCollectAll').click();
+    (await clickAction(button('stashCollectAll')));
     expect(ports.convert).not.toHaveBeenCalled();
     expect(document.querySelector('[data-conversion-preview]').textContent).toContain('消耗【同名卡】×3');
     expect(document.querySelector('[data-conversion-preview]').textContent).toContain('实际经验 +25');
     expect(document.querySelector('[data-conversion-preview]').textContent).toContain('末张溢出 5 经验');
-    button('stashCollectAll').click();
+    (await clickAction(button('stashCollectAll')));
     expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 3 });
   });
-  it('确认期间人物经验或保护变化必须重看预览，不沿用已确认的收益', () => {
-    open(growth); ui._acts.stashCollectOne();
+  it('确认期间人物经验或保护变化必须重看预览，不沿用已确认的收益', async () => {
+    open(growth); (await ui._acts.stashCollectOne());
     base.data.characters = { wu: { lv: 1, xp: 40 } };
-    ui._acts.stashCollectOne();
+    (await ui._acts.stashCollectOne());
     expect(ports.convert).not.toHaveBeenCalled();
-    ui._acts.stashCollectOne();
+    (await ui._acts.stashCollectOne());
     expect(ports.convert).toHaveBeenCalledOnce();
   });
 });
@@ -282,48 +282,48 @@ describe('仓库补给物品真实页脚入口', () => {
   const wood = { id: 'tt-wood', name: '木材', type: '资源', rarity: '古朴' };
   const egg = { id: 'egg', name: '宠物蛋', type: '道具', rarity: '稀有' };
   const pack = { id: 'tt-econpack', name: '经济卡包', type: '道具', rarity: '稀有' };
-  it('材料真实使用1张入口折入库存，关闭后可重入并确认最后一张', () => {
+  it('材料真实使用1张入口折入库存，关闭后可重入并确认最后一张', async () => {
     open(wood); base.data.wood = 0;
     base.useStashMaterial.mockImplementation((_name, all) => {
       const count = all ? base.data.stash[0].count : 1; base.data.wood += count;
       base.data.stash[0].count -= count; if (!base.data.stash[0].count) base.data.stash = [];
       return { ok: true, msg: '木材已折入' };
     });
-    const stale = ui._acts.stashUseMat; button('stashUseMat').click();
+    const stale = ui._acts.stashUseMat; (await clickAction(button('stashUseMat')));
     expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材', false);
     expect(base.data.wood).toBe(1); expect(document.getElementById('cardZoom')).toBeNull();
     pages.openStashCardView(0); const current = document.getElementById('cardZoom'); stale();
     expect(base.useStashMaterial).toHaveBeenCalledTimes(1); expect(document.getElementById('cardZoom')).toBe(current);
-    button('stashUseMat').click(); expect(button('stashUseMat').textContent).toBe('确认？');
-    expect(base.data.wood).toBe(1); button('stashUseMat').click(); expect(base.data.wood).toBe(2);
+    (await clickAction(button('stashUseMat'))); expect(button('stashUseMat').textContent).toBe('确认？');
+    expect(base.data.wood).toBe(1); (await clickAction(button('stashUseMat'))); expect(base.data.wood).toBe(2);
     expect(base.data.stash).toEqual([]);
   });
-  it('整堆按钮二次确认并绑定当前库存数量，数量变化后不能沿用旧确认', () => {
-    open(wood); button('stashUseMatAll').click(); expect(base.useStashMaterial).not.toHaveBeenCalled();
-    base.data.stash[0].count = 4; button('stashUseMatAll').click();
-    expect(base.useStashMaterial).not.toHaveBeenCalled(); button('stashUseMatAll').click();
+  it('整堆按钮二次确认并绑定当前库存数量，数量变化后不能沿用旧确认', async () => {
+    open(wood); (await clickAction(button('stashUseMatAll'))); expect(base.useStashMaterial).not.toHaveBeenCalled();
+    base.data.stash[0].count = 4; (await clickAction(button('stashUseMatAll')));
+    expect(base.useStashMaterial).not.toHaveBeenCalled(); (await clickAction(button('stashUseMatAll')));
     expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材', true);
   });
-  it('孵化按钮显示成本且需再次确认，失败保留详情供重试', () => {
+  it('孵化按钮显示成本且需再次确认，失败保留详情供重试', async () => {
     open(egg); expect(button('stashHatch').textContent).toContain('50 储备币');
-    button('stashHatch').click(); expect(base.hatchPet).not.toHaveBeenCalled();
-    button('stashHatch').click(); expect(base.hatchPet).toHaveBeenCalledOnce();
+    (await clickAction(button('stashHatch'))); expect(base.hatchPet).not.toHaveBeenCalled();
+    (await clickAction(button('stashHatch'))); expect(base.hatchPet).toHaveBeenCalledOnce();
     expect(document.getElementById('cardZoom')).not.toBeNull(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('不足 50'), 'warn');
     base.hatchPet.mockReturnValue({ ok: true, pet: { name: '旺财', desc: '伙伴' } });
-    button('stashHatch').click(); button('stashHatch').click();
+    (await clickAction(button('stashHatch'))); (await clickAction(button('stashHatch')));
     expect(base.hatchPet).toHaveBeenCalledTimes(2); expect(document.getElementById('cardZoom')).toBeNull();
   });
-  it('拆包真实按钮受五格空位限制，最后一包需二次确认且向既有命令传5张', () => {
+  it('拆包真实按钮受五格空位限制，最后一包需二次确认且向既有命令传5张', async () => {
     base.data.stash = [{ card: pack, count: 1 }]; base.stashRoom = () => 4; pages.openStashCardView(0);
-    button('stashOpenPack').click(); button('stashOpenPack').click();
+    (await clickAction(button('stashOpenPack'))); (await clickAction(button('stashOpenPack')));
     expect(base.openCardPack).not.toHaveBeenCalled(); expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('空位不足 5 格'), 'warn');
-    base.stashRoom = () => 5; button('stashOpenPack').click();
+    base.stashRoom = () => 5; (await clickAction(button('stashOpenPack')));
     expect(base.openCardPack).toHaveBeenCalledExactlyOnceWith('tt-econpack', expect.arrayContaining([expect.objectContaining({ count: 1 })]));
     expect(base.openCardPack.mock.calls[0][1]).toHaveLength(5); expect(document.getElementById('cardZoom')).toBeNull();
   });
-  it.each([[wood, 'stashUseMat'], [egg, 'stashHatch'], [pack, 'stashOpenPack']])('同名/同ID异variant的%s不能误消耗另一堆', (item, action) => {
+  it.each([[wood, 'stashUseMat'], [egg, 'stashHatch'], [pack, 'stashOpenPack']])('同名/同ID异variant的%s不能误消耗另一堆', async (item, action) => {
     base.data.stash = [{ card: { ...item, variantKey: 'first' }, count: 2 }, { card: { ...item, variantKey: 'second' }, count: 2 }];
-    pages.openStashCardView(1); button(action).click(); if (action === 'stashHatch') button(action).click();
+    pages.openStashCardView(1); (await clickAction(button(action))); if (action === 'stashHatch') (await clickAction(button(action)));
     expect(base.useStashMaterial).not.toHaveBeenCalled(); expect(base.hatchPet).not.toHaveBeenCalled(); expect(base.openCardPack).not.toHaveBeenCalled();
     expect(ui.log).toHaveBeenCalledWith('库存引用不唯一，请刷新仓库', 'warn');
   });
@@ -374,8 +374,10 @@ it('仓库资源卡单击使用一张，刷新页面，旧页面不能再消费'
   document.querySelector('.hub-page').innerHTML=feature.warehouseHTML();
   const refresh=vi.fn();
   feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},refresh});
-  const tile=document.querySelector('.stash-cell');tile.click();
+  const tile=document.querySelector('.stash-cell');tile.click(); await flush();
   expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材',false);
   expect(refresh).toHaveBeenCalledOnce();expect(document.getElementById('cardZoom')).toBeNull();
   base.slot=2;tile.click();expect(base.useStashMaterial).toHaveBeenCalledTimes(1);
 });
+
+function clickAction(element) { ui.lastAction = undefined; element.click(); return ui.lastAction; }

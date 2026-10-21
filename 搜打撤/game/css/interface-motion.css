@@ -13,21 +13,21 @@ body.interface-motion #overlay[data-ui-motion="confirm"] { --ui-in: var(--motion
 body.interface-motion #overlay[data-ui-motion="fast"] { --ui-in: var(--motion-fast-enter,180ms); --ui-out: var(--motion-fast-exit,110ms); --ui-rise: 4px; --ui-return: 4px; --ui-scale: 1; }
 body.interface-motion #overlay[data-ui-motion][data-ui-instant-close] { --ui-out: var(--motion-fast-exit,110ms); --ui-return: 4px; --ui-scale: 1; }
 
-body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) {
+body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([data-ui-shell="content"]):not([hidden]) {
   animation: uiVeilInA var(--ui-in) var(--ui-in-ease) both !important;
 }
-body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([hidden]) {
+body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([data-ui-shell="content"]):not([hidden]) {
   animation-name: uiVeilInB !important;
 }
-body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([hidden]) > .card {
+body.interface-motion #overlay[data-ui-motion][data-ui-enter]:not([data-ui-shell="content"]):not([hidden]) > .card {
   animation: uiPanelInA var(--ui-in) var(--ui-in-ease) both !important;
 }
-body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([hidden]) > .card {
+body.interface-motion #overlay[data-ui-motion][data-ui-enter="b"]:not([data-ui-shell="content"]):not([hidden]) > .card {
   animation-name: uiPanelInB !important;
 }
 /* Eliminate competing whole-page animations; object-level effects keep their identity. */
 body.interface-motion #overlay[data-ui-motion] #ovBody > .pg { animation: none !important; }
-body.interface-motion #overlay[data-ui-motion] #hubMain .hub-page.page-in { animation: none !important; }
+body.interface-motion #overlay[data-ui-motion] #hubMain:not(.base-camp) .hub-page.page-in { animation: none !important; }
 body.interface-motion #overlay[data-ui-motion][data-ui-enter][data-ui-closing]:not([hidden]) {
   animation: uiVeilOut var(--ui-out) var(--ui-out-ease) both !important; pointer-events: none;
 }

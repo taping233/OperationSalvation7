@@ -1,0 +1,103 @@
+{
+  "status": "superseded_not_sent",
+  "reason": "User explicitly switched muscular correction to built-in image generation.",
+  "request": {
+    "input": "1boy, solo, full body, standing with a grounded relaxed stance, three-quarter front view, confident smirk toward viewer. Right gloved hand delicately holds a tiny silver coffee cup at his lips, little finger slightly raised; left gloved hand supports its small saucer at waist. Steam rises from the cup. A massive plain silver-gray slab greatsword is strapped diagonally across his back, hilt above his shoulder and broad blade extending to calf level.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1326307802,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, very tall, 1.5::massive muscular heavyweight bodybuilder build, huge broad shoulders, thick neck and trapezius muscles, barrel chest, massive thick upper arms and forearms, heavy torso, thick muscular thighs and calves::, imposing bulky silhouette, adult masculine proportions, dark brown skin, amber gold eyes, black short slicked back hair, exposed forehead. His black hair is slicked back from his forehead, fully exposing it. Stitched scar on his left cheek, viewer-right. Fitted black long-sleeve combat shirt, single metal shoulder plate, black tactical trousers, thigh pouches, utility belt, black gloves and heavy black combat boots. Burnt-orange scarf around neck with one long frayed trailing end.",
+          "uc": "pale skin, white skin, bangs, forehead covered, slim body, girl, beard, slim, slender, narrow shoulders, thin arms, lean build",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1boy, solo, full body, standing with a grounded relaxed stance, three-quarter front view, confident smirk toward viewer. Right gloved hand delicately holds a tiny silver coffee cup at his lips, little finger slightly raised; left gloved hand supports its small saucer at waist. Steam rises from the cup. A massive plain silver-gray slab greatsword is strapped diagonally across his back, hilt above his shoulder and broad blade extending to calf level.\n\nSingle game character selection full-body portrait, isolated on a clean white background.\n\nVertical composition. Entire character, headwear, hair, clothing, feet and signature props inside frame, comfortable small margins. No scenery, no other people.\n\nSoft neutral studio illumination, clear face and hand shadows, restrained metal reflections, readable dark fabric, subtle ground contact shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, very tall, 1.5::massive muscular heavyweight bodybuilder build, huge broad shoulders, thick neck and trapezius muscles, barrel chest, massive thick upper arms and forearms, heavy torso, thick muscular thighs and calves::, imposing bulky silhouette, adult masculine proportions, dark brown skin, amber gold eyes, black short slicked back hair, exposed forehead. His black hair is slicked back from his forehead, fully exposing it. Stitched scar on his left cheek, viewer-right. Fitted black long-sleeve combat shirt, single metal shoulder plate, black tactical trousers, thigh pouches, utility belt, black gloves and heavy black combat boots. Burnt-orange scarf around neck with one long frayed trailing end.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple people, background scenery",
+          "char_captions": [
+            {
+              "char_caption": "pale skin, white skin, bangs, forehead covered, slim body, girl, beard, slim, slender, narrow shoulders, thin arms, lean build",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/roster-nai5-redo-20261020/heixiang-muscular-v2.png",
+  "references": [
+    {
+      "path": "game\\assets\\portraits\\full\\heixiang.webp",
+      "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
+      "role": "current appearance, outfit and pose",
+      "uploaded": false
+    },
+    {
+      "path": "docs\\character-bible\\heixiang.md",
+      "sha256": "a103ea3d7ee88d105b7670a9d0bfb6c0fd84fe438cd08d0933a73f9947b58ca8",
+      "role": "current identity; newest explicit anchors override old illustration",
+      "uploaded": false
+    }
+  ],
+  "change": "physique only; same seed and all sampling settings",
+  "integration": "candidate only",
+  "replacement": "heixiang-bulk-built-in-request.json"
+}

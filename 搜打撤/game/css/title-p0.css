@@ -30,8 +30,33 @@
 #title.home-composed[data-home-wallpaper="baita-heixiang"] .title-wallpaper-extension {
   background-image: url('../assets/reconstruction/wallpaper-baita-heixiang-1016.webp?v=face-v2-1016');
 }
-#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-bg { opacity: 0; }
-#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-bg-alternate { opacity: 1; }
+#title.home-composed .title-bg-piano {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp');
+  opacity: 0;
+}
+#title.home-composed[data-home-wallpaper="xingyue-piano"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-piano-1020.webp');
+}
+#title.home-composed .title-bg-bass,
+#title.home-composed[data-home-wallpaper="wu-bass"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-wu-bass-1020.webp?v=final-face-1020');
+}
+#title.home-composed .title-bg-station,
+#title.home-composed[data-home-wallpaper="baita-station"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-baita-station-1020.webp?v=selected-5401-1020');
+}
+#title.home-composed .title-bg-reeds,
+#title.home-composed[data-home-wallpaper="xingyue-reeds"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-xingyue-reeds-1020.webp');
+}
+/* Each image keeps its own layer so every pair crossfades, including wraparound. */
+#title.home-composed .title-bg[data-wallpaper-layer] { opacity: 0; }
+#title.home-composed[data-home-wallpaper="snow-road"] [data-wallpaper-layer="snow-road"],
+#title.home-composed[data-home-wallpaper="baita-heixiang"] [data-wallpaper-layer="baita-heixiang"],
+#title.home-composed[data-home-wallpaper="xingyue-piano"] [data-wallpaper-layer="xingyue-piano"],
+#title.home-composed[data-home-wallpaper="wu-bass"] [data-wallpaper-layer="wu-bass"],
+#title.home-composed[data-home-wallpaper="baita-station"] [data-wallpaper-layer="baita-station"],
+#title.home-composed[data-home-wallpaper="xingyue-reeds"] [data-wallpaper-layer="xingyue-reeds"] { opacity: 1; }
 #title.home-composed::before,
 #title.home-composed .title-bg::before,
 #title.home-composed .title-bg::after,

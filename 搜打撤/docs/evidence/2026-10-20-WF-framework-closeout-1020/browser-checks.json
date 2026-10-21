@@ -1,0 +1,173 @@
+{
+  "platform": "Codex",
+  "browser": "iab",
+  "surface": "current-window",
+  "transport": "cua",
+  "origin": "http://127.0.0.1:5339",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "devicePixelRatio": 1.25
+  },
+  "resized": false,
+  "testSlot": 4,
+  "initialSlot": "empty",
+  "existingSlot5": "not-operated",
+  "inputKind": "real-input",
+  "evaluation": "DOM与计算样式只读采集；未注入游戏状态或合成事件",
+  "mainFlow": [
+    "新建04档",
+    "切直入敌腹并刷新恢复，再切正常入城",
+    "带连射出征",
+    "保存退出并继续",
+    "地图领取人物补给并进入合法首战",
+    "连射选中并确认目标",
+    "结束回合",
+    "初始攻击选中并确认目标",
+    "胜利领取金币，回图保存退出"
+  ],
+  "observed": {
+    "firstBattleDeck": 99,
+    "afterEnemyTurn": {
+      "hp": 30,
+      "maxHp": 35,
+      "deck": 99,
+      "energy": 2
+    },
+    "finalReload": {
+      "hp": 30,
+      "maxHp": 35,
+      "coins": 1,
+      "bagSlots": 4,
+      "spentCards": 2
+    }
+  },
+  "mainSceneInputs": {
+    "path": ".tmp/framework-closeout-1020/browser-inputs-main-scene.json",
+    "bytes": 1071289,
+    "sha256": "2ef3e2db85372b8139711dc5034831400446e9f54f20dbbf1c79253978076be5",
+    "fingerprint": "c9b133f9302f7a98c1a37ccb3b213f3e228ce8c7661649b23a71c21da7841f3a"
+  },
+  "finalInputs": {
+    "path": ".tmp/framework-closeout-1020/browser-inputs.json",
+    "bytes": 1071532,
+    "sha256": "6e2e1329c78489e5026a47140e970b282c2988dc62f5ca01f75b1fe1a9808417",
+    "fingerprint": "d44c404d1d86cc7a3812e4cb217412f7115229ab8a995e57efaff03b601edc75",
+    "changedSinceMainScene": [
+      "game/src/battle/core/battle.resolution.domain.js",
+      "game/src/battle/effects/effect-steps.m2.domain.js",
+      "game/src/cards/builtin-card-execution.js",
+      "game/src/cards/card-execution-plan.js",
+      "game/src/cards/card-execution-plan.types.d.ts",
+      "game/src/cards/card-rules.schema.js"
+    ]
+  },
+  "deltaCoverage": "主流程后六个源文件的差异为神秘药水显式沉默政策及执行视图/schema传播、敌人互殴日志void回执兼容；107/95定向覆盖并纳入最终全量。主流程无这些特例；最终源码已重新装载并真实继续战后档案，状态与error日志核对。",
+  "snapshots": [
+    {
+      "file": "docs/evidence/2026-10-20-WF-framework-closeout-1020/browser-9d3f18ae-5125-426e-9644-3a002affd5b7-snapshot.json",
+      "scene": "framework-closeout-final-restored",
+      "observedAt": "2026-10-20T17:05:30.245Z",
+      "page": {
+        "origin": "http://127.0.0.1:5339",
+        "pathname": "/",
+        "viewport": {
+          "devicePixelRatio": 1.25,
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "collector": {
+        "browser": "iab",
+        "platform": "Codex",
+        "surface": "current-window",
+        "transport": "cua"
+      },
+      "actions": [
+        {
+          "detail": "最终源码同步后重新加载，等待启动完成，从04档真实继续；生命30/35、金币1、背包4格、消耗区2张与战后保存一致",
+          "type": "real-input"
+        },
+        {
+          "detail": "当前窗口1280×720，未改尺寸",
+          "type": "screenshot"
+        }
+      ],
+      "console": {
+        "coverage": "collected",
+        "errors": []
+      },
+      "screenshots": [
+        "docs/evidence/2026-10-20-WF-framework-closeout-1020/05-final-restored.png"
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-10-20-WF-framework-closeout-1020/browser-aad363ec-ecbe-45af-a761-67596171ab42-snapshot.json",
+      "scene": "framework-closeout-victory",
+      "observedAt": "2026-10-20T16:55:41.113Z",
+      "page": {
+        "origin": "http://127.0.0.1:5339",
+        "pathname": "/",
+        "viewport": {
+          "devicePixelRatio": 1.25,
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "collector": {
+        "browser": "iab",
+        "platform": "Codex",
+        "surface": "current-window",
+        "transport": "cua"
+      },
+      "actions": [
+        {
+          "detail": "空04档建档、难度保存刷新、带连射出征、保存退出继续、地图首战、连射确认目标、结束回合、初始攻击胜利、领取金币",
+          "type": "real-input"
+        },
+        {
+          "detail": "当前1280×720窗口，未修改尺寸",
+          "type": "screenshot"
+        }
+      ],
+      "console": {
+        "coverage": "collected",
+        "errors": []
+      },
+      "screenshots": [
+        "docs/evidence/2026-10-20-WF-framework-closeout-1020/04-victory.png"
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/evidence/2026-10-20-WF-framework-closeout-1020/01-base-save.png",
+      "bytes": 91472,
+      "sha256": "f3c35bc31207a2b5c06a24191861279c56b8165bb4445bf65a7bbf31457a4969"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-WF-framework-closeout-1020/02-departed-bag.png",
+      "bytes": 59459,
+      "sha256": "6042c6e1fd09b8420ea409be5ff4501e3cd5740cb056e617a9284c8adb7cbee5"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-WF-framework-closeout-1020/03-turn-two.png",
+      "bytes": 91540,
+      "sha256": "dd218fbf36fd70377911036b409e0fc56a42d6056ec20b70441027c4ba135d01"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-WF-framework-closeout-1020/04-victory.png",
+      "bytes": 35548,
+      "sha256": "70546b102bd406f1ac478afa661ef2b773856069da89333cba04383b8bbed909"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-WF-framework-closeout-1020/05-final-restored.png",
+      "bytes": 44471,
+      "sha256": "3fc360b51c1549f551960224e84c35732548d0274663d99de84fa58ffdcfa8fd"
+    }
+  ],
+  "limits": [
+    "单一当前窗口与上述代表路径；未逐卡或多窗口实页穷举",
+    "故障注入、竞争与组合效果的测试证据单列，不能与真实输入混称"
+  ]
+}

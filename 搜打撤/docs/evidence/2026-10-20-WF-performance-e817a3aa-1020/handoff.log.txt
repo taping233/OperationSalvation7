@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 handoff
+> node scripts/handoff-brief.mjs --paths game/src/core/bag-render-derivation.js,game/src/hub/game.bag.js,game/src/hub/game.bag.rules.js,game/src/run/game.session.bag.js,game/src/ui/page-visual-ready.js,game/src/ui/camp-entry.js,game/src/ui/page-visual-readiness-sharing.js,tests/bag-render-derivation.test.js,tests/bag-render-snapshot.test.js,tests/page-visual-readiness-sharing.test.js,docs/PARALLEL-REGISTRY.md
+
+{"ok":false,"error":"Command failed: git rev-parse --show-prefix\nfatal: not a git repository (or any parent up to mount point /)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).\n"}

@@ -31,20 +31,22 @@ export function setPersonnelSection(section) { if (['profile', 'pool', 'appearan
 export function petSafeSlots(pet, level) {
   return Math.min(MAP.rules.safeMax, MAP.rules.safeStart + level - 1) + (pet?.effect?.safeBonus || 0);
 }
-export function upgradePetFromPersonnel({ base, id, notice, sound, ui, meta, refresh }) {
+export async function upgradePetFromPersonnel({ base, id, notice, sound, ui, meta, refresh, isCurrent = () => true }) {
   const pet = base.petById(id);
   if (!pet) return;
   const beforeLevel = base.petLevel(id);
   const beforeSafe = petSafeSlots(pet, beforeLevel);
   const cost = base.petUpCost(id);
-  if (!base.upgradePet(id)) return;
+  const upgraded = await base.upgradePet(id);
+  if (!isCurrent()) return false;
+  if (!upgraded) { ui.log('伙伴升级未保存或口粮不足，请重试。', 'warn'); return false; }
   const level = base.petLevel(id);
   const safe = petSafeSlots(pet, level);
   notice(`${pet.name} Lv.${beforeLevel} → Lv.${level} · 安全格 ${beforeSafe} → ${safe} · 口粮 −${cost}`);
   sound.ding();
   ui.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b> Lv.${beforeLevel} → <b>Lv.${level}</b>：携带时安全格 ${beforeSafe} → <b>${safe}</b> 格（口粮 −${cost}）`, 'ok');
-  meta.checkUnlocks();
-  refresh();
+  await meta.checkUnlocks();
+  if (isCurrent()) refresh();
 }
 export function personnelBackTarget() {
   if (browse.group === 'pets' && browse.hatch) return { action:'personHatchView', label:'返回伙伴' };
@@ -176,11 +178,25 @@ export function bindPersonnel({ ui, refresh, sound }) {
 
     sound.tick();
   });
-  ui.act('personHatch', () => {
-    const result = window.SDT.Base.hatchPet();
-    ui.log(result.ok ? `孵化成功：${result.pet.name}` : result.msg || '孵化条件不足，资源未改变。', result.ok ? 'ok' : 'warn');
-    if (result.ok) { sound.ding(); window.SDT.Meta.checkUnlocks(); browse.pet = result.pet.id; }
-    refresh();
+  let hatching = false;
+  ui.act('personHatch', async () => {
+    if (hatching) return false;
+    const base = window.SDT.Base, slot = base.slot;
+    const current = () => window.SDT.Base === base && base.slot === slot && (ui.isCurrent?.() ?? true);
+    hatching = true;
+    try {
+      let result;
+      try { result = await base.hatchPet(); }
+      catch { result = { ok:false, msg:'孵化未保存，请重试。' }; }
+      if (!current()) return false;
+      ui.log(result.ok ? `孵化成功：${result.pet.name}` : result.msg || '孵化条件不足，资源未改变。', result.ok ? 'ok' : 'warn');
+      if (result.ok) {
+        sound.ding(); browse.pet = result.pet.id;
+        try { await window.SDT.Meta.checkUnlocks(); }
+        catch { if (current()) ui.log('伙伴已保存，成就检查未完成，可重新进入基地重试。', 'warn'); }
+      }
+      if (current()) refresh();
+    } finally { hatching = false; }
   });
   return mountPartnerInteraction(document.querySelector('.partner-display [data-partner-play]'));
 }

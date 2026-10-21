@@ -1,0 +1,736 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-spring",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-3bf13ec2-883a-4e81-bbd8-ff052746177c.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-spring-source.png",
+        "bytes": 1976164,
+        "sha256": "3c595ff8495713a93f8216ff342dcb299dfd348a2022b4b625626bf44209a3e6"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-spring.webp",
+          "bytes": 142074,
+          "sha256": "d5db1eac3bb2be3407f59bcd2001d56b97376d5964e87837e1dbc7104bd5232b",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-spring.webp",
+          "bytes": 14220,
+          "sha256": "d3067942539c25b3e867db321c7e69a7edeb76869cdc8e3567faf4da3960a391",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-spring.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 142074,
+            "sha256": "d5db1eac3bb2be3407f59bcd2001d56b97376d5964e87837e1dbc7104bd5232b",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-spring.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14220,
+            "sha256": "d3067942539c25b3e867db321c7e69a7edeb76869cdc8e3567faf4da3960a391",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-magazine",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-c358c9e2-0141-4e7e-8e7a-fdc94e5e7fd0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-equip-tt13-magazine-source.png",
+        "bytes": 2025199,
+        "sha256": "86f9a191f332c956117d6a780512872f666dde6b63b88b338a320cf9b31e6b21"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-magazine.webp",
+          "bytes": 146172,
+          "sha256": "bd222ba4f2f5f77f9baf2e30d4e5a01885554f09f4240d0c880cd31ef6512d23",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-magazine.webp",
+          "bytes": 16570,
+          "sha256": "858f62b396e03fae872a6f2a63e7cb3c4516b41eb97266a3d7376e4273c147c2",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt13-magazine.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146172,
+            "sha256": "bd222ba4f2f5f77f9baf2e30d4e5a01885554f09f4240d0c880cd31ef6512d23",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/equip-tt13-magazine.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16570,
+            "sha256": "858f62b396e03fae872a6f2a63e7cb3c4516b41eb97266a3d7376e4273c147c2",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-snipe",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-f6ef1ff2-1c3b-4311-9c75-8188cfa65d7d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-martial-tt13-snipe-source.png",
+        "bytes": 1912017,
+        "sha256": "834cfe4568facd80b088e8a9f1ece3523e55b9e13a51ed052bbce23c28b1b97c"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt13-snipe.webp",
+          "bytes": 146232,
+          "sha256": "b4b12ff481039a6dbd5816873f4a09891fbf5e9af4aa27d52d6904b8aec7572c",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt13-snipe.webp",
+          "bytes": 17132,
+          "sha256": "5aeb7a05ec0f660ba8c8b489d33ab97bff0f4c3e8b7bea4e9737ee9477c32c4b",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt13-snipe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146232,
+            "sha256": "b4b12ff481039a6dbd5816873f4a09891fbf5e9af4aa27d52d6904b8aec7572c",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt13-snipe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 17132,
+            "sha256": "5aeb7a05ec0f660ba8c8b489d33ab97bff0f4c3e8b7bea4e9737ee9477c32c4b",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-guard",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-0e088c73-4ce6-4429-a0f9-8d7d43b47c89.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-martial-tt13-guard-source.png",
+        "bytes": 2105722,
+        "sha256": "727a64e8bcd138a720295aa17935d61d3c498c1f99d81b1376818ca3311c8e12"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt13-guard.webp",
+          "bytes": 169972,
+          "sha256": "46d6fbc91d89ea18587141e5f6c864a0bf94d468c142e37bea84d89ac00232fb",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt13-guard.webp",
+          "bytes": 18246,
+          "sha256": "c883572dd1ab9f747aa33dc695a4869b1661150ac7786770696869eb8eed323b",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt13-guard.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 169972,
+            "sha256": "46d6fbc91d89ea18587141e5f6c864a0bf94d468c142e37bea84d89ac00232fb",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt13-guard.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18246,
+            "sha256": "c883572dd1ab9f747aa33dc695a4869b1661150ac7786770696869eb8eed323b",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-bitter-rain",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-2b327b26-e999-46e1-a5c7-b49f93051477.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-bitter-rain-source.png",
+        "bytes": 2445066,
+        "sha256": "c24bac949da82905b1c9754bc134cdbc2437aaee836f74e4730aa5adc46de2f9"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-bitter-rain.webp",
+          "bytes": 253224,
+          "sha256": "2b6fc572202908bb05b7b126fafc043496e0c9a3da5df1e252c1594d69da53a3",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-bitter-rain.webp",
+          "bytes": 22286,
+          "sha256": "5ab131c542dda1d3ae881205b9fd591e3fd23960e7061dd2f7535bea226349b1",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-bitter-rain.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 253224,
+            "sha256": "2b6fc572202908bb05b7b126fafc043496e0c9a3da5df1e252c1594d69da53a3",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-bitter-rain.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 22286,
+            "sha256": "5ab131c542dda1d3ae881205b9fd591e3fd23960e7061dd2f7535bea226349b1",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-mind-control",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-12516db5-d320-4a6a-a912-9fdf64d83886.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-mind-control-source.png",
+        "bytes": 2004395,
+        "sha256": "bdd368379108186f1e064e52556066e7a9341c97e3909dfbd186fd7508bb8d4d"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-mind-control.webp",
+          "bytes": 127638,
+          "sha256": "57e1df26fb9b7eb2c471f74eefb7cb665fa2e6a78d8a511dfe2a86f5a8a8674f",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-mind-control.webp",
+          "bytes": 12128,
+          "sha256": "08d3730a1840b1b08e7fee6f12b53ecad74d2fcd936c147ed1ce46687760ed60",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 127638,
+            "sha256": "57e1df26fb9b7eb2c471f74eefb7cb665fa2e6a78d8a511dfe2a86f5a8a8674f",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 12128,
+            "sha256": "08d3730a1840b1b08e7fee6f12b53ecad74d2fcd936c147ed1ce46687760ed60",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-flame-staff",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-340307b1-fc61-4248-9ed5-2efe2867de1a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-equip-tt13-flame-staff-source.png",
+        "bytes": 1816285,
+        "sha256": "b79d97e86d3dc18b8852508789b43bdc338ca8bb7561f9e32085f29f12bdfdf0"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-flame-staff.webp",
+          "bytes": 140996,
+          "sha256": "f4047546821f0a7c8996b1a08b9783ffd19f4b65a5589a15eae7c15c910432ee",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-flame-staff.webp",
+          "bytes": 15744,
+          "sha256": "d75d2197a0802d1d3ea43b0548fc164f4102352205a51b685150aa55340ae7b2",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt13-flame-staff.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 140996,
+            "sha256": "f4047546821f0a7c8996b1a08b9783ffd19f4b65a5589a15eae7c15c910432ee",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/equip-tt13-flame-staff.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 15744,
+            "sha256": "d75d2197a0802d1d3ea43b0548fc164f4102352205a51b685150aa55340ae7b2",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-scale-armor",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-169ad989-e640-4385-8c72-af05af0b8011.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-equip-tt13-scale-armor-source.png",
+        "bytes": 2202329,
+        "sha256": "8b5fcd919b79b00d4ca2882da2b60fa8223b5644217b99c8f263cdd1b98071c0"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-scale-armor.webp",
+          "bytes": 182184,
+          "sha256": "4bc73155c2204ce90d66ca44e682ce08d87778619f6d2820fcc8d847fd80afc1",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-scale-armor.webp",
+          "bytes": 20192,
+          "sha256": "47805d0d3cc62f17c66785aab6eed4a6b38c66cd1b8813875045f007d1ec0d80",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 182184,
+            "sha256": "4bc73155c2204ce90d66ca44e682ce08d87778619f6d2820fcc8d847fd80afc1",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 20192,
+            "sha256": "47805d0d3cc62f17c66785aab6eed4a6b38c66cd1b8813875045f007d1ec0d80",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-astrolabe",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-f8c649ac-a207-4fd2-b2b4-c8304d4c1200.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-equip-tt13-astrolabe-source.png",
+        "bytes": 2124595,
+        "sha256": "f802164579e65b1863f744f18d2b86cab3ffdb0dc168bf8f7f801413a5a3e98b"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-astrolabe.webp",
+          "bytes": 194794,
+          "sha256": "939b74f18c8e9023700b276f0e715c4875f0ad08514a564bf2237bf10e8608c2",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-astrolabe.webp",
+          "bytes": 18190,
+          "sha256": "52670c847ffee4a1d505460d6ee15a31f0be795488a7f8bdded3bb164807ba75",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 194794,
+            "sha256": "939b74f18c8e9023700b276f0e715c4875f0ad08514a564bf2237bf10e8608c2",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18190,
+            "sha256": "52670c847ffee4a1d505460d6ee15a31f0be795488a7f8bdded3bb164807ba75",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-soul-contract",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-5b3d16e5-3ee5-4d07-b96b-45c88755413d.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-soul-contract-source.png",
+        "bytes": 1934801,
+        "sha256": "2a3b3fbb13aed2a408505f9914c72ec617d54034775501e9881d9b838f022947"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-soul-contract.webp",
+          "bytes": 116366,
+          "sha256": "4e55a062688a8b98ad207785f7ab57a7c8a4ed9512939caf570235e533a4fcd6",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-soul-contract.webp",
+          "bytes": 10706,
+          "sha256": "da49683fd28e9a741f355b330e114dbfeabcf48cfbd85a4c2d51f62cdb83ed40",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 116366,
+            "sha256": "4e55a062688a8b98ad207785f7ab57a7c8a4ed9512939caf570235e533a4fcd6",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 10706,
+            "sha256": "da49683fd28e9a741f355b330e114dbfeabcf48cfbd85a4c2d51f62cdb83ed40",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-stellar-divination",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-88df4a87-f3fd-4f86-b242-6979caf4c53f.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-stellar-divination-source.png",
+        "bytes": 1992639,
+        "sha256": "e2d549e9c915f0b8c6769fd8e8c65b66b021f94c94642d2b1ed26323a3965d15"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 138720,
+          "sha256": "259bc905f2959667205bc1ffe7e8e3fbba37b03d04b4c754555c52a850e74bd6",
+          "size": [
+            1660,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 14556,
+          "sha256": "269bcfd69f82852e9019b4a1109170a93a5de60f79954ae61640cf2ca316a6c5",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 138720,
+            "sha256": "259bc905f2959667205bc1ffe7e8e3fbba37b03d04b4c754555c52a850e74bd6",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14556,
+            "sha256": "269bcfd69f82852e9019b4a1109170a93a5de60f79954ae61640cf2ca316a6c5",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-chaos-deck",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-644b69d7-733b-4d66-81f5-9b08ae9dc2ed.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-spell-tt13-chaos-deck-source.png",
+        "bytes": 2547430,
+        "sha256": "87ac4d7c62c5cf5f79aef1e374bd447ca34c69a84d6792f4809dc2d34f1dbad5"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-chaos-deck.webp",
+          "bytes": 320914,
+          "sha256": "66ac6c0255e4cdd6ddde98edfe7a137135d2ad67947d02c21434b4ed146e1085",
+          "size": [
+            1659,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-chaos-deck.webp",
+          "bytes": 29372,
+          "sha256": "c546c1662a6c1d70e76d371dae65da2eea143d03e1838e2c9a320e7c6212a42f",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/spell-tt13-chaos-deck.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 320914,
+            "sha256": "66ac6c0255e4cdd6ddde98edfe7a137135d2ad67947d02c21434b4ed146e1085",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/spell-tt13-chaos-deck.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 29372,
+            "sha256": "c546c1662a6c1d70e76d371dae65da2eea143d03e1838e2c9a320e7c6212a42f",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-mercy",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-834be0d9-9291-488c-93ae-4e2c3d1e4ad0.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-tt13-card-art/cards-martial-tt13-mercy-source.png",
+        "bytes": 1948707,
+        "sha256": "c1ca80f051d3809c559146d0e32698a75b30d44072b4e15ffa298bc006bd5173"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt13-mercy.webp",
+          "bytes": 119508,
+          "sha256": "3cb9b9cac2983cbb55843cbdd6af295249bc122984e7c6efdb421168a0620151",
+          "size": [
+            1660,
+            948
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt13-mercy.webp",
+          "bytes": 11944,
+          "sha256": "2b89958928eb5592f59e27f175069770a229c3c64953867e82f5990fd5339b7b",
+          "size": [
+            448,
+            256
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "nai45-reset-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/martial-tt13-mercy.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 119508,
+            "sha256": "3cb9b9cac2983cbb55843cbdd6af295249bc122984e7c6efdb421168a0620151",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/martial-tt13-mercy.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 11944,
+            "sha256": "2b89958928eb5592f59e27f175069770a229c3c64953867e82f5990fd5339b7b",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1472,
+  "manifest_count_after": 1498
+}

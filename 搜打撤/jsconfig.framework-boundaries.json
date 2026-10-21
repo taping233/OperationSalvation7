@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", "module": "ESNext", "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"], "allowJs": true, "checkJs": true,
+    "strict": true, "skipLibCheck": true, "noEmit": true, "types": []
+  },
+  "files": [
+    "game/src/run/shop-commands.js",
+    "game/src/run/event-commands.js",
+    "game/src/cards/card-execution-plan.js",
+    "tests/framework-boundaries-types.fixture.ts"
+  ]
+}

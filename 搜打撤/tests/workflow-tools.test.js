@@ -154,6 +154,29 @@ describe('验收证据可信边界', () => {
     expect(() => previewCheck(root, { paths: ['../outside.js'] })).toThrow('不在 Vite');
     expect(existsSync(path.join(root, 'docs/evidence'))).toBe(false);
   });
+  it('路径预检保留原门级别，冷扫描使用有界等待且超时/失败不产生通过证据', () => {
+    const root = fixture();
+    mkdirSync(path.join(root, 'scripts'));
+    writeFileSync(path.join(root, 'scripts/acceptance-gate.mjs'), '// probe only');
+    writeFileSync(path.join(root, 'scripts/local.mjs'), '// changed file');
+    const selection = { mode: 'full', paths: ['scripts/local.mjs'], tests: [], reasons: ['fixture full'] };
+    const planProbe = vi.fn(() => ({ status: 0, stdout: JSON.stringify(selection) }));
+    const report = previewCheck(root, { paths: ['scripts/local.mjs'] }, { planProbe });
+    expect(report.selection).toEqual(selection);
+    expect(planProbe).toHaveBeenCalledWith(process.execPath,
+      ['scripts/acceptance-gate.mjs', '--paths', 'scripts/local.mjs', '--plan', '--json'],
+      expect.objectContaining({ cwd: root, timeout: 60_000, windowsHide: true }));
+    const preview = result => () => previewCheck(root, { paths: ['scripts/local.mjs'] }, { planProbe: () => result });
+    const timeout = Object.assign(new Error('spawn timeout'), { code: 'ETIMEDOUT' });
+    expect(preview({ error: timeout, status: null })).toThrow('验证计划生成超时（60 秒）；未执行检查');
+    expect(preview({ error: Object.assign(new Error('denied'), { code: 'EPERM' }), status: null })).toThrow('无法启动：denied');
+    expect(preview({ status: 7, stderr: 'fixture failure' })).toThrow('验证预检失败：fixture failure');
+    expect(preview({ status: null, signal: 'SIGTERM' })).toThrow('signal SIGTERM');
+    expect(preview({ status: 0, stdout: '{"mode":"passed","tests":[]}' })).toThrow('无效选择计划');
+    expect(() => previewCheck(root, { full: true }, { planProbe: () => ({ status: 0,
+      stdout: '{"mode":"quick","tests":[]}' }) })).toThrow('拒绝降级');
+    expect(existsSync(path.join(root, 'docs/evidence'))).toBe(false);
+  });
 });
 
 describe('防重复建设与归档', () => {

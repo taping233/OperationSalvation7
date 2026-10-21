@@ -123,10 +123,11 @@ describe('其他免注能来源与绕过手动出牌的结算路径', () => {
     expect(R.infuseFuels).toBe(0);
   });
 
-  it('noInfuse 洗入牌库、抽出、弃牌洗回后仍触发效果', async () => {
+  it('noInfuse 洗入、抽出与显式返回库后仍触发，空库不自动取回', async () => {
     const heal = PURE_HEAL;
     const game = await begin([]);
     R.set$mode('boss');
+    R.set$drawPile([]); // 隔离本测试的显式洗入牌，不带普通99库。
     const source = {
       id: 'free-deck-source', name: '免注能洗入测试', type: '法术', cost: 0, desc: '',
       rules: { version: 1, battle: { target: { side: 'self', area: false } },
@@ -137,6 +138,10 @@ describe('其他免注能来源与绕过手动出牌的结算路径', () => {
     expect(R.drawPile).toHaveLength(1);
     const uid = R.drawPile[0];
     for (let i = 0; i < 2; i++) {
+      if (i > 0) {
+        expect(E.drawCards(1)).toBe(0);
+        R.discard.splice(R.discard.indexOf(uid), 1); R.drawPile.push(uid); // 显式返回库夹具，不模拟自动洗回。
+      }
       expect(E.drawCards(1)).toBe(1);
       expect(E.findCard(uid).card._noInfuse).toBe(true);
       const hp = game.hp;

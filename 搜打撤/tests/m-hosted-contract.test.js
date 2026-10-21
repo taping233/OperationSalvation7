@@ -5,6 +5,7 @@ import { resolveRegisterRule } from '../game/src/battle/effects/effect-steps.m2.
 import { getHostedExecutionCard } from '../game/src/battle/effects/battle.hosted.js';
 import { buildFirstSourceCardIndex } from '../game/src/battle/effects/hosted-catalog-index.js';
 import { RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
+import nativeExecution from './fixtures/builtin-execution-approved-20261020.json';
 
 const hostedCards = Object.entries(HOSTED_CARD_RULES);
 
@@ -22,13 +23,13 @@ describe('M hosted battle contract', () => {
     expect(validateCardRules({ id: 'duplicate-hosted', rules: { version: 1, battle: { hosted: ['imitate', 'imitate'] } } }).ok).toBe(false);
   });
 
-  it('uses the immutable canonical host text for a migrated card with rewritten display text', () => {
+  it('migrates an exact former native declaration independently of rewritten display text', () => {
     const hosted = getHostedExecutionCard({
       id: 'tt8-hero-priest', name: 'display name', desc: '纯展示文本',
       rules: { version: 1, battle: { hosted: ['priest'] } },
     });
-    expect(hosted.desc).toContain('置入随机卡牌直至手牌达到');
-    expect(hosted.desc).not.toBe('纯展示文本');
+    expect(hosted.rules).toEqual(nativeExecution['tt8-hero-priest'].rules);
+    expect(hosted.desc).toBe('纯展示文本');
     expect(getHostedExecutionCard({
       id: 'tt8-hero-priest', desc: '纯展示文本', rules: { version: 1, battle: { hosted: ['warlock'] } },
     }).desc).toBe('纯展示文本');
@@ -47,7 +48,7 @@ describe('M hosted battle contract', () => {
     expect(buildFirstSourceCardIndex([[later, laterSameCatalog]]).get('duplicate')).toBe(later);
   });
 
-  it('keeps canonical M-batch execution text for every registered hosted ID', () => {
+  it('normalizes registered historical hosted IDs to approved rules or a canonical legacy view', () => {
     for (const [id, hostedName] of hostedCards) {
       if (RETIRED_1010.has(id)) continue; // 退役卡不再有现役canonical，注册表仍兼容历史规则形状。
       const savedCard = {
@@ -57,7 +58,13 @@ describe('M hosted battle contract', () => {
       };
       const executionCard = getHostedExecutionCard(savedCard);
       expect(executionCard.desc, id).toBeTypeOf('string');
-      expect(executionCard.desc, id).not.toBe('玩家存档改写的文字');
+      if (!executionCard.rules?.battle?.hosted) {
+        expect(executionCard.rules, id).toEqual(nativeExecution[id].rules);
+        expect(executionCard.desc, id).toBe('玩家存档改写的文字');
+      } else {
+        expect(executionCard.desc, id).not.toBe('玩家存档改写的文字');
+      }
+      expect(savedCard.rules).toEqual({ version: 1, battle: { hosted: [hostedName] } });
       expect(savedCard.desc, id).toBe('玩家存档改写的文字');
     }
   });

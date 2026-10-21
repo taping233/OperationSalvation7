@@ -1,50 +1,50 @@
-/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */
-export let drawPile = [], hand = [], discard = [], granted = [];
-export let played = [], consumed = [];
-export let grave = [];
-export let delayed = [];
-export let noDrawNext = false;
-export let lastDrawnUids = [];
-export let zeroFeeUntil = new Map();
-export let cardOverrides = new Map();
-export let equipped = [];
-export let freeCast = new Set();
+import { defaultBattleRuntime as runtime } from './battle.runtime.default.js';
 
-export function set$drawPile(v) { drawPile = v; }
-export function set$hand(v) { hand = v; }
-export function set$discard(v) { discard = v; }
-export function set$consumed(v) { consumed = v; }
-export function set$grave(v) { grave = v; }
-export function set$delayed(v) { delayed = v; }
-export function set$noDrawNext(v) { noDrawNext = v; }
-export function set$lastDrawnUids(v) { lastDrawnUids = v; }
-export function set$equipped(v) { equipped = v; }
-export function set$freeCast(v) { freeCast = v; }
-
-/* —— 域内聚合接口（2026-09-24 状态袋打薄试点）：散 set$Xxx 调用收敛到本域。
- * 同一域内多变量的整组重置/还原合并为一次调用；赋值顺序在域内保持原调用点的相对次序。 */
-export function clearBattlePiles() {
-  drawPile = []; discard = []; granted = []; played = []; consumed = []; grave = [];
-}
-export function restoreBattlePiles(data) {
-  hand = [...(data.hand || [])];
-  drawPile = [...(data.drawPile || [])];
-  discard = [...(data.discard || [])];
-  grave = [...(data.grave || [])];
-  played = [...(data.played || [])];
-  consumed = [...(data.consumed || [])];
-  granted = (data.granted || []).map(g => ({ uid: g.uid, card: { ...g.card } }));
-}
-export function restorePilesBookkeeping(data) {
-  delayed = (data.delayed || []).map(d => ({ ...d }));
-  noDrawNext = !!data.noDrawNext;
-  lastDrawnUids = [...(data.lastDrawnUids || [])];
-  zeroFeeUntil = new Map(data.zeroFeeUntil || []);
-  cardOverrides = new Map(data.cardOverrides || []);
-}
-export function resetPilesCarryover() {
-  delayed = []; noDrawNext = false; lastDrawnUids = [];
-}
-export function resetCastOverrides() {
-  zeroFeeUntil = new Map(); cardOverrides = new Map();
-}
+// Derived ESM bindings preserve existing readers; mutable data lives in runtime.
+export let drawPile = runtime.drawPile;
+export let hand = runtime.hand;
+export let discard = runtime.discard;
+export let granted = runtime.granted;
+export let played = runtime.played;
+export let consumed = runtime.consumed;
+export let grave = runtime.grave;
+export let delayed = runtime.delayed;
+export let noDrawNext = runtime.noDrawNext;
+export let lastDrawnUids = runtime.lastDrawnUids;
+export let zeroFeeUntil = runtime.zeroFeeUntil;
+export let cardOverrides = runtime.cardOverrides;
+export let equipped = runtime.equipped;
+export let freeCast = runtime.freeCast;
+runtime.subscribe((state, key) => {
+  switch (key) {
+    case 'drawPile': drawPile = state.drawPile; break;
+    case 'hand': hand = state.hand; break;
+    case 'discard': discard = state.discard; break;
+    case 'granted': granted = state.granted; break;
+    case 'played': played = state.played; break;
+    case 'consumed': consumed = state.consumed; break;
+    case 'grave': grave = state.grave; break;
+    case 'delayed': delayed = state.delayed; break;
+    case 'noDrawNext': noDrawNext = state.noDrawNext; break;
+    case 'lastDrawnUids': lastDrawnUids = state.lastDrawnUids; break;
+    case 'zeroFeeUntil': zeroFeeUntil = state.zeroFeeUntil; break;
+    case 'cardOverrides': cardOverrides = state.cardOverrides; break;
+    case 'equipped': equipped = state.equipped; break;
+    case 'freeCast': freeCast = state.freeCast; break;
+  }
+});
+export const set$drawPile = runtime.set$drawPile;
+export const set$hand = runtime.set$hand;
+export const set$discard = runtime.set$discard;
+export const set$consumed = runtime.set$consumed;
+export const set$grave = runtime.set$grave;
+export const set$delayed = runtime.set$delayed;
+export const set$noDrawNext = runtime.set$noDrawNext;
+export const set$lastDrawnUids = runtime.set$lastDrawnUids;
+export const set$equipped = runtime.set$equipped;
+export const set$freeCast = runtime.set$freeCast;
+export const clearBattlePiles = runtime.clearBattlePiles;
+export const restoreBattlePiles = runtime.restoreBattlePiles;
+export const restorePilesBookkeeping = runtime.restorePilesBookkeeping;
+export const resetPilesCarryover = runtime.resetPilesCarryover;
+export const resetCastOverrides = runtime.resetCastOverrides;

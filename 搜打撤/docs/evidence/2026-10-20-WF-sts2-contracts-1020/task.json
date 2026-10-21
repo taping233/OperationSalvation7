@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-sts2-contracts-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "落实尖塔第二轮六项借鉴；普通打出牌纳入消耗牌堆，按跨会话老板拍板统一单一可取回堆；设置提供重开本场战斗；挖宝改为真实牌库底三选一",
+  "paths": [
+    "game/src/agent/agent.state.js",
+    "game/src/battle/core",
+    "game/src/battle/effects/battle.card-cost.js",
+    "game/src/battle/effects/battle.card-inspection.js",
+    "game/src/battle/effects/battle.discover-flow.js",
+    "game/src/battle/effects/requested-card-runtime.js",
+    "game/src/battle/runtime/battle.snapshot.js",
+    "game/src/cards/card-instance.js",
+    "game/src/cards/card-instance-fields.js",
+    "game/src/run/shop-commands.js",
+    "game/src/run/game.run.scenes.js",
+    "game/src/run/game.session.bag.js",
+    "tests",
+    "docs/architecture.md",
+    "docs/agent-protocol.md",
+    "docs/evidence/2026-10-20-WF-sts2-contracts-1020",
+    "game/src/battle/bag/battle.consumed-pile.js",
+    "game/src/battle/bag/battle.bag.js",
+    "game/src/battle/view/battle.piles.view.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.decision-content.js",
+    "game/src/battle/effects/effect-verbs.js",
+    "game/src/ui/game.menu.pages.js",
+    "game/src/ui/settings-battle-restart.js",
+    "game/src/battle/bag/battle.bag.domain.js",
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/effects/battle.card-inspection.domain.js",
+    "docs/evidence/2026-10-21-WF-sts2-contracts-1020"
+  ],
+  "doneWhen": [
+    "界面和Agent消费相同选牌候选及取消权限，最终提交仍复检",
+    "真实收牌入口深拷贝实例，字段白名单保留已核实长期局内字段且清理已知临时字段，旧档与自定义内容兼容",
+    "临时改费使用明确生命周期并接入现有效果，现行费用优先级不变",
+    "敌人预告与行动共用纯计划，战斗事实接入实际计数或伤害查询消费者，保持现行时点",
+    "完成各线定向回归、集成守卫与当前内置窗口代表流程验证，保留其他会话改动，不提交",
+    "唯一消耗牌堆覆盖普通和首脑战同一可见/计数/取回来源，不自动洗回，保留战后账本类别与99临时过滤",
+    "设置按钮复用本场检查点重开，保留人物与首脑编组，取消旧队列且无战后结算"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "六项借鉴与追加规则完成；集中15文件212、最后道具/设置/架构8文件126、冻结近邻7文件70通过（含重叠），原失败原因与修正保留日志",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "语法583、数据、10组类型、各线与最后目标lint及文档守卫通过；全量与构建不在本次声明",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex内置真实补给首战：99到98、已打出牌可在唯一堆查看，设置重开恢复99/堆0/全敌满血/手牌，error[]；截图与只读DOM已导入workflow",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "三子代理已停编辑；自有5342最终PID35848身份核验后停止，无进程/监听，预览标签会话列表为空，保留副本及测试档",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未跑整库全量、build或远端CI；后续多实例/全结构化改动由framework-closeout任务独立覆盖",
+    "本档没有自然法杖或挖宝随身牌，已由真实BattleSession定向用例覆盖；最后道具增量另由battle-flow当前窗口补验，首战截图不冒称覆盖该增量"
+  ],
+  "updatedAt": "2026-10-20T16:03:10.461Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -74,3 +74,24 @@ export function isHandPaymentCandidate({ uid, handUids, card, type, excludedUids
     !selectedUids.has(uid) &&
     matchesHandSelectKey(card, type);
 }
+
+/**
+ * Project the currently legal selection actions without changing cards, selection, or UID order.
+ * Entries must come from the same stored/override lookup used by the selection consumer.
+ * @param {{ act?: string, type?: string | null, mandatory?: boolean, excludedUids?: readonly string[], selectedUids?: readonly string[] }} selection
+ * @param {readonly ({ uid: string, card?: HandSelectionRuleCard } | null | undefined)[]} handEntries
+ * @returns {{ readonly candidateUids: readonly string[], readonly canCancel: boolean }}
+ */
+export function buildHandSelectionContract(selection, handEntries) {
+  const handUids = new Set(handEntries.flatMap(entry => entry ? [entry.uid] : []));
+  const excludedUids = new Set(selection.excludedUids || []);
+  const selectedUids = new Set(selection.selectedUids || []);
+  const candidates = handEntries.flatMap(entry => {
+    if (!entry?.card) return [];
+    const eligible = selection.act === 'payment'
+      ? isHandPaymentCandidate({ uid: entry.uid, handUids, card: entry.card, type: selection.type, excludedUids, selectedUids })
+      : matchesHandSelectKey(entry.card, selection.type);
+    return eligible ? [entry.uid] : [];
+  });
+  return Object.freeze({ candidateUids: Object.freeze([...new Set(candidates)]), canCancel: !selection.mandatory });
+}

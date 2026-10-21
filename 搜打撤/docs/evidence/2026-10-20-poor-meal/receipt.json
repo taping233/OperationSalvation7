@@ -1,0 +1,64 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-poor-meal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a15969-f563-7bc0-b6fd-06bf74ddddcd\\exec-38c5b79f-b114-4bcd-9dae-58c76f712f2a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-20-poor-meal/cards-equip-tt13-poor-meal-source.png",
+        "bytes": 2223047,
+        "sha256": "0b4283e9b0edb0f7f6b7e42c1a7d2838c80186e452017a99b97dc505c80a7b23"
+      },
+      "backups": [],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-poor-meal.webp",
+          "bytes": 195406,
+          "sha256": "ea824d76589de269432f4f4b77657d6d929586631e845a7525c613c9da2555e5",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-poor-meal.webp",
+          "bytes": 25204,
+          "sha256": "0843f981f31c0a42652f792e43759677e732fe5d387349e00caeda2d88cedf85",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "poor-meal-square-20261020",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/equip-tt13-poor-meal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 195406,
+            "sha256": "ea824d76589de269432f4f4b77657d6d929586631e845a7525c613c9da2555e5",
+            "source": "docs/evidence/2026-10-20-poor-meal/receipt.json"
+          }
+        },
+        {
+          "before": null,
+          "after": {
+            "path": "thumbs/cards/equip-tt13-poor-meal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 25204,
+            "sha256": "0843f981f31c0a42652f792e43759677e732fe5d387349e00caeda2d88cedf85",
+            "source": "docs/evidence/2026-10-20-poor-meal/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1498,
+  "manifest_count_after": 1500
+}

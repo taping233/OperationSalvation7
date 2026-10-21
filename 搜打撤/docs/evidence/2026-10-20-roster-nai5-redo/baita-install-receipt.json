@@ -1,0 +1,50 @@
+{
+  "status": "installed",
+  "authorization": "User approved this final beret/book/skirt portrait for installation and explicitly prioritized this chat over the other Baita replacement.",
+  "source": {
+    "path": ".tmp\\nai\\roster-nai5-redo-20261020\\baita-books-skirt-final.png",
+    "sha256": "4f7ee00ecb793e99ec5177afb4af38ad6d3945dc25901f4890b7d9be8fb48ca6",
+    "acquisition": "C:\\Users\\太平\\.codex\\generated_images\\01a1553f-21df-7721-8862-2ed861f9ecd0\\exec-24761296-96c0-4082-bf3e-259677539a61.png",
+    "size": [
+      1037,
+      1516
+    ]
+  },
+  "output": {
+    "path": "portraits/full/baita.webp",
+    "size": [
+      1037,
+      1516
+    ],
+    "sha256": "8a82b130be3fa5cc953c060f7c3861144acc5844c255416a65f37e843ed85057",
+    "bytes": 343474,
+    "encoding": "Pillow WebP quality95 method6; preserve source size and composition"
+  },
+  "reference": {
+    "path": "docs\\character-bible\\ref-images\\baita.webp",
+    "sha256": "8a82b130be3fa5cc953c060f7c3861144acc5844c255416a65f37e843ed85057"
+  },
+  "before": [
+    {
+      "path": "game\\assets\\portraits\\full\\baita.webp",
+      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
+      "backup": ".tmp\\nai\\roster-nai5-redo-20261020\\before-install\\baita-runtime.webp"
+    },
+    {
+      "path": "docs\\character-bible\\ref-images\\baita.webp",
+      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
+      "backup": ".tmp\\nai\\roster-nai5-redo-20261020\\before-install\\baita-reference.webp"
+    }
+  ],
+  "content": "Approved green beret, single-eye fringe as shown (viewer-right covered), rich skirt folds retained; blouse folds lightly cleaned; original-inspired lap grimoire and two floating books.",
+  "scope": "Default full portrait and documentation reference only; battle sprites and avatars unchanged.",
+  "verification": {
+    "reference_bytes": "runtime/reference SHA256 equal",
+    "asset_audit": "selected asset passed; global95 unrelated errors untouched",
+    "browser": "Codex in-app browser, current viewport, real entry through slot01/base/config/Baita. Correct new portrait fully visible; natural size1037x1516, complete true; console errors empty.",
+    "screenshot": "baita-installed.png",
+    "build": "not run, mixed worktree",
+    "commit": "not authorized"
+  },
+  "screenshot_sha256": "ff2a20c8b5459fe30ecf7cdb6d92a23caca38b47a16128d2965341b424f97792"
+}

@@ -97,7 +97,7 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
     controller = mountView(panelRoot, {
       model: makeModel(current.value, getPreparation(current.value)),
       onIntent: async ({ type, payload = {} }) => {
-        if (!isCurrent(token)) return;
+        if (!isCurrent(token) || busy) return;
         const slot = slotId;
         const fresh = data.readBase(slot);
         if (!fresh.ok) { reportError(formatError(fresh)); return; }
@@ -147,7 +147,8 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
             const selection = {};
             if (preset.characterId) selection.characterId = preset.characterId;
             if (preset.petId) selection.petId = preset.petId;
-            const applied = Object.keys(selection).length ? navigation.applyPicks(picks, selection) : navigation.applyPicks(picks);
+            const applied = await navigation.applyPicks(picks, selection, () => isCurrent(token));
+            if (!isCurrent(token)) return;
             if (applied === false) { repaint('人物或宠物设置未能应用，请检查选择并重试；携带卡牌未改变。'); return; }
             dispose();
             navigation.openDeparture();

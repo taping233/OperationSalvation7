@@ -1,0 +1,213 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+····················································································································stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 加载失败释放覆盖/开关/缓存；同页重试成功
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/ui/page-loading.js:77:22 {
+  cause: Error: network unavailable
+      at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/tests/hub-lazy-entry.test.js:187:22
+      at file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+·····stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 终局首次下载失败保留原回基地按钮，可直接再次点击重试
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/hub/game.hub.js:93:18)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/ui/page-loading.js:77:22 {
+  cause: Error: first fetch failed
+      at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/tests/hub-lazy-entry.test.js:208:22
+      at file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+························································································stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 网络失败保留基地原按钮，释放cover/缓存后同按钮可重试
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/run/game.run.class-choice.js:68:18)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/ui/page-loading.js:77:22 {
+  cause: Error: offline
+      at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/tests/class-choice-lazy-entry.test.js:123:74
+      at file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+·····stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 直接newRun失败提供重试，重试只开选角，不重新准备出征
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/run/game.run.class-choice.js:68:18)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/ui/page-loading.js:77:22 {
+  cause: Error: offline
+      at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/tests/class-choice-lazy-entry.test.js:137:19
+      at file:///workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+·············································stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[SDT.Art] missing asset mapping: class:剑士
+
+stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+···stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+···stderr | tests/bag-structured-rule-migration.test.js > 原始定版背包规则与旧档回填 > 真实背包 UI：改名改描述后的斗神酒按 heal:99 回满且只消耗自身 uid
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+
+·······················stderr | tests/bag-structured-rule-migration.test.js
+[music] load failed board No codec support for selected audio sources.
+
+······················································································stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+·stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+··stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+······························
+
+ Test Files  28 passed (28)
+      Tests  407 passed (407)
+   Start at  03:00:01
+   Duration  12.55s (transform 2.45s, setup 0ms, collect 1.80s, tests 25.76s, environment 9.01s, prepare 1.73s)

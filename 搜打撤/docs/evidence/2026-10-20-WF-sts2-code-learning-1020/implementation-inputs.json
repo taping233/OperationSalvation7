@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-20T14:29:59.452Z",
+  "head": "6a489a11821bbf74c69bc7c048dff55bd52aecf3",
+  "entries": [
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "sha256": "29cc5a8052846a0ea341960626570bfb030d18bd126e1ee721d669b103c1f68e",
+      "previewSha256": "29cc5a8052846a0ea341960626570bfb030d18bd126e1ee721d669b103c1f68e"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "d0e33ffe3aab42bfdd338de93981a83557d4cc81e70daaa8e0d7a95dfdddc773",
+      "previewSha256": "d0e33ffe3aab42bfdd338de93981a83557d4cc81e70daaa8e0d7a95dfdddc773"
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "sha256": "022227250dcea877a8c42b1a7804c2c4b221969954753eb8469bf9ff85e25353",
+      "previewSha256": "022227250dcea877a8c42b1a7804c2c4b221969954753eb8469bf9ff85e25353"
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "sha256": "63ceea8b307882a830dde4b5604c7856d0fbfc95998946eb03f4f3a26c914453",
+      "previewSha256": "63ceea8b307882a830dde4b5604c7856d0fbfc95998946eb03f4f3a26c914453"
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "sha256": "6c05998258a942d69e6e646fc2233d6afda57d82e795039eab45b2c078d11546",
+      "previewSha256": "6c05998258a942d69e6e646fc2233d6afda57d82e795039eab45b2c078d11546"
+    },
+    {
+      "path": "game/src/agent/agent.replay.js",
+      "sha256": "4e9dec4eed5498bdb96bb2eef969ae6fd2f326e843ea6c649a14c1372ab61e50",
+      "previewSha256": "4e9dec4eed5498bdb96bb2eef969ae6fd2f326e843ea6c649a14c1372ab61e50"
+    },
+    {
+      "path": "game/src/agent/agent.replay-state.js",
+      "sha256": "906277d2b54609ae365dd24b62e5121675eb88f51e99990fb55a0566482adeb8",
+      "previewSha256": "906277d2b54609ae365dd24b62e5121675eb88f51e99990fb55a0566482adeb8"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "sha256": "6a8bfeb28eb021f2a3a4b2b49a77bb33bf5a032cc082c6282d89ef1921f02255",
+      "previewSha256": "6a8bfeb28eb021f2a3a4b2b49a77bb33bf5a032cc082c6282d89ef1921f02255"
+    },
+    {
+      "path": "game/src/cards/card-description-links.js",
+      "sha256": "af54cb8952247371d8a63a40e3213063050540a49972907bd9759e14547b53a8",
+      "previewSha256": "af54cb8952247371d8a63a40e3213063050540a49972907bd9759e14547b53a8"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "sha256": "38735176857aeee1ff86d3199d0284d9e43bd4f330778a0ded6caf133725a8bb",
+      "previewSha256": "38735176857aeee1ff86d3199d0284d9e43bd4f330778a0ded6caf133725a8bb"
+    },
+    {
+      "path": "game/src/cards/structured-card-description.js",
+      "sha256": "3be02c9985c2e66b1bdc1261cc5cb0e90eff23a6142ccc56f072ca0b25fa140d",
+      "previewSha256": "3be02c9985c2e66b1bdc1261cc5cb0e90eff23a6142ccc56f072ca0b25fa140d"
+    },
+    {
+      "path": "tests/sts2-random-boundary.test.js",
+      "sha256": "acce42b6441dfd1f766c33aa0c3ba014154cd7fbb0546da372e9b6f18278af71"
+    },
+    {
+      "path": "tests/sts2-agent-replay.test.js",
+      "sha256": "fd5e955d7363efa39d284e008c7087b1b2e960061fa9533e3b277eb0f45a4c98"
+    },
+    {
+      "path": "tests/sts2-structured-description.test.js",
+      "sha256": "e45fe2db050bf023aae3d01e267a65f2dabe0b8518607091f8b5c5ec2ce17ef3"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "da91b9855cc885fa980eca52b12dcb90b3ffb76c09df0080a6963a333524e151"
+    },
+    {
+      "path": "docs/agent-protocol.md",
+      "sha256": "19859f9764c0140bbcfdeede7607988c4b3e317a416546f89d30c6e7e72f04bc"
+    }
+  ]
+}

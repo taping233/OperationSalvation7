@@ -1,6 +1,9 @@
 import { beforeAll,beforeEach,describe,expect,it,vi } from 'vitest';
 import { createLayeredMap } from '../game/src/run/layeredMap.js';
 import { createMapSnapshot } from '../game/src/run/map-snapshot.js';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+
+installImmediateWebLocks();
 
 const ctx=new Proxy({}, {get:()=>()=>ctx,set:()=>true});
 window.HTMLCanvasElement.prototype.getContext=()=>ctx;
@@ -23,9 +26,9 @@ beforeAll(()=>{
 beforeEach(()=>localStorage.clear());
 
 describe('R5-a real session persistence',()=>{
-  it('正式newRun走通用覆盖并保存严格v2，恢复routePlan不重算',()=>{
+  it('正式newRun走通用覆盖并保存严格v2，恢复routePlan不重算',async()=>{
     const slot=2; window.SDT.Base.use(slot); session._set_active_slot(slot);
-    session.newRun('standard',[],{skipClassChoice:true});
+    await session.newRun('standard',[],{skipClassChoice:true});
     expect(['applied','fallback']).toContain(session.game.routePlan.status);
     expect(session.saveGame()).toBe(true);
     const stored=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
@@ -34,8 +37,8 @@ describe('R5-a real session persistence',()=>{
     expect(session.loadGame(slot).ok).toBe(true); expect(session.game.routePlan).toEqual(plan);
   });
 
-  it('正式newRun把仓库带入与口袋清理合并为一次Base写入', () => {
-    const slot = 7; window.SDT.Base.use(slot); session._set_active_slot(slot);
+  it('正式newRun把仓库带入与口袋清理合并为一次Base写入', async () => {
+    const slot = 3; window.SDT.Base.use(slot); session._set_active_slot(slot);
     const base = window.SDT.Base;
     const selected = { id: 'deploy-card', name: '攻击卡', rarity: '稀有' };
     const secondSelected = { id: 'deploy-guard', name: '防御卡', rarity: '古朴' };
@@ -52,7 +55,7 @@ describe('R5-a real session persistence',()=>{
     };
 
     try {
-      expect(session.newRun('standard', { 攻击卡: 1, 防御卡: 2 }, { skipClassChoice: true })).toBeUndefined();
+      expect(await session.newRun('standard', { 攻击卡: 1, 防御卡: 2 }, { skipClassChoice: true })).toBeUndefined();
       expect(baseWrites).toBe(1);
       expect(base.data.stash).toEqual([
         { card: selected, count: 1 },
@@ -66,8 +69,8 @@ describe('R5-a real session persistence',()=>{
     }
   });
 
-  it('Base真实写盘失败时出征不初始化run、不消费随机流且不丢库存', () => {
-    const slot = 8; window.SDT.Base.use(slot); session._set_active_slot(slot);
+  it('Base真实写盘失败时出征不初始化run、不消费随机流且不丢库存', async () => {
+    const slot = 4; window.SDT.Base.use(slot); session._set_active_slot(slot);
     const base = window.SDT.Base;
     base.data.stash = [{ card: { id: 'deploy-card', name: '攻击卡', rarity: '稀有' }, count: 2 }];
     const cardStack = base.data.stash[0];
@@ -89,7 +92,7 @@ describe('R5-a real session persistence',()=>{
     };
 
     try {
-      expect(session.newRun('standard', { [cardStack.card.name]: 1 }, { skipClassChoice: true })).toBe(false);
+      expect(await session.newRun('standard', { [cardStack.card.name]: 1 }, { skipClassChoice: true })).toBe(false);
       expect(Random.snapshot()).toEqual(beforeRandom);
       expect(session.game).toMatchObject(before);
       expect(base.data).toEqual(beforeBase);
@@ -120,9 +123,9 @@ describe('R5-a real session persistence',()=>{
     expect(session.saveGame()).toBe(false); expect(localStorage.getItem(RunStorage.key(slot))).toBe(oldRaw);
   });
 
-  it('跨标签存档冲突提示重新载入，而不是提示存储空间不足',()=>{
+  it('跨标签存档冲突提示重新载入，而不是提示存储空间不足',async()=>{
     const slot=1; window.SDT.Base.use(slot); session._set_active_slot(slot);
-    session.newRun('standard',[],{skipClassChoice:true});
+    await session.newRun('standard',[],{skipClassChoice:true});
     expect(session.saveGame()).toBe(true);
     expect(session.loadGame(slot).ok).toBe(true);
     const latest=JSON.parse(localStorage.getItem(RunStorage.key(slot)));

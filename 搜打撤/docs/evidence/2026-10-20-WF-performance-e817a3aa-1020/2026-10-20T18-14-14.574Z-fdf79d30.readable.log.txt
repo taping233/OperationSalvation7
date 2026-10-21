@@ -1,0 +1,58 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+·········stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+·stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+·········································stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+···················································································
+
+ Test Files  11 passed (11)
+      Tests  134 passed (134)
+   Start at  03:14:15
+   Duration  4.75s (transform 831ms, setup 0ms, collect 1.53s, tests 7.76s, environment 2.46s, prepare 667ms)

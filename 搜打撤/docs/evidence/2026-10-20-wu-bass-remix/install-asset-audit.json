@@ -1,0 +1,21 @@
+{
+  "scope": "selected",
+  "ok": true,
+  "selected": [
+    "reconstruction/wallpaper-wu-bass-1020.webp"
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "path": "reconstruction/wallpaper-wu-bass-1020.webp",
+      "bytes": 527266,
+      "sha256": "bc6296abbe97d51a31e4f9fda360817634cc9564cce1b5fdc000e1369c575950"
+    }
+  ],
+  "global": {
+    "ok": false,
+    "errorCount": 95,
+    "historicalWarningCount": 570,
+    "manifestIssues": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T17:44:30.234Z",
+  "inputKind": "real-input",
+  "detail": "真实点击轮换三张壁纸；刷新仍选择第三张。读取中间态第二层opacity0.839917、星月层0.160083；0.5秒渐变。",
+  "screenshot": {
+    "path": "home-wallpaper.png",
+    "bytes": 46280,
+    "sha256": "7e392a1bbc775cb6ddbfec254ea42c14f102555c26762dbd5de17189a835125d"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    },
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    },
+    {
+      "complete": false,
+      "fit": "fill",
+      "height": 0,
+      "src": "",
+      "width": 0
+    }
+  ],
+  "console": []
+}

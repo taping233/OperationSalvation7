@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "steps": [
+    {
+      "name": "selected-assets",
+      "exitCode": 0,
+      "durationMs": 1602,
+      "stdout": "{\"scope\":\"selected\",\"ok\":true,\"selected\":[\"reconstruction/wallpaper-xingyue-piano-1020.webp\"],\"errors\":[],\"assets\":[{\"path\":\"reconstruction/wallpaper-xingyue-piano-1020.webp\",\"bytes\":484368,\"sha256\":\"5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393\"}],\"global\":{\"ok\":false,\"errorCount\":95,\"historicalWarningCount\":570,\"manifestIssues\":[]}}\n",
+      "stderr": ""
+    },
+    {
+      "name": "targeted-tests",
+      "exitCode": 0,
+      "durationMs": 2513,
+      "stdout": "\n RUN  v3.2.7 D:/素材/代号柒/搜打撤\n\n ✓ tests/title-wallpaper.test.js (9 tests) 410ms\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  01:40:26\n   Duration  1.73s (transform 63ms, setup 0ms, collect 36ms, tests 410ms, environment 920ms, prepare 145ms)\n\n",
+      "stderr": " DEPRECATED  \"environmentMatchGlobs\" is deprecated. Use `test.projects` to define different configurations instead.\n"
+    }
+  ]
+}

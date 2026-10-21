@@ -16,6 +16,24 @@ beforeEach(() => {
 afterEach(()=>{document.body.replaceChildren();vi.unstubAllGlobals();});
 function render(){document.body.innerHTML=personnelHTML('wu');bindPersonnel({ui:{act:(key,handler)=>actions.set(key,handler)},sound:{tick:vi.fn()},refresh});return document.body;}
 
+it('孵化后成就迁移仍在等待时保持忙态，连点不再次扣币与蛋', async () => {
+  let finish;
+  base.data.coins = 100;
+  let eggs = 2;
+  base.hatchPet = vi.fn(async () => { base.data.coins -= 50; eggs--; return { ok:true, pet:base.PETS[0] }; });
+  window.SDT.Meta.checkUnlocks = vi.fn(() => new Promise(resolve => { finish = resolve; }));
+  const ui = { act:(name, handler) => actions.set(name, handler), log:vi.fn(), isCurrent:() => true };
+  bindPersonnel({ ui, sound:{ tick:vi.fn(), ding:vi.fn() }, refresh });
+  const pending = actions.get('personHatch')();
+  await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
+  expect(await actions.get('personHatch')()).toBe(false);
+  expect(base.hatchPet).toHaveBeenCalledOnce();
+  expect(base.data.coins).toBe(50); expect(eggs).toBe(1);
+  expect(refresh).not.toHaveBeenCalled();
+  finish([]); await pending;
+  expect(refresh).toHaveBeenCalledOnce();
+});
+
 it('integrated personnel tabs keep one growth action and return from appearance without changing the save',()=>{
   const before=JSON.stringify(base.data),root=render();
   expect(root.querySelectorAll('.pv12-sections button')).toHaveLength(4);

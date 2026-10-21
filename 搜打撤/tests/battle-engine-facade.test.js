@@ -6,12 +6,13 @@
  * 基线取自治理批次 3 开工前（HEAD 工作区）的导出面快照；回合结束续接增加
  * deferEndTurn / hasPendingEndTurn，供 battle.enemy-phase 按名消费。
  * 当前选择续接、统一表现事件与手牌装备上限新增四个明确入口。
+ * notifyPlayerDamaged 供 enemy-phase 的毒伤复用受伤触发宿主，避免再次形成攻击/毒伤双路径。
  */
 import { describe, expect, it } from 'vitest';
 import * as Engine from '../game/src/battle/core/battle.engine.js';
 
 const BASELINE_EXPORTS = [
-  'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive', 'awaitTriggeredActions',
+  'configureBattleEngine', 'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive', 'awaitTriggeredActions',
   'intentFor', 'drawCards', 'resolveFoeDefeat', 'sweepDead', 'nestPhase', 'grantSha',
   'findCard', 'findEffectiveCard', 'infusionFuelReason', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
   'cancelInteraction', 'flee', 'handCurseSpecs', 'getSnapshot', 'snapshotSignature',
@@ -24,7 +25,7 @@ const BASELINE_EXPORTS = [
   'queueCardExecution', 'aegisBlocked', 'foeIdx', 'hitFoe', 'matchHandSelectKey',
   'skipHandSelect', 'pickHandSelect', 'useItem', 'bagSlam', 'resolveDart',
   'resolveSlam', 'slamSkill', 'addPlayerCurse', 'usePotion', 'openBag', 'closeBag', 'pickChoice',
-  'pickDiscover', 'playerTakeHit', 'frenzyCurse', 'elCurse',
+  'pickDiscover', 'playerTakeHit', 'notifyPlayerDamaged', 'frenzyCurse', 'elCurse',
   'deferEndTurn', 'hasPendingEndTurn',
   'settlePendingSelections', 'emitBattlePresentation', 'emitRecast', 'handUnplayableReason',
 ];
@@ -34,7 +35,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 77', () => {
-    expect(BASELINE_EXPORTS.length).toBe(77);
+  it('基线数量 = 79', () => {
+    expect(BASELINE_EXPORTS.length).toBe(79);
   });
 });

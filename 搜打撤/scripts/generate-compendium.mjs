@@ -7,6 +7,7 @@
  * 也可 `npm run docs:compendium`。文档即快照，重跑即同步；手改会被下一次生成覆盖。
  */
 import { RULE_CONFIG } from '../game/src/core/rule-config.js';
+import { displayCardDescription } from '../game/src/cards/card-description-text.js';
 
 export function buildCompendium({ Cards, syncData, achievements, pets, scenes, mapData, generatedAt }) {
   const all = Cards.all();
@@ -21,7 +22,7 @@ export function buildCompendium({ Cards, syncData, achievements, pets, scenes, m
   const cardRow = (c) => {
     const cls = c.cls ? esc(c.cls) : '通用';
     const cost = c.cost != null ? c.cost : '—';
-    return `| ${esc(c.name)} | ${cost} | ${esc(rarOf(c))} | ${cls} | ${esc(String(c.desc || '').replace(/\n/g, ' '))} |`;
+    return `| ${esc(c.name)} | ${cost} | ${esc(rarOf(c))} | ${cls} | ${esc(String(displayCardDescription(c.desc, c.id, c)).replace(/\n/g, ' '))} |`;
   };
   const cardTable = (list) =>
     `| 卡牌 | 费用 | 稀有度 | 职业 | 描述 |\n| --- | --- | --- | --- | --- |\n` +
@@ -48,7 +49,7 @@ ${ch('1', '游戏概览')}
 - 局外成长：人物熟练度、仓库、收藏图鉴、宠物、成就（\`game/src/hub/meta.js\`、\`base.js\`）。
 ${ch('2', '对局规则与常量')}
 - 玩家规则文档：\`docs/rules.md\`；基础数值源为 \`game/src/core/rule-config.js\`，\`game/src/core/rules.js\` 提供兼容门面。
-- 基础战斗规则：每回合 ${RULE_CONFIG.battle.energy} 能量，手牌上限 ${RULE_CONFIG.battle.handMax}；首脑战初始抽 ${RULE_CONFIG.battle.startDraw} 张、每回合抽 ${RULE_CONFIG.battle.turnDraw} 张，编组 ${RULE_CONFIG.battle.bossDeckSize} 张并加入 ${RULE_CONFIG.battle.starterAttack} 张初始攻击。具体效果与例外查玩家规则。
+- 基础战斗规则：每回合 ${RULE_CONFIG.battle.energy} 能量。普通战随身可用牌开局入手，另有99张初始攻击牌库，开局和每回合不自动抽牌，仅抽牌效果取牌。首脑战手牌上限 ${RULE_CONFIG.battle.handMax}，初始抽 ${RULE_CONFIG.battle.startDraw} 张、每回合抽 ${RULE_CONFIG.battle.turnDraw} 张，编组 ${RULE_CONFIG.battle.bossDeckSize} 张并加入 ${RULE_CONFIG.battle.starterAttack} 张初始攻击。打出、弃置或消耗的牌统一进入消耗牌堆，不自动洗回，仅由卡牌效果取回。具体效果与例外查玩家规则。
 - 新局地图由 \`game/src/run/map-generator-v4.js\` 按种子生成，第1/3层仅火堆、第2/4层仅商店，恢复使用已校验快照；\`game/data/map.json\` 提供内容配置（${Object.keys(mapData?.monsters || {}).length} 个敌人模板），旧棋盘元数据不描述当前地图几何。
 ${ch('3', '战斗系统')}
 - 流程入口：\`game/src/battle/core/battle.core.js\` 提供命令与快照；\`game/src/battle/effects/battle.target-rules.js\` 提供目标及打出限制，\`game/src/battle/bag/battle.deck.js\` 管理牌堆。

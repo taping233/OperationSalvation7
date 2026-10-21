@@ -1,0 +1,20 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-code-learning-1020/replay-before-agent.js.txt b/game/src/agent/agent.js
+index 02236a59..90754476 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-code-learning-1020/replay-before-agent.js.txt
++++ b/game/src/agent/agent.js
+@@ -22,6 +22,7 @@ import * as recorder from './agent.recorder.js';
+ import * as stats from './agent.stats.js';
+ import { runScene, startScene, sceneStatus, listScenes } from './agent.scenes.js';
+ import { openDataPage, dataPanelHTML } from './agent.data.js';
++import * as replay from './agent.replay.js';
+ 
+ const Agent = Object.freeze({
+   version: 1,
+@@ -29,6 +30,7 @@ const Agent = Object.freeze({
+   phase: phaseOf,
+   settleSignature,
+   normalizeAction, actionId,
++  replay: Object.freeze({ capture: replay.capture, play: replay.play }),
+   policies: Object.freeze({ greedy: greedyPolicy, random: randomPolicy, strategic: strategicPolicy }),
+   llm: Object.freeze({ decide: llmDecide, loadConfig: llmLoadConfig, saveConfig: llmSaveConfig, isEnabled: llmEnabled }),
+   recorder: Object.freeze({

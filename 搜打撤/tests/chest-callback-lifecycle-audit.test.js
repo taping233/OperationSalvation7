@@ -191,3 +191,33 @@ it('正常结算重绘后仍返回地图，重复点击只提交一次，失败�
   expect(UI.el.overlay.hidden).toBe(true);
   expect(game.state).toBe('idle');
 });
+
+it.each([
+  ['overview', 'reward', false], ['cards', 'reward', false],
+  ['overview', 'map', false], ['cards', 'map', false],
+  ['overview', 'map', true], ['cards', 'reward', true],
+])('%s 返回时%s保存失败（throw=%s）保留原奖励，重试不重抽或重领', async (screen, phase, throws) => {
+  open(); actions.chestReveal(); actions.chestTake1({ i:'0' });
+  if (screen === 'overview') actions.chestClosePicker();
+  const before = Chests.serialize(game), draws = drawn.mock.calls.length;
+  game.persistSave.mockReset().mockReturnValue(true);
+  if (phase === 'map') game.persistSave.mockReturnValueOnce(true);
+  game.persistSave.mockImplementationOnce(() => {
+    if (throws) throw new Error('isolated return save failure');
+    return false;
+  });
+  expect(await actions.chestReturn()).toBe(false);
+  expect(UI.el.overlay.hidden).toBe(false);
+  expect(game.state).toBe('modal');
+  expect(Chests.serialize(game).current).toMatchObject({ cards:before.current.cards, taken:[0], lost:[] });
+  expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
+  expect(UI.el.ovBody.querySelector('[data-act="chestReturn"]')).not.toBeNull();
+  expect(game.grantCard).toHaveBeenCalledOnce();
+  expect(await actions.chestReturn()).toBe(true);
+  expect(UI.el.overlay.hidden).toBe(true);
+  expect(game.state).toBe('idle');
+  expect(drawn).toHaveBeenCalledTimes(draws);
+  expect(Chests.restore(game, game.nodeChestRewards['0,1'], vi.fn())).toBe(true);
+  actions.chestOpen?.({ i:'0' }); actions.chestTake1({ i:'0' });
+  expect(game.grantCard).toHaveBeenCalledOnce();
+});

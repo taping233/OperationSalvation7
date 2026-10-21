@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T08:34:04.746Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口真实打开照相馆并搜索源头活水；确认新图与缓存版本显示，未改变视口或玩家存档",
+  "screenshot": {
+    "path": "live-spring.png",
+    "bytes": 63650,
+    "sha256": "05e9b6349fdb9d5c74b3f4ff9d8454493a76a9927bbd66eaaaed87a2833daa81"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 948,
+      "src": "http://localhost:5200/assets/cards/spell-tt13-spring.webp?art=nai45-reset-20261020&v=0.60.0",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

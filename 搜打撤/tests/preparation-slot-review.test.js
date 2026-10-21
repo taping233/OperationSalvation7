@@ -13,9 +13,31 @@ function harness() {
   feature.open(); return { feature, navigation, update, read, commit, resolve, intent: value => intent(value), setSlot: value => { slot = value; } };
 }
 describe('整备预设slot与完整CardRef', () => {
+  it('应用预设等待宠物保存时，连点只提交一次原选择', async () => {
+    const h = harness(); let finish;
+    h.navigation.applyPicks.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    const pending = h.intent({ type:'preset-apply', payload:{ presetId:'preset-1' } });
+    await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
+    await h.intent({ type:'preset-apply', payload:{ presetId:'preset-1' } });
+    expect(h.navigation.applyPicks).toHaveBeenCalledOnce();
+    finish(true); await pending;
+    expect(h.navigation.openDeparture).toHaveBeenCalledOnce();
+  });
   it('换slot后旧intent不能提交到新slot', async () => { const h = harness(); h.setSlot(2); const pending = h.intent({ type: 'goal-add', payload: { targetId: 'a' } }); h.resolve({ ok: true }); await pending; expect(h.commit).not.toHaveBeenCalled(); });
   it('旧slot命令成功后不读新slot或更新旧页面', async () => { const h = harness(); const pending = h.intent({ type: 'goal-add', payload: { targetId: 'a' } }); await Promise.resolve(); const reads = h.read.mock.calls.length, updates = h.update.mock.calls.length; h.setSlot(2); h.resolve({ ok: true }); await pending; expect(h.read.mock.calls.length).toBe(reads); expect(h.update.mock.calls.length).toBe(updates); });
-  it('预设应用保存cardId+堆级variant身份', async () => { const h = harness(); await h.intent({ type: 'preset-apply', payload: { presetId: 'preset-1' } }); expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:b:foil': 1 }); expect(h.navigation.openDeparture).toHaveBeenCalledOnce(); });
+  it('预设应用保存cardId+堆级variant身份', async () => { const h = harness(); await h.intent({ type: 'preset-apply', payload: { presetId: 'preset-1' } }); expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:b:foil': 1 }, {}, expect.any(Function)); expect(h.navigation.openDeparture).toHaveBeenCalledOnce(); });
+  it('宠物保存失败不会离开整备；等待保存时换档也不会打开旧档出征', async () => {
+    const failed = harness(); failed.navigation.applyPicks.mockResolvedValue(false);
+    await failed.intent({ type:'preset-apply', payload:{ presetId:'preset-1' } });
+    expect(failed.navigation.openDeparture).not.toHaveBeenCalled();
+    const changed = harness(); let finish;
+    changed.navigation.applyPicks.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    const pending = changed.intent({ type:'preset-apply', payload:{ presetId:'preset-1' } });
+    await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
+    changed.setSlot(2); finish(true); await pending;
+    expect(changed.navigation.openDeparture).not.toHaveBeenCalled();
+    expect(changed.navigation.applyPicks.mock.lastCall[2]()).toBe(false);
+  });
   it('换slot后旧预设应用不读取新档或覆盖新档选择', async () => {
     const h = harness(), reads = h.read.mock.calls.length;
     h.setSlot(2);

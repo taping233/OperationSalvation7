@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { describe, expect, it } from 'vitest';
 import { createRecoveryCommands } from '../game/src/hub/recovery.commands.js';
 import { RunStorage } from '../game/src/hub/game.storage.js';
@@ -91,13 +93,13 @@ describe('R2-a production facade contract with isolated adapter', () => {
     try { expect(RunStorage.remove(slot)).toBe(false); } finally { Storage.prototype.removeItem=original; localStorage.removeItem(runKey); }
   });
 
-  it('Base.reset 与旧迁移在空串 pending 下先拒绝且不切档或搬移旧数据', () => {
+  it('Base.reset 与旧迁移在空串 pending 下先拒绝且不切档或搬移旧数据', async () => {
     const Base=window.SDT.Base, slot=3, txKey=`sdt-tx-v1-slot${slot}`, legacy=Base.LEGACY_KEY;
     const oldSlot=Base.slot, oldData=Base.data;
     localStorage.setItem(txKey,''); localStorage.setItem(legacy,'{"legacy":true}'); localStorage.removeItem(Base.SLOT_KEY(slot));
-    expect(Base.reset(slot)).toBe(false);
+    expect((await Base.reset(slot))).toBe(false);
     expect(Base.slot).toBe(oldSlot); expect(Base.data).toBe(oldData);
-    expect(Base.migrateLegacy([slot])).toBe(false);
+    expect((await Base.migrateLegacy([slot]))).toBe(false);
     expect(localStorage.getItem(Base.SLOT_KEY(slot))).toBeNull(); expect(localStorage.getItem(legacy)).not.toBeNull();
     localStorage.removeItem(txKey); localStorage.removeItem(legacy);
   });

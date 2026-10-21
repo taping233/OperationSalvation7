@@ -1,8 +1,11 @@
 export type BattleOperationName = 'damage' | 'heal' | 'armor' | 'draw' | 'status' | 'discover'
-  | 'curse' | 'acquire' | 'coins' | 'blessing' | 'energy' | 'energyCap' | 'maxHp' | 'deckCap' | 'cleanse'
+  | 'curse' | 'acquire' | 'coins' | 'blessing' | 'energy' | 'refillEnergy' | 'energyCap' | 'maxHp' | 'deckCap' | 'cleanse'
   | 'stealAtk' | 'noDrawNext' | 'extraTurn' | 'execute' | 'summon' | 'registerRule' | 'transform'
-  | 'foeFight' | 'copyRandom';
-export type OperationTarget = 'chosenEnemy' | 'allEnemies' | 'randomEnemy' | 'self';
+  | 'foeFight' | 'copyRandom' | 'adjustCurse' | 'restoreHeroSkill' | 'recruitEnemy'
+  | 'insertCards' | 'fillHand' | 'castRandomSpells' | 'equipCapacity' | 'release' | 'consumeHand'
+  | 'handSelect' | 'swapDiscoverCosts' | 'markEnemy' | 'schedule' | 'castDrawn' | 'castStored'
+  | 'registerInfusionBonus' | 'transformCards' | 'choice' | 'randomCurse' | 'randomBlessing' | 'freezeFirstEnemies' | 'discoverCopies';
+export type OperationTarget = 'chosenEnemy' | 'allEnemies' | 'randomEnemy' | 'self' | 'allAllies';
 export type AcquireDestination = 'hand' | 'deck' | 'discover';
 export type AcquireAction = 'play' | 'playKeep' | 'dup' | 'zeroCost' | 'costMinusOne' | 'decay' | 'noInfuse';
 export type HostedBattleRuleName = 'imitate' | 'mana-surge' | 'rot-seed' | 'charge-fireball'

@@ -4,7 +4,7 @@
 
 - 画风配方唯一权威：`nai_style.py`（画师串/风格块/负面基线 + 全部 build_* 构建器），禁止散抄画风文本。
 - 新批次构建入口：`nai_prompt_clean.py`（转发 nai_style + 负面词去重 + 透明战斗立绘构建器）。
-- 当前流程与可复用请求记录示例：[NAI 提示词组合](../docs/production/art/NAI-PROMPTING.md)。新批次按用途构图、角色分槽、固定参数对照并保存完整请求；当前配方v3.4，质量尾、按需质量词、负面和画法以nai_style及组合手册为准，默认四画师链保留；人物关系与适度重复沿组合原则；默认2048×1152、CFG5.5、28步、Variety+关闭，完整参数见客户端与认可请求。
+- 当前流程与可复用请求记录示例：[NAI 提示词组合](../docs/production/art/NAI-PROMPTING.md)。新批次按用途构图、角色分槽、固定参数对照并保存完整请求；当前配方v3.4，质量尾、按需质量词、负面和画法以nai_style及组合手册为准，默认四画师链保留；人物关系与适度重复沿组合原则；默认免费横版1344×768、CFG5.5、28步（大图须老板明确指定）、Variety+关闭，完整参数见客户端与认可请求。
 - 生图客户端与护栏：`nai_gen.py`（模型/参数/双通道/大图限额）+ `nai_guard.py`（节奏/配额/冷却）；离线测试 `tools/tests/`。
 - 视觉规范与认可锚点：`docs/production/art/VISUAL-BIBLE.md`（portraits/full 五图为唯一认可图）。
 - 角色身份与 tag 口径：`docs/character-bible/`（每页只认「现行权威」段，历史段不拼入新配方）。

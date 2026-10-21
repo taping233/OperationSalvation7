@@ -3,7 +3,8 @@ import { createGameMenuController } from './helpers/menu-controller.js';
 
 function setup(recoverSlotIfPending) {
   const handlers = {};
-  const base = { peek: () => ({}), use: vi.fn(), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn(() => true), applyStoredCardRenames: vi.fn(() => false) };
+  let activeSlot = null;
+  const base = { slot:null, peek: () => ({}), use: vi.fn(slot => { base.slot = slot; }), save: vi.fn(), data: { stash: [], pocket: [] }, issue: () => null, reset: vi.fn(async () => true), applyStoredCardRenames: vi.fn(async () => ({ changed:false, persisted:true })), flushWrites:vi.fn(async () => ({ ok:true })) };
   const openBaseHub = vi.fn();
   const runStore = { has: vi.fn(() => false), issue: () => null };
   const preflightRunMap = vi.fn(() => ({ ok: true }));
@@ -14,7 +15,7 @@ function setup(recoverSlotIfPending) {
     registerHelp() {}, helpBtn() { return ''; }, act(name, fn) { handlers[name] = fn; },
     log: vi.fn(), clearLog() {}, hideScreen: vi.fn(), showScreen() {}, refresh() {},
   };
-  const setActiveSlot = vi.fn();
+  const setActiveSlot = vi.fn(slot => { activeSlot = slot; });
   const game = { state: 'title' };
   const controller = createGameMenuController({
     SDT: { Base: base, Cards: { applyAbilityRename: () => false, applyDuplicateRenames: () => false }, Sound: { music() {} },
@@ -22,7 +23,7 @@ function setup(recoverSlotIfPending) {
     UI, game, runtime: { resize() {}, openBaseHub, showRunTransition: () => Object.assign(Promise.resolve(true), { isCurrent: () => true }) },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame: vi.fn(), clearSlot,
     saveGame() {}, syncPlayTime() {}, clearSave() {}, clearAllSlots() {},
-    getActiveSlot: () => null, setActiveSlot, preflightRunMap, hasRun: () => false,
+    getActiveSlot: () => activeSlot, setActiveSlot, preflightRunMap, hasRun: () => false,
     RunStorage: runStore, recoverSlotIfPending,
   });
   controller.startNewGame();
@@ -96,12 +97,64 @@ describe('选档恢复门禁', () => {
 
 
 describe('基地异步入口的选档锁和结果', () => {
+  it.each(['newSlot', 'delSlot', 'overwriteSlot'])('%s 等待回执时返回标题，即使旧页仍在淡出也不重新导航', async action => {
+    const h = setup(); let finish;
+    const page = document.querySelector('.slot-page');
+    const hide = vi.spyOn(h.UI, 'hideOverlay').mockImplementation(() => {});
+    const pendingWrite = new Promise(resolve => { finish = resolve; });
+    if (action === 'newSlot') h.base.reset.mockReturnValue(pendingWrite);
+    else { h.clearSlot.mockReturnValue(pendingWrite); await h.handlers[action]({ slot:1 }); }
+    const pending = h.handlers[action]({ slot:1 });
+    h.handlers.slotBack();
+    expect(page.isConnected).toBe(true);
+    finish(action === 'newSlot' ? true : { ok:true });
+    expect(await pending).toBe(false);
+    expect(h.openBaseHub).not.toHaveBeenCalled();
+    expect(document.querySelector('.slot-page')).toBe(page);
+    if (action === 'overwriteSlot') expect(h.base.reset).not.toHaveBeenCalled();
+    expect(h.UI.log.mock.calls.some(([text]) => text.includes('已删除') || text.includes('已进入'))).toBe(false);
+    hide.mockRestore();
+  });
+  it('基地迁移写入失败保留档案且不打开基地，重试成功后才进入', async () => {
+    const h = setup();
+    h.base.applyStoredCardRenames.mockResolvedValueOnce({ changed:true, persisted:false });
+    expect(await h.handlers.enterSlot({ slot:1 })).toBe(false);
+    expect(h.openBaseHub).not.toHaveBeenCalled();
+    expect(document.getElementById('slotRestoreError').textContent).toContain('迁移未保存');
+    await h.handlers.enterSlot({ slot:1 });
+    expect(h.openBaseHub).toHaveBeenCalledOnce();
+  });
+
+  it('等待基地迁移时离开选档，迟到回执不打开旧档位', async () => {
+    const h = setup(); let finish;
+    h.base.applyStoredCardRenames.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    const pending = h.handlers.enterSlot({ slot:1 });
+    document.getElementById('ovBody').innerHTML = '<section class="settings-page">设置</section>';
+    finish({ changed:true, persisted:true });
+    expect(await pending).toBe(false);
+    expect(h.openBaseHub).not.toHaveBeenCalled();
+    expect(document.querySelector('.settings-page')).not.toBeNull();
+  });
+
+  it('覆盖删除等待时离开选档，已完成删除不会触发迟到初始化', async () => {
+    const h = setup(); let finish;
+    h.clearSlot.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    await h.handlers.overwriteSlot({ slot:1 });
+    const pending = h.handlers.overwriteSlot({ slot:1 });
+    document.getElementById('ovBody').innerHTML = '<section class="settings-page">设置</section>';
+    finish({ ok:true });
+    expect(await pending).toBe(false);
+    expect(h.base.reset).not.toHaveBeenCalled();
+    expect(h.openBaseHub).not.toHaveBeenCalled();
+    expect(document.querySelector('.settings-page')).not.toBeNull();
+  });
   it.each(['newSlot', 'enterSlot', 'overwriteSlot'])('%s 等待基地时禁止重复初始化、覆盖、删除或进入', async action => {
     const h = setup();
     let finish;
     h.openBaseHub.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
     if (action === 'overwriteSlot') h.handlers[action]({ slot: 1 });
     const entry = h.handlers[action]({ slot: 1 });
+    await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
     await h.handlers.newSlot({ slot: 1 });
     await h.handlers.enterSlot({ slot: 1 });
     h.handlers.overwriteSlot({ slot: 1 }); h.handlers.delSlot({ slot: 1 });
@@ -129,6 +182,7 @@ describe('基地异步入口的选档锁和结果', () => {
     const h = setup(); let finish;
     h.openBaseHub.mockImplementation(() => new Promise((resolve, reject) => { finish = outcome === 'false' ? () => resolve(false) : () => reject(new Error('late failure')); }));
     const entry = h.handlers.enterSlot({ slot: 1 });
+    await vi.waitFor(() => expect(finish).toBeTypeOf('function'));
     document.getElementById('ovBody').innerHTML = '<section class="settings-page">设置</section>';
     finish(); expect(await entry).toBe(false);
     expect(document.querySelector('.settings-page')).not.toBeNull();

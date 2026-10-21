@@ -202,7 +202,16 @@ describe('Electron 启动契约', () => {
     expect(launch).toBeGreaterThan(prestart);
   });
 
-  it('main.js 副作用导入顺序与 boot-order.js 的 BOOT_ORDER 逐项一致（批次 5）', () => {
+  it('HTML 只经 main.js 装配全部生产模块，不漏载或旁路新增模块入口', () => {
+    const html = readFileSync(resolve(process.cwd(), 'game/index.html'), 'utf8');
+    const page = new DOMParser().parseFromString(html, 'text/html');
+    const moduleEntries = [...page.querySelectorAll('script')]
+      .filter(script => script.getAttribute('type')?.trim().toLowerCase() === 'module')
+      .map(script => script.getAttribute('src'));
+    expect(moduleEntries).toEqual(['./src/main.js']);
+  });
+
+  it('main.js 完整页面装配顺序与 boot-order.js 的 BOOT_ORDER 逐项一致', () => {
     const source = readFileSync(resolve(process.cwd(), 'game/src/main.js'), 'utf8');
     // 只取顶格的副作用导入；被注释掉的模块（如 scene/runtime.js）不计入；id 含域目录前缀
     const imported = [...source.matchAll(/^\s*import\s+'\.\/([\w./-]+)\.js';/gm)].map(m => m[1]);

@@ -1,7 +1,12 @@
+import { BATTLE_TRIGGER_POINTS } from './card-trigger-contract.js';
+import { isSemanticOperation, validateSemanticOperation } from './card-semantic-contract.js';
+import { createCardRuleExecutionView } from './card-execution-plan.js';
+
 // M3：keepInHand——打出后回手（不朽斩「永远被保留在手牌中」，exec-play 保留通道结构化）
-const BATTLE_KEYS = new Set(['target', 'requirements', 'costModifiers', 'keepInHand', 'hosted']);
+const BATTLE_KEYS = new Set(['target', 'requirements', 'costModifiers', 'keepInHand', 'fuelAllowed', 'ignoresSilence', 'ownedEquipCapacity', 'setup', 'handTransform', 'hosted']);
 // Hosted names are executable integration points bound to stable card identities.
 export const HOSTED_CARD_RULES = Object.freeze({
+  'tt13-poor-meal': 'batch13-poor-meal',
   'tt13-spring': 'batch13-spring',
   'tt13-magazine': 'batch13-magazine',
   'tt13-snipe': 'batch13-snipe',
@@ -63,9 +68,7 @@ const BAG_KEYS = new Set(['use']);
 // 解释器（battle.triggers.m2.js runner）逐时点接线；未接线时点由 capability 收口。
 // M2（2026-09-27）七时点全量接线：onTurnStart/onTurnEnd/onBattleStart/onConsume/onDraw/
 // onKill/onDamaged/onPlayCard；容器级 duration = 该卡 trigger 持续 N 次触发后过期。
-const TRIGGER_KEYS = new Set(['onPlay', 'onTurnStart', 'onTurnEnd', 'onBattleStart', 'onConsume', 'onDraw',
-  'onKill', 'onDamaged', 'onPlayCard', 'onAcquire', 'onFreezeDealt', 'duration',
-  'replay']);
+const TRIGGER_KEYS = new Set([...BATTLE_TRIGGER_POINTS, 'duration', 'replay']);
 // v2 onPlay 全量键白名单（逐键参数校验在各 op 分支内完成）。
 const ON_PLAY_OPERATION_KEYS = new Set([
   // v1
@@ -89,7 +92,7 @@ const ON_PLAY_OPERATION_KEYS = new Set([
   'priceOf', 'perTargetPrice', 'perInfusedInHand', 'infuseBonus', 'spellPowerMul', 'perCurseKinds', 'perCurseStacks',
   'consumeEquip', 'source', 'bindTarget', 'capTo',
   // M3（2026-09-27）：pick:'new' 段级重新点选（血毒双镖）；execute.what 施放语义
-  'pick', 'what',
+  'pick', 'what', 'nonLethal',
 ]);
 const DISCOVER_POOL_KEYS = new Set(['kind', 'cost']);
 const SUPPORTED_DAMAGE_TYPES = new Set(['attack', 'spell', 'fixed', 'true']);
@@ -99,7 +102,7 @@ const DAMAGE_ALLOWED_KEYS = new Set(['op', 'amountField', 'amount', 'range', 'ta
   // M2：onKill 击杀奖励 / perInfusedInHand 手注能加伤 / infuseBonus 注能加伤 /
   // spellPowerMul 法伤加成倍率 / perTargetPrice 伤害锚定参照牌价格
   // M3：pick:'new' 段级重新点选（血毒双镖双目标）
-  'onKill', 'perInfusedInHand', 'infuseBonus', 'spellPowerMul', 'perTargetPrice', 'pick']);
+  'onKill', 'perInfusedInHand', 'infuseBonus', 'spellPowerMul', 'perTargetPrice', 'pick', 'nonLethal']);
 const CURSE_ALLOWED_KEYS = new Set(['op', 'curse', 'stacks', 'duration', 'target', 'randomKinds', 'double', 'burst', 'extend',
   // M2：source 手牌招式诅咒聚合 / bindTarget 绑定前一 damage 段目标 / amount（atkDown 扣减量）
   // M3：pick:'new' 段级重新点选
@@ -116,7 +119,7 @@ const CLEANSE_ALLOWED_KEYS = new Set(['op', 'target']);
 // M2：偷取攻击（影噬「偷取至 1 点」/ 禁咒「夺取 1 点攻击力」）——amount 固定量 / capTo 压至阈值二选一
 const STEAL_ATK_ALLOWED_KEYS = new Set(['op', 'target', 'amount', 'capTo', 'duration', 'pick']);
 // M3：敌对敌互殴（扰敌「选择 2 名敌人，迫使其相互攻击一次」）/ 随机复制一张手牌（刀剑形态）
-const FOE_FIGHT_ALLOWED_KEYS = new Set(['op']);
+const FOE_FIGHT_ALLOWED_KEYS = new Set(['op', 'pick']);
 const COPY_RANDOM_ALLOWED_KEYS = new Set(['op']);
 const STATUS_ALLOWED_KEYS = new Set(['op', 'status', 'target', 'duration']);
 const DISCOVER_ALLOWED_KEYS = new Set(['op', 'count', 'pool', 'costDecayPerTurn']);
@@ -125,19 +128,20 @@ const CURSE_KEYS = new Set(['bleed', 'poison', 'freeze', 'silence', 'abreak', 'h
 const STACKING_CURSE_KEYS = new Set(['bleed', 'poison']);
 const CONDITION_KEYS = new Set(['foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp',
   // M2：目标身负任意诅咒（暗影射击「若对手处于诅咒状态」）
-  'anyCurse']);
+  'anyCurse', 'playerStealthed']);
 const DAMAGE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy']);
 const CURSE_TARGET_KEYS = new Set(['chosenEnemy', 'allEnemies', 'randomEnemy', 'self']);
 // v2 —— 键位已定的操作族（schema 放行 + 逐键校验）。解释器进度：acquire/blessing/
 // energy/energyCap/maxHp/deckCap/coins 已接线（A3 G3/G4 批，battle.resolution.js）；
 // execute/summon/transform/registerRule/extraTurn 仍 pending throw（后续批）。
 // 集合名保留 PENDING_ 前缀为兼容（路由到 validatePendingOperation 的键校验分支）。
-const PENDING_ONPLAY_OPS = new Set(['acquire', 'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap',
+const PENDING_ONPLAY_OPS = new Set(['acquire', 'blessing', 'energy', 'refillEnergy', 'energyCap', 'maxHp', 'deckCap',
   'execute', 'summon', 'transform', 'registerRule', 'extraTurn', 'coins']);
 const PENDING_OP_ALLOWED_KEYS = new Map([
   ['acquire', new Set(['op', 'n', 'pool', 'dest', 'act', 'filter'])],
   ['blessing', new Set(['op', 'key', 'stacks', 'duration'])],
   ['energy', new Set(['op', 'n'])],
+  ['refillEnergy', new Set(['op'])],
   ['energyCap', new Set(['op', 'n'])],
   ['maxHp', new Set(['op', 'n'])],
   ['deckCap', new Set(['op', 'n'])],
@@ -161,7 +165,7 @@ const REGISTER_RULE_KEYS = new Set(['consumeFireball', 'allSpellsInfused', 'grow
 const HAND_OP_KEYS = new Set(['consumeHand', 'dumpHand', 'copyRandom', 'keepInHand', 'noInfuse']);
 // v2 —— G5 装备域（键位设计先行，全部 pending；消费点在 battle.equipment.js，A3 B9 落地）
 const EQUIP_KEYS = new Set(['onEquip', 'passive', 'battleStart', 'skill', 'container']);
-const EQUIP_PASSIVE_KEYS = new Set(['aura', 'cond']);
+const EQUIP_PASSIVE_KEYS = new Set(['aura', 'cond', 'heroSkillCost', 'damageResponse', 'alternatingRefund', 'infusionUnlock']);
 const EQUIP_AURA_KEYS = new Set(['atk', 'spellPower', 'deckCap',
   // M2：focus 专注——每回合开始额外获得 N 点能量（回合管线经 triggers runner 结算）
   'focus']);
@@ -215,6 +219,7 @@ function validateCondition(record, path, error) {
   if (record.anyCurse !== undefined && record.anyCurse !== true) {
     error(`${path}.anyCurse`, 'must equal true when provided');
   }
+  if (record.playerStealthed !== undefined && record.playerStealthed !== true) error(`${path}.playerStealthed`, 'must equal true');
 }
 
 function validateDamageOperation(operation, card, path, error) {
@@ -348,12 +353,14 @@ function validateDamageOperation(operation, card, path, error) {
   }
   if (operation.onKill !== undefined) {
     const onKill = operation.onKill;
-    if (!isRecord(onKill) || !hasOnlyKeys(onKill, new Set(['coins', 'armor'])) || Object.keys(onKill).length === 0 ||
+    if (!isRecord(onKill) || !hasOnlyKeys(onKill, new Set(['coins', 'armor', 'energy'])) || Object.keys(onKill).length === 0 ||
         (onKill.coins !== undefined && !isPositiveInteger(onKill.coins)) ||
-        (onKill.armor !== undefined && !isPositiveInteger(onKill.armor))) {
+        (onKill.armor !== undefined && !isPositiveInteger(onKill.armor)) ||
+        (onKill.energy !== undefined && !isPositiveInteger(onKill.energy))) {
       error(`${path}.onKill`, "must be a non-empty object with positive integer 'coins' and/or 'armor'");
     }
   }
+  if (operation.nonLethal !== undefined && operation.nonLethal !== true) error(`${path}.nonLethal`, 'must be true');
 }
 
 function validateCurseOperation(operation, path, error) {
@@ -608,6 +615,7 @@ function validatePendingOperation(operation, path, op, error) {
     }
     return;
   }
+  if (op === 'refillEnergy') return;
   if (['energy', 'energyCap', 'maxHp', 'deckCap', 'coins'].includes(op)) {
     if (!isPositiveInteger(operation.n)) error(`${path}.n`, 'must be a positive integer');
     return;
@@ -619,9 +627,10 @@ function validatePendingOperation(operation, path, op, error) {
     }
     if (operation.cap !== undefined) {
       const cap = operation.cap;
-      if (!isRecord(cap) || !hasOnlyKeys(cap, new Set(['atk', 'maxHpBelow'])) || Object.keys(cap).length === 0 ||
+      if (!isRecord(cap) || !hasOnlyKeys(cap, new Set(['atk', 'maxHpBelow', 'wounded'])) || Object.keys(cap).length === 0 ||
           (cap.atk !== undefined && !isPositiveInteger(cap.atk)) ||
-          (cap.maxHpBelow !== undefined && !isPositiveInteger(cap.maxHpBelow))) {
+          (cap.maxHpBelow !== undefined && !isPositiveInteger(cap.maxHpBelow)) ||
+          (cap.wounded !== undefined && cap.wounded !== true)) {
         error(`${path}.cap`, "must be a non-empty object with positive integer 'atk' and/or 'maxHpBelow'");
       }
     }
@@ -689,6 +698,18 @@ function validateOperation(operation, card, path, error) {
     error(path, 'expected an operation object');
     return;
   }
+  if (Object.hasOwn(operation, 'when')) {
+    const { when, ...effect } = operation;
+    if (!isRecord(when) || !hasOnlyKeys(when, new Set(['infused', 'brokeStealth', 'targetStatus', 'targetUndamagedBeforeCast'])) ||
+      Object.keys(when).length < 1 || Object.entries(when).some(([key, value]) => key === 'targetStatus'
+        ? !CURSE_KEYS.has(value) : typeof value !== 'boolean')) error(`${path}.when`, 'requires finite execution predicates');
+    validateOperation(effect, card, path, error);
+    return;
+  }
+  if (isSemanticOperation(operation)) {
+    validateSemanticOperation(operation, path, error, (ops, childPath) => validateOperationArray(ops, card, childPath, error));
+    return;
+  }
   if (!hasOnlyKeys(operation, ON_PLAY_OPERATION_KEYS)) error(path, 'contains an unknown parameter');
   if (typeof operation.op !== 'string' ||
       (!['damage', 'armor', 'heal', 'draw', 'status', 'discover', 'curse', 'cleanse', 'stealAtk', 'noDrawNext',
@@ -736,6 +757,7 @@ function validateOperation(operation, card, path, error) {
     for (const key of Object.keys(operation)) {
       if (!FOE_FIGHT_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for foeFight operations');
     }
+    if (operation.pick !== undefined && operation.pick !== 'two') error(`${path}.pick`, 'must be two');
   } else if (operation.op === 'copyRandom') {
     // M3：随机复制一张手牌（刀剑形态「回合开始时获得一张随机手牌的复制」）
     for (const key of Object.keys(operation)) {
@@ -770,12 +792,22 @@ function validateOperation(operation, card, path, error) {
 }
 
 // v2 —— 装备域（G5）形状校验：键位先行，全部 pending，解释器遇到即 throw
+/** A trigger or equipment action executes only its own operations and referenced fields.
+ * This pure view is shared by capability preflight and the battle executors. */
+export { createCardRuleExecutionView };
+
 function validateOperationArray(operations, card, path, error) {
   if (!Array.isArray(operations)) {
     error(path, 'expected an operation array');
     return;
   }
-  operations.forEach((operation, index) => validateOperation(operation, card, `${path}[${index}]`, error));
+  // Each registered point owns its numeric inputs. A literal consume/draw effect
+  // must not be forced to equal the unrelated onPlay damage field (e.g. a bomb).
+  const scoped = createCardRuleExecutionView(card, operations);
+  for (const field of ['dmg', 'heal', 'armor', 'draw']) {
+    if (operations.some(operation => operation?.amountField === field)) scoped[field] = card?.[field];
+  }
+  operations.forEach((operation, index) => validateOperation(operation, scoped, `${path}[${index}]`, error));
 }
 
 function validateEquipRules(equip, card, error) {
@@ -795,8 +827,9 @@ function validateEquipRules(equip, card, error) {
         if (!isRecord(aura) || !hasOnlyKeys(aura, EQUIP_AURA_KEYS) || Object.keys(aura).length === 0 ||
             (aura.atk !== undefined && !Number.isInteger(aura.atk)) ||
             (aura.spellPower !== undefined && !Number.isInteger(aura.spellPower)) ||
-            (aura.deckCap !== undefined && !Number.isInteger(aura.deckCap))) {
-          error('rules.equip.passive.aura', "must be a non-empty object with integer 'atk', 'spellPower', or 'deckCap'");
+            (aura.deckCap !== undefined && !Number.isInteger(aura.deckCap)) ||
+            (aura.focus !== undefined && !isNonnegativeInteger(aura.focus))) {
+          error('rules.equip.passive.aura', "must contain integer atk/spellPower/deckCap values or a nonnegative integer focus");
         }
       }
       if (passive.cond !== undefined) {
@@ -808,6 +841,24 @@ function validateEquipRules(equip, card, error) {
           error('rules.equip.passive.cond', "must be a non-empty object with 'hasCurse: true' and/or a positive integer 'vsFreeze' bonus");
         }
       }
+      for (const [key, fields] of Object.entries({
+        heroSkillCost: ['maxHand', 'cost'], damageResponse: ['damage', 'drawChance', 'draw'],
+        alternatingRefund: ['types', 'amount'], infusionUnlock: ['fuel', 'spellPower', 'draw'],
+      })) {
+        if (passive[key] === undefined) continue;
+        const rule = passive[key];
+        if (!isRecord(rule) || !hasOnlyKeys(rule, new Set(fields)) || fields.some(field => rule[field] === undefined)) {
+          error(`rules.equip.passive.${key}`, `requires exactly ${fields.join(', ')}`); continue;
+        }
+        for (const field of fields) {
+          if (field === 'types') {
+            if (!Array.isArray(rule.types) || rule.types.length !== 2 || new Set(rule.types).size !== 2 ||
+              rule.types.some(type => !['武术', '法术'].includes(type))) error(`rules.equip.passive.${key}.types`, 'requires both martial and spell types');
+          } else if (field === 'drawChance') {
+            if (!Number.isFinite(rule[field]) || rule[field] < 0 || rule[field] > 1) error(`rules.equip.passive.${key}.${field}`, 'requires probability 0..1');
+          } else if (!isNonnegativeInteger(rule[field])) error(`rules.equip.passive.${key}.${field}`, 'requires nonnegative integer');
+        }
+      }
     }
   }
   if (equip.skill !== undefined) {
@@ -815,8 +866,8 @@ function validateEquipRules(equip, card, error) {
     if (!isRecord(skill) || !hasOnlyKeys(skill, EQUIP_SKILL_KEYS) || !Array.isArray(skill.ops)) {
       error('rules.equip.skill', "expected an object with an 'ops' operation array (optional 'oncePerBattle')");
     } else {
-      if (skill.oncePerBattle !== undefined && skill.oncePerBattle !== true) {
-        error('rules.equip.skill.oncePerBattle', 'must equal true when provided');
+      if (skill.oncePerBattle !== undefined && typeof skill.oncePerBattle !== 'boolean') {
+        error('rules.equip.skill.oncePerBattle', 'must be a boolean when provided');
       }
       validateOperationArray(skill.ops, card, 'rules.equip.skill.ops', error);
     }
@@ -897,6 +948,9 @@ export function validateCardRules(card) {
           const discoverOperations = operations.filter(operation => isRecord(operation) && operation.op === 'discover');
           const curseOperations = operations.filter(operation => isRecord(operation) && operation.op === 'curse');
           const pendingOperations = operations.filter(operation => isRecord(operation) && PENDING_ONPLAY_OPS.has(operation.op));
+          if (triggers.replay && damageOperations.some(operation => operation.recast?.on === 'lastHand')) {
+            error('rules.triggers.replay', 'cannot combine whole-card lastHand replay with damage lastHand recast');
+          }
           // v1 契约保留：status / discover 仍必须单独声明（泛化由 curse / acquire 承接）
           if (statusOperations.length && operations.length !== 1) {
             error('rules.triggers.onPlay', 'status operations must be declared alone');
@@ -924,14 +978,16 @@ export function validateCardRules(card) {
           if (damageOperations.length && fieldAnchoredEffectOps.length) {
             error('rules.triggers.onPlay', 'damage cannot be combined with heal, armor, or draw');
           }
-          if (fieldAnchoredEffectOps.length && (curseOperations.length || pendingOperations.length)) {
+          if (fieldAnchoredEffectOps.length && (curseOperations.length || pendingOperations.some(operation => operation.op !== 'refillEnergy'))) {
             error('rules.triggers.onPlay', 'field-anchored heal/armor/draw cannot be combined with v2 operations');
           }
           // —— 卡面字段一致性 ——
           // 空 onPlay 明确声明「打出时无效果，其他触发点承接」；字段仍须由同卡
           // onTurnStart/equip 等真实消费器声明，不能借空数组保留未消费的卡面字段。
           // 注能字段在任何结构化 onPlay 中都不允许保留（v1 约定延续：注能门由描述句承担）
-          if (card?.infuse !== undefined && Number(card.infuse) !== 0) {
+          const ownsInfusion = rules.battle?.requirements?.some(rule => rule.kind === 'infused') ||
+            operations.some(operation => operation?.infuseBonus !== undefined || operation?.when?.infused !== undefined);
+          if (card?.infuse !== undefined && Number(card.infuse) !== 0 && !ownsInfusion) {
             error('rules.triggers.onPlay', 'onPlay cannot preserve card.infuse');
           }
           // M3：动态源豁免——draw 的 range/perCurseKinds/untilHandN 也是「声明消费了卡面字段」的
@@ -942,15 +998,21 @@ export function validateCardRules(card) {
           const equipOps = isRecord(equip) ? ['onEquip', 'battleStart'].flatMap(key =>
             Array.isArray(equip[key]) ? equip[key] : []).concat(
               isRecord(equip.skill) && Array.isArray(equip.skill.ops) ? equip.skill.ops : []) : [];
-          const declaringOperations = [...operations, ...otherTriggerOps, ...equipOps];
+          const expandOperations = entries => entries.flatMap(operation => isRecord(operation)
+            ? [operation, ...expandOperations(Array.isArray(operation.ops) ? operation.ops : []),
+              ...expandOperations(Array.isArray(operation.options) ? operation.options.flatMap(option => Array.isArray(option?.ops) ? option.ops : []) : [])]
+            : [operation]);
+          const declaringOperations = expandOperations([...operations, ...otherTriggerOps, ...equipOps]);
           const declaresField = (op, field) => declaringOperations.some(operation => isRecord(operation) && (
             (operation.op === op && (operation.amountField === field ||
               (operation.amount !== undefined && typeof card?.[field] === 'number' && Number(card[field]) === operation.amount) ||
               (field === 'draw' && (operation.range !== undefined || operation.perCurseKinds !== undefined ||
                 operation.untilHandN !== undefined)))) ||
-            (field === 'armor' && operation.op === 'damage' && operation.onKill?.armor === card?.armor)));
+            (field === 'armor' && operation.op === 'damage' && operation.onKill?.armor === card?.armor) ||
+            (field === 'heal' && operation.op === 'fillHand' && operation.perSpellHeal === card?.heal)));
           for (const field of ['heal', 'armor', 'draw']) {
-            if (card?.[field] !== undefined && Number(card[field]) !== 0 && !declaresField(field, field)) {
+            if (card?.[field] !== undefined && Number(card[field]) !== 0 && !declaresField(field, field)
+              && !operations.some(operation => operation?.op === 'choice')) {
               error('rules.triggers.onPlay', `onPlay must declare card.${field}`);
             }
           }
@@ -974,12 +1036,16 @@ export function validateCardRules(card) {
           // 「damage 不能与 heal/armor/draw 混排」的 v1/v2 口径）。
           const declaredTarget = rules.battle?.target;
           const enemyDomainOps = operations.filter(operation => isRecord(operation) &&
-            (operation.op === 'damage' || operation.op === 'stealAtk' ||
+            (['damage', 'stealAtk', 'execute', 'foeFight'].includes(operation.op) ||
               (operation.op === 'curse' && operation.target !== 'self')));
           const selfLiteralOps = operations.filter(operation => isRecord(operation) &&
-            (operation.op === 'cleanse' || operation.op === 'noDrawNext' || operation.op === 'extraTurn' ||
+            ((operation.op === 'curse' && operation.target === 'self') ||
+              operation.op === 'cleanse' || operation.op === 'noDrawNext' || operation.op === 'extraTurn' ||
               operation.op === 'registerRule' || operation.op === 'summon' ||
               (['heal', 'armor', 'draw'].includes(operation.op) && operation.amountField === undefined)));
+          const untargetedRefill = declaredTarget?.side === null
+            && operations.some(operation => operation?.op === 'refillEnergy')
+            && operations.every(operation => ['draw', 'refillEnergy'].includes(operation?.op));
           const mixedSelfEffects = declaredTarget?.side === 'enemy' && enemyDomainOps.length > 0 &&
             selfLiteralOps.length > 0;
           for (const operation of operations) {
@@ -995,12 +1061,14 @@ export function validateCardRules(card) {
                   error('rules.battle.target.side', "allEnemies requires side 'enemy' or null");
                 }
               } else if (operationTarget === 'self') {
-                if (declaredTarget?.side !== 'self') error('rules.battle.target.side', 'self requires side self');
-                if (declaredTarget?.area !== false) error('rules.battle.target.area', 'self requires area false');
+                if (!mixedSelfEffects) {
+                  if (declaredTarget?.side !== 'self') error('rules.battle.target.side', 'self requires side self');
+                  if (declaredTarget?.area !== false) error('rules.battle.target.area', 'self requires area false');
+                }
               }
             } else if (['heal', 'armor', 'draw'].includes(operation.op)) {
               if (!mixedSelfEffects) {
-                if (declaredTarget?.side !== 'self') error('rules.battle.target.side', `${operation.op} requires side 'self'`);
+                if (declaredTarget?.side !== 'self' && !(operation.op === 'draw' && (untargetedRefill || declaredTarget?.side === null))) error('rules.battle.target.side', `${operation.op} requires side 'self'`);
                 if (declaredTarget?.area !== false) error('rules.battle.target.area', `${operation.op} requires area false`);
               }
             } else if (operation.op === 'cleanse') {
@@ -1117,6 +1185,22 @@ export function validateCardRules(card) {
   }
   const battle = rules.battle;
   if (!hasOnlyKeys(battle, BATTLE_KEYS)) error('rules.battle', 'contains an unknown field');
+  if (battle.keepInHand !== undefined && typeof battle.keepInHand !== 'boolean') {
+    error('rules.battle.keepInHand', 'must be a boolean when provided');
+  }
+  if (battle.fuelAllowed !== undefined && typeof battle.fuelAllowed !== 'boolean') error('rules.battle.fuelAllowed', 'must be a boolean');
+  if (battle.ignoresSilence !== undefined && battle.ignoresSilence !== true) error('rules.battle.ignoresSilence', 'must be true');
+  if (battle.ownedEquipCapacity !== undefined && !isPositiveInteger(battle.ownedEquipCapacity)) error('rules.battle.ownedEquipCapacity', 'requires positive integer');
+  if (battle.handTransform !== undefined) {
+    const rule = battle.handTransform;
+    if (!isRecord(rule) || !hasOnlyKeys(rule, new Set(['afterType', 'cost'])) || rule.afterType !== '武术' || !isNonnegativeInteger(rule.cost)) error('rules.battle.handTransform', 'requires martial event and copy cost');
+  }
+  if (battle.setup !== undefined) {
+    const rule = battle.setup;
+    const idList = value => Array.isArray(value) && value.length > 0 && value.every(id => typeof id === 'string' && id);
+    if (!isRecord(rule) || !hasOnlyKeys(rule, new Set(['mode', 'injectIds', 'collection'])) || rule.mode !== 'boss' || !idList(rule.injectIds) ||
+      !isRecord(rule.collection) || !hasOnlyKeys(rule.collection, new Set(['ids', 'into'])) || !idList(rule.collection.ids) || typeof rule.collection.into !== 'string') error('rules.battle.setup', 'requires boss setup identities and hand collection transformation');
+  }
 
   if (battle.hosted !== undefined) {
     if (!Array.isArray(battle.hosted) || battle.hosted.length === 0) {

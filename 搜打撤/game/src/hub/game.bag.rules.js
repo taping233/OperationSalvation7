@@ -17,15 +17,17 @@ export function bagUseLocation(card) {
 }
 
 // Match the existing restore loop's capacity rule without removing a real card during preview.
-export function restorationCapacityReason(game, ownedIndex, { usedSlots, bagCap }) {
+export function restorationCapacityReason(game, ownedIndex, { usedSlots, bagCap, renderState }) {
   const entry = game.ownedCards[ownedIndex];
   if (!entry) return '';
-  const same = game.ownedCards.filter(o => !o.safe && !o.stored && o.card.name === entry.card.name).length;
+  const same = renderState ? (renderState.bagNameCounts.get(entry.card.name) || 0)
+    : game.ownedCards.filter(o => !o.safe && !o.stored && o.card.name === entry.card.name).length;
   const freesSlot = !entry.safe && !entry.stored && same % stackCapOf(entry.card) === 1;
-  return usedSlots() - Number(freesSlot) >= bagCap() ? '背包空间不足，先腾位再复原' : '';
+  return (renderState ? renderState.used : usedSlots()) - Number(freesSlot) >= (renderState ? renderState.cap : bagCap())
+    ? '背包空间不足，先腾位再复原' : '';
 }
 
-export function bagUseStatus(card, uid, { game, usedSlots, bagCap }) {
+export function bagUseStatus(card, uid, { game, usedSlots, bagCap, renderState }) {
   if (card.id === 'tt3-mystery-potion') return { label:'仅战斗中使用', badge:'战斗使用', reason:'神秘药水仅能在战斗中使用' };
   if (bagUseLocation(card) === 'battle') return { label:'仅战斗中使用', badge:'战斗使用', reason:'该道具的效果需要在战斗中使用' };
   const operations = card.rules?.bag?.use;
@@ -39,7 +41,8 @@ export function bagUseStatus(card, uid, { game, usedSlots, bagCap }) {
   const empty = (restoreOnly || legacyRestore) && !game.usedPocket.length;
   if (empty) return { label:'消耗区为空，无法复原', badge:'无可复原卡', reason:'消耗区是空的，无需复原' };
   const capacityReason = restoreOnly || legacyRestore
-    ? restorationCapacityReason(game, game.ownedCards.findIndex(o => o.uid === uid), { usedSlots, bagCap }) : '';
+    ? restorationCapacityReason(game, renderState ? (renderState.ownedIndexByUid.get(uid) ?? -1)
+      : game.ownedCards.findIndex(o => o.uid === uid), { usedSlots, bagCap, renderState }) : '';
   if (capacityReason) return { label:capacityReason, badge:'需腾位', reason:`${capacityReason}；卡牌未消耗` };
   return { label:'使用这张道具', badge:bagUseLocation(card) === 'map' ? '可用' : '查看用法', reason:'' };
 }

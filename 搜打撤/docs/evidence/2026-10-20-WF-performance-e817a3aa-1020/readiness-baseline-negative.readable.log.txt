@@ -1,0 +1,165 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-seeds/visual-readiness/搜打撤
+
+ × tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares scanning, measurement and decode across 2 simultaneous gates 34ms
+   → expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+ × tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares scanning, measurement and decode across 3 simultaneous gates 6ms
+   → expected { scans: 3, measurements: 3, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+ × tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares warm settings cut and visual handoff without shortening the 980ms cut 12ms
+   → expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+ × tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares all three cold-settings gates through the real loading wrapper 11ms
+   → expected { scans: 3, measurements: 3, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+ × tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares camp entry and loading while excluding the archive ghost and curtain 12ms
+   → expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+ ↓ tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > follows an asynchronous hub refresh while waiting for page
+ ↓ tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > follows an asynchronous hub refresh while waiting for artwork
+ ↓ tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > cleans an abandoned camp without an old completion clearing a newer camp marker
+ ↓ tests/page-visual-readiness-sharing.test.js > subscriber cancellation and deadlines > cancels one subscriber without aborting the remaining resource wait
+ ↓ tests/page-visual-readiness-sharing.test.js > subscriber cancellation and deadlines > keeps unequal deadlines independent, including a later subscriber
+ ↓ tests/page-visual-readiness-sharing.test.js > subscriber cancellation and deadlines > does not cache a timed-out wait or let its late decode resolve the next wait
+ ↓ tests/page-visual-readiness-sharing.test.js > subscriber cancellation and deadlines > releases listeners when all subscribers cancel and starts a fresh wait on reentry
+ ↓ tests/page-visual-readiness-sharing.test.js > subscriber cancellation and deadlines > waits for each subscriber background and fonts without repeating image work
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > isolates a revision change even when the page DOM instance is reused
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > captures the page before the layout frame and refuses a replacement
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > isolates a replaced page even without a revision increment
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > does not share scans when extra roots differ
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > keeps the 12-image cap and lazy, hidden, grid and viewport exclusions
+ ↓ tests/page-visual-readiness-sharing.test.js > page identity and representative image boundaries > accepts image errors as settled resources without extending the wait
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares scanning, measurement and decode across 2 simultaneous gates
+AssertionError: expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "decodes": 1,
+-   "measurements": 1,
+-   "scans": 1,
++   "decodes": 2,
++   "measurements": 2,
++   "scans": 2,
+  }
+
+ ❯ expectSinglePass tests/page-visual-readiness-sharing.test.js:39:6
+     37|     measurements: image.getBoundingClientRect.mock.calls.length,
+     38|     decodes: image.decode.mock.calls.length,
+     39|   }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+       |      ^
+     40| }
+     41| beforeEach(() => {
+ ❯ tests/page-visual-readiness-sharing.test.js:66:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares scanning, measurement and decode across 3 simultaneous gates
+AssertionError: expected { scans: 3, measurements: 3, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "decodes": 1,
+-   "measurements": 1,
+-   "scans": 1,
++   "decodes": 3,
++   "measurements": 3,
++   "scans": 3,
+  }
+
+ ❯ expectSinglePass tests/page-visual-readiness-sharing.test.js:39:6
+     37|     measurements: image.getBoundingClientRect.mock.calls.length,
+     38|     decodes: image.decode.mock.calls.length,
+     39|   }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+       |      ^
+     40| }
+     41| beforeEach(() => {
+ ❯ tests/page-visual-readiness-sharing.test.js:66:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares warm settings cut and visual handoff without shortening the 980ms cut
+AssertionError: expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "decodes": 1,
+-   "measurements": 1,
+-   "scans": 1,
++   "decodes": 2,
++   "measurements": 2,
++   "scans": 2,
+  }
+
+ ❯ expectSinglePass tests/page-visual-readiness-sharing.test.js:39:6
+     37|     measurements: image.getBoundingClientRect.mock.calls.length,
+     38|     decodes: image.decode.mock.calls.length,
+     39|   }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+       |      ^
+     40| }
+     41| beforeEach(() => {
+ ❯ tests/page-visual-readiness-sharing.test.js:81:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares all three cold-settings gates through the real loading wrapper
+AssertionError: expected { scans: 3, measurements: 3, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "decodes": 1,
+-   "measurements": 1,
+-   "scans": 1,
++   "decodes": 3,
++   "measurements": 3,
++   "scans": 3,
+  }
+
+ ❯ expectSinglePass tests/page-visual-readiness-sharing.test.js:39:6
+     37|     measurements: image.getBoundingClientRect.mock.calls.length,
+     38|     decodes: image.decode.mock.calls.length,
+     39|   }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+       |      ^
+     40| }
+     41| beforeEach(() => {
+ ❯ tests/page-visual-readiness-sharing.test.js:104:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares camp entry and loading while excluding the archive ghost and curtain
+AssertionError: expected { scans: 2, measurements: 2, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }
+
+- Expected
++ Received
+
+  {
+-   "decodes": 1,
+-   "measurements": 1,
+-   "scans": 1,
++   "decodes": 2,
++   "measurements": 2,
++   "scans": 2,
+  }
+
+ ❯ expectSinglePass tests/page-visual-readiness-sharing.test.js:39:6
+     37|     measurements: image.getBoundingClientRect.mock.calls.length,
+     38|     decodes: image.decode.mock.calls.length,
+     39|   }).toEqual({ scans: 1, measurements: 1, decodes: 1 });
+       |      ^
+     40| }
+     41| beforeEach(() => {
+ ❯ tests/page-visual-readiness-sharing.test.js:122:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 14 skipped (19)
+   Start at  02:58:49
+   Duration  731ms (transform 92ms, setup 0ms, collect 120ms, tests 75ms, environment 322ms, prepare 63ms)

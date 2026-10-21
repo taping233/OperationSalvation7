@@ -1,0 +1,68 @@
+[
+  {
+    "path": "game/src/agent/agent.runner.js",
+    "baseSha256": "e0b6483c6a1a6cf416cbd90c072b474dcba612686208eaa5718891373a137afe",
+    "sha256": "38c593fa3f39a103e5f17a7c0194eebcbacf5e4d937c58214810867596c955d2",
+    "bytes": 4091
+  },
+  {
+    "path": "game/src/agent/agent.action-router.js",
+    "baseSha256": null,
+    "sha256": "fef1c01eaf89624ac1e2a77a0be9f164c07344b3030805ae08d6d9512e947334",
+    "bytes": 9709
+  },
+  {
+    "path": "game/src/agent/agent.run-control.js",
+    "baseSha256": null,
+    "sha256": "058844378a342aca1e4591870f8082643bdcff4a2895898eb82e80c7c0a9837d",
+    "bytes": 333
+  },
+  {
+    "path": "game/src/agent/agent.runner.runtime.js",
+    "baseSha256": null,
+    "sha256": "c22df8aeb0fc6de65067ee7bc02aaa1f19ae661be07651f4d88932a2a849ab1d",
+    "bytes": 21095
+  },
+  {
+    "path": "game/src/agent/agent.replay.js",
+    "baseSha256": "4e9dec4eed5498bdb96bb2eef969ae6fd2f326e843ea6c649a14c1372ab61e50",
+    "sha256": "39ed465331a45ce9d1ec8cbee853ebd59dc5c40af873f5f306473eff965e0edf",
+    "bytes": 769
+  },
+  {
+    "path": "game/src/agent/agent.replay.runtime.js",
+    "baseSha256": null,
+    "sha256": "4e9dec4eed5498bdb96bb2eef969ae6fd2f326e843ea6c649a14c1372ab61e50",
+    "bytes": 7600
+  },
+  {
+    "path": "game/src/agent/agent.llm.js",
+    "baseSha256": "d067b7f6a0d853fce5819b12622655e05d85ad8651924b4c732b55469f997d20",
+    "sha256": "faeda3851bc623593dd7e8a365604711b56a48c78140e7955a62c50acf876051",
+    "bytes": 4087
+  },
+  {
+    "path": "game/src/agent/agent.llm-parser.js",
+    "baseSha256": null,
+    "sha256": "b8ed44164563a32fbe992db8f635a9cdd35060a413380aea7722aef1099cab66",
+    "bytes": 794
+  },
+  {
+    "path": "game/src/agent/agent.llm.runtime.js",
+    "baseSha256": null,
+    "sha256": "042111e0260eac3bae985153971384396708d647dda7592f7eeea6e7ea766134",
+    "bytes": 5224
+  },
+  {
+    "path": "tests/agent-runner-lazy-boundary.test.js",
+    "baseSha256": null,
+    "sha256": "9761363ee38788fbd7fe96b15c2e0b5254f03d99f504f402fb25c63a4fe189af",
+    "bytes": 8837
+  },
+  {
+    "path": "tests/agent-optional-lazy-boundary.test.js",
+    "baseSha256": null,
+    "sha256": "20bba6499e5e6ecae0d3c9a27022e45d19e4269e7e76139158d583f59561ed8b",
+    "bytes": 6094
+  }
+]

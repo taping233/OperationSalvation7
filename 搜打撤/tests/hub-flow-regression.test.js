@@ -17,18 +17,18 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('deployCharacter = cl;');
     expect(hub).toContain('deployStart = start;');
     expect(hub).toContain('openDepartPrep');
-    expect(hub).toContain('newRun(mode, picks, { skipClassChoice: true })');
+    expect(hub).toMatch(/await newRun\(mode, picks, \{ skipClassChoice: true,[\s\S]*?isCurrent:/);
     expect(session).toContain('if (!options.skipClassChoice) return runtime.openClassChoice()');
   });
 
   it('出征整备写盘失败会留在整备页并停止出发', () => {
-    expect(hub).toContain('const started = newRun(mode, picks, { skipClassChoice: true })');
+    expect(hub).toMatch(/const started = await newRun\(mode, picks, \{ skipClassChoice: true,/);
     expect(hub).toContain('if (started === false) {');
-    expect(hub).toContain("deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。'");
+    expect(hub).toContain("deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。'");
     // 顺序守卫：失败分支 → 重置选牌 → 成功返回；中间允许有限的合法插入（音效/埋点），不锁死相邻字节（CRLF 教训同族）
     expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*replaceDeployPick\(null\);\s*[\s\S]{0,300}?return true;/);
-    expect(altar).toContain('if (beforeConfirm && beforeConfirm() === false) return false;');
-    expect(altar.indexOf('beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
+    expect(altar).toContain('if (beforeConfirm && await beforeConfirm() === false) return false;');
+    expect(altar.indexOf('await beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
   });
 });
 
@@ -311,7 +311,7 @@ describe('基地分页、详情返回与档位浏览状态', () => {
     browsing.click('[data-act="tradeShopSelectGood"][data-key="wood"]');
     browsing.click('[data-act="tradeShopBuy"]');
     expect(browsing.base.purchase).toHaveBeenCalledTimes(1);
-    expect(browsing.host.querySelector('[role="status"]').textContent).toContain('购入木材');
+    await vi.waitFor(() => expect(browsing.host.querySelector('[role="status"]')?.textContent).toContain('购入木材'));
     browsing.scroll(320);
     browsing.runtime.closeBase();
     browsing.useSlot(2);

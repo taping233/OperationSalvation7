@@ -1,6 +1,6 @@
 # src 模块说明
 
-`index.html` 通过 `<script type="module">` 加载 `main.js`。所有模块都是 ESM；不得再依赖旧版普通 script 的共享词法作用域。
+`index.html` 只通过一个 `<script type="module">` 加载 `main.js`；首页控制器、游戏内核与启动展示都在同一装配清单内，启动集成测试沿用该入口。所有模块都是 ESM；不得再依赖旧版普通 script 的共享词法作用域。
 
 ## 目录结构
 
@@ -25,7 +25,7 @@
 
 1. `core/rules.js`、`core/mapData.js`、`run/game.run.data.js`、`core/asset-url.js`：规则、授权数据和资源路径。
 2. `core/art.js`、`core/icons-bitmap.js`、`audio/sound.js`、`core/camera.js`、`battle/core/combat.js`、`hub/base.js`、`hub/meta.js`、`core/renderer.primitives.js`：独立能力与纯工具。
-3. `hub/game.store.js`、`hub/game.storage.js`、`run/game.session.js`、`battle/core/battle.core.js`、`battle/effects/battle.effects.js`、`battle/bag/battle.deck.js`、`battle/core/battle.target-rules.js`：状态、持久化和领域逻辑；`ui/game.menu.js` 是同步标题/退出与菜单懒加载门面；`ui/game.menu.pages.js` 是经依赖注入创建一次的非首屏面板工厂。冷入口可等待完成并支持取消/重试，热入口直接复用原面板行为。
+3. `hub/game.store.js`、`hub/game.storage.js`、`run/game.session.js`、`battle/core/battle.core.js`、`battle/effects/battle.effects.js`、`battle/bag/battle.deck.js`、`battle/core/battle.target-rules.js`：状态、持久化和领域逻辑；`ui/game.menu.js` 是标题、异步保存退出与菜单懒加载门面；`ui/game.menu.pages.js` 是经依赖注入创建一次的非首屏面板工厂。冷入口可等待完成并支持取消/重试，热入口直接复用原面板行为。
 4. `core/renderer.js`（聚合 `renderer.icons.js` / `renderer.fx.js`）、`battle/view/battle.view.js`、`ui/ui.js`、`experience/pocket-strip.js`（章节风险徽标，常驻汇总条已按老板要求移除）：Canvas 或 DOM 表现层；`renderer.fx.js` 挂载的 `SDT.FX` 必须先于 `run/game.session.js` 求值（main.js 导入顺序不可调换）。
 5. `run/game.run.js`、`run/game.run.shop.js`、`run/game.run.class-choice.js`（选角按需轻门面，返回页面就绪 Promise）、`run/game.run.class-choice.page.js`（人物与卡池叶页面，非首屏依赖）、`hub/game.hub.js`（基地按需轻门面）、`hub/game.hub.runtime.js`（基地壳实现，首次选档进入时动态加载）、`hub/game.hub.depart.js`（出征整备）、`hub/game.hub.pages.js`（六页签 HTML）、`hub/game.hub.bridge.js`（壳↔切片中立桥）、`hub/game.bag.js`、`hub/game.notes.js`、`hub/game.cardslib.js`：功能流程。
 6. `game.boot.js`：输入、跨功能接线和启动；这是唯一允许了解多数功能模块的地方。
@@ -35,6 +35,12 @@
 - `run/game.session.js` 不得导入 `boot/run/hub/notes/cardslib`；页面跳转通过 `configureGameRuntime()` 注入。
 - `battle/core/battle.core.js` 不得导入 `battle/view/battle.view.js`；视图通过 `configureBattleRenderer()` 注册。
 - 战斗调用优先使用 `getSnapshot()` 和 `commands`，不要新增私有状态修改器。
+- 商店与事件的业务写入通过 `run/shop-commands.js`、`run/event-commands.js`；事件和资源领取控制器由 flow 注入会话及呈现端口。
+- 战斗引擎装配 card-play、turn-continuation、turn-start、damage 用例；新用例显式读取当前状态，不捕获兼容门面或复制运行态。
+- `battle.engine.factory.js` / `battle.engine.instance.js` 创建独立战斗；runtime、Combat钩子、随机、队列及取消均属实例。`*.domain.js` 是共同实现，默认浏览器服务仅在 `battle.default-context.js` 装配；原接口保留稳定转发，重配只允许在战斗不活动且队列排空后进行。
+- Base 公开写 API 返回 Promise，所有物理写入经 `slot-write-lock.js` 同槽锁及有效 lease。`saveGame()` 同步保存 Run；保存退出用 `saveSession()`，读档后的完整持久结果等待 `pendingPersistence`。
+- `newRun()` 返回 Promise；持久档位的出征在同槽 Web Lock 内提交可恢复的 Base/Run 日志，调用方必须 await 并处理 `false`，页面已取消或档位已变化时不继续原请求。
+- 卡牌时点、装备与打出效果的来源和执行视图统一从 `cards/card-execution-plan.js` 获取。内建可执行卡使用结构化声明；自定义卡及未识别历史规则保留文本兼容路径。卡面文案与内建执行数值独立。
 - 新规则值进入 `RULES`，新效果文本时点进入 `battle/effects/battle.effects.js`。
 - `tests/contracts.test.js` 会检查整个目录的循环依赖；新增顶层目录须同步 `architecture-graph.mjs` 的分层判据。
 

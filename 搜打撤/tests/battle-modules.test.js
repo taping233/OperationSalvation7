@@ -34,7 +34,7 @@ describe('战斗牌堆与出牌规则模块', () => {
   it('按普通战斗与 BOSS 战限制卡牌', () => {
     expect(unplayableReasonFor({ type: '资源' }, 'normal')).toContain('资源卡');
     expect(unplayableReasonFor({ type: '道具' }, 'boss')).toContain('BOSS');
-    expect(unplayableReasonFor({ type: '法术', desc: '将其洗入牌库' }, 'normal')).toContain('牌库');
+    expect(unplayableReasonFor({ type: '法术', desc: '将其洗入牌库' }, 'normal')).toBeNull();
     expect(unplayableReasonFor({ type: '法术', desc: '抽 1 张牌' }, 'boss')).toBe(null);
   });
 });

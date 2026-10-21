@@ -1,0 +1,219 @@
+{
+  "at": "2026-10-20T13:42:05.035Z",
+  "status": "PASS",
+  "artifactSHA256": "0f1c6e07ef87d0b81ec1075deb329c9fecace9a6798a69432e806f6f319e6133",
+  "production": {
+    "at": "2026-10-20T13:26:23.434Z",
+    "static": {
+      "files": 1678,
+      "bytes": 229973088,
+      "jsModules": 21,
+      "references": 497,
+      "aliases": 19,
+      "missing": 0,
+      "aliasFailures": 0,
+      "forbidden": 0,
+      "passed": true
+    },
+    "protocol": {
+      "checked": 1678,
+      "rangeChecks": 12,
+      "errors": 0,
+      "failures": 0,
+      "passed": true
+    },
+    "manifestSHA256": "22c6a99762f8e1ec790f6f05092ace3bf5a6999a6bed3533aebc73ab66a862ba",
+    "passed": true
+  },
+  "images": {
+    "decoded": 1380,
+    "rasterFrames": 1313,
+    "svgRendered": 67,
+    "failures": 0,
+    "passed": true
+  },
+  "asar": {
+    "entries": 11,
+    "snapshotByteCompared": 10,
+    "asarSHA256": "41598ec1b089b9ec2ebcd5329c9cc5f09fc5575d3b5fcabe2c10190d884d5520",
+    "deliveryFiles": 1753,
+    "forbiddenDelivery": [],
+    "profile": "codename7-clean-20261020-f043d15e57b3487c",
+    "profileAbsent": true,
+    "passed": true
+  },
+  "actualEXE": {
+    "gameFiles": 1676,
+    "gameBytes": 229973086,
+    "allGameSHA256Matched": true,
+    "rawAsarSHA256": "41598ec1b089b9ec2ebcd5329c9cc5f09fc5575d3b5fcabe2c10190d884d5520",
+    "rawAsarMatched": true,
+    "finalProbeExit": 0,
+    "passed": true
+  },
+  "omittedPlaceholders": [
+    {
+      "path": "assets/cards/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "assets/portraits/enemies/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ],
+  "probeHistory": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "evidence": "probe-launched.json; probe-launcher.log",
+      "reason": "No result; empty output; exit code not persisted; identical raw ASAR read present, same cause plausible but unproven"
+    },
+    {
+      "attempt": 2,
+      "passed": false,
+      "exitCode": 1,
+      "evidence": "probe-second-exit.json; second-error.json; second-game-hashes.json",
+      "reason": "All 1676 actual game file hashes completed; node:fs virtualizes ASAR and raw archive read raised ENOENT; game hash proof retained"
+    }
+  ],
+  "records": [
+    {
+      "path": ".tmp/portable-clean-1020/audit/actual-game-summary.json",
+      "bytes": 309,
+      "sha256": "3b1899756f38bf09eddb27e91b3b852c8a05fc33bf8ef213794510e38c32550d"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/asar.json",
+      "bytes": 2606,
+      "sha256": "3b9dcb226e1044e475dc389e369bc38bc2c5502e19443cdd5f7946f3e8c991b9"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/asset-references.json",
+      "bytes": 130180,
+      "sha256": "cc0326ddaedd597fbaaa8fe798b70db4b3e6a6c8747c86e81efb4c8ec34a9704"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/audit-asar.cjs",
+      "bytes": 4345,
+      "sha256": "17ec6d29e43342ce76e56a04b566f2545d536afbd286168001e4cf08cfc42672"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/audit-production.cjs",
+      "bytes": 7265,
+      "sha256": "ef7f744292541cdf28cc4b8759191dc34a0ded7a8756466b32a99fcbf2169cef"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/check-images.py",
+      "bytes": 1953,
+      "sha256": "27baf96e522040a73bff09b66ceed41f57b441423217b440583ba5fae57940c2"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/images.json",
+      "bytes": 1628,
+      "sha256": "a920234f10db5fb10c3801485dfc33b943a87bd7e8743e3881c7f1d46c5f2908"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-child.cjs",
+      "bytes": 675,
+      "sha256": "d56379c9faf11ea8635fc3875de8650c944e667debfbec121e7d97b040adc66e"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-launched.json",
+      "bytes": 309,
+      "sha256": "a21a52171e7940782cbc10be1c92fc7b6411c6535066970e3026139c121e9da0"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-launcher.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-portable-asar.cjs",
+      "bytes": 4020,
+      "sha256": "e8d066f645efeb1eb13298f5f8aac23f022c997a0f5a753eceed45b3dcad78e9"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-portable-second.cjs",
+      "bytes": 5466,
+      "sha256": "d775ab1719223e22ef8f20d8f46ae929023ad224ba7e2663c7e48bc4de99637f"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-portable.cjs",
+      "bytes": 4232,
+      "sha256": "6b2fc3d03c8eb17db7faef9aa94f7249baeb9a54fe936bbb5b0eac2106e02487"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-second-error.json",
+      "bytes": 440,
+      "sha256": "44e36ae4c3eb2d66ebd5b6beead2de7b026017d4b9e9466a0e496b21e8af2609"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-second-exit.json",
+      "bytes": 66,
+      "sha256": "b031db15a5e5d4ac234697b16f0d527123802770653621ada37d3205b2d4aed3"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-second-launched.json",
+      "bytes": 690,
+      "sha256": "4032915fd4589e718db59693c1f3b7d899bbc966555aec496f7326357de5d3e3"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-summary.json",
+      "bytes": 2209,
+      "sha256": "305dd12e0e3cca2c4879ed6887b8b1a083af049a3fdd36c3618dc8de7b5610a7"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-third-exit.json",
+      "bytes": 66,
+      "sha256": "6fdcb7ebbb7f168a96df3687d1579270b64edf7543c53ee9757300503a58bd15"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/probe-third-launched.json",
+      "bytes": 690,
+      "sha256": "f5e3056758f057b123f21c345bcb6fb646cf87e90879f30072fe94d27ca88e5d"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/production-manifest.json",
+      "bytes": 298597,
+      "sha256": "22c6a99762f8e1ec790f6f05092ace3bf5a6999a6bed3533aebc73ab66a862ba"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/production-summary.json",
+      "bytes": 471,
+      "sha256": "9aba89594eeb358b0d17de902e07e5bba867339ad90be146b082a4fca5542d5b"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/protocol.json",
+      "bytes": 2284,
+      "sha256": "f1476cb1f6a3e7e8c4ee0ccb13a1279ef881cedb09b4fbc976da6815f803e27e"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/second-error.json",
+      "bytes": 999,
+      "sha256": "bebd1f93f8f50681739571148bfda6ca144e4247de4ebf65bca9c76bcd53c898"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/second-game-hashes.json",
+      "bytes": 298302,
+      "sha256": "e839c4840b6e74decd8b7d87f5f250f9e229c07fe5eb6ca8251756fcbfaacb62"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/second-progress.json",
+      "bytes": 54,
+      "sha256": "ee84f201905e450cfcfcf530effff38d720f97c452cf9fb397e5325b0ca1d330"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/third-actual.json",
+      "bytes": 260,
+      "sha256": "136bd21752f2bfeba5588e221af00ae72698b1a34ed637249921ab63761adaec"
+    },
+    {
+      "path": ".tmp/portable-clean-1020/audit/third-progress.json",
+      "bytes": 425,
+      "sha256": "daca301c8262ae1ce816b36913b47820a6dfdb320faa846c28d251e4b04a97e2"
+    }
+  ],
+  "passed": true
+}

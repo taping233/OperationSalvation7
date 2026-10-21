@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
+import { displayCardDescription } from '../game/src/cards/card-description-text.js';
 
 const baseline = 'docs/evidence/2026-10-18-WF-page-perf-1018/shared/baseline/';
 function compileCardCache(source) {
@@ -14,6 +15,7 @@ function compileCardCache(source) {
   const render = runInNewContext(source.slice(source.indexOf('const cardHTMLMemo'), source.indexOf('function buildCardHTML'))
     .replace('export function cardHTML', 'function cardHTML') + '\ncardHTML;', {
     Map: TrackedMap,
+    displayCardDescription,
     buildCardHTML: (card, cls, options) => { builds++; return card.id + '/' + cls + '/' + JSON.stringify(options); },
   });
   return { render, maps, builds: () => builds };

@@ -59,7 +59,7 @@ const EXPECTED_RULES = {
     battle: { target: ENEMY_ONE },
     triggers: { onPlay: [
       { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-      { op: 'armor', amount: 3 },
+      { op: 'curse', curse: 'abreak', duration: 2, target: 'chosenEnemy' },
     ] },
   },
   'tt2-swiftarrow': {

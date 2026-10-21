@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "observedAt": "2026-10-20T15:42:43.490Z",
+  "scene": "boss-empty-no-recycle",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "page": {
+    "origin": "http://127.0.0.1:5337",
+    "pathname": "/",
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "devicePixelRatio": 1.25
+    }
+  },
+  "selectors": [
+    {
+      "key": "deck",
+      "selector": "[data-act=\"btDeck\"]"
+    },
+    {
+      "key": "consumed",
+      "selector": "[data-act=\"btGrave\"]"
+    },
+    {
+      "key": "stage",
+      "selector": ".battle-stage.sts"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "deck",
+      "selector": "[data-act=\"btDeck\"]",
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"0牌库\",\"class\":\"bt-pile clickable\"}",
+      "tag": "BUTTON",
+      "text": "0牌库",
+      "attributes": {},
+      "styles": {
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "color": "rgb(232, 239, 237)",
+        "background-color": "rgba(27, 41, 51, 0.28)",
+        "font-size": "16px",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "line-height": "normal",
+        "width": "115.819px",
+        "height": "50.3812px",
+        "padding": "7px 9px",
+        "border-radius": "8px",
+        "transform": "none",
+        "pointer-events": "auto"
+      },
+      "rect": {
+        "x": 50.125,
+        "y": 641.0750122070312,
+        "width": 77.2125015258789,
+        "height": 33.587501525878906
+      }
+    },
+    {
+      "key": "consumed",
+      "selector": "[data-act=\"btGrave\"]",
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"1消耗牌堆\",\"class\":\"bt-pile clickable\"}",
+      "tag": "BUTTON",
+      "text": "1消耗牌堆",
+      "attributes": {},
+      "styles": {
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "color": "rgb(232, 239, 237)",
+        "background-color": "rgba(27, 41, 51, 0.28)",
+        "font-size": "16px",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "line-height": "normal",
+        "width": "178.012px",
+        "height": "50.3812px",
+        "padding": "7px 9px",
+        "border-radius": "8px",
+        "transform": "none",
+        "pointer-events": "auto"
+      },
+      "rect": {
+        "x": 1129.3250732421875,
+        "y": 516.8500366210938,
+        "width": 118.67500305175781,
+        "height": 33.587501525878906
+      }
+    },
+    {
+      "key": "stage",
+      "selector": ".battle-stage.sts",
+      "identity": "{\"data-asset-key\":\"battle-boss-general\"}",
+      "tag": "DIV",
+      "text": "首脑战\n          第 2 回合你的行动\n        \n         选项\n          战斗规则\n           撤离（判负）\n           设置\n        \n      \n      \n        32/35甲 0 攻 4\n          \n    \n    \n    1\n    \n    \n  \n          \n        \n   ",
+      "attributes": {
+        "data-asset-key": "battle-boss-general"
+      },
+      "styles": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "color": "rgb(237, 242, 243)",
+        "background-color": "rgb(16, 22, 27)",
+        "font-size": "16px",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "line-height": "normal",
+        "width": "1920px",
+        "height": "1080px",
+        "padding": "0px",
+        "border-radius": "0px",
+        "transform": "none",
+        "pointer-events": "auto"
+      },
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      }
+    }
+  ],
+  "actions": [
+    {
+      "type": "static-inspection",
+      "detail": "真实读档后用页面调试构造BOSS小牌库与敌人；未调整窗口尺寸。"
+    },
+    {
+      "type": "real-input",
+      "detail": "真实点击初始攻击、敌人和结束回合；第2回合库0、消耗牌堆1、手牌4，未洗回。"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-20-WF-battle-flow-1020/06-boss-empty-no-recycle.png"
+  ]
+}

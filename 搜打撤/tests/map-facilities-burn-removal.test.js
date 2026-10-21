@@ -48,5 +48,7 @@ it('敌人数据不再赋予灼烧，玩家词条字典无灼烧入口', () => {
   expect(Object.keys(map.monsters).length).toBeGreaterThan(0);
   expect(Object.values(map.monsters).every(foe => foe.behavior !== 'burn')).toBe(true);
   expect(readFileSync('game/data/map.json', 'utf8')).not.toContain('"behavior": "burn"');
-  expect(readFileSync('game/src/ui/term-tips.js', 'utf8')).not.toContain('灼烧');
+  for (const file of ['term-tips.js', 'term-tips.runtime.js']) {
+    expect(readFileSync(`game/src/ui/${file}`, 'utf8')).not.toContain('灼烧');
+  }
 });

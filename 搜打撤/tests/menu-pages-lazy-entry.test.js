@@ -15,7 +15,7 @@ beforeEach(async () => {
   document.body.innerHTML = '<div id="viewport"></div><div id="title"></div><div id="exitScr" hidden></div><div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"><section>来源</section></div></div>';
   localStorage.setItem('sdt-rmb-hint','1');
   h = { game:{ state:'title', seed:'source', runActive:false, battleActive:false, toggles:{}, discoveredPairs:new Set(), ownedCards:[] },
-    slot:1, gate:deferred(), imports:vi.fn(), methods:{}, acts:{}, log:vi.fn(), save:vi.fn(() => true), clear:vi.fn(),
+    slot:1, gate:deferred(), imports:vi.fn(), methods:{}, acts:{}, log:vi.fn(), save:vi.fn(async () => ({ ok:true })), clear:vi.fn(),
     base:{ slot:1, peek:() => null }, factory:vi.fn(), runtime:{ resize:vi.fn() } };
   const UI = { el:{ overlay:document.getElementById('overlay'), ovBody:document.getElementById('ovBody') },
     showOverlay(title, html) { document.getElementById('ovTitle').textContent=title; this.el.ovBody.innerHTML=html; this.el.overlay.hidden=false; },
@@ -24,7 +24,7 @@ beforeEach(async () => {
   h.SDT={ UI, game:h.game, Base:h.base, Sound:{ music:vi.fn(), sfx:vi.fn() }, Meta:{ ACHIEVEMENTS:[] } };
   window.SDT=h.SDT;
   h.deps={ SDT:h.SDT, UI, game:h.game, runtime:h.runtime, SLOT_COUNT:1, readSlot:() => null,
-    saveGame:h.save, clearAllSlots:h.clear, getActiveSlot:() => h.slot, setActiveSlot:value => { h.slot=value; }, esc:String };
+    saveSession:h.save, clearAllSlots:h.clear, getActiveSlot:() => h.slot, setActiveSlot:value => { h.slot=value; }, esc:String };
   for (const method of ['startNewGame','openSettings','openLeaveMenu','openTitleGuide','openTitleAchievements','openSuggestionInbox','openSuggestionBox','openDataPageUi']) {
     h.methods[method]=vi.fn(() => { h.game.state='modal'; UI.showOverlay(method, `<section data-page="${method}">${method}</section>`); });
   }
@@ -177,9 +177,9 @@ describe('菜单真实按需入口', () => {
     expect(await second).not.toBe(false); expect(h.factory).toHaveBeenCalledOnce(); expect(h.methods.openSettings).toHaveBeenCalledOnce();
   });
 
-  it('退出保持同步保存/退出行为并取消迟到页面', async () => {
+  it('退出等待完整保存回执并取消迟到页面', async () => {
     const request=h.menu.openLeaveMenu(); await vi.advanceTimersByTimeAsync(32);
-    h.menu.quitGame(); expect(h.save).toHaveBeenCalledOnce(); expect(document.getElementById('exitScr').hidden).toBe(false);
+    await h.menu.quitGame(); expect(h.save).toHaveBeenCalledOnce(); expect(document.getElementById('exitScr').hidden).toBe(false);
     expect(await finish(request)).toBe(false); expect(h.methods.openLeaveMenu).not.toHaveBeenCalled(); expect(h.clear).not.toHaveBeenCalled();
   });
 

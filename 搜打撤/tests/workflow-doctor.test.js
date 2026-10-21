@@ -11,7 +11,7 @@ const put = (root, file, content) => {
   mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
   writeFileSync(path.join(root, file), content);
 };
-function fixture({ omit = [], brokenDocs = false } = {}) {
+function fixture({ omit = [], brokenDocs = false, nodeModules = true } = {}) {
   const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-doctor-'));
   roots.push(root);
   const files = {
@@ -26,7 +26,9 @@ function fixture({ omit = [], brokenDocs = false } = {}) {
     'node_modules/eslint/bin/eslint.js': '// fixture', 'node_modules/typescript/bin/tsc': '// fixture',
   };
   for (const name of packages) files[`node_modules/${name}/package.json`] = JSON.stringify({ name, version: '1.0.0', engines: { node: '>=18' } });
-  for (const [file, content] of Object.entries(files)) if (!omit.includes(file)) put(root, file, content);
+  for (const [file, content] of Object.entries(files)) {
+    if (!omit.includes(file) && (nodeModules || !file.startsWith('node_modules/'))) put(root, file, content);
+  }
   const probes = [];
   const probe = request => {
     probes.push(request);
@@ -125,16 +127,15 @@ describe('只读项目 doctor', () => {
     const report = await doctor(root, { probe });
     expect(item(report, 'dependencies')).toMatchObject({ status: 'blocked', details: {
       missing: ['new-tool'], nodeModules: { linked: false, targetReadable: true } } });
-    const { root: linkedRoot, probe: linkedProbe } = fixture();
-    // Only replace this test's generated dependency directory.
-    rmSync(path.join(linkedRoot, 'node_modules'), { recursive: true });
+    const { root: linkedRoot, probe: linkedProbe } = fixture({ nodeModules: false });
+    expect(existsSync(path.join(linkedRoot, 'node_modules'))).toBe(false);
     symlinkSync(path.join(root, 'node_modules'), path.join(linkedRoot, 'node_modules'), 'junction');
     const linked = await doctor(linkedRoot, { probe: linkedProbe });
     expect(item(linked, 'dependencies').details.nodeModules).toEqual({ linked: true, targetReadable: true });
   });
   it('node_modules 缺失仍列出缺包，失效链接标记不可读', async () => {
-    const { root, probe } = fixture();
-    rmSync(path.join(root, 'node_modules'), { recursive: true });
+    const { root, probe } = fixture({ nodeModules: false });
+    expect(existsSync(path.join(root, 'node_modules'))).toBe(false);
     const absent = await doctor(root, { probe });
     expect(item(absent, 'dependencies')).toMatchObject({ status: 'blocked', details: {
       missing: packages, nodeModules: { linked: false, targetReadable: false } } });

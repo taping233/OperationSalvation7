@@ -1,0 +1,34 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+····························································stdout | tests/runtime-hotpaths.test.js > bounded rich description reuse > compares 6400 identical calls before/after without asserting wall-clock timing
+HOTPATH description 6400 calls / 64 texts {"before":{"ms":92.48,"bytes":1599000,"termLookups":25600},"after":{"ms":9.096,"bytes":1599000,"termLookups":256}}
+
+····················stdout | tests/runtime-hotpaths.test.js > card browser differential DOM writes > eliminates unchanged mutations while preserving filtering, paging and external repairs
+HOTPATH browser 100 unchanged refreshes / 96 cards {"beforeMutations":9100,"afterMutations":0}
+
+·················································································x······················································································································-
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/stealth-term.test.js > 潜行卡面词条 > 潜匿与破隐说明都接入独立讲解，点击词条不触发卡牌
+TypeError: Cannot read properties of null (reading 'hidden')
+ ❯ tests/stealth-term.test.js:15:16
+     13|     terms[0].dispatchEvent(new MouseEvent('pointerover', { bubbles: tr…
+     14|     const tip = document.querySelector('[role="tooltip"]');
+     15|     expect(tip.hidden).toBe(false);
+       |                ^
+     16|     expect(tip.textContent).toContain('潜行');
+     17|     expect(tip.textContent).toContain('无法成为被攻击对象；造成伤害会破除潜行。');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 16 passed | 1 skipped (18)
+      Tests  1 failed | 279 passed | 1 skipped (281)
+   Start at  03:57:28
+   Duration  12.36s (transform 1.51s, setup 0ms, collect 4.71s, tests 12.56s, environment 6.34s, prepare 1.05s)
+
+[gate] FAIL：指定 Vitest 失败（exit 1）

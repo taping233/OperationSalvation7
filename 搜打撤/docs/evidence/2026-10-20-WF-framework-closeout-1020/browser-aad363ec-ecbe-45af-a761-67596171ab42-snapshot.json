@@ -1,0 +1,78 @@
+{
+  "actions": [
+    {
+      "detail": "空04档建档、难度保存刷新、带连射出征、保存退出继续、地图首战、连射确认目标、结束回合、初始攻击胜利、领取金币",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前1280×720窗口，未修改尺寸",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "overlay"
+      },
+      "identity": "{\"id\":\"overlay\"}",
+      "key": "victory",
+      "rect": {
+        "height": 645.3375244140625,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#overlay",
+      "styles": {
+        "background-color": "rgba(7, 7, 8, 0.46)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "968.006px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "×\n         奖励总览\n        \n    \n    战斗胜利\n      1箱待领共 1 箱\n    \n    \n    \n    \n      金币待领 0 · 已领 1\n      \n      待开启\n      \n      小型物资箱\n      1 张 · 可全部领取\n      打开宝箱 ↗\n    \n    \n    \n    \n       4/16 格\n    "
+    }
+  ],
+  "observedAt": "2026-10-20T16:55:41.113Z",
+  "page": {
+    "origin": "http://127.0.0.1:5339",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "framework-closeout-victory",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-20-WF-framework-closeout-1020/04-victory.png"
+  ],
+  "selectors": [
+    {
+      "key": "victory",
+      "selector": "#overlay"
+    }
+  ]
+}

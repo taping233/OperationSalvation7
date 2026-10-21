@@ -1,7 +1,8 @@
 import { planBagTokenCraft } from './game.bag.token-craft.js';
 import { patchBackpackPane, captureBackpackPosition, restoreBackpackPosition } from './bag-pane-view.js';
 import { containerStoreHTML, captureContainerView, restoreContainerFocus } from './game.container-store.view.js';
-import { stackTransferSlotDelta } from '../core/card-capacity.js';
+import { stackTransferSlotDelta, containerRuleOf, containerAccepts } from '../core/card-capacity.js';
+import { deriveBagRenderState, syncBagCardOrder } from '../core/bag-render-derivation.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const UI = window.SDT.UI;
 const SDT = window.SDT;
@@ -19,6 +20,12 @@ import { pageHTML as bagV2PageHTML, rarityOf as bagV2Rarity } from './game.bag.v
 import { captureBattleContext } from '../battle/battle-loader.js';
 import { createRewardOrganizer } from './game.reward-organizer.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
+function closeBagZoom() {
+  const zoom = document.getElementById('cardZoom');
+  // Finish the old detail before new page actions capture their view owner.
+  if (typeof zoom?._closeCardZoom === 'function') zoom._closeCardZoom(true);
+  else zoom?.querySelector('.cz-backdrop')?.click();
+}
 function captureBagView(rootFor = null) {
   const sameRun = captureBattleContext(game), cards = game.ownedCards, body = UI.el.ovBody;
   const root = body?.firstElementChild, zoom = document.getElementById('cardZoom');
@@ -254,17 +261,11 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // ---------- 背包显示顺序（v0.21：卡牌堆可拖拽排序，随存档保存） ----------
   // cardOrder = 卡名列表；新出现的堆追加到末尾，已消失的堆自动移除
   function syncCardOrder(bagStacks = cardStacks(false), safeStacks = cardStacks(true)) {
-    const known = [];
-    bagStacks.forEach(s => known.push(s.card.name));
-    safeStacks.forEach(s => known.push(s.card.name));
-    const ord = (game.cardOrder || []).filter(n => known.includes(n));
-    known.forEach(n => { if (!ord.includes(n)) ord.push(n); });
-    game.cardOrder = ord;
+    game.cardOrder = syncBagCardOrder(bagStacks, safeStacks, game.cardOrder || []);
   }
 
-  function sortStacksByOrder(stacks) {
-    const ord = game.cardOrder || [];
-    const idx = (n) => ord.indexOf(n);
+  function sortStacksByOrder(stacks, orderIndex) {
+    const idx = n => orderIndex.get(n) ?? -1;
     return stacks.slice().sort((a, b) => idx(a.card.name) - idx(b.card.name));
   }
 
@@ -327,7 +328,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     // 2026-09-19 留言 #25：确认页背景透明——走 fx-glass 暗纱 + 中性玻璃面板
     UI.showOverlay('[[icon:question]] 丢弃卡牌？', `
       <div class="glass-panel">
-        <p class="ov-note">确认后将永久丢弃【<b>${esc(name)}</b>】1 张，无法从消耗区或墓地取回。</p>
+        <p class="ov-note">确认后将永久丢弃【<b>${esc(name)}</b>】1 张，无法从消耗区或消耗牌堆取回。</p>
         <div class="ov-btns">
           <button class="ov-btn danger" data-act="confirmDragDiscard">确认丢弃</button>
           <button class="ov-btn" data-act="cancelDragDiscard">取消，放回背包</button>
@@ -376,7 +377,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         </div>`,
     });
     // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
-    const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+    const closeZoom = closeBagZoom;
     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
     bagAct('craftColorToken', () => { closeZoom(); craftBagToken('gold'); });
     bagAct('craftColorTokenByFragments', () => { closeZoom(); craftBagToken('fragments', o.uid); });
@@ -404,6 +405,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     game.state = 'modal';
     let root; const current = captureBagView(() => root);
     const POUCH_ID = 'tt7-stratagem';
+    const pouch = () => game.ownedCards.find(entry => entry.card?.id === POUCH_ID)?.card;
+    const pouchCapacity = () => containerRuleOf(pouch())?.slots || 0;
     // 口径与 storedStacks 一致：只按 pouchOf 判定。stored 是与珍珠盒共用的
     // 「不入背包格」标记，若在这里再查 !x.stored，锦囊计数恒为 0、3 张上限永久失效
     const stored = () => game.ownedCards.filter(x => x.pouchOf === POUCH_ID && x.card);
@@ -416,14 +419,14 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       });
       return [...map.values()];
     };
-    const bagSpellStacks = () => cardStacks(false).filter(st => st.card.type === '法术' && st.card.id !== POUCH_ID);
+    const bagSpellStacks = () => cardStacks(false).filter(st => containerAccepts(pouch(), st.card) && st.card.id !== POUCH_ID);
     const render = () => {
       const viewState = captureContainerView(root);
       const storedList = storedStacks(), available = bagSpellStacks();
       const stacks = [...storedList, ...available];
       UI.showOverlay('法师锦囊', containerStoreHTML({ title: '法师锦囊', icon: 'cards', prefix: 'pouch',
-        count: stored().length, cap: 3, stored: storedList, available,
-        type: '法术', cardHTML: SDT.Cards.cardHTML, reason: containerTransferReason,
+        count: stored().length, cap: pouchCapacity(), stored: storedList, available,
+        type: containerRuleOf(pouch())?.accepts || '法术', cardHTML: SDT.Cards.cardHTML, reason: containerTransferReason,
         help: '战斗中打出锦囊，从囊内选择 1 张法术直接释放；锦囊为空时无效果。',
       }), 'bag');
       root = UI.el.ovBody?.firstElementChild;
@@ -442,8 +445,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       if (!stack) return;
       // 整叠存入也受 3 张上限：已有数量 + 本次堆数超过即拒收（此前只查已有 ≥3，
       // 整叠 3 张可与已有 2 张叠成 5/3，09-30 深审 ROOT-04）
-      if (stored().length + stack.count > 3) {
-        UI.log(`[[icon:cards]] 锦囊装不下整叠：已有 ${stored().length}/3 张，本次 ${stack.count} 张`, 'warn');
+      if (stored().length + stack.count > pouchCapacity()) {
+        UI.log(`[[icon:cards]] 锦囊装不下整叠：已有 ${stored().length}/${pouchCapacity()} 张，本次 ${stack.count} 张`, 'warn');
         SDT.Sound.sfx('deny');
         return;
       }
@@ -482,8 +485,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     game.state = 'modal';
     let root; const current = captureBagView(() => root);
     const PEARL_ID = 'tt2-pearlbox';
-    const boxes = game.ownedCards.filter(x => x.card && x.card.id === PEARL_ID).length;
-    const cap = boxes * 9;
+    const boxes = game.ownedCards.filter(x => x.card && x.card.id === PEARL_ID);
+    const cap = boxes.reduce((sum, box) => sum + (containerRuleOf(box.card)?.slots || 0), 0);
     // stored 与法师锦囊共用标记：pouchOf 非空的卡在锦囊里，不属于任何珍珠盒
     const storedN = () => game.ownedCards.filter(x => x.stored && !x.pouchOf).length;
     const storedStacks = () => {
@@ -495,7 +498,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       });
       return [...map.values()];
     };
-    const bagResStacks = () => cardStacks(false).filter(st => st.card.type === '资源');
+    const bagResStacks = () => cardStacks(false).filter(st => boxes.some(box => containerAccepts(box.card, st.card)));
     const render = () => {
       const viewState = captureContainerView(root);
       const storedList = storedStacks(), available = bagResStacks();
@@ -503,7 +506,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       UI.showOverlay('珍珠盒', containerStoreHTML({ title: '珍珠盒', icon: 'gem', prefix: 'pearl',
         count: storedN(), cap, stored: storedList, available,
         type: '资源', cardHTML: SDT.Cards.cardHTML, reason: containerTransferReason,
-        help: `每个珍珠盒可存 9 张资源卡，当前共 ${boxes} 个。把珍珠盒放进安全格，盒中卡牌在撤离失败时也会被抢运回基地。`,
+        help: `当前 ${boxes.length} 个珍珠盒共可存 ${cap} 张卡牌。把珍珠盒放进安全格，盒中卡牌在撤离失败时也会被抢运回基地。`,
       }), 'bag');
       root = UI.el.ovBody?.firstElementChild;
       restoreContainerFocus(root, viewState, 'pearlBack');
@@ -565,8 +568,9 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     return i < 0 ? 99 : i;
   }
   function sortBagBy(kind) {
-    syncCardOrder();
-    const all = cardStacks(false).concat(cardStacks(true));
+    const bagStacks = cardStacks(false), safeStacks = cardStacks(true);
+    syncCardOrder(bagStacks, safeStacks);
+    const all = bagStacks.concat(safeStacks);
     all.sort((a, b) => {
       const first = kind === 'rarity' ? rarityRank(b.card) - rarityRank(a.card) : typeRank(a.card) - typeRank(b.card);
       if (first) return first;
@@ -582,16 +586,17 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // —— v2 玻璃界面（2026-10-15 WF-bag-redesign-1015 实装，老板拍板绝区零方向）：
   // 表现层在纯渲染切片 game.bag.view2.js（架构门：壳行数不上浮、切片不得 import 壳）；
   // 壳负责数据组装（bagZoneTiles）与动作注册，跨区移动 = 拖到左栏分区钮或点详情按钮。
-  function bagZoneTiles(bagStacks, safeStacks) {
+  function bagZoneTiles(renderState) {
+    const { bagStacks, safeStacks, orderIndex } = renderState;
     if (bagZone === 'safe') {
-      return sortStacksByOrder(safeStacks).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
+      return sortStacksByOrder(safeStacks, orderIndex).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
     }
     if (bagZone === 'pocket') {
       return game.usedPocket.map(p => ({ name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
     }
     const supplies = game.inventory.flatMap(it => Array.from({ length:Math.ceil((it.count || 1) / 3) }, (_, index) =>
       ({ name:it.name, value:it.value, tier:it.tier, count:Math.min(3, (it.count || 1) - index * 3), supply:1, zone:'bag' })));
-    let cards = sortStacksByOrder(bagStacks).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap }) : null }));
+    let cards = sortStacksByOrder(bagStacks, orderIndex).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap, renderState }) : null }));
     if (bagFilter === 'supply') return supplies;
     if (bagFilter !== 'all') cards = cards.filter(c => bagFilter === 'move' ? ['武术', '法术', '能力卡'].includes(c.type) : c.type === bagFilter);
     return bagFilter === 'all' ? [...supplies, ...cards] : cards;
@@ -618,7 +623,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     const card = st.card, safeFlag = !!safe;
     const usable = !safeFlag && card.type === '道具';
     const isSha = card.id === SDT.Cards.SHA.id;
-    const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+    const closeZoom = closeBagZoom;
     const btns = [];
     if (usable) btns.push(bagUseButton(card, st.uids[0]));
     if (card.id === 'tt2-pearlbox') btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
@@ -690,11 +695,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     backpackOpen = true;
     _set_cardPageOpen(false);
     // This snapshot belongs to this render; actions keep using live capacity checks.
-    const bagStacks = cardStacks(false), safeStacks = cardStacks(true);
-    syncCardOrder(bagStacks, safeStacks);
-    const cap = bagCap(), sCap = safeCap(), baseCap = SDT.Base.bagCap();
-    const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
-    const safeUsedN = safeStacks.length;
+    const renderState = deriveBagRenderState(game, SDT.Base.bagCap());
+    game.cardOrder = renderState.cardOrder;
+    const { cap, baseCap, total, pearlStoredN, capacityText, used, bagCardN, safeCardN, supplyN } = renderState;
+    const sCap = safeCap(), safeUsedN = renderState.safeStacks.length;
     const pkN = game.usedPocket.reduce((a, b) => a + b.count, 0);
     if (requestedBagSection) {
       bagZone = requestedBagSection === 'main' ? 'bag' : requestedBagSection;
@@ -717,12 +721,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     });
     const markup = bagV2PageHTML({
       bagZone, bagFilter, bagSortKey,
-      cap, baseCap, pearlStoredN:game.ownedCards.filter(o => o.stored && !o.pouchOf).length, capacityText:game.bagCapacityText?.() || '', total, safeUsedN, sCap, pkN,
+      cap, baseCap, pearlStoredN, capacityText, total, safeUsedN, sCap, pkN,
       petName: SDT.Base.carriedPet?.()?.name || '随行伙伴', receipt: bagReceipt?.cards === game.ownedCards ? bagReceipt.text : '',
-      used: usedSlots(), coins: game.coins, fragments: game.fragments || 0,
-      bagCardN:bagStacks.reduce((n, st) => n + st.count, 0), safeCardN:safeStacks.reduce((n, st) => n + st.count, 0),
-      supplyN:game.inventory.reduce((n, item) => n + (item.count || 1), 0),
-      tiles: bagZoneTiles(bagStacks, safeStacks),
+      used, coins: game.coins, fragments: game.fragments || 0, bagCardN, safeCardN, supplyN,
+      tiles: bagZoneTiles(renderState),
     });
     if (!patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly)) {
       UI.showOverlay('[[icon:bag]] 背包', markup, 'bagpage');

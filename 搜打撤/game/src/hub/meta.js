@@ -32,8 +32,11 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
   // 增加经验并处理升级；返回升级次数。
   // 2026-09-29 直写收敛：熟练度推进改走 Base.addClassXp 命令（草稿准备→保存成功才提交；
   // 局内旧 checkpoint 语义由命令端口保留），此处只编排升级播报。
-  function addXP(cls, amount) {
-    const result = B().addClassXp(cls, amount);
+  async function addXP(cls, amount) {
+    const slot = B().slot;
+    const result = await B().addClassXp(cls, amount);
+    if (B().slot !== slot) return 0;
+    if (result.persisted === false && slot) SDT.UI?.log('[[icon:cross]] 人物经验已保留在本次内存，尚未写入存档；请重试保存', 'warn');
     result.checkpoints.forEach(checkpoint => {
       if (SDT.Sound) SDT.Sound.sfx('levelup');
       if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(cls)}</b> 熟练度提升！现在是 <b>Lv.${checkpoint.lv}</b>（出征 ${perkText(checkpoint.lv)}）`, 'ok');
@@ -132,7 +135,8 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
 
   // 领取收藏里程碑奖励（每个一次性）。卡牌奖励（传说卡/宠物蛋）入卡牌仓库，
   // 容量不足则整批缓发：返回 {ok:false, why:'full'}。
-  function claimColl(id) {
+  async function claimColl(id) {
+    const slot = B().slot;
     const m = collMsById(id);
     if (!m || isCollClaimed(id) || !collMsReached(m)) return { ok: false };
     const cards = [];
@@ -160,8 +164,9 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     if (cards.length && SDT.Base.stashRoom() < cards.reduce((a, c) => a + (c.count || 1), 0)) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
     }
-    const result = B().grantReward({ kind: 'collection', id, reward: m.reward, cards });
+    const result = await B().grantReward({ kind: 'collection', id, reward: m.reward, cards });
     if (!result.ok) return result;
+    if (B().slot !== slot) return result;
     const msg = `[[icon:sparkles]] 领取职业收藏奖励【收藏 ${collMsNeed(m)} 张】：${collRewardText(m)}`;
     if (SDT.UI) SDT.UI.log(msg, 'loot');
     return { ok: true, msg };
@@ -170,11 +175,13 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
   // 收藏经验结算（仓库收藏动作后调用）：职业卡 +10 / 能力卡 +50 人物经验。
   // 2026-09-16 定版（Item 15）：重复收藏重复获得经验——取消「同一张只结算一次」的门槛；
   // 收藏进度（data.collection）仍只在首次收藏时登记（见 game.hub collCollectOne）。
-  function onCollect(card, now) {
+  async function onCollect(card, now) {
+    const slot = B().slot;
     if (!now || !isCollectible(card)) return null;
     B().ensureCollXp();
     const amount = card.type === '能力卡' ? 50 : 10;
-    const ups = addXP(card.cls, amount);
+    const ups = await addXP(card.cls, amount);
+    if (B().slot !== slot) return null;
     if (SDT.UI) {
       SDT.UI.log(`[[icon:medal]] ${characterName(card.cls)} 收藏入室，获得 <b>${amount}</b> 点人物经验` +
         `${ups ? `（升级了 ${ups} 级！）` : ''}`, 'ok');
@@ -187,7 +194,8 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
   // 老档回填：本特性上线前已收藏的职业卡按已结算处理（旧版收藏动作即时发过 +10），
   // 能力卡的 +50 为新增——不回填，已收藏的能力卡再次收藏时补结算一次。
   // 2026-09-29 直写收敛：待回填 id 先按当前档只读计算，再经 Base.markCollXpSettled 落库。
-  function syncCollXp() {
+  async function syncCollXp() {
+    const slot = B().slot;
     const d = B().data;
     const collXp = d.collXp && typeof d.collXp === 'object' ? d.collXp : {};
     const pending = Object.keys(d.collection || {}).filter(id => {
@@ -195,7 +203,11 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
       const card = collectPool().find(c => c.id === id);
       return !!card && card.rarity === '职业';
     });
-    if (pending.length) B().markCollXpSettled(pending);
+    if (pending.length) {
+      const result = await B().markCollXpSettled(pending);
+      if (B().slot !== slot) return;
+      if (result.persisted === false && B().slot) SDT.UI?.log('[[icon:cross]] 收藏经验迁移尚未保存，请重试保存', 'warn');
+    }
   }
 
   // 播报去重按档位隔离（迭代评审 09-20 C-P3）：_seen 此前挂在模块级 ACHIEVEMENTS/
@@ -233,7 +245,8 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
   // 领取奖励：返回 {ok, msg}
   // 09-24 扩展：支持 keys（此前 JSON 里 runeFan 等写了 keys 但 claim 从未发放——顺带修复）
   // 与 card（指定现役卡 id 入仓库，复用现有卡池；容量不足整单缓发，与 claimColl 同口径）
-  function claim(id) {
+  async function claim(id) {
+    const slot = B().slot;
     const a = achById(id);
     if (!a || !isUnlocked(a) || isClaimed(id)) return { ok: false };
     const cards = [];
@@ -245,8 +258,9 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     if (cards.length && SDT.Base.stashRoom() < 1) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
     }
-    const result = B().grantReward({ kind: 'achievement', id, reward: a.reward, cards, back: a.back });
+    const result = await B().grantReward({ kind: 'achievement', id, reward: a.reward, cards, back: a.back });
     if (!result.ok) return result;
+    if (B().slot !== slot) return result;
     const parts = [];
     if (a.reward.wood) parts.push(`[[icon:wood]] 木材 ×${a.reward.wood}`);
     if (a.reward.rations) parts.push(`[[icon:bread]] 口粮 ×${a.reward.rations}`);
@@ -262,14 +276,24 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
   }
 
   // 已领取的带卡背成就 → 补发卡背（v0.21 升级时老存档回填）
-  function syncBackUnlocks() {
-    ACHIEVEMENTS.forEach(a => { if (a.back && isClaimed(a.id)) B().unlockBack(a.back); });
+  async function syncBackUnlocks() {
+    const slot = B().slot;
+    for (const a of ACHIEVEMENTS) {
+      if (B().slot !== slot) return;
+      if (!a.back || !isClaimed(a.id) || B().isBackUnlocked(a.back)) continue;
+      const unlocked = await B().unlockBack(a.back);
+      if (B().slot !== slot) return;
+      if (!unlocked) SDT.UI?.log('[[icon:cross]] 成就卡背补发尚未保存，请重试保存', 'warn');
+    }
   }
 
   // 解锁检测：返回本次新解锁的成就（只播报一次）
-  function checkUnlocks() {
-    syncBackUnlocks();
-    syncCollXp();
+  async function checkUnlocks() {
+    const slot = B().slot;
+    await syncBackUnlocks();
+    if (B().slot !== slot) return [];
+    await syncCollXp();
+    if (B().slot !== slot) return [];
     const seen = seenSet();
     const fresh = ACHIEVEMENTS.filter(a => isUnlocked(a) && !isClaimed(a.id) && !seen.has('ach:' + a.id));
     fresh.forEach(a => { seen.add('ach:' + a.id); });
@@ -282,30 +306,34 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
 
   // A battle attempt has already committed XP and kill counts before presentation is published.
   // Replayed receipts do not call this API, so these effects never grant progression themselves.
-  function publishBattleProgress(levelUps) {
+  async function publishBattleProgress(levelUps) {
     (Array.isArray(levelUps) ? levelUps : []).forEach(entry => {
       (Array.isArray(entry?.levels) ? entry.levels : []).forEach(level => {
         if (SDT.Sound) SDT.Sound.sfx('levelup');
         if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(entry.classId)}</b> 熟练度提升！现在是 <b>Lv.${level}</b>（出征 ${perkText(level)}）`, 'ok');
       });
     });
-    checkUnlocks();
+    await checkUnlocks();
   }
 
   // ---------- 事件埋点（经验计入本局所选职业 d.cls） ----------
   // type: kill / extract / death / action / stash
   // 2026-09-29 直写收敛：统计与经验一次草稿内完成（Base.recordMetaEvent），
   // 升级播报沿用原 addXP 的检查点循环；保存失败的内存推进由命令端口负责。
-  function track(type, d) {
+  async function track(type, d) {
     d = d || {};
-    const result = B().recordMetaEvent(type, d, xpMul);
+    const slot = B().slot;
+    const result = await B().recordMetaEvent(type, d, xpMul);
+    if (B().slot !== slot) return result;
+    if (result.changed && result.persisted === false && slot) SDT.UI?.log('[[icon:cross]] 本次统计已保留在内存，尚未写入存档；请重试保存', 'warn');
     if (result.changed && result.gained) {
       result.gained.checkpoints.forEach(checkpoint => {
         if (SDT.Sound) SDT.Sound.sfx('levelup');
         if (SDT.UI) SDT.UI.log(`[[icon:medal]] <b>${characterName(d.cls)}</b> 熟练度提升！现在是 <b>Lv.${checkpoint.lv}</b>（出征 ${perkText(checkpoint.lv)}）`, 'ok');
       });
     }
-    checkUnlocks();
+    await checkUnlocks();
+    return result;
   }
 
   // 经验倍率：随本局玩法模式（由 game.js 在开局时设置）

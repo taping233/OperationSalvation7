@@ -2,6 +2,8 @@ import { esc, escAttr } from '../core/shared.js';
 import { eventChoiceRewardAt, nodeActionBinding } from './node-reward-state.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
+import { createEventCommands } from './event-commands.js';
 
 const PRESENTATIONS = {
   'ev19-potions': {
@@ -21,6 +23,9 @@ export function createEventCardChoiceController({
 }) {
   let viewSequence = 0;
   let choiceZoomToken = null;
+  const pendingSaves = new WeakSet();
+  const persist = () => saveRunCheckpoint(saveGame);
+  const commands = createEventCommands({ state:game, grantCard:grantEventCard });
   const closeChoiceZoom = () => {
     // 引用卡往返会重建特写 DOM；按当前详情动作的归属关闭，不持有旧节点。
     const zoom = document.getElementById('cardZoom');
@@ -28,6 +33,33 @@ export function createEventCardChoiceController({
     if (choiceZoomToken !== null && owner?.dataset.choiceView === choiceZoomToken) zoom._closeCardZoom?.(true);
     choiceZoomToken = null;
   };
+  function renderSaveRetry(record, current = captureContext()) {
+    if (!current()) return false;
+    const key = `${game.layerIdx},${game.trackPos}`;
+    if (game.nodeRewards?.[key] !== record || !pendingSaves.has(record)) return false;
+    closeChoiceZoom();
+    const token = ++viewSequence;
+    game.state = 'modal';
+    nodeShell({ tone:'event', asset:PRESENTATIONS[record.eventId].asset, icon:'[[icon:cards]]', title:'已领取，尚未保存',
+      sub:'卡牌已在当前背包中，选择已完成。重试只保存进度，不会再次发牌。',
+      body:'<p class="reward-notice" role="status">保存未成功，请在刷新或关闭游戏前重试。</p><button type="button" class="ov-btn ok" data-act="eventCardSaveRetry">重试保存并返回地图</button>' });
+    const page = UI.el?.ovBody?.firstElementChild;
+    const binding = nodeActionBinding(game, UI, 'eventCardSaveRetry');
+    const active = () => current() && token === viewSequence && binding() && game.nodeRewards?.[key] === record
+      && (!page || UI.el?.ovBody?.firstElementChild === page);
+    setBagReturnHook(() => renderSaveRetry(record, current));
+    const retry = () => {
+      if (!active()) return false;
+      if (!persist()) return renderSaveRetry(record, current);
+      pendingSaves.delete(record);
+      close();
+      return true;
+    };
+    UI.act('eventCardSaveRetry', retry);
+    UI.act('eventExit', retry);
+    UI.refresh(game);
+    return true;
+  }
   function render(record, current = captureContext(), notice = '', selectedIndex = null) {
     if (!current()) return false;
     const key = `${game.layerIdx},${game.trackPos}`;
@@ -56,6 +88,7 @@ export function createEventCardChoiceController({
     const binding = nodeActionBinding(game, UI, 'eventCardPick');
     const active = () => current() && binding() && game.nodeRewards?.[key] === record && record.taken === null
       && (!page || UI.el?.ovBody?.firstElementChild === page);
+    UI.act('eventExit', () => { if (active()) { closeChoiceZoom(); close(); } });
     UI.act('eventCardBag', () => { if (active()) { closeChoiceZoom(); bagSlots.showBackpack(); } });
     UI.act('eventCardReturn', () => { if (active()) { closeChoiceZoom(); close(); } });
     UI.act('eventCardRead', data => {
@@ -104,16 +137,22 @@ export function createEventCardChoiceController({
         if (current()) render(record, current, '领奖页未能打开，选择与已支付货币已保留，请重试。');
         return false;
       }
-      if (!grantEventCard(card)) {
+      // 先预留选择，核心授予后再演出；日志/展示的同步回调不能重领。
+      const granted = commands.claimChoice({ record, key, index, card, current:choiceCurrent });
+      if (!granted) {
         const message = UI.el?.ovBody?.querySelector('[data-event-capacity]');
         const notice = `「${card.name}」当前放不下，请整理背包后重试；本次候选已保留。`;
         if (message) message.textContent = notice;
         else render(record, current, notice, index);
         return false;
       }
-      record.taken = index;
       consumeCurrentCell();
-      close();
+      if (!persist()) {
+        pendingSaves.add(record);
+        renderSaveRetry(record, current);
+      } else close();
+      try { UI.showCardReward(card); }
+      catch (error) { console.warn('[event-choice] 卡牌已领取，演出未完成', error); }
       return true;
      };
     UI.act('eventCardPick', data => {
@@ -140,6 +179,8 @@ export function createEventCardChoiceController({
   }
 
   function resume() {
+    const completed = game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`];
+    if (completed && pendingSaves.has(completed)) return renderSaveRetry(completed);
     const record = eventChoiceRewardAt(game);
     return record ? render(record) : false;
   }
@@ -161,7 +202,7 @@ export function createEventCardChoiceController({
     };
     consumeCurrentCell(); // 事件选项已确定；未领取候选仍由上方 resume 入口承接。
     game.state = 'modal';
-    const saved = saveGame();
+    const saved = persist();
     const notice = saved === false && getActiveSlot()
       ? '候选已留在当前对局，但尚未保存成功。请检查存储状态，刷新前先重试保存。' : '';
     return render(record, captureContext(), notice);

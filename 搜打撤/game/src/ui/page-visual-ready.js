@@ -1,6 +1,6 @@
 import { beginRuntimeStage, captureRuntimeStageContext } from '../core/runtime-trace-stages.local.js';
-import { mapImageReady } from '../core/map-image-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
+import { acquirePageVisualReadiness } from './page-visual-readiness-sharing.js';
 import { motionTiming, motionReduced } from './motion-presets.js';
 import '../../css/page-visual-ready.css';
 
@@ -52,38 +52,36 @@ export function visualFrame(signal) {
 }
 
 // Only first-screen representative images are gated; long card lists retain lazy loading.
-export async function waitPageVisual(root, { signal, extraRoots = [], background, timeout = 1500, frameReady = false } = {}) {
+export async function waitPageVisual(root, { signal, extraRoots = [], background, timeout = 1500,
+  frameReady = false, revisionOwner = window.SDT?.UI } = {}) {
+  const page = root?.id === 'ovBody' ? root.firstElementChild || root : root;
+  const revision = revisionOwner?._overlayRevision;
+  const current = () => !!root?.isConnected && !!page?.isConnected
+    && (root.id !== 'ovBody' || (root.firstElementChild || root) === page)
+    && revisionOwner?._overlayRevision === revision;
   if (signal?.aborted) return false;
   if (!frameReady) await visualFrame(signal);
-  if (signal?.aborted || !root?.isConnected) return false;
-  const controller = new AbortController();
+  if (signal?.aborted || !current()) return false;
+  let resources;
   let release;
   const deadline = new Promise(resolve => { release = resolve; });
-  const stop = () => { controller.abort(); release(); };
+  const stop = () => { resources?.release(); release(); };
   signal?.addEventListener('abort', stop, { once: true });
   const timer = setTimeout(stop, timeout);
-  const images = [];
-  for (const host of [root, ...extraRoots]) {
-    for (const image of host.querySelectorAll('img')) {
-      if (images.length >= 12) break;
-      if (!image.src || image.loading === 'lazy' || image.closest('[hidden], .lib-grid, .pool-grid')) continue;
-      const rect = image.getBoundingClientRect();
-      if (rect.width && rect.height && rect.bottom > 0 && rect.right > 0
-        && rect.top < window.innerHeight && rect.left < window.innerWidth) images.push(image);
-    }
-  }
   try {
+    resources = acquirePageVisualReadiness(root, { page, revisionOwner, revision, extraRoots });
+    if (signal?.aborted) stop();
     await Promise.race([Promise.all([
-      ...images.map(image => mapImageReady(image, { timeout, signal: controller.signal })),
+      resources.ready,
       background,
       document.fonts?.ready,
     ]), deadline]);
     await visualFrame(signal);
-    return !signal?.aborted && root.isConnected;
+    return !signal?.aborted && current();
   } finally {
     clearTimeout(timer);
     signal?.removeEventListener('abort', stop);
-    controller.abort();
+    resources?.release();
   }
 }
 
@@ -176,7 +174,8 @@ export function stagePageVisual(ui, reveal, { kind = 'page' } = {}) {
       // for it twice; waitPageVisual still owns the final presentation frame.
       const finishWait = settingsTraceContext ? beginRuntimeStage('settings-visual-wait', settingsTraceContext) : () => {};
       let ready;
-      try { ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady, frameReady: true }); }
+      try { ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady,
+        frameReady: true, revisionOwner: ui }); }
       finally { finishWait(); }
       if (!ready || !current()) return;
       delete overlay.dataset.visualPending;

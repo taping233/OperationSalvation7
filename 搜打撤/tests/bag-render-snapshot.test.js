@@ -66,15 +66,18 @@ beforeEach(async () => {
 afterEach(() => { drag?.resetBagDrag(); document.body.replaceChildren(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe('背包单次渲染堆快照', () => {
-  it.each([['main', 5], ['safe', 4], ['pocket', 4]])('%s 每次仅向会话请求两区各一份堆，保留实时容量查询', (zone, totalGroupings) => {
+  it.each(['main', 'safe', 'pocket'])('%s 每次一次遍历派生两区与容量，动作仍实时查询', zone => {
     const visits = vi.spyOn(H.game.ownedCards, 'forEach');
+    const repeated = ['filter', 'reduce', 'findIndex'].map(method => vi.spyOn(H.game.ownedCards, method));
     bag.showBackpackSection(zone);
-    expect(H.stacks.mock.calls).toEqual([[false], [true]]);
-    expect(visits).toHaveBeenCalledTimes(totalGroupings);
+    expect(H.stacks).not.toHaveBeenCalled();
+    expect(visits).toHaveBeenCalledTimes(1);
+    repeated.forEach(spy => expect(spy).not.toHaveBeenCalled());
     H.stacks.mockClear(); visits.mockClear();
     bag.showBackpack(true);
-    expect(H.stacks.mock.calls).toEqual([[false], [true]]);
-    expect(visits).toHaveBeenCalledTimes(totalGroupings);
+    expect(H.stacks).not.toHaveBeenCalled();
+    expect(visits).toHaveBeenCalledTimes(1);
+    repeated.forEach(spy => expect(spy).not.toHaveBeenCalled());
   });
 
   it('保留同名多堆、装备逐张、原有顺序、物资拆格与两区张数', () => {
@@ -101,7 +104,7 @@ describe('背包单次渲染堆快照', () => {
     expect(tiles().map(x => x.name)).toEqual(names);
     expect(document.querySelectorAll('.bag-grid [data-supply]')).toHaveLength(0);
     expect(document.querySelector('.bag-capchip').textContent).toBe(capacity);
-    expect(H.stacks.mock.calls).toEqual([[false], [true]]);
+    expect(H.stacks).not.toHaveBeenCalled();
   });
 
   it('空背包、空安全格和空消耗区都可刷新', () => {
@@ -111,7 +114,7 @@ describe('背包单次渲染堆快照', () => {
       if (section === 'main') bag.showBackpackSection(section);
       else click(`.bag-rz[data-zone="${section}"]`);
       expect(tiles()).toEqual([]); expect(document.querySelector('.bag-empty2')).not.toBeNull();
-      expect(H.stacks.mock.calls).toEqual([[false], [true]]);
+      expect(H.stacks).not.toHaveBeenCalled();
     }
     expect(H.game.cardOrder).toEqual([]);
   });

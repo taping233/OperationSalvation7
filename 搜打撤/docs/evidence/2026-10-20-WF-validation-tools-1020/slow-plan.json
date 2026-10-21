@@ -1,0 +1,42 @@
+{
+  "kind": "synthetic-slow-plan-check",
+  "outcome": "passed",
+  "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-validation-slow-plan-PiLlhn",
+  "elapsedMs": 16093,
+  "injectedDelayMs": 16000,
+  "previousLimitMs": 15000,
+  "currentLimitMs": 60000,
+  "source": "D:\\素材\\代号柒\\搜打撤\\scripts\\workflow-evidence.mjs",
+  "sourceSha256": "e7083b3ea3f005d5bf3c1b661b376eca3078eb2108442cdad334e8d0731b5f4f",
+  "repository": {
+    "mode": "snapshot",
+    "head": null,
+    "status": null,
+    "reusableReceipt": false,
+    "reason": "当前目录没有可用 Git 仓库；仅核验显式输入与文件指纹，不代表 HEAD/index/CI。"
+  },
+  "plan": {
+    "dryRun": true,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "scripts/acceptance-gate.mjs",
+      "--full",
+      "--run"
+    ],
+    "selection": {
+      "mode": "full",
+      "paths": [],
+      "tests": [],
+      "reasons": [
+        "16s planning fixture"
+      ]
+    },
+    "limits": [
+      "只读预检，未运行检查；实际执行仍重新核对；测试覆盖范围由负责人确认"
+    ]
+  },
+  "checksExecuted": false,
+  "limits": [
+    "人工延迟夹具，仅验证超过旧时限的计划可完成；不代表真实项目选验耗时或完整门通过。"
+  ]
+}

@@ -288,13 +288,10 @@ body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZo
 #cardZoom:has(.camp-detail) .camp-detail-copy h3 { margin: 5px 0 12px; color: #365c52; font-size: 24px; }
 #cardZoom:has(.camp-detail) .camp-detail-copy small { color: #778a70; font: 11px/1.4 var(--font-mono); letter-spacing: .1em; }
 
-/* 通用转场导演以 important 禁用页内动画；基地仅内容切页，导航与资源保持稳定。 */
-body.interface-motion #overlay[data-ui-motion][data-ui-enter]:has(#hubMain.base-camp):not([hidden]),
-body.interface-motion #overlay[data-ui-motion][data-ui-enter]:has(#hubMain.base-camp):not([hidden]) > .card { animation: none !important; }
-body.interface-motion #overlay[data-ui-motion] #hubMain.base-camp .hub-page.page-in { animation: camp-page-in .2s var(--camp-ease) both !important; }
+/* 基地的外壳/内容归属由页面动效配置决定，通用导演不覆盖页内动画。 */
 @keyframes camp-page-in { from { opacity: .4; transform: translateY(9px); } to { opacity: 1; transform: none; } }
 body.reduce-motion #overlay #hubMain.pg.hub.base-camp *, body.reduce-motion #overlay #depMain.pg.hub.camp-detail * { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   #overlay #hubMain.pg.hub.base-camp *, #overlay #depMain.pg.hub.camp-detail * { animation: none; transition: none; }
-  body.interface-motion #overlay[data-ui-motion] #hubMain.base-camp .hub-page.page-in { animation: none !important; }
+  #overlay #hubMain.pg.hub.base-camp .hub-page.page-in { animation: none; }
 }

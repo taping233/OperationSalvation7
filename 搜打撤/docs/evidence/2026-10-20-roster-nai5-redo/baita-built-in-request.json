@@ -1,0 +1,35 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen",
+  "prompt": "baita-built-in-prompt.txt",
+  "inputs": [
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\roster-nai5-redo-20261020\\baita.png",
+      "sha256": "87e2c86b84e455c7a9b8fcf5b4cf3662114ebf1f69ac24e0a39d1376b29ae169"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-default-art-style\\reference-detail.png",
+      "sha256": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-07.jpg",
+      "sha256": "23eedd926340a1f84082a40ea78d9c30116d3bbf8b865c251964b30f65ee7b72"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-08.jpg",
+      "sha256": "8242e77dcbf5edd0acef6eff33815e11e872114cbe851378db8e56e3efb301ea"
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\roster-nai5-redo-20261020\\baita-built-in.png",
+  "sha256": "2a77fa5531d62aa14e344afa61796f3bdd6b3681919da94eec2f4be3d7b08809",
+  "size": [
+    1037,
+    1516
+  ],
+  "visual_review": {
+    "matched": "Approved beret, dark long curls, green eye and dual clips, green dress/white blouse, seated cake/fork, lap grimoire, two open floating books, circle, full shoes; layered painterly style visible.",
+    "deviation": "Requested eye-side correction failed: viewer-right remains covered, opposite current written anchor.",
+    "approval": "pending"
+  },
+  "integration": "candidate only"
+}

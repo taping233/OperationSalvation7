@@ -1,0 +1,162 @@
+{
+  "source": "Codex current in-app browser",
+  "input": "Real photo studio searches, current window only",
+  "cards": [
+    {
+      "name": "源头活水",
+      "images": [
+        {
+          "alt": "源头活水",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-spring.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "扩容弹夹",
+      "images": [
+        {
+          "alt": "扩容弹夹",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/equip-tt13-magazine.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "狙杀",
+      "images": [
+        {
+          "alt": "狙杀",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/martial-tt13-snipe.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "护身",
+      "images": [
+        {
+          "alt": "护身",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/martial-tt13-guard.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "苦雨",
+      "images": [
+        {
+          "alt": "苦雨",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-bitter-rain.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "精神控制",
+      "images": [
+        {
+          "alt": "精神控制",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-mind-control.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "火焰法杖",
+      "images": [
+        {
+          "alt": "火焰法杖",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/equip-tt13-flame-staff.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "逆鳞护甲",
+      "images": [
+        {
+          "alt": "逆鳞护甲",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/equip-tt13-scale-armor.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "双相星盘",
+      "images": [
+        {
+          "alt": "双相星盘",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/equip-tt13-astrolabe.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "灵魂契约",
+      "images": [
+        {
+          "alt": "灵魂契约",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-soul-contract.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "星辰占卜",
+      "images": [
+        {
+          "alt": "星辰占卜",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-stellar-divination.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "混乱套牌",
+      "images": [
+        {
+          "alt": "混乱套牌",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-chaos-deck.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    },
+    {
+      "name": "手下留情",
+      "images": [
+        {
+          "alt": "手下留情",
+          "complete": true,
+          "height": 448,
+          "src": "http://localhost:5200/assets/thumbs/cards/martial-tt13-mercy.webp?art=square-20261020&v=0.60.0",
+          "width": 448
+        }
+      ]
+    }
+  ]
+}

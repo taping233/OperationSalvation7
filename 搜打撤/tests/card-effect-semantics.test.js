@@ -114,7 +114,7 @@ describe('已知效果条目的真实战斗语义', () => {
     await drain();
     await infuseAndPlay(game, meteor.id, fuels.map(entry => entry.id));
     expect(BattleSession.getSnapshot().foes[0].hp).toBe(999 - 12);
-    expect(game.logs.some(line => line.includes('施放 3 次火球'))).toBe(true);
+    expect(game.logs.filter(line => line.includes('火球') && line.includes('法术伤害'))).toHaveLength(3);
     BattleSession.commands.flee();
     await drain();
   });

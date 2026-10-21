@@ -138,7 +138,9 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
     const teachAmmoOnce = () => {
       const B = SDT.Base;
       if (!B || !B.data || B.data.ammoTaught) return;
-      B.markAmmoTaught();   // 2026-09-29 收敛：内存推进+尝试保存的旧语义移入 Base 命令
+      Promise.resolve(B.markAmmoTaught()).then(saved => {
+        if (saved === false && B.slot) UI.log('[[icon:cross]] 教学标记尚未保存，本次不会重复弹出；请重试保存', 'warn');
+      });
       game.state = 'modal';
       const shaCard = SDT.Cards.all().find(c => c.id === SDT.Cards.SHA.id) || SDT.Cards.SHA;
       // 2026-10-02 老板：左列「入口袋」图换真正会进消耗区的普通牌（镭射，TT10 定版）——
@@ -201,7 +203,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
           // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。
           // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。
           if (win === true && !settlement.slotId && SDT.Base && SDT.Base.data) {
-            SDT.Base.recordEggBattle();
+            await SDT.Base.recordEggBattle();
           }
           if (win === true) {
             game.visited = game.visited || {};
@@ -244,12 +246,13 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
             settlement.progressPublished = true;
             if (typeof SDT.Meta.publishBattleProgress === 'function') {
               try {
-                SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);
+                await SDT.Meta.publishBattleProgress(committed.receipt?.output?.progression?.levelUps || []);
               } catch (error) {
                 console.error('[battle:progress] 战斗进度已保存，但升级/成就提示未完成', error);
               }
             }
           }
+          if (!sameRun()) return false;
           clearBattleSettlementPending(settlement.slotId, settlement.runId);
           game.elapsedSynced = settlement.elapsedCheckpoint;
           if (canPresentRewardReturn()) game.state = 'idle';

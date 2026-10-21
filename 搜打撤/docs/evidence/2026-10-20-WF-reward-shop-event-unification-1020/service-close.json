@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-20T11:55:41.3334698Z",
+  "ownedService": {
+    "ProcessId": 22668,
+    "CreationDate": "2026-10-20T19:36:00.991136+08:00",
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5317 --strictPort"
+  },
+  "stopped": true,
+  "pidExists": false,
+  "port5317Listening": false,
+  "protectedMainPort5200": [
+    {
+      "LocalPort": 5200,
+      "OwningProcess": 492
+    }
+  ],
+  "note": "Stopped only this task service; no action on port 5200"
+}

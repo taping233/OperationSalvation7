@@ -2,7 +2,10 @@
  * 回归目标：SDT.Agent.scenes 装配与 battle/shop 场景的断言链在 jsdom 全量
  * 启动环境下自然收口（pass），防止场景与命令面/动作面漂移脱节。
  * 环境补桩与 tests/boot.test.js 同款：无 canvas/Audio 渲染，逻辑同源。 */
-import { describe, it, expect, vi } from 'vitest';
+import { afterAll, describe, it, expect, vi } from 'vitest';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
+
+afterAll(releaseMainPage);
 
 // jsdom 不加载/解码美术；保持异步 ready 契约，避免规则动作等待永不触发的图片事件。
 // 真实资源屏障与动作等待分别由 battle-entry-readiness / battle-action-runner-readiness 覆盖。
@@ -65,6 +68,7 @@ import { resolve } from 'node:path';
 }
 
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 

@@ -1,0 +1,55 @@
+{
+  "patch": "term-tips-lazy-e817.patch",
+  "sha256": "20f488adbbcca29867861ab9b49aa69601abcdf713b4df80e67c448f9effa839",
+  "paths": [
+    {
+      "path": "game/src/ui/term-tips.js",
+      "baseline_sha256": "5c6ec1f9796564e57b09148dc9fded0ec483d578f7f7447aa56521298917acb7",
+      "current_sha256": "0ebc39ee92b753328cc1754537a43387d27246292f80536fe87444ea37b9874b",
+      "bytes": 7335
+    },
+    {
+      "path": "game/src/ui/term-tips.runtime.js",
+      "baseline_sha256": null,
+      "current_sha256": "884121f097bf9d3a27a6126727f26d000539a850d97e27c7e29783864a5c5604",
+      "bytes": 11988
+    },
+    {
+      "path": "tests/term-tips-lazy-boundary.test.js",
+      "baseline_sha256": null,
+      "current_sha256": "532b3b9211f34364184933b38182ecd52b1fb9560dff8b1b180074910fbffd99",
+      "bytes": 9014
+    },
+    {
+      "path": "tests/term-tips-lifecycle.test.js",
+      "baseline_sha256": "c381f5a064c10b9f70010e7372e6cc519333f981d2e64bcd0764e0cd73de5358",
+      "current_sha256": "1077ebdd53af832cb490a0c60411cb67904fdadd3a54104206d4d4f55c0803b1",
+      "bytes": 4592
+    },
+    {
+      "path": "tests/term-tip-rule-copy.test.js",
+      "baseline_sha256": "54c54c124dd3333f272977f75d3f949fd899f6ac3ce8a4617130f21bc7ff9a22",
+      "current_sha256": "195473bd604f03e53333e20e497e506c4ca7e5ddf6198644dcd2edf34cc5a2f7",
+      "bytes": 3203
+    },
+    {
+      "path": "tests/battle-hand-keyword-interaction.test.js",
+      "baseline_sha256": "9c31a6c8f79a7176601ef06edaed5b46e5550bb2f5900a0186c89d330a963fe7",
+      "current_sha256": "f68f783befa0c2f04f90ddad0e204cd657cbd0aa862688027ed31324e5b443f7",
+      "bytes": 12289
+    },
+    {
+      "path": "tests/map-facilities-burn-removal.test.js",
+      "baseline_sha256": "6bbc82f5569d079bdb11dbb5c196b30ce3b68693bcea6c723308e6609f40ccd0",
+      "current_sha256": "aae00ef071fef83504c0dd9ced890136632d78b2935e388382beff4d93ac7ebe",
+      "bytes": 2967
+    }
+  ],
+  "validation": "term-tips-targeted-final.log: 7 files / 102 tests pass; changed-file ESLint and node syntax pass",
+  "estimates_only": {
+    "independent_esbuild_gzip_before": 4339,
+    "independent_esbuild_gzip_shell": 1311,
+    "difference": 3028,
+    "runtime": 3714
+  }
+}

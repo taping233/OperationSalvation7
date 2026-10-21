@@ -36,7 +36,8 @@ beforeEach(async () => {
     Cards: { all: () => [card], classPool: () => [card], randomClassCard: () => card, cardHTML: () => 'test card',
       applyAbilityRename: () => false, applyDuplicateRenames: () => false },
     Base: { slot: 1, peek: () => ({}), use(n) { this.slot = n; }, issue: () => null,
-      data: { stash: [], pocket: [] }, save() {}, applyStoredCardRenames: () => false } };
+      data: { stash: [], pocket: [] }, save() {}, applyStoredCardRenames: async () => ({ changed:false, persisted:true }),
+      flushWrites: async () => ({ ok:true }) } };
   battle = { start: vi.fn(() => true), restore: vi.fn(), getSnapshot: vi.fn(() => ({})) };
   vi.doMock('../game/src/battle/view/battle.view.js', async () => {
     entered.resolve(); await gate.promise; SDT.Battle = battle; return {};
@@ -118,7 +119,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   });
 
   it('resumes a slot only after real transition and loader completion', async () => {
-    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 }); await vi.advanceTimersByTimeAsync(0);
     expect(document.querySelector('.city-run-transition')).not.toBeNull();
     handlers.flowContinue(); await entered.promise;
     expect(loadGame).not.toHaveBeenCalled(); gate.resolve();
@@ -129,7 +130,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   });
 
   it.each(['resolve', 'reject'])('does not load or report an old slot after title exit (%s)', async outcome => {
-    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 }); await vi.advanceTimersByTimeAsync(0);
     handlers.flowContinue(); await entered.promise;
     menu.showTitle(); UI.log.mockClear(); UI.showOverlay.mockClear();
     gate[outcome](new Error('offline')); expect(await request).toBe(false);
@@ -142,13 +143,13 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   });
 
   it('checks the real active slot after awaiting the loader', async () => {
-    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 }); await vi.advanceTimersByTimeAsync(0);
     handlers.flowContinue(); await entered.promise; slot = 2; gate.resolve();
     expect(await request).toBe(false); expect(loadGame).not.toHaveBeenCalled();
   });
 
   it.each(['resolve', 'reject'])('a new same-run transition supersedes pending slot load (%s)', async outcome => {
-    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 }); await vi.advanceTimersByTimeAsync(0);
     handlers.flowContinue(); await entered.promise;
     const replacement = scenes.showRunTransition({ title: 'new' }); UI.log.mockClear();
     gate[outcome](new Error('offline'));
@@ -158,7 +159,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   });
 
   it.each(['module', 'load-result'])('shows a current %s failure in an actionable slot picker after clearing run ownership', async failure => {
-    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 });
+    menu.startNewGame(); const request = handlers.enterSlot({ slot: 1 }); await vi.advanceTimersByTimeAsync(0);
     handlers.flowContinue(); await entered.promise;
     if (failure === 'module') gate.reject(new Error('offline'));
     else { loadGame.mockReturnValueOnce({ ok: false, message: '测试路线恢复失败' }); gate.resolve(); }
@@ -177,7 +178,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     else expect(loadGame).toHaveBeenCalledExactlyOnceWith(1);
     // Exercise the newly rendered button and its newly registered handler; no retry mock.
     hasSavedRun = false;
-    enterButton.click(); handlers.flowContinue();
+    enterButton.click(); await vi.advanceTimersByTimeAsync(0); handlers.flowContinue();
     expect(await clickedAction).toMatchObject({ ok: true });
     expect(slot).toBe(1);
   });
@@ -193,7 +194,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
   it.each(['normal', 'new-run', 'title', 'resolved-then-new-run', 'resolved-then-transition'])('guards class grant transition (%s)', async change => {
     SDT.Battle = battle;
     const { openClassChoice } = await import('../game/src/run/game.run.class-choice.page.js');
-    openClassChoice(); handlers.pickClass(); const finish = handlers.flowContinue;
+    openClassChoice(); handlers.pickClass(); await vi.advanceTimersByTimeAsync(0); const finish = handlers.flowContinue;
     if (change === 'new-run') game.discoveredPairs = new Set();
     if (change === 'title') menu.showTitle();
     UI.showOverlay.mockClear(); UI.hideOverlay.mockClear();

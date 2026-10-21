@@ -1,0 +1,24 @@
+/* Keep the existing winter platform and geometry; reinforce figure/hand separation. */
+#overlay .battle-stage.sts[data-scenery-key="winter-platform-minimal"] .battle-stage-shade {
+  background: linear-gradient(180deg, #10202c26 0%, transparent 27%, transparent 61%, #101b2424 75%, #0d1827a6 91%, #0c1522e0 100%);
+}
+#overlay .battle-stage.sts[data-scenery-key="winter-platform-minimal"] .sts-foe .sts-figure::after {
+  height: 16px;
+  background: radial-gradient(ellipse, #0f182d70, #15223733 46%, transparent 74%);
+}
+#overlay .battle-stage.sts .battle-victory-feedback {
+  position: absolute;
+  z-index: 32;
+  top: 25%;
+  left: 50%;
+  translate: -50% -50%;
+  padding: 12px 32px;
+  border-block: 1px solid #eadfc18c;
+  color: #f2e8cc;
+  background: linear-gradient(90deg, transparent, #162538e6 18%, #162538e6 82%, transparent);
+  font: 600 clamp(22px, 2.2vw, 34px)/1.4 var(--font-ui, sans-serif);
+  letter-spacing: .12em;
+  text-shadow: 0 2px 8px #0d1629;
+  white-space: nowrap;
+  pointer-events: none;
+}

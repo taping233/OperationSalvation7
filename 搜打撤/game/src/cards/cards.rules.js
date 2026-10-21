@@ -5,6 +5,7 @@ import { CLASSES } from './cards.consts.js';
 import { Random } from '../core/random.js';
 import { DATA } from '../core/data-loader.js';
 import { isHeroLine, rarityOf } from './card-rarity.js';
+import { nativeNumericField, nativeDamageType } from './builtin-card-numeric-fields.js';
 
 let fixedCardIdSet;
 function fixedCardIds() {
@@ -58,6 +59,8 @@ export const rulesSlice = {
     //      （设计者规则：「射击」2 点为固定伤害，流血不自动掉血、层数无上限不衰减）
     deriveDmgType(card) {
       if (SDT.Cards.DMG_TYPE_META[card.dmgType]) return card.dmgType;
+      const native = nativeDamageType(card);
+      if (native !== undefined) return native || undefined;
       const desc = String(card.desc || '');
       // 「攻 N 点」（旧转写）或「攻（+n）／攻⁺n」（新记号）才算攻击伤害，
       // 避免「攻击 +1」这类装备强化描述误判
@@ -79,6 +82,8 @@ export const rulesSlice = {
     // 描述以「N′」开头给出伤害但 dmg 字段缺失的法术（如 银刺 5′、冰刺 1′）→ N。
     // 描述以「注能(」开头的卡（如 诅咒光波，全部效果在注能后）不推导，避免虚增基础伤害。
     deriveDmgValue(card) {
+      const native = nativeNumericField(card, 'dmg');
+      if (native !== undefined) return native;
       if (+(card.dmg || 0) > 0) return +card.dmg;
       if (!SDT.Cards.DMG_TYPES.includes(card.type)) return 0;
       const desc = String(card.desc || '').trim();
@@ -95,6 +100,8 @@ export const rulesSlice = {
     // （取下限）同样视为抽卡词条；「从牌库中抽取」（检索牌库）与「额外抽」（形态
     // 每回合效果）不是一次性抽牌，不计入，避免卡面出现误导角标。
     deriveDraw(card) {
+      const native = nativeNumericField(card, 'draw');
+      if (native !== undefined) return native;
       if (+(card.draw || 0) > 0) return +card.draw;
       const desc = String(card.desc || '')
         .replace(/从\s*牌库[^。；;]*?抽[取]?\s*\d+\s*张[^。，；;]*/g, ' ')
@@ -105,6 +112,8 @@ export const rulesSlice = {
 
     // 注能词条推导：「注能(N)」→ N；「注能(小)」→ 1（设计者记号：小 = 1 张）
     deriveInfuse(card) {
+      const native = nativeNumericField(card, 'infuse');
+      if (native !== undefined) return native;
       if (+(card.infuse || 0) > 0) return +card.infuse;
       const m = String(card.desc || '').match(/注能\s*[（(]\s*(\d+|小)\s*[)）]/);
       return m ? (m[1] === '小' ? 1 : +m[1]) : 0;
@@ -120,6 +129,8 @@ export const rulesSlice = {
 
     // 回复词条推导（v0.25 正式词条化）：「回复 N 点生命/血」「+N 血」→ N
     deriveHeal(card) {
+      const native = nativeNumericField(card, 'heal');
+      if (native !== undefined) return native;
       if (+(card.heal || 0) > 0) return +card.heal;
       const m = String(card.desc || '').match(/回复\s*(\d+)\s*(?:点\s*生命|点?血)/) ||
                 String(card.desc || '').match(/\+\s*(\d+)\s*血/);
@@ -128,6 +139,8 @@ export const rulesSlice = {
 
     // 护甲词条推导：「获得 N 点护甲」「+N 甲」→ N
     deriveArmor(card) {
+      const native = nativeNumericField(card, 'armor');
+      if (native !== undefined) return native;
       if (+(card.armor || 0) > 0) return +card.armor;
       const desc = String(card.desc || '');
       // 分支文本由选项结算，不能回填为出牌即获得的护甲；制作坊显式字段仍优先。

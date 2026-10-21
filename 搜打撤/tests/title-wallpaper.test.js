@@ -12,11 +12,18 @@ const selection = () => document.getElementById('title').dataset.homeWallpaper;
 beforeEach(() => {
   vi.resetModules();
   localStorage.clear();
+  localStorage.setItem('sdt-title-wallpaper', 'snow-road');
   document.body.innerHTML = html;
 });
 afterEach(() => vi.restoreAllMocks());
 
 describe('home wallpaper preference', () => {
+  it('defaults to Wu bass without an existing preference', async () => {
+    localStorage.removeItem('sdt-title-wallpaper');
+    await boot();
+    expect(selection()).toBe('wu-bass');
+    expect(button().textContent).toContain('4/6');
+  });
   it('temporarily hides the interface and restores it without changing wallpaper or saves', async () => {
     localStorage.setItem('sdt-title-wallpaper', 'baita-heixiang');
     localStorage.setItem('game-save-fixture', 'untouched');
@@ -37,21 +44,34 @@ describe('home wallpaper preference', () => {
     expect({ ...localStorage }).toEqual(stored);
   });
 
-  it('keeps the snow road first and cycles the second wallpaper without changing game saves', async () => {
+  it('keeps the snow road first and cycles all six wallpapers without changing game saves', async () => {
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();
     expect(selection()).toBe('snow-road');
     expect(button().disabled).toBe(false);
     expect(button().hidden).toBe(false);
-    expect(button().textContent).toContain('1/2');
+    expect(button().textContent).toContain('1/6');
     button().click();
     expect(selection()).toBe('baita-heixiang');
-    expect(button().getAttribute('aria-label')).toContain('当前第2张，共2张');
-    expect(button().textContent).toContain('2/2');
+    expect(button().getAttribute('aria-label')).toContain('当前第2张，共6张');
+    expect(button().textContent).toContain('2/6');
     expect(localStorage.getItem('sdt-title-wallpaper')).toBe('baita-heixiang');
     button().click();
+    expect(selection()).toBe('xingyue-piano');
+    expect(button().getAttribute('aria-label')).toContain('当前第3张，共6张');
+    expect(button().textContent).toContain('3/6');
+    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('xingyue-piano');
+    button().click();
+    expect(selection()).toBe('wu-bass');
+    button().click();
+    expect(selection()).toBe('baita-station');
+    expect(button().textContent).toContain('5/6');
+    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('baita-station');
+    button().click();
+    expect(selection()).toBe('xingyue-reeds');
+    button().click();
     expect(selection()).toBe('snow-road');
-    expect(button().textContent).toContain('1/2');
+    expect(button().textContent).toContain('1/6');
     expect(localStorage.getItem('game-save-fixture')).toBe('untouched');
   });
 
@@ -82,31 +102,48 @@ describe('home wallpaper preference', () => {
     } finally { vi.useRealTimers(); }
   });
 
-  it('restores the second wallpaper on a new page load', async () => {
+  it.each([
+    ['baita-heixiang', 1, '2/6'],
+    ['xingyue-piano', 2, '3/6'],
+    ['wu-bass', 3, '4/6'],
+    ['baita-station', 4, '5/6'],
+    ['xingyue-reeds', 5, '6/6'],
+  ])('restores wallpaper %s on a new page load', async (wallpaper, clicks, count) => {
     await boot();
-    button().click();
+    for (let i = 0; i < clicks; i++) button().click();
     vi.resetModules();
     document.body.innerHTML = html;
     await boot();
-    expect(selection()).toBe('baita-heixiang');
-    expect(button().textContent).toContain('2/2');
+    expect(selection()).toBe(wallpaper);
+    expect(button().textContent).toContain(count);
   });
 
   it.each(['snow', 'ensemble', 'retired'])('uses the new wallpaper for retired or unknown preference %s', async preference => {
     localStorage.setItem('sdt-title-wallpaper', preference);
     await boot();
-    expect(selection()).toBe('snow-road');
+    expect(selection()).toBe('wu-bass');
     button().click();
-    expect(selection()).toBe('baita-heixiang');
+    expect(selection()).toBe('baita-station');
+    button().click();
+    expect(selection()).toBe('xingyue-reeds');
+    button().click();
+    expect(selection()).toBe('snow-road');
   });
 
   it('still switches when preference storage is unavailable', async () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked'); });
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked'); });
     await boot();
+    expect(selection()).toBe('wu-bass');
+    button().click();
+    expect(selection()).toBe('baita-station');
+    button().click();
+    expect(selection()).toBe('xingyue-reeds');
+    button().click();
+    expect(selection()).toBe('snow-road');
     button().click();
     expect(selection()).toBe('baita-heixiang');
     button().click();
-    expect(selection()).toBe('snow-road');
+    expect(selection()).toBe('xingyue-piano');
   });
 });

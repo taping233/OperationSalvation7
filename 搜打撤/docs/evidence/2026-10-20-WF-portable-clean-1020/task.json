@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-portable-clean-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "将当前完成工作区构建为便携无预置存档EXE，核验最终回归、生产资源、启动器与独立资料目录",
+  "paths": [
+    "desktop-app",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/fixtures/approved-card-batch-20261020.json",
+    "tests/e6-card-rules-capability.test.js",
+    "tests/e8-card-inventory.test.js",
+    "tests/m-batch-production.test.js",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/evidence/2026-10-20-WF-portable-clean-1020"
+  ],
+  "doneWhen": [
+    "独立快照包含当前完成源码及素材，静态/类型/全量回归和Vite构建预算通过或失败已修复复验",
+    "便携EXE及解包内容SHA可复核，双启动资源隔离通过，包内无存档且独立首次资料目录为空档",
+    "当前内置浏览器验证生产构建代表流程，明确桌面实窗覆盖边界，输出最终EXE路径，不提交推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "静态类型lint自测通过，全量11项旧卡库失败已修复定向复验，详见quality.md",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "独立快照2904输入一致，生产构建预算通过；实际EXE双启动、1676资源与asar SHA通过，profile不存在，详见package-audit.json与delivery.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "内置当前窗口生产版五空档、新建、首战领奖及刷新继续通过；自建3个服务已停止，docs与diff检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "修复后未重跑最终全量；38个原有skip未算通过；全量jsdom teardown日志定向未复现",
+    "未验证可听音频、原生Electron游戏实窗、整局、多尺寸及远端CI；未提交推送或外部发布"
+  ],
+  "updatedAt": "2026-10-20T13:43:09.054Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

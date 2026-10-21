@@ -1,0 +1,51 @@
+{
+  "outcome": "passed",
+  "cwd": "C:/Users/太平/AppData/Local/Temp/sdt-reward-flow-1020-01a157fe/project",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/workflow.mjs",
+    "verify",
+    "--task",
+    "WF-validation-tools-1020",
+    "--paths",
+    "game/src/hub/game.bag.js,game/src/run/chests.js",
+    "--plan",
+    "--json"
+  ],
+  "elapsedMs": 1548,
+  "repository": {
+    "mode": "snapshot",
+    "head": null,
+    "status": null,
+    "reusableReceipt": false,
+    "reason": "当前目录没有可用 Git 仓库；仅核验显式输入与文件指纹，不代表 HEAD/index/CI。"
+  },
+  "plan": {
+    "ok": true,
+    "dryRun": true,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "scripts/acceptance-gate.mjs",
+      "--paths",
+      "game/src/hub/game.bag.js",
+      "game/src/run/chests.js",
+      "--run"
+    ],
+    "selection": {
+      "mode": "full",
+      "paths": [
+        "game/src/hub/game.bag.js",
+        "game/src/run/chests.js"
+      ],
+      "reasons": [
+        "定向测试超过 30 个文件"
+      ],
+      "tests": []
+    },
+    "limits": [
+      "只读预检，未运行检查；实际执行仍重新核对；测试覆盖范围由负责人确认"
+    ]
+  },
+  "matchesOriginalGatePlan": true,
+  "checksExecuted": false
+}

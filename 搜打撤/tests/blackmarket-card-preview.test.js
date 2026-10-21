@@ -61,7 +61,7 @@ afterEach(() => {
 });
 async function openBlackMarket() {
   H.cards = [{ id:'ev19-gamble', name:'地下商场黑市', type:'事件' }, ...prizes];
-  const opening = flow.runEventDeck(); await vi.advanceTimersByTimeAsync(1000); await opening;
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled(); await vi.advanceTimersByTimeAsync(1000); await opening;
   UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
 }
 const readers = () => [...UI.el.ovBody.querySelectorAll('[data-act="eventGambleRead"]')];

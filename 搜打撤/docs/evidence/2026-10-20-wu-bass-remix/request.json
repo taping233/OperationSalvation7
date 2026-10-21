@@ -1,0 +1,118 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, lying on her back on a worn rug, bent legs resting on the sofa, electric bass diagonally across her torso. Left fingers hold the fretboard; right fingers pluck above the pickups. Head closest to camera, upside-down face, half-lidded eyes, faint confident smile showing a small fang.\n\nWide horizontal composition, close floor-level perspective, enlarged bass headstock entering lower left foreground, silver ponytail spread across rug. Faded sofa, cushions, loose audio cables, mugs, practice sheets, small amplifier.\n\nDim cyan overhead light, tiny violet amplifier indicator, muted teal-gray and dusty lavender palette, warm softly illuminated face and hands, intimate late-night lethargy.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1859463027,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, horns, reptile tail, animal ears, sword, sword harness, standing, white background",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, fair skin, slender, blue eyes, silver-white long hair, high ponytail tied with blue ribbon bow, wispy bangs, black rose at her left temple, ordinary round black sunglasses perched on head. Oversized charcoal knit sweatshirt, loose lavender-gray pinstriped pajama trousers, thick ivory socks, fully clothed.",
+          "uc": "pink hair, horns, tail, animal ears, goggles",
+          "center": {
+            "x": 0.58,
+            "y": 0.55
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, lying on her back on a worn rug, bent legs resting on the sofa, electric bass diagonally across her torso. Left fingers hold the fretboard; right fingers pluck above the pickups. Head closest to camera, upside-down face, half-lidded eyes, faint confident smile showing a small fang.\n\nWide horizontal composition, close floor-level perspective, enlarged bass headstock entering lower left foreground, silver ponytail spread across rug. Faded sofa, cushions, loose audio cables, mugs, practice sheets, small amplifier.\n\nDim cyan overhead light, tiny violet amplifier indicator, muted teal-gray and dusty lavender palette, warm softly illuminated face and hands, intimate late-night lethargy.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, fair skin, slender, blue eyes, silver-white long hair, high ponytail tied with blue ribbon bow, wispy bangs, black rose at her left temple, ordinary round black sunglasses perched on head. Oversized charcoal knit sweatshirt, loose lavender-gray pinstriped pajama trousers, thick ivory socks, fully clothed.",
+              "centers": [
+                {
+                  "x": 0.58,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, horns, reptile tail, animal ears, sword, sword harness, standing, white background",
+          "char_captions": [
+            {
+              "char_caption": "pink hair, horns, tail, animal ears, goggles",
+              "centers": [
+                {
+                  "x": 0.58,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "source_metadata": {
+    "srgb": 0,
+    "Software": "Plana",
+    "Source": "Plana",
+    "Comment": "{\"prompt\":\"1girl, solo, yvonne (arknights), arknights: endfield, long pink hair with turquoise accents, distinctive painted horns and reptilian tail, alternate costume, oversized charcoal sweatshirt, loose lavender striped pajama trousers, thick socks, lying on her back on a worn rug with her bent legs resting against the sofa, electric bass resting diagonally across her torso, left fingers loosely holding the fretboard, right fingers idly plucking above the pickups, head closest to the camera and face appearing upside down, half-lidded eyes and a faint distracted smile, wide horizontal composition, close floor-level perspective, enlarged bass headstock entering the lower left foreground, hair spread across the rug, tail resting beside a cushion, loose audio cables crossing the floor, faded sofa, empty mugs, handwritten practice sheets with indistinct marks, dim cyan overhead light and a tiny violet amplifier indicator, muted teal-gray and dusty pink palette, painterly anime rendering, intimate late-night lethargy, no text\",\"uc\":\"\",\"steps\":28,\"scale\":5.0,\"seed\":0,\"sampler\":\"k_euler_ancestral\",\"noise_schedule\":\"native\",\"cfg_rescale\":0.0,\"strength\":0.7,\"noise\":0.0,\"sm\":false,\"sm_dyn\":false,\"width\":1516,\"height\":1037}"
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\e8897f01f51cee6c83259072e91075ec236908.png",
+      "sha256": "38e81d4d7a11b3760386a0ab8147a445e9c1783de9463e2b83540384c5aa1a78",
+      "uploaded": false,
+      "role": "composition, action, setting and light; embedded prompt"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+      "sha256": "8d976e04f8382b100ca110ab15908ae9f78f0894c7b73fd88373d47745467de5",
+      "uploaded": false,
+      "role": "current Wu identity"
+    }
+  ],
+  "retained": "supine upside-down pose, sofa legs, bass and hand contacts, floor-level diagonal, room and light",
+  "replaced": "Yvonne identity, pink/turquoise hair, horns, tail; current Wu identity and our artist chain",
+  "redesigned": "charcoal knit sweatshirt, lavender-gray pinstriped lounge trousers and ivory socks; no sword",
+  "output": ".tmp\\nai\\wu-bass-remix-20261020\\candidate.png",
+  "acquisition": "generated by nai_gen/nai_guard",
+  "seed": 1859463027,
+  "sha256": "99816397bd663bfe2ebd4758b00c570e6680faf4f7df96db9c3e9365787860d9",
+  "size_bytes": 1940546,
+  "visual_review": {
+    "matched": "Silver ponytail, blue bow, black rose, head-top round sunglasses, blue eyes; upside-down supine pose, diagonal bass, cyan sofa room.",
+    "deviations": "Feet on rug rather than sofa; imperfect plucking contact and fingers.",
+    "user_approval": "pending"
+  }
+}

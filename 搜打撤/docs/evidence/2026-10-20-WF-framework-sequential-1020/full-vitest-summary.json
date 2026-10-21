@@ -1,0 +1,142 @@
+{
+  "at": "2026-10-20T13:03:01.856Z",
+  "source": "../.tmp/framework-sequential-1020/full-vitest.json",
+  "sourceBytes": 2581087,
+  "sourceSHA256": "12f3bea35355d16ceba9c91c49260ee9fb6028151d58c91a7585e0c7501a4d54",
+  "success": false,
+  "fileCount": 713,
+  "passedFileCount": 701,
+  "failedFileCount": 12,
+  "testCount": 7341,
+  "passedTestCount": 7289,
+  "failedTestCount": 14,
+  "skippedTestCount": 38,
+  "failures": [
+    {
+      "file": "acceptance-gate.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "分层验收选择 纯战斗规则改动带直接测试与架构哨兵，不扩成启动全链",
+          "message": "Error: STACK_TRACE_ERROR\n    at task (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:638:27)\n    at Object.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:662:16)\n    at Object.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:458:28)\n    at chain (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:369:14)\n    at D:\\素材\\代号柒\\搜打撤\\tests"
+        }
+      ]
+    },
+    {
+      "file": "card-description-text.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "卡牌展示文案与结算文本隔离 共同入口使用同一文案，源卡、费用、规则与卡库存储保持原字节",
+          "message": "Error: [sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'\n    at fail (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:81:32)\n    at sourceCardLibrary (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:166:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\card-description-text.test.js:58:38\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hoo"
+        }
+      ]
+    },
+    {
+      "file": "card-fixes-1010.test.js",
+      "message": "[sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'",
+      "tests": []
+    },
+    {
+      "file": "message-batch-0920-late.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "2026-09-20 晚间留言卡牌数据 物资格、药水说明、能力提示与手牌翻页提醒均有界面守卫",
+          "message": "AssertionError: expected '/* ==================================…' to contain 'EVENT_SCENE_META[card.id]'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\message-batch-0920-late.test.js:65:18\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90"
+        }
+      ]
+    },
+    {
+      "file": "pocket-restore-interface.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "消耗卡复原公共选择界面 修鞋铺入口只提供场景句，次数范围与操作由公共界面说明一次",
+          "message": "TypeError: Cannot read properties of null (reading '1')\n    at D:\\素材\\代号柒\\搜打撤\\tests\\pocket-restore-interface.test.js:63:68\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%"
+        }
+      ]
+    },
+    {
+      "file": "r6-story.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "R6-a 最后一盏引路灯 事件接线先提交 Base，再消费节点；保存失败路径撤销 visited 并保留重试页",
+          "message": "AssertionError: expected '/* ==================================…' to match /await storyCommands\\.record[\\s\\S]*ren…/\n    at D:\\素材\\代号柒\\搜打撤\\tests\\r6-story.test.js:122:20\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E"
+        }
+      ]
+    },
+    {
+      "file": "retired-scenes-publication.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "exact retired scene publication review fingerprints the scene constructors and DATA mapping, preserving all current scene variants",
+          "message": "AssertionError: game/data/art-mapping.json: expected 'df0c2fa6adad04a7e85a0d4570289293e5b98…' to be '70d6636e800c1dd2763b8f4101cd99fff78d2…' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\retired-scenes-publication.test.js:53:74\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<ano"
+        }
+      ]
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "reviewed production-only asset omissions contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files",
+          "message": "AssertionError: expected [ …(2) ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-redundancy.test.js:70:30\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%"
+        },
+        {
+          "name": "reviewed production-only asset omissions omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs",
+          "message": "AssertionError: expected false to be true // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-redundancy.test.js:97:51\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E"
+        },
+        {
+          "name": "reviewed production-only asset omissions retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references",
+          "message": "AssertionError: expected +0 to be 30 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-redundancy.test.js:117:50\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89"
+        }
+      ]
+    },
+    {
+      "file": "schema-op-coverage.test.js",
+      "message": "[sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'",
+      "tests": []
+    },
+    {
+      "file": "selftest-paths.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "ROOT-06 零依赖自测入口（域目录路径） node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT",
+          "message": "AssertionError: 自测未通过：\n✔ boot-order.js 语法 OK\n✔ e2.snapshot.qa.js 语法 OK\n✔ game.boot.js 语法 OK\n✔ main.js 语法 OK\n✔ r7a.qa.js 语法 OK\n✔ rarity-design-lab.js 语法 OK\n✔ wu-career-frame-preview.js 语法 OK\n✔ 关卡·三环风险梯度已声明\n✔ 关卡·巨兽精英概率已声明（第3层3% / 第4层10%）\n✔ 遭遇·策略预告元数据\n✔ 场景·10 张事件 sceneId 覆盖\n✔ 场景·标准节点与拾取契约\n✔ 场景·落脚进入全屏房间链\n✔ 音频·四首原创场景曲使用Howler循环与交叉渐变\n✔ 战斗·意图轮转与 DOM 接线\n✔ 战斗·拖牌 Pointer Events 接线保留\n✔ BOSS·三类独立意图模式\n✔ 敌人·全部图鉴具备行为钩子\n✔ 事件·二选一与三选一分支\n✘ 兼容·未知事件仍走旧效果: 期望 true，得到 false\n✔ 战斗阶段背包入口拒绝打开\n✔ BOSS·胜利领奖完成后直接保存结算\n✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）\n✔ 档位概览仅展示游玩时间与已解锁成就\n✔ 背包入口支持再次点击关闭\n✔ 背包缩略卡点击进入详情\n✔ 道具使用入口只在详情页生成\n✔ 拖出背包弹出丢弃确认\n\n共 1 项失败\n: expected 1 to be +0 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\selftes"
+        }
+      ]
+    },
+    {
+      "file": "sync-cards-from-live.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "sync-cards-from-live 源码有效卡库（六文件沙箱） 沙箱求值建出完整现役卡库，关键卡在位",
+          "message": "Error: [sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'\n    at fail (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:81:32)\n    at sourceCardLibrary (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:166:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\sync-cards-from-live.test.js:12:34\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hook"
+        },
+        {
+          "name": "sync-cards-from-live 源码有效卡库（六文件沙箱） 同步沙箱执行腐化之种修订，保留单体标记和死亡群体真伤规则",
+          "message": "Error: [sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'\n    at fail (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:81:32)\n    at sourceCardLibrary (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:166:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\sync-cards-from-live.test.js:31:35\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hook"
+        },
+        {
+          "name": "sync-cards-from-live 源码有效卡库（六文件沙箱） diff 对齐口径：完全一致的输入零差异",
+          "message": "Error: [sync-cards] 卡库源码沙箱求值失败: Unexpected token 'export'\n    at fail (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:81:32)\n    at sourceCardLibrary (D:\\素材\\代号柒\\搜打撤\\scripts\\sync-cards-from-live.mjs:166:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\sync-cards-from-live.test.js:39:34\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hook"
+        }
+      ]
+    },
+    {
+      "file": "workflow-cli-integration.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "流程入口集成 八份类型配置确实纳入证据指纹（DEBT-2 strict 扩面起随配置数走）",
+          "message": "AssertionError: expected [ { …(2) }, { …(2) }, { …(2) }, …(7) ] to have a length of 8 but got 10\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1257:20)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\workflow-cli-integration.test.js:159:21\n    at processTicksAndRejections (node:internal/process/task"
+        }
+      ]
+    }
+  ]
+}

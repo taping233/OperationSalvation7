@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import mapData from '../game/data/map.json';
 

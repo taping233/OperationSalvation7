@@ -6,18 +6,19 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { game } from './game.session.kernel.js';
 import { modeCfg } from './game.session.modes.js';
-import { canAcceptCardAtCapacity, PEARL_BOX_ID, PEARL_BOX_SLOTS, stackCapOf } from '../core/card-capacity.js';
+import { canAcceptCardAtCapacity, resourceContainerBonus, stackCapOf } from '../core/card-capacity.js';
+import { cardStacksForZone, formatBagCapacity } from '../core/bag-render-derivation.js';
+import { refreshedCardFace } from '../cards/card-instance.js';
 export { PEARL_BOX_ID, stackCapOf } from '../core/card-capacity.js';
 
 // ---------- 背包容量（基地扩建后生效）----------
 // 物资与卡牌混占背包格：装备每张占1格，其余同名卡/散装物资每3张（件）占1格；
 // 安全格独立计容（基地用口粮升级），消耗区不占格（无限容量）。
 // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
-const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
+const pearlBonus = () => resourceContainerBonus(game.ownedCards || []);
 export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
 export function bagCapacityText() {
-  const base = SDT.Base.bagCap(), extra = pearlBonus(), used = usedSlots();
-  return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源扩展格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
+  return formatBagCapacity({ baseCap:SDT.Base.bagCap(), resourceBonus:pearlBonus(), used:usedSlots() });
 }
 // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
 export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, {
@@ -30,22 +31,7 @@ export function cardStacks(safe) {
   // 先按卡名聚合，再按叠放上限切分成多格（同名可能占多格，#7）
   // 2026-09-10 留言 #29：存入珍珠盒的资源卡（o.stored）不占背包格——从堆叠统计里排除，
   // 背包格渲染与容量口径（usedSlots/canAcceptCard）随之自动生效
-  const map = new Map();
-  game.ownedCards.forEach(o => {
-    if (o.stored) return;
-    if (!!o.safe !== !!safe) return;
-    const key = o.card.name;
-    if (!map.has(key)) map.set(key, { card: o.card, uids: [] });
-    map.get(key).uids.push(o.uid);
-  });
-  const out = [];
-  map.forEach(({ card, uids }) => {
-    const cap = stackCapOf(card);
-    for (let i = 0; i < uids.length; i += cap) {
-      out.push({ card, count: Math.min(cap, uids.length - i), uids: uids.slice(i, i + cap) });
-    }
-  });
-  return out;
+  return cardStacksForZone(game.ownedCards, safe);
 }
 export function usedSlots() { return game.inventory.reduce((sum, item) => sum + Math.ceil((item.count || 1) / 3), 0) + cardStacks(false).length; }
 export function safeUsed() { return cardStacks(true).length; }
@@ -106,7 +92,7 @@ export function gainCoins(n) {
 }
 
 // 按现行卡库刷新背包/仓库里的卡牌快照克隆（2026-09-10 留言 #22/#37）。
-// 卡面数值与描述以卡库为准；下划线开头的运行时字段（法师锦囊 _pouch 等）是局内状态，原样保留。
+// 卡面数值与描述以卡库为准；保留单局数据及未知历史扩展，清理由实例合同列明的临时字段。
 export function refreshCardClones(cards) {
   if (!Array.isArray(cards) || !SDT.Cards || typeof SDT.Cards.all !== 'function') return 0;
   const libById = new Map(SDT.Cards.all().map(c => [c.id, c]));
@@ -114,12 +100,11 @@ export function refreshCardClones(cards) {
   cards.forEach(card => {
     if (!card || !card.id) return;
     const lib = libById.get(card.id);
-    if (!lib) return;
-    const keep = {};
-    Object.keys(card).forEach(k => { if (k.startsWith('_')) keep[k] = card[k]; });
-    const fresh = { ...lib, ...keep };
-    // 字段级比较：有实际变化才替换并计数，避免无谓的存档抖动
-    if (JSON.stringify(fresh) !== JSON.stringify(card)) { Object.keys(card).forEach(k => delete card[k]); Object.assign(card, fresh); n++; }
+    if (!lib || card === lib) return;
+    const fresh = refreshedCardFace(lib, card);
+    // 计数仍只反映内容变化；内容相同时也隔离旧浅拷贝共享的嵌套规则与锦囊数据。
+    if (JSON.stringify(fresh) !== JSON.stringify(card)) { Object.keys(card).forEach(k => delete card[k]); n++; }
+    Object.assign(card, fresh);
   });
   return n;
 }

@@ -10,7 +10,7 @@
  *                     amount 为正整数折扣步长——矩阵草案的 -1 过不了 schema 正整数校验）；
  *   tt2-comboarrow    攻（-1），上一张武术则 0 费 → damage + previousCardTypeFree type:'武术'；
  *   tt2-forestarrow   攻（-1），+3 甲 → damage + armor amount:3（字面量，M1 混合目标放行）；
- *   tt2-piercearrow   同 forestarrow 同构（获得 3 点护甲）；
+ *   tt2-piercearrow   攻（-1），附加破甲 2 回合（2026-10-20 定版修订）；
  *   tt2-swiftarrow    攻（-1），抽 1 → damage + draw amount:1（amountField 锚定不得与 damage
  *                     混排，字面量与卡面 draw 字段一致仍满足 declaresField 契约——A3 先例）；
  *   tt7-fullstrike    攻（+5），抽 1 → 同 swiftarrow 同构；
@@ -66,7 +66,7 @@ const definitions = new Map([
   ['cc-chase-slash', withCostModifiers([{ kind: 'martialPlayedDiscount', amount: 1 }])],
   ['tt2-comboarrow', withCostModifiers([{ kind: 'previousCardTypeFree', type: '武术' }])],
   ['tt2-forestarrow', dmgOneWith([{ op: 'armor', amount: 3 }])],
-  ['tt2-piercearrow', dmgOneWith([{ op: 'armor', amount: 3 }])],
+  ['tt2-piercearrow', dmgOneWith([{ op: 'curse', curse: 'abreak', duration: 2, target: 'chosenEnemy' }])],
   ['tt2-swiftarrow', dmgOneWith([{ op: 'draw', amount: 1 }])],
   ['tt7-fullstrike', dmgOneWith([{ op: 'draw', amount: 1 }])],
   ['tt7-throwblade', dmgOneWith([

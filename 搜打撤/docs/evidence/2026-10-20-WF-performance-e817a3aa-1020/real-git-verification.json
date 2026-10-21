@@ -1,0 +1,33 @@
+{
+  "commit": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "tree": "e89af07b7c0d2e09a871831f4453f2dcb84c9c2f",
+  "trueParent": "57dd6c68b9deb1318a500ee458ba08c76830e9ce",
+  "commitRawBodyBytes": 274,
+  "exactCommitBytesVerified": true,
+  "shallow": true,
+  "shallowBoundary": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "worktree": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration",
+  "gitdir": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-git",
+  "readOnlyAlternate": "/workspace/scratch/b7a53a06c872/game-work-9b0fe799/.git/objects",
+  "createdObjects": {
+    "blob": 1347,
+    "tree": 177,
+    "commit": 1
+  },
+  "compressedObjectBytes": 39291470,
+  "indexEntries": 18611,
+  "indexBytes": 2739891,
+  "indexSha256": "1507537f74e88479efe18b9c14e97c1615911f7399f183879793ec4c64285a03",
+  "indexExactlyMatchesRealTree": true,
+  "stagedChanges": 0,
+  "worktreeEditsStaged": false,
+  "remoteConfigured": false,
+  "fsckExitCode": 0,
+  "fsckLog": "/workspace/scratch/b7a53a06c872/sync-e817a3aa/real-git-fsck.log",
+  "allocatedMetadataFileBytes": 45920256,
+  "freeBytes": 589942784,
+  "protectedOldIndexLogicalSha256": "32e399220a2e38961b5142bbf92cb5ebda959cbb62abbc97dc7dee27b7ccf721",
+  "protectedOldGeneratedManifestSha256": "597e181fad22dc4453ab2ad8992006d73b331cdb2e912a2cf750ae785649deed",
+  "limitation": "Real e817 commit and entire source tree are present; parent ancestry is intentionally unavailable beyond the standard shallow boundary. This is not a full-history checkout or proof that worktree patches have been staged or accepted.",
+  "allocatedMetadataTotalBytesIncludingDirectories": 47017984
+}

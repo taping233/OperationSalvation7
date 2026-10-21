@@ -1,5 +1,6 @@
 import './base.js';
 import { clone, fail, freezeDeep, stable, validSlot } from './commands.shared.js';
+import { withSlotWriteLock } from './slot-write-lock.js';
 
 const Base = () => window.SDT.Base;
 
@@ -51,6 +52,17 @@ function readBaseReceipt(context, identity) {
 }
 
 async function commitBase(context, preparedChange) {
+  const invalid = validateContext(context);
+  if (invalid) return invalid;
+  const base = Base();
+  if (base.slot == null || base.slot !== context.slotId) return fail('INVALID_STATE', '提交档位与当前游玩档位不一致');
+  const locked = await withSlotWriteLock(context.slotId,
+    lease => commitBaseLocked(context, preparedChange, lease),
+    { isCurrent: () => Base() === base && base.slot === context.slotId });
+  return locked.ok ? locked.value : locked;
+}
+
+function commitBaseLocked(context, preparedChange, lease) {
   const invalidContext = validateContext(context);
   if (invalidContext) return invalidContext;
   if (Base().slot == null) return fail('INVALID_STATE', '标题页尚未选择档位，不能提交基地命令');
@@ -62,6 +74,7 @@ async function commitBase(context, preparedChange) {
   }
 
   const base = Base();
+  if (!base._flushCheckpointForCommit(context.slotId, lease)) return fail('SAVE_FAILED', '基地进度尚未保存，请重试', true);
   const current = base._readForCommit(context.slotId);
   if (!current) {
     const issue = base.issue(context.slotId);
@@ -111,7 +124,7 @@ async function commitBase(context, preparedChange) {
   };
 
   try {
-    base._writeCommitted(context.slotId, afterState);
+    base._writeCommitted(context.slotId, afterState, lease);
   } catch {
     return fail('SAVE_FAILED', '基地存档写入失败', true);
   }

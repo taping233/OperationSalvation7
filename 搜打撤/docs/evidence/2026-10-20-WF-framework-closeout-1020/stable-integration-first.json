@@ -1,0 +1,58 @@
+{
+  "kind": "stable-integration-first",
+  "startedAt": "2026-10-20T16:42:53.989Z",
+  "completedAt": "2026-10-20T16:48:48.548Z",
+  "files": 748,
+  "total": 7690,
+  "passed": 7644,
+  "failed": 8,
+  "skipped": 38,
+  "success": false,
+  "inputs": {
+    "files": 3760,
+    "before": "fac33168af06b10e40b486ee28b239951405188e20c9707e3bcd4ebeb4c4f126",
+    "after": "fac33168af06b10e40b486ee28b239951405188e20c9707e3bcd4ebeb4c4f126",
+    "unchanged": true
+  },
+  "raw": {
+    "report": ".tmp/framework-closeout-1020/final-all.json",
+    "reportSha256": "c87df074b3f0eb995e4845a9df8d0375037a9d10058751d6d51c2c5c3561ceb9",
+    "log": ".tmp/framework-closeout-1020/final-all.log",
+    "logSha256": "6d82f4bdf75f02ee177dee1b6f9c32ce8fbf410451b3ce5556bf14ab8253d052"
+  },
+  "failures": [
+    {
+      "file": "boot.test.js",
+      "cases": [
+        "启动链（DOMContentLoaded → showTitle） 唯一敌人也需确认目标；键盘选中可取消且确认前不扣资源"
+      ]
+    },
+    {
+      "file": "e8-card-migration.test.js",
+      "cases": [
+        "E8 legacy BattleSession contract investigation (not migration benefit) 'tt-jinchuangyao' keeps the recorded fixed heal and status gates",
+        "E8 legacy BattleSession contract investigation (not migration benefit) 'tt4-woodify' keeps the recorded fixed heal and status gates",
+        "E8 legacy BattleSession contract investigation (not migration benefit) 'starter-emergency-bandage' keeps the recorded fixed heal and status gates"
+      ]
+    },
+    {
+      "file": "framework-independent-battles.test.js",
+      "cases": [
+        "independent battle instances in Node cancels a paused instance and starts its next battle while another async action stays valid"
+      ]
+    },
+    {
+      "file": "m-execute-consume.test.js",
+      "cases": [
+        "M repeated execution and consumption sweeps defeated foes even when the combat port only changes hp"
+      ]
+    },
+    {
+      "file": "structured-backupcell.test.js",
+      "cases": [
+        "后备能源的结构化打出合同 preserves legacy draw and refill order in normal mode when display text changes",
+        "后备能源的结构化打出合同 preserves legacy draw and refill order in boss mode when display text changes"
+      ]
+    }
+  ]
+}

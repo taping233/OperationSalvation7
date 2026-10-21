@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a157e7-0b27-77b2-9462-0fecb53cc289\\exec-c99a7760-82e6-4820-87ad-7334a14a72f6.png",
+  "source_sha256": "2cbf77164a7bc89fc19951875cc2a2fd86bc1cf5b99e22720853484de3dd0088",
+  "asset": "game\\assets\\reconstruction\\wallpaper-wu-bass-1020.webp",
+  "sha256": "a01ec7e5a298f173decbc72b9b83999dda1ba72012f265f949803603de55d9b3",
+  "bytes": 359894,
+  "size": [
+    1672,
+    941
+  ],
+  "previous_sha256": "9e435d8b6e635cc7810fa1ee77f1b5d93c6941f0f7120e54e61d07f4a216892a",
+  "backup": "D:\\素材\\代号柒\\.tmp\\imagegen\\wu-bass-polish-1020\\before-final.webp",
+  "verification": "Selected asset audit passed. Codex built-in browser current window at http://127.0.0.1:5200 shows wallpaper 4/6, updated final-face-1020 background, opacity 1, no console errors. Screenshot final-home.png. No build/full tests/commit."
+}

@@ -1,0 +1,144 @@
+{
+  "recordedAt": "2026-10-20T22:15:20.3134290+08:00",
+  "timing": "Recorded after final target-only test; no claim of same-time first-run baseline",
+  "inputs": [
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "sha256": "6A8BFEB28EB021F2A3A4B2B49A77BB33BF5A032CC082C6282D89EF1921F02255",
+      "bytes": 36009,
+      "lastWriteTime": "2026-10-20T22:12:28.0274255+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "sha256": "38735176857AEEE1FF86D3199D0284D9E43BD4F330778A0DED6CAF133725A8BB",
+      "bytes": 13020,
+      "lastWriteTime": "2026-10-20T22:13:16.3066508+08:00"
+    },
+    {
+      "path": "game/src/cards/card-description-links.js",
+      "sha256": "AF54CB8952247371D8A63A40E3213063050540A49972907BD9759E14547B53A8",
+      "bytes": 4563,
+      "lastWriteTime": "2026-10-20T22:11:13.6029436+08:00"
+    },
+    {
+      "path": "game/src/cards/structured-card-description.js",
+      "sha256": "3BE02C9985C2E66B1BDC1261CC5CB0E90EFF23A6142CCC56F072CA0B25FA140D",
+      "bytes": 2928,
+      "lastWriteTime": "2026-10-20T22:13:16.3051446+08:00"
+    },
+    {
+      "path": "tests/sts2-structured-description.test.js",
+      "sha256": "E45FE2DB050BF023AAE3D01E267A65F2DABE0B8518607091F8B5C5EC2CE17EF3",
+      "bytes": 6402,
+      "lastWriteTime": "2026-10-20T22:13:50.8452594+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "sha256": "1B36066F8CF8BBCA3B37BDD31FB3F3E15B9A5E0657F76890444BE964105A10FE",
+      "bytes": 104259,
+      "lastWriteTime": "2026-10-20T22:15:13.6388968+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.consts.js",
+      "sha256": "93AFE56EF8BA05E4EC72A976241973E89F54A1254B5F36178D73D33A265810AD",
+      "bytes": 6103,
+      "lastWriteTime": "2026-10-03T01:12:54.0904931+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.catalog.js",
+      "sha256": "8BE4BEC49C82B5E3BB023BE7FBE623FCDBB82ACE680100AE477CB917B981A823",
+      "bytes": 1750,
+      "lastWriteTime": "2026-09-23T23:09:36.3368576+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "sha256": "4E818B3FD9273BAF7F470D5D6B223A2F457589CE9366E7983A62C93AA968C49A",
+      "bytes": 60555,
+      "lastWriteTime": "2026-10-20T22:15:13.6398968+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "sha256": "613D57098BD70ABB98862C9DF4ADE7BC04B52E8EFFB7E27E185231642AF485ED",
+      "bytes": 17915,
+      "lastWriteTime": "2026-10-18T13:41:47.7696721+08:00"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "sha256": "B438758D2494F9173B998678718CB467EC250CE3C307699EA0F62D57CA493322",
+      "bytes": 72688,
+      "lastWriteTime": "2026-10-20T22:13:21.0517589+08:00"
+    },
+    {
+      "path": "game/data/cards-sync.json",
+      "sha256": "1AE95746A9F5037142737EFEDB32AA451441EC56FE570C6AB15EC7F4CFB715DF",
+      "bytes": 24941,
+      "lastWriteTime": "2026-10-10T15:49:51.6150277+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m1.js",
+      "sha256": "E05AB9D7484406E4328F2BD8E8C88681E1431F62A9A6B0A2BFD4965C6B75CF8B",
+      "bytes": 4083,
+      "lastWriteTime": "2026-10-02T07:44:47.8705967+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m10.js",
+      "sha256": "08D4BAE0C89973BEED5A544C54C7D95092F7447F2EB4750E5986A9F207C6E756",
+      "bytes": 1843,
+      "lastWriteTime": "2026-10-19T20:04:49.1496463+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "sha256": "7BD8A10FDE163F5BD54673BF604449659CF3AB50457EFB5144056D3938F1CAD1",
+      "bytes": 2157,
+      "lastWriteTime": "2026-10-10T00:44:11.3369557+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "sha256": "EDB80C7416EB48AACB0769AEB8C7BBDCE195770839689855C53119EBFFDC6B68",
+      "bytes": 8367,
+      "lastWriteTime": "2026-10-02T07:44:47.8733907+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "sha256": "7F8739B4316533C9B5B34309954CDBAE2F32E0E62BD8A76E30A8E0AE1ED1FB42",
+      "bytes": 12436,
+      "lastWriteTime": "2026-10-19T20:15:29.6093857+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m4.js",
+      "sha256": "13EB6767B010D64CA1DB098BFFD048E9A9A1F52244F6955C2D39D7055F3AB105",
+      "bytes": 5057,
+      "lastWriteTime": "2026-10-10T00:49:08.1409218+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "sha256": "667A158C413195E7278BA9CD89CC27E2DD14DA61EE27276E2F424D3F0227E4E3",
+      "bytes": 8936,
+      "lastWriteTime": "2026-10-02T07:44:47.8744887+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m6.js",
+      "sha256": "E9C39B6ADEB0316AF4F0956BFAC4691BF62804FF33B8C5E821C3408A92225ECC",
+      "bytes": 6144,
+      "lastWriteTime": "2026-10-19T20:06:37.0279870+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m7.js",
+      "sha256": "C3A6E7D6729E176F45E1805B779B86E922649611115D630FF09F867E676B5CB8",
+      "bytes": 4007,
+      "lastWriteTime": "2026-09-29T10:01:01.2635481+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m8.js",
+      "sha256": "FEDECA1FD65CB45D5D93379D7D987D916EE230A2AE088262F5942BE007806E3B",
+      "bytes": 3389,
+      "lastWriteTime": "2026-10-02T07:44:47.8744887+08:00"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m9.js",
+      "sha256": "B8041FDAA22993E0CF03605A474AA0238D0E71DEE369B3B2E64A5AC6A4CBADC0",
+      "bytes": 3104,
+      "lastWriteTime": "2026-10-06T00:56:22.8025408+08:00"
+    }
+  ]
+}

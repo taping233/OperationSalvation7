@@ -1,0 +1,13 @@
+{
+  "status": "passed-scoped-checks",
+  "asset": "game/assets/reconstruction/wallpaper-baita-station-1020.webp",
+  "size": [1672, 941],
+  "checks": {
+    "initialWallpaperTests": "12 passed; checks.json. Logic unchanged by staircase image revision.",
+    "updatedAssetAudit": "Selected asset passed; stairs-checks.json. Global audit has 95 unrelated historical errors.",
+    "browser": "Codex in-app browser localhost:5200, current 1920x1080 window; real clicks 5->1->2->3->4->5, reload restores 5/5; only-wallpaper/restored-interface controls exercised; fifth layer opacity1 with stairs2-1020 URL, other four0, crossfade0.5s; captured console errors empty.",
+    "visual": "Latest corrected step sequence shown in game; full figure, feet and ticket retained. Tread perspective assessment remains subject to user visual review.",
+    "screenshots": ["home-installed-stairs.png", "wallpaper-stairs-final.png"]
+  },
+  "limits": "No multi-size testing, full suite, build, commit, or game-save interaction. Browser evidence represents five-wallpaper state before any other session adds a sixth wallpaper."
+}

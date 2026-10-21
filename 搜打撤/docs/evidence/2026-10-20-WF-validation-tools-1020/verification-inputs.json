@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "file": "scripts/workflow-evidence.mjs",
+      "sha256": "e7083b3ea3f005d5bf3c1b661b376eca3078eb2108442cdad334e8d0731b5f4f"
+    },
+    {
+      "file": "tests/workflow-doctor.test.js",
+      "sha256": "4233d32ee6d553f93fbaafd128520d0ff83902a0342f5cf566f117878e62c538"
+    },
+    {
+      "file": "tests/workflow-tools.test.js",
+      "sha256": "4eb81ffcfbfb74abc1af6982fe02c735bd2629b1a035e7a6548ea860e7c7c7e6"
+    },
+    {
+      "file": "scripts/workflow-doctor.mjs",
+      "sha256": "1850eaf898933c727652a6d762986ca0d8071cb63071d651bac2aa41009c28dd"
+    },
+    {
+      "file": "scripts/gate-plan.mjs",
+      "sha256": "bfffa3981dceecabe0a46e12d9e181d28e9191361e9ec67bbe501fd6319c9147"
+    },
+    {
+      "file": "scripts/acceptance-gate.mjs",
+      "sha256": "f3bd5d6bf16bdb9c80f74f02afcc39a82c8764120eaa3e9a57ff9a0a1eec2cac"
+    }
+  ],
+  "snapshot": "C:/Users/太平/AppData/Local/Temp/sdt-reward-flow-1020-01a157fe/project",
+  "note": "doctor、选择器和实际门实现未修改；snapshot的三个计划入口与原工作区哈希相同。"
+}

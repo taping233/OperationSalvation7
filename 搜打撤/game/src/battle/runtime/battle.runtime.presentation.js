@@ -1,19 +1,30 @@
-/* 渲染回调、飘字、卡牌演出和快照缓存。由 battle.runtime.js 转发活绑定。 */
-export let renderBattle = () => {};
-export let floats = [];
-export let cardAnims = [];
-export let presentationActionSeq = 0;
-export let dreadShown = false;
-export let snapCache = null, snapSig = null;
+import { defaultBattleRuntime as runtime } from './battle.runtime.default.js';
 
-
-/* —— 域内聚合接口（2026-09-24 状态袋打薄试点）：散 set$Xxx 调用收敛到本域 —— */
-export function bindBattleRenderer(renderer) { renderBattle = renderer; }
-export function showDread() { dreadShown = true; }
-export function hideDread() { dreadShown = false; }
-export function takeBattleFloats() { const list = floats; floats = []; return list; }
-export function takeBattleCardAnims() { const list = cardAnims; cardAnims = []; return list; }
-export function clearBattlePresentation() { floats = []; cardAnims = []; }
-export function resetBattlePresentation() { floats = []; cardAnims = []; presentationActionSeq = 0; }
-export function nextActionSeq() { presentationActionSeq += 1; return presentationActionSeq; }
-export function storeBattleSnapshot(sig, snap) { snapSig = sig; snapCache = snap; }
+// Derived ESM bindings preserve existing readers; mutable data lives in runtime.
+export let renderBattle = runtime.renderBattle;
+export let floats = runtime.floats;
+export let cardAnims = runtime.cardAnims;
+export let presentationActionSeq = runtime.presentationActionSeq;
+export let dreadShown = runtime.dreadShown;
+export let snapCache = runtime.snapCache;
+export let snapSig = runtime.snapSig;
+runtime.subscribe((state, key) => {
+  switch (key) {
+    case 'renderBattle': renderBattle = state.renderBattle; break;
+    case 'floats': floats = state.floats; break;
+    case 'cardAnims': cardAnims = state.cardAnims; break;
+    case 'presentationActionSeq': presentationActionSeq = state.presentationActionSeq; break;
+    case 'dreadShown': dreadShown = state.dreadShown; break;
+    case 'snapCache': snapCache = state.snapCache; break;
+    case 'snapSig': snapSig = state.snapSig; break;
+  }
+});
+export const bindBattleRenderer = runtime.bindBattleRenderer;
+export const showDread = runtime.showDread;
+export const hideDread = runtime.hideDread;
+export const takeBattleFloats = runtime.takeBattleFloats;
+export const takeBattleCardAnims = runtime.takeBattleCardAnims;
+export const clearBattlePresentation = runtime.clearBattlePresentation;
+export const resetBattlePresentation = runtime.resetBattlePresentation;
+export const nextActionSeq = runtime.nextActionSeq;
+export const storeBattleSnapshot = runtime.storeBattleSnapshot;

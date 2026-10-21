@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T18:21:26.854Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口真实切换6→1→2→3→4→5，点击只看壁纸；指定exec-5401版本以selected-5401-1020缓存URL加载。",
+  "screenshot": {
+    "path": "selected-wallpaper-installed.png",
+    "bytes": 151880,
+    "sha256": "f007344287754d832d3c2fb275602f707f105c11ec940e552a9d13dd88bfb96e"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 1486,
+      "src": "http://localhost:5200/assets/title-wordmark.png",
+      "width": 3200
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/tools.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

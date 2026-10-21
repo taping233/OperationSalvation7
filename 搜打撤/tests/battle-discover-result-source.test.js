@@ -50,20 +50,22 @@ it.each(['structured','legacy'])('灵能召唤%s路径先候选后授予，只�
  const source={...canonical('cmtn1epgt20j')};if(path==='legacy')delete source.rules;
  const options=[1,2,3].map(i=>({id:`choice-${i}`,name:`注能候选${i}`,type:'法术',rarity:'稀有',cost:1,infuse:1,desc:'注能(1)：回复2点生命。'}));
  const game=makeGame([source]);BattleSession.start(game,[{id:'foe',name:'靶',hp:50,atk:0}],{isBoss:false});
+ const before=R.granted.length;expect(before).toBe(99);
  vi.spyOn(C,'all').mockReturnValue(options);BattleSession.commands.playCard('runtime-0','self');await settle();
- expect(R.discovering.act).toBe('noInfuse');expect(R.discovering.options.length).toBe(3);expect(R.granted).toHaveLength(0);
+ expect(R.discovering.act).toBe('noInfuse');expect(R.discovering.options.length).toBe(3);expect(R.granted).toHaveLength(before);
  const chosen=R.discovering.options[1].id;BattleSession.commands.pickDiscover(1);await settle();
- expect(R.granted).toHaveLength(1);expect(R.granted[0].card).toMatchObject({id:chosen,_noInfuse:true});
+ expect(R.granted).toHaveLength(before+1);expect(R.granted[before].card).toMatchObject({id:chosen,_noInfuse:true});
  expect(options.every(option=>!Object.hasOwn(option,'_noInfuse'))).toBe(true);
- BattleSession.commands.pickDiscover(1);await settle();expect(R.granted).toHaveLength(1);
+ BattleSession.commands.pickDiscover(1);await settle();expect(R.granted).toHaveLength(before+1);
 });
 
 it('连续免注能发现每轮独立实例，退出后不授予旧候选',async()=>{
  const source={...canonical('cmtn1epgt20j'),rules:structuredClone(canonical('cmtn1epgt20j').rules)};source.rules.triggers.onPlay[0].n=2;
  const option={id:'repeat-infuse',name:'连续候选',type:'法术',rarity:'稀有',cost:1,infuse:1,desc:'注能(1)：回复2点生命。'};
  const game=makeGame([source]);BattleSession.start(game,[{id:'foe',name:'靶',hp:50,atk:0}],{isBoss:false});
+ const before=R.granted.length;expect(before).toBe(99);
  vi.spyOn(C,'all').mockReturnValue([option]);BattleSession.commands.playCard('runtime-0','self');await settle();
- BattleSession.commands.pickDiscover(0);await settle();expect(R.discovering.act).toBe('noInfuse');expect(R.granted).toHaveLength(1);
- BattleSession.commands.pickDiscover(0);await settle();expect(R.granted).toHaveLength(2);expect(R.granted[0].uid).not.toBe(R.granted[1].uid);expect(R.granted[0].card).not.toBe(R.granted[1].card);expect(option._noInfuse).toBeUndefined();
+ BattleSession.commands.pickDiscover(0);await settle();expect(R.discovering.act).toBe('noInfuse');expect(R.granted).toHaveLength(before+1);
+ BattleSession.commands.pickDiscover(0);await settle();expect(R.granted).toHaveLength(before+2);expect(R.granted[before].uid).not.toBe(R.granted[before+1].uid);expect(R.granted[before].card).not.toBe(R.granted[before+1].card);expect(option._noInfuse).toBeUndefined();
  BattleSession.commands.flee();await settle();BattleSession.commands.pickDiscover(0);await settle();expect(R.discovering).toBeNull();
 });

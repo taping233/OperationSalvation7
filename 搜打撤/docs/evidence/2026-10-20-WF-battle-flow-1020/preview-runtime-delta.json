@@ -1,0 +1,33 @@
+{
+  "copiedAt": "2026-10-20T15:57:09.929Z",
+  "inputs": [
+    {
+      "path": "game/src/battle/runtime/battle.runtime.factory.js",
+      "sha256": "637efeee823c17cae85c58924f58de9a8091de54701c4b7b01661f4ef3150fe6"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.default.js",
+      "sha256": "34ac56db1a48ca21f1721e92eb54e45c5942642d84eae19346733fe3db8e6a89"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "sha256": "9e75fa70bedf2a64b13b872c9fade3578698130d6e469c02a21caf54bbb1d727"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "sha256": "02322d2e60986e7dce3c50e4fed94f1ad3952092f167cbb932b914e07b6d61cf"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "sha256": "83247c6da29c41b063c82e391f1a752f5410f2a61eced8557c4c36e860f2bec7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "sha256": "018d74bfc92116d6c36377a85a9c406abfd19606e93a6d45540edf3b624f3524"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "sha256": "9941e3c54db25af269100dd1d8bc673f2117a229ff074fb8528db16550253aaf"
+    }
+  ]
+}

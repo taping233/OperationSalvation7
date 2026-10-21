@@ -1,0 +1,51 @@
+{
+  "tool": "built-in image_gen; Wu supplied original",
+  "size": [
+    1024,
+    1536
+  ],
+  "items": [
+    {
+      "id": "wu",
+      "source": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+      "prompt": "老板指定原图直接替换，无重绘。",
+      "references": []
+    },
+    {
+      "id": "changwuyu",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+      ],
+      "prompt": "Repaint image 2 in the painting language of image 1. IMAGE 1 IS THE PRIMARY STYLE AUTHORITY, image 2 ONLY identifies the character, costume, pose and principal props. Match image 1's clearly Japanese anime drawing, economical facial anatomy, opaque matte painted color planes, coherent directional hair strokes, broad shadow groups with structured smaller angular brush marks. Faces and skin calm and delicately anime, cloth and hair have firmer painted edges. Keep painterly volume and meaningful fold structure: neither glossy over-rendered illustration nor flat cel-shaded simplification. Eliminate random micro-wrinkles, noisy fragmented glints and decorative surface mottling. Gold trim should be a few readable painted strokes rather than reflective jewel-like filigree. Do not copy image 1's identity or black dress. Subject: slender adult elf with silver low-tied hair, pointed ears, golden eyes behind thin round glasses, adjusting-glasses pose, crooked black witch hat with purple underside, black gold-edged robe and purple-lined cape, feather and sapphire brooch, black smoke orb and orange fire orb. Preserve image 2 pose, costume silhouette, colors and all principal props. White background, full body and props entirely visible, centered portrait, EXACT 1024x1536. Match image 1's comfortable full-body scale. No text, UI, frame, watermark, photorealism or 3D.",
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-8c59bbf1-fb99-4376-a1fa-d4db75dbdc74.png"
+    },
+    {
+      "id": "baita",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+      ],
+      "prompt": "Repaint image 2 in the painting language of image 1. IMAGE 1 IS THE PRIMARY STYLE AUTHORITY, image 2 ONLY identifies the character, costume, pose and principal props. Match image 1's clearly Japanese anime drawing, economical facial anatomy, opaque matte painted color planes, coherent directional hair strokes, broad shadow groups with structured smaller angular brush marks. Faces and skin calm and delicately anime, cloth and hair have firmer painted edges. Keep painterly volume and meaningful fold structure: neither glossy over-rendered illustration nor flat cel-shaded simplification. Eliminate random micro-wrinkles, noisy fragmented glints and decorative surface mottling. Gold trim should be a few readable painted strokes rather than reflective jewel-like filigree. Do not copy image 1's identity or black dress. Subject: adult woman, dark brown long curly hair, two gold hairpins, green eyes, white blouse and green suspender long skirt; sitting on chair eating strawberry cake with fork, book on lap, two floating books, pale gold magic circle beneath chair. Preserve image 2 pose, costume silhouette, colors and all principal props. White background, full body and props entirely visible, centered portrait, EXACT 1024x1536. Match image 1's comfortable full-body scale. No text, UI, frame, watermark, photorealism or 3D.",
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-58713a71-669d-4548-88c4-f7d0b8ea060e.png"
+    },
+    {
+      "id": "heixiang",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp"
+      ],
+      "prompt": "Repaint image 2 in the painting language of image 1. IMAGE 1 IS THE PRIMARY STYLE AUTHORITY, image 2 ONLY identifies the character, costume, pose and principal props. Match image 1's clearly Japanese anime drawing, economical facial anatomy, opaque matte painted color planes, coherent directional hair strokes, broad shadow groups with structured smaller angular brush marks. Faces and skin calm and delicately anime, cloth and hair have firmer painted edges. Keep painterly volume and meaningful fold structure: neither glossy over-rendered illustration nor flat cel-shaded simplification. Eliminate random micro-wrinkles, noisy fragmented glints and decorative surface mottling. Gold trim should be a few readable painted strokes rather than reflective jewel-like filigree. Do not copy image 1's identity or black dress. Subject: muscular adult dark-tan male, short swept-back charcoal hair, golden eyes and cheek scar, orange scarf, black tactical clothes and single shoulder plate, giant plain silver sword behind back, right hand holds tiny coffee cup and left holds saucer. Preserve image 2 pose, costume silhouette, colors and all principal props. White background, full body and props entirely visible, centered portrait, EXACT 1024x1536. Match image 1's comfortable full-body scale. No text, UI, frame, watermark, photorealism or 3D.",
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-6c492b30-5589-4a41-8bf9-d655a4bac819.png"
+    },
+    {
+      "id": "xingyue",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+      ],
+      "prompt": "Repaint image 2 in the painting language of image 1. IMAGE 1 IS THE PRIMARY STYLE AUTHORITY, image 2 ONLY identifies the character, costume, pose and principal props. Match image 1's clearly Japanese anime drawing, economical facial anatomy, opaque matte painted color planes, coherent directional hair strokes, broad shadow groups with structured smaller angular brush marks. Faces and skin calm and delicately anime, cloth and hair have firmer painted edges. Keep painterly volume and meaningful fold structure: neither glossy over-rendered illustration nor flat cel-shaded simplification. Eliminate random micro-wrinkles, noisy fragmented glints and decorative surface mottling. Gold trim should be a few readable painted strokes rather than reflective jewel-like filigree. Do not copy image 1's identity or black dress. Subject: calm adult priestess with pale blond hair and long thick braid, gold eyes, white crescent clip on viewer-right above bangs, white gold-edged priest dress and dark teal cape, chest-height blessing hand, small star lantern, dark tights and white gray boots. Preserve image 2 pose, costume silhouette, colors and all principal props. White background, full body and props entirely visible, centered portrait, EXACT 1024x1536. Match image 1's comfortable full-body scale. No text, UI, frame, watermark, photorealism or 3D.",
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-729f33a5-223c-4ec5-9cbc-68954d47370f.png"
+    }
+  ]
+}

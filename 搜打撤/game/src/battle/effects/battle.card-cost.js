@@ -1,5 +1,6 @@
 /* Card-cost rules preserve numeric state inputs; an optional consumed-count reader
  * defers runtime pocket inspection until that discount wins the priority chain. */
+import { targetTurnCardCost } from './battle.cost-modifiers.js';
 export function pocketSpellDiscountFor(card) {
   const modifiers = card && card.rules && card.rules.battle && card.rules.battle.costModifiers;
   if (Array.isArray(modifiers)) {
@@ -23,8 +24,17 @@ export function calculateEffectiveCardCost(card, uid, state, readConsumedSpellCo
   if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid && String(uid).startsWith('bts')) {
     return Math.max(0, (+(card.cost || 0)) - 1);
   }
-  // Nature Staff stores one target turn, not an inclusive expiry deadline.
-  if (uid && state.zeroFeeTurn != null && state.zeroFeeTurn === state.turn) return 0;
+  // This slot keeps Nature Staff's existing priority and exact target-turn lifetime.
+  // zeroFeeTurn remains accepted for callers using the earlier numeric contract.
+  const modifier = uid ? state.temporaryCostModifier ?? state.zeroFeeTurn : undefined;
+  const temporaryCost = targetTurnCardCost(card.cost, modifier, state.turn);
+  if (temporaryCost !== null && !modifier?.onlyReduce) return temporaryCost;
+  const cost = calculateConditionalCardCost(card, state, readConsumedSpellCount);
+  // A reduce-only record cannot raise a lower-priority condition's already cheaper result.
+  return targetTurnCardCost(cost, modifier, state.turn) ?? cost;
+}
+
+function calculateConditionalCardCost(card, state, readConsumedSpellCount) {
   if (state.cosmosForm > 0) return 1;
   if (state.spellCost1 && card.type === '法术') return 1;
   if (state.meleeCost1 && card.type === '武术') return 1;

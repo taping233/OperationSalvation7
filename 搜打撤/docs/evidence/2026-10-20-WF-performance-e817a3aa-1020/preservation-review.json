@@ -1,0 +1,26 @@
+{
+  "sourceCommit": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "functionPreservation": [
+    {
+      "name": "closeBagZoom",
+      "unchanged": true
+    },
+    {
+      "name": "openPouchStore",
+      "unchanged": true
+    },
+    {
+      "name": "openPearlStore",
+      "unchanged": true
+    }
+  ],
+  "changedFunctions": [
+    "syncCardOrder",
+    "sortStacksByOrder",
+    "sortBagBy",
+    "bagZoneTiles",
+    "showBackpack"
+  ],
+  "pageLoadingUnchanged": true,
+  "verifiedAt": "2026-10-20T18:01:35.482Z"
+}

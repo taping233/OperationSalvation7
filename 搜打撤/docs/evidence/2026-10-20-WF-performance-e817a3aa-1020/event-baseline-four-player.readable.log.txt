@@ -1,0 +1,38 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/baseline-r6-check
+
+ ✓ tests/four-player-event-regressions.test.js (6 tests) 1199ms
+stderr | VirtualConsole.<anonymous> (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+Error: Uncaught [ReferenceError: requestAnimationFrame is not defined]
+    at reportException (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:169:9)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5 ReferenceError: requestAnimationFrame is not defined
+    at schedule (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:20:30)
+    at MutationObserver.<anonymous> (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:99:5)
+    at MutationObserver.invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/MutationCallback.js:19:26)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+Error: Uncaught [ReferenceError: requestAnimationFrame is not defined]
+    at reportException (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:169:9)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5 ReferenceError: requestAnimationFrame is not defined
+    at schedule (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:20:30)
+    at MutationObserver.<anonymous> (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:99:5)
+    at MutationObserver.invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/MutationCallback.js:19:26)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+Error: Uncaught [ReferenceError: requestAnimationFrame is not defined]
+    at reportException (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:169:9)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5 ReferenceError: requestAnimationFrame is not defined
+    at schedule (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:20:30)
+    at MutationObserver.<anonymous> (/workspace/scratch/b7a53a06c872/performance-e817a3aa-baseline-build/搜打撤/game/src/ui/selection-state-motion.js:99:5)
+    at MutationObserver.invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/MutationCallback.js:19:26)
+    at notifyMutationObservers (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22)
+    at /workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  03:40:47
+   Duration  1.76s (transform 411ms, setup 0ms, collect 53ms, tests 1.20s, environment 285ms, prepare 63ms)

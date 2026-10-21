@@ -70,27 +70,27 @@ describe('整备完整刷新与卡格复用',()=>{
     expect(html.mock.contexts.filter(node=>node instanceof window.HTMLTemplateElement)).toHaveLength(0);
   });
 
-  it('原卡实例的名称/说明/费用原地变化会刷新卡面与筛选；数量变化不冻结',()=>{
+  it('原卡实例的名称/说明/费用原地变化会刷新卡面与筛选；数量变化不冻结',async ()=>{
     open();add();const before=document.getElementById('depMain'),source=base.data.stash[0].card;
     source.name='改名后的牌';source.desc='更新后的规则';source.cost=4;source.type='武术';
-    actions.depPet({id:'dog'});
+    (await actions.depPet({id:'dog'}));
     expect(base.data.stash[0].card).toBe(source);expect(document.getElementById('depMain')).not.toBe(before);
     expect(pool().textContent).toContain('更新后的规则');expect(pool().textContent).toContain('改名后的牌');
     expect(selected().querySelector('.hs-card').textContent).toContain('更新后的规则');
     expect([...document.getElementById('depFilterCost').options].map(o=>o.value)).toContain('4');
-    base.data.stash[0].count=2;actions.depPet({id:'dog'});
+    base.data.stash[0].count=2;(await actions.depPet({id:'dog'}));
     expect(pool().querySelector('.dep-own').textContent).toBe('1');
     expect(selected().querySelector('.dep-n').textContent).toBe('×1');
   });
 
-  it.each(['replace','delete','insert','reorder','variant'])('%s 库存结构变化使旧根失效，按当前库存完整重绘',change=>{
+  it.each(['replace','delete','insert','reorder','variant'])('%s 库存结构变化使旧根失效，按当前库存完整重绘',async change=>{
     open();add();const root=document.getElementById('depMain'),oldAdd=actions.pickAdd;
     if(change==='replace')base.data.stash[0].card={...base.data.stash[0].card,desc:'替换对象的新卡面'};
     if(change==='delete')base.data.stash.splice(0,1);
     if(change==='insert')base.data.stash.unshift({card:card('new'),count:2});
     if(change==='reorder')base.data.stash.reverse();
     if(change==='variant')base.data.stash[0].variantKey='foil';
-    actions.depPet({id:'dog'});
+    (await actions.depPet({id:'dog'}));
     expect(document.getElementById('depMain')).not.toBe(root);
     const expected=base.data.stash.map(s=>`${key(s.card.id)}${s.variantKey?`:${s.variantKey}`:''}`);
     expect([...document.querySelectorAll('#depPool .dep-card')].map(n=>n.dataset.stackKey)).toEqual(expected);
@@ -98,33 +98,33 @@ describe('整备完整刷新与卡格复用',()=>{
     if(change==='replace')expect(pool().textContent).toContain('替换对象的新卡面');
   });
 
-  it.each(['counter','pool-row','bag-face','bag-root'])('%s DOM被移除后不会使用旧节点缓存',kind=>{
+  it.each(['counter','pool-row','bag-face','bag-root'])('%s DOM被移除后不会使用旧节点缓存',async kind=>{
     open();add();
     if(kind==='counter')pool().querySelector('.dep-own').remove();
     if(kind==='pool-row')pool().remove();
     if(kind==='bag-face')selected().querySelector('.hs-card').remove();
     if(kind==='bag-root')document.getElementById('depBag').remove();
-    actions.depPet({id:'dog'});
+    (await actions.depPet({id:'dog'}));
     expect(pool().querySelector('.dep-own').textContent).toBe('2');
     expect(selected().querySelector('.hs-card').textContent).toContain('原始规则');
     expect(document.getElementById('depBag').children).toHaveLength(6);
   });
 
-  it('容量拒绝、筛选和推荐按钮在复用路径保持当前值',()=>{
+  it('容量拒绝、筛选和推荐按钮在复用路径保持当前值',async ()=>{
     base.bagCap=()=>2;open();add();add('b');
     expect(departure.deployPick[key('b')]).toBeUndefined();expect(document.getElementById('depStatus').textContent).toContain('背包格数已满');
     expect(document.getElementById('depCapacity').textContent).toContain('2/2');
     const filter=document.getElementById('depFilterType');filter.value='装备';filter.dispatchEvent(new Event('change'));
     expect([...document.querySelectorAll('#depPool .dep-card')].map(n=>n.hidden)).toEqual([true,true,false]);
-    actions.depPet({id:'dog'});expect(filter.value).toBe('装备');expect(pool('a').hidden).toBe(true);
+    (await actions.depPet({id:'dog'}));expect(filter.value).toBe('装备');expect(pool('a').hidden).toBe(true);
     expect(document.querySelector('[data-act="depRecommendApply"]').disabled).toBe(true);
     expect(document.querySelector('[data-act="depRecommendUndo"]').disabled).toBe(true);
   });
 
-  it('多轮复用只执行一次现有drop监听，重绘后的旧回调不抢新页',()=>{
-    open();add();add();actions.depPet({id:'dog'});actions.depPet({id:'dog'});
+  it('多轮复用只执行一次现有drop监听，重绘后的旧回调不抢新页',async ()=>{
+    open();add();add();(await actions.depPet({id:'dog'}));(await actions.depPet({id:'dog'}));
     drop();expect(departure.deployPick[key('a')]).toBe(1);
-    const old=actions.pickAdd;base.data.stash[0].card.desc='触发完整重绘';actions.depPet({id:'dog'});
+    const old=actions.pickAdd;base.data.stash[0].card.desc='触发完整重绘';(await actions.depPet({id:'dog'}));
     old({stackKey:key('a')});expect(departure.deployPick[key('a')]).toBe(1);
     add();expect(departure.deployPick[key('a')]).toBe(2);
   });

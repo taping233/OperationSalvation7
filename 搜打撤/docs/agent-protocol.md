@@ -20,6 +20,31 @@ for (;;) {
 `SDT.Agent.autoRun({ decide, maxSteps })` 连续驱动一局。
 内置策略 `SDT.Agent.policies.greedy()` / `.random()` 返回 decide 函数，可直接用或作参照。
 
+### 战斗命令复现
+
+`SDT.Agent.replay.capture()` 与 `.play()` 用于受控战斗 fixture 的开发复现。两者都要求可信的本地 `prepare(fixture)` 适配器：它负责识别 fixture ID、恢复种子和规则输入，并通过正常入口重建空闲的第 1 回合。调用会重建测试场景，应在隔离测试对局使用；复现包只含数据，不执行其中的脚本，也不直接写回战斗私有状态。
+
+```js
+// fixture、prepare 和 fingerprint 由本地开发宿主提供。
+// fingerprint = { version: '应用版本', code: '本次运行源码的指纹' }。
+const captured = await SDT.Agent.replay.capture({
+  fixture, prepare, fingerprint, decide, maxCommands: 20,
+});
+if (captured.ok) {
+  const result = await SDT.Agent.replay.play(captured.packet, { prepare, fingerprint });
+}
+```
+
+`capture` 走真实 `Agent.step`，仅接受战斗命令，包含待选目标和其他战斗选择。包内记录 fixture 标识与参数、调用方提供的版本/代码指纹、起点诊断、动作、结果、随机状态和逐步规则摘要。指纹标明 `caller-provided`，接口不会自动证明它等于当前源码。附带的入场检查点只作诊断，恢复能力仍由本地适配器决定。
+
+`play` 在准备场景前检查指纹和包格式，重建后比较初态，再逐命令校验前态、完成结果及后态；首处差异返回命令编号、阶段、字段路径和期望/实际值，不继续下一命令。命令失败、异常、未完成或等待超时会停止记录并标为不可重放。该协议不承诺任意中途存档恢复，也不替代整局流程测试。
+
+规则校验包含有序牌堆、状态、待选流程和费用/成长等诊断字段；`battleToken` 等场次身份不参与比较。触发器闭包登记表的剩余次数等状态尚未纳入诊断，只能在后续命令产生可观察差异时发现，不能据此证明全部引擎内部状态等价。
+
+`visual`、`recording`、`agent-policy` 三条流只用于表现、记录和决策，规则随机比较排除它们。自定义 `decide` 若推进其他随机流或改动诊断投影覆盖的规则状态，记录会拒绝该决策；重放只执行已记录命令，不重跑策略或覆盖玩法随机状态。
+
+默认 `.random()` 使用独立 `agent-policy` 流，传入随机函数的接口不变。同种子的默认随机策略动作序列已随隔离变化，历史实验结果须区分实现版本。
+
 ## 二、observe() 状态 JSON
 
 ```jsonc
@@ -80,6 +105,7 @@ for (;;) {
 - `playCard [uid, 敌人下标]`：指向敌人直接结算；`playCard [uid, "self"]` 指向自己
 - `playDirect [uid]`：跳过注能直接打出（注能态的正出口）
 - `endTurn []` / `flee []`；`pickChoice [i]` / `pickDiscover [i]`；`pickHandSelect [uid]` / `skipHandSelect []`
+- `observe().battle.handSelecting` 提供 `candidateUids` 与 `canCancel`，动作面只列这些UID及允许的跳过。派发前以最新快照复检：选择已结束返回 `HAND_SELECTION_STALE`，UID失效返回 `HAND_SELECTION_UNAVAILABLE`，强制选择跳过返回 `HAND_SELECTION_MANDATORY`；这些拒绝不调用领域命令，最终支付仍由领域复检。
 - `selectDeckCard [uid]` / `confirmDeck []` / `cancelDeck []`（BOSS 编组）
 - `usePotion [uid]` / `useItem [uid, 侧]`（侧=敌人下标或 "self"）/ `openBag []` / `cancelPendingTarget []`
 - `openBag` 保留兼容命令名，战斗中返回拒绝；观察动作面不再提供开背包动作。地图背包与 `sys:discardCard` 同样受战斗禁用约束，独立药水与手牌道具仍按原战斗规则执行。
@@ -107,7 +133,8 @@ for (;;) {
 - `SDT.Agent.setTurbo(true)`：战斗演出等待、移动动画、节点过场、搜索揭晓、通关演出全部短路；
   一局（贪心策略）实测秒级。持久化在 localStorage `sdt-agent-turbo`。
 - `waitSettle({ quietMs, timeoutMs })`：局面签名连续不变且战斗非 busy 才返回；超时返回
-  `{ ok:false, stalled:true, obs }`，绝不无限挂起。
+  `{ ok:false, stalled:true, obs }`，绝不无限挂起。首次加载执行模块也计入同一期限，热入口直接沿用原选项。
+- 冷 `step` 加载超过该等待期限返回 `AGENT_RUNNER_LOAD_TIMEOUT`，不调用迟到决策；可在之后重试。`autoRun` 的停止与局级期限会立即释放冷等待的运行归属，迟到模块只缓存代码。
 - 两分钟预算：纯策略全链路远低于 2 分钟；LLM 决策延迟取决于模型与网络（决策点约 30–80 个）。
 
 ## 五、配套模块（game/src/agent/）
@@ -117,10 +144,14 @@ for (;;) {
 | `agent.protocol.js` | 动作 schema 校验 / 稳定 id（纯模块，Node 可直接 import） |
 | `agent.state.js` | observe() 状态组装（game + 战斗快照 + 弹层动作面） |
 | `agent.surface.js` | 弹层 data-act 动作面扫描（零侵入，不改页面代码） |
-| `agent.runner.js` | act 路由 / settle 等待 / step / autoRun |
+| `agent.runner.js` / `agent.run-control.js` | 同步动作/停止门面与单一运行归属；异步驱动首次使用时加载，冷等待可取消并受局级期限约束 |
+| `agent.action-router.js` | act 路由、同步受理回执、异步命令完成追踪与对局归属校验 |
+| `agent.runner.runtime.js` | 按需加载的 settle 等待 / step / autoRun 执行 |
+| `agent.replay.js` / `agent.replay.runtime.js` | Promise 回放门面及按需加载的可信 fixture 记录/重放 |
 | `agent.policy.js` | 内置随机 / 贪心策略（统计基线） |
 | `../core/turbo.js` | 快进总闸（battle.clock / moveTo / 过场共用；2026-10-02 兼容壳 agent.turbo.js 退役） |
-| `agent.llm.js` | 内置 OpenAI 兼容适配器（见下） |
+| `agent.llm.js` / `agent.llm-parser.js` | 同步配置与策略工厂、纯回复解析；已配置决策的冷加载可取消/超时并报告回退 |
+| `agent.llm.runtime.js` | 按需加载的 OpenAI 兼容请求、重试与超时执行（见下） |
 | `agent.recorder.js` / `agent.stats.js` | 逐局记录与聚合统计（数据分析系统） |
 
 ## 六、内置 LLM 适配器

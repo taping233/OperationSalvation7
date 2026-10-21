@@ -154,7 +154,7 @@ it.each(['beforeUse', 'beforeDue'])('神秘药水%s沉默仍兑现产卡，其�
   if (timing === 'beforeUse') R.pstat.status.silence = 3;
   BattleSession.commands.usePotion('runtime-0'); await settle();
   if (timing === 'beforeDue') R.pstat.status.silence = 3;
-  expect(R.delayed[0].special).toBe('mysteryPotion');
+  expect(R.delayed[0]).toMatchObject({ special: 'triggerOps', srcCard: { type: '道具' }, ops: [{ op: 'acquire', n: 1, pool: { kind: 'types', types: ['武术', '法术'], randomEligible: true }, dest: 'hand', act: 'zeroCost' }] });
   // Construct an ordinary text-delay control; both jobs run through real processDelayed.
   R.delayed.push({ text:'回复8点生命。', cardName:'普通延迟法术对照', repeat:false, left:null });
   const hpBefore = game.hp;

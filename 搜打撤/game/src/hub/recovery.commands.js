@@ -1,6 +1,8 @@
 import './base.js';
 import { RUN_KEY, RunStorage, SAVE_VERSION, TX_KEY } from './game.storage.js';
 import { createRecoverablePair } from './recoverable-pair.js';
+import { DEPARTURE_COMMAND, validateDepartureJournal } from './departure-persistence.js';
+import { guardSlotStorage, withSlotWriteLock } from './slot-write-lock.js';
 import { clone, fail, stable, successReceipt, validSlot } from './commands.shared.js';
 
 const Base = () => window.SDT.Base;
@@ -19,7 +21,10 @@ function parseVersioned(raw, maxVersion, label) {
 export function createRecoveryCommands({ storage = globalThis.localStorage, lockManager = globalThis.navigator?.locks, failpoint,
   baseApi = Base(), runStore = RunStorage, keyFactory = null, baseVersion = baseApi.BASE_VERSION, runVersion = SAVE_VERSION } = {}) {
   const keys = keyFactory || (slotId => ({ base: baseApi.SLOT_KEY(slotId), run: RUN_KEY(slotId), journal: TX_KEY(slotId) }));
+  let writeOwner = null;
+  const guardedStorage = guardSlotStorage(storage, key => writeOwner && Object.values(keys(writeOwner.slotId)).includes(key) ? writeOwner : null);
   const validateJournal = journal => {
+    if (journal.command === DEPARTURE_COMMAND) return validateDepartureJournal(journal, baseVersion, runVersion);
     const parse = (raw, maxVersion, label, nullable = true) => {
       if (raw === null) return nullable ? { ok: true, value: null } : fail('RECOVERY_BLOCKED', `${label}不可为空`);
       return parseVersioned(raw, maxVersion, label);
@@ -55,14 +60,16 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     return { ok: true };
   };
   const pair = createRecoverablePair({
-    storage, keyFor: keys, failpoint,
+    storage: guardedStorage, keyFor: keys, failpoint,
     validateJournal,
     onChanged: slotId => { baseApi._refreshExternal(slotId); runStore._invalidate(slotId); },
   });
   const locked = async (slotId, fn) => {
-    if (!lockManager || typeof lockManager.request !== 'function') return fail('CAPABILITY_UNAVAILABLE', '浏览器不支持 Web Locks，拒绝生产两键事务');
-    try { return await lockManager.request(`sdt-slot-${slotId}`, { mode: 'exclusive' }, fn); }
-    catch { return fail('LOCK_FAILED', '无法取得事务锁，未确认提交结果', true, { slotId }); }
+    const result = await withSlotWriteLock(slotId, lease => {
+      writeOwner = { slotId, lease };
+      try { return fn(lease); } finally { writeOwner = null; }
+    }, { lockManager });
+    return result.ok ? result.value : result;
   };
   const validateContext = context => {
     if (!context || !validSlot(context.slotId) || typeof context.requestId !== 'string' || !context.requestId ||
@@ -115,9 +122,12 @@ export function createRecoveryCommands({ storage = globalThis.localStorage, lock
     if (invalid || !prepared || typeof prepared.command !== 'string' || typeof prepared.runId !== 'string' ||
         !prepared.afterBase || typeof prepared.afterBase !== 'object' || Array.isArray(prepared.afterBase) ||
         !Object.hasOwn(prepared, 'afterRun') || (prepared.afterRun !== null && (typeof prepared.afterRun !== 'object' || Array.isArray(prepared.afterRun)))) return invalid || fail('INVALID_ARGUMENT', 'prepared 事务无效');
-    return locked(context.slotId, () => {
+    return locked(context.slotId, lease => {
       const recovered = recoverInside(context.slotId);
       if (!recovered.ok) return recovered;
+      if (baseApi._flushCheckpointForCommit && !baseApi._flushCheckpointForCommit(context.slotId, lease)) {
+        return fail('SAVE_FAILED', '基地进度尚未保存，请重试', true);
+      }
       const k = keys(context.slotId);
       let baseRaw, runRaw;
       try { baseRaw = storage.getItem(k.base); runRaw = storage.getItem(k.run); }

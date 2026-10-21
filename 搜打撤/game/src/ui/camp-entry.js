@@ -150,8 +150,10 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
     lifetime.dispose(); cut.remove(); onFinish?.();
   };
   const lifetime = createPageSurfaceLifetime(page, { overlay, onInvalidate: finish });
+  // Match the other destination gates; the cut artwork has its own readiness.
+  const body = page.closest('#ovBody') || page;
   Promise.all([prepareCityCut(cut, { signal: controller.signal }),
-    waitPageVisual(page, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
+    waitPageVisual(body, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
     .then(([cutReady, ready]) => {
       if (!cutReady || !ready || finished || !lifetime.current()) { finish(); return; }
       cut.classList.remove('page-cut-waiting');
@@ -170,6 +172,37 @@ export function enterAchievementCut(page, reduced) {
   return playPreparedCut(page, cut);
 }
 
+// Base data may refresh the mounted hub before the initial curtain is ready.
+// Follow that new surface under the same curtain, but never reveal a later route.
+async function waitCampVisual(overlay, artwork, { signal, isCurrent }) {
+  const active = () => !signal.aborted && isCurrent() && overlay.isConnected
+    && !overlay.hidden && !overlay.dataset.uiClosing && !overlay.classList.contains('closing')
+    && !!overlay.querySelector('#hubMain');
+  while (active()) {
+    const body = overlay.querySelector('#ovBody') || overlay;
+    const page = body.firstElementChild || body;
+    const ui = window.SDT?.UI;
+    const controller = new AbortController();
+    let invalidate;
+    const invalidated = new Promise(resolve => { invalidate = resolve; });
+    const stop = () => { controller.abort(); invalidate(); };
+    signal.addEventListener('abort', stop, { once: true });
+    const lifetime = createPageSurfaceLifetime(page, { overlay,
+      getRevision: () => ui?._overlayRevision, onInvalidate: stop });
+    try {
+      const ready = await Promise.race([invalidated, Promise.all([artwork,
+        waitPageVisual(body, { signal: controller.signal, background: ui?._pageBgReady, revisionOwner: ui }),
+      ])]);
+      if (ready?.every(Boolean) && lifetime.current()) return true;
+      if (ready && !ready[0]) return false;
+    } finally {
+      signal.removeEventListener('abort', stop);
+      lifetime.dispose(); controller.abort();
+    }
+  }
+  return false;
+}
+
 export function enterCamp(overlay, ghost, reduced) {
   clearCampEntry();
   // 首次进入仅由本模块展开；临时编排结束后不能恢复 page-in 再播一遍。
@@ -185,20 +218,23 @@ export function enterCamp(overlay, ghost, reduced) {
   if (cut) { cut.classList.add('page-cut-waiting'); card.append(cut); }
   const controller = new AbortController();
   let timer;
+  let finished = false;
   const finish = () => {
+    if (finished) return;
+    finished = true;
     clearTimeout(timer);
     controller.abort();
     ghost?.remove();
     cut?.remove();
     removeIdentity?.();
-    delete overlay.dataset.campEntry;
-    if (cleanup === finish) cleanup = null;
+    if (cleanup === finish) { delete overlay.dataset.campEntry; cleanup = null; }
   };
   cleanup = finish;
-  Promise.all([cut ? prepareCityCut(cut, { signal: controller.signal }) : true,
-    waitPageVisual(overlay, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
-    .then(([cutReady, ready]) => {
-      if (!cutReady || !ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
+  // The archive ghost and cut are presentation copies, not destination assets.
+  waitCampVisual(overlay, cut ? prepareCityCut(cut, { signal: controller.signal }) : true,
+    { signal: controller.signal, isCurrent: () => cleanup === finish })
+    .then(ready => {
+      if (!ready || cleanup !== finish || !overlay.querySelector('#hubMain')) { finish(); return; }
       overlay.dataset.campEntry = '1';
       cut?.classList.remove('page-cut-waiting');
       removeIdentity = ghost ? transferIdentity(overlay, ghost) : null;

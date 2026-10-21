@@ -3,6 +3,7 @@
  *   ② 药水栏自带 [data-potion-tip] 提示条，初始隐藏，贴药水栏正下方；
  *   ③ 悬停/按下药水 → 提示条显示【名 ×数】效果+用法；移开/松手 → 收起。 */
 import { afterAll, describe, it, expect, vi } from 'vitest';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
 
 // 完整启动会排入壁纸预热等延后工作；测试结束前释放，避免jsdom拆除后再访问Image。
 const pendingTimeouts = new Set();
@@ -12,7 +13,8 @@ const timeoutSpy = vi.spyOn(globalThis, 'setTimeout').mockImplementation((callba
   pendingTimeouts.add(timer);
   return timer;
 });
-afterAll(() => {
+afterAll(async () => {
+  await releaseMainPage();
   for (const timer of pendingTimeouts) clearTimeout(timer);
   timeoutSpy.mockRestore();
 });
@@ -66,6 +68,7 @@ import { resolve } from 'node:path';
 }
 
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 

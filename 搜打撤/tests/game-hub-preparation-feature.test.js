@@ -135,7 +135,7 @@ describe('基地整备功能端口', () => {
     const h = createHarness();
     h.feature.open();
     await h.view.lastIntent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
-    expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:card-a': 1 });
+    expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:card-a': 1 }, {}, expect.any(Function));
     expect(h.navigation.openDeparture).toHaveBeenCalledTimes(1);
     expect(h.view.controller.dispose).toHaveBeenCalledTimes(1);
   });
@@ -145,7 +145,7 @@ describe('基地整备功能端口', () => {
     h.feature.open();
     await h.view.lastIntent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
     expect(h.navigation.applyPicks).toHaveBeenCalledExactlyOnceWith(
-      { 'card:card-a': 1 }, { characterId: 'baita', petId: 'robot' });
+      { 'card:card-a': 1 }, { characterId: 'baita', petId: 'robot' }, expect.any(Function));
     expect(h.navigation.openDeparture).toHaveBeenCalledOnce();
     expect(h.commitBase).not.toHaveBeenCalled();
   });

@@ -13,6 +13,7 @@ import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 import { createBaseMetaCommands } from './base-meta.commands.js';
 import { isCollectionProtected as collectionProtection } from './collection-protection.js';
+import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -59,6 +60,32 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
 
   let slot = null;      // 当前游玩的档位（1..5）；标题界面未选档时为 null
   let data = def();
+  let selectionGeneration = 0;
+  let checkpointVersion = 0;
+  let savedCheckpointVersion = 0;
+  let activeWriteLease = null;
+  const pendingWrites = new Set();
+
+  function physicalWrite(i, key, value, lease = activeWriteLease) {
+    assertSlotWriteLease(lease, i);
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, value);
+  }
+
+  function rememberWrite(promise) {
+    pendingWrites.add(promise);
+    promise.finally(() => pendingWrites.delete(promise));
+    return promise;
+  }
+
+  async function flushWrites() {
+    let ok = true;
+    while (pendingWrites.size) {
+      const results = await Promise.all([...pendingWrites]);
+      ok &&= results.every(result => result !== false && result?.persisted !== false && result?.ok !== false);
+    }
+    return { ok };
+  }
 
   // peek 指纹缓存（2026-09-08 性能，管线现居 versioned-slot-reader.js）：选档页每次打开
   // peek×5，基地档含全量卡牌/收藏数据，逐槽 JSON.parse 不便宜。raw 串指纹失配自动
@@ -82,6 +109,20 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     rejectArrays: false,
     // 持久快照仅归缓存所有；预览、装载及命令读取各取得独立副本。
     toPublic: structuredClone,
+    backupRaw: (i, raw) => {
+      const backup = () => {
+        if (localStorage.getItem(SLOT_KEY(i)) !== raw) return false;
+        physicalWrite(i, CORRUPT_KEY(i), raw);
+        return true;
+      };
+      if (activeWriteLease) {
+        try { return backup(); } catch { return false; }
+      }
+      return rememberWrite(withSlotWriteLock(i, lease => {
+        activeWriteLease = lease;
+        try { return backup(); } finally { activeWriteLease = null; }
+      }).then(result => result.ok && result.value));
+    },
   });
 
   function readSlot(i) {
@@ -94,22 +135,32 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
   function issue(i) { return reader.issue(i); }
 
   // 启动迁移：旧全局基地 → 每一个已有对局存档的档位（都没有则给档位 1）
-  function migrateLegacy(existingSlots) {
+  async function migrateLegacy(existingSlots) {
     try {
       const legacy = localStorage.getItem(LEGACY_KEY);
-      if (!legacy) return;
+      if (!legacy) return true;
       const targets = (Array.isArray(existingSlots) && existingSlots.length) ? existingSlots : [1];
-      if (targets.some(txPending)) return false;
-      targets.forEach(i => {
-        if (!localStorage.getItem(SLOT_KEY(i))) localStorage.setItem(SLOT_KEY(i), legacy);
+      for (const i of targets) {
+        const result = await withSlotWriteLock(i, lease => {
+          if (txPending(i)) return false;
+          if (!localStorage.getItem(SLOT_KEY(i))) physicalWrite(i, SLOT_KEY(i), legacy, lease);
+          return true;
+        });
+        if (!result.ok || !result.value) return false;
+      }
+      const cleaned = await withSlotWriteLock(targets[0], lease => {
+        if (localStorage.getItem(LEGACY_KEY) !== legacy) return false;
+        physicalWrite(targets[0], LEGACY_KEY, null, lease);
+        return true;
       });
-      localStorage.removeItem(LEGACY_KEY);
-      return true;
-    } catch { /* 存储不可用时静默 */ }
+      return cleaned.ok && cleaned.value;
+    } catch { return false; }
   }
 
   // 进入档位：加载该档独立的基地数据（没有则用初始值 = 新档案）
   function use(s) {
+    selectionGeneration++;
+    checkpointVersion = savedCheckpointVersion = 0;
     slot = s;
     const found = readSlot(s);
     // 装载与写基线使用同一次读取；读取失败不能获得空档的写权限。
@@ -130,8 +181,9 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
   // 写失败警示去重（迭代评审 09-20 G-P1）：失败连击只提示一次，成功即复位——
   // 玩家腾出存储空间后的下一次失败会立即再报（有「已恢复」信号）
   let saveWarned = false;
-  function save(candidate = data) {
+  function save(candidate = data, snapshot = candidate, includedCheckpointVersion = checkpointVersion) {
     if (!slot) return true;   // 未选档不落盘（标题界面的数据只读）
+    try { assertSlotWriteLease(activeWriteLease, slot); } catch { return false; }
     if (txPending(slot)) return false;
     // 损坏档／未来版本只允许显式 reset 覆盖，普通旧流程不得把兜底默认值写回原键。
     if (issue(slot)) return false;
@@ -147,18 +199,19 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
         return false;
       }
       const revision = ((candidate._m01 && candidate._m01.revision) || 0) + 1;
-      const next = { ...candidate, version: BASE_VERSION,
-        _m01: { ...(candidate._m01 || {}), revision, requests: { ...((candidate._m01 && candidate._m01.requests) || {}) } } };
+      const next = { ...snapshot, version: BASE_VERSION,
+        _m01: { ...(snapshot._m01 || {}), revision, requests: { ...((snapshot._m01 && snapshot._m01.requests) || {}) } } };
       const raw = JSON.stringify(next);
-      localStorage.setItem(SLOT_KEY(slot), raw);
+      physicalWrite(slot, SLOT_KEY(slot), raw);
       writeBaseline.set(slot, raw);
       data = candidate;
       data.version = BASE_VERSION;
       data._m01 = next._m01;
+      savedCheckpointVersion = includedCheckpointVersion;
       reader.poke(slot, raw, JSON.parse(raw));
       reader.clearIssue(slot);
       saveWarned = false;
-      try { localStorage.removeItem(CORRUPT_KEY(slot)); } catch { /* 无关紧要 */ }
+      try { physicalWrite(slot, CORRUPT_KEY(slot), null); } catch { /* 无关紧要 */ }
       return true;
     } catch {
       // 写失败不再静默：仓库配额满时玩家以为卡牌已入库，重开档无声丢失。
@@ -226,6 +279,15 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     return { value: prepare(data), persisted: false };
   }
   const metaCommands = createBaseMetaCommands({ read: () => data, persistProgress: persistMetaProgress });
+  function recordNestBoss(name) {
+    const result = persistMetaProgress(draft => {
+      const kills = draft.stats.nestBossKills ||= [];
+      if (!name || kills.includes(name)) return false;
+      kills.push(name);
+      return true;
+    });
+    return { changed: result.value, persisted: result.persisted };
+  }
 
   // 「卡牌是消耗品」一次性教学旗（2026-09-29 收敛，原 game.bag.settle teachAmmoOnce 直写）。
   // 旧语义：先内存推进再尝试保存——保存失败重试层依赖旗子只弹一次，故不做严格事务。
@@ -250,14 +312,15 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     const abilityChanged = window.SDT.Cards.applyAbilityRename(cards);
     const duplicateChanged = window.SDT.Cards.applyDuplicateRenames(cards);
     const changed = abilityChanged || duplicateChanged;
-    if (changed) save();
-    return !!changed;
+    return { changed: !!changed, persisted: !changed || save() };
   }
 
   // 重开档位：基地回到初始状态（覆盖开新档 / 空档开新档时调用）
   // 新档案仓库预置 5 张随机卡牌（按稀有度权重抽取，不重复），让第一局就有牌可带
   function reset(s) {
     if (txPending(s)) return false;
+    const previous = { slot, data, random: Random.snapshot(), issue: issue(s),
+      baselinePresent: writeBaseline.has(s), baseline: writeBaseline.get(s), checkpointVersion, savedCheckpointVersion };
     try {
       const currentRaw = localStorage.getItem(SLOT_KEY(s));
       if (emptySlotObservation.has(s) && currentRaw !== emptySlotObservation.get(s)) {
@@ -272,7 +335,17 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     ensureStarterPet();
     seedStarterStash();
     const saved = save();
-    if (saved) emptySlotObservation.delete(s);
+    if (saved) { emptySlotObservation.delete(s); selectionGeneration++; checkpointVersion = savedCheckpointVersion = 0; }
+    else {
+      slot = previous.slot;
+      data = previous.data;
+      Random.restore(previous.random);
+      checkpointVersion = previous.checkpointVersion;
+      savedCheckpointVersion = previous.savedCheckpointVersion;
+      if (previous.baselinePresent) writeBaseline.set(s, previous.baseline);
+      else writeBaseline.delete(s);
+      if (previous.issue) reader.markIssue(s, previous.issue);
+    }
     return saved;
   }
 
@@ -322,30 +395,51 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     const raw = parseRaw(i);
     return raw ? adopt(raw) : (issue(i) ? null : def());
   }
-  function _writeCommitted(i, next) {
+  // Departure needs the same accepted raw baseline as save(), before preparing both keys.
+  function _readDepartureBaseline(i) {
+    if (slot !== i || issue(i) || !writeBaseline.has(i)) return { ok: false };
+    try {
+      const raw = localStorage.getItem(SLOT_KEY(i));
+      return raw === writeBaseline.get(i) ? { ok: true, raw } : { ok: false };
+    } catch { return { ok: false }; }
+  }
+  function _writeCommitted(i, next, lease) {
+    assertSlotWriteLease(lease, i);
+    if (slot === i && checkpointVersion !== savedCheckpointVersion) throw new Error('unsaved checkpoint must be flushed before replacing Base');
     if (txPending(i)) throw new Error('pending cross-key transaction');
     const normalized = adopt(next);
     normalized.version = BASE_VERSION;
     const raw = JSON.stringify(normalized);
-    localStorage.setItem(SLOT_KEY(i), raw);
+    physicalWrite(i, SLOT_KEY(i), raw, lease);
     writeBaseline.set(i, raw);
     reader.poke(i, raw, JSON.parse(raw));
     reader.clearIssue(i);
-    try { localStorage.removeItem(CORRUPT_KEY(i)); } catch { /* 无关紧要 */ }
+    try { physicalWrite(i, CORRUPT_KEY(i), null, lease); } catch { /* 无关紧要 */ }
     if (slot === i) data = normalized;
     return normalized;
+  }
+  // Prepared transactions read durable snapshots; flush newer in-memory facts before checking their revision.
+  function _flushCheckpointForCommit(i, lease) {
+    assertSlotWriteLease(lease, i);
+    if (slot !== i || checkpointVersion === savedCheckpointVersion) return true;
+    const previousLease = activeWriteLease;
+    activeWriteLease = lease;
+    try { return save(); } finally { activeWriteLease = previousLease; }
   }
   function _refreshExternal(i) {
     reader.invalidate(i);
     const found = readSlot(i);
     if (found) writeBaseline.set(i, found.raw);
     else writeBaseline.delete(i);
-    if (found?.value && slot === i) data = adopt(found.value);
+    if (found?.value && slot === i) {
+      data = adopt(found.value);
+      checkpointVersion = savedCheckpointVersion = 0;
+    }
     return found?.value ? adopt(structuredClone(found.value)) : null;
   }
 
   // 删除某档位的基地数据
-  function wipe(i) { if (txPending(i)) return false; try { localStorage.removeItem(SLOT_KEY(i)); return true; } catch { return false; } }
+  function wipe(i) { if (txPending(i)) return false; try { physicalWrite(i, SLOT_KEY(i), null); return true; } catch { return false; } }
   const hasSlot = (i) => { try { return !!localStorage.getItem(SLOT_KEY(i)); } catch { return false; } };
 
   // ---------- 卡背（v0.21） ----------
@@ -660,18 +754,18 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     return a + (m ? +m[1] : 1) * (b.count || 0);
   }, 0);
 
-  sdtDefine('Base', {
+  const api = {
     ...createBaseEconomy({ read: () => data, mutate, appendCards, room: stashRoom }),
     ...progressionCommands,
     ...departureCommands,
     ...petEggCommands,
     ...elapsedCommands,
     ...metaCommands,
-    markAmmoTaught, ensureCollXp, applyStoredCardRenames,
+    markAmmoTaught, ensureCollXp, applyStoredCardRenames, recordNestBoss,
     SLOT_KEY, LEGACY_KEY,
     migrateLegacy, use, save, reset, peek, wipe, hasSlot,
     issue, CORRUPT_KEY, BASE_VERSION,
-    _readForCommit, _writeCommitted, _refreshExternal,
+    _readForCommit, _writeCommitted, _refreshExternal, _readDepartureBaseline, _flushCheckpointForCommit,
     get slot() { return slot; },
     get data() { return data; },
     bagCap, safeCap, stashCap, stashUsed, stashRoom,
@@ -686,6 +780,87 @@ import { isCollectionProtected as collectionProtection } from './collection-prot
     isBackUnlocked, unlockBack, setBack, backSel,
     // —— 宠物（2026-09-09 需求 #2/#4）——
     PETS, petById, ownedPets, carriedPet, setPet, hatchPet, HATCH_COST, PET_EGG_ID,
-  });
+    flushWrites,
+  };
+
+  const economicFailure = { ok: false, why: 'save', msg: '基地存档未保存，请重试' };
+  const failures = {
+    save: false, reset: false, wipe: false,
+    purchase: economicFailure, openCardPack: economicFailure, grantReward: economicFailure,
+    upgradeBag: false, upgradePet: false, upgradeStash: false, upgradeNestBag: false,
+    deposit: false, depositCards: false, restore: false, setPet: false,
+    hatchPet: economicFailure, takeStashCards: 0, useStashMaterial: economicFailure,
+    sellStashCards: economicFailure, collectToggle: null, unlockBack: false, setBack: false,
+    selectMode: { ok: false, code: 'SAVE_FAILED' }, unlockNestGate: { ok: false, code: 'SAVE_FAILED' },
+    unlockNestLegacy: { ok: false, code: 'SAVE_FAILED' }, prepareDeparture: { ok: false, why: 'save' },
+    markAmmoTaught: false, applyStoredCardRenames: { changed: false, persisted: false },
+    syncPlayTime: { changed: false, delta: 0, checkpoint: 0, persisted: false },
+    migrateElapsed: { changed: false, checkpoint: 0, persisted: false },
+    recordPetEggChestResult: { persisted: false }, recordEggBattle: { persisted: false },
+    recordMetaEvent: { changed: false, xp: null, gained: null, persisted: false },
+    addClassXp: { changed: false, levels: [], checkpoints: [], persisted: false },
+    markCollXpSettled: { changed: false, persisted: false },
+    recordNestBoss: { changed: false, persisted: false },
+  };
+  const memoryCheckpoints = new Set(['markAmmoTaught', 'applyStoredCardRenames', 'syncPlayTime', 'migrateElapsed',
+    'recordPetEggChestResult', 'recordEggBattle', 'recordMetaEvent', 'addClassXp', 'markCollXpSettled', 'recordNestBoss']);
+  for (const [name, failure] of Object.entries(failures)) {
+    const command = api[name];
+    api[name] = (...args) => {
+      const targetSlot = name === 'reset' || name === 'wipe' ? args[0] : slot;
+      const generation = selectionGeneration;
+      const current = () => generation === selectionGeneration &&
+        (name === 'reset' || name === 'wipe' || slot === targetSlot);
+      if (!targetSlot) return Promise.resolve(memoryCheckpoints.has(name) || name === 'save' ? command(...args) : failure);
+      if (memoryCheckpoints.has(name)) {
+        // Checkpoint facts affect the current game immediately. Only their durable write waits for the lock.
+        // This preserves egg-pity/elapsed/meta semantics when several rewards happen in one synchronous batch.
+        const previousLease = activeWriteLease;
+        activeWriteLease = null;
+        let staged;
+        try { staged = command(...args); } finally { activeWriteLease = previousLease; }
+        const changed = !(staged && typeof staged === 'object' && staged.changed === false);
+        if (!changed && (name !== 'applyStoredCardRenames' || checkpointVersion === savedCheckpointVersion)) return Promise.resolve(staged);
+        if (name === 'addClassXp' && (!args[0] || !(Number(args[1]) > 0))) return Promise.resolve(staged);
+        if (changed) checkpointVersion++;
+        const stagedVersion = checkpointVersion;
+        return rememberWrite(withSlotWriteLock(targetSlot, lease => {
+          if (savedCheckpointVersion >= stagedVersion) return true;
+          activeWriteLease = lease;
+          try { return save(); } finally { activeWriteLease = null; }
+        }, { isCurrent: current }).then(result => {
+          const persisted = result.ok && result.value === true;
+          if (!persisted) {
+            try { window.SDT?.UI?.log(`[[icon:cross]] ${result.message || '本次内存进度尚未保存，请重试保存'}`, 'warn'); } catch { /* 页面尚未就绪 */ }
+          }
+          return staged && typeof staged === 'object' ? { ...staged, persisted, ...(!result.ok ? { code: result.code } : {}) } : persisted;
+        }));
+      }
+      const candidate = name === 'save' ? (args[0] || data) : null;
+      let snapshot = null;
+      try { if (candidate) snapshot = JSON.parse(JSON.stringify(candidate)); }
+      catch { return Promise.resolve(false); }
+      const baseline = name === 'save' ? writeBaseline.get(targetSlot) : undefined;
+      const snapshotCheckpointVersion = checkpointVersion;
+      const task = withSlotWriteLock(targetSlot, lease => {
+        activeWriteLease = lease;
+        try {
+          if (name === 'save') {
+            if (writeBaseline.get(targetSlot) !== baseline) return false;
+            return save(candidate, snapshot, snapshotCheckpointVersion);
+          }
+          return command(...args);
+        } finally { activeWriteLease = null; }
+      }, { isCurrent: current }).then(result => {
+        if (result.ok) return result.value;
+        let value = failure;
+        try { window.SDT?.UI?.log(`[[icon:cross]] ${result.message}`, 'warn'); } catch { /* 页面尚未就绪 */ }
+        return value && typeof value === 'object' ? { ...value, code: result.code, persisted: false } : value;
+      });
+      return rememberWrite(task);
+    };
+  }
+  api.migrateLegacy = (...args) => rememberWrite(migrateLegacy(...args));
+  sdtDefine('Base', api);
 
 export { bagCap, hasSlot, safeCap };

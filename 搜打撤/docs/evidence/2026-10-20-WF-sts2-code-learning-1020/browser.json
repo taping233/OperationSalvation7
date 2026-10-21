@@ -1,0 +1,15 @@
+{
+  "source": "Codex current-window in-app browser",
+  "url": "http://127.0.0.1:5341/",
+  "window": "1280x720 (no viewport override)",
+  "errors": [],
+  "interactions": "真实UI输入：照相馆搜索包扎/坚守；空档01新建、出征、领补给、首战流星箭雨与初始攻击击杀三敌、领冷冻射线与金币并回图",
+  "result": {
+    "hp": "35/35",
+    "coins": 1,
+    "consumed": 2,
+    "bag": "6/16"
+  },
+  "scope": "RNG序列隔离与Agent回放由定向自动测试证明；本次浏览器未构造数据、未调用回放API、未验整局或其他尺寸",
+  "captureLimit": "回图后#log未出现在可查询DOM，未以其作为日志证据；采用实际逐步AX状态与胜利截图"
+}

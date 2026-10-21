@@ -7,17 +7,17 @@ export function gatesSteps(s) {
   return [
       /* ============ 前置改写与门控（旧实现顶部） ============ */
       {
-        id: 'gate.infuseRequired', gate: 'always', label: '未注能时跳过纯注能效果句',
+        id: 'gate.infuseRequired', gate: 'always', silenceAllowed: true, label: '未注能时跳过纯注能效果句',
         when: (ctx) => ctx.flags.infused !== true && /^注能\s*[（(][^）)]*[）)][：:]?/.test(ctx.desc),
         run: () => HALT(FRESH_RESULT(false)),
       },
       {
-        id: 'pre.infuseLead', gate: 'always', label: '「注能(N)：效果」前缀剥离',
+        id: 'pre.infuseLead', gate: 'always', silenceAllowed: true, label: '「注能(N)：效果」前缀剥离',
         when: (ctx) => ctx.flags.infused === true ? ctx.desc.match(/^注能\s*[（(][^）)]*[）)][：:]?\s*(.+)$/) : null,
         run: (ctx, m) => { ctx.infLead = m; ctx.desc = m[1]; },
       },
       {
-        id: 'pre.fuelPrice', gate: 'always', label: '「N倍于被注能卡牌价格」按牺牲品费用折算',
+        id: 'pre.fuelPrice', gate: 'always', silenceAllowed: true, label: '「N倍于被注能卡牌价格」按牺牲品费用折算',
         when: (ctx) => (ctx.flags.fuelCost != null) ? ctx.desc.match(/(\d+)\s*倍于被注能卡牌价格/) : null,
         run: (ctx, m) => {
           ctx.desc = ctx.desc.replace(/[^，。]*?\d+\s*倍于被注能卡牌价格的血量/, `回复 ${+m[1] * Math.max(0, ctx.flags.fuelCost)} 点生命`);
@@ -25,10 +25,11 @@ export function gatesSteps(s) {
         },
       },
       {
-        id: 'gate.sealUnlock', gate: 'always', label: '「累计注能 N 张后解锁」门',
+        id: 'gate.sealUnlock', gate: 'always', silenceAllowed: true, label: '「累计注能 N 张后解锁」门',
         when: (ctx) => ctx.desc.match(/累计注能\s*(\d+)\s*张[^。；]*?解锁[：:]?\s*([\s\S]*)/),
         run: (ctx, m) => {
           const need = +m[1];
+          if (ctx.silenced) return HALT(FRESH_RESULT(true));
           const fuels = typeof getInfuseFuels === 'function' ? getInfuseFuels() : need;
           if (fuels >= need) {
             if (typeof unlockSeal === 'function') {
@@ -44,7 +45,7 @@ export function gatesSteps(s) {
         },
       },
       {
-        id: 'gate.curseCond', gate: 'always', label: '「诅咒状态下」条件门（装备改穿戴期核算）',
+        id: 'gate.curseCond', gate: 'always', silenceAllowed: true, label: '「诅咒状态下」条件门（装备改穿戴期核算）',
         when: (ctx) => (/诅咒状态[下时]/.test(ctx.desc) && !/对手|对方/.test(ctx.desc)) ? true : null,
         run: (ctx) => {
           const met = typeof combat.hasCurse === 'function' && combat.hasCurse(ctx.pstat);
@@ -72,9 +73,10 @@ export function gatesSteps(s) {
         },
       },
       {
-        id: 'gate.choice', gate: 'fresh', label: '抉择面板拦截（必须在其它动词之前）',
+        id: 'gate.choice', gate: 'fresh', silenceAllowed: true, label: '抉择面板拦截（必须在其它动词之前）',
         when: (ctx) => (/抉择[:：]/.test(ctx.desc) && typeof queueChoice === 'function') ? true : null,
         run: (ctx) => {
+          if (ctx.silenced) return HALT(FRESH_RESULT(true));
           const body = ctx.desc.replace(/^.*?抉择[:：]\s*/, '');
           let options;
           if (/\d\s*[°º]/.test(body)) {

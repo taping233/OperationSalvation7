@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function deckSteps(s) {
-  const {getMode, log, drawCards, grantStarterAttack, randomDiscoverCard, addTempCard, addDeckCard, allCards, shuffleDeck, randomAcquired, esc, POOL_NUM_MAP} = s;
+  const {log, drawCards, randomDiscoverCard, addTempCard, addDeckCard, allCards, shuffleDeck, randomAcquired, esc, POOL_NUM_MAP} = s;
   return [
       /* ============ 牌库操作段 ============ */
       {
@@ -55,13 +55,8 @@ export function deckSteps(s) {
             const afterDraw = ctx.desc.match(/洗入牌库[^。]*然后抽\s*(\d+|[一二两三四五])\s*张牌/);
             if (afterDraw) {
               const n2 = POOL_NUM_MAP[afterDraw[1]] != null ? POOL_NUM_MAP[afterDraw[1]] : +afterDraw[1];
-              if (getMode() === 'boss') {
-                const got = drawCards(n2);
-                log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：洗入后抽了 ${got} 张牌`, 'sys');
-              } else {
-                grantStarterAttack(n2);
-                log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：洗入后获得 ${n2} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
-              }
+              const got = drawCards(n2);
+              log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：洗入后抽了 ${got} 张牌`, 'sys');
             }
             ctx.did = true;
           }

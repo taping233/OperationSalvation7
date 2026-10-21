@@ -27,7 +27,7 @@
 | cmtn2jc142dj | 刀剑形态 | 武术 | onTurnStart[draw 1 + handOps:{copyRandom:true}] | 规格/接线:onTurnStart 触发器（TRIGGER_KEYS 已放行 schema:11，解释器 throw） | L | B-M4 | 「获得随机手牌的复制」=copyRandom 键位已有 |
 | tt2-comboarrow | 连击箭 | 武术 | onPlay[damage amountField:dmg] + battle.costModifiers[{kind:'previousCardTypeFree',type:'武术'}] | 现有能力 | S | B-M1 | previousCardTypeFree 白名单内；lastCardType 状态已有（battle.core.js:78） |
 | tt2-forestarrow | 绿化箭 | 武术 | onPlay[damage amountField:dmg, armor amount:3] | 现有能力 | S | B-M1 | v2 字面量 armor 可与 damage 混排（card-rules.schema.js:648-655 只限 amountField 锚定） |
-| tt2-piercearrow | 破甲箭 | 武术 | onPlay[damage amountField:dmg, armor amount:3] | 现有能力 | S | B-M1 | 与 tt2-forestarrow 同构，可同测 |
+| tt2-piercearrow | 破甲箭 | 武术 | onPlay[damage amountField:dmg, curse abreak duration:2] | 现有能力 | S | B-M1 | 攻击后对目标附加 2 回合破甲；2026-10-20 定版 |
 | tt2-swiftarrow | 迅疾箭 | 武术 | onPlay[damage amountField:dmg, draw amountField:draw] | 现有能力 | S | B-M1 | 箭系列成员（连弩/天狼长弓联动对象） |
 | tt2-jianghu | 江湖救急 | 武术 | onPlay[discover {count:1, pool:{kind:'otherClass'}, act:'play'}] | 规格新增:discover.pool.kind 跨职业池（现仅 kind:'moves'，card-rules.schema.js:503-505） | M | B-M2 | 「直接施放」=discover act play（现有） |
 | tt2-turtlearmor | 铸甲 | 武术 | onPlay[armor amount:10] + cost:{consumeEquip:1} | 规格新增:onPlay 代价 consumeEquip | M | B-M2 | 消耗装备需玩家选择交互（装备≥2 时），handSelecting 域 |

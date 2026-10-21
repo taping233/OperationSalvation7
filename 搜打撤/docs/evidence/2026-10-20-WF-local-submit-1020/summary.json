@@ -1,0 +1,43 @@
+{
+  "codeCommit": "6a37c3c56041861f764b988bf4b8ee64a4eaa9a6",
+  "codeFiles": 42,
+  "priorDocumentFiles": 353,
+  "gate": {
+    "outcome": "passed",
+    "mode": "quick",
+    "testFiles": 4,
+    "testsPassed": 58,
+    "report": "docs/evidence/2026-10-20-WF-local-submit-1020/2026-10-20T06-16-04.637Z-79ce6283-staged.json",
+    "reportBytes": 4102095,
+    "reportSha256": "71a0c5fd1426c087a566a8699ae469d9c3e9f1aec8ef3f138446bc7111522554",
+    "acquisition": "npm run workflow -- staged --task WF-local-submit-1020 --json; retained local report exceeds 1 MiB"
+  },
+  "preserved": {
+    "editing": true,
+    "unknownNAI": false,
+    "pendingAndIntermediate": true,
+    "largeSources": [
+      "搜打撤/game/art-source/characters/changwuyu-sprites-20261009/attack/hat-clean-source.png",
+      "搜打撤/game/art-source/characters/changwuyu-sprites-20261009/death/previous-source.png",
+      "搜打撤/game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif",
+      "搜打撤/game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp",
+      "搜打撤/game/art-source/characters/wu-roster-20261009.png",
+      "搜打撤/game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png",
+      "搜打撤/game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png",
+      "搜打撤/docs/production/art/NAI-PROMPTING.md"
+    ]
+  },
+  "limits": [
+    "No push, build or full test run",
+    "Original task browser evidence reused; no new browser interaction"
+  ],
+  "documentFiles": 358,
+  "takeover": "Owner confirmed no editing sessions and authorised Friday to take responsibility for remaining changes",
+  "naiTests": {
+    "total": 38,
+    "passed": 37,
+    "skipped": 1,
+    "network": "offline mocks; no real image request"
+  },
+  "temporarilyReservedOriginalStagedEntries": 33
+}

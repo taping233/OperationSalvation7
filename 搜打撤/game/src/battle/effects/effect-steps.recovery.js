@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function recoverySteps(s) {
-  const {combat, getMode, log, heal, pushFloat, drawCards, grantStarterAttack, markNoDrawNext, randomDiscoverCard, addTempCard, queueHandSelect, restoreConsumed, random01, autoPlayHandType, armorMul, randomAcquired, esc, HAND_COST_CONSUME_RE, HAND_COST_SELECT_RE, num, HALT} = s;
+  const {combat, log, heal, pushFloat, drawCards, markNoDrawNext, randomDiscoverCard, addTempCard, queueHandSelect, restoreConsumed, random01, autoPlayHandType, armorMul, randomAcquired, esc, HAND_COST_CONSUME_RE, HAND_COST_SELECT_RE, num, HALT} = s;
   return [
       /* ============ 回复 / 护甲 / 抽牌 / 手选段 ============ */
       {
@@ -66,7 +66,14 @@ export function recoverySteps(s) {
         when: (ctx) => /随机神秘效果/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           const r = random01();
-          if (r < 1 / 3) { heal(8); log('[[icon:flask]] 神秘药水：回复 <b>8</b> 点生命', 'ok'); }
+          if (r < 1 / 3) {
+            if ((ctx.pstat.status.healban || 0) > 0) {
+              log('[[icon:heart]] 禁疗中：神秘药水回复 8 点生命无效', 'warn');
+            } else {
+              heal(8); log('[[icon:flask]] 神秘药水：回复 <b>8</b> 点生命', 'ok');
+            }
+            ctx.healed = true;
+          }
           else if (r < 2 / 3) { drawCards(2); log('[[icon:flask]] 神秘药水：抽 <b>2</b> 张牌', 'ok'); }
           else {
             const c = randomDiscoverCard(null);
@@ -134,13 +141,8 @@ export function recoverySteps(s) {
             n *= kinds;   // 09-29 老板拍板：0 种诅咒时不抽（原 Math.max(1,kinds) 按 1 种兜底）
             if (kinds > 0) log(`[[icon:skull]] 目标身上有 ${kinds} 种诅咒，抽牌量放大`, 'sys');
           }
-          if (getMode() === 'boss') {
-            const got = drawCards(n);
-            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${got} 张牌`, 'sys');
-          } else {
-            grantStarterAttack(n);
-            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：获得 ${n} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
-          }
+          const got = drawCards(n);
+          log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${got} 张牌`, 'sys');
           ctx.did = true; ctx.drawn = true;
           // 万剑归宗：抽完后直接释放其中的武术/法术
           const autoM = ctx.desc.match(/直接释放其中(武术|法术|招式)/);

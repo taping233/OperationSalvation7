@@ -67,7 +67,7 @@ const events = [
   { id:'tt6-demondeal', name:'隧道血契', type:'事件', desc:'交易或拒绝' },
 ];
 async function openBoundEvent() {
-  const pending = flow.runEventDeck();
+  const pending = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000); await pending;
 }
 
@@ -77,6 +77,11 @@ describe('事件卡足额生命代价', () => {
     H.game.hp = hp;
     const open = vi.spyOn(window.SDT.Chests, 'open').mockImplementation(() => { H.game.state = 'modal'; });
     await openBoundEvent();
+    const option = UI.el.ovBody.querySelector('[data-act="evtChoice"][data-i="0"]');
+    expect(option.dataset.optionState).toBe(hp <= 5 ? 'lethal' : 'cost');
+    expect(option.textContent).toContain(hp <= 5 ? '会致死' : '剩余 1');
+    expect(H.game.hp).toBe(hp);
+    expect(H.game.damage).not.toHaveBeenCalled();
     UI._acts.evtChoice({ i:'0' });
     expect(H.game.damage).toHaveBeenCalledTimes(1);
     expect(H.game.damage).toHaveBeenCalledWith(5, '隧道血契');

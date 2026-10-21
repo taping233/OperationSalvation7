@@ -1,0 +1,11 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { planLedger, applyLedger } from '../../../scripts/workflow-ledger.mjs';
+const root = fileURLToPath(new URL('../../../', import.meta.url));
+const action = process.argv[2] || 'add';
+const suffix = ['v2', 'v5'].includes(process.argv[3]) ? `-${process.argv[3]}` : '';
+const { cells } = JSON.parse(readFileSync(new URL(`registry${suffix}-${action}.json`, import.meta.url), 'utf8'));
+const key = cells[0].match(/WF-[a-zA-Z0-9-]+/)[0];
+const plan = planLedger(root, { kind: 'registry', action, key, owner: 'Friday', cells });
+console.log(JSON.stringify({ before: plan.before, after: plan.after }));
+console.log(JSON.stringify(applyLedger(root, plan, plan.expectedSha256)));

@@ -1,0 +1,273 @@
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤
+
+··························································stderr | tests/agent-console-jump.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/agent-console-jump.test.js > INFRA-02 控制台快捷键页签跳转不再关掉目标页 > 冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-console-jump.test.js > INFRA-02 控制台快捷键页签跳转不再关掉目标页 > 冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-console-jump.test.js > INFRA-02 控制台快捷键页签跳转不再关掉目标页 > 冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-console-jump.test.js > INFRA-02 控制台快捷键页签跳转不再关掉目标页 > 冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-console-jump.test.js > INFRA-02 控制台快捷键页签跳转不再关掉目标页 > 冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+
+······················································stderr | tests/agent-scenes.test.js
+[music] load failed title No codec support for selected audio sources.
+
+·······················stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+··stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+·stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+
+·························stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[music] load failed battle No codec support for selected audio sources.
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[battle] 渲染异常已兜底： TypeError: clone.animate is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:243:25
+    at Array.forEach (<anonymous>)
+    at animateBattleTransition (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:202:15)
+    at Object.render (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.view.js:789:41)
+    at flushBattleRender (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/core/battle.engine.factory.domain.js:102:30)
+    at invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26)
+    at runAnimationFrameCallbacks (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:662:13)
+    at Timeout._onTimeout (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:640:11)
+    at listOnTimeout (node:internal/timers:635:17)
+    at processTimers (node:internal/timers:571:7)
+
+·······stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[battle] 渲染异常已兜底： TypeError: clone.animate is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:243:25
+    at Array.forEach (<anonymous>)
+    at animateBattleTransition (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:202:15)
+    at Object.render (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.view.js:789:41)
+    at flushBattleRender (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/core/battle.engine.factory.domain.js:102:30)
+    at invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26)
+    at runAnimationFrameCallbacks (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:662:13)
+    at Timeout._onTimeout (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:640:11)
+    at listOnTimeout (node:internal/timers:635:17)
+    at processTimers (node:internal/timers:571:7)
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[battle] 渲染异常已兜底： TypeError: clone.animate is not a function
+    at /workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:243:25
+    at Array.forEach (<anonymous>)
+    at animateBattleTransition (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.anim.view.js:202:15)
+    at Object.render (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/view/battle.view.js:789:41)
+    at flushBattleRender (/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/game/src/battle/core/battle.engine.factory.domain.js:102:30)
+    at invokeTheCallbackFunction (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26)
+    at runAnimationFrameCallbacks (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:662:13)
+    at Timeout._onTimeout (/workspace/scratch/b7a53a06c872/integration-dependencies-restored-20261019/node_modules/jsdom/lib/jsdom/browser/Window.js:640:11)
+    at listOnTimeout (node:internal/timers:635:17)
+    at processTimers (node:internal/timers:571:7)
+
+······stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > battle 场景：测试局直跳遭遇战并自然打完（turbo）
+[music] load failed board No codec support for selected audio sources.
+
+········stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > shop 场景：商店页打开且被策略收口（turbo）
+[music] load failed shop No codec support for selected audio sources.
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > shop 场景：商店页打开且被策略收口（turbo）
+[music] load failed shop No codec support for selected audio sources.
+
+stderr | tests/agent-scenes.test.js > SDT.Agent.scenes 验收剧本库 > shop 场景：商店页打开且被策略收口（turbo）
+[music] load failed board No codec support for selected audio sources.
+
+···············stderr | tests/sts2-agent-replay.test.js > battle-entry replay through the real Agent and BattleSession commands > stops recording immediately on an ACTION_THREW receipt
+[agent.act] battle:playCard 抛错: injected command failure
+
+·······
+
+ Test Files  23 passed (23)
+      Tests  206 passed (206)
+   Start at  03:24:07
+   Duration  30.69s (transform 3.07s, setup 0ms, collect 7.78s, tests 49.81s, environment 5.49s, prepare 1.34s)

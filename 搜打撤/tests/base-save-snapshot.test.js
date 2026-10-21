@@ -1,3 +1,6 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { withSlotWriteLock } from '../game/src/hub/slot-write-lock.js';
+installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RULES } from '../game/src/core/rules.js';
 
@@ -43,7 +46,7 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(localStorage.getItem(otherKey)).toBe(other);
   });
 
-  it('外部更新自动失配缓存，预览不推进旧运行态写基线', () => {
+  it('外部更新自动失配缓存，预览不推进旧运行态写基线', async () => {
     const latest = JSON.stringify({ version: Base.BASE_VERSION, stats: { playSeconds: 250 },
       stash: [{ card: { id: 'updated-card', name: '更新卡' }, count: 6 }], pocket: [],
       _m01: { revision: 5, requests: {} } });
@@ -52,10 +55,10 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(preview.stats.playSeconds).toBe(250);
     preview.stash[0].count = 99;
     expect(Base._readForCommit(1).stash[0].count).toBe(6);
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(key)).toBe(latest);
     expect(Base.use(1).stash[0].count).toBe(6);
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
   });
 
   it('持久快照仍按原串缓存迁移，命中不再JSON.parse且每次只读一次主键', () => {
@@ -89,9 +92,9 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(Base.data.stats.playSeconds).toBe(100);
   });
 
-  it('保存失败时沿用内存checkpoint，预览和重新装载仍来自磁盘', () => {
+  it('保存失败时沿用内存checkpoint，预览和重新装载仍来自磁盘', async () => {
     const blocked = blockSave();
-    expect(Base.syncPlayTime(35, 25)).toEqual({ changed: true, delta: 10, checkpoint: 35, persisted: false });
+    expect((await Base.syncPlayTime(35, 25))).toEqual({ changed: true, delta: 10, checkpoint: 35, persisted: false });
     expect(Base.data.stats.playSeconds).toBe(110);
     expect(persisted().stats.playSeconds).toBe(100);
     expect(Base.peek(1).stats.playSeconds).toBe(100);
@@ -99,15 +102,15 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(Base.use(1).stats.playSeconds).toBe(100);
   });
 
-  it('成功保存后的缓存也独立于下一次未保存运行态，重试会保存完整内存', () => {
+  it('成功保存后的缓存也独立于下一次未保存运行态，重试会保存完整内存', async () => {
     Base.data.stats.playSeconds = 120;
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     const blocked = blockSave();
-    expect(Base.syncPlayTime(35, 25).persisted).toBe(false);
+    expect((await Base.syncPlayTime(35, 25)).persisted).toBe(false);
     expect(Base.data.stats.playSeconds).toBe(130);
     expect(Base.peek(1).stats.playSeconds).toBe(120);
     blocked.mockRestore();
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     expect(persisted().stats.playSeconds).toBe(130);
     expect(Base.use(1).stats.playSeconds).toBe(130);
   });
@@ -121,23 +124,23 @@ describe('基地持久快照与运行内存隔离', () => {
     expect(Base.peek(1).stats.playSeconds).toBe(100);
   });
 
-  it('成功写穿透缓存代表真实JSON原串，保留JSON序列化的既有口径', () => {
+  it('成功写穿透缓存代表真实JSON原串，保留JSON序列化的既有口径', async () => {
     Base.data.extraCheckpoint = { value: Infinity, transient: () => {} };
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     expect(Base.peek(1).extraCheckpoint).toEqual({ value: null });
     expect(persisted().extraCheckpoint).toEqual({ value: null });
     expect(Base.use(1).extraCheckpoint).toEqual({ value: null });
   });
 
-  it('提交接口写成功后仍隔离快照，普通mutate保留未改仓库引用', () => {
+  it('提交接口写成功后仍隔离快照，普通mutate保留未改仓库引用', async () => {
     const next = Base._readForCommit(1);
     next.stats.playSeconds = 120;
-    Base._writeCommitted(1, next);
+    await withSlotWriteLock(1, lease => Base._writeCommitted(1, next, lease));
     Base.data.stats.playSeconds = 150;
     expect(Base.peek(1).stats.playSeconds).toBe(120);
     expect(Base.use(1).stats.playSeconds).toBe(120);
     const stack = Base.data.stash[0];
-    expect(Base.unlockBack('snapshot-back')).toBe(true);
+    expect((await Base.unlockBack('snapshot-back'))).toBe(true);
     expect(Base.data.stash[0]).toBe(stack);
     Base.data.stash[0].count = 9;
     expect(Base.peek(1).stash[0].count).toBe(2);

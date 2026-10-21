@@ -77,7 +77,7 @@ vi.mock('pixi.js', () => ({
 import * as Flight from '../game/src/core/flight-recorder.local.js';
 import { setPerformanceSettings } from '../game/src/core/performance-settings.js';
 import { scale as uiScale } from '../game/src/ui/ui-scale.js';
-import { attach, cacheStats, isLiveBattleFigure, hide, play, presentDeath } from '../game/src/battle/view/battle.frames.js';
+import { attach, cacheStats, isLiveBattleFigure, hide, play, presentDeath, actionImpactRemaining } from '../game/src/battle/view/battle.frames.js';
 import { WU_FRAME_SEQUENCES, wuTimeline } from '../game/src/battle/view/battle.frame-catalog.js';
 import { CHANGWUYU_FRAME_SEQUENCES, changwuyuTimeline } from '../game/src/battle/view/battle.frame-catalog-changwuyu.js';
 import { THREE_ROLE_FRAME_SEQUENCES, threeRoleTimeline } from '../game/src/battle/view/battle.frame-catalog-three-role.js';
@@ -152,6 +152,24 @@ describe('battle frame lifecycle', () => {
     expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
     setPerformanceSettings({ fps: 120 });
     expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+  });
+
+  it('continues a live combo action and reads its remaining contact time from the player clock', async () => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    const body = document.getElementById('ovBody');
+    const stage = document.querySelector('.battle-stage'); stage._battleToken = 'timing-battle';
+    await attach(body); await finishFrames('changwuyu');
+    const cue = { attacker: 'player-attack' };
+    expect(play('atk')).toBe(true);
+    expect(actionImpactRemaining(cue, 'timing-battle')).toBe(125);
+    clock.mockReturnValue(1100); pixi.tick();
+    const frame = document.getElementById('unitFrames').dataset.frame;
+    expect(play('atk', { continueActive: true })).toBe(true);
+    expect(document.getElementById('unitFrames').dataset.frame).toBe(frame);
+    expect(actionImpactRemaining(cue, 'timing-battle')).toBe(25);
+    expect(actionImpactRemaining(cue, 'old-battle')).toBeNull();
+    expect(actionImpactRemaining({ attacker: 'player-spell' }, 'timing-battle')).toBeNull();
+    hide(); expect(actionImpactRemaining(cue, 'timing-battle')).toBeNull();
   });
 
   it('stops hidden geometry polling and resumes only one interval for a live figure', async () => {

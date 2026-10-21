@@ -99,11 +99,16 @@ export function resourceRewardAt(game, drawCards) {
   return game.nodeRewards[key].type === 'resource' ? game.nodeRewards[key] : null;
 }
 
+const resourceClaims = new WeakSet();
 export function claimResourceReward(record, index, receive) {
   if (!record || record.taken !== null || !Number.isInteger(index) || !record.cardIds[index]) return false;
-  if (!receive(record.cardIds[index])) return false;
-  record.taken = index;
-  return true;
+  if (resourceClaims.has(record)) return false;
+  resourceClaims.add(record);
+  try {
+    if (!receive(record.cardIds[index])) return false;
+    record.taken = index;
+    return true;
+  } finally { resourceClaims.delete(record); }
 }
 
 // A page callback cannot outlive its run, location, or visible action.

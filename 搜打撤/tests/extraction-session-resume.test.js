@@ -1,4 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+
+installImmediateWebLocks();
 
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
 window.HTMLCanvasElement.prototype.getContext = () => ctx;
@@ -124,12 +127,13 @@ describe('撤离整理会话恢复', () => {
     expect(resumeHook).not.toHaveBeenCalled();
   });
 
-  it('开始新 run 会清除运行态中的 pending extraction', () => {
+  it('开始新 run 会清除运行态中的 pending extraction', async () => {
     const slot = 4;
     seedRun(slot);
     session.game.pendingExtraction = pendingFor('old-run');
     session.game.extractionPending = true;
-    session.newRun('standard', [], { skipClassChoice: true });
+    expect(RunStorage.remove(slot)).toBe(true); // The previous run has ended before another departure.
+    expect(await session.newRun('standard', [], { skipClassChoice: true })).not.toBe(false);
     expect(session.game.pendingExtraction).toBeNull();
     expect(session.game.extractionPending).toBeNull();
   });

@@ -1,0 +1,55 @@
+{
+  "tool": "built-in image_gen",
+  "size": [
+    1024,
+    1536
+  ],
+  "export": "Entire generated canvas scaled uniformly to 90%, centered on white 1024x1536 canvas for consistent safe margins.",
+  "items": [
+    {
+      "id": "wu",
+      "prompt": "Redraw the full-body game roster portrait. Reference 1 controls character identity, outfit, pose and props. Reference 2 ONLY controls refined anime semi-painterly technique: coherent detailed anime face, layered eyes, natural smooth warm-cool skin shading and gentle sheen, grouped flowing hair with selective fine strands, structural cloth folds and nuanced materials, precise focal lines and sophisticated hard/soft edges. Do not borrow reference 2 pose or clothing. CANVAS EXACTLY 1024x1536 portrait. Entire figure and all major props visible, balanced centered silhouette within x=50..974 and y=75..1460, about 90% canvas height, comfortable consistent top and bottom margins; do not crop hair, hat, shoes or sword. Pure near-white background with only subtle contact shadow and existing character effects. No environment, frame, text, watermark, UI, extra limbs, blocky polygon skin, photorealism or 3D. Silver-white very long high ponytail, vivid blue bow and black rose, round sunglasses atop head, cyan eyes and confident small fang smile. Black off-shoulder ruffled short dress, black ankle boots, sword sheathed behind back. Preserve standing pose and outfit of reference 1.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+        "D:/素材/代号柒/output/imagegen/wu-boots-1018/wu-boots-final.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-140960ad-7b57-447e-8783-c444b819e922.png"
+    },
+    {
+      "id": "changwuyu",
+      "prompt": "Redraw the full-body game roster portrait. Reference 1 controls character identity, outfit, pose and props. Reference 2 ONLY controls refined anime semi-painterly technique: coherent detailed anime face, layered eyes, natural smooth warm-cool skin shading and gentle sheen, grouped flowing hair with selective fine strands, structural cloth folds and nuanced materials, precise focal lines and sophisticated hard/soft edges. Do not borrow reference 2 pose or clothing. CANVAS EXACTLY 1024x1536 portrait. Entire figure and all major props visible, balanced centered silhouette within x=50..974 and y=75..1460, about 90% canvas height, comfortable consistent top and bottom margins; do not crop hair, hat, shoes or sword. Pure near-white background with only subtle contact shadow and existing character effects. No environment, frame, text, watermark, UI, extra limbs, blocky polygon skin, photorealism or 3D. Androgynous slim adult elf, silver gray hair tied low, golden eyes visible behind round thin eyeglasses, bent point black wide-brim witch hat with purple lining, black gold-trim long robe and purple-lined cape, feather sapphire brooch. One hand adjusts glasses, other arm folded, separate black smoke and orange flame at shoulder level. Preserve reference 1.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "D:/素材/代号柒/output/imagegen/wu-boots-1018/wu-boots-final.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-192e20de-164a-4033-99c6-a1b946d4a731.png"
+    },
+    {
+      "id": "baita",
+      "prompt": "Redraw the full-body game roster portrait. Reference 1 controls character identity, outfit, pose and props. Reference 2 ONLY controls refined anime semi-painterly technique: coherent detailed anime face, layered eyes, natural smooth warm-cool skin shading and gentle sheen, grouped flowing hair with selective fine strands, structural cloth folds and nuanced materials, precise focal lines and sophisticated hard/soft edges. Do not borrow reference 2 pose or clothing. CANVAS EXACTLY 1024x1536 portrait. Entire figure and all major props visible, balanced centered silhouette within x=50..974 and y=75..1460, about 90% canvas height, comfortable consistent top and bottom margins; do not crop hair, hat, shoes or sword. Pure near-white background with only subtle contact shadow and existing character effects. No environment, frame, text, watermark, UI, extra limbs, blocky polygon skin, photorealism or 3D. Adult woman, long dark-brown curly hair, two gold hairpins, green eyes, white blouse and green suspender long skirt, white socks and dark Mary Jane shoes. Seated in ornate chair eating strawberry cake with fork, ancient book on lap, two floating books, faint gold magic circle under chair. Preserve seated pose, objects and costume of reference 1.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+        "D:/素材/代号柒/output/imagegen/wu-boots-1018/wu-boots-final.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-aea5cd3a-2b6b-4c3c-9993-4aad23571185.png"
+    },
+    {
+      "id": "heixiang",
+      "prompt": "Redraw the full-body game roster portrait. Reference 1 controls character identity, outfit, pose and props. Reference 2 ONLY controls refined anime semi-painterly technique: coherent detailed anime face, layered eyes, natural smooth warm-cool skin shading and gentle sheen, grouped flowing hair with selective fine strands, structural cloth folds and nuanced materials, precise focal lines and sophisticated hard/soft edges. Do not borrow reference 2 pose or clothing. CANVAS EXACTLY 1024x1536 portrait. Entire figure and all major props visible, balanced centered silhouette within x=50..974 and y=75..1460, about 90% canvas height, comfortable consistent top and bottom margins; do not crop hair, hat, shoes or sword. Pure near-white background with only subtle contact shadow and existing character effects. No environment, frame, text, watermark, UI, extra limbs, blocky polygon skin, photorealism or 3D. Large muscular dark tan adult man, short swept-back dark gray hair, gold eyes, stitched scar on left cheek, orange scarf, dark tactical clothing, one heavy metal shoulder plate, combat gloves and boots, massive plain wide silver sword on back. Right hand sipping tiny coffee cup and left hand holds saucer. Preserve reference 1.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "D:/素材/代号柒/output/imagegen/wu-boots-1018/wu-boots-final.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-a2c2c628-b81a-49f0-a7dc-1963c4a414dc.png"
+    },
+    {
+      "id": "xingyue",
+      "prompt": "Redraw the full-body game roster portrait. Reference 1 controls character identity, outfit, pose and props. Reference 2 ONLY controls refined anime semi-painterly technique: coherent detailed anime face, layered eyes, natural smooth warm-cool skin shading and gentle sheen, grouped flowing hair with selective fine strands, structural cloth folds and nuanced materials, precise focal lines and sophisticated hard/soft edges. Do not borrow reference 2 pose or clothing. CANVAS EXACTLY 1024x1536 portrait. Entire figure and all major props visible, balanced centered silhouette within x=50..974 and y=75..1460, about 90% canvas height, comfortable consistent top and bottom margins; do not crop hair, hat, shoes or sword. Pure near-white background with only subtle contact shadow and existing character effects. No environment, frame, text, watermark, UI, extra limbs, blocky polygon skin, photorealism or 3D. Calm adult priestess, pale blond hair and extremely long thick low braid, gold eyes, white crescent hairclip flat above bangs on viewer right, white gold-trim clerical dress with dark teal cape, dark leggings and white gray boots. One raised hand with five clearly separated natural fingers blessing at chest, other holds small star lantern. Preserve reference 1.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp",
+        "D:/素材/代号柒/output/imagegen/wu-boots-1018/wu-boots-final.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a14eb6-9a67-75c2-80a6-1be3b3c5c14a/exec-40dfb7b3-e53f-4c27-b115-05f95b5cd69f.png"
+    }
+  ]
+}

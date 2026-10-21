@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-20T13:22:53.231Z",
+  "head": "6a489a11821bbf74c69bc7c048dff55bd52aecf3",
+  "sourceKind": "Current working tree including completed uncommitted files; no HEAD substitutions",
+  "project": "D:\\素材\\代号柒\\.tmp\\portable-clean-1020\\project",
+  "artifact": "代号柒-v0.60.0-便携无存档-20261020.exe",
+  "profile": "codename7-clean-20261020-f043d15e57b3487c",
+  "profileAbsent": true,
+  "inputFileCount": 2904,
+  "inputBytes": 289137186,
+  "manifest": "../.tmp/portable-clean-1020/inputs.json",
+  "manifestSHA256": "0f3460a5e5f00ed4a84dc2715cc32b1a266e24bf77328263777579416198b8cd",
+  "acquisition": "node ../.tmp/portable-clean-1020/prepare.cjs"
+}

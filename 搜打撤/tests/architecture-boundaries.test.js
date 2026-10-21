@@ -4,6 +4,92 @@ import { analyzeModule, buildModuleGraph, assertAcyclic, architectureViolations,
 
 const graphOf = files => buildModuleGraph(new Map(Object.entries(files)));
 
+describe('新增领域模块的默认保护', () => {
+  it('新增战斗实例域不能捕获默认运行态、全局随机或浏览器，视图也不能直接调用', () => {
+    const problems = architectureViolations(graphOf({
+      'battle/core/future.domain.js': "import '../runtime/battle.runtime.js'; import '../../core/random.js'; const page = document.body;",
+      'battle/runtime/battle.runtime.js': 'export const state = {};',
+      'core/random.js': 'export const random = {};',
+      'battle/view/battle.view.js': "import '../core/future.domain.js';",
+    }));
+    expect(problems.filter(problem => problem.includes('独立战斗实例'))).toHaveLength(3);
+    expect(problems.some(problem => problem.includes('视图须通过 core 命令与快照'))).toBe(true);
+  });
+
+  it('战斗实例允许纯状态工厂和同实例域依赖', () => {
+    expect(architectureViolations(graphOf({
+      'battle/core/future.domain.js': "import { create } from '../runtime/battle.runtime.factory.js'; export const run = context => create(context);",
+      'battle/runtime/battle.runtime.factory.js': 'export const create = state => ({ state });',
+    }))).toEqual([]);
+  });
+  it.each(['run/future-commands.js', 'hub/future.commands.js'])('%s 未登记也禁止页面与全局门面', name => {
+    const graph = graphOf({
+      [name]: "import '../core/sdt-facade.js'; import '../ui/future.js'; export const x = SDT.G || document.body;",
+      'core/sdt-facade.js': 'export const SDT = {};',
+      'ui/future.js': 'export const page = {};',
+    });
+    const problems = architectureViolations(graph);
+    expect(problems.filter(problem => problem.startsWith(name))).toHaveLength(3);
+    expect(problems.some(problem => problem.includes('SDT:1'))).toBe(true);
+  });
+
+  it('未登记的新纯执行计划禁止动态依赖运行态和捕获浏览器', () => {
+    const problems = architectureViolations(graphOf({
+      'cards/future-execution-plan.js': "import('../run/game.session.kernel.js'); export const x = globalThis.SDT;",
+      'run/game.session.kernel.js': 'export const state = {};',
+    }));
+    expect(problems).toHaveLength(2);
+  });
+
+  it('新命令禁止旁路依赖战斗全局运行内核', () => {
+    const problems = architectureViolations(graphOf({
+      'battle/future-commands.js': "import './core/battle.engine.js';",
+      'battle/core/battle.engine.js': 'export const energy = 1;',
+    }));
+    expect(problems).toEqual(['battle/future-commands.js:1: 领域命令/端口工厂不得捕获页面或全局状态 battle/core/battle.engine.js']);
+  });
+
+  it.each(['battle.card-play', 'battle.turn-continuation', 'battle.turn-start', 'battle.damage'])('%s 工厂禁止导入全局session状态', module => {
+    const problems = architectureViolations(graphOf({
+      [`battle/core/${module}.js`]: "import '../../run/game.session.kernel.js'; const x = window.SDT;",
+      'run/game.session.kernel.js': 'export const state = {};',
+    }));
+    expect(problems).toHaveLength(2);
+  });
+
+  it.each(['game.run.events', 'game.run.resources'])('%s 工厂禁止导入状态门面或捕获DOM', module => {
+    const problems = architectureViolations(graphOf({
+      [`run/${module}.js`]: "import '../hub/game.store.js'; const root = document.body;",
+      'hub/game.store.js': 'export const state = {};',
+    }));
+    expect(problems).toHaveLength(2);
+  });
+
+  it('战斗引擎工厂不能重新捕获浏览器门面，视图也不能旁路调用它', () => {
+    const problems = architectureViolations(graphOf({
+      'battle/core/battle.engine.factory.js': "import '../../core/sdt-facade.js'; const old = window.SDT;",
+      'core/sdt-facade.js': 'export const SDT = {};',
+      'battle/view/battle.view.js': "import '../core/battle.engine.factory.js';",
+    }));
+    expect(problems).toHaveLength(3);
+    expect(problems.some(problem => problem.includes('视图须通过 core 命令与快照'))).toBe(true);
+  });
+
+  it('新命令和工厂允许显式端口以及纯规则依赖', () => {
+    expect(architectureViolations(graphOf({
+      'run/future-commands.js': "import { value } from '../cards/future-rule.js'; export const create = ({ state, render }) => () => render(state, value);",
+      'battle/core/battle.card-play.js': "import { value } from '../../cards/future-rule.js'; export const create = ({ readState }) => () => readState().energy + value;",
+      'cards/future-rule.js': 'export const value = 1;',
+    }))).toEqual([]);
+  });
+
+  it('旧命令的特定浏览器债务不会放行新增DOM依赖', () => {
+    expect(architectureViolations(graphOf({
+      'hub/collection.commands.js': 'const previous = window; const regression = document.body;',
+    }))).toEqual(['hub/collection.commands.js: 领域命令/端口工厂/纯执行计划不能读取全局浏览器对象 document:1']);
+  });
+});
+
 describe('AST 架构检查的识别与负面场景', () => {
   it('会话内核不能重新接入 DOM 或浏览器适配器', () => {
     const graph = graphOf({

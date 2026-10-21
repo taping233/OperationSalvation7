@@ -191,7 +191,8 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
     const footer = pocket ? `<div class="pocket-zoom-actions"><span>待复原 ${stack.count} 张</span><button class="mini-btn ok" data-act="restoreCard" data-stack-key="${escAttr(stackKeyOf(stack))}" data-count="${count}" data-name="${escAttr(name)}" data-i="${index}"${missing ? ' disabled' : ''}>复原 ${count} 张 · ${cost} 钥匙</button>${missing ? `<p>${keys < cost ? `还需 ${cost - keys} 把钥匙` : `仓库空位不足，还需 ${count - base.stashRoom()} 格`}</p>` : ''}</div>` : '';
     ui.showCardZoom(stack.card, { presentation:'inventory', from, footer }); decorateInventoryZoom(stack.card);
   };
-  browser.addEventListener('click', event => {
+  let usingMaterial = false;
+  browser.addEventListener('click', async event => {
     const item = event.target.closest('[data-browser-key]');
     if (!item || !browser.contains(item) || item.hidden || !currentWarehouse()) return;
     const rows = pocket ? base.data.pocket : base.data.stash;
@@ -199,9 +200,15 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
     if (matches.length !== 1) return;
     const stack = matches[0];
     if (!pocket && base.materialInfo?.(stack.card)) {
+      if (usingMaterial) return;
       select(item.dataset.browserKey);
       if (rows.filter(row => row.card.name === stack.card.name).length !== 1) { ui.log('库存引用不唯一，请刷新仓库', 'warn'); return; }
-      const result = base.useStashMaterial(stack.card.name, false);
+      usingMaterial = true;
+      let result;
+      try { result = await base.useStashMaterial(stack.card.name, false); }
+      catch { result = { ok:false, msg:'基地存档未保存，材料未消耗，请重试。' }; }
+      finally { usingMaterial = false; }
+      if (!currentWarehouse()) return;
       if (result.ok) { sound.ding?.(); ui.log(result.msg, 'loot'); refresh(); }
       else if (result.msg) ui.log(result.msg, 'warn');
       return;

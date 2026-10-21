@@ -1,6 +1,7 @@
 import { esc } from '../core/shared.js';
 import { Random } from '../core/random.js';
 import { hopPoint, ease } from '../core/motion-primitives.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import '../../css/event-dice.css';
 
 // Outcomes and the result live in the caller's run record, never in animation state.
@@ -12,7 +13,9 @@ export function diceStep(owner, key, outcomes, sides = outcomes.length) {
 
 export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, setReturn }) {
   let sequence = 0;
+  const persist = () => saveRunCheckpoint(save);
   function open({ owner, key, title, outcomes, sides, done, beforeRoll = () => true, current:context = () => true }) {
+    if (!context()) return false;
     const step = diceStep(owner, key, outcomes, sides);
     const token = ++sequence;
     let rolling = false, continued = false;
@@ -32,14 +35,19 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
           <button type="button" class="ov-btn ok" data-act="eventDiceContinue"${result ? '' : ' hidden'}>确认结果，继续</button>
           <button type="button" class="ov-btn" data-act="eventDiceLeave">暂离，保留进度</button></div>` });
       const active = bind('eventDiceRoll');
-      const current = () => token === sequence && !continued && active();
+      const current = () => token === sequence && !continued && context() && active();
       setReturn?.(() => { if (token === sequence && !continued) render(); });
-      UI.act('eventDiceLeave', () => { if (current() && !rolling) { sequence++; onLeave(); } });
+      const leave = () => { if (current() && !rolling) { sequence++; onLeave(); } };
+      UI.act('eventDiceLeave', leave);
+      UI.act('eventExit', leave);
       UI.act('eventDiceContinue', () => {
         if (!current() || rolling || !selected()) return;
-        if (save() === false) { render('保存未成功，请重试确认；本次结果不会改变。'); return; }
+        if (!persist()) { render('保存未成功，请重试确认；本次结果不会改变。'); return; }
         continued = true;
-        done(selected().value);
+        if (done(selected().value) === false) {
+          continued = false;
+          render('奖励尚未承接，请重试确认；本次结果不会改变。');
+        }
       });
       UI.act('eventDiceRoll', async () => {
         if (!current() || rolling || step.result != null) return;
@@ -47,8 +55,7 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
         if (!beforeRoll()) { rolling = false; render('当前无法投骰，请检查货币。'); return; }
         step.result = 1 + Math.floor(Random.random('event') * step.sides);
         // Persist payment and roll together before revealing the outcome.
-        const saved = save();
-        if (saved === false) {
+        if (!persist()) {
           rolling = false;
           render('保存未成功，结果已保留在本局；请先重试保存。');
           return;
@@ -69,7 +76,7 @@ export function createEventDiceController({ UI, SDT, save, show, bind, onLeave, 
         if (current()) render();
       });
     }
-    if (save() === false) { onLeave(); return false; }
+    if (!persist()) { onLeave(); return false; }
     render();
     return true;
   }

@@ -1,0 +1,58 @@
+{
+  "status": "generated",
+  "name": "猎鹰宝宝",
+  "recipe": "3.4",
+  "request": {
+    "input": "One original baby falcon scout, plump compact bird with slate blue back, ivory belly, sharp ochre eyes and ochre feet. Its signature is one oversized translucent amber reconnaissance lens mounted ONLY over its left eye, folded blade-like flight feathers and a short split orange signal ribbon on its leg. Perched with wings partially opened, proud curious expression. Distinct hooked beak, two feet, two wings.\n\nOriginal collectible companion creature concept for a futuristic urban extraction card game. Nonhuman pet, solo, full body.\n\nSquare composition, entire subject centered, complete ears wings tail feet and equipment within canvas, generous clean margin. Three-quarter view, plain warm off-white background, no scenery, no typography.\n\nCoherent muted base palette with one concentrated vivid signature accent, clear grouped shadows, carefully readable face and equipment at thumbnail scale.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 1024,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1801202601,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, human, person, girl, boy, humanoid, duplicate creature, crowd, cropped ears, cropped tail, photorealistic, 3d render",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "One original baby falcon scout, plump compact bird with slate blue back, ivory belly, sharp ochre eyes and ochre feet. Its signature is one oversized translucent amber reconnaissance lens mounted ONLY over its left eye, folded blade-like flight feathers and a short split orange signal ribbon on its leg. Perched with wings partially opened, proud curious expression. Distinct hooked beak, two feet, two wings.\n\nOriginal collectible companion creature concept for a futuristic urban extraction card game. Nonhuman pet, solo, full body.\n\nSquare composition, entire subject centered, complete ears wings tail feet and equipment within canvas, generous clean margin. Three-quarter view, plain warm off-white background, no scenery, no typography.\n\nCoherent muted base palette with one concentrated vivid signature accent, clear grouped shadows, carefully readable face and equipment at thumbnail scale.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, human, person, girl, boy, humanoid, duplicate creature, crowd, cropped ears, cropped tail, photorealistic, 3d render",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "game\\art-source\\pets\\redesign-20261018\\falcon-nai.png",
+  "sha256": "1dede111caf8f54910c37d7bb6cfee54d622005ebc4f51362463b4fec8f433b0"
+}

@@ -1,0 +1,45 @@
+{
+  "snapshot": "C:/Users/太平/AppData/Local/Temp/sdt-reward-flow-1020-01a157fe/project",
+  "capturedAt": "2026-10-20T07:05:51.3738687Z",
+  "inputs": [
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "6b619405a2dd460c17f1da9baea3b72ec547a698e02c09c17c8d1fc908dc1af8"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "8d1bd3a7cc849e655af7819584bb74520207c1036d0a9b14cea9b2838cc045b1"
+    },
+    {
+      "path": "tests/chest-callback-lifecycle-audit.test.js",
+      "sha256": "a1dbd11f862b3406e26e212f5df96928c391e67fc863651c31a3cefcb4d8f833"
+    },
+    {
+      "path": "tests/reward-save-interruptions.test.js",
+      "sha256": "0d02c6b9ce40196eb36bb89fc04333713c3961dc2a1aaf9c7ca7e7454f76bb8a"
+    },
+    {
+      "path": "tests/bag-page-lifecycle-review.test.js",
+      "sha256": "2074e2d01f13458eedaf5f1ff06aa4b24b9fdeb5b9bc6541e86faa17e29399d4"
+    },
+    {
+      "path": "game/dev/feedback-1018-review.js",
+      "sha256": "2cee676ad2e9b20ed5efe4cce1250f6fd90bc11029f4035a74cb597c77a2e2ba"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "6a49359560708a6c4beb80ae65216df95af3b0c3e2246eae4b3f413f9c3ca2ca"
+    },
+    {
+      "path": "docs/save-format.md",
+      "sha256": "acbaaafdba4973df2f22654b7808080105509322a23bc043d9ff9de8ff175429"
+    }
+  ],
+  "assetSelectionReview": "chests.js仅保存返回控制及临时提示变化，静态与动态素材URL/帧选择不变；按完整diff复核后更新两处既有指纹",
+  "followUp": {
+    "path": "tests/node-retrigger.test.js",
+    "sha256": "ae47e2d58424454aaa9dd558a0c90583bc71bc24fd261b948205d2c81ae462dc",
+    "reason": "修正资源节点夹具：返回保存前恢复合法邻格，随后再临时构造安全落点",
+    "verification": "full-findings-recheck.log：该文件通过；总体62通过/2项未修改workflow-doctor失败"
+  }
+}

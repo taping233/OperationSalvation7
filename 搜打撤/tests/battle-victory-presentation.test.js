@@ -9,7 +9,7 @@ beforeEach(() => {
   cancel = vi.fn();
   Element.prototype.animate = vi.fn(() => ({ finished: new Promise(resolve => { resolveAnimation = resolve; }), cancel }));
 });
-afterEach(() => { delete Element.prototype.animate; });
+afterEach(() => { delete Element.prototype.animate; delete Element.prototype.getAnimations; document.body.classList.remove('reduce-motion'); vi.useRealTimers(); });
 
 it('keeps the battle mounted and deduplicates feedback until its animation finishes', async () => {
   const first = presentVictory();
@@ -42,4 +42,41 @@ it('adds no wait for reduced motion', async () => {
   window.SDT.Motion.reduceMotion = () => true;
   expect(await presentVictory()).toBe(true);
   expect(Element.prototype.animate).not.toHaveBeenCalled();
+});
+
+it('lets the final enemy death complete before announcing victory', async () => {
+  stage.innerHTML = '<div class="sts-foe dead"></div>';
+  let finishDeath;
+  Element.prototype.getAnimations = () => [{ playState: 'running',
+    effect: { getComputedTiming: () => ({ endTime: 650 }) },
+    finished: new Promise(resolve => { finishDeath = resolve; }) }];
+  const result = presentVictory();
+  expect(stage.inert).toBe(true);
+  expect(stage.querySelector('.battle-victory-feedback')).toBeNull();
+  finishDeath(); await Promise.resolve(); await Promise.resolve();
+  expect(stage.querySelector('.battle-victory-feedback')).not.toBeNull();
+  resolveAnimation(); expect(await result).toBe(true);
+});
+
+it('skips pending death motion when reduced motion is enabled mid-settlement', async () => {
+  stage.innerHTML = '<div class="sts-foe dead"></div>';
+  Element.prototype.getAnimations = () => [{ playState: 'running',
+    effect: { getComputedTiming: () => ({ endTime: 650 }) }, finished: new Promise(() => {}) }];
+  const result = presentVictory();
+  document.body.classList.add('reduce-motion');
+  expect(await result).toBe(true);
+  expect(stage.inert).toBe(false);
+});
+
+it('bounds a stuck death animation and never revives a closed settlement', async () => {
+  vi.useFakeTimers();
+  stage.innerHTML = '<div class="sts-foe dead"></div>';
+  Element.prototype.getAnimations = () => [{ playState: 'running',
+    effect: { getComputedTiming: () => ({ endTime: 650 }) }, finished: new Promise(() => {}) }];
+  const result = presentVictory();
+  await vi.advanceTimersByTimeAsync(1100);
+  expect(stage.querySelector('.battle-victory-feedback')).not.toBeNull();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
+  expect(await result).toBe(false);
+  expect(stage.querySelector('.battle-victory-feedback')).toBeNull();
 });

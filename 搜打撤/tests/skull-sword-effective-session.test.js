@@ -489,7 +489,7 @@ it('显式自定义raw同名执行候选不会被后来的UID override吞掉cost
 });
 
 
-it('BOSS三堆摘要标题与ARIA按有效卡计数，打开牌库/墓地与摘要同名且不改UID', async () => {
+it('BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID', async () => {
   const originals = await swordBattle();
   const ownedBefore = JSON.stringify(game.ownedCards);
   runtime.set$hand(runtime.hand.filter(uid => !originals.includes(uid)));
@@ -499,25 +499,25 @@ it('BOSS三堆摘要标题与ARIA按有效卡计数，打开牌库/墓地与摘�
   render(); flush();
   const draw = UI.el.ovBody.querySelector('[data-act="btDeck"]');
   const grave = UI.el.ovBody.querySelector('[data-act="btGrave"]');
-  const discard = [...UI.el.ovBody.querySelectorAll('.bt-pile')]
-    .find(node => node.title.startsWith('弃牌堆：'));
-  for (const [node, count] of [[draw, 2], [discard, 1], [grave, 1]]) {
-    expect(node.title).toContain(`不朽斩×${count}`);
+  expect([...UI.el.ovBody.querySelectorAll('.bt-pile')].some(node => node.title.startsWith('弃牌堆：'))).toBe(false);
+  for (const [node, count] of [[draw, 2], [grave, 3]]) {
+    expect(node.title).toContain('不朽斩×2');
     expect(node.title).not.toContain('初始攻击');
     expect(node.querySelector('b').textContent).toBe(String(count));
   }
   expect(draw.getAttribute('aria-label')).toBe(draw.title);
   expect(grave.getAttribute('aria-label')).toBe(grave.title);
-  for (const [uids, count] of [[before.drawPile, 2], [before.discard, 1], [before.grave, 1]]) {
-    expect(pileTip(uids)).toBe(`不朽斩×${count}`);
-  }
+  expect(pileTip(before.drawPile)).toBe('不朽斩×2');
+  expect(before.consumedPile).toHaveLength(3); // Two attacks plus the already played sword.
+  expect(pileTip(before.consumedPile)).toContain('不朽斩×2');
   actions.get('btDeck')(); await settle();
   expect(UI.el.ovBody.querySelector('.battle-pile-card').getAttribute('aria-label')).toContain('不朽斩');
   expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('不朽斩');
   actions.get('btDeckBack')(); await settle();
   actions.get('btGrave')(); await settle();
-  expect(UI.el.ovBody.querySelector('.battle-pile-card').getAttribute('aria-label')).toContain('不朽斩');
-  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('不朽斩');
+  const consumedLabels = [...UI.el.ovBody.querySelectorAll('.battle-pile-card')].map(node => node.getAttribute('aria-label'));
+  expect(consumedLabels).toEqual(['查看 骷髅王剑 的完整规则，1 张', '查看 不朽斩 的完整规则，2 张']);
+  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('骷髅王剑');
   const after = BattleSession.getSnapshot();
   expect(after.drawPile).toEqual(before.drawPile);
   expect(after.discard).toEqual(before.discard);

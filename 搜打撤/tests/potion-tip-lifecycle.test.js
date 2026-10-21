@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
   attach: vi.fn(() => Promise.resolve(false)), hide: vi.fn(), cacheStats: () => ({}),
   play: vi.fn(), setPaused: vi.fn(), presentDeath: vi.fn(), isLiveBattleFigure: () => false,
+  actionImpactRemaining: () => null,
 }));
 
 document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';

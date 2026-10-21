@@ -159,14 +159,15 @@ describe('受缚之残影 → 深渊主宰·妲莉薇特', () => {
     await drain();
 
 
-    expect(g.logs.some(l => l.includes('抽了') && l.includes('张牌（手牌'))).toBe(true); // 旧日再临抽牌段已结算（测试牌库小，抽到牌库空为止）
+    expect(g.logs.some(l => /(?:抽了|无牌可抽).*手牌/.test(l))).toBe(true); // 旧日再临抽牌段已结算（测试牌库小，抽到牌库空为止）
     expect(snap().hand.length).toBeLessThanOrEqual(6);                       // 抽牌直到手牌 6 张
     expect(snap().allies.length).toBe(4);                     // 4 名封印肢体
     snap().allies.forEach(a => { expect(a.statless).toBe(true); expect(a.hp).toBeNull(); });
     expect(snap().maxEnergy).toBe(100);                       // 能量上限 +1
     expect(snap().pstat.status.spellUp || 0).toBe(1);         // 法伤 +1
-    expect(g.logs.some(l => l.includes('诅咒无法侵染深渊主宰'))).toBe(true);
-    expect(g.logs.some(l => l.includes('均视为已注能'))).toBe(true);
+    const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+    expect(runtime.playerCurseImmune).toBe(true);
+    expect(runtime.allSpellsInfused).toBe(true);
     BattleSession.commands.flee();
     await drain(50);
   });

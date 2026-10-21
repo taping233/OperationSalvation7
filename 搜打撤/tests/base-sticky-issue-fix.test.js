@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it } from 'vitest';
 import { RunStorage, SLOT_COUNT } from '../game/src/hub/game.storage.js';
 
@@ -19,10 +21,11 @@ beforeEach(() => {
 });
 
 describe('base 坏档 issue 不再粘滞', () => {
-  it('坏档→外部修复→peek 恢复→save 解锁', () => {
+  it('坏档→外部修复→peek 恢复→save 解锁', async () => {
     localStorage.setItem(slotKey(1), '{broken');
     expect(Base.peek(1)).toBeNull();
     expect(Base.issue(1)).toBe('corrupt');
+    await Base.flushWrites();
     expect(localStorage.getItem(Base.CORRUPT_KEY(1))).toBe('{broken');   // 坏档备份口径不变
 
     // 外部（另一标签页/人工）把原串修成合法基地档
@@ -34,6 +37,6 @@ describe('base 坏档 issue 不再粘滞', () => {
 
     // save 解锁：旧实现这里因残留 issue 返回 false，玩家进度永远写不回
     Base.use(1);
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
   });
 });

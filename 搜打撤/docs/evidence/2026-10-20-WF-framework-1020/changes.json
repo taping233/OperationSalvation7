@@ -1,0 +1,434 @@
+{
+  "at": "2026-10-20T14:47:18.002Z",
+  "scope": "Owned changes only; shared-file fingerprints include preserved pre-existing and peer changes",
+  "shared": {
+    "game/src/battle/core/battle.core.js": "Only configureBattleEngine import and service composition block; replay diagnostic belongs to WF-sts2-code-learning-1020",
+    "game/src/battle/core/battle.engine.factory.js": "Framework output frozen for browser; two normal-deck snippets handed to WF-battle-flow-1020",
+    "docs/architecture.md": "Only startup/engine/departure/motion paragraphs; peer replay/RNG/description paragraphs preserved",
+    "tests/page-perf-shared.test.js": "Peer-owned VM fixture fix, tested in integration, not owned here"
+  },
+  "files": [
+    {
+      "path": "game/index.html",
+      "sha256": "9038263d7ce25cd848897850aea1b0b4be1b8ee15889cf36989f3a5d38ac2bf1",
+      "bytes": 25187,
+      "browserSnapshotSha256": "9038263d7ce25cd848897850aea1b0b4be1b8ee15889cf36989f3a5d38ac2bf1",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/main.js",
+      "sha256": "42e054f2fe88f06e5f6abff94cfbf1fbf6570972ae59539f9d828abf2dec74d8",
+      "bytes": 2310,
+      "browserSnapshotSha256": "42e054f2fe88f06e5f6abff94cfbf1fbf6570972ae59539f9d828abf2dec74d8",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/boot-order.js",
+      "sha256": "a9d8170a42a58b752a990f71fd9d288a66df77851993cdcc9b3bde3f2e612a98",
+      "bytes": 1640,
+      "browserSnapshotSha256": "a9d8170a42a58b752a990f71fd9d288a66df77851993cdcc9b3bde3f2e612a98",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/ui/home-menu-motion.js",
+      "sha256": "866641a1f7c41458d37cad9b4b150f5861fd011a69fda10477e67488b3f31cdd",
+      "bytes": 9811,
+      "browserSnapshotSha256": "866641a1f7c41458d37cad9b4b150f5861fd011a69fda10477e67488b3f31cdd",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/base-departure.commands.js",
+      "sha256": "b5449abcd58cc740485fd45852b463031f6d2312a2cb4736eff0d07222b0fd77",
+      "bytes": 4486,
+      "browserSnapshotSha256": "b5449abcd58cc740485fd45852b463031f6d2312a2cb4736eff0d07222b0fd77",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "sha256": "7a9ddd8c9a162427e770e7b02745d169421bd39fbb36cb065b2e68e25eafff1e",
+      "bytes": 34228,
+      "browserSnapshotSha256": "7a9ddd8c9a162427e770e7b02745d169421bd39fbb36cb065b2e68e25eafff1e",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/departure-persistence.js",
+      "sha256": "a59ee69e9ac811b04067b931a7837b2e00855ffadf4f79a6981170cc8eb6da11",
+      "bytes": 6127,
+      "browserSnapshotSha256": "a59ee69e9ac811b04067b931a7837b2e00855ffadf4f79a6981170cc8eb6da11",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/recovery.commands.js",
+      "sha256": "733ef58dd9ac2c03569eeb8fc92bc5d12ff3c27a1466e0a92c743e77ea05e91a",
+      "bytes": 12239,
+      "browserSnapshotSha256": "733ef58dd9ac2c03569eeb8fc92bc5d12ff3c27a1466e0a92c743e77ea05e91a",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "sha256": "b39c91e21e5d8c695b3ccc81853b7bd0ed663907cc15d5310c9e213306dfb4ee",
+      "bytes": 15536,
+      "browserSnapshotSha256": "b39c91e21e5d8c695b3ccc81853b7bd0ed663907cc15d5310c9e213306dfb4ee",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "sha256": "3f33673335420b3162f4f2c88bcdc686c1b8ddfd3ba8277b2edb69a5fe3d4758",
+      "bytes": 38760,
+      "browserSnapshotSha256": "3f33673335420b3162f4f2c88bcdc686c1b8ddfd3ba8277b2edb69a5fe3d4758",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "sha256": "000a0dc2503328a23a0571199dff9f6045e3362236b458a8131e52be8436a34e",
+      "bytes": 30167,
+      "browserSnapshotSha256": "000a0dc2503328a23a0571199dff9f6045e3362236b458a8131e52be8436a34e",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.page.js",
+      "sha256": "2e9fc484ef101fa90a5265f36e402dd23560ae740740ab85fee94a091a28982a",
+      "bytes": 27077,
+      "browserSnapshotSha256": "2e9fc484ef101fa90a5265f36e402dd23560ae740740ab85fee94a091a28982a",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/agent/agent.scenes.runtime.js",
+      "sha256": "9d728a7f548a2f656035358ac993cdddabba5a3567c1f38749bf44f818ee1749",
+      "bytes": 24418,
+      "browserSnapshotSha256": "9d728a7f548a2f656035358ac993cdddabba5a3567c1f38749bf44f818ee1749",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/run/game.run.dev.js",
+      "sha256": "b481cb3ae2df16e3428dda31f5f4fd600e036125cd7da8375cf8748d42daddc5",
+      "bytes": 14827,
+      "browserSnapshotSha256": "b481cb3ae2df16e3428dda31f5f4fd600e036125cd7da8375cf8748d42daddc5",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "c62fbd38e29c17ecc6074011075aa914f8a7944ec5c0050916de3d24d681f0ee",
+      "bytes": 12516,
+      "browserSnapshotSha256": "c62fbd38e29c17ecc6074011075aa914f8a7944ec5c0050916de3d24d681f0ee",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.js",
+      "sha256": "11d19ae692b5fde8c3196b172772ed90c2816a57df8df59168e8e1d604ab6cc9",
+      "bytes": 68941,
+      "browserSnapshotSha256": "88342ed8d1f0ffda9a0d98d9dbf2d38dad30852e3d5d39797c3581a41339651a",
+      "laterChanged": true
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "e10598b5bb102a7e18dfa7a2ec7a1777f3dc1f58ede4b32b5dee7ec9c50079b0",
+      "bytes": 25678,
+      "browserSnapshotSha256": "d0e33ffe3aab42bfdd338de93981a83557d4cc81e70daaa8e0d7a95dfdddc773",
+      "laterChanged": true
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "sha256": "fa13533ac0d392e441120e64903ab1752421e75f824d4722e898ae6b7a56eae7",
+      "bytes": 86549,
+      "browserSnapshotSha256": "087955d0f1c1d765ed7f375a6619619100222739802ccd17a38137aa8803d10c",
+      "laterChanged": true
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "sha256": "7a9066ff12c231282d0ea6f11a5789a00fa9579b6f96c09d5f22f9d9c2da78e8",
+      "bytes": 72977,
+      "browserSnapshotSha256": "7a9066ff12c231282d0ea6f11a5789a00fa9579b6f96c09d5f22f9d9c2da78e8",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "sha256": "e569f0ca48552742178324ef08f17c91b9ed98f3fcf50b62dc16736289814771",
+      "bytes": 11645,
+      "browserSnapshotSha256": "e569f0ca48552742178324ef08f17c91b9ed98f3fcf50b62dc16736289814771",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.types.d.ts",
+      "sha256": "9692f28ca8b397019b5667b32ee5a4cf68716e6871120df223905f758ea01567",
+      "bytes": 2319,
+      "browserSnapshotSha256": "9692f28ca8b397019b5667b32ee5a4cf68716e6871120df223905f758ea01567",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "sha256": "4fe84684307401a606e4f673e63d976dec9d9e9c4ba98c00348f0ca0f3a9509b",
+      "bytes": 104257,
+      "browserSnapshotSha256": "4fe84684307401a606e4f673e63d976dec9d9e9c4ba98c00348f0ca0f3a9509b",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "sha256": "4e818b3fd9273baf7f470d5d6b223a2f457589ce9366e7983a62c93aa968c49a",
+      "bytes": 60555,
+      "browserSnapshotSha256": "4e818b3fd9273baf7f470d5d6b223a2f457589ce9366e7983a62c93aa968c49a",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "sha256": "dbf91fad0c32cf83036a85e4fc5a1f33b7ab77167456dcf3dcb9660208e05f79",
+      "bytes": 6208,
+      "browserSnapshotSha256": "dbf91fad0c32cf83036a85e4fc5a1f33b7ab77167456dcf3dcb9660208e05f79",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "sha256": "45bc5f7b529928977db2c2cd4b479880905335ada40e24c01aa1e6638989a7a5",
+      "bytes": 13963,
+      "browserSnapshotSha256": "45bc5f7b529928977db2c2cd4b479880905335ada40e24c01aa1e6638989a7a5",
+      "laterChanged": false
+    },
+    {
+      "path": "game/src/ui/page-motion-profiles.js",
+      "sha256": "0688e223339608d62e90a160831bbb3c44a2304a2a8902a4f026fab7ee88fc0a",
+      "bytes": 6354,
+      "browserSnapshotSha256": "0688e223339608d62e90a160831bbb3c44a2304a2a8902a4f026fab7ee88fc0a",
+      "laterChanged": false
+    },
+    {
+      "path": "game/css/interface-motion.css",
+      "sha256": "b0b27f66916c28e2ffdf517de47380df667df3c4935081787b6663dcf58b024c",
+      "bytes": 7323,
+      "browserSnapshotSha256": "b0b27f66916c28e2ffdf517de47380df667df3c4935081787b6663dcf58b024c",
+      "laterChanged": false
+    },
+    {
+      "path": "game/css/base-camp.css",
+      "sha256": "221270f9c62bf9d399520303c5361bfa97d2c6ddec61c2f55b3812cf94383f2b",
+      "bytes": 36200,
+      "browserSnapshotSha256": "221270f9c62bf9d399520303c5361bfa97d2c6ddec61c2f55b3812cf94383f2b",
+      "laterChanged": false
+    },
+    {
+      "path": "game/css/camp-entry.css",
+      "sha256": "0e25b8c0cf1cc11530876b8bb3570717df6723ba896d93c5cf97f472ffa4989e",
+      "bytes": 13670,
+      "browserSnapshotSha256": "0e25b8c0cf1cc11530876b8bb3570717df6723ba896d93c5cf97f472ffa4989e",
+      "laterChanged": false
+    },
+    {
+      "path": "scripts/architecture-graph.mjs",
+      "sha256": "3518a86a414244b98d1108fc2df998e9db44198e38980ab1629ee18458448a21",
+      "bytes": 13697,
+      "browserSnapshotSha256": "3518a86a414244b98d1108fc2df998e9db44198e38980ab1629ee18458448a21",
+      "laterChanged": false
+    },
+    {
+      "path": "game/selftest.js",
+      "sha256": "cf450cc4310f59dd9ce5d2cd8e0e6f4f5ca8b39202366f109bb3b70cfe230248",
+      "bytes": 10560
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "da91b9855cc885fa980eca52b12dcb90b3ffb76c09df0080a6963a333524e151",
+      "bytes": 33702
+    },
+    {
+      "path": "docs/save-format.md",
+      "sha256": "9ba200af5b70a7e22e3026a0b5598431deef765968c42ff137f7354727665dfc",
+      "bytes": 23109
+    },
+    {
+      "path": "game/src/README.md",
+      "sha256": "b967703820cb1d84db793d2e9db254a9cffcb0ed0acb75e39ef32facb57b3d5b",
+      "bytes": 5502,
+      "browserSnapshotSha256": "b967703820cb1d84db793d2e9db254a9cffcb0ed0acb75e39ef32facb57b3d5b",
+      "laterChanged": false
+    },
+    {
+      "path": "tests/boot.test.js",
+      "sha256": "cf1f3d21377c80816ed913809726c9e53984b86610c261139027510a5235ed24",
+      "bytes": 48608
+    },
+    {
+      "path": "tests/contracts.test.js",
+      "sha256": "7a11dd78116c5b8332ec4450158134d7490a8c70cc5cf575dbafd93ee1e4a499",
+      "bytes": 11361
+    },
+    {
+      "path": "tests/dev-tools-lazy-entry.test.js",
+      "sha256": "39c01a6f1277283e90e6246b97609c1b3c97c1c5660319c55a8f1541d9c30653",
+      "bytes": 15443
+    },
+    {
+      "path": "tests/home-menu-motion.test.js",
+      "sha256": "c55e5802c757db60b996d9f8de217787a8ac8440079206b68e6a20dd0dc395da",
+      "bytes": 3551
+    },
+    {
+      "path": "tests/agent-console-jump.test.js",
+      "sha256": "84a383dc161fb18a6dc2387543827d3c179abde634d83f1d1a6519140d56da36",
+      "bytes": 10663
+    },
+    {
+      "path": "tests/agent-scenes.test.js",
+      "sha256": "c93a845dde49cdfc6abcc979e02c4e99fedbef6525c5bffd92e2b08052ee8d2d",
+      "bytes": 6028
+    },
+    {
+      "path": "tests/bag-item-rule-baseline.test.js",
+      "sha256": "a58096b4691e5aeb4ccfdd263d7192b420013bdfe854a73f22612d18a2f7eccb",
+      "bytes": 13889
+    },
+    {
+      "path": "tests/bag-structured-rule-migration.test.js",
+      "sha256": "7fed06f6ca0992ab2fbe7579769ee3ba8a512b650fbec512b7eb49060371f4b1",
+      "bytes": 10654
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "sha256": "b0f70ade034d14694a14ade81bd9b33b8fb35de5ed864bc84b215e7b8233ab59",
+      "bytes": 22728
+    },
+    {
+      "path": "tests/extraction-session-resume.test.js",
+      "sha256": "b7431d5d75c147279fd72aebc87ed9b9ad39638a4fc8fe28b8cdd8590d986dce",
+      "bytes": 6350
+    },
+    {
+      "path": "tests/first-explore-marking.test.js",
+      "sha256": "7d1afc17b85ee90bba86570c1c815bbafa2e23222946e602b9a40b9a4d4757e2",
+      "bytes": 8288
+    },
+    {
+      "path": "tests/hub-flow-regression.test.js",
+      "sha256": "058b8e6fa9c0f1f23d8255f51f88244eaf5d75553b27b0eb2f2ea3f7a91407c6",
+      "bytes": 19895
+    },
+    {
+      "path": "tests/node-retrigger.test.js",
+      "sha256": "e4dd11feb2a68f733d77271a0446fcb97839d3e59ea2135698e7445173fcb72a",
+      "bytes": 20605
+    },
+    {
+      "path": "tests/r5a-session-menu.test.js",
+      "sha256": "dff4336d7605b5139b6f7eba14bcac8369e4afa4dfb75879620019a2dc7c0955",
+      "bytes": 10956
+    },
+    {
+      "path": "tests/run-battle-stats-persistence-cloud.test.js",
+      "sha256": "4e7ed4e105a639997d1d3e02f23cb32908bf9b4ab439d448a05a4af8b8656d33",
+      "bytes": 7384
+    },
+    {
+      "path": "tests/terminal-death.test.js",
+      "sha256": "6ed46d8616e5d0962494a41451de5c543e840bfb1b05d4f5b4fb00ac194262d1",
+      "bytes": 6683
+    },
+    {
+      "path": "tests/terminal-retry-copy.test.js",
+      "sha256": "c68e76b179ed240aa2b1df865fb1f9fa761fd9ecf8443abe12100b750dbdcde9",
+      "bytes": 5877
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "sha256": "2a6a0b853f16977917a12908d6afb5eb099360f5d179f352a30ab5e27106fa92",
+      "bytes": 7220
+    },
+    {
+      "path": "tests/main-lifecycle.test.js",
+      "sha256": "871f73724e5f0c35b38daacfc3a23fba6da073fa9a3e9db8f936ce7aab1ec893",
+      "bytes": 1734
+    },
+    {
+      "path": "tests/departure-persistence.test.js",
+      "sha256": "94fd18ff5af7a85e136f01565782120aa4009d4d6ee586c5ccb9e1f7e0982af8",
+      "bytes": 10582
+    },
+    {
+      "path": "tests/departure-real-session-review.test.js",
+      "sha256": "4acf13a044776cfac5000d7624ca6738d30cb0e4c99e543bbe6e0a852deef9fd",
+      "bytes": 4027
+    },
+    {
+      "path": "tests/departure-class-confirmation.test.js",
+      "sha256": "a45fc1075f3c8b00866d89557f30071944dbd4f9e0fdf52e4e1ae7fc9be0c2b5",
+      "bytes": 6460
+    },
+    {
+      "path": "tests/departure-browse-state.test.js",
+      "sha256": "e1f780ffca9940bd0e69cab8a658f5d09f1a365ee294f714630934061f10362d",
+      "bytes": 7629
+    },
+    {
+      "path": "tests/framework-battle-engine-services.test.js",
+      "sha256": "af5272e423ced4da4da755e8a1413abe90cd9219d0241c5d16316b6f091d6704",
+      "bytes": 3780
+    },
+    {
+      "path": "tests/structured-backupcell.test.js",
+      "sha256": "5eeafe3b2ab2cbc010e93779f808b74b22ecdeaca9fa1b23e63e7c8c98787ed9",
+      "bytes": 4252
+    },
+    {
+      "path": "tests/battle-engine-facade.test.js",
+      "sha256": "24ee0461ddb66a4cd426a359cda959055c5bee592a7094f2ba3104d33ee5f684",
+      "bytes": 2574
+    },
+    {
+      "path": "tests/battle-engine-decomposition.test.js",
+      "sha256": "e0534126a7678e2e6dede8d2332f30611ed40179d4baaa7adae68729a85a05eb",
+      "bytes": 9262
+    },
+    {
+      "path": "tests/tt12-structured-preplay.test.js",
+      "sha256": "d2b7f9348e8568ba8b2d67d327a8e71bfae53ff60683e61006323b8a83df156e",
+      "bytes": 7450
+    },
+    {
+      "path": "tests/tt12-structured-battle.test.js",
+      "sha256": "7818c1430b9ddd9849e126e53a40e80145f2bd746dc1b5c896a147b2725e8a0a",
+      "bytes": 7856
+    },
+    {
+      "path": "tests/schema-op-coverage.test.js",
+      "sha256": "6b4c5599102c1a2a1308690b3c99891da9fbf4f0cfd36f6d8d0b8bfe81aa4002",
+      "bytes": 6760
+    },
+    {
+      "path": "tests/e8-card-inventory.test.js",
+      "sha256": "959fdaa2aac6d1671b7d76dc6e932320eebefe807de50d5a30908088cfa2d1bd",
+      "bytes": 28573
+    },
+    {
+      "path": "tests/m-batch-production.test.js",
+      "sha256": "63bc8daafa1e9d62d832c7c0aeeba48afa6f66059a7e0a846a96d94143569c98",
+      "bytes": 7487
+    },
+    {
+      "path": "tests/facade-snapshot-drift.test.js",
+      "sha256": "e830b46c395d7e3883e595e71eb71bbd309bf851a3c70716bc67b8fe9b789d62",
+      "bytes": 4311
+    },
+    {
+      "path": "tests/architecture-boundaries.test.js",
+      "sha256": "eed17a63fe6b7530b97e37cf8788947f4875c63615c6dbdaf76b3f0483ec5498",
+      "bytes": 14051
+    },
+    {
+      "path": "tests/motion-ownership.test.js",
+      "sha256": "77c6d8ed004b2c6be493bec040b092548ff8cca8db3abcc1aa33dc358703df2d",
+      "bytes": 3539
+    },
+    {
+      "path": "tests/helpers/main-lifecycle.js",
+      "sha256": "6a75fc3074c51a358979c058fca223a7f0928ad4c5c379b10b26b73d151dd175",
+      "bytes": 2229
+    },
+    {
+      "path": "tests/helpers/web-locks.js",
+      "sha256": "a34e492583fc55bd19650a1c324ae62bfcd1c3ff8e0734e3f7d00f9e74f07ac3",
+      "bytes": 324
+    },
+    {
+      "path": "tests/helpers/e8-card-inventory.js",
+      "sha256": "997d72ac3737963a492f54fcd3d19f46027aaee4eab0ff166d9478a90ba49316",
+      "bytes": 14875
+    }
+  ]
+}

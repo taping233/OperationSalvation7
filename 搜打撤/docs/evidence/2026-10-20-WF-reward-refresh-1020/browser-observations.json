@@ -1,0 +1,38 @@
+{
+  "source": "Codex current in-app browser, real clicks and page reloads",
+  "origin": "http://127.0.0.1:5308",
+  "seed": 2574942447,
+  "node": "0,0",
+  "initialOwned": 19,
+  "finalOwned": 21,
+  "safeCards": [
+    "寒冰剑",
+    "百炼青虹剑"
+  ],
+  "coinsBefore": 0,
+  "coinsAfter": 0,
+  "iceUid": "omvgh0r0ropa8g",
+  "frostUid": "omvgh4kivkrqew",
+  "partialTaken": [
+    0
+  ],
+  "finalTaken": [
+    0,
+    1
+  ],
+  "rewardAfterCompletion": null,
+  "allUidsPreservedAfterFinalReload": true,
+  "actualReloads": 2,
+  "checked": [
+    "close bag without changes",
+    "cancel discard remaining rewards",
+    "move equipment into safe pocket and close bag",
+    "double-click claims",
+    "reload and load partial reward",
+    "return map and reenter same pending node",
+    "claim remainder",
+    "reload and load completed reward"
+  ],
+  "inputLimits": "背包和两张固定奖励由夹具构造；存储、读档、卡牌授予、背包和重进均用正式实现；没有自然整局、配额失败或战斗结算实页的新覆盖。",
+  "transient": "第二次刷新后曾在验收入口加载完成前发生一次按钮查找超时；确认入口加载、控制台error为空后点击成功，未改游戏状态。"
+}

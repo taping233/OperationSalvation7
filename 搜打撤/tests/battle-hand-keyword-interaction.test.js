@@ -61,7 +61,7 @@ function renderHand(uids = state.snap.hand) {
     set(value) { this.toggleAttribute('inert', !!value); },
   });
 }
-beforeEach(() => {
+beforeEach(async context => {
   vi.clearAllMocks(); frames = new Map(); clock = 0;
   let frameId = 0;
   vi.stubGlobal('requestAnimationFrame', callback => { frames.set(++frameId, callback); return frameId; });
@@ -81,6 +81,11 @@ beforeEach(() => {
     hand: ['keyword-card'], foes: [{ hp: 20, dead: false }] };
   mountHandLayer(UI.el.ovBody, '', state.snap.battleToken);
   renderHand();
+  if (context.task.name === 'loads the real first cold tooltip while a keyword hold stays outside aiming') return;
+  // Exercise the unchanged immediate hot path; the cold boundary suite holds imports pending.
+  pointer(term(), 'pointerover');
+  await vi.dynamicImportSettled();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
 });
 afterEach(() => {
   document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
@@ -88,6 +93,27 @@ afterEach(() => {
   for (let i = 0; frames.size && i < 200; i++) step();
   window.dispatchEvent(new Event('blur'));
   vi.restoreAllMocks(); vi.unstubAllGlobals();
+});
+
+it('loads the real first cold tooltip while a keyword hold stays outside aiming', async () => {
+  const keyword = term();
+  expect(tip()).toBeNull();
+  pointer(keyword, 'pointerdown');
+  expect(tip()).toBeNull();
+  expect(Aim.aim).toBeNull();
+  expect(UI.el.overlay.setPointerCapture).not.toHaveBeenCalled();
+  const parentClick = vi.fn(); UI.el.ovBody.addEventListener('click', parentClick);
+  const click = new MouseEvent('click', { bubbles:true, cancelable:true });
+  keyword.dispatchEvent(click);
+  expect(click.defaultPrevented).toBe(true); expect(parentClick).not.toHaveBeenCalled();
+  await vi.dynamicImportSettled();
+  expect(tip()?.hidden).toBe(false); expect(tip().textContent).toContain('中毒');
+  expect(keyword.getAttribute('aria-describedby')).toContain('sdt-term-tip');
+  expect(Aim.aim).toBeNull(); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  pointer(document, 'pointerup');
+  expect(tip().hidden).toBe(true); expect(keyword.hasAttribute('aria-describedby')).toBe(false);
+  await vi.dynamicImportSettled();
+  expect(tip().hidden).toBe(true); expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
 it.each(['term', 'nested child'])('holds the %s explanation without aiming or submitting, then hides on release', route => {

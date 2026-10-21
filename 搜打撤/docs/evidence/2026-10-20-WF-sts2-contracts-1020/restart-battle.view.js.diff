@@ -1,0 +1,25 @@
+--- before/game/src/battle/view/battle.view.js
++++ after/game/src/battle/view/battle.view.js
+@@ -21,6 +21,7 @@
+ import { battleChoiceBodyHTML, battleHandSelectBodyHTML, battleDiscoverLifecycleNote } from './battle.decision-content.js';
+ import { createDiscoverInputGate } from './battle.discover-input.js';
+ import { forecastEnemyTurn } from './battle.turn-forecast.js';
++import { battleRestartHTML, bindBattleRestart } from '../../ui/settings-battle-restart.js';
+ import { createBattleSceneryCapture } from './battle.scenery.js';
+ import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+ import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
+@@ -613,12 +614,14 @@
+           <label class="chk"><input type="checkbox" id="btSetSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效</label>
+           <label class="chk"><input type="checkbox" id="btSetShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
+           <label class="chk"><input type="checkbox" id="btSetPace" ${getPace() === 2 ? 'checked' : ''}> 2× 战斗节奏（敌方行动加速）</label>
++          ${battleRestartHTML({ SDT, game: SDT.game, buttonClass: 'ov-btn' })}
+           <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
+           <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
+         </div>`, true);
+       // 迭代评审 09-20：删除无参 setDucked()——它被 setDucked 内部 !!v 强转成 false，
+       // 战斗中关音乐会静默解除侧链压低；setMusicMuted 内部已走 syncBgm，无需额外调用
+       const settingsPage = UI.el.ovBody.querySelector('.battle-decision');
++      bindBattleRestart({ SDT, UI, game: SDT.game, page: settingsPage });
+       const onSetting = handler => event => {
+         if (isInteractiveBattlePage(UI, settingsPage) && getSnapshot().battleToken === snapshot.battleToken) handler(event);
+       };

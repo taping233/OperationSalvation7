@@ -1,5 +1,6 @@
 // 在内存投影已批准的卡面修订；历史 E8 before 文件保持原字节。
 import frozenInventory from '../../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
+import nativeExecution from '../fixtures/builtin-execution-approved-20261020.json';
 
 export const RETIRED_1010 = new Set(['tt-medneedle', 'tt-token-color', 'tt3-deep-seal', 'tt3eq-boiler']);
 // 2026-10-18 老板批准的事件选择与腐化之种死亡真伤；仅投影生产副本，CARDS_SYNC 不变。
@@ -10,6 +11,7 @@ export const APPROVED_1018_PRODUCTION_REVISIONS = [
   ['tt6-relief', 'desc', '回复 6 点生命。', '选择回复 6 点生命，或投骰获得 1 张随机招式。'],
   ['cc-rot-seed', 'desc', '对 1 名敌人附加 2 层中毒；其死亡时，将中毒层数转移给另一名敌人。', '对 1 名敌人附加 2 层中毒并标记。被标记的敌人死亡时，对所有敌人造成等同于其死亡时中毒层数的真实伤害。'],
   ['cc-rot-seed', 'dmgType', undefined, 'true'],
+  ['tt3-dig-treasure', 'desc', '从牌库底发现 1 张牌，并获得等同于其价格的护甲。', '从牌库底三张牌中发现1张牌，并获得等同于其价格的护甲。'],
 ];
 const revisions = {
   'cc-demon': { dmg: 7, desc: '7′，损失 2 点生命。' },
@@ -24,7 +26,7 @@ const sorted = value => Array.isArray(value) ? value.map(sorted) : value && type
 const lampBefore = frozenInventory.production.cards.find(row => row.id === 'tt3-magic-lamp').card;
 const lampFace = { ...lampBefore };
 delete lampFace.armor;
-const lampAfter = { ...lampFace, rules: { version: 1, battle: { hosted: ['three-choice-lamp'] } } };
+const lampAfter = { ...lampFace, rules: nativeExecution['tt3-magic-lamp'].rules };
 
 // 仅放行已冻结的生产神灯 armor:5 → 字段不存在，其他卡面字节语义与 M11 声明必须一致。
 export function isApprovedLampArmorRemoval(previous, current) {
@@ -37,6 +39,10 @@ export function approvedRevisionBaseline(original) {
   const baseline = structuredClone(original);
   const revise = row => {
     Object.assign(row.card, revisions[row.id] || {});
+    if (row.id === 'tt2-piercearrow') {
+      row.card.desc = '造成（你的攻击力 - 1）点攻击伤害；对目标附加破甲，持续 2 回合。';
+      delete row.card.armor;
+    }
     if (row.id === 'cmtn125e1nk0' && row.card.rules) row.card.rules.triggers.onPlay[0].pool.kind = '传说';
     return row;
   };

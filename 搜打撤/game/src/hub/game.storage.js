@@ -242,7 +242,13 @@ const RunStorage = Object.freeze({
     try { raw = localStorage.getItem(RUN_KEY(index)); writeBaseline.set(index, raw); }
     catch { writeBaseline.delete(index); return; }
     // 终局两键提交绕过 remove() 删除主档；同步释放它的旧局备份。
-    if (raw === null) { try { localStorage.removeItem(PREV_KEY(index)); } catch { /* 新局首写仍必须清理 */ } }
+    try {
+      const previous = localStorage.getItem(PREV_KEY(index));
+      const currentId = raw === null ? null : JSON.parse(raw)?._r2?.runId;
+      const previousId = previous === null ? null : JSON.parse(previous)?._r2?.runId;
+      // A recovered departure starts a new identity; never fall back into the preceding exploration.
+      if (raw === null || (currentId && previousId !== currentId)) localStorage.removeItem(PREV_KEY(index));
+    } catch { /* 备份清理尽力而为，保留已确认的主档写基线 */ }
   },
   migrateLegacy() {
     try {

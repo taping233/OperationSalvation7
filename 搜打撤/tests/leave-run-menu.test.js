@@ -5,7 +5,7 @@ function mountLeaveMenu({ slot = 1, save } = {}) {
   document.body.innerHTML = '<div id="title" hidden></div><div id="exitScr" hidden></div><div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
   const actions = new Map();
   const game = { state:'idle', runActive:true, layerIdx:0, layerData:[{ name:'外围荒地' }], coins:9, ownedCards:[] };
-  const saveGame = save || vi.fn(() => true);
+  const saveSession = save || vi.fn(() => ({ ok:true }));
   const UI = {
     showOverlay:vi.fn((title, html) => {
       document.getElementById('ovTitle').textContent = title;
@@ -19,11 +19,11 @@ function mountLeaveMenu({ slot = 1, save } = {}) {
     Sound:{ sfx:vi.fn(), music:vi.fn() }, Cards:{ cardHTML:() => '' } };
   const controller = createGameMenuController({ SDT, UI, game,
     runtime:{ resize:vi.fn(), openBaseHub:vi.fn() }, SLOT_COUNT:0, esc:String,
-    saveGame, getActiveSlot:() => slot, setActiveSlot:vi.fn(),
+    saveSession, getActiveSlot:() => slot, setActiveSlot:vi.fn(),
     readSlot:vi.fn(), terminalCommands:{ projectEphemeral:({ cards }) => depositCards(cards) },
   });
   controller.openLeaveMenu();
-  return { actions, game, UI, controller, saveGame, depositCards };
+  return { actions, game, UI, controller, saveSession, depositCards };
 }
 
 beforeEach(() => {
@@ -33,7 +33,7 @@ beforeEach(() => {
 
 describe('离开对局：保存结果与分级确认', () => {
   it('打开时不声称已保存，继续游玩只关闭面板', () => {
-    const { actions, game, UI, saveGame } = mountLeaveMenu();
+    const { actions, game, UI, saveSession } = mountLeaveMenu();
     expect(document.getElementById('ovTitle').textContent).toBe('离开对局');
     expect(document.querySelector('.leave-run-description').textContent).not.toContain('已保存');
     expect(document.querySelector('.leave-run-actions button').dataset.act).toBe('leaveCancel');
@@ -41,12 +41,12 @@ describe('离开对局：保存结果与分级确认', () => {
     actions.get('leaveCancel')();
     expect(game.state).toBe('idle');
     expect(game.runActive).toBe(true);
-    expect(saveGame).not.toHaveBeenCalled();
+    expect(saveSession).not.toHaveBeenCalled();
     expect(UI.hideOverlay).toHaveBeenCalledOnce();
   });
 
   it('保存失败保留当前对局与面板，重试成功才回主菜单', async () => {
-    const save = vi.fn().mockReturnValueOnce(false).mockReturnValueOnce(true);
+    const save = vi.fn().mockResolvedValueOnce({ ok:false }).mockResolvedValueOnce({ ok:true });
     const { actions, game, UI } = mountLeaveMenu({ save });
     expect(await actions.get('leaveSave')()).toBe(false);
     expect(game.runActive).toBe(true);
@@ -73,7 +73,7 @@ describe('离开对局：保存结果与分级确认', () => {
     expect(document.querySelector('.leave-run-panel').getAttribute('aria-busy')).toBe('true');
     expect([...document.querySelectorAll('.leave-run-panel button')].every(button => button.disabled)).toBe(true);
     expect(UI.hideOverlay).not.toHaveBeenCalled();
-    resolveSave(true);
+    resolveSave({ ok:true });
     await Promise.all([first, second]);
     expect(game.state).toBe('title');
     expect(UI.hideOverlay).toHaveBeenCalledOnce();
@@ -86,7 +86,7 @@ describe('离开对局：保存结果与分级确认', () => {
     const pending = actions.get('leaveSave')();
     UI.showOverlay('其他页面', '<section class="replacement">新的内容</section>');
     game.state = 'replacement';
-    resolveSave(saved);
+    resolveSave({ ok:saved });
     expect(await pending).toBe(false);
     expect(game.state).toBe('replacement');
     expect(document.querySelector('.replacement').textContent).toBe('新的内容');
@@ -96,14 +96,14 @@ describe('离开对局：保存结果与分级确认', () => {
 
   it.each(['hidden', 'closing'])('面板 %s 后旧保存不退出，新面板仍可保存', async state => {
     let resolveSave;
-    const save = vi.fn().mockImplementationOnce(() => new Promise(resolve => { resolveSave = resolve; })).mockReturnValue(true);
+    const save = vi.fn().mockImplementationOnce(() => new Promise(resolve => { resolveSave = resolve; })).mockResolvedValue({ ok:true });
     const { actions, game, UI, controller } = mountLeaveMenu({ save });
     const pending = actions.get('leaveSave')();
     const overlay = document.getElementById('overlay');
     if (state === 'hidden') overlay.hidden = true;
     else overlay.classList.add('closing');
     game.state = 'idle';
-    resolveSave(true);
+    resolveSave({ ok:true });
     expect(await pending).toBe(false);
     expect(game.state).toBe('idle');
     expect(UI.hideOverlay).not.toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe('离开对局：保存结果与分级确认', () => {
     const temporary = mountLeaveMenu({ slot:null });
     expect(document.querySelector('[data-act="leaveSave"]').disabled).toBe(true);
     await temporary.actions.get('leaveSave')();
-    expect(temporary.saveGame).not.toHaveBeenCalled();
+    expect(temporary.saveSession).not.toHaveBeenCalled();
     const skipped = mountLeaveMenu({ save:vi.fn(() => undefined) });
     expect(await skipped.actions.get('leaveSave')()).toBe(false);
     expect(skipped.UI.hideOverlay).not.toHaveBeenCalled();

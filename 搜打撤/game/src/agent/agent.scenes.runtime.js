@@ -75,9 +75,9 @@ function skipToLayer2Start() {
 // 测试局起步（game.run.dev.devEnsureRun 同口径）：newRun 不占档位、不写存档，
 // 补真实角色避免 HUD 落入「未选择人物」。startNewGame 在有旧档时会弹存档槽页，
 // 策略可能误点「进入档位」走进玩家正式档（走图写档）——长链路场景一律用测试局
-function ensureTestRun() {
+async function ensureTestRun() {
   if (game.runActive && !game.battleActive && !game.terminalPending) return true;
-  const ok = newRun('standard') !== false;
+  const ok = await newRun('standard') !== false;
   if (ok) {
     document.getElementById('title').hidden = true;
     game.characterId = 'heixiang';
@@ -169,7 +169,7 @@ async function runDevKind(kind, { check, options, seen, finishOk, awaitReady, pr
     try { prepare(); }
     catch (error) { check('前置准备', false, String(error?.message || error)); }
   }
-  devJumpNode(kind);
+  await devJumpNode(kind);
   await waitSettle({ timeoutMs: 15000 });
   // devForceBattle 是 async（await startBattle）而 devJumpNode 不等它：开战类场景
   // 必须等战斗真正挂上再驱动，否则 autoRun 会在接敌过场页空转到 spin 熔断
@@ -390,7 +390,7 @@ async function sceneExtract(ctx) {
   // 进图后直跳第三层入口（skipToLayer2Start），撤离段全程真实逐格 moveTo
   let exits = new Set();
   for (let attempt = 1; attempt <= 3; attempt++) {
-    const started = ensureTestRun();
+    const started = await ensureTestRun();
     check('测试局就绪', started, `第 ${attempt} 次 newRun`);
     if (!started) return { final: finalSnapshot() };
     await waitSettle({ timeoutMs: 15000 });
@@ -430,7 +430,7 @@ async function sceneExtract(ctx) {
 async function sceneFullrun(ctx) {
   const { check, options } = ctx;
   // 测试局起步：startNewGame 在有旧档时弹存档槽页，策略可能误入玩家正式档（写档风险）
-  const started = ensureTestRun();
+  const started = await ensureTestRun();
   check('测试局就绪', started);
   if (!started) return { final: finalSnapshot() };
   await waitSettle({ timeoutMs: 15000 });

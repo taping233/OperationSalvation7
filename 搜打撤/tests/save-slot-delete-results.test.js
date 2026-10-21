@@ -1,4 +1,5 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
 import { cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
 
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
@@ -25,6 +26,7 @@ window.SDT.Nest = { renderNestMap() { session.game.state = 'idle'; } };
 window.SDT.Battle = { restore: vi.fn(() => true) };
 
 beforeEach(() => {
+  installImmediateWebLocks();
   localStorage.clear();
   for (let slot = 1; slot <= 5; slot++) RunStorage.remove(slot);
   session._set_active_slot(1);
@@ -71,7 +73,7 @@ describe('整档删除结果与菜单消费', () => {
     localStorage.setItem(RunStorage.corruptKey(1), '{fixture corrupt backup');
     failRemove(target === 'run' ? RunStorage.key(1) : RunStorage.corruptKey(1));
     await session.startNewGame();
-    expect(confirmed('delSlot', { slot: 1 })).toBe(false);
+    expect(await confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(target === 'run' ? before.run : null);
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已删除【档位 1】');
@@ -83,7 +85,7 @@ describe('整档删除结果与菜单消费', () => {
     const journal = '{fixture pending transaction';
     localStorage.setItem('sdt-tx-v1-slot1', journal);
     await session.startNewGame();
-    expect(confirmed('delSlot', { slot: 1 })).toBe(false);
+    expect(await confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(before.run);
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
     expect(localStorage.getItem('sdt-tx-v1-slot1')).toBe(journal);
@@ -102,7 +104,7 @@ describe('整档删除结果与菜单消费', () => {
       return remove.call(this, key);
     });
     await session.startNewGame();
-    expect(confirmed('delSlot', { slot: 1 })).toBe(false);
+    expect(await confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(latest);
   });
@@ -111,13 +113,13 @@ describe('整档删除结果与菜单消费', () => {
     const before = prepareSlot();
     const blocked = failRemove(Base.SLOT_KEY(1));
     await session.startNewGame();
-    expect(confirmed('delSlot', { slot: 1 })).toBe(false);
+    expect(await confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
     expect(document.getElementById('slotRestoreError').textContent).toContain('对局已删除，基地数据未能删除');
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已删除【档位 1】');
     blocked.mockRestore();
-    handlers.delSlot({ slot: 1 });
+    await handlers.delSlot({ slot: 1 });
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBeNull();
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已删除【档位 1】');
   });
@@ -146,7 +148,7 @@ describe('整档删除结果与菜单消费', () => {
     });
     await session.openSettings();
     const activeBase = Base.data, activeRunToken = session.game.discoveredPairs;
-    expect(confirmed('wipeSave', {})).toBe(false);
+    expect(await confirmed('wipeSave', {})).toBe(false);
     expect(Base.slot).toBe(1);
     expect(session.getActiveSlot()).toBe(1);
     expect(Base.data).toBe(activeBase);
@@ -162,7 +164,7 @@ describe('整档删除结果与菜单消费', () => {
     expect(logs).toContain('档位 2');
     expect(logs).not.toContain('已清空全部五个档位的存档');
     block.mockRestore();
-    handlers.wipeSave({});
+    await handlers.wipeSave({});
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(2))).toBeNull();
     expect(UI.log.mock.calls.flat().join(' ')).toContain('已清空全部五个档位的存档');

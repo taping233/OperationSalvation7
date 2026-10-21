@@ -1,0 +1,10 @@
+{
+  "stoppedPid": 27932,
+  "port": 5308,
+  "listenerRemaining": false,
+  "verifiedCommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-reward-refresh-1020-XzsHVG\\node_modules\\vite\\bin\\vite.js --config review.vite.config.mjs",
+  "stoppedAt": "2026-10-20T17:28:38.3390167+08:00",
+  "preservedDirectory": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-reward-refresh-1020-XzsHVG",
+  "main5200Untouched": true,
+  "note": "首次Stop-Process后即时查询仍见监听；等待自有进程退出后复核无监听。"
+}

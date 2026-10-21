@@ -1,0 +1,5 @@
+/* Rules stay available on focus without repeating them in the combat readout. */
+#overlay .battle-stage.sts :is(.sts-stat[data-ui-tip], .bt-turn-forecast):focus-visible {
+  outline: 2px solid #b5d9d2;
+  outline-offset: 3px;
+}

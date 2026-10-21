@@ -38,7 +38,7 @@ const saved=()=>RunStorage.read(1);
 const ownCount=id=>session.game.ownedCards.filter(owned=>owned.card.id===id).length;
 function fill(n){return Array.from({length:n},(_,i)=>({uid:`filler-${i}`,card:{id:`filler-${i}`,name:`不同已有卡${i}`,type:'法术',rarity:'古朴'}}));}
 async function openQuartermaster(card=apollo){
-  catalog=[event,card,bonus];const opening=flow.runEventDeck();await vi.advanceTimersByTimeAsync(1000);await opening;
+  catalog=[event,card,bonus];const opening=flow.runEventDeck(); await vi.dynamicImportSettled();await vi.advanceTimersByTimeAsync(1000);await opening;
   acts.evtChoice({i:'0'}); rollEventDice(UI);expect(session.game.coins).toBe(15);expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:null});
 }
 function reload(){session.game.state='title';const result=session.loadGame(1);expect(result,JSON.stringify(result)).toMatchObject({ok:true});}
@@ -106,15 +106,15 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
     expect(saved().chestReward.current.cards[0].id).toBe(apollo.id);expect(UI.el.ovBody.querySelector('.reward-v14')).toBeTruthy();expect(ownCount(apollo.id)).toBe(0);
   });
 
-  it.each([[[1]],[[2]],[[1,2]]])('交接两次保存失败序列%j：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口',async failedWrites=>{
+  it.each([[[]],[[1]]])('交接单次保存失败序列%j：同一快照含锁定与chest，失败保留待领并可完整补存',async failedWrites=>{
     await openQuartermaster();const beforeRaw=localStorage.getItem(RunStorage.key(1)),attempts=[],original=Storage.prototype.setItem;let writes=0;
     const failure=vi.spyOn(Storage.prototype,'setItem').mockImplementation(function(storageKey,value){
       if(storageKey===RunStorage.key(1)){writes++;attempts.push(JSON.parse(value));if(failedWrites.includes(writes))throw new Error('isolated transfer save failure');}
       return original.call(this,storageKey,value);
     });
-    acts.eventCardPick({i:0});expect(writes).toBe(2);expect(ownCount(apollo.id)).toBe(0);
+    acts.eventCardPick({i:0});expect(writes).toBe(1);expect(ownCount(apollo.id)).toBe(0);
     for(const attempt of attempts){expect(attempt.nodeRewards[key]).toMatchObject({taken:0,paidCoins:3});expect(attempt.visited[key]).toBe(1);expect(attempt.chestReward.current.cards[0].id).toBe(apollo.id);}
-    if(failedWrites.length===2){expect(localStorage.getItem(RunStorage.key(1))).toBe(beforeRaw);expect(session.game.nodeRewards[key].taken).toBe(0);expect(Chests.serialize(session.game).current.cards[0].id).toBe(apollo.id);}
+    if(failedWrites.includes(1)){expect(localStorage.getItem(RunStorage.key(1))).toBe(beforeRaw);expect(session.game.nodeRewards[key].taken).toBe(0);expect(Chests.serialize(session.game).current.cards[0].id).toBe(apollo.id);}
     else{expect(saved().nodeRewards[key].taken).toBe(0);expect(saved().chestReward.current.cards[0].id).toBe(apollo.id);}
     failure.mockRestore();expect(session.saveGame()).toBe(true);reload();acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);expect(session.game.coins).toBe(15);
   });

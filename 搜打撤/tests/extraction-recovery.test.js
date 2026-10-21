@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = {
@@ -22,7 +24,7 @@ async function harness(slot = 2, failpoint = null) {
   localStorage.clear();
   RunStorage.remove(slot); // clear the module's optimistic write baseline between repeated-slot fixtures
   Base.use(slot);
-  Base.reset(slot);
+  (await Base.reset(slot));
   expect(RunStorage.write(slot, { seed: 'extract-test', rngState: { seed: 'extract-test', streams: { pocket: 0 } },
     hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' })).toBe(true);
   const game = {
@@ -36,15 +38,15 @@ async function harness(slot = 2, failpoint = null) {
   let revisionRace = null;
   const recovery = createRecoveryCommands({ storage: localStorage, lockManager, baseApi: Base, runStore: RunStorage,
     failpoint: phase => { if (pendingFailure === phase) { pendingFailure = null; throw new Error('simulated interruption'); } } });
-  const runRace = boundary => {
+  const runRace = async boundary => {
     if (revisionRace?.boundary !== boundary || --revisionRace.remaining > 0) return;
     const callback = revisionRace.callback;
     revisionRace = null;
-    callback();
+    await callback();
   };
   const recoveryPort = { ...recovery,
-    recoverSlot: async slotId => { const result = await recovery.recoverSlot(slotId); runRace('recovery'); return result; },
-    commitBaseAndRun: (...args) => { runRace('commit'); return recovery.commitBaseAndRun(...args); },
+    recoverSlot: async slotId => { const result = await recovery.recoverSlot(slotId); await runRace('recovery'); return result; },
+    commitBaseAndRun: async (...args) => { await runRace('commit'); return recovery.commitBaseAndRun(...args); },
   };
   const deps = {
     getActiveSlot: () => activeSlot, runStore: RunStorage, baseApi: Base, recovery: recoveryPort, game,
@@ -134,9 +136,9 @@ describe('撤离整理 paired recovery', () => {
         : h.commands.finish(runId, 2);
     const beforeRun = localStorage.getItem(RunStorage.key(2));
     let advancedBase;
-    h.beforeNextCommit(() => {
+    h.beforeNextCommit(async () => {
       Base.data.coins += 7;
-      expect(Base.save()).toBe(true);
+      expect((await Base.save())).toBe(true);
       advancedBase = localStorage.getItem(Base.SLOT_KEY(2));
     }, boundary);
 
@@ -187,7 +189,7 @@ describe('撤离整理 paired recovery', () => {
   it('重复整数选择按剩余张数和仓容收敛，接受的整理快照保持有效', async () => {
     const h = await harness(2);
     Base.data.stash = [{ card: { name: '已有卡' }, count: 19 }];
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     const started = await h.commands.begin();
     const saved = await h.commands.updateCards([{ name: card.name, count: 1 }, { name: card.name, count: 2 }], started.value.runId, 2);
     expect(saved).toMatchObject({ ok: true, count: 1 });
@@ -205,7 +207,7 @@ describe('撤离整理 paired recovery', () => {
       const h = await harness(2);
       Base.data.stash = [{ card: { name: '已有卡' }, count: stashed }];
       Base.data.runes = [{ name: '占位符文' }];
-      expect(Base.save()).toBe(true);
+      expect((await Base.save())).toBe(true);
       if (ephemeral) h.setActiveSlot(null);
       const started = await h.commands.begin();
       h.game.pendingExtraction = started.value;
@@ -226,7 +228,7 @@ describe('撤离整理 paired recovery', () => {
   it('基地内存仓容过期时，以当前提交快照的符文数量限制直接入库请求', async () => {
     const h = await harness(2);
     Base.data.stash = [{ card: { name: '已有卡' }, count: 18 }];
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     const started = await h.commands.begin();
     const externalBase = JSON.parse(localStorage.getItem(Base.SLOT_KEY(2)));
     externalBase.runes = [{ name: '另一标签页新符文' }];

@@ -38,6 +38,23 @@ function inspect(name = potion.name) { document.querySelector(`[data-act="inspec
 function pointer(type, target, id = 1, x = 20) { const event = new Event(type, { bubbles: true, cancelable: true }); Object.assign(event, { pointerId: id, button: 0, clientX: x, clientY: 20 }); target.dispatchEvent(event); }
 function startDrag() { const source = document.querySelector('[data-stack="木材卡"]'); pointer('pointerdown', source); pointer('pointermove', window, 1, 200); frames.at(-1)(); return source; }
 describe('背包旧详情/页面回调与正常返回', () => {
+  it('卡牌操作重绘背包后，特写退场完成不会令关闭按钮失效', () => {
+    inspect(spell.name);
+    const zoom = document.getElementById('cardZoom');
+    zoom._closeCardZoom = vi.fn(immediate => {
+      if (immediate) zoom.remove();
+      else zoom.classList.add('cz-out');
+    });
+    zoom.querySelector('.cz-backdrop').onclick = () => zoom._closeCardZoom(false);
+    ui._acts.zoomMoveToSafe();
+    expect(H.game.ownedCards.find(item => item.uid === 'spell').safe).toBeTruthy();
+    // The real zoom removes its animated DOM after the bag has rendered.
+    zoom.remove();
+    ui._acts.closeBag();
+    expect(ui.el.overlay.hidden).toBe(true);
+    expect(H.game.state).toBe('idle');
+  });
+
   it('神秘药水地图详情禁用，直接旧回调也不消费/回血/发金币', () => {
     const mystery = { id:'tt3-mystery-potion', name:'神秘药水', type:'道具', desc:'随机神秘效果。' };
     H.game.ownedCards = [{ uid:'mystery', card:mystery }];

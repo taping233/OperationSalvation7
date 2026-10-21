@@ -72,7 +72,7 @@ afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.
 
 async function openEvent(id, rewards = []) {
   H.cards = [{ id, name: '生命周期事件', type: '事件' }, ...rewards];
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000);
   await opening;
 }
@@ -376,7 +376,7 @@ it.each([
   const restored = vi.spyOn(window.SDT.Chests, 'restore').mockReturnValue(true);
   const opened = vi.spyOn(window.SDT.Chests, 'open').mockImplementation(() => {});
   const before = {hp:H.game.hp,maxHp:H.game.maxHp,coins:H.game.coins,cards:JSON.stringify(H.game.ownedCards)};
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000); await opening;
   const button = UI.el.ovBody.querySelector('[data-act="evtChoice"]');
   expect(button.querySelector('b').textContent).toBe(label);
@@ -410,7 +410,7 @@ it('故障重编入口正文保规则，接入选择页不转换不收费且仍�
   H.game.ownedCards = [{ uid: 'one', card: { ...old } }, { uid: 'two', card: { ...old } }];
   const snapshot = () => JSON.stringify({ cards: H.game.ownedCards, coins: H.game.coins, hp: H.game.hp });
   const before = snapshot();
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000); await opening;
   const button = UI.el.ovBody.querySelector('[data-act="evtChoice"]');
   expect(button.querySelector('b').textContent).toBe('接入重编台');

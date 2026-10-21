@@ -6,17 +6,38 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import { hasInfusionWaiver, missingInfusionReason } from '../effects/battle.infusion.js';
 import * as Combat from './combat.js';
+import * as replayPiles from '../runtime/battle.runtime.piles.js';
+import * as replayEffects from '../runtime/battle.runtime.effects.js';
+import * as replayInteraction from '../runtime/battle.runtime.interaction.js';
 import {
   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
   discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
   shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
-  battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
+  battleRestartCheckpoint, tmpSeq, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from '../runtime/battle.runtime.js';
 import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
-import { getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
+import { configureBattleEngine, getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
+// The browser composition root owns compatibility services; the engine receives narrow ports.
+configureBattleEngine({
+  cards: {
+    all: () => SDT.Cards.all(),
+    deriveDraw: card => SDT.Cards.deriveDraw(card),
+    deriveInfuse: card => SDT.Cards.deriveInfuse(card),
+    isRandomObtainable: card => SDT.Cards.isRandomObtainable(card),
+    sellPrice: card => SDT.Cards.sellPrice(card),
+    randomClassCard: cls => SDT.Cards.randomClassCard(cls),
+    get SHA() { return SDT.Cards.SHA; },
+    get TABLETOP10() { return SDT.Cards.TABLETOP10; },
+    get DMG_TYPES() { return SDT.Cards.DMG_TYPES; },
+    get DMG_TYPE_META() { return SDT.Cards.DMG_TYPE_META; },
+  },
+  readRules: () => SDT.MAP.rules,
+  sound: name => SDT.Sound.sfx(name),
+  evaluateRunes: slots => SDT.Runes?.evaluateSlots?.(slots) || {},
+});
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
 // 祝福挂上反馈钩（音频 P2#6）：addBlessing 生效即响，敌我通用——敌人强化同样是可听信息
 COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
@@ -223,6 +244,29 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     return cloneData(battleRestartCheckpoint);
   }
 
+  // Read-only diagnostics for deterministic command replay. This is not a restorable save state.
+  // Include rule flags and cost overrides absent from the rendering snapshot; callbacks stay inert text.
+  function getReplayState() {
+    const ancestors = new WeakSet();
+    const copy = value => {
+      if (typeof value === 'function') return Object.freeze({ callbackSource: String(value) });
+      if (!value || typeof value !== 'object') return value;
+      if (ancestors.has(value)) throw new TypeError('Replay diagnostics cannot contain cycles');
+      ancestors.add(value);
+      try {
+        if (value instanceof Map) return Object.freeze({ mapEntries: copy([...value]) });
+        if (value instanceof Set) return Object.freeze({ setValues: copy([...value]) });
+        if (Array.isArray(value)) return Object.freeze(value.map(copy));
+        return Object.freeze(Object.fromEntries(Object.entries(value).map(([key, item]) => [key, copy(item)])));
+      } finally { ancestors.delete(value); }
+    };
+    const snapshot = { ...getSnapshot() };
+    delete snapshot.battleToken;
+    const data = module => Object.fromEntries(Object.entries(module).filter(([, value]) => typeof value !== 'function'));
+    return copy({ battle: snapshot, rules: { piles: data(replayPiles), effects: data(replayEffects),
+      interaction: data(replayInteraction), generatedCardSequence: tmpSeq } });
+  }
+
   
 
   
@@ -328,7 +372,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   }
 
   function openGrave() { set$viewingGrave(true); requestBattleRender(); }
-  function openDeckView() { if (mode !== 'boss') return; set$viewingDeck(true); requestBattleRender(); }
+  function openDeckView() { set$viewingDeck(true); requestBattleRender(); }
   function closeDeckView() { set$viewingDeck(false); requestBattleRender(); }
   // 统一幂等取消（批次C）：一次调用清掉整个交互槽，无交互时 no-op。
   // 直接释放/freeCast 的卡取消后留在手牌按原费打出（原 cancelPendingTarget 语义）。
@@ -449,7 +493,7 @@ const viewApi = Object.freeze({
   matchHandSelectKey, handCurseSpecs,
   getPreviewContext,
 });
-const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
+const BattleSession = Object.freeze({ start, getSnapshot, getReplayState, commands, serialize, restore });
 
 // 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
 export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, findEffectiveCard, infusionFuelReason, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };

@@ -1,7 +1,8 @@
 // Selection belongs to this cast, never to persisted card data. Object spreads
 // preserve the symbol through hosted normalization; JSON saves omit it.
 const selectedFighters = Symbol('selectedFighters');
-export const isFoeFightCard = card => card?.id === 'tt7-provoke';
+export const isFoeFightCard = card => card?.rules?.triggers?.onPlay?.some(operation => operation.op === 'foeFight' && operation.pick === 'two')
+  || card?.id === 'tt7-provoke' && !Array.isArray(card.rules?.triggers?.onPlay);
 export const foeFightTargets = card => card?.[selectedFighters];
 export const withFoeFightTargets = (card, targets) => ({ ...card, [selectedFighters]: Object.freeze([...targets]) });
 export const validFoeFightTargets = (targets, alive) => Array.isArray(targets) && targets.length === 2

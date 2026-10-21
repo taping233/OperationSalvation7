@@ -1,0 +1,114 @@
+{
+  "base": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "apply_cwd": "搜打撤",
+  "files": [
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "base_git_blob": "4886b649142133f9932cad21f840200cc29889b7",
+      "after_git_blob": "5d6fcbf00b203b3042460ff85fd143d27830042a",
+      "sha256": "ab8eba84d1681d3c35a2420bcbb89eb5ba5e1491b12a4c4011dd265909376be7",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/game/src/run/game.run.flow.js"
+    },
+    {
+      "path": "game/src/run/game.run.events.js",
+      "base_git_blob": "d6c2d0a7ee44e7a6f38c8b30accdb7a3c7a1442b",
+      "after_git_blob": "0c2b275d4a925b1ba05bb97a97d762e490688976",
+      "sha256": "d855b4595b21ff179d57495322860c5201a3b69379c3a6521e3bbb74d4646ae1",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/game/src/run/game.run.events.js"
+    },
+    {
+      "path": "game/src/run/event-lifecycle.js",
+      "base_git_blob": null,
+      "after_git_blob": "9d8d7e397dfc0aff341a94ba11206565f0e6ed3f",
+      "sha256": "eee0bedc230fb3c3a8920b5d6480c298e93414e9de2cc3c8e9eb593853c64d14",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/game/src/run/event-lifecycle.js"
+    },
+    {
+      "path": "game/src/run/event-runtime.js",
+      "base_git_blob": null,
+      "after_git_blob": "e42e1c85b363fccf7f27b5bc30e381095f3904ad",
+      "sha256": "62937b968877acdba00bce84e5b5344303b5e89f617cd3d0a104da29af651b75",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/game/src/run/event-runtime.js"
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "base_git_blob": "f43501800585aa448ab7b3d30e7882ca0607a160",
+      "after_git_blob": "810a9f3991a163b5e47376141cfc8569034a610f",
+      "sha256": "ad853acc9537753b42341ea1d8623eaabc0bc6c536921254d87850ba115157e4",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-callback-lifecycle-audit.test.js"
+    },
+    {
+      "path": "tests/event-choice-acquired-gift-cloud.test.js",
+      "base_git_blob": "521e61513fc84ec0aba21f2053fab0680f4cce1c",
+      "after_git_blob": "1545428452f32c7a09c47087cec59192e4a15c8c",
+      "sha256": "10871eb2eb8b284a73e4d1078c0028f9513813ce81f7163b6af7f2d370161549",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-choice-acquired-gift-cloud.test.js"
+    },
+    {
+      "path": "tests/event-choice-recovery-cloud.test.js",
+      "base_git_blob": "f3f2fcd1085be21667ccf18ed1af07d5c8d3459d",
+      "after_git_blob": "7c3f7512ae5d28aa3cdedb4ec75c673aa1be9695",
+      "sha256": "59ed66b67a966687b611aef1588612c59bd8bb1f6988fa29ae48606348506da1",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-choice-recovery-cloud.test.js"
+    },
+    {
+      "path": "tests/event-node-binding-cloud.test.js",
+      "base_git_blob": "6e30c7b2445b0bac07396a59a20c130c6047afc1",
+      "after_git_blob": "4057df93b106f44346a04bb3389d48860ebab805",
+      "sha256": "79a2a93325209bac8fc3ca30afb0236996aef08f5452beb2c37f99820e379688",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-node-binding-cloud.test.js"
+    },
+    {
+      "path": "tests/event-recode-selection-continuity.test.js",
+      "base_git_blob": "a86bd31dbc3ab80183bd342f850fac58814d50f1",
+      "after_git_blob": "b5da12d9551c838fd41c40c07f136cc2bebc67a0",
+      "sha256": "a70fac7ac30f1cab7d252af7cb98c8af67468dee143d121b75ec1759fbf88e1b",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-recode-selection-continuity.test.js"
+    },
+    {
+      "path": "tests/event-settlement-unification.test.js",
+      "base_git_blob": "c8be4d9c9650f1f422e5305cc8c83f813687e76c",
+      "after_git_blob": "fcda0478443d75f3ce83662a8f5856bb0486d1d1",
+      "sha256": "9ceb545ac098a2f3d905ecf0c3b2ad343460bce3a2572b4aef0025ed7d29e781",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-settlement-unification.test.js"
+    },
+    {
+      "path": "tests/event-signal-puzzle-integration.test.js",
+      "base_git_blob": "bacdb01d0147f3b7860ef261269d0e8040bab212",
+      "after_git_blob": "93c466aae7976b6ba2d6d533de303fe4ce947841",
+      "sha256": "78bc150bf66f25ff542c4c2ffc49672652d13e7429f9514a7c1bf5fdb5dff674",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/event-signal-puzzle-integration.test.js"
+    },
+    {
+      "path": "tests/events-lazy-entry.test.js",
+      "base_git_blob": null,
+      "after_git_blob": "024c54f850ce5fc7fd654a6bc70c4791d2ae7fcb",
+      "sha256": "698cb0796e68a5d25cfb33559486025116d1b7c410f91f3d6aa6d5a386b1c0bc",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/events-lazy-entry.test.js"
+    },
+    {
+      "path": "tests/events-lazy-story-ownership.test.js",
+      "base_git_blob": null,
+      "after_git_blob": "b63d2760ab4323a700beefdfb34b011de4734588",
+      "sha256": "e0378e0ea370641b83f28b042bb2feb952f0e9cc756f5d336298a1a4220c45dd",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/events-lazy-story-ownership.test.js"
+    },
+    {
+      "path": "tests/four-player-event-regressions.test.js",
+      "base_git_blob": "f2e9ee5be7be93a38f9348fbf933045832de2959",
+      "after_git_blob": "8fa6888c41497d215820affc75ad1b42b08df172",
+      "sha256": "b27f998aacfd768ecbd8f5ac860be4829d678a006bfae5d08918e98f7277b2ae",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/four-player-event-regressions.test.js"
+    },
+    {
+      "path": "tests/r6-story.test.js",
+      "base_git_blob": "b5a607e02e79180711f9539617ee41cf19b17c4d",
+      "after_git_blob": "e4456c9e6715848adc9b589ae095b1c644a45dec",
+      "sha256": "bbc090e2876700931b310d0cb4121ea9b4e6cbe6b07b2942a44ce9f5506b3433",
+      "seed_path": "/workspace/scratch/b7a53a06c872/performance-events-entry-e817a3aa/搜打撤/tests/r6-story.test.js"
+    }
+  ],
+  "patch_sha256": "3695c625de8e2675073185dd6ec378bcbf79be153ff3088b5a6f1410f8a2ceab",
+  "production_frozen": true,
+  "no_build": true
+}

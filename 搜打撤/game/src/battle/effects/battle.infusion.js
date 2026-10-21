@@ -1,4 +1,3 @@
-import { getHostedExecutionCard } from './battle.hosted.js';
 import { splitEffectClauses } from './battle.effect-clauses.js';
 
 /** Instance waivers and the battle-wide move blessing share the same play semantics. */
@@ -11,9 +10,9 @@ const REQUIRED_HOSTED_EFFECTS = new Set([
 ]);
 
 /** Structural play requirement, never a prediction of damage against today's target. */
-export function requiresInfusion(card) {
+export function requiresInfusion(card, normalizeCard = card => card) {
   if (card?.rules?.battle?.requirements?.some(rule => rule.kind === 'infused')) return true;
-  const execution = getHostedExecutionCard(card);
+  const execution = normalizeCard(card);
   // Structured operations and equipment registration have independent effects;
   // their editable description must not override their executable contract.
   if (!execution || execution.rules?.triggers || execution.rules?.equip || execution.rules?.bag
@@ -30,7 +29,7 @@ export function requiresInfusion(card) {
     && !parts.turnStart.length && !parts.battle.length && !parts.skill.length;
 }
 
-export function missingInfusionReason(card, fuelCount = 0, allSpellsInfused = false) {
-  return requiresInfusion(card) && !fuelCount && !hasInfusionWaiver(card, allSpellsInfused)
+export function missingInfusionReason(card, fuelCount = 0, allSpellsInfused = false, normalizeCard = card => card) {
+  return requiresInfusion(card, normalizeCard) && !fuelCount && !hasInfusionWaiver(card, allSpellsInfused)
     ? `【${card.name}】需要先注能才能打出，未注能时没有效果` : '';
 }

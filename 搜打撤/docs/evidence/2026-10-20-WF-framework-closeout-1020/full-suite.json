@@ -1,0 +1,44 @@
+{
+  "startedAt": "2026-10-20T17:03:15.109Z",
+  "completedAt": "2026-10-20T17:09:07.051Z",
+  "exitCode": 0,
+  "files": 748,
+  "total": 7692,
+  "passed": 7654,
+  "failed": 0,
+  "skipped": 38,
+  "success": true,
+  "inputScope": "all source, data, CSS, assets, tests, scripts, root config/package manifests, game HTML and current architecture/save-format/compendium documentation",
+  "inputFiles": 3760,
+  "inputFingerprint": "70e0667d906787f3884952980fada3056ece62bb1391693520d36c23cc264ec9",
+  "beforeAfterUnchanged": true,
+  "node": "v24.13.0",
+  "vitest": "3.2.7",
+  "raw": [
+    {
+      "path": ".tmp/framework-closeout-1020/final-all-r2.json",
+      "bytes": 2687706,
+      "sha256": "af5db4f78b9745df2f3ba6b0c6a1b51172817905bc2e086199c697cc682fb60e"
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/final-all-r2.log",
+      "bytes": 5170,
+      "sha256": "ae787582e3dd35cdaa7c241aeb277caf28219ff59b133db07442711b6462919b"
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/final-all-r2-inputs-before.json",
+      "bytes": 667238,
+      "sha256": "7f4b21daf8f78f18f60add7671e685e29d3277aec861dd21b1828435b32ac268"
+    },
+    {
+      "path": ".tmp/framework-closeout-1020/final-all-r2-inputs-after.json",
+      "bytes": 667238,
+      "sha256": "1de1596ece191f94b0388239d135d515f214ffd6554380ef76a0be5e52e88d27"
+    }
+  ],
+  "limits": [
+    "输入清单覆盖声明的源码、数据、CSS、素材、测试、脚本、配置与现行架构/存档/图鉴文档；不等同Git提交或远端CI",
+    "跳过项单列，不计为通过；未运行build；最终大报告保留.tmp并记录获取命令和SHA256"
+  ],
+  "command": "node node_modules/vitest/vitest.mjs run --reporter=json --outputFile=.tmp/framework-closeout-1020/final-all-r2.json"
+}

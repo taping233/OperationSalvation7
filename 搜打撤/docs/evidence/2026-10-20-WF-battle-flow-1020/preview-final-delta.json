@@ -1,0 +1,26 @@
+{
+  "copiedAt": "2026-10-20T15:51:28.159Z",
+  "preview": "D:\\素材\\代号柒\\.tmp\\battle-flow-1020\\preview-unified",
+  "inputs": [
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256": "18904d737a067c3ca1d19f86361a25a72b205923e97cce5e408fcc1fa21ecd9a"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "f62e9a24028c3419da5dea1f3f6d12f292e4ccff63605464a8fdb0fa35a1c424"
+    },
+    {
+      "path": "game/src/battle/core/battle.default-context.js",
+      "sha256": "3ca6a13978eabc2f63925ae4aade992a8c6fc7d469ecc496cc508ab1d94b92ad"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "11abf8a89ce5bfba68cffa55cdf896cda7b823eeb35f36eb8fa7fedb975fdfd2"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "sha256": "37dd7d2f88ed563f7be509864b034a756147cd725a9fc6685bad6b24fdd85f6d"
+    }
+  ]
+}

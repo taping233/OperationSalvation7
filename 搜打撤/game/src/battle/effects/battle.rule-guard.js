@@ -1,5 +1,6 @@
 // @ts-check
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
+import { createCardRuleExecutionView } from '../../cards/card-execution-plan.js';
 
 /** @typedef {import('../../cards/card-rules.capability.types.js').CardRuleIssue} CardRuleIssue */
 /** @typedef {import('../../cards/card-rules.capability.types.js').RuleWarningPort} RuleWarningPort */
@@ -14,6 +15,15 @@ function describeIssues(issues) {
 export function assertCardRulesExecutable(card) {
   const result = inspectCardRuleCapability(card);
   if (!result.ok) throw new TypeError(`${result.kind === 'invalid' ? 'Invalid' : 'Unsupported'} card rules: ${describeIssues(result.issues)}`);
+}
+
+/** Prepare the same isolated operation view inspected before the action is accepted.
+ * @param {object} card @param {readonly object[]} operations */
+export function createCardRuleExecution(card, operations) {
+  assertCardRulesExecutable(card);
+  const execution = createCardRuleExecutionView(card, operations);
+  assertCardRulesExecutable(execution);
+  return execution;
 }
 
 /** The warning port receives HTML-safe text for the battle log.

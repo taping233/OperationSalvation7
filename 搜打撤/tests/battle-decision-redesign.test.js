@@ -105,9 +105,9 @@ describe('统一战斗二级界面展示契约',()=>{
     expect(picks.every(b=>!b.querySelector('button'))).toBe(true);
     expect(document.querySelectorAll('[data-act="btDecisionInspect"]')).toHaveLength(3);
   });
-  it('首脑发现说明与普通战、锦囊取出区分，不把打出与消耗混为一谈',()=>{
+  it('普通和首脑的发现牌统一进入消耗牌堆，锦囊取出保留原支付规则',()=>{
     const boss=battleDiscoverLifecycleNote({act:'play',isBoss:true});
-    expect(boss).toContain('打出后进弃牌堆');expect(boss).toContain('被消耗时进入本场消耗牌');
+    expect(boss).toContain('使用或消耗后进入消耗牌堆');expect(boss).toContain('不自动洗回，仅由卡牌效果取回');
     expect(boss).not.toContain('使用或消耗后进入消耗区');
     expect(battleDiscoverLifecycleNote({act:'play',isBoss:false})).toContain('未用则战后消散');
     expect(battleDiscoverLifecycleNote({act:'pouch',isBoss:true})).toContain('背包原牌随之消耗');

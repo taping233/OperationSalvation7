@@ -2,6 +2,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
 
 window.HTMLCanvasElement.prototype.getContext = () => ({
     measureText: () => ({ width: 10 }), clearRect() {}, fillRect() {}, drawImage() {},
@@ -37,6 +38,7 @@ beforeAll(async () => {
     expect(vi.getTimerCount()).toBe(before);
   }
   await import('../game/src/main.js');
+  trackMainPagePreparation();
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
   await vi.advanceTimersByTimeAsync(0);
   session = await import('../game/src/run/game.session.js');
@@ -47,8 +49,9 @@ beforeAll(async () => {
   sampleCard = window.SDT.Cards.all().find(c => c.type === '法术' || c.type === '攻击');
 });
 
-afterAll(() => {
+afterAll(async () => {
   try {
+    await releaseMainPage();
     vi.clearAllTimers();
     expect(vi.getTimerCount()).toBe(0);
   } finally {

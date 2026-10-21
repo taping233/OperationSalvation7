@@ -103,7 +103,7 @@ const VERBS = [
  * （tests/effect-verbs.test.js 有快照断言）。识别面直接影响执行器 did 返回值，
  * 要动必须先跑差分：全卡库 216 句子在 structuredHit 两种取值下 did 必须不变。 */
 const ELSEWHERE = [
-  { id: 'graveScale', label: '墓地/消耗数量加成', impl: 'battle.core', pattern: /墓地中每有\s*1\s*张(武术|法术|装备|道具|资源)牌/ },
+  { id: 'graveScale', label: '消耗牌堆数量加成', impl: 'battle.core', pattern: /(?:墓地|弃牌堆|消耗牌堆)中每有\s*1\s*张(武术|法术|装备|道具|资源)牌/ },
   { id: 'fuelPriceScale', label: '按注能牺牲品价格折算', impl: 'battle.effects', pattern: /倍于被注能卡牌价格/ },
   { id: 'keepInHand', label: '永远保留在手牌 / 无法注能', impl: 'battle.rules', pattern: /永远被保留在手牌中|无法用于注能/ },
   { id: 'nextCastTimes', label: '下一张牌施放 N 次（规则层）', impl: 'battle.core', pattern: /下一张(?:法术|招式)?施放\s*\d+\s*次/ },

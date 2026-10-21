@@ -5,6 +5,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildCompendium } from '../scripts/generate-compendium.mjs';
+import { displayCardDescription } from '../game/src/cards/card-description-text.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -65,7 +66,10 @@ describe('游戏全书与运行时数据一一对应', () => {
 
   it('机制导航指向现行文件，基础常量不取伪造的运行态或旧棋盘字段', () => {
     const before = readFileSync(OUT);
-    expect(md).toContain('每回合 2 能量，手牌上限 8');
+    expect(md).toContain('每回合 2 能量。普通战');
+    expect(md).toContain('首脑战手牌上限 8');
+    expect(md).toContain('另有99张初始攻击牌库，开局和每回合不自动抽牌');
+    expect(md).toContain('消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(md).not.toContain('每回合 99');
     expect(md).not.toContain('骰子面数');
     expect(md).not.toContain('30×30 格');
@@ -81,6 +85,22 @@ describe('游戏全书与运行时数据一一对应', () => {
     expect(+m[1]).toBe(Cards.all().length);
   });
 
+  it('卡牌表描述与实际展示同源，保留卡库原数据并转义表格符号', () => {
+    const cards = Cards.all();
+    const before = JSON.stringify(cards);
+    const escape = text => String(text ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\|/g, '\\|');
+    for (const card of cards) {
+      const description = displayCardDescription(card.desc, card.id, card).replace(/\n/g, ' ');
+      const row = md.split('\n').find(line => line.startsWith(`| ${escape(card.name)} |`));
+      expect(row, card.id).toBeDefined();
+      expect(row, card.id).toContain(`| ${escape(description)} |`);
+    }
+    expect(JSON.stringify(cards)).toBe(before);
+    const thunder = md.split('\n').find(line => line.startsWith('| 雷殛 |'));
+    expect(thunder).toContain('消耗牌堆');
+    expect(thunder).not.toContain('墓地');
+  });
+
   it('退役卡不再出现（灭魔之剑/桃；恶魔之力为 cc-demon 正式卡仍应在册）', () => {
     expect(md).not.toContain('灭魔之剑');
     expect(md).not.toContain('| 桃 ');
@@ -92,6 +112,6 @@ describe('游戏全书与运行时数据一一对应', () => {
     expect(md).toMatch(/\| 自然法杖 \| 0 \| 稀有 \|/);
     expect(md).toMatch(/\| 灵符 \| 0 \| 稀有 \|/);
     expect(md).toContain('主动技能：选择 1 张卡牌');
-    expect(md).toContain('对战开始时，额外抽 2 张牌。');
+    expect(md).toContain('对战开始时，你额外抽 2 张牌。');
   });
 });

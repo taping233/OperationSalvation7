@@ -28,6 +28,7 @@ import {
  *   findByUid: (uid: string) => DiscoverCardEntry | null,
  *   addTempCard: (card: DiscoverCard, presentation?: { source: 'pouch' | 'discover-cast' }) => string,
  *   addDeckCard?: (card: DiscoverCard) => string,
+ *   moveDeckCardToHand?: (uid: string) => boolean,
  *   queueCardExecution: (uid: string, card: DiscoverCard, fuelUids: string[], target: unknown, freeCost: boolean) => unknown,
  *   directPlayReason?: (card: DiscoverCard) => string,
  *   fireCatGift: (card: DiscoverCard) => void
@@ -162,6 +163,7 @@ export function createBattleDiscoverFlow(ports) {
     const swapPair = queuedState ? state.swapPair : null;
     const deckBottom = 'deckBottom' in state ? state.deckBottom : false;
     const deckBottomUids = 'deckBottomUids' in state ? state.deckBottomUids || [] : [];
+    const pickedDeckUid = deckBottom ? deckBottomUids[+index] : null;
     const zeroCost = queuedState && state.zeroCost;
     const decayEachTurn = queuedState && state.decayEachTurn;
     const costDecayPerTurn = queuedState ? state.costDecayPerTurn : undefined;
@@ -218,19 +220,25 @@ export function createBattleDiscoverFlow(ports) {
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
       cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
-    } else if (act === 'stellarCopies') {
+    } else if (act === 'stellarCopies' || act === 'copyToDeck') {
       if (!cards.addDeckCard || !effects.shuffleDeck) throw new Error('Missing stellarCopies deck ports');
       cards.addTempCard(clone(card));
-      for (let i = 0; i < 2; i++) cards.addDeckCard({ ...clone(card), _castOnDraw: true });
+      const copies = act === 'stellarCopies' ? 2 : state.copies || 0;
+      const castOnDraw = act === 'stellarCopies' ? true : !!state.castOnDraw;
+      for (let i = 0; i < copies; i++) cards.addDeckCard({ ...clone(card), ...(castOnDraw ? { _castOnDraw: true } : {}) });
       effects.shuffleDeck();
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌，将 2 张复制洗入牌库（抽到时免费施放，仍需满足注能和其他使用条件）`, 'loot');
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌，将 ${copies} 张复制洗入牌库${castOnDraw ? '（抽到时免费施放，仍需满足注能和其他使用条件）' : ''}`, 'loot');
     } else if (act === 'dup') {
       cards.addTempCard(card);
       cards.addTempCard(card);
       output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并额外获得 1 张复制（×2 置入手牌 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
     } else {
-      const uid = cards.addTempCard(card);
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
+      let uid;
+      if (pickedDeckUid && cards.moveDeckCardToHand) {
+        if (!cards.moveDeckCardToHand(pickedDeckUid)) throw new Error('Deck discovery source is unavailable');
+        uid = pickedDeckUid;
+      } else uid = cards.addTempCard(card);
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】${pickedDeckUid ? '从牌库置入手牌' : '置入手牌（本场生成：使用或消耗后进入消耗区，未用则战后消散）'}`, 'loot');
       if (priceArmor) {
         const price = cards.sellPrice(card);
         const armor = effects.addArmor(price);

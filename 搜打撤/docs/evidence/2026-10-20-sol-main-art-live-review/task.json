@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-main-art-live-review",
+  "date": "2026-10-20",
+  "owner": "Friday / Sol medium",
+  "goal": "当前内置浏览器最短远征主美实页诊断，交付截图、优先问题与首个样板建议",
+  "paths": [
+    "docs/evidence/2026-10-20-sol-main-art-live-review"
+  ],
+  "doneWhen": [
+    "实际输入覆盖整备、地图、战斗、领奖、背包、撤离结算，未覆盖如实标注",
+    "问题有截图、玩家影响、优先级与建议，区分观察和提案",
+    "选定第一段样板，不修改游戏源码与正式存档；自建服务核实后停止"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "同一测试档真实走完三层远征、紧急撤离、入库、结算与返回基地；15张内置浏览器截图已核对来源和SHA256，报告链接有效",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "自有5317服务PID15568身份核实后已停止，端口无监听；未改游戏源码和正式素材",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "前段为子代理后台1280x720截图，后段由主会话当前可见1001x956窗口接续；未做同一窗口整链视觉复验或多尺寸适配验收",
+    "第四层、首脑、死亡结算、满仓、全部动效边界和后续在途源码不在本轮覆盖"
+  ],
+  "updatedAt": "2026-10-20T07:55:35.652Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

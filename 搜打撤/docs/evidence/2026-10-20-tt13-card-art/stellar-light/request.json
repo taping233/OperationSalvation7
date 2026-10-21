@@ -1,0 +1,12 @@
+{
+  "status": "preview-only-no-runtime-replacement",
+  "card_id": "tt13-stellar-divination",
+  "method": "Built-in ImageGen light edit of the first NAI4.5 portrait draft",
+  "prompt": "对这张星月《星辰占卜》NAI原图做非常轻微的内置重绘。它是唯一内容与美感依据：保留原来的漂亮二次元脸型、眼睛与神态、五官比例、头部角度、发型轮廓、辫子、月饰、衣装、人物位置、持牌手势、整组悬浮星牌的数量与排列、亮星形状、光色、背景和画幅。不要重新设计，不纠正人设或道具数量，不改变动作构图。改动仅限稍微收整过密细线和零碎高光，衣料几处暗面略作归并，少量柔和的手绘覆色让笔触自然；脸眼和发束仍保留原图清透、柔和、完整的体积。整体应与原图极为接近，保留原图的吸引力。不要上一轮的大量碎块、厚重三角切面、刮擦、颗粒、油画纹理或暗沉灰色，不额外增加笔触和细节，不把头发画粗碎，不把脸磨平或画成熟。输出一张原横版完整图，无新增文字、边框、水印或UI。",
+  "references": [
+    "D:/素材/代号柒/.tmp/nai/tt13-career-redraw-20261020/tt13-stellar-divination.png"
+  ],
+  "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-ebd45a76-fcd7-48a0-966f-42990905c05e.png",
+  "observed": "保留首张带星月人物NAI图的脸型神态、双辫/月饰原位置、指尖星牌与基本布局，轻微收整线条及明暗；未强行修改人设和牌数，未追加默认厚涂切笔。",
+  "verification": "仅实看画作，未替换、未测试/build/提交。"
+}

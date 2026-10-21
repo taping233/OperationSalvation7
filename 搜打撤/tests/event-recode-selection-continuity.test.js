@@ -63,7 +63,7 @@ afterEach(() => { UI.hideOverlay({ immediate: true }); vi.restoreAllMocks(); vi.
 
 async function openEvent(id, rewards = []) {
   H.cards = [{ id, name: '生命周期事件', type: '事件' }, ...rewards];
-  const opening = flow.runEventDeck();
+  const opening = flow.runEventDeck(); await vi.dynamicImportSettled();
   await vi.advanceTimersByTimeAsync(1000);
   await opening;
 }

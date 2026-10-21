@@ -53,7 +53,8 @@ it('首脑池没有合法候选时不生成禁用道具，明确提示且结束�
 it('普通战仍可生成道具，不改变全局随机掉落资格', async () => {
   const drink = canonical('tt4-woodify'); expect(C.isRandomObtainable(drink)).toBe(true);
   await rescue([drink], false);
-  expect(R.granted.map(o => o.card.id)).toEqual([drink.id, drink.id, drink.id]);
+  expect(R.granted.filter(o => o.card.id === drink.id).map(o => o.card.id)).toEqual([drink.id, drink.id, drink.id]);
+  expect(R.granted.filter(o => o.uid.startsWith('normal-sha-'))).toHaveLength(99);
   expect(C.isRandomObtainable(drink)).toBe(true);
 });
 it('生成池保留原有unrandom/稀有度资格，不纳入禁止随机的候选', async () => {

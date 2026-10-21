@@ -2,7 +2,7 @@ import { storeGet, storeSet } from '../core/storage.js';
 import { hideHomeForWallpaper, restoreHomeFromWallpaper } from './home-menu-motion.js';
 
 const preferenceKey = 'sdt-title-wallpaper';
-const wallpapers = ['snow-road', 'baita-heixiang'];
+const wallpapers = ['snow-road', 'baita-heixiang', 'xingyue-piano', 'wu-bass', 'baita-station', 'xingyue-reeds'];
 const title = document.getElementById('title');
 const button = document.getElementById('btnTitleWallpaper');
 const viewButton = document.getElementById('btnTitleWallpaperView');
@@ -20,7 +20,8 @@ if (title && viewButton) {
 }
 
 if (title && button) {
-  let index = Math.max(0, wallpapers.indexOf(storeGet(preferenceKey)));
+  const savedIndex = wallpapers.indexOf(storeGet(preferenceKey));
+  let index = savedIndex >= 0 ? savedIndex : wallpapers.indexOf('wu-bass');
   const render = () => {
     title.dataset.homeWallpaper = wallpapers[index];
     const count = `${index + 1}/${wallpapers.length}`;

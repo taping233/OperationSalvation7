@@ -1,0 +1,15 @@
+/* Stronghold bandit sample: grounded collapse on the illustration, beneath the existing slot fade. */
+.battle-stage.sts .sts-foe.dead:not(.bt-death-pending) .sts-figure img[src*="/bandit.webp"] {
+  transform-origin: 50% 94%;
+  animation: bandit-collapse .65s ease-in forwards;
+}
+@keyframes bandit-collapse {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  24% { transform: translateY(4px) rotate(5deg); opacity: 1; }
+  65% { transform: translateY(18px) rotate(14deg); opacity: .75; }
+  100% { transform: translateY(28px) rotate(18deg); opacity: 0; }
+}
+body.reduce-motion .battle-stage.sts .sts-foe.dead .sts-figure img[src*="/bandit.webp"] { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .battle-stage.sts .sts-foe.dead .sts-figure img[src*="/bandit.webp"] { animation: none; }
+}

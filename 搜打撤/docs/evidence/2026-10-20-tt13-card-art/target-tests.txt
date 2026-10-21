@@ -1,0 +1,15 @@
+
+> codename7-soudache-game@0.60.0 test:target
+> node scripts/acceptance-gate.mjs --target-tests tests/card-art-coverage.test.js tests/shadowed-card-art.test.js
+
+[gate] 指定 Vitest
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+······
+
+ Test Files  2 passed (2)
+      Tests  6 passed (6)
+   Start at  17:08:51
+   Duration  2.76s (transform 302ms, setup 0ms, collect 523ms, tests 1.06s, environment 2.56s, prepare 298ms)
+

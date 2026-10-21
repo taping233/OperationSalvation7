@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:05:05.509Z",
+  "inputKind": "real-input",
+  "detail": "真实搜索灵魂契约并打开大图，核对默认画风常无欲最终版",
+  "screenshot": {
+    "path": "live-soul-final.png",
+    "bytes": 58327,
+    "sha256": "e440e208b7b6cd486ece007b21f1e77d48ae38a3b022b2774e3ef382b64f5ca3"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 256,
+      "src": "http://localhost:5200/assets/thumbs/cards/spell-tt13-soul-contract.webp?art=selected-final-20261020&v=0.60.0",
+      "width": 448
+    }
+  ],
+  "console": []
+}

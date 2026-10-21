@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T18:10:47.037Z",
+  "inputKind": "real-input",
+  "detail": "前轮真实按钮切到第五张；重新打开当前窗口恢复第五张，检查新版台阶壁纸与5/5标识，未进入游戏存档。",
+  "screenshot": {
+    "path": "home-installed-stairs.png",
+    "bytes": 98524,
+    "sha256": "eaa594c072e7c2d94267c3a680d43a7b6819c41fe469cb502a43f360b7709135"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 1486,
+      "src": "http://localhost:5200/assets/title-wordmark.png",
+      "width": 3200
+    }
+  ],
+  "console": []
+}

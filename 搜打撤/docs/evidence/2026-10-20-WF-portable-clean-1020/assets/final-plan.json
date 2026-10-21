@@ -1,0 +1,15 @@
+{
+  "count": 195,
+  "warnings": [],
+  "inactive": [
+    {
+      "file": "game/src/hub/base-chibi-v2.skin.js",
+      "expected": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
+      "matches": false,
+      "active": false,
+      "historicalEntryDeletion": null,
+      "note": "Historical fingerprint for a source no longer scanned; production opaque analysis reports no unreviewed active consumers."
+    }
+  ],
+  "mappingCurrentUnchanged": true
+}
