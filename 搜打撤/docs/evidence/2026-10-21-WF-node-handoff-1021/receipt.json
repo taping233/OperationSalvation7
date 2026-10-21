@@ -1,0 +1,112 @@
+{
+  "task": "WF-node-handoff-1021",
+  "owner": "Friday",
+  "status": "complete-uncommitted",
+  "source": [
+    {
+      "path": "game/src/ui/transition-handoff.js",
+      "sha256": "b2ad324c13857e467f0fa37f04b1a62bffed09604d83c032f2a2463be7adbed1",
+      "bytes": 2979
+    },
+    {
+      "path": "game/css/transition-handoff.css",
+      "sha256": "8895f2e134e6244b985d601794a2ebfd482ba36cea73022e9463b567dafe188a",
+      "bytes": 1610
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "sha256": "ea8afdcc0e43fce59141fe8c8b89a4808f426865f843485381a69c679bd3a1e0",
+      "bytes": 13208
+    },
+    {
+      "path": "game/src/ui/page-loading.js",
+      "sha256": "a946b69fed749603620e964573a899498d9ddcfa92601aa77289e2a119369447",
+      "bytes": 5826
+    },
+    {
+      "path": "game/src/ui/page-visual-ready.js",
+      "sha256": "5de08d499de730b8421d43f91c333d1d8b0dbe97a6ba200eed74e72ccafce93f",
+      "bytes": 9160
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "sha256": "f228db5c827126a383b10dcd3cd981de71a10c5bd180bf72149a6c2c9d24ff5f",
+      "bytes": 15762
+    },
+    {
+      "path": "game/src/ui/startup-transition.js",
+      "sha256": "f1245f76e30dcc6f296d222a7f0244129bc91111b3280386840d5080e935f5d3",
+      "bytes": 3227
+    },
+    {
+      "path": "game/src/ui/departure-transition.js",
+      "sha256": "e709a77ba7f861f91ea21eaf1378fee8ae0c360c3ac1bffa78cffcc2a983afba",
+      "bytes": 2627
+    },
+    {
+      "path": "game/src/ui/settings-transition.js",
+      "sha256": "7c74e9c0f80dd7d30592bbf420ec20b59c47b200714b0294bd922e23ea4cb1cb",
+      "bytes": 1098
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "sha256": "35c742173767befa061a4387937df7235095b6c0746bf4b402d072d92cd71ff3",
+      "bytes": 66634
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "466ca233bb14c8bf84fbbb9abd10b4cff91da303746a06bcbd3410c5251c6fa8",
+      "bytes": 38836
+    },
+    {
+      "path": "game/css/page-visual-ready.css",
+      "sha256": "58f432871500262c5760918337df5cf4d8c7d884e80dc2d667e94253e01042e9",
+      "bytes": 2387
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "sha256": "c913aa4c423185e6a95de5318ba2fe039834fb85c9c777fe716300dee7c23aa7",
+      "bytes": 26758
+    },
+    {
+      "path": "tests/camp-entry-readiness.test.js",
+      "sha256": "2c256f2bf831fc5050e12546b7db51734ce982378d44d6d435bfa2d69855c66b",
+      "bytes": 5393
+    },
+    {
+      "path": "tests/page-loading.test.js",
+      "sha256": "0d7feebca19014e65f9fed5d8c43a61b2e236056b4ced9c6ca106bac21bd3de0",
+      "bytes": 12144
+    },
+    {
+      "path": "tests/page-visual-readiness-sharing.test.js",
+      "sha256": "9747a6744c5ca0f47321eb2f52b4085f99d25e85710cea9070205677e02ea787",
+      "bytes": 18311
+    },
+    {
+      "path": "tests/startup-transition.test.js",
+      "sha256": "469a7d63eab1dfc706401dada77c18b66a1177c491f7b6675dd17fee0341ebf8",
+      "bytes": 4284
+    },
+    {
+      "path": "tests/surface-motion.test.js",
+      "sha256": "1565172e8128c3417195adee198634115864060bd0ec21029d9241542cc64a3d",
+      "bytes": 10724
+    },
+    {
+      "path": "docs/performance.md",
+      "sha256": "8878c0c02fad3331a2c128939ff4c8563e77f11fe143cd936f6449d714c3b4c7",
+      "bytes": 33790
+    }
+  ],
+  "validation": [
+    "11文件185项定向回归通过；末次公共场景增量6文件93项通过；冷入口专图兼容追加4文件51项通过",
+    "定向ESLint通过；docs:check通过；自有diff检查通过",
+    "Codex IAB当前窗口：真实点击存档05至地图、照相馆；只读逐帧采样见browser.json；error为空"
+  ],
+  "limits": [
+    "没有本地全量/build/提交/推送",
+    "类型全量未通过：他人地图属地game/src/core/map-layer-atmosphere.js:30的5项TS2363；本轮新增交接模块没有类型诊断",
+    "浏览器覆盖上述两条实页，其他入口使用定向回归；没有跨尺寸或FPS结论"
+  ]
+}

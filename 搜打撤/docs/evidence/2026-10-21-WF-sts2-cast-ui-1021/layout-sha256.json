@@ -1,0 +1,38 @@
+[
+  {
+    "file": "game/src/battle/view/battle.infusion-view.js",
+    "sha256": "96dd77c79adaa0a8d55eae9b66cb975bbc5e1dcd6fc9f985ee348942dc087b78"
+  },
+  {
+    "file": "game/src/battle/view/battle.infusion-material-state.js",
+    "sha256": "48aa3386323df7da2d4d12e2af0a19fd1ec28a30c0bfd3de8b39935c222548ab"
+  },
+  {
+    "file": "game/src/battle/view/battle.discover-view.js",
+    "sha256": "fc17f5ea93b2fdac51a1ddf78b91b83fb65aa50893cbb00f264fa9bdcf7a8ddd"
+  },
+  {
+    "file": "game/src/battle/view/battle.view.js",
+    "sha256": "d71c395b9001a3eaacd14f8cdc77468a4bd46d62157e078278e995732b9e7aab"
+  },
+  {
+    "file": "game/css/battle-infusion.css",
+    "sha256": "329e5bb76dd879dab4c97934e1147590d4f3af8129c57a046be6c71c45e07e96"
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "sha256": "1abcbebd750fbd647e97b3f06ea2048f704796a5e189eb2dfcedcb8ae50de3df"
+  },
+  {
+    "file": "tests/battle-infusion-action-layout.test.js",
+    "sha256": "36b6a0cbfecd96d5baeea2db320de829fa90399061df01b7b000cf3c320adfa6"
+  },
+  {
+    "file": "tests/sts2-cast-layout-1021.test.js",
+    "sha256": "939dc64571ca3c8b3e1d85556f4d6d383234d22b4191d639eeefb6d5c3e02acc"
+  },
+  {
+    "file": "docs/evidence/2026-10-21-WF-sts2-cast-ui-1021/layout-source.diff",
+    "sha256": "cbb4eeb4d26c903457444c4273ae50b79bf44cda57878dec3971b62eb6d70966"
+  }
+]

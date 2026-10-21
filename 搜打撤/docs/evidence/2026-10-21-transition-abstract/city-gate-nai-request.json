@@ -1,0 +1,61 @@
+{
+  "status": "failed",
+  "name": "阴暗未来城市通路",
+  "request": {
+    "input": "scenery, no humans, abstract futuristic city at night, an urban threshold suggested by broad dark building slabs and angular shelter shapes, a continuous flat street plane recedes between them, only a few short cold light strips suggest future technology, dark city silhouettes merge into the same atmosphere, low detail, simple connected forms, no literal mechanical construction\n\nabstract hand-painted game transition illustration, communicate mood and direction\n\nwide balanced composition, subject to the right of center, left third quiet, only a few large connected shapes, one continuous atmospheric environment, coherent foreground middle distance and background, soft transitions between masses, complete readable silhouettes, economical brushwork, no split panels\n\nvery dark charcoal blue and gray violet, restrained desaturated teal light along one side, one small dim amber light accent, dim reflected light on the continuous ground, a single coherent light direction, subdued oppressive mysterious urban mood, no bright daylight or glowing sky\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 768,
+      "height": 512,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 102101013,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, people, detailed city, windows, pipes, cables, machinery, complicated architecture, detailed rails, tiny objects, decorative clutter, split screen, photorealistic, 3d render, mountains, cliffs, rocks, wilderness, forest, snow field, ancient ruins, stone arch, temple, crystal, sunny, daylight, white sky, pastoral landscape, fantasy landscape, busy neon signs",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, abstract futuristic city at night, an urban threshold suggested by broad dark building slabs and angular shelter shapes, a continuous flat street plane recedes between them, only a few short cold light strips suggest future technology, dark city silhouettes merge into the same atmosphere, low detail, simple connected forms, no literal mechanical construction\n\nabstract hand-painted game transition illustration, communicate mood and direction\n\nwide balanced composition, subject to the right of center, left third quiet, only a few large connected shapes, one continuous atmospheric environment, coherent foreground middle distance and background, soft transitions between masses, complete readable silhouettes, economical brushwork, no split panels\n\nvery dark charcoal blue and gray violet, restrained desaturated teal light along one side, one small dim amber light accent, dim reflected light on the continuous ground, a single coherent light direction, subdued oppressive mysterious urban mood, no bright daylight or glowing sky\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, people, detailed city, windows, pipes, cables, machinery, complicated architecture, detailed rails, tiny objects, decorative clutter, split screen, photorealistic, 3d render, mountains, cliffs, rocks, wilderness, forest, snow field, ancient ruins, stone arch, temple, crystal, sunny, daylight, white sky, pastoral landscape, fantasy landscape, busy neon signs",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-abstract-20261021\\city-gate-nai.png",
+  "recipe_version": "3.4",
+  "localNegativeAdjustment": "移除negative space，避免与左侧安静留白冲突；共享配方不改",
+  "userConstraint": "可抽象；场景不具体化，不增加不合理细节或割裂拼贴",
+  "error_type": "SystemExit",
+  "error": "Generation failed (HTTP 402)"
+}

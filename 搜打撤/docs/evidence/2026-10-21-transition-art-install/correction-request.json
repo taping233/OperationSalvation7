@@ -1,0 +1,24 @@
+{
+  "status": "generated-awaiting-user-selection",
+  "reason": "老板否定扩展重绘细节，要求基于NAI原图修正即可",
+  "editTarget": "D:/素材/代号柒/.tmp/nai/transition-art-sample-20261021/nai-v45-small.png",
+  "prompt": "Edit ONLY the attached original NovelAI small image. This is a conservative correction, NOT a redesign and NOT a detailed repaint.\nPreserve the exact 3:2 framing and viewpoint, doorway placement and proportions, dark left corridor, simple panel walls, ceiling beams and light, turquoise-to-ivory sky, snowy threshold, bright distant city and its soft economical shapes. Preserve the original anime illustration technique, original level of detail, palette, lighting, atmosphere and broad smooth shadow shapes.\nCorrect only visibly ambiguous perspective or joins: make the rectangular doorframe, wall/ceiling joints and floor threshold structurally consistent with the same vanishing direction. Clarify that the existing floor continues safely through the door onto a simple walkway, using at most a few broad connected shapes; keep it understated and avoid a floating ledge or cliff immediately outside.\nDo not add new towers, bridges, buildings, windows, signs, floor tiles, cables, machinery, lamps, rail networks, elaborate rails, trees or extra objects. Do not invent dense tiny architectural detail while increasing resolution. Simplify any incoherent small background marks into calm silhouettes rather than resolving each into a new object. Retain the original quiet, uncluttered visual. No added brush-grain filter, snow speckles, scratch texture or thick sharp outlines. No people, text, watermark or UI. Deliver one corrected image with the original aspect ratio, original composition and no comparison layout.",
+  "preserve": [
+    "原图3:2构图",
+    "原画法与细节密度",
+    "原色光",
+    "城市远景概括"
+  ],
+  "allowedChanges": [
+    "门框/墙顶接缝透视",
+    "门槛与通道地面连接"
+  ],
+  "integration": "未接入；老板要求先列现图选择，生产代码/运行素材未修改",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-art-sample-20261021\\corrected-original-v2.png",
+  "originalOutput": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-2e425cfb-21b7-424f-a946-cf0e504d29a5.png",
+  "sha256": "43e7ff3366252e8b92e4182ab374d9cd8d25f22a5fa8a88a23f6667f8c2f52f7",
+  "size": [
+    1536,
+    1024
+  ]
+}

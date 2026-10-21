@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\dist\\代号柒-v0.60.0-便携无存档-20261021.exe",
+  "artifactSHA256": "fa74c44bed810e4e6e5adf70a31179424049417aef58e0ca6fcfd5f0c854e895",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-3VXXs0",
+  "first": {
+    "pid": 12692,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-3VXXs0\\临时 resources\\nsk39F9.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "second": {
+    "pid": 43864,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-3VXXs0\\临时 resources\\nsu85C7.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-3VXXs0\\临时 resources\\nsk39F9.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}

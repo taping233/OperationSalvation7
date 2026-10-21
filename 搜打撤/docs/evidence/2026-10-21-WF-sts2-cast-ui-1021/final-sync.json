@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-21T05:55:25.017Z",
+  "files": [
+    "css/battle-stage.css",
+    "css/battle-infusion.css",
+    "css/battle-discover.css",
+    "css/battle-potion-use.css",
+    "css/battle-pile-view.css",
+    "css/home-polish.css",
+    "src/battle/view/battle.pile-view.js",
+    "src/battle/view/battle.potion-use.js",
+    "src/battle/view/battle.infusion-material-state.js",
+    "src/battle/view/battle.infusion-view.js",
+    "src/battle/view/battle.discover-view.js",
+    "src/battle/view/battle.decision-content.js",
+    "src/battle/view/battle.decision-shell.js",
+    "src/battle/view/battle.overlays.js",
+    "src/battle/view/battle.aim.js",
+    "src/battle/view/battle.selection-ui.js",
+    "src/battle/core/battle.card-play.domain.js",
+    "src/battle/core/battle.core.js",
+    "src/battle/core/battle.snapshot-projection.domain.js",
+    "src/battle/core/battle.core-ports.types.d.ts",
+    "src/battle/battle.snapshot.types.d.ts",
+    "src/agent/agent.state.js",
+    "src/agent/agent.policy.js",
+    "src/battle/view/battle.view.js"
+  ],
+  "preview": ".tmp/sts2-cast-ui-1021/preview/game",
+  "port": 5346,
+  "verification": "老板明确要求不再验证；本次仅同步完成源码，未运行检查或浏览器验收",
+  "followup": "followup-sync.json",
+  "followupAt": "2026-10-21T06:17:23.424Z",
+  "followupFiles": [
+    "css/battle-discover.css",
+    "css/battle-stage.css",
+    "css/chest-reward-overview.css",
+    "src/ui/reward-scene-view.js",
+    "src/ui/chest-reward-overview.js",
+    "src/run/chests.js",
+    "src/battle/view/battle.view.js"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\dist\\代号柒-v0.60.0-便携首开修复-20261021.exe",
+  "artifactSHA256": "20929e41090a90e96d01ae8b7b36a24586077933a2469a7e0a49ed9ef329c6fc",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-7vQGWI",
+  "first": {
+    "pid": 20972,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-7vQGWI\\临时 resources\\nsxABD2.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "second": {
+    "pid": 29808,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-7vQGWI\\临时 resources\\nst127C.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-7vQGWI\\临时 resources\\nsxABD2.tmp\\app",
+    "files": 1690,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}

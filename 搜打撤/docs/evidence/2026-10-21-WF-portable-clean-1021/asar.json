@@ -1,0 +1,88 @@
+{
+  "omittedPlaceholders": [
+    {
+      "path": "assets/cards/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "assets/portraits/enemies/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ],
+  "deliveryFiles": 1766,
+  "forbiddenDelivery": [],
+  "at": "2026-10-21T10:25:47.285Z",
+  "asar": "D:\\素材\\代号柒\\.tmp\\portable-clean-1021\\delivery-final\\win-unpacked\\resources\\app.asar",
+  "asarSHA256": "f4a35a593d4e482e9cf4bb3c39b1d448713bf7156966b78626a65b7169d8b720",
+  "files": 11,
+  "compared": [
+    {
+      "path": "main.js",
+      "bytes": 7221,
+      "sha256": "50c807d84d4bd953da846b81acb2bdbbf90abd46670473d364665aa6912966f6",
+      "same": true
+    },
+    {
+      "path": "game-file-protocol.cjs",
+      "bytes": 4023,
+      "sha256": "f82749b6c007f1c123d69eea5f55c772a43f47afb31aed1c84de17dd29366c72",
+      "same": true
+    },
+    {
+      "path": "runtime-guard.cjs",
+      "bytes": 3992,
+      "sha256": "a73fda878dfe0dfc1a22f1a283c6918e802458ce579f89814a285dc447507c16",
+      "same": true
+    },
+    {
+      "path": "preload.js",
+      "bytes": 3559,
+      "sha256": "109e4db8f16411391500ab781ecb5d99ade7a4ce493af21891d4b1f58b3ff2f8",
+      "same": true
+    },
+    {
+      "path": "suggestions-store.cjs",
+      "bytes": 983,
+      "sha256": "4f2d615ce8433b1b98890568f3d4edcc3641666a2e51d1606d0d3cb9f920d2d3",
+      "same": true
+    },
+    {
+      "path": "startup-window.cjs",
+      "bytes": 4497,
+      "sha256": "48aaefece5054ea504c0d96d6578e89c9e9c084664d218bc3312b7bf01d402fc",
+      "same": true
+    },
+    {
+      "path": "startup-preload.cjs",
+      "bytes": 307,
+      "sha256": "0fd1ecdc6f8c7795b63784483078a32a2330dab8dd26b7f8642564df0c3e2f47",
+      "same": true
+    },
+    {
+      "path": "startup.html",
+      "bytes": 5448,
+      "sha256": "068bc6b9f7090bafe0859af0de7c748b8065d3b5522ea662e9a5eb49875ac554",
+      "same": true
+    },
+    {
+      "path": "release-profile.json",
+      "bytes": 63,
+      "sha256": "3785278c7db1391decca67cf15d112ca5f518e62c8fc1c90fad98f312d1d87e0",
+      "same": true
+    },
+    {
+      "path": "app.ico",
+      "bytes": 124019,
+      "sha256": "a4e6c139c712469ed573aa8cdb337b75bab5560ee452e59d1a6c0525e59f92e6",
+      "same": true
+    }
+  ],
+  "profile": "codename7-clean-20261021-c5f24112b3cd410f",
+  "profilePath": "C:\\Users\\太平\\AppData\\Roaming\\codename7-clean-20261021-c5f24112b3cd410f",
+  "profileAbsent": true,
+  "gameFiles": 1690,
+  "failures": [],
+  "passed": true
+}

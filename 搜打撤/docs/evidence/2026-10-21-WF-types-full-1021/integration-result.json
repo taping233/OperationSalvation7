@@ -1,0 +1,193 @@
+{
+  "recordedAtUtc": "2026-10-21T04:05:27.513Z",
+  "coverage": {
+    "implementationChecked": 537,
+    "denominator": 537,
+    "strictChecked": 49,
+    "configs": 11,
+    "diagnostics": 0,
+    "baseline": "checkJs:true / strict:false; original strict configurations preserved"
+  },
+  "static": {
+    "typecheck": "Reused latest frozen source complete eleven-configuration check and compiler injection coverage",
+    "lint": "Reused final complete lint plus independent changed-three-test lint",
+    "syntax": {
+      "exitCode": 0,
+      "projectFiles": 597
+    },
+    "docs": {
+      "exitCode": 0,
+      "relativeLinks": 659
+    },
+    "data": "npm test pretest compilation and validation passed",
+    "sourceCountIncludingDeclarations": 555,
+    "sourceSha256": "5630047d8765f98ce58aea98df71ad371740087cb63f57fcf9ee7977c230613f",
+    "reusedLogs": [
+      {
+        "file": ".tmp/hubrun-I03-freeze-types.txt",
+        "sha256": "a6a7b1a7884df256e626d1a96dfb08908315862b7cd35fc6c62897fa859a6795",
+        "mtime": "2026-10-21T03:50:41.293Z"
+      },
+      {
+        "file": ".tmp/hubrun-I03-freeze-lint.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mtime": "2026-10-21T03:50:34.580Z"
+      }
+    ]
+  },
+  "stableFull": {
+    "command": "npm test",
+    "exitCode": 1,
+    "files": {
+      "passed": 750,
+      "failed": 3,
+      "skipped": 1,
+      "total": 754
+    },
+    "tests": {
+      "passed": 7685,
+      "failed": 3,
+      "skipped": 38,
+      "total": 7726
+    },
+    "unhandledErrors": 0,
+    "vitestDurationSeconds": 338.39,
+    "inputStable": true,
+    "inputGroup": "701df90d7c0f6c9237d83f1e3fadaa93b96ce1faf1384b89b2a339a12caff7cd",
+    "log": {
+      "file": ".tmp/types-integration-final2/test.log",
+      "bytes": 197080,
+      "sha256": "ccc47520172235e78affc3697b8c2d5bde955da3474db19ead8f721cd27b00bf"
+    }
+  },
+  "correctedThreeFiles": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/hero-cards.test.js tests/premium-ui-pages.test.js tests/r7a-scenes-integration.test.js --reporter=dot",
+    "exitCode": 0,
+    "filesPassed": 3,
+    "testsPassed": 25,
+    "lintExitCode": 0,
+    "stable": true,
+    "inputGroup": "33ce62a179998643757608e16ffce60b47b20a7428bcff68b7b5275d1fa866db",
+    "changesFromStableFull": [
+      {
+        "file": "tests/hero-cards.test.js",
+        "sha256": "07e425eb49bde019af7b1cf13abc5bce0d3b147129a357bb861b90364ac07466"
+      },
+      {
+        "file": "tests/premium-ui-pages.test.js",
+        "sha256": "903fff70f3a5a0b224da2552804b52dee600442dba358e0fa974c5a64056fdd7"
+      },
+      {
+        "file": "tests/r7a-scenes-integration.test.js",
+        "sha256": "7b5d7a58704da52bc6d84447f1d0a491a8edc0a31724322004958bc27e72761c"
+      }
+    ],
+    "unexpectedChanges": [],
+    "removed": [],
+    "log": {
+      "file": ".tmp/types-integration-target3/target3.log",
+      "bytes": 402,
+      "sha256": "453bb0093edea19c4f5db32de1b805d431ac721653d1d07d685779bb28222b68"
+    }
+  },
+  "validationConclusion": "Production source, assets, configuration, dependencies and other tests are unchanged from stable full. Reuse its 750 passed files and separately report the corrected three complete files. No claim that one latest full run was green.",
+  "browser": {
+    "finalFrozenSourceVerified": false,
+    "blocker": "Current CUA inventory empty and explicit iab creation unavailable",
+    "record": "browser-final-blocker.json",
+    "earlierRealInputScope": "Previous source only: title/new slot05/real card play/enemy turn/normal visuals/save-exit/restore"
+  },
+  "service": {
+    "atUtc": "2026-10-21T04:03:21.4815545Z",
+    "processId": 17432,
+    "creationUtc": "2026-10-21T03:13:28.4121550Z",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5337 --strictPort",
+    "ownedChildren": [
+      {
+        "ProcessId": 33420,
+        "ExecutablePath": "C:\\WINDOWS\\system32\\conhost.exe",
+        "CommandLine": "\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4",
+        "CreationDate": "2026-10-21T11:13:28.420369+08:00"
+      },
+      {
+        "ProcessId": 31832,
+        "ExecutablePath": "D:\\素材\\代号柒\\搜打撤\\node_modules\\@esbuild\\win32-x64\\esbuild.exe",
+        "CommandLine": "D:\\素材\\代号柒\\搜打撤\\node_modules\\@esbuild\\win32-x64\\esbuild.exe --service=0.25.12 --ping",
+        "CreationDate": "2026-10-21T11:13:28.799169+08:00"
+      }
+    ],
+    "remainingOwnedChildren": [],
+    "listenersAfter": [],
+    "portReleased": true,
+    "copyPreserved": true,
+    "slot05Preserved": true
+  },
+  "rawArtifacts": [
+    {
+      "file": ".tmp/types-integration-final2/inputs-before.json",
+      "bytes": 617484,
+      "sha256": "9ee108992feb8b27d3a1d3735dad165c51784724805350549cd331acfed0810f"
+    },
+    {
+      "file": ".tmp/types-integration-final2/inputs-after.json",
+      "bytes": 617484,
+      "sha256": "9ee108992feb8b27d3a1d3735dad165c51784724805350549cd331acfed0810f"
+    },
+    {
+      "file": ".tmp/types-integration-final2/static-reuse.json",
+      "bytes": 84017,
+      "sha256": "d64eda5817f14ce09cb11f101b9334ce21e3e34f62eaca14134df6dc53d1f2a1"
+    },
+    {
+      "file": ".tmp/types-integration-final2/results.json",
+      "bytes": 911,
+      "sha256": "6ed9c543ef2ccead355157b06927c91416664022673ae7419b98d428bda2c176"
+    },
+    {
+      "file": ".tmp/types-integration-final2/stability.json",
+      "bytes": 778,
+      "sha256": "ac99444c952ed4e10e4064aaad5831763d5e80a698c717b98eeb9f7ef1552e9d"
+    },
+    {
+      "file": ".tmp/types-integration-target3/inputs-before.json",
+      "bytes": 617484,
+      "sha256": "daa2af42ec72508be49040bf8ff907b2f0c11ceb70d3b88e7d747234e8b11001"
+    },
+    {
+      "file": ".tmp/types-integration-target3/inputs-after.json",
+      "bytes": 617484,
+      "sha256": "daa2af42ec72508be49040bf8ff907b2f0c11ceb70d3b88e7d747234e8b11001"
+    },
+    {
+      "file": ".tmp/types-integration-target3/result.json",
+      "bytes": 2516,
+      "sha256": "9bc0006158cc807578c78e33403ff31e8c2c3aab215a2c9fbc1e27863ee03b29"
+    },
+    {
+      "file": ".tmp/types-integration-target3/lint3.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": ".tmp/types-integration-browser-source.json",
+      "bytes": 207,
+      "sha256": "5c258648a3af4f773f7192206fd980b0123a9ac4cbb7292d45220850a7391219"
+    },
+    {
+      "file": ".tmp/types-integration-final2/browser-source-final.json",
+      "bytes": 162,
+      "sha256": "90b9569c93e7416a2c60148b9cee53fd7a949afff78e589318c948529ed026ff"
+    }
+  ],
+  "reproduction": {
+    "stableFull": "node .tmp/types-integration-final2.mjs",
+    "correctedThree": "node .tmp/types-integration-target3.mjs",
+    "summary": "node .tmp/types-integration-summary.mjs"
+  },
+  "limitations": [
+    "Final frozen source browser verification unavailable",
+    "No build or remote CI result",
+    "Temporary files, junctions and own slot05 preserved; no commit/push"
+  ]
+}

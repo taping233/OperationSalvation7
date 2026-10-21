@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-public-controls-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "Sol medium统一公共控件并按老板要求将装备改为血条下Buff式图标，沿用既有奖励与返回能力",
+  "paths": [
+    "game/css/base.css",
+    "game/css/public-controls.css",
+    "game/css/battle-equipment.css",
+    "game/src/ui/term-tips.js",
+    "game/src/ui/equipment-info.js",
+    "game/src/battle/view/battle.layers.js",
+    "tests/public-controls-equipment.test.js",
+    "tests/public-controls-tooltip.test.js",
+    "docs/modules/secondary-ui-style.md",
+    "docs/evidence/2026-10-21-WF-public-controls-1021"
+  ],
+  "doneWhen": [
+    "公共控件状态和说明行为在代表性入口统一，保留原动作与专用交互",
+    "相关定向回归与必要静态检查通过，当前Codex内置窗口实页复核或如实记录阻塞"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "既有集中9文件145项通过与当前窗口已完成范围见收尾记录",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "老板要求停止进一步验证；未作全量构建CI，当前预览服务保留"
+  ],
+  "updatedAt": "2026-10-21T05:54:37.802Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

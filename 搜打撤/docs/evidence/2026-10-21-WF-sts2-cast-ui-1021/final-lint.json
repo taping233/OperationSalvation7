@@ -1,0 +1,328 @@
+{
+  "mode": "lint",
+  "at": "2026-10-21T05:07:03.152Z",
+  "passed": true,
+  "stable": true,
+  "before": [
+    {
+      "file": "game/src/battle/core/battle.card-play.domain.js",
+      "sha256": "2e17016dc2084d513610c2110972b156c9f83424d257dc80bdd677067679bee8"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "sha256": "f0fad508495b25e12c85aafc978f10040d2e2cefdd2007b7e19c74efca014b7d"
+    },
+    {
+      "file": "game/src/battle/core/battle.core-ports.types.d.ts",
+      "sha256": "c8ab9f57ddfe7a5f1ba3bf616f4511a483c214cfe44307645e59e59a37467e62"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "5dd5507884defa75464d5b42b1a18f2a5aeb577e3fdee12aece208c543978619"
+    },
+    {
+      "file": "game/src/battle/core/battle.snapshot-projection.domain.js",
+      "sha256": "b8683218079a07e34dc4b4bb5e92c6f726a62a52c4e9245d18d632e46a4b96dc"
+    },
+    {
+      "file": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "c573dd16265dea4157f587059c785d01bb3dd3c09c1d86bd2f303f35bbec97a1"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "389513a511043986f6f7e6442e577e6b5ac141e863785fae92ae36ee3bfa11d3"
+    },
+    {
+      "file": "game/src/battle/view/battle.selection-ui.js",
+      "sha256": "763b39865202c5c86a972ffbd4eb2c5bde54e3f32e8dbb002334fb3225914b55"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "sha256": "ffdd311bdae651636901f1a46bac3d940057abdef848551e8c02d5e33130f7f8"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-material-state.js",
+      "sha256": "48aa3386323df7da2d4d12e2af0a19fd1ec28a30c0bfd3de8b39935c222548ab"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "sha256": "693992e283a388efd7735412089fcbb47753671111189b4d45d21227c6714ea1"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "8142326743fbff108db14a7416db673abeb36ac386bba51c961bc451d0a3345d"
+    },
+    {
+      "file": "game/src/battle/view/battle.potion-use.js",
+      "sha256": "a598c460a0db9b0b195d17c76199393b75edb67bed44d92b0c45940d8c79d819"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "sha256": "44f0cfa41fdbebb7e789e513ae5f1073b6b0448f421600a80fab6920a7b86ab8"
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "sha256": "683dc63e47504e9be19ddf52ea14337efecab1444765e4a98497cb4fd23ec871"
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "sha256": "aedd8c0de3c16258576cedf0a6ace750b27c8534984fca41632c0231d4708ec9"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "sha256": "71414ec7dbaeb2a3ddf7524697b0e7cb3313ec11962428d84cc54d642d7bfce5"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "sha256": "6317e381b290a95f7232ff15f2700577910da495dfce222f69adda0114252037"
+    },
+    {
+      "file": "docs/rules.md",
+      "sha256": "36ff55083c7add3025e8ad47ea42aa8bacbb158421865594939666d959ce46a3"
+    },
+    {
+      "file": "docs/infusion-material-controls.md",
+      "sha256": "684d54b1da7ec5f72c5222e443de565801c0657b5bb84e6c14c835c98e824515"
+    },
+    {
+      "file": "docs/architecture.md",
+      "sha256": "18844b112c18b93368fd86cd584b2d8865b9ffecd978b8c79d8de7af79fe1864"
+    },
+    {
+      "file": "tests/sts2-infusion-flow-1021.test.js",
+      "sha256": "95825fa25d2f92f9ed85a54aee1f822ae8c59ccc552cbb4af3df4ce1ba69ca14"
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "sha256": "846639758d253d617d0e3e4d62b1ba2a293e06cb0142992e5a073a1373bd795f"
+    },
+    {
+      "file": "tests/sts2-potion-use-1021.test.js",
+      "sha256": "d623dff58db866577fa0da20f9d74194dde4da1543b57e1163cd0a5bc28d1419"
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "sha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c"
+    },
+    {
+      "file": "tests/required-infusion-play.test.js",
+      "sha256": "a609e44672a15c1cb04fe78c323a4388a6d4080c36b5e85144cd5a77ac198412"
+    },
+    {
+      "file": "tests/battle-infusion-material-state.test.js",
+      "sha256": "fef77bf7bd9b845c966377b193fb9679b492d70ec8a5304f88172b64e9a3f55d"
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "sha256": "cc52dc7ee0154c915dff77bb4a0f4c6bcf97b6ea0296cef16d600ff2e8562460"
+    },
+    {
+      "file": "tests/battle-selection-ui.test.js",
+      "sha256": "201974591a542d3ad9ad25a4d73f671c852c7c596d0f5e8e7173331143d71f30"
+    },
+    {
+      "file": "tests/potion-tip.test.js",
+      "sha256": "5be670389ef2e983471618a2c77166545efb77f006b552dfc76c1d6d92d1bbba"
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "1a71bb03a73efd6817ccdbfb2b8eaf77eb0508ff71856bd1b2abddd20d95e4d1"
+    },
+    {
+      "file": "tests/battle-discover-retained-feedback.test.js",
+      "sha256": "1bbf571173e4c75105db7b676472d2f1f50e6499266e2164de2a40a4dbd02c4d"
+    },
+    {
+      "file": "tests/sts2-agent-replay.test.js",
+      "sha256": "77c55d6fc92dcd3413dccc6ec7468828732359543d07b15935fa0ebd0cff9eb1"
+    },
+    {
+      "file": "tests/contracts.test.js",
+      "sha256": "7a11dd78116c5b8332ec4450158134d7490a8c70cc5cf575dbafd93ee1e4a499"
+    },
+    {
+      "file": "tests/architecture-boundaries.test.js",
+      "sha256": "577a9cc241729b758e0b66b4fabb750700bc44eb099a7768abf9b0af43c85ffb"
+    }
+  ],
+  "after": [
+    {
+      "file": "game/src/battle/core/battle.card-play.domain.js",
+      "sha256": "2e17016dc2084d513610c2110972b156c9f83424d257dc80bdd677067679bee8"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "sha256": "f0fad508495b25e12c85aafc978f10040d2e2cefdd2007b7e19c74efca014b7d"
+    },
+    {
+      "file": "game/src/battle/core/battle.core-ports.types.d.ts",
+      "sha256": "c8ab9f57ddfe7a5f1ba3bf616f4511a483c214cfe44307645e59e59a37467e62"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "5dd5507884defa75464d5b42b1a18f2a5aeb577e3fdee12aece208c543978619"
+    },
+    {
+      "file": "game/src/battle/core/battle.snapshot-projection.domain.js",
+      "sha256": "b8683218079a07e34dc4b4bb5e92c6f726a62a52c4e9245d18d632e46a4b96dc"
+    },
+    {
+      "file": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "c573dd16265dea4157f587059c785d01bb3dd3c09c1d86bd2f303f35bbec97a1"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "389513a511043986f6f7e6442e577e6b5ac141e863785fae92ae36ee3bfa11d3"
+    },
+    {
+      "file": "game/src/battle/view/battle.selection-ui.js",
+      "sha256": "763b39865202c5c86a972ffbd4eb2c5bde54e3f32e8dbb002334fb3225914b55"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "sha256": "ffdd311bdae651636901f1a46bac3d940057abdef848551e8c02d5e33130f7f8"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-material-state.js",
+      "sha256": "48aa3386323df7da2d4d12e2af0a19fd1ec28a30c0bfd3de8b39935c222548ab"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "sha256": "693992e283a388efd7735412089fcbb47753671111189b4d45d21227c6714ea1"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "8142326743fbff108db14a7416db673abeb36ac386bba51c961bc451d0a3345d"
+    },
+    {
+      "file": "game/src/battle/view/battle.potion-use.js",
+      "sha256": "a598c460a0db9b0b195d17c76199393b75edb67bed44d92b0c45940d8c79d819"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "sha256": "44f0cfa41fdbebb7e789e513ae5f1073b6b0448f421600a80fab6920a7b86ab8"
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "sha256": "683dc63e47504e9be19ddf52ea14337efecab1444765e4a98497cb4fd23ec871"
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "sha256": "aedd8c0de3c16258576cedf0a6ace750b27c8534984fca41632c0231d4708ec9"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "sha256": "71414ec7dbaeb2a3ddf7524697b0e7cb3313ec11962428d84cc54d642d7bfce5"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "sha256": "6317e381b290a95f7232ff15f2700577910da495dfce222f69adda0114252037"
+    },
+    {
+      "file": "docs/rules.md",
+      "sha256": "36ff55083c7add3025e8ad47ea42aa8bacbb158421865594939666d959ce46a3"
+    },
+    {
+      "file": "docs/infusion-material-controls.md",
+      "sha256": "684d54b1da7ec5f72c5222e443de565801c0657b5bb84e6c14c835c98e824515"
+    },
+    {
+      "file": "docs/architecture.md",
+      "sha256": "18844b112c18b93368fd86cd584b2d8865b9ffecd978b8c79d8de7af79fe1864"
+    },
+    {
+      "file": "tests/sts2-infusion-flow-1021.test.js",
+      "sha256": "95825fa25d2f92f9ed85a54aee1f822ae8c59ccc552cbb4af3df4ce1ba69ca14"
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "sha256": "846639758d253d617d0e3e4d62b1ba2a293e06cb0142992e5a073a1373bd795f"
+    },
+    {
+      "file": "tests/sts2-potion-use-1021.test.js",
+      "sha256": "d623dff58db866577fa0da20f9d74194dde4da1543b57e1163cd0a5bc28d1419"
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "sha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c"
+    },
+    {
+      "file": "tests/required-infusion-play.test.js",
+      "sha256": "a609e44672a15c1cb04fe78c323a4388a6d4080c36b5e85144cd5a77ac198412"
+    },
+    {
+      "file": "tests/battle-infusion-material-state.test.js",
+      "sha256": "fef77bf7bd9b845c966377b193fb9679b492d70ec8a5304f88172b64e9a3f55d"
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "sha256": "cc52dc7ee0154c915dff77bb4a0f4c6bcf97b6ea0296cef16d600ff2e8562460"
+    },
+    {
+      "file": "tests/battle-selection-ui.test.js",
+      "sha256": "201974591a542d3ad9ad25a4d73f671c852c7c596d0f5e8e7173331143d71f30"
+    },
+    {
+      "file": "tests/potion-tip.test.js",
+      "sha256": "5be670389ef2e983471618a2c77166545efb77f006b552dfc76c1d6d92d1bbba"
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "1a71bb03a73efd6817ccdbfb2b8eaf77eb0508ff71856bd1b2abddd20d95e4d1"
+    },
+    {
+      "file": "tests/battle-discover-retained-feedback.test.js",
+      "sha256": "1bbf571173e4c75105db7b676472d2f1f50e6499266e2164de2a40a4dbd02c4d"
+    },
+    {
+      "file": "tests/sts2-agent-replay.test.js",
+      "sha256": "77c55d6fc92dcd3413dccc6ec7468828732359543d07b15935fa0ebd0cff9eb1"
+    },
+    {
+      "file": "tests/contracts.test.js",
+      "sha256": "7a11dd78116c5b8332ec4450158134d7490a8c70cc5cf575dbafd93ee1e4a499"
+    },
+    {
+      "file": "tests/architecture-boundaries.test.js",
+      "sha256": "577a9cc241729b758e0b66b4fabb750700bc44eb099a7768abf9b0af43c85ffb"
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "game/src/battle/core/battle.card-play.domain.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.engine.factory.domain.js",
+        "game/src/battle/core/battle.snapshot-projection.domain.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.selection-ui.js",
+        "game/src/battle/view/battle.infusion-view.js",
+        "game/src/battle/view/battle.infusion-material-state.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/battle/view/battle.discover-view.js",
+        "game/src/battle/view/battle.potion-use.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.policy.js",
+        "tests/sts2-infusion-flow-1021.test.js",
+        "tests/sts2-cast-layout-1021.test.js",
+        "tests/sts2-potion-use-1021.test.js",
+        "tests/sts2-agent-infusion-1021.test.js",
+        "tests/required-infusion-play.test.js",
+        "tests/battle-infusion-material-state.test.js",
+        "tests/battle-infusion-action-layout.test.js",
+        "tests/battle-selection-ui.test.js",
+        "tests/potion-tip.test.js",
+        "tests/potion-tip-lifecycle.test.js",
+        "tests/battle-discover-retained-feedback.test.js",
+        "tests/sts2-agent-replay.test.js",
+        "tests/contracts.test.js",
+        "tests/architecture-boundaries.test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "log": "docs/evidence/2026-10-21-WF-sts2-cast-ui-1021/final-lint-1.log"
+    }
+  ]
+}

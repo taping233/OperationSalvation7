@@ -1,0 +1,96 @@
+{
+  "status": "complete-uncommitted",
+  "authorization": [
+    "以大门、祭坛、商店统一",
+    "做成统一的接口 以后添加都是这个样式"
+  ],
+  "api": "showRunTransition({ title, art, duration })",
+  "implementation": "Default node-cut; all run city-cut titles share transitionHeadingHTML and one CSS rule. Legacy base-arrival remains compatibility-only.",
+  "checks": {
+    "tests": {
+      "files": 7,
+      "passed": 121,
+      "failed": 0
+    },
+    "runtimeTypecheck": {
+      "config": "jsconfig.runtime.json",
+      "exitCode": 0
+    },
+    "eslint": {
+      "files": 5,
+      "exitCode": 0
+    },
+    "visual": {
+      "browser": "Codex built-in, current 1280×720 window",
+      "scope": [
+        "door",
+        "retreat",
+        "battle",
+        "boss"
+      ],
+      "sameComputedFontAndGeometry": true,
+      "defaultInterfaceConfirmed": true,
+      "method": "Constructed real showRunTransition, prolonged to 60000ms; comparison animations paused at 400ms. Door final screenshot uses default interface without presentation. Not a natural full game run.",
+      "errors": [],
+      "cleanup": "Temporary tab closed; existing 5200 service retained"
+    }
+  },
+  "files": [
+    {
+      "path": "game/src/ui/transition-heading.js",
+      "sha256": "07c698b574749c34f1c5f76e2438ef01a3151c50cc2030c8165ddbade2ef1ac9"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "49443751869c5fde909c84c15bef0b5e7b185b7e737106b2213c6e523da5dd6a"
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "sha256": "1c0b808e5cd606b15cfa5eafe5357d9eae70342584a538f68facbb143e72ede9"
+    },
+    {
+      "path": "game/css/expedition-transitions.css",
+      "sha256": "43f10ba1b9d57e5af91ce20489ba8ffe4e767bec3b4d1345b53ff833e03e53fb"
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "sha256": "ba2369498c5621a8658ebcfdd49865864824a2d1dfb2366be8303c426cec5886"
+    },
+    {
+      "path": "tests/nightshift-u10-settle-transition.test.js",
+      "sha256": "18ed47c4885215bf319e9ef334c03f4dba210c083881d651d49fda8c6937e50b"
+    },
+    {
+      "path": "docs/production/art/VISUAL-BIBLE.md",
+      "sha256": "af5b503f8b4f64ed2110e420beaf5c603e063631d5b4d6aba80b1bd4bf8ad6ff"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/evidence/2026-10-21-transition-typography/door.png",
+      "bytes": 85784,
+      "sha256": "444a6fea60aa02e469f08aa5f206073edda090534ee09ff9cd6cab4fc85869d0"
+    },
+    {
+      "path": "docs/evidence/2026-10-21-transition-typography/retreat.png",
+      "bytes": 71038,
+      "sha256": "cc461f6642397c85b64b4aa5d0d2215060749b487e6da153f6fdff7162d74c81"
+    },
+    {
+      "path": "docs/evidence/2026-10-21-transition-typography/battle.png",
+      "bytes": 37604,
+      "sha256": "72c23684ef6fcde65137a1ad796fe2bf7fc3dbad2a3db4b0bbc0a14a28a0b441"
+    },
+    {
+      "path": "docs/evidence/2026-10-21-transition-typography/boss.png",
+      "bytes": 44254,
+      "sha256": "afe631bb4d8e4943583972f8b8d1c6999f3a02224a22b8677c7030f0d742c7e0"
+    }
+  ],
+  "notRun": [
+    "full suite",
+    "build",
+    "commit",
+    "push"
+  ]
+}

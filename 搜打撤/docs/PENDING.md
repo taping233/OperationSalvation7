@@ -25,6 +25,8 @@
 
 ## 已决记录（不计入活账）
 
+| 50 | 提交推送遇全量测试133项失败 | 10-21 | WF-github-ship-1021；docs/evidence/2026-10-21-WF-github-ship-1021/README.md | 老板明确“修复后推送”，已授权修复、验证、提交与推送；原现场保留，继续修复而不绕过门禁。 |
+
 历史决定、旧编号重复和原验收状态保留在[整理前原文](archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md)；本轮逐项处置见[清理记录](evidence/2026-10-14-WF-ledger-cleanup-1014/README.md)。
 
 | # | 事项 | 提出 | 来源 | 备注 |

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-types-full-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "Sol中等代理将game/src全部自有运行源码纳入真实实现类型检查，保留既有strict配置并逐文件证明覆盖",
+  "paths": [
+    "game/src",
+    "tests",
+    "scripts/check-types.mjs",
+    "scripts/check-type-coverage.mjs",
+    "scripts/architecture-graph.mjs",
+    "scripts/gate-plan.mjs",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "jsconfig.json",
+    "jsconfig.runtime.json",
+    "docs/architecture.md",
+    "docs/development.md",
+    "docs/evidence/2026-10-21-WF-types-full-1021"
+  ],
+  "doneWhen": [
+    "game/src逐文件分类且自有运行JS真实checkJs实现覆盖无空白，生成或第三方例外明确列出依据",
+    "全部现行类型检查通过，既有strict不降级，无ts-nocheck或新增宽泛any/忽略掩盖诊断",
+    "覆盖守卫核查配置与源文件实际有效检查并包含真实实现反例",
+    "按影响执行相关静态和回归，玩法与存档合同不变，实页结果或能力阻塞如实记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已核对最终hubrun完整11配置类型日志与集成源时间核验，537/537实现真实checkJs、49/537 strict；保留原strict，无运行源码排除。见hubrun.md、coverage-I02-final.json与integration.md。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "真实注错覆盖负例、工具69项、素材32项及各域定向通过；最终全域lint、语法597文件、文档659链接通过。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "稳定输入全量原始记录保留：750文件通过、3文件失败、1跳过，7685项通过、3失败、38跳过，无未处理错误；三个失败为后续已修正测试合同，不把该次运行改写为通过。",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "三测试合同独立审核后完整联合3文件25项通过，scoped lint0；前后稳定，与全量after仅这三测试改变，生产/资产/其他测试字节未变，复用750文件证据。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "已核对service-release.json：确认自有PID17432身份后停止本会话服务及子进程，5337无监听；副本与slot05保留。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "最终补丁实页因Codex IAB当前不可用阻塞；browser-final-blocker.json记录空inventory及明确创建失败，旧源码实页结果不计最终。",
+      "result": "unverified"
+    }
+  ],
+  "unverified": [
+    "最终源码slot05恢复、真实嵌套SVG输入及浏览器错误窗口未补验：当前Codex内置浏览器不可用，未切换外部路线。"
+  ],
+  "updatedAt": "2026-10-21T04:06:28.436Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

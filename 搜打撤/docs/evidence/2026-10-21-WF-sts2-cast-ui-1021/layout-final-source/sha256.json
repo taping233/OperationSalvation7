@@ -1,0 +1,27 @@
+[
+  {
+    "file": "game/src/battle/view/battle.infusion-view.js",
+    "bytes": 11370,
+    "sha256": "ffdd311bdae651636901f1a46bac3d940057abdef848551e8c02d5e33130f7f8"
+  },
+  {
+    "file": "game/src/battle/view/battle.discover-view.js",
+    "bytes": 1667,
+    "sha256": "8142326743fbff108db14a7416db673abeb36ac386bba51c961bc451d0a3345d"
+  },
+  {
+    "file": "game/src/battle/view/battle.view.js",
+    "bytes": 58020,
+    "sha256": "693992e283a388efd7735412089fcbb47753671111189b4d45d21227c6714ea1"
+  },
+  {
+    "file": "game/css/battle-infusion.css",
+    "bytes": 5497,
+    "sha256": "44f0cfa41fdbebb7e789e513ae5f1073b6b0448f421600a80fab6920a7b86ab8"
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "bytes": 11424,
+    "sha256": "683dc63e47504e9be19ddf52ea14337efecab1444765e4a98497cb4fd23ec871"
+  }
+]

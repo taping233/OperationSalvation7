@@ -1,0 +1,133 @@
+ FAIL  tests/archive-motion.test.js > cleans the old handoff before a second camp entry and leaves the new entry alive
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 斗神酒非满血时消耗道具 uid 并按生命上限治疗
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 结构化治疗读取 card.heal；改写名称/描述不改变治疗量且只消费一次
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 结构化治疗满血不消耗道具 uid
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 结构化复原按声明数量执行一次，名称/描述不影响复原量
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 结构化复原遇到容量不足只恢复可放入数量
+ FAIL  tests/bag-item-rule-baseline.test.js > 背包道具旧行为基线 > 结构化复原空口袋不消费道具 uid
+ FAIL  tests/bag-item-rule-baseline.test.js > 复原道具满包零收益保护 > tt-crystal同堆两张满包时详情禁用，直接执行也不消耗
+ FAIL  tests/bag-item-rule-baseline.test.js > 复原道具满包零收益保护 > cmtn6bge52qt同堆两张满包时详情禁用，直接执行也不消耗
+ FAIL  tests/bag-item-rule-baseline.test.js > 复原道具满包零收益保护 > 满包只剩一张结晶时可腾出其格，仍允许复原
+ FAIL  tests/bag-item-rule-baseline.test.js > 真实卡库通行证C进入三选一，选中后才消费并获得所选传说卡
+ FAIL  tests/bag-ui-language.test.js > backpack winter UI facts > limits v3 artwork to opted-in backpack surfaces and decorative tile properties
+ FAIL  tests/base-inventory-lifecycle-audit.test.js > 基地材料入口不依赖标准资源卡存在，关闭后可再次查看并说明折入规则
+ FAIL  tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps object labels on a local dark reading surface and career controls at the player feet
+ FAIL  tests/battle-decision-shell-review.test.js > 其他 pile 弹窗继续使用各自类型
+ FAIL  tests/battle-hud-info.test.js > 战斗信息减负与普通牌库 > 普通牌库徽章读取实际剩余99，保留原消耗区而不引入弃牌循环
+ FAIL  tests/battle-hud-info.test.js > 战斗信息减负与普通牌库 > 普通牌库徽章读取实际剩余98，保留原消耗区而不引入弃牌循环
+ FAIL  tests/battle-hud-info.test.js > 战斗信息减负与普通牌库 > 普通牌库徽章读取实际剩余0，保留原消耗区而不引入弃牌循环
+ FAIL  tests/battle-scenery-secondary-ready.test.js > handles delayed scenery under a restarted infusion panel (decode failure: false)
+ FAIL  tests/battle-scenery-secondary-ready.test.js > handles delayed scenery under a restarted infusion panel (decode failure: true)
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one current set after repeated grave open/return and incremental patches
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one current set after repeated settings open/return and incremental patches
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > 普通战背包按钮与命令均被锁定，手牌和独立道具快捷栏不受影响
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from the real lamp enemy-target choice with one ready set through the next turn
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from real discovery with one current set and preserves subsequent updates
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one set when target or infusion is cancelled, and when the lethal warning returns
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > does not duplicate paging or gesture listeners across patches and full redraws
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > spends for the real skill once after repeated returns, retains used state, then resets next turn
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > removes and reintroduces paging through one shared set and starts the next battle cleanly
+ FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > moves a retained pager out of the old player tools without duplicating it
+ FAIL  tests/blackmarket-card-preview.test.js > 黑市投入前卡牌详情 > 三张原生按钮逐张打开共用远征大图，Esc/关闭/背景收回并归还来源焦点
+ FAIL  tests/blackmarket-card-preview.test.js > 黑市投入前卡牌详情 > 重复查看只读且不重建黑市，不扣币、不保存、不抽随机、不改变尝试数或候选
+ FAIL  tests/blackmarket-card-preview.test.js > 黑市投入前卡牌详情 > 四次失败后详情和背包返回仍保留保底，第五次只扣3币并保留原三张待领
+ FAIL  tests/blackmarket-card-preview.test.js > 黑市投入前卡牌详情 > 越界详情索引忽略，不影响有效卡牌详情或交易
+ FAIL  tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 地图首次点击只预览，再次点击同节点才开始移动
+ FAIL  tests/card-state-motion.test.js > keeps instantaneous edge feedback without movement for reduced motion
+ FAIL  tests/card-state-motion.test.js > returns a raised card to neutral geometry when the system enables reduced motion
+ FAIL  tests/card-state-motion.test.js > inherits the actual face material ahead of tile tint and keeps its hue on reversal
+ FAIL  tests/chest-coins-summary.test.js > 双箱懒生成：可先独立收币，后箱开箱一并收币且不重复
+ FAIL  tests/chest-coins-summary.test.js > 恢复双箱已收币进度，不补抽或重发
+ FAIL  tests/chest-extra-rewards-choice.test.js > 真实小/中宝箱的基础候选与附赠边界 > 'medium' 出蛋=true：仅基础三选一，开箱前/选择后重载保留边界且不重发
+ FAIL  tests/chest-extra-rewards-choice.test.js > 三选一与附赠的总览状态连续性 > 已选择且附赠待领，重载=false：总览与卡牌页均明确其余基础卡已放弃
+ FAIL  tests/chest-extra-rewards-choice.test.js > 三选一与附赠的总览状态连续性 > 已选择且附赠待领，重载=true：总览与卡牌页均明确其余基础卡已放弃
+ FAIL  tests/chest-extra-rewards-choice.test.js > 真实领奖卡面与详情共用动作 > medium 容量16时详情与卡面动作一致且不暗中领卡
+ FAIL  tests/chest-extra-rewards-choice.test.js > 真实领奖卡面与详情共用动作 > medium 容量1时详情与卡面动作一致且不暗中领卡
+ FAIL  tests/chest-multi-queue-regression.test.js > multi-chest leave and take actions advance exactly once per box
+ FAIL  tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 首次整备在出发按钮之前明示统一消耗去向与复原入口
+ FAIL  tests/docs-consistency.test.js > 文档一致性守卫 > 现行文档（docs 根）的相对链接无死链
+ FAIL  tests/e6-card-rules-execution.test.js > E6 complete-list and pre-payment executable rule boundaries > rejects invalid beginInfusion costModifiers before public preplay consumers throw
+ FAIL  tests/e7-rule-warning-view.test.js > E7 rule refusal reaches the real battle view > shows unsupported beginInfusion feedback before selecting fuel
+ FAIL  tests/event-callback-lifecycle-audit.test.js > 事件等待与回调生命周期审计 > 资源稀有卡与火堆额外卡复用获得演出，重开不重播
+ FAIL  tests/event-callback-lifecycle-audit.test.js > 事件等待与回调生命周期审计 > F06 三选一明确永久放弃，其余候选刷新后仍不可领取
+ FAIL  tests/expedition-battle-presentation.test.js > keeps the canonical full rule when inspecting the deck surface
+ FAIL  tests/expedition-view.test.js > expedition view DOM rendering > 背包占格0用图形刻度展示状态，读屏仍获得准确容量
+ FAIL  tests/expedition-view.test.js > expedition view DOM rendering > 背包占格4用图形刻度展示状态，读屏仍获得准确容量
+ FAIL  tests/expedition-view.test.js > expedition view DOM rendering > 背包占格12用图形刻度展示状态，读屏仍获得准确容量
+ FAIL  tests/expedition-view.test.js > expedition view DOM rendering > 背包占格16用图形刻度展示状态，读屏仍获得准确容量
+ FAIL  tests/expedition-view.test.js > expedition view DOM rendering > 背包占格20用图形刻度展示状态，读屏仍获得准确容量
+ FAIL  tests/extraction-receipt.test.js > 结算页从回执读数（slot=null 真实 altar 分支） > clear 结局：主体文案突出「击破首脑+关键收获」，数字（行动/用时/首探经验）来自回执
+ FAIL  tests/extraction-receipt.test.js > 结算页从回执读数（slot=null 真实 altar 分支） > extract 结局：说明安全撤离，不暗示没有损失，与 clear 区分
+ FAIL  tests/full-review-regressions-world.test.js > 09-30 深审 WORLD 组修复回归 > WORLD-002 火堆：从消耗区自动发现两张复原（道具不入池），节点一次性结算
+ FAIL  tests/full-review-regressions-world.test.js > 09-30 深审 WORLD 组修复回归 > WORLD-002b 火堆空池：只回血掷职业卡并给提示，不再打开复原选牌页
+ FAIL  tests/full-review-regressions-world.test.js > 09-30 深审 WORLD 组修复回归 > 火堆结果页按实际生命差和复原卡显示，满血不报名义回复
+ FAIL  tests/full-review-regressions-world.test.js > 09-30 深审 WORLD 组修复回归 > 营火说明可展开且无副作用，结果区分复原与额外奖励并保留查看入口
+ FAIL  tests/full-review-regressions-world.test.js > 09-30 深审 WORLD 组修复回归 > WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）
+ FAIL  tests/m06-sources-view.test.js > M06 mountable view > explains an over-capacity preset and disables applying it
+ FAIL  tests/m06-sources-view.test.js > M06 mountable view > emits intents, updates and disposes without leaked listeners
+ FAIL  tests/map-node-glow.test.js > 当前/可达节点辉光呼吸窗口 > 选中可达点仍保留常驻可达光效，未选中的远处点不亮
+ FAIL  tests/map-render-performance.test.js > 道路纹理裁剪与曲率采样 > 两个端点都离屏但曲线穿过窗口时保留，透明边缘擦过窗口也保留
+ FAIL  tests/map-route-v2.test.js > L2有战斗门槛与休整时序的route-v2 > 4/9已开始的v1快照身份与地图不变；生成器和兼容覆盖源逐字冻结
+ FAIL  tests/map-version-compat.test.js > 地图3/9冻结与现行6/9明确分派 > 旧生成器源文件字节冻结，防维护时误把新规则并回旧身份
+ FAIL  tests/menu-pages-lazy-entry.test.js > 菜单真实按需入口 > 冷入口有可见反馈，同请求合并，热入口同步复用同一工厂
+ FAIL  tests/node-design-review.test.js > lightweight node design review fixture > runs production pure views without game bootstrap or persistence
+ FAIL  tests/page-loading.test.js > shared page loading cover > paints a cover before mounting and deduplicates repeated opening
+ FAIL  tests/page-loading.test.js > shared page loading cover > keeps source shortcuts from firing and releases guards after a failed mount
+ FAIL  tests/page-loading.test.js > shared page loading cover > finishes in suspended previews without waiting indefinitely for a frame
+ FAIL  tests/page-loading.test.js > shared page loading cover > releases shortcuts once the destination first frame is ready, before the cover finishes fading
+ FAIL  tests/page-loading.test.js > shared page loading cover > cancels a delayed destination without blocking a fresh request
+ FAIL  tests/page-loading.test.js > shared page loading cover > paints the prepared cut before mounting, holds until the page is ready, then reveals once
+ FAIL  tests/page-loading.test.js > shared page loading cover > uses the static city preparation route when reduced motion disables its cut
+ FAIL  tests/page-loading.test.js > shared page loading cover > prepares the page under a waiting cold curtain and aborts before revealing it
+ FAIL  tests/page-loading.test.js > shared page loading cover > keeps a failed decorative image on the opaque fallback and still opens the page
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > replace cancels old reveal and releases only its own cover
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > hidden cancels old reveal and releases only its own cover
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > closing cancels old reveal and releases only its own cover
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > native-closing cancels old reveal and releases only its own cover
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > detached cancels old reveal and releases only its own cover
+ FAIL  tests/page-loading.test.js > mounted destination ownership during readiness > background readiness timeout remains a successful fallback, not cancellation
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > shares one fresh snapshot per material shortcut and sees in-place changes before repaint
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > checks confirmation and pointer adjustments once and blocks zoom/hidden inputs
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > releases the active infusion key listener on sdt-overlay-mode
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > releases the active infusion key listener on sdt-overlay-close
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > re-rendering infusion owns exactly one live keyboard handler
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > measures stable nine-stack hand writes and infusion snapshot traversals
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > measures discovery readiness commits without changing its 350 ms admission window
+ FAIL  tests/page-perf-battle.test.js > battle page input and DOM work > updates live cost, content, order and external attribute changes after an unchanged hand render
+ FAIL  tests/page-perf-expedition.test.js > 远征页查询开销 > 多条入边仅查询一次阻塞节点；下一次查询立即读取原地领奖、门和可见性变化
+ FAIL  tests/page-perf-hub.test.js > bag resource art work per render > keeps the entire HTML while filtering a 300-card catalog once for 30 supply tiles
+ FAIL  tests/page-perf-hub.test.js > bag resource art work per render > does not read the catalog for card-only bag views
+ FAIL  tests/page-perf-hub.test.js > bag resource art work per render > does not read the catalog for card-only safe views
+ FAIL  tests/page-perf-hub.test.js > bag resource art work per render > does not read the catalog for card-only pocket views
+ FAIL  tests/page-perf-hub.test.js > bag resource art work per render > re-reads in-place resource edits, additions and fuzzy matches on the next render
+ FAIL  tests/page-surface-lifetime.test.js > backpack return retains a transparent input guard until the first map frame
+ FAIL  tests/renderer-resource-lifecycle.test.js > 地图玩家可见编号 > 内部索引 0 绘制为同预览的一基编号，绘制不改索引
+ FAIL  tests/renderer-resource-lifecycle.test.js > 地图玩家可见编号 > 内部索引 7 绘制为同预览的一基编号，绘制不改索引
+ FAIL  tests/renderer-resource-lifecycle.test.js > 地图玩家可见编号 > 内部索引 10 绘制为同预览的一基编号，绘制不改索引
+ FAIL  tests/retired-scenes-publication.test.js > exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants
+ FAIL  tests/reward-coins-overview.test.js > 开箱入口chestNext只收当前箱金币，卡牌领取不追加收币
+ FAIL  tests/reward-coins-overview.test.js > 开箱入口chestOpen只收当前箱金币，卡牌领取不追加收币
+ FAIL  tests/reward-coins-overview.test.js > 先独立领首箱币，再开两箱只新增第二箱币，返回地图/重载不重发
+ FAIL  tests/reward-coins-overview.test.js > 直接恢复待领卡牌层后chestTake不收币，独立金币仍可完成且只收一次
+ FAIL  tests/reward-coins-overview.test.js > 直接恢复待领卡牌层后chestLeave不收币，独立金币仍可完成且只收一次
+ FAIL  tests/reward-coins-overview.test.js > 多个已生成快照金币独立汇总，仅收未领箱且不重新抽卡
+ FAIL  tests/reward-frame-review.test.js > 互斥箱完成只说明本箱已放弃，另一箱仍可继续领取
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs
+ FAIL  tests/screen-entry-performance.test.js > ready pages reveal after readiness measurement and presentation frames, without a third serial frame
+ FAIL  tests/screen-entry-performance.test.js > cold visible images and backgrounds still gate reveal, while lazy images do not decode
+ FAIL  tests/selftest-paths.test.js > ROOT-06 零依赖自测入口（域目录路径） > node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT
+ FAIL  tests/shop-currency-guidance.test.js > 商店金币与交易状态引导 > 收购收入明确标为卖出可得，出售后返店重新投影余额和可买状态
+ FAIL  tests/skull-sword-effective-session.test.js > 不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌
+ FAIL  tests/skull-sword-effective-session.test.js > BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID
+ FAIL  tests/sys03-altar-restore-txn.test.js > 火堆：确认才回血复原，结算落盘且重入不重复；继续才回图
+ FAIL  tests/sys03-altar-restore-txn.test.js > 火堆：满包时不扣口袋（先检后扣），deny 播报后照常收格
+ FAIL  tests/sys03-altar-restore-txn.test.js > A3文案：满包火堆准确报告容量，不能谎报没有可复原牌
+ FAIL  tests/sys03-altar-restore-txn.test.js > 火堆取消休整保留收益，再进入必须重新确认
+ FAIL  tests/sys03-altar-restore-txn.test.js > 入城补给直接展示待领卡牌，逐张领取与刷新满包规则保持
+ FAIL  tests/title-resource-review.test.js > isolated title CSS/image diagnostic > preserves actual title IDs, SVG art, wordmark and complete base stylesheet order
+ FAIL  tests/ui-design-system.test.js > opt-in winter decision language > keeps decision facts and irreversible risks outside collapsed explanations
+ FAIL  tests/ui-design-system.test.js > opt-in winter decision language > shows the zero-capacity outcome without expanding help and keeps rest available
+ FAIL  tests/ui-design-system.test.js > opt-in winter decision language > does not claim a capacity failure for an empty restore pool
+ FAIL  tests/xart-z1-batch2.test.js > A3-PREP-02 预设预览按分段占格计容 > 整备文案不再把来源封顶说成局内规则（帮助分段已按 10-04 老板令整体移除，保留上限提示口径）

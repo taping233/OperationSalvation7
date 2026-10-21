@@ -1,0 +1,20 @@
+{
+  "regex": {
+    "tested": 327680,
+    "errors": [],
+    "before": "(?:[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF](?:\\uFE0F|\\u200D[\\s\\S])?|[\\u2300-\\u27BF]\\uFE0?|[\\u2B00-\\u2BFF]\\uFE0?)",
+    "after": "(?:[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF](?:\\uFE0F|\\u200D[\\s\\S])?|[\\u2300-\\u27BF]\\x75FE0?|[\\u2B00-\\u2BFF]\\x75FE0?)"
+  },
+  "datasetEqual": true,
+  "errorMessageEqual": true,
+  "statusSamples": [
+    0,
+    100,
+    200,
+    301,
+    400,
+    404,
+    500,
+    599
+  ]
+}

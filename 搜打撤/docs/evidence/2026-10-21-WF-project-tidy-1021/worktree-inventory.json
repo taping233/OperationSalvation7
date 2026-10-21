@@ -1,0 +1,2711 @@
+{
+  "head": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "changes": 641,
+  "byArea": {
+    "README.md": 1,
+    "docs/PARALLEL-REGISTRY.md": 1,
+    "docs/README.md": 1,
+    "docs/STATUS.md": 1,
+    "docs/agent-protocol.md": 1,
+    "docs/architecture.md": 1,
+    "docs/development.md": 1,
+    "docs/evidence": 117,
+    "docs/infusion-material-controls.md": 1,
+    "docs/modules": 1,
+    "docs/performance.md": 1,
+    "docs/production": 1,
+    "docs/rules.md": 1,
+    "game/assets": 3,
+    "game/css": 11,
+    "game/src/README.md": 1,
+    "game/src/agent": 18,
+    "game/src/audio": 5,
+    "game/src/battle": 150,
+    "game/src/boot-order.js": 1,
+    "game/src/cards": 9,
+    "game/src/core": 24,
+    "game/src/e2.snapshot.qa.js": 1,
+    "game/src/game.boot.js": 1,
+    "game/src/generated": 2,
+    "game/src/home": 5,
+    "game/src/hub": 53,
+    "game/src/main.js": 1,
+    "game/src/r7a.qa.js": 1,
+    "game/src/rarity-design-lab.js": 1,
+    "game/src/run": 27,
+    "game/src/ui": 91,
+    "game/src/wu-career-frame-preview.js": 1,
+    "jsconfig.framework-ports.json": 1,
+    "jsconfig.json": 1,
+    "scripts/architecture-graph.mjs": 1,
+    "scripts/check-types.mjs": 1,
+    "scripts/gate-plan.mjs": 1,
+    "scripts/runtime-asset-redundancy-review.mjs": 1,
+    "scripts/runtime-asset-redundancy.mjs": 1,
+    "tests/architecture-boundaries.test.js": 1,
+    "tests/bag-render-snapshot.test.js": 1,
+    "tests/base-hub-business-lifecycle-audit.test.js": 1,
+    "tests/base-inventory-lifecycle-audit.test.js": 1,
+    "tests/base-mutation.test.js": 1,
+    "tests/base-save-snapshot.test.js": 1,
+    "tests/battle-all-cards.test.js": 1,
+    "tests/battle-decision-readability.test.js": 1,
+    "tests/battle-decision-redesign.test.js": 1,
+    "tests/battle-frames-ownership.test.js": 1,
+    "tests/battle-hand-inspector.test.js": 1,
+    "tests/battle-hand-keyword-interaction.test.js": 1,
+    "tests/battle-hud-info.test.js": 1,
+    "tests/battle-infusion-action-layout.test.js": 1,
+    "tests/battle-pile-readability.test.js": 1,
+    "tests/battle-tools-lifecycle.test.js": 1,
+    "tests/blackmarket-card-preview.test.js": 1,
+    "tests/boot.test.js": 1,
+    "tests/card-description-fix-lifecycle.test.js": 1,
+    "tests/direct-cast.test.js": 1,
+    "tests/e4-async-entry.test.js": 1,
+    "tests/event-callback-lifecycle-audit.test.js": 1,
+    "tests/event-choice-acquired-gift-cloud.test.js": 1,
+    "tests/event-choice-recovery-cloud.test.js": 1,
+    "tests/event-node-binding-cloud.test.js": 1,
+    "tests/event-recode-selection-continuity.test.js": 1,
+    "tests/event-settlement-unification.test.js": 1,
+    "tests/event-signal-puzzle-integration.test.js": 1,
+    "tests/facade-snapshot-drift.test.js": 1,
+    "tests/four-player-event-regressions.test.js": 1,
+    "tests/framework-battle-ports-types.fixture.ts": 1,
+    "tests/framework-boundaries-types.fixture.ts": 1,
+    "tests/game-session-browser-boundary.test.js": 1,
+    "tests/game-store-snapshot.test.js": 1,
+    "tests/game-store-types.fixture.ts": 1,
+    "tests/hero-cards.test.js": 1,
+    "tests/home-async-lifecycle.test.js": 1,
+    "tests/hub-architecture.test.js": 1,
+    "tests/hub-lazy-entry.test.js": 1,
+    "tests/hub-trade-shop-v5.test.js": 1,
+    "tests/m05-home-presenter.test.js": 1,
+    "tests/map-facilities-burn-removal.test.js": 1,
+    "tests/map-route-v2.test.js": 1,
+    "tests/map-version-compat.test.js": 1,
+    "tests/nightshift-u10-settle-transition.test.js": 1,
+    "tests/potion-tip-lifecycle.test.js": 1,
+    "tests/potion-tip.test.js": 1,
+    "tests/premium-ui-pages.test.js": 1,
+    "tests/preparation-adapter-review.test.js": 1,
+    "tests/r6-story.test.js": 1,
+    "tests/r7a-scenes-integration.test.js": 1,
+    "tests/required-infusion-play.test.js": 1,
+    "tests/runtime-asset-aliases.test.js": 1,
+    "tests/runtime-asset-redundancy-plugin.test.js": 1,
+    "tests/runtime-asset-redundancy.test.js": 1,
+    "tests/shop-currency-guidance.test.js": 1,
+    "tests/stealth-term.test.js": 1,
+    "tests/target-motion.test.js": 1,
+    "tests/term-tip-rule-copy.test.js": 1,
+    "tests/term-tips-lifecycle.test.js": 1,
+    "tests/workflow-cli-integration.test.js": 1,
+    "vite.config.js": 1,
+    ".codex/config.toml.bak-nai-domain-20261013-224601": 1,
+    ".codex/config.toml.bak-nai-network-20261013-224312": 1,
+    ".codex/config.toml.bak-nai-open-20261013-230419": 1,
+    ".codex/config.toml.bak-nai-profile-20261015-215723": 1,
+    "nul": 1,
+    ".tmp-ship-plan-1016.json": 1,
+    "game/art-source": 1,
+    "jsconfig.runtime.json": 1,
+    "pv/": 1,
+    "scripts/check-type-coverage.mjs": 1,
+    "tests/agent-optional-lazy-boundary.test.js": 1,
+    "tests/agent-replay-identity.test.js": 1,
+    "tests/agent-runner-lazy-boundary.test.js": 1,
+    "tests/bag-render-derivation.test.js": 1,
+    "tests/battle-ally-dom-order.test.js": 1,
+    "tests/battle-execution-card-guard.test.js": 1,
+    "tests/battle-hand-rule-context.test.js": 1,
+    "tests/battle-snapshot-phase-cost.test.js": 1,
+    "tests/battle-unit-metadata.test.js": 1,
+    "tests/boot-frame-readiness.test.js": 1,
+    "tests/events-lazy-entry.test.js": 1,
+    "tests/events-lazy-story-ownership.test.js": 1,
+    "tests/framework-battle-decomposition.test.js": 1,
+    "tests/framework-core-ports-types.test.js": 1,
+    "tests/hub-command-errors.test.js": 1,
+    "tests/map-type-annotation-freeze.test.js": 1,
+    "tests/page-visual-readiness-sharing.test.js": 1,
+    "tests/public-controls-equipment.test.js": 1,
+    "tests/public-controls-tooltip.test.js": 1,
+    "tests/sts2-agent-infusion-1021.test.js": 1,
+    "tests/sts2-cast-layout-1021.test.js": 1,
+    "tests/sts2-infusion-flow-1021.test.js": 1,
+    "tests/sts2-pile-view-1021.test.js": 1,
+    "tests/sts2-potion-use-1021.test.js": 1,
+    "tests/term-tips-lazy-boundary.test.js": 1,
+    "tests/type-coverage.test.js": 1,
+    "tests/type-runtime-delegation.test.js": 1
+  },
+  "entries": [
+    {
+      "status": " M",
+      "path": "搜打撤/README.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/README.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/STATUS.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/agent-protocol.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/architecture.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/development.md"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/baseline.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/dispatch.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/evaluation-plan.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/task.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/01-overview.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/02-event.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/03-unavailable.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/04-confirm.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/05-result.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/06-left.png"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/browser-observations.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/design.html"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/index.html"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/manifest.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/static-checks.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/validation.txt"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/trial-01/visual-review.md"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-arknights-skill-forward-test/visual-baseline.json"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-18-wu-skins-reset/check-assets.cjs"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-18-wu-skins-reset/generate.py"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-18-wu-skins-reset/install.py"
+    },
+    {
+      "status": "A ",
+      "path": "搜打撤/docs/evidence/2026-10-18-wu-skins-reset/request.json"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-art-sample/README.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/infusion-material-controls.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/modules/secondary-ui-style.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/performance.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/production/art/VISUAL-BIBLE.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/docs/rules.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/assets/README.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/assets/asset-manifest.json"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/base.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/battle-discover.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/battle-infusion.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/battle-stage.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/chest-reward-overview.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/expedition-transitions.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/css/home-polish.css"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/README.md"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.console.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.data.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.llm.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.policy.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.recorder.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.replay-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.replay.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.runner.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.scenes.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/agent/agent.surface.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/audio/sfx-audition.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/audio/sfx-review.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/audio/sound.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/audio/sound.music.catalog.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/audio/sound.music.player.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.bag.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.bag.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.consumed-pile.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.deck.factory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.deck.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.equipment.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.equipment.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/bag/battle.slam-skill.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/battle-loader.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/battle.snapshot.types.d.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.actions.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.card-play.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.card-play.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.card-presentation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.core.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.damage.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.damage.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.default-context.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.draw.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.draw.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.enemy-phase.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.enemy-phase.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.enemy-plan.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.engine.factory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.engine.instance.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.engine.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.facts.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.foe-lifecycle.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.foe-lifecycle.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.hand.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.lifecycle.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.lifecycle.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.presentation-events.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.presentation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.resolution.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.resolution.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.selection-flow.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.selection-flow.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.summary.factory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.summary.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.target-session.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/battle.turn-continuation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/combat.factory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/core/combat.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.card-cost.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.card-inspection.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.card-inspection.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.cost-modifiers.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.discover-candidates.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.discover-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.effect-clauses.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.effects.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.foe-fight.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.infusion.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.infusion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.rule-guard.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.target-rules.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.trigger-source.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.triggers.m2.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/battle.triggers.m2.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/card-semantic-operations.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/choice-semantic-operations.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.audit.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.curse.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.damage.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.m1.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.m1.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.m2.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-steps.m2.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/effect-verbs.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/equipment-semantic-operations.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/random-blessings.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/requested-card-batch.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/requested-card-runtime.domain.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/effects/requested-card-runtime.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runes.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.action-runner.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.browser-presentation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.clock.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.execution-session.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.host-scheduling.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.playback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.player-effects.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.presentation-ports.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.default.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.effects.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.factory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.interaction.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.piles.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.presentation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.runtime.session.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.staged-playback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/runtime/battle.state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.action-timing.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.aim.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.anim.view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.attack-cues.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.attack-profiles.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.card-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.card-results.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.decision-content.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.decision-shell.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.discover-infusion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.discover-input.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.discover-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.effect-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.enemy-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-assets.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-changwuyu.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog-three-role.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-catalog.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-renderer.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frame-resolution.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frames-diagnostic-policy.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.frames.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.hand-hit.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.hand-inspector.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.hand-layout.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.hover.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.infusion-material-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.infusion-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.layers.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.overlays.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.page-activity.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.piles.view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.presentation-ready.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.preview.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.scenery.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.secondary-overlay.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.selection-ui.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.skill-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.turn-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.turn-forecast.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.vfx.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.victory.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/battle/view/battle.view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/boot-order.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/builtin-card-execution.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/card-execution-plan.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/card-execution-plan.types.d.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/card-rules.schema.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/card-trigger-contract.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/cards.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/cards.sync.backfiller.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/cards.sync.m9.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/cards/structured-card-description.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/art.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/camera.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/characters.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/data-loader.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/flight-recorder.local.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/icon-hydration.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/icons-bitmap.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/input.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/map-drag-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/map-image-ready.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/map-node-art.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/mapData.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/notes.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/perf-probe.local.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/random-service.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/random.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/renderer.fx.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/renderer.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/rule-config.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/core/sdt-facade.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/e2.snapshot.qa.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/game.boot.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/generated/art-manifest.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/generated/thumb-manifest.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/home/home.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/home/home.presenter.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/home/home.scene.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/home/story.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/home/story.last-lamp.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/bag-pane-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base-economy.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base-elapsed.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base-motion-v4.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/base.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/collection-conversion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/collection.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/courtyard-vendor/KoiPond.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/departure-persistence.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/departure.summary.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/departure.view-updates.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/extraction.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.bag.drag.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.bag.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.bag.rules.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.bag.settle.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.cardslib.common.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.cardslib.designer.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.cardslib.page.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.cardslib.photo-fps.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.container-store.view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.depart.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.home-scene.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.pages.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.preparation-ports.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.preparation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.hub.runtime.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.notes.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.store.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/game.store.types.d.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.archive-v3.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.archive.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.personnel.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.presentation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.reward-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.trade-shop-v5.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/hub.warehouse.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/meta.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/nest-settlement.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/photo-studio-controls.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/photo-studio-navigation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/preparation.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/preparation.view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/recoverable-pair.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/recovery.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/slot-write-lock.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/hub/terminal.commands.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/main.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/r7a.qa.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/rarity-design-lab.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/chest-opening-art.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/chests.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/event-card-choice.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.nest.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.altar.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.class-choice.page.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.dev.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.events.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.flow.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.scenes.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.run.shop.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.session.bag.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.session.board.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.session.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.session.kernel.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/game.session.map.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/lab.ending.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/layeredMap.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/map-generator-v4.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/map-generator.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/map-graph.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/node-reward-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/run/run-domain-commands.types.d.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/achievement-gallery.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/achievement-medals.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/achievement-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/archive-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/base-design-preview-v7.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/base-preview-rooms-v7.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/battle-hud-info.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/beginner-guide-diagrams.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/beginner-guide.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/camp-entry.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/card-browser-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/card-browser.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/card-result-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/card-state-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/character-idle.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/character-view-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/chest-reward-overview.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/cinematics.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/comm-feed.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/cover-context.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/departure-transition.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/equipment-info.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/event-dice.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/event-option-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/event-recode-result.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/event-signal-puzzle.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/expedition-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/extraction-rewards-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/feedback-theme.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/feedback.local.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/fire-rest-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/game.menu.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/game.menu.pages.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/general-transition.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/home-fx.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/home-layers.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/home-linked-interactions.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/home-menu-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/hud.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/interface-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/inventory-zoom.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/lucide-acquisition-icon.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/map-health-hud.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/map-passage.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/motion-presets.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/motion-transitions.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/navigation-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/node-decision-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/node-scene-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/overlay-return-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/overlay.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/page-entry-cancellation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/page-loading.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/page-surface-lifetime.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/page-visual-ready.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/partner-interaction.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/performance-settings.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/quick-nav.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/rarity-reveal.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-acquisition-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-capacity-organizer.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-card-feedback.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-picker-heading.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-scene-view.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/reward-state.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/route-overlay.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/selection-state-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/settings-audio.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/settings-battle-restart.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/settings-navigation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/settings-transition.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/slot-emblems.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/startup-transition.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/surface-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/target-motion.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/term-tips.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/terminal-settlement.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/title-credits.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/title-wallpaper.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/transition-diagnostic-policy.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/transition-preparation.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/transitions-director.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/ui-decision.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/ui-disclosure.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/ui-scale.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/ui/ui.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/game/src/wu-career-frame-preview.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/jsconfig.framework-ports.json"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/jsconfig.json"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/scripts/architecture-graph.mjs"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/scripts/check-types.mjs"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/scripts/gate-plan.mjs"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/scripts/runtime-asset-redundancy.mjs"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/architecture-boundaries.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/bag-render-snapshot.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/base-hub-business-lifecycle-audit.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/base-inventory-lifecycle-audit.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/base-mutation.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/base-save-snapshot.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-all-cards.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-decision-readability.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-decision-redesign.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-frames-ownership.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-hand-inspector.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-hand-keyword-interaction.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-hud-info.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-infusion-action-layout.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-pile-readability.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/battle-tools-lifecycle.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/blackmarket-card-preview.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/boot.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/card-description-fix-lifecycle.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/direct-cast.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/e4-async-entry.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-callback-lifecycle-audit.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-choice-acquired-gift-cloud.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-choice-recovery-cloud.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-node-binding-cloud.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-recode-selection-continuity.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-settlement-unification.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/event-signal-puzzle-integration.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/facade-snapshot-drift.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/four-player-event-regressions.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/framework-battle-ports-types.fixture.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/framework-boundaries-types.fixture.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/game-session-browser-boundary.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/game-store-snapshot.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/game-store-types.fixture.ts"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/hero-cards.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/home-async-lifecycle.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/hub-architecture.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/hub-lazy-entry.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/hub-trade-shop-v5.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/m05-home-presenter.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/map-facilities-burn-removal.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/map-route-v2.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/map-version-compat.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/nightshift-u10-settle-transition.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/potion-tip-lifecycle.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/potion-tip.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/premium-ui-pages.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/preparation-adapter-review.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/r6-story.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/r7a-scenes-integration.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/required-infusion-play.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/runtime-asset-aliases.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/runtime-asset-redundancy-plugin.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/runtime-asset-redundancy.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/shop-currency-guidance.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/stealth-term.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/target-motion.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/term-tip-rule-copy.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/term-tips-lifecycle.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/tests/workflow-cli-integration.test.js"
+    },
+    {
+      "status": " M",
+      "path": "搜打撤/vite.config.js"
+    },
+    {
+      "status": "??",
+      "path": ".codex/config.toml.bak-nai-domain-20261013-224601"
+    },
+    {
+      "status": "??",
+      "path": ".codex/config.toml.bak-nai-network-20261013-224312"
+    },
+    {
+      "status": "??",
+      "path": ".codex/config.toml.bak-nai-open-20261013-230419"
+    },
+    {
+      "status": "??",
+      "path": ".codex/config.toml.bak-nai-profile-20261015-215723"
+    },
+    {
+      "status": "??",
+      "path": "nul"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/.tmp-ship-plan-1016.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-05-WF-exe-1005/2026-10-05T14-42-18.695Z-2378777f-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-09-card-history-document/catalog.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-09-card-history-document/render-final/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-09-card-history-document/render/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-10-feedback-four/cardback-draft-v2.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-10-ship-1010-code/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-10-ship-1010-docs/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-10-ship-1010/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-redesign/references/hsr-swarm-map.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-11-WF-selection-map-implementation-1011/shop-redesign/references/is6-shop.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.html"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/shop.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-27-52.891Z-e636bc69-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-33-38.079Z-f2a8cb09-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-38-26.643Z-4d250ec6-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-42-16.244Z-c0730111-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-54-14.797Z-8ec76a47-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-56-35.602Z-46aff0bc-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-07-05.583Z-34869b8e-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-12-27.686Z-7696777f-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-shop.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/slay-the-spire-rewards.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-1.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-2.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-WF-ship-pathspec-1013/2026-10-13T12-23-54.978Z-2ef564e2-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-13-staged-check/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-49-45.109Z-d01f6cb7-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-50-31.504Z-f157ed90-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-36-05.140Z-76220423-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-48-39.716Z-50fb0198-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-battle-redesign/demo-annotations.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-battle-redesign/demo-battle-state.png"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-46-50.258Z-a84e6896-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-25-34.836Z-1c28528c-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-18-free-sfx-library-search/sources/sonniss-mirror-tail.bin"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-18-staged-check/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-cleanup-submit-1019/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-completed-commit-1019/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-local-closeout-1019-r2/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-local-closeout-1019/2026-10-18T16-49-09.933Z-a2bd94d3-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-local-github-baseline-1018/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-19-WF-submit-tools-1019/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-20-WF-local-cloud-upload-1020-final/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-20-WF-local-submit-1020/2026-10-20T06-16-04.637Z-79ce6283-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-cloud-perf-merge-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-framework-solo-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-github-perf-integrate-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-local-publish-1020/2026-10-20T17-20-24.575Z-e41fc7f7-staged.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-project-tidy-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-public-controls-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-shop-secondary-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-sts2-cast-ui-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-WF-types-full-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-battle-cuts-reuse/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-four-transition-redraw/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-github-performance-review/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-missing-transition-nai45/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-stash-sale-price/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-abstract/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-art-install/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-art-sample/generate-v45-small.py"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-art-sample/nai-request-v45-small.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/docs/evidence/2026-10-21-transition-typography/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/art-source/chests/large-rig-v1-local/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/assets/scenes/transitions-1021/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/css/battle-equipment.css"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/css/battle-pile-view.css"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/css/battle-potion-use.css"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/css/public-controls.css"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.action-router.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.llm-parser.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.llm.runtime.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.replay.runtime.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.run-control.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/agent/agent.runner.runtime.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/core/battle.core-ports.types.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/core/battle.effect-assembly.domain.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/core/battle.setup-mechanics.domain.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/core/battle.snapshot-projection.domain.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/effects/battle.acquire-operation.domain.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/effects/battle.status-operations.domain.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/view/battle.dom.types.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/view/battle.pile-view.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/battle/view/battle.potion-use.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/core/bag-render-derivation.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/core/runtime-env.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/core/sdt-facade.typecheck.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/hub/command-errors.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/hub/preparation.types.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/hub/stash-sale-price.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/run/event-lifecycle.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/run/event-runtime.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/run/game.session.kernel.types.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/ui/page-visual-readiness-sharing.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/ui/term-tips.runtime.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/ui/transition-art.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/ui/transition-heading.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/game/src/ui/ui.dom.types.d.ts"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/jsconfig.runtime.json"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/pv/"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/scripts/check-type-coverage.mjs"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/agent-optional-lazy-boundary.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/agent-replay-identity.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/agent-runner-lazy-boundary.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/bag-render-derivation.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/battle-ally-dom-order.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/battle-execution-card-guard.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/battle-hand-rule-context.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/battle-snapshot-phase-cost.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/battle-unit-metadata.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/boot-frame-readiness.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/events-lazy-entry.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/events-lazy-story-ownership.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/framework-battle-decomposition.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/framework-core-ports-types.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/hub-command-errors.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/map-type-annotation-freeze.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/page-visual-readiness-sharing.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/public-controls-equipment.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/public-controls-tooltip.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/sts2-agent-infusion-1021.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/sts2-cast-layout-1021.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/sts2-infusion-flow-1021.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/sts2-pile-view-1021.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/sts2-potion-use-1021.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/term-tips-lazy-boundary.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/type-coverage.test.js"
+    },
+    {
+      "status": "??",
+      "path": "搜打撤/tests/type-runtime-delegation.test.js"
+    }
+  ]
+}

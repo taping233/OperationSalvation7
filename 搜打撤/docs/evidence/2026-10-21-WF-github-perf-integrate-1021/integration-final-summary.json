@@ -1,0 +1,29 @@
+{
+  "numTotalTests": 937,
+  "numPassedTests": 935,
+  "numFailedTests": 2,
+  "numPendingTests": 0,
+  "success": false,
+  "exitCode": 1,
+  "files": 80,
+  "failed": [
+    {
+      "name": "D:/素材/代号柒/搜打撤/tests/sts2-agent-replay.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "battle-entry replay through the real Agent and BattleSession commands records target selection and an enemy turn, then replays recorded commands without rerunning a policy",
+          "failures": [
+            "AssertionError: {\"ok\":false,\"code\":\"REPLAY_DIVERGED\",\"executed\":1,\"index\":0,\"stage\":\"after\",\"difference\":{\"path\":\"$.battle.pendingTarget.battleToken\",\"expected\":5,\"actual\":6}}: expected { ok: false, …(5) } to match object { ok: true, executed: 3 }\n(7 matching properties omitted from actual)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1155:10)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\sts2-agent-replay.test.js:113:46\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+          ]
+        },
+        {
+          "name": "battle-entry replay through the real Agent and BattleSession commands stops on the changed target at command 1 and never executes the next endTurn",
+          "failures": [
+            "AssertionError: expected { ok: false, …(5) } to match object { ok: false, …(4) }\n(4 matching properties omitted from actual)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1155:10)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\sts2-agent-replay.test.js:121:21\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+          ]
+        }
+      ]
+    }
+  ]
+}

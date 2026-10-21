@@ -1,0 +1,16 @@
+[
+  {
+    "path": "game/src/generated/art-manifest.js",
+    "beforeSha256": "200743578e9ef02cfda61c6b6856fca0f624758f330f5b55091c7fc850eed95d",
+    "afterSha256": "90643fff48fb389cb33ad481af1033dcfee62700be8d945bde48fcc86bdea08d",
+    "changed": true,
+    "source": "isolated npm run build, build-final exit 0"
+  },
+  {
+    "path": "game/src/generated/thumb-manifest.js",
+    "beforeSha256": "f91309a211ac93f0c86f16cb0c7ca7265636cdd7ac367bac8ae0bc7a05ac6464",
+    "afterSha256": "16a57337292f59096ef3eebfe9ff6d9c7256f71f4cb91c11d25dfa2eadd2175f",
+    "changed": true,
+    "source": "isolated npm run build, build-final exit 0"
+  }
+]

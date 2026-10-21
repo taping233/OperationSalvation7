@@ -1,0 +1,50 @@
+{
+  "generator": "Built-in ImageGen",
+  "prompts": "unified-requests.json",
+  "status": "seven unified v2 candidates saved; not installed",
+  "validation": "Skipped per user instruction",
+  "items": [
+    {
+      "id": "emergency-exit",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\emergency-exit-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\emergency-exit-unified-v2.webp",
+      "sha256": "da901757c5d8a3050751b661911d814278aa06462d66ee320514a70224ffa66d"
+    },
+    {
+      "id": "event",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\event-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\event-unified-v2.webp",
+      "sha256": "53de01193365758f886fe16c5ed13db2d0a67bca015e2ef58bad8f93971062de"
+    },
+    {
+      "id": "layer-passage",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\layer-passage-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\layer-passage-unified-v2.webp",
+      "sha256": "9b83e065e32d56989434d1e76c228328ab7efce56cb489cae7d6cf1269e74b37"
+    },
+    {
+      "id": "map-return",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\map-return-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\map-return-unified-v2.webp",
+      "sha256": "dbbac9bcdfbe0e15f2ae1870e658987c8134359ada5254546d86f19cdbd2b963"
+    },
+    {
+      "id": "loading",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\loading-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\loading-unified-v2.webp",
+      "sha256": "3d5eb799da5066e49ae0a60b0a752221e3d88dc219f3240b3c6bbef58579a558"
+    },
+    {
+      "id": "expedition-start",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\expedition-start-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\expedition-start-unified-v2.webp",
+      "sha256": "0989bdbc8ced9bf7f0191a44eb13e7a24caaa377cadfd770e7728474b7670eb6"
+    },
+    {
+      "id": "page-turn",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\page-turn-unified-v2.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\page-turn-unified-v2.webp",
+      "sha256": "af063a33086031b9f6f5500ff9c7933f2afc35f847244cc21ef72cc02298d223"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "emergency-exit",
+  "name": "紧急撤离点前置",
+  "status": "generated",
+  "generator": "nai_gen.generate_image",
+  "model": "nai-diffusion-4-5-full",
+  "width": 768,
+  "height": 512,
+  "seed": 102121100,
+  "prompt": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+  "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+  "request": {
+    "input": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 768,
+      "height": 512,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 102121100,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\emergency-exit.png",
+  "bytes": 430043,
+  "sha256": "0709d7310982f2a9b5f3557f325b0b3d593fac76706c303982ac6d40ba029ba1"
+}

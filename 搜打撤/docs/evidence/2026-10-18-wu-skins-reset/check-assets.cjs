@@ -1,0 +1,12 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const { auditAssets } = require('../../../scripts/asset-audit-lib.cjs');
+const root = path.resolve(__dirname, '../../..');
+const receipt = JSON.parse(fs.readFileSync(path.join(__dirname, 'installed-faces.json'), 'utf8'));
+const paths = receipt.items.map(item => 'game/assets/' + item.asset);
+const result = auditAssets({root, paths});
+const targetIssues = result.issues.filter(issue => receipt.items.some(item => issue.path === item.asset || issue.path === 'game/assets/' + item.asset));
+const report = {paths, targetIssues, otherErrors:result.errors.filter(issue => !targetIssues.includes(issue)), historicalWarnings:result.warnings.length};
+fs.writeFileSync(path.join(__dirname, 'asset-check.json'), JSON.stringify(report, null, 2));
+console.log(JSON.stringify({targetIssues:targetIssues.length, otherErrors:report.otherErrors.length, historicalWarnings:report.historicalWarnings}));
+if (targetIssues.length) process.exitCode=1;

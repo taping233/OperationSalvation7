@@ -1,0 +1,678 @@
+{
+  "status": "superseded-by-selected-format",
+  "scope": "Seven missing transition candidates; previously installed four and battle/boss art preserved; frozen laboratory excluded",
+  "model": "nai-diffusion-4-5-full",
+  "dimensions": [
+    768,
+    512
+  ],
+  "steps": 28,
+  "billing": "Uses requested small-image settings; no account billing state queried",
+  "items": [
+    {
+      "id": "emergency-exit",
+      "name": "紧急撤离点前置",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121100,
+      "prompt": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121100,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, A single cyan emergency beacon beside a broad dark service doorway in a deserted futuristic city at night. A simple recessed rectangular doorway, one low illuminated signal strip, a continuous wet concrete floor. Only two or three coherent urban building silhouettes beyond. The beacon and doorway are on the right half; no people or vehicles.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nmuted charcoal and deep blue gray, restrained pale cyan signal, soft teal reflection. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\emergency-exit.png"
+    },
+    {
+      "id": "event",
+      "name": "事件前置",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121101,
+      "prompt": "scenery, no humans, dark futuristic city, A quiet unfamiliar signal in a deserted futuristic city at night: one small amber light on a simple sealed urban utility box, a wide empty street surface and two broad modern building masses fading into haze. The box and light are on the right half. A suggestion of mystery, no literal story props, no humans.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncold ink blue and dark chromatic gray, one small muted amber accent, still dim atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, A quiet unfamiliar signal in a deserted futuristic city at night: one small amber light on a simple sealed urban utility box, a wide empty street surface and two broad modern building masses fading into haze. The box and light are on the right half. A suggestion of mystery, no literal story props, no humans.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncold ink blue and dark chromatic gray, one small muted amber accent, still dim atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121101,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, A quiet unfamiliar signal in a deserted futuristic city at night: one small amber light on a simple sealed urban utility box, a wide empty street surface and two broad modern building masses fading into haze. The box and light are on the right half. A suggestion of mystery, no literal story props, no humans.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncold ink blue and dark chromatic gray, one small muted amber accent, still dim atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\event.png"
+    },
+    {
+      "id": "layer-passage",
+      "name": "跨层通路",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121102,
+      "prompt": "scenery, no humans, dark futuristic city, An abstracted transition between levels inside a dark futuristic city: one broad continuous inclined urban passage leading past a simple rectangular wall opening, a few large aligned concrete and metal planes. Three-quarter perspective, the opening on the right half, only a narrow distant cold light. No complex stairs, no elevated rail networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black, steel gray and desaturated teal, a thin cold light beyond the passage, dim coherent space. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, An abstracted transition between levels inside a dark futuristic city: one broad continuous inclined urban passage leading past a simple rectangular wall opening, a few large aligned concrete and metal planes. Three-quarter perspective, the opening on the right half, only a narrow distant cold light. No complex stairs, no elevated rail networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black, steel gray and desaturated teal, a thin cold light beyond the passage, dim coherent space. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121102,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, An abstracted transition between levels inside a dark futuristic city: one broad continuous inclined urban passage leading past a simple rectangular wall opening, a few large aligned concrete and metal planes. Three-quarter perspective, the opening on the right half, only a narrow distant cold light. No complex stairs, no elevated rail networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black, steel gray and desaturated teal, a thin cold light beyond the passage, dim coherent space. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\layer-passage.png"
+    },
+    {
+      "id": "map-return",
+      "name": "返回地图继续探索",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121103,
+      "prompt": "scenery, no humans, dark futuristic city, An abstracted overview of a dark futuristic city district at night, a continuous street junction suggested by three broad ground planes and a few compact silhouettes of modern buildings. A single quiet cold light along the right street edge. No literal map, no diagram, no floating panels, no aerial road networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncharcoal blue shadows, muted green gray ground, a very small pale cyan accent, subdued nocturnal atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, An abstracted overview of a dark futuristic city district at night, a continuous street junction suggested by three broad ground planes and a few compact silhouettes of modern buildings. A single quiet cold light along the right street edge. No literal map, no diagram, no floating panels, no aerial road networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncharcoal blue shadows, muted green gray ground, a very small pale cyan accent, subdued nocturnal atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121103,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, An abstracted overview of a dark futuristic city district at night, a continuous street junction suggested by three broad ground planes and a few compact silhouettes of modern buildings. A single quiet cold light along the right street edge. No literal map, no diagram, no floating panels, no aerial road networks.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ncharcoal blue shadows, muted green gray ground, a very small pale cyan accent, subdued nocturnal atmosphere. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\map-return.png"
+    },
+    {
+      "id": "loading",
+      "name": "基地选人菜单加载等待",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121104,
+      "prompt": "scenery, no humans, dark futuristic city, A sheltered dark futuristic city waiting space, represented by a broad flat concrete wall, a simple horizontal metal ledge and one recessed cyan wall lamp on the right. A faint distant city silhouette beyond a single broad rectangular gap. Sparse connected architectural masses, calm and nearly abstract.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep charcoal blue, muted chromatic gray, one soft cyan light, very restrained contrast, dark stillness. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, A sheltered dark futuristic city waiting space, represented by a broad flat concrete wall, a simple horizontal metal ledge and one recessed cyan wall lamp on the right. A faint distant city silhouette beyond a single broad rectangular gap. Sparse connected architectural masses, calm and nearly abstract.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep charcoal blue, muted chromatic gray, one soft cyan light, very restrained contrast, dark stillness. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121104,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, A sheltered dark futuristic city waiting space, represented by a broad flat concrete wall, a simple horizontal metal ledge and one recessed cyan wall lamp on the right. A faint distant city silhouette beyond a single broad rectangular gap. Sparse connected architectural masses, calm and nearly abstract.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep charcoal blue, muted chromatic gray, one soft cyan light, very restrained contrast, dark stillness. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\loading.png"
+    },
+    {
+      "id": "expedition-start",
+      "name": "启程初入",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121105,
+      "prompt": "scenery, no humans, dark futuristic city, Leaving shelter into a dark futuristic city before dawn: one broad empty paved path continuing past a simple modern rectangular shelter opening toward two distant urban silhouettes. The opening and focal cold horizon sit on the right half. Large coherent shapes, minimal architectural detail, a quiet beginning, not a sunny vista.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nink blue and charcoal, muted pale gray blue horizon, tiny soft warm glimmer far away, shadowed foreground. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, Leaving shelter into a dark futuristic city before dawn: one broad empty paved path continuing past a simple modern rectangular shelter opening toward two distant urban silhouettes. The opening and focal cold horizon sit on the right half. Large coherent shapes, minimal architectural detail, a quiet beginning, not a sunny vista.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nink blue and charcoal, muted pale gray blue horizon, tiny soft warm glimmer far away, shadowed foreground. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121105,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, Leaving shelter into a dark futuristic city before dawn: one broad empty paved path continuing past a simple modern rectangular shelter opening toward two distant urban silhouettes. The opening and focal cold horizon sit on the right half. Large coherent shapes, minimal architectural detail, a quiet beginning, not a sunny vista.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\nink blue and charcoal, muted pale gray blue horizon, tiny soft warm glimmer far away, shadowed foreground. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\expedition-start.png"
+    },
+    {
+      "id": "page-turn",
+      "name": "通用翻页过场",
+      "status": "planned",
+      "generator": "nai_gen.generate_image",
+      "model": "nai-diffusion-4-5-full",
+      "width": 768,
+      "height": 512,
+      "seed": 102121106,
+      "prompt": "scenery, no humans, dark futuristic city, A near-abstract dark futuristic urban environment formed from three broad connected concrete and dark glass wall planes, a single narrow vertical cold light on the far right, and a quiet continuous ground plane. Suggest modern city architecture without literal detailed machinery. A restrained unoccupied space, no objects in foreground.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black and smoky chromatic gray, subdued blue green light at the right edge, low contrast grouped shadows. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "uc": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+      "request": {
+        "input": "scenery, no humans, dark futuristic city, A near-abstract dark futuristic urban environment formed from three broad connected concrete and dark glass wall planes, a single narrow vertical cold light on the far right, and a quiet continuous ground plane. Suggest modern city architecture without literal detailed machinery. A restrained unoccupied space, no objects in foreground.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black and smoky chromatic gray, subdued blue green light at the right edge, low contrast grouped shadows. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 768,
+          "height": 512,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 102121106,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+          "characterPrompts": [
+            {
+              "prompt": "",
+              "uc": "",
+              "center": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "scenery, no humans, dark futuristic city, A near-abstract dark futuristic urban environment formed from three broad connected concrete and dark glass wall planes, a single narrow vertical cold light on the far right, and a quiet continuous ground plane. Suggest modern city architecture without literal detailed machinery. A restrained unoccupied space, no objects in foreground.\n\nOne cohesive hand-painted anime environment illustration for a short game transition. Urban, futuristic and dark. No interface or written words.\n\nWide quiet composition. The left third is a dark uncluttered connected plane reserved for a later UI title, but DO NOT draw that title. Main visual interest on the right half. Large opaque grouped color shapes, few selective hard edges, simplified perspective, continuous floor, attached shadows, only necessary readable architectural cues. Avoid little individual fragments, repeating tiny windows or decorative seams.\n\ndeep blue black and smoky chromatic gray, subdued blue green light at the right edge, low contrast grouped shadows. Opaque block-painted surfaces, restrained directional brushwork, quiet backgrounds, consistent single light direction. Spatial continuity matters more than intricate detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, letters, numbers, interface, HUD, mountains, cliffs, canyon, wilderness, forest, medieval, gothic, castle, pillars, ancient ruins, bright daylight, sunny sky, dense pipes, complex bridges, impossible architecture, disconnected ground, floating platforms, debris fragments everywhere, detailed window grids, photorealistic, 3d render",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\missing-transition-nai45-20261021\\page-turn.png"
+    }
+  ],
+  "generatedDraftIds": [
+    "emergency-exit",
+    "event",
+    "layer-passage",
+    "map-return"
+  ],
+  "remaining": "Small batch stopped after current request on owner size steering; no loading/start/page-turn request sent."
+}

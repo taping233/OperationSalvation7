@@ -1,0 +1,167 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：占格 5/16，余 11 格" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 5/16
+      - generic: B
+    - button "安全格：保护物资 0/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 0/2
+    - button "消耗区：已消耗卡牌 0" [disabled]:
+      - img "cards"
+      - generic: 消耗区
+      - strong: "0"
+    - button "定位：当前位置与相邻路线" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "全景：整层路线，未知地点保留迷雾" [disabled]:
+      - img "map"
+      - generic: 全景
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 外围荒地
+    - generic: 第 1 层 / 4
+  - generic "持有金币":
+    - generic: "0"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - button "生命 35，上限 35":
+    - generic: 生命
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic "无，自己":
+      - img "无":
+        - img "无"
+      - generic: 35/35
+      - img "swords"
+      - text: 攻 4
+    - generic "联邦射手，敌方单位":
+      - img "联邦射手":
+        - img "archer"
+      - generic: 3/3
+      - button "联邦射手的意图：攻击 · 5。基础攻击 5。点击查看完整说明":
+        - img "swords"
+        - generic: 攻击 5
+    - generic "联邦射手，敌方单位":
+      - img "联邦射手":
+        - img "archer"
+      - generic: 3/3
+      - button "联邦射手的意图：攻击 · 5。基础攻击 5。点击查看完整说明":
+        - img "swords"
+        - generic: 攻击 5
+    - generic "联邦射手，敌方单位":
+      - img "联邦射手":
+        - img "archer"
+      - generic: 3/3
+      - button "联邦射手的意图：攻击 · 5。基础攻击 5。点击查看完整说明":
+        - img "swords"
+        - generic: 攻击 5
+    - button "牌库：99 张（仅抽牌效果取牌，回合开始不抽牌；点击查看）":
+      - generic: "99"
+      - generic: 牌库
+    - button "消耗牌堆：（空）（不自动洗回，仅由卡牌效果取回；点击查看）":
+      - img "skull"
+      - generic: "0"
+      - generic: 消耗牌堆
+    - generic "选择注能材料的手牌，点击一张移入已选区":
+      - group "初始攻击，第2/5张，同名已选1张。材料已齐，请先撤回已选卡":
+        - button "初始攻击，第2/5张，同名已选1张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "1"
+          - img "初始攻击"
+          - generic: 武术
+          - generic: ·初始
+          - generic: 初始攻击
+          - generic: 造成等同于你的攻击力的攻击伤害。
+          - img "coin"
+          - generic: "1"
+        - generic: "2"
+      - group "初始攻击，第3/5张，同名已选1张。材料已齐，请先撤回已选卡":
+        - button "初始攻击，第3/5张，同名已选1张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "1"
+          - img "初始攻击"
+          - generic: 武术
+          - generic: ·初始
+          - generic: 初始攻击
+          - generic: 造成等同于你的攻击力的攻击伤害。
+          - img "coin"
+          - generic: "1"
+        - generic: "3"
+      - group "初始攻击，第4/5张，同名已选1张。材料已齐，请先撤回已选卡":
+        - button "初始攻击，第4/5张，同名已选1张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "1"
+          - img "初始攻击"
+          - generic: 武术
+          - generic: ·初始
+          - generic: 初始攻击
+          - generic: 造成等同于你的攻击力的攻击伤害。
+          - img "coin"
+          - generic: "1"
+        - generic: "4"
+      - group "初始攻击，第5/5张，同名已选1张。材料已齐，请先撤回已选卡":
+        - button "初始攻击，第5/5张，同名已选1张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "1"
+          - img "初始攻击"
+          - generic: 武术
+          - generic: ·初始
+          - generic: 初始攻击
+          - generic: 造成等同于你的攻击力的攻击伤害。
+          - img "coin"
+          - generic: "1"
+        - generic: "5"
+      - group "江湖救急-改，第1/1张，同名已选0张。材料已齐，请先撤回已选卡":
+        - button "江湖救急-改，第1/1张，同名已选0张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "0"
+          - img "江湖救急-改"
+          - generic: 武术
+          - generic: ·侠客
+          - generic: 江湖救急-改
+          - generic: 随机获得 3 张临时卡牌；下回合开始时，这 3 张牌被消耗。
+          - img "coin"
+          - generic: "3"
+        - generic: "6"
+      - group "潜匿，第1/1张，同名已选0张。材料已齐，请先撤回已选卡":
+        - button "潜匿，第1/1张，同名已选0张。材料已齐，请先撤回已选卡" [disabled]:
+          - generic: "1"
+          - img "潜匿"
+          - generic: 武术
+          - generic: ·侠客
+          - generic: 潜匿
+          - generic: 你进入潜行状态，持续 1 回合，并抽 1 张牌。
+          - img "coin"
+          - generic: "3"
+        - generic: "7"
+    - region "注能材料选择":
+      - status "已选 1/1 张材料": 1/1
+      - complementary:
+        - generic: "1"
+        - img "镭射"
+        - generic: 法术
+        - generic: ·古朴
+        - generic: 镭射
+        - generic: 造成 5 点法术伤害；注能（1）：本牌伤害增加 3 点。
+        - img "coin"
+        - generic: "2"
+        - button "查看主卡详情": ⌕
+      - region "已选材料":
+        - group "已选材料，点击卡面撤回":
+          - article:
+            - button "撤回初始攻击第1张，同名已选1/5张":
+              - generic: "1"
+              - img "初始攻击"
+              - generic: 武术
+              - generic: ·初始
+              - generic: 初始攻击
+              - generic: 造成等同于你的攻击力的攻击伤害。
+              - img "coin"
+              - generic: "1"
+              - generic: ↙
+      - button "返回"
+      - button "不注能直接打出"
+      - button "确认材料，继续选择目标": 确认

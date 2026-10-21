@@ -1,0 +1,51 @@
+{
+  "generator": "Built-in ImageGen",
+  "thread": "01a15d42-c942-73a1-8115-99f1691c3929",
+  "status": "seven simplified review candidates saved; not installed",
+  "validation": "Skipped per user instruction",
+  "prompts": "simple-requests.json; final three use concise equivalent with event-simple.png as style reference",
+  "items": [
+    {
+      "id": "emergency-exit",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\emergency-exit-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\emergency-exit-simple.webp",
+      "sha256": "f6ae4f32478cfee9674b7de7d49287827314251b0d21a09d2183b002ab166de3"
+    },
+    {
+      "id": "event",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\event-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\event-simple.webp",
+      "sha256": "cf9b7000908b947d003f439f2baec6b1bcd71ea68cf7428fcd5a05898a762a2a"
+    },
+    {
+      "id": "layer-passage",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\layer-passage-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\layer-passage-simple.webp",
+      "sha256": "f6c544673329e67ed9eebd120db961acc1bd78d1e55d4e324f4e03d9585cf8b6"
+    },
+    {
+      "id": "map-return",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\map-return-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\map-return-simple.webp",
+      "sha256": "71f04558084864ed8234b1249a92e851067d9d3b77adea4396933e5cd19f90b6"
+    },
+    {
+      "id": "loading",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\loading-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\loading-simple.webp",
+      "sha256": "862b5b5b47130855d03b355c2561d566c2c17868e81eeb730b2172aeab3c2ae9"
+    },
+    {
+      "id": "expedition-start",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\expedition-start-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\expedition-start-simple.webp",
+      "sha256": "8608b82bb3f63a60ba9746ffe431713cfa949d4f6fa089c387c206cdfd93c7d1"
+    },
+    {
+      "id": "page-turn",
+      "png": ".tmp\\imagegen\\missing-transition-20261021\\page-turn-simple.png",
+      "webp": ".tmp\\imagegen\\missing-transition-20261021\\page-turn-simple.webp",
+      "sha256": "590cf3f0cb2b348b384999490852b1892da14256ab7b4ab5fae70949ac788f85"
+    }
+  ]
+}

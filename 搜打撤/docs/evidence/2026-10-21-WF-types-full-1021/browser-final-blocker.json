@@ -1,0 +1,29 @@
+{
+  "recordedAtUtc": "2026-10-21T03:53:38Z",
+  "platform": "Codex subagent / mcp__cua_repl",
+  "expectedOrigin": "http://localhost:5337/",
+  "expectedViewport": "Current default window; no viewport override",
+  "probes": [
+    {
+      "call": "await integrationTabHidden.getAXState()",
+      "result": "integrationTabHidden is not defined",
+      "meaning": "Previous REPL handle was lost across delegated turns"
+    },
+    {
+      "call": "await cua.getState()",
+      "result": { "apps": [], "browsers": [] }
+    },
+    {
+      "call": "await cua.createBrowserTab('iab', 'http://localhost:5337/', {visible:false})",
+      "result": "Browser is not available: iab"
+    }
+  ],
+  "conclusion": "Final frozen source cannot receive a new browser verification in this resumed tool session. Previous real-input results remain scoped to their earlier source fingerprint.",
+  "unverifiedFinalScenarios": [
+    "Resume this session's slot05 on final source",
+    "Real nested SVG icon input after I-05",
+    "Final-source browser console/error window"
+  ],
+  "previousSafeBoundary": "Previous source performed real Save and exit and returned to title; slot05 retains HP25/35, coins2 and consumed4",
+  "fallbackUsed": false
+}

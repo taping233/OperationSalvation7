@@ -1,0 +1,253 @@
+[
+  {
+    "id": "01",
+    "title": "启动／首次进入基地／出征整备",
+    "state": "已配图 · 三处共用",
+    "path": "game/assets/scenes/transition-camp-v2.webp",
+    "detail": "启动、基地首次展开与出征整备调用同一张基地切幕图。",
+    "sha256": "5330b56b49990b9d9dd28a287609a49fe41d9e22c7d6dc6577052cab0b6091a7",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "02",
+    "title": "启程进入地图／继续对局",
+    "state": "已配图 · 两处共用",
+    "path": "game/assets/scenes/transition-field-v2.webp",
+    "detail": "启程与读档续局使用field切幕。",
+    "sha256": "e3a5b3d9084ae08b1873194b1f0d5b71db936fd2dcafc55b3f50e2e39cf0d762",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "03",
+    "title": "普通战／首脑战入口",
+    "state": "已配图 · 两处共用",
+    "path": "game/assets/scenes/transition-general-1016.webp",
+    "detail": "当前统一为旅途继续；旧battle/boss图不在此映射中。",
+    "sha256": "5a6093b4a5e71d8773a750e8a48922519c6ea4cb0c9b7222f3ab0b598ff3815d",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "04",
+    "title": "照相馆入口",
+    "state": "已配图",
+    "path": "game/assets/scenes/transition-photo-v2.webp",
+    "detail": "照相馆使用独立photo切幕；制作坊的载入仍为文字等待层。",
+    "sha256": "11ab751e84d18f31064a8052403778c6e37b04dc265a0ecc35219150965ed100",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "05",
+    "title": "成就总览入口",
+    "state": "已配图",
+    "path": "game/assets/scenes/transition-achievement-v2.webp",
+    "detail": "荣誉档案切幕。",
+    "sha256": "21f7e507ab3d4b6ff22091684ed80220c1e988063e1f410794897876413868f5",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "06",
+    "title": "设置入口",
+    "state": "已配图",
+    "path": "game/assets/ui/settings-shutter-1011.webp",
+    "detail": "系统档案切幕使用独立设置图。",
+    "sha256": "4cd4af3ba76982907cf69ba09d116eb4e2df4418fb29336371a374dfe5121b05",
+    "size": [
+      1344,
+      756
+    ]
+  },
+  {
+    "id": "07",
+    "title": "战斗撤退：全身而退",
+    "state": "已配图 · 复用撤离场景",
+    "path": "game/assets/scenes/scene-extract-anime-v2.webp",
+    "detail": "此处是战斗撤退动画，区别于紧急撤离点的前置短过场。",
+    "sha256": "a373e8e00dbba37f9ed69fc93121bbb4ac82ea4dcd55f1fab4d0776da4d62227",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "08",
+    "title": "大门前置短过场",
+    "state": "当前无图 · 下图是现有可复用场景",
+    "path": "game/assets/scenes/scene-door-anime-v2.webp",
+    "detail": "当前node-cut只显示标题和色块；这张门场景用于后续场景页，尚未接入短过场。",
+    "sha256": "3f099a756a4f68cbd4256e41ba2fe3624e41297c8d4257ff83a2cc594f72e682",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "09",
+    "title": "祭坛前置短过场",
+    "state": "当前无图 · 下图是现有可复用场景",
+    "path": "game/assets/scenes/scene-altar-anime-v2.webp",
+    "detail": "当前node-cut只显示标题和色块；这张污染核心图是现有正式场景。",
+    "sha256": "09c160a54c59463ca8c32dd177038f200337f6d30b4fb3a77348e3f5b6234b2d",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "10",
+    "title": "商店前置短过场",
+    "state": "当前无图 · 下图是现有可复用场景",
+    "path": "game/assets/scenes/scene-shop-anime-v2.webp",
+    "detail": "当前node-cut未显示图片。已确认商店原图默认保留；老板重新选择时再改。",
+    "sha256": "750e55cc93c087d0d7809beccf4a2c96446a0b4b8bfbadea39148b6ce2b647d8",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "11",
+    "title": "紧急撤离点前置短过场",
+    "state": "当前无图 · 下图是现有可复用场景",
+    "path": "game/assets/scenes/scene-extract-anime-v2.webp",
+    "detail": "有撤离场景图，但当前短过场分支没有使用它。",
+    "sha256": "a373e8e00dbba37f9ed69fc93121bbb4ac82ea4dcd55f1fab4d0776da4d62227",
+    "size": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": "12",
+    "title": "事件前置短过场",
+    "state": "当前无图 · 下图是现有候选A",
+    "path": "game/assets/scenes/event-tt6-mystery.webp",
+    "detail": "前置短过场配置custom-a但未渲染场景。后续通用事件页还可轮换空投／救济图；剧情专属事件图未列入过场清单。",
+    "sha256": "f7ddd7b58ad238d24d716cee4a60a93c504c95c8ca7b2c0b73ec1ee7d6c70c2c",
+    "size": [
+      1554,
+      1012
+    ]
+  },
+  {
+    "id": "13",
+    "title": "跨层：第X层→第Y层",
+    "state": "当前无图",
+    "path": null,
+    "detail": "map-layer-passage目前是蓝灰渐变、层号与箭头。新修正版见22，尚未接入。"
+  },
+  {
+    "id": "14",
+    "title": "节点结束：返回探索",
+    "state": "当前无图",
+    "path": null,
+    "detail": "返回探索文字与渐变遮罩；普通背包返回是透明等待层，不单列生图。"
+  },
+  {
+    "id": "15",
+    "title": "基地／选人／菜单／制作坊载入",
+    "state": "当前无图 · 共用等待层",
+    "path": null,
+    "detail": "深色背景、载入文字与三条短线。设置与成就随后另播已配图切幕。"
+  },
+  {
+    "id": "16",
+    "title": "按下出征后的瞬间遮层",
+    "state": "当前无图",
+    "path": null,
+    "detail": "深色底和短横线；后续启程进入地图已有02。"
+  },
+  {
+    "id": "17",
+    "title": "普通整页切换",
+    "state": "当前无图 · 三段遮罩",
+    "path": null,
+    "detail": "通用页面揭幕使用三段纯色遮罩，不是独立叙事场景；基地内导航主要是内容滑入。"
+  },
+  {
+    "id": "18",
+    "title": "旧战斗专用过场图",
+    "state": "素材仍在 · 当前未用于战斗入口",
+    "path": "game/assets/scenes/transition-battle-v2.webp",
+    "detail": "camp-entry当前battle映射已经改为03。",
+    "sha256": "17e0acea1b2277182ca5ac87f2660d550f90db919bd00470ad86626d6de8ae8d",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "19",
+    "title": "旧首脑专用过场图",
+    "state": "素材仍在 · 当前未用于首脑入口",
+    "path": "game/assets/scenes/transition-boss-v2.webp",
+    "detail": "camp-entry当前boss映射已经改为03。",
+    "sha256": "6d9a6c244cc8fd6900b884b67524e6aad55ba5e925c52546a3b6dec1861b7e0d",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "id": "20",
+    "title": "旧基地城市切幕图",
+    "state": "素材仍在 · 当前切幕不使用",
+    "path": "game/assets/scenes/camp-transition-city-v1.webp",
+    "detail": "当前基地切幕使用01，此旧图仅供对照选择。",
+    "sha256": "da4904fb29c62a72dd43220b5f6bf8fd57eb33e7a5beae3effcaed2fdc736a5d",
+    "size": [
+      1536,
+      864
+    ]
+  },
+  {
+    "id": "21",
+    "title": "NAI4.5小图原稿",
+    "state": "768×512 · 候选未接入",
+    "path": "D:/素材/代号柒/.tmp/nai/transition-art-sample-20261021/nai-v45-small.png",
+    "detail": "本轮HTTP200成功底稿，当前修正只以它为编辑目标。",
+    "sha256": "145ab485b74ed3b97d80556532b5391542e548b52c2755c705c5f9949f6e420d",
+    "size": [
+      768,
+      512
+    ]
+  },
+  {
+    "id": "22",
+    "title": "基于NAI原图的局部修正版",
+    "state": "最新候选 · 未接入",
+    "path": "C:/Users/太平/.codex/generated_images/01a15a22-8b3e-7611-97f9-321deb86583d/exec-2e425cfb-21b7-424f-a946-cf0e504d29a5.png",
+    "detail": "保留3:2构图、原画法和简洁度，修门框/接缝透视与门外地面连接；待老板评价。",
+    "sha256": "43e7ff3366252e8b92e4182ab374d9cd8d25f22a5fa8a88a23f6667f8c2f52f7",
+    "size": [
+      1536,
+      1024
+    ]
+  },
+  {
+    "id": "23",
+    "title": "扩展重绘版",
+    "state": "老板已否定 · 未接入",
+    "path": "C:/Users/太平/.codex/generated_images/01a15a22-8b3e-7611-97f9-321deb86583d/exec-24ca73b1-b7e7-452a-982b-1bff7986b02a.png",
+    "detail": "老板指出扩展的楼体、桥轨和雪面细节经不起推敲；保留对照，不采用。",
+    "sha256": "b0e5d82883f618985abc7f9a820ac8d6302ced5c14faabb87f5dc0f78809e204",
+    "size": [
+      1672,
+      941
+    ]
+  }
+]

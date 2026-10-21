@@ -1,0 +1,22 @@
+
+> codename7-soudache-game@0.60.0 typecheck
+> node scripts/check-types.mjs
+
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+Type-checking jsconfig.runtime.json
+game/src/core/map-layer-atmosphere.js(30,45): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+game/src/core/map-layer-atmosphere.js(30,49): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+game/src/core/map-layer-atmosphere.js(30,55): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+game/src/core/map-layer-atmosphere.js(30,59): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+game/src/core/map-layer-atmosphere.js(30,63): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+game/src/run/chests.js(463,7): error TS2353: Object literal may only specify known properties, and 'progress' does not exist in type '{ boxes?: any[]; coins?: any; complete?: boolean; footer?: string; notice?: string; primaryAction?: any; source?: string; summary?: string; title?: string; }'.
+Implementation type coverage: 557/557; strict: 50/557

@@ -1,0 +1,32 @@
+{
+  "phase": "controls-v1",
+  "capturedAt": "2026-10-21T05:27:06.829Z",
+  "target": ".tmp/public-controls-1021/preview",
+  "items": [
+    {
+      "path": "game/css/base.css",
+      "bytes": 31895,
+      "sha256": "c6d3f9dfadb88c44c79e4f90b2479f3825ec113c3d8e278ec6b84fa52559268c"
+    },
+    {
+      "path": "game/css/public-controls.css",
+      "bytes": 1839,
+      "sha256": "0c7c08950654ed26b0580ab25337cd95503b1ba6d8ac75c17c7f8e46ee2a0e01"
+    },
+    {
+      "path": "game/css/battle-equipment.css",
+      "bytes": 2722,
+      "sha256": "7f63f56ab7be689a09cb995b1cc22cd8374c895eddb8b8c8e2cca045e3754c0c"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "bytes": 8699,
+      "sha256": "da2cfa03de197c8fa1be11d31098fad9ee4642c07c995eb510272be486240a83"
+    },
+    {
+      "path": "game/src/ui/equipment-info.js",
+      "bytes": 1984,
+      "sha256": "07d68a02866d26f1a899751f7d6d049ca6bdfc9ea8e7ffb4bcee5b935fd27776"
+    }
+  ]
+}

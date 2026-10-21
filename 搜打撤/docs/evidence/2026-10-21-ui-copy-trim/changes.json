@@ -1,0 +1,650 @@
+[
+  {
+    "file": "game/src/ui/settings-navigation.js",
+    "beforeSha256": "7ebdfa4bf1c27f3820130dbaf3ba01a6bd74a0060480b8fb0e1944e19f6ed2ea",
+    "afterSha256": "1dbf345d2926e4ba163d659b179016acac48723acb937f61ad2d3b0a3fb98af7",
+    "removedCharacters": 243,
+    "changes": [
+      {
+        "before": "<small>${english}</small>",
+        "after": ""
+      },
+      {
+        "before": "<h3>${title}</h3><p>${description}</p>",
+        "after": "<h3>${title}</h3>"
+      },
+      {
+        "before": "[string, string, string, string, string[]][]",
+        "after": "[string, string, string[]][]"
+      },
+      {
+        "before": "'通用', 'GENERAL', '界面信息与辅助功能'",
+        "after": "'通用'"
+      },
+      {
+        "before": "'画面与反馈', 'DISPLAY', '画质、动画绘制上限与动作反馈'",
+        "after": "'画面与反馈'"
+      },
+      {
+        "before": "'音频', 'AUDIO', '音乐与音效独立调节，修改自动保存'",
+        "after": "'音频'"
+      },
+      {
+        "before": "'数据管理', 'DATA', '查看记录与管理本地数据'",
+        "after": "'数据管理'"
+      },
+      {
+        "before": "'关于', 'ABOUT', '创作来源与鸣谢'",
+        "after": "'关于'"
+      },
+      {
+        "before": "[key, title, english]",
+        "after": "[key, title]"
+      },
+      {
+        "before": "[key, title, english, description, names]",
+        "after": "[key, title, names]"
+      }
+    ]
+  },
+  {
+    "file": "game/src/ui/game.menu.pages.js",
+    "beforeSha256": "35c742173767befa061a4387937df7235095b6c0746bf4b402d072d92cd71ff3",
+    "afterSha256": "39fc6200a4c4ab7311bfa983bb81fa30edd6434526df59ced1445f8ab0f3159f",
+    "removedCharacters": 1185,
+    "changes": [
+      {
+        "before": " <span class=\"set-en\">PENDING · ${pend.length}</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">DONE · ${done.length}</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">GENERAL</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">NODE NUMBERS</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">HINT BAR</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">LAYER BANNER</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">DEVELOPER</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">DISPLAY &amp; ACCESS</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">SCREEN SHAKE</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">REDUCE MOTION</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">AUDIO</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">MUSIC</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">MUSIC VOL</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">SOUND FX</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">SFX VOL</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">CREDITS</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">SUGGESTION BOX</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">RUN DATA</span>",
+        "after": ""
+      },
+      {
+        "before": " <span class=\"set-en\">DANGER ZONE</span>",
+        "after": ""
+      },
+      {
+        "before": "<p class=\"hint\">音乐与音效可分别调节，修改自动保存。侧边栏按钮控制全局静音。</p>",
+        "after": "<p class=\"hint\">自动保存 · 侧栏可静音</p>"
+      },
+      {
+        "before": "保存这次远征，返回主菜单。下次进入此档位时，可从当前进度继续。",
+        "after": "保存并返回主菜单，下次可继续。"
+      },
+      {
+        "before": "当前对局未关联档位，无法保存。你仍可继续游玩。",
+        "after": "未选择档位，无法保存。"
+      },
+      {
+        "before": "该档位数据读取失败，原档已保留未写回；请重试或联系开发者排查",
+        "after": "读取失败，原档已保留。请重试。"
+      },
+      {
+        "before": "。已完成的留言是历史档案；未完成的可删除，删除需点两次确认。",
+        "after": " · 删除需再次确认"
+      },
+      {
+        "before": "<span class=\"slot-page-en\">选择存档</span>",
+        "after": ""
+      },
+      {
+        "before": "<span class=\"section-kicker\">SELECT ARCHIVE</span>",
+        "after": "<h2 class=\"slot-page-en\">选择存档</h2>"
+      },
+      {
+        "before": "<span class=\"section-kicker\">RUN DATA // 09</span>",
+        "after": ""
+      },
+      {
+        "before": "<em>PROGRESS</em>",
+        "after": ""
+      },
+      {
+        "before": "<em>SAVED</em>",
+        "after": ""
+      },
+      {
+        "before": "<em>PLAYTIME</em>",
+        "after": ""
+      },
+      {
+        "before": "<em>ACHIEVEMENTS</em>",
+        "after": ""
+      },
+      {
+        "before": "<span class=\"slot-card-sub\">SLOT 0${i}</span>",
+        "after": ""
+      },
+      {
+        "before": " <i class=\"en\">NEW GAME</i>",
+        "after": ""
+      },
+      {
+        "before": " <i class=\"en\">CONTINUE</i>",
+        "after": ""
+      },
+      {
+        "before": " <i class=\"en\">ENTER</i>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.hub.depart.js",
+    "beforeSha256": "056b32fcf8a1334fd8796b12aac67978c6a4a685f310b73f60c0a9e2d8c38ea9",
+    "afterSha256": "ec4c4742ebff6652a37a5fcb35652f00a29a74da9557b3d588c7d72bae9f245a",
+    "removedCharacters": 134,
+    "changes": [
+      {
+        "before": "<small>EXPEDITION / 03</small>",
+        "after": ""
+      },
+      {
+        "before": "<small>DEPARTURE CHECKLIST</small>",
+        "after": ""
+      },
+      {
+        "before": "<p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；撤离时再确认带回结果。</p>",
+        "after": "<p>用过的牌进入<b>消耗区</b>，复原后可再用。方法见背包。</p>"
+      },
+      {
+        "before": "已应用推荐，尚未扣仓；可拖回仓库调整或点击「撤销推荐」。",
+        "after": "已应用，尚未扣仓；可调整或撤销。"
+      },
+      {
+        "before": "（每格叠放上限，局内超出会另占一格，这里不提供）——想多带就分摊到不同卡牌上。",
+        "after": "（每格上限）。"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.home-v3.js",
+    "beforeSha256": "caf31b16d31d566575e7fc7570d928e577097f9b8f58750632eb95ba9bc513a3",
+    "afterSha256": "2961b80be2df98066fbf0bfbe5945a2a9f61ee9ec1628b32ea4e44d5bd8b980c",
+    "removedCharacters": 48,
+    "changes": [
+      {
+        "before": "正常入城探索，撤离带回资源卡；在后勤使用后，再去建设扩建。背包记得留空格。",
+        "after": "撤离带回资源卡 → 后勤使用 → 建设扩建。背包留空格。"
+      },
+      {
+        "before": "同样四层探索；",
+        "after": "四层探索 · "
+      },
+      {
+        "before": "。建议熟悉防御与卡牌损耗后挑战。",
+        "after": "。"
+      },
+      {
+        "before": "首局推荐正常入城：完整四层探索，敌人、战斗金币、人物经验均为基础倍率。",
+        "after": "四层探索 · 基础难度"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.hub.pages.js",
+    "beforeSha256": "1dd4586e640179caab227b8fd2f77a3206188d31e9a95d2a07132882fd5a4444",
+    "afterSha256": "75dd530a100d6051132db54cffc7a30533cb3737f480e214ce90566635f8336b",
+    "removedCharacters": 54,
+    "changes": [
+      {
+        "before": "这里显示已折入的基地材料，不含仓库里的资源卡。资源卡需在仓库详情使用后才增加库存；散装物资与资源卡分别结算。",
+        "after": "不含未使用的资源卡；在仓库使用后计入。"
+      },
+      {
+        "before": "卡牌受保护；取消保护会保留图鉴收录。",
+        "after": "取消保护不影响图鉴收录。"
+      },
+      {
+        "before": "保护标记不消耗卡牌、不发放人物经验；图鉴收录独立保留。",
+        "after": "保护不消耗卡牌，不增加经验。"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.personnel.js",
+    "beforeSha256": "8e98551dac6f715dde86a7b95156bab127b77901ccd8a3ce9971230fb5fa205c",
+    "afterSha256": "44157a4c91715bdb8692e88e4a38d4731ae0388de7fcb23caeb2912f6deb3f6b",
+    "removedCharacters": 104,
+    "changes": [
+      {
+        "before": "当前外观已装备",
+        "after": "已装备"
+      },
+      {
+        "before": "应用此外观",
+        "after": "应用外观"
+      },
+      {
+        "before": "浏览预览中 · 当前使用：",
+        "after": "当前："
+      },
+      {
+        "before": "<small>${esc(character.rulesetId)} · 浏览档案</small>",
+        "after": ""
+      },
+      {
+        "before": "用该人物的职业卡或能力卡培养；卡牌转为经验并消耗。",
+        "after": "消耗本人物职业卡或能力卡，获得经验。"
+      },
+      {
+        "before": "在远征宝箱中取得伙伴蛋，回到基地孵化，与尚未拥有的伙伴相遇。",
+        "after": "远征宝箱获取伙伴蛋，回基地孵化。"
+      },
+      {
+        "before": "<small>伙伴档案</small>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.facilities.js",
+    "beforeSha256": "affb6d90a8a70a88325a92cdab073221fe992102546ad5d799a909dcfaa80252",
+    "afterSha256": "bb5db39d25dd631920a3e85141ebc2f1fcf500e071a20a1c03942c939c9831d2",
+    "removedCharacters": 34,
+    "changes": [
+      {
+        "before": "<h2>建设</h2><span>设施扩建</span>",
+        "after": "<h2>建设</h2>"
+      },
+      {
+        "before": "<header><span>设施扩建</span><h3>${facility.name}</h3></header>",
+        "after": "<header><h3>${facility.name}</h3></header>"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.collection-v4.js",
+    "beforeSha256": "9d3be5ce6115276fa0a1ce7355d90b436e9aec18e298f22828f49ec9235504f9",
+    "afterSha256": "5c0fb2ff3b4d79e328f54e5a2f50020156be940bc88c2a5c64889c532e59a177",
+    "removedCharacters": 52,
+    "changes": [
+      {
+        "before": "<span>已收藏 · 卡牌预览</span>",
+        "after": ""
+      },
+      {
+        "before": "查看卡牌详情 →",
+        "after": "详情 →"
+      },
+      {
+        "before": "调整搜索或类型，继续查看已有收藏。",
+        "after": ""
+      },
+      {
+        "before": "在仓库收藏卡牌后，会陈列在这里。",
+        "after": "在仓库收藏卡牌。"
+      },
+      {
+        "before": "<p>${owned.length ? '' : '在仓库收藏卡牌。'}</p>",
+        "after": "${owned.length ? '' : '<p>在仓库收藏卡牌。</p>'}"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.archive-v3.js",
+    "beforeSha256": "88964e45205bf2bf373e2dd8146ef63548fea274bb47aa6a6848b53f48671a35",
+    "afterSha256": "9c4385de843bc4d3dee5869fef0f1a145779098316612c13d10a78394cb0742d",
+    "removedCharacters": 46,
+    "changes": [
+      {
+        "before": "背包翻面与牌库堆正在使用此卡背。",
+        "after": "用于背包与牌库。"
+      },
+      {
+        "before": "当前仅预览，应用后用于背包翻面与牌库堆。",
+        "after": "应用后用于背包与牌库。"
+      },
+      {
+        "before": "当前仅预览，完成目标并领取奖励后可应用。",
+        "after": "完成目标并领取奖励后解锁。"
+      },
+      {
+        "before": "<p>调整筛选条件，或查看全部目标。</p>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.archive.js",
+    "beforeSha256": "6024db4a27b7377213f83b65381d93fe92d665b7d6d58cca725a879f95fb2a48",
+    "afterSha256": "602e508a31f37b8da2ef69a26b8f67ae69bcc30be4a27d790d3d621dffbaaf46",
+    "removedCharacters": 106,
+    "changes": [
+      {
+        "before": "<p>${query.trim() ? '调整关键词，或查看全部目标。' : status === 'claimable' ? '完成下方目标后，奖励会出现在这里。' : '可以返回全部目标继续浏览。'}</p>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/hub.reward-feedback.js",
+    "beforeSha256": "74ebbc761f4a389e01f1350439d9ecf45f5fa1e115a17ce5ae676ef56ad38736",
+    "afterSha256": "7e30580cd43c9841c36cdac519e4189915c090ef6ad73a136c50a04793bb7b9e",
+    "removedCharacters": 45,
+    "changes": [
+      {
+        "before": "确认 · 返回浏览",
+        "after": "确认"
+      },
+      {
+        "before": "奖励尚未领取，领取记录未改变。",
+        "after": ""
+      },
+      {
+        "before": "领取记录已确认。物资明细请查看基地资源、后勤与卡背档案。",
+        "after": "已领取，明细见对应库存。"
+      },
+      {
+        "before": "<p></p>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.page.js",
+    "beforeSha256": "01f55a4318446aa0e24d36e1fa701f28cde1344501f2848fbc1d4667f420faf5",
+    "afterSha256": "eb06d14b45cb4d4ac9529b05d960918caf248bb8b1809b54abe7e0ee2190ae32",
+    "removedCharacters": 14,
+    "changes": [
+      {
+        "before": "暂无选片<br>请调整筛选或搜索条件",
+        "after": "暂无选片"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.cardslib.designer.js",
+    "beforeSha256": "75c38aeb8800ba0c98566654368817afa6135f159a43b7a784a810286916bc55",
+    "afterSha256": "2a7f4c4119802158df74d48b5395b611ab48f223c0947a0301bc245dc9c73e74",
+    "removedCharacters": 54,
+    "changes": [
+      {
+        "before": "移动鼠标可以转动卡牌",
+        "after": "移动鼠标旋转"
+      },
+      {
+        "before": "再点一次叠加次数，到上限后再点移除；句式与战斗结算（battle.core 词条解析）一一对应，也可在描述里手写其他效果。",
+        "after": "点击叠加，满次后移除；可补写效果描述。"
+      },
+      {
+        "before": "保存后可在商店刷出、在战斗中实装；数据保存在本浏览器。",
+        "after": "保存于本浏览器；可在商店和战斗中出现。"
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/game.bag.js",
+    "beforeSha256": "99f0d1b3d1573fe7fc2853e10a18f2e21ce94e87e54f95118ce550f4038238bc",
+    "afterSha256": "bed535e7c8d595e4351db0c587978001b794b12d574eff676b040c94d8e2bbe6",
+    "removedCharacters": 32,
+    "changes": [
+      {
+        "before": "撤离失败也将运回基地；拖到左栏背包钮或点「移回背包」取出。",
+        "after": "撤离失败也能带回基地。"
+      },
+      {
+        "before": "这是资源卡，不计入散装物资估值。带回后勤仓库，使用材料卡折入基地库存。",
+        "after": "不计入散装物资估值；带回后在仓库使用，计入基地库存。"
+      },
+      {
+        "before": "按住拖动整理顺序；拖到左栏盾钮存入安全格。",
+        "after": "拖动整理 · 拖至盾钮存入安全格"
+      }
+    ]
+  },
+  {
+    "file": "game/src/run/game.run.class-choice.page.js",
+    "beforeSha256": "00d8a003ebe842472d1442f68de99fabff1544363d1322efad917b544d8e054d",
+    "afterSha256": "7062eb529f1dbbf81b4919875bd8a55156f007edbee6cd144d9175b3edd91ce3",
+    "removedCharacters": 114,
+    "changes": [
+      {
+        "before": "<i>SKINS</i>",
+        "after": ""
+      },
+      {
+        "before": "<span class=\"pool-catalog-kicker\">COLLECTION INDEX</span>",
+        "after": ""
+      },
+      {
+        "before": "选择右侧卡牌<br>这里会显示档案预览",
+        "after": "选择卡牌查看"
+      },
+      {
+        "before": "从下方选择一名角色",
+        "after": "选择人物"
+      },
+      {
+        "before": "<p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；首脑战规则在入场前说明。</p>",
+        "after": "<p>用过的牌进入<b>消耗区</b>，复原后可再用。方法见背包。</p>"
+      }
+    ]
+  },
+  {
+    "file": "game/src/run/game.run.shop.js",
+    "beforeSha256": "da4937bfb262d4e39e216ade73b687722c440d50f2d3131054d45d4c603a98ad",
+    "afterSha256": "890ec7494520aee0b09ccfca272ec01eb1fd4285d8a07f8322587ad958ecaef9",
+    "removedCharacters": 138,
+    "changes": [
+      {
+        "before": "<span class=\"shop-kicker\">ACQUISITION DESK // 08</span>",
+        "after": ""
+      },
+      {
+        "before": "<p>选择卡牌，按标价卖出</p>",
+        "after": ""
+      },
+      {
+        "before": "<span class=\"sell-ledger-kicker\">MERCHANT LEDGER</span>",
+        "after": ""
+      },
+      {
+        "before": "本页卖出共可得",
+        "after": "合计"
+      },
+      {
+        "before": "购买后随机揭晓一张卡",
+        "after": "随机卡牌 ×1"
+      }
+    ]
+  },
+  {
+    "file": "game/src/ui/achievement-gallery.js",
+    "beforeSha256": "eb363cb38580068bdc54452c5c56161f8bc897d8d49bc8c15dcc6a33db2d4f91",
+    "afterSha256": "ccfc7e4ac7c3d0d98bdb5e4c0def1c44eb802457eb300351b249bf1dc9a402c7",
+    "removedCharacters": 47,
+    "changes": [
+      {
+        "before": "<span class=\"ag-kicker\">WINTER / HONOURS</span>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/ui/overlay.js",
+    "beforeSha256": "0789cb16ac44efef7c7d4bdc205c9875d568eff4e809e432efc89b08765ca370",
+    "afterSha256": "b0a724424aed5666267a846e5b32e4b172b079f685ab34f851bb111f4ad8e7b1",
+    "removedCharacters": 32,
+    "changes": [
+      {
+        "before": "<small>FIELD MANUAL / 01</small>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/ui/extraction-rewards-view.js",
+    "beforeSha256": "b74923207327616fc661ed37fdb0811106e7afe3cf858419d459f3e49048eb34",
+    "afterSha256": "fd5132989dc5682cfaec82960ec7de965a80b8a9b062b32c310d66d4464d5c39",
+    "removedCharacters": 77,
+    "changes": [
+      {
+        "before": "<p>选择要留下的卡牌</p>",
+        "after": ""
+      },
+      {
+        "before": "<p class=\"exr-eyebrow\">安全撤离 / 整理战利品</p>",
+        "after": ""
+      },
+      {
+        "before": "${clear ? '首脑突破' : '安全撤离'} / 收获已保存",
+        "after": "${clear ? '首脑突破 · 已保存' : '收获已保存'}"
+      },
+      {
+        "before": "${remaining ? '' : ''}",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/src/hub/preparation.view.js",
+    "beforeSha256": "101703b42b9b64cd00568c57c2abcba13e23060c76f77bba6d428abd4d657360",
+    "afterSha256": "064d7119f527271d0cd358c9fd3f8984cfba88aeec4a12642360180816b09627",
+    "removedCharacters": 62,
+    "changes": [
+      {
+        "before": "<small>EXPEDITION INTENT</small>",
+        "after": ""
+      },
+      {
+        "before": "下一局目标与准备",
+        "after": "目标与预设"
+      },
+      {
+        "before": "应用预设会带入已选人物、宠物和卡牌；先确认人物，再在整备页确认宠物并出发。",
+        "after": "应用后，在整备页确认人物、伙伴与卡牌。"
+      },
+      {
+        "before": "尚未追踪目标。最多选择三项。",
+        "after": "未追踪目标"
+      }
+    ]
+  },
+  {
+    "file": "game/src/ui/performance-settings.js",
+    "beforeSha256": "3186437c930a32d60c644d2b635333cd28671dedfd2f5fa6054601242831c9f5",
+    "afterSha256": "fc9afd76c425bc7de38c77b6db821f9d50ee3e9e5c6b8251bd3e8ddc91c21a69",
+    "removedCharacters": 104,
+    "changes": [
+      {
+        "before": "减少装饰光效，降低画面开销，适合省电或运行不流畅时使用。",
+        "after": "减少光效，节省性能。"
+      },
+      {
+        "before": "兼顾画面清晰度与运行流畅度，推荐日常使用。",
+        "after": "画质与性能均衡。"
+      },
+      {
+        "before": "保留更细腻的背景与角色画面，以及完整装饰光效。",
+        "after": "精细画面，完整光效。"
+      },
+      {
+        "before": "地图最高按所选帧率绘制；战斗角色最高 60 帧，庭院最高 30 帧。实际流畅度取决于设备。",
+        "after": "地图按所选上限绘制；战斗角色 ≤60 帧，庭院 ≤30 帧。"
+      },
+      {
+        "before": "只调整画面表现，不改变战斗速度或结算。操作即时响应，卡牌文字与目标提示保留清晰；修改立即生效。",
+        "after": "立即生效；战斗速度不变。"
+      },
+      {
+        "before": "本次已生效，但浏览器未能保存；重新加载游戏后可能恢复原设置。",
+        "after": "已生效但保存失败；重载后可能恢复原设置。"
+      }
+    ]
+  },
+  {
+    "file": "game/index.html",
+    "beforeSha256": "1d6b62c672f37dd285ede3838e8650d29b199e64d8cc62767762f6d7b5b891b7",
+    "afterSha256": "01f8905c80c40887cc45285240272006eea138f46ba7d6646e52c72379801b99",
+    "removedCharacters": 58,
+    "changes": [
+      {
+        "before": "<small>CREDITS</small>",
+        "after": ""
+      },
+      {
+        "before": "<span class=\"td-en\">NODE TEST</span>",
+        "after": ""
+      }
+    ]
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "beforeSha256": "6841431b54d585bc21511e1538310c9105ddb6988643ba864ab1abb63efc6349",
+    "afterSha256": "0586f5be8c567304c7701dca259aa688fd7ec86f520eb6d99ac3ef227cb66a7d",
+    "removedCharacters": 48,
+    "changes": [
+      {
+        "before": "#title.home-composed .home-button-copy::after { font: 700 11px/1 var(--font-label); text-transform: uppercase; }",
+        "after": "#title.home-composed .home-button-copy::after { display: none; }"
+      }
+    ]
+  }
+]

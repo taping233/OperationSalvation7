@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-snapshot",
+  "observedAt": "2026-10-21T04:56:47.343Z",
+  "scene": "性能移植：背包三分区及指南返回",
+  "collector": {
+    "platform": "Codex",
+    "browser": "iab",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "page": {
+    "origin": "http://127.0.0.1:5338",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "selectors": [
+    {
+      "key": "bag",
+      "selector": "#overlay"
+    }
+  ],
+  "nodes": [
+    {
+      "attributes": {
+        "id": "overlay"
+      },
+      "identity": "overlay",
+      "key": "bag",
+      "rect": {
+        "height": 856.6875,
+        "width": 1523,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#overlay",
+      "styles": {
+        "display": "block",
+        "visibility": "visible"
+      },
+      "tag": "DIV",
+      "text": "×\n         背包\n        \n      \n      \n        \n          \n        \n          \n          \n        \n      \n          \n      \n        背包3\n      \n          \n      \n        安全格0/2\n      \n          \n      \n "
+    }
+  ],
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "空slot05建档，基地出征→地图打开背包→安全格→消耗区→随身背包→使用指南→返回；真实按钮点击，未注入游戏状态。"
+    },
+    {
+      "type": "static-inspection",
+      "detail": "读取当前背包DOM与计算样式。"
+    }
+  ],
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "screenshots": [
+    "docs/evidence/2026-10-21-WF-github-perf-integrate-1021/bag.png"
+  ]
+}

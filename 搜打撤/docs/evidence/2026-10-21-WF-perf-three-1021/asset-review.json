@@ -1,0 +1,23 @@
+{
+  "file": "game/src/battle/view/battle.layers.js",
+  "beforeSha256": "832d68a6896d9e3787b885013c4fb7d8f1017f7799ce1bd1fc776b1d3c191c5e",
+  "afterSha256": "7a241df28427fd4b3cad95ba35ce09458066f4aeb29347fac93e1d24a5688f5f",
+  "priorApproval": "a7b85df2212f8e53e493984416f355f41bf88b8b39f5dd438ae52b67a044ba2d",
+  "review": "Only old membership snapshot allocation moved behind drawn.size; complete normalized change matches reviewed five-line bookkeeping patch. All asset constructors and imports identical.",
+  "before": {
+    "excluded": 0,
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/hub/game.bag.view2.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/ui.js; retaining reviewed assets."
+    ]
+  },
+  "after": {
+    "excluded": 0,
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/hub/game.bag.view2.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/ui.js; retaining reviewed assets."
+    ]
+  },
+  "normalizedAfterSha256": "22d818dbcc304a099a782db85468b2f5b6956515b6888a61b66219fcf7a61c64"
+}

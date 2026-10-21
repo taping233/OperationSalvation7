@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-20T18:05:16.987Z",
+  "sourceEvidence": "docs/evidence/2026-10-21-WF-framework-solo-1021/types.md",
+  "sourceEvidenceSha256": "7ace813cb8b92d1cdb6ea3360a70e92529371c10d57cd9111906618e28b05436",
+  "node": "v24.13.0",
+  "typescript": "7.0.2",
+  "configs": [
+    {
+      "file": "jsconfig.framework-boundaries.json",
+      "sha256": "f6b54464ae8c1282f508af8e24a80cc7387002d7f07c2a608aed9f570a6fdc98"
+    },
+    {
+      "file": "jsconfig.framework-ports.json",
+      "sha256": "eb42f7fdccba2f178110867a2ce60f28310d190599d1d2b1be3232e87673c00c"
+    },
+    {
+      "file": "jsconfig.json",
+      "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+    },
+    {
+      "file": "jsconfig.battle-settlement.json",
+      "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+    },
+    {
+      "file": "jsconfig.battle-snapshot.json",
+      "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+    },
+    {
+      "file": "jsconfig.card-rules.json",
+      "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+    },
+    {
+      "file": "jsconfig.strict-foundations.json",
+      "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+    },
+    {
+      "file": "jsconfig.strict-selection.json",
+      "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+    },
+    {
+      "file": "jsconfig.strict-hand-selection.json",
+      "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+    },
+    {
+      "file": "jsconfig.strict-ui.json",
+      "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+    }
+  ],
+  "rows": [
+    {
+      "file": "game/src/battle/core/battle.effect-assembly.domain.js",
+      "expected": "6116ab534864a9d791fa3624d86b66fcf5897cd98cc7e1e5861a62b05bcc7bfd",
+      "actual": "6116ab534864a9d791fa3624d86b66fcf5897cd98cc7e1e5861a62b05bcc7bfd"
+    },
+    {
+      "file": "game/src/battle/core/battle.snapshot-projection.domain.js",
+      "expected": "7c1633cb15aee0978957583ecfba0c1320d1db8a8b8634c82474e9a41e44b1e8",
+      "actual": "7c1633cb15aee0978957583ecfba0c1320d1db8a8b8634c82474e9a41e44b1e8"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.instance.js",
+      "expected": "cc3f96871b455a73cb7f847f92c5cf539a46a593067cec97227be2da7759b6bf",
+      "actual": "cc3f96871b455a73cb7f847f92c5cf539a46a593067cec97227be2da7759b6bf"
+    },
+    {
+      "file": "game/src/battle/core/battle.core-ports.types.d.ts",
+      "expected": "1e86f7ef0df35f853431fa41ef89b30cb63cc885b2c87e405da22ba2bb053472",
+      "actual": "1e86f7ef0df35f853431fa41ef89b30cb63cc885b2c87e405da22ba2bb053472"
+    },
+    {
+      "file": "scripts/check-types.mjs",
+      "expected": "302d58adaabd4d4f051998422cf6494243aad0470d0634c65e3457a9ce1abf93",
+      "actual": "302d58adaabd4d4f051998422cf6494243aad0470d0634c65e3457a9ce1abf93"
+    },
+    {
+      "file": "jsconfig.framework-ports.json",
+      "expected": "eb42f7fdccba2f178110867a2ce60f28310d190599d1d2b1be3232e87673c00c",
+      "actual": "eb42f7fdccba2f178110867a2ce60f28310d190599d1d2b1be3232e87673c00c"
+    },
+    {
+      "file": "tests/framework-battle-ports-types.fixture.ts",
+      "expected": "d5c77823442fa78c29b7ac6718197a3f0ee1f34c24d7f336b23c693364ddb88e",
+      "actual": "d5c77823442fa78c29b7ac6718197a3f0ee1f34c24d7f336b23c693364ddb88e"
+    },
+    {
+      "file": "tests/framework-core-ports-types.test.js",
+      "expected": "a750b298a7b8d7174755a4ca3e913562eae89be03ec1af13d8b44b11b28b38ff",
+      "actual": "a750b298a7b8d7174755a4ca3e913562eae89be03ec1af13d8b44b11b28b38ff"
+    }
+  ],
+  "allMatch": true,
+  "result": "Reuses the frozen type agent final npm run typecheck; not a second typecheck execution."
+}

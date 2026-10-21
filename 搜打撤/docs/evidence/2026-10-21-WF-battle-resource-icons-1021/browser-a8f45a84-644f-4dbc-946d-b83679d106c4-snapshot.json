@@ -1,0 +1,174 @@
+{
+  "actions": [
+    {
+      "detail": "恢复5351测试档05首战；点击聚焦能量显示说明；真实法力光波选敌施放，能量2→1。当前4叠手牌，分页按单栏规则隐藏。",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"99\\n          \\n        \\n          \\n            1/2\",\"class\":\"sts-resource-dock\"}",
+      "key": "resources",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".sts-resource-dock",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "contents",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "auto",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": "99\n          \n        \n          \n            1/2"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"99\",\"class\":\"bt-pile clickable\"}",
+      "key": "deck",
+      "rect": {
+        "height": 36,
+        "width": 117.32500457763672,
+        "x": 37.32500076293945,
+        "y": 596
+      },
+      "selector": ".sts-hud-l .bt-pile",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(230, 238, 234)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "20px",
+        "height": "54px",
+        "line-height": "24px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "175.987px"
+      },
+      "tag": "BUTTON",
+      "text": "99"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1/2\",\"class\":\"sts-energy\"}",
+      "key": "energy",
+      "rect": {
+        "height": 36,
+        "width": 117.32500457763672,
+        "x": 37.32500076293945,
+        "y": 650
+      },
+      "selector": ".sts-energy",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(243, 229, 198)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "20px",
+        "height": "54px",
+        "line-height": "24px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "175.987px"
+      },
+      "tag": "DIV",
+      "text": "1/2"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"IMG\",\"text\":\"\",\"class\":\"battle-energy-emblem battle-control-icon\"}",
+      "key": "emblem",
+      "rect": {
+        "height": 32,
+        "width": 32,
+        "x": 37.32500076293945,
+        "y": 652
+      },
+      "selector": ".battle-energy-emblem",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(243, 229, 198)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "20px",
+        "height": "48px",
+        "line-height": "24px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "48px"
+      },
+      "tag": "IMG",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-21T07:12:53.497Z",
+  "page": {
+    "origin": "http://127.0.0.1:5351",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "左侧资源入口去文字、大图标与能量数值",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-21-WF-battle-resource-icons-1021/battle-after.png"
+  ],
+  "selectors": [
+    {
+      "key": "resources",
+      "selector": ".sts-resource-dock"
+    },
+    {
+      "key": "deck",
+      "selector": ".sts-hud-l .bt-pile"
+    },
+    {
+      "key": "energy",
+      "selector": ".sts-energy"
+    },
+    {
+      "key": "emblem",
+      "selector": ".battle-energy-emblem"
+    }
+  ]
+}

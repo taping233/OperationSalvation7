@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-github-perf-integrate-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "将已审查远端性能优化移植到现行Vite源码，保留类型改造及其他会话成果",
+  "paths": [
+    "game/src/core/bag-render-derivation.js",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.rules.js",
+    "game/src/run/game.session.bag.js",
+    "game/src/agent",
+    "game/src/ui/page-visual-ready.js",
+    "game/src/ui/page-visual-readiness-sharing.js",
+    "game/src/ui/camp-entry.js",
+    "game/src/ui/term-tips.js",
+    "game/src/ui/term-tips.runtime.js",
+    "game/src/run/event-lifecycle.js",
+    "game/src/run/event-runtime.js",
+    "game/src/run/game.run.events.js",
+    "game/src/run/game.run.flow.js",
+    "game/src/game.boot.js",
+    "scripts/runtime-asset-redundancy.mjs",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "vite.config.js",
+    "game/assets/asset-manifest.json",
+    "game/src/generated",
+    "tests",
+    "docs/performance.md",
+    "docs/agent-protocol.md",
+    "docs/evidence/2026-10-21-WF-github-perf-integrate-1021",
+    "game/src/battle/core/battle.snapshot-projection.domain.js",
+    "docs/architecture.md",
+    "game/art-source/chests/large-rig-v1-local"
+  ],
+  "doneWhen": [
+    "各组相关回归及类型静态门通过，保留本地四张过场登记和其他未提交改动",
+    "资源收益按当前消费者重新审查，失败测试明确解决或排除该组",
+    "当前内置窗口验代表场景，不能运行时留明阻塞；不提交或推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "相关回归分批汇合85文件960项，Agent最新23文件169项且输入稳定，见自有evidence/regression-coverage.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "11组类型549/549及strict50/549，定向lint、609文件语法、资产0错误570历史告警、664条文档链接与diff检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "隔离标准npm run build及原预算通过，165.54MiB；内置当前窗口设置、基地、背包三分区和指南往返通过，错误日志为空",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "远端CI未覆盖本轮未提交字节；本地未重跑全量Vitest",
+    "事件冷入口与Agent网络LLM、首脑自然实战仅自动回归，未列实页通过；浏览器安全审批拒绝原始CDP冷模块下载检查，该项未计为已验",
+    "尖塔会话在途施放UI和后续Agent观察/策略排除于隔离构建/实页，其功能归该会话；主线保留这些改动并完成当前Agent兼容回归"
+  ],
+  "updatedAt": "2026-10-21T05:08:58.654Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

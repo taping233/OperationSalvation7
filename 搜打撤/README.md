@@ -2,7 +2,7 @@
 
 四层相邻节点探索与卡牌战斗结合的单机搜打撤游戏。当前包版本为 v0.60.0「冬日远征体验改造」，主线为 Vite 网页版；开发范围与冻结边界见根 AGENTS.md。
 
-开发从[快速入口](docs/QUICKSTART.md)进入；[文档导航](docs/README.md)按改动定位资料，[项目状态](docs/STATUS.md)提供交付指针。带日期的[历史记录](docs/archive/README.md)只代表当时时点。
+开发从[快速入口](docs/QUICKSTART.md)进入；[源码导航](game/src/README.md)按功能定位实现，[文档导航](docs/README.md)定位规范，[项目状态](docs/STATUS.md)提供交付指针。带日期的[历史记录](docs/archive/README.md)只代表当时时点。
 
 ## 快速开始
 

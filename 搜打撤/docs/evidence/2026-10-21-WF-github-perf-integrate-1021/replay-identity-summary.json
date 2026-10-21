@@ -1,0 +1,23 @@
+{
+  "numTotalTests": 31,
+  "numPassedTests": 30,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "success": false,
+  "exitCode": 1,
+  "files": 4,
+  "failed": [
+    {
+      "name": "D:/素材/代号柒/搜打撤/tests/agent-replay-identity.test.js",
+      "message": "",
+      "tests": [
+        {
+          "name": "still rejects stale membership, changed fuel and changed targets in both projections",
+          "failures": [
+            "AssertionError: expected '$.battle.infusing.battleToken' to contain 'battle.pendingTarget.battleToken'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\agent-replay-identity.test.js:30:79\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runFiles (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1787:3)"
+          ]
+        }
+      ]
+    }
+  ]
+}

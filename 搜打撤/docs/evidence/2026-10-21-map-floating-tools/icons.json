@@ -1,0 +1,47 @@
+[
+  {
+    "tool": "bag",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-300d7d04-b9de-4eec-9b7d-4a2107d939a2.png",
+    "sourceSha256": "82c5cca4a0b69fe912bd941f7afb39fad8654c8304a360f9b5f3d24787a9748d",
+    "path": "game/assets/ui/map-tools-1021/bag-v2.webp",
+    "sha256": "19d0258ea69363be8fd57a19222bb8368b5e4dfcb32c08203b547c65701850fd",
+    "bytes": 10368,
+    "encoding": "lossless RGBA WebP, 256px; original PNG retained, no recolour, extraction or added lighting"
+  },
+  {
+    "tool": "safe",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-07144b4a-7805-4509-a700-9dfda7d00bb6.png",
+    "sourceSha256": "86355e267d34a3765f78853ebaa2d719ab9719ce8f3f5bb97f2a135292cf608c",
+    "path": "game/assets/ui/map-tools-1021/safe-v2.webp",
+    "sha256": "82bb782a889bc8c3797eef5f65116a9825c74bf4e6963b1bebb857f347caa775",
+    "bytes": 11276,
+    "encoding": "lossless RGBA WebP, 256px; original PNG retained, no recolour, extraction or added lighting"
+  },
+  {
+    "tool": "pocket",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-a4b4176d-0149-4cbf-b2db-5b79fcd13d5d.png",
+    "sourceSha256": "3212d17281296872e33a6a9dc3eaddb7f5e2af71f9f849bce8f4666eecf5fab8",
+    "path": "game/assets/ui/map-tools-1021/pocket-v2.webp",
+    "sha256": "0e49c66ff29f2427a42c238528b831cf63c7e1e6610a62c0b75d77a58641719b",
+    "bytes": 11268,
+    "encoding": "lossless RGBA WebP, 256px; original PNG retained, no recolour, extraction or added lighting"
+  },
+  {
+    "tool": "focus",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-663b1db0-99aa-40a2-8fe6-6895e972d30c.png",
+    "sourceSha256": "a8d9430e6dc758e2092896b700efa623b3274a4471bf82daa778c7f7f09e770f",
+    "path": "game/assets/ui/map-tools-1021/focus-v2.webp",
+    "sha256": "e6737899cd522e9da9044a9256c76ed55cc9580eb7dff1125afa58e08da0893a",
+    "bytes": 10640,
+    "encoding": "lossless RGBA WebP, 256px; original PNG retained, no recolour, extraction or added lighting"
+  },
+  {
+    "tool": "overview",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-5b5284ff-6d3b-48f6-b134-bc1423e64a0a.png",
+    "sourceSha256": "7ec0964ad994cd587ab7c53d697528449368515617b3072552401e56dff32bc7",
+    "path": "game/assets/ui/map-tools-1021/overview-v2.webp",
+    "sha256": "c9cb6db4b607061901372c919177fdcbabe0fc30a06f3bf4877563a21fcc312f",
+    "bytes": 11076,
+    "encoding": "lossless RGBA WebP, 256px; original PNG retained, no recolour, extraction or added lighting"
+  }
+]

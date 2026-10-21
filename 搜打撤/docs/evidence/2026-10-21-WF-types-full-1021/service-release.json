@@ -1,0 +1,26 @@
+{
+  "atUtc": "2026-10-21T04:03:21.4815545Z",
+  "processId": 17432,
+  "creationUtc": "2026-10-21T03:13:28.4121550Z",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5337 --strictPort",
+  "ownedChildren": [
+    {
+      "ProcessId": 33420,
+      "ExecutablePath": "C:\\WINDOWS\\system32\\conhost.exe",
+      "CommandLine": "\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4",
+      "CreationDate": "2026-10-21T11:13:28.420369+08:00"
+    },
+    {
+      "ProcessId": 31832,
+      "ExecutablePath": "D:\\素材\\代号柒\\搜打撤\\node_modules\\@esbuild\\win32-x64\\esbuild.exe",
+      "CommandLine": "D:\\素材\\代号柒\\搜打撤\\node_modules\\@esbuild\\win32-x64\\esbuild.exe --service=0.25.12 --ping",
+      "CreationDate": "2026-10-21T11:13:28.799169+08:00"
+    }
+  ],
+  "remainingOwnedChildren": [],
+  "listenersAfter": [],
+  "portReleased": true,
+  "copyPreserved": true,
+  "slot05Preserved": true
+}

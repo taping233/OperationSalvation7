@@ -1,0 +1,56 @@
+[
+  {
+    "bytes": 548609,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "c97b74f853b1bd15f287ffce7e30ba8019eec0677f5ada0c5c840b6d51229d62",
+    "path": ".tmp/portable-clean-1021/inputs-motion.json"
+  },
+  {
+    "bytes": 31514,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "d667246b0d55aef3716cb2021208afd123238faa11110fb1b73c29e103af5ca4",
+    "path": ".tmp/portable-clean-1021/vite-build-motion-final.log"
+  },
+  {
+    "bytes": 1261,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "84d7f9864cca779e1b360722a256609fc24c9ea8d9b505e6d4a5caf09896a8b9",
+    "path": ".tmp/portable-clean-1021/motion-tests-final.log"
+  },
+  {
+    "bytes": 747,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "b6b3763177f24f54824f2cfa7083e75be7fc90cfc188aaa8c1efb7c1af495716",
+    "path": ".tmp/portable-clean-1021/motion-types.log"
+  },
+  {
+    "bytes": 0,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "path": ".tmp/portable-clean-1021/motion-types-final.log"
+  },
+  {
+    "bytes": 2563,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "44a3f7e77fac43e30ae8ca99cef55c99126850f7e76a2016217b1d5a0e4aedd2",
+    "path": ".tmp/portable-clean-1021/builder-motion.log"
+  },
+  {
+    "bytes": 301191,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "8e8e63e62cf86bb10f2a274122974be0669b27e9d7d310d33cfb4330f737a956",
+    "path": ".tmp/portable-clean-1021/audit-motion/production-manifest.json"
+  },
+  {
+    "bytes": 137706,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "14617a33b9bbdaf1a1b4e78ab83bd547596cbbd6e8c76df7cd019ec9eb5c9db1",
+    "path": ".tmp/portable-clean-1021/audit-motion/asset-references.json"
+  },
+  {
+    "bytes": 2284,
+    "acquisition": "本轮独立副本构建/定向检查/审计命令生成；仓库根相对路径",
+    "sha256": "7eee8cd122297b7720065d3200baa985c8756337bd7899dcbc862dc9b289710a",
+    "path": ".tmp/portable-clean-1021/audit-motion/protocol.json"
+  }
+]

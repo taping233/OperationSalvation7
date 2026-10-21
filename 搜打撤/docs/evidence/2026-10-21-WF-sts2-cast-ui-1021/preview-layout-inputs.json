@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-21T05:10:53.086Z",
+  "files": [
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "sha256": "ffdd311bdae651636901f1a46bac3d940057abdef848551e8c02d5e33130f7f8"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "8142326743fbff108db14a7416db673abeb36ac386bba51c961bc451d0a3345d"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "sha256": "693992e283a388efd7735412089fcbb47753671111189b4d45d21227c6714ea1"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "sha256": "f8bcfb20db8494a0400c55d4b79549f8ba7bbd914f0c228a3e97114ac3975ca3"
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "sha256": "94e61845f0cbfbd192a848124b0d8ac254c03164417c41e24ceaa52b2bfcac81"
+    }
+  ]
+}

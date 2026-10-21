@@ -1,0 +1,84 @@
+{
+  "task": "WF-framework-solo-1021",
+  "mode": "recovery",
+  "generatedAt": "2026-10-20T18:12:04.016Z",
+  "node": "v24.13.0",
+  "passed": true,
+  "inputStable": true,
+  "groupsStable": {
+    "code": true,
+    "docs": true,
+    "state": true,
+    "environment": true
+  },
+  "changedFiles": [],
+  "steps": [
+    {
+      "command": [
+        "node",
+        "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "test:target",
+        "--",
+        "tests/facade-snapshot-drift.test.js",
+        "tests/architecture-boundaries.test.js",
+        "tests/game-session-browser-boundary.test.js"
+      ],
+      "startedAt": "2026-10-20T18:12:00.453Z",
+      "endedAt": "2026-10-20T18:12:02.647Z",
+      "exitCode": 0,
+      "signal": null,
+      "log": ".tmp/WF-framework-solo-1021-integration/recovery-2026-10-20T18-12-00.449Z-1.log",
+      "logBytes": 1487,
+      "logSha256": "286ac5f8e6ca56dc5188882698453af124f7636dc2a0badece860b0070786bc2",
+      "testFiles": "3 passed (3)",
+      "tests": "48 passed (48)"
+    },
+    {
+      "command": [
+        "node",
+        "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "docs:check"
+      ],
+      "startedAt": "2026-10-20T18:12:02.647Z",
+      "endedAt": "2026-10-20T18:12:03.022Z",
+      "exitCode": 0,
+      "signal": null,
+      "log": ".tmp/WF-framework-solo-1021-integration/recovery-2026-10-20T18-12-00.449Z-2.log",
+      "logBytes": 3269,
+      "logSha256": "ffc90cefcebf5ce72ba5472417dfc4326cd71e6dc189983ae980df596c62d81d",
+      "testFiles": null,
+      "tests": null
+    }
+  ],
+  "reusedChecks": [],
+  "before": {
+    "sha256": "4e9a4ef6cb239b56c6dff6c672d495241028f32df9cc868513fa6afa623a0471",
+    "groups": {
+      "code": "47f5a29e32a5b5eff43d4bb24643bee9e7a70d051440c860d43ad3250cf4ffff",
+      "docs": "85e464e9c915dcb5154a0e3eb87d0495c8eb7571730bf84e4ec5ee09b8dd33b8",
+      "state": "e025e27d90ec61f6de491adb4e8cfcf07f61bc76ef6f415f500b4674920c1ccc",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "files": 4144,
+    "path": ".tmp/WF-framework-solo-1021-integration/recovery-2026-10-20T18-12-00.449Z-before.json",
+    "manifestSha256": "fa3af3012868fc457edb9d4e768cea762e14391f8c4ae55994b91580cf083c18"
+  },
+  "after": {
+    "sha256": "4e9a4ef6cb239b56c6dff6c672d495241028f32df9cc868513fa6afa623a0471",
+    "groups": {
+      "code": "47f5a29e32a5b5eff43d4bb24643bee9e7a70d051440c860d43ad3250cf4ffff",
+      "docs": "85e464e9c915dcb5154a0e3eb87d0495c8eb7571730bf84e4ec5ee09b8dd33b8",
+      "state": "e025e27d90ec61f6de491adb4e8cfcf07f61bc76ef6f415f500b4674920c1ccc",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "files": 4144,
+    "path": ".tmp/WF-framework-solo-1021-integration/recovery-2026-10-20T18-12-00.449Z-after.json",
+    "manifestSha256": "fa3af3012868fc457edb9d4e768cea762e14391f8c4ae55994b91580cf083c18"
+  },
+  "limits": [
+    "已锁资产字节与目录；未监控其他图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验",
+    "No build, real browser interaction, or remote CI claim. Logs/manifests retained under .tmp; regenerate using this script."
+  ]
+}

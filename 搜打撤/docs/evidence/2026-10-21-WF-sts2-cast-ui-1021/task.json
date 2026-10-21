@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-sts2-cast-ui-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "参考本地尖塔源码落实注能连贯施放、战场选材与发现布局、道具明确使用和公共选靶",
+  "paths": [
+    "game/src/battle/core/battle.card-play.domain.js",
+    "game/src/battle/core/battle.core.js",
+    "game/src/battle/core/battle.core-ports.types.d.ts",
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/core/battle.snapshot-projection.domain.js",
+    "game/src/battle/battle.snapshot.types.d.ts",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.selection-ui.js",
+    "game/src/battle/view/battle.infusion-view.js",
+    "game/src/battle/view/battle.infusion-material-state.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.discover-view.js",
+    "game/src/battle/view/battle.potion-use.js",
+    "game/src/battle/view/battle.pile-view.js",
+    "game/src/battle/view/battle.decision-content.js",
+    "game/src/battle/view/battle.decision-shell.js",
+    "game/src/battle/view/battle.overlays.js",
+    "game/css/battle-infusion.css",
+    "game/css/battle-discover.css",
+    "game/css/battle-potion-use.css",
+    "game/css/home-polish.css",
+    "game/css/battle-stage.css",
+    "game/css/battle-pile-view.css",
+    "game/src/agent/agent.state.js",
+    "game/src/agent/agent.policy.js",
+    "tests",
+    "docs/rules.md",
+    "docs/infusion-material-controls.md",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-21-WF-sts2-cast-ui-1021",
+    "game/src/run/chests.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/ui/chest-reward-overview.js",
+    "game/css/chest-reward-overview.css"
+  ],
+  "doneWhen": [
+    "可选注能缺材料仍可直接施放，鼠标键盘统一语义，选靶返回保留材料，最终提交才扣资源",
+    "主卡材料已选区同屏，发现卡清楚，战场布局参考尖塔并保持本作风格",
+    "道具点击有明确使用入口，目标取消不消耗，防重复及陈旧输入",
+    "首页选项白边移除；能量紧凑、控制与手牌互不冲突；选择后景轻度虚化且可辨",
+    "左侧自上而下为牌库、手牌分栏切换和能量且无常驻外框；牌堆整卡网格和独立大卡阅读保留实际牌序/UID/规则；发现背景隔离地图",
+    "完成实现与预览同步；老板最后明确取消后续验证，已有检查记录仅保留原覆盖范围",
+    "发现界面隐藏下方工具栏；宝箱三选一与可全部领取以不同构图和领取状态区分，保留原奖励规则",
+    "牌库、切栏与能量统一字号和位置；切栏显示上一栏、下一栏与当前进度，配合短暂换页过渡，保持手牌和控制区边界"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "24个实现文件及本地预览入口复制完成；仅记录同步动作，不表示最终运行或视觉已验证",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板最后明确指令，未继续任何测试、静态检查或浏览器验证；最后牌堆、背景隔离、左侧控件以及追加的发现底栏、宝箱领取视觉和手牌切栏均未实页复验。",
+    "最后一次119项相关回归有10项旧注能DOM契约未通过，按指令未继续迁移或重跑；先前通过记录不冒称覆盖最终字节。"
+  ],
+  "updatedAt": "2026-10-21T06:17:24.198Z",
+  "doneWhenConfirmed": true,
+  "followup": {
+    "status": "implemented-and-synced",
+    "record": "followup-sync.json",
+    "verification": "按老板明确指令，发现底栏、宝箱领取视觉、统一字号和切栏整改均未继续测试、检查或浏览器验收。"
+  }
+}

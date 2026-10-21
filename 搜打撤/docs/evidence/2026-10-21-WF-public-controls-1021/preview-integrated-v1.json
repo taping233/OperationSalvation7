@@ -1,0 +1,17 @@
+{
+  "phase": "integrated-v1",
+  "capturedAt": "2026-10-21T05:29:50.280Z",
+  "target": ".tmp/public-controls-1021/preview",
+  "items": [
+    {
+      "path": "game/css/public-controls.css",
+      "bytes": 2089,
+      "sha256": "710f79fa7a0fcd55c120a107c91d21a2b132fd8abaf264b7e90c1e1c32adc340"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "bytes": 47914,
+      "sha256": "da4937bfb262d4e39e216ade73b687722c440d50f2d3131054d45d4c603a98ad"
+    }
+  ]
+}

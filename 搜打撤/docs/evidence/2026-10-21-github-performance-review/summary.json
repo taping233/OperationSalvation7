@@ -1,0 +1,32 @@
+{
+  "exitCode": 1,
+  "numTotalTestSuites": 37,
+  "numPassedTestSuites": 35,
+  "numFailedTestSuites": 2,
+  "numTotalTests": 267,
+  "numPassedTests": 266,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "success": false,
+  "failures": [
+    {
+      "name": "D:/素材/代号柒/.tmp/github-perf-review-1021/candidate/tests/runtime-asset-redundancy.test.js",
+      "message": "",
+      "assertions": [
+        {
+          "ancestorTitles": [
+            "retained high-resolution chest and inline-replaced weather sources"
+          ],
+          "fullName": "retained high-resolution chest and inline-replaced weather sources rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family",
+          "status": "failed",
+          "title": "rereads binary bytes on every collection; redrawn, missing and unreadable sources restore their family",
+          "duration": 44.33179999999993,
+          "failureMessages": [
+            "Error: EEXIST: file already exists, mkdir 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{340fe61b-301a-4def-8d5a-1b6ade17e381}\\AC\\Temp\\asset-source-guard-ewG7Tf\\game\\assets\\scenes\\chests\\small-rig-v1\\frame-00.webp'\n    at mkdirSync (node:fs:1363:26)\n    at D:\\素材\\代号柒\\.tmp\\github-perf-review-1021\\candidate\\tests\\runtime-asset-redundancy.test.js:441:14\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+          ],
+          "meta": {}
+        }
+      ]
+    }
+  ]
+}

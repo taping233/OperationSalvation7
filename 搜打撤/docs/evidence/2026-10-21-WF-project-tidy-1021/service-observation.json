@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-10-21T06:55:23.223474+00:00",
+  "ports": [
+    {
+      "port": 5200,
+      "rows": [],
+      "netstatExitCode": 0
+    },
+    {
+      "port": 5319,
+      "rows": [],
+      "netstatExitCode": 0
+    },
+    {
+      "port": 5346,
+      "rows": [],
+      "netstatExitCode": 0
+    },
+    {
+      "port": 5347,
+      "rows": [],
+      "netstatExitCode": 0
+    },
+    {
+      "port": 5348,
+      "rows": [],
+      "netstatExitCode": 0
+    }
+  ],
+  "scope": "Read-only OS TCP table; no process stop or service ownership transfer."
+}

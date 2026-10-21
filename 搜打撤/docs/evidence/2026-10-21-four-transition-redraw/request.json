@@ -1,0 +1,129 @@
+{
+  "status": "four-approved-installed",
+  "workflow": "原有四张运行图→内置ImageGen按项目现行画风重绘",
+  "constraint": "阴暗未来城市；原主构图，少细节，连续空间；研究所排除",
+  "items": [
+    {
+      "id": "retreat",
+      "name": "战斗撤退：全身而退",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-extract-anime-v2.webp",
+      "difference": "Retain the original central green extraction flare and soft smoke, low city silhouette enclosing the square and the single supply bag in the lower right. Treat the city as two or three dark urban silhouette groups, the ground as a few connected cold planes, and the bag as one readable simple shape. Preserve the green signal as the focal identity, with physically consistent light pooling on the ground. Merge rubble into broad ground-edge masses, no individually rendered debris everywhere.",
+      "prompt": "Repaint Image 1, the existing game scene, in our current hand-painted Japanese anime block-painting style. Images 2 and 3 are technique references for opaque layered blocks, firm shadow facets and varied edges; Image 4 supplies selective drawn contours and chromatic overpainting. Borrow technique ONLY: do not copy their people, clothes, hair, white backgrounds or signatures.\nKeep Image 1's original wide 16:9 framing, viewpoint, main subject placement and light direction. Preserve its scene identity. The theme is a DARK FUTURISTIC CITY; do not turn it into mountains, natural cliffs, a sunny vista, medieval ruins or a disconnected abstract landscape. Use broad coherent architectural masses and only necessary readable technological cues.\nPaint large connected opaque forms with directional strokes and selected smaller structured facets. Dark ink-blue/charcoal and chromatic gray shadows remain readable; restrained cold light and one concentrated warm or vivid accent. Hand-drawn edges vary in weight and disappear into paint; do not retrace every original line. Reduce repeated window grids, rubble fragments, pipework, decorative seams and tiny highlights into quiet grouped shapes. Keep the ground continuous, perspective understandable and shadows attached to forms. No new towers, bridge networks, dense machinery or extra props. No photorealism, polished 3D, flat vector look, scratch-grain filter, evenly scattered triangular fragments, text, logos, UI, borders or people. One cohesive finished illustration, approximately 1672×941.\nSCENE-SPECIFIC CORRECTIONS: Retain the original central green extraction flare and soft smoke, low city silhouette enclosing the square and the single supply bag in the lower right. Treat the city as two or three dark urban silhouette groups, the ground as a few connected cold planes, and the bag as one readable simple shape. Preserve the green signal as the focal identity, with physically consistent light pooling on the ground. Merge rubble into broad ground-edge masses, no individually rendered debris everywhere.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-extract-anime-v2.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg"
+      ],
+      "status": "approved-installed",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-7cae7516-8cb3-4dda-9bbf-df2a65bbfece.png",
+      "output": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\retreat.png",
+      "preview": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\retreat.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "c62f1e2645d4fc4e295f89eb56bb8ec12bbac07416aea2ea80a4de18cc893126",
+      "webpSha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+      "webpBytes": 212598,
+      "referenceHashes": [
+        "a373e8e00dbba37f9ed69fc93121bbb4ac82ea4dcd55f1fab4d0776da4d62227",
+        "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+        "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+        "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+      ]
+    },
+    {
+      "id": "door",
+      "name": "大门前置短过场",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-door-anime-v2.webp",
+      "difference": "Retain the centered closed modern barrier gate, framing city masses, yellow-black caution identity and single red status light at its upper right. Simplify the gate to large structurally continuous panels and a few correctly joined frame planes. Reduce numerous strips and tiny fittings. The foreground obstructions become a few coherent low shapes rather than a web of sticks. Suppress repeated window grids and ruined-building detail; keep it a dark futuristic urban gate.",
+      "prompt": "Repaint Image 1, the existing game scene, in our current hand-painted Japanese anime block-painting style. Images 2 and 3 are technique references for opaque layered blocks, firm shadow facets and varied edges; Image 4 supplies selective drawn contours and chromatic overpainting. Borrow technique ONLY: do not copy their people, clothes, hair, white backgrounds or signatures.\nKeep Image 1's original wide 16:9 framing, viewpoint, main subject placement and light direction. Preserve its scene identity. The theme is a DARK FUTURISTIC CITY; do not turn it into mountains, natural cliffs, a sunny vista, medieval ruins or a disconnected abstract landscape. Use broad coherent architectural masses and only necessary readable technological cues.\nPaint large connected opaque forms with directional strokes and selected smaller structured facets. Dark ink-blue/charcoal and chromatic gray shadows remain readable; restrained cold light and one concentrated warm or vivid accent. Hand-drawn edges vary in weight and disappear into paint; do not retrace every original line. Reduce repeated window grids, rubble fragments, pipework, decorative seams and tiny highlights into quiet grouped shapes. Keep the ground continuous, perspective understandable and shadows attached to forms. No new towers, bridge networks, dense machinery or extra props. No photorealism, polished 3D, flat vector look, scratch-grain filter, evenly scattered triangular fragments, text, logos, UI, borders or people. One cohesive finished illustration, approximately 1672×941.\nSCENE-SPECIFIC CORRECTIONS: Retain the centered closed modern barrier gate, framing city masses, yellow-black caution identity and single red status light at its upper right. Simplify the gate to large structurally continuous panels and a few correctly joined frame planes. Reduce numerous strips and tiny fittings. The foreground obstructions become a few coherent low shapes rather than a web of sticks. Suppress repeated window grids and ruined-building detail; keep it a dark futuristic urban gate.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-door-anime-v2.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg"
+      ],
+      "status": "approved-installed",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-c7d7f36c-57fa-4200-80e2-ec5a4f718ddc.png",
+      "output": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\door.png",
+      "preview": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\door.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "17cc799a0658e67a668d569ee3e14a3805888f3cbcbef9afcc5421367f7f4223",
+      "webpSha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+      "webpBytes": 257088,
+      "referenceHashes": [
+        "3f099a756a4f68cbd4256e41ba2fe3624e41297c8d4257ff83a2cc594f72e682",
+        "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+        "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+        "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+      ]
+    },
+    {
+      "id": "altar",
+      "name": "祭坛前置短过场",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-altar-anime-v2.webp",
+      "difference": "Retain the tall central violet-cyan contamination crystal rising from the floor of the dark modern indoor hall, with cold reflected light on the continuous floor. Simplify the crystal to one main connected shape and a few subordinate facets and nearby fragments, not hundreds of splinters. The hall is a restrained modern urban interior of broad wall planes and a low balcony silhouette; remove busy ceiling grids, repeated doors, sports-court line clutter and random floor cracks. Keep one coherent source of light. Do not create a fantasy temple or crystal island.",
+      "prompt": "Repaint Image 1, the existing game scene, in our current hand-painted Japanese anime block-painting style. Images 2 and 3 are technique references for opaque layered blocks, firm shadow facets and varied edges; Image 4 supplies selective drawn contours and chromatic overpainting. Borrow technique ONLY: do not copy their people, clothes, hair, white backgrounds or signatures.\nKeep Image 1's original wide 16:9 framing, viewpoint, main subject placement and light direction. Preserve its scene identity. The theme is a DARK FUTURISTIC CITY; do not turn it into mountains, natural cliffs, a sunny vista, medieval ruins or a disconnected abstract landscape. Use broad coherent architectural masses and only necessary readable technological cues.\nPaint large connected opaque forms with directional strokes and selected smaller structured facets. Dark ink-blue/charcoal and chromatic gray shadows remain readable; restrained cold light and one concentrated warm or vivid accent. Hand-drawn edges vary in weight and disappear into paint; do not retrace every original line. Reduce repeated window grids, rubble fragments, pipework, decorative seams and tiny highlights into quiet grouped shapes. Keep the ground continuous, perspective understandable and shadows attached to forms. No new towers, bridge networks, dense machinery or extra props. No photorealism, polished 3D, flat vector look, scratch-grain filter, evenly scattered triangular fragments, text, logos, UI, borders or people. One cohesive finished illustration, approximately 1672×941.\nSCENE-SPECIFIC CORRECTIONS: Retain the tall central violet-cyan contamination crystal rising from the floor of the dark modern indoor hall, with cold reflected light on the continuous floor. Simplify the crystal to one main connected shape and a few subordinate facets and nearby fragments, not hundreds of splinters. The hall is a restrained modern urban interior of broad wall planes and a low balcony silhouette; remove busy ceiling grids, repeated doors, sports-court line clutter and random floor cracks. Keep one coherent source of light. Do not create a fantasy temple or crystal island.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-altar-anime-v2.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg"
+      ],
+      "status": "approved-installed",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-722d4e49-b2a5-4144-aba5-d3b3c4efafca.png",
+      "output": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\altar.png",
+      "preview": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\altar.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "c07f184fcc8ee0b2c259445d0d6fdc35d115c2788f60ea47b6dc364b1fdcbe40",
+      "webpSha256": "4cff52225a7894f4c00b0f058c9039646d1a0c853d1866b1378e3b90d84fed3b",
+      "webpBytes": 281942,
+      "referenceHashes": [
+        "09c160a54c59463ca8c32dd177038f200337f6d30b4fb3a77348e3f5b6234b2d",
+        "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+        "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+        "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+      ]
+    },
+    {
+      "id": "shop",
+      "name": "商店前置短过场",
+      "source": "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-shop-anime-v2.webp",
+      "difference": "Retain the original sheltered stall/canopy silhouette, warm illuminated goods area and cold dark city surrounding it. Simplify the canopy into broad folds, crates into a few simple modern supply-case masses, and the many oil lanterns into three modest coherent warm light sources. Keep the recognizable shop composition and continuous ground. Reduce wiring, tiny goods, repeated windows and debris. Suggest future-city scavenger trade with modern composite supply cases and restrained practical lighting, without adding complex machinery, medieval market decorations or text.",
+      "prompt": "Repaint Image 1, the existing game scene, in our current hand-painted Japanese anime block-painting style. Images 2 and 3 are technique references for opaque layered blocks, firm shadow facets and varied edges; Image 4 supplies selective drawn contours and chromatic overpainting. Borrow technique ONLY: do not copy their people, clothes, hair, white backgrounds or signatures.\nKeep Image 1's original wide 16:9 framing, viewpoint, main subject placement and light direction. Preserve its scene identity. The theme is a DARK FUTURISTIC CITY; do not turn it into mountains, natural cliffs, a sunny vista, medieval ruins or a disconnected abstract landscape. Use broad coherent architectural masses and only necessary readable technological cues.\nPaint large connected opaque forms with directional strokes and selected smaller structured facets. Dark ink-blue/charcoal and chromatic gray shadows remain readable; restrained cold light and one concentrated warm or vivid accent. Hand-drawn edges vary in weight and disappear into paint; do not retrace every original line. Reduce repeated window grids, rubble fragments, pipework, decorative seams and tiny highlights into quiet grouped shapes. Keep the ground continuous, perspective understandable and shadows attached to forms. No new towers, bridge networks, dense machinery or extra props. No photorealism, polished 3D, flat vector look, scratch-grain filter, evenly scattered triangular fragments, text, logos, UI, borders or people. One cohesive finished illustration, approximately 1672×941.\nSCENE-SPECIFIC CORRECTIONS: Retain the original sheltered stall/canopy silhouette, warm illuminated goods area and cold dark city surrounding it. Simplify the canopy into broad folds, crates into a few simple modern supply-case masses, and the many oil lanterns into three modest coherent warm light sources. Keep the recognizable shop composition and continuous ground. Reduce wiring, tiny goods, repeated windows and debris. Suggest future-city scavenger trade with modern composite supply cases and restrained practical lighting, without adding complex machinery, medieval market decorations or text.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/scenes/scene-shop-anime-v2.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg"
+      ],
+      "status": "approved-installed",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-833ffd43-f668-4260-b3b8-9bfc0213de1c.png",
+      "output": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\shop.png",
+      "preview": "D:\\素材\\代号柒\\.tmp\\imagegen\\four-transition-redraw-20261021\\shop.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "97ca57022c25b850262b7af78cc3ca19085d39af4797e346662be89fac0b7ed1",
+      "webpSha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+      "webpBytes": 287062,
+      "referenceHashes": [
+        "750e55cc93c087d0d7809beccf4a2c96446a0b4b8bfbadea39148b6ce2b647d8",
+        "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+        "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+        "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+      ]
+    }
+  ],
+  "integration": "四张为重绘候选，未替换运行图/引用或清单",
+  "observed": "四图保留原主构图并使用不透明块面覆色。商店灯具已收至三盏与现代物资箱；祭坛晶体和三张室外图地面仍有较多局部细节，待老板反馈。"
+}

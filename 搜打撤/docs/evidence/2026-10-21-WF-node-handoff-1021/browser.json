@@ -1,0 +1,121 @@
+{
+  "platform": "Codex IAB",
+  "origin": "http://127.0.0.1:5200",
+  "input": "真实按钮点击；内置CDP只读逐帧采样，无页面持久修改",
+  "photo": {
+    "count": 78,
+    "first": {
+      "animation": "campCutReveal",
+      "loaded": 0,
+      "opacity": "0",
+      "phase": "page-loading page-loading--city",
+      "play": "paused",
+      "sceneAnimation": "campSceneryPass",
+      "scenePlay": "paused",
+      "src": "http://127.0.0.1:5200/assets/scenes/transition-photo-v2.webp",
+      "t": 27,
+      "transform": "matrix(1, 0, 0, 1, 0, 0)"
+    },
+    "last": {
+      "animation": "campCutReveal",
+      "loaded": 1280,
+      "opacity": "0",
+      "phase": "page-loading page-loading--city transition-handoff-rich leaving",
+      "play": "running",
+      "sceneAnimation": "campSceneryPass",
+      "scenePlay": "running",
+      "src": "http://127.0.0.1:5200/assets/scenes/transition-photo-v2.webp",
+      "t": 1384,
+      "transform": "matrix(1, 0, 0, 1, 2822.4, 0)"
+    },
+    "moving": {
+      "animation": "campCutReveal",
+      "loaded": 1280,
+      "opacity": "0.850006",
+      "phase": "page-loading page-loading--city transition-handoff-rich leaving",
+      "play": "running",
+      "sceneAnimation": "campSceneryPass",
+      "scenePlay": "running",
+      "src": "http://127.0.0.1:5200/assets/scenes/transition-photo-v2.webp",
+      "t": 952,
+      "transform": "matrix(1, 0, 0, 1, 1197.52, 0)"
+    },
+    "photos": 16,
+    "playing": {
+      "animation": "campCutReveal",
+      "loaded": 1280,
+      "opacity": "0",
+      "phase": "page-loading page-loading--city transition-handoff-rich leaving",
+      "play": "running",
+      "sceneAnimation": "campSceneryPass",
+      "scenePlay": "running",
+      "src": "http://127.0.0.1:5200/assets/scenes/transition-photo-v2.webp",
+      "t": 429,
+      "transform": "matrix(1, 0, 0, 1, 0, 0)"
+    }
+  },
+  "resume": {
+    "first": {
+      "animation": "resumeCutHold",
+      "classes": "scene flow-transition city-run-transition resume-hold sc-door",
+      "hidden": false,
+      "loaded": 0,
+      "sceneOpacity": "0",
+      "scenePlay": "paused",
+      "t": 35,
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "viewport": [
+        1280,
+        720,
+        1600,
+        900
+      ]
+    },
+    "picture": {
+      "animation": "campCutReveal",
+      "classes": "scene flow-transition city-run-transition resume-hold sc-door transition-handoff-rich leaving",
+      "hidden": false,
+      "loaded": 1280,
+      "sceneOpacity": "0.51481",
+      "scenePlay": "running",
+      "t": 634,
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "viewport": [
+        1280,
+        645,
+        1600,
+        807
+      ]
+    },
+    "revealing": {
+      "animation": "campCutReveal",
+      "classes": "scene flow-transition city-run-transition resume-hold sc-door transition-handoff-rich leaving",
+      "hidden": false,
+      "loaded": 1280,
+      "sceneOpacity": "0",
+      "scenePlay": "running",
+      "t": 551,
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "viewport": [
+        1280,
+        645,
+        1600,
+        807
+      ]
+    },
+    "sizesDuringReveal": [
+      "[1280,645,1600,807]"
+    ],
+    "uncovered": {
+      "hidden": true,
+      "t": 1540,
+      "viewport": [
+        1280,
+        645,
+        1600,
+        807
+      ]
+    }
+  },
+  "errors": []
+}

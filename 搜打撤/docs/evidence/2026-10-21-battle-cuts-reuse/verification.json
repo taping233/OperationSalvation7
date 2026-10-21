@@ -1,0 +1,69 @@
+{
+  "checks": {
+    "targetTests": {
+      "files": 5,
+      "passed": 111,
+      "exitCode": 0
+    },
+    "targetLint": {
+      "passed": [
+        "camp-entry.js",
+        "e4-async-entry.test.js"
+      ],
+      "existingFailure": "game.run.scenes.js: finishInstant(_completed=false) no-unused-vars; present in pre-edit type-annotation delta; left to owner"
+    },
+    "diffCheck": {
+      "exitCode": 0
+    }
+  },
+  "browser": {
+    "platform": "Codex in-app browser",
+    "url": "http://127.0.0.1:5200/",
+    "viewport": [
+      1002,
+      956
+    ],
+    "source": "constructed actual showRunTransition with scene battle/boss; animation paused at 400ms and preview duration extended to 60s only in temporary tab",
+    "coverage": "images decode, actual cut appearance and text; normal/boss route selection covered by e4 async tests; no natural run or real battle claimed",
+    "pageErrors": [],
+    "cleanup": "preview closed; overlay hidden; temporary tab closed; existing service kept",
+    "excludedCapture": "battle.png captured after cut animation exited and shows title; use battle-held.png/boss-held.png"
+  },
+  "files": [
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "bytes": 10402,
+      "sha256": "3381dd869306a4d69f409828fa8b878cb8102af4fc1e6992194f90e9c5833ba3"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "bytes": 35877,
+      "sha256": "7e8b480c825603568abaa22c7842236298a6168d3ed78890b6a0d8f4a10d4422"
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "bytes": 23442,
+      "sha256": "e60cb9f88e9bcc6ee399e1fc8e9c6c17518bff4560455291d7e92adabc9b5204"
+    },
+    {
+      "path": "game/assets/scenes/transition-battle-v2.webp",
+      "bytes": 31066,
+      "sha256": "17e0acea1b2277182ca5ac87f2660d550f90db919bd00470ad86626d6de8ae8d"
+    },
+    {
+      "path": "game/assets/scenes/transition-boss-v2.webp",
+      "bytes": 42416,
+      "sha256": "6d9a6c244cc8fd6900b884b67524e6aad55ba5e925c52546a3b6dec1861b7e0d"
+    },
+    {
+      "path": "docs/evidence/2026-10-21-battle-cuts-reuse/battle-held.png",
+      "bytes": 32239,
+      "sha256": "055d385df9eef02c0a4b7c89764fa1d45ecf7853132721dddf36c319913bcb45"
+    },
+    {
+      "path": "docs/evidence/2026-10-21-battle-cuts-reuse/boss-held.png",
+      "bytes": 36089,
+      "sha256": "c5e2a72b88df09d717f7a689627933b4ab38055e02e02e0085c85704091539d2"
+    }
+  ]
+}

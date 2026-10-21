@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-21T06:17:23.424Z",
+  "files": [
+    "css/battle-discover.css",
+    "css/battle-stage.css",
+    "css/chest-reward-overview.css",
+    "src/ui/reward-scene-view.js",
+    "src/ui/chest-reward-overview.js",
+    "src/run/chests.js",
+    "src/battle/view/battle.view.js"
+  ],
+  "preview": ".tmp/sts2-cast-ui-1021/preview/game",
+  "port": 5346,
+  "changes": [
+    "发现隐藏底部工具栏",
+    "宝箱选一与全部领取分别呈现",
+    "左侧字号对齐与双向手牌切栏"
+  ],
+  "verification": "老板明确要求不再验证；本次仅同步完成源码，未运行检查或浏览器验收"
+}

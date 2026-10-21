@@ -1,0 +1,138 @@
+[
+  {
+    "color": "rgb(241, 242, 237)",
+    "font": "600 44px / 52.8px \"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+    "fontSize": "44px",
+    "id": "door",
+    "letterSpacing": "3.52px",
+    "ruleRect": {
+      "bottom": 335.72500014305115,
+      "height": 2.6625001430511475,
+      "left": 153.60000610351562,
+      "right": 226.92501068115232,
+      "top": 333.0625,
+      "width": 73.32500457763672,
+      "x": 153.60000610351562,
+      "y": 333.0625
+    },
+    "src": "http://127.0.0.1:5200/assets/scenes/transitions-1021/door.webp",
+    "textAlign": "left",
+    "title": "抵达大门",
+    "titleRect": {
+      "bottom": 386.9250068664551,
+      "height": 35.20000076293945,
+      "left": 153.60000610351562,
+      "right": 292.82501220703125,
+      "top": 351.7250061035156,
+      "width": 139.22500610351562,
+      "x": 153.60000610351562,
+      "y": 351.7250061035156
+    },
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  {
+    "color": "rgb(241, 242, 237)",
+    "font": "600 44px / 52.8px \"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+    "fontSize": "44px",
+    "id": "retreat",
+    "letterSpacing": "3.52px",
+    "ruleRect": {
+      "bottom": 335.72500014305115,
+      "height": 2.6625001430511475,
+      "left": 153.60000610351562,
+      "right": 226.92501068115232,
+      "top": 333.0625,
+      "width": 73.32500457763672,
+      "x": 153.60000610351562,
+      "y": 333.0625
+    },
+    "src": "http://127.0.0.1:5200/assets/scenes/transitions-1021/retreat.webp",
+    "textAlign": "left",
+    "title": "全身而退",
+    "titleRect": {
+      "bottom": 386.9250068664551,
+      "height": 35.20000076293945,
+      "left": 153.60000610351562,
+      "right": 292.82501220703125,
+      "top": 351.7250061035156,
+      "width": 139.22500610351562,
+      "x": 153.60000610351562,
+      "y": 351.7250061035156
+    },
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  {
+    "color": "rgb(241, 242, 237)",
+    "font": "600 44px / 52.8px \"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+    "fontSize": "44px",
+    "id": "battle",
+    "letterSpacing": "3.52px",
+    "ruleRect": {
+      "bottom": 335.72500014305115,
+      "height": 2.6625001430511475,
+      "left": 153.60000610351562,
+      "right": 226.92501068115232,
+      "top": 333.0625,
+      "width": 73.32500457763672,
+      "x": 153.60000610351562,
+      "y": 333.0625
+    },
+    "src": "http://127.0.0.1:5200/assets/scenes/transition-battle-v2.webp",
+    "textAlign": "left",
+    "title": "旅途继续",
+    "titleRect": {
+      "bottom": 386.9250068664551,
+      "height": 35.20000076293945,
+      "left": 153.60000610351562,
+      "right": 292.82501220703125,
+      "top": 351.7250061035156,
+      "width": 139.22500610351562,
+      "x": 153.60000610351562,
+      "y": 351.7250061035156
+    },
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  {
+    "color": "rgb(241, 242, 237)",
+    "font": "600 44px / 52.8px \"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+    "fontSize": "44px",
+    "id": "boss",
+    "letterSpacing": "3.52px",
+    "ruleRect": {
+      "bottom": 335.72500014305115,
+      "height": 2.6625001430511475,
+      "left": 153.60000610351562,
+      "right": 226.92501068115232,
+      "top": 333.0625,
+      "width": 73.32500457763672,
+      "x": 153.60000610351562,
+      "y": 333.0625
+    },
+    "src": "http://127.0.0.1:5200/assets/scenes/transition-boss-v2.webp",
+    "textAlign": "left",
+    "title": "旅途继续",
+    "titleRect": {
+      "bottom": 386.9250068664551,
+      "height": 35.20000076293945,
+      "left": 153.60000610351562,
+      "right": 292.82501220703125,
+      "top": 351.7250061035156,
+      "width": 139.22500610351562,
+      "x": 153.60000610351562,
+      "y": 351.7250061035156
+    },
+    "viewport": [
+      1280,
+      720
+    ]
+  }
+]

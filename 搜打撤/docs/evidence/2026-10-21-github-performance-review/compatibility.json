@@ -1,0 +1,292 @@
+{
+  "localHead": "e817a3aa2ad945c904b87bdaa99bb697a7f30d0c",
+  "candidate": "eaa27f33c4ca3781118e7289707da3b22927ff2a",
+  "overlapCount": 14,
+  "productionOverlap": [
+    "搜打撤/game/assets/asset-manifest.json",
+    "搜打撤/game/src/agent/agent.replay.js",
+    "搜打撤/game/src/agent/agent.runner.js",
+    "搜打撤/game/src/battle/core/battle.engine.factory.domain.js",
+    "搜打撤/game/src/hub/game.bag.js",
+    "搜打撤/game/src/hub/game.bag.rules.js",
+    "搜打撤/game/src/run/game.run.flow.js",
+    "搜打撤/game/src/ui/camp-entry.js",
+    "搜打撤/game/src/ui/page-visual-ready.js",
+    "搜打撤/game/src/ui/term-tips.js",
+    "搜打撤/scripts/runtime-asset-redundancy-review.mjs"
+  ],
+  "remoteExclusionPlanOnLiveTree": {
+    "excludedCount": 0,
+    "warnings": [
+      "Changed/missing indirect asset consumer game/src/audio/sfx-review.js; retaining reviewed assets.",
+      "Changed/missing indirect asset consumer game/src/audio/sound.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/audio/sfx-audition.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/audio/sfx-review.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/audio/sound.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.frames.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.vfx.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/core/art.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/core/icons-bitmap.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/home/home.scene.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/hub/hub.presentation.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/rarity-design-lab.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/run/lab.ending.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/ui.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/wu-career-frame-preview.js; retaining reviewed assets."
+    ]
+  },
+  "fingerprintMismatches": [
+    {
+      "filename": "game/src/audio/sfx-review.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/ui/game.menu.pages.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/hub/hub.personnel.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/audio/sfx-audition.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/audio/sound.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/battle/view/battle.frames.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/battle/view/battle.layers.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/battle/view/battle.vfx.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/core/art.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/core/icons-bitmap.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/home/home.scene.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/hub/base-chibi-v2.skin.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/hub/hub.presentation.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/rarity-design-lab.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/run/lab.ending.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/ui/game.menu.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/ui/ui.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/wu-career-frame-preview.js",
+      "group": "opaque"
+    },
+    {
+      "filename": "game/src/ui/game.menu.pages.js",
+      "group": "slot-weather"
+    },
+    {
+      "filename": "game/src/core/art.js",
+      "group": "shadowed-card-art"
+    },
+    {
+      "filename": "game/src/core/data-loader.js",
+      "group": "shadowed-card-art"
+    },
+    {
+      "filename": "game/src/core/art.js",
+      "group": "retired-scenes"
+    },
+    {
+      "filename": "game/src/run/chests.js",
+      "group": "retired-scenes"
+    },
+    {
+      "filename": "game/src/run/chest-opening-art.js",
+      "group": "retired-scenes"
+    },
+    {
+      "filename": "game/src/run/game.run.scenes.js",
+      "group": "retired-scenes"
+    },
+    {
+      "filename": "game/src/run/chests.js",
+      "group": "chests"
+    },
+    {
+      "filename": "game/src/run/chest-opening-art.js",
+      "group": "chests"
+    },
+    {
+      "filename": "game/src/battle/view/battle.frames.js",
+      "group": "frames"
+    },
+    {
+      "filename": "game/src/core/map-node-art.js",
+      "group": "map"
+    },
+    {
+      "filename": "game/src/core/renderer.js",
+      "group": "map"
+    },
+    {
+      "filename": "game/src/core/art.js",
+      "group": "map"
+    },
+    {
+      "filename": "game/src/core/data-loader.js",
+      "group": "map"
+    },
+    {
+      "filename": "game/src/ui/camp-entry.js",
+      "group": "transitions"
+    },
+    {
+      "filename": "game/src/core/art.js",
+      "group": "transitions"
+    },
+    {
+      "filename": "game/src/core/data-loader.js",
+      "group": "transitions"
+    }
+  ],
+  "manifest": {
+    "keys": [
+      "_comment",
+      "generated",
+      "count",
+      "assets",
+      "verified"
+    ],
+    "localCount": 1504,
+    "remoteCount": 1591,
+    "localOnly": [
+      "scenes/transitions-1021/retreat.webp",
+      "scenes/transitions-1021/door.webp",
+      "scenes/transitions-1021/altar.webp",
+      "scenes/transitions-1021/shop.webp"
+    ],
+    "remoteOnly": [
+      "scenes/chests/boss-rig-v1/frame-00.webp",
+      "scenes/chests/boss-rig-v1/frame-01.webp",
+      "scenes/chests/boss-rig-v1/frame-02.webp",
+      "scenes/chests/boss-rig-v1/frame-03.webp",
+      "scenes/chests/boss-rig-v1/frame-04.webp",
+      "scenes/chests/boss-rig-v1/frame-05.webp",
+      "scenes/chests/boss-rig-v1/frame-06.webp",
+      "scenes/chests/boss-rig-v1/frame-07.webp",
+      "scenes/chests/boss-rig-v1/frame-08.webp",
+      "scenes/chests/boss-rig-v1/frame-09.webp",
+      "scenes/chests/boss-rig-v1/frame-10.webp",
+      "scenes/chests/boss-rig-v1/frame-11.webp",
+      "scenes/chests/boss-rig-v1/frame-12.webp",
+      "scenes/chests/boss-rig-v1/frame-13.webp",
+      "scenes/chests/boss-rig-v1/frame-14.webp",
+      "scenes/chests/boss-rig-v1/frame-15.webp",
+      "scenes/chests/boss-rig-v1/frame-16.webp",
+      "scenes/chests/boss-rig-v1/frame-17.webp",
+      "scenes/chests/class-rig-v1/frame-00.webp",
+      "scenes/chests/class-rig-v1/frame-01.webp",
+      "scenes/chests/class-rig-v1/frame-02.webp",
+      "scenes/chests/class-rig-v1/frame-03.webp",
+      "scenes/chests/class-rig-v1/frame-04.webp",
+      "scenes/chests/class-rig-v1/frame-05.webp",
+      "scenes/chests/class-rig-v1/frame-06.webp",
+      "scenes/chests/class-rig-v1/frame-07.webp",
+      "scenes/chests/class-rig-v1/frame-08.webp",
+      "scenes/chests/class-rig-v1/frame-09.webp",
+      "scenes/chests/class-rig-v1/frame-10.webp",
+      "scenes/chests/class-rig-v1/frame-11.webp",
+      "scenes/chests/class-rig-v1/frame-12.webp",
+      "scenes/chests/class-rig-v1/frame-13.webp",
+      "scenes/chests/class-rig-v1/frame-14.webp",
+      "scenes/chests/class-rig-v1/frame-15.webp",
+      "scenes/chests/class-rig-v1/frame-16.webp",
+      "scenes/chests/class-rig-v1/frame-17.webp",
+      "scenes/chests/large-rig-v1/frame-00.webp",
+      "scenes/chests/large-rig-v1/frame-01.webp",
+      "scenes/chests/large-rig-v1/frame-02.webp",
+      "scenes/chests/large-rig-v1/frame-03.webp",
+      "scenes/chests/large-rig-v1/frame-04.webp",
+      "scenes/chests/large-rig-v1/frame-05.webp",
+      "scenes/chests/large-rig-v1/frame-06.webp",
+      "scenes/chests/large-rig-v1/frame-07.webp",
+      "scenes/chests/large-rig-v1/frame-08.webp",
+      "scenes/chests/large-rig-v1/frame-09.webp",
+      "scenes/chests/large-rig-v1/frame-10.webp",
+      "scenes/chests/large-rig-v1/frame-11.webp",
+      "scenes/chests/large-rig-v1/frame-12.webp",
+      "scenes/chests/large-rig-v1/frame-13.webp",
+      "scenes/chests/medium-rig-v1/frame-00.webp",
+      "scenes/chests/medium-rig-v1/frame-01.webp",
+      "scenes/chests/medium-rig-v1/frame-02.webp",
+      "scenes/chests/medium-rig-v1/frame-03.webp",
+      "scenes/chests/medium-rig-v1/frame-04.webp",
+      "scenes/chests/medium-rig-v1/frame-05.webp",
+      "scenes/chests/medium-rig-v1/frame-06.webp",
+      "scenes/chests/medium-rig-v1/frame-07.webp",
+      "scenes/chests/medium-rig-v1/frame-08.webp",
+      "scenes/chests/medium-rig-v1/frame-09.webp",
+      "scenes/chests/medium-rig-v1/frame-10.webp",
+      "scenes/chests/medium-rig-v1/frame-11.webp",
+      "scenes/chests/medium-rig-v1/frame-12.webp",
+      "scenes/chests/medium-rig-v1/frame-13.webp",
+      "scenes/chests/medium-rig-v1/frame-14.webp",
+      "scenes/chests/medium-rig-v1/frame-15.webp",
+      "scenes/chests/medium-rig-v1/frame-16.webp",
+      "scenes/chests/medium-rig-v1/frame-17.webp",
+      "scenes/chests/small-rig-v1/frame-00.webp",
+      "scenes/chests/small-rig-v1/frame-01.webp",
+      "scenes/chests/small-rig-v1/frame-02.webp",
+      "scenes/chests/small-rig-v1/frame-03.webp",
+      "scenes/chests/small-rig-v1/frame-04.webp",
+      "scenes/chests/small-rig-v1/frame-05.webp",
+      "scenes/chests/small-rig-v1/frame-06.webp",
+      "scenes/chests/small-rig-v1/frame-07.webp",
+      "scenes/chests/small-rig-v1/frame-08.webp",
+      "scenes/chests/small-rig-v1/frame-09.webp",
+      "scenes/chests/small-rig-v1/frame-10.webp",
+      "scenes/chests/small-rig-v1/frame-11.webp",
+      "scenes/chests/small-rig-v1/frame-12.webp",
+      "scenes/chests/small-rig-v1/frame-13.webp",
+      "scenes/chests/small-rig-v1/frame-14.webp",
+      "scenes/chests/small-rig-v1/frame-15.webp",
+      "scenes/chests/small-rig-v1/frame-16.webp",
+      "scenes/chests/small-rig-v1/frame-17.webp",
+      "ui/slot-weather/partly-cloudy-v1.webp",
+      "ui/slot-weather/rain-v1.webp",
+      "ui/slot-weather/snow-v1.webp",
+      "ui/slot-weather/sunny-v1.webp",
+      "ui/slot-weather/thunder-v1.webp"
+    ]
+  },
+  "snapshotMovedTo": "game/src/battle/core/battle.snapshot-projection.domain.js"
+}

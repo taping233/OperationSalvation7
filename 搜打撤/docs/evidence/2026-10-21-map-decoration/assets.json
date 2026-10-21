@@ -1,0 +1,38 @@
+[
+  {
+    "region": "outskirts",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-da409790-5ba1-4c48-8eb0-170b261169b1.png",
+    "sourceSha256": "d4b7ae92157fb44ab9741018411abec8be11e1be438a1a3e098b24e98fe25647",
+    "path": "game/assets/scenes/map-environment-1021/outskirts-simple.webp",
+    "sha256": "0f3e4d1b3173c0fc2091c70434a11257058debd07afd8faf690ed381f6babddc",
+    "bytes": 76516,
+    "provenance": "Built-in ImageGen; source alpha preserved in WebP encoding"
+  },
+  {
+    "region": "watchline",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-a1c16058-b55d-4956-99bc-045cbd67df55.png",
+    "sourceSha256": "9a35fd3f921213868d5f7709c4445bc9546efdd7a15b9db4b04849f91509e08e",
+    "path": "game/assets/scenes/map-environment-1021/watchline-simple.webp",
+    "sha256": "d416aa3db47e9e005f2119d8b8fd48fb2383ed89533d228e6d1dc0b977663e9f",
+    "bytes": 82298,
+    "provenance": "Built-in ImageGen; source alpha preserved in WebP encoding"
+  },
+  {
+    "region": "ruins",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-8d46d131-2e97-4b63-8580-c3b78a30d466.png",
+    "sourceSha256": "297255034cd32e67b07bfd7aa20d87876e56659fe0c5551a611cc3aa3f8c6828",
+    "path": "game/assets/scenes/map-environment-1021/ruins-simple.webp",
+    "sha256": "336eeb81ef44d3f07f3727bde6266f28e3af1b1e12c23138630135c410d116e7",
+    "bytes": 109466,
+    "provenance": "Built-in ImageGen; source alpha preserved in WebP encoding"
+  },
+  {
+    "region": "core",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a15d62-0be6-73a0-b479-69a90febabd9\\exec-9c012584-8be7-4367-a782-f5692f9ec0a6.png",
+    "sourceSha256": "44590b26b02c86920f6c0f39fe5737aa15d2454723dc83224715ba4c1a3564a3",
+    "path": "game/assets/scenes/map-environment-1021/core-simple.webp",
+    "sha256": "66c7c6d0207b355cd3228b092d0e8bb36c652af297343172e81929e7cc4f3260",
+    "bytes": 109614,
+    "provenance": "Built-in ImageGen; source alpha preserved in WebP encoding"
+  }
+]

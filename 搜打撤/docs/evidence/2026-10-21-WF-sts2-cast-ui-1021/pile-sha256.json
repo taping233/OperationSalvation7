@@ -1,0 +1,105 @@
+{
+  "baseline": ".tmp/sts2-cast-ui-1021-pile-before",
+  "files": [
+    {
+      "file": "game/src/battle/view/battle.pile-view.js",
+      "owner": "potion_use",
+      "before": null,
+      "after": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7",
+      "added": 50,
+      "removed": 0
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-content.js",
+      "owner": "potion_use",
+      "before": "d66dfd78c5727933c25da7fa0139997a8e9b1f26781804164d3938ff8c55e40b",
+      "after": "1439e2a2a5cb26f85f7cbdc1c0d0e60f1c8851def2c84aaac3ee7721a33e04a6",
+      "added": 1,
+      "removed": 20
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-shell.js",
+      "owner": "potion_use",
+      "before": "0098b2610b1b6e3c94207c9691e83f7011abba4d7636e2ac0801b56e24a41db2",
+      "after": "817b9a68bbb44d32e2b5a30f1dc31478a241c6515f90ea4dd036f64899433204",
+      "added": 7,
+      "removed": 2
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "owner": "potion_use",
+      "before": "b048c47d9e23435dba8dc6cc92b67c87d734d789ebe0df7e1587aa89f4556eb9",
+      "after": "d75a029d6fd44cae3428189dc76ddb3e05044e35461dbde539c22bdc061aabb3",
+      "added": 4,
+      "removed": 22
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "owner": "potion_use",
+      "before": "693992e283a388efd7735412089fcbb47753671111189b4d45d21227c6714ea1",
+      "after": "fe2ef89220d689ac52da95a765abb0042d48d3b3fbd12710b9d2f5aef800d3e0",
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "file": "game/css/battle-pile-view.css",
+      "owner": "cast_layout",
+      "before": null,
+      "after": "6115f23e16a914473dcab8ea62cd3766467c118c9c0bce5ee33e78efa95fcc00",
+      "added": 84,
+      "removed": 0
+    },
+    {
+      "file": "tests/sts2-pile-view-1021.test.js",
+      "owner": "potion_use",
+      "before": null,
+      "after": "f548293fc4cf22d026858c854ae3f54402cb41791d9ba2834d5be306dc5f2124",
+      "added": 151,
+      "removed": 0
+    },
+    {
+      "file": "tests/battle-pile-readability.test.js",
+      "owner": "potion_use",
+      "before": "438f29a2df9c93b828c2e3a233f28e01f7f449067548aa5308b8ded6da032737",
+      "after": "e0d995221807fb59769995a72c0fa0cf451d2957d462d00417c9d754898e5a0b",
+      "added": 44,
+      "removed": 53
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "owner": "potion_use",
+      "before": "1ab5efa685d737a7491ba03fcc079f94b6cc5abb6446603f076a547364635e0e",
+      "after": "e0338f2e48704f31c5ced8144cbb1040e163713ab4aafd43d3fb8a7e136e876a",
+      "added": 8,
+      "removed": 9
+    },
+    {
+      "file": "tests/battle-hud-info.test.js",
+      "owner": "potion_use",
+      "before": "538dc560badd1a98b301d68187d5800fb0bf7f88891bf6f4d4f7f444c17ad9d5",
+      "after": "3b351dc974cf4abf7690825e0ac8cc1430a31af55fd0c8c3780845d70eb4947a",
+      "added": 6,
+      "removed": 3
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "owner": "potion_use",
+      "before": "d453c14394bfd3d4388dace57bbdb153b67b9035177c33407a00d6c6b9d9bf99",
+      "after": "5e65f3d741770208969d74a3c893ca10deb18e5bed035561193cc0a769f52134",
+      "added": 1,
+      "removed": 1
+    },
+    {
+      "file": "tests/battle-hand-inspector.test.js",
+      "owner": "potion_use",
+      "before": "fcba02d079d6a2b4a9b0497f84da1b23b2dce0416340da6edb750b53c777d9ab",
+      "after": "ccb8a75ae2fb64661b4da3c94586ccab1a8c611dc00c7d53f78abbb0204cd173",
+      "added": 1,
+      "removed": 1
+    }
+  ],
+  "patch": {
+    "file": "docs/evidence/2026-10-21-WF-sts2-cast-ui-1021/pile-own-baseline.patch",
+    "sha256": "3fec2cc468742a17fc87bb9e63763f0401d4f3f78d3a114df9b783e6a81d326f"
+  }
+}

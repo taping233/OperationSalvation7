@@ -1,0 +1,363 @@
+{
+  "schema": "sdt-runtime-trace-v1",
+  "revision": "runtime-interactions-20261020-3",
+  "buildVersion": "0.60.0",
+  "timeOriginMs": 1792578832299.8,
+  "traceStartMs": 386.69999998807907,
+  "clock": "performance.now milliseconds since timeOrigin",
+  "longTaskSupport": "supported",
+  "eventTimingSupport": "supported",
+  "eventDurationThresholdMs": 16,
+  "active": true,
+  "limit": 400,
+  "interpretation": "DOM changes and frame opportunities are correlated with recent input, not proof of action success, paint, FPS, or a causal bottleneck.",
+  "dropped": 0,
+  "records": [
+    {
+      "kind": "start",
+      "tMs": 387.2,
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 391.2,
+      "durationMs": 79,
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 34136.3,
+      "durationMs": 60,
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 34218.7,
+      "interaction": 1,
+      "trigger": "click",
+      "action": "button",
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 34258.9,
+      "durationMs": 40.3,
+      "interaction": 1,
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 34259.1,
+      "durationMs": 59.4,
+      "interaction": 1,
+      "stage": "settings-module-wait",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 34319.9,
+      "durationMs": 24,
+      "interaction": 1,
+      "stage": "settings-overlay-sync",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 34343.9,
+      "durationMs": 21.6,
+      "interaction": 1,
+      "stage": "settings-navigation-sync",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 34368.4,
+      "durationMs": 149.8,
+      "interaction": 1,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 34408,
+      "durationMs": 189.4,
+      "interaction": 1,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 34318,
+      "durationMs": 61,
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 34208.8,
+      "durationMs": 128,
+      "interaction": 1,
+      "inputDelayMs": 9.3,
+      "processingMs": 16.4,
+      "browserInteraction": 1,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 34395.2,
+      "durationMs": 52.6,
+      "interaction": 1,
+      "stage": "settings-visual-wait",
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 56069.2,
+      "interaction": 2,
+      "trigger": "click",
+      "action": "button",
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 56091.4,
+      "durationMs": 22.2,
+      "interaction": 2,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 56068.7,
+      "durationMs": 56,
+      "interaction": 2,
+      "inputDelayMs": 0.4,
+      "processingMs": 15,
+      "browserInteraction": 2,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 56284.6,
+      "durationMs": 215.4,
+      "interaction": 2,
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 83548.8,
+      "interaction": 3,
+      "trigger": "click",
+      "action": "button",
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 83563.2,
+      "durationMs": 17.4,
+      "interaction": 3,
+      "stage": "settings-overlay-sync",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 83580.7,
+      "durationMs": 23.4,
+      "interaction": 3,
+      "stage": "settings-navigation-sync",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 83605.7,
+      "durationMs": 56.9,
+      "interaction": 3,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 83651.5,
+      "durationMs": 102.7,
+      "interaction": 3,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 83548.4,
+      "durationMs": 74,
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 83665.1,
+      "durationMs": 116.2,
+      "interaction": 3,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "stage",
+      "tMs": 83654.3,
+      "durationMs": 11.9,
+      "interaction": 3,
+      "stage": "settings-visual-wait",
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 83670.5,
+      "durationMs": 88,
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 83548.1,
+      "durationMs": 240,
+      "interaction": 3,
+      "inputDelayMs": 0.6,
+      "processingMs": 72.7,
+      "browserInteraction": 3,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 84655,
+      "durationMs": 1106.2,
+      "interaction": 3,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 105339.1,
+      "interaction": 4,
+      "trigger": "click",
+      "action": "button",
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 105356.7,
+      "durationMs": 17.6,
+      "interaction": 4,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 105338.8,
+      "durationMs": 48,
+      "interaction": 4,
+      "inputDelayMs": 0.3,
+      "processingMs": 10.9,
+      "browserInteraction": 4,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 105543.9,
+      "durationMs": 204.8,
+      "interaction": 4,
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 105814.1,
+      "interaction": 5,
+      "trigger": "click",
+      "action": "button",
+      "page": "base",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 105885.4,
+      "durationMs": 71.3,
+      "interaction": 5,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "longtask",
+      "tMs": 105810.4,
+      "durationMs": 89,
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 105917.3,
+      "durationMs": 103.2,
+      "interaction": 5,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 105807.4,
+      "durationMs": 144,
+      "interaction": 5,
+      "inputDelayMs": 6.7,
+      "processingMs": 82.9,
+      "browserInteraction": 5,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 107035.6,
+      "durationMs": 1221.5,
+      "interaction": 5,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "input",
+      "tMs": 172446.9,
+      "interaction": 6,
+      "trigger": "click",
+      "action": "button",
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "frame-opportunity",
+      "tMs": 172464.4,
+      "durationMs": 17.4,
+      "interaction": 6,
+      "page": "overlay",
+      "visible": true
+    },
+    {
+      "kind": "event-timing",
+      "tMs": 172446.7,
+      "durationMs": 40,
+      "interaction": 6,
+      "inputDelayMs": 0.2,
+      "processingMs": 10.5,
+      "browserInteraction": 6,
+      "trigger": "click",
+      "visible": true
+    },
+    {
+      "kind": "dom-update",
+      "tMs": 172653.7,
+      "durationMs": 206.7,
+      "interaction": 6,
+      "page": "base",
+      "visible": true
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "f59919da6023ae092b169a5dbaaac68c2ba7356b0fec359dbd087d90e8853cc0"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "db7ce49e5f5746af273516e20b0b1b822dc865cd5f4317c3eb7ae5179caa0660"
+    },
+    {
+      "path": "game/src/battle/view/battle.anim.view.js",
+      "sha256": "380a18ca616a5f8432a8f292b525940e3e743e85e9410b0093ead6c026b01a66"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "78baaa4dcda3de84600e8196a27ab2da00d2450030e197ebfd42b5fb9f605a75"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "b5e936582748dc2a398149e1ba0c662b71f5428d1e395ecf9977cafd903659b2"
+    }
+  ],
+  "tests": 135,
+  "serviceSession": 78607,
+  "serviceStopped": true,
+  "port5351": "post-stop netstat: no listeners/connections",
+  "tab": "closed",
+  "commit": "not requested"
+}

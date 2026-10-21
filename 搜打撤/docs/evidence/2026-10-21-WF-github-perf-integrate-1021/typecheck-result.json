@@ -1,0 +1,5 @@
+{
+  "check": "typecheck",
+  "exitCode": 0,
+  "tail": "Type-checking jsconfig.framework-boundaries.json\nType-checking jsconfig.framework-ports.json\nType-checking jsconfig.json\nType-checking jsconfig.battle-settlement.json\nType-checking jsconfig.battle-snapshot.json\nType-checking jsconfig.card-rules.json\nType-checking jsconfig.strict-foundations.json\nType-checking jsconfig.strict-selection.json\nType-checking jsconfig.strict-hand-selection.json\nType-checking jsconfig.strict-ui.json\nType-checking jsconfig.runtime.json\nImplementation type coverage: 549/549; strict: 50/549\n"
+}

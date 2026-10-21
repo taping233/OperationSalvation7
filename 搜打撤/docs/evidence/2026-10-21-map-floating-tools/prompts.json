@@ -1,0 +1,52 @@
+[
+  {
+    "tool": "bag",
+    "method": "built-in image_gen",
+    "prompt": "Create ONE original tiny HUD symbol. The first two reference images are our game's APPROVED gold and attack icons: closely match their tiny symbol scale, very limited flat opaque colour planes, simple strong silhouette and dim near-black backing. Third image is secondary node grammar reference. Subject: BAG: a squat soft-sided messenger bag with ONE broad loop handle forming a large empty opening above the body. Squared sagging lower silhouette, single simple flap merging into the front, no mouth rim, no pot or vase silhouette. Three flat muted tan/grey-ochre planes with a small ivory upper edge. No buckles, no stitching, no wrinkles, no separate pockets. Recognizable carrying bag through handle and body outline alone.\nActual painted GRAPHIC icon intended to be viewed at44px, NOT an equipment illustration. All meaning must survive with only the outer contour and one or two broad internal negative spaces. NO 3D rendering, no realistic material, no repeated tiny facets, no glossy surface, no texture detailing. Sparse irregular hand-painted contour, minimal internal detail, three or four restrained flat planes with distinct light/dark. Central symbol about45% of square, near-black irregular circular support about55%, a faint small one-sided coloured haze touching an edge. No sprawling smoke, no ribbon backing, no all-around ring, no extra dots or ornaments. Whole graphic within70% of canvas and lots of surrounding true transparent alpha. No words, letters, numbers, border or UI button. Same simplicity and miniature reading scale as the square-holed coin, while retaining this subject's identity.",
+    "references": [
+      "game/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "game/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+    ]
+  },
+  {
+    "tool": "safe",
+    "method": "built-in image_gen",
+    "prompt": "Create ONE original tiny HUD symbol. The first two reference images are our game's APPROVED gold and attack icons: closely match their tiny symbol scale, very limited flat opaque colour planes, simple strong silhouette and dim near-black backing. Third image is secondary node grammar reference. Subject: SAFE STORAGE: one closed rectangular lock silhouette, broad asymmetric solid body and one thick curved shackle with a large dark opening. The body and shackle form a single compact symbol, no engraved keyhole, no equipment detailing. Three flat sage-green/grey-white planes and one pale jade light edge. It must unmistakably read as protection and lock, not an abstract shell or jewel.\nActual painted GRAPHIC icon intended to be viewed at44px, NOT an equipment illustration. All meaning must survive with only the outer contour and one or two broad internal negative spaces. NO 3D rendering, no realistic material, no repeated tiny facets, no glossy surface, no texture detailing. Sparse irregular hand-painted contour, minimal internal detail, three or four restrained flat planes with distinct light/dark. Central symbol about45% of square, near-black irregular circular support about55%, a faint small one-sided coloured haze touching an edge. No sprawling smoke, no ribbon backing, no all-around ring, no extra dots or ornaments. Whole graphic within70% of canvas and lots of surrounding true transparent alpha. No words, letters, numbers, border or UI button. Same simplicity and miniature reading scale as the square-holed coin, while retaining this subject's identity.",
+    "references": [
+      "game/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "game/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+    ]
+  },
+  {
+    "tool": "pocket",
+    "method": "built-in image_gen",
+    "prompt": "Create ONE original tiny HUD symbol. The first two reference images are our game's APPROVED gold and attack icons: closely match their tiny symbol scale, very limited flat opaque colour planes, simple strong silhouette and dim near-black backing. Third image is secondary node grammar reference. Subject: CONSUMED CARDS: two flat overlapping card silhouettes with one large missing corner at the bottom of the foremost card; the broken silhouette clearly conveys used-up cards. Broad off-white/grey-violet faces, one dark overlap, one muted lilac edge light. No letters, numbers, suits, picture content or dense paper tears. A few large flat shapes.\nActual painted GRAPHIC icon intended to be viewed at44px, NOT an equipment illustration. All meaning must survive with only the outer contour and one or two broad internal negative spaces. NO 3D rendering, no realistic material, no repeated tiny facets, no glossy surface, no texture detailing. Sparse irregular hand-painted contour, minimal internal detail, three or four restrained flat planes with distinct light/dark. Central symbol about45% of square, near-black irregular circular support about55%, a faint small one-sided coloured haze touching an edge. No sprawling smoke, no ribbon backing, no all-around ring, no extra dots or ornaments. Whole graphic within70% of canvas and lots of surrounding true transparent alpha. No words, letters, numbers, border or UI button. Same simplicity and miniature reading scale as the square-holed coin, while retaining this subject's identity.",
+    "references": [
+      "game/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "game/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+    ]
+  },
+  {
+    "tool": "focus",
+    "method": "built-in image_gen",
+    "prompt": "Create ONE original tiny HUD symbol. The first two reference images are our game's APPROVED gold and attack icons: closely match their tiny symbol scale, very limited flat opaque colour planes, simple strong silhouette and dim near-black backing. Third image is secondary node grammar reference. Subject: LOCATE CURRENT POSITION: four sharp inward-pointing painted wedges of unequal lengths framing one tiny empty central point. Bone-white main strokes with slate-jade shadow and one short dim jade edge. A restrained positional anchor, no full circular crosshair, no map pins, no target rings, no decorative scale marks. Few flat sparse strokes, clean central negative space.\nActual painted GRAPHIC icon intended to be viewed at44px, NOT an equipment illustration. All meaning must survive with only the outer contour and one or two broad internal negative spaces. NO 3D rendering, no realistic material, no repeated tiny facets, no glossy surface, no texture detailing. Sparse irregular hand-painted contour, minimal internal detail, three or four restrained flat planes with distinct light/dark. Central symbol about45% of square, near-black irregular circular support about55%, a faint small one-sided coloured haze touching an edge. No sprawling smoke, no ribbon backing, no all-around ring, no extra dots or ornaments. Whole graphic within70% of canvas and lots of surrounding true transparent alpha. No words, letters, numbers, border or UI button. Same simplicity and miniature reading scale as the square-holed coin, while retaining this subject's identity.",
+    "references": [
+      "game/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "game/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+    ]
+  },
+  {
+    "tool": "overview",
+    "method": "built-in image_gen",
+    "prompt": "Create ONE original tiny HUD symbol. The first two reference images are our game's APPROVED gold and attack icons: closely match their tiny symbol scale, very limited flat opaque colour planes, simple strong silhouette and dim near-black backing. Third image is secondary node grammar reference. Subject: MAP OVERVIEW: one broad folded map silhouette, two large zig-zag folds and a simple torn outer contour. Three opaque muted blue-grey/ivory planes only, one small pale-blue edge light. No paths, drawings, text, symbols, pins or dots inside the map. Readable as an unfolded map by outer silhouette and fold negative spaces alone.\nActual painted GRAPHIC icon intended to be viewed at44px, NOT an equipment illustration. All meaning must survive with only the outer contour and one or two broad internal negative spaces. NO 3D rendering, no realistic material, no repeated tiny facets, no glossy surface, no texture detailing. Sparse irregular hand-painted contour, minimal internal detail, three or four restrained flat planes with distinct light/dark. Central symbol about45% of square, near-black irregular circular support about55%, a faint small one-sided coloured haze touching an edge. No sprawling smoke, no ribbon backing, no all-around ring, no extra dots or ornaments. Whole graphic within70% of canvas and lots of surrounding true transparent alpha. No words, letters, numbers, border or UI button. Same simplicity and miniature reading scale as the square-holed coin, while retaining this subject's identity.",
+    "references": [
+      "game/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "game/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+    ]
+  }
+]

@@ -1,0 +1,668 @@
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.infusion-view.js b/game/src/battle/view/battle.infusion-view.js
+index 9fdcf230..29a161da 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.infusion-view.js
++++ b/game/src/battle/view/battle.infusion-view.js
+@@ -1,119 +1,143 @@
+ /** @typedef {import("./battle.dom.types.js").BattleElement} BattleElement */
+ import '../../../css/battle-infusion.css';
+ import { esc, escAttr } from '../../core/shared.js';
+-import { displayCardDescription } from '../../cards/card-description-text.js';
+-import { descRich } from '../../cards/cards.view.js';
+-import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
+-
+ import { isInteractiveBattlePage } from './battle.page-activity.js';
+ import { cancelSelection } from './battle.selection-ui.js';
+-import { infusionMaterialState } from './battle.infusion-material-state.js';
++import { infusionHandCards, infusionMaterialState } from './battle.infusion-material-state.js';
+ import { requiresInfusion } from '../effects/battle.infusion.js';
+ 
+ let keyCleanup = null;
+ if (import.meta.hot) import.meta.hot.dispose(() => { keyCleanup?.(); keyCleanup = null; });
+ 
+-// Selection is presentation only. The battle commands remain the authority for
+-// eligibility, counts, final target confirmation and atomic resource spending.
+-export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, showBattleDecision, cardHTML }) {
++// The ordinary hand stays mounted. Only its projection and selected-card
++// container change; commands retain eligibility and atomic resource spending.
++export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, cardHTML, focusedHandUid = null }) {
+   keyCleanup?.(); keyCleanup = null;
++  const stage = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-stage.sts'));
++  if (!stage) return;
++  const previous = /** @type {BattleElement} */ (stage.querySelector('[data-infusion-workspace]'));
+   const infusion = snapshot.infusing;
+-  const entries = snapshot.hand.map(findCard).filter(Boolean);
+-  const groups = orderHandGroups(groupHandCards(entries, infusion)).filter(group => !group.self);
++  const locks = stage.querySelectorAll('.sts-arena, .sts-topbar, .bt-potions, .sts-tactics, .sts-hud-l, .sts-hud-r, .sts-energy-wrap, .sts-hand-tools');
++  locks.forEach((/** @type {HTMLElement} */ node) => { node.inert = !!infusion; });
++  stage.toggleAttribute('data-infusion-mode', !!infusion);
++  const hand = /** @type {BattleElement} */ (stage.querySelector('.sts-hand'));
++  hand?.setAttribute('aria-label', infusion ? '选择注能材料的手牌，点击一张移入已选区' : '当前手牌');
++  if (!infusion) {
++    previous?.remove();
++    // The shared hand may still be fading out the prior selection projection.
++    hand?.querySelectorAll('.infusion-copy-count').forEach(node => node.closest('.bt-slot')?.remove());
++    return;
++  }
++  const cards = infusionHandCards(snapshot.hand.map(findCard).filter(Boolean), infusion);
+   const picked = infusion.picked;
++  const candidateUids = new Set(cards.filter(entry => !picked.includes(entry.uids[0])).map(entry => entry.uids[0]));
++  const displayedUids = new Set();
++  // Selected cards have already left the layer's logical slots. Remove their
++  // 240 ms exit remnants so one physical card cannot appear in both containers.
++  [.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll(':scope > .bt-slot') || [])].reverse().forEach(slot => {
++    const uid = slot.dataset.uid;
++    if (!candidateUids.has(uid) || displayedUids.has(uid)) slot.remove();
++    else displayedUids.add(uid);
++  });
+   const required = requiresInfusion(infusion.card);
+   const remaining = Math.max(0, infusion.need - picked.length);
+-  const targetNext = targetSide(infusion.card) === 'enemy' && snapshot.foes.filter(foe => foe.hp > 0).length > 1;
+-  const previous = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('[data-infusion-workspace]'));
++  const retainedTarget = Number.isInteger(infusion.targetIndex) && snapshot.foes[infusion.targetIndex]?.hp > 0 && !snapshot.foes[infusion.targetIndex]?.dead;
++  const targetNext = targetSide(infusion.card) === 'enemy' && snapshot.foes.filter(foe => foe.hp > 0).length > 1 && !retainedTarget;
+   const same = previous?._battleToken === snapshot.battleToken && previous?._sourceUid === infusion.uid;
+-  const scroll = same ? /** @type {BattleElement} */ (previous.querySelector('.infusion-materials'))?.scrollTop || 0 : 0;
+-  const sourceExpanded = same && /** @type {HTMLDetailsElement} */ (previous.querySelector('.infusion-source-details'))?.open;
+-  /** @type {{groupUid?: string, act?: string, summary?: boolean} | null} */
+-  const focused = same && previous.contains(document.activeElement) ? { ...(document.activeElement instanceof HTMLElement ? document.activeElement.dataset : {}), summary:document.activeElement.tagName === 'SUMMARY' } : null;
+-  const materialHTML = groups.map((group, i) => {
+-    const { selected, unavailable:reason, addReason, remove, canAdjust } = infusionMaterialState(group, infusion, snapshot.hand, infusionFuelReason);
+-    const note = addReason ? `${addReason}${selected.length ? '；点击卡面或减号减少一张' : ''}` : '';
+-    return `<article class="infusion-material${selected.length ? ' is-selected' : ''}${reason ? ' is-unavailable' : ''}">
+-      <div class="infusion-material-heading"><b>${i < 9 ? `<small class="infusion-key">${i + 1}</small> ` : ''}${esc(group.card.name)}</b><button class="infusion-detail" data-act="btInfuseInspect" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}">详情</button></div>
+-      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="增加一张${escAttr(group.card.name)}" ${addReason ? `disabled title="${escAttr(addReason)}"` : ''}>＋</button></div>
+-      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdjust" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="${remove ? '减少' : '选择'}一张${escAttr(group.card.name)}作为材料，已选${selected.length}张" ${canAdjust ? '' : `disabled title="${escAttr(addReason)}"`}>${cardHTML(group.card, 'sm')}</button>
+-      ${note ? `<p class="infusion-material-note">${esc(note)}</p>` : ''}
+-    </article>`;
+-  }).join('');
+-  const chosen = groups.filter(group => group.uids.some(uid => picked.includes(uid))).map(group => `${esc(group.card.name)} ×${group.uids.filter(uid => picked.includes(uid)).length}`).join('、');
+-  showBattleDecision('注能', `<div data-decision-content="infusion" data-infusion-workspace>
+-    <aside class="infusion-source"><span class="infusion-eyebrow">将要使用</span><h4>${esc(infusion.card.name)}</h4><p class="infusion-cost">消耗 ${effCostOf(infusion.card, infusion.uid)} 点能量 + ${infusion.need} 张材料</p>
+-      <div class="infusion-rules"><h5>打出效果</h5><p>${descRich(displayCardDescription(infusion.card.desc || '暂无规则描述', infusion.card.id), infusion.card.id)}</p></div>
+-      <details class="infusion-source-details" ${sourceExpanded ? 'open' : ''}><summary>查看卡面</summary><div class="infusion-source-card">${cardHTML(infusion.card, 'sm')}</div></details>
++  const sourceCard = same ? previous.querySelector('.infusion-source-card') : null;
++  const sourceFocus = sourceCard?.contains(document.activeElement) && document.activeElement instanceof HTMLElement ? document.activeElement : null;
++  const selectedScroll = same ? /** @type {BattleElement} */ (previous.querySelector('.infusion-selected-cards'))?.scrollLeft || 0 : 0;
++  const focused = same && previous.contains(document.activeElement) && document.activeElement instanceof HTMLElement ? { ...document.activeElement.dataset } : null;
++  const chosen = picked.map(uid => cards.find(card => card.uids[0] === uid)).filter(Boolean);
++  const selectedHTML = chosen.map(entry => `<article class="infusion-selected-card" data-selected-uid="${escAttr(entry.uids[0])}">
++      <button type="button" class="infusion-card-face" data-act="btInfuseRemove" data-uid="${escAttr(entry.uids[0])}" aria-label="撤回${escAttr(entry.card.name)}第${entry.copyIndex}张，同名已选${entry.selectedCopies}/${entry.totalCopies}张">
++        ${cardHTML(entry.card, 'sm')}<span class="infusion-card-return">↙ 点击撤回${entry.shortcut ? ` · ${entry.shortcut}` : ''}</span>
++      </button><span class="infusion-copy-count">第 ${entry.copyIndex}/${entry.totalCopies} 张 · 同名已选 ${entry.selectedCopies} 张</span>
++    </article>`).join('');
++  const workspace = /** @type {BattleElement} */ (document.createElement('section'));
++  workspace.setAttribute('data-infusion-workspace', '');
++  workspace.setAttribute('aria-label', '注能材料选择');
++  workspace.innerHTML = window.SDT.Icons.rich(`<header class="infusion-heading"><div><span class="infusion-eyebrow">注能</span><h3>从手牌选择 ${infusion.need} 张材料</h3></div><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status">已选 ${picked.length}/${infusion.need}${remaining ? '' : '<small>材料已齐</small>'}</strong></header>
++    <aside class="infusion-source"><span class="infusion-eyebrow">将要使用</span><h4>${esc(infusion.card.name)}</h4><p class="infusion-cost">${effCostOf(infusion.card, infusion.uid)} 点能量 + ${infusion.need} 张材料</p>
++      <div class="infusion-source-card">${cardHTML(infusion.card, 'lg')}</div>
++      <button type="button" class="infusion-detail" data-act="btInfuseInspect" data-uid="${escAttr(infusion.uid)}">查看主卡详情</button>
+       <p class="infusion-destination">材料进入消耗牌堆，不自动洗回，仅由卡牌效果取回；战后进入消耗区。道具、装备不可在火堆复原。</p>
+     </aside>
+-    <section class="infusion-selection"><header><div><h4>选择 ${infusion.need} 张材料</h4></div><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status">已选 ${picked.length}/${infusion.need}${remaining ? '' : '<small>材料已齐</small>'}</strong></header>
+-      <div class="infusion-materials">${materialHTML || '<p>没有可选材料</p>'}</div>
+-      <div class="infusion-selection-summary"><span>本次材料</span><p>${chosen || '尚未选择材料'}</p></div>
+-    </section></div>
+-    <div class="ov-btns infusion-footer"><button class="ov-btn" data-act="btInfuseCancel">返回战斗</button><button class="ov-btn infusion-direct" data-act="btInfuseDirect" data-uid="${escAttr(infusion.uid)}" ${required ? 'disabled title="未注能时没有效果，必须先注能"' : ''}>${required ? '必须注能后打出' : '不注能直接打出'}</button><p>${targetNext ? '下一步选目标，有效打出后才消耗' : '确认后打出，并消耗所选材料'}</p><button class="ov-btn ok" data-act="btInfuseGo" ${remaining ? 'disabled' : ''}>${remaining ? `还需 ${remaining} 张材料` : targetNext ? '确认材料 · 选择目标' : '确认注能并打出'}</button></div>`, 'discover', snapshot);
+-  const page = /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-decision[data-decision-kind="infusion"]'));
+-  const workspace = /** @type {BattleElement} */ (page?.querySelector('[data-infusion-workspace]'));
+-  if (!workspace) return;
++    <section class="infusion-selection"><header><h4>已选材料</h4><span>${picked.length ? '点击已选卡撤回手牌' : '点击下方手牌移入此处'}</span></header>
++      <div class="infusion-selected-cards" role="group" aria-label="已选材料，点击卡面撤回">${selectedHTML || '<p class="infusion-selection-empty">从下方手牌选择材料</p>'}</div>
++    </section>
++    <footer class="infusion-footer"><div class="infusion-actions"><button class="ov-btn" data-act="btInfuseCancel">返回战斗</button><button class="ov-btn infusion-direct" data-act="btInfuseDirect" data-uid="${escAttr(infusion.uid)}" ${required ? 'disabled title="未注能时没有效果，必须先注能"' : ''}>${required ? '必须注能后打出' : '不注能直接打出'}</button><button class="ov-btn ok" data-act="btInfuseGo" ${remaining ? 'disabled' : ''}>${remaining ? `还需 ${remaining} 张材料` : targetNext ? '确认材料 · 选择目标' : '确认注能并打出'}</button></div><p>${targetNext ? '下一步选目标，有效打出后才消耗' : '确认后打出，并消耗所选材料'}</p></footer>
++    <div class="infusion-hand-caption"><h4>候选手牌</h4><span>${cards.length - picked.length} 张留在手中 · 已选卡在上方${cards.length > 9 ? ' · 横向滚动查看更多' : ''}</span></div>`);
+   workspace._battleToken = snapshot.battleToken; workspace._sourceUid = infusion.uid;
+-  /** @type {BattleElement} */ (workspace.querySelector('.infusion-materials')).scrollTop = scroll;
+-  if (focused?.summary) /** @type {BattleElement} */ (workspace.querySelector('.infusion-source-details summary'))?.focus({ preventScroll:true });
++  // Material picks must not reset a long main-card rule or reload its artwork.
++  if (sourceCard) workspace.querySelector('.infusion-source-card').replaceWith(sourceCard);
++  if (previous) previous.replaceWith(workspace); else stage.appendChild(workspace);
++  workspace.querySelectorAll('.infusion-card-face [tabindex]').forEach((/** @type {HTMLElement} */ node) => { node.tabIndex = -1; });
++  const emptyHand = hand?.querySelector('.ov-empty');
++  if (emptyHand) emptyHand.textContent = '候选手牌已全部选中；点击上方卡牌可撤回。';
++  /** @type {BattleElement} */ (workspace.querySelector('.infusion-selected-cards')).scrollLeft = selectedScroll;
++  if (focusedHandUid && picked.includes(focusedHandUid)) [.../** @type {NodeListOf<HTMLButtonElement>} */ (workspace.querySelectorAll('[data-act="btInfuseRemove"]'))].find(button => button.dataset.uid === focusedHandUid)?.focus({ preventScroll:true });
++  if (sourceFocus) sourceFocus.focus({ preventScroll:true });
+   else if (focused) {
+-    const available = [.../** @type {NodeListOf<HTMLButtonElement>} */ (page.querySelectorAll('button:not(:disabled)'))];
+-    const sameGroup = button => button.dataset.groupUid === focused.groupUid;
+-    const exact = available.find(button => button.dataset.act === focused.act && sameGroup(button));
+-    const fallback = focused.groupUid && available.find(button => sameGroup(button) && button.dataset.act === 'btInfuseInspect');
+-    (exact || fallback || /** @type {BattleElement} */ (page.querySelector('[data-act="btInfuseCancel"]')))?.focus({ preventScroll:true });
++    const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (workspace.querySelectorAll('button:not(:disabled)'))];
++    (buttons.find(button => button.dataset.act === focused.act && button.dataset.uid === focused.uid)
++      || /** @type {HTMLElement} */ ([.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll('.bt-card') || [])].find(node => node.dataset.uid === focused.uid)?.querySelector('.hs-card'))
++      || buttons.find(button => button.dataset.act === 'btInfuseCancel'))?.focus({ preventScroll:true });
+   }
+-  // A snapshot checks all current values; share it only within this synchronous
+-  // input. Later inputs must see in-place state changes before the next render.
++  // Each face owns an actual UID; captions make same-name copies explicit.
++  cards.filter(entry => !picked.includes(entry.uids[0])).forEach(entry => {
++    const uid = entry.uids[0];
++    const state = infusionMaterialState(entry, infusion, snapshot.hand, infusionFuelReason);
++    const card = [.../** @type {NodeListOf<BattleElement>} */ (hand?.querySelectorAll('.bt-card') || [])].find(node => node.dataset.uid === uid);
++    if (!card) return;
++    card.querySelector('.infusion-copy-count')?.remove();
++    const caption = document.createElement('span'); caption.className = 'infusion-copy-count';
++    caption.textContent = `${entry.shortcut ? `${entry.shortcut} · ` : ''}第 ${entry.copyIndex}/${entry.totalCopies} 张 · 同名已选 ${entry.selectedCopies} 张`;
++    card.appendChild(caption);
++    card.classList.toggle('infusion-at-limit', !state.canAdjust);
++    card.setAttribute('aria-label', `${entry.card.name}，第${entry.copyIndex}/${entry.totalCopies}张，同名已选${entry.selectedCopies}张。${state.addReason || '点击选择为材料'}`);
++    const face = card.querySelector('.hs-card');
++    face?.setAttribute('aria-label', card.getAttribute('aria-label'));
++    face?.setAttribute('aria-disabled', state.canAdjust ? 'false' : 'true');
++  });
+   const current = () => {
+-    if (!isInteractiveBattlePage(UI, page) || /** @type {BattleElement} */ (UI.el.ovBody.querySelector('.battle-decision')) !== page
++    if (!isInteractiveBattlePage(UI, workspace) || stage.querySelector('[data-infusion-workspace]') !== workspace
+       || document.getElementById('cardZoom')) return null;
+     const now = getSnapshot();
+     return now.battleToken === snapshot.battleToken && now.infusing?.uid === infusion.uid
+-      && !now.busy && ['player', 'targeting'].includes(now.phase) ? now : null;
+-  };
+-  const adjust = (data, remove, now = current()) => {
+-    if (!now) return;
+-    const group = groups[Number(data.i)];
+-    if (!group) return;
+-    const uid = remove ? group.uids.find(id => now.infusing.picked.includes(id))
+-      : now.infusing.picked.length < now.infusing.need && group.uids.find(id => now.hand.includes(id) && !now.infusing.picked.includes(id) && !infusionFuelReason(id));
+-    if (uid) commands.selectInfusion(uid);
++      && now.infusing.selectionId === infusion.selectionId && !now.busy && ['player', 'targeting'].includes(now.phase) ? now : null;
+   };
+-  const adjustFace = (data, now = current()) => {
+-    const group = groups[Number(data.i)];
+-    if (!now || !group) return;
+-    const state = infusionMaterialState(group, now.infusing, now.hand, infusionFuelReason);
+-    if (state.canAdjust) adjust(data, state.remove, now);
++  const toggle = (uid, now = current()) => {
++    if (!now || !cards.some(entry => entry.uids[0] === uid)) return;
++    if (now.infusing.picked.includes(uid) || (now.hand.includes(uid) && now.infusing.picked.length < now.infusing.need && !infusionFuelReason(uid))) commands.selectInfusion(uid);
+   };
+-  UI.act('btPlay', () => {});
+-  UI.act('btInfuseAdjust', data => adjustFace(data));
+-  UI.act('btInfuseAdd', data => adjust(data, false));
+-  UI.act('btInfuseRemove', data => adjust(data, true));
++  UI.act('btInfuseRemove', data => { const now = current(); if (now?.infusing.picked.includes(data.uid)) toggle(data.uid, now); });
+   UI.act('btInfuseInspect', data => {
+     if (!current()) return;
+-    const group = groups[Number(data.i)];
+-    const entry = group && findCard(group.uids[0]);
+-    if (entry) UI.showCardZoom(entry.card, { returnFocus:page.querySelector(`[data-act="btInfuseInspect"][data-i="${Number(data.i)}"]`) });
++    const entry = findCard(data.uid);
++    if (entry) UI.showCardZoom(entry.card, { returnFocus:workspace.querySelector('[data-act="btInfuseInspect"]') });
+   });
+   const cancel = () => { const now = current(); return !!now && cancelSelection({ snapshot:now, commands }); };
+   UI.act('btInfuseCancel', cancel);
+   UI.act('btInfuseDirect', () => { if (current() && !required) commands.playDirect(infusion.uid); });
+   UI.act('btInfuseGo', () => { const now = current(); if (now && now.infusing.picked.length === now.infusing.need) commands.confirmInfusion(); });
+   const onKey = event => {
+-    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+-    const materialKey = /^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.target?.closest?.('[contenteditable="true"]') && !event.shiftKey;
++    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented) return;
++    const materialKey = /^[1-9]$/.test(event.key);
+     if (event.key !== 'Escape' && !materialKey) return;
++    // Suppress the ordinary hand shortcut behind this mode without preventing
++    // browser shortcuts or editing text in an input/contenteditable region.
++    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || /INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') || event.target?.closest?.('[contenteditable="true"]')) {
++      event.stopImmediatePropagation(); return;
++    }
+     const now = current();
+-    if (!now) return;
+-    if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); cancel(); }
+-    // Detached hand-layer shortcuts must not select a hidden material.
+-    if (materialKey) {
+-      event.preventDefault(); event.stopImmediatePropagation();
+-      adjustFace({ i:Number(event.key) - 1 }, now);
++    if (!now) {
++      if (materialKey || !document.getElementById('cardZoom')) event.stopImmediatePropagation();
++      return;
+     }
++    event.preventDefault(); event.stopImmediatePropagation();
++    if (event.key === 'Escape') cancel();
++    else toggle(cards[Number(event.key) - 1]?.uids[0], now);
+   };
+   document.addEventListener('keydown', onKey, true);
+   const cleanup = () => {
+@@ -125,5 +149,4 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
+   document.addEventListener('sdt-overlay-mode', cleanup);
+   document.addEventListener('sdt-overlay-close', cleanup);
+   keyCleanup = cleanup;
+-  UI.refresh(window.SDT.game);
+ }
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.infusion-material-state.js b/game/src/battle/view/battle.infusion-material-state.js
+index 44a41165..73c1aa9e 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.infusion-material-state.js
++++ b/game/src/battle/view/battle.infusion-material-state.js
+@@ -1,11 +1,24 @@
+ // Presentation only: the command layer validates and spends materials.
+-// Card-face clicks and number keys share the same add-until-full / remove action.
++import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
++
++// Expose each physical copy without editing the hand or the selection.
++export function infusionHandCards(entries, infusion) {
++  let index = 0;
++  return orderHandGroups(groupHandCards(entries, infusion)).filter(group => !group.self).flatMap(group => {
++    const selectedCopies = group.uids.filter(uid => infusion.picked.includes(uid)).length;
++    return group.uids.map((uid, copy) => ({ ...group, key:`${group.key}|uid:${uid}`, uids:[uid],
++      copyIndex:copy + 1, totalCopies:group.uids.length, selectedCopies, shortcut:++index <= 9 ? index : null,
++      displayIndex:index - 1, displayCount:entries.length - 1 }));
++  });
++}
++
++// Card eligibility is projected without selecting a physical copy for the player.
+ export function infusionMaterialState(group, infusion, hand, fuelReason) {
+   const selected = group.uids.filter(uid => infusion.picked.includes(uid));
+   const available = group.uids.filter(uid => hand.includes(uid) && !infusion.picked.includes(uid) && !fuelReason(uid));
+   const full = infusion.picked.length >= infusion.need;
+   const unavailable = !selected.length && !available.length ? fuelReason(group.uids[0]) || '材料已不在手牌中' : '';
+-  const addReason = unavailable || (full ? '材料已齐，请先减少已选材料' : !available.length ? selected.length === group.uids.length ? '该组材料已全部选中' : '该组没有更多可选材料' : '');
++  const addReason = unavailable || (full ? '材料已齐，请先撤回已选卡' : !available.length ? selected.length === group.uids.length ? '该组材料已全部选中' : '该组没有更多可选材料' : '');
+   const remove = selected.length > 0 && (full || !available.length);
+   return { selected, available, unavailable, addReason, remove, canAdjust:remove || !addReason };
+ }
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.discover-view.js b/game/src/battle/view/battle.discover-view.js
+index 443f438a..c0d179bf 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.discover-view.js
++++ b/game/src/battle/view/battle.discover-view.js
+@@ -8,14 +8,12 @@ export function battleDiscoverBodyHTML({ candidates, cardHTML, action, remaining
+       aria-label="${escAttr(`${card.name}，${action}${sourceNote ? `，${sourceNote}` : ''}${infusionNote ? `，${infusionNote}` : ''}`)}">
+       ${cardHTML(card, 'lg')}
+       <span class="battle-discover-card-caption"><span class="battle-discover-index">${String(index + 1).padStart(2, '0')}</span>${sourceNote ? `<span class="battle-discover-card-source">${esc(sourceNote)}</span>` : ''}<span class="battle-discover-pick-mark" aria-hidden="true">↗</span></span>
+-      ${infusionNote ? `<span class="battle-discover-equipment-note">${esc(infusionNote)}</span>` : ''}
+-      ${equipmentNote ? `<span class="battle-discover-equipment-note">${esc(equipmentNote)}</span>` : ''}
+-    </button><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" data-cancel="false" aria-label="查看 ${escAttr(card.name)} 详情">查看详情</button></div>`).join('');
+-  const rules = [note, ...modifiers].filter(Boolean).join(' · ');
++    </button><div class="battle-discover-card-notes">${infusionNote ? `<p class="battle-discover-equipment-note">${esc(infusionNote)}</p>` : ''}${equipmentNote ? `<p class="battle-discover-equipment-note">${esc(equipmentNote)}</p>` : ''}</div><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${index}" data-cancel="false" aria-label="查看 ${escAttr(card.name)} 详情">查看详情</button></div>`).join('');
++  const rules = [note, ...modifiers].filter(Boolean);
+   return `<p class="ov-stats battle-discover-summary"><span>${esc(action)}</span><span class="battle-discover-progress" aria-label="还需发现 ${remaining} 次">剩余 <b>${remaining}</b> 次</span></p>
+     <section class="battle-discover-panel" data-battle-discover data-discover-page="${escAttr(pageToken)}">
+       <div class="battle-discover-meta">${source ? `<span class="battle-discover-source">来自 ${esc(source)}</span>` : ''}<span class="battle-discover-count">${candidates.length} 张候选</span></div>
+       <div class="bt-hand battle-discover-options" role="group" aria-label="${escAttr(action)}">${options}</div>
+-      ${rules ? `<p class="battle-discover-rules">${esc(rules)}</p>` : ''}
++      ${rules.length ? `<div class="battle-discover-rules">${rules.map(rule => `<p>${esc(rule)}</p>`).join('')}</div>` : ''}
+     </section>`;
+ }
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.view.js b/game/src/battle/view/battle.view.js
+index 71ac5285..0af3a2d3 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/src/battle/view/battle.view.js
++++ b/game/src/battle/view/battle.view.js
+@@ -17,6 +17,8 @@ import { renderCombatPiles, consumedPileUids } from './battle.piles.view.js';
+ import { turnForecastHTML } from '../../ui/battle-hud-info.js';
+ import { careerSkillButtonHTML } from './battle.skill-view.js';
+ import { renderInfusionSelection } from './battle.infusion-view.js';
++import { infusionHandCards } from './battle.infusion-material-state.js';
++import { createBattlePotionUse } from './battle.potion-use.js';
+ import { discoverInfusionNote } from './battle.discover-infusion.js';
+ import { battleDiscoverBodyHTML } from './battle.discover-view.js';
+ import { bindBattleDecisionInspection, restoreCombatScene } from './battle.decision-shell.js';
+@@ -28,7 +30,7 @@ import { createBattleSceneryCapture } from './battle.scenery.js';
+ import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+ import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
+ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
+-import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE, infusionStackUid } from './battle.layers.js';
++import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
+ import { spawnFloats } from './battle.vfx.js';
+ import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
+ import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid, updateClickSelectionUI } from './battle.aim.js';
+@@ -43,11 +45,10 @@ let sceneryStage = null, sceneryToken = null, sceneryWorld = null, sceneryFront
+ let sceneryReady = null;
+ const battleEntry = createBattleEntryGate();
+ let sceneryObserver = null, sceneryHideObserver = null, sceneryFrame = 0;
+-let activePotionTipCleanup = null;
++const potionUse = createBattlePotionUse({ UI, getSnapshot, commands });
++if (import.meta.hot) import.meta.hot.dispose(() => potionUse.dispose());
+ function clearPotionTip() {
+-  const cleanup = activePotionTipCleanup;
+-  activePotionTipCleanup = null;
+-  cleanup?.();
++  potionUse.close();
+ }
+ function clearBattleScenery() {
+   sceneryObserver?.disconnect(); sceneryObserver = null;
+@@ -95,7 +96,7 @@ function layoutBattleScenery() {
+   sceneryFront.style.top = `${a.top - overlay.top + y * sy}px`;
+   sceneryFront.style.width = `${width * sx}px`; sceneryFront.style.height = `${height * sy}px`;
+   // HUD 本身可透明且零高；只为实际可见控件开孔，保留其余前景覆盖地面。
+-  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-infuse, .bt-card, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
++  const protectedNodes = sceneryStage.querySelectorAll('.sts-topbar, .sts-nameplate, .sts-intent, .sts-arena-caption, .bt-potions, .bt-potion-use, .bt-infuse, .bt-card, .sts-energy-wrap, .sts-hand-tools, .sts-tactics, .bt-fpreview, .bt-thought-bubble, .sts-unit.can-target, #aimArrow');
+   const holes = [...protectedNodes].map(node => {
+     const r = uiRect(node);
+     const padding = node.matches('.sts-unit.can-target') ? 10 : 4;
+@@ -202,7 +203,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+   const pickChoice = commands.pickChoice;
+   const pickHandSelect = commands.pickHandSelect;
+   const skipHandSelect = commands.skipHandSelect;
+-  const usePotion = commands.usePotion;
+   const useEquipSkill = commands.useEquipSkill;
+   // 双击放大已退役（2026-09-12 老板定向：紧凑手牌 + 单击展开完整卡面取代）
+ 
+@@ -342,7 +342,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+     // This is view-only: phase/resources stay real, and existing selection DOM
+     // remains mounted until the presenter captures its focus and scroll.
+     const secondary = snapshot.choosing || snapshot.discovering || snapshot.handSelecting
+-      || snapshot.infusing || snapshot.viewingGrave || snapshot.viewingDeck || snapshot.viewingBag;
++      || snapshot.viewingGrave || snapshot.viewingDeck || snapshot.viewingBag;
+     if (secondary && !snapshot.deckSelection && !backgroundOnly) {
+       render({ ...snapshot, choosing:null, discovering:null, handSelecting:null, infusing:null,
+         viewingGrave:false, viewingDeck:false, viewingBag:false }, true);
+@@ -366,7 +366,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
+     // 销毁，不藏会浮在弹层之上（09-12 实机：背包弹层上残留玩家序列帧立绘）——
+     // 卸下 sprite 恢复静态立绘，关闭弹层走主渲染 attach 自动恢复
+-    if (viewingGrave || viewingBag || choosing || handSelecting || discovering || infusing) hideUnitFrames();
++    if (viewingGrave || viewingBag || choosing || handSelecting || discovering) hideUnitFrames();
+     if (deckSelection) { renderDeckSelection(snapshot); return; }   // 战前编组：允许下次挂载时重置手牌层
+     if (viewingGrave) { renderGrave(snapshot); return; }
+     if (viewingDeck) { renderDeckPileView(snapshot); return; }
+@@ -463,26 +463,24 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+       UI.refresh(SDT.game);
+       return;
+     }
+-    if (infusing) {
+-      renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, showBattleDecision, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
+-      return;
+-    }
+     const cards = hand.map(findCard).filter(Boolean);
+     const infusingNow = !!infusing;
+     // —— 法伤加成同步（2026-09-09 需求）：有法伤加成时，造成法术伤害的招式卡面
+     // 数值实时显示为「卡面值 + 法伤加成」，数字略微放大（口径同 combat.dealDamage）
+     const spellBonus = (player.spellPower || 0) + (/** @type {number} */ ((pstat.status && pstat.status.spellUp) || 0));
+     // —— 同名卡堆叠（v0.32 杀戮尖塔式手牌）：同名同描述的卡只占一个位置，显示 ×N ——
+-    // 注能中：注能主卡单独一块展示，其同名燃料照常成组（点击组 = 消耗组内一张）
++    // 注能时每个实际 UID 单独成卡；已选材料移到独立容器，主卡保持完整可读。
+     // 初始攻击最左、招式在前、装备在后；类别内部保留槽位，不改变hand语义顺序
+-    const stable = stableHandSlots(orderHandGroups(groupHandCards(cards, infusingNow ? infusing : null)), snapshot.battleToken, snapshot.turn);
++    const stable = infusingNow
++      ? { groups:infusionHandCards(cards, infusing).filter(group => !infusing.picked.includes(group.uids[0])).map((group, displaySlot) => ({ ...group, displaySlot })), count:cards.length - 1 }
++      : stableHandSlots(orderHandGroups(groupHandCards(cards)), snapshot.battleToken, snapshot.turn);
+     const groups = stable.groups;
+     const N = stable.count;
+     // 分栏切页：只渲染当前栏的9叠，扇形布局按本栏实际张数计算。
+-    const handPages = Math.max(1, Math.ceil(N / HAND_PAGE_SIZE));
++    const handPages = infusingNow ? 1 : Math.max(1, Math.ceil(N / HAND_PAGE_SIZE));
+     if (handPage >= handPages) handPage = handPages - 1;
+     if (handPage < 0) handPage = 0;
+-    const pageGroups = groups.filter(g => Math.floor(g.displaySlot / HAND_PAGE_SIZE) === handPage)
++    const pageGroups = infusingNow ? groups : groups.filter(g => Math.floor(g.displaySlot / HAND_PAGE_SIZE) === handPage)
+       .map(g => ({ ...g, displayIndex: g.displaySlot % HAND_PAGE_SIZE, displayCount: Math.min(HAND_PAGE_SIZE, N - handPage * HAND_PAGE_SIZE) }));
+     // 手牌 DOM 由常驻层差分维护（见 mountHandLayer / updateHand）：这里只算分组与目标扇形位，
+     // 不再拼整段手牌 HTML（批次A 架构对齐：手牌区不随整屏重渲染重建）
+@@ -513,16 +511,15 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+       <div class="bt-potions">
+         <span class="bt-potions-label">[[icon:flask]] 道具</span>
+         ${potions.length ? potions.map((p, pi) => p.usable === false
+-          ? `<div class="bt-potion off" data-potion-idx="${pi}">
++          ? `<div class="bt-potion off" role="button" tabindex="0" data-uid="${p.uid}" aria-label="查看${escAttr(p.name)}：${escAttr(p.why || p.desc)}" data-potion-idx="${pi}">
+               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
+             </div>`
+-          : `<div class="bt-potion${p.aim === 'enemy' ? ' need-target' : ''}" role="button" tabindex="0" aria-label="使用${escAttr(p.name)}：${escAttr(p.desc)}${p.aim === 'enemy' ? '，随后选择敌人' : ''}" data-act="btPotion" data-uid="${p.uid}"
++          : `<div class="bt-potion${p.aim === 'enemy' ? ' need-target' : ''}" role="button" tabindex="0" aria-label="查看${escAttr(p.name)}：${escAttr(p.desc)}${p.aim === 'enemy' ? '，使用后选择目标，或拖向敌人' : ''}" data-act="btPotion" data-uid="${p.uid}"
+               ${p.aim === 'enemy' ? 'data-potion-aim="1"' : ''}
+               data-potion-idx="${pi}">
+               ${SDT.Icons.img('flask')}<b>${esc(p.name)}</b>${p.count > 1 ? `<span class="bt-potion-n">×${p.count}</span>` : ''}
+             </div>`).join('')
+           : '<span class="bt-potions-empty">背包里没有道具</span>'}
+-        <div class="bt-potion-tip" data-potion-tip hidden></div>
+       </div>` : '';
+     const battleAssetKey = opts.isBoss
+       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
+@@ -587,8 +584,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+       if (Date.now() - aimPlayedAt < 300) return;   // 指向松手刚打出，忽略残留 click
+       const snap = getSnapshot();
+       if (snap.infusing) {
+-        const uid = infusionStackUid(d.uid);
+-        if (uid) commands.selectInfusion(uid);
++        if (!infusing || snap.infusing.selectionId !== infusing.selectionId) return;
++        if (groups.some(group => group.uids[0] === d.uid)) commands.selectInfusion(d.uid);
+       }
+       else selectCardByClick(d.uid, false, { autoSingleTarget: false });
+     };
+@@ -671,8 +668,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+         }
+       }, 2600);
+     });
+-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGrave', openGrave, '.battle-stage');
+-    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', openDeckView, '.battle-stage');
++    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGrave', () => { if (!getSnapshot().infusing) openGrave(); }, '.battle-stage');
++    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', () => { if (!getSnapshot().infusing) openDeckView(); }, '.battle-stage');
+     UI.act('btDeckBack', closeDeckView);
+     UI.act('btSlam', () => {
+       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）
+@@ -683,19 +680,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+     // —— 药水栏（2026-09-12 老板定向）：点击使用；敌方指向药水按住可拖到敌人身上 ——
+     UI.act('btPotion', (d) => {
+       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽刚松手，忽略残留 click
+-      usePotion(d.uid);
++      potionUse.open(d.uid);
+     });
+     const body = UI.el.ovBody;
+     // —— 药水栏/砸击绑定：节点跨渲染保留（syncBattleSlot 差分命中即复用旧节点），dataset 标记
+     // 去重防监听器无界累积（此前每次 render 重挂，几十次渲染=同节点 N 套闭包）——
+-    /** @type {NodeListOf<HTMLButtonElement>} */ (body.querySelectorAll('.bt-potion[role="button"]')).forEach(el => {
+-      if (el.dataset.keyBound) return;
+-      el.dataset.keyBound = '1';
+-      el.addEventListener('keydown', event => {
+-        if (event.isComposing || !['Enter', ' '].includes(event.key)) return;
+-        event.preventDefault(); el.click();
+-      });
+-    });
+     /** @type {NodeListOf<BattleElement>} */ (body.querySelectorAll('.bt-potion[data-potion-aim="1"]')).forEach(el => {
+       if (el.dataset.aimBound) return;
+       el.dataset.aimBound = '1';
+@@ -707,52 +696,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+       el.dataset.aimBound = '1';
+       el.addEventListener('pointerdown', (e) => { if (e.button === 0) startAim(e, el, 'slam'); });
+     });
+-    // 药水栏点击直接使用兜底（2026-09-16 留言 #11：普通战药水栏点不动）
+-    /** @type {NodeListOf<BattleElement>} */ (body.querySelectorAll('.bt-potion:not([data-potion-aim="1"]):not(.off)')).forEach(el => {
+-      if (el.dataset.useBound) return;
+-      el.dataset.useBound = '1';
+-      el.addEventListener('pointerdown', (e) => {
+-        if (e.button !== 0) return;
+-        const uid = el.dataset.uid;
+-        if (uid) usePotion(uid);
+-      });
+-    });
+-    // 药水自绘文字提示栏（09-20 老板：悬停 / 触摸药水即出说明，不用系统 title）——
+-    // 挂在 .bt-potions 容器内贴药水栏正下方；任一终止事件同时解绑 up/cancel，换栏/离页也清理。
+-    const potionTip = /** @type {BattleElement} */ (body.querySelector('[data-potion-tip]'));
+-    if (potionTip) {
+-      const showPotionTip = (p) => {
+-        if (!potionTip.isConnected) return;
+-        clearPotionTip();
+-        activePotionTipCleanup = hidePotionTip;
+-        potionTip.innerHTML = p.usable === false
+-          ? `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}（不可使用——${esc(p.why)}）`
+-          : `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}${p.aim === 'enemy' ? '——点击或拖到敌人身上使用' : '——点击直接使用'}`;
+-        potionTip.hidden = false;
+-      };
+-      const hidePotionTip = () => {
+-        potionTip.hidden = true;
+-        document.removeEventListener('pointerup', hidePotionTip);
+-        document.removeEventListener('pointercancel', hidePotionTip);
+-        if (activePotionTipCleanup === hidePotionTip) activePotionTipCleanup = null;
+-      };
+-      /** @type {NodeListOf<BattleElement>} */ (body.querySelectorAll('.bt-potion')).forEach(el => {
+-        if (el.dataset.tipBound) return;
+-        el.dataset.tipBound = '1';
+-        // p 惰性现取：potions 数组每渲染重建，去重后的常驻闭包若绑定时就捕获会拿旧数据
+-        const potionAt = () => potions[Number(el.dataset.potionIdx)];
+-        el.addEventListener('mouseenter', () => { const p = potionAt(); if (p) showPotionTip(p); });
+-        el.addEventListener('mouseleave', hidePotionTip);
+-        el.addEventListener('pointerdown', (e) => {
+-          if (e.button !== 0 && e.pointerType === 'mouse') return;
+-          const p = potionAt();
+-          if (!p || !potionTip.isConnected) return;
+-          showPotionTip(p);
+-          document.addEventListener('pointerup', hidePotionTip, { once: true });
+-          document.addEventListener('pointercancel', hidePotionTip, { once: true });
+-        });
+-      });
+-    }
+     // —— 指向施法（炉石/杀戮尖塔式）：按住指向卡轻微拎起，弯曲箭头跟随指针 ——
+     //    指向敌人 = 红色箭头，指向自己（立绘）= 绿色箭头；松手在目标身上即打出，
+     //    松手没目标自动取消回手牌；轻点先放大查看，再明确确认使用。
+@@ -775,7 +718,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+     const paintedReady = syncBattleScenery(entryStage, snapshot.battleToken, captureBattleScenery(snapshot, SDT.game?.layerIdx || 0));
+     mountHandLayer(body, tip, snapshot.battleToken, playHandCard);
+     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
++    const focusedHandUid = snapshot.infusing && document.activeElement instanceof HTMLElement
++      ? /** @type {BattleElement} */ (document.activeElement.closest('.sts-hand .bt-card'))?.dataset.uid : null;
+     const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect });
++    renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, infusionFuelReason, effCostOf, targetSide, commands, focusedHandUid, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size) });
++    potionUse.sync(entryStage, snapshot, potions);
+     if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);
+     if (battleEntry.pending(entryStage)) {
+       const images = waitForBattleImages(entryStage);
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/css/battle-infusion.css b/game/css/battle-infusion.css
+index ffac64cf..bd4319ed 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/css/battle-infusion.css
++++ b/game/css/battle-infusion.css
+@@ -1,62 +1,55 @@
+-/* Focused infusion workspace uses the combat decision palette without the
+-   generic page's empty full-height shell. Material scrolling is independent. */
+-body #overlay .card.card:has(.battle-decision.battle-decision-unified[data-decision-kind="infusion"]) {
+-  width:min(1420px,calc(var(--game-layout-width,100vw) - 100px))!important;
+-  height:min(820px,calc(var(--game-layout-height,100vh) - 100px))!important;
++/* In-place card selection: the battle remains visible behind the source,
++   selected cards and the same mounted hand. Card faces keep the game theme. */
++body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace] {
++  position:absolute; inset:0; z-index:24; pointer-events:none; color:#e9eff0;
++  font:400 21px/1.45 var(--font-ui,sans-serif);
+ }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-head { padding:22px 30px 16px; border-bottom:1px solid #afc4ce26!important; }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-content { display:flex; padding:0; overflow:hidden!important; }
+-body #overlay [data-infusion-workspace] { display:grid; grid-template-columns:300px minmax(0,1fr); width:100%; min-height:0; font:400 21px/1.45 var(--font-ui,sans-serif); }
+-body #overlay .infusion-source { padding:22px 26px; overflow:auto; background:#0e1a2460; border-right:1px solid #afc4ce26; }
+-body #overlay .infusion-eyebrow { font-size:18px; color:#9eafb9; }
+-body #overlay [data-infusion-workspace] h4 { margin:5px 0 10px; color:#eee3c6; font-size:29px; line-height:1.3; }
+-body #overlay .infusion-cost { margin:0; font-size:20px; color:#c6d6df; }
+-body #overlay .infusion-source-card { display:flex; justify-content:center; margin:10px 0; }
+-body #overlay .infusion-source-card .hs-card { font-size:12px; }
+-body #overlay .infusion-rules h5 { margin:0 0 8px; font-size:19px; color:#c1d5d8; }
+-body #overlay .infusion-rules p { margin:0; font-size:21px; line-height:1.5; }
+-body #overlay .infusion-destination { margin:14px 0 0; padding-top:12px; border-top:1px solid #afc4ce26; color:#afbec6; font-size:19px; line-height:1.5; }
+-body #overlay .infusion-selection { min-width:0; min-height:0; display:flex; flex-direction:column; }
+-body #overlay .infusion-selection>header { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:12px 18px 10px; }
+-body #overlay .infusion-selection>header p { margin:0; color:#aebfc9; font-size:20px; }
+-body #overlay .infusion-progress { flex:none; color:#e5d3a2; font-size:29px; font-variant-numeric:tabular-nums; text-align:right; }
+-body #overlay .infusion-progress small { display:block; font-size:19px; font-weight:400; }
+-body #overlay .infusion-progress.is-ready { color:#b8dfcf; }
+-body #overlay .infusion-materials { flex:1; min-height:0; overflow:auto; scrollbar-gutter:stable; overscroll-behavior:contain; display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); align-content:start; gap:24px; padding:12px 24px 24px; }
+-body #overlay .infusion-material { position:relative; display:flex; flex-direction:column; min-width:0; padding:12px 0; border:0; border-bottom:2px solid #8ca7b132; border-radius:0; background:none; }
+-body #overlay .infusion-material.is-selected { border-color:#c3e3e5; background:#b6dce50a; box-shadow:none; }
+-body #overlay .infusion-material.is-unavailable { opacity:.65; }
+-body #overlay .infusion-card-face { display:flex; justify-content:center; width:100%; margin:0; padding:0; border:0; background:none; cursor:pointer; }
+-body #overlay .infusion-card-face:disabled { cursor:default; opacity:1; }
+-body #overlay .infusion-card-face .hs-card { pointer-events:none; font-size:13px; margin:12px 0; }
+-body #overlay .infusion-material-heading { display:flex; gap:8px; align-items:baseline; justify-content:space-between; margin:0 0 6px; font-size:20px; }
+-body #overlay .infusion-material-heading b { min-width:0; overflow-wrap:anywhere; color:#e4e9e9; font-size:0; }
+-body #overlay .infusion-detail { flex:none; padding:3px 0; border:0; background:none; color:#b9cfd8; font-size:18px; text-decoration:underline; cursor:pointer; }
+-body #overlay .infusion-quantity { order:2; display:flex; align-items:center; justify-content:center; gap:14px; padding-top:10px; }
+-body #overlay .infusion-quantity>button { flex:none; width:48px; height:46px; padding:0; border:1px solid #b3c6ce60; border-radius:6px; color:#e5edf1; background:#314854; font:500 29px/1 var(--font-ui,sans-serif); cursor:pointer; }
+-body #overlay .infusion-quantity>button:disabled { color:#657984; border-color:#6f89932d; background:#1b2a35; cursor:default; }
+-body #overlay .infusion-quantity>span { text-align:center; font-size:25px; color:#bacbd2; }
+-body #overlay .infusion-quantity b { color:#eddbac; }
+-body #overlay .infusion-quantity small { display:block; font-size:16px; }
+-body #overlay .infusion-material-note { min-height:24px; margin:9px 0 0; text-align:center; color:#afc1c9; font-size:17px; }
+-body #overlay .infusion-material.is-selected .infusion-material-note { color:#e8d5a7; }
+-body #overlay .infusion-selection-summary { display:none; }
+-body #overlay .infusion-selection-summary>span { color:#94acb9; font-size:17px; white-space:nowrap; }
+-body #overlay .infusion-selection-summary p { margin:0; color:#e9dbb6; font-size:18px; max-height:52px; overflow:auto; }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .battle-decision-actions { padding:18px 26px; }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer .ov-btn { min-width:140px; min-height:58px; padding:12px 20px; font-size:22px; }
+-body #overlay .battle-decision.battle-decision-unified[data-decision-kind="infusion"] .infusion-footer .ok { min-width:245px; }
+-body #overlay .infusion-footer p { flex:1; margin:0 12px; text-align:right; color:#b5c5cd; font-size:18px; max-width:240px; }
++body #overlay .battle-stage.sts[data-infusion-mode] [data-infusion-workspace]::before {
++  content:''; position:absolute; inset:0; z-index:-1; background:#07111975;
++}
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hud { z-index:25; }
++body #overlay .battle-stage.sts[data-infusion-mode] :is(.sts-topbar,.bt-potions,.sts-resource-dock,.sts-hud-r,.sts-hand-tools,.sts-tactics) { opacity:.35; pointer-events:none; }
++body #overlay .infusion-heading { position:absolute; top:118px; left:430px; right:64px; display:flex; align-items:center; justify-content:space-between; gap:32px; }
++body #overlay .infusion-eyebrow { color:#cad9df; font-size:18px; letter-spacing:.1em; }
++body #overlay .infusion-heading h3 { margin:4px 0 0; color:#eee3c6; font-size:34px; line-height:1.3; }
++body #overlay .infusion-progress { flex:none; color:#e5d3a2; font-size:30px; font-variant-numeric:tabular-nums; text-align:right; }
++body #overlay .infusion-progress small { display:block; color:#b8dfcf; font-size:19px; font-weight:400; }
++body #overlay .infusion-source { position:absolute; top:140px; left:64px; width:300px; pointer-events:auto; text-align:center; }
++body #overlay .infusion-source h4 { margin:4px 0 6px; color:#eee3c6; font-size:25px; line-height:1.3; overflow-wrap:anywhere; }
++body #overlay .infusion-cost { margin:0; color:#d5e0e4; font-size:21px; }
++body #overlay .infusion-source-card { margin:14px 0 8px; }
++body #overlay .infusion-source-card .hs-card { width:300px!important; max-width:none!important; margin:0; font-size:24px; filter:drop-shadow(0 12px 20px #0006); }
++body #overlay .infusion-detail { margin:0; padding:6px 12px; border:0; background:none; color:#d7e4e8; font:400 19px/1.4 var(--font-ui,sans-serif); text-decoration:underline; cursor:pointer; }
++body #overlay .infusion-destination { margin:12px 0 0; color:#c3d2d8; font-size:18px; line-height:1.5; text-align:left; }
++body #overlay .infusion-selection { position:absolute; top:220px; left:430px; right:64px; height:352px; min-width:0; pointer-events:auto; }
++body #overlay .infusion-selection>header { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:12px; }
++body #overlay :is(.infusion-selection,.infusion-hand-caption) h4 { margin:0; color:#dce9eb; font-size:23px; font-weight:500; }
++body #overlay .infusion-selection>header span { color:#c1d0d5; font-size:19px; }
++body #overlay .infusion-selected-cards { display:flex; align-items:flex-start; justify-content:safe center; gap:24px; height:320px; min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; padding:6px 12px 8px; border-top:1px solid #c6dfe336; border-bottom:1px solid #c6dfe336; }
++body #overlay .infusion-selection-empty { align-self:center; margin:auto; color:#aabdc7; font-size:24px; }
++body #overlay .infusion-selected-card { flex:0 0 190px; width:190px; min-width:0; text-align:center; }
++body #overlay .infusion-card-face { position:relative; display:block; width:100%; margin:0; padding:0; border:0; background:none; cursor:pointer; }
++body #overlay .infusion-card-face .hs-card { pointer-events:none; width:190px!important; max-width:none!important; margin:0; font-size:20px; outline:2px solid #bfe3e1; outline-offset:3px; }
++body #overlay .infusion-card-return { position:absolute; left:12px; right:12px; bottom:10px; padding:5px 8px; background:#102831ed; color:#e4f3ed; font:500 18px/1.2 var(--font-ui,sans-serif); }
++body #overlay .infusion-copy-count { display:block; margin-top:7px; color:#d3e2e5; font:400 17px/1.3 var(--font-ui,sans-serif); text-align:center; white-space:nowrap; }
++body #overlay .infusion-footer { position:absolute; top:604px; left:430px; right:64px; pointer-events:auto; }
++body #overlay .infusion-actions { display:flex; align-items:center; gap:16px; }
++body #overlay .infusion-actions .ov-btn { flex:none; min-width:154px; min-height:62px; margin:0; padding:13px 24px; font-size:23px; }
++body #overlay .infusion-actions .ok { margin-left:auto; min-width:290px; }
++body #overlay .infusion-footer p { max-width:630px; margin:10px 0 0 auto; color:#c2d2d9; font-size:19px; text-align:right; }
+ body #overlay .infusion-footer .ov-btn:disabled { background:#2b3d48!important; color:#9aaeb8!important; border-color:#6f899344!important; opacity:1; cursor:default; }
+-body #overlay .infusion-card-face:focus-visible,body #overlay .infusion-quantity button:focus-visible,body #overlay .infusion-detail:focus-visible { outline:3px solid #e8d4a1; outline-offset:4px; }
+-
+-body #overlay .infusion-key { color:#91a8b5; font-size:16px; font-weight:400; }
+-
+-/* Keep counters before artwork so the first visible row is always actionable. */
+-body #overlay .infusion-source-details { margin-top:12px; font-size:18px; color:#b9cfd8; }
+-body #overlay .infusion-source-details summary { cursor:pointer; }
+-body #overlay .infusion-source-details summary:focus-visible { outline:2px solid #e8d4a1; outline-offset:3px; }
+-body #overlay .infusion-rules { margin-top:12px; }
+-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="infusion"] .battle-decision-content { padding:0; overflow:hidden!important; }
+-body #overlay .battle-secondary-panel[data-decision-kind="infusion"] [data-infusion-workspace] { gap:0; }
++body #overlay .infusion-hand-caption { position:absolute; left:430px; width:600px; bottom:370px; display:flex; align-items:baseline; gap:24px; }
++body #overlay .infusion-hand-caption span { color:#c0d1d8; font-size:18px; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand {
++  left:420px; right:52px; bottom:20px; height:340px; display:flex!important; align-items:flex-start; justify-content:safe center;
++  gap:22px!important; padding:6px 12px 8px!important; overflow:auto!important; overscroll-behavior:contain; pointer-events:auto;
++  scroll-padding-inline:12px; scrollbar-width:thin; border:0; background:none;
++}
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot { position:relative; inset:auto; flex:0 0 204px; width:204px; height:332px; margin:0; transform:none!important; pointer-events:auto; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot::after { content:none; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card { width:204px; height:auto; transform:none!important; touch-action:pan-x; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card>.hs-card { width:204px!important; max-width:none!important; margin:0; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-slot:hover .bt-card { filter:drop-shadow(0 4px 10px #b4dce52b); }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand .bt-card.infusion-at-limit { opacity:.6; }
++body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand>.ov-empty { position:static; margin:auto; color:#bdd0d8; font-size:22px; }
++body #overlay :is(.infusion-card-face,.infusion-detail,.infusion-actions .ov-btn):focus-visible { outline:3px solid #e8d4a1; outline-offset:5px; }
+diff --git a/.tmp/sts2-cast-ui-1021-before/game/css/battle-discover.css b/game/css/battle-discover.css
+index b8c183a1..0a3912ee 100644
+--- a/.tmp/sts2-cast-ui-1021-before/game/css/battle-discover.css
++++ b/game/css/battle-discover.css
+@@ -88,3 +88,25 @@ body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-r
+   body #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card { transition:none; }
+ }
+ body.reduce-motion #overlay .battle-decision[data-decision-kind="discover"] .battle-discover-card.bt-card { transition:none; }
++
++/* Card-choice composition: a centred card row over the current battlefield.
++   The 350 ms readiness and single-submit policy live in discover-input. */
++body #overlay .battle-secondary-layer:has(.battle-discover-panel)::before { content:''; position:absolute; inset:0; z-index:-1; background:#07111985; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] {
++  width:1700px!important; max-width:100%!important; border:0!important; background:none!important; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
++}
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head { padding:12px 40px 10px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head h3 { color:#eee3c6; font-size:36px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-head>span { color:#c2d3dc; font-size:19px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-summary { padding:0 40px 14px; border:0; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-decision-content { padding:6px 30px 20px; overflow:hidden!important; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-panel { gap:8px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-options { gap:52px!important; padding:16px 20px!important; align-items:start!important; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-slot { display:flex; flex:0 0 300px!important; flex-direction:column; width:300px!important; gap:8px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card.bt-card { width:300px!important; gap:10px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card.bt-card>.hs-card { width:300px!important; max-width:none!important; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-card-notes { display:grid; gap:5px; color:#c4d5dd; font:400 18px/1.5 var(--font-ui,sans-serif); }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-equipment-note { margin:0; padding:0 8px; font-size:18px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-card-inspect { align-self:center; min-height:38px; padding:5px 14px; border:0; text-decoration:underline; color:#d1e0e5; font-size:18px; }
++body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="discover"] .battle-discover-rules { display:flex; justify-content:center; flex-wrap:wrap; gap:4px 28px; padding:8px 14px 0; font-size:18px; }
++body #overlay .battle-discover-rules p { margin:0; }
+\ No newline at end of file

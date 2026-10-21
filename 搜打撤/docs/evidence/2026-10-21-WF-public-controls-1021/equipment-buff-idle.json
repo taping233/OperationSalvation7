@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-21T05:42:38.502Z",
+  "inputKind": "synthetic-event",
+  "detail": "5348独立origin，真实开空档05→选人→整备→出征；随后用本页CDP调用现有devForceBattle及runtime夹具，放入真实寒冰剑/寻宝图两件装备。截图验证图标、位置、当前窗口遮挡，不冒称自然获得或穿戴。",
+  "screenshot": {
+    "path": "equipment-buff-idle.png",
+    "bytes": 72825,
+    "sha256": "7197210d25cc006c24e0508974daef218afa49cfbbe97a8c214b6986289ec5d5"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5348/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1024,
+      "src": "http://127.0.0.1:5348/assets/portraits/avatars/wu.webp?v=public-controls-review",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/bag.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/lock.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/cards.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/map.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/map.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 1486,
+      "src": "http://127.0.0.1:5348/assets/title-wordmark.png",
+      "width": 3200
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/tools.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/gear.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/runner.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/gear.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/far.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/ground.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/far.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/ground.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 342,
+      "src": "http://127.0.0.1:5348/assets/portraits/frames/wu/sprite-v1/neutral.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 448,
+      "src": "http://127.0.0.1:5348/assets/thumbs/cards/studio-expanded/tt2-frostsword.webp?art=studio-square-outpaint-20261011&v=public-controls-review",
+      "width": 448
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 448,
+      "src": "http://127.0.0.1:5348/assets/thumbs/cards/equip-tt2-treasuremap.webp?art=tt2-treasuremap-original-rough-20261010&v=public-controls-review",
+      "width": 448
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/bolt.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 512,
+      "src": "http://127.0.0.1:5348/assets/ui/battle-controls-glass-1016/fixed.webp",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://127.0.0.1:5348/assets/portraits/cut/enemies/archer.webp?v=public-controls-review",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://127.0.0.1:5348/assets/portraits/cut/enemies/archer.webp?v=public-controls-review",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/cards.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 512,
+      "src": "http://127.0.0.1:5348/assets/ui/battle-controls-glass-1016/energy.webp",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/cards.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/skull.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5348/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=public-controls-review",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/initial.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/foreground.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://127.0.0.1:5348/assets/scenes/battle/platform-minimal-1016/foreground.webp",
+      "width": 1672
+    }
+  ],
+  "console": []
+}

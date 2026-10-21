@@ -1,0 +1,274 @@
+{
+  "generator": "Built-in ImageGen",
+  "thread": "01a15d1f-7909-72c0-b18e-bc233d425b5f",
+  "status": "seven review candidates complete; not installed",
+  "prompts": "builtin-requests.json",
+  "encoding": "WebP quality=94 method=6; original dimensions retained",
+  "items": [
+    {
+      "id": "emergency-exit",
+      "name": "紧急撤离点前置",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/emergency-exit.png",
+        "sha256": "82d86bb062c6e40db87c6e407e3c8bbaf08531fcf930f0d7f3bc286b42360dbc",
+        "bytes": 2026099
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/emergency-exit.webp",
+        "sha256": "1b93743a3dcf163ee016596efcb063471af1c059952cbb67b849a16218761295",
+        "bytes": 251270
+      },
+      "inputs": [
+        {
+          "path": ".tmp/nai/missing-transition-nai45-20261021/wide/emergency-exit.png",
+          "sha256": "51e00b7aef8616a2aa49c7943adbcbf13a3e2dc428052f3a95992668e144d93b",
+          "bytes": 1283501
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "event",
+      "name": "事件前置",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/event.png",
+        "sha256": "e23bcc82f279ab3c0036f9491e1cc1a24aaa2b8726807cf0953f3c35b4e4a989",
+        "bytes": 2160416
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/event.webp",
+        "sha256": "0a12fad06c669fe0a7fe08ad6e9c146d8db5f14ccb0e90429d47e33d9516daa3",
+        "bytes": 291830
+      },
+      "inputs": [
+        {
+          "path": ".tmp/nai/missing-transition-nai45-20261021/wide/event.png",
+          "sha256": "3fab02bdea5ee227d9edf6cdef468311430e598e5fc554c32ed40b6cd25fca33",
+          "bytes": 1462058
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "layer-passage",
+      "name": "跨层通路",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/layer-passage.png",
+        "sha256": "e1fcf95ea11871fec5ec02246dc1cadbddc34d8a3f86e02a7f4eaf07330ff00f",
+        "bytes": 2080162
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/layer-passage.webp",
+        "sha256": "68522a3940b30c4b8a2ac54ff6ee480b865b2d4632d5aeff6b02d6156630f6b2",
+        "bytes": 256326
+      },
+      "inputs": [
+        {
+          "path": ".tmp/nai/missing-transition-nai45-20261021/wide/layer-passage.png",
+          "sha256": "b8b0859a9a7cc0ea8569496ce05ddf29df48e6e8c05d0c57f58b31da91119962",
+          "bytes": 1389901
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "map-return",
+      "name": "返回地图继续探索",
+      "size": [
+        1672,
+        941
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/map-return.png",
+        "sha256": "ade2c7491f71e598725de3126cb33854a265c35885755ef5ba5c447ba413053e",
+        "bytes": 1962515
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/map-return.webp",
+        "sha256": "2d6b9b10d74c2fa3c4405aff94efad17a75bf09f18acfdfc209b55be3996d672",
+        "bytes": 215496
+      },
+      "inputs": [
+        {
+          "path": ".tmp/nai/missing-transition-nai45-20261021/map-return.png",
+          "sha256": "43d162e200ed573eddaddb2f1bb8dbb4580cac6ab79901fcda7244f305f1d71a",
+          "bytes": 469683
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "loading",
+      "name": "基地选人菜单加载等待",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/loading.png",
+        "sha256": "2b791055bd379bf01b4a8c392d9286610ecc50f0090032e968e833ab26d96697",
+        "bytes": 1933944
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/loading.webp",
+        "sha256": "404fae0a58d0551385fabbb31f86ad7ec8297fe8de07e28d6568495c8c60a163",
+        "bytes": 207088
+      },
+      "inputs": [
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "expedition-start",
+      "name": "启程初入",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/expedition-start.png",
+        "sha256": "aeed4647c0205d28878205da448985f72d5c295a4187dc2411c3ad35ac5cacec",
+        "bytes": 1942218
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/expedition-start.webp",
+        "sha256": "af8a3c40b72d7def435e30e4620ba667ccc7a2800b15f442a5c9c824c1d3676b",
+        "bytes": 211412
+      },
+      "inputs": [
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    },
+    {
+      "id": "page-turn",
+      "name": "通用翻页过场",
+      "size": [
+        1659,
+        948
+      ],
+      "png": {
+        "path": ".tmp/imagegen/missing-transition-20261021/page-turn.png",
+        "sha256": "4e73f82fa5203dfa88b7fd3d98c2976a0b68b0ec65a4242e3527b19d02bd974d",
+        "bytes": 1887980
+      },
+      "webp": {
+        "path": ".tmp/imagegen/missing-transition-20261021/page-turn.webp",
+        "sha256": "1a155979a5c0ab408db60dc1f9571c04466989b8a7529b28bd615b1a0bd832a8",
+        "bytes": 207168
+      },
+      "inputs": [
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/retreat.webp",
+          "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b",
+          "bytes": 212598
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/door.webp",
+          "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92",
+          "bytes": 257088
+        },
+        {
+          "path": "搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+          "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3",
+          "bytes": 287062
+        }
+      ]
+    }
+  ]
+}

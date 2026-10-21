@@ -1,0 +1,83 @@
+{
+  "base": "306376b7",
+  "candidate": "91052c8b",
+  "files": [
+    {
+      "file": "搜打撤/game/src/battle/core/battle.card-play.domain.js",
+      "existed": true,
+      "conflicts": 1,
+      "beforeSha256": "959cc4dde372deedb078fde31c6037376b7d7cd292fed1e036ea5d513f2f9e17",
+      "afterSha256": "b07b5082679329050bc86039ad63ca4f05ebc2ea41677261981917a168b78dad"
+    },
+    {
+      "file": "搜打撤/game/src/battle/core/battle.core.js",
+      "existed": true,
+      "conflicts": 0,
+      "beforeSha256": "f0fad508495b25e12c85aafc978f10040d2e2cefdd2007b7e19c74efca014b7d",
+      "afterSha256": "2ec475f9df6a48e7d35e23da4a0708e9268d0c0cd2d3f6015604c54c63960e3b"
+    },
+    {
+      "file": "搜打撤/game/src/battle/view/battle.aim.js",
+      "existed": true,
+      "conflicts": 1,
+      "beforeSha256": "389513a511043986f6f7e6442e577e6b5ac141e863785fae92ae36ee3bfa11d3",
+      "afterSha256": "a72f4cade1b03002c16376325d080e5b5111a11b53f819713365b64715d5fe07"
+    },
+    {
+      "file": "搜打撤/game/src/battle/view/battle.effect-feedback.js",
+      "existed": true,
+      "conflicts": 1,
+      "beforeSha256": "894f298fa03aa21f5c0b6b986b4f6a3c762863716a8085c79221419ceaee7ba5",
+      "afterSha256": "d835736dc680efa9df470bdf0ab5511d8f63dce7b2b396bc81623168af7d31ba"
+    },
+    {
+      "file": "搜打撤/game/src/battle/view/battle.hover.js",
+      "existed": true,
+      "conflicts": 0,
+      "beforeSha256": "dbda5777c4e1f48ec91a4b222452b8952d0b6256edac19354730277dca2c2c84",
+      "afterSha256": "ff4e92291df6ad08f0a59eb2e28f05dbc603293c04625f29e15eda3a9dcb390e"
+    },
+    {
+      "file": "搜打撤/game/src/battle/view/battle.layers.js",
+      "existed": true,
+      "conflicts": 0,
+      "beforeSha256": "832d68a6896d9e3787b885013c4fb7d8f1017f7799ce1bd1fc776b1d3c191c5e",
+      "afterSha256": "7a241df28427fd4b3cad95ba35ce09458066f4aeb29347fac93e1d24a5688f5f"
+    },
+    {
+      "file": "搜打撤/tests/battle-area-hover-hand-context.test.js",
+      "existed": false,
+      "conflicts": 0,
+      "beforeSha256": null,
+      "afterSha256": "bcbfa3545e5a7cf54b8a465f0cb94697ad66ef9b1b115ba0e49cdb74c486edc2"
+    },
+    {
+      "file": "搜打撤/tests/battle-drag-reference.test.js",
+      "existed": true,
+      "conflicts": 0,
+      "beforeSha256": "24dc366f3e7f2949c5ba0c10abc1ffa96bdd182f25d0fac917dbfcf85997274a",
+      "afterSha256": "62ca79186b9b37014b0950d7d6168b7897253c2125d9d685173122a32ed047ac"
+    },
+    {
+      "file": "搜打撤/tests/battle-effect-feedback.test.js",
+      "existed": true,
+      "conflicts": 0,
+      "beforeSha256": "de9c41097af0c7e41df7e6cda19695267882adff7cfbd87537de33c3be660d6e",
+      "afterSha256": "de4bf6c066aa7f4c79fe488513ae3396497f2173d8856d5268ea9f2e3fac7fa2"
+    },
+    {
+      "file": "搜打撤/tests/battle-preview-hand-context.test.js",
+      "existed": false,
+      "conflicts": 0,
+      "beforeSha256": null,
+      "afterSha256": "3147c049f94659ca2a39a7f1a79beb7b9d0a58ba7a06c2f6a00872ef9688b1a3"
+    },
+    {
+      "file": "搜打撤/tests/battle-target-dom.test.js",
+      "existed": false,
+      "conflicts": 0,
+      "beforeSha256": null,
+      "afterSha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff"
+    }
+  ]
+}

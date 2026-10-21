@@ -1,0 +1,518 @@
+{
+  "files": {
+    "tests/agent-batch-llm-timeout.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 1,
+      "passed": 1
+    },
+    "tests/agent-channel-pump-lazy.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-command-results.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 29,
+      "passed": 29
+    },
+    "tests/agent-compare-provenance.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-console-async-entry.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/agent-console-jump.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-llm-abort.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-llm.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/agent-optional-lazy-boundary.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/agent-policy-door-threshold.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/agent-provenance-stopreason.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 15,
+      "passed": 15
+    },
+    "tests/agent-recorder.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/agent-run-provenance.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-runner-abort.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 5,
+      "passed": 5
+    },
+    "tests/agent-runner-driver-restore.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/agent-runner-lazy-boundary.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 15,
+      "passed": 15
+    },
+    "tests/agent-scenes-lazy-boundary.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 5,
+      "passed": 5
+    },
+    "tests/agent-scenes.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/agent-stats-provenance.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/agent-tool-lifecycle.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 14,
+      "passed": 14
+    },
+    "tests/architecture-boundaries.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 44,
+      "passed": 44
+    },
+    "tests/bag-architecture.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 5,
+      "passed": 5
+    },
+    "tests/bag-help-return-continuity.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 17,
+      "passed": 17
+    },
+    "tests/bag-item-rule-baseline.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 15,
+      "passed": 15
+    },
+    "tests/bag-page-lifecycle-review.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 80,
+      "passed": 80
+    },
+    "tests/bag-pane-retained.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/bag-pouch-capacity.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 24,
+      "passed": 24
+    },
+    "tests/bag-render-derivation.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 5,
+      "passed": 5
+    },
+    "tests/bag-render-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 11,
+      "passed": 11
+    },
+    "tests/bag-return-hook.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/bag-slam-button.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 11,
+      "passed": 11
+    },
+    "tests/bag-structured-rule-migration.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/bag-structured-use.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/bag-token-craft.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/bag-token-discover.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 13,
+      "passed": 13
+    },
+    "tests/bag-ui-language.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/base-save-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 10,
+      "passed": 10
+    },
+    "tests/battle-all-cards.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/battle-area-hover-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 1,
+      "passed": 1
+    },
+    "tests/battle-hand-keyword-interaction.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 12,
+      "passed": 12
+    },
+    "tests/battle-snapshot-integration.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 1,
+      "passed": 1
+    },
+    "tests/battle-snapshot-phase-cost.test.js": {
+      "report": "replay-identity-final.json",
+      "status": "passed",
+      "tests": 10,
+      "passed": 10
+    },
+    "tests/battle-snapshot-types.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/battle-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/blackmarket-card-preview.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 8,
+      "passed": 8
+    },
+    "tests/boot-frame-readiness.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 5,
+      "passed": 5
+    },
+    "tests/boot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 24,
+      "passed": 24
+    },
+    "tests/card-description-fix-lifecycle.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 11,
+      "passed": 11
+    },
+    "tests/cards-sync-snapshot-guard.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/contracts.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 18,
+      "passed": 18
+    },
+    "tests/direct-cast.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 10,
+      "passed": 10
+    },
+    "tests/event-callback-lifecycle-audit.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 57,
+      "passed": 57
+    },
+    "tests/event-choice-acquired-gift-cloud.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 12,
+      "passed": 12
+    },
+    "tests/event-choice-recovery-cloud.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 28,
+      "passed": 28
+    },
+    "tests/event-node-binding-cloud.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 12,
+      "passed": 12
+    },
+    "tests/event-recode-selection-continuity.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/event-settlement-unification.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 23,
+      "passed": 23
+    },
+    "tests/event-signal-puzzle-integration.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 7,
+      "passed": 7
+    },
+    "tests/events-lazy-entry.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 28,
+      "passed": 28
+    },
+    "tests/events-lazy-story-ownership.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 11,
+      "passed": 11
+    },
+    "tests/facade-snapshot-drift.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/four-player-event-regressions.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/game-store-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/global-boot-pointer-lifecycle.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/hero-cards.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 13,
+      "passed": 13
+    },
+    "tests/light-startup-boot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/map-facilities-burn-removal.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/map-snapshot-copy-cost.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 9,
+      "passed": 9
+    },
+    "tests/page-visual-readiness-sharing.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 19,
+      "passed": 19
+    },
+    "tests/r5a-map-snapshot.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 6,
+      "passed": 6
+    },
+    "tests/r6-story.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 15,
+      "passed": 15
+    },
+    "tests/runtime-asset-aliases.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 46,
+      "passed": 46
+    },
+    "tests/runtime-asset-publication.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 8,
+      "passed": 8
+    },
+    "tests/runtime-asset-redundancy-plugin.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 10,
+      "passed": 10
+    },
+    "tests/runtime-asset-redundancy.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 28,
+      "passed": 28
+    },
+    "tests/stealth-term.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 1,
+      "passed": 1
+    },
+    "tests/sts2-agent-replay.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 12,
+      "passed": 12
+    },
+    "tests/term-tip-rule-copy.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 13,
+      "passed": 13
+    },
+    "tests/term-tips-lazy-boundary.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 22,
+      "passed": 22
+    },
+    "tests/term-tips-lifecycle.test.js": {
+      "report": "integration-final.json",
+      "status": "passed",
+      "tests": 8,
+      "passed": 8
+    },
+    "tests/agent-replay-identity.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/asset-url-aliases.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 3,
+      "passed": 3
+    },
+    "tests/lossless-runtime-assets.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 2,
+      "passed": 2
+    },
+    "tests/rations-thumbnail-alias.test.js": {
+      "report": "generated-final.json",
+      "status": "passed",
+      "tests": 4,
+      "passed": 4
+    },
+    "tests/sts2-agent-infusion-1021.test.js": {
+      "report": "agent-current-final.json",
+      "status": "passed",
+      "tests": 12,
+      "passed": 12
+    }
+  },
+  "distinctFiles": 85,
+  "distinctTests": 960,
+  "method": "Latest per-file result across scoped runs; not a fresh single full-suite run. Original integration failures retained.",
+  "scope": "Own optimization files plus current Agent compatibility; active peer UI changes remain outside isolated build/browser evidence."
+}

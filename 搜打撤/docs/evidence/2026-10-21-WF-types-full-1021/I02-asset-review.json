@@ -1,0 +1,328 @@
+{
+  "baseline": "Existing review hashes match HEAD for every updated consumer. Historical inactive entries were not rewritten.",
+  "mechanism": "Same full-file CRLF-to-LF SHA256; no algorithm, candidate category or exclusion-range changes.",
+  "frozenAuthorEvidence": {
+    "battle": "frames/layers/vfx/ui frozen by types_battle at I-04 completion",
+    "hub": "hub.presentation and lab.ending frozen by types_hubrun at I-03; supplied raw SHA independently checked"
+  },
+  "approvedNonTypeDelta": {
+    "file": "game/src/ui/camp-entry.js",
+    "evidence": "docs/evidence/2026-10-21-battle-cuts-reuse/README.md",
+    "paths": [
+      "scenes/transition-battle-v2.webp",
+      "scenes/transition-boss-v2.webp"
+    ],
+    "reason": "Previously approved restored v2 artwork; neither path is an exclusion candidate. Existing v1 omission candidates remain unchanged."
+  },
+  "unchangedInactiveFingerprints": [
+    "game/src/ui/game.menu.pages.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/ui/game.menu.js"
+  ],
+  "updatedConsumers": [
+    {
+      "file": "game/src/core/art.js",
+      "oldSha": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+      "currentSha": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "expectations": {
+        "shadowed-card-art": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+        "retired-scenes": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+        "map": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+        "transitions": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+        "opaque": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 11,
+      "afterExpressions": 11,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "4bd71022d1b81c9ae5ba04a23fc375fa8dddc06c8645f9321d2a2e862416010a",
+      "afterSignature": "4bd71022d1b81c9ae5ba04a23fc375fa8dddc06c8645f9321d2a2e862416010a"
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "oldSha": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+      "currentSha": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd",
+      "expectations": {
+        "shadowed-card-art": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+        "map": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+        "transitions": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 0,
+      "afterExpressions": 0,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "afterSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "oldSha": "dfffd48dd8b1624fb1c6f430b1206e03091224102ea39b47baae09faf29a897e",
+      "currentSha": "0ca01a0d5fd87e741d6a898090c0c209b6e78738396bc3ae0ce00a155e3ea93e",
+      "expectations": {
+        "retired-scenes": "dfffd48dd8b1624fb1c6f430b1206e03091224102ea39b47baae09faf29a897e",
+        "chests": "dfffd48dd8b1624fb1c6f430b1206e03091224102ea39b47baae09faf29a897e"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 0,
+      "afterExpressions": 0,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "afterSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "oldSha": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09",
+      "currentSha": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300",
+      "expectations": {
+        "retired-scenes": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09",
+        "chests": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 21,
+      "afterExpressions": 21,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "d4cc243c4d723d62ea1f1a6f891bf6aa5dc044eb266b8e2694a8a5c356690673",
+      "afterSignature": "d4cc243c4d723d62ea1f1a6f891bf6aa5dc044eb266b8e2694a8a5c356690673"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "oldSha": "c250bdc2fec20371637a60421506697e53162d0e7d06cccdad8f8f9fbf21e5ad",
+      "currentSha": "3a181d7746dfb8abbb56000452b68c716ebbeecae509a905b4ccf2aed4397ff0",
+      "expectations": {
+        "retired-scenes": "c250bdc2fec20371637a60421506697e53162d0e7d06cccdad8f8f9fbf21e5ad"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 0,
+      "afterExpressions": 0,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "afterSignature": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "oldSha": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+      "currentSha": "4bf5e3cd669150281453c83d6a4eeea10dad0c13d596de9cbab21b7bf194bed0",
+      "expectations": {
+        "frames": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+        "opaque": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 4,
+      "afterExpressions": 4,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "ae8ce410b781468edc0acbe0d20424500f62bcca7fcd6d81aab0ef2dafecb5b9",
+      "afterSignature": "ae8ce410b781468edc0acbe0d20424500f62bcca7fcd6d81aab0ef2dafecb5b9"
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "oldSha": "d84fa6332489b6b7980568bdb8e23953f4f42ddc65fde956fd3e8239d6625f33",
+      "currentSha": "7da237011a3bb1348780d1379cbd15570da5fbd1a5152ad2588a8007a66c80b8",
+      "expectations": {
+        "map": "d84fa6332489b6b7980568bdb8e23953f4f42ddc65fde956fd3e8239d6625f33"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 10,
+      "afterExpressions": 10,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "4fd27011c3280d0b8cb7437e42630fb45b8c38e253c10e2bee6872d2284a7fc7",
+      "afterSignature": "4fd27011c3280d0b8cb7437e42630fb45b8c38e253c10e2bee6872d2284a7fc7"
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "oldSha": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34",
+      "currentSha": "f9ede7df06ae15857b8947d9411627a72344a1ebbf92b6a09074b41749e829af",
+      "expectations": {
+        "map": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "c2d15cf5982c3c4ff99d90c39a94033234f1a570cc452a016267bfaa72b0562a",
+      "afterSignature": "c2d15cf5982c3c4ff99d90c39a94033234f1a570cc452a016267bfaa72b0562a"
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "oldSha": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0",
+      "currentSha": "672e6b42bf5e000cf3e0ad0a7fe1bd939ed3de92d6d7f5bcf9e864663f9af94d",
+      "expectations": {
+        "transitions": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 4,
+      "afterExpressions": 6,
+      "pathExpressionsEqual": false,
+      "beforeSignature": "c8f9d5501aad1c9b274dfb35e145276034fc33f175987fcfeb0cb474a5b23c15",
+      "afterSignature": "0e0a33e877b059b76df617a53c16a4395401ebf8afd3ae7e894b4967f455e1d4"
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "oldSha": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
+      "currentSha": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4",
+      "expectations": {
+        "opaque": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "42e10a2b9ea08066e903601949b7907ccf9b7a50350da7c7ed43229b7fd76356",
+      "afterSignature": "42e10a2b9ea08066e903601949b7907ccf9b7a50350da7c7ed43229b7fd76356"
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "oldSha": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
+      "currentSha": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4",
+      "expectations": {
+        "opaque": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 3,
+      "afterExpressions": 3,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "37f25832088b19ea0267012c997748ba5d2a085ac748bb62599259098d42ca4f",
+      "afterSignature": "37f25832088b19ea0267012c997748ba5d2a085ac748bb62599259098d42ca4f"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "oldSha": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
+      "currentSha": "5aa85e7c58a7445a19f8a09357b15f7ccab50a58ab3327532caba22ed679c509",
+      "expectations": {
+        "opaque": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "da6d7d10fa7c6f620f00ba9fd4d459e85be9b04eeab21f38c7688ef16ab9a395",
+      "afterSignature": "da6d7d10fa7c6f620f00ba9fd4d459e85be9b04eeab21f38c7688ef16ab9a395"
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "oldSha": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+      "currentSha": "ee64127567265fe821456c61e749f0745bac4ed35d83cab138b88e061c07bf2a",
+      "expectations": {
+        "opaque": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "e5f20388eb992311401b60babc2f69fbf90d16e9cd275cb1c57f44ccd3bdf11f",
+      "afterSignature": "e5f20388eb992311401b60babc2f69fbf90d16e9cd275cb1c57f44ccd3bdf11f"
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "oldSha": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687",
+      "currentSha": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
+      "expectations": {
+        "opaque": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 2,
+      "afterExpressions": 2,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "2d3eaa53c6a2ff9075e82c4fd3a3add4eacd59f2ba97eeb5ce3f2c6a975b9389",
+      "afterSignature": "2d3eaa53c6a2ff9075e82c4fd3a3add4eacd59f2ba97eeb5ce3f2c6a975b9389"
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "oldSha": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
+      "currentSha": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "expectations": {
+        "opaque": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 3,
+      "afterExpressions": 3,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "b66fdd70c7dea72a969fce59ef0143302886661e84f91a9c5c466fac76520d1d",
+      "afterSignature": "b66fdd70c7dea72a969fce59ef0143302886661e84f91a9c5c466fac76520d1d"
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "oldSha": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",
+      "currentSha": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd",
+      "expectations": {
+        "opaque": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 3,
+      "afterExpressions": 3,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "be9def222a8df170ff6f434504548325fec99e9137f818a1b54d32040e03070d",
+      "afterSignature": "be9def222a8df170ff6f434504548325fec99e9137f818a1b54d32040e03070d"
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "oldSha": "52d24bc34fe9b781127723c580183aad5818c82d14a14034db88d261147ab7ce",
+      "currentSha": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+      "expectations": {
+        "opaque": "52d24bc34fe9b781127723c580183aad5818c82d14a14034db88d261147ab7ce"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 2,
+      "afterExpressions": 2,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "f095a40d10b073c215ad796dfe855eba6951de9e73cd47426eaccbe6b678cc5d",
+      "afterSignature": "f095a40d10b073c215ad796dfe855eba6951de9e73cd47426eaccbe6b678cc5d"
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "oldSha": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
+      "currentSha": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09",
+      "expectations": {
+        "opaque": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "0014f2a7609369c3d82f96654937aff4d019f405c941f78d706524db07d68e56",
+      "afterSignature": "0014f2a7609369c3d82f96654937aff4d019f405c941f78d706524db07d68e56"
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "oldSha": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",
+      "currentSha": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809",
+      "expectations": {
+        "opaque": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "87f402a44c9735ef001926dcd16d309a5b5faaa114f46a5ffe3ab71ca5818051",
+      "afterSignature": "87f402a44c9735ef001926dcd16d309a5b5faaa114f46a5ffe3ab71ca5818051"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "oldSha": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf",
+      "currentSha": "ae804e84924e69badf94c4bd582372a916c15f593b72521ee6d4c5ac8a3d3a92",
+      "expectations": {
+        "opaque": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "169388ca77e6b5bf7703a6848c9978798d3dda020eb7744f087fba1dec099d10",
+      "afterSignature": "169388ca77e6b5bf7703a6848c9978798d3dda020eb7744f087fba1dec099d10"
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "oldSha": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38",
+      "currentSha": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892",
+      "expectations": {
+        "opaque": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
+      },
+      "reviewMatchesHead": true,
+      "beforeExpressions": 1,
+      "afterExpressions": 1,
+      "pathExpressionsEqual": true,
+      "beforeSignature": "a116e4efd21faa72da6a4893289c3e4e2766ceee1baeb74960193f17aeb96e34",
+      "afterSignature": "a116e4efd21faa72da6a4893289c3e4e2766ceee1baeb74960193f17aeb96e34"
+    }
+  ],
+  "replacementCount": 30
+}

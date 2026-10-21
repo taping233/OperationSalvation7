@@ -1,0 +1,22 @@
+{
+  "phase": "buff-v2",
+  "capturedAt": "2026-10-21T05:39:03.957Z",
+  "target": ".tmp/public-controls-1021/review",
+  "items": [
+    {
+      "path": "game/css/battle-equipment.css",
+      "bytes": 3178,
+      "sha256": "c98d1161b6b1ab8da791f0eb7cdc9680160eaccf6cf6db028b92ca3e450d21b9"
+    },
+    {
+      "path": "game/src/ui/equipment-info.js",
+      "bytes": 2041,
+      "sha256": "a8fd72bc091304a346e9a1aeb52f0e93382579aa55192181e1874e9fc8396544"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "bytes": 59291,
+      "sha256": "6d2c31dc0a213e62952be53392adca4c07d18e46749a825f4cb7c118660714f4"
+    }
+  ]
+}

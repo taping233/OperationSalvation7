@@ -1,0 +1,70 @@
+{
+  "task": "WF-framework-solo-1021",
+  "mode": "target",
+  "generatedAt": "2026-10-20T18:05:05.827Z",
+  "node": "v24.13.0",
+  "passed": true,
+  "inputStable": true,
+  "groupsStable": {
+    "code": true,
+    "docs": true,
+    "state": true,
+    "environment": true
+  },
+  "changedFiles": [],
+  "steps": [
+    {
+      "command": [
+        "node",
+        "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "test:target",
+        "--",
+        "tests/boot.test.js",
+        "tests/framework-independent-battles.test.js",
+        "tests/battle-snapshot-integration.test.js",
+        "tests/game-store-snapshot.test.js",
+        "tests/contracts.test.js",
+        "tests/architecture-boundaries.test.js"
+      ],
+      "startedAt": "2026-10-20T18:04:48.381Z",
+      "endedAt": "2026-10-20T18:05:04.780Z",
+      "exitCode": 0,
+      "signal": null,
+      "log": ".tmp/WF-framework-solo-1021-integration/target-2026-10-20T18-04-48.378Z-1.log",
+      "logBytes": 9852,
+      "logSha256": "f64e0b331dc56ac045acdd94bb79980885c50b0071c2aa322c25127ef392c50b",
+      "testFiles": "6 passed (6)",
+      "tests": "95 passed (95)"
+    }
+  ],
+  "reusedChecks": [],
+  "before": {
+    "sha256": "13a51fa8eca84287b60507d11803fb7bca479ab34ac02c6168fa0b4cbf5af8ae",
+    "groups": {
+      "code": "9acf5f1b18eb504e6f097b4e3ffe0efd8c02b7cc4a5148a943000f51fc0132fb",
+      "docs": "85e464e9c915dcb5154a0e3eb87d0495c8eb7571730bf84e4ec5ee09b8dd33b8",
+      "state": "e025e27d90ec61f6de491adb4e8cfcf07f61bc76ef6f415f500b4674920c1ccc",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "files": 4144,
+    "path": ".tmp/WF-framework-solo-1021-integration/target-2026-10-20T18-04-48.378Z-before.json",
+    "manifestSha256": "141156cc0d43941713fd9fc4e7fe351d4e826d5442cb107f886e659c8cbe2293"
+  },
+  "after": {
+    "sha256": "13a51fa8eca84287b60507d11803fb7bca479ab34ac02c6168fa0b4cbf5af8ae",
+    "groups": {
+      "code": "9acf5f1b18eb504e6f097b4e3ffe0efd8c02b7cc4a5148a943000f51fc0132fb",
+      "docs": "85e464e9c915dcb5154a0e3eb87d0495c8eb7571730bf84e4ec5ee09b8dd33b8",
+      "state": "e025e27d90ec61f6de491adb4e8cfcf07f61bc76ef6f415f500b4674920c1ccc",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "files": 4144,
+    "path": ".tmp/WF-framework-solo-1021-integration/target-2026-10-20T18-04-48.378Z-after.json",
+    "manifestSha256": "141156cc0d43941713fd9fc4e7fe351d4e826d5442cb107f886e659c8cbe2293"
+  },
+  "limits": [
+    "已锁资产字节与目录；未监控其他图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验",
+    "No build, real browser interaction, or remote CI claim. Logs/manifests retained under .tmp; regenerate using this script."
+  ]
+}

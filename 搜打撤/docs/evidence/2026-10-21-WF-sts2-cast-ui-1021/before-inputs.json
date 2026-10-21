@@ -1,0 +1,62 @@
+[
+  {
+    "path": "game/src/battle/core/battle.card-play.domain.js",
+    "sha256": "477AFFFFCD25276713E9EC0AEF936FC23056529C8FFD772F7475BA7470781B40"
+  },
+  {
+    "path": "game/src/battle/core/battle.core.js",
+    "sha256": "12B55009131E447405E9F9CDC11BECA3FC3D4EC0E33D582CDE993E3D296FA6A3"
+  },
+  {
+    "path": "game/src/battle/core/battle.engine.factory.domain.js",
+    "sha256": "5DD5507884DEFA75464D5B42B1A18F2A5AEB577E3FDEE12AECE208C543978619"
+  },
+  {
+    "path": "game/src/battle/core/battle.snapshot-projection.domain.js",
+    "sha256": "7C1633CB15AEE0978957583ECFBA0C1320D1DB8A8B8634C82474E9A41E44B1E8"
+  },
+  {
+    "path": "game/src/battle/battle.snapshot.types.d.ts",
+    "sha256": "DD3B951FF2B7EF8FB270229804C645CB3C2F14BACD24A6639BCE77FC3070826C"
+  },
+  {
+    "path": "game/src/battle/view/battle.aim.js",
+    "sha256": "7C9B164484CA562C2754C1C2D1E4B85E6CA4F2F2295D68848A2A5B8704C98882"
+  },
+  {
+    "path": "game/src/battle/view/battle.selection-ui.js",
+    "sha256": "9785117947A468EA9D984E2F609C6F325D3BC0F7DBEB5FB2865AB1C77E631D22"
+  },
+  {
+    "path": "game/src/battle/view/battle.infusion-view.js",
+    "sha256": "70DDD0038135CCDAFE776CEAFE85EAD8864E8D58D064C6580BC92DBB845D5B60"
+  },
+  {
+    "path": "game/src/battle/view/battle.infusion-material-state.js",
+    "sha256": "2A41FD204FC9187692E4BFDE494B2DBFA117321940835DA7C4C7014D21F49DC3"
+  },
+  {
+    "path": "game/src/battle/view/battle.view.js",
+    "sha256": "3BF2772C7FE61B7B9929B3175345BAAE8F730E2D00BA97DFBC7D8F068913E3A9"
+  },
+  {
+    "path": "game/src/battle/view/battle.discover-view.js",
+    "sha256": "4D5C96AC6C8DE985E86C51DC744625EDA97433ACF86434F0DE4D4010335E705D"
+  },
+  {
+    "path": "game/css/battle-infusion.css",
+    "sha256": "3E21DC72C9B03B606F13DF6ECB3D7430598499B89A300DCEF2922A57AA4AEFDC"
+  },
+  {
+    "path": "game/css/battle-discover.css",
+    "sha256": "3931704685A1E929EBF160924C5A01F00B9EAF832B57C6FDD31C24B8098314B4"
+  },
+  {
+    "path": "docs/rules.md",
+    "sha256": "B0B4BBAC82439DC666AFC6330F3EB0787CD584E06E3D029D366FCB98E6C66B16"
+  },
+  {
+    "path": "docs/architecture.md",
+    "sha256": "97F01725839355711FE5F93C7E1033DE71F6E84A8ACAF11BE2BE66A1370541ED"
+  }
+]

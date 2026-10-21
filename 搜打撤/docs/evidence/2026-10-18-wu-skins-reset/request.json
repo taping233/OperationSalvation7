@@ -1,0 +1,288 @@
+{
+  "status": "nai-generated",
+  "pipeline": "NAI V5 Full free-size drafts then built-in redraw",
+  "items": [
+    {
+      "id": "casual",
+      "name": "春日·机车",
+      "asset": "portraits/full/wu-casual-v14.webp",
+      "character": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, black round sunglasses worn on nose, black rose hair ornament, cobalt blue oversized long sleeve shirt with rolled cuffs, black shorts, black lace-up ankle boots",
+      "scene": "Spring afternoon beside a modern city park. The woman sits sideways on the seat of a parked black classic motorcycle facing left; one bent knee rests near the fuel tank, the other leg descends naturally beside the motorcycle. One hand rests by her shorts pocket, the other steadies her on the saddle. She looks toward camera with a confident smile. Large black motorcycle with coherent round headlamp, fuel tank, engine, aligned front and rear wheels, readable handlebars. Pink cherry blossom branches frame upper left, fresh green trees and quiet contemporary urban shapes in distance. Clear blue daylight, petals as sparse accents. Full figure and motorcycle inside landscape canvas, adult character large at center-right, face and hands readable; coherent limbs and practical seated balance.",
+      "status": "nai-generated",
+      "before": ".tmp\\nai\\wu-skins-reset-1018\\casual-before.webp",
+      "beforeSha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
+      "nai": ".tmp\\nai\\wu-skins-reset-1018\\casual-nai.png",
+      "request": {
+        "input": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nSpring afternoon beside a modern city park. The woman sits sideways on the seat of a parked black classic motorcycle facing left; one bent knee rests near the fuel tank, the other leg descends naturally beside the motorcycle. One hand rests by her shorts pocket, the other steadies her on the saddle. She looks toward camera with a confident smile. Large black motorcycle with coherent round headlamp, fuel tank, engine, aligned front and rear wheels, readable handlebars. Pink cherry blossom branches frame upper left, fresh green trees and quiet contemporary urban shapes in distance. Clear blue daylight, petals as sparse accents. Full figure and motorcycle inside landscape canvas, adult character large at center-right, face and hands readable; coherent limbs and practical seated balance.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1152,
+          "height": 896,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 605525788,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, black round sunglasses worn on nose, black rose hair ornament, cobalt blue oversized long sleeve shirt with rolled cuffs, black shorts, black lace-up ankle boots",
+              "uc": "child, teen, goggles",
+              "center": {
+                "x": 0.6,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nSpring afternoon beside a modern city park. The woman sits sideways on the seat of a parked black classic motorcycle facing left; one bent knee rests near the fuel tank, the other leg descends naturally beside the motorcycle. One hand rests by her shorts pocket, the other steadies her on the saddle. She looks toward camera with a confident smile. Large black motorcycle with coherent round headlamp, fuel tank, engine, aligned front and rear wheels, readable handlebars. Pink cherry blossom branches frame upper left, fresh green trees and quiet contemporary urban shapes in distance. Clear blue daylight, petals as sparse accents. Full figure and motorcycle inside landscape canvas, adult character large at center-right, face and hands readable; coherent limbs and practical seated balance.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, black round sunglasses worn on nose, black rose hair ornament, cobalt blue oversized long sleeve shirt with rolled cuffs, black shorts, black lace-up ankle boots",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+              "char_captions": [
+                {
+                  "char_caption": "child, teen, goggles",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "seed": 605525788,
+      "naiSha256": "64dc841bd11a7a2d6ae86d612d5004cb849a1d2845a42544f3249f4cf75974c8"
+    },
+    {
+      "id": "spring",
+      "name": "新春·旗袍",
+      "asset": "portraits/full/wu-spring-v15.webp",
+      "character": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, red satin ribbon bow, fair skin, confident relaxed smile, small fang, red plum blossom hairpin, long red qipao with gold piping, long sleeves with gold cuffs, modest side slit, black embroidered flat shoes",
+      "scene": "Lunar new year winter tea scene. The woman sits elegantly on a dark simple chair at center-right, right hand holds a small blue porcelain teacup just below her mouth, left hand rests on her knee; cup and fingers clearly separated from face. Ankles crossed naturally, feet supported near floor. Red and gold long qipao drapes over seated legs, dress has coherent tension and gravity, no excessive embroidery. A dark small side table holds one porcelain teapot and spare cup; red draped cloth trails beside it. Large geometric window and a snow-covered plum courtyard at left, two red lanterns above, scattered red plum blossoms. Cool winter daylight against warm red silk. Balanced landscape composition, character face remains prominent, scene fills edges, intimate calm festive atmosphere.",
+      "status": "nai-generated",
+      "before": ".tmp\\nai\\wu-skins-reset-1018\\spring-before.webp",
+      "beforeSha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
+      "nai": ".tmp\\nai\\wu-skins-reset-1018\\spring-nai.png",
+      "request": {
+        "input": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nLunar new year winter tea scene. The woman sits elegantly on a dark simple chair at center-right, right hand holds a small blue porcelain teacup just below her mouth, left hand rests on her knee; cup and fingers clearly separated from face. Ankles crossed naturally, feet supported near floor. Red and gold long qipao drapes over seated legs, dress has coherent tension and gravity, no excessive embroidery. A dark small side table holds one porcelain teapot and spare cup; red draped cloth trails beside it. Large geometric window and a snow-covered plum courtyard at left, two red lanterns above, scattered red plum blossoms. Cool winter daylight against warm red silk. Balanced landscape composition, character face remains prominent, scene fills edges, intimate calm festive atmosphere.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1152,
+          "height": 896,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1174636765,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, red satin ribbon bow, fair skin, confident relaxed smile, small fang, red plum blossom hairpin, long red qipao with gold piping, long sleeves with gold cuffs, modest side slit, black embroidered flat shoes",
+              "uc": "child, teen, goggles",
+              "center": {
+                "x": 0.6,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nLunar new year winter tea scene. The woman sits elegantly on a dark simple chair at center-right, right hand holds a small blue porcelain teacup just below her mouth, left hand rests on her knee; cup and fingers clearly separated from face. Ankles crossed naturally, feet supported near floor. Red and gold long qipao drapes over seated legs, dress has coherent tension and gravity, no excessive embroidery. A dark small side table holds one porcelain teapot and spare cup; red draped cloth trails beside it. Large geometric window and a snow-covered plum courtyard at left, two red lanterns above, scattered red plum blossoms. Cool winter daylight against warm red silk. Balanced landscape composition, character face remains prominent, scene fills edges, intimate calm festive atmosphere.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, red satin ribbon bow, fair skin, confident relaxed smile, small fang, red plum blossom hairpin, long red qipao with gold piping, long sleeves with gold cuffs, modest side slit, black embroidered flat shoes",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+              "char_captions": [
+                {
+                  "char_caption": "child, teen, goggles",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "seed": 1174636765,
+      "naiSha256": "d445936cc93baafdce92e7df23da490b8397df9ebb828fe0a6485b0c47469601"
+    },
+    {
+      "id": "beach",
+      "name": "盛夏·水枪",
+      "asset": "portraits/full/wu-beach.webp",
+      "character": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, navy blue one-piece athletic swimsuit with sparse white stars, open white lightweight jacket loosely around shoulders and arms",
+      "scene": "Bright summer seaside. Adult woman sits sideways on the edge of a clean wooden pier at center-right, torso turns toward camera with a cheerful confident fang smile. Her left hand rests flat on pier supporting her weight, right hand holds a small orange and white plastic toy water gun upright near shoulder, a visibly harmless recreational water toy. Two legs extend naturally toward left with one knee bent slightly; one foot makes a small splash in turquoise water. Normal limb proportions, no foreground body-part closeup. Silver ponytail arcs behind her, blue bow, jacket has believable draped folds. Clear blue sky with grouped white clouds, far modern coastal city and mountains, a few palm fronds framing upper-right. Luminous cyan sea and warm ochre boards, one coherent sunlight direction, person is central focal point. Tasteful nonsexual adult summer recreation, full landscape vignette, entire figure readable.",
+      "status": "nai-generated",
+      "before": ".tmp\\nai\\wu-skins-reset-1018\\beach-before.webp",
+      "beforeSha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
+      "nai": ".tmp\\nai\\wu-skins-reset-1018\\beach-nai.png",
+      "request": {
+        "input": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nBright summer seaside. Adult woman sits sideways on the edge of a clean wooden pier at center-right, torso turns toward camera with a cheerful confident fang smile. Her left hand rests flat on pier supporting her weight, right hand holds a small orange and white plastic toy water gun upright near shoulder, a visibly harmless recreational water toy. Two legs extend naturally toward left with one knee bent slightly; one foot makes a small splash in turquoise water. Normal limb proportions, no foreground body-part closeup. Silver ponytail arcs behind her, blue bow, jacket has believable draped folds. Clear blue sky with grouped white clouds, far modern coastal city and mountains, a few palm fronds framing upper-right. Luminous cyan sea and warm ochre boards, one coherent sunlight direction, person is central focal point. Tasteful nonsexual adult summer recreation, full landscape vignette, entire figure readable.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1152,
+          "height": 896,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1167074888,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, navy blue one-piece athletic swimsuit with sparse white stars, open white lightweight jacket loosely around shoulders and arms",
+              "uc": "child, teen, goggles",
+              "center": {
+                "x": 0.6,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, game character skin scene illustration, highly detailed face and hands.\n\nBright summer seaside. Adult woman sits sideways on the edge of a clean wooden pier at center-right, torso turns toward camera with a cheerful confident fang smile. Her left hand rests flat on pier supporting her weight, right hand holds a small orange and white plastic toy water gun upright near shoulder, a visibly harmless recreational water toy. Two legs extend naturally toward left with one knee bent slightly; one foot makes a small splash in turquoise water. Normal limb proportions, no foreground body-part closeup. Silver ponytail arcs behind her, blue bow, jacket has believable draped folds. Clear blue sky with grouped white clouds, far modern coastal city and mountains, a few palm fronds framing upper-right. Luminous cyan sea and warm ochre boards, one coherent sunlight direction, person is central focal point. Tasteful nonsexual adult summer recreation, full landscape vignette, entire figure readable.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, mature adult proportions, silver white long hair, high ponytail, parted bangs, both cyan blue eyes visible, blue satin ribbon bow, fair skin, confident relaxed smile, small fang, navy blue one-piece athletic swimsuit with sparse white stars, open white lightweight jacket loosely around shoulders and arms",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, teen, loli, nude, erotic, underwear, extra legs, extra feet, broken limbs, goggles, fisheye, giant foreground foot",
+              "char_captions": [
+                {
+                  "char_caption": "child, teen, goggles",
+                  "centers": [
+                    {
+                      "x": 0.6,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "seed": 1167074888,
+      "naiSha256": "5a571f8158fd4010a3e759a8912946b8e15cc4969dab9759ba2621ec401cbb9e"
+    }
+  ]
+}

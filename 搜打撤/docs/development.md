@@ -38,7 +38,7 @@ npm run assets:audit
 - 事件叙事优先修改 `narrative/events.ink`；不要手改 `src/generated/narrative-events.js`，它会在开发、测试和构建前自动重新生成。
 - 领域逻辑不直接操作 DOM；视图不直接修改其他模块的私有状态。
 - 基地购买、拆包、领奖使用 `Base.purchase/openCardPack/grantReward`；复合命令在一个草稿中准备并只持久化一次。不要在 UI 先扣资源、再调用入库、最后忽略保存结果。
-- `npm run typecheck` 按 [check-types.mjs 的 configs 清单](../scripts/check-types.mjs)并行检查；精确覆盖以各 jsconfig 的 include 为准，不手写配置个数或序号。selection 只编译新增外部端口调用契约及正反例，hand-selection 检查纯选牌/发现规则与其 fixture，strict-ui 覆盖清单内 UI 模块；旧 battle.selection-flow 运行态与 runtime/engine 接线不因这些配置自动纳入严格覆盖。新端口补具体 JSDoc 与编译正反例，不用忽略诊断代替契约，通过不代表全项目 strict。
+- `npm run typecheck` 按 [统一配置清单](../scripts/check-type-coverage.mjs)并行编译，再用真实注错探针核验全部自有运行实现。全域 `jsconfig.runtime.json` 启用 `checkJs:true / strict:false`；原严格配置保留，接口 fixture 与实际实现覆盖分开统计。当前为 537/537 实现受检、49/537 strict，边界见[架构说明](architecture.md)。新增源码必须被实际检查，补具体 JSDoc、具名端口与正反例；不能用忽略诊断或排除文件通过覆盖门。运行时门面声明只在 runtime 配置解析，不能替代原实现的检查。
 - 样式按页面职责放入 `css/base.css`、`cards.css`、`overlays.css`、`hub.css`、`battle.css` 或 `scenes.css`；主题覆盖文件保持在这些基础样式之后加载。
 - 存档字段或键名如需变化，先添加迁移与固定旧档测试。
 - 构建/实验产物写入已忽略目录，不提交 `dist` 或 `desktop-app/game`；验收报告/截图集中 `docs/evidence/<日期>-<任务>/`，是否提交仍需老板明确授权。

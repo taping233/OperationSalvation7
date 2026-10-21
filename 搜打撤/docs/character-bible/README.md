@@ -16,7 +16,7 @@
 |---|---|---|---|---|
 | [无](wu.md) | wu | 侠客 | [ref-images/wu.webp](ref-images/wu.webp) | 10-18指定原图补背后黑剑与剑带，交错站姿；性格背景待老板提供 |
 | [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 10-18恢复重绘前10-13版本；扶镜、黑雾与橙火保留；性格背景待老板提供 |
-| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-20接入贝雷帽书卷版；单眼刘海、绿裙坐姿、蛋糕与浮书；性格背景待老板提供 |
+| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-20接入贝雷帽书卷版，10-21补充身份锚点，详见角色页；性格背景待老板提供 |
 | [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | 10-18恢复重绘前10-13版本；喝咖啡与背剑保留；性格背景待老板提供 |
 | [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | 10-18恢复重绘前10-13版本；胸前祝祷、长辫与星灯保留；性格背景待老板提供 |
 

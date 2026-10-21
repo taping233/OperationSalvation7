@@ -1,0 +1,28 @@
+{
+  "command": "node scripts/check-types.mjs",
+  "exitCode": 0,
+  "signal": null,
+  "durationMs": 6789,
+  "stableCodeInputs": true,
+  "beforeSha": "abe90efb8828da6450db952e75893065b0217ede83db43a6e9293509dba628a0",
+  "afterSha": "abe90efb8828da6450db952e75893065b0217ede83db43a6e9293509dba628a0",
+  "beforeGroups": {
+    "code": "e4b8afb504a1ead131a0942cd19f36d87a8cef40601db5846a50ba0912aabc80",
+    "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "state": "d78e844cfb7d9417d71a9bc3608dbdbe174d51cd13cf5b8e49adb05bdac994a0",
+    "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+  },
+  "afterGroups": {
+    "code": "e4b8afb504a1ead131a0942cd19f36d87a8cef40601db5846a50ba0912aabc80",
+    "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "state": "d78e844cfb7d9417d71a9bc3608dbdbe174d51cd13cf5b8e49adb05bdac994a0",
+    "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+  },
+  "coverage": {
+    "denominator": 537,
+    "implementationChecked": 537,
+    "strictChecked": 49
+  },
+  "logSha256": "a859e45d0a3d7385a7d1f7249960ccb8705c4f6787f9ea2152971890f76db8a0",
+  "log": ".tmp/types-full/I02-typecheck.log"
+}

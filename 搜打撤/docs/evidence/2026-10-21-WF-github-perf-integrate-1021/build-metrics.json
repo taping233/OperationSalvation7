@@ -1,0 +1,14 @@
+{
+  "command": "npm run build",
+  "exitCode": 0,
+  "metrics": [
+    "[perf-budget] startup=6/40",
+    "[perf-budget] package=165.54 MiB, duplicates=0.13 MiB",
+    "[perf-budget] entry-gzip=359.9 KiB, initial-js-gzip=408.5 KiB, battle-gzip=61.6 KiB, narrative-gzip=31.0 KiB, css-gzip=223.6 KiB",
+    "[perf-budget] PASS"
+  ],
+  "outputBytes": 173577881,
+  "artManifestImages": 951,
+  "thumbManifestImages": 329,
+  "comparison": "absolute current isolated artifact size, not a local baseline size delta or browser FPS"
+}

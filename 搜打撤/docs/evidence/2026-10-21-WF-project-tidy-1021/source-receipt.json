@@ -1,0 +1,30 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "cea893a03de8225480bc8143ba298bfd95adb237cecbdcb4df4cb5e9d8235990"
+  },
+  {
+    "path": "game/src/README.md",
+    "sha256": "97a00b21fdee1ca716bc91999d7647e888d3cddacdd7552488d1c75a43fdcdf8"
+  },
+  {
+    "path": "docs/README.md",
+    "sha256": "db41e049bd145f25d9e9b9b47c88645392664383f3c7c14a6ef759c9070587cd"
+  },
+  {
+    "path": "docs/STATUS.md",
+    "sha256": "65c9ba0169efbcbd9001fbeb3f6b5e6b9a5fa8ff9320517bd6f1c417dd103cd3"
+  },
+  {
+    "path": "docs/architecture.md",
+    "sha256": "63102c93e4c1a3b172ee2450094b1d1b97646e5617f27589c792dd04b3b3ceb4"
+  },
+  {
+    "path": "tests/battle-hand-inspector.test.js",
+    "sha256": "9bbf0bd21247ccdfa2f80a98b8d5faaf35a74f29969c712cbd23756a247f575b"
+  },
+  {
+    "path": "tests/battle-hand-keyword-interaction.test.js",
+    "sha256": "7688cf38054f08ac19e50632444b5fb58e9903d46afa0493e1a00a0e65410d1b"
+  }
+]

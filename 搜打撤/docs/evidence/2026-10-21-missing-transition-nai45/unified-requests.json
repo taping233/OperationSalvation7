@@ -1,0 +1,39 @@
+{
+  "base": "Paint ONE finished wide 16:9 game transition wallpaper for the SAME GAME as the attached references. Image 1 controls painterly technique ONLY: opaque anime painted planes, bold confident irregular directional strokes, selective contour drawing, warm/cool chromatic grays, readable hard-edged shadows; DO NOT copy its character. Image 2 controls abandoned modern-city world, salvaged survival supplies, weathered matte materials and restrained warm lantern against cold blue gray. Image 3 controls coherent modern architectural scale and layered atmospheric depth; image 4 controls broad brush scale and quiet secondary surfaces. This must look related to these game cards and wallpapers, not a generic minimalist background. MEDIUM DETAIL: strong clear focal object and a few meaningful supporting survival-world details, enough designed material and structure to feel inhabited, with calm grouped background masses. Visible selective broad brush overpainting rather than tiny all-over texture. Dark cold urban twilight, chromatic slate/teal/gray with localized warm amber or cyan, dark areas readable. About one third of image is lower-detail space to left, NOT a huge empty flat field. Connected physical ground, meaningful foreground/midground/distance. No people, letters, numbers, UI, frames, logos, photorealism, glossy 3D, uniform tiny rubble, random triangular fragments, or featureless vector flat fills. ",
+  "refs": [
+    "D:/素材/代号柒/搜打撤/game/assets/cards/bound-shadow.webp",
+    "D:/素材/代号柒/搜打撤/game/assets/scenes/transitions-1021/shop.webp",
+    "D:/素材/代号柒/搜打撤/game/assets/scenes/entry/modern-winter-entry-1011-v2.webp",
+    "D:/素材/代号柒/搜打撤/game/assets/scenes/entry/threshold-cardstyle-1011-v1.webp"
+  ],
+  "scenes": [
+    [
+      "emergency-exit",
+      "EMERGENCY EXTRACTION: right midground a recessed reinforced evacuation hatch built into an abandoned concrete street shelter, a cyan slit illuminates its heavy metal jamb and small fold-down escape ramp; one secured rugged supply case and a modest coil of evacuation rope beside it. Wet broken pavement with grouped reflection, a bent guard rail leads toward hatch; distant urban masses dissolve in cold haze. Focal hatch structurally resolved, secondary city painted broadly."
+    ],
+    [
+      "event",
+      "UNEXPECTED EVENT: a salvaged public broadcast kiosk beneath a patched shallow metal canopy on the right, its empty amber glass glows softly. A small rugged receiver and one tied bundle of paper hanging beneath the canopy hint a survivor left a message, with absolutely no legible marks. A few strong worn concrete planes, restrained cable attachment, damp street reflections, distant abandoned city blocked in broad shapes. Atmospheric mystery and practical scavenged construction."
+    ],
+    [
+      "layer-passage",
+      "DESCENT TO ANOTHER CITY LAYER: an intact sloping maintenance road enters a dark reinforced threshold below a ruined elevated city. Right concrete retaining wall, simple protective railing and a heavy steel gate frame with a single muted red warning lamp. Distinct nearer concrete planes and a narrow cold sky opening between two distant building masses. Paint the gateway material and road structure selectively; suppress repetitive facade grids. Clear dangerous deeper route."
+    ],
+    [
+      "map-return",
+      "RETURN TO EXPLORATION: a believable winding empty service street through an abandoned modern city, broken cyan guidance strips physically embedded along the right curb lead around a bend. A closed salvage crate and battered street barrier make a readable foreground group; one weathered wall and simple elevated connection in middle distance, farther buildings dissolve into broad cold haze. Direction is readable without drawing a map or floating markers. Focal curb light and physical exploratory route."
+    ],
+    [
+      "loading",
+      "WAITING / LOADING: sheltered concourse of a survivor base in the same abandoned city, right upper foreground an oblique circular industrial ceiling light attached to its bracket; its amber pool picks out a simple battered bench and one strapped travel case below. Structural concrete beams, a broad dark window/opening with cold city silhouettes and pale weather outside. Focal lamp/bench group rendered with card-like plane strokes, quieter back walls, a lived-in refuge rather than an empty minimalist box."
+    ],
+    [
+      "expedition-start",
+      "SETTING OUT: look from a makeshift base shelter onto a cold deserted city road at blue dusk. On right an amber caged lantern attached to a patched tarpaulin and concrete shelter edge, below it a packed sturdy field backpack and a compact closed supply case ready for departure. Road opens toward a distant blocky ruined skyline and one faint elevated road; foreground traces of slushy snow at edges, painterly rather than detailed texture. Readable expedition gear focal group, clear inviting but dangerous outward route."
+    ],
+    [
+      "page-turn",
+      "GENERAL TRANSITION: near right a massive weathered concrete corner with a recessed narrow warm-lit doorway beyond it, partly revealed as if rounding the corner into another chapter. One simple hanging cloth and a closed military supply crate at base connect to this game's survivor world. The pavement and one broad wall guide the eye into a cold urban side alley, distant buildings softly grouped, strong angular light-shadow planes and controlled hand-painted material. A threshold to the next place, not literal pages or a book."
+    ]
+  ]
+}

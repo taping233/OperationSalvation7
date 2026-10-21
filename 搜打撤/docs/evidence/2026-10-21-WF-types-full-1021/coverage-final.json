@@ -1,0 +1,6343 @@
+{
+  "denominator": 535,
+  "implementationChecked": 535,
+  "strictChecked": 49,
+  "excluded": [],
+  "configs": [
+    {
+      "config": "jsconfig.framework-boundaries.json",
+      "strict": true,
+      "checkJs": true,
+      "checked": [
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-instance-fields.js",
+        "game/src/cards/card-instance.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/shared.js",
+        "game/src/run/event-commands.js",
+        "game/src/run/event-recode-candidates.js",
+        "game/src/run/shop-commands.js"
+      ],
+      "loaded": [
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-instance-fields.js",
+        "game/src/cards/card-instance.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/shared.js",
+        "game/src/run/event-commands.js",
+        "game/src/run/event-recode-candidates.js",
+        "game/src/run/shop-commands.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/framework-boundaries-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.framework-ports.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/battle/core/battle.effect-assembly.domain.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.snapshot-projection.domain.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/runtime/battle.player-effects.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/core/random-core.js",
+        "game/src/core/shared.js"
+      ],
+      "loaded": [
+        "game/src/battle/bag/battle.bag.domain.js",
+        "game/src/battle/bag/battle.consumed-pile.js",
+        "game/src/battle/bag/battle.deck.factory.js",
+        "game/src/battle/bag/battle.equipment.domain.js",
+        "game/src/battle/bag/battle.piles.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/battle/core/battle.actions.js",
+        "game/src/battle/core/battle.card-play.domain.js",
+        "game/src/battle/core/battle.card-play.js",
+        "game/src/battle/core/battle.card-presentation.js",
+        "game/src/battle/core/battle.damage.domain.js",
+        "game/src/battle/core/battle.draw.domain.js",
+        "game/src/battle/core/battle.effect-assembly.domain.js",
+        "game/src/battle/core/battle.enemy-intent.js",
+        "game/src/battle/core/battle.enemy-phase.domain.js",
+        "game/src/battle/core/battle.enemy-plan.js",
+        "game/src/battle/core/battle.engine.factory.domain.js",
+        "game/src/battle/core/battle.engine.factory.js",
+        "game/src/battle/core/battle.engine.instance.js",
+        "game/src/battle/core/battle.exec-play.domain.js",
+        "game/src/battle/core/battle.facts.js",
+        "game/src/battle/core/battle.foe-lifecycle.domain.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.lifecycle.domain.js",
+        "game/src/battle/core/battle.presentation-events.js",
+        "game/src/battle/core/battle.resolution.domain.js",
+        "game/src/battle/core/battle.selection-flow.domain.js",
+        "game/src/battle/core/battle.setup-mechanics.domain.js",
+        "game/src/battle/core/battle.snapshot-projection.domain.js",
+        "game/src/battle/core/battle.summary.factory.js",
+        "game/src/battle/core/battle.turn-continuation.js",
+        "game/src/battle/core/battle.turn-start.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "game/src/battle/effects/battle.card-cost.js",
+        "game/src/battle/effects/battle.card-inspection.domain.js",
+        "game/src/battle/effects/battle.cost-modifiers.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effect-clauses.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.foe-fight.js",
+        "game/src/battle/effects/battle.infusion.domain.js",
+        "game/src/battle/effects/battle.infusion.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.status-operations.domain.js",
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/effects/battle.trigger-source.js",
+        "game/src/battle/effects/battle.triggers.m2.domain.js",
+        "game/src/battle/effects/card-semantic-operations.js",
+        "game/src/battle/effects/choice-semantic-operations.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.m1.domain.js",
+        "game/src/battle/effects/effect-steps.m2.domain.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/equipment-semantic-operations.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/random-blessings.js",
+        "game/src/battle/effects/requested-card-batch.js",
+        "game/src/battle/effects/requested-card-runtime.domain.js",
+        "game/src/battle/runtime/battle.action-runner.js",
+        "game/src/battle/runtime/battle.execution-session.js",
+        "game/src/battle/runtime/battle.playback.js",
+        "game/src/battle/runtime/battle.player-effects.js",
+        "game/src/battle/runtime/battle.presentation-ports.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.attack-profiles.js",
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random-service.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/framework-battle-ports-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.json",
+      "strict": false,
+      "checkJs": true,
+      "checked": [
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/core/random-core.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-snapshot.js"
+      ],
+      "loaded": [
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/core/random-core.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-snapshot.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/game-store-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.battle-settlement.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/core/shared.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/nest-settlement.commands.js"
+      ],
+      "loaded": [
+        "game/src/core/characters.js",
+        "game/src/core/shared.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/nest-settlement.commands.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/battle-settlement-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.battle-snapshot.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/core/shared.js"
+      ],
+      "loaded": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/core/combat.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/core/shared.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/battle-snapshot-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.card-rules.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/core/shared.js"
+      ],
+      "loaded": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/core/shared.js"
+      ],
+      "interfaceFixtures": []
+    },
+    {
+      "config": "jsconfig.strict-foundations.json",
+      "strict": true,
+      "checkJs": true,
+      "checked": [
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/core/random-core.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/shared.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js"
+      ],
+      "loaded": [
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/core/random-core.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/shared.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/strict-foundations-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.strict-selection.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/core/shared.js"
+      ],
+      "loaded": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.selection-flow.domain.js",
+        "game/src/battle/core/battle.selection-flow.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/effects/battle.cost-modifiers.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effect-clauses.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.foe-fight.js",
+        "game/src/battle/effects/battle.infusion.domain.js",
+        "game/src/battle/effects/battle.infusion.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.trigger-source.js",
+        "game/src/battle/effects/choice-semantic-operations.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/random-blessings.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.attack-profiles.js",
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/strict-selection-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.strict-hand-selection.json",
+      "strict": true,
+      "checkJs": true,
+      "checked": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/core/shared.js"
+      ],
+      "loaded": [
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/core/shared.js"
+      ],
+      "interfaceFixtures": [
+        "./tests/strict-hand-selection-types.fixture.ts"
+      ]
+    },
+    {
+      "config": "jsconfig.strict-ui.json",
+      "strict": true,
+      "checkJs": false,
+      "checked": [
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/random-core.js",
+        "game/src/core/shared.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/ui-scale.js"
+      ],
+      "loaded": [
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/cards/card-frame-presentation.js",
+        "game/src/cards/cards.view.js",
+        "game/src/cards/rot-seed-revision.js",
+        "game/src/cards/structured-card-description.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/node-info.js",
+        "game/src/core/random-core.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/core/storage.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/route-choice-preview.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/map-health-hud.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/ui-scale.js"
+      ],
+      "interfaceFixtures": []
+    },
+    {
+      "config": "jsconfig.runtime.json",
+      "strict": false,
+      "checkJs": true,
+      "checked": [
+        "game/src/agent/agent.battle-stats.js",
+        "game/src/agent/agent.console.js",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.js",
+        "game/src/agent/agent.llm.js",
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.replay-state.js",
+        "game/src/agent/agent.replay.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.scenes.catalog.js",
+        "game/src/agent/agent.scenes.js",
+        "game/src/agent/agent.scenes.runtime.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.weights.js",
+        "game/src/audio/sfx-audition.js",
+        "game/src/audio/sfx-review.js",
+        "game/src/audio/sfx-review.labels.js",
+        "game/src/audio/sfx-review.sources.js",
+        "game/src/audio/sound.diagnostic-policy.js",
+        "game/src/audio/sound.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.samples.catalog.js",
+        "game/src/audio/sound.samples.player.js",
+        "game/src/battle/bag/battle.bag.domain.js",
+        "game/src/battle/bag/battle.bag.js",
+        "game/src/battle/bag/battle.consumed-pile.js",
+        "game/src/battle/bag/battle.deck.factory.js",
+        "game/src/battle/bag/battle.deck.js",
+        "game/src/battle/bag/battle.equipment.domain.js",
+        "game/src/battle/bag/battle.equipment.js",
+        "game/src/battle/bag/battle.piles.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/core/battle.actions.js",
+        "game/src/battle/core/battle.card-play.domain.js",
+        "game/src/battle/core/battle.card-play.js",
+        "game/src/battle/core/battle.card-presentation.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.damage.domain.js",
+        "game/src/battle/core/battle.damage.js",
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/core/battle.draw.domain.js",
+        "game/src/battle/core/battle.draw.js",
+        "game/src/battle/core/battle.effect-assembly.domain.js",
+        "game/src/battle/core/battle.enemy-intent.js",
+        "game/src/battle/core/battle.enemy-phase.domain.js",
+        "game/src/battle/core/battle.enemy-phase.js",
+        "game/src/battle/core/battle.enemy-plan.js",
+        "game/src/battle/core/battle.engine.factory.domain.js",
+        "game/src/battle/core/battle.engine.factory.js",
+        "game/src/battle/core/battle.engine.instance.js",
+        "game/src/battle/core/battle.engine.js",
+        "game/src/battle/core/battle.exec-play.domain.js",
+        "game/src/battle/core/battle.exec-play.js",
+        "game/src/battle/core/battle.facts.js",
+        "game/src/battle/core/battle.foe-lifecycle.domain.js",
+        "game/src/battle/core/battle.foe-lifecycle.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.hand.js",
+        "game/src/battle/core/battle.lifecycle.domain.js",
+        "game/src/battle/core/battle.lifecycle.js",
+        "game/src/battle/core/battle.presentation-events.js",
+        "game/src/battle/core/battle.presentation.js",
+        "game/src/battle/core/battle.resolution.domain.js",
+        "game/src/battle/core/battle.resolution.js",
+        "game/src/battle/core/battle.selection-flow.domain.js",
+        "game/src/battle/core/battle.selection-flow.js",
+        "game/src/battle/core/battle.setup-mechanics.domain.js",
+        "game/src/battle/core/battle.snapshot-projection.domain.js",
+        "game/src/battle/core/battle.summary.factory.js",
+        "game/src/battle/core/battle.summary.js",
+        "game/src/battle/core/battle.target-session.js",
+        "game/src/battle/core/battle.turn-continuation.js",
+        "game/src/battle/core/battle.turn-start.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/core/combat.js",
+        "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "game/src/battle/effects/battle.card-cost.js",
+        "game/src/battle/effects/battle.card-inspection.domain.js",
+        "game/src/battle/effects/battle.card-inspection.js",
+        "game/src/battle/effects/battle.cost-modifiers.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effect-clauses.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.foe-fight.js",
+        "game/src/battle/effects/battle.hosted.js",
+        "game/src/battle/effects/battle.infusion.domain.js",
+        "game/src/battle/effects/battle.infusion.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.status-operations.domain.js",
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/effects/battle.trigger-source.js",
+        "game/src/battle/effects/battle.triggers.m2.domain.js",
+        "game/src/battle/effects/battle.triggers.m2.js",
+        "game/src/battle/effects/card-semantic-operations.js",
+        "game/src/battle/effects/choice-semantic-operations.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.m1.domain.js",
+        "game/src/battle/effects/effect-steps.m1.js",
+        "game/src/battle/effects/effect-steps.m2.domain.js",
+        "game/src/battle/effects/effect-steps.m2.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/equipment-semantic-operations.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/hosted-catalog-index.js",
+        "game/src/battle/effects/random-blessings.js",
+        "game/src/battle/effects/requested-card-batch.js",
+        "game/src/battle/effects/requested-card-runtime.domain.js",
+        "game/src/battle/effects/requested-card-runtime.js",
+        "game/src/battle/runes.js",
+        "game/src/battle/runtime/battle.action-runner.js",
+        "game/src/battle/runtime/battle.browser-presentation.js",
+        "game/src/battle/runtime/battle.clock.js",
+        "game/src/battle/runtime/battle.execution-session.js",
+        "game/src/battle/runtime/battle.host-scheduling.js",
+        "game/src/battle/runtime/battle.pace.js",
+        "game/src/battle/runtime/battle.playback.js",
+        "game/src/battle/runtime/battle.player-effects.js",
+        "game/src/battle/runtime/battle.presentation-ports.js",
+        "game/src/battle/runtime/battle.runtime.default.js",
+        "game/src/battle/runtime/battle.runtime.effects.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.runtime.interaction.js",
+        "game/src/battle/runtime/battle.runtime.js",
+        "game/src/battle/runtime/battle.runtime.piles.js",
+        "game/src/battle/runtime/battle.runtime.presentation.js",
+        "game/src/battle/runtime/battle.runtime.session.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.staged-playback.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.action-timing.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.anim.view.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.attack-profiles.js",
+        "game/src/battle/view/battle.card-feedback.js",
+        "game/src/battle/view/battle.card-results.js",
+        "game/src/battle/view/battle.decision-content.js",
+        "game/src/battle/view/battle.decision-shell.js",
+        "game/src/battle/view/battle.discover-infusion.js",
+        "game/src/battle/view/battle.discover-input.js",
+        "game/src/battle/view/battle.discover-view.js",
+        "game/src/battle/view/battle.effect-feedback.js",
+        "game/src/battle/view/battle.enemy-motion.js",
+        "game/src/battle/view/battle.feedback.js",
+        "game/src/battle/view/battle.frame-assets.js",
+        "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+        "game/src/battle/view/battle.frame-catalog-three-role.js",
+        "game/src/battle/view/battle.frame-catalog.js",
+        "game/src/battle/view/battle.frame-renderer.js",
+        "game/src/battle/view/battle.frame-resolution.js",
+        "game/src/battle/view/battle.frames-diagnostic-policy.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.hand-hit.js",
+        "game/src/battle/view/battle.hand-inspector.js",
+        "game/src/battle/view/battle.hand-layout.js",
+        "game/src/battle/view/battle.hover.js",
+        "game/src/battle/view/battle.infusion-material-state.js",
+        "game/src/battle/view/battle.infusion-view.js",
+        "game/src/battle/view/battle.intent.view.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.overlays.js",
+        "game/src/battle/view/battle.page-activity.js",
+        "game/src/battle/view/battle.piles.view.js",
+        "game/src/battle/view/battle.presentation-ready.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/battle/view/battle.scenery.js",
+        "game/src/battle/view/battle.secondary-overlay.js",
+        "game/src/battle/view/battle.selection-ui.js",
+        "game/src/battle/view/battle.skill-view.js",
+        "game/src/battle/view/battle.turn-feedback.js",
+        "game/src/battle/view/battle.turn-forecast.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/battle/view/battle.victory.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/boot-order.js",
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-field-defaults.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-numeric-fields.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-battle-start-explanation.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/cards/card-draw-explanation.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-frame-presentation.js",
+        "game/src/cards/card-instance-fields.js",
+        "game/src/cards/card-instance.js",
+        "game/src/cards/card-photo-notes.js",
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/cards/cards.catalog.js",
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.sync.backfiller.js",
+        "game/src/cards/cards.sync.builtin.js",
+        "game/src/cards/cards.sync.face-refresh.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/cards/cards.sync.m1.js",
+        "game/src/cards/cards.sync.m10.js",
+        "game/src/cards/cards.sync.m11.js",
+        "game/src/cards/cards.sync.m2.js",
+        "game/src/cards/cards.sync.m3.js",
+        "game/src/cards/cards.sync.m4.js",
+        "game/src/cards/cards.sync.m5.js",
+        "game/src/cards/cards.sync.m6.js",
+        "game/src/cards/cards.sync.m7.js",
+        "game/src/cards/cards.sync.m8.js",
+        "game/src/cards/cards.sync.m9.js",
+        "game/src/cards/cards.view.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/cards/pierce-arrow-revision.js",
+        "game/src/cards/rot-seed-revision.js",
+        "game/src/cards/structured-card-description.js",
+        "game/src/core/art-preload-plan.js",
+        "game/src/core/art.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/camera.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/characters.js",
+        "game/src/core/data-loader.js",
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/flight-recorder.local.js",
+        "game/src/core/icon-hydration.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/core/image-decode.js",
+        "game/src/core/input.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-drag-motion.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/mapData.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/motion.js",
+        "game/src/core/node-info.js",
+        "game/src/core/notes.js",
+        "game/src/core/perf-probe.local.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/performance-settings.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random-service.js",
+        "game/src/core/random.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.fx.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/renderer.js",
+        "game/src/core/renderer.primitives.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/rules.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/runtime-trace-stages.local.js",
+        "game/src/core/runtime-trace.local.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/core/storage.js",
+        "game/src/core/turbo.js",
+        "game/src/e2.snapshot.qa.js",
+        "game/src/experience/pocket-strip.js",
+        "game/src/game.boot.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/narrative-events.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/home/home.catalog.js",
+        "game/src/home/home.commands.js",
+        "game/src/home/home.presenter.js",
+        "game/src/home/home.scene.js",
+        "game/src/home/home.visuals.js",
+        "game/src/home/narrative.js",
+        "game/src/home/story.commands.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-page-motion-v7.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-state.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/base.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/collection-conversion-view.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/collection-protection.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/courtyard-vendor/KoiPond.js",
+        "game/src/hub/courtyard-vendor/RainRenderer.js",
+        "game/src/hub/courtyard-vendor/RainSimulation.js",
+        "game/src/hub/courtyard.rain-tableau.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/departure.drag.js",
+        "game/src/hub/departure.selection-state.js",
+        "game/src/hub/departure.summary.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/hub/game.bag.token-craft.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/hub/game.cardslib.art-warm.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.cardslib.photo-fps.js",
+        "game/src/hub/game.cardslib.photo-props.js",
+        "game/src/hub/game.container-store.view.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/hub.archive-v3.js",
+        "game/src/hub/hub.archive.js",
+        "game/src/hub/hub.collection-v4.js",
+        "game/src/hub/hub.courtyard-runtime.js",
+        "game/src/hub/hub.courtyard-v3.js",
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.home-icons-v10.js",
+        "game/src/hub/hub.home-v3.js",
+        "game/src/hub/hub.materials.js",
+        "game/src/hub/hub.navigation-v7.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/hub/hub.reward-feedback.js",
+        "game/src/hub/hub.shop-v3.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/hub/hub.visuals.js",
+        "game/src/hub/hub.warehouse-categories-v7.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/nest-settlement.commands.js",
+        "game/src/hub/photo-studio-catalog-cache.js",
+        "game/src/hub/photo-studio-controls.js",
+        "game/src/hub/photo-studio-navigation.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/hub/photo-studio-tabs.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/main.js",
+        "game/src/r7a.qa.js",
+        "game/src/rarity-design-lab.js",
+        "game/src/run/chest-opening-art.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/chests.js",
+        "game/src/run/encounter-meta.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/event-commands.js",
+        "game/src/run/event-recode-candidates.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/extraction-preview.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.class-choice.js",
+        "game/src/run/game.run.class-choice.page.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.dev-loader.js",
+        "game/src/run/game.run.dev.js",
+        "game/src/run/game.run.events.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.js",
+        "game/src/run/game.run.resources.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.browser.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/lab.ending.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/run/map-travel-motion.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/route-choice-preview.js",
+        "game/src/run/shop-browse-state.js",
+        "game/src/run/shop-commands.js",
+        "game/src/run/shop-commission.js",
+        "game/src/ui/achievement-gallery.js",
+        "game/src/ui/achievement-medals.js",
+        "game/src/ui/achievement-motion.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/base-design-preview-v7.js",
+        "game/src/ui/base-preview-rooms-v7.js",
+        "game/src/ui/battle-hud-info.js",
+        "game/src/ui/beginner-guide-diagrams.js",
+        "game/src/ui/beginner-guide.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/card-browser-state.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/card-result-feedback.js",
+        "game/src/ui/card-state-motion.js",
+        "game/src/ui/character-idle.js",
+        "game/src/ui/character-view-motion.js",
+        "game/src/ui/chest-reward-overview.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/comm-feed.js",
+        "game/src/ui/cover-context.js",
+        "game/src/ui/departure-transition.js",
+        "game/src/ui/equipment-info.js",
+        "game/src/ui/event-dice.js",
+        "game/src/ui/event-option-state.js",
+        "game/src/ui/event-recode-result.js",
+        "game/src/ui/event-signal-puzzle.js",
+        "game/src/ui/expedition-feedback.js",
+        "game/src/ui/extraction-rewards-view.js",
+        "game/src/ui/feedback-theme.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/fire-rest-view.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/game.menu.pages.js",
+        "game/src/ui/general-transition.js",
+        "game/src/ui/home-fx.js",
+        "game/src/ui/home-layers.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/home-menu-motion.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/ui/lucide-acquisition-icon.js",
+        "game/src/ui/map-health-hud.js",
+        "game/src/ui/map-passage.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/motion-transitions.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/node-decision-view.js",
+        "game/src/ui/node-scene-view.js",
+        "game/src/ui/overlay-return-state.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/partner-interaction.js",
+        "game/src/ui/performance-settings.js",
+        "game/src/ui/quick-nav.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/reward-acquisition-motion.js",
+        "game/src/ui/reward-capacity-organizer.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-picker-heading.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/selection-state-motion.js",
+        "game/src/ui/settings-audio.js",
+        "game/src/ui/settings-battle-restart.js",
+        "game/src/ui/settings-navigation.js",
+        "game/src/ui/settings-transition.js",
+        "game/src/ui/slot-emblems.js",
+        "game/src/ui/startup-transition.js",
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/target-motion.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/title-credits.js",
+        "game/src/ui/title-wallpaper.js",
+        "game/src/ui/transition-diagnostic-policy.js",
+        "game/src/ui/transition-preparation.js",
+        "game/src/ui/transitions-director.js",
+        "game/src/ui/ui-decision.js",
+        "game/src/ui/ui-disclosure.js",
+        "game/src/ui/ui-scale.js",
+        "game/src/ui/ui.js",
+        "game/src/wu-career-frame-preview.js"
+      ],
+      "loaded": [
+        "game/src/agent/agent.battle-stats.js",
+        "game/src/agent/agent.console.js",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.js",
+        "game/src/agent/agent.llm.js",
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.replay-state.js",
+        "game/src/agent/agent.replay.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.scenes.catalog.js",
+        "game/src/agent/agent.scenes.js",
+        "game/src/agent/agent.scenes.runtime.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.weights.js",
+        "game/src/audio/sfx-audition.js",
+        "game/src/audio/sfx-review.js",
+        "game/src/audio/sfx-review.labels.js",
+        "game/src/audio/sfx-review.sources.js",
+        "game/src/audio/sound.diagnostic-policy.js",
+        "game/src/audio/sound.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.samples.catalog.js",
+        "game/src/audio/sound.samples.player.js",
+        "game/src/battle/bag/battle.bag.domain.js",
+        "game/src/battle/bag/battle.bag.js",
+        "game/src/battle/bag/battle.consumed-pile.js",
+        "game/src/battle/bag/battle.deck.factory.js",
+        "game/src/battle/bag/battle.deck.js",
+        "game/src/battle/bag/battle.equipment.domain.js",
+        "game/src/battle/bag/battle.equipment.js",
+        "game/src/battle/bag/battle.piles.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/core/battle.actions.js",
+        "game/src/battle/core/battle.card-play.domain.js",
+        "game/src/battle/core/battle.card-play.js",
+        "game/src/battle/core/battle.card-presentation.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.damage.domain.js",
+        "game/src/battle/core/battle.damage.js",
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/core/battle.draw.domain.js",
+        "game/src/battle/core/battle.draw.js",
+        "game/src/battle/core/battle.effect-assembly.domain.js",
+        "game/src/battle/core/battle.enemy-intent.js",
+        "game/src/battle/core/battle.enemy-phase.domain.js",
+        "game/src/battle/core/battle.enemy-phase.js",
+        "game/src/battle/core/battle.enemy-plan.js",
+        "game/src/battle/core/battle.engine.factory.domain.js",
+        "game/src/battle/core/battle.engine.factory.js",
+        "game/src/battle/core/battle.engine.instance.js",
+        "game/src/battle/core/battle.engine.js",
+        "game/src/battle/core/battle.exec-play.domain.js",
+        "game/src/battle/core/battle.exec-play.js",
+        "game/src/battle/core/battle.facts.js",
+        "game/src/battle/core/battle.foe-lifecycle.domain.js",
+        "game/src/battle/core/battle.foe-lifecycle.js",
+        "game/src/battle/core/battle.hand-selection.js",
+        "game/src/battle/core/battle.hand.js",
+        "game/src/battle/core/battle.lifecycle.domain.js",
+        "game/src/battle/core/battle.lifecycle.js",
+        "game/src/battle/core/battle.presentation-events.js",
+        "game/src/battle/core/battle.presentation.js",
+        "game/src/battle/core/battle.resolution.domain.js",
+        "game/src/battle/core/battle.resolution.js",
+        "game/src/battle/core/battle.selection-flow.domain.js",
+        "game/src/battle/core/battle.selection-flow.js",
+        "game/src/battle/core/battle.setup-mechanics.domain.js",
+        "game/src/battle/core/battle.snapshot-projection.domain.js",
+        "game/src/battle/core/battle.summary.factory.js",
+        "game/src/battle/core/battle.summary.js",
+        "game/src/battle/core/battle.target-session.js",
+        "game/src/battle/core/battle.turn-continuation.js",
+        "game/src/battle/core/battle.turn-start.js",
+        "game/src/battle/core/combat.factory.js",
+        "game/src/battle/core/combat.js",
+        "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "game/src/battle/effects/battle.card-cost.js",
+        "game/src/battle/effects/battle.card-inspection.domain.js",
+        "game/src/battle/effects/battle.card-inspection.js",
+        "game/src/battle/effects/battle.cost-modifiers.js",
+        "game/src/battle/effects/battle.discover-candidates.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/battle.discover-state.js",
+        "game/src/battle/effects/battle.effect-clauses.js",
+        "game/src/battle/effects/battle.effects.js",
+        "game/src/battle/effects/battle.foe-fight.js",
+        "game/src/battle/effects/battle.hosted.js",
+        "game/src/battle/effects/battle.infusion.domain.js",
+        "game/src/battle/effects/battle.infusion.js",
+        "game/src/battle/effects/battle.rule-guard.js",
+        "game/src/battle/effects/battle.status-operations.domain.js",
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/effects/battle.trigger-source.js",
+        "game/src/battle/effects/battle.triggers.m2.domain.js",
+        "game/src/battle/effects/battle.triggers.m2.js",
+        "game/src/battle/effects/card-semantic-operations.js",
+        "game/src/battle/effects/choice-semantic-operations.js",
+        "game/src/battle/effects/effect-steps.audit.js",
+        "game/src/battle/effects/effect-steps.ctx.js",
+        "game/src/battle/effects/effect-steps.curse.js",
+        "game/src/battle/effects/effect-steps.damage.js",
+        "game/src/battle/effects/effect-steps.deck.js",
+        "game/src/battle/effects/effect-steps.gates.js",
+        "game/src/battle/effects/effect-steps.js",
+        "game/src/battle/effects/effect-steps.kills.js",
+        "game/src/battle/effects/effect-steps.m1.domain.js",
+        "game/src/battle/effects/effect-steps.m1.js",
+        "game/src/battle/effects/effect-steps.m2.domain.js",
+        "game/src/battle/effects/effect-steps.m2.js",
+        "game/src/battle/effects/effect-steps.recovery.js",
+        "game/src/battle/effects/effect-steps.rules.js",
+        "game/src/battle/effects/effect-steps.tail.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/effects/equipment-semantic-operations.js",
+        "game/src/battle/effects/hand-cost-patterns.js",
+        "game/src/battle/effects/hosted-catalog-index.js",
+        "game/src/battle/effects/random-blessings.js",
+        "game/src/battle/effects/requested-card-batch.js",
+        "game/src/battle/effects/requested-card-runtime.domain.js",
+        "game/src/battle/effects/requested-card-runtime.js",
+        "game/src/battle/runes.js",
+        "game/src/battle/runtime/battle.action-runner.js",
+        "game/src/battle/runtime/battle.browser-presentation.js",
+        "game/src/battle/runtime/battle.clock.js",
+        "game/src/battle/runtime/battle.execution-session.js",
+        "game/src/battle/runtime/battle.host-scheduling.js",
+        "game/src/battle/runtime/battle.pace.js",
+        "game/src/battle/runtime/battle.playback.js",
+        "game/src/battle/runtime/battle.player-effects.js",
+        "game/src/battle/runtime/battle.presentation-ports.js",
+        "game/src/battle/runtime/battle.runtime.default.js",
+        "game/src/battle/runtime/battle.runtime.effects.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/runtime/battle.runtime.interaction.js",
+        "game/src/battle/runtime/battle.runtime.js",
+        "game/src/battle/runtime/battle.runtime.piles.js",
+        "game/src/battle/runtime/battle.runtime.presentation.js",
+        "game/src/battle/runtime/battle.runtime.session.js",
+        "game/src/battle/runtime/battle.snapshot.js",
+        "game/src/battle/runtime/battle.staged-playback.js",
+        "game/src/battle/runtime/battle.state.js",
+        "game/src/battle/view/battle.action-timing.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.anim.view.js",
+        "game/src/battle/view/battle.attack-cues.js",
+        "game/src/battle/view/battle.attack-profiles.js",
+        "game/src/battle/view/battle.card-feedback.js",
+        "game/src/battle/view/battle.card-results.js",
+        "game/src/battle/view/battle.decision-content.js",
+        "game/src/battle/view/battle.decision-shell.js",
+        "game/src/battle/view/battle.discover-infusion.js",
+        "game/src/battle/view/battle.discover-input.js",
+        "game/src/battle/view/battle.discover-view.js",
+        "game/src/battle/view/battle.effect-feedback.js",
+        "game/src/battle/view/battle.enemy-motion.js",
+        "game/src/battle/view/battle.feedback.js",
+        "game/src/battle/view/battle.frame-assets.js",
+        "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+        "game/src/battle/view/battle.frame-catalog-three-role.js",
+        "game/src/battle/view/battle.frame-catalog.js",
+        "game/src/battle/view/battle.frame-renderer.js",
+        "game/src/battle/view/battle.frame-resolution.js",
+        "game/src/battle/view/battle.frames-diagnostic-policy.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.hand-hit.js",
+        "game/src/battle/view/battle.hand-inspector.js",
+        "game/src/battle/view/battle.hand-layout.js",
+        "game/src/battle/view/battle.hover.js",
+        "game/src/battle/view/battle.infusion-material-state.js",
+        "game/src/battle/view/battle.infusion-view.js",
+        "game/src/battle/view/battle.intent.view.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.overlays.js",
+        "game/src/battle/view/battle.page-activity.js",
+        "game/src/battle/view/battle.piles.view.js",
+        "game/src/battle/view/battle.presentation-ready.js",
+        "game/src/battle/view/battle.preview.js",
+        "game/src/battle/view/battle.scenery.js",
+        "game/src/battle/view/battle.secondary-overlay.js",
+        "game/src/battle/view/battle.selection-ui.js",
+        "game/src/battle/view/battle.skill-view.js",
+        "game/src/battle/view/battle.turn-feedback.js",
+        "game/src/battle/view/battle.turn-forecast.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/battle/view/battle.victory.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/boot-order.js",
+        "game/src/cards/builtin-card-execution.js",
+        "game/src/cards/builtin-card-field-defaults.js",
+        "game/src/cards/builtin-card-identities.js",
+        "game/src/cards/builtin-card-numeric-fields.js",
+        "game/src/cards/builtin-card-previous-rules.js",
+        "game/src/cards/builtin-card-previous-variants.js",
+        "game/src/cards/builtin-choice-execution.js",
+        "game/src/cards/builtin-equipment-execution.js",
+        "game/src/cards/builtin-equipment-previous-rules.js",
+        "game/src/cards/card-battle-start-explanation.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/cards/card-draw-explanation.js",
+        "game/src/cards/card-execution-plan.js",
+        "game/src/cards/card-frame-presentation.js",
+        "game/src/cards/card-instance-fields.js",
+        "game/src/cards/card-instance.js",
+        "game/src/cards/card-photo-notes.js",
+        "game/src/cards/card-rarity.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/cards/card-rules.capability.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-semantic-contract.js",
+        "game/src/cards/card-trigger-contract.js",
+        "game/src/cards/cards.catalog.js",
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.sync.backfiller.js",
+        "game/src/cards/cards.sync.builtin.js",
+        "game/src/cards/cards.sync.face-refresh.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/cards/cards.sync.m1.js",
+        "game/src/cards/cards.sync.m10.js",
+        "game/src/cards/cards.sync.m11.js",
+        "game/src/cards/cards.sync.m2.js",
+        "game/src/cards/cards.sync.m3.js",
+        "game/src/cards/cards.sync.m4.js",
+        "game/src/cards/cards.sync.m5.js",
+        "game/src/cards/cards.sync.m6.js",
+        "game/src/cards/cards.sync.m7.js",
+        "game/src/cards/cards.sync.m8.js",
+        "game/src/cards/cards.sync.m9.js",
+        "game/src/cards/cards.view.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/cards/pierce-arrow-revision.js",
+        "game/src/cards/rot-seed-revision.js",
+        "game/src/cards/structured-card-description.js",
+        "game/src/core/art-preload-plan.js",
+        "game/src/core/art.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/camera.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/characters.js",
+        "game/src/core/data-loader.js",
+        "game/src/core/diagnostics.local.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/flight-recorder.local.js",
+        "game/src/core/icon-hydration.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/core/image-decode.js",
+        "game/src/core/input.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-drag-motion.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/mapData.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/motion.js",
+        "game/src/core/node-info.js",
+        "game/src/core/notes.js",
+        "game/src/core/perf-probe.local.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/performance-settings.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random-service.js",
+        "game/src/core/random.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.fx.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/renderer.js",
+        "game/src/core/renderer.primitives.js",
+        "game/src/core/rule-config.js",
+        "game/src/core/rules.js",
+        "game/src/core/run-checkpoint.js",
+        "game/src/core/runtime-trace-stages.local.js",
+        "game/src/core/runtime-trace.local.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/core/storage.js",
+        "game/src/core/turbo.js",
+        "game/src/e2.snapshot.qa.js",
+        "game/src/experience/pocket-strip.js",
+        "game/src/game.boot.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/narrative-events.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/home/home.catalog.js",
+        "game/src/home/home.commands.js",
+        "game/src/home/home.presenter.js",
+        "game/src/home/home.scene.js",
+        "game/src/home/home.visuals.js",
+        "game/src/home/narrative.js",
+        "game/src/home/story.commands.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-page-motion-v7.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-state.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/base.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/collection-conversion-view.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/collection-protection.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/courtyard-vendor/KoiPond.js",
+        "game/src/hub/courtyard-vendor/RainRenderer.js",
+        "game/src/hub/courtyard-vendor/RainSimulation.js",
+        "game/src/hub/courtyard.rain-tableau.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/departure.drag.js",
+        "game/src/hub/departure.selection-state.js",
+        "game/src/hub/departure.summary.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/hub/game.bag.token-craft.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/hub/game.cardslib.art-warm.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.cardslib.photo-fps.js",
+        "game/src/hub/game.cardslib.photo-props.js",
+        "game/src/hub/game.container-store.view.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/hub/hub.archive-v3.js",
+        "game/src/hub/hub.archive.js",
+        "game/src/hub/hub.collection-v4.js",
+        "game/src/hub/hub.courtyard-runtime.js",
+        "game/src/hub/hub.courtyard-v3.js",
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.home-icons-v10.js",
+        "game/src/hub/hub.home-v3.js",
+        "game/src/hub/hub.materials.js",
+        "game/src/hub/hub.navigation-v7.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/hub/hub.reward-feedback.js",
+        "game/src/hub/hub.shop-v3.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/hub/hub.visuals.js",
+        "game/src/hub/hub.warehouse-categories-v7.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/nest-settlement.commands.js",
+        "game/src/hub/photo-studio-catalog-cache.js",
+        "game/src/hub/photo-studio-controls.js",
+        "game/src/hub/photo-studio-navigation.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/hub/photo-studio-tabs.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/main.js",
+        "game/src/r7a.qa.js",
+        "game/src/rarity-design-lab.js",
+        "game/src/run/chest-opening-art.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/chests.js",
+        "game/src/run/encounter-meta.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/event-commands.js",
+        "game/src/run/event-recode-candidates.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/extraction-preview.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.class-choice.js",
+        "game/src/run/game.run.class-choice.page.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.dev-loader.js",
+        "game/src/run/game.run.dev.js",
+        "game/src/run/game.run.events.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.js",
+        "game/src/run/game.run.resources.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.browser.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/lab.ending.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/run/map-travel-motion.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/route-choice-preview.js",
+        "game/src/run/shop-browse-state.js",
+        "game/src/run/shop-commands.js",
+        "game/src/run/shop-commission.js",
+        "game/src/ui/achievement-gallery.js",
+        "game/src/ui/achievement-medals.js",
+        "game/src/ui/achievement-motion.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/base-design-preview-v7.js",
+        "game/src/ui/base-preview-rooms-v7.js",
+        "game/src/ui/battle-hud-info.js",
+        "game/src/ui/beginner-guide-diagrams.js",
+        "game/src/ui/beginner-guide.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/card-browser-state.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/card-result-feedback.js",
+        "game/src/ui/card-state-motion.js",
+        "game/src/ui/character-idle.js",
+        "game/src/ui/character-view-motion.js",
+        "game/src/ui/chest-reward-overview.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/comm-feed.js",
+        "game/src/ui/cover-context.js",
+        "game/src/ui/departure-transition.js",
+        "game/src/ui/equipment-info.js",
+        "game/src/ui/event-dice.js",
+        "game/src/ui/event-option-state.js",
+        "game/src/ui/event-recode-result.js",
+        "game/src/ui/event-signal-puzzle.js",
+        "game/src/ui/expedition-feedback.js",
+        "game/src/ui/extraction-rewards-view.js",
+        "game/src/ui/feedback-theme.js",
+        "game/src/ui/feedback.local.js",
+        "game/src/ui/fire-rest-view.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/game.menu.pages.js",
+        "game/src/ui/general-transition.js",
+        "game/src/ui/home-fx.js",
+        "game/src/ui/home-layers.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/home-menu-motion.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/ui/lucide-acquisition-icon.js",
+        "game/src/ui/map-health-hud.js",
+        "game/src/ui/map-passage.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/motion-transitions.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/node-decision-view.js",
+        "game/src/ui/node-scene-view.js",
+        "game/src/ui/overlay-return-state.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/partner-interaction.js",
+        "game/src/ui/performance-settings.js",
+        "game/src/ui/quick-nav.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/reward-acquisition-motion.js",
+        "game/src/ui/reward-capacity-organizer.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-picker-heading.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/selection-state-motion.js",
+        "game/src/ui/settings-audio.js",
+        "game/src/ui/settings-battle-restart.js",
+        "game/src/ui/settings-navigation.js",
+        "game/src/ui/settings-transition.js",
+        "game/src/ui/slot-emblems.js",
+        "game/src/ui/startup-transition.js",
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/target-motion.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/title-credits.js",
+        "game/src/ui/title-wallpaper.js",
+        "game/src/ui/transition-diagnostic-policy.js",
+        "game/src/ui/transition-preparation.js",
+        "game/src/ui/transitions-director.js",
+        "game/src/ui/ui-decision.js",
+        "game/src/ui/ui-disclosure.js",
+        "game/src/ui/ui-scale.js",
+        "game/src/ui/ui.js",
+        "game/src/wu-career-frame-preview.js"
+      ],
+      "interfaceFixtures": []
+    }
+  ],
+  "files": [
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.replay.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.runtime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sfx-review.labels.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sfx-review.sources.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.diagnostic-policy.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/audio/sound.samples.player.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.consumed-pile.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.factory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.piles.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.actions.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.card-presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.default-context.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.effect-assembly.domain.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-plan.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.instance.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.facts.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.hand-selection.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation-events.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.setup-mechanics.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.snapshot-projection.domain.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.summary.factory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.summary.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.target-session.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-continuation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-start.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.battle-snapshot.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-cost.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.cost-modifiers.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-candidates.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-flow.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-state.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.effect-clauses.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.effects.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.foe-fight.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.infusion.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.infusion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.rule-guard.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.status-operations.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.trigger-source.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/choice-semantic-operations.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.ctx.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.gates.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.tail.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/effect-verbs.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/equipment-semantic-operations.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/hand-cost-patterns.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/hosted-catalog-index.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/effects/random-blessings.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-batch.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/runtime/battle.browser-presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.clock.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.execution-session.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/runtime/battle.host-scheduling.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.pace.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.playback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/runtime/battle.player-effects.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.presentation-ports.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.default.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.factory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/view/battle.action-timing.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-cues.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-profiles.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/battle/view/battle.card-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.card-results.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-content.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-shell.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-infusion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-input.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.effect-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.enemy-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-assets.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-renderer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-resolution.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-hit.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-inspector.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-layout.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.hover.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-material-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.intent.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.page-activity.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.presentation-ready.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.preview.js",
+      "checkedBy": [
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.battle-snapshot.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.scenery.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.secondary-overlay.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.selection-ui.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.skill-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-forecast.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.victory.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/boot-order.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/builtin-card-execution.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-card-field-defaults.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/builtin-card-identities.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-card-numeric-fields.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/builtin-card-previous-rules.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-card-previous-variants.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-choice-execution.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-execution.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-previous-rules.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-battle-start-explanation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-execution-plan.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-frame-presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-instance-fields.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-instance.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-photo-notes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-render-context.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-semantic-contract.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/card-trigger-contract.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-selection.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.builtin.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/pierce-arrow-revision.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/cards/rot-seed-revision.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/cards/structured-card-description.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.battle-settlement.json"
+      ]
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/input.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/map-drag-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "checkedBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.json",
+        "jsconfig.strict-foundations.json",
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-foundations.json",
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/random-service.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json"
+      ]
+    },
+    {
+      "file": "game/src/core/random.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/run-checkpoint.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/runtime-trace-stages.local.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/runtime-trace.local.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.framework-ports.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.framework-ports.json",
+        "jsconfig.json",
+        "jsconfig.battle-settlement.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-foundations.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.framework-ports.json",
+        "jsconfig.battle-settlement.json",
+        "jsconfig.battle-snapshot.json",
+        "jsconfig.card-rules.json",
+        "jsconfig.strict-foundations.json",
+        "jsconfig.strict-selection.json",
+        "jsconfig.strict-hand-selection.json",
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/generated/narrative-events.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/home.visuals.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/bag-pane-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-motion-v4.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-page-motion-v7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "checkedBy": [
+        "jsconfig.strict-foundations.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-foundations.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "checkedBy": [
+        "jsconfig.battle-settlement.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.battle-settlement.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "checkedBy": [
+        "jsconfig.battle-settlement.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.battle-settlement.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/collection-conversion-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/collection-conversion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/collection-protection.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.battle-settlement.json"
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/courtyard.rain-tableau.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/departure-persistence.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/departure.drag.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation-ports.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.collection-v4.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-runtime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.home-icons-v10.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.navigation-v7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.reward-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse-categories-v7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "checkedBy": [
+        "jsconfig.battle-settlement.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.battle-settlement.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "checkedBy": [
+        "jsconfig.battle-settlement.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.battle-settlement.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-catalog-cache.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-navigation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/slot-write-lock.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/main.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/event-commands.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.resources.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "checkedBy": [
+        "jsconfig.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/shop-commands.js",
+      "checkedBy": [
+        "jsconfig.framework-boundaries.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.framework-boundaries.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/run/shop-commission.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/achievement-gallery.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/achievement-medals.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/achievement-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/base-design-preview-v7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/base-preview-rooms-v7.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/battle-hud-info.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/beginner-guide-diagrams.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/beginner-guide.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/card-browser-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/card-result-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/card-state-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/character-view-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/comm-feed.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/cover-context.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/departure-transition.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/equipment-info.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/event-dice.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/event-option-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/event-recode-result.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/event-signal-puzzle.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/extraction-rewards-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/feedback-theme.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/feedback.local.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/fire-rest-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/game.menu.pages.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/general-transition.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/home-fx.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/home-layers.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/home-menu-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/lucide-acquisition-icon.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/map-health-hud.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/ui/map-passage.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/node-decision-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/overlay-return-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/page-entry-cancellation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/page-surface-lifetime.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/page-visual-ready.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/partner-interaction.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/performance-settings.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/rarity-reveal.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": [
+        "jsconfig.strict-ui.json"
+      ]
+    },
+    {
+      "file": "game/src/ui/reward-acquisition-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/reward-card-feedback.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/reward-picker-heading.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/reward-state.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/selection-state-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/settings-audio.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/settings-battle-restart.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/settings-navigation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/settings-transition.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/slot-emblems.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/startup-transition.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/target-motion.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/title-credits.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/title-wallpaper.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/transition-diagnostic-policy.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/transition-preparation.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/ui-decision.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/ui-disclosure.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "checkedBy": [
+        "jsconfig.strict-ui.json",
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [
+        "jsconfig.strict-ui.json"
+      ],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "checkedBy": [
+        "jsconfig.runtime.json"
+      ],
+      "strictBy": [],
+      "uncheckedDependencyBy": []
+    }
+  ],
+  "probeDirectory": ".tmp/type-coverage-uOgOhv"
+}

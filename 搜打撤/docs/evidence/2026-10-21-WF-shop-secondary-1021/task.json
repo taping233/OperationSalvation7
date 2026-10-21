@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-shop-secondary-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "Sol medium落实商店奖励连续反馈与二级返回上下文，复用已实现公共能力",
+  "paths": [
+    "game/src/run/game.run.shop.js",
+    "game/src/run/shop-browse-state.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/ui/reward-state.js",
+    "game/src/ui/reward-capacity-organizer.js",
+    "game/src/ui/overlay-return-state.js",
+    "game/src/ui/overlay.js",
+    "docs/evidence/2026-10-21-WF-shop-secondary-1021"
+  ],
+  "doneWhen": [
+    "商店奖励成功反馈及二级返回实际缺口修复，保持原规则与事务行为",
+    "相关定向检查通过且父会话集中实页或如实记录阻塞"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "既有集中9文件145项通过与当前窗口已完成范围见收尾记录",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "老板要求停止进一步验证；未作全量构建CI，当前预览服务保留"
+  ],
+  "updatedAt": "2026-10-21T05:54:38.763Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

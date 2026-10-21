@@ -1,0 +1,42 @@
+{
+  "phase": "final-ui",
+  "capturedAt": "2026-10-21T05:39:43.205Z",
+  "target": ".tmp/public-controls-1021/review",
+  "items": [
+    {
+      "path": "game/css/base.css",
+      "bytes": 31895,
+      "sha256": "c6d3f9dfadb88c44c79e4f90b2479f3825ec113c3d8e278ec6b84fa52559268c"
+    },
+    {
+      "path": "game/css/public-controls.css",
+      "bytes": 2089,
+      "sha256": "710f79fa7a0fcd55c120a107c91d21a2b132fd8abaf264b7e90c1e1c32adc340"
+    },
+    {
+      "path": "game/css/battle-equipment.css",
+      "bytes": 3178,
+      "sha256": "c98d1161b6b1ab8da791f0eb7cdc9680160eaccf6cf6db028b92ca3e450d21b9"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "bytes": 8752,
+      "sha256": "2863ecdc0ed44412209603d6c88253e1f923b3ed2ae180c649dd998ac7264e08"
+    },
+    {
+      "path": "game/src/ui/equipment-info.js",
+      "bytes": 2041,
+      "sha256": "a8fd72bc091304a346e9a1aeb52f0e93382579aa55192181e1874e9fc8396544"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "bytes": 59291,
+      "sha256": "6d2c31dc0a213e62952be53392adca4c07d18e46749a825f4cb7c118660714f4"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "bytes": 47914,
+      "sha256": "da4937bfb262d4e39e216ade73b687722c440d50f2d3131054d45d4c603a98ad"
+    }
+  ]
+}

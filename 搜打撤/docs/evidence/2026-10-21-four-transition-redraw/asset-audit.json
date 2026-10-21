@@ -1,0 +1,39 @@
+{
+  "scope": "selected",
+  "ok": true,
+  "selected": [
+    "scenes/transitions-1021/retreat.webp",
+    "scenes/transitions-1021/door.webp",
+    "scenes/transitions-1021/altar.webp",
+    "scenes/transitions-1021/shop.webp"
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "path": "scenes/transitions-1021/altar.webp",
+      "bytes": 281942,
+      "sha256": "4cff52225a7894f4c00b0f058c9039646d1a0c853d1866b1378e3b90d84fed3b"
+    },
+    {
+      "path": "scenes/transitions-1021/door.webp",
+      "bytes": 257088,
+      "sha256": "7c6efd4c34714f0afafcaca689d7be880f5975a2e4d9285e0de699477e24ff92"
+    },
+    {
+      "path": "scenes/transitions-1021/retreat.webp",
+      "bytes": 212598,
+      "sha256": "a367ac468060b220f96e1224e6fb49f2d5fe1666b6cce9243f077f60d367cb0b"
+    },
+    {
+      "path": "scenes/transitions-1021/shop.webp",
+      "bytes": 287062,
+      "sha256": "4879472de6fda076d1bcabf9ec6b8d08b693611c48c2c27e032babe7618732a3"
+    }
+  ],
+  "global": {
+    "ok": false,
+    "errorCount": 95,
+    "historicalWarningCount": 570,
+    "manifestIssues": []
+  }
+}

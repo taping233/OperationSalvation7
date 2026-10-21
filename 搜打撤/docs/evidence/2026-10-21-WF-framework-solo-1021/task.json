@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-framework-solo-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "父会话只派工协调；Sol中等推理子代理完成快照隔离、核心端口类型、战斗职责拆分和启动依赖收口",
+  "paths": [
+    "game/src/hub/game.store.js",
+    "game/src/hub/game.store.types.d.ts",
+    "game/src/battle/core",
+    "game/src/battle/effects",
+    "game/src/run/game.session.kernel.js",
+    "game/src/core/mapData.js",
+    "game/src/core/renderer.fx.js",
+    "game/src/game.boot.js",
+    "game/src/main.js",
+    "game/src/boot-order.js",
+    "tests",
+    "jsconfig.framework-ports.json",
+    "scripts/check-types.mjs",
+    "scripts/architecture-graph.mjs",
+    "docs/architecture.md",
+    "game/src/README.md",
+    "docs/evidence/2026-10-21-WF-framework-solo-1021"
+  ],
+  "doneWhen": [
+    "快照隔离奖励等纯数据且保留明确运行态引用",
+    "核心端口真实装配受类型检查与反例保护",
+    "引擎和结算职责拆分且玩法及取消顺序不变",
+    "会话内核不再在求值时捕获全局MAP和FX且启动回归通过",
+    "相关静态回归、必要集成和当前窗口实页核验完成"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "四项代码由三位Sol中等代理完成；语法数据lint与10配置类型通过，关键集成95项通过，来源见integration.md及分片报告",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "完整套件原始exit1：7670通过、1项旧门面债务清单失败、38跳过；原结果保留",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "唯一旧清单缩债后3文件48项及docs通过；完整manifest仅该测试变化，生产源码SHA一致，见full-recovery-coverage.json",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "Codex内置浏览器不可用，当前窗口标题开局战斗保存恢复及页面error实页待补，来源参数时间见integration.md",
+    "未build提交推送或核对远端CI；旧战斗实现未整体strict，本轮未再次运行完整全绿套件"
+  ],
+  "updatedAt": "2026-10-20T18:14:52.584Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

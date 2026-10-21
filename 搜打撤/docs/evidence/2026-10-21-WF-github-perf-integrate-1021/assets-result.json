@@ -1,0 +1,5 @@
+{
+  "check": "assets",
+  "exitCode": 0,
+  "tail": "Manifest drift: {\"unlisted\":533,\"ghost\":33,\"license-pending\":4}\nAsset check: 0 errors, 570 unchanged historical warnings (docs/asset-audit-debt.json)\n"
+}

@@ -1,0 +1,16 @@
+{
+  "path": "game/src/battle/core/battle.snapshot-projection.domain.js",
+  "beforeSha256": "3d96aeb5f5e3499f234295a701cff8d7b547b2b2f5aca7acde59f85e3d9cdbfe",
+  "afterSha256": "b8683218079a07e34dc4b4bb5e92c6f726a62a52c4e9245d18d632e46a4b96dc",
+  "coordination": "PARALLEL-REGISTRY.md: WF-sts2-cast-ui-1021 串行接入说明",
+  "preserved": [
+    "pendingTarget.fuelUids",
+    "pendingTarget.battleToken",
+    "pendingTarget.selectionId",
+    "infusing"
+  ],
+  "test": {
+    "path": "tests/battle-snapshot-phase-cost.test.js",
+    "sha256": "71fddfd8d26519a18521f3753fafc2927785bbc7f2a1da2d846e680bf1203e14"
+  }
+}

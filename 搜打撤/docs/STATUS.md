@@ -17,7 +17,22 @@ npm run workflow -- task read --task <任务编号> --date <YYYY-MM-DD> --json
 - 美术、人设、术语与图鉴整理：[接手与生成验证](evidence/2026-10-09-WF-doc-system-art-cards-1009/README.md)。
 - 旧状态原文与各轮验收保留在[历史索引](archive/lean-workflow-2026-09-30/README.md)，只证明各自时点，不回填为新任务进度。
 
-## 当前交付核对
+## 当前工作区与交付
+
+当前主线为 Vite 工作区；HEAD、index 与未提交增量以实时 Git 为准。下表导航当前已接入的改动及其验证边界，不把某批历史通过结果视作整个工作树通过。
+
+| 范围 | 当前入口与证据 |
+| --- | --- |
+| 源码结构与类型 | [源码导航](../game/src/README.md)、[架构](architecture.md)；全域类型与实例端口改造见[类型记录](evidence/2026-10-21-WF-types-full-1021/README.md) |
+| 性能优化 | [首批移植](evidence/2026-10-21-WF-github-perf-integrate-1021/README.md)、[追加五项优化](evidence/2026-10-21-WF-cloud-perf-merge-1021/README.md)；均已接入，完成未提交，构建/实页/测试分别保留输入边界 |
+| 战斗施放与公共控件 | [施放、牌堆与切栏](evidence/2026-10-21-WF-sts2-cast-ui-1021/README.md)、[公共控件与装备](evidence/2026-10-21-WF-public-controls-1021/README.md)；当前实现见架构，旧UI断言补齐及清账见[整理记录](evidence/2026-10-21-WF-project-tidy-1021/README.md) |
+| 编辑、服务与候选 | [REGISTRY](PARALLEL-REGISTRY.md)分别记录源码编辑、保留服务、待验收美术和已释放成果；服务历史PID不能直接当作当前进程身份 |
+| 待决策与后续工作 | [PENDING](PENDING.md)保留需老板拍板的事项；普通需求见[roadmap](roadmap.md) |
+| 旧资源与便携包 | [清理后状态](CLEANUP-STATUS.md)只维护已执行清理的文件及旧交付包；不代表当前网页已打包或发布 |
+
+## 较早交付记录
+
+以下保留原报告时点和验证范围；原文中的“未提交”不作为今天仍未提交的判断，使用前核对Git及对应任务交付信息。
 
 10-19清理后的文件可用性与当前保留EXE统一见[清理后状态](CLEANUP-STATUS.md)。旧资源、失败动画、临时解包目录和五份旧便携包已经按批准清单删除；历史交付记录中的旧路径不再作为当前下载入口。
 

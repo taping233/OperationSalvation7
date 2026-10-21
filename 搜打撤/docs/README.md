@@ -38,6 +38,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 
 | 要改什么 | 先看（现行规范） | 再看（时点依据与证据） |
 | --- | --- | --- |
+| 找代码位置 / 模块职责 | [源码导航](../game/src/README.md)、[架构](architecture.md) | [当前工作区与交付](STATUS.md)；不要按历史文件名猜现行入口 |
 | 战斗逻辑 / 数值 / 牌效 | [规则](rules.md)、[架构](architecture.md) | [质量门](quality-gates.md)（验收与全量口径） |
 | 卡牌数据 / 规则文本 | [卡牌入口](cards/README.md)、[术语](terminology.md)，先核对运行卡库与解释器 | [迁移矩阵](M-BATCH-MATRIX.md)、[排除清单](M-BATCH-EXCLUSIONS.md)（测试固定路径）、[M 批结果](archive/card-migration-2026-09-27/README.md) |
 | 存档 / 基地写入 | [存档契约](save-format.md) | [直写路径审计 09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)（直写红线、保留簇与挂账） |

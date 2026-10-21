@@ -1,0 +1,527 @@
+[
+  {
+    "path": "agent-current-final-input-stability.json",
+    "bytes": 32,
+    "sha256": "5d967a90a97d87039c81140f0001d06b6404b7e93399ef728d7f5e9ad426a129",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-final-inputs.json",
+    "bytes": 23965,
+    "sha256": "c54c225b12b2b6ca07bc2b3134dfa2ff974623d68757fa339de0aa4ce4cc1ae1",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-final-summary.json",
+    "bytes": 174,
+    "sha256": "4c1ff35e09f1253c48881f8c78e1bdeae9861bd09a37affe6b2dc9e87505e65d",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-final.json",
+    "bytes": 61993,
+    "sha256": "7bfc55eaa38cf7059179b2e19b368a1a694c7583e8533aa2b1a6bcca4bf1adff",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-final.log.txt",
+    "bytes": 249,
+    "sha256": "c29a414f5d704138e44a6d92a13cbca7c6691c850c9b2653341f9d349a3267bf",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-input-stability.json",
+    "bytes": 73,
+    "sha256": "6e17d8b8914b65f24abca237dcde2ec8e1ac14556892f59e502e97278e13f3d8",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-inputs.json",
+    "bytes": 23852,
+    "sha256": "6fd4aba14038f307c4b653689ee687491ced84287d1152877543f24828e8bed0",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current-summary.json",
+    "bytes": 174,
+    "sha256": "c334237f2ba1a5348e3285d01a18e1e99c15cf053d21be8ecdcbb514cb051e69",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current.json",
+    "bytes": 57055,
+    "sha256": "3cc7d43909ba8de22ee17c9e19221896314249d1ffb1414ec1f134579b16f441",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "agent-current.log.txt",
+    "bytes": 243,
+    "sha256": "52335208fd06f3eb1097bd31f78dcb21bc873643678e7d747da16fcbfd079195",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "asset-registration.json",
+    "bytes": 4841,
+    "sha256": "625ac174be0e710989528f3476f5129140e74025a68f76db82a19423e30a55c5",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "asset-review.json",
+    "bytes": 16860,
+    "sha256": "9771fcb08a4936df33b8be32c8b421fd6d68353a6c063e15e037b36a33ea3cc0",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "assets-result.json",
+    "bytes": 216,
+    "sha256": "cca5a3cc8e70a3b8dd289603005e03489a806be9453a5b7f62a5b313c1303437",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "assets.log.txt",
+    "bytes": 150,
+    "sha256": "1e94f101a702837b260a1aad8c80270eb64dc4d9f3e67b5b42d84f4dc16d8757",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "bag.png",
+    "bytes": 83374,
+    "sha256": "e0c7eef53b6635fd03791741ad8d6a38adbb1a60b2291ed2a7f8f4808746e9f6",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "browser-3ab98d23-c8c3-4ba4-9abf-775c2634f356-snapshot.json",
+    "bytes": 1678,
+    "sha256": "0cc0441bb91db9832d150bcf6772583c02cd36506caf5eda9521edd84b9c1d46",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "browser-snapshot.json",
+    "bytes": 1678,
+    "sha256": "0cc0441bb91db9832d150bcf6772583c02cd36506caf5eda9521edd84b9c1d46",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-event-presentation-result.json",
+    "bytes": 10556,
+    "sha256": "02564dfe2e638f82e8b6a2d6dee1b0f0e3864ea9ce7f50d1ee0a82ba2ae75c6e",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-event-presentation.log.txt",
+    "bytes": 30657,
+    "sha256": "6c268407d69a0e455afe0635aa74bb00f92694ed32e9159473fd30f9ff3dcd32",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-final-result.json",
+    "bytes": 10556,
+    "sha256": "ca11d9f96468533e86c36981e6b3ba2a34a395d013f5c5c5e443be0879f61b74",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-final.log.txt",
+    "bytes": 30657,
+    "sha256": "0f807b5a0b3b94e0955b751c8640a10199156b1d66e0052060a04beda4488a6f",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-materialized-result.json",
+    "bytes": 10560,
+    "sha256": "86090180e67fea6e594bdad771b8937829d5c5e6d84b274262e5f53351eb975d",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-materialized.log.txt",
+    "bytes": 30695,
+    "sha256": "35f1ddb2d03ba25803aded67ecbb55bd7bfc25060a066bc914b1879abbda5c8b",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-metrics.json",
+    "bytes": 531,
+    "sha256": "e7abdc5d81e724c054e43616496927458925d88b5c396f698e40a208ec3c3d92",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-result.json",
+    "bytes": 136,
+    "sha256": "7764fb6b973f4559fe87fb483b7ab0d0e6dd7a587bf3b46be7646b87db53b479",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-source-archive-result.json",
+    "bytes": 10558,
+    "sha256": "5c48f1304de21e5ecbd831a0202a12bf1438d09d3b94430161371325a65cc222",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build-source-archive.log.txt",
+    "bytes": 28759,
+    "sha256": "a22c5cde9f8f2c6aab3d986e7eade0b78fad133b23ff6700c9d84099501a6322",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "build.log.txt",
+    "bytes": 26325,
+    "sha256": "60484398e3dfb0fa25cfbe8bddedc599191368f3102a1e44cdb40c3c08aef401",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "camp.png",
+    "bytes": 118557,
+    "sha256": "a7ff1655c77d75d60b32db7d0470962519984aaeed9bd6cfc508d1f7998ea053",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "check-syntax-result.json",
+    "bytes": 106,
+    "sha256": "11d4ce2a16ace7a244fd325a4a992f5ab54b0b860060d08a3e0a27cde5b4727a",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "check-syntax.log.txt",
+    "bytes": 41,
+    "sha256": "a36840009f6bc2c3b5cd32634be2b619cad3d2caf99ead3a4aae580e2935c266",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "closeout.json",
+    "bytes": 322,
+    "sha256": "f752ff8a2842ec614d354dc50bbffa7387a4c821717f6ffd58bcb34bc02d8d07",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "diff-check.json",
+    "bytes": 1526,
+    "sha256": "d0b4dfac8569323504117593d60acd9d222f288874aa8a1152f6c7841e22ce4a",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "docs-finish-migration.json",
+    "bytes": 456,
+    "sha256": "f10006ac6148e074d69bd0359965186b9fa2ac912e0ce227dd02984751f4124d",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "docs-result.json",
+    "bytes": 3001,
+    "sha256": "4d9a88e3c4a640fe3b76eaa664e29ae26496e355af3105fe0022e35aaeef4203",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "docs.log.txt",
+    "bytes": 2766,
+    "sha256": "ac8f9e8b74b6c9b3d3ac7c891a9f472bb0f2b711e9b941b7b73cb2bb96e9718e",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "event-presentation-summary.json",
+    "bytes": 173,
+    "sha256": "3600842495da179f51e5a7dccf265ff8c48e7673d57b32fe307b6da02b5b9d8a",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "event-presentation.json",
+    "bytes": 62423,
+    "sha256": "63dba14ea2a3eed14c7529b0b57d3423f4ebb4fb36c5dbc09c6c93969efb1feb",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "event-presentation.log.txt",
+    "bytes": 248,
+    "sha256": "81db47911d7651924828aecfbf11c5bec64733926390a89b01fa479377e02ad2",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "generated-final-summary.json",
+    "bytes": 173,
+    "sha256": "499e6ca5644d8e3ef2de3fe4354cd8b512d5399852bc90d4ae9c9fcb56d717f2",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "generated-final.json",
+    "bytes": 62628,
+    "sha256": "4313111da50277e24853a7ec547ad7b62ec6e5e5d71de4652457286518511272",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "generated-final.log.txt",
+    "bytes": 245,
+    "sha256": "a8d5a076e2f61e520075aaf997728d74910a90e9c95ffa4725f60bfbbb87f668",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "generated-sync.json",
+    "bytes": 647,
+    "sha256": "45ea9b30d82a5fd20367fcd5b7dce39687e3f3df0567aace0effd240e7dc6ca0",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "integration-final-input-stability.json",
+    "bytes": 32,
+    "sha256": "5d967a90a97d87039c81140f0001d06b6404b7e93399ef728d7f5e9ad426a129",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "integration-final-inputs.json",
+    "bytes": 71356,
+    "sha256": "b5d3383b0a80f517c22002720329f9f7bfc3c793c458cc6d69167aff55a424f0",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "integration-final-summary.json",
+    "bytes": 2705,
+    "sha256": "571c1d3640d140bd08e28c83c4b795793fc6c85cbda22aed5c842206d35e4849",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "integration-final.json",
+    "bytes": 335380,
+    "sha256": "a3e9cea70434b8cf451e61bc445dcab2be17e399c6bc6af76206105a873d1854",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "integration-final.log.txt",
+    "bytes": 247,
+    "sha256": "aad4c2dbeb8e282708ebcbace3c281b98abac39e1dd25bad34a64cc75cb63123",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "lint-result.json",
+    "bytes": 56,
+    "sha256": "b9d706599135986dd2160dee7a58fba7cefde71120fd1de8beb00ed01088f90b",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "lint.log.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "local-source-archive.json",
+    "bytes": 1357,
+    "sha256": "f09d881a87133d33ff4130ef63c01d22e1b20762346e228924f04f56c87b9089",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "README.md",
+    "bytes": 6536,
+    "sha256": "8b56c5b8bbb17af32477dbd9d7cdea9c361ae5f506698ce7cc1ee85de4942aa5",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "regression-coverage.json",
+    "bytes": 14252,
+    "sha256": "63bedd0270cb1ee255fc231f5676f43ed96cbb386bfd79ae88cefa5dd2cf4ec9",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity-final-summary.json",
+    "bytes": 171,
+    "sha256": "72781983b080ae6628617157d593e9b077fd2bb79f5995dd2de8c3a80d7d00be",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity-final.json",
+    "bytes": 12025,
+    "sha256": "3ea8856a809ea1c7d9e27ef9339c064a93d45049ab08b834340e52c2d051b3e8",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity-final.log.txt",
+    "bytes": 251,
+    "sha256": "c7511ce54dd1bbd6e3725b4f213e069f08ae9f0390cd9d87664ac19ae538933e",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity-summary.json",
+    "bytes": 1898,
+    "sha256": "95b5685b7dfb00dbaa86019563beae115d931070f8484c3666e1492dc2d416dd",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity.json",
+    "bytes": 13421,
+    "sha256": "84e62a92c396e02b21b80ff5cc8c5d8da59ba05a6acf3de382bad9dda0681e49",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "replay-identity.log.txt",
+    "bytes": 245,
+    "sha256": "dca2e28be772e9b5e55f4ccbaad7fcfb811ba4a23b2c378d658721e1e4ad2566",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "resources-first-summary.json",
+    "bytes": 171,
+    "sha256": "930f083d95974ebee36415b487fadee75cd4f534e19ae3532f5dfbccec611322",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "resources-first.json",
+    "bytes": 34423,
+    "sha256": "20a59fe89182573d51e09953a9a51b096e354a9b8dc30642493eb546f482baed",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "resources-first.log.txt",
+    "bytes": 245,
+    "sha256": "ccd4e7b3712f32b19c7ddd3bee179112ed1b05ddf365c4f6464eeb77c67b287c",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "runtime-first-summary.json",
+    "bytes": 174,
+    "sha256": "cc4da9d0a8d4525540a65dd3af3d46cf1f4cba8b4e1fc9deffd919d627627aa3",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "runtime-first.json",
+    "bytes": 150930,
+    "sha256": "0846b5adb480c8a03fb6ec650b54c2a4db30a7bba7e460df25a0e240a16a16d3",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "runtime-first.log.txt",
+    "bytes": 243,
+    "sha256": "428b80a110688f64b243973123846f4ad42216b3b39274320a12ee8711248eb2",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "service-cleanup.json",
+    "bytes": 153,
+    "sha256": "cc9c547e98da49c05ed4b961873d874a4e914e3004d3e3004f4818f219acc75c",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "service.json",
+    "bytes": 392,
+    "sha256": "ae68edaa94384642d42d7b62968c484d59cbd55092f88028d8de8985317c9eca",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "settings.png",
+    "bytes": 56501,
+    "sha256": "08985071261646bb747be03cd412859c9ea5aaf9c8058f400c0a0d74cb371470",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "snapshot-inputs.json",
+    "bytes": 8122,
+    "sha256": "03935930036e734da165d4f2166935b4ac858efb09ffb2d1cb41b6a64246e8f4",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "snapshot-migration.json",
+    "bytes": 629,
+    "sha256": "aa8e92ec55197f88c64786a66fca76bc1be8f7d27da5a86e2e54b46673c9a359",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "source-receipt.json",
+    "bytes": 12861,
+    "sha256": "61598d7d049f300c302d3bc32d29e9da6deb2cf098cd9eb29b375a12ad7c3228",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "task.json",
+    "bytes": 2945,
+    "sha256": "8e9ac1ea4b5144c1247ce49984781ae0a461fd6b76926b70efa256420886bcb3",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "term-tip.png",
+    "bytes": 128349,
+    "sha256": "560d8d22315ee4c5d13c7d4616d17dbaeb7b73b1e0a1b758904a05132b613c2b",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "typecheck-result.json",
+    "bytes": 593,
+    "sha256": "5be1ac0c1609aeb3e983e958fb33de00f71b209606c53be14d5561b28adb6838",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  },
+  {
+    "path": "typecheck.log.txt",
+    "bytes": 520,
+    "sha256": "9446eb65ceb2a4c21b319809ef7acec3ad9ea20c95cc9a4b84ca31f91569f129",
+    "gitEligibleBySize": true,
+    "acquisition": "task scoped terminal checks / Codex built-in browser, see README and matching log"
+  }
+]

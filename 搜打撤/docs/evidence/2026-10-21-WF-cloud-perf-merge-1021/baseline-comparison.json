@@ -1,0 +1,34 @@
+{
+  "preIntegrationFailed": [
+    "adds and removes infusion materials explicitly without opening the inspector or spending resources",
+    "adds distinct material UIDs through the workspace and ignores a detached repeated button",
+    "describes and cycles three hand pages without changing cards or combat state",
+    "inspects the source before entry and keeps selected materials and scroll while reading details",
+    "keeps pointerover and keyboard focus explanations readable without selecting a card",
+    "pending infusion recreates its actual battlefield when restored without a mounted scene",
+    "updates the entire career skill help across busy and energy changes",
+    "取消或切换战斗后旧工作区确认、直打、选量与详情回调均失效",
+    "同叠注能逐张加减，数量、按钮与剩余提示同步且不循环撤选",
+    "工作区数字键逐张加入当前材料组，取消保留全部手牌和能量",
+    "更新后旧加减回调失效，当前按钮继续逐张选取独立UID",
+    "独立工作区展示全部材料，旧手牌入口不能选离屏UID",
+    "选量变化保留材料滚动和可用控件焦点，更换材料不提前消耗"
+  ],
+  "postIntegrationFailed": [
+    "adds and removes infusion materials explicitly without opening the inspector or spending resources",
+    "adds distinct material UIDs through the workspace and ignores a detached repeated button",
+    "describes and cycles three hand pages without changing cards or combat state",
+    "inspects the source before entry and keeps selected materials and scroll while reading details",
+    "keeps pointerover and keyboard focus explanations readable without selecting a card",
+    "pending infusion recreates its actual battlefield when restored without a mounted scene",
+    "updates the entire career skill help across busy and energy changes",
+    "取消或切换战斗后旧工作区确认、直打、选量与详情回调均失效",
+    "同叠注能逐张加减，数量、按钮与剩余提示同步且不循环撤选",
+    "工作区数字键逐张加入当前材料组，取消保留全部手牌和能量",
+    "更新后旧加减回调失效，当前按钮继续逐张选取独立UID",
+    "独立工作区展示全部材料，旧手牌入口不能选离屏UID",
+    "选量变化保留材料滚动和可用控件焦点，更换材料不提前消耗"
+  ],
+  "newFailures": [],
+  "method": "Vite pre-load plugin substitutes frozen before bytes for touched modules and tests; source tree untouched."
+}

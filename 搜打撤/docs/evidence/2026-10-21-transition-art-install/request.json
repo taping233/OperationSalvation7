@@ -1,0 +1,24 @@
+{
+  "status": "generated-user-rejected",
+  "workflow": "成功NAI4.5小稿→内置ImageGen重绘→现役过场接入",
+  "prompt": "Use case: style-transfer / game environment illustration.\nCreate one wide 16:9 1672×941 finished background by repainting Image 1, the user's successful NovelAI 4.5 small draft. Image 1 is the edit target: PRESERVE its eye-level camera, sheltered dark blue-gray passage on the left, large open rectangular sliding gate on the center-right, bright elevated futuristic city beyond, orange ivory winter sunlight, turquoise sky, walkable snowy threshold and strong depth. Expand the sides gracefully to landscape 16:9 without cropping away the gate or floor. Keep the dark left third quiet for a later title overlay. Repair and clarify the walkway beyond the threshold so it connects safely to the city; no cliff or sudden drop at the door. No people, lettering, logos or interface.\nImages 2 and 3 are painting-technique references only; Image 4 enriches selective hand-drawn edges and warm-cool overpainting. Never transfer their characters, clothes, hair, white backgrounds or signatures.\nRepaint as the project's hand-painted Japanese anime block-painting style: coherent opaque color masses, visible broad directional brush shapes, firm grouped light and shadow, muted chromatic gray overlaps, selected thinner drawn contours at beams, panel seams and rail edges. Mix calm large architectural surfaces with locally resolved material turns. Steel uses a few narrow highlights; composite wall panels stay mostly quiet; snow uses pale blue, lilac and warm ivory facets. Do not retain the small draft's uniform thin parallel lines or airbrushed gradients; recast repetitive city details into grouped building silhouettes and a few readable transit rails. Preserve luminous inviting winter light and clear architectural perspective. Keep secondary details economical, avoid photorealistic/3D polish, flat vector filling, excessive grain, random facet confetti and dense scratchy line webs. One cohesive landscape image, no frame, no watermarks, no UI.",
+  "references": [
+    "D:/素材/代号柒/.tmp/nai/transition-art-sample-20261021/nai-v45-small.png",
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg"
+  ],
+  "exclusions": [
+    "研究所",
+    "已有战斗/首脑专用过场"
+  ],
+  "scope": "新图用于跨层/返回探索/普通载入；五类节点入口复用现行正式场景图",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-art-sample-20261021\\expanded-rejected-v1.png",
+  "originalOutput": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-24ca73b1-b7e7-452a-982b-1bff7986b02a.png",
+  "sha256": "b0e5d82883f618985abc7f9a820ac8d6302ced5c14faabb87f5dc0f78809e204",
+  "size": [
+    1672,
+    941
+  ],
+  "integration": "未接入；老板要求先列现图选择，生产代码/运行素材未修改"
+}

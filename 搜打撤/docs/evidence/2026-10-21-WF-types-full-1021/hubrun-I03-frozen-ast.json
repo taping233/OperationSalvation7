@@ -1,0 +1,23 @@
+[
+  {
+    "file": "game/src/run/map-generator.js",
+    "astEqual": true,
+    "headSHA256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41",
+    "workingSHA256": "6857fab2f1a4f2a195d3e51703d4b2f92c54eb76b0ab5b190c9ed57c460f12a9",
+    "canonicalASTSHA256": "489357e322f812db70a28e7c10d2bdc57c03be59f7d272715cf487956dc49d16"
+  },
+  {
+    "file": "game/src/run/layeredMap.js",
+    "astEqual": true,
+    "headSHA256": "c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600",
+    "workingSHA256": "79fff9baa207243dd4dc9156f90409ca9f897ea906227840d0153f440067d83f",
+    "canonicalASTSHA256": "a44384329ca3a58773dfa3c01e5c72dd3d2df9c7f4a1419a0e0285425455af54"
+  },
+  {
+    "file": "game/src/ui/route-overlay.js",
+    "astEqual": true,
+    "headSHA256": "1d738d479ccb09f77b60371eb667745790b8029868f1e008aacc8cc8beaa1910",
+    "workingSHA256": "8c04f36198cd940c7d19f1283b2f07ab6f3564c475e20d3fc1271982746ab25e",
+    "canonicalASTSHA256": "025e039f7f51c39ac9b3b5ce258106170ae2d17f2f1770b5c1edc3b5328ba083"
+  }
+]

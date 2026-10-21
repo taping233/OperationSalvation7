@@ -1,0 +1,37 @@
+{
+  "authorization": "老板：接入吧",
+  "installed": true,
+  "items": [
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\transition-12-16-remake-1021\\12-emergency-exit-simple-v2.webp",
+      "destination": "game/assets/scenes/transitions-1021/emergency-exit.webp",
+      "sha256": "c0b01444ab07e4fa63cc9eddfe504760c586f179ecff29cfb80ec87cc860f76b",
+      "bytes": 107930
+    },
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\transition-12-16-remake-1021\\13-event-simple-v2.webp",
+      "destination": "game/assets/scenes/transitions-1021/event.webp",
+      "sha256": "20697ea711f1096510b1f36166e1e16bb13fa04c6ff2cd3786414c79725d5a04",
+      "bytes": 119636
+    },
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\transition-12-16-remake-1021\\14-layer-passage-simple-v2.webp",
+      "destination": "game/assets/scenes/transitions-1021/layer-passage.webp",
+      "sha256": "73b5c9524cb8158cc40c4e73b37db69697fb607c6bd9bb0f5c82e04973319584",
+      "bytes": 109148
+    },
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\transition-12-16-remake-1021\\15-map-return-simple-v2.webp",
+      "destination": "game/assets/scenes/transitions-1021/map-return.webp",
+      "sha256": "d8753e65e96129ccb9aee25bc3afac8904971fe9632194d75867491dba2e1ee1",
+      "bytes": 137750
+    },
+    {
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\transition-12-16-remake-1021\\16-loading-simple-v2.webp",
+      "destination": "game/assets/scenes/transitions-1021/loading.webp",
+      "sha256": "3100f3e8cd7f0066c4772a3514c2bd44683da0ebb94f918d148bed768f0c2645",
+      "bytes": 142146
+    }
+  ],
+  "validation": "Stopped further verification per owner instruction: 不用验证. Selected five-asset audit had passed before instruction; no browser/build/full-suite validation."
+}

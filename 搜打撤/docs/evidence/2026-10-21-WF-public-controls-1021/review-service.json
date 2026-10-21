@@ -1,0 +1,18 @@
+{
+  "task": "WF-public-controls-1021",
+  "createdAt": "2026-10-21T05:34:41.948Z",
+  "pid": 35120,
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "preview": ".tmp/public-controls-1021/review/game",
+  "port": 5348,
+  "url": "http://127.0.0.1:5348/",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "args": [
+    "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js",
+    "--config",
+    "D:\\素材\\代号柒\\搜打撤\\.tmp\\public-controls-1021\\vite-review.config.mjs"
+  ],
+  "config": "D:\\素材\\代号柒\\搜打撤\\.tmp\\public-controls-1021\\vite-review.config.mjs",
+  "logPath": "D:\\素材\\代号柒\\搜打撤\\.tmp\\public-controls-1021\\vite-review.log",
+  "windowsHide": true
+}

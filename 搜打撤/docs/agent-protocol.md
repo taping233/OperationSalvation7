@@ -39,7 +39,7 @@ if (captured.ok) {
 
 `play` 在准备场景前检查指纹和包格式，重建后比较初态，再逐命令校验前态、完成结果及后态；首处差异返回命令编号、阶段、字段路径和期望/实际值，不继续下一命令。命令失败、异常、未完成或等待超时会停止记录并标为不可重放。该协议不承诺任意中途存档恢复，也不替代整局流程测试。
 
-规则校验包含有序牌堆、状态、待选流程和费用/成长等诊断字段；`battleToken` 等场次身份不参与比较。触发器闭包登记表的剩余次数等状态尚未纳入诊断，只能在后续命令产生可观察差异时发现，不能据此证明全部引擎内部状态等价。
+规则校验包含有序牌堆、状态、待选流程和费用/成长等诊断字段；`battleToken` 等场次身份不直接比较。待选目标与注能的场次身份在 Agent 比较层转为“当前场次/失效场次”，进程内 `selectionId` 不参与比较；材料 UID、目标及卡牌规则完整保留，实时快照和引擎诊断不修改。触发器闭包登记表的剩余次数等状态尚未纳入诊断，只能在后续命令产生可观察差异时发现，不能据此证明全部引擎内部状态等价。
 
 `visual`、`recording`、`agent-policy` 三条流只用于表现、记录和决策，规则随机比较排除它们。自定义 `decide` 若推进其他随机流或改动诊断投影覆盖的规则状态，记录会拒绝该决策；重放只执行已记录命令，不重跑策略或覆盖玩法随机状态。
 
@@ -133,7 +133,8 @@ if (captured.ok) {
 - `SDT.Agent.setTurbo(true)`：战斗演出等待、移动动画、节点过场、搜索揭晓、通关演出全部短路；
   一局（贪心策略）实测秒级。持久化在 localStorage `sdt-agent-turbo`。
 - `waitSettle({ quietMs, timeoutMs })`：局面签名连续不变且战斗非 busy 才返回；超时返回
-  `{ ok:false, stalled:true, obs }`，绝不无限挂起。
+  `{ ok:false, stalled:true, obs }`，绝不无限挂起。首次加载执行模块也计入同一期限，热入口直接沿用原选项。
+- 冷 `step` 加载超过该等待期限返回 `AGENT_RUNNER_LOAD_TIMEOUT`，不调用迟到决策；可在之后重试。`autoRun` 的停止与局级期限会立即释放冷等待的运行归属，迟到模块只缓存代码。
 - 两分钟预算：纯策略全链路远低于 2 分钟；LLM 决策延迟取决于模型与网络（决策点约 30–80 个）。
 
 ## 五、配套模块（game/src/agent/）
@@ -143,10 +144,14 @@ if (captured.ok) {
 | `agent.protocol.js` | 动作 schema 校验 / 稳定 id（纯模块，Node 可直接 import） |
 | `agent.state.js` | observe() 状态组装（game + 战斗快照 + 弹层动作面） |
 | `agent.surface.js` | 弹层 data-act 动作面扫描（零侵入，不改页面代码） |
-| `agent.runner.js` | act 路由 / settle 等待 / step / autoRun |
+| `agent.runner.js` / `agent.run-control.js` | 同步动作/停止门面与单一运行归属；异步驱动首次使用时加载，冷等待可取消并受局级期限约束 |
+| `agent.action-router.js` | act 路由、同步受理回执、异步命令完成追踪与对局归属校验 |
+| `agent.runner.runtime.js` | 按需加载的 settle 等待 / step / autoRun 执行 |
+| `agent.replay.js` / `agent.replay.runtime.js` | Promise 回放门面及按需加载的可信 fixture 记录/重放 |
 | `agent.policy.js` | 内置随机 / 贪心策略（统计基线） |
 | `../core/turbo.js` | 快进总闸（battle.clock / moveTo / 过场共用；2026-10-02 兼容壳 agent.turbo.js 退役） |
-| `agent.llm.js` | 内置 OpenAI 兼容适配器（见下） |
+| `agent.llm.js` / `agent.llm-parser.js` | 同步配置与策略工厂、纯回复解析；已配置决策的冷加载可取消/超时并报告回退 |
+| `agent.llm.runtime.js` | 按需加载的 OpenAI 兼容请求、重试与超时执行（见下） |
 | `agent.recorder.js` / `agent.stats.js` | 逐局记录与聚合统计（数据分析系统） |
 
 ## 六、内置 LLM 适配器

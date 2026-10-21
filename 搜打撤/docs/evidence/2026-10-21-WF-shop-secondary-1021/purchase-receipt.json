@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-21T05:50:52.775Z",
+  "inputKind": "real-input",
+  "detail": "5348内置独立测试局；通过既有devJumpNode构造商店并设99金币，真实点击基础开发货位→详情购买，核对99→97金币、唯一入包与去向回执。非自然走图获得该商店。",
+  "screenshot": {
+    "path": "purchase-receipt.png",
+    "bytes": 55774,
+    "sha256": "9e074d481ca8e13d31b4b7872d889b631e491ffc21ee875af006046624e38ea6"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5348/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1024,
+      "src": "http://127.0.0.1:5348/assets/portraits/avatars/wu.webp?v=public-controls-review",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/bag.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/lock.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/cards.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/map.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/map.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/attack-is7-v2.webp",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 1486,
+      "src": "http://127.0.0.1:5348/assets/title-wordmark.png",
+      "width": 3200
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/tools.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5348/assets/cards/spell-tt13-chaos-deck.webp?art=square-20261020&v=public-controls-review",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/legendary.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5348/assets/cards/spell-tt12-basicdev.webp?art=original-rough-20261010&v=public-controls-review",
+      "width": 1440
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5348/assets/cards/items/tt-jinchuangyao.webp?v=public-controls-review",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/heart.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/epic.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5348/assets/cards/martial-tt2-bloodblade.webp?art=original-rough-20261010&v=public-controls-review",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/epic.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/swords.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5348/assets/cards/martial-tt3-bandage.webp?art=bandage-original-rough-20261010&v=public-controls-review",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/heart.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/plate.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5348/assets/cards/spell-tt3-treasure-hunt.webp?art=treasure-hunt-search-strokes-rough-20261011&v=public-controls-review",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/sparkles.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5348/assets/cards/items/tt4-woodify.webp?v=public-controls-review",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/heart.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5348/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=public-controls-review",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/initial.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/dice.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/bag.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5348/assets/cards/spell-tt12-basicdev.webp?art=original-rough-20261010&v=public-controls-review",
+      "width": 1440
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/map-hud-1015/gold-is7-v2.webp?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5348/assets/ui/icons/arrow.png?v=public-controls-review",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5348/assets/cards/spell-tt12-basicdev.webp?art=original-rough-20261010&v=public-controls-review",
+      "width": 1440
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5348/assets/ui/card-frames/paper-1015/common.webp?v=public-controls-review",
+      "width": 512
+    }
+  ],
+  "console": []
+}

@@ -1,0 +1,79 @@
+{
+  "candidate": {
+    "total": 737,
+    "passed": 721,
+    "failed": 16
+  },
+  "baseline": {
+    "total": 81,
+    "passed": 65,
+    "failed": 16
+  },
+  "failuresIdentical": true,
+  "failures": [
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership 普通战背包按钮与命令均被锁定，手牌和独立道具快捷栏不受影响"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership does not duplicate paging or gesture listeners across patches and full redraws"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership keeps one current set after repeated grave open/return and incremental patches"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership keeps one current set after repeated settings open/return and incremental patches"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership keeps one set when target or infusion is cancelled, and when the lethal warning returns"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership moves a retained pager out of the old player tools without duplicating it"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership removes and reintroduces paging through one shared set and starts the next battle cleanly"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership replaces retained disabled tools with the fresh ready template after a full redraw"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership returns from real discovery with one current set and preserves subsequent updates"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership returns from the real lamp enemy-target choice with one ready set through the next turn"
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "name": "battle tools template ownership spends for the real skill once after repeated returns, retains used state, then resets next turn"
+    },
+    {
+      "file": "expedition-battle-presentation.test.js",
+      "name": "keeps the canonical full rule when inspecting the deck surface"
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "name": "reviewed production-only asset omissions omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs"
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "name": "reviewed production-only asset omissions preserves 195 historical exclusions and adds exactly 91 source-retained images"
+    },
+    {
+      "file": "skull-sword-effective-session.test.js",
+      "name": "不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌"
+    },
+    {
+      "file": "skull-sword-effective-session.test.js",
+      "name": "BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID"
+    }
+  ]
+}

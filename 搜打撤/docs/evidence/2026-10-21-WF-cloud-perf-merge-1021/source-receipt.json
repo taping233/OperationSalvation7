@@ -1,0 +1,118 @@
+{
+  "base": "0bf320704f01985314ef9c7661cd8479a5bd8090",
+  "candidate": "306376b7a80021a1820ad8d3d1047cae74d9020c",
+  "files": [
+    {
+      "path": "game/src/battle/core/battle.card-play.domain.js",
+      "sha256": "959cc4dde372deedb078fde31c6037376b7d7cd292fed1e036ea5d513f2f9e17"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "sha256": "a5ce350a119cb4eba09746689df8d3a374e72ffc5b5e9cb11b21d2edc7f5f4ed"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "832d68a6896d9e3787b885013c4fb7d8f1017f7799ce1bd1fc776b1d3c191c5e"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "8e2398aba7dde9ea73effa7ca119caebded507d75ace2d161945cebd72aba1b2"
+    },
+    {
+      "path": "game/src/home/home.presenter.js",
+      "sha256": "9216cf84b2f0e0091fa015b22ec3b875eb04cc35a5948e0e4ff6201bec7766d9"
+    },
+    {
+      "path": "game/src/hub/command-errors.js",
+      "sha256": "d48b188f48493043cfdf14d6c3f15472787ec2c990fe7cf7354448e5eb199da8"
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "sha256": "b387a1c1affa5c42526d5c8b4c03a79f774af003740cd6487228b631effc06db"
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "sha256": "1dd4586e640179caab227b8fd2f77a3206188d31e9a95d2a07132882fd5a4444"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation-ports.js",
+      "sha256": "d796ec4088c302208d0adf49f5262dcfc54c484781de903ae9631212fbafa6f4"
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "sha256": "2a77423e1c6a8ff0fdbd1c74dc7223a9b7f70922b991da10d290b142b3142790"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "6ea00a32c31fd81b5fd8ee39da869c64df8a067aa1582d347ec0cd21d8bf270b"
+    },
+    {
+      "path": "tests/base-hub-business-lifecycle-audit.test.js",
+      "sha256": "2398c357eeb6a5ea9131ed71ca4b8550cdf35bbe667eb98d55cf6eeb0d6b37e8"
+    },
+    {
+      "path": "tests/base-inventory-lifecycle-audit.test.js",
+      "sha256": "ff0f4139f0360d78baa4a8fe26cd8a9e881bec6fe1f703aa28675999d69d469b"
+    },
+    {
+      "path": "tests/base-save-snapshot.test.js",
+      "sha256": "f077a9660b5c14ab69817d560c8b2d44dc02213c0e3b79013d26ee859dad66de"
+    },
+    {
+      "path": "tests/battle-ally-dom-order.test.js",
+      "sha256": "c4d234687a6a117868af5a0e17bb31d0ef462681d804760461c3bfae8575d855"
+    },
+    {
+      "path": "tests/battle-frames-ownership.test.js",
+      "sha256": "a4c87c401f7c376d68246e1ff65a92ac0be8a2b6f6568843093233b2b9a10377"
+    },
+    {
+      "path": "tests/battle-hand-inspector.test.js",
+      "sha256": "3d05bc1072e3ca83ed82537425eca6efeaa5f20ef7fae738ff5f96929b608e00"
+    },
+    {
+      "path": "tests/battle-hand-rule-context.test.js",
+      "sha256": "a53ec38d212621ad0e3ac59a6813457d0fd2449470ecaf26bc8189668cebefee"
+    },
+    {
+      "path": "tests/battle-unit-metadata.test.js",
+      "sha256": "9435c053a9ab960b2f02332451487ceb84f6b51cf78a9be3f40fef0e436d22cf"
+    },
+    {
+      "path": "tests/home-async-lifecycle.test.js",
+      "sha256": "93e043e67f41889a5a1aef139dad6a0c3820d88718923d04b9ee5472aa4b5116"
+    },
+    {
+      "path": "tests/hub-architecture.test.js",
+      "sha256": "00c2df1bc2ccfc3231e4f8e2ee01e6f780aa13fb7ad1e732f88cd5c6ca018605"
+    },
+    {
+      "path": "tests/hub-command-errors.test.js",
+      "sha256": "41c89d0ba46d69cd960f10367e3cd4c3f2cce7b0e040d533523034a3f9e9dba8"
+    },
+    {
+      "path": "tests/hub-lazy-entry.test.js",
+      "sha256": "85ee042a4fe94b50c86cc2c3cad80920fa856738f8f6e4e6200460bce09d9f91"
+    },
+    {
+      "path": "tests/m05-home-presenter.test.js",
+      "sha256": "201cd5c4f539de9874053454c034a6283fad3e7c2c069ecfeb42251475577876"
+    },
+    {
+      "path": "tests/preparation-adapter-review.test.js",
+      "sha256": "817c24e17b9003c08d01a09bec185ae56e952bb8f8781c33ad57642bf68a8184"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "sha256": "2376934c3314b0f20deb4801262760d50a224c3f79da0463233f928cc0047786"
+    },
+    {
+      "path": "docs/performance.md",
+      "sha256": "0e12e6b0c798036e1dde83d5b9e7aba50878aebe1d7b16fb71503601fc845ecc"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "95b12d6a6d239e766f1dd589496b844870612ff43b74990687bff39599cd5e72"
+    }
+  ]
+}

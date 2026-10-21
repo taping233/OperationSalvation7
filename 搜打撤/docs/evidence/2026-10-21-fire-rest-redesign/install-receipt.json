@@ -1,0 +1,28 @@
+{
+  "status": "implemented-unverified",
+  "userConstraints": [
+    "城市环境",
+    "减少AI碎细节，采用大块面",
+    "NAI5底图加内置生图重绘",
+    "不运行测试或浏览器验证"
+  ],
+  "asset": {
+    "path": "scenes/fire-rest-1021/city-campfire.webp",
+    "bytes": 58868,
+    "sha256": "826c12561f4078c10952b689870b491b2c48c2bc6f038c7d63764a8257faf7dc"
+  },
+  "nai": {
+    "model": "nai-diffusion-5-full",
+    "seed": 218721857,
+    "raw": ".tmp/nai/fire-rest-1021/nai5-city-fire-rest.png",
+    "sha256": "cc4e22f1bfabd03bf6a2f55bb0b9b571a82ccb9aea14122e3c748598952d186b",
+    "request": "nai-city-request.json"
+  },
+  "redraw": {
+    "tool": "image_gen.imagegen",
+    "raw": "C:\\Users\\太平\\.codex\\generated_images\\01a15dc5-7646-79c0-9348-97e9479b27c8\\exec-60c25cd0-cafb-44fb-bf99-553a0cbe924a.png",
+    "sha256": "2c9419178e4865a38462cfe00f56e5fe2bba9c24962f20bc3329536f9818bfd2",
+    "prompt": "redraw-prompt.txt"
+  },
+  "rejected": "首版雪林石屋场景不符合城市地点，且石块与积雪细节过密；未接入。"
+}

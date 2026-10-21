@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-10-20T18:12:30.477Z",
+  "fullReport": "docs/evidence/2026-10-21-WF-framework-solo-1021/full-2026-10-20T18-05-33.044Z.json",
+  "recoveryReport": "docs/evidence/2026-10-21-WF-framework-solo-1021/recovery-2026-10-20T18-12-00.449Z.json",
+  "fullInputSha256": "13a51fa8eca84287b60507d11803fb7bca479ab34ac02c6168fa0b4cbf5af8ae",
+  "currentInputSha256": "4e9a4ef6cb239b56c6dff6c672d495241028f32df9cc868513fa6afa623a0471",
+  "productionScope": "game/src files excluding Markdown; manifest entries from workflow-evidence fingerprint",
+  "fullProductionSha256": "bd4e8b5e7f6bff14496551dee38053074ee02c9b6e3fcf3bf9ed58117caf8a65",
+  "currentProductionSha256": "bd4e8b5e7f6bff14496551dee38053074ee02c9b6e3fcf3bf9ed58117caf8a65",
+  "productionUnchanged": true,
+  "changes": [
+    {
+      "file": "tests/facade-snapshot-drift.test.js",
+      "kind": "file",
+      "before": "d15152bdfbc85c2e248c41d428d75e9792e483af65766bc6cfce32e831292484",
+      "after": "0e5cb669cbd4b9334abae6e9a65e3186528304b7db636b0b0f1107bb70d303d7"
+    }
+  ],
+  "fullResult": {
+    "exitCode": 1,
+    "files": "1 failed | 748 passed | 1 skipped (750)",
+    "tests": "1 failed | 7670 passed | 38 skipped (7709)"
+  },
+  "recoveryResult": {
+    "exitCode": 0,
+    "files": "3 passed (3)",
+    "tests": "48 passed (48)"
+  },
+  "reuseBoundary": "Only tests/facade-snapshot-drift.test.js changed among executable/test inputs; the exact debt-list assertion remains, renderer.fx debt removed and existing no-capture guard strengthened. Full suite was not rerun or relabelled passed."
+}

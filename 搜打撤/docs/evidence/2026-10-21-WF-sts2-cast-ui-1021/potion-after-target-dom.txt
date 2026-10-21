@@ -1,0 +1,113 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog [active]:
+    - generic: 第 1 回合
+    - generic: 你的行动
+    - generic "gear 选项":
+      - img "gear"
+      - text: 选项
+    - generic "无，自己":
+      - img "无"
+      - generic: 35/40
+      - img "swords"
+      - text: 攻 1
+      - generic "职业技能与手牌分栏":
+        - button "搜刮，1费，可用，随机获得1张牌；每回合一次":
+          - generic: "1"
+    - generic "联邦巡防兵，敌方单位":
+      - img "联邦巡防兵":
+        - img "infantry"
+      - generic: 80/80
+      - img "swords"
+      - text: 攻 1
+      - img "crystal"
+      - text: 冰冻 1回合
+      - button "联邦巡防兵的意图：冰冻·无法行动。基础攻击 1。点击查看完整说明":
+        - img "crystal"
+        - generic: 冰冻中
+    - generic "联邦射手，敌方单位":
+      - img "联邦射手":
+        - img "archer"
+      - generic: 80/80
+      - button "联邦射手的意图：攻击 · 1。基础攻击 1。点击查看完整说明":
+        - img "swords"
+        - generic: 攻击 1
+    - generic "抽牌堆":
+      - button "牌库：99 张（仅抽牌效果取牌，回合开始不抽牌；点击查看）":
+        - generic: "99"
+        - generic: 牌库
+    - group "能量 10，每回合 9":
+      - generic: "10"
+      - generic: /9
+    - generic "消耗牌堆":
+      - button "消耗牌堆：恢复药水×1，冰冻药水×1（不自动洗回，仅由卡牌效果取回；点击查看）":
+        - img "skull"
+        - generic: "2"
+        - generic: 消耗牌堆
+    - generic "当前手牌":
+      - group "初始攻击 · 1 费。费用 1 · 点击选择敌人；也可直接拖到敌人身上使用":
+        - button "初始攻击 · 1 费。 费用 1 · 点击选择敌人；也可直接拖到敌人身上使用":
+          - generic: "1"
+          - img "初始攻击"
+          - generic: 武术
+          - generic: ·初始
+          - generic: 初始攻击
+          - generic: 造成等同于你的攻击力的攻击伤害。
+          - img "coin"
+          - generic: "1"
+        - generic: ×3
+      - group "镭射 · 1 费。费用 1 · 点「注能」按钮选材料；也可拖拽使用；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+        - button "镭射 · 1 费。 费用 1 · 点「注能」按钮选材料；也可拖拽使用；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+          - generic: "1"
+          - img "镭射"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 镭射
+          - generic: 造成 5 点法术伤害；注能（1）：本牌伤害增加 3 点。
+          - img "coin"
+          - generic: "2"
+        - button "crystal 注能1":
+          - img "crystal"
+          - text: 注能1
+      - group "龙焰射线 · 2 费。费用 2 · 必须先注能；点「注能」按钮选材料；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+        - button "龙焰射线 · 2 费。 费用 2 · 必须先注能；点「注能」按钮选材料；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+          - generic: "2"
+          - img "龙焰射线"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 龙焰射线
+          - generic: 注能（1）：
+          - text: 造成 11 点法术伤害。
+          - img "coin"
+          - generic: "1"
+        - button "crystal 注能1":
+          - img "crystal"
+          - text: 注能1
+      - group "血蝠风暴 · 2 费。费用 2 · 点「注能」按钮选材料；也可拖拽使用；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+        - button "血蝠风暴 · 2 费。 费用 2 · 点「注能」按钮选材料；也可拖拽使用；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料":
+          - generic: "2"
+          - img "血蝠风暴"
+          - generic: 法术
+          - generic: ·史诗
+          - generic: 血蝠风暴
+          - generic "完整卡牌规则，可滚动阅读":
+            - generic: 对全体敌人造成 3 点法术伤害；你按结算后总伤害回复生命（含过量伤害）；注能（2）：本牌的伤害与回复效果触发 2 次。
+          - img "coin"
+          - generic: "3"
+        - button "crystal 注能2":
+          - img "crystal"
+          - text: 注能2
+    - generic "战术操作":
+      - paragraph:
+        - text: 估算承伤
+        - generic: "1"
+        - generic: 余 34 生命
+      - button "结束回合"
+- navigation "施放交互本地验收":
+  - generic: 本地构造场景
+  - button "注能样本"
+  - button "无材料基础施放"
+  - button "发现样本"
+  - button "道具样本"
+  - button "收起工具条"
+  - status: 能量10 · 选材0 · 消耗1

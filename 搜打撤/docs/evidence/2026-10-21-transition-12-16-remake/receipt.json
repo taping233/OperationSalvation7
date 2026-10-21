@@ -1,0 +1,83 @@
+{
+  "pipeline": "NAI4.5 Full new draft then built-in ImageGen redraw",
+  "installed": false,
+  "style": "docs/production/art/ART-STYLE-V1.md; approved base pair plus fusion reference-09",
+  "user_correction": "不要有过多的细节 去掉ai味",
+  "items": [
+    {
+      "id": "12-emergency-exit",
+      "name": "紧急撤离点",
+      "size": [
+        1672,
+        941
+      ],
+      "png": ".tmp\\imagegen\\transition-12-16-remake-1021\\12-emergency-exit-simple-v2.png",
+      "png_sha256": "cfb9df9beddbef7d50dfaa0adcbfe1da109bcecd03f1410bd7880728d9a14bf0",
+      "webp": ".tmp\\imagegen\\transition-12-16-remake-1021\\12-emergency-exit-simple-v2.webp",
+      "webp_sha256": "c0b01444ab07e4fa63cc9eddfe504760c586f179ecff29cfb80ec87cc860f76b",
+      "nai_source": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\12-emergency-exit-nai45.png",
+      "nai_sha256": "a03a9b4b50da85b01002606e2a470a1ff8ac34a9ee1618ac7eebcb8d4f65c000"
+    },
+    {
+      "id": "13-event",
+      "name": "事件入口",
+      "size": [
+        1672,
+        941
+      ],
+      "png": ".tmp\\imagegen\\transition-12-16-remake-1021\\13-event-simple-v2.png",
+      "png_sha256": "02a33fd3b59ec180307c406cbf3b6716d2c348f15672e75d7d142742ceac9c71",
+      "webp": ".tmp\\imagegen\\transition-12-16-remake-1021\\13-event-simple-v2.webp",
+      "webp_sha256": "20697ea711f1096510b1f36166e1e16bb13fa04c6ff2cd3786414c79725d5a04",
+      "nai_source": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\13-event-nai45.png",
+      "nai_sha256": "3321a33a1f94fd5a89a1188bd310ccffe739129a246f518b06007e57e9840a98"
+    },
+    {
+      "id": "14-layer-passage",
+      "name": "跨层移动",
+      "size": [
+        1672,
+        941
+      ],
+      "png": ".tmp\\imagegen\\transition-12-16-remake-1021\\14-layer-passage-simple-v2.png",
+      "png_sha256": "ec0a087af886af0c4bac5e19a387cefdbf105f62a4e36fd7ab244c68fc2b45a3",
+      "webp": ".tmp\\imagegen\\transition-12-16-remake-1021\\14-layer-passage-simple-v2.webp",
+      "webp_sha256": "73b5c9524cb8158cc40c4e73b37db69697fb607c6bd9bb0f5c82e04973319584",
+      "nai_source": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\14-layer-passage-nai45.png",
+      "nai_sha256": "aab6a6408d951f6d0d57a2b2a396be33e0b7a414e204470ccb6eb4566f3bcaff"
+    },
+    {
+      "id": "15-map-return",
+      "name": "返回探索",
+      "size": [
+        1672,
+        941
+      ],
+      "png": ".tmp\\imagegen\\transition-12-16-remake-1021\\15-map-return-simple-v2.png",
+      "png_sha256": "5b4762d400f88bcce9d0f1dae05a92bcc98db6ef482efd450c6705dac83c6387",
+      "webp": ".tmp\\imagegen\\transition-12-16-remake-1021\\15-map-return-simple-v2.webp",
+      "webp_sha256": "d8753e65e96129ccb9aee25bc3afac8904971fe9632194d75867491dba2e1ee1",
+      "nai_source": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\15-map-return-nai45.png",
+      "nai_sha256": "07444cdbca95846146c85c102b2c95fdda682099553303a5aacf51688d49e1b9"
+    },
+    {
+      "id": "16-loading",
+      "name": "共用加载等待",
+      "size": [
+        1672,
+        941
+      ],
+      "png": ".tmp\\imagegen\\transition-12-16-remake-1021\\16-loading-simple-v2.png",
+      "png_sha256": "b348b9a6fa1aab25472d40df32468e54494d24296dc379cbde2e0ef7d10e3eb8",
+      "webp": ".tmp\\imagegen\\transition-12-16-remake-1021\\16-loading-simple-v2.webp",
+      "webp_sha256": "3100f3e8cd7f0066c4772a3514c2bd44683da0ebb94f918d148bed768f0c2645",
+      "nai_source": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\16-loading-nai45.png",
+      "nai_sha256": "21a311ed9a394dabf95267d85c51dd57ea116b22eaa5afaf786bc26f5088a0ba"
+    }
+  ],
+  "reference_sha256": {
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png": "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg": "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+  }
+}

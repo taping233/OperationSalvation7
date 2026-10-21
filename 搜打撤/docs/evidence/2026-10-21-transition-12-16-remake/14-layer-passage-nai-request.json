@@ -1,0 +1,59 @@
+{
+  "id": "14-layer-passage",
+  "name": "跨层移动",
+  "status": "generated",
+  "recipeVersion": "3.4",
+  "request": {
+    "input": "scenery, no humans, a broad descending service ramp entering a lower level of an abandoned futuristic city, reinforced concrete retaining walls and one heavy rectangular steel threshold on the right, a single muted red warning light above the threshold, continuous connected road and simple railing, sparse snow outside the tunnel, distant upper city blocks\n\nwide game transition illustration, abandoned dark future city in winter, strong single focal idea\n\nwide cinematic framing, main focal structure on right half, quiet darker left third reserved for title overlay, believable perspective, continuous ground, a few large architectural shapes, selective details\n\ncharcoal blue and muted concrete gray, thin vermilion warning light, cold light outside and dark depth inside, readable descending architecture\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 102121652,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, letters, numbers, signs, UI, medieval, gothic, castle, ancient stone columns, mountains, wilderness, wooden stall, market stall, tent, dense machinery, floating structures, impossible perspective, excessive tiny rubble, photorealistic, 3d render",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, a broad descending service ramp entering a lower level of an abandoned futuristic city, reinforced concrete retaining walls and one heavy rectangular steel threshold on the right, a single muted red warning light above the threshold, continuous connected road and simple railing, sparse snow outside the tunnel, distant upper city blocks\n\nwide game transition illustration, abandoned dark future city in winter, strong single focal idea\n\nwide cinematic framing, main focal structure on right half, quiet darker left third reserved for title overlay, believable perspective, continuous ground, a few large architectural shapes, selective details\n\ncharcoal blue and muted concrete gray, thin vermilion warning light, cold light outside and dark depth inside, readable descending architecture\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, letters, numbers, signs, UI, medieval, gothic, castle, ancient stone columns, mountains, wilderness, wooden stall, market stall, tent, dense machinery, floating structures, impossible perspective, excessive tiny rubble, photorealistic, 3d render",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\14-layer-passage-nai45.png",
+  "sha256": "aab6a6408d951f6d0d57a2b2a396be33e0b7a414e204470ccb6eb4566f3bcaff"
+}

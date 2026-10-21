@@ -1,0 +1,468 @@
+{
+  "comparison": "Acorn runtime AST against HEAD. Location/raw/comment fields omitted; exporting an existing registration initializer is compared to the original initializer expression. Previous-task shared edits are explicitly identified, not reverted.",
+  "filesReviewed": 52,
+  "equalAfterNormalization": 46,
+  "restored": [
+    "Original callback/function parameter lists and destructured options, including ignored music/backdrop arguments",
+    "Original falsy checks and optional-chain/DOM selectors",
+    "Original CSS easing strings and their real installed-library fallback",
+    "Original QA namespace assignment; no new runtime schema/validation restrictions"
+  ],
+  "semanticsProof": "I02-semantics.json",
+  "files": [
+    {
+      "file": "game/src/agent/agent.console.js",
+      "headSha256": "cf4d8973bddbafb9c669fea26165a443df6f3a25f5992aebcd9ba751af6f10c3",
+      "currentSha256": "66eaf40168b7baa5acfd63109b59b5e1ab617745ca9253c54398f804e71b62ac",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "headSha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10",
+      "currentSha256": "18cc4f36d8d1929b92da8174d213b8eeab174964f3c4e003732fd06372d239c7",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "headSha256": "022227250dcea877a8c42b1a7804c2c4b221969954753eb8469bf9ff85e25353",
+      "currentSha256": "b0ca752afe3736f836d110a2f6a88258434cd70476f85700a86e05bbee55209a",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "headSha256": "6c05998258a942d69e6e646fc2233d6afda57d82e795039eab45b2c078d11546",
+      "currentSha256": "bcbad40e9cc8362b132d633c4dbbc168635463de1c8c8c27ddeac3869aecaab8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "headSha256": "63ceea8b307882a830dde4b5604c7856d0fbfc95998946eb03f4f3a26c914453",
+      "currentSha256": "ad2c7fc9267233c46fcdd7e2b98c1948817263ad768169a8ee8e6cf32ba05054",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.replay.js",
+      "headSha256": "4e9dec4eed5498bdb96bb2eef969ae6fd2f326e843ea6c649a14c1372ab61e50",
+      "currentSha256": "4653911ff258372bc3a59fb3196f2e20b3acba9564aafe5ac8da607cbbc97392",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "headSha256": "e0b6483c6a1a6cf416cbd90c072b474dcba612686208eaa5718891373a137afe",
+      "currentSha256": "c0731d0d3d9a0c400e77251188375b8efbd63b67f56fe8ad700624621fa7f2a8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "headSha256": "b88a54dffe02cf7010f577e47a924dcb268658c1d2c8491edf81c03e323469c8",
+      "currentSha256": "c2af5756d1be19c607ea639c1ea363b1672cc162b6e7f22852ed816fff6841d8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "headSha256": "0fd42c1e8b97c71a941895c8a541426eaee990fb54263ba9b7eca2c59357c496",
+      "currentSha256": "f258c634fe6db62bf6176c67a6c6d45e8b27e3b787449edd32997dcee8604958",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "headSha256": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
+      "currentSha256": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "headSha256": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
+      "currentSha256": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "headSha256": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
+      "currentSha256": "5aa85e7c58a7445a19f8a09357b15f7ccab50a58ab3327532caba22ed679c509",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "Explicit String(HTTP status) equals Error constructor numeric-to-string coercion. Service export registration evaluates the same initializer.",
+      "differencePaths": [
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].type",
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].object",
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].property",
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].computed",
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].callee",
+        "program.body[25].body.body[1].body.body[3].expression.callee.object.callee.object.callee.object.callee.object.arguments[0].body.body[1].consequent.argument.arguments[0].arguments"
+      ]
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "headSha256": "bb39e957e6f6f82606bb7f125f542dcc6659909f87c0e9f6bbdf979fcf3a45d2",
+      "currentSha256": "0689bc715d3bc51e88684b500a1b04cf988e16a747cc3b47b02b9ed21e9a7f86",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "headSha256": "8f339c6193d7bc3fc2ed69e483ffce6f18bb775526fdfe2382e8db05f6c21afa",
+      "currentSha256": "65792e8366be47a29b7e6b5d9bf0b195879d769da853b00392c034202d67c6da",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/builtin-card-execution.js",
+      "headSha256": "aec627e324e9c1770fc84475eec701b90bfa0ce22dad1689f1dbdd36ee3da938",
+      "currentSha256": "a940fcb875fa3ceb25e4ee3c91fc398345c00a5eacb72aca884e6d649eccb7ed",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/card-execution-plan.js",
+      "headSha256": "0f3f842e3f971906fee803cf240dbf761b5b12d04e8d8fa9fae2fac7c42138dc",
+      "currentSha256": "4c3d024ff2f0a453e5f95c16e60cfd97575c1dc1e2ad24ac7d8c6a00875937f4",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "headSha256": "5eee476e74833bc6c1e0a01aa234e2b313bda04bb3d6009401cf1fdb3000593a",
+      "currentSha256": "6dfeb79a8d3f49f6f8b48842280db32038487e7afcdea8bbd415e51b31e54a86",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/card-trigger-contract.js",
+      "headSha256": "f547dde170bfcb3428069f5503bdcc735ea0e024a09e10ecd0bca66e33bc8d18",
+      "currentSha256": "239ce5c1b1e66eca67dcf3303c3b341cbe7819a52d13a27604010625691871ee",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "headSha256": "3c4fe4ce8b735780d0969ca3c8e4ad1f223031c6c7cd3c81a87b89dc84bdd4d6",
+      "currentSha256": "34233f357f5262e577d42e9f4a1f61808737d82944406dbbf08f33cde0a4e2b8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "headSha256": "1b4a8d120a33e9a6cf11580e93115f6bd8549e3fdc8dbbb142ca3227aacda3f8",
+      "currentSha256": "0db90c778b4b86b8e2d17b58f14f12d20a0d72004a0f4643b79bb7b82043f999",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "headSha256": "b8041fdaa22993e0cf03605a474aa0238d0e71dee369b3b2e64a5ac6a4cbadc0",
+      "currentSha256": "e09cb23daed059252a79ed53b29598000cdeb7b63453be2f276edbae58d06792",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/cards/structured-card-description.js",
+      "headSha256": "3be02c9985c2e66b1bdc1261cc5cb0e90eff23a6142ccc56f072ca0b25fa140d",
+      "currentSha256": "3d2db82a6d8e9c73c91ce8ee3b532003cf637d81743cb7cddc6171a851c217db",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "headSha256": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+      "currentSha256": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "headSha256": "50805b547b921248f156741e2baee03dd54dff86bc5b6aac24392051815fddf4",
+      "currentSha256": "ccd08bc3bd9b213cdec8dc5048a7fbaadc34980ab7fa5dabc3ae0a45082f67e4",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "headSha256": "1e13c272bf950c475c31282faafadc5aedb0b5d5d0ab34b4ec99941e0c7254b9",
+      "currentSha256": "3a7a6b89737ce5068f26fb09c95b9cee3d137f1a187c864c2025f4f63c436d7d",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "headSha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+      "currentSha256": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "headSha256": "91939e2e355c18b5edd84a70915e6ce2d6db2a9ba2194a01f2656fa8b50d1e9b",
+      "currentSha256": "b5f4e585cedec3831227e8ace93df73f4ef1f31410cd3fe9dd93fbc9a5fb1d54",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "headSha256": "e84bb33f03882a86aa971edb1a7b7c3ef223afdcc080fc322cb12e11dad364c6",
+      "currentSha256": "fbff9be537fe946251556b750fb715bc386117d18e54c98da00ed921ff8a90de",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "headSha256": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
+      "currentSha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "Malformed Unicode identity escape is rewritten as explicit literal u. 327680 input/suffix combinations have identical exec results; resource path constructors are identical.",
+      "differencePaths": [
+        "program.body[77].declarations[0].init.regex.pattern"
+      ]
+    },
+    {
+      "file": "game/src/core/input.js",
+      "headSha256": "c52d8ce3333038bb231e2953c5a7f209e9f93b1ee52831f66050a77ad97ffa01",
+      "currentSha256": "45270d38c43926ee3b6f5cc7c241b68b72bf144b8bee16ec7f7e8ff4e474eb1c",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/map-drag-motion.js",
+      "headSha256": "ec1fed36d8eb55ac215480d361d0c86b085decee63eddae12bcecf8dc5ebdb09",
+      "currentSha256": "79bad700a2427f471501c9d1deee47f4d3ad87ebfee5b8b62b88bb30694e1d89",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "headSha256": "77f5a75f98b42c2c567ba9411c1ea29d0583f7db3edd4908e9a4e3d283dce3fb",
+      "currentSha256": "cab9a768d6d0a9aa19e3f0c3fa9c959c3e5803b79e6733a6560273d159de62ac",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "headSha256": "d84fa6332489b6b7980568bdb8e23953f4f42ddc65fde956fd3e8239d6625f33",
+      "currentSha256": "7da237011a3bb1348780d1379cbd15570da5fbd1a5152ad2588a8007a66c80b8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "headSha256": "22845354604f9bf090d1464d41c07a749a6236c7a5d0549e6473d7cbf6dc535d",
+      "currentSha256": "39a17de50df0ded90b56f1e828ebd6f9beeab1f91a78cf15a3d1f82d0230ca83",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "JSON import attribute was already present in the received shared worktree before this type task. Preserved; no type-task runtime change.",
+      "differencePaths": [
+        "program.body[2].attributes"
+      ]
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "headSha256": "d70f9e42c714b60d9d3e01e6762c6c723a8d5b8eec0757f8571aa51aaa320653",
+      "currentSha256": "c2022d4d36897ac088969a14e7dbfa0ab8614c9298a8526efaf2fd28016aa06b",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "Same imported animate function is assigned a typed local port. Original ease-out string and every call option are restored. Installed motion-dom maps that unrecognised string to native default; no Bezier substitution remains.",
+      "differencePaths": [
+        "program.body"
+      ]
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "headSha256": "a8d32c5265aa2185901fb1795d25297fa618a2e0aec9a66abf0152b6b75b902d",
+      "currentSha256": "1b0dacfaa1cd7ebe8c83c93dfd4101a2034d96325e791d31deb0986471c2a3e6",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "headSha256": "a68f3f5e8b9abe757b0177ea08b1efe2b5a688ae880bee0ccdcb815a741c757f",
+      "currentSha256": "381909db0e242f9b552ab4d4d6f0d46ff8a8de73849198be88f538cc3c02d6d7",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/random-service.js",
+      "headSha256": "7e1e4686147e6f18e27f53fd910c0e0101d47fe93fd8fefd0f37ef1bdac26b87",
+      "currentSha256": "5efe09d60a325d7a1dbf0b7efa96b49754d91fae327b7f09f016dbd46f5dd165",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/random.js",
+      "headSha256": "bfc684f8a47ff68bc4c70554a8c042d4f8725533f55fa52b76215e63a9705726",
+      "currentSha256": "1b6dc9f215577c023200d9e90a88bb3af6865695dc2e013f5ce00d7c6a74f02a",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "headSha256": "7682307628f400dcea170457cab7308a0687156696324e7c101573cf7a645a02",
+      "currentSha256": "279e855b8cd2c0e363b78542f717f84e92f3ef636d19441c4955f6227f4e55b6",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "HEAD delta comes from preceding framework task (Node-safe facade import and registration), already present at this task handoff. Preserved without changing runtime implementation.",
+      "differencePaths": [
+        "program.body[0].type",
+        "program.body[0].declarations",
+        "program.body[0].kind",
+        "program.body[0].specifiers",
+        "program.body[0].source",
+        "program.body[0].attributes",
+        "program.body[3].expression.type",
+        "program.body[3].expression.operator",
+        "program.body[3].expression.left",
+        "program.body[3].expression.right",
+        "program.body[3].expression.callee",
+        "program.body[3].expression.arguments",
+        "program.body[3].expression.optional"
+      ]
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "headSha256": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34",
+      "currentSha256": "f9ede7df06ae15857b8947d9411627a72344a1ebbf92b6a09074b41749e829af",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "headSha256": "7976d367bf8a8313f197f489cf923cd0a014914a33f46111100daf55fd2dbbbe",
+      "currentSha256": "72ef0c629608fbf2f790ad7d767ddf3bc0e9cd49070cb8a63ebfdc266b83e815",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "headSha256": "52c174eb79457cf0f215420b0503e572fa228c4d33c8f34b9b637efd338d433d",
+      "currentSha256": "eb8e15901830011d94eaa98ff647daa6f2435336b80ab01d976140cf936131b8",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "headSha256": "b20918e483fcb88ff00e22bf45e244f169e703af8f3767c91baf8d9e2541a31e",
+      "currentSha256": "f8f0825f37ac8d23be92a88c9da4608ea15b6e51cb5df28bfa356925104e546a",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "headSha256": "eb75d1a2444b1082ed5b8c97b5559dc7e480e91cf68bb0074f9c609c0dbe6c82",
+      "currentSha256": "cafd000af5eaed9b34b8bd28f8b63b26b2a2442ca59fc44ced5cb5c90100eef1",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "headSha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88",
+      "currentSha256": "f70296f4e439240b130c87122fce83429f8c9b706cd853bfc9eadb3a9aa38ce6",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "headSha256": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",
+      "currentSha256": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd",
+      "runtimeAstEqualAfterRegistrationExportNormalization": false,
+      "review": "Explicit String(x/y) on finite grid coordinates equals the pre-existing DOMStringMap setter coercion; verified with JSDOM.",
+      "differencePaths": [
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[2].expression.right.type",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[2].expression.right.name",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[2].expression.right.callee",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[2].expression.right.arguments",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[2].expression.right.optional",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[3].expression.right.type",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[3].expression.right.name",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[3].expression.right.callee",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[3].expression.right.arguments",
+        "program.body[12].body.body[15].declarations[0].init.body.body[2].body.body.body[3].expression.right.optional"
+      ]
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "headSha256": "7f7e4c8220f85e686eb43a8c929cee3462c866c8584b210009a0cb7fc1fe8022",
+      "currentSha256": "9e191850b9df6507b08641f7fdc7e1f3726413b8c1ffffff7b8dcb3049cc8474",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "headSha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc",
+      "currentSha256": "5c2de19fb2a568d6cf427f75c9f3d095c7e9c6c1a486c01345a412844bf43ccc",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "headSha256": "2b203fe77f5d013a0b4068bfbc6286abe6629aa3dbdde22745135b047e4c0ae6",
+      "currentSha256": "5026a6e7699deb8967e990008830386af6bd2754001b4fe1b623f6dee3ac770a",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "headSha256": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
+      "currentSha256": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "headSha256": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38",
+      "currentSha256": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892",
+      "runtimeAstEqualAfterRegistrationExportNormalization": true,
+      "review": "Only comments/type declarations or an export of the existing registration result. Original initializer and argument ASTs are identical.",
+      "differencePaths": []
+    }
+  ]
+}

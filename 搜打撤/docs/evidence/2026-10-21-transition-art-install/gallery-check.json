@@ -1,0 +1,12 @@
+{
+  "items": 23,
+  "images": 18,
+  "checks": [
+    "embedded thumbnail sources exist and decode via Pillow",
+    "fragment under 1 MB",
+    "23 selection controls",
+    "08 and 13 selection dispatch in isolated DOM"
+  ],
+  "scope": "gallery logic only; no game page or visual screenshot verification",
+  "productionChanged": false
+}

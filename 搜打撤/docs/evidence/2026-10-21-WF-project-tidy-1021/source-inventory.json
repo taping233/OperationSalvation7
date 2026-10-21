@@ -1,0 +1,105 @@
+{
+  "modules": 552,
+  "violations": [],
+  "deadGuardKeys": [],
+  "byDomain": {
+    "agent": {
+      "files": 24,
+      "lines": 4233
+    },
+    "audio": {
+      "files": 11,
+      "lines": 1299
+    },
+    "battle": {
+      "files": 166,
+      "lines": 21689
+    },
+    "root": {
+      "files": 7,
+      "lines": 1303
+    },
+    "cards": {
+      "files": 49,
+      "lines": 8002
+    },
+    "core": {
+      "files": 48,
+      "lines": 4658
+    },
+    "experience": {
+      "files": 1,
+      "lines": 86
+    },
+    "generated": {
+      "files": 3,
+      "lines": 1293
+    },
+    "home": {
+      "files": 8,
+      "lines": 1471
+    },
+    "hub": {
+      "files": 95,
+      "lines": 15307
+    },
+    "run": {
+      "files": 49,
+      "lines": 10721
+    },
+    "ui": {
+      "files": 91,
+      "lines": 9859
+    }
+  },
+  "largest": [
+    {
+      "file": "cards/card-rules.schema.js",
+      "lines": 1331
+    },
+    {
+      "file": "hub/game.cardslib.page.js",
+      "lines": 1152
+    },
+    {
+      "file": "cards/cards.sync.js",
+      "lines": 1096
+    },
+    {
+      "file": "ui/game.menu.pages.js",
+      "lines": 1069
+    },
+    {
+      "file": "generated/art-manifest.js",
+      "lines": 956
+    },
+    {
+      "file": "battle/view/battle.layers.js",
+      "lines": 945
+    },
+    {
+      "file": "battle/core/battle.resolution.domain.js",
+      "lines": 930
+    },
+    {
+      "file": "cards/cards.data.js",
+      "lines": 925
+    },
+    {
+      "file": "battle/view/battle.aim.js",
+      "lines": 921
+    },
+    {
+      "file": "agent/agent.policy.js",
+      "lines": 896
+    },
+    {
+      "file": "run/chests.js",
+      "lines": 893
+    },
+    {
+      "file": "hub/base.js",
+      "lines": 873
+    }
+  ]
+}

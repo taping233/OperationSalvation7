@@ -1,0 +1,59 @@
+{
+  "id": "16-loading",
+  "name": "共用加载等待",
+  "status": "generated",
+  "recipeVersion": "3.4",
+  "request": {
+    "input": "scenery, no humans, a sheltered waiting room inside a futuristic survivor base, on the right a single simple metal bench beneath a large rectangular warm ceiling light, one closed travel case rests beside the bench, broad dark window reveals a distant snowy city, intact concrete walls and flat floor, quiet practical modern interior\n\nwide game transition illustration, abandoned dark future city in winter, strong single focal idea\n\nwide cinematic framing, main focal structure on right half, quiet darker left third reserved for title overlay, believable perspective, continuous ground, a few large architectural shapes, selective details\n\nmuted gray teal interior, soft ivory amber light on bench and floor, cold blue city through window, peaceful pause before departure\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 102121654,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, letters, numbers, signs, UI, medieval, gothic, castle, ancient stone columns, mountains, wilderness, wooden stall, market stall, tent, dense machinery, floating structures, impossible perspective, excessive tiny rubble, photorealistic, 3d render",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, a sheltered waiting room inside a futuristic survivor base, on the right a single simple metal bench beneath a large rectangular warm ceiling light, one closed travel case rests beside the bench, broad dark window reveals a distant snowy city, intact concrete walls and flat floor, quiet practical modern interior\n\nwide game transition illustration, abandoned dark future city in winter, strong single focal idea\n\nwide cinematic framing, main focal structure on right half, quiet darker left third reserved for title overlay, believable perspective, continuous ground, a few large architectural shapes, selective details\n\nmuted gray teal interior, soft ivory amber light on bench and floor, cold blue city through window, peaceful pause before departure\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, letters, numbers, signs, UI, medieval, gothic, castle, ancient stone columns, mountains, wilderness, wooden stall, market stall, tent, dense machinery, floating structures, impossible perspective, excessive tiny rubble, photorealistic, 3d render",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-12-16-remake-1021\\16-loading-nai45.png",
+  "sha256": "21a311ed9a394dabf95267d85c51dd57ea116b22eaa5afaf786bc26f5088a0ba"
+}

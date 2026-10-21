@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-perf-three-1021",
+  "date": "2026-10-21",
+  "owner": "Friday",
+  "goal": "接入手牌空闲、目标DOM与AOE当次投影三项远端性能优化",
+  "paths": [
+    "game/src/battle/core/battle.card-play.domain.js",
+    "game/src/battle/core/battle.core.js",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.effect-feedback.js",
+    "game/src/battle/view/battle.hover.js",
+    "game/src/battle/view/battle.layers.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/battle-effect-feedback.test.js",
+    "tests/battle-drag-reference.test.js",
+    "tests/battle-area-hover-hand-context.test.js",
+    "tests/battle-preview-hand-context.test.js",
+    "tests/battle-target-dom.test.js",
+    "docs/performance.md"
+  ],
+  "doneWhen": [
+    "三项优化接入且保留现有规则及类型",
+    "定向回归及静态检查通过，实页或阻塞边界记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "三项优化接入并保留本地注能及类型，专属90项通过，lint和语法通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "36文件737项721通过16既有失败，接入前只读对照失败名称完全一致",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "老板要求不用测试结束；实页仅自然首战入口，未完成交互验收；runtime类型6处外域错误和资源审定2处告警保留；未全量构建提交推送或核验CI"
+  ],
+  "updatedAt": "2026-10-21T10:15:05.432Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}
