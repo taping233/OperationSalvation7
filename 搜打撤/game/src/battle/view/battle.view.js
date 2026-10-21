@@ -1,3 +1,4 @@
+import { captureRuntimeStageContext, beginRuntimeStage } from '../../core/runtime-trace-stages.local.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -272,6 +273,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   // 只在同一场战斗的主舞台仍在屏幕上时复用外壳。弹层/设置页会通过
   // showOverlay 更新模式、焦点和遮罩；从它们返回时必须重新走该入口。
   function render(snapshot, backgroundOnly = false, transaction = null) {
+    // One context per outer call; recursive background refresh shares it. Timing
+    // ends synchronously, without awaiting or replacing the readiness promise.
+    const traceContext = transaction ? transaction.traceContext : captureRuntimeStageContext();
+    const finishRender = !transaction && traceContext && beginRuntimeStage('battle-render-sync', traceContext);
+    try {
     // Only a snapshot acquired by this call is reusable as live input. Public
     // callers may supply a deliberately projected/stale presentation snapshot.
     const acquiredHere = snapshot === undefined;
@@ -279,6 +285,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // Reject a departed public snapshot before invalidating the current scene.
     if (getBattleLiveness()?.battleToken !== snapshot.battleToken) return;
     const tx = transaction || { generation:++renderGeneration, live:acquiredHere ? snapshot : null };
+    if (!transaction && traceContext) tx.traceContext = traceContext;
     const isCurrent = () => tx.generation === renderGeneration && getBattleLiveness()?.battleToken === snapshot.battleToken;
     if (!transaction) setBattleRenderGuard(UI, isCurrent);
     if (!isCurrent()) return;
@@ -489,7 +496,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const restored = !backgroundOnly && restoreCombatScene(UI, snapshot.battleToken, { isCurrent });
     if (!isCurrent()) return;
     if (restored) tx.live = getSnapshot();
-    const mounted = battleStageView.show({
+    let mounted;
+    const finishShell = traceContext && beginRuntimeStage('battle-shell-sync', traceContext);
+    try {
+    mounted = battleStageView.show({
       token:snapshot.battleToken, assetKey:battleAssetKey, isBoss:!!opts.isBoss, phase, combatState, turn,
       energy, maxEnergy, energyArt:battleEnergyArt, mode, locked:busy || infusingNow, potions, potionsHTML,
       drawHTML:drawPileHTML, restHTML:pilesHTML,
@@ -502,6 +512,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       tx.live = getSnapshot();
       return tx.live.battleToken === snapshot.battleToken && isCurrent();
     } });
+    } finally { finishShell && finishShell(); }
     if (!mounted || !isCurrent()) return;
     const stageOwner = mounted.owner;
     stageOwner.stage._battleRenderCurrent = isCurrent;
@@ -728,7 +739,11 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (!isCurrent()) return;
     mountHandLayer(body, tip, snapshot.battleToken, playHandCard, stageOwner);
     showBattleStartEquipFlash(snapshot.equipped, snapshot.battleToken);
-    const handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext, liveInteractionSnapshot });
+    let handAnim;
+    const finishHand = traceContext && beginRuntimeStage('battle-hand-sync', traceContext);
+    try {
+    handAnim = updateHand(snapshot, prevView, pageGroups, animEvents, { spellBonus, mode, discoverSrcRect, handRuleContext, liveInteractionSnapshot });
+    } finally { finishHand && finishHand(); }
     if (!isCurrent()) return;
     if (simplifiedEntry) battleEntry.begin(entryStage, snapshot.battleToken, UI.el.overlay);
     if (battleEntry.pending(entryStage)) {
@@ -770,6 +785,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     spawnFloats(body, anim.flightMs ? Math.min(340, anim.flightMs * 0.8) : 0);
     UI.refresh(SDT.game);
     return battleEntry.ready(entryStage, snapshot.battleToken);
+    } finally { finishRender && finishRender(); }
   }
 
 

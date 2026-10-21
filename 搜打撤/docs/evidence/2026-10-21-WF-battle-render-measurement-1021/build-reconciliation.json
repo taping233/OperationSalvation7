@@ -1,0 +1,33 @@
+{
+  "buildReusedNotRerun": true,
+  "allInputHashesMatch": 812,
+  "allOutputHashesMatch": 1595,
+  "outputBytes": 171888706,
+  "output": "/tmp/battle-render-trace-20261021/desktop-app/game",
+  "configs": [
+    {
+      "path": "package.json",
+      "sha256": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4"
+    },
+    {
+      "path": "scripts/perf-budget.cjs",
+      "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "ea68dccbb6a9256033f3b09a9d0cae038b02cc4a31c323aa8891b70f83f8075a"
+    }
+  ],
+  "dependencyRoot": "/workspace/scratch/b7a53a06c872/performance-e817a3aa-integration/搜打撤/node_modules",
+  "buildLogSha256": "b28740fabc598558b4eb8c1ae75f6acd099af920d2bce29c886d59c9af669029",
+  "inputManifestSha256": "205ccfc005c750e980f0d62bc211e050928ecaf218d7834ab1f6f7bfe039a1e1",
+  "outputManifestSha256": "0eff708c293ef7b20a36e332ca9ae2aff498ecc35b4467c8f70ccfb1c43cd0dc"
+}
