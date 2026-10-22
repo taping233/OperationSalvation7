@@ -23,6 +23,12 @@ describe('脚本契约：语法可解析（未映射脚本回退下限）', () =
 });
 
 describe('映射完整性守卫：新脚本必须显式登记', () => {
+  it('dependency audit uses a native Vitest bridge, never a Node-only file or exemption', () => {
+    const script = 'scripts/dependency-audit-diagnostics.mjs';
+    expect(EXEMPT_SCRIPTS.has(script)).toBe(false);
+    expect(WORKFLOW_TESTS.get(script)).toEqual(['tests/dependency-audit-diagnostics.test.js']);
+  });
+
   it('每个脚本都已映射专属测试或登记豁免', () => {
     const unregistered = scriptFiles
       .map(file => 'scripts/' + file)

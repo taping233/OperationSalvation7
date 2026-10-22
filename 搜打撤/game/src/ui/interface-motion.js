@@ -29,8 +29,7 @@ function kindFor(ui, mode, body) {
   return 'panel';
 }
 
-function tabKey(body) {
-  const hub = /** @type {import("./ui.dom.types.js").UIElement} */ (body?.querySelector('#hubMain'));
+function tabKey(hub) {
   if (!hub) return '';
   const main = /** @type {import("./ui.dom.types.js").UIElement} */ (hub.querySelector('.hub-tab.on'))?.dataset.tab || '';
   const sub = /** @type {HTMLButtonElement} */ (hub.querySelector('.stash-section-tab.on, .person-tab.on, .collection-tabs button.on'));
@@ -98,9 +97,11 @@ function install(ui = window.SDT?.UI) {
     clearArchiveMotion(overlay);
     const wasOpen = !overlay.hidden;
     const oldProfile = pageMotionProfile(body)?.key;
-    const oldTab = tabKey(body);
-    const oldNavigation = navigationState(/** @type {import("./ui.dom.types.js").UIElement} */ (body?.querySelector('#hubMain')));
-    const refreshHub = wasOpen && mode === 'page' && !!/** @type {import("./ui.dom.types.js").UIElement} */ (body?.querySelector('#hubMain'))
+    // Reuse only within this synchronous read group, never across showOverlay hooks.
+    const oldHub = /** @type {import("./ui.dom.types.js").UIElement} */ (body?.querySelector('#hubMain'));
+    const oldTab = tabKey(oldHub);
+    const oldNavigation = navigationState(oldHub);
+    const refreshHub = wasOpen && mode === 'page' && !!oldHub
       && typeof html === 'string' && html.includes('id="hubMain"');
     // 同一基地页的异步资料刷新只替换内容，不中断尚未播完的揭幕。
     if (!refreshHub) clearCampEntry();
@@ -135,8 +136,9 @@ function install(ui = window.SDT?.UI) {
     overlay.dataset.uiTransition = mode === 'bagpage' ? 'panel'
       : /** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.flow-transition')) ? 'scene'
       : mode === 'page' ? 'page' : 'dialog';
-    const tabChanged = refreshHub && oldTab !== tabKey(currentBody);
-    const navChange = navigationChange(oldNavigation, navigationState(/** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('#hubMain'))));
+    const currentHub = /** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('#hubMain'));
+    const tabChanged = refreshHub && oldTab !== tabKey(currentHub);
+    const navChange = navigationChange(oldNavigation, navigationState(currentHub));
     const dedicated = !!/** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.city-run-transition, .expedition-cut'))
       || !!(/** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.studio-unified')) && /** @type {import("./ui.dom.types.js").UIElement} */ (document.querySelector('.page-loading')));
     const reveal = () => {

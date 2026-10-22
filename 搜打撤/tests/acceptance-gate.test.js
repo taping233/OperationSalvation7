@@ -13,6 +13,17 @@ import { planForPaths as selectPlan, reverseImports } from '../scripts/gate-plan
 vi.setConfig({ testTimeout: 20000, hookTimeout: 20000 });
 
 describe('分层验收选择', () => {
+  it.each([
+    'scripts/dependency-audit-diagnostics.mjs',
+    'tests/tools/dependency-audit-diagnostics.test.mjs',
+  ])('audit implementation or Node fixture change selects the Vitest bridge: %s', changed => {
+    const plan = planForPaths([changed]);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toContain('tests/dependency-audit-diagnostics.test.js');
+    expect(plan.tests.every(test => test.endsWith('.test.js'))).toBe(true);
+    expect(plan.tests).not.toContain('tests/tools/dependency-audit-diagnostics.test.mjs');
+  });
+
   it('测试文件小改只运行该测试', () => {
     const plan = planForPaths(['搜打撤/tests/battle-hand-selection-rules.test.js']);
     expect(plan.mode).toBe('quick');
