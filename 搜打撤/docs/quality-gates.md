@@ -65,4 +65,6 @@ A 档三证据：①与幸存正本逐字相同或全库零引用（搜索含 ht
 
 每次交付列本轮实际验证范围、结果与未核项；纯工程文档/内部工具定向任务不额外盘点无关的游戏全量或远端 CI。阶段/集成交付或引用全量通过结论时，核对对应来源版本/输入指纹、报告和覆盖增量；远端 CI 须有对应提交的 Actions 链接与状态，引用未刷新标未核实。快速门、全量、构建与实页分别记结果，skip 不算通过；没有全量覆盖仍可完成定向任务，明确相关补验条件。
 
-`ci.yml` 先跑语法、类型、lint，再经 `npm test` 的 pretest 编译剧情、验证数据并执行全量 Vitest；`vite-quality.yml` 只运行 Vite 构建（prebuild 编译验数据、postbuild 查预算）。文档只描述配置，远端是否实际运行及结果以对应提交或 PR 的记录为准。历史验收实证见 [快速门执行记录](archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md) 与归档证据，不在本页复述。
+`ci.yml` 的 `Full test suite` 使用原入口 `node scripts/acceptance-gate.mjs --full --run`：剧情编译、语法/数据检查、全部原类型检查及覆盖审计、原 ESLint、真实项目全局资产审计与完整 Vitest。它保留 `npm test` 原 pretest 的编译和数据检查；原门禁的 `--silent` 只改变测试日志，不减少测试选择。显式 FULL 不依赖暂存差异，但不代表正常提交的混树/归属守卫或冻结 receipt 已通过；空暂存差异上的强制 hook 不能冒充 FULL。Node 22、30 分钟 job 超时与原测试预算不变。`vite-quality.yml` 保留原 Vite 构建、prebuild 编译验数据、postbuild 预算以及构建来源与私有产物留存。
+
+`Dependency audit diagnostics` 是独立诊断 job，不安装依赖、不升级、不改 lock、不修复：先运行无网络解析器 fixture，再执行 `npm audit --package-lock-only --ignore-scripts --json --registry=https://registry.npmjs.org/ --audit-level=info`。只有退出 0/1 且成功 JSON 结构、逐严重级别计数、详细条目与退出状态相符才记为“诊断收集成功”；漏洞以 warning 和摘要列出，不等于安全验收通过。网络/进程错误、error 字段、无效 JSON、异常退出或计数不符仍失败，不取消独立 FULL job。仅成功的公开依赖审计 JSON 保存为仓库私有 artifact，保留 3 天；不保存 npm 错误响应、凭据或环境变量，也不将诊断文件写入源码。文档只描述配置，远端是否实际运行及结果以对应提交或 PR 的记录为准。历史验收实证见 [快速门执行记录](archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md) 与归档证据，不在本页复述。

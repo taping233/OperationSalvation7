@@ -29,11 +29,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check syntax, types, and lint
+      - name: Run original complete acceptance gate
         run: |
-          npm run check:syntax
-          npm run typecheck
-          npm run lint
+          set -euo pipefail
+          for name in GATE_RECEIPT GATE_MANIFEST_OK SKIP_FULL_TESTS SDT_STAGED_SNAPSHOT; do
+            if [[ -n "${!name:-}" ]]; then
+              echo "Refusing inherited gate shortcut: $name" >&2
+              exit 1
+            fi
+          done
+          node scripts/acceptance-gate.mjs --full --run 2>&1 | tee "$RUNNER_TEMP/original-full-gate.log"
+          grep -Fx '[gate] PASS：full 验收完成' "$RUNNER_TEMP/original-full-gate.log"
 
-      - name: Run full test suite
-        run: npm test
+  dependency-audit:
+    name: Dependency audit diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: 搜打撤
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify diagnostics parser with offline fixtures
+        run: node --max-old-space-size=64 --test tests/tools/dependency-audit-diagnostics.test.mjs
+      - name: Collect dependency audit diagnostics (not security acceptance)
+        run: node --max-old-space-size=64 scripts/dependency-audit-diagnostics.mjs "$RUNNER_TEMP/dependency-audit.json"
+      - name: Preserve private audit diagnostics
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dependency-audit-${{ github.sha }}
+          path: ${{ runner.temp }}/dependency-audit.json
+          if-no-files-found: error
+          retention-days: 3
