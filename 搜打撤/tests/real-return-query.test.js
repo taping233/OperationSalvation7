@@ -30,11 +30,11 @@ it.each(['rules', 'settings'])('observes complete synchronous real %s returns in
   const { createBattleDecisionPresenter, restoreCombatScene } = await import('../game/src/battle/view/battle.decision-shell.js');
   const show = createBattleDecisionPresenter({ UI, getSnapshot: () => ({ battleToken: 7, turn: 2, energy: 3, maxEnergy: 3, opts: {} }), R: () => ({ battleEnergy: 3 }) });
   let recording = false, counts;
-  for (const proto of [Element.prototype, Document.prototype]) for (const method of ['querySelector','querySelectorAll']) {
+  for (const proto of [Element.prototype, window.Document.prototype]) for (const method of ['querySelector','querySelectorAll']) {
     const originalQuery=proto[method];
     vi.spyOn(proto,method).mockImplementation(function(selector) {
       if (recording) {
-        const key=`${proto===Document.prototype?'Document':'Element'}.${method}:${selector}`;
+        const key=`${proto===window.Document.prototype?'Document':'Element'}.${method}:${selector}`;
         counts[key]=(counts[key]||0)+1;
       }
       return originalQuery.call(this,selector);
