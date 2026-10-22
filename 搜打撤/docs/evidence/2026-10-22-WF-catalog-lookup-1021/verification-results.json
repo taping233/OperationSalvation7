@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "validatedCodeTree": "efe274293bca0ba043df30a2965b68c0eafc0a49",
+  "validatedIndexLogicalSha256": "e8e4a35d710c1c22216a3533a7d907e093df455392be3ce2ae43edcf83746784",
+  "baseCommit": "da9adae8afaadadbc7ac245698c8a2f4646719ad",
+  "commands": {
+    "quick": "original workflow runStaged; CPU0; unchanged repository config",
+    "full": "FORCE_FULL_TESTS=1 SDT_STAGED_SNAPSHOT=1 taskset -c 0 sh 搜打撤/.githooks/pre-commit",
+    "buildBothAttempts": "taskset -c 0 npm run build",
+    "postBuild": "SDT_STAGED_SNAPSHOT=1 taskset -c 0 node node_modules/vitest/vitest.mjs run tests/art-preload-scheduling.test.js tests/runtime-asset-aliases.test.js tests/runtime-asset-publication.test.js tests/runtime-asset-redundancy-plugin.test.js tests/runtime-asset-redundancy.test.js --reporter=dot"
+  },
+  "inputs": {
+    "game/src/cards/builtin-card-execution.js": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+    "tests/builtin-migration-lookup.test.js": "d6b726c8227d93a7fc88b35291c2a5f327b08fbedf39b9667c6891aa1d9b2bcb",
+    "tests/reserved-card-id-regression.test.js": "0d4557d0e6b73c13fac2d003791c14df74c2b549a85515059d4eab0981a043c0",
+    "vite.config.js": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4",
+    "package.json": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d",
+    "package-lock.json": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156",
+    ".githooks/pre-commit": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+  },
+  "installedDependencyBytesSha256": "2bdaa1285e9cb522a347460990f1c3f5401932c32de46244023b58522ee24b4c",
+  "quick": {
+    "exitCode": 0,
+    "suitesPassed": 5,
+    "testsPassed": 95,
+    "receiptMode": "quick",
+    "largeOriginalReportSha256": "d65bd6f768e1223fdbe473517c227c067bd57549b0f7ebad09e26b072a80604d",
+    "originalReportArchive": {
+      "file": "original-quick-report.json.gz",
+      "sha256": "dbe3bebbe802e7601b22727eea620db903a8ef65a2e3d1804e2dc3d8ac7820df",
+      "acquisition": "验收归档 catalog-lookup-acceptance-da9adae-20261021；大报告不入Git"
+    }
+  },
+  "independentFull": {
+    "exitCode": 0,
+    "suitesPassed": 804,
+    "suitesSkipped": 1,
+    "testsPassed": 8386,
+    "testsSkipped": 7,
+    "originalHook": true,
+    "reusableFullReceipt": false
+  },
+  "build": {
+    "firstExitCode": 137,
+    "firstGlobalOomKill": [
+      207,
+      214
+    ],
+    "firstFailureCause": "unknown; global counter cannot identify victim/cause; postbuild not reached",
+    "retryCount": 1,
+    "retryExitCode": 0,
+    "retryGlobalOomKill": [
+      214,
+      214
+    ],
+    "unchangedOriginalPerformanceBudgetPassed": true,
+    "retryAdmission": {
+      "tmpGreaterThanGiB": 1.5,
+      "availableMemoryGreaterThanGiB": 3,
+      "samplesSeparatedSeconds": 10,
+      "qualification": "Precaution only; not a proof of cause/safety"
+    },
+    "retrySampledPeakAggregateOwnedRssBytes": 1142063104,
+    "retryKernelChildRuMaxrssBytes": 922427392,
+    "rssQualification": "Kernel child high-water and sampled aggregate process tree are different measures",
+    "files": 1615,
+    "bytes": 174118131,
+    "priorBytes": 174118039,
+    "byteDelta": 92,
+    "samePathByteIdenticalFiles": 1596,
+    "replacedHashedJsChunks": 18,
+    "changedStablePaths": [
+      "index.html"
+    ],
+    "logicalJsChunks": 28,
+    "extraMissingLogicalChunks": 0,
+    "immutableReconstructionLedgerSha256": "94e500b8559d6c208d8263b6e81dd1d5a70ff26b5e9fd3d7a4abc98ae2d9384a",
+    "newArtifactPayloadBytes": 0
+  },
+  "postBuildAssetTests": {
+    "suitesPassed": 5,
+    "testsPassed": 116,
+    "outputHashesUnchanged": true
+  },
+  "generatedManifest": {
+    "canonicalBlob": "6e462ce0755ab7c31ca09c735b999336f7430058",
+    "generatedBlob": "97e8d8e11ef79cadc2c70d1e86951e401c24642d",
+    "sameAsPreviousBuild": true,
+    "entries": [
+      951,
+      966
+    ],
+    "added": 15,
+    "removed": 0,
+    "all966CanonicalAssetsMatchOutput": true,
+    "staged": false
+  },
+  "rawLogs": [
+    {
+      "file": "quick.log.txt",
+      "sha256": "a63a3212d6361b5c9b549fa0d2e49122c4f252031ae736f1118153ca9f191b33",
+      "bytes": 2665
+    },
+    {
+      "file": "full.log.txt",
+      "sha256": "bd4ec376199b911304efad3195093fe1cfda53ab9a62a89311ce0f757efc772c",
+      "bytes": 23582
+    },
+    {
+      "file": "build-first-failed.log.txt",
+      "sha256": "fa7cddcae408844b4d58b55b4186e6b40811cc01b4c25819d5a7e2c573a2349b",
+      "bytes": 27071
+    },
+    {
+      "file": "build-retry.log.txt",
+      "sha256": "9068fd450496eadd7ee85a49cb6028842dd1d865721159656fede8d6d41a376c",
+      "bytes": 31310
+    },
+    {
+      "file": "post-build-assets.log.txt",
+      "sha256": "3751b509a20d58b4e0210eb9ae4f9814c0266f19ddea6bd858f585da238cdca1",
+      "bytes": 9197
+    }
+  ],
+  "pending": [
+    "Current-window browser/live-game acceptance",
+    "Remote CI",
+    "Push/deployment"
+  ],
+  "claimsExcluded": [
+    "Runtime duration/FPS/memory improvement",
+    "First failure confirmed OOM cause",
+    "Large-artifact full-copy transmission"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-catalog-lookup-1021",
+  "date": "2026-10-22",
+  "owner": "Friday",
+  "goal": "在独立最新主线副本准备历史规则查询复用与已审兼容修复的集中验收，保护现有源码、候选与构建",
+  "paths": [
+    "game/src/cards/builtin-card-execution.js",
+    "tests/builtin-migration-lookup.test.js",
+    "tests/reserved-card-id-regression.test.js",
+    "docs/performance.md"
+  ],
+  "doneWhen": [
+    "明确审阅后的合并范围并同步当前工程说明",
+    "原配置负对照、候选回归、正常冻结门禁和构建分别留实证",
+    "保护既有未提交内容与旧构建，提交推送另按授权"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原配置相同最终测试三组：基线13预期失败/10通过；仅守卫3预期计数失败/20通过；合并23通过，73历史案例保留",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "原生QUICK5套95项及静态链通过；独立原钩子FULL804套通过/1跳过、8386项通过/7跳过，不混同回执",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "首次标准构建exit137原日志与失败产物保留，唯一不改命令重试exit0及原预算通过；未确证OOM因果",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "前批确切5资源专项116项通过，1615产物哈希稳定；仅art-manifest生成差异未暂存；生产/测试/配置/锁/依赖未改",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "当前窗口浏览器实玩、远端CI、推送与部署未核验；自然游戏崩溃原因及FPS/耗时/内存改善未证明"
+  ],
+  "updatedAt": "2026-10-22T00:41:26.057Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

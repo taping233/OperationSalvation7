@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "da9adae8afaadadbc7ac245698c8a2f4646719ad",
+  "sourceSha256": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+  "testSha256": {
+    "tests/builtin-migration-lookup.test.js": "d6b726c8227d93a7fc88b35291c2a5f327b08fbedf39b9667c6891aa1d9b2bcb",
+    "tests/reserved-card-id-regression.test.js": "0d4557d0e6b73c13fac2d003791c14df74c2b549a85515059d4eab0981a043c0"
+  },
+  "configSha256": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "node",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "tests/builtin-migration-lookup.test.js",
+    "tests/reserved-card-id-regression.test.js",
+    "--reporter=verbose",
+    "--reporter=json"
+  ],
+  "configuration": "unchanged repository vite.config.js; original CPU-affinity worker selection; no standalone audit config",
+  "arms": [
+    {
+      "arm": "baseline-da9-final-tests",
+      "startedAt": "2026-10-21T23:42:38.251556+00:00",
+      "sourceSha256": "a940fcb875fa3ceb25e4ee3c91fc398345c00a5eacb72aca884e6d649eccb7ed",
+      "exitCode": 1,
+      "testsPassed": 10,
+      "testsFailed": 13,
+      "testsPending": 0,
+      "operationCounts": [
+        {
+          "path": "getHostedExecutionCard",
+          "calls": 100,
+          "sourceEntries": 72,
+          "ownKeys": 300,
+          "descriptors": 7200
+        },
+        {
+          "path": "ensureBuiltinExecutionRules",
+          "calls": 13,
+          "sourceEntries": 72,
+          "ownKeys": 39,
+          "descriptors": 936
+        },
+        {
+          "path": "BattleSession.commands.playCard normal",
+          "sourceEntries": 72,
+          "ownKeys": 27,
+          "descriptors": 648
+        }
+      ],
+      "historyCoverage": [
+        {
+          "histories": 73,
+          "variants": 3,
+          "variantOnly": [
+            "tt3-dig-treasure"
+          ]
+        }
+      ],
+      "logSha256": "baba251369c291a99c061d8b87100b363923f1546861669e22733f63addcd4a1",
+      "log": "baseline-da9-final-tests.log.txt"
+    },
+    {
+      "arm": "guard-only-final-tests",
+      "startedAt": "2026-10-21T23:42:44.052110+00:00",
+      "sourceSha256": "d71548aedf398aca77453055b07fb217006bfd12cedd38fd3109f593d6359126",
+      "exitCode": 1,
+      "testsPassed": 20,
+      "testsFailed": 3,
+      "testsPending": 0,
+      "operationCounts": [
+        {
+          "path": "getHostedExecutionCard",
+          "calls": 100,
+          "sourceEntries": 72,
+          "ownKeys": 225,
+          "descriptors": 5400
+        },
+        {
+          "path": "ensureBuiltinExecutionRules",
+          "calls": 13,
+          "sourceEntries": 72,
+          "ownKeys": 30,
+          "descriptors": 720
+        },
+        {
+          "path": "BattleSession.commands.playCard normal",
+          "sourceEntries": 72,
+          "ownKeys": 27,
+          "descriptors": 648
+        }
+      ],
+      "historyCoverage": [
+        {
+          "histories": 73,
+          "variants": 3,
+          "variantOnly": [
+            "tt3-dig-treasure"
+          ]
+        }
+      ],
+      "logSha256": "3efea52cee175f9928f202132a65358210785c29118541483a178cf605008866",
+      "log": "guard-only-final-tests.log.txt"
+    },
+    {
+      "arm": "combined-final-tests",
+      "startedAt": "2026-10-21T23:42:50.227987+00:00",
+      "sourceSha256": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+      "exitCode": 0,
+      "testsPassed": 23,
+      "testsFailed": 0,
+      "testsPending": 0,
+      "operationCounts": [
+        {
+          "path": "getHostedExecutionCard",
+          "calls": 100,
+          "sourceEntries": 72,
+          "ownKeys": 0,
+          "descriptors": 0
+        },
+        {
+          "path": "ensureBuiltinExecutionRules",
+          "calls": 13,
+          "sourceEntries": 72,
+          "ownKeys": 0,
+          "descriptors": 0
+        },
+        {
+          "path": "BattleSession.commands.playCard normal",
+          "sourceEntries": 72,
+          "ownKeys": 0,
+          "descriptors": 0
+        }
+      ],
+      "historyCoverage": [
+        {
+          "histories": 73,
+          "variants": 3,
+          "variantOnly": [
+            "tt3-dig-treasure"
+          ]
+        }
+      ],
+      "logSha256": "2230318858143e4d06ec808dd00352789d746cc86b4214c5bf49ab594e476966",
+      "log": "combined-final-tests.log.txt"
+    }
+  ]
+}

@@ -181,6 +181,11 @@ freezeBuiltinData(BUILTIN_EQUIPMENT_PREVIOUS_RULES);
 freezeBuiltinData(BUILTIN_CHOICE_PREVIOUS_RULES);
 freezeBuiltinData(BUILTIN_PREVIOUS_VARIANTS);
 
+// Only immutable declaration data is shared; each call still reads live card rules.
+const builtinPreviousRulesById = /** @type {Record<string, unknown>} */ (Object.freeze({
+  ...BUILTIN_PREVIOUS_RULES, ...BUILTIN_EQUIPMENT_PREVIOUS_RULES, ...BUILTIN_CHOICE_PREVIOUS_RULES,
+}));
+
 // Missing native points are explicitly inert. Custom/unknown cards and native
 // declarations still awaiting migration retain the separate legacy adapter.
 /** @template TOperation @param {import('./card-execution-plan.types').ExecutionCard<TOperation> | null | undefined} card */
@@ -192,9 +197,10 @@ export function ownsBuiltinExecutionDomain(card) {
 /** @template {object} T @param {T & {id?:string, rules?:unknown}} card */
 export function migrateBuiltinExecutionCard(card) {
   const revision = BUILTIN_EXECUTION_REVISIONS[card?.id || ''];
-  const previous = /** @type {Record<string, unknown>} */ ({ ...BUILTIN_PREVIOUS_RULES, ...BUILTIN_EQUIPMENT_PREVIOUS_RULES, ...BUILTIN_CHOICE_PREVIOUS_RULES });
+  // Unknown/custom identities must not resolve through Object.prototype.
+  if (!Object.prototype.hasOwnProperty.call(BUILTIN_EXECUTION_REVISIONS, card.id || '')) return card;
   const variants = /** @type {Record<string, unknown[]>} */ (BUILTIN_PREVIOUS_VARIANTS);
-  const expected = [previous[card.id || ''], ...(variants[card.id || ''] || [])];
+  const expected = [builtinPreviousRulesById[card.id || ''], ...(variants[card.id || ''] || [])];
   if (!revision || !expected.some(rules => JSON.stringify(card.rules) === JSON.stringify(rules))) return card;
   return { ...card, ...revision.fields, rules: JSON.parse(JSON.stringify(revision.rules)) };
 }

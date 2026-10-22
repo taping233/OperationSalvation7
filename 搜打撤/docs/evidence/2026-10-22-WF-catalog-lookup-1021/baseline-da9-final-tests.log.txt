@@ -1,0 +1,185 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/catalog-lookup-acceptance-da9adae-20261021/source/搜打撤
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization
+BUILTIN_MIGRATION_COUNTS {"path":"getHostedExecutionCard","calls":100,"sourceEntries":72,"ownKeys":300,"descriptors":7200}
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports
+BUILTIN_MIGRATION_COUNTS {"path":"ensureBuiltinExecutionRules","calls":13,"sourceEntries":72,"ownKeys":39,"descriptors":936}
+
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization 23ms
+   → expected { ownKeys: 300, descriptors: 7200 } to deeply equal { ownKeys: +0, descriptors: +0 }
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports 10ms
+   → expected { ownKeys: 39, descriptors: 936 } to deeply equal { ownKeys: +0, descriptors: +0 }
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership
+BUILTIN_MIGRATION_COUNTS {"path":"BattleSession.commands.playCard normal","sourceEntries":72,"ownKeys":27,"descriptors":648}
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants
+BUILTIN_MIGRATION_HISTORY_COVERAGE {"histories":73,"variants":3,"variantOnly":["tt3-dig-treasure"]}
+
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership 879ms
+   → expected { ownKeys: 27, descriptors: 648 } to deeply equal { ownKeys: +0, descriptors: +0 }
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants 33ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not cache mutable card results, ids, replacement rules or nested edits 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > gives each migrated call an independent mutable rule tree 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains exact JSON fingerprint comparison, including custom field order and explicit empty rules 0ms
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves unknown and Object-prototype IDs as untouched custom cards 10ms
+   → (variants[(card.id || "")] || []) is not iterable
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains all frozen source tables and nested declarations 20ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves reentrant calls from live JSON inputs without sharing result state 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves failed-save behavior and caller-owned source cards 0ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > boots the clean supported source catalog 159ms
+ × tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named constructor on the next startup 262ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named toString on the next startup 206ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named __proto__ on the next startup 222ms
+   → (variants[(card.id || "")] || []) is not iterable
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / legacy ownership, inputs, cost and intended effect 373ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / explicit ownership, inputs, cost and intended effect 273ms
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / legacy ownership, inputs, cost and intended effect 181ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / explicit ownership, inputs, cost and intended effect 212ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / legacy ownership, inputs, cost and intended effect 179ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / explicit ownership, inputs, cost and intended effect 227ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / legacy ownership, inputs, cost and intended effect 177ms
+   → (variants[(card.id || "")] || []) is not iterable
+ × tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / explicit ownership, inputs, cost and intended effect 202ms
+   → (variants[(card.id || "")] || []) is not iterable
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization
+AssertionError: expected { ownKeys: 300, descriptors: 7200 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 7200,
++   "ownKeys": 300,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:46:22
+     44|     const measured = counts();
+     45|     console.info('BUILTIN_MIGRATION_COUNTS', JSON.stringify({ path: 'g…
+     46|     expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                      ^
+     47|   });
+     48| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports
+AssertionError: expected { ownKeys: 39, descriptors: 936 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 936,
++   "ownKeys": 39,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:60:22
+     58|     const measured = counts();
+     59|     console.info('BUILTIN_MIGRATION_COUNTS', JSON.stringify({ path: 'e…
+     60|     expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                      ^
+     61|     expect(saveAll).toHaveBeenCalledTimes(2);
+     62|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership
+AssertionError: expected { ownKeys: 27, descriptors: 648 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 648,
++   "ownKeys": 27,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:92:24
+     90|       expect(runtime.mode).toBe('normal'); expect(runtime.foes[0].hp).…
+     91|       expect(runtime.hand).toContain('next'); expect(card).toEqual(bef…
+     92|       expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                        ^
+     93|     } finally { BattleSession.commands.flee(); }
+     94|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves unknown and Object-prototype IDs as untouched custom cards
+TypeError: (variants[(card.id || "")] || []) is not iterable
+ ❯ Module.migrateBuiltinExecutionCard game/src/cards/builtin-card-execution.js:197:74
+    195|   const previous = /** @type {Record<string, unknown>} */ ({ ...BUILTI…
+    196|   const variants = /** @type {Record<string, unknown[]>} */ (BUILTIN_P…
+    197|   const expected = [previous[card.id || ''], ...(variants[card.id || '…
+       |                                                                          ^
+    198|   if (!revision || !expected.some(rules => JSON.stringify(card.rules) …
+    199|   return { ...card, ...revision.fields, rules: JSON.parse(JSON.stringi…
+ ❯ tests/builtin-migration-lookup.test.js:164:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named constructor on the next startup
+ FAIL  tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named toString on the next startup
+ FAIL  tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named __proto__ on the next startup
+TypeError: (variants[(card.id || "")] || []) is not iterable
+ ❯ migrateBuiltinExecutionCard game/src/cards/builtin-card-execution.js:197:74
+    195|   const previous = /** @type {Record<string, unknown>} */ ({ ...BUILTI…
+    196|   const variants = /** @type {Record<string, unknown[]>} */ (BUILTIN_P…
+    197|   const expected = [previous[card.id || ''], ...(variants[card.id || '…
+       |                                                                          ^
+    198|   if (!revision || !expected.some(rules => JSON.stringify(card.rules) …
+    199|   return { ...card, ...revision.fields, rules: JSON.parse(JSON.stringi…
+ ❯ game/src/cards/cards.sync.builtin.js:10:49
+ ❯ ensureBuiltinExecutionRules game/src/cards/cards.sync.builtin.js:9:25
+ ❯ Object.ensureTabletop game/src/cards/cards.js:295:34
+ ❯ bootCatalog tests/reserved-card-id-regression.test.js:11:52
+ ❯ tests/reserved-card-id-regression.test.js:36:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / legacy ownership, inputs, cost and intended effect
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / explicit ownership, inputs, cost and intended effect
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / legacy ownership, inputs, cost and intended effect
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / explicit ownership, inputs, cost and intended effect
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / legacy ownership, inputs, cost and intended effect
+ FAIL  tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / explicit ownership, inputs, cost and intended effect
+TypeError: (variants[(card.id || "")] || []) is not iterable
+ ❯ migrateBuiltinExecutionCard game/src/cards/builtin-card-execution.js:197:74
+    195|   const previous = /** @type {Record<string, unknown>} */ ({ ...BUILTI…
+    196|   const variants = /** @type {Record<string, unknown[]>} */ (BUILTIN_P…
+    197|   const expected = [previous[card.id || ''], ...(variants[card.id || '…
+       |                                                                          ^
+    198|   if (!revision || !expected.some(rules => JSON.stringify(card.rules) …
+    199|   return { ...card, ...revision.fields, rules: JSON.parse(JSON.stringi…
+ ❯ game/src/cards/cards.sync.builtin.js:10:49
+ ❯ ensureBuiltinExecutionRules game/src/cards/cards.sync.builtin.js:9:25
+ ❯ Object.ensureTabletop game/src/cards/cards.js:295:34
+ ❯ bootCatalog tests/reserved-card-id-regression.test.js:11:52
+ ❯ tests/reserved-card-id-regression.test.js:56:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  13 failed | 10 passed (23)
+   Start at  08:42:38
+   Duration  5.27s (transform 708ms, setup 0ms, collect 407ms, tests 3.65s, environment 677ms, prepare 126ms)
+
+JSON report written to /workspace/shared/catalog-lookup-acceptance-da9adae-20261021/baseline-da9-final-tests.vitest.json

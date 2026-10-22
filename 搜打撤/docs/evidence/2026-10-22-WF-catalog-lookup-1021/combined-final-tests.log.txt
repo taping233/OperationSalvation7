@@ -1,0 +1,46 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/catalog-lookup-acceptance-da9adae-20261021/source/搜打撤
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization
+BUILTIN_MIGRATION_COUNTS {"path":"getHostedExecutionCard","calls":100,"sourceEntries":72,"ownKeys":0,"descriptors":0}
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports
+BUILTIN_MIGRATION_COUNTS {"path":"ensureBuiltinExecutionRules","calls":13,"sourceEntries":72,"ownKeys":0,"descriptors":0}
+
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization 3ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports 4ms
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership
+BUILTIN_MIGRATION_COUNTS {"path":"BattleSession.commands.playCard normal","sourceEntries":72,"ownKeys":0,"descriptors":0}
+
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership 841ms
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants
+BUILTIN_MIGRATION_HISTORY_COVERAGE {"histories":73,"variants":3,"variantOnly":["tt3-dig-treasure"]}
+
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants 18ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not cache mutable card results, ids, replacement rules or nested edits 0ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > gives each migrated call an independent mutable rule tree 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains exact JSON fingerprint comparison, including custom field order and explicit empty rules 0ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves unknown and Object-prototype IDs as untouched custom cards 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains all frozen source tables and nested declarations 10ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves reentrant calls from live JSON inputs without sharing result state 0ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves failed-save behavior and caller-owned source cards 0ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > boots the clean supported source catalog 172ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named constructor on the next startup 268ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named toString on the next startup 225ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named __proto__ on the next startup 230ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / legacy ownership, inputs, cost and intended effect 380ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / explicit ownership, inputs, cost and intended effect 280ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / legacy ownership, inputs, cost and intended effect 294ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / explicit ownership, inputs, cost and intended effect 312ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / legacy ownership, inputs, cost and intended effect 252ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / explicit ownership, inputs, cost and intended effect 266ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / legacy ownership, inputs, cost and intended effect 244ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / explicit ownership, inputs, cost and intended effect 252ms
+
+ Test Files  2 passed (2)
+      Tests  23 passed (23)
+   Start at  08:42:50
+   Duration  5.53s (transform 655ms, setup 0ms, collect 364ms, tests 4.06s, environment 668ms, prepare 120ms)
+
+JSON report written to /workspace/shared/catalog-lookup-acceptance-da9adae-20261021/combined-final-tests.vitest.json

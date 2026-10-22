@@ -1,0 +1,121 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/catalog-lookup-acceptance-da9adae-20261021/source/搜打撤
+
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > boots the clean supported source catalog 171ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named constructor on the next startup 250ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named toString on the next startup 220ms
+ ✓ tests/reserved-card-id-regression.test.js > saved custom IDs through the public startup catalog API (code simulation) > preserves an existing saved custom card named __proto__ on the next startup 217ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / legacy ownership, inputs, cost and intended effect 900ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves plain-custom-id / explicit ownership, inputs, cost and intended effect 271ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / legacy ownership, inputs, cost and intended effect 285ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves constructor / explicit ownership, inputs, cost and intended effect 369ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / legacy ownership, inputs, cost and intended effect 268ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves toString / explicit ownership, inputs, cost and intended effect 257ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / legacy ownership, inputs, cost and intended effect 263ms
+ ✓ tests/reserved-card-id-regression.test.js > public play after cold startup with an existing custom card (code simulation) > preserves __proto__ / explicit ownership, inputs, cost and intended effect 261ms
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization
+BUILTIN_MIGRATION_COUNTS {"path":"getHostedExecutionCard","calls":100,"sourceEntries":72,"ownKeys":225,"descriptors":5400}
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports
+BUILTIN_MIGRATION_COUNTS {"path":"ensureBuiltinExecutionRules","calls":13,"sourceEntries":72,"ownKeys":30,"descriptors":720}
+
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization 22ms
+   → expected { ownKeys: 225, descriptors: 5400 } to deeply equal { ownKeys: +0, descriptors: +0 }
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports 12ms
+   → expected { ownKeys: 30, descriptors: 720 } to deeply equal { ownKeys: +0, descriptors: +0 }
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership
+BUILTIN_MIGRATION_COUNTS {"path":"BattleSession.commands.playCard normal","sourceEntries":72,"ownKeys":27,"descriptors":648}
+
+stdout | tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants
+BUILTIN_MIGRATION_HISTORY_COVERAGE {"histories":73,"variants":3,"variantOnly":["tt3-dig-treasure"]}
+
+ × tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership 252ms
+   → expected { ownKeys: 27, descriptors: 648 } to deeply equal { ownKeys: +0, descriptors: +0 }
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves all historical fingerprints and all released variants 37ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not cache mutable card results, ids, replacement rules or nested edits 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > gives each migrated call an independent mutable rule tree 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains exact JSON fingerprint comparison, including custom field order and explicit empty rules 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves unknown and Object-prototype IDs as untouched custom cards 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > retains all frozen source tables and nested declarations 11ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves reentrant calls from live JSON inputs without sharing result state 1ms
+ ✓ tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > preserves failed-save behavior and caller-owned source cards 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs during repeated public battle normalization
+AssertionError: expected { ownKeys: 225, descriptors: 5400 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 5400,
++   "ownKeys": 225,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:46:22
+     44|     const measured = counts();
+     45|     console.info('BUILTIN_MIGRATION_COUNTS', JSON.stringify({ path: 'g…
+     46|     expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                      ^
+     47|   });
+     48| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > does not enumerate immutable source catalogs in actual library migration, including late imports
+AssertionError: expected { ownKeys: 30, descriptors: 720 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 720,
++   "ownKeys": 30,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:60:22
+     58|     const measured = counts();
+     59|     console.info('BUILTIN_MIGRATION_COUNTS', JSON.stringify({ path: 'e…
+     60|     expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                      ^
+     61|     expect(saveAll).toHaveBeenCalledTimes(2);
+     62|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/builtin-migration-lookup.test.js > immutable native migration lookup reuse > reuses the lookup on a real ordinary-battle play while preserving damage, draw and input ownership
+AssertionError: expected { ownKeys: 27, descriptors: 648 } to deeply equal { ownKeys: +0, descriptors: +0 }
+
+- Expected
++ Received
+
+  {
+-   "descriptors": 0,
+-   "ownKeys": 0,
++   "descriptors": 648,
++   "ownKeys": 27,
+  }
+
+ ❯ tests/builtin-migration-lookup.test.js:92:24
+     90|       expect(runtime.mode).toBe('normal'); expect(runtime.foes[0].hp).…
+     91|       expect(runtime.hand).toContain('next'); expect(card).toEqual(bef…
+     92|       expect(measured).toEqual({ ownKeys: 0, descriptors: 0 });
+       |                        ^
+     93|     } finally { BattleSession.commands.flee(); }
+     94|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  3 failed | 20 passed (23)
+   Start at  08:42:44
+   Duration  5.71s (transform 647ms, setup 0ms, collect 425ms, tests 4.08s, environment 704ms, prepare 123ms)
+
+JSON report written to /workspace/shared/catalog-lookup-acceptance-da9adae-20261021/guard-only-final-tests.vitest.json

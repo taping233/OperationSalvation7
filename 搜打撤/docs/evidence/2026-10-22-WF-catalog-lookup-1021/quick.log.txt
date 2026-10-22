@@ -1,0 +1,48 @@
+{"mode":"quick","paths":["game/src/cards/builtin-card-execution.js","tests/builtin-migration-lookup.test.js","tests/reserved-card-id-regression.test.js"],"reasons":["game/src/cards/builtin-card-execution.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担"],"tests":["tests/architecture-boundaries.test.js","tests/builtin-card-execution.test.js","tests/builtin-migration-lookup.test.js","tests/contracts.test.js","tests/reserved-card-id-regression.test.js"]}
+[gate] 模式：quick
+[gate] 变更：game/src/cards/builtin-card-execution.js
+[gate] 变更：tests/builtin-migration-lookup.test.js
+[gate] 变更：tests/reserved-card-id-regression.test.js
+[gate] 说明：game/src/cards/builtin-card-execution.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担
+[gate] 测试：tests/architecture-boundaries.test.js
+[gate] 测试：tests/builtin-card-execution.test.js
+[gate] 测试：tests/builtin-migration-lookup.test.js
+[gate] 测试：tests/contracts.test.js
+[gate] 测试：tests/reserved-card-id-regression.test.js
+[gate] 剧情编译
+Compiled narrative: narrative/events.ink -> game/src/generated/narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (620 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.framework-boundaries.json
+Type-checking jsconfig.framework-ports.json
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+Type-checking jsconfig.runtime.json
+Implementation type coverage: 560/560; strict: 51/560
+
+[gate] ESLint：OK
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /tmp/sdt-staged-dJiwsK/snapshot/搜打撤
+
+·······························································································
+
+ Test Files  5 passed (5)
+      Tests  95 passed (95)
+   Start at  08:47:52
+   Duration  10.62s (transform 769ms, setup 0ms, collect 996ms, tests 6.59s, environment 1.77s, prepare 342ms)
+
+[gate] PASS：quick 验收完成
