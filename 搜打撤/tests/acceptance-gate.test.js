@@ -1,4 +1,6 @@
-import { spawnSync } from 'node:child_process';
+import { EventEmitter } from 'node:events';
+import { runInNewContext } from 'node:vm';
+import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
 import os from 'node:os';
 import { pathToFileURL } from 'node:url';
@@ -464,6 +466,40 @@ describe('planner 显式 root 与查询故障隔离', () => {
     expect(mixed.status).not.toBe(0);
     expect(mixed.stderr).toContain('不能与');
   });
+  it.each(['scripts/check-syntax.mjs', 'scripts/validate-data.mjs', 'scripts/check-types.mjs',
+    'node_modules/eslint/bin/eslint.js'])('正常CLI中%s失败不漏跑其他静态检查、不运行后续步骤', failing => {
+    const root = createRoot();
+    for (const name of ['acceptance-gate.mjs', 'gate-plan.mjs', 'registry-paths.mjs']) {
+      put(root, 'scripts/' + name, readFileSync(path.resolve('scripts', name), 'utf8'));
+    }
+    put(root, 'scripts/architecture-graph.mjs', 'export const analyzeModule = () => ({ imports: [] });');
+    put(root, 'package.json', '{"type":"module"}');
+    const checks = ['scripts/check-syntax.mjs', 'scripts/validate-data.mjs', 'scripts/check-types.mjs',
+      'node_modules/eslint/bin/eslint.js'];
+    for (const file of ['scripts/compile-narrative.mjs', ...checks, 'node_modules/vitest/vitest.mjs']) {
+      put(root, file, `import {appendFileSync} from 'node:fs';
+        appendFileSync('calls.jsonl', JSON.stringify(${JSON.stringify(file)})+'\\n');
+        ${file === failing ? 'process.exitCode = 23;' : ''}`);
+    }
+    put(root, 'scripts/asset-audit.cjs', "require('node:fs').appendFileSync('calls.jsonl', '\"asset-audit\"\\n');");
+    const env = { ...process.env }; delete env.GATE_RECEIPT;
+    // Unknown options/variables must not become an injection channel. These are
+    // intentionally ignored by the existing parser, never consumed as overrides.
+    env.GATE_STATIC_RESULTS = '[{"ok":true}]';
+    env.GATE_STATIC_CHECKER = 'fake-success.mjs';
+    const run = spawnSync(process.execPath, [path.join(root, 'scripts/acceptance-gate.mjs'), '--full', '--run',
+      '--static-checker=fake-success.mjs', '--static-results=success'], { cwd: root, encoding: 'utf8', env });
+    expect(run.status).toBe(1);
+    expect(run.stdout).toContain('"code":23,"signal":null');
+    expect(run.stdout).not.toContain('PASS：');
+    const calls = readFileSync(path.join(root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
+    expect(calls).toHaveLength(5);
+    expect(calls[0]).toBe('scripts/compile-narrative.mjs');
+    expect(new Set(calls.slice(1))).toEqual(new Set(checks));
+    expect(calls.slice(3)).toEqual(['scripts/check-types.mjs', 'node_modules/eslint/bin/eslint.js']);
+    expect(calls).not.toContain('node_modules/vitest/vitest.mjs');
+    expect(calls).not.toContain('asset-audit');
+  });
   it('同一输入在两份root按各自真实依赖图选择，root缺失不能隐式读cwd', () => {
     const first = createRoot(), second = createRoot();
     for (const [root, name] of [[first, 'first'], [second, 'second']]) {
@@ -508,5 +544,126 @@ describe('planner 显式 root 与查询故障隔离', () => {
     const result = spawnSync(process.execPath, ['--input-type=module', '-e', code], { cwd: root, encoding: 'utf8' });
     expect(result.status).toBe(0);
     expect(result.stdout.trim()).toBe('function');
+  });
+});
+
+// Test-only harness: evaluate the exact private collector/scheduler source without
+// adding production exports, checker overrides, environment switches or CLI flags.
+describe('静态检查原生结果与调度边界', () => {
+  const source = readFileSync(path.resolve('scripts/acceptance-gate.mjs'), 'utf8');
+  const start = source.indexOf('function runNodeCaptured(');
+  const end = source.indexOf('\nfunction printPlan(', start);
+  const load = (spawnChild, root = process.cwd()) => {
+    expect(start).toBeGreaterThan(-1);
+    expect(end).toBeGreaterThan(start);
+    let output = '';
+    const api = runInNewContext(source.slice(start, end) + '\n({ runNodeCaptured, runStaticChecks })', {
+      spawn: spawnChild, PROJECT_ROOT: root,
+      process: { execPath: process.execPath, stdout: { write: text => { output += text; } } },
+    });
+    return { ...api, output: () => output };
+  };
+  const child = () => Object.assign(new EventEmitter(), {
+    stdout: new EventEmitter(), stderr: new EventEmitter(),
+  });
+  it('等待close保留error之后的所有输出、原始error和终止字段', async () => {
+    const processChild = child();
+    const api = load(() => processChild);
+    const pending = api.runNodeCaptured([], 'fixture');
+    const error = Object.assign(new Error('spawn fixture ENOENT'), { code: 'ENOENT' });
+    processChild.stdout.emit('data', Buffer.from('before\n'));
+    processChild.emit('error', error);
+    processChild.stderr.emit('data', Buffer.from('after\n'));
+    processChild.emit('close', -2, null);
+    const result = await pending;
+    expect(result).toMatchObject({ ok: false, code: -2, signal: null, output: 'before\nafter\n' });
+    expect(result.error).toBe(error);
+  });
+  it.each([[0, null, true], [7, null, false], [null, 'SIGTERM', false]])(
+    '退出结果code=%s signal=%s不改变成功条件', async (code, signal, ok) => {
+      const processChild = child();
+      const pending = load(() => processChild).runNodeCaptured([], 'fixture');
+      processChild.emit('close', code, signal);
+      expect(await pending).toMatchObject({ ok, code, signal, error: null, output: '' });
+    },
+  );
+  it('捕获真实spawn错误而不是把缺失cwd当作成功', async () => {
+    const missing = path.join(os.tmpdir(), 'sdt-absent-' + process.pid + '-' + Date.now(), 'missing');
+    const result = await load(spawn, missing).runNodeCaptured(['--version'], 'missing cwd');
+    expect(result.ok).toBe(false);
+    expect(result.error.code).toBe('ENOENT');
+    expect(result.code).not.toBe(0);
+    expect(result.signal).toBe(null);
+  });
+  it('同步spawn异常也保留原生对象', async () => {
+    const error = new TypeError('fixture spawn argument failure');
+    const result = await load(() => { throw error; }).runNodeCaptured([], 'fixture');
+    expect(result).toMatchObject({ ok: false, code: null, signal: null, output: '' });
+    expect(result.error).toBe(error);
+  });
+  it.each(['throw', 'error'])('首项%s失败仍尝试全部四项', async mode => {
+    const calls = [];
+    const failure = Object.assign(new Error('native spawn failure'), { code: 'ENOENT' });
+    const api = load((_node, args) => {
+      calls.push(args[0]);
+      if (calls.length === 1 && mode === 'throw') throw failure;
+      const proc = child(), first = calls.length === 1;
+      queueMicrotask(() => {
+        if (first) proc.emit('error', failure);
+        proc.emit('close', first ? -2 : 0, null);
+      });
+      return proc;
+    });
+    await expect(api.runStaticChecks()).rejects.toThrow('语法检查 失败');
+    expect(calls).toEqual(['scripts/check-syntax.mjs', 'scripts/validate-data.mjs',
+      'scripts/check-types.mjs', 'node_modules/eslint/bin/eslint.js']);
+    expect(api.output()).toContain('"message":"native spawn failure","code":"ENOENT"');
+  });
+  it('并发轻检查完成后才运行重检查；失败仍尝试全部且完整打印诊断', async () => {
+    const running = new Map(), calls = [], ended = [];
+    const api = load((_node, args) => {
+      const name = args[0];
+      calls.push([...args]);
+      if (name === 'scripts/check-types.mjs') expect(ended).toEqual(['syntax', 'data']);
+      if (name.includes('eslint')) expect(ended).toEqual(['syntax', 'data', 'type']);
+      const proc = child(); running.set(name, proc);
+      return proc;
+    });
+    const pending = api.runStaticChecks();
+    // Attach rejection handler before driving errors (no unhandled rejection).
+    const failed = expect(pending).rejects.toThrow('语法检查、内容数据检查、类型契约检查、ESLint 失败');
+    expect(calls.map(args => args[0])).toEqual(['scripts/check-syntax.mjs', 'scripts/validate-data.mjs']);
+    const syntax = running.get('scripts/check-syntax.mjs');
+    syntax.stdout.emit('data', Buffer.from('syntax out\n'));
+    syntax.stderr.emit('data', Buffer.from('syntax err\n'));
+    ended.push('syntax'); syntax.emit('close', 7, null);
+    await Promise.resolve(); expect(calls).toHaveLength(2);
+    const data = running.get('scripts/validate-data.mjs');
+    data.stdout.emit('data', Buffer.from(' \n'));
+    ended.push('data'); data.emit('close', 8, null);
+    // Promise.all and its awaiting scheduler each have a microtask continuation.
+    await Promise.resolve(); await Promise.resolve();
+    expect(calls).toHaveLength(3);
+    const types = running.get('scripts/check-types.mjs');
+    ended.push('type'); types.emit('close', null, 'SIGTERM');
+    await Promise.resolve();
+    expect(calls).toHaveLength(4);
+    const lint = running.get('node_modules/eslint/bin/eslint.js');
+    const error = Object.assign(new Error('native failure'), { code: 'ENOENT', syscall: 'spawn node' });
+    lint.emit('error', error); lint.stderr.emit('data', Buffer.from('late stderr\n'));
+    lint.emit('close', -2, null);
+    await failed;
+    expect(calls).toEqual([
+      ['scripts/check-syntax.mjs'], ['scripts/validate-data.mjs'], ['scripts/check-types.mjs'],
+      ['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts', 'game/tools', '*config.{js,mjs,cjs}',
+        '--cache', '--cache-location', 'node_modules/.cache/eslint/.eslintcache'],
+    ]);
+    expect(api.output()).toContain('syntax out\nsyntax err\n');
+    expect(api.output()).toContain(' \n\n');
+    expect(api.output()).toContain('late stderr\n');
+    expect(api.output()).toContain('"code":7,"signal":null');
+    expect(api.output()).toContain('"code":null,"signal":"SIGTERM"');
+    expect(api.output()).toContain('"message":"native failure","code":"ENOENT"');
+    expect(api.output()).not.toContain('：OK');
   });
 });

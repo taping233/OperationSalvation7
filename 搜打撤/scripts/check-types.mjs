@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const tscPath = fileURLToPath(new URL('../node_modules/typescript/bin/tsc', import.meta.url));
 const configs = TYPE_CONFIGS;
 
-// configs 清单中的配置彼此独立：并行跑，按原顺序汇报，任何失败都让整体退出非零。
+// configs 清单中的配置彼此独立：逐个跑，按原顺序汇报，任何失败都让整体退出非零。
 function runConfig(config) {
   return new Promise(resolve => {
     const child = spawn(process.execPath, [tscPath, '--noEmit', '-p', config, '--pretty', 'false'],
@@ -18,7 +18,17 @@ function runConfig(config) {
   });
 }
 
-const results = await Promise.all(configs.map(runConfig));
+const results = [];
+const errors = [];
+for (const config of configs) {
+  try {
+    results.push(await runConfig(config));
+  } catch (error) {
+    errors.push(error);
+  }
+}
+// Unexpected rejections must not prevent attempts of the remaining configs.
+if (errors.length) throw errors[0];
 let failed = false;
 for (const result of results) {
   process.stdout.write(`Type-checking ${result.config}\n`);

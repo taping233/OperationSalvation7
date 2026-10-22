@@ -1,0 +1,6 @@
+
+> codename7-soudache-game@0.60.0 assets:audit
+> node scripts/asset-audit.cjs --check
+
+Manifest drift: {"unlisted":533,"ghost":33,"license-pending":4}
+Asset check: 0 errors, 570 unchanged historical warnings (docs/asset-audit-debt.json)

@@ -1,8 +1,80 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1601,
+  "count": 1610,
   "assets": [
+    {
+      "path": "scenes/map-environment-1021/outskirts-simple.webp",
+      "ext": "webp",
+      "bytes": 76516,
+      "sha256": "0f3e4d1b3173c0fc2091c70434a11257058debd07afd8faf690ed381f6babddc",
+      "license": "老板授权生成的项目环境素材；Codex内置ImageGen生成；来源见同目录README.md与prompts.json",
+      "source": "docs/evidence/2026-10-21-map-decoration/assets.json"
+    },
+    {
+      "path": "scenes/map-environment-1021/watchline-simple.webp",
+      "ext": "webp",
+      "bytes": 82298,
+      "sha256": "d416aa3db47e9e005f2119d8b8fd48fb2383ed89533d228e6d1dc0b977663e9f",
+      "license": "老板授权生成的项目环境素材；Codex内置ImageGen生成；来源见同目录README.md与prompts.json",
+      "source": "docs/evidence/2026-10-21-map-decoration/assets.json"
+    },
+    {
+      "path": "scenes/map-environment-1021/ruins-simple.webp",
+      "ext": "webp",
+      "bytes": 109466,
+      "sha256": "336eeb81ef44d3f07f3727bde6266f28e3af1b1e12c23138630135c410d116e7",
+      "license": "老板授权生成的项目环境素材；Codex内置ImageGen生成；来源见同目录README.md与prompts.json",
+      "source": "docs/evidence/2026-10-21-map-decoration/assets.json"
+    },
+    {
+      "path": "scenes/map-environment-1021/core-simple.webp",
+      "ext": "webp",
+      "bytes": 109614,
+      "sha256": "66c7c6d0207b355cd3228b092d0e8bb36c652af297343172e81929e7cc4f3260",
+      "license": "老板授权生成的项目环境素材；Codex内置ImageGen生成；来源见同目录README.md与prompts.json",
+      "source": "docs/evidence/2026-10-21-map-decoration/assets.json"
+    },
+    {
+      "path": "ui/map-tools-1021/bag-v2.webp",
+      "ext": "webp",
+      "bytes": 10368,
+      "sha256": "19d0258ea69363be8fd57a19222bb8368b5e4dfcb32c08203b547c65701850fd",
+      "license": "老板授权生成的地图工具图标；Codex内置ImageGen生成；方舟节点图仅作画法参考，不直接使用原作资源（据同目录README.md与prompts.json）",
+      "source": "docs/evidence/2026-10-21-map-floating-tools/icons.json"
+    },
+    {
+      "path": "ui/map-tools-1021/safe-v2.webp",
+      "ext": "webp",
+      "bytes": 11276,
+      "sha256": "82bb782a889bc8c3797eef5f65116a9825c74bf4e6963b1bebb857f347caa775",
+      "license": "老板授权生成的地图工具图标；Codex内置ImageGen生成；方舟节点图仅作画法参考，不直接使用原作资源（据同目录README.md与prompts.json）",
+      "source": "docs/evidence/2026-10-21-map-floating-tools/icons.json"
+    },
+    {
+      "path": "ui/map-tools-1021/pocket-v2.webp",
+      "ext": "webp",
+      "bytes": 11268,
+      "sha256": "0e49c66ff29f2427a42c238528b831cf63c7e1e6610a62c0b75d77a58641719b",
+      "license": "老板授权生成的地图工具图标；Codex内置ImageGen生成；方舟节点图仅作画法参考，不直接使用原作资源（据同目录README.md与prompts.json）",
+      "source": "docs/evidence/2026-10-21-map-floating-tools/icons.json"
+    },
+    {
+      "path": "ui/map-tools-1021/focus-v2.webp",
+      "ext": "webp",
+      "bytes": 10640,
+      "sha256": "e6737899cd522e9da9044a9256c76ed55cc9580eb7dff1125afa58e08da0893a",
+      "license": "老板授权生成的地图工具图标；Codex内置ImageGen生成；方舟节点图仅作画法参考，不直接使用原作资源（据同目录README.md与prompts.json）",
+      "source": "docs/evidence/2026-10-21-map-floating-tools/icons.json"
+    },
+    {
+      "path": "ui/map-tools-1021/overview-v2.webp",
+      "ext": "webp",
+      "bytes": 11076,
+      "sha256": "c9cb6db4b607061901372c919177fdcbabe0fc30a06f3bf4877563a21fcc312f",
+      "license": "老板授权生成的地图工具图标；Codex内置ImageGen生成；方舟节点图仅作画法参考，不直接使用原作资源（据同目录README.md与prompts.json）",
+      "source": "docs/evidence/2026-10-21-map-floating-tools/icons.json"
+    },
     {
       "path": "scenes/fire-rest-1021/city-campfire.webp",
       "bytes": 58868,

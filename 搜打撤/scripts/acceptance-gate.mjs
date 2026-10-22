@@ -127,27 +127,45 @@ function runNode(args, label, opts = {}) {
 
 function runNodeCaptured(args, label) {
   return new Promise(resolve => {
-    const child = spawn(process.execPath, args, { cwd: PROJECT_ROOT, stdio: ['ignore', 'pipe', 'pipe'] });
-    let output = '';
+    let child;
+    try {
+      child = spawn(process.execPath, args, { cwd: PROJECT_ROOT, stdio: ['ignore', 'pipe', 'pipe'] });
+    } catch (error) {
+      resolve({ label, ok: false, output: '', code: null, signal: null, error });
+      return;
+    }
+    let output = '', spawnError = null;
     child.stdout.on('data', chunk => { output += chunk.toString('utf8'); });
     child.stderr.on('data', chunk => { output += chunk.toString('utf8'); });
-    child.on('error', error => resolve({ label, ok: false, output: String(error) }));
-    child.on('close', code => resolve({ label, ok: code === 0, output }));
+    // close follows error and drained stdio: keep both the native failure and all output.
+    child.on('error', error => { spawnError = error; });
+    child.on('close', (code, signal) => resolve({
+      label, ok: !spawnError && code === 0, output, code, signal, error: spawnError,
+    }));
   });
 }
 
 async function runStaticChecks() {
-  process.stdout.write('[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint\n');
+  process.stdout.write('[gate] 静态检查分阶段：语法 / 数据并行，然后类型、ESLint依次执行\n');
   const results = await Promise.all([
     runNodeCaptured(['scripts/check-syntax.mjs'], '语法检查'),
     runNodeCaptured(['scripts/validate-data.mjs'], '内容数据检查'),
-    runNodeCaptured(['scripts/check-types.mjs'], '类型契约检查'),
-    runNodeCaptured(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts', 'game/tools', '*config.{js,mjs,cjs}',
-      '--cache', '--cache-location', 'node_modules/.cache/eslint/.eslintcache'], 'ESLint'),
   ]);
+  // Collect every result before failing; heavy checks must not overlap.
+  results.push(await runNodeCaptured(['scripts/check-types.mjs'], '类型契约检查'));
+  results.push(await runNodeCaptured(['node_modules/eslint/bin/eslint.js', 'game/src', 'tests', 'scripts', 'game/tools', '*config.{js,mjs,cjs}',
+      '--cache', '--cache-location', 'node_modules/.cache/eslint/.eslintcache'], 'ESLint'));
   for (const result of results) {
     process.stdout.write('[gate] ' + result.label + '：' + (result.ok ? 'OK' : 'FAIL') + '\n');
-    if (result.output.trim()) process.stdout.write(result.output + '\n');
+    if (result.output) process.stdout.write(result.output + '\n');
+    if (!result.ok) {
+      const error = result.error;
+      process.stdout.write('[gate] 子进程结果：' + JSON.stringify({
+        code: result.code, signal: result.signal,
+        error: error ? { name: error.name, message: error.message, code: error.code,
+          errno: error.errno, syscall: error.syscall, path: error.path, spawnargs: error.spawnargs } : null,
+      }) + '\n');
+    }
   }
   const failed = results.filter(result => !result.ok);
   if (failed.length) throw new Error(failed.map(result => result.label).join('、') + ' 失败');
