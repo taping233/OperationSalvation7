@@ -1,0 +1,15 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/agent-command-results.test.js (36 tests) 820ms
+ ✓ tests/overlay-dialog.test.js (14 tests) 1667ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening  894ms
+ ✓ tests/action-dispatch.test.js (23 tests) 636ms
+
+ Test Files  3 passed (3)
+      Tests  73 passed (73)
+   Start at  14:45:26
+   Duration  13.98s (transform 1.19s, setup 0ms, collect 3.43s, tests 3.12s, environment 6.06s, prepare 545ms)
+
+EXIT_CODE=0

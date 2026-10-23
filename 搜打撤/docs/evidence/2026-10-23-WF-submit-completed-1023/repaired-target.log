@@ -1,0 +1,460 @@
+
+> codename7-soudache-game@0.60.0 test:target
+> node scripts/acceptance-gate.mjs --target-tests tests/bag-structured-use.test.js tests/battle-rules-settlement.test.js tests/boot.test.js tests/e8-card-migration.test.js tests/exp003-extraction-pocket-copy.test.js tests/icon-hydration.test.js tests/node-retrigger.test.js tests/potion-tip.test.js tests/runtime-asset-redundancy.test.js tests/shop-detail-focus.test.js tests/bag-safe-transfer.test.js tests/action-dispatch.test.js
+
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/potion-tip.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/boot.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+
+stderr | tests/potion-tip.test.js > 药水文字说明与使用确认 > 真实启动后悬停/按住只读，点击查看可取消，确认后仅使用一次
+[music] load failed battle No codec support for selected audio sources.
+
+stderr | tests/potion-tip.test.js
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 商店关闭不消耗，离开所在格才变普通
+[music] load failed shop No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 商店关闭不消耗，离开所在格才变普通
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > wood满包可暂离、真实存读档与离开重进保留未领奖；腾格领取只结算一次
+[SDT.Art] missing asset mapping: class:武
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not mark or pollute cache on throw save failure
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: save failure
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:310:90)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.saveAll (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:172:26)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:316:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not mark or pollute cache on storage-write save failure
+[cards] 自定义卡库保存失败（存储空间可能已满）： Error: quota
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:313:32)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.setItem (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.saveAll (D:\素材\代号柒\搜打撤\game\src\cards\cards.js:174:22)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:172:26)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:316:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > retries marker failure without another card save
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: marker write
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:324:33)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.setItem (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:175:22)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:326:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not interpret sdt-cards-e8-fixed-heal-bag-rules-v1-seeded read failure as an unmarked empty library
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: read failure
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:336:37)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:123:26)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:338:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not interpret sdt-cards-v1 read failure as an unmarked empty library
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: read failure
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:336:37)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:127:34)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:338:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not stamp an absent, empty, corrupt or ambiguous library: {bad
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:129:34)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:345:13
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > preserves external replacement when original saveAll sees a concurrent change
+[cards] 检测到卡牌库已被其他标签页或外部修改，本次写回已放弃（不覆盖新数据）；下次读取将自动刷新到最新库
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > will not mark a previously degraded corrupt cache after storage is replaced
+[cards] 自定义卡库串损坏，已降级为空库并暂停所有卡库写回（含启动自动播种）。原串已备份到 sdt-cards-corrupt。人工恢复：localStorage.setItem('sdt-cards-v1', localStorage.getItem('sdt-cards-corrupt')) 后刷新页面
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not stamp after successful save followed by read-failure
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: post-save read
+    at Object.<anonymous> (D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:400:67)
+    at Object.mockCall (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (D:\素材\代号柒\搜打撤\game\src\cards\cards.sync.js:173:28)
+    at D:\素材\代号柒\搜打撤\tests\e8-card-migration.test.js:403:11
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算
+[SDT.Art] missing asset mapping: card:martial-melee
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算
+[music] load failed battle No codec support for selected audio sources.
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 唯一敌人也需确认目标；键盘选中可取消且确认前不扣资源
+[music] load failed battle No codec support for selected audio sources.
+
+stderr | tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触
+[music] load failed board No codec support for selected audio sources.
+
+····················································································x································································x··························
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > preserves 195 historical exclusions and adds exactly 91 source-retained images
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "Changed/missing slot-weather selector; retaining its reviewed assets.",
++   "Changed/missing transitions selector; retaining its reviewed assets.",
++ ]
+
+ ❯ tests/runtime-asset-redundancy.test.js:152:30
+    150|         `scenes/chests/${kind}-rig-640-v1/frame-${String(frame).padSta…
+    151|     const current = collectReviewedRuntimeAssetExclusions(projectRoot);
+    152|     expect(current.warnings).toEqual([]);
+       |                              ^
+    153|     expect(current.excludedAssets.size).toBe(286);
+    154|     for (const asset of current.excludedAssets) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/shop-detail-focus.test.js > shop detail covered-region focus isolation > excludes covered shelf controls and merchant actions but keeps the visible header/footer
+AssertionError: expected [ <button …(4)></button>, …(3) ] to include <button data-act="help"></button>
+ ❯ tests/shop-detail-focus.test.js:44:24
+     42|     expect(focusables).not.toContain(host.querySelector('.shop-board i…
+     43|     expect(focusables.some(node => node.closest('.shop-board, .shop-me…
+     44|     expect(focusables).toContain(host.querySelector('[data-act=help]')…
+       |                        ^
+     45|     expect(focusables).toContain(host.querySelector('[data-act=closeSh…
+     46|     expect(focusables).toContain(host.querySelector('.shop-detail [dat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 10 passed (12)
+      Tests  2 failed | 174 passed (176)
+   Start at  17:50:56
+   Duration  23.66s (transform 2.58s, setup 0ms, collect 16.20s, tests 32.41s, environment 8.89s, prepare 1.29s)
+
+[gate] FAIL：指定 Vitest 失败（exit 1）

@@ -1,0 +1,7 @@
+npm error code EBUSY
+npm error syscall copyfile
+npm error path D:\素材\代号柒\搜打撤\node_modules\@rollup\rollup-win32-x64-msvc\rollup.win32-x64-msvc.node
+npm error dest D:\素材\代号柒\搜打撤\node_modules\@rollup\.rollup-win32-x64-msvc-SbQHlLW5\rollup.win32-x64-msvc.node
+npm error errno -4082
+npm error EBUSY: resource busy or locked, copyfile 'D:\素材\代号柒\搜打撤\node_modules\@rollup\rollup-win32-x64-msvc\rollup.win32-x64-msvc.node' -> 'D:\素材\代号柒\搜打撤\node_modules\@rollup\.rollup-win32-x64-msvc-SbQHlLW5\rollup.win32-x64-msvc.node'
+npm error A complete log of this run can be found in: C:\Users\太平\AppData\Local\npm-cache\_logs\2026-10-23T05_42_20_730Z-debug-0.log

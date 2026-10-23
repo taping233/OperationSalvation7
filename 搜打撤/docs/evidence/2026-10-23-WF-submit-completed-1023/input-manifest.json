@@ -1,0 +1,465 @@
+{
+  "head": "ed0cf08d3eab57d47e56eb003eeb991353ec68c5",
+  "source": [
+    "搜打撤/docs/PARALLEL-REGISTRY.md",
+    "搜打撤/docs/rules.md",
+    "搜打撤/game/css/archive-back.css",
+    "搜打撤/game/css/base-camp-rework.css",
+    "搜打撤/game/css/base-camp-roster.css",
+    "搜打撤/game/css/base-framework-v7.css",
+    "搜打撤/game/css/character-cover.css",
+    "搜打撤/game/css/character-view-motion.css",
+    "搜打撤/game/css/expedition-roster.css",
+    "搜打撤/game/css/home-linked-interactions.css",
+    "搜打撤/game/css/page-loading.css",
+    "搜打撤/game/css/page-visual-ready.css",
+    "搜打撤/game/css/roster-departure-v2.css",
+    "搜打撤/game/css/roster-reference.css",
+    "搜打撤/game/css/transition-handoff.css",
+    "搜打撤/game/css/transition-illustrations.css",
+    "搜打撤/game/index.html",
+    "搜打撤/game/src/agent/agent.action-router.js",
+    "搜打撤/game/src/agent/agent.surface.js",
+    "搜打撤/game/src/battle/runtime/battle.action-runner.js",
+    "搜打撤/game/src/battle/runtime/battle.clock.js",
+    "搜打撤/game/src/core/map-node-state.js",
+    "搜打撤/game/src/generated/art-manifest.js",
+    "搜打撤/game/src/hub/game.bag.js",
+    "搜打撤/game/src/hub/game.bag.safe-transfer.js",
+    "搜打撤/game/src/hub/game.hub.depart.js",
+    "搜打撤/game/src/hub/hub.navigation-v7.js",
+    "搜打撤/game/src/run/game.run.class-choice.page.js",
+    "搜打撤/game/src/ui/action-dispatch.js",
+    "搜打撤/game/src/ui/camp-entry.js",
+    "搜打撤/game/src/ui/game.menu.pages.js",
+    "搜打撤/game/src/ui/home-linked-interactions.js",
+    "搜打撤/game/src/ui/interface-motion.js",
+    "搜打撤/game/src/ui/motion-presets.js",
+    "搜打撤/game/src/ui/overlay.js",
+    "搜打撤/game/src/ui/page-loading.js",
+    "搜打撤/game/src/ui/page-motion-profiles.js",
+    "搜打撤/game/src/ui/page-visual-ready.js",
+    "搜打撤/game/src/ui/settings-navigation.js",
+    "搜打撤/game/src/ui/transition-handoff.js",
+    "搜打撤/game/src/ui/ui.js",
+    "搜打撤/tests/action-dispatch.test.js",
+    "搜打撤/tests/agent-command-results.test.js",
+    "搜打撤/tests/archive-motion.test.js",
+    "搜打撤/tests/bag-page-lifecycle-review.test.js",
+    "搜打撤/tests/bag-safe-transfer.test.js",
+    "搜打撤/tests/battle-action-runner-readiness.test.js",
+    "搜打撤/tests/camp-entry-readiness.test.js",
+    "搜打撤/tests/cov-battle-clock.test.js",
+    "搜打撤/tests/departure-browse-state.test.js",
+    "搜打撤/tests/departure-class-confirmation.test.js",
+    "搜打撤/tests/menu-pages-lazy-entry.test.js",
+    "搜打撤/tests/overlay-dialog.test.js",
+    "搜打撤/tests/overlay-disclosure-focus.test.js",
+    "搜打撤/tests/page-loading.test.js",
+    "搜打撤/tests/page-surface-lifetime.test.js",
+    "搜打撤/tests/page-visual-readiness-sharing.test.js",
+    "搜打撤/tests/reward-capacity-organizer.test.js",
+    "搜打撤/tests/settings-page.test.js",
+    "搜打撤/tests/surface-motion.test.js"
+  ],
+  "evidence": [
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/README.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-before-main.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-before.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-final.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-source.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-targeted.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission-types.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/action-admission.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/bag-feedback.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-art-manifest-after.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-art-manifest-before.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-retest-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-retest.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-summary.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-tests.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-types.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/batch-validated-source-sha.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/battle-cancellation-design.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/browser-d009b2b2-55ea-4840-9565-060bf45fc58c-snapshot.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/copy-cleanup.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-back-controls-pool.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-back-controls-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-back-controls-sync.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-back-controls-tests.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-back-controls.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-before-sha.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-cancel-semantics.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-green.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-main-merge.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-main-sentinels.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-main-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-red.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-review-green.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-review-lazy.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-review-red.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-review.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-settings-navigation-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/entry-settings-navigation-tests.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-browser-source.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-console.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-qa.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-slot01-resume.png",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-slot02-depart.png",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/journey-ui-polish.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/navigation-source.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/navigation-tests.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/reward-before-sha.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/reward-context-merge.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/reward-context-regression.md",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/reward-context-static.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/reward-context-vitest.txt",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/service.json",
+    "搜打撤/docs/evidence/2026-10-23-WF-experience-polish-1023/task.json",
+    "搜打撤/docs/evidence/2026-10-23-candidate-merge/README.md",
+    "搜打撤/docs/evidence/2026-10-23-local-full/README.md",
+    "搜打撤/docs/evidence/2026-10-23-local-full/assets-postbuild.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/assets-postbuild.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/build-inventory.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/build-retry.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/build-retry.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/build.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/build.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/dependency-inputs.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/dependency-version-check-final.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/dependency-version-check.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/docs-check-final.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/docs-check-final.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/docs-check.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/docs-check.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/full.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/full.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/generated-art-manifest.diff.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/generated-tests.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/generated-tests.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/listeners-before.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/log-hashes.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-ci-retry.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-ci-retry.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-ci.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-ci.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-install-locked.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-install-locked.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-install.exit.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/npm-install.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/service-health-final.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/service-health.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/services-before.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/services-restored.json",
+    "搜打撤/docs/evidence/2026-10-23-local-full/source-sha.txt",
+    "搜打撤/docs/evidence/2026-10-23-local-full/vite-5173.stderr.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/vite-5173.stdout.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/vite-5200.stderr.log",
+    "搜打撤/docs/evidence/2026-10-23-local-full/vite-5200.stdout.log"
+  ],
+  "excluded": [],
+  "input": [
+    {
+      "file": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "sha256": "45aadbc337cd099e29a7ac6ec0223240b834205847e3e9b7b888911f37929efb",
+      "mtimeMs": 1792747695054.3894
+    },
+    {
+      "file": "搜打撤/docs/rules.md",
+      "sha256": "30d3d3496ace4a7399cf0e177ad3d83e76aec6e78623bdde570063f7926062a8",
+      "mtimeMs": 1792747694618.477
+    },
+    {
+      "file": "搜打撤/game/css/archive-back.css",
+      "sha256": "ad43a677b1235bfdf833592ba9b81b9e484938e03d060986f58cf05cac995d15",
+      "mtimeMs": 1792737260273.4016
+    },
+    {
+      "file": "搜打撤/game/css/base-camp-rework.css",
+      "sha256": "69aa653d50e27a8afbd676fdef10d69a59e0a99db289d82b3c1b481758063b76",
+      "mtimeMs": 1792741417243.3196
+    },
+    {
+      "file": "搜打撤/game/css/base-camp-roster.css",
+      "sha256": "a2ef25750df4b0ef5260d147866463c1834c6139a3fdacc496b9888b15b79608",
+      "mtimeMs": 1792741415189.8474
+    },
+    {
+      "file": "搜打撤/game/css/base-framework-v7.css",
+      "sha256": "f4990e874741248d2ad481d97c9312ac78a3aba2d6e28bf142f87fc870e5962f",
+      "mtimeMs": 1792741414872.399
+    },
+    {
+      "file": "搜打撤/game/css/character-cover.css",
+      "sha256": "217e3a0699f5c26d5fc00c2e63ed917a16c2fe2df24042f3c10b261cef9fd974",
+      "mtimeMs": 1792741415530.8652
+    },
+    {
+      "file": "搜打撤/game/css/character-view-motion.css",
+      "sha256": "97c30a22d03bbc92046fef8c158fec21575dcd194c8dc70a1b7adb5c194913db",
+      "mtimeMs": 1792741416916.187
+    },
+    {
+      "file": "搜打撤/game/css/expedition-roster.css",
+      "sha256": "ed29d7a79dac7607adb301081f0ffb2948123c2b1e1560cd65cedbc6af69b688",
+      "mtimeMs": 1792741415858.8438
+    },
+    {
+      "file": "搜打撤/game/css/home-linked-interactions.css",
+      "sha256": "609c2d3d93247102bea930fc9e21e9851e6284ef4618f23a7ee126f956ae135f",
+      "mtimeMs": 1792737260589.0984
+    },
+    {
+      "file": "搜打撤/game/css/page-loading.css",
+      "sha256": "71615c17478171acae72aa0f184ebde0d0751af86f7f287cac4b1313fec9dcfd",
+      "mtimeMs": 1792739240524.5144
+    },
+    {
+      "file": "搜打撤/game/css/page-visual-ready.css",
+      "sha256": "610b3a1bdadd2fec822c245d61e28ab3360298738312b4cc93f9351ca4ec6302",
+      "mtimeMs": 1792737654926.0674
+    },
+    {
+      "file": "搜打撤/game/css/roster-departure-v2.css",
+      "sha256": "e0fa882cdb972c4109e5666bcc64cac9c2aaea59188cf4c734fb74a683624587",
+      "mtimeMs": 1792741416557.4158
+    },
+    {
+      "file": "搜打撤/game/css/roster-reference.css",
+      "sha256": "668c7147c44824654b63d96f1c22feb41c9b1ce79068df8d73531bd159e69b25",
+      "mtimeMs": 1792741416207.2153
+    },
+    {
+      "file": "搜打撤/game/css/transition-handoff.css",
+      "sha256": "e720c5c1ca96bfa9c9a3862db49b41dd9c4fcdbe387a2d31c94323bce131edd2",
+      "mtimeMs": 1792737655702.0332
+    },
+    {
+      "file": "搜打撤/game/css/transition-illustrations.css",
+      "sha256": "4ca55c66d407fb86dcabe673cc58136a538d9216cc52e802a2524909561c7f99",
+      "mtimeMs": 1792739240762.1956
+    },
+    {
+      "file": "搜打撤/game/index.html",
+      "sha256": "1ff5c6893b55a698f35f4e7d99434d8fef005c3afcaebe8e6517e688c82de474",
+      "mtimeMs": 1792737824171.0996
+    },
+    {
+      "file": "搜打撤/game/src/agent/agent.action-router.js",
+      "sha256": "7005c4405808792c8e15cf1890d2b32cb84f1e06fb9a621795db92d068d5a4e5",
+      "mtimeMs": 1792738140691.9001
+    },
+    {
+      "file": "搜打撤/game/src/agent/agent.surface.js",
+      "sha256": "f3d08f0eb093a89e00dd6c4a189ff494e1dca11f8cf81d2701be03aa03c4ed87",
+      "mtimeMs": 1792738085787.6038
+    },
+    {
+      "file": "搜打撤/game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "3e923bd86e06e04c32bddfb66433c90d5d6bab78a3042995d730190830cc530d",
+      "mtimeMs": 1792739181222.2979
+    },
+    {
+      "file": "搜打撤/game/src/battle/runtime/battle.clock.js",
+      "sha256": "9585369c4c7ed858a11582f25283d8043b11dc937373822c25710cc4b39b4303",
+      "mtimeMs": 1792739180993.5671
+    },
+    {
+      "file": "搜打撤/game/src/core/map-node-state.js",
+      "sha256": "032eba7b02895dad9650c5fa72377ecd70eac2a47bc57199bc0aa067b4f2f944",
+      "mtimeMs": 1792741414479.5933
+    },
+    {
+      "file": "搜打撤/game/src/generated/art-manifest.js",
+      "sha256": "fce7ff6407be53c1d530c6dd36306d881d068232c2f9e553fe55eae1f38d990b",
+      "mtimeMs": 1792735749274.392
+    },
+    {
+      "file": "搜打撤/game/src/hub/game.bag.js",
+      "sha256": "c9befed2fdb5a7175b7faf5cb824335a9f98eb46ffb8eb59223e13a8bb04f746",
+      "mtimeMs": 1792742449657.3635
+    },
+    {
+      "file": "搜打撤/game/src/hub/game.bag.safe-transfer.js",
+      "sha256": "e0b3def57ae7f5041541b9d4c41eaceab6632fe21bb2841a743be77974a5ab63",
+      "mtimeMs": 1792742907822.3047
+    },
+    {
+      "file": "搜打撤/game/src/hub/game.hub.depart.js",
+      "sha256": "ef542e6720b3f2d80d0309479830f582b41d93702232671fbf9ec2ddf7c9f7ff",
+      "mtimeMs": 1792741414478.0615
+    },
+    {
+      "file": "搜打撤/game/src/hub/hub.navigation-v7.js",
+      "sha256": "cf765d6e69039d5a1e48d90c8282894cc6b2e34ecd65ce79a59756beba4af3e3",
+      "mtimeMs": 1792741414476.0605
+    },
+    {
+      "file": "搜打撤/game/src/run/game.run.class-choice.page.js",
+      "sha256": "0caec3718031720e1cf4ff4b2a638ce54f466da75e7e8012bb38ab496b8029ec",
+      "mtimeMs": 1792741414478.0615
+    },
+    {
+      "file": "搜打撤/game/src/ui/action-dispatch.js",
+      "sha256": "d5430b83c07606b39d3dbb2c1b6aeb8522d14620114e476f23b2bc4c631a293d",
+      "mtimeMs": 1792740511064.6365
+    },
+    {
+      "file": "搜打撤/game/src/ui/camp-entry.js",
+      "sha256": "4e5fe0e25e54ab76a231e71958bbea5de3fc963a20454e3ccfbc94aac0de6606",
+      "mtimeMs": 1792739240276.3718
+    },
+    {
+      "file": "搜打撤/game/src/ui/game.menu.pages.js",
+      "sha256": "58fffc26bb158bbf7e7e25ceb53df8bfad56313a41ac854e0c4f4e2f05dbcb50",
+      "mtimeMs": 1792738921164.9146
+    },
+    {
+      "file": "搜打撤/game/src/ui/home-linked-interactions.js",
+      "sha256": "bb80f9dc66b26526a77653207b65d14d131aa86d4e6cd4f83e57b644e9ccb890",
+      "mtimeMs": 1792738920936.5752
+    },
+    {
+      "file": "搜打撤/game/src/ui/interface-motion.js",
+      "sha256": "e280d279fc3db1119f1fd26e822b495839fe99c743f6fc9432b8c5f43e46c410",
+      "mtimeMs": 1792737733241.4468
+    },
+    {
+      "file": "搜打撤/game/src/ui/motion-presets.js",
+      "sha256": "0ce68b2d607c292e5393747198dca4622473594284a4e170302893a60293367e",
+      "mtimeMs": 1792737654610.5625
+    },
+    {
+      "file": "搜打撤/game/src/ui/overlay.js",
+      "sha256": "4f403fb8f3394a81fb4d5fee21248f9d319c9d45524134a38b5ec3bcc246791e",
+      "mtimeMs": 1792740026517.6616
+    },
+    {
+      "file": "搜打撤/game/src/ui/page-loading.js",
+      "sha256": "31602b1121c8579d0076a04793a28981316f2b5e5c8aad188c24268ebbe8b910",
+      "mtimeMs": 1792739240017.1692
+    },
+    {
+      "file": "搜打撤/game/src/ui/page-motion-profiles.js",
+      "sha256": "af39664ba123b7293da0a8260ffb9273e885ea507b696647f2942547f4954516",
+      "mtimeMs": 1792737653407.5132
+    },
+    {
+      "file": "搜打撤/game/src/ui/page-visual-ready.js",
+      "sha256": "af1ce83479f48b5b9d035d6b17557e9a0e9689e044c2bfff070a4459ca85a3ac",
+      "mtimeMs": 1792737654017.531
+    },
+    {
+      "file": "搜打撤/game/src/ui/settings-navigation.js",
+      "sha256": "04b4b498f0120b2e66fad88ea5e1584b481cd06c04ff0f80f5b5f7204826c5ef",
+      "mtimeMs": 1792738434475.5405
+    },
+    {
+      "file": "搜打撤/game/src/ui/transition-handoff.js",
+      "sha256": "682ced044dd90ea5eee0d5fd7a9be865c77f64b206859d8984062e458d34f786",
+      "mtimeMs": 1792737654308.926
+    },
+    {
+      "file": "搜打撤/game/src/ui/ui.js",
+      "sha256": "0b200e1cf0063f05e307c73c203887d18868ca5c1569e802af37c9875d1c05cd",
+      "mtimeMs": 1792737622621.8481
+    },
+    {
+      "file": "搜打撤/tests/action-dispatch.test.js",
+      "sha256": "9b277cb74a73e14a63abf9e9f09608e654680c8962d691f6952e23c0811596c4",
+      "mtimeMs": 1792740511333.1833
+    },
+    {
+      "file": "搜打撤/tests/agent-command-results.test.js",
+      "sha256": "3fe948c3d4be141b61514522fb55e6c13c5138de0c07f7c74f14a98538e3a3bf",
+      "mtimeMs": 1792738140899.948
+    },
+    {
+      "file": "搜打撤/tests/archive-motion.test.js",
+      "sha256": "c393011113508307ba2d3dd7b98e93c59babc1b71c8e8fadddcff90af02a7966",
+      "mtimeMs": 1792739972920.644
+    },
+    {
+      "file": "搜打撤/tests/bag-page-lifecycle-review.test.js",
+      "sha256": "b70bdc864cfd159ae1eb3edc61cd40e776acb0f3bd72a343a394cf7878930835",
+      "mtimeMs": 1792743455372.2778
+    },
+    {
+      "file": "搜打撤/tests/bag-safe-transfer.test.js",
+      "sha256": "813f8b801c8d4dbdf3e642c698dabc41020cf363ffbb81bd4c08cbeb73133642",
+      "mtimeMs": 1792742593818.6108
+    },
+    {
+      "file": "搜打撤/tests/battle-action-runner-readiness.test.js",
+      "sha256": "a889ac4bef518ede8465190e74d91e15cdcaec49ad4e28b29fa4157d9ab8aa24",
+      "mtimeMs": 1792739181682.2915
+    },
+    {
+      "file": "搜打撤/tests/camp-entry-readiness.test.js",
+      "sha256": "072cb0c2dddf562e741ab54e8a3659ec460e82d39bb5c9c1e2b753c842af9bca",
+      "mtimeMs": 1792739973179.3843
+    },
+    {
+      "file": "搜打撤/tests/cov-battle-clock.test.js",
+      "sha256": "17793245a05992de039d111ed969252c03a2f38f29b0e8db4faba8eb6eaeb3c7",
+      "mtimeMs": 1792740856839.2417
+    },
+    {
+      "file": "搜打撤/tests/departure-browse-state.test.js",
+      "sha256": "85dd0dab9de071da37a1e5d9bb030d92d96f9419de8599f0180828eb0224409f",
+      "mtimeMs": 1792741417557.53
+    },
+    {
+      "file": "搜打撤/tests/departure-class-confirmation.test.js",
+      "sha256": "f9d94e4c7d84e26101b61d546d09aebddf923c79f5c6e13a5199c446840f4d8b",
+      "mtimeMs": 1792741417913.2004
+    },
+    {
+      "file": "搜打撤/tests/menu-pages-lazy-entry.test.js",
+      "sha256": "125e348c07565ebcdf125e2df93101b58a1d6f8657e933113abac37c406c6879",
+      "mtimeMs": 1792739009234.6091
+    },
+    {
+      "file": "搜打撤/tests/overlay-dialog.test.js",
+      "sha256": "b637863c23e57386183836a5e0d894c7306f4f28af129ceb222a4f35f9eb622e",
+      "mtimeMs": 1792739009021.0925
+    },
+    {
+      "file": "搜打撤/tests/overlay-disclosure-focus.test.js",
+      "sha256": "73153d0d82fbe79f97c8fe5ce10f81e3d6cc068e2cceced41cf027cae974c6d3",
+      "mtimeMs": 1792740026764.661
+    },
+    {
+      "file": "搜打撤/tests/page-loading.test.js",
+      "sha256": "5009d7930cbd93b3c9f0d9d330659ccf87b3897446e3e7e4863fb63abe876459",
+      "mtimeMs": 1792739240990.2297
+    },
+    {
+      "file": "搜打撤/tests/page-surface-lifetime.test.js",
+      "sha256": "0294d43b988499c270a7109e5b228567f11a0fe68f5ab5226af7563e44f84237",
+      "mtimeMs": 1792737702107.911
+    },
+    {
+      "file": "搜打撤/tests/page-visual-readiness-sharing.test.js",
+      "sha256": "bd3323758b4d7d7f632627d5c1e3492144396ca2a32e847b22cc2ee12f864599",
+      "mtimeMs": 1792741145727.614
+    },
+    {
+      "file": "搜打撤/tests/reward-capacity-organizer.test.js",
+      "sha256": "28c20f8bce988acd67f113fe51b3af31592534f62768d5f3794ee35ac008f751",
+      "mtimeMs": 1792736132561.358
+    },
+    {
+      "file": "搜打撤/tests/settings-page.test.js",
+      "sha256": "78277228ed551dbb9abca7e51499bc46f15c9cb5e1d5635627bce6f799f8d252",
+      "mtimeMs": 1792738434717.865
+    },
+    {
+      "file": "搜打撤/tests/surface-motion.test.js",
+      "sha256": "b8dda7f5cb190a32fcb81b32e00bdf7dc7e609c781b473c2d708b40294d98519",
+      "mtimeMs": 1792737733505.2854
+    }
+  ]
+}

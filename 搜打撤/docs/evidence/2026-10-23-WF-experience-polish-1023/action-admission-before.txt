@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤/.tmp/polish-1023/project
+
+ ↓ tests/agent-command-results.test.js (29 tests | 29 skipped)
+
+ Test Files  1 skipped (1)
+      Tests  29 skipped (29)
+   Start at  14:40:53
+   Duration  5.19s (transform 1.00s, setup 0ms, collect 2.96s, tests 0ms, environment 1.79s, prepare 180ms)
+
+EXIT_CODE=0

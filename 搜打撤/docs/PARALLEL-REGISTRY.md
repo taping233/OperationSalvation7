@@ -8,7 +8,6 @@
 
 ## 活跃登记
 
-Friday / 完成改动提交受理 WF-submit-completed-1023：老板授权全部完成未提交内容分组提交；冻结当前源码/测试、相关规则与三批自有证据，排除旧备份、PV、中间文件及待决内容；先验收后正常提交，不推送，不接续已暂停的体验开发。
 
 
 
@@ -27,7 +26,6 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（核心体验持续打磨 WF-experience-polish-1023，会话01a16744） | 主代理：ui导航/就绪/切幕及对应CSS；entry_audit：公共返回/overlay及集中验收；run_logic_audit：动作分发、agent、battle/runtime，现文案片class-choice.page、hub.depart、hub.navigation-v7、core/map-node-state及对应闲置CSS/直接测试；journey_qa：hub/game.bag、安全格操作切片及直接测试；自有docs/evidence/2026-10-23-WF-experience-polish-1023/、.tmp/polish-1023/；5357/PID1368/exec66734，cwd 搜打撤 | 老板授权整体游戏思路、底层代码与前端美术两层持续打磨；公共机制优先，6.1-sol/high实施验证，本地STS2参考；不改他人资源清单；先整批修改再集中验收 | 2026-10-23 | 完成未提交（编辑释放）：原会话已按老板要求暂停；公共机制559例已验，安全格替换及5处文案/闲置样式已实现；本次受理统一提交验收，疑似双过场未解决，实页按要求未做；原5357服务保留 |
 | Friday（历史规则查询集中验收 WF-catalog-lookup-1021） | `game/src/cards/builtin-card-execution.js`、`tests/builtin-migration-lookup.test.js`、`tests/reserved-card-id-regression.test.js`、`docs/performance.md`、本条登记、`docs/evidence/2026-10-22-WF-catalog-lookup-1021/`；独立 `/tmp/catalog-lookup-acceptance-da9adae-20261021/source` / Git/index，无服务 | da9adae8基底的不可变历史表复用与既有自定义ID兼容；不改变内置规则、不启用设计/导入UI | 2026-10-22 | 本地验收完成未提交、编辑占用释放：QUICK95；独立FULL8386通过/7跳过；首次构建137保留、唯一标准重试及预算通过、资源专项116通过；实页/远端CI/推送/发布未核验；原源码、候选及前批构建/登记保留 |
 | Friday（已验证增量准备 WF-next-verified-main-1021） | `game/src/cards/cards.view.js`、`game/src/cards/card-description-links.js`、`tests/card-description-linked-zoom.test.js`、`tests/runtime-hotpaths.test.js`、`tests/card-description-single-resolution.test.js`、`game/src/battle/view/battle.view.js`、`tests/battle-persistent-stage.test.js`、`docs/architecture.md`、本条登记、`docs/evidence/2026-10-21-WF-next-verified-main-1021/`；独立 `/tmp/next-verified-main-batch-20261021/source` / Git/index，无服务 | 以17013cc/tree442bfad9完整19,532 blob为基底；卡面/正常缩放单次解析和单行陈旧父呈现续跑守卫，保留原候选证据；mock重入压力不冒充自然音频bug或速度收益；完整挂载查询R2独立保留，不混入 | 2026-10-21 | 待验收：精确候选源/测试已核；旧quick中断/失败均保留不可复用；仅适配既有VM夹具的命名导出，原断言未改；待新冻结，FULL/构建/当前窗口实页/提交推送未运行；旧云端HEAD/index及历史证据不变 |
 | Friday（奖励总览重设计 WF-reward-overview-1021） | `game/css/chest-reward-overview.css`、`game/src/ui/chest-reward-overview.js`、`game/src/ui/reward-scene-view.js`、`game/src/run/chests.js`、定向测试、dev复核页、自有证据；Vite 5301，exec会话72327，创建会话01a15dc5 | 老板授权配色、布局与阅读层级整改；保留原未提交内容及领取规则 | 2026-10-21 | 完成未提交，编辑释放；自建5301服务收官停止；老板要求删除计数后不再验证 |
@@ -70,6 +68,10 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 
 ## 近期已释放
+
+### 2026-10-23 已完成体验批次提交 / Friday WF-submit-completed-1023
+
+代码提交 bc1a0e687cea07ea3e014568a8bfdf0641196829，68文件；包含已实现的安全格替换、公共交互/导航、文案和闲置样式以及15条生成图片清单。首次隔离FULL25失败保留，经老板授权修复后定向176项与正常提交FULL8612通过/38跳过；代码编辑释放，证据见 `docs/evidence/2026-10-23-WF-submit-completed-1023/`。原体验任务保持暂停/partial，双过场未解决，实页未做，未推送。原5357/PID1368服务记录保留，本会话未停止或重新核验。
 
 ### 2026-10-23 本地依赖与完整验收 / Friday WF-local-full-1023
 

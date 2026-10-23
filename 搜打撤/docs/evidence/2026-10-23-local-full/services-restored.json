@@ -1,0 +1,23 @@
+[
+  {
+    "pid": 40140,
+    "url": "http://localhost:5173/",
+    "port": 5173,
+    "arguments": [
+      "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js"
+    ]
+  },
+  {
+    "pid": 20320,
+    "url": "http://127.0.0.1:5200/",
+    "port": 5200,
+    "arguments": [
+      "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "5200",
+      "--strictPort"
+    ]
+  }
+]

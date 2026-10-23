@@ -1,0 +1,48 @@
+
+  VITE v6.4.4  ready in 1584 ms
+
+  ➜  Local:   http://127.0.0.1:5200/
+  ➜  press h + enter to show help
+14:34:20 [vite] (client) hmr update /css/archive-back.css
+14:34:20 [vite] (client) hmr update /css/home-linked-interactions.css
+14:40:22 [vite] (client) page reload src/ui/ui.js
+14:40:53 [vite] (client) page reload src/ui/page-motion-profiles.js
+14:40:53 [vite] (client) page reload src/ui/interface-motion.js
+14:40:54 [vite] (client) page reload src/ui/page-visual-ready.js
+14:40:54 [vite] (client) page reload src/ui/transition-handoff.js
+14:40:54 [vite] (client) page reload src/ui/motion-presets.js
+14:40:54 [vite] (client) hmr update /css/page-visual-ready.css
+14:40:55 [vite] (client) hmr update /css/transition-handoff.css
+14:42:13 [vite] (client) page reload src/ui/interface-motion.js
+14:42:40 [vite] (client) page reload src/ui/overlay.js
+14:42:40 [vite] (client) page reload src/agent/agent.surface.js
+14:42:41 [vite] (client) page reload src/agent/agent.action-router.js
+14:43:44 [vite] (client) page reload index.html
+14:44:46 [vite] (client) page reload src/agent/agent.surface.js
+14:47:13 [vite] (client) page reload src/ui/overlay.js
+14:48:05 [vite] (client) page reload src/agent/agent.surface.js
+14:48:06 [vite] (client) page reload src/agent/agent.action-router.js
+14:49:00 [vite] (client) page reload src/agent/agent.action-router.js
+15:02:00 [vite] (client) page reload src/ui/home-linked-interactions.js
+15:02:01 [vite] (client) page reload src/ui/overlay.js
+15:07:20 [vite] (client) page reload src/ui/page-loading.js
+15:07:20 [vite] (client) page reload src/ui/camp-entry.js
+15:07:20 [vite] (client) hmr update /css/page-loading.css
+15:20:26 [vite] (client) page reload src/ui/overlay.js
+15:21:21 [vite] (client) page reload src/hub/game.bag.js
+15:43:34 [vite] (client) page reload src/core/map-node-state.js
+15:43:34 [vite] (client) hmr update /css/base-framework-v7.css
+15:43:36 [vite] (client) hmr update /css/roster-reference.css
+15:43:37 [vite] (client) hmr update /css/base-camp-rework.css
+15:44:35 [vite] (client) page reload src/hub/game.bag.js
+15:57:16 [vite] (client) page reload src/hub/game.bag.js
+16:00:49 [vite] (client) page reload src/hub/game.bag.js
+17:47:29 [vite] (client) page reload src/hub/game.bag.safe-transfer.js
+17:47:29 [vite] (client) page reload src/ui/action-dispatch.js
+17:48:49 [vite] (client) page reload src/ui/action-dispatch.js
+17:50:54 [vite] (client) page reload src/ui/action-dispatch.js
+17:50:54 [vite] scripts/runtime-asset-redundancy-review.mjs changed, restarting server...
+17:50:55 [vite] (client) Re-optimizing dependencies because lockfile has changed
+17:50:55 [vite] server restarted.
+17:52:41 [vite] scripts/runtime-asset-redundancy-review.mjs changed, restarting server...
+17:52:42 [vite] server restarted.

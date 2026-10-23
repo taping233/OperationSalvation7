@@ -1,0 +1,17 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/bag-page-lifecycle-review.test.js (86 tests) 17207ms
+   ✓ 背包旧详情/页面回调与正常返回 > 移入安全格按武术整叠所需格禁用并在动作旁解释  1046ms
+   ✓ 背包旧详情/页面回调与正常返回 > 锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包  1947ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒重绘后旧详情回调不能打开旧牌  460ms
+   ✓ 新号背包真实入口反馈 > 招式不混入散装物资，全部保留物资和生物且不单设筛选入口  301ms
+ ✓ tests/page-visual-readiness-sharing.test.js (19 tests) 90ms
+ ✓ tests/cov-battle-clock.test.js (23 tests) 18ms
+
+ Test Files  3 passed (3)
+      Tests  128 passed (128)
+   Start at  15:39:48
+   Duration  23.59s (transform 929ms, setup 0ms, collect 828ms, tests 17.32s, environment 4.37s, prepare 446ms)
+

@@ -1,0 +1,17 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/menu-pages-lazy-entry.test.js (25 tests) 3976ms
+   ✓ 菜单真实按需入口 > 诊断冷模块等待保留入口事件，热打开不制造模块等待  510ms
+   ✓ 菜单真实按需入口 > 真实离开页冷加载可取消；重试挂载也不保存，只有明确点击保存才调用一次  790ms
+   ✓ 菜单真实按需入口 > 初始静态图不反穿页面与独占渲染依赖，页面不静态依赖会话  812ms
+ ✓ tests/departure-browse-state.test.js (7 tests) 512ms
+ ✓ tests/departure-class-confirmation.test.js (10 tests) 573ms
+ ✓ tests/premium-ui-pages.test.js (9 tests) 56ms
+
+ Test Files  4 passed (4)
+      Tests  51 passed (51)
+   Start at  14:39:18
+   Duration  11.97s (transform 509ms, setup 0ms, collect 244ms, tests 5.12s, environment 4.99s, prepare 735ms)
+

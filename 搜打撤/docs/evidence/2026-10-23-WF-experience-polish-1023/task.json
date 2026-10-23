@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-experience-polish-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "以制作人主线持续打磨整体游戏思路，联动底层代码/状态/公共机制与前端美术/操作逻辑，参考本地STS2，清理冗余、修bug；先整批实现再集中验收，后续需求不冲掉主目标",
+  "paths": [
+    "docs/evidence/2026-10-23-WF-experience-polish-1023",
+    ".tmp/polish-1023",
+    "game/src/ui",
+    "game/src/agent/agent.action-router.js",
+    "game/src/agent/agent.surface.js",
+    "game/src/battle/runtime/battle.clock.js",
+    "game/src/battle/runtime/battle.action-runner.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/hub.navigation-v7.js",
+    "game/src/core/map-node-state.js",
+    "game/src/run/game.run.class-choice.page.js",
+    "game/css",
+    "game/index.html",
+    "tests"
+  ],
+  "doneWhen": [
+    "核心旅程及相关取消失败路径实页验证",
+    "确证缺陷修复并有定向回归；未覆盖明确记录",
+    "普通导航/场景转场分离，公共返回/活动层/动作准入接入实际页面",
+    "游戏规则、界面说明与操作结果一致；按完整模块批次集中验证"
+  ],
+  "stage": "partial",
+  "checks": [
+    "公共机制批次29文件559个不同用例通过；实现类型与定向静态检查通过，输入SHA及边界见batch-summary.txt",
+    "提交受理修复后：12套件176项定向通过；正常pre-commit完整门8612通过/38跳过，静态检查与资产审计通过；代码提交bc1a0e687cea07ea3e014568a8bfdf0641196829"
+  ],
+  "unverified": [
+    "原会话保持暂停；实页按老板要求未执行。",
+    "入战疑似两次过场仍未定性或修复；当前批次没有宣称解决。",
+    "本批提交未推送；没有本批构建或远端CI证明。"
+  ],
+  "updatedAt": "2026-10-23T10:02:51.660Z"
+}

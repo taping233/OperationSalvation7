@@ -1,0 +1,96 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ❯ tests/agent-command-results.test.js (31 tests | 2 failed | 29 skipped) 24ms
+   × Agent command result contract > rejects an observed action disabled before execution 19ms
+     → expected { ok: true, id: 'ui:testCommand' } to match object { ok: false, …(1) }
+(1 matching property omitted from actual)
+   × Agent command result contract > an observed action cannot target a same-name button on a replacement page 4ms
+     → expected { ok: true, id: 'ui:testCommand' } to match object { ok: false, …(1) }
+(1 matching property omitted from actual)
+   ↓ Agent command result contract > rejects explicit false from a real registered UI callback
+   ↓ Agent command result contract > preserves a structured business rejection
+   ↓ Agent command result contract > preserves the real BattleSession cancellation void contract
+   ↓ Agent command result contract > accepts legacy synchronous result true
+   ↓ Agent command result contract > accepts legacy synchronous result undefined
+   ↓ Agent command result contract > turns synchronous exceptions into a serializable failure
+   ↓ Agent command result contract > keeps synchronous move rejection routing
+   ↓ Agent command result contract > allows a synchronous command to change its own run ownership
+   ↓ Agent command result contract > returns only serializable acceptance from act and handles an unawaited rejection
+   ↓ Agent command result contract > waits for the registered asynchronous callback before settling the step
+   ↓ Agent command result contract > reports asynchronous false as a completed failure
+   ↓ Agent command result contract > reports asynchronous structured rejection as a completed failure
+   ↓ Agent command result contract > reports asynchronous rejected Promise as a completed failure
+   ↓ Agent command result contract > stops autoRun after a timeout and ignores the late failure without retrying
+   ↓ Agent command result contract > does not execute a pending decision after same-seed new run
+   ↓ Agent command result contract > does not execute a pending decision after slot switch
+   ↓ Agent command result contract > does not execute a pending decision after exit
+   ↓ Agent command result contract > does not execute a pending decision after nest generation
+   ↓ Agent command result contract > discards old-run completion false without failure-memory writes
+   ↓ Agent command result contract > discards old-run completion true without failure-memory writes
+   ↓ Agent command result contract > does not write an old-page rejection over the new-page failure
+   ↓ Agent command result contract > accepts real enterSlot completion (saved run = true) and strips its ownership proof
+   ↓ Agent command result contract > accepts real enterSlot completion (saved run = false) and strips its ownership proof
+   ↓ Agent command result contract > reports real enterSlot load failure without claiming completion success
+   ↓ Agent command result contract > reports real enterSlot recovery rejection without attempting load
+   ↓ Agent command result contract > rejects a real enterSlot proof if another run replaces it before delivery
+   ↓ Agent command result contract > does not accept ownership proofs from other commands
+   ↓ Agent command result contract > rejects an enterSlot proof for a different requested slot
+   ↓ Agent command result contract > stops if an external run replaces the command during settle handoff
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/agent-command-results.test.js > Agent command result contract > rejects an observed action disabled before execution
+AssertionError: expected { ok: true, id: 'ui:testCommand' } to match object { ok: false, …(1) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "UI_ACTION_UNAVAILABLE",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/agent-command-results.test.js:83:27
+     81|     const observed = collectUiActions().find(item => item.name === 'te…
+     82|     document.querySelector('[data-act="testCommand"]').disabled = true;
+     83|     expect(act(observed)).toMatchObject({ ok:false, code:'UI_ACTION_UN…
+       |                           ^
+     84|     expect(callback).not.toHaveBeenCalled();
+     85|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/agent-command-results.test.js > Agent command result contract > an observed action cannot target a same-name button on a replacement page
+AssertionError: expected { ok: true, id: 'ui:testCommand' } to match object { ok: false, …(1) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "code": "UI_ACTION_UNAVAILABLE",
+-   "ok": false,
++   "ok": true,
+  }
+
+ ❯ tests/agent-command-results.test.js:91:27
+     89|     document.getElementById('ovBody').innerHTML = '<button data-act="t…
+     90|     const callback = window.SDT.UI._acts.testCommand = vi.fn();
+     91|     expect(act(observed)).toMatchObject({ ok:false, code:'UI_ACTION_UN…
+       |                           ^
+     92|     expect(callback).not.toHaveBeenCalled();
+     93|     expect(act(collectUiActions().find(item => item.name === 'testComm…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 29 skipped (31)
+   Start at  14:41:57
+   Duration  5.12s (transform 951ms, setup 0ms, collect 2.93s, tests 24ms, environment 1.78s, prepare 155ms)
+
+EXIT_CODE=1

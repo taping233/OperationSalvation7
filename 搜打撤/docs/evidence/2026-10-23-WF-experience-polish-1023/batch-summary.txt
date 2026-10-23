@@ -1,0 +1,23 @@
+集中验收：2026-10-23，安全格换入/换出新片之前的冻结版本
+
+最终：29个测试文件、559个不同用例通过。未执行全量、build、提交、推送或浏览器。
+
+首轮：batch-tests.txt，29文件559例，26文件通过、3文件7例失败，另1条未处理拒绝，退出1。
+补验：batch-retest.txt，仅原3个失败文件，128例全部通过，退出0，无未处理错误。
+复用：首轮另外26个文件431例的有效通过证据，未重复执行；431+128=559。
+
+失败分类与作者修正：
+1. page-visual-readiness-sharing：2例要求设置rich city cut，是被本批取消的旧规格；修改为导航不挂城市幕，同时保留单次资源扫描、解码前不揭幕、共享准备门与清理约束。首轮未处理拒绝来自失败断言，不是另一个生产异常。
+2. cov-battle-clock：2例turbo模式timer计数多1来自setTurbo写localStorage后jsdom派发storage事件的0ms setup timer；在创建被测任务之前排空setup事件，仍断言取消回调不执行且timer为0。生产clock与runner未改。
+3. bag-page-lifecycle-review：新例误将开包toggle当刷新，改真实页内安全格流程；旧fixture补共享_overlayInteractionRoot；旧帮助断言补1/3与初攻/职业撤离例外和局内复原。生产game.bag.js未改。
+
+集中静态：
+- batch-static.txt：20份本批源码+17份直接测试ESLint/JS解析，6份CSS解析与定向diff检查通过，退出0。
+- batch-types.txt：jsconfig.runtime.json实现类型基线通过，退出0；未执行全量类型覆盖探针。
+- batch-retest-static.txt：3份修正测试的ESLint、JS解析与diff检查通过，退出0。
+- batch-art-manifest-before.txt、batch-art-manifest-after.txt：他人art-manifest SHA256保持FCE7FF6407BE53C1D530C6DD36306D881D068232C2F9E553FE55EAE1F38D990B。
+- batch-validated-source-sha.txt：保存最终57项源码、测试、CSS及运行配置输入SHA，便于后续按变化边界复用证据。
+
+覆盖：普通/场景导航策略、冷入口与旧切幕、五处公共返回、内层dialog取消/focus/Tab归属、UI正文/特写footer/Agent三入口准入、时钟取消与完成Promise、背包容量失败反馈/帮助、契约和架构边界。
+
+边界：真实窗口首帧、动效观感与实际输入结果由统筹内置浏览器另验。本次未同步副本。安全格原子换入/换出新需求不在该559例最终版本内；补验结束及输入SHA保存后已通知journey_qa放行新片，后续只对其变化范围追加集中验收。

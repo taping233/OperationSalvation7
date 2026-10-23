@@ -1,0 +1,14 @@
+[
+  {
+    "ProcessId": 3224,
+    "ParentProcessId": 14768,
+    "Name": "node.exe",
+    "CommandLine": "\"node\"   \"D:\\素材\\代号柒\\搜打撤\\node_modules\\.bin\\\\..\\vite\\bin\\vite.js\" "
+  },
+  {
+    "ProcessId": 23304,
+    "ParentProcessId": 44476,
+    "Name": "node.exe",
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\bin\\vite.js --host 127.0.0.1 --port 5200 --strictPort"
+  }
+]

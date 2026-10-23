@@ -1,0 +1,38 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤/.tmp/polish-1023/project
+
+stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 网络失败保留基地原按钮，释放cover/缓存后同按钮可重试
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\game\src\run\game.run.class-choice.js:68:18)
+    at D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\game\src\ui\page-loading.js:80:22 {
+  cause: Error: offline
+      at D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\tests\class-choice-lazy-entry.test.js:123:74
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 直接newRun失败提供重试，重试只开选角，不重新准备出征
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\game\src\run\game.run.class-choice.js:68:18)
+    at D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\game\src\ui\page-loading.js:80:22 {
+  cause: Error: offline
+      at D:\素材\代号柒\搜打撤\.tmp\polish-1023\project\tests\class-choice-lazy-entry.test.js:137:19
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+ ✓ tests/class-choice-lazy-entry.test.js (22 tests) 6633ms
+   ✓ 选角真实按需叶入口 > 人物页挂载后同一步添加入口切幕，不等载入流程释放  407ms
+   ✓ 选角首屏边界守卫 > 叶实现/人物动效不在main静态闭包，门面仅字面量动态加载，无idle预取  3851ms
+
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+   Start at  14:11:15
+   Duration  10.44s (transform 232ms, setup 0ms, collect 138ms, tests 6.63s, environment 2.66s, prepare 378ms)
+

@@ -1,0 +1,11 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/departure-class-confirmation.test.js (12 tests) 711ms
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  14:41:16
+   Duration  3.82s (transform 111ms, setup 0ms, collect 59ms, tests 711ms, environment 2.47s, prepare 255ms)
+

@@ -1,0 +1,66 @@
+{
+  "actions": [
+    {
+      "detail": "档01补给、相邻战斗、奖励、背包、保存退出续玩；档02选人整备离页返回及正常出发。无状态注入。",
+      "type": "real-input"
+    },
+    {
+      "detail": "截图为档01战后续玩和档02正常出征，DOM是最终保存退出后的标题。",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "mStart"
+      },
+      "identity": "mStart",
+      "key": "start",
+      "rect": {
+        "height": 72,
+        "width": 358.3999938964844,
+        "x": 84.4749984741211,
+        "y": 287.70001220703125
+      },
+      "selector": "#mStart",
+      "styles": {
+        "display": "flex"
+      },
+      "tag": "BUTTON",
+      "text": "\n            \n            进入城市\n            \n            \n              \n                \n                \n                \n              \n              \n              \n              \n              \n              \n              \n              \n                \n                \n              \n              \n              \n            \n          01"
+    }
+  ],
+  "observedAt": "2026-10-23T06:20:29.284Z",
+  "page": {
+    "origin": "http://127.0.0.1:5357",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "journey-qa-returned-title",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-23-WF-experience-polish-1023/journey-slot01-resume.png",
+    "docs/evidence/2026-10-23-WF-experience-polish-1023/journey-slot02-depart.png"
+  ],
+  "selectors": [
+    {
+      "key": "start",
+      "selector": "#mStart"
+    }
+  ]
+}

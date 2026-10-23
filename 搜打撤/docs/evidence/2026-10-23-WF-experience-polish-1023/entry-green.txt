@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤/.tmp/polish-1023/project
+
+ ✓ tests/departure-class-confirmation.test.js (7 tests) 770ms
+   ✓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，教学等待：null）  351ms
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  14:05:45
+   Duration  4.69s (transform 159ms, setup 0ms, collect 83ms, tests 770ms, environment 2.91s, prepare 350ms)
+

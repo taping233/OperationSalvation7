@@ -1,0 +1,45 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤/.tmp/polish-1023/project
+
+ ❯ tests/departure-class-confirmation.test.js (10 tests | 2 failed | 7 skipped) 281ms
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：null）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：true，转场完成：true，等待情形：null）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：false，等待情形：null）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：source-page）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：hidden）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：run）
+   ↓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：true，转场完成：true，等待情形：deferred-new-run）
+   ✓ 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：true，转场完成：true，等待情形：deferred-stale-page） 183ms
+   × 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：before-hidden） 50ms
+     → expected true to be false // Object.is equality
+   × 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：before-run） 46ms
+     → expected true to be false // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/departure-class-confirmation.test.js > 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：before-hidden）
+ FAIL  tests/departure-class-confirmation.test.js > 选角确认的出征整备守卫 > 整备守卫与入城边界（延迟确认：false，转场完成：true，等待情形：before-run）
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/departure-class-confirmation.test.js:111:27
+    109|         expect(showRunTransition).toHaveBeenCalledOnce(); expect(saveG…
+    110|       } else {
+    111|         expect(confirmed).toBe(false);
+       |                           ^
+    112|         expect(game.myClass).toBeNull(); expect(game.characterId).toBe…
+    113|         expect(randomClassCard).not.toHaveBeenCalled(); expect(hideOve…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed | 7 skipped (10)
+   Start at  14:08:51
+   Duration  2.24s (transform 95ms, setup 0ms, collect 53ms, tests 281ms, environment 1.50s, prepare 151ms)
+

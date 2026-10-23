@@ -1,0 +1,47 @@
+diff --git a/搜打撤/game/src/generated/art-manifest.js b/搜打撤/game/src/generated/art-manifest.js
+index 6e462ce0..97e8d8e1 100644
+--- a/搜打撤/game/src/generated/art-manifest.js
++++ b/搜打撤/game/src/generated/art-manifest.js
+@@ -693,6 +693,7 @@ export default [
+   "scenes/event-tt6-mystery.webp",
+   "scenes/event-tt6-relief.webp",
+   "scenes/event-tt6-systemsupply.webp",
++  "scenes/fire-rest-1021/city-campfire.webp",
+   "scenes/hub-wallpaper.webp",
+   "scenes/lab-ending/ending-1.webp",
+   "scenes/lab-ending/ending-2.webp",
+@@ -708,6 +709,10 @@ export default [
+   "scenes/map-brush-1015/trail-a.webp",
+   "scenes/map-brush-1015/trail-b.webp",
+   "scenes/map-brush-1015/trail-c.webp",
++  "scenes/map-environment-1021/core-simple.webp",
++  "scenes/map-environment-1021/outskirts-simple.webp",
++  "scenes/map-environment-1021/ruins-simple.webp",
++  "scenes/map-environment-1021/watchline-simple.webp",
+   "scenes/map-nodes/altar-symbol-1017-v2.webp",
+   "scenes/map-nodes/battle-symbol-foreground-1012-v5.webp",
+   "scenes/map-nodes/blank-symbol-foreground-1013-v1.webp",
+@@ -739,6 +744,11 @@ export default [
+   "scenes/transition-photo-v2.webp",
+   "scenes/transitions-1021/altar.webp",
+   "scenes/transitions-1021/door.webp",
++  "scenes/transitions-1021/emergency-exit.webp",
++  "scenes/transitions-1021/event.webp",
++  "scenes/transitions-1021/layer-passage.webp",
++  "scenes/transitions-1021/loading.webp",
++  "scenes/transitions-1021/map-return.webp",
+   "scenes/transitions-1021/retreat.webp",
+   "scenes/transitions-1021/shop.webp",
+   "scenes/ui-loop-0925/boss-arena.webp",
+@@ -904,6 +914,11 @@ export default [
+   "ui/map-hud-1015/attack-is7-v2.webp",
+   "ui/map-hud-1015/gold-is7-v2.webp",
+   "ui/map-hud-1015/health-is7-v1.webp",
++  "ui/map-tools-1021/bag-v2.webp",
++  "ui/map-tools-1021/focus-v2.webp",
++  "ui/map-tools-1021/overview-v2.webp",
++  "ui/map-tools-1021/pocket-v2.webp",
++  "ui/map-tools-1021/safe-v2.webp",
+   "ui/photo-nail-v1.png",
+   "ui/photo-studio/back.webp",
+   "ui/photo-studio/cabinet-plaque.svg",

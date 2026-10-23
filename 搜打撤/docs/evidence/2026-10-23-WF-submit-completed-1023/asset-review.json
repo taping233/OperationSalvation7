@@ -1,0 +1,15 @@
+{
+  "reviewed": "UI action delegation, menu back controls, and transition scheduling change; asset constructors, slot-weather lookup, CUT_SCENES, retained source bytes and 286 exclusion candidates unchanged.",
+  "consumers": [
+    {
+      "category": "slot-weather",
+      "file": "game/src/ui/game.menu.pages.js",
+      "sha256": "1e7881f718e735acb4b3cf482a63919eadd3ece44f40bac6ec488bd4a979251b"
+    },
+    {
+      "category": "transitions",
+      "file": "game/src/ui/camp-entry.js",
+      "sha256": "e2e93537b0345a1eda5a382d3548ef04980927bead0fbea19fd7bf4dbd8ddc55"
+    }
+  ]
+}

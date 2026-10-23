@@ -1,0 +1,385 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ❯ tests/bag-page-lifecycle-review.test.js (86 tests | 3 failed) 13929ms
+   ✓ 背包旧详情/页面回调与正常返回 > 移入安全格按武术整叠所需格禁用并在动作旁解释  787ms
+   ✓ 背包旧详情/页面回调与正常返回 > 移入安全格按装备整叠所需格禁用并在动作旁解释 125ms
+   × 背包旧详情/页面回调与正常返回 > 移回已满背包同样禁用，失败保留安全格与当前详情 151ms
+     → Cannot read properties of null (reading 'querySelector')
+   ✓ 背包旧详情/页面回调与正常返回 > 详情打开后容量变满，执行复检给警告且不收起详情或移动卡牌 167ms
+   ✓ 背包旧详情/页面回调与正常返回 > 安全格满格但已有同名叠可接收时仍允许，成功后收起详情并刷新 172ms
+   ✓ 背包旧详情/页面回调与正常返回 > 帮助区分局内复原与撤离不带回的初始攻击、职业卡 171ms
+   ✓ 背包旧详情/页面回调与正常返回 > 卡牌操作重绘背包后，特写退场完成不会令关闭按钮失效 179ms
+   ✓ 背包旧详情/页面回调与正常返回 > 神秘药水地图详情禁用，直接旧回调也不消费/回血/发金币 124ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/0张时的详情按钮和执行守卫 162ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/1张时的详情按钮和执行守卫 127ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/3张时的详情按钮和执行守卫 128ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/0张时的详情按钮和执行守卫 106ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/1张时的详情按钮和执行守卫 165ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/4张时的详情按钮和执行守卫 122ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗中的通用背包入口拒绝打开/刷新（刷新=false），不转发旧战斗背包命令 110ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗中的通用背包入口拒绝打开/刷新（刷新=true），不转发旧战斗背包命令 76ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗已经接管时，旧背包详情和底层丢弃/跨区/排序入口不能变更卡牌 87ms
+   ✓ 背包旧详情/页面回调与正常返回 > slot变化后旧道具详情不能使用新卡或关闭新详情 103ms
+   ✓ 背包旧详情/页面回调与正常返回 > seed变化后旧道具详情不能使用新卡或关闭新详情 79ms
+   ✓ 背包旧详情/页面回调与正常返回 > owned-instance变化后旧道具详情不能使用新卡或关闭新详情 111ms
+   ✓ 背包旧详情/页面回调与正常返回 > same-seed-run变化后旧道具详情不能使用新卡或关闭新详情 115ms
+   ✓ 背包旧详情/页面回调与正常返回 > page变化后旧道具详情不能使用新卡或关闭新详情 144ms
+   ✓ 背包旧详情/页面回调与正常返回 > zoom变化后旧道具详情不能使用新卡或关闭新详情 125ms
+   ✓ 背包旧详情/页面回调与正常返回 > 退出珍珠盒后旧存入和返回不改卡、不抢页面 105ms
+   ✓ 背包旧详情/页面回调与正常返回 > 退出法师锦囊后旧存入和返回不改卡、不抢页面 97ms
+   ✓ 背包旧详情/页面回调与正常返回 > 旧丢弃确认换局后不丢新局同名卡 87ms
+   ✓ 背包旧详情/页面回调与正常返回 > 帮助正常返回有效，离开帮助后旧返回不抢新页面 76ms
+   × 背包旧详情/页面回调与正常返回 > 锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包 1201ms
+     → this._overlayInteractionRoot is not a function
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒真实入口共用面板，帮助折叠、详情不搬牌 125ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊真实入口共用面板，帮助折叠、详情不搬牌 142ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒整叠超容量在动作旁显示原因且禁用 105ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊整叠超容量在动作旁显示原因且禁用 116ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒连续存取保留滚动、说明展开及安全返回焦点 166ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊连续存取保留滚动、说明展开及安全返回焦点 141ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒重绘后旧详情回调不能打开旧牌 142ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊重绘后旧详情回调不能打开旧牌 97ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒返回背包保留列表位置并定位原容器 112ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊返回背包保留列表位置并定位原容器 147ms
+   ✓ 背包旧详情/页面回调与正常返回 > 丢弃取消返回原卡，确认后返回邻卡且保留背包位置 168ms
+   ✓ 背包旧详情/页面回调与正常返回 > 正常使用与当前容器连续存取/返回保持可用 185ms
+   ✓ 背包pointer拖动取消/会话身份 > pointercancel释放全部浮影，随后pointerup不会落账 138ms
+   ✓ 背包pointer拖动取消/会话身份 > 别的pointerup不结束当前拖动，原pointer正常落入安全格 119ms
+   ✓ 背包pointer拖动取消/会话身份 > slot变化后拖动释放不改新会话 112ms
+   ✓ 背包pointer拖动取消/会话身份 > owned-instance变化后拖动释放不改新会话 112ms
+   ✓ 背包pointer拖动取消/会话身份 > same-seed-run变化后拖动释放不改新会话 133ms
+   ✓ 背包pointer拖动取消/会话身份 > page变化后拖动释放不改新会话 118ms
+   ✓ 新号背包真实入口反馈 > 招式不混入散装物资，全部保留物资和生物且不单设筛选入口 203ms
+   × 新号背包真实入口反馈 > 安全格和口袋显示真实容量张数与复原角标，伙伴及复原说明保留在帮助 128ms
+     → expected '\n        随身背包物资与卡牌混占格（装备每张占 1 格，其余同名…' to contain '撤离时每张仅 1/3 概率带回基地消耗区'
+   ✓ 新号背包真实入口反馈 > 按钮丢弃确认不误称拖拽，按反馈移除货币栏且排序按钮有名称 97ms
+   ✓ 新号背包真实入口反馈 > 通行证B结构化使用获取传说且保留棱彩与禁随机排除规则 132ms
+   ✓ 新号背包真实入口反馈 > 结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则 158ms
+   ✓ 背包键盘查看与分区焦点 > 随身详情接入完整阅读栏并在注册后捕获当前动作，不改卡牌或存档 145ms
+   ✓ 背包键盘查看与分区焦点 > 安全格与消耗区也保留全文阅读，安全格移回按钮与消耗区限制保持原语义 158ms
+   ✓ 背包键盘查看与分区焦点 > Enter 查看详情再关闭返回来源卡格，不重复触发 158ms
+   ✓ 背包键盘查看与分区焦点 >   查看详情再关闭返回来源卡格，不重复触发 174ms
+   ✓ 背包键盘查看与分区焦点 > 分区切换保留当前分区按钮焦点，口袋卡可键盘查看但不能拖动或使用 180ms
+   ✓ 背包键盘查看与分区焦点 > 卡格去掉卡面内部重复Tab停靠，不嵌套焦点控件 162ms
+   ✓ 地图道具角标与详情用途一致 > 神秘药水只描述已有地图用途，查看不消耗 169ms
+   ✓ 地图道具角标与详情用途一致 > 剧毒药水只描述已有地图用途，查看不消耗 166ms
+   ✓ 地图道具角标与详情用途一致 > 治疗药只描述已有地图用途，查看不消耗 145ms
+   ✓ 地图道具角标与详情用途一致 > 复原药只描述已有地图用途，查看不消耗 156ms
+   ✓ 地图道具角标与详情用途一致 > 通行证只描述已有地图用途，查看不消耗 155ms
+   ✓ 地图道具角标与详情用途一致 > 觉醒药只描述已有地图用途，查看不消耗 136ms
+   ✓ 地图道具角标与详情用途一致 > 混合药只描述已有地图用途，查看不消耗 172ms
+   ✓ 地图道具角标与详情用途一致 > 旧文本药只描述已有地图用途，查看不消耗 167ms
+   ✓ 地图道具角标与详情用途一致 > 未知用法只描述已有地图用途，查看不消耗 145ms
+   ✓ 地图道具角标与详情用途一致 > 战斗道具在安全格与消耗区仍优先显示原区域说明 150ms
+   ✓ shared token crafting through live stack zoom > gold recipe allocates and saves exactly once; repeated old callback is inert 162ms
+   ✓ shared token crafting through live stack zoom > fragments recipe allocates and saves exactly once; repeated old callback is inert 148ms
+   ✓ shared token crafting through live stack zoom > gold missing output never consumes, allocates, saves or logs success 133ms
+   ✓ shared token crafting through live stack zoom > fragments missing output never consumes, allocates, saves or logs success 140ms
+   ✓ shared token crafting through live stack zoom > live in-place material removal and fragment depletion are checked after opening 167ms
+   ✓ retained backpack pane across actions > drag to safe retains unaffected cards/scroll and updates source state 151ms
+   ✓ retained backpack pane across actions > drag to pearl retains unaffected cards/scroll and updates source state 143ms
+   ✓ retained backpack pane across actions > repeated retained-grid refresh binds keyboard and pointer once and reads replacement inventory 188ms
+   ✓ retained backpack pane across actions > refresh during drag clears old gesture and later pointerup cannot move inventory 160ms
+   ✓ retained backpack pane across actions > filter and sort refresh preserve control focus and correct visible cards 171ms
+   ✓ 纯治疗道具满血预览与详情一致，受伤后恢复可用（amountField=0） 188ms
+   ✓ 纯治疗道具满血预览与详情一致，受伤后恢复可用（amountField=1） 181ms
+   ✓ 结构化复原道具不靠卡牌ID判断空消耗区，加入可复原卡后恢复可用 175ms
+   ✓ 治疗加复原混合道具mixed满血=false仍可使用有效的另一项效果 151ms
+   ✓ 治疗加复原混合道具tt-crystal满血=false仍可使用有效的另一项效果 145ms
+   ✓ 治疗加复原混合道具mixed满血=true仍可使用有效的另一项效果 210ms
+   ✓ 治疗加复原混合道具tt-crystal满血=true仍可使用有效的另一项效果 175ms
+   ✓ 含null的旧结构化heal规则保守显示可用且不崩溃 158ms
+   ✓ 含null的旧结构化restoreConsumed规则保守显示可用且不崩溃 144ms
+ ✓ tests/menu-pages-lazy-entry.test.js (25 tests) 4798ms
+   ✓ 菜单真实按需入口 > 诊断冷模块等待保留入口事件，热打开不制造模块等待  324ms
+   ✓ 菜单真实按需入口 > 真实离开页冷加载可取消；重试挂载也不保存，只有明确点击保存才调用一次  1195ms
+   ✓ 菜单真实按需入口 > 初始静态图不反穿页面与独占渲染依赖，页面不静态依赖会话  1087ms
+ ✓ tests/bag-help-return-continuity.test.js (17 tests) 4500ms
+   ✓ 真实背包与帮助模块的合成交互连续性（非浏览器实页） > button 返回保留分类排序、滚动与帮助入口焦点，延后聚焦不覆盖  705ms
+stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 加载失败释放覆盖/开关/缓存；同页重试成功
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\game\src\hub\game.hub.js:93:18)
+    at D:\素材\代号柒\搜打撤\game\src\ui\page-loading.js:84:22 {
+  cause: Error: network unavailable
+      at D:\素材\代号柒\搜打撤\tests\hub-lazy-entry.test.js:212:22
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+stderr | tests/hub-lazy-entry.test.js > 基地真实按需入口 > 终局首次下载失败保留原回基地按钮，可直接再次点击重试
+[基地] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\game\src\hub\game.hub.js:93:18)
+    at D:\素材\代号柒\搜打撤\game\src\ui\page-loading.js:84:22 {
+  cause: Error: first fetch failed
+      at D:\素材\代号柒\搜打撤\tests\hub-lazy-entry.test.js:233:22
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+ ✓ tests/hub-lazy-entry.test.js (21 tests) 3725ms
+   ✓ 退役家具门面冷调用不载入 runtime、不导航、不写数据  369ms
+   ✓ 基地真实按需入口 > cards→hub→cards 旧 cards finally 不解除新 cards 注册或吞新 promise  794ms
+ ✓ tests/contracts.test.js (18 tests) 826ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  662ms
+ ✓ tests/bag-pouch-capacity.test.js (24 tests) 4296ms
+ ✓ tests/overlay-dialog.test.js (26 tests) 1853ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening  953ms
+stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 网络失败保留基地原按钮，释放cover/缓存后同按钮可重试
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\game\src\run\game.run.class-choice.js:68:18)
+    at D:\素材\代号柒\搜打撤\game\src\ui\page-loading.js:84:22 {
+  cause: Error: offline
+      at D:\素材\代号柒\搜打撤\tests\class-choice-lazy-entry.test.js:123:74
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+stderr | tests/class-choice-lazy-entry.test.js > 选角真实按需叶入口 > 直接newRun失败提供重试，重试只开选角，不重新准备出征
+[选角] 页面载入失败，可再次重试。 Error: [vitest] There was an error when mocking a module. If you are using "vi.mock" factory, make sure there are no top level variables inside, since this call is hoisted to top of the file. Read more: https://vitest.dev/api/vi.html#vi-mock
+    at ManualMockedModule.resolve (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/mocker/dist/chunk-registry.js:160:24)
+    at VitestMocker.callFunctionMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:322:19)
+    at VitestMocker.requestWithMock (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:433:11)
+    at VitestExecutor.dependencyRequest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/execute.B7h3T_Hc.js:692:18)
+    at open (D:\素材\代号柒\搜打撤\game\src\run\game.run.class-choice.js:68:18)
+    at D:\素材\代号柒\搜打撤\game\src\ui\page-loading.js:84:22 {
+  cause: Error: offline
+      at D:\素材\代号柒\搜打撤\tests\class-choice-lazy-entry.test.js:137:19
+      at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+}
+
+ ✓ tests/class-choice-lazy-entry.test.js (22 tests) 2754ms
+   ✓ 选角首屏边界守卫 > 叶实现/人物动效不在main静态闭包，门面仅字面量动态加载，无idle预取  1074ms
+ ✓ tests/surface-motion.test.js (11 tests) 1011ms
+ ✓ tests/global-ui-settings-notes.test.js (2 tests) 781ms
+ ✓ tests/agent-command-results.test.js (38 tests) 758ms
+ ✓ tests/architecture-boundaries.test.js (44 tests) 563ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  538ms
+ ✓ tests/departure-class-confirmation.test.js (12 tests) 614ms
+ ✓ tests/action-dispatch.test.js (26 tests) 771ms
+ ✓ tests/departure-browse-state.test.js (7 tests) 429ms
+ ✓ tests/runtime-trace-modal.test.js (13 tests) 373ms
+ ✓ tests/reward-capacity-organizer.test.js (19 tests) 188ms
+ ✓ tests/settings-page.test.js (9 tests) 286ms
+ ✓ tests/overlay-disclosure-focus.test.js (9 tests) 118ms
+ ✓ tests/page-surface-lifetime.test.js (9 tests) 79ms
+ ✓ tests/target-surface.test.js (14 tests) 123ms
+(node:36308) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 3)
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/page-visual-readiness-sharing.test.js (19 tests | 2 failed) 107ms
+   ✓ one resource pass per mounted destination > shares scanning, measurement and decode across 2 simultaneous gates 19ms
+   ✓ one resource pass per mounted destination > shares scanning, measurement and decode across 3 simultaneous gates 4ms
+   × one resource pass per mounted destination > shares warm settings resources and retains the full rich cut animation 18ms
+     → expected false to be true // Object.is equality
+   × one resource pass per mounted destination > uses one cold-settings curtain while sharing destination readiness 8ms
+     → expected null not to be null
+   ✓ one resource pass per mounted destination > shares camp entry and loading while excluding the archive ghost and curtain 9ms
+   ✓ one resource pass per mounted destination > follows an asynchronous hub refresh while waiting for page 8ms
+   ✓ one resource pass per mounted destination > follows an asynchronous hub refresh while waiting for artwork 6ms
+   ✓ one resource pass per mounted destination > cleans an abandoned camp without an old completion clearing a newer camp marker 8ms
+   ✓ subscriber cancellation and deadlines > cancels one subscriber without aborting the remaining resource wait 5ms
+   ✓ subscriber cancellation and deadlines > keeps unequal deadlines independent, including a later subscriber 2ms
+   ✓ subscriber cancellation and deadlines > does not cache a timed-out wait or let its late decode resolve the next wait 2ms
+   ✓ subscriber cancellation and deadlines > releases listeners when all subscribers cancel and starts a fresh wait on reentry 2ms
+   ✓ subscriber cancellation and deadlines > waits for each subscriber background and fonts without repeating image work 2ms
+   ✓ page identity and representative image boundaries > isolates a revision change even when the page DOM instance is reused 2ms
+   ✓ page identity and representative image boundaries > captures the page before the layout frame and refuses a replacement 1ms
+   ✓ page identity and representative image boundaries > isolates a replaced page even without a revision increment 3ms
+   ✓ page identity and representative image boundaries > does not share scans when extra roots differ 2ms
+   ✓ page identity and representative image boundaries > keeps the 12-image cap and lazy, hidden, grid and viewport exclusions 4ms
+   ✓ page identity and representative image boundaries > accepts image errors as settled resources without extending the wait 2ms
+ ✓ tests/archive-motion.test.js (6 tests) 79ms
+ ✓ tests/page-loading.test.js (15 tests) 70ms
+ ✓ tests/camp-entry-readiness.test.js (14 tests) 69ms
+ ❯ tests/cov-battle-clock.test.js (23 tests | 2 failed) 23ms
+   ✓ waitPresentationMs 真实调度 > 按毫秒真实等待：未到点不结算，到点结算 3ms
+   ✓ waitPresentationMs 真实调度 > 非正时长立即结算，不挂定时器 0ms
+   ✓ waitPresentationMs 真实调度 > 测试运行时旁路：VITEST=true 时不挂定时器立即结算 0ms
+   ✓ waitPresentationMs 真实调度 > abort 后以 signal.reason 原因拒绝，事前已中止同样拒绝 2ms
+   ✓ schedulePresentation / schedulePresentationMs > 取消zero已排微任务，旧回调不能在下一轮生效 1ms
+   × schedulePresentation / schedulePresentationMs > 取消turbo已排微任务，旧回调不能在下一轮生效 7ms
+     → expected 1 to be +0 // Object.is equality
+   ✓ schedulePresentation / schedulePresentationMs > 取消test-runtime已排微任务，旧回调不能在下一轮生效 1ms
+   ✓ schedulePresentation / schedulePresentationMs > 取消timer-resolved已排微任务，旧回调不能在下一轮生效 1ms
+   ✓ schedulePresentation / schedulePresentationMs > 过期signal在zero短路等待中仍拒绝，等待与顿帧语义一致 1ms
+   × schedulePresentation / schedulePresentationMs > 过期signal在turbo短路等待中仍拒绝，等待与顿帧语义一致 1ms
+     → expected 1 to be +0 // Object.is equality
+   ✓ schedulePresentation / schedulePresentationMs > 过期signal在test-runtime短路等待中仍拒绝，等待与顿帧语义一致 0ms
+   ✓ schedulePresentation / schedulePresentationMs > 替换同一演出时取消旧微任务，只有新回调能提交终态 0ms
+   ✓ schedulePresentation / schedulePresentationMs > 回调到点执行一次 1ms
+   ✓ schedulePresentation / schedulePresentationMs > 80ms 下限：短时长也至少等 demoMs 下限 0ms
+   ✓ schedulePresentation / schedulePresentationMs > schedulePresentationMs 按原始毫秒直排，不经 80ms 下限 0ms
+   ✓ schedulePresentation / schedulePresentationMs > 返回取消函数：取消后回调不再执行 0ms
+   ✓ pausePresentation 挂起/恢复 > 暂停期间等待冻结，恢复后续跑至结算 1ms
+   ✓ pausePresentation 挂起/恢复 > 恢复句柄可重复调用（幂等），释放后新等待正常计时 0ms
+   ✓ pausePresentation 挂起/恢复 > 先行暂停：暂停期间新建的等待不启动，恢复后才开始计时 0ms
+   ✓ pausePresentation 挂起/恢复 > 嵌套暂停：外层释放前不恢复 0ms
+   ✓ waitHitStop 顿帧窗口 > 顿帧窗口内并发等待被冻结，窗口结束自动恢复后续跑 0ms
+   ✓ waitHitStop 顿帧窗口 > 嵌套顿帧共享暂停生命周期：两窗都结束才恢复 0ms
+   ✓ waitHitStop 顿帧窗口 > abort 立即打断顿帧并解除暂停 1ms
+ ✓ tests/battle-architecture.test.js (13 tests) 14ms
+ ✓ tests/battle-action-runner-readiness.test.js (11 tests) 9ms
+ ✓ tests/battle-execution-continuation.test.js (6 tests) 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 移回已满背包同样禁用，失败保留安全格与当前详情
+TypeError: Cannot read properties of null (reading 'querySelector')
+ ❯ tests/bag-page-lifecycle-review.test.js:59:69
+     57|     H.game.ownedCards = [{ uid:'safe-spell', card:spell, safe:true }];…
+     58|     bag.showBackpackSection('safe'); inspect(spell.name);
+     59|     const zoom = document.getElementById('cardZoom'), button = zoom.qu…
+       |                                                                     ^
+     60|     expect(button.disabled).toBe(true);
+     61|     expect(zoom.querySelector('[role="status"]').textContent).toContai…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包
+TypeError: this._overlayInteractionRoot is not a function
+ ❯ Object._findCancelBtn game/src/ui/overlay.js:383:76
+    381|   _findCancelBtn() {
+    382|     const styles = new Map();
+    383|     const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (…
+       |                                                                            ^
+    384|       .filter(b => b.dataset.cancel !== 'false')
+    385|       // Card rules can contain 返回/离开; inspection or selection is neve…
+ ❯ tests/bag-page-lifecycle-review.test.js:185:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/bag-page-lifecycle-review.test.js > 新号背包真实入口反馈 > 安全格和口袋显示真实容量张数与复原角标，伙伴及复原说明保留在帮助
+AssertionError: expected '\n        随身背包物资与卡牌混占格（装备每张占 1 格，其余同名…' to contain '撤离时每张仅 1/3 概率带回基地消耗区'
+
+- Expected
++ Received
+
+- 撤离时每张仅 1/3 概率带回基地消耗区
++
++         随身背包物资与卡牌混占格（装备每张占 1 格，其余同名卡每 3 张或同名物资每 3 件占 1 格）。点击格子看卡牌详情；按住拖动整理顺序，拖到左栏盾形按钮存入安全格。
++         安全格由旺财看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。
++         消耗区战斗中用过的牌统一暂存在这里，包括初始攻击、职业卡和衍生卡，不占背包格。局内复原后，就能再用。
++         去火堆复原每次随机复原最多 2 张；道具和装备不能在火堆复原。
++         用道具复原能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备。背包要放得下。
++         撤离后怎么处理？成功撤离时，消耗区逐张以 1/3 概率结算；初始攻击和职业卡即使掷中也不带回基地消耗区，其余实际带回的牌可用钥匙复原。初始攻击和职业卡仍可在局内复原。下次出发时，基地消耗区中未复原的牌会消散。
++         丢弃把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。
+
+ ❯ tests/bag-page-lifecycle-review.test.js:314:30
+    312|     expect(help.textContent).toContain('道具和装备不能在火堆复原');
+    313|     expect(help.textContent).toContain('能源结晶按消耗区顺序复原最多 3 张');
+    314|     expect(help.textContent).toContain('撤离时每张仅 1/3 概率带回基地消耗区');
+       |                              ^
+    315|     document.querySelector('[data-zone="pocket"].bag-rz').click();
+    316|     expect(document.querySelector('.bag-capchip').textContent).toConta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/cov-battle-clock.test.js > schedulePresentation / schedulePresentationMs > 取消turbo已排微任务，旧回调不能在下一轮生效
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/cov-battle-clock.test.js:83:32
+
+ Test Files  3 failed | 26 passed (29)
+      Tests  7 failed | 552 passed (559)
+     Errors  1 error
+   Start at  15:29:39
+   Duration  113.14s (transform 2.90s, setup 0ms, collect 6.32s, tests 43.15s, environment 52.46s, prepare 4.93s)
+
+     81|     await Promise.resolve(); await Promise.resolve();
+     82|     expect(callback).not.toHaveBeenCalled();
+     83|     expect(vi.getTimerCount()).toBe(0);
+       |                                ^
+     84|   });
+     85| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/cov-battle-clock.test.js > schedulePresentation / schedulePresentationMs > 过期signal在turbo短路等待中仍拒绝，等待与顿帧语义一致
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/cov-battle-clock.test.js:93:32
+     91|     await expect(waitPresentationMs(mode === 'zero' ? 0 : 100, control…
+     92|     await expect(waitHitStop(mode === 'zero' ? 0 : 100, controller.sig…
+     93|     expect(vi.getTimerCount()).toBe(0);
+       |                                ^
+     94|   });
+     95| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > shares warm settings resources and retains the full rich cut animation
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/page-visual-readiness-sharing.test.js:88:29
+     86|     await vi.advanceTimersByTimeAsync(32);
+     87|     expect(cut.classList.contains('page-cut-waiting')).toBe(false);
+     88|     expect(cut.isConnected).toBe(true); expect(onFinish).not.toHaveBee…
+       |                             ^
+     89|     await vi.advanceTimersByTimeAsync(cityCutDuration);
+     90|     expect(cut.isConnected).toBe(false); expect(onFinish).toHaveBeenCa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/page-visual-readiness-sharing.test.js > one resource pass per mounted destination > uses one cold-settings curtain while sharing destination readiness
+AssertionError: expected null not to be null
+ ❯ open tests/page-visual-readiness-sharing.test.js:101:48
+     99|       const cut = createCityCut({ scene: 'general' });
+    100|       finishCut = playPreparedCut(document.querySelector('main'), cut);
+    101|       expect(cut.closest('.page-loading')).not.toBeNull();
+       |                                                ^
+    102|       expect(document.querySelectorAll('.camp-entry-cut')).toHaveLengt…
+    103|       readyArtwork(document.querySelector('.page-loading .camp-entry-c…
+ ❯ game/src/ui/page-loading.js:84:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯ Unhandled Rejection ⎯⎯⎯⎯⎯
+AssertionError: expected null not to be null
+ ❯ open tests/page-visual-readiness-sharing.test.js:101:48
+     99|       const cut = createCityCut({ scene: 'general' });
+    100|       finishCut = playPreparedCut(document.querySelector('main'), cut);
+    101|       expect(cut.closest('.page-loading')).not.toBeNull();
+       |                                                ^
+    102|       expect(document.querySelectorAll('.camp-entry-cut')).toHaveLengt…
+    103|       readyArtwork(document.querySelector('.page-loading .camp-entry-c…
+ ❯ game/src/ui/page-loading.js:84:22
+
+This error originated in "tests/page-visual-readiness-sharing.test.js" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.
+The latest test that might've caused the error is "uses one cold-settings curtain while sharing destination readiness". It might mean one of the following:
+- The error was thrown, while Vitest was running this test.
+- If the error occurred after the test had been completed, this was the last documented test before it was thrown.
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+

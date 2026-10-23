@@ -1,0 +1,32 @@
+{
+  "beforeHash": "ECE4921ED9406498734B657DEA57027BAC7007C918E6A2A137FEAD20C0D36F45",
+  "reusedTests": 19,
+  "baselineHash": "ECE4921ED9406498734B657DEA57027BAC7007C918E6A2A137FEAD20C0D36F45",
+  "afterHash": "28C20F8BCE988ACD67F113FE51B3AF31592534F62768D5F3794EE35AC008F751",
+  "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\polish-1023\\project\\tests\\reward-capacity-organizer.test.js",
+  "target": "D:\\素材\\代号柒\\搜打撤\\tests\\reward-capacity-organizer.test.js",
+  "copiedAt": "2026-10-23T14:18:39.9916695+08:00",
+  "sourceHash": "28C20F8BCE988ACD67F113FE51B3AF31592534F62768D5F3794EE35AC008F751",
+  "registryCheck": "目标测试无其他定向占用；按主代理精确合回授权执行",
+  "moduleMatches": [
+    {
+      "mainHash": "7C0423BD4CADED968E375DABA69CBF93D49E2C39648A3A45FD7FC66E2A56C2EC",
+      "path": "game/src/ui/reward-capacity-organizer.js",
+      "copyHash": "7C0423BD4CADED968E375DABA69CBF93D49E2C39648A3A45FD7FC66E2A56C2EC",
+      "identical": true
+    },
+    {
+      "mainHash": "C82CF9D9986F97B563006A737B61BB9DE49BDF098FF0E3E855C5C3898FF74F05",
+      "path": "game/src/ui/reward-scene-view.js",
+      "copyHash": "C82CF9D9986F97B563006A737B61BB9DE49BDF098FF0E3E855C5C3898FF74F05",
+      "identical": true
+    },
+    {
+      "mainHash": "2687BCC33D114EAB4700663FFDDA962E783A8C9125DA5C3DE29323E8F6F9E9AD",
+      "path": "game/src/core/shared.js",
+      "copyHash": "2687BCC33D114EAB4700663FFDDA962E783A8C9125DA5C3DE29323E8F6F9E9AD",
+      "identical": true
+    }
+  ],
+  "dependencyReuse": "本轮复用同一主线 node_modules；未安装、更新或修改依赖。"
+}

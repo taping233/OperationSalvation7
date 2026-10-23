@@ -1,0 +1,14 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/contracts.test.js (18 tests) 1848ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  1589ms
+ ✓ tests/architecture-boundaries.test.js (44 tests) 786ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  743ms
+
+ Test Files  2 passed (2)
+      Tests  62 passed (62)
+   Start at  14:18:37
+   Duration  11.84s (transform 348ms, setup 0ms, collect 1.22s, tests 2.63s, environment 6.49s, prepare 597ms)
+
