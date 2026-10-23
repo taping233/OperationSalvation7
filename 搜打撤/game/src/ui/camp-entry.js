@@ -6,6 +6,7 @@ import { mapImageReady } from '../core/map-image-ready.js';
 import { GENERAL_TRANSITION_ART } from './general-transition.js';
 import { transitionHeadingHTML } from './transition-heading.js';
 import { revealTransition } from './transition-handoff.js';
+import { pageMotionProfile } from './page-motion-profiles.js';
 const CUT_SCENES = {
   camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
   photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
@@ -15,12 +16,7 @@ const CUT_SCENES = {
   boss: new URL('../../assets/scenes/transition-boss-v2.webp', import.meta.url).href,
   achievement: new URL('../../assets/scenes/transition-achievement-v2.webp', import.meta.url).href,
 };
-// 各目的页小图随模块预热，首次切幕出现前即可加载。
-for (const src of new Set(Object.values(CUT_SCENES))) {
-  const image = new Image();
-  image.decoding = 'async';
-  image.src = src;
-}
+// Load artwork only for the cut that is actually requested; prepareCityCut owns readiness.
 
 let cleanup = null;
 const identities = new WeakMap();
@@ -132,6 +128,13 @@ export async function prepareCityCut(cut, { signal } = {}) {
 
 // A mounted city cut holds its first pose until the destination's representative assets settle.
 export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish) {
+  // Page semantics are shared with interface-motion. Legacy adapters cannot
+  // reintroduce scene curtains over ordinary navigation surfaces.
+  if (pageMotionProfile(page?.closest('#ovBody'))?.navigation) {
+    cut.remove();
+    onFinish?.();
+    return () => {};
+  }
   // A cold-entry cover already owns readiness and reveal for this route.
   const loading = document.querySelector('.page-loading');
   if (loading) {
@@ -169,7 +172,7 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
 export function enterAchievementCut(page, reduced) {
   const overlay = page?.closest('#overlay');
   const card = page?.closest('.card');
-  if (reduced || !overlay || !card) return () => {};
+  if (reduced || !overlay || !card || pageMotionProfile(page.closest('#ovBody'))?.navigation) return () => {};
   const cut = createCityCut({ scene: 'achievement', archive: '荣誉档案', title: '成就总览',
     subtitle: 'ACHIEVEMENTS / 远征荣誉陈列', destination: 'ACHIEVEMENTS', watermark: 'HONOR' });
   return playPreparedCut(page, cut);

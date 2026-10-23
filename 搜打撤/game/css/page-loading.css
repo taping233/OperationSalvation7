@@ -17,6 +17,17 @@
 .page-loading.leaving { animation: pageLoadOut .18s var(--ease-fly) both; pointer-events: none; }
 @keyframes pageLoadPulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @keyframes pageLoadOut { to { opacity: 0; } }
+/* Module loading preserves the source scene. Only a slower request shows a compact status. */
+.page-loading.page-loading--interface { background:transparent; }
+.page-loading.page-loading--interface::before { content:none; }
+.page-loading--interface .page-loading-copy {
+  position:absolute; bottom:24px; padding:14px 24px; border:1px solid #c2c5c733;
+  background:#111b24ed; border-radius:6px;
+  animation:pageLoadingStatusIn 120ms ease-out 150ms backwards;
+}
+.page-loading--interface .page-loading-copy h2 { margin:0 0 4px; font-size:18px; letter-spacing:.08em; }
+.page-loading--interface .page-loading-copy p { font-size:13px; }
+@keyframes pageLoadingStatusIn { from { opacity:0; } to { opacity:1; } }
 /* 先画出切幕并保持首姿；目标页就绪后统一揭幕。 */
 .page-loading.page-loading--city { background: #10191f; overflow: hidden; }
 .page-loading.page-loading--city::before { content: none; }

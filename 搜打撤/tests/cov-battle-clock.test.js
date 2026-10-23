@@ -27,6 +27,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.useRealTimers();
+  setTurbo(false);
   if (REAL_VITEST_ENV === undefined) delete process.env.VITEST;
   else process.env.VITEST = REAL_VITEST_ENV;
 });
@@ -70,6 +71,40 @@ describe('waitPresentationMs 真实调度', () => {
 });
 
 describe('schedulePresentation / schedulePresentationMs', () => {
+  it.each(['zero', 'turbo', 'test-runtime', 'timer-resolved'])('取消%s已排微任务，旧回调不能在下一轮生效', async mode => {
+    // jsdom setItem queues a zero-delay storage event; settle fixture setup
+    // before creating the presentation task whose timer ownership we assert.
+    if (mode === 'turbo') { setTurbo(true); vi.advanceTimersByTime(0); }
+    if (mode === 'test-runtime') process.env.VITEST='true';
+    const callback=vi.fn();
+    const cancel=schedulePresentationMs(callback, mode === 'zero' ? 0 : 100);
+    if (mode === 'timer-resolved') vi.advanceTimersByTime(100);
+    cancel(); cancel();
+    await Promise.resolve(); await Promise.resolve();
+    expect(callback).not.toHaveBeenCalled();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it.each(['zero', 'turbo', 'test-runtime'])('过期signal在%s短路等待中仍拒绝，等待与顿帧语义一致', async mode => {
+    if (mode === 'turbo') { setTurbo(true); vi.advanceTimersByTime(0); }
+    if (mode === 'test-runtime') process.env.VITEST='true';
+    const controller=new AbortController(), reason=new Error('old presentation');
+    controller.abort(reason);
+    await expect(waitPresentationMs(mode === 'zero' ? 0 : 100, controller.signal)).rejects.toBe(reason);
+    await expect(waitHitStop(mode === 'zero' ? 0 : 100, controller.signal)).rejects.toBe(reason);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('替换同一演出时取消旧微任务，只有新回调能提交终态', async () => {
+    setTurbo(true);
+    const callbacks=[];
+    const cancel=schedulePresentationMs(() => callbacks.push('old'), 100);
+    cancel();
+    schedulePresentationMs(() => callbacks.push('new'), 100);
+    await Promise.resolve(); await Promise.resolve();
+    expect(callbacks).toEqual(['new']);
+  });
+
   it('回调到点执行一次', async () => {
     const cb = vi.fn();
     schedulePresentation(cb, 200);

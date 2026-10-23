@@ -202,7 +202,30 @@ describe('菜单真实按需入口', () => {
     const request=menu[method](); await vi.runAllTimersAsync();
     expect(await request).not.toBe(false); expect(h.facade.menuPageLoading).toBe(false);
     expect(h.deps.UI.el.overlay.hidden).toBe(false); expect(document.querySelector('.page-loading')).toBeNull();
+    const back = document.querySelector(`.archive-back[data-act="${method === 'startNewGame' ? 'slotBack' : 'closeSettings'}"]`);
+    expect(back.type).toBe('button'); expect(back.getAttribute('aria-label')).toBe(method === 'startNewGame' ? '返回主菜单' : '返回');
+    if (method === 'startNewGame') expect(back.dataset.cancel).toBe('true');
+    back.focus(); expect(document.activeElement).toBe(back);
     expect(h.save).not.toHaveBeenCalled(); expect(h.clear).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])('数据页公共返回保留回流且不重复注入（来自设置：%s）', async fromSettings => {
+    const real = await vi.importActual('../game/src/ui/game.menu.pages.js');
+    h.deps.openDataPage = () => h.deps.UI.showOverlay('', '<section class="pg"><div class="doom-stats">数据</div></section>');
+    const menu = h.facade.createGameMenuController(h.deps, { pageFactory:real.createGameMenuPages });
+    menu.openDataPageUi(fromSettings);
+    const back = document.querySelector('.archive-back[data-act="dataPageBack"]');
+    expect(back.type).toBe('button'); expect(back.getAttribute('aria-label')).toBe('返回');
+    expect(back.dataset.cancel).toBe('true');
+    expect(back.querySelector('svg').getAttribute('aria-hidden')).toBe('true');
+    back.focus(); expect(document.activeElement).toBe(back);
+    back.click(); await Promise.resolve();
+    expect(h.deps.UI.el.overlay.hidden).toBe(!fromSettings);
+    if (fromSettings) {
+      expect(document.querySelector('.settings-page')).not.toBeNull();
+      expect(document.querySelectorAll('.archive-back')).toHaveLength(1);
+      expect(document.querySelector('[data-act="dataPageBack"]')).toBeNull();
+    }
   });
 
   it('初始静态图不反穿页面与独占渲染依赖，页面不静态依赖会话', () => {

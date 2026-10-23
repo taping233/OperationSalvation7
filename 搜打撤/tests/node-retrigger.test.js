@@ -211,7 +211,9 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     const beforeRead = game.ownedCards.length;
     expect(clickAct('resRead')).toBe(true);
     expect(game.ownedCards.length).toBe(beforeRead);
-    expect(clickAct('resTake')).toBe(true);
+    const zoomClaim = document.querySelector('#cardZoom .cz-foot [data-act="resTake"]');
+    expect(zoomClaim).not.toBeNull();
+    zoomClaim.click();
     await sweep();
     expect(game.visited[key]).toBe(1);
   });

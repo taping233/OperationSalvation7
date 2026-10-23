@@ -44,4 +44,3 @@ body.reduce-motion #overlay .card.page :is(.cls2-page, .cls-pool-page) * {
 
 #overlay .cls2-page .cls2-example:focus-visible { outline: 3px solid #426d7b; outline-offset: 3px; }
 #overlay .cls2-page .cls2-example:hover { background: #e6ecec; border-color: #426d7b; }
-#overlay .cls2-page .cls2-supply-rules p { margin: 6px 0 10px; color: #35414a; font-size: 16px; line-height: 1.55; }

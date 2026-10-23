@@ -27,7 +27,6 @@
 #overlay .card.page .pg.cls2-page.roster-reference .cls2-face b {
   background:#172832e8; color:#e9edf0; text-align:center;
 }
-#overlay .card.page .pg.cls2-page.roster-reference .cls2-chips:empty { display:none; }
 #overlay .card.page .pg.cls2-page.roster-reference .cls2-mechanism > b { font-size:30px; }
 #overlay .card.page .pg.cls2-page.roster-reference .cls2-mechanism > p { margin:8px 0 18px; }
 #overlay .card.page .pg.cls2-page.roster-reference .cls2-example {

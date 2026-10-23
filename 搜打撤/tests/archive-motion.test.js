@@ -25,23 +25,12 @@ function picker() {
   return { overlay, body };
 }
 
-it('releases the achievement cut when closing or replacing the destination page', async () => {
-  vi.useFakeTimers();
+it('achievement browsing keeps the navigation surface free of scene curtains', () => {
   const { overlay, body } = picker();
   body.innerHTML = '<main class="achievement-gallery">Awards</main>';
   enterAchievementCut(body.firstElementChild, false);
-  const closingCut = overlay.querySelector('.camp-entry-cut');
-  expect(closingCut.getAttribute('aria-hidden')).toBe('true');
-  overlay.dataset.uiClosing = '1';
-  await Promise.resolve();
-  expect(closingCut.isConnected).toBe(false);
-  delete overlay.dataset.uiClosing;
+  expect(overlay.querySelector('.camp-entry-cut')).toBeNull();
   enterAchievementCut(body.firstElementChild, false);
-  const replacementCut = overlay.querySelector('.camp-entry-cut');
-  body.replaceChildren();
-  await Promise.resolve();
-  expect(replacementCut.isConnected).toBe(false);
-  await vi.advanceTimersByTimeAsync(1000);
   expect(overlay.querySelector('.camp-entry-cut')).toBeNull();
 });
 

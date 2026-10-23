@@ -149,7 +149,7 @@ it('base navigation keeps the veil and shell stable and animates only changed co
   }
 });
 
-it('same-page base updates stay quiet while leaving the base retains normal entry', async () => {
+it('same-page base updates stay quiet and interface navigation opens without a scene curtain', async () => {
   vi.useFakeTimers();
   vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
   vi.stubGlobal('cancelAnimationFrame', clearTimeout);
@@ -161,13 +161,12 @@ it('same-page base updates stay quiet while leaving the base retains normal entr
   expect(body.querySelectorAll('[data-surface-block]')).toHaveLength(0);
 
   ui.showOverlay('', '<main class="settings-page">Settings</main>', 'page');
-  expect(document.querySelector('.page-visual-handoff')).not.toBeNull();
-  await vi.advanceTimersByTimeAsync(500);   // 离开基地的整页切换先遮层，就绪后重放区域入场
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
   expect(root.dataset.surfacePhase).toBeDefined();
-  expect(root.dataset.uiEnter).toBeUndefined();   // 卡面翻入动画由遮层淡出替代，不提前播放
+  expect(root.dataset.uiEnter).toBeUndefined();   // 普通界面只播区域入场，不叠整页翻入。
 });
 
-it('different pages sharing an empty heading still wait and reveal the new page once', async () => {
+it('interface pages sharing an empty heading apply their own profile without a loading curtain', async () => {
   vi.useFakeTimers();
   vi.stubGlobal('requestAnimationFrame', fn => setTimeout(fn, 16));
   vi.stubGlobal('cancelAnimationFrame', clearTimeout);
@@ -175,7 +174,7 @@ it('different pages sharing an empty heading still wait and reveal the new page 
   ui.showOverlay('', '<main class="settings-page"><section class="settings-content">Settings</section></main>', 'page');
   await vi.advanceTimersByTimeAsync(400);
   ui.showOverlay('', '<main class="beginner-guide"><div class="bg-copy">Guide</div></main>', 'page');
-  expect(root.dataset.visualPending).toBe('page');
+  expect(root.dataset.visualPending).toBeUndefined();
   await vi.advanceTimersByTimeAsync(400);
   expect(root.dataset.surfaceLayout).toBe('guide');
   expect(root.querySelector('.bg-copy').dataset.surfaceRole).toBe('content');

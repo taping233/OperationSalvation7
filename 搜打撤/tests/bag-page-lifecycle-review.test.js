@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-const H = vi.hoisted(() => ({ game: {}, save: vi.fn(), uid: 0 }));
+const H = vi.hoisted(() => ({ game: {}, save: vi.fn(), uid: 0, bagUsed:0, safeUsed:0, bagCap:16, safeCap:6 }));
 vi.mock('../game/src/run/game.session.js', () => ({
-  MAP: { items: {} }, game: H.game, bagCap: () => 16, safeCap: () => 6, newUid: () => `new-${++H.uid}`, safeUsed: () => 0, usedSlots: () => 0, saveGame: H.save,
+  MAP: { items: {} }, game: H.game, bagCap: () => H.bagCap, safeCap: () => H.safeCap, newUid: () => `new-${++H.uid}`, safeUsed: () => H.safeUsed, usedSlots: () => H.bagUsed, saveGame: H.save,
   cardStacks: safe => {
     const stacks = new Map(); for (const owned of H.game.ownedCards.filter(item => !!item.safe === !!safe && !item.stored)) {
       const name = owned.card.name; if (!stacks.has(name)) stacks.set(name, { card: owned.card, count: 0, uids: [] });
@@ -17,6 +17,8 @@ const resource = { id: 'wood', name: '木材卡', type: '资源' };
 let bag, drag, ui, frames;
 beforeEach(async () => {
   vi.resetModules(); H.save.mockReset(); H.uid = 0;
+  delete H.game.canReceiveCard;
+  Object.assign(H, { bagUsed:0, safeUsed:0, bagCap:16, safeCap:6 });
   Object.assign(H.game, { seed: 'run-1', discoveredPairs: new Set(), runActive: true, nestActive: false, state: 'idle', myClass: '法师', battleActive: false,
     inventory: [], ownedCards: [{ uid: 'potion', card: potion }, { uid: 'spell', card: spell }, { uid: 'wood', card: resource }, { uid: 'pearl', card: { id: 'tt2-pearlbox', name: '珍珠盒' } }, { uid: 'pouch', card: { id: 'tt7-stratagem', name: '法师锦囊' } }],
     usedPocket: [], cardOrder: [], hp: 10, maxHp: 30, coins: 0, fragments: 0, stackCapOf: () => 3, heal: vi.fn(n => { H.game.hp += n; }) });
@@ -38,6 +40,92 @@ function inspect(name = potion.name) { document.querySelector(`[data-act="inspec
 function pointer(type, target, id = 1, x = 20) { const event = new Event(type, { bubbles: true, cancelable: true }); Object.assign(event, { pointerId: id, button: 0, clientX: x, clientY: 20 }); target.dispatchEvent(event); }
 function startDrag() { const source = document.querySelector('[data-stack="木材卡"]'); pointer('pointerdown', source); pointer('pointermove', window, 1, 200); frames.at(-1)(); return source; }
 describe('背包旧详情/页面回调与正常返回', () => {
+  it('安全格满后详情进入换格选择，返回取消恢复原详情且不移动', () => {
+    H.safeCap = 2; H.safeUsed = 2; H.bagUsed = 1;
+    H.game.ownedCards = [{ uid:'spell', card:spell }, { uid:'safe-potion', card:potion, safe:true }, { uid:'safe-wood', card:resource, safe:true }];
+    bag.showBackpack(true); inspect(spell.name);
+    expect(document.querySelector('[data-act="zoomMoveToSafe"]').disabled).toBe(false);
+    expect(document.querySelector('[data-act="zoomMoveToSafe"]').textContent).toContain('换入安全格');
+    const before = JSON.stringify(H.game.ownedCards); ui._acts.zoomMoveToSafe();
+    expect(document.querySelectorAll('[data-act="safeSwapPick"]')).toHaveLength(2);
+    ui._acts.safeSwapCancel();
+    expect(document.getElementById('cardZoom')).not.toBeNull();
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
+  });
+  it('唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常', () => {
+    H.safeCap = 1; H.safeUsed = 1; H.bagUsed = 1;
+    H.game.ownedCards = [{ uid:'spell', card:spell }, ...Array.from({ length:3 }, (_, n) => ({ uid:`safe-${n}`, card:potion, safe:true }))];
+    bag.showBackpack(true); inspect(spell.name); ui._acts.zoomMoveToSafe();
+    expect(H.game.ownedCards[0].safe).toBe(true);
+    expect(H.game.ownedCards.slice(1).every(entry => !entry.safe)).toBe(true);
+    expect(document.getElementById('cardZoom')).toBeNull(); expect(H.save).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('.bag-receipt').textContent).toContain('药剂 ×3已回背包');
+    ui._acts.closeBag(); expect(ui.el.overlay.hidden).toBe(true); expect(H.game.state).toBe('idle');
+  });
+  it('真实奖励腾位API保留直接容量禁用和同步false合同，不开启换格或移动', async () => {
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
+    H.safeCap = 1; H.safeUsed = 1; H.bagUsed = 16;
+    H.game.ownedCards = [{ uid:'spell', card:spell }, { uid:'safe-potion', card:potion, safe:true }];
+    H.game.canReceiveCard = () => false;
+    bagSlots.organizeReward({ card:resource, current:() => true, onReturn:vi.fn(), onClaim:vi.fn(), onFullBag:vi.fn() });
+    const root = ui.el.ovBody.firstElementChild, before = JSON.stringify(H.game.ownedCards);
+    const button = root.querySelector('[data-organize="safe"]');
+    expect(button.disabled).toBe(true); button.click();
+    expect(bagSlots.moveStackSafe(spell.name, true, { refresh:false, uids:['spell'] })).toBe(false);
+    expect(ui.el.ovBody.firstElementChild).toBe(root); expect(document.querySelector('[data-act="safeSwapPick"]')).toBeNull();
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
+  });
+  it.each([['武术', 7, 3], ['装备', 2, 2]])('移入安全格按%s整叠所需格禁用并在动作旁解释', (type, count, slots) => {
+    const card = { ...spell, type };
+    H.game.stackCapOf = entry => entry.type === '装备' ? 1 : 3;
+    H.game.ownedCards = Array.from({ length:count }, (_, n) => ({ uid:`spell-${n}`, card }));
+    H.safeUsed = 5;
+    bag.showBackpack(true); inspect(spell.name);
+    const zoom = document.getElementById('cardZoom'), button = zoom.querySelector('[data-act="zoomMoveToSafe"]');
+    expect(button.disabled).toBe(true); expect(button.getAttribute('aria-disabled')).toBe('true');
+    expect(zoom.querySelector('[role="status"]').textContent).toContain(`整叠还需 ${slots} 格`);
+    ui._acts.zoomMoveToSafe();
+    expect(document.getElementById('cardZoom')).toBe(zoom);
+    expect(H.game.ownedCards.some(entry => entry.safe)).toBe(false);
+    expect(H.save).not.toHaveBeenCalled(); expect(window.SDT.Sound.sfx).not.toHaveBeenCalled();
+  });
+  it('移回已满背包同样禁用，失败保留安全格与当前详情', () => {
+    H.game.ownedCards = [{ uid:'safe-spell', card:spell, safe:true }]; H.bagUsed = 16;
+    bag.showBackpack(true); document.querySelector('[data-zone="safe"].bag-rz').click(); inspect(spell.name);
+    const zoom = document.getElementById('cardZoom'), button = zoom.querySelector('[data-act="zoomMoveToBag"]');
+    expect(button.disabled).toBe(true);
+    expect(zoom.querySelector('[role="status"]').textContent).toContain('背包放不下');
+    ui._acts.zoomMoveToBag();
+    expect(document.getElementById('cardZoom')).toBe(zoom); expect(H.game.ownedCards[0].safe).toBe(true);
+    expect(H.save).not.toHaveBeenCalled();
+  });
+  it('详情打开后容量变满，执行复检给警告且不收起详情或移动卡牌', () => {
+    inspect(spell.name);
+    const zoom = document.getElementById('cardZoom');
+    expect(zoom.querySelector('[data-act="zoomMoveToSafe"]').disabled).toBe(false);
+    H.safeUsed = H.safeCap; ui._acts.zoomMoveToSafe();
+    expect(document.getElementById('cardZoom')).toBe(zoom);
+    expect(zoom.querySelector('[role="status"]').dataset.noticeTone).toBe('warn');
+    expect(zoom.querySelector('[role="status"]').textContent).toContain('安全格放不下');
+    expect(H.game.ownedCards.find(entry => entry.uid === 'spell').safe).toBeFalsy();
+    expect(H.save).not.toHaveBeenCalled(); expect(window.SDT.Sound.sfx).not.toHaveBeenCalled();
+  });
+  it('安全格满格但已有同名叠可接收时仍允许，成功后收起详情并刷新', () => {
+    H.game.ownedCards = [{ uid:'safe-spell', card:spell, safe:true }, { uid:'spell', card:spell }]; H.safeUsed = H.safeCap;
+    bag.showBackpack(true); inspect(spell.name);
+    expect(document.querySelector('[data-act="zoomMoveToSafe"]').disabled).toBe(false);
+    ui._acts.zoomMoveToSafe();
+    expect(H.game.ownedCards.every(entry => entry.safe)).toBe(true);
+    expect(document.getElementById('cardZoom')).toBeNull();
+    expect(window.SDT.Sound.sfx).toHaveBeenCalledWith('safeStore');
+  });
+  it('帮助区分局内复原与撤离不带回的初始攻击、职业卡', () => {
+    const help = ui.helpTopics.bag.html;
+    expect(help).toContain('包括初始攻击、职业卡和衍生卡');
+    expect(help).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
+    expect(help).toContain('初始攻击和职业卡仍可在局内复原');
+    expect(help).toContain('1/3');
+  });
   it('卡牌操作重绘背包后，特写退场完成不会令关闭按钮失效', () => {
     inspect(spell.name);
     const zoom = document.getElementById('cardZoom');
@@ -129,6 +217,7 @@ describe('背包旧详情/页面回调与正常返回', () => {
     inspect('法师锦囊'); ui._acts.pouchStoreZoom();
     const { overlayMethods } = await import('../game/src/ui/overlay.js');
     ui._lastMode = undefined;
+    ui._overlayInteractionRoot = overlayMethods._overlayInteractionRoot;
     ui._findCancelBtn = overlayMethods._findCancelBtn;
     const back = ui._findCancelBtn();
     expect(back.dataset.act).toBe('pouchBack'); expect(back.dataset.cancel).toBe('true');
@@ -259,7 +348,10 @@ describe('新号背包真实入口反馈', () => {
     expect(help.textContent).toContain('只有安全格里的卡牌会被抢运回基地');
     expect(help.textContent).toContain('道具和装备不能在火堆复原');
     expect(help.textContent).toContain('能源结晶按消耗区顺序复原最多 3 张');
-    expect(help.textContent).toContain('撤离时每张仅 1/3 概率带回基地消耗区');
+    expect(help.textContent).toContain('成功撤离时，消耗区逐张以 1/3 概率结算');
+    expect(help.textContent).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
+    expect(help.textContent).toContain('其余实际带回的牌可用钥匙复原');
+    expect(help.textContent).toContain('初始攻击和职业卡仍可在局内复原');
     document.querySelector('[data-zone="pocket"].bag-rz').click();
     expect(document.querySelector('.bag-capchip').textContent).toContain('不限容量');
     expect(document.querySelector('.bag-capchip b').textContent).toBe('5');

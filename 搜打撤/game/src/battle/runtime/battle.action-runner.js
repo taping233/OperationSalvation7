@@ -25,7 +25,7 @@ export function createBattleActionRunner({
     setBusy(true);
     render();
 
-    queue.enqueue(async signal => {
+    return queue.enqueue(async signal => {
       if (session.generation !== generation || getBattleState().token !== battleToken || !getGame()?.battleActive) {
         throw actionCancellationError(signal);
       }

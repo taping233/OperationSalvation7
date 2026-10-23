@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { registerRuntimeTracePanel } from '../game/src/core/runtime-trace-panel.local.js';
 
 window.SDT = { Icons: { rich: value => value }, Sound: { sfx() {} } };
 const { overlayMethods } = await import('../game/src/ui/overlay.js');
@@ -12,6 +13,47 @@ beforeEach(() => {
 afterEach(() => { document.body.replaceChildren(); });
 
 describe('shared overlay native disclosure keyboard contract', () => {
+  it('cancel, explicit initial focus and Tab share the live inner dialog', () => {
+    UI.el.ovBody.innerHTML = '<button id="pageBack" data-cancel="true">返回页面</button><section id="detail" role="dialog"><button id="detailBack" data-cancel="true">收回详情</button><button id="detailNext">下一项</button></section>';
+    const detail = document.getElementById('detail');
+    expect(UI._overlayInteractionRoot()).toBe(detail);
+    expect(UI._findCancelBtn().id).toBe('detailBack');
+    expect(ids()).toEqual(['detailBack', 'detailNext']);
+    expect(UI._resolveOverlayInitialFocus('#pageBack').id).toBe('detailBack');
+    expect(UI._resolveOverlayInitialFocus(document.getElementById('pageBack')).id).toBe('detailBack');
+    document.getElementById('detailNext').focus();
+    UI._trapOverlayFocus(new KeyboardEvent('keydown', { key:'Tab', cancelable:true }));
+    expect(document.activeElement.id).toBe('detailBack');
+    detail.hidden = true;
+    expect(UI._overlayInteractionRoot()).toBe(UI.el.ovBody);
+    expect(ids()).toEqual(['pageBack']);
+    UI.el.ovBody.innerHTML = '<section id="replacement" role="dialog"><button id="replacementBack" data-cancel="true">返回新详情</button></section>';
+    expect(UI._overlayInteractionRoot().id).toBe('replacement');
+    expect(UI._resolveOverlayInitialFocus('#detailBack').id).toBe('replacementBack');
+  });
+
+  it('a mandatory empty dialog retains focus without exposing background actions', () => {
+    UI.el.ovBody.innerHTML = '<button id="pageBack" data-cancel="true">返回页面</button><section id="choice" role="dialog" aria-label="选择处理中">处理中</section>';
+    expect(ids()).toEqual([]);
+    expect(UI._resolveOverlayInitialFocus('#pageBack').id).toBe('choice');
+    expect(UI._findCancelBtn()).toBeUndefined();
+    UI._trapOverlayFocus(new KeyboardEvent('keydown', { key:'Tab', cancelable:true }));
+    expect(document.activeElement.id).toBe('choice');
+  });
+
+  it('only the registered diagnostic panel stays in the Tab set beside a detail', () => {
+    UI.el.overlay.setAttribute('role', 'dialog'); UI.el.overlay.setAttribute('aria-modal', 'true');
+    UI.el.ovBody.innerHTML = '<button id="pageBack" data-cancel="true">返回页面</button><section role="dialog"><button id="detailBack" data-cancel="true">收回详情</button></section>';
+    const panel = document.createElement('aside'); panel.innerHTML = '<button id="traceAction">记录</button>';
+    document.body.append(panel); const unregister = registerRuntimeTracePanel(panel);
+    const unrelated = document.createElement('button'); unrelated.id = 'unrelated'; UI.el.overlay.append(unrelated);
+    try {
+      expect(ids()).toEqual(['detailBack', 'traceAction']);
+      expect(UI._resolveOverlayInitialFocus('#pageBack').id).toBe('detailBack');
+      expect(UI._findCancelBtn().id).toBe('detailBack');
+    } finally { unregister(); }
+  });
+
   it('collapsed reward shelf exposes its summary, not its hidden card actions', () => {
     UI.el.ovBody.innerHTML = '<details><summary id="shelf">本次已入库</summary><button id="card">查看卡牌</button></details><button id="back">返回</button>';
     expect(ids()).toEqual(['shelf', 'back']);

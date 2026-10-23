@@ -1,6 +1,6 @@
-import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { observeIconHydration } from '../game/src/core/icon-hydration.js';
+import { createSafeTransfer } from '../game/src/hub/game.bag.safe-transfer.js';
 
 let observer, frames, hydrate, scrubAttrs;
 const hasTokens = text => /\[\[icon:|❤/.test(text);
@@ -70,8 +70,11 @@ it('安全格按钮显式装饰图标在真实hydrate前后隐藏，纯图标按
   observer.disconnect();
   vi.stubGlobal('MutationObserver', undefined);
   await import('../game/src/core/icons-bitmap.js');
-  const source = readFileSync('game/src/hub/game.bag.js', 'utf8');
-  const markup = source.match(/<button class="ov-btn" data-act="zoomMoveToSafe">.*?<\/button>/)[0];
+  const card = { id:'icon-test', name:'图标测试牌', type:'武术' };
+  const transfer = createSafeTransfer({ game:{ ownedCards:[{uid:'icon-test', card}] },
+    shaName:'初始攻击', safeUsed:() => 0, usedSlots:() => 1,
+    safeCap:() => 2, bagCap:() => 16, baseCap:() => 16 });
+  const markup = transfer.button(card.name, true, 'zoomMoveToSafe');
   document.body.innerHTML = markup + '<button id="iconOnly">[[icon:cross]]</button><button id="named" aria-label="关闭详情">[[icon:cross]]</button>';
   const button = document.querySelector('[data-act="zoomMoveToSafe"]');
   expect(button.querySelector('[aria-hidden="true"]').textContent).toBe('[[icon:lock]]');

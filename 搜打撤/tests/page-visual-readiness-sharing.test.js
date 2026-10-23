@@ -70,26 +70,28 @@ describe('one resource pass per mounted destination', () => {
     expect(await Promise.all(waits)).toEqual(Array(count).fill(true));
     expect(vi.getTimerCount()).toBe(0);
   });
-  it('shares warm settings resources and retains the full rich cut animation', async () => {
+  it('shares warm settings readiness while rejecting a legacy scene curtain', async () => {
     const { image, decoded } = portrait(document.querySelector('main'));
     const scan = vi.spyOn(Element.prototype, 'querySelectorAll');
     const reveal = vi.fn(), onFinish = vi.fn();
     stagePageVisual(ui, reveal);
+    const readiness = waitPageVisual(body());
     const cut = createCityCut({ scene: 'general' });
     finishCut = playPreparedCut(document.querySelector('main'), cut, cityCutDuration, onFinish);
-    readyArtwork(cut);
+    expect(cut.isConnected).toBe(false);
+    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    expect(onFinish).toHaveBeenCalledOnce();
     await vi.advanceTimersByTimeAsync(48);
     expectSinglePass(scan, image);
     expect(reveal).not.toHaveBeenCalled();
     decoded.resolve(); await vi.advanceTimersByTimeAsync(32);
+    expect(await readiness).toBe(true);
     expect(reveal).toHaveBeenCalledOnce();
-    await vi.advanceTimersByTimeAsync(32);
-    expect(cut.classList.contains('page-cut-waiting')).toBe(false);
-    expect(cut.isConnected).toBe(true); expect(onFinish).not.toHaveBeenCalled();
-    await vi.advanceTimersByTimeAsync(cityCutDuration);
-    expect(cut.isConnected).toBe(false); expect(onFinish).toHaveBeenCalledOnce();
+    expectSinglePass(scan, image);
+    finishCut();
+    expect(onFinish).toHaveBeenCalledOnce();
   });
-  it('uses one cold-settings curtain while sharing destination readiness', async () => {
+  it('uses a compact cold-settings loader while sharing destination readiness', async () => {
     const { image, decoded } = portrait(document.querySelector('main'));
     const scan = vi.spyOn(Element.prototype, 'querySelectorAll');
     const reveal = vi.fn();
@@ -98,16 +100,20 @@ describe('one resource pass per mounted destination', () => {
       stagePageVisual(ui, reveal);
       const cut = createCityCut({ scene: 'general' });
       finishCut = playPreparedCut(document.querySelector('main'), cut);
-      expect(cut.closest('.page-loading')).not.toBeNull();
-      expect(document.querySelectorAll('.camp-entry-cut')).toHaveLength(1);
-      readyArtwork(document.querySelector('.page-loading .camp-entry-cut'));
+      expect(cut.isConnected).toBe(false);
+      expect(document.querySelectorAll('.page-loading')).toHaveLength(1);
+      expect(document.querySelector('.page-loading--interface .page-loading-copy')).not.toBeNull();
+      expect(document.querySelector('.camp-entry-cut')).toBeNull();
       return 'settings';
     } });
     await vi.advanceTimersByTimeAsync(80);
     expectSinglePass(scan, image);
     expect(reveal).not.toHaveBeenCalled();
+    expect(document.querySelector('.page-loading')).not.toBeNull();
     decoded.resolve(); await vi.advanceTimersByTimeAsync(1200);
     expect(await loading).toBe('settings'); expect(reveal).toHaveBeenCalledOnce();
+    expectSinglePass(scan, image);
+    expect(document.querySelector('.page-loading')).toBeNull();
   });
   it('shares camp entry and loading while excluding the archive ghost and curtain', async () => {
     body().innerHTML = '<main id="hubMain"><div class="hub-page"></div></main>';

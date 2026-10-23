@@ -8,6 +8,9 @@
 
 ## 活跃登记
 
+Friday / 完成改动提交受理 WF-submit-completed-1023：老板授权全部完成未提交内容分组提交；冻结当前源码/测试、相关规则与三批自有证据，排除旧备份、PV、中间文件及待决内容；先验收后正常提交，不推送，不接续已暂停的体验开发。
+
+
 
 Friday / 合并更新 master 与已验证云端改进 WF-master-merge-1021：在独立 `/tmp/merge-master-b7207a28-assembly` 与独立 Git/index 中，以 `b7207a2846` 为正本，按逐文件兼容性审查重施已验收改进；保持旧云端 main/index/HEAD、v36 构建与证据不变。属地为本次合并后的运行时、配套测试、类型与文档；不复活旧注能分组、未验收选择提示/挂载候选或被拒手牌缓存。无服务；代码与定向/静态检查完成，独立最终复核通过，待正常 FULL 冻结验收；构建另核实际余量，远端写入由受理会话控制。
 
@@ -24,6 +27,7 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday（核心体验持续打磨 WF-experience-polish-1023，会话01a16744） | 主代理：ui导航/就绪/切幕及对应CSS；entry_audit：公共返回/overlay及集中验收；run_logic_audit：动作分发、agent、battle/runtime，现文案片class-choice.page、hub.depart、hub.navigation-v7、core/map-node-state及对应闲置CSS/直接测试；journey_qa：hub/game.bag、安全格操作切片及直接测试；自有docs/evidence/2026-10-23-WF-experience-polish-1023/、.tmp/polish-1023/；5357/PID1368/exec66734，cwd 搜打撤 | 老板授权整体游戏思路、底层代码与前端美术两层持续打磨；公共机制优先，6.1-sol/high实施验证，本地STS2参考；不改他人资源清单；先整批修改再集中验收 | 2026-10-23 | 完成未提交（编辑释放）：原会话已按老板要求暂停；公共机制559例已验，安全格替换及5处文案/闲置样式已实现；本次受理统一提交验收，疑似双过场未解决，实页按要求未做；原5357服务保留 |
 | Friday（历史规则查询集中验收 WF-catalog-lookup-1021） | `game/src/cards/builtin-card-execution.js`、`tests/builtin-migration-lookup.test.js`、`tests/reserved-card-id-regression.test.js`、`docs/performance.md`、本条登记、`docs/evidence/2026-10-22-WF-catalog-lookup-1021/`；独立 `/tmp/catalog-lookup-acceptance-da9adae-20261021/source` / Git/index，无服务 | da9adae8基底的不可变历史表复用与既有自定义ID兼容；不改变内置规则、不启用设计/导入UI | 2026-10-22 | 本地验收完成未提交、编辑占用释放：QUICK95；独立FULL8386通过/7跳过；首次构建137保留、唯一标准重试及预算通过、资源专项116通过；实页/远端CI/推送/发布未核验；原源码、候选及前批构建/登记保留 |
 | Friday（已验证增量准备 WF-next-verified-main-1021） | `game/src/cards/cards.view.js`、`game/src/cards/card-description-links.js`、`tests/card-description-linked-zoom.test.js`、`tests/runtime-hotpaths.test.js`、`tests/card-description-single-resolution.test.js`、`game/src/battle/view/battle.view.js`、`tests/battle-persistent-stage.test.js`、`docs/architecture.md`、本条登记、`docs/evidence/2026-10-21-WF-next-verified-main-1021/`；独立 `/tmp/next-verified-main-batch-20261021/source` / Git/index，无服务 | 以17013cc/tree442bfad9完整19,532 blob为基底；卡面/正常缩放单次解析和单行陈旧父呈现续跑守卫，保留原候选证据；mock重入压力不冒充自然音频bug或速度收益；完整挂载查询R2独立保留，不混入 | 2026-10-21 | 待验收：精确候选源/测试已核；旧quick中断/失败均保留不可复用；仅适配既有VM夹具的命名导出，原断言未改；待新冻结，FULL/构建/当前窗口实页/提交推送未运行；旧云端HEAD/index及历史证据不变 |
 | Friday（奖励总览重设计 WF-reward-overview-1021） | `game/css/chest-reward-overview.css`、`game/src/ui/chest-reward-overview.js`、`game/src/ui/reward-scene-view.js`、`game/src/run/chests.js`、定向测试、dev复核页、自有证据；Vite 5301，exec会话72327，创建会话01a15dc5 | 老板授权配色、布局与阅读层级整改；保留原未提交内容及领取规则 | 2026-10-21 | 完成未提交，编辑释放；自建5301服务收官停止；老板要求删除计数后不再验证 |
@@ -38,7 +42,8 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday / 主线网页版 WF-feedback-1021 | Vite `D:/素材/代号柒/搜打撤`、5200、PID23304；本会话 `npm run web` 创建（独立后台），日志 `node_modules/.cache/web-up-5200.log`，入口/PNG/WebP 自探活通过 | 老板要求拉起网页版试玩；含本轮12条反馈修复的全部改动 | 2026-10-22 | 服务运行中，老板试玩保留 |
+| Friday / 主线网页版 WF-feedback-1021；恢复 WF-local-full-1023 | Vite `D:/素材/代号柒/搜打撤`、5200、PID20320；老板允许临停原PID23304后按原参数隐藏重启，身份/日志见 `docs/evidence/2026-10-23-local-full/services-restored.json` | 原试玩服务恢复；首页HTTP200，不代表实页验收 | 2026-10-23 | 服务运行中，老板试玩保留 |
+| Friday / 原5173服务恢复 WF-local-full-1023 | Vite `D:/素材/代号柒/搜打撤`、5173、PID40140；原PID3224经老板允许临停，按原无参数命令隐藏重启；收据同上 | 已确认IPv6 ::1监听；当前工具访问IPv6套接字受权限限制，HTTP未核验 | 2026-10-23 | 原服务恢复保留 |
 | Friday / 公共控件预览保留 WF-public-controls-1021 | `.tmp/public-controls-1021/review/game`：5348/PID35120；旧preview/game：5347/PID18792，工作目录均为`D:/素材/代号柒/搜打撤`，本父会话创建，身份见自有service.json与review-service.json | 源码已释放；老板当前预览保留，旧预览不再同步或重载；未停止或认领其他服务 | 2026-10-21 | 已交付；服务保留供当前试玩 |
 | Friday / 尖塔施放预览 WF-sts2-cast-ui-1021 | 隔离预览 `.tmp/sts2-cast-ui-1021/preview/game`，5346；启动身份见 `docs/evidence/2026-10-21-WF-sts2-cast-ui-1021/service.json`，同步清单见 `final-sync.json` 及 `followup-sync.json` | 实现及发现底栏、宝箱视觉、统一字号和切栏追加编辑已释放，预览保留供老板当前界面查看；沿用“不用验证，你做完就行”，未继续测试/检查/浏览器验收，无build/提交/推送 | 2026-10-21 | 已交付预览，保留本会话服务 |
 | Friday / 主线启动 01a159f7 | Vite `D:/素材/代号柒/搜打撤`、5200、PID13008；本会话 `npm run web -- --skip-compile` 创建；`node_modules/.cache/web-up-5200.json` | 老板授权拉起主线；后台隐藏启动，入口及资源响应通过，沿用现有剧情产物；服务保留供试玩 | 2026-10-20 | 已交付 |
@@ -65,6 +70,10 @@ Friday / 修复门禁后提交推送 WF-github-ship-1021（会话01a15dfc）：�
 
 
 ## 近期已释放
+
+### 2026-10-23 本地依赖与完整验收 / Friday WF-local-full-1023
+
+ed0cf08d：按锁清装依赖，502个已安装包版本一致；FULL8507通过/38跳过，生产构建及预算通过。构建自动生成 `game/src/generated/art-manifest.js` 的15条资源记录，补验105通过/1跳过；与本条及自有 `docs/evidence/2026-10-23-local-full/` 完成未提交，编辑释放。原失败尝试保留；服务按老板授权恢复并转保留表；实页按要求未做，无提交/推送。
 
 ### 2026-10-22 工作树打包提交推送 / Friday WF-ship-feedback-12
 

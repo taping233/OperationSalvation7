@@ -35,6 +35,32 @@ it('mounts the busy presentation and waits for true readiness before cost, RNG a
   expect(h.busy).toBe(false); expect(h.state.phase).toBe('player');
 });
 
+it('returns a completion promise through execution and queue idle cleanup', async () => {
+  const resource=deferred(), effect=deferred(), h=harness(() => resource.promise);
+  const completion=h.queue(() => effect.promise);
+  expect(typeof completion?.then).toBe('function');
+  let settled=false;
+  completion.then(() => { settled=true; });
+  await flush(); expect(settled).toBe(false);
+  resource.resolve(true); await flush(); expect(settled).toBe(false);
+  effect.resolve('completed');
+  await expect(completion).resolves.toBe('completed');
+  expect(h.busy).toBe(false); expect(h.activeSignal).toBeNull();
+  expect(h.session.actionQueue.running).toBe(false);
+});
+
+it('a returned cancelled completion settles without reviving a replacement generation', async () => {
+  const resource=deferred(), h=harness(() => resource.promise), execute=vi.fn();
+  const completion=h.queue(execute);
+  h.session.reset('replacement battle'); h.replaceBattle();
+  await expect(completion).resolves.toBeUndefined();
+  const rendered=h.render.mock.calls.length;
+  resource.resolve(true); await flush();
+  expect(execute).not.toHaveBeenCalled();
+  expect(h.render).toHaveBeenCalledTimes(rendered);
+  expect(h.state.phase).toBe('player');
+});
+
 it('releases an aborted queue while readiness is unresolved and cannot revive the action later', async () => {
   const resource = deferred(), h = harness(() => resource.promise), execute = vi.fn();
   h.queue(execute); await flush();

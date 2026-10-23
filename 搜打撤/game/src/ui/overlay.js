@@ -8,6 +8,7 @@ import './motion-transitions.js';
 import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
 import { clearExpeditionPanel, renderExpeditionPanel } from '../run/expedition.view.js';
 import { getOverlayRuntimeTracePanel, syncRuntimeTracePanel } from '../core/runtime-trace-panel.local.js';
+import { isAvailableControl as isAvailableOverlayFocusTarget } from './action-dispatch.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -339,6 +340,9 @@ export const overlayMethods = {
   // 返回 true 表示已处理。战斗页与结算类页面（没有取消按钮可代点）一律不关，
   // 避免把必须做出选择的流程（撤离失败 / 宝箱强选 / BOSS 编组）跳过。
   closeTopOverlayByEsc() {
+    // Inspection owns cancellation above its source page, including backdrop/X calls.
+    const zoom = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
+    if (zoom?._closeCardZoom) { zoom._closeCardZoom(); return true; }
     if (this.el.overlay.hidden) return false;
     const mode = this._lastMode;
     if (mode === 'battle') {
@@ -356,16 +360,27 @@ export const overlayMethods = {
     // 图标关闭钮（背包 × / 卡池 ×）文本为空，按 data-act 与 aria-label/title 兜底匹配
     const cancelBtn = this._findCancelBtn();
     if (cancelBtn) { cancelBtn.click(); return true; }
+    // A mandatory inner dialog never falls through to the underlying page/bag.
+    if (this._overlayInteractionRoot() !== this.el.ovBody) return false;
     // 背包这类只有信息没有按钮的浮层：走 bag 侧注册的关闭回调（closeBackpack 唯一收口，
     // 复位 game.state）；钩子未注册时（启动早期）退回直接关
     if (mode === 'bag' || mode === 'bagpage') { if (this._bagCloseHook) this._bagCloseHook(); else this.hideOverlay(); return true; }
     return false;
   },
 
+  // Cancellation, keyboard focus and action admission share the current dialog owner.
+  _overlayInteractionRoot() {
+    const styles = new Map();
+    const root = this.el.ovBody || this.el.overlay;
+    const dialogs = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('dialog[open], [role="dialog"]'))];
+    // Existing DOM ordering is the overlay ordering; no parallel stack or cached owner.
+    return dialogs.reverse().find(dialog => isAvailableOverlayFocusTarget(dialog, styles)) || root;
+  },
+
   // 面板内「取消语义」按钮探测（Esc / 右上角 × / 遮罩点击共用）
   _findCancelBtn() {
     const styles = new Map();
-    const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (this.el.ovBody.querySelectorAll('button'))]
+    const buttons = [.../** @type {NodeListOf<HTMLButtonElement>} */ (this._overlayInteractionRoot().querySelectorAll('button'))]
       .filter(b => b.dataset.cancel !== 'false')
       // Card rules can contain 返回/离开; inspection or selection is never an inferred cancel.
       .filter(b => b.dataset.cancel === 'true' || !b.matches('.reward-card, .event-choice-card, .bt-card'));
@@ -377,15 +392,18 @@ export const overlayMethods = {
 
   // 当前浮层是否可通过取消类入口关闭（决定右上角 × 的显隐）
   _canCancelOverlay() {
+    const zoom = /** @type {import('./ui.dom.types.js').CardZoomElement} */ (document.getElementById('cardZoom'));
+    if (zoom?._closeCardZoom) return true;
     if (this.el.overlay.hidden || this._lastMode === 'battle') return false;
     if (this._findCancelBtn()) return true;
+    if (this._overlayInteractionRoot() !== this.el.ovBody) return false;
     const m = this._lastMode;
     return m === 'bag' || m === 'bagpage';
   },
 
   _overlayFocusable() {
     const styles = new Map();
-    const root = this.el.ovBody || this.el.overlay;
+    const root = this._overlayInteractionRoot();
     const focusables = [...root.querySelectorAll(OVERLAY_FOCUS_SELECTOR)];
     const panel = getOverlayRuntimeTracePanel(this.el.overlay);
     if (panel && !root.contains(panel)) focusables.push(...panel.querySelectorAll(OVERLAY_FOCUS_SELECTOR));
@@ -393,7 +411,7 @@ export const overlayMethods = {
   },
 
   _resolveOverlayInitialFocus(initialFocus) {
-    const root = this.el.ovBody || this.el.overlay;
+    const root = this._overlayInteractionRoot();
     let target = null;
     if (initialFocus && initialFocus.nodeType === 1 && root.contains(initialFocus)) target = initialFocus;
     if (!target && typeof initialFocus === 'string') {
@@ -414,14 +432,21 @@ export const overlayMethods = {
       return /取消|返回|关闭|继续|放回|保留|不删除|不清空|留下/.test(text)
         && isAvailableOverlayFocusTarget(el, styles);
     });
-    return preferred || candidates.find(el => isAvailableOverlayFocusTarget(el, styles)) || null;
+    const fallback = preferred || candidates.find(el => isAvailableOverlayFocusTarget(el, styles));
+    if (fallback) return fallback;
+    // A mandatory dialog with no controls still owns keyboard focus.
+    if (root !== this.el.ovBody && root !== this.el.overlay) {
+      if (!root.hasAttribute('tabindex')) root.tabIndex = -1;
+      return root;
+    }
+    return null;
   },
 
   _trapOverlayFocus(e) {
     const focusables = this._overlayFocusable();
     if (!focusables.length) {
       e.preventDefault();
-      this.el.overlay.focus({ preventScroll: true });
+      (this._resolveOverlayInitialFocus() || this.el.overlay).focus({ preventScroll: true });
       return;
     }
     const active = document.activeElement;
@@ -456,27 +481,4 @@ export const overlayMethods = {
     syncRuntimeTracePanel(this.el.overlay);
   },
 };
-
-// Keep sequential focus and explicit initial focus inside the active dialog surface.
-// Native :disabled preserves the first-legend exception of disabled fieldsets.
-function isAvailableOverlayFocusTarget(element, styles = new Map()) {
-  if (element.matches(':disabled, input[type="hidden"]') ||
-      element.closest('[hidden], [aria-hidden="true"], [inert]')) return false;
-  const styleOf = node => {
-    if (!styles.has(node)) styles.set(node, getComputedStyle(node));
-    return styles.get(node);
-  };
-  // Visibility is inherited but can be explicitly restored by a descendant.
-  if (['hidden', 'collapse'].includes(styleOf(element).visibility)) return false;
-  for (let node = element; node; node = node.parentElement) {
-    if (styleOf(node).display === 'none') return false;
-    // A closed disclosure exposes only its first direct summary, even when a
-    // nested details is open. The details element itself remains visible.
-    if (node !== element && node.matches('details:not([open])')) {
-      const summary = /** @type {HTMLElement} */ (node.querySelector(':scope > summary'));
-      if (!summary?.contains(element)) return false;
-    }
-  }
-  return true;
-}
 

@@ -12,6 +12,7 @@ function isTestRuntime() {
 }
 
 function waitPresentationMs(ms, signal) {
+  if (signal?.aborted) return Promise.reject(signal.reason || new Error('Battle presentation cancelled'));
   if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
     if (signal?.aborted) { reject(signal.reason || new Error('Battle presentation cancelled')); return; }
@@ -42,6 +43,7 @@ function waitPresentationMs(ms, signal) {
 }
 
 function waitHitStop(ms, signal) {
+  if (signal?.aborted) return Promise.reject(signal.reason || new Error('Battle presentation cancelled'));
   if (isTestRuntime() || isTurbo() || !(ms > 0)) return Promise.resolve();
   const release = pausePresentation();
   return new Promise((/** @type {(value?: void) => void} */ resolve, reject) => {
@@ -60,7 +62,11 @@ function schedulePresentation(callback, ms) {
 
 function schedulePresentationMs(callback, ms) {
   const controller = new AbortController();
-  waitPresentationMs(ms, controller.signal).then(callback).catch(() => {});
+  // A resolved wait can still have an undelivered microtask (zero duration,
+  // turbo, or a timer that just fired). Cancellation owns callback delivery too.
+  waitPresentationMs(ms, controller.signal).then(() => {
+    if (!controller.signal.aborted) callback();
+  }).catch(() => {});
   return () => controller.abort(new Error('Presentation cleanup cancelled'));
 }
 

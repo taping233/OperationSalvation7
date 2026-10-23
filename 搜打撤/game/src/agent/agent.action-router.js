@@ -1,6 +1,7 @@
 /* Synchronous Agent command routing and completion tracking. Shared by the eager facade and lazy runner. */
 import { normalizeAction, actionId } from './agent.protocol.js';
 import { findUiElement } from './agent.surface.js';
+import { getObservedActionTarget, invokeUiAction } from '../ui/action-dispatch.js';
 import { markUiFailure } from './agent.state.js';
 import { moveTo, reenterCell } from '../run/game.run.flow.js';
 import { startNewGame, game, getActiveSlot } from '../run/game.session.js';
@@ -81,7 +82,7 @@ function act(input) {
     }
   };
   try {
-    const out = dispatch(action, id);
+    const out = dispatch(action, id, getObservedActionTarget(input));
     const completion = completions.get(out);
     if (completion) {
       completion.promise = completion.promise.then(result => {
@@ -103,7 +104,7 @@ function act(input) {
   }
 }
 
-function dispatch(action, id) {
+function dispatch(action, id, observedTarget) {
   switch (action.type) {
     case 'ui': {
       // 合成动作（对应真实关闭机制）：卡牌特写点背景关闭 / closeTopOverlayByEsc 同链关层
@@ -118,15 +119,12 @@ function dispatch(action, id) {
         const closed = UI?.closeTopOverlayByEsc?.();
         return closed ? { ok: true, id } : { ok: false, id, code: 'OVERLAY_NOT_CLOSABLE', message: '当前弹层是必选流程，不能关闭' };
       }
-      const el = findUiElement(action.name, action.params);
+      const el = observedTarget || findUiElement(action.name, action.params);
       if (!el) return { ok: false, id, code: 'UI_ACTION_UNAVAILABLE', message: `当前页面没有可点的 ${id}` };
       const UI = window.SDT?.UI;
-      const fn = UI?._acts?.[action.name] || UI?._baseActs?.[action.name];
-      if (fn) {
-        // 与 ovBody 点击分发同参：回调拿按钮 dataset（photo-zoom 源按钮多传元素）
-        const result = el.hasAttribute('data-photo-zoom-source') ? fn(el.dataset, el) : fn(el.dataset);
-        return commandResult(result, id, action);
-      }
+      const result = invokeUiAction(UI, el, { expected:action });
+      if (result.ok) return commandResult(result.value, id, action);
+      if (result.reason === 'unavailable') return { ok:false, id, code:'UI_ACTION_UNAVAILABLE', message:'来源动作已失效或不可操作' };
       if (typeof el.click === 'function') { el.click(); return { ok: true, id, via: 'click' }; }
       return { ok: false, id, code: 'UI_ACTION_UNHANDLED', message: `${id} 没有注册回调` };
     }

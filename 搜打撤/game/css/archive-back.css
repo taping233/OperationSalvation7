@@ -2,14 +2,14 @@
 /* 退出键几何与基础外观来源：选档、基地、地图均使用 archive-back；触碰反馈沿 navigation-feedback。 */
 :is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back {
   position: absolute;
-  left: 18px;
-  top: 16px;
+  left: var(--archive-back-left, 18px);
+  top: var(--archive-back-top, 16px);
   z-index: 6;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 58px;
+  width: var(--archive-back-width, 64px);
+  height: var(--archive-back-height, 58px);
   min-width: 0;
   min-height: 0;
   margin: 0;

@@ -1,6 +1,7 @@
 /* 首页直连界面的通用交互；页面布局、主题与入场动画由各页保留。 */
 :root { --linked-touch-time: .38s; --linked-touch-ease: cubic-bezier(.37,0,.63,1); }
-#overlay :is(.achievement-gallery, .beginner-guide) { --archive-back-color: #303735; }
+#overlay :is(.achievement-gallery, .beginner-guide, .cls-pool-page) { --archive-back-color: #303735; }
+#overlay .cls-pool-page[data-base-departure='true'] { --archive-back-color: #e7eee4; }
 #overlay .achievement-gallery .ag-title-group { padding-left: 76px; min-height: 58px; }
 
 /* 可点击外层保持原位；奖章、文字和装饰层仍可播放各自的小反馈。 */
@@ -51,6 +52,18 @@ body.cardlib-open #cardZoom#cardZoom.cz-photo .cz-close:not(:hover):not(:focus-v
 #title#title #homeCredits .archive-back:is(:hover, :active, :focus-visible) { transform: scale(1); }
 #title#title #homeCredits > form { position: absolute; left: 18px; top: 16px; margin: 0; }
 #title#title #homeCredits > form .archive-back { position: static; }
+
+/* 整备沿用自身页头的点击范围，公共返回件只提供图标与输入反馈。 */
+#overlay #depMain.camp-depart-detail {
+  --archive-back-left: 36px; --archive-back-top: 24px;
+  --archive-back-width: 46px; --archive-back-height: 46px;
+}
+/* 卡池的带字返回留在页头流中，两种入口继续使用各自宽度。 */
+#overlay#overlay#overlay .cls-pool-page .pool-back.archive-back {
+  position: static; inset: auto; flex: none; gap: 9px;
+  width: 104px; height: 44px;
+}
+#overlay#overlay#overlay .cls-pool-page[data-base-departure='true'] .pool-back.archive-back { width: 128px; }
 
 /* Same return control inside the merchant's existing footer layout. */
 #overlay#overlay#overlay .shop-market-footer .shop-back.archive-back {

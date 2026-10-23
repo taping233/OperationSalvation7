@@ -55,9 +55,6 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   if (!current()) return false;
   const rich = cover.matches('.camp-entry-cut') || !!cover.querySelector('.camp-entry-cut');
   const resume = cover.dataset.handoffProfile === 'resume';
-  const mapReturn = cover.matches('.page-visual-return:not([data-kind="panel"])');
-  // Full-page returns retain their entrance before revealing the prepared map.
-  const returnDwell = transitionPause(motionReduced() || !mapReturn ? 0 : motionTiming.mapReturnHold, signal);
   cover.classList.add(rich ? 'transition-handoff-rich' : 'transition-handoff');
   if (!painted) {
     await transitionFrame(signal);
@@ -72,7 +69,7 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   try { result = await Promise.race([Promise.resolve().then(ready), cancelled]); }
   finally { signal?.removeEventListener('abort', stop); }
   if (result === false || !current()) return false;
-  await Promise.all([dwell, returnDwell]);
+  await dwell;
   if (!current()) return false;
   await transitionFrame(signal);
   if (!current()) return false;
@@ -81,6 +78,6 @@ export async function revealTransition(cover, { ready = () => true, isCurrent = 
   cover.querySelectorAll('.page-cut-waiting').forEach(cut => cut.classList.remove('page-cut-waiting'));
   cover.classList.add('leaving');
   if (!rich) cover.classList.add('transition-handoff-leaving');
-  if (!motionReduced()) await transitionPause(resume ? motionTiming.resumeExit : rich ? duration : mapReturn ? motionTiming.mapReturnExit : motionTiming.handoff, signal);
+  if (!motionReduced()) await transitionPause(resume ? motionTiming.resumeExit : rich ? duration : motionTiming.handoff, signal);
   return current();
 }

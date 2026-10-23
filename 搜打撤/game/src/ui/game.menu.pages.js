@@ -434,7 +434,7 @@ export function createGameMenuPages(deps, shell) {
           ${SLOT_BG_SILHOUETTES}
         </div>
         <!-- 选档、基地、地图退出键统一沿 archive-back.css。 -->
-        <button class="archive-back" data-act="slotBack" aria-label="返回主菜单" title="返回主菜单（Esc）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        ${linkedBackHTML('slotBack', '返回主菜单', '', 'button', { cancel:true })}
         <header class="slot-page-head">
           <i class="slot-page-rule"></i>
         </header>
@@ -839,7 +839,7 @@ export function createGameMenuPages(deps, shell) {
   // ---------- 跑局数据（W1-01：入口=设置页；W2-06：页头行+布局收敛） ----------
   // agent.data.js 的 openDataPage 渲染 .pg hub 但无页头/返回件（原唯一进入=Alt+9，离开仅靠
   // 隐式 Esc/点背景）。此处包装：
-  //   ① 注入全站统一 .ak-sq.ak-exit.ak-back-tl 返回键（点击=hideOverlay，等价 Esc 语义；
+  //   ① 注入 linkedBackHTML 共用返回键（点击=hideOverlay，等价 Esc 语义；
   //      数据页不持有 game.state 无需复位），从设置页进入时返回键回设置页；
   //   ② 注入 .data-pg-head 页头行（W2-06：返回件不再叠「总局数」KPI 卡，KPI 区下让位）；
   //   ③ .data-tuned 类激活 page-datapage.css（导出/清空钮收敛正常尺寸右对齐）。
@@ -867,13 +867,9 @@ export function createGameMenuPages(deps, shell) {
         pg.prepend(head);
       }
       if (!/** @type {import("./ui.dom.types.js").UIElement} */ (pg.querySelector('.ak-back-tl'))) {
-        const btn = document.createElement('button');
-        btn.className = 'ak-sq ak-exit ak-back-tl';
-        btn.title = '返回（Esc）';
-        btn.setAttribute('aria-label', '返回');
-        btn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">'
-          + '<path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
-          + '<path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        const template = document.createElement('template');
+        template.innerHTML = linkedBackHTML('dataPageBack', '返回', 'ak-back-tl', 'button', { cancel:true });
+        const btn = /** @type {HTMLButtonElement} */ (template.content.firstElementChild);
         btn.addEventListener('click', () => {
           UI.hideOverlay();
           if (fromSettings) openSettings();   // 从设置页进来：返回键回设置页，而非落到标题

@@ -13,6 +13,7 @@ const { observe, bustSigCache, markUiFailure } = await import('../game/src/agent
 const { setTurbo } = await import('../game/src/core/turbo.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const { createGameMenuController } = await import('./helpers/menu-controller.js');
+const { collectUiActions } = await import('../game/src/agent/agent.surface.js');
 const action = { type: 'ui', name: 'testCommand' };
 const options = { preSettled: true, allowEmpty: true, quietMs: 1, pollMs: 1, timeoutMs: 100, commandTimeoutMs: 1000 };
 const deferred = () => {
@@ -75,6 +76,49 @@ function mountSlotMenu({ savedRun = true, loadOk = true, recovery } = {}) {
 }
 
 describe('Agent command result contract', () => {
+  it.each(['disabled', 'aria-disabled', 'hidden', 'inert', 'closing'])('rejects an observed action made %s before execution', kind => {
+    const callback = window.SDT.UI._acts.testCommand = vi.fn();
+    const observed = collectUiActions().find(item => item.name === 'testCommand');
+    const button=document.querySelector('[data-act="testCommand"]');
+    if (kind === 'disabled') button.disabled=true;
+    if (kind === 'aria-disabled') button.setAttribute('aria-disabled','true');
+    if (kind === 'hidden') button.parentElement.hidden=true;
+    if (kind === 'inert') button.parentElement.inert=true;
+    if (kind === 'closing') button.parentElement.classList.add('closing');
+    expect(act(observed)).toMatchObject({ ok:false, code:'UI_ACTION_UNAVAILABLE' });
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('agent resolves the active zoom footer and rejects the covered source action', () => {
+    document.body.insertAdjacentHTML('beforeend', '<div id="cardZoom"><footer class="cz-foot"><button data-act="zoomCommand">领取</button></footer></div>');
+    const source=window.SDT.UI._acts.testCommand=vi.fn();
+    const result=Promise.resolve(true), zoom=window.SDT.UI._acts.zoomCommand=vi.fn(() => result);
+    expect(act(action)).toMatchObject({ok:false,code:'UI_ACTION_UNAVAILABLE'});
+    expect(source).not.toHaveBeenCalled();
+    expect(act({type:'ui',name:'zoomCommand'})).toMatchObject({ok:true,async:true});
+    expect(zoom).toHaveBeenCalledOnce();
+  });
+
+  it('an observed action cannot target a same-name button on a replacement page', () => {
+    const observed = collectUiActions().find(item => item.name === 'testCommand');
+    document.getElementById('ovBody').innerHTML = '<button data-act="testCommand">New page</button>';
+    const callback = window.SDT.UI._acts.testCommand = vi.fn();
+    expect(act(observed)).toMatchObject({ ok:false, code:'UI_ACTION_UNAVAILABLE' });
+    expect(callback).not.toHaveBeenCalled();
+    expect(act(collectUiActions().find(item => item.name === 'testCommand')).ok).toBe(true);
+    expect(callback).toHaveBeenCalledOnce();
+  });
+
+  it.each(['name', 'params'])('rejects an observed target whose %s changes without DOM replacement', change => {
+    const button=document.querySelector('[data-act="testCommand"]'); button.dataset.i='1';
+    const observed=collectUiActions().find(item => item.name === 'testCommand');
+    const callback=window.SDT.UI._acts.testCommand=window.SDT.UI._acts.otherCommand=vi.fn();
+    if (change === 'name') button.dataset.act='otherCommand';
+    else button.dataset.i='2';
+    expect(act(observed)).toMatchObject({ok:false,code:'UI_ACTION_UNAVAILABLE'});
+    expect(callback).not.toHaveBeenCalled();
+  });
+
   it('rejects explicit false from a real registered UI callback', () => {
     window.SDT.UI._acts.testCommand = () => false;
     expect(act(action)).toMatchObject({ ok: false, code: 'ACTION_REJECTED' });

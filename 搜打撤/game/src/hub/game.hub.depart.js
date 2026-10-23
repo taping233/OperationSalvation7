@@ -14,6 +14,7 @@ import { bindDepartureFilters, updateDepartureView } from './departure.view-upda
 import { departureSummary, previewRecommendedDeparture } from './departure.summary.js';
 import { baseHomeV3HTML } from './hub.home-v3.js';
 import { enterDepartureCut, startDepartureHandoff } from '../ui/departure-transition.js';
+import { linkedBackHTML } from '../ui/home-linked-interactions.js';
 import '../../css/departure-selected.css';
 import { bindDepartureDrag } from './departure.drag.js';
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
@@ -218,14 +219,7 @@ function renderDepartureCard(card) {
     const bagCells = Array.from({ length:Math.max(preview.capacity, preview.cells.length) }, (_, i) => renderCell(preview.cells[i])).join('');
     UI.showOverlay('', `
       <div class="pg hub departure-cover departure-glass camp-detail camp-depart-detail ui-scale-system" id="depMain" data-departure-view="cover-v3">
-        <button class="ak-sq ak-exit ak-back-tl" data-act="depBack" title="返回人物选择（Esc）" aria-label="返回人物选择">
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M4 12h10M4 12l4-4M4 12l4 4"
-                  fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        ${linkedBackHTML('depBack', '返回人物选择', 'ak-back-tl', 'button', { cancel:true })}
         <header class="hub-head">
           <div class="camp-detail-heading"><h2>出征整备</h2></div>
           <nav class="camp-steps" aria-label="出征步骤"><button data-act="depMode">01 模式</button><button data-act="depBack">02 人物</button><b aria-current="step">03 整备</b></nav>
@@ -234,7 +228,7 @@ function renderDepartureCard(card) {
         <div class="dep-body${deployJustOpened ? ' page-in' : ''}">
           <aside class="camp-depart-person">
             <div class="camp-depart-person-art" data-character="${escAttr(characterFor(deployCharacter)?.id || '')}" data-skin="${escAttr(SDT.Art?.getSkin?.(deployCharacter) || 'default')}" aria-hidden="true">${SDT.Art?.classFullArt?.(characterFor(deployCharacter)?.id) || ''}</div>
-            <div class="camp-depart-person-copy"><h3>本次人物：${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
+            <div class="camp-depart-person-copy"><h3 aria-label="出征人物：${escAttr(characterName(deployCharacter))}">${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
           </aside>
           <section class="hub-card dep-storage">
             <h3>仓库候选</h3>

@@ -313,7 +313,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   consumerFingerprints: {
     "slot-weather": {
       "game/src/ui/slot-emblems.js": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a",
-      "game/src/ui/game.menu.pages.js": "2dbc43a4b707e6dbdbdd1ee18c58df424d9a43739594cc885f3fd0ccc4a0c92d"
+      "game/src/ui/game.menu.pages.js": "1e7881f718e735acb4b3cf482a63919eadd3ece44f40bac6ec488bd4a979251b"
     },
     "shadowed-card-art": {
       "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
@@ -350,7 +350,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     },
     "transitions": {
-      "game/src/ui/camp-entry.js": "ccee99b0505c2b35cc6fa8c04ef69a41ea2f2b23a23abbbc7d503f2d15c7c384",
+      "game/src/ui/camp-entry.js": "e2e93537b0345a1eda5a382d3548ef04980927bead0fbea19fd7bf4dbd8ddc55",
       "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
       "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
     }
@@ -389,7 +389,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/run/lab.ending.js": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
     "game/src/ui/game.menu.js": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
-    "game/src/ui/ui.js": "72437c0bb2f5e094f6ca40221771d04bea468a56d61c6868379f9a5c6b7f71e3",
+    "game/src/ui/ui.js": "f5db4dc8e31eef14d3abba25abe291b4dba539d89613e34fa74256afc98c1d73",
     "game/src/wu-career-frame-preview.js": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892"
   },
 });

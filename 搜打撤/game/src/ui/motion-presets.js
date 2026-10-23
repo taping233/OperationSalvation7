@@ -8,7 +8,6 @@ export const motionTiming = Object.freeze({
   cardReturn: 120, acquire: 340,
   photoEnter: 140, photoAtelierEnter: 420, photoExit: 120,
   zoomExit: 260, completionSlack: 60, notice: 3200,
-  mapReturnEnter: 420, mapReturnExit: 420, mapReturnHold: 560,
   resumeExit: 360,
 });
 export const motionEasing = Object.freeze({

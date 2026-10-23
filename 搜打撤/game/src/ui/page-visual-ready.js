@@ -1,7 +1,6 @@
 import { beginRuntimeStage, captureRuntimeStageContext } from '../core/runtime-trace-stages.local.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import { acquirePageVisualReadiness } from './page-visual-readiness-sharing.js';
-import { transitionHeadingHTML } from './transition-heading.js';
 import '../../css/page-visual-ready.css';
 import { revealTransition, transitionFrame } from './transition-handoff.js';
 
@@ -12,13 +11,6 @@ function visualCover(kind, returning = false) {
   cover.className = `page-visual-handoff${returning ? ' page-visual-return' : ''}`;
   cover.dataset.kind = kind;
   cover.setAttribute('aria-hidden', 'true');
-  if (kind !== 'panel') {
-    for (let index = 0; index < 3; index++) {
-      const band = document.createElement('i');
-      band.style.setProperty('--band', String(index));
-      cover.append(band);
-    }
-  }
   return cover;
 }
 
@@ -78,15 +70,15 @@ function waitBattlePresentation(stage, signal) {
   });
 }
 
-// Returning from a full page can resize the map; retain a veil until its new first frame.
+// Returning keeps the existing map visible. A transparent input shield owns
+// the resize/first-frame boundary without staging an unrelated scene or dwell.
 export function stageMapReturn(ui, game) {
   cancelPageVisual();
   const controller = new AbortController();
   const run = game.discoveredPairs;
   const overlay = ui.el.overlay;
-  const cover = visualCover('page', true);
-  cover.classList.add('node-map-return');
-  cover.insertAdjacentHTML('beforeend', transitionHeadingHTML('返回探索'));
+  const cover = visualCover('panel', true);
+  cover.classList.add('page-map-return');
   document.body.append(cover);
   const block = event => {
     if (event.key === 'Escape' || event.altKey) return;

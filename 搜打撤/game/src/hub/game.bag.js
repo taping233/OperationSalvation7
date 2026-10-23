@@ -1,7 +1,7 @@
 import { planBagTokenCraft } from './game.bag.token-craft.js';
 import { patchBackpackPane, captureBackpackPosition, restoreBackpackPosition } from './bag-pane-view.js';
 import { containerStoreHTML, captureContainerView, restoreContainerFocus } from './game.container-store.view.js';
-import { stackTransferSlotDelta, containerRuleOf, containerAccepts } from '../core/card-capacity.js';
+import { containerRuleOf, containerAccepts } from '../core/card-capacity.js';
 import { deriveBagRenderState, syncBagCardOrder } from '../core/bag-render-derivation.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const UI = window.SDT.UI;
@@ -21,6 +21,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
 import { createRewardOrganizer } from './game.reward-organizer.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import { createOperationNotice } from '../ui/operation-notice.js';
+import { createSafeTransfer } from './game.bag.safe-transfer.js';
 function closeBagZoom() {
   const zoom = document.getElementById('cardZoom');
   // Finish the old detail before new page actions capture their view owner.
@@ -44,6 +45,12 @@ let requestedBagSection = null;
 let bagZone = 'bag', bagFilter = 'all', bagSortKey = 'rarity';
 let bagReceipt = null;
 const bagNotice = createOperationNotice();
+const { button:safeTransferButton, move:moveStackSafe } = createSafeTransfer({
+  UI, game, shaName:SDT.Cards.SHA.name, bagCap, safeCap, usedSlots, safeUsed,
+  baseCap:() => SDT.Base.bagCap(), refresh:showBackpack, save:saveGame, closeZoom:closeBagZoom,
+  captureContext:() => captureBattleContext(game), beforeSelection:rememberBagPosition,
+  cardHTML:card => SDT.Cards.cardHTML(card), sound:kind => SDT.Sound.sfx(kind), receipt:setBagReceipt,
+});
 function setBagReceipt(text) {
   bagReceipt = { cards:game.ownedCards };
   bagNotice.set(text);
@@ -229,41 +236,6 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     showBackpack(true); // 刷新背包
   }
 
-  // 整堆移动：背包格 ⇄ 安全格（同名卡一起移动）
-  function moveStackSafe(name, toSafe, { refresh = true, uids = null } = {}) {
-    if (game.battleActive) return false;
-    // 初始牌「初始攻击」不能带出背包：不入安全格（也就不会经宠物运回仓库）
-    if (toSafe && name === SDT.Cards.SHA.name) {
-      UI.log('[[icon:cross]] 初始牌「初始攻击」无法移出背包——每局固定携带，不入安全格 / 仓库', 'warn');
-      return;
-    }
-    const list = game.ownedCards.filter(o => !!o.safe !== !!toSafe && o.card.name === name && (!uids || (uids.includes(o.uid) && !o.stored && !o.pouchOf)));
-    if (!list.length) return;
-    // 整堆移动按「格数增量」检查：装备每张独立占格，其余同名牌每3张切格。
-    // 此前只查有无同名堆就整堆放行，9 张同名可越过安全格/背包容量（09-30 深审 ROOT-02）
-    const cap = game.stackCapOf(list[0].card);
-    const delta = stackTransferSlotDelta(game.ownedCards, name, toSafe, list.length, cap);
-    if (toSafe) {
-      if (safeUsed() + delta > safeCap()) {
-        UI.log(`[[icon:lock]] 安全格放不下：本次整叠还需 ${delta} 格（现 ${safeUsed()}/${safeCap()} 格），可在基地用口粮升级`, 'warn');
-        return;
-      }
-    } else {
-      if (usedSlots() + delta > bagCap()) {
-        UI.log(`[[icon:bag]] 背包放不下：本次整叠还需 ${delta} 格（现 ${usedSlots()}/${bagCap()} 格），取不出来`, 'warn');
-        return;
-      }
-    }
-    list.forEach(o => { o.safe = toSafe; });
-    SDT.Sound.sfx(toSafe ? 'safeStore' : 'safeRetrieve');
-    UI.log(toSafe
-      ? `[[icon:lock]] 【${esc(name)}】×${list.length} 已存入安全格（撤离失败时安全运回）`
-      : `[[icon:upload]] 【${esc(name)}】×${list.length} 已从安全格取出`, 'sys');
-    if (refresh) showBackpack(true);
-    else saveGame();
-    return true;
-  }
-
   // ---------- 背包显示顺序（v0.21：卡牌堆可拖拽排序，随存档保存） ----------
   // cardOrder = 卡名列表；新出现的堆追加到末尾，已消失的堆自动移除
   function syncCardOrder(bagStacks = cardStacks(false), safeStacks = cardStacks(true)) {
@@ -377,8 +349,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
             ? '<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>' : ''}
           ${o.card.id === 'tt2-pearlbox' ? '<button class="ov-btn ok" data-act="pearlStore">[[icon:gem]] 存入 / 取出资源卡</button>' : ''}
           ${o.card.id === 'tt7-stratagem' ? '<button class="ov-btn ok" data-act="pouchStore">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>' : ''}
-          ${fromSafe ? '<button class="ov-btn" data-act="detailFromSafe">移回背包</button>' :
-            (isSha ? '' : '<button class="ov-btn" data-act="detailToSafe">移入安全格</button>')}
+          ${fromSafe ? safeTransferButton(name, false, 'detailFromSafe') :
+            (isSha ? '' : safeTransferButton(name, true, 'detailToSafe'))}
           ${isSha ? '' : '<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>'}
         </div>`,
     });
@@ -387,8 +359,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
     bagAct('craftColorToken', () => { closeZoom(); craftBagToken('gold'); });
     bagAct('craftColorTokenByFragments', () => { closeZoom(); craftBagToken('fragments', o.uid); });
-    bagAct('detailFromSafe', () => { closeZoom(); moveStackSafe(name, false); });
-    bagAct('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
+    bagAct('detailFromSafe', () => moveStackSafe(name, false, { beforeMove:closeZoom }));
+    bagAct('detailToSafe', () => moveStackSafe(name, true, { beforeMove:closeZoom, onCancel:() => openBagZoom(name, false) }));
     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
     bagAct('pearlStore', () => { closeZoom(); openPearlStore(); });
     bagAct('pouchStore', () => { closeZoom(); openPouchStore(); });
@@ -636,8 +608,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');
     if (card.id === 'tt-token-gold' && st.count >= 3) btns.push('<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>');
     if (card.id === 'tt-token-color' && (game.fragments || 0) >= 2) btns.push('<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>');
-    if (safeFlag) btns.push('<button class="ov-btn" data-act="zoomMoveToBag">[[icon:bag]] 移回背包</button>');
-    else if (!isSha) btns.push('<button class="ov-btn" data-act="zoomMoveToSafe"><span aria-hidden="true">[[icon:lock]]</span> 移入安全格</button>');
+    if (safeFlag) btns.push(safeTransferButton(card.name, false, 'zoomMoveToBag'));
+    else if (!isSha) btns.push(safeTransferButton(card.name, true, 'zoomMoveToSafe'));
     if (!isSha) btns.push('<button class="ov-btn danger" data-act="detailDiscard">丢弃 1 张</button>');
     const zoneLabel = safeFlag ? '安全格押运中' : '随身背包';
     const material = SDT.Base.materialInfo?.(card);
@@ -652,8 +624,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     });
     // 特写页动作：特写打开时注册（旧守卫语义——特写被新详情替换即失效，生命周期测试锚定）
     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(st.uids[0]); });
-    if (safeFlag) bagAct('zoomMoveToBag', () => { closeZoom(); moveStackSafe(card.name, false); });
-    else if (!isSha) bagAct('zoomMoveToSafe', () => { closeZoom(); moveStackSafe(card.name, true); });
+    if (safeFlag) bagAct('zoomMoveToBag', () => moveStackSafe(card.name, false, { beforeMove:closeZoom }));
+    else if (!isSha) bagAct('zoomMoveToSafe', () => moveStackSafe(card.name, true, { beforeMove:closeZoom, onCancel:() => openBagZoom(card.name, false) }));
     if (card.id === 'tt2-pearlbox') bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
     if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
@@ -715,11 +687,11 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       title: '背包说明',
       html: `
         <p class="help-item"><b>随身背包</b>物资与卡牌混占格（装备每张占 1 格，其余同名卡每 3 张或同名物资每 3 件占 1 格）。点击格子看卡牌详情；按住拖动整理顺序，拖到左栏盾形按钮存入安全格。</p>
-        <p class="help-item"><b>安全格</b>由${esc(SDT.Base.carriedPet?.()?.name || '随行伙伴')}看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。容量在基地「升级」页用口粮升级。</p>
-        <p class="help-item"><b>消耗区</b>用过的普通牌暂存在这里，不占背包格。复原回背包后，就能再用。</p>
+        <p class="help-item"><b>安全格</b>由${esc(SDT.Base.carriedPet?.()?.name || '随行伙伴')}看守：撤离失败或放弃对局时，只有安全格里的卡牌会被抢运回基地，其余全部丢失。在基地培养随行伙伴可提升容量。</p>
+        <p class="help-item"><b>消耗区</b>战斗中用过的牌统一暂存在这里，包括初始攻击、职业卡和衍生卡，不占背包格。局内复原后，就能再用。</p>
         <p class="help-item"><b>去火堆复原</b>每次随机复原最多 2 张；道具和装备不能在火堆复原。</p>
         <p class="help-item"><b>用道具复原</b>能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备。背包要放得下。</p>
-        <details><summary>撤离后怎么处理？</summary><p>撤离时每张仅 1/3 概率带回基地消耗区（用钥匙复原）。下次出发时，未复原的牌会消散。</p></details>
+        <details><summary>撤离后怎么处理？</summary><p>成功撤离时，消耗区逐张以 1/3 概率结算；初始攻击和职业卡即使掷中也不带回基地消耗区，其余实际带回的牌可用钥匙复原。初始攻击和职业卡仍可在局内复原。下次出发时，基地消耗区中未复原的牌会消散。</p></details>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) {
         showBackpack(true);

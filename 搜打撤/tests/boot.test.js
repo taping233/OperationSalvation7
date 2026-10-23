@@ -438,7 +438,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     defaultZoom.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, isComposing: true }));
     expect(document.getElementById('cardZoom')).toBe(defaultZoom);
     defaultZoom.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-    await new Promise(r => setTimeout(r, 270));
+    expect(await waitFor(() => !document.getElementById('cardZoom'))).toBe(true);
     document.querySelector('.card-library-page [data-act="closeCardPage"]').click();
     await new Promise(r => setTimeout(r, 230));
     expect(document.getElementById('overlay').hidden).toBe(true);

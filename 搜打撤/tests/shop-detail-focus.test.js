@@ -18,7 +18,7 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
     const button = event.target.closest('[data-act]');
     if (button) acts[button.dataset.act]?.(button.dataset);
   });
-  const UI = { el: { ovBody: host, overlay: host }, act: (name, handler) => { acts[name] = handler; },
+  const UI = { el: { ovBody: host, overlay: host }, _overlayInteractionRoot: overlayMethods._overlayInteractionRoot, act: (name, handler) => { acts[name] = handler; },
     showOverlay: (_title, html) => { host.innerHTML = html; }, hideOverlay: vi.fn(),
     refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '<button data-act=help>帮助</button>' };
   const SDT = { Base: { slot: 1 }, Cards: { isSellable: item => !!item.sellable, sellPrice: item => item.value || 0 },
@@ -34,15 +34,15 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); configureShopRuntime({ openBag: undefined }); });
 
 describe('shop detail covered-region focus isolation', () => {
-  it('excludes covered shelf controls and merchant actions but keeps the visible header/footer', () => {
+  it('keeps focus in the top detail dialog, excluding shelf, merchant and parent navigation', () => {
     const { acts, host, UI } = shop({ renderCard: () => '<input type="checkbox" aria-label="灵能召唤">' });
     acts.shopInspect({ i: 0 });
     const focusables = overlayMethods._overlayFocusable.call(UI);
     expect(document.activeElement).toBe(host.querySelector('.shop-detail-close'));
     expect(focusables).not.toContain(host.querySelector('.shop-board input[type=checkbox]'));
     expect(focusables.some(node => node.closest('.shop-board, .shop-merchant'))).toBe(false);
-    expect(focusables).toContain(host.querySelector('[data-act=help]'));
-    expect(focusables).toContain(host.querySelector('[data-act=closeShop]'));
+    expect(focusables).not.toContain(host.querySelector('[data-act=help]'));
+    expect(focusables).not.toContain(host.querySelector('[data-act=closeShop]'));
     expect(focusables).toContain(host.querySelector('.shop-detail [data-act=buyCard]'));
   });
 
@@ -56,6 +56,8 @@ describe('shop detail covered-region focus isolation', () => {
     expect(host.querySelector('.shop-merchant').hasAttribute('inert')).toBe(false);
     expect(document.activeElement).toBe(host.querySelector('.shop-preview[data-i="1"]'));
     expect(overlayMethods._overlayFocusable.call(UI)).toContain(document.activeElement);
+    expect(overlayMethods._overlayFocusable.call(UI)).toContain(host.querySelector('[data-act=help]'));
+    expect(overlayMethods._overlayFocusable.call(UI)).toContain(host.querySelector('[data-act=closeShop]'));
   });
 
   it('keeps the shade background blocked through exit and ignores a cancelled close on quick reopen', () => {

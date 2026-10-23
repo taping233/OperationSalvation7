@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
-let UI, stacks, fits, options, root;
+let UI, stacks, fits, options, root, current;
 const click = action => root.querySelector(`[data-organize="${action}"]`).click();
 beforeEach(() => {
   document.body.innerHTML='<div id="overlay"><div id="body"></div></div>';
   UI={el:{overlay:document.querySelector('#overlay'),ovBody:document.querySelector('#body')},showOverlay:(_,html)=>UI.el.ovBody.innerHTML=html};
-  stacks=[{card:{name:'长剑'},uids:['a','b','c'],count:3}]; fits=false;
-  options={UI,card:{name:'待领法术'},readStacks:()=>stacks,canReceive:()=>fits,capacity:()=> '背包 16/16 格 · 安全格 0/3 格',current:()=>true,
+  stacks=[{card:{name:'长剑'},uids:['a','b','c'],count:3}]; fits=false; current=true;
+  options={UI,card:{name:'待领法术'},readStacks:()=>stacks,canReceive:()=>fits,capacity:()=> '背包 16/16 格 · 安全格 0/3 格',current:()=>current,
     moveToSafe:vi.fn(()=>{stacks=[];fits=true;return true;}),discardOne:vi.fn(()=>{stacks[0].uids.shift();stacks[0].count--;return true;}),
     onReturn:vi.fn(),onClaim:vi.fn(),onFullBag:vi.fn()};
   root=openRewardCapacityOrganizer(options);
@@ -28,7 +28,29 @@ describe('奖励上下文腾位',()=>{
   it('存安全格后再明确领取，不自动领',()=>{click('safe');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('已移入安全格：长剑 ×3');click('claim');expect(options.onClaim).toHaveBeenCalledOnce();click('claim');expect(options.onClaim).toHaveBeenCalledOnce();});
   it('安全格失败保目标/堆，完整背包可继续',()=>{options.moveToSafe.mockReturnValue(false);click('safe');expect(root.textContent).toContain('安全格放不下');expect(stacks[0].count).toBe(3);click('bag');expect(options.onFullBag).toHaveBeenCalledOnce();});
   it('旧渲染按钮和旧页面回调均不能提交',()=>{const old=root.querySelector('[data-organize="safe"]');click('discard');old.click();expect(options.moveToSafe).not.toHaveBeenCalled();UI.el.ovBody.innerHTML='<p>其他页</p>';click('confirm');expect(options.discardOne).not.toHaveBeenCalled();});
-  it('领取前再核容量与当前会话',()=>{click('safe');fits=false;click('claim');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('空间已变化');});
+  it('领取前容量发生变化时拒绝领取并提示继续整理',()=>{click('safe');fits=false;click('claim');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('空间已变化');});
+  it.each([['claim', '领取'], ['confirm', '丢弃确认'], ['return', '返回']])('会话失效后旧%s按钮拒绝%s，容量足够且页面仍保留', (action) => {
+    fits=true;
+    root=openRewardCapacityOrganizer(options);
+    click('discard');
+    const button=root.querySelector(`[data-organize="${action}"]`);
+    const before=structuredClone(stacks), html=root.innerHTML;
+    expect(options.current()).toBe(true);
+    expect(button.disabled).toBe(false);
+    current=false;
+    expect(options.current()).toBe(false);
+    expect(options.canReceive()).toBe(true);
+    expect(root.isConnected).toBe(true);
+    expect(UI.el.ovBody.contains(root)).toBe(true);
+    button.click(); button.click();
+    expect(stacks).toEqual(before);
+    expect(root.innerHTML).toBe(html);
+    expect(options.onClaim).not.toHaveBeenCalled();
+    expect(options.discardOne).not.toHaveBeenCalled();
+    expect(options.moveToSafe).not.toHaveBeenCalled();
+    expect(options.onReturn).not.toHaveBeenCalled();
+    expect(options.onFullBag).not.toHaveBeenCalled();
+  });
 });
 
 describe('奖励整理连续键盘焦点', () => {

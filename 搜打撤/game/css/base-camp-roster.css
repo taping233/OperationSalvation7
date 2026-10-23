@@ -75,12 +75,6 @@
   font-size: 44px !important; letter-spacing: .05em !important; text-shadow: none;
 }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-name::after { content: none; }
-#overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 13px 0 0; }
-#overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-chip {
-  padding: 4px 10px; border: 1px solid #bbc7c5; border-radius: 2px; background: #edf0e8;
-  color: var(--camp-ink); font: 500 13px/1.5 var(--font-ui); letter-spacing: .03em;
-}
-#overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-chip-live { background: #e1ece8; border-color: #8fb5b6; color: #28616d; }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-level {
   display: flex; align-items: center; gap: 18px; margin-top: 20px; padding: 15px 0;
   border-top: 1px solid var(--camp-line); border-bottom: 1px solid var(--camp-line);

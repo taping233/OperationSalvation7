@@ -5,6 +5,7 @@ import { MAP, game, getActiveSlot, exitToTitle, saveGame } from './game.session.
 import { slamSkillFor } from '../battle/bag/battle.slam-skill.js';
 import { createEntrySupply } from './node-reward-state.js';
 import { createCharacterViewMotion } from '../ui/character-view-motion.js';
+import { linkedBackHTML } from '../ui/home-linked-interactions.js';
 import { Sfx } from '../hub/game.cardslib.js';
 import { captureBattleContext, ensureBattleReady } from '../battle/battle-loader.js';
 import { preloadAllNodeShellBgs, showRunTransition } from './game.run.scenes.js';
@@ -25,9 +26,10 @@ export function openClassChoice(options = {}) {
   const originalClass = game.myClass;
   let choiceRoot = null;
   const current = () => choiceContext() && game.myClass === originalClass && (!options.isCurrent || options.isCurrent());
-  const visible = () => current() && choiceRoot?.isConnected && !document.getElementById('overlay')?.hidden &&
+  const choiceVisible = () => choiceRoot?.isConnected && !document.getElementById('overlay')?.hidden &&
     !document.getElementById('overlay')?.classList.contains('closing') &&
     document.querySelector('#overlay .cls2-page, #overlay .cls-pool-page') === choiceRoot;
+  const visible = () => current() && choiceVisible();
   const act = (name, handler) => UI.act(name, data => { if (visible()) return handler(data); });
   const onCancel = typeof options.onCancel === 'function' ? options.onCancel : null;
   const onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
@@ -86,9 +88,6 @@ export function openClassChoice(options = {}) {
               <div class="cls2-nameline">
                 <h2 class="cls2-name">${esc(story.name)}</h2>
               </div>
-              <div class="cls2-chips">
-                ${sel ? '<span class="cls2-chip cls2-chip-live">当前选择</span>' : ''}
-              </div>
               <section class="cls2-mechanism"><p class="cls2-stats">生命上限 <b>${hp}</b> · 基础攻击 <b>${MAP.rules.playerAtk ?? '—'}</b></p><b>${esc(mechanism?.[0] || story.rulesetId)}</b><p>${esc(mechanism?.[1] || '查看完整人物卡池')}</p><p class="cls2-skill"><b>${esc(skill.name)}</b> · 每回合一次<br>${esc(skill.hint)}</p></section>
               <details class="cls2-growth"><summary>熟练成长 · Lv.${lv}</summary><div class="cls2-level">
                 <div class="cls2-level-num"><i>LV</i>${lv}</div>
@@ -98,7 +97,7 @@ export function openClassChoice(options = {}) {
                   <div class="cls2-perk">[[icon:medal]] 出征加成 ${esc(SDT.Meta.perkText(lv))}</div>
                 </div>
               </div>
-              </details><details class="cls2-growth cls2-supply-rules"${SDT.Base?.data?.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>用过的牌进入<b>消耗区</b>，复原后可再用。方法见背包。</p></details>
+              </details>
               ${!mechanism ? `<p class="cls2-story">${esc(CLASS_STORY[story.id] || '确认后以此人物进入远征，熟练度加成与职业卡将在确认时生效。')}</p>` : ''}
               ${(SDT.Art.listSkins ? SDT.Art.listSkins(displaySel) : []).length ? `
                 <div class="cls2-skins-wrap">
@@ -116,7 +115,7 @@ export function openClassChoice(options = {}) {
           <button class="cls2-face${cl === sel ? ' sel' : ''}" data-act="selClass" data-cls="${escAttr(cl)}" title="${escAttr(c.name)}" aria-pressed="${cl === sel ? 'true' : 'false'}">
             ${SDT.Art.classAvatarArt ? SDT.Art.classAvatarArt(cl) : SDT.Art.classArt(cl, true)}<b>${esc(c.name)}</b>
           </button>`).join('')}</div>
-        <button class="archive-back" data-act="cls2Quit" title="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}" aria-label="${onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面'}"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        ${linkedBackHTML('cls2Quit', onSelect ? '返回基地' : onCancel ? '返回出发整备' : '返回标题界面', '', 'button', { cancel:true })}
         <button class="cls2-confirm" data-act="pickClass" ${sel ? '' : 'disabled'} title="${sel ? confirmLabel : '请先选择角色'}" aria-label="${sel ? confirmLabel : '请先选择角色'}"><span>${sel ? confirmLabel : '选择角色后出发'}</span><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>`;
     const mounted = local && document.querySelector('#overlay .cls2-page');
@@ -247,7 +246,7 @@ export function openClassChoice(options = {}) {
     UI.showOverlay('', `
       <div class="pg cls-pool-page" data-base-departure="${!!onCancel}" style="--cls-color:${story ? story.color : '#69aec2'}">
         <header class="pg-head">
-          <button class="pool-back" data-act="clsBack" aria-label="返回选人"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5 4 12l6.5 6.5M4.6 12H20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>返回</span></button>
+          ${linkedBackHTML('clsBack', '返回选人', 'pool-back', 'button', { text:'返回', cancel:true })}
           <div class="pool-archive-title"><h2>角色卡池</h2></div>
           <div class="pool-head-stats"><span class="pool-head-caption">${esc(characterName(sel))}</span><span class="pool-head-badge"><b>${pool.length}</b><small>张</small></span></div>
         </header>
@@ -382,14 +381,17 @@ export function openClassChoice(options = {}) {
     confirmationPending = true;
     try {
       if (beforeConfirm && await beforeConfirm() === false) return false;
-      // beforeConfirm may create a new run and intentionally replace the old battle seed.
+      // Deferred beforeConfirm creates the run; its preparation page owns the new battle seed.
       if (getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
-      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !choiceRoot?.isConnected) return false;
+      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return false;
     } finally { confirmationPending = false; }
     confirmationStarted = true;
     if (!SDT.Base?.data?.ammoTaught) {
+      // beforeConfirm may create the run; only its resulting context owns this awaited confirmation.
+      const confirmationContext = captureBattleContext(game, getActiveSlot);
       const marked = await SDT.Base?.markAmmoTaught?.();
-      if (getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
+      if (!confirmationContext() || getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
+      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !choiceVisible()) return false;
       if (marked === false && confirmationSlot != null) UI.log('[[icon:cross]] 教学标记尚未保存，请重试保存', 'warn');
     }
     game.myClass = cl;

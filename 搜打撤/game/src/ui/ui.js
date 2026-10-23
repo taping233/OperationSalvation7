@@ -9,6 +9,7 @@ import { cinematicsMethods } from './cinematics.js';
 import { hudMethods } from './hud.js';
 import { completeSurfaceMotion } from './motion-completion.js';
 import { motionTiming } from './motion-presets.js';
+import { invokeUiAction } from './action-dispatch.js';
   /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
@@ -67,11 +68,7 @@ function revealPhotoSource(request) {
       if (!(e.target instanceof Element)) return;
         const btn = /** @type {HTMLElement} */ (e.target.closest('[data-act]'));
         if (!btn) return;
-        const fn = this._acts[btn.dataset.act] || this._baseActs[btn.dataset.act];
-        if (fn) {
-          if (btn.hasAttribute('data-photo-zoom-source')) fn(btn.dataset, btn);
-          else fn(btn.dataset);
-        }
+        invokeUiAction(this, btn);
       });
       // 面板右上角 × 与遮罩点击（09-20 老板 P1-1）：都走 closeTopOverlayByEsc 同一条链，
       // 必选流程（事件必选/BOSS 编组/战斗页）探测不到取消语义时按钮自动隐藏、遮罩点击无效。
@@ -426,8 +423,7 @@ function revealPhotoSource(request) {
         if (e.target.closest('.cz-close')) { close(); return; }
         const btn = /** @type {HTMLElement} */ (e.target.closest('.cz-foot [data-act]'));
         if (btn) {
-          const fn = this._acts[btn.dataset.act];
-          if (fn) fn(btn.dataset);
+          invokeUiAction(this, btn, { allowBase:false });
           return;
         }
         if (photoMode) {

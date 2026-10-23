@@ -29,6 +29,10 @@ function choose(character = '侠客') {
 }
 it('更换人物与返回模式保留草稿，重新进入可继续整备', () => {
   departure.openDepartPrep(); choose(); actions.pickAdd({ name: '甲' });
+  const back = document.querySelector('.archive-back[data-act="depBack"]');
+  expect(back.type).toBe('button'); expect(back.getAttribute('aria-label')).toBe('返回人物选择');
+  expect(back.dataset.cancel).toBe('true');
+  expect(back.querySelector('svg').getAttribute('aria-hidden')).toBe('true');
   expect(departure.deployPick).toEqual({ 甲: 1 });
   actions.depBack();
   expect(ports.choice.mock.lastCall[0].initialCharacter).toBe('侠客');
@@ -39,7 +43,9 @@ it('更换人物与返回模式保留草稿，重新进入可继续整备', () =
   departure.openDepartPrep();
   expect(ports.choice).toHaveBeenCalledTimes(calls);
   expect(departure.deployPick).toEqual({ 甲: 1 });
-  expect(document.body.textContent).toContain('本次人物：白塔');
+  const characterTitle=document.querySelector('.camp-depart-person-copy h3');
+  expect(characterTitle.textContent).toBe('白塔');
+  expect(characterTitle.getAttribute('aria-label')).toBe('出征人物：白塔');
   expect(ports.start).not.toHaveBeenCalled();
 });
 it('换档清除上档整备草稿，预设导入仍保留选择', () => {

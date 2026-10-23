@@ -44,22 +44,6 @@ body[data-map-presentation="restoring"] :is(#sidebar,#layerBanner,#expeditionCha
 .transition-handoff.transition-handoff-leaving { pointer-events:none!important; }
 .transition-handoff.transition-handoff-leaving:not(.page-visual-return),
 .page-visual-return[data-kind="panel"].transition-handoff-leaving { opacity:0!important; }
-.transition-handoff-leaving > i { transform:none!important; }
-/* Every full-page return fades through its cover, including pages without artwork. */
-.page-visual-return.page-visual-return:not([data-kind="panel"]) {
-  animation:mapReturnCoverIn var(--motion-map-return-enter,420ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both!important;
-}
-.page-visual-return.page-visual-return.transition-handoff-leaving:not([data-kind="panel"]) {
-  animation:mapReturnCoverOut var(--motion-map-return-exit,420ms) var(--motion-ease-exit,ease-out) both!important;
-}
-@keyframes mapReturnCoverIn {
-  from { opacity:0; transform:translateX(-24px) scale(1.025); }
-  to { opacity:1; transform:translateX(0) scale(1); }
-}
-@keyframes mapReturnCoverOut {
-  from { opacity:1; transform:translateX(0) scale(1); }
-  to { opacity:0; transform:translateX(24px) scale(1.015); }
-}
 .reduce-motion .transition-handoff { transition:none!important; }
 @media (prefers-reduced-motion:reduce) { .transition-handoff { transition:none!important; } }
 body.reduce-motion .page-visual-return.page-visual-return.page-visual-return {

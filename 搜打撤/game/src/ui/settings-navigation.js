@@ -1,7 +1,6 @@
 import '../../css/settings-navigation.css';
 import '../../css/home-ui-tokens.css';
 import { enterSurface } from './surface-motion.js';
-import { enterSettingsCut } from './settings-transition.js';
 
 /** @type {[string, string, string[]][]} */
 const CATEGORIES = [
@@ -79,7 +78,6 @@ export function initSettingsNavigation(root) {
     });
   });
   updateMarker(0);
-  // 保留既有设置入场时序；后续资源就绪揭幕仍由通用包装器负责。
+  // 首次打开沿公共导航区域入场；分类切换只更新上面的内容与选中标记。
   enterSurface(root.closest('#overlay'), { restart: false });
-  enterSettingsCut(root);
 }

@@ -22,7 +22,8 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
       expect(document.body.textContent).toContain('用钥匙复原后才能携带');
     }
     expect(altar).toContain('消耗区逐张以 1/3 概率结算');
-    expect(bag).toContain('每张仅 1/3 概率带回基地');
+    expect(bag).toContain('消耗区逐张以 1/3 概率结算');
+    expect(bag).toContain('初始攻击和职业卡即使掷中也不带回基地消耗区');
   });
 
   it('帮助区分概率保留、职业/初始攻击规则损失以及钥匙复原', () => {
@@ -56,7 +57,8 @@ describe('EXP-003 撤离消耗区文案与规则一致', () => {
   it('局内背包明确概率与钥匙，不承诺免费复原整袋', () => {
     expect(bag).not.toContain('免费复原');
     expect(bag).not.toContain('基地/火堆可复原');
-    expect(bag).toContain('撤离时每张仅 1/3 概率带回基地消耗区（用钥匙复原）');
+    expect(bag).toContain('消耗区逐张以 1/3 概率结算');
+    expect(bag).toContain('其余实际带回的牌可用钥匙复原');
     expect(bag).toContain('每次随机复原最多 2 张；道具和装备不能在火堆复原');
     expect(bag).toContain('能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备');
     const previousCards=SDT.Cards;

@@ -46,7 +46,6 @@
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab .base-home-icon { width:32px; height:32px; }
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab:is(:hover,:focus-visible) { color:#fff; background:#ffffff14; transform:none; }
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab.on { color:#f2f5f0; background:#9edce71c; box-shadow:inset 0 3px #9edce7; }
-#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-nav-current { position:absolute; bottom:4px; color:#9edce7; font:600 var(--base-type-label)/1.1 var(--font-ui); }
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab em { position:absolute; top:8px; right:20px; padding:2px 5px; min-width:22px; border-radius:5px; color:#14242d; background:#9edce7; font:700 var(--base-type-label)/1.2 var(--font-num); font-style:normal; }
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .camp-navigation-indicator { display:none; }
 #overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7.base-home .hub-page { padding:0; overflow:hidden; }

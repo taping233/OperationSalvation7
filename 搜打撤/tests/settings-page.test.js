@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createGameMenuController } from './helpers/menu-controller.js';
 
 function openSettings({ mounted = () => {} } = {}) {
-  document.body.innerHTML = '<div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
+  document.body.innerHTML = '<div id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
   const overlay = document.getElementById('overlay');
   const ovBody = document.getElementById('ovBody');
   const acts = {};
@@ -32,6 +32,18 @@ function openSettings({ mounted = () => {} } = {}) {
 afterEach(() => { document.body.innerHTML = ''; localStorage.clear(); vi.restoreAllMocks(); vi.useRealTimers(); });
 
 describe('settings page layout and controls', () => {
+  it('uses the common navigation on first open and reopen without a city curtain', () => {
+    const { UI, controller, acts } = openSettings();
+    const expectNavigation = () => {
+      expect(UI.el.overlay.dataset.surfaceLayout).toBe('settings');
+      expect(UI.el.overlay.querySelector('.camp-entry-cut, .page-visual-handoff')).toBeNull();
+      expect(UI.el.ovBody.querySelector('#settings-panel-general').hidden).toBe(false);
+      expect(UI.el.ovBody.querySelector('.settings-page').dataset.settingsMotion).toBe('entry');
+    };
+    expectNavigation();
+    acts.closeSettings(); controller.openSettings(); expectNavigation();
+  });
+
   it('mounts the final hidden panels and switch wrappers without reparenting controls', () => {
     let controls, parents, observer;
     const { UI } = openSettings({ mounted(body) {

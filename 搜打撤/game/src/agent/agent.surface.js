@@ -9,6 +9,8 @@
  * 无头宿主（jsdom 批跑）同样适用：只要 UI 把 HTML 渲进 #ovBody 即可扫描。
  * ============================================================ */
 
+import { bindObservedAction, isActionTargetAvailable } from '../ui/action-dispatch.js';
+
 function overlayBody() {
   if (typeof document === 'undefined') return null;
   return document.getElementById('ovBody');
@@ -50,10 +52,11 @@ function collectUiActions() {
   })();
   const scan = (root) => {
     if (!root) return;
+    const styles = new Map();
     for (const el of root.querySelectorAll('[data-act]')) {
       const act = el.getAttribute('data-act');
       if (!act) continue;
-      if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;
+      if (!isActionTargetAvailable(el, window.SDT?.UI, styles)) continue;
       if (!battleActive && el.closest('.sts-topbar, .sts-hud, .sts-arena, .sts-hand, .sts-tactics')) continue;
       const params = {};
       for (const [key, value] of Object.entries(el.dataset)) {
@@ -62,11 +65,13 @@ function collectUiActions() {
       const key = act + JSON.stringify(params);
       if (seen.has(key)) continue;
       seen.add(key);
-      out.push({ type: 'ui', name: act, params, label: textLabel(el) });
+      const action = { type: 'ui', name: act, params, label: textLabel(el) };
+      out.push(bindObservedAction(action, el));
     }
   };
   const zoom = typeof document !== 'undefined' ? document.getElementById('cardZoom') : null;
   if (zoom) out.push({ type: 'ui', name: 'czClose', params: {}, label: '关闭卡牌特写' });
+  if (zoom) scan(zoom.querySelector('.cz-foot'));
   const body = overlayBody();
   if (body && overlayVisible()) {
     scan(body);
@@ -78,13 +83,13 @@ function collectUiActions() {
 // act 执行时按 name+params 反查真实元素：优先直调注册回调（纯接口，不模拟点击），
 // 宿主未暴露 _acts（如极简夹具）时退化为元素 click——同一 ovBody 委托路径。
 function findUiElement(name, params) {
-  const body = overlayBody();
+  const body = document.getElementById('cardZoom')?.querySelector('.cz-foot') || overlayBody();
   if (!body) return null;
   for (const el of /** @type {NodeListOf<HTMLElement & {disabled?:boolean}>} */ (body.querySelectorAll('[data-act]'))) {
     if (el.getAttribute('data-act') !== name) continue;
     const dataset = el.dataset;
     const matched = Object.entries(params || {}).every(([k, v]) => String(dataset[k] ?? '') === String(v ?? ''));
-    if (matched) return el;
+    if (matched && isActionTargetAvailable(el)) return el;
   }
   return null;
 }
@@ -95,12 +100,13 @@ function collectActionKeys() {
   const out = [];
   const zoom = typeof document !== 'undefined' ? document.getElementById('cardZoom') : null;
   if (zoom) out.push('czClose:{}');
-  const body = overlayBody();
-  if (!body || !overlayVisible()) return out;
+  const body = zoom?.querySelector('.cz-foot') || overlayBody();
+  if (!body || (!zoom && !overlayVisible())) return out;
+  const styles = new Map();
   for (const el of /** @type {NodeListOf<HTMLElement & {disabled?:boolean}>} */ (body.querySelectorAll('[data-act]'))) {
     const act = el.getAttribute('data-act');
     if (!act) continue;
-    if (el.disabled === true || el.getAttribute('aria-disabled') === 'true' || el.classList.contains('off')) continue;
+    if (!isActionTargetAvailable(el, window.SDT?.UI, styles)) continue;
     // 原生 attributes 直读（09-26 均耗时优化）：jsdom 的 el.dataset 是
     // DOMStringMap 代理，Object.entries 会触发 camelCase 转换+ownKeys 全扫
     // （profile 占 ~4% CPU）；签名只做变化检测，data-* 原名拼接语义等价

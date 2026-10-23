@@ -204,7 +204,6 @@
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-panel { background:var(--camp-sheet); }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] h2.cls2-name { border:0; padding:0; color:var(--camp-ink); text-shadow:none; }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-stats > div { background:var(--camp-paper); }
-#overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-chip-live { background:#e2e5e6; border-color:var(--camp-line); color:var(--camp-ink); }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-skin-btn.sel { background:var(--camp-blue); border-color:var(--camp-blue); }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-pool-btn { background:var(--camp-paper); border-color:var(--camp-line); color:var(--camp-ink); }
 #overlay .card.page .pg.cls2-page[data-base-departure="true"] .cls2-face.sel { border-color:var(--camp-blue); box-shadow:none; }

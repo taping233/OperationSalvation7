@@ -125,13 +125,14 @@ function install(ui = window.SDT?.UI) {
     try { result = showOverlay.call(this, heading, html, mode, options); }
     finally { withinShow = false; }
     const currentBody = document.getElementById('ovBody');
+    const profile = pageMotionProfile(currentBody);
     // An empty/reused heading does not make two different pages the same page.
-    if (contentRefresh && mode === 'page' && oldProfile !== pageMotionProfile(currentBody)?.key) {
+    if (contentRefresh && mode === 'page' && oldProfile !== profile?.key) {
       contentRefresh = false;
       markEntry(kindFor(this, mode, currentBody), true);
     }
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
-    overlay.dataset.uiShell = pageMotionProfile(currentBody)?.shell || 'surface';
+    overlay.dataset.uiShell = profile?.shell || 'surface';
     // Presentation semantics remain independent of the business mode/route.
     overlay.dataset.uiTransition = mode === 'bagpage' ? 'panel'
       : /** @type {import("./ui.dom.types.js").UIElement} */ (currentBody?.querySelector('.flow-transition')) ? 'scene'
@@ -170,14 +171,16 @@ function install(ui = window.SDT?.UI) {
       delete overlay.dataset.surfaceLayout;
     } else {
       const samePage = wasOpen && mode === 'page' && oldProfile
-        && oldProfile === pageMotionProfile(currentBody)?.key;
-      if (samePage) delete overlay.dataset.uiEnter;
+        && oldProfile === profile?.key;
+      // A navigation surface has one regional entry, not an additional whole-page flip.
+      if (samePage || profile?.navigation) delete overlay.dataset.uiEnter;
       enterSurface(overlay, { restart: !!restart, fast: overlay.dataset.uiMotion === 'fast', contentOnly: !!samePage });
     }
     enterArchive(overlay, currentBody, interfaceReducedMotion());
     };
     // 基地内导航直接衔接区域动效，避免每次换房间都盖全屏黑幕。
     const staged = !contentRefresh && !dedicated && !initialCamp && !refreshHub
+      && (!!outgoingScene || !profile?.navigation)
       && (outgoingScene || mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
     if (staged) {
       clearSurface(overlay, { preserveVisual:true });

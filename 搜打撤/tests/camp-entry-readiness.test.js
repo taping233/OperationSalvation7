@@ -24,6 +24,18 @@ function start() {
   finish = playPreparedCut(document.querySelector('main'), cut, cityCutDuration, onFinish);
   return { cut, image, onFinish };
 }
+it.each(['settings-page', 'achievement-gallery', 'cls-pool-page'])(
+  'legacy cut adapters cannot mask the shared %s navigation surface', className => {
+    const page = document.querySelector('main');
+    page.className = className;
+    const cut = createCityCut();
+    const onFinish = vi.fn();
+    finish = playPreparedCut(page, cut, cityCutDuration, onFinish);
+    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    expect(onFinish).toHaveBeenCalledOnce();
+    finish();
+    expect(onFinish).toHaveBeenCalledOnce();
+  });
 async function expectFinished(cut, onFinish) {
   await vi.advanceTimersByTimeAsync(cityCutDuration + 64);
   expect(cut.isConnected).toBe(false);

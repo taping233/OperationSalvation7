@@ -3,6 +3,13 @@
 import { afterAll, describe, it, expect, vi } from 'vitest';
 import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
 
+// This suite isolates potion reading/confirmation from image and character-frame readiness.
+// The real readiness gate has its own loading/inert/timeout integration coverage.
+vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
+  createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }),
+  waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }),
+}));
+
 // 完整启动会排入壁纸预热等延后工作；测试结束前释放，避免jsdom拆除后再访问Image。
 const pendingTimeouts = new Set();
 const nativeSetTimeout = globalThis.setTimeout;

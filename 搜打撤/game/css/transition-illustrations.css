@@ -6,20 +6,10 @@
   position: relative;
   text-shadow: 0 2px 12px #08101c;
 }
-.page-visual-return.node-map-return.node-map-return {
-  background: linear-gradient(90deg, #08101c99, #08101c33), url('../assets/scenes/transitions-1021/map-return.webp') center / cover no-repeat #101b28;
-}
-.node-map-return.node-map-return > i {
-  background: transparent;
-  border: 0;
-}
-.node-map-return.node-map-return > span {
-  text-shadow: 0 2px 12px #08101c;
-}
-.page-loading.page-loading:not(.page-loading--city) {
+.page-loading.page-loading:not(.page-loading--city):not(.page-loading--interface) {
   background: linear-gradient(90deg, #08101cbb, #08101c55), url('../assets/scenes/transitions-1021/loading.webp') center / cover no-repeat #111214;
 }
-.page-loading:not(.page-loading--city) .page-loading-copy {
+.page-loading:not(.page-loading--city):not(.page-loading--interface) .page-loading-copy {
   position: relative;
   text-shadow: 0 2px 12px #08101c;
 }

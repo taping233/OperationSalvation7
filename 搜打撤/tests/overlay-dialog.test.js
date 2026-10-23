@@ -1,4 +1,5 @@
 import { describe, expect, it, beforeEach, vi } from 'vitest';
+import { linkedBackHTML } from '../game/src/ui/home-linked-interactions.js';
 
 window.SDT = {
   Icons: { rich: value => value },
@@ -191,6 +192,62 @@ describe('overlay dialog accessibility contract', () => {
     expect(UI._findCancelBtn().dataset.act).toBe('pouchBack');
     expect(UI.closeTopOverlayByEsc()).toBe(true);
     expect(back).toHaveBeenCalledOnce(); expect(leave).not.toHaveBeenCalled();
+  });
+
+  it.each(['slotBack', 'cls2Quit', 'clsBack', 'depBack', 'dataPageBack'])('共用返回%s的点击、Esc和遮罩使用同一个显式动作', action => {
+    UI.showOverlay('档案', linkedBackHTML(action, '收回档案', '', 'button', { cancel:true }), 'page');
+    const back = vi.fn(); UI.act(action, back);
+    const button = document.querySelector(`[data-act="${action}"]`);
+    expect(button.dataset.cancel).toBe('true');
+    button.click();
+    button.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+    UI.el.overlay.click();
+    expect(back).toHaveBeenCalledTimes(3);
+    expect(UI.el.overlay.hidden).toBe(false);
+  });
+
+  it.each(['button', 'Escape', 'backdrop'])('内层详情的%s只收回详情，下一次取消才返回页面', method => {
+    UI.showOverlay('档案', `${linkedBackHTML('pageBack', '返回档案', '', 'button', { cancel:true })}
+      <section role="dialog" aria-label="详情"><button data-act="detailBack" data-cancel="true">收回详情</button></section>`, 'page');
+    const pageBack = vi.fn(), detailBack = vi.fn(() => { document.querySelector('[role="dialog"] [data-act="detailBack"]').parentElement.hidden = true; });
+    UI.act('pageBack', pageBack); UI.act('detailBack', detailBack);
+    const detail = document.querySelector('[data-act="detailBack"]');
+    if (method === 'button') detail.click();
+    if (method === 'Escape') detail.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+    if (method === 'backdrop') UI.el.overlay.click();
+    expect(detailBack).toHaveBeenCalledOnce(); expect(pageBack).not.toHaveBeenCalled();
+    expect(UI.closeTopOverlayByEsc()).toBe(true); expect(pageBack).toHaveBeenCalledOnce();
+  });
+
+  it.each(['page', 'bagpage'])('必须选择的内层%s不穿透到底层显式返回或背包关闭兜底', mode => {
+    UI.showOverlay('档案', `${linkedBackHTML('pageBack', '返回档案', '', 'button', { cancel:true })}
+      <section role="dialog" aria-label="必须选择"><button data-act="choose" data-cancel="false">返回手牌</button></section>`, mode);
+    const back = vi.fn(), choose = vi.fn(), closeBag = vi.fn();
+    UI.act('pageBack', back); UI.act('choose', choose); UI._bagCloseHook = closeBag;
+    try {
+      expect(UI._findCancelBtn()).toBeUndefined(); expect(UI._canCancelOverlay()).toBe(false);
+      expect(UI.closeTopOverlayByEsc()).toBe(false); UI.el.overlay.click();
+      expect(back).not.toHaveBeenCalled(); expect(choose).not.toHaveBeenCalled(); expect(closeBag).not.toHaveBeenCalled();
+      expect(UI.el.overlay.hidden).toBe(false);
+    } finally { UI._bagCloseHook = null; }
+  });
+
+  it('特写拥有遮罩和直接取消，不能代点底层返回', () => {
+    UI.showOverlay('档案', linkedBackHTML('pageBack', '返回档案', '', 'button', { cancel:true }), 'page');
+    const back = vi.fn(); UI.act('pageBack', back);
+    const zoom = document.createElement('div'); zoom.id = 'cardZoom';
+    zoom._closeCardZoom = vi.fn(); document.body.append(zoom);
+    expect(UI._canCancelOverlay()).toBe(true);
+    UI.el.overlay.click(); UI.closeTopOverlayByEsc();
+    expect(zoom._closeCardZoom).toHaveBeenCalledTimes(2); expect(back).not.toHaveBeenCalled();
+    zoom.remove(); UI.closeTopOverlayByEsc(); expect(back).toHaveBeenCalledOnce();
+  });
+
+  it('共用返回组件只按调用方声明取消，明确禁止时不再猜测返回文字', () => {
+    UI.showOverlay('选择', linkedBackHTML('mustChoose', '返回手牌', '', 'button', { cancel:false }), 'page');
+    expect(UI._findCancelBtn()).toBeUndefined(); expect(UI.closeTopOverlayByEsc()).toBe(false);
+    document.getElementById('ovBody').innerHTML = linkedBackHTML('legacyBack', '返回页面');
+    expect(document.querySelector('[data-act="legacyBack"]').hasAttribute('data-cancel')).toBe(false);
   });
 
   it('强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过', () => {

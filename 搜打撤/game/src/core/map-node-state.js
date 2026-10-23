@@ -46,7 +46,7 @@ export function mapNodeStatus(game, node) {
   }
   const tone = ['battle','boss'].includes(type) ? 'danger' : ['chest','resource','coin','key'].includes(type) ? 'gold'
     : ['fire','wood'].includes(type) ? 'warm' : type === 'rations' ? 'safe' : 'mystery';
-  const detail = ['battle','boss'].includes(type) ? '战斗结束后完成，战斗中不能整理背包。'
+  const detail = ['battle','boss'].includes(type) ? '战斗中不能整理背包。'
     : type === 'event' ? '选择前可回地图，原事件会保留。' : '完成前可回地图整理后重进。';
   return status('incomplete', '未完成', detail, tone, 'question');
 }

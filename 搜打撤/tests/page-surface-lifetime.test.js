@@ -73,7 +73,7 @@ it('reduced motion reveals once readiness completes without a decorative exit wa
   document.body.classList.remove('reduce-motion');
 });
 
-it('backpack return retains the shared page curtain until map readiness and reveal', async () => {
+it('return keeps the map visible and blocks input only until its prepared frame', async () => {
   let ready; const prepare = vi.fn(() => new Promise(resolve => { ready = resolve; }));
   window.SDT = { Renderer: { prepare } };
   const game = { discoveredPairs: [], runActive: true, battleActive: false, nestActive: false };
@@ -81,9 +81,13 @@ it('backpack return retains the shared page curtain until map readiness and reve
   ui.el.overlay.hidden = true;
   await vi.advanceTimersByTimeAsync(32);
   const cover = document.querySelector('.page-visual-return');
-  expect(cover.dataset.kind).toBe('page'); expect(cover.querySelector('.transition-heading').textContent).toBe('返回探索');
+  expect(cover.dataset.kind).toBe('panel');
+  expect(cover.classList.contains('page-map-return')).toBe(true);
+  expect(cover.querySelector('.transition-heading, img, i')).toBeNull();
   expect(prepare).toHaveBeenCalledOnce();
-  ready(); await vi.advanceTimersByTimeAsync(2000);
+  ready(); await vi.advanceTimersByTimeAsync(48);
+  expect(cover.classList.contains('leaving')).toBe(true);
+  await vi.advanceTimersByTimeAsync(180);
   expect(document.querySelector('.page-visual-return')).toBeNull();
 });
 

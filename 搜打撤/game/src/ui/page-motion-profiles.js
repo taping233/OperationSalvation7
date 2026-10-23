@@ -1,4 +1,4 @@
-// 页面只声明展示顺序；时长、进退曲线与生命周期由 surface-motion 统一管理。
+// 页面声明展示顺序及切换语义；普通界面不借用场景遮幕，场景资源仍由原入口准备。
 import { motionTiming } from './motion-presets.js';
 import { navigationTiming } from './navigation-motion.js';
 const profiles = [
@@ -78,6 +78,12 @@ const profiles = [
 ];
 
 const pageRoots = profiles.map(profile => profile.root).join(', ');
+// These surfaces browse or configure the current scene. Their own fixed layout
+// and lazy image handling remain active; opening them is not a new scene load.
+const navigationProfiles = new Set([
+  'backpack', 'inbox', 'settings', 'guide', 'achievements', 'data',
+  'card-pool', 'departure', 'preparation', 'archives',
+]);
 
 export function pageMotionProfile(content) {
   // Collect page roots once, then apply the declared priority (not DOM order).
@@ -86,7 +92,7 @@ export function pageMotionProfile(content) {
   if (!pages?.length) return null;
   for (const profile of profiles) {
     for (const page of pages) {
-      if (page.matches(profile.root)) return { ...profile, page };
+      if (page.matches(profile.root)) return { ...profile, page, navigation: navigationProfiles.has(profile.key) };
     }
   }
   return null;
