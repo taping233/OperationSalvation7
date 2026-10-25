@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-25T15:52:26.914Z",
+  "head": "17317a7b82b04cc6c030343159017dae39c669e9",
+  "sourceKind": "Committed runtime at HEAD; active test configuration excluded using HEAD vite.config.js",
+  "project": "D:\\素材\\代号柒\\.tmp\\portable-clean-1025\\project",
+  "artifact": "代号柒-v0.60.0-便携无存档-20261025.exe",
+  "profile": "codename7-clean-20261025-5558e960c4204960",
+  "profileAbsent": true,
+  "inputFileCount": 3248,
+  "inputBytes": 293009734,
+  "manifest": "../.tmp/portable-clean-1025/inputs.json",
+  "manifestSHA256": "341ea266daf068e4331e716a12d21c21c62d47d20066ef25e99dc189d109a25a",
+  "acquisition": "node ../.tmp/portable-clean-1025/prepare.cjs"
+}

@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\.tmp\\portable-clean-1025\\delivery-final\\代号柒-v0.60.0-便携无存档-20261025.exe",
+  "artifactSHA256": "c5ecaed24545059cfe471addb2957f2d5511e6b6a67080aa2a1e8a2e8d06cc2a",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-ZopICL",
+  "first": {
+    "pid": 14852,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-ZopICL\\临时 resources\\nsj66BE.tmp\\app",
+    "files": 1734,
+    "missing": []
+  },
+  "second": {
+    "pid": 18840,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-ZopICL\\临时 resources\\nsoD96D.tmp\\app",
+    "files": 1734,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-ZopICL\\临时 resources\\nsj66BE.tmp\\app",
+    "files": 1734,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}
