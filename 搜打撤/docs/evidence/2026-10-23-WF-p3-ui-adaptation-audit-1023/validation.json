@@ -1,0 +1,49 @@
+{
+  "kind": "design-plan-document-check",
+  "exitCode": 0,
+  "passed": true,
+  "scope": [
+    "README.md",
+    "IMPLEMENTATION.md",
+    "ICON-REPLACEMENT.md",
+    "REVIEW.md",
+    "review-current-code.md"
+  ],
+  "relativeLinksChecked": 57,
+  "implementationUnits": 28,
+  "decisionLevels": {
+    "确定整改": 11,
+    "条件优化": 9,
+    "实施约束": 6,
+    "暂缓扩展": 2
+  },
+  "currentExcerptHashesVerified": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13"
+  ],
+  "snapshotSourceHashesPreviouslyVerified": 44,
+  "duplicatePngGroups": 11,
+  "duplicatePngKeys": 30,
+  "failures": [],
+  "limitations": [
+    "Document integrity and source consistency only; no game UI implementation or runtime acceptance"
+  ],
+  "docsCheck": {
+    "command": "npm run --silent docs:check -- --json",
+    "exitCode": 0,
+    "ok": true,
+    "findings": 0,
+    "limits": "Root docs check skips evidence; own 57-link/source verification is recorded separately"
+  }
+}

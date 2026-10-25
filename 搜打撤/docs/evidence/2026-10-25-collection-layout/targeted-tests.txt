@@ -1,0 +1,126 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ❯ tests/achievement-gallery-entry.test.js (6 tests | 2 failed) 374ms
+   ✓ achievement gallery entry work > waits for the cold curtain to end and plays entry only once 97ms
+   ✓ achievement gallery entry work > waits for the warm curtain to end and plays entry only once 59ms
+   ✓ achievement gallery entry work > leaving during curtain readiness never replays entry on the hidden page 60ms
+   × achievement gallery entry work > creates only tiles and watermark on entry, with no unopened detail trees 57ms
+     → expected …(26) to have a length of 27 but got 26
+   × achievement gallery entry work > parses once for the selected medal, reuses repeated opens, and switches correctly 74ms
+     → expected …(27) to have a length of 28 but got 27
+   ✓ achievement gallery entry work > keeps deferred text escaped and uses the current gallery snapshot on reopening 25ms
+ ✓ tests/preparation-adapter-review.test.js (5 tests) 295ms
+ ❯ tests/achievement-gallery.test.js (8 tests | 1 failed) 713ms
+   ✓ achievement gallery > lists actual conditions even without a save; does not infer unlocks from the active base 110ms
+   ✓ achievement gallery > combines status, category and search filters, and resets all three together 100ms
+   × achievement gallery > enlarges the same medal, shows real rewards and returns focus without claiming 64ms
+     → Cannot read properties of null (reading 'hidden')
+   ✓ achievement gallery > renders saved claim status independently from rewards not yet claimed 33ms
+   ✓ achievement gallery > escapes names, conditions and rewards before creating searchable markup 11ms
+   ✓ five-style theme medal catalogue > covers every achievement with a distinct cell in each of the five atlases 148ms
+   ✓ five-style theme medal catalogue > draws once per opening and shares the chosen style across tiles, filters and detail 242ms
+   ✓ five-style theme medal catalogue > falls back to fixed catalogue keys for unknown medal and style input 2ms
+ ❯ tests/achievement-gallery-close.test.js (4 tests | 2 failed) 298ms
+   × achievement nested detail dismissal > provides a visible cancel action to the real shared Escape route while the header is inert 106ms
+     → expected false to be true // Object.is equality
+   ✓ achievement nested detail dismissal > the capture-phase shared route closes only the detail and restores its trigger 104ms
+   × achievement nested detail dismissal > the visible close button and backdrop both close the bound detail, preserving cached content 47ms
+     → Cannot read properties of null (reading 'click')
+   ✓ achievement nested detail dismissal > standalone Escape closes the detail, but composition and repeated keys do not 39ms
+ ✓ tests/photo-studio-tabs.test.js (6 tests) 49ms
+ ✓ tests/photo-studio-presentation.test.js (3 tests) 7ms
+ ✓ tests/game-hub-preparation-feature.test.js (8 tests) 24ms
+ ✓ tests/m06-preparation.test.js (6 tests) 10ms
+ ✓ tests/preparation-slot-review.test.js (6 tests) 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/achievement-gallery-close.test.js > achievement nested detail dismissal > provides a visible cancel action to the real shared Escape route while the header is inert
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/achievement-gallery-close.test.js:39:68
+     37|   it('provides a visible cancel action to the real shared Escape route…
+     38|     const { root, tile, detail, UI, leaveGallery } = gallery();
+     39|     expect(root.querySelector('.ag-header').hasAttribute('inert')).toB…
+       |                                                                    ^
+     40|     expect(UI._findCancelBtn()?.closest('.ag-detail')).toBe(detail);
+     41|     expect(UI.closeTopOverlayByEsc()).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/achievement-gallery-close.test.js > achievement nested detail dismissal > the visible close button and backdrop both close the bound detail, preserving cached content
+TypeError: Cannot read properties of null (reading 'click')
+ ❯ tests/achievement-gallery-close.test.js:70:46
+     68|     tile.click();
+     69|     expect(detail.querySelector('.ag-detail-content').firstElementChil…
+     70|     root.querySelector('.ag-detail-backdrop').click();
+       |                                              ^
+     71|     expect(detail.hidden).toBe(true);
+     72|     expect(document.activeElement).toBe(tile);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/achievement-gallery-entry.test.js > achievement gallery entry work > creates only tiles and watermark on entry, with no unopened detail trees
+AssertionError: expected …(26) to have a length of 27 but got 26
+
+- Expected
++ Received
+
+- 27
++ 26
+
+ ❯ tests/achievement-gallery-entry.test.js:58:51
+
+     56|     const { root, content } = openGallery();
+     57|     expect(root.querySelectorAll('[data-gallery-item]')).toHaveLength(…
+     58|     expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(27);
+       |                                                   ^
+     59|     expect(root.querySelectorAll('template')).toHaveLength(0);
+     60|     expect(content.childElementCount).toBe(0);
+ Test Files  3 failed | 6 passed (9)
+      Tests  5 failed | 47 passed (52)
+   Start at  12:22:46
+   Duration  17.72s (transform 2.32s, setup 0ms, collect 5.93s, tests 1.78s, environment 53.57s, prepare 3.88s)
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/achievement-gallery-entry.test.js > achievement gallery entry work > parses once for the selected medal, reuses repeated opens, and switches correctly
+AssertionError: expected …(27) to have a length of 28 but got 27
+
+- Expected
++ Received
+
+- 28
++ 27
+
+ ❯ tests/achievement-gallery-entry.test.js:84:51
+     82|     root.querySelector('[data-medal-id="allBoss"]').click();
+     83|     expect(content.textContent).toContain('完成以上条件后');
+     84|     expect(root.querySelectorAll('svg.ag-badge')).toHaveLength(28);
+       |                                                   ^
+     85|     writes.mockRestore();
+     86|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/achievement-gallery.test.js > achievement gallery > enlarges the same medal, shows real rewards and returns focus without claiming
+TypeError: Cannot read properties of null (reading 'hidden')
+ ❯ tests/achievement-gallery.test.js:63:21
+     61|     const backdrop = root.querySelector('.ag-detail-backdrop');
+     62|     expect(detail.hidden).toBe(false);
+     63|     expect(backdrop.hidden).toBe(false);
+       |                     ^
+     64|     const close = detail.querySelector('[data-gallery-dismiss]');
+     65|     expect(close.getAttribute('aria-label')).toBe('关闭奖章详情');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+

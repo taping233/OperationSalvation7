@@ -1,0 +1,18 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "edit",
+  "references": [
+    "D:/素材/代号柒/.tmp/nai/xingyue-piano-reset-1024/nai5-draft.png",
+    "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+  ],
+  "referenceRoles": [
+    "NAI5 base composition and scene",
+    "current Xingyue identity only"
+  ],
+  "styleSource": "docs/production/art/ART-STYLE-V1.md",
+  "status": "generated",
+  "prompt_file": "builtin-prompt.txt",
+  "output": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-ff16072c-2566-466c-ab7e-9718178df9f6.png",
+  "final_correction_prompt": "piano-hands-prompt.txt",
+  "final_output": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-d3e54298-af72-476d-a3d6-298e9075f718.png"
+}

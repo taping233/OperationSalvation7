@@ -1,0 +1,494 @@
+diff --git a/docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.before.txt b/game/src/cards/builtin-card-previous-rules.js
+index 3c7e602b..13f2b89a 100644
+--- a/docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.before.txt
++++ b/game/src/cards/builtin-card-previous-rules.js
+@@ -1,3 +1,4 @@
++import { hostedRuleSnapshot, targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+ // Former native declarations used only to recognize unedited historical rules.
+ export const BUILTIN_PREVIOUS_RULES = {
+   "tt2-frostsword": {
+@@ -15,230 +16,34 @@ export const BUILTIN_PREVIOUS_RULES = {
+       }
+     }
+   },
+-  "tt3-qi-wave": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "draw-and-price-damage"
+-      ]
+-    }
+-  },
+-  "tt3-chaos-eye": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "chaos-eye"
+-      ]
+-    }
+-  },
+-  "tt3-silver-runesword": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "silver-runesword"
+-      ]
+-    }
+-  },
+-  "tt7-marchrush": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "last-hand-repeat-all"
+-      ]
+-    }
+-  },
+-  "tt7-provoke": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "foe-fight-select"
+-      ]
+-    }
+-  },
+-  "tt7-arcanebolt": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "damage-and-draw"
+-      ]
+-    }
+-  },
+-  "tt8-hero-assassin": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "assassin"
+-      ]
+-    }
+-  },
+-  "tt8-hero-mage": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "mage"
+-      ]
+-    }
+-  },
+-  "tt8-hero-descender": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "consume-fireball"
+-      ]
+-    }
+-  },
+-  "tt3-fatal-pierce": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "bleed-gated-armor-break"
+-      ]
+-    }
+-  },
+-  "tt3-frostfall": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "choose-and-cast-melee"
+-      ]
+-    }
+-  },
+-  "tt3-mystery-potion": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "mystery-potion"
+-      ]
+-    }
+-  },
+-  "tt3-magic-lamp": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "three-choice-lamp"
+-      ]
+-    }
+-  },
+-  "tt3sp-silverthorn": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-damage-bonus"
+-      ]
+-    }
+-  },
+-  "tt3sp-flowerzhen": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "double-and-burst-poison"
+-      ]
+-    }
+-  },
+-  "tt3sp-bloodstorm": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-repeating-lifesteal"
+-      ]
+-    }
+-  },
+-  "tt7-ghostblade": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "stealth-break-bonus"
+-      ]
+-    }
+-  },
+-  "tt7-bloodpoison": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "double-target-poison-daggers"
+-      ]
+-    }
+-  },
+-  "tt7-holyheal": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-price-heal"
+-      ]
+-    }
+-  },
+-  "tt7-stratagem": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "pouch-container"
+-      ]
+-    }
+-  },
+-  "tt7-meteorstrong": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-fireball-burst"
+-      ]
+-    }
+-  },
+-  "tt8-hero-sword": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "sword"
+-      ]
+-    }
+-  },
+-  "tt8-hero-ranger": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "ranger"
+-      ]
+-    }
+-  },
+-  "tt8-hero-warrior": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "kill-transform"
+-      ]
+-    }
+-  },
+-  "tt8-hero-guardian": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "guardian"
+-      ]
+-    }
+-  },
+-  "tt8-hero-priest": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "priest"
+-      ]
+-    }
+-  },
+-  "tt8-hero-warlock": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "warlock"
+-      ]
+-    }
+-  },
+-  "tt8-hero-summoner": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "gate-choices"
+-      ]
+-    }
+-  },
++  "tt3-qi-wave": hostedRuleSnapshot("draw-and-price-damage"),
++  "tt3-chaos-eye": hostedRuleSnapshot("chaos-eye"),
++  "tt3-silver-runesword": hostedRuleSnapshot("silver-runesword"),
++  "tt7-marchrush": hostedRuleSnapshot("last-hand-repeat-all"),
++  "tt7-provoke": hostedRuleSnapshot("foe-fight-select"),
++  "tt7-arcanebolt": hostedRuleSnapshot("damage-and-draw"),
++  "tt8-hero-assassin": hostedRuleSnapshot("assassin"),
++  "tt8-hero-mage": hostedRuleSnapshot("mage"),
++  "tt8-hero-descender": hostedRuleSnapshot("consume-fireball"),
++  "tt3-fatal-pierce": hostedRuleSnapshot("bleed-gated-armor-break"),
++  "tt3-frostfall": hostedRuleSnapshot("choose-and-cast-melee"),
++  "tt3-mystery-potion": hostedRuleSnapshot("mystery-potion"),
++  "tt3-magic-lamp": hostedRuleSnapshot("three-choice-lamp"),
++  "tt3sp-silverthorn": hostedRuleSnapshot("infused-damage-bonus"),
++  "tt3sp-flowerzhen": hostedRuleSnapshot("double-and-burst-poison"),
++  "tt3sp-bloodstorm": hostedRuleSnapshot("infused-repeating-lifesteal"),
++  "tt7-ghostblade": hostedRuleSnapshot("stealth-break-bonus"),
++  "tt7-bloodpoison": hostedRuleSnapshot("double-target-poison-daggers"),
++  "tt7-holyheal": hostedRuleSnapshot("infused-price-heal"),
++  "tt7-stratagem": hostedRuleSnapshot("pouch-container"),
++  "tt7-meteorstrong": hostedRuleSnapshot("infused-fireball-burst"),
++  "tt8-hero-sword": hostedRuleSnapshot("sword"),
++  "tt8-hero-ranger": hostedRuleSnapshot("ranger"),
++  "tt8-hero-warrior": hostedRuleSnapshot("kill-transform"),
++  "tt8-hero-guardian": hostedRuleSnapshot("guardian"),
++  "tt8-hero-priest": hostedRuleSnapshot("priest"),
++  "tt8-hero-warlock": hostedRuleSnapshot("warlock"),
++  "tt8-hero-summoner": hostedRuleSnapshot("gate-choices"),
+   "tt8-hero-sealer": {
+     "version": 1,
+     "battle": {
+@@ -252,30 +57,9 @@ export const BUILTIN_PREVIOUS_RULES = {
+       ]
+     }
+   },
+-  "cmtn233trmeg": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "keep-self-in-hand"
+-      ]
+-    }
+-  },
+-  "tt7-imitate": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "imitate"
+-      ]
+-    }
+-  },
+-  "cmtn1lbhbqi4": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "charge-fireball"
+-      ]
+-    }
+-  },
++  "cmtn233trmeg": hostedRuleSnapshot("keep-self-in-hand"),
++  "tt7-imitate": hostedRuleSnapshot("imitate"),
++  "cmtn1lbhbqi4": hostedRuleSnapshot("charge-fireball"),
+   "cmtn1ntxzoc4": {
+     "version": 1,
+     "battle": {
+@@ -296,30 +80,9 @@ export const BUILTIN_PREVIOUS_RULES = {
+       ]
+     }
+   },
+-  "cmtn1wnhhym": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "temporary-hand-cards"
+-      ]
+-    }
+-  },
+-  "cc-mana-surge": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "mana-surge"
+-      ]
+-    }
+-  },
+-  "cc-poison-burst": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "burst-existing-poison"
+-      ]
+-    }
+-  },
++  "cmtn1wnhhym": hostedRuleSnapshot("temporary-hand-cards"),
++  "cc-mana-surge": hostedRuleSnapshot("mana-surge"),
++  "cc-poison-burst": hostedRuleSnapshot("burst-existing-poison"),
+   "cc-rot-seed": {
+     "version": 1,
+     "battle": {
+@@ -332,144 +95,17 @@ export const BUILTIN_PREVIOUS_RULES = {
+       }
+     }
+   },
+-  "tt8-abyss-sovereign": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "sovereign"
+-      ]
+-    }
+-  },
+-  "tt12-raydragon": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-ray"
+-      ]
+-    }
+-  },
+-  "tt12-felguard": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "infused-immune-spell"
+-      ]
+-    }
+-  },
+-  "tt12-freezeray": {
+-    "version": 1,
+-    "battle": {
+-      "hosted": [
+-        "untouched-target-freeze"
+-      ]
+-    }
+-  },
+-  "tt13-spring": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "self",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-spring"
+-      ]
+-    }
+-  },
+-  "tt13-snipe": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "enemy",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-snipe"
+-      ]
+-    }
+-  },
+-  "tt13-guard": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "self",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-guard"
+-      ]
+-    }
+-  },
+-  "tt13-bitter-rain": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "enemy",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-bitter-rain"
+-      ]
+-    }
+-  },
+-  "tt13-mind-control": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "enemy",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-mind-control"
+-      ]
+-    }
+-  },
+-  "tt13-soul-contract": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "enemy",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-soul-contract"
+-      ]
+-    }
+-  },
+-  "tt13-stellar-divination": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "self",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-stellar-divination"
+-      ]
+-    }
+-  },
+-  "tt13-chaos-deck": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "self",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-chaos-deck"
+-      ]
+-    }
+-  },
+-  "tt13-mercy": {
+-    "version": 1,
+-    "battle": {
+-      "target": {
+-        "side": "enemy",
+-        "area": false
+-      },
+-      "hosted": [
+-        "batch13-mercy"
+-      ]
+-    }
+-  }
++  "tt8-abyss-sovereign": hostedRuleSnapshot("sovereign"),
++  "tt12-raydragon": hostedRuleSnapshot("infused-ray"),
++  "tt12-felguard": hostedRuleSnapshot("infused-immune-spell"),
++  "tt12-freezeray": hostedRuleSnapshot("untouched-target-freeze"),
++  "tt13-spring": targetedHostedRuleSnapshot("batch13-spring", "self"),
++  "tt13-snipe": targetedHostedRuleSnapshot("batch13-snipe", "enemy"),
++  "tt13-guard": targetedHostedRuleSnapshot("batch13-guard", "self"),
++  "tt13-bitter-rain": targetedHostedRuleSnapshot("batch13-bitter-rain", "enemy"),
++  "tt13-mind-control": targetedHostedRuleSnapshot("batch13-mind-control", "enemy"),
++  "tt13-soul-contract": targetedHostedRuleSnapshot("batch13-soul-contract", "enemy"),
++  "tt13-stellar-divination": targetedHostedRuleSnapshot("batch13-stellar-divination", "self"),
++  "tt13-chaos-deck": targetedHostedRuleSnapshot("batch13-chaos-deck", "self"),
++  "tt13-mercy": targetedHostedRuleSnapshot("batch13-mercy", "enemy")
+ };

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-module-boundaries-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "集中收敛战斗装配、背包业务写入和卡牌特写职责边界，保留当前未提交增量与现行行为，完成后统一测试",
+  "paths": [
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/core/battle.turn-effects.domain.js",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/bag-inventory-commands.js",
+    "game/src/cards/cards.js",
+    "game/src/cards/cards.rules.js",
+    "game/src/cards/card-execution-plan.js",
+    "game/src/cards/card-compatibility.js",
+    "game/src/cards/card-migrations.js",
+    "game/src/ui/ui.js",
+    "game/src/ui/card-zoom-controller.js",
+    "game/src/ui/card-zoom-content.js",
+    "game/src/ui/card-zoom-photo-source.js",
+    "game/src/README.md",
+    "tests/premium-ui-pages.test.js",
+    "tests/battle-turn-effects-domain.test.js",
+    "tests/bag-inventory-commands.test.js",
+    "tests/card-compatibility-boundary.test.js",
+    "tests/card-migrations-boundary.test.js",
+    "tests/card-zoom-controller.test.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "game/src/hub/game.bag.token-craft.js",
+    "game/src/hub/bag-token-craft-plan.js",
+    "scripts/sync-cards-from-live.mjs",
+    "tests/sync-cards-from-live.test.js",
+    "tests/reward-action-clipping.test.js"
+  ],
+  "doneWhen": [
+    "四块职责边界收敛且保留现行行为与未提交内容",
+    "统一原FULL门禁通过，实页与构建边界如实记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已核对原FULL退出0与PASS标记：831文件、8728测试通过，38跳过；语法/数据/11类型/ESLint/素材检查通过；1756输入逐文件核对无漂移，详见validation-summary.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs:check退出0；Codex内置当前窗口真实输入验证照片特写打开/Esc收回/焦点恢复，无捕获页面错误；对应JSON与截图已保存",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "生产构建、远端CI、提交推送和发布未执行",
+    "浏览器仅覆盖照片特写；战斗、背包、备注编辑与整局实页未验"
+  ],
+  "updatedAt": "2026-10-23T12:28:33.793Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

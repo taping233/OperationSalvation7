@@ -1,0 +1,295 @@
+[
+  {
+    "file": "game/css/settings-navigation.css",
+    "changes": [
+      {
+        "line": 82,
+        "selector": "#overlay .settings-tabbed .settings-content",
+        "backgroundBefore": "radial-gradient(ellipse at 0 0, rgba(var(--settings-tint),.12), transparent 65%),\r\n    linear-gradient(140deg, rgba(39,44,51,.67), rgba(16,22,29,.48))",
+        "backgroundAfter": "radial-gradient(ellipse at 0 0, rgba(var(--settings-tint),.12), transparent 65%),\r\n    linear-gradient(140deg, rgba(39,44,51,.67), rgba(16,22,29,.48)), #141c25",
+        "filters": [
+          "backdrop-filter: blur(18px) saturate(.88)"
+        ]
+      }
+    ],
+    "beforeSha256": "f9bcdf65b0771ff103462864892cc4f9f2fd4e37e45ae23856eaeeae75cfc1bf",
+    "afterSha256": "d19457ac2ec0487ebc18862b01cf797d55f96fc871d8d2b8fe437623b5f8bf38"
+  },
+  {
+    "file": "game/css/settings-cover.css",
+    "changes": [
+      {
+        "line": 3,
+        "selector": "#overlay:has(.pg.settings-page:not(.sugin-page))",
+        "backgroundBefore": "#1213148c",
+        "backgroundAfter": "#13171c",
+        "filters": [
+          "backdrop-filter: blur(10px) saturate(.8)"
+        ]
+      }
+    ],
+    "beforeSha256": "35db0837a6cbccb96048d79c60a951719a313c211b83eadc79e1c2a3f5fb0a9f",
+    "afterSha256": "656f0fe1381400e364541ed67fbeb4ba06666dc44e2421bbabd8d02ad1d38f0a"
+  },
+  {
+    "file": "game/css/bag-design-system.css",
+    "changes": [
+      {
+        "line": 5,
+        "property": "--bag-glass",
+        "before": "rgba(22,45,54,.56)",
+        "after": "#162f38"
+      },
+      {
+        "line": 14,
+        "selector": "body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rail",
+        "backgroundBefore": "linear-gradient(160deg,#436f7b70,#21475299 58%,#17313ba3)",
+        "backgroundAfter": "linear-gradient(160deg,#436f7b70,#21475299 58%,#17313ba3), #17313b",
+        "filters": [
+          "backdrop-filter:blur(20px) saturate(1.08)",
+          "-webkit-backdrop-filter:blur(20px) saturate(1.08)"
+        ]
+      },
+      {
+        "line": 52,
+        "selector": "body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-board",
+        "backgroundBefore": "linear-gradient(145deg,rgba(29,65,73,.34),rgba(20,44,54,.52))",
+        "backgroundAfter": "linear-gradient(145deg,rgba(29,65,73,.34),rgba(20,44,54,.52)), #17313b",
+        "filters": [
+          "backdrop-filter:blur(16px) saturate(1.04)",
+          "-webkit-backdrop-filter:blur(16px) saturate(1.04)"
+        ]
+      }
+    ],
+    "beforeSha256": "82564ec7f3da42825fedda0fb103e7b66c0562dcded2a949eb3914383c5fb6a9",
+    "afterSha256": "82dc11d63de18b5c7707e9b1b2300201e9c7d8f59de34a6ade4ee890993c720b"
+  },
+  {
+    "file": "game/css/base-framework-v7.css",
+    "changes": [
+      {
+        "line": 4,
+        "property": "--base-v12-glass",
+        "before": "rgba(20,29,35,.90)",
+        "after": "#141e24"
+      },
+      {
+        "line": 10,
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-head",
+        "backgroundBefore": "rgba(22,29,35,.78)",
+        "backgroundAfter": "#161f25",
+        "filters": [
+          "backdrop-filter:blur(22px) saturate(1.14)"
+        ]
+      },
+      {
+        "line": 31,
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7.base-subpage .hub-page :is(.warehouse-v3 > .camp-section-head,.trade-v5-heading,.archive-v12 > .av3-header,.facilities-v12 > .camp-section-head,.courtyard-zzz > .courtyard-v3-heading,.personnel-v12[data-section=\"companions\"] > .pv12-page-head)",
+        "backgroundBefore": "rgba(22,29,35,.90)",
+        "backgroundAfter": "#161e24",
+        "filters": [
+          "backdrop-filter:blur(18px)"
+        ]
+      },
+      {
+        "line": 32,
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-navigation-v7",
+        "backgroundBefore": "rgba(22,29,35,.78)",
+        "backgroundAfter": "#161f25",
+        "filters": [
+          "backdrop-filter:blur(24px) saturate(1.18)"
+        ]
+      }
+    ],
+    "beforeSha256": "f4990e874741248d2ad481d97c9312ac78a3aba2d6e28bf142f87fc870e5962f",
+    "afterSha256": "9f4c45c33dc5d5375fd6128151557632310b2911008c9138e79e6a5dc9af9e7b"
+  },
+  {
+    "file": "game/css/base-archive-facilities-v12.css",
+    "changes": [
+      {
+        "line": 10,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.av12-directory,.facilities-v12 .facility-map)",
+        "backgroundBefore": "var(--base-v12-glass,rgba(22,29,35,.46))",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      },
+      {
+        "line": 16,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.av12-record-list,.archive-v12 .av3-cabinet)",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      },
+      {
+        "line": 23,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.av12-record-detail,.archive-v12 .av3-medal-detail,.archive-v12 .av3-back-detail,.archive-v12 .story-reader,.facilities-v12 .facility-details)",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(18px)"
+        ]
+      },
+      {
+        "line": 52,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-stage",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      },
+      {
+        "line": 67,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .facility-v12-stage",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      },
+      {
+        "line": 80,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .av12-back-stage",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      },
+      {
+        "line": 109,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12[data-empty=\"true\"] .collection-empty",
+        "backgroundBefore": "var(--base-v12-glass)",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(16px)"
+        ]
+      }
+    ],
+    "beforeSha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62",
+    "afterSha256": "f7a7310153d0f7ec64a13cafd272ef93060732fa96735bbf5bd4c3e4da5baf1b"
+  },
+  {
+    "file": "game/css/base-courtyard-v3.css",
+    "changes": [
+      {
+        "line": 3,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-heading",
+        "backgroundBefore": "rgba(22,29,35,.38)",
+        "backgroundAfter": "#172329",
+        "filters": [
+          "backdrop-filter:blur(18px) saturate(1.14)"
+        ]
+      },
+      {
+        "line": 16,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-controls",
+        "backgroundBefore": "var(--base-v12-glass,rgba(20,29,35,.76))",
+        "backgroundAfter": "var(--base-v12-glass,#17262d)",
+        "filters": [
+          "backdrop-filter:blur(18px)"
+        ]
+      }
+    ],
+    "beforeSha256": "a920e6276c3485f068c351489f7ed90d57c087c3506fa2d785fecf65ae7a1096",
+    "afterSha256": "835b00aa90efaa57e7d601ee3f91690e2660dffd6cce3d01d57f1ea5a159aa37"
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "changes": [
+      {
+        "line": 123,
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 :is(.pv12-identity,.pv12-sections,.person-level)",
+        "backgroundBefore": "rgba(22,29,35,.90)",
+        "backgroundAfter": "#161e24",
+        "filters": [
+          "backdrop-filter:blur(12px)"
+        ]
+      },
+      {
+        "line": 128,
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 button.base-command[data-act]",
+        "backgroundBefore": "rgba(22,29,35,.72)",
+        "backgroundAfter": "#162026",
+        "filters": [
+          "backdrop-filter:blur(12px)"
+        ]
+      }
+    ],
+    "beforeSha256": "17fc507e954c5e29769e98e94740555b48de28fed2cf3dbb0dccc23a0b58779b",
+    "afterSha256": "e40b03289f3fc7c27aede39b3728bf394d25439b4a2018b703d69ca917cc4659"
+  },
+  {
+    "file": "game/css/base-home-v7.css",
+    "changes": [
+      {
+        "line": 5,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-affairs",
+        "backgroundBefore": "rgba(22,29,35,.90)",
+        "backgroundAfter": "#161e24",
+        "filters": [
+          "backdrop-filter:blur(22px) saturate(1.12)"
+        ]
+      },
+      {
+        "line": 6,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-affairs:has(.base-home-affairs-empty)",
+        "backgroundBefore": "rgba(14,23,29,.88)",
+        "backgroundAfter": "#0f191f",
+        "filters": [
+          "backdrop-filter:blur(10px)"
+        ]
+      },
+      {
+        "line": 24,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 #btnDeploy",
+        "backgroundBefore": "rgba(22,29,35,.88)",
+        "backgroundAfter": "#161e24",
+        "filters": [
+          "backdrop-filter:blur(22px)"
+        ]
+      },
+      {
+        "line": 35,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-mode",
+        "backgroundBefore": "rgba(22,29,35,.90)",
+        "backgroundAfter": "#161e24",
+        "filters": [
+          "backdrop-filter:blur(22px)"
+        ]
+      }
+    ],
+    "beforeSha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8",
+    "afterSha256": "f79fe2f7d110a2c58e38103f3c84196547820dc1c318e913294a313fa9aadf78"
+  },
+  {
+    "file": "game/css/photo-studio-unified.css",
+    "changes": [
+      {
+        "line": 231,
+        "selector": "body.cardlib-open #overlay .studio-archive .library-head",
+        "backgroundBefore": "linear-gradient(90deg,#0f1916a0,#23302570 48%,#121b1778)",
+        "backgroundAfter": "linear-gradient(90deg,#0f1916a0,#23302570 48%,#121b1778), #18251e",
+        "filters": [
+          "backdrop-filter:blur(18px) saturate(.8)"
+        ]
+      },
+      {
+        "line": 342,
+        "selector": "body.cardlib-open #overlay .studio-archive .studio-choice-menu",
+        "backgroundBefore": "linear-gradient(135deg,#d8dec211,transparent 48%),#1c2925ed",
+        "backgroundAfter": "linear-gradient(135deg,#d8dec211,transparent 48%), #1c2925",
+        "filters": [
+          "backdrop-filter:blur(16px) saturate(.75)"
+        ]
+      }
+    ],
+    "beforeSha256": "b864e9334795093bdba0662bbb5695ab165ea0653b90bc8956d25ea36c9a0007",
+    "afterSha256": "6e3b5ed7bb1062b756f1f91e188e3fa5a647521187ae3d12be4498ee9ad36fec"
+  }
+]

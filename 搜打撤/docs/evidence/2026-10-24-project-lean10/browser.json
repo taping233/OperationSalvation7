@@ -1,0 +1,21 @@
+{
+  "platform": "Codex IAB",
+  "origin": "http://127.0.0.1:5200",
+  "viewport": [
+    1618,
+    956
+  ],
+  "input": "Real AX/Playwright clicks in current window; developer test run path, no evaluated state injection",
+  "verified": [
+    "title/settings/audio navigation",
+    "developer encounter test run",
+    "initial attack selected and enemy targeted: energy2->1, hand5->4, consumed0->1, enemies3->2",
+    "consumed pile contains initial attack x1 and return-to-battle control",
+    "return from consumed pile and real end-turn input: round1->2, hp30->20, energy1->2, player input restored"
+  ],
+  "limits": [
+    "does not prove a complete normal save-slot campaign or every page",
+    "intermediate character loading page and failed description-as-name locators excluded from successful input evidence"
+  ],
+  "errors": []
+}

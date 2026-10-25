@@ -1,0 +1,251 @@
+import { KEY, TT10_KEY, TT11_KEY, EVENTS_0919_KEY, RETIRE_TT10, RETIRE_TT11 } from './cards.consts.js';
+import { createCardMigrationMarker } from './cards.sync.persistence.js';
+
+/** Seed and synchronize canonical catalog snapshots; each marker remains retryable.
+ * library/storage are lazy ports so callers may replace their active store. */
+export function createCatalogCardMigrations({ library, storage, data }) {
+  const markCardMigration = createCardMigrationMarker(storage);
+  // 历史批次 key 可能独立重播；即使 live-sync 已标记，也不能写回旧语义或复活退役卡。
+  // 同 id 以定版字段为准，定版未携带的 art 等仓库元数据继续取历史快照。
+  const cardsSyncById = new Map(data.cardsSync.cards.map(card => [card.id, card]));
+  const cardsSyncRetired = new Set(data.cardsSync.retire);
+  const canonicalTabletopSnapshot = (snapshot) => {
+    if (cardsSyncRetired.has(snapshot.id)) return null;
+    const current = cardsSyncById.get(snapshot.id);
+    return current ? { ...snapshot, ...current } : snapshot;
+  };
+  return {
+    // 播入初始牌「初始攻击」（只播一次，之后删改都尊重玩家）
+    ensureSha() {
+      // 旧档迁移：早期版本默认名「杀」统一纠正为定版「初始攻击」
+      // （按 id 识别系统卡，只纠正旧默认名，不覆盖玩家后来改过的其它名字）
+      try {
+        const cards = library().all();
+        // 旧 id 迁移（2026-09-19 老板令：彻底删除「杀」id）：builtin-sha → starter-attack，
+        // 卡库层一次性归一化；对局存档侧由 RunStorage MIGRATIONS 兜底
+        let renamed = false;
+        for (const c of cards) if (c.id === 'builtin-sha') { c.id = 'starter-attack'; renamed = true; }
+        const sha = cards.find(c => c.id === library().SHA.id);
+        if (sha && sha.name === '杀') {
+          sha.name = library().SHA.name;
+          sha.desc = library().SHA.desc;
+          renamed = true;
+        }
+        if (renamed) library().saveAll(cards);
+      } catch { /* 存储不可用时静默跳过 */ }
+      library().seedBatch([library().SHA], 'sdt-cards-sha-seeded');
+    },
+
+    // 卡牌库为空或缺少初始牌时，补入新手卡
+    ensureStarters() {
+      const cards = library().all();
+      // 兼容早期没有 id 的默认资源卡：将历史生成的临时 id 收敛到稳定编号，
+      // 使制式口粮的卡面资源不再依赖名称或一次性生成的 id。
+      const legacyRation = cards.find(c => c.name === '制式口粮' && c.type === '资源');
+      if (legacyRation && legacyRation.id !== 'starter-ration' && !cards.some(c => c.id === 'starter-ration')) {
+        legacyRation.id = 'starter-ration';
+        library().saveAll(cards);
+      }
+      const legacyBandage = cards.find(c => c.name === '应急绷带' && c.type === '道具');
+      if (legacyBandage && legacyBandage.id !== 'starter-emergency-bandage' && !cards.some(c => c.id === 'starter-emergency-bandage')) {
+        legacyBandage.id = 'starter-emergency-bandage';
+        library().saveAll(cards);
+      }
+      if (!cards.length || !cards.some(c => c.rarity === '初始')) {
+        library().STARTERS.forEach(c => library().upsert(c));
+      }
+    },
+
+    // 通用播种：一批卡一个标记，只播一次；已有同名/同 id 的卡跳过。
+    // replacePrefix：同前缀且同 id 的内置卡视为「旧识别」，用最新数据覆盖。
+    seedBatch(list, markerKey, replacePrefix) {
+      try {
+        if (storage().getItem(markerKey)) return;
+        // 批内内存合并、整批一次落盘（2026-09-28 审计B#6）：原实现每卡一次
+        // 「全库序列化+setItem」，首批数百卡=数百次全库写，首启秒级卡顿。
+        const cards = library().all().slice();
+        let changed = false;
+        list.forEach(c => {
+          if (replacePrefix && String(c.id || '').startsWith(replacePrefix) &&
+              cards.some(x => x.id === c.id)) {
+            const i = cards.findIndex(x => x.id === c.id);
+            cards[i] = { ...c };   // 旧识别：用最新数据覆盖（原 upsert 按 id 覆盖口径）
+            changed = true;
+            return;
+          }
+          if (!cards.some(x => x.id === c.id || x.name === c.name)) {
+            cards.push({ ...c });
+            changed = true;
+          }
+        });
+        // A rejected save can mean another page replaced the full catalog.
+        // Keep that snapshot intact and retry this batch on a later invocation.
+        if (changed && !library().saveAll(cards)) return;
+        if (storage().getItem(KEY) !== JSON.stringify(cards)) return;
+        storage().setItem(markerKey, '1');
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+
+    // 随机池防退回修正（卡库审计 2026-09-17 发现三，2026-09-25 修复）：石榴弹珠。
+    // 老板 2026-09-13 拍板「石榴石弹珠卖价 3→4，并退出商店/发现池」（TABLETOP3 定义已带
+    // unrandom: true），但定版覆盖批次 cards-sync.json 的 tt3-garnet-marble 无 unrandom
+    // 字段，ensureCardsSyncLive 整卡覆盖会把该字段抹掉——资源/古朴卡 isRandomObtainable
+    // 只看 unrandom，抹掉即退回商店随机槽位/发现/掉落池。每次启动幂等补回（改完即无
+    // 目标，无需 key 标记），旧档、新库、定版升版重播后同口径防退回。
+    ensureRandomPoolFixes() {
+      try {
+        const cards = library().all();
+        const marble = cards.find(c => c.id === 'tt3-garnet-marble');
+        if (marble && !marble.unrandom) {
+          marble.unrandom = true;
+          library().saveAll(cards);
+        }
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+
+    // 设计者定版数据修正（一次性）：爆燃火球描述未写注能收益，删除其注能字段
+    ensureCardFixes() {
+      try {
+        if (storage().getItem('sdt-mig-burnharvest')) return;
+        const cards = library().all();
+        cards.forEach(c => {
+          if (c.id === 'tt7-burnharvest' && c.infuse) { delete c.infuse; }
+        });
+        if (!library().saveAll(cards)) return;
+        markCardMigration('sdt-mig-burnharvest', cards);
+      } catch { /* 静默跳过 */ }
+    },
+
+    // 神灯定版护甲只属于抉择 3°。旧词条回填曾在迁移后重新写入 armor:5，
+    // 因此旧 marker 不再跳过幂等修正；仅修已知定版/历史卡面，保留制作坊自定义效果。
+    ensureChoiceFixes() {
+      try {
+        const cards = library().all();
+        if (!cards.some(card => card.id === 'tt3-magic-lamp')) return;
+        const normalizedDesc = card => String(card.desc || '').replace(/\s/g, '');
+        const knownDescriptions = new Set([
+          ...library().TABLETOP3, ...library().TABLETOP10, ...data.cardsSync.cards,
+        ].filter(card => card.id === 'tt3-magic-lamp').map(normalizedDesc)
+          // 2026-10-21 反馈#5 第 1 项文案改「发现招式」：历史定版卡面仍参与 armor:5 修正判定
+          .concat([
+            '抉择：1° 发现 1 张牌并将其释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，获得5 点护甲。',
+            '抉择：1° 发现 1 张牌并释放；2° 消灭 1 名受伤敌人（非 BOSS）；3° 冰冻 2 名角色，+5 甲。',
+          ].map(normalizedDesc)));
+        let dirty = false;
+        const nextCards = cards.map(card => {
+          if (card.id !== 'tt3-magic-lamp' || +card.armor !== 5
+            || !knownDescriptions.has(normalizedDesc(card))
+            || (card.rules?.triggers && !card.rules.triggers.onPlay?.some(operation => operation?.op === 'choice'))
+            || card.rules?.equip || card.rules?.bag) return card;
+          const next = { ...card };
+          delete next.armor;
+          dirty = true;
+          return next;
+        });
+        if (dirty && !library().saveAll(nextCards)) return;
+        if (!storage().getItem('sdt-mig-choice')) storage().setItem('sdt-mig-choice', '1');
+      } catch { /* 静默跳过 */ }
+    },
+
+    // 第十批同步：设计者实机定版双向合并（TT10_KEY 标记，一次性）。按 id 整卡覆盖 + 缺失补种；
+    // 本轮为老板拍板的定版动作，有意覆盖制作坊玩家改动（与 seedBatch 的「尊重玩家」语义不同）；
+    // 并移除同设计重复 id（RETIRE，设计者已在旧 id 上定版同名卡）。
+    ensureTabletopSync() {
+      try {
+        if (storage().getItem(TT10_KEY)) return;
+        const cards = library().all();
+        for (let i = cards.length - 1; i >= 0; i--) {
+          if (RETIRE_TT10.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id)) cards.splice(i, 1);
+        }
+        library().TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+        });
+        if (!library().saveAll(cards)) return;
+        markCardMigration(TT10_KEY, cards);
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+
+    // 第十一批同步（2026-09-09 老板拍板）：与设计者实机卡库导出（微信接收的
+    // 「搜打撤·代号7_卡牌库_233张.json」，裸数组旧格式）完全对齐——
+    //   · 补入设计者实机有而仓库缺失的 26 张；
+    //   · 39 张仓库独有卡退役（RETIRE_TT11；「新兵操典」种子不带 id，按名字清理）；
+    //   · 25 张共享 id 卡整卡取设计者稿（能力卡 type「能力卡」与敌人图鉴 art
+    //     为仓库实现标记，不回退，见 TABLETOP11 注释）。
+    // 有意结果：不变应万变 新旧两版并存（设计者实机如此；厉兵秣马 cc-prep 已于 2026-09-19 退役，只留 tt7-ironcharge），
+    // 旧版 tt7-* 无 cls 不进职业池，法力补给除外——cls=法师 为仓库定版）；
+    // 恶魔之力 tt7-drunksong 已整卡退役（2026-09-13 老板拍板删除，同名双版只留 cc-demon）。
+    // 初始牌只剩初始攻击与应急绷带（设计者稿）。
+    ensureTabletopSync11() {
+      try {
+        if (storage().getItem(TT11_KEY)) return;
+        const cards = library().all();
+        for (let i = cards.length - 1; i >= 0; i--) {
+          if (RETIRE_TT11.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id) || cards[i].name === '新兵操典') cards.splice(i, 1);
+        }
+        library().TABLETOP11.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+        });
+        if (!library().saveAll(cards)) return;
+        markCardMigration(TT11_KEY, cards);
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+
+// ===== 实机定版覆盖批次（数据真源：game/data/cards-sync.json）=====
+    // 网页版卡牌库的修改同步进定版数据（老板 2026-09-09 拍板的机制）——
+    // 数据由 scripts/sync-cards-from-live.mjs 生成写入 JSON，本文件只负责播种。
+    // 沿用 TABLETOP10/11 模式：按 id 整卡覆盖 + 缺失补种 + RETIRE 退役；KEY 变更让旧环境重播。
+    ensureCardsSyncLive() {
+      try {
+        const seedKey = `sdt-cards-sync-v${data.cardsSync.version}-seeded`;
+        if (storage().getItem(seedKey)) return;
+        const cards = library().all();
+        for (let i = cards.length - 1; i >= 0; i--) {
+          if (this.RETIRE_CARDS_SYNC.includes(cards[i].id)) cards.splice(i, 1);
+        }
+        this.CARDS_SYNC.forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+        });
+        if (!library().saveAll(cards)) return;
+        markCardMigration(seedKey, cards);
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+    ensureEvents0919() {
+      try {
+        if (storage().getItem(EVENTS_0919_KEY)) {
+          // 只修旧定版标题；保留已盖章卡库的自定义名称、规则及其它字段。
+          const cards = library().all().slice();
+          let changed = false;
+          const index = cards.findIndex(c => c.id === 'tt6-chestdraw' && c.name === '熔断双箱');
+          if (index >= 0) {
+            cards[index] = { ...cards[index], name: '熔断物资箱' };
+            changed = true;
+          }
+          const oldDescriptions = {
+            'tt6-bandits':['反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。'],
+            'tt6-mystery':['获得员工通行证A碎片，+2 币。','你获得员工通行证A碎片和 2 币。'],
+            'tt6-goldhammer':['获得卡牌「闪金之锤」。','你获得 1 张「闪金之锤」。'],
+            'tt6-relief':['回复 6 点生命。','你回复 6 点生命。'],
+          };
+          cards.forEach((card,i) => {
+            if (!oldDescriptions[card.id]?.includes(card.desc)) return;
+            const definition = library().EVENTS_0919.find(item => item.id === card.id);
+            if (definition) { cards[i] = {...card,desc:definition.desc}; changed = true; }
+          });
+          if (changed) library().saveAll(cards);
+          return;
+        }
+        const cards = library().all();
+        library().EVENTS_0919.forEach(d => {
+          const i = cards.findIndex(c => c.id === d.id);
+          if (i >= 0) cards[i] = { ...cards[i], ...d };
+          else cards.push({ ...d });
+        });
+        if (!library().saveAll(cards)) return;
+        markCardMigration(EVENTS_0919_KEY, cards);
+      } catch { /* 隐私模式等场景静默跳过 */ }
+    },
+  };
+}

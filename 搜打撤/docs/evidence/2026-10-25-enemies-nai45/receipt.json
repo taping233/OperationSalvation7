@@ -1,0 +1,1028 @@
+{
+  "date": "2026-10-25",
+  "workflow": "nai-diffusion-4-5-full draft -> builtin imagegen redraw -> RGBA WebP",
+  "sources": [
+    {
+      "id": "archer",
+      "oldName": "封锁线枪手",
+      "newName": "封锁线枪手",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/archer-nai45.png",
+      "naiSha256": "436119812f3407387e7a7884a36a2467419979d2d4e022ffc80e0cd8f025488e",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/archer-builtin.png",
+      "builtinSha256": "06afcfd6d16c13c75743b17dda40d243f8cd99a20932f4f486cbfa9ba5eb6654",
+      "sourceSize": [
+        1037,
+        1517
+      ]
+    },
+    {
+      "id": "bandit",
+      "oldName": "截道拾荒者",
+      "newName": "截道拾荒者",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/bandit-nai45.png",
+      "naiSha256": "feb0a7f05db8efbe36ebdbb12632b69b2f2d74d410bbad07eece64a9d86753dc",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/bandit-builtin.png",
+      "builtinSha256": "63ba3c84047b0198d9a9421930be1e6ae835cfec28119bc9f7b196949a7f4844",
+      "sourceSize": [
+        1037,
+        1517
+      ]
+    },
+    {
+      "id": "orc_axe",
+      "oldName": "硬化感染者",
+      "newName": "板壳畸变体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/orc_axe_r2-nai45.png",
+      "naiSha256": "764b8b001832ae89f3ac59dfdfb6e7c4be2afe66f65f0dec44ca6b835fe71c4a",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/orc_axe-builtin.png",
+      "builtinSha256": "2ecf1cf8edfadc90f60cdf2ac97292e0593a39a96438a6557fa612f11d22fb9c",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "grass_el",
+      "oldName": "增生感染者",
+      "newName": "囊生畸变体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/grass_el_r2-nai45.png",
+      "naiSha256": "cb9ff6f9cb9f0a77a144b48889c9c66f0198e1ace8cb92aa34dfce5b86415b29",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/grass_el-builtin.png",
+      "builtinSha256": "886a7bbf6c09e87a66ef82cd6e879408c1da2d7056defaa447893ff72247e171",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "cavalry",
+      "oldName": "联邦机动兵",
+      "newName": "封锁线突击兵",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/cavalry-nai45.png",
+      "naiSha256": "34b35007acf7050224a6fac6279b937e0252fdadd0e4812bac4cb17ea4c6ba0b",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/cavalry-builtin.png",
+      "builtinSha256": "c64c334ae79f39380d8c414aedb1b662d7fae308fecb401600447839e2fe3571",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "wolf_rider",
+      "oldName": "变异雪狼",
+      "newName": "裂颚匍行体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/wolf_rider-nai45.png",
+      "naiSha256": "833ceef9de687a8ef402dbccf78e79d8e9a6a2bb86aa6a6a91a829bcb6613487",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/wolf_rider-builtin.png",
+      "builtinSha256": "dc98f0212da3b27012421c69eadcb2f6c43bbb4752eb8269d73385d1b5bf5328",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "fire_el",
+      "oldName": "灼热异变体",
+      "newName": "灼囊畸变体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/fire_el-nai45.png",
+      "naiSha256": "152ce2ec0458872c19ff1b883736b32b5456432ace679e06dc30157127f33d22",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/fire_el-builtin.png",
+      "builtinSha256": "d64f8757d8907f4110b2564c777b6d67ac78fae1f1ba859c47e4138e389410cb",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "water_el",
+      "oldName": "腐蚀异变体",
+      "newName": "渗蚀畸变体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/water_el-nai45.png",
+      "naiSha256": "d5c1098b1aae1166df4ee2ef03f8771cf5419b7a56ca8865985f90f71fee8a75",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/water_el-builtin.png",
+      "builtinSha256": "f406055283ab576a038282d1b97ef6eecf01884ee015b90aeed40b3e64a0f907",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "dragon",
+      "oldName": "巨兽「荒渊」",
+      "newName": "封街巨躯",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/dragon-nai45.png",
+      "naiSha256": "213321493e3d70ef82a87cf22f32dc6b2678c49a127bc3021086dd0143f957ec",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/dragon-builtin.png",
+      "builtinSha256": "b534375d203890000799e33c1a62b316d18fad08b4e02e4957cd367433067589",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "boss_general",
+      "oldName": "肃清总督",
+      "newName": "封控指挥官",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/boss_general-nai45.png",
+      "naiSha256": "b8464f484268d6dc90307f2df2946762ad6fecc23c5de4c5ca655c0c178de8c6",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/boss_general-builtin.png",
+      "builtinSha256": "c901d6b832e47f51dc19f2a13d5788be8aaa473afa737ca3d5647a425cbb78f4",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "boss_orc",
+      "oldName": "变异巢母",
+      "newName": "囊巢母体",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/boss_orc-nai45.png",
+      "naiSha256": "b086f753753b8402109cec67af378665dd92a7421363d26389002c3a9aaf1da5",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/boss_orc-builtin.png",
+      "builtinSha256": "d67d8601f91890ac78d0cdea03090390fed335c8be3f6a8e53d9b8eb763bfb61",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "boss_elem",
+      "oldName": "异能领主",
+      "newName": "隔离区看守",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/boss_elem-nai45.png",
+      "naiSha256": "881d66a11905632f2f29ff8d44091e8a2b4aab2a88214b5d8a4b5ce8c62c592a",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/boss_elem-builtin.png",
+      "builtinSha256": "9cced0bb81ca0b143aca0a65715f114b45468e7fcb2135761a691e4344aa4a9a",
+      "sourceSize": [
+        1037,
+        1517
+      ]
+    },
+    {
+      "id": "greedy_imp",
+      "oldName": "贪财小鬼",
+      "newName": "拾能囊虫",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/greedy_imp-nai45.png",
+      "naiSha256": "3e48c2286fc3436d6725d05244948201dee135f00c4ac5e93fa00f304085435b",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/greedy_imp-builtin.png",
+      "builtinSha256": "6601dfd0065ece7eb10f3f6901d5f596a2fa7869f75ab4dfbd78a5288b0beaa4",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "tin_mute",
+      "oldName": "铁皮哑人",
+      "newName": "覆板缄默者",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/tin_mute-nai45.png",
+      "naiSha256": "fc8f2d81d9814310f79e87b82a491db4f58f3f310f84037fe3e75d492d6fd7b4",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/tin_mute-builtin.png",
+      "builtinSha256": "08609c25db9ac0fe0a9f175e521d1c263f8387efb288cd05a09ba39bbc2e20ce",
+      "sourceSize": [
+        1037,
+        1517
+      ]
+    },
+    {
+      "id": "cultist",
+      "oldName": "邪教徒",
+      "newName": "封识信徒",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/cultist-nai45.png",
+      "naiSha256": "cfbf6588386c2cc926b22a3c27900b21036dcef076f1bd5f9a00e8b38f744369",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/cultist-builtin.png",
+      "builtinSha256": "46b2d8bf593b67b6c931de0ae7e4def41713853d9e1da8ab9fb8005f7fc923cc",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    },
+    {
+      "id": "fake_apothecary",
+      "oldName": "假药贩子",
+      "newName": "黑诊配药人",
+      "naiSource": ".tmp/nai/enemies-nai45-20261025/fake_apothecary-nai45.png",
+      "naiSha256": "a73321271ea501be9c0de613f51d6dda6c53d2693f06053d904d57fbf3e4bd79",
+      "builtinSource": ".tmp/imagegen/enemies-nai45-20261025/fake_apothecary-builtin.png",
+      "builtinSha256": "3eda505337885764b3b2c9189090f95273446f4f4d41652853bd105010fdc5ef",
+      "sourceSize": [
+        1037,
+        1516
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "game/assets/portraits/enemies/archer.webp",
+      "bytes": 168288,
+      "sha256": "bd0fc8c9f7bb6c0d1ef50c8f8d09ac5d1ae4f58939c428a364914c9c3018265c",
+      "beforeSha256": "4b983d5d95ef5113c47e5a55f9086a1b6a2a5685c2c2ed5c30b98b5459235fa2",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/archer.webp",
+      "size": [
+        1037,
+        1517
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/archer.webp",
+      "bytes": 45814,
+      "sha256": "2301d425b69a9072d4032adfe3f23f7dc71910e4ecb6088a7c3d99281421b628",
+      "beforeSha256": "7e119037d84e58b1558983e66508b929121628d7cdb3ce988a32301af8bf8e76",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/archer.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/bandit.webp",
+      "bytes": 150738,
+      "sha256": "2c469da23d97c3f0f3949d8272a74338683e18ebada1a2efd5465fc2e73cc49e",
+      "beforeSha256": "1190606f545b2336c400d1ca2ec6e8937f4a086e0b7cfc7220a744deebdd726a",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/bandit.webp",
+      "size": [
+        1037,
+        1517
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/bandit.webp",
+      "bytes": 42244,
+      "sha256": "1cbd2225f0148356594f21e756bfe7ca414aa62817bdbc519e26a5a429a3ce30",
+      "beforeSha256": "958c3f5ea85870e71f61514995e73b8c111741dfbb91168dd188c26485e977c7",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/bandit.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/orc_axe.webp",
+      "bytes": 223094,
+      "sha256": "56c672a29dcb937e1b94a2f3c1fd9ee213c27200c7cc88e6e81495571ff2b5ee",
+      "beforeSha256": "26c313b336d762dcfa0324c4f89365a42215547de6f9c058e95b87374554e607",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/orc_axe.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/orc_axe.webp",
+      "bytes": 63460,
+      "sha256": "547d58d9c276f000b05e2a5787f08bbdefaa16134025d1ebafd5a3c730f6dab6",
+      "beforeSha256": "5a49a16948a46ad3978ceb8ea9bab5600455f8bb3cedbc09df1758b3a45af671",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/orc_axe.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/grass_el.webp",
+      "bytes": 185732,
+      "sha256": "3e23c992306aa33e2e60610f0eb0e7060585abddbc985f7f324fc642e9541338",
+      "beforeSha256": "1ec24e8ed1a3025fab280fef0bffc48a287ad409d21c278246c92ab5b5dc767b",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/grass_el.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/grass_el.webp",
+      "bytes": 50152,
+      "sha256": "b4ec09f3f1bc5d3c875a9f9998f7a4c50c39e6f52a33296de2918844ea23ec21",
+      "beforeSha256": "b47dccb4da4c13dd4acb4a22f772b461fa88a3e83b2900279cac829ab447a7df",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/grass_el.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/cavalry.webp",
+      "bytes": 153072,
+      "sha256": "0e476e03e355e515ebf6047e2b2f02513e29ef07526f181c56238e12fd57035d",
+      "beforeSha256": "16ece6b30893f8b593c328174af2460e7c6f6f921e0db84d68ac26a2c151e52b",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/cavalry.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/cavalry.webp",
+      "bytes": 42998,
+      "sha256": "b526542fd41ae424aff37211eced7925d58c857ced2e52db8499465a73a5a9cd",
+      "beforeSha256": "c5524fa3cacc2ef19f33de311ff82a7bb9b3abe717f8da700d03a5051d43300d",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/cavalry.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/wolf_rider.webp",
+      "bytes": 210798,
+      "sha256": "5c8076bf7124817f0468aa02202343d74672111839d79254131d4a6aa8b8da8a",
+      "beforeSha256": "d6985aa524842090f7886937a9221e532b84e64074f27b7331d92584d3596d20",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/wolf_rider.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/wolf_rider.webp",
+      "bytes": 53626,
+      "sha256": "2091924fed936210dc44657c815634d5a473f0f3dac33c3814483c746d8d53cc",
+      "beforeSha256": "2635d91650b32a24edd2fa3051a3b296f721baf7fed984d988056315894ba0cd",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/wolf_rider.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/fire_el.webp",
+      "bytes": 274808,
+      "sha256": "4fa924c059f3d49a371f2943c63555d5d0c22ea2d39d7e3bfc31abdd10df6c2c",
+      "beforeSha256": "06b834021596299dfc7bb962d8931586813388371f39b1d01ef90c9433eccb49",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/fire_el.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/fire_el.webp",
+      "bytes": 69636,
+      "sha256": "910aa305543bca6a23be560b77ce8d9b1451bf9312465ac0af43d4f39035a97a",
+      "beforeSha256": "5b96ec2874ca33e4ab51f320bc4564cf348dc9666c2a9bfa9380d16d7a39a492",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/fire_el.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/water_el.webp",
+      "bytes": 184018,
+      "sha256": "e819a6096cb41b347b70eb01475b41d85ea5d7ba8df070301a6da26cc1cbe002",
+      "beforeSha256": "07f78900a1f9838440a0d2265bb0ab40fb15e02086a75cb55c44480086dce0d3",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/water_el.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/water_el.webp",
+      "bytes": 49598,
+      "sha256": "cb648884ab6b34bffe185057447a75d89640a075799c5cbb5eca5827631a83be",
+      "beforeSha256": "d7f93e258349267fd71f05d218bc86e6c892731ee109b40f4f0d048ddadec3c4",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/water_el.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/dragon.webp",
+      "bytes": 308468,
+      "sha256": "638c7675d9686222e89465ffc15a112b5adbce1af36f286e593d274c603020c1",
+      "beforeSha256": "b3a3e88525786ac6a08bd9a6ce407138158257b546b5f55a282a2de08a64a789",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/dragon.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/dragon.webp",
+      "bytes": 78592,
+      "sha256": "d7114477a3de4b75f4a794ea48c03510022f902ac125d26c1f68c0bb9263bbe3",
+      "beforeSha256": "84c66a2b80458365d4b490dd00d66d1981de2d4fcd09280e5b1a29083a6968b6",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/dragon.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/boss_general.webp",
+      "bytes": 131336,
+      "sha256": "c1e2588f37cd3cd7e5deb9b285b547c1db5bc6d173ab8bab61cfcfa1b3dbbc55",
+      "beforeSha256": "1d1d54fc9d3f80b91c2248435530fbebdacec70d47300e7ea38770c4f532eb9b",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/boss_general.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/boss_general.webp",
+      "bytes": 36654,
+      "sha256": "d67c071974baaf94588264aed89d0709c8c9ced17af433e0752bf6907a5847fa",
+      "beforeSha256": "2710454822d2f640742b1fe2ed1c75939fbd88d976b51be320543a8f6f17a9c5",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/boss_general.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/boss_orc.webp",
+      "bytes": 227490,
+      "sha256": "84f1907419581f662b9a25a3e76f4cfa54c32ae9a418a7d0f079a26c3b75a87c",
+      "beforeSha256": "367b080c42b1e5bb242a18af3145b8205709e2c103e7023741e05e4dc03f192b",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/boss_orc.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/boss_orc.webp",
+      "bytes": 60362,
+      "sha256": "32a41e1d31071c592848f8be8d8297d0b07bbb3f96c2e636d57d1200b88fb74e",
+      "beforeSha256": "8e9625a5e61127030d41683c7c607617df63fb85b00eaddf7586cafd92fbbd9d",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/boss_orc.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/boss_elem.webp",
+      "bytes": 202874,
+      "sha256": "82709c4bf1422a3245b8c4155a18be6320d2fbad21f0fdaa220f339786df091a",
+      "beforeSha256": "a9ff3cd7e4e97153b173707fa0070fb005ea4e3e1546f2259f76c3aebbe99248",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/boss_elem.webp",
+      "size": [
+        1037,
+        1517
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/boss_elem.webp",
+      "bytes": 54366,
+      "sha256": "50dbe2edbef5b5f7b89e4696e17708cfab993fd449f174df7a8e7566a6ed7baa",
+      "beforeSha256": "8b4d6af58416ef4579259907bd035cd0503ceaccbe6a762f3f4e4f874c57c4ae",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/boss_elem.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/greedy_imp.webp",
+      "bytes": 190504,
+      "sha256": "3568beeac92016deeaab520d8b61d9ef938d360f46b93c9979f72a6519bd1e37",
+      "beforeSha256": "5bb13d0ff7cc285ca45b38539e343a786562a0f4d49cac34917396e6d9f109d1",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/greedy_imp.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/greedy_imp.webp",
+      "bytes": 50518,
+      "sha256": "b490d9b23b86f1cbcf2a7708f994470fbae09d5fe075d774998bab5e962a833a",
+      "beforeSha256": "47d7ae870de93f41126eff237ae9a35ed2fe26d705d672db3b2d195e014639c2",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/greedy_imp.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/tin_mute.webp",
+      "bytes": 245936,
+      "sha256": "09645db5ca829142ad3b503f3788822bf715a0a1e1855ff54b1cf229e0f29b95",
+      "beforeSha256": "094d8d3bd44a62a4e4e53a5d5896a7dfe7dfc307956b2208fdbf060888bf6e73",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/tin_mute.webp",
+      "size": [
+        1037,
+        1517
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/tin_mute.webp",
+      "bytes": 61246,
+      "sha256": "ee2043edef2e6e10e237433cb1bc7d2e9321f677980d745bf83261c6c996938b",
+      "beforeSha256": "a220c010025d4a0d1df07c2c6109d9784c98f408191bccf7d808a2de208faabf",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/tin_mute.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/cultist.webp",
+      "bytes": 101870,
+      "sha256": "dbdd64ef24e0a04a5950e10650960c4f855d4069dfe92b19aaea30fb656b7536",
+      "beforeSha256": "e9a74067f0f3c931dfed05696d804677037701d89c1efaaa07f1e31d165935c9",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/cultist.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/cultist.webp",
+      "bytes": 28950,
+      "sha256": "5fe170c589f2a0d50e4d003c0412057454bf6c37d6bede333ec03841c42327a5",
+      "beforeSha256": "a2eb489fb23943e8e5815fbabd625ee5527faa0cbbcdca4680ccf6965eee51c7",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/cultist.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/portraits/enemies/fake_apothecary.webp",
+      "bytes": 156764,
+      "sha256": "e51c60d072450ac99b6e1a8ab423774eb5b565c6f99e454be4fb0cfd7692b181",
+      "beforeSha256": "854dae1a0455c3d62f7cbd6dbbde81b3b5fa5d3ac0990ffc4f9c769338e85b07",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/portraits/enemies/fake_apothecary.webp",
+      "size": [
+        1037,
+        1516
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "game/assets/thumbs/portraits/enemies/fake_apothecary.webp",
+      "bytes": 44460,
+      "sha256": "015e1e52ce7c7edf75f50404028c2802cf4a2d17d46c2fd85e97029297ea3bfc",
+      "beforeSha256": "6e4de098efb6d67bbfddee7aa75dc87f5254314ec8f680edd6f6d2dd5e6e6235",
+      "backup": ".tmp/imagegen/enemies-nai45-20261025/before/thumbs/portraits/enemies/fake_apothecary.webp",
+      "size": [
+        448,
+        655
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  ],
+  "mechanicsBefore": {
+    "monsters": {
+      "infantry": {
+        "id": "infantry",
+        "name": "联邦巡防兵",
+        "atk": 4,
+        "hp": 4,
+        "behavior": "strike"
+      },
+      "archer": {
+        "id": "archer",
+        "name": "封锁线枪手",
+        "atk": 5,
+        "hp": 3,
+        "behavior": "volley"
+      },
+      "bandit": {
+        "id": "bandit",
+        "name": "截道拾荒者",
+        "atk": 3,
+        "hp": 3,
+        "behavior": "strike"
+      },
+      "cavalry": {
+        "id": "cavalry",
+        "name": "联邦机动兵",
+        "atk": 5,
+        "hp": 6,
+        "behavior": "charge"
+      },
+      "orc_jav": {
+        "id": "orc_jav",
+        "name": "反抗组织掷弹兵",
+        "atk": 6,
+        "hp": 4,
+        "behavior": "volley"
+      },
+      "wolf_rider": {
+        "id": "wolf_rider",
+        "name": "变异雪狼",
+        "atk": 7,
+        "hp": 6,
+        "behavior": "charge"
+      },
+      "orc_axe": {
+        "id": "orc_axe",
+        "name": "硬化感染者",
+        "atk": 4,
+        "hp": 7,
+        "behavior": "guard"
+      },
+      "fire_el": {
+        "id": "fire_el",
+        "name": "灼热异变体",
+        "atk": 10,
+        "hp": 7,
+        "behavior": "strike"
+      },
+      "water_el": {
+        "id": "water_el",
+        "name": "腐蚀异变体",
+        "atk": 7,
+        "hp": 10,
+        "behavior": "guard"
+      },
+      "esper_crow": {
+        "id": "esper_crow",
+        "name": "白鸦",
+        "atk": 8,
+        "hp": 5,
+        "behavior": "volley"
+      },
+      "esper_candle": {
+        "id": "esper_candle",
+        "name": "烛火",
+        "atk": 9,
+        "hp": 6,
+        "behavior": "strike"
+      },
+      "grass_el": {
+        "id": "grass_el",
+        "name": "增生感染者",
+        "atk": 5,
+        "hp": 12,
+        "behavior": "curse"
+      },
+      "esper_silence": {
+        "id": "esper_silence",
+        "name": "静默",
+        "atk": 7,
+        "hp": 9,
+        "behavior": "curse"
+      },
+      "esper_echo": {
+        "id": "esper_echo",
+        "name": "回声",
+        "atk": 9,
+        "hp": 7,
+        "behavior": "volley"
+      },
+      "dragon": {
+        "id": "dragon",
+        "name": "巨兽「荒渊」",
+        "atk": 7,
+        "hp": 40,
+        "elite": true,
+        "behavior": "dragon"
+      },
+      "rager": {
+        "id": "rager",
+        "name": "暴怒者",
+        "atk": 2,
+        "hp": 5,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "allyDeathRage",
+        "desc": "一个友方角色死亡后，自身攻击力 +2。"
+      },
+      "deserter": {
+        "id": "deserter",
+        "name": "落难逃兵",
+        "atk": 3,
+        "hp": 7,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "allyDeathLoss",
+        "desc": "每有一个友方角色死亡，自身失去 2 点生命。"
+      },
+      "greedy_imp": {
+        "id": "greedy_imp",
+        "name": "贪财小鬼",
+        "atk": 4,
+        "hp": 5,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "deathEnergy",
+        "desc": "自身死亡后，为主人公回复 1 点能量。"
+      },
+      "swaggerer": {
+        "id": "swaggerer",
+        "name": "招摇过客",
+        "atk": 2,
+        "hp": 6,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "attackAura",
+        "desc": "其它所有友方单位攻击力 +2。"
+      },
+      "tin_mute": {
+        "id": "tin_mute",
+        "name": "铁皮哑人",
+        "atk": 4,
+        "hp": 9,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "damageCap",
+        "desc": "每次受到的伤害不超过 4 点；破甲与真实伤害无视此限制。",
+        "damageCap": 4
+      },
+      "heavy_hammer": {
+        "id": "heavy_hammer",
+        "name": "笨重锤手",
+        "atk": 8,
+        "hp": 8,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "evenAttack",
+        "desc": "仅偶数回合可以攻击。",
+        "evenAttack": true
+      },
+      "cultist": {
+        "id": "cultist",
+        "name": "邪教徒",
+        "atk": 6,
+        "hp": 6,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "blockPowerGain",
+        "desc": "存活期间，主人公无法获得攻击强化与法术强化。"
+      },
+      "fake_apothecary": {
+        "id": "fake_apothecary",
+        "name": "假药贩子",
+        "atk": 5,
+        "hp": 10,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "curseHeal",
+        "desc": "每次被附加诅咒时回复 2 点生命（受禁疗限制）。"
+      },
+      "camo_sniper": {
+        "id": "camo_sniper",
+        "name": "迷彩狙击手",
+        "atk": 7,
+        "hp": 4,
+        "elite": true,
+        "behavior": "strike",
+        "eliteSkill": "firstTurnStealth",
+        "desc": "第一回合具有潜行；其它友方角色均死亡时立即失去潜行。"
+      }
+    },
+    "bosses": [
+      {
+        "id": "boss_general",
+        "name": "肃清总督",
+        "hp": 50,
+        "atk": 5,
+        "cell": [
+          4,
+          3
+        ],
+        "icon": "将",
+        "affix": "grow",
+        "affixName": "军威",
+        "behavior": "general",
+        "affixDesc": "每个回合结束时攻击力 +2"
+      },
+      {
+        "id": "boss_orc",
+        "name": "变异巢母",
+        "hp": 45,
+        "atk": 4,
+        "cell": [
+          4,
+          4
+        ],
+        "icon": "巢",
+        "affix": "frenzy",
+        "affixName": "狂乱",
+        "behavior": "orc_boss",
+        "affixDesc": "每回合攻击两次，每次附加 1 层流血或中毒"
+      },
+      {
+        "id": "boss_elem",
+        "name": "异能领主",
+        "hp": 48,
+        "atk": 8,
+        "cell": [
+          3,
+          4
+        ],
+        "icon": "能",
+        "affix": "aegis",
+        "affixName": "元素庇幕",
+        "behavior": "element_boss",
+        "affixDesc": "偶数回合减免所有伤害（破甲可克制）"
+      }
+    ]
+  },
+  "fullBytes": 3115790,
+  "thumbBytes": 832676,
+  "manifestCountUnchanged": 1717,
+  "consumerFingerprint": "08233000b37a7b616d776e86c2bda37ccda557c728bac737324c2e6cac3e0be5",
+  "consumerReview": "Only 14 display-name aliases added to existing stable enemy paths. Prior aliases and exclusion lists retained.",
+  "textChanges": [
+    {
+      "path": "game/data/map.json",
+      "beforeSha256": "5ae4fdd20b726306705a25b82135cc3b3705dc2a4e4f0da39c4d608a9698aad1",
+      "sha256": "64bc0e8e5ef6690c58f82374b284537cd971bebd3ab8211676b04ba54a157d83"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "beforeSha256": "6db9ed57ebbb56559b721029dbde25d1d386930f224692f46d5ee804f828b93a",
+      "sha256": "9becbb58c3bf587d318cc3b2fb0944112654972ba91d69403e6da8acca4b3310"
+    },
+    {
+      "path": "game/src/battle/core/battle.elite-mechanics.js",
+      "beforeSha256": "f2076c90d99ef6aeea069fa9e8f98cbe65d0405a398e37dbcd7e5cc2df68ede5",
+      "sha256": "b4a44db5fb8a444adce91dc08af3a4f34365692ada4bd34c4098da4104272233"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.domain.js",
+      "beforeSha256": "0c27ff47e38128dc6907f6f77f55f23391316fb9ee69d62e9329363bb10db115",
+      "sha256": "dcc7a09504101f0346d5d92562ee6b1787991286ceed0bbd7f9696f38f62aba5"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "beforeSha256": "16f75fcf5d3eec53d53aed0e655e4cf160e6468974150575ff67dc421552200d",
+      "sha256": "7a4e119f0eb205338a2a703720be9fb363a6c7b38f86ec34718c6254066fa14e"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "beforeSha256": "7d4fe85577547ca292f2da74e93286deb73cd0f9e31079c03451a8370ca64e68",
+      "sha256": "d69cf8037f0d81633939d31339aeba005caf69040d2116f0c37376cb5cd105ff"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "beforeSha256": "ca04f77c2ce10c7b155420a439868da6c053756345c83243f2c7f9dd7e238b05",
+      "sha256": "6a0ea84e9972e6d0d8cb6558b66411a316b0c1d2f608461370b8d00fe067aa80"
+    }
+  ],
+  "notRun": [
+    "tests",
+    "asset audit",
+    "lint",
+    "type check",
+    "browser acceptance",
+    "build"
+  ],
+  "state": "complete-uncommitted"
+}

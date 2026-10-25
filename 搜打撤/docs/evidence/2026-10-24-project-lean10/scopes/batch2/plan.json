@@ -1,0 +1,3789 @@
+{
+  "scope": "Second batch: remaining positive selector scope refactors; first batch and paused sources excluded",
+  "status": "read-only-plan",
+  "excluded": [
+    "bag-design-system.css",
+    "base-collection-v4.css",
+    "base-rooms-v7.css",
+    "card-browser.css",
+    "collection-workspace.css",
+    "container-store.css",
+    "hub-cover-collections.css",
+    "photo-studio-mounts.css",
+    "photo-studio-room-effects.css",
+    "photo-studio-unified.css",
+    "photo-studio-zoom-motion.css"
+  ],
+  "totalStructuralBytes": 25839,
+  "totalNormalizedBytes": 25885,
+  "roundtrip": "Reparsed output; expanded generated scopes equal original selectors, declaration bytes, comments and at-rule order",
+  "files": [
+    {
+      "file": "game/css/ak-skin.css",
+      "beforeSha256": "f71637e0d990a221e72a3adf566fe0dd1efad8610cc33b0a426e3b4121e6d76f",
+      "afterSha256": "d89db857d35eba669b916e6b14004fea809493ea43f0c4d9fb489097af537d96",
+      "structuralBytes": 729,
+      "normalizedBytes": 735,
+      "groups": 17,
+      "specificityChecks": 90,
+      "examples": [
+        {
+          "firstLine": 26,
+          "lastLine": 33,
+          "prefix": "#overlay .card",
+          "structuralBytes": 22,
+          "rules": 3
+        },
+        {
+          "firstLine": 23,
+          "lastLine": 25,
+          "prefix": "#overlay",
+          "structuralBytes": 17,
+          "rules": 2
+        },
+        {
+          "firstLine": 140,
+          "lastLine": 141,
+          "prefix": ".page-loading-copy",
+          "structuralBytes": 13,
+          "rules": 2
+        },
+        {
+          "firstLine": 113,
+          "lastLine": 136,
+          "prefix": "#overlay",
+          "structuralBytes": 101,
+          "rules": 15
+        },
+        {
+          "firstLine": 93,
+          "lastLine": 106,
+          "prefix": "#overlay",
+          "structuralBytes": 52,
+          "rules": 8
+        },
+        {
+          "firstLine": 87,
+          "lastLine": 92,
+          "prefix": "#overlay .hub-tab",
+          "structuralBytes": 108,
+          "rules": 4
+        },
+        {
+          "firstLine": 81,
+          "lastLine": 83,
+          "prefix": "#overlay :is(.hub-back, .pg-back, .ag-back)",
+          "structuralBytes": 38,
+          "rules": 2
+        },
+        {
+          "firstLine": 76,
+          "lastLine": 80,
+          "prefix": "#overlay",
+          "structuralBytes": 10,
+          "rules": 3
+        },
+        {
+          "firstLine": 35,
+          "lastLine": 42,
+          "prefix": "#overlay",
+          "structuralBytes": 73,
+          "rules": 5
+        },
+        {
+          "firstLine": 188,
+          "lastLine": 191,
+          "prefix": "#title.home-composed",
+          "structuralBytes": 53,
+          "rules": 4
+        },
+        {
+          "firstLine": 184,
+          "lastLine": 185,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 173,
+          "lastLine": 183,
+          "prefix": "#overlay .evt-opt",
+          "structuralBytes": 140,
+          "rules": 9
+        },
+        {
+          "firstLine": 169,
+          "lastLine": 170,
+          "prefix": "#overlay .cls2-strip > *",
+          "structuralBytes": 59,
+          "rules": 2
+        },
+        {
+          "firstLine": 164,
+          "lastLine": 165,
+          "prefix": "#bagBtn",
+          "structuralBytes": 2,
+          "rules": 2
+        },
+        {
+          "firstLine": 161,
+          "lastLine": 163,
+          "prefix": "#sidebar",
+          "structuralBytes": 17,
+          "rules": 3
+        },
+        {
+          "firstLine": 153,
+          "lastLine": 155,
+          "prefix": "#resHud",
+          "structuralBytes": 8,
+          "rules": 3
+        },
+        {
+          "firstLine": 151,
+          "lastLine": 152,
+          "prefix": "#resHud .chip-mini",
+          "structuralBytes": 13,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "beforeSha256": "ee304d0bb204793120bcc2e93f842755f1855d62b88be291664ea00fefcfac25",
+      "afterSha256": "0afe19291a6e13e9fcf321d3b2114cb3f2e8db7d0264f04529df22792a1f2367",
+      "structuralBytes": 468,
+      "normalizedBytes": 468,
+      "groups": 3,
+      "specificityChecks": 9,
+      "examples": [
+        {
+          "firstLine": 46,
+          "lastLine": 47,
+          "prefix": "#topBtns#topBtns",
+          "structuralBytes": 11,
+          "rules": 2
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 44,
+          "prefix": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #homeCredits#homeCredits#homeCredits) .archive-back",
+          "structuralBytes": 420,
+          "rules": 5
+        },
+        {
+          "firstLine": 29,
+          "lastLine": 32,
+          "prefix": "#overlay#overlay #hubMain.pg.hub.base-camp",
+          "structuralBytes": 37,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "beforeSha256": "637211cf89b02a64c24a77ef7adff8e4657ac8c62f0ef6328c750e121934142e",
+      "afterSha256": "1caeaf846cb914201dd7c2eea2c048349aca948fa48d06a7c825ebb709abe563",
+      "structuralBytes": 852,
+      "normalizedBytes": 852,
+      "groups": 7,
+      "specificityChecks": 18,
+      "examples": [
+        {
+          "firstLine": 61,
+          "lastLine": 66,
+          "prefix": "body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion][data-surface-phase=\"out\"]",
+          "structuralBytes": 107,
+          "rules": 2
+        },
+        {
+          "firstLine": 56,
+          "lastLine": 60,
+          "prefix": "body:not(.reduce-motion) #overlay",
+          "structuralBytes": 28,
+          "rules": 2
+        },
+        {
+          "firstLine": 44,
+          "lastLine": 55,
+          "prefix": "body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card",
+          "structuralBytes": 188,
+          "rules": 4
+        },
+        {
+          "firstLine": 37,
+          "lastLine": 43,
+          "prefix": "body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion]",
+          "structuralBytes": 81,
+          "rules": 2
+        },
+        {
+          "firstLine": 24,
+          "lastLine": 36,
+          "prefix": "body:not(.reduce-motion) #overlay[data-archive-motion] .slot-page:not(.camp-entry-ghost)",
+          "structuralBytes": 170,
+          "rules": 3
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 22,
+          "prefix": "body:not(.reduce-motion) #overlay#overlay#overlay#overlay#overlay[data-archive-motion]",
+          "structuralBytes": 166,
+          "rules": 3
+        },
+        {
+          "firstLine": 7,
+          "lastLine": 12,
+          "prefix": "body:not(.reduce-motion) #title#title#title.home-composed[data-home-phase=\"out\"][data-home-pick=\"mStart\"] .home-plate",
+          "structuralBytes": 112,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "beforeSha256": "18b602c3ed6acd96d9f1b91905a382d7e4234d22a4cbadc922a8125ac4ddaf96",
+      "afterSha256": "8c07988e24f6b1e96e5ee211bc9cd8d6b59a35fef13154adeffd61152db9f636",
+      "structuralBytes": 406,
+      "normalizedBytes": 406,
+      "groups": 3,
+      "specificityChecks": 13,
+      "examples": [
+        {
+          "firstLine": 61,
+          "lastLine": 72,
+          "prefix": "#overlay#overlay #hubMain.base-frame-v7",
+          "structuralBytes": 72,
+          "rules": 3
+        },
+        {
+          "firstLine": 45,
+          "lastLine": 58,
+          "prefix": "body.reduce-motion #overlay#overlay #hubMain.base-frame-v7",
+          "structuralBytes": 110,
+          "rules": 3
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 43,
+          "prefix": "#overlay#overlay #hubMain.base-frame-v7",
+          "structuralBytes": 224,
+          "rules": 6
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "beforeSha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b",
+      "afterSha256": "2b0c278f043aab3c23106fbffeecd149b143c7775ad8e4c4e74db0a1634e1819",
+      "structuralBytes": 416,
+      "normalizedBytes": 416,
+      "groups": 1,
+      "specificityChecks": 11,
+      "examples": [
+        {
+          "firstLine": 5,
+          "lastLine": 15,
+          "prefix": "#overlay #hubMain.base-camp .reward-receipt",
+          "structuralBytes": 416,
+          "rules": 11
+        }
+      ]
+    },
+    {
+      "file": "game/css/base.css",
+      "beforeSha256": "62110160321bfaf1f82b077a8eab64263913c3fdfe2b1925b7d48edaae32be6b",
+      "afterSha256": "95165b446626d72647791e10acfa0eeb6e6073ad4915fae57918d7532d764713",
+      "structuralBytes": 497,
+      "normalizedBytes": 497,
+      "groups": 26,
+      "specificityChecks": 87,
+      "examples": [
+        {
+          "firstLine": 227,
+          "lastLine": 232,
+          "prefix": "#hpBar",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 212,
+          "lastLine": 213,
+          "prefix": ".stat.stat-duo",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 203,
+          "lastLine": 210,
+          "prefix": ".stat",
+          "structuralBytes": 12,
+          "rules": 5
+        },
+        {
+          "firstLine": 193,
+          "lastLine": 199,
+          "prefix": ".panel",
+          "structuralBytes": 26,
+          "rules": 7
+        },
+        {
+          "firstLine": 186,
+          "lastLine": 188,
+          "prefix": "#hpHud #hpText",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 179,
+          "lastLine": 180,
+          "prefix": ".hp-hud-icon",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 170,
+          "lastLine": 172,
+          "prefix": "#btnMute",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 165,
+          "lastLine": 168,
+          "prefix": "#topBtns",
+          "structuralBytes": 24,
+          "rules": 4
+        },
+        {
+          "firstLine": 155,
+          "lastLine": 160,
+          "prefix": "#layerBanner",
+          "structuralBytes": 40,
+          "rules": 5
+        },
+        {
+          "firstLine": 148,
+          "lastLine": 151,
+          "prefix": "#resHud",
+          "structuralBytes": 14,
+          "rules": 4
+        },
+        {
+          "firstLine": 138,
+          "lastLine": 147,
+          "prefix": "#resHud .chip-mini",
+          "structuralBytes": 30,
+          "rules": 3
+        },
+        {
+          "firstLine": 121,
+          "lastLine": 129,
+          "prefix": "#sidebar",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 249,
+          "lastLine": 262,
+          "prefix": "#bagBtn",
+          "structuralBytes": 26,
+          "rules": 6
+        },
+        {
+          "firstLine": 243,
+          "lastLine": 247,
+          "prefix": ".chip-mini",
+          "structuralBytes": 14,
+          "rules": 3
+        },
+        {
+          "firstLine": 241,
+          "lastLine": 242,
+          "prefix": "#bagPanel",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 363,
+          "lastLine": 367,
+          "prefix": ".rmb-hint-toast",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 354,
+          "lastLine": 357,
+          "prefix": ".ov-textarea",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 344,
+          "lastLine": 350,
+          "prefix": ".mini-btn",
+          "structuralBytes": 28,
+          "rules": 5
+        },
+        {
+          "firstLine": 337,
+          "lastLine": 338,
+          "prefix": ".chk.vol",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 328,
+          "lastLine": 334,
+          "prefix": ".dev-tools",
+          "structuralBytes": 32,
+          "rules": 5
+        },
+        {
+          "firstLine": 321,
+          "lastLine": 324,
+          "prefix": ".help-body .help-item",
+          "structuralBytes": 16,
+          "rules": 2
+        },
+        {
+          "firstLine": 314,
+          "lastLine": 319,
+          "prefix": ".help-btn",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 298,
+          "lastLine": 305,
+          "prefix": ".bag-view .bag-slot",
+          "structuralBytes": 68,
+          "rules": 5
+        },
+        {
+          "firstLine": 284,
+          "lastLine": 290,
+          "prefix": "#overlay .card.bag-page",
+          "structuralBytes": 40,
+          "rules": 3
+        },
+        {
+          "firstLine": 278,
+          "lastLine": 279,
+          "prefix": "#overlay .card.bag-modal",
+          "structuralBytes": 19,
+          "rules": 2
+        },
+        {
+          "firstLine": 273,
+          "lastLine": 277,
+          "prefix": ".bag-slot.filled",
+          "structuralBytes": 41,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-equipment.css",
+      "beforeSha256": "14a9e77ad81624de014445a82df9166f237f26bb5985ef1b2c1582c5fb3fec51",
+      "afterSha256": "26b8d8c36a3ef2d1571ee6d70c9780a2a15a4a456ba9177a27730b5b6b420d1e",
+      "structuralBytes": 561,
+      "normalizedBytes": 565,
+      "groups": 5,
+      "specificityChecks": 20,
+      "examples": [
+        {
+          "firstLine": 94,
+          "lastLine": 131,
+          "prefix": "#overlay .battle-stage.sts .sts-equip",
+          "structuralBytes": 248,
+          "rules": 7
+        },
+        {
+          "firstLine": 86,
+          "lastLine": 93,
+          "prefix": "#overlay .battle-stage.sts .sts-equips .sts-equip",
+          "structuralBytes": 92,
+          "rules": 2
+        },
+        {
+          "firstLine": 52,
+          "lastLine": 85,
+          "prefix": "#overlay .battle-stage.sts .sts-equip",
+          "structuralBytes": 104,
+          "rules": 4
+        },
+        {
+          "firstLine": 18,
+          "lastLine": 51,
+          "prefix": "#overlay .battle-stage.sts",
+          "structuralBytes": 21,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 17,
+          "prefix": "#overlay .battle-stage.sts .sts-me > .sts-unit-vitals",
+          "structuralBytes": 96,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-hud-clarity.css",
+      "beforeSha256": "afbd98ba0ea3b4dc95724020e31958d2cfe43ce834c3543587e9fdfcb05ef5dd",
+      "afterSha256": "200ff80fbf46151ba16c2856f3e851aa027740594be24d5b11398d290b23ee2b",
+      "structuralBytes": 21,
+      "normalizedBytes": 21,
+      "groups": 1,
+      "specificityChecks": 2,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 11,
+          "prefix": "#overlay .battle-stage.sts",
+          "structuralBytes": 21,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "beforeSha256": "8d5d18fcebb2b3d5bca820e92d2ac152350a094d84bf3dc00c46784b17d47a9b",
+      "afterSha256": "bf2c9cdc37f535ca77db56e6eafc0f7aceb29f8197380a8ee4cf9305b415a1f4",
+      "structuralBytes": 922,
+      "normalizedBytes": 922,
+      "groups": 5,
+      "specificityChecks": 35,
+      "examples": [
+        {
+          "firstLine": 54,
+          "lastLine": 56,
+          "prefix": "body #overlay",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 34,
+          "lastLine": 53,
+          "prefix": "body #overlay .battle-stage.sts[data-infusion-mode] .sts-hand",
+          "structuralBytes": 536,
+          "rules": 10
+        },
+        {
+          "firstLine": 30,
+          "lastLine": 32,
+          "prefix": "body #overlay .infusion-actions",
+          "structuralBytes": 56,
+          "rules": 3
+        },
+        {
+          "firstLine": 14,
+          "lastLine": 29,
+          "prefix": "body #overlay",
+          "structuralBytes": 176,
+          "rules": 15
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 11,
+          "prefix": "body #overlay .battle-stage.sts[data-infusion-mode]",
+          "structuralBytes": 146,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "beforeSha256": "9743ce0a9822422a7349be0aecb9e1ddb64ce491a1a5426734d8b94bcd3d992e",
+      "afterSha256": "d4a0992d9b2ed38a0c58e8e85791b15047ef84398616f9671899324c86af7cf9",
+      "structuralBytes": 367,
+      "normalizedBytes": 367,
+      "groups": 2,
+      "specificityChecks": 14,
+      "examples": [
+        {
+          "firstLine": 31,
+          "lastLine": 46,
+          "prefix": "#overlay .battle-stage.sts .bt-potion-use",
+          "structuralBytes": 196,
+          "rules": 6
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 30,
+          "prefix": "#overlay .battle-stage.sts",
+          "structuralBytes": 171,
+          "rules": 8
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-scene-polish.css",
+      "beforeSha256": "13dd201743c2a80a436542c5a1520c152daebd21ec9cf5b0766019ca0a1e130f",
+      "afterSha256": "93535301fd6d5ca74e990ed69a6f9026453b7219a6b90b6992ac067cdec2336d",
+      "structuralBytes": 65,
+      "normalizedBytes": 65,
+      "groups": 1,
+      "specificityChecks": 2,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": "#overlay .battle-stage.sts[data-scenery-key=\"winter-platform-minimal\"]",
+          "structuralBytes": 65,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-status-chips.css",
+      "beforeSha256": "dbaf57077517e416df3343ef30b6e038db30b7e1675ded069c117396517f2097",
+      "afterSha256": "9a3aa8b338d95072d6950a5e0f29b3f5fac723667434b3125da331f4d947523e",
+      "structuralBytes": 346,
+      "normalizedBytes": 346,
+      "groups": 1,
+      "specificityChecks": 15,
+      "examples": [
+        {
+          "firstLine": 3,
+          "lastLine": 43,
+          "prefix": "#overlay .battle-stage.sts",
+          "structuralBytes": 346,
+          "rules": 15
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle.css",
+      "beforeSha256": "674058c37d2a494b2229733e2d222571313a30761e62797bb53959aeeb2a7d35",
+      "afterSha256": "d000be0413799a815978cb5ee198d0aa0159c8b51e63ba7032694ba3dc8f5724",
+      "structuralBytes": 578,
+      "normalizedBytes": 592,
+      "groups": 16,
+      "specificityChecks": 63,
+      "examples": [
+        {
+          "firstLine": 70,
+          "lastLine": 76,
+          "prefix": ".bt-thought-bubble",
+          "structuralBytes": 13,
+          "rules": 2
+        },
+        {
+          "firstLine": 44,
+          "lastLine": 60,
+          "prefix": "#overlay > .battle-entry-status",
+          "structuralBytes": 192,
+          "rules": 8
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 34,
+          "prefix": ".bt-card[data-aim=\"1\"]",
+          "structuralBytes": 17,
+          "rules": 2
+        },
+        {
+          "firstLine": 21,
+          "lastLine": 28,
+          "prefix": ".bt-foe",
+          "structuralBytes": 20,
+          "rules": 5
+        },
+        {
+          "firstLine": 10,
+          "lastLine": 18,
+          "prefix": ".bt-fpreview",
+          "structuralBytes": 40,
+          "rules": 5
+        },
+        {
+          "firstLine": 94,
+          "lastLine": 107,
+          "prefix": ".bt-potion",
+          "structuralBytes": 68,
+          "rules": 8
+        },
+        {
+          "firstLine": 188,
+          "lastLine": 196,
+          "prefix": ".sts-float",
+          "structuralBytes": 41,
+          "rules": 6
+        },
+        {
+          "firstLine": 216,
+          "lastLine": 219,
+          "prefix": ".sts-float.stk",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 278,
+          "lastLine": 282,
+          "prefix": ".sts-impact",
+          "structuralBytes": 16,
+          "rules": 3
+        },
+        {
+          "firstLine": 274,
+          "lastLine": 275,
+          "prefix": ".sts-cardfly",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 270,
+          "lastLine": 273,
+          "prefix": ".bt-card-result",
+          "structuralBytes": 38,
+          "rules": 4
+        },
+        {
+          "firstLine": 300,
+          "lastLine": 302,
+          "prefix": ".boss-intro-art",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 370,
+          "lastLine": 372,
+          "prefix": ".bt-card-reveal-face",
+          "structuralBytes": 34,
+          "rules": 3
+        },
+        {
+          "firstLine": 366,
+          "lastLine": 367,
+          "prefix": ".bt-card-results",
+          "structuralBytes": 11,
+          "rules": 2
+        },
+        {
+          "firstLine": 333,
+          "lastLine": 339,
+          "prefix": ".bt-settings",
+          "structuralBytes": 40,
+          "rules": 5
+        },
+        {
+          "firstLine": 324,
+          "lastLine": 330,
+          "prefix": ".sts-float.stk",
+          "structuralBytes": 22,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "beforeSha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f",
+      "afterSha256": "89773a5c861f91befad6e66c54d272c66db2067a23f39ce88f5006acc4493a0e",
+      "structuralBytes": 816,
+      "normalizedBytes": 816,
+      "groups": 9,
+      "specificityChecks": 56,
+      "examples": [
+        {
+          "firstLine": 93,
+          "lastLine": 94,
+          "prefix": ".beginner-guide",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 89,
+          "lastLine": 92,
+          "prefix": ".beginner-guide .bg-page-status",
+          "structuralBytes": 86,
+          "rules": 4
+        },
+        {
+          "firstLine": 85,
+          "lastLine": 88,
+          "prefix": ".beginner-guide .bg-page-button",
+          "structuralBytes": 86,
+          "rules": 4
+        },
+        {
+          "firstLine": 63,
+          "lastLine": 84,
+          "prefix": ".beginner-guide",
+          "structuralBytes": 262,
+          "rules": 19
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 58,
+          "prefix": ".beginner-guide",
+          "structuralBytes": 164,
+          "rules": 13
+        },
+        {
+          "firstLine": 28,
+          "lastLine": 32,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 16,
+          "lastLine": 27,
+          "prefix": ".beginner-guide",
+          "structuralBytes": 38,
+          "rules": 3
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 15,
+          "prefix": "#overlay .card.page:has(.beginner-guide)",
+          "structuralBytes": 113,
+          "rules": 3
+        },
+        {
+          "firstLine": 98,
+          "lastLine": 100,
+          "prefix": ".beginner-guide details.bg-tip",
+          "structuralBytes": 54,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "beforeSha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25",
+      "afterSha256": "588a98eb76e941be6417afc5dfe2fbf6c936cbd5fbfa84cd0f758f50ddac5f84",
+      "structuralBytes": 74,
+      "normalizedBytes": 74,
+      "groups": 3,
+      "specificityChecks": 8,
+      "examples": [
+        {
+          "firstLine": 19,
+          "lastLine": 25,
+          "prefix": ".studio-locate",
+          "structuralBytes": 35,
+          "rules": 4
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 18,
+          "prefix": "#cardZoom .cz-reference-back",
+          "structuralBytes": 23,
+          "rules": 2
+        },
+        {
+          "firstLine": 9,
+          "lastLine": 10,
+          "prefix": ".card-description-ref",
+          "structuralBytes": 16,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "beforeSha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62",
+      "afterSha256": "e0df25cc8d55e9116ad820597b9e67e7c31c91116dcb413445e0330006db6311",
+      "structuralBytes": 256,
+      "normalizedBytes": 256,
+      "groups": 1,
+      "specificityChecks": 27,
+      "examples": [
+        {
+          "firstLine": 3,
+          "lastLine": 29,
+          "prefix": ".craft-card",
+          "structuralBytes": 256,
+          "rules": 27
+        }
+      ]
+    },
+    {
+      "file": "game/css/card-state-motion.css",
+      "beforeSha256": "1f5dd9bc8f20b86f052838c0724371a19e657ff90bfe7b24e59d79fa3c4707c4",
+      "afterSha256": "f483929d5d6085638711cb42e2cb35746f9a75f948af79391f33d47884947fe1",
+      "structuralBytes": 51,
+      "normalizedBytes": 51,
+      "groups": 2,
+      "specificityChecks": 5,
+      "examples": [
+        {
+          "firstLine": 17,
+          "lastLine": 21,
+          "prefix": ".reward-acquisition-body",
+          "structuralBytes": 19,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 11,
+          "prefix": "body #overlay .card",
+          "structuralBytes": 32,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "beforeSha256": "032ba33a9cb836febc92c74feb9d758b8d32b187d4947c840979f6b35da413dd",
+      "afterSha256": "c992a3f6e14e16e15c32ca97ac151bfa94ff7dfbe300c72b344c1e929c6269d8",
+      "structuralBytes": 14,
+      "normalizedBytes": 14,
+      "groups": 1,
+      "specificityChecks": 10,
+      "examples": [
+        {
+          "firstLine": 3,
+          "lastLine": 14,
+          "prefix": "img",
+          "structuralBytes": 14,
+          "rules": 10
+        }
+      ]
+    },
+    {
+      "file": "game/css/cards.css",
+      "beforeSha256": "ab33f554311ee309411afb2a839b53ae5d99500032f3aa4cbfe41a2e25c92568",
+      "afterSha256": "18fe64d5b5b22a68305100be30c2b841141eb02cebb2acd99f53416f97f6c331",
+      "structuralBytes": 415,
+      "normalizedBytes": 415,
+      "groups": 19,
+      "specificityChecks": 72,
+      "examples": [
+        {
+          "firstLine": 64,
+          "lastLine": 71,
+          "prefix": ".type-tab",
+          "structuralBytes": 36,
+          "rules": 6
+        },
+        {
+          "firstLine": 46,
+          "lastLine": 61,
+          "prefix": ".hs-btn",
+          "structuralBytes": 50,
+          "rules": 10
+        },
+        {
+          "firstLine": 41,
+          "lastLine": 43,
+          "prefix": ".pg-select",
+          "structuralBytes": 5,
+          "rules": 2
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 39,
+          "prefix": ".pg-head",
+          "structuralBytes": 17,
+          "rules": 4
+        },
+        {
+          "firstLine": 27,
+          "lastLine": 32,
+          "prefix": ".pg-close",
+          "structuralBytes": 12,
+          "rules": 3
+        },
+        {
+          "firstLine": 17,
+          "lastLine": 22,
+          "prefix": "#overlay .card.page",
+          "structuralBytes": 50,
+          "rules": 4
+        },
+        {
+          "firstLine": 10,
+          "lastLine": 12,
+          "prefix": ".sellable-tgl",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 5,
+          "prefix": ".hs-card",
+          "structuralBytes": 17,
+          "rules": 4
+        },
+        {
+          "firstLine": 167,
+          "lastLine": 169,
+          "prefix": ".set-h",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 157,
+          "lastLine": 159,
+          "prefix": ".mini-btn.ok",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 151,
+          "lastLine": 153,
+          "prefix": ".shop-slot",
+          "structuralBytes": 5,
+          "rules": 2
+        },
+        {
+          "firstLine": 137,
+          "lastLine": 146,
+          "prefix": ".mech-chip",
+          "structuralBytes": 41,
+          "rules": 6
+        },
+        {
+          "firstLine": 131,
+          "lastLine": 132,
+          "prefix": ".cdes-duo",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 129,
+          "lastLine": 130,
+          "prefix": ".cdes-sec",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 118,
+          "lastLine": 122,
+          "prefix": ".dmg-ctl input",
+          "structuralBytes": 22,
+          "rules": 2
+        },
+        {
+          "firstLine": 105,
+          "lastLine": 111,
+          "prefix": ".cost-gem",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 98,
+          "lastLine": 103,
+          "prefix": ".seg button",
+          "structuralBytes": 26,
+          "rules": 4
+        },
+        {
+          "firstLine": 87,
+          "lastLine": 96,
+          "prefix": ".cdes-row",
+          "structuralBytes": 60,
+          "rules": 6
+        },
+        {
+          "firstLine": 73,
+          "lastLine": 76,
+          "prefix": ".lib-cardwrap:where(:not(.studio-photo))",
+          "structuralBytes": 35,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "beforeSha256": "2604a44fbfdc0576e68f6c6a8e532570375132628a83c752fca07df18a41e663",
+      "afterSha256": "df0be7a2c484833673af9d8c149f1c7deed8326546221dde1f5d8fca871ce40f",
+      "structuralBytes": 42,
+      "normalizedBytes": 42,
+      "groups": 1,
+      "specificityChecks": 3,
+      "examples": [
+        {
+          "firstLine": 4,
+          "lastLine": 10,
+          "prefix": ".cls2-fullart.idle-stage",
+          "structuralBytes": 42,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "beforeSha256": "f3b6d0a71c0304aff8eb5453e44e2b8c8e62604275f0c49b4519f06e74748030",
+      "afterSha256": "63fc69406e86b1317402f34480ef80c9adc114c8af1a4a4376ff2f11e94a83fe",
+      "structuralBytes": 239,
+      "normalizedBytes": 239,
+      "groups": 4,
+      "specificityChecks": 18,
+      "examples": [
+        {
+          "firstLine": 40,
+          "lastLine": 45,
+          "prefix": ".safe-opening",
+          "structuralBytes": 56,
+          "rules": 6
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 39,
+          "prefix": "body #overlay .safe-opening[data-chest-fx='frames']",
+          "structuralBytes": 146,
+          "rules": 4
+        },
+        {
+          "firstLine": 26,
+          "lastLine": 31,
+          "prefix": ".safe-opening",
+          "structuralBytes": 32,
+          "rules": 3
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 16,
+          "prefix": "body",
+          "structuralBytes": 5,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "beforeSha256": "f12f332c9572883fc0f2d626df966341d3596b9724e4ea9089e3364c70e814a8",
+      "afterSha256": "53e1d5731389fb9c2d14317497484f5b9145ea2c320c242deea719e6b9f3f600",
+      "structuralBytes": 104,
+      "normalizedBytes": 104,
+      "groups": 1,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 23,
+          "prefix": "#overlay .sts-float",
+          "structuralBytes": 104,
+          "rules": 7
+        }
+      ]
+    },
+    {
+      "file": "game/css/discovery-selection.css",
+      "beforeSha256": "24ea6bfb69277b4204713cccf112c460149c9b93ee73e8fa3fbef719872e29c0",
+      "afterSha256": "545ee4112cb43330128320d1600a1cd4f4ea131ea599b3381a10609ea73f0cda",
+      "structuralBytes": 449,
+      "normalizedBytes": 449,
+      "groups": 3,
+      "specificityChecks": 12,
+      "examples": [
+        {
+          "firstLine": 21,
+          "lastLine": 40,
+          "prefix": "body #overlay .card button[data-discovery-option]",
+          "structuralBytes": 236,
+          "rules": 6
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 18,
+          "prefix": "body #overlay .card .room-reward .reward-foot.room-footer",
+          "structuralBytes": 52,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 10,
+          "prefix": "body #overlay .card .ov-btns.discovery-selection-actions",
+          "structuralBytes": 161,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/event-choice-feedback.css",
+      "beforeSha256": "ae02ece0bf5088b268687d71fb2e1cb7a2d28925714afee2afe80aaf8441db0e",
+      "afterSha256": "d1600173aab28423be0e13eb146b7d735fd564404a7669ec833323aaac5d5c6d",
+      "structuralBytes": 502,
+      "normalizedBytes": 502,
+      "groups": 3,
+      "specificityChecks": 12,
+      "examples": [
+        {
+          "firstLine": 19,
+          "lastLine": 20,
+          "prefix": "body #overlay .event-scene.sc-event",
+          "structuralBytes": 30,
+          "rules": 2
+        },
+        {
+          "firstLine": 15,
+          "lastLine": 18,
+          "prefix": "body #overlay .event-scene.sc-event .event-decisions .evt-opt",
+          "structuralBytes": 176,
+          "rules": 4
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 13,
+          "prefix": "body #overlay .event-scene.sc-event .event-decisions .evt-opt",
+          "structuralBytes": 296,
+          "rules": 6
+        }
+      ]
+    },
+    {
+      "file": "game/css/event-dice.css",
+      "beforeSha256": "41c29ad6927dd61ecc8c512b82333aa3684277ec8b79498ca5c9c2ff18c9a667",
+      "afterSha256": "cc95fa7411b542e66706fbd9a77fb65375b142de922aec5e314962cfa67e0d1e",
+      "structuralBytes": 72,
+      "normalizedBytes": 72,
+      "groups": 2,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 9,
+          "lastLine": 11,
+          "prefix": ".commission-story",
+          "structuralBytes": 28,
+          "rules": 3
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 7,
+          "prefix": ".event-dice-rules",
+          "structuralBytes": 44,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/event-option-state.css",
+      "beforeSha256": "e53ded4f4404c9e2c708fbfa22efde626bb5ea6b0262fd72735c71d1c65099e5",
+      "afterSha256": "bf062379e7b71bd3d816570a0aaae14949b6c8b31d2502ce00e1da98def19d0d",
+      "structuralBytes": 98,
+      "normalizedBytes": 98,
+      "groups": 1,
+      "specificityChecks": 3,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 7,
+          "prefix": "#overlay .card.page .pg.node-pg.event-scene .evt-opt",
+          "structuralBytes": 98,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/event-recode-result.css",
+      "beforeSha256": "4950073c2b3bb49676d03a2bb8b3c6f62db8cb18c29734aeb101f3f0ff3fe02d",
+      "afterSha256": "4e7f80828d38b7c7499a6f487859d6d831fdfcfb4892035e70aebd80670be82d",
+      "structuralBytes": 97,
+      "normalizedBytes": 97,
+      "groups": 3,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 5,
+          "lastLine": 7,
+          "prefix": "body #overlay .recode-result-card",
+          "structuralBytes": 60,
+          "rules": 3
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 4,
+          "prefix": "body #overlay .recode-result-source",
+          "structuralBytes": 30,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 2,
+          "prefix": "body #overlay",
+          "structuralBytes": 8,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/event-signal-puzzle.css",
+      "beforeSha256": "8eb3a4929dee4df620767d09d48f9e1028ec4c7b07961d3e0c355ddf2972eaf3",
+      "afterSha256": "fded3b908240cdbd785c36a9e04be1a7c6809a88c4111a7a515984d5c4cc57bd",
+      "structuralBytes": 739,
+      "normalizedBytes": 739,
+      "groups": 4,
+      "specificityChecks": 33,
+      "examples": [
+        {
+          "firstLine": 23,
+          "lastLine": 33,
+          "prefix": ".event-signal-puzzle",
+          "structuralBytes": 186,
+          "rules": 11
+        },
+        {
+          "firstLine": 16,
+          "lastLine": 22,
+          "prefix": ".event-signal-puzzle .signal-puzzle-tile",
+          "structuralBytes": 230,
+          "rules": 7
+        },
+        {
+          "firstLine": 8,
+          "lastLine": 15,
+          "prefix": ".event-signal-puzzle",
+          "structuralBytes": 167,
+          "rules": 8
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 7,
+          "prefix": ".event-signal-puzzle .signal-puzzle-entry",
+          "structuralBytes": 156,
+          "rules": 5
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "beforeSha256": "429c614c09c15568f0711d4438fd9d95382b02ad8bd05a7b312f65d11ee354d5",
+      "afterSha256": "8e565fd7ad385328d45ce2c14934f2a5cf388a4365b34cd52d6c2f73557c158d",
+      "structuralBytes": 96,
+      "normalizedBytes": 96,
+      "groups": 4,
+      "specificityChecks": 10,
+      "examples": [
+        {
+          "firstLine": 25,
+          "lastLine": 26,
+          "prefix": "#overlay .hub-ach .ach-row",
+          "structuralBytes": 21,
+          "rules": 2
+        },
+        {
+          "firstLine": 21,
+          "lastLine": 24,
+          "prefix": ".collection-tabs button",
+          "structuralBytes": 62,
+          "rules": 4
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 14,
+          "prefix": ".readiness-head",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 4,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "beforeSha256": "20e80f195b0e837f6bfec11c4d41c5510a2ab6ba7cdbdbc9aa3f7aecee6d212d",
+      "afterSha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8",
+      "structuralBytes": 275,
+      "normalizedBytes": 275,
+      "groups": 5,
+      "specificityChecks": 17,
+      "examples": [
+        {
+          "firstLine": 79,
+          "lastLine": 93,
+          "prefix": "body.cardlib-open #cardZoom",
+          "structuralBytes": 74,
+          "rules": 4
+        },
+        {
+          "firstLine": 60,
+          "lastLine": 61,
+          "prefix": "#overlay .lib-cardwrap:where(:not(.studio-photo))",
+          "structuralBytes": 44,
+          "rules": 2
+        },
+        {
+          "firstLine": 173,
+          "lastLine": 191,
+          "prefix": "#cardZoom .cz-note-input",
+          "structuralBytes": 19,
+          "rules": 2
+        },
+        {
+          "firstLine": 141,
+          "lastLine": 172,
+          "prefix": "#cardZoom .cz-note",
+          "structuralBytes": 64,
+          "rules": 3
+        },
+        {
+          "firstLine": 98,
+          "lastLine": 133,
+          "prefix": "body.cardlib-open #cardZoom",
+          "structuralBytes": 74,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "beforeSha256": "9e54ae5eda40ebe63325bf9f124470dc790dc7b0c37c6f377c325a384e4a948d",
+      "afterSha256": "539911f877804260954291110e7d619c35dfa733c43093d6c901ae8b1a66a3ac",
+      "structuralBytes": 342,
+      "normalizedBytes": 342,
+      "groups": 9,
+      "specificityChecks": 28,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 14,
+          "prefix": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #viewport",
+          "structuralBytes": 191,
+          "rules": 3
+        },
+        {
+          "firstLine": 44,
+          "lastLine": 52,
+          "prefix": ".map-volumetric-light i",
+          "structuralBytes": 40,
+          "rules": 3
+        },
+        {
+          "firstLine": 60,
+          "lastLine": 66,
+          "prefix": "body",
+          "structuralBytes": 14,
+          "rules": 3
+        },
+        {
+          "firstLine": 58,
+          "lastLine": 59,
+          "prefix": ".map-volumetric-light i",
+          "structuralBytes": 18,
+          "rules": 2
+        },
+        {
+          "firstLine": 122,
+          "lastLine": 124,
+          "prefix": "body",
+          "structuralBytes": 2,
+          "rules": 2
+        },
+        {
+          "firstLine": 114,
+          "lastLine": 115,
+          "prefix": "#resHud",
+          "structuralBytes": 2,
+          "rules": 2
+        },
+        {
+          "firstLine": 102,
+          "lastLine": 112,
+          "prefix": ":is(#resHud,#hpHud) .map-resource-tip",
+          "structuralBytes": 32,
+          "rules": 2
+        },
+        {
+          "firstLine": 96,
+          "lastLine": 97,
+          "prefix": "#topBtns",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 75,
+          "lastLine": 77,
+          "prefix": "body #expeditionChapter",
+          "structuralBytes": 40,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "beforeSha256": "38f5b918b282e5aab735598e655175d2424a7ef0d2988a88ccc111c5ea33ab2a",
+      "afterSha256": "b3f36cc9c553bbf7696dd4c686fd28ff48f3471daf57d1f84df4646ac92ca196",
+      "structuralBytes": 381,
+      "normalizedBytes": 381,
+      "groups": 7,
+      "specificityChecks": 20,
+      "examples": [
+        {
+          "firstLine": 3,
+          "lastLine": 6,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 19,
+          "lastLine": 21,
+          "prefix": "#overlay",
+          "structuralBytes": 10,
+          "rules": 3
+        },
+        {
+          "firstLine": 17,
+          "lastLine": 18,
+          "prefix": "#overlay .card.scene:has(.illustrated-cut)",
+          "structuralBytes": 37,
+          "rules": 2
+        },
+        {
+          "firstLine": 14,
+          "lastLine": 16,
+          "prefix": "#overlay .expedition-cut",
+          "structuralBytes": 42,
+          "rules": 3
+        },
+        {
+          "firstLine": 8,
+          "lastLine": 12,
+          "prefix": "#overlay .card.scene:has(.expedition-cut)",
+          "structuralBytes": 156,
+          "rules": 3
+        },
+        {
+          "firstLine": 27,
+          "lastLine": 29,
+          "prefix": ".departure-handoff",
+          "structuralBytes": 30,
+          "rules": 3
+        },
+        {
+          "firstLine": 34,
+          "lastLine": 35,
+          "prefix": "#overlay :is(.event-scene .evt-opt,.event-choice-confirm,.event-choice-clear,.reward-claim,.shop-detail-buy)",
+          "structuralBytes": 103,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition.css",
+      "beforeSha256": "fbb47c3be1cfa4670fd9104d75a6943e2e9f3dfe1a6be7ca9a70941925707391",
+      "afterSha256": "2f21eafa4bf31e062fd97b8c36ff2c9c101a8bc872b3225499812e2a4938cd4e",
+      "structuralBytes": 965,
+      "normalizedBytes": 965,
+      "groups": 27,
+      "specificityChecks": 133,
+      "examples": [
+        {
+          "firstLine": 311,
+          "lastLine": 316,
+          "prefix": "#title",
+          "structuralBytes": 26,
+          "rules": 3
+        },
+        {
+          "firstLine": 12,
+          "lastLine": 20,
+          "prefix": "#title",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 113,
+          "lastLine": 122,
+          "prefix": "#title .ak-start",
+          "structuralBytes": 11,
+          "rules": 2
+        },
+        {
+          "firstLine": 110,
+          "lastLine": 112,
+          "prefix": "#title .ak-circle",
+          "structuralBytes": 12,
+          "rules": 2
+        },
+        {
+          "firstLine": 104,
+          "lastLine": 109,
+          "prefix": "#title",
+          "structuralBytes": 21,
+          "rules": 6
+        },
+        {
+          "firstLine": 88,
+          "lastLine": 103,
+          "prefix": "#title .ak-circle .c-ring",
+          "structuralBytes": 92,
+          "rules": 5
+        },
+        {
+          "firstLine": 85,
+          "lastLine": 86,
+          "prefix": "#title .c-ring",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 77,
+          "lastLine": 84,
+          "prefix": "#title .ak-circle",
+          "structuralBytes": 12,
+          "rules": 2
+        },
+        {
+          "firstLine": 37,
+          "lastLine": 76,
+          "prefix": "#title",
+          "structuralBytes": 96,
+          "rules": 15
+        },
+        {
+          "firstLine": 23,
+          "lastLine": 35,
+          "prefix": "#title .title-bg",
+          "structuralBytes": 41,
+          "rules": 3
+        },
+        {
+          "firstLine": 140,
+          "lastLine": 155,
+          "prefix": "#title",
+          "structuralBytes": 21,
+          "rules": 4
+        },
+        {
+          "firstLine": 137,
+          "lastLine": 139,
+          "prefix": "#title .ak-sec",
+          "structuralBytes": 22,
+          "rules": 3
+        },
+        {
+          "firstLine": 129,
+          "lastLine": 136,
+          "prefix": "#title .ak-start",
+          "structuralBytes": 71,
+          "rules": 5
+        },
+        {
+          "firstLine": 184,
+          "lastLine": 192,
+          "prefix": "#title",
+          "structuralBytes": 26,
+          "rules": 7
+        },
+        {
+          "firstLine": 175,
+          "lastLine": 183,
+          "prefix": "#title .ak-circle .c-ring",
+          "structuralBytes": 20,
+          "rules": 2
+        },
+        {
+          "firstLine": 157,
+          "lastLine": 174,
+          "prefix": "#title",
+          "structuralBytes": 26,
+          "rules": 6
+        },
+        {
+          "firstLine": 222,
+          "lastLine": 246,
+          "prefix": "#title .ak-start",
+          "structuralBytes": 101,
+          "rules": 7
+        },
+        {
+          "firstLine": 201,
+          "lastLine": 221,
+          "prefix": "#title .ak-circle",
+          "structuralBytes": 44,
+          "rules": 4
+        },
+        {
+          "firstLine": 198,
+          "lastLine": 200,
+          "prefix": "#title",
+          "structuralBytes": 6,
+          "rules": 3
+        },
+        {
+          "firstLine": 304,
+          "lastLine": 309,
+          "prefix": "body.reduce-motion #title",
+          "structuralBytes": 116,
+          "rules": 2
+        },
+        {
+          "firstLine": 299,
+          "lastLine": 303,
+          "prefix": "body.reduce-motion",
+          "structuralBytes": 47,
+          "rules": 2
+        },
+        {
+          "firstLine": 297,
+          "lastLine": 298,
+          "prefix": "#layerBanner",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 294,
+          "lastLine": 295,
+          "prefix": "#hpHud",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 278,
+          "lastLine": 290,
+          "prefix": "#sidebar",
+          "structuralBytes": 45,
+          "rules": 8
+        },
+        {
+          "firstLine": 264,
+          "lastLine": 274,
+          "prefix": ".title-dev",
+          "structuralBytes": 50,
+          "rules": 7
+        },
+        {
+          "firstLine": 255,
+          "lastLine": 263,
+          "prefix": "#title .title-dev",
+          "structuralBytes": 28,
+          "rules": 3
+        },
+        {
+          "firstLine": 318,
+          "lastLine": 319,
+          "prefix": "body.reduce-motion",
+          "structuralBytes": 13,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "beforeSha256": "c9e3a746099acbe27d305f9c45fad76a413a610f37e12cae1899f11918409ad6",
+      "afterSha256": "16e188c27b87086bd8d07e40dee70621b63ea8c476decad27b49bd843900258b",
+      "structuralBytes": 12,
+      "normalizedBytes": 12,
+      "groups": 1,
+      "specificityChecks": 3,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": ".eps-fate",
+          "structuralBytes": 12,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/feedback-1018.css",
+      "beforeSha256": "16acd75b33f97aa6554e7162670bb5e9747c233c50427244c40699b3f023c218",
+      "afterSha256": "ab549bd03c0f01570bbd843322c405d9b7bbbd92e3c1572ea4209efad86fab23",
+      "structuralBytes": 827,
+      "normalizedBytes": 827,
+      "groups": 9,
+      "specificityChecks": 31,
+      "examples": [
+        {
+          "firstLine": 31,
+          "lastLine": 35,
+          "prefix": "body #overlay .exr-page",
+          "structuralBytes": 84,
+          "rules": 5
+        },
+        {
+          "firstLine": 27,
+          "lastLine": 29,
+          "prefix": "body #overlay#overlay #hubMain .facilities-v12 .facility-tile",
+          "structuralBytes": 116,
+          "rules": 3
+        },
+        {
+          "firstLine": 22,
+          "lastLine": 26,
+          "prefix": "body #overlay .bag-guide",
+          "structuralBytes": 88,
+          "rules": 5
+        },
+        {
+          "firstLine": 19,
+          "lastLine": 21,
+          "prefix": "body #overlay .bag-guide-heading",
+          "structuralBytes": 58,
+          "rules": 3
+        },
+        {
+          "firstLine": 16,
+          "lastLine": 18,
+          "prefix": "body #overlay",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 13,
+          "lastLine": 15,
+          "prefix": "body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-recommend .mini-btn",
+          "structuralBytes": 174,
+          "rules": 3
+        },
+        {
+          "firstLine": 9,
+          "lastLine": 12,
+          "prefix": "body #overlay .bag-v2 .bag-guide-trigger",
+          "structuralBytes": 113,
+          "rules": 4
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 8,
+          "prefix": "body #overlay .bag-v2",
+          "structuralBytes": 36,
+          "rules": 3
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 5,
+          "prefix": "body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-filters",
+          "structuralBytes": 150,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/feedback-theme.css",
+      "beforeSha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7",
+      "afterSha256": "d8780b51edacd1a608688857cade85c096e838fcf86dee8f884ccb53bbbf4238",
+      "structuralBytes": 334,
+      "normalizedBytes": 334,
+      "groups": 2,
+      "specificityChecks": 13,
+      "examples": [
+        {
+          "firstLine": 11,
+          "lastLine": 14,
+          "prefix": ".sdt-feedback-theme",
+          "structuralBytes": 50,
+          "rules": 4
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 10,
+          "prefix": "#overlay .bt-turnbanner.bt-turn-title",
+          "structuralBytes": 284,
+          "rules": 8
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "beforeSha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2",
+      "afterSha256": "200f59aad2438c3c4a2e41cb1a9f31139b9f53ac44cbee7d63453bf497f4d828",
+      "structuralBytes": 818,
+      "normalizedBytes": 820,
+      "groups": 6,
+      "specificityChecks": 28,
+      "examples": [
+        {
+          "firstLine": 61,
+          "lastLine": 72,
+          "prefix": "body:not(.reduce-motion) #title#title",
+          "structuralBytes": 176,
+          "rules": 5
+        },
+        {
+          "firstLine": 47,
+          "lastLine": 60,
+          "prefix": "body:not(.reduce-motion) #title#title.home-composed",
+          "structuralBytes": 246,
+          "rules": 6
+        },
+        {
+          "firstLine": 8,
+          "lastLine": 21,
+          "prefix": "#title.home-composed[data-home-phase=\"out\"]",
+          "structuralBytes": 248,
+          "rules": 4
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 7,
+          "prefix": "#title.home-composed",
+          "structuralBytes": 53,
+          "rules": 2
+        },
+        {
+          "firstLine": 41,
+          "lastLine": 42,
+          "prefix": "#title #homeCredits > form",
+          "structuralBytes": 19,
+          "rules": 2
+        },
+        {
+          "firstLine": 34,
+          "lastLine": 38,
+          "prefix": "#title.home-composed .home-credits-dialog",
+          "structuralBytes": 76,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "beforeSha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7",
+      "afterSha256": "e2faf5af03621b8d78ebba0a25b569f6f9deef04be90ee16d6363b01378c1d70",
+      "structuralBytes": 293,
+      "normalizedBytes": 293,
+      "groups": 12,
+      "specificityChecks": 33,
+      "examples": [
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-scene__quick",
+          "structuralBytes": 13,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-scene__notice",
+          "structuralBytes": 32,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-resident",
+          "structuralBytes": 22,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-display__card",
+          "structuralBytes": 14,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-editor__displays",
+          "structuralBytes": 38,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-editor__state",
+          "structuralBytes": 32,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-editor__bar",
+          "structuralBytes": 28,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-scene__editor",
+          "structuralBytes": 14,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-grid-cell",
+          "structuralBytes": 52,
+          "rules": 5
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-scene__grid",
+          "structuralBytes": 12,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-hotspot",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".home-scene__head",
+          "structuralBytes": 28,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "beforeSha256": "3b73dfc1cc8eac665bfb97028bc6b8bf3b40f9fb48b2aa434781f089a65654f0",
+      "afterSha256": "8c0dfc98db546db435c0aa18633a56759b962ff32564e6746c019c6087039fb9",
+      "structuralBytes": 333,
+      "normalizedBytes": 333,
+      "groups": 20,
+      "specificityChecks": 61,
+      "examples": [
+        {
+          "firstLine": 17,
+          "lastLine": 23,
+          "prefix": ".hub-tab",
+          "structuralBytes": 17,
+          "rules": 4
+        },
+        {
+          "firstLine": 7,
+          "lastLine": 12,
+          "prefix": ".hub-head",
+          "structuralBytes": 12,
+          "rules": 3
+        },
+        {
+          "firstLine": 180,
+          "lastLine": 188,
+          "prefix": ".cls2-fullart",
+          "structuralBytes": 32,
+          "rules": 3
+        },
+        {
+          "firstLine": 166,
+          "lastLine": 173,
+          "prefix": ".pet-chip",
+          "structuralBytes": 28,
+          "rules": 5
+        },
+        {
+          "firstLine": 146,
+          "lastLine": 153,
+          "prefix": ".cls2-confirm",
+          "structuralBytes": 32,
+          "rules": 4
+        },
+        {
+          "firstLine": 142,
+          "lastLine": 143,
+          "prefix": ".cls2-fullart .figure-baita img",
+          "structuralBytes": 26,
+          "rules": 2
+        },
+        {
+          "firstLine": 136,
+          "lastLine": 140,
+          "prefix": ".cls2-fullart",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 121,
+          "lastLine": 134,
+          "prefix": ".cls2-face",
+          "structuralBytes": 59,
+          "rules": 7
+        },
+        {
+          "firstLine": 116,
+          "lastLine": 117,
+          "prefix": ".cls2-hint",
+          "structuralBytes": 5,
+          "rules": 2
+        },
+        {
+          "firstLine": 111,
+          "lastLine": 112,
+          "prefix": ".cls2-lv",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 98,
+          "lastLine": 103,
+          "prefix": ".cls2-fullart",
+          "structuralBytes": 20,
+          "rules": 2
+        },
+        {
+          "firstLine": 91,
+          "lastLine": 92,
+          "prefix": ".cls-foot",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 89,
+          "lastLine": 90,
+          "prefix": ".hero-ava",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 76,
+          "lastLine": 78,
+          "prefix": ".ach-row",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 69,
+          "lastLine": 75,
+          "prefix": ".dep-foot #btnDeploy",
+          "structuralBytes": 34,
+          "rules": 3
+        },
+        {
+          "firstLine": 63,
+          "lastLine": 64,
+          "prefix": ".dep-n",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 50,
+          "lastLine": 53,
+          "prefix": "#btnDeploy",
+          "structuralBytes": 14,
+          "rules": 3
+        },
+        {
+          "firstLine": 45,
+          "lastLine": 47,
+          "prefix": ".xp-bar",
+          "structuralBytes": 2,
+          "rules": 2
+        },
+        {
+          "firstLine": 41,
+          "lastLine": 43,
+          "prefix": ".mode-card",
+          "structuralBytes": 5,
+          "rules": 2
+        },
+        {
+          "firstLine": 36,
+          "lastLine": 40,
+          "prefix": ".hub-card",
+          "structuralBytes": 12,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "beforeSha256": "0b243f07250634d1818ec0b31385304d6e9040c3a51ede7366fdd6f27c2d8cb3",
+      "afterSha256": "046bb4226dedf849732aa8503a07be08506d846bbd08a9a32c7de14f18a9f00b",
+      "structuralBytes": 713,
+      "normalizedBytes": 713,
+      "groups": 6,
+      "specificityChecks": 28,
+      "examples": [
+        {
+          "firstLine": 14,
+          "lastLine": 36,
+          "prefix": "body.interface-motion #overlay[data-ui-motion]",
+          "structuralBytes": 356,
+          "rules": 9
+        },
+        {
+          "firstLine": 8,
+          "lastLine": 13,
+          "prefix": "body.interface-motion #overlay",
+          "structuralBytes": 83,
+          "rules": 4
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 7,
+          "prefix": "body.interface-motion",
+          "structuralBytes": 16,
+          "rules": 2
+        },
+        {
+          "firstLine": 44,
+          "lastLine": 56,
+          "prefix": "body.interface-motion",
+          "structuralBytes": 76,
+          "rules": 4
+        },
+        {
+          "firstLine": 62,
+          "lastLine": 65,
+          "prefix": "body.interface-motion #overlay .ag-detail",
+          "structuralBytes": 36,
+          "rules": 2
+        },
+        {
+          "firstLine": 72,
+          "lastLine": 79,
+          "prefix": "body.interface-motion #cardZoom",
+          "structuralBytes": 146,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "beforeSha256": "0b937142ad367f92ce6a0fc7a9a82695c5eb74c84255da29a841abe5c16bbe78",
+      "afterSha256": "fe4b2062614bc9cddc39990806132c4a547c4d3c62d65a05ee0124b6f4db1087",
+      "structuralBytes": 254,
+      "normalizedBytes": 254,
+      "groups": 5,
+      "specificityChecks": 23,
+      "examples": [
+        {
+          "firstLine": 6,
+          "lastLine": 17,
+          "prefix": "#labEnding",
+          "structuralBytes": 59,
+          "rules": 8
+        },
+        {
+          "firstLine": 20,
+          "lastLine": 24,
+          "prefix": "#labEnding",
+          "structuralBytes": 23,
+          "rules": 4
+        },
+        {
+          "firstLine": 74,
+          "lastLine": 90,
+          "prefix": "#labEnding .lab-end-skip",
+          "structuralBytes": 42,
+          "rules": 3
+        },
+        {
+          "firstLine": 43,
+          "lastLine": 71,
+          "prefix": "#labEnding .lab-end-page",
+          "structuralBytes": 111,
+          "rules": 6
+        },
+        {
+          "firstLine": 34,
+          "lastLine": 40,
+          "prefix": "#labEnding .lab-end-text",
+          "structuralBytes": 19,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "beforeSha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78",
+      "afterSha256": "4d7bc494bdf51c80539ec246e6c83603247b1b5ccd77b5e0b2757a22edda1d7a",
+      "structuralBytes": 796,
+      "normalizedBytes": 796,
+      "groups": 7,
+      "specificityChecks": 35,
+      "examples": [
+        {
+          "firstLine": 48,
+          "lastLine": 52,
+          "prefix": "body #overlay .leave-run-panel",
+          "structuralBytes": 112,
+          "rules": 5
+        },
+        {
+          "firstLine": 42,
+          "lastLine": 46,
+          "prefix": "body #overlay .leave-run-consequences",
+          "structuralBytes": 140,
+          "rules": 5
+        },
+        {
+          "firstLine": 37,
+          "lastLine": 40,
+          "prefix": "body #overlay .leave-run-secondary",
+          "structuralBytes": 95,
+          "rules": 4
+        },
+        {
+          "firstLine": 35,
+          "lastLine": 36,
+          "prefix": "body #overlay .leave-run-panel",
+          "structuralBytes": 54,
+          "rules": 2
+        },
+        {
+          "firstLine": 20,
+          "lastLine": 34,
+          "prefix": "body #overlay .leave-run-actions",
+          "structuralBytes": 275,
+          "rules": 10
+        },
+        {
+          "firstLine": 15,
+          "lastLine": 19,
+          "prefix": "body #overlay",
+          "structuralBytes": 44,
+          "rules": 5
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 14,
+          "prefix": "body #overlay .card:has(.leave-run-panel)",
+          "structuralBytes": 76,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "beforeSha256": "8df0e504b5d193505695336bce81ddb4947175a3276e634ffb6240818a8412e5",
+      "afterSha256": "facee275e50c4bc42880b4c828c9a27231c2a8837fdf0637e415789f273dc871",
+      "structuralBytes": 77,
+      "normalizedBytes": 77,
+      "groups": 3,
+      "specificityChecks": 13,
+      "examples": [
+        {
+          "firstLine": 40,
+          "lastLine": 54,
+          "prefix": ".map-edge-light i",
+          "structuralBytes": 28,
+          "rules": 3
+        },
+        {
+          "firstLine": 11,
+          "lastLine": 34,
+          "prefix": ".map-edge-light",
+          "structuralBytes": 38,
+          "rules": 3
+        },
+        {
+          "firstLine": 60,
+          "lastLine": 65,
+          "prefix": "body",
+          "structuralBytes": 11,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/map-floating-tools.css",
+      "beforeSha256": "417d20aa0ff36be2cf2a78c8bd98ed99d26bfb38894e1a33ebadd3349cf998f7",
+      "afterSha256": "f75c094073b6dd8a55b9bef657c4590d30a3209c0e3fa695326409a9d2bda4f1",
+      "structuralBytes": 952,
+      "normalizedBytes": 952,
+      "groups": 3,
+      "specificityChecks": 24,
+      "examples": [
+        {
+          "firstLine": 42,
+          "lastLine": 55,
+          "prefix": "body #sidebar[data-expedition-layout=\"map\"] .expedition-toolbar",
+          "structuralBytes": 492,
+          "rules": 8
+        },
+        {
+          "firstLine": 9,
+          "lastLine": 41,
+          "prefix": "body #sidebar[data-expedition-layout=\"map\"]",
+          "structuralBytes": 458,
+          "rules": 12
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": "body",
+          "structuralBytes": 2,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/map-node-status.css",
+      "beforeSha256": "9efde1e426fb5479f58c966020317d88bf380b4f38b697a071c754f91730d160",
+      "afterSha256": "702b4b308c3f69b1c9cef190efa038c904cf44edbb02f1c36d07f050e9c2035e",
+      "structuralBytes": 206,
+      "normalizedBytes": 206,
+      "groups": 1,
+      "specificityChecks": 6,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 37,
+          "prefix": "body #sidebar[data-expedition-layout=\"map\"]",
+          "structuralBytes": 206,
+          "rules": 5
+        }
+      ]
+    },
+    {
+      "file": "game/css/map-passage.css",
+      "beforeSha256": "a80f33f37cc9ddb539bd3ba8a33aae47d94d48de9b260cad836844b7990c58dc",
+      "afterSha256": "fe2842e788eaad17fe53e4f1c78cba0221f89f12fb5ac246db41080bf210a478",
+      "structuralBytes": 97,
+      "normalizedBytes": 97,
+      "groups": 1,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 1,
+          "lastLine": 7,
+          "prefix": ".map-layer-passage",
+          "structuralBytes": 98,
+          "rules": 7
+        }
+      ]
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "beforeSha256": "b567acc42ef7101a26792826a6113d3f9c8b7254343bbc30dd5170eefb2ee3cb",
+      "afterSha256": "78883155d95796bae77cb4990f530765f6ea2d370679e3cf7104c542edf01171",
+      "structuralBytes": 214,
+      "normalizedBytes": 214,
+      "groups": 10,
+      "specificityChecks": 38,
+      "examples": [
+        {
+          "firstLine": 32,
+          "lastLine": 39,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 94,
+          "lastLine": 109,
+          "prefix": "#overlay",
+          "structuralBytes": 24,
+          "rules": 4
+        },
+        {
+          "firstLine": 115,
+          "lastLine": 121,
+          "prefix": "#overlay",
+          "structuralBytes": 10,
+          "rules": 3
+        },
+        {
+          "firstLine": 146,
+          "lastLine": 154,
+          "prefix": "#t1Gate",
+          "structuralBytes": 14,
+          "rules": 4
+        },
+        {
+          "firstLine": 162,
+          "lastLine": 163,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 175,
+          "lastLine": 186,
+          "prefix": ".comm-row",
+          "structuralBytes": 36,
+          "rules": 6
+        },
+        {
+          "firstLine": 193,
+          "lastLine": 199,
+          "prefix": ".comm-typing",
+          "structuralBytes": 29,
+          "rules": 4
+        },
+        {
+          "firstLine": 189,
+          "lastLine": 191,
+          "prefix": ".comm-row",
+          "structuralBytes": 12,
+          "rules": 3
+        },
+        {
+          "firstLine": 210,
+          "lastLine": 223,
+          "prefix": "#commDemoPanel",
+          "structuralBytes": 61,
+          "rules": 6
+        },
+        {
+          "firstLine": 203,
+          "lastLine": 208,
+          "prefix": ".comm-progress",
+          "structuralBytes": 22,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "beforeSha256": "0cac57143aed4e1642690ab235722cccd2ad9968391b02ea9ebc297308144fb8",
+      "afterSha256": "fc425ff7dfd98faa39831418677c2cf98ecdd907ea120f217cf72cf18dc9b8c2",
+      "structuralBytes": 347,
+      "normalizedBytes": 347,
+      "groups": 1,
+      "specificityChecks": 2,
+      "examples": [
+        {
+          "firstLine": 8,
+          "lastLine": 21,
+          "prefix": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled=\"true\"])",
+          "structuralBytes": 347,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "beforeSha256": "97a857b3b8be03321d61ebdac52109de9ba65d95ec80fcd6ba75eea8cb9eeeb5",
+      "afterSha256": "f56b78a2325f8bb2f8ae26237c4a267f3645c0af149460b6f6f141f44d10a0ce",
+      "structuralBytes": 528,
+      "normalizedBytes": 532,
+      "groups": 3,
+      "specificityChecks": 13,
+      "examples": [
+        {
+          "firstLine": 42,
+          "lastLine": 53,
+          "prefix": "body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot",
+          "structuralBytes": 144,
+          "rules": 3
+        },
+        {
+          "firstLine": 32,
+          "lastLine": 41,
+          "prefix": "body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled",
+          "structuralBytes": 166,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 25,
+          "prefix": "body[data-ui-cover-context='ordinary']",
+          "structuralBytes": 218,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "beforeSha256": "12b6aac85aeedd59723bb715b852f0b932ee056b7a5fb66c4fa059a2157c02ec",
+      "afterSha256": "5ef98944e1b7a75c5c9ecb28871ffaf1fea86c54b82c675b5c1728b8082f7cdb",
+      "structuralBytes": 94,
+      "normalizedBytes": 94,
+      "groups": 2,
+      "specificityChecks": 5,
+      "examples": [
+        {
+          "firstLine": 77,
+          "lastLine": 92,
+          "prefix": "#overlay .card.discover .choice-list .ov-btn",
+          "structuralBytes": 82,
+          "rules": 3
+        },
+        {
+          "firstLine": 72,
+          "lastLine": 75,
+          "prefix": ".bt-settings .chk",
+          "structuralBytes": 12,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "beforeSha256": "eb7852e1e995bec623451043966681d93917b5cc58fea558c5a9ce2fed359885",
+      "afterSha256": "e47fdc341dc0323ff2f20f7bb445fffbaf271bc8e42ca40f140cfd6304c317ff",
+      "structuralBytes": 877,
+      "normalizedBytes": 877,
+      "groups": 8,
+      "specificityChecks": 57,
+      "examples": [
+        {
+          "firstLine": 208,
+          "lastLine": 241,
+          "prefix": "#overlay .pg.cdes",
+          "structuralBytes": 92,
+          "rules": 6
+        },
+        {
+          "firstLine": 200,
+          "lastLine": 207,
+          "prefix": "#overlay .pg.cdes .dmg-ctl .hs-btn.round",
+          "structuralBytes": 35,
+          "rules": 2
+        },
+        {
+          "firstLine": 192,
+          "lastLine": 199,
+          "prefix": "#overlay .pg.cdes .pg-head .hs-btn:not(.gold)",
+          "structuralBytes": 40,
+          "rules": 2
+        },
+        {
+          "firstLine": 176,
+          "lastLine": 189,
+          "prefix": "#overlay .pg.cdes .cost-gem",
+          "structuralBytes": 74,
+          "rules": 4
+        },
+        {
+          "firstLine": 110,
+          "lastLine": 171,
+          "prefix": "#overlay .pg.cdes",
+          "structuralBytes": 364,
+          "rules": 13
+        },
+        {
+          "firstLine": 88,
+          "lastLine": 106,
+          "prefix": "#overlay .pg.cdes .pg-head .hs-btn.gold",
+          "structuralBytes": 72,
+          "rules": 3
+        },
+        {
+          "firstLine": 22,
+          "lastLine": 84,
+          "prefix": "#overlay .pg.cdes",
+          "structuralBytes": 156,
+          "rules": 11
+        },
+        {
+          "firstLine": 268,
+          "lastLine": 273,
+          "prefix": "#overlay .pg.cdes",
+          "structuralBytes": 44,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "beforeSha256": "71615c17478171acae72aa0f184ebde0d0751af86f7f287cac4b1313fec9dcfd",
+      "afterSha256": "af9e4d9974bd739fb5d8ea5c84f656e8b9cc706b0c5edb480d7193b5f0a93eee",
+      "structuralBytes": 244,
+      "normalizedBytes": 244,
+      "groups": 6,
+      "specificityChecks": 17,
+      "examples": [
+        {
+          "firstLine": 13,
+          "lastLine": 16,
+          "prefix": ".page-loading-track",
+          "structuralBytes": 50,
+          "rules": 4
+        },
+        {
+          "firstLine": 9,
+          "lastLine": 12,
+          "prefix": ".page-loading-copy",
+          "structuralBytes": 47,
+          "rules": 4
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": ".page-loading",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 23,
+          "lastLine": 29,
+          "prefix": ".page-loading--interface .page-loading-copy",
+          "structuralBytes": 80,
+          "rules": 3
+        },
+        {
+          "firstLine": 21,
+          "lastLine": 22,
+          "prefix": ".page-loading.page-loading--interface",
+          "structuralBytes": 32,
+          "rules": 2
+        },
+        {
+          "firstLine": 32,
+          "lastLine": 33,
+          "prefix": ".page-loading.page-loading--city",
+          "structuralBytes": 27,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "beforeSha256": "5f3b292e6d2cd3584351e13c6f0a5299f0efb55340437f9c3b37eb7ecc82623d",
+      "afterSha256": "c2f4d6cedf447062e8ac80de784c22987f595d133a9712079f457d0244c0b024",
+      "structuralBytes": 329,
+      "normalizedBytes": 341,
+      "groups": 1,
+      "specificityChecks": 4,
+      "examples": [
+        {
+          "firstLine": 25,
+          "lastLine": 34,
+          "prefix": "body.interface-motion:not(.reduce-motion)\n    #title.home-composed .home-credits-dialog[open][data-home-motion=\"in\"]",
+          "structuralBytes": 329,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "beforeSha256": "68ff398ca13450f90147fafababccead62426faba994eb20e45e5969fce85acb",
+      "afterSha256": "fb40f9c45eb6d1bbb1bd8811ffa302fa9138720f0e399124b3155b9fbd4c8f85",
+      "structuralBytes": 82,
+      "normalizedBytes": 86,
+      "groups": 2,
+      "specificityChecks": 6,
+      "examples": [
+        {
+          "firstLine": 5,
+          "lastLine": 7,
+          "prefix": "#overlay > .page-visual-scene",
+          "structuralBytes": 48,
+          "rules": 3
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 4,
+          "prefix": ".page-visual-handoff",
+          "structuralBytes": 34,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "beforeSha256": "f994f918d02dde18af180fcbd831491750e716774af98b66ec56c980869dc844",
+      "afterSha256": "ff378ae35acb317b8dbb1f25e70396a474e26ad989b32d4d4fd3a263493516af",
+      "structuralBytes": 263,
+      "normalizedBytes": 263,
+      "groups": 4,
+      "specificityChecks": 22,
+      "examples": [
+        {
+          "firstLine": 16,
+          "lastLine": 29,
+          "prefix": "body",
+          "structuralBytes": 29,
+          "rules": 4
+        },
+        {
+          "firstLine": 11,
+          "lastLine": 14,
+          "prefix": "#overlay .pg.settings-page:not(.sugin-page)",
+          "structuralBytes": 122,
+          "rules": 3
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 8,
+          "prefix": ".performance-details",
+          "structuralBytes": 34,
+          "rules": 3
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 4,
+          "prefix": ".performance-controls .performance-setting",
+          "structuralBytes": 78,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/preparation.css",
+      "beforeSha256": "1a62800153caeec783ea23fe0ed7f2658527f44c668fec8ff9a7efdc67a378a5",
+      "afterSha256": "7aea8c25679a580c68257b6ddbdc6f012ddb2667e1770caa122620d1585bb0f1",
+      "structuralBytes": 344,
+      "normalizedBytes": 344,
+      "groups": 10,
+      "specificityChecks": 38,
+      "examples": [
+        {
+          "firstLine": 90,
+          "lastLine": 91,
+          "prefix": ".prep-preset",
+          "structuralBytes": 18,
+          "rules": 2
+        },
+        {
+          "firstLine": 63,
+          "lastLine": 77,
+          "prefix": ".prep-summary",
+          "structuralBytes": 68,
+          "rules": 7
+        },
+        {
+          "firstLine": 37,
+          "lastLine": 54,
+          "prefix": ".prep-preset",
+          "structuralBytes": 29,
+          "rules": 4
+        },
+        {
+          "firstLine": 15,
+          "lastLine": 34,
+          "prefix": ".preparation-shell",
+          "structuralBytes": 30,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".prep-summary",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".prep-pick",
+          "structuralBytes": 23,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".preparation-module",
+          "structuralBytes": 104,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".prep-goals",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".preparation-module",
+          "structuralBytes": 50,
+          "rules": 4
+        },
+        {
+          "firstLine": 95,
+          "lastLine": 98,
+          "prefix": ".prep-summary",
+          "structuralBytes": 8,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "beforeSha256": "5f2d12fe1d78e0eac09240c9c8ab3409669c92a0b1dc4aef1abe2d647d8c64f5",
+      "afterSha256": "8ea9a6951e1de0b8b8fa7e67e0cefb625aec3a34e121d2bbd4dc91316b916143",
+      "structuralBytes": 773,
+      "normalizedBytes": 773,
+      "groups": 2,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 33,
+          "lastLine": 34,
+          "prefix": "body .term-tip",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 10,
+          "lastLine": 29,
+          "prefix": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *))",
+          "structuralBytes": 764,
+          "rules": 5
+        }
+      ]
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "beforeSha256": "e0bd41b271656dacd0a2f6ae1d11f5e4e9a98734a36130bec3d0089d6475c998",
+      "afterSha256": "abf5dac6b6c1a0e9ecdbdad31d89b401015453b9e5640259432434b9ccb92265",
+      "structuralBytes": 740,
+      "normalizedBytes": 740,
+      "groups": 30,
+      "specificityChecks": 112,
+      "examples": [
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".design-tabs",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 62,
+          "lastLine": 62,
+          "prefix": ".revision-bar",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".dialog-head",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": "dialog",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".compact",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".ornament",
+          "structuralBytes": 28,
+          "rules": 5
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".craft-card",
+          "structuralBytes": 86,
+          "rules": 10
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".references",
+          "structuralBytes": 36,
+          "rules": 5
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".notes",
+          "structuralBytes": 6,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".exhibit-foot",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".tier-note",
+          "structuralBytes": 5,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".card-button",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".tier-heading",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".selects",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".exhibit-caption",
+          "structuralBytes": 26,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".view-controls",
+          "structuralBytes": 22,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".design-tabs",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".scope-note",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".masthead",
+          "structuralBytes": 4,
+          "rules": 2
+        },
+        {
+          "firstLine": 59,
+          "lastLine": 61,
+          "prefix": ".reference-grid",
+          "structuralBytes": 24,
+          "rules": 3
+        },
+        {
+          "firstLine": 45,
+          "lastLine": 55,
+          "prefix": ".revision-7",
+          "structuralBytes": 96,
+          "rules": 11
+        },
+        {
+          "firstLine": 35,
+          "lastLine": 44,
+          "prefix": ".ornament-v7",
+          "structuralBytes": 95,
+          "rules": 10
+        },
+        {
+          "firstLine": 30,
+          "lastLine": 34,
+          "prefix": ".revision-bar",
+          "structuralBytes": 44,
+          "rules": 5
+        },
+        {
+          "firstLine": 19,
+          "lastLine": 21,
+          "prefix": ".ornament .top-ornament",
+          "structuralBytes": 40,
+          "rules": 3
+        },
+        {
+          "firstLine": 11,
+          "lastLine": 17,
+          "prefix": ".ornament",
+          "structuralBytes": 44,
+          "rules": 7
+        },
+        {
+          "firstLine": 8,
+          "lastLine": 8,
+          "prefix": ".ornament",
+          "structuralBytes": 20,
+          "rules": 4
+        },
+        {
+          "firstLine": 90,
+          "lastLine": 91,
+          "prefix": ".painted-frame",
+          "structuralBytes": 9,
+          "rules": 2
+        },
+        {
+          "firstLine": 86,
+          "lastLine": 87,
+          "prefix": ".revision-8",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 80,
+          "lastLine": 83,
+          "prefix": ".wrap-crystal",
+          "structuralBytes": 32,
+          "rules": 4
+        },
+        {
+          "firstLine": 66,
+          "lastLine": 67,
+          "prefix": ".revision-8",
+          "structuralBytes": 6,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/rarity-reveal.css",
+      "beforeSha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464",
+      "afterSha256": "4370218e76630c9ff48f893058e9843fc1225e721b14b5256e7881a7e251c6b0",
+      "structuralBytes": 105,
+      "normalizedBytes": 105,
+      "groups": 2,
+      "specificityChecks": 5,
+      "examples": [
+        {
+          "firstLine": 15,
+          "lastLine": 16,
+          "prefix": ".bt-card-reveal[data-rare-reveal=\"true\"]",
+          "structuralBytes": 35,
+          "rules": 2
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 8,
+          "prefix": "body #cardGet[data-rare-reveal=\"true\"]",
+          "structuralBytes": 70,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/review-ui.css",
+      "beforeSha256": "7090cd0c98e5ae0785a91e2365d42d414e0552dd58c4695bb56199ce6687b02a",
+      "afterSha256": "30cc8400654c5cb94e98912f7c87b73b45b48b87c24633fdb626c9f7fe6b2fbe",
+      "structuralBytes": 174,
+      "normalizedBytes": 174,
+      "groups": 7,
+      "specificityChecks": 19,
+      "examples": [
+        {
+          "firstLine": 31,
+          "lastLine": 32,
+          "prefix": "#topBtns>.save-status",
+          "structuralBytes": 16,
+          "rules": 2
+        },
+        {
+          "firstLine": 27,
+          "lastLine": 29,
+          "prefix": ".save-status",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 23,
+          "lastLine": 24,
+          "prefix": ".settings-secondary",
+          "structuralBytes": 14,
+          "rules": 2
+        },
+        {
+          "firstLine": 21,
+          "lastLine": 22,
+          "prefix": ".setting-binding-row",
+          "structuralBytes": 15,
+          "rules": 2
+        },
+        {
+          "firstLine": 17,
+          "lastLine": 20,
+          "prefix": "#cardZoom .cz-list-nav",
+          "structuralBytes": 59,
+          "rules": 4
+        },
+        {
+          "firstLine": 12,
+          "lastLine": 14,
+          "prefix": "#sdt-term-tip",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 6,
+          "prefix": ".confirmation-panel",
+          "structuralBytes": 32,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/room-footer.css",
+      "beforeSha256": "5bf7ba2222c7c108609b9cc3ebad641fdad990dbb895ff3ebea695fa11ab2cf6",
+      "afterSha256": "19fd1842edaa7e348e8c246aeb9569b703cd5408e9e229397f80f2079ff1e160",
+      "structuralBytes": 177,
+      "normalizedBytes": 177,
+      "groups": 3,
+      "specificityChecks": 12,
+      "examples": [
+        {
+          "firstLine": 9,
+          "lastLine": 12,
+          "prefix": "body #overlay .room-footer",
+          "structuralBytes": 71,
+          "rules": 4
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 8,
+          "prefix": "body #overlay",
+          "structuralBytes": 56,
+          "rules": 4
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 4,
+          "prefix": "body:not(.lobby):has(#runTopBar:not([hidden])) #overlay",
+          "structuralBytes": 50,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "beforeSha256": "e713351b78b84cd49226150d5703064a05ae53fdd7a5ef64b6c2907779549086",
+      "afterSha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe",
+      "structuralBytes": 430,
+      "normalizedBytes": 430,
+      "groups": 2,
+      "specificityChecks": 12,
+      "examples": [
+        {
+          "firstLine": 20,
+          "lastLine": 42,
+          "prefix": "#overlay .card.page .pg.cls2-page.roster-reference",
+          "structuralBytes": 290,
+          "rules": 7
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 19,
+          "prefix": "#overlay .cls2-fullart img.art-figure",
+          "structuralBytes": 140,
+          "rules": 5
+        }
+      ]
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "beforeSha256": "5feda9f2aef191f3355e3871be367169b3c9a348ff0710faa650ed2e28a3f425",
+      "afterSha256": "f5b28b74a80d96865fe3eb8591171d748b7466bb35ef8739295d8719af9c315c",
+      "structuralBytes": 76,
+      "normalizedBytes": 76,
+      "groups": 4,
+      "specificityChecks": 10,
+      "examples": [
+        {
+          "firstLine": 45,
+          "lastLine": 46,
+          "prefix": "body #overlay",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": "[data-selection-motion]",
+          "structuralBytes": 18,
+          "rules": 2
+        },
+        {
+          "firstLine": 40,
+          "lastLine": 42,
+          "prefix": "body.reduce-motion",
+          "structuralBytes": 30,
+          "rules": 3
+        },
+        {
+          "firstLine": 26,
+          "lastLine": 39,
+          "prefix": "body #overlay",
+          "structuralBytes": 20,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/settings-audio.css",
+      "beforeSha256": "eafaeb3129261709e33c88e1543e3e660f6b40d16f4f310faa7ec5924c414f9c",
+      "afterSha256": "57c2c3a75bb4c1ae1aeac8714985359d533672501acca874fe3685a2b2066129",
+      "structuralBytes": 21,
+      "normalizedBytes": 21,
+      "groups": 1,
+      "specificityChecks": 2,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 3,
+          "prefix": "#overlay .pg.settings-page",
+          "structuralBytes": 21,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "beforeSha256": "dca5290aaa40c9bc84534c161d9b08caea31780fb5495901cff4e83c4cd5ef37",
+      "afterSha256": "f2569b427f864d880c339d5f052eed070f2c446d20ee405f38e340cd075daaeb",
+      "structuralBytes": 386,
+      "normalizedBytes": 386,
+      "groups": 13,
+      "specificityChecks": 49,
+      "examples": [
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".transport",
+          "structuralBytes": 14,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".signal.running i",
+          "structuralBytes": 44,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".signal i",
+          "structuralBytes": 20,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".playing-info",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".sound-card",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".section-head",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".search-box",
+          "structuralBytes": 26,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".category",
+          "structuralBytes": 20,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": "button",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".pack-choice",
+          "structuralBytes": 7,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".pack-heading",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 2,
+          "prefix": ".sound-note",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 4,
+          "prefix": ".comparison-mode",
+          "structuralBytes": 206,
+          "rules": 15
+        }
+      ]
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "beforeSha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa",
+      "afterSha256": "99dbfadb98fa3ecbe00e3fb6a89959d4dc41133bb802693f4b66f44e0630f685",
+      "structuralBytes": 182,
+      "normalizedBytes": 182,
+      "groups": 16,
+      "specificityChecks": 44,
+      "examples": [
+        {
+          "firstLine": 8,
+          "lastLine": 8,
+          "prefix": ".review-bar",
+          "structuralBytes": 6,
+          "rules": 2
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": ".dialog-actions",
+          "structuralBytes": 10,
+          "rules": 2
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": "dialog",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": ".dialog-head",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": "dialog",
+          "structuralBytes": 1,
+          "rules": 2
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": ".primary",
+          "structuralBytes": 10,
+          "rules": 3
+        },
+        {
+          "firstLine": 6,
+          "lastLine": 6,
+          "prefix": ".review-bar",
+          "structuralBytes": 16,
+          "rules": 3
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".card-detail",
+          "structuralBytes": 29,
+          "rules": 4
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".sound-card",
+          "structuralBytes": 16,
+          "rules": 3
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".list-heading",
+          "structuralBytes": 20,
+          "rules": 3
+        },
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".filters",
+          "structuralBytes": 17,
+          "rules": 4
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 4,
+          "prefix": ".volume",
+          "structuralBytes": 8,
+          "rules": 3
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 4,
+          "prefix": ".search",
+          "structuralBytes": 8,
+          "rules": 3
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 4,
+          "prefix": ".view-switch",
+          "structuralBytes": 18,
+          "rules": 3
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".eyebrow",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 2,
+          "prefix": "button",
+          "structuralBytes": 1,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/startup-transition.css",
+      "beforeSha256": "77c728d7b1141be2907cd8612888d74f11dd010c75db6ae40929a8a90882f8ac",
+      "afterSha256": "b105692bb95c01bfe686d25ffc92db165229bc3146b03fca436d11f95b9c42a4",
+      "structuralBytes": 110,
+      "normalizedBytes": 110,
+      "groups": 1,
+      "specificityChecks": 7,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 11,
+          "prefix": ".desktop-startup-cut",
+          "structuralBytes": 110,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "beforeSha256": "9ebd415d85a1c5d6ff1216abfde3c306ee4dd31c350bf5fd1a00f676aba4bbed",
+      "afterSha256": "d18623aabaa84c004e12970948631a967992493826466a51e5fe03c6fb69490b",
+      "structuralBytes": 134,
+      "normalizedBytes": 134,
+      "groups": 1,
+      "specificityChecks": 4,
+      "examples": [
+        {
+          "firstLine": 4,
+          "lastLine": 19,
+          "prefix": "body[data-ui-cover-context='ordinary'] #overlay",
+          "structuralBytes": 134,
+          "rules": 4
+        }
+      ]
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "beforeSha256": "7c04d98f82516d34ac07b8f8b40599ba0928fe003fe8bb698b59fc25e7a49dff",
+      "afterSha256": "7fb81f0644466ac552eb366f22c112a9e08cb6cf606aa5776dce36b364daeb1f",
+      "structuralBytes": 727,
+      "normalizedBytes": 727,
+      "groups": 10,
+      "specificityChecks": 28,
+      "examples": [
+        {
+          "firstLine": 65,
+          "lastLine": 68,
+          "prefix": ".page-visual-return",
+          "structuralBytes": 14,
+          "rules": 2
+        },
+        {
+          "firstLine": 22,
+          "lastLine": 28,
+          "prefix": "body[data-map-presentation=\"restoring\"] :is(#sidebar,#layerBanner,#expeditionChapter,#resHud,#topBtns,#hpHud)",
+          "structuralBytes": 212,
+          "rules": 2
+        },
+        {
+          "firstLine": 10,
+          "lastLine": 21,
+          "prefix": "#overlay [data-handoff-profile=\"resume\"]",
+          "structuralBytes": 230,
+          "rules": 6
+        },
+        {
+          "firstLine": 4,
+          "lastLine": 9,
+          "prefix": "#overlay .flow-transition[data-handoff-profile=\"resume\"]",
+          "structuralBytes": 51,
+          "rules": 2
+        },
+        {
+          "firstLine": 54,
+          "lastLine": 55,
+          "prefix": ".transition-handoff",
+          "structuralBytes": 14,
+          "rules": 2
+        },
+        {
+          "firstLine": 48,
+          "lastLine": 52,
+          "prefix": "#overlay .transition-handoff-held.transition-handoff-held",
+          "structuralBytes": 52,
+          "rules": 2
+        },
+        {
+          "firstLine": 40,
+          "lastLine": 47,
+          "prefix": "#overlay .city-run-transition.resume-hold",
+          "structuralBytes": 76,
+          "rules": 2
+        },
+        {
+          "firstLine": 36,
+          "lastLine": 37,
+          "prefix": "#overlay",
+          "structuralBytes": 3,
+          "rules": 2
+        },
+        {
+          "firstLine": 33,
+          "lastLine": 35,
+          "prefix": ".transition-handoff-rich",
+          "structuralBytes": 42,
+          "rules": 2
+        },
+        {
+          "firstLine": 60,
+          "lastLine": 63,
+          "prefix": "body.reduce-motion .page-visual-return",
+          "structuralBytes": 33,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/transition-heading.css",
+      "beforeSha256": "b8f75fc597bf073db59c2366c369b557e93915024e94406080c09d2562aad52d",
+      "afterSha256": "dc39ba71f7f98745d43ddd419fba4374348448db105160ec35eff9eab67bc738",
+      "structuralBytes": 72,
+      "normalizedBytes": 72,
+      "groups": 1,
+      "specificityChecks": 3,
+      "examples": [
+        {
+          "firstLine": 2,
+          "lastLine": 18,
+          "prefix": ":is(#overlay, body) .transition-heading",
+          "structuralBytes": 72,
+          "rules": 3
+        }
+      ]
+    },
+    {
+      "file": "game/css/transition-illustrations.css",
+      "beforeSha256": "4ca55c66d407fb86dcabe673cc58136a538d9216cc52e802a2524909561c7f99",
+      "afterSha256": "7468547d4918d002a37f490df330778bb1acc1819c4e6df26a4bda65011988cb",
+      "structuralBytes": 39,
+      "normalizedBytes": 39,
+      "groups": 2,
+      "specificityChecks": 4,
+      "examples": [
+        {
+          "firstLine": 9,
+          "lastLine": 15,
+          "prefix": ".page-loading",
+          "structuralBytes": 8,
+          "rules": 2
+        },
+        {
+          "firstLine": 2,
+          "lastLine": 8,
+          "prefix": ".map-layer-passage.map-layer-passage",
+          "structuralBytes": 31,
+          "rules": 2
+        }
+      ]
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "beforeSha256": "6673dc6b3c2d25066a87cbc797e5e22e2242105d2fb503b76d7e9843cccc9050",
+      "afterSha256": "ef2e40dc7cdc87e9d63692b8d2ca97ac9bbbef14eabbb14e7ccd8f9abbbbaa97",
+      "structuralBytes": 404,
+      "normalizedBytes": 404,
+      "groups": 10,
+      "specificityChecks": 38,
+      "examples": [
+        {
+          "firstLine": 5,
+          "lastLine": 5,
+          "prefix": ".wu-preview .picture",
+          "structuralBytes": 15,
+          "rules": 2
+        },
+        {
+          "firstLine": 3,
+          "lastLine": 3,
+          "prefix": ".wu-preview-dialog",
+          "structuralBytes": 115,
+          "rules": 8
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview",
+          "structuralBytes": 16,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview.small",
+          "structuralBytes": 92,
+          "rules": 7
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview-dialog",
+          "structuralBytes": 47,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview",
+          "structuralBytes": 16,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview .craft-card",
+          "structuralBytes": 62,
+          "rules": 4
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-card .wu-frame",
+          "structuralBytes": 13,
+          "rules": 2
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-comparison",
+          "structuralBytes": 22,
+          "rules": 3
+        },
+        {
+          "firstLine": 1,
+          "lastLine": 1,
+          "prefix": ".wu-preview",
+          "structuralBytes": 6,
+          "rules": 2
+        }
+      ]
+    }
+  ]
+}

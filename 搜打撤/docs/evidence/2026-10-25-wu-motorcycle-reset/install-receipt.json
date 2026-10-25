@@ -1,0 +1,23 @@
+{
+  "status": "installed-uncommitted",
+  "source": ".tmp\\imagegen\\wu-motorcycle-reset-20261025\\repaint.png",
+  "sourceSha256": "2b888773d0dc5b515351b2283a8b05db107688db316f75bcffec7c3c7302cf11",
+  "generationRecord": "docs/evidence/2026-10-25-wu-motorcycle-reset/repaint.json",
+  "asset": "game\\assets\\portraits\\full\\wu-casual-v14.webp",
+  "size": [
+    1430,
+    1100
+  ],
+  "bytes": 549978,
+  "sha256": "d5f28fb0911d98b53ae14e1f257a67649893fb878b3e128a07e33fd04d15ebe3",
+  "encoding": {
+    "format": "WebP",
+    "quality": 94,
+    "method": 6,
+    "crop": false
+  },
+  "backup": ".tmp\\imagegen\\wu-motorcycle-reset-20261025\\before-install.webp",
+  "previousSha256": "c53156d2038291935fba357e7a04d9d31371e27be759662937deb0804db5ccb3",
+  "integration": "Existing wu casual skin mapping retained; all consumers use replaced asset.",
+  "verification": "No tests/browser/build, per user instruction."
+}

@@ -1,0 +1,54 @@
+{
+  "owner": "Friday / tools_audio_bugs",
+  "status": "complete-uncommitted; source frozen for parent integration",
+  "newIndependentRootCauses": 2,
+  "priorRootCompletionNotRecounted": 1,
+  "previousTwoRoundsRootCausesNotRecounted": 6,
+  "fixes": [
+    {
+      "id": "FAST3-T1",
+      "title": "LLM拒绝真实UI支持的等价标量参数",
+      "impact": "数据按钮的字符串参数0/true由模型以数字0/布尔true回复时，真实act准入可执行，而LLM清单比较却重试三次并错误退化",
+      "sources": ["game/src/agent/agent.llm.runtime.js"],
+      "tests": ["tests/project-fast-round3-agent-boundary-1024.test.js"],
+      "red": { "failed": 1, "actualFetches": 3 },
+      "change": "仅UI参数复用真实dataset分发的字符串比较；键集合仍完整相同，battle/sys参数仍保留严格类型比较"
+    },
+    {
+      "id": "FAST3-T2",
+      "title": "坏动作名称或类型转换异常绕过LLM重试与回退",
+      "impact": "合法JSON中name或type为遮蔽toString/valueOf的对象时，normalizeAction在String转换抛异常，真实act和LLM决策异常退出而不走既有错误码/重试",
+      "sources": ["game/src/agent/agent.protocol.js"],
+      "tests": ["tests/project-fast-round3-agent-boundary-1024.test.js"],
+      "red": { "failed": 3, "additionalTypeRegressionFailed": 1, "error": "Cannot convert object to primitive value" },
+      "change": "仅name字段限定为字符串；未知type诊断不再强制转换对象；UI/battle/sys和ACTION_TYPE_UNKNOWN保留原错误码，真实decide重试后可执行下一条有效回复；type补全沿同一根因不重复计数"
+    }
+  ],
+  "extensionsNotRecounted": [
+    {
+      "priorRoot": "WF-project-bug-sweep-round2-1024 R2-A02",
+      "title": "补全确认状态守卫的Agent归一化接线",
+      "impact": "旧观察动作经act归一化后生成新对象，丢失WeakMap绑定，原有守卫无法识别观察来源；真实数据页清空按钮第二次旧动作可直接清空记录",
+      "sources": ["game/src/agent/agent.action-router.js"],
+      "tests": ["tests/project-fast-round3-agent-boundary-1024.test.js"],
+      "red": { "failed": 1 },
+      "change": "归一化动作继承原输入的观察来源绑定；旧动作被拒，新观察确认与手写命令仍兼容；未修改冻结ui/action-dispatch.js"
+    }
+  ],
+  "checks": [
+    { "kind": "final-targeted-after-type-completion", "files": 8, "passed": 85, "exitCode": 0,
+      "tests": ["project-fast-round3-agent-boundary-1024", "project-fast-round2-agent-move-1024", "project-bug-sweep-agent-target-1024", "project-bug-sweep-round2-agent-confirm", "agent-command-results", "project-bug-sweep-llm-1024", "agent-llm-abort", "agent-llm"] },
+    { "kind": "targeted-eslint-and-diff-check", "exitCode": 0 }
+  ],
+  "sourceSha256": {
+    "game/src/agent/agent.protocol.js": "4e1f0db237b7a31d10328df66d4d47dec399ea5641ba331080f17242fbad5b42",
+    "game/src/agent/agent.action-router.js": "ee57217bde436fea4455c78e3343d17c66b9a6160ecfb61fd44235f89c66bb1f",
+    "game/src/agent/agent.llm.runtime.js": "3d1f158dbcaff240304a2d50e83b4fae09e65d24eb86a6396ce864e2d0a43133",
+    "tests/project-fast-round3-agent-boundary-1024.test.js": "6bd3504032f35f808b8c1065f4029036cce5e25f6663d6d82aa4b1efe9b64ed8"
+  },
+  "limits": [
+    "数据清空回归只操作jsdom隔离localStorage；未触及玩家存档",
+    "音频与脚本未确认新问题，未为数量做修改，未重复前轮全套基线",
+    "无build、提交推送、安装、配置变化或新服务；浏览器实页由父会话统一"
+  ]
+}

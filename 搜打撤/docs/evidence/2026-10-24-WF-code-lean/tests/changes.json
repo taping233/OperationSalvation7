@@ -1,0 +1,493 @@
+[
+  {
+    "file": "tests/abyss-sovereign.test.js",
+    "before": {
+      "bytes": 10181,
+      "lines": 201,
+      "sha256": "b2cf786b92cecb440b35b46f873dc130f85d359b5c0612fe43a02b34d76fa8f0"
+    },
+    "after": {
+      "bytes": 9014,
+      "lines": 171,
+      "sha256": "33c63cbcf37e6fbc4659bf5219a8a3bd4fd1e7fecd4ca91e2a45cef136a410e4"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/armup-mode.test.js",
+    "before": {
+      "bytes": 4436,
+      "lines": 70,
+      "sha256": "2c1e16e52d7923a91b34926ddf54a5a54c27764c46ba146cfa71e526c3ccebb9"
+    },
+    "after": {
+      "bytes": 4088,
+      "lines": 59,
+      "sha256": "60fc2f115315411a47f57cad014bcb80c1b53d69b14e35cdb3707259edfa9b22"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/bag-slam-button.test.js",
+    "before": {
+      "bytes": 13230,
+      "lines": 317,
+      "sha256": "16837ba73869766f3c9f4fc729b325e72d01aa8076b40afc38ec81eecb04d637"
+    },
+    "after": {
+      "bytes": 12602,
+      "lines": 302,
+      "sha256": "9087dede7b158ef82f9edb8542fddf866379b2a5c58e783f850e4efcf53c2082"
+    },
+    "extracted": [
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/battle-curse-immunity-lifetime.test.js",
+    "before": {
+      "bytes": 4641,
+      "lines": 85,
+      "sha256": "5e7e4760c1c62a9bf84fc50aa6d8477ea5deda72c6459ffc4c1086c729069e91"
+    },
+    "after": {
+      "bytes": 4299,
+      "lines": 80,
+      "sha256": "d08e2f1c575e4c49f14290a3d1ceaffc9a243a3dd2d6038fb6967f2c9114e071"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/battle-pouch-entry.test.js",
+    "before": {
+      "bytes": 4583,
+      "lines": 75,
+      "sha256": "55d265f11a21910e94dbc4a4b7c7d2c02b10fa31d70586dbcb2a18f941ae8446"
+    },
+    "after": {
+      "bytes": 4240,
+      "lines": 69,
+      "sha256": "14df77861030d0b75d79441430463871d1985a4a684e3a5fae83ab0b8fec36cf"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/battle-runtime-completion-1014.test.js",
+    "before": {
+      "bytes": 12584,
+      "lines": 247,
+      "sha256": "04c3929d7dcdce6cad760d12fbc0cd22bd5f9d1248e01fac7b9b7815c1e590d9"
+    },
+    "after": {
+      "bytes": 12242,
+      "lines": 242,
+      "sha256": "9dd7bd8106634c1f6e7293822674c314b917df266d45f8818c34503e7dcdd5a8"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/battle-semantic-feedback.test.js",
+    "before": {
+      "bytes": 12392,
+      "lines": 185,
+      "sha256": "168c9c4048c623002f033da54ba111b6c0d411ae12fe2897fcf4c09bf4d3ca44"
+    },
+    "after": {
+      "bytes": 12046,
+      "lines": 176,
+      "sha256": "bbc21aaf106aa7dda3d127f5d5328ab83b1a0f96688ef413c0d5bcb04e202b10"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/battle-turn-start-discover.test.js",
+    "before": {
+      "bytes": 7817,
+      "lines": 153,
+      "sha256": "804ce27824048a2600a54a3cc2c31bb41605263adc194af1bc03c80dcf30b49d"
+    },
+    "after": {
+      "bytes": 7464,
+      "lines": 145,
+      "sha256": "d3bd37b16e24fcc08c9b0e179402979da00c38fba274fbecb6a31803247d86f3"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/boss-equip-select.test.js",
+    "before": {
+      "bytes": 11477,
+      "lines": 262,
+      "sha256": "a57f698f2a8ea67a28aa2d3d244a28a46873f823bd83c8e0511a90432d3e89b5"
+    },
+    "after": {
+      "bytes": 10340,
+      "lines": 232,
+      "sha256": "f5d59b46d687658a76a9f84b1a19a95d4cc1acfdf7c46a23a8106149d72301b3"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/boss-rescue-pool.test.js",
+    "before": {
+      "bytes": 4664,
+      "lines": 70,
+      "sha256": "7bbed474cd4eadaa4ae05591d19dce1be25d9ca5bb0248001273c5b2ee97597b"
+    },
+    "after": {
+      "bytes": 4317,
+      "lines": 65,
+      "sha256": "49ad0ce80b53fb923b728cf32a20c3ed6191bdcde5a10d79d0f044f58e1b09b8"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/chase-slash.test.js",
+    "before": {
+      "bytes": 5502,
+      "lines": 137,
+      "sha256": "bbf10a0989e302fe906e0f70648cce11cfe25f6e1cb21bb42436cff8136374e6"
+    },
+    "after": {
+      "bytes": 4335,
+      "lines": 107,
+      "sha256": "3e96fd6fc792b857dd4aeb3fedb6357408e5e5ad42aac5e998a483f2594849bd"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/cursed-blade.test.js",
+    "before": {
+      "bytes": 6243,
+      "lines": 132,
+      "sha256": "801ef7c91fab4d80e785b66d8ccae7eeed2fa59159b7f90e46c985de1fd90b29"
+    },
+    "after": {
+      "bytes": 5076,
+      "lines": 102,
+      "sha256": "3cb2fe0a4b55316f1d2f40be1371d038f29720a545bb1d82e10cdebf52169214"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/discover-infusion-feedback.test.js",
+    "before": {
+      "bytes": 4562,
+      "lines": 71,
+      "sha256": "a2ba2dd953a6e689ceca94c4a90b2763a2db2080844bc45d29dc48bcbc60acf2"
+    },
+    "after": {
+      "bytes": 4216,
+      "lines": 62,
+      "sha256": "835dd93e13f0097c5e94f21ceb63332f450a787fa8f86addba43bf193c4c9d04"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/dual-wield.test.js",
+    "before": {
+      "bytes": 4411,
+      "lines": 97,
+      "sha256": "5dc3fcb0f238dda98ce183a54b8a9a725ceaf58ecd9bcfe61ab56e5b05387757"
+    },
+    "after": {
+      "bytes": 3244,
+      "lines": 67,
+      "sha256": "c03eda9f86b143c5899ada9a021d4b8a270699289a0e3f37c5b6d8469dfa9a86"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/ember-burst-rot-seed.test.js",
+    "before": {
+      "bytes": 7468,
+      "lines": 158,
+      "sha256": "d5e27d7beffdd4404aef9886ee5018629c55c131d6976ec0c584382096744ce0"
+    },
+    "after": {
+      "bytes": 6301,
+      "lines": 128,
+      "sha256": "67e8fff0571eea78ec48bdd684cdff6a55eb5527df1c185f889503125c4dee35"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/energy-crystal-restoration.test.js",
+    "before": {
+      "bytes": 7981,
+      "lines": 137,
+      "sha256": "94f5467a79eeba6e5ac36d754943613de9b36830c85f93c81638539103b60464"
+    },
+    "after": {
+      "bytes": 7639,
+      "lines": 132,
+      "sha256": "60683e5fcd2918197d64d520407cad095c3b57eaa4697b91f8501480615ab255"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/ghostblade-stealth-break.test.js",
+    "before": {
+      "bytes": 7547,
+      "lines": 122,
+      "sha256": "05da6910ac0aca06329bcea7788566b5a9558eda51975c4f280714e70a89d0b6"
+    },
+    "after": {
+      "bytes": 7200,
+      "lines": 117,
+      "sha256": "dfa2426078ef9a36ef8c55e62ea8bd80d60bd7d9ad4e92ef88c4a018bb814236"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/last-stand-poison-burst.test.js",
+    "before": {
+      "bytes": 6430,
+      "lines": 139,
+      "sha256": "2ebed9acc36319a9a38723e44426c09e96d72bdd3bd6b41f3318b8251f453421"
+    },
+    "after": {
+      "bytes": 5263,
+      "lines": 109,
+      "sha256": "1d32b08f0453e7dac53196dcbb339c80325376afa3d122e7204b3ac54b4faa04"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/lava-blast.test.js",
+    "before": {
+      "bytes": 5638,
+      "lines": 129,
+      "sha256": "479ba343873f243ad95f7a3d9249094c8e38099ccd3d2bbb4fff0a73889b967e"
+    },
+    "after": {
+      "bytes": 4471,
+      "lines": 99,
+      "sha256": "77faf35ff067799914f3d0446a22bf48c497a2a723a785d7251612dbbdf14a02"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/mana-surge.test.js",
+    "before": {
+      "bytes": 5740,
+      "lines": 122,
+      "sha256": "fed22c9b770653c518cf9855666d6f32612226b1b65561f762dc2c90135b336a"
+    },
+    "after": {
+      "bytes": 4573,
+      "lines": 92,
+      "sha256": "1e09154f3bdb411a8f79e8b64b20a94140b07f15e1c139db66bdab3e1c8cd412"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/mistbox.test.js",
+    "before": {
+      "bytes": 4913,
+      "lines": 113,
+      "sha256": "d38e84fa18eadf8898dd0500b765203c3413cb7af2a8abda97795651b35c06e2"
+    },
+    "after": {
+      "bytes": 3746,
+      "lines": 83,
+      "sha256": "a0d53f33a3757b64631665dce274faec4c5f73968af82555a3d5e43bd1ccac86"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/mystery-potion-observation.test.js",
+    "before": {
+      "bytes": 11141,
+      "lines": 183,
+      "sha256": "96a62e7159d482d9f2df05a7dbcd6ecebcb2ae78ce461a505a51adc73cbe4196"
+    },
+    "after": {
+      "bytes": 10792,
+      "lines": 177,
+      "sha256": "30d0040926a8659bd05496a9598295e17376fe56f4f9018da2af12982d90fe6c"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/nest-hearts.test.js",
+    "before": {
+      "bytes": 3602,
+      "lines": 61,
+      "sha256": "71c0a00ae9deb94132fd50c98f871e856839d9d08a3c0ebeda45605470090bd2"
+    },
+    "after": {
+      "bytes": 2916,
+      "lines": 48,
+      "sha256": "943d825bbb035a3d58ca37ff8c38da272936e462f90511257d517e99453547d9"
+    },
+    "extracted": [
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/playthrough-bot.test.js",
+    "before": {
+      "bytes": 6705,
+      "lines": 105,
+      "sha256": "3f96696f623d8addf7ec7166e2a9129eccc50daa483d76a5ce661afca5d1a321"
+    },
+    "after": {
+      "bytes": 6019,
+      "lines": 92,
+      "sha256": "93412cda7502f93a4fe6a6a75180b810b77858d820c6231a57cbe3ffa17e524d"
+    },
+    "extracted": [
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/provoke-target-contract.test.js",
+    "before": {
+      "bytes": 6708,
+      "lines": 125,
+      "sha256": "9ddff3ea8e20482de3158836a1ee250e8b7b023563bb078c9392be75d4a2f1ad"
+    },
+    "after": {
+      "bytes": 6366,
+      "lines": 120,
+      "sha256": "f1f10b51f562b95606dd4386ebcd579d1e206acf1593c77d8d594248210935f1"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/rapid-fire.test.js",
+    "before": {
+      "bytes": 6969,
+      "lines": 163,
+      "sha256": "599ef13b43e0b1eb1c1b61946efc2bdf4e1cad5351faec9a06e5f5c2812704e2"
+    },
+    "after": {
+      "bytes": 5858,
+      "lines": 134,
+      "sha256": "f34f4458b876a6d419581a1ddc32d99958688df252584fdc058e7a64fd352220"
+    },
+    "extracted": [
+      "createBattleGameFactory",
+      "drainBattle"
+    ]
+  },
+  {
+    "file": "tests/restoration-potion-observation.test.js",
+    "before": {
+      "bytes": 8389,
+      "lines": 142,
+      "sha256": "5c75a64e1d9ab493be0b40a51d86074eac63de81d413bb29aa455884919dd87b"
+    },
+    "after": {
+      "bytes": 8047,
+      "lines": 137,
+      "sha256": "a239d5414f8f2f923436f05f27b9d7563b839ec53b012c106bf7f5504c4babbc"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/scavenge-mode-feedback.test.js",
+    "before": {
+      "bytes": 4798,
+      "lines": 67,
+      "sha256": "465aaf314e5791c656df7bd3572b2e37be184d3b2d772fb9b9299c00f8420878"
+    },
+    "after": {
+      "bytes": 4451,
+      "lines": 57,
+      "sha256": "50e9bbcc31e7edf7f5e7407de17fe2f30356004adbc942c873a858c3a5e8cf20"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/sword-consume-trigger.test.js",
+    "before": {
+      "bytes": 8076,
+      "lines": 103,
+      "sha256": "581e505abf7de8a011950f3d8c1af47a724f688a29c68df085397096316467f6"
+    },
+    "after": {
+      "bytes": 7713,
+      "lines": 90,
+      "sha256": "f5e0d30af504767cc87b138a70e39916ad022a63c886dede89ddba0a9e8baefe"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  },
+  {
+    "file": "tests/venom-staff-passive.test.js",
+    "before": {
+      "bytes": 4523,
+      "lines": 72,
+      "sha256": "0cc3f78dd46f48cf6411f4c955d119c8f8115a85646cdc8197d32d1b3a806703"
+    },
+    "after": {
+      "bytes": 4181,
+      "lines": 67,
+      "sha256": "27a55ae6699ec514cdf398e46b203388f8fa14a81aa08adf7fd17307c1142628"
+    },
+    "extracted": [
+      "makeRuntimeBattleGame as makeGame"
+    ]
+  }
+]

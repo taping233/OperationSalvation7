@@ -1,0 +1,4424 @@
+{
+  "root": "game/src/main.js",
+  "totalParsed": 613,
+  "parseErrors": [],
+  "dynamicImports": [],
+  "inventory": [
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "lines": 1151,
+      "bytes": 69700,
+      "sha256": "eb06d14b45cb4d4ac9529b05d960918caf248bb8b1809b54abe7e0ee2190ae32",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.js"
+      ],
+      "imports": [
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/core/shared.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/ui/term-tips.js",
+        "game/src/cards/card-draw-explanation.js",
+        "game/src/cards/card-render-context.js",
+        "game/src/run/game.session.js",
+        "game/src/core/characters.js",
+        "game/src/cards/card-photo-notes.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/hub/photo-studio-catalog-cache.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/hub/game.cardslib.photo-fps.js",
+        "game/src/hub/game.cardslib.art-warm.js",
+        "game/src/hub/game.cardslib.photo-props.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/photo-studio-controls.js",
+        "game/src/hub/photo-studio-tabs.js",
+        "game/src/hub/photo-studio-navigation.js"
+      ],
+      "exports": [
+        "preparePhotoStudioEntry",
+        "openCardDesigner",
+        "openCardLibrary"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "HTMLElement",
+        "innerHTML",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "setLibSelection",
+          "line": 566,
+          "lines": 63
+        },
+        {
+          "name": "renderCardLibrary",
+          "line": 767,
+          "lines": 282
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "lines": 879,
+      "bytes": 45266,
+      "sha256": "6c81008034e007c142377a7b31a3d460ccb6ad892daff6ccb6467e7c1b396237",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.commands.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/save-archive.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/hub/base-state.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/collection-protection.js",
+        "game/src/hub/stash-sale-price.js",
+        "game/src/hub/slot-write-lock.js"
+      ],
+      "exports": [
+        "bagCap",
+        "hasSlot",
+        "safeCap",
+        "Base"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "lines": 588,
+      "bytes": 33053,
+      "sha256": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/collection.commands.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/characters.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/data-loader.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/core/shared.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/performance-settings.js",
+        "game/src/core/image-decode.js",
+        "game/src/core/art-preload-plan.js"
+      ],
+      "exports": [
+        "Art",
+        "SKIN_FULL_ART",
+        "setActiveSkin"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "lines": 573,
+      "bytes": 30985,
+      "sha256": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.primitives.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/node-info.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-layer-atmosphere.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/run/expedition.view.js"
+      ],
+      "exports": [
+        "Renderer"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame",
+        "document",
+        "canvas",
+        "HTMLCanvasElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "nodeGeo",
+          "line": 150,
+          "lines": 146
+        },
+        {
+          "name": "drawLinks",
+          "line": 396,
+          "lines": 73
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "lines": 511,
+      "bytes": 17184,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5",
+      "reachableFromMain": false,
+      "parents": [],
+      "imports": [],
+      "exports": [
+        "Droplet",
+        "RainSimulation",
+        "RivuletMap",
+        "SimplexNoise",
+        "TrailBead",
+        "default"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "lines": 503,
+      "bytes": 29025,
+      "sha256": "e029ca93d70ea873f90dfc3b160dc8755e1268dc4e036bd0041a3aff4759f669",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/core/rule-config.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/core/random.js",
+        "game/src/run/game.run.js",
+        "game/src/ui/transition-art.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/chest-reward-save.js"
+      ],
+      "exports": [
+        "resumeBattleRewards",
+        "bindBagMixins"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "document"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindBagMixins",
+          "line": 26,
+          "lines": 475
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "lines": 497,
+      "bytes": 30093,
+      "sha256": "ef542e6720b3f2d80d0309479830f582b41d93702232671fbf9ec2ddf7c9f7ff",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/departure.summary.js",
+        "game/src/hub/hub.home-v3.js",
+        "game/src/ui/departure-transition.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/hub/departure.drag.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/departure.selection-state.js",
+        "game/src/core/card-capacity.js",
+        "game/src/hub/preparation.commands.js"
+      ],
+      "exports": [
+        "hubDeployHTML",
+        "openDepartPrep",
+        "deployPick",
+        "setDeployPick"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "requestAnimationFrame",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "openDepartPrep",
+          "line": 75,
+          "lines": 84
+        },
+        {
+          "name": "renderDepartPrep",
+          "line": 185,
+          "lines": 278
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "lines": 433,
+      "bytes": 25938,
+      "sha256": "0d3bec91fd924926e8cc2674aaa0a6d3e2cacba782559d1ceee1367ac2f716d2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/save-archive.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js",
+        "game/src/core/rule-config.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "exports": [
+        "validatePendingExtraction",
+        "firstExploreMoves",
+        "extractionXp",
+        "extractionPocketOutcome",
+        "buildExtractionReceipt",
+        "createExtractionCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "organize",
+          "line": 365,
+          "lines": 62
+        },
+        {
+          "name": "createExtractionCommands",
+          "line": 211,
+          "lines": 223
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "lines": 417,
+      "bytes": 27517,
+      "sha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/hub/bag-legacy-use.js",
+        "game/src/hub/bag-container-pages.js",
+        "game/src/hub/bag-inventory-commands.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/core/bag-render-derivation.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/core/random.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/ui/operation-notice.js",
+        "game/src/hub/game.bag.safe-transfer.js",
+        "game/src/hub/game.bag.settle.js"
+      ],
+      "exports": [
+        "showBackpack",
+        "showBackpackSection",
+        "setBagReturnHook",
+        "bindBagMixins",
+        "resumeBattleRewards"
+      ],
+      "presentationSignals": [
+        "document",
+        "HTMLElement",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "showBackpack",
+          "line": 315,
+          "lines": 93
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "lines": 412,
+      "bytes": 14949,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd",
+      "reachableFromMain": false,
+      "parents": [],
+      "imports": [],
+      "exports": [
+        "RainRenderer",
+        "default"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "lines": 405,
+      "bytes": 26551,
+      "sha256": "03f7254b6687527f7d3650655e5095c14cc0498e2a0d99489f556a8cd44be2cb",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/core/shared.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/operation-notice.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/command-errors.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/hub.materials.js",
+        "game/src/hub/hub.archive-v3.js",
+        "game/src/hub/hub.courtyard-v3.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/hub/hub.navigation-v7.js",
+        "game/src/hub/base-page-motion-v7.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.archive.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.pages.js"
+      ],
+      "exports": [
+        "closeBase",
+        "openBaseHub",
+        "renderHub",
+        "renderHomeScene"
+      ],
+      "presentationSignals": [
+        "document",
+        "innerHTML",
+        "HTMLElement",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "renderHub",
+          "line": 117,
+          "lines": 259
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "lines": 392,
+      "bytes": 20852,
+      "sha256": "381909db0e242f9b552ab4d4d6f0d46ff8a8de73849198be88f538cc3c02d6d7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js"
+      ],
+      "imports": [
+        "game/src/ui/transition-diagnostic-policy.js",
+        "game/src/battle/view/battle.frames-diagnostic-policy.js",
+        "game/src/core/flight-recorder.local.js"
+      ],
+      "exports": [
+        "summarizePerfSample",
+        "installPerfProbe"
+      ],
+      "presentationSignals": [
+        "document",
+        "canvas",
+        "innerHTML",
+        "HTMLElement",
+        "querySelector",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "sample",
+          "line": 209,
+          "lines": 115
+        },
+        {
+          "name": "onClick",
+          "line": 325,
+          "lines": 65
+        },
+        {
+          "name": "installPerfProbe",
+          "line": 127,
+          "lines": 266
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "lines": 373,
+      "bytes": 24243,
+      "sha256": "2a7f4c4119802158df74d48b5395b611ab48f223c0947a0301bc245dc9c73e74",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/cards/mech-sentences.js",
+        "game/src/hub/game.cardslib.common.js"
+      ],
+      "exports": [
+        "createCardDesigner"
+      ],
+      "presentationSignals": [
+        "document",
+        "innerHTML",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "renderDesigner",
+          "line": 102,
+          "lines": 128
+        },
+        {
+          "name": "createCardDesigner",
+          "line": 16,
+          "lines": 358
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "lines": 366,
+      "bytes": 19837,
+      "sha256": "5d0e5ae22c96bb9d77adcef5136d79dd771c8934094b9f9e573aba551ec0bd67",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/data-loader.js",
+        "game/src/core/characters.js",
+        "game/src/core/random.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "exports": [
+        "Meta",
+        "LEVEL_MAX",
+        "xpForNext",
+        "perkText",
+        "addXpToProgress",
+        "collectionXpFor"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "lines": 347,
+      "bytes": 22728,
+      "sha256": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/hub.collection-v4.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.warehouse.js"
+      ],
+      "imports": [
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/navigation-motion.js"
+      ],
+      "exports": [
+        "presentHub",
+        "pulseNumber",
+        "bindCardNavigation",
+        "bindHubBrowse",
+        "restoreHubFocus"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "document",
+        "innerHTML",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "presentHub",
+          "line": 34,
+          "lines": 65
+        },
+        {
+          "name": "updatePersonnelV12",
+          "line": 172,
+          "lines": 85
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "lines": 312,
+      "bytes": 21347,
+      "sha256": "1c285a3f41bbf11a5f7edeb57031752680b07d0cd7aae4cba9db5795a0c48bae",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.archive-v3.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/core/shared.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/core/random.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/collection-conversion-view.js",
+        "game/src/hub/collection-protection.js",
+        "game/src/hub/command-errors.js",
+        "game/src/hub/game.hub.bridge.js"
+      ],
+      "exports": [
+        "hubStashHTML",
+        "openStashCardView",
+        "openRawItem",
+        "hubUpgradeHTML",
+        "hubClassesHTML",
+        "hubAchHTML",
+        "HUB_SHOP_GOODS"
+      ],
+      "presentationSignals": [
+        "HTMLElement",
+        "document",
+        "querySelector",
+        "innerHTML"
+      ],
+      "largeFunctions": [
+        {
+          "name": "openStashCardView",
+          "line": 48,
+          "lines": 240
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "lines": 288,
+      "bytes": 16287,
+      "sha256": "9119b1ecd3912b5840d094a2cfb6b0561434125bf1b39d5eb0d5fd269ba3d1ff",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/save-archive.js",
+        "game/src/main.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/hub/slot-write-lock.js"
+      ],
+      "exports": [
+        "RUN_KEY",
+        "RunStorage",
+        "SAVE_VERSION",
+        "SLOT_COUNT",
+        "TX_KEY",
+        "txPending"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "lines": 266,
+      "bytes": 12216,
+      "sha256": "9a6bca6ec2c0be39f5a769590bad7962ae8559b48b52a3f36b1200757da469ba",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/game-map-selection.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/map-drag-motion.js"
+      ],
+      "exports": [
+        "nodeHitRadius",
+        "Camera"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "lines": 265,
+      "bytes": 16801,
+      "sha256": "8c529dd5b819d2a5aea12eab7dbc78b63369e6f2bb456caf16277bfe520fe15f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.settle.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/battle-victory-progress.js"
+      ],
+      "exports": [
+        "createBattleSettlementCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createAttempt",
+          "line": 151,
+          "lines": 76
+        },
+        {
+          "name": "createBattleSettlementCommands",
+          "line": 53,
+          "lines": 213
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "lines": 258,
+      "bytes": 15227,
+      "sha256": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js",
+        "game/src/run/expedition.view.js"
+      ],
+      "imports": [
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/map-image-ready.js"
+      ],
+      "exports": [
+        "prepareMapNodeArt",
+        "drawMapNodeArt",
+        "getMapNodeArt",
+        "mapNodeArtHTML",
+        "mapNodeIconDataUrl",
+        "mapViewportScale",
+        "mapNodeAppearance",
+        "drawMapNodeBadge",
+        "drawMapFogBadge",
+        "drawMapTraveller",
+        "drawMapNativeSymbol"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "canvas",
+        "CanvasRenderingContext2D"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "lines": 243,
+      "bytes": 15299,
+      "sha256": "73ec61fc3f279e6508239f7af270226bc9a01a1063fc9d43c6d5bd00b51721e2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-legacy-use.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.view2.js"
+      ],
+      "imports": [
+        "game/src/ui/discovery-selection.js",
+        "game/src/hub/bag-use-compatibility.js",
+        "game/src/core/shared.js",
+        "game/src/core/card-capacity.js",
+        "game/src/ui/reward-scene-view.js"
+      ],
+      "exports": [
+        "bagUseLocation",
+        "restorationCapacityReason",
+        "bagUseStatus",
+        "canReplaceBagCard",
+        "openBagDiscovery",
+        "openBagLegendaryDiscovery",
+        "useStructuredBagRule"
+      ],
+      "presentationSignals": [
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "openBagDiscovery",
+          "line": 66,
+          "lines": 82
+        },
+        {
+          "name": "useStructuredBagRule",
+          "line": 160,
+          "lines": 84
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-runtime.js",
+      "lines": 236,
+      "bytes": 12675,
+      "sha256": "b61e185d8b0eb5c5c049f15e0ea7dab1547170c0b1e6838c6936491ee0e51e26",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.courtyard-v3.js"
+      ],
+      "imports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/random.js",
+        "game/src/hub/courtyard.rain-tableau.js",
+        "game/src/hub/courtyard-vendor/KoiPond.js"
+      ],
+      "exports": [
+        "mountCourtyardV3"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "canvas",
+        "document",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "mountCourtyardV3",
+          "line": 8,
+          "lines": 229
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "lines": 234,
+      "bytes": 11889,
+      "sha256": "714833ad765c69b79d96c7c317cd7696cffbdf51ea78bbc6ed3d4a3c7bb2dc91",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/home/home.presenter.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.warehouse.js"
+      ],
+      "imports": [
+        "game/src/core/data-loader.js",
+        "game/src/core/characters.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/meta.js",
+        "game/src/core/art.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/collection-conversion.js"
+      ],
+      "exports": [
+        "getCollection",
+        "getCharacter",
+        "convertCollection",
+        "selectSkin",
+        "stackKeyOf"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "convert",
+          "line": 107,
+          "lines": 66
+        },
+        {
+          "name": "createCollectionCommands",
+          "line": 98,
+          "lines": 128
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "lines": 234,
+      "bytes": 11956,
+      "sha256": "845c5a45e6e607125e6a9bfca1de30283db8f2bc14a775ec4f5bc2008b463c7f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.courtyard-runtime.js"
+      ],
+      "imports": [
+        "game/src/core/random.js"
+      ],
+      "exports": [
+        "createKoiPond"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "HTMLCanvasElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createKoiPond",
+          "line": 8,
+          "lines": 227
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "lines": 230,
+      "bytes": 11630,
+      "sha256": "b5fa676ea25d416ca53d364add472309d03a94a614001ef677c3a578e51dccd3",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js"
+      ],
+      "exports": [
+        "TYPE_NAME",
+        "bindNotesMixins",
+        "initDevMode",
+        "openCellEditor",
+        "rebuildNotes",
+        "showClearOverlay",
+        "showExportOverlay",
+        "showImportOverlay",
+        "syncDevVisibility"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "lines": 225,
+      "bytes": 18370,
+      "sha256": "a2cf24de593f627a037380e24419bc92338bb742c99a66c0580ac91118c8e2b2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/ui/card-browser-state.js",
+        "game/src/core/shared.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/core/characters.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/hub/hub.warehouse-categories-v7.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/ui/ui-disclosure.js"
+      ],
+      "exports": [
+        "clearWarehouseFilters",
+        "focusWarehouseForCharacter",
+        "warehouseSectionsHTML",
+        "warehouseHTML",
+        "bindWarehouse"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "innerHTML",
+        "HTMLElement",
+        "document",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindWarehouse",
+          "line": 128,
+          "lines": 98
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "lines": 220,
+      "bytes": 12126,
+      "sha256": "d02abc62eaa11f222348c2c3ccb0609eba60a7df0fc8f240ef5dee4a9e545780",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js"
+      ],
+      "imports": [
+        "game/src/hub/hub.presentation.js",
+        "game/src/hub/base-departure.commands.js"
+      ],
+      "exports": [
+        "bindDepartureFilters",
+        "updateDepartureView"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "lines": 218,
+      "bytes": 11032,
+      "sha256": "7d03e4e8975e703301d92d2a8cfe98b6e2b63ea418c7ca7a119e7b146615830b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/card-capacity.js"
+      ],
+      "exports": [
+        "bagDrag",
+        "resetBagDrag"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "document",
+        "innerHTML",
+        "HTMLElement",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "onBagDragUp",
+          "line": 145,
+          "lines": 64
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/game-boot-input.js",
+      "lines": 216,
+      "bytes": 11039,
+      "sha256": "932f24dd9c041c0083e0cd6e2a1b56a420eae5d32972295cb1273e7f9fded19d",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js"
+      ],
+      "imports": [
+        "game/src/ui/screen-owner.js"
+      ],
+      "exports": [
+        "createGameBootInput"
+      ],
+      "presentationSignals": [
+        "document",
+        "requestAnimationFrame",
+        "canvas",
+        "HTMLElement",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindInput",
+          "line": 9,
+          "lines": 206
+        },
+        {
+          "name": "createGameBootInput",
+          "line": 4,
+          "lines": 213
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/runtime-trace.local.js",
+      "lines": 211,
+      "bytes": 13568,
+      "sha256": "cf7d855112ce65278c54e9aa9d79bf28d30b286c32dabadbc4084e9afea86378",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js"
+      ],
+      "imports": [
+        "game/src/core/runtime-trace-stages.local.js",
+        "game/src/core/runtime-trace-panel.local.js"
+      ],
+      "exports": [
+        "TRACE_LIMIT",
+        "TRACE_REVISION",
+        "sanitizeTraceRow",
+        "createTraceBuffer",
+        "createEventTimingMatcher",
+        "installRuntimeTrace"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "innerHTML",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "installRuntimeTrace",
+          "line": 66,
+          "lines": 146
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard.rain-tableau.js",
+      "lines": 204,
+      "bytes": 10795,
+      "sha256": "51baef07821ad53def47fe397974da70348aa7bbdb1e80e7c17846dfe697e32b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.courtyard-runtime.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createRainTableau"
+      ],
+      "presentationSignals": [
+        "canvas"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createRainTableau",
+          "line": 11,
+          "lines": 194
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "lines": 193,
+      "bytes": 13208,
+      "sha256": "75bf8d36fc3052657ec8d07d025450fd895750434ae1b484f1c69f9b828ece23",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.settle.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/receipt-retention.js"
+      ],
+      "exports": [
+        "createRecoveryCommands",
+        "recoverSlot",
+        "recoverSlotIfPending",
+        "readSettlementReceipt",
+        "commitBaseAndRun"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createRecoveryCommands",
+          "line": 22,
+          "lines": 166
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "lines": 189,
+      "bytes": 22651,
+      "sha256": "7bd8b26f98e417c36d97d93be8c273547f2d7d903514cd41e0e02ebaa52d5ad7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/ui/card-browser-state.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/core/shared.js",
+        "game/src/core/characters.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/hub.visuals.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/ui/partner-interaction.js"
+      ],
+      "exports": [
+        "personnelPageKey",
+        "personnelViewKey",
+        "setPersonnelGroup",
+        "setPersonnelSection",
+        "petSafeSlots",
+        "upgradePetFromPersonnel",
+        "personnelBackTarget",
+        "personnelHTML",
+        "bindPersonnel"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "document",
+        "querySelector",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindPersonnel",
+          "line": 115,
+          "lines": 75
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "lines": 187,
+      "bytes": 15798,
+      "sha256": "f091ed8e8fb2ec5f676b60587a834b2066fe875125257f8c4a7ddba2595effae",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/hub.materials.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/stash-sale-price.js"
+      ],
+      "exports": [
+        "createTradeShopState",
+        "tradeShopV5HTML",
+        "bindTradeShopV5"
+      ],
+      "presentationSignals": [
+        "innerHTML",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindTradeShopV5",
+          "line": 94,
+          "lines": 94
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "lines": 186,
+      "bytes": 10330,
+      "sha256": "efc6bc99aecda6eb7f835ca4cbc5da5238ce7e1e2e0c97777ceb41c7b01ccf5b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/run/game.nest.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "createNestSettlementCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createAttempt",
+          "line": 39,
+          "lines": 81
+        },
+        {
+          "name": "createNestSettlementCommands",
+          "line": 27,
+          "lines": 160
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "lines": 184,
+      "bytes": 7978,
+      "sha256": "b2a582cad98fd758f0ad2601b30c8ac656eb29dd83618e6bfa84bcedf112619f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/ui-scale.js"
+      ],
+      "exports": [
+        "bindPhotoStudioControls",
+        "refreshPhotoStudioControls",
+        "closePhotoStudioControls"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindChoice",
+          "line": 19,
+          "lines": 156
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "lines": 184,
+      "bytes": 12536,
+      "sha256": "51ef18f8d7ee212769fc099c9bffea75361471399d4f83b4191b029fff288d34",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "validateArchivedRun",
+        "createSaveArchive"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createSaveArchive",
+          "line": 69,
+          "lines": 116
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "lines": 181,
+      "bytes": 8090,
+      "sha256": "8f13e650c675b5e579bf611fdbfcb536964c37c3ab74de2112f2baa4a37a23bb",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.preparation-ports.js"
+      ],
+      "imports": [
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/hub/base-departure.commands.js"
+      ],
+      "exports": [
+        "createHubPreparationFeature"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": [
+        {
+          "name": "open",
+          "line": 48,
+          "lines": 122
+        },
+        {
+          "name": "createHubPreparationFeature",
+          "line": 9,
+          "lines": 171
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/base-page-motion-v7.js",
+      "lines": 179,
+      "bytes": 8062,
+      "sha256": "60b95779622f977afdbd6add457ec381582b006d27fc5fc0dad204b941e54575",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/ui/base-design-preview-v7.js"
+      ],
+      "imports": [
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js"
+      ],
+      "exports": [
+        "bindBasePageMotionV7",
+        "animateBaseModeChangeV12"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "lines": 175,
+      "bytes": 9230,
+      "sha256": "56798c6feff1a2d222b38198c9564e87250422655958f81f448083f0df404797",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/core/card-capacity.js",
+        "game/src/hub/game.container-store.view.js",
+        "game/src/hub/bag-inventory-commands.js"
+      ],
+      "exports": [
+        "createBagContainerPages"
+      ],
+      "presentationSignals": [
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "openPouchStore",
+          "line": 27,
+          "lines": 71
+        },
+        {
+          "name": "openPearlStore",
+          "line": 102,
+          "lines": 71
+        },
+        {
+          "name": "createBagContainerPages",
+          "line": 7,
+          "lines": 169
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "lines": 175,
+      "bytes": 19460,
+      "sha256": "b15173796eef4065432a8697ad6d978200a9b1f0bd912e8e8dce40100f2e5ec6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/hub/hub.reward-feedback.js",
+        "game/src/core/shared.js",
+        "game/src/ui/achievement-medals.js",
+        "game/src/hub/hub.archive.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/hub.collection-v4.js"
+      ],
+      "exports": [
+        "archiveV3HTML",
+        "refreshArchiveBacks",
+        "bindArchiveV3"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "innerHTML",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindArchiveV3",
+          "line": 116,
+          "lines": 60
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "lines": 174,
+      "bytes": 6530,
+      "sha256": "744486dda776d5c59f8bf734322a03416339f61f6631939b132c7bfda222fcf1",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/main.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.class-choice.page.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/ui/quick-nav.js"
+      ],
+      "imports": [
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/ui/surface-motion.js",
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "exports": [
+        "cardPageLoading",
+        "CARD_DESIGNER_WRITES_ENABLED",
+        "Sfx",
+        "cardHTML",
+        "configureCardNavigation",
+        "cardPageOpen",
+        "closeCardPageTop",
+        "openCardDesigner",
+        "openCardLibrary",
+        "_set_cardPageOpen",
+        "cancelPendingCardPageOpen"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "enterPage",
+          "line": 57,
+          "lines": 93
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/bag-legacy-use.js",
+      "lines": 172,
+      "bytes": 10056,
+      "sha256": "6c4c95c787c514eb575f97e80e755b5963956e6728d74302c897f85d9fa8ef8f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/bag-use-compatibility.js",
+        "game/src/hub/game.bag.rules.js"
+      ],
+      "exports": [
+        "createLegacyBagUse"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "useOwnedCard",
+          "line": 63,
+          "lines": 107
+        },
+        {
+          "name": "createLegacyBagUse",
+          "line": 6,
+          "lines": 167
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/game-map-selection.js",
+      "lines": 167,
+      "bytes": 8426,
+      "sha256": "b87bf12f61a5ab66ab07eacb7cb0e9d9cfa7708cd340e50994543e2091a7eeac",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js"
+      ],
+      "imports": [
+        "game/src/core/camera.js",
+        "game/src/core/map-node-state.js",
+        "game/src/run/map-travel-path.js"
+      ],
+      "exports": [
+        "createGameMapSelection"
+      ],
+      "presentationSignals": [
+        "canvas"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createGameMapSelection",
+          "line": 6,
+          "lines": 162
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "lines": 159,
+      "bytes": 10530,
+      "sha256": "b5f4e585cedec3831227e8ace93df73f4ef1f31410cd3fe9dd93fbc9a5fb1d54",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/core/perf-probe.local.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/menu-slots.js"
+      ],
+      "imports": [],
+      "exports": [
+        "FLIGHT_KEY",
+        "FLIGHT_LIMIT",
+        "FLIGHT_BYTES",
+        "recordFrameStage",
+        "recordRestoreStage",
+        "traceRestoreStep",
+        "sanitizeFlight",
+        "readFlight",
+        "createFlightRecorder",
+        "installFlightRecorder"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "document"
+      ],
+      "largeFunctions": [
+        {
+          "name": "installFlightRecorder",
+          "line": 85,
+          "lines": 75
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "lines": 155,
+      "bytes": 7556,
+      "sha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/battle-loader.js",
+        "game/src/core/event-bus.js",
+        "game/src/ui/feedback.local.js"
+      ],
+      "imports": [],
+      "exports": [
+        "DIAGNOSTICS_KEY",
+        "MAX_DIAGNOSTICS",
+        "getDiagnosticSummary",
+        "installRuntimeDiagnostics",
+        "readLocalDiagnostics",
+        "recordDiagnostic",
+        "resetDiagnosticMemory"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "lines": 152,
+      "bytes": 10348,
+      "sha256": "e09f808d8045c3d90a910d9c472b15d6546b5ad32c15e3861a98ced2f2f545be",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/preparation.view.js"
+      ],
+      "imports": [
+        "game/src/hub/base.commands.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/core/card-capacity.js",
+        "game/src/hub/departure.summary.js"
+      ],
+      "exports": [
+        "getPreparation",
+        "previewDeployment",
+        "createPreparationCommands",
+        "setTrackedGoals",
+        "savePreset",
+        "startDeployment"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.reward-feedback.js",
+      "lines": 150,
+      "bytes": 8588,
+      "sha256": "7e30580cd43c9841c36cdac519e4189915c090ef6ad73a136c50a04793bb7b9e",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.archive-v3.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "rewardSnapshot",
+        "confirmedRewardReceipt",
+        "bindRewardFeedback"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector",
+        "HTMLElement",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "lines": 146,
+      "bytes": 8790,
+      "sha256": "687b373e331dba534e31e929cad26991dbaf95d72472bbb914d95b94b3b51568",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/recovery.commands.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "createRecoverablePair"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createRecoverablePair",
+          "line": 51,
+          "lines": 96
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "lines": 146,
+      "bytes": 7860,
+      "sha256": "987843826ac43fd4de58661c251a40c26078d9e4011e42f14d0e45c2854e003d",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "createTerminalCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createAttempt",
+          "line": 50,
+          "lines": 63
+        },
+        {
+          "name": "createTerminalCommands",
+          "line": 39,
+          "lines": 108
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/game-boot-loop.js",
+      "lines": 145,
+      "bytes": 8504,
+      "sha256": "bcd7867639e002ed24d89ca9588e91d5f897ea2fc490e60345a5029733168bbb",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createGameBootLoop"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "document",
+        "requestAnimationFrame",
+        "querySelector"
+      ],
+      "largeFunctions": [
+        {
+          "name": "loop",
+          "line": 46,
+          "lines": 72
+        },
+        {
+          "name": "createGameBootLoop",
+          "line": 2,
+          "lines": 144
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "lines": 143,
+      "bytes": 7461,
+      "sha256": "58ea50dc7dbc0b1647e11036c37efe348089ae159b342a1e0041210adbca503a",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/home/home.commands.js",
+        "game/src/home/story.commands.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/preparation.commands.js"
+      ],
+      "imports": [
+        "game/src/hub/base.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/slot-write-lock.js"
+      ],
+      "exports": [
+        "readBase",
+        "readBaseReceipt",
+        "commitBase"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "commitBaseLocked",
+          "line": 65,
+          "lines": 77
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "lines": 138,
+      "bytes": 6049,
+      "sha256": "1b0dacfaa1cd7ebe8c83c93dfd4101a2034d96325e791d31deb0986471c2a3e6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "Notes",
+        "KEY"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "migrateLegacyCoordinates",
+          "line": 64,
+          "lines": 71
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "lines": 138,
+      "bytes": 11074,
+      "sha256": "39a44f1467d79fa18141e7045e0c6a36bf2e608fb19866b20d6c775fb2af4e58",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/hub/game.bag.rules.js"
+      ],
+      "exports": [
+        "rarityOf",
+        "tileHTML",
+        "pageHTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "lines": 135,
+      "bytes": 4755,
+      "sha256": "0e749cec6b54eeda4feff81fbc317a2a03686bafea8cc4dffaa7b8f1ae1a481e",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [],
+      "exports": [
+        "warmLibArt",
+        "resetLibArtWarmup"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "lines": 134,
+      "bytes": 6605,
+      "sha256": "755c136dfe53338dda2375e741b9e7a483488b624dac7b1647c47107c74cfddc",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "exports": [
+        "createBaseMetaCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createBaseMetaCommands",
+          "line": 51,
+          "lines": 84
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "lines": 131,
+      "bytes": 5623,
+      "sha256": "fa1300e44a29b31363ddff5acfcd3750607a2105bb041a89ac36e66dbf075fe2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js",
+        "game/src/main.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/ui/quick-nav.js"
+      ],
+      "imports": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/hub/departure.selection-state.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "exports": [
+        "baseHubLoading",
+        "closeBase",
+        "deployPick",
+        "openBaseHub",
+        "renderHub",
+        "renderHomeScene",
+        "cancelPendingBaseHubOpen"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": [
+        {
+          "name": "enterHub",
+          "line": 61,
+          "lines": 60
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/bag-pane-view.js",
+      "lines": 130,
+      "bytes": 7777,
+      "sha256": "e472fb48e3f0844f7f3eb7dd65f22709bf86d8dd1c319809fb3bbbb481784ecc",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [],
+      "exports": [
+        "patchBackpackPane",
+        "captureBackpackPosition",
+        "restoreBackpackPosition"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "innerHTML",
+        "document",
+        "HTMLElement"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-navigation.js",
+      "lines": 121,
+      "bytes": 6135,
+      "sha256": "b1c23f153cb8f2097647e4e8c3c834c412806af735c479ec53a780a3ab94254e",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/motion-presets.js"
+      ],
+      "exports": [
+        "createPhotoStudioBrowseHistory",
+        "createPhotoStudioMotion"
+      ],
+      "presentationSignals": [
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createPhotoStudioMotion",
+          "line": 32,
+          "lines": 90
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "lines": 121,
+      "bytes": 7091,
+      "sha256": "9d8725a88ee0251f7da12abff822b8331ae400530a43b3fb15a25093464ec97b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.storage.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createVersionedSlotReader"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createVersionedSlotReader",
+          "line": 17,
+          "lines": 105
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "lines": 116,
+      "bytes": 5550,
+      "sha256": "72ef0c629608fbf2f790ad7d767ddf3bc0e9cd49070cb8a63ebfdc266b83e815",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/rules.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/run/extraction-preview.js"
+      ],
+      "imports": [],
+      "exports": [
+        "RULE_CONFIG",
+        "validateRuleConfig"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "validateRuleConfig",
+          "line": 24,
+          "lines": 76
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.safe-transfer.js",
+      "lines": 112,
+      "bytes": 9129,
+      "sha256": "1b78522c77d76fad0f2f259696ccf2e6d5a6296b6f1696a877f2f9e375506909",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/card-capacity.js",
+        "game/src/core/bag-render-derivation.js",
+        "game/src/ui/operation-notice.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/discovery-selection.js",
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "planSafeCardSwap",
+        "createSafeTransfer"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createSafeTransfer",
+          "line": 24,
+          "lines": 89
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/map-drag-motion.js",
+      "lines": 109,
+      "bytes": 5356,
+      "sha256": "df9581556cc7dce38defcc307fabe4b4737c34694e2651979d314e27ed0fb7fd",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/camera.js"
+      ],
+      "imports": [],
+      "exports": [
+        "cameraPanBounds",
+        "createMapDragMotion"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createMapDragMotion",
+          "line": 48,
+          "lines": 62
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "lines": 106,
+      "bytes": 3752,
+      "sha256": "943e61ce889937dea82d56dc2eff7a604b3f6b1f5fe6fdca73d22aafa1298d4f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js",
+        "game/src/run/game.session.kernel.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "GameStore"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "lines": 104,
+      "bytes": 8289,
+      "sha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/shared.js",
+        "game/src/core/icon-hydration.js"
+      ],
+      "exports": [
+        "Icons"
+      ],
+      "presentationSignals": [
+        "document",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "lines": 104,
+      "bytes": 6493,
+      "sha256": "af4272a7c47e4ed15293af3be7f91f8aac6ecc223fb1315056d0516c5abd3500",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js"
+      ],
+      "exports": [
+        "createBaseState",
+        "normalizeBaseState"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/departure-persistence.js",
+      "lines": 99,
+      "bytes": 6571,
+      "sha256": "7ff8046ba4f485b44fac9b8c987a134b2fc79fe9420f8d60598eeb206684c04b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/recovery.commands.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/receipt-retention.js"
+      ],
+      "exports": [
+        "DEPARTURE_COMMAND",
+        "validateDepartureJournal",
+        "createDeparturePersistence"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": [
+        {
+          "name": "createDeparturePersistence",
+          "line": 36,
+          "lines": 63
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "lines": 99,
+      "bytes": 5202,
+      "sha256": "6eb3fd36a3a7326092a14d9f4b50d320cd85ac69849ef5117a3cc0e3ca365800",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/save-archive.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/node-reward-state.js"
+      ],
+      "exports": [
+        "validateRunSave"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/bag-inventory-commands.js",
+      "lines": 98,
+      "bytes": 5729,
+      "sha256": "72d58af2a06c9b0e0dfbb7a4d578a23506b6fc9aed52b11034c170c89c038330",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-container-pages.js",
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/hub/bag-token-craft-plan.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/bag-render-derivation.js"
+      ],
+      "exports": [
+        "discardInventoryCard",
+        "craftInventoryToken",
+        "transferContainerStack"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.collection-v4.js",
+      "lines": 96,
+      "bytes": 7487,
+      "sha256": "5c0fb2ff3b4d79e328f54e5a2f50020156be940bc88c2a5c64889c532e59a177",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.archive-v3.js"
+      ],
+      "imports": [
+        "game/src/ui/card-browser-state.js",
+        "game/src/hub/base-motion-v4.js",
+        "game/src/core/shared.js",
+        "game/src/ui/card-browser.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/ui/inventory-zoom.js"
+      ],
+      "exports": [
+        "collectionCardsHTML",
+        "bindCollectionCards"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "lines": 95,
+      "bytes": 4162,
+      "sha256": "452df01d5fe6c40051cf1cc06677dd48af418f8afd57c7f5b03798e3d2a97a66",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [],
+      "exports": [
+        "configurePhotoFps",
+        "photoFpsEnabled",
+        "stopPhotoFpsProbe",
+        "samplePhotoFps",
+        "clearPhotoFpsSettledTimer",
+        "scheduleSettledPhotoFps"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame",
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "lines": 94,
+      "bytes": 4562,
+      "sha256": "dfa393942e759d805d3daff1cefc79dda0c22e9a77e23d9d21536050b1866dc7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/map-node-art.js",
+        "game/src/core/renderer.js"
+      ],
+      "imports": [
+        "game/src/core/map-image-ready.js"
+      ],
+      "exports": [
+        "prepareMapBrushArt",
+        "mapBrushVariant",
+        "mapBrushRoadInView",
+        "mapBrushSteps",
+        "drawMapBrushRoad"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "lines": 94,
+      "bytes": 4486,
+      "sha256": "b5449abcd58cc740485fd45852b463031f6d2312a2cb4736eff0d07222b0fd77",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/departure.summary.js",
+        "game/src/hub/departure.view-updates.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.preparation.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "departureStackKey",
+        "findDepartureStack",
+        "createBaseDepartureCommands",
+        "planBaseDeparture"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/input.js",
+      "lines": 88,
+      "bytes": 3978,
+      "sha256": "7c1c6e795d3266780add6881bfc4992fc5d25ea7207f9f27c36a7a28b4dc4975",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js",
+        "game/src/ui/settings-input.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "Input"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "lines": 86,
+      "bytes": 4841,
+      "sha256": "17e6634c53a68ff04b70886035ed0692b0fc719def955fcdf9bc9627d816034f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/hub/hub.courtyard-runtime.js"
+      ],
+      "exports": [
+        "courtyardV3HTML",
+        "mountCourtyardV3"
+      ],
+      "presentationSignals": [
+        "canvas",
+        "querySelector"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "lines": 85,
+      "bytes": 8960,
+      "sha256": "064d7119f527271d0cd358c9fd3f8984cfba88aeec4a12642360180816b09627",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.preparation.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js"
+      ],
+      "exports": [
+        "buildPreparationViewModel",
+        "mountPreparationView"
+      ],
+      "presentationSignals": [
+        "HTMLElement",
+        "querySelector",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "lines": 84,
+      "bytes": 4292,
+      "sha256": "8f59196bda4fefb6e6f1f477a5b696b2a48db0032e49fcf04ed2bd63ffe1d184",
+      "reachableFromMain": false,
+      "parents": [],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/home/home.commands.js",
+        "game/src/home/home.presenter.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/home/home.scene.js",
+        "game/src/home/home.visuals.js"
+      ],
+      "exports": [
+        "createHubHomeScene"
+      ],
+      "presentationSignals": [
+        "document",
+        "HTMLElement"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createHubHomeScene",
+          "line": 9,
+          "lines": 76
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "lines": 78,
+      "bytes": 3921,
+      "sha256": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js"
+      ],
+      "imports": [
+        "game/src/core/map-image-ready.js",
+        "game/src/core/map-layer-atmosphere.js"
+      ],
+      "exports": [
+        "createMapCityAtmosphere"
+      ],
+      "presentationSignals": [
+        "document",
+        "canvas"
+      ],
+      "largeFunctions": [
+        {
+          "name": "createMapCityAtmosphere",
+          "line": 10,
+          "lines": 69
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "lines": 77,
+      "bytes": 2808,
+      "sha256": "0cc97ec24921c7e58f877ff6d972578a0863b659c03da2d97fee59bae847ac73",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/view/battle.frames.js",
+        "game/src/core/camera.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/renderer.js",
+        "game/src/game.boot.js",
+        "game/src/main.js",
+        "game/src/run/game.run.flow.js"
+      ],
+      "imports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "RenderScheduler",
+        "renderScheduler"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "lines": 77,
+      "bytes": 4722,
+      "sha256": "3accdc9c14cd96d99b3f7d0fa38809357ca6880fc1deea9e6ff23e069fbda2e8",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createBaseEconomy"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "lines": 76,
+      "bytes": 3261,
+      "sha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [],
+      "exports": [
+        "updatePhotoStudioTabMarker",
+        "bindPhotoStudioTabMarker"
+      ],
+      "presentationSignals": [
+        "querySelector",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/bag-render-derivation.js",
+      "lines": 74,
+      "bytes": 3239,
+      "sha256": "9a832c3e4fc60b410c2d599f1a7002735024690893c795e6bfb60dbffa7e9dad",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-inventory-commands.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.safe-transfer.js",
+        "game/src/run/game.session.bag.js"
+      ],
+      "imports": [
+        "game/src/core/card-capacity.js"
+      ],
+      "exports": [
+        "cardStacksForZone",
+        "syncBagCardOrder",
+        "bagCardOrderIndex",
+        "formatBagCapacity",
+        "deriveBagRenderState"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "lines": 74,
+      "bytes": 3241,
+      "sha256": "d9658c6c529d1f88879d071da692ab92b6742d95a0f46c1ae04d1f32f76b4971",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [],
+      "exports": [
+        "LIB_ART",
+        "photoStyle",
+        "photoNo"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "lines": 73,
+      "bytes": 3550,
+      "sha256": "2752612c611c4259cb26d1049098c414b3f35ab5f8f37f3bb098c159f54ad1ab",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/map-node-glow.js",
+        "game/src/main.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/ui/card-zoom-controller.js",
+        "game/src/ui/comm-feed.js",
+        "game/src/ui/map-passage.js",
+        "game/src/ui/menu-guide.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/transitions-director.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "Motion",
+        "overlayIn",
+        "cancelOverlayIn",
+        "pop",
+        "reduceMotion",
+        "refreshReduceMotion",
+        "resolveReducedMotion"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "lines": 67,
+      "bytes": 4805,
+      "sha256": "032eba7b02895dad9650c5fa72377ecd70eac2a47bc57199bc0aa067b4f2f944",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/game-map-selection.js",
+        "game/src/core/node-info.js",
+        "game/src/core/renderer.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/map-travel-path.js"
+      ],
+      "imports": [
+        "game/src/run/node-restore-state.js"
+      ],
+      "exports": [
+        "BOSS_ALTAR_REQUIREMENT",
+        "mapNodeStatus",
+        "isConsumedMapNode"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "lines": 64,
+      "bytes": 2627,
+      "sha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/diagnostics.local.js"
+      ],
+      "exports": [
+        "on",
+        "off",
+        "emit",
+        "reset"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/departure.drag.js",
+      "lines": 64,
+      "bytes": 3428,
+      "sha256": "ce271515794670e761b766a3884646a3be274244cea466e7cfff17060befe1da",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js"
+      ],
+      "imports": [
+        "game/src/ui/ui-scale.js"
+      ],
+      "exports": [
+        "bindDepartureDrag"
+      ],
+      "presentationSignals": [
+        "document",
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": [
+        {
+          "name": "bindDepartureDrag",
+          "line": 4,
+          "lines": 61
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "lines": 64,
+      "bytes": 7012,
+      "sha256": "602e508a31f37b8da2ef69a26b8f67ae69bcc30be4a27d790d3d621dffbaaf46",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/hub.archive-v3.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/home/narrative.js",
+        "game/src/home/story.last-lamp.js"
+      ],
+      "exports": [
+        "achievementFiltersHTML",
+        "createAchievementProgressReader",
+        "achievementProgressText",
+        "bindArchive"
+      ],
+      "presentationSignals": [
+        "HTMLElement",
+        "document",
+        "querySelector",
+        "innerHTML"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "lines": 60,
+      "bytes": 3122,
+      "sha256": "fbd1f13e1fb8b358714efd698203cdf530c01cb284395f8c59bb8ebd81561128",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/bag-render-derivation.js",
+        "game/src/hub/bag-container-pages.js",
+        "game/src/hub/bag-inventory-commands.js",
+        "game/src/hub/departure.summary.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.safe-transfer.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/run/chests.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [],
+      "exports": [
+        "PEARL_BOX_ID",
+        "PEARL_BOX_SLOTS",
+        "stackCapOf",
+        "containerRuleOf",
+        "containerAccepts",
+        "resourceContainerSlots",
+        "resourceContainerBonus",
+        "canAcceptCardAtCapacity",
+        "canReceiveCardFromBag",
+        "previewCardRewards",
+        "stackTransferSlotDelta"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "lines": 57,
+      "bytes": 2960,
+      "sha256": "042797a9cf64528b6d29b2afbf6e302bf345df6093474899993a066c6b4b1ac9",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/battle-settlement.commands.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "exports": [
+        "prepareBattleVictoryProgress"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "lines": 57,
+      "bytes": 4314,
+      "sha256": "bfcc3fdf77197325ff1c7b8b88ddb16a75a1bdc1a502a5ab53ba3604c5811593",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-container-pages.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "containerStoreHTML",
+        "captureContainerView",
+        "restoreContainerFocus"
+      ],
+      "presentationSignals": [
+        "document",
+        "HTMLElement",
+        "querySelector"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "lines": 56,
+      "bytes": 3287,
+      "sha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/camera.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/renderer.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/map-travel-motion.js",
+        "game/src/ui/event-dice.js"
+      ],
+      "imports": [],
+      "exports": [
+        "clamp01",
+        "decayOsc",
+        "ease",
+        "hopPoint",
+        "settleMs",
+        "spring"
+      ],
+      "presentationSignals": [
+        "canvas"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "lines": 55,
+      "bytes": 2327,
+      "sha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createBaseProgressionCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "lines": 54,
+      "bytes": 1992,
+      "sha256": "5d2cab3cf14e1a20d04d418f18266d52e8d8aa5c0f5341f1a8c300556258d97d",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/art.js"
+      ],
+      "imports": [],
+      "exports": [
+        "decodeImagesIn"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame",
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "lines": 54,
+      "bytes": 2407,
+      "sha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [
+        "game/src/core/rule-config.js"
+      ],
+      "exports": [
+        "createBasePetEggCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "lines": 54,
+      "bytes": 2819,
+      "sha256": "1273361e2324cbde2dc7098da6caa34825a2571137f54bb271d5b010987da6a0",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.hub.js",
+        "game/src/run/game.run.dev-loader.js",
+        "game/src/run/game.run.dev.js"
+      ],
+      "imports": [
+        "game/src/ui/page-entry-cancellation.js"
+      ],
+      "exports": [
+        "cardPageOpen",
+        "setCardPageOpen",
+        "configureCardPageClosers",
+        "configurePendingCardPageEntry",
+        "cancelPendingCardPageEntry",
+        "closeCardPageTop",
+        "CARD_DESIGNER_WRITES_ENABLED",
+        "Sfx",
+        "cardHTML",
+        "configureCardNavigation"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/random-service.js",
+      "lines": 50,
+      "bytes": 1848,
+      "sha256": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/core/battle.engine.instance.js",
+        "game/src/core/random.js"
+      ],
+      "imports": [
+        "game/src/core/random-core.js",
+        "game/src/core/random-streams.js"
+      ],
+      "exports": [
+        "SeededRandomService",
+        "generateSeed"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "lines": 50,
+      "bytes": 3844,
+      "sha256": "744e5db733f236e9c7f1a2bc030685322afdec50d92d716c41c9366d2f49c5ca",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/preparation.commands.js"
+      ],
+      "imports": [
+        "game/src/hub/base-departure.commands.js",
+        "game/src/core/card-capacity.js"
+      ],
+      "exports": [
+        "previewRecommendedDeparture",
+        "departureSummary"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "lines": 49,
+      "bytes": 1870,
+      "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/collection-conversion-view.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/meta.js"
+      ],
+      "imports": [],
+      "exports": [
+        "LEVEL_MAX",
+        "xpForNext",
+        "applyXpGain",
+        "addXpToProgress"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-layer-atmosphere.js",
+      "lines": 48,
+      "bytes": 2656,
+      "sha256": "9c598e8d971a224415e1e41ce5dc1f8055bb70c9a96d715762f493650eed9cd5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/renderer.js"
+      ],
+      "imports": [],
+      "exports": [
+        "mapLayerAtmosphere",
+        "drawMapLayerHaze"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/slot-write-lock.js",
+      "lines": 48,
+      "bytes": 2173,
+      "sha256": "9c59fd4985ce1efb433a057d1cd2579ffe75c50aad7ac32272448ecae6c120cc",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.commands.js",
+        "game/src/hub/base.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/save-archive.js",
+        "game/src/run/game.session.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "assertSlotWriteLease",
+        "withSlotWriteLock",
+        "guardSlotStorage"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "lines": 47,
+      "bytes": 1889,
+      "sha256": "6c124920061defc3146402404201bbbe191cacb3d86dd30dddc75e09aa6c3d45",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js",
+        "game/src/run/game.session.board.js"
+      ],
+      "imports": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js"
+      ],
+      "exports": [
+        "noteReveal",
+        "revealProgress"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "lines": 47,
+      "bytes": 2616,
+      "sha256": "736b80fce4cac19c7e2e722775da048f175bef7d8dcffd0ce61cc9fafe501432",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/view/battle.frames.js",
+        "game/src/core/art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.js",
+        "game/src/hub/hub.courtyard-runtime.js",
+        "game/src/ui/performance-settings.js"
+      ],
+      "imports": [
+        "game/src/core/storage.js"
+      ],
+      "exports": [
+        "QUALITY_PRESETS",
+        "FRAME_LIMITS",
+        "normalizePerformanceSettings",
+        "getPerformanceSettings",
+        "hasUnsavedPerformanceSettings",
+        "getQualityPreset",
+        "onPerformanceSettingsChange",
+        "setPerformanceSettings"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "lines": 47,
+      "bytes": 2933,
+      "sha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/map-node-art.js"
+      ],
+      "imports": [],
+      "exports": [
+        "drawTacticalIcon"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "lines": 46,
+      "bytes": 3191,
+      "sha256": "3a7a6b89737ce5068f26fb09c95b9cee3d137f1a187c864c2025f4f63c436d7d",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/view/battle.layers.js",
+        "game/src/core/art.js",
+        "game/src/hub/base-meta.commands.js",
+        "game/src/hub/base-state.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.class-choice.page.js",
+        "game/src/run/game.session.death.js",
+        "game/src/ui/base-preview-rooms-v7.js",
+        "game/src/ui/run-top-bar.js"
+      ],
+      "imports": [],
+      "exports": [
+        "CHARACTERS",
+        "characterFor",
+        "characterName",
+        "migrateCharacterProgress",
+        "migrateRunCharacter"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "lines": 44,
+      "bytes": 2342,
+      "sha256": "9b9e28dfa50112e780a39dc66ee2765efab513190139b6b8f16ca185c36b1308",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/audio/sfx-review.js",
+        "game/src/audio/sound.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/cards/card-frame-presentation.js",
+        "game/src/core/art-preload-plan.js",
+        "game/src/core/art.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/hub/hub.courtyard-runtime.js",
+        "game/src/hub/hub.visuals.js",
+        "game/src/run/lab.ending.js"
+      ],
+      "imports": [],
+      "exports": [
+        "assetUrl"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "lines": 43,
+      "bytes": 1563,
+      "sha256": "7860c4e2ad5469ab17a1e4d1800dc69a5914633710b808157d14ef105966fce7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js"
+      ],
+      "imports": [],
+      "exports": [
+        "circle",
+        "font",
+        "hash2",
+        "mixHex",
+        "rrect",
+        "shade"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "lines": 42,
+      "bytes": 1778,
+      "sha256": "fbff9be537fe946251556b750fb715bc386117d18e54c98da00ed921ff8a90de",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/icons-bitmap.js"
+      ],
+      "imports": [],
+      "exports": [
+        "observeIconHydration"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "lines": 42,
+      "bytes": 2417,
+      "sha256": "c3b041e1da9c8f4ae39e2b1fe5ab0b2e200f07a5f31039ba3a2d4d62322d28c3",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createBaseElapsedCommands"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/collection-conversion.js",
+      "lines": 42,
+      "bytes": 3496,
+      "sha256": "c012dd7653d63ec0d7898242195a88aa7fb4ca2997a6deb1fdeaa34cd061fbd7",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/game.hub.pages.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/collection-protection.js"
+      ],
+      "exports": [
+        "previewCollectionConversion"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "lines": 41,
+      "bytes": 2241,
+      "sha256": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/art.js",
+        "game/src/game.boot.js"
+      ],
+      "imports": [
+        "game/src/core/asset-url.js"
+      ],
+      "exports": [
+        "planStartupArtPreload",
+        "createForegroundImageYield"
+      ],
+      "presentationSignals": [
+        "document",
+        "querySelector"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "lines": 41,
+      "bytes": 1901,
+      "sha256": "41aa314b19f475d695e658d06ebcb858ce6a13d6aa5f8a4ba2a137a933998ba6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js"
+      ],
+      "imports": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion.js"
+      ],
+      "exports": [
+        "GLOW_BREATH_S",
+        "noteGlowPulse",
+        "glowPulse"
+      ],
+      "presentationSignals": [
+        "requestAnimationFrame"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "lines": 41,
+      "bytes": 1915,
+      "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "commitBaseMutation"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "lines": 40,
+      "bytes": 2782,
+      "sha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/home/home.commands.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/nest-settlement.commands.js",
+        "game/src/hub/preparation.commands.js",
+        "game/src/hub/preparation.sources.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/save-archive.js",
+        "game/src/hub/slot-write-lock.js",
+        "game/src/hub/terminal.commands.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js"
+      ],
+      "exports": [
+        "clone",
+        "fail",
+        "successReceipt",
+        "stable",
+        "validSlot",
+        "freezeDeep"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "lines": 39,
+      "bytes": 1853,
+      "sha256": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/effects/battle.hosted.js",
+        "game/src/cards/cards.catalog.js",
+        "game/src/cards/cards.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/core/art.js",
+        "game/src/e2.snapshot.qa.js",
+        "game/src/hub/base.js",
+        "game/src/hub/collection.commands.js",
+        "game/src/hub/meta.js",
+        "game/src/run/game.run.data.js"
+      ],
+      "imports": [],
+      "exports": [
+        "DATA"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/base-motion-v4.js",
+      "lines": 39,
+      "bytes": 1893,
+      "sha256": "6e989f3ede646eb00ba1f17afaa9055448b1e0c2eac4f4147ee5c0362780fb6e",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/hub.collection-v4.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.presentation.js",
+        "game/src/hub/hub.warehouse.js"
+      ],
+      "imports": [
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js"
+      ],
+      "exports": [
+        "bindBaseMotion",
+        "animateBaseRefresh"
+      ],
+      "presentationSignals": [
+        "querySelector"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "lines": 36,
+      "bytes": 1529,
+      "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/random-service.js",
+        "game/src/core/random.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-route-v2.js"
+      ],
+      "imports": [],
+      "exports": [
+        "hashSeed",
+        "nextRandom"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation-ports.js",
+      "lines": 36,
+      "bytes": 1641,
+      "sha256": "d796ec4088c302208d0adf49f5262dcfc54c484781de903ae9631212fbafa6f4",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/core/characters.js",
+        "game/src/hub/base.commands.js",
+        "game/src/hub/command-errors.js",
+        "game/src/hub/game.hub.bridge.js",
+        "game/src/hub/game.hub.preparation.js"
+      ],
+      "exports": [
+        "createHubPreparationAdapter"
+      ],
+      "presentationSignals": [
+        "document"
+      ],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "lines": 35,
+      "bytes": 1351,
+      "sha256": "ab76d311c8428e045a2219ef2c294492ea31c514046744e6c571e37384e611d5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/mapData.js",
+        "game/src/e2.snapshot.qa.js",
+        "game/src/main.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/rule-config.js"
+      ],
+      "exports": [
+        "RULES"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "lines": 35,
+      "bytes": 4781,
+      "sha256": "2961b80be2df98066fbf0bfbe5945a2a9f61ee9ec1628b32ea4e44d5bd8b980c",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js",
+        "game/src/ui/base-design-preview-v7.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/hub.home-icons-v10.js"
+      ],
+      "exports": [
+        "actionModeName",
+        "baseHomeV3HTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "lines": 34,
+      "bytes": 2246,
+      "sha256": "1dbd68c4c3f3a7b33941b4ab1820bade37a83939f4be7a03f3ef537b52975a4a",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/renderer.js",
+        "game/src/run/expedition.view.js"
+      ],
+      "imports": [
+        "game/src/core/map-node-state.js"
+      ],
+      "exports": [
+        "NODE_INFO",
+        "mapNodeInfo"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "lines": 33,
+      "bytes": 1708,
+      "sha256": "279e855b8cd2c0e363b78542f717f84e92f3ef636d19441c4955f6227f4e55b6",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/game.boot.js",
+        "game/src/main.js",
+        "game/src/run/game.session.kernel.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "FX"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "lines": 32,
+      "bytes": 1721,
+      "sha256": "23ddb7addbe503ae82bc30d3510dc481153b9e0f7adcd602859ceeafbbfb132f",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js"
+      ],
+      "imports": [
+        "game/src/core/card-capacity.js",
+        "game/src/ui/reward-capacity-organizer.js"
+      ],
+      "exports": [
+        "createRewardOrganizer"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/random.js",
+      "lines": 30,
+      "bytes": 1223,
+      "sha256": "48eb8bbd1917c977bfa59960e5379ab71078e62dc312c73f4386bd61e6dfa233",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.replay-state.js",
+        "game/src/agent/agent.replay.runtime.js",
+        "game/src/battle/bag/battle.deck.js",
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/cards/cards.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/hub/base.js",
+        "game/src/hub/courtyard-vendor/KoiPond.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/hub.courtyard-runtime.js",
+        "game/src/hub/meta.js",
+        "game/src/main.js",
+        "game/src/run/chests.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.events.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.resources.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.map.js",
+        "game/src/ui/event-dice.js"
+      ],
+      "imports": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/random-core.js",
+        "game/src/core/random-service.js"
+      ],
+      "exports": [
+        "Random",
+        "SeededRandomService",
+        "generateSeed",
+        "hashSeed",
+        "nextRandom",
+        "setRandomService",
+        "randomRule"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "lines": 30,
+      "bytes": 2064,
+      "sha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/agent/agent.console.js",
+        "game/src/agent/agent.data.js",
+        "game/src/battle/bag/battle.bag.domain.js",
+        "game/src/battle/bag/battle.equipment.domain.js",
+        "game/src/battle/core/battle.card-play.domain.js",
+        "game/src/battle/core/battle.core.js",
+        "game/src/battle/core/battle.damage.domain.js",
+        "game/src/battle/core/battle.draw.domain.js",
+        "game/src/battle/core/battle.effect-assembly.domain.js",
+        "game/src/battle/core/battle.enemy-phase.domain.js",
+        "game/src/battle/core/battle.engine.factory.domain.js",
+        "game/src/battle/core/battle.exec-play.domain.js",
+        "game/src/battle/core/battle.foe-lifecycle.domain.js",
+        "game/src/battle/core/battle.lifecycle.domain.js",
+        "game/src/battle/core/battle.selection-flow.domain.js",
+        "game/src/battle/core/battle.turn-effects.domain.js",
+        "game/src/battle/core/battle.turn-start.js",
+        "game/src/battle/effects/battle.card-inspection.domain.js",
+        "game/src/battle/effects/battle.discover-flow.js",
+        "game/src/battle/effects/card-semantic-operations.js",
+        "game/src/battle/effects/requested-card-runtime.domain.js",
+        "game/src/battle/runtime/battle.runtime.factory.js",
+        "game/src/battle/view/battle.aim.js",
+        "game/src/battle/view/battle.card-results.js",
+        "game/src/battle/view/battle.decision-content.js",
+        "game/src/battle/view/battle.discover-view.js",
+        "game/src/battle/view/battle.hover.js",
+        "game/src/battle/view/battle.infusion-view.js",
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.overlays.js",
+        "game/src/battle/view/battle.pile-view.js",
+        "game/src/battle/view/battle.selection-ui.js",
+        "game/src/battle/view/battle.skill-view.js",
+        "game/src/battle/view/battle.stage-view.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-instance.js",
+        "game/src/cards/cards.sync.rule-backfill.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/art.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/bag-container-pages.js",
+        "game/src/hub/bag-legacy-use.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/battle-victory-progress.js",
+        "game/src/hub/collection-conversion-view.js",
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.safe-transfer.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/hub/game.cardslib.designer.js",
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/hub/game.container-store.view.js",
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/hub.archive-v3.js",
+        "game/src/hub/hub.archive.js",
+        "game/src/hub/hub.collection-v4.js",
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.home-v3.js",
+        "game/src/hub/hub.navigation-v7.js",
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.reward-feedback.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/hub/preparation.view.js",
+        "game/src/main.js",
+        "game/src/run/chest-opening-art.js",
+        "game/src/run/chests.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/expedition.view.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.class-choice.page.js",
+        "game/src/run/game.run.dev.js",
+        "game/src/run/game.run.events.js",
+        "game/src/run/game.run.resources.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/game.session.js",
+        "game/src/run/map-generator-v4.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/run/shop-commission.js",
+        "game/src/ui/base-preview-rooms-v7.js",
+        "game/src/ui/battle-hud-info.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/card-zoom-content.js",
+        "game/src/ui/chest-reward-overview.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/confirm-dialog.js",
+        "game/src/ui/discovery-selection.js",
+        "game/src/ui/equipment-info.js",
+        "game/src/ui/event-dice.js",
+        "game/src/ui/event-option-state.js",
+        "game/src/ui/event-recode-result.js",
+        "game/src/ui/expedition-feedback.js",
+        "game/src/ui/extraction-rewards-view.js",
+        "game/src/ui/fire-rest-view.js",
+        "game/src/ui/home-linked-interactions.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/ui/node-decision-view.js",
+        "game/src/ui/node-scene-view.js",
+        "game/src/ui/operation-notice.js",
+        "game/src/ui/partner-interaction.js",
+        "game/src/ui/reward-capacity-organizer.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/ui/settings-input.js",
+        "game/src/ui/terminal-settlement.js",
+        "game/src/ui/transition-heading.js",
+        "game/src/ui/ui-decision.js",
+        "game/src/ui/ui-disclosure.js"
+      ],
+      "imports": [],
+      "exports": [
+        "clone",
+        "esc",
+        "escAttr"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "lines": 29,
+      "bytes": 1221,
+      "sha256": "cab9a768d6d0a9aa19e3f0c3fa9c959c3e5803b79e6733a6560273d159de62ac",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/map-brush-art.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/renderer.js",
+        "game/src/ui/camp-entry.js"
+      ],
+      "imports": [],
+      "exports": [
+        "mapImageReady"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "lines": 29,
+      "bytes": 1540,
+      "sha256": "39a17de50df0ded90b56f1e828ebd6f9beeab1f91a78cf15a3d1f82d0230ca83",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/main.js",
+        "game/src/run/game.session.kernel.js"
+      ],
+      "imports": [
+        "game/src/core/rules.js",
+        "game/src/core/sdt-facade.js"
+      ],
+      "exports": [
+        "MAP"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "lines": 29,
+      "bytes": 1383,
+      "sha256": "576dbe1bd94981696971a4fe65a8b81c3755b128f15be8dc36842b44f9ad25ff",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/agent/agent.js",
+        "game/src/agent/agent.replay-state.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.runner.runtime.js",
+        "game/src/agent/agent.scenes.runtime.js",
+        "game/src/battle/runtime/battle.clock.js",
+        "game/src/run/chests.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/lab.ending.js",
+        "game/src/ui/map-passage.js"
+      ],
+      "imports": [],
+      "exports": [
+        "isTurbo",
+        "setTurbo",
+        "turboMs"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/bag-token-craft-plan.js",
+      "lines": 26,
+      "bytes": 1607,
+      "sha256": "8bc9a03324ae8cdaf447a0c04e461c07559609b027d73cb727934d11472f0f30",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-inventory-commands.js",
+        "game/src/hub/game.bag.token-craft.js"
+      ],
+      "imports": [],
+      "exports": [
+        "planBagTokenCraft"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "lines": 26,
+      "bytes": 2581,
+      "sha256": "bfbefcf92562c5864902e3901cfe18a09aa79ff0e0c285850b62576f34baf2c5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/preparation.view.js"
+      ],
+      "imports": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "exports": [
+        "getSources"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/bag-use-compatibility.js",
+      "lines": 25,
+      "bytes": 1797,
+      "sha256": "3fb692c45d86084f60d7f3fae79e4b78c73b785088b6b476f53a8f606ba5bad2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/bag-legacy-use.js",
+        "game/src/hub/game.bag.rules.js"
+      ],
+      "imports": [
+        "game/src/cards/card-legacy-battle-policy.js"
+      ],
+      "exports": [
+        "isBattleOnlyBagCard",
+        "isLegacyDiscoveryToken",
+        "isLegacyRestorePreviewCard",
+        "bagUseCompatibility",
+        "grantsApolloBonus"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/runtime-trace-panel.local.js",
+      "lines": 24,
+      "bytes": 1030,
+      "sha256": "49e06eeae73b04ebb64deb8e08e93ed8f46c787d58c7ecb16bf2ac0dfe444ec3",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/runtime-trace.local.js",
+        "game/src/ui/overlay.js"
+      ],
+      "imports": [],
+      "exports": [
+        "registerRuntimeTracePanel",
+        "syncRuntimeTracePanel",
+        "getOverlayRuntimeTracePanel"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/runtime-trace-stages.local.js",
+      "lines": 24,
+      "bytes": 1047,
+      "sha256": "987f709e1f51dd9d0023e4aface0e5e390850e08a1ac9b5af2dac6bc6a481d4e",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/view/battle.secondary-overlay.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/core/runtime-trace.local.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/menu-settings.js",
+        "game/src/ui/page-visual-ready.js"
+      ],
+      "imports": [],
+      "exports": [
+        "RUNTIME_STAGES",
+        "connectRuntimeStages",
+        "captureRuntimeStageContext",
+        "withRuntimeStageContext",
+        "beginRuntimeStage"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "lines": 23,
+      "bytes": 3995,
+      "sha256": "bb5db39d25dd631920a3e85141ebc2f1fcf500e071a20a1c03942c939c9831d2",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/hub.visuals.js",
+        "game/src/ui/home-linked-interactions.js"
+      ],
+      "exports": [
+        "selectFacility",
+        "facilitiesHTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "lines": 22,
+      "bytes": 1195,
+      "sha256": "19882d112172c606cabcc23a6b522f2103717cb283233d7a7344bf1b1ebdd283",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/core/art.js",
+        "game/src/game.boot.js",
+        "game/src/run/game.run.data.js"
+      ],
+      "imports": [],
+      "exports": [
+        "PERFORMANCE_BUDGETS",
+        "STARTUP_SCENE_KEYS"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "lines": 22,
+      "bytes": 1130,
+      "sha256": "eb8e15901830011d94eaa98ff647daa6f2435336b80ab01d976140cf936131b8",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/agent/agent.js",
+        "game/src/audio/sound.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/core/battle.default-context.js",
+        "game/src/battle/effects/effect-verbs.js",
+        "game/src/battle/runes.js",
+        "game/src/battle/view/battle.frames.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/art.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/core/input.js",
+        "game/src/core/mapData.js",
+        "game/src/core/motion.js",
+        "game/src/core/notes.js",
+        "game/src/core/random.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.fx.js",
+        "game/src/core/rules.js",
+        "game/src/e2.snapshot.qa.js",
+        "game/src/hub/base.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/hub/game.store.js",
+        "game/src/run/chests.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/lab.ending.js",
+        "game/src/ui/character-idle.js",
+        "game/src/ui/term-tips.runtime.js",
+        "game/src/ui/ui-scale.js"
+      ],
+      "imports": [],
+      "exports": [
+        "sdtDefine"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "lines": 22,
+      "bytes": 4634,
+      "sha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.facilities.js",
+        "game/src/hub/hub.materials.js",
+        "game/src/hub/hub.personnel.js"
+      ],
+      "imports": [
+        "game/src/core/asset-url.js"
+      ],
+      "exports": [
+        "baseIcon",
+        "partnerPortrait",
+        "facilityIllustration"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "lines": 18,
+      "bytes": 770,
+      "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js",
+        "game/src/ui/card-zoom-content.js"
+      ],
+      "imports": [],
+      "exports": [
+        "photoMountFor"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/receipt-retention.js",
+      "lines": 16,
+      "bytes": 935,
+      "sha256": "346fa6acbecd1f8296263809285ae11e3b4a79163b2d45c6c348ffa2e4c3d606",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/departure-persistence.js",
+        "game/src/hub/recovery.commands.js"
+      ],
+      "imports": [],
+      "exports": [
+        "retainRunReceipts"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/random-streams.js",
+      "lines": 15,
+      "bytes": 773,
+      "sha256": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/agent/agent.replay-state.js",
+        "game/src/agent/agent.replay.runtime.js",
+        "game/src/core/random-service.js"
+      ],
+      "imports": [],
+      "exports": [
+        "RANDOM_STREAM_VERSION",
+        "LEGACY_RANDOM_STREAM_VERSION",
+        "NON_RULE_RANDOM_STREAMS",
+        "randomStreamKey",
+        "rulesRandomSnapshot"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "lines": 15,
+      "bytes": 1025,
+      "sha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/battle/view/battle.layers.js",
+        "game/src/battle/view/battle.vfx.js",
+        "game/src/battle/view/battle.view.js",
+        "game/src/core/performance-settings.js",
+        "game/src/game.boot.js",
+        "game/src/ui/end-turn-hold.js",
+        "game/src/ui/game.menu.js",
+        "game/src/ui/hud.js",
+        "game/src/ui/menu-settings.js",
+        "game/src/ui/title-wallpaper.js"
+      ],
+      "imports": [],
+      "exports": [
+        "storeGet",
+        "storeSet"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/collection-conversion-view.js",
+      "lines": 15,
+      "bytes": 1379,
+      "sha256": "fab4442d5ce15457c8ed7e113734333c054dfef33d5314a4f1efb600374282e3",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.pages.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "exports": [
+        "conversionSignature",
+        "collectionConversionHTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-catalog-cache.js",
+      "lines": 14,
+      "bytes": 464,
+      "sha256": "45cb473fc2782137374c8c9caa2a16f85c7a5890d0b06d153f3c9281acac82a9",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.cardslib.page.js"
+      ],
+      "imports": [],
+      "exports": [
+        "createPhotoCatalogCache"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.home-icons-v10.js",
+      "lines": 13,
+      "bytes": 1082,
+      "sha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.home-v3.js",
+        "game/src/hub/hub.navigation-v7.js"
+      ],
+      "imports": [],
+      "exports": [
+        "baseHomeIconV10"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "lines": 12,
+      "bytes": 762,
+      "sha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.scenes.js"
+      ],
+      "imports": [],
+      "exports": [
+        "setBagReturnHook",
+        "takeBagReturnHook"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.navigation-v7.js",
+      "lines": 12,
+      "bytes": 1018,
+      "sha256": "cf765d6e69039d5a1e48d90c8282894cc6b2e34ecd65ce79a59756beba4af3e3",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/ui/base-design-preview-v7.js"
+      ],
+      "imports": [
+        "game/src/core/shared.js",
+        "game/src/hub/hub.home-icons-v10.js"
+      ],
+      "exports": [
+        "baseNavigationV7HTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/command-errors.js",
+      "lines": 11,
+      "bytes": 542,
+      "sha256": "d48b188f48493043cfdf14d6c3f15472787ec2c990fe7cf7354448e5eb199da8",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/home/home.presenter.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [],
+      "exports": [
+        "homeErrorMessage"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "lines": 11,
+      "bytes": 941,
+      "sha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.runtime.js",
+        "game/src/hub/hub.trade-shop-v5.js",
+        "game/src/ui/base-design-preview-v7.js"
+      ],
+      "imports": [
+        "game/src/hub/hub.visuals.js"
+      ],
+      "exports": [
+        "resourceValueHTML",
+        "resourceStripHTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/core/run-checkpoint.js",
+      "lines": 7,
+      "bytes": 389,
+      "sha256": "95a76419654f9fe299af1389c23ef16efdaeba1253035fbb97d9e920bc1cdab8",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/run/chests.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/event-lifecycle.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.events.js",
+        "game/src/run/game.run.resources.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/run/shop-commands.js",
+        "game/src/run/shop-commission.js",
+        "game/src/ui/event-dice.js"
+      ],
+      "imports": [],
+      "exports": [
+        "saveRunCheckpoint"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "lines": 7,
+      "bytes": 284,
+      "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.js"
+      ],
+      "imports": [],
+      "exports": [
+        "deployPick",
+        "replaceDeployPick"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "lines": 7,
+      "bytes": 619,
+      "sha256": "8f0bd3e9a736841bca9623fda2a9e0c4ed8045cbb482523e093c0fe3d7d737e5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.hub.depart.js",
+        "game/src/hub/game.hub.home-scene.js",
+        "game/src/hub/game.hub.pages.js",
+        "game/src/hub/game.hub.preparation-ports.js",
+        "game/src/hub/game.hub.runtime.js"
+      ],
+      "imports": [],
+      "exports": [
+        "slots",
+        "homeRequestId"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/stash-sale-price.js",
+      "lines": 7,
+      "bytes": 386,
+      "sha256": "2ba63a9a490bdef064804821fc307c120eb294c8208edb6b651b018b3ce0f1fa",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js",
+        "game/src/hub/hub.trade-shop-v5.js"
+      ],
+      "imports": [],
+      "exports": [
+        "stashSalePrice"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/collection-protection.js",
+      "lines": 5,
+      "bytes": 259,
+      "sha256": "3c1fc2d49c87a920328ce67acd5789aaa0078a04a854a1ffd384342da15213a4",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/base.js",
+        "game/src/hub/collection-conversion.js",
+        "game/src/hub/game.hub.pages.js"
+      ],
+      "imports": [],
+      "exports": [
+        "isCollectionProtected"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "lines": 5,
+      "bytes": 514,
+      "sha256": "cb117388a75f9e47d9803da31be7912dae443c586abbd6dcec096491061c6cf5",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.bag.settle.js",
+        "game/src/run/chests.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.scenes.js"
+      ],
+      "imports": [],
+      "exports": [
+        "bagSlots"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/hub.warehouse-categories-v7.js",
+      "lines": 5,
+      "bytes": 543,
+      "sha256": "209aebf8e4d64faa0b234614a4725f17d5dcbd2121ff9b4e720f4972065a6b2d",
+      "reachableFromMain": true,
+      "parents": [
+        "game/src/hub/hub.warehouse.js",
+        "game/src/ui/base-preview-rooms-v7.js"
+      ],
+      "imports": [],
+      "exports": [
+        "warehouseCategoriesV7HTML"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "lines": 2,
+      "bytes": 133,
+      "sha256": "18a680c5829b730d75a9a1989fe11963205e5f4a51824387ffc72f4d43f523bc",
+      "reachableFromMain": false,
+      "parents": [],
+      "imports": [
+        "game/src/hub/bag-token-craft-plan.js"
+      ],
+      "exports": [
+        "planBagTokenCraft"
+      ],
+      "presentationSignals": [],
+      "largeFunctions": []
+    }
+  ]
+}

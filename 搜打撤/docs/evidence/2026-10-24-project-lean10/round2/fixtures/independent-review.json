@@ -1,0 +1,80 @@
+{
+  "status": "passed-no-regression-found-source-unmodified",
+  "reviewer": "reduction_audit independent second review",
+  "scope": {
+    "plan": "docs/evidence/2026-10-24-project-lean10/round2/fixtures/plan.json",
+    "implementationPlan": "node_modules/.cache/project-lean10-1024/round2/tests/implementation-plan.json",
+    "helper": "tests/helpers/environment-fixtures.js",
+    "families": 28,
+    "consumerFiles": 201,
+    "replacementInstances": 383
+  },
+  "frozenSourceIntegrity": {
+    "beforeDirectory": "node_modules/.cache/project-lean10-1024/round2/tests/before",
+    "inputManifestFilesChecked": 201,
+    "beforeSha256Mismatches": [],
+    "appliedManifest": "node_modules/.cache/project-lean10-1024/round2/tests/applied.json",
+    "currentOutputsChecked": 202,
+    "currentOutputSha256Mismatches": []
+  },
+  "assertionAndRegistrationPreservation": {
+    "method": "Parse every frozen/current consumer with Acorn; compare ordered canonical AST for expect-rooted CallExpression nodes and test/describe/hook registration signatures, excluding positions and literal raw spelling. These are AST node counts, not executed test-case counts.",
+    "expectCallNodesBefore": 19507,
+    "expectCallNodesAfter": 19507,
+    "expectAstDifferenceFiles": [],
+    "registrationAndHookCallNodesBefore": 2629,
+    "registrationAndHookCallNodesAfter": 2629,
+    "registrationAstDifferenceFiles": []
+  },
+  "propertyFragmentDifferential": {
+    "method": "For every selected property fragment, evaluate the frozen literal and the actual replacement spread in separate fresh Node VM contexts with equivalent instrumented holder, DOM and vi fixtures. Compare ordered own fields, ordinary descriptors, object prototype kind, function name/length/own-prototype/function kind/own metadata descriptors, construction-time holder and DOM reads, vi.fn call order, external identity labels, and internal identity relationships across a second construction.",
+    "families": 24,
+    "instances": 353,
+    "shapeTraceOrFreshnessDifferences": []
+  },
+  "remainingStatementFamiliesReviewed": [
+    "resetEventGame",
+    "bindEventRoot",
+    "startRuleBattle (same-file helper, preserving session receiver and call order)",
+    "mountBattleRoot"
+  ],
+  "lazyReaderDifferential": {
+    "method": "After old/new construction, replace holder.game/cards or UI/scenes/drawn and invoke the exposed callback or previously registered listener. Compare the old and new observable results, including deliberately eager game/drop identities and deliberately live holder/module readers.",
+    "families": [
+      "eventCardMocks",
+      "eventUiMocks",
+      "chestMocks",
+      "resetEventGame",
+      "bindEventRoot"
+    ],
+    "checks": 5,
+    "differences": []
+  },
+  "functionNameConcern": {
+    "riskChecked": "An inline property arrow moved directly to a call argument can lose its inferred property name.",
+    "actualBattleViewMocksSites": 16,
+    "originalRichFields": "All 16 are existing shorthand rich identifiers; none is a property inline arrow.",
+    "currentFirstArguments": "All 16 are the same rich Identifier.",
+    "dynamicMethod": "Read each actual frozen rich declaration, evaluate its old fragment and current replacement with the current helper, and compare strict rich identity and metadata.",
+    "sameOriginalAndCurrentRichIdentity": 16,
+    "observedNames": ["rich"],
+    "observedLengths": [1],
+    "allParameterizedFunctionArguments": 38,
+    "allArePlannedCaptureReaders": true,
+    "unexpectedInlineFunctionArguments": []
+  },
+  "vitestImportOrder": {
+    "helperCallsChecked": 383,
+    "helperCallsInsideViHoisted": [],
+    "consumerHelperImportNotFirstAmongStaticImports": [],
+    "helperTopLevelSideEffects": [],
+    "helperThisOrSuperReferences": [],
+    "conclusion": "The helper contains only function declarations and has no imports or top-level state reads. Consumers import it before their other static imports; the selected helper calls are not executed by vi.hoisted. No hoist/import-order regression was found."
+  },
+  "sourceFilesChangedByReviewer": false,
+  "assertionsChangedByReviewer": false,
+  "integrationSuiteRerunByReviewer": false,
+  "buildRun": false,
+  "additionalCandidateSearch": false,
+  "unresolvedFindings": []
+}

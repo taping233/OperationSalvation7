@@ -1,0 +1,19 @@
+{
+  "method": "70-token windows, normalize local identifier spellings while retaining property and object-key names/literals; candidate generation only",
+  "scanned": 77,
+  "candidates": [
+    {
+      "tokenLength": 106,
+      "a": {
+        "file": "game/src/run/game.run.dev-loader.js",
+        "line": 40,
+        "index": 224
+      },
+      "b": {
+        "file": "game/src/run/game.run.dev.js",
+        "line": 100,
+        "index": 953
+      }
+    }
+  ]
+}

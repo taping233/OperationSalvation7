@@ -1,0 +1,42 @@
+{
+  "file": "scripts/runtime-asset-redundancy-review.mjs",
+  "added": 22,
+  "deleted": 30,
+  "netLinesRemoved": 8,
+  "beforeBytes": 35680,
+  "afterBytes": 33799,
+  "savedBytes": 1881,
+  "beforeSha256": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83",
+  "ownAfterSha256": "3d16b41f173ec4640dc93f6d1f39ac2d7033e4b42b5296b24ff40b3843cb8db4",
+  "observedSharedSourceSha256": "0a45bd61b688dc9b9fde685fdcacac46d66d6cd59c492ea5963212c99e7a4901",
+  "ownPatchOnly": true,
+  "concurrentFingerprintChangesExcluded": [
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "before": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+      "current": "ffaa4754f7e865539119332bc55ae8843c3100f558ea1c1ccc03db339e09a859"
+    },
+    {
+      "file": "game/src/ui/card-zoom-controller.js",
+      "before": "8e075bfe29e06c5077b648a92d104e737bd3471ea8615dfe0e965df7b2ee346c",
+      "current": "d479b379a74e26534dba289b13e2d565dae25a74f0ec7ded11a0df72af6d3de8"
+    }
+  ],
+  "concurrentOwner": "WF-frontend-six-residuals-clean-1023",
+  "concurrentOwnerRegistry": "docs/PARALLEL-REGISTRY.md:41",
+  "expandedReviewSha256": "88f7b5124630fdd39cc9fe1bec92d152377080553c0820a9b14550d6ce84a4d0",
+  "candidateCount": 286,
+  "verification": {
+    "staticASTDataOrder": "passed",
+    "original90TemplateByteEquality": "passed",
+    "protectedMetadataWithinOwnPatch": "unchanged",
+    "sharedSourceVersusOwnAfter": "exactly the two reported external opaqueConsumers fingerprints",
+    "sourceSyntax": "passed",
+    "scopedDiffWhitespace": "passed",
+    "tests": "not run per instruction",
+    "build": "not run",
+    "browser": "not run",
+    "commit": "not created",
+    "inspectedTargetModuleExecution": "none"
+  }
+}

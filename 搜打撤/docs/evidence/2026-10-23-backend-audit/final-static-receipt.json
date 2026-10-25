@@ -1,0 +1,51 @@
+{
+  "kind": "static-only-closeout",
+  "at": "2026-10-23T14:34:27.935Z",
+  "files": [
+    {
+      "file": "game/src/hub/game.storage.js",
+      "sha256": "c98f8370e78b89b664e79e30ee2432b4ade377c8bb8d312ebd0658cf69d7b93e"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "5cf7047975ea50351f1f9716b64699a4b638746ddcb9874420c6939e7f772b7b"
+    },
+    {
+      "file": "game/src/run/game-session-restoration.js",
+      "sha256": "69ba1e1d26199d0b067b9b09c7b348753386235077fce6b49a7cc3eb17431665"
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "sha256": "b68e24b447c403512344c9ebebf505a1b242d285af17cffa84d42eaa756a3b73"
+    },
+    {
+      "file": "scripts/impact-query.mjs",
+      "sha256": "f744faa56f8f2a1fbeeee1253234119026a81baf4a7e52b2bf2d02743e89c3fa"
+    },
+    {
+      "file": "scripts/esm-convert.mjs",
+      "sha256": "eaaec79a958cfb408abf5dca943af1d1f26af2ec0c583b3c22230670a7f1da9b"
+    },
+    {
+      "file": "scripts/workflow-status.mjs",
+      "sha256": "d2d9bcee8e22da6a0a6e4e8a1b452f2980ea21f2e5085c5640fac23982eb2a1b"
+    }
+  ],
+  "syntaxAndDiff": "All seven files passed syntax parsing and scoped diff checks, recorded by the owning agent or root; no test/build/browser run.",
+  "sources": [
+    "storage.md",
+    "battle.md",
+    "run-agent.md",
+    "core-tools-static.json"
+  ],
+  "bugs": {
+    "confirmed": 6,
+    "fixed": 0
+  },
+  "codeFilesDeleted": 0,
+  "limitations": [
+    "Static evidence only; not exhaustive.",
+    "Existing unrelated uncommitted changes preserved.",
+    "Knip result unavailable and excluded."
+  ]
+}

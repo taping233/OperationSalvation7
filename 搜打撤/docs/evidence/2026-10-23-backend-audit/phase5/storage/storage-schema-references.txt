@@ -1,0 +1,23 @@
+game/src/hub\base-state.js:5:export function createBaseState() {
+game/src/hub\base-state.js:74:export function normalizeBaseState(raw) {
+game/src/hub\base-state.js:75:  const defaults = createBaseState();
+game/src/hub\departure-persistence.js:1:import { createRecoverablePair } from './recoverable-pair.js';
+game/src/hub\departure-persistence.js:11:export function validateDepartureJournal(journal, baseVersion, runVersion) {
+game/src/hub\departure-persistence.js:40:  const pair = createRecoverablePair({
+game/src/hub\departure-persistence.js:42:    validateJournal: journal => validateDepartureJournal(journal, baseApi.BASE_VERSION, runStore.SAVE_VERSION),
+game/src/hub\base.js:2:import { createBaseState as def, normalizeBaseState as adopt } from './base-state.js';
+game/src/hub\base.js:7:import { createVersionedSlotReader } from './versioned-slot-reader.js';
+game/src/hub\base.js:105:  const reader = createVersionedSlotReader({
+game/src/hub\game.storage.js:2:import { createVersionedSlotReader } from './versioned-slot-reader.js';
+game/src/hub\game.storage.js:66:const reader = createVersionedSlotReader({
+game/src/hub\recoverable-pair.js:51:export function createRecoverablePair(options) {
+game/src/hub\recovery.commands.js:3:import { createRecoverablePair } from './recoverable-pair.js';
+game/src/hub\recovery.commands.js:4:import { DEPARTURE_COMMAND, validateDepartureJournal } from './departure-persistence.js';
+game/src/hub\recovery.commands.js:11:function parseVersioned(raw, maxVersion, label) {
+game/src/hub\recovery.commands.js:28:    if (journal.command === DEPARTURE_COMMAND) return validateDepartureJournal(journal, baseVersion, runVersion);
+game/src/hub\recovery.commands.js:31:      return parseVersioned(raw, maxVersion, label);
+game/src/hub\recovery.commands.js:66:  const pair = createRecoverablePair({
+game/src/hub\recovery.commands.js:112:      const parsed = parseVersioned(raw, baseVersion, '基地存档');
+game/src/hub\recovery.commands.js:139:      const baseParsed = parseVersioned(baseRaw, baseVersion, '基地存档');
+game/src/hub\recovery.commands.js:140:      const runParsed = parseVersioned(runRaw, runVersion, '对局存档');
+game/src/hub\versioned-slot-reader.js:17:export function createVersionedSlotReader({

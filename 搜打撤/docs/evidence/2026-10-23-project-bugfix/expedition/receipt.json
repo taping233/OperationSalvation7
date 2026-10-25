@@ -1,0 +1,34 @@
+[
+  {
+    "path": "game/src/run/game.run.altar.js",
+    "sha256": "7C700AC7249B8B071207B2CD202BB02CB1614BFE0ACB165CEBC251DBD38D5F0B"
+  },
+  {
+    "path": "game/src/run/game.run.resources.js",
+    "sha256": "DB46D83A19F5F593153966E2BF128880177E00BC000C9BC14375F2C82EB74633"
+  },
+  {
+    "path": "game/src/run/node-reward-state.js",
+    "sha256": "401AF76CB63317C602E803A40977B042EE89EE1645A608A67CF9F117BBE1F99B"
+  },
+  {
+    "path": "game/src/run/game.run.shop.js",
+    "sha256": "CABC3C48DAE46556902026A9C67B2C5E554CCD96133C254B3182CF34BEAAEC34"
+  },
+  {
+    "path": "game/src/run/shop-commands.js",
+    "sha256": "3DA4C0BC334F1279E93A81674CFB4269AA448BD33665C18675FB6FB80D8F0E70"
+  },
+  {
+    "path": "game/src/run/run-domain-commands.types.d.ts",
+    "sha256": "08CBD4F7326DA4BF01817A8D4178553BE85EF192940563BC0055948CC5B1C46F"
+  },
+  {
+    "path": "tests/project-bugfix-expedition-1023.test.js",
+    "sha256": "5C7D3C9A7A150588D3AF48900A17FFE114D70E27CCCD3585797838389D261C21"
+  },
+  {
+    "path": "tests/project-bugfix-expedition-shop-1023.test.js",
+    "sha256": "E9F0D797801F6BD0831F4E4F4ABCF3F3ACBB7F626BEBAF6F06F9A09024F3F8B6"
+  }
+]

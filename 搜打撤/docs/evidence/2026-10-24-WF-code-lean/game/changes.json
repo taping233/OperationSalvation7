@@ -1,0 +1,69 @@
+{
+  "files": [
+    {
+      "path": "game/src/hub/bag-container-pages.js",
+      "before": {
+        "bytes": 9272,
+        "normalizedBytes": 9097,
+        "lines": 175,
+        "sha256": "df03fba6900798b5d10360c6bb227e970a40bead872e8fd82db91420543be864"
+      },
+      "after": {
+        "bytes": 6057,
+        "normalizedBytes": 5960,
+        "lines": 97,
+        "sha256": "d1a50072beb39e11ab3df71a8f509e3767258adb9416ac511b25d6421f07d9fd"
+      },
+      "removedLines": 78,
+      "removedBytes": 3215,
+      "removedNormalizedBytes": 3137
+    },
+    {
+      "path": "game/src/ui/achievement-motion.js",
+      "before": {
+        "bytes": 10502,
+        "normalizedBytes": 10317,
+        "lines": 185,
+        "sha256": "c8d86de5c594387a56215e3f13d9203e180b448d41e5ab670caf242f0ed022e7"
+      },
+      "after": {
+        "bytes": 10380,
+        "normalizedBytes": 10198,
+        "lines": 182,
+        "sha256": "73d6c7763cf9f0e9d7dcea624602a9360dce4b8906709b3fea143d624e77f27b"
+      },
+      "removedLines": 3,
+      "removedBytes": 122,
+      "removedNormalizedBytes": 119
+    },
+    {
+      "path": "game/src/ui/character-view-motion.js",
+      "before": {
+        "bytes": 7849,
+        "normalizedBytes": 7704,
+        "lines": 145,
+        "sha256": "2282315e897c56ae790baf08093af42d9c3c3516cf6b9d662024f6d96867b05e"
+      },
+      "after": {
+        "bytes": 7715,
+        "normalizedBytes": 7573,
+        "lines": 142,
+        "sha256": "cf2af93b41e1efef7822dbf4fa6aef1876ba8abfece956270e8756af25d48627"
+      },
+      "removedLines": 3,
+      "removedBytes": 134,
+      "removedNormalizedBytes": 131
+    }
+  ],
+  "totals": {
+    "removedLines": 84,
+    "removedBytes": 3471,
+    "removedNormalizedBytes": 3387
+  },
+  "checks": {
+    "syntaxAndESLint": "3 files passed",
+    "containerTests": "146 passed; 2 pre-existing failures reproduced against before source",
+    "motionTests": "18 passed",
+    "differential": "576 container configurations; identical markup, inventory, messages, sounds, save calls and lifecycle guards"
+  }
+}

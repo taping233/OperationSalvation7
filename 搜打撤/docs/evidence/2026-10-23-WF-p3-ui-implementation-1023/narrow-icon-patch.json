@@ -1,0 +1,17 @@
+{
+  "coordination": "Current frontend owner session archived; latest completed report inspected; no active writer found for these two files. Preserve current logic; 3 literal presentation parameters only. Old independent /tmp candidate is not overwritten.",
+  "changes": [
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "tokens": 1,
+      "before": "7337167f3380e85b4e21e018e9b2f7fb0817c6e9f85d8832e17dcf9ce7720e22",
+      "after": "f14a7ac7170da6815264b2e64c04a3977fd751b0db0a3f02c9de0e9319a1c7db"
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "tokens": 2,
+      "before": "7b74cd8785986a97a85367b3885479b82149fcc0142d6283fd2401b4a00f5fce",
+      "after": "40f450766882053c9ec415987776e311c5fbeed48ad1d9ec523e97a6ba1d47a7"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "asset": "cards/martial-tt7-swordimmortal.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e65-684d-7800-845e-5943cd826978/exec-493e4569-c195-4529-b7c4-ee14261897d8.png",
+      "revision": "sword-seat-fix-20261024",
+      "prompt": "Use case: precise-object-edit. Image 1 is the edit target, the current square Sword Immortal card illustration. Correct ONLY the large flying sword beneath the seated woman. It currently reads as a blunt rectangular metal rail with inconsistent layered edges. Redraw it as ONE structurally coherent broad Chinese straight sword (jian): a single flat continuous steel blade supporting her sitting pose and palms, clearly readable central ridge and two clean straight tapering cutting edges, correct unified perspective along the existing diagonal from upper left to lower right. The blade extends toward the left edge; the rightmost section near the lower-right edge leads to a small simple crossguard and short aligned grip, partially cropped naturally. Keep the sword flat and solid, not a box beam, scabbard, double blade, split blade, or bent rail. Preserve the existing overall diagonal, seat height, contacts with palms and dress; the sword must remain beneath her, never intersect the body. Match existing steel colors and illustration rendering. Keep the woman's face, expression, sunglasses, white ponytail, blue bow and black flower, black dress, skin, exact seated pose, body proportions, crop, background blue and cream color shapes, lighting and entire composition unchanged as closely as possible. This is a small object repair, no new scene, no redesign of the person, no text or border.",
+      "references": [
+        "game/assets/cards/martial-tt7-swordimmortal.webp"
+      ]
+    }
+  ]
+}

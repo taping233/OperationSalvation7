@@ -1,0 +1,23 @@
+{
+  "docsCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 753,
+    "findings": []
+  },
+  "selectedFiles": [
+    "docs/production/design/STORY-PART-ONE.md",
+    "docs/character-bible/README.md",
+    "docs/character-bible/wu.md",
+    "docs/character-bible/xingyue.md",
+    "docs/character-bible/baita.md",
+    "docs/character-bible/heixiang.md",
+    "docs/character-bible/changwuyu.md",
+    "docs/design.md"
+  ],
+  "selectedFileLinks": 59,
+  "selectedFileLinksReadable": true,
+  "diffWhitespaceCheck": "passed",
+  "runtimeChanged": false,
+  "gameTestsRun": false,
+  "submitted": false
+}

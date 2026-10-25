@@ -1,0 +1,46 @@
+{
+  "kind": "static-only",
+  "at": "2026-10-23T14:30:22.675Z",
+  "syntax": [
+    {
+      "file": "scripts/impact-query.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "file": "scripts/esm-convert.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "file": "scripts/workflow-status.mjs",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "lint": [
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\scripts\\impact-query.mjs",
+      "errorCount": 0,
+      "warningCount": 0,
+      "messages": []
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\scripts\\esm-convert.mjs",
+      "errorCount": 0,
+      "warningCount": 0,
+      "messages": []
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\scripts\\workflow-status.mjs",
+      "errorCount": 0,
+      "warningCount": 0,
+      "messages": []
+    }
+  ],
+  "sha256": {
+    "scripts/impact-query.mjs": "f744faa56f8f2a1fbeeee1253234119026a81baf4a7e52b2bf2d02743e89c3fa",
+    "scripts/esm-convert.mjs": "eaaec79a958cfb408abf5dca943af1d1f26af2ec0c583b3c22230670a7f1da9b",
+    "scripts/workflow-status.mjs": "d2d9bcee8e22da6a0a6e4e8a1b452f2980ea21f2e5085c5640fac23982eb2a1b"
+  }
+}

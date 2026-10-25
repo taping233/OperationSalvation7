@@ -1,0 +1,11 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/battle-hand-layout.test.js (12 tests) 15ms
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  19:41:36
+   Duration  2.65s (transform 366ms, setup 0ms, collect 442ms, tests 15ms, environment 1.46s, prepare 199ms)
+

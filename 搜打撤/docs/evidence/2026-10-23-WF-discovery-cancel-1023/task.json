@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-discovery-cancel-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "修复发现选中及取消，移除卡牌词条浮层，解决装备与Buff重叠，并统一地图/战斗可点击顶栏；修复代码审查确认的现行错误",
+  "paths": [
+    "game/css/battle-equipment.css",
+    "game/css/discovery-selection.css",
+    "game/css/review-ui.css",
+    "game/index.html",
+    "game/src/README.md",
+    "game/src/battle/bag/battle.bag.domain.js",
+    "game/src/battle/battle.snapshot.types.d.ts",
+    "game/src/battle/core/battle.core-ports.types.d.ts",
+    "game/src/battle/core/battle.core.js",
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/core/battle.engine.js",
+    "game/src/battle/core/battle.exec-play.domain.js",
+    "game/src/battle/core/battle.resolution.domain.js",
+    "game/src/battle/core/battle.selection-flow.domain.js",
+    "game/src/battle/effects/battle.acquire-operation.domain.js",
+    "game/src/battle/effects/battle.discover-flow.js",
+    "game/src/battle/effects/battle.discover-preview.js",
+    "game/src/battle/effects/battle.discover-state.js",
+    "game/src/battle/effects/card-semantic-operations.js",
+    "game/src/battle/view/battle.decision-shell.js",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.presentation-ready.js",
+    "game/src/hub/bag-legacy-use.js",
+    "game/src/hub/game.bag.js",
+    "game/src/run/game-session-persistence.js",
+    "game/src/ui/battle-hud-info.js",
+    "game/src/ui/card-tip-groups.js",
+    "game/src/ui/card-zoom-content.js",
+    "game/src/ui/discovery-selection.js",
+    "game/src/ui/game-map-controls.js",
+    "game/src/ui/game-title-controller.js",
+    "game/src/ui/hud.js",
+    "game/src/ui/menu-data.js",
+    "game/src/ui/menu-feedback.js",
+    "game/src/ui/menu-settings.js",
+    "game/src/ui/run-top-bar.css",
+    "game/src/ui/run-top-bar.js",
+    "game/src/ui/screen-owner.js",
+    "game/src/ui/term-tip-policy.js",
+    "game/src/ui/term-tips.js",
+    "game/src/ui/term-tips.runtime.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/bag-use-compatibility.test.js",
+    "tests/battle-discovery-cancellation.test.js",
+    "tests/card-term-passive.test.js",
+    "tests/discovery-selection.test.js",
+    "tests/game-session-slices.test.js",
+    "tests/menu-return-chain.test.js",
+    "tests/public-controls-equipment.test.js",
+    "tests/run-top-bar-actions.test.js",
+    "tests/ui-review-remediation.test.js"
+  ],
+  "doneWhen": [
+    "发现选中视觉明确，取消接真实业务退出，说明付款前取消与已结算收益放弃边界",
+    "卡牌词条浮层移除；装备与Buff分区；地图战斗共用左操作/中人物血量/右资源的真实点击顶栏",
+    "修复已确认代码问题，按老板先改齐汇报要求保留未验证状态"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "授权实现已完成并经代码交叉阅读；共享顶栏点击端口、发现取消领域和卡牌提示移除已接线",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "测试、类型、lint、构建、资源审计和实页均未运行，状态为待用户验收",
+      "result": "unverified"
+    }
+  ],
+  "unverified": [
+    "尚未运行本轮及前轮整合后的统一全套验证与当前窗口实页；实现不等于视觉或行为验收通过",
+    "取消成本边界：纯结构化发现/C/锦囊首次确认前取消不付款；旧文本/混合/条件/自动/已确认的后续发现结束当前未确认收益，保留已结算成本"
+  ],
+  "updatedAt": "2026-10-23T14:13:38.367Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

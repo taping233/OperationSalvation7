@@ -1,0 +1,232 @@
+/* ═══════════════════════════════════════════════════════════════════
+   T4 全界面开合成对动画（2026-10-04 · 美术UI升级计划 D9-T4 / 附录 B 五档）
+   计划：docs/evidence/2026-10-04-minako-ui-benchmark/美术UI升级计划.md
+   装载：src/ui/motion-transitions.js 运行时注入 <link>，恒位于 index.html
+   全部静态 <link>（winter.css 等）之后生效——后载同级特异性即胜。
+   ── 红线自查 ──
+   · 缓动只用 :root 既有五 token（base.css:69-73）：entrance/pop/spring/fly/float；
+   · 属性只 transform/opacity；零 background-position / 逐帧重绘；零 filter 动画；
+   · 战斗域五类弹层 .18s 开/.14s 关、位移 ≤4px；零常驻循环动画；
+   · prefers-reduced-motion：winter.css:35 全局 animation/transition:none!important
+     整体关闭本文件全部普通声明；仅下方两处与 winter 关闭链对打的 !important
+     规则另配同款 reduce 分支（不是绕过，是配合全局开关补齐同强度覆盖）；
+   · winter 定版五件（回合条透明/名牌透明/战场状态条隐藏/发现磨砂/药水纸白底）
+     零接触；对 winter pgOut/bag 关 !important 的覆盖仅限动画参数（语义不变）。
+   ─────────────────────────────────────────────────────────────────── */
+
+/* —— 档 2 标准弹层卡：开 translateY(22px)+scale(.988) 0.3s --ease-entrance ——
+   排除：.page/.bag-page（全屏档）、.discover/.battle（战斗域：快档弹层/主界面
+   保持既有 .22s）、.scene（场景页归 T3，级联自管）、.swap（已开切换既有动画）、
+   以及按内容拉走的战斗快档（bt-settings/bt-gy-list）与确认小窗（glass-panel/
+   离开对局）——:not 链保证标准档只兜真正的「无标记普通弹层」底，
+   专属档规则不被本档特异性压制。实页播 WAAPI overlayIn（core/motion.js
+   y18px/0.28s 同曲线盖写，4px/20ms 偏差记 deferred，经主控拍板保留）；
+   本条为其 CSS 兜底与 reduce 外环境的参数定版。档 3 确认小窗（glass/leaveSave）
+   与档 5 战斗快档已在 overlay.js 排除 WAAPI，CSS 档参数实际生效、无盖写偏差。 */
+#overlay .card:not(.page):not(.bag-page):not(.discover):not(.battle):not(.scene):not(.swap):not(:has(.bt-settings)):not(:has(.bt-gy-list)):not(:has(.glass-panel)):not(:has([data-act="leaveSave"])) {
+  animation: t4CardIn .3s var(--ease-entrance);
+}
+@keyframes t4CardIn { from { opacity: 0; transform: translateY(22px) scale(.988); } }
+/* 战斗主界面卡复述原值（cardIn .22s，overlays.css:374），确保零变化；
+   曲线字面 .22,1,.36,1 与 --ease-entrance 同值，按 token 白名单引用 */
+#overlay .card.battle { animation: cardIn .22s var(--ease-entrance); }
+
+/* —— 档 2 标准弹层卡关：原位 → translateY(14px)+scale(.985)+淡出 0.2s ——
+   纯 CSS 挂 #overlay.closing 既有生命周期（overlay.js hideOverlay 加类、
+   240ms 后收场），开与关同源反向；排除链与开档一致。 */
+#overlay.closing .card:not(.page):not(.bag-page):not(.discover):not(.battle):not(.scene):not(.swap):not(:has(.bt-settings)):not(:has(.bt-gy-list)):not(:has(.glass-panel)):not(:has([data-act="leaveSave"])) {
+  animation: t4CardOut .2s var(--ease-fly) both;
+}
+@keyframes t4CardOut { to { opacity: 0; transform: translateY(14px) scale(.985); } }
+
+/* —— 档 1 全屏页（.card.page / .card.bag-page）：开 scale(.97)+淡入 0.3s ——
+   统一覆盖 winter pgIn(.38s y18 scale.988)/bagIn(.34s y26 scale.94) 的页面级开场
+   → 附录 B 全屏档；设置页（page-settings.css S4 setPanelIn）与选档页
+   （page-slot-select.css slotPanelIn）的 :has 页面级入场一并并入本档
+   （特异性同级靠后载胜；两页行级 stagger / 氛围动画零接触）。 */
+#overlay .card.page:not(.swap),
+#overlay .card.bag-page:not(.swap),
+#overlay .card.page:has(.pg.settings-page):not(.swap),
+#overlay .card.page:has(.slot-page):not(.swap) {
+  animation: t4PageIn .3s var(--ease-entrance) both;
+}
+@keyframes t4PageIn { from { opacity: 0; transform: scale(.97); } }
+
+/* —— 档 1 全屏页关：镜像 0.24s ——
+   对打 winter.css:1242 `#overlay.closing .card.page{animation:pgOut…!important}`
+   与 winter.css:1489 bag 关 !important：同强度 important、同特异性靠后载胜。
+   仅把参数升级为验收档（0.24s scale(.97) 镜像），「关闭淡出退场」语义不变；
+   照相馆关闭链（winter.css:1593 容器 !important）不在此列、未触碰。 */
+#overlay.closing .card.page,
+#overlay.closing .card.bag-page {
+  animation: t4PageOut .24s var(--ease-fly) both !important;
+}
+@keyframes t4PageOut { to { opacity: 0; transform: translateY(12px) scale(.995); } }
+/* 同强度 important 必须自配 reduce 分支，让 winter.css:35 全局开关能整体关闭 */
+@media (prefers-reduced-motion: reduce) {
+  #overlay.closing .card.page,
+  #overlay.closing .card.bag-page { animation: none !important; }
+}
+
+/* —— 档 5 战斗域五类弹层（硬约束域）：fade+4px 位移，开 .18s / 关 .14s ——
+   发现/选卡/choice 列表 = .card.discover（'discover' mode 仅战斗语境，已核实
+   page-battle-ui.css 头注）；墓地/牌库 = .card.room:has(.bt-gy-list)；
+   战斗设置 = .card.room:has(.bt-settings)（两类名全库仅 battle/ 域产出，已核实）。
+   页面容器级动画接管的前提是 WAAPI 不再盖写——overlay.js 已按快档排除。
+   .swap 变体：战斗内模式切换（battle↔discover 等）会挂 swap 类播 cardSwap
+   （0.28s y16px，超战斗 6px 红线）——同特异性后载胜，钉在快档参数上。 */
+#overlay .card.discover,
+#overlay .card.discover.swap,
+#overlay .card.room:has(.bt-gy-list),
+#overlay .card.room:has(.bt-settings),
+#overlay .card.room:has(.bt-gy-list).swap,
+#overlay .card.room:has(.bt-settings).swap {
+  animation: t4BattleIn .18s var(--ease-pop);
+}
+@keyframes t4BattleIn { from { opacity: 0; transform: translateY(4px); } }
+#overlay.closing .card.discover,
+#overlay.closing .card.room:has(.bt-gy-list),
+#overlay.closing .card.room:has(.bt-settings) {
+  animation: t4BattleOut .14s var(--ease-fly) both;
+}
+@keyframes t4BattleOut { to { opacity: 0; transform: translateY(4px); } }
+/* room-view 既有瞬隐口径（overlays.css:365，留言 #33 整屏淡出卡顿）对这几类轻弹层
+   让位：容器自身不播整屏淡出、不提前透明，只由卡片层播 .14s 反向动画，
+   到点（overlay.js 计时 160ms）同步收场——整屏逐帧重合成的性能口径保持。 */
+#overlay.room-view.closing:has(.bt-gy-list),
+#overlay.room-view.closing:has(.bt-settings),
+#overlay.room-view.closing:has(.glass-panel) { animation: none; opacity: 1; }
+/* 发现类关闭：容器暗纱随卡片同步 .14s（chest 宝箱仍走标准 0.22s——按内容类区分，
+   不按 pick-veil 共享类一刀切） */
+#overlay.closing:has(.card.discover) { animation-duration: .14s; }
+/* 药水说明浮出栏（battle.view.js 自绘提示，hidden 切换 display）：
+   开 .18s animation（display 切换即重播，全内核稳定）；
+   关 .14s 为渐进增强——transition 声明含 allow-discrete，支持的内核 display
+   延迟到 [hidden] 过渡结束后才 none（成对 ✓），旧内核整条 transition 无效、
+   退回 display:none 瞬隐现状（零回归）。改收口 JS 属地越线，不动 battle.view.js。 */
+#overlay .bt-potion-tip {
+  animation: t4BattleIn .18s var(--ease-pop);
+  transition: opacity .14s var(--ease-fly), transform .14s var(--ease-fly),
+    display .14s var(--ease-fly) allow-discrete;
+}
+#overlay .bt-potion-tip[hidden] { opacity: 0; transform: translateY(4px); }
+
+/* —— 档 3 确认小窗（fx-glass 玻璃确认 / 离开对局类）：fade+scale(.98) 0.22s 开 —— */
+/* 父卡停层防双动画叠加（winter.css:1441 已剥其底色），面板单层动 */
+#overlay.fx-glass .card { animation: none; }
+/* 覆盖 winter.css glassIn .3s → 确认档 0.22s（同特异性后载胜） */
+#overlay.fx-glass .glass-panel { animation: t4ConfirmIn .22s var(--ease-pop); }
+@keyframes t4ConfirmIn { from { opacity: 0; transform: scale(.98); } }
+#overlay.closing.fx-glass .glass-panel { animation: t4ConfirmOut .16s var(--ease-fly) both; }
+@keyframes t4ConfirmOut { to { opacity: 0; transform: scale(.98); } }
+/* 离开对局类：无 mode 标记的普通小确认卡，按其取消语义按钮锚定（game.menu.js
+   leaveSave/leaveAbandon/leaveCancel 三 act 同前缀族） */
+#overlay .card:has([data-act="leaveSave"]):not(.swap) { animation: t4ConfirmIn .22s var(--ease-pop); }
+#overlay.closing .card:has([data-act="leaveSave"]) { animation: t4ConfirmOut .16s var(--ease-fly) both; }
+
+/* —— 档 4 hub 页签切换：新页签内容 translateY(10px)+淡入 0.28s，旧内容即时让位 ——
+   挂钩零越线：page-in 类由 game.hub.js renderHub 既有 tabChanged 逻辑挂载，
+   本文件只把 page-hub.css:31 的 hubPageIn(.34s y12) 换参数为附录 B 页签档。 */
+#overlay #hubMain .hub-page.page-in { animation: t4TabIn .28s var(--ease-entrance); }
+@keyframes t4TabIn { from { opacity: 0; transform: translateY(10px); } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   页面转场三件套（2026-10-04 · 计划 D9 T1/T2/T3）+ D10 通讯演出
+   编排：src/ui/transitions-director.js（click 捕获 + MutationObserver，
+   零越线挂钩，不触碰 run/hub 流程文件）。
+   ── T2 失焦退场：一次性 blur(3px) 已融入上方全屏页档关闭 keyframes t4PageOut
+   （「整页切换的一次性 blur 退场」为红线明文例外，仅低频整页、非战斗域；
+   T2 规格 0.2s/scale(.985) 与 T4 全屏档 0.24s/scale(.97) 冲突，按
+   「同界面同档不混档」以 T4 定档为准，偏差记 deferred ──
+   ── T3 界面即过场：闸门盖住 flow-transition 的 room-view 瞬隐与 hub/整备/
+   地图链路切换，新面板展开复用 t4PageIn(.3s)——总时长 0.55s ≤ 0.8s；
+   「旧面板压缩淡出 0.2s」在内容即时替换 + room-view 瞬隐架构下无法播出的
+   （先于内容替换的时序窗口不存在，且 blur/淡出全屏动画撞留言 #33 性能口径），
+   以闸门盖切替代，记 deferred ── */
+
+
+/* —— T1 斜纹闸门（--hazard 变量化，D6 语汇：暖金×深青、密度降至基准 1/3）——
+   层为单例 DOM（transitions-director.js 注入），单合成层：.on 期间 will-change:transform，
+   animationend 即摘（用后即除）。黄黑原色禁用。 */
+:root {
+  --hazard: repeating-linear-gradient(45deg,
+    rgba(230,203,118,.92) 0 12px, rgba(19,20,22,.96) 12px 44px);
+}
+#t1Gate { position: fixed; inset: 0; z-index: 880; pointer-events: none;
+  display: none; overflow: hidden; visibility: hidden; }
+#t1Gate.on { display: block; visibility: visible; }
+#t1Gate .t1-arm { position: absolute; left: calc(var(--game-layout-width, max(100vw, 100vh)) * -0.25); right: calc(var(--game-layout-width, max(100vw, 100vh)) * -0.25); top: -30%; bottom: -30%;
+  background: var(--hazard);
+  box-shadow: inset 0 0 0 2px rgba(230,203,118,.25), 0 0 44px rgba(8,9,9,.6);
+  transform: rotate(-8deg) scale(1.12) translateX(-135%); }
+/* will-change 用后即除：只在 .on（动画期）挂载，animationend 摘 .on 即释放 */
+#t1Gate.on .t1-arm { animation: t1GateSweep .55s var(--ease-pop) both; will-change: transform; }
+@keyframes t1GateSweep {
+  from { transform: rotate(-8deg) scale(1.12) translateX(-135%); }
+  50%  { transform: rotate(-8deg) scale(1.12) translateX(0); }
+  to   { transform: rotate(-8deg) scale(1.12) translateX(135%); }
+}
+/* 闸门进行时：关闭 overlay 的 backdrop-filter 同帧叠加（计划 R1），内容轻微挤压。
+   挤压挂 #overlay 容器（整内容参与、不与 .card 的 T4 入场动画抢 animation 槽）。 */
+#overlay.gate-live { backdrop-filter: none; }
+#overlay.gate-squeeze { animation: gateSqueeze .55s var(--ease-pop); }
+@keyframes gateSqueeze {
+  0% { transform: scaleX(1); }
+  45% { transform: scaleX(.962); }
+  100% { transform: scaleX(1); }
+}
+
+/* ═══ D10 无线电通讯演出 comm-feed：终端行 + 时间戳（非聊天气泡）═══
+   渲染器 src/ui/comm-feed.js；demo 由 URL 参数 ?commDemo=1 触发（可关=去掉参数）。
+   新消息 --ease-spring 弹入；旧消息由 FLIP（transform 反向补偿过渡回 0）上推；
+   打字指示为 opacity 脉动（transform/opacity 白名单内，非战斗域专用）。 */
+.comm-feed { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.comm-row { position: relative; display: grid; grid-template-columns: auto auto 1fr;
+  gap: 8px; align-items: baseline; padding: 6px 10px 6px 12px; text-align: left;
+  background: linear-gradient(180deg, rgba(19,20,22,.78), rgba(14,15,16,.84));
+  border: 1px solid rgba(170,174,177,.16); border-left: 2px solid var(--gold-dim);
+  border-radius:0; }
+.comm-row .comm-ts { font: 10px/1.4 'Cascadia Code', monospace; letter-spacing: .5px;
+  color: #9fabb3; white-space: nowrap; }
+.comm-row .comm-tag { font: 9px/1.6 'Cascadia Code', monospace; letter-spacing: 2px;
+  color: var(--gold-main); white-space: nowrap; }
+.comm-row .comm-txt { margin: 0; font-size: 12.5px; line-height: 1.6; color: #d7d8da; min-width: 0; }
+.comm-row .comm-txt b { color: #f7e29f; }
+.comm-row.comm-in { animation: commRowIn .34s var(--ease-spring); }
+@keyframes commRowIn { from { opacity: 0; transform: translateY(14px); } }
+/* 渠道分色：撤离=金、系统=青、警告=暖红（fx 语义既有色系，零新色相） */
+.comm-row[data-chan="extract"] { border-left-color: var(--gold-main); }
+.comm-row[data-chan="system"]  { border-left-color: #9fabb3; }
+.comm-row[data-chan="warn"]    { border-left-color: var(--ember); }
+/* 「传输中…」打字指示：三点 opacity 脉动循环（仅 demo/演出态挂载，非战斗域） */
+.comm-typing { display: inline-flex; gap: 4px; align-items: center;
+  font: 10px 'Cascadia Code', monospace; letter-spacing: 2px; color: #b0b7bc;
+  padding: 4px 10px 4px 12px; }
+.comm-typing i { width: 5px; height: 5px; border-radius: 50%; background: currentColor;
+  animation: commTyping 1.2s var(--ease-float) infinite; }
+.comm-typing i:nth-child(2) { animation-delay: .2s; }
+.comm-typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes commTyping { 0%, 100% { opacity: .25; } 45% { opacity: 1; } }
+/* D5 分段进度条挂点（本批只留结构与样式，点亮编排归 P1-D5）：
+   .comm-progress[data-segs="N"] > i.comm-seg（.lit 为已点亮格） */
+.comm-progress { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  gap: 4px; padding: 6px 12px 2px; }
+.comm-progress .comm-seg { height: 6px; border-radius:0;
+  background: rgba(170,174,177,.16); border: 1px solid rgba(170,174,177,.22); }
+.comm-progress .comm-seg.lit { background: linear-gradient(180deg, var(--gold-main), var(--gold-dim));
+  border-color: rgba(230,203,118,.5); }
+/* demo 演示面板：URL ?commDemo=1 挂载，右下角，不遮主 HUD 与 overlay 焦点链 */
+#commDemoPanel { position: fixed; right: 18px; bottom: 18px; z-index: 480; width: min(430px, calc(var(--game-layout-width, 100vw) * 0.92));
+  max-height: min(calc(var(--game-layout-height, 100vh) * 0.56), 430px); display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 14px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(20,21,23,.94), rgba(12,13,14,.96));
+  border: 1px solid rgba(230,203,118,.3); border-radius:0;
+  box-shadow: 0 18px 50px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05); }
+#commDemoPanel .comm-demo-head { display: flex; align-items: center; gap: 8px;
+  font: 10px 'Cascadia Code', monospace; letter-spacing: 3px; color: var(--gold-main); }
+#commDemoPanel .comm-demo-head small { color: #8c9195; letter-spacing: 1px; margin-left: auto; }
+#commDemoPanel .comm-demo-close { margin-left: 6px; padding: 1px 8px; font-size: 11px;
+  color: #d7d8da; background: rgba(28,30,32,.8); border: 1px solid rgba(170,174,177,.3);
+  border-radius:0; cursor: pointer; }
+#commDemoPanel .comm-demo-close:hover { color: var(--gold-bright); border-color: rgba(230,203,118,.55); }
+#commDemoPanel .comm-feed { overflow-y: auto; min-height: 0; }

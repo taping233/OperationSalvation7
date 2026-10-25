@@ -1,0 +1,251 @@
+/* Battle-only paper/blue/gold shells. Load after legacy battle themes and
+   cover-system. Unit geometry, health, intents, semantic colours, card art,
+   hand transforms, target surfaces, scene imagery and animation timing stay put. */
+
+/* Paint the existing HUD budget rather than moving the battlefield. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-topbar {
+  background: #26292cf2 !important;
+  border-bottom: 1px solid #ceb66b80 !important;
+  box-shadow: 0 2px 0 #0e0f1038 !important;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-topbar::before { content: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-encounter { letter-spacing: .03em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-encounter-kicker {
+  color: #c2c5c7; text-shadow: none; letter-spacing: .05em;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-encounter b { color: #f9e8b1; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-encounter > span:last-child { color: #e4e5e6; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-hud {
+  background: linear-gradient(180deg, #26292cdb, #222427ed);
+  border-top-color: #ceb66b66; box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-pile {
+  background: #e3e4e5; border: 1px solid #abadaf; border-radius: 0;
+  color: #44494e; box-shadow: 2px 2px 0 #0e0f1040;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-pile b { color: #26292c; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-pile .bt-pile-cap { color: #51575d; text-shadow: none; letter-spacing: .03em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-pile.clickable:hover {
+  background: #e1dfdb; border-color: #ceb66b; color: #26292c;
+  box-shadow: 2px 2px 0 #0e0f1040; filter: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-pile.clickable:hover .bt-pile-cap { color: #51575d; }
+
+/* Preserve each action's occupied dimensions and the surrender confirmation.
+   Cut corners/paper colours are skins; hover never alters drag/aim transforms. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts :is(.bt-hand-page, .bt-slam-btn, .sts-tactics .ov-btn, .bt-infuse .mini-btn) {
+  border-radius: 0; border: 1px solid #989c9e80; background: #2a2d30;
+  color: #f1f0ee; text-shadow: none; box-shadow: 2px 2px 0 #0e0f1055;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-tactics .ov-btn.ghost:not(.arm):hover:not(:disabled):not(.dis),
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-hand-page:hover:not(:disabled),
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-slam-btn:hover:not(:disabled):not(.aim-lift),
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-infuse .mini-btn:hover:not(:disabled) {
+  background: #3c4045; border-color: #90969a; color: #f1f0ee;
+  box-shadow: 2px 2px 0 #0e0f1055; filter: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts :is(.sts-end-turn.ok, .bt-infuse .mini-btn.ok) {
+  background: #ceb66b; color: #26292c; border-color: #ceb66b;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-end-turn.ok:hover:not(:disabled),
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-infuse .mini-btn.ok:hover:not(:disabled) {
+  background: #ddc67d; color: #26292c; border-color: #ddc67d;
+  box-shadow: 2px 2px 0 #0e0f1055; filter: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-hand-page.has-more {
+  background: #dedcd7; color: #26292c; border-color: #ceb66b;
+  box-shadow: 2px 2px 0 #0e0f1055;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-slam-btn.active {
+  background: #4b4c4c; color: #fae9b0; border-color: #ddc67d;
+  box-shadow: inset 0 0 0 1px #ddc67d80;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-tactics [data-act='btFlee']:not(.arm) {
+  background: #513c39; border-color: #a27368; color: #f2d5cb;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-tactics [data-act='btFlee']:not(.arm):hover:not(:disabled):not(.dis) {
+  background: #73473f; border-color: #b88b7b; color: #f5f2f1; box-shadow: 2px 2px 0 #0e0f1055;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts :is(.sts-tactics .ov-btn, .bt-hand-page, .bt-slam-btn, .bt-infuse .mini-btn):disabled, :where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .sts-tactics .ov-btn.dis {
+  background: #373b3f; color: #a9acae; border-color: #7a7e8066; opacity: .65; box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-infuse {
+  background: #ebeced; color: #44494e; border-color: #adafb1;
+  border-left: 3px solid #ceb66b; border-radius: 0; box-shadow: 2px 2px 0 #0e0f1040;
+  text-shadow: none; line-height: 1.65;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts .bt-infuse b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle .battle-stage.sts :is(.sts-tactics .ov-btn, .bt-hand-page, .bt-slam-btn, .bt-infuse .mini-btn, .bt-pile.clickable):focus-visible {
+  outline: 2px solid #90969a; outline-offset: 3px; box-shadow: 2px 2px 0 #0e0f1055;
+}
+
+/* Exact battle actions distinguish these discover panels from other pages.
+   Empty pools are separately scoped by the direct plain hand/empty-message
+   structure below, after auditing every current discover-mode producer. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover'], [data-act='battleSettleRetry']) {
+  width: min(1180px, 95%); max-width: 95%; max-height: 92%; padding: 30px 34px;
+  background: var(--cover-paper, #ebeced) !important;
+  border: 2px solid #2a2d30 !important; border-radius: 0;
+  box-shadow: 7px 7px 0 #0e0f1066 !important;
+  backdrop-filter: none; overflow-y: auto; color: #26292c;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover'], [data-act='battleSettleRetry']) #ovTitle {
+  color: #26292c; font: 700 25px/1.5 var(--font-ui); letter-spacing: .04em;
+  margin: 0 32px 20px 0; padding-bottom: 16px; border-bottom: 2px solid #ceb66b; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover']) :is(.ov-stats, .ov-note, .ov-empty) {
+  color: #555b61; font-size: 15px; line-height: 1.8; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover']) .ov-stats b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover']) .bt-hand {
+  gap: 28px; padding: 24px 8px; background: none; border: 0;
+  scrollbar-color: #959799 #e2e2e3;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick']) .choice-list {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 24px;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick']) .choice-opt {
+  min-height: 64px; justify-content: flex-start; text-align: left; padding: 18px 22px;
+  background: #f3f3f3; color: #26292c; border: 1px solid #b3b5b7; border-left: 3px solid #ceb66b;
+  border-radius: 0; box-shadow: 3px 3px 0 #2d31341c; font-size: 16px;
+  line-height: 1.75; white-space: normal; overflow-wrap: anywhere;
+  transition: background .18s ease, border-color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick']) .choice-opt:hover:not(:disabled) {
+  background: #e5e6e7; border-color: #90969a; color: #26292c;
+  box-shadow: 3px 3px 0 #2d31341c; filter: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btPickHandSkip'], [data-act='battleSettleRetry']) .ov-btn {
+  background: #2a2d30; color: #f1f0ee; border: 0; border-radius: 0;
+  padding: 12px 22px; min-height: 46px; font-size: 15px; white-space: normal;
+  box-shadow: 3px 3px 0 #2d31341c; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: background .18s ease, color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='battleSettleRetry']) { width: min(740px, 94%); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='battleSettleRetry']) .ov-btns { justify-content: flex-end; margin-top: 24px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='battleSettleRetry']) .ov-btn.ok { background: #ceb66b; color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHandSkip'], [data-act='battleSettleRetry']) .ov-btn:focus-visible {
+  outline: 2px solid #81878c; outline-offset: 3px; box-shadow: 3px 3px 0 #2d31341c;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has([data-act='btChoicePick'], [data-act='btPickHand'], [data-act='btPickHandSkip'], [data-act='btDiscover'], [data-act='battleSettleRetry']) .ov-x {
+  background: #e3e4e5; color: #26292c; border-color: #a0a3a6; border-radius: 0; box-shadow: none;
+}
+/* Current empty discovering is an empty direct .bt-hand; mandatory payment
+   emits only .ov-empty. Other discover producers have no such structure.
+   Exclude every nonbattle hand variant even though its mode already differs. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.event-choice-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))) {
+  width: min(1180px, 95%); max-width: 95%; max-height: 92%; padding: 30px 34px;
+  background: var(--cover-paper, #ebeced) !important;
+  border: 2px solid #2a2d30 !important; border-radius: 0;
+  box-shadow: 7px 7px 0 #0e0f1066 !important;
+  backdrop-filter: none; overflow-y: auto; color: #26292c;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.event-choice-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))) #ovTitle {
+  color: #26292c; font: 700 25px/1.5 var(--font-ui); letter-spacing: .04em;
+  margin: 0 32px 20px 0; padding-bottom: 16px; border-bottom: 2px solid #ceb66b; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.event-choice-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))) :is(.ov-stats, .ov-note, .ov-empty) {
+  color: #555b61; font-size: 15px; line-height: 1.8; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(#ovBody > .bt-hand:not(.sac-hand):not(.event-choice-hand):not(.fire-restore-hand):not(.cls-grant-hand):is(:empty, :has(> .ov-empty:only-child))) .ov-empty {
+  width: 100%; padding: 26px 22px; background: #f3f3f3; border: 1px dashed #b3b5b7;
+  text-align: left;
+}
+
+/* showOverlay(..., true) also carries .room when battle began in a room.
+   These exact battle-only roots need a full shell in both .wide and .room
+   variants: cover-system intentionally excludes .room. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) {
+  display: block; width: min(1140px, 94%); height: auto; min-height: 0; max-width: 94%; max-height: 90%;
+  padding: 30px 34px; margin: auto; border: 2px solid #2a2d30; border-radius: 0;
+  background: var(--cover-paper, #ebeced) !important; color: #26292c;
+  box-shadow: 7px 7px 0 #0e0f1066 !important; overflow-y: auto;
+  scrollbar-color: #959799 #e2e2e3; font-family: var(--font-ui);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack']))::before { content: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) #ovTitle {
+  position: static; flex: none; display: block; margin: 0 34px 22px 0; padding: 0 0 17px;
+  border-bottom: 2px solid #ceb66b; color: #26292c; text-align: left;
+  font: 700 25px/1.45 var(--font-ui); letter-spacing: .04em; text-shadow: none; overflow-wrap: anywhere;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) #ovBody {
+  display: block; width: 100%; max-width: none; height: auto; min-height: 0; margin: 0;
+  color: #26292c; background: none; line-height: 1.75;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) #ovBody > :is(.ov-stats, .ov-note, .ov-empty) {
+  margin: 14px 0; color: #555b61; font-size: 15px; line-height: 1.8; text-shadow: none; overflow-wrap: anywhere;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) #ovBody > :is(.ov-stats, .ov-note) b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .set-h {
+  margin: 24px 0 14px; padding-bottom: 12px; border-bottom: 1px solid #b3b5b7;
+  color: #26292c; font: 700 19px/1.5 var(--font-ui); text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btns {
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn {
+  min-height: 44px; padding: 12px 20px; border: 0; border-radius: 0;
+  background: #2a2d30; color: #f1f0ee; font: 600 15px/1.45 var(--font-ui); white-space: normal;
+  box-shadow: 3px 3px 0 #2d31341c; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: background .18s ease, color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn.ok { background: #ceb66b; color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn:hover:not(:disabled) { background: #3c4045; color: #f1f0ee; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn.ok:hover:not(:disabled) { background: #ddc67d; color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn:disabled { background: #dbdcdd; color: #64736e; opacity: .65; box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-btn:focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):is(.battle-bag, :has(.bt-settings), :has([data-act='bossGo']), :has([data-act='btGraveBack']), :has([data-act='btDeckBack'])) .ov-x { background: #e3e4e5; color: #26292c; border-color: #a0a3a6; border-radius: 0; box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:is(.room, .wide):not(.battle):not(.page):not(.bag-page):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):has(.bt-settings) { width: min(740px, 94%); }
+
+/* Interiors remain independently anchored to their real component roots. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.bt-settings) .bt-settings { min-width: 0; gap: 14px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.bt-settings) .bt-settings .chk {
+  display: flex; align-items: center; gap: 14px; padding: 16px 18px; min-height: 58px;
+  border: 1px solid #b3b5b773; border-left: 3px solid #90969a; border-radius: 0;
+  background: #f3f3f3; color: #26292c; font-size: 16px; line-height: 1.65; box-shadow: none;
+  transition: background .18s ease, border-color .18s ease;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.bt-settings) .bt-settings .chk:hover { background: #e4e5e6; border-color: #90969a; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.bt-settings) .bt-settings .chk input { width: 19px; height: 19px; accent-color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.bt-settings) .bt-settings .ov-note { color: #555b61; font-size: 14px; line-height: 1.8; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-list {
+  max-height: 48vh; margin: 22px 0; padding: 0 6px 0 0; border-top: 1px solid #b3b5b7;
+  scrollbar-color: #959799 #e2e2e3;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px;
+  min-height: 62px; padding: 16px 18px; background: #f3f3f3; color: #44494e;
+  border-bottom: 1px solid #b3b5b773; font-size: 15px; line-height: 1.65;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row .bt-gy-meta {
+  margin-left: auto; color: #555b61; font-size: 13px; white-space: normal; overflow-wrap: anywhere;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle-bag .battle-bag-grid { gap: 20px; padding: 14px 0 24px; background: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle-bag .battle-bag-slot {
+  background: #e2e3e4; border-color: #b3b5b7; border-radius: 0; box-shadow: 3px 3px 0 #2d31341c;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle-bag .battle-bag-slot:hover:not(.off) { border-color: #b9a050; box-shadow: 3px 3px 0 #2d31341c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.battle-bag .battle-bag-slot .bt-count {
+  background: #2a2d30; color: #f7e7b5; border-color: #ceb66b80; border-radius: 0; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']) .set-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 20px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']) .bs-count { color: #555b61; font-size: 14px; font-weight: 500; line-height: 1.6; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']) .bt-hand { gap: 24px; padding: 22px 8px; border-top-color: #b3b5b7; background: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']) [data-act='bossSel'].sel {
+  outline: 2px solid #b9a050; outline-offset: 5px; box-shadow: 3px 3px 0 #2d313426;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='bossGo']) [data-act='bossSel'] .bt-count {
+  color: #f7e7b5; background: #2a2d30; border-color: #ceb66b80; border-radius: 0; text-shadow: none;
+}
+
+/* Intro typography only: retain enemy-red cue, art, dimensions and timing. */
+:where(body[data-ui-cover-context="ordinary"]) .boss-intro .boss-intro-tag { letter-spacing: .28em; text-indent: .28em; font-weight: 600; }
+:where(body[data-ui-cover-context="ordinary"]) .boss-intro .boss-intro-title { font-family: var(--font-ui); font-weight: 700; letter-spacing: .12em; text-indent: .12em; }
+:where(body[data-ui-cover-context="ordinary"]) .bt-start-equip-flash .bt-start-equip-label {
+  padding: 6px 14px; background: #2a2d30; color: #f7e7b5; border: 1px solid #ceb66b80;
+  border-radius: 0; font: 600 14px/1.45 var(--font-ui); text-shadow: none;
+}

@@ -1,0 +1,31 @@
+{
+  "takenAt": "2026-10-23T14:54:12.349Z",
+  "knownFindings": [
+    {
+      "id": "A1-rarity",
+      "actual": "ancient",
+      "expected": "rare",
+      "cause": "古朴与稀有被赋同分，沿输入序选牌"
+    },
+    {
+      "id": "A1-types",
+      "actual": "武术牌",
+      "expected": "资源",
+      "cause": "现行武术类型没有获得卡组保留分"
+    },
+    {
+      "id": "A2",
+      "actual": "legendary",
+      "expected": "rare",
+      "cause": "observe扁平rarity与策略读取card.rarity不一致"
+    },
+    {
+      "id": "A3",
+      "actual": {
+        "L2N4/战斗中": 1
+      },
+      "expected": "非战斗死亡不得仅由累计fought>won归为战斗中",
+      "cause": "flee也增加fought、不增加won"
+    }
+  ]
+}

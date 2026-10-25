@@ -1,0 +1,73 @@
+{
+  "consumers": [
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "matchedBefore": true,
+      "assetConstructorsUnchanged": true
+    },
+    {
+      "file": "game/src/ui/card-zoom-controller.js",
+      "matchedBefore": true,
+      "assetConstructorsUnchanged": true
+    }
+  ],
+  "updates": [
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "before": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+      "after": "ffaa4754f7e865539119332bc55ae8843c3100f558ea1c1ccc03db339e09a859"
+    },
+    {
+      "file": "game/src/ui/card-zoom-controller.js",
+      "before": "8e075bfe29e06c5077b648a92d104e737bd3471ea8615dfe0e965df7b2ee346c",
+      "after": "d479b379a74e26534dba289b13e2d565dae25a74f0ec7ded11a0df72af6d3de8"
+    }
+  ],
+  "registry": "scripts/runtime-asset-redundancy-review.mjs",
+  "beforeRegistrySha256": "3d16b41f173ec4640dc93f6d1f39ac2d7033e4b42b5296b24ff40b3843cb8db4",
+  "afterRegistrySha256": "0a45bd61b688dc9b9fde685fdcacac46d66d6cd59c492ea5963212c99e7a4901",
+  "baselineWarnings": [
+    "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets.",
+    "Unreviewed dynamic asset consumer game/src/core/icons-bitmap.js; retaining reviewed assets.",
+    "Unreviewed dynamic asset consumer game/src/core/semantic-icons.js; retaining reviewed assets."
+  ],
+  "afterWarnings": [
+    "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets.",
+    "Unreviewed dynamic asset consumer game/src/core/icons-bitmap.js; retaining reviewed assets.",
+    "Unreviewed dynamic asset consumer game/src/core/semantic-icons.js; retaining reviewed assets."
+  ],
+  "publicationUnchanged": true,
+  "frozen": [
+    {
+      "file": "game/css/cover-hub.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "unchanged": true
+    }
+  ],
+  "finalRegistrySha256": "0a45bd61b688dc9b9fde685fdcacac46d66d6cd59c492ea5963212c99e7a4901",
+  "sharedRegistryOwner": "WF-backend-audit-phase6-1023",
+  "scopeNote": "Only hub.presentation.js and card-zoom-controller.js matching-before fingerprints were changed. Active shared metadata ownership was detected after this update; no further registry rewrite. Existing other values retained."
+}

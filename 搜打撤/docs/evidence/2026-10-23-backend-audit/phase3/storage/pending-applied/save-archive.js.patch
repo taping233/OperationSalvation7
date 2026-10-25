@@ -1,0 +1,14 @@
+--- a/搜打撤/game/src/hub/save-archive.js
++++ b/搜打撤/game/src/hub/save-archive.js
+@@ -4,10 +4,10 @@
+ import { planMapRestore } from '../run/map-snapshot.js';
+ import { validatePendingExtraction } from './extraction.commands.js';
+ import { withSlotWriteLock } from './slot-write-lock.js';
++import { validSlot } from './commands.shared.js';
+ 
+ const FORMAT = 'sdt-slot-archive';
+ const IMPORT_KEY = slot => `sdt-import-v1-slot${slot}`;
+-const validSlot = slot => Number.isInteger(slot) && slot >= 1 && slot <= 5;
+ const failure = (code, message) => ({ ok: false, code, message });
+ const keysFor = slot => ({ base: Base.SLOT_KEY(slot), run: RunStorage.key(slot), journal: TX_KEY(slot),
+   previousRun: `sdt-run-${slot}-prev`, corruptRun: RunStorage.corruptKey(slot),

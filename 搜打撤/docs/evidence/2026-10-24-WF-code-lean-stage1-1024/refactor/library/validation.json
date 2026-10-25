@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "baseline": "node_modules/.cache/lean-refactor-1024/before/",
+  "defaultRegression": {
+    "files": [
+      "tests/code-lean-refactor-library.test.js"
+    ],
+    "passed": 2,
+    "selfContained": true,
+    "usesFrozenSourceCache": false,
+    "coverage": [
+      "compatibility entry names and undefined receipts",
+      "creation/import read-only fallback",
+      "export JSON format and escaped textarea",
+      "clipboard success/failure",
+      "download Blob type/name/URL cleanup",
+      "return routing"
+    ]
+  },
+  "existingRegression": {
+    "files": [
+      "photo-page-lifecycle-audit",
+      "card-library-lazy-boundary",
+      "card-library-performance-contract",
+      "photo-probe-lifecycle-deep-audit",
+      "photo-art-warm-audit",
+      "photo-studio-catalog-cache",
+      "photo-studio-presentation",
+      "photo-studio-tabs"
+    ],
+    "passed": 40,
+    "failed": 0,
+    "workers": 1
+  },
+  "realBootIntegration": {
+    "file": "tests/boot.test.js",
+    "selected": [
+      "卡牌档案馆可打开、筛选、清空与排序",
+      "照相馆以照片背签打开，默认大图仍用卡牌面且保留 footer 委托"
+    ],
+    "passed": 2,
+    "skipped": 22,
+    "failed": 0,
+    "fixtureWarnings": [
+      "audio codec unavailable",
+      "fetch response test double lacks arrayBuffer"
+    ]
+  },
+  "manualFrozenDifferential": {
+    "files": [
+      "page-differential.vitest.js",
+      "differential.config.mjs"
+    ],
+    "passed": 2,
+    "failed": 0,
+    "windowModes": [
+      "IntersectionObserver",
+      "no IntersectionObserver"
+    ],
+    "comparison": "entire raw overlay HTML, serialized DOM, focus element, game state, body class, zoom/export/log/action receipts",
+    "defaultDiscovery": "excluded; evidence filename .vitest.js outside tests/**/*.test.js",
+    "traceStages": {
+      "intersectionObserver": 16,
+      "noIntersectionObserver": 14
+    }
+  },
+  "eslint": {
+    "status": "passed",
+    "files": [
+      "game/src/hub/game.cardslib.page.js",
+      "game/src/hub/game.cardslib.designer.js",
+      "tests/code-lean-refactor-library.test.js"
+    ]
+  },
+  "syntax": {
+    "status": "passed",
+    "method": "Acorn latest module parse"
+  },
+  "initialNewTestFailure": {
+    "status": "corrected assertion",
+    "reason": "JSON.stringify escapes embedded quote; compare whole textarea text with exact JSON instead. Frozen original and new raw exports already matched."
+  },
+  "unverified": [
+    "parent current-window browser smoke",
+    "parent global integration checks",
+    "remote CI"
+  ],
+  "noBuildOrExternalService": true
+}

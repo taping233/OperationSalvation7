@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-24",
+  "status": "implemented and frozen for parent integration; uncommitted",
+  "fixedRootCauses": 2,
+  "productionFiles": [
+    "game/src/battle/core/battle.turn-start.js",
+    "game/src/battle/core/battle.setup-mechanics.domain.js"
+  ],
+  "newTests": ["tests/fast-bug-sweep-round2-battle.test.js"],
+  "fixes": [
+    {
+      "id": "fast-battle-round2-01",
+      "title": "持续回合的延迟道具报错回退检查点，且遗漏后续次数",
+      "scope": "合法规则/旧道具兼容；现行急救合剂已退役，不声称为现行内置卡",
+      "contract": "tests/m3-contract.test.js 既有 schema/capability 契约接收 heal amount:6 schedule:nextTurnStart duration:3；bag 创建 repeat:true,left:3 的延迟任务。",
+      "red": "真实引擎下一回合抛 Invalid card rules: sweep-repeat-med rules.triggers.onPlay[0].duration: is not accepted for heal operations；随后恢复检查点，hp实50而非55。即使去掉非法键，原triggerOps分支也从不保留repeat。",
+      "change": "延迟道具仍用bag.use执行视图，不转译成不兼容onPlay；triggerOps与choiceOps统一按repeat/left保留和递减。",
+      "realEngine": "50生命开始、敌人每回合攻击1，连续4回合生命55/60/65/64；恰好治疗3次，任务移除。"
+    },
+    {
+      "id": "fast-battle-round2-02",
+      "title": "封印化形多烧重复卡",
+      "contract": "真实受缚之残影描述与builtin setup.collection声明需要五个不同ID各一张；旧实现按五种ID筛出全部手牌消耗。",
+      "red": "真实双受缚之残影编组洗入8肢体，开局10张集齐后 consumed实10，断言应5失败。",
+      "change": "按collection.ids各选一个手牌UID，五张满足化形即只消耗五张，保留额外副本。",
+      "realEngine": "真实双封印编组仅消耗5张，生成深渊主宰，保留第二份封印副本；旧单份化形和打出主宰原回归继续通过。"
+    }
+  ],
+  "validation": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-round2-battle.test.js tests/battle-turn-effects-domain.test.js tests/m3-contract.test.js tests/abyss-sovereign.test.js tests/battle-turn-start-discover.test.js tests/choice-semantic-operations.test.js tests/mystery-potion-observation.test.js tests/nest-regression.test.js tests/nest-runemaster.test.js tests/contracts.test.js tests/architecture-boundaries.test.js --reporter=dot",
+    "exitCode": 0,
+    "filesPassed": 11,
+    "testsPassed": 141,
+    "newRegressionTests": 2,
+    "durationSeconds": 8.67,
+    "eslint": { "exitCode": 0, "scope": "two production files and new test file" },
+    "diffCheck": { "exitCode": 0, "scope": "same three paths" },
+    "notRun": ["browser: parent owns current-window integration", "build", "full suite", "commit", "push"]
+  },
+  "unverifiedCandidates": [
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "candidate": "额外回合分支可能跳过玩家回合末中毒/随从攻击/计时递减。",
+      "status": "仅静态候选，未复现、未修复、不计修复数；该文件属于另一活跃round2冻结集，未越界编辑。"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "input": "abstract conceptual illustration, no humans, black void, a single slender fractured ivory circle containing a ghostly reflection of an empty modern city, inverted concrete building silhouettes dissolving into charcoal ink, one thin muted vermilion filament crossing the broken ring\n\nMinimal cinematic title-sequence visual for a story about a contaminated city in winter. Symbolic, mysterious, quiet, elegant. Not a literal environment.\n\nWide horizontal canvas, 75 percent pure near-black negative space. Small off-center broken ring at 60 percent width, approximately one third of canvas height. Buildings are only suggestions inside its lower arc. Asymmetric void. No frame. Lower left is completely black.\n\nMatte soot black, chalk ivory, ash grey, one tiny vermilion accent. Hand-painted edges, dry brush, ink bleeding, crisp focal fracture. No glossy metal, no neon, no magic glow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+  "model": "nai-diffusion-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 5.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": false,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 10251025,
+    "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, mountains, snowfield, snowy landscape, gate, road, people, girl, character, vehicle, spaceship, magic circle, runes, sigil, intricate mandala, oversaturated, blue glow, gold, cyberpunk, UI",
+    "characterPrompts": [
+      {
+        "prompt": "",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "abstract conceptual illustration, no humans, black void, a single slender fractured ivory circle containing a ghostly reflection of an empty modern city, inverted concrete building silhouettes dissolving into charcoal ink, one thin muted vermilion filament crossing the broken ring\n\nMinimal cinematic title-sequence visual for a story about a contaminated city in winter. Symbolic, mysterious, quiet, elegant. Not a literal environment.\n\nWide horizontal canvas, 75 percent pure near-black negative space. Small off-center broken ring at 60 percent width, approximately one third of canvas height. Buildings are only suggestions inside its lower arc. Asymmetric void. No frame. Lower left is completely black.\n\nMatte soot black, chalk ivory, ash grey, one tiny vermilion accent. Hand-painted edges, dry brush, ink bleeding, crisp focal fracture. No glossy metal, no neon, no magic glow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, mountains, snowfield, snowy landscape, gate, road, people, girl, character, vehicle, spaceship, magic circle, runes, sigil, intricate mandala, oversaturated, blue glow, gold, cyberpunk, UI",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

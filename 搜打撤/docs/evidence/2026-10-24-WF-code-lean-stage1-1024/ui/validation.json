@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "defaultRegression": {
+    "selfContained": true,
+    "files": [
+      "tests/code-lean-stage1-ui-settings.test.js",
+      "tests/code-lean-stage1-ui-archive.test.js"
+    ],
+    "tests": 15,
+    "source": "Direct imports of real runtime modules with service-port fixtures and fixed public-behavior assertions; no cache, filesystem loader, generated snapshot or duplicated implementation template.",
+    "coverage": [
+      "10 checkbox initial states and true/false receipts",
+      "2 volume ranges 0/37/100, release preview, invalid bubbled targets",
+      "input rereads after sound/storage/volume reentry",
+      "volume service getters read twice for range and printed label",
+      "reward/milestone empty, locked, pending, claimed states",
+      "escaping names/descriptions/attribute IDs",
+      "record selection pressed state, preserved detail node and focus, invalid index",
+      "collection metadata read order and four collMsNeed calls",
+      "sound service resolution precedes range input value reads"
+    ]
+  },
+  "manualDifferential": {
+    "status": "passed",
+    "tests": 10,
+    "files": [
+      "differential-settings.vitest.js",
+      "differential-archive.vitest.js"
+    ],
+    "command": "node node_modules/vitest/vitest.mjs run --config docs/evidence/2026-10-24-WF-code-lean-stage1-1024/ui/differential.config.mjs --reporter=dot",
+    "oracle": "parent frozen current-worktree source cache; only manual evidence depends on local cache",
+    "defaultTestDiscovery": "Excluded: filenames end .vitest.js under docs, default include is tests/**/*.test.js"
+  },
+  "finalTargetRun": {
+    "status": "passed",
+    "files": [
+      "code-lean-stage1-ui-settings",
+      "code-lean-stage1-ui-archive",
+      "menu-pages-slices",
+      "menu-return-chain",
+      "hub-archive-v3"
+    ],
+    "passed": 37,
+    "failed": 0,
+    "workers": 1
+  },
+  "eslint": {
+    "status": "passed",
+    "scope": "both runtime files and both default regression test files"
+  },
+  "syntax": {
+    "status": "passed",
+    "method": "Acorn parse of both runtime and both default regression files"
+  },
+  "corrections": [
+    "Removed early checked snapshot; callbacks receive original input and read properties at original use sites.",
+    "Volume HTML calls its reader separately for both original occurrences.",
+    "Archive retains original rows/records two-pass metadata reads; shares only HTML templates.",
+    "Moved cache-based differential suites to manual evidence files and replaced default tests with self-contained fixed assertions.",
+    "Initial fixed receipt test expected volume events after both audio switches; corrected to the fixture actual DOM interaction order (music switch, music range, sfx switch, sfx range). Runtime unchanged for that correction."
+  ],
+  "unverified": [
+    "Current-window game page verification remains parent responsibility.",
+    "No build/full suite/remote CI run."
+  ]
+}

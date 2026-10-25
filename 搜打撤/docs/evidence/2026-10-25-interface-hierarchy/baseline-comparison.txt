@@ -1,0 +1,246 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ❯ tests/ui-motion-cascade.test.js (7 tests | 7 failed) 68ms
+   × keeps CSS transform transitions off motion-owned bag cards regardless of sheet order 32ms
+     → ', .reward-replica .reward-unit .reward-card[data-card-state-motion="true"]' is not a valid selector
+   × lets the selection plate own movement instead of the inventory hover lift 14ms
+     → '' is not a valid selector
+   × removes inventory transitions and hover movement for the setting reduced-motion preference 7ms
+     → ', .bag-rz' is not a valid selector
+   × removes inventory transitions and hover movement for the system reduced-motion preference 5ms
+     → ', .bag-rz' is not a valid selector
+   × stops the is-temporary aura for both reduced-motion preferences while preserving its static identity 3ms
+     → '' is not a valid selector
+   × stops the is-transforming aura for both reduced-motion preferences while preserving its static identity 2ms
+     → '' is not a valid selector
+   × stops the is-temporary is-transforming aura for both reduced-motion preferences while preserving its static identity 3ms
+     → '' is not a valid selector
+ ❯ tests/selection-state-query-work.test.js (5 tests | 1 failed) 210ms
+   ✓ does zero membership scans across 20 scroll/resize frames while still following geometry 133ms
+   ✓ selects live aria state and hides zero-sized selection without rediscovering members 17ms
+   × discovers added members and groups, unobserves removed members, and releases removed groups 20ms
+     → expected "querySelectorAll" to be called 3 times, but got 6 times
+   ✓ invalidates class-based group and item membership including the root group 25ms
+   ✓ disposal cancels queued work and observers and reopening rediscovers the current tree 13ms
+ ❯ tests/ui-review-remediation.test.js (18 tests | 2 failed) 728ms
+   ✓ 确认层与输入所有权 > 业务即时取消，旧视觉壳不可交互且退场不能移除新确认框 34ms
+   ✓ 确认层与输入所有权 > 取消不执行写入，恢复原焦点与原页面的inert状态 9ms
+   ✓ 确认层与输入所有权 > 等待中的确认只执行一次，失败保留原层并允许重试成功 9ms
+   ✓ 确认层与输入所有权 > Esc逐次只退出最高层，底层保持原状 3ms
+   ✓ 确认层与输入所有权 > 改键监听中的Esc只取消改键，再按Esc才关闭设置 14ms
+   ✓ 确认层与输入所有权 > 冲突改键尚未确认时保留原绑定，来源设置离页后迟到批准不改键 9ms
+   × 卡牌说明、大图和保存回执 > 地图与房间移动同一顶栏节点，保留控件身份并留在可交互模态范围 25ms
+     → expected [ 'heroAva', 'hpHud' ] to deeply equal [ 'heroAva', 'hpHud', …(1) ]
+   ✓ 卡牌说明、大图和保存回执 > 重复出现的伤害/状态词条只出现一次，闪避说明符合实际四类伤害行为 5ms
+   ✓ 卡牌说明、大图和保存回执 > 列表切换到下一卡牌清除上一牌的操作footer，返回时不复用旧按钮 26ms
+   ✓ 卡牌说明、大图和保存回执 > 列表大图的来源已移除时，旧footer不能执行资源动作 7ms
+   ✓ 卡牌说明、大图和保存回执 > 对局检查点成功不能抹掉整档保存失败，整档成功后才解除失败 7ms
+   × 设置导航和结束回合 > 竖向分类键盘切换、焦点与各分类滚动位置独立保留 54ms
+     → expected false to be true // Object.is equality
+   ✓ 设置导航和结束回合 > 长按早松取消，持续650ms只结束一次且之后点击不重复 11ms
+   ✓ 设置导航和结束回合 > 修饰/输入法事件{ ctrlKey: true }不触发普通动作或长按结束回合 2ms
+   ✓ 设置导航和结束回合 > 修饰/输入法事件{ altKey: true }不触发普通动作或长按结束回合 2ms
+   ✓ 设置导航和结束回合 > 修饰/输入法事件{ metaKey: true }不触发普通动作或长按结束回合 2ms
+   ✓ 设置导航和结束回合 > 修饰/输入法事件{ isComposing: true }不触发普通动作或长按结束回合 2ms
+   ✓ 设置导航和结束回合 > 修饰/输入法事件{ keyCode: 229 }不触发普通动作或长按结束回合 2ms
+ ❯ tests/overlay-dialog.test.js (30 tests | 1 failed) 1526ms
+   ✓ overlay dialog accessibility contract > mounts the shared run bar inside the live modal before isolation, and re-isolates it for leave/confirmation 240ms
+   × overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene 22ms
+     → expected true to be false // Object.is equality
+   ✓ overlay dialog accessibility contract > returns a temporary battle from the real system-menu flow without hiding its modal 19ms
+   ✓ overlay dialog accessibility contract > returns a shared bar re-mounted during the close animation to the viewport at final hide 10ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening 277ms
+   ✓ overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order 55ms
+   ✓ overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported 14ms
+   ✓ overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable 12ms
+   ✓ overlay dialog accessibility contract > 照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测 7ms
+   ✓ overlay dialog accessibility contract > sets dialog semantics, isolates the background, traps Tab, and restores the opener 294ms
+   ✓ overlay dialog accessibility contract > honors an explicit safe initialFocus selector and closes through Escape 295ms
+   ✓ overlay dialog accessibility contract > 收回大卡后的按键重复不会触发底层奖励离开 52ms
+   ✓ overlay dialog accessibility contract > 卡牌reward-card正文含返回/离开不会成为取消按钮 11ms
+   ✓ overlay dialog accessibility contract > 卡牌event-choice-card正文含返回/离开不会成为取消按钮 9ms
+   ✓ overlay dialog accessibility contract > 卡牌bt-card正文含返回/离开不会成为取消按钮 11ms
+   ✓ overlay dialog accessibility contract > 显式安全取消优先于猜测文案，并由 Esc 调用原返回操作 10ms
+   ✓ overlay dialog accessibility contract > 共用返回slotBack的点击、Esc和遮罩使用同一个显式动作 15ms
+   ✓ overlay dialog accessibility contract > 共用返回cls2Quit的点击、Esc和遮罩使用同一个显式动作 15ms
+   ✓ overlay dialog accessibility contract > 共用返回clsBack的点击、Esc和遮罩使用同一个显式动作 12ms
+   ✓ overlay dialog accessibility contract > 共用返回depBack的点击、Esc和遮罩使用同一个显式动作 13ms
+   ✓ overlay dialog accessibility contract > 共用返回dataPageBack的点击、Esc和遮罩使用同一个显式动作 18ms
+   ✓ overlay dialog accessibility contract > 内层详情的button只收回详情，下一次取消才返回页面 20ms
+   ✓ overlay dialog accessibility contract > 内层详情的Escape只收回详情，下一次取消才返回页面 19ms
+   ✓ overlay dialog accessibility contract > 内层详情的backdrop只收回详情，下一次取消才返回页面 19ms
+   ✓ overlay dialog accessibility contract > 必须选择的内层page不穿透到底层显式返回或背包关闭兜底 15ms
+   ✓ overlay dialog accessibility contract > 必须选择的内层bagpage不穿透到底层显式返回或背包关闭兜底 14ms
+   ✓ overlay dialog accessibility contract > 特写拥有遮罩和直接取消，不能代点底层返回 12ms
+   ✓ overlay dialog accessibility contract > 共用返回组件只按调用方声明取消，明确禁止时不再猜测返回文字 6ms
+   ✓ overlay dialog accessibility contract > 强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过 5ms
+   ✓ overlay dialog accessibility contract > closes immediately when reduced motion is enabled 4ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/overlay-dialog.test.js:68:27
+     66|     const menu = scene.querySelector('.sts-options'); setRunTopBarBatt…
+     67|     const button = document.getElementById('btnBattleOptions'); button…
+     68|     expect(button.hidden).toBe(false); expect(button.getAttribute('ari…
+       |                           ^
+     69|     const observations=[];
+     70|     const beforeCommit=event=>{ if(event.detail==='settings') observat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  tests/selection-state-query-work.test.js > discovers added members and groups, unobserves removed members, and releases removed groups
+AssertionError: expected "querySelectorAll" to be called 3 times, but got 6 times
+ ❯ tests/selection-state-query-work.test.js:56:23
+     54|   const added = first.cloneNode(true); added.getBoundingClientRect = (…
+     55|   first.remove(); group.append(added); await flush();
+     56|   expect(rootQueries).toHaveBeenCalledTimes(3);
+       |                       ^
+     57|   expect(resize.unobserve).toHaveBeenCalledWith(first); expect(resize.…
+     58|   const newGroup = group.cloneNode(true); newGroup.querySelector('.sel…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  tests/ui-motion-cascade.test.js > keeps CSS transform transitions off motion-owned bag cards regardless of sheet order
+SyntaxError: ', .reward-replica .reward-unit .reward-card[data-card-state-motion="true"]' is not a valid selector
+ ❯ <input css UCTguY>:3:1
+ ❯ emit node_modules/nwsapi/src/nwsapi.js:803:17
+ ❯ parse node_modules/nwsapi/src/nwsapi.js:1791:13
+ ❯ Object._matches [as match] node_modules/nwsapi/src/nwsapi.js:1810:32
+ ❯ HTMLButtonElementImpl.ElementImpl.matches node_modules/jsdom/lib/jsdom/living/nodes/Element-impl.js:592:18
+ ❯ HTMLButtonElement.matches node_modules/jsdom/lib/jsdom/living/generated/Element.js:655:34
+ ❯ tests/ui-motion-cascade.test.js:33:20
+     31|       // Exercise the authored hover state without synthesising browse…
+     32|       const target = selector.toString().replace(/:hover\b/g, '');
+     33|       if (!element.matches(target)) continue;
+       |                    ^
+     34|       for (const declaration of declarations) {
+     35|         candidates.push({ value: declaration.value, important: !!decla…
+ ❯ node_modules/postcss/lib/container.js:432:18
+ ❯ Root.walk node_modules/postcss/lib/container.js:352:18
+ ❯ Root.walkRules node_modules/postcss/lib/container.js:430:19
+ ❯ winner tests/ui-motion-cascade.test.js:19:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  tests/ui-motion-cascade.test.js > lets the selection plate own movement instead of the inventory hover lift
+SyntaxError: '' is not a valid selector
+ ❯ <input css WYdxTB>:8:1
+ ❯ emit node_modules/nwsapi/src/nwsapi.js:803:17
+ ❯ parse node_modules/nwsapi/src/nwsapi.js:1791:13
+ ❯ Object._matches [as match] node_modules/nwsapi/src/nwsapi.js:1810:32
+ ❯ HTMLButtonElementImpl.ElementImpl.matches node_modules/jsdom/lib/jsdom/living/nodes/Element-impl.js:592:18
+ ❯ HTMLButtonElement.matches node_modules/jsdom/lib/jsdom/living/generated/Element.js:655:34
+ ❯ tests/ui-motion-cascade.test.js:33:20
+     31|       // Exercise the authored hover state without synthesising browse…
+     32|       const target = selector.toString().replace(/:hover\b/g, '');
+     33|       if (!element.matches(target)) continue;
+       |                    ^
+     34|       for (const declaration of declarations) {
+     35|         candidates.push({ value: declaration.value, important: !!decla…
+ ❯ node_modules/postcss/lib/container.js:432:18
+ ❯ Root.walk node_modules/postcss/lib/container.js:352:18
+ ❯ Root.walkRules node_modules/postcss/lib/container.js:430:19
+ ❯ winner tests/ui-motion-cascade.test.js:19:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the setting reduced-motion preference
+ FAIL  tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the system reduced-motion preference
+SyntaxError: ', .bag-rz' is not a valid selector
+ ❯ <input css WYdxTB>:39:1
+ ❯ emit node_modules/nwsapi/src/nwsapi.js:803:17
+ ❯ parse node_modules/nwsapi/src/nwsapi.js:1791:13
+ ❯ Object._matches [as match] node_modules/nwsapi/src/nwsapi.js:1810:32
+ ❯ HTMLButtonElementImpl.ElementImpl.matches node_modules/jsdom/lib/jsdom/living/nodes/Element-impl.js:592:18
+ ❯ HTMLButtonElement.matches node_modules/jsdom/lib/jsdom/living/generated/Element.js:655:34
+ ❯ tests/ui-motion-cascade.test.js:33:20
+     31|       // Exercise the authored hover state without synthesising browse…
+     32|       const target = selector.toString().replace(/:hover\b/g, '');
+     33|       if (!element.matches(target)) continue;
+       |                    ^
+     34|       for (const declaration of declarations) {
+     35|         candidates.push({ value: declaration.value, important: !!decla…
+ ❯ node_modules/postcss/lib/container.js:432:18
+ ❯ Root.walk node_modules/postcss/lib/container.js:352:18
+ ❯ Root.walkRules node_modules/postcss/lib/container.js:430:19
+ ❯ winner tests/ui-motion-cascade.test.js:19:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  tests/ui-motion-cascade.test.js > stops the is-temporary aura for both reduced-motion preferences while preserving its static identity
+ FAIL  tests/ui-motion-cascade.test.js > stops the is-transforming aura for both reduced-motion preferences while preserving its static identity
+ FAIL  tests/ui-motion-cascade.test.js > stops the is-temporary is-transforming aura for both reduced-motion preferences while preserving its static identity
+SyntaxError: '' is not a valid selector
+ ❯ <input css uFJd1y>:40:1
+ ❯ emit node_modules/nwsapi/src/nwsapi.js:803:17
+ ❯ parse node_modules/nwsapi/src/nwsapi.js:1791:13
+ ❯ Object._matches [as match] node_modules/nwsapi/src/nwsapi.js:1810:32
+ ❯ HTMLSpanElementImpl.ElementImpl.matches node_modules/jsdom/lib/jsdom/living/nodes/Element-impl.js:592:18
+ ❯ HTMLSpanElement.matches node_modules/jsdom/lib/jsdom/living/generated/Element.js:655:34
+ ❯ tests/ui-motion-cascade.test.js:33:20
+     31|       // Exercise the authored hover state without synthesising browse…
+     32|       const target = selector.toString().replace(/:hover\b/g, '');
+     33|       if (!element.matches(target)) continue;
+       |                    ^
+     34|       for (const declaration of declarations) {
+     35|         candidates.push({ value: declaration.value, important: !!decla…
+ ❯ node_modules/postcss/lib/container.js:432:18
+ ❯ Root.walk node_modules/postcss/lib/container.js:352:18
+ ❯ Root.walkRules node_modules/postcss/lib/container.js:430:19
+ ❯ winner tests/ui-motion-cascade.test.js:19:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  tests/ui-review-remediation.test.js > 卡牌说明、大图和保存回执 > 地图与房间移动同一顶栏节点，保留控件身份并留在可交互模态范围
+AssertionError: expected [ 'heroAva', 'hpHud' ] to deeply equal [ 'heroAva', 'hpHud', …(1) ]
+
+- Expected
++ Received
+
+  [
+    "heroAva",
+    "hpHud",
+-   "expeditionChapter",
+  ]
+
+ ❯ tests/ui-review-remediation.test.js:98:83
+     96|     expect([...bar.querySelector('.run-top-actions').children].map(nod…
+     97|     expect(bar.querySelector('#btnBattleOptions').hidden).toBe(true);
+     98|     expect([...bar.querySelector('.run-top-person').children].map(node…
+       |                                                                                   ^
+     99|     UI.el.overlay.hidden=false;
+    100|     document.dispatchEvent(new CustomEvent('sdt-overlay-mode',{detail:…
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  tests/ui-review-remediation.test.js > 设置导航和结束回合 > 竖向分类键盘切换、焦点与各分类滚动位置独立保留
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/ui-review-remediation.test.js:138:154
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ Test Files  4 failed (4)
+      Tests  11 failed | 49 passed (60)
+   Start at  12:57:43
+   Duration  4.57s (transform 742ms, setup 0ms, collect 2.31s, tests 2.53s, environment 5.42s, prepare 748ms)
+

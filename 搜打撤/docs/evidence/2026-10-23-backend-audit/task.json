@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "backend-audit",
+  "date": "2026-10-23",
+  "owner": "Friday / 01a1691d",
+  "goal": "并行排查非前端代码冗余与缺陷，精简有静态证据的冗余，报告具体缺陷",
+  "paths": [
+    "game/src/hub",
+    "game/src/battle",
+    "game/src/cards",
+    "game/src/run",
+    "game/src/agent",
+    "game/src/core",
+    "scripts",
+    "docs/evidence/2026-10-23-backend-audit"
+  ],
+  "excluded": [
+    "前端呈现及样式",
+    "desktop-app",
+    "Godot",
+    "Unity",
+    "EXE",
+    "其他会话活跃属地"
+  ],
+  "delegation": {
+    "storage_audit": "存档/锁/事务/基地命令",
+    "battle_audit": "战斗与卡牌规则",
+    "run_agent_audit": "地图/会话/Agent",
+    "root": "core/工程工具与集成"
+  },
+  "acceptance": "删除须有静态调用与引用证据；bug须给触发条件、位置与影响；整文件删除列出具体路径后获同意；不提交",
+  "validation": "沿用本会话不用测试；静态核对，不运行测试/build/实页",
+  "doneWhen": [
+    "三子代理回报实际覆盖和证据",
+    "精简已证实的非前端冗余并列出精确修改",
+    "具体bug给出触发条件与影响",
+    "按不用测试要求收官，无提交推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "仅静态：7文件语法与定向差异核对；三份脚本另定向ESLint。来源见final-static-receipt.json。"
+    }
+  ],
+  "unverified": [
+    "按老板要求未执行测试、构建和实页",
+    "六项缺陷为静态确认，未修复，未进行运行复现",
+    "未穷举全库分支，不声明全库无缺陷"
+  ],
+  "updatedAt": "2026-10-23T14:34:27.935Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "已完成并行排查和确定冗余精简；bug按本轮找出范围报告，未实施修复。"
+  }
+}

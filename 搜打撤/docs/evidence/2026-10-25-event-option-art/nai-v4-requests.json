@@ -1,0 +1,120 @@
+[
+  {
+    "key": "coins",
+    "status": "generated",
+    "recipe_version": "3.4",
+    "payload": {
+      "input": "no humans, Exactly three thick worn coins sliding into an open small field satchel, one clear grouped silhouette. The three circular coin rims and the open satchel mouth are immediately recognizable.\n\nOne isolated readable game choice emblem, conceptual 2D painted icon, not a landscape, not a full scene, no words or numbers.\n\nOne centered compact object group in the middle half of the canvas, front three-quarter view, large coherent shapes and clean silhouette on plain charcoal background. No border, no circle badge, no lettering.\n\nmuted brass gold accents on coin rims, desaturated blue-gray leather satchel. Matte layered pigment, restrained highlights, selective crisp edges, no glow or ornate details, quiet broad color planes.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1382502410,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, landscape, scenery, people, hands, complex background, ornate frame, neon, many repeated coins, many tools",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "no humans, Exactly three thick worn coins sliding into an open small field satchel, one clear grouped silhouette. The three circular coin rims and the open satchel mouth are immediately recognizable.\n\nOne isolated readable game choice emblem, conceptual 2D painted icon, not a landscape, not a full scene, no words or numbers.\n\nOne centered compact object group in the middle half of the canvas, front three-quarter view, large coherent shapes and clean silhouette on plain charcoal background. No border, no circle badge, no lettering.\n\nmuted brass gold accents on coin rims, desaturated blue-gray leather satchel. Matte layered pigment, restrained highlights, selective crisp edges, no glow or ornate details, quiet broad color planes.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, landscape, scenery, people, hands, complex background, ornate frame, neon, many repeated coins, many tools",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\event-option-art-1025\\v4\\coins-draft.png",
+    "seed": 1382502410,
+    "sha256": "6d760b5f6089b4cb295fdfd5010de08d340c23114f45013986032e60213367ff"
+  },
+  {
+    "key": "breach",
+    "status": "generated",
+    "recipe_version": "3.4",
+    "payload": {
+      "input": "no humans, One short mining pick striking a cracked structural beam, a clear single fracture with three falling masonry fragments below it, one clear grouped silhouette. The pick, unstable beam and falling debris communicate dangerous excavation.\n\nOne isolated readable game choice emblem, conceptual 2D painted icon, not a landscape, not a full scene, no words or numbers.\n\nOne centered compact object group in the middle half of the canvas, front three-quarter view, large coherent shapes and clean silhouette on plain charcoal background. No border, no circle badge, no lettering.\n\ncold blue-gray metal and masonry, restrained pale warm-red accent only inside the fracture. Matte layered pigment, restrained highlights, selective crisp edges, no glow or ornate details, quiet broad color planes.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1382502411,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, landscape, scenery, people, hands, complex background, ornate frame, neon, many repeated coins, many tools",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "no humans, One short mining pick striking a cracked structural beam, a clear single fracture with three falling masonry fragments below it, one clear grouped silhouette. The pick, unstable beam and falling debris communicate dangerous excavation.\n\nOne isolated readable game choice emblem, conceptual 2D painted icon, not a landscape, not a full scene, no words or numbers.\n\nOne centered compact object group in the middle half of the canvas, front three-quarter view, large coherent shapes and clean silhouette on plain charcoal background. No border, no circle badge, no lettering.\n\ncold blue-gray metal and masonry, restrained pale warm-red accent only inside the fracture. Matte layered pigment, restrained highlights, selective crisp edges, no glow or ornate details, quiet broad color planes.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, letters, numbers, landscape, scenery, people, hands, complex background, ornate frame, neon, many repeated coins, many tools",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\event-option-art-1025\\v4\\breach-draft.png",
+    "seed": 1382502411,
+    "sha256": "a4c733282f7dda3919c4a6738c60dd4ea3b1974847cb670a9ea5ba8fc90e9b5e"
+  }
+]

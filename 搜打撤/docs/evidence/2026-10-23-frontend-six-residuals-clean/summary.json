@@ -1,0 +1,29 @@
+{
+  "files": 15,
+  "frontendSourceFiles": 10,
+  "frontendRemovedBytesLf": 10870,
+  "cssRemovedBytesLf": 1024,
+  "testAndSelftestDeltaBytesLf": -564,
+  "tests": {
+    "files": 15,
+    "passed": 266,
+    "failed": 4,
+    "originalRun": {
+      "passed": 268,
+      "failed": 2
+    },
+    "originalBaselineFailures": 2,
+    "concurrentAdditionalFailures": 2,
+    "comparisonVerifiedFailures": 4,
+    "appearanceScenariosMigrated": 3,
+    "currentBagRerun": {
+      "passed": 131,
+      "failed": 3
+    }
+  },
+  "stylelint": "5 CSS passed",
+  "eslint": "all edited source and tests passed",
+  "browser": "not run by user instruction",
+  "build": "not run",
+  "committed": false
+}

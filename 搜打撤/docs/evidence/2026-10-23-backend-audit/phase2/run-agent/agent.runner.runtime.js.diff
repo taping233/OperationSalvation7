@@ -1,0 +1,20 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase2/run-agent/agent.runner.runtime.js.before b/D:/素材/代号柒/搜打撤/game/src/agent/agent.runner.runtime.js
+index 29b4bd03..80d0ca4b 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase2/run-agent/agent.runner.runtime.js.before
++++ b/D:/素材/代号柒/搜打撤/game/src/agent/agent.runner.runtime.js
+@@ -145,7 +145,6 @@ async function step(decide, options = {}) {
+     const deadline = nowMs() + (isTurbo() ? 40 : 1500);
+     const pl = prof;
+     let actPoll = 0;
+-    let firstCheckMs = 0;
+     let idleStuckMs = 0;
+     for (;;) {
+       // 签名降频 1/4（09-26 均耗时优化）：轮询主成本是 settleSignature 本体（0.35ms/次，
+@@ -159,7 +158,6 @@ async function step(decide, options = {}) {
+         // 完成后签名永不改变 → 白等满 40ms 死线（实测 12.6% 步、占 act 段 57%）。
+         // busy/queue 全空闲 + 签名 3ms 未动 = 不会有推进了，提前放行；引擎忙时照等满窗
+         const nowE = nowMs();
+-        if (!firstCheckMs) firstCheckMs = nowE;
+         const snapNow = window.SDT?.Battle?.getSnapshot?.() || null;
+         const engineIdle = !(snapNow && (snapNow.busy || snapNow.actionQueueLength > 0));
+         if (engineIdle) {

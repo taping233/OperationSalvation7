@@ -1,0 +1,92 @@
+/* 2026-10-05: shared paper/blue/gold vocabulary for previously uncovered surfaces.
+   Existing named page covers, card faces and gameplay canvases are not rethemed here. */
+:root {
+  --cover-paper: #ebeced; --cover-pane: #f3f3f3; --cover-ink: #26292c;
+  --cover-night: #2a2d30; --cover-muted: #555b61; --cover-gold: #ceb66b;
+  --cover-teal: #90969a; --cover-line: #b3b5b7; --cover-danger: #895448;
+  --cover-shadow: 4px 4px 0 #2d313429;
+}
+/* Small modal contract: only ordinary / glass dialogs, never a full page, fight or node. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) {
+  width: min(760px, 94%); max-width: 94%; max-height: 90%;
+  padding: 30px 34px; border: 2px solid var(--cover-night); border-radius: 0;
+  background: var(--cover-paper); color: var(--cover-ink); box-shadow: 8px 8px 0 #0e0f1066;
+  overflow-y: auto; font-family: var(--font-ui);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.wide:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) { width: min(1120px, 95%); max-width: 95%; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) #ovTitle {
+  display: block; margin: 0 34px 22px 0; padding-bottom: 17px;
+  border-bottom: 2px solid var(--cover-gold); color: var(--cover-ink);
+  font: 700 25px/1.4 var(--font-ui); letter-spacing: .06em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) #ovTitle:empty { display: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) #ovTitle.bad { color: var(--cover-danger); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) #ovBody { color: var(--cover-ink); line-height: 1.7; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-note,.ov-stats,.ov-empty,.set-tip) { color: var(--cover-muted); font-size: 15px; line-height: 1.75; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) .set-h {
+  margin: 24px 0 13px; padding-bottom: 10px; color: var(--cover-ink);
+  border-bottom: 1px solid var(--cover-line); font: 700 18px/1.4 var(--font-ui); letter-spacing: .04em;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btns,.btn-row) { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btn,.mini-btn) {
+  min-height: 42px; padding: 10px 18px; border: 0; border-radius: 0;
+  background: var(--cover-night); color: #f1f0ee; font: 600 15px/1.45 var(--font-ui);
+  letter-spacing: .03em; white-space: normal; box-shadow: 3px 3px 0 #a3a5a759;
+  clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btn,.mini-btn):hover:not(:disabled) { background: #3c4045; color: #f4f2ef; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btn,.mini-btn).ok { background: #a98738; color: #f2f0ec; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btn,.mini-btn).danger { background: #865044; color: #f5f2f1; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-btn,.mini-btn):disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) .ov-x {
+  width: 34px; height: 34px; top: 18px; right: 18px;
+  color: var(--cover-ink); background: #e3e4e5; border: 1px solid #a0a3a6; border-radius: 0; box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(.ov-textarea,textarea,input[type='text'],input[type='number'],select) {
+  max-width: 100%; padding: 10px 13px; border: 1px solid #9ea1a3; border-radius: 0;
+  background: var(--cover-pane); color: var(--cover-ink); font: 400 15px/1.65 var(--font-ui); box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act="labBack"],[data-act="nestGo"],[data-act^="nestCell"],[data-act="rcBack"],[data-act="naBack"],[data-act="nsBack"],[data-act="nestExtractRetry"],[data-act="labScoreBack"]))) :is(button,input,textarea,select):focus-visible { outline: 2px solid #81878c; outline-offset: 3px; }
+/* Shared help is a secondary/tertiary sheet; retain every instruction and source return. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.help-body) { background: var(--cover-paper); color: var(--cover-ink); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .help-body { max-height: 60vh; overflow-y: auto; padding: 3px 4px 5px; color: var(--cover-ink); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .help-body .help-item { margin: 0; padding: 18px 0; border-bottom: 1px solid #b3b5b773; color: var(--cover-muted); font: 400 16px/1.8 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .help-body .help-item b { display: block; margin-bottom: 7px; color: var(--cover-ink); font-weight: 700; }
+/* Existing term descriptions have their own body-mounted tooltip, distinct from map hover. */
+/* Leaving / abandon can retain .room from an exploration battle. Use real action
+   identity rather than recolouring every room card or the doom outer container. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay:has([data-act='leaveSave'],[data-act='toTitle']) .card:not(.page):not(.battle) {
+  display: block; width: min(1040px, 94%); max-width: 94%; height: auto; min-height: 0; max-height: 90%;
+  margin: auto; padding: 30px 34px; border: 2px solid #2a2d30; border-radius: 0;
+  background: #ebeced; color: #26292c; box-shadow: 8px 8px 0 #0e0f1066; overflow-y: auto;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) #ovTitle {
+  position: static; display: block; margin: 0 34px 22px 0; padding-bottom: 17px;
+  border-bottom: 2px solid #ceb66b; color: #26292c; font: 700 25px/1.4 var(--font-ui); text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) #ovBody { display: block; height: auto; color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) :is(.ov-note,.ov-stats) { color: #555b61; font: 400 16px/1.8 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave']) #ovBody > .ov-note:nth-child(2) { color: #895448 !important; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) :is(.ov-stats,.ov-note) .gold { color: #8a7137; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='toTitle']) .doom-loot { margin: 22px 0; padding: 20px 24px; background: #f3f3f3; border: 1px solid #b5b7b9; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='toTitle']) .doom-loot-h { margin: 0 0 17px; color: #26292c; font: 700 18px/1.5 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='toTitle']) .doom-cards { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 18px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='toTitle']) .doom-more { color: #555b61; font: 500 14px/1.7 var(--font-ui); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) .ov-btns { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) .ov-btn { min-height: 44px; padding: 11px 20px; border: 0; border-radius: 0; background: #2a2d30; color: #f1f0ee; font: 600 15px/1.5 var(--font-ui); white-space: normal; clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) .ov-btn.ok { background: #a98738; color: #f2f0ec; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave'],[data-act='toTitle']) .ov-btn.danger { background: #865044; color: #f5f2f1; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has([data-act='leaveSave']) .ov-btn.arm { background: #a3503f; color: #ffffff; outline: 2px solid #a3503f; outline-offset: 3px; }
+/* Existing term descriptions have their own body-mounted tooltip, distinct from map hover. */
+:where(body[data-ui-cover-context="ordinary"]) .term-tip {
+  max-width: min(390px, calc(100vw - 24px)); padding: 13px 17px;
+  background: #efefeef5; color: #44494e; border: 1px solid #969a9d; border-radius: 0;
+  box-shadow: 4px 4px 0 #0e0f1040; font: 400 14px/1.75 var(--font-ui);
+}
+:where(body[data-ui-cover-context="ordinary"]) .term-tip b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) .term-tip .term-tip-sep { color: #8a7a54; }
+/* Exit screen keeps its quiet winter tone; the return is a clear single action. */
+:where(body[data-ui-cover-context="ordinary"]) #exitScr { background: linear-gradient(145deg,#ebeced,#e0e1e2); color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #exitScr .title-inner { padding: 36px; }
+:where(body[data-ui-cover-context="ordinary"]) #exitScr .exit-msg { max-width: 720px; margin: 0 auto; color: #26292c; font: 600 28px/1.9 var(--font-ui); letter-spacing: .08em; }
+:where(body[data-ui-cover-context="ordinary"]) #exitScr #mBack { min-height: 48px; padding: 13px 30px; border: 0; border-radius: 0; background: #2a2d30; color: #f1f0ee; font: 600 16px/1.5 var(--font-ui); clip-path: polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%); }

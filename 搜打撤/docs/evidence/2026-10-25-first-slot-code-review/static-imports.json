@@ -1,0 +1,105 @@
+{
+  "method": "Static Acorn import graph; excludes dynamic imports, runtime timing and production bundle size.",
+  "bootJs": 330,
+  "menuNewJs": 21,
+  "hubColdJs": 43,
+  "hubColdSourceBytes": 332736,
+  "hubColdCss": [],
+  "largestColdJs": [
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "bytes": 30093
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "bytes": 26555
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "bytes": 21347
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "bytes": 21218
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "bytes": 19243
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "bytes": 16252
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "bytes": 16111
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "bytes": 15798
+    },
+    {
+      "path": "game/src/hub/collection.commands.js",
+      "bytes": 12335
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "bytes": 12126
+    },
+    {
+      "path": "game/src/hub/preparation.commands.js",
+      "bytes": 10408
+    },
+    {
+      "path": "game/src/hub/preparation.view.js",
+      "bytes": 8960
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "bytes": 8810
+    },
+    {
+      "path": "game/src/hub/hub.reward-feedback.js",
+      "bytes": 8588
+    }
+  ],
+  "directHubImports": [
+    "../core/characters.js",
+    "../core/shared.js",
+    "../ui/home-linked-interactions.js",
+    "../ui/operation-notice.js",
+    "../run/game.session.js",
+    "../run/game.session.js",
+    "./game.cardslib.js",
+    "./base.commands.js",
+    "./collection.commands.js",
+    "./command-errors.js",
+    "./game.hub.preparation-ports.js",
+    "../../css/base-camp-rework.css",
+    "./hub.presentation.js",
+    "./hub.warehouse.js",
+    "./hub.materials.js",
+    "./hub.archive-v3.js",
+    "./hub.courtyard-v3.js",
+    "../ui/inventory-zoom.js",
+    "../../css/base-courtyard-v3.css",
+    "../../css/base-panel-layout.css",
+    "../../css/base-cohesion-v5.css",
+    "../../css/base-framework-v7.css",
+    "../../css/base-rooms-v7.css",
+    "../../css/base-personnel-v12.css",
+    "../../css/base-logistics-trade-v12.css",
+    "../../css/base-archive-facilities-v12.css",
+    "./hub.navigation-v7.js",
+    "./base-page-motion-v7.js",
+    "./hub.trade-shop-v5.js",
+    "./hub.personnel.js",
+    "./base-motion-v4.js",
+    "./hub.facilities.js",
+    "./hub.archive.js",
+    "../ui/page-entry-cancellation.js",
+    "./game.hub.bridge.js",
+    "./game.hub.depart.js",
+    "./game.hub.pages.js"
+  ]
+}

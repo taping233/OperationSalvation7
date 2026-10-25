@@ -1,0 +1,28 @@
+{
+  "status": "installed-uncommitted",
+  "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\dinner-scar-gaze-20261025\\repaint.png",
+  "sourceSha256": "e5b2206cda8e54466299292a6e41511cb53b49b20bea3780a1be97c8c44dc7d3",
+  "sourceRequest": "docs/evidence/2026-10-25-dinner-scar-gaze/request.json",
+  "asset": "game/assets/slot-bg-knight-fantasy.webp",
+  "bytes": 456266,
+  "sha256": "80f2d3cd5f065616cf230b35cf056a44a7475918c6cfc61e510e8dffd2356c77",
+  "size": [
+    1672,
+    941
+  ],
+  "encoding": {
+    "format": "WebP",
+    "quality": 94,
+    "method": 6,
+    "crop": false
+  },
+  "previousAssetBackup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\dinner-wallpaper-install-20261025\\previous-slot-bg.webp",
+  "integration": {
+    "slotBackground": "existing shared asset replaced",
+    "titleWallpaperId": "companions-dinner",
+    "position": 7,
+    "total": 7,
+    "existingPreferences": "preserved"
+  },
+  "verification": "No tests, browser or build run, per user instruction."
+}

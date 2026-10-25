@@ -1,0 +1,1949 @@
+[
+  {
+    "reason": "",
+    "count": 69,
+    "files": [
+      "tests/battle-bloom-discovery.test.js",
+      "tests/battle-entry-readiness.test.js",
+      "tests/battle-persistent-stage.test.js",
+      "tests/battle-tools-lifecycle.test.js",
+      "tests/card-feedback-fixture.test.js",
+      "tests/chest-extra-rewards-choice.test.js",
+      "tests/courtyard-lifecycle-deep-audit.test.js",
+      "tests/e4-async-entry.test.js",
+      "tests/event-node-binding-cloud.test.js",
+      "tests/events-lazy-story-ownership.test.js",
+      "tests/home-menu-motion.test.js",
+      "tests/impact-query.test.js",
+      "tests/map-decoration-budget.test.js",
+      "tests/page-loading.test.js",
+      "tests/page-perf-battle.test.js",
+      "tests/page-perf-expedition.test.js",
+      "tests/page-visual-readiness-sharing.test.js",
+      "tests/potion-tip-lifecycle.test.js",
+      "tests/project-bugfix-round2-expedition-story.test.js",
+      "tests/r7b-feedback.test.js",
+      "tests/run-top-bar-consistency.test.js",
+      "tests/structured-backupcell.test.js",
+      "tests/sts2-pile-view-1021.test.js",
+      "tests/title-wallpaper.test.js",
+      "tests/ui-motion-cascade.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'textContent')\r",
+    "count": 18,
+    "files": [
+      "tests/archive-motion.test.js",
+      "tests/bag-page-lifecycle-review.test.js",
+      "tests/base-inventory-lifecycle-audit.test.js",
+      "tests/chest-extra-rewards-choice.test.js",
+      "tests/departure-browse-state.test.js",
+      "tests/e4-async-entry.test.js",
+      "tests/hub-flow-regression.test.js",
+      "tests/leave-run-menu.test.js",
+      "tests/page-perf-battle.test.js",
+      "tests/potion-tip-lifecycle.test.js",
+      "tests/r7b-feedback.test.js",
+      "tests/reward-frame-review.test.js",
+      "tests/reward-presentation-contract.test.js",
+      "tests/safe-pearl-access.test.js",
+      "tests/sts2-cast-layout-1021.test.js",
+      "tests/warehouse-art-window.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected false to be true // Object.is equality\r",
+    "count": 13,
+    "files": [
+      "tests/battle-decision-shell-review.test.js",
+      "tests/battle-entry-view.test.js",
+      "tests/boot.test.js",
+      "tests/character-view-motion.test.js",
+      "tests/courtyard-lifecycle-deep-audit.test.js",
+      "tests/css-dead-dom-budget.test.js",
+      "tests/e5-session-recovery.test.js",
+      "tests/map-decoration-budget.test.js",
+      "tests/message-batch-0917.test.js",
+      "tests/partner-interaction.test.js",
+      "tests/runtime-asset-redundancy.test.js",
+      "tests/ui-review-remediation.test.js"
+    ]
+  },
+  {
+    "reason": "ReferenceError: ResizeObserver is not defined\r",
+    "count": 12,
+    "files": [
+      "tests/battle-hand-inspector.test.js",
+      "tests/battle-infusion-action-layout.test.js",
+      "tests/page-perf-battle.test.js",
+      "tests/wf-feedback1021-c-infusion-dedupe.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div class=\"sts-unit-actions\" …(2)>…(2)</div> to be <div class=\"sts-unit sts-me\" …(4)>…(3)</div> // Object.is equality\r",
+    "count": 9,
+    "files": [
+      "tests/battle-persistent-stage.test.js",
+      "tests/battle-tools-lifecycle.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected true to be false // Object.is equality\r",
+    "count": 8,
+    "files": [
+      "tests/battle-entry-readiness.test.js",
+      "tests/battle-infusion-action-layout.test.js",
+      "tests/camp-entry-readiness.test.js",
+      "tests/overlay-dialog.test.js",
+      "tests/page-loading.test.js",
+      "tests/r7b-feedback.test.js",
+      "tests/target-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null not to be null\r",
+    "count": 8,
+    "files": [
+      "tests/battle-hand-inspector.test.js",
+      "tests/boot.test.js",
+      "tests/page-loading.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'click')\r",
+    "count": 6,
+    "files": [
+      "tests/battle-hand-inspector.test.js",
+      "tests/battle-persistent-stage.test.js",
+      "tests/battle-tools-lifecycle.test.js",
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'querySelector')\r",
+    "count": 6,
+    "files": [
+      "tests/battle-persistent-stage.test.js",
+      "tests/fresh-run-settlement.test.js",
+      "tests/potion-tip-lifecycle.test.js"
+    ]
+  },
+  {
+    "reason": "Error: Test timed out in Nms.\r",
+    "count": 6,
+    "files": [
+      "tests/e4-async-entry.test.js",
+      "tests/page-loading.test.js"
+    ]
+  },
+  {
+    "reason": "ReferenceError: collectionWorkspaceHTML is not defined\r",
+    "count": 6,
+    "files": [
+      "tests/page-perf-hub.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'full' to be 'quick' // Object.is equality\r",
+    "count": 5,
+    "files": [
+      "tests/acceptance-gate.test.js",
+      "tests/dev-tools-lazy-entry.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: getCards is not a function\r",
+    "count": 5,
+    "files": [
+      "tests/events-lazy-story-ownership.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called once, but got 0 times\r",
+    "count": 5,
+    "files": [
+      "tests/page-loading.test.js",
+      "tests/page-surface-lifetime.test.js",
+      "tests/screen-entry-performance.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: image.removeAttribute is not a function\r",
+    "count": 4,
+    "files": [
+      "tests/card-zoom-controller.test.js",
+      "tests/photo-probe-lifecycle-deep-audit.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: '' is not a valid selector\r",
+    "count": 4,
+    "files": [
+      "tests/run-top-bar-consistency.test.js",
+      "tests/ui-motion-cascade.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.\r",
+    "count": 3,
+    "files": [
+      "tests/battle-frames-ownership.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'classList')\r",
+    "count": 3,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js",
+      "tests/battle-persistent-stage.test.js",
+      "tests/battle-stage-validator.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'false' to be 'true' // Object.is equality\r",
+    "count": 3,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js",
+      "tests/settings-page.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called with arguments: [ ObjectContaining{…} ]\r",
+    "count": 3,
+    "files": [
+      "tests/menu-pages-slices.test.js",
+      "tests/nightshift-u10-settle-transition.test.js",
+      "tests/startup-transition.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { scans: +0, measurements: 1, …(1) } to deeply equal { scans: 1, measurements: 1, …(1) }\r",
+    "count": 3,
+    "files": [
+      "tests/page-visual-readiness-sharing.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: harness.acts.lastLampChoice is not a function\r",
+    "count": 3,
+    "files": [
+      "tests/project-bugfix-round2-expedition-story.test.js",
+      "tests/r6-story-flow.repro.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be true // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/bag-page-lifecycle-review.test.js",
+      "tests/r7a-qa-live.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 81 to be 65 // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/battle-area-hover-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { id: 'starter-attack', …(7) } to be { id: 'starter-attack', …(6) } // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/battle-effective-card.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'fuel-a' ] to deeply equal []\r",
+    "count": 2,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: actions.get(...) is not a function\r",
+    "count": 2,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'uid')\r",
+    "count": 2,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot set properties of null (setting 'open')\r",
+    "count": 2,
+    "files": [
+      "tests/battle-rules-settlement.test.js",
+      "tests/reward-picker-continuity.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div class=\"sts-unit-actions\" …(2)>…(2)</div> to be <div class=\"sts-unit sts-me\" …(2)>…(3)</div> // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/battle-stage-mounts.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [] to have a length of 1 but got +0\r",
+    "count": 2,
+    "files": [
+      "tests/card-browser.test.js",
+      "tests/skull-sword-effective-session.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ Array(1) ] to deeply equal []\r",
+    "count": 2,
+    "files": [
+      "tests/card-face-presentation.test.js",
+      "tests/runtime-asset-redundancy.test.js"
+    ]
+  },
+  {
+    "reason": "Error: [vitest] No \"finishPhotoStudioEntry\" export is defined on the \"../game/src/hub/game.cardslib.page.js\" mock. Did you forget to return it from \"vi.mock\"?\r",
+    "count": 2,
+    "files": [
+      "tests/card-library-performance-contract.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ …(3) ] to have a length of 1 but got 3\r",
+    "count": 2,
+    "files": [
+      "tests/courtyard-lifecycle-deep-audit.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'src')\r",
+    "count": 2,
+    "files": [
+      "tests/e4-async-entry.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null to be truthy\r",
+    "count": 2,
+    "files": [
+      "tests/e4-async-entry.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'changed IDs differ from approved IDs' but got 'migration: card IDs changed'\r",
+    "count": 2,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '中断的接应 · 交付凭据你把运输员的接应凭据递过柜台。行商扫了一眼签名，取…' to contain '送到下一家店的信'\r",
+    "count": 2,
+    "files": [
+      "tests/event-dice.test.js",
+      "tests/shop-settlement-unification.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of undefined (reading 'COMBAT_HOOKS')\r",
+    "count": 2,
+    "files": [
+      "tests/fast-bug-sweep-battle-deck.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'rest' to be 'in' // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/home-menu-motion.test.js",
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "Error: [vitest] No \"captureSettingsNavigation\" export is defined on the \"../game/src/ui/settings-navigation.js\" mock. Did you forget to return it from \"vi.mock\"?\r",
+    "count": 2,
+    "files": [
+      "tests/menu-return-chain.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'preparing' to be '1' // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/page-visual-readiness-sharing.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已领取 1 张 · 其余 2 张已放弃已结束' to be '已领取 1 张 · 其余 2 张已放弃' // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 4/7\\n            ' to contain '4/6'\r",
+    "count": 2,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'companions-dinner' to be 'snow-road' // Object.is equality\r",
+    "count": 2,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "Error: [vitest] No \"preloadBaseHub\" export is defined on the \"../game/src/hub/game.hub.js\" mock. Did you forget to return it from \"vi.mock\"?\r",
+    "count": 1,
+    "files": [
+      "tests/game-canvas-resize.test.js [ tests/game-canvas-resize.test.js ]"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [] to include 'tests/card-render-context.test.js'\r",
+    "count": 1,
+    "files": [
+      "tests/acceptance-gate.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'assets/ui/semantic-icons/crystal.svg?…' to contain 'ui/icons/crystal.png'\r",
+    "count": 1,
+    "files": [
+      "tests/altar-node-art.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'import { roomFooterHTML } from \\'../u…' to contain '[[icon:crystal]] 确认献祭'\r",
+    "count": 1,
+    "files": [
+      "tests/altar-node-art.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div …(8)><div …(4)>…(6)</div></div> to be null\r",
+    "count": 1,
+    "files": [
+      "tests/archive-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '背包空间不足，先腾位再复原；卡牌未消耗' to be '' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/bag-render-derivation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'var(--base-v12-glass)' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/base-subpage-header-readability.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'translateX(64px)' to be 'translateX(14px)' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/base-ui-sample.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 501 to be 485 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-area-hover-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 1866 to be 1850 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-area-hover-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'getAttribute')\r",
+    "count": 1,
+    "files": [
+      "tests/battle-bloom-discovery.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { uid: 'spell', safe: true, …(1) } to be { uid: 'spell', safe: true, …(1) } // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-card-inspection.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'auto' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-card-results.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'position:relative;isolation:isolate;w…' to contain 'transition:transform .16s'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-readability.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'position:absolute;inset:0 0 auto;text…' to contain 'font-size:22px'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-readability.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '' to contain 'display:none'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-readability.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'display:block;flex:none;width:var(--b…' to contain 'width:104px'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-readability.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { same: 1, other: 1 } to deeply equal { same: 2, other: 1 }\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-redesign.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected  to have a length of 3 but got +0\r",
+    "count": 1,
+    "files": [
+      "tests/battle-decision-redesign.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ { id: 'option-1', …(4) }, …(2) ] to be [ { id: 'option-1', …(4) }, …(2) ] // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-discovery-cancellation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { id: 'starter-attack', …(8) } to be { id: 'starter-attack', …(7) } // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-effective-card.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div class=\"sts-nameplate\">…(2)</div> to be <div …(5)>…(3)</div> // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-entry-view.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n    \\n    第 1 回合选择中\\n    50/50甲 0\\n…' to contain '支付代价'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-entry-view.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n    \\n    第 1 回合选择中部分美术未就绪 · 简化显示\\n…' to contain '支付代价'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-entry-view.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ { …(4) } ] to deeply equal [ { key: 'legacy:名0|法术|0|伤害0', …(3) } ]\r",
+    "count": 1,
+    "files": [
+      "tests/battle-hand-group-index.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string\r",
+    "count": 1,
+    "files": [
+      "tests/battle-hand-inspector.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'key-a', 'key-b' ] to deeply equal [ 'key-b' ]\r",
+    "count": 1,
+    "files": [
+      "tests/battle-hand-inspector.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: action is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/battle-hand-inspector.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: oldCancel is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"attach\" to be called at least once\r",
+    "count": 1,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <section …(2)>…(5)</section> to be null\r",
+    "count": 1,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { left: '420px', right: '52px', …(15) } to match object { display: 'flex', …(2) }\r",
+    "count": 1,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { 'pointer-events': 'none', …(7) } to match object { outline: '2px solid #bfe3e1', …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/battle-infusion-action-layout.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'focus')\r",
+    "count": 1,
+    "files": [
+      "tests/battle-persistent-stage.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: ' .data-pg-head) h2' is not a valid selector\r",
+    "count": 1,
+    "files": [
+      "tests/battle-potion-bar-layout.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: ' .data-pg-head)' is not a valid selector\r",
+    "count": 1,
+    "files": [
+      "tests/battle-potion-bar-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { status: 'ready', uid: 'u0', …(1) } to match object { status: 'rejected', …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/battle-preview-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of undefined (reading 'message')\r",
+    "count": 1,
+    "files": [
+      "tests/battle-preview-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '规则格式非法' to contain '能力卡'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-preview-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected last \"spy\" call to have been called with [ 'u0', …(3) ]\r",
+    "count": 1,
+    "files": [
+      "tests/battle-preview-hand-context.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { id: 'probe', name: '探针', …(4) } to be { id: 'probe', name: '探针', …(3) } // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-query-cost-benchmark.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { label: 'ready', cost: 28, …(1) } to deeply equal { label: 'ready', cost: 10, …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/battle-render-derivation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [] to deeply equal [ Array(2) ]\r",
+    "count": 1,
+    "files": [
+      "tests/battle-restore-boundaries.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { options: [ { …(10) }, …(2) ], …(21) } to be null\r",
+    "count": 1,
+    "files": [
+      "tests/battle-tools-lifecycle.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '新名称的意图：攻击' to contain '11'\r",
+    "count": 1,
+    "files": [
+      "tests/battle-unit-metadata.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '' not to be '' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-unit-metadata.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '<div class=\"sts-arena\"><div class=\"ba…' to be '<div class=\"sts-arena\"><div class=\"ba…' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/battle-unit-metadata.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <button type=\"button\" …(3)>…(1)</button> to be <button type=\"button\" …(5)>…(1)</button> // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/blackmarket-card-preview.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div …(1)>…(2)</div> to be null\r",
+    "count": 1,
+    "files": [
+      "tests/boot.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 点击设置后 overlay 应打开: expected true to be false // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/boot.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '' to contain '荣誉档案'\r",
+    "count": 1,
+    "files": [
+      "tests/camp-entry-readiness.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '卡0卡0类型法术稀有度古朴详情 →' to contain '更新后的卡'\r",
+    "count": 1,
+    "files": [
+      "tests/card-browser-state.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: this._overlayInteractionRoot is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/card-feedback-fixture.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: promise rejected \"Error: [vitest] No \"finishPhotoStudioEntr… { codeFrame: '…' }\" instead of resolving\r",
+    "count": 1,
+    "files": [
+      "tests/card-library-performance-contract.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ +0, +0, +0 ] to deeply equal [ -6, +0, -6 ]\r",
+    "count": 1,
+    "files": [
+      "tests/card-state-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected +0 to be -6 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/card-state-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { y: +0, scale: 1, rotate: +0 } to deeply equal { y: -6, scale: 1.02, rotate: +0 }\r",
+    "count": 1,
+    "files": [
+      "tests/card-state-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ { id: 'custom', type: '英雄卡', …(2) } ] to deeply equal [ { id: 'custom', type: '能力卡', …(2) } ]\r",
+    "count": 1,
+    "files": [
+      "tests/card-sync-slices.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null to be '1' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/card-sync-slices.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'default' to be 'casual' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/character-view-motion.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: readyLast is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/character-view-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择 1 张小型物资箱一把钥匙选择回音箭选择石榴弹珠选择[[icon:ba…' to contain '3 张候选'\r",
+    "count": 1,
+    "files": [
+      "tests/chest-extra-rewards-choice.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '领取奖励小型物资箱一把钥匙收下回音箭收下石榴弹珠收下[[icon:bag]…' to contain '3张待收下'\r",
+    "count": 1,
+    "files": [
+      "tests/chest-extra-rewards-choice.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择 1 张密封物资箱' to contain '3 张候选'\r",
+    "count": 1,
+    "files": [
+      "tests/chest-extra-rewards-choice.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'chestMakeRoom' to be 'chestPick' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/chest-extra-rewards-choice.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'chestMakeRoom' to be 'chestTake1' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/chest-extra-rewards-choice.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '领取奖励小宝箱队列测试卡✓已收下队列测试卡✓已收下队列测试卡收下[[ico…' to contain '1张待收下'\r",
+    "count": 1,
+    "files": [
+      "tests/chest-receive-animation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { display: 'flex', …(10) } to match object { flex: '1 1 0', 'min-height': '0' }\r",
+    "count": 1,
+    "files": [
+      "tests/compact-reward-layout.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of undefined (reading 'nodes')\r",
+    "count": 1,
+    "files": [
+      "tests/css-dead-dom-budget.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'import { isCardBrowserCurrent, cardBr…' to contain 'warehouse-workspace-v12'\r",
+    "count": 1,
+    "files": [
+      "tests/css-dead-dom-budget.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { total: 291, structured: 231, …(1) } to deeply equal { total: 282, structured: 231, …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/e6-card-rules-capability.test.js"
+    ]
+  },
+  {
+    "reason": "Error: migration: card IDs changed\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'tt13-poor-meal differs from approved …' but got 'migration: card IDs changed'\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'cmtn1ntxzoc4 changed beyond approved …' but got 'migration: card IDs changed'\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'missing=tt7-ironphalanx' but got 'migration: card IDs changed'\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '可逃离，或迎战截道拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。' to be '可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 …' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'tt3-mystery-potion changed beyond app…' but got 'migration: card IDs changed'\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to not throw an error but 'Error: migration: card IDs changed' was thrown\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [Function] to throw error including 'tt3-magic-lamp changed beyond approve…' but got 'migration: card IDs changed'\r",
+    "count": 1,
+    "files": [
+      "tests/e8-card-inventory.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected {} to match object { display: 'flex', …(3) }\r",
+    "count": 1,
+    "files": [
+      "tests/entry-supply-presentation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected NaN to be greater than or equal to 13\r",
+    "count": 1,
+    "files": [
+      "tests/entry-supply-presentation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected {} to match object { display: 'flex', …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/entry-supply-presentation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '领取奖励生命周期事件闪金之锤✓已收下[[icon:bag]] 1/9 格[…' to contain '1 张已入背包'\r",
+    "count": 1,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '物资已领取物资投放点钥匙已入背包木材已永久放弃整理背包[[icon:exi…' to contain '领取完成'\r",
+    "count": 1,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择 1 张测试三选一候选1选择候选2选择候选3选择[[icon:bag]…' to contain '选取后其余永久放弃'\r",
+    "count": 1,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择：钥匙' to be '选择这张：钥匙' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '' to contain '1 张已入背包'\r",
+    "count": 1,
+    "files": [
+      "tests/event-callback-lifecycle-audit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '暗巷赌约' to be '地下商场黑市' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '使用封存针剂' to be '接受强化急救' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '接过珍珠匣' to be '取走珍珠匣' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '接过两份火种' to be '接收封装火种' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '拆开封条' to be '启封黑箱' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '取出封存箭具' to be '投骰打开弹药柜' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '接入改装台' to be '接入重编台' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/event-choice-recovery-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called with arguments: [ 5, '隧道血契' ]\r",
+    "count": 1,
+    "files": [
+      "tests/event-node-binding-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called with arguments: [ 3, '塌方采掘点' ]\r",
+    "count": 1,
+    "files": [
+      "tests/event-node-binding-cloud.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { position: 'relative', …(16) } to match object { display: 'grid', …(2) }\r",
+    "count": 1,
+    "files": [
+      "tests/event-reward-layout.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ '领取建材补给包', '领取轻装补给包' ] to deeply equal [ '碎片与木材', '碎片与货币' ]\r",
+    "count": 1,
+    "files": [
+      "tests/event-signal-puzzle-integration.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'dataset')\r",
+    "count": 1,
+    "files": [
+      "tests/event-signal-puzzle-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '从大、中、小宝箱中随机抽取 1 个开启，或领取木材与口粮各 1 张。' to be '从大、中、小宝箱中随机抽取 1 个开启。' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/events-0919.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <button type=\"button\" …(2)>…(2)</button> to have a length of 2 but got 1\r",
+    "count": 1,
+    "files": [
+      "tests/expedition-view.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called with arguments: [ { runActive: true, …(11) }, …(2) ]\r",
+    "count": 1,
+    "files": [
+      "tests/expedition-view.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'cards' to be 'opening' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/four-player-chest-reload.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { id: 'first', name: 'first', …(4) } to deeply equal { id: 'first', name: 'first', …(3) }\r",
+    "count": 1,
+    "files": [
+      "tests/framework-battle-engine-services.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'querySelectorAll')\r",
+    "count": 1,
+    "files": [
+      "tests/fresh-run-settlement.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'enemy', 'enemy' ] to deeply equal [ 'enemy' ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'enemy', 'enemy', 'enemy', …(2) ] to deeply equal [ 'enemy', 'enemy', 'enemy', 'enemy' ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'enemy', 'enemy', 'enemy', 'enemy' ] to deeply equal [ 'enemy', 'enemy', 'enemy' ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'camo_sniper', 'grass_el' ] to deeply equal [ 'fire_el', 'grass_el' ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'enemy', 'enemy' ] to deeply equal [ 'enemy', 'enemy', 'enemy', 'enemy' ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-entry-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'archer', 'bandit', …(16) ] to deeply equal [ 'archer', 'bandit', …(25) ]\r",
+    "count": 1,
+    "files": [
+      "tests/hard-mode-reduction.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to not be called at all, but actually been called 1 times\r",
+    "count": 1,
+    "files": [
+      "tests/home-menu-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected +0 to be 1 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/hub-courtyard-v3.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '人物' to be '配置' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/hub-flow-regression.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '1 张' to be '待复原 1 张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/hub-flow-regression.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 缺少可点击入口 [data-act=\"rawItem\"][data-kind=\"wood\"]: expected null not to be null\r",
+    "count": 1,
+    "files": [
+      "tests/hub-flow-regression.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot set properties of null (setting 'value')\r",
+    "count": 1,
+    "files": [
+      "tests/hub-visible-card-faces.test.js"
+    ]
+  },
+  {
+    "reason": "Error: tests/battle-runtime-compatibility.test.js:6: 无法静态确定 import 目标\r",
+    "count": 1,
+    "files": [
+      "tests/impact-query.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ { …(11) }, …(290) ] to have a length of 282 but got 291\r",
+    "count": 1,
+    "files": [
+      "tests/m-batch-production.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'cc-chase-slash', …(290) ] to deeply equal [ 'cc-chase-slash', …(281) ]\r",
+    "count": 1,
+    "files": [
+      "tests/m-batch-production.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { id: 'foe-fire_el', …(9) } to deeply equal { id: 'foe-fire_el', …(9) }\r",
+    "count": 1,
+    "files": [
+      "tests/m-batch-production.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: tt6-bandits.desc: expected '可逃离，或迎战截道拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。' to be '可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 …' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/m-batch-production.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* Two depths of drifting snow; CSS c…' to contain 'body.reduce-motion .map-volumetric-li…'\r",
+    "count": 1,
+    "files": [
+      "tests/map-decoration-budget.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '地点预览' to contain '2/2'\r",
+    "count": 1,
+    "files": [
+      "tests/map-travel-path.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { kind: 'input', tMs: 64, …(5) } to match object { Object (stage, interaction) }\r",
+    "count": 1,
+    "files": [
+      "tests/menu-pages-lazy-entry.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected Promise{…} to be undefined\r",
+    "count": 1,
+    "files": [
+      "tests/menu-pages-lazy-entry.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called 2 times, but got 3 times\r",
+    "count": 1,
+    "files": [
+      "tests/menu-pages-slices.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '-112px' to be '-28px' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/navigation-motion.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called 1 times, but got 0 times\r",
+    "count": 1,
+    "files": [
+      "tests/node-cancel-semantics.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 2 to be 1 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/node-retrigger.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ [ 'template' ] ] to have a length of +0 but got 1\r",
+    "count": 1,
+    "files": [
+      "tests/page-perf-expedition.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <span class=\"choice-detail\"></span> to be null\r",
+    "count": 1,
+    "files": [
+      "tests/page-perf-expedition.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: characterMotion.cancelPage is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/page-perf-expedition.test.js"
+    ]
+  },
+  {
+    "reason": "ReferenceError: liveCardOptions is not defined\r",
+    "count": 1,
+    "files": [
+      "tests/page-perf-shared.test.js"
+    ]
+  },
+  {
+    "reason": "ReferenceError: watchSurfaceActivity is not defined\r",
+    "count": 1,
+    "files": [
+      "tests/page-perf-shared.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <div …(7)><div …(4)>…(5)</div></div> to be null\r",
+    "count": 1,
+    "files": [
+      "tests/page-visual-readiness-sharing.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/original-probe-1.webp' to be '' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/photo-probe-lifecycle-deep-audit.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot convert undefined or null to object\r",
+    "count": 1,
+    "files": [
+      "tests/potion-tip-lifecycle.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* 选角叶页面：仅由 class-choice 轻门面在用户请求时装载，…' to contain 'poolPreviewHTML(pool[0])'\r",
+    "count": 1,
+    "files": [
+      "tests/premium-ui-pages.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* 照相馆（卡牌收藏页）：筛选/窗口挂载网格/选片台/放大查看（拆分自原…' to contain '<h2>照相馆</h2>'\r",
+    "count": 1,
+    "files": [
+      "tests/premium-ui-pages.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* 照相馆（卡牌收藏页）：筛选/窗口挂载网格/选片台/放大查看（拆分自原…' to contain 'class=\"studio-filterbar\"'\r",
+    "count": 1,
+    "files": [
+      "tests/premium-ui-pages.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'import { reduceMotion } from \\'../cor…' to contain 'previousFocus.focus({ preventScroll: …'\r",
+    "count": 1,
+    "files": [
+      "tests/premium-ui-pages.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: {\"battleToken\":2,\"mode\":\"normal\",\"turn\":1,\"energy\":9,\"maxEnergy\":9,\"busy\":false,\"phase\":\"player\",\"actionQueueLength\":0,\"playedMovesThisTurn\":0,\"endTurnContext\":{\"deathSave\":0,\"timeRune\":false,\"extraTurn\":false},\"playerEffects\":[],\"opts\":{\"isBoss\":false},\"player\":{\"hp\":100,\"maxHp\":100,\"atk\":5,\"spellPower\":0,\"myClass\":\"战士\",\"characterId\":null},\"pdef\":{\"shield\":0,\"armor\":0,\"guard\":false},\"pstat\":{\"hp\":100,\"status\":{\"bleed\":0,\"poison\":0,\"freeze\":0,\"silence\":0,\"abreak\":0,\"healban\":0,\"atkDown\":0,\"atkUp\":0,\"spellUp\":0,\"stealth\":0,\"immune\":0,\"reduce\":0,\"dodge\":0,\"swordForm\":0,\"natureForm\":0,\"cosmosForm\":0},\"defense\":{\"shield\":0,\"armor\":0,\"guard\":false}},\"foes\":[{\"id\":\"confirm-foe\",\"name\":\"确认靶子\",\"hp\":100,\"maxHp\":100,\"controlBoss\":false,\"atk\":1,\"affix\":null,\"affixName\":null,\"behavior\":null,\"dead\":false,\"status\":{\"bleed\":0,\"poison\":0,\"freeze\":0,\"silence\":0,\"abreak\":0,\"healban\":0,\"atkDown\":0,\"atkUp\":0,\"spellUp\":0,\"stealth\":0,\"immune\":0,\"reduce\":0,\"dodge\":0,\"swordForm\":0,\"natureForm\":0,\"cosmosForm\":0},\"defense\":{\"shield\":0,\"armor\":0,\"guard\":false},\"intent\":{\"kind\":\"strike\",\"icon\":\"[[icon:swords]]\",\"label\":\"攻击\",\"damage\":1,\"hits\":1,\"bleedBonus\":0},\"eliteAuraBonus\":0,\"deathFxPending\":false}],\"allies\":[],\"hand\":[\"runtime-0\"],\"drawPile\":[\"normal-sha-2-0\",\"normal-sha-2-1\",\"normal-sha-2-2\",\"normal-sha-2-3\",\"normal-sha-2-4\",\"normal-sha-2-5\",\"normal-sha-2-6\",\"normal-sha-2-7\",\"normal-sha-2-8\",\"normal-sha-2-9\"],\"discard\":[],\"grave\":[],\"played\":[],\"consumed\":[],\"consumedPile\":[],\"handInfuseCounts\":{},\"infusing\":null,\"discovering\":null,\"handSelecting\":null,\"choosing\":null,\"pendingTarget\":null,\"pendingHint\":\"\",\"viewingGrave\":false,\"viewingDeck\":false,\"viewingBag\":false,\"dreadShown\":false,\"deckSelection\":null,\"potionBar\":[],\"pendingItem\":null,\"slamPending\":false,\"dartPending\":false,\"equipped\":[]}: expected undefined to be false // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/project-bug-sweep-round2-agent-confirm.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* Skill/equipment use a side lane; H…' to match /\\.sts-unit-vitals\\s*>\\s*\\.sts-equips…/s\r",
+    "count": 1,
+    "files": [
+      "tests/public-controls-equipment.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'status')\r",
+    "count": 1,
+    "files": [
+      "tests/r5a-session-menu.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be type of 'function'\r",
+    "count": 1,
+    "files": [
+      "tests/r6-story-flow.repro.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: oldChoice is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/r6-story-flow.repro.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: release is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/r6-story-flow.repro.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'import { esc, escAttr } from \\'../cor…' to match /await storyCommands\\.record[\\s\\S]*ren…/\r",
+    "count": 1,
+    "files": [
+      "tests/r6-story.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'far.webp', 'mid.webp', …(3) ] to deeply equal [ 'far.webp', 'mid.webp', …(3) ]\r",
+    "count": 1,
+    "files": [
+      "tests/r7a-scenes-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'rager', 'cavalry' ] to deeply equal [ 'archer', 'cavalry' ]\r",
+    "count": 1,
+    "files": [
+      "tests/r7a-scenes-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'cultist' ] to deeply equal [ 'dragon' ]\r",
+    "count": 1,
+    "files": [
+      "tests/r7a-scenes-integration.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 'title' to be 'idle' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/r7b-feedback.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '读取中…' to contain '原数据已保留'\r",
+    "count": 1,
+    "files": [
+      "tests/r7b-feedback.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '读取中…' to contain '<img src=x>'\r",
+    "count": 1,
+    "files": [
+      "tests/r7b-feedback.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: game/data/art-mapping.json: expected '2081834e80ccb45e8e24707bd91b83981725e…' to be '32ccc923bbdef1c383d3f4974416a5056d8f9…' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/retired-scenes-publication.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'clamp(8px,calc((100cqh - 480px) / 2),…' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-action-clipping.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { kind: 'small', …(12) } to match object { rewardStage: 'opening', …(2) }\r",
+    "count": 1,
+    "files": [
+      "tests/reward-coins-overview.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: .cqo-summary: expected NaN to be greater than or equal to 22\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '3 张 · 可全部领取打开宝箱' to be '3 张 · 可全部领取' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '3 张 · 可全部领取继续领取' to be '3 张 · 可全部领取' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已领取 1 张 · 剩余 2 张待处理继续领取' to be '已领取 1 张 · 剩余 2 张待处理' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已领取 3 张已结束' to be '已领取 3 张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已放弃 3 张已结束' to be '已放弃 3 张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已领取 1 张 · 已放弃 2 张已结束' to be '已领取 1 张 · 已放弃 2 张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理继续领取' to be '已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '3 张中选 1 张打开宝箱' to be '3 张中选 1 张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-frame-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择：测试奖励0' to be '选择这张：测试奖励0' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-picker-continuity.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '选择' to be '选择这张' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/reward-presentation-contract.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { position: 'relative', …(13) } to match object { flex: '0 0 280px', width: '280px' }\r",
+    "count": 1,
+    "files": [
+      "tests/reward-receipt-clarity.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* 局内流程薄装配壳：保持公共导出稳定，具体流程按依赖方向落在 scen…' to contain 'function devForceBattle('\r",
+    "count": 1,
+    "files": [
+      "tests/run-architecture.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: Cannot read properties of null (reading 'open')\r",
+    "count": 1,
+    "files": [
+      "tests/run-top-bar-actions.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: ', > button' is not a valid selector\r",
+    "count": 1,
+    "files": [
+      "tests/run-top-bar-consistency.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '// AUTO-GENERATED by vite.config.js (…' to contain 'portraits/frames/wu/sprite-v1/frame-0…'\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy-plugin.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '// AUTO-GENERATED by vite.config.js (…' to contain 'cards/studio-expanded/tt3-staff.webp'\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy-plugin.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '// AUTO-GENERATED by vite.config.js (…' to contain 'scenes/chests/boss-rig-v1/frame-00.we…'\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy-plugin.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '// AUTO-GENERATED by vite.config.js (…' to contain 'ui/slot-weather/partly-cloudy-v1.webp'\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy-plugin.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ …(11) ] to deeply equal []\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected +0 to be 30 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '2d4eb248c2666ce9abae900b5306458673a45…' to be '4a12567daad60a2ddf2aca90372b97ef11c14…' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-asset-redundancy.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ { kind: 'dom-update', …(5) }, …(1) ] to deeply equal []\r",
+    "count": 1,
+    "files": [
+      "tests/runtime-trace-modal.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 新脚本须在 acceptance-gate.mjs 的 WORKFLOW_TESTS 加映射（推荐，定向更快），或加入 EXEMPT_SCRIPTS 豁免（接受语法契约+引用搜索下限）。未登记：scripts/asset-manifest-source.mjs, scripts/css-component-scopes.mjs: expected [ …(2) ] to deeply equal []\r",
+    "count": 1,
+    "files": [
+      "tests/scripts-contract.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'transparent' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/secondary-glass-style.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'none' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/secondary-glass-style.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"querySelectorAll\" to be called 3 times, but got 6 times\r",
+    "count": 1,
+    "files": [
+      "tests/selection-state-query-work.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 自测未通过：\r",
+    "count": 1,
+    "files": [
+      "tests/selftest-paths.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected undefined to be 'entry' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/settings-page.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 61 to be +0 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/settings-page.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [] to deeply equal [ 'top', 'height', …(2) ]\r",
+    "count": 1,
+    "files": [
+      "tests/settings-page.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '消耗牌堆：骷髅王剑×1，不朽斩×2（不自动洗回，仅由卡牌效果取回；点击查看）' to be '' // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/skull-sword-effective-session.test.js"
+    ]
+  },
+  {
+    "reason": "TypeError: checkSealTransformation is not a function\r",
+    "count": 1,
+    "files": [
+      "tests/stellar-divination.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { energy: 11, maxEnergy: 11, …(3) } to deeply equal { energy: 11, maxEnergy: 11, …(3) }\r",
+    "count": 1,
+    "files": [
+      "tests/structured-backupcell.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'normal-sha-6-0', …(8) ] to have a length of 98 but got 9\r",
+    "count": 1,
+    "files": [
+      "tests/sts-attack-presentation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [] to deeply equal [ 'agent-infuse-1' ]\r",
+    "count": 1,
+    "files": [
+      "tests/sts2-agent-infusion-1021.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'btDiscover', …(2) ] to deeply equal [ 'btDiscover', …(3) ]\r",
+    "count": 1,
+    "files": [
+      "tests/sts2-cast-layout-1021.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected <button type=\"button\" …(2)></button> to be <button type=\"button\" …(4)>…(1)</button> // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/sts2-pile-view-1021.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"spy\" to be called with arguments: [ <dialog …(4)>…(2)</dialog>, …(2) ]\r",
+    "count": 1,
+    "files": [
+      "tests/target-surface.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 1/7\\n            ' to contain '1/6'\r",
+    "count": 1,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 2/7\\n            ' to contain '2/6'\r",
+    "count": 1,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 3/7\\n            ' to contain '3/6'\r",
+    "count": 1,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 5/7\\n            ' to contain '5/6'\r",
+    "count": 1,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '\\n              壁纸 6/7\\n            ' to contain '6/6'\r",
+    "count": 1,
+    "files": [
+      "tests/title-wallpaper.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* 照相馆（卡牌收藏页）：筛选/窗口挂载网格/选片台/放大查看（拆分自原…' to contain 'game.devMode && libEditMode'\r",
+    "count": 1,
+    "files": [
+      "tests/ui-accessibility-regression.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: ', .reward-replica .reward-unit .reward-card[data-card-state-motion=\"true\"]' is not a valid selector\r",
+    "count": 1,
+    "files": [
+      "tests/ui-motion-cascade.test.js"
+    ]
+  },
+  {
+    "reason": "SyntaxError: ', .bag-rz' is not a valid selector\r",
+    "count": 1,
+    "files": [
+      "tests/ui-motion-cascade.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected [ 'heroAva', 'hpHud' ] to deeply equal [ 'heroAva', 'hpHud', …(1) ]\r",
+    "count": 1,
+    "files": [
+      "tests/ui-review-remediation.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 2 to be 6 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/warehouse-art-window.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"cardHTML\" to be called 8 times, but got 2 times\r",
+    "count": 1,
+    "files": [
+      "tests/warehouse-art-window.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected \"cardHTML\" to be called 6 times, but got 2 times\r",
+    "count": 1,
+    "files": [
+      "tests/warehouse-art-window.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 状态角标容器存在: expected null not to be null\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-b-status-icons.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: 腐化标记 角标存在: expected null not to be null\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-b-status-icons.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { display: 'grid!important', …(11) } to match object { display: 'grid!important', …(7) }\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-hand-select-grid.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected { display: 'flex', …(6) } to match object { Object (display, width, ...) }\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-hand-select-grid.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* ==================================…' to contain '返回地图'\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-return-map.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null to match object { flex: '1', 'min-height': '0', …(1) }\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-reward-fit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null to match object { overflow: 'hidden' }\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-reward-fit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected null to match object { order: '10' }\r",
+    "count": 1,
+    "files": [
+      "tests/wf-feedback1021-c-reward-fit.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected 1 to be +0 // Object.is equality\r",
+    "count": 1,
+    "files": [
+      "tests/workflow-change-review.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '需要处理带入 1 张 · 占 3/16 格（同名超限多占 1 格） · 0…' to contain '人物尚未拥有'\r",
+    "count": 1,
+    "files": [
+      "tests/xart-z1-batch1.test.js"
+    ]
+  },
+  {
+    "reason": "AssertionError: expected '/* game.session.death.js —— 受击反馈与终局结算…' to contain 'uiDisclosure({label:\\'物资明细与保留规则\\',cla…'\r",
+    "count": 1,
+    "files": [
+      "tests/xart-z1-batch2.test.js"
+    ]
+  }
+]

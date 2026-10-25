@@ -1,0 +1,45 @@
+{
+  "task": "WF-fast-bug-sweep-r3-1024",
+  "date": "2026-10-24",
+  "status": "complete-uncommitted",
+  "newRootCauses": 5,
+  "previousRoundsNotRecounted": 21,
+  "cumulativeRootCauses": 26,
+  "parts": { "parent": 1, "battle": 1, "run-save": 1, "tools-audio": 2 },
+  "existingRootExtensionsNotRecounted": 1,
+  "parentFix": {
+    "title": "水平触控板滚动被当作向下滚动，意外缩小地图",
+    "source": "game/src/core/game-boot-input.js",
+    "test": "tests/fast-bug-sweep-round3-map-wheel.test.js",
+    "change": "deltaY为0时不提交缩放或重绘；正常垂直滚轮继续以光标为锚缩放",
+    "red": { "failed": 1, "passed": 2 },
+    "green": { "files": 4, "passed": 35, "exitCode": 0 }
+  },
+  "sliceEvidence": ["battle.json", "run-save.json", "tools-audio.json"],
+  "sourceManifest": "source-manifest.json",
+  "checks": {
+    "integratedFinal": { "files": 8, "passed": 101, "exitCode": 0, "log": "integrated-final.log" },
+    "typecheckFinal": { "implementationCoverage": "622/622", "exitCode": 0, "log": "typecheck-final.log" },
+    "sliceRegressions": ["battle: 5 files / 45 passed; additional audit 10 files / 100 passed", "run-save: 5 files / 34 passed", "tools-audio final: 8 files / 85 passed"],
+    "eslint": "six production files and four new regression files passed",
+    "finalRepeatReason": "Parent review found the same unsafe conversion in action.type after initial action.name repair; extended the existing root, then reran final integration/type checks against frozen input."
+  },
+  "browser": {
+    "platform": "Codex current in-app browser, current window only",
+    "url": "http://127.0.0.1:5358/",
+    "input": "real clicks and native horizontal scroll, no hidden game state injection",
+    "passed": ["enter existing slot02 hub", "choose casual skin then default skin", "depart into normal map", "horizontal scroll preserves node positions and map scale"],
+    "screenshotBefore": "map-before.png",
+    "screenshotAfter": "map-after-horizontal.png",
+    "consoleErrors": 0,
+    "notCovered": ["post-battle stale item command", "same-slot old skin receipt replay", "missing skin artwork fallback", "configured LLM replies", "Agent stale confirmation action"],
+    "notCoveredNote": "Special branches have real-engine/Base/Art/Agent regression tests; normal browser interaction is not claimed to prove those branches.",
+    "interruption": "One own agent.protocol.js update triggered Vite reload during initial hub entry; current state was reread and navigation repeated after source freeze.",
+    "service": "own PID41256 / exec54221; stopped after command identity verification; port5358 released, shared services untouched"
+  },
+  "remaining": [
+    "Earlier broad scan failures and another active refactor's script mapping gaps remain outside this batch; no full-project green claim.",
+    "Another task's frozen extra-turn candidate remains unverified and unmodified.",
+    "No full suite, build, commit, push, dependency installation or network audit."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "reason": "冻结完整测试暴露的同组输入；随代码提交，不降低原文与链接可达断言",
+  "paths": [
+    "docs/evidence/2026-10-24-photo-notes/original-notes.json",
+    "docs/evidence/2026-10-24-photo-notes/sync-32-notes.json",
+    "docs/evidence/2026-10-25-battle-scene-restore/README.md",
+    "docs/evidence/2026-10-23-WF-review-remediation-1023/audio.md",
+    "docs/evidence/2026-10-25-fuzzy-search-map-travel/README.md",
+    "docs/evidence/2026-10-25-photo-studio-entry/README.md",
+    "docs/evidence/2026-10-25-interface-entry-performance/README.md",
+    "docs/evidence/2026-10-25-interaction-hotpaths/README.md",
+    "docs/evidence/2026-10-25-map-observer-performance/README.md",
+    "docs/evidence/2026-10-25-catalog-search-performance/README.md",
+    "docs/evidence/2026-10-24-WF-context-reading/candidate-validation-2026-10-22.md",
+    "docs/evidence/2026-10-24-settings-ach-restore/README.md",
+    "docs/evidence/2026-10-24-WF-expedition-redesign-1024/README.md"
+  ]
+}

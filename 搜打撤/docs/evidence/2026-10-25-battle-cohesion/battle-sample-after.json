@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "status": "inconclusive",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T11:43:48.377Z",
+  "inputKind": "real-input",
+  "detail": "HMR在截图前重置回首页，此截图不用于战斗验收；有效截图为battle-sample-final.png。",
+  "screenshot": {
+    "path": "battle-sample-after.png",
+    "bytes": 159136,
+    "sha256": "fb187f23beeb5c9108e7a623a7678872d26b340ddbee3db36473c51782e23ef8"
+  },
+  "errors": [
+    "Captured title after shared-server HMR; no visible battle images"
+  ],
+  "url": "http://127.0.0.1:5200/dev/battle-cohesion-review.html",
+  "images": [],
+  "console": []
+}

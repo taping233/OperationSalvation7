@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-p3-ui-complete-1024",
+  "date": "2026-10-24",
+  "owner": "Friday",
+  "goal": "按P3设计方案完成整体UI美术动效整改与实页验证",
+  "paths": [
+    "game/src/ui/map-health-hud.js",
+    "game/src/ui/run-top-bar.js",
+    "game/src/ui/run-top-bar.css",
+    "game/src/hub/game.bag.view2.js",
+    "game/src/hub/game.bag.js",
+    "game/src/ui/card-zoom-controller.js",
+    "game/src/ui/ui.dom.types.d.ts",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.discover-view.js",
+    "game/css/inventory-zoom.css",
+    "game/css/battle-discover.css",
+    "game/css/bag-design-system.css",
+    "game/css/expedition-inventory.css",
+    "game/css/battle-status-chips.css",
+    "game/css/battle-pile-view.css",
+    "game/css/public-controls.css",
+    "game/css/settings-navigation.css",
+    "game/css/selection-state-motion.css",
+    "game/css/discovery-selection.css",
+    "tests/battle-area-hover-hand-context.test.js",
+    "tests/map-health-hud.test.js",
+    "tests/run-top-bar-actions.test.js",
+    "tests/bag-ui-language.test.js",
+    "tests/bag-page-lifecycle-review.test.js",
+    "tests/bag-zoom-navigation.test.js",
+    "tests/sts2-cast-layout-1021.test.js",
+    "docs/modules/secondary-ui-style.md",
+    "docs/production/art/UI-PAGE-COVERAGE.md",
+    "docs/evidence/2026-10-24-WF-p3-ui-complete-1024"
+  ],
+  "doneWhen": [
+    "原28单元对照现码与实页闭合，范围内问题修正，边界明确"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原28单元对照闭合，设置背包发现状态牌库及生命顶栏代表实页通过；19份输入一致；定向回归与静态检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "触摸/全部Boss/满包拖动/16状态自然到期/逐帧性能未覆盖；6项既有基线失败单列"
+  ],
+  "updatedAt": "2026-10-23T19:32:00.778Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

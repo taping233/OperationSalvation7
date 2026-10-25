@@ -1,0 +1,20 @@
+--- a/搜打撤/game/src/hub/battle-settlement.commands.js
++++ b/搜打撤/game/src/hub/battle-settlement.commands.js
+@@ -190,7 +190,7 @@
+         stillCurrent.value.revision !== liveIdentity.value.revision) return fail('STALE_RUN', '对局已变化，旧结算已取消');
+     if (prior.replay) return { ok: true, replay: true, receipt: prior.value };
+ 
+-    const baseSnapshot = clone(base.value);
++    const baseSnapshot = base.value;
+     const stats = isRecord(baseSnapshot.stats) ? baseSnapshot.stats : {};
+     const oldSeconds = Number(stats.playSeconds);
+     const nextStats = {
+@@ -209,7 +209,7 @@
+     /** @type {BattleSettlementAttempt} */
+     const attempt = freezeDeep({
+       context, command: COMMAND, runId: liveIdentity.value.runId, payload,
+-      afterBase, afterRun: clone(snapshot), output: { eggBattles, ...(progression ? { progression } : {}) },
++      afterBase, afterRun: snapshot, output: { eggBattles, ...(progression ? { progression } : {}) },
+     });
+     const finalIdentity = readIdentity(slotId);
+     if (getActiveSlot() !== slotId || getBase().slot !== slotId) return fail('STALE_SLOT', '档位已切换，旧结算已取消');

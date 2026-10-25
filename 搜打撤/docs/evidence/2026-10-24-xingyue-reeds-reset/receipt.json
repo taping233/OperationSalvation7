@@ -1,0 +1,31 @@
+{
+  "status": "installed",
+  "channels": [
+    "NAI V5 Full",
+    "built-in image_gen"
+  ],
+  "asset": "game\\assets\\reconstruction\\wallpaper-xingyue-reeds-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 453872,
+  "sha256": "2705a082ab551cb8cdfb63cc9dd752f88624a4b06c6c14d9ac3712f368af169b",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-4f186df6-562c-42b9-b171-1de81f6852a4.png",
+  "source_sha256": "7b27c0271e41a4deec05bce52aac7defe07004193553955a49d9146ac08aa2f9",
+  "before": ".tmp\\nai\\xingyue-reeds-reset-1024\\before-wallpaper.webp",
+  "before_sha256": "a0a603507f5b11c20fc74a57e34641bf0faf631bac036dd0c8bdb5cd715d53b5",
+  "draft": ".tmp\\nai\\xingyue-reeds-reset-1024\\nai5-draft.png",
+  "nai_seed": 562224166,
+  "builtin_final": ".tmp\\nai\\xingyue-reeds-reset-1024\\builtin-final.png",
+  "prompt_file": "builtin-prompt.txt",
+  "outfit": "深青绿长羊毛外套、燕麦色高领针织衫、赭金围巾、炭灰褶裥长裙；鞋靴被前景自然遮挡",
+  "reference_roles": [
+    "NAI5新换装底稿",
+    "旧图仅芦苇夕照场景与构图",
+    "现行星月立绘仅身份，不继承神官服或提灯"
+  ],
+  "review": "目视新冬装完整上身，保留浅金长辫、金瞳、白月牙发饰与芦苇夕照红飘带主题；双手动作重绘",
+  "verification": "按老板要求不测试、不打开游戏实页；只执行图片转换、尺寸及哈希登记",
+  "large_binary_policy": "原始PNG在根.tmp，不进Git；由本次NAI及内置ImageGen获取，路径与SHA见本记录及nai-request.json"
+}

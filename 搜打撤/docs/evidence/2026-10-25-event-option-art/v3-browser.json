@@ -1,0 +1,30 @@
+{
+  "url": "http://localhost:5200/event-template.html",
+  "choices": [
+    {
+      "material": "url(\"http://localhost:5200/dev/assets/event-option-ink-v3.webp\")",
+      "rect": "{\"bottom\":292,\"height\":174,\"left\":954.1625366210938,\"right\":1575.6000366210938,\"top\":118,\"width\":621.4375,\"x\":954.1625366210938,\"y\":118}",
+      "selected": "false"
+    },
+    {
+      "material": "url(\"http://localhost:5200/dev/assets/event-option-ink-v3.webp\")",
+      "rect": "{\"bottom\":498,\"height\":174,\"left\":950.1625366210938,\"right\":1571.6000366210938,\"top\":324,\"width\":621.4375,\"x\":950.1625366210938,\"y\":324}",
+      "selected": "true"
+    }
+  ],
+  "confirm": "{\"bottom\":490,\"height\":158,\"left\":1433.5999755859375,\"right\":1579.5999755859375,\"top\":332,\"width\":146,\"x\":1433.5999755859375,\"y\":332}",
+  "noOverflow": true,
+  "story": "{\"bottom\":683.4875259399414,\"height\":94.1500015258789,\"left\":42,\"right\":892,\"top\":589.3375244140625,\"width\":850,\"x\":42,\"y\":589.3375244140625}",
+  "window": [
+    1618,
+    956
+  ],
+  "logs": [],
+  "checks": [
+    "真实点击选择",
+    "Enter确认",
+    "结果禁用",
+    "重看恢复",
+    "Escape取消"
+  ]
+}

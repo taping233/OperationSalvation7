@@ -1,0 +1,2435 @@
+{
+  "status": "authorized-implementation",
+  "groups": 28,
+  "instances": 383,
+  "helperPath": "tests/helpers/environment-fixtures.js",
+  "testPath": "tests/environment-fixtures.test.js",
+  "netBeforeShapeTests": 32828,
+  "paths": [
+    "tests/helpers/environment-fixtures.js",
+    "tests/environment-fixtures.test.js",
+    "tests/a3-battle-rules.test.js",
+    "tests/abyss-sovereign.test.js",
+    "tests/agent-console-jump.test.js",
+    "tests/agent-scenes.test.js",
+    "tests/altar-sacrifice-zones-cloud.test.js",
+    "tests/armup-mode.test.js",
+    "tests/bag-pouch-capacity.test.js",
+    "tests/bag-slam-button.test.js",
+    "tests/battle-all-cards.test.js",
+    "tests/battle-ally-dom-order.test.js",
+    "tests/battle-area-hover-hand-context.test.js",
+    "tests/battle-art-warm-scope.test.js",
+    "tests/battle-bloom-discovery.test.js",
+    "tests/battle-curse-immunity-lifetime.test.js",
+    "tests/battle-dev-grant-card.test.js",
+    "tests/battle-direct-trigger-source.test.js",
+    "tests/battle-discover-result-source.test.js",
+    "tests/battle-effect-damage-boundary.test.js",
+    "tests/battle-end-turn-selection.test.js",
+    "tests/battle-entry-view.test.js",
+    "tests/battle-equipment-skill-synthesis.test.js",
+    "tests/battle-frames-lifecycle.test.js",
+    "tests/battle-frames-ownership.test.js",
+    "tests/battle-hand-content-diff.test.js",
+    "tests/battle-hand-inspector.test.js",
+    "tests/battle-imitate-unplayable.test.js",
+    "tests/battle-infusion-action-layout.test.js",
+    "tests/battle-pouch-entry.test.js",
+    "tests/battle-render-derivation.test.js",
+    "tests/battle-render-runtime-trace.test.js",
+    "tests/battle-resolution.test.js",
+    "tests/battle-review-remediation-1023.test.js",
+    "tests/battle-round-recording.test.js",
+    "tests/battle-rule-audit-1014.test.js",
+    "tests/battle-runtime-completion-1014.test.js",
+    "tests/battle-scenery-secondary-ready.test.js",
+    "tests/battle-semantic-feedback.test.js",
+    "tests/battle-settlement-retry.test.js",
+    "tests/battle-snapshot-phase-cost.test.js",
+    "tests/battle-target-dom.test.js",
+    "tests/battle-temp-item-destination.test.js",
+    "tests/battle-tools-lifecycle.test.js",
+    "tests/battle-trigger-lifecycle-unification.test.js",
+    "tests/battle-turn-start-discover.test.js",
+    "tests/battle-unit-metadata.test.js",
+    "tests/blackmarket-card-preview.test.js",
+    "tests/boot.test.js",
+    "tests/boss-equip-select.test.js",
+    "tests/boss-rescue-pool.test.js",
+    "tests/builtin-card-execution-battle.test.js",
+    "tests/builtin-migration-lookup.test.js",
+    "tests/card-description-audit-battle.test.js",
+    "tests/card-description-fix-auxiliary.test.js",
+    "tests/card-description-fix-lifecycle.test.js",
+    "tests/card-description-fix-pools.test.js",
+    "tests/card-description-fix-target-effects.test.js",
+    "tests/card-effect-semantics.test.js",
+    "tests/card-rules-per-foe-boundary.test.js",
+    "tests/card-rules-schema.test.js",
+    "tests/cards-choice-armor-guard.test.js",
+    "tests/chase-slash.test.js",
+    "tests/chest-acquired-gift-cloud.test.js",
+    "tests/chest-batch-receipt.test.js",
+    "tests/chest-callback-lifecycle-audit.test.js",
+    "tests/chest-click-flow.test.js",
+    "tests/chest-coins-summary.test.js",
+    "tests/chest-multi-queue-regression.test.js",
+    "tests/chest-receive-animation.test.js",
+    "tests/chests-reward-capacity-notice.test.js",
+    "tests/compendium.test.js",
+    "tests/cursed-blade.test.js",
+    "tests/custom-cards.test.js",
+    "tests/departure-real-session-review.test.js",
+    "tests/dev-console-lifecycle.test.js",
+    "tests/dev-tools-lazy-entry.test.js",
+    "tests/direct-cast.test.js",
+    "tests/discover-infusion-feedback.test.js",
+    "tests/dual-wield.test.js",
+    "tests/e2-view-hp.test.js",
+    "tests/e5-session-recovery.test.js",
+    "tests/e6-card-rules-execution.test.js",
+    "tests/e7-rule-warning-view.test.js",
+    "tests/e8-card-migration.test.js",
+    "tests/ember-burst-rot-seed.test.js",
+    "tests/energy-crystal-restoration.test.js",
+    "tests/event-callback-lifecycle-audit.test.js",
+    "tests/event-choice-acquired-gift-cloud.test.js",
+    "tests/event-choice-recovery-cloud.test.js",
+    "tests/event-choice-session-resume-cloud.test.js",
+    "tests/event-node-binding-cloud.test.js",
+    "tests/event-recode-selection-continuity.test.js",
+    "tests/event-settlement-unification.test.js",
+    "tests/event-signal-puzzle-integration.test.js",
+    "tests/expedition-battle-presentation.test.js",
+    "tests/expedition-page-lifecycle.test.js",
+    "tests/extraction-first-explore-xp.test.js",
+    "tests/extraction-flow.test.js",
+    "tests/extraction-receipt-idempotency.test.js",
+    "tests/extraction-record-saved-cards-cloud.test.js",
+    "tests/extraction-recovery-ui.test.js",
+    "tests/extraction-recovery.test.js",
+    "tests/extraction-session-resume.test.js",
+    "tests/extraction-settlement.test.js",
+    "tests/first-explore-marking.test.js",
+    "tests/four-player-capacity-text.test.js",
+    "tests/four-player-event-regressions.test.js",
+    "tests/framework-independent-battles.test.js",
+    "tests/full-review-regressions-battle.test.js",
+    "tests/full-review-regressions-hub.test.js",
+    "tests/full-review-regressions-world.test.js",
+    "tests/game-session-elapsed.test.js",
+    "tests/ghostblade-stealth-break.test.js",
+    "tests/hand-material-selection-window.test.js",
+    "tests/hero-cards.test.js",
+    "tests/infuse-free-paths.test.js",
+    "tests/infuse-free-play.test.js",
+    "tests/item15-18-fixes.test.js",
+    "tests/last-stand-poison-burst.test.js",
+    "tests/lava-blast.test.js",
+    "tests/m-batch-behavior.test.js",
+    "tests/m1-contract.test.js",
+    "tests/m1-data.test.js",
+    "tests/m10-data.test.js",
+    "tests/m2-contract.test.js",
+    "tests/m3-contract.test.js",
+    "tests/m3-data.test.js",
+    "tests/m5-data.test.js",
+    "tests/m7-battle.test.js",
+    "tests/mana-surge.test.js",
+    "tests/message-batch-0917.test.js",
+    "tests/message-batch-0920-late.test.js",
+    "tests/message-fixes.test.js",
+    "tests/mistbox.test.js",
+    "tests/mystery-potion-observation.test.js",
+    "tests/n1-infuse-uid-toggle.test.js",
+    "tests/nest-hearts.test.js",
+    "tests/nest-regression.test.js",
+    "tests/nightshift-u10-teardown-guards.test.js",
+    "tests/node-cancel-semantics.test.js",
+    "tests/node-retrigger.test.js",
+    "tests/normal-effects-deck-regression.test.js",
+    "tests/normal-starter-deck.test.js",
+    "tests/page-perf-battle.test.js",
+    "tests/pearl-storage-interface.test.js",
+    "tests/playthrough-bot.test.js",
+    "tests/potion-tip-lifecycle.test.js",
+    "tests/potion-tip.test.js",
+    "tests/provoke-target-contract.test.js",
+    "tests/r3-0-command-guards.test.js",
+    "tests/r3-a-preview.test.js",
+    "tests/r3-b-action-boundary.repro.test.js",
+    "tests/r5a-session-menu.test.js",
+    "tests/rapid-fire.test.js",
+    "tests/reactive-draw-cast-continuation.test.js",
+    "tests/requested-card-integration.test.js",
+    "tests/requested-equipment-effects.test.js",
+    "tests/reserved-card-id-regression.test.js",
+    "tests/restoration-potion-observation.test.js",
+    "tests/reward-capacity-preview.test.js",
+    "tests/reward-settlement-unification.test.js",
+    "tests/safe-pearl-access.test.js",
+    "tests/save-recovery-session-feedback.test.js",
+    "tests/save-slot-delete-results.test.js",
+    "tests/scavenge-mode-feedback.test.js",
+    "tests/session-base-persistence.test.js",
+    "tests/skull-sword-effective-session.test.js",
+    "tests/stellar-divination.test.js",
+    "tests/structured-backupcell.test.js",
+    "tests/structured-effect-authority.test.js",
+    "tests/structured-onplay-battle.test.js",
+    "tests/sts-attack-presentation.test.js",
+    "tests/sts2-agent-infusion-1021.test.js",
+    "tests/sts2-agent-replay.test.js",
+    "tests/sts2-battle-settings-restart.test.js",
+    "tests/sts2-combat-facts.test.js",
+    "tests/sts2-consumed-items.test.js",
+    "tests/sts2-consumed-pile.test.js",
+    "tests/sts2-consumed-rules.test.js",
+    "tests/sts2-enemy-plan.test.js",
+    "tests/sts2-hand-selection-contract.test.js",
+    "tests/sts2-infusion-flow-1021.test.js",
+    "tests/sts2-unified-consumed-pile.test.js",
+    "tests/sword-consume-trigger.test.js",
+    "tests/sys03-altar-restore-txn.test.js",
+    "tests/sys03-loot-shop-txn.test.js",
+    "tests/terminal-death.test.js",
+    "tests/terminal-persistence.test.js",
+    "tests/terminal-retry-copy.test.js",
+    "tests/tt12-hitechrd-battle-baseline.test.js",
+    "tests/tt12-hitechrd-structured.test.js",
+    "tests/tt12-structured-battle.test.js",
+    "tests/tt7-frozenight-structured-battle.test.js",
+    "tests/tt7-hand-payment.test.js",
+    "tests/tt7-sneak-structured.test.js",
+    "tests/u18-negative-hp-death.test.js",
+    "tests/venom-staff-passive.test.js",
+    "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+    "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+    "tests/wf-feedback1021-b-potion-chain.test.js",
+    "tests/wf-feedback1021-b-potion-targeting.test.js",
+    "tests/wf-feedback1021-b-status-icons.test.js"
+  ],
+  "inputManifest": [
+    {
+      "path": "tests/a3-battle-rules.test.js",
+      "sha256": "41a3939a9136575e5ba6bdbb8929ea917330c3b875a5743f94f2960eb28d1515",
+      "bytes": 20984
+    },
+    {
+      "path": "tests/abyss-sovereign.test.js",
+      "sha256": "33c63cbcf37e6fbc4659bf5219a8a3bd4fd1e7fecd4ca91e2a45cef136a410e4",
+      "bytes": 9014
+    },
+    {
+      "path": "tests/agent-console-jump.test.js",
+      "sha256": "84a383dc161fb18a6dc2387543827d3c179abde634d83f1d1a6519140d56da36",
+      "bytes": 10663
+    },
+    {
+      "path": "tests/agent-scenes.test.js",
+      "sha256": "c93a845dde49cdfc6abcc979e02c4e99fedbef6525c5bffd92e2b08052ee8d2d",
+      "bytes": 6028
+    },
+    {
+      "path": "tests/altar-sacrifice-zones-cloud.test.js",
+      "sha256": "5994fe63d9c853b35d37dddd2212cc15b3f72320f12b5c44ce9539743cf4997f",
+      "bytes": 12714
+    },
+    {
+      "path": "tests/armup-mode.test.js",
+      "sha256": "46b9554e7cf495da362363d6e0e5e4bf37997ddb252ba38d59a11e84dd376823",
+      "bytes": 4088
+    },
+    {
+      "path": "tests/bag-pouch-capacity.test.js",
+      "sha256": "a8666139783edca155f59abd22802113d5f3ee5de7aa559cf6e0d4e9a0da34f2",
+      "bytes": 19925
+    },
+    {
+      "path": "tests/bag-slam-button.test.js",
+      "sha256": "9087dede7b158ef82f9edb8542fddf866379b2a5c58e783f850e4efcf53c2082",
+      "bytes": 12602
+    },
+    {
+      "path": "tests/battle-all-cards.test.js",
+      "sha256": "786d8b02cc0095679dd61a4c86d5ded36de8be124117a98c63897794067fc446",
+      "bytes": 18631
+    },
+    {
+      "path": "tests/battle-ally-dom-order.test.js",
+      "sha256": "5d047c338ca608a47d000edcbba464288bfb40890cca7ffc43024266d130ed0b",
+      "bytes": 11504
+    },
+    {
+      "path": "tests/battle-area-hover-hand-context.test.js",
+      "sha256": "c74c2b48e1eaf5e0d8c4f0ff178a0887b1ebe9609c72604b6a3e2c8aa3ec2f3b",
+      "bytes": 16677
+    },
+    {
+      "path": "tests/battle-art-warm-scope.test.js",
+      "sha256": "e14a09fff698d5e4625a3ce51734eb35b8d6e6a0db5aa74a4e2af7d2557baf94",
+      "bytes": 2306
+    },
+    {
+      "path": "tests/battle-bloom-discovery.test.js",
+      "sha256": "de37b73ca1285dc12bc3727773df5d544becdf097fa35b2c2a74965e099dc799",
+      "bytes": 4384
+    },
+    {
+      "path": "tests/battle-curse-immunity-lifetime.test.js",
+      "sha256": "d08e2f1c575e4c49f14290a3d1ceaffc9a243a3dd2d6038fb6967f2c9114e071",
+      "bytes": 4299
+    },
+    {
+      "path": "tests/battle-dev-grant-card.test.js",
+      "sha256": "c89eb26c58a0a11125d11353fd8ccd9203e589b84a141af680e442e8228841b6",
+      "bytes": 1846
+    },
+    {
+      "path": "tests/battle-direct-trigger-source.test.js",
+      "sha256": "e9346f38b11a80e3cfa7265eb7de9d487d984cf23641b15ac294aca1616227d8",
+      "bytes": 4865
+    },
+    {
+      "path": "tests/battle-discover-result-source.test.js",
+      "sha256": "dccb1fd911cef0a00ddbecac48ae4089721dd0ddffd669c4c5e7aa9b8c652344",
+      "bytes": 5558
+    },
+    {
+      "path": "tests/battle-effect-damage-boundary.test.js",
+      "sha256": "e5b106bd6388817269b5ae95b451d2fd47aa72a42e5651be582f1261daf045c7",
+      "bytes": 2976
+    },
+    {
+      "path": "tests/battle-end-turn-selection.test.js",
+      "sha256": "a0304a4b08f93d03fc038c276e24ecb3ab6cdafbd868c1af5ab3ebf1ca1a8c5c",
+      "bytes": 16366
+    },
+    {
+      "path": "tests/battle-entry-view.test.js",
+      "sha256": "0c123223eba68ec5f698beb0d7fe5c808d386c1bbcb4e1eb3736a99ae5933524",
+      "bytes": 20860
+    },
+    {
+      "path": "tests/battle-equipment-skill-synthesis.test.js",
+      "sha256": "9d58d34c3e1d8ec99be8f06e34e6636cc3fcd450fac5f1e87582872e5b8380a3",
+      "bytes": 10081
+    },
+    {
+      "path": "tests/battle-frames-lifecycle.test.js",
+      "sha256": "7aaec09cc3c219df90e1d394f73a667424ddfa7c376835e9f9b80a6231544f39",
+      "bytes": 36445
+    },
+    {
+      "path": "tests/battle-frames-ownership.test.js",
+      "sha256": "132425542a6ef7ab2dd36cc464ddf5b011cec5f827fe90bcaa7dee8ca6efa8a0",
+      "bytes": 36513
+    },
+    {
+      "path": "tests/battle-hand-content-diff.test.js",
+      "sha256": "b4aafeed2e4a16015898a5592ef87fc13d5407a05b0bf8dd4ac8af5f6bd69a19",
+      "bytes": 10094
+    },
+    {
+      "path": "tests/battle-hand-inspector.test.js",
+      "sha256": "6e71d3dea3375307cba431a96e4637b427279ec252ac08b4a2a043a8ff67452b",
+      "bytes": 80779
+    },
+    {
+      "path": "tests/battle-imitate-unplayable.test.js",
+      "sha256": "08c68068bf1877d9e941d3e1baf911e9ce428d18db29a7772096904f0690c7e6",
+      "bytes": 6276
+    },
+    {
+      "path": "tests/battle-infusion-action-layout.test.js",
+      "sha256": "4b9e4e269fd628f56ab1cab0945fd36ae5f7fe02e03dd6d043fc5f4a73732661",
+      "bytes": 36867
+    },
+    {
+      "path": "tests/battle-pouch-entry.test.js",
+      "sha256": "4715d5baa2cbb8469a68874323a085f95d2a0b95d3097ce3c1ce4961f4e680c8",
+      "bytes": 4346
+    },
+    {
+      "path": "tests/battle-render-derivation.test.js",
+      "sha256": "07b3304a87dac92071fdf66972336ccbc5b400ff1dea655488eed02646e9cb66",
+      "bytes": 7955
+    },
+    {
+      "path": "tests/battle-render-runtime-trace.test.js",
+      "sha256": "b3cb8ad18a9e6a5fce1ca62cb2b527e9989a1de643207367925e6cd152cff776",
+      "bytes": 13128
+    },
+    {
+      "path": "tests/battle-resolution.test.js",
+      "sha256": "8aa933aeb3b0e26abb8d2554122f80cb90a5ec1eb660225ae52299b7c78f6db5",
+      "bytes": 74825
+    },
+    {
+      "path": "tests/battle-review-remediation-1023.test.js",
+      "sha256": "68d1696ba61494272a3fb2a4e1109fecc55e04a21d958279315621b00fe14c83",
+      "bytes": 7800
+    },
+    {
+      "path": "tests/battle-round-recording.test.js",
+      "sha256": "9bfb0471312ec06a46134d73f8faf618d729f19f946ff650228f63de93183b5f",
+      "bytes": 5345
+    },
+    {
+      "path": "tests/battle-rule-audit-1014.test.js",
+      "sha256": "b36ded6babdff22382e263d1d7c578506ae0ccf86086be3a9e28faaf8dd065ed",
+      "bytes": 14263
+    },
+    {
+      "path": "tests/battle-runtime-completion-1014.test.js",
+      "sha256": "9dd7bd8106634c1f6e7293822674c314b917df266d45f8818c34503e7dcdd5a8",
+      "bytes": 12242
+    },
+    {
+      "path": "tests/battle-scenery-secondary-ready.test.js",
+      "sha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549",
+      "bytes": 8480
+    },
+    {
+      "path": "tests/battle-semantic-feedback.test.js",
+      "sha256": "bbc21aaf106aa7dda3d127f5d5328ab83b1a0f96688ef413c0d5bcb04e202b10",
+      "bytes": 12046
+    },
+    {
+      "path": "tests/battle-settlement-retry.test.js",
+      "sha256": "1dc169e761cbfeaaaa00fe071222f299ea392a7fe210c2eb2246a5b73bb90dc8",
+      "bytes": 35854
+    },
+    {
+      "path": "tests/battle-snapshot-phase-cost.test.js",
+      "sha256": "71fddfd8d26519a18521f3753fafc2927785bbc7f2a1da2d846e680bf1203e14",
+      "bytes": 8701
+    },
+    {
+      "path": "tests/battle-target-dom.test.js",
+      "sha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff",
+      "bytes": 11350
+    },
+    {
+      "path": "tests/battle-temp-item-destination.test.js",
+      "sha256": "0a1d1b3e7880576fbe7748446d2bf2aa749c589f2244c6bb87292ed82925015b",
+      "bytes": 7302
+    },
+    {
+      "path": "tests/battle-tools-lifecycle.test.js",
+      "sha256": "48d96365f9080828a9a3f06ed31230d9ec2b362520321b5650a0e42c96e193c5",
+      "bytes": 15680
+    },
+    {
+      "path": "tests/battle-trigger-lifecycle-unification.test.js",
+      "sha256": "be772c695f964aa0fac3b18309ecabc5f5918192cd3d53991fa38c92ab259abe",
+      "bytes": 14052
+    },
+    {
+      "path": "tests/battle-turn-start-discover.test.js",
+      "sha256": "d3bd37b16e24fcc08c9b0e179402979da00c38fba274fbecb6a31803247d86f3",
+      "bytes": 7464
+    },
+    {
+      "path": "tests/battle-unit-metadata.test.js",
+      "sha256": "9435c053a9ab960b2f02332451487ceb84f6b51cf78a9be3f40fef0e436d22cf",
+      "bytes": 13050
+    },
+    {
+      "path": "tests/blackmarket-card-preview.test.js",
+      "sha256": "c7b173014629fd973b9e8026fd1be3b1ba48feb77c9c29029811b884ce8f1d68",
+      "bytes": 11165
+    },
+    {
+      "path": "tests/boot.test.js",
+      "sha256": "12b335d73cd961eae195ee9e223b94205d57ffdbb30a7048eefc51ffdccb2a2e",
+      "bytes": 51200
+    },
+    {
+      "path": "tests/boss-equip-select.test.js",
+      "sha256": "f5d59b46d687658a76a9f84b1a19a95d4cc1acfdf7c46a23a8106149d72301b3",
+      "bytes": 10340
+    },
+    {
+      "path": "tests/boss-rescue-pool.test.js",
+      "sha256": "1bc23e261c5801b812c4b0f8b4f66ed1986ed67668bb957cb8173851f77063ab",
+      "bytes": 4317
+    },
+    {
+      "path": "tests/builtin-card-execution-battle.test.js",
+      "sha256": "fe181b7844ed457d953eaac317371c255c3fd950e668bdd679d26187b774e27d",
+      "bytes": 5785
+    },
+    {
+      "path": "tests/builtin-migration-lookup.test.js",
+      "sha256": "d6b726c8227d93a7fc88b35291c2a5f327b08fbedf39b9667c6891aa1d9b2bcb",
+      "bytes": 11801
+    },
+    {
+      "path": "tests/card-description-audit-battle.test.js",
+      "sha256": "272db01561863bd9bcdc422a0aec11e1b9a839799041137d389c0486796df13c",
+      "bytes": 20896
+    },
+    {
+      "path": "tests/card-description-fix-auxiliary.test.js",
+      "sha256": "c821a93dfd6e13b61fe01d8e0bfac94797456c0b75c2c1c52b625d9a18944deb",
+      "bytes": 6270
+    },
+    {
+      "path": "tests/card-description-fix-lifecycle.test.js",
+      "sha256": "708427d926ba3eadd9c9dfab5cc5a6579cccef8b2e6427f68ea2cf635961f261",
+      "bytes": 8726
+    },
+    {
+      "path": "tests/card-description-fix-pools.test.js",
+      "sha256": "eab0db464e75a4d332790a2816c8083413c9cb3b7e24774d175b5c3a0a716ead",
+      "bytes": 8301
+    },
+    {
+      "path": "tests/card-description-fix-target-effects.test.js",
+      "sha256": "99a75377b6cd557b26150cce17bbe71b292b3e4a97b3bb24080393704d15eb41",
+      "bytes": 8212
+    },
+    {
+      "path": "tests/card-effect-semantics.test.js",
+      "sha256": "fbb32a2b4722d731d8b6a4c0c889b252a1fa3a1913b19bc3551f5dfb92c8e404",
+      "bytes": 5099
+    },
+    {
+      "path": "tests/card-rules-per-foe-boundary.test.js",
+      "sha256": "b3a50063effc798b4390c173613247200dbe8913c49016487f612ed41b72dedf",
+      "bytes": 4926
+    },
+    {
+      "path": "tests/card-rules-schema.test.js",
+      "sha256": "110cea8869aa91a9caa13a18ac04b08b7d898419a4545ed423a3f0555cc683db",
+      "bytes": 20076
+    },
+    {
+      "path": "tests/cards-choice-armor-guard.test.js",
+      "sha256": "040bdcc93a2d382b347903d3ca640b46f37f49a5b06b0e6898c3079257b53bb6",
+      "bytes": 7155
+    },
+    {
+      "path": "tests/chase-slash.test.js",
+      "sha256": "3e96fd6fc792b857dd4aeb3fedb6357408e5e5ad42aac5e998a483f2594849bd",
+      "bytes": 4335
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "sha256": "36bf8098ed9daad59ad2a5893ef6c3a8ae90fee3506b4ab6198ba6d59353805c",
+      "bytes": 15182
+    },
+    {
+      "path": "tests/chest-batch-receipt.test.js",
+      "sha256": "af6763d5182d79bab3b1af4e2dc847f111bf1043bd8c8d7f12285807b2622fe4",
+      "bytes": 3478
+    },
+    {
+      "path": "tests/chest-callback-lifecycle-audit.test.js",
+      "sha256": "70d8536f3f9af0be35317b8a248eb0c044cc66f993968b838a17a13cfb576cef",
+      "bytes": 13573
+    },
+    {
+      "path": "tests/chest-click-flow.test.js",
+      "sha256": "711220284284e772c9d5c144a4537d463837001bbe1ce01b268177c1e43cf6d5",
+      "bytes": 5925
+    },
+    {
+      "path": "tests/chest-coins-summary.test.js",
+      "sha256": "755aca0d8f224dc42f5539f330e9ab7d5df2bf178ecb655adb73615e84869b87",
+      "bytes": 3730
+    },
+    {
+      "path": "tests/chest-multi-queue-regression.test.js",
+      "sha256": "a1320ae74f7cb8817bb261f8dcc69187f5ae2ea5abb31cd5d6a01b4512ad94b2",
+      "bytes": 4128
+    },
+    {
+      "path": "tests/chest-receive-animation.test.js",
+      "sha256": "b51732cbb6576d6379f20f13b9dfc4db50008ec5ad6950c2f5b0f6d43b06a2ec",
+      "bytes": 3764
+    },
+    {
+      "path": "tests/chests-reward-capacity-notice.test.js",
+      "sha256": "247440b779e137a66fac9b5076bdacff6518703a78682632c6fe9ac951c39fd5",
+      "bytes": 17871
+    },
+    {
+      "path": "tests/compendium.test.js",
+      "sha256": "7343a709b27da6c4d46056d1c3d163bb1bc5a732ba195a740c447ac93200e883",
+      "bytes": 5630
+    },
+    {
+      "path": "tests/cursed-blade.test.js",
+      "sha256": "3cb2fe0a4b55316f1d2f40be1371d038f29720a545bb1d82e10cdebf52169214",
+      "bytes": 5076
+    },
+    {
+      "path": "tests/custom-cards.test.js",
+      "sha256": "a0c5f6c018a3719fb6e223989af5dddaa40b8a36aa80b2c0d01b81b5ed44ccec",
+      "bytes": 3459
+    },
+    {
+      "path": "tests/departure-real-session-review.test.js",
+      "sha256": "3a579f2a7973f8bc8bcff8278800e74314dd3ef83bb9ab592a06d33de6c12776",
+      "bytes": 4043
+    },
+    {
+      "path": "tests/dev-console-lifecycle.test.js",
+      "sha256": "cd21cc76364bd2faefbf14a749c5482bd6329d1d401aa49d1a99b794d111bdee",
+      "bytes": 8379
+    },
+    {
+      "path": "tests/dev-tools-lazy-entry.test.js",
+      "sha256": "05da3d2986807e5fe0c85bc6efa2c59e5f2fcaf2ccc6ec2b814471278477bb20",
+      "bytes": 15449
+    },
+    {
+      "path": "tests/direct-cast.test.js",
+      "sha256": "615042dbec1be015887ccfced7ffddae8de5905b694b5f05e145aea8c01d8729",
+      "bytes": 20077
+    },
+    {
+      "path": "tests/discover-infusion-feedback.test.js",
+      "sha256": "835dd93e13f0097c5e94f21ceb63332f450a787fa8f86addba43bf193c4c9d04",
+      "bytes": 4216
+    },
+    {
+      "path": "tests/dual-wield.test.js",
+      "sha256": "c03eda9f86b143c5899ada9a021d4b8a270699289a0e3f37c5b6d8469dfa9a86",
+      "bytes": 3244
+    },
+    {
+      "path": "tests/e2-view-hp.test.js",
+      "sha256": "c6892529724943984db8dd85cc548f8ea4c5a3c8e488ee31853bf817f35d3a03",
+      "bytes": 4989
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "sha256": "bf7b444813a6ccfad2239ef0898d0bccaf53f05bd8bc6fcdc7614d42359715a9",
+      "bytes": 24424
+    },
+    {
+      "path": "tests/e6-card-rules-execution.test.js",
+      "sha256": "6623fd52074b53fa16d99dc5042f8da717578da241e6b928bd1cc3a3bb59c2d8",
+      "bytes": 10378
+    },
+    {
+      "path": "tests/e7-rule-warning-view.test.js",
+      "sha256": "1dd76636ca613a84456041a51252b1e3b177eefa91d63dcb05f86d5f062b0bfa",
+      "bytes": 11435
+    },
+    {
+      "path": "tests/e8-card-migration.test.js",
+      "sha256": "174ccea0eaae46f3de114291c7429f8c66d1250d5d2c314feb1b9e42d1ff59be",
+      "bytes": 23096
+    },
+    {
+      "path": "tests/ember-burst-rot-seed.test.js",
+      "sha256": "67e8fff0571eea78ec48bdd684cdff6a55eb5527df1c185f889503125c4dee35",
+      "bytes": 6301
+    },
+    {
+      "path": "tests/energy-crystal-restoration.test.js",
+      "sha256": "60683e5fcd2918197d64d520407cad095c3b57eaa4697b91f8501480615ab255",
+      "bytes": 7639
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "sha256": "44990b473e5343a769ac5cdc63d067a027705aae8a1b6e6ab2a1e6df63985b90",
+      "bytes": 48080
+    },
+    {
+      "path": "tests/event-choice-acquired-gift-cloud.test.js",
+      "sha256": "f0b5fa2aded6d590da5f33f3d366e827c855314711f56b686fed8fd228854ea1",
+      "bytes": 14007
+    },
+    {
+      "path": "tests/event-choice-recovery-cloud.test.js",
+      "sha256": "2f4cb83f1477de95f9e67d09f8456e68fbe4af633c4f10d4350a8202112de5a4",
+      "bytes": 33030
+    },
+    {
+      "path": "tests/event-choice-session-resume-cloud.test.js",
+      "sha256": "46fdd508cfb36ddfc29f7fb821e06747d2db5aa6fbb7dd5af407e6d78fd30e71",
+      "bytes": 4889
+    },
+    {
+      "path": "tests/event-node-binding-cloud.test.js",
+      "sha256": "9e80942d0c6ee7c3cdd8850c6e37f5cf9c0d410581d7bca8b9b35b5d73ea22d3",
+      "bytes": 13135
+    },
+    {
+      "path": "tests/event-recode-selection-continuity.test.js",
+      "sha256": "aa5fdb2066e13cb15d033a7b14149edd684a84d4c4a980f655dd5f13333e1ac5",
+      "bytes": 8695
+    },
+    {
+      "path": "tests/event-settlement-unification.test.js",
+      "sha256": "c6e4aaafed02c9596e2be3413e9fefc6f636471ef021e10bc2cdd355be402b9e",
+      "bytes": 20887
+    },
+    {
+      "path": "tests/event-signal-puzzle-integration.test.js",
+      "sha256": "78bc150bf66f25ff542c4c2ffc49672652d13e7429f9514a7c1bf5fdb5dff674",
+      "bytes": 11527
+    },
+    {
+      "path": "tests/expedition-battle-presentation.test.js",
+      "sha256": "9f0ba2ab2d68f7b5fb8be36eb328dd3cbae687b8b82579a766eb929c8670a068",
+      "bytes": 9437
+    },
+    {
+      "path": "tests/expedition-page-lifecycle.test.js",
+      "sha256": "9958f0998869a09d5217e8fb912c30958c6fc9b6184341c2eba73e50e58008ca",
+      "bytes": 5008
+    },
+    {
+      "path": "tests/extraction-first-explore-xp.test.js",
+      "sha256": "2c7556e2fecfb1618008e78e3cbb1b620256572b1bffd098022bc1fc055c9c04",
+      "bytes": 7232
+    },
+    {
+      "path": "tests/extraction-flow.test.js",
+      "sha256": "9556d34ab3792e0bad4882ab6446a75049f7628658895c365ed1122c5ca06336",
+      "bytes": 13885
+    },
+    {
+      "path": "tests/extraction-receipt-idempotency.test.js",
+      "sha256": "8bd08442e3bc5c3f8bb2b527a8476fc0d030e5d4672908bef657c5eec4d25dda",
+      "bytes": 8749
+    },
+    {
+      "path": "tests/extraction-record-saved-cards-cloud.test.js",
+      "sha256": "49fc4139672d71d9d4a2ba8f39a6f970dd64602ef567d792ac61d089c8c046d2",
+      "bytes": 11275
+    },
+    {
+      "path": "tests/extraction-recovery-ui.test.js",
+      "sha256": "04a66d5cf55b1d37fe75a8edfcc13043dd23b6224d1cf6876913cf2f9b4b5ef5",
+      "bytes": 10526
+    },
+    {
+      "path": "tests/extraction-recovery.test.js",
+      "sha256": "77b1ade5bf27464d2b220a95f7a22ed581fcf2be2a43bca6f28a5813cfc4cb89",
+      "bytes": 19913
+    },
+    {
+      "path": "tests/extraction-session-resume.test.js",
+      "sha256": "3485c6e9b0274a0b78b92f86342b9a542e8719c481e63c2d8e2c12785337dc3e",
+      "bytes": 6434
+    },
+    {
+      "path": "tests/extraction-settlement.test.js",
+      "sha256": "7283157f122baf076aaef3231943b92455a8da997a5d10e11b5a97020015956f",
+      "bytes": 6103
+    },
+    {
+      "path": "tests/first-explore-marking.test.js",
+      "sha256": "7d1afc17b85ee90bba86570c1c815bbafa2e23222946e602b9a40b9a4d4757e2",
+      "bytes": 8288
+    },
+    {
+      "path": "tests/four-player-capacity-text.test.js",
+      "sha256": "6f74fa153b1dc2d21b20a826d62483475da2bee5bfd0cf67a50efdf9ec5d86a3",
+      "bytes": 2370
+    },
+    {
+      "path": "tests/four-player-event-regressions.test.js",
+      "sha256": "9dd7c78daf7707e7b08bac395bfa08d343d1a76564ca2dc0fa748707d02fc085",
+      "bytes": 8811
+    },
+    {
+      "path": "tests/framework-independent-battles.test.js",
+      "sha256": "2dee879c77f33b957df1269501b2db66e90338f7ed1edbf6c1292df586896f39",
+      "bytes": 8033
+    },
+    {
+      "path": "tests/full-review-regressions-battle.test.js",
+      "sha256": "f8d2d57e8dc10914d83642a48a7febfb392324a06cb07aef699c11edbd4ad601",
+      "bytes": 10881
+    },
+    {
+      "path": "tests/full-review-regressions-hub.test.js",
+      "sha256": "79d1c15e720c8f9945f36c5b8d7b6ab5f765e9d92d8bccc2e698d52c0ac20434",
+      "bytes": 6542
+    },
+    {
+      "path": "tests/full-review-regressions-world.test.js",
+      "sha256": "55f5ab6e33a3ea8e77b290ed4369d534fca06b7c4d5a6bfd8f4d3260c37c8fa6",
+      "bytes": 13876
+    },
+    {
+      "path": "tests/game-session-elapsed.test.js",
+      "sha256": "acd4e9d2eff091e15385baef8a38ed2ddc465b98345bb3ab9c646c4a2706dc2b",
+      "bytes": 3916
+    },
+    {
+      "path": "tests/ghostblade-stealth-break.test.js",
+      "sha256": "dfa2426078ef9a36ef8c55e62ea8bd80d60bd7d9ad4e92ef88c4a018bb814236",
+      "bytes": 7200
+    },
+    {
+      "path": "tests/hand-material-selection-window.test.js",
+      "sha256": "c1cdc1e856f34e64a24c66788e8080f1d5265a3f0dde270b8c973b112da1069c",
+      "bytes": 11236
+    },
+    {
+      "path": "tests/hero-cards.test.js",
+      "sha256": "19d4de811c8fe322540fe1d7599f274b2ebf8f5d2d11d0b8a99f329a06d5ad6a",
+      "bytes": 24247
+    },
+    {
+      "path": "tests/infuse-free-paths.test.js",
+      "sha256": "a7f1a3fd755cf83c68da940df2abc6a83f9e349b51c2e38542f3ecf91464cf50",
+      "bytes": 8019
+    },
+    {
+      "path": "tests/infuse-free-play.test.js",
+      "sha256": "85ba4864f9a5a177e977ff0dd6d162123d0decdb033cf2914c18f26d61219e8f",
+      "bytes": 4388
+    },
+    {
+      "path": "tests/item15-18-fixes.test.js",
+      "sha256": "86ff4bacca1c85cbe5a73dce19157cf66c36942b4329b3a89c8002c3e5b5ca7e",
+      "bytes": 5116
+    },
+    {
+      "path": "tests/last-stand-poison-burst.test.js",
+      "sha256": "1d32b08f0453e7dac53196dcbb339c80325376afa3d122e7204b3ac54b4faa04",
+      "bytes": 5263
+    },
+    {
+      "path": "tests/lava-blast.test.js",
+      "sha256": "77faf35ff067799914f3d0446a22bf48c497a2a723a785d7251612dbbdf14a02",
+      "bytes": 4471
+    },
+    {
+      "path": "tests/m-batch-behavior.test.js",
+      "sha256": "1dcb8ec0b6060a97bea981e1ee62bf53b117c5b3177d49a225734599284566fb",
+      "bytes": 5371
+    },
+    {
+      "path": "tests/m1-contract.test.js",
+      "sha256": "18a33d60337fa6bd9f1e0b6c30a79dcacea2b57efdb174629f51ddadcab1569e",
+      "bytes": 22128
+    },
+    {
+      "path": "tests/m1-data.test.js",
+      "sha256": "76b2a520d7805cc396b92babe15e81c84515e2156173ff0c0adb23516c4cf0d4",
+      "bytes": 9446
+    },
+    {
+      "path": "tests/m10-data.test.js",
+      "sha256": "0cddbe45c789adc77baba22d53d43c6596826944d09708fcd573798c2bacc0c4",
+      "bytes": 5150
+    },
+    {
+      "path": "tests/m2-contract.test.js",
+      "sha256": "e10e7be8891444b6b8457946c0794de0e105bfd04fd812b2e2ee48189f28a48f",
+      "bytes": 28095
+    },
+    {
+      "path": "tests/m3-contract.test.js",
+      "sha256": "e76ced94191206e270ba64deb7331a08f0fcb5d8ae53b834cbeae10e3c890bd8",
+      "bytes": 22379
+    },
+    {
+      "path": "tests/m3-data.test.js",
+      "sha256": "8fbe4d01b2395084c3c182b08cbba2b2983bbcc3adf4e82f63ce37455eb98061",
+      "bytes": 22596
+    },
+    {
+      "path": "tests/m5-data.test.js",
+      "sha256": "2a400d074627c86a46b294f126a0f64173da7cc39985f130bdd52597f9acfb07",
+      "bytes": 14826
+    },
+    {
+      "path": "tests/m7-battle.test.js",
+      "sha256": "c776b280cb82cad4cb6c35ddc2dd6f788ced19fcef23ed1cd0d645b3de10aab9",
+      "bytes": 4503
+    },
+    {
+      "path": "tests/mana-surge.test.js",
+      "sha256": "1e09154f3bdb411a8f79e8b64b20a94140b07f15e1c139db66bdab3e1c8cd412",
+      "bytes": 4573
+    },
+    {
+      "path": "tests/message-batch-0917.test.js",
+      "sha256": "5819a7b144e92262f5af791a44319204035f3135599371a44297d9f428500d1b",
+      "bytes": 8963
+    },
+    {
+      "path": "tests/message-batch-0920-late.test.js",
+      "sha256": "a865fd16be6df5d704ba82f9116d3f9e6fe0bfeace90cc1d46bea5a79ecf9b1f",
+      "bytes": 5489
+    },
+    {
+      "path": "tests/message-fixes.test.js",
+      "sha256": "41822e49870c3e936680abe11ea47d1199ada48e800554b3ef62f0a6b3b9e3b9",
+      "bytes": 6485
+    },
+    {
+      "path": "tests/mistbox.test.js",
+      "sha256": "a0d53f33a3757b64631665dce274faec4c5f73968af82555a3d5e43bd1ccac86",
+      "bytes": 3746
+    },
+    {
+      "path": "tests/mystery-potion-observation.test.js",
+      "sha256": "30d0040926a8659bd05496a9598295e17376fe56f4f9018da2af12982d90fe6c",
+      "bytes": 10792
+    },
+    {
+      "path": "tests/n1-infuse-uid-toggle.test.js",
+      "sha256": "7a9599826e90523f5a4cfac04f8bcb0254dd089db1be5455ddc07c67ab1c4718",
+      "bytes": 6095
+    },
+    {
+      "path": "tests/nest-hearts.test.js",
+      "sha256": "943d825bbb035a3d58ca37ff8c38da272936e462f90511257d517e99453547d9",
+      "bytes": 2916
+    },
+    {
+      "path": "tests/nest-regression.test.js",
+      "sha256": "eef73ce9f6a4f552067f7a0c44159c22f909c429051f01f60facc1b77cfb9079",
+      "bytes": 9198
+    },
+    {
+      "path": "tests/nightshift-u10-teardown-guards.test.js",
+      "sha256": "8de9728e91799763c985b16d1ca6f014ae6191c279a0087081f820efac4638d1",
+      "bytes": 7591
+    },
+    {
+      "path": "tests/node-cancel-semantics.test.js",
+      "sha256": "f96c7c2455c40cd6c123b56600b2a4e276b08cb3b39ab4967a822e2ff9f6b6c1",
+      "bytes": 9329
+    },
+    {
+      "path": "tests/node-retrigger.test.js",
+      "sha256": "d632fa130ff27b41c2710c9931f725832d35842651fa20506de8c7e043fc1d97",
+      "bytes": 20859
+    },
+    {
+      "path": "tests/normal-effects-deck-regression.test.js",
+      "sha256": "7cc5076ef9947ce8538596a9b1226712af29aa145b896a698a03f785d71348d2",
+      "bytes": 3064
+    },
+    {
+      "path": "tests/normal-starter-deck.test.js",
+      "sha256": "18943d9281cd69359d944c77e72fd0541e107c245fffd19768f7754dd5e80475",
+      "bytes": 10621
+    },
+    {
+      "path": "tests/page-perf-battle.test.js",
+      "sha256": "87f753f9c26eb7a29ee049f3519a327b00cfffe63be15970540b58ecf4e92c7e",
+      "bytes": 14325
+    },
+    {
+      "path": "tests/pearl-storage-interface.test.js",
+      "sha256": "dadcced289ec6890e57af1f1890bab487c890b62d7c073c972c940f126f9c4ba",
+      "bytes": 10921
+    },
+    {
+      "path": "tests/playthrough-bot.test.js",
+      "sha256": "93412cda7502f93a4fe6a6a75180b810b77858d820c6231a57cbe3ffa17e524d",
+      "bytes": 6019
+    },
+    {
+      "path": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "43f5f8e67a4449602730418f7f3f558c35fd54a2c2a010bc16c89db7c558f517",
+      "bytes": 10231
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "sha256": "fb72c6a283b0c28ebb8e3a3f6be92b3256a0b0eb83f0582d66f4ad6d01eae02b",
+      "bytes": 8484
+    },
+    {
+      "path": "tests/provoke-target-contract.test.js",
+      "sha256": "f1f10b51f562b95606dd4386ebcd579d1e206acf1593c77d8d594248210935f1",
+      "bytes": 6366
+    },
+    {
+      "path": "tests/r3-0-command-guards.test.js",
+      "sha256": "1b6421ed820f2fbb7335bbdc9d7717e6bbfbb3388dc955cc7b254a0f13d36761",
+      "bytes": 7469
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "sha256": "9ceafe3ac71716a2ec2629b7df7efda82583950bbc06c67e8eda74fa35a50048",
+      "bytes": 22938
+    },
+    {
+      "path": "tests/r3-b-action-boundary.repro.test.js",
+      "sha256": "0e33bd4a7d88f72f345359a3db818c0fd51fc09442ce6e2eaf642414126556e9",
+      "bytes": 7193
+    },
+    {
+      "path": "tests/r5a-session-menu.test.js",
+      "sha256": "166f5bc149813dd619db17b6dfc32f5b1b86f8249bb738ebf6e66e6d73c97f1c",
+      "bytes": 11232
+    },
+    {
+      "path": "tests/rapid-fire.test.js",
+      "sha256": "f34f4458b876a6d419581a1ddc32d99958688df252584fdc058e7a64fd352220",
+      "bytes": 5858
+    },
+    {
+      "path": "tests/reactive-draw-cast-continuation.test.js",
+      "sha256": "28dbe5ec89f44477dfa8b7417d186ec1f0037ac5c88ca2ecdb59bb4ede08a912",
+      "bytes": 7787
+    },
+    {
+      "path": "tests/requested-card-integration.test.js",
+      "sha256": "a1aa1b89705397da79a5e33972a316fe30216b6a6efb72b7faee80c2674cd23b",
+      "bytes": 14290
+    },
+    {
+      "path": "tests/requested-equipment-effects.test.js",
+      "sha256": "47dee7f62c39fca0fae23c72f9a179e5c09751e365d2fd4b2182f0647e3be6fb",
+      "bytes": 9635
+    },
+    {
+      "path": "tests/reserved-card-id-regression.test.js",
+      "sha256": "0d4557d0e6b73c13fac2d003791c14df74c2b549a85515059d4eab0981a043c0",
+      "bytes": 5611
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "sha256": "a239d5414f8f2f923436f05f27b9d7563b839ec53b012c106bf7f5504c4babbc",
+      "bytes": 8047
+    },
+    {
+      "path": "tests/reward-capacity-preview.test.js",
+      "sha256": "e4d1036694120fe5700dd446361eb31770c51a496424ac2c504557798d2aa39a",
+      "bytes": 13104
+    },
+    {
+      "path": "tests/reward-settlement-unification.test.js",
+      "sha256": "28e306d76774d8d216394848e4a18484d6ab58ebd7cee444c7a5a583a87c904d",
+      "bytes": 7563
+    },
+    {
+      "path": "tests/safe-pearl-access.test.js",
+      "sha256": "f0bcf7a67ad31f73defee46d0ef3533175dddf336e2d9a76734fe05023374297",
+      "bytes": 11439
+    },
+    {
+      "path": "tests/save-recovery-session-feedback.test.js",
+      "sha256": "eea840ba71ff1bc2d0bf6c7e0e206b5798b44f7e97ee0425d436cdae218e6c9f",
+      "bytes": 4308
+    },
+    {
+      "path": "tests/save-slot-delete-results.test.js",
+      "sha256": "f247e620c28012cb289e3ae2b96e0760f935b90f96ed9274220b8e18755fa2e4",
+      "bytes": 9280
+    },
+    {
+      "path": "tests/scavenge-mode-feedback.test.js",
+      "sha256": "50e9bbcc31e7edf7f5e7407de17fe2f30356004adbc942c873a858c3a5e8cf20",
+      "bytes": 4451
+    },
+    {
+      "path": "tests/session-base-persistence.test.js",
+      "sha256": "5d0e2a796bf07c97936102f641c9209360bd685b1b25d768cc2f736e1ede1358",
+      "bytes": 5590
+    },
+    {
+      "path": "tests/skull-sword-effective-session.test.js",
+      "sha256": "9f34a1c4f276cd1736d3d99a9e61e73d51618486e59a2e2de08aaa1e83b081b6",
+      "bytes": 32117
+    },
+    {
+      "path": "tests/stellar-divination.test.js",
+      "sha256": "772381eb5c872eac7003edd5094ff172bc3f1d7db319469c1cba2c340e1abda1",
+      "bytes": 8148
+    },
+    {
+      "path": "tests/structured-backupcell.test.js",
+      "sha256": "96a215c267bc337b1572d779709800fd00e0187f65abc83f20cf6436f1633043",
+      "bytes": 4686
+    },
+    {
+      "path": "tests/structured-effect-authority.test.js",
+      "sha256": "b41268a48c6f2d157f6b94b36106cfa6e30a837e8db309050422e8540fb2922c",
+      "bytes": 8458
+    },
+    {
+      "path": "tests/structured-onplay-battle.test.js",
+      "sha256": "8359a1f1c9a04d30ecf174503780ebae8cecc6acd173d38df01535387d18acff",
+      "bytes": 10668
+    },
+    {
+      "path": "tests/sts-attack-presentation.test.js",
+      "sha256": "1c8858b9b2e0c5a7cb3ae04d90733769b77977bcb0f60daeeb9db457a1104697",
+      "bytes": 6018
+    },
+    {
+      "path": "tests/sts2-agent-infusion-1021.test.js",
+      "sha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c",
+      "bytes": 11985
+    },
+    {
+      "path": "tests/sts2-agent-replay.test.js",
+      "sha256": "e73a3ae9479e41391ab3e6ba7d5e77356b8345d1815d28e9d5bddb1edf2de3ec",
+      "bytes": 13078
+    },
+    {
+      "path": "tests/sts2-battle-settings-restart.test.js",
+      "sha256": "a2ca36e2cc1d1d751e1fac80910b0790b8109ad1f5c2c9040767676f36c2ad35",
+      "bytes": 10620
+    },
+    {
+      "path": "tests/sts2-combat-facts.test.js",
+      "sha256": "6f1428e2b557fb4600a8d50e17e9c3caaa58648bc54c90be91447577dbd44da7",
+      "bytes": 9952
+    },
+    {
+      "path": "tests/sts2-consumed-items.test.js",
+      "sha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab",
+      "bytes": 10059
+    },
+    {
+      "path": "tests/sts2-consumed-pile.test.js",
+      "sha256": "8e247a5a189eaf02f27efc1d29e28cfd379bfed4d9801ba4851c50533baca73a",
+      "bytes": 7271
+    },
+    {
+      "path": "tests/sts2-consumed-rules.test.js",
+      "sha256": "fb868064404ffa8ae9b2e9b400ade880ffc50db0cf3b0c8e566806238814f7d0",
+      "bytes": 13066
+    },
+    {
+      "path": "tests/sts2-enemy-plan.test.js",
+      "sha256": "808eb4f0c5bb783016480580c0fd18939fb7ec6192559a2d3fb184016aafcb52",
+      "bytes": 6380
+    },
+    {
+      "path": "tests/sts2-hand-selection-contract.test.js",
+      "sha256": "1a61542b605a289e3336ff7a88778975fb50cf3a0ebdc14f33cf22e6607fe8bb",
+      "bytes": 10126
+    },
+    {
+      "path": "tests/sts2-infusion-flow-1021.test.js",
+      "sha256": "f14b94dde55968f196dd829277c830a466409641b03b5eb8ce96a8197a424299",
+      "bytes": 15962
+    },
+    {
+      "path": "tests/sts2-unified-consumed-pile.test.js",
+      "sha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161",
+      "bytes": 12028
+    },
+    {
+      "path": "tests/sword-consume-trigger.test.js",
+      "sha256": "f5e0d30af504767cc87b138a70e39916ad022a63c886dede89ddba0a9e8baefe",
+      "bytes": 7713
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "sha256": "b9e64ddc9e9d414779806b6ef30f50e36c174d58bd8b04df795dc5e0b5f301be",
+      "bytes": 29842
+    },
+    {
+      "path": "tests/sys03-loot-shop-txn.test.js",
+      "sha256": "8ccb24e94fa5678cb4295471cb31fc6022eb77e03ee4ffa83aab73220e1412f8",
+      "bytes": 33478
+    },
+    {
+      "path": "tests/terminal-death.test.js",
+      "sha256": "0999bec5c0f156d248988a8a35bd5961b0721d72212fb430b58a223931b045ed",
+      "bytes": 6711
+    },
+    {
+      "path": "tests/terminal-persistence.test.js",
+      "sha256": "0ce4867799ab9334220f2804d380c43ba2348d6fa4ef3a739870a19e54104726",
+      "bytes": 8513
+    },
+    {
+      "path": "tests/terminal-retry-copy.test.js",
+      "sha256": "d31da9855a9fc694e4d247a1d2bba161575b6bf15a07cae8290d7d8461db3072",
+      "bytes": 5957
+    },
+    {
+      "path": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "sha256": "9693a4c8a0780f16fa094de57a9a2e859570b6e880385ce43b9b1b1595165835",
+      "bytes": 6594
+    },
+    {
+      "path": "tests/tt12-hitechrd-structured.test.js",
+      "sha256": "d36f5692cd598472bca2e3dfd56b06e10083ff948f2483a1c28f6c8d4955c2f7",
+      "bytes": 8791
+    },
+    {
+      "path": "tests/tt12-structured-battle.test.js",
+      "sha256": "0f47d74d58f836f55605b13791377da249158b75f0cfeed3f015ad1797f8b04c",
+      "bytes": 7942
+    },
+    {
+      "path": "tests/tt7-frozenight-structured-battle.test.js",
+      "sha256": "1b95ec00086f21d6fadfb3d51548bb58d5108f71367a1cb5cfd1e760e0aec503",
+      "bytes": 5896
+    },
+    {
+      "path": "tests/tt7-hand-payment.test.js",
+      "sha256": "88e8a491b1dbb4df1cdc86b9158dfe9a87adcf562fb2904c3ad4e43e4410fb85",
+      "bytes": 10537
+    },
+    {
+      "path": "tests/tt7-sneak-structured.test.js",
+      "sha256": "8e304712e1e8a730685adadea0df2f03835828ef791daa2040e4ac94ba248f31",
+      "bytes": 4357
+    },
+    {
+      "path": "tests/u18-negative-hp-death.test.js",
+      "sha256": "0212b65f2d5028376fa273ab136595258cd7ca9189a756eec53ce1d0f1446628",
+      "bytes": 7264
+    },
+    {
+      "path": "tests/venom-staff-passive.test.js",
+      "sha256": "27a55ae6699ec514cdf398e46b203388f8fa14a81aa08adf7fd17307c1142628",
+      "bytes": 4181
+    },
+    {
+      "path": "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "sha256": "ba60715174ecc39a9f8e9baecc1617442e75f0e6e0e6bd9aa8fd5a325f9a251e",
+      "bytes": 6013
+    },
+    {
+      "path": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "sha256": "d22a9cd363146501dd1981e4670692e701b628fa3e9012b0258102ef53c39b2d",
+      "bytes": 11431
+    },
+    {
+      "path": "tests/wf-feedback1021-b-potion-chain.test.js",
+      "sha256": "c8b36d18487b3c85af7c7e856d1ba250436c6d2fa61904a4336bdbf74b31a2ce",
+      "bytes": 5942
+    },
+    {
+      "path": "tests/wf-feedback1021-b-potion-targeting.test.js",
+      "sha256": "a6b56f338e8c2647f739eb9be2cdac47128241663c01a38e67083241eccf805d",
+      "bytes": 9043
+    },
+    {
+      "path": "tests/wf-feedback1021-b-status-icons.test.js",
+      "sha256": "8ac8a233fbced6753a0077047a029547fc826782f89e5be8a3b344db4eaefd6f",
+      "bytes": 7848
+    }
+  ],
+  "excludedFiles": [
+    "tests/battle-persistent-stage.test.js",
+    "tests/project-bug-sweep-battle-1024.test.js",
+    "tests/project-bug-sweep-round2-agent-confirm.test.js",
+    "tests/project-bug-sweep-round2-battle-1024.test.js",
+    "tests/project-bug-sweep-round2-nest-progress.test.js",
+    "tests/project-bug-sweep-round2-nest-shop.test.js",
+    "tests/project-bugfix-battle-1023.test.js",
+    "tests/project-bugfix-expedition-1023.test.js",
+    "tests/project-bugfix-round2-battle.test.js",
+    "tests/project-bugfix-round2-expedition-chests.test.js",
+    "tests/project-bugfix-round2-expedition-nest.test.js"
+  ],
+  "models": [
+    {
+      "name": "battleRules",
+      "type": "properties",
+      "count": 117,
+      "keys": [
+        "battleEnergy",
+        "battleHandMax",
+        "bossDeckSize",
+        "starterSha",
+        "battleStartDraw",
+        "battleTurnDraw",
+        "diceSides"
+      ],
+      "files": [
+        "tests/abyss-sovereign.test.js",
+        "tests/armup-mode.test.js",
+        "tests/bag-slam-button.test.js",
+        "tests/battle-all-cards.test.js",
+        "tests/battle-bloom-discovery.test.js",
+        "tests/battle-curse-immunity-lifetime.test.js",
+        "tests/battle-direct-trigger-source.test.js",
+        "tests/battle-discover-result-source.test.js",
+        "tests/battle-effect-damage-boundary.test.js",
+        "tests/battle-end-turn-selection.test.js",
+        "tests/battle-equipment-skill-synthesis.test.js",
+        "tests/battle-imitate-unplayable.test.js",
+        "tests/battle-pouch-entry.test.js",
+        "tests/battle-round-recording.test.js",
+        "tests/battle-rule-audit-1014.test.js",
+        "tests/battle-runtime-completion-1014.test.js",
+        "tests/battle-semantic-feedback.test.js",
+        "tests/battle-settlement-retry.test.js",
+        "tests/battle-snapshot-phase-cost.test.js",
+        "tests/battle-temp-item-destination.test.js",
+        "tests/battle-trigger-lifecycle-unification.test.js",
+        "tests/battle-turn-start-discover.test.js",
+        "tests/boss-equip-select.test.js",
+        "tests/boss-rescue-pool.test.js",
+        "tests/builtin-card-execution-battle.test.js",
+        "tests/builtin-migration-lookup.test.js",
+        "tests/card-description-audit-battle.test.js",
+        "tests/card-description-fix-auxiliary.test.js",
+        "tests/card-description-fix-lifecycle.test.js",
+        "tests/card-description-fix-pools.test.js",
+        "tests/card-description-fix-target-effects.test.js",
+        "tests/card-effect-semantics.test.js",
+        "tests/card-rules-per-foe-boundary.test.js",
+        "tests/cards-choice-armor-guard.test.js",
+        "tests/chase-slash.test.js",
+        "tests/compendium.test.js",
+        "tests/cursed-blade.test.js",
+        "tests/custom-cards.test.js",
+        "tests/direct-cast.test.js",
+        "tests/discover-infusion-feedback.test.js",
+        "tests/dual-wield.test.js",
+        "tests/e5-session-recovery.test.js",
+        "tests/e6-card-rules-execution.test.js",
+        "tests/e7-rule-warning-view.test.js",
+        "tests/e8-card-migration.test.js",
+        "tests/ember-burst-rot-seed.test.js",
+        "tests/energy-crystal-restoration.test.js",
+        "tests/event-choice-session-resume-cloud.test.js",
+        "tests/extraction-receipt-idempotency.test.js",
+        "tests/extraction-record-saved-cards-cloud.test.js",
+        "tests/extraction-recovery.test.js",
+        "tests/extraction-session-resume.test.js",
+        "tests/full-review-regressions-battle.test.js",
+        "tests/ghostblade-stealth-break.test.js",
+        "tests/hero-cards.test.js",
+        "tests/infuse-free-paths.test.js",
+        "tests/item15-18-fixes.test.js",
+        "tests/last-stand-poison-burst.test.js",
+        "tests/lava-blast.test.js",
+        "tests/m-batch-behavior.test.js",
+        "tests/m1-contract.test.js",
+        "tests/m10-data.test.js",
+        "tests/m2-contract.test.js",
+        "tests/m3-contract.test.js",
+        "tests/m7-battle.test.js",
+        "tests/mana-surge.test.js",
+        "tests/message-batch-0917.test.js",
+        "tests/message-batch-0920-late.test.js",
+        "tests/message-fixes.test.js",
+        "tests/mistbox.test.js",
+        "tests/mystery-potion-observation.test.js",
+        "tests/n1-infuse-uid-toggle.test.js",
+        "tests/nest-hearts.test.js",
+        "tests/nest-regression.test.js",
+        "tests/normal-effects-deck-regression.test.js",
+        "tests/normal-starter-deck.test.js",
+        "tests/playthrough-bot.test.js",
+        "tests/provoke-target-contract.test.js",
+        "tests/r3-a-preview.test.js",
+        "tests/rapid-fire.test.js",
+        "tests/reactive-draw-cast-continuation.test.js",
+        "tests/requested-card-integration.test.js",
+        "tests/requested-equipment-effects.test.js",
+        "tests/reserved-card-id-regression.test.js",
+        "tests/restoration-potion-observation.test.js",
+        "tests/save-recovery-session-feedback.test.js",
+        "tests/save-slot-delete-results.test.js",
+        "tests/scavenge-mode-feedback.test.js",
+        "tests/stellar-divination.test.js",
+        "tests/structured-backupcell.test.js",
+        "tests/structured-effect-authority.test.js",
+        "tests/structured-onplay-battle.test.js",
+        "tests/sts-attack-presentation.test.js",
+        "tests/sts2-agent-infusion-1021.test.js",
+        "tests/sts2-agent-replay.test.js",
+        "tests/sts2-battle-settings-restart.test.js",
+        "tests/sts2-combat-facts.test.js",
+        "tests/sts2-consumed-items.test.js",
+        "tests/sts2-consumed-pile.test.js",
+        "tests/sts2-consumed-rules.test.js",
+        "tests/sts2-enemy-plan.test.js",
+        "tests/sts2-hand-selection-contract.test.js",
+        "tests/sts2-infusion-flow-1021.test.js",
+        "tests/sts2-unified-consumed-pile.test.js",
+        "tests/sword-consume-trigger.test.js",
+        "tests/terminal-death.test.js",
+        "tests/terminal-persistence.test.js",
+        "tests/terminal-retry-copy.test.js",
+        "tests/tt12-hitechrd-battle-baseline.test.js",
+        "tests/tt12-hitechrd-structured.test.js",
+        "tests/tt7-frozenight-structured-battle.test.js",
+        "tests/tt7-sneak-structured.test.js",
+        "tests/u18-negative-hp-death.test.js",
+        "tests/venom-staff-passive.test.js",
+        "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+        "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+        "tests/wf-feedback1021-b-potion-chain.test.js"
+      ],
+      "locations": [
+        "tests/abyss-sovereign.test.js:15-15",
+        "tests/armup-mode.test.js:8-8",
+        "tests/bag-slam-button.test.js:16-16",
+        "tests/battle-all-cards.test.js:25-25",
+        "tests/battle-bloom-discovery.test.js:8-8",
+        "tests/battle-curse-immunity-lifetime.test.js:7-7",
+        "tests/battle-direct-trigger-source.test.js:8-9",
+        "tests/battle-discover-result-source.test.js:7-7",
+        "tests/battle-effect-damage-boundary.test.js:6-7",
+        "tests/battle-end-turn-selection.test.js:7-8",
+        "tests/battle-equipment-skill-synthesis.test.js:10-11",
+        "tests/battle-imitate-unplayable.test.js:7-8",
+        "tests/battle-pouch-entry.test.js:8-8",
+        "tests/battle-round-recording.test.js:6-7",
+        "tests/battle-rule-audit-1014.test.js:10-11",
+        "tests/battle-runtime-completion-1014.test.js:6-6",
+        "tests/battle-semantic-feedback.test.js:7-7",
+        "tests/battle-settlement-retry.test.js:610-610",
+        "tests/battle-snapshot-phase-cost.test.js:5-6",
+        "tests/battle-temp-item-destination.test.js:4-4",
+        "tests/battle-trigger-lifecycle-unification.test.js:10-11",
+        "tests/battle-turn-start-discover.test.js:7-7",
+        "tests/boss-equip-select.test.js:11-11",
+        "tests/boss-rescue-pool.test.js:7-7",
+        "tests/builtin-card-execution-battle.test.js:10-11",
+        "tests/builtin-migration-lookup.test.js:68-69",
+        "tests/card-description-audit-battle.test.js:10-11",
+        "tests/card-description-fix-auxiliary.test.js:7-8",
+        "tests/card-description-fix-lifecycle.test.js:9-10",
+        "tests/card-description-fix-pools.test.js:12-13",
+        "tests/card-description-fix-target-effects.test.js:6-7",
+        "tests/card-effect-semantics.test.js:7-7",
+        "tests/card-rules-per-foe-boundary.test.js:11-11",
+        "tests/cards-choice-armor-guard.test.js:8-9",
+        "tests/chase-slash.test.js:11-11",
+        "tests/compendium.test.js:14-14",
+        "tests/cursed-blade.test.js:12-12",
+        "tests/custom-cards.test.js:9-9",
+        "tests/direct-cast.test.js:21-21",
+        "tests/discover-infusion-feedback.test.js:9-9",
+        "tests/dual-wield.test.js:11-11",
+        "tests/e5-session-recovery.test.js:11-11",
+        "tests/e6-card-rules-execution.test.js:10-10",
+        "tests/e7-rule-warning-view.test.js:27-27",
+        "tests/e8-card-migration.test.js:17-18",
+        "tests/ember-burst-rot-seed.test.js:12-12",
+        "tests/energy-crystal-restoration.test.js:7-7",
+        "tests/event-choice-session-resume-cloud.test.js:9-9",
+        "tests/extraction-receipt-idempotency.test.js:14-15",
+        "tests/extraction-record-saved-cards-cloud.test.js:8-9",
+        "tests/extraction-recovery.test.js:8-9",
+        "tests/extraction-session-resume.test.js:11-11",
+        "tests/full-review-regressions-battle.test.js:9-9",
+        "tests/ghostblade-stealth-break.test.js:7-7",
+        "tests/hero-cards.test.js:14-14",
+        "tests/infuse-free-paths.test.js:6-7",
+        "tests/item15-18-fixes.test.js:14-14",
+        "tests/last-stand-poison-burst.test.js:13-13",
+        "tests/lava-blast.test.js:12-12",
+        "tests/m-batch-behavior.test.js:8-9",
+        "tests/m1-contract.test.js:15-15",
+        "tests/m10-data.test.js:10-11",
+        "tests/m2-contract.test.js:19-19",
+        "tests/m3-contract.test.js:14-14",
+        "tests/m7-battle.test.js:9-10",
+        "tests/mana-surge.test.js:11-11",
+        "tests/message-batch-0917.test.js:14-14",
+        "tests/message-batch-0920-late.test.js:9-9",
+        "tests/message-fixes.test.js:10-10",
+        "tests/mistbox.test.js:11-11",
+        "tests/mystery-potion-observation.test.js:14-14",
+        "tests/n1-infuse-uid-toggle.test.js:15-15",
+        "tests/nest-hearts.test.js:7-7",
+        "tests/nest-regression.test.js:24-24",
+        "tests/normal-effects-deck-regression.test.js:4-5",
+        "tests/normal-starter-deck.test.js:5-6",
+        "tests/playthrough-bot.test.js:8-8",
+        "tests/provoke-target-contract.test.js:7-7",
+        "tests/r3-a-preview.test.js:9-9",
+        "tests/rapid-fire.test.js:11-11",
+        "tests/reactive-draw-cast-continuation.test.js:3-3",
+        "tests/requested-card-integration.test.js:8-8",
+        "tests/requested-equipment-effects.test.js:3-3",
+        "tests/reserved-card-id-regression.test.js:6-6",
+        "tests/restoration-potion-observation.test.js:7-7",
+        "tests/save-recovery-session-feedback.test.js:9-9",
+        "tests/save-slot-delete-results.test.js:10-10",
+        "tests/scavenge-mode-feedback.test.js:10-10",
+        "tests/stellar-divination.test.js:6-6",
+        "tests/structured-backupcell.test.js:10-11",
+        "tests/structured-effect-authority.test.js:13-13",
+        "tests/structured-onplay-battle.test.js:10-10",
+        "tests/sts-attack-presentation.test.js:9-10",
+        "tests/sts2-agent-infusion-1021.test.js:12-13",
+        "tests/sts2-agent-replay.test.js:13-14",
+        "tests/sts2-battle-settings-restart.test.js:18-19",
+        "tests/sts2-combat-facts.test.js:8-9",
+        "tests/sts2-consumed-items.test.js:5-6",
+        "tests/sts2-consumed-pile.test.js:7-8",
+        "tests/sts2-consumed-rules.test.js:7-8",
+        "tests/sts2-enemy-plan.test.js:9-10",
+        "tests/sts2-hand-selection-contract.test.js:13-14",
+        "tests/sts2-infusion-flow-1021.test.js:6-7",
+        "tests/sts2-unified-consumed-pile.test.js:7-8",
+        "tests/sword-consume-trigger.test.js:8-8",
+        "tests/terminal-death.test.js:11-13",
+        "tests/terminal-persistence.test.js:8-9",
+        "tests/terminal-retry-copy.test.js:17-19",
+        "tests/tt12-hitechrd-battle-baseline.test.js:7-7",
+        "tests/tt12-hitechrd-structured.test.js:9-9",
+        "tests/tt7-frozenight-structured-battle.test.js:9-9",
+        "tests/tt7-sneak-structured.test.js:9-9",
+        "tests/u18-negative-hp-death.test.js:15-15",
+        "tests/venom-staff-passive.test.js:7-7",
+        "tests/wf-feedback1021-a-battle-dynamic-values.test.js:16-16",
+        "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js:19-19",
+        "tests/wf-feedback1021-b-potion-chain.test.js:6-6"
+      ]
+    },
+    {
+      "name": "battleViewMocks",
+      "type": "properties",
+      "count": 16,
+      "keys": [
+        "Icons",
+        "Sound",
+        "Art",
+        "Meta",
+        "Motion",
+        "MAP"
+      ],
+      "files": [
+        "tests/battle-ally-dom-order.test.js",
+        "tests/battle-area-hover-hand-context.test.js",
+        "tests/battle-entry-view.test.js",
+        "tests/battle-hand-content-diff.test.js",
+        "tests/battle-hand-inspector.test.js",
+        "tests/battle-infusion-action-layout.test.js",
+        "tests/battle-render-derivation.test.js",
+        "tests/battle-render-runtime-trace.test.js",
+        "tests/battle-scenery-secondary-ready.test.js",
+        "tests/battle-target-dom.test.js",
+        "tests/battle-tools-lifecycle.test.js",
+        "tests/battle-unit-metadata.test.js",
+        "tests/hand-material-selection-window.test.js",
+        "tests/potion-tip-lifecycle.test.js",
+        "tests/skull-sword-effective-session.test.js",
+        "tests/wf-feedback1021-b-status-icons.test.js"
+      ],
+      "locations": [
+        "tests/battle-ally-dom-order.test.js:21-24",
+        "tests/battle-area-hover-hand-context.test.js:21-24",
+        "tests/battle-entry-view.test.js:25-29",
+        "tests/battle-hand-content-diff.test.js:15-18",
+        "tests/battle-hand-inspector.test.js:22-26",
+        "tests/battle-infusion-action-layout.test.js:22-26",
+        "tests/battle-render-derivation.test.js:22-26",
+        "tests/battle-render-runtime-trace.test.js:57-61",
+        "tests/battle-scenery-secondary-ready.test.js:23-27",
+        "tests/battle-target-dom.test.js:18-21",
+        "tests/battle-tools-lifecycle.test.js:28-32",
+        "tests/battle-unit-metadata.test.js:18-21",
+        "tests/hand-material-selection-window.test.js:20-24",
+        "tests/potion-tip-lifecycle.test.js:27-31",
+        "tests/skull-sword-effective-session.test.js:19-23",
+        "tests/wf-feedback1021-b-status-icons.test.js:21-24"
+      ]
+    },
+    {
+      "name": "overlayElements",
+      "type": "properties",
+      "count": 36,
+      "keys": [
+        "overlay",
+        "ovBody",
+        "ovTitle"
+      ],
+      "files": [
+        "tests/battle-ally-dom-order.test.js",
+        "tests/battle-area-hover-hand-context.test.js",
+        "tests/battle-hand-content-diff.test.js",
+        "tests/battle-hand-inspector.test.js",
+        "tests/battle-infusion-action-layout.test.js",
+        "tests/battle-render-derivation.test.js",
+        "tests/battle-render-runtime-trace.test.js",
+        "tests/battle-settlement-retry.test.js",
+        "tests/battle-target-dom.test.js",
+        "tests/battle-tools-lifecycle.test.js",
+        "tests/battle-unit-metadata.test.js",
+        "tests/blackmarket-card-preview.test.js",
+        "tests/chest-acquired-gift-cloud.test.js",
+        "tests/chest-callback-lifecycle-audit.test.js",
+        "tests/chest-coins-summary.test.js",
+        "tests/chests-reward-capacity-notice.test.js",
+        "tests/dev-console-lifecycle.test.js",
+        "tests/dev-tools-lazy-entry.test.js",
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-acquired-gift-cloud.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-settlement-unification.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/expedition-page-lifecycle.test.js",
+        "tests/four-player-event-regressions.test.js",
+        "tests/full-review-regressions-world.test.js",
+        "tests/hand-material-selection-window.test.js",
+        "tests/node-cancel-semantics.test.js",
+        "tests/page-perf-battle.test.js",
+        "tests/reward-capacity-preview.test.js",
+        "tests/reward-settlement-unification.test.js",
+        "tests/skull-sword-effective-session.test.js",
+        "tests/sts2-battle-settings-restart.test.js",
+        "tests/wf-feedback1021-b-status-icons.test.js"
+      ],
+      "locations": [
+        "tests/battle-ally-dom-order.test.js:86-86",
+        "tests/battle-area-hover-hand-context.test.js:92-92",
+        "tests/battle-hand-content-diff.test.js:45-45",
+        "tests/battle-hand-inspector.test.js:85-85",
+        "tests/battle-infusion-action-layout.test.js:73-73",
+        "tests/battle-render-derivation.test.js:69-69",
+        "tests/battle-render-runtime-trace.test.js:92-92",
+        "tests/battle-settlement-retry.test.js:158-158",
+        "tests/battle-target-dom.test.js:65-65",
+        "tests/battle-tools-lifecycle.test.js:100-100",
+        "tests/battle-unit-metadata.test.js:73-73",
+        "tests/blackmarket-card-preview.test.js:47-47",
+        "tests/chest-acquired-gift-cloud.test.js:61-61",
+        "tests/chest-callback-lifecycle-audit.test.js:9-9",
+        "tests/chest-coins-summary.test.js:9-9",
+        "tests/chests-reward-capacity-notice.test.js:66-66",
+        "tests/dev-console-lifecycle.test.js:23-23",
+        "tests/dev-tools-lazy-entry.test.js:31-31",
+        "tests/event-callback-lifecycle-audit.test.js:49-49",
+        "tests/event-choice-acquired-gift-cloud.test.js:51-51",
+        "tests/event-choice-recovery-cloud.test.js:48-48",
+        "tests/event-node-binding-cloud.test.js:41-41",
+        "tests/event-recode-selection-continuity.test.js:44-44",
+        "tests/event-settlement-unification.test.js:50-50",
+        "tests/event-signal-puzzle-integration.test.js:42-42",
+        "tests/expedition-page-lifecycle.test.js:14-14",
+        "tests/four-player-event-regressions.test.js:36-36",
+        "tests/full-review-regressions-world.test.js:41-41",
+        "tests/hand-material-selection-window.test.js:69-69",
+        "tests/node-cancel-semantics.test.js:43-43",
+        "tests/page-perf-battle.test.js:40-40",
+        "tests/reward-capacity-preview.test.js:69-69",
+        "tests/reward-settlement-unification.test.js:10-10",
+        "tests/skull-sword-effective-session.test.js:61-61",
+        "tests/sts2-battle-settings-restart.test.js:56-57",
+        "tests/wf-feedback1021-b-status-icons.test.js:68-68"
+      ]
+    },
+    {
+      "name": "playerFields",
+      "type": "properties",
+      "count": 51,
+      "keys": [
+        "hp",
+        "maxHp",
+        "atk",
+        "spellPower",
+        "coins",
+        "myClass",
+        "characterId",
+        "state",
+        "battleActive"
+      ],
+      "files": [
+        "tests/a3-battle-rules.test.js",
+        "tests/battle-art-warm-scope.test.js",
+        "tests/battle-bloom-discovery.test.js",
+        "tests/battle-dev-grant-card.test.js",
+        "tests/battle-discover-result-source.test.js",
+        "tests/battle-end-turn-selection.test.js",
+        "tests/battle-equipment-skill-synthesis.test.js",
+        "tests/battle-imitate-unplayable.test.js",
+        "tests/battle-temp-item-destination.test.js",
+        "tests/boot.test.js",
+        "tests/card-effect-semantics.test.js",
+        "tests/card-rules-per-foe-boundary.test.js",
+        "tests/cards-choice-armor-guard.test.js",
+        "tests/e2-view-hp.test.js",
+        "tests/e6-card-rules-execution.test.js",
+        "tests/e7-rule-warning-view.test.js",
+        "tests/e8-card-migration.test.js",
+        "tests/full-review-regressions-battle.test.js",
+        "tests/hero-cards.test.js",
+        "tests/infuse-free-paths.test.js",
+        "tests/infuse-free-play.test.js",
+        "tests/m-batch-behavior.test.js",
+        "tests/m1-contract.test.js",
+        "tests/m2-contract.test.js",
+        "tests/m3-contract.test.js",
+        "tests/m7-battle.test.js",
+        "tests/message-batch-0917.test.js",
+        "tests/message-fixes.test.js",
+        "tests/n1-infuse-uid-toggle.test.js",
+        "tests/nest-hearts.test.js",
+        "tests/potion-tip.test.js",
+        "tests/r3-0-command-guards.test.js",
+        "tests/r3-b-action-boundary.repro.test.js",
+        "tests/requested-card-integration.test.js",
+        "tests/reserved-card-id-regression.test.js",
+        "tests/stellar-divination.test.js",
+        "tests/structured-effect-authority.test.js",
+        "tests/structured-onplay-battle.test.js",
+        "tests/sts-attack-presentation.test.js",
+        "tests/sts2-combat-facts.test.js",
+        "tests/sts2-consumed-rules.test.js",
+        "tests/tt12-hitechrd-battle-baseline.test.js",
+        "tests/tt12-hitechrd-structured.test.js",
+        "tests/tt12-structured-battle.test.js",
+        "tests/tt7-frozenight-structured-battle.test.js",
+        "tests/tt7-hand-payment.test.js",
+        "tests/tt7-sneak-structured.test.js",
+        "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+        "tests/wf-feedback1021-b-potion-targeting.test.js"
+      ],
+      "locations": [
+        "tests/a3-battle-rules.test.js:57-58",
+        "tests/battle-art-warm-scope.test.js:17-18",
+        "tests/battle-bloom-discovery.test.js:20-21",
+        "tests/battle-dev-grant-card.test.js:16-17",
+        "tests/battle-discover-result-source.test.js:19-20",
+        "tests/battle-end-turn-selection.test.js:55-56",
+        "tests/battle-equipment-skill-synthesis.test.js:43-44",
+        "tests/battle-imitate-unplayable.test.js:40-41",
+        "tests/battle-temp-item-destination.test.js:18-19",
+        "tests/boot.test.js:694-695",
+        "tests/boot.test.js:778-779",
+        "tests/card-effect-semantics.test.js:27-28",
+        "tests/card-rules-per-foe-boundary.test.js:84-85",
+        "tests/cards-choice-armor-guard.test.js:44-45",
+        "tests/e2-view-hp.test.js:47-48",
+        "tests/e6-card-rules-execution.test.js:45-46",
+        "tests/e7-rule-warning-view.test.js:70-71",
+        "tests/e8-card-migration.test.js:44-45",
+        "tests/full-review-regressions-battle.test.js:29-30",
+        "tests/hero-cards.test.js:44-45",
+        "tests/infuse-free-paths.test.js:40-41",
+        "tests/infuse-free-play.test.js:59-60",
+        "tests/m-batch-behavior.test.js:40-41",
+        "tests/m1-contract.test.js:36-37",
+        "tests/m2-contract.test.js:57-58",
+        "tests/m3-contract.test.js:52-53",
+        "tests/m7-battle.test.js:39-40",
+        "tests/message-batch-0917.test.js:38-39",
+        "tests/message-fixes.test.js:47-48",
+        "tests/n1-infuse-uid-toggle.test.js:35-36",
+        "tests/nest-hearts.test.js:16-17",
+        "tests/potion-tip.test.js:87-88",
+        "tests/r3-0-command-guards.test.js:29-30",
+        "tests/r3-b-action-boundary.repro.test.js:33-34",
+        "tests/requested-card-integration.test.js:51-52",
+        "tests/reserved-card-id-regression.test.js:79-79",
+        "tests/stellar-divination.test.js:17-18",
+        "tests/structured-effect-authority.test.js:150-151",
+        "tests/structured-onplay-battle.test.js:31-32",
+        "tests/sts-attack-presentation.test.js:29-31",
+        "tests/sts-attack-presentation.test.js:58-59",
+        "tests/sts2-combat-facts.test.js:50-51",
+        "tests/sts2-consumed-rules.test.js:34-35",
+        "tests/tt12-hitechrd-battle-baseline.test.js:28-29",
+        "tests/tt12-hitechrd-structured.test.js:39-40",
+        "tests/tt12-structured-battle.test.js:33-34",
+        "tests/tt7-frozenight-structured-battle.test.js:56-57",
+        "tests/tt7-hand-payment.test.js:39-40",
+        "tests/tt7-sneak-structured.test.js:45-46",
+        "tests/wf-feedback1021-a-battle-dynamic-values.test.js:89-90",
+        "tests/wf-feedback1021-b-potion-targeting.test.js:93-94"
+      ]
+    },
+    {
+      "name": "resetEventGame",
+      "type": "statements",
+      "count": 4,
+      "files": [
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/event-choice-recovery-cloud.test.js:64-70",
+        "tests/event-recode-selection-continuity.test.js:54-60",
+        "tests/event-signal-puzzle-integration.test.js:53-59",
+        "tests/node-cancel-semantics.test.js:54-60"
+      ]
+    },
+    {
+      "name": "damageRuleFields",
+      "type": "properties",
+      "count": 18,
+      "keys": [
+        "version",
+        "battle",
+        "triggers"
+      ],
+      "files": [
+        "tests/battle-resolution.test.js",
+        "tests/battle-review-remediation-1023.test.js",
+        "tests/battle-snapshot-phase-cost.test.js",
+        "tests/card-rules-schema.test.js",
+        "tests/framework-independent-battles.test.js",
+        "tests/full-review-regressions-battle.test.js",
+        "tests/m1-data.test.js",
+        "tests/m3-contract.test.js",
+        "tests/m3-data.test.js",
+        "tests/r3-a-preview.test.js",
+        "tests/structured-onplay-battle.test.js",
+        "tests/sts2-battle-settings-restart.test.js",
+        "tests/sts2-consumed-items.test.js",
+        "tests/sts2-consumed-pile.test.js",
+        "tests/sts2-unified-consumed-pile.test.js",
+        "tests/tt7-sneak-structured.test.js"
+      ],
+      "locations": [
+        "tests/battle-resolution.test.js:85-85",
+        "tests/battle-resolution.test.js:134-134",
+        "tests/battle-review-remediation-1023.test.js:7-7",
+        "tests/battle-snapshot-phase-cost.test.js:31-32",
+        "tests/card-rules-schema.test.js:347-347",
+        "tests/framework-independent-battles.test.js:8-10",
+        "tests/full-review-regressions-battle.test.js:183-183",
+        "tests/m1-data.test.js:30-32",
+        "tests/m3-contract.test.js:133-135",
+        "tests/m3-data.test.js:91-95",
+        "tests/r3-a-preview.test.js:253-254",
+        "tests/structured-onplay-battle.test.js:88-90",
+        "tests/structured-onplay-battle.test.js:94-96",
+        "tests/sts2-battle-settings-restart.test.js:25-26",
+        "tests/sts2-consumed-items.test.js:16-17",
+        "tests/sts2-consumed-pile.test.js:17-18",
+        "tests/sts2-unified-consumed-pile.test.js:18-19",
+        "tests/tt7-sneak-structured.test.js:91-93"
+      ]
+    },
+    {
+      "name": "eventCardMocks",
+      "type": "properties",
+      "count": 6,
+      "keys": [
+        "game",
+        "Icons",
+        "Sound",
+        "Meta",
+        "Base",
+        "MAP",
+        "Cards"
+      ],
+      "files": [
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/event-callback-lifecycle-audit.test.js:33-35",
+        "tests/event-choice-recovery-cloud.test.js:30-32",
+        "tests/event-node-binding-cloud.test.js:26-28",
+        "tests/event-recode-selection-continuity.test.js:28-30",
+        "tests/event-signal-puzzle-integration.test.js:27-29",
+        "tests/node-cancel-semantics.test.js:28-30"
+      ]
+    },
+    {
+      "name": "canvasTraps",
+      "type": "properties",
+      "count": 6,
+      "keys": [
+        "get",
+        "set",
+        "apply"
+      ],
+      "files": [
+        "tests/agent-scenes.test.js",
+        "tests/boot.test.js",
+        "tests/first-explore-marking.test.js",
+        "tests/node-retrigger.test.js",
+        "tests/potion-tip.test.js",
+        "tests/wf-feedback1021-b-potion-targeting.test.js"
+      ],
+      "locations": [
+        "tests/agent-scenes.test.js:24-32",
+        "tests/boot.test.js:23-31",
+        "tests/first-explore-marking.test.js:16-24",
+        "tests/node-retrigger.test.js:19-27",
+        "tests/potion-tip.test.js:32-40",
+        "tests/wf-feedback1021-b-potion-targeting.test.js:30-38"
+      ]
+    },
+    {
+      "name": "bindEventRoot",
+      "type": "statements",
+      "count": 8,
+      "files": [
+        "tests/blackmarket-card-preview.test.js",
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-settlement-unification.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/blackmarket-card-preview.test.js:48-49",
+        "tests/event-callback-lifecycle-audit.test.js:50-51",
+        "tests/event-choice-recovery-cloud.test.js:49-50",
+        "tests/event-node-binding-cloud.test.js:42-43",
+        "tests/event-recode-selection-continuity.test.js:45-46",
+        "tests/event-settlement-unification.test.js:51-52",
+        "tests/event-signal-puzzle-integration.test.js:43-44",
+        "tests/node-cancel-semantics.test.js:44-45"
+      ]
+    },
+    {
+      "name": "eventMapMocks",
+      "type": "properties",
+      "count": 8,
+      "keys": [
+        "game",
+        "MAP",
+        "MODES",
+        "bagCap",
+        "usedSlots"
+      ],
+      "files": [
+        "tests/blackmarket-card-preview.test.js",
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-settlement-unification.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/blackmarket-card-preview.test.js:10-11",
+        "tests/event-callback-lifecycle-audit.test.js:13-14",
+        "tests/event-choice-recovery-cloud.test.js:14-15",
+        "tests/event-node-binding-cloud.test.js:10-11",
+        "tests/event-recode-selection-continuity.test.js:12-13",
+        "tests/event-settlement-unification.test.js:15-16",
+        "tests/event-signal-puzzle-integration.test.js:11-12",
+        "tests/node-cancel-semantics.test.js:12-13"
+      ]
+    },
+    {
+      "name": "frameMocks",
+      "type": "properties",
+      "count": 8,
+      "keys": [
+        "attach",
+        "hide",
+        "cacheStats",
+        "play",
+        "setPaused",
+        "presentDeath",
+        "isLiveBattleFigure",
+        "actionImpactRemaining"
+      ],
+      "files": [
+        "tests/battle-ally-dom-order.test.js",
+        "tests/battle-area-hover-hand-context.test.js",
+        "tests/battle-hand-content-diff.test.js",
+        "tests/battle-render-runtime-trace.test.js",
+        "tests/battle-target-dom.test.js",
+        "tests/battle-tools-lifecycle.test.js",
+        "tests/battle-unit-metadata.test.js",
+        "tests/wf-feedback1021-b-status-icons.test.js"
+      ],
+      "locations": [
+        "tests/battle-ally-dom-order.test.js:8-9",
+        "tests/battle-area-hover-hand-context.test.js:8-9",
+        "tests/battle-hand-content-diff.test.js:8-8",
+        "tests/battle-render-runtime-trace.test.js:28-29",
+        "tests/battle-target-dom.test.js:8-9",
+        "tests/battle-tools-lifecycle.test.js:8-9",
+        "tests/battle-unit-metadata.test.js:8-9",
+        "tests/wf-feedback1021-b-status-icons.test.js:10-11"
+      ]
+    },
+    {
+      "name": "eventMapActions",
+      "type": "properties",
+      "count": 9,
+      "keys": [
+        "curLayer",
+        "cellCenter",
+        "markSeen",
+        "modeCfg",
+        "gainCoins",
+        "weighted",
+        "enterLayer",
+        "exitToTitle"
+      ],
+      "files": [
+        "tests/blackmarket-card-preview.test.js",
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-settlement-unification.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/four-player-event-regressions.test.js",
+        "tests/full-review-regressions-world.test.js"
+      ],
+      "locations": [
+        "tests/blackmarket-card-preview.test.js:13-15",
+        "tests/event-callback-lifecycle-audit.test.js:20-22",
+        "tests/event-choice-recovery-cloud.test.js:17-19",
+        "tests/event-node-binding-cloud.test.js:13-15",
+        "tests/event-recode-selection-continuity.test.js:15-17",
+        "tests/event-settlement-unification.test.js:18-20",
+        "tests/event-signal-puzzle-integration.test.js:14-16",
+        "tests/four-player-event-regressions.test.js:10-12",
+        "tests/full-review-regressions-world.test.js:14-16"
+      ]
+    },
+    {
+      "name": "altarMocks",
+      "type": "properties",
+      "count": 2,
+      "keys": [
+        "Sound",
+        "Icons",
+        "Meta",
+        "Cards",
+        "MAP",
+        "Base",
+        "Motion"
+      ],
+      "files": [
+        "tests/altar-sacrifice-zones-cloud.test.js",
+        "tests/sys03-altar-restore-txn.test.js"
+      ],
+      "locations": [
+        "tests/altar-sacrifice-zones-cloud.test.js:92-108",
+        "tests/sys03-altar-restore-txn.test.js:94-110"
+      ]
+    },
+    {
+      "name": "inventoryFields",
+      "type": "properties",
+      "count": 13,
+      "keys": [
+        "inventory",
+        "usedPocket",
+        "hp",
+        "maxHp",
+        "atk",
+        "spellPower",
+        "coins",
+        "myClass",
+        "state",
+        "battleActive"
+      ],
+      "files": [
+        "tests/battle-ally-dom-order.test.js",
+        "tests/battle-area-hover-hand-context.test.js",
+        "tests/battle-infusion-action-layout.test.js",
+        "tests/battle-render-runtime-trace.test.js",
+        "tests/battle-snapshot-phase-cost.test.js",
+        "tests/battle-target-dom.test.js",
+        "tests/battle-tools-lifecycle.test.js",
+        "tests/battle-unit-metadata.test.js",
+        "tests/expedition-battle-presentation.test.js",
+        "tests/hand-material-selection-window.test.js",
+        "tests/page-perf-battle.test.js",
+        "tests/skull-sword-effective-session.test.js",
+        "tests/wf-feedback1021-b-status-icons.test.js"
+      ],
+      "locations": [
+        "tests/battle-ally-dom-order.test.js:59-60",
+        "tests/battle-area-hover-hand-context.test.js:58-59",
+        "tests/battle-infusion-action-layout.test.js:61-62",
+        "tests/battle-render-runtime-trace.test.js:83-84",
+        "tests/battle-snapshot-phase-cost.test.js:37-38",
+        "tests/battle-target-dom.test.js:46-47",
+        "tests/battle-tools-lifecycle.test.js:63-64",
+        "tests/battle-unit-metadata.test.js:48-49",
+        "tests/expedition-battle-presentation.test.js:31-32",
+        "tests/hand-material-selection-window.test.js:57-58",
+        "tests/page-perf-battle.test.js:225-226",
+        "tests/skull-sword-effective-session.test.js:81-82",
+        "tests/wf-feedback1021-b-status-icons.test.js:50-51"
+      ]
+    },
+    {
+      "name": "eventUiMocks",
+      "type": "properties",
+      "count": 10,
+      "keys": [
+        "_acts",
+        "_baseActs",
+        "_roomActive",
+        "el",
+        "act",
+        "refresh",
+        "log",
+        "showCardReward",
+        "_checkPageBg"
+      ],
+      "files": [
+        "tests/blackmarket-card-preview.test.js",
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-node-binding-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-settlement-unification.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/four-player-event-regressions.test.js",
+        "tests/full-review-regressions-world.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/blackmarket-card-preview.test.js:36-37",
+        "tests/event-callback-lifecycle-audit.test.js:37-38",
+        "tests/event-choice-recovery-cloud.test.js:34-35",
+        "tests/event-node-binding-cloud.test.js:30-31",
+        "tests/event-recode-selection-continuity.test.js:32-33",
+        "tests/event-settlement-unification.test.js:36-37",
+        "tests/event-signal-puzzle-integration.test.js:31-32",
+        "tests/four-player-event-regressions.test.js:27-28",
+        "tests/full-review-regressions-world.test.js:31-32",
+        "tests/node-cancel-semantics.test.js:32-33"
+      ]
+    },
+    {
+      "name": "startRuleBattle",
+      "type": "statements",
+      "count": 14,
+      "files": [
+        "tests/a3-battle-rules.test.js"
+      ],
+      "locations": [
+        "tests/a3-battle-rules.test.js:153-155",
+        "tests/a3-battle-rules.test.js:162-164",
+        "tests/a3-battle-rules.test.js:175-177",
+        "tests/a3-battle-rules.test.js:185-187",
+        "tests/a3-battle-rules.test.js:202-204",
+        "tests/a3-battle-rules.test.js:231-233",
+        "tests/a3-battle-rules.test.js:244-246",
+        "tests/a3-battle-rules.test.js:272-274",
+        "tests/a3-battle-rules.test.js:284-286",
+        "tests/a3-battle-rules.test.js:313-315",
+        "tests/a3-battle-rules.test.js:328-330",
+        "tests/a3-battle-rules.test.js:340-342",
+        "tests/a3-battle-rules.test.js:369-371",
+        "tests/a3-battle-rules.test.js:403-405"
+      ]
+    },
+    {
+      "name": "pixiFrameMocks",
+      "type": "properties",
+      "count": 2,
+      "keys": [
+        "utils",
+        "RENDERER_TYPE",
+        "Application",
+        "Sprite",
+        "Texture",
+        "Assets"
+      ],
+      "files": [
+        "tests/battle-frames-lifecycle.test.js",
+        "tests/battle-frames-ownership.test.js"
+      ],
+      "locations": [
+        "tests/battle-frames-lifecycle.test.js:46-74",
+        "tests/battle-frames-ownership.test.js:39-67"
+      ]
+    },
+    {
+      "name": "chestBaseMocks",
+      "type": "properties",
+      "count": 6,
+      "keys": [
+        "Base",
+        "Sound",
+        "Icons"
+      ],
+      "files": [
+        "tests/chest-batch-receipt.test.js",
+        "tests/chest-click-flow.test.js",
+        "tests/chest-multi-queue-regression.test.js",
+        "tests/chest-receive-animation.test.js",
+        "tests/nightshift-u10-teardown-guards.test.js",
+        "tests/sys03-loot-shop-txn.test.js"
+      ],
+      "locations": [
+        "tests/chest-batch-receipt.test.js:39-41",
+        "tests/chest-click-flow.test.js:75-82",
+        "tests/chest-multi-queue-regression.test.js:37-39",
+        "tests/chest-receive-animation.test.js:37-39",
+        "tests/nightshift-u10-teardown-guards.test.js:61-63",
+        "tests/sys03-loot-shop-txn.test.js:61-68"
+      ]
+    },
+    {
+      "name": "audioGainFields",
+      "type": "properties",
+      "count": 7,
+      "keys": [
+        "connect",
+        "disconnect",
+        "gain"
+      ],
+      "files": [
+        "tests/agent-console-jump.test.js",
+        "tests/agent-scenes.test.js",
+        "tests/boot.test.js",
+        "tests/first-explore-marking.test.js",
+        "tests/node-retrigger.test.js",
+        "tests/potion-tip.test.js",
+        "tests/wf-feedback1021-b-potion-targeting.test.js"
+      ],
+      "locations": [
+        "tests/agent-console-jump.test.js:37-37",
+        "tests/agent-scenes.test.js:48-48",
+        "tests/boot.test.js:46-46",
+        "tests/first-explore-marking.test.js:34-34",
+        "tests/node-retrigger.test.js:37-37",
+        "tests/potion-tip.test.js:53-53",
+        "tests/wf-feedback1021-b-potion-targeting.test.js:51-51"
+      ]
+    },
+    {
+      "name": "extractionMocks",
+      "type": "properties",
+      "count": 4,
+      "keys": [
+        "FIRE_RESTORABLE",
+        "consumeCurrentCell",
+        "finishInstant",
+        "grantEventCard",
+        "nodeOpt",
+        "nodeShell",
+        "openPocketRestore",
+        "openShop",
+        "preloadAllNodeShellBgs",
+        "showRunTransition"
+      ],
+      "files": [
+        "tests/extraction-first-explore-xp.test.js",
+        "tests/extraction-flow.test.js",
+        "tests/extraction-recovery-ui.test.js",
+        "tests/extraction-settlement.test.js"
+      ],
+      "locations": [
+        "tests/extraction-first-explore-xp.test.js:32-35",
+        "tests/extraction-flow.test.js:28-31",
+        "tests/extraction-recovery-ui.test.js:81-84",
+        "tests/extraction-settlement.test.js:27-30"
+      ]
+    },
+    {
+      "name": "chestMocks",
+      "type": "properties",
+      "count": 2,
+      "keys": [
+        "Icons",
+        "Sound",
+        "MAP",
+        "Cards",
+        "Base"
+      ],
+      "files": [
+        "tests/chest-callback-lifecycle-audit.test.js",
+        "tests/chest-coins-summary.test.js"
+      ],
+      "locations": [
+        "tests/chest-callback-lifecycle-audit.test.js:17-21",
+        "tests/chest-coins-summary.test.js:17-21"
+      ]
+    },
+    {
+      "name": "eventCapacityPorts",
+      "type": "properties",
+      "count": 4,
+      "keys": [
+        "readStacks",
+        "canReceive",
+        "capacity",
+        "moveToSafe",
+        "discardOne"
+      ],
+      "files": [
+        "tests/event-callback-lifecycle-audit.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/event-callback-lifecycle-audit.test.js:53-56",
+        "tests/event-recode-selection-continuity.test.js:48-51",
+        "tests/event-signal-puzzle-integration.test.js:46-49",
+        "tests/node-cancel-semantics.test.js:47-50"
+      ]
+    },
+    {
+      "name": "altarStateFields",
+      "type": "properties",
+      "count": 2,
+      "keys": [
+        "coins",
+        "fragments",
+        "visited",
+        "ownedCards",
+        "usedPocket",
+        "inventory",
+        "altarActivated",
+        "altarItemSacrificed",
+        "altarRewardPending",
+        "bossKilled",
+        "_fireRestKey",
+        "nodeRewards"
+      ],
+      "files": [
+        "tests/altar-sacrifice-zones-cloud.test.js",
+        "tests/sys03-altar-restore-txn.test.js"
+      ],
+      "locations": [
+        "tests/altar-sacrifice-zones-cloud.test.js:54-59",
+        "tests/sys03-altar-restore-txn.test.js:54-59"
+      ]
+    },
+    {
+      "name": "eventSaveActions",
+      "type": "properties",
+      "count": 7,
+      "keys": [
+        "newUid",
+        "pick",
+        "saveGame",
+        "scaledEnemy"
+      ],
+      "files": [
+        "tests/blackmarket-card-preview.test.js",
+        "tests/event-choice-recovery-cloud.test.js",
+        "tests/event-recode-selection-continuity.test.js",
+        "tests/event-signal-puzzle-integration.test.js",
+        "tests/four-player-event-regressions.test.js",
+        "tests/full-review-regressions-world.test.js",
+        "tests/node-cancel-semantics.test.js"
+      ],
+      "locations": [
+        "tests/blackmarket-card-preview.test.js:11-13",
+        "tests/event-choice-recovery-cloud.test.js:15-17",
+        "tests/event-recode-selection-continuity.test.js:13-15",
+        "tests/event-signal-puzzle-integration.test.js:12-14",
+        "tests/four-player-event-regressions.test.js:8-10",
+        "tests/full-review-regressions-world.test.js:12-14",
+        "tests/node-cancel-semantics.test.js:13-15"
+      ]
+    },
+    {
+      "name": "mountBattleRoot",
+      "type": "statements",
+      "count": 4,
+      "files": [
+        "tests/battle-ally-dom-order.test.js",
+        "tests/battle-target-dom.test.js",
+        "tests/battle-unit-metadata.test.js",
+        "tests/wf-feedback1021-b-status-icons.test.js"
+      ],
+      "locations": [
+        "tests/battle-ally-dom-order.test.js:83-85",
+        "tests/battle-target-dom.test.js:62-64",
+        "tests/battle-unit-metadata.test.js:70-72",
+        "tests/wf-feedback1021-b-status-icons.test.js:65-67"
+      ]
+    },
+    {
+      "name": "runPendingFields",
+      "type": "properties",
+      "count": 5,
+      "keys": [
+        "usedPocket",
+        "cardOrder",
+        "pendingExtraction",
+        "extractionPending",
+        "terminalPending",
+        "battleActive",
+        "nestActive",
+        "hp",
+        "maxHp",
+        "elapsed",
+        "elapsedSynced"
+      ],
+      "files": [
+        "tests/bag-pouch-capacity.test.js",
+        "tests/four-player-capacity-text.test.js",
+        "tests/full-review-regressions-hub.test.js",
+        "tests/pearl-storage-interface.test.js",
+        "tests/safe-pearl-access.test.js"
+      ],
+      "locations": [
+        "tests/bag-pouch-capacity.test.js:30-32",
+        "tests/four-player-capacity-text.test.js:29-31",
+        "tests/full-review-regressions-hub.test.js:29-30",
+        "tests/pearl-storage-interface.test.js:39-40",
+        "tests/safe-pearl-access.test.js:45-46"
+      ]
+    },
+    {
+      "name": "quietUiMocks",
+      "type": "properties",
+      "count": 7,
+      "keys": [
+        "clearLog",
+        "hideOverlay",
+        "hideScreen",
+        "showScreen",
+        "showOverlay",
+        "act",
+        "registerHelp",
+        "helpBtn"
+      ],
+      "files": [
+        "tests/battle-settlement-retry.test.js",
+        "tests/departure-real-session-review.test.js",
+        "tests/event-choice-session-resume-cloud.test.js",
+        "tests/extraction-session-resume.test.js",
+        "tests/game-session-elapsed.test.js",
+        "tests/r5a-session-menu.test.js",
+        "tests/session-base-persistence.test.js"
+      ],
+      "locations": [
+        "tests/battle-settlement-retry.test.js:615-615",
+        "tests/departure-real-session-review.test.js:13-13",
+        "tests/event-choice-session-resume-cloud.test.js:21-22",
+        "tests/extraction-session-resume.test.js:23-24",
+        "tests/game-session-elapsed.test.js:19-20",
+        "tests/r5a-session-menu.test.js:22-22",
+        "tests/session-base-persistence.test.js:14-14"
+      ]
+    },
+    {
+      "name": "acquireRuleFields",
+      "type": "properties",
+      "count": 7,
+      "keys": [
+        "version",
+        "battle",
+        "triggers"
+      ],
+      "files": [
+        "tests/infuse-free-paths.test.js",
+        "tests/m3-data.test.js",
+        "tests/m5-data.test.js"
+      ],
+      "locations": [
+        "tests/infuse-free-paths.test.js:133-134",
+        "tests/m3-data.test.js:69-73",
+        "tests/m3-data.test.js:128-132",
+        "tests/m3-data.test.js:135-139",
+        "tests/m3-data.test.js:164-168",
+        "tests/m3-data.test.js:199-203",
+        "tests/m5-data.test.js:267-267"
+      ]
+    }
+  ]
+}

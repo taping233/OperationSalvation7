@@ -1,0 +1,64 @@
+{
+  "platform": "Codex IAB",
+  "url": "http://127.0.0.1:5200/",
+  "window": "unchanged current window; screenshots 1617×956",
+  "pagesVisited": [
+    "基地",
+    "人物培养",
+    "伙伴",
+    "孵化伙伴",
+    "后勤",
+    "交易所购入",
+    "交易所出售",
+    "收藏室空态",
+    "建设出征背包",
+    "建设基地仓库",
+    "庭院"
+  ],
+  "input": "Browser locator clicks and CDP pointer movement; no upgrade, hatch, sale or purchase submitted",
+  "hatchCheck": [
+    {
+      "color": "rgb(237, 196, 155)",
+      "text": "伙伴蛋0 / 1持有 / 需要"
+    },
+    {
+      "color": "rgb(237, 196, 155)",
+      "text": "储备币0 / 50持有 / 需要"
+    }
+  ],
+  "ordinaryHover": {
+    "before": {
+      "h": 47.775001525878906,
+      "w": 185.3874969482422,
+      "x": 795.5,
+      "y": 243.77500915527344
+    },
+    "after": {
+      "after": "none",
+      "h": 47.775001525878906,
+      "transform": "none",
+      "w": 185.3874969482422,
+      "x": 795.5,
+      "y": 243.77500915527344
+    }
+  },
+  "cultivationHover": {
+    "duration": "0.52s",
+    "line": "\"\"",
+    "lineDuration": "0.62s"
+  },
+  "reducedCheck": {
+    "animations": [
+      "none",
+      "none",
+      "none",
+      "none",
+      "none"
+    ],
+    "buttonTransition": "0s",
+    "reduced": true
+  },
+  "mediaEmulationResetCommandSucceeded": true,
+  "consoleErrors": [],
+  "limitation": "After the completed route and reduced-motion checks, an additional panel-property read failed: the shared 5200 service returned ERR_CONNECTION_REFUSED. No service was started or stopped by this task."
+}

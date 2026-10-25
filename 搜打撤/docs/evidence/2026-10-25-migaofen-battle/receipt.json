@@ -1,0 +1,33 @@
+{
+  "method": "Built-in ImageGen alpha cutout and right-facing repose; RGBA WebP encoding with transparent padding",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-328f4008-2627-4dd6-9e87-5a3815ae983c.png",
+  "source_sha256": "a02f42d373363f2188fc6743cb8afed94903e6d5dc1d825df552061b6fde2ff6",
+  "saved_source": ".tmp/imagegen/2026-10-25-migaofen-battle/final-source.png",
+  "output": {
+    "path": "portraits/allies/migaofen-v1.webp",
+    "ext": "webp",
+    "bytes": 244716,
+    "sha256": "ece97cfb2151725c06e39cb6cc7555f8fffda3b4e084e2627e26bb0d22b28d25",
+    "license": "项目自有（AI 生成）",
+    "source": "docs/evidence/2026-10-25-migaofen-battle/receipt.json"
+  },
+  "transparency": {
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "fully_transparent_pixels": 950544,
+    "total_pixels": 1572864,
+    "outer_corners_alpha": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "status": "generated-v1-rejected-not-used-by-v2",
+  "pipeline": "NAI5 default 1344x768 then built-in imagegen transparent refinement",
+  "files": [
+    {
+      "path": "D:/素材/代号柒/.tmp/nai/event-option-art-1025/option-draft.png",
+      "sha256": "cb33523827056484de45ef020798871bb9a48ecef06faef07fb72861c95a4b22",
+      "bytes": 864622
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-bc92ba36-6576-494e-9e1d-de73d0cc1008.png",
+      "sha256": "e34106489f44f0978c8de119d3e9cb2e5dc7f01da3946554c5acb9110ad044c3",
+      "bytes": 1092256
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-option-paper-v1.webp",
+      "sha256": "8308aefa90d7a018e53f14c8af6cd03ebefca197d55f5dd5d28e775ea22bed75",
+      "bytes": 59680
+    }
+  ],
+  "finalUse": "V2 uses CSS layout and native geometric strips; retains generated V1 as rejected candidate",
+  "prompt": "builtin-prompt.txt",
+  "naiRequest": "nai-request.json"
+}

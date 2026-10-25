@@ -1,0 +1,36 @@
+{
+  "bag": {
+    "before": "背包旧详情/页面回调与正常返回 唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常",
+    "afterSameFailure": true,
+    "method": "Vitest transform loaded original bag snapshot under the original module ID; shared source was not rewritten"
+  },
+  "selftest": {
+    "slotBefore": false,
+    "slotAfter": false,
+    "bagBefore": true,
+    "bagAfter": true
+  },
+  "baselineFailuresConfirmed": 2,
+  "concurrentBag": {
+    "beforePassed": 131,
+    "beforeFailed": 3,
+    "afterPassed": 131,
+    "afterFailed": 3,
+    "identicalFailures": true,
+    "method": "Original bag source plus the two observed concurrent edits; old detail function retained during baseline",
+    "failures": [
+      {
+        "name": "背包单次渲染堆快照 main 每次一次遍历派生两区与容量，动作仍实时查询",
+        "error": "AssertionError: expected \"filter\" to not be called at all, but actually been called 2 times"
+      },
+      {
+        "name": "背包旧详情/页面回调与正常返回 唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常",
+        "error": "AssertionError: expected undefined to be true // Object.is equality"
+      },
+      {
+        "name": "新号背包真实入口反馈 结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则",
+        "error": "TypeError: Cannot read properties of null (reading 'textContent')"
+      }
+    ]
+  }
+}

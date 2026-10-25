@@ -1,0 +1,130 @@
+[
+  {
+    "id": "archer",
+    "name": "封锁线枪手",
+    "subject": "1man, adult male, 30 years old, ordinary modern quarantine perimeter infantry rifleman, muted steel-blue winter military uniform, simple dark soft body armor, plain helmet and goggles, cloth collar, combat boots, one simple service rifle held low in relaxed hands with muzzle pointing down-left. Slim readable silhouette, mature anime face, no real-world national insignia, no hero ornaments, no bulky backpack.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-c659fa9b-c8ed-4ea8-8ee5-220e40d58964.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/archer-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张修订：保留灰蓝封锁线军服、头盔、护目镜和低垂步枪，减掉零碎装备。修正草稿持枪结构：双手自然握住枪的握把与护木，枪口朝左下，手不穿过枪。成年动漫士兵，不画写实胡茬。所有靴尖转朝左。"
+  },
+  {
+    "id": "bandit",
+    "name": "截道拾荒者",
+    "subject": "1man, adult male urban scavenger in a sealed polluted city, patched muted ochre winter parka, dark charcoal trousers and worn boots, dark red cloth armband, small canvas salvage satchel, short messy dark hair, guarded ordinary anime face. One short utility machete hangs down loosely at his left-facing side. Subdued rusty orange accent, clear silhouette, no punk mohawk, no neon orange suit, no pose of attack.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-1cff9dba-4454-4c20-b186-d6c2c1d85a28.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/bandit-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张修订：保留土褐外套、暗红袖带和旧物资包，刀自然向下。修正黑白挑染为普通深棕短发，不戴眼镜；清楚普通成年动漫脸，不夸张俊美主角或写实肖像。保留少量衣服主折面，收掉外套下摆过多破碎，双靴全转朝左。"
+  },
+  {
+    "id": "orc_axe",
+    "name": "板壳畸变体",
+    "subject": "4::no humans, monster, giant beetle, armored creature, four legs::, high rounded dome carapace, broad overlapping ivory and slate-gray plates, small blind wedge-shaped head facing left, muted plum joints, four thick stubby supporting limbs, compact tall silhouette, quiet pale gray background.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-f2587e5a-64cc-4915-ac15-31ea335f7811.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/orc_axe_r2-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：板壳畸变体：删掉草稿的长鹿角甲虫角和所有尖细昆虫腿。保留骨灰/暗蓝甲壳色系，改为四只短厚关节支持足，背部是高而圆的三块重叠角质板；小型无眼楔形头从左侧探出，一道暗色感知缝，甲板间暗紫软组织。壳缝夹着一小块深灰破工作服残片，暗示人类感染来源。身形紧凑、高略大于宽，无人形躯干、人的脸、斧头、骷髅或绿色荧光，清楚左侧轮廓。"
+  },
+  {
+    "id": "grass_el",
+    "name": "囊生畸变体",
+    "subject": "4::no humans, monster, alien creature, bulbous body, four legs::, tall pear-shaped body formed from three large smooth fused tissue sacs, muted mauve and gray-teal skin, tiny blunt eyeless head facing left, four short folded supporting limbs, compact distinct silhouette, intact closed body.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-2e05b27a-9262-42e4-aeed-1254910ed6b8.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/grass_el_r2-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：囊生畸变体：保留草稿梨形大体块与冷灰蓝色，删除头顶两根细触角，把过长尖腿改成四只短而厚的折叠支持肢。主体是三个相连的不对称灰紫/灰青组织囊，不是光滑金属豆子；左上方一段短钝折颈和小的无眼头明确朝左。囊体连接处夹一点旧衣领碎布。大面哑光、仅少量柔反光，无花叶、树根、蘑菇、人的脸或长袍，不堆碎小肉团。"
+  },
+  {
+    "id": "cavalry",
+    "name": "封锁线突击兵",
+    "subject": "1man, adult modern quarantine breaching trooper, muted navy padded urban uniform, simple hard helmet with opaque visor, dark boots, short heavy rectangular riot shield held quietly by his side and one compact battering baton resting downward. Broad sturdy silhouette, restrained cold blue and cream armband. Not a knight, no lance, no motorcycle, no fantasy armor, no gold decoration. Calm normal upright idle stance.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-5e463be5-17af-4d5a-a48c-8115398ba1fe.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/cavalry-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张修订：保留沉稳灰蓝突击制服、面罩头盔和简洁防护。删除草稿错误的两根横杆武器，改成一只短而宽的长方形防暴盾平静垂在身体左侧，另一手松持一根朝下的短破门棍。袖带无文字/徽标，不加摩托、长矛或披风，双脚全朝左。"
+  },
+  {
+    "id": "wolf_rider",
+    "name": "裂颚匍行体",
+    "subject": "4::no humans, monster, quadruped, hunchback, hairless::, high compact arched back, four long folded supporting limbs, blunt elongated closed jaw facing left, pale gray skin with broad slate-blue shielding patches, dark recessed sensing slit, calm stationary pose.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-24a9eeaa-3139-45f9-84d5-23354fb05abc.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/wolf_rider-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：裂颚匍行体：保留草稿高拱背与四足支撑的压迫轮廓，但去掉所有狼耳、毛发和普通犬科眼睛。前端改成平钝、闭合的长颚，只有一道暗色感知缝；身体是灰冷光滑的变异皮层，肩背三块大硬化斑，四肢短一些粗一些，关节有手掌衍生的宽支持足。背部嵌一小片深灰旧衣布。头与躯体严格左侧面，四足静止落地，不是正在匍匐奔跑；绝不画冰晶、狼鬃或尖牙咆哮。"
+  },
+  {
+    "id": "fire_el",
+    "name": "灼囊畸变体",
+    "subject": "4::no humans, monster, giant beetle, fat body, four legs::, tall rounded black umber carapace, two large muted amber orange sacs visible beneath intact thin skin in its flank, small blind head facing left, short thick supporting feet, dark rust-red joints, calm stationary creature.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-c65a5338-4f32-4c17-a6eb-01ac841a42e5.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/fire_el-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：灼囊畸变体：保留草稿黑褐外壳、暖琥珀色大囊和紧凑梨形轮廓。把包袋拉链/布兜改成封闭生物角质壳，用三片厚钝壳围住一个暗橙色内部囊；删除脖子绳子，底部鸟爪改成四只宽短支撑足。左侧有小而钝的无眼感知头，明确朝左。只一小块灰布条嵌入壳缝作为城里感染痕迹，不穿完整人类衣服。内部暖色克制，不是真正火焰、不冒烟、不喷粒子、不发大光晕。"
+  },
+  {
+    "id": "water_el",
+    "name": "渗蚀畸变体",
+    "subject": "4::no humans, monster, alien slug, quadruped::, high compact folded mantle body, broad pale desaturated teal fluid pouch, four thick fingerlike supporting feet, small recessed eyeless face slit on left, layered dark blue-gray skin folds and a few large ivory calluses, intact body.",
+    "generatedSource": "C:/Users/太平/.codex/generated_images/01a17111-77e5-7e83-893e-2786d8fc0113/exec-5ca491f8-c90e-45bb-85c7-cb4dde3a05cc.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/water_el-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：渗蚀畸变体：草稿错误地画成人形长袍，本阶段彻底去掉人类肩、手、脚和服装结构。保留灰青外罩的折叠大色形，改为一只沉重的非人形软体生物：高而紧凑的折叠膜质主体，三组厚皮褶覆盖一只闭合液囊，四只短粗指状支持足在同一水平线站稳。小而下垂的无眼头从左侧膜褶探出，有一道暗色感知缝。外层为深灰蓝，液囊淡灰青，关节少量骨白硬茧，仅一小片旧袖口挂在侧后。不是斗篷法师、幽灵、披布人，不要兜帽衣领或五指人手，不画滴落、积水和荧光。"
+  },
+  {
+    "id": "dragon",
+    "name": "封街巨躯",
+    "subject": "4::no humans, kaiju, colossal monster, six legs, armored creature::, towering compact humpback of fused broad gray keratin ridges, massive dark violet-gray soft body, blunt head set low facing left, six short thick pillar-like supporting limbs, monumental clean silhouette, closed intact body.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-69093dab-e125-4fee-a71d-8f083b3911ee.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/dragon-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：封街巨躯：草稿外形过于接近普通恐龙，本阶段删除背鳍、尖刺、大长尾、小前手与恐龙脸。只保留草稿暗紫灰的巨大体块和高拱背节奏，改成一只封城污染巨型畸变体：三块钝圆的宽大角质脊覆盖巨大闭合软体，六只短厚柱状支持肢，大背峰，小而钝的无眼头低置左侧，侧面两道暗感知缝。体型高大、紧凑、如堵住街道的一座生物土丘；一个被嵌住的旧风衣带是感染来源线索。没有翅膀、龙角、骨骷髅、尾巴与能量吐息；正常静止支撑站立。"
+  },
+  {
+    "id": "boss_general",
+    "name": "封控指挥官",
+    "subject": "1man, mature male commander guarding a sealed laboratory access route during an urban quarantine, stern clean anime profile, short swept gray hair, dark navy practical long winter officer coat, modest gray insignia shapes without text, simple tactical belt, plain boots and gloves. One compact radio held low, holstered sidearm, a thin ivory armband. Tall authoritative calm upright left-facing idle stance. No halberd, cape, crown, gold epaulettes, medieval armor, royal embroidery or magic effects.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-bdc16cba-de64-4046-8698-fca1a6bb7a77.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/boss_general-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张结构：封控指挥官：保留NAI灰发动漫侧脸、深藏蓝现代长外套和低垂手持通讯器，年龄约四十五岁但不转写实脸；神态严厉。删除金色肩章、胸前勋章和装饰链，只留简洁布质领章与一段象牙白袖带，靴子向左，腰间收妥小手枪，不拿长戟、不披王侯披风。上衣用宽暗面和少数完整折面，不满身锈迹。"
+  },
+  {
+    "id": "boss_orc",
+    "name": "囊巢母体",
+    "subject": "4::no humans, kaiju, giant monster, sac creature, six legs::, towering asymmetrical rounded body, three huge overlapping pale gray-violet tissue lobes, upper folded shell canopy, small left-facing mouth seam, six broad supporting limbs, dark desaturated purple creases and one muted warm red sensory patch, closed intact body.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-43efe8a2-05ba-4c14-9e00-92bfcd6a9326.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/boss_orc-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：囊巢母体：保留草稿高耸下垂的大轮廓和六足支持，删除背部细小尖刺与普通动物眼睛，把均匀刷毛细纹改成三个相连的大型灰紫组织囊，囊外有一块厚钝折叠角质罩，左侧钝头只有一道暗口缝。六只支持肢更厚重、像折叠的大手衍变，脚面全落地，身形有母体般的巨大封闭储囊感。仅一小片旧医疗布嵌在侧下，不穿袍子、不像猩猩，不画獠牙、绿泡泡、卵外漏或任何裸露器官。"
+  },
+  {
+    "id": "boss_elem",
+    "name": "隔离区看守",
+    "subject": "4::no humans, giant armored beetle, cocoon creature, four legs::, two huge overlapping broad ivory-gray keratin shield panels around compact dark plum soft body, narrow desaturated teal tissue seams, four short strong supporting feet, one small left-facing sensing slit, quiet strong silhouette.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-d1da688e-50b4-4ae5-bb1c-2b2c34ee0563.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/boss_elem-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：隔离区看守：删掉草稿独角仙长角、细昆虫腿和昆虫脸。保留白灰大甲壳与灰紫内部的色系，改成四只短粗支持肢托住一个高大的闭合茧形体；前后两块巨大板状角质盾像交叠隔离门，接缝只有一条灰青半透明生物膜，左侧一点感知缝明确朝左。防御结构是大平面与少数钝转折，不铺小装甲分割。底部夹一条断掉的深色束带和空白标签，暗示实验设施来源。不要水晶女王、皇冠、衣服、人脸、金属机器人、魔法阵或悬浮碎晶。"
+  },
+  {
+    "id": "greedy_imp",
+    "name": "拾能囊虫",
+    "subject": "4::no humans, beetle, monster, insect, round body::, small compact upright creature with large folded pale tan abdomen, one muted amber metabolic node under intact skin, short beakless head facing left, four tiny broad feet, dark brown joints, simple clean silhouette.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-d84fcb8b-d032-4afb-becf-e55f62ce75fd.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/greedy_imp-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：拾能囊虫：保留NAI小型椭圆囊虫的紧凑外形与灰黄/深褐色系，删掉前额触角与金属甲壳机器人分割。四只短宽支持足托住一只浅灰褐软组织大囊，左侧有小钝头，一道感知缝；腹侧一小块琥珀色代谢节点隔着闭合皮层呈现，不照亮周围。外壳只有三块较软的大护片，不做真的昆虫复眼或人类表情，旁边夹一小片旧布。完整轮廓略可怪诞但不卖萌，不画金币、钱袋、尖耳小鬼或魔法粒子。"
+  },
+  {
+    "id": "tin_mute",
+    "name": "覆板缄默者",
+    "subject": "4::no humans, monster, armored oval creature, three legs::, tall blunt gray oval soft body, four broad flat scrap-steel shielding plates held with dark straps, narrow left-facing breathing slit, muted pale tissue folds at joints, three thick folded supports, slate blue and rusty ochre accents, quiet clean silhouette.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-9f3ebe8f-c6a1-455c-af25-bc8b80636d3b.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/tin_mute-nai45.png",
+    "redrawPrompt": "第二阶段正式重绘，输入为本张NAI4.5草稿，只继承其日系游戏绘画的线面、大色块和主要配色。按下面结构修订为现代城市污染造成的非人形畸变体，不是穿异装的人。项目默认日系二次元块面厚涂：不透明的大块明暗与冷暖叠色、少量有方向的宽笔，选择性粗细轮廓，轮廓完整，内部安静。不做写实皮肤、摄影、3D塑料、满身粒子和碎细纹。单个完整生物、头和所有支持足入画，竖幅，严格左侧面平视正交、无透视缩短、不正对观众、不用3/4角度。静止中性的自然站立支撑，不攻击、不行进、不咆哮。真正透明底，轮廓外全透明，无背景、地面、投影、雾、光晕、文字或UI。封闭完整组织，无伤口、血液或外露内脏；特征用大形体表达而非脏碎恐怖细节。\n本张结构：覆板缄默者：保留NAI高椭圆大体和暗钢灰色，把完整科幻机器人壳拆解成仅四块旧市政铁板，外形略不规整、简洁直线边，以两条旧深色束带固定在闭合生物体表。铁板缝间可见清楚的大块灰紫软组织，三只厚而折叠的支持肢是生物性的，不是机械腿或穿甲人。左侧一条安静的水平呼吸缝，没有发光摄像头。仅少量有结构意义的磨损，去掉满身小螺丝/铆钉。无人的头、手、骑士盔甲、武器或披风。"
+  },
+  {
+    "id": "cultist",
+    "name": "封识信徒",
+    "subject": "1man, adult covert anomalous believer active in a modern quarantined city, charcoal hooded raincoat over ordinary dark trousers, muted plum scarf covering lower face, plain worn boots, slim anonymous silhouette. One closed small cloth-bound notebook with no writing held low against his hip, other hand relaxed, two small dark red fabric sealing strips on coat cuff. Calm normal upright left-facing idle stance. No ornate religious robe, crosses, metal chains, wizard hat, magic circle, floating runes, fantasy tome ornament or glowing eyes.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-f0446c0e-28cc-4843-9b4b-cdcb69339cfd.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/cultist-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张结构：封识信徒：保留NAI简洁炭灰带帽雨衣、暗紫围巾、细瘦动漫脸和放松站姿。把围巾提高遮住下半张脸，手中的册子是完全无字无图标的普通深色布封笔记本，平静低持，不夹进身体或口袋里。袖口只两条暗红布封条，不带十字、锁链、仪式长袍或浮空符文；衣领头发清楚但不要写实皮肤。双脚全朝左。"
+  },
+  {
+    "id": "fake_apothecary",
+    "name": "黑诊配药人",
+    "subject": "1man, adult untrustworthy clandestine street medic in a sealed polluted city, angular weary anime face, short dark hair, simple spectacles, worn off-white clinic coat over muted teal urban work clothes, gray scarf, one small closed medicine case held low, only two opaque unlabelled glass vials in a belt pouch, no spilling liquid. Calm normal left-facing idle standing. Understated colors, one muted rust-red glove accent, slightly reserved expression. Not a Victorian apothecary, no waistcoat, cravat, gold jewelry, curled moustache, green glowing potion, smile of a caricature villain or staff.",
+    "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-8520049d-d86b-40b8-8435-d9b27d2abcde.png",
+    "naiSource": "D:/素材/代号柒/.tmp/nai/enemies-nai45-20261025/fake_apothecary-nai45.png",
+    "redrawPrompt": "这是游戏敌人立绘的第二阶段：以所附NAI4.5草稿为造型、动漫脸和配色基础，内置重绘为正式游戏立绘。保留明确的日系动漫五官比例、清楚眼睛和概括线面，绝对不要转成上一版写实中年肖像、摄影脸、脏灰滤镜或3D。采用项目默认日系二次元块面厚涂：不透明色块连成主暗面，少量宽笔随形覆色，轮廓线有粗细取舍，脸眼比衣物清楚，衣料内部大面安静，有少数完整折面，去掉均匀小碎斑和满身细线。冷暖彩色灰搭配少量鲜色点睛，哑光材质。完整单个敌人，头和脚均入画，竖幅画布；身体、脸、膝脚全朝左，平视正交侧视，无透视缩短、无3/4机位。正常静止站立，放松持物，不走动/冲刺/蹲跪/攻击。真正透明背景，人物外alpha全透明，不要灰底、晕染、地面、投影、光晕、文字或UI。\n本张结构：黑诊配药人：保留NAI白色诊所大衣、灰青内搭、普通眼镜和低垂药箱，脸是清楚的普通成年动漫侧脸，深色头发无白色挑染，不要写实人物。删除腰间绿光试管，改为两个封口、不发光的灰色小药瓶；只一只暗砖红手套点睛，大衣无真实医院文字/徽标。双手自然放低，其中一手握箱柄，另一手松垂或放兜，站姿放松，靴子朝左。"
+  }
+]

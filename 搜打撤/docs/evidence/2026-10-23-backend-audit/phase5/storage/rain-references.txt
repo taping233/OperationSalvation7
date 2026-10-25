@@ -1,0 +1,6 @@
+game\assets\asset-manifest.json:11679:      "path": "vendor/base-courtyard/RainRenderer.js",
+game\assets\asset-manifest.json:11691:      "path": "vendor/base-courtyard/RainSimulation.js",
+game\assets\vendor\base-courtyard\SOURCE.md:9:| RainSimulation.js / RainRenderer.js | [rubenvieira/rain-simulator](https://github.com/rubenvieira/rain-simulator/tree/2f3390cd4ccb4e898856dea4ddb8c6d635a90553)，提交 `2f3390cd4ccb4e898856dea4ddb8c6d635a90553` | 原 `src/simulation/RainSimulation.ts`、`src/rendering/RainRenderer.ts` 通过项目现有 esbuild 去除类型，未执行上游脚本、安装依赖或构建上游项目。原 MIT 许可见 rain-LICENSE.txt。 |
+game\src\hub\courtyard-vendor\SOURCE.md:3:此目录保存锦鲤庭院运行时正本，由相邻 `hub.courtyard-v3.js` 相对导入。首次迁入与资产目录的审核副本逐文件 SHA256 一致；原始 MIT 许可证随代码保存。观雨改用项目自有 `courtyard.rain-tableau.js`；本目录的 `RainSimulation.js` 与 `RainRenderer.js` 保留为历史 MIT 审核源码，不再由庭院导入。
+tests\random.test.js:44:      resolve(root, 'hub/courtyard-vendor/RainSimulation.js'),
+tests\random.test.js:45:      resolve(root, 'hub/courtyard-vendor/RainRenderer.js'),

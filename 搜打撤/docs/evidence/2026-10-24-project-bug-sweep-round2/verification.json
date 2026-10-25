@@ -1,0 +1,100 @@
+{
+  "at": "2026-10-23T18:33:41.239Z",
+  "scope": "本轮自有修复、第一轮关联回归及相关领域集成；不是项目全量通过",
+  "functional": {
+    "files": 70,
+    "passed": 693,
+    "failed": 0,
+    "skipped": 0,
+    "initial": {
+      "files": 67,
+      "passed": 667,
+      "failed": 0,
+      "inputChanged": [
+        "game/src/run/game.run.scenes.js",
+        "tests/project-bug-sweep-round2-pocket-identity.test.js"
+      ]
+    },
+    "incremental": {
+      "files": 4,
+      "passed": 37,
+      "failed": 0,
+      "reason": "末次复原唯一性补丁及1条新增边界，覆盖全部两个变化输入；相同文件用最新结果替换，不累计重复用例"
+    }
+  },
+  "static": {
+    "syntax": {
+      "exit": 0,
+      "projectFiles": 680
+    },
+    "data": {
+      "exit": 0
+    },
+    "types": {
+      "exit": 0,
+      "configs": 11,
+      "implementationCoverage": "619/619"
+    },
+    "eslint": {
+      "exit": 0,
+      "scope": "全部本轮JS源与67个定向测试；最后两变化输入补验通过"
+    },
+    "docs": {
+      "exit": 0
+    }
+  },
+  "sourceFingerprints": {
+    "game/src/agent/agent.scenes.js": "da1bfc52c100229ca74ec969e6b4282fc58b62b4309b80d908604b5805790e6d",
+    "game/src/battle/core/battle.core-ports.types.d.ts": "5dac47d2fbe98a8553e5003d003b29460198b99e18cf6d937703bf8710e0fea2",
+    "game/src/battle/core/battle.damage.domain.js": "1029c4361bea4560a5a64322b98ffa251dbc6425fc869f72393448e285952221",
+    "game/src/battle/core/battle.draw.domain.js": "657ee357d3a19c82b9c158a0596daae2be8abdfdf0fa41add879b1b5f830b81b",
+    "game/src/battle/core/battle.enemy-phase.domain.js": "6ff69c7191b61bdd47d14eaadd6b8555b58dd29e21ccebc7f4c0600c77a59f26",
+    "game/src/battle/core/battle.engine.factory.domain.js": "ed27f25c2d314e62f6ab770e85867653b9165f2b15fc767d53e5d1501fd2e6fd",
+    "game/src/battle/core/battle.foe-lifecycle.domain.js": "974d695e77dc47100128f4825fe4aa40b6141a533f677a1a15fb6d4cab1b44bc",
+    "game/src/battle/core/battle.measured-damage.js": "d6a300f901295b7bc6eec31b3eb14b464ea764c3c7e3111132cb94e4788286ab",
+    "game/src/battle/core/combat.factory.js": "2426be761f218824b68782ca0513aea1286ba8870770779eb8bf5241bc1db0ca",
+    "game/src/battle/effects/battle.card-cost.js": "0786371f55adb19cd8a939d8168b4205f375c3ce7fafb28e82ba7649bd9a6954",
+    "game/src/battle/view/battle.preview.js": "b162835ecaa6d5da60b8ceee8b2619a95376f89480f9d991931a996bbeadc05b",
+    "game/src/hub/bag-inventory-commands.js": "448339bf0e71b9f43da2513a46886bea2dadd1725bf5a6da1a76fbbf1cfd767a",
+    "game/src/hub/bag-legacy-use.js": "481eed648d2f66602d3e0f69300493ece6e41668240c8c5f2ebba7df519ea6f8",
+    "game/src/hub/base.commands.js": "1e77978b69918e38fc9f0bdd98f60bd0e027453f999114a6ae6a8c9c889fbb75",
+    "game/src/hub/base.js": "5bcba7a7eaf64574b325b78edfcdc78c3a9138290980cb0eeb2c5a003bd29b95",
+    "game/src/hub/extraction.commands.js": "df4683b0054b9edcfbeb8ff1cad08967102c9695b2e6a1e36841d8095f33dfbd",
+    "game/src/hub/game.bag.js": "67bc1f6678143754b41fd87a93a4875e0cccd44d4d456457ee7094856f79763a",
+    "game/src/hub/game.storage.js": "6be83d81cb848dea4abf56f9082698d9b4802647fd497c4146c35fa37ebf6f6a",
+    "game/src/hub/game.store.types.d.ts": "0dd09edd63bef6b203cb60e9b4e1e6cf92a02b8152ff66043c351868c06e2b34",
+    "game/src/hub/recovery.commands.js": "705ba67f68f821828d63fd94cb0a3335ae61029871468400c9e743fc193065c6",
+    "game/src/hub/run-save-validation.js": "5da3f71597c2f1ec2c76e33e9103e0a14162f0849a5ea1f71da0f53a1197ee3c",
+    "game/src/run/extraction-preview.js": "d1a3dd4b9391be795b24bc7832d48e9d1f303691ded76795fd2c18c4ff091715",
+    "game/src/run/game-session-persistence.js": "42396589235a4db698b4c3b520b3a9da74b4e5ac0a4d3aec2ba879388ed28d08",
+    "game/src/run/game-session-restoration.js": "c7b90d31f6d2a9fba5061c5d140717905cd7b3abada18129323cd079027b6df6",
+    "game/src/run/game.nest.js": "6ffdc1bf92eac04d8ce851d69f23e0946d565ed7d4c86ab39166c1bb87d50f6c",
+    "game/src/run/game.run.altar.js": "0ded01c26ebee00019f567fd77adf47dd8f4e86b0b3a706adb2973824c98a5c9",
+    "game/src/run/game.run.events.js": "96b4e2ef0f8e839b851a19b6ed1b83a1e612f09ac6bf1b6b9f353cef8df3e3a3",
+    "game/src/run/game.run.scenes.js": "ef7e453d75460315afe2dc58c2081ab9f04f42babd73b90ba1d492a7071ebbd8",
+    "game/src/run/node-restore-state.js": "9afb4a94d29bc4735545466d1d9d7ac762a1495218c99356cf8595312762f0a8",
+    "game/src/ui/action-dispatch.js": "f34766ef8bed42e3e10ec87de2042e584aace5ca13183ee1cb1e6f700e209116",
+    "game/src/ui/event-dice.js": "78f6b4aae8b7ab187b24b782abea7eb7c54f14157f0a19612f14430b81b4dbff",
+    "game/src/ui/extraction-rewards-view.js": "075edc2ea28822c29749e61e2d5e89a2bba23da85d3b614d7f22d9979ebd249d"
+  },
+  "runtimeMatchesLiveSources": true,
+  "browser": {
+    "status": "closed-with-partial-browser-coverage",
+    "completed": "当前窗口正常点击：标题、建立隔离来源档位、人物选择、携带箭雨/回音箭、正常出征、抵达入城补给地图；未更换尺寸或外部浏览器。",
+    "limitation": "完整CDP调用多次被权限审批拒绝，返回已保存权限或管理策略禁止访问；未执行构造状态代码。深层研究所/容器/战斗组合实页未补。用户要求直接收尾，不再继续权限排查或扩大检查。",
+    "temporaryTab": "本轮临时标签页3已不存在，没有新建标签页。"
+  },
+  "notRun": [
+    "未重新跑项目全量Vitest",
+    "未build",
+    "未提交、推送、发布"
+  ],
+  "closedAt": "2026-10-24T15:24:08.845Z",
+  "liveSourceChangesSinceVerified": [
+    "game/src/battle/core/battle.foe-lifecycle.domain.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/hub/game.bag.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/run/game.run.scenes.js"
+  ]
+}

@@ -1,0 +1,100 @@
+--- game/src/cards/card-rules.schema.js (before phase4)
++++ game/src/cards/card-rules.schema.js (after phase4)
+@@ -436,6 +436,25 @@
+   }
+ }
+ 
++function validateEffectAmount(operation, card, path, field, error) {
++  if (operation.amountField !== undefined) {
++    if (operation.amountField !== field) {
++      error(`${path}.amountField`, `must reference card field '${field}'`);
++    }
++    if (typeof card?.[field] !== 'number' || !Number.isFinite(card[field]) || card[field] <= 0) {
++      error(`${path}.amountField`, `card.${field} must be a finite positive number`);
++    }
++  }
++  if (operation.amount !== undefined) {
++    if (!isPositiveInteger(operation.amount)) {
++      error(`${path}.amount`, 'must be a positive integer');
++    } else if (typeof card?.[field] === 'number' && Number.isFinite(card[field]) && Number(card[field]) !== operation.amount
++      && Number(card[field]) !== 0) {
++      error(`${path}.amount`, `must equal card.${field} (${card[field]}) when the field is declared`);
++    }
++  }
++}
++
+ function validateEffectOperation(operation, card, path, op, error) {
+   const allowed = op === 'heal' ? HEAL_ALLOWED_KEYS : op === 'armor' ? ARMOR_ALLOWED_KEYS : DRAW_ALLOWED_KEYS;
+   for (const key of Object.keys(operation)) {
+@@ -447,22 +466,7 @@
+     if (sources.length !== 1) {
+       error(path, "must specify exactly one source among 'amountField', 'amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal'");
+     }
+-    if (operation.amountField !== undefined) {
+-      if (operation.amountField !== 'heal') {
+-        error(`${path}.amountField`, "must reference card field 'heal'");
+-      }
+-      if (typeof card?.heal !== 'number' || !Number.isFinite(card.heal) || card.heal <= 0) {
+-        error(`${path}.amountField`, 'card.heal must be a finite positive number');
+-      }
+-    }
+-    if (operation.amount !== undefined) {
+-      if (!isPositiveInteger(operation.amount)) {
+-        error(`${path}.amount`, 'must be a positive integer');
+-      } else if (typeof card?.heal === 'number' && Number.isFinite(card.heal) && Number(card.heal) !== operation.amount
+-        && Number(card.heal) !== 0) {
+-        error(`${path}.amount`, `must equal card.heal (${card.heal}) when the field is declared`);
+-      }
+-    }
++    validateEffectAmount(operation, card, path, 'heal', error);
+     if (operation.upTo !== undefined && !isPositiveInteger(operation.upTo)) {
+       error(`${path}.upTo`, 'must be a positive integer');
+     }
+@@ -491,22 +495,7 @@
+     if (operation.consumeEquip !== undefined && operation.consumeEquip !== true) {
+       error(`${path}.consumeEquip`, 'must equal true when provided');
+     }
+-    if (operation.amountField !== undefined) {
+-      if (operation.amountField !== 'armor') {
+-        error(`${path}.amountField`, "must reference card field 'armor'");
+-      }
+-      if (typeof card?.armor !== 'number' || !Number.isFinite(card.armor) || card.armor <= 0) {
+-        error(`${path}.amountField`, 'card.armor must be a finite positive number');
+-      }
+-    }
+-    if (operation.amount !== undefined) {
+-      if (!isPositiveInteger(operation.amount)) {
+-        error(`${path}.amount`, 'must be a positive integer');
+-      } else if (typeof card?.armor === 'number' && Number.isFinite(card.armor) && Number(card.armor) !== operation.amount
+-        && Number(card.armor) !== 0) {
+-        error(`${path}.amount`, `must equal card.armor (${card.armor}) when the field is declared`);
+-      }
+-    }
++    validateEffectAmount(operation, card, path, 'armor', error);
+     if (operation.guard !== undefined && operation.guard !== true) {
+       error(`${path}.guard`, 'must equal true when provided');
+     }
+@@ -532,22 +521,7 @@
+       error(`${path}.filter`, "must be { type: non-empty card type }");
+     }
+   }
+-  if (operation.amountField !== undefined) {
+-    if (operation.amountField !== 'draw') {
+-      error(`${path}.amountField`, "must reference card field 'draw'");
+-    }
+-    if (typeof card?.draw !== 'number' || !Number.isFinite(card.draw) || card.draw <= 0) {
+-      error(`${path}.amountField`, 'card.draw must be a finite positive number');
+-    }
+-  }
+-  if (operation.amount !== undefined) {
+-    if (!isPositiveInteger(operation.amount)) {
+-      error(`${path}.amount`, 'must be a positive integer');
+-    } else if (typeof card?.draw === 'number' && Number.isFinite(card.draw) && Number(card.draw) !== operation.amount
+-        && Number(card.draw) !== 0) {
+-      error(`${path}.amount`, `must equal card.draw (${card.draw}) when the field is declared`);
+-    }
+-  }
++  validateEffectAmount(operation, card, path, 'draw', error);
+   if (operation.untilHandN !== undefined && !isPositiveInteger(operation.untilHandN)) {
+     error(`${path}.untilHandN`, 'must be a positive integer');
+   }

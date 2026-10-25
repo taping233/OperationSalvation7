@@ -1,0 +1,423 @@
+{
+  "scope": "selected",
+  "ok": true,
+  "selected": [
+    "ui/semantic-icons/archive.svg",
+    "ui/semantic-icons/arrow.svg",
+    "ui/semantic-icons/bag.svg",
+    "ui/semantic-icons/book.svg",
+    "ui/semantic-icons/broom.svg",
+    "ui/semantic-icons/card-back.svg",
+    "ui/semantic-icons/card-craft.svg",
+    "ui/semantic-icons/card-library.svg",
+    "ui/semantic-icons/cards.svg",
+    "ui/semantic-icons/chart.svg",
+    "ui/semantic-icons/consumed-pile.svg",
+    "ui/semantic-icons/crystal.svg",
+    "ui/semantic-icons/door.svg",
+    "ui/semantic-icons/draw-card.svg",
+    "ui/semantic-icons/draw-pile.svg",
+    "ui/semantic-icons/exit.svg",
+    "ui/semantic-icons/folder.svg",
+    "ui/semantic-icons/gem.svg",
+    "ui/semantic-icons/hand-pages.svg",
+    "ui/semantic-icons/helmet.svg",
+    "ui/semantic-icons/home.svg",
+    "ui/semantic-icons/hourglass.svg",
+    "ui/semantic-icons/infinity.svg",
+    "ui/semantic-icons/info.svg",
+    "ui/semantic-icons/infuse.svg",
+    "ui/semantic-icons/lantern.svg",
+    "ui/semantic-icons/mouse.svg",
+    "ui/semantic-icons/notes.svg",
+    "ui/semantic-icons/pass-fragment.svg",
+    "ui/semantic-icons/pearl-box.svg",
+    "ui/semantic-icons/pen.svg",
+    "ui/semantic-icons/pet-egg.svg",
+    "ui/semantic-icons/pin.svg",
+    "ui/semantic-icons/plate.svg",
+    "ui/semantic-icons/play.svg",
+    "ui/semantic-icons/pocket.svg",
+    "ui/semantic-icons/pouch.svg",
+    "ui/semantic-icons/question.svg",
+    "ui/semantic-icons/safe-slot.svg",
+    "ui/semantic-icons/save.svg",
+    "ui/semantic-icons/scroll.svg",
+    "ui/semantic-icons/search.svg",
+    "ui/semantic-icons/sell-cards.svg",
+    "ui/semantic-icons/shield.svg",
+    "ui/semantic-icons/skip.svg",
+    "ui/semantic-icons/sparkles.svg",
+    "ui/semantic-icons/spell-pouch.svg",
+    "ui/semantic-icons/spell-power.svg",
+    "ui/semantic-icons/status-armor-break.svg",
+    "ui/semantic-icons/status-atk-down.svg",
+    "ui/semantic-icons/status-atk-up.svg",
+    "ui/semantic-icons/status-bleed.svg",
+    "ui/semantic-icons/status-cosmos-form.svg",
+    "ui/semantic-icons/status-dodge.svg",
+    "ui/semantic-icons/status-freeze.svg",
+    "ui/semantic-icons/status-heal-ban.svg",
+    "ui/semantic-icons/status-immune.svg",
+    "ui/semantic-icons/status-moon-form.svg",
+    "ui/semantic-icons/status-poison.svg",
+    "ui/semantic-icons/status-reduce.svg",
+    "ui/semantic-icons/status-silence.svg",
+    "ui/semantic-icons/status-spell-up.svg",
+    "ui/semantic-icons/status-stealth.svg",
+    "ui/semantic-icons/status-sword-form.svg",
+    "ui/semantic-icons/tools.svg",
+    "ui/semantic-icons/trash.svg",
+    "ui/semantic-icons/upload.svg",
+    "ui/semantic-icons/warning.svg"
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "path": "ui/semantic-icons/archive.svg",
+      "bytes": 311,
+      "sha256": "d0732811bac1b7fbd3ee2b7a26d8e6613df3050ba91ad0bb5bbf91715fdd8a10"
+    },
+    {
+      "path": "ui/semantic-icons/arrow.svg",
+      "bytes": 264,
+      "sha256": "7dcfe44ce9926c34949d1207d5da7a279252ff7399296ea87bc347fdc3a5221e"
+    },
+    {
+      "path": "ui/semantic-icons/bag.svg",
+      "bytes": 319,
+      "sha256": "4c6129960417fa625914250f3f42eebe8654cfb84b90e6d5f54ca51980365ea9"
+    },
+    {
+      "path": "ui/semantic-icons/book.svg",
+      "bytes": 357,
+      "sha256": "336648e14729ad8ffe203c2b0bd3eafe3be3d1e7f7dce46301c06af846ded18e"
+    },
+    {
+      "path": "ui/semantic-icons/broom.svg",
+      "bytes": 329,
+      "sha256": "10b8cfbcda580e925d06fc5f40194740affa7f7f1c9c1fb92ad975dc8ccdbaf7"
+    },
+    {
+      "path": "ui/semantic-icons/card-back.svg",
+      "bytes": 297,
+      "sha256": "6b04d723765facab0cbe262dfd8ee7a7c5d6a61cf63e298f3618a1acee1c68c1"
+    },
+    {
+      "path": "ui/semantic-icons/card-craft.svg",
+      "bytes": 365,
+      "sha256": "324c1942ab5821f2a9416033db47691f849f02a2b2ef50e50ecb837d9faeba21"
+    },
+    {
+      "path": "ui/semantic-icons/card-library.svg",
+      "bytes": 337,
+      "sha256": "90cd14eb1dab2ba30c6d857af10a197aa63ee5a7b1f5444abd46edee159a89d8"
+    },
+    {
+      "path": "ui/semantic-icons/cards.svg",
+      "bytes": 319,
+      "sha256": "8114d4e9562e2c1e4f6380a5de9b47aa13ae8af9419b89ac465d6d546f21dac3"
+    },
+    {
+      "path": "ui/semantic-icons/chart.svg",
+      "bytes": 261,
+      "sha256": "e84e676c38ca3abeb5358ac4e2051f6344d106c2f0e7cabf21a350a8f8800092"
+    },
+    {
+      "path": "ui/semantic-icons/consumed-pile.svg",
+      "bytes": 323,
+      "sha256": "15ee36fc4d37fb6914aaa13a13d866ddd6049c3281128aa11c36f4bd3431a6a9"
+    },
+    {
+      "path": "ui/semantic-icons/crystal.svg",
+      "bytes": 341,
+      "sha256": "32fd0c11bd6c91453b3471e21d5f73f7f236cb627200fe73c67b3183416063d1"
+    },
+    {
+      "path": "ui/semantic-icons/door.svg",
+      "bytes": 292,
+      "sha256": "c1e6e84dcbb5b0870f1f9e972fc084e1459ec7febd850867e19f45be411cbcee"
+    },
+    {
+      "path": "ui/semantic-icons/draw-card.svg",
+      "bytes": 323,
+      "sha256": "b0ecb454d9656c9239b5859f907dfb00b0d32d371c5c7eb495957cab21273bfe"
+    },
+    {
+      "path": "ui/semantic-icons/draw-pile.svg",
+      "bytes": 305,
+      "sha256": "fefc349b3de1a26a3776d257c80eb72c3d766f29c65b12a34caed62f8aa89232"
+    },
+    {
+      "path": "ui/semantic-icons/exit.svg",
+      "bytes": 260,
+      "sha256": "3ac55b90fef2b1a1bd401c2d5eda2caf411b0f391d8070678eb20624472d1d4a"
+    },
+    {
+      "path": "ui/semantic-icons/folder.svg",
+      "bytes": 307,
+      "sha256": "1b45a9c4595f33e7683fed1a4478546bac0a36ae5a0cf4834b9ce95fb25196cd"
+    },
+    {
+      "path": "ui/semantic-icons/gem.svg",
+      "bytes": 316,
+      "sha256": "0e797886f2b29c23ab36b9f4adbac4ee43f07e25f0c30f3253d27b9ab1105ff7"
+    },
+    {
+      "path": "ui/semantic-icons/hand-pages.svg",
+      "bytes": 356,
+      "sha256": "4ed544f7744db1a8caca0dc359f06dfcc4ecdfa57539963bc6afb492c76018ab"
+    },
+    {
+      "path": "ui/semantic-icons/helmet.svg",
+      "bytes": 362,
+      "sha256": "f030c08bda3fa79668cc4eecf60e29ca4c245890d9ea2ea14b3bfc93d905861f"
+    },
+    {
+      "path": "ui/semantic-icons/home.svg",
+      "bytes": 310,
+      "sha256": "f5e3f7705d987ca8109116e7b47842a4db8754318c60e7cd5f7c7671acb41ad0"
+    },
+    {
+      "path": "ui/semantic-icons/hourglass.svg",
+      "bytes": 312,
+      "sha256": "35f7ce54b04d1e5064b024cbfa8ac97b105d86330c8e3db0c8d7bac959b2de22"
+    },
+    {
+      "path": "ui/semantic-icons/infinity.svg",
+      "bytes": 253,
+      "sha256": "28c3eb6e0e82cf2cad7982b4addcc349cf22b72c5ebf838662314a321dad5032"
+    },
+    {
+      "path": "ui/semantic-icons/info.svg",
+      "bytes": 315,
+      "sha256": "04bbaa4fad501545b906703c1fac6dff716058975965875dccb8ab38f20720c6"
+    },
+    {
+      "path": "ui/semantic-icons/infuse.svg",
+      "bytes": 301,
+      "sha256": "129598abe54ca922f15f4bd2184ed80b9243b2a8fe27b16fb908deecad22dd05"
+    },
+    {
+      "path": "ui/semantic-icons/lantern.svg",
+      "bytes": 338,
+      "sha256": "179cd07129d891a9ecf4550d53448e4bc7a4fb0d3238037ca1f9b81b9f4891bb"
+    },
+    {
+      "path": "ui/semantic-icons/mouse.svg",
+      "bytes": 335,
+      "sha256": "2fb324358115bc4ecfce676fa632b387df64b998d30eefa7f5357e5bc29fa4df"
+    },
+    {
+      "path": "ui/semantic-icons/notes.svg",
+      "bytes": 321,
+      "sha256": "d94debfbcbebec4845d6985f063452ac80ce4ac11b357f8c7c7babbf62015f35"
+    },
+    {
+      "path": "ui/semantic-icons/pass-fragment.svg",
+      "bytes": 422,
+      "sha256": "3050c50c3a4d90ca3641be08e8fa2341c691288c87c282b407cf11a4fc9c5063"
+    },
+    {
+      "path": "ui/semantic-icons/pearl-box.svg",
+      "bytes": 447,
+      "sha256": "09d8a9314e06c0b650a5015fba662a99a201b98a7b44bccf641f388692b8128c"
+    },
+    {
+      "path": "ui/semantic-icons/pen.svg",
+      "bytes": 326,
+      "sha256": "6acbda02259578485340e29aca158c6e8e01d8760677b34838d9107d2f3e3cbc"
+    },
+    {
+      "path": "ui/semantic-icons/pet-egg.svg",
+      "bytes": 364,
+      "sha256": "fe5776cdd28dc124df591bc2907c13fd0f654548f879d60060c802ebd934ad7e"
+    },
+    {
+      "path": "ui/semantic-icons/pin.svg",
+      "bytes": 291,
+      "sha256": "65ebfc975d0748e2925005033a5a2d3a2c5c91e0c440e4ea1bb43029a07a46f1"
+    },
+    {
+      "path": "ui/semantic-icons/plate.svg",
+      "bytes": 334,
+      "sha256": "07cfdb450554a34a34c97bf7fef4b5bf24ee389c17ce73415a6b3ab67b267362"
+    },
+    {
+      "path": "ui/semantic-icons/play.svg",
+      "bytes": 240,
+      "sha256": "4619d3a357e7ba7eaf1a9e0037145928fd0c68bcaf931fc7a91aa035db4f26c1"
+    },
+    {
+      "path": "ui/semantic-icons/pocket.svg",
+      "bytes": 315,
+      "sha256": "ae04eaaacccffe6db56c7e9f49ad66f8bf3d9a27dba4cbbb4ed2b17792a97a3b"
+    },
+    {
+      "path": "ui/semantic-icons/pouch.svg",
+      "bytes": 373,
+      "sha256": "dfcbb6f214b8ad5174520afda13568216634256249d913f7a11d1cde607238bb"
+    },
+    {
+      "path": "ui/semantic-icons/question.svg",
+      "bytes": 251,
+      "sha256": "aae9b329f8214fd502a90e24270cfb5f9cc9e19013103e42e1c59433d114e0be"
+    },
+    {
+      "path": "ui/semantic-icons/safe-slot.svg",
+      "bytes": 330,
+      "sha256": "17e2e5e17d0eefc1447053bd18dcfe6fc57bc581cca9636b8c1ae36047c5b2ce"
+    },
+    {
+      "path": "ui/semantic-icons/save.svg",
+      "bytes": 309,
+      "sha256": "85fb550d18917ca97c6719706a9a83ad5caa2c35acc08f2e34a370ae01749a10"
+    },
+    {
+      "path": "ui/semantic-icons/scroll.svg",
+      "bytes": 351,
+      "sha256": "3b4a879312959031bf6cb3fc4959229af5f59150a2d39e56afd1a38077f31fdd"
+    },
+    {
+      "path": "ui/semantic-icons/search.svg",
+      "bytes": 270,
+      "sha256": "ce5ba0cc5c01550e4f56d8ddfb4d9d37164db7ec5745a8047b1655fe6cc2c829"
+    },
+    {
+      "path": "ui/semantic-icons/sell-cards.svg",
+      "bytes": 377,
+      "sha256": "881aeded16120a6681b2ebb1f39f07641197390f317dcef1b889e7c09b6f15ff"
+    },
+    {
+      "path": "ui/semantic-icons/shield.svg",
+      "bytes": 328,
+      "sha256": "591a9a8174bace45de025c9bef6ddfe740ea495f61a0af489a4483f98afb88bc"
+    },
+    {
+      "path": "ui/semantic-icons/skip.svg",
+      "bytes": 248,
+      "sha256": "0c8254bda061c3855f387955f5927813fdba066425b3d09c22590c0e8b012a18"
+    },
+    {
+      "path": "ui/semantic-icons/sparkles.svg",
+      "bytes": 343,
+      "sha256": "60a34c946474349975cbde49c421f382edc8ac2238ae5181aa8527946e54e76c"
+    },
+    {
+      "path": "ui/semantic-icons/spell-pouch.svg",
+      "bytes": 362,
+      "sha256": "8bd8542416d3891600ca84cb620d814ed48c2f065d480d47e758e2ae8d88c284"
+    },
+    {
+      "path": "ui/semantic-icons/spell-power.svg",
+      "bytes": 324,
+      "sha256": "c4a7438d670d939aa907ac60c816edb83e7bfdd22091483280b18b66da819c7c"
+    },
+    {
+      "path": "ui/semantic-icons/status-armor-break.svg",
+      "bytes": 354,
+      "sha256": "09b21038603993110774d2d73f32894592ee99a4844f62ba148e6131751227e1"
+    },
+    {
+      "path": "ui/semantic-icons/status-atk-down.svg",
+      "bytes": 319,
+      "sha256": "b3bfb4f223d1785789541ea65f3ae14b1bfb57dab9aa4c863ae44614361d8a2f"
+    },
+    {
+      "path": "ui/semantic-icons/status-atk-up.svg",
+      "bytes": 320,
+      "sha256": "eacc7953adbe1370a90040139cb0d1df3a3fe5c370ebc10696b8b8167a81df07"
+    },
+    {
+      "path": "ui/semantic-icons/status-bleed.svg",
+      "bytes": 335,
+      "sha256": "e206137d2449f11501903b7bdb773a21708b5b51447f1c0f0ac75867854454c8"
+    },
+    {
+      "path": "ui/semantic-icons/status-cosmos-form.svg",
+      "bytes": 372,
+      "sha256": "8ed8f6c7fbb2c63fb54d1c0f7ca03924ae885bb7cb546780872beda4be69a166"
+    },
+    {
+      "path": "ui/semantic-icons/status-dodge.svg",
+      "bytes": 348,
+      "sha256": "c42a90b084fde8bf67a91ef8c8c1644288572f7e48e8586438c6d60f3c9ce230"
+    },
+    {
+      "path": "ui/semantic-icons/status-freeze.svg",
+      "bytes": 301,
+      "sha256": "09b51d2aeae8fa37a9f0055048230fadf1dc1974126d1524d8b2fa81bd3b379e"
+    },
+    {
+      "path": "ui/semantic-icons/status-heal-ban.svg",
+      "bytes": 369,
+      "sha256": "218f50f48fc06b97b7f7258bdd9f52b9813640ef157296697dabba7204316de6"
+    },
+    {
+      "path": "ui/semantic-icons/status-immune.svg",
+      "bytes": 365,
+      "sha256": "b8f7a52d62cd9b5809681f6eeb678aa68911e92a9aaca0176cb55270b81a3d25"
+    },
+    {
+      "path": "ui/semantic-icons/status-moon-form.svg",
+      "bytes": 324,
+      "sha256": "239eaed04bc1cab0de15cc922cb77edab16cc47432662901316feecf979893cd"
+    },
+    {
+      "path": "ui/semantic-icons/status-poison.svg",
+      "bytes": 375,
+      "sha256": "75b65aaf49b9bdbf6fc51dcb9138e020b1652962f4f49dc544c4ef507a13b7b7"
+    },
+    {
+      "path": "ui/semantic-icons/status-reduce.svg",
+      "bytes": 359,
+      "sha256": "af6c98e6380483f8094a1f7573a9426dfaf436153b0a3af198bb7c29f503512c"
+    },
+    {
+      "path": "ui/semantic-icons/status-silence.svg",
+      "bytes": 236,
+      "sha256": "e539a18d3b5178d7ebf7a66026fc884667fef14e6eb9956376e2e64151d224a5"
+    },
+    {
+      "path": "ui/semantic-icons/status-spell-up.svg",
+      "bytes": 327,
+      "sha256": "e7df2ad3d06e9ce4bf5af22cb95fad8aab8af4f5572428f071995610448b1340"
+    },
+    {
+      "path": "ui/semantic-icons/status-stealth.svg",
+      "bytes": 353,
+      "sha256": "25600363d641f122ea40e37bbf17e4fdd59bdff7ec78a506d9a0037906aa6853"
+    },
+    {
+      "path": "ui/semantic-icons/status-sword-form.svg",
+      "bytes": 340,
+      "sha256": "352a9cf7d800fdebfed50673de7979abec1b43c41cd8c490e8f7e52ec945888b"
+    },
+    {
+      "path": "ui/semantic-icons/tools.svg",
+      "bytes": 291,
+      "sha256": "5bef647b79916304b56e45a9ef522980e3831cb184bed73257e59b66595f334d"
+    },
+    {
+      "path": "ui/semantic-icons/trash.svg",
+      "bytes": 278,
+      "sha256": "e3f7579ab66eba3baf16d9c40394a6d95a655c0e25cc88266dc341256beb1dda"
+    },
+    {
+      "path": "ui/semantic-icons/upload.svg",
+      "bytes": 253,
+      "sha256": "063c213a16298163f4347fde0c415975e0aead412bb384056950378a3c4ee965"
+    },
+    {
+      "path": "ui/semantic-icons/warning.svg",
+      "bytes": 282,
+      "sha256": "3199ce394227327e5dd5cfdd5bf101c2111b9ac32f1398e257f94c7af0134e72"
+    }
+  ],
+  "global": {
+    "ok": true,
+    "errorCount": 0,
+    "historicalWarningCount": 570,
+    "manifestIssues": []
+  }
+}

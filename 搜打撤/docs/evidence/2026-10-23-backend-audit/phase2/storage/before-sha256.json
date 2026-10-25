@@ -1,0 +1,12 @@
+[
+  {
+    "source": "game\\src\\hub\\base-meta.commands.js",
+    "before": "docs\\evidence\\2026-10-23-backend-audit\\phase2\\storage\\base-meta.commands.js.before.txt",
+    "sha256": "43C53E3EDF5D48DABB979E3C94D36788D17ACFD3A5E74FC058EE5D898AF0476A"
+  },
+  {
+    "source": "game\\src\\hub\\base-state.js",
+    "before": "docs\\evidence\\2026-10-23-backend-audit\\phase2\\storage\\base-state.js.before.txt",
+    "sha256": "1748B60CE6EB115FBB41FFDEC91921AC5CBABB6662D8D4AB5DCAA3ACB513E69E"
+  }
+]

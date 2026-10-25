@@ -1,0 +1,49 @@
+--- a/搜打撤/game/src/hub/base.js
++++ b/搜打撤/game/src/hub/base.js
+@@ -246,34 +246,24 @@
+     return result.ok ? result.value : failure;
+   }
+ 
+-  // Pet-egg pity keeps its historical chest contract: a failed durable write
+-  // still advances this one in-memory field while the already-rolled reward
+-  // proceeds. This is explicitly not an atomic save and does not weaken mutate.
+-  function persistEggPity(next) {
++  // Pet-egg counters retain their checkpoint contract: a failed durable write
++  // advances only the relevant in-memory field and does not weaken mutate.
++  /** @param {'eggPity'|'eggBattles'} field @param {number} next */
++  function persistEggCounter(field, next) {
+     if (!slot) {
+-      data.eggPity = next;
++      data[field] = next;
+       return false;
+     }
+-    const saved = mutate(draft => { draft.eggPity = next; return true; }, false);
++    const saved = mutate(draft => { draft[field] = next; return true; }, false);
+     if (saved === true) return true;
+-    // Legacy chests changed Base.data before calling save(); keep only that
+-    // narrow in-memory fallback. Protected/too-new storage is never rewritten.
+-    data.eggPity = next;
++    data[field] = next;
+     return false;
+   }
+-  // 宠物蛋战斗计数（2026-09-29 收敛）：无档位胜利的原直写路径移入命令层，
+-  // 沿用保底计数同款旧语义——先内存推进，落盘失败不回滚（persisted:false）。
+-  function persistEggBattles(next) {
+-    if (!slot) {
+-      data.eggBattles = next;
+-      return false;
+-    }
+-    const saved = mutate(draft => { draft.eggBattles = next; return true; }, false);
+-    if (saved === true) return true;
+-    data.eggBattles = next;
+-    return false;
+-  }
+-  const petEggCommands = createBasePetEggCommands({ read: () => data, persistPity: persistEggPity, persistBattles: persistEggBattles });
++  const petEggCommands = createBasePetEggCommands({
++    read: () => data,
++    persistPity: next => persistEggCounter('eggPity', next),
++    persistBattles: next => persistEggCounter('eggBattles', next),
++  });
+ 
+   // Meta 进度端口（2026-09-29 收敛）：战斗统计/熟练度/收藏回填的规则在草稿上准备，
+   // 保存成功才替换运行态；失败时同一规则在运行态补应用一次（仅内存推进，persisted:false）。

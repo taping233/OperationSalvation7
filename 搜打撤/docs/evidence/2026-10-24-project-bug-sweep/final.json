@@ -1,0 +1,486 @@
+{
+  "owner": "Friday / 01a16995",
+  "fixedRootCauses": 20,
+  "sourceFiles": [
+    {
+      "file": "game/src/agent/agent.llm.runtime.js",
+      "sha256": "c2e6e97fd8946ce0aa9147580518c4a658df831264a171e1dcb8afc71d6c2d25"
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "sha256": "c2dcf99ab6dce1c5638de689f47741148a17fb105b1a2e217f7e7847672fd20b"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "sha256": "51c4877fc1a9e14de0fc076eabc8e73c716312e4a724724cd8521b97b5e5a09e"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "1e0485714f4cabd110135d3486b38a65ad4c74b82e4bf922a838eda41e69eea0"
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "sha256": "9c7643ecd96ff7fcde97e24ca4cb591d9c0ee0d0e925d0670b9de95bfc37c2d9"
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "sha256": "1e0ee41818cb30607dcb9124193786d6715a070f96e50dc5d603d01718d20873"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "sha256": "18be6c468d97d36f2eb050c4d12e94ffc8fc2c93a7b97cd750747179f352b127"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "5ddf7de56c8bce7ba4def63b0cb267e345ee8fe0ec80a201fc4e8cc729337dc3"
+    },
+    {
+      "file": "game/src/hub/bag-inventory-commands.js",
+      "sha256": "6cdadb2c22265d90be51ec66a4a7c7b60b42109ca645d20f94028b651445def7"
+    },
+    {
+      "file": "game/src/hub/bag-token-craft-plan.js",
+      "sha256": "87cd135b2657739ce02f256d82d90253a94a28028b3ed7c7809ec4322c1de906"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "sha256": "61cb8357e927a03abd348b00f4c3e4003799230f5594cf53af7b31228f5c880e"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "sha256": "458a6e1c61fed6eb7b703e88cd2d4e698d0d52a24ba2e63301ba01814abcaf7b"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "4fb65dde3cd80c38ec6355d5916331d6e523708dc805aa2b8a47ac0274a72320"
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "sha256": "68c93717e2a97719f7e755c460294ec207a0c6d6327d0761c01a03d45bd60b3b"
+    },
+    {
+      "file": "game/src/hub/stored-card-identity.js",
+      "sha256": "f682a2ea080c03533b8f2f710cae1b16fa5cfc9970a3c17dd7b7016e956a36c6"
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "sha256": "7db403846a4ac78c4d71eac74cdc0791ef884725d4746019f455625e017eed45"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "sha256": "0daeb56a49a8663e07785e386b8deddd22c9e15057d671363e7ef7660fdc068f"
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "sha256": "b10f8396b460a46f2b283c810fe4a0ffd05211d75a6d74b0eb5f8e061a2b018c"
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "sha256": "2b156c8b2f09d09ba9d8d2876da9ec6fdebd472188718907917c3704d9c80097"
+    },
+    {
+      "file": "game/src/run/game.run.resources.js",
+      "sha256": "a375b561410957d8cb43a5c60442f9e0fb62e890960c281cf7f519af0b1c904d"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "sha256": "199b24315933d19e0927c754461e88379f2d3fe9bbc52ba6f790886136dfa7be"
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "sha256": "57c66852c3c3967c0ea149fba583ae5436e7bcb019f9d00504c58c40f1b65c31"
+    }
+  ],
+  "validation": {
+    "initialFull": {
+      "files": 867,
+      "passed": 8765,
+      "failed": 211,
+      "skipped": 26,
+      "note": "原沙箱运行，含临时Git/原子写权限失败；共享工作树运行，不是冻结版本证明。"
+    },
+    "failedSubsetRecheck": {
+      "passed": 613,
+      "failed": 79,
+      "skipped": 58,
+      "files": [
+        {
+          "name": "acceptance-gate.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "altar-node-art.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "bag-page-lifecycle-review.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "bag-render-derivation.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "bag-ui-language.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "base-subpage-header-readability.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-area-hover-hand-context.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-card-inspection.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-effective-card.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-entry-view.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-hand-group-index.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-hand-keyword-interaction.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-pouch-entry.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-preview-hand-context.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-query-cost-benchmark.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-render-derivation.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "battle-status-presentation.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "battle-tools-lifecycle.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "build-artifact-manifest.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "builtin-card-execution.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "card-description-text.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "card-effect-semantics.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "card-feedback-fixture.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "card-fixes-1010.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "card-sync-slices.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "docs-consistency.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "event-scene-readability.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "extraction-record-saved-cards-cloud.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "framework-battle-engine-services.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "full-review-regressions-battle.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "hero-cards.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "icon-hydration.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "infuse-free-play.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "map-health-hud.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "page-perf-shared.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "perf-ledger-port-occupancy.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "potion-tip-lifecycle.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "r6-story.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "retired-scenes-publication.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "run-architecture.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "runtime-asset-redundancy.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "runtime-trace-modal.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "schema-op-coverage.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "selftest-paths.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "setup-commit-gate.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "skull-sword-effective-session.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "stealth-term.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "stellar-divination.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "structured-backupcell.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "sts2-agent-infusion-1021.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "sts2-structured-description.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "sync-cards-from-live.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "workflow-browser.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-cli-integration.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-doctor.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-gate-receipt.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-handoff.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-memory.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-scope.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-ship.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-staged.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-task.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "workflow-tools.test.js",
+          "status": "passed"
+        }
+      ]
+    },
+    "scopedIntegration": {
+      "passed": 136,
+      "failed": 1,
+      "skipped": 0,
+      "files": [
+        {
+          "name": "architecture-boundaries.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "contracts.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "extraction-recovery-ui.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-agent-target-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-battle-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-event-choice-1024.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "project-bug-sweep-events-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-expedition-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-extraction-entry-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-llm-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-persistence.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-records-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-token-craft.test.js",
+          "status": "passed"
+        }
+      ]
+    },
+    "correctedEventFixture": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "files": [
+        {
+          "name": "extraction-recovery-ui.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-event-choice-1024.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "project-bug-sweep-extraction-entry-1024.test.js",
+          "status": "passed"
+        }
+      ]
+    },
+    "catalog": {
+      "passed": 54,
+      "failed": 2,
+      "skipped": 0,
+      "files": [
+        {
+          "name": "builtin-card-execution.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "card-fixes-1010.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "card-sync-slices.test.js",
+          "status": "failed"
+        },
+        {
+          "name": "schema-op-coverage.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "sts2-structured-description.test.js",
+          "status": "passed"
+        },
+        {
+          "name": "sync-cards-from-live.test.js",
+          "status": "passed"
+        }
+      ]
+    },
+    "static": "最终语法680文件、数据、目标ESLint、文档与全部11组类型检查通过；类型覆盖619/619，strict51/619。",
+    "integrationStatus": "首次整合136通过/1个新fixture标题缺失断言失败；补齐fixture后该文件6项及撤离/恢复关联19项通过，其余整合通过输入未改。",
+    "catalogStatus": "同步沙箱修复后五个直接相关文件50项通过；card-sync-slices另2项旧fixture失败独立保留，未记为通过。"
+  },
+  "browser": {
+    "platform": "Codex in-app browser",
+    "viewport": "current 1280x720",
+    "origin": "http://127.0.0.1:5327",
+    "realInput": [
+      "节点测试进入商店；货架固定饮料仅一份；返回地图；系统菜单→设置→返回；测试遭遇战进入第一回合并选牌/点敌人，能量2→1、手牌5→4"
+    ],
+    "constructed": "通过当前内置浏览器CDP仅在5327临时对局构造16/16普通包+安全格3张B，真实点击合成；结果仍19张、B=3、A=0、碎片=2。没有使用玩家存档。",
+    "limits": "特殊战斗效果、异步保存故障、真实存档重载由逻辑回归覆盖，未冒充所有特殊组合实页通过；页面复核副本未build。",
+    "cleanup": "构造状态通过reload移除，5327开发者开关恢复关闭，临时页关闭；自建服务已Ctrl-C停止，监听复核另记。 服务端口最终ECONNREFUSED。"
+  },
+  "status": "完成未提交；并行界面/既有测试失败仍保留，不宣称全库清零；无build、commit或push"
+}

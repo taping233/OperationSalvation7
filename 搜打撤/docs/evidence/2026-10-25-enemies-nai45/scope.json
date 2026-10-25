@@ -1,0 +1,83 @@
+{
+  "reviewed": 27,
+  "redraw": [
+    {
+      "id": "archer",
+      "name": "封锁线枪手"
+    },
+    {
+      "id": "bandit",
+      "name": "截道拾荒者"
+    },
+    {
+      "id": "orc_axe",
+      "name": "板壳畸变体"
+    },
+    {
+      "id": "grass_el",
+      "name": "囊生畸变体"
+    },
+    {
+      "id": "cavalry",
+      "name": "封锁线突击兵"
+    },
+    {
+      "id": "wolf_rider",
+      "name": "裂颚匍行体"
+    },
+    {
+      "id": "fire_el",
+      "name": "灼囊畸变体"
+    },
+    {
+      "id": "water_el",
+      "name": "渗蚀畸变体"
+    },
+    {
+      "id": "dragon",
+      "name": "封街巨躯"
+    },
+    {
+      "id": "boss_general",
+      "name": "封控指挥官"
+    },
+    {
+      "id": "boss_orc",
+      "name": "囊巢母体"
+    },
+    {
+      "id": "boss_elem",
+      "name": "隔离区看守"
+    },
+    {
+      "id": "greedy_imp",
+      "name": "拾能囊虫"
+    },
+    {
+      "id": "tin_mute",
+      "name": "覆板缄默者"
+    },
+    {
+      "id": "cultist",
+      "name": "封识信徒"
+    },
+    {
+      "id": "fake_apothecary",
+      "name": "黑诊配药人"
+    }
+  ],
+  "retain": [
+    "infantry",
+    "orc_jav",
+    "esper_crow",
+    "esper_candle",
+    "esper_silence",
+    "esper_echo",
+    "rager",
+    "deserter",
+    "swaggerer",
+    "heavy_hammer",
+    "camo_sniper"
+  ],
+  "reason": "前批四图因画风不符重做；其余重做对象含西幻坐骑/龙/元素人/哥布林/骑士铁甲/宫廷与仪式造型，转为城市污染畸变、现代封控或隐蔽势力形象。11项原图已符合现代封城/能力者背景及平静朝左站姿，保留。全部27项原图已逐一目视，不做游戏验收。"
+}

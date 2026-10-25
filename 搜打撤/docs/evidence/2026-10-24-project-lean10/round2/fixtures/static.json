@@ -1,0 +1,39 @@
+{
+  "files": 203,
+  "assertionNodes": 19507,
+  "registrationNodes": 2629,
+  "failures": [],
+  "helperTopLevelPure": true,
+  "hoistedReferences": 0,
+  "helperUnresolved": [
+    "Element",
+    "Error",
+    "JSON",
+    "Math",
+    "Object",
+    "Promise",
+    "Set",
+    "document",
+    "localStorage",
+    "setTimeout",
+    "undefined",
+    "window"
+  ],
+  "totals": {
+    "before": {
+      "normalized": 2319536,
+      "commentIndependent": 2214142,
+      "tokens": 560041
+    },
+    "after": {
+      "normalized": 2291283,
+      "commentIndependent": 2186052,
+      "tokens": 549504
+    }
+  },
+  "net": {
+    "normalized": 28253,
+    "commentIndependent": 28090,
+    "tokens": 10537
+  }
+}

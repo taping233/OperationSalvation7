@@ -1,0 +1,295 @@
+{
+  "status": "applied",
+  "method": "Complete module AST equality after constructor expansion; literal-only interpretation and alias analysis, no production code executed",
+  "files": [
+    {
+      "path": "game/src/cards/builtin-card-previous-rules.js",
+      "baseSha256": "f17e3b52b606bede15e568440fb15268f35e4667bf2342f4b9d1d85c6c52ab20",
+      "afterSha256": "0dbb3147f178db0147a7965f2eea0e091ed2a874b5954490b3b8450030a2bcb6",
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.targeted-before.txt",
+      "preview": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.targeted-candidate.txt",
+      "insertions": 10,
+      "deletions": 109,
+      "bytesRemoved": 1025,
+      "expandedModuleAstIdentical": true,
+      "eachConstructedRuleHasFourIndependentObjects": true,
+      "matchingTemplates": [
+        {
+          "start": 3395,
+          "end": 3564,
+          "fromLine": 102,
+          "toLine": 113,
+          "name": "batch13-spring",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-spring\", \"self\")"
+        },
+        {
+          "start": 3582,
+          "end": 3751,
+          "fromLine": 114,
+          "toLine": 125,
+          "name": "batch13-snipe",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-snipe\", \"enemy\")"
+        },
+        {
+          "start": 3769,
+          "end": 3937,
+          "fromLine": 126,
+          "toLine": 137,
+          "name": "batch13-guard",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-guard\", \"self\")"
+        },
+        {
+          "start": 3961,
+          "end": 4136,
+          "fromLine": 138,
+          "toLine": 149,
+          "name": "batch13-bitter-rain",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-bitter-rain\", \"enemy\")"
+        },
+        {
+          "start": 4161,
+          "end": 4337,
+          "fromLine": 150,
+          "toLine": 161,
+          "name": "batch13-mind-control",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-mind-control\", \"enemy\")"
+        },
+        {
+          "start": 4363,
+          "end": 4540,
+          "fromLine": 162,
+          "toLine": 173,
+          "name": "batch13-soul-contract",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-soul-contract\", \"enemy\")"
+        },
+        {
+          "start": 4571,
+          "end": 4752,
+          "fromLine": 174,
+          "toLine": 185,
+          "name": "batch13-stellar-divination",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-stellar-divination\", \"self\")"
+        },
+        {
+          "start": 4775,
+          "end": 4948,
+          "fromLine": 186,
+          "toLine": 197,
+          "name": "batch13-chaos-deck",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-chaos-deck\", \"self\")"
+        },
+        {
+          "start": 4966,
+          "end": 5135,
+          "fromLine": 198,
+          "toLine": 209,
+          "name": "batch13-mercy",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-mercy\", \"enemy\")"
+        }
+      ]
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-previous-rules.js",
+      "baseSha256": "8492db199d00df5097c6cd0f6b09d6a0c0f1fa722f246d8b61f176042b7c253a",
+      "afterSha256": "3b5ed9499f7a6e2dffb37ed051eeffcea628adfaf141d5289c331018b54519fd",
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-equipment-previous-rules.js.targeted-before.txt",
+      "preview": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-equipment-previous-rules.js.targeted-candidate.txt",
+      "insertions": 5,
+      "deletions": 49,
+      "bytesRemoved": 440,
+      "expandedModuleAstIdentical": true,
+      "eachConstructedRuleHasFourIndependentObjects": true,
+      "matchingTemplates": [
+        {
+          "start": 1054,
+          "end": 1226,
+          "fromLine": 19,
+          "toLine": 30,
+          "name": "batch13-poor-meal",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-poor-meal\", \"self\")"
+        },
+        {
+          "start": 1247,
+          "end": 1418,
+          "fromLine": 31,
+          "toLine": 42,
+          "name": "batch13-magazine",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-magazine\", \"self\")"
+        },
+        {
+          "start": 1442,
+          "end": 1616,
+          "fromLine": 43,
+          "toLine": 54,
+          "name": "batch13-scale-armor",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-scale-armor\", \"self\")"
+        },
+        {
+          "start": 1638,
+          "end": 1810,
+          "fromLine": 55,
+          "toLine": 66,
+          "name": "batch13-astrolabe",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-astrolabe\", \"self\")"
+        }
+      ]
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "baseSha256": "c57c25a898d3fa2c6dd9538cff489d5c8e4bbeb2f4c27815c278bffb5bf77088",
+      "afterSha256": "ce4fdc8f5bd9a79ff2846c8acefd673917c7eec47aded78ba47028d3f76c9d8f",
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-before.txt",
+      "preview": "docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-candidate.txt",
+      "insertions": 14,
+      "deletions": 145,
+      "bytesRemoved": 1637,
+      "expandedModuleAstIdentical": true,
+      "eachConstructedRuleHasFourIndependentObjects": true,
+      "matchingTemplates": [
+        {
+          "start": 71362,
+          "end": 71458,
+          "fromLine": 642,
+          "toLine": 642,
+          "name": "batch13-poor-meal",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-poor-meal\", \"self\")"
+        },
+        {
+          "start": 71607,
+          "end": 71798,
+          "fromLine": 650,
+          "toLine": 661,
+          "name": "batch13-spring",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-spring\", \"self\")"
+        },
+        {
+          "start": 71964,
+          "end": 72157,
+          "fromLine": 670,
+          "toLine": 681,
+          "name": "batch13-magazine",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-magazine\", \"self\")"
+        },
+        {
+          "start": 72311,
+          "end": 72502,
+          "fromLine": 690,
+          "toLine": 701,
+          "name": "batch13-snipe",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-snipe\", \"enemy\")"
+        },
+        {
+          "start": 72705,
+          "end": 72895,
+          "fromLine": 712,
+          "toLine": 723,
+          "name": "batch13-guard",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-guard\", \"self\")"
+        },
+        {
+          "start": 73066,
+          "end": 73263,
+          "fromLine": 732,
+          "toLine": 743,
+          "name": "batch13-bitter-rain",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-bitter-rain\", \"enemy\")"
+        },
+        {
+          "start": 73430,
+          "end": 73628,
+          "fromLine": 752,
+          "toLine": 763,
+          "name": "batch13-mind-control",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-mind-control\", \"enemy\")"
+        },
+        {
+          "start": 74383,
+          "end": 74579,
+          "fromLine": 803,
+          "toLine": 814,
+          "name": "batch13-scale-armor",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-scale-armor\", \"self\")"
+        },
+        {
+          "start": 74756,
+          "end": 74950,
+          "fromLine": 823,
+          "toLine": 834,
+          "name": "batch13-astrolabe",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-astrolabe\", \"self\")"
+        },
+        {
+          "start": 75129,
+          "end": 75328,
+          "fromLine": 843,
+          "toLine": 854,
+          "name": "batch13-soul-contract",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-soul-contract\", \"enemy\")"
+        },
+        {
+          "start": 75545,
+          "end": 75748,
+          "fromLine": 865,
+          "toLine": 876,
+          "name": "batch13-stellar-divination",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-stellar-divination\", \"self\")"
+        },
+        {
+          "start": 75977,
+          "end": 76172,
+          "fromLine": 887,
+          "toLine": 898,
+          "name": "batch13-chaos-deck",
+          "side": "self",
+          "call": "targetedHostedRuleSnapshot(\"batch13-chaos-deck\", \"self\")"
+        },
+        {
+          "start": 76329,
+          "end": 76520,
+          "fromLine": 907,
+          "toLine": 918,
+          "name": "batch13-mercy",
+          "side": "enemy",
+          "call": "targetedHostedRuleSnapshot(\"batch13-mercy\", \"enemy\")"
+        }
+      ]
+    }
+  ],
+  "helper": {
+    "path": "game/src/cards/hosted-rule-snapshot.js",
+    "baseSha256": "c36e3b69e914318ee1159a1e522037d90dad1203d3cce6bf282c9f9d4dcf0cf9",
+    "afterSha256": "adfdd49264abaee85c4bfe780201983416b790b9b03bdacd0e41ecdea0a70a7a",
+    "linesAdded": 5
+  },
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "insertions": 34,
+  "deletions": 303,
+  "netLinesRemoved": 269,
+  "netBytesRemoved": 2899
+}

@@ -1,0 +1,111 @@
+{
+  "baseline": "node_modules/.cache/lean-refactor-1024/before/",
+  "originalProjectNormalizedBytes": 6601166,
+  "files": [
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "before": {
+        "sha256": "199b24315933d19e0927c754461e88379f2d3fe9bbc52ba6f790886136dfa7be",
+        "bytes": 49672,
+        "normalizedBytes": 49672,
+        "lines": 807,
+        "tokens": 8530
+      },
+      "after": {
+        "sha256": "bca78282c96983c6011af24abd684dbe5aac454032ffd502c6351a8e1486f321",
+        "bytes": 48180,
+        "normalizedBytes": 48180,
+        "lines": 785,
+        "tokens": 8237
+      }
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "before": {
+        "sha256": "90113b9b63f89c7a0bcdb2e11429fbc02fdad8510e9dd20d41776cfb3c224ba6",
+        "bytes": 57966,
+        "normalizedBytes": 57966,
+        "lines": 965,
+        "tokens": 10729
+      },
+      "after": {
+        "sha256": "43bce2cb7dec28eb3233e02fcca492584fe2d1e5853ab7d573054ae6b05c84c7",
+        "bytes": 57858,
+        "normalizedBytes": 57858,
+        "lines": 966,
+        "tokens": 10651
+      }
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "before": {
+        "sha256": "8fd8a8d9ea02488c1cd6ff31e858d82b34b862ce7abb256b8d9103a668eeaa07",
+        "bytes": 53534,
+        "normalizedBytes": 53534,
+        "lines": 936,
+        "tokens": 10818
+      },
+      "after": {
+        "sha256": "1de044eea813f36ebef03c4ae40daec83bd2dcb70fb7c72b8c2de87564668654",
+        "bytes": 53218,
+        "normalizedBytes": 53218,
+        "lines": 936,
+        "tokens": 10676
+      }
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "before": {
+        "sha256": "b95b9ebef4cd5ad099f12d2f872cd98d9cbcd85bc8a7cad898c9305dc484d82a",
+        "bytes": 12292,
+        "normalizedBytes": 12165,
+        "lines": 138,
+        "tokens": 2197
+      },
+      "after": {
+        "sha256": "c5d58fa93b5638206755bf3d67eb61cca4daa51663e56d3d554d558263d6fc84",
+        "bytes": 11776,
+        "normalizedBytes": 11660,
+        "lines": 135,
+        "tokens": 2105
+      }
+    },
+    {
+      "file": "game/src/ui/room-actions.js",
+      "before": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "normalizedBytes": 0,
+        "lines": 1,
+        "tokens": 0
+      },
+      "after": {
+        "sha256": "8c3a1808f9ffa5db4cf9764275ef2f1fcf703bda4532c1a07b09db65c269d4ce",
+        "bytes": 358,
+        "normalizedBytes": 358,
+        "lines": 8,
+        "tokens": 57
+      }
+    }
+  ],
+  "netReduction": {
+    "bytes": 2074,
+    "normalizedBytes": 2063,
+    "lines": 17,
+    "tokens": 548
+  },
+  "originalProjectNetPercent": 0.031252054561269935,
+  "touchedSlicePercent": 1.1901671310799196,
+  "purchaseFlow": {
+    "beforeNormalizedBytes": 4002,
+    "afterNormalizedBytes": 2628,
+    "savedNormalizedBytes": 1374,
+    "percent": 34.3328335832084,
+    "scope": "two registered buy callbacks versus one complete buy flow and two adapters; public command validation unchanged"
+  },
+  "addedRuntimeFiles": [
+    "game/src/ui/room-actions.js"
+  ],
+  "testsExcludedFromRuntime": true,
+  "evidenceExcludedFromRuntime": true
+}

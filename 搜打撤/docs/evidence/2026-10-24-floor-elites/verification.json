@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-24",
+  "task": "WF-floor-elites-1024",
+  "status": "complete-uncommitted",
+  "ownedIncrement": "仅精英相关增量；保留各路径已有改动",
+  "files": [
+    {
+      "path": "game/data/map.json",
+      "bytes": 12324,
+      "sha256": "999754febeecefa35349ebdb3ee89147367727e525f43f52ee2ccb6a081a0cf7"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "bytes": 40401,
+      "sha256": "c5753005abb9bcaf70e6a98439e37ecd041fa3e0cb90308d2794755e24dad052"
+    },
+    {
+      "path": "game/src/run/encounter-meta.js",
+      "bytes": 1989,
+      "sha256": "cbc1afbbdc5bfc250977ecb084791a54c2df735d0c1e4160625bd3a67cca43e1"
+    },
+    {
+      "path": "game/src/battle/core/battle.elite-mechanics.js",
+      "bytes": 1859,
+      "sha256": "f2076c90d99ef6aeea069fa9e8f98cbe65d0405a398e37dbcd7e5cc2df68ede5"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "bytes": 6568,
+      "sha256": "c844aae29531029cb100b6de11cccecac213271f9aff7645e2b6d6ca1e5d75b1"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.domain.js",
+      "bytes": 29855,
+      "sha256": "0c27ff47e38128dc6907f6f77f55f23391316fb9ee69d62e9329363bb10db115"
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "bytes": 16640,
+      "sha256": "94544e4d0b357e3f6edb6d2a2587479980a7d8a229531030e4a23075ed4cb967"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.factory.js",
+      "bytes": 19902,
+      "sha256": "c05020f918133f3699babb360c37deda43daafe9a2926358ffc3ff647e47407d"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "bytes": 64199,
+      "sha256": "89eb6a19ab7da653e5853471871714395bc94fe63edfccd826b7deb2d205f517"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "bytes": 19234,
+      "sha256": "e4cdd5ba822db34b798cdf370812c36276f613490f88d6fb6ddb56fd270436b9"
+    },
+    {
+      "path": "tests/floor-elites.test.js",
+      "bytes": 8021,
+      "sha256": "2625c34a93afc18d4a836915ea03f3f9574bf52efb86e788d523bb423a2a036c"
+    },
+    {
+      "path": "tests/fresh-run-map-encounters.test.js",
+      "bytes": 5642,
+      "sha256": "176f91517325de1f9a9bcb74d88ca2c31587886ce945bc1b6debca7834df70ae"
+    },
+    {
+      "path": "tests/encounter-meta.test.js",
+      "bytes": 1881,
+      "sha256": "62c88066f60c4d623f661a26fe643fd55651bc4dd51d72886ac58be770b7d199"
+    },
+    {
+      "path": "tests/r7a-encounter-selector.test.js",
+      "bytes": 2385,
+      "sha256": "ac71b4c97b1f0fd39a798c851183453d0a8e487b890e40582dfcc1f5b2675c65"
+    },
+    {
+      "path": "docs/rules.md",
+      "bytes": 34669,
+      "sha256": "bc504d275b118f866e114a592fd7fe3fd4645b34b1333ce7d497e3f63c6b2e6a"
+    }
+  ],
+  "tests": {
+    "uniqueFiles": 14,
+    "uniqueTests": 290,
+    "passed": true,
+    "floorEliteTests": 16,
+    "seedScenarios": 1200
+  },
+  "checks": {
+    "eslint": "passed",
+    "data": "passed",
+    "docs": "passed",
+    "diff": "passed",
+    "typecheck": {
+      "status": "failed",
+      "onlyReportedError": "game/src/ui/game.menu.pages.js:61 TS2353 pickLatestSlot does not exist",
+      "implementationCoverage": "623/623"
+    }
+  },
+  "browser": {
+    "platform": "Codex IAB",
+    "url": "http://127.0.0.1:5200/",
+    "viewport": "当前窗口，未设置尺寸",
+    "entry": "标题节点测试真实开局，devMode不保存",
+    "scenarios": "构造九种精英属性与说明；各层生成样本；真实点击与命令端口出牌混合证据",
+    "ironCap": {
+      "printedAttack": 7,
+      "hpBefore": 9,
+      "hpAfter": 5,
+      "energyBefore": 2,
+      "energyAfter": 1
+    },
+    "consoleErrors": [],
+    "assets": [
+      {
+        "path": ".tmp/floor-elites-1024/iron-cap.png",
+        "bytes": 126736,
+        "sha256": "ec4671083487f48c230e60dcabd4ae652cebc04025b500cd2a8a98c14270f153",
+        "acquisition": "当前Codex内置浏览器截图/DOM；未另开浏览器"
+      },
+      {
+        "path": ".tmp/floor-elites-1024/final-dom.txt",
+        "bytes": 3081,
+        "sha256": "300ca6663ffd16d8bf9981ea907190fd8527e1fee32d4c1fa2499c96888d2694",
+        "acquisition": "当前Codex内置浏览器截图/DOM；未另开浏览器"
+      }
+    ]
+  },
+  "limitations": [
+    "独立精英立绘未新增，使用通用占位图标",
+    "未自然通关四层",
+    "未build/全量/提交/推送"
+  ],
+  "newServices": []
+}

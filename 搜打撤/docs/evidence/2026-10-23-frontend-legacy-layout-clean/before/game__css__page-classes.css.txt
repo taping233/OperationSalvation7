@@ -1,0 +1,82 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地·人物页签美术升级（2026-09-24）——对标 page-hub.css / page-slot-select.css
+   定稿语言：① 冷青统一调色 ② var(--gold-main) 暖金装饰（金发丝线/端点光点/封条顶线/
+   编号短线）③ 信息排版仪式感（层级分离/发丝分隔线）④ 交互三档节奏
+   （fast .18s / lift .32s 弹性 / press .1s）+ hover/按压/焦点/出入场。
+   作用域：全部规则限定人物页签内容区 #overlay #hubMain.hub-classes；
+   页签框架/资源头/页头由 page-hub.css 负责，此处不重复定义（按钮焦点环
+   与 cursor:pointer 沿用 page-hub.css T2/T6 全 #hubMain 规则）。
+   约束：只覆盖不删除；角色立绘（.class-dossier-art img）不动；
+   动画仅 transform/opacity；reduced-motion 由 winter.css 全局兜底。
+   节奏变量沿用 page-hub.css 定义在 .card.page:has(#hubMain) 上的
+   --hub-fast/--hub-lift/--hub-press（附兜底值）。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ═════════ C1 页首档案条：金发丝线 + 端点光点 + 编号短线 ═════════ */
+/* C1a 下缘金发丝线（两端渐隐、中心提亮，同 hub-head W2a 语言） */
+/* C1b 右端光点呼吸（金线的"封蜡"） */
+@keyframes clsGemBreath { from { opacity: .5; } to { opacity: 1; } }
+
+/* C1c 眉题：前置金短线（编号短线的仪式语言）+ 提色 */
+/* C1d 页名：微金晕提亮（层级：页名 > 说明 > 统计） */
+
+/* C1e 统计章：档案章化——冷青底、左上金角标、数值金晕 */
+
+/* ═════════ C2 人物档案卡：封条顶线 + hover 抬升 + 按压回弹 ═════════ */
+
+/* C2a 卡框：三档节奏（hover 沿 lift 弹性落位，按压沿 press 快进、松手回弹） */
+/* C2b 键盘可达：卡内皮肤按钮聚焦时金线亮框（对焦走查的可见反馈） */
+
+/* C2c 卡顶"封条"金线：未培养极淡、已培养可辨、hover 点亮（slot-card W2d 语言） */
+
+/* C2d 档案编号：提亮微金晕 + 号下金短线（编号短线语言） */
+#overlay #hubMain.hub-classes .class-dossier-index {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+  color: rgba(223,220,214,.88);
+  text-shadow: 0 0 8px rgba(230,203,118,.3), 0 1px 3px rgba(6,7,7,.8);
+}
+#overlay #hubMain.hub-classes .class-dossier-index::after {
+  content: ''; display: block; width: 14px; height: 1px;
+  background: linear-gradient(270deg, #e6cb76b3, transparent);
+  box-shadow: 0 0 4px #e6cb7655;
+}
+
+/* ═════════ C3 卡内信息层级：发丝分隔线 + 熟练度金头光点 ═════════ */
+
+/* C3a 眉题/人名/描述：层级分离（人名压暗投影保浅色立绘下的可读性） */
+#overlay #hubMain.hub-classes .class-dossier-kicker { color: var(--gold-main); }
+
+/* C3b 档案数据行：顶部发丝分隔线（信息块仪式感，slot-page W3d 语言） */
+#overlay #hubMain.hub-classes .class-dossier-meta {
+  padding-top: 8px;
+  border-top: 1px solid rgba(170,174,177,.18);
+}
+#overlay #hubMain.hub-classes .class-dossier-meta b {
+  color: #f6e6af; text-shadow: 0 0 8px rgba(230,203,118,.22);
+}
+#overlay #hubMain.hub-classes .class-dossier-meta span { color: #a6aaad; letter-spacing: .05em; }
+
+/* C3c 熟练度条：冷青凹槽 + 进度金头光点（仅已培养卡出现，保证 width>0） */
+
+/* ═════════ C4 皮肤按钮：冷青底 retint + 选中金章 + hover 金线 ═════════ */
+/* 选中皮肤 = 金章（金渐变 + 内高光 + 微金晕，同 deploy-primary 收口语言） */
+
+/* ═════════ C5 出入场：页首先落位、档案卡错峰上浮（仅页签切入时重播；
+   皮肤切换等页内重渲染不带 .page-in，不重播） ═════════ */
+@keyframes clsCommandIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes clsDossierIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═════════ C6 第二波补件（2026-09-25 A 组·审查计划项7）═════════ */
+
+/* C6a 立绘头顶防裁：object-position 由 center 22% 收为 center top——
+   立绘头顶（巫帽尖/发饰）紧贴画布上缘，任何纵向裁切场景一律保头去脚 */
+#overlay #hubMain.hub-classes .class-dossier-art img { object-position: center top; }
+
+/* C6b 皮肤按钮区固定底部对齐：皮肤数不同的卡（1~4 枚）统一预留两行高度，
+   各卡标题/数据行起始位置一致，按钮组齐平卡底（copy 为 bottom 锚定） */

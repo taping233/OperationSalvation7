@@ -1,0 +1,114 @@
+[
+  {
+    "file": "game/src/hub/hub.presentation.js",
+    "beforeSha256": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+    "afterSha256": "ffaa4754f7e865539119332bc55ae8843c3100f558ea1c1ccc03db339e09a859",
+    "beforeBytes": 22728,
+    "afterBytes": 16252
+  },
+  {
+    "file": "game/src/hub/game.bag.js",
+    "beforeSha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36",
+    "afterSha256": "be3412e3d8876d8aed15940779534d4455a191859c661ebc99c8e86a88224ee3",
+    "beforeBytes": 27100,
+    "afterBytes": 23998,
+    "observedCurrentSha256": "72c5536492be511f2a72d7358202bc1b787aaf777876d0ca76efd59db934f8b1",
+    "concurrentChangesExcludedFromSize": true,
+    "concurrentChanges": [
+      "bagUseStatus baseCap provider",
+      "pouchStoreZoom spell-pouch icon",
+      "pearlStoreZoom pearl-box icon after latest test run"
+    ]
+  },
+  {
+    "file": "game/selftest.js",
+    "beforeSha256": "cac4af2dd5a00ffbb9ded607a30c134ba8970c518a8283307c2ecb0fdf86f96c",
+    "afterSha256": "9fc0ea6c010a74b1de46f6e48ca9fe0bb9e79c5f8a189afb1c6ee6819cdeda35",
+    "beforeBytes": 10779,
+    "afterBytes": 10889
+  },
+  {
+    "file": "game/src/run/expedition.view.js",
+    "beforeSha256": "d718191babe5f0fd452bcb535023963a5e088ef6ac5a5bf0553aa13caf22db38",
+    "afterSha256": "2dc605ab338c9b1c2d90324fcc05f38f6b30794ab7ace2053e6382b01443878f",
+    "beforeBytes": 17348,
+    "afterBytes": 17292
+  },
+  {
+    "file": "game/src/ui/interface-motion.js",
+    "beforeSha256": "e280d279fc3db1119f1fd26e822b495839fe99c743f6fc9432b8c5f43e46c410",
+    "afterSha256": "55d605bfa3e403035379e3ecdb34e0ec45a9cf005e6fc81194c51d08fea60a95",
+    "beforeBytes": 15332,
+    "afterBytes": 15137
+  },
+  {
+    "file": "game/src/ui/card-zoom-controller.js",
+    "beforeSha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185",
+    "afterSha256": "5d5928e7e27affacda743b0669d328f65e4c6436c3dd99a87f25aba26f751780",
+    "beforeBytes": 22146,
+    "afterBytes": 22129
+  },
+  {
+    "file": "game/css/base-framework-v7.css",
+    "beforeSha256": "4c00c87e888459c029b3ad7928718c35e6d3d714cb11610455ae2ae6c983cc06",
+    "afterSha256": "20e20ca7b31a3c69be23c1d1a92f73cb887c544e78ba80f70d025ff025e44258",
+    "beforeBytes": 7795,
+    "afterBytes": 7695
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "beforeSha256": "9b0f2546910e78e8de87126cd16534ac0336056d171cc88149286692e1e6b0d9",
+    "afterSha256": "c679466faa9bf3ec9137b2a8cd265183cbb1a9fef27f5eb079dde316ef1db8c1",
+    "beforeBytes": 31436,
+    "afterBytes": 31099
+  },
+  {
+    "file": "game/css/battle.css",
+    "beforeSha256": "3cb8074a056c49067c86a99b3015ef3876df9821b54d246cfb9a019ed34f45d2",
+    "afterSha256": "674058c37d2a494b2229733e2d222571313a30761e62797bb53959aeeb2a7d35",
+    "beforeBytes": 31907,
+    "afterBytes": 31692
+  },
+  {
+    "file": "game/css/winter.css",
+    "beforeSha256": "cdb77fdc6bcf7d0af596eb83414c2fbce643fa9c2b43e73570fa18f2ac7e4746",
+    "afterSha256": "47ce218ea036de4b71a5dfcc7db92fcfac2eb3e07e044402933e39f709f0748d",
+    "beforeBytes": 91387,
+    "afterBytes": 91055
+  },
+  {
+    "file": "game/css/map-edge-light.css",
+    "beforeSha256": "03672ff89af18eeec9af34842ef4468d55684f307e94352cd4fd7438066cc86d",
+    "afterSha256": "8df0e504b5d193505695336bce81ddb4947175a3276e634ffb6240818a8412e5",
+    "beforeBytes": 2709,
+    "afterBytes": 2669
+  },
+  {
+    "file": "tests/base-ui-sample.test.js",
+    "beforeSha256": "d3f6e81b63f44599c6640fd6a3b3b068d01b2eebd194c3de0ae89fb5b761be1f",
+    "afterSha256": "f483c6bc05c2ff03baf2e9801ae5a659f45297fa143daf8f300f1017607cfebc",
+    "beforeBytes": 14155,
+    "afterBytes": 12113
+  },
+  {
+    "file": "tests/hub-personnel-portrait.test.js",
+    "beforeSha256": "1fb2c47095b7c6c6060d970ab218315fd6232a87606aa73e135fa08f93da45c5",
+    "afterSha256": "d5b407f1d42208b78986bb2b716e131f9e190b95df0d7eb1537245dbccd8564e",
+    "beforeBytes": 7838,
+    "afterBytes": 10457
+  },
+  {
+    "file": "tests/interface-hub-query-reuse.test.js",
+    "beforeSha256": "8bcb7306a28ce2e019b7f18551bcdd2f9e6ed3fb13f0fe39407abc1c2c8695c8",
+    "afterSha256": "cc6c72892ec9927331708ae7c7f7b79de294a0990d6ad1720231f1f49ea9234b",
+    "beforeBytes": 6758,
+    "afterBytes": 6692
+  },
+  {
+    "file": "tests/surface-motion.test.js",
+    "beforeSha256": "b8dda7f5cb190a32fcb81b32e00bdf7dc7e609c781b473c2d708b40294d98519",
+    "afterSha256": "68962f833f022339d4466c8f8ea0fe89f288512fd96c7cd037016eb5d7e29a0d",
+    "beforeBytes": 10627,
+    "afterBytes": 10570
+  }
+]

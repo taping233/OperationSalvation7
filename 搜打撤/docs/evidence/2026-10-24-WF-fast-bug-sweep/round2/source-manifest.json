@@ -1,0 +1,81 @@
+{
+  "task": "WF-fast-bug-sweep-r2-1024",
+  "files": [
+    {
+      "sha256": "a87ed4f169c00f82e6339945efc7a98e13499827e82ee502e9d06358a32fe4d0",
+      "path": "game/src/core/event-bus.js"
+    },
+    {
+      "sha256": "94fbd6d5a4506c833b05d7dc161e693431c4d286703dfff5c079684c0382054c",
+      "path": "game/src/ui/discovery-selection.js"
+    },
+    {
+      "sha256": "4897ddfd250adc72fc60f92baedde232bdc1a1e5f604c01f1cc70cf741ad1c52",
+      "path": "game/src/battle/core/battle.turn-start.js"
+    },
+    {
+      "sha256": "0a3bbf72dd174f61539251cbd12f27fedf38477203b788a039c48f31dc9f0835",
+      "path": "game/src/battle/core/battle.setup-mechanics.domain.js"
+    },
+    {
+      "sha256": "03467576e95480c2db765eacab96ba0a2471369266432a5cfc6084a002866a38",
+      "path": "game/src/hub/base-state.js"
+    },
+    {
+      "sha256": "a11bb33661d187e09e27230acd42c62210a71e3e57e1c2d4bdd3cb09985cc813",
+      "path": "game/src/hub/recoverable-pair.js"
+    },
+    {
+      "sha256": "1d74dbeb9859bce23e0a87683a0aa9d0a54dc1d2d8b863ad958fc2f51b654e5d",
+      "path": "game/src/ui/game.menu.js"
+    },
+    {
+      "sha256": "07649b3df1a94acb1d1f4b44f99697908530445737bdfb375ca6144b774ae011",
+      "path": "scripts/dependency-audit-diagnostics.mjs"
+    },
+    {
+      "sha256": "1c09416d9b0f9e5a0ed6b450a5f64021b29ac93bd3037e4e8c79baebc7df76b7",
+      "path": "game/src/audio/sound.samples.player.js"
+    },
+    {
+      "sha256": "7ad53dc5e5ada3914afb2a57bd9d2d18a9c68cf7623767f85afacc32cbfb312a",
+      "path": "game/src/agent/agent.protocol.js"
+    },
+    {
+      "sha256": "e392be5e3aac6b3fa13dce03f4ebf605949781f798957b482194b8f8b668eff6",
+      "path": "tests/fast-bug-sweep-round2-battle.test.js"
+    },
+    {
+      "sha256": "21ae4ce642998c1b40297947c0481b48d7299d2504860dce9e5452d6d4f90b25",
+      "path": "tests/fast-bug-sweep-round2-discovery-input.test.js"
+    },
+    {
+      "sha256": "593024c6a3f03e5b6f9b6ebb64335108c801f7de5b773f08315a3ff4b07814fa",
+      "path": "tests/fast-bug-sweep-round2-event-bus.test.js"
+    },
+    {
+      "sha256": "b224a1b2312c34a303a5128599879a8e4b6efc7299f4ee1d38e54645360058a7",
+      "path": "tests/fast-bug-sweep-round2-pair-preflight.test.js"
+    },
+    {
+      "sha256": "596c497fab896555ff1afa20dfb120be31bcb863e7aa57036236006a9d251527",
+      "path": "tests/fast-bug-sweep-round2-pet-state.test.js"
+    },
+    {
+      "sha256": "53abb1ff8a8ddd680a7916bf922721c663a44f96d11d0db6a2bb5c1415d4e883",
+      "path": "tests/fast-bug-sweep-round2-title-slot-context.test.js"
+    },
+    {
+      "sha256": "ab3aa46e3e56608a245b44ea5e014da9ba4c31edb5e55bde8f3d47b61166f87b",
+      "path": "tests/project-fast-round2-agent-move-1024.test.js"
+    },
+    {
+      "sha256": "95cce191261678061ae31ee4bdcd997f05165dcad178c29d5825f6bbea94f416",
+      "path": "tests/project-fast-round2-tools-audio-1024.test.js"
+    },
+    {
+      "sha256": "5bbe124a3cefabd7814b4586c8e7a89b0bc2d68e848ef6da70f98900fd9a8b75",
+      "path": "tests/tools/dependency-audit-diagnostics.test.mjs"
+    }
+  ]
+}

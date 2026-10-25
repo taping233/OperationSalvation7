@@ -1,0 +1,127 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const assert = require('node:assert/strict');
+const cp = require('node:child_process');
+const acorn = require('acorn');
+const out = 'docs/evidence/2026-10-23-backend-audit/phase5/battle';
+const files = ['game/src/cards/builtin-card-previous-rules.js', 'game/src/cards/builtin-equipment-previous-rules.js', 'game/src/cards/cards.data.js'];
+const helperPath = 'game/src/cards/hosted-rule-snapshot.js';
+const helperBefore = fs.readFileSync(helperPath, 'utf8');
+const addition = "\n/** @param {string} name @param {'self' | 'enemy'} side */\nexport function targetedHostedRuleSnapshot(name, side) {\n  return { version: 1, battle: { target: { side, area: false }, hosted: [name] } };\n}\n";
+const helperAfter = helperBefore + addition;
+const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const parse = source => acorn.parse(source, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
+const helperAst = parse(helperAfter), functions = Object.fromEntries(helperAst.body.map(node => [node.declaration.id.name, node.declaration]));
+assert.equal(helperAst.body.length, 2);
+assert.equal(functions.targetedHostedRuleSnapshot.body.body.length, 1);
+assert.equal(functions.targetedHostedRuleSnapshot.body.body[0].type, 'ReturnStatement');
+function value(node, parameters = {}) {
+  if (node.type === 'Literal') return node.value;
+  if (node.type === 'Identifier' && Object.hasOwn(parameters, node.name)) return parameters[node.name];
+  if (node.type === 'UnaryExpression' && node.operator === '-') return -value(node.argument, parameters);
+  if (node.type === 'ArrayExpression') return node.elements.map(element => value(element, parameters));
+  if (node.type === 'ObjectExpression') {
+    const object = {};
+    for (const property of node.properties) {
+      assert.equal(property.type, 'Property'); assert.equal(property.computed, false); assert.equal(property.kind, 'init'); assert.equal(property.method, false);
+      const key = property.key.type === 'Identifier' ? property.key.name : property.key.value;
+      assert.equal(Object.hasOwn(object, key), false);
+      Object.defineProperty(object, key, { value: value(property.value, parameters), writable: true, enumerable: true, configurable: true });
+    }
+    return object;
+  }
+  if (node.type === 'CallExpression' && node.callee.type === 'Identifier' && Object.hasOwn(functions, node.callee.name)) {
+    const fn = functions[node.callee.name];
+    assert.equal(node.arguments.length, fn.params.length);
+    const args = node.arguments.map(argument => value(argument));
+    return value(fn.body.body[0].argument, Object.fromEntries(fn.params.map((parameter, index) => [parameter.name, args[index]])));
+  }
+  throw new Error('Not static literal: ' + node.type);
+}
+function visit(node, callback) {
+  if (!node || typeof node !== 'object') return;
+  if (node.type) callback(node);
+  for (const [key, child] of Object.entries(node)) if (!['start', 'end', 'loc'].includes(key)) {
+    if (Array.isArray(child)) child.forEach(item => visit(item, callback)); else if (child && typeof child === 'object') visit(child, callback);
+  }
+}
+function canonical(node, parameters = {}, expand = false, removeTargetedImport = false, propertyKey = false) {
+  if (!node || typeof node !== 'object') return node;
+  if (Array.isArray(node)) return node.map(child => canonical(child, parameters, expand, removeTargetedImport)).filter(child => child !== null);
+  if (propertyKey && ['Identifier', 'Literal'].includes(node.type)) return { key: node.type === 'Identifier' ? node.name : String(node.value) };
+  if (node.type === 'Identifier' && Object.hasOwn(parameters, node.name)) return canonical(parameters[node.name]);
+  if (expand && node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === 'targetedHostedRuleSnapshot') {
+    const fn = functions.targetedHostedRuleSnapshot;
+    return canonical(fn.body.body[0].argument, Object.fromEntries(fn.params.map((parameter, index) => [parameter.name, node.arguments[index]])), false, false);
+  }
+  if (removeTargetedImport && node.type === 'ImportDeclaration' && node.source.value === './hosted-rule-snapshot.js') {
+    const specifiers = node.specifiers.filter(specifier => specifier.imported?.name !== 'targetedHostedRuleSnapshot');
+    return specifiers.length ? canonical({ ...node, specifiers }, parameters, expand, false) : null;
+  }
+  const normalized = {};
+  for (const [key, child] of Object.entries(node)) {
+    if (['start', 'end', 'loc', 'raw'].includes(key)) continue;
+    normalized[key] = node.type === 'Property' && key === 'shorthand' ? false : canonical(child, parameters, expand, removeTargetedImport, node.type === 'Property' && key === 'key');
+  }
+  return normalized;
+}
+function uniqueObjects(root) {
+  const set = new Set();
+  function walk(value) { if (!value || typeof value !== 'object') return; assert.equal(set.has(value), false); set.add(value); Object.values(value).forEach(walk); }
+  walk(root); return set.size;
+}
+const receipt = { status: 'ready_not_applied', method: 'Complete module AST equality after constructor expansion; literal-only interpretation and alias analysis, no production code executed', files: [], helper: { path: helperPath, baseSha256: sha(Buffer.from(helperBefore)), afterSha256: sha(Buffer.from(helperAfter)), linesAdded: addition.split('\n').length - 1 }, testsRun: false, buildRun: false, browserRun: false };
+for (const file of files) {
+  const base = fs.readFileSync(file), before = base.toString('utf8'), ast = parse(before), candidates = [];
+  visit(ast, node => {
+    if (node.type !== 'ObjectExpression') return;
+    let literal; try { literal = value(node); } catch { return; }
+    const name = literal?.battle?.hosted?.[0], side = literal?.battle?.target?.side;
+    if (typeof name !== 'string' || !['self', 'enemy'].includes(side)) return;
+    const generated = { version: 1, battle: { target: { side, area: false }, hosted: [name] } };
+    if (JSON.stringify(literal) !== JSON.stringify(generated)) return;
+    const call = 'targetedHostedRuleSnapshot(' + JSON.stringify(name) + ', ' + JSON.stringify(side) + ')';
+    const callNode = parse(call).body[0].expression, recreated = value(callNode);
+    assert.equal(JSON.stringify(literal), JSON.stringify(recreated)); assert.equal(uniqueObjects(literal), 4); assert.equal(uniqueObjects(recreated), 4);
+    candidates.push({ start: node.start, end: node.end, fromLine: node.loc.start.line, toLine: node.loc.end.line, name, side, call, original: before.slice(node.start, node.end) });
+  });
+  assert.ok(candidates.length > 0);
+  let after = before;
+  for (const candidate of [...candidates].sort((a, b) => b.start - a.start)) after = after.slice(0, candidate.start) + candidate.call + after.slice(candidate.end);
+  if (file.endsWith('cards.data.js')) {
+    const eol = before.includes('\r\n') ? '\r\n' : '\n';
+    after = "import { targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';" + eol + after;
+  } else after = after.replace("import { hostedRuleSnapshot } from './hosted-rule-snapshot.js';", "import { hostedRuleSnapshot, targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';");
+  const afterAst = parse(after);
+  assert.deepEqual(canonical(ast), canonical(afterAst, {}, true, true), 'Whole module expanded AST must match');
+  const objects = [];
+  visit(afterAst, node => { if (node.type === 'CallExpression' && node.callee?.name === 'targetedHostedRuleSnapshot') objects.push(value(node)); });
+  assert.equal(objects.length, candidates.length); assert.equal(uniqueObjects(objects), 1 + 4 * candidates.length);
+  if (!file.endsWith('cards.data.js')) {
+    const declaration = tree => tree.body.find(node => node.type === 'ExportNamedDeclaration').declaration.declarations[0].init;
+    assert.equal(JSON.stringify(value(declaration(ast))), JSON.stringify(value(declaration(afterAst))));
+    assert.equal(uniqueObjects(value(declaration(ast))), uniqueObjects(value(declaration(afterAst))));
+  }
+  const basename = path.basename(file), backup = out + '/' + basename + '.targeted-before.txt', preview = out + '/' + basename + '.targeted-candidate.txt';
+  fs.writeFileSync(backup, base); fs.writeFileSync(preview, after);
+  const diff = cp.spawnSync('git', ['diff', '--no-index', '--numstat', '--', backup, preview], { encoding: 'utf8' });
+  assert.ok(diff.status === 0 || diff.status === 1); const counts = diff.stdout.match(/^(\d+)\s+(\d+)\s+/); assert.ok(counts);
+  receipt.files.push({ path: file, baseSha256: sha(base), afterSha256: sha(Buffer.from(after)), backup, preview, insertions: Number(counts[1]), deletions: Number(counts[2]), bytesRemoved: base.length - Buffer.byteLength(after), expandedModuleAstIdentical: true, eachConstructedRuleHasFourIndependentObjects: true, matchingTemplates: candidates.map(({ original, ...candidate }) => candidate) });
+}
+const helperBackup = out + '/hosted-rule-snapshot.js.targeted-before.txt', helperPreview = out + '/hosted-rule-snapshot.js.targeted-candidate.txt';
+fs.writeFileSync(helperBackup, helperBefore); fs.writeFileSync(helperPreview, helperAfter);
+receipt.insertions = receipt.files.reduce((total, file) => total + file.insertions, 0) + receipt.helper.linesAdded;
+receipt.deletions = receipt.files.reduce((total, file) => total + file.deletions, 0);
+receipt.netLinesRemoved = receipt.deletions - receipt.insertions;
+receipt.netBytesRemoved = receipt.files.reduce((total, file) => total + file.bytesRemoved, 0) - Buffer.byteLength(addition);
+if (process.argv.includes('--apply')) {
+  for (const file of receipt.files) assert.equal(sha(fs.readFileSync(file.path)), file.baseSha256);
+  assert.equal(sha(fs.readFileSync(helperPath)), receipt.helper.baseSha256);
+  for (const file of receipt.files) fs.writeFileSync(file.path, fs.readFileSync(file.preview));
+  fs.writeFileSync(helperPath, helperAfter);
+  for (const file of receipt.files) assert.equal(sha(fs.readFileSync(file.path)), file.afterSha256);
+  receipt.status = 'applied';
+}
+fs.writeFileSync(out + '/targeted-receipt.json', JSON.stringify(receipt, null, 2) + '\n');
+process.stdout.write(JSON.stringify({ ...receipt, files: receipt.files.map(({ matchingTemplates, ...file }) => ({ ...file, templates: matchingTemplates.length })) }, null, 2) + '\n');

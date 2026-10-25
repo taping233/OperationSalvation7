@@ -1,0 +1,65 @@
+{
+  "controls": [
+    {
+      "bottom": 513.7250175476074,
+      "height": 61.98749923706055,
+      "selector": "sts-unit-vitals",
+      "width": 176,
+      "x": 257.6000061035156,
+      "y": 451.7375183105469
+    },
+    {
+      "bottom": 470.4000186920166,
+      "height": 18.662500381469727,
+      "selector": "sts-unit-vitals",
+      "width": 136,
+      "x": 733.7250366210938,
+      "y": 451.7375183105469
+    },
+    {
+      "bottom": 470.4000186920166,
+      "height": 18.662500381469727,
+      "selector": "sts-unit-vitals",
+      "width": 136,
+      "x": 973.4625244140624,
+      "y": 451.7375183105469
+    },
+    {
+      "bottom": 658.6750183105469,
+      "height": 200,
+      "selector": "bt-hand sts-hand",
+      "width": 837.3500366210938,
+      "x": 197.3249969482422,
+      "y": 458.6750183105469
+    },
+    {
+      "bottom": 693.3374900817871,
+      "height": 46.66250228881836,
+      "selector": "ov-btn sts-end-turn ok",
+      "width": 165.3249969482422,
+      "x": 1077.3499755859375,
+      "y": 646.6749877929688
+    }
+  ],
+  "ground": {
+    "bottom": 720.0041809082031,
+    "complete": true,
+    "height": "1423.74px",
+    "naturalHeight": 948,
+    "naturalWidth": 1659,
+    "pointerEvents": "none",
+    "top": "-233.75px",
+    "width": 1280,
+    "x": 0,
+    "y": -229.15835571289065
+  },
+  "horizontalOverflow": false,
+  "stage": {
+    "bottom": 720,
+    "height": 720,
+    "width": 1280,
+    "x": 0,
+    "y": 0
+  },
+  "worldOverflow": "visible"
+}

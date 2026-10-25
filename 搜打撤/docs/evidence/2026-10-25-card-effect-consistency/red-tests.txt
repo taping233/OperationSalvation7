@@ -1,0 +1,84 @@
+
+> codename7-soudache-game@0.60.0 test:target
+> node scripts/acceptance-gate.mjs --target-tests tests/card-effect-consistency-review.test.js
+
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+xxxx·
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/card-effect-consistency-review.test.js > 卡面展示数值与生产战斗效果一致 > 不稳定射线显示完整加成区间，实际伤害落在该区间
+AssertionError: expected '造成 4-6 点法术伤害。' to be '造成 6-8 点法术伤害。' // Object.is equality
+
+Expected: "造成 6-8 点法术伤害。"
+Received: "造成 4-6 点法术伤害。"
+
+ ❯ tests/card-effect-consistency-review.test.js:54:62
+     52|     const card = byId('tt12-unstableray');
+     53|     await start(card);
+     54|     expect(displayCardDescription(card.desc, card.id, card)).toBe('造成 …
+       |                                                              ^
+     55|     BattleSession.commands.playCard('consistency-card', 0);
+     56|     const snapshot = await drain();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/card-effect-consistency-review.test.js > 卡面展示数值与生产战斗效果一致 > 爆燃火球按两倍法伤加成显示，与生产伤害9一致
+AssertionError: expected '造成 7 点法术伤害；本牌受到的法伤加成翻倍。' to be '造成 9 点法术伤害；本牌受到的法伤加成翻倍。' // Object.is equality
+
+Expected: "造成 9 点法术伤害；本牌受到的法伤加成翻倍。"
+Received: "造成 7 点法术伤害；本牌受到的法伤加成翻倍。"
+
+ ❯ tests/card-effect-consistency-review.test.js:64:62
+     62|     const card = byId('tt7-burnharvest');
+     63|     await start(card);
+     64|     expect(displayCardDescription(card.desc, card.id, card)).toBe('造成 …
+       |                                                              ^
+     65|     BattleSession.commands.playCard('consistency-card', 0);
+     66|     expect(1000 - (await drain()).foes[0].hp).toBe(9);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/card-effect-consistency-review.test.js > 卡面展示数值与生产战斗效果一致 > 圣疗使用费用一词，区分材料费用与出售价格
+AssertionError: expected '注能（1）：你回复等同于被注能卡牌价格 2 倍的生命。' to be '注能（1）：你回复等同于被注能卡牌费用 2 倍的生命。' // Object.is equality
+
+Expected: "注能（1）：你回复等同于被注能卡牌费用 2 倍的生命。"
+Received: "注能（1）：你回复等同于被注能卡牌价格 2 倍的生命。"
+
+ ❯ tests/card-effect-consistency-review.test.js:71:62
+     69|   it('圣疗使用费用一词，区分材料费用与出售价格', () => {
+     70|     const card = byId('tt7-holyheal');
+     71|     expect(displayCardDescription(card.desc, card.id, card)).toBe('注能（…
+       |                                                              ^
+     72|   });
+     73| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/card-effect-consistency-review.test.js > 卡面展示数值与生产战斗效果一致 > 负法伤按实际伤害下限显示，双素记号真实伤害不吃法伤
+AssertionError: expected '造成 4-6 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤害。' to be '造成 0-0 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤害。' // Object.is equality
+
+Expected: "造成 0-0 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤害。"
+Received: "造成 4-6 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤害。"
+
+ ❯ tests/card-effect-consistency-review.test.js:78:10
+     76|     try {
+     77|       expect(displayCardDescription('造成 4-6 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤…
+     78|         .toBe('造成 0-0 点法术伤害；造成 3 点固定伤害；造成 9 点真实伤害。');
+       |          ^
+     79|       expect(displayCardDescription('12′′；4-6′', 'custom')).toBe('12′′…
+     80|     } finally { registerBattleValueProvider(previous); }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  19:32:41
+   Duration  4.43s (transform 921ms, setup 0ms, collect 2.16s, tests 228ms, environment 1.43s, prepare 211ms)
+
+[gate] FAIL：指定 Vitest 失败（exit 1）

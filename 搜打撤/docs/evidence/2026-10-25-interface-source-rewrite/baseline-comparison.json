@@ -1,0 +1,23 @@
+{
+  "currentFailures": [
+    "tests/menu-return-chain.test.js > settings child return ownership > inbox retains its original settings return chain despite a newer settings open",
+    "tests/menu-return-chain.test.js > settings child return ownership > data retains its original settings return chain despite a newer settings open",
+    "tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene",
+    "tests/settings-page.test.js > settings page layout and controls > uses the common navigation on first open and reopen without a city curtain",
+    "tests/settings-page.test.js > settings page layout and controls > keeps Home/End/wrap focus, per-category scroll, and control identity",
+    "tests/settings-page.test.js > settings page layout and controls > reads the selected tab geometry before updating the sliding marker",
+    "tests/settings-page.test.js > settings page layout and controls > switches categories by click and keyboard without losing preference state"
+  ],
+  "baselineFailures": [
+    "tests/menu-return-chain.test.js > settings child return ownership > inbox retains its original settings return chain despite a newer settings open",
+    "tests/menu-return-chain.test.js > settings child return ownership > data retains its original settings return chain despite a newer settings open",
+    "tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene",
+    "tests/settings-page.test.js > settings page layout and controls > uses the common navigation on first open and reopen without a city curtain",
+    "tests/settings-page.test.js > settings page layout and controls > keeps Home/End/wrap focus, per-category scroll, and control identity",
+    "tests/settings-page.test.js > settings page layout and controls > reads the selected tab geometry before updating the sliding marker",
+    "tests/settings-page.test.js > settings page layout and controls > switches categories by click and keyboard without losing preference state"
+  ],
+  "identicalFailureNames": true,
+  "sourceBaseline": ".tmp/interface-source-rewrite-baseline/",
+  "isolatedComparison": ".tmp/interface-baseline-compare/"
+}

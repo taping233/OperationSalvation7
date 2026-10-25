@@ -1,0 +1,873 @@
+{
+  "files": [
+    {
+      "file": "game/css/ak-skin.css",
+      "beforeSha256": "d89db857d35eba669b916e6b14004fea809493ea43f0c4d9fb489097af537d96",
+      "afterSha256": "95ce4367503238261346ac73d85560b487e8ee7bb2e29169c374c0e5b41fa2af",
+      "removed": [
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 57,
+          "selector": ".ov-btn:hover:not(:disabled), .hs-btn:hover:not(:disabled), .menu-btn:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateX(3px)"
+          ]
+        },
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 88,
+          "selector": "#overlay :is(.hub-back, .pg-back, .ag-back) -> &:hover",
+          "declarations": [
+            "transform:translateX(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 95,
+          "selector": "#overlay .hub-tab -> &:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 109,
+          "selector": "#overlay -> & :is(.slot-card, .shop-slot, .evt-opt):hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 126,
+          "selector": "#overlay -> & .cls2-confirm:hover",
+          "declarations": [
+            "transform:translateX(6px)"
+          ]
+        },
+        {
+          "file": "game/css/ak-skin.css",
+          "line": 128,
+          "selector": "#overlay -> & .cls2-strip > *:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "beforeSha256": "1caeaf846cb914201dd7c2eea2c048349aca948fa48d06a7c825ebb709abe563",
+      "afterSha256": "9e99622b128925e845550f66bd38181ee3c8581d983425b0c9ad79585cd3f5ab",
+      "removed": [
+        {
+          "file": "game/css/archive-motion.css",
+          "line": 62,
+          "selector": "body:not(.reduce-motion) #overlay -> &#overlay[data-archive-motion] .slot-card:is(:hover,:focus-within)",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "beforeSha256": "dc584f2ac62e092ff43b1e8472704de348b4a03b31227595616bb93c6ae1a50e",
+      "afterSha256": "517ee3ecd444ab0c88c77ac798aff83bfd8e76e675e72e04e93275652afd33cc",
+      "removed": [
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 113,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] -> & .cls2-pool-btn:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 134,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-face -> &:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 144,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-confirm -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 165,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .pool-back:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 210,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .pool-card-button.lib-cardwrap:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 223,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .cls-foot .hs-btn:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/base-camp-roster.css",
+          "line": 224,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .cls-foot .ov-btn.ok:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "beforeSha256": "41b9cb4e450c071c609edae2b9a8e33bef2eda952150d0c56d7f72ae3cf4470c",
+      "afterSha256": "8728734abc7ff9728976efde2ba7ba2fb486e1dfd321dab284823461604ddb9f",
+      "removed": [
+        {
+          "file": "game/css/base-collection-v4.css",
+          "line": 20,
+          "selector": "#overlay #hubMain .collection-workspace[data-collection-variant=\"owned\"] -> & .collection-item:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "beforeSha256": "89dc7d3c42aa3e79d3a09e54f885fff5a81330168421cec9fcc947dae8336e26",
+      "afterSha256": "368563aab7ef7f7509aa20ad354fdb160e1f3eac662ff351d04efa46f35e4b88",
+      "removed": [
+        {
+          "file": "game/css/base-controls-v4.css",
+          "line": 19,
+          "selector": "#overlay #hubMain.pg.hub.base-camp button.base-command[data-act] -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/base-controls-v4.css",
+          "line": 46,
+          "selector": "#overlay #hubMain.pg.hub.base-camp -> & .facility-tile:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/base-controls-v4.css",
+          "line": 55,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .base-home-launch #btnDeploy -> &:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "beforeSha256": "1cc99d3e45ab5f8db32581c6e3ec75a7419ce34956c4e209a193797fc8ba0d40",
+      "afterSha256": "007b1d42dc65b7f157d186a3b76d5718cbf9c8e32383aa8469d9113fddb9643a",
+      "removed": [
+        {
+          "file": "game/css/base-home-v7.css",
+          "line": 27,
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 -> & #btnDeploy:hover",
+          "declarations": [
+            "transform:translateX(-3px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "beforeSha256": "8c07988e24f6b1e96e5ee211bc9cd8d6b59a35fef13154adeffd61152db9f636",
+      "afterSha256": "0e42056475a0a4790c46f462350ba80089ad86a1c42a524e6a88e220a6a1de05",
+      "removed": [
+        {
+          "file": "game/css/base-page-motion-v7.css",
+          "line": 35,
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 -> & .base-home-v7 :is(\r\n  .base-home-utility button, .base-home-launch button\r\n):hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base.css",
+      "beforeSha256": "95165b446626d72647791e10acfa0eeb6e6073ad4915fae57918d7532d764713",
+      "afterSha256": "d42831bfbc512501118dee68c98b0f968e6a36b86eb298f503184938b13b4ff0",
+      "removed": [
+        {
+          "file": "game/css/base.css",
+          "line": 270,
+          "selector": "#bagBtn -> &:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/base.css",
+          "line": 371,
+          "selector": ".mini-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "beforeSha256": "9714398fe760389960c0bb9ffde0ba4fb61ea761d2c6c8e786743af45410c7ee",
+      "afterSha256": "e967eb1c9896b6b274494fededd660ecd699d8a6c91849ca8f374fba38eb75ad",
+      "removed": [
+        {
+          "file": "game/css/battle-discover.css",
+          "line": 76,
+          "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-card.bt-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-6px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle.css",
+      "beforeSha256": "d000be0413799a815978cb5ee198d0aa0159c8b51e63ba7032694ba3dc8f5724",
+      "afterSha256": "cbac9056a77ca23414802316076b474af40dce8371e6fe3377903ae74e5bdaf8",
+      "removed": [
+        {
+          "file": "game/css/battle.css",
+          "line": 26,
+          "selector": ".bt-foe -> &.can-target:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/battle.css",
+          "line": 107,
+          "selector": ".bt-potion -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/cards.css",
+      "beforeSha256": "fcbeb362ee3ce9c0a609d3eb0d9838d82d09a9fdf9dc641bef69d5dcdc49d504",
+      "afterSha256": "64951aad4b1641c089a5ed4aede065a0a9282c1bef06cd1991788d80834ffd68",
+      "removed": [
+        {
+          "file": "game/css/cards.css",
+          "line": 44,
+          "selector": ".hs-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/cards.css",
+          "line": 71,
+          "selector": ".lib-cardwrap:where(:not(.studio-photo)) -> &:hover",
+          "declarations": [
+            "transform:scale(1.17) rotate(-1.2deg)"
+          ]
+        },
+        {
+          "file": "game/css/cards.css",
+          "line": 87,
+          "selector": ".shop-slot -> &:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/collection-workspace.css",
+      "beforeSha256": "706cb7b66fdfc61dd2003ab380483c4701291c7107d6a9829ae823ac018a667d",
+      "afterSha256": "5ab0581cb83b57fdeb51978ddc109c5a99beb4e6ac443c08e744ab2f5ca178eb",
+      "removed": [
+        {
+          "file": "game/css/collection-workspace.css",
+          "line": 25,
+          "selector": "#overlay #hubMain .collection-workspace -> & .card-browser-page:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "beforeSha256": "23ccdb460a75afb262be608d3a2898ba3d40b7ffc40b26c6e9da1ed364794fce",
+      "afterSha256": "003f88e0ead13ba2d3a53bb030f57107ddce7ac758ee25c8123506573e679c83",
+      "removed": [
+        {
+          "file": "game/css/cover-run.css",
+          "line": 114,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay -> & :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), & .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "beforeSha256": "ddda1c98df6aca1c7c031f1a3ba05fba37959a27cb61d3ab41d00401c5fb7037",
+      "afterSha256": "20790aa4f3579c9d4844d4023c3c0e32b1ac08a3ca3156e2c3dbda32d4483794",
+      "removed": [
+        {
+          "file": "game/css/expedition-roster.css",
+          "line": 150,
+          "selector": "#overlay .cls2-face -> &:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/expedition-roster.css",
+          "line": 211,
+          "selector": "#overlay .pg.cls-pool-page .pool-card-button -> &:hover,\n&:focus-visible",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition.css",
+      "beforeSha256": "2f21eafa4bf31e062fd97b8c36ff2c9c101a8bc872b3225499812e2a4938cd4e",
+      "afterSha256": "7763f807c1df8b84239ec89b634e26e1b36d1adf20477f17c3e1460b489f08e1",
+      "removed": [
+        {
+          "file": "game/css/expedition.css",
+          "line": 179,
+          "selector": "#title -> & .ak-circle:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/expedition.css",
+          "line": 247,
+          "selector": "#title .ak-start -> &:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "beforeSha256": "804f7f57072cdfa2255e91cb5d4208a40352110643329c7a1fb3ccf3d3e20fbb",
+      "afterSha256": "7921d2a5c6a99fc9c8f027fb1096ed6b25c70fc26d9e908dec57f29734bad92c",
+      "removed": [
+        {
+          "file": "game/css/hub.css",
+          "line": 46,
+          "selector": ".mode-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/hub.css",
+          "line": 49,
+          "selector": "#btnDeploy -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/hub.css",
+          "line": 71,
+          "selector": ".dep-foot #btnDeploy -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/hub.css",
+          "line": 133,
+          "selector": ".cls2-face -> &:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        },
+        {
+          "file": "game/css/hub.css",
+          "line": 156,
+          "selector": ".cls2-confirm -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/hub.css",
+          "line": 174,
+          "selector": ".pet-chip -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/overlays.css",
+      "beforeSha256": "1f381b677abfee0934e0c8a0ae9d7f3af8a625b671953515433af41623c39b8a",
+      "afterSha256": "29a293af47ca5499f731f1f839bb9af4ff6894cf8fb9b4bbc8f4ed042e85075e",
+      "removed": [
+        {
+          "file": "game/css/overlays.css",
+          "line": 27,
+          "selector": ".bt-pile -> &.clickable:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 34,
+          "selector": ".bt-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-6px) scale(1.04)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 81,
+          "selector": ".bt-infchip -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px) scale(1.05)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 98,
+          "selector": ".menu-btn -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 184,
+          "selector": ".slot-page .slot-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-4px)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 246,
+          "selector": "#btnHome:hover, #btnMute:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 253,
+          "selector": "#btnHome.exit-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/overlays.css",
+          "line": 365,
+          "selector": ".ov-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "beforeSha256": "1519b5833220879488ce0488657d37a90d2a8c5faf7bc095c38b135bdc67a1d0",
+      "afterSha256": "848b3c8781b776c6c67a7d5f2ea2e81c2d5fb8de9b3d68fa7810955382679e4c",
+      "removed": [
+        {
+          "file": "game/css/page-ach.css",
+          "line": 151,
+          "selector": "#overlay #hubMain.hub-ach .mini-btn.ok -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "beforeSha256": "5ef98944e1b7a75c5c9ecb28871ffaf1fea86c54b82c675b5c1728b8082f7cdb",
+      "afterSha256": "fc06ebaa1bd9b140e8a211a1f6407ebb3e4e021375f1a2d14a1b3f85b97a9940",
+      "removed": [
+        {
+          "file": "game/css/page-battle-ui.css",
+          "line": 83,
+          "selector": "#overlay .card.discover .choice-list .ov-btn -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "beforeSha256": "33863c70be740ea9400356f450ac9aa512beb8107caec027334613c664a499fd",
+      "afterSha256": "9e052b11c9420916d9c215efc382cb7bcc256dc3e14c6accf280db4e065c8920",
+      "removed": [
+        {
+          "file": "game/css/page-datapage.css",
+          "line": 140,
+          "selector": "#overlay .pg.data-tuned -> & .ov-btn:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-events.css",
+      "beforeSha256": "5b8e32085af514783540784412a8663df04f82997ce7432a458c5d17353ba18d",
+      "afterSha256": "d2bc908ffc892afbca477c203f18801ed159cc12ec651702746da39bf34d1852",
+      "removed": [
+        {
+          "file": "game/css/page-events.css",
+          "line": 106,
+          "selector": "#overlay .node-pg:not(.event-themed) .evt-opt -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateX(5px)"
+          ]
+        },
+        {
+          "file": "game/css/page-events.css",
+          "line": 159,
+          "selector": "#overlay .node-pg:not(.event-themed) .node-foot .ov-btn -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/page-events.css",
+          "line": 205,
+          "selector": "#overlay .card.scene .scene-ops .ov-btn -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "beforeSha256": "456686c4ea3077667b816ffee8f1df783324257fb56325a43c255a719b57f1a5",
+      "afterSha256": "e9cd459c01dfea8292c8f2756f7e81f4036983d3fb3e0dbab04efa407fddeb76",
+      "removed": [
+        {
+          "file": "game/css/page-expedition-hud.css",
+          "line": 106,
+          "selector": "#topBtns -> & #btnHelp:hover,\r\n& #btnMute:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/page-expedition-hud.css",
+          "line": 129,
+          "selector": "#topBtns #btnLocate -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "beforeSha256": "ad07375d0a19fa28817efa35d52264227b9e15f74f3ae158c63bc39ddf175b37",
+      "afterSha256": "13ef676405d5832fa431d5057c0d619fef1ec3f8a4e9965ae70d87ef1e7bff24",
+      "removed": [
+        {
+          "file": "game/css/page-rewards-bag-help.css",
+          "line": 83,
+          "selector": "#overlay .card.chest -> & .bt-card:hover",
+          "declarations": [
+            "transform:translateY(-8px)"
+          ]
+        },
+        {
+          "file": "game/css/page-rewards-bag-help.css",
+          "line": 267,
+          "selector": "#overlay .card:has(.help-body) .ov-btn.ok -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "beforeSha256": "9fe54255c411c0518a5c949c3c236bcaaab4a5dbdb27fecbfb2ea9d4d40d9542",
+      "afterSha256": "02d1931e8deb5621e5fc109b3174e42ce7111697e74b7620052fc1df088e02af",
+      "removed": [
+        {
+          "file": "game/css/page-settings.css",
+          "line": 253,
+          "selector": "#overlay .pg.settings-page -> & .mini-btn:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "beforeSha256": "abe3edfd0244ae764b387cd5dcee27b788f61b9b590039f137961f34124a617c",
+      "afterSha256": "864b16a583bc909987f9fce2df62e44fdaf3e6ea2d75a5fd1b20e1c73eec27d6",
+      "removed": [
+        {
+          "file": "game/css/page-slot-select.css",
+          "line": 407,
+          "selector": "#overlay .slot-page .slot-card-ops .mini-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/preparation.css",
+      "beforeSha256": "7aea8c25679a580c68257b6ddbdc6f012ddb2667e1770caa122620d1585bb0f1",
+      "afterSha256": "b890c912df67025eb5042224b04ef033b9ae67f49183e135a64a11049b7d8cb7",
+      "removed": [
+        {
+          "file": "game/css/preparation.css",
+          "line": 56,
+          "selector": ".prep-preset -> &:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "beforeSha256": "abf5dac6b6c1a0e9ecdbdad31d89b401015453b9e5640259432434b9ccb92265",
+      "afterSha256": "fb826ec804a96a7df99cac45f4fe42c3cdc2283435ab6d3974b14a2e0c807304",
+      "removed": [
+        {
+          "file": "game/css/rarity-design-lab.css",
+          "line": 9,
+          "selector": ".card-button -> &:hover",
+          "declarations": [
+            "transform:translateY(-5px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/scenes.css",
+      "beforeSha256": "97453acbd3c5071d02f90b10faad2df520e5b0e5df3e97c77ad5f781084c0d1f",
+      "afterSha256": "c19257206663181aef00b7b7200d62335cd5394ae81a74807a12431e0b8f702d",
+      "removed": [
+        {
+          "file": "game/css/scenes.css",
+          "line": 161,
+          "selector": ".evt-opt -> &:hover",
+          "declarations": [
+            "transform:translateX(5px)"
+          ]
+        },
+        {
+          "file": "game/css/scenes.css",
+          "line": 294,
+          "selector": ".node-pg .fire-restore-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-6px) scale(1.04)"
+          ]
+        },
+        {
+          "file": "game/css/scenes.css",
+          "line": 321,
+          "selector": ".shop-slot -> &:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        },
+        {
+          "file": "game/css/scenes.css",
+          "line": 344,
+          "selector": ".shop-back -> &:hover",
+          "declarations": [
+            "transform:translateY(-50%) translateX(3px)"
+          ]
+        },
+        {
+          "file": "game/css/scenes.css",
+          "line": 403,
+          "selector": "#resHud .chip-mini -> &:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/scenes.css",
+          "line": 521,
+          "selector": "button.event-choice-card -> &:hover,\n  &:focus-visible",
+          "declarations": [
+            "transform:translateY(-5px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "beforeSha256": "efce3f9cd4562b89588ecc17bf842a93612ea0dbc7c7cc81d1f786078b1a2cd9",
+      "afterSha256": "185a543ef43b9480fe148f623b3d6a38c25edc50f4f23a9cb4591ffed8b63bc4",
+      "removed": [
+        {
+          "file": "game/css/title-p0.css",
+          "line": 269,
+          "selector": "#title.home-composed -> & .home-tool:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/winter.css",
+      "beforeSha256": "92e4104e4928fd0f7928bd5faafeada50dcb5e1d457ca1472489a8a302d3bffb",
+      "afterSha256": "fc4c02af9ff1a40908d074d41ae4e535f16a89c534880ad590888f72f52fdf5d",
+      "removed": [
+        {
+          "file": "game/css/winter.css",
+          "line": 419,
+          "selector": ".dep-card -> &:hover",
+          "declarations": [
+            "transform:translateY(-3px)"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 439,
+          "selector": ".bag-cell -> &.filled:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 612,
+          "selector": "#overlay .card.chest -> & .bt-card:hover",
+          "declarations": [
+            "transform:translateY(-8px)"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 667,
+          "selector": "#overlay .sc-shop .shop-slot -> &.buy:hover",
+          "declarations": [
+            "translate:0 -3px"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 736,
+          "selector": "#overlay .card.battle-bag -> & .battle-bag-slot:hover",
+          "declarations": [
+            "transform:translateY(-2px)"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 1060,
+          "selector": ".devc-stop -> &:hover:not(:disabled)",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        },
+        {
+          "file": "game/css/winter.css",
+          "line": 1083,
+          "selector": ".devc-danger-btn -> &:hover",
+          "declarations": [
+            "transform:translateY(-1px)"
+          ]
+        }
+      ]
+    }
+  ],
+  "commonRuleCoverage": [
+    {
+      "file": "game/css/run-experience.css",
+      "line": 29,
+      "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout=\"map\"] -> .expedition-toolbar button:hover:not(:disabled)",
+      "declarations": [
+        "translate:0 -2px"
+      ]
+    },
+    {
+      "file": "game/css/run-experience.css",
+      "line": 84,
+      "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout=\"map\"] .expedition-map-preview -> .expedition-preview-enter:hover:not(:disabled)",
+      "declarations": [
+        "translate:2px 0"
+      ]
+    },
+    {
+      "file": "game/css/run-experience.css",
+      "line": 125,
+      "selector": "#overlay .node-pg:not(.event-themed) -> .evt-opt:hover:not(:disabled)",
+      "declarations": [
+        "translate:4px 0"
+      ]
+    },
+    {
+      "file": "game/css/run-experience.css",
+      "line": 154,
+      "selector": "#overlay .battle-stage.sts -> .sts-end-turn:hover:not(:disabled)",
+      "declarations": [
+        "translate:0 -2px"
+      ]
+    },
+    {
+      "file": "game/css/run-experience.css",
+      "line": 182,
+      "selector": "body #overlay .card .room-reward.reward-replica -> .reward-unit:not(.got):not(.dropped):hover",
+      "declarations": [
+        "translate:0 -5px"
+      ]
+    },
+    {
+      "file": "game/css/run-experience.css",
+      "line": 184,
+      "selector": "body #overlay .card .room-reward.reward-replica -> .reward-claim:hover:not(:disabled)",
+      "declarations": [
+        "translate:0 -2px"
+      ]
+    }
+  ],
+  "verification": "Source inspection and guarded edits only; no tests, browser acceptance or build."
+}

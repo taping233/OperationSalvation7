@@ -1,0 +1,19 @@
+{
+  "cssFiles": 61,
+  "deletedBytesLf": 114434,
+  "cumulativeCssBytesLf": 136870,
+  "cumulativeCssPercent": 6.970655206957719,
+  "stylelint": "passed",
+  "tests": {
+    "main": {
+      "files": 12,
+      "passed": 84
+    },
+    "potion": {
+      "files": 1,
+      "passed": 3
+    }
+  },
+  "browser": "not run",
+  "committed": false
+}

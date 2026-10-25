@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>战斗二级页面 · 只读视觉夹具</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css?review=shop-currency-r2" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" />
+<link rel="stylesheet" href="/css/battle-hand-overhaul.css"><link rel="stylesheet" href="/css/battle-discover.css"><link rel="stylesheet" href="/css/battle-decision.css">
+<style>.fixture-controls{position:fixed;left:8px;top:4px;z-index:20000;display:flex;gap:4px;padding:3px 6px;background:#07121ce8;color:#dce7ed;font:11px sans-serif}.fixture-controls button{font:inherit}.fixture-controls[hidden]{display:none}body{background:#101c28}</style>
+<script>Object.defineProperty(window,'localStorage',{value:Object.freeze({getItem(){return null},setItem(){throw new Error('Read-only fixture: save blocked')},removeItem(){throw new Error('Read-only fixture: delete blocked')},clear(){throw new Error('Read-only fixture: clear blocked')}})});</script></head><body>
+<div class="fixture-controls" id="fixtureControls">只读夹具 <button data-scene="pile">牌库</button><button data-scene="grave">消耗</button><button data-scene="choice">抉择</button><button data-scene="select">支付</button><button data-scene="discover">发现</button><button data-scene="empty">空牌库</button><button id="fixtureHide">隐藏</button><span id="fixtureResult"></span></div>
+<div id="app"><main id="viewport"><div id="overlay" class="room-view" role="dialog" aria-modal="true"><div class="card room"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import SDT,{sdtDefine} from '/src/core/sdt-facade.js';
+import '/src/core/icons-bitmap.js';
+import '/src/core/art.js';
+import '/src/ui/ui-scale.js';
+import {rulesSlice} from '/src/cards/cards.rules.js';
+import {dataSlice} from '/src/cards/cards.data.js';
+import {cardHTML} from '/src/cards/cards.view.js';
+import {createBattleDecisionPresenter} from '/src/battle/view/battle.decision-shell.js';
+import {battlePileBodyHTML,pileDetailHTML,battleChoiceBodyHTML,battleHandSelectBodyHTML,battleDiscoverLifecycleNote} from '/src/battle/view/battle.decision-content.js';
+import {battleDiscoverBodyHTML} from '/src/battle/view/battle.discover-view.js';
+const catalog=Object.values(dataSlice).filter(Array.isArray).flat();
+sdtDefine('Cards',{...rulesSlice,all:()=>catalog,cardHTML});
+sdtDefine('Sound',{sfx(){}});
+const {UI}=await import('/src/ui/ui.js');
+const overlay=document.querySelector('#overlay'),body=document.querySelector('#ovBody'),outer=body.parentElement;
+UI.el={overlay,ovBody:body};
+UI.showOverlay=(title,html,mode)=>{UI._acts={};outer.className='card '+(mode==='discover'?'discover':'room');overlay.className=mode==='discover'?'discover-view':'room-view';body.innerHTML=SDT.Icons.rich(html);overlay.hidden=false;};
+const snapshot={battleToken:'read-only-fixture',mode:'boss',opts:{isBoss:true},turn:9,energy:3,maxEnergy:3};
+const show=createBattleDecisionPresenter({UI,getSnapshot:()=>snapshot,R:()=>({battleEnergy:3})});
+const byId=new Map(catalog.map(card=>[card.id,card]));
+const pick=id=>{if(!byId.has(id))throw new Error('Missing static card '+id);return structuredClone(byId.get(id));};
+const cards=['tt3-wave-slash','tt3-toxin','tt12-felguard','tt12-freezeray','tt12-chargeray','tt12-backupcell','tt4-woodify','tt12-magicfind'].map((id,i)=>({uid:'fixture-'+i,card:pick(id)}));
+let activeCards=[];
+const result=document.querySelector('#fixtureResult');
+function inspect(){UI.act('btDecisionInspect',data=>UI.showCardZoom(activeCards[+data.i],{returnFocus:body.querySelector(`[data-act="btDecisionInspect"][data-i="${+data.i}"]`)}));}
+function render(scene){
+ result.textContent='';document.querySelector('#cardZoom')?._closeCardZoom?.(true);
+ if(scene==='pile'||scene==='grave'||scene==='empty'){
+  const {html,stacks}=battlePileBodyHTML({cards:scene==='empty'?[]:[...cards,cards[0],cards[1]],cardHTML,kind:scene==='grave'?'grave':'deck',isBoss:true});
+  show(scene==='grave'?'消耗牌':'剩余牌库',html,true,snapshot);
+  UI.act('btInspectPile',data=>{const n=+data.i;body.querySelector('.battle-decision-inspect').outerHTML=pileDetailHTML(stacks[n]);body.querySelectorAll('.battle-pile-card').forEach((b,i)=>{b.classList.toggle('is-inspected',i===n);b.setAttribute('aria-pressed',String(i===n));});});
+  UI.act('btDeckBack',()=>{result.textContent='仅关闭夹具';overlay.hidden=true;});UI.act('btGraveBack',UI._acts.btDeckBack);
+ }else if(scene==='choice'){
+  show('抉择',battleChoiceBodyHTML({cardName:'战术抉择',options:['抽取 2 张牌。','获得 6 点护甲。','造成 3 点伤害，并回复 3 点生命。']}),'discover',snapshot);
+  UI.act('btChoicePick',data=>{result.textContent='夹具选择第 '+(+data.i+1)+' 项；未触发游戏结算';});
+ }else if(scene==='select'){
+  activeCards=cards.slice(0,5).map(entry=>entry.card);
+  show('支付代价',battleHandSelectBodyHTML({pool:cards.slice(0,5),handSelecting:{act:'payment',n:2,selectedUids:['already-selected'],mandatory:true,payment:{card:{name:'剑荡妖邪'}}},cardHTML}),'discover',snapshot);
+  UI.act('btPickHand',data=>{result.textContent='夹具选中 '+data.uid+'；未消耗游戏卡牌';});inspect();
+ }else{
+  activeCards=cards.slice(0,3).map(entry=>entry.card);
+  show('发现',battleDiscoverBodyHTML({candidates:activeCards.map(card=>({card})),cardHTML,action:'选择 1 张免费施放',remaining:1,source:'江湖救急',note:battleDiscoverLifecycleNote({act:'play',isBoss:true}),pageToken:'fixture'}),'discover',snapshot);
+  UI.act('btDiscover',data=>{result.textContent='夹具选择第 '+(+data.i+1)+' 张；未施放游戏卡牌';});inspect();
+ }
+}
+body.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b&&!b.disabled)UI._acts[b.dataset.act]?.(b.dataset,b);});
+body.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelector('#cardZoom'))document.querySelector('#cardZoom')._closeCardZoom?.();});
+document.querySelectorAll('[data-scene]').forEach(b=>b.onclick=()=>render(b.dataset.scene));
+document.querySelector('#fixtureHide').onclick=()=>{document.querySelector('#fixtureControls').hidden=true;};
+render(new URLSearchParams(location.search).get('scene')||'pile');
+</script></body></html>

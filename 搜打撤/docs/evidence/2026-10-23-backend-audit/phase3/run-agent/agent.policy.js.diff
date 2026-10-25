@@ -1,0 +1,93 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/run-agent/agent.policy.js.before b/D:/素材/代号柒/搜打撤/game/src/agent/agent.policy.js
+index aa3fb464..9741b038 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/run-agent/agent.policy.js.before
++++ b/D:/素材/代号柒/搜打撤/game/src/agent/agent.policy.js
+@@ -59,6 +59,25 @@ const RARITY_ORDER = { '普通': 0, '常见': 0, '稀有': 1, '史诗': 2, '传
+ const DECK_TYPES = new Set(['招式', '装备', '能力']);
+ const rarityRank = (r) => RARITY_ORDER[r] ?? 1;
+ 
++// 两种导航保留各自的目标选择，共用同层反向图与多起点距离展开。
++function layerTargetDistances(layer, li, targets) {
++  const pred = layer.map(() => []);
++  for (let i = 0; i < layer.length; i++) {
++    for (const [tl, ti] of layer[i]?.next || []) {
++      if (tl === li && ti != null) pred[ti].push(i);
++    }
++  }
++  const dist = new Map(targets.map(i => [i, 0]));
++  const queue = [...targets];
++  while (queue.length) {
++    const u = queue.shift();
++    for (const p of pred[u]) {
++      if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
++    }
++  }
++  return dist;
++}
++
+ // 策略 v2（数据驱动改版，2026-09-26）：基于 45 局 v1 基线（均层2.0、73% 死于层2、
+ // 战斗胜率 72% 仍全灭）——死因是续航与推进节奏，不是单场战术。三处升级：
+ //   ① 地图：血线门控（hp<65% 不进层门、<70% 优先火堆）、同层收图再进、血低少打硬仗
+@@ -430,7 +449,6 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
+       try {
+         const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
+         if (lay) {
+-          const pred = (lay.map(() => []));
+           const targets = [];
+           let lockedExit = false;   // 本层撤离被 boss 锁（R14a 破局路径判据）
+           for (let i = 0; i < lay.length; i++) {
+@@ -438,26 +456,16 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
+             if (ty === 'extraction' && !(obs.run?.bossKilled ?? false)) lockedExit = true;
+             if (ty === 'door' || ty === 'emergencyExit'
+               || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
+-            for (const [tl, ti] of lay[i]?.next || []) {
+-              if (tl === curLi && ti != null) pred[ti].push(i);   // 同层反向边
+-            }
+           }
+-          const dist = new Map(targets.map(i => [i, 0]));
+-          const queue = [...targets];
+           // R14a：撤离被 boss 锁时，破局路径=打 boss（92 复现：extraction -100 不进
+           // 目标集 → 梯度失效 → L4 环 277 步 no-progress）。boss 格纳入目标，
+           // 打赢后锁解除、targets 自然切回 extraction
+           if (lockedExit && !obs.run?.bossKilled) {
+             for (let i = 0; i < lay.length; i++) {
+-              if (lay[i]?.def?.type === 'boss' && !dist.has(i)) { dist.set(i, 0); queue.push(i); }
+-            }
+-          }
+-          while (queue.length) {
+-            const u = queue.shift();
+-            for (const p of pred[u]) {
+-              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
++              if (lay[i]?.def?.type === 'boss' && !targets.includes(i)) targets.push(i);
+             }
+           }
++          const dist = layerTargetDistances(lay, curLi, targets);
+           if (dist.size) {
+             exitDist = dist;
+             exitMax = Math.max(...dist.values());
+@@ -475,24 +483,13 @@ function greedyPolicy({ resetSlots = false, preferNest = false, strategic = fals
+       try {
+         const lay = globalThis.window?.SDT?.game?.layerData?.[curLi]?.logical;
+         if (lay) {
+-          const pred = lay.map(() => []);
+           const targets = [];
+           for (let i = 0; i < lay.length; i++) {
+             const ty = lay[i]?.def?.type;
+             if (ty === 'fire' || ty === 'emergencyExit'
+               || (ty === 'extraction' && (obs.run?.bossKilled ?? false))) targets.push(i);
+-            for (const [tl, ti] of lay[i]?.next || []) {
+-              if (tl === curLi && ti != null) pred[ti].push(i);
+-            }
+-          }
+-          const dist = new Map(targets.map(i => [i, 0]));
+-          const queue = [...targets];
+-          while (queue.length) {
+-            const u = queue.shift();
+-            for (const p of pred[u]) {
+-              if (!dist.has(p)) { dist.set(p, dist.get(u) + 1); queue.push(p); }
+-            }
+           }
++          const dist = layerTargetDistances(lay, curLi, targets);
+           if (dist.size) {
+             retreatDist = dist;
+             retreatMax = Math.max(...dist.values());

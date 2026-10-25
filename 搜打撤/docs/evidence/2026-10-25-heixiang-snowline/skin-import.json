@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "character": "heixiang",
+    "id": "snowline-vigil",
+    "name": "雪线未眠",
+    "source_sha256": "7a38e9e0a54ef2da23c7485268891c90187d21081b8b7102996f11b8cda3b936",
+    "asset": "portraits/full/heixiang-snowline-vigil.webp",
+    "quality": 94
+  },
+  "source": "C:\\Users\\太平\\Documents\\Codex\\2026-10-25\\new-chat\\outputs\\heixiang-snowline-rescue-clean.png",
+  "source_size": [
+    1660,
+    948
+  ],
+  "default_sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
+  "asset": {
+    "path": "portraits/full/heixiang-snowline-vigil.webp",
+    "ext": "webp",
+    "bytes": 456166,
+    "sha256": "b8276de0117d754ab8176b09cf353c67cc09e9193e838853b80626e9d4da3075",
+    "license": "项目自有（AI 生成）",
+    "source": "docs/evidence/2026-10-25-heixiang-snowline/skin-import.json"
+  },
+  "operations": [
+    "game\\assets\\portraits\\full\\heixiang-snowline-vigil.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ],
+  "status": "imported",
+  "default_unchanged": true,
+  "git_mutation": false,
+  "processing": "RGB WebP; full canvas, no crop or resize"
+}

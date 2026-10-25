@@ -1,0 +1,123 @@
+- main:
+  - dialog:
+    - button "返回角色":
+    - heading "人物" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 0":
+        - generic: "0"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - generic "招式卡牌目录":
+        - region "人物专属招式":
+          - text: · · · ·
+          - button "放大查看快意恩仇" [pressed]:
+            - generic: "1"
+            - img "快意恩仇"
+            - generic: 武术
+            - generic: ·侠客
+            - generic: 快意恩仇
+            - generic: 消耗 2 张「初始攻击」，对目标攻击 3 次。
+            - img "coin"
+            - generic: "3"
+            - generic: 未归档
+          - button "放大查看流星箭雨":
+            - generic: "1"
+            - img "流星箭雨"
+            - generic: 武术
+            - generic: ·侠客
+            - generic: 流星箭雨
+            - generic: 造成（你的攻击力 - 1）点攻击伤害；本牌的伤害效果触发 2 次。
+            - img "coin"
+            - generic: "3"
+            - generic: 未归档
+          - button "放大查看潜匿":
+            - generic: "1"
+            - img "潜匿"
+            - generic: 武术
+            - generic: ·侠客
+            - generic: 潜匿
+            - generic: 你进入潜行状态，持续 1 回合，并抽 1 张牌。
+            - img "coin"
+            - generic: "3"
+            - generic: 未归档
+          - button "放大查看剑仙形态":
+            - generic: "2"
+            - img "剑仙形态"
+            - generic: 武术
+            - generic: ·侠客
+            - generic: 剑仙形态
+            - generic: 本场战斗中，回合开始时，你额外抽 1 张牌。
+            - img "coin"
+            - generic: "4"
+            - generic: 未归档
+          - button "上一页卡牌": ←
+          - status: 2 / 5
+          - button "下一页卡牌": →
+      - navigation "人物切换":
+        - button "查看无" [pressed]:
+          - img "无"
+          - generic: 无
+        - button "查看黑像":
+          - img "黑像"
+          - generic: 黑像
+        - button "查看星月":
+          - img "星月"
+          - generic: 星月
+        - button "查看白塔":
+          - img "白塔"
+          - generic: 白塔
+        - button "查看常无欲":
+          - img "常无欲"
+          - generic: 常无欲
+      - navigation "角色操作":
+        - button "培养"
+        - button "招式" [pressed]
+        - button "外观"
+        - button "伙伴"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "人物" [pressed]:
+        - generic: 人物
+      - button "后勤":
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室":
+        - generic: 收藏室
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院
+- dialog "快意恩仇卡牌详情":
+  - generic: "1"
+  - img "快意恩仇"
+  - generic: 武术
+  - generic: ·侠客
+  - generic: 快意恩仇
+  - text: 消耗 2 张「
+  - button "初始攻击"
+  - text: 」，对目标攻击 3 次。
+  - img "coin"
+  - generic: "3"
+  - article:
+    - button "关闭卡牌大图":
+      - img "cross"
+    - heading "快意恩仇" [level=2]
+    - generic: 武术 · 职业
+    - heading "卡牌效果" [level=3]
+    - generic: 消耗 2 张「初始攻击」，对目标攻击 3 次。

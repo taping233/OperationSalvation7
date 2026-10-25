@@ -1,0 +1,48 @@
+const fs = require('node:fs');
+const crypto = require('node:crypto');
+const acorn = require('acorn');
+const out = 'docs/evidence/2026-10-23-backend-audit/phase5/battle';
+fs.mkdirSync(out, { recursive: true });
+const paths = ['game/src/cards/builtin-card-previous-rules.js', 'game/src/cards/builtin-equipment-previous-rules.js'];
+const helper = '// Each historical rule owns its objects; field order is the migration fingerprint.\n/** @param {string} name */\nexport function hostedRuleSnapshot(name) {\n  return { version: 1, battle: { hosted: [name] } };\n}\n';
+function value(node) {
+  if (node.type === 'Literal') return node.value;
+  if (node.type === 'UnaryExpression' && node.operator === '-') return -value(node.argument);
+  if (node.type === 'ArrayExpression') return node.elements.map(value);
+  if (node.type === 'ObjectExpression') return Object.fromEntries(node.properties.map(property => {
+    if (property.type !== 'Property' || property.computed || property.kind !== 'init') throw new Error('Nonliteral snapshot property');
+    return [property.key.type === 'Identifier' ? property.key.name : property.key.value, value(property.value)];
+  }));
+  throw new Error('Not a static literal: ' + node.type);
+}
+const files = [];
+for (const path of paths) {
+  const bytes = fs.readFileSync(path);
+  const source = bytes.toString('utf8');
+  const ast = acorn.parse(source, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
+  const declaration = ast.body.find(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration').declaration.declarations[0];
+  const before = value(declaration.init);
+  const eligible = [], retained = [], replacements = [];
+  for (const property of declaration.init.properties) {
+    const id = property.key.type === 'Identifier' ? property.key.name : property.key.value;
+    const rule = before[id];
+    const name = rule?.battle?.hosted?.[0];
+    const generated = { version: 1, battle: { hosted: [name] } };
+    if (typeof name === 'string' && JSON.stringify(rule) === JSON.stringify(generated)) {
+      eligible.push({ id, hosted: name, start: property.loc.start.line, end: property.loc.end.line, propertyOrderPreserved: true });
+      replacements.push({ start: property.value.start, end: property.value.end, source: 'hostedRuleSnapshot(' + JSON.stringify(name) + ')' });
+    } else retained.push({ id, start: property.loc.start.line, end: property.loc.end.line, reason: 'Additional fields, structured points, or nonmatching property order; leave literal unchanged' });
+  }
+  let candidate = source;
+  for (const replacement of replacements.sort((a, b) => b.start - a.start)) candidate = candidate.slice(0, replacement.start) + replacement.source + candidate.slice(replacement.end);
+  candidate = "import { hostedRuleSnapshot } from './hosted-rule-snapshot.js';" + (source.includes('\r\n') ? '\r\n' : '\n') + candidate;
+  const candidateName = path.split('/').pop() + '.candidate.txt';
+  fs.writeFileSync(out + '/' + candidateName, candidate);
+  const beforeLines = source.split(/\r?\n/).length - 1;
+  const afterLines = candidate.split(/\r?\n/).length - 1;
+  files.push({ path, baseSha256: crypto.createHash('sha256').update(bytes).digest('hex'), exportedName: declaration.id.name, entries: declaration.init.properties.length, eligible, retained, linesBefore: beforeLines, linesCandidate: afterLines, netLinesRemoved: beforeLines - afterLines, candidate: candidateName, exactSerializedValueAndKeyOrderEqualForEveryReplacedEntry: true });
+}
+fs.writeFileSync(out + '/hosted-rule-snapshot.js.candidate.txt', helper);
+const result = { status: 'read_only_candidate_not_applied', method: 'Acorn literal-only evaluation; no game modules, migrations, or tests were executed', helperCandidate: 'hosted-rule-snapshot.js.candidate.txt', helperLines: helper.trimEnd().split('\n').length, files, potentialNetLinesRemoved: files.reduce((total, file) => total + file.netLinesRemoved, 0) - helper.trimEnd().split('\n').length, sharedSourceFilesModified: false };
+fs.writeFileSync(out + '/snapshot-candidate-analysis.json', JSON.stringify(result, null, 2) + '\n');
+process.stdout.write(JSON.stringify({ status: result.status, files: files.map(file => ({ path: file.path, entries: file.entries, eligible: file.eligible.length, retained: file.retained.length, netLinesRemovedBeforeHelper: file.netLinesRemoved })), helperLines: result.helperLines, potentialNetLinesRemoved: result.potentialNetLinesRemoved }, null, 2));

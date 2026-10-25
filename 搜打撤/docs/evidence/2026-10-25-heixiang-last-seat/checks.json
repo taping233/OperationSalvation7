@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "steps": [
+    {
+      "name": "selected-assets",
+      "exitCode": 0,
+      "durationMs": 1778,
+      "stdout": "{\"scope\":\"selected\",\"ok\":true,\"selected\":[\"portraits/full/heixiang-last-seat.webp\"],\"errors\":[],\"assets\":[{\"path\":\"portraits/full/heixiang-last-seat.webp\",\"bytes\":362424,\"sha256\":\"f258bfeef3cba80047aac00cdfaf588701dc7fd177dfd44ed6e4d9388dbfd9c6\"}],\"global\":{\"ok\":true,\"errorCount\":0,\"historicalWarningCount\":569,\"manifestIssues\":[]}}\n",
+      "stderr": ""
+    },
+    {
+      "name": "targeted-tests",
+      "exitCode": 0,
+      "durationMs": 2650,
+      "stdout": "\n RUN  v3.2.7 D:/素材/代号柒/搜打撤\n\n ✓ tests/m02-collection-commands.test.js (10 tests) 39ms\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  02:09:50\n   Duration  1.87s (transform 265ms, setup 0ms, collect 699ms, tests 39ms, environment 772ms, prepare 111ms)\n\n",
+      "stderr": " DEPRECATED  \"environmentMatchGlobs\" is deprecated. Use `test.projects` to define different configurations instead.\n"
+    }
+  ]
+}

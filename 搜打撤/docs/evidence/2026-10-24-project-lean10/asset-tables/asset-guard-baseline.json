@@ -1,0 +1,29 @@
+{
+  "method": "Replace only this batch audio catalog source and its two reviewed dependency fingerprints with the exact pre-edit versions; compare with current source and re-reviewed matching audio fingerprint. Generated modules are excluded by the existing scanner. Other current scanner inputs held equal.",
+  "beforeOwnBatch": {
+    "warnings": [
+      "Changed/missing indirect asset consumer game/src/ui/card-zoom-controller.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/hub/game.bag.view2.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/base-preview-rooms-v7.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/card-zoom-controller.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "afterOwnBatch": {
+    "warnings": [
+      "Changed/missing indirect asset consumer game/src/ui/card-zoom-controller.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/hub/game.bag.view2.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/base-preview-rooms-v7.js; retaining reviewed assets.",
+      "Unreviewed dynamic asset consumer game/src/ui/card-zoom-controller.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "shadowedArt": {
+    "beforeAndAfterOwnBatchInputsIdentical": true,
+    "actualExcluded": 0,
+    "expectedByExistingTest": 30,
+    "warnings": [
+      "Changed/missing shadowed-card-art selector; retaining its reviewed assets."
+    ]
+  }
+}

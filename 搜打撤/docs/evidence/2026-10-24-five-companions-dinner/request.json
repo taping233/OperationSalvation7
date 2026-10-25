@@ -1,0 +1,37 @@
+{
+  "toolchain": [
+    "NAI5 via tools/nai_gen.py and tools/nai_guard.py",
+    "built-in image_gen"
+  ],
+  "draftRequest": "docs/evidence/2026-10-24-five-companions-dinner/nai-request.json",
+  "final": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e35-69d5-77f2-9c09-4b2b8c9ad583\\exec-3aca4ef6-8dc1-43ff-9592-6064beba3ebc.png",
+    "prompt": "Use case: style-transfer. Create the FINAL wide 16:9 game save-selection background, a fully designed continuous narrative illustration of exactly FIVE adult protagonists enjoying dinner together after a winter expedition. NOT chibi.\nINPUT ROLES: Image 1 is the NAI5 composition/lighting draft only: use its five-character meal idea and warm/cold atmosphere, but CORRECT its unwanted vertical comic-panel dividers, duplicated pots, disjoint tables and disconnected staging. Images 2–5 are authoritative identity references in order WU, CHANGWUYU, BAITA, XINGYUE. HEIXIANG's appearance follows the all-black-haired man in Image 1 and his explicit description below. They control faces, hair and signature costume details ONLY, not their white backgrounds, standing poses, handheld props or rendering. User override: HEIXIANG has entirely BLACK hair, absolutely NO white forelock or pale streak, his black hair in Image 1 is the correct identity. BAITA's dense fringe completely hides the viewer-RIGHT eye; viewer-LEFT green eye visible, gold clips on that exposed-eye side.\n\nSCENE AND DESIGN: One connected lived-in safehouse dining room, ONE continuous wooden dining table seen from a mildly elevated three-quarter camera, broad perspective lines and foreground plates leading into the group. Snowy dark-blue city visible through a SINGLE broad rear window; a small hearth glows at the back. One amber hanging lamp casts decisive light onto faces, hands, the table and curls of steam, with cold blue window rim light, deep readable shadows under furniture and clear warm/cool planes. Coats and a folded expedition map quietly imply they have just returned. One central serving pot, one teapot, a few bowls and bread, a small dessert plate. No burning stovetop in the tabletop and no repeated giant pots. The food supports character action instead of burying bodies. Art fills the complete frame with no white margins.\n\nFIVE PEOPLE, left-to-right, with alternating height and interlocked gestures rather than five isolated portraits:\n1. WU seated on the left, lively confident fang smile, silver-white high ponytail, front hair swept aside with clearly exposed forehead, cyan eyes, ordinary black ROUND SUNGLASSES on head, blue bow and black rose on viewer-right side. Charcoal black off-shoulder ruffle dress. She mischievously reaches her fork toward BAITA's last piece of cake.\n2. CHANGWUYU standing behind the left half of the table, an adult MALE elf with silver-gray low bun and long sidelocks, pointed ears, yellow-gold eyes, thin round spectacles, compact bent black witch hat with purple underside, black high-collar purple-lined robe with restrained gold trim and blue jewel/white feather brooch. He pours tea into an actual cup beside WU while noticing the cake theft with an amused look.\n3. BAITA seated around the middle, long deep brown wavy hair, green beret, ONE visible green eye on viewer LEFT, dense opaque fringe fully covering viewer RIGHT eye, two gold clips on the exposed-eye side, gold earrings. White high-collar blouse, deep-green broad pinafore straps with small rectangular gold buckles and a small oval blue throat jewel. She looks up from an open book resting beside her plate and lightly blocks WU's fork with her own fork: a playful brief standoff over the last dessert.\n4. HEIXIANG standing behind the right half of the table, broad muscular dark-skinned adult man, ALL-BLACK slicked-back short hair, fully exposed forehead, amber eyes, stitched scar on viewer-right cheek, burnt-orange neck scarf over a dark fitted rolled-sleeve shirt. Smiling at the others, he brings ONE steaming serving pot toward XINGYUE's waiting bowl. His bulk, face planes and pure-black hair must remain distinct from the pale-haired elf.\n5. XINGYUE seated sideways at the right, pale-blonde long low braid, neat bangs, calm gold eyes, WHITE crescent ornament, white priest dress with dark teal-green mantle and gold edging. She quietly offers a bowl toward HEIXIANG, eyes following the serving action, reserved tiny smile.\n\nFRAMING: Keep each face readily recognizable and individually unobscured. Broad head positions across the image near x=10%,30%,50%,70%,90%, safely away from the 20/40/60/80% slice seams used by five save cards. Standing figures' heads higher than seated figures, shoulders overlap naturally at different depths. This is ONE coherent scene with continuous lighting, table and room perspective across the WHOLE image. Absolutely no vertical panel boundaries, no five-strip montage, no frames between characters, no composited portrait cutouts. Natural anatomy, readable fingers and utensil contact, exactly three women and two men, no extra people or reflected duplicate faces.\n\nPAINTING: Current project hand-painted Japanese anime block-painting. Opaque color masses with firm light/shadow boundaries, coherent large forms with visible directional overpainting, selective expressive hand-drawn contours. Hair consists of clean flowing broad ribbon-like locks with intact base/midtones, long grouped shadows and a few broad highlight bands, not scratchy strands or tiny jagged triangles. Matte warm skin with calm facial planes, clearly shaped anime eyelids and layered irises; no glossy nose tips. Cloth folds follow weight and overlap in broad chromatic-gray planes, principal shadows remain connected. Warm amber versus slate/cobalt blue, muted base colors with concentrated green, orange and cyan identity accents. Faces and expressive hand gestures resolved; secondary furnishings quiet and roughly painted. No uniform airbrush polish, plastic skin, all-over grain, tiny repeated highlights or photographic blur. No text, signatures, borders or UI.",
+    "referenced_image_paths": [
+      "D:/素材/代号柒/搜打撤/.tmp/nai/slot-dinner-20261024/draft.png",
+      "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+      "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+      "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+      "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+    ],
+    "transparent_background": false
+  },
+  "asset": "game/assets/slot-bg-knight-fantasy.webp",
+  "observations": {
+    "characters": 5,
+    "seated": [
+      "wu",
+      "baita",
+      "xingyue"
+    ],
+    "standing": [
+      "changwuyu",
+      "heixiang"
+    ],
+    "story": "Wu reaches for Baita's dessert, Baita stops her; Changwuyu pours tea; Heixiang serves Xingyue soup",
+    "identity": "Baita viewer-right eye covered; Heixiang pure-black hair",
+    "draftCorrection": "Vertical panel dividers removed; final is a continuous room and table",
+    "remainingDifference": "Final contains the serving pot in Heixiang's hands plus a communal stew dish on the table"
+  },
+  "verification": "Generated artwork viewed only; user requested no tests, asset audit, browser acceptance or build"
+}

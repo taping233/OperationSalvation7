@@ -1,0 +1,18 @@
+{
+  "event_id": "tt6-demondeal",
+  "name": "受困运输队",
+  "status": "preview-only",
+  "pipeline": [
+    "NAI 4.5 Full",
+    "内置生图精修"
+  ],
+  "nai_request": "../.tmp/nai/event-transport-preview-1025/request.json",
+  "nai_source": "../.tmp/nai/event-transport-preview-1025/nai45-draft.png",
+  "final": "../.tmp/nai/event-transport-preview-1025/builtin-preview.png",
+  "final_sha256": "9c6eab36b1e3c79ef7d5e2f1c64f50d7dfeff52fa72e87debc678a2a1fd1b8b5",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-89fe97a5-5a93-4662-982e-b932ee2afe20.png",
+  "prompt_summary": "沿用NAI底稿的两名成年运输人员及橄榄绿、藏蓝、冷灰与琥珀灯色；修正为正常比例军用运输车、独立闭合重箱和可信搬运手势，补出封锁街区、路障与远处怪物。日系手绘块面叠色，横版16:9，主体偏左，无文字。",
+  "runtime_replaced": false,
+  "checks_run": [],
+  "feedback": "等待老板评价首张效果"
+}

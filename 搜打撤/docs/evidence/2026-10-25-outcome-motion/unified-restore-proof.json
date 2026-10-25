@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T11:35:32.726Z",
+  "inputKind": "real-input",
+  "detail": "Codex当前窗口，内存营火，真实点击复原。生产控制器与共用效果；未加载或保存玩家档位。",
+  "screenshot": {
+    "path": "unified-restore-proof.png",
+    "bytes": 53907,
+    "sha256": "f165abaf5150ebc5a42ba93c23d224c4c68d371c3f25113cf40bd76c17abd731"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/dev/outcome-motion-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://localhost:5200/assets/cards/spell-tt3-holy-shield.webp?art=career-local-final-20261023&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 150,
+      "src": "http://localhost:5200/assets/ui/semantic-icons/plate.svg?v=0.60.0",
+      "width": 150
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/spell-tt3-ice-spike.webp?art=ice-spike-frozen-gear-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 150,
+      "src": "http://localhost:5200/assets/ui/semantic-icons/sparkles.svg?v=0.60.0",
+      "width": 150
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": [
+    {
+      "level": "error",
+      "message": "TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.\n    at http://localhost:5200/dev/outcome-motion-review.js:21:4",
+      "timestamp": "2026-10-25T11:20:25.708Z",
+      "url": "http://localhost:5200/dev/outcome-motion-review.js"
+    }
+  ]
+}

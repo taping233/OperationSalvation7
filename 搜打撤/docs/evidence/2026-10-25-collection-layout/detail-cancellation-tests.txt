@@ -1,0 +1,14 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/achievement-gallery-entry.test.js (6 tests) 324ms
+ ✓ tests/achievement-gallery.test.js (8 tests) 595ms
+ ✓ tests/achievement-gallery-close.test.js (4 tests) 286ms
+ ✓ tests/collection-browsing-layout.test.js (3 tests) 244ms
+
+ Test Files  4 passed (4)
+      Tests  21 passed (21)
+   Start at  12:31:40
+   Duration  2.54s (transform 426ms, setup 0ms, collect 2.67s, tests 1.45s, environment 3.87s, prepare 611ms)
+

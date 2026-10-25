@@ -1,0 +1,73 @@
+{
+  "task": "WF-project-bug-sweep-round2-1024",
+  "owner": "Friday / parent",
+  "status": "complete-uncommitted-with-browser-limitation",
+  "independentRootCauses": 2,
+  "fixes": [
+    {
+      "id": "R2-A01",
+      "title": "同名验收场景重跑串用报告",
+      "trigger": "run等待第一次场景报告时，status调用者在旧轮询前已启动同名第二次场景，第一次run返回第二次报告；失败也可能被后续成功掩盖",
+      "change": "run绑定本次执行的Promise，start/status接口保持同步契约",
+      "sources": [
+        "game/src/agent/agent.scenes.js"
+      ],
+      "regression": "tests/project-bug-sweep-round2-agent-scenes.test.js",
+      "red": {
+        "tests": 2,
+        "failed": 2
+      },
+      "green": {
+        "files": 3,
+        "tests": 11,
+        "passed": 11,
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "R2-A02",
+      "title": "旧观察动作跨过按钮确认状态",
+      "trigger": "真实战斗撤离按钮第一次调用添加confirm标记但保留DOM，同一旧观察动作再次调用会直接确认判负",
+      "change": "有来源绑定的观察动作在执行时核对完整dataset参数集合；新观察确认与手写命令仍可用",
+      "sources": [
+        "game/src/ui/action-dispatch.js"
+      ],
+      "regression": "tests/project-bug-sweep-round2-agent-confirm.test.js",
+      "red": {
+        "tests": 1,
+        "failed": 1,
+        "note": "真实battle.view处理器及battle engine；仅资源/动画就绪替身"
+      },
+      "green": {
+        "files": 4,
+        "tests": 44,
+        "passed": 44,
+        "exitCode": 0
+      }
+    }
+  ],
+  "extensionsNotCountedAgain": [
+    {
+      "priorRoot": "第一轮 SWEEP-E4",
+      "title": "补齐投骰组件初始化检查点的晚回调归属",
+      "change": "事件调用方提供初次展示归属；组件在保存成功/失败后先核对运行代次和初始页面，再决定展示或退出，避免迟到失败关闭新局、迟到成功覆盖菜单。",
+      "sources": [
+        "game/src/ui/event-dice.js",
+        "game/src/run/game.run.events.js"
+      ],
+      "tests": [
+        "tests/project-bug-sweep-round2-dice-lifecycle.test.js",
+        "tests/project-bug-sweep-events-1024.test.js"
+      ],
+      "red": {
+        "failed": 3,
+        "passed": 1
+      },
+      "verification": "5文件82项通过；再补真实事件调用方到真实投骰组件的2条连接回归，与组件4条边界一并通过。最终见verification.json。"
+    }
+  ],
+  "limits": [
+    "完整CDP被权限审批拒绝，深层构造状态实页未补；正常页面覆盖与定向逻辑测试分别记录于verification.json。",
+    "按老板要求收尾，不再扩大排查；未build、未提交、未推送。"
+  ]
+}

@@ -1,0 +1,335 @@
+/* 远征HUD：保留资源、生命与节点详情；地图悬浮工具由 map-floating-tools.css 单独维护。 */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
+/* 探索信息层：目标有独立阅读行，路线名称与已知结果分级。 */
+body:not(.lobby):not(.scene-battle-3d) #sidebar::before { content:none; }
+body #sidebar .panel { background:none; box-shadow:none; border:0; min-width:0; padding:0; }
+body #sidebar .panel::before { content:none; }
+body #sidebar #charPanel { align-items:center; justify-content:center; min-width:0; }
+body #sidebar #charPanel .hero-ava { position:relative; left:auto; bottom:auto; border:1px solid #92a8b2; box-shadow:none; }
+body #sidebar #charPanel .hero-ava::after { content:none; }
+body #sidebar #statsPanel { min-width:0; justify-content:center; padding:0 16px 0 0; border-right:1px solid #768c963d; }
+body #sidebar #miniMap { display:none; }
+body #sidebar #statsPanel .stat-duo { flex-direction:column; align-items:flex-start; gap:10px; }
+body #sidebar #statsPanel .stat-duo label { font-size:14px; letter-spacing:.04em; color:#c6d2d8; }
+body #sidebar #statsPanel .stat-duo b { font-size:22px; }
+body #sidebar #devPanel { display:none; }
+body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
+body #sidebar #logPanel { position:absolute; right:104px; left:auto; bottom:24px; width:330px; }
+body #sidebar #logPanel.collapsed { width:130px; min-width:130px; }
+body #sidebar #logPanel:not(.collapsed) { bottom:24px; z-index:10; }
+/* Removed map panels stay absent; compact navigation owns location/help only. */
+body #sidebar #logPanel { display:none!important; }
+body #sidebar #statsPanel { border-right-color:#7b91982b; }
+/* Map tools are actions, not repeated character/location summaries. */
+body #sidebar :is(#charPanel,#statsPanel) { display:none; }
+body #resHud .res-gold::before { content:'金币'; font-size:14px; color:#e3d6b3; }
+body #resHud .res-atk::before { content:'攻击'; font-size:14px; color:#f0c0b4; }
+body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
+.expedition-feedback { position:absolute; z-index:8; left:50%; bottom:224px; transform:translateX(-50%); width:min(560px,80%); padding:16px 20px; color:#e6edef; background:rgba(19,32,40,.97); border:1px solid #7b999f; box-shadow:0 10px 28px #09131b66; }
+.expedition-feedback header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.expedition-feedback header b { font-size:18px; }
+.expedition-feedback p { margin:10px 0; font-size:16px; line-height:1.5; }
+.expedition-feedback small { color:#c4d0d4; font-size:14px; }
+.expedition-feedback button { min-width:32px; min-height:32px; border:1px solid #95b0b5; background:#263f49; color:#edf5f5; cursor:pointer; }
+#sidebar, #topBtns, #resHud, #logPanel {
+  --exh-fast: .18s cubic-bezier(.33, 1, .68, 1);
+  --exh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);
+  --exh-press: .09s ease-out;
+}
+
+/* ═════════ W1 底部面板栏 #sidebar：档案化质感（冷青半透明 + 顶缘金发丝线） ═════════ */
+
+/* W1b 面板竖向分隔发丝线：冷青弱化（原 #464b5080 蓝灰） */
+#sidebar .panel { border-right-color: rgba(170,174,177,.14); }
+
+/* W1c 头像卡：冷青描边 + 底部内阴影落定 + 脚底金线（档案章的"镇纸"） */
+#sidebar .hero-ava {
+  border-color: rgba(208,210,211,.55);
+  box-shadow: 0 6px 18px rgba(8,9,9,.55), inset 0 -22px 30px rgba(12,13,14,.35);
+}
+#sidebar .hero-ava::after {
+  content: ''; position: absolute; left: 12%; right: 12%; bottom: 5px; height: 1px; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #e6cb76cc, transparent);
+  box-shadow: 0 0 5px #e6cb7645;
+}
+/* W1c-2 头像空档态（09-25 P1）：winter.css:938 的浅灰实心底（#9b9b9b→#666666 + #c2c2c2 边）
+   在未选职业时露出成刺眼灰块，占位字（医/旅）不可见——按行规不碰 winter，在此以
+   更高特异性（+ #charPanel 一级）覆盖为深蓝底 + 冷青弱边 + 暖金占位字；
+   选中职业后立绘 img 盖满底，不受影响 */
+#sidebar #charPanel .hero-ava {
+  background: radial-gradient(ellipse at 50% 30%, #232628, #131416 88%);
+  border-color: rgba(170,174,177,.25);
+  color: #e6cb76;
+}
+
+/* ═════════ W2 简图面板：数值排版仪式感（标签小而灰青、数值暖米金表格数字） ═════════ */
+
+#sidebar #statsPanel { border-right-color: rgba(170,174,177,.14); }
+#sidebar .stat-duo { gap: 8px; }
+#sidebar .stat-duo label { font-size: 10px; letter-spacing: .22em; color: #92979a; }
+#sidebar .stat-duo b {
+  color: #f4f4f4; font-variant-numeric: tabular-nums; letter-spacing: .03em;
+  text-shadow: 0 0 8px rgba(230,203,118,.14);
+}
+#sidebar .stat-duo .gold { color: #f4e2a5; }
+#sidebar .stat-duo .duo-sep { color: #7a7f83; }
+
+/* ═════════ W3 路线面板：金短线标题 + 发丝分隔线 + 路线卡交互（核心操作区） ═════════ */
+
+/* W3a 「下一步」标题：前置金短线 + 暖米金（对标页头 hub-slot-label / 卡标题语言） */
+/* W3a-2 标题行下发丝线 / 提示行上发丝线：面板内的"档案表格"骨架 */ /* 09-25 P3：#898e91 对比临界，提到 route-help 同级 */
+
+/* W3b 路线卡：冷青半透明档案卡 + hover 金线上浮 + 按压快按慢弹 */
+/* 卡顶"封条"金线：hover 点亮（与选档卡同语言） */
+/* 选中态：金边 + 左缘金条压过 tone 强调色（expedition.css 原有 hover/selected 底色同步提冷） */
+
+/* W3c 路线卡文字层级：主名提亮 / 副注灰青 / 箭头 hover 斜移 + 暖金 */
+
+/* ═════════ W4 左上操作键组 #topBtns（含右下定位键）：幽灵键三态 + 金线焦点 ═════════ */
+/* winter.css 09-24 留言 #6 把三键设为透明+细边(!important)，本文件更晚加载，
+   同特异性 + !important 覆盖出统一的暖金 hover（快按慢弹节奏不变 transform 走变量） */
+
+#topBtns button {
+  transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
+    box-shadow var(--exh-fast), transform var(--exh-fast);
+}
+#topBtns #btnHelp:hover,
+#topBtns #btnMute:hover {
+  color: #f4f4f4 !important;
+  border-color: rgba(230,203,118,.62) !important;
+  background: rgba(21,23,24,.66) !important;
+  box-shadow: 0 0 10px rgba(230,203,118,.16) !important;
+  transform: translateY(-1px);
+}
+#topBtns button:active:not(:disabled) {
+  transform: translateY(0) scale(.94);
+  transition-duration: var(--exh-press);
+}
+/* 右下镜头定位键（expedition-map.css 底态非 important，直接覆盖） */
+body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !important; }
+
+#topBtns #btnLocate {
+  background: rgba(17,18,19,.88);
+  border-color: rgba(170,174,177,.3);
+  color: #cccecf;
+  transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast),
+    box-shadow var(--exh-fast), transform var(--exh-fast);
+}
+#topBtns #btnLocate:hover {
+  color: #f4f4f4; border-color: rgba(230,203,118,.6);
+  background: rgba(21,23,24,.9);
+  box-shadow: 0 0 10px rgba(230,203,118,.16);
+  transform: translateY(-1px);
+}
+#topBtns #btnLocate:active { transform: scale(.92); transition-duration: var(--exh-press); }
+
+/* W4b 血量 HUD：底座并进冷青半透明家族，图标块收饱和保 HP 蓝语义 */
+#hpHud {
+  border-color: rgba(170,174,177,.28);
+  box-shadow: 0 2px 8px rgba(7,7,8,.3);
+}
+.hp-hud-icon, .hp-hud-label { background: linear-gradient(160deg, #6e777e 0%, #53595f 60%, #43484d 100%); }
+.hp-hud-label { letter-spacing: 2.5px; }
+#hpText { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+/* ═════════ W5 右上资源章 #resHud：冷青档案章 + 金色值 + 左缘金标 ═════════ */
+
+#resHud .chip-mini {
+  border: 1px solid rgba(170,174,177,.26); border-radius:0;
+  box-shadow: inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35);
+}
+/* 金币章：左缘 2px 暖金标（资源主章，呼应入口牌 border-left 金条语言） */
+#resHud .res-gold { box-shadow: inset 2px 0 0 rgba(230,203,118,.5), inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35); }
+#resHud .res-gold b { color: #f4e2a5; text-shadow: 0 0 8px rgba(230,203,118,.2); }
+#resHud .res-atk b { color: #ff8d7e; }
+#resHud .chip-mini b { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+
+/* ═════════ W6 环层横幅 + 章节导航：仪式感微调（展示层，零交互开销） ═════════ */
+
+/* W6a 横幅：中文名提字距 + 微金晕，下方金发丝短线收束 */
+#layerBanner .lb-zh {
+  letter-spacing: 7px;
+  text-shadow: 0 2px 14px rgba(9,9,10,.9), 0 0 3px rgba(230,203,118,.22);
+}
+#layerBanner::after {
+  content: ''; position: absolute; left: 50%; bottom: 0; width: 56px; height: 1px;
+  transform: translateX(-50%); pointer-events: none;
+  background: linear-gradient(90deg, transparent, #e6cb76a1, transparent);
+  opacity: .8;
+}
+/* W6b 章节导航：眉题金化、当前节点金线金点、已过节点青绿提亮 */
+#expeditionChapter ol { border-left-color: rgba(176,181,184,.28); }
+#expeditionChapter li { transition: color var(--exh-fast), border-color var(--exh-fast), background var(--exh-fast); }
+#expeditionChapter li.current { border-left-color: #e6cb76; }
+#expeditionChapter li.current span { opacity: 1; color: #f1de9f; }
+#expeditionChapter li.passed { color: #adb2b6; }
+#expeditionChapter > small { color: #92979a; }
+
+/* ═════════ W7 行动记录 #logPanel：冷青档案纸 + 标题条金线反馈 ═════════ */
+
+#logPanel {
+  background: rgba(12,13,14,.74);
+  border-color: rgba(170,174,177,.15); border-radius:0;
+}
+#logPanel .log-toggle {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(170,174,177,.13);
+  color: #9a9fa2; letter-spacing: .2em;
+  transition: color var(--exh-fast), border-color var(--exh-fast);
+}
+#logPanel .log-toggle:hover { color: #f4e2a5; border-bottom-color: rgba(230,203,118,.42); } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
+#topBtns button:focus-visible,
+#logPanel .log-toggle:focus-visible {
+  outline: 1px solid #e6cb76cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
+}
+/* 路线卡贴边收进：金环画在卡内，避免与相邻卡重叠 */
+
+/* ═════════ T6 光标自查：对局 HUD 可点元素均为 <button>（cursor-art 的
+   button:not(:disabled) 白名单已给出互动光标），无新增非按钮可点元素。
+   禁用路线卡保持系统默认，压掉自定义互动光标误导。 ═════════ */
+
+/* IS7 source layout: edge-aligned top groups, central current-region title,
+   continuous bottom inventory strip. No route details or action-log panel. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns {
+  top:16px; left:68px; gap:14px; align-items:center; height:62px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns button {
+  width:50px; height:50px; min-width:50px; padding:0; border:0;
+  border-radius:0; clip-path:none; box-shadow:none; color:#e5e6e5;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome {
+  order:0; border:0!important; color:#fff!important;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute {
+  order:1; background:transparent!important; border:0!important; box-shadow:none!important;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnMute svg {
+  width:34px; height:34px; flex:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud {
+  order:2; position:relative; min-width:112px; height:62px; margin-left:22px; padding:0; align-items:center;
+  background:transparent; border:0; clip-path:none; box-shadow:none; gap:0;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud .hp-hud-body {
+  width:112px; padding:0; position:relative; gap:5px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText {
+  display:block; padding:0; margin:0; text-shadow:none; color:#edf2ed; font:600 32px/36px var(--font-num); letter-spacing:.5px;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpText .hp-rest { color:#8eaba5; font-size:18px; text-shadow:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBarWrap {
+  display:block; width:100%; height:3px; margin:0; border:0; border-radius:0;
+  background:#b1c8c12b; box-shadow:none; animation:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBar { border-radius:0; box-shadow:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBar::after { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud {
+  top:22px; right:72px; gap:30px; align-items:center;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini,
+#runTopBar #resHud .chip-mini {
+  min-width:120px; height:64px; padding:0; border:0; gap:10px;
+  background:transparent; box-shadow:none; clip-path:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini::before,
+#runTopBar #resHud .chip-mini::before { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .res-ic,
+#runTopBar #resHud .res-ic {
+  width:40px; height:40px; padding:5px; background:none; filter:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini b,
+#runTopBar #resHud .chip-mini b {
+  font:500 31px/1 var(--font-num); text-shadow:none;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] {
+  height:112px; min-height:112px; padding:0 36px; display:block;
+  background:#171c20f2; border:0; border-top:1px solid #d4dddf38; box-shadow:none;
+}
+
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview {
+  position:absolute; z-index:7; right:36px; left:auto; bottom:auto;
+  top:calc(152px - (var(--game-layout-height,1080px) - 122px));
+  transform:none; width:530px; min-height:300px; max-height:720px; box-sizing:border-box;
+  display:flex; flex-direction:column; align-items:stretch; gap:0; padding:0;
+  color:#ecf1ef; border:0; border-radius:0; background:linear-gradient(90deg,#081118d9,#08111870); box-shadow:none; backdrop-filter:none;
+  animation:map-detail-enter 180ms ease-out;
+}
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[hidden] { display:none; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-heading { display:flex; align-items:center; position:relative; min-height:100px; padding:14px 48px 14px 22px; gap:20px; background:linear-gradient(90deg,#03090cea,#03090c80); border-left:2px solid #78bbb8; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-icon { display:grid; place-items:center; width:66px; height:66px; flex:0 0 66px; border:0; border-radius:50%; background:radial-gradient(circle,#0b202be6 45%,#07111999 70%,transparent 72%); color:#fff; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-icon > .ic { width:58px; height:58px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-copy { display:flex; flex-direction:column; gap:9px; min-width:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-copy b { font:600 34px/1.25 var(--font-ui); color:#f4f5f3; overflow-wrap:anywhere; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-status { font:500 17px/1.2 var(--font-ui); color:#75d9d9; letter-spacing:.08em; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-content { flex:1; display:flex; flex-direction:column; gap:24px; padding:26px 28px 32px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-hint { margin:0; color:#d1dcdd; font:400 23px/1.65 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-condition { margin:0; font:400 20px/1.6 var(--font-ui); color:#a5b5b9; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-preview-risk { margin:auto 0 0; padding:14px 16px; background:#8d292944; border-left:3px solid #e46d61; color:#ffc3b6; font:400 20px/1.5 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview button { border:0; border-radius:0; box-shadow:none; cursor:pointer; clip-path:none; min-height:0; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-close { position:absolute; right:14px; top:14px; width:34px; height:34px; padding:0; font:400 30px/1 var(--font-ui); background:none; color:#a3b1b4; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:72px; padding:16px 28px; background:linear-gradient(90deg,#c7d8d0,#ecf1e8); color:#142226; font:600 26px/1.25 var(--font-ui); }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter:hover:not(:disabled) { background:#bfece9; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview button:focus-visible { outline:2px solid #6ed6d6; outline-offset:-4px; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview .expedition-preview-enter:disabled { opacity:1; background:#303b40; color:#8e9ea3; cursor:default; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-tone="danger"] .expedition-preview-heading { border-left-color:#e76053; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-state="unreachable"] .expedition-preview-heading { border-left-color:#6f8087; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview[data-node-state="unreachable"] .expedition-preview-status { color:#9baab1; }
+body:has(#overlay:not([hidden])) #sidebar[data-expedition-layout="map"] .expedition-map-preview { visibility:hidden; pointer-events:none; }
+@keyframes map-detail-enter { from { opacity:0; transform:translateX(14px); } to { opacity:1; transform:translateX(0); } }
+body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview { animation:none; }
+body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] button { transition:none; }
+@media (prefers-reduced-motion:reduce) {
+  body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview { animation:none; }
+  body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] button { transition:none; }
+}
+
+/* Map health: quiet status, one-shot feedback, and a touch/keyboard disclosure. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #hpHud[data-health-hud] {
+  cursor:pointer; touch-action:manipulation; isolation:isolate;
+}
+#hpHud[data-health-hud] .map-health-heading {
+  display:flex; align-items:center; gap:7px; color:var(--ak-sub, #9aa9ad);
+  font:500 18px/20px var(--font-ui); letter-spacing:1px;
+}
+/* Keep the larger label inside the existing 62px toolbar footprint. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud[data-health-hud] .hp-hud-body { gap:1px; }
+#hpHud[data-health-hud] .map-resource-tip { font-size:20px; line-height:1.45; }
+#hpHud[data-health-hud] .map-resource-tip strong { font-size:20px; line-height:1.4; }
+#hpHud[data-health-hud] .map-health-state { color:var(--fx-hurt, #ec4b3f); letter-spacing:1px; }
+#hpHud[data-health-hud] .map-health-delta {
+  position:absolute; top:0; right:0; font:600 12px/12px var(--font-num); letter-spacing:0;
+  opacity:0; pointer-events:none;
+}
+#topBtns #hpHud[data-health-hud] #hpBarWrap { animation:none; will-change:auto; }
+#topBtns #hpHud[data-health-hud] #hpBar { transition:width 260ms ease; }
+#hpHud[data-health-hud] .hp-hud-body::after {
+  content:''; position:absolute; inset:-5px -8px; border:1px solid currentColor;
+  opacity:0; pointer-events:none;
+}
+#hpHud[data-health-hud].health-hurt { --health-feedback:var(--fx-hurt, #ec4b3f); }
+#hpHud[data-health-hud].health-heal { --health-feedback:var(--fx-heal, #5fd38d); }
+#hpHud[data-health-hud]:is(.health-hurt,.health-heal) .hp-hud-body::after {
+  color:var(--health-feedback); animation:map-health-flash 700ms ease-out both;
+}
+#hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta {
+  color:var(--health-feedback); animation:map-health-delta 1000ms ease-out both;
+}
+#hpHud[data-health-hud][aria-expanded="true"] .map-resource-tip { opacity:1; visibility:visible; transform:none; }
+#hpHud[data-health-hud][data-health-dismissed="true"] .map-resource-tip { opacity:0; visibility:hidden; }
+#hpHud[data-health-hud][data-health-active="false"] .map-resource-tip { display:none; }
+@keyframes map-health-flash { 0%,20% { opacity:.55; } 100% { opacity:0; } }
+@keyframes map-health-delta { 0%,65% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(-5px); } }
+body.reduce-motion #topBtns #hpHud[data-health-hud] #hpBar { transition:none; }
+body.reduce-motion #hpHud[data-health-hud] .hp-hud-body::after { animation:none; }
+body.reduce-motion #hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta { animation:none; opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) {
+  #topBtns #hpHud[data-health-hud] #hpBar { transition:none; }
+  #hpHud[data-health-hud] .hp-hud-body::after { animation:none; }
+  #hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta { animation:none; opacity:1; transform:none; }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "game/css/cover-run.css",
+    "line": 100,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn, :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn",
+    "reason": "specificity change"
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "line": 107,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn.ok, .mini-btn.ok), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok, :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn.ok",
+    "reason": "specificity change"
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "line": 110,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:hover:not(:disabled), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled)",
+    "reason": "specificity change"
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "line": 114,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):disabled, :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:disabled, :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn:disabled",
+    "reason": "specificity change"
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "line": 117,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel, .card.chest:not(:has(.reward-v14)), .card.discover:has(.sac-hand)) :is(button, [tabindex]):focus-visible",
+    "reason": "specificity change"
+  }
+]

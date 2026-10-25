@@ -1,0 +1,18 @@
+{
+  "scope": ["game/src/hub/base.js"],
+  "evidence": "docs/evidence/2026-10-23-backend-audit/phase6/storage/",
+  "sourceBeforeSha256": "6C81008034E007C142377A7B31A3D460CCB6AD892DAFF6CCB6467E7C1B396237",
+  "sourceAfterSha256": "D3652CA05F8835770C7E1D6AF8EEDA1598E4C26354EC97733BDD02D1B00980DF",
+  "added": 11,
+  "removed": 20,
+  "netRemoved": 9,
+  "checks": [
+    {"command": "node --check game/src/hub/base.js", "exitCode": 0},
+    {"command": "git diff --check -- game/src/hub/base.js", "exitCode": 0, "note": "Only Git's existing CRLF normalization advisory; no whitespace errors."},
+    {"command": "node docs/evidence/2026-10-23-backend-audit/phase6/storage/prove-upgrades.mjs", "exitCode": 0, "note": "Static AST parsing/comparison; no game code execution."}
+  ],
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "committed": false
+}

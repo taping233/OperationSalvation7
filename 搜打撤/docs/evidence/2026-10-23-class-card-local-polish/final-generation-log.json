@@ -1,0 +1,926 @@
+{
+  "total": 31,
+  "builtin": true,
+  "runtimeInstall": false,
+  "feedback": [
+    "黑像无白毛，修为黑短背头",
+    "白塔两枚细长金色发夹保留",
+    "白塔金托椭圆蓝宝石及白高领衬衫、深绿双背带裙统一",
+    "聚能与征召脸部曾被否定，失败候选不认可；聚能最新基于老板指定fc2bb208底图"
+  ],
+  "items": [
+    {
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "who": "无",
+      "original": "game/assets/cards/martial-cmtn1i64j7y7.webp",
+      "originalSha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-175fa13e-3c4d-4e35-b227-5564a5ac19b1.png",
+      "output": "game/art-source/class-card-local-polish-20261023/cmtn1i64j7y7.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《盗宝》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：仅修脸部与额发：银白高马尾，额头明确露出，青蓝眼与眉部可读，自信带笑。把旧蓝星纹裙内衬调整为黑灰短裙层叠色面。保持侧身抱住发光宝物的动作及位置，手指托持接触更清楚，金色光只集中在宝物与指尖。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cmtn1i64j7y7.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急-改",
+      "who": "无",
+      "original": "game/assets/cards/martial-cmtn1wnhhym.webp",
+      "originalSha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b16c9f53-2b27-4584-bd93-b2d3a56453f7.png",
+      "output": "game/art-source/class-card-local-polish-20261023/cmtn1wnhhym.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《江湖救急-改》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保持伸手递三张空白纸牌的原分镜、脸和纸牌大小位置。局部修额发向两侧分开明确露额头，青蓝眼与高马尾保持。整理递牌手的指节与纸边遮挡，纸牌不添文字；衣褶块面和发束更连贯。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-cmtn1wnhhym.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-marchrush",
+      "name": "急行军",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-marchrush.webp",
+      "originalSha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-775ee708-2ad4-4704-b2a5-e966d4e2a913.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-marchrush.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《急行军》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留朝镜头冲来的原透视、体格、前腿和围巾方向，只清理前后腿遮挡，明确前脚足掌与脚踝连接、后腿轮廓。脸部对齐深肤色、金瞳、露额黑背头与左颊缝线疤痕。减少平均速度碎笔，不改动作或机位。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt7-marchrush.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对这张《急行军》插画做极小范围发色修复：黑像是纯黑短背头，头顶没有白毛。只把头顶、发际线与发梢中所有白色、银色和灰白的发束/挑染全部恢复成统一的黑色头发；允许很克制的深蓝黑或深灰黑明暗，不能留白色发束或银白额发。保留原来的露额头、背头轮廓、发量、脸、金瞳、疤痕、肤色、表情、动作、服装、武器、背景、笔触、机位和完整画幅，除头发颜色以外不要改任何部位。不要重设计人物，不添饰物、文字、水印。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-5a9bb0d6-8142-489d-9cd3-9950fe6e00a3.png"
+        ],
+        "reason": "老板明确黑像头顶没有白毛，全部修回黑发"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "first",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-5a9bb0d6-8142-489d-9cd3-9950fe6e00a3.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-bulwark",
+      "name": "坚盾",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-bulwark.webp",
+      "originalSha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-74a7c87f-0d4e-4e73-a1d9-3d24690a534b.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-bulwark.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《坚盾》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留原盾牌、人物站姿、相机和背景。只把一处原有受力接触做清楚：集中少量碎石与亮边，强化盾面厚度和握盾手的连接；其余碎石降低反差。人物肤色体格与脸对齐参考。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt7-bulwark.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对这张《坚盾》插画做极小范围发色修复：黑像是纯黑短背头，头顶没有白毛。只把头顶、发际线与发梢中所有白色、银色和灰白的发束/挑染全部恢复成统一的黑色头发；允许很克制的深蓝黑或深灰黑明暗，不能留白色发束或银白额发。保留原来的露额头、背头轮廓、发量、脸、金瞳、疤痕、肤色、表情、动作、服装、武器、背景、笔触、机位和完整画幅，除头发颜色以外不要改任何部位。不要重设计人物，不添饰物、文字、水印。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-24ad6b8b-dc58-4fc3-96f7-63b9a8751e97.png"
+        ],
+        "reason": "老板明确黑像头顶没有白毛，全部修回黑发"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "first",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-24ad6b8b-dc58-4fc3-96f7-63b9a8751e97.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-ironcharge.webp",
+      "originalSha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-faceff6d-630c-4379-bead-3e6eb5f22c4e.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-ironcharge.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《厉兵秣马》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留坐着磨长剑的完整原构图、剑向、腿和石台。局部强化手、磨石、剑刃接触点与少量火星，剑刃亮边服从该点；脸部和深肤色对齐参考，整理远离焦点的杂碎笔触。不要换成战斗场面。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt7-ironcharge.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对这张《厉兵秣马》插画做极小范围发色修复：黑像是纯黑短背头，头顶没有白毛。只把头顶、发际线与发梢中所有白色、银色和灰白的发束/挑染全部恢复成统一的黑色头发；允许很克制的深蓝黑或深灰黑明暗，不能留白色发束或银白额发。保留原来的露额头、背头轮廓、发量、脸、金瞳、疤痕、肤色、表情、动作、服装、武器、背景、笔触、机位和完整画幅，除头发颜色以外不要改任何部位。不要重设计人物，不添饰物、文字、水印。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-93c7a61e-134a-4cba-82d6-1caca7f902c6.png"
+        ],
+        "reason": "老板明确黑像头顶没有白毛，全部修回黑发"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "first",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-93c7a61e-134a-4cba-82d6-1caca7f902c6.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-fullstrike",
+      "name": "全力一击",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-fullstrike.webp",
+      "originalSha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-dadc75e6-a289-4034-9e9c-b146bb8f590c.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-fullstrike.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《全力一击》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留腾空双手举大剑下劈的动作和低机位。只修画面右下屈腿：膝、小腿、踝与脚掌的遮挡分开，确保两条腿及两只脚各自可追踪；保持强透视和壮硕身材，握柄手与肩臂连接清楚。不是增加腿或改成站姿。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/martial-tt7-fullstrike.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对这张《全力一击》插画做极小范围发色修复：黑像是纯黑短背头，头顶没有白毛。只把头顶、发际线与发梢中所有白色、银色和灰白的发束/挑染全部恢复成统一的黑色头发；允许很克制的深蓝黑或深灰黑明暗，不能留白色发束或银白额发。保留原来的露额头、背头轮廓、发量、脸、金瞳、疤痕、肤色、表情、动作、服装、武器、背景、笔触、机位和完整画幅，除头发颜色以外不要改任何部位。不要重设计人物，不添饰物、文字、水印。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-58fe5ba1-7d30-4a5d-b469-23714d792fb6.png"
+        ],
+        "reason": "老板明确黑像头顶没有白毛，全部修回黑发"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "first",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-58fe5ba1-7d30-4a5d-b469-23714d792fb6.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-arcanebolt",
+      "name": "奥术弹",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-arcanebolt.webp",
+      "originalSha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-9618cdb2-247a-4cdc-9a87-da16355307c0.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-arcanebolt.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《奥术弹》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：原指尖奥术弹、近手、面部机位和背景全保留。主要只改头发：厚侧刘海完整遮住观众视角右眼，观众左侧绿眼可见；不以眨眼代替遮眼，长棕卷发保持。修指尖亮点与手指结构，肤色平静，避免全脸幼态化。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-arcanebolt.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《奥术弹》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-6f0f7ff9-f047-4ca2-b759-cf57c889b817.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《奥术弹》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-97277eca-b1c2-42c6-9e19-44d09b0b864e.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-6f0f7ff9-f047-4ca2-b759-cf57c889b817.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-97277eca-b1c2-42c6-9e19-44d09b0b864e.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-frozenight",
+      "name": "冰封千里",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-frozenight.webp",
+      "originalSha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-894da6d5-0a95-4694-8d03-661bfd54b9b3.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-frozenight.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《冰封千里》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：这是局部修正，严格保留原前景人物、半身大小、施法手势和远处一排冰块；不改成新场景。头部改为白塔现行厚侧刘海遮观众右眼，左绿眼可见。仅在现有冰块底部与背景补少量由近向远的连贯冻结面、简化等距机械边缘，加强冰体前后与冷色反光，原有数量和主布局仍可认出。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-frozenight.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《冰封千里》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-5a12e611-550d-4217-9e7b-d72df0e7a5da.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《冰封千里》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-4c851143-1c42-4c9f-bc4c-56432804e485.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-5a12e611-550d-4217-9e7b-d72df0e7a5da.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-4c851143-1c42-4c9f-bc4c-56432804e485.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-maxsupply",
+      "name": "法力补给",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-maxsupply.webp",
+      "originalSha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-fbe82dcf-0914-4bb9-bcc8-5e699bf7af00.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-maxsupply.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《法力补给》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留坐姿、古书、扶书手与另一手暖光、椅子和镜头。只把白塔现行厚侧刘海盖住观众右眼，左绿眼可见；发束有干净连续曲面。局部清楚书页暖光到手掌的联系，保留原图安静绿金色组。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-maxsupply.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《法力补给》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-346cdc69-35d6-499c-9d02-8459719768db.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《法力补给》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-c4cac9e7-fd6e-4ce2-a72e-cf2947ec52c1.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-346cdc69-35d6-499c-9d02-8459719768db.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-c4cac9e7-fd6e-4ce2-a72e-cf2947ec52c1.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-stratagem",
+      "name": "法师锦囊",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-stratagem.webp",
+      "originalSha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bc3acb24-b9d9-4200-bd99-14b631163a67.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-stratagem.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《法师锦囊》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留坐姿、小袋、展开金色纸带和全部机位方向。主要局部修现行厚侧刘海遮住观众右眼，左绿眼可见；手指与袋口及纸带起点的接触更清楚。金色长纸带仍是原图形体，不变成书阵或新道具。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-stratagem.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《法师锦囊》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8bb61b25-d5f1-417a-b93b-f79c4fbc20a5.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《法师锦囊》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-890662a6-bc04-44d3-8bf9-e9a793528148.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8bb61b25-d5f1-417a-b93b-f79c4fbc20a5.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-890662a6-bc04-44d3-8bf9-e9a793528148.png"
+        }
+      ]
+    },
+    {
+      "id": "tt3-firm-barrier",
+      "name": "坚冰结界",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt3-firm-barrier.webp",
+      "originalSha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-35ec9f8b-019a-414f-ad3a-a25d5287791d.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt3-firm-barrier.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《坚冰结界》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留人物靠近冰墙的原动作、冰墙位置与轮廓、画幅。局部修白塔厚侧刘海遮观众右眼、左绿眼可见；冰墙顶面和侧面用少数大转折明确厚度，外侧轻微受力痕与内侧人物分离。手臂原位置不变。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-firm-barrier.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《坚冰结界》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-34f1cf3a-bd03-4abc-a1ba-146cff1e7f45.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《坚冰结界》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-64c182ec-c1d9-470b-8f5f-b9844ddac74f.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-34f1cf3a-bd03-4abc-a1ba-146cff1e7f45.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-64c182ec-c1d9-470b-8f5f-b9844ddac74f.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-energize",
+      "name": "聚能",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-energize.webp",
+      "originalSha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-energize.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《聚能》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：局部编辑原抱蓝球的图，不换动作不换球。白塔厚侧刘海遮观众右眼、左绿眼可见，发束干净连贯。将蓝球中心最亮部分缩小，保留球体外轮廓和抱持关系，恢复指尖、前臂与衬衫的冷蓝中间调，让少数既有环形亮带向球心收拢，避免一整球爆白。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-energize.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对Image1原卡面《聚能》做保守局部修图，最优先保护原脸：保持原脸型宽度、下颌长度、头部角度和透视、原来可见绿眼的眼型/眼睑弧度/眼球大小位置、鼻口位置与原本平静的微笑，不把脸重新设计，不削下巴，不压扁或缩小眼睛，不加歪嘴，不把脸拉长。只改以下局部：1. 原棕色长卷发的前额增加一片顺原发流的侧刘海，遮住画面右侧眼睛；画面左侧绿眼连同原五官关系原样保留。2. 在画面左侧露眼一侧额发上加两枚小而细长、平行倾斜的金色条形发夹。3. 衣服统一为现有白色高领长袖衬衫与深绿双背带长裙，胸前原蓝宝石整理成领口正中的竖椭圆深蓝宝石、简洁金色托边；背带为两条深绿宽带与小金色矩形扣，不加黑领带、胸前花边围兜或另一款珠宝。只有这几处可修，原脸是锁定区域。保留抱蓝球、双手、蓝光强度、原机位与青色背景，球不要改形。所有身体、道具与构图保持原卡面，沿用原大色面手绘笔触，不重画全图、不过度精描，不增加细发噪点。只输出一张完整修正图。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-energize.webp"
+        ],
+        "reason": "老板否定脸部，回原卡面锁定脸型五官，局部修刘海发夹与统一服装"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": {
+        "source": "C:/Users/太平/.codex/generated_images/01a16883-69e5-77f2-94fb-0c823676537a/exec-fc2bb208-7811-45e6-a883-c40c53dac081.png",
+        "prompt": "以这张指定的《聚能》图为唯一底图做非常小的局部编辑。必须完整保留这张图现有的脸：脸型、下巴、头部倾斜与透视、眼睛大小和眼型、绿色虹膜、眼睑、鼻口位置、嘴角弧度和原表情全部保持；脸部不是编辑区域，不重新设计五官，不改成另一张脸。现有的棕色长卷发形状、遮眼侧刘海、头部轮廓、耳环也保留。只编辑以下两类小区域：一，在画面左侧露出的绿眼上方、侧发的表面补两枚小巧细长金色条形发夹，两根平行稍斜，金属细条而非宽金片，总数两枚，不移动现有发束；二，胸前原蓝宝石保留现在的大小与位置，托框整理成简洁金色竖椭圆边，宝石仍深蓝透明；白色高领衬衫和深绿双背带裙维持原设计，仅在看得见的背带位置补小金色矩形扣，不添加领带、围兜、披肩或其他衣服。被蓝球挡住的背带保持被遮挡，不强行画出来。脸、手、抱球姿势、蓝球、球光、身体、背景、色调、画风、构图和画幅都保持本图原样。不要全图重绘，不要追加五官描线或改眼神，不加文字边框水印。只输出这一张局部修正图。"
+      },
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-fc2bb208-7811-45e6-a883-c40c53dac081.png"
+        },
+        {
+          "stage": "rejected-face",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-83af20e3-ca61-4ef1-bcd5-4679cf6dfc5e.png"
+        }
+      ]
+    },
+    {
+      "id": "cmtn1p9vb5au",
+      "name": "千变万化",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-cmtn1p9vb5au.webp",
+      "originalSha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2a17cd25-ce4e-4eca-a232-1b6ac955c9c0.png",
+      "output": "game/art-source/class-card-local-polish-20261023/cmtn1p9vb5au.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《千变万化》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保持白色碎片、交叉手臂、身体大小、紫色底与原机位；白塔侧刘海遮观众右眼，左绿眼可见。只整理几枚主要碎片的前后关系与手指遮挡，给其中一枚清楚的折叠/变形连续结构；不要增加大量新物件或改分镜。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cmtn1p9vb5au.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《千变万化》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8105bf5a-fe31-4ce9-beb3-c042cf1512c7.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《千变万化》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-ae532721-d0f6-4276-9858-dcec9d8798ec.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8105bf5a-fe31-4ce9-beb3-c042cf1512c7.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-ae532721-d0f6-4276-9858-dcec9d8798ec.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-elementstorm",
+      "name": "元素风暴",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-elementstorm.webp",
+      "originalSha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-15eed2f8-e052-4242-970c-2a21287e8b78.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-elementstorm.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《元素风暴》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留原俯视悬空姿态、头手脚位置、红蓝绿轨迹与暗底。局部修白塔现行遮观众右眼的侧刘海；将现有轨迹收束为少量有厚薄与相互遮挡的色面，保留原流向，减少像电线的细线与无结构碎片，手和脚各自清楚。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-elementstorm.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只局部修《元素风暴》里白塔的头部额发与金色发夹，画面其他部分尽可能保持原样。她的厚侧刘海应覆盖画面右侧的眼睛，画面左侧的绿色眼睛完整可见；在画面左侧、这只露出绿眼上方的侧发上，清楚放置两枚细长金色条形发夹，两根彼此平行略倾斜，小而清晰可辨。不要把金夹放在画面右侧的遮眼刘海上；若那里已有夹子，把它移到画面左侧。金夹总数恰好两枚，不是大片金色块、花饰或发冠。若目前露眼方向反了，只在额发附近校正为右眼被盖、左眼可见，脸型、头的位置与朝向、表情与棕色超长波浪卷发都保留。Image2仅提供遮眼刘海和两枚细夹的身份参照，不搬帽子、站坐姿或书。不能改变手、服装、道具、魔法效果、背景、原有构图、笔触或画幅。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-947448dd-eb6c-4fb4-9689-5e1544fb9585.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp"
+        ],
+        "reason": "老板要求补齐两枚细长金色发夹，露眼一侧，且统一遮眼刘海方向"
+      },
+      "outfitRequest": {
+        "prompt": "只统一Image1《元素风暴》里白塔的胸前服装小区域，不编辑脸和头发。Image2仅作为衣服和蓝宝石胸针款式样本，绝不能取它的脸、发型、姿势、蓝球或光色。统一为：白色长袖高领衬衫，小巧领口、简洁前襟；领口正中一枚竖椭圆深蓝宝石，简洁金色椭圆托边，体积克制；深绿双宽背带长裙，背带上用小金色矩形扣。去掉原图若有的黑领带、领前大花边围兜、星形宝石托或圆按钮式背带扣，仅在原服装对应区域改，不扩大裸露、不改变衣服覆盖范围。被手、道具或发束挡住的胸针/背带自然保持遮挡，不强行显露全部。原脸型、头部透视、眼型、表情、遮一眼的侧刘海、两枚金色发夹、发色、手、身体动作、道具、魔法效果、背景和画幅全部原样保留，尤其禁止重新绘制五官或缩小眼睛。沿原图笔触，只输出一张完整的局部修正图。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-72dbad2d-1b71-4e8c-b365-bf56e77351e1.png",
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png"
+        ],
+        "reason": "老板要求统一蓝宝石胸针及对应衣服设计，锁定脸不改"
+      },
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "before-hairpins",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-947448dd-eb6c-4fb4-9689-5e1544fb9585.png"
+        },
+        {
+          "stage": "before-outfit",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-72dbad2d-1b71-4e8c-b365-bf56e77351e1.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-recruit",
+      "name": "征召",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-recruit.webp",
+      "originalSha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2572003f-c3db-4ee2-ad4d-f84539837527.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-recruit.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《征召》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：保留坐椅喝茶、杯碟和左侧两个小士兵的反差构图，不扩大成军队。只修白塔侧刘海盖住观众右眼、露左绿眼；两名小兵足底与原地面投影、前后位置更清楚，保持其小尺寸；手指与杯柄合理接触。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-recruit.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/baita.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "对Image1原卡面《征召》做保守局部修图，最优先保护原脸：保持原脸型宽度、下颌长度、头部角度和透视、原来可见绿眼的眼型/眼睑弧度/眼球大小位置、鼻口位置与原本平静的微笑，不把脸重新设计，不削下巴，不压扁或缩小眼睛，不加歪嘴，不把脸拉长。只改以下局部：1. 原棕色长卷发的前额增加一片顺原发流的侧刘海，遮住画面右侧眼睛；画面左侧绿眼连同原五官关系原样保留。2. 在画面左侧露眼一侧额发上加两枚小而细长、平行倾斜的金色条形发夹。3. 衣服统一为现有白色高领长袖衬衫与深绿双背带长裙，胸前原蓝宝石整理成领口正中的竖椭圆深蓝宝石、简洁金色托边；背带为两条深绿宽带与小金色矩形扣，不加黑领带、胸前花边围兜或另一款珠宝。只有这几处可修，原脸是锁定区域。保留喝茶坐姿、杯碟、双手、椅子、两名小兵和暖色背景。所有身体、道具与构图保持原卡面，沿用原大色面手绘笔触，不重画全图、不过度精描，不增加细发噪点。只输出一张完整修正图。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-recruit.webp"
+        ],
+        "reason": "老板否定脸部，回原卡面锁定脸型五官，局部修刘海发夹与统一服装"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "rejected-face",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-856b75db-ad82-4c86-993d-1b7bf9a9da1c.png"
+        }
+      ]
+    },
+    {
+      "id": "tt3-petal",
+      "name": "花瓣法阵",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-petal.webp",
+      "originalSha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-efc43242-c010-4eac-b0e3-9c24085b20af.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt3-petal.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《花瓣法阵》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：严格保留原顶视角、人物在花环中央、原双臂姿态及环形整体，不换新分镜。星月为浅金发、金瞳、白神官服深青绿披肩，安静神态，发型对齐身份参考；整理头颈与肩臂的顶视透视。仅调整原花瓣环的疏密和明暗，沿原圆环加少量连续流向与很克制的法阵内外层，保留原粉绿配色，去均匀碎光。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-petal.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": {
+        "prompt": "只修这张《花瓣法阵》中星月的发型：她是浅金色长发，平顺直刘海，低处扎起的单侧长麻花辫，头顶和后脑高处没有高马尾、丸子或发髻。将目前画面右上方明显扎起的高马尾团改回从后颈低处起的一条长辫，沿原来发束所在空间自然铺开；不要增加第二条辫子。Image 2只用作星月发型身份参照，不搬其站姿或星灯。保留原顶视机位、头脸位置与大小、金瞳与沉静表情、衣服、展开的披肩、双手、花环、法阵、光色、画幅及全部其他内容，只改头发扎起的结构。",
+        "references": [
+          "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-ff3d8610-b8a1-49f5-aa58-62217d8a7606.png",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+        ],
+        "reason": "修正星月高马尾偏差为后颈低处单辫"
+      },
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": [
+        {
+          "stage": "first",
+          "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-ff3d8610-b8a1-49f5-aa58-62217d8a7606.png"
+        }
+      ]
+    },
+    {
+      "id": "tt7-silence",
+      "name": "禁言术",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-silence.webp",
+      "originalSha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-7a342e42-27fc-476e-ae11-da49661a3160.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-silence.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《禁言术》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留暗牧星月原伸臂、镜头、紫色长形和背景剪影。局部把原紫色长形与被截断的声纹联系清楚，原几条影子在同一处失去连续性；不新增角色或改成捂嘴。脸与头发对齐暗牧参考的极浅低饱和发色、平直刘海和紫瞳，表情不动声色。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-silence.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/cards/curse-silence.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt13-mind-control",
+      "name": "精神控制",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt13-mind-control.webp",
+      "originalSha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-61f2106e-c8c1-49a2-956a-29579d716d96.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt13-mind-control.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《精神控制》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。 本次允许改变的内容：保留上方白手套提线、下方机械头盔的原构图，不添加星月肖像。仅把手套与头盔改为与原图相融的哑光块面笔触，头盔粉色玻璃降低塑料强光，保留辨识色。提线张力和手指连接清楚，不改变科技头盔设计。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt13-mind-control.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt3-nature-form",
+      "name": "满月形态",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-nature-form.webp",
+      "originalSha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-773a9462-373e-4b85-b6d7-4704dcf621fd.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt3-nature-form.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《满月形态》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：局部编辑：保留星月举起一手、另一手张开、满月在左上以及原机位构图。对齐浅金发、金瞳、平顺刘海、低处单侧长辫与沉静脸，不画两条对称辫。只加强原月光沿抬起手、披肩和衣摆形成一条连贯的冷暖光区，月亮不扩大不移位，不改成变身新场景。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-nature-form.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-provoke",
+      "name": "扰敌",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-provoke.webp",
+      "originalSha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-98af7f79-8825-4acf-b4e5-ad9c94958510.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-provoke.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《扰敌》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留暗牧星月左侧操线与右侧两个小剪影的构图。仅让两个剪影有明确互相攻击方向并与原细线连上，适度加强小目标亮暗差；手指清楚。脸头发对齐暗牧参考，维持沉静，无邪笑，无额外大光效。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-provoke.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/cards/curse-silence.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt3-holy-shield",
+      "name": "圣盾",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-holy-shield.webp",
+      "originalSha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-34f9554e-6b63-4c18-856c-396f7a7aabad.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt3-holy-shield.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《圣盾》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。Image 3只参考干净连贯的发束画法，不借人物、服装、发色、剑或光圈。 本次允许改变的内容：局部修原星月胸前蜂巢光盾，不重设计分镜。保持人物、盾牌横向位置和六边形主结构；金光从全亮改成中央一小处集中、外围透出暗金中间调，盾的弧面厚度与原双手联系明确，脸与手不能被黄光洗掉。仅一处小受力明暗说明防护。星月浅金发金瞳、低处单侧长辫、白裙青绿披肩、沉静神态。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3-holy-shield.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp",
+          "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-holyheal",
+      "name": "圣光治愈",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-holyheal.webp",
+      "originalSha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-27e8c786-585d-4346-b15a-f754b5f83676.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-holyheal.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《圣光治愈》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留胸前双手环抱暖光与闭眼近景。只把两条对称垂辫改成现行单侧编发汇入低处一条粗长辫，保留浅金色、原脸与刘海；清楚五指与胸前光形的遮挡。金光集中且肤色不爆白，不换动作。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-holyheal.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-bloodpotion",
+      "name": "噬血术",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-bloodpotion.webp",
+      "originalSha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-814cc127-8b6d-4ceb-860e-ee5de4eab21b.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-bloodpotion.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《噬血术》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留暗牧星月原胸前红光、红线位置与伸手、背景剪影。局部让红色能量沿既有红线向胸前汇入，明暗和少量尖端方向能读出回流；不要增加血腥或伤口。脸头发按暗牧参考，保持平静。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-bloodpotion.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/cards/curse-silence.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt13-stellar-divination",
+      "name": "星辰占卜",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt13-stellar-divination.webp",
+      "originalSha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-c9764ac2-5549-4158-89e9-7beba647707d.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt13-stellar-divination.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《星辰占卜》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留三张星纹纸牌、手指、脸部机位与背景。局部对齐星月浅金发金瞳、平顺刘海与低处单侧长辫，避免左右对称双辫；指尖与三张牌的前后关系清楚。只用少量原有星点建立牌间联系，不添背景星海。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 优先锁定Image1的脸型、眼型、眼睛大小、头部透视和表情，不因头发或特效修正而重新设计面部。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt13-stellar-divination.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt3sp-shadowshot",
+      "name": "暗影射击",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt3sp-shadowshot.webp",
+      "originalSha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-693a5c83-8c95-4793-b537-8ac9b91d31ba.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt3sp-shadowshot.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《暗影射击》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留侧身伸手、原三条暗影射线、箭尖位置与浅紫底。局部加强箭的前后遮挡和手掌发射起点，脸部对齐男性银灰低髻、尖耳黄瞳；头发曲面连续、安静。勿改成火球，勿新增敌人。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt3sp-shadowshot.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "cmtn1gfhczzj",
+      "name": "厄运",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-cmtn1gfhczzj.webp",
+      "originalSha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b4ec291a-7ed1-4791-a69d-b9ba678659a1.png",
+      "output": "game/art-source/class-card-local-polish-20261023/cmtn1gfhczzj.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《厄运》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留浮空黑方块、指向手、桌面小人和长影的原概念构图。仅集中方块下缘与小人长影的联系，减少不必要的细符号，手指结构和方块透视准确；人物对齐男性银灰低髻、黄瞳尖耳。不要改成另一种诅咒场景。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cmtn1gfhczzj.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "cmtn1ntxzoc4",
+      "name": "火焰形态",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-cmtn1ntxzoc4.webp",
+      "originalSha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8201d62f-5f6c-4c3c-a0da-9a36ad57eb94.png",
+      "output": "game/art-source/class-card-local-polish-20261023/cmtn1ntxzoc4.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《火焰形态》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留人物正面托小火、下半部火墙与帽檐位置。局部压低火墙的均匀碎亮点，明确少数大片火形和衣摆暗轮廓的前后关系；火光映脸有中间调。人物仍是男性银灰低髻、黄瞳尖耳，不画成长发女性或无发髻。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-cmtn1ntxzoc4.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt13-soul-contract",
+      "name": "灵魂契约",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt13-soul-contract.webp",
+      "originalSha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-903a1854-0093-4d40-b4db-583f24a6b0d3.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt13-soul-contract.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《灵魂契约》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留现有人脸近景、右侧小瓶/红线、摊开手、帽子。仅把原小瓶两端红线的张力与手指或身侧暗影的连结说清，保持瓶大小和位置；整理手指。对齐男性银灰低髻与黄瞳尖耳，服装保持黑紫金，不加法杖。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt13-soul-contract.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-abysscurse",
+      "name": "深渊诅咒",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt7-abysscurse.webp",
+      "originalSha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-3f778f62-45f2-4d50-9cc2-8292f4a3706b.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-abysscurse.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《深渊诅咒》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留扶镜站姿、右手黑色拖迹与右下小目标的原分镜。仅让拖迹到目标阴影连贯，目标原位置的黑影有一处明确变形结果，减少飞溅碎线。对齐男性银灰低髻、黄瞳尖耳，脸与手自然。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-abysscurse.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-meteorstrong",
+      "name": "星陨之力",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt7-meteorstrong.webp",
+      "originalSha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bb58f1f7-75ac-44b3-9b8c-50ccde785293.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-meteorstrong.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《星陨之力》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。Image 2只控制人物身份、脸与发型，禁止搬入其站坐姿、背景或道具。 本次允许改变的内容：保留原倾斜人物、大橙色坠落轨迹及右下爆点，禁止换机位重排人物。只将最亮焦点集中在一条主轨迹/原爆点，其余火线降低反差，恢复脸帽和肩臂轮廓。男性银灰低髻黄瞳尖耳，不因倾斜改脸身份。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/spell-tt7-meteorstrong.webp",
+          "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    },
+    {
+      "id": "tt7-darkfort",
+      "name": "黑暗吊坠",
+      "who": "常无欲",
+      "original": "game/assets/cards/equip-tt7-darkfort.webp",
+      "originalSha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-018c5c80-7f73-4a50-aa0e-a42d1e39642f.png",
+      "output": "game/art-source/class-card-local-polish-20261023/tt7-darkfort.webp",
+      "status": "candidate-awaiting-owner-review",
+      "initialRequest": {
+        "prompt": "局部编辑游戏卡面《黑暗吊坠》。Image 1是唯一编辑目标，必须保留其构图、机位、人物动作、主要道具、色板与原画幅比例；不要另起新图或拼贴。 本次允许改变的内容：物件局部优化，保留原悬挂吊坠、链子、紫晶轮廓、深紫背景及居中位置，不加人物。只改善宝石少量明确切面与链扣连接，暗紫大面干净，局部反光有轻重；可在晶内保留一小处异常暗影，提高层次，不加入大场景。 画法沿原图手绘二次元块面厚涂，主要衣褶有结构性折面，脸眼与关键手势清楚，次要区域安静；头发为连贯宽窄发束、干净中间调、顺束长明暗面和少量细线，避免碎色三角片与密集短白线。配饰可选，已有合理配饰可保留但不新增堆饰，不以配饰替代身份。其余区域尽量保持原样。只输出一张无文字、无卡框、无水印的完整修正插画。 锁定Image1的脸型、五官与头部透视，只修指定局部。常无欲是男性，银灰长发脑后低发髻，不得改成女性、高马尾或散发长发角色。",
+        "references": [
+          "D:/素材/代号柒/搜打撤/game/assets/cards/equip-tt7-darkfort.webp"
+        ]
+      },
+      "repair": null,
+      "outfitRequest": null,
+      "selectedBaseRequest": null,
+      "priorCandidates": []
+    }
+  ]
+}

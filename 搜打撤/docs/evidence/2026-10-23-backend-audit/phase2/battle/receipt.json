@@ -1,0 +1,51 @@
+{
+  "status": "candidates_only_no_source_changes",
+  "sourceEdits": [],
+  "lineChanges": {
+    "added": 0,
+    "removed": 0,
+    "productionMoved": 0
+  },
+  "reason": "Active WF-live-repair-1023 owns battle/discovery; root instructed not to implement these candidates.",
+  "validation": {
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false,
+    "syntaxCheckRun": false,
+    "referenceReviewOnly": true
+  },
+  "candidates": [
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "sha256": "d78cf107ccb180de54d81cc214ed8517b3c42a2e2c6ba11687e6dbd97aa8cf70",
+      "bytes": 24113,
+      "lines": 477,
+      "originalSnapshot": "1-combat.factory.js.before.txt",
+      "modified": false
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "sha256": "f9214408a586ea648157f489f4e78942e9518688d7055dd9fdc3efa97bd6ac14",
+      "bytes": 695,
+      "lines": 5,
+      "originalSnapshot": "2-combat.js.before.txt",
+      "modified": false
+    },
+    {
+      "path": "tests/combat.test.js",
+      "sha256": "b15ea9ff2fd0d6349cdd4f0060aa24a8492dc8b1848f4e132fafa0ab8a1dcd71",
+      "bytes": 460,
+      "lines": 12,
+      "originalSnapshot": "3-combat.test.js.before.txt",
+      "modified": false
+    },
+    {
+      "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "sha256": "b4425b75b8f9f291c33af5db24c23a104a2eca7115c19fb1b7ab64890f1e0b7e",
+      "bytes": 12000,
+      "lines": 168,
+      "originalSnapshot": "4-battle.acquire-operation.domain.js.before.txt",
+      "modified": false
+    }
+  ]
+}

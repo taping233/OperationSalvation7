@@ -1,0 +1,102 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman, playing an old upright piano, seated at the keyboard, quiet focused expression, both hands resting naturally on different piano keys, looking down at the keyboard\n\nWide game title-screen wallpaper, a quiet intimate musical moment in a roofless abandoned wooden hall at sunset.\n\nLandscape composition, low three-quarter view from the left end of the keyboard. The old wooden piano occupies the left foreground, its keyboard recedes diagonally toward the woman seated on the right half. Her face, both wrists and both hands are visible. Only one continuous keyboard with orderly black and white keys. A broken roof opens onto luminous clouds above. Keep the outer edges quiet enough for a game menu overlay, no actual interface.\n\nWarm late-afternoon sunlight grazes her pale blonde braid and face, cool muted teal shadows inside the timber hall. Weathered brown wood, cream cloth and deep teal cape, golden rim light, atmospheric depth, restrained dust motes, softly glowing sky, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1235857615,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, split screen, multiple pianos, organ, floating hair ornament, halo, lantern, gloves, extra keyboard, bent piano keys, detached hands, monochrome",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale blonde very long hair in a single thick low braid, straight bangs, gold eyes, calm expression, white crescent moon hairpin clipped flat just above the bangs slightly to the viewers right, white priestess dress with gold edging, dark teal short shoulder cape with gold trim, natural bare hands",
+          "uc": "",
+          "center": {
+            "x": 0.69,
+            "y": 0.61
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, playing an old upright piano, seated at the keyboard, quiet focused expression, both hands resting naturally on different piano keys, looking down at the keyboard\n\nWide game title-screen wallpaper, a quiet intimate musical moment in a roofless abandoned wooden hall at sunset.\n\nLandscape composition, low three-quarter view from the left end of the keyboard. The old wooden piano occupies the left foreground, its keyboard recedes diagonally toward the woman seated on the right half. Her face, both wrists and both hands are visible. Only one continuous keyboard with orderly black and white keys. A broken roof opens onto luminous clouds above. Keep the outer edges quiet enough for a game menu overlay, no actual interface.\n\nWarm late-afternoon sunlight grazes her pale blonde braid and face, cool muted teal shadows inside the timber hall. Weathered brown wood, cream cloth and deep teal cape, golden rim light, atmospheric depth, restrained dust motes, softly glowing sky, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale blonde very long hair in a single thick low braid, straight bangs, gold eyes, calm expression, white crescent moon hairpin clipped flat just above the bangs slightly to the viewers right, white priestess dress with gold edging, dark teal short shoulder cape with gold trim, natural bare hands",
+              "centers": [
+                {
+                  "x": 0.69,
+                  "y": 0.61
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, split screen, multiple pianos, organ, floating hair ornament, halo, lantern, gloves, extra keyboard, bent piano keys, detached hands, monochrome",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.69,
+                  "y": 0.61
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "game/assets/reconstruction/wallpaper-xingyue-piano-1020.webp",
+      "sha256": "5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393",
+      "role": "theme and composition",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "role": "current character identity",
+      "uploaded_to_nai": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-piano-reset-1024\\nai5-draft.png",
+  "seed": 1235857615,
+  "sha256": "c8091806bd8f8a2c74ea9b746470576cf396fa5b6774469e3d28d6c3f7522bd5"
+}

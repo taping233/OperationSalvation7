@@ -1,0 +1,1401 @@
+{
+  "scope": "game/src/**/*.js, game/data/**/*.json, game/css/**/*.css, game/index.html; static tokens/calls/properties and mapped emoji; dynamic unresolved paths require further consumer tracing",
+  "hitLines": 91,
+  "hitFiles": 44,
+  "hits": [
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "line": 53,
+      "kinds": [
+        "property"
+      ],
+      "context": "CARD_BACKS: [{ id: 'classic', name: '行囊粗布', icon: 'cards', from: '默认卡背' }] });"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "line": 245,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 抽了 ${got} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "line": 288,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽取传说卡【<b>${esc(got.name)}</b>】${got.type === '道具' ? '置入道具栏' : '置入手牌'}`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "line": 192,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 【${esc(e.card.name)}】需要先有一张手牌可选，技能次数未消耗`, 'warn');"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "line": 217,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>${esc(e.card.name)}</b>：随机获取 ${got.length} 张卡牌${got.length ? `（${got.map(esc).join('、')}）` : ''}`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "line": 13,
+      "kinds": [
+        "property"
+      ],
+      "context": "'法师': { kind: 'acquire',  name: '搜刮', icon: 'cards',  cost: 1, needsTarget: false,"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "line": 403,
+      "kinds": [
+        "token"
+      ],
+      "context": "G.log(`[[icon:cards]] 开发者：获得【${esc(card.name)}】（当前战斗临时卡）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "line": 419,
+      "kinds": [
+        "token"
+      ],
+      "context": "G.log(`[[icon:cards]] 开发者：抽了 <b>${n}</b> 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.domain.js",
+      "line": 46,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 【${esc(card.name)}】尚未满足施放条件，保留在手牌中`, 'warn');"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.domain.js",
+      "line": 183,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (moved && instanceRuntime.G?.battleActive) instanceRuntime.G.log(`[[icon:cards]] 从牌库抽取 ${moved} 张【${esc(type)}】牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 191,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (n > 0 && instanceRuntime.unyieldRune) { const g = drawCards(1); instanceRuntime.G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 509,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>阿猫的礼物</b>：获得【<b>${esc(o ? o.card.name : '?')}</b>】置入手牌（战斗内临时卡，战后消散）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 598,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>法师锦囊</b>：从背包 pouch 载入 ${entry.card._pouch.length} 张法术`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 341,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 ${recastTimes} 次`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 350,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果再触发 ${replay.times} 次`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 428,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 【${esc(card.name)}】保留在手牌中（无法用于注能）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 432,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 手牌已满，【${esc(card.name)}】回到弃牌堆`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "line": 42,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${handSize}/6）${spells ? `，其中 ${spells} 张法术回复 ${healAmount} 血` : ''}`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "line": 56,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：当前没有符合本场战斗规则的随机卡牌`, 'warn');"
+    },
+    {
+      "file": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "line": 66,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：随机获得 ${uids.length} 张临时卡牌（下个回合开始时消耗）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "line": 317,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>99</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "line": 437,
+      "kinds": [
+        "token"
+      ],
+      "context": "? `[[icon:cards]] <b>牌盒即牌库</b>：${instanceRuntime.drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费`"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "line": 438,
+      "kinds": [
+        "token"
+      ],
+      "context": ": `[[icon:cards]] 牌库编成：${instanceRuntime.opts.directBossStart ? '自动编入' : '自选'} ${instanceRuntime.sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${instanceRuntime.drawPile.length}</b> 张 ·"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 652,
+      "kinds": [
+        "token"
+      ],
+      "context": "? `[[icon:cards]] <b>${esc(card.name)}</b>：牌库上限在开战前编组阶段生效，战斗中 +${operation.n} 不追溯扩容`"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 653,
+      "kinds": [
+        "token"
+      ],
+      "context": ": `[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗不使用 BOSS 编组上限，牌库上限 +${operation.n} 不改变本场牌数`, 'dim');"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 691,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 本次入手 ${spellsGained} 张法术 → 回复 ${amount} 点生命`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 760,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：目标身负 ${kinds} 种诅咒，抽 ${kinds} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 766,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：从牌库抽取 ${got} 张【${esc(want)}】牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 770,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "line": 826,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.domain.js",
+      "line": 175,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 手牌中没有${job.type ? `「${esc(job.type)}」` : ''}卡牌可选，该效果跳过`, 'warn');"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.domain.js",
+      "line": 190,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.domain.js",
+      "line": 267,
+      "kinds": [
+        "token"
+      ],
+      "context": "instanceRuntime.G.log(`[[icon:cards]] 复制了手牌中的【<b>${esc(entry.card.name)}</b>】（置入手牌，原牌保留）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "line": 68,
+      "kinds": [
+        "token"
+      ],
+      "context": "else log(`[[icon:cards]] <b>${esc(card.name)}</b>：牌库底没有可取的卡牌`, 'dim');"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "line": 141,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-flow.js",
+      "line": 216,
+      "kinds": [
+        "token"
+      ],
+      "context": "output.log(`[[icon:cards]] 其余的【<b>${esc(option.name)}</b>】置入手牌`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "line": 88,
+      "kinds": [
+        "token"
+      ],
+      "context": "ports.log('[[icon:cards]] 当前没有符合本场战斗规则的随机卡牌', 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "line": 95,
+      "kinds": [
+        "token"
+      ],
+      "context": "ports.log('[[icon:cards]] 当前没有符合本场战斗规则的随机卡牌', 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "line": 102,
+      "kinds": [
+        "token"
+      ],
+      "context": "ports.log(`[[icon:cards]] <b>${ports.esc(card.name)}</b>：获得【${ports.esc(selected.name)}】${operation.act === 'zeroCost' ? '（0 费）' : ''}`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "line": 162,
+      "kinds": [
+        "token"
+      ],
+      "context": "ports.log(`[[icon:cards]] <b>${ports.esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${ports.getHandSize()}/${operation.untilHandN}）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "line": 20,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "line": 76,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 牌库上限 +${m[1]}（BOSS 编组时生效）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "line": 221,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 获得【<b>${esc(c.name)}</b>】，其费用已变为 0`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "line": 59,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：洗入后抽了 ${got} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "line": 74,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：将 ${count} 张【${esc(tpl.name)}】置入手牌（战斗内临时卡，战后消散）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "line": 93,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：获得 ${count} 张【${esc(tpl.name)}】（置入手牌）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "line": 193,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张），其中 ${spells} 张法术 → 回复 ${healedN * spells} 血`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "line": 195,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "line": 209,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 复制了手牌中的【<b>${esc(tpl.card.name)}</b>】（置入手牌）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "line": 288,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (got.length) log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：随机获取 ${got.length} 张招式（${got.map(esc).join('、')}）`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "line": 88,
+      "kinds": [
+        "token"
+      ],
+      "context": "? `[[icon:cards]] ${name}：抽了 ${drawn} 张牌（直到手牌有 ${target} 张，当前 ${instanceRuntime.hand.length} 张）`"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "line": 89,
+      "kinds": [
+        "token"
+      ],
+      "context": ": `[[icon:cards]] ${name}：无牌可抽（目标手牌 ${target} 张，当前 ${instanceRuntime.hand.length} 张）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "line": 423,
+      "kinds": [
+        "token"
+      ],
+      "context": "deps.log(`[[icon:cards]] <b>${deps.esc(card.name)}</b>：复制了手牌中的【<b>${deps.esc(entry.card.name)}</b>】`, 'loot');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "line": 40,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${m.m[2] && m.m[2] !== '牌' ? m.m[2] : ''}牌打出`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "line": 47,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 从手牌选择 <b>1</b> 张复制（原牌保留）`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "line": 145,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${got} 张牌`, 'sys');"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "line": 66,
+      "kinds": [
+        "token"
+      ],
+      "context": "log('[[icon:cards]] 最后一张手牌条件：手牌已空时整卡效果触发 2 次（出牌结算判定）', 'sys');"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "line": 90,
+      "kinds": [
+        "token"
+      ],
+      "context": "showBattleDecision('[[icon:cards]] 剩余牌库', html, true, snapshot);"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "line": 348,
+      "kinds": [
+        "token"
+      ],
+      "context": "showBattleDecision(`[[icon:cards]] ${paymentLabel}`, battleHandSelectBodyHTML({ pool, handSelecting, cardHTML:(card,size) => SDT.Cards.cardHTML(card,size) }), 'discover', snapshot);"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "line": 531,
+      "kinds": [
+        "token"
+      ],
+      "context": "<div class=\"battle-hand-page-position\" role=\"status\" aria-live=\"polite\"><span class=\"battle-control-icon\" aria-hidden=\"true\">[[icon:cards]]</span><span class=\"battle-control-value\"><b>${handPage + 1}</b><span>/${handPages}</span></span></div>"
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "line": 204,
+      "kinds": [
+        "property"
+      ],
+      "context": "{ id: 'classic', name: '行囊粗布', icon: 'cards',   from: '默认卡背' },"
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "line": 146,
+      "kinds": [
+        "call"
+      ],
+      "context": "if (drawN > 0) kwArr.push(`<span class=\"kw-draw\" title=\"从本场牌库抽 ${drawN} 张牌\">${SDT.Icons.img('cards')}抽 ${drawN}</span>`);"
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "line": 43,
+      "kinds": [
+        "property"
+      ],
+      "context": "{ k: 'drawTxt', label: '抽牌', icon: 'cards',  tpl: n => `抽 ${n} 张牌。`, sen: /抽\\s*\\d+\\s*张牌[^。；;]*。?/, cnt: /抽\\s*(\\d+)\\s*张牌/, max: 5 },"
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "line": 862,
+      "kinds": [
+        "bitmap"
+      ],
+      "context": "\"ui/icons/cards.png\","
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "line": 51,
+      "kinds": [
+        "property"
+      ],
+      "context": "UI.showOverlay('法师锦囊', containerStoreHTML({ title: '法师锦囊', icon: 'cards', prefix: 'pouch',"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "line": 71,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log(`[[icon:cards]] 锦囊装不下整叠：已有 ${result.storedCount}/${result.capacity} 张，本次 ${result.count} 张`, 'warn');"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "line": 77,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】存入法师锦囊`, 'ok');"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "line": 91,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log(`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】已从锦囊取出`, 'ok');"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "line": 197,
+      "kinds": [
+        "token"
+      ],
+      "context": "${o.card.id === 'tt7-stratagem' ? '<button class=\"ov-btn ok\" data-act=\"pouchStore\">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>' : ''}"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "line": 286,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class=\"ov-btn ok\" data-act=\"pouchStoreZoom\">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');"
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "line": 151,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.showOverlay('[[icon:cards]] 卡牌是消耗品', `"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "line": 108,
+      "kinds": [
+        "token"
+      ],
+      "context": "<h2>[[icon:cards]] 卡牌制作坊</h2>"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "line": 294,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log(`[[icon:cards]] 卡牌【<b>${esc(card.name)}</b>】已${wasEditing ? '更新' : '收入照相馆'}`, 'ok');"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "line": 267,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "line": 275,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');"
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "line": 324,
+      "kinds": [
+        "token"
+      ],
+      "context": "else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');"
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "line": 350,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log(`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');"
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "line": 22,
+      "kinds": [
+        "token"
+      ],
+      "context": "return [reward.wood ? `[[icon:wood]] 木材 ×${reward.wood}` : '', reward.rations ? `[[icon:bread]] 口粮 ×${reward.rations}` : '', reward.keys ? `[[icon:key]] 钥匙 ×${reward.keys}` : '', reward.card ? `[[icon:cards]] ${esc(card?.name || '稀有卡牌')}` : '', back ? `[[icon:cards]] 卡背 · ${esc(back.name)}` : ''].filter(Boolean).map(item => `<span>${item}</span>`).join('') || '<span>成就纪念</span>';"
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "line": 268,
+      "kinds": [
+        "token"
+      ],
+      "context": "cards.forEach(c => parts.push(`[[icon:cards]] 【${c.card.name}】`));"
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "line": 271,
+      "kinds": [
+        "token"
+      ],
+      "context": "parts.push(`[[icon:cards]] 卡背【${bd ? bd.name : a.back}】`);"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "line": 43,
+      "kinds": [
+        "token"
+      ],
+      "context": "nodeShell({ tone:'event', asset:PRESENTATIONS[record.eventId].asset, icon:'[[icon:cards]]', title:'已领取，尚未保存',"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "line": 76,
+      "kinds": [
+        "token"
+      ],
+      "context": "tone:'event', asset:spec.asset, icon:'[[icon:cards]]', title:spec.title, sub:spec.sub,"
+    },
+    {
+      "file": "game/src/run/game-session-departure.js",
+      "line": 172,
+      "kinds": [
+        "token"
+      ],
+      "context": "log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "line": 183,
+      "kinds": [
+        "token"
+      ],
+      "context": "${on ? '[[icon:check]]' : '[[icon:cards]]'} ${esc(s2.card.name)} ×${s2.count}${on ? '（已选）' : ''}</button>`;"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "line": 449,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (pool.length) { const c = pool[ri(pool.length)]; game.cardBox.push({ ...c }); UI.log(`[[icon:cards]] 宝箱开出【${esc(c.name)}】入牌盒`, 'loot'); }"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "line": 110,
+      "kinds": [
+        "token"
+      ],
+      "context": "<button class=\"ov-btn cls2-pool-btn\" data-act=\"clsPool\" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>`"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "line": 191,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (!c) return '<div class=\"pv-empty\">[[icon:cards]]</div><p class=\"pv-hint\">选择卡牌查看</p>';"
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "line": 16,
+      "kinds": [
+        "token"
+      ],
+      "context": "if (!game.ownedCards?.length) { UI.log('[[icon:cards]] 还没有随身卡牌，先开一局再试', 'warn'); return; }"
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "line": 519,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log('[[icon:cards]] 背包中没有可转换的招式或装备卡', 'warn');"
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "line": 658,
+      "kinds": [
+        "token"
+      ],
+      "context": "UI.log('[[icon:cards]] 黑市货架无法生成完整的三张奖品', 'warn');"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "line": 466,
+      "kinds": [
+        "token"
+      ],
+      "context": "<div class=\"shop-heading\"><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2></div>"
+    }
+  ],
+  "assets": [
+    {
+      "file": "game/assets/ui/icons/archive.png",
+      "bytes": 508,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "d32cbf80a3711a5efe06187d405221fc405c3610b73c77239356130f02542b2c"
+    },
+    {
+      "file": "game/assets/ui/icons/arrow.png",
+      "bytes": 430,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "306a2ab2004d7bac42784d86d342d788996d57bbcb8b78e22ca5822f460fcb36"
+    },
+    {
+      "file": "game/assets/ui/icons/bag.png",
+      "bytes": 526,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "ed06218126a752969986aca2608e4dc1fd96df712f1995fca4cb70570ad8f4b0"
+    },
+    {
+      "file": "game/assets/ui/icons/blood.png",
+      "bytes": 808,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "6ddba11e7853e51c3da6f886618da4372c5c74cc00369644f3e649093ed97b9d",
+      "pixelSha256": "f26f16bc70688e5c2046a071d7d120743ded60bf44c9128a31aea3b4b5723754"
+    },
+    {
+      "file": "game/assets/ui/icons/bolt.png",
+      "bytes": 688,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "0ca5191ee356ee03cc8dd07abd1bc494e51ea946cd3fa2ba8471a69600412da0",
+      "pixelSha256": "4b1041ec434bdec3c639d2e28ec38eddcff94dbeff445a03c02029ffc75dba62"
+    },
+    {
+      "file": "game/assets/ui/icons/book.png",
+      "bytes": 523,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "34c26c667247a4fc2d6d514eef468f0c1401557fe88147bcbc66a17f1ea6906a"
+    },
+    {
+      "file": "game/assets/ui/icons/bread.png",
+      "bytes": 696,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "7cdddae2a97fdaed625152758fd52223729e7f5f588347b1a7dde4fcd5a6a177",
+      "pixelSha256": "5b38bc25afd86a0f9a8f49e5ab24b9a769e47646a75e63bcf654dc013b217880"
+    },
+    {
+      "file": "game/assets/ui/icons/broken.png",
+      "bytes": 811,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "b393bf324f5754ef776b1079437212d48193e7d1d11eb7590f3bc4a1fa7dc2ce",
+      "pixelSha256": "4599d20af2ac96a61c80447f75f4cec75b8e8df5e2a3774ca0d3eb7c80451f95"
+    },
+    {
+      "file": "game/assets/ui/icons/broom.png",
+      "bytes": 678,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "5a0503f00a16dfcc4111b0f6d17c3e52250ea4175d6eb36088758d09f00c5224"
+    },
+    {
+      "file": "game/assets/ui/icons/cards.png",
+      "bytes": 523,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "34c26c667247a4fc2d6d514eef468f0c1401557fe88147bcbc66a17f1ea6906a"
+    },
+    {
+      "file": "game/assets/ui/icons/check.png",
+      "bytes": 563,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "199b401c7cb96fc8b1e701facc8bcbc79ad9cd1965dea0b359eb838c35886bb7",
+      "pixelSha256": "c670759539d8aa3cf3e7401df594bb751b265620dbe4dde87a356390b0360674"
+    },
+    {
+      "file": "game/assets/ui/icons/coin.png",
+      "bytes": 28404,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "39b56fb0c48547b69733cdb3ddf3be052c9b770e481c7a241f028e6fa3c6c996",
+      "pixelSha256": "ff5424d32aa9b6cd76acc614505a524d3571e76b02d10bdd9b1611486f042758"
+    },
+    {
+      "file": "game/assets/ui/icons/cross.png",
+      "bytes": 645,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e1c88cd7a202f77ddc6c44a84ec5a281e83fc7afc44c246895fa817d3a568451",
+      "pixelSha256": "1f7d4779f096b01f2292f0754e74c300e3c36bc9ced967292242cef5bfb41c62"
+    },
+    {
+      "file": "game/assets/ui/icons/crystal.png",
+      "bytes": 1029,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "pixelSha256": "f3d9927c6fd6139816b5bca8e0f6064563e6386f1af170fbc696dfba6a9e4b82"
+    },
+    {
+      "file": "game/assets/ui/icons/demon.png",
+      "bytes": 1173,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a9f278ec0a763ee77157b17227b8b28cccd8beb6c6dd220f0b874c7c2d031cc4",
+      "pixelSha256": "adc60d9c769989c51c5957d664b9be3c97282b64a0f4882d4b9f7b260fa01cd8"
+    },
+    {
+      "file": "game/assets/ui/icons/dice.png",
+      "bytes": 554,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "adb3ccdfa1ea9379646f6831607464b6e61937519055bb4fafdc63323a6ca5dd",
+      "pixelSha256": "969d581f728d84f098c1d6b0f4e652433f364b13df80d5f449afa441e25b4fe0"
+    },
+    {
+      "file": "game/assets/ui/icons/door.png",
+      "bytes": 538,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "pixelSha256": "e65b75853a033f2948e501de7eee00792dcca040c3273733a722fb131adb4f5b"
+    },
+    {
+      "file": "game/assets/ui/icons/download.png",
+      "bytes": 521,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a14c5e985f06e9ac82adb533aa952112d1ca7ce8bfc07f2e61d1cc837886ec6d",
+      "pixelSha256": "56b8b45aa7098a1db9d2bf51aca365536886e493cde783609c6caaee14ddd31d"
+    },
+    {
+      "file": "game/assets/ui/icons/exit.png",
+      "bytes": 430,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "306a2ab2004d7bac42784d86d342d788996d57bbcb8b78e22ca5822f460fcb36"
+    },
+    {
+      "file": "game/assets/ui/icons/fire.png",
+      "bytes": 922,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "dfb7af696cfd2a889279feb682f13cc865b06a3c8a000828c7945207ee7246a1",
+      "pixelSha256": "9516eeabaaf9fb856bea8ee76ddacabec81d9648be55226483ff5007357f57e6"
+    },
+    {
+      "file": "game/assets/ui/icons/flag.png",
+      "bytes": 576,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "920a0ba3bace2c9bb540710819bfa977dec33f36e9e91be526e4a4a71aeb5e96",
+      "pixelSha256": "28a682487dd506a7f20e8eb8c75343a955af989655c7e9eb26e40b162068802d"
+    },
+    {
+      "file": "game/assets/ui/icons/flask.png",
+      "bytes": 756,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "f31ac7bac8befa5e3c6a2d677388a487a77b43116e1885d6098ae03a5e315372",
+      "pixelSha256": "5c222eb360cb052d4639c4291790a88478a3978edc92053f67af1d63863d325e"
+    },
+    {
+      "file": "game/assets/ui/icons/folder.png",
+      "bytes": 508,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "d32cbf80a3711a5efe06187d405221fc405c3610b73c77239356130f02542b2c"
+    },
+    {
+      "file": "game/assets/ui/icons/gear.png",
+      "bytes": 17639,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "7fbef9f84edbc9e948e6a7a4779c835954002da3603a5bc00e80c74a0b951473",
+      "pixelSha256": "267d2b9badfa6883a772cf49224492e391102d0dd80f73a6801ba19a264c0ed5"
+    },
+    {
+      "file": "game/assets/ui/icons/gem.png",
+      "bytes": 1029,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "pixelSha256": "f3d9927c6fd6139816b5bca8e0f6064563e6386f1af170fbc696dfba6a9e4b82"
+    },
+    {
+      "file": "game/assets/ui/icons/heart.png",
+      "bytes": 602,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3698053f2689d511a0f63db8e1a4aad7582d0cdebfe8c2597d4396f59adef6eb",
+      "pixelSha256": "b22fd2603cba1bc2ea26c958abbe41e6bb23b56729482f0f456813a3464a4dcf"
+    },
+    {
+      "file": "game/assets/ui/icons/helmet.png",
+      "bytes": 802,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "9db7fd8fd27e2200efdb4ac0971bdcdfe00b31658e415bd1be43f90d032f2e2d"
+    },
+    {
+      "file": "game/assets/ui/icons/home.png",
+      "bytes": 538,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "pixelSha256": "e65b75853a033f2948e501de7eee00792dcca040c3273733a722fb131adb4f5b"
+    },
+    {
+      "file": "game/assets/ui/icons/hourglass.png",
+      "bytes": 768,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "pixelSha256": "9488f5aed0c74fb72c4f913e04a652ea521ac638c1eeef7ef4393da206d0fd45"
+    },
+    {
+      "file": "game/assets/ui/icons/key.png",
+      "bytes": 733,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9ed823ab9b14bfd1b0a1c12f6fe8bae1cf6683e345e3df024e138a86dce13e31",
+      "pixelSha256": "28e0b5cbdfbf765625e07603139a1d559acb9d60edec782a1e088c2322f93f7c"
+    },
+    {
+      "file": "game/assets/ui/icons/lantern.png",
+      "bytes": 664,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "pixelSha256": "69fa3fa9d2300305f38dc937b0cad5ce921625bb21aca84188c0dfdcb4ca973f"
+    },
+    {
+      "file": "game/assets/ui/icons/lock.png",
+      "bytes": 586,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "691b10a542e041ff97d5ddf9e39742a5d33feef8485a3ac5d8a273458f9e3ab6",
+      "pixelSha256": "67187cc2ac2190476cbce725dcea3e6ca845ea58be903c892580b83702297b84"
+    },
+    {
+      "file": "game/assets/ui/icons/map.png",
+      "bytes": 794,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "8c24b879b817db55351ee7b89b11f7b5df81deaf579c2ead8c0d5dcc5afeac4e",
+      "pixelSha256": "a0da16f1be371c1937749a175911bc4fe81219b55464cb05bd8504f686f382fb"
+    },
+    {
+      "file": "game/assets/ui/icons/medal.png",
+      "bytes": 869,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "007d3e0fa06dbff5b9ea0ea92893aa72d01ee70881b01b8f3c23c17f78b57d38",
+      "pixelSha256": "ecdc8ae8ee114b5e1be0de29f0f335f9470c01361a8cd9ca1c7ca175d28f0f5b"
+    },
+    {
+      "file": "game/assets/ui/icons/mouse.png",
+      "bytes": 768,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "pixelSha256": "9488f5aed0c74fb72c4f913e04a652ea521ac638c1eeef7ef4393da206d0fd45"
+    },
+    {
+      "file": "game/assets/ui/icons/notes.png",
+      "bytes": 523,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "34c26c667247a4fc2d6d514eef468f0c1401557fe88147bcbc66a17f1ea6906a"
+    },
+    {
+      "file": "game/assets/ui/icons/paw.png",
+      "bytes": 900,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "29264104d179f63a43a42a8f00f81f490c015f4d7c0cf755a6e439499d98483e",
+      "pixelSha256": "78e1203ea0026f0a4e2eb9acab75f97733b87215f16d376b2b35967aef0d8cfa"
+    },
+    {
+      "file": "game/assets/ui/icons/pen.png",
+      "bytes": 678,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "5a0503f00a16dfcc4111b0f6d17c3e52250ea4175d6eb36088758d09f00c5224"
+    },
+    {
+      "file": "game/assets/ui/icons/plate.png",
+      "bytes": 802,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "9db7fd8fd27e2200efdb4ac0971bdcdfe00b31658e415bd1be43f90d032f2e2d"
+    },
+    {
+      "file": "game/assets/ui/icons/play.png",
+      "bytes": 508,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "pixelSha256": "f3a7f69de4d6fbb60dbfc15226a58f64fab507e5b8233705996a10a8b38ebc2c"
+    },
+    {
+      "file": "game/assets/ui/icons/pocket.png",
+      "bytes": 526,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "ed06218126a752969986aca2608e4dc1fd96df712f1995fca4cb70570ad8f4b0"
+    },
+    {
+      "file": "game/assets/ui/icons/pouch.png",
+      "bytes": 526,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "ed06218126a752969986aca2608e4dc1fd96df712f1995fca4cb70570ad8f4b0"
+    },
+    {
+      "file": "game/assets/ui/icons/question.png",
+      "bytes": 632,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "b266bc5695dec96b9d3805f59bae79b2fa49ea2c8aab037b804099cc66b5a604",
+      "pixelSha256": "a7d2815f395b978f0e5b23831026ca7bb453f020fc4ae5067b5d4a00d5e031c2"
+    },
+    {
+      "file": "game/assets/ui/icons/recycle.png",
+      "bytes": 1006,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "bb1bd84ed2927f5567c70b415838308c8e6ef0423ac67a77fcb2092952015084",
+      "pixelSha256": "cc9aa872100e3fa33f1e7d1fa616d4abb40dc8dd9cb413d6f9af1ebee2746c6c"
+    },
+    {
+      "file": "game/assets/ui/icons/runner.png",
+      "bytes": 724,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a9ca3f1a55cc1618f003075647a9198fe0e94f4c973716b490eedf6b2bded7db",
+      "pixelSha256": "ae9a78645f239cb163e1d84040ae3b49c8c3eb4f55d24be5fce3bede5e6e6fff"
+    },
+    {
+      "file": "game/assets/ui/icons/save.png",
+      "bytes": 523,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "34c26c667247a4fc2d6d514eef468f0c1401557fe88147bcbc66a17f1ea6906a"
+    },
+    {
+      "file": "game/assets/ui/icons/scroll.png",
+      "bytes": 523,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "34c26c667247a4fc2d6d514eef468f0c1401557fe88147bcbc66a17f1ea6906a"
+    },
+    {
+      "file": "game/assets/ui/icons/settings-gear-r2.webp",
+      "bytes": 7822,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a05f9465286915b601a17e4a87db5bef78f4372d634d62da37ecebc4e412c462",
+      "pixelSha256": "4c47a4f3983830bf10f00a24995a3fcf1c60e28c0c528a25c4c9c1eab8ec58fd"
+    },
+    {
+      "file": "game/assets/ui/icons/shield.png",
+      "bytes": 802,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "9db7fd8fd27e2200efdb4ac0971bdcdfe00b31658e415bd1be43f90d032f2e2d"
+    },
+    {
+      "file": "game/assets/ui/icons/skip.png",
+      "bytes": 508,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "pixelSha256": "f3a7f69de4d6fbb60dbfc15226a58f64fab507e5b8233705996a10a8b38ebc2c"
+    },
+    {
+      "file": "game/assets/ui/icons/skull.png",
+      "bytes": 878,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "cdf7e473530e9b693431dee7b86f440e4d7396c670b7be1b909550b73aad3fd2",
+      "pixelSha256": "4770cf3a5da25ac5d0ff02f2be4c2735280d05b43f103be3c40eb292dae2eea1"
+    },
+    {
+      "file": "game/assets/ui/icons/slime.png",
+      "bytes": 745,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "8d0c614cea2b06ec28ee55124c37dcad8c72f40e4b26eda3bd18dd9d18e356fb",
+      "pixelSha256": "854bb0c4001b08065e0e5c840fe5700943f499cf324d91e93361aa812170dc9b"
+    },
+    {
+      "file": "game/assets/ui/icons/sparkles.png",
+      "bytes": 664,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "pixelSha256": "69fa3fa9d2300305f38dc937b0cad5ce921625bb21aca84188c0dfdcb4ca973f"
+    },
+    {
+      "file": "game/assets/ui/icons/sword.png",
+      "bytes": 563,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1639b937b924d9e8bddf1e0a759b5965617570b756eee40c72b7bda81957eee",
+      "pixelSha256": "6eba403ede40d677e5c5d9558eba209a24ee06b21c8f5ee98f82bef0662bc49b"
+    },
+    {
+      "file": "game/assets/ui/icons/swords.png",
+      "bytes": 882,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a187cc96e25f34c4e5508681a798fbb59e239f7638e23b56d201dbc2bf6b8e06",
+      "pixelSha256": "15a9ac7f65d3386c52951fb51f000353b370b0dd17c8230c5552d768a3596c8c"
+    },
+    {
+      "file": "game/assets/ui/icons/tools.png",
+      "bytes": 678,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "5a0503f00a16dfcc4111b0f6d17c3e52250ea4175d6eb36088758d09f00c5224"
+    },
+    {
+      "file": "game/assets/ui/icons/trash.png",
+      "bytes": 508,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "d32cbf80a3711a5efe06187d405221fc405c3610b73c77239356130f02542b2c"
+    },
+    {
+      "file": "game/assets/ui/icons/trophy.png",
+      "bytes": 976,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "97fe3b2c1ad22125565320b198a87c0feb9ed64ff069df7f64380bbb829b066c",
+      "pixelSha256": "8ad3c35281d96b5280d8b4f9425d9e49ed7f8c09b098ee8d6d1203fc9410ebb5"
+    },
+    {
+      "file": "game/assets/ui/icons/unlock.png",
+      "bytes": 542,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "12aede0159feb6de705befbe8e6497df3e7389025e76151b6aa5639ebcf3bffa",
+      "pixelSha256": "2976583b8a70facd9d8e32302faca49d242dad4b6479a521aa2fb4fb3703aca3"
+    },
+    {
+      "file": "game/assets/ui/icons/upload.png",
+      "bytes": 430,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "306a2ab2004d7bac42784d86d342d788996d57bbcb8b78e22ca5822f460fcb36"
+    },
+    {
+      "file": "game/assets/ui/icons/wood.png",
+      "bytes": 416,
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "ca93425aa9cf18f6b53272d1cccf288ac558ee31352783a479738d6213c94791",
+      "pixelSha256": "81723995749324be8f1b3eb7de8b12f5db0544c9d17da85e470cc836e593bdd9"
+    }
+  ],
+  "identicalPixelGroups": [
+    [
+      "archive.png",
+      "folder.png",
+      "trash.png"
+    ],
+    [
+      "arrow.png",
+      "exit.png",
+      "upload.png"
+    ],
+    [
+      "bag.png",
+      "pocket.png",
+      "pouch.png"
+    ],
+    [
+      "book.png",
+      "cards.png",
+      "notes.png",
+      "save.png",
+      "scroll.png"
+    ],
+    [
+      "broom.png",
+      "pen.png",
+      "tools.png"
+    ],
+    [
+      "crystal.png",
+      "gem.png"
+    ],
+    [
+      "door.png",
+      "home.png"
+    ],
+    [
+      "helmet.png",
+      "plate.png",
+      "shield.png"
+    ],
+    [
+      "hourglass.png",
+      "mouse.png"
+    ],
+    [
+      "lantern.png",
+      "sparkles.png"
+    ],
+    [
+      "play.png",
+      "skip.png"
+    ]
+  ]
+}

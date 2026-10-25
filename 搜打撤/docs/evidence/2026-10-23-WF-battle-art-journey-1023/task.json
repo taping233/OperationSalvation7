@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-art-journey-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "按老板最新纠偏，停止生图及候选接入，完成非生图过场与冗余文字整改",
+  "paths": [
+    "game/src/ui/transition-handoff.js",
+    "game/css/transition-handoff.css",
+    "tests/held-scene-handoff.test.js",
+    "game/src/hub/hub.personnel.js",
+    "game/src/hub/hub.archive-v3.js",
+    "docs/evidence/2026-10-23-WF-battle-art-journey-1023"
+  ],
+  "doneWhen": [
+    "持幕可见且资源就绪后单淡出，保留专用过场和token守卫",
+    "精简确认冗余文案，定向检查及当前窗口实页范围如实记录"
+  ],
+  "stage": "partial",
+  "checks": [],
+  "unverified": [
+    "完整过场时序与人事/档案两页实页待复核"
+  ],
+  "updatedAt": "2026-10-23T13:48:06.5026528Z"
+}

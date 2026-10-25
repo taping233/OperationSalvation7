@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>商店金币 · 隔离视觉夹具</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css?review=shop-currency-r2" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" />
+<style>
+.fixture-controls{position:absolute;left:32px;top:14px;z-index:10000;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#111e30f5;color:#eef3f3;font:18px sans-serif;border:1px solid #718590}.fixture-controls button{font:inherit;padding:7px 10px}.fixture-controls[hidden]{display:none}.fixture-result{padding:60px;font-size:28px;color:#e5f1ff}
+</style></head><body class="page-covered page-opaque"><div class="fixture-controls" id="fixtureControls">隔离静态夹具 · 不读取/保存主局 <button id="mixed">5币混合状态</button><button id="poor">0币不足</button><button id="full">满包</button><button id="rich">20币可购买</button><button id="hide">隐藏工具栏</button><span id="fixtureResult"></span></div>
+<div id="app"><main id="viewport"><div id="overlay" class="opaque" role="dialog" aria-modal="true"><div class="card page"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import SDT, {sdtDefine} from '../src/core/sdt-facade.js';
+import '../src/core/icons-bitmap.js';
+import '../src/core/art.js';
+import '../src/ui/ui-scale.js';
+import {rulesSlice} from '../src/cards/cards.rules.js';
+import {dataSlice} from '../src/cards/cards.data.js';
+import {cardHTML} from '../src/cards/cards.view.js';
+import {createShopController, configureShopRuntime} from '../src/run/game.run.shop.js';
+const catalog=Object.values(dataSlice).filter(Array.isArray).flat();
+const byId=new Map(catalog.map(card=>[card.id,card]));
+sdtDefine('Cards',{...rulesSlice,all:()=>catalog,cardHTML});
+const pick=id=>{const card=byId.get(id);if(!card)throw new Error('Missing static fixture card '+id);return {...card};};
+const sha={id:'sha',name:'初始攻击',type:'武术',rarity:'初始',cost:1,dmg:0,dmgType:'attack',desc:'造成等同攻击力的伤害。'};
+const overlay=document.querySelector('#overlay'),body=document.querySelector('#ovBody'),result=document.querySelector('#fixtureResult');
+let acts={},game,controller;
+const UI={el:{overlay,ovBody:body},act(name,handler){acts[name]=handler;},registerHelp(){},helpBtn(){return '';},log(){},refresh(){},showOverlay(title,html){body.innerHTML=SDT.Icons.rich(html);overlay.hidden=false;},hideOverlay(){body.innerHTML='<p class="fixture-result">已离开静态商店。刷新页面可重新打开夹具。</p>';}};
+body.addEventListener('click',event=>{const button=event.target.closest('[data-act]');if(button&&!button.disabled)acts[button.dataset.act]?.(button.dataset);});
+function reset(coins,full=false){
+ acts={};result.textContent='';
+ const stock=[{card:pick('tt3-wave-slash'),price:3,sold:false},{card:pick('tt3-toxin'),price:2,sold:false},{card:pick('tt12-felguard'),price:9,sold:false},{card:pick('tt12-freezeray'),price:4,sold:true},{card:pick('tt12-chargeray'),price:0,sold:false,free:true},{card:pick('tt12-backupcell'),price:9,sold:false},{card:pick('tt4-woodify'),price:2,sold:false},{card:{...sha},price:1,sold:false,shaReplenish:5},{card:pick('tt12-magicfind'),price:3,sold:false,mystery:true}];
+ game={state:'idle',coins,ownedCards:[{uid:'fixture-copper',card:pick('tt-copper')}],shopStocks:{'visual-fixture':stock},canReceiveCard:()=>!full};
+ let uid=0;
+ controller=createShopController({UI,SDT:{...SDT,Base:{slot:'visual-fixture'},Sound:{sfx(){}},Motion:{reduceMotion:()=>false}},game,bagCap:()=>16,usedSlots:()=>full?16:game.ownedCards.length,cardHTML,newUid:()=>`fixture-${++uid}`,saveGame:()=>{result.textContent='仅修改此夹具内存';return true;},setCardPageOpen(){}});
+ controller.openShop('visual-fixture');
+}
+configureShopRuntime({openBag:onReturn=>{result.textContent='夹具未接完整背包；点此返回';body.innerHTML='<button class="fixture-result" id="fixtureBack">返回静态商店</button>';document.querySelector('#fixtureBack').onclick=onReturn;}});
+document.querySelector('#mixed').onclick=()=>reset(5);document.querySelector('#poor').onclick=()=>reset(0);document.querySelector('#full').onclick=()=>reset(20,true);document.querySelector('#rich').onclick=()=>reset(20);document.querySelector('#hide').onclick=()=>{document.querySelector('#fixtureControls').hidden=true;};
+reset(5);
+</script></body></html>

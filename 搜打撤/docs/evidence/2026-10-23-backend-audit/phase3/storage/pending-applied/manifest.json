@@ -1,0 +1,29 @@
+[
+  {
+    "source": "搜打撤/game/src/hub/base.js",
+    "base_sha256": "79d0e3749f7b0095df791987f627bb5001267f367cbcfb8ca9576a4825e927eb",
+    "applied_sha256": "31e628004143c9c1b3d9fa24a7514bb8ff1bcb5bdf65d7d05f5586f12ee8f05d",
+    "added": 12,
+    "removed": 22,
+    "before": "base.js.before.txt",
+    "patch": "base.js.patch"
+  },
+  {
+    "source": "搜打撤/game/src/hub/battle-settlement.commands.js",
+    "base_sha256": "7360ebd06f139c8e43510c1cd9d9556471f6532185c265618df8603fa289584e",
+    "applied_sha256": "5b8d8dbded70cdb32caa6f47149e63a1330f9a2530a152cae7d874061e6383f2",
+    "added": 2,
+    "removed": 2,
+    "before": "battle-settlement.commands.js.before.txt",
+    "patch": "battle-settlement.commands.js.patch"
+  },
+  {
+    "source": "搜打撤/game/src/hub/save-archive.js",
+    "base_sha256": "fc8eab678b1cba4943587aca4afc4f01127b609fe4767dfddc9cfb51afe82e63",
+    "applied_sha256": "e43f24cbd99136888eaeb392f39c00d17e3cddedeb2c8af17cce0096b8a6b443",
+    "added": 1,
+    "removed": 1,
+    "before": "save-archive.js.before.txt",
+    "patch": "save-archive.js.patch"
+  }
+]

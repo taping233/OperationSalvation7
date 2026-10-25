@@ -1,0 +1,14 @@
+{
+  "cases": 576,
+  "operationsPerCase": 9,
+  "equivalent": [
+    "markup",
+    "inventory flags and UIDs",
+    "messages",
+    "sounds",
+    "saving",
+    "inspect render guards",
+    "back",
+    "expired callbacks"
+  ]
+}

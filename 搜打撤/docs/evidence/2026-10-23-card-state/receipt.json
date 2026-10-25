@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-astrolabe",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a168e9-3303-7231-bf93-a56fd7b7c7f3\\exec-868443bb-a318-4b85-93c8-8003e3215df7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-23-card-state/cards-equip-tt13-astrolabe-source.png",
+        "bytes": 2344352,
+        "sha256": "edd94cc2b366f82e8352b910b3a6b729a09709cd8e104f6bea28d9eb7a75b7bf"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-23-card-state/cards-equip-tt13-astrolabe-full-before.webp",
+          "bytes": 173242,
+          "sha256": "5bd21f08649acea543f893ce396171b4cf7440056514ea4c57086d473f69f748"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-23-card-state/cards-equip-tt13-astrolabe-thumb-before.webp",
+          "bytes": 28500,
+          "sha256": "5e12e3a85e1e6a8c284573d32ec2455415ba6a8733e54c69acf7e5525a8e37e9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-astrolabe.webp",
+          "bytes": 261766,
+          "sha256": "82d2825d6c6a3e085249ac7343e3c70f93f166d58805ffe000c4b524c4b4bfb2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-astrolabe.webp",
+          "bytes": 39790,
+          "sha256": "341892b25cd54cb389501358c4546e7afd86989247503db1fcc9cb1b430bea56",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "square-20261020",
+      "revision_after": "astrolabe-dual-phase-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 173242,
+            "sha256": "5bd21f08649acea543f893ce396171b4cf7440056514ea4c57086d473f69f748",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 261766,
+            "sha256": "82d2825d6c6a3e085249ac7343e3c70f93f166d58805ffe000c4b524c4b4bfb2",
+            "source": "docs/evidence/2026-10-23-card-state/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 28500,
+            "sha256": "5e12e3a85e1e6a8c284573d32ec2455415ba6a8733e54c69acf7e5525a8e37e9",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt13-astrolabe.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 39790,
+            "sha256": "341892b25cd54cb389501358c4546e7afd86989247503db1fcc9cb1b430bea56",
+            "source": "docs/evidence/2026-10-23-card-state/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1610,
+  "manifest_count_after": 1610
+}

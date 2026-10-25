@@ -1,0 +1,28 @@
+{
+  "platform": "Codex IAB",
+  "origin": "http://127.0.0.1:5200",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "input": "Real click on title gallery and view-photo button; real Escape key on close control",
+  "opened": {
+    "card": "禁咒I",
+    "focus": "收回照片",
+    "imageVisible": true
+  },
+  "closed": {
+    "activeLabel": "查看大图与背签",
+    "activeText": "查看照片",
+    "scripts": [
+      "/@vite/client",
+      "./src/main.js"
+    ],
+    "zoomPresent": false
+  },
+  "consoleErrors": [],
+  "screenshot": "photo-zoom.png",
+  "limits": [
+    "Only photo zoom smoke path; no battle, inventory, player-slot or note-edit path tested in browser"
+  ]
+}

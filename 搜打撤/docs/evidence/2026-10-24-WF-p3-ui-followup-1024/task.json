@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-p3-ui-followup-1024",
+  "date": "2026-10-24",
+  "owner": "Friday",
+  "goal": "P3奖励阅读与控件续改及实页复核",
+  "paths": [
+    "game/src/ui/reward-scene-view.js",
+    "docs/modules/secondary-ui-style.md"
+  ],
+  "doneWhen": [
+    "奖励文案与状态反馈实页验证"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "奖励三选一详情返回与Enter确认，57项回归及静态检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "其他P3页面与hover按下逐帧未复核，5320结果预览保留"
+  ],
+  "updatedAt": "2026-10-23T18:54:18.729Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

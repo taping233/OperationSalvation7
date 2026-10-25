@@ -1,0 +1,26 @@
+{
+  "passed": 37,
+  "failed": 0,
+  "files": [
+    {
+      "file": "card-notes-coverage.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "docs-consistency.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "workflow-dependencies.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "workflow-gate-receipt.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "workflow-index.test.js",
+      "status": "passed"
+    }
+  ]
+}

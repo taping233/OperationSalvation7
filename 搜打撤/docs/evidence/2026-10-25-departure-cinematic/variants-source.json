@@ -1,0 +1,44 @@
+[
+  {
+    "asset": "game/assets/scenes/departure/battle-incision-v1.webp",
+    "bytes": 33298,
+    "sha256": "719ae78a5064d9707787b2cd7fff330e778bfc13ba2ac9e3b7accfd11e008dc6",
+    "dimensions": [
+      1659,
+      948
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a171ea-9b41-7662-988e-09e280e38f57\\exec-39ff9cf2-2c09-4bfc-bf0b-8fc52dc8c1fe.png",
+    "sourceSha256": "06ef39ad4c6347efba15a978dba06c7361e2fd8539f19194e80e56994fec8ad1",
+    "provider": "built-in imagegen",
+    "reference": "NAI5起稿后内置重绘的已认可入城倒影",
+    "prompt": "战斗：大黑场中斜向切开的玻璃破片与微弱城市倒影，暗红细线，禁止文字与人物。"
+  },
+  {
+    "asset": "game/assets/scenes/departure/boss-monolith-v1.webp",
+    "bytes": 57306,
+    "sha256": "4c8eb9440bc523add0bbff89b5036e4939884f367b9dc04adb062c73e82d6a48",
+    "dimensions": [
+      1672,
+      940
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a171ea-9b41-7662-988e-09e280e38f57\\exec-d20465c2-73c3-4266-98b6-0fdf9d4eaafe.png",
+    "sourceSha256": "2a7be538f951f8d80e82566d95d22437beac11043a509e42a62746f5e9092141",
+    "provider": "built-in imagegen",
+    "reference": "NAI5起稿后内置重绘的已认可入城倒影",
+    "prompt": "首脑：中央石墨黑块面缓慢压近，仅一侧少量灰白破裂轮廓，城市窗格倒影，不定义剧情实体。"
+  },
+  {
+    "asset": "game/assets/scenes/departure/extraction-seam-v1.webp",
+    "bytes": 21144,
+    "sha256": "abb85c22669a1ba60c3aa53ce2cd17b143fe8e292995e8545934e1613eb9fb85",
+    "dimensions": [
+      1659,
+      948
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a171ea-9b41-7662-988e-09e280e38f57\\exec-3c6d7d6d-b411-40cf-bb15-0a11f53a7b1e.png",
+    "sourceSha256": "e1e00b4a24c7ccf4af668fab67c7ffb682cceae7f8baf750f8dc92b568252236",
+    "provider": "built-in imagegen",
+    "reference": "NAI5起稿后内置重绘的已认可入城倒影",
+    "prompt": "撤离：大面积暖灰白留白，水平城市倒影碎面向中间收拢，中央一点暗朱红，无胜利字幕。"
+  }
+]

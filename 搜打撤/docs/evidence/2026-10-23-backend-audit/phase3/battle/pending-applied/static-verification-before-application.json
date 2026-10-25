@@ -1,0 +1,64 @@
+{
+  "status": "verified_prepared_only_not_applied",
+  "combat": {
+    "currentBaseShaMatches": true,
+    "newTargetsAbsent": true,
+    "syntax": [
+      {
+        "path": "game/src/battle/core/combat.factory.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/battle/core/combat.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/combat.test.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/helpers/combat-self-test.js",
+        "exitCode": 0
+      }
+    ],
+    "gitApplyCheckExitCode": 0,
+    "testsExecuted": false,
+    "sharedSourcesModified": false,
+    "selfTestRelocation": {
+      "originalBodyAstEqual": true,
+      "originalEqCallCount": 67,
+      "candidateEqCallCount": 67,
+      "capturedNames": [
+        "TYPES",
+        "addBleed",
+        "addBlessing",
+        "addCurse",
+        "breakStealth",
+        "canAct",
+        "clearBleed",
+        "dealDamage",
+        "hasCurse",
+        "isStealthed",
+        "parseNotation",
+        "purify",
+        "tickDurations",
+        "tickPoison"
+      ],
+      "allDependenciesRemainExportedByFacade": true,
+      "originalAssertionsExecuted": false
+    }
+  },
+  "acquire": {
+    "currentBaseShaMatches": true,
+    "newTargetsAbsent": true,
+    "syntax": [
+      {
+        "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "exitCode": 0
+      }
+    ],
+    "gitApplyCheckExitCode": 0,
+    "testsExecuted": false,
+    "sharedSourcesModified": false
+  }
+}

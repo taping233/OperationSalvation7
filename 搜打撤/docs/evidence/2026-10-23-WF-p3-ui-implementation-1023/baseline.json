@@ -1,0 +1,70 @@
+{
+  "root": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-implementation-baseline",
+  "files": [
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "sha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157"
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "sha256": "c0d2aa6aa74b7d0a62ca83e8e2adbae94b41b55bb138253add89e0443a4161df"
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "sha256": "6e862d463e31292e1fff586f5ac5f50d13a344683ab38452bafe7d79c1835cef"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "sha256": "d75a029d6fd44cae3428189dc76ddb3e05044e35461dbde539c22bdc061aabb3"
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "e4c3293af451170eac93c918a375b1d7214d761e398fb5d5663019aa6b00242b"
+    },
+    {
+      "file": "game/src/ui/battle-hud-info.js",
+      "sha256": "c34fd0b9534c99d539fe3a830018f1a2b2863d640d3477c5a508f4ea049a53b2"
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "sha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a"
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "sha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "sha256": "56798c6feff1a2d222b38198c9564e87250422655958f81f448083f0df404797"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "sha256": "0caec3718031720e1cf4ff4b2a638ce54f466da75e7e8012bb38ab496b8029ec"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "sha256": "2a7f4c4119802158df74d48b5395b611ab48f223c0947a0301bc245dc9c73e74"
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "sha256": "b15173796eef4065432a8697ad6d978200a9b1f0bd912e8e8dce40100f2e5ec6"
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "sha256": "701483224360e67cb14a0f855c5077c056b41566069e0ea586802bf68f5c847c"
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "sha256": "5d0e5ae22c96bb9d77adcef5136d79dd771c8934094b9f9e573aba551ec0bd67"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "sha256": "cabc3c48dae46556902026a9c67b2c5e554ccd96133c254b3182cf34beaaec34"
+    }
+  ],
+  "capturedAt": "2026-10-23T15:50:36.310Z"
+}

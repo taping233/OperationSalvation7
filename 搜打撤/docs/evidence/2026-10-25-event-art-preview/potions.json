@@ -1,0 +1,17 @@
+{
+  "event_id": "ev19-potions",
+  "name": "应急药品站",
+  "status": "preview-only",
+  "pipeline": [
+    "NAI4.5 Full",
+    "一次内置精修"
+  ],
+  "nai_request": "../.tmp/nai/event-potions-preview-1025/request.json",
+  "builtin_prompt": "../.tmp/nai/event-potions-preview-1025/builtin-prompt.txt",
+  "final": "../.tmp/nai/event-potions-preview-1025/builtin-preview.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-70526a17-d7b3-4e3e-a408-53430893e863.png",
+  "sha256": "fdb473e3773ee78dac2711998a8fbf3fdf668f517d271194bfe53874e183412e",
+  "runtime_replaced": false,
+  "checks_run": [],
+  "feedback": "等待老板评价"
+}

@@ -1,0 +1,114 @@
+{
+  "owner": "persistence_audit",
+  "date": "2026-10-24",
+  "status": "complete-uncommitted-nine-source-files-frozen",
+  "fixedRootCauses": 4,
+  "sourceFiles": [
+    "game/src/hub/bag-legacy-use.js",
+    "game/src/hub/base.js",
+    "game/src/hub/base.commands.js",
+    "game/src/hub/recovery.commands.js",
+    "game/src/hub/game.storage.js",
+    "game/src/hub/bag-inventory-commands.js",
+    "game/src/hub/game.bag.js",
+    "game/src/run/game.run.scenes.js",
+    "game/src/run/node-restore-state.js"
+  ],
+  "findings": [
+    {
+      "id": "SWEEP2-PERSIST-1",
+      "root": "旧员工通行证A觉醒未按消费后的背包投影检查容量",
+      "before": "同叠还有2至3张A且通用格已满时，消费1张仍不释放格，随机能力卡继续加入导致超容量",
+      "after": "使用共用canReplaceBagCard预检，满则A不消耗；单张释放格、可并同名未满叠仍正常，资源扩展格不能接能力卡"
+    },
+    {
+      "id": "SWEEP2-PERSIST-2",
+      "root": "普通背包使用入口仅按UID查找，历史重复或缺失UID会选择安全格及容器中的卡牌",
+      "before": "隐藏同UID药水排在点击的普通背包A前时会消费错误药水；仅隐藏卡也可绕过位置规则使用",
+      "after": "只接受普通背包实际条目且要求唯一；安全格、珍珠盒和锦囊内容均不被普通入口消费，歧义保持原状"
+    },
+    {
+      "id": "SWEEP2-PERSIST-3",
+      "root": "排队写入仅绑定槽号或可重复revision，导入/同档重入/清空后旧请求可覆盖新采纳的数据",
+      "before": "相同revision导入后旧基地提交仍落盘；同runId/revision导入后旧Base+Run终局可清除新对局；空包导入/清空后旧Run保存可复活旧局",
+      "after": "基地提交与成对事务绑定selectionGeneration；Run保存绑定采纳/替换代次。新档原串保持，旧请求STALE_SLOT；同一会话连续交易、幂等重放和连续Run保存正常，真正新局仍可写空槽",
+      "counting": "base.commands、recovery.commands及game.storage的同根队列失效统一计1项"
+    },
+    {
+      "id": "SWEEP2-PERSIST-4",
+      "root": "丢弃唯一容器后保留隐藏储物标记，内容失去可访问入口",
+      "before": "法术存入唯一锦囊、资源存入普通或安全格唯一珍珠盒后，丢容器成功但内容仍stored/pouchOf并从普通背包隐藏",
+      "after": "仅当现有储物会失去最后可用同类容器时拒绝丢弃并提示先取出；空容器和仍有备用同类容器可丢，未增加容量新规则",
+      "ruleReview": "rules.md60-61为现行容器共享存取；126仅称丢弃不可撤销；确认文案仅丢该卡1张，无内容一起丢弃约定；PENDING#43是研究所牌盒满容量换牌，非珍珠盒"
+    }
+  ],
+  "tests": [
+    { "file": "tests/project-bug-sweep-round2-bag-use.test.js", "cases": 11 },
+    { "file": "tests/project-bug-sweep-round2-base-context.test.js", "cases": 10 },
+    { "file": "tests/project-bug-sweep-round2-container-discard.test.js", "cases": 7 },
+    { "file": "tests/project-bug-sweep-round2-pocket-identity.test.js", "cases": 12 }
+  ],
+  "newRegressionCases": 40,
+  "reproductions": [
+    { "stage": "legacy-awaken-and-zone", "failed": 7, "passed": 2, "exitCode": 1 },
+    { "stage": "base-same-slot-replacement", "failed": 3, "passed": 1, "exitCode": 1 },
+    { "stage": "paired-import-old-termination", "failed": 1, "exitCode": 1, "note": "夹具排空导入后的后台备份清理锁后，真实旧事务覆盖导入结果断言失败" },
+    { "stage": "run-empty-import-and-clear", "failed": 2, "passed": 7, "exitCode": 1 },
+    { "stage": "container-discard", "failed": 3, "passed": 4, "exitCode": 1 }
+  ],
+  "validation": {
+    "commandPrefix": "node node_modules/vitest/vitest.mjs run",
+    "flags": "--maxWorkers=1 --minWorkers=1 --reporter=dot --silent",
+    "batches": [
+      {
+        "files": ["project-bug-sweep-round2-bag-use", "bag-use-compatibility", "bag-legacy-use-live-ports", "bag-structured-use", "project-bugfix-round2-storage-bag"],
+        "passed": 54, "exitCode": 0
+      },
+      {
+        "files": ["project-bug-sweep-round2-base-context", "m01-base-commit", "base-write-lock", "project-bugfix-archive-1023", "m06-preparation"],
+        "passed": 38, "exitCode": 0,
+        "note": "新上下文测试此时5条，后续成对事务及Run队列扩展见下批"
+      },
+      {
+        "files": ["project-bug-sweep-round2-base-context", "base-write-lock", "r2a-recovery", "terminal-persistence", "extraction-recovery", "battle-settlement-recovery"],
+        "passed": 136, "exitCode": 0,
+        "note": "新上下文测试此时6条"
+      },
+      {
+        "files": ["project-bug-sweep-round2-base-context", "storage-review-remediation", "save-slot-lock-interleaving", "project-bugfix-archive-1023", "save-compat", "terminal-persistence", "r2a-recovery"],
+        "passed": 67, "exitCode": 0,
+        "note": "包含全部10条上下文回归"
+      },
+      {
+        "files": ["project-bug-sweep-round2-container-discard", "bag-inventory-commands", "pearl-storage-interface", "project-bug-sweep-token-craft", "project-bugfix-round2-storage-bag"],
+        "passed": 55, "exitCode": 0
+      },
+      {
+        "files": ["project-bug-sweep-round2-pocket-identity", "pocket-restore-interface", "node-restore-flow", "node-restore-state", "battle-generated-settlement", "battle-temp-item-settlement", "bag-pouch-capacity"],
+        "passed": 61, "exitCode": 0,
+        "note": "新增live身份测试此时7条；后增加变化/歧义边界见最终批次"
+      },
+      {
+        "files": ["project-bug-sweep-round2-bag-use", "project-bug-sweep-round2-base-context", "project-bug-sweep-round2-container-discard", "project-bug-sweep-round2-pocket-identity"],
+        "passed": 39, "exitCode": 0,
+        "note": "新增live身份测试此时11条；最终再增加1条页面之后出现同名卡的旧name歧义边界"
+      },
+      {
+        "files": ["project-bug-sweep-round2-pocket-identity", "pocket-restore-interface", "node-restore-flow", "node-restore-state"],
+        "passed": 37, "exitCode": 0,
+        "note": "最终源和新增12条live身份/容器用例全部通过；结合上批覆盖本轮全部40条新增回归"
+      }
+    ],
+    "diffCheck": "本域9源与4新测试和本JSON检查通过（exitCode 0）",
+    "staticAndBrowser": "父代理集中完成"
+  },
+  "identityRootCompletion": {
+    "paths": ["game/src/hub/game.bag.js:pocketAdd", "game/src/run/game.run.scenes.js:openPocketRestore", "game/src/run/node-restore-state.js:claimNodeRestore"],
+    "reproductionTest": "tests/project-bug-sweep-round2-pocket-identity.test.js",
+    "status": "fixed-and-source-frozen",
+    "reproductions": [{"stage":"actual-departure-battle-consumption", "failed":2,"passed":3}, {"stage":"actual-click-restore-second-identity", "failed":2,"passed":5}],
+    "description": "实际出征保持两张同名不同ID/variant身份，实际战后消费曾合为第一张count2；修复后按稳定身份合堆。同名行点击第二卡的营火/祭坛复原曾取第一卡，现绑定本次真实条目并复检数量/身份/位置；旧name仅当前唯一允许，未改复原次数或存档格式。旧无ID合堆及正常同身份合堆保留，另覆盖容器丢弃实入口提示",
+    "counting": "归第一轮身份根因补全，不增加本轮4项计数"
+  },
+  "boundaries": "保留所有他人原增量；未build、全量测试、起服务、浏览器、提交、推送、改共享登记或研究所存档字段；未改UI美术。"
+}

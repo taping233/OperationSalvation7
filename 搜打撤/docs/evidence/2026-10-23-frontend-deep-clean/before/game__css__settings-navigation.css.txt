@@ -1,0 +1,270 @@
+@import url('./ui-design-system.css');
+/* Settings only: the feedback archive keeps its own page layout. */
+#overlay .card.page:has(.pg.settings-page.settings-tabbed) {
+  background: #11171f;
+  color: #e1e8ef;
+}
+#overlay .pg.settings-page.settings-tabbed {
+  --settings-tint: 204, 181, 139;
+  --settings-accent: rgb(var(--settings-tint));
+  --settings-ease: var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
+  --linked-touch-time: var(--home-ui-feedback);
+  --linked-touch-ease: var(--home-ui-ease);
+  --settings-wallpaper: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b');
+  --settings-wallpaper-position: center;
+  width: 100%; height: 100%; padding: 0;
+  display: flex; flex-direction: column;
+  position: relative; isolation: isolate; overflow: hidden;
+  background: #11171f;
+}
+#overlay .pg.settings-page.settings-tabbed[data-settings-category="general"],
+#overlay .settings-tabbed #settings-tab-general { --settings-tint: var(--home-ui-gold); --settings-category-tint: 204,181,139; }
+#overlay .pg.settings-page.settings-tabbed[data-settings-category="display"],
+#overlay .settings-tabbed #settings-tab-display { --settings-tint: var(--home-ui-cold); --settings-category-tint: 139,182,207; }
+#overlay .pg.settings-page.settings-tabbed[data-settings-category="audio"],
+#overlay .settings-tabbed #settings-tab-audio { --settings-tint: var(--home-ui-cold); --settings-category-tint: 185,164,207; }
+#overlay .pg.settings-page.settings-tabbed::before {
+  content: ''; position: absolute; inset: -12px; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(13,19,26,.88), rgba(17,23,31,.68) 65%, rgba(17,23,31,.5)),
+    var(--settings-wallpaper) var(--settings-wallpaper-position) / cover;
+  filter: blur(7px) saturate(.5);
+}
+#overlay .settings-tabbed::after { display: none; }
+#overlay .pg.settings-page.settings-tabbed .pg-head {
+  min-height: 88px; padding: 20px 7%; margin: 0;
+  background: rgba(13,18,24,.7); border-bottom: 1px solid #dce7ef1c;
+  box-shadow: 0 8px 28px #03060940;
+}
+#overlay .settings-tabbed .pg-head::before,
+#overlay .settings-tabbed .pg-head::after,
+#overlay .settings-tabbed .pg-head h2::before { display: none; }
+#overlay .pg.settings-page.settings-tabbed .pg-head h2 {
+  display: flex; align-items: center; gap: 12px;
+  font-size: var(--ui-text-title); color: #e8eef4; letter-spacing: 3px; text-shadow: none;
+}
+#overlay .settings-tabbed .settings-gear-r2 { filter: grayscale(1); }
+#overlay .pg.settings-tabbed .settings.settings-layout {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas: none; gap: 20px; align-items: start;
+  width: min(1540px, 90%); max-width: none; margin: 42px auto;
+  flex: 1; min-height: 0; padding: 0 !important; overflow: hidden;
+}
+#overlay .settings-tabbed .settings-nav {
+  position: relative;
+  display: flex; flex-direction: row; gap: 10px;
+  padding: 0 0 12px; border-bottom: 1px solid #dce7ef24;
+}
+#overlay .settings-tabbed .settings-nav::before {
+  content: none;
+}
+#overlay .settings-tabbed .settings-tab {
+  position: relative;
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
+  width: auto; flex: 1; min-height: 64px; padding: 16px 20px;
+  border: 1px solid transparent; border-left: 3px solid transparent;
+  border-radius: 2px; background: transparent; box-shadow: none;
+  color: #a7b5c2; text-align: left; font-size: var(--ui-text-body); letter-spacing: 1px;
+  transition: background var(--home-ui-feedback) var(--settings-ease), color var(--home-ui-feedback) var(--settings-ease), box-shadow var(--home-ui-feedback) var(--settings-ease);
+}
+#overlay .settings-tabbed .settings-tab:hover { background: #b5c7d014; color: #edf3f9; }
+#overlay .settings-tabbed .settings-tab:active { background: #bacbdc24; }
+#overlay .settings-tabbed .settings-tab[aria-selected="true"] {
+  background: linear-gradient(100deg, rgba(var(--settings-tint),.23), rgba(var(--settings-tint),.06));
+  box-shadow: inset 0 1px 0 #e8f3ff21, inset 0 -1px 0 #03080e33, 0 8px 22px #0205094d;
+  border-left-color: transparent; color: #edf3f9;
+  font-weight: 600;
+}
+#overlay .settings-tabbed .settings-tab[aria-selected="true"]::after {
+  content: ''; position: absolute; right: 16px; top: 28px;
+  width: 5px; height: 5px; border-radius: 50%; background: rgb(var(--settings-category-tint,var(--settings-tint)));
+  box-shadow: 0 0 8px rgba(var(--settings-tint),.27);
+}
+#overlay .settings-tabbed .settings-content {
+  min-width: 0; max-height: 100%; overflow-y: auto; padding: 28px 32px 32px;
+  background: radial-gradient(ellipse at 0 0, rgba(var(--settings-tint),.12), transparent 65%),
+    linear-gradient(140deg, rgba(39,44,51,.67), rgba(16,22,29,.48)), #141c25;
+  border: 1px solid var(--home-ui-edge); border-top-color: var(--home-ui-highlight); border-radius: 2px;
+  box-shadow: var(--home-ui-shadow);
+  backdrop-filter: none;
+  scrollbar-color: #536c81 transparent; scrollbar-width: thin;
+}
+#overlay .settings-tabbed [hidden] { display: none !important; }
+#overlay .settings-tabbed .settings-panel-head {
+  position: relative; margin-bottom: 28px; padding-bottom: 24px;
+  border-bottom: 1px solid #d4e0e916;
+}
+#overlay .settings-tabbed .settings-panel-head::after {
+  content: ''; position: absolute; left: 0; bottom: -1px; width: 48px; height: 1px;
+  background: linear-gradient(90deg, rgba(var(--settings-tint),.8), rgba(var(--settings-tint),0));
+}
+#overlay .settings-tabbed .settings-panel-head h3 {
+  margin: 8px 0 10px; font-size: var(--ui-text-object); font-weight: 600; letter-spacing: 2px;
+  color: #f0f3f6; text-shadow: 0 2px 8px #02050966;
+}
+#overlay .settings-tabbed .settings-panel-head p {
+  color: #aab7c2; font-size: var(--ui-text-label); margin: 0; line-height: 1.8;
+}
+#overlay .settings-tabbed .chk { font-size: var(--home-ui-copy); }
+/* 两侧信息区从各自方向展开，背景与点击区域保持既有布局。 */
+body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surface-role="nav"] { --page-x: -20px; --page-y: 0px; }
+body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surface-role="content"] { --page-x: 20px; --page-y: 0px; }
+#overlay .settings-tabbed .settings-group {
+  grid-area: auto; height: auto; padding: 0; margin: 0 0 26px;
+  border: 0; background: none; box-shadow: none; animation: none;
+}
+#overlay .settings-tabbed .settings-panel > .settings-group:last-child { margin-bottom: 0; }
+#overlay .settings-tabbed :is(.settings-general,.settings-display,.settings-audio,.settings-credits) > .set-h { display: none; }
+#overlay .settings-tabbed .set-h {
+  margin: 20px 0 12px; padding: 0; border: 0;
+  color: #d5dfe7; font-size: var(--ui-text-object); text-shadow: none; letter-spacing: 1px;
+}
+#overlay .settings-tabbed .set-h::before,
+#overlay .settings-tabbed .set-h::after { display: none; }
+#overlay .settings-tabbed .set-h .ic { display: none; }
+#overlay .settings-tabbed .set-en {
+  color: #7f96ab; font-size: var(--home-ui-sub); letter-spacing: 1.3px; font-weight: 400;
+}
+#overlay .settings-tabbed .settings-group .chk {
+  display: flex; align-items: center; gap: 24px;
+  min-height: 84px; padding: 16px 28px; margin: 0 0 8px;
+  background: linear-gradient(105deg, rgba(125,135,145,.22), rgba(60,70,81,.24));
+  border: 1px solid #d9e6ef21; border-radius: 4px;
+  box-shadow: inset 0 1px 0 #ecf4ff12, inset 0 -1px 0 #03080e33, 0 3px 8px #02060926;
+  color: #e7edf3; font-size: var(--ui-text-body); animation: none;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+#overlay .settings-tabbed .chk:hover {
+  background: linear-gradient(105deg, rgba(136,154,171,.3), rgba(65,79,93,.36));
+  border-color: #c8dbe34d;
+  box-shadow: inset 0 1px 0 #edf5ff21, 0 7px 18px #02060940;
+}
+#overlay .settings-tabbed .chk:has(input[type="checkbox"]:checked) {
+  border-right-color: rgba(var(--settings-tint),.35);
+}
+#overlay .settings-tabbed .settings-group .chk:has(input:focus-visible) {
+  border-color: #bdcfdf80;
+  background: linear-gradient(105deg, rgba(136,154,171,.3), rgba(65,79,93,.36));
+  box-shadow: inset 0 0 0 1px #bdcfdf26, 0 5px 14px #02060940;
+}
+#overlay .settings-tabbed .chk::before,
+#overlay .settings-tabbed .chk::after { display: none; }
+#overlay .settings-tabbed .chk > .settings-row-copy,
+#overlay .settings-tabbed .vol > span { display: block; flex: 1; min-width: 0; }
+#overlay .settings-tabbed .settings-row-copy,
+#overlay .settings-tabbed .vol > span { font-weight: 500; letter-spacing: .4px; }
+#overlay .settings-tabbed .chk .set-en {
+  display: block; margin: 6px 0 0; padding: 0; min-width: 0;
+  font-size: var(--ui-text-label); color: #98a9b7; text-align: left; line-height: 1.3;
+}
+#overlay .settings-tabbed .chk input[type="checkbox"] {
+  appearance: none; position: relative; flex: 0 0 48px;
+  width: 48px; height: 26px; margin: 0;
+  background: linear-gradient(180deg, #111923, #1c2631); border: 1px solid #657b8d; border-radius: 20px;
+  box-shadow: inset 0 2px 4px #02060980, 0 1px 0 #e6f1ff0f; cursor: pointer;
+}
+#overlay .settings-tabbed .chk input[type="checkbox"]::before {
+  content: ''; position: absolute; left: 4px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%; background: #8397a8;
+  box-shadow: 0 2px 4px #02060966, inset 0 1px 0 #ffffff66;
+  transform: none; transition: transform .24s var(--settings-ease), background .18s ease;
+}
+#overlay .settings-tabbed .chk input[type="checkbox"]::after { display: none; }
+#overlay .settings-tabbed .chk input[type="checkbox"]:checked {
+  background: linear-gradient(180deg, rgba(var(--settings-tint),.65), rgba(var(--settings-tint),.34)), #19212a;
+  border-color: rgba(var(--settings-tint),.8);
+}
+#overlay .settings-tabbed .chk input[type="checkbox"]:checked::before { transform: translateX(22px); background: #eef5fa; }
+#overlay .settings-tabbed .settings-group .chk.vol {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(140px, 300px) 68px;
+  column-gap: 24px;
+}
+#overlay .settings-tabbed .vol input[type="range"] {
+  width: 100%; min-width: 0; margin: 0;
+  accent-color: var(--settings-accent); filter: none;
+}
+#overlay .settings-tabbed .vol input[type="range"]:hover,
+#overlay .settings-tabbed .vol input[type="range"]:active { filter: drop-shadow(0 2px 4px #03080e66); }
+#overlay .settings-tabbed .vol b {
+  flex: 0 0 68px; width: 68px; padding: 6px 0; border-radius: 4px;
+  color: rgb(var(--settings-tint)); background: #07111a33; border: 1px solid rgba(var(--settings-tint),.22);
+  font-size: 18px; font-variant-numeric: tabular-nums; text-align: center; text-shadow: none;
+}
+#overlay .settings-tabbed .vol b::after {
+  content: '%'; margin-left: 3px; color: #93a7b7; font-size: 12px; font-weight: 400;
+}
+#overlay .settings-tabbed .vol input[type="range"]:active + b,
+#overlay .settings-tabbed .vol input[type="range"]:focus-visible + b {
+  color: #eff6fb; border-color: #c2d4e166; text-shadow: none;
+}
+#overlay .settings-tabbed .hint { color: #95a8b9; line-height: 1.9; font-size: var(--ui-text-label); }
+#overlay .pg.settings-tabbed .btn-row .mini-btn {
+  padding: var(--ui-space-2) var(--ui-space-4); font-size: var(--ui-text-label); letter-spacing: 1px; line-height: 1.5;
+}
+#overlay .settings-tabbed :is(.mini-btn,.ov-btn) {
+  padding: var(--ui-space-2) var(--ui-space-4); min-height: var(--ui-control-compact); background: #91a9bc21;
+  border: 1px solid #c2d4e136; border-radius: 4px;
+  color: #dde7ee; box-shadow: inset 0 1px 0 #eff6ff0d, 0 5px 14px #02050940; font-size: var(--ui-text-label);
+  clip-path: none; transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+#overlay .settings-tabbed :is(.mini-btn,.ov-btn):hover { background: #abc1d237; }
+#overlay .settings-tabbed :is(.mini-btn,.ov-btn):active {
+  transform: translateY(1px); box-shadow: inset 0 2px 5px #02050940;
+}
+#overlay .settings-tabbed .settings-records .mini-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 72px; padding: 16px 28px; text-align: left; letter-spacing: 1px;
+}
+#overlay .settings-tabbed .settings-records .mini-btn::after {
+  content: ''; width: 8px; height: 8px; margin-left: 20px;
+  border-top: 1px solid rgb(var(--settings-tint)); border-right: 1px solid rgb(var(--settings-tint));
+  transform: rotate(45deg); transition: transform .15s ease;
+}
+#overlay .settings-tabbed .settings-records .mini-btn:hover::after { transform: translateX(3px) rotate(45deg); }
+#overlay .settings-tabbed .settings-credits .hint {
+  display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px;
+  max-width: none; margin: 0 0 20px; line-height: 1.9;
+}
+#overlay .settings-tabbed .settings-credits .hint strong { color: #d8e1e8; font-weight: 500; }
+#overlay .settings-tabbed .settings-credits .license { white-space: nowrap; color: #c3cdd6; }
+#overlay .settings-tabbed .settings-credits .ov-btn {
+  display: inline-flex; align-items: center; gap: 18px; text-decoration: none;
+}
+#overlay .settings-tabbed .settings-credits .ov-btn::after { content: none; }
+#overlay .settings-tabbed .settings-credits .settings-external { color: #aabecd; font-size: 18px; }
+#overlay .settings-tabbed .settings-danger {
+  padding: 20px 0 0; margin-top: 32px; border-top: 1px solid #8294a629;
+}
+#overlay .pg.settings-tabbed .settings-danger .mini-btn {
+  background: #94666e24; border-color: #a7767845; color: #d7b4b8;
+}
+#overlay .pg.settings-tabbed .settings-danger .mini-btn:hover,
+#overlay .pg.settings-tabbed .settings-danger .mini-btn.arm { background: #ae6d7b45; }
+#overlay .settings-tabbed .settings-danger .hint { color: #ae929b; }
+#overlay .pg.settings-tabbed .settings-danger .danger-max {
+  border-left: 3px solid #c68d98; background: #94666e30;
+}
+#overlay .settings-tabbed :is(button,input):focus-visible {
+  outline: 2px solid rgb(var(--settings-tint)); outline-offset: 3px;
+}
+/* 首次入场由 surface-motion 展开导航和玻璃框，分类切换只展开内容。 */
+body:not(.reduce-motion) #overlay .settings-tabbed .settings-content {
+  animation: none;
+}
+body:not(.reduce-motion) #overlay .settings-tabbed[data-settings-motion="change"] .settings-panel:not([hidden]) .settings-panel-head {
+  animation: settingsContentIn var(--home-ui-change) var(--settings-ease) backwards;
+}
+body:not(.reduce-motion) #overlay .settings-tabbed[data-settings-motion="change"] .settings-panel:not([hidden]) :is(.chk,.btn-row,.hint) {
+  animation: settingsContentIn var(--home-ui-change) var(--settings-ease) calc(var(--settings-order, 0) * var(--motion-stagger,35ms)) backwards;
+}
+@keyframes settingsContentIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+body.reduce-motion #overlay .settings-tabbed *,
+body.reduce-motion #overlay .settings-tabbed *::before,
+body.reduce-motion #overlay .settings-tabbed *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #overlay .settings-tabbed *,
+  #overlay .settings-tabbed *::before,
+  #overlay .settings-tabbed *::after { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "Internal tooling only; no game runtime, art output, browser, build, install, commit, or push",
+  "baselineDirectory": "node_modules/.cache/code-lean-before/tools/baseline",
+  "codeFiles": 6,
+  "netLines": -8.0,
+  "netBytes": -1070.0,
+  "tests": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/build-artifact-manifest.test.js tests/runtime-asset-aliases.test.js tests/rations-thumbnail-alias.test.js tests/perf-budget-duplicates.test.js tests/build-output-contract.test.js --reporter=dot",
+    "filesPassed": 5,
+    "testsPassed": 75,
+    "exitCode": 0,
+    "durationSeconds": 6.52
+  },
+  "static": {
+    "nodeSyntaxFiles": 3,
+    "pythonSyntaxFiles": 3,
+    "eslintFiles": 3,
+    "diffCheck": "passed"
+  },
+  "differential": {
+    "vectorize": "vectorize-differential.log: 24 exact SVG output comparisons and 4 contour cases passed",
+    "perfBudget": "perf-budget-differential.log: 3 exact CLI output/status comparisons; normal/over-budget compressions 4 -> 3"
+  },
+  "preserved": {
+    "artifact": "Writer skips hidden names; verifier includes/rejects extras; symlink and unsupported-entry checks unchanged",
+    "aliases": "Source/canonical existence and byte equality required",
+    "vectorize": "Distinct colour quantization, fitting, minimum contour area and epsilon retained",
+    "perfBudget": "Budget limits, feature matching, missing chunk diagnostics and reports retained"
+  },
+  "pythonEntrypoints": {
+    "directCliHelp": "node icons and winter UI passed",
+    "moduleCliHelp": "node icons and winter UI passed",
+    "packageImports": "both modules passed",
+    "logs": [
+      "python-entrypoints.log",
+      "python-package-import.log"
+    ],
+    "compatibility": "Explicit __package__ chooses relative import for package usage and absolute import for direct CLI; no ImportError catch",
+    "algorithmDiff": "Earlier 28 checks retained; import-only repair did not alter algorithms or require repeating output comparisons"
+  }
+}

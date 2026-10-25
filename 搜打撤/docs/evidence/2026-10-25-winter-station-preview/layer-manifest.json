@@ -1,0 +1,79 @@
+[
+  {
+    "layer": "far",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\far.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-2d93dd45-baad-4360-8529-ba2f7a5750c2.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGB",
+    "alpha_extrema": null,
+    "bytes": 1663045,
+    "sha256": "40b8eab7aed9d2df6c4b761a56f5c8778f81980a8774797befe99a2ef114b446",
+    "nai_base_sha256": "4c1d2a624067ab33eb31cc6a6130221c039f2680838c36a7ad1d4ac33d6bd9ca"
+  },
+  {
+    "layer": "mid",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\mid.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-5f2a3e25-f360-4bc5-acc8-c38af050f4f1.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 563112,
+    "sha256": "99830e62d25f253c031e6848b2385ecc74d31e81a493dc747c1c054df73c409d",
+    "nai_base_sha256": "1ed1b17e4a92672f0e0f5eeebd3e7e61090e7bdec09049cfaadec0c905beee98"
+  },
+  {
+    "layer": "ground",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\ground.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-15726652-68a8-460d-908f-918e2b4c2f35.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 1008985,
+    "sha256": "2cf19337e3114b5b45578e725b4a392bea5193de6c006e25e70ba740691ead7c",
+    "nai_base_sha256": "3c6602ccde009ad5da8b8057301b3aac435682131372cec19fb87dddf0b7f0f6"
+  },
+  {
+    "layer": "foreground",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\foreground.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-69be41f6-ff64-47cc-a7c7-6281892d5b89.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 791563,
+    "sha256": "b410e277cac336f9fc65e6fa6a2f0eee516c8a375a5d35490ba95ce8f8633072",
+    "nai_base_sha256": "eb21509d928dd980d978768ffe9341f132379ac8d1265748dd688e297f5e3255"
+  },
+  {
+    "artifact": "composite.png",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\composite.png",
+    "bytes": 3208021,
+    "sha256": "da9fa33d8030e92864c3c1a55a23ad66d5d579fe19ebf8a1c2db1a0104da07c0"
+  },
+  {
+    "artifact": "portable.html",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\preview\\portable.html",
+    "bytes": 5371912,
+    "sha256": "d92ca93b05c27c3c1eb1b5e5d5720d663734f85e350fa2a235f44f8756b6974c"
+  }
+]

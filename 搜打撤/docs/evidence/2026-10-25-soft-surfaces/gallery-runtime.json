@@ -1,0 +1,45 @@
+{
+  "after": {
+    "cut": false,
+    "entries": [
+      {
+        "name": "WAAPI",
+        "state": "running",
+        "time": 125
+      },
+      {
+        "name": "WAAPI",
+        "state": "running",
+        "time": 125
+      },
+      {
+        "name": "WAAPI",
+        "state": "running",
+        "time": 125
+      },
+      {
+        "name": "WAAPI",
+        "state": "running",
+        "time": 125
+      },
+      {
+        "name": "WAAPI",
+        "state": "running",
+        "time": 125
+      }
+    ],
+    "medalVisibility": "visible"
+  },
+  "during": {
+    "cut": true,
+    "entries": [],
+    "medalVisibility": "hidden",
+    "waiting": "waiting"
+  },
+  "initial": {
+    "cut": true,
+    "entries": [],
+    "medalVisibility": "hidden",
+    "waiting": "waiting"
+  }
+}

@@ -1,0 +1,1512 @@
+{
+  "method": "50-token windows; local identifiers normalized, property names/literals retained; includes same-file nonoverlapping candidates; target source never executed",
+  "inventory": [
+    {
+      "file": "game/src/agent/agent.action-router.js",
+      "bytes": 10171,
+      "lines": 183,
+      "sha256": "0b05305296a219a5c834f8b1482aa632f1b085c29d04fdee6cc6021f10084469"
+    },
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "bytes": 3158,
+      "lines": 56,
+      "sha256": "ad18c1b9deb1adf637a873e3670a02633997a659414fc891c24eed7b2d4f8e41"
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "bytes": 8184,
+      "lines": 143,
+      "sha256": "66eaf40168b7baa5acfd63109b59b5e1ab617745ca9253c54398f804e71b62ac"
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "bytes": 7965,
+      "lines": 141,
+      "sha256": "18cc4f36d8d1929b92da8174d213b8eeab174964f3c4e003732fd06372d239c7"
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "bytes": 3143,
+      "lines": 62,
+      "sha256": "b0ca752afe3736f836d110a2f6a88258434cd70476f85700a86e05bbee55209a"
+    },
+    {
+      "file": "game/src/agent/agent.llm-parser.js",
+      "bytes": 1263,
+      "lines": 32,
+      "sha256": "cc3806050c6d05688e3907944fa5f6ebebbde3035d54287f72f195320f082bc9"
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "bytes": 4087,
+      "lines": 103,
+      "sha256": "faeda3851bc623593dd7e8a365604711b56a48c78140e7955a62c50acf876051"
+    },
+    {
+      "file": "game/src/agent/agent.llm.runtime.js",
+      "bytes": 5224,
+      "lines": 108,
+      "sha256": "042111e0260eac3bae985153971384396708d647dda7592f7eeea6e7ea766134"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "bytes": 56427,
+      "lines": 896,
+      "sha256": "1bc4a3df8cb67685345dfa839fa1c1643469c438d9d94a86801846984e9954b3"
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "bytes": 5175,
+      "lines": 95,
+      "sha256": "8398f0bbe8fc1cccd619b52b96b3c06c4d341673210b790e85bf6f7c796cde84"
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "bytes": 16108,
+      "lines": 296,
+      "sha256": "bae099ba6609a7649e6e5fd48a0d18f10423fe0d95af5dd2e6de26238c19a8c4"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "bytes": 5202,
+      "lines": 99,
+      "sha256": "baa849ca5a850201c5704620911439811d27c4bc84abde493853b739cf9a9726"
+    },
+    {
+      "file": "game/src/agent/agent.replay.js",
+      "bytes": 958,
+      "lines": 25,
+      "sha256": "914c3a32b29ba9c961b026af3eeb18fb6d8752865192055fd8467850e8d99b1a"
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "bytes": 7900,
+      "lines": 132,
+      "sha256": "2301c06c4f455c0e421ea06ad238e4be009a7a8ac82e68b45ba28e5106caf7a5"
+    },
+    {
+      "file": "game/src/agent/agent.run-control.js",
+      "bytes": 333,
+      "lines": 8,
+      "sha256": "058844378a342aca1e4591870f8082643bdcff4a2895898eb82e80c7c0a9837d"
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "bytes": 5647,
+      "lines": 123,
+      "sha256": "0359d986e2220e3832e8be4774fe1d8f3dd04674327e04eb15fbd67e46e078b1"
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "bytes": 22194,
+      "lines": 364,
+      "sha256": "5e31e48661c1ea0753f88ff87cb24eb84f8bfd5060ff3d02554f8ab7250db84e"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "bytes": 973,
+      "lines": 14,
+      "sha256": "00982b021d18f18aa93e78b6dd9de4a1f612dd6a05819b05b9e7c79f01c751b9"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "bytes": 3455,
+      "lines": 78,
+      "sha256": "c2af5756d1be19c607ea639c1ea363b1672cc162b6e7f22852ed816fff6841d8"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.runtime.js",
+      "bytes": 24418,
+      "lines": 515,
+      "sha256": "9d728a7f548a2f656035358ac993cdddabba5a3567c1f38749bf44f818ee1749"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "bytes": 22185,
+      "lines": 426,
+      "sha256": "87921d5060b713986f32f8afd1e62e24f419d3a5e0595d71010f83dfa3bd47bc"
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "bytes": 4198,
+      "lines": 103,
+      "sha256": "c9283d08c0c1920b739950c00044f5323982fa69744b24ac4b3948f14d7b0408"
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "bytes": 6333,
+      "lines": 125,
+      "sha256": "f3d08f0eb093a89e00dd6c4a189ff494e1dca11f8cf81d2701be03aa03c4ed87"
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "bytes": 6702,
+      "lines": 115,
+      "sha256": "2a2944dbd969cb05074e5e3fc0c479b05801d868791feb1a8f7ce77bb34b550c"
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "bytes": 4129,
+      "lines": 65,
+      "sha256": "e96bb5e851656d954294d434f475d304cc33a9accd83e9f249fd377b1254ad4f"
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "bytes": 7129,
+      "lines": 106,
+      "sha256": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "bytes": 53337,
+      "lines": 915,
+      "sha256": "8893625dd70c9547e74c1b75a73c508d66a728a48a9bc11eb91295cc5d0ee96c"
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "bytes": 1964,
+      "lines": 36,
+      "sha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72"
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "bytes": 3591,
+      "lines": 52,
+      "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "bytes": 12500,
+      "lines": 215,
+      "sha256": "758d693d73e698e7cc0f6051df502984bbaa38b9a935ac02385e127134cbc8da"
+    },
+    {
+      "file": "game/src/run/event-commands.js",
+      "bytes": 6792,
+      "lines": 132,
+      "sha256": "dfbf880ed4af39e48f6f319208fdf56777d937ead059ba7333734371afd58654"
+    },
+    {
+      "file": "game/src/run/event-lifecycle.js",
+      "bytes": 8894,
+      "lines": 200,
+      "sha256": "605735d842b3c23253bbb859b2e6903766f53695affe04422c141f80c9898d1f"
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "bytes": 2129,
+      "lines": 36,
+      "sha256": "f83df7ff6bc31d822213d7eaea0a7b0ad608b42772228a07907ec1f90e21ab64"
+    },
+    {
+      "file": "game/src/run/event-runtime.js",
+      "bytes": 1084,
+      "lines": 20,
+      "sha256": "62937b968877acdba00bce84e5b5344303b5e89f617cd3d0a104da29af651b75"
+    },
+    {
+      "file": "game/src/run/expedition-tool-art.js",
+      "bytes": 699,
+      "lines": 13,
+      "sha256": "eb37cdb594cc82537aacc9dbd629b505b434ab640d2e6e79fd4659cb0f9d64a2"
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "bytes": 17292,
+      "lines": 231,
+      "sha256": "2dc605ab338c9b1c2d90324fcc05f38f6b30794ab7ace2053e6382b01443878f"
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "bytes": 2427,
+      "lines": 52,
+      "sha256": "0e486fdbe0f7e72cdb10e8bdfe763712aa4d879feed9c2cb61779f55ff043441"
+    },
+    {
+      "file": "game/src/run/game-session-departure.js",
+      "bytes": 12237,
+      "lines": 208,
+      "sha256": "ffb6d90b2b7c026fe38947cfcc18fb2d07de933ce144f1bbcbcb10c301fea099"
+    },
+    {
+      "file": "game/src/run/game-session-persistence.js",
+      "bytes": 16975,
+      "lines": 284,
+      "sha256": "0eb69da73de76f0ac02670b941024c083f0aab58694fe229b6113b97ba9d4c24"
+    },
+    {
+      "file": "game/src/run/game-session-restoration.js",
+      "bytes": 13280,
+      "lines": 195,
+      "sha256": "5e4ab32eb5988e22f2d3c52f515d26d39c8650d569a336de5ea6291842cc408a"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "bytes": 43566,
+      "lines": 760,
+      "sha256": "23d8a2a7911cfeb8dde39d40508e08cb7a6c9f088650627d07421ddf0b657d1d"
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "bytes": 56866,
+      "lines": 948,
+      "sha256": "7c700ac7249b8b071207b2cd202bb02cb1614bfe0acb165cebc251dbd38d5f0b"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "bytes": 5252,
+      "lines": 105,
+      "sha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "bytes": 26905,
+      "lines": 451,
+      "sha256": "0caec3718031720e1cf4ff4b2a638ce54f466da75e7e8012bb38ab496b8029ec"
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "bytes": 3142,
+      "lines": 50,
+      "sha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8"
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "bytes": 5051,
+      "lines": 112,
+      "sha256": "63bc91f9be199b49531268e4ada83e8a49843c73d0bbe4d72da6a59743ea51ba"
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "bytes": 15421,
+      "lines": 266,
+      "sha256": "04f409d1f4f1db68215ccfd7c5df04612ba75e5daa9f437e28139f0cab32714d"
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "bytes": 50621,
+      "lines": 871,
+      "sha256": "351a55e265e7a94d009a0c771f89466ad4a97349372b8eeb9f06c5951a11416e"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "bytes": 19565,
+      "lines": 374,
+      "sha256": "3e917600e4685bf589378201c9efa3d53ce077ba1eadb8e5c25916ab8d2bbb30"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "bytes": 857,
+      "lines": 14,
+      "sha256": "45eda386150581e6ffd3b90ac319cf10bba37e12ccf1095df5c8662807164266"
+    },
+    {
+      "file": "game/src/run/game.run.resources.js",
+      "bytes": 6629,
+      "lines": 108,
+      "sha256": "db46d83a19f5f593153966e2bf128880177e00bc000c9bc14375f2c82eb74633"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "bytes": 39443,
+      "lines": 664,
+      "sha256": "b8d5b9876dc673ca5bdb0c500a73e8fbf4f3e6e373c1e188f9ac53084ff7f55e"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "bytes": 49575,
+      "lines": 805,
+      "sha256": "cabc3c48dae46556902026a9c67b2c5e554ccd96133c254b3182cf34beaaec34"
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "bytes": 6003,
+      "lines": 111,
+      "sha256": "8e339392184e1883d0ae2b43b411815dd6a5714caf8622b6acdc5cf9cdc9cc05"
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "bytes": 5530,
+      "lines": 109,
+      "sha256": "8d4c5ccfff913aa57fba4aa7f0d14ccbc90d9560761ba263c45af9d9f62c265d"
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "bytes": 540,
+      "lines": 10,
+      "sha256": "6990f34b05c0b1fe119723999171b6713c69b868d3fcb58d6b7f10bc57b7d34c"
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "bytes": 17404,
+      "lines": 244,
+      "sha256": "c80c0a9fb6a771b53ed3220d2b4bc152dce6d3994b242b501d1d3d4b5a59eb42"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "bytes": 12210,
+      "lines": 188,
+      "sha256": "cdef4ff284f48e9e4ea583c71698a2ab274463af30da06da73f06dcaadf5a228"
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "bytes": 4200,
+      "lines": 87,
+      "sha256": "f4eeb71b4322b3561f81572a6b618b357d46561c74af3fd160ebbe3595861d1f"
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "bytes": 5913,
+      "lines": 103,
+      "sha256": "c6bd6b6f6637f14d7cdcd141fd31b55817bf8c1ec6021446dc3dc09be216243b"
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "bytes": 1594,
+      "lines": 28,
+      "sha256": "0255417a37c9e6106c3bc29e6f34415033a29d481a644367733265b64199d93c"
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "bytes": 4731,
+      "lines": 108,
+      "sha256": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809"
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "bytes": 2895,
+      "lines": 46,
+      "sha256": "79fff9baa207243dd4dc9156f90409ca9f897ea906227840d0153f440067d83f"
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "bytes": 6297,
+      "lines": 119,
+      "sha256": "1f90ec484c147edd2398d14bee7f2ef4356825e57d4a5c693e4407a72f383734"
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "bytes": 9881,
+      "lines": 179,
+      "sha256": "96940cef385015f30a9aaf00031da96a5eb53e964f8590d9861cd76fde7c04e3"
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "bytes": 24363,
+      "lines": 326,
+      "sha256": "6857fab2f1a4f2a195d3e51703d4b2f92c54eb76b0ab5b190c9ed57c460f12a9"
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "bytes": 4206,
+      "lines": 88,
+      "sha256": "ef3fd0d85f9c36dce50aeb8d0bc155a83224bca54cd4f232def3baba4e21cb0f"
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "bytes": 15019,
+      "lines": 209,
+      "sha256": "36f78f9ccecc6acdeac2342ef604d7371f70abd4306e595c436fe7704e69b7ef"
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "bytes": 17539,
+      "lines": 208,
+      "sha256": "b68e24b447c403512344c9ebebf505a1b242d285af17cffa84d42eaa756a3b73"
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "bytes": 2936,
+      "lines": 59,
+      "sha256": "c2184dba1b6afb1f33a8a9cc03b99c95f729e14d546db0659d89f1eb210c5b22"
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "bytes": 3851,
+      "lines": 77,
+      "sha256": "409ac7761a003388d3328ac692edc74709b5cd3369093af8648742e1fc3a9f8d"
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "bytes": 2890,
+      "lines": 59,
+      "sha256": "ee362370aba4d198aaa82bfddde1ebc7f900936307af9ac6dafc4d516a93e3f3"
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "bytes": 6523,
+      "lines": 132,
+      "sha256": "401af76cb63317c602e803a40977b042ee89ee1645a608a67cf9f117bbe1f99b"
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "bytes": 1291,
+      "lines": 19,
+      "sha256": "0a05a0af46c7f95be20f9578a1b3caae9d7359fa0a0d0967d20ea4a0c4328583"
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "bytes": 2903,
+      "lines": 62,
+      "sha256": "a4f9c30a1aa03e9594500143220a767ac3b24abf5a65c33d150d909303bcf6eb"
+    },
+    {
+      "file": "game/src/run/shop-commands.js",
+      "bytes": 6410,
+      "lines": 105,
+      "sha256": "3da4c0bc334f1279e93a81674cfb4269aa448bd33665c18675fb6fb80d8f0e70"
+    },
+    {
+      "file": "game/src/run/shop-commission.js",
+      "bytes": 7615,
+      "lines": 121,
+      "sha256": "a44d5aef97dea714f27429b5dbebc67b2ad1e9d8b32cdf548588d92d4dde28eb"
+    },
+    {
+      "file": "game/tools/agent-batch.mjs",
+      "bytes": 38243,
+      "lines": 622,
+      "sha256": "132a3b3f5791e46ad13289cf2dde1b37e78e168569d02986e4a9997eb1cb7454"
+    },
+    {
+      "file": "game/tools/agent-compare-provenance.mjs",
+      "bytes": 5863,
+      "lines": 118,
+      "sha256": "eba5998ac522fcd2616557f3108030579ce5a72cc8c36b639e20fdb605c5f56f"
+    },
+    {
+      "file": "game/tools/agent-compare.mjs",
+      "bytes": 10257,
+      "lines": 205,
+      "sha256": "2816a25a3c39e93cc70bbe209ac877d813ac590623917514acf7a880461aab12"
+    },
+    {
+      "file": "game/tools/agent-evolve.mjs",
+      "bytes": 19208,
+      "lines": 311,
+      "sha256": "adfa5803f8d8d44cc3f39577ad2af142cd1e80baed128a0d3b1e18cb70e8fda6"
+    },
+    {
+      "file": "game/tools/agent-ledger.mjs",
+      "bytes": 6381,
+      "lines": 124,
+      "sha256": "7706524eb3e292796153eea7441241561821551cc495b711c6ad8aa86022f076"
+    },
+    {
+      "file": "game/tools/agent-run-provenance.mjs",
+      "bytes": 5098,
+      "lines": 120,
+      "sha256": "a55d72e3f9b4eb0bef992f6a6fa388beb32855f82ee7be276b7f025f16159f9a"
+    },
+    {
+      "file": "game/tools/agent-supervise.mjs",
+      "bytes": 11678,
+      "lines": 220,
+      "sha256": "8dcf3f1cb34ac5b2292d23b72bef90210bb799169e747168855d32ed3adf39b8"
+    },
+    {
+      "file": "scripts/acceptance-gate.mjs",
+      "bytes": 15722,
+      "lines": 274,
+      "sha256": "ac04304aa3f43911657199188b9affcdb353f6793b54bcf11563d458eda384cc"
+    },
+    {
+      "file": "scripts/architecture-graph.mjs",
+      "bytes": 15998,
+      "lines": 280,
+      "sha256": "b88cbdf88e8a2c65a8727f2c00f2a8a13edaf4493f1e1b29ebe060f1f2624778"
+    },
+    {
+      "file": "scripts/asset-audit-lib.cjs",
+      "bytes": 8273,
+      "lines": 141,
+      "sha256": "06ed331ed5b29235a068237fe03953217cb48fb9da476e53eec8f7ddb424e69e"
+    },
+    {
+      "file": "scripts/asset-audit.cjs",
+      "bytes": 5794,
+      "lines": 118,
+      "sha256": "a1eb24b80aef0bf8973d1311d48bba85d5c2e8bc72fe2c35ac1c2c5985257934"
+    },
+    {
+      "file": "scripts/build-artifact-manifest.mjs",
+      "bytes": 6655,
+      "lines": 96,
+      "sha256": "09ab048c5ad7d4cad3b638513ab00cf98a1e8c92ef35c16c4a06e961b1257f26"
+    },
+    {
+      "file": "scripts/check-syntax.mjs",
+      "bytes": 2108,
+      "lines": 57,
+      "sha256": "e794c2f4406b4ef20ca0e8081e0bbd60f47530f66fce51be0be035c9c61bdaa8"
+    },
+    {
+      "file": "scripts/check-type-coverage.mjs",
+      "bytes": 5344,
+      "lines": 87,
+      "sha256": "32e76c7e99df0f089cd7b60ed6ff2b147807b97f15d0825c786fa8e071dc2696"
+    },
+    {
+      "file": "scripts/check-types.mjs",
+      "bytes": 1926,
+      "lines": 47,
+      "sha256": "3156dd8d4dddefec63bf68b8d259ef9f50a5438ca840b316f6d1459aa19ad8eb"
+    },
+    {
+      "file": "scripts/check-version.cjs",
+      "bytes": 1114,
+      "lines": 30,
+      "sha256": "85bcfe496f0571bb184d80a236edcd7e51bdcc4e2c08c1c471c3a4d0d804ec20"
+    },
+    {
+      "file": "scripts/compile-narrative.mjs",
+      "bytes": 1121,
+      "lines": 25,
+      "sha256": "8745e3759a3b79074758912ff3cfbd15de7fda957e3602a600afde10531482a7"
+    },
+    {
+      "file": "scripts/css-asset-minification.mjs",
+      "bytes": 2226,
+      "lines": 56,
+      "sha256": "aabdb61fd4bb63416e4e0584cac75a918a92e5f0fca67182ec676773196f3217"
+    },
+    {
+      "file": "scripts/css-redundancy-audit.mjs",
+      "bytes": 2517,
+      "lines": 45,
+      "sha256": "43db735953dd1cf2110d8079d593622eb8cd3ee78b6695803f355903bac0187d"
+    },
+    {
+      "file": "scripts/dependency-audit-diagnostics.mjs",
+      "bytes": 6525,
+      "lines": 105,
+      "sha256": "a5fcfcda1971903a8aa4339e5b95324bc192d727b3cbbff880d13e049274213b"
+    },
+    {
+      "file": "scripts/doc-retirement-candidates.mjs",
+      "bytes": 1900,
+      "lines": 37,
+      "sha256": "2be33b6986be9e3ae8f45f710e0306d5d711cd63f443a4427c650cabf44f1166"
+    },
+    {
+      "file": "scripts/electron-gpu-info.cjs",
+      "bytes": 650,
+      "lines": 22,
+      "sha256": "d7d468acc01bff87500572be80f912f73d508d623fdd5372f94c275e39562975"
+    },
+    {
+      "file": "scripts/electron-title-smoke.mjs",
+      "bytes": 5721,
+      "lines": 125,
+      "sha256": "3703d04d0fcfe69fe34555af8c1b3d1fb2832679e7d081482d322b5129a12431"
+    },
+    {
+      "file": "scripts/gate-plan.mjs",
+      "bytes": 18150,
+      "lines": 319,
+      "sha256": "f608b6244e2e6aa857351d97f21cf214b1d5e89e075f51ce86d694cecfb054fc"
+    },
+    {
+      "file": "scripts/generate-compendium.mjs",
+      "bytes": 8689,
+      "lines": 95,
+      "sha256": "662cb8fefa7be55dae5b9e76624de26c2768a8f8ab7f15f02b0403dc0c2835d5"
+    },
+    {
+      "file": "scripts/handoff-brief.mjs",
+      "bytes": 1159,
+      "lines": 20,
+      "sha256": "d2b44214f592082e52fa64b6d572f21cecf2de8e34ad28fe99d4b0bb378235a9"
+    },
+    {
+      "file": "scripts/iab-drive.mjs",
+      "bytes": 10612,
+      "lines": 201,
+      "sha256": "77e713c29f1a3975c497afa3f114cef105596a9329e8c4bdff7b8d659b54c39e"
+    },
+    {
+      "file": "scripts/impact-query.mjs",
+      "bytes": 9259,
+      "lines": 179,
+      "sha256": "f744faa56f8f2a1fbeeee1253234119026a81baf4a7e52b2bf2d02743e89c3fa"
+    },
+    {
+      "file": "scripts/index-validation.mjs",
+      "bytes": 13004,
+      "lines": 182,
+      "sha256": "87f22638c641c310a84248dd75d03c00481c11a1bb20c8e2e0e4277ecf5fdb06"
+    },
+    {
+      "file": "scripts/perf-benchmark.cjs",
+      "bytes": 18775,
+      "lines": 402,
+      "sha256": "235c204bfa53f723542344744f73d5cb8083263f6486d1366fb15318e79be2a0"
+    },
+    {
+      "file": "scripts/perf-budget.cjs",
+      "bytes": 9475,
+      "lines": 176,
+      "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+    },
+    {
+      "file": "scripts/registry-paths.mjs",
+      "bytes": 5449,
+      "lines": 97,
+      "sha256": "0136ea2b0902fde11479ec2bed780c6335b8c66d7b2d1cbd718f9410a29fd9ef"
+    },
+    {
+      "file": "scripts/runtime-asset-aliases.mjs",
+      "bytes": 2541,
+      "lines": 48,
+      "sha256": "ec4b5c7b4f1065201937f3a1a1d6c0a2cd9d3eb30a4211336576e58dc01d5ccc"
+    },
+    {
+      "file": "scripts/runtime-asset-publication.mjs",
+      "bytes": 2925,
+      "lines": 65,
+      "sha256": "5358062d9935a4ab1c32c77ddb30075881b0effadb594cbcd5e38be4fee9720d"
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy-review.mjs",
+      "bytes": 35680,
+      "lines": 330,
+      "sha256": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83"
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy.mjs",
+      "bytes": 14547,
+      "lines": 275,
+      "sha256": "9351046eff16e8f059a327eff04e4e872af912dfff592f4e5099a692f9d1b0a6"
+    },
+    {
+      "file": "scripts/runtime-trace-alignment.mjs",
+      "bytes": 8130,
+      "lines": 99,
+      "sha256": "ec13d98073922b2bb24f4356adf85b90013d0b933e46a5b24e1992897e40ef6b"
+    },
+    {
+      "file": "scripts/setup-commit-gate.mjs",
+      "bytes": 2734,
+      "lines": 65,
+      "sha256": "e128d737c2c2727c2c79eda9471a5e6b799853143f32cd6860d8a31c0ab9fe7e"
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "bytes": 18400,
+      "lines": 317,
+      "sha256": "a2da160ce980731c6c12c1b573563856dae42a10ddced98e9ec7cba151570f20"
+    },
+    {
+      "file": "scripts/validate-data.mjs",
+      "bytes": 5562,
+      "lines": 123,
+      "sha256": "94161eb946f88474bf10800f5265c0b5df77bd1115e5dc7180448f5468c156ab"
+    },
+    {
+      "file": "scripts/video-review.mjs",
+      "bytes": 22458,
+      "lines": 206,
+      "sha256": "b01e77ab77ed063267e19d62a5bc819748cb761b1187b7f077eacfeab9e7ddc4"
+    },
+    {
+      "file": "scripts/visible-playback.mjs",
+      "bytes": 15375,
+      "lines": 212,
+      "sha256": "fb0d8266997efed30214cd36a4d5fdb9922727514e9d653ddc392b5f44a7b31d"
+    },
+    {
+      "file": "scripts/web-up.mjs",
+      "bytes": 6217,
+      "lines": 117,
+      "sha256": "15136f981263305426e2b81d6a2bade13dfec0fdae39dca07954ee2f562a8963"
+    },
+    {
+      "file": "scripts/workflow-archive.mjs",
+      "bytes": 4166,
+      "lines": 60,
+      "sha256": "abc0de0d012b9020004eab49b3ca0fb0e89c1ad3c274640d2e41e51b1396c632"
+    },
+    {
+      "file": "scripts/workflow-browser.mjs",
+      "bytes": 13937,
+      "lines": 192,
+      "sha256": "329ccf7dbb83ae1862e0858354b8d27d0bf6f66552bfef86cb24776858eacbbc"
+    },
+    {
+      "file": "scripts/workflow-change-advice.mjs",
+      "bytes": 5454,
+      "lines": 81,
+      "sha256": "2d5c6583518d82ea3293aa97c83cac10abd947b2192fe71c41daa8e512e366d5"
+    },
+    {
+      "file": "scripts/workflow-change-review.mjs",
+      "bytes": 8564,
+      "lines": 131,
+      "sha256": "85337ce79f2571b46c33d52bd3982ef348850b2c8b834146d2ab171a9ae0eaf5"
+    },
+    {
+      "file": "scripts/workflow-dependencies.mjs",
+      "bytes": 10773,
+      "lines": 154,
+      "sha256": "e8d73af8dd2b626300e78d8863eef5e5d3e7086bf2b1aca1919e109063eaf4d7"
+    },
+    {
+      "file": "scripts/workflow-doctor.mjs",
+      "bytes": 13344,
+      "lines": 168,
+      "sha256": "1850eaf898933c727652a6d762986ca0d8071cb63071d651bac2aa41009c28dd"
+    },
+    {
+      "file": "scripts/workflow-evidence.mjs",
+      "bytes": 19051,
+      "lines": 274,
+      "sha256": "e7083b3ea3f005d5bf3c1b661b376eca3078eb2108442cdad334e8d0731b5f4f"
+    },
+    {
+      "file": "scripts/workflow-gate-receipt.mjs",
+      "bytes": 16721,
+      "lines": 233,
+      "sha256": "05c732292747494f8c74bc2f76581dc5da4c75a30f4e31a4f13ec290ce6d3f15"
+    },
+    {
+      "file": "scripts/workflow-ledger.mjs",
+      "bytes": 6542,
+      "lines": 113,
+      "sha256": "3769564ecce57cffb2e2318e78f04b70213c996bbf11d0757da4f74c2bee2b12"
+    },
+    {
+      "file": "scripts/workflow-memory.mjs",
+      "bytes": 18171,
+      "lines": 306,
+      "sha256": "aa3bbce19d4c98938676779b1e9e0870c021dde181591c7dfae11881db1886a2"
+    },
+    {
+      "file": "scripts/workflow-ship.mjs",
+      "bytes": 18618,
+      "lines": 297,
+      "sha256": "e84b1d3592b4760c7ebfec1a39e0764bfc0e49d30ce9e319c5223db55627c3bc"
+    },
+    {
+      "file": "scripts/workflow-staged.mjs",
+      "bytes": 20413,
+      "lines": 307,
+      "sha256": "0a780402b899299aace87a4f75762ec433fb562d3d433f030b6fa98d7ecab6bc"
+    },
+    {
+      "file": "scripts/workflow-status.mjs",
+      "bytes": 26302,
+      "lines": 380,
+      "sha256": "d2d9bcee8e22da6a0a6e4e8a1b452f2980ea21f2e5085c5640fac23982eb2a1b"
+    },
+    {
+      "file": "scripts/workflow-task-input.mjs",
+      "bytes": 3474,
+      "lines": 64,
+      "sha256": "585e23ceb860779d4e6b5b113c5820357b1668ac293d41bc9ff42a1506e246a9"
+    },
+    {
+      "file": "scripts/workflow-task.mjs",
+      "bytes": 11720,
+      "lines": 182,
+      "sha256": "a179172c6b5c25b8ff20b9663be8da8b63e053c51c8acecff81f5d288f67cf63"
+    },
+    {
+      "file": "scripts/workflow.mjs",
+      "bytes": 14898,
+      "lines": 217,
+      "sha256": "48ffcfb87c6fc5f62d8f81152773df3c7f845209d7ebad4daa29a7f0902cf98d"
+    }
+  ],
+  "matches": [
+    {
+      "tokens": 245,
+      "a": {
+        "file": "game/src/run/layeredMap.js",
+        "start": 12,
+        "end": 27
+      },
+      "b": {
+        "file": "game/src/run/layeredMap.js",
+        "start": 31,
+        "end": 45
+      }
+    },
+    {
+      "tokens": 106,
+      "a": {
+        "file": "game/src/run/game.run.dev-loader.js",
+        "start": 40,
+        "end": 47
+      },
+      "b": {
+        "file": "game/src/run/game.run.dev.js",
+        "start": 100,
+        "end": 107
+      }
+    },
+    {
+      "tokens": 75,
+      "a": {
+        "file": "game/tools/agent-batch.mjs",
+        "start": 26,
+        "end": 32
+      },
+      "b": {
+        "file": "game/tools/agent-evolve.mjs",
+        "start": 36,
+        "end": 44
+      }
+    },
+    {
+      "tokens": 75,
+      "a": {
+        "file": "scripts/workflow.mjs",
+        "start": 100,
+        "end": 104
+      },
+      "b": {
+        "file": "scripts/workflow.mjs",
+        "start": 152,
+        "end": 156
+      }
+    },
+    {
+      "tokens": 74,
+      "a": {
+        "file": "game/src/agent/agent.protocol.js",
+        "start": 73,
+        "end": 76
+      },
+      "b": {
+        "file": "game/src/agent/agent.protocol.js",
+        "start": 82,
+        "end": 85
+      }
+    },
+    {
+      "tokens": 69,
+      "a": {
+        "file": "game/src/run/chests.js",
+        "start": 514,
+        "end": 518
+      },
+      "b": {
+        "file": "game/src/run/chests.js",
+        "start": 699,
+        "end": 702
+      }
+    },
+    {
+      "tokens": 68,
+      "a": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 125,
+        "end": 131
+      },
+      "b": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 345,
+        "end": 351
+      }
+    },
+    {
+      "tokens": 68,
+      "a": {
+        "file": "scripts/perf-budget.cjs",
+        "start": 135,
+        "end": 140
+      },
+      "b": {
+        "file": "scripts/perf-budget.cjs",
+        "start": 142,
+        "end": 147
+      }
+    },
+    {
+      "tokens": 68,
+      "a": {
+        "file": "scripts/workflow-evidence.mjs",
+        "start": 237,
+        "end": 240
+      },
+      "b": {
+        "file": "scripts/workflow-staged.mjs",
+        "start": 188,
+        "end": 191
+      }
+    },
+    {
+      "tokens": 66,
+      "a": {
+        "file": "game/tools/agent-batch.mjs",
+        "start": 26,
+        "end": 32
+      },
+      "b": {
+        "file": "game/tools/agent-supervise.mjs",
+        "start": 27,
+        "end": 31
+      }
+    },
+    {
+      "tokens": 66,
+      "a": {
+        "file": "game/tools/agent-evolve.mjs",
+        "start": 36,
+        "end": 44
+      },
+      "b": {
+        "file": "game/tools/agent-supervise.mjs",
+        "start": 27,
+        "end": 31
+      }
+    },
+    {
+      "tokens": 64,
+      "a": {
+        "file": "scripts/asset-audit.cjs",
+        "start": 12,
+        "end": 18
+      },
+      "b": {
+        "file": "scripts/perf-budget.cjs",
+        "start": 10,
+        "end": 16
+      }
+    },
+    {
+      "tokens": 63,
+      "a": {
+        "file": "game/src/run/map-generation-rules.js",
+        "start": 61,
+        "end": 66
+      },
+      "b": {
+        "file": "game/src/run/map-route-v2.js",
+        "start": 53,
+        "end": 57
+      }
+    },
+    {
+      "tokens": 62,
+      "a": {
+        "file": "game/tools/agent-evolve.mjs",
+        "start": 81,
+        "end": 85
+      },
+      "b": {
+        "file": "game/tools/agent-evolve.mjs",
+        "start": 97,
+        "end": 101
+      }
+    },
+    {
+      "tokens": 62,
+      "a": {
+        "file": "scripts/architecture-graph.mjs",
+        "start": 144,
+        "end": 148
+      },
+      "b": {
+        "file": "scripts/workflow-dependencies.mjs",
+        "start": 8,
+        "end": 11
+      }
+    },
+    {
+      "tokens": 61,
+      "a": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 187,
+        "end": 191
+      },
+      "b": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 228,
+        "end": 231
+      }
+    },
+    {
+      "tokens": 61,
+      "a": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 335,
+        "end": 337
+      },
+      "b": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 421,
+        "end": 424
+      }
+    },
+    {
+      "tokens": 61,
+      "a": {
+        "file": "scripts/runtime-asset-aliases.mjs",
+        "start": 19,
+        "end": 22
+      },
+      "b": {
+        "file": "scripts/runtime-asset-aliases.mjs",
+        "start": 41,
+        "end": 44
+      }
+    },
+    {
+      "tokens": 60,
+      "a": {
+        "file": "scripts/workflow-evidence.mjs",
+        "start": 74,
+        "end": 79
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "start": 20,
+        "end": 25
+      }
+    },
+    {
+      "tokens": 59,
+      "a": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 188,
+        "end": 191
+      },
+      "b": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 283,
+        "end": 285
+      }
+    },
+    {
+      "tokens": 59,
+      "a": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 229,
+        "end": 231
+      },
+      "b": {
+        "file": "game/src/agent/agent.policy.js",
+        "start": 283,
+        "end": 285
+      }
+    },
+    {
+      "tokens": 59,
+      "a": {
+        "file": "scripts/build-artifact-manifest.mjs",
+        "start": 15,
+        "end": 19
+      },
+      "b": {
+        "file": "scripts/build-artifact-manifest.mjs",
+        "start": 58,
+        "end": 62
+      }
+    },
+    {
+      "tokens": 58,
+      "a": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 258,
+        "end": 262
+      },
+      "b": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 288,
+        "end": 293
+      }
+    },
+    {
+      "tokens": 57,
+      "a": {
+        "file": "game/src/run/game-session-restoration.js",
+        "start": 79,
+        "end": 81
+      },
+      "b": {
+        "file": "game/src/run/game-session-restoration.js",
+        "start": 92,
+        "end": 94
+      }
+    },
+    {
+      "tokens": 57,
+      "a": {
+        "file": "scripts/index-validation.mjs",
+        "start": 69,
+        "end": 73
+      },
+      "b": {
+        "file": "scripts/workflow-evidence.mjs",
+        "start": 74,
+        "end": 78
+      }
+    },
+    {
+      "tokens": 57,
+      "a": {
+        "file": "scripts/workflow-ledger.mjs",
+        "start": 104,
+        "end": 111
+      },
+      "b": {
+        "file": "scripts/workflow-task.mjs",
+        "start": 153,
+        "end": 160
+      }
+    },
+    {
+      "tokens": 56,
+      "a": {
+        "file": "scripts/workflow-gate-receipt.mjs",
+        "start": 96,
+        "end": 97
+      },
+      "b": {
+        "file": "scripts/workflow-gate-receipt.mjs",
+        "start": 98,
+        "end": 99
+      }
+    },
+    {
+      "tokens": 56,
+      "a": {
+        "file": "scripts/index-validation.mjs",
+        "start": 69,
+        "end": 73
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "start": 20,
+        "end": 24
+      }
+    },
+    {
+      "tokens": 56,
+      "a": {
+        "file": "scripts/workflow-status.mjs",
+        "start": 336,
+        "end": 337
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "start": 338,
+        "end": 339
+      }
+    },
+    {
+      "tokens": 55,
+      "a": {
+        "file": "scripts/acceptance-gate.mjs",
+        "start": 137,
+        "end": 141
+      },
+      "b": {
+        "file": "scripts/check-types.mjs",
+        "start": 13,
+        "end": 16
+      }
+    },
+    {
+      "tokens": 54,
+      "a": {
+        "file": "scripts/architecture-graph.mjs",
+        "start": 105,
+        "end": 108
+      },
+      "b": {
+        "file": "scripts/architecture-graph.mjs",
+        "start": 110,
+        "end": 113
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 612,
+        "end": 616
+      },
+      "b": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 641,
+        "end": 645
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 640,
+        "end": 643
+      },
+      "b": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 669,
+        "end": 672
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "game/src/run/game.run.shop.js",
+        "start": 335,
+        "end": 338
+      },
+      "b": {
+        "file": "game/src/run/game.run.shop.js",
+        "start": 359,
+        "end": 362
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 239,
+        "end": 241
+      },
+      "b": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 259,
+        "end": 261
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 239,
+        "end": 241
+      },
+      "b": {
+        "file": "scripts/gate-plan.mjs",
+        "start": 290,
+        "end": 292
+      }
+    },
+    {
+      "tokens": 53,
+      "a": {
+        "file": "scripts/index-validation.mjs",
+        "start": 31,
+        "end": 34
+      },
+      "b": {
+        "file": "scripts/workflow-dependencies.mjs",
+        "start": 62,
+        "end": 65
+      }
+    },
+    {
+      "tokens": 52,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 16,
+        "end": 21
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 52,
+      "a": {
+        "file": "scripts/architecture-graph.mjs",
+        "start": 123,
+        "end": 128
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "start": 118,
+        "end": 123
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 21
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 21
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 22
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 22
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 22
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 22
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 51,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 23
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 206,
+        "end": 212
+      },
+      "b": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 221,
+        "end": 227
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 198,
+        "end": 200
+      },
+      "b": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 335,
+        "end": 337
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 198,
+        "end": 200
+      },
+      "b": {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "start": 421,
+        "end": 424
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/agent/agent.state.js",
+        "start": 261,
+        "end": 263
+      },
+      "b": {
+        "file": "game/src/agent/agent.state.js",
+        "start": 267,
+        "end": 269
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 612,
+        "end": 614
+      },
+      "b": {
+        "file": "game/src/run/game.run.altar.js",
+        "start": 670,
+        "end": 672
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/run/game.run.shop.js",
+        "start": 690,
+        "end": 692
+      },
+      "b": {
+        "file": "game/src/run/game.run.shop.js",
+        "start": 725,
+        "end": 727
+      }
+    },
+    {
+      "tokens": 50,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "start": 17,
+        "end": 23
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "start": 187,
+        "end": 187
+      }
+    }
+  ]
+}

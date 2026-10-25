@@ -1,0 +1,12 @@
+{
+  "event_id": "tt6-demondeal",
+  "status": "preview-only",
+  "feedback": "首版非常不好；不要自行增加额外背景等细节，AI味太重。",
+  "source": "../.tmp/nai/event-transport-preview-1025/nai45-draft.png",
+  "output": "../.tmp/nai/event-transport-preview-1025/builtin-minimal-v2.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-fe101c50-63da-4e12-9f14-d7cccea815ce.png",
+  "prompt_summary": "回到原NAI4.5底稿，只保留两名运输人员、车厢局部和一个补给箱；去除额外街景、怪物、路障、雾雨、湿地反光与装饰光。灰蓝背景大色面，简化衣褶与机械刻画。",
+  "sha256": "e2a45d0681f4476e516b76c8cc114cf223f4851d92de8a5fea0da6f1e3076fdc",
+  "runtime_replaced": false,
+  "checks_run": []
+}

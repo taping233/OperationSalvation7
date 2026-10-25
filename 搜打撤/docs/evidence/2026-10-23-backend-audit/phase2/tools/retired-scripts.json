@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-23T14:46:10.764Z",
+  "authorization": "老板明确同意删除两份具体脚本及gate-plan登记/main注释旧引用",
+  "receipt": [
+    {
+      "file": "scripts/esm-convert.mjs",
+      "target": "D:\\素材\\代号柒\\搜打撤\\scripts\\esm-convert.mjs",
+      "backup": ".tmp/backend-phase2-retired-scripts/esm-convert.mjs.before",
+      "sha256": "eaaec79a958cfb408abf5dca943af1d1f26af2ec0c583b3c22230670a7f1da9b",
+      "bytes": 11322,
+      "lines": 276
+    },
+    {
+      "file": "scripts/esm-fix-setters.mjs",
+      "target": "D:\\素材\\代号柒\\搜打撤\\scripts\\esm-fix-setters.mjs",
+      "backup": ".tmp/backend-phase2-retired-scripts/esm-fix-setters.mjs.before",
+      "sha256": "b4e9129fb03ae69b61bcc047506a6dc0d3dea6dc659e58dfa877f5d5a73f0226",
+      "bytes": 5138,
+      "lines": 113
+    }
+  ],
+  "deletedLines": 389,
+  "recovery": "本轮原文字节备份保存在各receipt.backup（项目.tmp）；原始入库版本也可从Git获取，esm-convert另含本会话上一轮的1行导入精简。"
+}

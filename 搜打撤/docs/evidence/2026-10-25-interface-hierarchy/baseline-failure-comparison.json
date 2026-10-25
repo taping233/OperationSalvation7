@@ -1,0 +1,30 @@
+{
+  "matchingFailureHeadings": true,
+  "current": [
+    "tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene",
+    "tests/selection-state-query-work.test.js > discovers added members and groups, unobserves removed members, and releases removed groups",
+    "tests/ui-motion-cascade.test.js > keeps CSS transform transitions off motion-owned bag cards regardless of sheet order",
+    "tests/ui-motion-cascade.test.js > lets the selection plate own movement instead of the inventory hover lift",
+    "tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the setting reduced-motion preference",
+    "tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the system reduced-motion preference",
+    "tests/ui-motion-cascade.test.js > stops the is-temporary aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-motion-cascade.test.js > stops the is-temporary is-transforming aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-motion-cascade.test.js > stops the is-transforming aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-review-remediation.test.js > 卡牌说明、大图和保存回执 > 地图与房间移动同一顶栏节点，保留控件身份并留在可交互模态范围",
+    "tests/ui-review-remediation.test.js > 设置导航和结束回合 > 竖向分类键盘切换、焦点与各分类滚动位置独立保留"
+  ],
+  "before": [
+    "tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene",
+    "tests/selection-state-query-work.test.js > discovers added members and groups, unobserves removed members, and releases removed groups",
+    "tests/ui-motion-cascade.test.js > keeps CSS transform transitions off motion-owned bag cards regardless of sheet order",
+    "tests/ui-motion-cascade.test.js > lets the selection plate own movement instead of the inventory hover lift",
+    "tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the setting reduced-motion preference",
+    "tests/ui-motion-cascade.test.js > removes inventory transitions and hover movement for the system reduced-motion preference",
+    "tests/ui-motion-cascade.test.js > stops the is-temporary aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-motion-cascade.test.js > stops the is-temporary is-transforming aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-motion-cascade.test.js > stops the is-transforming aura for both reduced-motion preferences while preserving its static identity",
+    "tests/ui-review-remediation.test.js > 卡牌说明、大图和保存回执 > 地图与房间移动同一顶栏节点，保留控件身份并留在可交互模态范围",
+    "tests/ui-review-remediation.test.js > 设置导航和结束回合 > 竖向分类键盘切换、焦点与各分类滚动位置独立保留"
+  ],
+  "baselineLoaderSha256": "897734cd96069757dd76dbca741c4536e1e08d58fefc499593e6f9a99d54c40f"
+}

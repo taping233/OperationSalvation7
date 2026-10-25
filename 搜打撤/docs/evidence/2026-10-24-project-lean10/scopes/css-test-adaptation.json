@@ -1,0 +1,218 @@
+{
+  "cache": "node_modules/.cache/project-lean10-css-test-before",
+  "status": "verified-readers-only-with-9-existing-failures",
+  "helper": "tests/helpers/css-source.js",
+  "files": [
+    {
+      "file": "tests/backpack-layout.test.js",
+      "beforeSha256": "fb2cf28358e6d118a0c93a839f192b8a223cbfd45eed0a673fb02b6836eab4dc",
+      "afterSha256": "1f5069b606aaf8dc1fba3cdfde53ed6abac498873967943fd7232be94267e620",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/backpack-rail-alignment.test.js",
+      "beforeSha256": "4e00d3adc87ed579f8992c8bd8aaa6de40a5a2a713cdee0a73404765d43c496a",
+      "afterSha256": "ff99325e079fea50c8b0d49e10e36a0988496090d901c9d892b83bcf7b70eec1",
+      "cssReadCalls": 3
+    },
+    {
+      "file": "tests/base-subpage-header-readability.test.js",
+      "beforeSha256": "762ec3d3d6a531133ef467c58eab526e88045514c3c22ce97ea262857e93c8db",
+      "afterSha256": "fdb9682c06727d5e4bdeb75defa706a1e92c81cc5f82015f02f41d681b226899",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-card-results.test.js",
+      "beforeSha256": "4a39432a48c4ea4fd83b5e2b962679791be459913c62d80f4511a74556eefce0",
+      "afterSha256": "52b9e27fcb9ebb0d23ce9080ce10187025295fd1a3851479ee91db85bae69664",
+      "cssReadCalls": 2
+    },
+    {
+      "file": "tests/battle-decision-lifecycle.test.js",
+      "beforeSha256": "2bcb92120c1554841d6fdc3cb6756b6868acd2eeff7d3f5fba02c7d5f02ffb78",
+      "afterSha256": "86e1607cf54b67166a750ff00dae503f56b3655048018165df0ed763f3f7d3ed",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-decision-readability.test.js",
+      "beforeSha256": "1a5791471ad51ee383981656ebaeccf6a7ea01904a8fc8137dbab40a115c242f",
+      "afterSha256": "e273798a604b2fe6e8f8c7e721037294c8ac7d033554c61ce1cd4e36e6e041cb",
+      "cssReadCalls": 3
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "beforeSha256": "84c2520583c6c091152ac4995f011cbf43f0e8a113dd2f8d2dba960370cbf40b",
+      "afterSha256": "04ae6d9b28bbdb544544f58b289ed5c94a61fec89336a03c483988a1fbc42a82",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-decision-shell-review.test.js",
+      "beforeSha256": "6feb08e48287e6a53ef7b59326ae6fe380106b55d455120959e1fb92382ad9b3",
+      "afterSha256": "80a7931562c857b51abdc7016e5a78ef3783441958b0581b1c6344a27f4134b4",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-effect-feedback.test.js",
+      "beforeSha256": "de4bf6c066aa7f4c79fe488513ae3396497f2173d8856d5268ea9f2e3fac7fa2",
+      "afterSha256": "1bb8bc2e7866ed96b9d1844266124f62224a99e78c3ad8957683d73b25836445",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "beforeSha256": "9e5e10b8a61f3eea21024f0d1ab2dd81d0f48747061b517ccd1e8aa3454039e6",
+      "afterSha256": "4b9e4e269fd628f56ab1cab0945fd36ae5f7fe02e03dd6d043fc5f4a73732661",
+      "cssReadCalls": 2
+    },
+    {
+      "file": "tests/battle-infusion-chip-bounds.test.js",
+      "beforeSha256": "32c65eb1b1ae9ce2e0c19a056b1295b859abee5ff2820d3292054a8d9e37a57c",
+      "afterSha256": "4dc84581c4c8b8176b1d03f49fda99180e2cd4e3d212e1c3201eed623994dc7b",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-pile-readability.test.js",
+      "beforeSha256": "b5762e7617ff5516a643888bbb86e985bff93d9409006781f1fc089585eaaac4",
+      "afterSha256": "dfb3f90211cc4d9ff9ada3f93d9eba0b0d1684cded1fb3e7df06cd742e2e98ff",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-potion-bar-layout.test.js",
+      "beforeSha256": "9d7b5d9d62b65edb268d61de7ff592e2bd8649a1056f24aa8fbc90f24eb5be22",
+      "afterSha256": "2713586cd2d45f456a46f04227b34e5c3c35c25e1cc0bfaeee95f87487e5f5b4",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/battle-secondary-overlay.test.js",
+      "beforeSha256": "082d2d0585e928cf9e24ad5704359a715b0704f735ca205ddf290975ed1a8ab7",
+      "afterSha256": "4fc3eb0aa233711d356fc1de7e5255d9005f4749a618f817e963f4fd5825031a",
+      "cssReadCalls": 4
+    },
+    {
+      "file": "tests/card-face-presentation.test.js",
+      "beforeSha256": "ad70ada763a52331cc596a8fa8ed0db5be5249d94303c742aa383f2a46cc79e4",
+      "afterSha256": "70c6459e9e3077d8acf7e53c2db65e6d1c897b5d7adacfd67cf15055f9d23cb5",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/card-reading-typography.test.js",
+      "beforeSha256": "4ca6c1e5903e9c6111451fc84dc1eadd4cf7a505854f5afe8007d66d12806720",
+      "afterSha256": "c38536563634f8e1859c9b8fc62dc4777a443cd9747e614c9c10cb0da8477ea2",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/compact-reward-layout.test.js",
+      "beforeSha256": "cbed3ef1d814f51a3175e3655f698c2276338cc24b0b2b4fae410f5718a1143c",
+      "afterSha256": "1ea5e6cae897cffbb186a626c65eb2aaea81f1602d467762a51ed9273403124f",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/css-dead-dom-budget.test.js",
+      "beforeSha256": "80090ded452ea1396ce2edc8906d5902c1dab30049332f5e37c4c0927fb67106",
+      "afterSha256": "96ef5def6ee42d218ae583357b9fcd6ba7169277eb141f7ebec184f6d8ac64b8",
+      "cssReadCalls": 2
+    },
+    {
+      "file": "tests/event-reward-layout.test.js",
+      "beforeSha256": "8a6b74793ff4f5f7e28f34423ab2be9eb0be7877fc4f0389739762132e7ce6c1",
+      "afterSha256": "ba2ef09d77ca9b6e313f678fd21a2d21ed998a8b20026f12d5f5ea84857ef869",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/event-scene-readability.test.js",
+      "beforeSha256": "8efda447153165280a73e84a227a9d4ef6c85a21245c41f4290538ae51037891",
+      "afterSha256": "8a8980799e137714d68e22a40f9a60d91368a2e77fbde615b7bf9fe0b14295d4",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/extraction-rewards-view.test.js",
+      "beforeSha256": "ff832142ce577fb4aaac7caad1c4cde08b118eaa8c27b3b53fd5db9598cc0e61",
+      "afterSha256": "28a4d5eff82b93c40fad70bebe95b634d08914c713480af859bbde38f4ed34de",
+      "cssReadCalls": 2
+    },
+    {
+      "file": "tests/hub-personnel-portrait.test.js",
+      "beforeSha256": "d5b407f1d42208b78986bb2b716e131f9e190b95df0d7eb1537245dbccd8564e",
+      "afterSha256": "83480fb19d9f244533ab61ce2005757fb7bb3632c74d0b3d37a30f8820139e63",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/map-health-hud.test.js",
+      "beforeSha256": "6ca17cbf097f5b0fb55e917e92867b07b8d13f842ebd43414bf4ef067a19cf8c",
+      "afterSha256": "8d2987fca9b19d09812d75487e9d5577b91155deae72316fa1c27869d73b86e1",
+      "cssReadCalls": 2
+    },
+    {
+      "file": "tests/partner-interaction.test.js",
+      "beforeSha256": "c20d9bd9fa6a03a2bab8b81361f66fadcc2c458dd558f106ce2ede199f084926",
+      "afterSha256": "4d1286e4d25ffb7f52cf27670f4e25776a3b6d0fd461d0a30a017aea9bf2c9bf",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/pocket-restore-interface.test.js",
+      "beforeSha256": "769ec913656f2252bea5c828bf81aecb254a95738dac3035d3aeb794edbcf8b7",
+      "afterSha256": "8546b60651471900d4f52a62b76d859368efc0abc3263478723865c7c1040b7b",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/reward-action-clipping.test.js",
+      "beforeSha256": "f55d87a02aee2c4a8224802a8b7f3e87d16fd4ea821c23aec6162390037426cc",
+      "afterSha256": "7748a5fed1c18520960081b895d9890b7c339b9a0c0fb87a954a3bffe185753e",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/reward-frame-review.test.js",
+      "beforeSha256": "b058a78e8f2974ae955a897ba8114a328d19ad39f223807fabb3c06ba96dc909",
+      "afterSha256": "b8c21ef8a95869bf23439e4a9627238e479b32a5a22ec704b467f73586e1844a",
+      "cssReadCalls": 3
+    },
+    {
+      "file": "tests/reward-receipt-clarity.test.js",
+      "beforeSha256": "4bfd4a95f089ccc9149270e86e47b935c418ce3eb43065dbb8685414c1699ad1",
+      "afterSha256": "b73fcc54dcde400ed8535fd9835fba960023d5b9efad8b491fb46cc36cf981b2",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/sacrifice-layout-readability.test.js",
+      "beforeSha256": "8e0036aa17ad35267d27d7e25a8365457c155f22fd6df1534da9e2d4fd1bed23",
+      "afterSha256": "9c576ce02a2458643d50755ec19f74409d64c2eb299de53909ed66d397b0da19",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "beforeSha256": "70fd27e019a63b7296bad093207466cb252579d50c86dd1ec1cf5f322885f870",
+      "afterSha256": "bf9000630f359f54fccab6402cac9d5508a3045c7a5e5f31a73ecd091edad3a2",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/terminal-result-readability.test.js",
+      "beforeSha256": "bc8580a4ece5548b0e4c699dbb7767d8691b09e55fa62f2af29f940c7e3443fd",
+      "afterSha256": "cb9a3fd276503ff1a76b6cef83d01878bb06ddb520c9f4fced9dfa18628fd5ce",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/ui-design-system.test.js",
+      "beforeSha256": "bf24df10ebfcf0939fc4aa44378c2eef0f8a3dc0304b4ddee72638d8f1f80ac3",
+      "afterSha256": "cec97be156d9a68e86fd6682edb58d40ceb94c0bebdfa49accb048419bf33c78",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/wf-feedback1021-c-hand-select-grid.test.js",
+      "beforeSha256": "064b5792fac2fc2651e55103391f8eb82c2fab4cfd0dd1d675d27aac93b933cb",
+      "afterSha256": "a549d0e7b5863472c19ff770ee1d59391098f48e4412351dd484912dfde65806",
+      "cssReadCalls": 1
+    },
+    {
+      "file": "tests/wf-feedback1021-c-return-map.test.js",
+      "beforeSha256": "4c26407e3f252a38ebae74ac0e049853f882cc0f2661579dc59c8cfc615de0c0",
+      "afterSha256": "366a67845eeb5cf7347d7fa06ff2eaba0e8cdcb27f89d7b59f66160a9e6b4141",
+      "cssReadCalls": 1
+    }
+  ],
+  "result": {
+    "total": 404,
+    "passed": 395,
+    "existingFailures": 9,
+    "baselineComparison": "css-test-baseline-comparison.json",
+    "assertionsProof": "css-test-assertions-proof.json"
+  }
+}

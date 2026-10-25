@@ -1,0 +1,17 @@
+[
+  {
+    "path": "game/src/agent/agent.replay-state.js",
+    "sha256": "4A3A23BDAFA028C078ED8A60DBF4DB7C886D8054D879995662FF19EF17C9E19C",
+    "backup": "agent.replay-state.js.before"
+  },
+  {
+    "path": "game/src/agent/agent.policy.js",
+    "sha256": "6317E381B290A95F7232FF15F2700577910DA495DFCE222F69ADDA0114252037",
+    "backup": "agent.policy.js.before"
+  },
+  {
+    "path": "game/src/run/game.run.js",
+    "sha256": "1DCCEC8B53629ABF11266A86F69781B1FB1D2FD779FF327848A01E146CD2B16B",
+    "backup": "game.run.js.before"
+  }
+]

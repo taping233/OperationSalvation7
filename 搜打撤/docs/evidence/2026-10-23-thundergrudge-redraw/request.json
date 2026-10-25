@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-thundergrudge",
+      "asset": "cards/martial-tt7-thundergrudge.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a168e9-3303-7231-bf93-a56fd7b7c7f3/exec-6854ea18-bf63-4823-8d34-4c6f0ce7782a.png",
+      "revision": "wu-thundergrudge-20261023",
+      "prompt": "Use case: identity-preserve. Redraw game card illustration 快意恩仇, landscape 4:3. Image 1 is the OLD CARD, composition reference only: preserve airborne turning slash, bent rear leg, extended other leg, ponytail flying left, face at upper-right, blade crossing horizontally diagonally across upper image. Image 2 is CURRENT CHARACTER identity reference, overrides old clothing and hair. Match her youthful adult anime face, cyan-blue eyes, confident grin with tiny fang, silver-white high ponytail tied with cobalt blue bow, black rose at character left temple, ordinary black round sunglasses pushed onto head. Forehead clearly exposed, front hair swept aside and parted, no heavy bangs. Black charcoal off-shoulder long-sleeve SHORT ruffled dress, every hem above knees, bare legs, black ankle boots, black leather sword harness with simple buckle across torso. Remove ALL blue star lining, long skirt and long back hem. Sword drawn for this attack, simple black straight sword hilt and dark blade with a narrow bright cutting edge, empty black sheath secured behind her, no duplicate weapon. Readable sword-gripping hand and athletic twist. Background abstract dark charcoal blue with a few broad directional swipes and thin white slash accent, no scenery. 画风：有明确笔形与取舍的手绘动漫插画，哑光、不透明的色块覆色，选择性的细线融入色面。先用连成大组的综合色铺完整形状，再在少数转折处用钝端短条、宽弧形或长条笔压出体积。大片安静底色与少量较密的重点交替出现。覆盖笔有方向，边缘偶尔轻微错位或搭接，轮廓和结构仍准确。脸眼与关键手势画准，肤面留白，鼻口经济短线。宽弯发束像相接的完整色片，发束内部多数连续底色，阴影宽而有形，少数断续短亮带。衣褶并入主暗面，少数宽转折，不画满屏碎三角面。避免细发网络、反复碎高光、统一颗粒、塑料精修。No text, UI, border or watermark.",
+      "references": [
+        "game/assets/cards/martial-tt7-thundergrudge.webp",
+        "game/assets/portraits/full/wu.webp"
+      ]
+    }
+  ]
+}

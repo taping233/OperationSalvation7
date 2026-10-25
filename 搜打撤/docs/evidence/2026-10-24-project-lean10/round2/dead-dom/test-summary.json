@@ -1,0 +1,20 @@
+{
+  "status": "completed-with-matched-existing-failures",
+  "cssConsumerFiles": 13,
+  "total": 141,
+  "passed": 136,
+  "failed": 5,
+  "pureGuardFinal": {
+    "tests": 6,
+    "passed": 6,
+    "eslint": "passed",
+    "evidenceIndependent": true
+  },
+  "baseline": "baseline-comparison.json",
+  "outsideConsumerScope": [
+    "acceptance-gate.test.js",
+    "workflow-change-review.test.js"
+  ],
+  "originalFullRun": "tests-first.log",
+  "fixtureOwnerCoordination": "Producer SHA refresh deferred until parent confirms fixture batch frozen"
+}

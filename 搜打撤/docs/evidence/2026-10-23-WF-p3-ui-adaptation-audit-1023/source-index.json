@@ -1,0 +1,860 @@
+{
+  "capturedAt": "2026-10-23T15:14:10.815Z",
+  "decompiler": "ILSpyCmd 9.1.0.7988; --disable-updatecheck -p",
+  "archives": [
+    {
+      "name": "P3Makoto_v0.14.76.zip",
+      "bytes": 86902622,
+      "sha256": "0fb7341f0ba5a5d802a27ff9a9a42d4218f55ed1410d3b8eea064ca26a2b0962",
+      "retrieval": "老板本会话提供的本机压缩包；未复制进仓库"
+    },
+    {
+      "name": "P3MusicBox_v1.1.3.zip",
+      "bytes": 71814522,
+      "sha256": "ae17b21a19717cf5126a3afc69654832243af18ec5b0ca1f92412f555e0a850d",
+      "retrieval": "老板本会话提供的本机压缩包；未复制进仓库"
+    }
+  ],
+  "entries": [
+    {
+      "id": "R01",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/StatusButton.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/StatusButton.cs",
+      "sha256": "431023d07fd61986cbdfb4abad83776cc6b4d86b64b9e5bc50b57ee2c7418a84",
+      "lineCount": 366,
+      "ranges": [
+        [
+          129,
+          191
+        ],
+        [
+          305,
+          363
+        ]
+      ],
+      "why": "状态入口、悬停、展开的独立进度"
+    },
+    {
+      "id": "R02",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/TipList.cs",
+      "sha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "lineCount": 1226,
+      "ranges": [
+        [
+          129,
+          136
+        ],
+        [
+          221,
+          231
+        ],
+        [
+          271,
+          325
+        ],
+        [
+          412,
+          421
+        ]
+      ],
+      "why": "状态列表数据来源与打开/关闭输入"
+    },
+    {
+      "id": "R03",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/TipList.cs",
+      "sha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "lineCount": 1226,
+      "ranges": [
+        [
+          363,
+          376
+        ],
+        [
+          1073,
+          1160
+        ],
+        [
+          1204,
+          1209
+        ]
+      ],
+      "why": "列表空间预算、滚动、单条强调与错峰"
+    },
+    {
+      "id": "R04",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/TipList.cs",
+      "sha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "lineCount": 1226,
+      "ranges": [
+        [
+          611,
+          653
+        ],
+        [
+          778,
+          811
+        ]
+      ],
+      "why": "原说明内容与正负状态表面"
+    },
+    {
+      "id": "R05",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/TipList.cs",
+      "sha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "lineCount": 1226,
+      "ranges": [
+        [
+          914,
+          956
+        ]
+      ],
+      "why": "时间步长、内容签名、刷新和失效关闭"
+    },
+    {
+      "id": "R06",
+      "kind": "reference",
+      "file": "P3Makoto.Vfx/PileFx.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Vfx/PileFx.cs",
+      "sha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "lineCount": 3824,
+      "ranges": [
+        [
+          1837,
+          1910
+        ],
+        [
+          1954,
+          1998
+        ],
+        [
+          2045,
+          2051
+        ],
+        [
+          2077,
+          2117
+        ]
+      ],
+      "why": "卡片连续进度、占位、前置、明暗与名称条"
+    },
+    {
+      "id": "R07",
+      "kind": "reference",
+      "file": "P3Makoto.Vfx/PileFx.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Vfx/PileFx.cs",
+      "sha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "lineCount": 3824,
+      "ranges": [
+        [
+          1193,
+          1237
+        ],
+        [
+          1272,
+          1277
+        ],
+        [
+          1552,
+          1602
+        ],
+        [
+          2415,
+          2417
+        ]
+      ],
+      "why": "卡片命中关系、错峰、边缘渐隐、排序与详情延后"
+    },
+    {
+      "id": "R08",
+      "kind": "reference",
+      "file": "P3Makoto.Scenes/SettingsSkin.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Scenes/SettingsSkin.cs",
+      "sha256": "237e20566bdf286e72b38f9749aacbf41ade7564477e65eb877660259bca6d95",
+      "lineCount": 2957,
+      "ranges": [
+        [
+          1474,
+          1487
+        ],
+        [
+          2337,
+          2383
+        ]
+      ],
+      "why": "设置行：鼠标/键盘的整行强调"
+    },
+    {
+      "id": "R09",
+      "kind": "reference",
+      "file": "P3MusicBox/MusicBox.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3MusicBox-decompiled/P3MusicBox/MusicBox.cs",
+      "sha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "lineCount": 2187,
+      "ranges": [
+        [
+          926,
+          943
+        ],
+        [
+          1381,
+          1393
+        ],
+        [
+          1446,
+          1499
+        ]
+      ],
+      "why": "稳定命中框、图形平滑、悬停提示和浮层定位"
+    },
+    {
+      "id": "R10",
+      "kind": "reference",
+      "file": "P3MusicBox/MusicBox.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3MusicBox-decompiled/P3MusicBox/MusicBox.cs",
+      "sha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "lineCount": 2187,
+      "ranges": [
+        [
+          1544,
+          1563
+        ],
+        [
+          1996,
+          2023
+        ],
+        [
+          2104,
+          2134
+        ]
+      ],
+      "why": "文本交接、非对称开关、当前选项反色"
+    },
+    {
+      "id": "R11",
+      "kind": "reference",
+      "file": "P3MusicBox/IconDrag.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3MusicBox-decompiled/P3MusicBox/IconDrag.cs",
+      "sha256": "90ac95ebdfb1d15022cb138723293b7faf0ee0111d45f64c43f5d875271e21c1",
+      "lineCount": 183,
+      "ranges": [
+        [
+          70,
+          122
+        ],
+        [
+          131,
+          180
+        ]
+      ],
+      "why": "点击/拖动阈值与比例位置"
+    },
+    {
+      "id": "R12",
+      "kind": "reference",
+      "file": "P3Makoto.Vfx/Popups.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Vfx/Popups.cs",
+      "sha256": "907fa06e45a152b882036ea617befe4699f7ac819d0e4e7c1f4a22aa717464fa",
+      "lineCount": 850,
+      "ranges": [
+        [
+          25,
+          32
+        ],
+        [
+          284,
+          295
+        ],
+        [
+          413,
+          450
+        ]
+      ],
+      "why": "连续反馈的时窗和错位"
+    },
+    {
+      "id": "R13",
+      "kind": "reference",
+      "file": "P3Makoto.Vfx/Preload.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Vfx/Preload.cs",
+      "sha256": "74f5925213640d75ee297fedcf9d9f5983d5d230b6e197b9ccbcd06c509a8deb",
+      "lineCount": 354,
+      "ranges": [
+        [
+          83,
+          134
+        ]
+      ],
+      "why": "资源准备入口及骨骼预热取舍"
+    },
+    {
+      "id": "R14",
+      "kind": "reference",
+      "file": "P3Makoto.Vfx/IdleWarmup.cs",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-code-analysis/P3Makoto-decompiled/P3Makoto.Vfx/IdleWarmup.cs",
+      "sha256": "be75d0ecee44e68bd33a46f5c1eb2b4bbc308c38b075212ffef7c8db03dac48a",
+      "lineCount": 707,
+      "ranges": [
+        [
+          477,
+          533
+        ]
+      ],
+      "why": "空闲条件下逐项预热"
+    },
+    {
+      "id": "P01",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/target-motion.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/target-motion.js",
+      "sha256": "24a15e91f35328eeb78282df18f91f92d338fa97d336461af10878c9863ba095",
+      "lineCount": 169,
+      "ranges": [
+        [
+          26,
+          28
+        ],
+        [
+          37,
+          51
+        ],
+        [
+          66,
+          135
+        ]
+      ],
+      "why": "连续目标、停止与原有动画所有权"
+    },
+    {
+      "id": "P02",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/selection-state-motion.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/selection-state-motion.js",
+      "sha256": "93b676ae16744f11cd92d763c80fe44fe8b1e6a0b6e627cdaa9b8dc279f97c5d",
+      "lineCount": 119,
+      "ranges": [
+        [
+          1,
+          8
+        ],
+        [
+          31,
+          63
+        ]
+      ],
+      "why": "背包/设置的共享选中底板"
+    },
+    {
+      "id": "P03",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/card-state-motion.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/card-state-motion.js",
+      "sha256": "f5f18549b89ed68fefd75b2363a8b804e87d75ee9ad684d108734e42a1b2e499",
+      "lineCount": 86,
+      "ranges": [
+        [
+          1,
+          30
+        ],
+        [
+          36,
+          67
+        ]
+      ],
+      "why": "奖励与背包的现行轻抬、选中与拖拽排除"
+    },
+    {
+      "id": "P04",
+      "kind": "project-snapshot",
+      "file": "game/css/settings-navigation.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/settings-navigation.css",
+      "sha256": "f9bcdf65b0771ff103462864892cc4f9f2fd4e37e45ae23856eaeeae75cfc1bf",
+      "lineCount": 271,
+      "ranges": [
+        [
+          127,
+          176
+        ],
+        [
+          250,
+          269
+        ]
+      ],
+      "why": "设置行、开关滑块、页签内容入场的现行责任"
+    },
+    {
+      "id": "P05",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/discovery-selection.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/discovery-selection.js",
+      "sha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0",
+      "lineCount": 157,
+      "ranges": [
+        [
+          21,
+          100
+        ],
+        [
+          117,
+          145
+        ]
+      ],
+      "why": "发现选择的本地状态、确认、取消和键盘"
+    },
+    {
+      "id": "P06",
+      "kind": "project-snapshot",
+      "file": "game/css/discovery-selection.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/discovery-selection.css",
+      "sha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523",
+      "lineCount": 44,
+      "ranges": [
+        [
+          19,
+          43
+        ]
+      ],
+      "why": "发现页现有多重描边与已选标记"
+    },
+    {
+      "id": "P07",
+      "kind": "project-snapshot",
+      "file": "game/src/battle/view/battle.aim.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/battle/view/battle.aim.js",
+      "sha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087",
+      "lineCount": 927,
+      "ranges": [
+        [
+          521,
+          552
+        ],
+        [
+          587,
+          627
+        ],
+        [
+          691,
+          708
+        ],
+        [
+          875,
+          901
+        ]
+      ],
+      "why": "战斗拾牌、跟手、归位和清理的 transform 所有权"
+    },
+    {
+      "id": "P08",
+      "kind": "project-snapshot",
+      "file": "game/src/battle/view/battle.hand-hit.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/battle/view/battle.hand-hit.js",
+      "sha256": "e0977072ba0d53329187c9ffffe15c82006082d7d8f1fadeb0976dc02ffe2991",
+      "lineCount": 144,
+      "ranges": [
+        [
+          1,
+          27
+        ],
+        [
+          43,
+          80
+        ]
+      ],
+      "why": "静态命中区域与物理输入"
+    },
+    {
+      "id": "P09",
+      "kind": "project-snapshot",
+      "file": "game/src/battle/view/battle.layers.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/battle/view/battle.layers.js",
+      "sha256": "ab4708626ffadb1f51d12407a7a15dc4bae393f451943fd6e0a79517f9b5ffdf",
+      "lineCount": 1021,
+      "ranges": [
+        [
+          115,
+          135
+        ],
+        [
+          727,
+          750
+        ],
+        [
+          789,
+          818
+        ],
+        [
+          990,
+          1005
+        ]
+      ],
+      "why": "状态生成、分组重写、角色名牌与敌方扩展标记"
+    },
+    {
+      "id": "P10",
+      "kind": "project-snapshot",
+      "file": "game/css/battle-stage.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/battle-stage.css",
+      "sha256": "8e5db7debd678a9aa161586a369922da40744ac0d364661b05410e873ff59894",
+      "lineCount": 250,
+      "ranges": [
+        [
+          55,
+          85
+        ],
+        [
+          126,
+          145
+        ],
+        [
+          184,
+          191
+        ]
+      ],
+      "why": "血条/意图/状态布局与战斗卡片阅读/已选样式"
+    },
+    {
+      "id": "P11",
+      "kind": "project-snapshot",
+      "file": "game/css/card-layout-selected.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/card-layout-selected.css",
+      "sha256": "034d32e1d5ee0c3b0318c3241cf2aedbc17abb4e9b2803c9ed2efbef1d4abf09",
+      "lineCount": 265,
+      "ranges": [
+        [
+          1,
+          16
+        ],
+        [
+          169,
+          189
+        ]
+      ],
+      "why": "全局卡面边界与临时/变形光效"
+    },
+    {
+      "id": "P12",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/term-tips.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/term-tips.js",
+      "sha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2",
+      "lineCount": 192,
+      "ranges": [
+        [
+          99,
+          192
+        ]
+      ],
+      "why": "词条事件捕获与当前显示时机"
+    },
+    {
+      "id": "P13",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/term-tips.runtime.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/term-tips.runtime.js",
+      "sha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21",
+      "lineCount": 155,
+      "ranges": [
+        [
+          80,
+          152
+        ]
+      ],
+      "why": "现有说明浮层、定位、跟随与生命周期"
+    },
+    {
+      "id": "P14",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/term-tip-policy.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/term-tip-policy.js",
+      "sha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3",
+      "lineCount": 8,
+      "ranges": [
+        [
+          1,
+          8
+        ]
+      ],
+      "why": "卡面规则与词条浮层的互斥边界"
+    },
+    {
+      "id": "P15",
+      "kind": "project-snapshot",
+      "file": "game/src/battle/view/battle.pile-view.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/battle/view/battle.pile-view.js",
+      "sha256": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7",
+      "lineCount": 51,
+      "ranges": [
+        [
+          10,
+          49
+        ]
+      ],
+      "why": "牌堆只读展示与不泄露隐藏顺序的分组"
+    },
+    {
+      "id": "P16",
+      "kind": "project-snapshot",
+      "file": "game/css/battle-pile-view.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/battle-pile-view.css",
+      "sha256": "b89677dc79e74fce243a204d67ab416b69aebd595d4367795e694b1b9e23dbcd",
+      "lineCount": 89,
+      "ranges": [
+        [
+          43,
+          78
+        ],
+        [
+          89,
+          89
+        ]
+      ],
+      "why": "牌库卡宽、滚动、阅读和固定返回区"
+    },
+    {
+      "id": "P17",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/card-zoom-controller.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/card-zoom-controller.js",
+      "sha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185",
+      "lineCount": 390,
+      "ranges": [
+        [
+          13,
+          33
+        ],
+        [
+          171,
+          230
+        ],
+        [
+          259,
+          299
+        ],
+        [
+          343,
+          385
+        ]
+      ],
+      "why": "大图层的 inert、焦点、关闭和源卡过渡"
+    },
+    {
+      "id": "P18",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/reward-interaction.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/reward-interaction.js",
+      "sha256": "b12792d8326a43d0ea6176852f8d39b985a5b6a5d95d7f07f8c385b37205071a",
+      "lineCount": 37,
+      "ranges": [
+        [
+          1,
+          37
+        ]
+      ],
+      "why": "奖励输入保护及同类焦点导航"
+    },
+    {
+      "id": "P19",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/reward-acquisition-motion.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/reward-acquisition-motion.js",
+      "sha256": "df06881c5f68c0a2ab02632e51912fb63f143b175def55a837701a0e1f634a0b",
+      "lineCount": 130,
+      "ranges": [
+        [
+          24,
+          117
+        ]
+      ],
+      "why": "领取后飞向背包、清理与位置重算"
+    },
+    {
+      "id": "P20",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/reward-card-feedback.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/reward-card-feedback.js",
+      "sha256": "4645685cd23efb79edc46c3939426d5b30b47601d1ec22b663bccab14e488bc4",
+      "lineCount": 43,
+      "ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "why": "奖励反馈与完成回执入口"
+    },
+    {
+      "id": "P21",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/motion-presets.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/motion-presets.js",
+      "sha256": "0ce68b2d607c292e5393747198dca4622473594284a4e170302893a60293367e",
+      "lineCount": 36,
+      "ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "why": "现有时长、缓动和减少动态偏好"
+    },
+    {
+      "id": "P22",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/screen-owner.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/screen-owner.js",
+      "sha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b",
+      "lineCount": 31,
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "why": "页面/浮层输入所有权与返回路由"
+    },
+    {
+      "id": "P23",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/settings-audio.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/settings-audio.js",
+      "sha256": "3541c1f986d78ca8ee4f5ade1e5a0825083bed64915b6c572245a05221667322",
+      "lineCount": 56,
+      "ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "why": "音频设置状态源、读值和刷新"
+    },
+    {
+      "id": "P24",
+      "kind": "project-snapshot",
+      "file": "game/src/core/icons-bitmap.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/core/icons-bitmap.js",
+      "sha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "lineCount": 105,
+      "ranges": [
+        [
+          8,
+          26
+        ],
+        [
+          29,
+          44
+        ],
+        [
+          93,
+          105
+        ]
+      ],
+      "why": "图标字典、语义别名、字符映射和类型图标"
+    },
+    {
+      "id": "P25",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/reward-scene-view.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/reward-scene-view.js",
+      "sha256": "10e71d3f7e036f0e168b22fcbda4c90baccbb50e12a3e63e367f97ec5aebaed2",
+      "lineCount": 133,
+      "ranges": [
+        [
+          1,
+          133
+        ]
+      ],
+      "why": "奖励卡、查看与领取的实际组件结构"
+    },
+    {
+      "id": "P26",
+      "kind": "project-snapshot",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/battle/view/battle.vfx.js",
+      "sha256": "0ccb1621ff0fa5919775924f643a967d3c33d3ebe211e1c0897e2679d1d18858",
+      "lineCount": 447,
+      "ranges": [
+        [
+          248,
+          263
+        ],
+        [
+          393,
+          415
+        ]
+      ],
+      "why": "现有多段伤害计数与四个活跃飘字槽位"
+    },
+    {
+      "id": "P27",
+      "kind": "project-snapshot",
+      "file": "game/src/ui/run-top-bar.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/ui/run-top-bar.js",
+      "sha256": "dd88ccc2a89fa911e86c41f256ba189d7fd5267fcef0b8a1147c975b743b23ce",
+      "lineCount": 175,
+      "ranges": [
+        [
+          10,
+          31
+        ],
+        [
+          64,
+          100
+        ]
+      ],
+      "why": "局内顶栏按钮、状态与移动同一组控件"
+    },
+    {
+      "id": "P28",
+      "kind": "project-snapshot",
+      "file": "game/src/core/renderer.icons.js",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/src/core/renderer.icons.js",
+      "sha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07",
+      "lineCount": 48,
+      "ranges": [
+        [
+          16,
+          48
+        ]
+      ],
+      "why": "地图线性符号中的同形多义分支"
+    },
+    {
+      "id": "P29",
+      "kind": "project-snapshot",
+      "file": "game/css/card-state-motion.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/card-state-motion.css",
+      "sha256": "27d599cbb514596a50f69c6e7e1e917b8e30a7acd0cf66f48895d1f06b0ceab0",
+      "lineCount": 39,
+      "ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "why": "卡片姿态服务接管与领取副本动画层"
+    },
+    {
+      "id": "P30",
+      "kind": "project-snapshot",
+      "file": "game/css/selection-state-motion.css",
+      "source": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot/game/css/selection-state-motion.css",
+      "sha256": "ec80b92f04ba733a3a51ecc392c30755730a24297f4e823b0b0d45a0677fb39b",
+      "lineCount": 31,
+      "ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "why": "底板及已接管选择项的背景退让"
+    }
+  ]
+}

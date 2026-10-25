@@ -1,0 +1,66 @@
+{
+  "status": "partial-complete-uncommitted",
+  "objective": "Preserve all existing functions and reduce source by at least 10%",
+  "targetMet": false,
+  "runtime": {
+    "baseline": 6542503,
+    "after": 6104715,
+    "net": 437788,
+    "percent": 6.691445154858928
+  },
+  "conservativeStructural": {
+    "net": 430222,
+    "percent": 6.575801340862969,
+    "remainingToTenPercent": 224029,
+    "engineeringAdded": 7132,
+    "formatAndCommentCleanupExcluded": 434
+  },
+  "checks": {
+    "syntax": "passed:685 project files",
+    "types": "passed:11 configs; actual implementation coverage 622/622",
+    "docs": "passed",
+    "runtimeDifferential": "passed:190 runtime keys,66 setters,84 engine exports",
+    "styles": "passed:124 source files,6969 selector branches,expanded rules/declarations/comments and ordering",
+    "catalogs": "passed:1295 paths and106 independent cue configurations",
+    "browser": "passed:current1618x956 Codex IAB; actual card play,enemy defeat,consumed pile,enemy turn and next player turn; zero console errors",
+    "diff": "passed:208 scoped paths;151 runtime entries match frozen SHA"
+  },
+  "battleIntegration": {
+    "files": 156,
+    "passed": 1816,
+    "failed": 24,
+    "skipped": 0,
+    "baseline": "All24 failures reproduced with frozen original sources; names and first diagnostics match, zero mismatches"
+  },
+  "assetCompatibility": {
+    "passed": 114,
+    "failed": 3,
+    "baseline": "Same3 old asset guard failures as pre-runtime slice; exclusion set/warnings unchanged"
+  },
+  "cssTargeted": {
+    "first": {
+      "passed": 395,
+      "failed": 9,
+      "baseline": "All9 reproduced"
+    },
+    "second": {
+      "passed": 243,
+      "failed": 1,
+      "baseline": "The1 reproduced"
+    }
+  },
+  "limits": [
+    "10% objective not reached; no feature removal used to close the gap",
+    "No full normal save-slot campaign, production build, commit, push or remote CI run",
+    "Original pre-existing native nesting follows its prior pipeline; only new supported component scopes gain compatibility expansion",
+    "Source byte reduction differs from JS token and physical line reductions; tokens reduced10237 and lines2186",
+    "Original full source and raw Vitest JSON remain in ignored local caches"
+  ],
+  "services": {
+    "created": [],
+    "preserved": "Existing5200 service owned by another chat"
+  },
+  "browserCleanup": "Only the IAB tab created for this batch was closed; no service was stopped",
+  "pagePerfFixture": "Original unchanged card source reproduces the same liveCardOptions ReferenceError in the existing test extraction",
+  "editing": "released;completed batch remains uncommitted;10% objective remains unmet"
+}

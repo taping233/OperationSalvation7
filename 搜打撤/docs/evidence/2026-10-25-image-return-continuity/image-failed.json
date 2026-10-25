@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T11:45:34.175Z",
+  "inputKind": "real-input",
+  "detail": "真实点击隔离页模拟失败按钮，脚本派发受控error事件；保留已加载图及其他操作，不是真实断网故障。",
+  "screenshot": {
+    "path": "image-failed.png",
+    "bytes": 51969,
+    "sha256": "572280232af20cf506f3d8b3139f8722068c0f2c2759ffa3d53f6a3b0c05d0e1"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/dev/image-return-continuity-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/portraits/avatars/heixiang.webp",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/portraits/avatars/baita.webp",
+      "width": 1024
+    }
+  ],
+  "console": []
+}

@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "revision": 3,
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-swordimmortal.webp",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-swordimmortal.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-swordimmortal.webp"
+      ],
+      "prompt": "Repaint IMAGE 1, the NEW NAI5 storyboard, into ONE 1:1 square game-card illustration. Image 1 exclusively determines the NEW camera, pose, relative positions and action. Image 2 is ONLY the woman's face, costume and head-ornament identity; do not inherit its old composition. Use clear blue eyes, silver-white high ponytail with exposed forehead, small-fang smile, plain round black sunglasses on hair, black rose beside blue ribbon. Her outfit is a short black off-shoulder dress, with a restrained ruffle at neckline, not a blue-lined coat. No added jewelry. Hand-painted anime with clean coherent hair locks, connected broad opaque shadow masses and selective resolved face/hands; quieter secondary areas. Square composition with generous open space and clear focal point; no detailed scenery, no words or frame. Preserve the draft's three-quarter REAR VIEW: she is seated on one broad flying black sword and looks back over her shoulder. Her face and one bracing hand contacting the flat sword surface are the main visual story. Adapt to square by cropping the lower thighs/feet outside frame, never squeezing the whole body or bringing back the old frontal seated pose. One ponytail flows left into open space; the sword runs diagonally through the bottom. Keep torso twist and hip contact natural, quiet dark dress with a few broad structural folds. Do not multiply curls, tiny pleats, swords or magical particles. Background only slate-blue and warm ivory fields.",
+      "nai_path": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-swordimmortal.png"
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "revision": 3,
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-goldencicada.webp",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-goldencicada.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-goldencicada.webp"
+      ],
+      "prompt": "Repaint IMAGE 1, the NEW NAI5 storyboard, into ONE 1:1 square game-card illustration. Image 1 exclusively determines the NEW camera, pose, relative positions and action. Image 2 is ONLY the woman's face, costume and head-ornament identity; do not inherit its old composition. Use clear blue eyes, silver-white high ponytail with exposed forehead, small-fang smile, plain round black sunglasses on hair, black rose beside blue ribbon. Her outfit is a short black off-shoulder dress, with a restrained ruffle at neckline, not a blue-lined coat. No added jewelry. Hand-painted anime with clean coherent hair locks, connected broad opaque shadow masses and selective resolved face/hands; quieter secondary areas. Square composition with generous open space and clear focal point; no detailed scenery, no words or frame. Preserve the draft's SIDE VIEW dodge: woman is on the RIGHT leaning back beyond the incoming straight blade tip, open released hand below, discarded intact jacket falling LOWER LEFT. Keep a clearly visible EMPTY BACKGROUND GAP between the sword point and her upper chest/neck. Widen the attacking blade enough to read as a real broad sword, but preserve its straight axis and separate visible pointed tip. Her body has moved off the thrust line; blade touches NEITHER body NOR discarded jacket. The jacket is wholly below the weapon, with one sleeve and a few gravity folds; it is not a hollow body, ring, shield, cloak wall or a second person. No holes, punctures, tearing, stabbing contact, blood, added opponent or extra weapon. Keep all THREE shapes and their gap legible in the square frame, no foreground fabric around the blade. Remove the rectangular panel from the background and use two connected quiet color fields.",
+      "nai_path": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-goldencicada.png"
+    }
+  ]
+}

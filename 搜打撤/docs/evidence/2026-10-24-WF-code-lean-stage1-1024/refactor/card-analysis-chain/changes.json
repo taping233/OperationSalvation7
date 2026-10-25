@@ -1,0 +1,100 @@
+{
+  "baseline": "node_modules/.cache/lean-refactor-1024/card-analysis-chain/before/",
+  "files": [
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "before": {
+        "sha256": "2c0225c9b117cf132e2f769a42abeeb7f549694ab6f8d72db222932cbd844963",
+        "lines": 215,
+        "normalizedBytes": 12385,
+        "tokens": 1909
+      },
+      "after": {
+        "sha256": "e136101cace7af864cfeb8f4e78a2cf2768c1d70f98b931e6f64b47fb4087d14",
+        "lines": 235,
+        "normalizedBytes": 13399,
+        "tokens": 1993
+      },
+      "delta": {
+        "lines": 20,
+        "normalizedBytes": 1014,
+        "tokens": 84
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "before": {
+        "sha256": "3e9a3616a15bc21b13a3ec0f236757f4affe3ac1bca694dcd8c4295a2b00b80f",
+        "lines": 150,
+        "normalizedBytes": 7869,
+        "tokens": 1025
+      },
+      "after": {
+        "sha256": "db3c4c8e9ab84723f98d8b9ef2b9b37ea6b6f2aeb3201ec1a344db144d8032c7",
+        "lines": 148,
+        "normalizedBytes": 7751,
+        "tokens": 1014
+      },
+      "delta": {
+        "lines": -2,
+        "normalizedBytes": -118,
+        "tokens": -11
+      }
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "before": {
+        "sha256": "68ea343fab43648db80dc962028f9870770c231903c29a69b04e2d8743402b46",
+        "lines": 318,
+        "normalizedBytes": 18319,
+        "tokens": 2470
+      },
+      "after": {
+        "sha256": "a2ce8966147a0380ccebf3da5c9ca8a82ee40a20b956c061112b858e86220eb7",
+        "lines": 319,
+        "normalizedBytes": 18399,
+        "tokens": 2492
+      },
+      "delta": {
+        "lines": 1,
+        "normalizedBytes": 80,
+        "tokens": 22
+      }
+    }
+  ],
+  "delta": {
+    "lines": 19,
+    "normalizedBytes": 976,
+    "tokens": 95
+  },
+  "addedTests": [
+    {
+      "file": "tests/card-analysis-chain.test.js",
+      "after": {
+        "sha256": "454d798d1381ce564e93502e154e31834c880f74e44537df27c5ecf47e8e058a",
+        "lines": 73,
+        "normalizedBytes": 3758,
+        "tokens": 897
+      }
+    }
+  ],
+  "newRuntimeFiles": [],
+  "priorSchemaExcluded": true,
+  "wholeProjectBaseline": {
+    "tokens": 836141,
+    "normalizedBytes": 6601166
+  },
+  "wholeProjectReductionContributionPercentagePoints": {
+    "tokens": -0.011361720092663797,
+    "normalizedBytes": -0.014785266724090865
+  },
+  "computation": {
+    "schemaBefore": 49,
+    "schemaAfter": 34,
+    "reductionPercent": 30.612244897959183,
+    "rootCallsBefore": 30,
+    "rootCallsAfter": 15,
+    "isolatedViewsBefore": 19,
+    "isolatedViewsAfter": 19
+  }
+}

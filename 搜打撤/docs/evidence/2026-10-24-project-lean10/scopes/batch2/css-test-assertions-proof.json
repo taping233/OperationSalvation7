@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "eslint": "passed",
+  "files": [
+    {
+      "file": "tests/battle-entry-readiness.test.js",
+      "matchers": 141,
+      "registrations": 23
+    },
+    {
+      "file": "tests/battle-status-presentation.test.js",
+      "matchers": 52,
+      "registrations": 9
+    },
+    {
+      "file": "tests/battle-turn-feedback.test.js",
+      "matchers": 28,
+      "registrations": 7
+    },
+    {
+      "file": "tests/beginner-guide-readability.test.js",
+      "matchers": 12,
+      "registrations": 4
+    },
+    {
+      "file": "tests/event-signal-puzzle.test.js",
+      "matchers": 54,
+      "registrations": 12
+    },
+    {
+      "file": "tests/m05-home-scene.test.js",
+      "matchers": 69,
+      "registrations": 15
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "matchers": 90,
+      "registrations": 24
+    },
+    {
+      "file": "tests/settings-audio.test.js",
+      "matchers": 16,
+      "registrations": 5
+    }
+  ]
+}

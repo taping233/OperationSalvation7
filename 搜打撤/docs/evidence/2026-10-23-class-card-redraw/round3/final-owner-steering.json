@@ -1,0 +1,16 @@
+{
+  "owner_instruction": "金蝉的剑指向外衣；不更新反馈网页；准备实装",
+  "item": {
+    "card_id": "tt7-goldencicada",
+    "name": "金蝉脱壳",
+    "revision": 3,
+    "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-goldencicada.webp",
+    "references": [
+      "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-bbde1bba-a3e1-4fe8-8886-4b531ed4025f.png"
+    ],
+    "prompt": "Precise local weapon-direction edit of this existing square anime illustration. Keep the woman, released hand, discarded falling jacket in LOWER LEFT, clothing, face, head ornaments, camera and background exactly as they are. The sword is currently aimed horizontally toward the woman's neck; CHANGE ONLY this incoming sword's position and axis. Make one straight broad blade enter from UPPER LEFT and angle diagonally DOWNWARD toward the discarded JACKET at lower left. The sharp point must aim directly at the jacket's shoulder/upper sleeve and stop a small clear distance before that cloth surface. It must be immediately clear the attacker has struck toward the abandoned clothing while the woman has already escaped to the RIGHT, entirely outside the blade's straight trajectory. The full tip and its small gap to the jacket must be visible. No blade aimed at her body or neck. No cloth hole, piercing, damage, touching, blood, second sword or added opponent. Retain the same clean hand-painted anime style and 1:1 square framing.",
+    "nai_path": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-goldencicada.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-bbde1bba-a3e1-4fe8-8886-4b531ed4025f.png",
+    "status": "nai-repaint-candidate"
+  }
+}

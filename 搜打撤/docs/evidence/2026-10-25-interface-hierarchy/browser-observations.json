@@ -1,0 +1,43 @@
+{
+  "preset": {
+    "blocked": "rgb(228, 194, 147)",
+    "buttons": [
+      {
+        "action": "secondary",
+        "bg": "rgba(255, 255, 255, 0.03)",
+        "disabled": false,
+        "font": "20px"
+      },
+      {
+        "action": "primary",
+        "bg": "rgb(185, 214, 227)",
+        "disabled": false,
+        "font": "20px"
+      },
+      {
+        "action": "secondary",
+        "bg": "rgba(255, 255, 255, 0.03)",
+        "disabled": false,
+        "font": "20px"
+      },
+      {
+        "action": "primary",
+        "bg": "rgb(185, 214, 227)",
+        "disabled": true,
+        "font": "20px"
+      }
+    ],
+    "horizontalOverflow": false,
+    "ready": "rgb(186, 216, 196)",
+    "scope": "constructed component, no save connection"
+  },
+  "logs": [],
+  "checks": [
+    "settings title 30px / object 26px / consistent selection tint",
+    "confirmation secondary / danger 20px; cancelled and source focus restored",
+    "achievement title 30px / object 26px / body 22px; no horizontal overflow",
+    "photo primary rgb(185,214,227), ink rgb(23,43,54); 8 visible images loaded; zoom opens and returns",
+    "feedback primary/secondary 20px; keyboard reaches both; cancelled without save"
+  ],
+  "window": "Current built-in browser window; no resize"
+}

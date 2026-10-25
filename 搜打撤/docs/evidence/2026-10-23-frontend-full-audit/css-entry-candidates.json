@@ -1,0 +1,4989 @@
+{
+  "files": 41,
+  "candidates": [
+    {
+      "file": "css/battle-stage.css",
+      "bytes": 37350,
+      "saved": 33,
+      "redundant": [
+        {
+          "selector": "#overlay .battle-stage.sts .sts-headrow",
+          "property": "display",
+          "value": "flex",
+          "line": 54,
+          "start": 7869,
+          "end": 7882,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 249,
+            "value": "none"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-headrow",
+          "property": "font-size",
+          "value": "24px",
+          "line": 54,
+          "start": 7958,
+          "end": 7973,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 249,
+            "value": "20px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .bt-infchip",
+          "property": "top",
+          "value": "8px",
+          "line": 141,
+          "start": 21744,
+          "end": 21752,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 142,
+            "value": "56px"
+          },
+          "bytes": 7
+        }
+      ]
+    },
+    {
+      "file": "css/page-events.css",
+      "bytes": 12891,
+      "saved": 141,
+      "redundant": [
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+          "property": "left",
+          "value": "12%",
+          "line": 36,
+          "start": 1570,
+          "end": 1580,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 137,
+            "value": "0"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+          "property": "right",
+          "value": "12%",
+          "line": 36,
+          "start": 1581,
+          "end": 1592,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 137,
+            "value": "0"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+          "property": "top",
+          "value": "0",
+          "line": 36,
+          "start": 1593,
+          "end": 1600,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 137,
+            "value": "0"
+          },
+          "bytes": 6
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+          "property": "height",
+          "value": "1px",
+          "line": 36,
+          "start": 1601,
+          "end": 1613,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 137,
+            "value": "3px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+          "property": "background",
+          "value": "linear-gradient(90deg, transparent, #ead282a1 24%, #ead282c4 50%, #ead282a1 76%, transparent)",
+          "line": 38,
+          "start": 1654,
+          "end": 1760,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 137,
+            "value": "linear-gradient(90deg, var(--ak-yellow) 0 64px, var(--ak-line) 64px)"
+          },
+          "bytes": 105
+        }
+      ]
+    },
+    {
+      "file": "css/page-expedition-hud.css",
+      "bytes": 23514,
+      "saved": 178,
+      "redundant": [
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "linear-gradient(180deg, rgba(18,20,21,.88), rgba(14,15,16,.92))",
+          "line": 134,
+          "start": 6590,
+          "end": 6666,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 165,
+            "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+          },
+          "bytes": 75
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "linear-gradient(180deg, rgba(17,18,20,.88), rgba(13,14,15,.92))",
+          "line": 145,
+          "start": 7055,
+          "end": 7131,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+          },
+          "bytes": 75
+        },
+        {
+          "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome",
+          "property": "background",
+          "value": "#632d32",
+          "line": 214,
+          "start": 10184,
+          "end": 10213,
+          "survivor": {
+            "file": "css/feedback-oct12.css",
+            "line": 55,
+            "value": "transparent"
+          },
+          "bytes": 28
+        }
+      ]
+    },
+    {
+      "file": "css/page-slot-select.css",
+      "bytes": 21459,
+      "saved": 274,
+      "redundant": [
+        {
+          "selector": ".slot-page::before",
+          "property": "background",
+          "value": "radial-gradient(ellipse 42% 34% at 30% 62%, rgba(132,144,152,.26), transparent 68%),\n    radial-gradient(ellipse 38% 30% at 72% 40%, rgba(162,173,180,.15), transparent 70%),\n    radial-gradient(ellipse 50% 40% at 52% 84%, rgba(34,36,39,.55), transparent 72%)",
+          "line": 123,
+          "start": 5207,
+          "end": 5482,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 118,
+            "value": "var(--ak-tex-hex) 0 0 / 56px 97px"
+          },
+          "bytes": 274
+        }
+      ]
+    },
+    {
+      "file": "css/expedition-roster.css",
+      "bytes": 27716,
+      "saved": 246,
+      "redundant": [
+        {
+          "selector": "#overlay .cls2-page",
+          "property": "background",
+          "value": "#101112",
+          "line": 7,
+          "start": 300,
+          "end": 319,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 122,
+            "value": "var(--ak-tex-grid) 0 0 / 32px 32px, linear-gradient(180deg, #14171a, #08090b)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "border-radius",
+          "value": "0",
+          "line": 48,
+          "start": 5756,
+          "end": 5772,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 125,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "color",
+          "value": "#17181a",
+          "line": 48,
+          "start": 5773,
+          "end": 5787,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 125,
+            "value": "#14120a"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "background",
+          "value": "linear-gradient(115deg,#dfdcd5,var(--gold-main) 58%,#d7ba5c)",
+          "line": 48,
+          "start": 5788,
+          "end": 5860,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 125,
+            "value": "var(--ak-yellow)"
+          },
+          "bytes": 71
+        },
+        {
+          "selector": "#overlay .cls2-panel",
+          "property": "background",
+          "value": "linear-gradient(90deg,rgba(11,12,13,.98) 58%,rgba(11,12,13,.88) 84%,transparent)",
+          "line": 138,
+          "start": 12993,
+          "end": 13085,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 124,
+            "value": "linear-gradient(90deg, rgba(10,12,14,.9), rgba(10,12,14,.55))"
+          },
+          "bytes": 91
+        },
+        {
+          "selector": "#overlay .cls2-name",
+          "property": "text-shadow",
+          "value": "0 8px 28px rgba(0,0,0,.55)",
+          "line": 142,
+          "start": 13366,
+          "end": 13405,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 123,
+            "value": "0 2px 0 rgba(0,0,0,.6)"
+          },
+          "bytes": 38
+        }
+      ]
+    },
+    {
+      "file": "css/expedition-rewards.css",
+      "bytes": 26351,
+      "saved": 74,
+      "redundant": [
+        {
+          "selector": "#overlay .node-main",
+          "property": "justify-content",
+          "value": "flex-start",
+          "line": 136,
+          "start": 16686,
+          "end": 16713,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 136,
+            "value": "safe center"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "padding",
+          "value": "24px 32px",
+          "line": 143,
+          "start": 17443,
+          "end": 17461,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 48,
+            "value": "24px 40px 30px"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": "#overlay .card.chest > h2",
+          "property": "letter-spacing",
+          "value": "2px",
+          "line": 144,
+          "start": 17635,
+          "end": 17654,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 62,
+            "value": "4px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card.chest .evt-sts-desc",
+          "property": "color",
+          "value": "#c1c4c7",
+          "line": 146,
+          "start": 17876,
+          "end": 17890,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 70,
+            "value": "#c1c4c7"
+          },
+          "bytes": 13
+        }
+      ]
+    },
+    {
+      "file": "css/expedition-inventory.css",
+      "bytes": 32453,
+      "saved": 80,
+      "redundant": [
+        {
+          "selector": "#overlay .hub-tabs",
+          "property": "gap",
+          "value": "4px",
+          "line": 172,
+          "start": 14152,
+          "end": 14160,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 94,
+            "value": "2px"
+          },
+          "bytes": 7
+        },
+        {
+          "selector": "#overlay .hub-tabs",
+          "property": "border-bottom",
+          "value": "0",
+          "line": 172,
+          "start": 14226,
+          "end": 14242,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 94,
+            "value": "1px solid var(--ak-line)"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "border",
+          "value": "0",
+          "line": 173,
+          "start": 14373,
+          "end": 14382,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 95,
+            "value": "0"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "border-radius",
+          "value": "0",
+          "line": 173,
+          "start": 14418,
+          "end": 14434,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 95,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "background",
+          "value": "transparent",
+          "line": 173,
+          "start": 14435,
+          "end": 14458,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 95,
+            "value": "rgba(255,255,255,.03)"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "color",
+          "value": "#a7abae",
+          "line": 173,
+          "start": 14459,
+          "end": 14473,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 95,
+            "value": "var(--ak-sub)"
+          },
+          "bytes": 13
+        }
+      ]
+    },
+    {
+      "file": "css/expedition-map.css",
+      "bytes": 8410,
+      "saved": 35,
+      "redundant": [
+        {
+          "selector": "#logPanel",
+          "property": "background",
+          "value": "#101a20ed",
+          "line": 96,
+          "start": 6329,
+          "end": 6350,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 180,
+            "value": "rgba(12,13,14,.74)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#logPanel",
+          "property": "border-radius",
+          "value": "0",
+          "line": 96,
+          "start": 6379,
+          "end": 6395,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 181,
+            "value": "0"
+          },
+          "bytes": 15
+        }
+      ]
+    },
+    {
+      "file": "css/expedition.css",
+      "bytes": 19421,
+      "saved": 189,
+      "redundant": [
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "linear-gradient(105deg, #151618, #212326)",
+          "line": 312,
+          "start": 16100,
+          "end": 16154,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "#0b0c0e"
+          },
+          "bytes": 53
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "1px solid #7f848766",
+          "line": 312,
+          "start": 16155,
+          "end": 16187,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "1px solid var(--ak-line-hi)"
+          },
+          "bytes": 31
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "0 -10px 35px #0a0b0c55",
+          "line": 313,
+          "start": 16209,
+          "end": 16244,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "inset 0 3px 0 var(--ak-blue)"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": "#sidebar .stat-duo b",
+          "property": "color",
+          "value": "var(--exp-text)",
+          "line": 321,
+          "start": 17046,
+          "end": 17069,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 77,
+            "value": "#f4f4f4"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": "#sidebar .stat-duo label",
+          "property": "font-size",
+          "value": "10px",
+          "line": 322,
+          "start": 17099,
+          "end": 17115,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 75,
+            "value": "10px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#hpText",
+          "property": "font-variant-numeric",
+          "value": "tabular-nums",
+          "line": 330,
+          "start": 17538,
+          "end": 17573,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 140,
+            "value": "tabular-nums"
+          },
+          "bytes": 34
+        }
+      ]
+    },
+    {
+      "file": "css/winter.css",
+      "bytes": 103763,
+      "saved": 2099,
+      "redundant": [
+        {
+          "selector": "#title::after",
+          "property": "background",
+          "value": "linear-gradient(90deg,#1416184d,transparent 45%,#161819ba),linear-gradient(0deg,#141618bf,transparent 55%)",
+          "line": 4,
+          "start": 1498,
+          "end": 1616,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 13,
+            "value": "linear-gradient(90deg, #0e0f100a 18%, #12131512 48%, #0f101180 100%),\n    linear-gradient(0deg, #12131472, transparent 37%)"
+          },
+          "bytes": 117
+        },
+        {
+          "selector": "#sidebar",
+          "property": "height",
+          "value": "105px",
+          "line": 22,
+          "start": 9006,
+          "end": 9019,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "142px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#sidebar",
+          "property": "min-height",
+          "value": "105px",
+          "line": 22,
+          "start": 9019,
+          "end": 9036,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "142px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#sidebar",
+          "property": "padding",
+          "value": "8px 28px",
+          "line": 22,
+          "start": 9036,
+          "end": 9053,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "14px 24px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#sidebar",
+          "property": "gap",
+          "value": "22px",
+          "line": 22,
+          "start": 9053,
+          "end": 9062,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "18px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "1px solid #7d8286",
+          "line": 22,
+          "start": 9062,
+          "end": 9091,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "1px solid var(--ak-line-hi)"
+          },
+          "bytes": 28
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "linear-gradient(105deg,#1d2022,#26282b)",
+          "line": 22,
+          "start": 9091,
+          "end": 9142,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "#0b0c0e"
+          },
+          "bytes": 50
+        },
+        {
+          "selector": "#sidebar",
+          "property": "overflow",
+          "value": "visible",
+          "line": 22,
+          "start": 9142,
+          "end": 9159,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 313,
+            "value": "visible"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "0 -5px 25px #1a1c1e55",
+          "line": 22,
+          "start": 9159,
+          "end": 9191,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "inset 0 3px 0 var(--ak-blue)"
+          },
+          "bytes": 32
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "border",
+          "value": "0",
+          "line": 22,
+          "start": 9208,
+          "end": 9217,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 315,
+            "value": "0"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "background",
+          "value": "none",
+          "line": 22,
+          "start": 9250,
+          "end": 9266,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 315,
+            "value": "none"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "box-shadow",
+          "value": "none",
+          "line": 22,
+          "start": 9266,
+          "end": 9282,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 315,
+            "value": "none"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "padding",
+          "value": "2px 22px 2px 0",
+          "line": 22,
+          "start": 9282,
+          "end": 9304,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 315,
+            "value": "0"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "background",
+          "value": "#34373b",
+          "line": 22,
+          "start": 9680,
+          "end": 9699,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 173,
+            "value": "var(--ak-tex-hatch), linear-gradient(180deg, #2a2e33, #15171a)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "letter-spacing",
+          "value": "5px",
+          "line": 25,
+          "start": 10135,
+          "end": 10153,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 159,
+            "value": "7px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "#1e2022",
+          "line": 25,
+          "start": 10262,
+          "end": 10281,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 165,
+            "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#hpHud",
+          "property": "box-shadow",
+          "value": "none",
+          "line": 25,
+          "start": 10306,
+          "end": 10322,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 136,
+            "value": "0 2px 8px rgba(7,7,8,.3)"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#hpHud",
+          "property": "clip-path",
+          "value": "none",
+          "line": 25,
+          "start": 10322,
+          "end": 10336,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 165,
+            "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "letter-spacing",
+          "value": "2px",
+          "line": 25,
+          "start": 10413,
+          "end": 10431,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 139,
+            "value": "2.5px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "#1e2022e8",
+          "line": 26,
+          "start": 10774,
+          "end": 10795,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border",
+          "value": "1px solid #71777b",
+          "line": 26,
+          "start": 10795,
+          "end": 10820,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 146,
+            "value": "1px solid rgba(170,174,177,.26)"
+          },
+          "bytes": 24
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "box-shadow",
+          "value": "none",
+          "line": 26,
+          "start": 10820,
+          "end": 10836,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 147,
+            "value": "inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35)"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "height",
+          "value": "42px",
+          "line": 26,
+          "start": 10851,
+          "end": 10862,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "34px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#resHud .res-gold b",
+          "property": "color",
+          "value": "#eed47f",
+          "line": 26,
+          "start": 10883,
+          "end": 10896,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 151,
+            "value": "#f4e2a5"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#overlay",
+          "property": "background",
+          "value": "#101112a8",
+          "line": 29,
+          "start": 11645,
+          "end": 11666,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 23,
+            "value": "rgba(5,6,8,.82)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay",
+          "property": "backdrop-filter",
+          "value": "blur(6px)",
+          "line": 29,
+          "start": 11666,
+          "end": 11691,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 23,
+            "value": "blur(6px) saturate(.8)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "background",
+          "value": "linear-gradient(125deg,#202325,#181a1c)",
+          "line": 29,
+          "start": 11708,
+          "end": 11759,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 24,
+            "value": "var(--ak-ink)"
+          },
+          "bytes": 50
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border",
+          "value": "1px solid #74797c",
+          "line": 29,
+          "start": 11795,
+          "end": 11820,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 28,
+            "value": "1px solid var(--ak-line-hi)"
+          },
+          "bytes": 24
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "background",
+          "value": "linear-gradient(125deg,#2b2e31,#1e2022)",
+          "line": 29,
+          "start": 11820,
+          "end": 11871,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 27,
+            "value": "var(--ak-tex-noise), var(--ak-tex-grid) 0 0 / 32px 32px, linear-gradient(180deg, #23272b, #14161a)"
+          },
+          "bytes": 50
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "box-shadow",
+          "value": "0 25px 100px #0d0e0f99",
+          "line": 29,
+          "start": 11871,
+          "end": 11905,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 29,
+            "value": "var(--ak-bevel)"
+          },
+          "bytes": 33
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border-radius",
+          "value": "0",
+          "line": 29,
+          "start": 11905,
+          "end": 11920,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 28,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .pg.slot-page .pg-back",
+          "property": "transition",
+          "value": "color .18s,filter .18s,border-color .18s",
+          "line": 276,
+          "start": 34761,
+          "end": 34812,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 316,
+            "value": "color var(--slot-fast), border-color var(--slot-fast), filter var(--slot-fast), transform var(--slot-fast)"
+          },
+          "bytes": 51
+        },
+        {
+          "selector": ".slot-page .slot-card-desc .si-line em",
+          "property": "color",
+          "value": "#c9cbcc",
+          "line": 280,
+          "start": 35136,
+          "end": 35150,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 232,
+            "value": "#92979a"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".slot-page .slot-card-desc .si-line em",
+          "property": "letter-spacing",
+          "value": ".16em",
+          "line": 280,
+          "start": 35150,
+          "end": 35170,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 232,
+            "value": ".18em"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .slot-page .slot-card-cta",
+          "property": "letter-spacing",
+          "value": "2px",
+          "line": 292,
+          "start": 36426,
+          "end": 36444,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 252,
+            "value": "3px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "gap",
+          "value": "8px",
+          "line": 305,
+          "start": 37300,
+          "end": 37308,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 109,
+            "value": "10px"
+          },
+          "bytes": 7
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "font-size",
+          "value": "15px",
+          "line": 305,
+          "start": 37308,
+          "end": 37323,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 111,
+            "value": "16px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "letter-spacing",
+          "value": "3px",
+          "line": 305,
+          "start": 37323,
+          "end": 37342,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 111,
+            "value": "2.8px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "color",
+          "value": "#ebebeb",
+          "line": 305,
+          "start": 37342,
+          "end": 37356,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 111,
+            "value": "#e3e1dd"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "margin",
+          "value": "30px 0 14px",
+          "line": 306,
+          "start": 37359,
+          "end": 37378,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 110,
+            "value": "34px 0 12px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "border-bottom",
+          "value": "1px solid #757a7e66",
+          "line": 306,
+          "start": 37397,
+          "end": 37430,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 112,
+            "value": "1px solid rgba(230,203,118,.14)"
+          },
+          "bytes": 33
+        },
+        {
+          "selector": ".pg.settings-page .set-h:first-child",
+          "property": "margin-top",
+          "value": "8px",
+          "line": 307,
+          "start": 37469,
+          "end": 37483,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 125,
+            "value": "10px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "margin-left",
+          "value": "auto",
+          "line": 308,
+          "start": 37518,
+          "end": 37535,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 127,
+            "value": "auto"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "font-size",
+          "value": "10px",
+          "line": 308,
+          "start": 37535,
+          "end": 37550,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 127,
+            "value": "11.5px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "color",
+          "value": "#a9aeb1",
+          "line": 308,
+          "start": 37550,
+          "end": 37564,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 127,
+            "value": "#afb3b6"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "letter-spacing",
+          "value": "2px",
+          "line": 308,
+          "start": 37564,
+          "end": 37582,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 127,
+            "value": "1.6px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "font-size",
+          "value": "14.5px",
+          "line": 309,
+          "start": 37607,
+          "end": 37624,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 143,
+            "value": "16px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "padding",
+          "value": "9px 12px",
+          "line": 309,
+          "start": 37624,
+          "end": 37641,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 144,
+            "value": "12px 16px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "line": 309,
+          "start": 37641,
+          "end": 37676,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 144,
+            "value": "0"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "background",
+          "value": "#25282a55",
+          "line": 309,
+          "start": 37676,
+          "end": 37697,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 145,
+            "value": "rgba(37,40,42,.38)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "border",
+          "value": "1px solid #4d535933",
+          "line": 309,
+          "start": 37697,
+          "end": 37724,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 146,
+            "value": "1px solid rgba(77,83,89,.28)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "margin-bottom",
+          "value": "8px",
+          "line": 309,
+          "start": 37724,
+          "end": 37742,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 147,
+            "value": "6px"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "transition",
+          "value": "background .15s",
+          "line": 309,
+          "start": 37742,
+          "end": 37768,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 148,
+            "value": "background var(--set-fast), border-color var(--set-fast),\n    box-shadow var(--set-fast), transform var(--set-fast)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": ".pg.settings-page .chk:hover",
+          "property": "background",
+          "value": "#25282a88",
+          "line": 310,
+          "start": 37799,
+          "end": 37819,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 152,
+            "value": "rgba(44,48,51,.58)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "margin-left",
+          "value": "auto",
+          "line": 311,
+          "start": 37852,
+          "end": 37869,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 170,
+            "value": "auto"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "font-size",
+          "value": "10px",
+          "line": 311,
+          "start": 37869,
+          "end": 37884,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 170,
+            "value": "11.5px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "color",
+          "value": "#a9aeb1",
+          "line": 311,
+          "start": 37884,
+          "end": 37898,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 170,
+            "value": "#afb3b6"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "letter-spacing",
+          "value": "1.5px",
+          "line": 311,
+          "start": 37898,
+          "end": 37918,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 170,
+            "value": "1.2px"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ".pg.settings-page .chk.vol",
+          "property": "padding",
+          "value": "12px",
+          "line": 313,
+          "start": 38000,
+          "end": 38012,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 211,
+            "value": "12px 14px 12px 16px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "color",
+          "value": "#9a9fa2",
+          "line": 314,
+          "start": 38038,
+          "end": 38052,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 242,
+            "value": "#afb3b6"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "font-size",
+          "value": "12px",
+          "line": 314,
+          "start": 38052,
+          "end": 38067,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 242,
+            "value": "13.5px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "line-height",
+          "value": "1.9",
+          "line": 314,
+          "start": 38067,
+          "end": 38083,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 242,
+            "value": "1.7"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "margin",
+          "value": "10px 2px",
+          "line": 314,
+          "start": 38083,
+          "end": 38098,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 242,
+            "value": "12px 2px 4px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "background",
+          "value": "transparent",
+          "line": 490,
+          "start": 49480,
+          "end": 49503,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 331,
+            "value": "#191a1cdb"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "background",
+          "value": "#1f2124",
+          "line": 508,
+          "start": 50392,
+          "end": 50411,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 118,
+            "value": "rgba(17,18,19,.88)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "color",
+          "value": "#dedfe0",
+          "line": 508,
+          "start": 50427,
+          "end": 50441,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 120,
+            "value": "#cccecf"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "width",
+          "value": "44px",
+          "line": 509,
+          "start": 50469,
+          "end": 50480,
+          "survivor": {
+            "file": "css/expedition-map.css",
+            "line": 94,
+            "value": "40px"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "height",
+          "value": "44px",
+          "line": 509,
+          "start": 50480,
+          "end": 50492,
+          "survivor": {
+            "file": "css/expedition-map.css",
+            "line": 94,
+            "value": "40px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#topBtns #btnLocate:hover",
+          "property": "background",
+          "value": "#2b2e31",
+          "line": 510,
+          "start": 50609,
+          "end": 50628,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 126,
+            "value": "rgba(21,23,24,.9)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#topBtns #btnLocate:hover",
+          "property": "color",
+          "value": "#ffffff",
+          "line": 510,
+          "start": 50628,
+          "end": 50641,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 125,
+            "value": "#f4f4f4"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "background",
+          "value": "linear-gradient(125deg,rgba(39,42,45,.84),rgba(27,29,31,.84))",
+          "line": 515,
+          "start": 50780,
+          "end": 50852,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 151,
+            "value": "radial-gradient(110% 70% at 50% 0%, rgba(61,66,71,.3), transparent 58%),\n    linear-gradient(125deg, rgba(36,39,41,.88), rgba(23,25,27,.9))"
+          },
+          "bytes": 72
+        },
+        {
+          "selector": "#overlay .pg.cdes .cdes-sec",
+          "property": "border-bottom-color",
+          "value": "#c0b8a299",
+          "line": 548,
+          "start": 52874,
+          "end": 52903,
+          "survivor": {
+            "file": "css/page-cardforge.css",
+            "line": 117,
+            "value": "rgba(202,168,58,.26)"
+          },
+          "bytes": 29
+        },
+        {
+          "selector": "#sidebar .hero-ava",
+          "property": "border-color",
+          "value": "#c2c2c2",
+          "line": 581,
+          "start": 54855,
+          "end": 54876,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 52,
+            "value": "rgba(208,210,211,.55)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "width",
+          "value": "min(1180px,calc(var(--game-layout-width, 100vw) * 0.94))",
+          "line": 599,
+          "start": 55568,
+          "end": 55631,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 143,
+            "value": "min(1000px,calc(var(--game-layout-width, 100vw) * 0.92))"
+          },
+          "bytes": 62
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "padding",
+          "value": "24px 36px 28px",
+          "line": 599,
+          "start": 55631,
+          "end": 55653,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 48,
+            "value": "24px 40px 30px"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": "#overlay .card.chest > h2",
+          "property": "font-size",
+          "value": "20px",
+          "line": 600,
+          "start": 55681,
+          "end": 55696,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 144,
+            "value": "13px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .card.chest > h2",
+          "property": "letter-spacing",
+          "value": "3px",
+          "line": 600,
+          "start": 55717,
+          "end": 55735,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 62,
+            "value": "4px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card.chest .evt-sts-desc",
+          "property": "font-size",
+          "value": "15px",
+          "line": 601,
+          "start": 55772,
+          "end": 55787,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 146,
+            "value": "12px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .card.chest .bt-hand",
+          "property": "padding",
+          "value": "16px 0 8px",
+          "line": 605,
+          "start": 56071,
+          "end": 56089,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 145,
+            "value": "24px 8px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card",
+          "property": "transition",
+          "value": "transform .15s",
+          "line": 606,
+          "start": 56121,
+          "end": 56146,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 96,
+            "value": "transform var(--rbh-lift), filter var(--rbh-lift), opacity var(--rbh-fast)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card:hover",
+          "property": "transform",
+          "value": "translateY(-8px)",
+          "line": 607,
+          "start": 56184,
+          "end": 56210,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 99,
+            "value": "translateY(-8px)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "outline",
+          "value": "3px solid #fbdd7d",
+          "line": 613,
+          "start": 56551,
+          "end": 56577,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 117,
+            "value": "1px solid #e6cb76cc"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "outline-offset",
+          "value": "6px",
+          "line": 613,
+          "start": 56577,
+          "end": 56596,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 118,
+            "value": "5px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "line": 613,
+          "start": 56596,
+          "end": 56630,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 119,
+            "value": "0"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card.got",
+          "property": "filter",
+          "value": "grayscale(.7)",
+          "line": 614,
+          "start": 56693,
+          "end": 56713,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 106,
+            "value": "grayscale(.7)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card.got:hover",
+          "property": "transform",
+          "value": "none",
+          "line": 615,
+          "start": 56755,
+          "end": 56769,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 107,
+            "value": "none"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "border-radius",
+          "value": "0",
+          "line": 828,
+          "start": 72060,
+          "end": 72076,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 44,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "background",
+          "value": "transparent",
+          "line": 839,
+          "start": 72559,
+          "end": 72592,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 42,
+            "value": "linear-gradient(180deg, rgba(19,20,22,.88), rgba(10,11,11,.93))"
+          },
+          "bytes": 32
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "border",
+          "value": "0",
+          "line": 840,
+          "start": 72595,
+          "end": 72614,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 43,
+            "value": "1px solid rgba(218,220,222,.15)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "box-shadow",
+          "value": "none",
+          "line": 841,
+          "start": 72617,
+          "end": 72643,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 45,
+            "value": "0 34px 110px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.06),\n    0 0 46px rgba(230,203,118,.06)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "backdrop-filter",
+          "value": "none",
+          "line": 842,
+          "start": 72646,
+          "end": 72667,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 47,
+            "value": "blur(16px) saturate(1.05)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .card.chest::before",
+          "property": "display",
+          "value": "none",
+          "line": 845,
+          "start": 72718,
+          "end": 72730,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 52,
+            "value": "block"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "bottom",
+          "value": "calc(142px + 12px + 82px)",
+          "line": 972,
+          "start": 81888,
+          "end": 81930,
+          "survivor": {
+            "file": "css/expedition-map.css",
+            "line": 94,
+            "value": "auto"
+          },
+          "bytes": 42
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit",
+          "property": "background",
+          "value": "#2c3032f2",
+          "line": 979,
+          "start": 82290,
+          "end": 82311,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 331,
+            "value": "transparent"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit",
+          "property": "border",
+          "value": "1px solid #a8b0a938",
+          "line": 979,
+          "start": 82311,
+          "end": 82338,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 331,
+            "value": "0"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit::after",
+          "property": "content",
+          "value": "''",
+          "line": 980,
+          "start": 82393,
+          "end": 82404,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 334,
+            "value": "none"
+          },
+          "bytes": 10
+        }
+      ]
+    },
+    {
+      "file": "css/scenes.css",
+      "bytes": 46723,
+      "saved": 617,
+      "redundant": [
+        {
+          "selector": ".scene-title",
+          "property": "font-family",
+          "value": "var(--serif)",
+          "line": 20,
+          "start": 1400,
+          "end": 1426,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "'SimSun',serif"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "line-height",
+          "value": "1.75",
+          "line": 24,
+          "start": 1726,
+          "end": 1744,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 195,
+            "value": "1.9"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "color",
+          "value": "#d5d5d5",
+          "line": 24,
+          "start": 1745,
+          "end": 1760,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "#e7e8e8"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "background",
+          "value": "linear-gradient(180deg, rgba(220,220,220,.10), rgba(220,220,220,.04))",
+          "line": 25,
+          "start": 1765,
+          "end": 1847,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "#202225d9"
+          },
+          "bytes": 81
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "border",
+          "value": "1px solid rgba(171,171,171,.30)",
+          "line": 26,
+          "start": 1852,
+          "end": 1892,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "1px solid #7e8387"
+          },
+          "bytes": 39
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "border-radius",
+          "value": "0",
+          "line": 26,
+          "start": 1893,
+          "end": 1909,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".flow-title",
+          "property": "letter-spacing",
+          "value": ".2em",
+          "line": 53,
+          "start": 3928,
+          "end": 3949,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": ".16em"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "letter-spacing",
+          "value": "4px",
+          "line": 271,
+          "start": 20390,
+          "end": 20410,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 134,
+            "value": "4px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "text-shadow",
+          "value": "none",
+          "line": 271,
+          "start": 20457,
+          "end": 20475,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 134,
+            "value": "none"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "font-size",
+          "value": "13px",
+          "line": 273,
+          "start": 20627,
+          "end": 20643,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 135,
+            "value": "13px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "color",
+          "value": "#b1b5b8",
+          "line": 273,
+          "start": 20662,
+          "end": 20677,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 135,
+            "value": "#bfc2c5"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "letter-spacing",
+          "value": ".5px",
+          "line": 274,
+          "start": 20682,
+          "end": 20703,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 135,
+            "value": ".5px"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "text-shadow",
+          "value": "none",
+          "line": 274,
+          "start": 20704,
+          "end": 20722,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 135,
+            "value": "none"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "align-items",
+          "value": "flex-start",
+          "line": 327,
+          "start": 24025,
+          "end": 24049,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "flex-start"
+          },
+          "bytes": 23
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "text-align",
+          "value": "left",
+          "line": 327,
+          "start": 24050,
+          "end": 24067,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "left"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "padding",
+          "value": "16px 20px",
+          "line": 328,
+          "start": 24082,
+          "end": 24101,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "16px 20px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "border-radius",
+          "value": "0",
+          "line": 328,
+          "start": 24102,
+          "end": 24118,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "border",
+          "value": "1px solid rgba(170,174,177,.3)",
+          "line": 328,
+          "start": 24119,
+          "end": 24158,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "1px solid #989da044"
+          },
+          "bytes": 38
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "background",
+          "value": "#1f2123b0",
+          "line": 329,
+          "start": 24163,
+          "end": 24185,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "#1f2123b0"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "box-shadow",
+          "value": "none",
+          "line": 329,
+          "start": 24186,
+          "end": 24203,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 137,
+            "value": "none"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt b",
+          "property": "text-shadow",
+          "value": "none",
+          "line": 331,
+          "start": 24297,
+          "end": 24315,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 138,
+            "value": "none"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt span",
+          "property": "color",
+          "value": "#b3b8bb",
+          "line": 332,
+          "start": 24354,
+          "end": 24369,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 139,
+            "value": "#b3b8bb"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt span",
+          "property": "text-shadow",
+          "value": "none",
+          "line": 332,
+          "start": 24370,
+          "end": 24388,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 139,
+            "value": "none"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt:hover",
+          "property": "background",
+          "value": "#2d3134",
+          "line": 333,
+          "start": 24428,
+          "end": 24448,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 140,
+            "value": "#2d3134"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt:hover",
+          "property": "border-color",
+          "value": "#ead282",
+          "line": 333,
+          "start": 24449,
+          "end": 24471,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 140,
+            "value": "#ead282"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "text-shadow",
+          "value": "0 0 12px rgba(255,255,255,.24), 0 2px 8px rgba(0,0,0,.6)",
+          "line": 480,
+          "start": 33271,
+          "end": 33341,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 160,
+            "value": "0 2px 14px rgba(9,9,10,.9), 0 0 3px rgba(230,203,118,.22)"
+          },
+          "bytes": 69
+        }
+      ]
+    },
+    {
+      "file": "css/battle.css",
+      "bytes": 37056,
+      "saved": 27,
+      "redundant": [
+        {
+          "selector": ".bt-settings .chk",
+          "property": "transition",
+          "value": "background .15s",
+          "line": 411,
+          "start": 26915,
+          "end": 26943,
+          "survivor": {
+            "file": "css/page-battle-ui.css",
+            "line": 77,
+            "value": "background var(--bt-fast), border-color var(--bt-fast)"
+          },
+          "bytes": 27
+        }
+      ]
+    },
+    {
+      "file": "css/hub.css",
+      "bytes": 22800,
+      "saved": 842,
+      "redundant": [
+        {
+          "selector": ".hub-tabs",
+          "property": "gap",
+          "value": "8px",
+          "line": 15,
+          "start": 975,
+          "end": 984,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "10px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "border",
+          "value": "1px solid transparent",
+          "line": 18,
+          "start": 1230,
+          "end": 1260,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "0"
+          },
+          "bytes": 29
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "background",
+          "value": "transparent",
+          "line": 19,
+          "start": 1324,
+          "end": 1348,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "none"
+          },
+          "bytes": 23
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "color",
+          "value": "#999999",
+          "line": 19,
+          "start": 1349,
+          "end": 1364,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#a9aeb1"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "color",
+          "value": "#eaeaea",
+          "line": 27,
+          "start": 2055,
+          "end": 2070,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#222528"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "background",
+          "value": "linear-gradient(180deg, #292929, #1c1c1c)",
+          "line": 27,
+          "start": 2094,
+          "end": 2148,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#e2cd88"
+          },
+          "bytes": 53
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "box-shadow",
+          "value": "inset 0 2px 0 rgba(171,171,171,.5)",
+          "line": 28,
+          "start": 2153,
+          "end": 2200,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "none"
+          },
+          "bytes": 46
+        },
+        {
+          "selector": ".mode-card",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "line": 52,
+          "start": 3749,
+          "end": 3784,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "0"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": ".mode-card",
+          "property": "border",
+          "value": "1.5px solid #343434",
+          "line": 52,
+          "start": 3785,
+          "end": 3813,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "1px solid #555b61"
+          },
+          "bytes": 27
+        },
+        {
+          "selector": ".mode-card",
+          "property": "background",
+          "value": "#1d1d1d",
+          "line": 53,
+          "start": 3834,
+          "end": 3854,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#282b2e"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "border-color",
+          "value": "#a1a1a1",
+          "line": 55,
+          "start": 4007,
+          "end": 4029,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#e0c876"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "background",
+          "value": "linear-gradient(180deg, #2d2d2d, #1c1c1c)",
+          "line": 55,
+          "start": 4030,
+          "end": 4084,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#35393d"
+          },
+          "bytes": 53
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "box-shadow",
+          "value": "0 0 12px rgba(161,161,161,.22), inset 0 1px 0 rgba(237,237,237,.08)",
+          "line": 56,
+          "start": 4089,
+          "end": 4169,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "inset 3px 0 #e0c876"
+          },
+          "bytes": 79
+        },
+        {
+          "selector": ".mode-ckpt",
+          "property": "font-size",
+          "value": "10.5px",
+          "line": 63,
+          "start": 4705,
+          "end": 4723,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 570,
+            "value": "11px"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": ".mode-ckpt",
+          "property": "color",
+          "value": "#797979",
+          "line": 63,
+          "start": 4724,
+          "end": 4739,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 570,
+            "value": "#959595"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".xp-bar",
+          "property": "background",
+          "value": "#121212",
+          "line": 66,
+          "start": 4858,
+          "end": 4878,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 30,
+            "value": "#1b1d1f"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".xp-bar i",
+          "property": "background",
+          "value": "linear-gradient(90deg, #6a6a6a, #a6a6a6)",
+          "line": 69,
+          "start": 5034,
+          "end": 5087,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 30,
+            "value": "#abb1b5"
+          },
+          "bytes": 52
+        },
+        {
+          "selector": ".xp-txt",
+          "property": "font-size",
+          "value": "10px",
+          "line": 70,
+          "start": 5125,
+          "end": 5141,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 571,
+            "value": "11px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".xp-txt",
+          "property": "color",
+          "value": "#797979",
+          "line": 70,
+          "start": 5142,
+          "end": 5157,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 571,
+            "value": "#959595"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".deploy-forecast",
+          "property": "gap",
+          "value": "8px",
+          "line": 72,
+          "start": 5306,
+          "end": 5315,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "12px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "padding",
+          "value": "13px 44px",
+          "line": 76,
+          "start": 5531,
+          "end": 5550,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "18px 42px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "letter-spacing",
+          "value": "5px",
+          "line": 76,
+          "start": 5568,
+          "end": 5588,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "5px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "line": 76,
+          "start": 5589,
+          "end": 5624,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "0"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "border",
+          "value": "1px solid rgba(196,196,196,.65)",
+          "line": 77,
+          "start": 5629,
+          "end": 5669,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "0"
+          },
+          "bytes": 39
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "color",
+          "value": "#d9d9d9",
+          "line": 77,
+          "start": 5670,
+          "end": 5685,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#232628"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "font-weight",
+          "value": "800",
+          "line": 77,
+          "start": 5720,
+          "end": 5737,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "500"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "background",
+          "value": "linear-gradient(180deg, #515151, #2c2c2c)",
+          "line": 78,
+          "start": 5742,
+          "end": 5796,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#ead386"
+          },
+          "bytes": 53
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "box-shadow",
+          "value": "inset 0 1px 0 rgba(237,237,237,.18), 0 4px 16px rgba(0,0,0,.4)",
+          "line": 79,
+          "start": 5840,
+          "end": 5915,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "none"
+          },
+          "bytes": 74
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "overflow",
+          "value": "hidden",
+          "line": 157,
+          "start": 11442,
+          "end": 11459,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "hidden"
+          },
+          "bytes": 16
+        }
+      ]
+    },
+    {
+      "file": "css/overlays.css",
+      "bytes": 41292,
+      "saved": 2165,
+      "redundant": [
+        {
+          "selector": "#overlay .card.page:has(.pg.settings-page)",
+          "property": "animation",
+          "value": "setPageIn .42s cubic-bezier(.22,1,.36,1)",
+          "line": 3,
+          "start": 143,
+          "end": 195,
+          "survivor": {
+            "file": "css/page-settings.css",
+            "line": 27,
+            "value": "setPanelIn .42s cubic-bezier(.22, 1, .36, 1) backwards"
+          },
+          "bytes": 51
+        },
+        {
+          "selector": ".base-line b",
+          "property": "color",
+          "value": "var(--gold)",
+          "line": 40,
+          "start": 3062,
+          "end": 3081,
+          "survivor": {
+            "file": "css/hub.css",
+            "line": 118,
+            "value": "var(--gold)"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".bt-gy-row b",
+          "property": "color",
+          "value": "#e4e4e4",
+          "line": 65,
+          "start": 4949,
+          "end": 4964,
+          "survivor": {
+            "file": "css/page-battle-ui.css",
+            "line": 73,
+            "value": "#f1f1f1"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".bt-gy-row .bt-gy-meta",
+          "property": "color",
+          "value": "#797979",
+          "line": 66,
+          "start": 4994,
+          "end": 5009,
+          "survivor": {
+            "file": "css/page-battle-ui.css",
+            "line": 74,
+            "value": "#92979a"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".title-ver",
+          "property": "color",
+          "value": "#5e5e5e",
+          "line": 144,
+          "start": 10794,
+          "end": 10809,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 18,
+            "value": "#c4c7c9"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".title-ver",
+          "property": "letter-spacing",
+          "value": "3px",
+          "line": 144,
+          "start": 10827,
+          "end": 10847,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 18,
+            "value": "2px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".exit-msg",
+          "property": "font-size",
+          "value": "22px",
+          "line": 145,
+          "start": 10864,
+          "end": 10880,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 21,
+            "value": "24px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".exit-msg",
+          "property": "letter-spacing",
+          "value": "4px",
+          "line": 145,
+          "start": 10897,
+          "end": 10917,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 21,
+            "value": "4px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay .card .pg.slot-page",
+          "property": "background",
+          "value": "radial-gradient(ellipse 120% 90% at 50% 30%, #4a5055 0%, #383d41 34%, #272a2d 62%, #1b1d20 100%)",
+          "line": 152,
+          "start": 11279,
+          "end": 11392,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 117,
+            "value": "radial-gradient(ellipse 120% 90% at 50% 28%, #34383c 0%, #292c2f 34%, #1f2123 62%, #141517 100%)"
+          },
+          "bytes": 112
+        },
+        {
+          "selector": ".slot-page::before",
+          "property": "background",
+          "value": "radial-gradient(ellipse 42% 34% at 30% 62%, rgba(129,191,222,.34), transparent 68%),\n      radial-gradient(ellipse 38% 30% at 72% 40%, rgba(138,154,166,.22), transparent 70%),\n      radial-gradient(ellipse 50% 40% at 52% 84%, rgba(66,71,76,.55), transparent 72%)",
+          "line": 155,
+          "start": 11480,
+          "end": 11761,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 118,
+            "value": "var(--ak-tex-hex) 0 0 / 56px 97px"
+          },
+          "bytes": 280
+        },
+        {
+          "selector": ".slot-page::before",
+          "property": "animation",
+          "value": "slotMist 26s ease-in-out infinite alternate",
+          "line": 159,
+          "start": 11785,
+          "end": 11840,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 89,
+            "value": "slotArchiveLight 14s ease-in-out infinite alternate"
+          },
+          "bytes": 54
+        },
+        {
+          "selector": ".slot-page::after",
+          "property": "background",
+          "value": "linear-gradient(180deg, rgba(16,17,18,.42), transparent 26%, transparent 62%, rgba(12,13,14,.6)),\n      linear-gradient(90deg, rgba(16,17,18,.5), transparent 30%, transparent 70%, rgba(16,17,18,.5))",
+          "line": 161,
+          "start": 11924,
+          "end": 12141,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 131,
+            "value": "radial-gradient(120% 90% at 50% 42%, transparent 50%, rgba(8,9,9,.48) 88%, rgba(7,7,8,.64) 100%),\n    linear-gradient(90deg, rgba(11,12,13,.48) 0%, transparent 22%, transparent 78%, rgba(11,12,13,.48) 100%),\n    linear-gradient(0deg, rgba(10,11,11,.5), transparent 26%)"
+          },
+          "bytes": 216
+        },
+        {
+          "selector": ".slot-card",
+          "property": "background",
+          "value": "linear-gradient(180deg, rgba(24,26,27,.9), rgba(14,15,16,.94))",
+          "line": 218,
+          "start": 16858,
+          "end": 16933,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 30,
+            "value": "linear-gradient(180deg,#191b1d,#131416)"
+          },
+          "bytes": 74
+        },
+        {
+          "selector": ".slot-card",
+          "property": "box-shadow",
+          "value": "0 14px 34px rgba(7,8,8,.6), inset 0 0 30px rgba(120,187,220,.05)",
+          "line": 219,
+          "start": 16938,
+          "end": 17015,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 30,
+            "value": "0 12px 30px #0d0e0f66"
+          },
+          "bytes": 76
+        },
+        {
+          "selector": ".slot-card",
+          "property": "transition",
+          "value": "border-color .18s, box-shadow .18s, transform .18s",
+          "line": 220,
+          "start": 17020,
+          "end": 17083,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 78,
+            "value": "border-color .32s cubic-bezier(.33,1,.68,1),box-shadow .32s ease,transform .32s cubic-bezier(.22,1,.36,1)"
+          },
+          "bytes": 62
+        },
+        {
+          "selector": ".slot-page .slot-card:hover",
+          "property": "border-color",
+          "value": "rgba(222,225,228,.75)",
+          "line": 221,
+          "start": 17118,
+          "end": 17154,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 265,
+            "value": "rgba(213,214,215,.72)"
+          },
+          "bytes": 35
+        },
+        {
+          "selector": ".slot-page .slot-card:hover",
+          "property": "box-shadow",
+          "value": "0 0 24px rgba(196,203,209,.25), 0 18px 38px rgba(7,8,8,.65)",
+          "line": 222,
+          "start": 17188,
+          "end": 17260,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 266,
+            "value": "0 0 22px rgba(168,177,183,.18), 0 0 14px rgba(230,203,118,.1),\n    0 18px 38px rgba(7,7,8,.65)"
+          },
+          "bytes": 71
+        },
+        {
+          "selector": ".slot-page .slot-card:active",
+          "property": "transform",
+          "value": "scale(.98)",
+          "line": 223,
+          "start": 17296,
+          "end": 17318,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 299,
+            "value": "scale(.985)"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ".slot-page .slot-card-name",
+          "property": "text-shadow",
+          "value": "0 0 12px rgba(207,212,218,.5)",
+          "line": 241,
+          "start": 18816,
+          "end": 18859,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 214,
+            "value": "0 0 12px rgba(242,230,190,.3), 0 2px 6px rgba(6,6,7,.65)"
+          },
+          "bytes": 42
+        },
+        {
+          "selector": ".slot-page .slot-card-sub",
+          "property": "color",
+          "value": "#a5adb3",
+          "line": 243,
+          "start": 19010,
+          "end": 19025,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 162,
+            "value": "#9da1a3"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "flex",
+          "value": "1 1 auto",
+          "line": 246,
+          "start": 19226,
+          "end": 19241,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 218,
+            "value": "0 0 auto"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "font-size",
+          "value": "12px",
+          "line": 247,
+          "start": 19292,
+          "end": 19308,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 279,
+            "value": "14px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "line-height",
+          "value": "1.7",
+          "line": 247,
+          "start": 19309,
+          "end": 19326,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 279,
+            "value": "1.55"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "color",
+          "value": "#d1d3d5",
+          "line": 247,
+          "start": 19327,
+          "end": 19342,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 279,
+            "value": "#e9eaea"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".slot-card-desc .si-line em",
+          "property": "font-size",
+          "value": "9px",
+          "line": 249,
+          "start": 19482,
+          "end": 19497,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 68,
+            "value": "11px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".slot-card-desc .si-sub",
+          "property": "font-size",
+          "value": "10.5px",
+          "line": 253,
+          "start": 19750,
+          "end": 19768,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 70,
+            "value": "12px"
+          },
+          "bytes": 17
+        },
+        {
+          "selector": ".slot-page .slot-empty",
+          "property": "color",
+          "value": "#a5adb3",
+          "line": 254,
+          "start": 19816,
+          "end": 19831,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 239,
+            "value": "#9da1a3"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".slot-page .slot-empty",
+          "property": "font-size",
+          "value": "11px",
+          "line": 254,
+          "start": 19853,
+          "end": 19869,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 71,
+            "value": "13px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".slot-page .slot-card-ops",
+          "property": "transition",
+          "value": "opacity .18s, transform .18s",
+          "line": 261,
+          "start": 20391,
+          "end": 20432,
+          "survivor": {
+            "file": "css/page-slot-select.css",
+            "line": 337,
+            "value": "opacity var(--slot-fast), transform var(--slot-fast)"
+          },
+          "bytes": 40
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "border-color",
+          "value": "#3d3d3d",
+          "line": 309,
+          "start": 23204,
+          "end": 23226,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#be8c7e"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "background",
+          "value": "#1c1c1c",
+          "line": 309,
+          "start": 23227,
+          "end": 23247,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#7a443e"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "color",
+          "value": "#c4c4c4",
+          "line": 309,
+          "start": 23248,
+          "end": 23263,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#f3dcd5"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay",
+          "property": "background",
+          "value": "rgba(8,8,8,.75)",
+          "line": 329,
+          "start": 24442,
+          "end": 24470,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 23,
+            "value": "rgba(5,6,8,.82)"
+          },
+          "bytes": 27
+        },
+        {
+          "selector": "#overlay",
+          "property": "backdrop-filter",
+          "value": "blur(5px)",
+          "line": 329,
+          "start": 24471,
+          "end": 24498,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 23,
+            "value": "blur(6px) saturate(.8)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": "#overlay:focus",
+          "property": "outline",
+          "value": "2px solid #ecd382",
+          "line": 331,
+          "start": 24555,
+          "end": 24582,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 12,
+            "value": "2px solid var(--ak-blue)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": "#overlay:focus",
+          "property": "outline-offset",
+          "value": "-4px",
+          "line": 331,
+          "start": 24583,
+          "end": 24604,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 12,
+            "value": "-4px"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "backdrop-filter",
+          "value": "none",
+          "line": 352,
+          "start": 26321,
+          "end": 26343,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "none"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "background",
+          "value": "#121212",
+          "line": 352,
+          "start": 26344,
+          "end": 26364,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 24,
+            "value": "var(--ak-ink)"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "background",
+          "value": "linear-gradient(180deg, #232323, #171717)",
+          "line": 370,
+          "start": 27478,
+          "end": 27532,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 27,
+            "value": "var(--ak-tex-noise), var(--ak-tex-grid) 0 0 / 32px 32px, linear-gradient(180deg, #23272b, #14161a)"
+          },
+          "bytes": 53
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border",
+          "value": "1px solid #5f5f5f",
+          "line": 371,
+          "start": 27537,
+          "end": 27563,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 28,
+            "value": "1px solid var(--ak-line-hi)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border-radius",
+          "value": "0",
+          "line": 371,
+          "start": 27564,
+          "end": 27580,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 28,
+            "value": "0"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "box-shadow",
+          "value": "0 18px 60px rgba(0,0,0,.65), inset 0 0 0 1px rgba(237,237,237,.05)",
+          "line": 372,
+          "start": 27648,
+          "end": 27727,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 29,
+            "value": "var(--ak-bevel)"
+          },
+          "bytes": 78
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "animation",
+          "value": "cardIn .22s cubic-bezier(.22,1,.36,1)",
+          "line": 373,
+          "start": 27732,
+          "end": 27781,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 29,
+            "value": "akCardIn .26s var(--ease-entrance)"
+          },
+          "bytes": 48
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "content",
+          "value": "''",
+          "line": 374,
+          "start": 27811,
+          "end": 27823,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "''"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "position",
+          "value": "absolute",
+          "line": 374,
+          "start": 27824,
+          "end": 27843,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "absolute"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "top",
+          "value": "0",
+          "line": 374,
+          "start": 27844,
+          "end": 27851,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "0"
+          },
+          "bytes": 6
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "left",
+          "value": "10%",
+          "line": 374,
+          "start": 27852,
+          "end": 27862,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "0"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "right",
+          "value": "10%",
+          "line": 374,
+          "start": 27863,
+          "end": 27874,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "auto"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "height",
+          "value": "2px",
+          "line": 374,
+          "start": 27875,
+          "end": 27887,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 30,
+            "value": "3px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#overlay .card::before",
+          "property": "background",
+          "value": "linear-gradient(90deg, transparent, rgba(171,171,171,.9), rgba(136,136,136,.5), transparent)",
+          "line": 375,
+          "start": 27892,
+          "end": 27997,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 31,
+            "value": "var(--ak-white)"
+          },
+          "bytes": 104
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "color",
+          "value": "#c9c9c9",
+          "line": 377,
+          "start": 28101,
+          "end": 28116,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 39,
+            "value": "var(--ak-white)"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "font-size",
+          "value": "21px",
+          "line": 377,
+          "start": 28117,
+          "end": 28133,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 39,
+            "value": "20px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "letter-spacing",
+          "value": "1px",
+          "line": 377,
+          "start": 28155,
+          "end": 28175,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 39,
+            "value": ".28em"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "text-shadow",
+          "value": "0 0 18px rgba(171,171,171,.3), 0 1px 2px rgba(0,0,0,.6)",
+          "line": 379,
+          "start": 28211,
+          "end": 28280,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 39,
+            "value": "none"
+          },
+          "bytes": 68
+        },
+        {
+          "selector": "#overlay h2.bad",
+          "property": "color",
+          "value": "#959595",
+          "line": 381,
+          "start": 28376,
+          "end": 28391,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 41,
+            "value": "var(--ak-red)"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay h2.bad",
+          "property": "text-shadow",
+          "value": "0 0 18px rgba(140,140,140,.25)",
+          "line": 381,
+          "start": 28392,
+          "end": 28436,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 41,
+            "value": "none"
+          },
+          "bytes": 43
+        },
+        {
+          "selector": ".ov-note",
+          "property": "color",
+          "value": "#797979",
+          "line": 397,
+          "start": 29527,
+          "end": 29542,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 573,
+            "value": "#9a9fa2"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".ov-note",
+          "property": "font-size",
+          "value": "11.5px",
+          "line": 397,
+          "start": 29543,
+          "end": 29561,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 573,
+            "value": "12.5px"
+          },
+          "bytes": 17
+        }
+      ]
+    },
+    {
+      "file": "css/cards.css",
+      "bytes": 12017,
+      "saved": 205,
+      "redundant": [
+        {
+          "selector": "#overlay .card.wide",
+          "property": "width",
+          "value": "min(680px, 94%)",
+          "line": 16,
+          "start": 693,
+          "end": 716,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 598,
+            "value": "min(1180px,calc(var(--game-layout-width, 100vw) * 0.94))"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": ".pg-close",
+          "property": "border",
+          "value": "2px solid #3d3d3d",
+          "line": 28,
+          "start": 1608,
+          "end": 1634,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "1px solid #848a8e"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": ".pg-close",
+          "property": "background",
+          "value": "#1c1c1c",
+          "line": 28,
+          "start": 1635,
+          "end": 1655,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#313438"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".pg-close:hover",
+          "property": "background",
+          "value": "#2c2c2c",
+          "line": 31,
+          "start": 1857,
+          "end": 1877,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 29,
+            "value": "#6a5148"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "display",
+          "value": "flex",
+          "line": 151,
+          "start": 10237,
+          "end": 10251,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 369,
+            "value": "flex"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "flex-direction",
+          "value": "column",
+          "line": 151,
+          "start": 10252,
+          "end": 10275,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 369,
+            "value": "column"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "align-items",
+          "value": "center",
+          "line": 151,
+          "start": 10276,
+          "end": 10296,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 369,
+            "value": "center"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "gap",
+          "value": "6px",
+          "line": 151,
+          "start": 10297,
+          "end": 10306,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 369,
+            "value": "8px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "transition",
+          "value": "transform .15s ease",
+          "line": 152,
+          "start": 10312,
+          "end": 10344,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 370,
+            "value": "transform .15s ease"
+          },
+          "bytes": 31
+        },
+        {
+          "selector": ".shop-slot:hover",
+          "property": "transform",
+          "value": "translateY(-3px)",
+          "line": 153,
+          "start": 10369,
+          "end": 10397,
+          "survivor": {
+            "file": "css/scenes.css",
+            "line": 371,
+            "value": "translateY(-3px)"
+          },
+          "bytes": 27
+        }
+      ]
+    },
+    {
+      "file": "css/base.css",
+      "bytes": 31895,
+      "saved": 2476,
+      "redundant": [
+        {
+          "selector": ":root",
+          "property": "--ink",
+          "value": "var(--ak-ink)",
+          "line": 81,
+          "start": 4604,
+          "end": 4625,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-ink)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ":root",
+          "property": "--bg",
+          "value": "var(--ak-ink)",
+          "line": 81,
+          "start": 4626,
+          "end": 4646,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-ink)"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ":root",
+          "property": "--desk1",
+          "value": "#1b1e21",
+          "line": 82,
+          "start": 4651,
+          "end": 4668,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#191a1c"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ":root",
+          "property": "--desk2",
+          "value": "#121416",
+          "line": 82,
+          "start": 4669,
+          "end": 4686,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#101213"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ":root",
+          "property": "--panel",
+          "value": "var(--ak-panel)",
+          "line": 83,
+          "start": 4691,
+          "end": 4716,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-panel)"
+          },
+          "bytes": 24
+        },
+        {
+          "selector": ":root",
+          "property": "--panel2",
+          "value": "var(--ak-panel2)",
+          "line": 83,
+          "start": 4717,
+          "end": 4744,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-panel2)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": ":root",
+          "property": "--inset",
+          "value": "#101214",
+          "line": 84,
+          "start": 4749,
+          "end": 4766,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#0f1011"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ":root",
+          "property": "--line",
+          "value": "var(--ak-line-solid)",
+          "line": 85,
+          "start": 4771,
+          "end": 4800,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-line-solid)"
+          },
+          "bytes": 28
+        },
+        {
+          "selector": ":root",
+          "property": "--line2",
+          "value": "#555c63",
+          "line": 85,
+          "start": 4801,
+          "end": 4818,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#4b5157"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ":root",
+          "property": "--txt",
+          "value": "var(--ak-text)",
+          "line": 86,
+          "start": 4823,
+          "end": 4845,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-text)"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ":root",
+          "property": "--sub",
+          "value": "var(--ak-sub)",
+          "line": 86,
+          "start": 4846,
+          "end": 4867,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-sub)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ":root",
+          "property": "--dim",
+          "value": "var(--ak-dim)",
+          "line": 86,
+          "start": 4868,
+          "end": 4889,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-dim)"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ":root",
+          "property": "--amber",
+          "value": "var(--ak-yellow)",
+          "line": 87,
+          "start": 4894,
+          "end": 4920,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-yellow)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": ":root",
+          "property": "--amber-soft",
+          "value": "#ffe58a",
+          "line": 87,
+          "start": 4921,
+          "end": 4943,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#ffe48a"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ":root",
+          "property": "--gold",
+          "value": "#f2c75c",
+          "line": 88,
+          "start": 4948,
+          "end": 4964,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#ffd64f"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ":root",
+          "property": "--ok",
+          "value": "var(--ak-green)",
+          "line": 89,
+          "start": 5014,
+          "end": 5036,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-green)"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ":root",
+          "property": "--arcane",
+          "value": "var(--ak-purple)",
+          "line": 89,
+          "start": 5037,
+          "end": 5064,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-purple)"
+          },
+          "bytes": 26
+        },
+        {
+          "selector": ":root",
+          "property": "--cyan-soft",
+          "value": "var(--ak-blue-hi)",
+          "line": 90,
+          "start": 5069,
+          "end": 5100,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-blue-hi)"
+          },
+          "bytes": 30
+        },
+        {
+          "selector": ":root",
+          "property": "--bg-deep",
+          "value": "var(--ak-void)",
+          "line": 90,
+          "start": 5101,
+          "end": 5127,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--ak-void)"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": ":root",
+          "property": "--bg-deep2",
+          "value": "#0a0c0e",
+          "line": 90,
+          "start": 5128,
+          "end": 5148,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#0a0b0b"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ":root",
+          "property": "--cal",
+          "value": "var(--font-ui)",
+          "line": 94,
+          "start": 5319,
+          "end": 5341,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "var(--font-ui)"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ":root",
+          "property": "--sb-thumb",
+          "value": "#4a5056",
+          "line": 95,
+          "start": 5346,
+          "end": 5366,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "#41464b"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ":root",
+          "property": "--sb-radius",
+          "value": "0px",
+          "line": 95,
+          "start": 5367,
+          "end": 5384,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 2,
+            "value": "0px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "::selection",
+          "property": "background",
+          "value": "rgba(31,178,255,.35)",
+          "line": 118,
+          "start": 6590,
+          "end": 6623,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 3,
+            "value": "#dcc47566"
+          },
+          "bytes": 32
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb",
+          "property": "background",
+          "value": "var(--sb-thumb)",
+          "line": 121,
+          "start": 6777,
+          "end": 6805,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 3,
+            "value": "var(--sb-thumb)"
+          },
+          "bytes": 27
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb",
+          "property": "border-radius",
+          "value": "var(--sb-radius)",
+          "line": 121,
+          "start": 6806,
+          "end": 6838,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 3,
+            "value": "var(--sb-radius)"
+          },
+          "bytes": 31
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "var(--ak-tex-grid) 0 0 / 32px 32px,\n      linear-gradient(180deg, #1a1d20, #0e1012)",
+          "line": 135,
+          "start": 7352,
+          "end": 7454,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "#0b0c0e"
+          },
+          "bytes": 101
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "2px solid var(--ak-blue)",
+          "line": 138,
+          "start": 7459,
+          "end": 7496,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "1px solid var(--ak-line-hi)"
+          },
+          "bytes": 36
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "inset 0 1px 0 rgba(255,255,255,.06), 0 -10px 30px rgba(0,0,0,.6)",
+          "line": 139,
+          "start": 7501,
+          "end": 7578,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 170,
+            "value": "inset 0 3px 0 var(--ak-blue)"
+          },
+          "bytes": 76
+        },
+        {
+          "selector": "#sidebar",
+          "property": "display",
+          "value": "flex",
+          "line": 140,
+          "start": 7583,
+          "end": 7597,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 310,
+            "value": "grid"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#sidebar",
+          "property": "padding",
+          "value": "10px 14px",
+          "line": 140,
+          "start": 7641,
+          "end": 7660,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "14px 24px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": "#sidebar",
+          "property": "gap",
+          "value": "12px",
+          "line": 140,
+          "start": 7661,
+          "end": 7671,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 311,
+            "value": "18px"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#statsPanel",
+          "property": "min-width",
+          "value": "230px",
+          "line": 143,
+          "start": 7771,
+          "end": 7788,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "180px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#devPanel",
+          "property": "min-width",
+          "value": "210px",
+          "line": 144,
+          "start": 7822,
+          "end": 7839,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "240px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#topBtns",
+          "property": "top",
+          "value": "12px",
+          "line": 147,
+          "start": 7928,
+          "end": 7938,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "20px"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#topBtns",
+          "property": "left",
+          "value": "12px",
+          "line": 147,
+          "start": 7939,
+          "end": 7950,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "22px"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": "#topBtns",
+          "property": "gap",
+          "value": "8px",
+          "line": 147,
+          "start": 7978,
+          "end": 7987,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 327,
+            "value": "7px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#resHud",
+          "property": "top",
+          "value": "12px",
+          "line": 150,
+          "start": 8105,
+          "end": 8115,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "20px"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#resHud",
+          "property": "right",
+          "value": "12px",
+          "line": 150,
+          "start": 8116,
+          "end": 8128,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "22px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border-radius",
+          "value": "0",
+          "line": 151,
+          "start": 8230,
+          "end": 8247,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 146,
+            "value": "0"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "min-width",
+          "value": "118px",
+          "line": 152,
+          "start": 8252,
+          "end": 8269,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 26,
+            "value": "92px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "height",
+          "value": "36px",
+          "line": 152,
+          "start": 8270,
+          "end": 8283,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "34px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "gap",
+          "value": "8px",
+          "line": 152,
+          "start": 8320,
+          "end": 8329,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "0"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "linear-gradient(90deg, rgba(10,12,14,.92), rgba(24,27,30,.82))",
+          "line": 153,
+          "start": 8334,
+          "end": 8409,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+          },
+          "bytes": 74
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border",
+          "value": "none",
+          "line": 153,
+          "start": 8410,
+          "end": 8423,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 146,
+            "value": "1px solid rgba(170,174,177,.26)"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border-left",
+          "value": "3px solid var(--ak-white)",
+          "line": 154,
+          "start": 8428,
+          "end": 8467,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 160,
+            "value": "0"
+          },
+          "bytes": 38
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "box-shadow",
+          "value": "inset 0 0 0 1px rgba(255,255,255,.1), 0 4px 14px rgba(0,0,0,.55)",
+          "line": 156,
+          "start": 8563,
+          "end": 8640,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 147,
+            "value": "inset 0 1px 0 rgba(223,224,226,.06), 0 2px 8px rgba(7,7,8,.35)"
+          },
+          "bytes": 76
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "width",
+          "value": "20px",
+          "line": 157,
+          "start": 8674,
+          "end": 8686,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 161,
+            "value": "38px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "height",
+          "value": "20px",
+          "line": 157,
+          "start": 8687,
+          "end": 8700,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 161,
+            "value": "34px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "flex",
+          "value": "0 0 auto",
+          "line": 157,
+          "start": 8701,
+          "end": 8716,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 161,
+            "value": "none"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "filter",
+          "value": "drop-shadow(0 1px 2px rgba(0,0,0,.6))",
+          "line": 158,
+          "start": 8721,
+          "end": 8767,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 161,
+            "value": "none"
+          },
+          "bytes": 45
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "font-size",
+          "value": "19px",
+          "line": 159,
+          "start": 8825,
+          "end": 8841,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 164,
+            "value": "20px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "font-variant-numeric",
+          "value": "tabular-nums",
+          "line": 160,
+          "start": 8904,
+          "end": 8939,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 153,
+            "value": "tabular-nums"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "letter-spacing",
+          "value": ".5px",
+          "line": 160,
+          "start": 8940,
+          "end": 8961,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 153,
+            "value": ".02em"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#resHud .res-gold b",
+          "property": "color",
+          "value": "var(--ak-yellow)",
+          "line": 163,
+          "start": 9106,
+          "end": 9130,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 151,
+            "value": "#f4e2a5"
+          },
+          "bytes": 23
+        },
+        {
+          "selector": "#resHud .res-atk b",
+          "property": "color",
+          "value": "#ff7a6b",
+          "line": 164,
+          "start": 9156,
+          "end": 9171,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 152,
+            "value": "#ff8d7e"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "top",
+          "value": "10px",
+          "line": 168,
+          "start": 9294,
+          "end": 9304,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "20px"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "padding",
+          "value": "5px 32px 6px",
+          "line": 170,
+          "start": 9441,
+          "end": 9463,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "10px 28px"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "background",
+          "value": "linear-gradient(90deg, transparent, rgba(8,10,12,.84) 16%, rgba(8,10,12,.84) 84%, transparent)",
+          "line": 170,
+          "start": 9464,
+          "end": 9571,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 331,
+            "value": "#191a1cdb"
+          },
+          "bytes": 106
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "letter-spacing",
+          "value": "8px",
+          "line": 172,
+          "start": 9918,
+          "end": 9938,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 159,
+            "value": "7px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "text-shadow",
+          "value": "0 2px 6px rgba(0,0,0,.9)",
+          "line": 172,
+          "start": 9958,
+          "end": 9996,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 160,
+            "value": "0 2px 14px rgba(9,9,10,.9), 0 0 3px rgba(230,203,118,.22)"
+          },
+          "bytes": 37
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "color",
+          "value": "var(--ak-yellow)",
+          "line": 173,
+          "start": 10138,
+          "end": 10162,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 332,
+            "value": "#bbbec0"
+          },
+          "bytes": 23
+        },
+        {
+          "selector": "#topBtns #btnHome.exit-btn",
+          "property": "border",
+          "value": "none",
+          "line": 187,
+          "start": 11225,
+          "end": 11238,
+          "survivor": {
+            "file": "css/expedition-map.css",
+            "line": 95,
+            "value": "1px solid #868b8e44"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "linear-gradient(90deg, rgba(10,12,14,.94), rgba(26,29,33,.88))",
+          "line": 192,
+          "start": 11465,
+          "end": 11540,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 165,
+            "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+          },
+          "bytes": 74
+        },
+        {
+          "selector": "#hpHud",
+          "property": "border",
+          "value": "none",
+          "line": 192,
+          "start": 11541,
+          "end": 11554,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "1px solid #71777b"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#hpHud",
+          "property": "box-shadow",
+          "value": "inset 0 0 0 1px var(--ak-line-hi), 0 4px 14px rgba(0,0,0,.55)",
+          "line": 192,
+          "start": 11573,
+          "end": 11647,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 136,
+            "value": "0 2px 8px rgba(7,7,8,.3)"
+          },
+          "bytes": 73
+        },
+        {
+          "selector": "#hpHud",
+          "property": "clip-path",
+          "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)",
+          "line": 192,
+          "start": 11648,
+          "end": 11712,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 165,
+            "value": "polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%)"
+          },
+          "bytes": 63
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "letter-spacing",
+          "value": "3px",
+          "line": 198,
+          "start": 12187,
+          "end": 12207,
+          "survivor": {
+            "file": "css/page-expedition-hud.css",
+            "line": 139,
+            "value": "2.5px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "color",
+          "value": "var(--ak-sub)",
+          "line": 198,
+          "start": 12208,
+          "end": 12229,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 166,
+            "value": "#04121b"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "font-weight",
+          "value": "700",
+          "line": 198,
+          "start": 12230,
+          "end": 12247,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 25,
+            "value": "400"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "#statsPanel",
+          "property": "display",
+          "value": "flex",
+          "line": 216,
+          "start": 13979,
+          "end": 13993,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "flex"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#charPanel",
+          "property": "padding",
+          "value": "0",
+          "line": 230,
+          "start": 14819,
+          "end": 14830,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "0 18px 0 4px"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": "#charPanel",
+          "property": "display",
+          "value": "flex",
+          "line": 230,
+          "start": 14831,
+          "end": 14845,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "flex"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": "#charPanel",
+          "property": "align-items",
+          "value": "stretch",
+          "line": 230,
+          "start": 14846,
+          "end": 14867,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "flex-end"
+          },
+          "bytes": 20
+        },
+        {
+          "selector": "#charPanel",
+          "property": "min-width",
+          "value": "0",
+          "line": 230,
+          "start": 14868,
+          "end": 14881,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "176px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "width",
+          "value": "110px",
+          "line": 232,
+          "start": 14963,
+          "end": 14976,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "132px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "min-width",
+          "value": "110px",
+          "line": 232,
+          "start": 14977,
+          "end": 14994,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "132px"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "height",
+          "value": "auto",
+          "line": 232,
+          "start": 14995,
+          "end": 15008,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "165px"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "border-radius",
+          "value": "0",
+          "line": 232,
+          "start": 15030,
+          "end": 15047,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "0"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "border",
+          "value": "none",
+          "line": 235,
+          "start": 15206,
+          "end": 15219,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "2px solid #9ba0a4"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "box-shadow",
+          "value": "inset 0 2px 8px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.4)",
+          "line": 237,
+          "start": 15360,
+          "end": 15430,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "0 6px 20px #1a1c1e88"
+          },
+          "bytes": 69
+        },
+        {
+          "selector": "#hpText",
+          "property": "color",
+          "value": "#ffffff",
+          "line": 252,
+          "start": 16628,
+          "end": 16643,
+          "survivor": {
+            "file": "css/expedition.css",
+            "line": 330,
+            "value": "#f3f3f4"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "padding",
+          "value": "10px 8px 8px",
+          "line": 265,
+          "start": 17501,
+          "end": 17523,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "12px"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "background",
+          "value": "var(--ak-tex-hatch), linear-gradient(180deg, #262a2e, #121417)",
+          "line": 266,
+          "start": 17603,
+          "end": 17678,
+          "survivor": {
+            "file": "css/ak-skin.css",
+            "line": 173,
+            "value": "var(--ak-tex-hatch), linear-gradient(180deg, #2a2e33, #15171a)"
+          },
+          "bytes": 74
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "border",
+          "value": "1px solid var(--ak-line)",
+          "line": 267,
+          "start": 17683,
+          "end": 17716,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 22,
+            "value": "1px solid #7e8285"
+          },
+          "bytes": 32
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "display",
+          "value": "grid",
+          "line": 284,
+          "start": 18717,
+          "end": 18731,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 408,
+            "value": "grid"
+          },
+          "bytes": 13
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "grid-template-columns",
+          "value": "repeat(4, 1fr)",
+          "line": 284,
+          "start": 18732,
+          "end": 18770,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 460,
+            "value": "repeat(auto-fill,minmax(104px,1fr))"
+          },
+          "bytes": 37
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "gap",
+          "value": "8px",
+          "line": 284,
+          "start": 18771,
+          "end": 18780,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 408,
+            "value": "9px"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": ".bag-slot",
+          "property": "background",
+          "value": "var(--ak-tex-hatch)",
+          "line": 285,
+          "start": 18876,
+          "end": 18908,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "#232628"
+          },
+          "bytes": 31
+        },
+        {
+          "selector": ".bag-slot",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "line": 285,
+          "start": 18909,
+          "end": 18944,
+          "survivor": {
+            "file": "css/winter.css",
+            "line": 31,
+            "value": "0"
+          },
+          "bytes": 34
+        },
+        {
+          "selector": "#overlay.bag-full",
+          "property": "background",
+          "value": "#0c0c0c",
+          "line": 298,
+          "start": 19923,
+          "end": 19943,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 144,
+            "value": "radial-gradient(120% 90% at 50% 24%, rgba(49,53,56,.5), transparent 62%),\n    radial-gradient(130% 100% at 50% 46%, transparent 46%, rgba(9,9,10,.55) 92%),\n    linear-gradient(125deg, #202325, #181a1c)"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "background",
+          "value": "radial-gradient(ellipse at 50% 0%, rgba(97,97,97,.20), transparent 58%),\n      linear-gradient(180deg, #1d1d1d, #0c0c0c 78%)",
+          "line": 301,
+          "start": 20165,
+          "end": 20308,
+          "survivor": {
+            "file": "css/page-rewards-bag-help.css",
+            "line": 151,
+            "value": "radial-gradient(110% 70% at 50% 0%, rgba(61,66,71,.3), transparent 58%),\n    linear-gradient(125deg, rgba(36,39,41,.88), rgba(23,25,27,.9))"
+          },
+          "bytes": 142
+        }
+      ]
+    }
+  ]
+}

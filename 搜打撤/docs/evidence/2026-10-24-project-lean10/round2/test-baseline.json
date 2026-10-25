@@ -1,0 +1,5718 @@
+{
+  "scopeAuthorized": "User:测试夹具去重也计入，游戏减量仍单列",
+  "scope": "Game keeps the original2026-10-24 baseline; newly included tests use the snapshot at scope expansion. All test source and text fixtures count, not docs/binaries or ignored reports. Any new fixture format or helper must count.",
+  "cache": "node_modules/.cache/project-lean10-round2-before",
+  "files": [
+    {
+      "file": "tests/a3-battle-rules.test.js",
+      "bytes": 20984,
+      "normalizedBytes": 20564,
+      "sha256": "41a3939a9136575e5ba6bdbb8929ea917330c3b875a5743f94f2960eb28d1515"
+    },
+    {
+      "file": "tests/abyss-sovereign.test.js",
+      "bytes": 9014,
+      "normalizedBytes": 8844,
+      "sha256": "33c63cbcf37e6fbc4659bf5219a8a3bd4fd1e7fecd4ca91e2a45cef136a410e4"
+    },
+    {
+      "file": "tests/acceptance-gate.test.js",
+      "bytes": 43345,
+      "normalizedBytes": 43345,
+      "sha256": "5f795a4ec8bea768ad7d63deb5af8d2e7b4b560b82df967509ac21ebd369ff21"
+    },
+    {
+      "file": "tests/achievement-gallery-close.test.js",
+      "bytes": 4384,
+      "normalizedBytes": 4384,
+      "sha256": "1dbc72e9d8fa20a14a3c43f0e3ef2d444fad8a6683ccdebe02d2f510498830f2"
+    },
+    {
+      "file": "tests/achievement-gallery-entry.test.js",
+      "bytes": 3449,
+      "normalizedBytes": 3449,
+      "sha256": "1a64bff769e7193bee2f7cbb6d4481a505fde330865eb3cf33b6c44011df02b8"
+    },
+    {
+      "file": "tests/achievement-gallery.test.js",
+      "bytes": 9342,
+      "normalizedBytes": 9342,
+      "sha256": "56634e8327b8aafdadd0ff4c99c73898932ee8ce8a6585c6ea3e98f941048f23"
+    },
+    {
+      "file": "tests/action-dispatch.test.js",
+      "bytes": 5934,
+      "normalizedBytes": 5934,
+      "sha256": "9b277cb74a73e14a63abf9e9f09608e654680c8962d691f6952e23c0811596c4"
+    },
+    {
+      "file": "tests/agent-batch-llm-timeout.test.js",
+      "bytes": 3500,
+      "normalizedBytes": 3500,
+      "sha256": "ca2f19d164bf46a1bc54cae3b88072bc9e7723838ae08c082972ecf3563ad87b"
+    },
+    {
+      "file": "tests/agent-channel-pump-lazy.test.js",
+      "bytes": 3595,
+      "normalizedBytes": 3595,
+      "sha256": "109d0563d4fa15d4e6d7efcfcd1fcc9a68ab044682fc558493aa90c6263760f7"
+    },
+    {
+      "file": "tests/agent-command-results.test.js",
+      "bytes": 18058,
+      "normalizedBytes": 18058,
+      "sha256": "3fe948c3d4be141b61514522fb55e6c13c5138de0c07f7c74f14a98538e3a3bf"
+    },
+    {
+      "file": "tests/agent-compare-provenance.test.js",
+      "bytes": 3409,
+      "normalizedBytes": 3409,
+      "sha256": "7e45431b96e9aa724c7c320417ac4d2a1d233b9a1948887d92d7a014fc8e9ab7"
+    },
+    {
+      "file": "tests/agent-console-async-entry.test.js",
+      "bytes": 2075,
+      "normalizedBytes": 2075,
+      "sha256": "fde1cc9b7e95a7086db6a744a7c190e83dda38946494547c2d2cb8e8e796f0a3"
+    },
+    {
+      "file": "tests/agent-console-jump.test.js",
+      "bytes": 10663,
+      "normalizedBytes": 10663,
+      "sha256": "84a383dc161fb18a6dc2387543827d3c179abde634d83f1d1a6519140d56da36"
+    },
+    {
+      "file": "tests/agent-llm-abort.test.js",
+      "bytes": 3843,
+      "normalizedBytes": 3843,
+      "sha256": "77b50dbbbc24a5e32c0884556d14103ce1e4844a1dc4de799079b359bdefab0b"
+    },
+    {
+      "file": "tests/agent-llm.test.js",
+      "bytes": 4853,
+      "normalizedBytes": 4853,
+      "sha256": "94b233a7b3cd25b77cc7aedc9e5b59b21f5b81090a4f57a489ddbb5295044f83"
+    },
+    {
+      "file": "tests/agent-optional-lazy-boundary.test.js",
+      "bytes": 6094,
+      "normalizedBytes": 6094,
+      "sha256": "20bba6499e5e6ecae0d3c9a27022e45d19e4269e7e76139158d583f59561ed8b"
+    },
+    {
+      "file": "tests/agent-policy-door-threshold.test.js",
+      "bytes": 2994,
+      "normalizedBytes": 2994,
+      "sha256": "29bf2bdef3cc7c1237a0040c564b80a8ee59ab64cc3290fcd945dce7d55ae755"
+    },
+    {
+      "file": "tests/agent-provenance-stopreason.test.js",
+      "bytes": 13500,
+      "normalizedBytes": 13500,
+      "sha256": "f32f906f29809f1d4a00063a1c489e6cba87b38ddfe90cd308b77c55429a50dd"
+    },
+    {
+      "file": "tests/agent-recorder.test.js",
+      "bytes": 4194,
+      "normalizedBytes": 4194,
+      "sha256": "7d443a5c625fdeafdaedb3ec02deb717e1cc2d2d9399a58c7a8f51a167306566"
+    },
+    {
+      "file": "tests/agent-replay-identity.test.js",
+      "bytes": 2368,
+      "normalizedBytes": 2368,
+      "sha256": "65fe08001d5ff1ab18d070b7b3f745bb12337cb1ba95409ed891e90cebd1b13b"
+    },
+    {
+      "file": "tests/agent-run-provenance.test.js",
+      "bytes": 4101,
+      "normalizedBytes": 4101,
+      "sha256": "05ad8048a2e39b755bab06ef29527b6496010c38dff40c41787d9a7d2b1b518e"
+    },
+    {
+      "file": "tests/agent-runner-abort.test.js",
+      "bytes": 5406,
+      "normalizedBytes": 5406,
+      "sha256": "7e05b971e293fa8d0b58b5d2a52ca56d74b439ad1805e059b173fd28f81b9a9c"
+    },
+    {
+      "file": "tests/agent-runner-driver-restore.test.js",
+      "bytes": 2503,
+      "normalizedBytes": 2503,
+      "sha256": "2d761a1fc3c5bad54a14c258a3ea3917e31228fe3143641aee50178b6af8b79a"
+    },
+    {
+      "file": "tests/agent-runner-lazy-boundary.test.js",
+      "bytes": 13142,
+      "normalizedBytes": 13142,
+      "sha256": "45f6ecd444f85039be8c94bf3f80f3e1d7efaf468d43b174d2cafedbb14095d6"
+    },
+    {
+      "file": "tests/agent-scenes-lazy-boundary.test.js",
+      "bytes": 5591,
+      "normalizedBytes": 5591,
+      "sha256": "375798a9df6a71773c6b756c78161fe011580ed62914a733ccc416d6aa36b232"
+    },
+    {
+      "file": "tests/agent-scenes.test.js",
+      "bytes": 6028,
+      "normalizedBytes": 6028,
+      "sha256": "c93a845dde49cdfc6abcc979e02c4e99fedbef6525c5bffd92e2b08052ee8d2d"
+    },
+    {
+      "file": "tests/agent-stats-provenance.test.js",
+      "bytes": 2319,
+      "normalizedBytes": 2319,
+      "sha256": "03be91955c9d80ce10e4857d176718afd2457adfa65b9dd74b5acd920ab46941"
+    },
+    {
+      "file": "tests/agent-tool-lifecycle.test.js",
+      "bytes": 8975,
+      "normalizedBytes": 8975,
+      "sha256": "3b03e0fa263dfd54cf579cde1a52c727bf2c9dea3b41ae7feeefe45ccbd933cc"
+    },
+    {
+      "file": "tests/altar-completion-road-cache.test.js",
+      "bytes": 2862,
+      "normalizedBytes": 2862,
+      "sha256": "807ae973686b1617ed4c2f41444ec2c7ebdd6222b9660e8391e784577ef377ba"
+    },
+    {
+      "file": "tests/altar-node-art.test.js",
+      "bytes": 2520,
+      "normalizedBytes": 2520,
+      "sha256": "103694bbc3d7b7fad243ff3e953a6f1fe05f34df22a8c875975105bc1b457744"
+    },
+    {
+      "file": "tests/altar-node-completion-view.test.js",
+      "bytes": 5143,
+      "normalizedBytes": 5143,
+      "sha256": "69eccb927e9fecd09722ef00343729bf714f0a741460d2ea542c67c7c7fb3d75"
+    },
+    {
+      "file": "tests/altar-sacrifice-zones-cloud.test.js",
+      "bytes": 12714,
+      "normalizedBytes": 12714,
+      "sha256": "5994fe63d9c853b35d37dddd2212cc15b3f72320f12b5c44ce9539743cf4997f"
+    },
+    {
+      "file": "tests/architecture-boundaries.test.js",
+      "bytes": 16678,
+      "normalizedBytes": 16678,
+      "sha256": "577a9cc241729b758e0b66b4fabb750700bc44eb099a7768abf9b0af43c85ffb"
+    },
+    {
+      "file": "tests/archive-motion.test.js",
+      "bytes": 5292,
+      "normalizedBytes": 5292,
+      "sha256": "c393011113508307ba2d3dd7b98e93c59babc1b71c8e8fadddcff90af02a7966"
+    },
+    {
+      "file": "tests/archive-progress-rendering.test.js",
+      "bytes": 4112,
+      "normalizedBytes": 4112,
+      "sha256": "36982bf6fa06aa5d683bd63d4c9fb2201a5fe948f40ca1980faa44d2ad3dcf26"
+    },
+    {
+      "file": "tests/armup-mode.test.js",
+      "bytes": 4088,
+      "normalizedBytes": 4088,
+      "sha256": "46b9554e7cf495da362363d6e0e5e4bf37997ddb252ba38d59a11e84dd376823"
+    },
+    {
+      "file": "tests/art-preload-scheduling.test.js",
+      "bytes": 14599,
+      "normalizedBytes": 14599,
+      "sha256": "110a86a826abdcd2ef3da02798af5a9a918da98cea5b1ab5658715e6abc9bd7e"
+    },
+    {
+      "file": "tests/art-warmup-lifecycle.test.js",
+      "bytes": 14738,
+      "normalizedBytes": 14738,
+      "sha256": "ba52353768807001e97ead6747de33044d568200d54e47be2525910ea1d62b99"
+    },
+    {
+      "file": "tests/art-workflow-tools.test.js",
+      "bytes": 3371,
+      "normalizedBytes": 3371,
+      "sha256": "f71c61cc80bcb05ead629d3415580e64f83e09da48c8ba9dfe6659f83fe2c82e"
+    },
+    {
+      "file": "tests/asset-audit.test.js",
+      "bytes": 9615,
+      "normalizedBytes": 9615,
+      "sha256": "6e179893de4342493887e9d9971aacbc62bdd3ae53af644d293c5dc8d4ccc661"
+    },
+    {
+      "file": "tests/asset-manifest-source.test.js",
+      "bytes": 1428,
+      "normalizedBytes": 1428,
+      "sha256": "0d6ae76ec98aab3a1054d66a7aaff54931a2ac4a05fbcf30d9b5ee68c9d7c93c"
+    },
+    {
+      "file": "tests/asset-url-aliases.test.js",
+      "bytes": 2093,
+      "normalizedBytes": 2093,
+      "sha256": "12f60ce3a1c85581ea67314372624befd53dec2d9c98498dc0fc359e3f18348c"
+    },
+    {
+      "file": "tests/audio-review-remediation-1023.test.js",
+      "bytes": 6987,
+      "normalizedBytes": 6915,
+      "sha256": "901654ac1eb33468200cd777898a3af34e867fc1b57e5888e8dcd77075479647"
+    },
+    {
+      "file": "tests/backpack-layout.test.js",
+      "bytes": 5794,
+      "normalizedBytes": 5794,
+      "sha256": "1f5069b606aaf8dc1fba3cdfde53ed6abac498873967943fd7232be94267e620"
+    },
+    {
+      "file": "tests/backpack-rail-alignment.test.js",
+      "bytes": 3061,
+      "normalizedBytes": 3061,
+      "sha256": "ff99325e079fea50c8b0d49e10e36a0988496090d901c9d892b83bcf7b70eec1"
+    },
+    {
+      "file": "tests/bag-architecture.test.js",
+      "bytes": 4182,
+      "normalizedBytes": 4182,
+      "sha256": "4860630d59b7b9fb2d94dd79a5c1e9eece099763e0ce24c8781f1fc3316b6d42"
+    },
+    {
+      "file": "tests/bag-container-pages.test.js",
+      "bytes": 3678,
+      "normalizedBytes": 3624,
+      "sha256": "2034c00c0db0107ba275d25c08b3605b4b7acf7fae03fb69ea5c4a5583f977ed"
+    },
+    {
+      "file": "tests/bag-help-return-continuity.test.js",
+      "bytes": 9167,
+      "normalizedBytes": 9167,
+      "sha256": "018b04b6bea59aa67ed53779ce637c06b0be0a5a0ae1e9f05a6c5a058b7e8bd0"
+    },
+    {
+      "file": "tests/bag-inventory-commands.test.js",
+      "bytes": 6351,
+      "normalizedBytes": 6268,
+      "sha256": "c94b117eb963dc86bafb50e0c3a0a8c14318af889abaded541ce47d5761bb29f"
+    },
+    {
+      "file": "tests/bag-item-rule-baseline.test.js",
+      "bytes": 14076,
+      "normalizedBytes": 13797,
+      "sha256": "3a5b4b910a156600b136ab59191133f83e3cc67c54f3342d7869ff275f8413ad"
+    },
+    {
+      "file": "tests/bag-legacy-use-live-ports.test.js",
+      "bytes": 1689,
+      "normalizedBytes": 1664,
+      "sha256": "38ba7c5d5c74875a21141d709e9d43dd37f8309661cfbc34a25cffb89649c648"
+    },
+    {
+      "file": "tests/bag-page-lifecycle-review.test.js",
+      "bytes": 46674,
+      "normalizedBytes": 46674,
+      "sha256": "b8ab0196b9dbf45b4c67d2944dcaf341efcd8553b47c29c7e0e0a3bbc05e5de1"
+    },
+    {
+      "file": "tests/bag-pane-retained.test.js",
+      "bytes": 5725,
+      "normalizedBytes": 5725,
+      "sha256": "559b4699ec0c8f91012757533537031bb96aa47dd7dc42ba4ad8ff4f48b321c4"
+    },
+    {
+      "file": "tests/bag-pouch-capacity.test.js",
+      "bytes": 19925,
+      "normalizedBytes": 19925,
+      "sha256": "a8666139783edca155f59abd22802113d5f3ee5de7aa559cf6e0d4e9a0da34f2"
+    },
+    {
+      "file": "tests/bag-render-derivation.test.js",
+      "bytes": 7987,
+      "normalizedBytes": 7987,
+      "sha256": "b85fde9e75e87e68d4d4252cc164e56ec389df5f717c22df6c21a795f8ae74b3"
+    },
+    {
+      "file": "tests/bag-render-snapshot.test.js",
+      "bytes": 9082,
+      "normalizedBytes": 9082,
+      "sha256": "af64621360c31e30a16dc5706ee3acd70262a42a6b0013bdffcc2d2de1b31c1e"
+    },
+    {
+      "file": "tests/bag-return-hook.test.js",
+      "bytes": 1238,
+      "normalizedBytes": 1238,
+      "sha256": "6dd05ae3b24fca4bc4a361b11f23dccf21db666936785e6fcc3a115f06d3bf2d"
+    },
+    {
+      "file": "tests/bag-safe-transfer.test.js",
+      "bytes": 11667,
+      "normalizedBytes": 11490,
+      "sha256": "b3edac0f60aafdff300ba40411bad6113f0f723f16f05ac299ae7b43f4ac4c5e"
+    },
+    {
+      "file": "tests/bag-slam-button.test.js",
+      "bytes": 12602,
+      "normalizedBytes": 12602,
+      "sha256": "9087dede7b158ef82f9edb8542fddf866379b2a5c58e783f850e4efcf53c2082"
+    },
+    {
+      "file": "tests/bag-structured-rule-migration.test.js",
+      "bytes": 10678,
+      "normalizedBytes": 10678,
+      "sha256": "312ed421b096851bcc254be4e6a8000d923f2c536da4639628a0f1ee849978af"
+    },
+    {
+      "file": "tests/bag-structured-use.test.js",
+      "bytes": 6140,
+      "normalizedBytes": 6013,
+      "sha256": "19d64cbffea9873382fc3e66510d7f104988db0b3733992a95c4ce3084e3a813"
+    },
+    {
+      "file": "tests/bag-token-craft.test.js",
+      "bytes": 2455,
+      "normalizedBytes": 2455,
+      "sha256": "a68a9cbd0549baecaad7727c94778c3775fdb64ed1fdea9aa16e3228647beb70"
+    },
+    {
+      "file": "tests/bag-token-discover.test.js",
+      "bytes": 7813,
+      "normalizedBytes": 7698,
+      "sha256": "7ff2ae575028ff64d1713d69371a63f5b79e3ff9a4887c5ba02eb0af76a2f4e5"
+    },
+    {
+      "file": "tests/bag-ui-language.test.js",
+      "bytes": 5338,
+      "normalizedBytes": 5260,
+      "sha256": "cfe9598d5a6e8b50f4de37c94ec67d7b82de3554257a469ba6d52c6d6e57d405"
+    },
+    {
+      "file": "tests/bag-use-compatibility.test.js",
+      "bytes": 5543,
+      "normalizedBytes": 5463,
+      "sha256": "780b6d0b5cff3205973da70dd2e7282e6eee9b1bfba7fa2dfc99b07fd2165f4b"
+    },
+    {
+      "file": "tests/bag-zoom-navigation.test.js",
+      "bytes": 7596,
+      "normalizedBytes": 7596,
+      "sha256": "4e8d36bc62efc149c5efb6b01826acefcf5d7246d70a1a814287525fb6f2feea"
+    },
+    {
+      "file": "tests/base-corrupt-field.test.js",
+      "bytes": 6151,
+      "normalizedBytes": 6151,
+      "sha256": "cd56d9a56a23a696f95951d13fd09c48d0f7c6747e3050e15dc40f70ca7abbe0"
+    },
+    {
+      "file": "tests/base-departure.test.js",
+      "bytes": 3240,
+      "normalizedBytes": 3240,
+      "sha256": "9c0c37f0271264dcef43757936c6452e4865e07ee868b47b11485147fb33bf20"
+    },
+    {
+      "file": "tests/base-direct-write-convergence.test.js",
+      "bytes": 10192,
+      "normalizedBytes": 10192,
+      "sha256": "759e47f7a00d5e1a843d283807d8daf196e825d6db23c9cd9bc65b0abf8dc062"
+    },
+    {
+      "file": "tests/base-elapsed.test.js",
+      "bytes": 4166,
+      "normalizedBytes": 4166,
+      "sha256": "607731ae3da07ce1611b310d76db8b577fa31e1618ccb817fa49036e09173283"
+    },
+    {
+      "file": "tests/base-hub-business-lifecycle-audit.test.js",
+      "bytes": 13739,
+      "normalizedBytes": 13531,
+      "sha256": "2398c357eeb6a5ea9131ed71ca4b8550cdf35bbe667eb98d55cf6eeb0d6b37e8"
+    },
+    {
+      "file": "tests/base-inventory-lifecycle-audit.test.js",
+      "bytes": 27620,
+      "normalizedBytes": 27224,
+      "sha256": "a471e5cc85a2af724c4c6a0593d4d162ec53dd3575f6b0310f14b8bc533a17c4"
+    },
+    {
+      "file": "tests/base-key-count.test.js",
+      "bytes": 2815,
+      "normalizedBytes": 2782,
+      "sha256": "656964adccbd1d2f433a39fd35571f5b631175d9d364371100e5b44eacc3eab6"
+    },
+    {
+      "file": "tests/base-material-rule-baseline.test.js",
+      "bytes": 5112,
+      "normalizedBytes": 5112,
+      "sha256": "12356e2e497d983be0ea448cd18d78c2f63db257fecd24a920e7b439b6eeb4d2"
+    },
+    {
+      "file": "tests/base-meta.test.js",
+      "bytes": 3196,
+      "normalizedBytes": 3196,
+      "sha256": "23810664cf9eafa52f24a1f23d1b8f3ded53459cefa56499041665595e419992"
+    },
+    {
+      "file": "tests/base-motion-v4.test.js",
+      "bytes": 2509,
+      "normalizedBytes": 2509,
+      "sha256": "28ac9f59938c6f0c3bfb3887d9b4250a4f683bc61898488a8a96a43d234039d6"
+    },
+    {
+      "file": "tests/base-mutation-types.test.js",
+      "bytes": 4142,
+      "normalizedBytes": 4142,
+      "sha256": "58fe750199a02c866c4f52ee1e16272de4d935b281f51d5ff892024fefcf0c47"
+    },
+    {
+      "file": "tests/base-mutation.test.js",
+      "bytes": 10818,
+      "normalizedBytes": 10818,
+      "sha256": "470d27c88a8f624fa942fdf6e49fac7752c4b5c60c168e14e889d670b51c84fd"
+    },
+    {
+      "file": "tests/base-pet-egg.test.js",
+      "bytes": 4199,
+      "normalizedBytes": 4199,
+      "sha256": "88f74187e29abd219841eb077d20ff1f5a7182d22f3c779578fd090b5418ab33"
+    },
+    {
+      "file": "tests/base-progression-commands.test.js",
+      "bytes": 3452,
+      "normalizedBytes": 3452,
+      "sha256": "cb78e2a68b097e819c34877f4a14b34698a245733dfdbcea7d62932875328aa5"
+    },
+    {
+      "file": "tests/base-save-snapshot.test.js",
+      "bytes": 8187,
+      "normalizedBytes": 8015,
+      "sha256": "f077a9660b5c14ab69817d560c8b2d44dc02213c0e3b79013d26ee859dad66de"
+    },
+    {
+      "file": "tests/base-sticky-issue-fix.test.js",
+      "bytes": 1977,
+      "normalizedBytes": 1977,
+      "sha256": "2bff2af671a9dec54f773ebb434588d39cab08f862f17b9d04a639f5222c9e88"
+    },
+    {
+      "file": "tests/base-storage-read-failure.test.js",
+      "bytes": 6295,
+      "normalizedBytes": 6295,
+      "sha256": "58a0f2fae5ec9ba12e0ce882409f04910397af8b5b0e89ecb4048f8a0f859284"
+    },
+    {
+      "file": "tests/base-subpage-header-readability.test.js",
+      "bytes": 1584,
+      "normalizedBytes": 1584,
+      "sha256": "fdb9682c06727d5e4bdeb75defa706a1e92c81cc5f82015f02f41d681b226899"
+    },
+    {
+      "file": "tests/base-ui-sample.test.js",
+      "bytes": 12302,
+      "normalizedBytes": 12113,
+      "sha256": "f483c6bc05c2ff03baf2e9801ae5a659f45297fa143daf8f300f1017607cfebc"
+    },
+    {
+      "file": "tests/base-write-lock.test.js",
+      "bytes": 13900,
+      "normalizedBytes": 13900,
+      "sha256": "a2efdf7666c475b9293b3acf83ab343c0648c2998ffc9efd6825983df883be4a"
+    },
+    {
+      "file": "tests/battle-action-runner-readiness.test.js",
+      "bytes": 6477,
+      "normalizedBytes": 6477,
+      "sha256": "a889ac4bef518ede8465190e74d91e15cdcaec49ad4e28b29fa4157d9ab8aa24"
+    },
+    {
+      "file": "tests/battle-action-timing.test.js",
+      "bytes": 2439,
+      "normalizedBytes": 2439,
+      "sha256": "011033768a9e4089092a81045551626bae5436eded43061e5a17daa5a9f73a8c"
+    },
+    {
+      "file": "tests/battle-aim-canvas-resolution.test.js",
+      "bytes": 4445,
+      "normalizedBytes": 4445,
+      "sha256": "54e10367510df07b314fbaedfe4572d9c55dddd8f7dee87e95d6dbc9dbd37237"
+    },
+    {
+      "file": "tests/battle-all-cards.test.js",
+      "bytes": 18631,
+      "normalizedBytes": 18631,
+      "sha256": "786d8b02cc0095679dd61a4c86d5ded36de8be124117a98c63897794067fc446"
+    },
+    {
+      "file": "tests/battle-ally-dom-order.test.js",
+      "bytes": 11504,
+      "normalizedBytes": 11504,
+      "sha256": "5d047c338ca608a47d000edcbba464288bfb40890cca7ffc43024266d130ed0b"
+    },
+    {
+      "file": "tests/battle-architecture.test.js",
+      "bytes": 8836,
+      "normalizedBytes": 8668,
+      "sha256": "a8e84f2f411b2f02dc7f49ee4cbf18792c39f7e42f394d94263c513a57857345"
+    },
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "bytes": 16677,
+      "normalizedBytes": 16677,
+      "sha256": "c74c2b48e1eaf5e0d8c4f0ff178a0887b1ebe9609c72604b6a3e2c8aa3ec2f3b"
+    },
+    {
+      "file": "tests/battle-area-hover-snapshot.test.js",
+      "bytes": 5176,
+      "normalizedBytes": 5176,
+      "sha256": "878187c14f6ff3c5f11ba04c55606dce71739616d8e02679713cb33b8e0db738"
+    },
+    {
+      "file": "tests/battle-art-warm-scope.test.js",
+      "bytes": 2306,
+      "normalizedBytes": 2306,
+      "sha256": "e14a09fff698d5e4625a3ce51734eb35b8d6e6a0db5aa74a4e2af7d2557baf94"
+    },
+    {
+      "file": "tests/battle-bindings-equivalence.test.js",
+      "bytes": 5171,
+      "normalizedBytes": 5171,
+      "sha256": "0e02957a8feffeb05c01886e53d604300ac04af011f337aaa63c6bb625701af0"
+    },
+    {
+      "file": "tests/battle-bloom-discovery.test.js",
+      "bytes": 4384,
+      "normalizedBytes": 4315,
+      "sha256": "de37b73ca1285dc12bc3727773df5d544becdf097fa35b2c2a74965e099dc799"
+    },
+    {
+      "file": "tests/battle-card-feedback.test.js",
+      "bytes": 6502,
+      "normalizedBytes": 6502,
+      "sha256": "c0e48cf4022526dd8af784c26c63821c551353cd84fb654dbecb393e6d8d25e3"
+    },
+    {
+      "file": "tests/battle-card-inspection.test.js",
+      "bytes": 8003,
+      "normalizedBytes": 8003,
+      "sha256": "95f53efe6705be95c3c14b384a0ae61130a3811489da3ee898e41f97d0229be2"
+    },
+    {
+      "file": "tests/battle-card-results.test.js",
+      "bytes": 10559,
+      "normalizedBytes": 10559,
+      "sha256": "52b9e27fcb9ebb0d23ce9080ce10187025295fd1a3851479ee91db85bae69664"
+    },
+    {
+      "file": "tests/battle-curse-immunity-lifetime.test.js",
+      "bytes": 4299,
+      "normalizedBytes": 4299,
+      "sha256": "d08e2f1c575e4c49f14290a3d1ceaffc9a243a3dd2d6038fb6967f2c9114e071"
+    },
+    {
+      "file": "tests/battle-decision-lifecycle.test.js",
+      "bytes": 6036,
+      "normalizedBytes": 6036,
+      "sha256": "86e1607cf54b67166a750ff00dae503f56b3655048018165df0ed763f3f7d3ed"
+    },
+    {
+      "file": "tests/battle-decision-readability.test.js",
+      "bytes": 10427,
+      "normalizedBytes": 10427,
+      "sha256": "e273798a604b2fe6e8f8c7e721037294c8ac7d033554c61ce1cd4e36e6e041cb"
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "bytes": 10494,
+      "normalizedBytes": 10358,
+      "sha256": "04ae6d9b28bbdb544544f58b289ed5c94a61fec89336a03c483988a1fbc42a82"
+    },
+    {
+      "file": "tests/battle-decision-shell-review.test.js",
+      "bytes": 4097,
+      "normalizedBytes": 4097,
+      "sha256": "80a7931562c857b51abdc7016e5a78ef3783441958b0581b1c6344a27f4134b4"
+    },
+    {
+      "file": "tests/battle-dev-grant-card.test.js",
+      "bytes": 1846,
+      "normalizedBytes": 1846,
+      "sha256": "c89eb26c58a0a11125d11353fd8ccd9203e589b84a141af680e442e8228841b6"
+    },
+    {
+      "file": "tests/battle-direct-trigger-source.test.js",
+      "bytes": 4865,
+      "normalizedBytes": 4865,
+      "sha256": "e9346f38b11a80e3cfa7265eb7de9d487d984cf23641b15ac294aca1616227d8"
+    },
+    {
+      "file": "tests/battle-discover-candidates.test.js",
+      "bytes": 2722,
+      "normalizedBytes": 2664,
+      "sha256": "2e11c92228568552ac46580ab97c541d0e3d030e243779772e0e88e41dbfd062"
+    },
+    {
+      "file": "tests/battle-discover-result-source.test.js",
+      "bytes": 5558,
+      "normalizedBytes": 5479,
+      "sha256": "dccb1fd911cef0a00ddbecac48ae4089721dd0ddffd669c4c5e7aa9b8c652344"
+    },
+    {
+      "file": "tests/battle-discover-retained-feedback.test.js",
+      "bytes": 2015,
+      "normalizedBytes": 2015,
+      "sha256": "abd9fc9c68d50fe37abe46e2ad749db0bf081ba217b49f4925b3c21731789923"
+    },
+    {
+      "file": "tests/battle-discover-state.test.js",
+      "bytes": 1917,
+      "normalizedBytes": 1869,
+      "sha256": "1e2b64eeadc6e83df5decc547979b76532f841996325fefda718070fd7d8c6d3"
+    },
+    {
+      "file": "tests/battle-discovery-cancellation.test.js",
+      "bytes": 10160,
+      "normalizedBytes": 10015,
+      "sha256": "485ff7394082d176ed70b1b850b36690e5be5e7df6b8dc07c67d7e0d387399a1"
+    },
+    {
+      "file": "tests/battle-drag-reference.test.js",
+      "bytes": 15229,
+      "normalizedBytes": 15229,
+      "sha256": "62ca79186b9b37014b0950d7d6168b7897253c2125d9d685173122a32ed047ac"
+    },
+    {
+      "file": "tests/battle-effect-damage-boundary.test.js",
+      "bytes": 2976,
+      "normalizedBytes": 2976,
+      "sha256": "e5b106bd6388817269b5ae95b451d2fd47aa72a42e5651be582f1261daf045c7"
+    },
+    {
+      "file": "tests/battle-effect-feedback.test.js",
+      "bytes": 25100,
+      "normalizedBytes": 25100,
+      "sha256": "1bb8bc2e7866ed96b9d1844266124f62224a99e78c3ad8957683d73b25836445"
+    },
+    {
+      "file": "tests/battle-effective-card.test.js",
+      "bytes": 6194,
+      "normalizedBytes": 6194,
+      "sha256": "6c0947212ad77bcf009e2b3f0e1746266b79101c6b2ee11483f9d3f1e9dcdcf0"
+    },
+    {
+      "file": "tests/battle-end-turn-selection.test.js",
+      "bytes": 16366,
+      "normalizedBytes": 16366,
+      "sha256": "a0304a4b08f93d03fc038c276e24ecb3ab6cdafbd868c1af5ab3ebf1ca1a8c5c"
+    },
+    {
+      "file": "tests/battle-engine-decomposition.test.js",
+      "bytes": 9261,
+      "normalizedBytes": 9103,
+      "sha256": "6025bd739a866fd881b65a8932eae6777a3e08edcb58f17aaf98198cc27e2550"
+    },
+    {
+      "file": "tests/battle-engine-facade.test.js",
+      "bytes": 2825,
+      "normalizedBytes": 2782,
+      "sha256": "f77cfa8f06c7e22a23afb72d4bd4e30cb05c26f1323cf0bc079bdd957e649930"
+    },
+    {
+      "file": "tests/battle-entry-readiness.test.js",
+      "bytes": 21139,
+      "normalizedBytes": 20814,
+      "sha256": "40af8871dfa3dfcecd788188affc5bbba2b0a0c0dfe891061022056391cc6593"
+    },
+    {
+      "file": "tests/battle-entry-view.test.js",
+      "bytes": 20860,
+      "normalizedBytes": 20860,
+      "sha256": "0c123223eba68ec5f698beb0d7fe5c808d386c1bbcb4e1eb3736a99ae5933524"
+    },
+    {
+      "file": "tests/battle-equipment-skill-synthesis.test.js",
+      "bytes": 10081,
+      "normalizedBytes": 10081,
+      "sha256": "9d58d34c3e1d8ec99be8f06e34e6636cc3fcd450fac5f1e87582872e5b8380a3"
+    },
+    {
+      "file": "tests/battle-esc-ime-guard.test.js",
+      "bytes": 3659,
+      "normalizedBytes": 3659,
+      "sha256": "ecec71db210ae282bbca395dee35fdef90416529868a5374ae51fc00ddb4291d"
+    },
+    {
+      "file": "tests/battle-execution-card-guard.test.js",
+      "bytes": 1313,
+      "normalizedBytes": 1295,
+      "sha256": "42d1061b40b50ef2a1918702d6ef6d6af63af86d6417a5ba8449b411b0528525"
+    },
+    {
+      "file": "tests/battle-execution-continuation.test.js",
+      "bytes": 4501,
+      "normalizedBytes": 4501,
+      "sha256": "29f274866f545fefd45da3d70c4e06bb4e2c334e08c7fce70b0802bf9e8216af"
+    },
+    {
+      "file": "tests/battle-feedback-stickers.test.js",
+      "bytes": 2328,
+      "normalizedBytes": 2328,
+      "sha256": "ed95c530bbe34efe2ef8f22fb9ab64716a6df2cf837ae1ebcdbb9f9f2a65492f"
+    },
+    {
+      "file": "tests/battle-feedback-view.test.js",
+      "bytes": 1021,
+      "normalizedBytes": 1021,
+      "sha256": "d2260d39dc4c0cb14f1a07da5febf169403bf206117214dc74e7f9115b9e78d0"
+    },
+    {
+      "file": "tests/battle-foe-canvas-resolution.test.js",
+      "bytes": 4603,
+      "normalizedBytes": 4603,
+      "sha256": "73fe3c93605e1e51b4934d524f460c7cec0d5d9f47e0106c77256d25b5459241"
+    },
+    {
+      "file": "tests/battle-frame-assets.test.js",
+      "bytes": 3066,
+      "normalizedBytes": 3066,
+      "sha256": "7d2875e3d43a6a04fc907a3d627c29f3ed74b5bb32c9aa2871fd9694ed453459"
+    },
+    {
+      "file": "tests/battle-frame-renderer.test.js",
+      "bytes": 5171,
+      "normalizedBytes": 5171,
+      "sha256": "2f8ada0f5b261b03c3877444923ec8f30e02f2b51061301a39ee96d56ef8d47d"
+    },
+    {
+      "file": "tests/battle-frame-resolution.test.js",
+      "bytes": 3461,
+      "normalizedBytes": 3461,
+      "sha256": "220f2a3d63602d321e32b9b5b2b6d4a7c56e7221e4c8debcdd9d3215ce6b3fb7"
+    },
+    {
+      "file": "tests/battle-frames-diagnostic-policy.test.js",
+      "bytes": 1827,
+      "normalizedBytes": 1827,
+      "sha256": "65dd6fa2eb84bb3e455f51f1e62c5fdeda68b6c9909a4c2105103fd8de39185a"
+    },
+    {
+      "file": "tests/battle-frames-lifecycle.test.js",
+      "bytes": 36445,
+      "normalizedBytes": 36445,
+      "sha256": "7aaec09cc3c219df90e1d394f73a667424ddfa7c376835e9f9b80a6231544f39"
+    },
+    {
+      "file": "tests/battle-frames-ownership.test.js",
+      "bytes": 36513,
+      "normalizedBytes": 36513,
+      "sha256": "132425542a6ef7ab2dd36cc464ddf5b011cec5f827fe90bcaa7dee8ca6efa8a0"
+    },
+    {
+      "file": "tests/battle-frames-pending-release.test.js",
+      "bytes": 4952,
+      "normalizedBytes": 4952,
+      "sha256": "6a4d463cb9d3b11020e7edcb4401cd69a758272480b25c99cd59d0ad5b2d04c4"
+    },
+    {
+      "file": "tests/battle-generated-settlement.test.js",
+      "bytes": 3431,
+      "normalizedBytes": 3431,
+      "sha256": "05384ed2341d3780bbdec2879ddb6a52f1783a1e02ba779577933b7f416fb111"
+    },
+    {
+      "file": "tests/battle-hand-content-diff.test.js",
+      "bytes": 10094,
+      "normalizedBytes": 10094,
+      "sha256": "b4aafeed2e4a16015898a5592ef87fc13d5407a05b0bf8dd4ac8af5f6bd69a19"
+    },
+    {
+      "file": "tests/battle-hand-group-index.test.js",
+      "bytes": 2107,
+      "normalizedBytes": 2107,
+      "sha256": "3c6fbfeb7343e537aaad2c5f1ba53c247770e005f11f9f5d24f68366e747748d"
+    },
+    {
+      "file": "tests/battle-hand-hit-input.test.js",
+      "bytes": 9336,
+      "normalizedBytes": 9336,
+      "sha256": "84ea7f7290b4fdd231775e7592717703afbc7453573c807345594e9664eb0654"
+    },
+    {
+      "file": "tests/battle-hand-inspector.test.js",
+      "bytes": 80779,
+      "normalizedBytes": 80779,
+      "sha256": "6e71d3dea3375307cba431a96e4637b427279ec252ac08b4a2a043a8ff67452b"
+    },
+    {
+      "file": "tests/battle-hand-keyword-interaction.test.js",
+      "bytes": 12617,
+      "normalizedBytes": 12407,
+      "sha256": "7688cf38054f08ac19e50632444b5fb58e9903d46afa0493e1a00a0e65410d1b"
+    },
+    {
+      "file": "tests/battle-hand-layout.test.js",
+      "bytes": 2025,
+      "normalizedBytes": 2025,
+      "sha256": "4f2d1e7225a5b45c1fc13611463bc26b90d0b743aa94d95288bb2e171b9ed1c4"
+    },
+    {
+      "file": "tests/battle-hand-rule-context.test.js",
+      "bytes": 9773,
+      "normalizedBytes": 9773,
+      "sha256": "4784a312f22f84e5a18b07495da482262c9c9af64687d40dfb73c395e53d65f1"
+    },
+    {
+      "file": "tests/battle-hand-selection-rules.test.js",
+      "bytes": 1677,
+      "normalizedBytes": 1645,
+      "sha256": "a6c0563ac988e78c6ad50c18e7e955cb2c559a0940f310a4eff31e6319ff63b3"
+    },
+    {
+      "file": "tests/battle-hover-play-availability.test.js",
+      "bytes": 4964,
+      "normalizedBytes": 4964,
+      "sha256": "f3a787abaf94a84c9765ccfdd3ff4d4a7fa1b8e05813d1c832a5f678dad82922"
+    },
+    {
+      "file": "tests/battle-hud-info.test.js",
+      "bytes": 6364,
+      "normalizedBytes": 6364,
+      "sha256": "2a36a08c290378bbfe1d46f04ac820ef8fbc1196a3f44615875536f46c3ba0a3"
+    },
+    {
+      "file": "tests/battle-imitate-unplayable.test.js",
+      "bytes": 6276,
+      "normalizedBytes": 6276,
+      "sha256": "08c68068bf1877d9e941d3e1baf911e9ce428d18db29a7772096904f0690c7e6"
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "bytes": 36867,
+      "normalizedBytes": 36867,
+      "sha256": "4b9e4e269fd628f56ab1cab0945fd36ae5f7fe02e03dd6d043fc5f4a73732661"
+    },
+    {
+      "file": "tests/battle-infusion-chip-bounds.test.js",
+      "bytes": 624,
+      "normalizedBytes": 624,
+      "sha256": "4dc84581c4c8b8176b1d03f49fda99180e2cd4e3d212e1c3201eed623994dc7b"
+    },
+    {
+      "file": "tests/battle-infusion-material-state.test.js",
+      "bytes": 1736,
+      "normalizedBytes": 1736,
+      "sha256": "fef77bf7bd9b845c966377b193fb9679b492d70ec8a5304f88172b64e9a3f55d"
+    },
+    {
+      "file": "tests/battle-lifecycle.test.js",
+      "bytes": 4923,
+      "normalizedBytes": 4817,
+      "sha256": "fbbb5b37e4f479f0253b8c5c196be351a764391144cb1e3104b24331648970ed"
+    },
+    {
+      "file": "tests/battle-modules.test.js",
+      "bytes": 4562,
+      "normalizedBytes": 4485,
+      "sha256": "355e2e8d30addab47e211e7c5fa23b4d89f50c3a0c2ecfb9035c7cad24d8ef3d"
+    },
+    {
+      "file": "tests/battle-nature-staff-cost.test.js",
+      "bytes": 4579,
+      "normalizedBytes": 4579,
+      "sha256": "dec854f3e0da30ab9c2083c12451a420b241f962fd177b8e40b22695336030ec"
+    },
+    {
+      "file": "tests/battle-pace.test.js",
+      "bytes": 1373,
+      "normalizedBytes": 1330,
+      "sha256": "5f2a282539be26047478353a10e72df0355f4585a7445d2b3b4336acd7eed055"
+    },
+    {
+      "file": "tests/battle-persistent-stage.test.js",
+      "bytes": 32765,
+      "normalizedBytes": 32765,
+      "sha256": "7c215cd0ad1bafca7ed90784066e44ee7a0a93905beac6403e26c9ef3789f872"
+    },
+    {
+      "file": "tests/battle-pile-readability.test.js",
+      "bytes": 7629,
+      "normalizedBytes": 7629,
+      "sha256": "dfb3f90211cc4d9ff9ada3f93d9eba0b0d1684cded1fb3e7df06cd742e2e98ff"
+    },
+    {
+      "file": "tests/battle-pile-timers.test.js",
+      "bytes": 1901,
+      "normalizedBytes": 1901,
+      "sha256": "035efeb728cf87271ea13e56de2430e28886a46863eb68c444cf80be052e2bf1"
+    },
+    {
+      "file": "tests/battle-player-effects.test.js",
+      "bytes": 2024,
+      "normalizedBytes": 2024,
+      "sha256": "353d13f163d7be9d613adc2f388962d7ed777f5b8ec958915c4f2de3b4d5a6a1"
+    },
+    {
+      "file": "tests/battle-potion-bar-layout.test.js",
+      "bytes": 6601,
+      "normalizedBytes": 6601,
+      "sha256": "2713586cd2d45f456a46f04227b34e5c3c35c25e1cc0bfaeee95f87487e5f5b4"
+    },
+    {
+      "file": "tests/battle-pouch-entry.test.js",
+      "bytes": 4346,
+      "normalizedBytes": 4346,
+      "sha256": "4715d5baa2cbb8469a68874323a085f95d2a0b95d3097ce3c1ce4961f4e680c8"
+    },
+    {
+      "file": "tests/battle-presentation.test.js",
+      "bytes": 1286,
+      "normalizedBytes": 1248,
+      "sha256": "f9a9bb997f035b294e0c2a98eb30e6e551ccfe7b4bdd26ff3d916153ac545af8"
+    },
+    {
+      "file": "tests/battle-preview-amount.test.js",
+      "bytes": 1720,
+      "normalizedBytes": 1678,
+      "sha256": "c8a181a542b28dae173f864822ecada7814cca0cd32eb0021285f3ad3e1b2cf4"
+    },
+    {
+      "file": "tests/battle-preview-hand-context.test.js",
+      "bytes": 11838,
+      "normalizedBytes": 11838,
+      "sha256": "71b86f2ba36f2b88082361f7141252ddd1a278fea058b8aa888676754013f651"
+    },
+    {
+      "file": "tests/battle-preview-trust-boundary.test.js",
+      "bytes": 8673,
+      "normalizedBytes": 8673,
+      "sha256": "dc26454adb9906db94f407ff8abd2889c45244645b9610f00540f834c9fc83fd"
+    },
+    {
+      "file": "tests/battle-pure-rules.test.js",
+      "bytes": 8878,
+      "normalizedBytes": 8878,
+      "sha256": "0338ac097261b88c991f9d5d7542b36e8a23d68d803bfd1ad42efec1a540a89e"
+    },
+    {
+      "file": "tests/battle-qi-wave-defense.test.js",
+      "bytes": 4742,
+      "normalizedBytes": 4742,
+      "sha256": "da142d3dd7988bc0f2f996c3efb7369f89dce7542a2b2692fd133c92d41f913c"
+    },
+    {
+      "file": "tests/battle-query-cost-benchmark.test.js",
+      "bytes": 1613,
+      "normalizedBytes": 1613,
+      "sha256": "835510aae7021d20516e956d0c30acb6de04091cf86d5b85b830af74a80c69a2"
+    },
+    {
+      "file": "tests/battle-queue-direct-release-forwarding.test.js",
+      "bytes": 3794,
+      "normalizedBytes": 3794,
+      "sha256": "b2a94eb546e68d0e1463fb880bb854f978f384bed34567cfacabbefa69b87c74"
+    },
+    {
+      "file": "tests/battle-recorder-lifecycle-cloud.test.js",
+      "bytes": 5549,
+      "normalizedBytes": 5549,
+      "sha256": "bbe48fb97248db785e8bf160601262f8903e8bb0df3c7f741ea55b71f08023d7"
+    },
+    {
+      "file": "tests/battle-render-derivation.test.js",
+      "bytes": 7955,
+      "normalizedBytes": 7955,
+      "sha256": "07b3304a87dac92071fdf66972336ccbc5b400ff1dea655488eed02646e9cb66"
+    },
+    {
+      "file": "tests/battle-render-runtime-trace.test.js",
+      "bytes": 13128,
+      "normalizedBytes": 13128,
+      "sha256": "b3cb8ad18a9e6a5fce1ca62cb2b527e9989a1de643207367925e6cd152cff776"
+    },
+    {
+      "file": "tests/battle-resolution.test.js",
+      "bytes": 74825,
+      "normalizedBytes": 74825,
+      "sha256": "8aa933aeb3b0e26abb8d2554122f80cb90a5ec1eb660225ae52299b7c78f6db5"
+    },
+    {
+      "file": "tests/battle-restart.test.js",
+      "bytes": 6733,
+      "normalizedBytes": 6733,
+      "sha256": "f51820a8159a00a5b784454ca49fcfce576c2df61e6eca6a96863899546d3a40"
+    },
+    {
+      "file": "tests/battle-restore-boundaries.test.js",
+      "bytes": 5840,
+      "normalizedBytes": 5840,
+      "sha256": "d680694a8589ad8da6fbaa52a5744d359266c70892cfbe725930016faef12f87"
+    },
+    {
+      "file": "tests/battle-review-remediation-1023.test.js",
+      "bytes": 7800,
+      "normalizedBytes": 7709,
+      "sha256": "68d1696ba61494272a3fb2a4e1109fecc55e04a21d958279315621b00fe14c83"
+    },
+    {
+      "file": "tests/battle-round-recording.test.js",
+      "bytes": 5345,
+      "normalizedBytes": 5345,
+      "sha256": "9bfb0471312ec06a46134d73f8faf618d729f19f946ff650228f63de93183b5f"
+    },
+    {
+      "file": "tests/battle-rule-audit-1014.test.js",
+      "bytes": 14263,
+      "normalizedBytes": 14263,
+      "sha256": "b36ded6babdff22382e263d1d7c578506ae0ccf86086be3a9e28faaf8dd065ed"
+    },
+    {
+      "file": "tests/battle-rules-settlement.test.js",
+      "bytes": 6989,
+      "normalizedBytes": 6989,
+      "sha256": "d3d41d44abe95d1d68e2f3435e52d00f6a4a63f35331f9221e1ad191c09dde63"
+    },
+    {
+      "file": "tests/battle-runtime-completion-1014.test.js",
+      "bytes": 12242,
+      "normalizedBytes": 12242,
+      "sha256": "9dd7bd8106634c1f6e7293822674c314b917df266d45f8818c34503e7dcdd5a8"
+    },
+    {
+      "file": "tests/battle-runtime-state-guard.test.js",
+      "bytes": 6105,
+      "normalizedBytes": 5982,
+      "sha256": "b6b15802b0d8a6fb7bce008953a62b63c42bff53bd8d1412af07ae89271ba27a"
+    },
+    {
+      "file": "tests/battle-scenery-secondary-ready.test.js",
+      "bytes": 8480,
+      "normalizedBytes": 8480,
+      "sha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549"
+    },
+    {
+      "file": "tests/battle-scenery.test.js",
+      "bytes": 1532,
+      "normalizedBytes": 1532,
+      "sha256": "e9bb285a1f7333b8ba414928b9db5e112770b5b00e5a6ea26436aad4728fc45e"
+    },
+    {
+      "file": "tests/battle-secondary-overlay.test.js",
+      "bytes": 17417,
+      "normalizedBytes": 17417,
+      "sha256": "4fc3eb0aa233711d356fc1de7e5255d9005f4749a618f817e963f4fd5825031a"
+    },
+    {
+      "file": "tests/battle-selection-consumer.test.js",
+      "bytes": 7676,
+      "normalizedBytes": 7676,
+      "sha256": "0167ddccf661d8807877a62d311b4dd52a84ea827883e3a0b334220aab28847a"
+    },
+    {
+      "file": "tests/battle-selection-flow-boundary.test.js",
+      "bytes": 13117,
+      "normalizedBytes": 12827,
+      "sha256": "679216407e1fdf8e9e1253e5a9f7e80e30d26347d0f891dedf50ec59d0110f86"
+    },
+    {
+      "file": "tests/battle-selection-ui.test.js",
+      "bytes": 5803,
+      "normalizedBytes": 5803,
+      "sha256": "201974591a542d3ad9ad25a4d73f671c852c7c596d0f5e8e7173331143d71f30"
+    },
+    {
+      "file": "tests/battle-semantic-feedback.test.js",
+      "bytes": 12046,
+      "normalizedBytes": 12046,
+      "sha256": "bbc21aaf106aa7dda3d127f5d5328ab83b1a0f96688ef413c0d5bcb04e202b10"
+    },
+    {
+      "file": "tests/battle-settlement-recovery.test.js",
+      "bytes": 22336,
+      "normalizedBytes": 22336,
+      "sha256": "692af0753a72966e7d00337fc66fa2252b5ec5600c134634ce419541072ea705"
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "bytes": 35854,
+      "normalizedBytes": 35854,
+      "sha256": "1dc169e761cbfeaaaa00fe071222f299ea392a7fe210c2eb2246a5b73bb90dc8"
+    },
+    {
+      "file": "tests/battle-settlement-types.fixture.ts",
+      "bytes": 4966,
+      "normalizedBytes": 4966,
+      "sha256": "539bb60e9f581e956a51c42ca290819dc9ecdcf90b1a0d9165e7787529eebdec"
+    },
+    {
+      "file": "tests/battle-settlement-types.test.js",
+      "bytes": 3830,
+      "normalizedBytes": 3830,
+      "sha256": "915703cfd8d68f303230a53937539b8bb9198d954e179b6e0c41f1bdb2a3a154"
+    },
+    {
+      "file": "tests/battle-snapshot-integration.test.js",
+      "bytes": 3762,
+      "normalizedBytes": 3691,
+      "sha256": "9cc11142d156bb9d3ff0089b57ed9fa7cb2227d0a33f36a8b58a04610938fdb5"
+    },
+    {
+      "file": "tests/battle-snapshot-phase-cost.test.js",
+      "bytes": 8701,
+      "normalizedBytes": 8701,
+      "sha256": "71fddfd8d26519a18521f3753fafc2927785bbc7f2a1da2d846e680bf1203e14"
+    },
+    {
+      "file": "tests/battle-snapshot-types.fixture.ts",
+      "bytes": 2001,
+      "normalizedBytes": 1963,
+      "sha256": "ab2d6fc6aeb13b98ca8209f2246137d3b4b2b73dd0aa854e4bf45fc4e04359f0"
+    },
+    {
+      "file": "tests/battle-snapshot-types.test.js",
+      "bytes": 7975,
+      "normalizedBytes": 7846,
+      "sha256": "4e473757b223eb09cac65a7674f9f5bf74c9ae63bbd48b95829fca193b58115c"
+    },
+    {
+      "file": "tests/battle-snapshot.test.js",
+      "bytes": 8894,
+      "normalizedBytes": 8894,
+      "sha256": "99ae16b82faebce1bc0ff3b8dfe2bf1f809d5dea42cfb1eed85e1b459efc4e91"
+    },
+    {
+      "file": "tests/battle-stage-mounts.test.js",
+      "bytes": 10486,
+      "normalizedBytes": 10486,
+      "sha256": "7892015b04c46d3dc95744e69d944c2959833d159c6dc107ef49214a52cc38f3"
+    },
+    {
+      "file": "tests/battle-stage-validator.test.js",
+      "bytes": 8131,
+      "normalizedBytes": 8131,
+      "sha256": "2aecc1ca3a84e961e4baca825fbabf8cc16f0fad7f55a5e21b22392cbaa2f36a"
+    },
+    {
+      "file": "tests/battle-staged-timing.test.js",
+      "bytes": 5317,
+      "normalizedBytes": 5317,
+      "sha256": "a6a4bffa736dd0c62d4107cb4af49d94bec50963e133cf5dc0e1ab0fde43d856"
+    },
+    {
+      "file": "tests/battle-status-presentation.test.js",
+      "bytes": 8225,
+      "normalizedBytes": 8225,
+      "sha256": "432b3b80b60ae41df218ff5822201d22e93ab1336ea7b7644fde70f8764f83ec"
+    },
+    {
+      "file": "tests/battle-status-preview.test.js",
+      "bytes": 3472,
+      "normalizedBytes": 3472,
+      "sha256": "0863559e5fee212385f4fa8bc1215d34f8c73d30f4b4f451496283fdb38a4be7"
+    },
+    {
+      "file": "tests/battle-structured-authority-unification.test.js",
+      "bytes": 21947,
+      "normalizedBytes": 21947,
+      "sha256": "45d519dcf424be947ee63c436df0849e76f9328796bd804b19c8209bc36fbafa"
+    },
+    {
+      "file": "tests/battle-talisman-settlement.test.js",
+      "bytes": 3852,
+      "normalizedBytes": 3852,
+      "sha256": "955cf46a48fa9b399baa8b666c93a6ab6d03b29874507a428a8b81fb698760d8"
+    },
+    {
+      "file": "tests/battle-target-dom.test.js",
+      "bytes": 11350,
+      "normalizedBytes": 11350,
+      "sha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff"
+    },
+    {
+      "file": "tests/battle-temp-item-destination.test.js",
+      "bytes": 7302,
+      "normalizedBytes": 7302,
+      "sha256": "0a1d1b3e7880576fbe7748446d2bf2aa749c589f2244c6bb87292ed82925015b"
+    },
+    {
+      "file": "tests/battle-temp-item-settlement.test.js",
+      "bytes": 3659,
+      "normalizedBytes": 3659,
+      "sha256": "7346996d09756d5487ea8d5c630932ac6d04dd8975352fed2eace5f4d963a139"
+    },
+    {
+      "file": "tests/battle-three-role-sprites.test.js",
+      "bytes": 2767,
+      "normalizedBytes": 2767,
+      "sha256": "63c41341c13fdbe3451a0ce0b49ed31665c09d9cf17e4eb009290c61dfa2e238"
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "bytes": 15680,
+      "normalizedBytes": 15406,
+      "sha256": "48d96365f9080828a9a3f06ed31230d9ec2b362520321b5650a0e42c96e193c5"
+    },
+    {
+      "file": "tests/battle-trigger-lifecycle-unification.test.js",
+      "bytes": 14052,
+      "normalizedBytes": 14052,
+      "sha256": "be772c695f964aa0fac3b18309ecabc5f5918192cd3d53991fa38c92ab259abe"
+    },
+    {
+      "file": "tests/battle-turn-effects-domain.test.js",
+      "bytes": 4068,
+      "normalizedBytes": 4067,
+      "sha256": "24d46d8561dc7e0dd97a41049f684a653d5aa77369d9f57ff9fb5c1f5afee5e1"
+    },
+    {
+      "file": "tests/battle-turn-feedback.test.js",
+      "bytes": 5187,
+      "normalizedBytes": 5187,
+      "sha256": "1d4f7a1b8246365180554aad741ab4d8fb27adac608c4868ccb31acdd63808df"
+    },
+    {
+      "file": "tests/battle-turn-start-discover.test.js",
+      "bytes": 7464,
+      "normalizedBytes": 7320,
+      "sha256": "d3bd37b16e24fcc08c9b0e179402979da00c38fba274fbecb6a31803247d86f3"
+    },
+    {
+      "file": "tests/battle-unit-metadata.test.js",
+      "bytes": 13050,
+      "normalizedBytes": 12850,
+      "sha256": "9435c053a9ab960b2f02332451487ceb84f6b51cf78a9be3f40fef0e436d22cf"
+    },
+    {
+      "file": "tests/battle-victory-presentation.test.js",
+      "bytes": 3816,
+      "normalizedBytes": 3816,
+      "sha256": "7a9213def73e1478228ceb33628615f1c772a8c61e41543ac12890d1a5472e5f"
+    },
+    {
+      "file": "tests/battle-victory-progress.test.js",
+      "bytes": 2005,
+      "normalizedBytes": 2005,
+      "sha256": "957934984a372177ad151c8c3064691a83a9ac50eb86347a396cc76cf9a775ee"
+    },
+    {
+      "file": "tests/battle-wu-sprite.test.js",
+      "bytes": 1642,
+      "normalizedBytes": 1642,
+      "sha256": "289d00b7c320b88710fa01456f8d8b36cdca9203034b482c8d84771bfa9e6526"
+    },
+    {
+      "file": "tests/beginner-guide-entry-copy.test.js",
+      "bytes": 1004,
+      "normalizedBytes": 1004,
+      "sha256": "3c776862e4c58cd77a722fd26fff512b01466cfd588c209b97b93879c754c149"
+    },
+    {
+      "file": "tests/beginner-guide-readability.test.js",
+      "bytes": 1961,
+      "normalizedBytes": 1961,
+      "sha256": "acf14b598cbd326ab8d211a3147018b6dd136d742e904feff2479c4e6b9d19bb"
+    },
+    {
+      "file": "tests/blackmarket-card-preview.test.js",
+      "bytes": 11165,
+      "normalizedBytes": 11165,
+      "sha256": "c7b173014629fd973b9e8026fd1be3b1ba48feb77c9c29029811b884ce8f1d68"
+    },
+    {
+      "file": "tests/boot-frame-readiness.test.js",
+      "bytes": 8688,
+      "normalizedBytes": 8688,
+      "sha256": "0c95f5ea079cf3728a14d145a78b94108b8a01acf58f31b694bcb6c0fd2645c4"
+    },
+    {
+      "file": "tests/boot.test.js",
+      "bytes": 51200,
+      "normalizedBytes": 51200,
+      "sha256": "12b335d73cd961eae195ee9e223b94205d57ffdbb30a7048eefc51ffdccb2a2e"
+    },
+    {
+      "file": "tests/boss-equip-select.test.js",
+      "bytes": 10340,
+      "normalizedBytes": 10340,
+      "sha256": "f5d59b46d687658a76a9f84b1a19a95d4cc1acfdf7c46a23a8106149d72301b3"
+    },
+    {
+      "file": "tests/boss-rescue-pool.test.js",
+      "bytes": 4317,
+      "normalizedBytes": 4253,
+      "sha256": "1bc23e261c5801b812c4b0f8b4f66ed1986ed67668bb957cb8173851f77063ab"
+    },
+    {
+      "file": "tests/build-artifact-manifest.test.js",
+      "bytes": 5693,
+      "normalizedBytes": 5693,
+      "sha256": "c8708f75e75d064e8681c42da819c2c0639b8e3b52d258abddbbde2c100bce4a"
+    },
+    {
+      "file": "tests/build-budget-baseline.test.js",
+      "bytes": 1279,
+      "normalizedBytes": 1279,
+      "sha256": "a10d10cf19a5b69290b3a3074df608864cc749442536aee599cb3ba1c0c7bb4e"
+    },
+    {
+      "file": "tests/build-output-contract.test.js",
+      "bytes": 5682,
+      "normalizedBytes": 5682,
+      "sha256": "0ac74d3716d4ee4259af810a25fa62f5b9ebf69ef7b3d22fdcf699c58b7ecc43"
+    },
+    {
+      "file": "tests/builtin-card-acquisition.test.js",
+      "bytes": 2605,
+      "normalizedBytes": 2605,
+      "sha256": "7f8092b61a5ce4dda92e9a9eadcf2a59292c87999cd331656b4483ab3041ddc0"
+    },
+    {
+      "file": "tests/builtin-card-execution-battle.test.js",
+      "bytes": 5785,
+      "normalizedBytes": 5785,
+      "sha256": "fe181b7844ed457d953eaac317371c255c3fd950e668bdd679d26187b774e27d"
+    },
+    {
+      "file": "tests/builtin-card-execution.test.js",
+      "bytes": 7796,
+      "normalizedBytes": 7796,
+      "sha256": "63168d5fe50fd101646ed8e1102c9c0ae16909fd8ab9f5c7aad5d209c7f973b1"
+    },
+    {
+      "file": "tests/builtin-migration-lookup.test.js",
+      "bytes": 11801,
+      "normalizedBytes": 11801,
+      "sha256": "d6b726c8227d93a7fc88b35291c2a5f327b08fbedf39b9667c6891aa1d9b2bcb"
+    },
+    {
+      "file": "tests/camera-interaction.test.js",
+      "bytes": 8871,
+      "normalizedBytes": 8870,
+      "sha256": "478223b393823b263893dbf4f3bb71769cea6e8b7178fc8f92d0693187b120c2"
+    },
+    {
+      "file": "tests/camp-entry-readiness.test.js",
+      "bytes": 5934,
+      "normalizedBytes": 5934,
+      "sha256": "072cb0c2dddf562e741ab54e8a3659ec460e82d39bb5c9c1e2b753c842af9bca"
+    },
+    {
+      "file": "tests/canvas-resource-review.test.js",
+      "bytes": 2961,
+      "normalizedBytes": 2961,
+      "sha256": "ab82819fa37ff1f80a4f9b22eafba8f526466b37fd0eeac2faae92125d7e7bc2"
+    },
+    {
+      "file": "tests/card-analysis-chain.test.js",
+      "bytes": 3758,
+      "normalizedBytes": 3758,
+      "sha256": "454d798d1381ce564e93502e154e31834c880f74e44537df27c5ecf47e8e058a"
+    },
+    {
+      "file": "tests/card-art-coverage.test.js",
+      "bytes": 6566,
+      "normalizedBytes": 6566,
+      "sha256": "4168dbf32c95a19a6e28e04ae1385939a3ab9a17ce94a7878238204cbbafb1dd"
+    },
+    {
+      "file": "tests/card-audit.test.js",
+      "bytes": 13288,
+      "normalizedBytes": 13067,
+      "sha256": "811f2d8bb826153655b2e76cd3531a1dfa0a86dcfa62249308feb3bd737b00ab"
+    },
+    {
+      "file": "tests/card-battle-start-explanation.test.js",
+      "bytes": 2176,
+      "normalizedBytes": 2176,
+      "sha256": "3f87461f40b81cefa70b194926b7ce8bd770e4799e4f28f5236a3aa64a755108"
+    },
+    {
+      "file": "tests/card-browser-deferred-art.test.js",
+      "bytes": 5301,
+      "normalizedBytes": 5301,
+      "sha256": "cc99ea68d3513a65c1f52eb3d42086d7eab6743d73a8626a5bbd0311f27134f4"
+    },
+    {
+      "file": "tests/card-browser-resize.test.js",
+      "bytes": 4508,
+      "normalizedBytes": 4508,
+      "sha256": "5bc8cc3c441b866462dac47c37c52b039b63667a46c12760494299187aadafa0"
+    },
+    {
+      "file": "tests/card-browser-state.test.js",
+      "bytes": 13315,
+      "normalizedBytes": 13315,
+      "sha256": "69226a3b68304bebe36ad0b1ef9f4c8313c7916634a4f9d1e27e3c3d84ebe44d"
+    },
+    {
+      "file": "tests/card-browser.test.js",
+      "bytes": 2926,
+      "normalizedBytes": 2926,
+      "sha256": "7641aed5e0aebd575424f05488a0b49402dcc542cd6bd9962fadaecfd7200731"
+    },
+    {
+      "file": "tests/card-compatibility-boundary.test.js",
+      "bytes": 1707,
+      "normalizedBytes": 1707,
+      "sha256": "7afd535d2ad120db89881350ce3a014247eee8572fcd393a9346e09be0683b28"
+    },
+    {
+      "file": "tests/card-description-audit-battle.test.js",
+      "bytes": 20896,
+      "normalizedBytes": 20590,
+      "sha256": "272db01561863bd9bcdc422a0aec11e1b9a839799041137d389c0486796df13c"
+    },
+    {
+      "file": "tests/card-description-fix-auxiliary.test.js",
+      "bytes": 6270,
+      "normalizedBytes": 6148,
+      "sha256": "c821a93dfd6e13b61fe01d8e0bfac94797456c0b75c2c1c52b625d9a18944deb"
+    },
+    {
+      "file": "tests/card-description-fix-lifecycle.test.js",
+      "bytes": 8726,
+      "normalizedBytes": 8726,
+      "sha256": "708427d926ba3eadd9c9dfab5cc5a6579cccef8b2e6427f68ea2cf635961f261"
+    },
+    {
+      "file": "tests/card-description-fix-pools.test.js",
+      "bytes": 8301,
+      "normalizedBytes": 8167,
+      "sha256": "eab0db464e75a4d332790a2816c8083413c9cb3b7e24774d175b5c3a0a716ead"
+    },
+    {
+      "file": "tests/card-description-fix-target-effects.test.js",
+      "bytes": 8212,
+      "normalizedBytes": 8061,
+      "sha256": "99a75377b6cd557b26150cce17bbe71b292b3e4a97b3bb24080393704d15eb41"
+    },
+    {
+      "file": "tests/card-description-linked-zoom.test.js",
+      "bytes": 7457,
+      "normalizedBytes": 7457,
+      "sha256": "e1e49a3a5881c4233adcdef8ca5cb9d0d11bf113f94cb7aa20c3f235926f50d3"
+    },
+    {
+      "file": "tests/card-description-single-resolution.test.js",
+      "bytes": 6708,
+      "normalizedBytes": 6708,
+      "sha256": "78ac14a5bfbd40c750d9d6a4655b3cf013da96bc71d6a15dd0c52f5537070e06"
+    },
+    {
+      "file": "tests/card-description-text.test.js",
+      "bytes": 8583,
+      "normalizedBytes": 8583,
+      "sha256": "23a51ad85d64cec834183c06b4eecc3ff40d30aa3d29f07baff8f3d58a0707ad"
+    },
+    {
+      "file": "tests/card-effect-semantics.test.js",
+      "bytes": 5099,
+      "normalizedBytes": 4978,
+      "sha256": "fbb32a2b4722d731d8b6a4c0c889b252a1fa3a1913b19bc3551f5dfb92c8e404"
+    },
+    {
+      "file": "tests/card-execution-plan.test.js",
+      "bytes": 4706,
+      "normalizedBytes": 4705,
+      "sha256": "022c9615e1ed9bf33faddd5f146c7e27662a962fac3c28ed08547bf2b52e5b18"
+    },
+    {
+      "file": "tests/card-face-presentation.test.js",
+      "bytes": 7950,
+      "normalizedBytes": 7950,
+      "sha256": "70c6459e9e3077d8acf7e53c2db65e6d1c897b5d7adacfd67cf15055f9d23cb5"
+    },
+    {
+      "file": "tests/card-feedback-fixture.test.js",
+      "bytes": 1392,
+      "normalizedBytes": 1392,
+      "sha256": "29dabac678b21b493c564cefe7d78ef8700f38b47a5dcf1fcb2f8697e5f6143b"
+    },
+    {
+      "file": "tests/card-feedback-motion-integration.test.js",
+      "bytes": 1877,
+      "normalizedBytes": 1877,
+      "sha256": "cd12daf60e57737d5566648f5f5187fb551c108f25e7104f3fa5e44c3f3efb09"
+    },
+    {
+      "file": "tests/card-fixes-1010.test.js",
+      "bytes": 923,
+      "normalizedBytes": 923,
+      "sha256": "51bdbe67b2fb348c7d6a32e66e0f178936b93c5f0511dbd709efe74e0c7ad4df"
+    },
+    {
+      "file": "tests/card-library-lazy-boundary.test.js",
+      "bytes": 4763,
+      "normalizedBytes": 4763,
+      "sha256": "ee45e70e530c31220f242255919f5a7f224d9db8717fae98f12163318a8846a5"
+    },
+    {
+      "file": "tests/card-library-performance-contract.test.js",
+      "bytes": 4730,
+      "normalizedBytes": 4730,
+      "sha256": "86180b84b36c9223ddeef943268af9e27aee657e9be5e1f39b5e6a729e97cb23"
+    },
+    {
+      "file": "tests/card-migrations-boundary.test.js",
+      "bytes": 2005,
+      "normalizedBytes": 1965,
+      "sha256": "09468258d3353cf42cc40f242697eee639e13602cc988ad5d0823077c8671f2d"
+    },
+    {
+      "file": "tests/card-notes-coverage.test.js",
+      "bytes": 4372,
+      "normalizedBytes": 4372,
+      "sha256": "b7654bd08d07118264665c8705edfb36c2e8db06b6376cc3413d8eac92047e02"
+    },
+    {
+      "file": "tests/card-photo-notes.test.js",
+      "bytes": 6581,
+      "normalizedBytes": 6581,
+      "sha256": "7d7a9dd66f24e357c6725aa79ff9da14d642ea159e4bc7ab900ee908a50e5415"
+    },
+    {
+      "file": "tests/card-rarity-cycle.test.js",
+      "bytes": 5579,
+      "normalizedBytes": 5579,
+      "sha256": "ee1104b6463a25526e2bf59a75f4ddca90b88b5be0dfb0e4c10f3871baa6127d"
+    },
+    {
+      "file": "tests/card-reading-typography.test.js",
+      "bytes": 4541,
+      "normalizedBytes": 4541,
+      "sha256": "c38536563634f8e1859c9b8fc62dc4777a443cd9747e614c9c10cb0da8477ea2"
+    },
+    {
+      "file": "tests/card-render-context.test.js",
+      "bytes": 2978,
+      "normalizedBytes": 2978,
+      "sha256": "21333869b847d40d22eb92d0c852da742af43eead5034593d9b189e857cce9ab"
+    },
+    {
+      "file": "tests/card-rules-bag-boundary.test.js",
+      "bytes": 1913,
+      "normalizedBytes": 1913,
+      "sha256": "c95d1a5d8c8745724af2e2667830f4a31d94a0ebc5f7149067857c84ec5cf27b"
+    },
+    {
+      "file": "tests/card-rules-per-foe-boundary.test.js",
+      "bytes": 4926,
+      "normalizedBytes": 4926,
+      "sha256": "b3a50063effc798b4390c173613247200dbe8913c49016487f612ed41b72dedf"
+    },
+    {
+      "file": "tests/card-rules-schema.test.js",
+      "bytes": 20076,
+      "normalizedBytes": 20076,
+      "sha256": "110cea8869aa91a9caa13a18ac04b08b7d898419a4545ed423a3f0555cc683db"
+    },
+    {
+      "file": "tests/card-state-motion.test.js",
+      "bytes": 5290,
+      "normalizedBytes": 5290,
+      "sha256": "f9e9594bbca5b5440496eefb6666affff14c49986a3367cbc99c75fe1c3fa69d"
+    },
+    {
+      "file": "tests/card-sync-slices.test.js",
+      "bytes": 5398,
+      "normalizedBytes": 5398,
+      "sha256": "87915f4e230d3ed40973c95e5a7646e6b5e730081dad3dbf3daad284f0641e5f"
+    },
+    {
+      "file": "tests/card-term-passive.test.js",
+      "bytes": 3528,
+      "normalizedBytes": 3528,
+      "sha256": "52c89b9ea3b79257cfdcbce5ed5603c12b51ac1fb2451066e7acd873e3924749"
+    },
+    {
+      "file": "tests/card-zoom-controller.test.js",
+      "bytes": 5591,
+      "normalizedBytes": 5486,
+      "sha256": "29c0c072fa93a2ffe830d209b5ede9f7c7f8fb3a790599e86324d2446a746626"
+    },
+    {
+      "file": "tests/cards-catalog.test.js",
+      "bytes": 2373,
+      "normalizedBytes": 2373,
+      "sha256": "1e82a5aae9d976fd6af7c8af7d886d0b59f4728fcf90f1590016bb831e55496d"
+    },
+    {
+      "file": "tests/cards-choice-armor-guard.test.js",
+      "bytes": 7155,
+      "normalizedBytes": 7155,
+      "sha256": "040bdcc93a2d382b347903d3ca640b46f37f49a5b06b0e6898c3079257b53bb6"
+    },
+    {
+      "file": "tests/cards-migration-commit-guard.test.js",
+      "bytes": 9780,
+      "normalizedBytes": 9780,
+      "sha256": "75ba4da79a81d2846f180993b2abe46de61b29b2635d8e25357716bd3e335366"
+    },
+    {
+      "file": "tests/cards-random-pool-guard.test.js",
+      "bytes": 2136,
+      "normalizedBytes": 2136,
+      "sha256": "62c3e8fb31797920342aeef6c90340f14556679ca72b7d226788470cfd5ec800"
+    },
+    {
+      "file": "tests/cards-replay.test.js",
+      "bytes": 3014,
+      "normalizedBytes": 3014,
+      "sha256": "7fe2f91ecf42185d7c6e2e4b7b747e608c596c7f6c1363f4f43531f7f1887eb2"
+    },
+    {
+      "file": "tests/cards-rules-runtime-boundary.test.js",
+      "bytes": 3821,
+      "normalizedBytes": 3821,
+      "sha256": "632331b4a8165c042c48c70272248fdea2f181d3bf45203f32c1e92c5bfbb45b"
+    },
+    {
+      "file": "tests/cards-storage-guard.test.js",
+      "bytes": 5006,
+      "normalizedBytes": 5006,
+      "sha256": "239d82229d1eccac540ff15e242a3edebe6020f0844a4b71161caa5b7b8c1fcd"
+    },
+    {
+      "file": "tests/cards-sync-snapshot-guard.test.js",
+      "bytes": 3351,
+      "normalizedBytes": 3351,
+      "sha256": "5c35416119961d38c4f72d5a4fd3a21ec2a63581b349ce0897f9b0a19e4aeeed"
+    },
+    {
+      "file": "tests/cards.test.js",
+      "bytes": 5938,
+      "normalizedBytes": 5849,
+      "sha256": "7d3c78a37bde8787e0d3a4363e0babf504cb6bd8944b9354de8b4f662ad4722d"
+    },
+    {
+      "file": "tests/cell-notes-migration-commit-guard.test.js",
+      "bytes": 15295,
+      "normalizedBytes": 15295,
+      "sha256": "853ead7f7ad5776c77a2aa0346efe4368a3e7968067b0ba8595bdfb626e5dc5d"
+    },
+    {
+      "file": "tests/cell-notes-quota.test.js",
+      "bytes": 2919,
+      "normalizedBytes": 2919,
+      "sha256": "34f602da66dd759cba5eb100b52e6a94c42adcb53c7af8632dae18a7347d383c"
+    },
+    {
+      "file": "tests/character-idle.test.js",
+      "bytes": 4779,
+      "normalizedBytes": 4673,
+      "sha256": "c44da22f8501e84a5c64d82b974963ea63411bfa31d50083697bcc51318c0074"
+    },
+    {
+      "file": "tests/character-view-motion.test.js",
+      "bytes": 4173,
+      "normalizedBytes": 4173,
+      "sha256": "054644c4a65780fec30e571a7d7e95922a26f96191ac5ed7729e9c4ac9c4ce6f"
+    },
+    {
+      "file": "tests/characters.test.js",
+      "bytes": 1841,
+      "normalizedBytes": 1841,
+      "sha256": "de982c4c1dae427d4c295b2771e43a6b03f00e6b0b6e29f82f749219a5f21267"
+    },
+    {
+      "file": "tests/chase-slash.test.js",
+      "bytes": 4335,
+      "normalizedBytes": 4229,
+      "sha256": "3e96fd6fc792b857dd4aeb3fedb6357408e5e5ad42aac5e998a483f2594849bd"
+    },
+    {
+      "file": "tests/check-types.test.js",
+      "bytes": 6385,
+      "normalizedBytes": 6385,
+      "sha256": "fc63d1a599ea5512b9147c8d7aed7a372a258269dc5c06bf3cf9b22328cd6f66"
+    },
+    {
+      "file": "tests/chest-acquired-gift-cloud.test.js",
+      "bytes": 15182,
+      "normalizedBytes": 15182,
+      "sha256": "36bf8098ed9daad59ad2a5893ef6c3a8ae90fee3506b4ab6198ba6d59353805c"
+    },
+    {
+      "file": "tests/chest-batch-receipt.test.js",
+      "bytes": 3478,
+      "normalizedBytes": 3478,
+      "sha256": "af6763d5182d79bab3b1af4e2dc847f111bf1043bd8c8d7f12285807b2622fe4"
+    },
+    {
+      "file": "tests/chest-callback-lifecycle-audit.test.js",
+      "bytes": 13573,
+      "normalizedBytes": 13573,
+      "sha256": "70d8536f3f9af0be35317b8a248eb0c044cc66f993968b838a17a13cfb576cef"
+    },
+    {
+      "file": "tests/chest-click-flow.test.js",
+      "bytes": 5925,
+      "normalizedBytes": 5925,
+      "sha256": "711220284284e772c9d5c144a4537d463837001bbe1ce01b268177c1e43cf6d5"
+    },
+    {
+      "file": "tests/chest-coins-summary.test.js",
+      "bytes": 3730,
+      "normalizedBytes": 3730,
+      "sha256": "755aca0d8f224dc42f5539f330e9ab7d5df2bf178ecb655adb73615e84869b87"
+    },
+    {
+      "file": "tests/chest-extra-rewards-choice.test.js",
+      "bytes": 21163,
+      "normalizedBytes": 21163,
+      "sha256": "6dd2e7276662a48586a0f25482bc1c0498dc14222bf18b0bfea57fe4065b02f5"
+    },
+    {
+      "file": "tests/chest-multi-queue-regression.test.js",
+      "bytes": 4128,
+      "normalizedBytes": 4128,
+      "sha256": "a1320ae74f7cb8817bb261f8dcc69187f5ae2ea5abb31cd5d6a01b4512ad94b2"
+    },
+    {
+      "file": "tests/chest-opening-art.test.js",
+      "bytes": 6840,
+      "normalizedBytes": 6840,
+      "sha256": "058a50e235000aae0814d8af663ae5a0559bc88908a22ddc488f9f6687cd47ba"
+    },
+    {
+      "file": "tests/chest-receive-animation.test.js",
+      "bytes": 3764,
+      "normalizedBytes": 3764,
+      "sha256": "b51732cbb6576d6379f20f13b9dfc4db50008ec5ad6950c2f5b0f6d43b06a2ec"
+    },
+    {
+      "file": "tests/chests-reward-capacity-notice.test.js",
+      "bytes": 17871,
+      "normalizedBytes": 17871,
+      "sha256": "247440b779e137a66fac9b5076bdacff6518703a78682632c6fe9ac951c39fd5"
+    },
+    {
+      "file": "tests/choice-semantic-operations.test.js",
+      "bytes": 5181,
+      "normalizedBytes": 5181,
+      "sha256": "afeb66a9632a0fcad93506e496b0c14865138f0213dec49bb16f03efccef803a"
+    },
+    {
+      "file": "tests/cinematics-lifecycle.test.js",
+      "bytes": 6352,
+      "normalizedBytes": 6352,
+      "sha256": "83a987b0ef83ef014f64e4a28102a92b7a3bc2415a524c9e4b6b3dbf97c27406"
+    },
+    {
+      "file": "tests/class-choice-lazy-entry.test.js",
+      "bytes": 11968,
+      "normalizedBytes": 11968,
+      "sha256": "a2a6682f106e5819bd1ddbe49a0476bbb26001f1ac25ab31f68f62653783eea8"
+    },
+    {
+      "file": "tests/class-consolidation.test.js",
+      "bytes": 4659,
+      "normalizedBytes": 4580,
+      "sha256": "d24bcb845ee5696c49176f93a4af0fceb1eebb0c80d5b8df7439b35a160b6e7c"
+    },
+    {
+      "file": "tests/code-lean-collection-styles.test.js",
+      "bytes": 5849,
+      "normalizedBytes": 5849,
+      "sha256": "d6ade2ca5d29ac0370fd4794ab59fd0753285501902f986db43bc7ce7d673981"
+    },
+    {
+      "file": "tests/code-lean-refactor-collections.test.js",
+      "bytes": 2902,
+      "normalizedBytes": 2902,
+      "sha256": "9058579fb8bd3cdd21179921efc03ee6fde05c484b281c3dfafd598dd3430260"
+    },
+    {
+      "file": "tests/code-lean-refactor-library.test.js",
+      "bytes": 3044,
+      "normalizedBytes": 3044,
+      "sha256": "603f22efbb1bb93c86ae6cbb8899248559451c98c70f07b11f557409d8362a6b"
+    },
+    {
+      "file": "tests/code-lean-refactor-rooms.test.js",
+      "bytes": 1629,
+      "normalizedBytes": 1629,
+      "sha256": "f08be00b37025082c825e6421d76264254c705f56ff2daa4c4ec243d0634e888"
+    },
+    {
+      "file": "tests/code-lean-stage1-cards-m7.test.js",
+      "bytes": 1372,
+      "normalizedBytes": 1372,
+      "sha256": "ff125291202fce049ce2a55d81e5e10b26462ee4c2cdba9ea8bdb56fbe9a6ab5"
+    },
+    {
+      "file": "tests/code-lean-stage1-cards-schema.test.js",
+      "bytes": 3777,
+      "normalizedBytes": 3777,
+      "sha256": "c1fb256ad3641603f65064e64c247cb56f89157b6337bc4a661d801cb721a753"
+    },
+    {
+      "file": "tests/code-lean-stage1-ui-archive.test.js",
+      "bytes": 5497,
+      "normalizedBytes": 5497,
+      "sha256": "d9d614e54a5b35c503fb5079d507877b13ff83fd8c2f2242e0eed5ad83eda890"
+    },
+    {
+      "file": "tests/code-lean-stage1-ui-settings.test.js",
+      "bytes": 8772,
+      "normalizedBytes": 8772,
+      "sha256": "5dbad11fc79f4532193e720434ace6561a3123f78f56e5f675ebb71335f9204a"
+    },
+    {
+      "file": "tests/collection-conversion.test.js",
+      "bytes": 3153,
+      "normalizedBytes": 3153,
+      "sha256": "2154f16e752ba3434cc8f927b48e490632b67bb07075480d3f1fa31df89746e5"
+    },
+    {
+      "file": "tests/collection-room.test.js",
+      "bytes": 10895,
+      "normalizedBytes": 10895,
+      "sha256": "721ba2e355fe082e29c4db8e74deea632ed5205bd0de7ab6ceff5d745a42ed13"
+    },
+    {
+      "file": "tests/collection-skin-context-audit.test.js",
+      "bytes": 2155,
+      "normalizedBytes": 2155,
+      "sha256": "e0b2c3bf86232b02d33a305b33aaf0007e833b517cda1614781aa6c6320159dd"
+    },
+    {
+      "file": "tests/combat-feedback.test.js",
+      "bytes": 1665,
+      "normalizedBytes": 1633,
+      "sha256": "01793de072fd3f3c82b81b3ea16f0e89355ef1991672755aa5564b3f5490c7ee"
+    },
+    {
+      "file": "tests/combat-status-boundary-unification.test.js",
+      "bytes": 5500,
+      "normalizedBytes": 5500,
+      "sha256": "8bcac1e8c32f6e406f5c46dc9c8d36d4ac557c06ab38b04c3de9fce12ef421e5"
+    },
+    {
+      "file": "tests/combat.test.js",
+      "bytes": 508,
+      "normalizedBytes": 508,
+      "sha256": "2d7263c3680ddb51b0dc8263b9d0430ceab1db2f8118f2a9fb99a89cf66d8c3e"
+    },
+    {
+      "file": "tests/comm-demo-lazy-entry.test.js",
+      "bytes": 4675,
+      "normalizedBytes": 4675,
+      "sha256": "1b052446dc8bd40a24d2c2649601c50d54825b2b63a9a7cfd20be5e2f40ad30e"
+    },
+    {
+      "file": "tests/comm-feed-lifecycle.test.js",
+      "bytes": 4056,
+      "normalizedBytes": 4056,
+      "sha256": "808d91dc0684745e177963657a39ff1872d6692a8f08435ceb0968238b7b3a61"
+    },
+    {
+      "file": "tests/commands-shared-contract.test.js",
+      "bytes": 4998,
+      "normalizedBytes": 4998,
+      "sha256": "cbad64b25f75dbf4e0dfcf1d19d44571b675494072ada9bbce22f40868e8834a"
+    },
+    {
+      "file": "tests/compact-reward-layout.test.js",
+      "bytes": 2117,
+      "normalizedBytes": 2117,
+      "sha256": "1ea5e6cae897cffbb186a626c65eb2aaea81f1602d467762a51ed9273403124f"
+    },
+    {
+      "file": "tests/compendium.test.js",
+      "bytes": 5630,
+      "normalizedBytes": 5630,
+      "sha256": "7343a709b27da6c4d46056d1c3d163bb1bc5a732ba195a740c447ac93200e883"
+    },
+    {
+      "file": "tests/contracts.test.js",
+      "bytes": 11474,
+      "normalizedBytes": 11250,
+      "sha256": "3519215f0a089934b530014a7b875751cd2fa7e12ef1d62d5f84c04053961077"
+    },
+    {
+      "file": "tests/courtyard-koi.test.js",
+      "bytes": 10703,
+      "normalizedBytes": 10703,
+      "sha256": "b199c7526c4b529fdb255407c45c41c0a9e402756ea8ea48f2c5eafdbf6da8f2"
+    },
+    {
+      "file": "tests/courtyard-lifecycle-deep-audit.test.js",
+      "bytes": 7936,
+      "normalizedBytes": 7936,
+      "sha256": "0972d78d1f323f968ccc64c08e8d7716760313024818e2b36647ac9432b6c2cb"
+    },
+    {
+      "file": "tests/courtyard-rain-tableau.test.js",
+      "bytes": 8253,
+      "normalizedBytes": 8253,
+      "sha256": "5ee7cf8a23a55e4345d77b550d544b5fbfa06155429b73f5e6b989ccb75a2445"
+    },
+    {
+      "file": "tests/cov-battle-clock.test.js",
+      "bytes": 10263,
+      "normalizedBytes": 10263,
+      "sha256": "17793245a05992de039d111ed969252c03a2f38f29b0e8db4faba8eb6eaeb3c7"
+    },
+    {
+      "file": "tests/cov-motion-primitives.test.js",
+      "bytes": 7252,
+      "normalizedBytes": 7252,
+      "sha256": "06a4712f170c70b2df0fb4b1387924525874941fa59d19651334c9d11f90e501"
+    },
+    {
+      "file": "tests/cov-target-session.test.js",
+      "bytes": 11256,
+      "normalizedBytes": 11256,
+      "sha256": "fb6a4b0936cb29fec6bc49858b2b74bbbec289c07ea574ae770bfb81c82a249b"
+    },
+    {
+      "file": "tests/css-asset-minification.test.js",
+      "bytes": 8107,
+      "normalizedBytes": 8107,
+      "sha256": "a367504095ec6669e12b66dbbe4a76087850c97c80c40aef50c3ed6ee7807e43"
+    },
+    {
+      "file": "tests/css-component-scopes.test.js",
+      "bytes": 6553,
+      "normalizedBytes": 6553,
+      "sha256": "18a6af6dfd9407736036b9de1bac7cd12d30ec3bb63dcee621d5f015ccb9f85c"
+    },
+    {
+      "file": "tests/css-dead-dom-budget.test.js",
+      "bytes": 6205,
+      "normalizedBytes": 6205,
+      "sha256": "96ef5def6ee42d218ae583357b9fcd6ba7169277eb141f7ebec184f6d8ac64b8"
+    },
+    {
+      "file": "tests/css-redundancy-audit.test.js",
+      "bytes": 1180,
+      "normalizedBytes": 1180,
+      "sha256": "d30431adfee19797606fa93eacd35f32c1e13efb351a40934d51bb844d3ae79a"
+    },
+    {
+      "file": "tests/cursed-blade.test.js",
+      "bytes": 5076,
+      "normalizedBytes": 4975,
+      "sha256": "3cb2fe0a4b55316f1d2f40be1371d038f29720a545bb1d82e10cdebf52169214"
+    },
+    {
+      "file": "tests/custom-cards.test.js",
+      "bytes": 3459,
+      "normalizedBytes": 3459,
+      "sha256": "a0c5f6c018a3719fb6e223989af5dddaa40b8a36aa80b2c0d01b81b5ed44ccec"
+    },
+    {
+      "file": "tests/defeat-summary-review.test.js",
+      "bytes": 1777,
+      "normalizedBytes": 1777,
+      "sha256": "5eda62c8aebe733c74b7d50c6be611cdbc946ffc4ff07630b6aa27ad6bbcbaa8"
+    },
+    {
+      "file": "tests/departure-browse-state.test.js",
+      "bytes": 8073,
+      "normalizedBytes": 8073,
+      "sha256": "85dd0dab9de071da37a1e5d9bb030d92d96f9419de8599f0180828eb0224409f"
+    },
+    {
+      "file": "tests/departure-class-confirmation.test.js",
+      "bytes": 10957,
+      "normalizedBytes": 10957,
+      "sha256": "f9d94e4c7d84e26101b61d546d09aebddf923c79f5c6e13a5199c446840f4d8b"
+    },
+    {
+      "file": "tests/departure-domain-review.test.js",
+      "bytes": 2211,
+      "normalizedBytes": 2211,
+      "sha256": "12d988a4aa91180901b9982107e7762c692a660c1f25b22a94730dfd80254fdb"
+    },
+    {
+      "file": "tests/departure-drag.test.js",
+      "bytes": 2442,
+      "normalizedBytes": 2442,
+      "sha256": "a0df5073648e0966354f67ceae68949c222a08e1ce6f04bac55626a06ddc1617"
+    },
+    {
+      "file": "tests/departure-handoff.test.js",
+      "bytes": 2314,
+      "normalizedBytes": 2314,
+      "sha256": "3def611c46a9fc1918001299aed2156ff76e7d0e0efedbef2da4338b654d6378"
+    },
+    {
+      "file": "tests/departure-persistence.test.js",
+      "bytes": 10932,
+      "normalizedBytes": 10932,
+      "sha256": "677a8936be6e8786012ac0bb164ae336da2e5ae5d0ff454049df40e27fe5ba72"
+    },
+    {
+      "file": "tests/departure-real-session-review.test.js",
+      "bytes": 4043,
+      "normalizedBytes": 4043,
+      "sha256": "3a579f2a7973f8bc8bcff8278800e74314dd3ef83bb9ab592a06d33de6c12776"
+    },
+    {
+      "file": "tests/departure-rejected-start.test.js",
+      "bytes": 7786,
+      "normalizedBytes": 7786,
+      "sha256": "a167bfdf23cf83905aa782c477b253dc2275f5de76a4004901b92296352e671f"
+    },
+    {
+      "file": "tests/departure-render-performance.test.js",
+      "bytes": 10074,
+      "normalizedBytes": 10074,
+      "sha256": "fcb9b2f57efcd7945479677949a56066acc71d10f309a3774768cb77488d0116"
+    },
+    {
+      "file": "tests/departure-selection-state.test.js",
+      "bytes": 2390,
+      "normalizedBytes": 2390,
+      "sha256": "8636e821613faaf775e980c1151372e8326a45cac819fb63064342565c0e10d5"
+    },
+    {
+      "file": "tests/departure-stack-lifecycle-review.test.js",
+      "bytes": 16028,
+      "normalizedBytes": 16028,
+      "sha256": "c833c9583c8c5b9f776535e3ff8591b966062bc8aeba70b664adaa03f8e24a55"
+    },
+    {
+      "file": "tests/departure-summary.test.js",
+      "bytes": 2074,
+      "normalizedBytes": 2038,
+      "sha256": "f9366c04e430ca1852587371a21b86a3ea99feb0527ffb5f7ae7f8dc34e1ded0"
+    },
+    {
+      "file": "tests/dependency-audit-diagnostics.test.js",
+      "bytes": 1904,
+      "normalizedBytes": 1904,
+      "sha256": "4999ce943e95d38a9b0de85875abe44004fcf6ece3e4d51f33adbfcecdb8f13e"
+    },
+    {
+      "file": "tests/desktop-file-protocol.test.js",
+      "bytes": 3616,
+      "normalizedBytes": 3616,
+      "sha256": "a57818634a7b1fac77ed8c3015c274c6a70f3bed692abda27017d1fb35a0fa9f"
+    },
+    {
+      "file": "tests/desktop-runtime-guard.test.js",
+      "bytes": 8019,
+      "normalizedBytes": 8019,
+      "sha256": "1882d3222a8c53bdc8728d086f7dac6f80606cf98f33adc902d29c81c2f51a17"
+    },
+    {
+      "file": "tests/desktop-startup.test.js",
+      "bytes": 16145,
+      "normalizedBytes": 16145,
+      "sha256": "3328d396582a2386c5eb002735cfc3fc72075ad062c21edca20bad37e32c93c2"
+    },
+    {
+      "file": "tests/dev-console-lifecycle.test.js",
+      "bytes": 8379,
+      "normalizedBytes": 8379,
+      "sha256": "cd21cc76364bd2faefbf14a749c5482bd6329d1d401aa49d1a99b794d111bdee"
+    },
+    {
+      "file": "tests/dev-tools-lazy-entry.test.js",
+      "bytes": 15449,
+      "normalizedBytes": 15190,
+      "sha256": "05da3d2986807e5fe0c85bc6efa2c59e5f2fcaf2ccc6ec2b814471278477bb20"
+    },
+    {
+      "file": "tests/diagnostics.local.test.js",
+      "bytes": 6257,
+      "normalizedBytes": 6257,
+      "sha256": "f0908a774ada079f1c840d6dbacd39145cd2d66b34d4a9a6efad055167dd8e20"
+    },
+    {
+      "file": "tests/direct-cast.test.js",
+      "bytes": 20077,
+      "normalizedBytes": 20077,
+      "sha256": "615042dbec1be015887ccfced7ffddae8de5905b694b5f05e145aea8c01d8729"
+    },
+    {
+      "file": "tests/discover-infusion-feedback.test.js",
+      "bytes": 4216,
+      "normalizedBytes": 4216,
+      "sha256": "835dd93e13f0097c5e94f21ceb63332f450a787fa8f86addba43bf193c4c9d04"
+    },
+    {
+      "file": "tests/discovery-selection.test.js",
+      "bytes": 14585,
+      "normalizedBytes": 14383,
+      "sha256": "4ae9d734722e08773fd24e7d5551704c67927b3430909b9ca305af6bad14db92"
+    },
+    {
+      "file": "tests/docs-consistency.test.js",
+      "bytes": 8152,
+      "normalizedBytes": 8152,
+      "sha256": "d766f3e45845bc9f8a889ab29f6160f1b95e4561986d948f6ad756d7acf0afc6"
+    },
+    {
+      "file": "tests/dual-wield.test.js",
+      "bytes": 3244,
+      "normalizedBytes": 3178,
+      "sha256": "c03eda9f86b143c5899ada9a021d4b8a270699289a0e3f37c5b6d8469dfa9a86"
+    },
+    {
+      "file": "tests/e2-view-hp.test.js",
+      "bytes": 4989,
+      "normalizedBytes": 4989,
+      "sha256": "c6892529724943984db8dd85cc548f8ea4c5a3c8e488ee31853bf817f35d3a03"
+    },
+    {
+      "file": "tests/e4-async-entry.test.js",
+      "bytes": 26788,
+      "normalizedBytes": 26788,
+      "sha256": "1bf724375f34d3a65f5755631ca26c6d84064c7472902e78d947715cfe4c0b62"
+    },
+    {
+      "file": "tests/e4-battle-loader.test.js",
+      "bytes": 6927,
+      "normalizedBytes": 6777,
+      "sha256": "42d7d4760e15e0a1d17ed822488e1aff415cdb0e90ab25c235e2b7bffdcbc058"
+    },
+    {
+      "file": "tests/e5-save-validation.test.js",
+      "bytes": 10761,
+      "normalizedBytes": 10560,
+      "sha256": "1cc255b15aa5bc3dbb1639fb33ccbacce3b5ab71a4a314a5e2891d8257b66c40"
+    },
+    {
+      "file": "tests/e5-session-recovery.test.js",
+      "bytes": 24424,
+      "normalizedBytes": 23965,
+      "sha256": "bf7b444813a6ccfad2239ef0898d0bccaf53f05bd8bc6fcdc7614d42359715a9"
+    },
+    {
+      "file": "tests/e6-card-rules-capability.test.js",
+      "bytes": 6680,
+      "normalizedBytes": 6576,
+      "sha256": "044ebf5d2ccb24b41f773fb7d90a91f48ca98a8bf1e951482796e5db5866efa4"
+    },
+    {
+      "file": "tests/e6-card-rules-execution.test.js",
+      "bytes": 10378,
+      "normalizedBytes": 10164,
+      "sha256": "6623fd52074b53fa16d99dc5042f8da717578da241e6b928bd1cc3a3bb59c2d8"
+    },
+    {
+      "file": "tests/e6-card-rules-types.test.js",
+      "bytes": 5302,
+      "normalizedBytes": 5302,
+      "sha256": "29cdca606d083300fab87a45be1fa24a967bafe813043e64eea58206abd5712c"
+    },
+    {
+      "file": "tests/e7-rule-warning-view.test.js",
+      "bytes": 11435,
+      "normalizedBytes": 11435,
+      "sha256": "1dd76636ca613a84456041a51252b1e3b177eefa91d63dcb05f86d5f062b0bfa"
+    },
+    {
+      "file": "tests/e8-card-inventory.test.js",
+      "bytes": 30493,
+      "normalizedBytes": 30493,
+      "sha256": "68c65b046980926b86a9f74675e21cf622ba61d5ee5299ae155adbfa58b3e07f"
+    },
+    {
+      "file": "tests/e8-card-migration.test.js",
+      "bytes": 23096,
+      "normalizedBytes": 23096,
+      "sha256": "174ccea0eaae46f3de114291c7429f8c66d1250d5d2c314feb1b9e42d1ff59be"
+    },
+    {
+      "file": "tests/effect-verbs.test.js",
+      "bytes": 8198,
+      "normalizedBytes": 8047,
+      "sha256": "ef52b5b4fff525fe7ad67e43a8bbe27069cf89cfbd9b58bbd1f2a4f45fb452d9"
+    },
+    {
+      "file": "tests/ember-burst-rot-seed.test.js",
+      "bytes": 6301,
+      "normalizedBytes": 6174,
+      "sha256": "67e8fff0571eea78ec48bdd684cdff6a55eb5527df1c185f889503125c4dee35"
+    },
+    {
+      "file": "tests/encounter-count.test.js",
+      "bytes": 2182,
+      "normalizedBytes": 2133,
+      "sha256": "b2e78c00aebc75aeaa4269b05a7a62d8caaea05f44e72db6ea146838d6388015"
+    },
+    {
+      "file": "tests/encounter-meta.test.js",
+      "bytes": 1826,
+      "normalizedBytes": 1826,
+      "sha256": "1b3d6148dd24a3eb25566a28cc9b1936fe090ad9a87ba1c31fa6d7bc43086d5b"
+    },
+    {
+      "file": "tests/energy-crystal-restoration.test.js",
+      "bytes": 7639,
+      "normalizedBytes": 7639,
+      "sha256": "60683e5fcd2918197d64d520407cad095c3b57eaa4697b91f8501480615ab255"
+    },
+    {
+      "file": "tests/entry-supply-presentation.test.js",
+      "bytes": 2609,
+      "normalizedBytes": 2609,
+      "sha256": "c3e936924ca63d55512c860e97e675ecf57ab7d9caab87341d7d49790f42fae7"
+    },
+    {
+      "file": "tests/equipment-semantic-operations.test.js",
+      "bytes": 4469,
+      "normalizedBytes": 4469,
+      "sha256": "25989cc4381222495169127d081d7d8e0f9003625305a855263bb6b27ee27c70"
+    },
+    {
+      "file": "tests/esc-semantics.test.js",
+      "bytes": 2317,
+      "normalizedBytes": 2317,
+      "sha256": "f8a9a74f84b2351c446c7941f86a4a765f0346338064524c4413796203385f63"
+    },
+    {
+      "file": "tests/event-bus.test.js",
+      "bytes": 2540,
+      "normalizedBytes": 2540,
+      "sha256": "b07cfec694353f67aed8d2bdc45c110ac3a88160bbfe9dfcd0cd29aff49cabd7"
+    },
+    {
+      "file": "tests/event-callback-lifecycle-audit.test.js",
+      "bytes": 48080,
+      "normalizedBytes": 47408,
+      "sha256": "44990b473e5343a769ac5cdc63d067a027705aae8a1b6e6ab2a1e6df63985b90"
+    },
+    {
+      "file": "tests/event-choice-acquired-gift-cloud.test.js",
+      "bytes": 14007,
+      "normalizedBytes": 13868,
+      "sha256": "f0b5fa2aded6d590da5f33f3d366e827c855314711f56b686fed8fd228854ea1"
+    },
+    {
+      "file": "tests/event-choice-recovery-cloud.test.js",
+      "bytes": 33030,
+      "normalizedBytes": 32560,
+      "sha256": "2f4cb83f1477de95f9e67d09f8456e68fbe4af633c4f10d4350a8202112de5a4"
+    },
+    {
+      "file": "tests/event-choice-session-resume-cloud.test.js",
+      "bytes": 4889,
+      "normalizedBytes": 4795,
+      "sha256": "46fdd508cfb36ddfc29f7fb821e06747d2db5aa6fbb7dd5af407e6d78fd30e71"
+    },
+    {
+      "file": "tests/event-dice.test.js",
+      "bytes": 8315,
+      "normalizedBytes": 8207,
+      "sha256": "0be57895c2128280ba5a640006f3497406ad6049b6b39069b03e24c1df60db30"
+    },
+    {
+      "file": "tests/event-node-binding-cloud.test.js",
+      "bytes": 13135,
+      "normalizedBytes": 13135,
+      "sha256": "9e80942d0c6ee7c3cdd8850c6e37f5cf9c0d410581d7bca8b9b35b5d73ea22d3"
+    },
+    {
+      "file": "tests/event-option-state.test.js",
+      "bytes": 2139,
+      "normalizedBytes": 2139,
+      "sha256": "26d0e4e17e696d36da4a7e55d75ea82c8d23039101b8f29f29a63368fa94c6f4"
+    },
+    {
+      "file": "tests/event-recode-selection-continuity.test.js",
+      "bytes": 8695,
+      "normalizedBytes": 8695,
+      "sha256": "aa5fdb2066e13cb15d033a7b14149edd684a84d4c4a980f655dd5f13333e1ac5"
+    },
+    {
+      "file": "tests/event-reward-layout.test.js",
+      "bytes": 3381,
+      "normalizedBytes": 3381,
+      "sha256": "ba2ef09d77ca9b6e313f678fd21a2d21ed998a8b20026f12d5f5ea84857ef869"
+    },
+    {
+      "file": "tests/event-save-page-ownership.test.js",
+      "bytes": 5559,
+      "normalizedBytes": 5503,
+      "sha256": "19db8c4fba96ba4dcfe408e15180b702fd48be673c720948295085b05d21ad17"
+    },
+    {
+      "file": "tests/event-scene-readability.test.js",
+      "bytes": 11318,
+      "normalizedBytes": 11318,
+      "sha256": "8a8980799e137714d68e22a40f9a60d91368a2e77fbde615b7bf9fe0b14295d4"
+    },
+    {
+      "file": "tests/event-scene-selection.test.js",
+      "bytes": 2482,
+      "normalizedBytes": 2482,
+      "sha256": "9235ee4fb0ac34807beb420b51baa19229416cbe4a297003dc2523bdf8c4174b"
+    },
+    {
+      "file": "tests/event-settlement-unification.test.js",
+      "bytes": 20887,
+      "normalizedBytes": 20601,
+      "sha256": "c6e4aaafed02c9596e2be3413e9fefc6f636471ef021e10bc2cdd355be402b9e"
+    },
+    {
+      "file": "tests/event-signal-puzzle-integration.test.js",
+      "bytes": 11527,
+      "normalizedBytes": 11527,
+      "sha256": "78bc150bf66f25ff542c4c2ffc49672652d13e7429f9514a7c1bf5fdb5dff674"
+    },
+    {
+      "file": "tests/event-signal-puzzle.test.js",
+      "bytes": 9502,
+      "normalizedBytes": 9502,
+      "sha256": "3231b022083df177c57480ea64dd52e414792f86ba62e300295054f2e401b797"
+    },
+    {
+      "file": "tests/events-0919.test.js",
+      "bytes": 5496,
+      "normalizedBytes": 5496,
+      "sha256": "680385099116366274a60f9aa84bf6d3891885e4ec4e57e679e93d186a1241d7"
+    },
+    {
+      "file": "tests/events-lazy-entry.test.js",
+      "bytes": 11521,
+      "normalizedBytes": 11521,
+      "sha256": "4ee871039671d52deccb2989ede3ff11cef3d3032d5c1211e4a82db350133c2a"
+    },
+    {
+      "file": "tests/events-lazy-story-ownership.test.js",
+      "bytes": 6483,
+      "normalizedBytes": 6483,
+      "sha256": "9242159fa2eefa6de19e1e97522dfcb84798f1dc31cbe733114c98f6e6b78704"
+    },
+    {
+      "file": "tests/execute-target.test.js",
+      "bytes": 3392,
+      "normalizedBytes": 3392,
+      "sha256": "efacd6c2959a8b3b5cf5a0875c9b58691a6a24d66a398aa375459933f4a7a7e5"
+    },
+    {
+      "file": "tests/exp003-extraction-pocket-copy.test.js",
+      "bytes": 5214,
+      "normalizedBytes": 5134,
+      "sha256": "e909ad617b5774190e0529c7c306777594bb985cbbedf7debfc3a42d483ec8cb"
+    },
+    {
+      "file": "tests/expedition-battle-presentation.test.js",
+      "bytes": 9437,
+      "normalizedBytes": 9437,
+      "sha256": "9f0ba2ab2d68f7b5fb8be36eb328dd3cbae687b8b82579a766eb929c8670a068"
+    },
+    {
+      "file": "tests/expedition-feedback.test.js",
+      "bytes": 1910,
+      "normalizedBytes": 1910,
+      "sha256": "9bd7ce1d42de1bcce72258850d424cfe17ccb437bbdb484d2f93f0ac43d8c617"
+    },
+    {
+      "file": "tests/expedition-log-preference.test.js",
+      "bytes": 1074,
+      "normalizedBytes": 1074,
+      "sha256": "db8bff2ca9b7ca3d6ea716173a0e7e82f447a05f39992de57635646dcc5e30f3"
+    },
+    {
+      "file": "tests/expedition-page-lifecycle.test.js",
+      "bytes": 5008,
+      "normalizedBytes": 5008,
+      "sha256": "9958f0998869a09d5217e8fb912c30958c6fc9b6184341c2eba73e50e58008ca"
+    },
+    {
+      "file": "tests/expedition-view.test.js",
+      "bytes": 14622,
+      "normalizedBytes": 14622,
+      "sha256": "73bdd5fddbd9c5613df32c74b345e771491585089b6f3e89e817fe8a926bc90c"
+    },
+    {
+      "file": "tests/extra-legend-reward-persistence.test.js",
+      "bytes": 21932,
+      "normalizedBytes": 21932,
+      "sha256": "01d7e3b073c3fc075c53f7500ef4117f0f3266bc510f519d52e91de77824f970"
+    },
+    {
+      "file": "tests/extraction-copy-hierarchy.test.js",
+      "bytes": 2753,
+      "normalizedBytes": 2753,
+      "sha256": "b3e9d78535a49015a3d60f3676300bbfcc192e03a8523a30c81e4993f574a1e0"
+    },
+    {
+      "file": "tests/extraction-first-explore-xp.test.js",
+      "bytes": 7232,
+      "normalizedBytes": 7232,
+      "sha256": "2c7556e2fecfb1618008e78e3cbb1b620256572b1bffd098022bc1fc055c9c04"
+    },
+    {
+      "file": "tests/extraction-flow.test.js",
+      "bytes": 13885,
+      "normalizedBytes": 13885,
+      "sha256": "9556d34ab3792e0bad4882ab6446a75049f7628658895c365ed1122c5ca06336"
+    },
+    {
+      "file": "tests/extraction-growth-summary.test.js",
+      "bytes": 7013,
+      "normalizedBytes": 7013,
+      "sha256": "f2fa736f67a19f7bff5abeaf96e0d6b72243b682d3e40bc745300d3c6556bbbc"
+    },
+    {
+      "file": "tests/extraction-pocket-truth.test.js",
+      "bytes": 3573,
+      "normalizedBytes": 3573,
+      "sha256": "2f87afc48c85f50f65c0d08a566c80b926e5e437cd5f111fc423954fa6316650"
+    },
+    {
+      "file": "tests/extraction-preview.test.js",
+      "bytes": 2288,
+      "normalizedBytes": 2288,
+      "sha256": "4b42c40bf17e843ed0ed111301671b8da3661a04533746777ad7cd3ce5c23138"
+    },
+    {
+      "file": "tests/extraction-receipt-idempotency.test.js",
+      "bytes": 8749,
+      "normalizedBytes": 8749,
+      "sha256": "8bd08442e3bc5c3f8bb2b527a8476fc0d030e5d4672908bef657c5eec4d25dda"
+    },
+    {
+      "file": "tests/extraction-receipt.test.js",
+      "bytes": 16104,
+      "normalizedBytes": 16104,
+      "sha256": "9ad8831baa8404a4e8f16ed669f16d2f3a10a03e29c9f4c51fcb8449a38ae454"
+    },
+    {
+      "file": "tests/extraction-record-saved-cards-cloud.test.js",
+      "bytes": 11275,
+      "normalizedBytes": 11275,
+      "sha256": "49fc4139672d71d9d4a2ba8f39a6f970dd64602ef567d792ac61d089c8c046d2"
+    },
+    {
+      "file": "tests/extraction-recovery-ui.test.js",
+      "bytes": 10526,
+      "normalizedBytes": 10526,
+      "sha256": "04a66d5cf55b1d37fe75a8edfcc13043dd23b6224d1cf6876913cf2f9b4b5ef5"
+    },
+    {
+      "file": "tests/extraction-recovery.test.js",
+      "bytes": 19913,
+      "normalizedBytes": 19913,
+      "sha256": "77b1ade5bf27464d2b220a95f7a22ed581fcf2be2a43bca6f28a5813cfc4cb89"
+    },
+    {
+      "file": "tests/extraction-review-fixture.test.js",
+      "bytes": 6532,
+      "normalizedBytes": 6532,
+      "sha256": "389873bd1a36c739df00af616eecec57c70205964b34719b9d7c3709d228e154"
+    },
+    {
+      "file": "tests/extraction-rewards-view.test.js",
+      "bytes": 9721,
+      "normalizedBytes": 9721,
+      "sha256": "28a4d5eff82b93c40fad70bebe95b634d08914c713480af859bbde38f4ed34de"
+    },
+    {
+      "file": "tests/extraction-session-resume.test.js",
+      "bytes": 6434,
+      "normalizedBytes": 6434,
+      "sha256": "3485c6e9b0274a0b78b92f86342b9a542e8719c481e63c2d8e2c12785337dc3e"
+    },
+    {
+      "file": "tests/extraction-settlement.test.js",
+      "bytes": 6103,
+      "normalizedBytes": 6103,
+      "sha256": "7283157f122baf076aaef3231943b92455a8da997a5d10e11b5a97020015956f"
+    },
+    {
+      "file": "tests/facade-snapshot-drift.test.js",
+      "bytes": 4306,
+      "normalizedBytes": 4306,
+      "sha256": "0e5cb669cbd4b9334abae6e9a65e3186528304b7db636b0b0f1107bb70d303d7"
+    },
+    {
+      "file": "tests/feedback-1018.test.js",
+      "bytes": 3704,
+      "normalizedBytes": 3654,
+      "sha256": "7bc1491b0171dd7e74b270493c88ca8c2cd187a32089cb320606f22cc8554e96"
+    },
+    {
+      "file": "tests/first-explore-marking.test.js",
+      "bytes": 8288,
+      "normalizedBytes": 8288,
+      "sha256": "7d1afc17b85ee90bba86570c1c815bbafa2e23222946e602b9a40b9a4d4757e2"
+    },
+    {
+      "file": "tests/fixtures/approved-card-batch-20261020.json",
+      "bytes": 7802,
+      "normalizedBytes": 7802,
+      "sha256": "925bebfac7b181f884cc7fc898dc0a4adb828b881dc6cf26b1a91bc1e8a6d5fd"
+    },
+    {
+      "file": "tests/fixtures/base-v1.json",
+      "bytes": 427,
+      "normalizedBytes": 427,
+      "sha256": "08e238573801fc98b0555de3b80e1b02be33650a3ec22a7baa0b2ada200294c2"
+    },
+    {
+      "file": "tests/fixtures/builtin-execution-approved-20261020.json",
+      "bytes": 35376,
+      "normalizedBytes": 33615,
+      "sha256": "19726af5c954a63d330696b9b4f1f61cb30621a6d745882d3f89af36aadf6df5"
+    },
+    {
+      "file": "tests/fixtures/card-effect-audit-known.json",
+      "bytes": 7972,
+      "normalizedBytes": 7793,
+      "sha256": "351847f9fca7d9f347c7bba8834268c2dba67728801892098734a38cd34783d9"
+    },
+    {
+      "file": "tests/fixtures/effect-elsewhere-frozen.json",
+      "bytes": 3134,
+      "normalizedBytes": 2997,
+      "sha256": "958b472a1331a5d4bdc4489d25466093139c23ac66a3dd7204a51836aab84cd1"
+    },
+    {
+      "file": "tests/fixtures/map-replica.html",
+      "bytes": 5700,
+      "normalizedBytes": 5700,
+      "sha256": "70c025ff83f799af3b53dc55d6b38b4b01ebec5c4ffb46a1c95d328ad346a36d"
+    },
+    {
+      "file": "tests/fixtures/map-v4-before-resource-removal.json",
+      "bytes": 24011,
+      "normalizedBytes": 24011,
+      "sha256": "dbbace782cd2218ff7cc13e9f3cca337c5745e8cb9d11332e9a426864c9b6d31"
+    },
+    {
+      "file": "tests/fixtures/map-v5-late-fire.json",
+      "bytes": 8018,
+      "normalizedBytes": 8018,
+      "sha256": "0d576bfad4d8580be3b919e47dd0b0c5ef55d544b194e7f264e19c96654575ed"
+    },
+    {
+      "file": "tests/fixtures/save-v1-run.json",
+      "bytes": 511,
+      "normalizedBytes": 511,
+      "sha256": "8a9eaf1fd98fbf916ebb4bb6096912170ac85b17ce608c281ea8f4480022e5ad"
+    },
+    {
+      "file": "tests/fixtures/save-v2-slot2-run.json",
+      "bytes": 403,
+      "normalizedBytes": 403,
+      "sha256": "4d0ecb9b3f1704b014e51895dd4197dccaeca28abffce7a073baa30218a69d8a"
+    },
+    {
+      "file": "tests/flight-recorder.local.test.js",
+      "bytes": 3693,
+      "normalizedBytes": 3693,
+      "sha256": "e8320320305c0d67c68f98aac9c17c35986a8a9e82e90bb78d67dedaac1cbb4f"
+    },
+    {
+      "file": "tests/four-player-battle-regressions.test.js",
+      "bytes": 2747,
+      "normalizedBytes": 2747,
+      "sha256": "2652cf1ab37a692b2dd6db2cf95ed75b4a973d46c756e41bc9e3dd58d00b02e5"
+    },
+    {
+      "file": "tests/four-player-capacity-text.test.js",
+      "bytes": 2370,
+      "normalizedBytes": 2370,
+      "sha256": "6f74fa153b1dc2d21b20a826d62483475da2bee5bfd0cf67a50efdf9ec5d86a3"
+    },
+    {
+      "file": "tests/four-player-chest-reload.test.js",
+      "bytes": 6405,
+      "normalizedBytes": 6405,
+      "sha256": "9871fee94fb32aae29cfbb3ac383a17e32259e1224e8b7b4ed17a50e5d53b580"
+    },
+    {
+      "file": "tests/four-player-event-regressions.test.js",
+      "bytes": 8811,
+      "normalizedBytes": 8811,
+      "sha256": "9dd7c78daf7707e7b08bac395bfa08d343d1a76564ca2dc0fa748707d02fc085"
+    },
+    {
+      "file": "tests/four-player-music-fallback.test.js",
+      "bytes": 1696,
+      "normalizedBytes": 1696,
+      "sha256": "7b0d98995b151be026dac69607fd47aab6e661683bdf52a2460b73e68c190f1f"
+    },
+    {
+      "file": "tests/four-player-semantics-regressions.test.js",
+      "bytes": 5350,
+      "normalizedBytes": 5281,
+      "sha256": "d42a8f0506fed813c1a8ecb9890c2b05d9dc230764d051aed609d353b4394e67"
+    },
+    {
+      "file": "tests/frame-assets-cancellation-perf.test.js",
+      "bytes": 5436,
+      "normalizedBytes": 5436,
+      "sha256": "7291dc131df9b1decae95c3f26b356992d0c65b0bfd11201ae083e7e7bba7d1a"
+    },
+    {
+      "file": "tests/framework-battle-decomposition.test.js",
+      "bytes": 4019,
+      "normalizedBytes": 4019,
+      "sha256": "21eec15bbad1ba8b8c7b5161472e6e17bebc1cbe0f093623320d949579eaa3a4"
+    },
+    {
+      "file": "tests/framework-battle-engine-services.test.js",
+      "bytes": 3932,
+      "normalizedBytes": 3932,
+      "sha256": "50e3f2f452fded49bda396241aed3224cbc529d88ee45a069947e1b758fe06de"
+    },
+    {
+      "file": "tests/framework-battle-ports-types.fixture.ts",
+      "bytes": 7462,
+      "normalizedBytes": 7462,
+      "sha256": "d5c77823442fa78c29b7ac6718197a3f0ee1f34c24d7f336b23c693364ddb88e"
+    },
+    {
+      "file": "tests/framework-boundaries-types.fixture.ts",
+      "bytes": 5531,
+      "normalizedBytes": 5462,
+      "sha256": "387533080f31586c5763ba59e9d865c089b72b0519e076b1c53f2fd9d60882c7"
+    },
+    {
+      "file": "tests/framework-core-ports-types.test.js",
+      "bytes": 2763,
+      "normalizedBytes": 2763,
+      "sha256": "a750b298a7b8d7174755a4ca3e913562eae89be03ec1af13d8b44b11b28b38ff"
+    },
+    {
+      "file": "tests/framework-independent-battles.test.js",
+      "bytes": 8033,
+      "normalizedBytes": 8033,
+      "sha256": "2dee879c77f33b957df1269501b2db66e90338f7ed1edbf6c1292df586896f39"
+    },
+    {
+      "file": "tests/framework-runtime-instances.test.js",
+      "bytes": 1671,
+      "normalizedBytes": 1671,
+      "sha256": "3c295022f1082943ae1bf18183e8fa502deaccbe96002ae430c1ac75e55c883e"
+    },
+    {
+      "file": "tests/fresh-run-battle-turn-forecast.test.js",
+      "bytes": 2946,
+      "normalizedBytes": 2946,
+      "sha256": "eb36fa5ba030c5c0594b8cb69b91663b4dc8d66322dcf931d95d0340f90bf073"
+    },
+    {
+      "file": "tests/fresh-run-map-encounters.test.js",
+      "bytes": 4618,
+      "normalizedBytes": 4618,
+      "sha256": "33278d1dba81a7b65afdd5aaa4e00fb2a3e1ff59e5535202fce0eba4ac56062f"
+    },
+    {
+      "file": "tests/fresh-run-onboarding-copy.test.js",
+      "bytes": 2705,
+      "normalizedBytes": 2705,
+      "sha256": "61aceaaf944298bb216129078c40c29fb1dd012e47499465fb4a8ae7196bb483"
+    },
+    {
+      "file": "tests/fresh-run-settlement-battle-summary.test.js",
+      "bytes": 1431,
+      "normalizedBytes": 1431,
+      "sha256": "2b7d4727d351a1b4ab10b5addaf111f698dd6024c3dac3f9ab90f8a7ba5cfad5"
+    },
+    {
+      "file": "tests/fresh-run-settlement.test.js",
+      "bytes": 8093,
+      "normalizedBytes": 8093,
+      "sha256": "cb3a177c1001ded5aa6825aa24128a57b4537461cb97fc557b93bf5421ebcb94"
+    },
+    {
+      "file": "tests/full-review-regressions-battle.test.js",
+      "bytes": 10881,
+      "normalizedBytes": 10684,
+      "sha256": "f8d2d57e8dc10914d83642a48a7febfb392324a06cb07aef699c11edbd4ad601"
+    },
+    {
+      "file": "tests/full-review-regressions-hub.test.js",
+      "bytes": 6542,
+      "normalizedBytes": 6542,
+      "sha256": "79d1c15e720c8f9945f36c5b8d7b6ab5f765e9d92d8bccc2e698d52c0ac20434"
+    },
+    {
+      "file": "tests/full-review-regressions-world.test.js",
+      "bytes": 13876,
+      "normalizedBytes": 13876,
+      "sha256": "55f5ab6e33a3ea8e77b290ed4369d534fca06b7c4d5a6bfd8f4d3260c37c8fa6"
+    },
+    {
+      "file": "tests/game-boot-slices.test.js",
+      "bytes": 5658,
+      "normalizedBytes": 5658,
+      "sha256": "72248af23b36ada0b03cde6f408fcc97a4aeb784d32f44f5639c86259d14ded2"
+    },
+    {
+      "file": "tests/game-canvas-resize.test.js",
+      "bytes": 5433,
+      "normalizedBytes": 5433,
+      "sha256": "babd9682ff449c234e23245a0683fa83bc27cceb76033a20109bbed80454e745"
+    },
+    {
+      "file": "tests/game-hub-preparation-feature.test.js",
+      "bytes": 8658,
+      "normalizedBytes": 8658,
+      "sha256": "ee19087d1c7e98cf5706b3dd6e9702d03e47dd516325251cae3819e161dc59ca"
+    },
+    {
+      "file": "tests/game-session-browser-boundary.test.js",
+      "bytes": 3119,
+      "normalizedBytes": 3119,
+      "sha256": "9b58c7b58a73b91b1fd0e7fd0691963d2141c803eb2b0f53ea2a297821c443b8"
+    },
+    {
+      "file": "tests/game-session-elapsed.test.js",
+      "bytes": 3916,
+      "normalizedBytes": 3916,
+      "sha256": "acd4e9d2eff091e15385baef8a38ed2ddc465b98345bb3ab9c646c4a2706dc2b"
+    },
+    {
+      "file": "tests/game-session-slices.test.js",
+      "bytes": 9695,
+      "normalizedBytes": 9542,
+      "sha256": "04d53d94eb50756a76dabd44af976bd15a59ef47fda263a5c68687bfe4690cb5"
+    },
+    {
+      "file": "tests/game-store-snapshot.test.js",
+      "bytes": 8000,
+      "normalizedBytes": 8000,
+      "sha256": "72d907742ac228aceae2d60fe26e514359ac3cf1b12f11efee88dd24e1f5f6b2"
+    },
+    {
+      "file": "tests/game-store-types.fixture.ts",
+      "bytes": 3921,
+      "normalizedBytes": 3846,
+      "sha256": "d9f9084f5394b45665e797c8943afaf237d63b7634ff05b48a8630b265f84d55"
+    },
+    {
+      "file": "tests/game-store-types.test.js",
+      "bytes": 4953,
+      "normalizedBytes": 4953,
+      "sha256": "8f123e1fb97dfc2c5157993e8ebe3861fd7ebef11a110430b992ccb9d7c23f87"
+    },
+    {
+      "file": "tests/ghostblade-stealth-break.test.js",
+      "bytes": 7200,
+      "normalizedBytes": 7084,
+      "sha256": "dfa2426078ef9a36ef8c55e62ea8bd80d60bd7d9ad4e92ef88c4a018bb814236"
+    },
+    {
+      "file": "tests/global-boot-pointer-lifecycle.test.js",
+      "bytes": 8302,
+      "normalizedBytes": 8302,
+      "sha256": "64a3c7ddfac29848cf1919e28bf6dc46313bcfb1cc44fc428e502ea46077b7b7"
+    },
+    {
+      "file": "tests/global-ui-character-lifecycle.test.js",
+      "bytes": 3036,
+      "normalizedBytes": 3036,
+      "sha256": "b3c793519d289eef94630b306184c3b9ed75377c52e99dbbdc3b3127190cb5a5"
+    },
+    {
+      "file": "tests/global-ui-completion.test.js",
+      "bytes": 4783,
+      "normalizedBytes": 4783,
+      "sha256": "11beba41a98b405836bf7a43b186d980fa14af9b5f10d25fdcf42926d37a9385"
+    },
+    {
+      "file": "tests/global-ui-feedback-state-lifecycle.test.js",
+      "bytes": 5112,
+      "normalizedBytes": 5112,
+      "sha256": "7d6d8a42c1d6622c8df92cb751bb49732edad573c3a6ae7fa26415cf69a97d4c"
+    },
+    {
+      "file": "tests/global-ui-settings-notes.test.js",
+      "bytes": 2848,
+      "normalizedBytes": 2802,
+      "sha256": "aac29e131a2ce2af06b4028929adb82c97a6979bac8e4861a5ca5aba7dbccf7d"
+    },
+    {
+      "file": "tests/hand-cost-patterns.test.js",
+      "bytes": 1894,
+      "normalizedBytes": 1864,
+      "sha256": "0c40da562563dae15816e4bc2a35be4224884000a49702b3d764aada7799bd60"
+    },
+    {
+      "file": "tests/hand-fixed-hit.test.js",
+      "bytes": 4184,
+      "normalizedBytes": 4184,
+      "sha256": "6dd272b5a43d1d218403f803b96e5bb9a23d0af70bc322d2abfbd83135d841aa"
+    },
+    {
+      "file": "tests/hand-material-selection-window.test.js",
+      "bytes": 11236,
+      "normalizedBytes": 11236,
+      "sha256": "c1cdc1e856f34e64a24c66788e8080f1d5265a3f0dde270b8c973b112da1069c"
+    },
+    {
+      "file": "tests/hand-pointer-log.test.js",
+      "bytes": 3097,
+      "normalizedBytes": 3097,
+      "sha256": "f6735668039468eca23a41b644294d1f62e19e1ca4e9a26d0baf5ee921be397b"
+    },
+    {
+      "file": "tests/hand-pointer-review.test.js",
+      "bytes": 779,
+      "normalizedBytes": 779,
+      "sha256": "df8ba61772df653f558b1e7e3c59abfba56d1a2bc79ba52e11a801cd6f926797"
+    },
+    {
+      "file": "tests/hard-mode-battle-integration.test.js",
+      "bytes": 9841,
+      "normalizedBytes": 9841,
+      "sha256": "e25bf832c6e05c4c25db84800497dfc77dc762cc5ab263eac28b438592f6c872"
+    },
+    {
+      "file": "tests/hard-mode-economy-integration.test.js",
+      "bytes": 5861,
+      "normalizedBytes": 5861,
+      "sha256": "95f473e35822d55c1498758db171fc261edfc01d86add16053666fce687c56cb"
+    },
+    {
+      "file": "tests/hard-mode-entry-integration.test.js",
+      "bytes": 8585,
+      "normalizedBytes": 8585,
+      "sha256": "cdc1a1e7efe8e9afdbe732171c75260f87011e401e3f8ee9b03fa577499f9745"
+    },
+    {
+      "file": "tests/hard-mode-event-integration.test.js",
+      "bytes": 8214,
+      "normalizedBytes": 8214,
+      "sha256": "b08766965da37a8d202c38d7248012b2c1303f3671c8b4665871331bda8f30f6"
+    },
+    {
+      "file": "tests/hard-mode-laboratory-integration.test.js",
+      "bytes": 5004,
+      "normalizedBytes": 5004,
+      "sha256": "9bb96adcdffbe4f348907a46717bd78b9922fda8f580628b0ce88cbb7470edab"
+    },
+    {
+      "file": "tests/hard-mode-reduction.test.js",
+      "bytes": 5257,
+      "normalizedBytes": 5257,
+      "sha256": "4eb1f54b80573253bc88e8ddc2320c85131cbcff5c6e24dc6048b2e52d5f83e2"
+    },
+    {
+      "file": "tests/held-scene-handoff.test.js",
+      "bytes": 5760,
+      "normalizedBytes": 5760,
+      "sha256": "4c4e6b019f7fe290822b39f8d72f7fd464e0fd5b3a462bfe5add8bbeb41e9100"
+    },
+    {
+      "file": "tests/help-return-lifecycle.test.js",
+      "bytes": 6622,
+      "normalizedBytes": 6622,
+      "sha256": "ed0d9d0ab0e2d12f277eef2e3bbea193cd9caa14b6e2bcccd38e4508ea660afd"
+    },
+    {
+      "file": "tests/helpers/battle-fixtures.js",
+      "bytes": 1913,
+      "normalizedBytes": 1913,
+      "sha256": "975b80ddb4d6d3bc18918a0b0b828af314e3e228d728671850afe5e88ac69d41"
+    },
+    {
+      "file": "tests/helpers/card-catalog-approved-revisions.js",
+      "bytes": 5612,
+      "normalizedBytes": 5612,
+      "sha256": "2d22d355203c5d7b15c043c2cba79d518e3d727191fea438f9090433073cd166"
+    },
+    {
+      "file": "tests/helpers/card-effect-audit.js",
+      "bytes": 571,
+      "normalizedBytes": 571,
+      "sha256": "e74ed5f2c66aba8be5515c1b39f05d2819e6cbab9a34b84172abbca68cdc13da"
+    },
+    {
+      "file": "tests/helpers/chest-actions.js",
+      "bytes": 1223,
+      "normalizedBytes": 1223,
+      "sha256": "60882a97ee6ea31eada732a8c649c138ce440f748b3ecaa4ddff558bc487d2fe"
+    },
+    {
+      "file": "tests/helpers/combat-self-test.js",
+      "bytes": 8932,
+      "normalizedBytes": 8932,
+      "sha256": "3f79d3472ace74d164454a196ccafe591997ebafc6e17e11aafb134d43129da9"
+    },
+    {
+      "file": "tests/helpers/css-source.js",
+      "bytes": 444,
+      "normalizedBytes": 444,
+      "sha256": "18d28307da37ea71a20260d33c28a7a8091caa3c13906bd4ee19f46eabaa3392"
+    },
+    {
+      "file": "tests/helpers/e8-card-inventory.js",
+      "bytes": 16146,
+      "normalizedBytes": 16146,
+      "sha256": "b82890e6acaa6674d2d62f49deb92e6f6f5591945d251c6bd69174e7fcd581d0"
+    },
+    {
+      "file": "tests/helpers/event-dice-async.js",
+      "bytes": 838,
+      "normalizedBytes": 837,
+      "sha256": "008a5523c337c396ab48f23f69bb29be4562e7a16ccfd79cab2740595f2dacbd"
+    },
+    {
+      "file": "tests/helpers/event-dice.js",
+      "bytes": 558,
+      "normalizedBytes": 558,
+      "sha256": "dd289bced1985264baa2c95fbf4082ba04431bd0a528210c2a6c4d72fdfcf37b"
+    },
+    {
+      "file": "tests/helpers/main-lifecycle.js",
+      "bytes": 2229,
+      "normalizedBytes": 2229,
+      "sha256": "6a75fc3074c51a358979c058fca223a7f0928ad4c5c379b10b26b73d151dd175"
+    },
+    {
+      "file": "tests/helpers/menu-controller.js",
+      "bytes": 452,
+      "normalizedBytes": 452,
+      "sha256": "f6cef4e67a0fa09b44d738592faefe882d2a984d549e2dc4ac65b125d3d9afea"
+    },
+    {
+      "file": "tests/helpers/web-locks.js",
+      "bytes": 324,
+      "normalizedBytes": 324,
+      "sha256": "a34e492583fc55bd19650a1c324ae62bfcd1c3ff8e0734e3f7d00f9e74f07ac3"
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "bytes": 24247,
+      "normalizedBytes": 23778,
+      "sha256": "19d4de811c8fe322540fe1d7599f274b2ebf8f5d2d11d0b8a99f329a06d5ad6a"
+    },
+    {
+      "file": "tests/home-async-lifecycle.test.js",
+      "bytes": 5903,
+      "normalizedBytes": 5799,
+      "sha256": "593d5e697771b402278be4a089bb140ecf6708905ced1ab0154b6229d0599b48"
+    },
+    {
+      "file": "tests/home-legacy-layout-review.test.js",
+      "bytes": 2906,
+      "normalizedBytes": 2906,
+      "sha256": "882d3ac56e751b1a70a0a8812b8bbddf356ce335375dc8a403828ce0e65e7931"
+    },
+    {
+      "file": "tests/home-menu-motion.test.js",
+      "bytes": 3551,
+      "normalizedBytes": 3551,
+      "sha256": "c55e5802c757db60b996d9f8de217787a8ac8440079206b68e6a20dd0dc395da"
+    },
+    {
+      "file": "tests/home-slot-lifecycle-review.test.js",
+      "bytes": 4015,
+      "normalizedBytes": 4015,
+      "sha256": "e15bdcc42495bb9d898505be6558f0782d27734870d2b41855f0a3c698b79b85"
+    },
+    {
+      "file": "tests/hub-architecture.test.js",
+      "bytes": 7720,
+      "normalizedBytes": 7601,
+      "sha256": "00c2df1bc2ccfc3231e4f8e2ee01e6f780aa13fb7ad1e732f88cd5c6ca018605"
+    },
+    {
+      "file": "tests/hub-archive-v3.test.js",
+      "bytes": 15727,
+      "normalizedBytes": 15727,
+      "sha256": "ab166176d3c6d48117e0422b8505563d87d735adb19508d2608bb4b2b0c5c5d4"
+    },
+    {
+      "file": "tests/hub-collection-v4.test.js",
+      "bytes": 4158,
+      "normalizedBytes": 4158,
+      "sha256": "a173f245693e8b652105a0b2b032a82b0b7ac610b0abc887ac93dac5e8015482"
+    },
+    {
+      "file": "tests/hub-command-errors.test.js",
+      "bytes": 1017,
+      "normalizedBytes": 998,
+      "sha256": "41c89d0ba46d69cd960f10367e3cd4c3f2cce7b0e040d533523034a3f9e9dba8"
+    },
+    {
+      "file": "tests/hub-courtyard-v3.test.js",
+      "bytes": 10533,
+      "normalizedBytes": 10533,
+      "sha256": "6fb36512961e218c6b3bae261c7f0c7072df48036e5336527615183756b12320"
+    },
+    {
+      "file": "tests/hub-flow-regression.test.js",
+      "bytes": 20271,
+      "normalizedBytes": 19946,
+      "sha256": "69892fd915ac5e7152e7185630ce30743aaf8f570d26a2de8aa3888834734bac"
+    },
+    {
+      "file": "tests/hub-lazy-entry.test.js",
+      "bytes": 14557,
+      "normalizedBytes": 14274,
+      "sha256": "c4cbf7d110a3d90f73920f02736657bc09be537545c02684cba9176ccb733fb8"
+    },
+    {
+      "file": "tests/hub-pages-rework.test.js",
+      "bytes": 14348,
+      "normalizedBytes": 14348,
+      "sha256": "6a4a1491ae0e81a7b0311ade01bcc3837d69309f70f0f183ba9ecb9569aa7145"
+    },
+    {
+      "file": "tests/hub-personnel-actions.test.js",
+      "bytes": 3598,
+      "normalizedBytes": 3598,
+      "sha256": "bfdd53dffc7f8c38cf1ad2aadc3814e84a40407ba745cf63b334f71931a6b883"
+    },
+    {
+      "file": "tests/hub-personnel-navigation.test.js",
+      "bytes": 4832,
+      "normalizedBytes": 4832,
+      "sha256": "f2abdbe8dcb66098aaaf82ab3786f9f174e0002caf6b72895b93b8d217b6d257"
+    },
+    {
+      "file": "tests/hub-personnel-portrait.test.js",
+      "bytes": 10613,
+      "normalizedBytes": 10475,
+      "sha256": "83480fb19d9f244533ab61ce2005757fb7bb3632c74d0b3d37a30f8820139e63"
+    },
+    {
+      "file": "tests/hub-reward-feedback.test.js",
+      "bytes": 9319,
+      "normalizedBytes": 9319,
+      "sha256": "38afdeb0343c240392ac17a9116eaf145d089293b5e2129140ec1bf80594d20e"
+    },
+    {
+      "file": "tests/hub-trade-shop-v5.test.js",
+      "bytes": 17880,
+      "normalizedBytes": 17880,
+      "sha256": "f0bdb237e92ae0e38d13592b43623f7e3cdbc88e238463dd54eda7e5d9b7a6b9"
+    },
+    {
+      "file": "tests/hub-upgrade-render.test.js",
+      "bytes": 4522,
+      "normalizedBytes": 4522,
+      "sha256": "ab882e70226d81763ad7b6bf2709788b6f3121d7f68bf1d512258a18593b9a03"
+    },
+    {
+      "file": "tests/hub-versioned-slot-reader.test.js",
+      "bytes": 6918,
+      "normalizedBytes": 6918,
+      "sha256": "d0520b1ec4f82ff5c5ee23714d79099372f4a02057cb564742230c36846e2eaf"
+    },
+    {
+      "file": "tests/hub-visible-card-faces.test.js",
+      "bytes": 4121,
+      "normalizedBytes": 4121,
+      "sha256": "483d6c04675cdb23c3b8329d0adb5fa2b9289e933494902d3e79874bb19a1206"
+    },
+    {
+      "file": "tests/icon-hydration.test.js",
+      "bytes": 5499,
+      "normalizedBytes": 5499,
+      "sha256": "e3c68d54027478f305825974eed49f57922c28f4cdadcb933465411b153a57be"
+    },
+    {
+      "file": "tests/image-decode.test.js",
+      "bytes": 3839,
+      "normalizedBytes": 3839,
+      "sha256": "11ce438ae874cf2286fec39abe145ffabff30e1b5129f5f7c3846af2c830fdfc"
+    },
+    {
+      "file": "tests/impact-query.test.js",
+      "bytes": 10342,
+      "normalizedBytes": 10342,
+      "sha256": "efc00014d6e3831664a6f75481b1a117afeca3e6601223e28880db115c4b0e6d"
+    },
+    {
+      "file": "tests/infuse-free-paths.test.js",
+      "bytes": 8019,
+      "normalizedBytes": 8019,
+      "sha256": "a7f1a3fd755cf83c68da940df2abc6a83f9e349b51c2e38542f3ecf91464cf50"
+    },
+    {
+      "file": "tests/infuse-free-play.test.js",
+      "bytes": 4388,
+      "normalizedBytes": 4388,
+      "sha256": "85ba4864f9a5a177e977ff0dd6d162123d0decdb033cf2914c18f26d61219e8f"
+    },
+    {
+      "file": "tests/input-bindings-persistence.test.js",
+      "bytes": 3399,
+      "normalizedBytes": 3399,
+      "sha256": "e8c732a1cfbeda6bfe8c8c007acc08829d735937bb098163abe1034feeeed8c5"
+    },
+    {
+      "file": "tests/intent-legend-isolation.test.js",
+      "bytes": 3478,
+      "normalizedBytes": 3409,
+      "sha256": "fc257bcb08f8898e1ea88c2920ebd0b1d7f55b3b6a165885e77330ed6cfb626c"
+    },
+    {
+      "file": "tests/interface-hub-query-reuse.test.js",
+      "bytes": 6692,
+      "normalizedBytes": 6692,
+      "sha256": "cc6c72892ec9927331708ae7c7f7b79de294a0990d6ad1720231f1f49ea9234b"
+    },
+    {
+      "file": "tests/item15-18-fixes.test.js",
+      "bytes": 5116,
+      "normalizedBytes": 5020,
+      "sha256": "86ff4bacca1c85cbe5a73dce19157cf66c36942b4329b3a89c8002c3e5b5ca7e"
+    },
+    {
+      "file": "tests/lab-ending-visibility.test.js",
+      "bytes": 2028,
+      "normalizedBytes": 2028,
+      "sha256": "96a28bd69154e88d3127c2012591016a32977d7870381e79288765259ae803cb"
+    },
+    {
+      "file": "tests/last-stand-poison-burst.test.js",
+      "bytes": 5263,
+      "normalizedBytes": 5155,
+      "sha256": "1d32b08f0453e7dac53196dcbb339c80325376afa3d122e7204b3ac54b4faa04"
+    },
+    {
+      "file": "tests/lava-blast.test.js",
+      "bytes": 4471,
+      "normalizedBytes": 4373,
+      "sha256": "77faf35ff067799914f3d0446a22bf48c497a2a723a785d7251612dbbdf14a02"
+    },
+    {
+      "file": "tests/layered-map-generator.test.js",
+      "bytes": 7766,
+      "normalizedBytes": 7629,
+      "sha256": "71bd4ba9afc56b9bd2146e214331110910bf1f3fc46fdb25d2512aa15358a9fd"
+    },
+    {
+      "file": "tests/leave-run-menu.test.js",
+      "bytes": 7331,
+      "normalizedBytes": 7331,
+      "sha256": "aa80e3bbceb612a2cb32bfaef73a464eed8f60f08a59c303def20fe7cab21127"
+    },
+    {
+      "file": "tests/legacy-battle-policy.test.js",
+      "bytes": 5630,
+      "normalizedBytes": 5629,
+      "sha256": "d4828ef6714e3edebe618a9e791d2718f9e2dd5250d840e2008a04df6894e1bd"
+    },
+    {
+      "file": "tests/light-startup-boot.test.js",
+      "bytes": 7569,
+      "normalizedBytes": 7569,
+      "sha256": "4966971ff8bc752fe2c7f57db7b4af6b12580b98295e84343dab2691db20ba20"
+    },
+    {
+      "file": "tests/linked-motion-lifecycle.test.js",
+      "bytes": 4177,
+      "normalizedBytes": 4177,
+      "sha256": "da8a00eb841078b3654455d8327a5ae7f280b4bdcd618a77050774d2f711376e"
+    },
+    {
+      "file": "tests/lossless-runtime-assets.test.js",
+      "bytes": 2410,
+      "normalizedBytes": 2410,
+      "sha256": "6eb04ab377bb8bdf0a6be8dc41e342eae8bddc42ed57f0f525014c75a76708ec"
+    },
+    {
+      "file": "tests/m-batch-behavior.test.js",
+      "bytes": 5371,
+      "normalizedBytes": 5282,
+      "sha256": "1dcb8ec0b6060a97bea981e1ee62bf53b117c5b3177d49a225734599284566fb"
+    },
+    {
+      "file": "tests/m-batch-production.test.js",
+      "bytes": 8646,
+      "normalizedBytes": 8515,
+      "sha256": "46d88555cb094aaabd42d9254e1aaf8b7e58c92fec7f2690ee651084e7f51136"
+    },
+    {
+      "file": "tests/m-execute-consume.test.js",
+      "bytes": 3117,
+      "normalizedBytes": 3056,
+      "sha256": "c8216e76ba156121fe0079006c75af4754cc7961528730effa4dffa2ff779d85"
+    },
+    {
+      "file": "tests/m-hosted-contract.test.js",
+      "bytes": 5062,
+      "normalizedBytes": 4968,
+      "sha256": "d0eda68a9506dd84ff75abb41b9c6bb7be3e57239545dc9cc77201f9a3332d6c"
+    },
+    {
+      "file": "tests/m01-base-commit.test.js",
+      "bytes": 8510,
+      "normalizedBytes": 8510,
+      "sha256": "947ebae3c8b0c031af0e3c66fc71add4513e50af31aab28730ff3dcc5cf08db5"
+    },
+    {
+      "file": "tests/m02-collection-commands.test.js",
+      "bytes": 10696,
+      "normalizedBytes": 10696,
+      "sha256": "6763e39b75d04bdea2d9b12a12fd1289db0f50c6daccc6c382ccf0bb7667db82"
+    },
+    {
+      "file": "tests/m03-home.test.js",
+      "bytes": 8889,
+      "normalizedBytes": 8889,
+      "sha256": "72e9ea3f409ef232cf06f5e1b3874024da3b1681fa8bd8f57308046ac0461fe5"
+    },
+    {
+      "file": "tests/m04-preview-contract.test.js",
+      "bytes": 733,
+      "normalizedBytes": 733,
+      "sha256": "39ca2341f5ac1f87e999ac1ccebb55e0525e390fa748356aaeb4862cc03b141d"
+    },
+    {
+      "file": "tests/m04-visual-pack.test.js",
+      "bytes": 2858,
+      "normalizedBytes": 2858,
+      "sha256": "013ef7bb7decad9396dcdccad669668377f3b566bf8a84f32ae96de4585dcb52"
+    },
+    {
+      "file": "tests/m05-home-presenter.test.js",
+      "bytes": 2704,
+      "normalizedBytes": 2653,
+      "sha256": "201cd5c4f539de9874053454c034a6283fad3e7c2c069ecfeb42251475577876"
+    },
+    {
+      "file": "tests/m05-home-scene.test.js",
+      "bytes": 18571,
+      "normalizedBytes": 18571,
+      "sha256": "8b49e08b5730fdf15de812134a6aa8e5984bc340ddc941109130052d0550e9b3"
+    },
+    {
+      "file": "tests/m06-preparation.test.js",
+      "bytes": 8181,
+      "normalizedBytes": 8181,
+      "sha256": "a1911ee5bbdd1c23cd8c2bbbee20625db5d637a86b535276c4ea429f8ac9925c"
+    },
+    {
+      "file": "tests/m06-sources-view.test.js",
+      "bytes": 4346,
+      "normalizedBytes": 4346,
+      "sha256": "a77409f6f7835924c285e0972b63547ae7868a0bc47373244acdd8e6fe1ef378"
+    },
+    {
+      "file": "tests/m1-contract.test.js",
+      "bytes": 22128,
+      "normalizedBytes": 21709,
+      "sha256": "18a33d60337fa6bd9f1e0b6c30a79dcacea2b57efdb174629f51ddadcab1569e"
+    },
+    {
+      "file": "tests/m1-data.test.js",
+      "bytes": 9446,
+      "normalizedBytes": 9446,
+      "sha256": "76b2a520d7805cc396b92babe15e81c84515e2156173ff0c0adb23516c4cf0d4"
+    },
+    {
+      "file": "tests/m10-data.test.js",
+      "bytes": 5150,
+      "normalizedBytes": 5040,
+      "sha256": "0cddbe45c789adc77baba22d53d43c6596826944d09708fcd573798c2bacc0c4"
+    },
+    {
+      "file": "tests/m11-data.test.js",
+      "bytes": 3378,
+      "normalizedBytes": 3378,
+      "sha256": "0d172e753e376e45bc35cf5b81847049e961f582a0e293c6224ee51119178244"
+    },
+    {
+      "file": "tests/m2-contract.test.js",
+      "bytes": 28095,
+      "normalizedBytes": 27564,
+      "sha256": "e10e7be8891444b6b8457946c0794de0e105bfd04fd812b2e2ee48189f28a48f"
+    },
+    {
+      "file": "tests/m2-data.test.js",
+      "bytes": 13187,
+      "normalizedBytes": 13187,
+      "sha256": "7346ad919e39015a9ce9c31e13b00108d4100d88bab0d26bceac30eb47deb707"
+    },
+    {
+      "file": "tests/m3-contract.test.js",
+      "bytes": 22379,
+      "normalizedBytes": 22379,
+      "sha256": "e76ced94191206e270ba64deb7331a08f0fcb5d8ae53b834cbeae10e3c890bd8"
+    },
+    {
+      "file": "tests/m3-data.test.js",
+      "bytes": 22596,
+      "normalizedBytes": 22118,
+      "sha256": "8fbe4d01b2395084c3c182b08cbba2b2983bbcc3adf4e82f63ce37455eb98061"
+    },
+    {
+      "file": "tests/m4-data.test.js",
+      "bytes": 8653,
+      "normalizedBytes": 8653,
+      "sha256": "1d841e47cbf3061b625cfbcdeb03a97912dbe49f74886acb8d1d22aaa3e15812"
+    },
+    {
+      "file": "tests/m5-data.test.js",
+      "bytes": 14826,
+      "normalizedBytes": 14826,
+      "sha256": "2a400d074627c86a46b294f126a0f64173da7cc39985f130bdd52597f9acfb07"
+    },
+    {
+      "file": "tests/m6-data.test.js",
+      "bytes": 12592,
+      "normalizedBytes": 12592,
+      "sha256": "f9dc4ede9fdee8dbd0fdefe7186aea8f4ba7db26a9c0870fb673cad2cfa05087"
+    },
+    {
+      "file": "tests/m7-battle.test.js",
+      "bytes": 4503,
+      "normalizedBytes": 4414,
+      "sha256": "c776b280cb82cad4cb6c35ddc2dd6f788ced19fcef23ed1cd0d645b3de10aab9"
+    },
+    {
+      "file": "tests/m7-data.test.js",
+      "bytes": 8428,
+      "normalizedBytes": 8428,
+      "sha256": "f7d4d692a755fbc6dd4c2801fde85298af58777b452c907a3608e0ddfa400d73"
+    },
+    {
+      "file": "tests/m8-data.test.js",
+      "bytes": 9498,
+      "normalizedBytes": 9498,
+      "sha256": "65cccccc0739f6dad5c6ed4598a223eb469dff05fd995591bc417d6ee7456f56"
+    },
+    {
+      "file": "tests/m9-data.test.js",
+      "bytes": 4620,
+      "normalizedBytes": 4620,
+      "sha256": "aae924803c00b1dbecbd251254f733b95bbee4f5d8bc6b2443aeb2ec1e3d0f7d"
+    },
+    {
+      "file": "tests/main-lifecycle.test.js",
+      "bytes": 1734,
+      "normalizedBytes": 1734,
+      "sha256": "871f73724e5f0c35b38daacfc3a23fba6da073fa9a3e9db8f936ce7aab1ec893"
+    },
+    {
+      "file": "tests/mana-surge.test.js",
+      "bytes": 4573,
+      "normalizedBytes": 4482,
+      "sha256": "1e09154f3bdb411a8f79e8b64b20a94140b07f15e1c139db66bdab3e1c8cd412"
+    },
+    {
+      "file": "tests/map-asset-registration.test.js",
+      "bytes": 5858,
+      "normalizedBytes": 5858,
+      "sha256": "d1f17802c912707051b3e440e6eb37f1c5e3f4f0d0302c15de9ae5d160f8017a"
+    },
+    {
+      "file": "tests/map-connectivity.test.js",
+      "bytes": 3845,
+      "normalizedBytes": 3845,
+      "sha256": "b87f7f6b18a6376c6fdfc11adf88941c8554c7dc95f9432e6607e2c5494a4efa"
+    },
+    {
+      "file": "tests/map-decoration-budget.test.js",
+      "bytes": 3759,
+      "normalizedBytes": 3759,
+      "sha256": "614ca1255567bc6b8415925eb8a442bb8f5720af808959ec2f2dcbecb069e035"
+    },
+    {
+      "file": "tests/map-drag-motion.test.js",
+      "bytes": 4125,
+      "normalizedBytes": 4125,
+      "sha256": "913a2075ef02d3983664e55be7900c16455f024d77df2927647c988112d10483"
+    },
+    {
+      "file": "tests/map-facilities-burn-removal.test.js",
+      "bytes": 2967,
+      "normalizedBytes": 2967,
+      "sha256": "aae00ef071fef83504c0dd9ced890136632d78b2935e388382beff4d93ac7ebe"
+    },
+    {
+      "file": "tests/map-fire-pacing.test.js",
+      "bytes": 5284,
+      "normalizedBytes": 5284,
+      "sha256": "6d759ad92b78941aaed12cb8c65c4ccc27675198ebebf08d18c6a8f7c8d68821"
+    },
+    {
+      "file": "tests/map-generator-v4.test.js",
+      "bytes": 8011,
+      "normalizedBytes": 8011,
+      "sha256": "4d5f23e21bcc45051a05192e9b65e6c8b7a036dcdc7e0293c550e757cf61435b"
+    },
+    {
+      "file": "tests/map-glow-preference-lifecycle.test.js",
+      "bytes": 1516,
+      "normalizedBytes": 1516,
+      "sha256": "c0eb22755d1849ed3afdd0738cf893e9acff0d12d1dd62689c6e539a37c17c98"
+    },
+    {
+      "file": "tests/map-health-hud.test.js",
+      "bytes": 9087,
+      "normalizedBytes": 9087,
+      "sha256": "8d2987fca9b19d09812d75487e9d5577b91155deae72316fa1c27869d73b86e1"
+    },
+    {
+      "file": "tests/map-node-glow.test.js",
+      "bytes": 3559,
+      "normalizedBytes": 3559,
+      "sha256": "b642000b46017c6b61230ebf89a3664eb4432e42f0311e749dbb48704b955981"
+    },
+    {
+      "file": "tests/map-node-state.test.js",
+      "bytes": 4479,
+      "normalizedBytes": 4479,
+      "sha256": "e1f36d67515cc51da95c116ee2a6fab2eec115a8f8f34b50515a061efa618af0"
+    },
+    {
+      "file": "tests/map-overview-review.test.js",
+      "bytes": 1906,
+      "normalizedBytes": 1906,
+      "sha256": "130fdb5ab56cba4229cad3847e4363ddb78717e72874fc85de28932e4427b3bf"
+    },
+    {
+      "file": "tests/map-passage.test.js",
+      "bytes": 3943,
+      "normalizedBytes": 3943,
+      "sha256": "b70b265b4e5040d7de676be390b21e1a7c605139a21de171def51b9191883574"
+    },
+    {
+      "file": "tests/map-render-performance.test.js",
+      "bytes": 5928,
+      "normalizedBytes": 5928,
+      "sha256": "b2120d4ca8edcd4c6a759c057b5030970cccab7fd455914362ac66347d6c6752"
+    },
+    {
+      "file": "tests/map-rng-bit-equivalence.test.js",
+      "bytes": 3535,
+      "normalizedBytes": 3535,
+      "sha256": "4ecfd460fe8c48b301a603c707e6d3f409cfa516e9dc54f4057abcc55fe1af99"
+    },
+    {
+      "file": "tests/map-route-v2-preview.test.js",
+      "bytes": 4909,
+      "normalizedBytes": 4909,
+      "sha256": "5008796024d3cb3c4c49261c9f89b56b40e725b5d53078d94b5c8bb26680ea66"
+    },
+    {
+      "file": "tests/map-route-v2.test.js",
+      "bytes": 12362,
+      "normalizedBytes": 12362,
+      "sha256": "24befe25f5da9ce29cc670d3d16372c665515b7fe23838fa23cde211132ac455"
+    },
+    {
+      "file": "tests/map-snapshot-copy-cost.test.js",
+      "bytes": 3587,
+      "normalizedBytes": 3587,
+      "sha256": "efcc6f97a6e280120354cf8a92eb27cf53afab3c5252e218fc1878c2a2ce592c"
+    },
+    {
+      "file": "tests/map-travel-motion.test.js",
+      "bytes": 9411,
+      "normalizedBytes": 9411,
+      "sha256": "494a503dcd247522df9dab371d01226b2653777454cbf755fb1aee78af3fd56b"
+    },
+    {
+      "file": "tests/map-travel-path.test.js",
+      "bytes": 9418,
+      "normalizedBytes": 9266,
+      "sha256": "860ea14bec14e57904d2f6fe5484fd288039188d6cd187f89d40b21db27e6dbb"
+    },
+    {
+      "file": "tests/map-type-annotation-freeze.test.js",
+      "bytes": 1191,
+      "normalizedBytes": 1191,
+      "sha256": "965480fcce80ddcd295c0cc2e50c159e323354641890f54cefd222197a04f781"
+    },
+    {
+      "file": "tests/map-version-compat.test.js",
+      "bytes": 6019,
+      "normalizedBytes": 5941,
+      "sha256": "573c5e376053e3ac2267c22608058a2677c1cea649cf4d0466e80acb05986588"
+    },
+    {
+      "file": "tests/mech-sentences.test.js",
+      "bytes": 3460,
+      "normalizedBytes": 3382,
+      "sha256": "5d243ac15a5e2db1bb05006452c6c5d8c6669ab0902ea4181db02b94e2b428ca"
+    },
+    {
+      "file": "tests/menu-pages-lazy-entry.test.js",
+      "bytes": 16621,
+      "normalizedBytes": 16621,
+      "sha256": "125e348c07565ebcdf125e2df93101b58a1d6f8657e933113abac37c406c6879"
+    },
+    {
+      "file": "tests/menu-pages-slices.test.js",
+      "bytes": 6052,
+      "normalizedBytes": 5951,
+      "sha256": "1e32281dd4edf7bec8c46d8c5b9c917fba1b7f58f8fb3f0a6106e6ddc883ecee"
+    },
+    {
+      "file": "tests/menu-recovery-entry.test.js",
+      "bytes": 11579,
+      "normalizedBytes": 11579,
+      "sha256": "0cc96b50c5dbca95580e43c750c4f475740245f8ecda5b9f3ca59c11ca600d63"
+    },
+    {
+      "file": "tests/menu-return-chain.test.js",
+      "bytes": 3377,
+      "normalizedBytes": 3376,
+      "sha256": "6ed4019494395950e07485e3cd9ff8e0d9e12e537ee8ede3efd15e0e539f2563"
+    },
+    {
+      "file": "tests/message-batch-0917.test.js",
+      "bytes": 8963,
+      "normalizedBytes": 8782,
+      "sha256": "5819a7b144e92262f5af791a44319204035f3135599371a44297d9f428500d1b"
+    },
+    {
+      "file": "tests/message-batch-0920-late.test.js",
+      "bytes": 5489,
+      "normalizedBytes": 5380,
+      "sha256": "a865fd16be6df5d704ba82f9116d3f9e6fe0bfeace90cc1d46bea5a79ecf9b1f"
+    },
+    {
+      "file": "tests/message-fixes.test.js",
+      "bytes": 6485,
+      "normalizedBytes": 6342,
+      "sha256": "41822e49870c3e936680abe11ea47d1199ada48e800554b3ef62f0a6b3b9e3b9"
+    },
+    {
+      "file": "tests/mistbox.test.js",
+      "bytes": 3746,
+      "normalizedBytes": 3664,
+      "sha256": "a0d53f33a3757b64631665dce274faec4c5f73968af82555a3d5e43bd1ccac86"
+    },
+    {
+      "file": "tests/motion-ownership.test.js",
+      "bytes": 3539,
+      "normalizedBytes": 3539,
+      "sha256": "77c6d8ed004b2c6be493bec040b092548ff8cca8db3abcc1aa33dc358703df2d"
+    },
+    {
+      "file": "tests/multi-hit-retarget.test.js",
+      "bytes": 3759,
+      "normalizedBytes": 3686,
+      "sha256": "20343ef87134e9aeb9f20504287f22fbae52cc7d4415d574e4eb15a478806e96"
+    },
+    {
+      "file": "tests/mystery-potion-observation.test.js",
+      "bytes": 10792,
+      "normalizedBytes": 10616,
+      "sha256": "30d0040926a8659bd05496a9598295e17376fe56f4f9018da2af12982d90fe6c"
+    },
+    {
+      "file": "tests/n1-infuse-uid-toggle.test.js",
+      "bytes": 6095,
+      "normalizedBytes": 5984,
+      "sha256": "7a9599826e90523f5a4cfac04f8bcb0254dd089db1be5455ddc07c67ab1c4718"
+    },
+    {
+      "file": "tests/narrative-coverage.test.js",
+      "bytes": 2166,
+      "normalizedBytes": 2166,
+      "sha256": "ae5bcbc50563d0888012987d22d62d1ebb9de2059fe3c54a7c79eb12d17f4922"
+    },
+    {
+      "file": "tests/narrative.test.js",
+      "bytes": 1883,
+      "normalizedBytes": 1883,
+      "sha256": "169a8322c97e98b5624fb28ba7ed87c5221d83e36f87c0e01c9f8f7b272e111a"
+    },
+    {
+      "file": "tests/navigation-motion.test.js",
+      "bytes": 2802,
+      "normalizedBytes": 2802,
+      "sha256": "3704407f3a100ec7ff2aa7a7b5d40963c691a4d22f8a07998563976ae6c0782f"
+    },
+    {
+      "file": "tests/nest-hearts.test.js",
+      "bytes": 2916,
+      "normalizedBytes": 2869,
+      "sha256": "943d825bbb035a3d58ca37ff8c38da272936e462f90511257d517e99453547d9"
+    },
+    {
+      "file": "tests/nest-node-lifecycle-audit.test.js",
+      "bytes": 16694,
+      "normalizedBytes": 16694,
+      "sha256": "b16d639751a9faafa312de31807e9052d583d2feb25ccbef7a60416588af598e"
+    },
+    {
+      "file": "tests/nest-regression.test.js",
+      "bytes": 9198,
+      "normalizedBytes": 9198,
+      "sha256": "eef73ce9f6a4f552067f7a0c44159c22f909c429051f01f60facc1b77cfb9079"
+    },
+    {
+      "file": "tests/nest-runemaster.test.js",
+      "bytes": 1624,
+      "normalizedBytes": 1624,
+      "sha256": "3c59fb1bec83a89b98da9136a3b62579180ceec4b1e99e56e6d7e9f0babe3f2c"
+    },
+    {
+      "file": "tests/nest-settlement-transaction.test.js",
+      "bytes": 7251,
+      "normalizedBytes": 7251,
+      "sha256": "ce3d96142acea35ec06bffb9a97591266add0b4637571f5763fdbae061f5ed1e"
+    },
+    {
+      "file": "tests/nightshift-u10-settle-transition.test.js",
+      "bytes": 5934,
+      "normalizedBytes": 5934,
+      "sha256": "18ed47c4885215bf319e9ef334c03f4dba210c083881d651d49fda8c6937e50b"
+    },
+    {
+      "file": "tests/nightshift-u10-teardown-guards.test.js",
+      "bytes": 7591,
+      "normalizedBytes": 7591,
+      "sha256": "8de9728e91799763c985b16d1ca6f014ae6191c279a0087081f820efac4638d1"
+    },
+    {
+      "file": "tests/node-cancel-semantics.test.js",
+      "bytes": 9329,
+      "normalizedBytes": 9329,
+      "sha256": "f96c7c2455c40cd6c123b56600b2a4e276b08cb3b39ab4967a822e2ff9f6b6c1"
+    },
+    {
+      "file": "tests/node-decision-view.test.js",
+      "bytes": 4667,
+      "normalizedBytes": 4667,
+      "sha256": "95dcabca6f221b96aa34ef4ae819472bf6bf772e4aa65cf3d180c07f82670d9c"
+    },
+    {
+      "file": "tests/node-design-review.test.js",
+      "bytes": 1866,
+      "normalizedBytes": 1866,
+      "sha256": "34f575b00f8b9f668a53814e965e894664ea7e8614c69c9acb0b9114f9686333"
+    },
+    {
+      "file": "tests/node-flow-confirmation.test.js",
+      "bytes": 5338,
+      "normalizedBytes": 5338,
+      "sha256": "6add2fd2cd2e6846a3ed3b60525a081c952e551bb8f334fcc800eb445c3daa97"
+    },
+    {
+      "file": "tests/node-restore-flow.test.js",
+      "bytes": 6366,
+      "normalizedBytes": 6366,
+      "sha256": "1c917bc5f951674d5e7395b6ff2d500cef51717042aae74ef952fac1d3dc93af"
+    },
+    {
+      "file": "tests/node-restore-state.test.js",
+      "bytes": 3726,
+      "normalizedBytes": 3726,
+      "sha256": "b8ab74893bb38a25cbee805685fba370412e433b08c9f087f99f020c613b55e6"
+    },
+    {
+      "file": "tests/node-retrigger.test.js",
+      "bytes": 20859,
+      "normalizedBytes": 20859,
+      "sha256": "d632fa130ff27b41c2710c9931f725832d35842651fa20506de8c7e043fc1d97"
+    },
+    {
+      "file": "tests/node-reward-state.test.js",
+      "bytes": 4718,
+      "normalizedBytes": 4631,
+      "sha256": "5ba9e7344215731e2f5eeb717737a1df05e82bcee064bdd2957a778ebf879deb"
+    },
+    {
+      "file": "tests/normal-effects-deck-regression.test.js",
+      "bytes": 3064,
+      "normalizedBytes": 3064,
+      "sha256": "7cc5076ef9947ce8538596a9b1226712af29aa145b896a698a03f785d71348d2"
+    },
+    {
+      "file": "tests/normal-starter-deck.test.js",
+      "bytes": 10621,
+      "normalizedBytes": 10621,
+      "sha256": "18943d9281cd69359d944c77e72fd0541e107c245fffd19768f7754dd5e80475"
+    },
+    {
+      "file": "tests/optional-scene-lazy-boundary.test.js",
+      "bytes": 9141,
+      "normalizedBytes": 9141,
+      "sha256": "64f6735e5dc7180b863c8af97ed7cd6557b26f0797578639c6105a5fdb274516"
+    },
+    {
+      "file": "tests/overlay-connected-master-merge.test.js",
+      "bytes": 11381,
+      "normalizedBytes": 11381,
+      "sha256": "a9779ef019b2a17bb53d58328e9cc4485a2b30f840853f5dc676d9ac54e5a721"
+    },
+    {
+      "file": "tests/overlay-dialog.test.js",
+      "bytes": 21234,
+      "normalizedBytes": 20894,
+      "sha256": "438d1f2d93a6f35f69dca27957465225ba44237ed1c32919c109bd0f5e172e27"
+    },
+    {
+      "file": "tests/overlay-disclosure-focus.test.js",
+      "bytes": 7399,
+      "normalizedBytes": 7399,
+      "sha256": "73153d0d82fbe79f97c8fe5ce10f81e3d6cc068e2cceced41cf027cae974c6d3"
+    },
+    {
+      "file": "tests/overlay-mount-cost.test.js",
+      "bytes": 4220,
+      "normalizedBytes": 4220,
+      "sha256": "0d2bfa240ce76311b3b06d38914b7c855cdf68c943aad0667aca1965f18b7de6"
+    },
+    {
+      "file": "tests/page-entry-cancellation.test.js",
+      "bytes": 1726,
+      "normalizedBytes": 1726,
+      "sha256": "8f835aadfc039af65b8984b1b90a7c83aafa2beaf02bafdc9f64ee1054bec21f"
+    },
+    {
+      "file": "tests/page-loading.test.js",
+      "bytes": 12395,
+      "normalizedBytes": 12395,
+      "sha256": "5009d7930cbd93b3c9f0d9d330659ccf87b3897446e3e7e4863fb63abe876459"
+    },
+    {
+      "file": "tests/page-perf-battle.test.js",
+      "bytes": 14325,
+      "normalizedBytes": 14325,
+      "sha256": "87f753f9c26eb7a29ee049f3519a327b00cfffe63be15970540b58ecf4e92c7e"
+    },
+    {
+      "file": "tests/page-perf-expedition.test.js",
+      "bytes": 10339,
+      "normalizedBytes": 10339,
+      "sha256": "08510f18d03943669a2a3a40ca9a6274ba9490ff86451017d238bb14fcc3419c"
+    },
+    {
+      "file": "tests/page-perf-hub.test.js",
+      "bytes": 11543,
+      "normalizedBytes": 11543,
+      "sha256": "a5ad560b4c3606c5d008bc81343665c910821805cddd5a8d67006c6831cfdaca"
+    },
+    {
+      "file": "tests/page-perf-shared.test.js",
+      "bytes": 6179,
+      "normalizedBytes": 6179,
+      "sha256": "55cf71d3e133694324f42c18563f166e7d4d086aa5009a83737ba927b9305684"
+    },
+    {
+      "file": "tests/page-surface-lifetime.test.js",
+      "bytes": 7243,
+      "normalizedBytes": 7243,
+      "sha256": "0294d43b988499c270a7109e5b228567f11a0fe68f5ab5226af7563e44f84237"
+    },
+    {
+      "file": "tests/page-visual-readiness-sharing.test.js",
+      "bytes": 18537,
+      "normalizedBytes": 18537,
+      "sha256": "bd3323758b4d7d7f632627d5c1e3492144396ca2a32e847b22cc2ee12f864599"
+    },
+    {
+      "file": "tests/partner-interaction.test.js",
+      "bytes": 12231,
+      "normalizedBytes": 11994,
+      "sha256": "4d1286e4d25ffb7f52cf27670f4e25776a3b6d0fd461d0a30a017aea9bf2c9bf"
+    },
+    {
+      "file": "tests/pearl-storage-interface.test.js",
+      "bytes": 10921,
+      "normalizedBytes": 10921,
+      "sha256": "dadcced289ec6890e57af1f1890bab487c890b62d7c073c972c940f126f9c4ba"
+    },
+    {
+      "file": "tests/perf-budget-duplicates.test.js",
+      "bytes": 5866,
+      "normalizedBytes": 5866,
+      "sha256": "31b9aa41149f910d2684f88acc0ac13fcb0f02aeffa7e41d0ba8e250fdf2b5ca"
+    },
+    {
+      "file": "tests/perf-ledger-drive.test.js",
+      "bytes": 3831,
+      "normalizedBytes": 3831,
+      "sha256": "d63303d62b899f5dffe8dbf350f31b924fcdd1d601ba02f660641ad202d23559"
+    },
+    {
+      "file": "tests/perf-ledger-port-occupancy.test.js",
+      "bytes": 7236,
+      "normalizedBytes": 7236,
+      "sha256": "2be4683fbccec852e30097b193803bd2ae59501f1d578cb9961562b32d22e079"
+    },
+    {
+      "file": "tests/perf-probe-summary.test.js",
+      "bytes": 15225,
+      "normalizedBytes": 15225,
+      "sha256": "91e0f7b0286e603cf4958fa4285af21aae09018e92a605d6662a37ace490fbbe"
+    },
+    {
+      "file": "tests/performance-settings.test.js",
+      "bytes": 7130,
+      "normalizedBytes": 7130,
+      "sha256": "b3608720b6924686d1c836d2e6d7b18570372635cc84ca135b4a9cb5995f1cef"
+    },
+    {
+      "file": "tests/personnel-preview-lifecycle-perf.test.js",
+      "bytes": 4836,
+      "normalizedBytes": 4836,
+      "sha256": "5e99c811a68d3533d56fc9c9c41aca10d92c4b96a11d542a52caf45c6a6fa83d"
+    },
+    {
+      "file": "tests/pet-egg-chest.test.js",
+      "bytes": 6859,
+      "normalizedBytes": 6859,
+      "sha256": "4809a76297a95578b1282418da7f63a22c3fba5f3ee82947a1fdafe43b7aebfc"
+    },
+    {
+      "file": "tests/photo-art-warm-audit.test.js",
+      "bytes": 2974,
+      "normalizedBytes": 2974,
+      "sha256": "9ec8057f3c7a1da65fdc5e3b46b46875e09b66cbcc0dbfe4940607989c7d2a10"
+    },
+    {
+      "file": "tests/photo-notes-key-audit.test.js",
+      "bytes": 1639,
+      "normalizedBytes": 1639,
+      "sha256": "bc0463c5b08fb553889e217bfeb70e83a1f3bc103323d1c87f1c1439bf628aec"
+    },
+    {
+      "file": "tests/photo-page-lifecycle-audit.test.js",
+      "bytes": 12044,
+      "normalizedBytes": 12044,
+      "sha256": "f3897f06af03c0bf2bf64042ef0518d63c22b4b04459616c9a631ab136fb2689"
+    },
+    {
+      "file": "tests/photo-probe-lifecycle-deep-audit.test.js",
+      "bytes": 6241,
+      "normalizedBytes": 6241,
+      "sha256": "000ed0e89117a04ed2ada47392e0954d966c7926e34fd0002634ba34d3b867ee"
+    },
+    {
+      "file": "tests/photo-studio-catalog-cache.test.js",
+      "bytes": 1814,
+      "normalizedBytes": 1814,
+      "sha256": "83fde6bed756910b910ea6cd32089a55c3dea9cbe3b98ad366c16d2e559acdfc"
+    },
+    {
+      "file": "tests/photo-studio-presentation.test.js",
+      "bytes": 2069,
+      "normalizedBytes": 2069,
+      "sha256": "3d826dc508ab4b0bf1c1cf564f0440dcce1a0c55cebdd2ab5efa8b8f9a7fc313"
+    },
+    {
+      "file": "tests/photo-studio-tabs.test.js",
+      "bytes": 6065,
+      "normalizedBytes": 6065,
+      "sha256": "8014d43bde2b21a6725f7066313c75cf0bccc353f277e2502a7430c99070e9ec"
+    },
+    {
+      "file": "tests/photo-zoom-lifecycle.test.js",
+      "bytes": 10924,
+      "normalizedBytes": 10924,
+      "sha256": "20355770598415e9e1a612418c5d859fa7dcded7923a34cdbb785622fe097283"
+    },
+    {
+      "file": "tests/pierce-arrow-revision.test.js",
+      "bytes": 2410,
+      "normalizedBytes": 2410,
+      "sha256": "233cbd0b58ed17a2fed5aff3ccb37e28035d546548108b2bc8fba72a99f629e2"
+    },
+    {
+      "file": "tests/pipeline-completion-contract.test.js",
+      "bytes": 11355,
+      "normalizedBytes": 11355,
+      "sha256": "141884832065646b694b7dff25b935f1604b043c37a08a54427c5de7318d8e8b"
+    },
+    {
+      "file": "tests/playthrough-bot.test.js",
+      "bytes": 6019,
+      "normalizedBytes": 5928,
+      "sha256": "93412cda7502f93a4fe6a6a75180b810b77858d820c6231a57cbe3ffa17e524d"
+    },
+    {
+      "file": "tests/pocket-restore-interface.test.js",
+      "bytes": 15158,
+      "normalizedBytes": 15158,
+      "sha256": "8546b60651471900d4f52a62b76d859368efc0abc3263478723865c7c1040b7b"
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "bytes": 10231,
+      "normalizedBytes": 10231,
+      "sha256": "43f5f8e67a4449602730418f7f3f558c35fd54a2c2a010bc16c89db7c558f517"
+    },
+    {
+      "file": "tests/potion-tip.test.js",
+      "bytes": 8484,
+      "normalizedBytes": 8484,
+      "sha256": "fb72c6a283b0c28ebb8e3a3f6be92b3256a0b0eb83f0582d66f4ad6d01eae02b"
+    },
+    {
+      "file": "tests/premium-ui-pages.test.js",
+      "bytes": 7674,
+      "normalizedBytes": 7537,
+      "sha256": "c7d070527795a606f62f956c6fb8d57f91bc84a5cf87d2adf45f2f5788d783fe"
+    },
+    {
+      "file": "tests/preparation-adapter-review.test.js",
+      "bytes": 5105,
+      "normalizedBytes": 5034,
+      "sha256": "817c24e17b9003c08d01a09bec185ae56e952bb8f8781c33ad57642bf68a8184"
+    },
+    {
+      "file": "tests/preparation-slot-review.test.js",
+      "bytes": 4610,
+      "normalizedBytes": 4610,
+      "sha256": "c7eddfb7e39411b6a33e08b7140a4df7a953271a0d322f51be937890529d86e6"
+    },
+    {
+      "file": "tests/project-bug-sweep-agent-target-1024.test.js",
+      "bytes": 3173,
+      "normalizedBytes": 3173,
+      "sha256": "cf3fa48e35b9a916b6a6485f02dfa0f906861b4c804873c292f958436d2152a5"
+    },
+    {
+      "file": "tests/project-bug-sweep-battle-1024.test.js",
+      "bytes": 6793,
+      "normalizedBytes": 6793,
+      "sha256": "e7384c076901af32e08ad6c2bfbada8ecb93a06a4b93e709a47e9d3b4fd87f8f"
+    },
+    {
+      "file": "tests/project-bug-sweep-event-choice-1024.test.js",
+      "bytes": 3703,
+      "normalizedBytes": 3703,
+      "sha256": "a74d4295a1a2fed83c06a59d95ab57c5c328544aa7642fcfb0f64691094ba1ce"
+    },
+    {
+      "file": "tests/project-bug-sweep-events-1024.test.js",
+      "bytes": 6141,
+      "normalizedBytes": 6141,
+      "sha256": "f14054cc6a79bc3bc680277c9540523f112b97bb311f37a756b7e8e1f4a303d3"
+    },
+    {
+      "file": "tests/project-bug-sweep-expedition-1024.test.js",
+      "bytes": 4606,
+      "normalizedBytes": 4606,
+      "sha256": "29b803573000dd2c3a40cf425480773132edb19ddfbd61b912a062235a6ce1d2"
+    },
+    {
+      "file": "tests/project-bug-sweep-extraction-entry-1024.test.js",
+      "bytes": 4833,
+      "normalizedBytes": 4833,
+      "sha256": "34cd448fa37c3acc0fb20114d108a1de9fb780c307771c605d285a41c94ccfdd"
+    },
+    {
+      "file": "tests/project-bug-sweep-llm-1024.test.js",
+      "bytes": 2582,
+      "normalizedBytes": 2582,
+      "sha256": "e268c8129b4fa9e1a5891fb4596b9fa10625361034443fe6bfe438855ba8d900"
+    },
+    {
+      "file": "tests/project-bug-sweep-persistence.test.js",
+      "bytes": 9693,
+      "normalizedBytes": 9693,
+      "sha256": "461e6ece4003f3cfcaed5c1c82630d4fcf9febc9f30c88c6c3ddad001c855b55"
+    },
+    {
+      "file": "tests/project-bug-sweep-records-1024.test.js",
+      "bytes": 1137,
+      "normalizedBytes": 1137,
+      "sha256": "9f1aebda7e34d9078c3c6a5b0a0e533eccfd6c4dabf72e838e7402b0fd791fb3"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-agent-confirm.test.js",
+      "bytes": 3945,
+      "normalizedBytes": 3945,
+      "sha256": "53b4d72acd1dccfad5aaae4af11e8fd92d02412e489be843c14027215f5aac2a"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-agent-scenes.test.js",
+      "bytes": 2292,
+      "normalizedBytes": 2292,
+      "sha256": "993c8c28fe268f1b6d8e1e5efe5939c78b0d63654e913e7ce725d0e25dd5aa7b"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-bag-use.test.js",
+      "bytes": 4434,
+      "normalizedBytes": 4434,
+      "sha256": "78f1f27bac25246111f375f23300c3fd7a50d0148c50cfcca1346fa5befcfca2"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-base-context.test.js",
+      "bytes": 9662,
+      "normalizedBytes": 9662,
+      "sha256": "175c4271d9d9e112f278181dce81d540cb2faf37d0a05a16851fb4b4a7beb567"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-battle-1024.test.js",
+      "bytes": 12066,
+      "normalizedBytes": 12066,
+      "sha256": "311d22a25b46ce2c2fa1b8363b134f25640b47d6c9e9df9d5564fa9df86a5a03"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-container-discard.test.js",
+      "bytes": 2787,
+      "normalizedBytes": 2787,
+      "sha256": "035ba6c9f55c7090879793c516b82b0414f469d091d14cd8b7859ac0294844b5"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-dice-lifecycle.test.js",
+      "bytes": 2234,
+      "normalizedBytes": 2234,
+      "sha256": "9d9939fac6d7f6bf866f7baca08e6b3ba3aa9163892a305aa8e037561c3aeef1"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-extraction-identity.test.js",
+      "bytes": 9046,
+      "normalizedBytes": 9046,
+      "sha256": "cf0bb2db7ea15bb642440a476e692b4349b09ee70eb637f1eb312a53a2d1cc7e"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-extraction-preview.test.js",
+      "bytes": 1425,
+      "normalizedBytes": 1425,
+      "sha256": "4ef72e0a0223fa57f9a08f771005d0d686d875677506cf88a2556e85f849f6be"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-extraction-ui.test.js",
+      "bytes": 4737,
+      "normalizedBytes": 4737,
+      "sha256": "c3c22ed491b1f754e5d266a53b76ab4409b1f581c26b0e2dc5642ffff2e72574"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-nest-progress.test.js",
+      "bytes": 4600,
+      "normalizedBytes": 4600,
+      "sha256": "28a027b84038a13c421a096a8225dbc450de927607f4a65e69f8c8d95843d088"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-nest-shop.test.js",
+      "bytes": 5932,
+      "normalizedBytes": 5932,
+      "sha256": "08e639b8a02bfcb8e48471dfe26aaa3fc86d51b41678144329162de9dd1c2008"
+    },
+    {
+      "file": "tests/project-bug-sweep-round2-pocket-identity.test.js",
+      "bytes": 5574,
+      "normalizedBytes": 5574,
+      "sha256": "7bbd43cbf3088d6a8968e4df1c20a18816253042f054985fc8dc380cce7e73f1"
+    },
+    {
+      "file": "tests/project-bug-sweep-token-craft.test.js",
+      "bytes": 4251,
+      "normalizedBytes": 4251,
+      "sha256": "817beb537f35c2ae527c13a4df76dbff8105bbd6015b8299efd03149d6dc4a31"
+    },
+    {
+      "file": "tests/project-bugfix-agent-1023.test.js",
+      "bytes": 3057,
+      "normalizedBytes": 3057,
+      "sha256": "0958ecef350ec5e6d4d461b7940cbcd5886524f0e4cee981e3599e423fde8c0e"
+    },
+    {
+      "file": "tests/project-bugfix-agent-discard-1023.test.js",
+      "bytes": 2396,
+      "normalizedBytes": 2396,
+      "sha256": "9aa6890264a6615489ff0baf2278abe4b9d214c99bf5d7686578bd3e2f055de8"
+    },
+    {
+      "file": "tests/project-bugfix-agent-failure-1023.test.js",
+      "bytes": 3163,
+      "normalizedBytes": 3163,
+      "sha256": "53c8b126d8c435c4a9e7522e045849082d0352092fa3b006547b8c57ae0868d8"
+    },
+    {
+      "file": "tests/project-bugfix-archive-1023.test.js",
+      "bytes": 3733,
+      "normalizedBytes": 3733,
+      "sha256": "3610bd5dc394324a0b48b84161231f8bbbae6c98c3455402239d763159a3558c"
+    },
+    {
+      "file": "tests/project-bugfix-battle-1023.test.js",
+      "bytes": 10007,
+      "normalizedBytes": 10007,
+      "sha256": "7302cac134025dbc096a58fb516059f1bd9a4c8c6bc3735c0e003de603f84893"
+    },
+    {
+      "file": "tests/project-bugfix-dodge-1023.test.js",
+      "bytes": 1887,
+      "normalizedBytes": 1887,
+      "sha256": "bf9d01dcedd0c6cf933a6d680350d3097334bc522ab46d6ad86a89b5086e12b6"
+    },
+    {
+      "file": "tests/project-bugfix-expedition-1023.test.js",
+      "bytes": 11752,
+      "normalizedBytes": 11750,
+      "sha256": "5c7d3c9a7a150588d3af48900a17ffe114d70e27cccd3585797838389d261c21"
+    },
+    {
+      "file": "tests/project-bugfix-expedition-shop-1023.test.js",
+      "bytes": 4635,
+      "normalizedBytes": 4634,
+      "sha256": "e9f0d797801f6bd0831f4e4f4abcf3f3acbb7f626bebaf6f06f9a09024f3f8b6"
+    },
+    {
+      "file": "tests/project-bugfix-menu-1023.test.js",
+      "bytes": 2321,
+      "normalizedBytes": 2321,
+      "sha256": "59466508e46256e19d9741994606c3a295bdca90608321683d0dcb6eb2bd6107"
+    },
+    {
+      "file": "tests/project-bugfix-round2-agent-lifetime.test.js",
+      "bytes": 5522,
+      "normalizedBytes": 5522,
+      "sha256": "1f19a90f033e8fa6d6c87b7a9e11fc4002649b7932012cf427593429edc03d44"
+    },
+    {
+      "file": "tests/project-bugfix-round2-agent-surface.test.js",
+      "bytes": 1245,
+      "normalizedBytes": 1245,
+      "sha256": "b959d3ba597e861a0794c90823c5ad856c472a92ce0ac8f724f8b074819f9f18"
+    },
+    {
+      "file": "tests/project-bugfix-round2-battle.test.js",
+      "bytes": 7106,
+      "normalizedBytes": 7106,
+      "sha256": "d3d8e71461cee1bd6b54b24ab59cf667712166a1f3d0aef6aad2aa6af2e4637a"
+    },
+    {
+      "file": "tests/project-bugfix-round2-expedition-chests.test.js",
+      "bytes": 3391,
+      "normalizedBytes": 3390,
+      "sha256": "edde742843598d898eb844f12dd4b2314e2cd8fe7a79ad6c5b500dbbcf472d11"
+    },
+    {
+      "file": "tests/project-bugfix-round2-expedition-commission.test.js",
+      "bytes": 1922,
+      "normalizedBytes": 1922,
+      "sha256": "d8957ee2e1fa351eaf8be71f31ad9d9ad0e3d36d9d50a93a87edfd08eaffc1bf"
+    },
+    {
+      "file": "tests/project-bugfix-round2-expedition-nest.test.js",
+      "bytes": 7817,
+      "normalizedBytes": 7816,
+      "sha256": "6ba37e2d56ba77536df4c03edf30bff2095e68125c41bd8a0c256fe65815d7d8"
+    },
+    {
+      "file": "tests/project-bugfix-round2-expedition-story.test.js",
+      "bytes": 4155,
+      "normalizedBytes": 4154,
+      "sha256": "5522a0363a4cd6f440693a7e02199bf234c51ad91287e1d72d6d8360477e4d64"
+    },
+    {
+      "file": "tests/project-bugfix-round2-input.test.js",
+      "bytes": 3602,
+      "normalizedBytes": 3602,
+      "sha256": "00af340af5394713301ece8b7effb97b63f8d2a120c6a1c59c03c922c8855909"
+    },
+    {
+      "file": "tests/project-bugfix-round2-records.test.js",
+      "bytes": 2831,
+      "normalizedBytes": 2831,
+      "sha256": "fbd0255bd8ad7b3f03de254584f71a5c00a41efc8984b9171f6daecee04a4e62"
+    },
+    {
+      "file": "tests/project-bugfix-round2-storage-bag.test.js",
+      "bytes": 12894,
+      "normalizedBytes": 12894,
+      "sha256": "be9d51798f96c36d811c22880aff5421670d5f736c7c207303783a7700d175dd"
+    },
+    {
+      "file": "tests/project-bugfix-storage-1023.test.js",
+      "bytes": 7242,
+      "normalizedBytes": 7242,
+      "sha256": "7b69ce4887f476919c91b42556bd6447cb7801e22df5d874e055789f897d4b6e"
+    },
+    {
+      "file": "tests/provoke-instance-review.test.js",
+      "bytes": 2296,
+      "normalizedBytes": 2296,
+      "sha256": "eed16c763d7153176ab6a734bdb2dd592412553ecf5d6d6f64341a591997a8bc"
+    },
+    {
+      "file": "tests/provoke-target-contract.test.js",
+      "bytes": 6366,
+      "normalizedBytes": 6366,
+      "sha256": "f1f10b51f562b95606dd4386ebcd579d1e206acf1593c77d8d594248210935f1"
+    },
+    {
+      "file": "tests/public-controls-equipment.test.js",
+      "bytes": 3174,
+      "normalizedBytes": 3113,
+      "sha256": "465d18dc6a9ac242d2a068c93201b70da7924828bdedb3b962b3d1bad36b971e"
+    },
+    {
+      "file": "tests/public-controls-tooltip.test.js",
+      "bytes": 1642,
+      "normalizedBytes": 1642,
+      "sha256": "f93fb390a9c69674eb803e87040e90fa04ec2cbee854b6345e7d8b894457ce11"
+    },
+    {
+      "file": "tests/quality-config.test.js",
+      "bytes": 2015,
+      "normalizedBytes": 2015,
+      "sha256": "9d040db71bbf942a9c2df49cb67127c9dfee915860e2690188d8decc708905aa"
+    },
+    {
+      "file": "tests/quick-nav-async.test.js",
+      "bytes": 2364,
+      "normalizedBytes": 2364,
+      "sha256": "489120c2bfcafb0af7746929f8f8baae859ac4cb1a721a112052d94f6a9fed71"
+    },
+    {
+      "file": "tests/r2a-commands.test.js",
+      "bytes": 9897,
+      "normalizedBytes": 9897,
+      "sha256": "6c5d5db85d101926c04fc8616ebc34e5d19af2615abc4502435fd514fb92226a"
+    },
+    {
+      "file": "tests/r2a-recovery.test.js",
+      "bytes": 6325,
+      "normalizedBytes": 6325,
+      "sha256": "8e49b2088f6bef59a40e2a2deed7a48ab9f96bb91aa1c96d86b222ff9c1796a4"
+    },
+    {
+      "file": "tests/r3-0-command-guards.test.js",
+      "bytes": 7469,
+      "normalizedBytes": 7297,
+      "sha256": "1b6421ed820f2fbb7335bbdc9d7717e6bbfbb3388dc955cc7b254a0f13d36761"
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "bytes": 22938,
+      "normalizedBytes": 22511,
+      "sha256": "9ceafe3ac71716a2ec2629b7df7efda82583950bbc06c67e8eda74fa35a50048"
+    },
+    {
+      "file": "tests/r3-b-action-boundary.repro.test.js",
+      "bytes": 7193,
+      "normalizedBytes": 7035,
+      "sha256": "0e33bd4a7d88f72f345359a3db818c0fd51fc09442ce6e2eaf642414126556e9"
+    },
+    {
+      "file": "tests/r5a-map-snapshot.test.js",
+      "bytes": 4975,
+      "normalizedBytes": 4975,
+      "sha256": "ce1fd3cbc2f73ebc66334f203d01fa711b4dc6c9193316c21549b9ff59745cee"
+    },
+    {
+      "file": "tests/r5a-session-menu.test.js",
+      "bytes": 11232,
+      "normalizedBytes": 11232,
+      "sha256": "166f5bc149813dd619db17b6dfc32f5b1b86f8249bb738ebf6e66e6d73c97f1c"
+    },
+    {
+      "file": "tests/r5b-dev-info.test.js",
+      "bytes": 632,
+      "normalizedBytes": 632,
+      "sha256": "5315d3072d130d9d486f5906aa0dfdec051cc6fcf4bcdddd5be741be203e721a"
+    },
+    {
+      "file": "tests/r5b-route-overlay.test.js",
+      "bytes": 2630,
+      "normalizedBytes": 2630,
+      "sha256": "9072984b4c8f8769c67bc56e8f9aea545f6fc2502b376ff70d226f2fabfa0a43"
+    },
+    {
+      "file": "tests/r6-story-flow.repro.test.js",
+      "bytes": 7662,
+      "normalizedBytes": 7662,
+      "sha256": "d5f06b599a4b9559a447c1631e007a083f35f695dfa7f26778d21e3da7d107d3"
+    },
+    {
+      "file": "tests/r6-story.test.js",
+      "bytes": 9177,
+      "normalizedBytes": 9177,
+      "sha256": "bbc090e2876700931b310d0cb4121ea9b4e6cbe6b07b2942a44ce9f5506b3433"
+    },
+    {
+      "file": "tests/r7a-battle-orders.test.js",
+      "bytes": 4918,
+      "normalizedBytes": 4870,
+      "sha256": "09afec8db5792aa94196a9ce90988817b60c77677ad88f3096a076368a626795"
+    },
+    {
+      "file": "tests/r7a-encounter-selector.test.js",
+      "bytes": 2335,
+      "normalizedBytes": 2335,
+      "sha256": "0d61226e18ddf0b4e40f6dcae7f0bd5ed8c8b575311bfc633f4c0e3277560dc4"
+    },
+    {
+      "file": "tests/r7a-qa-host.test.js",
+      "bytes": 904,
+      "normalizedBytes": 889,
+      "sha256": "4e6f98e1ef3f1a0f55cce2c603d495ded43a3779950ccb38fdda16e1466e008d"
+    },
+    {
+      "file": "tests/r7a-qa-live.test.js",
+      "bytes": 2650,
+      "normalizedBytes": 2650,
+      "sha256": "59bcca54113d5148e3861ea298ccd5a7d8cb88a4b553975a3dfa5932d65a5835"
+    },
+    {
+      "file": "tests/r7a-scenes-integration.test.js",
+      "bytes": 2772,
+      "normalizedBytes": 2772,
+      "sha256": "7b5d7a58704da52bc6d84447f1d0a491a8edc0a31724322004958bc27e72761c"
+    },
+    {
+      "file": "tests/r7b-feedback.test.js",
+      "bytes": 17434,
+      "normalizedBytes": 17434,
+      "sha256": "3a318d9d58d5cf135e0ec75d9c72d7275e8cdd128c1994e79965dd488c7b8e08"
+    },
+    {
+      "file": "tests/random-stream-version.test.js",
+      "bytes": 3239,
+      "normalizedBytes": 3239,
+      "sha256": "8f2ceb55df3be145b15eb5332ca9c6ba9f3e54f477d18536923e20f2b443cbb0"
+    },
+    {
+      "file": "tests/random.test.js",
+      "bytes": 2670,
+      "normalizedBytes": 2615,
+      "sha256": "5962feb541f7ea813317fa90982f13780df757009a861403736dc25b160ef174"
+    },
+    {
+      "file": "tests/rapid-fire.test.js",
+      "bytes": 5858,
+      "normalizedBytes": 5725,
+      "sha256": "f34f4458b876a6d419581a1ddc32d99958688df252584fdc058e7a64fd352220"
+    },
+    {
+      "file": "tests/rations-thumbnail-alias.test.js",
+      "bytes": 4318,
+      "normalizedBytes": 4318,
+      "sha256": "22f0714f4319937833d49708e28b9f6b8f09bbe5605ba7763859c930b895e6a1"
+    },
+    {
+      "file": "tests/reactive-draw-cast-continuation.test.js",
+      "bytes": 7787,
+      "normalizedBytes": 7787,
+      "sha256": "28dbe5ec89f44477dfa8b7417d186ec1f0037ac5c88ca2ecdb59bb4ede08a912"
+    },
+    {
+      "file": "tests/real-return-query.test.js",
+      "bytes": 3873,
+      "normalizedBytes": 3873,
+      "sha256": "b1eb6b2de2a976549ff4ac3d587c53f08c580bd82c2305c1135ce46adb3b6834"
+    },
+    {
+      "file": "tests/recoverable-pair-contract.test.js",
+      "bytes": 1539,
+      "normalizedBytes": 1539,
+      "sha256": "97c673c9f7f1124a813c011bf6378c29467496f8ab26dc5e4996b8ee6f2be954"
+    },
+    {
+      "file": "tests/recoverable-pair-types.test.js",
+      "bytes": 6968,
+      "normalizedBytes": 6968,
+      "sha256": "ea0c71c834255ff60076aa3bcf5ea7e1b08dd82c38f41726fe8d059c4f81b75e"
+    },
+    {
+      "file": "tests/render-scheduler.test.js",
+      "bytes": 3247,
+      "normalizedBytes": 3247,
+      "sha256": "6c6bdd7ae29ca6320ab357fab48805f85f5a23580146070a1dcbf79d15ccc9ef"
+    },
+    {
+      "file": "tests/renderer-resource-lifecycle.test.js",
+      "bytes": 6160,
+      "normalizedBytes": 6160,
+      "sha256": "c48f3291902d6307a1eddc8e18cb08d9864371dec413950cbfbee64207a6cc59"
+    },
+    {
+      "file": "tests/renderer-road-invalidation.test.js",
+      "bytes": 3788,
+      "normalizedBytes": 3788,
+      "sha256": "06de9547ce7252258e5c9c87463f32237b533f247068e6de34dfcfe7316cb043"
+    },
+    {
+      "file": "tests/requested-card-batch.test.js",
+      "bytes": 3912,
+      "normalizedBytes": 3912,
+      "sha256": "66c7061bf4c9b43374b56dd8e0aedfefe04d6b5584a90e0e779be0122bc4fdd7"
+    },
+    {
+      "file": "tests/requested-card-integration.test.js",
+      "bytes": 14290,
+      "normalizedBytes": 14290,
+      "sha256": "a1aa1b89705397da79a5e33972a316fe30216b6a6efb72b7faee80c2674cd23b"
+    },
+    {
+      "file": "tests/requested-equipment-effects.test.js",
+      "bytes": 9635,
+      "normalizedBytes": 9635,
+      "sha256": "47dee7f62c39fca0fae23c72f9a179e5c09751e365d2fd4b2182f0647e3be6fb"
+    },
+    {
+      "file": "tests/required-infusion-play.test.js",
+      "bytes": 9164,
+      "normalizedBytes": 9164,
+      "sha256": "2ae0bc128fff6a3c926586bcd319a772a562e2cffe658c65c291838466d87eb9"
+    },
+    {
+      "file": "tests/reserved-card-id-regression.test.js",
+      "bytes": 5611,
+      "normalizedBytes": 5611,
+      "sha256": "0d4557d0e6b73c13fac2d003791c14df74c2b549a85515059d4eab0981a043c0"
+    },
+    {
+      "file": "tests/resource-presentation-benchmark.test.js",
+      "bytes": 5741,
+      "normalizedBytes": 5741,
+      "sha256": "5261affa4cbd686050f579469e0747859c54f8d8262378c57cdd429bdc9e38a7"
+    },
+    {
+      "file": "tests/resource-presentation-cache.test.js",
+      "bytes": 3651,
+      "normalizedBytes": 3651,
+      "sha256": "06e5fcb38bb63e23d7cd05f33db14727dba3f7270286472779ef8b434cef60d5"
+    },
+    {
+      "file": "tests/restoration-potion-observation.test.js",
+      "bytes": 8047,
+      "normalizedBytes": 8047,
+      "sha256": "a239d5414f8f2f923436f05f27b9d7563b839ec53b012c106bf7f5504c4babbc"
+    },
+    {
+      "file": "tests/restore-fixture-startup.test.js",
+      "bytes": 2334,
+      "normalizedBytes": 2334,
+      "sha256": "f75a4a905d57b99f1c89ac6811e3c1546d5bf5199123733de4ad997521a3b57c"
+    },
+    {
+      "file": "tests/restore-flight-stages.test.js",
+      "bytes": 4608,
+      "normalizedBytes": 4608,
+      "sha256": "ef82997be244e8bea0aacf7006a975e9a33b4ffd714448c9ab75cd14d92dda69"
+    },
+    {
+      "file": "tests/retired-scenes-publication.test.js",
+      "bytes": 5097,
+      "normalizedBytes": 5097,
+      "sha256": "c7aafa650bfd4f8280ff4a8cc8be1d8eadff6819f67c52c5184977d00d80e440"
+    },
+    {
+      "file": "tests/reward-acquisition-motion.test.js",
+      "bytes": 11524,
+      "normalizedBytes": 11524,
+      "sha256": "0757e6d93186b3ffb740c89e43381e4a663759a56dddba1d1101a29285e6767e"
+    },
+    {
+      "file": "tests/reward-action-clipping.test.js",
+      "bytes": 3612,
+      "normalizedBytes": 3612,
+      "sha256": "7748a5fed1c18520960081b895d9890b7c339b9a0c0fb87a954a3bffe185753e"
+    },
+    {
+      "file": "tests/reward-atomicity-cloud.test.js",
+      "bytes": 9660,
+      "normalizedBytes": 9660,
+      "sha256": "57b6a40eef648098ae40e1d5b1ae73e18b5a0a47f32c190297824e4a20b24d22"
+    },
+    {
+      "file": "tests/reward-capacity-organizer.test.js",
+      "bytes": 8601,
+      "normalizedBytes": 8601,
+      "sha256": "28c20f8bce988acd67f113fe51b3af31592534f62768d5f3794ee35ac008f751"
+    },
+    {
+      "file": "tests/reward-capacity-preview.test.js",
+      "bytes": 13104,
+      "normalizedBytes": 12911,
+      "sha256": "e4d1036694120fe5700dd446361eb31770c51a496424ac2c504557798d2aa39a"
+    },
+    {
+      "file": "tests/reward-card-feedback.test.js",
+      "bytes": 3746,
+      "normalizedBytes": 3746,
+      "sha256": "edc267ad0e8f73de52848ed2abb9275304cc21ffbdbd6eefe39bafaec3fdbe9a"
+    },
+    {
+      "file": "tests/reward-coins-overview.test.js",
+      "bytes": 7203,
+      "normalizedBytes": 7203,
+      "sha256": "052c08d21a16dcf4933f618e008725453ea986e539b4585f1f85d19c8adcd785"
+    },
+    {
+      "file": "tests/reward-completion-receipt.test.js",
+      "bytes": 2147,
+      "normalizedBytes": 2147,
+      "sha256": "b8896f5081c4d75b7e24a9155f2dd64bde12bf69c608d24508985b2bdf2edee1"
+    },
+    {
+      "file": "tests/reward-frame-review.test.js",
+      "bytes": 7468,
+      "normalizedBytes": 7468,
+      "sha256": "b8c21ef8a95869bf23439e4a9627238e479b32a5a22ec704b467f73586e1844a"
+    },
+    {
+      "file": "tests/reward-picker-continuity.test.js",
+      "bytes": 7835,
+      "normalizedBytes": 7835,
+      "sha256": "41303fd83c4f9d1a3b791cddd5e3df74032f248ab225b0ac0337d0747412447c"
+    },
+    {
+      "file": "tests/reward-picker-heading.test.js",
+      "bytes": 1432,
+      "normalizedBytes": 1432,
+      "sha256": "718a9be7d6c86b4e0e9247bfb6381cc435f4ee28e80356bd646463ceef791030"
+    },
+    {
+      "file": "tests/reward-presentation-contract.test.js",
+      "bytes": 3165,
+      "normalizedBytes": 3165,
+      "sha256": "3e0d0b584eddbe214d60c6bcc16fd032b3b8096fea8cf75cb8d2d08bb78e9a36"
+    },
+    {
+      "file": "tests/reward-receipt-clarity.test.js",
+      "bytes": 4937,
+      "normalizedBytes": 4937,
+      "sha256": "b73fcc54dcde400ed8535fd9835fba960023d5b9efad8b491fb46cc36cf981b2"
+    },
+    {
+      "file": "tests/reward-save-interruptions.test.js",
+      "bytes": 12252,
+      "normalizedBytes": 12252,
+      "sha256": "8e9ce77051b5700c1987c2bdd9c6cf61af3452049ce97942c9f2805fab9621c0"
+    },
+    {
+      "file": "tests/reward-settlement-unification.test.js",
+      "bytes": 7563,
+      "normalizedBytes": 7563,
+      "sha256": "28e306d76774d8d216394848e4a18484d6ab58ebd7cee444c7a5a583a87c904d"
+    },
+    {
+      "file": "tests/rooms-review-remediation.test.js",
+      "bytes": 5135,
+      "normalizedBytes": 5135,
+      "sha256": "dc22c2473cb5a2412e5913b67ac958869d88932692f275bc2db81eaf1368a41a"
+    },
+    {
+      "file": "tests/rule-config.test.js",
+      "bytes": 3405,
+      "normalizedBytes": 3405,
+      "sha256": "be1aa3bbfe7a926235c20efbc9b33688fe9789ce81bbfa897302f4679e1e3a92"
+    },
+    {
+      "file": "tests/run-architecture.test.js",
+      "bytes": 5692,
+      "normalizedBytes": 5692,
+      "sha256": "0090442a842eeb328f743026526e9d94c30ebed1b815b161aadb7d637597c509"
+    },
+    {
+      "file": "tests/run-battle-stats-persistence-cloud.test.js",
+      "bytes": 7650,
+      "normalizedBytes": 7650,
+      "sha256": "9dd64feb0803c2957fadbc46aaaaf32248105c2cef55307e1a748e61204aa8ab"
+    },
+    {
+      "file": "tests/run-domain-commands.test.js",
+      "bytes": 5144,
+      "normalizedBytes": 5144,
+      "sha256": "0b8fe451da92b9c8ebaec1f51d901df9cf2110ca320a24a952eee139a5151b13"
+    },
+    {
+      "file": "tests/run-event-controller-ownership.test.js",
+      "bytes": 2190,
+      "normalizedBytes": 2149,
+      "sha256": "f13487912d77b97e07a3f9d4e9d619028cbb4a5987f3ded0af7fc1cf4eb1c027"
+    },
+    {
+      "file": "tests/run-fallback-preservation.test.js",
+      "bytes": 8938,
+      "normalizedBytes": 8777,
+      "sha256": "cef3611c94d635a0fb93771358f30ca8ec22e332be03bb853e52477add47b8a5"
+    },
+    {
+      "file": "tests/run-top-bar-actions.test.js",
+      "bytes": 9269,
+      "normalizedBytes": 9269,
+      "sha256": "155ab0dfb4f51dfc1ebe1770283cfb18b3fa454153572557f96c970e033dee42"
+    },
+    {
+      "file": "tests/run-top-bar-consistency.test.js",
+      "bytes": 11278,
+      "normalizedBytes": 11278,
+      "sha256": "c395ab4fee5ba47909fad84e4448aaecb3d59adc52d274f5b2d29951a41bc716"
+    },
+    {
+      "file": "tests/runtime-asset-aliases.test.js",
+      "bytes": 22786,
+      "normalizedBytes": 22786,
+      "sha256": "bb2de51f1f99d5242d36cebdda2e596b987ddd9552704e6d3854eaaa6671790d"
+    },
+    {
+      "file": "tests/runtime-asset-publication.test.js",
+      "bytes": 10349,
+      "normalizedBytes": 10349,
+      "sha256": "5373b6286bf680361a3b9dcff3f651ad686f1cd8cd9bf212b497204820a663ab"
+    },
+    {
+      "file": "tests/runtime-asset-redundancy-plugin.test.js",
+      "bytes": 19589,
+      "normalizedBytes": 19589,
+      "sha256": "bc132308deba0ccccc10e432096e88bf47393423fd5597df7540ef8b94b3bb72"
+    },
+    {
+      "file": "tests/runtime-asset-redundancy.test.js",
+      "bytes": 34495,
+      "normalizedBytes": 33959,
+      "sha256": "2376934c3314b0f20deb4801262760d50a224c3f79da0463233f928cc0047786"
+    },
+    {
+      "file": "tests/runtime-event-timing.local.test.js",
+      "bytes": 7329,
+      "normalizedBytes": 7329,
+      "sha256": "742e39073e94e28cf4496118748d34aea8683dcf28c89c9ced8cbda79361731f"
+    },
+    {
+      "file": "tests/runtime-hotpaths.test.js",
+      "bytes": 6368,
+      "normalizedBytes": 6368,
+      "sha256": "71a6b7ba088eebad9c2c8eca2163f348fd711c81b797ac02110fae878c171abd"
+    },
+    {
+      "file": "tests/runtime-trace-alignment.test.js",
+      "bytes": 6901,
+      "normalizedBytes": 6901,
+      "sha256": "332a31645893cd2923512db167d586eea4718a6c0eb4d52bb1105b5dc5aace7a"
+    },
+    {
+      "file": "tests/runtime-trace-modal.test.js",
+      "bytes": 14462,
+      "normalizedBytes": 14462,
+      "sha256": "2c87dbec4f7a5ef164a7e4f40ce755f2a6e8a4703674369923191dc55bdb5939"
+    },
+    {
+      "file": "tests/runtime-trace-stages.local.test.js",
+      "bytes": 3933,
+      "normalizedBytes": 3933,
+      "sha256": "9029554561a2244111729abb1741d175f7661feeae4161f004f55063fb55721e"
+    },
+    {
+      "file": "tests/runtime-trace.local.test.js",
+      "bytes": 5977,
+      "normalizedBytes": 5977,
+      "sha256": "d4cdba09109c7a216f23aa72bcb18c9a621bfe926b78d528767e5f3a8b53ed9d"
+    },
+    {
+      "file": "tests/sacrifice-layout-readability.test.js",
+      "bytes": 5064,
+      "normalizedBytes": 5064,
+      "sha256": "9c576ce02a2458643d50755ec19f74409d64c2eb299de53909ed66d397b0da19"
+    },
+    {
+      "file": "tests/sacrifice-scroll-stability.test.js",
+      "bytes": 8642,
+      "normalizedBytes": 8485,
+      "sha256": "b3de1295a44a6cdf8bf02bdb295f18d3e4af4081a4aad14b717b16e1d7c6dbfa"
+    },
+    {
+      "file": "tests/safe-pearl-access.test.js",
+      "bytes": 11439,
+      "normalizedBytes": 11255,
+      "sha256": "f0bcf7a67ad31f73defee46d0ef3533175dddf336e2d9a76734fe05023374297"
+    },
+    {
+      "file": "tests/save-compat.test.js",
+      "bytes": 10386,
+      "normalizedBytes": 10181,
+      "sha256": "d741df3bd0e7987019236f61b1f9437a631f9e61910c45549223937f72a79efb"
+    },
+    {
+      "file": "tests/save-management-review.test.js",
+      "bytes": 2331,
+      "normalizedBytes": 2331,
+      "sha256": "053abcdcfbb4b306c2dba14036f5f69f85430005f0fa8c7dbe818c5f5aaf8e31"
+    },
+    {
+      "file": "tests/save-prev-fallback.test.js",
+      "bytes": 8600,
+      "normalizedBytes": 8444,
+      "sha256": "5e49f4fd9d0710b1ed14603cfb70a5172590c1dfafaaa79b36c18c92a6c80502"
+    },
+    {
+      "file": "tests/save-recovery-session-feedback.test.js",
+      "bytes": 4308,
+      "normalizedBytes": 4223,
+      "sha256": "eea840ba71ff1bc2d0bf6c7e0e206b5798b44f7e97ee0425d436cdae218e6c9f"
+    },
+    {
+      "file": "tests/save-slot-delete-results.test.js",
+      "bytes": 9280,
+      "normalizedBytes": 9104,
+      "sha256": "f247e620c28012cb289e3ae2b96e0760f935b90f96ed9274220b8e18755fa2e4"
+    },
+    {
+      "file": "tests/save-slot-lock-interleaving.test.js",
+      "bytes": 5405,
+      "normalizedBytes": 5405,
+      "sha256": "466a5e663552343be3a3fab7fee4ffc809cb0e21bd2d1175f90d0629682bd7a6"
+    },
+    {
+      "file": "tests/scavenge-mode-feedback.test.js",
+      "bytes": 4451,
+      "normalizedBytes": 4451,
+      "sha256": "50e9bbcc31e7edf7f5e7407de17fe2f30356004adbc942c873a858c3a5e8cf20"
+    },
+    {
+      "file": "tests/schema-op-coverage.test.js",
+      "bytes": 7536,
+      "normalizedBytes": 7536,
+      "sha256": "515c452a866da8d80bfcf39736c171e13cd1e579ef91660b784f7c00f2d41023"
+    },
+    {
+      "file": "tests/screen-entry-performance.test.js",
+      "bytes": 4110,
+      "normalizedBytes": 4110,
+      "sha256": "e7b95f838f3575efd4abaea965745ab1265b25e94629a45c7246b2b8c3c7c00b"
+    },
+    {
+      "file": "tests/scripts-contract.test.js",
+      "bytes": 2949,
+      "normalizedBytes": 2949,
+      "sha256": "d3e66a99e603f400085a9183a753305884a450c597784a44102b0bb6eaa93e0c"
+    },
+    {
+      "file": "tests/secondary-glass-style.test.js",
+      "bytes": 4213,
+      "normalizedBytes": 4213,
+      "sha256": "4525e9ddad459814920bfcfaad7634332c331b72679f49771be0b294a7ed9d5b"
+    },
+    {
+      "file": "tests/selection-state-motion.test.js",
+      "bytes": 6906,
+      "normalizedBytes": 6906,
+      "sha256": "6089f7ce3fec0274c35366063461f32195ab736ff1b83c887cd319bab3c0bbaa"
+    },
+    {
+      "file": "tests/selection-state-query-work.test.js",
+      "bytes": 5574,
+      "normalizedBytes": 5574,
+      "sha256": "8fa3a5935f9412110b0c757eb146d16f74075367f528f7920a2a76937ae96a4e"
+    },
+    {
+      "file": "tests/selftest-paths.test.js",
+      "bytes": 1140,
+      "normalizedBytes": 1140,
+      "sha256": "afdc98e0d7ff3d12d68c9fb64ea674ac42a3cdd483bb626268efccacdfcd2454"
+    },
+    {
+      "file": "tests/semantic-icons.test.js",
+      "bytes": 5231,
+      "normalizedBytes": 5231,
+      "sha256": "8b1e9be02fbd256a384a3c383fbf7fee346839486121a165919714f6ed608893"
+    },
+    {
+      "file": "tests/session-base-persistence.test.js",
+      "bytes": 5590,
+      "normalizedBytes": 5590,
+      "sha256": "5d0e2a796bf07c97936102f641c9209360bd685b1b25d768cc2f736e1ede1358"
+    },
+    {
+      "file": "tests/settings-audio.test.js",
+      "bytes": 3303,
+      "normalizedBytes": 3303,
+      "sha256": "6cf46b09eafeebde9070016438f4968016fa498b6e1604ed32833f32ff94bbe6"
+    },
+    {
+      "file": "tests/settings-page.test.js",
+      "bytes": 10539,
+      "normalizedBytes": 10539,
+      "sha256": "8055312a50e623173a41791d59d14a261d8a99782f499c6d9b6655ab5776e3c1"
+    },
+    {
+      "file": "tests/setup-commit-gate.test.js",
+      "bytes": 4849,
+      "normalizedBytes": 4849,
+      "sha256": "5105d56d104b87d6f238c49d4b7c77b3e0583f4ae6d6f3e923d1590097617367"
+    },
+    {
+      "file": "tests/shadowed-card-art.test.js",
+      "bytes": 4204,
+      "normalizedBytes": 4204,
+      "sha256": "6d6e31acb1809221bf76c60b88d1dccda94d8da79976d4fa22ab994ed7f2a75b"
+    },
+    {
+      "file": "tests/shop-carry-cleanup.test.js",
+      "bytes": 3968,
+      "normalizedBytes": 3968,
+      "sha256": "ab83330f0d346abea7aa6a4fb7597aa2d27761b246d64638bc98764e044c7d8e"
+    },
+    {
+      "file": "tests/shop-currency-guidance.test.js",
+      "bytes": 11331,
+      "normalizedBytes": 11331,
+      "sha256": "1916807b95867f3481632db73d3593c18c85b98dcbd200cacb3ed1c94a10fa0a"
+    },
+    {
+      "file": "tests/shop-detail-focus.test.js",
+      "bytes": 9678,
+      "normalizedBytes": 9678,
+      "sha256": "b2adb7c8c8e300143e0d2f038df9e35c564ae64c43ad3378e1f73dfa72b95350"
+    },
+    {
+      "file": "tests/shop-sell-stored-guard.test.js",
+      "bytes": 3299,
+      "normalizedBytes": 3299,
+      "sha256": "fb58beabc620a38a3a42a939ba8400aab0a50398dccae3d94177b2915a26fd64"
+    },
+    {
+      "file": "tests/shop-settlement-unification.test.js",
+      "bytes": 12163,
+      "normalizedBytes": 12163,
+      "sha256": "acac3d08c025f6d7aa49ac0d2607d6509e80fe5509b7be0579f88820e53f39f8"
+    },
+    {
+      "file": "tests/shop-transaction-lifecycle.test.js",
+      "bytes": 16850,
+      "normalizedBytes": 16850,
+      "sha256": "cac63d66bbbdcc4afb6af082ecc3515dd1fcbd5b7a3d63d9c1bee1067ea41773"
+    },
+    {
+      "file": "tests/skull-sword-effective-session.test.js",
+      "bytes": 32117,
+      "normalizedBytes": 32117,
+      "sha256": "9f34a1c4f276cd1736d3d99a9e61e73d51618486e59a2e2de08aaa1e83b081b6"
+    },
+    {
+      "file": "tests/sound-diagnostic-policy.test.js",
+      "bytes": 738,
+      "normalizedBytes": 738,
+      "sha256": "94d2d41b1b71122dc79a953cbbda9baaaad459f7108d785d9fd5f2fffe17ea3a"
+    },
+    {
+      "file": "tests/sound-f4ngy-draw.test.js",
+      "bytes": 2659,
+      "normalizedBytes": 2623,
+      "sha256": "27d942343440918be10cb017b8052d1da119f2bebd8f9917dd0d740d69578eb4"
+    },
+    {
+      "file": "tests/sound-lifecycle.test.js",
+      "bytes": 10821,
+      "normalizedBytes": 10617,
+      "sha256": "7bf21bd432e9527f473913e00ede258f0eb580b5ccbc9b8825cdbc57105ae554"
+    },
+    {
+      "file": "tests/sound-music-backend.test.js",
+      "bytes": 3217,
+      "normalizedBytes": 3217,
+      "sha256": "f3af8536b4dcb372b2e15bb8576928c3cc37d71624afd5eb5bfe533db01ca355"
+    },
+    {
+      "file": "tests/sound-music-lifecycle.test.js",
+      "bytes": 13696,
+      "normalizedBytes": 13696,
+      "sha256": "9eeaa8435607d522894d93041b1eedcb235bffc9113e6c5ef8fa5432ab731f4e"
+    },
+    {
+      "file": "tests/sound-music.test.js",
+      "bytes": 8771,
+      "normalizedBytes": 8771,
+      "sha256": "33d837c0e9bb8ae18cd00369c7bf7c1d1037dfa6ee9dbbb010188a5abd9991a7"
+    },
+    {
+      "file": "tests/sound-muted-startup-perf.test.js",
+      "bytes": 6913,
+      "normalizedBytes": 6793,
+      "sha256": "991ec9f2ed647ffba0371f9c772869d8d7a1bf020e097b7cea36399164e48521"
+    },
+    {
+      "file": "tests/sound-policy.test.js",
+      "bytes": 1919,
+      "normalizedBytes": 1919,
+      "sha256": "2cce10c47165d56215d0dd25ed1bf3fbf81d28afc254b3f86f4296a4faeb524b"
+    },
+    {
+      "file": "tests/sound-real-foley.test.js",
+      "bytes": 3569,
+      "normalizedBytes": 3515,
+      "sha256": "2ef2bdbcfce591d747e078937a8910c401e7df057714931baff96da1669a8f43"
+    },
+    {
+      "file": "tests/sound-safe-slot-foley.test.js",
+      "bytes": 4634,
+      "normalizedBytes": 4564,
+      "sha256": "47c5d1c20ca20442ed6399d4e31405c863d36baf3d284ac886397b2bf4ffa124"
+    },
+    {
+      "file": "tests/sound-sample-only.test.js",
+      "bytes": 6889,
+      "normalizedBytes": 6790,
+      "sha256": "bd926a129e9e6472d0b418866ac1ab92bce57f7ace1c25b60384522497ac2cca"
+    },
+    {
+      "file": "tests/sound-web-library.test.js",
+      "bytes": 3142,
+      "normalizedBytes": 3142,
+      "sha256": "c98a65d0faae7cf1e6297887507008dbfff8ca5b7cd775064774db4c21fa8bc0"
+    },
+    {
+      "file": "tests/startup-guard.test.js",
+      "bytes": 6644,
+      "normalizedBytes": 6644,
+      "sha256": "86b7977fc53941702372c0106d4bba45e94cbc1d2450f21c624a064cdf131719"
+    },
+    {
+      "file": "tests/startup-transition.test.js",
+      "bytes": 4284,
+      "normalizedBytes": 4284,
+      "sha256": "469a7d63eab1dfc706401dada77c18b66a1177c491f7b6675dd17fee0341ebf8"
+    },
+    {
+      "file": "tests/status-icon-consistency.test.js",
+      "bytes": 1147,
+      "normalizedBytes": 1147,
+      "sha256": "042d3a6354616158ad7f11668c207fc9a0c5dddb8746b31990cd573f3e3fdc53"
+    },
+    {
+      "file": "tests/stealth-term.test.js",
+      "bytes": 1438,
+      "normalizedBytes": 1438,
+      "sha256": "8d2638c3412b20dbbb795a7d0b83c23c79cdf53128af655b9e6799397f07cb4c"
+    },
+    {
+      "file": "tests/stellar-divination.test.js",
+      "bytes": 8148,
+      "normalizedBytes": 8021,
+      "sha256": "772381eb5c872eac7003edd5094ff172bc3f1d7db319469c1cba2c340e1abda1"
+    },
+    {
+      "file": "tests/storage-review-remediation.test.js",
+      "bytes": 12782,
+      "normalizedBytes": 12782,
+      "sha256": "782f459417ebefc0f43d71402c4b74538731d457f051b2e9e3460c4d6eaabe81"
+    },
+    {
+      "file": "tests/strict-foundations-types.fixture.ts",
+      "bytes": 7269,
+      "normalizedBytes": 7269,
+      "sha256": "b2285ea8e20055114aaae6152fd2319a27fa2ab80e13955e12d715545ba972e2"
+    },
+    {
+      "file": "tests/strict-hand-selection-types.fixture.ts",
+      "bytes": 4253,
+      "normalizedBytes": 4157,
+      "sha256": "af5784438253caee61bdf6908b7ceff62ee7d4dd876a7dfddbd7da932e3cf5cc"
+    },
+    {
+      "file": "tests/strict-selection-types.fixture.ts",
+      "bytes": 2808,
+      "normalizedBytes": 2763,
+      "sha256": "588213f4cf09cef4aa943cc3ce7cab06fbf2fb6c6c5bc5d1ea2ed09a45a06c01"
+    },
+    {
+      "file": "tests/structured-backupcell.test.js",
+      "bytes": 4686,
+      "normalizedBytes": 4686,
+      "sha256": "96a215c267bc337b1572d779709800fd00e0187f65abc83f20cf6436f1633043"
+    },
+    {
+      "file": "tests/structured-effect-authority.test.js",
+      "bytes": 8458,
+      "normalizedBytes": 8458,
+      "sha256": "b41268a48c6f2d157f6b94b36106cfa6e30a837e8db309050422e8540fb2922c"
+    },
+    {
+      "file": "tests/structured-onplay-battle.test.js",
+      "bytes": 10668,
+      "normalizedBytes": 10447,
+      "sha256": "8359a1f1c9a04d30ecf174503780ebae8cecc6acd173d38df01535387d18acff"
+    },
+    {
+      "file": "tests/sts-attack-presentation.test.js",
+      "bytes": 6018,
+      "normalizedBytes": 6018,
+      "sha256": "1c8858b9b2e0c5a7cb3ae04d90733769b77977bcb0f60daeeb9db457a1104697"
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "bytes": 11985,
+      "normalizedBytes": 11985,
+      "sha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c"
+    },
+    {
+      "file": "tests/sts2-agent-replay.test.js",
+      "bytes": 13078,
+      "normalizedBytes": 13078,
+      "sha256": "e73a3ae9479e41391ab3e6ba7d5e77356b8345d1815d28e9d5bddb1edf2de3ec"
+    },
+    {
+      "file": "tests/sts2-battle-settings-restart.test.js",
+      "bytes": 10620,
+      "normalizedBytes": 10620,
+      "sha256": "a2ca36e2cc1d1d751e1fac80910b0790b8109ad1f5c2c9040767676f36c2ad35"
+    },
+    {
+      "file": "tests/sts2-card-instance.test.js",
+      "bytes": 8850,
+      "normalizedBytes": 8850,
+      "sha256": "386989875beaabb4583edb41efa9e13f0eb1587d2f3052feedb610526caab371"
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "bytes": 6194,
+      "normalizedBytes": 6109,
+      "sha256": "bf9000630f359f54fccab6402cac9d5508a3045c7a5e5f31a73ecd091edad3a2"
+    },
+    {
+      "file": "tests/sts2-combat-facts.test.js",
+      "bytes": 9952,
+      "normalizedBytes": 9745,
+      "sha256": "6f1428e2b557fb4600a8d50e17e9c3caaa58648bc54c90be91447577dbd44da7"
+    },
+    {
+      "file": "tests/sts2-consumed-items.test.js",
+      "bytes": 10059,
+      "normalizedBytes": 10059,
+      "sha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab"
+    },
+    {
+      "file": "tests/sts2-consumed-pile.test.js",
+      "bytes": 7271,
+      "normalizedBytes": 7271,
+      "sha256": "8e247a5a189eaf02f27efc1d29e28cfd379bfed4d9801ba4851c50533baca73a"
+    },
+    {
+      "file": "tests/sts2-consumed-rules.test.js",
+      "bytes": 13066,
+      "normalizedBytes": 13066,
+      "sha256": "fb868064404ffa8ae9b2e9b400ade880ffc50db0cf3b0c8e566806238814f7d0"
+    },
+    {
+      "file": "tests/sts2-cost-lifecycle.test.js",
+      "bytes": 7350,
+      "normalizedBytes": 7350,
+      "sha256": "2273c075d0035fd61bb58251efe1f17c071b322dbb5f9550c23951d23dd5a1ad"
+    },
+    {
+      "file": "tests/sts2-enemy-plan.test.js",
+      "bytes": 6380,
+      "normalizedBytes": 6380,
+      "sha256": "808eb4f0c5bb783016480580c0fd18939fb7ec6192559a2d3fb184016aafcb52"
+    },
+    {
+      "file": "tests/sts2-hand-selection-contract.test.js",
+      "bytes": 10126,
+      "normalizedBytes": 10126,
+      "sha256": "1a61542b605a289e3336ff7a88778975fb50cf3a0ebdc14f33cf22e6607fe8bb"
+    },
+    {
+      "file": "tests/sts2-infusion-flow-1021.test.js",
+      "bytes": 15962,
+      "normalizedBytes": 15962,
+      "sha256": "f14b94dde55968f196dd829277c830a466409641b03b5eb8ce96a8197a424299"
+    },
+    {
+      "file": "tests/sts2-pile-view-1021.test.js",
+      "bytes": 10741,
+      "normalizedBytes": 10741,
+      "sha256": "c6aa68f89dc6f62e041aa1beedd6089c589c2711be522e16e51ab7f4e9c2e322"
+    },
+    {
+      "file": "tests/sts2-potion-use-1021.test.js",
+      "bytes": 11261,
+      "normalizedBytes": 11261,
+      "sha256": "47185bf524ceb149664d4f611454b3ab7d674819fcc78e3f20abe930fbaf3417"
+    },
+    {
+      "file": "tests/sts2-random-boundary.test.js",
+      "bytes": 5683,
+      "normalizedBytes": 5683,
+      "sha256": "95deac3f94927bab283dfe0c3a2b9dd38859a647250ac5913a03d0d0299698cc"
+    },
+    {
+      "file": "tests/sts2-structured-description.test.js",
+      "bytes": 6402,
+      "normalizedBytes": 6402,
+      "sha256": "e45fe2db050bf023aae3d01e267a65f2dabe0b8518607091f8b5c5ec2ce17ef3"
+    },
+    {
+      "file": "tests/sts2-unified-consumed-pile.test.js",
+      "bytes": 12028,
+      "normalizedBytes": 12028,
+      "sha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161"
+    },
+    {
+      "file": "tests/suggestions-store.test.js",
+      "bytes": 993,
+      "normalizedBytes": 993,
+      "sha256": "5a98687875c374348c0322439c3cff286ea46afb63b32c710173d5ede0bb8435"
+    },
+    {
+      "file": "tests/surface-motion.test.js",
+      "bytes": 10570,
+      "normalizedBytes": 10570,
+      "sha256": "68962f833f022339d4466c8f8ea0fe89f288512fd96c7cd037016eb5d7e29a0d"
+    },
+    {
+      "file": "tests/sword-consume-trigger.test.js",
+      "bytes": 7713,
+      "normalizedBytes": 7624,
+      "sha256": "f5e0d30af504767cc87b138a70e39916ad022a63c886dede89ddba0a9e8baefe"
+    },
+    {
+      "file": "tests/sync-cards-from-live.test.js",
+      "bytes": 6350,
+      "normalizedBytes": 6233,
+      "sha256": "e9204123030c43dcdda792545d9f4fd5808eb3acd73aa83a21e480ca7246ff52"
+    },
+    {
+      "file": "tests/sys03-altar-restore-txn.test.js",
+      "bytes": 29842,
+      "normalizedBytes": 29842,
+      "sha256": "b9e64ddc9e9d414779806b6ef30f50e36c174d58bd8b04df795dc5e0b5f301be"
+    },
+    {
+      "file": "tests/sys03-base-key-restore.test.js",
+      "bytes": 3465,
+      "normalizedBytes": 3465,
+      "sha256": "043d4e0fd673d992678548b8f13d7656466c6b63e37de86b890e35220e7c6129"
+    },
+    {
+      "file": "tests/sys03-loot-shop-txn.test.js",
+      "bytes": 33478,
+      "normalizedBytes": 33478,
+      "sha256": "8ccb24e94fa5678cb4295471cb31fc6022eb77e03ee4ffa83aab73220e1412f8"
+    },
+    {
+      "file": "tests/target-motion-native-cost.test.js",
+      "bytes": 1883,
+      "normalizedBytes": 1883,
+      "sha256": "9a6dcda2433b3fbc21df9cace39965e65f64bbc096772f3b3326e02817cafaa2"
+    },
+    {
+      "file": "tests/target-motion.test.js",
+      "bytes": 7805,
+      "normalizedBytes": 7804,
+      "sha256": "079598b179d34d003d27a9e06af9e8b15ac60587af30e15c60b28c85ed77525b"
+    },
+    {
+      "file": "tests/target-surface.test.js",
+      "bytes": 10898,
+      "normalizedBytes": 10898,
+      "sha256": "a89c3f862dac74aa41366abe40da6da12727ff173d7c9eba4896b0c5283d9d75"
+    },
+    {
+      "file": "tests/term-tip-rule-copy.test.js",
+      "bytes": 3203,
+      "normalizedBytes": 3203,
+      "sha256": "195473bd604f03e53333e20e497e506c4ca7e5ddf6198644dcd2edf34cc5a2f7"
+    },
+    {
+      "file": "tests/term-tips-lazy-boundary.test.js",
+      "bytes": 10228,
+      "normalizedBytes": 10228,
+      "sha256": "3448c60bf1243d6ab544bf6be87168d45cbdf178e5dfed58cb6c2951beff89c9"
+    },
+    {
+      "file": "tests/term-tips-lifecycle.test.js",
+      "bytes": 4592,
+      "normalizedBytes": 4592,
+      "sha256": "1077ebdd53af832cb490a0c60411cb67904fdadd3a54104206d4d4f55c0803b1"
+    },
+    {
+      "file": "tests/terminal-death.test.js",
+      "bytes": 6711,
+      "normalizedBytes": 6711,
+      "sha256": "0999bec5c0f156d248988a8a35bd5961b0721d72212fb430b58a223931b045ed"
+    },
+    {
+      "file": "tests/terminal-persistence.test.js",
+      "bytes": 8513,
+      "normalizedBytes": 8513,
+      "sha256": "0ce4867799ab9334220f2804d380c43ba2348d6fa4ef3a739870a19e54104726"
+    },
+    {
+      "file": "tests/terminal-recovery-matrix.test.js",
+      "bytes": 9337,
+      "normalizedBytes": 9337,
+      "sha256": "a4ad0d684a8f56bd378499e6fa5bbc9b3bf4dccfb4326f2231a88a7853fd5b82"
+    },
+    {
+      "file": "tests/terminal-result-readability.test.js",
+      "bytes": 6268,
+      "normalizedBytes": 6268,
+      "sha256": "cb9a3fd276503ff1a76b6cef83d01878bb06ddb520c9f4fced9dfa18628fd5ce"
+    },
+    {
+      "file": "tests/terminal-retry-copy.test.js",
+      "bytes": 5957,
+      "normalizedBytes": 5957,
+      "sha256": "d31da9855a9fc694e4d247a1d2bba161575b6bf15a07cae8290d7d8461db3072"
+    },
+    {
+      "file": "tests/terminal-settlement.test.js",
+      "bytes": 4590,
+      "normalizedBytes": 4590,
+      "sha256": "49411d48f23ee7c6ed5fc06d9593aa075d6b4e234395f3ffc6976d514558906a"
+    },
+    {
+      "file": "tests/title-resource-review.test.js",
+      "bytes": 5796,
+      "normalizedBytes": 5796,
+      "sha256": "eded78f8b4cadb0c9cf926f046b31fbf668a636a9aff79ad111989fa5fcf6790"
+    },
+    {
+      "file": "tests/title-wallpaper.test.js",
+      "bytes": 6670,
+      "normalizedBytes": 6521,
+      "sha256": "ce37ef58eb72db007464d762766534c2ed54d5aa6a4793f502f754ca50f36b04"
+    },
+    {
+      "file": "tests/tools/axe-dom-audit.mjs",
+      "bytes": 2214,
+      "normalizedBytes": 2214,
+      "sha256": "a1f0356063947522958ba0cc12acf490628400e834aa411146850ac0d40b0ac5"
+    },
+    {
+      "file": "tests/tools/dependency-audit-diagnostics.test.mjs",
+      "bytes": 5793,
+      "normalizedBytes": 5793,
+      "sha256": "05240b7c247f5b5cbe65ce6afc02b0ef41778421897a51d1127cf700624b2af3"
+    },
+    {
+      "file": "tests/tools/dependency-query-security.test.mjs",
+      "bytes": 2170,
+      "normalizedBytes": 2170,
+      "sha256": "e2e1e3c86b8f54c056650a22e87fe7d64508da4d66684227e2e15fe95f1110da"
+    },
+    {
+      "file": "tests/tools/hand-selection.property.test.js",
+      "bytes": 2521,
+      "normalizedBytes": 2521,
+      "sha256": "576c19383fa0ea644e345d73cb638afc31fd06e1242a020a4820672d363df10d"
+    },
+    {
+      "file": "tests/tools/knip.report.json",
+      "bytes": 585,
+      "normalizedBytes": 585,
+      "sha256": "92762d2080f5672a557226e75fa34e07dba0f7b231a5d0997ffb92830068e3f1"
+    },
+    {
+      "file": "tests/tools/overlay-focus.stryker.json",
+      "bytes": 732,
+      "normalizedBytes": 732,
+      "sha256": "92c11c13a417374952dbf040766726dc8fb4e410f603cd3efd719be482087a9b"
+    },
+    {
+      "file": "tests/tools/overlay-lifecycle.property.test.js",
+      "bytes": 5813,
+      "normalizedBytes": 5813,
+      "sha256": "eb08428890700d451bfe4725ce55821a3ba9b8791fc36f238ce9645f14a8c132"
+    },
+    {
+      "file": "tests/tools/overlay-lifecycle.stryker.json",
+      "bytes": 646,
+      "normalizedBytes": 646,
+      "sha256": "f6e91729751ac18be588cd83ff3fdbb91d15ca3b02d2e52eca4546753fef9826"
+    },
+    {
+      "file": "tests/tools/overlay-lifecycle.vitest.config.mjs",
+      "bytes": 240,
+      "normalizedBytes": 240,
+      "sha256": "a3c14d3a95088203ec9e04c2f404e3dd6cb62ea50f611a37ea7984583c2bb989"
+    },
+    {
+      "file": "tests/tools/quality.vitest.config.mjs",
+      "bytes": 281,
+      "normalizedBytes": 281,
+      "sha256": "4e0a9f7b00fa41e5dd0e6325bb2cd78b9cf87c562adfe7bb34a50783e1141277"
+    },
+    {
+      "file": "tests/tools/redundancy-audit.mjs",
+      "bytes": 1637,
+      "normalizedBytes": 1637,
+      "sha256": "5634f49e46490ba54b5e4e428ca44fcd23c4f5b1498a2b7d3f79ac823ed68520"
+    },
+    {
+      "file": "tests/tools/redundancy-contract.test.mjs",
+      "bytes": 1488,
+      "normalizedBytes": 1488,
+      "sha256": "840e23b5756f9d9bf3c92fa6093c5883ad750b29de242c4f1aa9ae30c1d948a1"
+    },
+    {
+      "file": "tests/tools/redundancy-report.json",
+      "bytes": 223,
+      "normalizedBytes": 223,
+      "sha256": "2820eeb0cf332f4bcace57569f0c20425d1aa87cc11cda6701ad0f66cc354814"
+    },
+    {
+      "file": "tests/tools/reward-sequences.property.test.js",
+      "bytes": 12680,
+      "normalizedBytes": 12680,
+      "sha256": "7bb1e7c7a0cb5142108219fe27fe0992dfb6be959ef8f5275c86b58aaf628956"
+    },
+    {
+      "file": "tests/tools/reward-sequences.vitest.config.mjs",
+      "bytes": 239,
+      "normalizedBytes": 239,
+      "sha256": "66c025b4142f2e09041c82d7272ae17ab532c6c92abbd4322dd69dfe5be20417"
+    },
+    {
+      "file": "tests/tools/ui-secondary-token-adoption.test.mjs",
+      "bytes": 2897,
+      "normalizedBytes": 2897,
+      "sha256": "891a194d8630158289af2a6eb090b8489954dd0d9b1b0154a428a82c747c4376"
+    },
+    {
+      "file": "tests/tools/ui-style-contract.test.mjs",
+      "bytes": 2493,
+      "normalizedBytes": 2493,
+      "sha256": "582f2880ff40b6d7971a6f62c252c13a8b87a1dd0de72c8e8cb180b187a20990"
+    },
+    {
+      "file": "tests/trade-stack-identity-audit.test.js",
+      "bytes": 9192,
+      "normalizedBytes": 9192,
+      "sha256": "42483a2b594a10a56c8e71089404a13523829cad382a1d407241ca82b1ac609c"
+    },
+    {
+      "file": "tests/transition-diagnostic-policy.test.js",
+      "bytes": 1075,
+      "normalizedBytes": 1075,
+      "sha256": "dd35eb674fdeaf332096cfa39811ae422608cf92eaf26b5a20a465de2bd4dcd5"
+    },
+    {
+      "file": "tests/transition-gate-lifetime.test.js",
+      "bytes": 3664,
+      "normalizedBytes": 3664,
+      "sha256": "86b4ada682589acb6bf77d16cacaf283f9eefe309892db0c8d230d2a7dd8321f"
+    },
+    {
+      "file": "tests/transition-preparation.test.js",
+      "bytes": 1202,
+      "normalizedBytes": 1202,
+      "sha256": "a6f106d10891b4241e19e0bcf66a44c71d5fc23ea8a8ca42fe71d9c48d3dcbfc"
+    },
+    {
+      "file": "tests/tt1-material-structured.test.js",
+      "bytes": 1799,
+      "normalizedBytes": 1799,
+      "sha256": "b362ebc4833d6399d815b69e4d5d86946f030fdf71dc50d7f5cc3c1b56190871"
+    },
+    {
+      "file": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "bytes": 6594,
+      "normalizedBytes": 6445,
+      "sha256": "9693a4c8a0780f16fa094de57a9a2e859570b6e880385ce43b9b1b1595165835"
+    },
+    {
+      "file": "tests/tt12-hitechrd-structured.test.js",
+      "bytes": 8791,
+      "normalizedBytes": 8601,
+      "sha256": "d36f5692cd598472bca2e3dfd56b06e10083ff948f2483a1c28f6c8d4955c2f7"
+    },
+    {
+      "file": "tests/tt12-structured-battle.test.js",
+      "bytes": 7942,
+      "normalizedBytes": 7763,
+      "sha256": "0f47d74d58f836f55605b13791377da249158b75f0cfeed3f015ad1797f8b04c"
+    },
+    {
+      "file": "tests/tt12-structured-preplay.test.js",
+      "bytes": 7450,
+      "normalizedBytes": 7301,
+      "sha256": "d2b7f9348e8568ba8b2d67d327a8e71bfae53ff60683e61006323b8a83df156e"
+    },
+    {
+      "file": "tests/tt3-effect-baseline.test.js",
+      "bytes": 14761,
+      "normalizedBytes": 14427,
+      "sha256": "d5e69e743d8a1a97df7692344c451eadfffcbc0f315bd2ef6b324adbf9594280"
+    },
+    {
+      "file": "tests/tt3-material-structured.test.js",
+      "bytes": 4455,
+      "normalizedBytes": 4455,
+      "sha256": "f01744aacb7e7b46ef6c9bc8212583f34f0faf6338ce01cb949e0f0cadd8d231"
+    },
+    {
+      "file": "tests/tt7-frozenight-structured-battle.test.js",
+      "bytes": 5896,
+      "normalizedBytes": 5767,
+      "sha256": "1b95ec00086f21d6fadfb3d51548bb58d5108f71367a1cb5cfd1e760e0aec503"
+    },
+    {
+      "file": "tests/tt7-hand-payment.test.js",
+      "bytes": 10537,
+      "normalizedBytes": 10342,
+      "sha256": "88e8a491b1dbb4df1cdc86b9158dfe9a87adcf562fb2904c3ad4e43e4410fb85"
+    },
+    {
+      "file": "tests/tt7-sneak-structured.test.js",
+      "bytes": 4357,
+      "normalizedBytes": 4258,
+      "sha256": "8e304712e1e8a730685adadea0df2f03835828ef791daa2040e4ac94ba248f31"
+    },
+    {
+      "file": "tests/type-coverage.test.js",
+      "bytes": 3111,
+      "normalizedBytes": 3110,
+      "sha256": "8ce6bb6ff96565296c3a420c592378eb6e331b504ff20b3a1321222aab759e93"
+    },
+    {
+      "file": "tests/type-runtime-delegation.test.js",
+      "bytes": 2182,
+      "normalizedBytes": 2181,
+      "sha256": "214aee2414b7f6aba9a97d1373d091f7611b3727f751095f8ab12ac289d44f30"
+    },
+    {
+      "file": "tests/u18-negative-hp-death.test.js",
+      "bytes": 7264,
+      "normalizedBytes": 7264,
+      "sha256": "0212b65f2d5028376fa273ab136595258cd7ca9189a756eec53ce1d0f1446628"
+    },
+    {
+      "file": "tests/u4-nightshift-guards.test.js",
+      "bytes": 3405,
+      "normalizedBytes": 3405,
+      "sha256": "bd0c2ceb4a6e423584defb31e5549617a7ffa7f365f31994be7c9a75b7a67adb"
+    },
+    {
+      "file": "tests/ui-accessibility-regression.test.js",
+      "bytes": 2130,
+      "normalizedBytes": 2096,
+      "sha256": "e0d3840fa18bf85dccbb8a69743598cfef5c6f0ace1436de77a59bc4df547d35"
+    },
+    {
+      "file": "tests/ui-design-system.test.js",
+      "bytes": 3993,
+      "normalizedBytes": 3993,
+      "sha256": "cec97be156d9a68e86fd6682edb58d40ceb94c0bebdfa49accb048419bf33c78"
+    },
+    {
+      "file": "tests/ui-motion-cascade.test.js",
+      "bytes": 5000,
+      "normalizedBytes": 5000,
+      "sha256": "be6318eddcbf445054a5b78fb6b29728076d15c07484983dfeafeb6d3eb6a571"
+    },
+    {
+      "file": "tests/ui-review-remediation.test.js",
+      "bytes": 12465,
+      "normalizedBytes": 12326,
+      "sha256": "232a08b0c9fb57876a442c152c60eeb9897317bfb9d1321db5fbb360b55de557"
+    },
+    {
+      "file": "tests/ui-scale.test.js",
+      "bytes": 3211,
+      "normalizedBytes": 3211,
+      "sha256": "066e6a83575b28d1d7898e1d95918ed79988e7d9a278fa20b088dca25685fa09"
+    },
+    {
+      "file": "tests/venom-staff-passive.test.js",
+      "bytes": 4181,
+      "normalizedBytes": 4181,
+      "sha256": "27a55ae6699ec514cdf398e46b203388f8fa14a81aa08adf7fd17307c1142628"
+    },
+    {
+      "file": "tests/video-review.test.js",
+      "bytes": 12821,
+      "normalizedBytes": 12821,
+      "sha256": "a473b0fd860c7e23ec59646393aeb75a83e3dc968ba83982621e7daf4a563ae4"
+    },
+    {
+      "file": "tests/visible-playback.test.js",
+      "bytes": 25047,
+      "normalizedBytes": 25047,
+      "sha256": "8085ca3d93d463711ba25f24053c26f2ff90917a9e0de03a79a196dadcd9ed6b"
+    },
+    {
+      "file": "tests/vite-card-chunk.test.js",
+      "bytes": 1954,
+      "normalizedBytes": 1954,
+      "sha256": "80886457871a2745b0d5a8a3d1154fbc657940c61c1395b6dfd71131ea67a915"
+    },
+    {
+      "file": "tests/warehouse-art-window.test.js",
+      "bytes": 10093,
+      "normalizedBytes": 10093,
+      "sha256": "e637a078d4b6a71944bb0a225213bf3c3ac791b49d19d8deec46a558bc9dfb6d"
+    },
+    {
+      "file": "tests/web-up.test.js",
+      "bytes": 9048,
+      "normalizedBytes": 9048,
+      "sha256": "da6f30932ebc7a90fa45fa9337d3fd7f61c0cdd349b7fd73e0db4ce32216cbfb"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "bytes": 6013,
+      "normalizedBytes": 6013,
+      "sha256": "ba60715174ecc39a9f8e9baecc1617442e75f0e6e0e6bd9aa8fd5a325f9a251e"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-class-card-random-gate.test.js",
+      "bytes": 4780,
+      "normalizedBytes": 4780,
+      "sha256": "a2465ff5dacfcd593ab811b34a59e6e2c101a0c238972fc4145810d7a02b447d"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "bytes": 11431,
+      "normalizedBytes": 11431,
+      "sha256": "d22a9cd363146501dd1981e4670692e701b628fa3e9012b0258102ef53c39b2d"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-shadowbug-rarity.test.js",
+      "bytes": 2487,
+      "normalizedBytes": 2487,
+      "sha256": "f3460f3e8df9c16cfd8a8febb53f64c0836e046515ba0c920bbd18e76f546e76"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-hand-phase.test.js",
+      "bytes": 5230,
+      "normalizedBytes": 5230,
+      "sha256": "ccb054149bc7d771fe965c15a3c275a7204d72e039a7bba1f949331fdbc3c4d0"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-chain.test.js",
+      "bytes": 5942,
+      "normalizedBytes": 5942,
+      "sha256": "c8b36d18487b3c85af7c7e856d1ba250436c6d2fa61904a4336bdbf74b31a2ce"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-targeting.test.js",
+      "bytes": 9043,
+      "normalizedBytes": 9043,
+      "sha256": "a6b56f338e8c2647f739eb9be2cdac47128241663c01a38e67083241eccf805d"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-status-icons.test.js",
+      "bytes": 7848,
+      "normalizedBytes": 7848,
+      "sha256": "8ac8a233fbced6753a0077047a029547fc826782f89e5be8a3b344db4eaefd6f"
+    },
+    {
+      "file": "tests/wf-feedback1021-c-hand-select-grid.test.js",
+      "bytes": 5658,
+      "normalizedBytes": 5658,
+      "sha256": "a549d0e7b5863472c19ff770ee1d59391098f48e4412351dd484912dfde65806"
+    },
+    {
+      "file": "tests/wf-feedback1021-c-infusion-dedupe.test.js",
+      "bytes": 5678,
+      "normalizedBytes": 5678,
+      "sha256": "6aab5a808b667fa3c12f163da31f76358cad1bc9217c6fc6598db4232efb3c65"
+    },
+    {
+      "file": "tests/wf-feedback1021-c-return-map.test.js",
+      "bytes": 4237,
+      "normalizedBytes": 4237,
+      "sha256": "366a67845eeb5cf7347d7fa06ff2eaba0e8cdcb27f89d7b59f66160a9e6b4141"
+    },
+    {
+      "file": "tests/wf-feedback1021-c-reward-fit.test.js",
+      "bytes": 2925,
+      "normalizedBytes": 2925,
+      "sha256": "859a1588ee308ea5d09f2b9145b2b0cdcfbd734a0c7537e5c55c964160da4cf6"
+    },
+    {
+      "file": "tests/workflow-browser.test.js",
+      "bytes": 8707,
+      "normalizedBytes": 8707,
+      "sha256": "1c9e7893345e21d59f3c13d162990ef938182530245fb4aaeb184132d6f35fff"
+    },
+    {
+      "file": "tests/workflow-change-review.test.js",
+      "bytes": 12968,
+      "normalizedBytes": 12968,
+      "sha256": "c78a94be40ac72e2db776670460e99cb9c6f9e091653ac2993111c801f5d0699"
+    },
+    {
+      "file": "tests/workflow-cli-integration.test.js",
+      "bytes": 14258,
+      "normalizedBytes": 14258,
+      "sha256": "9a10684c1f1ade4efcdbc6f2e51387e82678011a77dd8d7cba4facc63b2ee83f"
+    },
+    {
+      "file": "tests/workflow-dependencies.test.js",
+      "bytes": 8641,
+      "normalizedBytes": 8641,
+      "sha256": "12181127a5f890da3c8a884780fe6011af4573981b5127b42b0766c54811c1c1"
+    },
+    {
+      "file": "tests/workflow-doctor.test.js",
+      "bytes": 12996,
+      "normalizedBytes": 12996,
+      "sha256": "4233d32ee6d553f93fbaafd128520d0ff83902a0342f5cf566f117878e62c538"
+    },
+    {
+      "file": "tests/workflow-gate-receipt.test.js",
+      "bytes": 21366,
+      "normalizedBytes": 21366,
+      "sha256": "6fe9f533fa2d4befc88217fb1bf80e020e4df3b333832696c520c9176b9717e9"
+    },
+    {
+      "file": "tests/workflow-handoff.test.js",
+      "bytes": 20001,
+      "normalizedBytes": 20001,
+      "sha256": "afd748eb6956aa8938fa9730453859598363730001d10025003db29a2c57bf0a"
+    },
+    {
+      "file": "tests/workflow-index.test.js",
+      "bytes": 8271,
+      "normalizedBytes": 8271,
+      "sha256": "cbe8d6602321659d5e59ebc96a84ee756f32709c6484f844bd63a5d100cb540e"
+    },
+    {
+      "file": "tests/workflow-memory.test.js",
+      "bytes": 17797,
+      "normalizedBytes": 17797,
+      "sha256": "8218ea5af7f391a088e1ac12cd4867c2d78122c0d420d268522deac6f895f1bf"
+    },
+    {
+      "file": "tests/workflow-scope.test.js",
+      "bytes": 11227,
+      "normalizedBytes": 11227,
+      "sha256": "ed8300493edd9e043f316a3d5ef688237d3705b9b9f9a38a5e31480dee1520cb"
+    },
+    {
+      "file": "tests/workflow-ship.test.js",
+      "bytes": 20564,
+      "normalizedBytes": 20564,
+      "sha256": "84bda61fe60cc506fc917ebfe1d2f120162cc93dcf50cdfd41efe9ded151f60d"
+    },
+    {
+      "file": "tests/workflow-slice.test.js",
+      "bytes": 5721,
+      "normalizedBytes": 5721,
+      "sha256": "967f6500fdd22a9968bade2012bcfed81757f96219d1c036566a95fbfde9e8d4"
+    },
+    {
+      "file": "tests/workflow-staged.test.js",
+      "bytes": 22246,
+      "normalizedBytes": 22246,
+      "sha256": "08b11b5701de9899d86953fcc571b0d6652d64a474145e16f16357b9b5913bfd"
+    },
+    {
+      "file": "tests/workflow-standardize.test.js",
+      "bytes": 6087,
+      "normalizedBytes": 6087,
+      "sha256": "d123256f13201c79aee50bcb9bf7921412b99b29c71953213bf0a9a6cf0f28bc"
+    },
+    {
+      "file": "tests/workflow-task-input.test.js",
+      "bytes": 4516,
+      "normalizedBytes": 4516,
+      "sha256": "c6debf7d464d278ebe0e1b22710970c69171891c796e04e88ba2d22551aa8844"
+    },
+    {
+      "file": "tests/workflow-task.test.js",
+      "bytes": 10226,
+      "normalizedBytes": 10226,
+      "sha256": "c9ade20025b88de427bd80d9ed545d3716ac8e7a0560a8bc6d7ed6a19c6698ca"
+    },
+    {
+      "file": "tests/workflow-tools.test.js",
+      "bytes": 17006,
+      "normalizedBytes": 17006,
+      "sha256": "4eb81ffcfbfb74abc1af6982fe02c735bd2629b1a035e7a6548ea860e7c7c7e6"
+    },
+    {
+      "file": "tests/xart-z1-batch1.test.js",
+      "bytes": 3816,
+      "normalizedBytes": 3816,
+      "sha256": "ba7e95e84d40225ac209e3a4c5729c228cc0f19ec0898e3530f70193dad8d5a4"
+    },
+    {
+      "file": "tests/xart-z1-batch2.test.js",
+      "bytes": 5318,
+      "normalizedBytes": 5220,
+      "sha256": "0c0282132e54eaa78b92a6c5a1c8bc3f48f392f8d944fc9f8c05c0db894cf030"
+    }
+  ],
+  "normalizedBytes": 7129745,
+  "originalGameBaseline": 6542503,
+  "combinedBaseline": 13672248,
+  "target": 1367225,
+  "carriedGameStructuralNet": 430222
+}

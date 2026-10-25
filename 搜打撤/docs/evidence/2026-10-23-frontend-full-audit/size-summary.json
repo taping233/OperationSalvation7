@@ -1,0 +1,210 @@
+{
+  "metric": "UTF-8 bytes, LF normalized; CSS cleanup only; later visual additions excluded",
+  "cssFiles": 176,
+  "beforeCss": 1963517,
+  "afterCss": 1941081,
+  "removed": 22436,
+  "cssPercent": 1.142643531988773,
+  "sourceDenominator": 7816638,
+  "cssRemovalPercentOfAllSources": 0.28702877119293485,
+  "stats": [
+    {
+      "file": "game/css/ak-skin.css",
+      "beforeBytes": 18687,
+      "afterBytes": 18271,
+      "removed": 416
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "beforeBytes": 2096,
+      "afterBytes": 2039,
+      "removed": 57
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "beforeBytes": 37867,
+      "afterBytes": 37478,
+      "removed": 389
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "beforeBytes": 36200,
+      "afterBytes": 36149,
+      "removed": 51
+    },
+    {
+      "file": "game/css/base.css",
+      "beforeBytes": 31895,
+      "afterBytes": 30409,
+      "removed": 1486
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "beforeBytes": 13883,
+      "afterBytes": 12463,
+      "removed": 1420
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "beforeBytes": 11974,
+      "afterBytes": 9869,
+      "removed": 2105
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "beforeBytes": 13198,
+      "afterBytes": 12607,
+      "removed": 591
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "beforeBytes": 9930,
+      "afterBytes": 9431,
+      "removed": 499
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "beforeBytes": 37094,
+      "afterBytes": 36260,
+      "removed": 834
+    },
+    {
+      "file": "game/css/battle.css",
+      "beforeBytes": 37056,
+      "afterBytes": 35642,
+      "removed": 1414
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "beforeBytes": 11004,
+      "afterBytes": 10095,
+      "removed": 909
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "beforeBytes": 32453,
+      "afterBytes": 32298,
+      "removed": 155
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "beforeBytes": 8410,
+      "afterBytes": 8371,
+      "removed": 39
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "beforeBytes": 26351,
+      "afterBytes": 26297,
+      "removed": 54
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "beforeBytes": 28228,
+      "afterBytes": 27527,
+      "removed": 701
+    },
+    {
+      "file": "game/css/expedition.css",
+      "beforeBytes": 19421,
+      "afterBytes": 18993,
+      "removed": 428
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "beforeBytes": 38592,
+      "afterBytes": 38536,
+      "removed": 56
+    },
+    {
+      "file": "game/css/hub.css",
+      "beforeBytes": 22800,
+      "afterBytes": 21874,
+      "removed": 926
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "beforeBytes": 4938,
+      "afterBytes": 4726,
+      "removed": 212
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "beforeBytes": 10393,
+      "afterBytes": 9743,
+      "removed": 650
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "beforeBytes": 23514,
+      "afterBytes": 23326,
+      "removed": 188
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "beforeBytes": 32644,
+      "afterBytes": 30861,
+      "removed": 1783
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "beforeBytes": 65861,
+      "afterBytes": 65486,
+      "removed": 375
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "beforeBytes": 2089,
+      "afterBytes": 2029,
+      "removed": 60
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "beforeBytes": 13586,
+      "afterBytes": 13187,
+      "removed": 399
+    },
+    {
+      "file": "game/css/review-ui.css",
+      "beforeBytes": 5416,
+      "afterBytes": 5401,
+      "removed": 15
+    },
+    {
+      "file": "game/css/scenes.css",
+      "beforeBytes": 46723,
+      "afterBytes": 46357,
+      "removed": 366
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "beforeBytes": 2332,
+      "afterBytes": 1824,
+      "removed": 508
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "beforeBytes": 16324,
+      "afterBytes": 15088,
+      "removed": 1236
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "beforeBytes": 18251,
+      "afterBytes": 17269,
+      "removed": 982
+    },
+    {
+      "file": "game/css/winter.css",
+      "beforeBytes": 103763,
+      "afterBytes": 100696,
+      "removed": 3067
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "beforeBytes": 3959,
+      "afterBytes": 3894,
+      "removed": 65
+    }
+  ]
+}

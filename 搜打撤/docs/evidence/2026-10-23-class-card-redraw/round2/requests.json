@@ -1,0 +1,150 @@
+{
+  "original_interpretation": "Left-side NAI5 draft on the comparison page",
+  "pipeline": "built-in image edits only, no NAI requests",
+  "jobs": [
+    {
+      "card_id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "base_kind": "png",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-imitate.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Precise local edit, ONLY hair and sunglasses. Keep image1's square composition, face identity/expression, sword, hand, clothes, crossed light arcs and background fixed. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Replace the malformed eyewear with ONE normal thin black round pair resting on top of her head: exactly two separate dark circular lenses joined by one small nose bridge, two anatomically placed temples. No third lens, overlapping loops or goggle/crown structure. Leave other optional ornaments alone. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "base_kind": "png",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-ghostblade.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Precise local edit of image1: ONLY repaint her hair, part front hair away to visibly expose forehead as far as the crop permits. Preserve blue eye, expression, shadow seam, extreme near dagger and hand, every camera/weapon/lighting relation. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-swordimmortal.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Image1 is the ORIGINAL NAI draft explicitly preferred by the owner. Retain its full-body pose, spread leg placement, oblique camera, long black flying sword, hand positions, subject size and simple blue/ivory background. Make only slight character-identity corrections. Do NOT use the rejected new one-boot crouching pose. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Align face to image3 current Wu, small round anime face with blue eyes and slight fang smile. Keep original framing; for square format outpaint plain background around the whole original instead of rearranging/cropping pose. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-goldencicada.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Return to image1 ORIGINAL NAI draft's clearer cloak composition: the visible Wu holding open simple black fabric, close face on left, ponytail trailing right. Simplify cloak to one readable soft garment with open neckline, two sleeves and three main folds, not a heap of rocky triangles. Remove the hard rectangular cutout; use a natural opening between soft folds if needed. One woman only, no extra rear torso. Keep sword strikes minimal. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Face matches current Wu in image3. Square expansion of plain background allowed, preserve original arrangement and scale. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-meteorrain.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Use image1 ORIGINAL NAI draft as edit target. Preserve original camera, body pose, foreshortened luminous near arrow/weapon and hand positions, scale and falling directions. Do not substitute rejected recomposition. Only clean up her face and repaint hair, keep large near form as original and do not add new effects. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Clean connected warm skin, no dirty gray/brown triangles or scattered blotches across cheeks and nose. Original simple blue-grey background, no extra fragments. Expand quiet background to square without changing pose. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-sneak",
+      "name": "偷袭",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-sneak.png",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "prompt": "Image1 is the edit target. Image2 is HAIR TECHNIQUE ONLY, not its pose or ornaments. Image3 is Wu current identity only; owner's latest exposed-forehead rule overrides any covered forehead in a reference. Use image1 ORIGINAL NAI draft as edit target, restore its over-armor composition and crouching pose. Owner requested repair and OUTPAINT, not a new camera. Preserve foreground armored shoulder, woman beyond it, blade height/direction and body size; make existing blade clearly supported by visible hand, not impossibly fused into mouth. HAIR CHANGE: use clean continuous ribbon-like silver hair locks as in the hair reference. Smooth connected base fields and long grouped shadows, broad highlights following curved locks, selective fine tapered contours. No scratched white threads, angular confetti patches, dirty gray speckles or chopped triangular facets. Preserve actual high ponytail. Forehead visibly OPEN and EXPOSED with front hair swept back or parted widely to sides; brows and both blue eyes visible. Not just eyes visible beneath bangs. Keep confident Wu face, blue eyes, high ponytail and exposed forehead. Extend the original frame into square with quiet matching abstract planes, retaining all original core placement. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "base_kind": "png",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-whirlwind.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Owner requests redesign to repair anatomy and show MULTI-TARGET attack. Image1 is the rejected previous attempt: do NOT preserve its stretched lunge. Image2 gives Heixiang identity only. Redesign from high three-quarter camera with both boots planted on one simple abstract ground plane, bent knees under hips, natural torso twist, shoulders following hips, two hands gripping ONE giant sword handle. A single broad sweeping crescent crosses two distinct faceless enemy armor silhouettes on opposite sides at different depths. Enemies are simple dark torso/helmet fragments, visibly struck by same sweep with only two small spark accents. Main man remains huge dark-skinned muscular build, black swept-back hair/exposed forehead, amber eyes and left-cheek stitched scar. Simplify armor and orange cloth into clean connected surfaces, no random pale shards, no exploding scarf. No full arena/city, no gore. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "name": "血毒双镖",
+      "base_kind": "png",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-bloodpoison.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Precise cleanup of image1, owner says overall composition is good. Keep EXACT near crimson dagger and far green dagger, flight directions, release hand, man pose/face and camera. Merge excess patchwork into a few coherent quiet armor, skin, scarf and background color fields. Remove scattered speckles, scratchy highlights, tiny shards and redundant speed marks. Do not smooth everything into plastic or redraw the event. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-burnharvest",
+      "name": "爆燃火球",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-burnharvest.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Image1 ORIGINAL NAI draft explicitly preferred. Only LIGHT repair, keep original side face and raised hand, small split fire seed and short flame at existing size/position. No huge foreground explosion, no giant black shell, no new action pose. Clean the hand contours, facial skin and sparse flame edges locally. Keep male sorcerer silver-grey low bun and long side locks, amber eyes, pointed ears, round glasses. Hair uses clean flowing connected locks, no chopped color confetti. Expand simple background if needed for square; never enlarge the flame. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "name": "风暴火球",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-flame-storm.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Image1 ORIGINAL NAI draft explicitly preferred. Preserve its camera, half-body pose, outstretched hand, original large near fire at upper-left and smaller distant fire right, original scale differences and calm abstract background. Only clean and refine original. No added wrapping ribbons or full flame circle. Use a few hand-painted flame lobes, keep hair and face clean and coherent; no dirty mosaic color patches. Preserve male sorcerer low silver-grey bun/side locks, amber eyes and glasses. If square extend background, do not redesign. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt7-twinfireball",
+      "name": "三重火球",
+      "base_kind": "nai",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-twinfireball.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Precise edit of image1 ORIGINAL NAI draft: replace ONLY the THREE smooth white/orange balloon/egg-like objects in front of fingers with THREE visibly HAND-PAINTED FIREBALLS, retaining their original positions, sizes, arrangement and hand/face relationship. Glowing warm orange/yellow cores with irregular brush-shaped flame tongues, clear fire silhouette, not smooth glossy spheres or eggs. Preserve his original face, hand pose, eyeglasses, low bun, hat, outfit and background. No giant foreground ball, no recomposed diagonal depth chain. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "name": "致命射线",
+      "base_kind": "png",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt3-nuke-ray.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-class-card-redraw/round2/hair-reference.webp"
+      ],
+      "prompt": "Image1 is edit target. Image2 is current male character identity only. Image3 supplies clean flowing HAIR TECHNIQUE ONLY; never copy its female face, hairstyle or colors. Owner accepts this composition. Precise simplification ONLY of image1: keep two massive offset dark slabs, narrow diagonal ray, his amber eye and two fingers through gap, current camera and proportions. Remove most crack networks, tiny metal scratches, speckled fragments and redundant small color planes. Steel slabs become quiet large dark graphite surfaces with two or three broad value changes and a restrained warm cut edge. Clean hair into continuous flowing locks and face into clean skin fields. Do not change ray position, gap shape or add scenery. Keep a clean hand-painted anime finish with a few large coherent shadow shapes and quiet base colors. Faces have clean warm skin fields and economical nose and mouth, no dirt-like colored patches. Background stays simple abstract planes. No added detail, scenery, text or border. ",
+      "status": "prepared"
+    }
+  ]
+}

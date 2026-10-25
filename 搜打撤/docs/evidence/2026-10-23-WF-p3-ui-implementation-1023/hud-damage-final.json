@@ -1,0 +1,50 @@
+{
+  "hud": {
+    "body": "interface-motion page-covered",
+    "counts": {
+      "hpHud": 1,
+      "hpText": 1,
+      "resHud": 1,
+      "runTopBar": 1
+    },
+    "font": {
+      "color": "rgb(239, 244, 246)",
+      "lineHeight": "34px",
+      "size": "30px",
+      "style": "normal"
+    },
+    "format": [
+      {
+        "cls": "hp-current",
+        "text": "23"
+      },
+      {
+        "cls": "hp-rest",
+        "text": "/30"
+      }
+    ],
+    "headerDisplay": "grid",
+    "hp": {
+      "background": "rgba(0, 0, 0, 0)",
+      "clip": "none",
+      "height": "64px",
+      "shadow": "none",
+      "width": "164px"
+    },
+    "hpText": "23/30",
+    "surface": "battle",
+    "track": {
+      "display": "block",
+      "height": "4px"
+    },
+    "viewport": [
+      1074,
+      956
+    ]
+  },
+  "numbers": {
+    "energy": "2/2",
+    "header": "23/30",
+    "unit": "23/30"
+  }
+}

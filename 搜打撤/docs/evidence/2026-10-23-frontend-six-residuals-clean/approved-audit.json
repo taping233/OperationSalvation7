@@ -1,0 +1,62 @@
+{
+  "scope": "Read-only follow-up audit requested by user",
+  "codeModified": false,
+  "browserOpened": false,
+  "items": [
+    {
+      "id": "hidden-base-indicator",
+      "file": "game/src/hub/hub.presentation.js",
+      "line": 129,
+      "status": "confirmed",
+      "finding": "Creates and measures camp-navigation-indicator hidden unconditionally by base-framework-v7.css:49; stale warehouse inspector/layout branches have no producer",
+      "boundary": "Keep current stage sizing and refreshCardBrowser",
+      "inputSha256": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6"
+    },
+    {
+      "id": "legacy-personnel-updater",
+      "file": "game/src/hub/hub.presentation.js",
+      "line": 257,
+      "status": "test-migration-required",
+      "finding": "Legacy person-hero updater only reached by artificial old test fixture; production uses updatePersonnelV12",
+      "boundary": "Preview person-hero CSS is live; do not delete the preview styles",
+      "inputSha256": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6"
+    },
+    {
+      "id": "unused-bag-detail",
+      "file": "game/src/hub/game.bag.js",
+      "line": 179,
+      "status": "selftest-migration-required",
+      "bytes": 2905,
+      "lines": 35,
+      "finding": "showBagCardDetail has no production caller; retained solely for textual selftest guard at game/selftest.js:125",
+      "boundary": "Keep actual inspectStack behavior and its current tests",
+      "inputSha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36"
+    },
+    {
+      "id": "retired-3d-state",
+      "file": "game/src/run/expedition.view.js",
+      "line": 113,
+      "status": "confirmed",
+      "finding": "scene-battle-3d has a remaining reader but no writer; positive CSS rules and old sts-note have no producer",
+      "boundary": "Do not remove not(scene-battle-3d) selectors without proving specificity equivalence; preserve GPU failure hint",
+      "inputSha256": "d718191babe5f0fd452bcb535023963a5e088ef6ac5a5bf0553aa13caf22db38"
+    },
+    {
+      "id": "stale-subtab-and-zoom-selectors",
+      "file": "game/src/ui/interface-motion.js",
+      "line": 35,
+      "status": "confirmed",
+      "finding": "Retired subtab query has no producer; card-zoom-controller.js:272 card-tip-group alternative has no producer",
+      "boundary": "Keep navigationState and inventory-zoom-info",
+      "inputSha256": "e280d279fc3db1119f1fd26e822b495839fe99c743f6fc9432b8c5f43e46c410"
+    },
+    {
+      "id": "unused-body-portrait-fit",
+      "file": "game/css/base-personnel-v12.css",
+      "line": 13,
+      "status": "confirmed",
+      "finding": "body fit selector has no value producer; current personnel uses canvas",
+      "inputSha256": "9b0f2546910e78e8de87126cd16534ac0336056d171cc88149286692e1e6b0d9"
+    }
+  ]
+}

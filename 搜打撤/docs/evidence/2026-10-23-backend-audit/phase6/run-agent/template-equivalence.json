@@ -1,0 +1,40 @@
+{
+  "method": "Static AST shape check, literal decode, exact fixed template enumeration; no target module execution",
+  "sourceBeforeSha256": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83",
+  "sourceAfterSha256": "3d16b41f173ec4640dc93f6d1f39ac2d7033e4b42b5296b24ff40b3843cb8db4",
+  "beforeBytes": 35680,
+  "afterBytes": 33799,
+  "savedBytes": 1881,
+  "candidates": 286,
+  "templatedRows": 30,
+  "names": 15,
+  "fixedPrefixes": [
+    "cards/",
+    "thumbs/cards/"
+  ],
+  "distinctPairedObjects": 30,
+  "fiveRoundChestHelperByteIdentical": true,
+  "otherSourceASTEqual": true,
+  "exactFullDataAndOrderEqual": true,
+  "pairedRowsSha256": "643638493ad04305d231f9c068d4664587c92c8901cf39473f24a2008bdc74c9",
+  "expandedReviewBeforeSha256": "88f7b5124630fdd39cc9fe1bec92d152377080553c0820a9b14550d6ce84a4d0",
+  "expandedReviewAfterSha256": "88f7b5124630fdd39cc9fe1bec92d152377080553c0820a9b14550d6ce84a4d0",
+  "propertyFingerprints": {
+    "candidates": {
+      "beforeSha256": "25815d4eae3001fb17ffd4969c8ca770bbd05a9482182ad14b708be11a0fdd92",
+      "afterSha256": "25815d4eae3001fb17ffd4969c8ca770bbd05a9482182ad14b708be11a0fdd92"
+    },
+    "consumerFingerprints": {
+      "beforeSha256": "a565d1d05bb0415a2b9b49523684a1a7fa7c2a993673a2225f326aec6ebb1933",
+      "afterSha256": "a565d1d05bb0415a2b9b49523684a1a7fa7c2a993673a2225f326aec6ebb1933"
+    },
+    "opaqueConsumerDependencies": {
+      "beforeSha256": "344e587aab219e6bfbc1afccb96a24249d315b4cdd7d7d5a7dc95ac55bf37c5b",
+      "afterSha256": "344e587aab219e6bfbc1afccb96a24249d315b4cdd7d7d5a7dc95ac55bf37c5b"
+    },
+    "opaqueConsumers": {
+      "beforeSha256": "5a390899d5e8f606d43da55009357198aacd6edbb8e2a82e64fb504920ed1331",
+      "afterSha256": "5a390899d5e8f606d43da55009357198aacd6edbb8e2a82e64fb504920ed1331"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "takenAt": "2026-10-23T15:06:26.958Z",
+  "head": "3eef40cf845204a965c7bece867048a9d20c16a7",
+  "status": {
+    "entries": 664,
+    "tracked": 469,
+    "untracked": 195
+  },
+  "findings": {
+    "new": 14,
+    "knownReconfirmed": 6,
+    "total": 20
+  },
+  "validation": {
+    "existingTestFileExecutions": 110,
+    "existingAssertionsPassed": 1369,
+    "syntaxFiles": 675,
+    "lintFiles": 1543,
+    "lintErrors": 0,
+    "typeCheckExitCode": 1,
+    "typeDistinctLocations": 9,
+    "assetErrors": 0,
+    "unchangedAssetWarnings": 570,
+    "docsCheckExitCode": 0
+  },
+  "sourceDrift": [],
+  "sources": [
+    {
+      "path": "game/src/battle/core/battle.draw.domain.js",
+      "sha256": "45fc35f1227c3213f27865ed97758fc934f6600edb36985b3cd32febfcedf9b3",
+      "mtime": "2026-10-23T13:10:34.791Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.domain.js",
+      "sha256": "f98af8f3b3f4afe7391f5b44e9347453ff70b1619f24a72cdb167386dbae9a8b",
+      "mtime": "2026-10-23T13:52:01.898Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "sha256": "d78cf107ccb180de54d81cc214ed8517b3c42a2e2c6ba11687e6dbd97aa8cf70",
+      "mtime": "2026-10-21T03:00:38.570Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "5cf7047975ea50351f1f9716b64699a4b638746ddcb9874420c6939e7f772b7b",
+      "mtime": "2026-10-23T14:31:42.319Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "sha256": "6eaaf393f67cf784181f6cd423d711522dfe1948d4d9c01080bb424e9b756b5a",
+      "mtime": "2026-10-21T03:00:38.543Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "d60696d0c1e007d74af237e6095ba943ec71792b13419490e8f771a88d19d679",
+      "mtime": "2026-10-23T10:56:05.910Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "sha256": "79d0e3749f7b0095df791987f627bb5001267f367cbcfb8ca9576a4825e927eb",
+      "mtime": "2026-10-23T11:02:44.331Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/hub/save-archive.js",
+      "sha256": "fc8eab678b1cba4943587aca4afc4f01127b609fe4767dfddc9cfb51afe82e63",
+      "mtime": "2026-10-23T10:54:03.364Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.js",
+      "sha256": "7360ebd06f139c8e43510c1cd9d9556471f6532185c265618df8603fa289584e",
+      "mtime": "2026-09-28T08:48:53.434Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/hub/base-elapsed.commands.js",
+      "sha256": "c3b041e1da9c8f4ae39e2b1fe5ab0b2e200f07a5f31039ba3a2d4d62322d28c3",
+      "mtime": "2026-10-23T10:32:41.121Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "sha256": "c98f8370e78b89b664e79e30ee2432b4ade377c8bb8d312ebd0658cf69d7b93e",
+      "mtime": "2026-10-23T14:22:02.575Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/game-session-persistence.js",
+      "sha256": "0eb69da73de76f0ac02670b941024c083f0aab58694fe229b6113b97ba9d4c24",
+      "mtime": "2026-10-23T13:56:59.469Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "b4cf3d4a99afdbf4c188b92f7eb40551e5bf22ccfd68bf4936b07cbf69a02249",
+      "mtime": "2026-10-23T13:19:41.269Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/game.run.resources.js",
+      "sha256": "82d3c2c5febd088fd889234696c024275abdf8ce19bc9738668c79b226a19a2d",
+      "mtime": "2026-10-23T11:00:19.127Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/shop-commands.js",
+      "sha256": "45d95df0de656bc127079a398f5b29adfa5768bf496e5c6814f105ed6cb9f7ac",
+      "mtime": "2026-10-23T10:33:01.562Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "sha256": "9ca504daf7b10a69254c37aa066ed10ddae802546ae1f9fa06d198dc24ed8b52",
+      "mtime": "2026-10-23T11:00:40.804Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/node-reward-state.js",
+      "sha256": "ef1d82d140e07ad6f6c6bfe23fcdddf60253479aa424db0c30697082ff6a3365",
+      "mtime": "2026-10-21T10:06:04.684Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "b8d5b9876dc673ca5bdb0c500a73e8fbf4f3e6e373c1e188f9ac53084ff7f55e",
+      "mtime": "2026-10-23T10:56:05.931Z",
+      "matchesDomainReceipt": true
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "sha256": "0334ac2bf2f2065b033a683a7dc86635340170baf5852d329249f1fd93e4d98b",
+      "mtime": "2026-10-23T14:56:43.085Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/agent/agent.stats.js",
+      "sha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5",
+      "mtime": "2026-10-03T07:19:29.113Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "sha256": "71414ec7dbaeb2a3ddf7524697b0e7cb3313ec11962428d84cc54d642d7bfce5",
+      "mtime": "2026-10-21T05:04:22.051Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/ui/menu-slots.js",
+      "sha256": "a4764f6416658fa85c21d5576fb03d5c5e256e8a3bc74c510148cd1edaf741bf",
+      "mtime": "2026-10-23T14:16:49.367Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/ui/save-management.js",
+      "sha256": "0ee4518e638db5378171506150ba820db845433bce064bc682ffddc02b7cd09a",
+      "mtime": "2026-10-23T11:00:18.744Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "baa23d7aa6f0ca1fc61bdab076266e09dff63b8e32d8310fcee0c5e37c04de5f",
+      "mtime": "2026-10-23T14:06:05.501Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-preview.js",
+      "sha256": "a259c521c49417cba114bb5eb253c242938714a57986a2877e7ce2a7335aa581",
+      "mtime": "2026-10-23T14:04:46.103Z",
+      "matchesDomainReceipt": null
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "sha256": "7876f5d10918c12de24044cefdec1abe2ad777581e4ddecf045b012ef91cbec5",
+      "mtime": "2026-10-23T13:21:48.848Z",
+      "matchesDomainReceipt": null
+    }
+  ]
+}

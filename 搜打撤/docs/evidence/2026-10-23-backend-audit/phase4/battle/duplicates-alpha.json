@@ -1,0 +1,642 @@
+{
+  "method": "Acorn token sequences inside function bodies, at least 60 tokens and 7 source lines; parsing only, no execution",
+  "identifiersNormalized": true,
+  "caution": "Identifier-only normalization is structural similarity, not a behavioral equivalence proof.",
+  "scannedFiles": [
+    "game/src/cards/builtin-card-execution.js",
+    "game/src/cards/builtin-card-field-defaults.js",
+    "game/src/cards/builtin-card-identities.js",
+    "game/src/cards/builtin-card-numeric-fields.js",
+    "game/src/cards/builtin-card-previous-rules.js",
+    "game/src/cards/builtin-card-previous-variants.js",
+    "game/src/cards/builtin-choice-execution.js",
+    "game/src/cards/builtin-equipment-execution.js",
+    "game/src/cards/builtin-equipment-previous-rules.js",
+    "game/src/cards/card-compatibility.js",
+    "game/src/cards/card-execution-plan.js",
+    "game/src/cards/card-instance-fields.js",
+    "game/src/cards/card-instance.js",
+    "game/src/cards/card-legacy-battle-policy.js",
+    "game/src/cards/card-migrations.js",
+    "game/src/cards/card-rarity.js",
+    "game/src/cards/card-rules.capability.js",
+    "game/src/cards/card-rules.schema.js",
+    "game/src/cards/card-semantic-contract.js",
+    "game/src/cards/card-trigger-contract.js",
+    "game/src/cards/cards.catalog.js",
+    "game/src/cards/cards.consts.js",
+    "game/src/cards/cards.data.js",
+    "game/src/cards/cards.js",
+    "game/src/cards/cards.rules.js",
+    "game/src/cards/cards.sync.backfiller.js",
+    "game/src/cards/cards.sync.builtin.js",
+    "game/src/cards/cards.sync.catalog.js",
+    "game/src/cards/cards.sync.face-refresh.js",
+    "game/src/cards/cards.sync.js",
+    "game/src/cards/cards.sync.m1.js",
+    "game/src/cards/cards.sync.m10.js",
+    "game/src/cards/cards.sync.m11.js",
+    "game/src/cards/cards.sync.m2.js",
+    "game/src/cards/cards.sync.m3.js",
+    "game/src/cards/cards.sync.m4.js",
+    "game/src/cards/cards.sync.m5.js",
+    "game/src/cards/cards.sync.m6.js",
+    "game/src/cards/cards.sync.m7.js",
+    "game/src/cards/cards.sync.m8.js",
+    "game/src/cards/cards.sync.m9.js",
+    "game/src/cards/cards.sync.numeric.js",
+    "game/src/cards/cards.sync.persistence.js",
+    "game/src/cards/cards.sync.renames.js",
+    "game/src/cards/cards.sync.rule-backfill.js",
+    "game/src/cards/pierce-arrow-revision.js",
+    "game/src/cards/rot-seed-revision.js",
+    "game/src/battle/core/battle.actions.js",
+    "game/src/battle/core/battle.card-play.domain.js",
+    "game/src/battle/core/battle.card-play.js",
+    "game/src/battle/core/battle.damage.domain.js",
+    "game/src/battle/core/battle.damage.js",
+    "game/src/battle/core/battle.default-context.js",
+    "game/src/battle/core/battle.draw.domain.js",
+    "game/src/battle/core/battle.draw.js",
+    "game/src/battle/core/battle.effect-assembly.domain.js",
+    "game/src/battle/core/battle.enemy-intent.js",
+    "game/src/battle/core/battle.enemy-phase.domain.js",
+    "game/src/battle/core/battle.enemy-phase.js",
+    "game/src/battle/core/battle.enemy-plan.js",
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/core/battle.engine.factory.js",
+    "game/src/battle/core/battle.engine.instance.js",
+    "game/src/battle/core/battle.engine.js",
+    "game/src/battle/core/battle.exec-play.domain.js",
+    "game/src/battle/core/battle.exec-play.js",
+    "game/src/battle/core/battle.facts.js",
+    "game/src/battle/core/battle.foe-lifecycle.domain.js",
+    "game/src/battle/core/battle.foe-lifecycle.js",
+    "game/src/battle/core/battle.hand-selection.js",
+    "game/src/battle/core/battle.legacy-resolution.domain.js",
+    "game/src/battle/core/battle.lifecycle.domain.js",
+    "game/src/battle/core/battle.lifecycle.js",
+    "game/src/battle/core/battle.measured-damage.js",
+    "game/src/battle/core/battle.resolution.domain.js",
+    "game/src/battle/core/battle.resolution.js",
+    "game/src/battle/core/battle.selection-flow.domain.js",
+    "game/src/battle/core/battle.selection-flow.js",
+    "game/src/battle/core/battle.setup-mechanics.domain.js",
+    "game/src/battle/core/battle.summary.factory.js",
+    "game/src/battle/core/battle.summary.js",
+    "game/src/battle/core/battle.target-session.js",
+    "game/src/battle/core/battle.turn-continuation.js",
+    "game/src/battle/core/battle.turn-effects.domain.js",
+    "game/src/battle/core/battle.turn-start.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/battle/core/combat.js",
+    "game/src/battle/effects/battle.acquire-operation.domain.js",
+    "game/src/battle/effects/battle.card-cost.js",
+    "game/src/battle/effects/battle.card-inspection.domain.js",
+    "game/src/battle/effects/battle.card-inspection.js",
+    "game/src/battle/effects/battle.cost-modifiers.js",
+    "game/src/battle/effects/battle.discover-candidates.js",
+    "game/src/battle/effects/battle.discover-flow.js",
+    "game/src/battle/effects/battle.discover-preview.js",
+    "game/src/battle/effects/battle.discover-state.js",
+    "game/src/battle/effects/battle.effect-clauses.js",
+    "game/src/battle/effects/battle.effects.js",
+    "game/src/battle/effects/battle.foe-fight.js",
+    "game/src/battle/effects/battle.hosted.js",
+    "game/src/battle/effects/battle.infusion.domain.js",
+    "game/src/battle/effects/battle.infusion.js",
+    "game/src/battle/effects/battle.rule-guard.js",
+    "game/src/battle/effects/battle.status-operations.domain.js",
+    "game/src/battle/effects/battle.target-rules.js",
+    "game/src/battle/effects/battle.trigger-source.js",
+    "game/src/battle/effects/battle.triggers.m2.domain.js",
+    "game/src/battle/effects/battle.triggers.m2.js",
+    "game/src/battle/effects/card-semantic-operations.js",
+    "game/src/battle/effects/choice-semantic-operations.js",
+    "game/src/battle/effects/effect-steps.audit.js",
+    "game/src/battle/effects/effect-steps.ctx.js",
+    "game/src/battle/effects/effect-steps.curse.js",
+    "game/src/battle/effects/effect-steps.damage.js",
+    "game/src/battle/effects/effect-steps.deck.js",
+    "game/src/battle/effects/effect-steps.gates.js",
+    "game/src/battle/effects/effect-steps.js",
+    "game/src/battle/effects/effect-steps.kills.js",
+    "game/src/battle/effects/effect-steps.m1.domain.js",
+    "game/src/battle/effects/effect-steps.m1.js",
+    "game/src/battle/effects/effect-steps.m2.domain.js",
+    "game/src/battle/effects/effect-steps.m2.js",
+    "game/src/battle/effects/effect-steps.recovery.js",
+    "game/src/battle/effects/effect-steps.rules.js",
+    "game/src/battle/effects/effect-steps.tail.js",
+    "game/src/battle/effects/effect-verbs.js",
+    "game/src/battle/effects/equipment-semantic-operations.js",
+    "game/src/battle/effects/hand-cost-patterns.js",
+    "game/src/battle/effects/hosted-catalog-index.js",
+    "game/src/battle/effects/random-blessings.js",
+    "game/src/battle/effects/requested-card-batch.js",
+    "game/src/battle/effects/requested-card-runtime.domain.js",
+    "game/src/battle/effects/requested-card-runtime.js",
+    "game/src/battle/bag/battle.bag.domain.js",
+    "game/src/battle/bag/battle.bag.js",
+    "game/src/battle/bag/battle.consumed-pile.js",
+    "game/src/battle/bag/battle.deck.factory.js",
+    "game/src/battle/bag/battle.deck.js",
+    "game/src/battle/bag/battle.equipment.domain.js",
+    "game/src/battle/bag/battle.equipment.js",
+    "game/src/battle/bag/battle.piles.js",
+    "game/src/battle/bag/battle.slam-skill.js",
+    "game/src/battle/runtime/battle.action-runner.js",
+    "game/src/battle/runtime/battle.clock.js",
+    "game/src/battle/runtime/battle.execution-session.js",
+    "game/src/battle/runtime/battle.host-scheduling.js",
+    "game/src/battle/runtime/battle.pace.js",
+    "game/src/battle/runtime/battle.playback.js",
+    "game/src/battle/runtime/battle.runtime.default.js",
+    "game/src/battle/runtime/battle.runtime.effects.js",
+    "game/src/battle/runtime/battle.runtime.factory.js",
+    "game/src/battle/runtime/battle.runtime.interaction.js",
+    "game/src/battle/runtime/battle.runtime.js",
+    "game/src/battle/runtime/battle.runtime.piles.js",
+    "game/src/battle/runtime/battle.runtime.session.js",
+    "game/src/battle/runtime/battle.snapshot.js",
+    "game/src/battle/runtime/battle.state.js"
+  ],
+  "candidates": [
+    {
+      "tokens": 268,
+      "first": {
+        "file": "game/src/battle/core/battle.engine.factory.domain.js",
+        "start": 207,
+        "end": 227
+      },
+      "second": {
+        "file": "game/src/battle/core/battle.engine.factory.domain.js",
+        "start": 229,
+        "end": 249
+      },
+      "preview": "recordRequestedDamage: (...args) => recordRequestedDamage(...args),\r\n    alive: (...args) => alive(...args),\r\n    hitFoe: (...args) => hitFoe(...args),\r\n    foe"
+    },
+    {
+      "tokens": 213,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 127,
+        "end": 153
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 256,
+        "end": 296
+      },
+      "preview": "; }\r\nfunction set$opts(v) { instanceState.opts = v; }\r\nfunction set$mode(v) { instanceState.mode = v; }\r\nfunction set$battleState(v) { instanceState.battleState"
+    },
+    {
+      "tokens": 140,
+      "first": {
+        "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+        "start": 111,
+        "end": 124
+      },
+      "second": {
+        "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+        "start": 441,
+        "end": 456
+      },
+      "preview": "try {\r\n      await context.engine.processDelayed();\r\n    } catch (error) {\r\n      if (!stillPlayerPhase()) return;\r\n      throw error;\r\n    }\r\n    if (!stillPla"
+    },
+    {
+      "tokens": 136,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 256,
+        "end": 287
+      },
+      "preview": ");\r\n}\r\n\r\n/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction set$drawPile(v) { instanceState.drawPile = v; }\r\nfunction set$hand("
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 127,
+        "end": 141
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\nfunction set$opts(v) { instanceState.opts = v; }\r\nfunction set$mode(v) { instanceState.mode = v; }\r\nfunction set$battleState(v) { instanceState.battleState"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 128,
+        "end": 142
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\nfunction set$mode(v) { instanceState.mode = v; }\r\nfunction set$battleState(v) { instanceState.battleState = v; }\r\nfunction set$foes(v) { instanceState.foes"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 129,
+        "end": 143
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\nfunction set$battleState(v) { instanceState.battleState = v; }\r\nfunction set$foes(v) { instanceState.foes = v; }\r\n/** @param {number} v */\r\nfunction set$en"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 130,
+        "end": 144
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\nfunction set$foes(v) { instanceState.foes = v; }\r\n/** @param {number} v */\r\nfunction set$energy(v) { instanceState.energy = v; }\r\n/** @param {number} v */\r"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 131,
+        "end": 145
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\n/** @param {number} v */\r\nfunction set$energy(v) { instanceState.energy = v; }\r\n/** @param {number} v */\r\nfunction set$maxEnergy(v) { instanceState.maxEner"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 133,
+        "end": 146
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\n/** @param {number} v */\r\nfunction set$maxEnergy(v) { instanceState.maxEnergy = v; }\r\n/** @param {number} v */\r\nfunction set$turn(v) { instanceState.turn ="
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 135,
+        "end": 153
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "preview": "; }\r\n/** @param {number} v */\r\nfunction set$turn(v) { instanceState.turn = v; }\r\nfunction set$busy(v) { instanceState.busy = v; }\r\nfunction set$pdef(v) { instan"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 274,
+        "end": 288
+      },
+      "preview": ";\r\n}\r\n\r\n/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction set$drawPile(v) { instanceState.drawPile = v; }\r\nfunction set$hand(v"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 276,
+        "end": 289
+      },
+      "preview": ";\r\n}\r\n\r\n/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction set$drawPile(v) { instanceState.drawPile = v; }\r\nfunction set$hand(v"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 278,
+        "end": 290
+      },
+      "preview": ";\r\n}\r\n\r\n/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction set$drawPile(v) { instanceState.drawPile = v; }\r\nfunction set$hand(v"
+    },
+    {
+      "tokens": 135,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 280,
+        "end": 291
+      },
+      "preview": ";\r\n}\r\n\r\n/* 牌区、卡牌临时覆盖和装备的战斗内状态。由 battle.runtime.js 转发活绑定。 */\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nfunction set$drawPile(v) { instanceState.drawPile = v; }\r\nfunction set$hand(v"
+    },
+    {
+      "tokens": 128,
+      "first": {
+        "file": "game/src/cards/cards.sync.backfiller.js",
+        "start": 15,
+        "end": 23
+      },
+      "second": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 118,
+        "end": 126
+      },
+      "preview": "{\n  if (left === right) return true;\n  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;\n  if (Array.isArray(left) !=="
+    },
+    {
+      "tokens": 116,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 1241,
+        "end": 1254
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 1280,
+        "end": 1295
+      },
+      "preview": "${index}]`;\r\n        if (!isRecord(requirement)) {\r\n          error(path, 'expected an object');\r\n          return;\r\n        }\r\n        if (Object.hasOwn(requir"
+    },
+    {
+      "tokens": 115,
+      "first": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 127,
+        "end": 138
+      },
+      "second": {
+        "file": "game/src/battle/runtime/battle.runtime.factory.js",
+        "start": 139,
+        "end": 153
+      },
+      "preview": "function set$G(v) { instanceState.G = v; }\r\nfunction set$opts(v) { instanceState.opts = v; }\r\nfunction set$mode(v) { instanceState.mode = v; }\r\nfunction set$bat"
+    },
+    {
+      "tokens": 105,
+      "first": {
+        "file": "game/src/cards/cards.sync.backfiller.js",
+        "start": 76,
+        "end": 82
+      },
+      "second": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 111,
+        "end": 117
+      },
+      "preview": ".getItem(storeKey);\n      if (raw == null) return;\n      const storedCards = JSON.parse(raw);\n      if (!Array.isArray(storedCards) || storedCards.length === 0)"
+    },
+    {
+      "tokens": 102,
+      "first": {
+        "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+        "start": 96,
+        "end": 105
+      },
+      "second": {
+        "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+        "start": 418,
+        "end": 426
+      },
+      "preview": "instanceRuntime.set$turn(instanceRuntime.turn + 1);\r\n    instanceRuntime.pdef.guard = false;   // 格挡只覆盖施放当回合，额外回合同样到期。\r\n    instanceRuntime.foes.forEach(foe => "
+    },
+    {
+      "tokens": 92,
+      "first": {
+        "file": "game/src/battle/core/battle.resolution.domain.js",
+        "start": 671,
+        "end": 678
+      },
+      "second": {
+        "file": "game/src/battle/effects/effect-steps.kills.js",
+        "start": 125,
+        "end": 132
+      },
+      "preview": ".status.healban} 回合）`, 'warn');\r\n            } else if (want > current) {\r\n              heal(want - current);\r\n              addFloat({ unit: 'self', text: '',"
+    },
+    {
+      "tokens": 89,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 455,
+        "end": 463
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 499,
+        "end": 507
+      },
+      "preview": ");\r\n      }\r\n    }\r\n    if (operation.amount !== undefined) {\r\n      if (!isPositiveInteger(operation.amount)) {\r\n        error(`${path}.amount`, 'must be a pos"
+    },
+    {
+      "tokens": 89,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 455,
+        "end": 463
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 540,
+        "end": 548
+      },
+      "preview": ");\r\n      }\r\n    }\r\n    if (operation.amount !== undefined) {\r\n      if (!isPositiveInteger(operation.amount)) {\r\n        error(`${path}.amount`, 'must be a pos"
+    },
+    {
+      "tokens": 89,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 499,
+        "end": 507
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 540,
+        "end": 548
+      },
+      "preview": ");\r\n      }\r\n    }\r\n    if (operation.amount !== undefined) {\r\n      if (!isPositiveInteger(operation.amount)) {\r\n        error(`${path}.amount`, 'must be a pos"
+    },
+    {
+      "tokens": 83,
+      "first": {
+        "file": "game/src/battle/bag/battle.bag.domain.js",
+        "start": 139,
+        "end": 145
+      },
+      "second": {
+        "file": "game/src/battle/bag/battle.bag.domain.js",
+        "start": 554,
+        "end": 560
+      },
+      "preview": ";\r\n      if ((instanceRuntime.pstat.status.healban || 0) > 0) {\r\n        instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pst"
+    },
+    {
+      "tokens": 83,
+      "first": {
+        "file": "game/src/battle/bag/battle.bag.domain.js",
+        "start": 140,
+        "end": 146
+      },
+      "second": {
+        "file": "game/src/battle/bag/battle.bag.domain.js",
+        "start": 216,
+        "end": 222
+      },
+      "preview": "if ((instanceRuntime.pstat.status.healban || 0) > 0) {\r\n        instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status"
+    },
+    {
+      "tokens": 76,
+      "first": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 331,
+        "end": 346
+      },
+      "second": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 382,
+        "end": 396
+      },
+      "preview": ",\r\n      });\r\n    },\r\n\r\n    // A3 卡牌规则迁移第一批（2026-09-25 老板令开工）：B1 纯伤害 / B2 多段与重复 /\r\n    // B3 治疗护甲吸血，共 23 张文本路径/专支卡改结构化 rules（docs/cards/card-rules-v2-taxonomy-2"
+    },
+    {
+      "tokens": 75,
+      "first": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 329,
+        "end": 345
+      },
+      "second": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 417,
+        "end": 435
+      },
+      "preview": ",\r\n        definitions,\r\n        domains: ['battle', 'triggers'],\r\n      });\r\n    },\r\n\r\n    // A3 卡牌规则迁移第一批（2026-09-25 老板令开工）：B1 纯伤害 / B2 多段与重复 /\r\n    // B3 治疗护"
+    },
+    {
+      "tokens": 68,
+      "first": {
+        "file": "game/src/battle/core/battle.card-play.domain.js",
+        "start": 12,
+        "end": 22
+      },
+      "second": {
+        "file": "game/src/battle/bag/battle.bag.domain.js",
+        "start": 18,
+        "end": 29
+      },
+      "preview": "const { missingInfusionReason } = createInfusionDomain(context);\r\n/** Player command boundary: inspect, collect fuel/targets, then submit one execution.\r\n * rea"
+    },
+    {
+      "tokens": 67,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 244,
+        "end": 250
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 455,
+        "end": 461
+      },
+      "preview": ");\r\n    }\r\n  }\r\n  if (operation.amount !== undefined) {\r\n    if (!isPositiveInteger(operation.amount)) {\r\n      error(`${path}.amount`, 'must be a positive inte"
+    },
+    {
+      "tokens": 67,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 244,
+        "end": 250
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 499,
+        "end": 505
+      },
+      "preview": ");\r\n    }\r\n  }\r\n  if (operation.amount !== undefined) {\r\n    if (!isPositiveInteger(operation.amount)) {\r\n      error(`${path}.amount`, 'must be a positive inte"
+    },
+    {
+      "tokens": 67,
+      "first": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 244,
+        "end": 250
+      },
+      "second": {
+        "file": "game/src/cards/card-rules.schema.js",
+        "start": 540,
+        "end": 546
+      },
+      "preview": ");\r\n    }\r\n  }\r\n  if (operation.amount !== undefined) {\r\n    if (!isPositiveInteger(operation.amount)) {\r\n      error(`${path}.amount`, 'must be a positive inte"
+    },
+    {
+      "tokens": 65,
+      "first": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 382,
+        "end": 395
+      },
+      "second": {
+        "file": "game/src/cards/cards.sync.rule-backfill.js",
+        "start": 419,
+        "end": 435
+      },
+      "preview": ",\r\n      });\r\n    },\r\n\r\n    // A3 第二批（B5 诅咒族，2026-09-25）：8 张可结构化诅咒卡迁移（curse op 解释分支已\r\n    // 接线——battle.resolution.js resolveCurseOperation，底层走 combat.addCurse "
+    },
+    {
+      "tokens": 65,
+      "first": {
+        "file": "game/src/battle/core/battle.resolution.domain.js",
+        "start": 268,
+        "end": 276
+      },
+      "second": {
+        "file": "game/src/battle/effects/battle.status-operations.domain.js",
+        "start": 34,
+        "end": 43
+      },
+      "preview": ";\r\n        // 目标选取（每段重算，windup 后目标可能倒下）：allEnemies 全体 / randomEnemy 每段随机一名 /\r\n        // 其余为点选目标（倒下则顺延战场首位，与 v1 同口径）。\r\n        const pickTargets = () => {\r\n    "
+    }
+  ]
+}

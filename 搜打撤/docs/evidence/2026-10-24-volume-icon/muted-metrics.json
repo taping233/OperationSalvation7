@@ -1,0 +1,54 @@
+[
+  {
+    "button": {
+      "h": 48.875,
+      "w": 53.92499923706055
+    },
+    "color": "rgb(235, 235, 235)",
+    "icons": [
+      {
+        "display": "block",
+        "height": "24px",
+        "strokes": [
+          "2.2",
+          "2.2"
+        ],
+        "viewBox": "0 0 24 24",
+        "width": "24px"
+      }
+    ],
+    "id": "btnHome",
+    "muted": false
+  },
+  {
+    "button": {
+      "h": 48.875,
+      "w": 53.92499923706055
+    },
+    "color": "rgb(239, 244, 246)",
+    "icons": [
+      {
+        "display": "none",
+        "height": "24px",
+        "strokes": [
+          "2.2",
+          "2.2"
+        ],
+        "viewBox": "0 0 24 24",
+        "width": "24px"
+      },
+      {
+        "display": "block",
+        "height": "24px",
+        "strokes": [
+          "2.2",
+          "2.2"
+        ],
+        "viewBox": "0 0 24 24",
+        "width": "24px"
+      }
+    ],
+    "id": "btnMute",
+    "muted": true
+  }
+]

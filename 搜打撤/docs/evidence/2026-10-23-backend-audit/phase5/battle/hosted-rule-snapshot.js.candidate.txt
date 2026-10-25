@@ -1,0 +1,5 @@
+// Each historical rule owns its objects; field order is the migration fingerprint.
+/** @param {string} name */
+export function hostedRuleSnapshot(name) {
+  return { version: 1, battle: { hosted: [name] } };
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "path": "game/src/battle/view/battle.decision-shell.js",
+    "sha256": "3A5C127AA0CEF6F506E7A34D0D38E9BA9D1DC5DE1996252DA0D3AAC3EA5348B7"
+  },
+  {
+    "path": "game/src/battle/view/battle.decision-content.js",
+    "sha256": "25074A2F38D3BE92A8644A713C7435D5B6F0920681A28A64AE23A1DD380003B6"
+  },
+  {
+    "path": "game/src/battle/view/battle.overlays.js",
+    "sha256": "6019E695FF6D0E5036DFF75DB9D99BE0C0CB79569918B0B1A1D3285241EE5B8F"
+  },
+  {
+    "path": "game/src/battle/view/battle.discover-view.js",
+    "sha256": "87E24CB1D2D0A3472AFDF2A0597427618F8DF4C3427A2D5F73BEE80C2EBC4D55"
+  },
+  {
+    "path": "game/src/ui/discovery-selection.js",
+    "sha256": "94FBD6D5A4506C833B05D7DC161E693431C4D286703DFFF5C079684C0382054C"
+  },
+  {
+    "path": "game/css/battle-decision.css",
+    "sha256": "481BF5AB6011509B357AFBB817437179403FAF1BD3A36C1139E1099A38F976BB"
+  },
+  {
+    "path": "game/css/battle-secondary-overlay.css",
+    "sha256": "5C23FF86F3368E1EC00051F976E41E9ECF9B2635AD1AD3BB089C168D8472C5C0"
+  },
+  {
+    "path": "game/css/expedition-rewards.css",
+    "sha256": "7249794F535B98507D7E5627522C1A7F0B470D6ACE4D2B38BA5B4E1A3E7D8FD9"
+  }
+]

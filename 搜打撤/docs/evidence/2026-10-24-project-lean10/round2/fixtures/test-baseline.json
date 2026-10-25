@@ -1,0 +1,331 @@
+{
+  "target": {
+    "files": 201,
+    "total": 2536,
+    "passed": 2485,
+    "failed": 51
+  },
+  "baseline": {
+    "files": 17,
+    "total": 263,
+    "passed": 212,
+    "failed": 51
+  },
+  "comparison": {
+    "files": 17,
+    "injected": 17,
+    "comparedCases": 263,
+    "oldFailed": 51,
+    "currentFailed": 51,
+    "differences": [],
+    "baselineRunRuntimeChanged": []
+  },
+  "failedCases": [
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "duration": 1394.067138671875,
+      "failed": [
+        {
+          "name": "one real empty-field pointer hover resolves 9 raw hand entries once, not per target",
+          "error": "AssertionError: expected 81 to be 65 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:110:27"
+        },
+        {
+          "name": "one real empty-field pointer hover resolves 30 raw hand entries once, not per target",
+          "error": "AssertionError: expected 501 to be 485 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:110:27"
+        },
+        {
+          "name": "one real empty-field pointer hover resolves 60 raw hand entries once, not per target",
+          "error": "AssertionError: expected 1866 to be 1850 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:110:27"
+        },
+        {
+          "name": "uses the current catalog 风暴火球 with unchanged damage, cost and play wording",
+          "error": "AssertionError: expected 81 to be 65 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:127:27"
+        }
+      ]
+    },
+    {
+      "file": "tests/battle-entry-view.test.js",
+      "duration": 799.855224609375,
+      "failed": [
+        {
+          "name": "keeps the ready stage during payment and charges once only after both choices",
+          "error": "AssertionError: expected '\\n    \\n    第 1 回合选择中\\n       选项战斗规则 …' to contain '支付代价'     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:233:62"
+        },
+        {
+          "name": "keeps the degraded stage during payment and charges once only after both choices",
+          "error": "AssertionError: expected '\\n    \\n    第 1 回合选择中\\n      部分美术未就绪 …' to contain '支付代价'     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:233:62"
+        },
+        {
+          "name": "cleans up the retained stage on real departure without charging an incomplete payment",
+          "error": "AssertionError: expected false to be true // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:267:78"
+        }
+      ]
+    },
+    {
+      "file": "tests/battle-render-derivation.test.js",
+      "duration": 802.256591796875,
+      "failed": [
+        {
+          "name": "compares real mixed combat inputs without keeping derived rules across renders",
+          "error": "AssertionError: expected { label: 'ready', cost: 28, …(1) } to deeply equal { label: 'ready', cost: 10, …(1) }     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-render-derivation.test.js:115:28"
+        }
+      ]
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "duration": 5112.915283203125,
+      "failed": [
+        {
+          "name": "真实战斗奖励刷新续流 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false）",
+          "error": "AssertionError: expected null not to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-settlement-retry.test.js:196:57"
+        },
+        {
+          "name": "真实战斗奖励刷新续流 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true）",
+          "error": "AssertionError: expected null not to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-settlement-retry.test.js:196:57"
+        }
+      ]
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "duration": 3369.73388671875,
+      "failed": [
+        {
+          "name": "battle tools template ownership returns from real discovery with one current set and preserves subsequent updates",
+          "error": "AssertionError: expected { options: [ { …(10) }, …(2) ], …(21) } to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-tools-lifecycle.test.js:179:36"
+        }
+      ]
+    },
+    {
+      "file": "tests/dev-tools-lazy-entry.test.js",
+      "duration": 3185.5634765625,
+      "failed": [
+        {
+          "name": "开发工具真正按需加载 普通依赖图直接选择新 loader 专测，boot 仍要求既有全量门",
+          "error": "AssertionError: expected 'full' to be 'quick' // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\dev-tools-lazy-entry.test.js:102:24"
+        }
+      ]
+    },
+    {
+      "file": "tests/event-callback-lifecycle-audit.test.js",
+      "duration": 2068.74755859375,
+      "failed": [
+        {
+          "name": "事件等待与回调生命周期审计 F02 满包动力锤保留固定奖励，重载后可整理重试且不重复发卡",
+          "error": "AssertionError: expected '\\n    生命周期事件领取奖励\\n    闪金之锤✓已收下\\n    […' to contain '1 张已入背包'     at D:\\素材\\代号柒\\搜打撤\\tests\\event-callback-lifecycle-audit.test.js:283:43"
+        },
+        {
+          "name": "事件等待与回调生命周期审计 F15/F41 物资格满包显示整理，领取成功留结果页再继续",
+          "error": "AssertionError: expected '\\n    物资投放点物资已领取\\n    钥匙已入背包木材已永久放弃\\n…' to contain '领取完成'     at D:\\素材\\代号柒\\搜打撤\\tests\\event-callback-lifecycle-audit.test.js:445:38"
+        },
+        {
+          "name": "事件等待与回调生命周期审计 F06 三选一明确永久放弃，其余候选刷新后仍不可领取",
+          "error": "AssertionError: expected '\\n    测试三选一领取奖励\\n    候选1×已放弃候选2✓已入背包候…' to contain '2 张已永久放弃'     at D:\\素材\\代号柒\\搜打撤\\tests\\event-callback-lifecycle-audit.test.js:533:38"
+        },
+        {
+          "name": "资源奖励公共领取体验 减弱动效仍给出真实领取回执，不播放飞入",
+          "error": "AssertionError: expected '' to contain '1 张已入背包'     at D:\\素材\\代号柒\\搜打撤\\tests\\event-callback-lifecycle-audit.test.js:659:64"
+        }
+      ]
+    },
+    {
+      "file": "tests/nightshift-u10-teardown-guards.test.js",
+      "duration": 1177.866943359375,
+      "failed": [
+        {
+          "name": "U10 H2 chests 逐卡揭晓音效守卫 揭晓后 document 拆除，音效定时器安全短路，不抛 document 引用错",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at D:\\素材\\代号柒\\搜打撤\\tests\\nightshift-u10-teardown-guards.test.js:66:51"
+        }
+      ]
+    },
+    {
+      "file": "tests/node-cancel-semantics.test.js",
+      "duration": 300.47119140625,
+      "failed": [
+        {
+          "name": "节点取消语义：关闭不能跨层或开始撤离 显式点击终局撤离仍调用原撤离事务",
+          "error": "AssertionError: expected \"spy\" to be called 1 times, but got 0 times     at D:\\素材\\代号柒\\搜打撤\\tests\\node-cancel-semantics.test.js:118:21"
+        }
+      ]
+    },
+    {
+      "file": "tests/page-perf-battle.test.js",
+      "duration": 377.001708984375,
+      "failed": [
+        {
+          "name": "battle page input and DOM work measures discovery readiness commits without changing its 350 ms admission window",
+          "error": "AssertionError: expected '剩余 1 次' to be '1' // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\page-perf-battle.test.js:192:81"
+        }
+      ]
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "duration": 648.536376953125,
+      "failed": [
+        {
+          "name": "药水说明与确认生命周期 pointerup收起只读说明，后续终止事件不触碰旧面板",
+          "error": "TypeError: Cannot read properties of null (reading 'textContent')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:71:16"
+        },
+        {
+          "name": "药水说明与确认生命周期 pointercancel收起只读说明，后续终止事件不触碰旧面板",
+          "error": "TypeError: Cannot read properties of null (reading 'textContent')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:71:16"
+        },
+        {
+          "name": "药水说明与确认生命周期 mouseleave收起只读说明，后续终止事件不触碰旧面板",
+          "error": "TypeError: Cannot read properties of null (reading 'textContent')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:71:16"
+        },
+        {
+          "name": "药水说明与确认生命周期 replace在未松手时清理说明，旧节点不能提交或重新打开",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:82:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 mode在未松手时清理说明，旧节点不能提交或重新打开",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:82:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 close在未松手时清理说明，旧节点不能提交或重新打开",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:82:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 new-stage在未松手时清理说明，旧节点不能提交或重新打开",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:82:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 100次普通按下/松开及药水栏替换不保留旧cancel回调",
+          "error": "TypeError: Cannot convert undefined or null to object     at Object.getOwnPropertyDescriptor (<anonymous>)"
+        },
+        {
+          "name": "药水说明与确认生命周期 同UID数量更新保留当前入口，旧确认失效，新说明使用当前数量且不消费",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:123:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 被替换UID的已打开确认与入口都失效，当前入口仍可读取",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:143:39"
+        },
+        {
+          "name": "药水说明与确认生命周期 同一药水栏重复渲染保留节点，悬停/移开仍可使用",
+          "error": "TypeError: Cannot read properties of null (reading 'textContent')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:160:48"
+        },
+        {
+          "name": "药水说明与确认生命周期 确认多敌道具后进入公共选靶，取消保持原UID和槽位",
+          "error": "TypeError: Cannot read properties of null (reading 'querySelector')     at D:\\素材\\代号柒\\搜打撤\\tests\\potion-tip-lifecycle.test.js:178:12"
+        }
+      ]
+    },
+    {
+      "file": "tests/skull-sword-effective-session.test.js",
+      "duration": 4379.404541015625,
+      "failed": [
+        {
+          "name": "其他手牌支付保持原有初始攻击资格，同时选牌面显示有效不朽斩",
+          "error": "AssertionError: expected [] to have a length of 1 but got +0     at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1257:20)"
+        },
+        {
+          "name": "BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID",
+          "error": "AssertionError: expected '消耗牌堆：骷髅王剑×1，不朽斩×2（不自动洗回，仅由卡牌效果取回；点击查看）' to be '' // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\skull-sword-effective-session.test.js:514:44"
+        }
+      ]
+    },
+    {
+      "file": "tests/stellar-divination.test.js",
+      "duration": 88.6611328125,
+      "failed": [
+        {
+          "name": "type-targeted deck draw also releases a copy through the queue despite a full hand",
+          "error": "TypeError: checkSealTransformation is not a function     at drawCards (D:\\素材\\代号柒\\搜打撤\\game\\src\\battle\\core\\battle.draw.domain.js:156:5)"
+        }
+      ]
+    },
+    {
+      "file": "tests/structured-backupcell.test.js",
+      "duration": 56.307861328125,
+      "failed": [
+        {
+          "name": "后备能源的结构化打出合同 preserves legacy draw and refill order in normal mode when display text changes",
+          "error": "AssertionError: expected { energy: 11, maxEnergy: 11, …(3) } to deeply equal { energy: 11, maxEnergy: 11, …(3) }     at D:\\素材\\代号柒\\搜打撤\\tests\\structured-backupcell.test.js:70:21"
+        },
+        {
+          "name": "后备能源的结构化打出合同 preserves legacy draw and refill order in boss mode when display text changes",
+          "error": "AssertionError: expected { energy: 11, maxEnergy: 11, …(3) } to deeply equal { energy: 11, maxEnergy: 11, …(3) }     at D:\\素材\\代号柒\\搜打撤\\tests\\structured-backupcell.test.js:70:21"
+        }
+      ]
+    },
+    {
+      "file": "tests/sts-attack-presentation.test.js",
+      "duration": 82.607177734375,
+      "failed": [
+        {
+          "name": "real 迅疾箭 presents its windup in an earlier RAF render than the damage and still draws from the real pile",
+          "error": "AssertionError: expected [ 'normal-sha-6-0', …(8) ] to have a length of 98 but got 9     at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1257:20)"
+        }
+      ]
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "duration": 25686.2705078125,
+      "failed": [
+        {
+          "name": "Agent uses the current domain infusion candidates a selected card that becomes forbidden is removed before cancellation, without resource payment",
+          "error": "AssertionError: expected [] to deeply equal [ 'agent-infuse-1' ]     at D:\\素材\\代号柒\\搜打撤\\tests\\sts2-agent-infusion-1021.test.js:132:59"
+        }
+      ]
+    },
+    {
+      "file": "tests/sys03-loot-shop-txn.test.js",
+      "duration": 2561.012939453125,
+      "failed": [
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） 满包整理通过背包命令入口，返回后保留所选卡与待领状态",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） chestTake1 满包拒绝：grantCard false 不入包不标记，卡保持可点（可再点）",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） chestTake1 成功后标记已收，takeAll 不重复发放已拾取卡",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） takeAll 满包时保留未入包卡，金币只领一次，明确放弃后才离开",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） 三选一（chestPick）满包拒绝：不 next、不重复发币、面板保留可腾格重选",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "SYS-03 搜刮页事务序（chests.js） 三选一成功或明确放弃均不重复结算开箱已收金币",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at revealFirst (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:91:51)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 手动揭晓取消原逐帧timer，同箱只揭晓一次且不会重复排音效",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 依次播放开启帧，最终帧结束前不公开牌，领奖才发卡，开箱金币仅一次",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 开启中跳过后进下一箱，旧帧timer不串新箱或重复领奖",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 开启中挂起到背包，旧timer不抢面板，恢复原结果不重抽或提前发放",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 减少动态直接静态揭晓，帧等待不阻塞收取",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 切到其他节点面板作废开启timer，不抢新界面或提前领奖",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        },
+        {
+          "name": "宝箱开启帧与唯一揭晓 turbo直接到静态结果，每次新开箱收币而卡只由领取动作发放",
+          "error": "TypeError: Cannot read properties of null (reading 'click')     at animatedChest (D:\\素材\\代号柒\\搜打撤\\tests\\sys03-loot-shop-txn.test.js:284:64)"
+        }
+      ]
+    }
+  ]
+}

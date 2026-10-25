@@ -1,0 +1,89 @@
+{
+  "task": "project-bug-sweep-round2-expedition-1024",
+  "fixCount": 5,
+  "status": "frozen-five-fixes-complete-targeted-validation",
+  "fixes": [
+    {
+      "id": "R2-SWEEP-E1",
+      "summary": "研究所商店重入或保存读档后重新生成货架，已售商品重新上架；购买没有立即保存。",
+      "rootCause": "openNestShop将三组货架及sold只保留在本次闭包中，开店及购买没有保存货架状态，持久字段缺失。",
+      "change": "可选nestShopStocks按第3/8格分别保存cardSlots/classSlots/runeSlots的首次卡牌、符文、价格、sold；生成和购买调用既有保存；新研究所重置，读档恢复，缺字段旧档首次开店生成；非法货架结构拒绝读取并保留原档。",
+      "sourceFiles": [
+        "game/src/run/game.nest.js",
+        "game/src/run/game-session-persistence.js",
+        "game/src/run/game-session-restoration.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/game.store.types.d.ts",
+        "docs/save-format.md"
+      ],
+      "tests": ["tests/project-bug-sweep-round2-nest-shop.test.js", "tests/nest-node-lifecycle-audit.test.js"],
+      "fixtureNote": "旧nest-node-lifecycle每测复用game并Object.assign，补nestShopStocks空表，避免新增持久字段在测试间残留已售状态；新恢复fixture补Base.syncPlayTime端口。",
+      "beforeFix": { "files": 1, "failed": 4, "exit": 1 },
+      "afterFix": {
+        "command": "vitest run tests/project-bug-sweep-round2-nest-shop.test.js tests/nest-node-lifecycle-audit.test.js tests/project-bugfix-round2-expedition-nest.test.js tests/game-session-slices.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+        "files": 4,
+        "passed": 53,
+        "exit": 0
+      },
+      "boundaries": "不改变卡池、价格、研究所节点、牌盒满处理或符文容量规则。"
+    },
+    {
+      "id": "R2-SWEEP-E2",
+      "summary": "研究所读档后丢失首领模板，首次战斗重新随机首领并推进随机流。",
+      "rootCause": "恢复仅保留nestBossName并清空运行模板，startNestBattle把模板缺失当成新局重新抽取。",
+      "change": "已知nestBossName从固定模板恢复；只有未知旧值沿原随机兜底，保留保存首领及随机流位置。",
+      "sourceFiles": ["game/src/run/game.nest.js", "game/src/run/game-session-restoration.js", "docs/save-format.md"],
+      "tests": ["tests/project-bug-sweep-round2-nest-progress.test.js"],
+      "beforeFix": "保存远古龙尊、模拟读档模板为空、随机值0.99，实触发首领格后变为完全形态·元素领主；断言原首领与零随机调用失败。"
+    },
+    {
+      "id": "R2-SWEEP-E3",
+      "summary": "研究所击杀与所主击破战绩未存档，读档后归零或继承上一档残留，结算分数错误。",
+      "rootCause": "nestKills/nestBossDown参与结算但未进入序列化和恢复字段。",
+      "change": "保存精确击杀及击破结果，恢复显式覆盖；旧档缺失/null为0/false，坏计数或布尔拒绝读取。",
+      "sourceFiles": ["game/src/run/game-session-persistence.js", "game/src/run/game-session-restoration.js", "game/src/hub/run-save-validation.js", "docs/save-format.md"],
+      "tests": ["tests/project-bug-sweep-round2-nest-progress.test.js"],
+      "beforeFix": "真实payload漏字段；读取保存8/true或旧缺字段时仍保留上一档99/true。进度组修前4项全红。",
+      "afterFixWithE1E2": {
+        "command": "vitest run tests/project-bug-sweep-round2-nest-progress.test.js tests/project-bug-sweep-round2-nest-shop.test.js tests/nest-node-lifecycle-audit.test.js tests/project-bugfix-round2-expedition-nest.test.js tests/nest-settlement-transaction.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+        "files": 5, "passed": 47, "exit": 0
+      }
+    },
+    {
+      "id": "R2-SWEEP-E4",
+      "summary": "普通撤离源聚合按name将不同ID的同名牌转换为首个ID。",
+      "proof": {
+        "departed": [["version-a",1],["version-b",1]],
+        "remaining": [["version-a",2]],
+        "stashed": [["version-a",2]],
+        "pocket": [["version-a",2]]
+      },
+      "method": "Node只读调用planBaseDeparture和createExtractionCommands；两个稳定key分别携带同名不同ID法术，随机口袋保留率固定命中。",
+      "change": "仅新draft带sourceIdentityVersion:1，待入库/保留口袋/回执按稳定id+variantKey（无id按name）分组。UI单选/全选/估值保留来源key和外层variantKey，现代name-only歧义拒绝；旧draft名称分组、请求payload、恢复日志与历史回执原样兼容，不静默升级。完成确认包含来源版本身份。",
+      "sourceFiles": ["game/src/hub/extraction.commands.js", "game/src/run/game.run.altar.js", "game/src/ui/extraction-rewards-view.js", "game/src/hub/game.store.types.d.ts", "docs/save-format.md"],
+      "tests": ["tests/project-bug-sweep-round2-extraction-identity.test.js", "tests/project-bug-sweep-round2-extraction-ui.test.js", "tests/extraction-record-saved-cards-cloud.test.js"],
+      "beforeFix": "命令专测5项中4红1过；UI专测5项中4红1过（丢sourceKey、外层variant及确认签名）。",
+      "afterFix": [
+        { "command": "vitest run tests/project-bug-sweep-round2-extraction-ui.test.js tests/project-bug-sweep-round2-extraction-identity.test.js tests/extraction-record-saved-cards-cloud.test.js tests/extraction-recovery.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot", "files": 4, "passed": 96, "exit": 0 },
+        { "command": "vitest run tests/project-bug-sweep-round2-extraction-identity.test.js tests/project-bug-sweep-round2-extraction-ui.test.js tests/extraction-session-resume.test.js tests/extraction-rewards-view.test.js tests/extraction-settlement.test.js tests/exp003-extraction-pocket-copy.test.js tests/project-bug-sweep-extraction-entry-1024.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot", "files": 7, "passed": 46, "exit": 0 }
+      ],
+      "compatibilityAudit": "全game/src的selections消费只有extraction.commands与altar；恢复模块按原payload摘要重放。独立ExtractionPending类型补可选协议及堆叠variantKey，现代回执差集按同一身份口径。旧2项同名回执fixture改为显式冻结legacy pending；现代新链用真实Base/RunStorage/Recovery验证不同ID与同ID不同variant的选择、持久化、口袋、回执和after-base中断重试。",
+      "counting": "只计源聚合及选择身份损毁；上一轮目的仓库sameStoredCard修复不重复计。"
+    },
+    {
+      "id": "R2-SWEEP-E5",
+      "summary": "地图携出预估把必散失的初始攻击与职业卡也计入1/3保留收益。",
+      "rootCause": "previewExtraction使用全部消耗区张数计算expectedKept，未沿实际结算排除初始攻击和职业卡。",
+      "change": "保留pocketTotal为全部消耗区张数；仅实际可保留卡参与期望值，不改变概率或来源身份协议。",
+      "sourceFiles": ["game/src/run/extraction-preview.js"],
+      "tests": ["tests/project-bug-sweep-round2-extraction-preview.test.js"],
+      "beforeFix": { "files": 1, "failed": 3, "passed": 2, "exit": 1 },
+      "afterFix": {
+        "command": "vitest run tests/project-bug-sweep-round2-extraction-preview.test.js tests/extraction-preview.test.js tests/exp003-extraction-pocket-copy.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+        "files": 3, "passed": 14, "exit": 0
+      },
+      "coverage": "初始攻击、职业、可留法术、三者混合、空区分别与真实extractionPocketOutcome的全部命中结果对照，确认只读。"
+    }
+  ],
+  "notes": "保留前轮全部增量；本子任务未build/全量/服务/提交/台账。父统一静态和当前内置浏览器实页。"
+}

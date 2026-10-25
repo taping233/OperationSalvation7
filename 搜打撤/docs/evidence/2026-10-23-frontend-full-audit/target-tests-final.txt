@@ -1,0 +1,32 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+··························································································x······································································································································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > states the item and equipment exceptions on the ordinary-battle grave badge
+AssertionError: expected '' to be '消耗牌堆：（不自动洗回，仅由卡牌效果取回；点击查看）' // Object.is equality
+
+- Expected
++ Received
+
+- 消耗牌堆：（不自动洗回，仅由卡牌效果取回；点击查看）
+
+ ❯ tests/battle-infusion-action-layout.test.js:540:61
+    538|       pileTip: () => '', cardBackHTML: '', escAttr: value => value });
+    539|     const host = document.createElement('div'); host.innerHTML = piles…
+    540|     expect(host.querySelector('.bt-pile:last-child').title).toBe('消耗牌堆…
+       |                                                             ^
+    541|   });
+    542| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 10 passed (11)
+      Tests  1 failed | 224 passed (225)
+   Start at  22:24:37
+   Duration  24.56s (transform 5.64s, setup 0ms, collect 12.52s, tests 21.92s, environment 40.54s, prepare 3.04s)
+

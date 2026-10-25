@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-24",
+  "scope": "Battle rule bug sweep round2",
+  "status": "implemented, uncommitted; source and tests frozen for parent integration; parent owns static checks and registry",
+  "fixedRootCauses": 6,
+  "productionFiles": [
+    "game/src/battle/core/battle.engine.factory.domain.js",
+    "game/src/battle/core/battle.foe-lifecycle.domain.js",
+    "game/src/battle/core/battle.core-ports.types.d.ts",
+    "game/src/battle/core/battle.draw.domain.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/battle/core/battle.enemy-phase.domain.js",
+    "game/src/battle/effects/battle.card-cost.js",
+    "game/src/battle/core/battle.damage.domain.js",
+    "game/src/battle/core/battle.measured-damage.js",
+    "game/src/battle/view/battle.preview.js"
+  ],
+  "newTests": [
+    "tests/project-bug-sweep-round2-battle-1024.test.js"
+  ],
+  "updatedExistingTests": [
+    "tests/m7-battle.test.js",
+    "tests/infuse-free-play.test.js",
+    "tests/full-review-regressions-battle.test.js",
+    "tests/hero-cards.test.js",
+    "tests/card-effect-semantics.test.js",
+    "tests/battle-pouch-entry.test.js"
+  ],
+  "fixes": [
+    {
+      "id": "battle-round2-01",
+      "title": "反击、抽到和延迟伤害击杀漏派发公共击杀奖励",
+      "before": "真实鳞甲在敌方回合反击击杀，登记onKill攻击祝福应+1实0；onDraw/延迟同样绕过原出牌收尾计数。",
+      "change": "公共死亡结算在复活替代判定后通知共享奖励；先按敌人对象WeakSet占位再触发反应；卡牌自身rider保持原数量；恢复快照已有尸体标记为已领取。",
+      "checks": [
+        "鳞甲反击击杀一次",
+        "onDraw击杀",
+        "回声及本体各一次",
+        "多段双杀与每击杀金币rider",
+        "延迟击杀",
+        "复活/控制不算击杀",
+        "旧档尸体不重领",
+        "新战斗相同敌人ID正常领取"
+      ]
+    },
+    {
+      "id": "battle-round2-02",
+      "title": "嵌套抽牌覆盖外层批次记录，直接释放漏放已抽武术",
+      "before": "万剑归宗抽牌中先入手武术，再抽到天启剑额外抽牌；lastDrawnUids被清空，先入手武术遗留手牌，仅释放4张而非5张。",
+      "change": "抽到触发和灰烬直释完成后合并保留外层已到达UID；内部抽牌当时仍保有独立结果。",
+      "checks": [
+        "固定牌序天启剑+万剑归宗释放完整5张",
+        "嵌套按抽到法术数治疗只计内部法术，不计外层已到达牌"
+      ]
+    },
+    {
+      "id": "battle-round2-03",
+      "title": "不屈符文漏响应敌方攻击与中毒",
+      "before": "runes.js声明每次受到伤害抽1张，原实现仅自伤入口有抽牌。真实敌击/毒伤均少抽。",
+      "change": "移入统一notifyPlayerDamaged入口，实际正伤且玩家存活/同场时触发。",
+      "checks": [
+        "两敌攻击各抽1张",
+        "单次毒伤抽1张",
+        "自伤仍只抽1张",
+        "护甲全挡不抽"
+      ]
+    },
+    {
+      "id": "battle-round2-04",
+      "title": "时光符文错误冻结负面诅咒持续时间",
+      "before": "正面计时保留被实现为跳过玩家全部tickDurations；1回合冰冻/沉默及2回合破甲/禁疗均不递减。",
+      "change": "tickDurations新增可选preserveBlessings参数，默认语义不变；时光玩家仍递减诅咒，只保留祝福及正面临时数值。",
+      "checks": [
+        "真实两回合冰冻/沉默/破甲/禁疗按时解除",
+        "潜行及免疫保持"
+      ]
+    },
+    {
+      "id": "battle-round2-05",
+      "title": "无限符文漏给新洗入牌库的套牌外招式减费",
+      "before": "真实acquire dest:deck创建btd UID，抽到后3费仍3费；原成本只识别bts生成UID。",
+      "change": "同时识别btd与bts，沿用原费用优先级及0下限。",
+      "checks": [
+        "真实获取→入库→抽牌新招式3费变2费",
+        "原套牌UID仍3费",
+        "卡模板仍3费"
+      ]
+    },
+    {
+    "id": "battle-round2-06",
+    "title": "破隐一击只翻倍印刷伤害，初始攻击及攻击加成不翻倍",
+    "before": "真实红例：攻击2初始攻击只打2而非4；基础3+攻击2只打8而非10；目标3护甲时打5而非7。",
+    "change": "统一倍率在攻击/法伤/流血加成后、防御前应用；测量心数与预测复用同一倍率；独立回声/反击保留原值。",
+    "checks": ["初始攻击、带印刷增量、护甲三组预测与实际完全一致", "心数8点最终伤害折为2心", "独立契约回声仍仅2点真伤", "英雄卡旧断言同步整体伤害翻倍现行规则"]
+    }
+  ],
+  "fixtureOnlyCorrections": [
+    "m7：用真实击杀替代无死者手动奖励调用，保留攻击力与日志一次性断言。",
+    "infuse-free-play/full-review/pouch-entry：纯发现确认前动作等待属于可输入状态，允许在该边界断言和取消；保留业务断言。",
+    "hero-cards：纯发现确认后源牌才付款离手，精神药水抽牌后的期望排除源UID。",
+    "card-effect-semantics：同步前轮已修燃料按费用2而非售价3，治疗4而非6。"
+  ],
+  "validation": {
+    "finalIntegration": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/project-bug-sweep-round2-battle-1024.test.js tests/hero-cards.test.js tests/battle-preview-trust-boundary.test.js tests/battle-preview-amount.test.js tests/battle-effect-damage-boundary.test.js tests/combat.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "exitCode": 0, "filesPassed": 6, "testsPassed": 96, "newTestsPassed": 19, "durationSeconds": 31.15,
+      "diffCheckExitCode": 0
+    },
+    "newRegression": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/project-bug-sweep-round2-battle-1024.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "exitCode": 0,
+      "filesPassed": 1,
+      "testsPassed": 15,
+      "durationSeconds": 1.87
+    },
+    "adjacentFinal": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/project-bug-sweep-round2-battle-1024.test.js tests/battle-nature-staff-cost.test.js tests/battle-snapshot-phase-cost.test.js tests/normal-effects-deck-regression.test.js tests/battle-effect-damage-boundary.test.js tests/project-bugfix-round2-battle.test.js tests/project-bug-sweep-battle-1024.test.js tests/battle-trigger-lifecycle-unification.test.js tests/ember-burst-rot-seed.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "exitCode": 0,
+      "filesPassed": 9,
+      "testsPassed": 97,
+      "durationSeconds": 21.21,
+      "newTestsAtRun": 13
+    },
+    "earlier": {
+      "exitCode": 0,
+      "filesPassed": 7,
+      "testsPassed": 61,
+      "durationSeconds": 19.01,
+      "files": [
+        "card-effect-semantics",
+        "battle-pouch-entry",
+        "combat",
+        "battle-turn-effects-domain",
+        "battle-trigger-lifecycle-unification",
+        "m7-battle",
+        "new-round2"
+      ]
+    },
+    "fixturePass": {
+      "exitCode": 0,
+      "filesPassed": 3,
+      "testsPassed": 26,
+      "durationSeconds": 28.96,
+      "files": [
+        "infuse-free-play",
+        "full-review-regressions-battle",
+        "hero-cards"
+      ]
+    },
+    "notRun": [
+      "browser game page",
+      "build",
+      "full-suite",
+      "commit",
+      "push"
+    ]
+  }
+}

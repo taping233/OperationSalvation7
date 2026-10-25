@@ -1,0 +1,171 @@
+{
+  "pipeline": "NAI4.5 Full then one built-in refinement per new image",
+  "approvedReuse": [
+    "ev19-potions",
+    "tt6-goldhammer"
+  ],
+  "jobs": [
+    {
+      "id": "tt6-demondeal",
+      "name": "受困运输队",
+      "asset": "event-tt6-demondeal",
+      "subject": "1man, adult transport worker, short dark hair, olive work jacket, simple work gloves, pulling the handle of a heavy closed rectangular military supply trunk beside the cropped rear of a stalled van, focused tired expression.",
+      "composition": "Close oblique view at trunk height. Face in upper-left, bent forearm and gripping glove lead to the trunk's near handle in the central foreground. One small portable kit is subordinate beside the loading edge. Believable box corners and a grounded pulling posture. Abstract muted van panels in the background, no complete vehicle or street.",
+      "light": "Cool blue-gray shade with soft amber reflected daylight on the face and the trunk handle, grouped dark olive shadows.",
+      "fix": "箱体是独立闭合长方体，提手、手指与手臂接触准确。车只露局部，不画整车，不增加远处人物或怪物。"
+    },
+    {
+      "id": "tt6-bandits",
+      "name": "武装截查",
+      "asset": "event-bandits-anime-v2",
+      "subject": "1man, adult rebel scavenger, dark weathered jacket, desaturated rust red scarf, watchful unfriendly expression, raising one open hand to stop a traveler, plain steel crowbar held downward in his other hand.",
+      "composition": "Low close medium shot from the stopped traveler's viewpoint. Raised palm occupies a near side plane without covering his face. His shoulders form a diagonal, gaze toward viewer. A cropped dark obstruction edge hints at a makeshift checkpoint. Background reduced to indistinct cold wall masses, no crowd or detailed city.",
+      "light": "Cold slate blue background, narrow muted warm sidelight on cheek and stopping palm, dark quiet lower frame.",
+      "fix": "主动作是拦停检查，不画战斗；抬手五指结构准确，撬棍朴素且向下，不加枪械、徽章或额外人物。"
+    },
+    {
+      "id": "tt6-mystery",
+      "name": "失联配给柜",
+      "asset": "event-tt6-mystery",
+      "subject": "Close-up of a worn but simple military ration cabinet, one gloved hand pulling open a shallow metal drawer, a fractured translucent access-card piece and a few dull silver coins inside, one small amber status light.",
+      "composition": "Oblique close shot. The half-open drawer cuts diagonally from lower-left toward center. Gloved fingers curl naturally around its attached handle. Access fragment catches a small cool reflection, coins sit in a separate shallow recess. Cabinet fills left two thirds, soft blue-gray planes fade on right, no person or legible screen.",
+      "light": "Deep cool metal shadows, restrained amber reflection on drawer rim, pale cyan translucent card edge.",
+      "fix": "画清抽屉真实透视、滑轨开合与手握把手的关系。碎片和硬币只是少量物资，不画复杂科技屏幕或库存陈列。"
+    },
+    {
+      "id": "tt6-goldmine",
+      "name": "塌陷地下库",
+      "asset": "event-tt6-goldmine-1013-v2",
+      "subject": "One gloved hand reaching toward several dull silver coins beneath a cracked concrete beam, a plain timber brace supporting the beam at one side, abandoned basement supply corner.",
+      "composition": "Tight low oblique close-up. Coins and reaching fingers are the focal point near the lower-left third; the tilted beam makes a broad diagonal overhead. One timber brace and one dark recess suggest the risk and the safer alternative. Background only broad blue-gray masonry shadow shapes, no sweeping ruins or mine.",
+      "light": "Quiet cool gray shadows with a restrained strip of warm daylight touching the coins and glove knuckles.",
+      "fix": "城市地下库，不是矿井。用少量梁柱与木撑交代风险，硬币与手是焦点，不画整片废墟或漂浮碎石。"
+    },
+    {
+      "id": "tt6-relief",
+      "name": "隔离线急救",
+      "asset": "event-tt6-relief",
+      "subject": "1woman, adult field medic, dark hair tied in a low bun, cream medical work coat over a muted navy shirt, gently wrapping a clean bandage around an unseen traveler's forearm, attentive calm expression.",
+      "composition": "Intimate three-quarter close-up. Medic face upper-left, two hands and the bandaged forearm cross the center on a diagonal. A small closed self-defense instruction booklet sits at the lower edge as a secondary choice. Background is soft abstract shelter canvas and a single broad shadow, no beds, no other people.",
+      "light": "Muted cool blue shelter shade, warm diffuse daylight on face and clean bandage, calm broad cloth shadow groups.",
+      "fix": "认真包扎的瞬间，双手动作连贯，绷带绕前臂自然贴合；没有血腥伤口，没有其他病人或病床，不把医疗点扩成医院。"
+    },
+    {
+      "id": "tt6-airdrop",
+      "name": "封锁区投送",
+      "asset": "event-tt6-airdrop",
+      "subject": "One practical gloved hand lifting the lid of a compact dropped supply pod, a sealed ration pack prominent inside, one short wrapped wood bundle and a small sealed drink bottle subordinate beside it.",
+      "composition": "Close oblique view into the half-open pod. The lid forms a broad dark framing plane, the glove grips its rim. A folded desaturated orange parachute strap leads diagonally across one edge. The inner sealed supplies are clean and separated from the scuffed exterior. Background abstract cool gray-blue air, no street or additional props.",
+      "light": "Soft cold daylight with a small warm accent from the orange strap, restrained reflective edges on pod metal.",
+      "fix": "用包装完好的内部与朴素外壳表达投送，物资保持少量，不画散乱垃圾、污液、复杂机械和大场景。"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "name": "封存储备库",
+      "asset": "event-tt6-chestdraw",
+      "subject": "A gloved hand operating one simple battery power switch beside three closed supply containers of different sizes, a small utility box, a medium sealed box, and a larger reinforced military case.",
+      "composition": "Tight diagonal view along one storage shelf. The switch and glove are close in lower-left; three box faces overlap in depth rather than line up as products. One amber indicator singles out a lock. A small cloth ration bundle at the edge suggests the supplies alternative. Background dark abstract blue shelving planes.",
+      "light": "Cool dark storage shadows, one small amber status lamp reflected weakly on the nearest lock, no glowing contents.",
+      "fix": "三个不同大小的闭合箱子，斜向遮挡形成纵深，不平铺成商品排。电源只有一个简洁开关，不加复杂控制屏或魔法光。"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "name": "撤离登记台",
+      "asset": "event-tt6-systemsupply",
+      "subject": "An abandoned evacuation registration desk, an open ledger with indistinct handwritten marks, two modest wrapped supply parcels, one fractured access-card piece lying partly across the page and two dull silver coins nearby.",
+      "composition": "Close oblique tabletop view. The open ledger and access-card fragment are foreground focal shapes; a gloved fingertip lightly holds the page edge. A short plain wood offcut protrudes from the heavier parcel, the second parcel is smaller. Broad canvas shadows suggest a shelter registration point, no people or detailed terminal.",
+      "light": "Soft cool morning light with a muted warm patch across paper, restrained blue-green and aged cream palette.",
+      "fix": "登记名册不出现可读姓名或文字；用纸张、碎片、两种补给包和少量硬币说明选择，不新增无人机或科技装置。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "name": "战地整备",
+      "asset": "event-cmtn7qttxqo4",
+      "subject": "1woman, adult field armorer, dark hair tied up, muted charcoal work apron over a rolled-sleeve olive shirt, repairing a simple leather strap on a wrist guard, a clean bandage roll beside her tools.",
+      "composition": "Close three-quarter over-table view. Face partly in the upper-left, concentrated gaze follows hands at center. One hand steadies the wrist guard while the other uses a single short blunt awl through a strap hole. Table cuts diagonally across lower frame. Background soft dark teal canvas planes, no shop or shoe repair.",
+      "light": "Warm broad sidelight on hands and strap, cool blue-green shadows on apron, subdued metal highlights.",
+      "fix": "明确修整腕部护具上的皮带，稳住与穿孔两手接触正确。只留一件工具和一卷绷带，不画正常营业店铺、鞋子或满桌零件。"
+    },
+    {
+      "id": "ev19-vital",
+      "name": "封存针剂",
+      "asset": "event-ev19-vital",
+      "subject": "A gloved hand opening a compact sealed medical case, one plain short automatic injector nested in clean molded padding, one small trauma dressing packet beside it, no markings or logos.",
+      "composition": "Tight oblique still-life with a hand. The injector and case catch the focal light in lower-left center; hinged lid creates a deep framing shadow above. Hand rests on the case rim, not holding a needle near a body. Right side fades into abstract cool-gray wall and cloth shapes.",
+      "light": "Restrained cold turquoise shadow with a warm ivory light patch across the injector housing and white dressing wrapper.",
+      "fix": "注射器是朴素封存医疗器具，不做大型枪械或科幻武器。盒内只留一支针剂和创伤包，不画身体注射、血液或复杂标签。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "name": "撤离遗存",
+      "asset": "event-ev19-pearlbox",
+      "subject": "1man, older adult civilian survivor, short gray hair, beige worn coat, tired gentle eyes, passing a small closed rectangular mother-of-pearl inlaid case through a partly open shelter door.",
+      "composition": "Intimate close view from outside. Part of the man's face upper-left remains visible beside the door jamb; one hand extends the modest pearl case into center foreground, other arm hidden. Case has simple clean proportions and a muted pearly lid, no jewels spilling out. Background soft blue-gray door and shelter shadow masses.",
+      "light": "Quiet warm interior reflected light on fingers and pearly lid, cool dim outer foreground, gentle controlled iridescence.",
+      "fix": "珍珠盒是小型闭合收纳匣，不画满盒珠宝、王冠或奢华宫廷装饰。老人手与匣子准确，门和背景概括。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "name": "封装火种",
+      "asset": "event-ev19-fireballs",
+      "subject": "Close view of two hands unfolding a small dark fabric packet containing exactly two sealed copper-red fireseed capsules, restrained warm amber reflections inside their small translucent windows, a small clean bandage packet tucked at one edge.",
+      "composition": "Oblique intimate close-up at a temporary handoff point. One hand steadies the fabric packet while the other gently lifts a capsule by its solid end. Exactly two capsules remain clearly countable, one lifted and one resting. No visible face, no named character identity. Abstract cool dark blue background planes.",
+      "light": "Two small warm ember accents against muted slate cloth, soft cool ambient light on hands, no flame explosion or magic particles.",
+      "fix": "只画两份封装火种和少量应急材料，用手部近景避免固定成某位主角或让常无欲遇见自己。小窗暖光克制，不画大火球或枪弹。"
+    },
+    {
+      "id": "ev19-classchest",
+      "name": "无署名封条",
+      "asset": "event-ev19-classchest",
+      "subject": "Close-up of a closed matte black transport case, one gloved hand checking a plain pale seal strip across the lid corner, a small coin pouch resting to the side, anonymous recovery-point supplies.",
+      "composition": "Three-quarter close view with the case corner pointing toward viewer. The thumb gently lifts only the loose end of the seal while the rest remains attached across the seam. One simple lock and connected hinges. Background reduced to broad cool-gray tabletop and dark wall planes, no lab reveal.",
+      "light": "Muted cool blue-black case with a narrow warm reflection across seal and glove knuckles, no luminous symbols.",
+      "fix": "封条无署名，无可读编号、宗教符号或组织标志。箱子保持闭合，手只检查封条边缘，不揭露原初、实验室内部或旧仇。"
+    },
+    {
+      "id": "ev19-recode",
+      "name": "异常改装台",
+      "asset": "event-ev19-recode",
+      "subject": "One pair of practical gloved hands adjusting a compact portable modification unit, two plain removable rectangular equipment modules on its work surface, a single large adjustment dial and a small dim blue indicator.",
+      "composition": "Tight oblique view over the workbench. One hand steadies a module while the other turns the dial with natural finger contact. The two module silhouettes overlap in depth across the central-left frame. Casing is simple and portable, broad coherent surfaces. Background abstract desaturated teal and gray shadows, no live technician or detailed lab.",
+      "light": "Soft cool workspace light with a restrained warm patch on the nearest hand and module edge, no holographic effects.",
+      "fix": "只有两个可辨认模块、一个旋钮与少量连接结构，准确画清手的工作关系。不增加九科人员、满墙设备、悬浮屏或复杂科幻零件。"
+    },
+    {
+      "id": "ev19-arrows",
+      "name": "撤防射击位",
+      "asset": "event-ev19-arrows",
+      "subject": "A gloved hand choosing one arrow from a plain open arrow-kit sleeve at an abandoned defensive position, exactly three simple steel arrowheads with connected straight shafts visible, muted gray-green fabric wrapping.",
+      "composition": "Close diagonal view. Three arrow shafts form calm converging lines from lower-left toward upper-right. Glove grips one shaft behind the head, away from its sharp edge. Kit rests on a cropped concrete ledge, distant background only soft blue-gray barricade-like planes, no characters or city detail.",
+      "light": "Cool soft ambient shade with one warm reflected edge along the selected arrowhead, matte fabric and restrained steel glints.",
+      "fix": "箭头、箭杆一一连接，三支形状朴素，抓握位置合理。不是枪弹或箭头漂浮合集，不画大规模军火库。"
+    },
+    {
+      "id": "ev19-gamble",
+      "name": "暗巷赌约",
+      "asset": "event-ev19-gamble",
+      "subject": "Only an adult man's hands and a cropped dark sleeve with a plain pale shirt cuff at a quiet covert trading table, pushing a single ivory die toward the viewer, exactly three plain sleeved cards and three dull coins beside it.",
+      "composition": "Intimate low oblique close-up. Die and fingertips are central-left focal points, three cards partly overlap across the lower edge with their backs visible. Face remains outside the frame so the helper's appearance is unspecified. Background is an abstract soft dark teal recess, no busy market or crowd.",
+      "light": "A restrained warm side reflection on ivory die and hands, cool deep blue-green surrounding shadows, no neon or glamorous casino lighting.",
+      "fix": "此人是季渊，外貌尚未确认，严格不露脸不新增固定人设。只画一枚结构正确的骰子、三张背面卡和少量硬币，背景安静，不变成赌场。"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "name": "转运军需",
+      "asset": "event-ev19-quartermaster",
+      "subject": "1man, adult quartermaster, short dark hair, plain navy field cap and muted gray-green work jacket, showing a simple practical protective wrist guard across a temporary transfer counter, other equipment indistinct behind.",
+      "composition": "Close three-quarter view. Face at upper-left, one open hand supports the wrist guard in central foreground, another hand rests near a small stack of three dull coins at the edge. One folded old strap hints at trade-in. Counter edge cuts diagonally, background only soft blue-gray cargo cloth planes, no official insignia or visible crowd.",
+      "light": "Soft warm reflected daylight on face and offered equipment, connected cool navy shadow groups, restrained matte material contrast.",
+      "fix": "军需人员不识玩家身份，不加主角或阵营徽记。近处只重点画一件朴素腕部护具、三枚硬币和旧绑带，其余装备退成虚形。"
+    },
+    {
+      "id": "story-last-lamp",
+      "name": "北门灯标",
+      "asset": "event-last-lamp-1013-v1",
+      "subject": "A practical gloved hand adjusting the hinged metal shade of a small amber emergency guide lamp mounted beside a dark shelter doorway, a narrow warm light patch falling onto a plain concrete wall.",
+      "composition": "Intimate close-up of lamp, hinge and glove. The lamp sits left of center; hand grips the shade's solid rim without covering the bulb. Two possible shade directions are suggested by the physical pivot, not by diagrams. Door jamb frames a cool quiet recess, background abstract blue-gray planes with soft edges, no people or monsters.",
+      "light": "One small warm lamp against blue dusk, gentle diffuse illumination, a restrained wall light patch, no theatrical beams or complex city.",
+      "fix": "一盏小灯、转轴、遮光片和手，结构准确。灯光只在近墙形成克制光斑，不画巨大的光柱、整片街景或额外幸存者。"
+    }
+  ]
+}

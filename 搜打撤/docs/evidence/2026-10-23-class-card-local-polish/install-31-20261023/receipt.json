@@ -1,0 +1,2519 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn1i64j7y7",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-175fa13e-3c4d-4e35-b227-5564a5ac19b1.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1i64j7y7-source.png",
+        "bytes": 1918806,
+        "sha256": "6a1e8222173ec7b09f3bdca86e80bec41e8d39943c4af90af9ba128982534a40"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1i64j7y7-full-before.webp",
+          "bytes": 50786,
+          "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1i64j7y7-thumb-before.webp",
+          "bytes": 12130,
+          "sha256": "2df5efc85e27faf8a719d63b2d12bc3ae40dbd531723f95a08e5ee3a45e1e647"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cmtn1i64j7y7.webp",
+          "bytes": 128396,
+          "sha256": "2a688cd554b2bdce8401e9a129fa09b5e904eb49c81af47ca56a7e53a9987a44",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cmtn1i64j7y7.webp",
+          "bytes": 16238,
+          "sha256": "6f8228c10b287040de91add04783c170567b789a84a58abe9339cdad99a3fe28",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-cmtn1i64j7y7.webp",
+            "ext": "webp",
+            "bytes": 50786,
+            "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-cmtn1i64j7y7.webp",
+            "ext": "webp",
+            "bytes": 128396,
+            "sha256": "2a688cd554b2bdce8401e9a129fa09b5e904eb49c81af47ca56a7e53a9987a44",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+            "ext": "webp",
+            "bytes": 12130,
+            "sha256": "2df5efc85e27faf8a719d63b2d12bc3ae40dbd531723f95a08e5ee3a45e1e647",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+            "ext": "webp",
+            "bytes": 16238,
+            "sha256": "6f8228c10b287040de91add04783c170567b789a84a58abe9339cdad99a3fe28",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1wnhhym",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b16c9f53-2b27-4584-bd93-b2d3a56453f7.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1wnhhym-source.png",
+        "bytes": 2211217,
+        "sha256": "ef6c52b4449ff79987270f94f39cb7c27c8849c9a113f201f51f3660dd4a17bf"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1wnhhym-full-before.webp",
+          "bytes": 154604,
+          "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-cmtn1wnhhym-thumb-before.webp",
+          "bytes": 24380,
+          "sha256": "bb5d2c22569af9de651e727e070342ee7947d8dcc3a82cd576631973093036e0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-cmtn1wnhhym.webp",
+          "bytes": 198624,
+          "sha256": "34a024a251ba8661e3ba67adb06ee237c20a22009df3fc3483a8a38fe5682333",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-cmtn1wnhhym.webp",
+          "bytes": 28664,
+          "sha256": "7191b3c1324fa5358a97108354514277dd1be4d65db87899b260449b3664509b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-jianghu-class-open-forehead-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 154604,
+            "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 198624,
+            "sha256": "34a024a251ba8661e3ba67adb06ee237c20a22009df3fc3483a8a38fe5682333",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 24380,
+            "sha256": "bb5d2c22569af9de651e727e070342ee7947d8dcc3a82cd576631973093036e0",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-jianghu-class-forehead/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+            "ext": "webp",
+            "bytes": 28664,
+            "sha256": "7191b3c1324fa5358a97108354514277dd1be4d65db87899b260449b3664509b",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-marchrush",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-775ee708-2ad4-4704-b2a5-e966d4e2a913.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-marchrush-source.png",
+        "bytes": 1904353,
+        "sha256": "9ac1c3f5b77c93a3019b63817bde12dafe720e18bf0c83b28e7d310cfc82249a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-marchrush-full-before.webp",
+          "bytes": 137670,
+          "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-marchrush-thumb-before.webp",
+          "bytes": 15216,
+          "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-marchrush.webp",
+          "bytes": 133312,
+          "sha256": "28740ee234ce4bff08851ef558a201b1768ee7dedc9ca9fe8eab236ff81b15b9",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-marchrush.webp",
+          "bytes": 18108,
+          "sha256": "3ee34a06c41939f39a3145912df82b84411d587287c8db546ab62694c2836fdd",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-marchrush-original-rough-20261005",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 137670,
+            "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 133312,
+            "sha256": "28740ee234ce4bff08851ef558a201b1768ee7dedc9ca9fe8eab236ff81b15b9",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 15216,
+            "sha256": "71db26afa8628fc6b53c25d948e3cf665994638283dec29968caa9e0c8ff950d",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-marchrush.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18108,
+            "sha256": "3ee34a06c41939f39a3145912df82b84411d587287c8db546ab62694c2836fdd",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bulwark",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-74a7c87f-0d4e-4e73-a1d9-3d24690a534b.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-bulwark-source.png",
+        "bytes": 2323986,
+        "sha256": "064b742f9d04ad2f8b31fa19fa5f003a9878d409ae4290871a63acab6f5f0cdd"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-bulwark-full-before.webp",
+          "bytes": 172940,
+          "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-bulwark-thumb-before.webp",
+          "bytes": 18574,
+          "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-bulwark.webp",
+          "bytes": 237036,
+          "sha256": "871dbbb8125db12d496c006d2bf7afc86d17a3752970915582db6e8c005407ff",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-bulwark.webp",
+          "bytes": 26822,
+          "sha256": "c59ad5574544c858c9bf4fdeb511e38a23bc5e945fc152e00abc08b13c736f75",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-bulwark-original-rough-20261005",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 172940,
+            "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 237036,
+            "sha256": "871dbbb8125db12d496c006d2bf7afc86d17a3752970915582db6e8c005407ff",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 18574,
+            "sha256": "8ccdc292c9c9abfb3041aac7d72e5c37fb46c1c57971ed051e88caca7c3f46cc",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-bulwark.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26822,
+            "sha256": "c59ad5574544c858c9bf4fdeb511e38a23bc5e945fc152e00abc08b13c736f75",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-ironcharge",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-faceff6d-630c-4379-bead-3e6eb5f22c4e.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-ironcharge-source.png",
+        "bytes": 1839564,
+        "sha256": "429933ca9d772cb971c46eb30eef1fe7af25ddf5ac11947666b4a1718dd13756"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-ironcharge-full-before.webp",
+          "bytes": 116256,
+          "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-ironcharge-thumb-before.webp",
+          "bytes": 12060,
+          "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-ironcharge.webp",
+          "bytes": 129528,
+          "sha256": "07af7626b6c9527550c526ea1669a61d0fecaa9d459376a5e8ff42a6a960d987",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-ironcharge.webp",
+          "bytes": 14686,
+          "sha256": "d3d5ecebdba7c81d1c015ea1f641b01993068652d3467af8cd70607ec6a63946",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-ironcharge-original-rough-20261005",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 116256,
+            "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 129528,
+            "sha256": "07af7626b6c9527550c526ea1669a61d0fecaa9d459376a5e8ff42a6a960d987",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 12060,
+            "sha256": "47efdb9bc3db19cb5826a1315d1b47c39d573181df75bdb98d991828c44a6c56",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 14686,
+            "sha256": "d3d5ecebdba7c81d1c015ea1f641b01993068652d3467af8cd70607ec6a63946",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-fullstrike",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-dadc75e6-a289-4034-9e9c-b146bb8f590c.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-fullstrike-source.png",
+        "bytes": 1912925,
+        "sha256": "50ed885f3d53c10cf2e66c0f11fd7cd3590c5cfbc700c80e892c162f653e0840"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-fullstrike-full-before.webp",
+          "bytes": 115830,
+          "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-martial-tt7-fullstrike-thumb-before.webp",
+          "bytes": 12480,
+          "sha256": "d7f27e27a8ff0a0f4f4013bec229b0d40a88b40eb6523df81d8fb7a235357612"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-fullstrike.webp",
+          "bytes": 122004,
+          "sha256": "5bac96586037f70d8f6b44c42141f9c0893cff446c09e4ea0593fc3d93619eca",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-fullstrike.webp",
+          "bytes": 15102,
+          "sha256": "5b73e0f1f44fb6476a3c8dc79c64f0cd3eea4986e8196d1731aec3d7ee4cc614",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "heixiang-fullstrike-identity-rough-20261005",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-fullstrike.webp",
+            "ext": "webp",
+            "bytes": 115830,
+            "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-fullstrike.webp",
+            "ext": "webp",
+            "bytes": 122004,
+            "sha256": "5bac96586037f70d8f6b44c42141f9c0893cff446c09e4ea0593fc3d93619eca",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-fullstrike.webp",
+            "ext": "webp",
+            "bytes": 12480,
+            "sha256": "d7f27e27a8ff0a0f4f4013bec229b0d40a88b40eb6523df81d8fb7a235357612",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-fullstrike-identity-rough/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-fullstrike.webp",
+            "ext": "webp",
+            "bytes": 15102,
+            "sha256": "5b73e0f1f44fb6476a3c8dc79c64f0cd3eea4986e8196d1731aec3d7ee4cc614",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-arcanebolt",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-9618cdb2-247a-4cdc-9a87-da16355307c0.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-arcanebolt-source.png",
+        "bytes": 1999515,
+        "sha256": "473d2026c8113545969f4e0e8dab0362071af43d0d4f39389121b5c685f4c510"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-arcanebolt-full-before.webp",
+          "bytes": 157072,
+          "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-arcanebolt-thumb-before.webp",
+          "bytes": 23188,
+          "sha256": "f0e9281749aa9068b03eec9bcaaa47778af6ef8faa493e6e2e3819e14ba26e5b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-arcanebolt.webp",
+          "bytes": 169546,
+          "sha256": "e53b64c6a19272dbbfedf43e294caeda5bed895318c89380ffeae6ab2843bfbf",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-arcanebolt.webp",
+          "bytes": 25786,
+          "sha256": "e95f1b825a740bd695f445e7d054d220011e11de4080b1820ed2ae2057d49a14",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "spell-tt7-arcanebolt-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 157072,
+            "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 169546,
+            "sha256": "e53b64c6a19272dbbfedf43e294caeda5bed895318c89380ffeae6ab2843bfbf",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23188,
+            "sha256": "f0e9281749aa9068b03eec9bcaaa47778af6ef8faa493e6e2e3819e14ba26e5b",
+            "source": "docs/evidence/2026-10-10-shoot-arcanebolt/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25786,
+            "sha256": "e95f1b825a740bd695f445e7d054d220011e11de4080b1820ed2ae2057d49a14",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-frozenight",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-894da6d5-0a95-4694-8d03-661bfd54b9b3.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-frozenight-source.png",
+        "bytes": 2072701,
+        "sha256": "eea18a7fd6f373730808728e95044e88eb0811331d9b35c28c028d44735bf38e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-frozenight-full-before.webp",
+          "bytes": 162896,
+          "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-frozenight-thumb-before.webp",
+          "bytes": 25516,
+          "sha256": "b9ee8afee9987c0fe53c2cbfe7a001711aeaa4776424a7a9d90dd968b7fe39b0"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-frozenight.webp",
+          "bytes": 217580,
+          "sha256": "750597c103dfa865dac2cc4b12a4cc3df86e7bb946c5001020d9ac9ae079bd32",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-frozenight.webp",
+          "bytes": 33312,
+          "sha256": "0106a81a24a6fad37a87130f0867f876514903608d010fe689c35efdc22072d5",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-frozenight-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162896,
+            "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 217580,
+            "sha256": "750597c103dfa865dac2cc4b12a4cc3df86e7bb946c5001020d9ac9ae079bd32",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 25516,
+            "sha256": "b9ee8afee9987c0fe53c2cbfe7a001711aeaa4776424a7a9d90dd968b7fe39b0",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-frozenight.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 33312,
+            "sha256": "0106a81a24a6fad37a87130f0867f876514903608d010fe689c35efdc22072d5",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-maxsupply",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-fbe82dcf-0914-4bb9-bcc8-5e699bf7af00.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-maxsupply-source.png",
+        "bytes": 2080281,
+        "sha256": "e4108187399214407771498fa2e2a53105f8cab07974cec38f049e98cc910a4e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-maxsupply-full-before.webp",
+          "bytes": 228798,
+          "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-maxsupply-thumb-before.webp",
+          "bytes": 26284,
+          "sha256": "f7883dcce64252c2a56bc33ad243358187615710731f34242fab4481bd523f0d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-maxsupply.webp",
+          "bytes": 189210,
+          "sha256": "5a58dc2f19bb30af46efcd1d22d2f8de826d586d8d233a2349815d91beff1ebb",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-maxsupply.webp",
+          "bytes": 27852,
+          "sha256": "e20c4fa1173872d991d17e44f45f9c24b493ba9bf2fc26e5aca1bb57e4a6fc67",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-manasupply-profession-builtin-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 228798,
+            "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
+            "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 189210,
+            "sha256": "5a58dc2f19bb30af46efcd1d22d2f8de826d586d8d233a2349815d91beff1ebb",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 26284,
+            "sha256": "f7883dcce64252c2a56bc33ad243358187615710731f34242fab4481bd523f0d",
+            "source": "docs/evidence/2026-10-10-baita-manasupply/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 27852,
+            "sha256": "e20c4fa1173872d991d17e44f45f9c24b493ba9bf2fc26e5aca1bb57e4a6fc67",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-stratagem",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bc3acb24-b9d9-4200-bd99-14b631163a67.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-stratagem-source.png",
+        "bytes": 2061450,
+        "sha256": "16b538101b4ef91c09312a1010c1c766cc44a64c152487b9032846de81ac314d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-stratagem-full-before.webp",
+          "bytes": 197780,
+          "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-stratagem-thumb-before.webp",
+          "bytes": 24240,
+          "sha256": "d01b923822d020a66c59b9b1003056024231f8a23f5c5ad6493530fa269a6863"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-stratagem.webp",
+          "bytes": 162874,
+          "sha256": "ad2ac7dc13a7350612ff3e27af851848d83911b6eae0b958bdcfda762a7a54da",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-stratagem.webp",
+          "bytes": 24164,
+          "sha256": "5388ea9065fdb4e160d8c04f4730eab887ad75f306974741e345d3dc69e25295",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-stratagem-indigo-reset-20261011",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 197780,
+            "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
+            "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162874,
+            "sha256": "ad2ac7dc13a7350612ff3e27af851848d83911b6eae0b958bdcfda762a7a54da",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24240,
+            "sha256": "d01b923822d020a66c59b9b1003056024231f8a23f5c5ad6493530fa269a6863",
+            "source": "docs/evidence/2026-10-11-mage-pouch-reset/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-stratagem.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24164,
+            "sha256": "5388ea9065fdb4e160d8c04f4730eab887ad75f306974741e345d3dc69e25295",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-firm-barrier",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-35ec9f8b-019a-414f-ad3a-a25d5287791d.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-firm-barrier-source.png",
+        "bytes": 1798357,
+        "sha256": "af3cc766f504336b19168fc4d6f7461d172f7e2a5d790eefb49c85115bed7fe1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-firm-barrier-full-before.webp",
+          "bytes": 102294,
+          "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-firm-barrier-thumb-before.webp",
+          "bytes": 17688,
+          "sha256": "c43ae18544bfcaefbaa0d63dae905e6f764347a1a645b1324f0d26739b466532"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 125716,
+          "sha256": "ddf9fd5353918393952398d9eb1e33bd72ada421ca37c55dd74318b3bf979336",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-firm-barrier.webp",
+          "bytes": 20962,
+          "sha256": "e159cdb19cfc4096b9591987d656e9f3e3b4dc3536c72494f7b9c51c1d7ed677",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-firm-barrier-two-straps-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 102294,
+            "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 125716,
+            "sha256": "ddf9fd5353918393952398d9eb1e33bd72ada421ca37c55dd74318b3bf979336",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17688,
+            "sha256": "c43ae18544bfcaefbaa0d63dae905e6f764347a1a645b1324f0d26739b466532",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20962,
+            "sha256": "e159cdb19cfc4096b9591987d656e9f3e3b4dc3536c72494f7b9c51c1d7ed677",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-energize",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-energize-source.png",
+        "bytes": 1856596,
+        "sha256": "e8457831e8dab0745d2a212691a5fdf04511dbb8cb50809b3aa288b46f13d841"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-energize-full-before.webp",
+          "bytes": 126042,
+          "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-energize-thumb-before.webp",
+          "bytes": 21528,
+          "sha256": "d1b3f4f7e46ae6e17921265ec87863d325616c6264c789df6f28aa3988974f1d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-energize.webp",
+          "bytes": 150504,
+          "sha256": "696ed37a3f5992ec745ff99f9f4bb9a7cad71a095cdf7101b6e71cd5c4063ae5",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-energize.webp",
+          "bytes": 24966,
+          "sha256": "ab6f0e65cb78c7e88ba5f3432811ebe75048802d9d427fe5d045e219cd15d5ec",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-energize-two-straps-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 126042,
+            "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 150504,
+            "sha256": "696ed37a3f5992ec745ff99f9f4bb9a7cad71a095cdf7101b6e71cd5c4063ae5",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21528,
+            "sha256": "d1b3f4f7e46ae6e17921265ec87863d325616c6264c789df6f28aa3988974f1d",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-energize.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24966,
+            "sha256": "ab6f0e65cb78c7e88ba5f3432811ebe75048802d9d427fe5d045e219cd15d5ec",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1p9vb5au",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2a17cd25-ce4e-4eca-a232-1b6ac955c9c0.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1p9vb5au-source.png",
+        "bytes": 2027913,
+        "sha256": "05ad47f6e23ad3c4309dc2f7797c6b06c859bfef9de65a599384a8536ade8830"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1p9vb5au-full-before.webp",
+          "bytes": 139450,
+          "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1p9vb5au-thumb-before.webp",
+          "bytes": 24868,
+          "sha256": "f4d93b57683327a2d44e47242fd28645bb493a1b6bd775b04532672d6da79a9d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 179594,
+          "sha256": "491c8d7dc1d1aa0a9e8d73a0ff48c61ee9927446e5cbeb49c0a1dafddfefb4bd",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1p9vb5au.webp",
+          "bytes": 31158,
+          "sha256": "4cad1117d5b355a33951ac9f77054052a381c4335b8e198bb14a5115479222f9",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "cmtn1p9vb5au-two-straps-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 139450,
+            "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 179594,
+            "sha256": "491c8d7dc1d1aa0a9e8d73a0ff48c61ee9927446e5cbeb49c0a1dafddfefb4bd",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24868,
+            "sha256": "f4d93b57683327a2d44e47242fd28645bb493a1b6bd775b04532672d6da79a9d",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 31158,
+            "sha256": "4cad1117d5b355a33951ac9f77054052a381c4335b8e198bb14a5115479222f9",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-elementstorm",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-15eed2f8-e052-4242-970c-2a21287e8b78.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-elementstorm-source.png",
+        "bytes": 1859150,
+        "sha256": "e36e36df30471cfb6ed739c28db2049178b653af7f3419d5123e5022c9532c87"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-elementstorm-full-before.webp",
+          "bytes": 90190,
+          "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-elementstorm-thumb-before.webp",
+          "bytes": 15500,
+          "sha256": "2f9aba20d150f32c482a5793feff657761e426909c1fa24e50d73baf4dfac527"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-elementstorm.webp",
+          "bytes": 135456,
+          "sha256": "30dccfb91903d2b59f323d15d9210f65bbf8261f29ecc62da48ed04c37f20084",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-elementstorm.webp",
+          "bytes": 21854,
+          "sha256": "8d302460d9928e27fb7f0190ff5606be714b99902e03a05b34daad484d951949",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-elementstorm-two-straps-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 90190,
+            "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 135456,
+            "sha256": "30dccfb91903d2b59f323d15d9210f65bbf8261f29ecc62da48ed04c37f20084",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15500,
+            "sha256": "2f9aba20d150f32c482a5793feff657761e426909c1fa24e50d73baf4dfac527",
+            "source": "docs/evidence/2026-10-10-baita-straps/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21854,
+            "sha256": "8d302460d9928e27fb7f0190ff5606be714b99902e03a05b34daad484d951949",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-recruit",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2572003f-c3db-4ee2-ad4d-f84539837527.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-recruit-source.png",
+        "bytes": 1673236,
+        "sha256": "5d697c884805de7ffc3ccfcf01000e79e56d3d0a1135915b6ceb97de27f970ca"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-recruit-full-before.webp",
+          "bytes": 109472,
+          "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-recruit-thumb-before.webp",
+          "bytes": 18688,
+          "sha256": "90e93fe4129363dac7dbdaedac82ee0a1dbcaa244b0f40f43c1c4becde012b3e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-recruit.webp",
+          "bytes": 106148,
+          "sha256": "b8c78bf735525f515495c6e2a6598e3f70b0e1653de141dcb3cc22af2ca0c237",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-recruit.webp",
+          "bytes": 18880,
+          "sha256": "6cb3c265a0036332b2683618cc9d134c0c7e99ddc967605b02454d4c2ff2e028",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-recruit-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 109472,
+            "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 106148,
+            "sha256": "b8c78bf735525f515495c6e2a6598e3f70b0e1653de141dcb3cc22af2ca0c237",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18688,
+            "sha256": "90e93fe4129363dac7dbdaedac82ee0a1dbcaa244b0f40f43c1c4becde012b3e",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-recruit.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18880,
+            "sha256": "6cb3c265a0036332b2683618cc9d134c0c7e99ddc967605b02454d4c2ff2e028",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-petal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-efc43242-c010-4eac-b0e3-9c24085b20af.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-petal-source.png",
+        "bytes": 2145720,
+        "sha256": "8f4f4148ec6119bbda4373e0b0e663673e9d749b981be08aa909ad681a0a7101"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-petal-full-before.webp",
+          "bytes": 146072,
+          "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-petal-thumb-before.webp",
+          "bytes": 21092,
+          "sha256": "e4ebbeb415559737229518ef1264d9f0e1222321fcd3d5dc88fdbc6930f2bea3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-petal.webp",
+          "bytes": 223762,
+          "sha256": "4e6e3adac6f254daa5493b6f5b8318b986efa2295424d0accc1ec56378ecd21c",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-petal.webp",
+          "bytes": 31016,
+          "sha256": "9f1b96b14321a3b3294e2343cd932fb6a73d67e37ec83ef7a11e4643554ff450",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "tt3-petal-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146072,
+            "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 223762,
+            "sha256": "4e6e3adac6f254daa5493b6f5b8318b986efa2295424d0accc1ec56378ecd21c",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21092,
+            "sha256": "e4ebbeb415559737229518ef1264d9f0e1222321fcd3d5dc88fdbc6930f2bea3",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-petal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 31016,
+            "sha256": "9f1b96b14321a3b3294e2343cd932fb6a73d67e37ec83ef7a11e4643554ff450",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-silence",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-7a342e42-27fc-476e-ae11-da49661a3160.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-silence-source.png",
+        "bytes": 1746185,
+        "sha256": "0f5d442167920617955d99e50bf1ae77c63b9f7caad88a04104e89550dee9684"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-silence-full-before.webp",
+          "bytes": 102230,
+          "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-silence-thumb-before.webp",
+          "bytes": 16628,
+          "sha256": "966c433e54ce412131e14ab828e5cd1d83a438159fca9d7bd26c1392bb1bbcf5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-silence.webp",
+          "bytes": 97424,
+          "sha256": "4f8685a4883e03898f57aefe1b2a44ec5d12c4ddeaaedb28b25df8b5976646f6",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-silence.webp",
+          "bytes": 13518,
+          "sha256": "5e0a1458ecab59ec10ef897980ab0157e3d02ca6b17350843fca28b9dad65442",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "xingyue-shadow-lowdetail-20261004",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-silence.webp",
+            "ext": "webp",
+            "bytes": 102230,
+            "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-silence.webp",
+            "ext": "webp",
+            "bytes": 97424,
+            "sha256": "4f8685a4883e03898f57aefe1b2a44ec5d12c4ddeaaedb28b25df8b5976646f6",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-silence.webp",
+            "ext": "webp",
+            "bytes": 16628,
+            "sha256": "966c433e54ce412131e14ab828e5cd1d83a438159fca9d7bd26c1392bb1bbcf5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-silence.webp",
+            "ext": "webp",
+            "bytes": 13518,
+            "sha256": "5e0a1458ecab59ec10ef897980ab0157e3d02ca6b17350843fca28b9dad65442",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-mind-control",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-61f2106e-c8c1-49a2-956a-29579d716d96.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-mind-control-source.png",
+        "bytes": 1828805,
+        "sha256": "73c78885fc8934adcca403f65bc244781e88c0837bb88ac09659a3fab8ef0df8"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-mind-control-full-before.webp",
+          "bytes": 103658,
+          "sha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-mind-control-thumb-before.webp",
+          "bytes": 17486,
+          "sha256": "d3c1811261afefc189bab1511195e58d708aa4cd24dce3ee401fa543aacbded8"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-mind-control.webp",
+          "bytes": 104238,
+          "sha256": "b9f47aac37b27a67101073d74666418cce5a7a630a92e74b945c4eb6dc3881e4",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-mind-control.webp",
+          "bytes": 16524,
+          "sha256": "a032846882fe0ad3ab488cb453ebcc76423720475ce6997c1a1f2621e9c18c5f",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "square-20261020",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 103658,
+            "sha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104238,
+            "sha256": "b9f47aac37b27a67101073d74666418cce5a7a630a92e74b945c4eb6dc3881e4",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 17486,
+            "sha256": "d3c1811261afefc189bab1511195e58d708aa4cd24dce3ee401fa543aacbded8",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16524,
+            "sha256": "a032846882fe0ad3ab488cb453ebcc76423720475ce6997c1a1f2621e9c18c5f",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-nature-form",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-773a9462-373e-4b85-b6d7-4704dcf621fd.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-nature-form-source.png",
+        "bytes": 2034485,
+        "sha256": "ca731926b38ceb47cc38e00860ec62514f611641e94122e962b94c8292b54560"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-nature-form-full-before.webp",
+          "bytes": 104532,
+          "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-nature-form-thumb-before.webp",
+          "bytes": 15402,
+          "sha256": "4e1a372e0ad854a3d5bdefd2ea4ace21854b66d1c6d82eb5a4a2d9da5a8153de"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nature-form.webp",
+          "bytes": 148392,
+          "sha256": "f9892a9563e1f6c9b35a4b14d9891f426371aa692bd643c76ca88d5c72c912c4",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nature-form.webp",
+          "bytes": 19758,
+          "sha256": "12652780d3813b0744a52110fc0d5492ce9b8bdff420f0e0c01025b095afb593",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "xingyue-fullmoon-smite-style-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 104532,
+            "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 148392,
+            "sha256": "f9892a9563e1f6c9b35a4b14d9891f426371aa692bd643c76ca88d5c72c912c4",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 15402,
+            "sha256": "4e1a372e0ad854a3d5bdefd2ea4ace21854b66d1c6d82eb5a4a2d9da5a8153de",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-10-fullmoon-smite/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nature-form.webp",
+            "ext": "webp",
+            "bytes": 19758,
+            "sha256": "12652780d3813b0744a52110fc0d5492ce9b8bdff420f0e0c01025b095afb593",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-provoke",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-98af7f79-8825-4acf-b4e5-ad9c94958510.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-provoke-source.png",
+        "bytes": 1848316,
+        "sha256": "bc74fc818f593d8b00469ff56c32316438d30588eb30fc158f1400af10aced3f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-provoke-full-before.webp",
+          "bytes": 128694,
+          "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-provoke-thumb-before.webp",
+          "bytes": 17994,
+          "sha256": "ea0d04f57d7e723b4eb23aa0a5f400e6fd8d1802607d45e35c797cb9a347a4f1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-provoke.webp",
+          "bytes": 111540,
+          "sha256": "b635db7a486b72ed59a1df4df0711d7dd7046d7eddeaa4368a0a85b0719ce5e3",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-provoke.webp",
+          "bytes": 13512,
+          "sha256": "415e8c58ad0c5858ca4246fe28987516f29cd4360a44ef0b452f9108ba5af388",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "xingyue-shadow-lowdetail-20261004",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-provoke.webp",
+            "ext": "webp",
+            "bytes": 128694,
+            "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-provoke.webp",
+            "ext": "webp",
+            "bytes": 111540,
+            "sha256": "b635db7a486b72ed59a1df4df0711d7dd7046d7eddeaa4368a0a85b0719ce5e3",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-provoke.webp",
+            "ext": "webp",
+            "bytes": 17994,
+            "sha256": "ea0d04f57d7e723b4eb23aa0a5f400e6fd8d1802607d45e35c797cb9a347a4f1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-provoke.webp",
+            "ext": "webp",
+            "bytes": 13512,
+            "sha256": "415e8c58ad0c5858ca4246fe28987516f29cd4360a44ef0b452f9108ba5af388",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-holy-shield",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-34f9554e-6b63-4c18-856c-396f7a7aabad.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-holy-shield-source.png",
+        "bytes": 2185714,
+        "sha256": "539929d026998b8f18d1dc86c24ddc6a42d6e262e67b061de303a8f9c92c1fe8"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-holy-shield-full-before.webp",
+          "bytes": 161656,
+          "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3-holy-shield-thumb-before.webp",
+          "bytes": 16522,
+          "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-holy-shield.webp",
+          "bytes": 219926,
+          "sha256": "f5b701ead65a34c14d822c8b1233be5d70e80da5da6e5f85fb969e332b771106",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-holy-shield.webp",
+          "bytes": 21974,
+          "sha256": "db6560065a741aca796b30010dae165dcf737213a57a84b66db90e8cb1dad136",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "xingyue-holy-shield-original-rough-20261005",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "bytes": 161656,
+            "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "bytes": 219926,
+            "sha256": "f5b701ead65a34c14d822c8b1233be5d70e80da5da6e5f85fb969e332b771106",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "bytes": 16522,
+            "sha256": "11b24763f1a85c705babd2ddb992983565250bdd770ce3c9a4b05268515bfc65",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-05-WF-holy-shield-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+            "ext": "webp",
+            "bytes": 21974,
+            "sha256": "db6560065a741aca796b30010dae165dcf737213a57a84b66db90e8cb1dad136",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-holyheal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-27e8c786-585d-4346-b15a-f754b5f83676.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-holyheal-source.png",
+        "bytes": 1918672,
+        "sha256": "e020f06d2835ac001977d88fe3c149700b674a13c5f11a8315ec0e88f8e94789"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-holyheal-full-before.webp",
+          "bytes": 162432,
+          "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-holyheal-thumb-before.webp",
+          "bytes": 20640,
+          "sha256": "93fda161adc562501d2324fc67200d77587d9b0b98ae6a039504a563dc8b6aa9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-holyheal.webp",
+          "bytes": 153028,
+          "sha256": "458d3d30ac6f9215f0edcc09a407da1332d3aa9b67cb2c4d9893e5f0e8f9784f",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-holyheal.webp",
+          "bytes": 21058,
+          "sha256": "3568eb7569daac45a71ad1851effa2e362916bcaf644b7023ce5e1d1c41e3525",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "holyheal-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162432,
+            "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
+            "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 153028,
+            "sha256": "458d3d30ac6f9215f0edcc09a407da1332d3aa9b67cb2c4d9893e5f0e8f9784f",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 20640,
+            "sha256": "93fda161adc562501d2324fc67200d77587d9b0b98ae6a039504a563dc8b6aa9",
+            "source": "docs/evidence/2026-10-10-holyheal/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-holyheal.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21058,
+            "sha256": "3568eb7569daac45a71ad1851effa2e362916bcaf644b7023ce5e1d1c41e3525",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bloodpotion",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-814cc127-8b6d-4ceb-860e-ee5de4eab21b.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-bloodpotion-source.png",
+        "bytes": 1835287,
+        "sha256": "93e30e1b123f25aaa8916410e8b19162cf684322a742a60b1b13853653dad0a0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-bloodpotion-full-before.webp",
+          "bytes": 120996,
+          "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-bloodpotion-thumb-before.webp",
+          "bytes": 19364,
+          "sha256": "c74e3b76f580b9523c28e45da1d43a21099b45114d1c73056ebfb27380879e0f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-bloodpotion.webp",
+          "bytes": 114248,
+          "sha256": "61e66a28770437d55979992dac913c919e580e442834abab222183de37e0a2f7",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-bloodpotion.webp",
+          "bytes": 15232,
+          "sha256": "65596f746087b659811ff5f66a0863795972638487edbf953395d9478c9f2e09",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "xingyue-shadow-lowdetail-20261004",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-bloodpotion.webp",
+            "ext": "webp",
+            "bytes": 120996,
+            "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-bloodpotion.webp",
+            "ext": "webp",
+            "bytes": 114248,
+            "sha256": "61e66a28770437d55979992dac913c919e580e442834abab222183de37e0a2f7",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-bloodpotion.webp",
+            "ext": "webp",
+            "bytes": 19364,
+            "sha256": "c74e3b76f580b9523c28e45da1d43a21099b45114d1c73056ebfb27380879e0f",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-bloodpotion.webp",
+            "ext": "webp",
+            "bytes": 15232,
+            "sha256": "65596f746087b659811ff5f66a0863795972638487edbf953395d9478c9f2e09",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-stellar-divination",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-c9764ac2-5549-4158-89e9-7beba647707d.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-stellar-divination-source.png",
+        "bytes": 2100193,
+        "sha256": "351ecf50f6da603077f6e16dba128ebcc1326038bc55b67f6d514541f79cf22e"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-stellar-divination-full-before.webp",
+          "bytes": 176094,
+          "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-stellar-divination-thumb-before.webp",
+          "bytes": 24288,
+          "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 190174,
+          "sha256": "4ff71f4cd05ea4d0f07da88a939f50779f44c9b3ffc299fa4234289ec39936bb",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 26392,
+          "sha256": "bee34f3d91e2e24298353defca718e09ab3f1d28ca35749ef1394285e4a11cd9",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "stellar-class-20261020",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 176094,
+            "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 190174,
+            "sha256": "4ff71f4cd05ea4d0f07da88a939f50779f44c9b3ffc299fa4234289ec39936bb",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24288,
+            "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26392,
+            "sha256": "bee34f3d91e2e24298353defca718e09ab3f1d28ca35749ef1394285e4a11cd9",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3sp-shadowshot",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-693a5c83-8c95-4793-b537-8ac9b91d31ba.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3sp-shadowshot-source.png",
+        "bytes": 1882505,
+        "sha256": "64cd3db5f556611ca5afdaa70eda66dbbd07f79d42661a8f408419e9728db6a8"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3sp-shadowshot-full-before.webp",
+          "bytes": 123470,
+          "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt3sp-shadowshot-thumb-before.webp",
+          "bytes": 16420,
+          "sha256": "433577fbf864289aa0a3e2d7852eaa53e2a4e8a14f5d6cd062d492429c9e7de5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3sp-shadowshot.webp",
+          "bytes": 129126,
+          "sha256": "41cc658506b66b4f0085beb117c5ea23337b92daa6ac0790cbca748add467806",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3sp-shadowshot.webp",
+          "bytes": 17306,
+          "sha256": "ce0426fb17338b95f1fa25ddfe628119a171b953f8866f5ff0c037634ef38229",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "shadowshot-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 123470,
+            "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
+            "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 129126,
+            "sha256": "41cc658506b66b4f0085beb117c5ea23337b92daa6ac0790cbca748add467806",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16420,
+            "sha256": "433577fbf864289aa0a3e2d7852eaa53e2a4e8a14f5d6cd062d492429c9e7de5",
+            "source": "docs/evidence/2026-10-10-shadowshot/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17306,
+            "sha256": "ce0426fb17338b95f1fa25ddfe628119a171b953f8866f5ff0c037634ef38229",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1gfhczzj",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b4ec291a-7ed1-4791-a69d-b9ba678659a1.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1gfhczzj-source.png",
+        "bytes": 1836695,
+        "sha256": "a1098cf1b1461cf37342482e08d205ae9f13a50a206ebc6ec61d432ce766a9db"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1gfhczzj-full-before.webp",
+          "bytes": 111690,
+          "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1gfhczzj-thumb-before.webp",
+          "bytes": 15854,
+          "sha256": "c2440402a5ba89765e4fc04fcf791c999e978300ae33668dfce7a721b1fce55f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1gfhczzj.webp",
+          "bytes": 116854,
+          "sha256": "2ad9e2c2a40cccad6edeadcd64f5ed195c1a63456e8cbefc827556dc76ffe62a",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1gfhczzj.webp",
+          "bytes": 16798,
+          "sha256": "f4183901c50841339a052747592256b9c5654bbcc3af9df94287b47e1b051a87",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "doom-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 111690,
+            "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
+            "source": "docs/evidence/2026-10-10-doom/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 116854,
+            "sha256": "2ad9e2c2a40cccad6edeadcd64f5ed195c1a63456e8cbefc827556dc76ffe62a",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15854,
+            "sha256": "c2440402a5ba89765e4fc04fcf791c999e978300ae33668dfce7a721b1fce55f",
+            "source": "docs/evidence/2026-10-10-doom/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 16798,
+            "sha256": "f4183901c50841339a052747592256b9c5654bbcc3af9df94287b47e1b051a87",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "cmtn1ntxzoc4",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8201d62f-5f6c-4c3c-a0da-9a36ad57eb94.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1ntxzoc4-source.png",
+        "bytes": 2125967,
+        "sha256": "bbf41454c25e3d9cf08edeebbff2e7e0590e8999a14d1434215e3b997ec13078"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1ntxzoc4-full-before.webp",
+          "bytes": 186816,
+          "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-cmtn1ntxzoc4-thumb-before.webp",
+          "bytes": 33002,
+          "sha256": "30f743a4e95034a9a40e4109aa8e7925972aab7892ab06dfee2f64b8f0e075ba"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-cmtn1ntxzoc4.webp",
+          "bytes": 230952,
+          "sha256": "08da9d09af958c157481b027bee8a8cd5ce05c5c78789190159bf60c7d098a36",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-cmtn1ntxzoc4.webp",
+          "bytes": 36532,
+          "sha256": "043aad85e333a74c5fceecc210086b924d2362a2ede84040abb52dedd8b7f8b2",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "cmtn1ntxzoc4-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 186816,
+            "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 230952,
+            "sha256": "08da9d09af958c157481b027bee8a8cd5ce05c5c78789190159bf60c7d098a36",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 33002,
+            "sha256": "30f743a4e95034a9a40e4109aa8e7925972aab7892ab06dfee2f64b8f0e075ba",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 36532,
+            "sha256": "043aad85e333a74c5fceecc210086b924d2362a2ede84040abb52dedd8b7f8b2",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt13-soul-contract",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-903a1854-0093-4d40-b4db-583f24a6b0d3.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-soul-contract-source.png",
+        "bytes": 2277671,
+        "sha256": "569369ce81f3c3c5061ee94d8e9faefc9cc0fdea86c1019f81012029b41f6b29"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-soul-contract-full-before.webp",
+          "bytes": 224676,
+          "sha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt13-soul-contract-thumb-before.webp",
+          "bytes": 32160,
+          "sha256": "d51fc6ba82bffe7e32230abd3c4cac6bbb34a32ab43b96208612e2df288dbca4"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-soul-contract.webp",
+          "bytes": 217526,
+          "sha256": "d8064617a5079a953fd9e20445c6f4c8f922141d58ee2f731fa3d7d2fa73d617",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-soul-contract.webp",
+          "bytes": 32750,
+          "sha256": "c57e5dca3b46fb5a9230a1984d55caa24d99e61f6b557509492e302879c25390",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "square-20261020",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 224676,
+            "sha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 217526,
+            "sha256": "d8064617a5079a953fd9e20445c6f4c8f922141d58ee2f731fa3d7d2fa73d617",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 32160,
+            "sha256": "d51fc6ba82bffe7e32230abd3c4cac6bbb34a32ab43b96208612e2df288dbca4",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt13-soul-contract.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 32750,
+            "sha256": "c57e5dca3b46fb5a9230a1984d55caa24d99e61f6b557509492e302879c25390",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-abysscurse",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-3f778f62-45f2-4d50-9cc2-8292f4a3706b.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-abysscurse-source.png",
+        "bytes": 1906641,
+        "sha256": "6f5658f644caf7ffe0de36b8a92e791d54796e4b33203c1712606957bbad0f7c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-abysscurse-full-before.webp",
+          "bytes": 133962,
+          "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-abysscurse-thumb-before.webp",
+          "bytes": 17298,
+          "sha256": "8176dffeca42c5091a2460f82fc14dfe5bd4d4edb44dd8ae56e0cf18a41b63b9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-abysscurse.webp",
+          "bytes": 140942,
+          "sha256": "1dfd90ccc54f54fd26755e98749702ea0e53d7447bd8bb81c22ad4c0e615ca1e",
+          "size": [
+            1440,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-abysscurse.webp",
+          "bytes": 18528,
+          "sha256": "67f900a5f633250dfd4036796c22fd39afdd761ddbda5f0f7c5d42250a1c7df5",
+          "size": [
+            448,
+            340
+          ]
+        }
+      ],
+      "revision_before": "tt7-abysscurse-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 133962,
+            "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 140942,
+            "sha256": "1dfd90ccc54f54fd26755e98749702ea0e53d7447bd8bb81c22ad4c0e615ca1e",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17298,
+            "sha256": "8176dffeca42c5091a2460f82fc14dfe5bd4d4edb44dd8ae56e0cf18a41b63b9",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18528,
+            "sha256": "67f900a5f633250dfd4036796c22fd39afdd761ddbda5f0f7c5d42250a1c7df5",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-meteorstrong",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bb58f1f7-75ac-44b3-9b8c-50ccde785293.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-meteorstrong-source.png",
+        "bytes": 2131583,
+        "sha256": "99fb2179d2f5310f7e63f8812a60b1f4e354ed078aab25e55571a89ae4f23b8c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-meteorstrong-full-before.webp",
+          "bytes": 165476,
+          "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-spell-tt7-meteorstrong-thumb-before.webp",
+          "bytes": 22570,
+          "sha256": "aa45a50b45968963c326841df345a21ef425450116fee5a4461848f9bc9c1839"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-meteorstrong.webp",
+          "bytes": 210318,
+          "sha256": "d29cb06c9368db33c3c18120c282678e17012a3eb854cacf9cdbc2ab7027f246",
+          "size": [
+            1441,
+            1092
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-meteorstrong.webp",
+          "bytes": 26998,
+          "sha256": "967f2e0a970f0f2284f5d0f6d734ce80bd08541a57c73a8f36f15538587c33d6",
+          "size": [
+            448,
+            339
+          ]
+        }
+      ],
+      "revision_before": "tt7-meteorstrong-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 165476,
+            "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 210318,
+            "sha256": "d29cb06c9368db33c3c18120c282678e17012a3eb854cacf9cdbc2ab7027f246",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 22570,
+            "sha256": "aa45a50b45968963c326841df345a21ef425450116fee5a4461848f9bc9c1839",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 26998,
+            "sha256": "967f2e0a970f0f2284f5d0f6d734ce80bd08541a57c73a8f36f15538587c33d6",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-darkfort",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-018c5c80-7f73-4a50-aa0e-a42d1e39642f.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-31-20261023/cards-equip-tt7-darkfort-source.png",
+        "bytes": 1473312,
+        "sha256": "d6ad429048bebd082a38776fb70f08011fd7ce09768d128ea90f06ca1baa141d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-equip-tt7-darkfort-full-before.webp",
+          "bytes": 24332,
+          "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12"
+        },
+        {
+          "path": ".tmp/imagegen/install-31-20261023/cards-equip-tt7-darkfort-thumb-before.webp",
+          "bytes": 3488,
+          "sha256": "d163f00ab114b9bf7c1c725bf60910d902682093c829fef7b6d387c2e627f42c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt7-darkfort.webp",
+          "bytes": 38440,
+          "sha256": "d0f1e4b186f6acd4a1a171cb57df3c535d408f4293ba0ec78d9c236bb1227c01",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt7-darkfort.webp",
+          "bytes": 5140,
+          "sha256": "ae73be53da306b321e8f588527ca091ff8a0f9ce7580a2d13e8596822f6915a8",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-darkfort-original-rough-20261010",
+      "revision_after": "career-local-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24332,
+            "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          },
+          "after": {
+            "path": "cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 38440,
+            "sha256": "d0f1e4b186f6acd4a1a171cb57df3c535d408f4293ba0ec78d9c236bb1227c01",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 3488,
+            "sha256": "d163f00ab114b9bf7c1c725bf60910d902682093c829fef7b6d387c2e627f42c",
+            "source": "docs/evidence/2026-10-10-recruit-boom-pendant/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt7-darkfort.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 5140,
+            "sha256": "ae73be53da306b321e8f588527ca091ff8a0f9ce7580a2d13e8596822f6915a8",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1610,
+  "manifest_count_after": 1610
+}

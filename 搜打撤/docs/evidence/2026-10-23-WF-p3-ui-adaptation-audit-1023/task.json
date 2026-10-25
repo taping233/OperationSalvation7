@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-p3-ui-adaptation-audit-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "交付参考模组UI与现行游戏的对照实施方案，含实页现状、冲突协调、双向源码定位和验收场景",
+  "paths": [
+    "docs/evidence/2026-10-23-WF-p3-ui-adaptation-audit-1023"
+  ],
+  "doneWhen": [
+    "每项建议具备参考代码与现行调用入口、现有效果取舍、实装风险和具体验收条件",
+    "当前窗口实页证据与静态推断分开标明，执行者可直接定位所需参考"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已逐项复审28项并分为11整改/9条件/6约束/2暂缓；修正状态语义、图标拆分与冲突",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "自有57处文档链接/锚点、28项分级、44份源文件指纹及13份当前摘录核对通过，11组30键像素去重重算一致",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs:check exit0；仅设计资料交付；自有5318服务核验身份后停止并复核无监听",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "尚未实施新动效或生成替换图标；实页密集BUFF、满容和连续领取场景仍待后续实装验收",
+    "未提交，远端CI不覆盖本轮设计文档；源码摘录是记录时点，执行前复核属地及当前版本"
+  ],
+  "updatedAt": "2026-10-23T15:42:01.399Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

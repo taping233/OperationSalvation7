@@ -1,0 +1,48 @@
+{
+  "status": "theme-panel-and-native-abstract-ghosts-integrated",
+  "generatedIconStatus": "Rejected as too concrete; not referenced",
+  "prompts": "builtin-v4-prompts.txt",
+  "naiRequests": "nai-v4-requests.json",
+  "files": [
+    {
+      "path": "D:/素材/代号柒/.tmp/nai/event-option-art-1025/v4/coins-draft.png",
+      "sha256": "6d760b5f6089b4cb295fdfd5010de08d340c23114f45013986032e60213367ff",
+      "bytes": 615478
+    },
+    {
+      "path": "D:/素材/代号柒/.tmp/nai/event-option-art-1025/v4/breach-draft.png",
+      "sha256": "a4c733282f7dda3919c4a6738c60dd4ea3b1974847cb670a9ea5ba8fc90e9b5e",
+      "bytes": 391596
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-14484085-9ac0-4f62-9b09-ca6f17e4e97b.png",
+      "sha256": "955f34cad5011c08315b738e0b993900be89c38866587f22572372bfbcd77052",
+      "bytes": 1237823
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-09c608c0-caf5-4b98-8654-db60da80b172.png",
+      "sha256": "76605e8093ec055cb6d3a7129294b0c3f5d683199b8bccfbd003865c2e7a4b01",
+      "bytes": 1417750
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-976e5b41-1b1e-4ab5-a442-4afc4d470aef.png",
+      "sha256": "a39bef218899aaba129f80d38ae78c19d429e7b524095ecfa8d335395cc514cd",
+      "bytes": 807390
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-option-winter-v4.webp",
+      "sha256": "1a8e7b34e8ecfc80cc39e3b9049979f9ebc20afb5ddbff513d60927129dcbc92",
+      "bytes": 58660
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-choice-search-ghost.svg",
+      "sha256": "e5b1cba2c83ea5fc9f35884ac705b404c55c2dc179520d988fb29235636774cb",
+      "bytes": 211
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-choice-breach-ghost.svg",
+      "sha256": "9ad855075cb2d39bd1c262029ffc3debaed5868f4ce8c79ad638f3c5e18787c5",
+      "bytes": 197
+    }
+  ]
+}

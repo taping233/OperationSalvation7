@@ -1,0 +1,6 @@
+{
+  "command": "node node_modules/stylelint/bin/stylelint.mjs game/css/battle-stage.css --formatter json",
+  "exitCode": 0,
+  "results": [{"source":"game/css/battle-stage.css","deprecations":[],"invalidOptionWarnings":[],"parseErrors":[],"errored":false,"warnings":[]}],
+  "captureNote": "Stylelint emitted the JSON result on the tool output stream; this record preserves that observed result."
+}

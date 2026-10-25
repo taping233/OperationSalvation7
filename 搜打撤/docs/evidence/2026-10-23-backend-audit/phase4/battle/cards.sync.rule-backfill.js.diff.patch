@@ -1,0 +1,26 @@
+--- game/src/cards/cards.sync.rule-backfill.js (before phase4)
++++ game/src/cards/cards.sync.rule-backfill.js (after phase4)
+@@ -1,6 +1,7 @@
+ import { KEY } from './cards.consts.js';
+ import { validateCardRules } from './card-rules.schema.js';
+ import { clone } from '../core/shared.js';
++import { sameCardSnapshot as sameSnapshot } from './card-snapshot.js';
+ 
+ /** Validate structured rule backfills before persisting; preserve explicit fields.
+  * library/storage are lazy ports so callers may replace their active store. */
+@@ -115,15 +116,6 @@
+         if (storedCards.some(card => !card || typeof card !== 'object' || Array.isArray(card)
+           || typeof card.id !== 'string' || !card.id)) return;
+         if (new Set(storedCards.map(card => card.id)).size !== storedCards.length) return;
+-        const sameSnapshot = (left, right) => {
+-          if (left === right) return true;
+-          if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
+-          if (Array.isArray(left) !== Array.isArray(right)) return false;
+-          if (Array.isArray(left) && left.length !== right.length) return false;
+-          const keys = Object.keys(left);
+-          return keys.length === Object.keys(right).length && keys.every(key =>
+-            Object.prototype.hasOwnProperty.call(right, key) && sameSnapshot(left[key], right[key]));
+-        };
+         const cards = library().all();
+         if (!sameSnapshot(cards, storedCards)) return;
+ 

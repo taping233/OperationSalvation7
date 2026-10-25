@@ -1,0 +1,15 @@
+[
+  {
+    "file": "tests/terminal-result-readability.test.js",
+    "retiredTests": [
+      "成功整理页两栏独立滚动，为完成整理和智能整理留固定操作槽"
+    ]
+  },
+  {
+    "file": "tests/sacrifice-layout-readability.test.js",
+    "retiredTests": [
+      "统一覆盖木材、口粮、物资与消耗区，不影响左侧初始攻击说明或其他页面",
+      "标签不拆字，只有说明列可缩窄换行，保留既有22px阅读档"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "card_id": "tt13-mind-control",
+      "asset": "cards/spell-tt13-mind-control.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e65-684d-7800-845e-5943cd826978/exec-3d5ca097-deaf-48d6-a79a-6c3b6f3c6ba7.png",
+      "revision": "mind-control-character-20261024",
+      "prompt": "Use case: precise-object-edit. Create the revised square game card illustration 'Mind Control'. Image 1 is the existing card to revise: keep the core visual metaphor of purple psychic threads controlling a helmeted enemy and its dark quiet background. Image 2 is the authoritative identity and clothing reference for Xingyue in her dark-priest form, and also the hand-painted style reference. The required correction is that this is a CHARACTER CLASS CARD: the actual caster Xingyue must visibly appear, with a clear unobscured face and substantial upper body, not just a floating hand. Recompose so Xingyue occupies the left and upper central two thirds, shown waist-up in three-quarter view, her calm purple eyes directed toward the controlled enemy in the lower right foreground. Use image 2's exact very pale desaturated blonde hair colors, neat blunt bangs, rounded crown, long side locks, low braid, dark crescent hair ornament on viewer's right, black-gray high-neck priest dress with gold edging, purple mantle, black gloves. Her expression is restrained and composed, no evil grin. Her right black-gloved hand extends into the middle, fingers curved in a deliberate puppeteer gesture; three or four readable taut violet psychic threads run from her fingertips into the helmet's pink-purple visor. The enemy is secondary: one cropped helmeted head and shoulder in the lower-right quarter, visibly inclining under her control, with a gray steel helmet and dark scarf as in image 1. Do not let helmet or effects cover the caster's face. The viewer must immediately recognize the named character actively performing the spell. New gesture and camera; do not copy reference 2's front-facing red-crystal pose, do not include its red gem or red beams. Dark muted navy and violet abstract color field, a few broad shapes, focused violet light at fingers and visor. No environment, lettering, frame, watermark or UI.\nStyle: hand-painted anime illustration with clear economical opaque color masses, matte surfaces, broad connected hair locks and principal cloth planes, a few wide directional swipes and blunt dabs, handmade edges, selectively crisp anime face, clear eyes and fingers. Large quiet surfaces alternate with concentrated detail near face and casting hand. Low-saturation overall colors with a few violet accents. No dense hair-line networks, tiny repetitive folds, glossy skin, all-over texture filter, or photographic blur. Match reference 2's painterly treatment.",
+      "references": [
+        "game/assets/cards/spell-tt13-mind-control.webp",
+        "game/assets/cards/curse-drain.webp"
+      ]
+    }
+  ]
+}

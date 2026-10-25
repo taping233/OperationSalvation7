@@ -1,0 +1,1867 @@
+[
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "beforeSha256": "28c2a0f2d66ffc92596e3c983aa225cfd6de97ac841ce0f9908af8cfc0450ead",
+    "afterSha256": "c24d8526c6a67a3c907b0b617109d07f5657271826d965b9250beaecba97beee",
+    "removed": [
+      {
+        "file": "game/css/page-expedition-hud.css",
+        "selector": "#hpHud",
+        "property": "background",
+        "value": "linear-gradient(180deg, rgba(18,20,21,.88), rgba(14,15,16,.92))",
+        "line": 134,
+        "start": 6590,
+        "end": 6666,
+        "survivor": {
+          "file": "css/ak-skin.css",
+          "line": 165,
+          "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+        },
+        "bytes": 75,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 165,
+              "value": "linear-gradient(90deg, #12161a, rgba(32,36,40,.9))"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/page-expedition-hud.css",
+        "selector": "#resHud .chip-mini",
+        "property": "background",
+        "value": "linear-gradient(180deg, rgba(17,18,20,.88), rgba(13,14,15,.92))",
+        "line": 145,
+        "start": 7055,
+        "end": 7131,
+        "survivor": {
+          "file": "css/ak-skin.css",
+          "line": 160,
+          "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+        },
+        "bytes": 75,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 160,
+              "value": "linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78))"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/page-expedition-hud.css",
+        "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome",
+        "property": "background",
+        "value": "#632d32",
+        "line": 214,
+        "start": 10184,
+        "end": 10213,
+        "survivor": {
+          "file": "css/feedback-oct12.css",
+          "line": 55,
+          "value": "transparent"
+        },
+        "bytes": 28,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/feedback-oct12.css",
+              "line": 55,
+              "value": "transparent"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/expedition-map.css",
+    "beforeSha256": "a30099b6d834fe96bd9072b5adf26003aba9229a16a8e31bcff7530a0f7f05db",
+    "afterSha256": "1fe8955dde58766e6856d172cde5a1413b369f88c6caa0c66a82f6730d71bf58",
+    "removed": [
+      {
+        "file": "game/css/expedition-map.css",
+        "selector": "#logPanel",
+        "property": "background",
+        "value": "#101a20ed",
+        "line": 96,
+        "start": 6329,
+        "end": 6350,
+        "survivor": {
+          "file": "css/page-expedition-hud.css",
+          "line": 180,
+          "value": "rgba(12,13,14,.74)"
+        },
+        "bytes": 20,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 180,
+              "value": "rgba(12,13,14,.74)"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/expedition-map.css",
+        "selector": "#logPanel",
+        "property": "border-radius",
+        "value": "0",
+        "line": 96,
+        "start": 6379,
+        "end": 6395,
+        "survivor": {
+          "file": "css/page-expedition-hud.css",
+          "line": 181,
+          "value": "0"
+        },
+        "bytes": 15,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 181,
+              "value": "0"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/expedition.css",
+    "beforeSha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28",
+    "afterSha256": "c1a96269cffd88521f882b17caa586ade752a35f8a92db8b1414b223f422863c",
+    "removed": [
+      {
+        "file": "game/css/expedition.css",
+        "selector": "#sidebar",
+        "property": "background",
+        "value": "linear-gradient(105deg, #151618, #212326)",
+        "line": 312,
+        "start": 16100,
+        "end": 16154,
+        "survivor": {
+          "file": "css/ak-skin.css",
+          "line": 170,
+          "value": "#0b0c0e"
+        },
+        "bytes": 53,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/ak-skin.css",
+              "line": 170,
+              "value": "#0b0c0e"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/expedition.css",
+        "selector": "#sidebar .stat-duo b",
+        "property": "color",
+        "value": "var(--exp-text)",
+        "line": 321,
+        "start": 17046,
+        "end": 17069,
+        "survivor": {
+          "file": "css/page-expedition-hud.css",
+          "line": 77,
+          "value": "#f4f4f4"
+        },
+        "bytes": 22,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 77,
+              "value": "#f4f4f4"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/expedition.css",
+        "selector": "#sidebar .stat-duo label",
+        "property": "font-size",
+        "value": "10px",
+        "line": 322,
+        "start": 17099,
+        "end": 17115,
+        "survivor": {
+          "file": "css/page-expedition-hud.css",
+          "line": 75,
+          "value": "10px"
+        },
+        "bytes": 15,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 75,
+              "value": "10px"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      },
+      {
+        "file": "game/css/expedition.css",
+        "selector": "#hpText",
+        "property": "font-variant-numeric",
+        "value": "tabular-nums",
+        "line": 330,
+        "start": 17538,
+        "end": 17573,
+        "survivor": {
+          "file": "css/page-expedition-hud.css",
+          "line": 140,
+          "value": "tabular-nums"
+        },
+        "bytes": 34,
+        "consumers": [
+          {
+            "file": "game/dev/battle-decision-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/canvas-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/chest-no-pity-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/combat-overlay-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/extraction-rewards-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/hand-draw-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/hand-pointer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/infusion-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/map-health-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/map-overview-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/node-design-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/partner-interaction-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/reward-card-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/reward-hierarchy-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/reward-organizer-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/reward-receipt-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/shop-currency-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/small-chest-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/title-resource-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/dev/turn-feedback-review.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "game/index.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          },
+          {
+            "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+            "winner": {
+              "file": "game/css/page-expedition-hud.css",
+              "line": 140,
+              "value": "tabular-nums"
+            }
+          }
+        ],
+        "blocked": [],
+        "eligible": true,
+        "reason": "cross-file-all-consumers"
+      }
+    ],
+    "empty": [
+      {
+        "selector": "#sidebar .stat-duo label",
+        "line": 322
+      }
+    ]
+  }
+]

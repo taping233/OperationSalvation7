@@ -1,0 +1,75 @@
+{
+  "baseline": true,
+  "method": "Static assembly and Acorn/ESLint binding analysis only; assembled modules not executed",
+  "moduleOrder": [
+    "cards.consts.js",
+    "cards.catalog.js",
+    "builtin-card-identities.js",
+    "builtin-card-previous-rules.js",
+    "builtin-card-previous-variants.js",
+    "builtin-equipment-previous-rules.js",
+    "builtin-equipment-execution.js",
+    "builtin-choice-execution.js",
+    "builtin-card-execution.js",
+    "builtin-card-field-defaults.js",
+    "builtin-card-numeric-fields.js",
+    "card-semantic-contract.js",
+    "card-trigger-contract.js",
+    "card-compatibility.js",
+    "card-execution-plan.js",
+    "card-rules.schema.js",
+    "cards.data.js",
+    "cards.rules.js",
+    "cards.sync.persistence.js",
+    "cards.sync.catalog.js",
+    "cards.sync.renames.js",
+    "cards.sync.numeric.js",
+    "cards.sync.rule-backfill.js",
+    "cards.sync.js",
+    "cards.js"
+  ],
+  "assembledSourceParses": true,
+  "dependencyOrderCorrect": false,
+  "constructorAndSnapshotNamesResolve": false,
+  "otherUnresolvedMessages": [
+    {
+      "line": 4159,
+      "message": "'rarityOf' is not defined."
+    },
+    {
+      "line": 4165,
+      "message": "'isHeroLine' is not defined."
+    },
+    {
+      "line": 4188,
+      "message": "'isClassCard' is not defined."
+    },
+    {
+      "line": 4986,
+      "message": "'sameSnapshot' is not defined."
+    },
+    {
+      "line": 5000,
+      "message": "'sameSnapshot' is not defined."
+    },
+    {
+      "line": 5646,
+      "message": "'sameSnapshot' is not defined."
+    },
+    {
+      "line": 5670,
+      "message": "'sameSnapshot' is not defined."
+    },
+    {
+      "line": 5672,
+      "message": "'sameSnapshot' is not defined."
+    },
+    {
+      "line": 5765,
+      "message": "'ensurePierceArrowRevision' is not defined."
+    }
+  ],
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false
+}

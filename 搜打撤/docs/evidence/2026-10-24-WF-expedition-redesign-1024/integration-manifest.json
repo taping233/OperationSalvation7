@@ -1,0 +1,446 @@
+[
+  {
+    "path": "game/src/battle/bag/battle.deck.factory.js",
+    "mainMtime": "2026-10-23T10:56:05.903Z",
+    "mainSha256": "0cda91ebadbee94caae3bc7dd97766741f21ac704df44626828aaadad3dc48e8",
+    "snapshotSha256": "7989b31955083223ef9eb4fe713d1777cbb5074809d089cec9175b406a1eb9c2"
+  },
+  {
+    "path": "game/src/battle/core/battle.lifecycle.domain.js",
+    "mainMtime": "2026-10-23T16:23:22.672Z",
+    "mainSha256": "f2fb13079923877e5f2ce9822b872c51e9b603fb34259df40bed00108a30ffe1",
+    "snapshotSha256": "6151933b46e9e413e41a28917a915e656ea3fb3a37ce209a29a13a357b58303f"
+  },
+  {
+    "path": "game/src/battle/view/battle.pile-view.js",
+    "mainMtime": "2026-10-21T05:33:26.321Z",
+    "mainSha256": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7",
+    "snapshotSha256": "fc3da1c0f1209f1931b3299dee7b4942ead6e325251f8bfafb7cc554e001d9c3"
+  },
+  {
+    "path": "game/src/battle/view/battle.view.js",
+    "mainMtime": "2026-10-23T16:48:23.167Z",
+    "mainSha256": "23eef4d8356f6649999ae5c48c98278cb400682a5323f71fb5ba4a0561f6a699",
+    "snapshotSha256": "5eb86842a681419c8a4d91d786b1105f152a5b0f6c988deb15d75517e1b2ee4f"
+  },
+  {
+    "path": "game/src/core/rule-config.js",
+    "mainMtime": "2026-10-21T02:48:03.663Z",
+    "mainSha256": "72ef0c629608fbf2f790ad7d767ddf3bc0e9cd49070cb8a63ebfdc266b83e815",
+    "snapshotSha256": "a920635022f766a184b21dc8f00e46a24f311d4be50b0274e410c07a87856032"
+  },
+  {
+    "path": "game/src/run/chests.js",
+    "mainMtime": "2026-10-23T16:05:09.527Z",
+    "mainSha256": "ff714e9e52ae9ecfbcb9d2dcf0885edf9e672691d6ef27d8eb32fe62f09accc4",
+    "snapshotSha256": "8fd8a8d9ea02488c1cd6ff31e858d82b34b862ce7abb256b8d9103a668eeaa07"
+  },
+  {
+    "path": "game/src/run/game.run.altar.js",
+    "mainMtime": "2026-10-23T18:13:56.487Z",
+    "mainSha256": "0ded01c26ebee00019f567fd77adf47dd8f4e86b0b3a706adb2973824c98a5c9",
+    "snapshotSha256": "90113b9b63f89c7a0bcdb2e11429fbc02fdad8510e9dd20d41776cfb3c224ba6"
+  },
+  {
+    "path": "game/src/run/game.run.flow.js",
+    "mainMtime": "2026-10-23T10:56:05.933Z",
+    "mainSha256": "3e917600e4685bf589378201c9efa3d53ce077ba1eadb8e5c25916ab8d2bbb30",
+    "snapshotSha256": "4e611b3d78ae1734fb27f0f7b1b827f239c5b976242ed668a7f444c010cc38c3"
+  },
+  {
+    "path": "game/src/run/game.run.resources.js",
+    "mainMtime": "2026-10-23T16:31:27.310Z",
+    "mainSha256": "a375b561410957d8cb43a5c60442f9e0fb62e890960c281cf7f519af0b1c904d",
+    "snapshotSha256": "93d99eb8519ff5d2127c16182e8d6f1fdf82c7713746ed895c810aaeb7382706"
+  },
+  {
+    "path": "game/src/ui/beginner-guide-diagrams.js",
+    "mainMtime": "2026-10-21T03:42:34.718Z",
+    "mainSha256": "6c1004249b3fed721e8d6718dbea7efad031948b2d0fe4cfcaff3b79712ca0a2",
+    "snapshotSha256": "b956d975fc42eda8776bd7435244408bcc02456525076b222bbed6a630c1a97e"
+  },
+  {
+    "path": "game/src/ui/map-passage.js",
+    "mainMtime": "2026-10-21T09:34:14.252Z",
+    "mainSha256": "4e8a06c457bfefe4dfdc99dd308d7576465911546a595ef268ba4fa325c28633",
+    "snapshotSha256": "44fbcbf20aa9b1d2ec5d54ce6b8ccf0ec3b0e3e2398874cc8fc1becc5132f5a7"
+  },
+  {
+    "path": "game/src/ui/page-motion-profiles.js",
+    "mainMtime": "2026-10-23T15:13:21.384Z",
+    "mainSha256": "328eae77a31c68f147827768568b144d7cffec486ae37687c679954cc4acbb41",
+    "snapshotSha256": "91cb771b34ce2611096da08a6533df776df2f2bc7a37ee8e531ab04f091e90d1"
+  },
+  {
+    "path": "game/src/ui/reward-card-feedback.js",
+    "mainMtime": "2026-10-21T03:42:34.737Z",
+    "mainSha256": "4645685cd23efb79edc46c3939426d5b30b47601d1ec22b663bccab14e488bc4",
+    "snapshotSha256": "4809cc164e23209647ac6a55254250884a2aafb417b694c48af135cbd15df0b5"
+  },
+  {
+    "path": "game/src/ui/reward-interaction.js",
+    "mainMtime": "2026-10-23T10:24:54.048Z",
+    "mainSha256": "b12792d8326a43d0ea6176852f8d39b985a5b6a5d95d7f07f8c385b37205071a",
+    "snapshotSha256": "143a5072221e80cfaf3cbd30f6259e714b34f48994c3ae88ff16e1d57e1e556a"
+  },
+  {
+    "path": "game/src/ui/reward-scene-view.js",
+    "mainMtime": "2026-10-23T18:52:50.424Z",
+    "mainSha256": "5904446b53992942594c94153866e8f039a223a0d7ce392e16470929c8eb28c7",
+    "snapshotSha256": "b95b9ebef4cd5ad099f12d2f872cd98d9cbcd85bc8a7cad898c9305dc484d82a"
+  },
+  {
+    "path": "game/src/ui/run-top-bar.css",
+    "mainMtime": "2026-10-23T19:20:02.843Z",
+    "mainSha256": "ee1206a95164fd68d0a290b08a8aa9b38b18114cfdc6978f6697d4b3bb80cd17",
+    "snapshotSha256": "910bbea98bb56072702e249b6001ba2016c59f79344d880ac4e88aafe69d0394"
+  },
+  {
+    "path": "game/src/ui/run-top-bar.js",
+    "mainMtime": "2026-10-23T19:20:02.839Z",
+    "mainSha256": "299d17293cdf8cf2f764a796bdb172a621e8ec72e76110e100a017266f9a4725",
+    "snapshotSha256": "b2f53e4f2f448bddb851834ac78b14549865b5f279ce7a6613c0787267fc470b"
+  },
+  {
+    "path": "game/css/archive-back.css",
+    "mainMtime": "2026-10-23T14:07:36.951Z",
+    "mainSha256": "7c12f096414c097deedd0cf3bb42dcd1a2345318ad5352fe8ad97330189d9b54",
+    "snapshotSha256": "ee304d0bb204793120bcc2e93f842755f1855d62b88be291664ea00fefcfac25"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "mainMtime": "2026-10-23T18:58:34.917Z",
+    "mainSha256": "f3e5a60315f5753618396753cd6366191816cb62447d1b5f799cb803449de151",
+    "snapshotSha256": "b5eb9cc77af31369a75e0be7f23ef01b4c9f544da792860ec06b63946ebb61f4"
+  },
+  {
+    "path": "game/css/battle-pile-view.css",
+    "mainMtime": "2026-10-23T18:58:10.334Z",
+    "mainSha256": "75194b33b6641828ed8855ffe0f2d375aafdba6f3f2dbcc67f7d5e8b38c7f795",
+    "snapshotSha256": "5509d213bd9a4c8f99158f334a44854a9a14df02db39e0342b4d47934ae02ba9"
+  },
+  {
+    "path": "game/css/battle-secondary-overlay.css",
+    "mainMtime": "2026-10-23T15:13:21.420Z",
+    "mainSha256": "ada9db98c7cda187aa6dfc628e96191d6682cd2187ae58eca3b678474938fc32",
+    "snapshotSha256": "a6755938439de2ca3f147ed5389881a895e5ec727503bf65923b544a41632cf9"
+  },
+  {
+    "path": "game/css/entry-events.css",
+    "mainMtime": "2026-10-23T15:13:21.422Z",
+    "mainSha256": "03ab0226f9936d9f3f137f6a69ee07ab3858d5877320e82d851724a0fb9e5a5b",
+    "snapshotSha256": "3f4d4f87ff881fded2830c84f66533021f8035571accf34cb789b4c243c73477"
+  },
+  {
+    "path": "game/css/inventory-zoom.css",
+    "mainMtime": "2026-10-23T19:15:18.204Z",
+    "mainSha256": "33cb89fc0fc22b1784759aecf437419980101e84327e21da0be635a3d91ee980",
+    "snapshotSha256": "9d2adba8971a5f45b50fa3b3a978b63768caf24b50080bfdd12503db9cd74bc8"
+  },
+  {
+    "path": "game/css/map-floating-tools.css",
+    "mainMtime": "2026-10-21T10:04:06.923Z",
+    "mainSha256": "d3097cd2c4d9c90f0b01d6ee5f529d0a2e3fcd00602d637ca6108a4491cb35a6",
+    "snapshotSha256": "417d20aa0ff36be2cf2a78c8bd98ed99d26bfb38894e1a33ebadd3349cf998f7"
+  },
+  {
+    "path": "game/css/page-expedition-hud.css",
+    "mainMtime": "2026-10-23T15:34:36.705Z",
+    "mainSha256": "e51c103b3c07580dd2f99d90996b7b16d6efc9616b9cd87f7df50891778764d3",
+    "snapshotSha256": "3d76287571eaed87ef6d346f9d79dd2688d7596ee59acecc5a178592a48e9647"
+  },
+  {
+    "path": "game/css/room-footer.css",
+    "mainMtime": "2026-10-23T11:20:03.578Z",
+    "mainSha256": "9fc194fe25f0d48d725a8aaf9d2057ce62d08d059b5d18acfa42ca738d78fa61",
+    "snapshotSha256": "5bf7ba2222c7c108609b9cc3ebad641fdad990dbb895ff3ebea695fa11ab2cf6"
+  },
+  {
+    "path": "game/css/room-rewards.css",
+    "mainMtime": "2026-10-23T18:49:53.496Z",
+    "mainSha256": "e831ad2220752f18602ed6386b92a1b84159c1bffad01e8fdb77aec075ef89b8",
+    "snapshotSha256": "756a7d4a2be7fb8a4432f90ded613699f5f57563999ada76a61ad83807a697a3"
+  },
+  {
+    "path": "game/data/beginner-guide.json",
+    "mainMtime": "2026-10-20T15:07:42.927Z",
+    "mainSha256": "a852b340aa31c8f915e8816bc5e838481631e72594731a6faa5f8501e268faf9",
+    "snapshotSha256": "695c18521e4857c2277b2b89eecb8eedc398b3530a6f3825ae175521f41ad7e7"
+  },
+  {
+    "path": "tests/armup-mode.test.js",
+    "mainMtime": "2026-10-23T16:34:41.408Z",
+    "mainSha256": "60fc2f115315411a47f57cad014bcb80c1b53d69b14e35cdb3707259edfa9b22",
+    "snapshotSha256": "46b9554e7cf495da362363d6e0e5e4bf37997ddb252ba38d59a11e84dd376823"
+  },
+  {
+    "path": "tests/battle-discover-result-source.test.js",
+    "mainMtime": "2026-10-23T14:39:35.502Z",
+    "mainSha256": "b18f2f500043db949549e06785f95b5b192219f316730deb5296fee060a679e4",
+    "snapshotSha256": "dccb1fd911cef0a00ddbecac48ae4089721dd0ddffd669c4c5e7aa9b8c652344"
+  },
+  {
+    "path": "tests/battle-equipment-skill-synthesis.test.js",
+    "mainMtime": "2026-10-23T11:28:45.905Z",
+    "mainSha256": "33fb5bcf3414b6346fe46c1e6d5bdbbe2f3385fc7e3cbe16edd9fffd17323c10",
+    "snapshotSha256": "9d58d34c3e1d8ec99be8f06e34e6636cc3fcd450fac5f1e87582872e5b8380a3"
+  },
+  {
+    "path": "tests/battle-hud-info.test.js",
+    "mainMtime": "2026-10-23T15:59:43.199Z",
+    "mainSha256": "9983b29156a150ec4c17a2cfa82c7f3cfb8514a7067fcd9afcefcbc07df14858",
+    "snapshotSha256": "2a36a08c290378bbfe1d46f04ac820ef8fbc1196a3f44615875536f46c3ba0a3"
+  },
+  {
+    "path": "tests/battle-pile-readability.test.js",
+    "mainMtime": "2026-10-23T11:25:04.749Z",
+    "mainSha256": "e6302bc9c6da495a1d9e0515c862b4c2cf8001e11e2cee475318d92edd511466",
+    "snapshotSha256": "b5762e7617ff5516a643888bbb86e985bff93d9409006781f1fc089585eaaac4"
+  },
+  {
+    "path": "tests/boss-rescue-pool.test.js",
+    "mainMtime": "2026-10-23T16:34:41.803Z",
+    "mainSha256": "49ad0ce80b53fb923b728cf32a20c3ed6191bdcde5a10d79d0f044f58e1b09b8",
+    "snapshotSha256": "1bc23e261c5801b812c4b0f8b4f66ed1986ed67668bb957cb8173851f77063ab"
+  },
+  {
+    "path": "tests/chest-batch-receipt.test.js",
+    "mainMtime": "2026-10-23T11:26:58.540Z",
+    "mainSha256": "eb0c33c15fdc6a992320344ffa7a62b88985e4d29eacf28c44589759fc9bc606",
+    "snapshotSha256": "af6763d5182d79bab3b1af4e2dc847f111bf1043bd8c8d7f12285807b2622fe4"
+  },
+  {
+    "path": "tests/chest-callback-lifecycle-audit.test.js",
+    "mainMtime": "2026-10-23T11:26:58.546Z",
+    "mainSha256": "d48d9b751b41709251e47e4082366c2470f9407cfa1fd9e21578525057d15c32",
+    "snapshotSha256": "70d8536f3f9af0be35317b8a248eb0c044cc66f993968b838a17a13cfb576cef"
+  },
+  {
+    "path": "tests/chest-click-flow.test.js",
+    "mainMtime": "2026-10-23T10:38:06.885Z",
+    "mainSha256": "8dea4c5036222485d25c79595a7a2ad0b6c6ac10243b991b7d576029601734e1",
+    "snapshotSha256": "711220284284e772c9d5c144a4537d463837001bbe1ce01b268177c1e43cf6d5"
+  },
+  {
+    "path": "tests/chest-coins-summary.test.js",
+    "mainMtime": "2026-10-23T11:26:58.544Z",
+    "mainSha256": "96fac8f16e0bed69c4228e61d97a7887c6248e4730a8d1c541df0e1f9508c2fd",
+    "snapshotSha256": "755aca0d8f224dc42f5539f330e9ab7d5df2bf178ecb655adb73615e84869b87"
+  },
+  {
+    "path": "tests/chest-extra-rewards-choice.test.js",
+    "mainMtime": "2026-10-23T18:51:11.893Z",
+    "mainSha256": "eb1874c9ab380386833ca013de7ed38800fba8bfa82516f0471afbcb705bfcb3",
+    "snapshotSha256": "6dd2e7276662a48586a0f25482bc1c0498dc14222bf18b0bfea57fe4065b02f5"
+  },
+  {
+    "path": "tests/chest-multi-queue-regression.test.js",
+    "mainMtime": "2026-10-21T11:02:37.264Z",
+    "mainSha256": "4fc4bcaf9c4c7b3f63e6e2b10e617ebff4a41f7f739e977f1c1aec73f86cdd3f",
+    "snapshotSha256": "a1320ae74f7cb8817bb261f8dcc69187f5ae2ea5abb31cd5d6a01b4512ad94b2"
+  },
+  {
+    "path": "tests/chest-opening-art.test.js",
+    "mainMtime": "2026-10-18T05:21:22.066Z",
+    "mainSha256": "a58b464e4409029264aeb200223afccc307d558a70c486ba84a8d43416e8aa75",
+    "snapshotSha256": "058a50e235000aae0814d8af663ae5a0559bc88908a22ddc488f9f6687cd47ba"
+  },
+  {
+    "path": "tests/chest-receive-animation.test.js",
+    "mainMtime": "2026-10-23T11:26:58.542Z",
+    "mainSha256": "02890fb471d4945ea2a17f6653fd43e2ad3df89cb4bdbff084accef406ffe7f9",
+    "snapshotSha256": "b51732cbb6576d6379f20f13b9dfc4db50008ec5ad6950c2f5b0f6d43b06a2ec"
+  },
+  {
+    "path": "tests/chests-reward-capacity-notice.test.js",
+    "mainMtime": "2026-10-23T11:25:00.325Z",
+    "mainSha256": "f267d2bd3ca784140d1bf0e329ba5d6815610d80a803c7aa9df0f5f22f4e1dde",
+    "snapshotSha256": "247440b779e137a66fac9b5076bdacff6518703a78682632c6fe9ac951c39fd5"
+  },
+  {
+    "path": "tests/compendium.test.js",
+    "mainMtime": "2026-10-20T15:14:38.439Z",
+    "mainSha256": "69cf404935f6fa862ad508c03f6be3121a2add87273a4a053920385eed6281b1",
+    "snapshotSha256": "7343a709b27da6c4d46056d1c3d163bb1bc5a732ba195a740c447ac93200e883"
+  },
+  {
+    "path": "tests/event-reward-layout.test.js",
+    "mainMtime": "2026-10-23T11:31:39.243Z",
+    "mainSha256": "abf588fc458772be548546fa8dea985eb774ca5a34db3d49720b456b0e7208d2",
+    "snapshotSha256": "8a6b74793ff4f5f7e28f34423ab2be9eb0be7877fc4f0389739762132e7ce6c1"
+  },
+  {
+    "path": "tests/event-scene-readability.test.js",
+    "mainMtime": "2026-10-16T06:18:41.638Z",
+    "mainSha256": "22bcafab62dc71d8505494f46c781cc971481818cf3232b3cb04861af1a30763",
+    "snapshotSha256": "8efda447153165280a73e84a227a9d4ef6c85a21245c41f4290538ae51037891"
+  },
+  {
+    "path": "tests/expedition-page-lifecycle.test.js",
+    "mainMtime": "2026-10-13T03:58:37.055Z",
+    "mainSha256": "cdc408234bac6a7503e8f3cc0e83083d213dcbee8fca30373e12f9c6d4798301",
+    "snapshotSha256": "9958f0998869a09d5217e8fb912c30958c6fc9b6184341c2eba73e50e58008ca"
+  },
+  {
+    "path": "tests/extra-legend-reward-persistence.test.js",
+    "mainMtime": "2026-10-23T10:48:48.213Z",
+    "mainSha256": "02ef6b3686b140f1b6ed39075d0625236410c40b96d31592d0a1d1c0e3cc7042",
+    "snapshotSha256": "01d7e3b073c3fc075c53f7500ef4117f0f3266bc510f519d52e91de77824f970"
+  },
+  {
+    "path": "tests/four-player-chest-reload.test.js",
+    "mainMtime": "2026-10-23T11:26:58.544Z",
+    "mainSha256": "4f86f488d8e81a053e9f81b0d552532f63c730de2ebb5ec1530a2a0cf5721a42",
+    "snapshotSha256": "9871fee94fb32aae29cfbb3ac383a17e32259e1224e8b7b4ed17a50e5d53b580"
+  },
+  {
+    "path": "tests/framework-independent-battles.test.js",
+    "mainMtime": "2026-10-20T16:55:23.103Z",
+    "mainSha256": "e5fe26d225cb880ca65423b2c6cd09d52dcf7e63fa7ecf3c563cc716a375076a",
+    "snapshotSha256": "2dee879c77f33b957df1269501b2db66e90338f7ed1edbf6c1292df586896f39"
+  },
+  {
+    "path": "tests/infuse-free-paths.test.js",
+    "mainMtime": "2026-10-20T15:11:09.363Z",
+    "mainSha256": "3e57063727b9c8af7fc26cd2462e24255e1ce6c87a74d25e8c48e268900892e6",
+    "snapshotSha256": "a7f1a3fd755cf83c68da940df2abc6a83f9e349b51c2e38542f3ecf91464cf50"
+  },
+  {
+    "path": "tests/node-flow-confirmation.test.js",
+    "mainMtime": "2026-10-18T07:04:41.489Z",
+    "mainSha256": "1eaaf0264dbfb9c28b823cb67fb67111721d8a76e4e0eb3498c33d24a8d61eac",
+    "snapshotSha256": "6add2fd2cd2e6846a3ed3b60525a081c952e551bb8f334fcc800eb445c3daa97"
+  },
+  {
+    "path": "tests/normal-effects-deck-regression.test.js",
+    "mainMtime": "2026-10-20T14:51:14.072Z",
+    "mainSha256": "6360a120669826c16bf7357a78efc09e2718bb4123e1ef74258c0f6d2d254154",
+    "snapshotSha256": "7cc5076ef9947ce8538596a9b1226712af29aa145b896a698a03f785d71348d2"
+  },
+  {
+    "path": "tests/normal-starter-deck.test.js",
+    "mainMtime": "2026-10-20T15:11:09.362Z",
+    "mainSha256": "1ee2d830a9b5f05f5398b49dcad0c250d4fa08f6cb59ab8fa4a9a0989caaca32",
+    "snapshotSha256": "18943d9281cd69359d944c77e72fd0541e107c245fffd19768f7754dd5e80475"
+  },
+  {
+    "path": "tests/project-bugfix-round2-expedition-chests.test.js",
+    "mainMtime": "2026-10-23T16:11:38.809Z",
+    "mainSha256": "f5b6add12c9ee8d71bca2364129d46a1ff6a7f22ef3e202a337666624c46fc23",
+    "snapshotSha256": "edde742843598d898eb844f12dd4b2314e2cd8fe7a79ad6c5b500dbbcf472d11"
+  },
+  {
+    "path": "tests/reward-coins-overview.test.js",
+    "mainMtime": "2026-10-23T11:26:58.542Z",
+    "mainSha256": "e4dbda652783e7f8d11b3f64292119e588e6ee121e03735678f9cf1b7857b574",
+    "snapshotSha256": "052c08d21a16dcf4933f618e008725453ea986e539b4585f1f85d19c8adcd785"
+  },
+  {
+    "path": "tests/reward-completion-receipt.test.js",
+    "mainMtime": "2026-10-20T11:58:36.265Z",
+    "mainSha256": "3616148a395fee3e5f0c7ba7f9d659867192ddc115f46d22e4ef738aa520e6da",
+    "snapshotSha256": "b8896f5081c4d75b7e24a9155f2dd64bde12bf69c608d24508985b2bdf2edee1"
+  },
+  {
+    "path": "tests/reward-save-interruptions.test.js",
+    "mainMtime": "2026-10-23T11:25:00.327Z",
+    "mainSha256": "1982bcd6830c1391843e71131cd956f5f614f4736099c3d60a9cb5ed3971682a",
+    "snapshotSha256": "8e9ce77051b5700c1987c2bdd9c6cf61af3452049ce97942c9f2805fab9621c0"
+  },
+  {
+    "path": "tests/reward-settlement-unification.test.js",
+    "mainMtime": "2026-10-23T11:28:21.429Z",
+    "mainSha256": "bc63a84bbafc7434ff074528a851e74f5686b99c37b1f9ac35d38975c94a9cb3",
+    "snapshotSha256": "28e306d76774d8d216394848e4a18484d6ab58ebd7cee444c7a5a583a87c904d"
+  },
+  {
+    "path": "tests/rooms-review-remediation.test.js",
+    "mainMtime": "2026-10-23T11:21:43.649Z",
+    "mainSha256": "94da992e3d5acebb89840177b713b52ac1a757c54abaa03cfb6d4c3677e4358e",
+    "snapshotSha256": "dc22c2473cb5a2412e5913b67ac958869d88932692f275bc2db81eaf1368a41a"
+  },
+  {
+    "path": "tests/run-top-bar-actions.test.js",
+    "mainMtime": "2026-10-23T18:59:00.513Z",
+    "mainSha256": "1c0dc96cfc5a599bbf5d8f7087714f9e3f9fb2748919da7c141b726268efa1b7",
+    "snapshotSha256": "155ab0dfb4f51dfc1ebe1770283cfb18b3fa454153572557f96c970e033dee42"
+  },
+  {
+    "path": "tests/sts2-agent-replay.test.js",
+    "mainMtime": "2026-10-23T10:57:36.397Z",
+    "mainSha256": "7764cfa3ab7e001ede991d1c3512d2dc7dcea3fc5767ed6170820ccb6e75d9a8",
+    "snapshotSha256": "e73a3ae9479e41391ab3e6ba7d5e77356b8345d1815d28e9d5bddb1edf2de3ec"
+  },
+  {
+    "path": "tests/sts2-consumed-rules.test.js",
+    "mainMtime": "2026-10-20T15:25:30.679Z",
+    "mainSha256": "71f397354e5037ff0d4c39c559a7cec4861cea2dd26532ec2cd0819e89d7ea67",
+    "snapshotSha256": "fb868064404ffa8ae9b2e9b400ade880ffc50db0cf3b0c8e566806238814f7d0"
+  },
+  {
+    "path": "tests/sts2-enemy-plan.test.js",
+    "mainMtime": "2026-10-20T15:02:37.393Z",
+    "mainSha256": "39e676e434598191d6610a659b5aeb1ee43441273028f40b86339bbf2c9eff19",
+    "snapshotSha256": "808eb4f0c5bb783016480580c0fd18939fb7ec6192559a2d3fb184016aafcb52"
+  },
+  {
+    "path": "tests/sts2-infusion-flow-1021.test.js",
+    "mainMtime": "2026-10-21T04:27:47.917Z",
+    "mainSha256": "95825fa25d2f92f9ed85a54aee1f822ae8c59ccc552cbb4af3df4ce1ba69ca14",
+    "snapshotSha256": "f14b94dde55968f196dd829277c830a466409641b03b5eb8ce96a8197a424299"
+  },
+  {
+    "path": "tests/sts2-pile-view-1021.test.js",
+    "mainMtime": "2026-10-21T05:36:13.961Z",
+    "mainSha256": "f548293fc4cf22d026858c854ae3f54402cb41791d9ba2834d5be306dc5f2124",
+    "snapshotSha256": "c6aa68f89dc6f62e041aa1beedd6089c589c2711be522e16e51ab7f4e9c2e322"
+  },
+  {
+    "path": "tests/sys03-altar-restore-txn.test.js",
+    "mainMtime": "2026-10-23T11:29:09.738Z",
+    "mainSha256": "9433371dbc5ea26a827ee3bfe30d2d272c3d892b94080760edded8ac60e4455c",
+    "snapshotSha256": "b9e64ddc9e9d414779806b6ef30f50e36c174d58bd8b04df795dc5e0b5f301be"
+  },
+  {
+    "path": "tests/wf-feedback1021-c-reward-fit.test.js",
+    "mainMtime": "2026-10-23T11:34:08.207Z",
+    "mainSha256": "b7898e748a56a70d7b595905fae1807c8f47fb349bea79cf66fa69a6319016ba",
+    "snapshotSha256": "859a1588ee308ea5d09f2b9145b2b0cdcfbd734a0c7537e5c55c964160da4cf6"
+  },
+  {
+    "path": "scripts/generate-compendium.mjs",
+    "mainMtime": "2026-10-20T15:13:36.768Z",
+    "mainSha256": "662cb8fefa7be55dae5b9e76624de26c2768a8f8ab7f15f02b0403dc0c2835d5",
+    "snapshotSha256": "2401f22275ab1c8d1fef17763b226aef1bfe74178de30b637544140b46afd2df"
+  },
+  {
+    "path": "docs/rules.md",
+    "mainMtime": "2026-10-23T10:31:43.820Z",
+    "mainSha256": "ed33e2a4805442a820e92483a848f1bda62f09a561b9931452e46cab26309bd3",
+    "snapshotSha256": "b7712bc515d29b1baa7524a14ff0ad2b7f5ab61ce090bb42aef00024d72072fc"
+  },
+  {
+    "path": "docs/requested-card-batch.md",
+    "mainMtime": "2026-10-23T18:30:10.711Z",
+    "mainSha256": "2cd6c12324fa70dd6e2110cd56207f5cda981d0d9465142be5da18991448d28b",
+    "snapshotSha256": "02eaf93579e607e9a4a2fd21e787da2d98865b306bec5608f3ba36588a09e7b6"
+  },
+  {
+    "path": "docs/modules/secondary-ui-style.md",
+    "mainMtime": "2026-10-23T19:30:47.844Z",
+    "mainSha256": "4ec96605adb6b7906314f4effc0210105be12deec4616064561a499f90798385",
+    "snapshotSha256": "63ccd0ddf2cffaaed6f6e13db4a88ca4a94657ebb84109a5ead200b66460d415"
+  },
+  {
+    "path": "docs/game-compendium.md",
+    "mainMtime": "2026-10-23T18:30:10.701Z",
+    "mainSha256": "97edf712cdb3459ee517d7faf2c06fef3e34cd17f38dcdda767b0a70ae488c81",
+    "snapshotSha256": "5787fab2563a4a423f31ba3e1ec7e83fc380e77b81d0ece2a731ddbf08daf05e"
+  },
+  {
+    "path": "docs/single-reward-flow.md",
+    "mainMtime": "2026-10-23T11:35:32.791Z",
+    "mainSha256": "587db7d927df86c14f82649bb6e07f5d86dc93ce903db54e203bfccb7aac2b38",
+    "snapshotSha256": "d65406268fa023fbdc5b14be72a86a23c8ba11efbb012cd7d869f913b742a395"
+  }
+]

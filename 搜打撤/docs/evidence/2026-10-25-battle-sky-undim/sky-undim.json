@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T09:21:58.252Z",
+  "inputKind": "real-input",
+  "detail": "真实点击标题开发遭遇战，场景解码后检查天空无额外压暗；当前窗口，不写存档。",
+  "screenshot": {
+    "path": "sky-undim.png",
+    "bytes": 111813,
+    "sha256": "0bbcb4f633093fd55b271387f56db11f003d661086b3fca84badf3530acab943"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

@@ -1,0 +1,787 @@
+{
+  "date": "2026-10-25",
+  "scope": "Battle presentation only. Preserve enemy IDs, statistics, mechanics and encounter pools.",
+  "assets": [
+    {
+      "id": "infantry",
+      "source": "game/assets/portraits/enemies/infantry.webp",
+      "sourceSha256": "1db0b0715c6605581b1f6f040df035113b1da5f9c61e8f8b933855552ac43fd6",
+      "runtime": "game/assets/portraits/cut/enemies/infantry.webp",
+      "beforeSha256": "5ffcce03937734b47c4e81d034f719b958413309178fc5281249eafd7b80c910",
+      "sha256": "5ffcce03937734b47c4e81d034f719b958413309178fc5281249eafd7b80c910",
+      "bytes": 65582,
+      "rebaked": false,
+      "size": [
+        521,
+        760
+      ],
+      "alphaBox": [
+        76,
+        12,
+        439,
+        752
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.490541,
+        "imageScale": 1.027027,
+        "bottom": -0.010811,
+        "x": -49.424184,
+        "revision": "5ffcce039377"
+      }
+    },
+    {
+      "id": "archer",
+      "source": "game/assets/portraits/enemies/archer.webp",
+      "sourceSha256": "bd0fc8c9f7bb6c0d1ef50c8f8d09ac5d1ae4f58939c428a364914c9c3018265c",
+      "runtime": "game/assets/portraits/cut/enemies/archer.webp",
+      "beforeSha256": "9a304c31d798fa5c7290c7dd6be049465869d855898d8d8ab8d8b5e7f6359f02",
+      "sha256": "409b05730660c4bbe2bd543a9c55bce3fd00c8425d628f182fe7a53914e891cd",
+      "bytes": 58156,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        35,
+        17,
+        458,
+        751
+      ],
+      "layout": {
+        "height": 278,
+        "aspect": 0.576294,
+        "imageScale": 1.035422,
+        "bottom": -0.012262,
+        "x": -47.403846,
+        "revision": "409b05730660"
+      }
+    },
+    {
+      "id": "bandit",
+      "source": "game/assets/portraits/enemies/bandit.webp",
+      "sourceSha256": "2c469da23d97c3f0f3949d8272a74338683e18ebada1a2efd5465fc2e73cc49e",
+      "runtime": "game/assets/portraits/cut/enemies/bandit.webp",
+      "beforeSha256": "deb0158fcd8239b068b9489a4d013655a0927db323ad2a7c15f0189fd95fad2a",
+      "sha256": "583696ff1170b2568b034f621c7fd8f73f610781863db1fdfb40c56d043f5057",
+      "bytes": 52714,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        83,
+        5,
+        396,
+        754
+      ],
+      "layout": {
+        "height": 268,
+        "aspect": 0.417891,
+        "imageScale": 1.014686,
+        "bottom": -0.008011,
+        "x": -46.057692,
+        "revision": "583696ff1170"
+      }
+    },
+    {
+      "id": "cavalry",
+      "source": "game/assets/portraits/enemies/cavalry.webp",
+      "sourceSha256": "0e476e03e355e515ebf6047e2b2f02513e29ef07526f181c56238e12fd57035d",
+      "runtime": "game/assets/portraits/cut/enemies/cavalry.webp",
+      "beforeSha256": "0a35abe7ba09f47bdb2e4a460399537db5c05c6dbee165b80dd53c3e74c5ceef",
+      "sha256": "e44c08e38d5dffadb91723fed5559d0d3361b260a980015f41ac722f1de696ee",
+      "bytes": 53864,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        85,
+        19,
+        469,
+        752
+      ],
+      "layout": {
+        "height": 300,
+        "aspect": 0.523874,
+        "imageScale": 1.036835,
+        "bottom": -0.010914,
+        "x": -53.269231,
+        "revision": "e44c08e38d5d"
+      }
+    },
+    {
+      "id": "orc_jav",
+      "source": "game/assets/portraits/enemies/orc_jav.webp",
+      "sourceSha256": "3508166a8ee67438af764016babd690a30e5f9c8659330893a45c2e522dc4e5c",
+      "runtime": "game/assets/portraits/cut/enemies/orc_jav.webp",
+      "beforeSha256": "be6246884342e1772eb1ec1706b133bb56a264ca05099178b9bd28b791036742",
+      "sha256": "be6246884342e1772eb1ec1706b133bb56a264ca05099178b9bd28b791036742",
+      "bytes": 75910,
+      "rebaked": false,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        49,
+        5,
+        433,
+        756
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.511318,
+        "imageScale": 1.011984,
+        "bottom": -0.005326,
+        "x": -46.346154,
+        "revision": "be6246884342"
+      }
+    },
+    {
+      "id": "wolf_rider",
+      "source": "game/assets/portraits/enemies/wolf_rider.webp",
+      "sourceSha256": "5c8076bf7124817f0468aa02202343d74672111839d79254131d4a6aa8b8da8a",
+      "runtime": "game/assets/portraits/cut/enemies/wolf_rider.webp",
+      "beforeSha256": "22923756c46db91dd4d67eb52edda673eb71352ddf364fd54fa06426018868fb",
+      "sha256": "a46960674caa830258cb050ebdf7dd6cfc2bd4ec9d8b856a786e23a34c501d25",
+      "bytes": 68846,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        2,
+        57,
+        519,
+        701
+      ],
+      "layout": {
+        "height": 230,
+        "aspect": 0.802795,
+        "imageScale": 1.180124,
+        "bottom": -0.091615,
+        "x": -50.096154,
+        "revision": "a46960674caa"
+      }
+    },
+    {
+      "id": "orc_axe",
+      "source": "game/assets/portraits/enemies/orc_axe.webp",
+      "sourceSha256": "56c672a29dcb937e1b94a2f3c1fd9ee213c27200c7cc88e6e81495571ff2b5ee",
+      "runtime": "game/assets/portraits/cut/enemies/orc_axe.webp",
+      "beforeSha256": "f6ef8d0fd6288f2ba50cfcd72b648f95ac63e36c3e0f4484cc79585269b28f25",
+      "sha256": "ae7f124413792d79dbaf0019f942baad760c1c3efda43f190a1cc519bccd97db",
+      "bytes": 79692,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        16,
+        9,
+        506,
+        744
+      ],
+      "layout": {
+        "height": 292,
+        "aspect": 0.666667,
+        "imageScale": 1.034014,
+        "bottom": -0.021769,
+        "x": -50.192308,
+        "revision": "ae7f12441379"
+      }
+    },
+    {
+      "id": "fire_el",
+      "source": "game/assets/portraits/enemies/fire_el.webp",
+      "sourceSha256": "4fa924c059f3d49a371f2943c63555d5d0c22ea2d39d7e3bfc31abdd10df6c2c",
+      "runtime": "game/assets/portraits/cut/enemies/fire_el.webp",
+      "beforeSha256": "b8679e9094d10604087a6e4a628cde2b86b8d94cf6a247b43b91c1008ecdd462",
+      "sha256": "9d2fb91d2b324792e6688643819b4d2b4481bd62f1e1afafbc65268c25bc6bd5",
+      "bytes": 88716,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        46,
+        12,
+        507,
+        741
+      ],
+      "layout": {
+        "height": 284,
+        "aspect": 0.632373,
+        "imageScale": 1.042524,
+        "bottom": -0.026063,
+        "x": -53.173077,
+        "revision": "9d2fb91d2b32"
+      }
+    },
+    {
+      "id": "water_el",
+      "source": "game/assets/portraits/enemies/water_el.webp",
+      "sourceSha256": "e819a6096cb41b347b70eb01475b41d85ea5d7ba8df070301a6da26cc1cbe002",
+      "runtime": "game/assets/portraits/cut/enemies/water_el.webp",
+      "beforeSha256": "043fb44d5bfbedcede755766b1c1b27e377eb46497ec3e41cce87bac313d060a",
+      "sha256": "9bf01d189617e1030aedd9305c6f6f430d00b9751e18d8f8af28fc09be5ab3bb",
+      "bytes": 61630,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        105,
+        11,
+        492,
+        746
+      ],
+      "layout": {
+        "height": 290,
+        "aspect": 0.526531,
+        "imageScale": 1.034014,
+        "bottom": -0.019048,
+        "x": -57.403846,
+        "revision": "9bf01d189617"
+      }
+    },
+    {
+      "id": "grass_el",
+      "source": "game/assets/portraits/enemies/grass_el.webp",
+      "sourceSha256": "3e23c992306aa33e2e60610f0eb0e7060585abddbc985f7f324fc642e9541338",
+      "runtime": "game/assets/portraits/cut/enemies/grass_el.webp",
+      "beforeSha256": "b63efb342c56b411ecd5f2376531ddf843cf5e457da15b5162b2bfe8a72f1d6c",
+      "sha256": "239df57f9c5862604bc5c40fd3fd1d2a3d697d99a3a9c65786bc9b7dff8120a7",
+      "bytes": 62164,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        27,
+        48,
+        505,
+        743
+      ],
+      "layout": {
+        "height": 310,
+        "aspect": 0.68777,
+        "imageScale": 1.093525,
+        "bottom": -0.02446,
+        "x": -51.153846,
+        "revision": "239df57f9c58"
+      }
+    },
+    {
+      "id": "esper_crow",
+      "source": "game/assets/portraits/enemies/esper_crow.webp",
+      "sourceSha256": "e9a5710997c26269591d3f04f78f9cdb29bde7e4f61dc0f1f0632c8fa3e872fa",
+      "runtime": "game/assets/portraits/cut/enemies/esper_crow.webp",
+      "beforeSha256": "bdabc54511877c1ca0d5a24b67149a2af7734155f2391133fdc91230c84eea14",
+      "sha256": "bdabc54511877c1ca0d5a24b67149a2af7734155f2391133fdc91230c84eea14",
+      "bytes": 74816,
+      "rebaked": false,
+      "size": [
+        521,
+        760
+      ],
+      "alphaBox": [
+        74,
+        25,
+        441,
+        742
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.511855,
+        "imageScale": 1.059972,
+        "bottom": -0.025105,
+        "x": -49.424184,
+        "revision": "bdabc5451187"
+      }
+    },
+    {
+      "id": "esper_candle",
+      "source": "game/assets/portraits/enemies/esper_candle.webp",
+      "sourceSha256": "105dc60ad932c4cf17be4895602450a34969b62a6f3c7d11e276b7bd125baf8a",
+      "runtime": "game/assets/portraits/cut/enemies/esper_candle.webp",
+      "beforeSha256": "3b1a3915edfd14b7c8d8b36878f9cc143c89ac57c8e04e716392185a1d01da4f",
+      "sha256": "3b1a3915edfd14b7c8d8b36878f9cc143c89ac57c8e04e716392185a1d01da4f",
+      "bytes": 81154,
+      "rebaked": false,
+      "size": [
+        521,
+        760
+      ],
+      "alphaBox": [
+        63,
+        4,
+        515,
+        752
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.604278,
+        "imageScale": 1.016043,
+        "bottom": -0.010695,
+        "x": -55.47025,
+        "revision": "3b1a3915edfd"
+      }
+    },
+    {
+      "id": "esper_silence",
+      "source": "game/assets/portraits/enemies/esper_silence.webp",
+      "sourceSha256": "8d89ac8a5181581d50195bc3dbba6529f9a325e245dbc782b948c4f791153a9a",
+      "runtime": "game/assets/portraits/cut/enemies/esper_silence.webp",
+      "beforeSha256": "42d37fc523b660dfa556d4be3964b31ed31aec62fa4e403d00d21e42b5326c58",
+      "sha256": "42d37fc523b660dfa556d4be3964b31ed31aec62fa4e403d00d21e42b5326c58",
+      "bytes": 91650,
+      "rebaked": false,
+      "size": [
+        521,
+        760
+      ],
+      "alphaBox": [
+        28,
+        10,
+        506,
+        749
+      ],
+      "layout": {
+        "height": 290,
+        "aspect": 0.64682,
+        "imageScale": 1.028417,
+        "bottom": -0.014885,
+        "x": -51.247601,
+        "revision": "42d37fc523b6"
+      }
+    },
+    {
+      "id": "esper_echo",
+      "source": "game/assets/portraits/enemies/esper_echo.webp",
+      "sourceSha256": "5b6083ad507ca19069636cbf892347d9c402e20ec6906a467c91e34a1361bc5e",
+      "runtime": "game/assets/portraits/cut/enemies/esper_echo.webp",
+      "beforeSha256": "4d31c46a5204234d314f55d1ce10b2e466ce8ede0c62946ad3bd31ba10a67b95",
+      "sha256": "4d31c46a5204234d314f55d1ce10b2e466ce8ede0c62946ad3bd31ba10a67b95",
+      "bytes": 90764,
+      "rebaked": false,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        50,
+        8,
+        488,
+        752
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.58871,
+        "imageScale": 1.021505,
+        "bottom": -0.010753,
+        "x": -51.730769,
+        "revision": "4d31c46a5204"
+      }
+    },
+    {
+      "id": "dragon",
+      "source": "game/assets/portraits/enemies/dragon.webp",
+      "sourceSha256": "638c7675d9686222e89465ffc15a112b5adbce1af36f286e593d274c603020c1",
+      "runtime": "game/assets/portraits/cut/enemies/dragon.webp",
+      "beforeSha256": "d07d53519b6d8d69a8b7a9df0ffb7c14b1183b415ce5046517e3662cfb5320c5",
+      "sha256": "cdfeaec260d7c66976cfcfb2955833f46fa842d432cb0e9bd96af618fd083739",
+      "bytes": 100966,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        4,
+        17,
+        519,
+        725
+      ],
+      "layout": {
+        "height": 384,
+        "aspect": 0.727401,
+        "imageScale": 1.073446,
+        "bottom": -0.049435,
+        "x": -50.288462,
+        "revision": "cdfeaec260d7"
+      }
+    },
+    {
+      "id": "boss_general",
+      "source": "game/assets/portraits/enemies/boss_general.webp",
+      "sourceSha256": "c1e2588f37cd3cd7e5deb9b285b547c1db5bc6d173ab8bab61cfcfa1b3dbbc55",
+      "runtime": "game/assets/portraits/cut/enemies/boss_general.webp",
+      "beforeSha256": "4652ab04f8273d5e94e14a7f9183863be03de312eab9aec0513c110a22987988",
+      "sha256": "d6b2e812a75bd70f0a63ba3665acb55502a0e591a2856f83719819c52890b69a",
+      "bytes": 45716,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        148,
+        5,
+        402,
+        758
+      ],
+      "layout": {
+        "height": 340,
+        "aspect": 0.337317,
+        "imageScale": 1.009296,
+        "bottom": -0.002656,
+        "x": -52.884615,
+        "revision": "d6b2e812a75b"
+      }
+    },
+    {
+      "id": "boss_orc",
+      "source": "game/assets/portraits/enemies/boss_orc.webp",
+      "sourceSha256": "84f1907419581f662b9a25a3e76f4cfa54c32ae9a418a7d0f079a26c3b75a87c",
+      "runtime": "game/assets/portraits/cut/enemies/boss_orc.webp",
+      "beforeSha256": "92b78925c83ff0a589670aeb752234dac55c3f1be0c210d7efe39694e0b25689",
+      "sha256": "237d10d83ef642fbdb86aa6364048e6fc2f0531a276dea9db603eca7401449e1",
+      "bytes": 74576,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        9,
+        0,
+        519,
+        759
+      ],
+      "layout": {
+        "height": 414,
+        "aspect": 0.671937,
+        "imageScale": 1.001318,
+        "bottom": -0.001318,
+        "x": -50.769231,
+        "revision": "237d10d83ef6"
+      }
+    },
+    {
+      "id": "boss_elem",
+      "source": "game/assets/portraits/enemies/boss_elem.webp",
+      "sourceSha256": "82709c4bf1422a3245b8c4155a18be6320d2fbad21f0fdaa220f339786df091a",
+      "runtime": "game/assets/portraits/cut/enemies/boss_elem.webp",
+      "beforeSha256": "427d6f2a7ae14a7e1906286957c44530dd2302762692951a81056bc62b82d48f",
+      "sha256": "8f5232539da9f85a51a8aa0200db28e5ae719abef52a4345dbfe145c42867703",
+      "bytes": 68218,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        9,
+        29,
+        511,
+        741
+      ],
+      "layout": {
+        "height": 392,
+        "aspect": 0.705056,
+        "imageScale": 1.067416,
+        "bottom": -0.026685,
+        "x": -50.0,
+        "revision": "8f5232539da9"
+      }
+    },
+    {
+      "id": "rager",
+      "source": "game/assets/portraits/enemies/rager.webp",
+      "sourceSha256": "aa4431ea0b89e7041a8f341a5cc703cd817dc4d34f0f1b145d4dc6b24cf4ad9a",
+      "runtime": "game/assets/portraits/cut/enemies/rager.webp",
+      "beforeSha256": "ae35bbec46717d448e85b0e113c48ff75e21d1e0d23ffbeb39146a21730b7999",
+      "sha256": "ae35bbec46717d448e85b0e113c48ff75e21d1e0d23ffbeb39146a21730b7999",
+      "bytes": 64696,
+      "rebaked": false,
+      "size": [
+        507,
+        760
+      ],
+      "alphaBox": [
+        132,
+        9,
+        359,
+        751
+      ],
+      "layout": {
+        "height": 282,
+        "aspect": 0.30593,
+        "imageScale": 1.024259,
+        "bottom": -0.012129,
+        "x": -48.422091,
+        "revision": "ae35bbec4671"
+      }
+    },
+    {
+      "id": "deserter",
+      "source": "game/assets/portraits/enemies/deserter.webp",
+      "sourceSha256": "c3069dacc4b1421cc9b16e6035cc71f6f44f646a08d0939e6796a9e2fc554697",
+      "runtime": "game/assets/portraits/cut/enemies/deserter.webp",
+      "beforeSha256": "1d929f09a7f8155ceb6112e3e7e038559bbc6e9b84ef9e6e6c31f83c903e11ae",
+      "sha256": "1d929f09a7f8155ceb6112e3e7e038559bbc6e9b84ef9e6e6c31f83c903e11ae",
+      "bytes": 71922,
+      "rebaked": false,
+      "size": [
+        507,
+        760
+      ],
+      "alphaBox": [
+        155,
+        8,
+        380,
+        744
+      ],
+      "layout": {
+        "height": 272,
+        "aspect": 0.305707,
+        "imageScale": 1.032609,
+        "bottom": -0.021739,
+        "x": -52.761341,
+        "revision": "1d929f09a7f8"
+      }
+    },
+    {
+      "id": "greedy_imp",
+      "source": "game/assets/portraits/enemies/greedy_imp.webp",
+      "sourceSha256": "3568beeac92016deeaab520d8b61d9ef938d360f46b93c9979f72a6519bd1e37",
+      "runtime": "game/assets/portraits/cut/enemies/greedy_imp.webp",
+      "beforeSha256": "eabbe90690111acca21d3fdabf63e96760f3f17eb5b9708a9e061f39d39460aa",
+      "sha256": "cbd3a6740d2adec44de228dc057330c545e6ffd18661c97606ff96a1d6fb24af",
+      "bytes": 62428,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        6,
+        116,
+        516,
+        679
+      ],
+      "layout": {
+        "height": 150,
+        "aspect": 0.905861,
+        "imageScale": 1.349911,
+        "bottom": -0.143872,
+        "x": -50.192308,
+        "revision": "cbd3a6740d2a"
+      }
+    },
+    {
+      "id": "swaggerer",
+      "source": "game/assets/portraits/enemies/swaggerer.webp",
+      "sourceSha256": "2062f70ca59e86135e4e0a3d6821cc5f655e34b7672c411c434a9e5f42d6650e",
+      "runtime": "game/assets/portraits/cut/enemies/swaggerer.webp",
+      "beforeSha256": "e8bad8479cbf811d96ddcc2d815dae3404514911fb9c7a9026a5cb9ac3fab672",
+      "sha256": "e8bad8479cbf811d96ddcc2d815dae3404514911fb9c7a9026a5cb9ac3fab672",
+      "bytes": 72334,
+      "rebaked": false,
+      "size": [
+        507,
+        760
+      ],
+      "alphaBox": [
+        125,
+        6,
+        438,
+        738
+      ],
+      "layout": {
+        "height": 276,
+        "aspect": 0.427596,
+        "imageScale": 1.038251,
+        "bottom": -0.030055,
+        "x": -55.522682,
+        "revision": "e8bad8479cbf"
+      }
+    },
+    {
+      "id": "tin_mute",
+      "source": "game/assets/portraits/enemies/tin_mute.webp",
+      "sourceSha256": "09645db5ca829142ad3b503f3788822bf715a0a1e1855ff54b1cf229e0f29b95",
+      "runtime": "game/assets/portraits/cut/enemies/tin_mute.webp",
+      "beforeSha256": "29db5791306cc22d0399cce90b3cc22df28e4be2e8b4636b5ed71ca88a94268a",
+      "sha256": "2423c858a28d4d7fc5634a99dd5381301875a4713e8f3a97f8d001a71c6ef68a",
+      "bytes": 78404,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        17,
+        13,
+        489,
+        749
+      ],
+      "layout": {
+        "height": 292,
+        "aspect": 0.641304,
+        "imageScale": 1.032609,
+        "bottom": -0.014946,
+        "x": -48.653846,
+        "revision": "2423c858a28d"
+      }
+    },
+    {
+      "id": "heavy_hammer",
+      "source": "game/assets/portraits/enemies/heavy_hammer.webp",
+      "sourceSha256": "da9e7d99ee47da90f86e2573b9d4ba41737534689834c9f10113b038ae32ab3a",
+      "runtime": "game/assets/portraits/cut/enemies/heavy_hammer.webp",
+      "beforeSha256": "90e3859111c3c9c015107d88dcff975ab1fceee7098979fa16935ddd6a125db7",
+      "sha256": "90e3859111c3c9c015107d88dcff975ab1fceee7098979fa16935ddd6a125db7",
+      "bytes": 97254,
+      "rebaked": false,
+      "size": [
+        507,
+        760
+      ],
+      "alphaBox": [
+        58,
+        5,
+        405,
+        748
+      ],
+      "layout": {
+        "height": 306,
+        "aspect": 0.467026,
+        "imageScale": 1.02288,
+        "bottom": -0.016151,
+        "x": -45.66075,
+        "revision": "90e3859111c3"
+      }
+    },
+    {
+      "id": "cultist",
+      "source": "game/assets/portraits/enemies/cultist.webp",
+      "sourceSha256": "dbdd64ef24e0a04a5950e10650960c4f855d4069dfe92b19aaea30fb656b7536",
+      "runtime": "game/assets/portraits/cut/enemies/cultist.webp",
+      "beforeSha256": "8ea3fa5996501efe5aa77cfd0214565d7694b78d68bac273e7d4c6322a5e63e2",
+      "sha256": "b06d6a94c65c2682752b05c710235c950263ad1fb5011dadbf36fa7f30d45bea",
+      "bytes": 35392,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        174,
+        14,
+        383,
+        754
+      ],
+      "layout": {
+        "height": 282,
+        "aspect": 0.282432,
+        "imageScale": 1.027027,
+        "bottom": -0.008108,
+        "x": -53.557692,
+        "revision": "b06d6a94c65c"
+      }
+    },
+    {
+      "id": "fake_apothecary",
+      "source": "game/assets/portraits/enemies/fake_apothecary.webp",
+      "sourceSha256": "e51c60d072450ac99b6e1a8ab423774eb5b565c6f99e454be4fb0cfd7692b181",
+      "runtime": "game/assets/portraits/cut/enemies/fake_apothecary.webp",
+      "beforeSha256": "a3d1d3b96e28af37d82a31a3f79f384025805618a5ab41c14dffbdca93fb27a7",
+      "sha256": "e8f2e9f8fde17c29b51ef6f2a5f049c9abc0cf8feab36f3e048b5a105f117c41",
+      "bytes": 54990,
+      "rebaked": true,
+      "size": [
+        520,
+        760
+      ],
+      "alphaBox": [
+        127,
+        6,
+        405,
+        753
+      ],
+      "layout": {
+        "height": 278,
+        "aspect": 0.372155,
+        "imageScale": 1.017403,
+        "bottom": -0.009371,
+        "x": -51.153846,
+        "revision": "e8f2e9f8fde1"
+      }
+    },
+    {
+      "id": "camo_sniper",
+      "source": "game/assets/portraits/enemies/camo_sniper.webp",
+      "sourceSha256": "ecdac04fc416c24e416a25ea2bcbaa7291e7f8fd62210870b3085492faa3e46f",
+      "runtime": "game/assets/portraits/cut/enemies/camo_sniper.webp",
+      "beforeSha256": "3ddce2f923b19137ea4e8c96168cff16f46068527b9846b2b9dda960a142761f",
+      "sha256": "3ddce2f923b19137ea4e8c96168cff16f46068527b9846b2b9dda960a142761f",
+      "bytes": 52026,
+      "rebaked": false,
+      "size": [
+        507,
+        760
+      ],
+      "alphaBox": [
+        119,
+        7,
+        386,
+        747
+      ],
+      "layout": {
+        "height": 286,
+        "aspect": 0.360811,
+        "imageScale": 1.027027,
+        "bottom": -0.017568,
+        "x": -49.802761,
+        "revision": "3ddce2f923b1"
+      }
+    }
+  ],
+  "rebakedCount": 16,
+  "rebakedBytes": 1046472,
+  "allBattleBytes": 1884580,
+  "manifestCount": 1718,
+  "backup": ".tmp/imagegen/enemy-battle-fit-20261025",
+  "geometry": "Alpha >=32 bounds measured offline. CSS anchors visible lower edge and visible center, and sizes by visible body aspect.",
+  "notRun": [
+    "tests",
+    "asset audit",
+    "lint",
+    "type check",
+    "browser acceptance",
+    "build"
+  ],
+  "consumerFingerprints": {
+    "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
+    "game/src/battle/view/battle.layers.js": "abe63f36f1d87a9726e01ad88d84e90a3854934e4b451ec2959d0a9a255a5fea"
+  },
+  "consumerReview": "Art only adds revision query to the same 27 enemy paths; cutout swap retains that query and original-image fallback. Layers adds offline numeric geometry only. No exclusion changes.",
+  "presentationFiles": {
+    "game/src/core/enemy-portrait-presentation.js": "ab7bc59dcbb3aa20aba91318f2ef0f8fb291ce6351114dd13d08b8e4619590b8",
+    "game/src/core/art.js": "4e5c6d53f56e208b15ebb7eba68e83932d385f672b06b9c5959771228de03d6b",
+    "game/src/battle/view/battle.layers.js": "d7a7914b5f0fc76dc15a9d8fc5659ad4bab362e7097edb6d5af72ba23e70604e",
+    "game/css/battle-stage.css": "dbdd8975d6a405532b7268662500bd2ffd1abe618b8ef7d7eb73f52ce2df97d7"
+  }
+}

@@ -1,0 +1,162 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>战斗二级层 · 存储隔离评审</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css?review=shop-currency-r2" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" />
+<link rel="stylesheet" href="/css/battle-hand-overhaul.css"><link rel="stylesheet" href="/css/battle-discover.css"><link rel="stylesheet" href="/css/battle-decision.css">
+<style>
+.fixture-controls{position:fixed;left:8px;top:4px;z-index:20000;max-width:calc(100% - 32px);padding:6px 8px;background:#07121ce8;color:#dce7ed;font:12px sans-serif;border:1px solid #52768c;border-radius:6px}
+.fixture-actions{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.fixture-controls button{font:inherit;min-height:28px;padding:4px 8px;border:1px solid #82a6bd;border-radius:5px;background:#173245;color:#e8f4fc;cursor:pointer}.fixture-controls p{margin:4px 0;max-width:1050px}.fixture-controls output{display:block;max-width:1050px;white-space:normal}.fixture-controls[data-collapsed="true"] .fixture-actions,.fixture-controls[data-collapsed="true"] .fixture-note{display:none}body{background:#101c28}
+</style>
+<script>
+// Install before imports: this fixture never reads or writes the player's saves.
+{const memory=new Map();Object.defineProperty(window,'localStorage',{value:Object.freeze({getItem(key){return memory.get(String(key))??null},setItem(key,value){memory.set(String(key),String(value))},removeItem(key){memory.delete(String(key))},clear(){memory.clear()},key(index){return [...memory.keys()][index]??null},get length(){return memory.size}})});}
+</script></head><body>
+<div id="app"><main id="viewport"><span id="heroAva" hidden aria-hidden="true"></span><div id="tooltip" hidden></div><div id="overlay" class="room-view" role="dialog" aria-modal="true" tabindex="-1">
+<!-- Outside ovBody and inside overlay: production inert scopes must not disable the review controls. -->
+<aside class="fixture-controls" id="fixtureControls" aria-label="隔离评审入口">
+<div class="fixture-actions">
+<button data-fixture="reset">普通战重置</button><button data-fixture="choice">抉择 · 神灯</button><button data-fixture="discover">发现 · 挖宝</button><button data-fixture="payment">支付 · 快意恩仇</button><button data-fixture="select">选择手牌 · 剑荡妖邪</button><button data-fixture="infusion">注能 · 血蝠风暴</button><button data-fixture="deck">首脑牌库</button><button data-fixture="grave">墓地（构造存档）</button><button data-fixture="bag">背包（现行禁止）</button><button data-fixture="settings">设置</button><button data-fixture="rules">首脑规则</button><button data-fixture="risk">风险确认（低血开局）</button><button data-fixture="detail">手牌阅读 · 既有输入</button><button data-fixture="reload">从开局检查点读档</button>
+</div>
+<p class="fixture-note">仅 dev：内存存储、真实 BattleSession / 真实卡牌 / UI.init 原生点击、Esc、Tab 路由。每个入口独立开局；墓地明确使用旧格式 restore 构造。手牌目前只用既有点击/悬停输入；独立手牌详情无生产入口。发现/选牌层的「查看详情」可验证详情返回。背包命令现行禁止战斗内打开。</p>
+<output id="fixtureResult" aria-live="polite">初始化中…</output><button id="fixtureCollapse">收起入口</button>
+</aside>
+<div class="card room"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import SDT,{sdtDefine} from '/src/core/sdt-facade.js';
+import '/src/core/icons-bitmap.js';
+import '/src/core/art.js';
+import '/src/ui/ui-scale.js';
+sdtDefine('Sound',{musicMuted:false,sfxMuted:false,sfx(){},music(){},setDucked(){},setBoss(){},setMusicMuted(value){this.musicMuted=value},setSfxMuted(value){this.sfxMuted=value}});
+sdtDefine('Meta',{track(){}});
+sdtDefine('MAP',{rules:{battleEnergy:9,battleHandMax:99,bossDeckSize:15,starterSha:5,battleStartDraw:5,battleTurnDraw:1},items:{}});
+const {UI}=await import('/src/ui/ui.js');
+// Real delegated click, Escape routing and Tab trap; heroAva is the only
+// mandatory non-overlay init node. HUD refresh/log stay fixture-local below.
+UI.init();
+UI.refresh=()=>{};
+const result=document.querySelector('#fixtureResult');
+let note='普通战就绪',lastLog='',game,requestId=0;
+UI.log=(message)=>{lastLog=String(message);};
+await import('/src/cards/cards.js');
+SDT.Cards.ensureSha();SDT.Cards.ensureStarters();SDT.Cards.ensureTabletop();SDT.Cards.ensureDmgTypes();SDT.Cards.ensureEffectFields();
+const {BattleSession}=await import('/src/battle/core/battle.core.js');
+await import('/src/battle/view/battle.view.js');
+const commands=BattleSession.commands;
+const cardIds=['tt3-magic-lamp','tt3-dig-treasure','tt7-thundergrudge','tt3-frostfall','tt3sp-bloodstorm','tt3-fate-wheel','tt3-iceheart-potion','tt-crystal'];
+const catalog=SDT.Cards.all();
+function reset({boss=false,risk=false}={}){
+ lastLog='';
+ const ownedCards=cardIds.map(id=>{
+  const card=catalog.find(candidate=>candidate.id===id);
+  if(!card)throw new Error(`缺少真实卡牌 ${id}`);
+  return {uid:id,card};
+ });
+ ownedCards.push(...Array.from({length:6},(_,index)=>({uid:`fuel-${index}`,card:SDT.Cards.SHA})));
+ game={ownedCards,inventory:[],usedPocket:[],hp:risk?1:30,maxHp:30,atk:4,spellPower:0,coins:0,myClass:null,state:'idle',battleActive:false,
+  log(message){lastLog=String(message)},heal(amount){this.hp=Math.min(this.maxHp,this.hp+amount)},addItem(){},onBattleEnd(){note='本场已结束；可用上方入口重开'}};
+ sdtDefine('game',game);
+ BattleSession.start(game,[0,1].map(index=>({id:`fixture-foe-${index}`,name:'训练木桩',hp:100,maxHp:100,atk:risk?12:1})),{isBoss:boss,directBossStart:boss});
+}
+function act(name){
+ if(typeof UI._acts[name]!=='function')throw new Error(`当前未绑定真实 UI 动作 ${name}`);
+ UI._acts[name]({});
+}
+async function waitFor(check,ticket){
+ const deadline=Date.now()+6000;
+ while(Date.now()<deadline){
+  if(ticket!==requestId)return false;
+  if(check(BattleSession.getSnapshot()))return true;
+  await new Promise(resolve=>setTimeout(resolve,40));
+ }
+ throw new Error('真实战斗未到达预期状态；请检查状态/控制台');
+}
+const targets={choice:'choosing',discover:'discovering',payment:'handSelecting',select:'handSelecting',infusion:'infusing'};
+let requestedKind='reset';
+async function enter(kind){
+ requestedKind=kind;
+ const ticket=++requestId;
+ note=`准备 ${kind}`;
+ if(kind==='reload'){BattleSession.restore(game,BattleSession.serialize());note='真实 serialize/restore：返回本场开局检查点';return;}
+ reset({boss:['deck','grave','rules'].includes(kind),risk:kind==='risk'});
+ await waitFor(state=>!state.busy&&state.phase==='player',ticket);
+ if(ticket!==requestId)return;
+ switch(kind){
+  case 'choice':commands.playCard('tt3-magic-lamp',0);note='真实出牌：神灯 → 抉择';break;
+  case 'discover':commands.playCard('tt3-dig-treasure','self');note='真实出牌：挖宝 → 发现（普通战随机池）';break;
+  case 'payment':commands.playCard('tt7-thundergrudge',0);note='真实出牌：快意恩仇 → 支付两张初始攻击';break;
+  case 'select':commands.playCard('tt3-frostfall',0);note='真实出牌：剑荡妖邪 → 选择武术手牌';break;
+  case 'infusion':commands.beginInfusion('tt3sp-bloodstorm');note='真实命令：beginInfusion → 注能选牌';break;
+  case 'deck':commands.openDeckView();note='真实首脑开局 → openDeckView';break;
+  case 'grave':{
+   const state=BattleSession.getSnapshot();
+   // Explicit dev construction through the supported legacy restore API, not runtime setters.
+   const grave=['fuel-0','fuel-1'];
+   const restored=BattleSession.restore(game,{opts:{isBoss:true,directBossStart:true},mode:'boss',turn:1,energy:9,maxEnergy:9,
+    foes:state.foes,hand:game.ownedCards.map(entry=>entry.uid).filter(uid=>!grave.includes(uid)),drawPile:[],discard:[],grave,consumed:grave,played:[],granted:[]});
+   if(!restored)throw new Error('构造墓地存档恢复失败');
+   commands.openGrave();note='构造状态：旧格式 restore 将两张初始攻击置墓地 → 真实 openGrave';break;
+  }
+  case 'bag':commands.openBag();note='现行限制：真实 openBag 返回 false，仅提示战斗中无法打开；未覆盖背包面板';break;
+  case 'settings':act('btSettings');note='真实 UI 动作：btSettings；音频为隔离静音桩';break;
+  case 'rules':act('btBossRules');note='真实首脑开局 → btBossRules';break;
+  case 'risk':act('btEnd');note='构造开局条件：1 生命、敌人攻击 12 → 真实 btEnd 风险确认';break;
+  case 'detail':note='既有手牌点击/悬停输入：当前无独立手牌详情生产入口；详情返回请在发现/选牌层测试';break;
+  default:note='普通战已重置';
+ }
+ if(targets[kind])await waitFor(state=>!!state[targets[kind]],ticket);
+}
+document.querySelectorAll('[data-fixture]').forEach(button=>button.addEventListener('click',()=>{
+ enter(button.dataset.fixture).catch(error=>{note=`入口失败：${error.message}`;console.error(error)});
+}));
+const controls=document.querySelector('#fixtureControls');
+document.querySelector('#fixtureCollapse').onclick=event=>{
+ const collapsed=controls.dataset.collapsed!=='true';controls.dataset.collapsed=String(collapsed);event.target.textContent=collapsed?'展开入口':'收起入口';
+};
+function sizeControls(){controls.style.zoom=String(1/SDT.UiScale.scale());}
+sizeControls();window.addEventListener('resize',sizeControls);
+function status(){
+ const state=BattleSession.getSnapshot();
+ if(note.startsWith('入口失败：') && targets[requestedKind] && state[targets[requestedKind]]) note=`真实入口已完成：${requestedKind}`;
+ const decision=document.querySelector('.battle-decision')?.dataset.decisionKind||document.querySelector('.bt-hand-detail')&&'hand-detail'||'无';
+ result.textContent=`${note} ｜ 当前层：${decision} ｜ ${state.mode} / ${state.phase} / 回合 ${state.turn} / 能量 ${state.energy} / 手牌 ${state.hand.length} / 牌库 ${state.drawPile.length} / 墓地 ${state.grave.length}${lastLog?` ｜ ${lastLog.replace(/\[\[.*?\]\]/g,'')}`:''}`;
+}
+reset();status();setInterval(status,250);
+window.combatOverlayFixture={enter,reset,snapshot:()=>BattleSession.getSnapshot()};
+</script></body></html>

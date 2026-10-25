@@ -1,0 +1,26 @@
+{
+  "platform": "Codex IAB",
+  "url": "http://127.0.0.1:5200/",
+  "source": "标题节点测试真实开局，devMode构造每组三个精英，仅检查立绘，不证明实际遭遇人数或战斗玩法",
+  "viewport": "当前窗口，未改尺寸",
+  "groups": [
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"ids\":[\"rager\",\"deserter\",\"greedy_imp\"],\"sprites\":[{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/rager.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/deserter.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/greedy_imp.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760}],\"dev\":true}"
+      }
+    },
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"ids\":[\"swaggerer\",\"tin_mute\",\"heavy_hammer\"],\"sprites\":[{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/swaggerer.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/tin_mute.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/heavy_hammer.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760}],\"dev\":true}"
+      }
+    },
+    {
+      "result": {
+        "type": "string",
+        "value": "{\"ids\":[\"cultist\",\"fake_apothecary\",\"camo_sniper\"],\"sprites\":[{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/cultist.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/fake_apothecary.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760},{\"src\":\"http://127.0.0.1:5200/assets/portraits/cut/enemies/camo_sniper.webp?v=0.60.0\",\"complete\":true,\"width\":507,\"height\":760}],\"dev\":true}"
+      }
+    }
+  ]
+}

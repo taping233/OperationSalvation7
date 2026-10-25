@@ -1,0 +1,17 @@
+{
+  "file": "game/src/cards/cards.view.js",
+  "test": "tests/page-perf-shared.test.js:bounds dynamic card variants while retaining exact results and repeated-hit reuse",
+  "sourceUnchanged": true,
+  "original": {
+    "status": "failed",
+    "name": "ReferenceError",
+    "message": "liveCardOptions is not defined"
+  },
+  "current": {
+    "status": "failed",
+    "name": "ReferenceError",
+    "message": "liveCardOptions is not defined"
+  },
+  "sha256": "8352a8becad2384135af3156def9c91c5087cea1f0fff2161e23d7ca78bf622e",
+  "method": "Reuses the existing test VM source extraction and supplies inert dependencies; failure happens before rendering."
+}

@@ -1,0 +1,210 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤/.tmp/interface-baseline-compare
+
+ ❯ tests/menu-return-chain.test.js (4 tests | 2 failed) 128ms
+   × settings child return ownership > inbox retains its original settings return chain despite a newer settings open 46ms
+     → [vitest] No "captureSettingsNavigation" export is defined on the "../game/src/ui/settings-navigation.js" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+   × settings child return ownership > data retains its original settings return chain despite a newer settings open 10ms
+     → [vitest] No "captureSettingsNavigation" export is defined on the "../game/src/ui/settings-navigation.js" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+   ✓ settings child return ownership > inbox title entry keeps title return while a settings entry invokes its captured return 64ms
+   ✓ settings child return ownership > data page returns through its own settings callback 7ms
+ ❯ tests/settings-page.test.js (9 tests | 4 failed) 406ms
+   × settings page layout and controls > uses the common navigation on first open and reopen without a city curtain 87ms
+     → expected undefined to be 'entry' // Object.is equality
+   ✓ settings page layout and controls > mounts the final hidden panels and switch wrappers without reparenting controls 43ms
+   ✓ settings page layout and controls > reopens with fresh persisted, game and audio values and requires separate danger confirmation 57ms
+   × settings page layout and controls > keeps Home/End/wrap focus, per-category scroll, and control identity 66ms
+     → expected 61 to be +0 // Object.is equality
+   × settings page layout and controls > reads the selected tab geometry before updating the sliding marker 40ms
+     → expected [] to deeply equal [ 'top', 'height', …(2) ]
+   ✓ settings page layout and controls > records actual overlay and navigation boundaries once per open 49ms
+   ✓ settings page layout and controls > groups everyday, display, audio, records, credits and dangerous actions while retaining control hooks 23ms
+   ✓ settings page layout and controls > keeps close behavior and immediate preference controls wired 16ms
+   × settings page layout and controls > switches categories by click and keyboard without losing preference state 23ms
+     → expected 'false' to be 'true' // Object.is equality
+ ❯ tests/overlay-dialog.test.js (30 tests | 1 failed) 2324ms
+   ✓ overlay dialog accessibility contract > mounts the shared run bar inside the live modal before isolation, and re-isolates it for leave/confirmation  1169ms
+   × overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene 20ms
+     → expected true to be false // Object.is equality
+   ✓ overlay dialog accessibility contract > returns a temporary battle from the real system-menu flow without hiding its modal 17ms
+   ✓ overlay dialog accessibility contract > returns a shared bar re-mounted during the close animation to the viewport at final hide 8ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening 246ms
+   ✓ overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order 51ms
+   ✓ overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported 12ms
+   ✓ overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable 10ms
+   ✓ overlay dialog accessibility contract > 照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测 5ms
+   ✓ overlay dialog accessibility contract > sets dialog semantics, isolates the background, traps Tab, and restores the opener 282ms
+   ✓ overlay dialog accessibility contract > honors an explicit safe initialFocus selector and closes through Escape 276ms
+   ✓ overlay dialog accessibility contract > 收回大卡后的按键重复不会触发底层奖励离开 51ms
+   ✓ overlay dialog accessibility contract > 卡牌reward-card正文含返回/离开不会成为取消按钮 10ms
+   ✓ overlay dialog accessibility contract > 卡牌event-choice-card正文含返回/离开不会成为取消按钮 9ms
+   ✓ overlay dialog accessibility contract > 卡牌bt-card正文含返回/离开不会成为取消按钮 8ms
+   ✓ overlay dialog accessibility contract > 显式安全取消优先于猜测文案，并由 Esc 调用原返回操作 8ms
+   ✓ overlay dialog accessibility contract > 共用返回slotBack的点击、Esc和遮罩使用同一个显式动作 10ms
+   ✓ overlay dialog accessibility contract > 共用返回cls2Quit的点击、Esc和遮罩使用同一个显式动作 12ms
+   ✓ overlay dialog accessibility contract > 共用返回clsBack的点击、Esc和遮罩使用同一个显式动作 12ms
+   ✓ overlay dialog accessibility contract > 共用返回depBack的点击、Esc和遮罩使用同一个显式动作 11ms
+   ✓ overlay dialog accessibility contract > 共用返回dataPageBack的点击、Esc和遮罩使用同一个显式动作 11ms
+   ✓ overlay dialog accessibility contract > 内层详情的button只收回详情，下一次取消才返回页面 13ms
+   ✓ overlay dialog accessibility contract > 内层详情的Escape只收回详情，下一次取消才返回页面 12ms
+   ✓ overlay dialog accessibility contract > 内层详情的backdrop只收回详情，下一次取消才返回页面 15ms
+   ✓ overlay dialog accessibility contract > 必须选择的内层page不穿透到底层显式返回或背包关闭兜底 11ms
+   ✓ overlay dialog accessibility contract > 必须选择的内层bagpage不穿透到底层显式返回或背包关闭兜底 10ms
+   ✓ overlay dialog accessibility contract > 特写拥有遮罩和直接取消，不能代点底层返回 9ms
+   ✓ overlay dialog accessibility contract > 共用返回组件只按调用方声明取消，明确禁止时不再猜测返回文字 5ms
+   ✓ overlay dialog accessibility contract > 强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过 4ms
+   ✓ overlay dialog accessibility contract > closes immediately when reduced motion is enabled 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/menu-return-chain.test.js > settings child return ownership > inbox retains its original settings return chain despite a newer settings open
+Error: [vitest] No "captureSettingsNavigation" export is defined on the "../game/src/ui/settings-navigation.js" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock(import("../game/src/ui/settings-navigation.js"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ readContext game/src/ui/menu-settings.js:130:27
+    128|       const contextCurrent = captureBattleContext(game, getActiveSlot);
+    129|       const snapshot = captureOverlayReturnState(settingsRoot, documen…
+    130|         readContext:() => captureSettingsNavigation(settingsRoot),
+       |                           ^
+    131|       });
+    132|       let returned = false, childRevision;
+ ❯ captureOverlayReturnState game/src/ui/overlay-return-state.js:26:14
+ ❯ openChild game/src/ui/menu-settings.js:129:49
+ ❯ Object.openInbox game/src/ui/menu-settings.js:141:31
+ ❯ tests/menu-return-chain.test.js:25:94
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/menu-return-chain.test.js > settings child return ownership > data retains its original settings return chain despite a newer settings open
+Error: [vitest] No "captureSettingsNavigation" export is defined on the "../game/src/ui/settings-navigation.js" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock(import("../game/src/ui/settings-navigation.js"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ readContext game/src/ui/menu-settings.js:130:27
+    128|       const contextCurrent = captureBattleContext(game, getActiveSlot);
+    129|       const snapshot = captureOverlayReturnState(settingsRoot, documen…
+    130|         readContext:() => captureSettingsNavigation(settingsRoot),
+       |                           ^
+    131|       });
+    132|       let returned = false, childRevision;
+ ❯ captureOverlayReturnState game/src/ui/overlay-return-state.js:26:14
+ ❯ openChild game/src/ui/menu-settings.js:129:49
+ ❯ Object.openDataPageUi game/src/ui/menu-settings.js:142:36
+ ❯ tests/menu-return-chain.test.js:25:94
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  tests/overlay-dialog.test.js > overlay dialog accessibility contract > commits battle option visibility after the pre-commit mode broadcast and restores it with the retained scene
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/overlay-dialog.test.js:68:27
+     66|     const menu = scene.querySelector('.sts-options'); setRunTopBarBatt…
+     67|     const button = document.getElementById('btnBattleOptions'); button…
+     68|     expect(button.hidden).toBe(false); expect(button.getAttribute('ari…
+       |                           ^
+     69|     const observations=[];
+     70|     const beforeCommit=event=>{ if(event.detail==='settings') observat…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  tests/settings-page.test.js > settings page layout and controls > uses the common navigation on first open and reopen without a city curtain
+AssertionError: expected undefined to be 'entry' // Object.is equality
+
+- Expected: 
+"entry"
+
++ Received: 
+undefined
+
+ ❯ expectNavigation tests/settings-page.test.js:41:83
+     39|       expect(UI.el.overlay.querySelector('.camp-entry-cut, .page-visua…
+     40|       expect(UI.el.ovBody.querySelector('#settings-panel-general').hid…
+     41|       expect(UI.el.ovBody.querySelector('.settings-page').dataset.sett…
+       |                                                                                   ^
+     42|     };
+     43|     expectNavigation();
+ ❯ tests/settings-page.test.js:43:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  tests/settings-page.test.js > settings page layout and controls > keeps Home/End/wrap focus, per-category scroll, and control identity
+AssertionError: expected 61 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 61
+
+ ❯ tests/settings-page.test.js:92:77
+     90|     const input = body.querySelector('#setIndex'); content.scrollTop =…
+     91|     tabs[0].dispatchEvent(new KeyboardEvent('keydown', { key:'End', bu…
+     92|     expect(document.activeElement).toBe(tabs[3]); expect(content.scrol…
+       |                                                                             ^
+     93|     content.scrollTop = 23;
+     94|     expect(body.querySelector('[role="tablist"]').getAttribute('aria-o…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/settings-page.test.js > settings page layout and controls > reads the selected tab geometry before updating the sliding marker
+AssertionError: expected [] to deeply equal [ 'top', 'height', …(2) ]
+
+Compared values have no visual difference.
+
+ ❯ tests/settings-page.test.js:112:19
+    110|     vi.spyOn(style, 'setProperty').mockImplementation((name, ...args) …
+    111|     tab.click();
+    112|     expect(order).toEqual(['top', 'height', '--settings-marker-top', '…
+       |                   ^
+    113|     expect(style.getPropertyValue('--settings-marker-top')).toBe('84px…
+    114|     expect(style.getPropertyValue('--settings-marker-height')).toBe('7…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/settings-page.test.js > settings page layout and controls > switches categories by click and keyboard without losing preference state
+AssertionError: expected 'false' to be 'true' // Object.is equality
+
+Expected: "true"
+Received: "false"
+
+ ❯ tests/settings-page.test.js:166:51
+    164|     expect(root.querySelector('#settings-panel-input').hidden).toBe(tr…
+    165|     tabs[2].click();
+    166|     expect(tabs[2].getAttribute('aria-selected')).toBe('true');
+       |                                                   ^
+    167|     expect(root.querySelector('#settings-panel-audio').hidden).toBe(fa…
+    168|     const music = root.querySelector('#setMusic');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  7 failed | 36 passed (43)
+   Start at  11:46:40
+   Duration  5.43s (transform 2.60s, setup 0ms, collect 4.07s, tests 2.86s, environment 4.06s, prepare 513ms)
+

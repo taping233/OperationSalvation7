@@ -1,0 +1,117 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>回合与卡牌 · 存储隔离展示夹具</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css?review=shop-currency-r2" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" />
+<link rel="stylesheet" href="/css/battle-hand-overhaul.css"><link rel="stylesheet" href="/css/battle-discover.css"><link rel="stylesheet" href="/css/battle-decision.css">
+<style>.fixture-controls{position:fixed;left:8px;top:4px;z-index:20000;display:flex;flex-wrap:wrap;max-width:calc(100% - 32px);gap:6px;align-items:center;padding:6px 8px;background:#07121ce8;color:#dce7ed;font:14px sans-serif}.fixture-controls button{font:inherit;min-height:32px;padding:5px 10px;border:1px solid #82a6bd;border-radius:5px;background:#173245;color:#e8f4fc;cursor:pointer}.fixture-controls[hidden]{display:none}body{background:#101c28}</style>
+<script>{const memory=new Map();Object.defineProperty(window,'localStorage',{value:Object.freeze({getItem(key){return memory.get(key)??null},setItem(key,value){memory.set(key,String(value))},removeItem(key){memory.delete(key)},clear(){memory.clear()}})});}</script></head><body>
+
+<div id="app"><main id="viewport"><div id="overlay" class="room-view" role="dialog" aria-modal="true">
+<div class="fixture-controls" id="fixtureControls">隔离回合 <button id="fixtureBoss">首脑开局</button><button id="fixtureClock">装备钟表</button><button id="fixtureClockUse">钟表技能</button><button id="fixtureTurn">结束回合（真实）</button><button id="fixtureReload">读档</button><button id="fixtureLow">节能：关</button><button id="fixtureGain">入手</button><button id="fixtureBatch">多张</button><button id="fixtureDeck">牌库</button><button id="fixtureCast">随机释放</button><button id="fixtureRepeat">追加</button><button id="fixtureReduced">减少动态</button><button id="fixtureSlow">慢速预览：关</button><button id="fixtureReset">重置</button><button id="fixtureHide">隐藏</button><span id="fixtureResult"></span></div>
+<div class="card room"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import SDT,{sdtDefine} from '/src/core/sdt-facade.js';
+import '/src/core/icons-bitmap.js';
+import '/src/core/art.js';
+import '/src/ui/ui-scale.js';
+sdtDefine('Sound',{sfx(){},music(){},setDucked(){},setBoss(){}});
+sdtDefine('Meta',{track(){}});
+import { reduceMotion, refreshReduceMotion } from '/src/core/motion.js';
+sdtDefine('MAP',{rules:{battleEnergy:9,battleHandMax:99,bossDeckSize:15,starterSha:5,battleStartDraw:5,battleTurnDraw:1},items:{}});
+const {UI}=await import('/src/ui/ui.js');
+UI.el={overlay:document.querySelector('#overlay'),ovBody:document.querySelector('#ovBody'),ovTitle:document.querySelector('#ovTitle')};
+UI.refresh=()=>{}; UI.log=()=>{};
+UI.el.ovBody.addEventListener('click',event=>{const button=event.target.closest('[data-act]');if(button&&!button.disabled&&!button.closest('[inert]')) UI._acts[button.dataset.act]?.(button.dataset);});
+await import('/src/cards/cards.js');
+SDT.Cards.ensureSha(); SDT.Cards.ensureStarters(); SDT.Cards.ensureTabletop(); SDT.Cards.ensureDmgTypes(); SDT.Cards.ensureEffectFields();
+const {BattleSession}=await import('/src/battle/core/battle.core.js');
+await import('/src/battle/view/battle.view.js');
+const {showBattleCardResults}=await import('/src/battle/view/battle.card-results.js');
+const C=SDT.Cards.all(); let game;
+function reset(boss=false){
+ game={ownedCards:[{uid:'clock',card:C.find(c=>c.id==='tt3-fate-wheel')},{uid:'infusion',card:C.find(c=>c.id==='tt3sp-bloodstorm')},...Array.from({length:4},(_,i)=>({uid:'fuel-'+i,card:SDT.Cards.SHA})),...C.filter(c=>['tt3sp-silverthorn','tt12-raydragon','tt7-holyheal','tt3-iceheart-potion','cmtn233trmeg','tt3eq-boiler'].includes(c.id)).map((card,i)=>({uid:'other-'+i,card}))],inventory:[],usedPocket:[],hp:30,maxHp:30,atk:4,spellPower:0,coins:0,myClass:null,state:'idle',battleActive:false,log(){},heal(){},addItem(){},onBattleEnd(){}};
+ sdtDefine('game',game);
+ BattleSession.start(game,[0,1].map(i=>({id:'foe-'+i,name:'训练木桩',hp:100,atk:1})),{isBoss:boss,directBossStart:boss});
+
+}
+reset();
+document.querySelector('#fixtureReset').onclick=()=>reset();
+document.querySelector('#fixtureBoss').onclick=()=>reset(true);
+document.querySelector('#fixtureClock').onclick=()=>BattleSession.commands.playCard('clock','self');
+document.querySelector('#fixtureClockUse').onclick=()=>BattleSession.commands.useEquipSkill('clock');
+document.querySelector('#fixtureTurn').onclick=()=>BattleSession.commands.endTurn();
+document.querySelector('#fixtureReload').onclick=()=>BattleSession.restore(game,BattleSession.serialize());
+let low=false;document.querySelector('#fixtureLow').onclick=()=>{low=!low;document.body.dataset.renderQuality=low?'low':'balanced';document.querySelector('#fixtureLow').textContent=low?'节能：开':'节能：关';};
+document.querySelector('#fixtureHide').onclick=()=>document.querySelector('#fixtureControls').hidden=true;
+const stage=()=>document.querySelector('.battle-stage');
+const card=()=>C.find(c=>c.id==='tt3sp-bloodstorm');
+let slow=false;
+// This dev page alone scopes a 4x clock to its synthetic feedback call tree.
+// Production modules and the live battle's timers/settlement remain untouched.
+const nativeTimeout=window.setTimeout.bind(window), nativeAnimate=Element.prototype.animate;
+function previewTiming(fn,scale=slow?4:1){
+ if(scale===1)return fn();
+ const beforeTimeout=window.setTimeout, beforeAnimate=Element.prototype.animate;
+ window.setTimeout=(callback,ms,...args)=>nativeTimeout(()=>previewTiming(()=>callback(...args),scale),ms*scale);
+ Element.prototype.animate=function(frames,options){return nativeAnimate.call(this,frames,typeof options==='number'?options*scale:{...options,duration:(options?.duration||0)*scale,delay:(options?.delay||0)*scale});};
+ try{return fn();}finally{window.setTimeout=beforeTimeout;Element.prototype.animate=beforeAnimate;}
+}
+const emit=(events)=>previewTiming(()=>showBattleCardResults(stage(),events));
+document.querySelector('#fixtureSlow').onclick=()=>{slow=!slow;document.querySelector('#fixtureSlow').textContent=slow?'慢速预览：4倍':'慢速预览：关';};
+function sizeControls(){document.querySelector('#fixtureControls').style.zoom=String(1/SDT.UiScale.scale());}
+sizeControls();window.addEventListener('resize',sizeControls);
+document.querySelector('#fixtureGain').onclick=()=>emit([{kind:'draw',acquired:true,uid:'infusion',name:card().name,card:card()}]);
+document.querySelector('#fixtureBatch').onclick=()=>emit(Array.from({length:6},(_,i)=>({kind:'draw',acquired:true,uid:i<3?'infusion':'fuel-0',name:i<3?card().name:SDT.Cards.SHA.name,card:i<3?card():SDT.Cards.SHA})));
+document.querySelector('#fixtureDeck').onclick=()=>emit([{kind:'shuffle',name:card().name,card:card()}]);
+document.querySelector('#fixtureCast').onclick=()=>emit([0,1,0,1].map((target,i)=>({kind:'surge',name:SDT.Cards.SHA.name,card:SDT.Cards.SHA,target,targetName:'训练木桩 '+(target+1),i:i+1,n:4})));
+document.querySelector('#fixtureRepeat').onclick=()=>emit([{kind:'recast',name:card().name,card:card(),repeatIndex:1,repeatTotal:2}]);
+function syncMotionControl(){
+ refreshReduceMotion();
+ document.querySelector('#fixtureReduced').textContent=reduceMotion()?'减少动态：开':'减少动态：关';
+ document.querySelector('#fixtureResult').textContent=reduceMotion()?'减少动态':'完整动效';
+}
+document.querySelector('#fixtureReduced').onclick=()=>{
+ // localStorage is the isolated in-memory store installed before module imports.
+ localStorage.setItem('sdt-reduce-motion',localStorage.getItem('sdt-reduce-motion')==='1'?'0':'1');
+ syncMotionControl();
+};
+syncMotionControl();
+window.cardFeedbackFixture={emit,reset};
+</script></body></html>

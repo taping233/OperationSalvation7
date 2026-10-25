@@ -1,0 +1,113 @@
+--- a/搜打撤/game/src/hub/extraction.commands.js
++++ b/搜打撤/game/src/hub/extraction.commands.js
+@@ -362,14 +362,25 @@ export function createExtractionCommands({
+       { nextPending: next, count }) };
+   }
+ 
+-  async function updateCards(selections, expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
+-    const checkedSelections = validateSelections(selections);
+-    if (!checkedSelections.ok) return checkedSelections;
+-    // 在异步读档前冻结本次有效输入；后续调用方修改原数组不能污染待提交快照。
+-    selections = selections.map(selection => ({ name: selection.name, count: selection.count }));
++  async function organize(command, selections, expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
++    const stashing = command === 'extractStash';
++    if (stashing) {
++      const checkedSelections = validateSelections(selections);
++      if (!checkedSelections.ok) return checkedSelections;
++      // 在异步读档前冻结本次有效输入；后续调用方修改原数组不能污染待提交快照。
++      selections = selections.map(selection => ({ name: selection.name, count: selection.count }));
++    }
+     const slotId = getActiveSlot();
+     if (!slotId) {
+       if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
++      if (!stashing) {
++        // 内存投影局也产回执，页面与记录走同一条读数路径。
++        const receipt = game.pendingExtraction
++          ? buildExtractionReceipt({ game, pending: game.pendingExtraction, isSha: baseApi.isSha, xpMul: xpMultiplier() })
++          : null;
++        game.pendingExtraction = null; game.runActive = false;
++        return { ok: true, ephemeral: true, ...(receipt ? { receipt } : {}) };
++      }
+       const checked = validatePendingExtraction(game.pendingExtraction);
+       if (!checked.ok) return checked;
+       const attempt = prepareCardAttempt({ slotId: null, identity: { runId: game.pendingExtraction.runId, revision: 0 }, run: { pendingExtraction: game.pendingExtraction },
+@@ -387,60 +398,36 @@ export function createExtractionCommands({
+       const current = await readPending(slotId);
+       if (!current.ok) return current;
+       if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
+-      const prepared = prepareCardAttempt(current, selections);
+-      if (!prepared.ok || prepared.unchanged) return prepared;
+-      attempt = prepared.attempt;
++      if (stashing) {
++        const prepared = prepareCardAttempt(current, selections);
++        if (!prepared.ok || prepared.unchanged) return prepared;
++        attempt = prepared.attempt;
++      } else {
++        // 回执随 extractFinish 事务持久化；已提交过则重放原值，不重复累计。
++        const receipt = buildExtractionReceipt({ game, pending: current.pending, isSha: baseApi.isSha, xpMul: xpMultiplier() });
++        attempt = makeAttempt(slotId, current, `terminal:extract:${expectedRunId}:${current.pending.requestSeq}:finish`,
++          'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null, { output: { receipt } });
++      }
+       inFlight.set(key, attempt);
+     }
+-    if (attempt.command !== 'extractStash') return fail('REQUEST_PENDING', '完成整理正在等待重试，请点击「完成整理」继续恢复', true);
++    if (attempt.command !== command) return fail('REQUEST_PENDING', stashing
++      ? '完成整理正在等待重试，请点击「完成整理」继续恢复' : '上一项整理正在重试，请稍后再操作', true);
+     const receipt = await commitAttempt(attempt);
+-    // 日志前的修订拒绝可丢弃；after-base/after-run 等中断或未确认结果必须
+-    // 保留同一令牌，经恢复日志和 receipt 重放保证卡牌只入库一次。
++    // 日志前的修订拒绝可丢弃；中断或结果未确认仍保留原令牌等待恢复/重放。
+     if (!receipt.ok) {
+       if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
+       return receipt;
+     }
+     applyAttempt(attempt);
+     inFlight.delete(key);
+-    return { ok: true, value: attempt.nextPending, count: attempt.count, replayed: !!receipt.replayed };
++    return stashing
++      ? { ok: true, value: attempt.nextPending, count: attempt.count, replayed: !!receipt.replayed }
++      : { ok: true, value: receipt.value, replayed: !!receipt.replayed };
+   }
+ 
+-  async function finish(expectedRunId = game.pendingExtraction?.runId, expectedSlotId = getActiveSlot()) {
+-    const slotId = getActiveSlot();
+-    if (!slotId) {
+-      if (expectedSlotId !== null) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
+-      // 2026-10-03 老板（SYS-02）：测试投影局也产回执（内存态），页面与记录走同一条读数路径
+-      const receipt = game.pendingExtraction
+-        ? buildExtractionReceipt({ game, pending: game.pendingExtraction, isSha: baseApi.isSha, xpMul: xpMultiplier() })
+-        : null;
+-      game.pendingExtraction = null; game.runActive = false;
+-      return { ok: true, ephemeral: true, ...(receipt ? { receipt } : {}) };
+-    }
+-    if (expectedSlotId !== slotId) return fail('STALE_SLOT', '档位已切换，撤离整理请求已取消');
+-    if (expectedRunId !== game.pendingExtraction?.runId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
+-    const key = `${slotId}:${expectedRunId}`;
+-    let attempt = inFlight.get(key);
+-    if (!attempt) {
+-      const current = await readPending(slotId);
+-      if (!current.ok) return current;
+-      if (current.pending.runId !== expectedRunId) return fail('STALE_RUN', '当前整理页已过期，请重新载入撤离整理');
+-      // 2026-10-03 老板（SYS-02）：结算回执随 extractFinish 事务收据持久化（output 位）——
+-      // 重试/刷新后重建 attempt 重算结果一致；已提交过则经 readSettlementReceipt 原样重放，不重复累计。
+-      const receipt = buildExtractionReceipt({ game, pending: current.pending, isSha: baseApi.isSha, xpMul: xpMultiplier() });
+-      attempt = makeAttempt(slotId, current, `terminal:extract:${expectedRunId}:${current.pending.requestSeq}:finish`,
+-        'extractFinish', { requestSeq: current.pending.requestSeq }, current.base, null, { output: { receipt } });
+-      inFlight.set(key, attempt);
+-    }
+-    if (attempt.command !== 'extractFinish') return fail('REQUEST_PENDING', '上一项整理正在重试，请稍后再操作', true);
+-    const receipt = await commitAttempt(attempt);
+-    if (!receipt.ok) {
+-      if (receipt.code === 'STALE_REVISION' && inFlight.get(key) === attempt) inFlight.delete(key);
+-      return receipt;   // 其余失败与 updateCards 一样保留恢复令牌
+-    }
+-    applyAttempt(attempt);
+-    inFlight.delete(key);
+-    return { ok: true, value: receipt.value, replayed: !!receipt.replayed };
+-  }
++  // 直接绑定同一异步内核，不额外包一层 await；默认值与校验仍在 async 内求值。
++  const updateCards = organize.bind(null, 'extractStash');
++  const finish = organize.bind(null, 'extractFinish', undefined);
+ 
+   return Object.freeze({ begin, updateCards, finish });
+ }

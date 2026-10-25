@@ -1,0 +1,38 @@
+{
+  "task": "2026-10-24-project-bug-sweep-agent-target",
+  "status": "completed-uncommitted",
+  "fixCount": 1,
+  "newTestCount": 3,
+  "id": "SWEEP-A1",
+  "summary": "Agent 观测动作的按钮来源凭据不再因添加动作id或LLM规范化而丢失；同一页面内部替换同名同参数按钮后，旧动作被拒绝。",
+  "files": [
+    "game/src/agent/agent.state.js",
+    "game/src/agent/agent.llm.runtime.js",
+    "tests/project-bug-sweep-agent-target-1024.test.js"
+  ],
+  "rootCause": "collectUiActions 已用 WeakMap 绑定真实按钮；observe 的 withId 对动作展开复制，LLM 对命令 normalizeAction 也生成新对象，两处都未继承绑定。act 因而退回name/params查询，在保留页面root只替换内部商品按钮时，把旧决策施加到新商品。runner的页面root检查不能识别内部按钮替换。",
+  "change": "withId 将原动作按钮凭据绑定给带id的新动作；LLM匹配当前actions时返回匹配candidate并将其按钮凭据绑定给规范化命令。参数、协议字段、未绑定的手写动作和父片actions清单校验/重试不变。",
+  "verification": [
+    {
+      "command": "vitest run tests/project-bug-sweep-agent-target-1024.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "phase": "before-fix",
+      "exit": 1,
+      "failed": 2,
+      "passed": 1,
+      "observed": "observe旧动作和LLM规范化旧动作都误执行替换商品；无观测凭据的手写命令原本正常。"
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-agent-target-1024.test.js tests/project-bugfix-round2-agent-surface.test.js tests/project-bugfix-round2-agent-lifetime.test.js tests/project-bug-sweep-llm-1024.test.js tests/agent-llm-abort.test.js tests/agent-llm.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "phase": "after-fix",
+      "exit": 0,
+      "files": 6,
+      "passed": 30
+    },
+    {
+      "command": "git diff --check -- game/src/agent/agent.state.js game/src/agent/agent.llm.runtime.js tests/project-bug-sweep-agent-target-1024.test.js",
+      "exit": 0
+    }
+  ],
+  "parentReview": "只读复核父片LLM动作清单匹配：协议允许的UI params和battle/sys args均为标量，完整键集合及值比较足够；忽略label/id合理；空动作清单不会放行任意回复；保留取消桥和runner dispatch前归属检查。只读复核父片recorder拆原始记录读取与统计归一化视图方向正确，未编辑该文件。",
+  "notes": "同一观测凭据根因只计一条；与远征expedition.json的5条分开。已保留父片LLM动作清单修复、原round2 surface/runner增量。源编辑已冻结，无build/全量/服务/提交/推送；父统一静态与实页。"
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "cmtn6ulm4boj",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-dd0609a5-67a8-4191-949e-dc709aaf8c8a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-25-migaofen-bear/cards-creature-cmtn6ulm4boj-source.png",
+        "bytes": 2471899,
+        "sha256": "4e00939af4c0e555de234705c352c9731547a3ca12f5cc5bd4b169d286de3c82"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-25-migaofen-bear/cards-creature-cmtn6ulm4boj-full-before.webp",
+          "bytes": 60596,
+          "sha256": "d7bcb677ab5b101e6050d0b71cc7ab27cd06f629b39946a8ba4d9d56f70191ae"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-25-migaofen-bear/cards-creature-cmtn6ulm4boj-thumb-before.webp",
+          "bytes": 63140,
+          "sha256": "1862c83833ffa16f9460f3314690ba935fe5d053f0e2204672992b0ceb067f52"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/creature-cmtn6ulm4boj.webp",
+          "bytes": 268496,
+          "sha256": "f164804eb9b9cac71a5f73a5dd00024cc0b38245865b91b0aa6de5aa842e49de",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/creature-cmtn6ulm4boj.webp",
+          "bytes": 29900,
+          "sha256": "54a76a2992bb8ba1263cd664f775952a6aa78e65b8fe2d9cd9c8357d9a81b241",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": null,
+      "revision_after": "migaofen-teddy-bear-20261025",
+      "manifest_patches": [
+        {
+          "before": null,
+          "after": {
+            "path": "cards/creature-cmtn6ulm4boj.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 268496,
+            "sha256": "f164804eb9b9cac71a5f73a5dd00024cc0b38245865b91b0aa6de5aa842e49de",
+            "source": "docs/evidence/2026-10-25-migaofen-bear/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 63140,
+            "sha256": "1862c83833ffa16f9460f3314690ba935fe5d053f0e2204672992b0ceb067f52",
+            "source": "docs/evidence/2026-10-11-studio-alpha-repair/assets.json"
+          },
+          "after": {
+            "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 29900,
+            "sha256": "54a76a2992bb8ba1263cd664f775952a6aa78e65b8fe2d9cd9c8357d9a81b241",
+            "source": "docs/evidence/2026-10-25-migaofen-bear/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1705,
+  "manifest_count_after": 1706
+}

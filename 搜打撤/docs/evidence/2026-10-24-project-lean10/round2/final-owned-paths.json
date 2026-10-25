@@ -1,0 +1,1171 @@
+{
+  "status": "source-frozen-complete-uncommitted-task-paused",
+  "sourcePaths": 232,
+  "files": [
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "sha256": "cf925408175f1dffa1f1b1439378b1985788abc1f8085f2494d857a2acee7c5e",
+      "normalizedBytes": 1755
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "sha256": "b106eae62f194d890c0ca3f9d0b26d9fae429c5d58fb8425d40f1adc6fdb8ef6",
+      "normalizedBytes": 1348
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "sha256": "d5958d23f3174920ebf87a102f36f319a3a019fede343527905d8e96170572a0",
+      "normalizedBytes": 1606
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "sha256": "4e3d4a4b3f503cb7be216da7032b90e4c00496d0b50c3462c3987bac829ff5e3",
+      "normalizedBytes": 3254
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "sha256": "fb6780dbfe26e5c202a6f7543db2c0f9b456d5b6ac95103a05156972bd8d26d8",
+      "normalizedBytes": 931
+    },
+    {
+      "file": "game/src/core/live-bindings.js",
+      "sha256": "4b3aeaf0ea96ae783bbaea6b4d897252a1147fc5b0e12a83180802beccdcba22",
+      "normalizedBytes": 2029
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "sha256": "23e059a41a6122d6965d1adb45a26648296e855c7c42165613042e70fb79af70",
+      "normalizedBytes": 7003
+    },
+    {
+      "file": "game/css/cards.css",
+      "sha256": "fcbeb362ee3ce9c0a609d3eb0d9838d82d09a9fdf9dc641bef69d5dcdc49d504",
+      "normalizedBytes": 5871
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "sha256": "6c83a572d584a45beade5f247a60ab4e651662f46459cdef9670072cfa2fcdf9",
+      "normalizedBytes": 4921
+    },
+    {
+      "file": "game/css/scenes.css",
+      "sha256": "97453acbd3c5071d02f90b10faad2df520e5b0e5df3e97c77ad5f781084c0d1f",
+      "normalizedBytes": 37714
+    },
+    {
+      "file": "game/css/winter.css",
+      "sha256": "92e4104e4928fd0f7928bd5faafeada50dcb5e1d457ca1472489a8a302d3bffb",
+      "normalizedBytes": 82650
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "sha256": "1519b5833220879488ce0488657d37a90d2a8c5faf7bc095c38b135bdc67a1d0",
+      "normalizedBytes": 13226
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "sha256": "23ccdb460a75afb262be608d3a2898ba3d40b7ffc40b26c6e9da1ed364794fce",
+      "normalizedBytes": 15581
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "sha256": "1976256b6c04f60ca573b021fee9eb142de6fbbd9946252db06b180b1e85a163",
+      "normalizedBytes": 2602
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "804f7f57072cdfa2255e91cb5d4208a40352110643329c7a1fb3ccf3d3e20fbb",
+      "normalizedBytes": 13726
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "sha256": "85efa262c301fddfbf3cb8911c5f311dd8d7ece82a6e7baf79e6c3418e702a34",
+      "normalizedBytes": 16046
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+      "normalizedBytes": 19011
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "sha256": "e58576e00ddf1b43ceef3533b2862b119429ff901a4bd7f95d923cce292a294a",
+      "normalizedBytes": 18890
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "sha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d",
+      "normalizedBytes": 5709
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "sha256": "6b1d8c8ea0ebfd298940395bf834a8f51c2c8f00fa780f1c3b5ea29985a66d40",
+      "normalizedBytes": 11577
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "sha256": "8cd4aa9c3ac1fbe7d116c84c244ce35d44634fe80c2ed734a5e2acd8043b0929",
+      "normalizedBytes": 17191
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "sha256": "ad07375d0a19fa28817efa35d52264227b9e15f74f3ae158c63bc39ddf175b37",
+      "normalizedBytes": 25017
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "sha256": "990d43f34cf601e4ad4f2ac1fe11d41523db1227252685351ed6cced608f8871",
+      "normalizedBytes": 19805
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "sha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96",
+      "normalizedBytes": 2960
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "sha256": "f5e77a20058950b1f002117cde60cb6a06168e3763a06ba54a50cbf1980fb59b",
+      "normalizedBytes": 14887
+    },
+    {
+      "file": "tests/a3-battle-rules.test.js",
+      "sha256": "0081131b4b766ada6fb5a28ce2c6a29e33dfcffa35bdd7e03cf30a0141cce867",
+      "normalizedBytes": 19568
+    },
+    {
+      "file": "tests/abyss-sovereign.test.js",
+      "sha256": "8f3bcf68d7d8b1b83707937aab051dc53d553e8b7c4fcf14ad8e21360ce7a764",
+      "normalizedBytes": 8823
+    },
+    {
+      "file": "tests/agent-console-jump.test.js",
+      "sha256": "f8e465accdcc550cba72e4925394e340c913eb86fbb9e4734876e5a49cf62de4",
+      "normalizedBytes": 10572
+    },
+    {
+      "file": "tests/agent-scenes.test.js",
+      "sha256": "c3ae1fdb7b8573884466e4dee9f6b617331fc1a7f2965ff9385049f50bf73b14",
+      "normalizedBytes": 5587
+    },
+    {
+      "file": "tests/altar-sacrifice-zones-cloud.test.js",
+      "sha256": "0eb22a3f684faed89ffb54196bb700c3eb96ca951196399b01c8d20567d97b8a",
+      "normalizedBytes": 11728
+    },
+    {
+      "file": "tests/armup-mode.test.js",
+      "sha256": "5c1032138f8e00029b4d6db89c9af1c7dd1d9b7618c98a200e3127f638480a23",
+      "normalizedBytes": 4067
+    },
+    {
+      "file": "tests/bag-pouch-capacity.test.js",
+      "sha256": "3944bc13044c861fea9a30b026cc24bb19e2bf09b38c148f5bcc50d0f221600c",
+      "normalizedBytes": 19817
+    },
+    {
+      "file": "tests/bag-slam-button.test.js",
+      "sha256": "c0796f2a70699a5ad17e906bc854dba0ccd3d00276d9f5ac4c3a2e3dfbf35067",
+      "normalizedBytes": 12581
+    },
+    {
+      "file": "tests/battle-all-cards.test.js",
+      "sha256": "18826d3b110fc92e125d294d260be772a811e9a74c89d73da9200cbb1c191918",
+      "normalizedBytes": 18610
+    },
+    {
+      "file": "tests/battle-ally-dom-order.test.js",
+      "sha256": "51258688e6db0914ff1955cde7b8bbe8f2a9bb59a5cf239c44540ae8d3166fa1",
+      "normalizedBytes": 10609
+    },
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "sha256": "e62cde2ef1d1bae9c3be3c0df367c48aaf6298b41645e250388a1e40bd7e9389",
+      "normalizedBytes": 15995
+    },
+    {
+      "file": "tests/battle-art-warm-scope.test.js",
+      "sha256": "8e4b5c21039adc3daada1d3bc257dac9f5213f143f2848d981522f4275e9f314",
+      "normalizedBytes": 2289
+    },
+    {
+      "file": "tests/battle-bloom-discovery.test.js",
+      "sha256": "d00249308992ae2cf1d10b8d38ba244adf513efbd361512da926ae57e9040bde",
+      "normalizedBytes": 4225
+    },
+    {
+      "file": "tests/battle-curse-immunity-lifetime.test.js",
+      "sha256": "5c009164e2fd3a6d56fbfe0113e54d45eccd1505645250be96007413b1cb37b8",
+      "normalizedBytes": 4278
+    },
+    {
+      "file": "tests/battle-dev-grant-card.test.js",
+      "sha256": "0afb2b98fdbd0b715bf78b05fd0bb8ca6fed5edbf3dcaf2fe2e93c980b7d8b44",
+      "normalizedBytes": 1836
+    },
+    {
+      "file": "tests/battle-direct-trigger-source.test.js",
+      "sha256": "01a3b5b1b8d26e346eff48c4f23225eb74784d0767a273b1adab458147b607f7",
+      "normalizedBytes": 4840
+    },
+    {
+      "file": "tests/battle-discover-result-source.test.js",
+      "sha256": "255d9b50066a6935bc7fc6523920331e2f543f4d319ffbc3ffdf91b63621bcbb",
+      "normalizedBytes": 5389
+    },
+    {
+      "file": "tests/battle-effect-damage-boundary.test.js",
+      "sha256": "59b12f8b5c9bc4ae5d73fd8385f975c098044c10d07bdbe072aa05fb9326fe5d",
+      "normalizedBytes": 2953
+    },
+    {
+      "file": "tests/battle-end-turn-selection.test.js",
+      "sha256": "a63c55371c710118a978e43345ef08c9917c9719772cad394148d6e29ff47305",
+      "normalizedBytes": 16270
+    },
+    {
+      "file": "tests/battle-entry-view.test.js",
+      "sha256": "607f79ba28f5d28c4318f10bd1319a3da6a81a56a4888fa1622ca6c2bdabbca2",
+      "normalizedBytes": 20514
+    },
+    {
+      "file": "tests/battle-equipment-skill-synthesis.test.js",
+      "sha256": "2a40fea299aa5471d1a60b96b32d861987d5adf0060e4051fde717acbe39af4c",
+      "normalizedBytes": 9989
+    },
+    {
+      "file": "tests/battle-frames-lifecycle.test.js",
+      "sha256": "851925aca54d24685bce02d9ed7135818d1c0c8396fee0199cb862bb2569e0a6",
+      "normalizedBytes": 35313
+    },
+    {
+      "file": "tests/battle-frames-ownership.test.js",
+      "sha256": "e1b3f76311e4cd6ddc3efc8d7ffff5a324e5110ae72adbfd3ee7f75ad3f934a5",
+      "normalizedBytes": 35381
+    },
+    {
+      "file": "tests/battle-hand-content-diff.test.js",
+      "sha256": "e630064109ffbd6edd3d23df3484b58d69fe547ab8c205c6b17fa390e067b87f",
+      "normalizedBytes": 9600
+    },
+    {
+      "file": "tests/battle-hand-inspector.test.js",
+      "sha256": "16b44154fa75407a3190ff7511dce6726c2cac93f9fa37c6f5d62b740c85406e",
+      "normalizedBytes": 80339
+    },
+    {
+      "file": "tests/battle-imitate-unplayable.test.js",
+      "sha256": "a660c0b73397dbb84dca92fc1c2903bc9a5987691250deb219bad4d346a22e72",
+      "normalizedBytes": 6184
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "sha256": "d517a1e7167750d65a73353308d33afcd135518a485e29dfdcd1666b3b6b860e",
+      "normalizedBytes": 36343
+    },
+    {
+      "file": "tests/battle-pouch-entry.test.js",
+      "sha256": "352bad77b9a5291c11f16cfdedca75a8e66f53653cb88b13a084d0fb0864eced",
+      "normalizedBytes": 4325
+    },
+    {
+      "file": "tests/battle-render-derivation.test.js",
+      "sha256": "7692b8f13e0619c6e1ea265f71edc14836ac7203671c832e1eaf068cce1210ef",
+      "normalizedBytes": 7515
+    },
+    {
+      "file": "tests/battle-render-runtime-trace.test.js",
+      "sha256": "f887945593621fb574d473becb5944d327bbbb8c8dea0a5eda1f3fa20afcd0d9",
+      "normalizedBytes": 12444
+    },
+    {
+      "file": "tests/battle-resolution.test.js",
+      "sha256": "d96c68a5b72f51996384e393183c5ffd76fc684fa49e57520da25e9b12679b3c",
+      "normalizedBytes": 74683
+    },
+    {
+      "file": "tests/battle-review-remediation-1023.test.js",
+      "sha256": "65a8350218afc5796b2d90720272a56b2d515dffbf6a6f42a029c75e295f6a46",
+      "normalizedBytes": 7683
+    },
+    {
+      "file": "tests/battle-round-recording.test.js",
+      "sha256": "441ae1ab5f007ddd7e415dba486a43a988fc3603e2461e6026643ba543550cb6",
+      "normalizedBytes": 5320
+    },
+    {
+      "file": "tests/battle-rule-audit-1014.test.js",
+      "sha256": "a757815f6ea1feabbbec3ae68fb85e827705da94392c358a106717206315b9b1",
+      "normalizedBytes": 14238
+    },
+    {
+      "file": "tests/battle-runtime-compatibility.test.js",
+      "sha256": "1915c6f36d8f3f6f9951e14106e7ad6b761c312e401e87c8303bf04ca01ebbf7",
+      "normalizedBytes": 6394
+    },
+    {
+      "file": "tests/battle-runtime-completion-1014.test.js",
+      "sha256": "39f4c02876916fabf92072ac804160a45fc246c86f5a873cc6c7205d65abd218",
+      "normalizedBytes": 12221
+    },
+    {
+      "file": "tests/battle-runtime-state-guard.test.js",
+      "sha256": "881a55a79a2aaa1e395531ff87881f722087fd75846cc0469b4d50dc3578bfc1",
+      "normalizedBytes": 6785
+    },
+    {
+      "file": "tests/battle-scenery-secondary-ready.test.js",
+      "sha256": "de4414afc6b726e9ab1404c1e2edf73edb95556c5e0842555572ab5be721524b",
+      "normalizedBytes": 8134
+    },
+    {
+      "file": "tests/battle-semantic-feedback.test.js",
+      "sha256": "9b344512a4a1d575bd370d2c8bbcc4d0c47314beeface055c30b61c0f0fed37d",
+      "normalizedBytes": 12025
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "sha256": "d554da2f5e893b773e6284eac9dbf77911d54d48f7c380b206cc106bf2c05cde",
+      "normalizedBytes": 35635
+    },
+    {
+      "file": "tests/battle-snapshot-phase-cost.test.js",
+      "sha256": "3304c0cc1a16df7f2fdb91fbd519793d63f7e78ad3910c50d6ef598757a0cc78",
+      "normalizedBytes": 8498
+    },
+    {
+      "file": "tests/battle-target-dom.test.js",
+      "sha256": "daab925913630981b9e029263f6c6fba9e01e013c8349623beb6041897ba0250",
+      "normalizedBytes": 10455
+    },
+    {
+      "file": "tests/battle-temp-item-destination.test.js",
+      "sha256": "a802e669bc1f9a57acde7480c8af1bcb2e63ca238f1170721d93aa677eb872c5",
+      "normalizedBytes": 7212
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "sha256": "720b91146ef4d19d6c94068e78ac53e58855e4753f6f31cf08776b6468060090",
+      "normalizedBytes": 14722
+    },
+    {
+      "file": "tests/battle-trigger-lifecycle-unification.test.js",
+      "sha256": "65d9a1534e5225256d83dd626abec629bc6ef5749fab8a40f2f8338e7034ee6a",
+      "normalizedBytes": 14029
+    },
+    {
+      "file": "tests/battle-turn-start-discover.test.js",
+      "sha256": "8542a745456429f4fd67b4205c5b9ad83e0e274308dbd55e79214797474f840f",
+      "normalizedBytes": 7299
+    },
+    {
+      "file": "tests/battle-unit-metadata.test.js",
+      "sha256": "eb5261999ad69732cf25db4ab67b9c2fb19b1ef1270ecdff59fd95e48e674405",
+      "normalizedBytes": 11955
+    },
+    {
+      "file": "tests/blackmarket-card-preview.test.js",
+      "sha256": "8c3f9e5575141315aa9ffd1af6cc6d779feca635ab1cb79a89dfe2ee8eed9ae5",
+      "normalizedBytes": 10296
+    },
+    {
+      "file": "tests/boot.test.js",
+      "sha256": "db145eb8870d5689f3ec5887ad7bf343475c793ec301c1e71858362c79291f72",
+      "normalizedBytes": 50603
+    },
+    {
+      "file": "tests/boss-equip-select.test.js",
+      "sha256": "d099e8888e3b962eab8f057a5229174b3fd61b4783327e1d8e4b4cf4aa85d667",
+      "normalizedBytes": 10319
+    },
+    {
+      "file": "tests/boss-rescue-pool.test.js",
+      "sha256": "b0f2c00e0536a30e39834c90684f2d634aa84c34dcd614c50c9d8b0a30f7903d",
+      "normalizedBytes": 4232
+    },
+    {
+      "file": "tests/builtin-card-execution-battle.test.js",
+      "sha256": "37536882dc4b90c0f4c18eb12285d9abeb095c1645daad0feee23d508808557c",
+      "normalizedBytes": 5762
+    },
+    {
+      "file": "tests/builtin-migration-lookup.test.js",
+      "sha256": "c421fe22b12c1a8daa91ac39693ca3f9432d6ec2cd540aba622ce5c7da75fcd0",
+      "normalizedBytes": 11774
+    },
+    {
+      "file": "tests/card-description-audit-battle.test.js",
+      "sha256": "91ff0367e1c44d2d0409ce775ad6fdd64a018f830a2238b7dbf51cf1479b3542",
+      "normalizedBytes": 20565
+    },
+    {
+      "file": "tests/card-description-fix-auxiliary.test.js",
+      "sha256": "0a91fd68f475f11c747b771660a4cdac2287e6151a8e3f3f8fa1b9a4f4c2c71f",
+      "normalizedBytes": 6123
+    },
+    {
+      "file": "tests/card-description-fix-lifecycle.test.js",
+      "sha256": "6074afcb5dd1c9ec25497cab4291cc6fe430b730efff6fd218807387265ac6b4",
+      "normalizedBytes": 8701
+    },
+    {
+      "file": "tests/card-description-fix-pools.test.js",
+      "sha256": "79eee3296187c8e320411ff6647303007fe189397e2eea0d1849c63b153a7941",
+      "normalizedBytes": 8142
+    },
+    {
+      "file": "tests/card-description-fix-target-effects.test.js",
+      "sha256": "7f5b57398b40fc8ed81cdaf38ef0a1977ff5b30580a41de28e88f8b54aa45b12",
+      "normalizedBytes": 8036
+    },
+    {
+      "file": "tests/card-effect-semantics.test.js",
+      "sha256": "3c238072052cb2b649bfdeb88031019727790c670f3c56fa550f46c4e163f689",
+      "normalizedBytes": 4888
+    },
+    {
+      "file": "tests/card-rules-per-foe-boundary.test.js",
+      "sha256": "59edeba69f422111c8ae865897c4ee4cf62a08011e134ab022e0e80d5cf5c56e",
+      "normalizedBytes": 4832
+    },
+    {
+      "file": "tests/card-rules-schema.test.js",
+      "sha256": "84f42e72b0f06ae82e5bbd77835c85257d6f5a96530afc6b7e735a980c951294",
+      "normalizedBytes": 20040
+    },
+    {
+      "file": "tests/cards-choice-armor-guard.test.js",
+      "sha256": "dd06658565d74774b0eca73deaffce4b6b2d639fdf6c2777707c6a9d130a235a",
+      "normalizedBytes": 7059
+    },
+    {
+      "file": "tests/chase-slash.test.js",
+      "sha256": "67a494346759ede882e620f8ffbc4b7c58ca72be57256eba545ecc9b9196e50a",
+      "normalizedBytes": 4208
+    },
+    {
+      "file": "tests/chest-acquired-gift-cloud.test.js",
+      "sha256": "02fc1e06a46b0244501f807b0dc35076349e5ce0361ff75bed2b535f0cf8a854",
+      "normalizedBytes": 15143
+    },
+    {
+      "file": "tests/chest-batch-receipt.test.js",
+      "sha256": "40143c89199aa4490250b7fc701297897cb4b777660715b99ce6e19dc0a55b4d",
+      "normalizedBytes": 3361
+    },
+    {
+      "file": "tests/chest-callback-lifecycle-audit.test.js",
+      "sha256": "0c0abc5bf01ccdd883a1917c6436b244879ca7201ef913df071ca2476fb889aa",
+      "normalizedBytes": 13049
+    },
+    {
+      "file": "tests/chest-click-flow.test.js",
+      "sha256": "e15a823d45e622ee57e7c1bca7e405ca5bad7ed7d2a9aeb59a6b1a6524ad34e2",
+      "normalizedBytes": 5752
+    },
+    {
+      "file": "tests/chest-coins-summary.test.js",
+      "sha256": "92340f0fd1294032cee2f0434a9af9b44b9cb8559a7b9b2754f7810ed939785b",
+      "normalizedBytes": 3206
+    },
+    {
+      "file": "tests/chest-multi-queue-regression.test.js",
+      "sha256": "90bd3dec5a98a5473cd911d1de38159db9676c77cd16a34117aa3c48b041acb7",
+      "normalizedBytes": 4011
+    },
+    {
+      "file": "tests/chest-receive-animation.test.js",
+      "sha256": "9b6a558d28e867dcf27e5496647be149b017feb0d8a0f892f9aaf9f8c8b84772",
+      "normalizedBytes": 3647
+    },
+    {
+      "file": "tests/chests-reward-capacity-notice.test.js",
+      "sha256": "afbb63f4a031c9137292089e48159639ecaff05682eaabba9e2065ef2a8ed96c",
+      "normalizedBytes": 17832
+    },
+    {
+      "file": "tests/compendium.test.js",
+      "sha256": "820f0a3ea9513e2185d2427a6938977dab29d14c6cb7dea43aae1d10650a2d41",
+      "normalizedBytes": 5609
+    },
+    {
+      "file": "tests/css-dead-dom-reachability.test.js",
+      "sha256": "cae2d5daf77df6a03ba7eda4a38a1e030f19dafd13fc4ccf6e9a3b8a4663326f",
+      "normalizedBytes": 3532
+    },
+    {
+      "file": "tests/cursed-blade.test.js",
+      "sha256": "df7819b806751ba506cfa19fbf6e364d0e381988fa4833ffb5642f002adce701",
+      "normalizedBytes": 4954
+    },
+    {
+      "file": "tests/custom-cards.test.js",
+      "sha256": "ab0f64dfceb552396fe371109eaccfcce39ea5fd8bd7e79ad3b8295be015f84d",
+      "normalizedBytes": 3438
+    },
+    {
+      "file": "tests/departure-real-session-review.test.js",
+      "sha256": "c544979191368cae987263dd9a4014d9536c929a42ac33cde59698827fc7af78",
+      "normalizedBytes": 3988
+    },
+    {
+      "file": "tests/dev-console-lifecycle.test.js",
+      "sha256": "784036e3e999df6cd0bb39eb04fd05564dfacdd20ea66ee3fc94ef3800f663b5",
+      "normalizedBytes": 8340
+    },
+    {
+      "file": "tests/dev-tools-lazy-entry.test.js",
+      "sha256": "d151fa9dfb7c5ffd73da53e201b6aa0672bcd6990176998fd58253aa1c466736",
+      "normalizedBytes": 15151
+    },
+    {
+      "file": "tests/direct-cast.test.js",
+      "sha256": "28224d8b66286d48fc0944b06c41d252bd56e0965ec42c3afc6f7ed15350ed2b",
+      "normalizedBytes": 20056
+    },
+    {
+      "file": "tests/discover-infusion-feedback.test.js",
+      "sha256": "730e92a6bae7baa99e0f18e5167f66d3b911f92e1dbc28add4896f30da50c38d",
+      "normalizedBytes": 4195
+    },
+    {
+      "file": "tests/dual-wield.test.js",
+      "sha256": "4f8058ea3780cad3b880fd91992463bdc333428c4af00a4f252e254e21d51ba1",
+      "normalizedBytes": 3157
+    },
+    {
+      "file": "tests/e2-view-hp.test.js",
+      "sha256": "03b63ca37dc90b6c2ccffb72f6001d5ab0c39621aaec2a3923af4c886d4d8ca9",
+      "normalizedBytes": 4972
+    },
+    {
+      "file": "tests/e5-session-recovery.test.js",
+      "sha256": "7b45860117df645f728dc3c7b48a3bbdb568d1096d0f408b61bc075e3c0be3e7",
+      "normalizedBytes": 23944
+    },
+    {
+      "file": "tests/e6-card-rules-execution.test.js",
+      "sha256": "fe77393d4cac6dfea57fbd65cfa3142addca5b56343cbb23d5cc606f4a7d596e",
+      "normalizedBytes": 10074
+    },
+    {
+      "file": "tests/e7-rule-warning-view.test.js",
+      "sha256": "5e6837db8213bbb4164465346a928f6ed05a36ee5b96d28d509072a02ff005dc",
+      "normalizedBytes": 11345
+    },
+    {
+      "file": "tests/e8-card-migration.test.js",
+      "sha256": "8a5cb477dd8e684ba94705fb2a88707a4525b994e3c0931b3a4ab5358185d380",
+      "normalizedBytes": 23004
+    },
+    {
+      "file": "tests/ember-burst-rot-seed.test.js",
+      "sha256": "6bd17e4532c22bc1161b443cb9fc7ceff2ad1b096a9a06a0747604f9a05c2fd6",
+      "normalizedBytes": 6153
+    },
+    {
+      "file": "tests/energy-crystal-restoration.test.js",
+      "sha256": "01081c4902251ffc0ce396e791472dfc332d4c916d3ccc6c1dd4558735883468",
+      "normalizedBytes": 7618
+    },
+    {
+      "file": "tests/environment-fixtures.test.js",
+      "sha256": "f6af14317aa75cdba82404f7c6933527e0a79d7dc397a1f5ecdc38880ded0f1c",
+      "normalizedBytes": 4548
+    },
+    {
+      "file": "tests/event-callback-lifecycle-audit.test.js",
+      "sha256": "376fffa5e2167d0d225c604eed669938fa89e2ad319ba31e1db9028a48078771",
+      "normalizedBytes": 46007
+    },
+    {
+      "file": "tests/event-choice-acquired-gift-cloud.test.js",
+      "sha256": "ad0499b7279dfd2e3fda8680097bc90e23c7cbcda3c68141d17d0fe9ec038937",
+      "normalizedBytes": 13831
+    },
+    {
+      "file": "tests/event-choice-recovery-cloud.test.js",
+      "sha256": "b933d3e8e4eb0abe4411fb9884cc8b524af25885755a0a62d3afd2c9effc1e36",
+      "normalizedBytes": 30644
+    },
+    {
+      "file": "tests/event-choice-session-resume-cloud.test.js",
+      "sha256": "5fdfc261c16c5cfcc7aece5059507543d6a2d401c4ada4191d4393e615e8e5e6",
+      "normalizedBytes": 4665
+    },
+    {
+      "file": "tests/event-node-binding-cloud.test.js",
+      "sha256": "0f482b5aab155a925879bfbeca4a70fce3dec88044e1caac47b3e59fc2e305a2",
+      "normalizedBytes": 12008
+    },
+    {
+      "file": "tests/event-recode-selection-continuity.test.js",
+      "sha256": "bfae69de110aaef3b435b03af2ec5ad79f5991a82bde1881a9da51dc398af25d",
+      "normalizedBytes": 6505
+    },
+    {
+      "file": "tests/event-settlement-unification.test.js",
+      "sha256": "baf29b26978cf754872d376fe1ce124d3683d6d36db60cc1eb05efb4045c01de",
+      "normalizedBytes": 19856
+    },
+    {
+      "file": "tests/event-signal-puzzle-integration.test.js",
+      "sha256": "0158153772f1cb67c6edff07db31d5c608a3035519c16fa3d79d0544bf5b4615",
+      "normalizedBytes": 9337
+    },
+    {
+      "file": "tests/expedition-battle-presentation.test.js",
+      "sha256": "c8f575beac92daf6b9cea230ef7eb981a9697e850b16c1c103f8db401fe4eeda",
+      "normalizedBytes": 9405
+    },
+    {
+      "file": "tests/expedition-page-lifecycle.test.js",
+      "sha256": "02db1e12d6261f1d86ad9be18bd07795feebf68bab1d4c0a1a9d37e8b5e78a04",
+      "normalizedBytes": 4966
+    },
+    {
+      "file": "tests/extraction-first-explore-xp.test.js",
+      "sha256": "c445000dd210b5e8f6e709fbd3eae923c85928f9e7f2ccd3b9cb4bf132783b51",
+      "normalizedBytes": 6956
+    },
+    {
+      "file": "tests/extraction-flow.test.js",
+      "sha256": "a9322f6a65e57a58965b7905c33dcbc37561380dd7c20942eb16be3ffdd02054",
+      "normalizedBytes": 13609
+    },
+    {
+      "file": "tests/extraction-receipt-idempotency.test.js",
+      "sha256": "fa67f8fdef2c81f43f66cf216b8ec5c2876f6895a54f4c56be7d498ed53bd2de",
+      "normalizedBytes": 8724
+    },
+    {
+      "file": "tests/extraction-record-saved-cards-cloud.test.js",
+      "sha256": "6bdedb5854d86b50ba4f22ec9d5bdcc2be4a99a73b5103ea78b0c33166524e70",
+      "normalizedBytes": 11250
+    },
+    {
+      "file": "tests/extraction-recovery-ui.test.js",
+      "sha256": "e8d763d8ddf97473044b070a00f00fe2b0490c19c0a8e0bb98fdf2e83dad073f",
+      "normalizedBytes": 10244
+    },
+    {
+      "file": "tests/extraction-recovery.test.js",
+      "sha256": "c64aa20786414d76adfc28ad48ad339a8acd89980e5ee6be2a7bef84feca98ee",
+      "normalizedBytes": 19888
+    },
+    {
+      "file": "tests/extraction-session-resume.test.js",
+      "sha256": "c78af5182c45d4dc57d1983e5fa4bfbd9bea82128d6999d48c384348973dd139",
+      "normalizedBytes": 6304
+    },
+    {
+      "file": "tests/extraction-settlement.test.js",
+      "sha256": "272420eec9fa2e4e385e2d2e9fabc764fd1ad48028e8f76d9ab8067ba2a9ca69",
+      "normalizedBytes": 5827
+    },
+    {
+      "file": "tests/first-explore-marking.test.js",
+      "sha256": "bb8f17c04d23190d26d5d208e6b82bc9190051af21a3db29437932f1558fe869",
+      "normalizedBytes": 7847
+    },
+    {
+      "file": "tests/four-player-capacity-text.test.js",
+      "sha256": "8a8c43fa3bafa247347568669469b44facee63b960d840e43b3a9ea2443c4e07",
+      "normalizedBytes": 2262
+    },
+    {
+      "file": "tests/four-player-event-regressions.test.js",
+      "sha256": "8f8295a13211ba380ced962248be930e768c83e9362d7ef38e10d9056a5f3372",
+      "normalizedBytes": 8370
+    },
+    {
+      "file": "tests/framework-independent-battles.test.js",
+      "sha256": "f51bfdee77cd520c761b1f703b12aca79c996351f66facfadc2c5ce55549b0ad",
+      "normalizedBytes": 7985
+    },
+    {
+      "file": "tests/full-review-regressions-battle.test.js",
+      "sha256": "c7e4e9eeb5705d7a21a5919301919b33e5574c3cebcef6b28f0a0f2cbb5d033a",
+      "normalizedBytes": 10506
+    },
+    {
+      "file": "tests/full-review-regressions-hub.test.js",
+      "sha256": "57f07fd702445e55f067372767eb60f186a5aeb6a68a93a13fef7bdbaa7672ae",
+      "normalizedBytes": 6438
+    },
+    {
+      "file": "tests/full-review-regressions-world.test.js",
+      "sha256": "0a60591249b159ea84ced6066e5e6a862b00e4311dd157991ee611073a52b6f4",
+      "normalizedBytes": 13435
+    },
+    {
+      "file": "tests/game-session-elapsed.test.js",
+      "sha256": "5e7ad83a21c8c78f8bf3b171456e703f6acedc752c0dd8b694cc31b28d8fe6ac",
+      "normalizedBytes": 3859
+    },
+    {
+      "file": "tests/ghostblade-stealth-break.test.js",
+      "sha256": "0691e182602bf4456dec0ffa23914cf746e8b58dfe5da62573b9738f3c028f9f",
+      "normalizedBytes": 7063
+    },
+    {
+      "file": "tests/hand-material-selection-window.test.js",
+      "sha256": "93e6b489769da716dda46f7099737737e9d5a014cd87b3d6038573174f34fd8d",
+      "normalizedBytes": 10712
+    },
+    {
+      "file": "tests/helpers/css-reachability.js",
+      "sha256": "6fca705b1684cf73dddef16eb40694cfbdb35dc595c5168277a4688d5aef59a0",
+      "normalizedBytes": 5460
+    },
+    {
+      "file": "tests/helpers/environment-fixtures.js",
+      "sha256": "8f824f0ade81e773dd1e08b8aac6ea508dc31077afe670fb503c6a5e4c84ee5f",
+      "normalizedBytes": 10805
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "sha256": "cfb1b0d94b9f1363ae5c87bd665cff95d80f19a3721c9af8745dd9c3edb0e10a",
+      "normalizedBytes": 23688
+    },
+    {
+      "file": "tests/infuse-free-paths.test.js",
+      "sha256": "0ae8ff884d3061925b35022d9e2795daeb623fc34d6b780ee1e20df38e73dc5d",
+      "normalizedBytes": 7822
+    },
+    {
+      "file": "tests/infuse-free-play.test.js",
+      "sha256": "af831b18f7e37d1205435c47aab6f4d99545108d271621cfc1e39a2d67bb1713",
+      "normalizedBytes": 4369
+    },
+    {
+      "file": "tests/item15-18-fixes.test.js",
+      "sha256": "1d3ed2d7fc0a4a46b012b72cb249999c24176afd4fc1d646c550e3244ed260b0",
+      "normalizedBytes": 4999
+    },
+    {
+      "file": "tests/last-stand-poison-burst.test.js",
+      "sha256": "b01d0f15df0ff53c300fca6441f6726a1b043795b79067ce8588251c9470d9a6",
+      "normalizedBytes": 5134
+    },
+    {
+      "file": "tests/lava-blast.test.js",
+      "sha256": "bb01433af74c0cd3286aff884418c2eeb740b230a401c0a680ec3103d2b2475b",
+      "normalizedBytes": 4352
+    },
+    {
+      "file": "tests/m-batch-behavior.test.js",
+      "sha256": "f89493708ed28fc46ca09f3302006f4b68a6b41bc989d1cbe872816f73a4af03",
+      "normalizedBytes": 5190
+    },
+    {
+      "file": "tests/m1-contract.test.js",
+      "sha256": "d76e95e77537f78afdffdde5560c3ded8a9c4e486f7ed1a7777dbb3241682ff5",
+      "normalizedBytes": 21619
+    },
+    {
+      "file": "tests/m1-data.test.js",
+      "sha256": "5486896d505fa24c5868899c4cd546b7e9d90e1ff5a965999eb1dbac461485d9",
+      "normalizedBytes": 9402
+    },
+    {
+      "file": "tests/m10-data.test.js",
+      "sha256": "02117ab85da1379008c66d5df68436dcce8e33c4317f0f73f46fdecd47df6061",
+      "normalizedBytes": 5017
+    },
+    {
+      "file": "tests/m2-contract.test.js",
+      "sha256": "71b85be01dc9881a0342a0d2858d0225620ecf56d77e6f11a1e90b47260422c4",
+      "normalizedBytes": 27474
+    },
+    {
+      "file": "tests/m3-contract.test.js",
+      "sha256": "3b1a6e7b0cd0143a289e3889ac3633d7a7985c23316d1d5ceb2b13b341db756e",
+      "normalizedBytes": 22186
+    },
+    {
+      "file": "tests/m3-data.test.js",
+      "sha256": "f33951d9a2b3d813cd775e7a818f1bc1df896d9f410e4799deba0308287a28bf",
+      "normalizedBytes": 21405
+    },
+    {
+      "file": "tests/m5-data.test.js",
+      "sha256": "4496a047ec44129209485236e18329385299f56d8ee2305e8ca2191ede9dfc33",
+      "normalizedBytes": 14783
+    },
+    {
+      "file": "tests/m7-battle.test.js",
+      "sha256": "4deb4a28fed93fb7333bdcace20b1765988ba58c49fc75cd5e464c0f8d597c58",
+      "normalizedBytes": 4320
+    },
+    {
+      "file": "tests/mana-surge.test.js",
+      "sha256": "5ade771e63ce3c9db525b0cea7186817be8de4b731f3247fde4725f1043045f5",
+      "normalizedBytes": 4461
+    },
+    {
+      "file": "tests/message-batch-0917.test.js",
+      "sha256": "6190c3f212deade503abe382ccfbb3ac8b548c2571d37035a26d1606ae73cbd3",
+      "normalizedBytes": 8692
+    },
+    {
+      "file": "tests/message-batch-0920-late.test.js",
+      "sha256": "5def4485efd1d1dd74df30f4f78a73bcbf2f4d2b9d7b6dafe5fd58972bcbd15d",
+      "normalizedBytes": 5359
+    },
+    {
+      "file": "tests/message-fixes.test.js",
+      "sha256": "7a9cf34c68ef05ad056f8631f40b97d676f0004e1a7f6c3078ecf44febaf6b63",
+      "normalizedBytes": 6252
+    },
+    {
+      "file": "tests/mistbox.test.js",
+      "sha256": "bf52553fabbc008cc4db264fac159277a1f2332691bbad198abee87f49b1186a",
+      "normalizedBytes": 3643
+    },
+    {
+      "file": "tests/mystery-potion-observation.test.js",
+      "sha256": "b91c87a81d6e98bac78cc09d57abe5f5af5bc1b4047c91fc2f72b22c683e67ab",
+      "normalizedBytes": 10595
+    },
+    {
+      "file": "tests/n1-infuse-uid-toggle.test.js",
+      "sha256": "e91b8f7701e118626dfafa8b4a2c3e00ea5f4d04a7277f933226111e26a98a3b",
+      "normalizedBytes": 5894
+    },
+    {
+      "file": "tests/nest-hearts.test.js",
+      "sha256": "1a08ecdd6d0c12922a10f9c009d5444620129e6732aea97ed0ccce71a2c70d5d",
+      "normalizedBytes": 2779
+    },
+    {
+      "file": "tests/nest-regression.test.js",
+      "sha256": "4d7f4d1dec01452bb5843283105a1ab9ea55a22298cffa75344c2e9a5a123efb",
+      "normalizedBytes": 9177
+    },
+    {
+      "file": "tests/nightshift-u10-teardown-guards.test.js",
+      "sha256": "4acb13519aed6c361209581c39cedeb37e76331da1a4be849ecf0089decbf184",
+      "normalizedBytes": 7459
+    },
+    {
+      "file": "tests/node-cancel-semantics.test.js",
+      "sha256": "56e1b5a041144d3d3dd161ee1a88837dd8af8b85f80a9786e2165c7841f83427",
+      "normalizedBytes": 7305
+    },
+    {
+      "file": "tests/node-retrigger.test.js",
+      "sha256": "5d0c545fdb958a110fb57c2d7146828a98ad1ccd940707dda714bdcbee70aa0b",
+      "normalizedBytes": 20418
+    },
+    {
+      "file": "tests/normal-effects-deck-regression.test.js",
+      "sha256": "bb7f66704ef3351d0b14a7834e9da0dce18cd62b632980c3b22dee3df8ffe7cf",
+      "normalizedBytes": 3039
+    },
+    {
+      "file": "tests/normal-starter-deck.test.js",
+      "sha256": "9504dd361af3242f399509461673b420d4380ef4415ef18d36e5811619c84691",
+      "normalizedBytes": 10596
+    },
+    {
+      "file": "tests/page-perf-battle.test.js",
+      "sha256": "1aa44ecd21a0e11dd42866deeacc7f058240e0dcaf04078beb84621b27386f77",
+      "normalizedBytes": 14199
+    },
+    {
+      "file": "tests/pearl-storage-interface.test.js",
+      "sha256": "e1e4942f9e60ecf40d235b43cb072cf10c2d6dec233441a0f923a9c04ddfae24",
+      "normalizedBytes": 10817
+    },
+    {
+      "file": "tests/playthrough-bot.test.js",
+      "sha256": "3f36d4048c6624192c5808c2b5c585a1bcb26becc3ebc673b584e1bc5e15dcad",
+      "normalizedBytes": 5907
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "51d273eda405a86908e79a654b02bcbfffacf9892dd38aa4ed7e907e4c29736f",
+      "normalizedBytes": 9885
+    },
+    {
+      "file": "tests/potion-tip.test.js",
+      "sha256": "927949455d7d65d9c7523bcf221860641fd43cc17bae6fa13b88fb3e86ce7ce5",
+      "normalizedBytes": 7972
+    },
+    {
+      "file": "tests/provoke-target-contract.test.js",
+      "sha256": "b6b998b8765e16d3b28dbd4ede9a785f026a6168c06e55d218a809da01cc6ee7",
+      "normalizedBytes": 6345
+    },
+    {
+      "file": "tests/r3-0-command-guards.test.js",
+      "sha256": "83952325772b5095bd9b2dfe8d6c609637d239ddd2b26bed589aad9e217f581d",
+      "normalizedBytes": 7280
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "sha256": "f094d0804051ceb65fc007c50957238aaa20aeaf92e81f3014f875dd1ece0585",
+      "normalizedBytes": 22394
+    },
+    {
+      "file": "tests/r3-b-action-boundary.repro.test.js",
+      "sha256": "0ac425f1147569ef93c83c9f0085a409559d705ee648a4a7abe03733e8791cbb",
+      "normalizedBytes": 7018
+    },
+    {
+      "file": "tests/r5a-session-menu.test.js",
+      "sha256": "2328084f22a5fc697e43e9a0954ebf646e21fe698501ea7b3972d2547098d1a8",
+      "normalizedBytes": 11195
+    },
+    {
+      "file": "tests/rapid-fire.test.js",
+      "sha256": "0da018c982c00882bf58a19a64d5188e1a5352fc7d8945662b92d16607d2e350",
+      "normalizedBytes": 5704
+    },
+    {
+      "file": "tests/reactive-draw-cast-continuation.test.js",
+      "sha256": "5d6a70d66c20e9fe366d1c86add824147225f9a3e14a3221511a1e765c6d041d",
+      "normalizedBytes": 7766
+    },
+    {
+      "file": "tests/requested-card-integration.test.js",
+      "sha256": "978a88876c313592be888af498723ac53a54d706d81aaf05718a25beff24272d",
+      "normalizedBytes": 14200
+    },
+    {
+      "file": "tests/requested-equipment-effects.test.js",
+      "sha256": "899bbb63f350367ee3d7ba9a07c002d8d788dff339b70825526b11edec8dfcda",
+      "normalizedBytes": 9614
+    },
+    {
+      "file": "tests/reserved-card-id-regression.test.js",
+      "sha256": "b4f9c60d96a194bc6f87460c75735228f0cabd1736c3c574eade2a4395a0f34f",
+      "normalizedBytes": 5525
+    },
+    {
+      "file": "tests/restoration-potion-observation.test.js",
+      "sha256": "fcea0cb977237e557f647fad740f7b7f43fd7f17ff7edd5eb49cd0d3b46e5e79",
+      "normalizedBytes": 8026
+    },
+    {
+      "file": "tests/reward-capacity-preview.test.js",
+      "sha256": "f27a59b6410c651e1d593c98fb79c73ee33fe523b69924969a4e486b6ae63e9a",
+      "normalizedBytes": 12874
+    },
+    {
+      "file": "tests/reward-settlement-unification.test.js",
+      "sha256": "3eae564fb461de66efaacb53535f455a1cfe78dbf6b9a002feb708514eaf7136",
+      "normalizedBytes": 7524
+    },
+    {
+      "file": "tests/safe-pearl-access.test.js",
+      "sha256": "4baabb689316e7053755753f9c9929ef467845bc9121e3d3bec30cc14eceac09",
+      "normalizedBytes": 11151
+    },
+    {
+      "file": "tests/save-recovery-session-feedback.test.js",
+      "sha256": "f593017c040e551b9f485427541108e6e96a49fcb98deafe9b7ea9f819830d66",
+      "normalizedBytes": 4202
+    },
+    {
+      "file": "tests/save-slot-delete-results.test.js",
+      "sha256": "2d18f9876679e63daf287ba00cf9fc0e32db4e6d62ec9d5ac04352415b46b779",
+      "normalizedBytes": 9083
+    },
+    {
+      "file": "tests/scavenge-mode-feedback.test.js",
+      "sha256": "6b95db58d4cb56c7c6b7e1d8668bc700f3518e867f63ef25872321b2e97fdf7e",
+      "normalizedBytes": 4430
+    },
+    {
+      "file": "tests/session-base-persistence.test.js",
+      "sha256": "3afb4855a3848f28bc30f1163c960064bee04273c10ffbeaf4eb03a74a5cf8fc",
+      "normalizedBytes": 5535
+    },
+    {
+      "file": "tests/skull-sword-effective-session.test.js",
+      "sha256": "7ce0c7ec1cdab3d4910ad2a4ac207f9ee9f4c7f9de5b1523bf732f2c8af373b9",
+      "normalizedBytes": 31593
+    },
+    {
+      "file": "tests/stellar-divination.test.js",
+      "sha256": "0378151cdc3e8bf651173ac01052a114d4fd62f735b5019997a789a5a7d278cd",
+      "normalizedBytes": 7931
+    },
+    {
+      "file": "tests/structured-backupcell.test.js",
+      "sha256": "aab74d080f1ee865e1d161e9d534e72e85a0f7a7cad420a45b781809fd30d559",
+      "normalizedBytes": 4663
+    },
+    {
+      "file": "tests/structured-effect-authority.test.js",
+      "sha256": "ff9e4c5d1e25fbecb27baafeece9ab537420eb183d3188da57bd0b98240d917b",
+      "normalizedBytes": 8368
+    },
+    {
+      "file": "tests/structured-onplay-battle.test.js",
+      "sha256": "c2ca8fa05098e2a84f1a4be25e8e908e8988cfbe711783b181eb299aaa300b2d",
+      "normalizedBytes": 10149
+    },
+    {
+      "file": "tests/sts-attack-presentation.test.js",
+      "sha256": "cbf08759313724c0ac312488bb350083db5b5163324d3ef047ba76e93dfdfa66",
+      "normalizedBytes": 5839
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "sha256": "9d9f8fb8bcee40869eecc46665111ee13ad2d3a2ef1ccd1ec3c56e21f35b3486",
+      "normalizedBytes": 11960
+    },
+    {
+      "file": "tests/sts2-agent-replay.test.js",
+      "sha256": "baa15bd910cc87471d850e24cd2444625c39daa60e0dc38060d7b9777ef3ed47",
+      "normalizedBytes": 13053
+    },
+    {
+      "file": "tests/sts2-battle-settings-restart.test.js",
+      "sha256": "4b30acc30d4acde2b63add9dfae99b001187a3e8e3c3a2bd4828956d105c23f0",
+      "normalizedBytes": 10405
+    },
+    {
+      "file": "tests/sts2-combat-facts.test.js",
+      "sha256": "9d69eeaaa5f69a99a7878ee9554e88024f7613c3305705c6a90b880e38fe269b",
+      "normalizedBytes": 9651
+    },
+    {
+      "file": "tests/sts2-consumed-items.test.js",
+      "sha256": "54d37ba6bf30fc9c52ebd860a1fb1f1a513b6ec8be1837a8b8794726dd38d622",
+      "normalizedBytes": 9942
+    },
+    {
+      "file": "tests/sts2-consumed-pile.test.js",
+      "sha256": "5c3b83301818bad0dd57a96a1ffe3c83a90ec9a081437775a573aff0ea7f0446",
+      "normalizedBytes": 7154
+    },
+    {
+      "file": "tests/sts2-consumed-rules.test.js",
+      "sha256": "1cdb6b738c4eab7818bd77b514bd901c5c113fc6de1ffbcdfc5bcaa8d899dcbe",
+      "normalizedBytes": 12974
+    },
+    {
+      "file": "tests/sts2-enemy-plan.test.js",
+      "sha256": "2584f0088d0505ecfd249424b6b1375d9c52a98eea31d87d75092529d2acb7ae",
+      "normalizedBytes": 6357
+    },
+    {
+      "file": "tests/sts2-hand-selection-contract.test.js",
+      "sha256": "ffc45d61f4bbf76ba143b5b601b178c51b140a49fca87ad0c9307d543f0b8bbe",
+      "normalizedBytes": 10101
+    },
+    {
+      "file": "tests/sts2-infusion-flow-1021.test.js",
+      "sha256": "821e0108a71ef5ee0e5fc7925a0a131dc758e73f661231b1f38890b92c3e7175",
+      "normalizedBytes": 15937
+    },
+    {
+      "file": "tests/sts2-unified-consumed-pile.test.js",
+      "sha256": "5ed93dde79cf056fdc637a19a8ef09e382c457791caf956fb69e6cbc2b6d4c2f",
+      "normalizedBytes": 11911
+    },
+    {
+      "file": "tests/sword-consume-trigger.test.js",
+      "sha256": "eaae0bf15af3013d42307fdae20d685c2b6a2c8f3cdf7d38580da51d4ae62d7d",
+      "normalizedBytes": 7603
+    },
+    {
+      "file": "tests/sys03-altar-restore-txn.test.js",
+      "sha256": "4dc27a80edb0c3f155d4ac518faa57a1d1366e6a13b780b0107b2b33764780db",
+      "normalizedBytes": 28856
+    },
+    {
+      "file": "tests/sys03-loot-shop-txn.test.js",
+      "sha256": "3982cb96b5cd7d82b3ab12c704eaa2be8e98435c1ba64b25bba3f1f5f5e2d971",
+      "normalizedBytes": 33319
+    },
+    {
+      "file": "tests/terminal-death.test.js",
+      "sha256": "defdc0c634edb9896af7ce982654f28c54f287572fb57b92254dd339ba34e472",
+      "normalizedBytes": 6682
+    },
+    {
+      "file": "tests/terminal-persistence.test.js",
+      "sha256": "2de797a3888ce602d671acf1446d26a63a825ebafb11ac7db3ac10db93a3f4e6",
+      "normalizedBytes": 8488
+    },
+    {
+      "file": "tests/terminal-retry-copy.test.js",
+      "sha256": "15805dbbe5fb9ea2d25cee404348e9c20580384175008f0038101f4f8475af56",
+      "normalizedBytes": 5928
+    },
+    {
+      "file": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "sha256": "f3715298ac72a71e222a2b7b97b7b9472482d7cbec1770fcf1519d1c147b6c55",
+      "normalizedBytes": 6355
+    },
+    {
+      "file": "tests/tt12-hitechrd-structured.test.js",
+      "sha256": "15f382fe98a8af343c2685a315234732ae515995867fcfd1ec04b96b2097df27",
+      "normalizedBytes": 8511
+    },
+    {
+      "file": "tests/tt12-structured-battle.test.js",
+      "sha256": "c573b32be623570d9d4860fcecb6fec728f2f1f949cdec503c537fd50b80f5c4",
+      "normalizedBytes": 7746
+    },
+    {
+      "file": "tests/tt7-frozenight-structured-battle.test.js",
+      "sha256": "15c269068516c4b18f4b34d3659638c1a2794b1ed92ebf0e11a92160b47accac",
+      "normalizedBytes": 5677
+    },
+    {
+      "file": "tests/tt7-hand-payment.test.js",
+      "sha256": "b02d5afff19d6bcdc42cac55838d0cd11723a0c69c6074d02ec2c83ac088c45b",
+      "normalizedBytes": 10325
+    },
+    {
+      "file": "tests/tt7-sneak-structured.test.js",
+      "sha256": "5376093cdef2d75ce2efceb385c35b1a39ab8651238ce8098d93958dcf50788e",
+      "normalizedBytes": 4063
+    },
+    {
+      "file": "tests/u18-negative-hp-death.test.js",
+      "sha256": "3f25c89c698b1586c07c99c123aee908d4fa0b1e6a3ea1a29fdede666cc76d78",
+      "normalizedBytes": 7243
+    },
+    {
+      "file": "tests/venom-staff-passive.test.js",
+      "sha256": "06f329d3cd8f4bccf33c5dc98b5faefbba853a2eeee8f145f9e12b2cba454cbb",
+      "normalizedBytes": 4160
+    },
+    {
+      "file": "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "sha256": "fc43e08beefb7856e10be712ab769dcdb392aece200cd6c5ab8ef4709a7fbafe",
+      "normalizedBytes": 5921
+    },
+    {
+      "file": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "sha256": "9082202186ad5c0560befdf0b954a61486ffd41d0e1f3790ff48e8be2981a8f1",
+      "normalizedBytes": 11410
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-chain.test.js",
+      "sha256": "40b6508335244386a9c9d0bc2410c6d866c64ac0c3240c38542319aebbd97dec",
+      "normalizedBytes": 5921
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-targeting.test.js",
+      "sha256": "7ac095abe8c955957a337575b9cd388e6ed1d2720771ba298802176a605df3ad",
+      "normalizedBytes": 8531
+    },
+    {
+      "file": "tests/wf-feedback1021-b-status-icons.test.js",
+      "sha256": "4db0f47c1cb499e2da8a1242f42287adc08d01a329983ec42445078e571b73f7",
+      "normalizedBytes": 6953
+    }
+  ],
+  "evidenceDirectory": "docs/evidence/2026-10-24-project-lean10/round2",
+  "priorBatchOwnership": "../final-owned-paths.json",
+  "sharedRegistryOwnership": "Only WF-project-lean10-1024 row; other rows preserved",
+  "servicesCreated": false,
+  "temporaryBrowserTabsClosed": true
+}

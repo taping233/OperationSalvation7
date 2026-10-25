@@ -1,0 +1,78 @@
+{
+  "totalFiles": 10,
+  "newTests": [
+    "tests/project-bugfix-round2-expedition-nest.test.js",
+    "tests/project-bugfix-round2-expedition-story.test.js",
+    "tests/project-bugfix-round2-expedition-chests.test.js",
+    "tests/project-bugfix-round2-expedition-commission.test.js"
+  ],
+  "completedAt": "2026-10-24T00:11:11.9299060+08:00",
+  "fixes": [
+    {
+      "files": [
+        "game/src/run/game.nest.js",
+        "game/src/run/game-session-persistence.js",
+        "game/src/run/game-session-restoration.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/game.store.types.d.ts",
+        "docs/save-format.md"
+      ],
+      "id": "R2-E1",
+      "rootCause": "研究所祭坛二选一未锁定，重入重置次数；空池部分兑现仍消费节点"
+    },
+    {
+      "files": [
+        "game/src/run/game.nest.js"
+      ],
+      "id": "R2-E2",
+      "rootCause": "研究所备战以索引代替所选条目身份，允许同名重复及名单变化后换入未选牌"
+    },
+    {
+      "files": [
+        "game/src/run/game.run.events.js"
+      ],
+      "id": "R2-E3",
+      "rootCause": "故事完成保存后未复核归属，失败删除新局visited，成功执行新局收尾"
+    },
+    {
+      "files": [
+        "game/src/run/chests.js"
+      ],
+      "id": "R2-E4",
+      "rootCause": "宝箱返回地图两段保存后未复核奖励及页面归属，成功关新页/失败重绘旧页"
+    },
+    {
+      "files": [
+        "game/src/run/shop-commission.js"
+      ],
+      "id": "R2-E5",
+      "rootCause": "委托保存混淆写入结果与页面有效性，迟到抢页或将成功写入误作失败回滚"
+    }
+  ],
+  "notes": "真实复现后修复；存储代理已移交4处可选字段编辑；旧档缺省/null兼容。保留上轮STORAGE_READ_FAILED预检及他人增量。未build/提交/浏览器，统一静态由父执行。",
+  "verification": [
+    {
+      "exit": 0,
+      "command": "vitest run tests/project-bugfix-round2-expedition-nest.test.js tests/project-bugfix-round2-expedition-story.test.js tests/nest-node-lifecycle-audit.test.js tests/r6-story-flow.repro.test.js tests/game-session-slices.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "seconds": 11.56,
+      "files": 5,
+      "tests": 58
+    },
+    {
+      "exit": 0,
+      "command": "vitest run tests/project-bugfix-round2-expedition-chests.test.js tests/chest-callback-lifecycle-audit.test.js tests/chest-multi-queue-regression.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "seconds": 10.99,
+      "files": 3,
+      "tests": 31
+    },
+    {
+      "exit": 0,
+      "command": "vitest run tests/project-bugfix-round2-expedition-commission.test.js tests/shop-settlement-unification.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "seconds": 5.07,
+      "files": 2,
+      "tests": 26
+    }
+  ],
+  "totalTests": 115,
+  "newTestCount": 21
+}

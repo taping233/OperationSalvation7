@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>首页 CSS / 图片隔离诊断</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<link rel="stylesheet" href="css/page-slot-select.css" />
+<link rel="stylesheet" href="css/page-settings.css" />
+<link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
+<link rel="stylesheet" href="css/pocket-strip.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+<!-- EXP: <link rel="stylesheet" href="css/cover-remaining.css" /> -->
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" />
+<link rel="stylesheet" href="css/transition-illustrations.css" />
+<link rel="stylesheet" href="css/home-ui-tokens.css">
+<link rel="stylesheet" href="css/interface-motion.css">
+<link rel="stylesheet" href="css/home-polish.css">
+<link rel="stylesheet" href="css/home-menu-motion.css">
+<link rel="stylesheet" href="css/home-layers.css">
+<style>
+#reviewControls {position:fixed;left:20px;bottom:80px;z-index:99999;background:#07121aee;color:#effaff;padding:12px 16px;font:18px/1.5 sans-serif;max-width:1100px;border:1px solid #97c1d5;}
+#reviewControls button,#reviewControls select {font:inherit;padding:4px 8px;margin:3px;color:#effaff;background:#203748;}
+body.title-review-paused #title,body.title-review-paused #title *,body.title-review-paused #title::before,body.title-review-paused #title::after,body.title-review-paused #title *::before,body.title-review-paused #title *::after {animation-play-state:paused!important;transition:none!important;}
+</style></head><body class="lobby interface-motion">
+<template id="titleReviewTemplate"><div id="app"><main id="viewport"><div id="title" class="home-composed" style="--home-travel: 848px;" data-home-phase="rest" data-home-wallpaper="snow-road">
+      <div class="home-scene" aria-hidden="true">
+        <div class="title-wallpaper-extension"></div>
+        <div class="title-bg"></div>
+        <div class="title-bg title-bg-alternate"></div>
+      </div>
+      <button type="button" class="home-tool home-wallpaper-view" id="btnTitleWallpaperView" aria-pressed="false" title="隐藏界面，只看壁纸">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>只看壁纸</span>
+      </button>
+      <div class="home-edge-band home-edge-band-top" aria-hidden="true">
+        <div class="home-band-track">
+          <span class="home-band-lane"><span>冬日猜想 <b>/</b> CODE NAME 7</span></span>
+        </div>
+      </div>
+      <div class="home-depth" aria-hidden="true"></div><div class="home-near-snow" aria-hidden="true"><i class="" aria-hidden="true" style="--x: 12%; --size: 7px; --duration: 13s; --delay: -3s;"></i><i class="" aria-hidden="true" style="--x: 28%; --size: 9px; --duration: 16s; --delay: -10s;"></i><i class="" aria-hidden="true" style="--x: 43%; --size: 6px; --duration: 14s; --delay: -7s;"></i><i class="" aria-hidden="true" style="--x: 69%; --size: 8px; --duration: 18s; --delay: -14s;"></i><i class="" aria-hidden="true" style="--x: 83%; --size: 10px; --duration: 15s; --delay: -5s;"></i><i class="" aria-hidden="true" style="--x: 93%; --size: 6px; --duration: 19s; --delay: -17s;"></i></div><div class="home-mist" aria-hidden="true"></div><div class="home-grain" aria-hidden="true"></div><div class="home-flash" aria-hidden="true"></div><div class="home-slash" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%" focusable="false"><defs><linearGradient id="hlSlashFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080a0e" stop-opacity="0"></stop><stop offset=".22" stop-color="#080a0e" stop-opacity=".62"></stop><stop offset=".8" stop-color="#080a0e" stop-opacity=".62"></stop><stop offset="1" stop-color="#080a0e" stop-opacity="0"></stop></linearGradient></defs><polygon points="24,0 100,0 100,100 0,100" fill="url(#hlSlashFill)"></polygon><line class="hs-edge" pathLength="1" x1="24" y1="0" x2="0" y2="100" stroke="#ffffff" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"></line><line class="hs-accent" x1="24" y1="0" x2="18.96" y2="21" stroke="#ffd23c" stroke-width="2" vector-effect="non-scaling-stroke"></line></svg></div><div class="home-beams" aria-hidden="true"></div><div class="home-ghost" aria-hidden="true"><div class="home-ghost-track"><span>CODE NAME 7</span><span>CODE NAME 7</span><span>CODE NAME 7</span><span>CODE NAME 7</span></div></div><i class="home-corner home-corner-tl" aria-hidden="true"></i><i class="home-corner home-corner-tr" aria-hidden="true"></i><i class="home-corner home-corner-bl" aria-hidden="true"></i><i class="home-corner home-corner-br" aria-hidden="true"></i><div class="title-inner">
+        <section class="home-command" aria-label="主菜单">
+        <header class="home-brand">
+          <h1 class="home-wordmark"><img src="assets/title-wordmark.png" alt="升格会的冬日猜想" draggable="false"></h1>
+        <i class="home-spark" aria-hidden="true" style="--x: 8%; --y: 18%; --t: 0s; --s: 1;"></i><i class="home-spark" aria-hidden="true" style="--x: 92%; --y: 14%; --t: 1.3s; --s: 0.8;"></i><i class="home-spark" aria-hidden="true" style="--x: 96%; --y: 64%; --t: 2.4s; --s: 1;"></i><i class="home-spark" aria-hidden="true" style="--x: 3%; --y: 70%; --t: 3.1s; --s: 0.7;"></i><i class="home-spark" aria-hidden="true" style="--x: 50%; --y: 2%; --t: 0.7s; --s: 0.6;"></i><i class="home-spark" aria-hidden="true" style="--x: 78%; --y: 88%; --t: 1.9s; --s: 0.8;"></i></header>
+        <nav class="home-primary" aria-label="开始与指南">
+          <button class="home-plate home-start" id="mStart" title="进入城市">
+            <svg class="home-line-icon home-city-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M5 34V17h8V9h14v8h8v17M13 17h14M16 34v-9a4 4 0 0 1 8 0v9M4 34h32M17 13h6M9 22v3M31 22v3M17 4v5M23 4v5"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">进入城市</span></span>
+            <svg class="home-arrow" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h21M18 7l9 9-9 9" fill="none" stroke="currentColor" stroke-width="2.5"></path></svg>
+          <i class="home-hover-glow" aria-hidden="true"></i><i class="home-sheen" aria-hidden="true"></i><span class="home-index" aria-hidden="true">01</span></button>
+          <button class="home-plate home-guide" id="mGuide" title="生存指南" aria-label="打开生存指南">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 7c4-2 8-2 12 0 4-2 8-2 12 0v20c-4-2-8-2-12 0-4-2-8-2-12 0zM16 7v20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">生存指南</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">02</span><i class="home-sweep" aria-hidden="true"></i></button>
+        </nav>
+        </section>
+        <aside class="home-support" aria-label="收藏与系统">
+        <nav class="home-secondary home-collection" aria-label="收藏">
+          <button class="home-plate home-ach" id="mAch" title="成就总览">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="12" r="7"></circle><path d="m16 8 1.2 2.5 2.8.4-2 1.9.5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-1.9 2.8-.4zM11 18l-2 10 7-4 7 4-2-10"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">成就总览</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">03</span><i class="home-sweep" aria-hidden="true"></i></button>
+          <button class="home-plate home-library" id="btnCardLib" title="照相馆">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10h6l2-4h8l2 4h6v17H4z"></path><circle cx="16" cy="18" r="5"></circle><path d="M24 13h1"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">照相馆</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">04</span><i class="home-sweep" aria-hidden="true"></i></button>
+        </nav>
+        <nav class="home-secondary home-system" aria-label="系统工具">
+          <button class="home-plate home-settings" id="mSettings" title="设置">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20M12 4v8M22 12v8M11 20v8"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">设置</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">05</span><i class="home-sweep" aria-hidden="true"></i></button>
+          <button class="home-plate home-makers" id="mCredits" title="制作名单" aria-haspopup="dialog" aria-controls="homeCredits">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="10" r="4"></circle><path d="M4 27v-4a8 8 0 0 1 16 0v4M22 7a4 4 0 0 1 0 8M24 19a7 7 0 0 1 4 6v2"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">制作名单</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">06</span><i class="home-sweep" aria-hidden="true"></i></button>
+          <button class="home-plate home-exit" id="btnTitleExit" title="退出游戏" aria-label="退出游戏">
+            <svg class="home-line-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13 5h13v22H13M4 16h16M9 10l-6 6 6 6"></path></svg>
+            <span class="home-button-copy"><span class="home-button-cn">退出游戏</span></span>
+          <i class="home-hover-glow" aria-hidden="true"></i><span class="home-index" aria-hidden="true">07</span><i class="home-sweep" aria-hidden="true"></i></button>
+        </nav>
+        </aside>
+        <footer class="home-footer">
+          <div class="home-tools">
+            <button class="home-tool" id="btnTitleMute" title="音效 / 背景乐开关" aria-label="音效 / 背景乐开关">
+              <svg class="ic-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5l-5 4zM16 9a5 5 0 0 1 0 6M19 6a9 9 0 0 1 0 12"></path></svg>
+              <svg class="ic-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5l-5 4zM16 9l6 6M22 9l-6 6"></path></svg>
+            </button>
+            <button class="home-tool home-inbox" id="mInbox" title="留言信箱">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v13H3zM3 6l9 7 9-7"></path></svg><span>留言信箱</span>
+            </button>
+            <button type="button" class="home-tool home-wallpaper" id="btnTitleWallpaper" title="切换壁纸" aria-label="切换壁纸，当前第1张，共1张">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 16l5-5 4 4 4-6 5 7"></path><circle cx="8" cy="9" r="1"></circle></svg><span>壁纸 <b data-wallpaper-count="" aria-live="polite">1/2</b></span>
+            </button>
+          </div>
+        </footer>
+        <dialog class="home-credits-dialog" id="homeCredits" aria-labelledby="homeCreditsTitle">
+          <form method="dialog"><button class="home-credits-back" aria-label="返回主页"><span aria-hidden="true">←</span> 返回主页</button></form>
+          <header class="credits-heading"><small>CREDITS</small><h2 id="homeCreditsTitle">制作名单</h2></header>
+          <h3 class="credits-section-title">制作团队</h3>
+          <dl class="home-makers-list">
+            <div><dt>制作人</dt><dd>太平</dd></div>
+            <div><dt>游戏设计师</dt><dd>创</dd></div>
+          </dl>
+          <h3 class="credits-section-title">特别鸣谢</h3>
+          <dl class="home-makers-list credits-thanks">
+            <div><dt>精神支柱</dt><dd>Tang</dd></div>
+          </dl>
+          <h3 class="credits-section-title">音效署名</h3>
+          <p class="credits-audio">抽牌：<a href="https://freesound.org/people/f4ngy/sounds/240777/" target="_blank" rel="noopener noreferrer">Dealing Card — f4ngy（Freesound）</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>。音频文件未处理，仅降低播放音量。</p>
+          <section class="credits-models" aria-labelledby="creditsModelsTitle">
+          <h3 class="credits-section-title" id="creditsModelsTitle">额外感谢 <span class="credits-model-label">大模型</span></h3>
+          <ul class="credits-extra-thanks" aria-label="额外感谢的大模型">
+            <li>Gpt</li><li>Glm</li><li>Mimo</li><li>Claude</li><li>Deepseek</li>
+          </ul>
+          </section>
+        </dialog>
+        <div class="title-snow home-snow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div id="warmupTip" hidden="" aria-live="polite">
+          <div class="warmup-head"><span class="warmup-spark" aria-hidden="true">❄</span>首用资源准备中 <b id="warmupNum">0/0</b></div>
+          <div class="warmup-reason">正在准备通用卡框与常见场景</div>
+          <div class="warmup-track"><div id="warmupBar"></div></div>
+        </div>
+        <p class="title-ver" hidden="">ASCENSION COUNCIL · <span id="gameVersion">v…</span></p>
+      <div class="home-readout" aria-hidden="true"><i class="home-readout-dot"></i><span>LOCAL <b data-clock="">00:00:00</b></span><span>ASCENSION COUNCIL <b data-version="">ISOLATED</b></span></div><div class="home-rail" aria-hidden="true"><span class="home-rail-text">Winter Speculation · Ascension Council · 2026</span><span class="home-rail-ruler"></span></div></div>
+      <!-- 开发者节点测试面板：仅「设置 → 开发者模式」开启后可见，一键跳到各类节点
+           （隐藏 = 普通玩家看不到；测试局不占档位、不写存档） -->
+      <div id="titleDev" class="title-dev" hidden="">
+        <div class="td-head"><span>[[icon:tools]] 节点测试</span><span class="td-en">NODE TEST</span></div>
+        <div class="td-grid">
+          <button type="button" data-dev-node="battle">遭遇战</button>
+          <button type="button" data-dev-node="boss">BOSS 战</button>
+          <button type="button" data-dev-node="shop">商店</button>
+          <button type="button" data-dev-node="event">事件</button>
+          <button type="button" data-dev-node="chest-small">小宝箱</button>
+          <button type="button" data-dev-node="chest-medium">中宝箱</button>
+          <button type="button" data-dev-node="chest-large">大宝箱</button>
+          <button type="button" data-dev-node="fire">火堆</button>
+          <button type="button" data-dev-node="altar">祭坛</button>
+        </div>
+        <p class="td-tip">开发者模式专属 · 测试局不写入存档</p>
+      </div>
+    </div></main></div></template>
+<section id="reviewControls"><div>DEV 首页隔离：仅真实首页 DOM / CSS / 图片；菜单无游戏功能。</div><div>无游戏启动、音频、存档、Canvas、预热目录。暂停仅冻结 CSS 动画，保留模糊 / 滤镜。</div>
+<button id="pauseDecorations" type="button" aria-pressed="false">暂停首页装饰 CSS</button>
+<label>壁纸 <select id="reviewWallpaper"><option value="snow-road">雪路（默认）</option><option value="baita-heixiang">白塔黑箱</option></select></label>
+<output id="reviewStatus">仅开发服务器可运行</output></section>
+<script type="module" src="/dev/title-resource-review.js"></script></body></html>

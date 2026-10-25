@@ -1,0 +1,79 @@
+{
+  "cards": [
+    {
+      "aria": null,
+      "class": "reward-card",
+      "filter": "none",
+      "motion": null,
+      "outline": "rgb(233, 238, 231) none 2.4px",
+      "rect": {
+        "h": 279.9875183105469,
+        "w": 186.6625061035156,
+        "x": 343.3374938964844,
+        "y": 250.1999969482422
+      },
+      "text": "0\n    \n    \n    \n    \n    装备稀有\n    \n    灵符\n    对战开始时，你额外抽 2 张牌。\n    抽 2\n    \n   ",
+      "transform": "none",
+      "unitClass": "reward-unit"
+    },
+    {
+      "aria": null,
+      "class": "reward-card",
+      "filter": "none",
+      "motion": null,
+      "outline": "rgb(233, 238, 231) none 2.4px",
+      "rect": {
+        "h": 279.9875183105469,
+        "w": 186.6625061035156,
+        "x": 544.6625366210938,
+        "y": 250.1999969482422
+      },
+      "text": "0\n    \n    \n    \n    \n    装备古朴\n    \n    长剑\n    你的攻击力增加 1 点。\n    \n    \n    \n    \n",
+      "transform": "none",
+      "unitClass": "reward-unit"
+    },
+    {
+      "aria": null,
+      "class": "reward-card",
+      "filter": "none",
+      "motion": null,
+      "outline": "rgb(233, 238, 231) none 2.4px",
+      "rect": {
+        "h": 279.9875183105469,
+        "w": 186.6625061035156,
+        "x": 745.9874877929688,
+        "y": 250.1999969482422
+      },
+      "text": "0\n    \n    \n    \n    \n    装备稀有\n    \n    圣杖\n    主动技能：净化自身，你回复 5 点生命。\n    回 5\n    ",
+      "transform": "none",
+      "unitClass": "reward-unit"
+    }
+  ],
+  "footer": [
+    {
+      "disabled": false,
+      "text": "收下"
+    },
+    {
+      "disabled": false,
+      "text": "整理背包"
+    },
+    {
+      "disabled": false,
+      "text": "放弃剩余卡牌"
+    },
+    {
+      "disabled": false,
+      "text": "返回总览"
+    },
+    {
+      "disabled": false,
+      "text": "全部收下"
+    }
+  ],
+  "viewport": {
+    "dpr": 1.25,
+    "h": 720,
+    "w": 1280
+  }
+}

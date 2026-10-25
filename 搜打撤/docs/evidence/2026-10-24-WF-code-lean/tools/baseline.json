@@ -1,0 +1,32 @@
+[
+  {
+    "path": "scripts/build-artifact-manifest.mjs",
+    "bytes": 6655,
+    "lines": 95,
+    "sha256": "09ab048c5ad7d4cad3b638513ab00cf98a1e8c92ef35c16c4a06e961b1257f26"
+  },
+  {
+    "path": "scripts/runtime-asset-aliases.mjs",
+    "bytes": 2541,
+    "lines": 47,
+    "sha256": "ec4b5c7b4f1065201937f3a1a1d6c0a2cd9d3eb30a4211336576e58dc01d5ccc"
+  },
+  {
+    "path": "scripts/perf-budget.cjs",
+    "bytes": 9475,
+    "lines": 175,
+    "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+  },
+  {
+    "path": "scripts/vectorize_node_icons.py",
+    "bytes": 7503,
+    "lines": 182,
+    "sha256": "ede949ae24828d034a8e1fb66f92d22203189604cd38b0562484a6a64b1c4bcd"
+  },
+  {
+    "path": "scripts/vectorize_winter_ui.py",
+    "bytes": 4386,
+    "lines": 112,
+    "sha256": "e8fa547c10983d5394d4b22697beb7b46f23790de2113dbcfd615acee949e0fc"
+  }
+]

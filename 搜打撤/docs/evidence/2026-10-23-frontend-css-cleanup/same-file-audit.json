@@ -1,0 +1,424 @@
+[
+  {
+    "file": "game/css/archive-back.css",
+    "beforeSha256": "ad43a677b1235bfdf833592ba9b81b9e484938e03d060986f58cf05cac995d15",
+    "afterSha256": "7c12f096414c097deedd0cf3bb42dcd1a2345318ad5352fe8ad97330189d9b54",
+    "removed": [],
+    "empty": [
+      {
+        "line": 29,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp .hub-back"
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "beforeSha256": "69aa653d50e27a8afbd676fdef10d69a59e0a99db289d82b3c1b481758063b76",
+    "afterSha256": "99121d9bd99b40bff5c348bc58de96c891a30f5710c953bf9ff6207e65077ed1",
+    "removed": [
+      {
+        "line": 216,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body .hub-card",
+        "declaration": "border-color:var(--camp-line)",
+        "winners": [
+          {
+            "line": 228,
+            "declaration": "border:0"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-blue:#29758a",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-blue:#b55346"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-line:#cbd7df",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-line:#313a4526"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-sub:#566e7b",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-sub:#717980"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-ink:#223946",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-ink:#252d36"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-sheet:#fbfcfd",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-sheet:#f5f5f0"
+          }
+        ]
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]",
+        "declaration": "--camp-paper:#edf1f4",
+        "winners": [
+          {
+            "line": 202,
+            "declaration": "--camp-paper:#e9e9e4"
+          }
+        ]
+      },
+      {
+        "line": 22,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell.empty",
+        "declaration": "border-color:#d6e0e5",
+        "winners": [
+          {
+            "line": 236,
+            "declaration": "border-color:var(--camp-line)"
+          }
+        ]
+      },
+      {
+        "line": 22,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell.empty",
+        "declaration": "background:#f0f4f6",
+        "winners": [
+          {
+            "line": 236,
+            "declaration": "background:var(--camp-paper)"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 216,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body .hub-card"
+      },
+      {
+        "line": 30,
+        "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=\"true\"]"
+      },
+      {
+        "line": 22,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell.empty"
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "beforeSha256": "221270f9c62bf9d399520303c5361bfa97d2c6ddec61c2f55b3812cf94383f2b",
+    "afterSha256": "075f2144f6abd7b830c8e35090b80e417a79fd8d231b4e46a7891f707f3e96c1",
+    "removed": [
+      {
+        "line": 90,
+        "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+        "declaration": "padding: 17px 24px",
+        "winners": [
+          {
+            "line": 247,
+            "declaration": "padding: 14px 25px"
+          }
+        ]
+      },
+      {
+        "line": 90,
+        "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+        "declaration": "min-height: 69px",
+        "winners": [
+          {
+            "line": 247,
+            "declaration": "min-height: 58px"
+          }
+        ]
+      },
+      {
+        "line": 90,
+        "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+        "declaration": "width: 100%",
+        "winners": [
+          {
+            "line": 247,
+            "declaration": "width: 300px"
+          }
+        ]
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "beforeSha256": "ed29d7a79dac7607adb301081f0ffb2948123c2b1e1560cd65cedbc6af69b688",
+    "afterSha256": "27ace941f70fc7b408a640b0e1309346ec05dfa073540d7b3a08f9484d1bd678",
+    "removed": [
+      {
+        "line": 162,
+        "selector": "#overlay .pg.cls-pool-page .cls-foot .ov-btn,\n#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn",
+        "declaration": "border-radius:0",
+        "winners": [
+          {
+            "line": 222,
+            "declaration": "border-radius:0"
+          },
+          {
+            "line": 217,
+            "declaration": "border-radius:0"
+          }
+        ]
+      },
+      {
+        "line": 157,
+        "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row",
+        "declaration": "border-color:rgba(170,176,180,.14)",
+        "winners": [
+          {
+            "line": 185,
+            "declaration": "border:1px solid rgba(202,203,204,.15)"
+          }
+        ]
+      },
+      {
+        "line": 156,
+        "selector": "#overlay .pg.cls-pool-page .pool-side .pv-head",
+        "declaration": "padding-bottom:12px",
+        "winners": [
+          {
+            "line": 178,
+            "declaration": "padding:0 0 13px"
+          }
+        ]
+      },
+      {
+        "line": 156,
+        "selector": "#overlay .pg.cls-pool-page .pool-side .pv-head",
+        "declaration": "margin-bottom:14px",
+        "winners": [
+          {
+            "line": 178,
+            "declaration": "margin:0 0 16px"
+          }
+        ]
+      },
+      {
+        "line": 155,
+        "selector": "#overlay .pg.cls-pool-page .pool-side",
+        "declaration": "border-color:rgba(170,176,180,.17)",
+        "winners": [
+          {
+            "line": 177,
+            "declaration": "border:1px solid rgba(200,202,203,.22)"
+          }
+        ]
+      },
+      {
+        "line": 152,
+        "selector": "#overlay .pg.cls-pool-page .pg-head",
+        "declaration": "border-color:rgba(170,176,180,.14)",
+        "winners": [
+          {
+            "line": 167,
+            "declaration": "border:0"
+          }
+        ]
+      },
+      {
+        "line": 114,
+        "selector": "#overlay .pg.cls-pool-page .cls-foot .pool-pager",
+        "declaration": "margin-right:auto",
+        "winners": [
+          {
+            "line": 216,
+            "declaration": "margin:0"
+          }
+        ]
+      },
+      {
+        "line": 71,
+        "selector": "#overlay .pg.cls-pool-page .pool-archive-title .section-kicker",
+        "declaration": "margin-bottom:5px",
+        "winners": [
+          {
+            "line": 169,
+            "declaration": "margin:0 0 7px"
+          }
+        ]
+      },
+      {
+        "line": 46,
+        "selector": "#overlay .cls2-face",
+        "declaration": "border-color:rgba(145,155,162,.52)",
+        "winners": [
+          {
+            "line": 145,
+            "declaration": "border:1px solid rgba(170,176,180,.28)"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 161,
+        "selector": "#overlay .pg.cls-pool-page .cls-foot .ov-btn,\n#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn"
+      },
+      {
+        "line": 157,
+        "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row"
+      },
+      {
+        "line": 156,
+        "selector": "#overlay .pg.cls-pool-page .pool-side .pv-head"
+      },
+      {
+        "line": 152,
+        "selector": "#overlay .pg.cls-pool-page .pg-head"
+      },
+      {
+        "line": 46,
+        "selector": "#overlay .cls2-face"
+      }
+    ]
+  },
+  {
+    "file": "game/css/photo-studio-unified.css",
+    "beforeSha256": "e7c3c596578c40a4b6bc2b29b5f75bfa2c1c6346c2fbe18ca740834c1a07eb48",
+    "afterSha256": "b864e9334795093bdba0662bbb5695ab165ea0653b90bc8956d25ea36c9a0007",
+    "removed": [
+      {
+        "line": 563,
+        "selector": "body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after",
+        "declaration": "transition:none!important",
+        "winners": [
+          {
+            "line": 686,
+            "declaration": "transition:none!important"
+          }
+        ]
+      },
+      {
+        "line": 313,
+        "selector": "body.cardlib-open #overlay .studio-archive .studio-search,\r\nbody.cardlib-open #overlay .studio-archive .studio-select-shell",
+        "declaration": "background:#f4f4f4!important",
+        "winners": [
+          {
+            "line": 589,
+            "declaration": "background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c292540!important"
+          },
+          {
+            "line": 592,
+            "declaration": "background:transparent!important"
+          }
+        ]
+      },
+      {
+        "line": 313,
+        "selector": "body.cardlib-open #overlay .studio-archive .studio-search,\r\nbody.cardlib-open #overlay .studio-archive .studio-select-shell",
+        "declaration": "border:1px solid #abadae!important",
+        "winners": [
+          {
+            "line": 589,
+            "declaration": "border:1px solid #cbd3be30!important"
+          },
+          {
+            "line": 592,
+            "declaration": "border:0!important"
+          }
+        ]
+      },
+      {
+        "line": 312,
+        "selector": "body.cardlib-open #overlay .studio-archive .studio-search,\r\nbody.cardlib-open #overlay .studio-archive .studio-select-shell",
+        "declaration": "min-height:44px",
+        "winners": [
+          {
+            "line": 589,
+            "declaration": "min-height:var(--sa-control-height)"
+          },
+          {
+            "line": 592,
+            "declaration": "min-height:var(--sa-control-height)"
+          }
+        ]
+      },
+      {
+        "line": 138,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term]",
+        "declaration": "color:#2d6561 !important",
+        "winners": [
+          {
+            "line": 769,
+            "declaration": "color:#2d6561!important"
+          }
+        ]
+      },
+      {
+        "line": 119,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+        "declaration": "color:#30302e!important",
+        "winners": [
+          {
+            "line": 215,
+            "declaration": "color:#30302e!important"
+          }
+        ]
+      },
+      {
+        "line": 118,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+        "declaration": "line-height:1.4",
+        "winners": [
+          {
+            "line": 215,
+            "declaration": "line-height:1.35"
+          }
+        ]
+      },
+      {
+        "line": 117,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+        "declaration": "font-size:26px",
+        "winners": [
+          {
+            "line": 215,
+            "declaration": "font-size:30px"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 563,
+        "selector": "body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after"
+      },
+      {
+        "line": 138,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term]"
+      }
+    ]
+  }
+]

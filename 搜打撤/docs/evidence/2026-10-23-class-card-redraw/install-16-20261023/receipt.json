@@ -1,0 +1,1304 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-imitate",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-imitate.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-imitate-source.png",
+        "bytes": 2382208,
+        "sha256": "946b7629faefb4bb57302cfe9299f9933e899f3f4d2deed1d597a00c5d48e0b0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-imitate-full-before.webp",
+          "bytes": 41340,
+          "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-imitate-thumb-before.webp",
+          "bytes": 10180,
+          "sha256": "d931d5d946ae3c3c34c7cec25e1e444a9bc10540f4531aac0724f5fd1e4a36bc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-imitate.webp",
+          "bytes": 253376,
+          "sha256": "ed19397062e90a129ac9b70b3efd1a1ff963a7bd7a2aed0014a6b7bcdca661f2",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-imitate.webp",
+          "bytes": 40188,
+          "sha256": "2b2c5c30139cca7bd42c2d37bc7efac39a87a6eab1e90ef8b5e70718d60d4771",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-imitate.webp",
+            "ext": "webp",
+            "bytes": 41340,
+            "sha256": "da084556b2b4dc1d556f43595af6e7a6c23920dc561100e02056095c29f841de",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-imitate.webp",
+            "ext": "webp",
+            "bytes": 253376,
+            "sha256": "ed19397062e90a129ac9b70b3efd1a1ff963a7bd7a2aed0014a6b7bcdca661f2",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-imitate.webp",
+            "ext": "webp",
+            "bytes": 10180,
+            "sha256": "d931d5d946ae3c3c34c7cec25e1e444a9bc10540f4531aac0724f5fd1e4a36bc",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-imitate.webp",
+            "ext": "webp",
+            "bytes": 40188,
+            "sha256": "2b2c5c30139cca7bd42c2d37bc7efac39a87a6eab1e90ef8b5e70718d60d4771",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-ghostblade",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-ghostblade.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-ghostblade-source.png",
+        "bytes": 2019949,
+        "sha256": "108193497253bdb56d45ca68aa88bac0fec312f58d918859ad2231d89268e9f0"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-ghostblade-full-before.webp",
+          "bytes": 69352,
+          "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-ghostblade-thumb-before.webp",
+          "bytes": 17364,
+          "sha256": "6a3613ae27ccbf42a6eff210731e42e2ede147269fa7da072d096de99af85056"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-ghostblade.webp",
+          "bytes": 147914,
+          "sha256": "90085ad68069c27ac690fd545b6d4e170f656819e7e4e6e6434b8fb43e5d4c52",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-ghostblade.webp",
+          "bytes": 24564,
+          "sha256": "1ce758ec79fa562816563497348279b1b72e1949d5def47aaa2dbaafd107b2a6",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-ghostblade.webp",
+            "ext": "webp",
+            "bytes": 69352,
+            "sha256": "1d69874fee4e249aa030270dede0ce9dcfd52132607aca02fc15c76054d6d302",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-ghostblade.webp",
+            "ext": "webp",
+            "bytes": 147914,
+            "sha256": "90085ad68069c27ac690fd545b6d4e170f656819e7e4e6e6434b8fb43e5d4c52",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+            "ext": "webp",
+            "bytes": 17364,
+            "sha256": "6a3613ae27ccbf42a6eff210731e42e2ede147269fa7da072d096de99af85056",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+            "ext": "webp",
+            "bytes": 24564,
+            "sha256": "1ce758ec79fa562816563497348279b1b72e1949d5def47aaa2dbaafd107b2a6",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-swordimmortal",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-swordimmortal.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-swordimmortal-source.png",
+        "bytes": 2031379,
+        "sha256": "8f4c767d557c8aa543ca2fe5b0c44a16320fd81f16202988bba34ebeb4e04b82"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-swordimmortal-full-before.webp",
+          "bytes": 42246,
+          "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-swordimmortal-thumb-before.webp",
+          "bytes": 9960,
+          "sha256": "d5f120ff27b4da0f53aa3366cf1b2d395a255b166103df6234482f4e72955615"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 171396,
+          "sha256": "855ddd9b677b0eccccfd48d10f0c28564a680f082b1c175fc7b4aabfc41eb4ae",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 27328,
+          "sha256": "a6d57aa268669d1eb6f79e8c52430673bec219633ab252886445c6b2cf414c54",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 42246,
+            "sha256": "361d7b74b61be9a8e418c39a1cabd8ec10a648d409a7409f0b8c982cd3088c97",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 171396,
+            "sha256": "855ddd9b677b0eccccfd48d10f0c28564a680f082b1c175fc7b4aabfc41eb4ae",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 9960,
+            "sha256": "d5f120ff27b4da0f53aa3366cf1b2d395a255b166103df6234482f4e72955615",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 27328,
+            "sha256": "a6d57aa268669d1eb6f79e8c52430673bec219633ab252886445c6b2cf414c54",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-goldencicada.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-goldencicada-source.png",
+        "bytes": 2100493,
+        "sha256": "f30f337d6b6737d6f8489de315f7ff635ee2f4048c9050e9de5175f6a82a58e9"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-goldencicada-full-before.webp",
+          "bytes": 44820,
+          "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-goldencicada-thumb-before.webp",
+          "bytes": 12112,
+          "sha256": "486279fa770bd45af128779c5acbb33345b4e1aae411e13a5a0e2cffbb7af63d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-goldencicada.webp",
+          "bytes": 178378,
+          "sha256": "e020b882481d560bbf4e5b16e59b85e5f3600433667abdb9525e277ce115a26a",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-goldencicada.webp",
+          "bytes": 27388,
+          "sha256": "9d90d6d28eb8b7b029dc1270391d357c83ce287f64dc2306c57a29a9f8e4c8c5",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-goldencicada.webp",
+            "ext": "webp",
+            "bytes": 44820,
+            "sha256": "989d38efcc86dc8f464070c80397280a48d48ac3217ca8defd5c37c2e1dcdbaa",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-goldencicada.webp",
+            "ext": "webp",
+            "bytes": 178378,
+            "sha256": "e020b882481d560bbf4e5b16e59b85e5f3600433667abdb9525e277ce115a26a",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+            "ext": "webp",
+            "bytes": 12112,
+            "sha256": "486279fa770bd45af128779c5acbb33345b4e1aae411e13a5a0e2cffbb7af63d",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+            "ext": "webp",
+            "bytes": 27388,
+            "sha256": "9d90d6d28eb8b7b029dc1270391d357c83ce287f64dc2306c57a29a9f8e4c8c5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-meteorrain",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-meteorrain.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-meteorrain-source.png",
+        "bytes": 2049486,
+        "sha256": "658bb5b148d5dd9e22c215bf3d9c8eadf386fa3f76df220738472318279a51e5"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-meteorrain-full-before.webp",
+          "bytes": 37134,
+          "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-meteorrain-thumb-before.webp",
+          "bytes": 9056,
+          "sha256": "3f008936a1b7446e5d393898d21c6b377bc7175998872b9d9dd7ecf3e1dd30e5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-meteorrain.webp",
+          "bytes": 164424,
+          "sha256": "c062ee0cef787f41426b5435a363cd9f90bcce6f70a57237f00b0f19ad6336b7",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-meteorrain.webp",
+          "bytes": 27490,
+          "sha256": "83865302550a1e37c042d5e8c0f031c67812aa3bac3eb6324f56a6b56725f04b",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-meteorrain.webp",
+            "ext": "webp",
+            "bytes": 37134,
+            "sha256": "35683467cbb9eaa5a0f9f6ebcf7a76e48ca392a31e746391c9b8ed1e1e18a5ce",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-meteorrain.webp",
+            "ext": "webp",
+            "bytes": 164424,
+            "sha256": "c062ee0cef787f41426b5435a363cd9f90bcce6f70a57237f00b0f19ad6336b7",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+            "ext": "webp",
+            "bytes": 9056,
+            "sha256": "3f008936a1b7446e5d393898d21c6b377bc7175998872b9d9dd7ecf3e1dd30e5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+            "ext": "webp",
+            "bytes": 27490,
+            "sha256": "83865302550a1e37c042d5e8c0f031c67812aa3bac3eb6324f56a6b56725f04b",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-stealth",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-stealth.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-stealth-source.png",
+        "bytes": 2186345,
+        "sha256": "8d081debff40082f3eba2fe356a91c86998bfc1f370387ebccaeb103372aed3a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-stealth-full-before.webp",
+          "bytes": 41548,
+          "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-stealth-thumb-before.webp",
+          "bytes": 10254,
+          "sha256": "9c58567525164e5e17342ee552d5a01a05cb1bf26604ae0b489a3216f137fc0c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-stealth.webp",
+          "bytes": 154290,
+          "sha256": "aff54b6546f9b25c70a5cee72dc7f9f6f10c5890a3a5f1016a89715b628d6591",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-stealth.webp",
+          "bytes": 21310,
+          "sha256": "f60798c3a58c14515f6c8b344e26c81db56e4d119fc846c78c3b453df2aa9f88",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-stealth.webp",
+            "ext": "webp",
+            "bytes": 41548,
+            "sha256": "4838f19d1edf9976d314a9a73bb9c3f6400e147d85298a01fe8f209985c21ee5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-stealth.webp",
+            "ext": "webp",
+            "bytes": 154290,
+            "sha256": "aff54b6546f9b25c70a5cee72dc7f9f6f10c5890a3a5f1016a89715b628d6591",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-stealth.webp",
+            "ext": "webp",
+            "bytes": 10254,
+            "sha256": "9c58567525164e5e17342ee552d5a01a05cb1bf26604ae0b489a3216f137fc0c",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-stealth.webp",
+            "ext": "webp",
+            "bytes": 21310,
+            "sha256": "f60798c3a58c14515f6c8b344e26c81db56e4d119fc846c78c3b453df2aa9f88",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-sneak",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-sneak.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-sneak-source.png",
+        "bytes": 2115057,
+        "sha256": "0544c9435b6e69f2767621f01cda761aab0b1bd710b3bdeec3265dd2f9742f6c"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-sneak-full-before.webp",
+          "bytes": 49586,
+          "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-sneak-thumb-before.webp",
+          "bytes": 12014,
+          "sha256": "30496faf3e32f94804872cfcb61c3e894e51c00b02bc65b5af01014d1e8f6877"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-sneak.webp",
+          "bytes": 186520,
+          "sha256": "fa0c5e9f09678fa87d1ec18e7567d3904cbfcd72835deae9634dd33eec9832dc",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-sneak.webp",
+          "bytes": 29714,
+          "sha256": "9c4a9ad1be9b121551177e3b7ade79f9ab242c0499b0344577f7384296f12939",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-sneak.webp",
+            "ext": "webp",
+            "bytes": 49586,
+            "sha256": "6a2305d4e03268c9126e8d7f762db00916b7564ef9418f718366068792c6ec16",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-sneak.webp",
+            "ext": "webp",
+            "bytes": 186520,
+            "sha256": "fa0c5e9f09678fa87d1ec18e7567d3904cbfcd72835deae9634dd33eec9832dc",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-sneak.webp",
+            "ext": "webp",
+            "bytes": 12014,
+            "sha256": "30496faf3e32f94804872cfcb61c3e894e51c00b02bc65b5af01014d1e8f6877",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-sneak.webp",
+            "ext": "webp",
+            "bytes": 29714,
+            "sha256": "9c4a9ad1be9b121551177e3b7ade79f9ab242c0499b0344577f7384296f12939",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-armup",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-armup.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-armup-source.png",
+        "bytes": 2436745,
+        "sha256": "99c42e0d1e3bcd34801907c2baebd77a8a82ebdbb8462df79d7d88d28d778d0f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-armup-full-before.webp",
+          "bytes": 162914,
+          "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-armup-thumb-before.webp",
+          "bytes": 19050,
+          "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-armup.webp",
+          "bytes": 260648,
+          "sha256": "31f626258960f8d83e980b9a045b33eb9747893d7e21f4cb4af233696cd79f8e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-armup.webp",
+          "bytes": 35158,
+          "sha256": "fcf7d8db9ec4ab5744f43cbb88959855b5a66823732c5b2df5578a915022889e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-armup-original-rough-20261005",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 162914,
+            "sha256": "869752a891dad1bb8074ef50f04849a27c84dfc34dbc1323ca1130b7f2c09d05",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 260648,
+            "sha256": "31f626258960f8d83e980b9a045b33eb9747893d7e21f4cb4af233696cd79f8e",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 19050,
+            "sha256": "e45a7111c364dda0e755af37c0430695bc235ca26861c746db4a574f6c8ac22e",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-armup.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 35158,
+            "sha256": "fcf7d8db9ec4ab5744f43cbb88959855b5a66823732c5b2df5578a915022889e",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-whirlwind.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-whirlwind-source.png",
+        "bytes": 2357038,
+        "sha256": "8b71ce0e5282218f15e58c84d1a665a16b76be160941f7cfd75047a5b849efad"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-whirlwind-full-before.webp",
+          "bytes": 149112,
+          "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-whirlwind-thumb-before.webp",
+          "bytes": 17962,
+          "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-whirlwind.webp",
+          "bytes": 234546,
+          "sha256": "4bb5b293785ac640f4690854ef9e789b8cb0f7c86b7ac582ab5f416968497609",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-whirlwind.webp",
+          "bytes": 36144,
+          "sha256": "18e9b6aa0164b1bdc52db9acaa25820ee71a96b80e61c3e3f2a024db13f423d7",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-whirlwind-original-rough-20261005",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 149112,
+            "sha256": "eae62f8946c0368b76866ca0291278fa523482e4b43931f9ebd41b729f767d18",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 234546,
+            "sha256": "4bb5b293785ac640f4690854ef9e789b8cb0f7c86b7ac582ab5f416968497609",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 17962,
+            "sha256": "b136632b1d7574395a49ae45af8b2d6e1d962962751c8fd00d305b8fd09ab30b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 36144,
+            "sha256": "18e9b6aa0164b1bdc52db9acaa25820ee71a96b80e61c3e3f2a024db13f423d7",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-bloodpoison.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-bloodpoison-source.png",
+        "bytes": 2072721,
+        "sha256": "0069cf1ccaf1592e1de9a7a7c65d6ab9f3619efed7fcb49bf029b09fb8e49bc1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-bloodpoison-full-before.webp",
+          "bytes": 104450,
+          "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-martial-tt7-bloodpoison-thumb-before.webp",
+          "bytes": 12972,
+          "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-bloodpoison.webp",
+          "bytes": 172000,
+          "sha256": "a5bcda36507a862fa6392edc87eaca94a2261945ddaff26dbb56d788554273dd",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-bloodpoison.webp",
+          "bytes": 28296,
+          "sha256": "d402fb80fd14c9f0354da5880c7119fac184ec31c2743848a15ec8f39eb69402",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "heixiang-tt7-bloodpoison-original-rough-20261005",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104450,
+            "sha256": "a33fd10407f47b90fa00e0edf2c3e0ab8dc88572702dbda2f1c2ec5236e4378b",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 172000,
+            "sha256": "a5bcda36507a862fa6392edc87eaca94a2261945ddaff26dbb56d788554273dd",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 12972,
+            "sha256": "ff86272069a5e864728934ac5a5f38b7a115883ea28539e3516030fd4a4454de",
+            "source": "docs/evidence/2026-10-05-WF-cards-22-fast/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 28296,
+            "sha256": "d402fb80fd14c9f0354da5880c7119fac184ec31c2743848a15ec8f39eb69402",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-bladebloom",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-bladebloom.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-bladebloom-source.png",
+        "bytes": 2298846,
+        "sha256": "14355a1fdf76cad6a7230ecc32a3007cbdbd3e291fb3738d3f7bf4df4c875361"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-bladebloom-full-before.webp",
+          "bytes": 154696,
+          "sha256": "07e0c8fc28f218372ade6a8b0d62bba2b20fbf50375bbe2e1133aeb77cdf0f0a"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-bladebloom-thumb-before.webp",
+          "bytes": 24348,
+          "sha256": "d88dcae8f4cdcc415662bcb4809494df78b5955c0497cbd000ad9e064a4dcd2f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-bladebloom.webp",
+          "bytes": 247696,
+          "sha256": "aad52acacbf4be52ea4e9ff677cee146dc41a4a66d917b2276a0e4162c76d464",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-bladebloom.webp",
+          "bytes": 37290,
+          "sha256": "e2c88823a3fd5e33f43a4bd2f37006793b1cb06debc577934c37f47600c0138f",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "bladebloom-original-rough-20261010",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 154696,
+            "sha256": "07e0c8fc28f218372ade6a8b0d62bba2b20fbf50375bbe2e1133aeb77cdf0f0a",
+            "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 247696,
+            "sha256": "aad52acacbf4be52ea4e9ff677cee146dc41a4a66d917b2276a0e4162c76d464",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 24348,
+            "sha256": "d88dcae8f4cdcc415662bcb4809494df78b5955c0497cbd000ad9e064a4dcd2f",
+            "source": "docs/evidence/2026-10-10-bladebloom/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 37290,
+            "sha256": "e2c88823a3fd5e33f43a4bd2f37006793b1cb06debc577934c37f47600c0138f",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-arcanescroll",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-arcanescroll.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-studio-expanded-tt7-arcanescroll-source.png",
+        "bytes": 1941884,
+        "sha256": "146d89a8853ce2b5b5e18c833865a237470a9842c32cb9ef99fd706e9caecbcf"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-studio-expanded-tt7-arcanescroll-full-before.webp",
+          "bytes": 70130,
+          "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-studio-expanded-tt7-arcanescroll-thumb-before.webp",
+          "bytes": 9996,
+          "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/studio-expanded/tt7-arcanescroll.webp",
+          "bytes": 146684,
+          "sha256": "b8fcddb09e417f54c0a2ee62642c07a743631fb83b84b8b6b7ddd0d25b411485",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+          "bytes": 21652,
+          "sha256": "0cce97fdc30188bdf181111ea200b46558664c5e68e7753d63639dff62563f3e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "studio-square-outpaint-20261011",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 70130,
+            "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+            "source": "docs/evidence/2026-10-11-studio-square-outpaint/receipt.json"
+          },
+          "after": {
+            "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 146684,
+            "sha256": "b8fcddb09e417f54c0a2ee62642c07a743631fb83b84b8b6b7ddd0d25b411485",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 9996,
+            "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+            "source": "docs/evidence/2026-10-11-studio-square-outpaint/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 21652,
+            "sha256": "0cce97fdc30188bdf181111ea200b46558664c5e68e7753d63639dff62563f3e",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-burnharvest",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-burnharvest.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-burnharvest-source.png",
+        "bytes": 2278466,
+        "sha256": "42bc4418a0a9f5357b672ca3a15c3ee92d82ab2e51fb16da800269f672c3edb6"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-burnharvest-full-before.webp",
+          "bytes": 108038,
+          "sha256": "9a5157d2bf216cf6422a2de011cb0859bd619569ae5554c25609bfa8ebe31ed3"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-burnharvest-thumb-before.webp",
+          "bytes": 13866,
+          "sha256": "a8d2b82fc376b6b863e1c9a0e2e484bf8b82e02f8041efa5e71ca3217c2ce5a3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-burnharvest.webp",
+          "bytes": 257096,
+          "sha256": "ef9f1608acafca3062164ba5cfd5e1379e671ec10c5afdf99680141f52532164",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-burnharvest.webp",
+          "bytes": 37868,
+          "sha256": "f08542332fe09ebe14c7a5af5938c0f3fba23d5b5fbd3a7050e29554044e18e6",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-burnharvest-original-rough-20261010",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 108038,
+            "sha256": "9a5157d2bf216cf6422a2de011cb0859bd619569ae5554c25609bfa8ebe31ed3",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 257096,
+            "sha256": "ef9f1608acafca3062164ba5cfd5e1379e671ec10c5afdf99680141f52532164",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 13866,
+            "sha256": "a8d2b82fc376b6b863e1c9a0e2e484bf8b82e02f8041efa5e71ca3217c2ce5a3",
+            "source": "docs/evidence/2026-10-10-three-spells-redraw/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 37868,
+            "sha256": "f08542332fe09ebe14c7a5af5938c0f3fba23d5b5fbd3a7050e29554044e18e6",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-flame-storm.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-flame-storm-source.png",
+        "bytes": 2287750,
+        "sha256": "40b4d11fef25ef4b20aa5e1e9d98c26903d1081b69e34392c8e83933cfca8dd3"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-flame-storm-full-before.webp",
+          "bytes": 139714,
+          "sha256": "c1c99ade6f1ab43412332cb56ff2950de4765f2c7dd1f735274036fae11a2e38"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-flame-storm-thumb-before.webp",
+          "bytes": 18256,
+          "sha256": "17b3134ce1b45fce977599598f50103be1dd4ce1c2c5c59f01f63dc9b2689955"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-flame-storm.webp",
+          "bytes": 261760,
+          "sha256": "f7da6822c1ec759be6e83ebfdd096dd4ea4dc7a265400367cfd4b65aa61461a1",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-flame-storm.webp",
+          "bytes": 38068,
+          "sha256": "caaba8fadc1f86b4c58a67e8d39cb7d5e7b49a1b73ca9aa5ad3d50f0da800710",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-flame-storm-original-rough-20261010",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 139714,
+            "sha256": "c1c99ade6f1ab43412332cb56ff2950de4765f2c7dd1f735274036fae11a2e38",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 261760,
+            "sha256": "f7da6822c1ec759be6e83ebfdd096dd4ea4dc7a265400367cfd4b65aa61461a1",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 18256,
+            "sha256": "17b3134ce1b45fce977599598f50103be1dd4ce1c2c5c59f01f63dc9b2689955",
+            "source": "docs/evidence/2026-10-10-petal-fire-storm/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 38068,
+            "sha256": "caaba8fadc1f86b4c58a67e8d39cb7d5e7b49a1b73ca9aa5ad3d50f0da800710",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt7-twinfireball",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-twinfireball.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-twinfireball-source.png",
+        "bytes": 2073628,
+        "sha256": "05491ae2bff0e7cdf13975aaca8410b072cb303e9617362c6c9ca7a886d0e0de"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-twinfireball-full-before.webp",
+          "bytes": 104126,
+          "sha256": "c6af47e5342f3bee45e4855e5f0eab34915646d25c6863fca656a8ee559700e6"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt7-twinfireball-thumb-before.webp",
+          "bytes": 15556,
+          "sha256": "e13f8ff4046cc02eed58964de866d18e68a8b0d8400f3c71520d6a22ef33082f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt7-twinfireball.webp",
+          "bytes": 208684,
+          "sha256": "fbe6d0e9fe4185a3c8bcc8fc34962a8349087705e0e6704ad4ccc7cff6fdb707",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt7-twinfireball.webp",
+          "bytes": 32934,
+          "sha256": "de0b8144b7cd7a1fd9f07540f1c00b56b637d1eccf7ab2d93947e86df6e2d401",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt7-twinfireball-original-rough-20261010",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104126,
+            "sha256": "c6af47e5342f3bee45e4855e5f0eab34915646d25c6863fca656a8ee559700e6",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 208684,
+            "sha256": "fbe6d0e9fe4185a3c8bcc8fc34962a8349087705e0e6704ad4ccc7cff6fdb707",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 15556,
+            "sha256": "e13f8ff4046cc02eed58964de866d18e68a8b0d8400f3c71520d6a22ef33082f",
+            "source": "docs/evidence/2026-10-10-triple-change-glow/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 32934,
+            "sha256": "de0b8144b7cd7a1fd9f07540f1c00b56b637d1eccf7ab2d93947e86df6e2d401",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-nuke-ray.png",
+      "raw": {
+        "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-nuke-ray-source.png",
+        "bytes": 1976262,
+        "sha256": "e3976dee4fa6dba17101568679ca37b7114aedb7ae7de20c39c2b96851495918"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-nuke-ray-full-before.webp",
+          "bytes": 94466,
+          "sha256": "5cad5ea9163bd36b918cb44177ead495983ab730dc10f0c596be1baf4d7e8bff"
+        },
+        {
+          "path": ".tmp/imagegen/install-16-20261023/cards-spell-tt3-nuke-ray-thumb-before.webp",
+          "bytes": 12658,
+          "sha256": "a68ec65924bb508dbe90039272d8a0dc76f2906ecb1140692250439399f912d4"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt3-nuke-ray.webp",
+          "bytes": 130536,
+          "sha256": "04ce206e8378178c2edde8ee15485017b7b7490f6c95d5dd953d863deca25057",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt3-nuke-ray.webp",
+          "bytes": 17938,
+          "sha256": "28d910128f39fd217d7d98091e9bbf4045fc63fc0357907959b700b6148aec68",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "tt3-nuke-ray-original-rough-20261010",
+      "revision_after": "career-final-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 94466,
+            "sha256": "5cad5ea9163bd36b918cb44177ead495983ab730dc10f0c596be1baf4d7e8bff",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 130536,
+            "sha256": "04ce206e8378178c2edde8ee15485017b7b7490f6c95d5dd953d863deca25057",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 12658,
+            "sha256": "a68ec65924bb508dbe90039272d8a0dc76f2906ecb1140692250439399f912d4",
+            "source": "docs/evidence/2026-10-10-meteor-ray-abyss/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 17938,
+            "sha256": "28d910128f39fd217d7d98091e9bbf4045fc63fc0357907959b700b6148aec68",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1610,
+  "manifest_count_after": 1610
+}

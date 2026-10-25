@@ -1,0 +1,37 @@
+{
+  "task": "WF-fast-bug-sweep-1024",
+  "date": "2026-10-24",
+  "owner": "Friday",
+  "status": "complete-uncommitted",
+  "fixedRootCauses": 10,
+  "parts": { "parent": 1, "battle": 3, "run-save": 3, "tools-audio": 3 },
+  "parentFix": "长按结束回合在窗口失焦、按钮外松手或页面隐藏/inert后仍可能执行；取消临时监听并在到期复检页面状态，4条回归先红后绿。",
+  "sourceManifest": "source-manifest.json",
+  "checks": {
+    "integrated": { "files": 12, "passed": 101, "exitCode": 0, "log": "integrated-tests.log" },
+    "existingHoldCases": { "passed": 6, "notSelected": 11, "exitCode": 0, "log": "hold-existing.log" },
+    "typecheck": { "implementationCoverage": "622/622", "exitCode": 0, "log": "typecheck-final.log" },
+    "docs": { "exitCode": 0, "log": "docs-check.log" },
+    "syntaxAndGameData": "passed at initial audit; final typecheck and per-slice ESLint/diff checks passed",
+    "sliceRegressions": ["battle.json: 13 files / 131 passed", "run-save.json: 10 files / 104 passed", "tools-audio.json: 12 files / 144 passed"],
+    "broadScans": ["parent-baseline.log: 12 files / 121 passed", "ui-sweep.log: 33 files / 279 passed, 6 files / 17 failed", "run-save-tests.json: 166 files / 1745 passed, 8 files / 42 failed", "tools-audio.json: audio/agent baseline 33 files / 350 passed"]
+  },
+  "browser": {
+    "platform": "Codex current in-app browser, current window only",
+    "url": "http://127.0.0.1:5358/",
+    "input": "real clicks and keyboard; no hidden game state injection",
+    "passed": ["new save slot", "hub", "character choice", "departure with a selected warehouse card", "entry supplies", "map route", "real encounter battle", "battle settings return", "keyboard plays card and receives temporary cards"],
+    "consoleErrors": 0,
+    "screenshot": "battle-browser.png",
+    "notCovered": ["hold interruption edge cases", "chaos-eye boss selection", "multi-card free casting", "damaged save recovery"],
+    "notCoveredNote": "These branches have direct regression/integration tests; no browser pass claimed for them.",
+    "service": "own PID 10384 / exec 58007, stopped after command-line identity check; 5358 verified released; shared 5200 untouched",
+    "failedInitialOrigin": "127.0.0.2:5200 refused connection; localhost navigation hit stale browser error-page policy; independent 5358 service then used normally"
+  },
+  "remaining": [
+    "Broad scans retain failures in existing UI/restructuring fixtures; see each log. They are outside these fixes and not counted as repaired.",
+    "Global lint has one existing unused index in tests/chest-batch-receipt.test.js:46; own-file ESLint passed.",
+    "Additional impact-query regression has three failures from another task's dynamic-import fixture; see tools-audio.json.",
+    "No full-suite, build, commit or push performed. This batch does not assert the project has no remaining bugs."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "task": "WF-fast-bug-sweep-r3-1024/run-save",
+  "status": "one-new-root-source-frozen-targeted-passed",
+  "newRootCauses": 1,
+  "priorFixesNotCountedAgain": 6,
+  "sourceFiles": ["game/src/hub/collection.commands.js"],
+  "fixes": [
+    {
+      "id": "FAST-RS-R3-1",
+      "summary": "外观命令按旧请求或不可用素材ID应用运行态皮肤，导致显示与当前保存选择不一致。",
+      "reproductions": [
+        "真实Base/Art：casual成功→default成功→重放casual原request，Base和保存串仍default，但Art被旧收据切回casual。",
+        "真实Base/Art：casual之后选择已解锁但缺素材的legacy skin，返回assetFallback:true/fallbackSkinId:default且保留其选择ID，Art却残留casual。"
+      ],
+      "change": "成功及幂等回执两条路径统一从当前活动同档Base读取最新selectedSkins，再投影为现有素材ID或default；回执原样返回，不覆盖保存选择，不修改收录/库存规则。两种表现按同一外观投影根因计1项。",
+      "test": "tests/fast-bug-sweep-round3-skin-replay.test.js",
+      "red": {"failed":2,"passed":1},
+      "green": {"files":5,"passed":34,"exitCode":0},
+      "integration": "真实Base写入、readBase、selectSkin、幂等收据、Art.setSkin/getSkin；原保存字节保持、当前收据重放仍能恢复对应运行态、已有换档守卫继续通过。"
+    }
+  ],
+  "validation": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-round3-skin-replay.test.js tests/collection-skin-context-audit.test.js tests/m02-collection-commands.test.js tests/collection-conversion.test.js tests/collection-room.test.js --maxWorkers=2 --minWorkers=1 --reporter=dot --silent",
+    "files":5,
+    "passed":34,
+    "exitCode":0,
+    "eslintOwnPaths":"passed",
+    "diffCheckOwnPaths":"passed"
+  },
+  "auditNotes": "本轮另读未占用terminal/nest settlement命令、Base经济、收藏转换、商店/配送凭据及其直接回归边界；未发现足证新根因，不猜改，不将旧夹具失配计bug。",
+  "boundaries": "不build/删除/提交/安装，无服务；其余冻结与活跃重构源码保持。父集中当前内置实页，未在本子任务声明浏览器验证。"
+}

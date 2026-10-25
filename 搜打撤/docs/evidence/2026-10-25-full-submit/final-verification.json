@@ -1,0 +1,28 @@
+{
+  "outcome": "passed",
+  "exitCode": 0,
+  "validation": {
+    "executed": true,
+    "passed": true,
+    "reusableReceipt": true,
+    "reason": "STAGED_PASSED"
+  },
+  "receipt": "docs/evidence/2026-10-25-WF-full-submit-1025/2026-10-25T14-12-52.982Z-b99650c8-staged.json",
+  "receiptSha256": "8008038e1d6a218b4fcbdaec540b7fa81aa900088dbad907d8afc51286cb390f",
+  "log": "docs/evidence/2026-10-25-WF-full-submit-1025/2026-10-25T14-12-52.982Z-b99650c8-staged.log",
+  "logSha256": "5ef51ff5191c34d92647e0c20bfa18078d04a7f58fac551b5d33098fb12b1b7d",
+  "testFiles": "Test Files  948 passed | 1 skipped (949)",
+  "testCases": "Tests  9524 passed | 42 skipped (9566)",
+  "scope": "full",
+  "indexSha256": "563f1ea639a191d516cca315aaa4f03a30e390e7a3be2d4f56e17eb0cfb2cb54",
+  "limits": [
+    "仅验证 Git index 快照，不含未暂存/未跟踪内容；不含 build、浏览器、远端 CI",
+    "项目外暂存路径仅列出，不由 Vite 验收门验证；临时 Git 元数据/index 独立，对象只读引用源对象库",
+    "依赖核对暂存 npm 锁及安装版本；成功报告另锁依赖字节，排除工具缓存目录",
+    "依赖复制到临时目录，检查配置与工具仅采用 index 中版本；未暂存工具修正不自动带入"
+  ],
+  "source": "真实 Git index 导出，复制并核对锁依赖字节后运行完整门；原工作区与隔离 index 结束时复核",
+  "codeCommit": "ef97fe53754e5436b21a49a261f9469a94eff208",
+  "stagedChangedFiles": 1670,
+  "coupledEvidenceFiles": 13
+}

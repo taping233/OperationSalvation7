@@ -1,0 +1,407 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "beforeSha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2",
+    "afterSha256": "33bffc2f3cc066247b03b62d6c47a54efffc7fd0d7d7f4761a81be6ee005f25c",
+    "removed": [
+      {
+        "line": 128,
+        "selector": "#overlay .cls2-strip > *",
+        "declaration": "clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%)",
+        "winners": [
+          {
+            "line": 177,
+            "declaration": "clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 14px) 100%, 0 100%)"
+          }
+        ]
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "beforeSha256": "7352f49b51e3e3fdf536382bcfb89ec2ac45aecfe23e5b46fdd6324214e4899d",
+    "afterSha256": "3928418a32359ba82c20390369028c4fe8ebb652db8260d42c52b50f93fd1dad",
+    "removed": [
+      {
+        "line": 114,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+        "declaration": "font-size:18px",
+        "winners": [
+          {
+            "line": 127,
+            "declaration": "font-size:27px"
+          }
+        ]
+      },
+      {
+        "line": 114,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+        "declaration": "text-decoration:underline",
+        "winners": [
+          {
+            "line": 127,
+            "declaration": "text-decoration:none"
+          }
+        ]
+      },
+      {
+        "line": 114,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+        "declaration": "border:0",
+        "winners": [
+          {
+            "line": 127,
+            "declaration": "border:1px solid #9cb5c55e"
+          }
+        ]
+      },
+      {
+        "line": 114,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+        "declaration": "padding:5px 14px",
+        "winners": [
+          {
+            "line": 127,
+            "declaration": "padding:0"
+          }
+        ]
+      },
+      {
+        "line": 114,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+        "declaration": "min-height:38px",
+        "winners": [
+          {
+            "line": 127,
+            "declaration": "min-height:38px"
+          }
+        ]
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/battle-stage.css",
+    "beforeSha256": "c98fc586d096001e820ec2a8438326396619ff035abfa8608ecfde6f5943698e",
+    "afterSha256": "f3aa16bbcf33bf1cbe75594ade9b2c77932980b2a638c26201082dd2b2fb6e82",
+    "removed": [
+      {
+        "line": 141,
+        "selector": "#overlay .battle-stage.sts .bt-infchip",
+        "declaration": "top:8px",
+        "winners": [
+          {
+            "line": 142,
+            "declaration": "top:56px"
+          }
+        ]
+      },
+      {
+        "line": 54,
+        "selector": "#overlay .battle-stage.sts .sts-headrow",
+        "declaration": "font-size:24px",
+        "winners": [
+          {
+            "line": 249,
+            "declaration": "font-size:20px"
+          }
+        ]
+      },
+      {
+        "line": 54,
+        "selector": "#overlay .battle-stage.sts .sts-headrow",
+        "declaration": "display:flex",
+        "winners": [
+          {
+            "line": 249,
+            "declaration": "display:none"
+          }
+        ]
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/expedition.css",
+    "beforeSha256": "c1a96269cffd88521f882b17caa586ade752a35f8a92db8b1414b223f422863c",
+    "afterSha256": "4b74c5d65ace598eaccc97804120ca3fbb9f5aa3bbf00f2ddacc01ed0af011dd",
+    "removed": [
+      {
+        "line": 149,
+        "selector": "#title .ak-start::before",
+        "declaration": "display: block",
+        "winners": [
+          {
+            "line": 259,
+            "declaration": "display: none"
+          }
+        ]
+      },
+      {
+        "line": 142,
+        "selector": "#title .ak-circle:hover",
+        "declaration": "border-color: var(--exp-gold)",
+        "winners": [
+          {
+            "line": 198,
+            "declaration": "border: 0"
+          }
+        ]
+      },
+      {
+        "line": 107,
+        "selector": "#title .ak-circle",
+        "declaration": "transition: background .2s, border-color .2s, transform .2s, box-shadow .2s",
+        "winners": [
+          {
+            "line": 204,
+            "declaration": "transition: opacity .2s, transform .2s, filter .2s"
+          }
+        ]
+      },
+      {
+        "line": 106,
+        "selector": "#title .ak-circle",
+        "declaration": "border-left: 2px solid #ead2829c",
+        "winners": [
+          {
+            "line": 189,
+            "declaration": "border: 0"
+          }
+        ]
+      },
+      {
+        "line": 105,
+        "selector": "#title .ak-circle",
+        "declaration": "column-gap: 8px",
+        "winners": [
+          {
+            "line": 191,
+            "declaration": "gap: 0"
+          }
+        ]
+      },
+      {
+        "line": 70,
+        "selector": "#title .ak-quickref",
+        "declaration": "color: #e0e1e2",
+        "winners": [
+          {
+            "line": 88,
+            "declaration": "color: #f5f6f6"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 141,
+        "selector": "#title .ak-circle:hover"
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-datapage.css",
+    "beforeSha256": "2d03db11e3714e53f3b720298efbc30cebe9e9595ec02d041b4c1cb1e7414d52",
+    "afterSha256": "2034eb7d82dea276807f318359502361bc28767cc94103f121b6c6bfe464df3a",
+    "removed": [
+      {
+        "line": 23,
+        "selector": "#overlay .pg.data-tuned .ov-btns .ov-btn",
+        "declaration": "min-width: 150px",
+        "winners": [
+          {
+            "line": 135,
+            "declaration": "min-width: 124px"
+          }
+        ]
+      },
+      {
+        "line": 23,
+        "selector": "#overlay .pg.data-tuned .ov-btns .ov-btn",
+        "declaration": "flex: 0 0 auto",
+        "winners": [
+          {
+            "line": 135,
+            "declaration": "flex: 0 0 auto"
+          }
+        ]
+      },
+      {
+        "line": 16,
+        "selector": "#overlay .pg.data-tuned .data-pg-head h2::before",
+        "declaration": "content: ''",
+        "winners": [
+          {
+            "line": 57,
+            "declaration": "content: none"
+          }
+        ]
+      },
+      {
+        "line": 13,
+        "selector": "#overlay .pg.data-tuned .data-pg-head h2",
+        "declaration": "padding-left: 14px",
+        "winners": [
+          {
+            "line": 51,
+            "declaration": "padding: 0"
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "selector": "#overlay .pg.data-tuned .data-pg-head",
+        "declaration": "padding-left: 96px",
+        "winners": [
+          {
+            "line": 47,
+            "declaration": "padding: 25px 32px 22px 154px"
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "selector": "#overlay .pg.data-tuned .data-pg-head",
+        "declaration": "padding-top: 58px",
+        "winners": [
+          {
+            "line": 47,
+            "declaration": "padding: 25px 32px 22px 154px"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 23,
+        "selector": "#overlay .pg.data-tuned .ov-btns .ov-btn"
+      },
+      {
+        "line": 10,
+        "selector": "#overlay .pg.data-tuned .data-pg-head"
+      }
+    ]
+  },
+  {
+    "file": "game/css/review-ui.css",
+    "beforeSha256": "b6aa78e131253f417eb03ccd619df51cf2bd9c54474653396622477b5efc5e1c",
+    "afterSha256": "58c76e14980963a86134a6c9406573615d73ccc57de718327672a064f55c2792",
+    "removed": [
+      {
+        "line": 24,
+        "selector": ".slot-card-archive",
+        "declaration": "font-size:18px",
+        "winners": [
+          {
+            "line": 46,
+            "declaration": "font-size:15px"
+          }
+        ]
+      }
+    ],
+    "empty": []
+  },
+  {
+    "file": "game/css/winter.css",
+    "beforeSha256": "573b952a5064091c4039706a6e4ea281897af0b43638485c716c0978f03d5120",
+    "afterSha256": "d75fd8d7dd450699b49123c2ce45da7e8124dd8db5551f305d020e8208b73d21",
+    "removed": [
+      {
+        "line": 80,
+        "selector": ".slot-card .slot-card-flakes i",
+        "declaration": "animation-timing-function:ease-in-out",
+        "winners": [
+          {
+            "line": 182,
+            "declaration": "animation:slotSnow linear infinite"
+          }
+        ]
+      },
+      {
+        "line": 56,
+        "selector": ".ak-quickref",
+        "declaration": "transition:color .18s,border-color .18s,filter .18s",
+        "winners": [
+          {
+            "line": 644,
+            "declaration": "transition:scale .12s ease"
+          }
+        ]
+      },
+      {
+        "line": 52,
+        "selector": "#btnTitleExit",
+        "declaration": "border:none",
+        "winners": [
+          {
+            "line": 669,
+            "declaration": "border:1px solid transparent"
+          }
+        ]
+      },
+      {
+        "line": 44,
+        "selector": "#btnTitleMute",
+        "declaration": "border:none",
+        "winners": [
+          {
+            "line": 669,
+            "declaration": "border:1px solid transparent"
+          }
+        ]
+      },
+      {
+        "line": 25,
+        "selector": "#topBtns #btnHelp",
+        "declaration": "box-shadow:none",
+        "winners": [
+          {
+            "line": 964,
+            "declaration": "box-shadow:none!important"
+          }
+        ]
+      },
+      {
+        "line": 25,
+        "selector": "#topBtns #btnHelp",
+        "declaration": "background:#1f2124",
+        "winners": [
+          {
+            "line": 964,
+            "declaration": "background:transparent!important"
+          }
+        ]
+      },
+      {
+        "line": 25,
+        "selector": "#topBtns #btnMute",
+        "declaration": "box-shadow:none",
+        "winners": [
+          {
+            "line": 964,
+            "declaration": "box-shadow:none!important"
+          }
+        ]
+      },
+      {
+        "line": 25,
+        "selector": "#topBtns #btnMute",
+        "declaration": "background:#1f2124",
+        "winners": [
+          {
+            "line": 964,
+            "declaration": "background:transparent!important"
+          }
+        ]
+      }
+    ],
+    "empty": [
+      {
+        "line": 80,
+        "selector": ".slot-card .slot-card-flakes i"
+      }
+    ]
+  }
+]

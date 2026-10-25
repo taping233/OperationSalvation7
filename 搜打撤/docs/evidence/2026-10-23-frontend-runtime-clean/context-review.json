@@ -1,0 +1,186 @@
+{
+  "files": 164,
+  "candidates": [
+    {
+      "file": "game/css/expedition-inventory.css",
+      "sha256": "006275cb073cfe35cf9a484d7b241a0a9aa9ea552da14434776dcd1c6090971a",
+      "line": 175,
+      "start": 14422,
+      "end": 14452,
+      "selector": "#overlay .hub-page .hub-card",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "background:rgba(25,26,28,.78)",
+      "bytes": 29,
+      "winners": [
+        {
+          "selector": "#overlay .hub-page .hub-card",
+          "line": 213,
+          "context": [],
+          "value": "rgba(25,26,28,.84)",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "d06768cd2a697704a5ce099cad9f8a0420f875aee6514a7f35bedcee5f6bd496",
+      "line": 158,
+      "start": 11524,
+      "end": 11537,
+      "selector": ".cls2-confirm",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "bottom: 26px",
+      "bytes": 12,
+      "winners": [
+        {
+          "selector": ".cls2-confirm",
+          "line": 161,
+          "context": [],
+          "value": "22px",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "d06768cd2a697704a5ce099cad9f8a0420f875aee6514a7f35bedcee5f6bd496",
+      "line": 158,
+      "start": 11538,
+      "end": 11550,
+      "selector": ".cls2-confirm",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "width: 52px",
+      "bytes": 11,
+      "winners": [
+        {
+          "selector": ".cls2-confirm",
+          "line": 161,
+          "context": [],
+          "value": "58px",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "d06768cd2a697704a5ce099cad9f8a0420f875aee6514a7f35bedcee5f6bd496",
+      "line": 158,
+      "start": 11551,
+      "end": 11564,
+      "selector": ".cls2-confirm",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "height: 52px",
+      "bytes": 12,
+      "winners": [
+        {
+          "selector": ".cls2-confirm",
+          "line": 161,
+          "context": [],
+          "value": "58px",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ]
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "sha256": "7d75e95990f02cd99b17681b2d0a80369c344656a93b9fe5b1cc6b78349a20c6",
+      "line": 3,
+      "start": 6209,
+      "end": 6223,
+      "selector": "h1",
+      "nesting": [],
+      "context": [
+        "media (max-width:700px)"
+      ],
+      "structural": [],
+      "declaration": "font-size:26px",
+      "bytes": 14,
+      "winners": [
+        {
+          "selector": "h1",
+          "line": 23,
+          "context": [],
+          "value": "28px",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "file": "game/css/cover-details.css",
+      "sha256": "1a3f838be2f3f1bb7859ec913425a0e176da9fad8010ad631130209dc66c4a65",
+      "line": 32,
+      "start": 3560,
+      "end": 3588,
+      "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #cardZoom:not(.cz-photo)",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "justify-content: flex-start",
+      "bytes": 27,
+      "winners": [
+        {
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #cardZoom:not(.cz-photo)",
+          "line": 32,
+          "context": [],
+          "value": "safe center",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ],
+      "reason": "Preserve explicit flex-start fallback for safe center browser support."
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "sha256": "96561775ef8a5d131d936e28d169fba576c7ad88b53a5bacc232e0cedd33cb32",
+      "line": 90,
+      "start": 11131,
+      "end": 11158,
+      "selector": "#overlay .node-main",
+      "nesting": [],
+      "context": [],
+      "structural": [],
+      "declaration": "justify-content:flex-start",
+      "bytes": 26,
+      "winners": [
+        {
+          "selector": "#overlay .node-main",
+          "line": 90,
+          "context": [],
+          "value": "safe center",
+          "important": false,
+          "validity": "css-tree-grammar"
+        }
+      ],
+      "reason": "Preserve explicit flex-start fallback for safe center browser support."
+    }
+  ],
+  "assumptions": [
+    "Exact selector members only; nested rule ancestor selector lists must be identical.",
+    "Keyframes excluded. Layers and other non-media/supports at-rule ancestors must be identical.",
+    "Later conditional context must be identical or empty.",
+    "Later values identical or css-tree property grammar valid; var/env and vendor fallbacks retained if values differ.",
+    "No source mutation."
+  ],
+  "summary": {
+    "declarations": 5,
+    "files": 3,
+    "bytes": 78,
+    "conditional": 1,
+    "nested": 0
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "status": "完成未提交",
+  "changes": [
+    "基地首页集中整备人物、卡数、出征及难度",
+    "人物培养并排比较当前与下级收益，进度与级别紧凑展示，默认肖像底色减亮",
+    "公共标题/操作区统一，后勤横向分类，建设操作贴底",
+    "固定导航不分批入场，详情过渡180ms",
+    "九种精英生物卡从当前map派生，沿用正式立绘，不进入随机/商店/发现池"
+  ],
+  "tests": {
+    "targeted": {
+      "files": 17,
+      "tests": 161,
+      "result": "passed"
+    },
+    "typecheck": {
+      "result": "passed",
+      "sourceCoverage": "624/624",
+      "strict": "51/624",
+      "note": "先前本轮定向结果，后续变更仅CSS与生成文档"
+    },
+    "eslint": "本轮所改JS及专测通过",
+    "dataValidation": "passed",
+    "stylelint": "5份所改CSS通过",
+    "postcss": "5份CSS解析通过",
+    "docsCheck": {
+      "result": "passed",
+      "checkedRelativeLinks": 754,
+      "findings": 0
+    },
+    "diffWhitespace": "passed"
+  },
+  "browser": {
+    "platform": "Codex IAB",
+    "url": "http://127.0.0.1:5200/",
+    "scope": "仅当前1280x720窗口，无尺寸设置；真实点击档位02及基地/人物/后勤/交易所/建设/照相馆生物筛选与精英搜索",
+    "result": "首页面板无横向溢出；人物当前加成浅色可读；分类横向、仓库卡牌完整可见；建设操作贴底；四个子页底栏位置一致；九名精英均在搜索结果、暴怒者详情显示2攻5血与技能",
+    "invalidEvidence": [
+      "browser-base.json首个基地measurement因页面尚未挂载产生exceptionDetails，无有效测量；由home-verified.png与本轮实测补齐",
+      "home-final.png为加载中无效捕获，不作为验收",
+      "导出的home-dom.html被工具截断，axe未取得有效上下文，未形成可访问性通过结论"
+    ],
+    "notExercised": [
+      "未培养/购买/扩建/出征，未操作已有对局；非当前窗口未核验"
+    ]
+  },
+  "compendium": {
+    "result": "updated",
+    "method": "内置浏览器读取完整当前Cards.all与DATA，交现有buildCompendium纯生成器生成；首次两次CLI写入访问错误，最终通过本地文件复制成功写回，未手改生成文本"
+  },
+  "limits": [
+    "未运行全量测试或build",
+    "未提交/推送/发布",
+    "共享服务未动，无自建服务"
+  ]
+}

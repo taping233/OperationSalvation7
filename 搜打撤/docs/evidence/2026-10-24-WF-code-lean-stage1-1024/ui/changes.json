@@ -1,0 +1,78 @@
+{
+  "baseline": "node_modules/.cache/lean-stage1-1024/before/",
+  "normalization": "CRLF/CR to LF only; UTF-8 bytes; Acorn latest module tokens exclude comments.",
+  "changes": [
+    {
+      "path": "game/src/ui/menu-settings.js",
+      "category": "runtime",
+      "before": {
+        "sha256": "c68a5fff9726fad91b8c492bb72d118505cd8a4a0af361c52ae748375c32756f",
+        "lines": 183,
+        "bytes": 14767,
+        "normalizedBytes": 14585,
+        "nonCommentTokens": 1752
+      },
+      "after": {
+        "sha256": "0b5c50b6ceab8978da056158c66e03d46d950cb9fc5897960c04855ff8821fe2",
+        "lines": 178,
+        "bytes": 12487,
+        "normalizedBytes": 12339,
+        "nonCommentTokens": 1591
+      }
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "category": "runtime",
+      "before": {
+        "sha256": "a71d6a58ea1c8db8c6bdde3a9124f4052bfca8ea3ad133acfcb1959c0ea5466a",
+        "lines": 176,
+        "bytes": 19464,
+        "normalizedBytes": 19289,
+        "nonCommentTokens": 3302
+      },
+      "after": {
+        "sha256": "e6b018f4b880fea3520da5453ab1cd191cf0796555f3d24e26e50884c243412f",
+        "lines": 184,
+        "bytes": 19243,
+        "normalizedBytes": 19069,
+        "nonCommentTokens": 3347
+      }
+    },
+    {
+      "path": "tests/code-lean-stage1-ui-settings.test.js",
+      "category": "regression-test",
+      "before": null,
+      "after": {
+        "sha256": "5dbad11fc79f4532193e720434ace6561a3123f78f56e5f675ebb71335f9204a",
+        "lines": 135,
+        "bytes": 8772,
+        "normalizedBytes": 8772,
+        "nonCommentTokens": 2102
+      }
+    },
+    {
+      "path": "tests/code-lean-stage1-ui-archive.test.js",
+      "category": "regression-test",
+      "before": null,
+      "after": {
+        "sha256": "d9d614e54a5b35c503fb5079d507877b13ff83fd8c2f2242e0eed5ad83eda890",
+        "lines": 84,
+        "bytes": 5497,
+        "normalizedBytes": 5497,
+        "nonCommentTokens": 1307
+      }
+    }
+  ],
+  "runtimeDelta": {
+    "lines": 3,
+    "bytes": -2501,
+    "normalizedBytes": -2466,
+    "nonCommentTokens": -116
+  },
+  "testDelta": {
+    "lines": 219,
+    "bytes": 14269,
+    "normalizedBytes": 14269,
+    "nonCommentTokens": 3409
+  }
+}

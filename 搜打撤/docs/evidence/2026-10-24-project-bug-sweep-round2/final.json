@@ -1,0 +1,73 @@
+{
+  "task": "WF-project-bug-sweep-round2-1024",
+  "closedAt": "2026-10-24T15:24:08.845Z",
+  "status": "complete-uncommitted-with-browser-limitation",
+  "fixedRootCausesThisRound": 17,
+  "byDomain": {
+    "battle": 6,
+    "persistence": 4,
+    "expedition": 5,
+    "parent": 2
+  },
+  "previousRound": 20,
+  "cumulative": 37,
+  "counting": "按独立根因计数；第一轮事件异步归属及同名卡身份补全、旧测试适配不重复计数。",
+  "functional": {
+    "files": 70,
+    "passed": 693,
+    "failed": 0,
+    "skipped": 0,
+    "initial": {
+      "files": 67,
+      "passed": 667,
+      "failed": 0,
+      "inputChanged": [
+        "game/src/run/game.run.scenes.js",
+        "tests/project-bug-sweep-round2-pocket-identity.test.js"
+      ]
+    },
+    "incremental": {
+      "files": 4,
+      "passed": 37,
+      "failed": 0,
+      "reason": "末次复原唯一性补丁及1条新增边界，覆盖全部两个变化输入；相同文件用最新结果替换，不累计重复用例"
+    }
+  },
+  "static": {
+    "syntax": {
+      "exit": 0,
+      "projectFiles": 680
+    },
+    "data": {
+      "exit": 0
+    },
+    "types": {
+      "exit": 0,
+      "configs": 11,
+      "implementationCoverage": "619/619"
+    },
+    "eslint": {
+      "exit": 0,
+      "scope": "全部本轮JS源与67个定向测试；最后两变化输入补验通过"
+    },
+    "docs": {
+      "exit": 0
+    }
+  },
+  "sourceFiles": 32,
+  "liveSourceChangesSinceVerified": [
+    "game/src/battle/core/battle.foe-lifecycle.domain.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/hub/game.bag.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/run/game.run.scenes.js"
+  ],
+  "browser": {
+    "status": "closed-with-partial-browser-coverage",
+    "completed": "当前窗口正常点击：标题、建立隔离来源档位、人物选择、携带箭雨/回音箭、正常出征、抵达入城补给地图；未更换尺寸或外部浏览器。",
+    "limitation": "完整CDP调用多次被权限审批拒绝，返回已保存权限或管理策略禁止访问；未执行构造状态代码。深层研究所/容器/战斗组合实页未补。用户要求直接收尾，不再继续权限排查或扩大检查。",
+    "temporaryTab": "本轮临时标签页3已不存在，没有新建标签页。"
+  },
+  "handoff": "本轮全部源码编辑与验证占用已释放。combat.factory.js、battle.foe-lifecycle.domain.js、battle.engine.factory.domain.js、battle.enemy-phase.domain.js可由后续会话保留现有增量接续；本轮通过结论仅对应verification.json指纹，后续改动需自行验证。",
+  "delivery": "源码及证据保留在当前工作树，未暂存、未提交、未推送、未build；原临时服务无监听。"
+}

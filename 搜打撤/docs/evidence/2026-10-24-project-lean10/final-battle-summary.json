@@ -1,0 +1,183 @@
+{
+  "total": 1840,
+  "passed": 1816,
+  "failed": 24,
+  "pending": 0,
+  "files": 156,
+  "failedFiles": [
+    {
+      "file": "battle-area-hover-hand-context.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "one real empty-field pointer hover resolves 9 raw hand entries once, not per target",
+          "error": "AssertionError: expected 81 to be 65 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:114:27"
+        },
+        {
+          "name": "one real empty-field pointer hover resolves 30 raw hand entries once, not per target",
+          "error": "AssertionError: expected 501 to be 485 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:114:27"
+        },
+        {
+          "name": "one real empty-field pointer hover resolves 60 raw hand entries once, not per target",
+          "error": "AssertionError: expected 1866 to be 1850 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:114:27"
+        },
+        {
+          "name": "uses the current catalog 风暴火球 with unchanged damage, cost and play wording",
+          "error": "AssertionError: expected 81 to be 65 // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-area-hover-hand-context.test.js:131:27"
+        }
+      ]
+    },
+    {
+      "file": "battle-card-inspection.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "reuses one live ownership scan per effective query without stale array or override caches",
+          "error": "AssertionError: expected { uid: 'spell', safe: true, …(1) } to be { uid: 'spell', safe: true, …(1) } // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-card-inspection.test.js:122:49"
+        }
+      ]
+    },
+    {
+      "file": "battle-decision-redesign.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "统一战斗二级界面展示契约 deck按有效卡面分组、稳定展示数量和只读返回",
+          "error": "AssertionError: expected { same: 1, other: 1 } to deeply equal { same: 2, other: 1 }     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-decision-redesign.test.js:28:68"
+        }
+      ]
+    },
+    {
+      "file": "battle-effective-card.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "approved effective-card contract returns unavailable target reason and does not mutate original card when template is missing",
+          "error": "AssertionError: expected { id: 'starter-attack', …(7) } to be { id: 'starter-attack', …(6) } // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-effective-card.test.js:63:58"
+        },
+        {
+          "name": "captured effective faces retain live UID provenance through normalization without swallowing custom candidates",
+          "error": "AssertionError: expected { id: 'starter-attack', …(7) } to be { id: 'starter-attack', …(6) } // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-effective-card.test.js:76:66"
+        },
+        {
+          "name": "a confirmed live raw capture follows a later override while an explicit raw-like custom candidate does not",
+          "error": "AssertionError: expected { id: 'starter-attack', …(8) } to be { id: 'starter-attack', …(7) } // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-effective-card.test.js:93:64"
+        }
+      ]
+    },
+    {
+      "file": "battle-entry-view.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "keeps the ready stage during payment and charges once only after both choices",
+          "error": "AssertionError: expected '\\n    \\n    第 1 回合选择中\\n       选项战斗规则 …' to contain '支付代价'     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:236:62"
+        },
+        {
+          "name": "keeps the degraded stage during payment and charges once only after both choices",
+          "error": "AssertionError: expected '\\n    \\n    第 1 回合选择中\\n      部分美术未就绪 …' to contain '支付代价'     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:236:62"
+        },
+        {
+          "name": "cleans up the retained stage on real departure without charging an incomplete payment",
+          "error": "AssertionError: expected false to be true // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-entry-view.test.js:270:78"
+        }
+      ]
+    },
+    {
+      "file": "battle-hand-group-index.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "preserves first-face identity, order, live cost/description splits and infusion main isolation",
+          "error": "AssertionError: expected [ { …(4) } ] to deeply equal [ { key: 'legacy:名0|法术|0|伤害0', …(3) } ]     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-hand-group-index.test.js:28:22"
+        }
+      ]
+    },
+    {
+      "file": "battle-preview-hand-context.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "single-hover raw-hand context at the command boundary excludes duplicate raw self references and missing UIDs in command availability",
+          "error": "AssertionError: expected { status: 'ready', uid: 'u0', …(1) } to match object { status: 'rejected', …(1) } (2 matching properties omitted from actual)"
+        },
+        {
+          "name": "single-hover raw-hand context at the command boundary keeps transformed execution faces separate from raw hand payment identity",
+          "error": "TypeError: Cannot read properties of undefined (reading 'message')     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-preview-hand-context.test.js:96:38"
+        },
+        {
+          "name": "single-hover raw-hand context at the command boundary does not cache current energy, cost, capability, or mode with the raw hand",
+          "error": "AssertionError: expected '规则格式非法' to contain '能力卡'     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-preview-hand-context.test.js:153:53"
+        },
+        {
+          "name": "single-hover raw-hand context at the command boundary does not carry selected infusion fuel, waivers, or free-cast state in the hand context",
+          "error": "AssertionError: expected last \"spy\" call to have been called with [ 'u0', …(3) ]     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-preview-hand-context.test.js:181:44"
+        }
+      ]
+    },
+    {
+      "file": "battle-query-cost-benchmark.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "reports same-input effective-face and pocket-cost lookup work",
+          "error": "AssertionError: expected { id: 'probe', name: '探针', …(4) } to be { id: 'probe', name: '探针', …(3) } // Object.is equality     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-query-cost-benchmark.test.js:18:85"
+        }
+      ]
+    },
+    {
+      "file": "battle-render-derivation.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "compares real mixed combat inputs without keeping derived rules across renders",
+          "error": "AssertionError: expected { label: 'ready', cost: 28, …(1) } to deeply equal { label: 'ready', cost: 10, …(1) }     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-render-derivation.test.js:118:28"
+        }
+      ]
+    },
+    {
+      "file": "battle-settlement-retry.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "真实战斗奖励刷新续流 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false）",
+          "error": "AssertionError: expected null not to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-settlement-retry.test.js:195:57"
+        },
+        {
+          "name": "真实战斗奖励刷新续流 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true）",
+          "error": "AssertionError: expected null not to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-settlement-retry.test.js:195:57"
+        }
+      ]
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "battle tools template ownership returns from real discovery with one current set and preserves subsequent updates",
+          "error": "AssertionError: expected { options: [ { …(10) }, …(2) ], …(21) } to be null     at D:\\素材\\代号柒\\搜打撤\\tests\\battle-tools-lifecycle.test.js:184:36"
+        }
+      ]
+    },
+    {
+      "file": "framework-battle-engine-services.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "battle engine explicit composition uses replacement service ports through real factories without consulting browser facades",
+          "error": "AssertionError: expected { id: 'first', name: 'first', …(4) } to deeply equal { id: 'first', name: 'first', …(3) }     at D:\\素材\\代号柒\\搜打撤\\tests\\framework-battle-engine-services.test.js:50:53"
+        }
+      ]
+    },
+    {
+      "file": "sts2-agent-infusion-1021.test.js",
+      "message": "",
+      "failed": [
+        {
+          "name": "Agent uses the current domain infusion candidates a selected card that becomes forbidden is removed before cancellation, without resource payment",
+          "error": "AssertionError: expected [] to deeply equal [ 'agent-infuse-1' ]     at D:\\素材\\代号柒\\搜打撤\\tests\\sts2-agent-infusion-1021.test.js:132:59"
+        }
+      ]
+    }
+  ]
+}

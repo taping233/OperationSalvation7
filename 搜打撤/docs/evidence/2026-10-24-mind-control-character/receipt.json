@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-mind-control",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e65-684d-7800-845e-5943cd826978\\exec-3d5ca097-deaf-48d6-a79a-6c3b6f3c6ba7.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-mind-control-character/cards-spell-tt13-mind-control-source.png",
+        "bytes": 2155672,
+        "sha256": "9e1288773e300c3eedd67447c754ddc97822807253ef76ef7dd25edee5c2e3e1"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-mind-control-character/cards-spell-tt13-mind-control-full-before.webp",
+          "bytes": 104238,
+          "sha256": "b9f47aac37b27a67101073d74666418cce5a7a630a92e74b945c4eb6dc3881e4"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-mind-control-character/cards-spell-tt13-mind-control-thumb-before.webp",
+          "bytes": 16524,
+          "sha256": "a032846882fe0ad3ab488cb453ebcc76423720475ce6997c1a1f2621e9c18c5f"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-mind-control.webp",
+          "bytes": 167430,
+          "sha256": "3f214992b7b0411cb5254d491c66b4dd4d6e25ebaaca77bc82c079a2dc52e041",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-mind-control.webp",
+          "bytes": 23380,
+          "sha256": "2048b6f4fb2dfc0a9f0b932140a36ba5c37f9bda40a57451becca85f07e66f31",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "career-local-final-20261023",
+      "revision_after": "mind-control-character-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 104238,
+            "sha256": "b9f47aac37b27a67101073d74666418cce5a7a630a92e74b945c4eb6dc3881e4",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 167430,
+            "sha256": "3f214992b7b0411cb5254d491c66b4dd4d6e25ebaaca77bc82c079a2dc52e041",
+            "source": "docs/evidence/2026-10-24-mind-control-character/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 16524,
+            "sha256": "a032846882fe0ad3ab488cb453ebcc76423720475ce6997c1a1f2621e9c18c5f",
+            "source": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt13-mind-control.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 23380,
+            "sha256": "2048b6f4fb2dfc0a9f0b932140a36ba5c37f9bda40a57451becca85f07e66f31",
+            "source": "docs/evidence/2026-10-24-mind-control-character/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

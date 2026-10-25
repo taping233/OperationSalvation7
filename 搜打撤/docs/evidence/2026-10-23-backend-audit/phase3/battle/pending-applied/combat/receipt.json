@@ -1,0 +1,168 @@
+{
+  "status": "applied_after_ownership_release",
+  "sharedSourcesModified": true,
+  "candidate": "combat",
+  "patch": "candidate.patch",
+  "patchPathsRelativeTo": "D:/素材/代号柒",
+  "files": [
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "baseSha256": "d78cf107ccb180de54d81cc214ed8517b3c42a2e2c6ba11687e6dbd97aa8cf70",
+      "requireTargetAbsent": false,
+      "candidateSha256": "2da9c5c9e9e3cf23a02ac291075d82a1e69c483726b5c58e81e3c73e59c5a77c",
+      "beforeSnapshot": "before/game/src/battle/core/combat.factory.js",
+      "afterSnapshot": "after/game/src/battle/core/combat.factory.js",
+      "bytesBefore": 24113,
+      "bytesAfter": 14927,
+      "added": 1,
+      "removed": 196,
+      "netRemoved": 195,
+      "appliedSha256": "9de4896aab80c55e7358d7844a7faa56211eead63efea276583c61dc520f1b21",
+      "appliedTextEqualsCandidate": true,
+      "onlyByteDifferenceIsCRLFtoLF": true,
+      "appliedBytes": 14645,
+      "evidenceBeforeSnapshot": "before/game/src/battle/core/combat.factory.js.before.txt"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "baseSha256": "f9214408a586ea648157f489f4e78942e9518688d7055dd9fdc3efa97bd6ac14",
+      "requireTargetAbsent": false,
+      "candidateSha256": "69f77fd8820dc2713878787c97285f0723abf40ccecb18e568cf658661d1d346",
+      "beforeSnapshot": "before/game/src/battle/core/combat.js",
+      "afterSnapshot": "after/game/src/battle/core/combat.js",
+      "bytesBefore": 695,
+      "bytesAfter": 675,
+      "added": 2,
+      "removed": 2,
+      "netRemoved": 0,
+      "appliedSha256": "ed3a6607e0d4ac44ea1a4873ac011d85ed4f17e28a8e829a42b3e139fab2abcc",
+      "appliedTextEqualsCandidate": true,
+      "onlyByteDifferenceIsCRLFtoLF": true,
+      "appliedBytes": 670,
+      "evidenceBeforeSnapshot": "before/game/src/battle/core/combat.js.before.txt"
+    },
+    {
+      "path": "tests/combat.test.js",
+      "baseSha256": "b15ea9ff2fd0d6349cdd4f0060aa24a8492dc8b1848f4e132fafa0ab8a1dcd71",
+      "requireTargetAbsent": false,
+      "candidateSha256": "4b050bde99a11e702749134f1c7cfe4b5fcef8b650b4ca0f83e98c896582c585",
+      "beforeSnapshot": "before/tests/combat.test.js",
+      "afterSnapshot": "after/tests/combat.test.js",
+      "bytesBefore": 460,
+      "bytesAfter": 521,
+      "added": 3,
+      "removed": 2,
+      "netRemoved": -1,
+      "appliedSha256": "2d7263c3680ddb51b0dc8263b9d0430ceab1db2f8118f2a9fb99a89cf66d8c3e",
+      "appliedTextEqualsCandidate": true,
+      "onlyByteDifferenceIsCRLFtoLF": true,
+      "appliedBytes": 508,
+      "evidenceBeforeSnapshot": "before/tests/combat.test.js.before.txt"
+    },
+    {
+      "path": "tests/helpers/combat-self-test.js",
+      "baseSha256": null,
+      "requireTargetAbsent": true,
+      "candidateSha256": "3f79d3472ace74d164454a196ccafe591997ebafc6e17e11aafb134d43129da9",
+      "beforeSnapshot": null,
+      "afterSnapshot": "after/tests/helpers/combat-self-test.js",
+      "bytesBefore": 0,
+      "bytesAfter": 8932,
+      "added": 194,
+      "removed": 0,
+      "netRemoved": -194,
+      "appliedSha256": "3f79d3472ace74d164454a196ccafe591997ebafc6e17e11aafb134d43129da9",
+      "appliedTextEqualsCandidate": true,
+      "onlyByteDifferenceIsCRLFtoLF": false,
+      "appliedBytes": 8932
+    }
+  ],
+  "productionSourceLineChanges": {
+    "added": 3,
+    "removed": 198,
+    "netRemoved": 195
+  },
+  "wholeRepositoryLineChanges": {
+    "added": 200,
+    "removed": 200,
+    "netRemoved": 0
+  },
+  "applicationPrecondition": "Wait for ownership release, then require all source SHA256 values to match and every new target to remain absent before applying.",
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "staticVerification": {
+    "currentBaseShaMatches": true,
+    "newTargetsAbsent": true,
+    "syntax": [
+      {
+        "path": "game/src/battle/core/combat.factory.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/battle/core/combat.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/combat.test.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/helpers/combat-self-test.js",
+        "exitCode": 0
+      }
+    ],
+    "gitApplyCheckExitCode": 0,
+    "testsExecuted": false,
+    "sharedSourcesModified": false,
+    "selfTestRelocation": {
+      "originalBodyAstEqual": true,
+      "originalEqCallCount": 67,
+      "candidateEqCallCount": 67,
+      "capturedNames": [
+        "TYPES",
+        "addBleed",
+        "addBlessing",
+        "addCurse",
+        "breakStealth",
+        "canAct",
+        "clearBleed",
+        "dealDamage",
+        "hasCurse",
+        "isStealthed",
+        "parseNotation",
+        "purify",
+        "tickDurations",
+        "tickPoison"
+      ],
+      "allDependenciesRemainExportedByFacade": true,
+      "originalAssertionsExecuted": false
+    }
+  },
+  "ownershipAuthorization": "Root confirmed WF-live-repair-1023 no longer owns the exact combat/acquire source paths.",
+  "lineEndingNote": "git apply used repository LF line endings; original prepared snapshots preserve their prior CRLF. Applied text is identical after CRLF normalization, and applied SHA256 values are recorded separately.",
+  "finalVerification": {
+    "syntax": [
+      {
+        "path": "game/src/battle/core/combat.factory.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/battle/core/combat.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/combat.test.js",
+        "exitCode": 0
+      },
+      {
+        "path": "tests/helpers/combat-self-test.js",
+        "exitCode": 0
+      }
+    ],
+    "gitDiffCheckExitCode": 0,
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  }
+}

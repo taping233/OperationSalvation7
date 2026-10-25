@@ -1,0 +1,429 @@
+{
+  "method": "Read-only AST pattern matching, no source mutation or business execution",
+  "file": "game/src/cards/card-rules.schema.js",
+  "groups": {
+    "positiveInteger": [
+      {
+        "start": 12274,
+        "end": 12422,
+        "fromLine": 208,
+        "toLine": 210,
+        "lines": 3,
+        "record": "record",
+        "field": "foeHpBelow",
+        "source": "if (record.foeHpBelow !== undefined && !isPositiveInteger(record.foeHpBelow)) {\r\n    error(`${path}.foeHpBelow`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 19807,
+        "end": 19979,
+        "fromLine": 346,
+        "toLine": 348,
+        "lines": 3,
+        "record": "operation",
+        "field": "perInfusedInHand",
+        "source": "if (operation.perInfusedInHand !== undefined && !isPositiveInteger(operation.perInfusedInHand)) {\r\n    error(`${path}.perInfusedInHand`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 19983,
+        "end": 20140,
+        "fromLine": 349,
+        "toLine": 351,
+        "lines": 3,
+        "record": "operation",
+        "field": "infuseBonus",
+        "source": "if (operation.infuseBonus !== undefined && !isPositiveInteger(operation.infuseBonus)) {\r\n    error(`${path}.infuseBonus`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 24377,
+        "end": 24516,
+        "fromLine": 431,
+        "toLine": 433,
+        "lines": 3,
+        "record": "operation",
+        "field": "burst",
+        "source": "if (operation.burst !== undefined && !isPositiveInteger(operation.burst)) {\r\n    error(`${path}.burst`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 24520,
+        "end": 24662,
+        "fromLine": 434,
+        "toLine": 436,
+        "lines": 3,
+        "record": "operation",
+        "field": "extend",
+        "source": "if (operation.extend !== undefined && !isPositiveInteger(operation.extend)) {\r\n    error(`${path}.extend`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 26304,
+        "end": 26444,
+        "fromLine": 470,
+        "toLine": 472,
+        "lines": 3,
+        "record": "operation",
+        "field": "upTo",
+        "source": "if (operation.upTo !== undefined && !isPositiveInteger(operation.upTo)) {\r\n      error(`${path}.upTo`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 26450,
+        "end": 26608,
+        "fromLine": 473,
+        "toLine": 475,
+        "lines": 3,
+        "record": "operation",
+        "field": "selfDamage",
+        "source": "if (operation.selfDamage !== undefined && !isPositiveInteger(operation.selfDamage)) {\r\n      error(`${path}.selfDamage`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 26614,
+        "end": 26775,
+        "fromLine": 476,
+        "toLine": 478,
+        "lines": 3,
+        "record": "operation",
+        "field": "perFuelCost",
+        "source": "if (operation.perFuelCost !== undefined && !isPositiveInteger(operation.perFuelCost)) {\r\n      error(`${path}.perFuelCost`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 26781,
+        "end": 26945,
+        "fromLine": 479,
+        "toLine": 481,
+        "lines": 3,
+        "record": "operation",
+        "field": "perSpellHeal",
+        "source": "if (operation.perSpellHeal !== undefined && !isPositiveInteger(operation.perSpellHeal)) {\r\n      error(`${path}.perSpellHeal`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 27949,
+        "end": 28119,
+        "fromLine": 502,
+        "toLine": 504,
+        "lines": 3,
+        "record": "operation",
+        "field": "decayAtTurnEnd",
+        "source": "if (operation.decayAtTurnEnd !== undefined && !isPositiveInteger(operation.decayAtTurnEnd)) {\r\n      error(`${path}.decayAtTurnEnd`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 29255,
+        "end": 29409,
+        "fromLine": 525,
+        "toLine": 527,
+        "lines": 3,
+        "record": "operation",
+        "field": "untilHandN",
+        "source": "if (operation.untilHandN !== undefined && !isPositiveInteger(operation.untilHandN)) {\r\n    error(`${path}.untilHandN`, 'must be a positive integer');\r\n  }"
+      },
+      {
+        "start": 32569,
+        "end": 32715,
+        "fromLine": 585,
+        "toLine": 587,
+        "lines": 3,
+        "record": "operation",
+        "field": "stacks",
+        "source": "if (operation.stacks !== undefined && !isPositiveInteger(operation.stacks)) {\r\n      error(`${path}.stacks`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 32721,
+        "end": 32873,
+        "fromLine": 588,
+        "toLine": 590,
+        "lines": 3,
+        "record": "operation",
+        "field": "duration",
+        "source": "if (operation.duration !== undefined && !isPositiveInteger(operation.duration)) {\r\n      error(`${path}.duration`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 33939,
+        "end": 34082,
+        "fromLine": 612,
+        "toLine": 614,
+        "lines": 3,
+        "record": "operation",
+        "field": "count",
+        "source": "if (operation.count !== undefined && !isPositiveInteger(operation.count)) {\r\n      error(`${path}.count`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 35224,
+        "end": 35358,
+        "fromLine": 638,
+        "toLine": 640,
+        "lines": 3,
+        "record": "operation",
+        "field": "hp",
+        "source": "if (operation.hp !== undefined && !isPositiveInteger(operation.hp)) {\r\n      error(`${path}.hp`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 38989,
+        "end": 39135,
+        "fromLine": 716,
+        "toLine": 718,
+        "lines": 3,
+        "record": "operation",
+        "field": "amount",
+        "source": "if (operation.amount !== undefined && !isPositiveInteger(operation.amount)) {\r\n      error(`${path}.amount`, 'must be a positive integer');\r\n    }"
+      },
+      {
+        "start": 39296,
+        "end": 39448,
+        "fromLine": 722,
+        "toLine": 724,
+        "lines": 3,
+        "record": "operation",
+        "field": "duration",
+        "source": "if (operation.duration !== undefined && !isPositiveInteger(operation.duration)) {\r\n      error(`${path}.duration`, 'must be a positive integer');\r\n    }"
+      }
+    ],
+    "nonnegativeInteger": [
+      {
+        "start": 35075,
+        "end": 35218,
+        "fromLine": 635,
+        "toLine": 637,
+        "lines": 3,
+        "record": "operation",
+        "field": "atk",
+        "source": "if (operation.atk !== undefined && !isNonnegativeInteger(operation.atk)) {\r\n      error(`${path}.atk`, 'must be a nonnegative integer');\r\n    }"
+      },
+      {
+        "start": 35987,
+        "end": 36133,
+        "fromLine": 656,
+        "toLine": 658,
+        "lines": 3,
+        "record": "operation",
+        "field": "cost",
+        "source": "if (operation.cost !== undefined && !isNonnegativeInteger(operation.cost)) {\r\n      error(`${path}.cost`, 'must be a nonnegative integer');\r\n    }"
+      },
+      {
+        "start": 39141,
+        "end": 39290,
+        "fromLine": 719,
+        "toLine": 721,
+        "lines": 3,
+        "record": "operation",
+        "field": "capTo",
+        "source": "if (operation.capTo !== undefined && !isNonnegativeInteger(operation.capTo)) {\r\n      error(`${path}.capTo`, 'must be a nonnegative integer');\r\n    }"
+      }
+    ],
+    "trueWhenProvided": [
+      {
+        "start": 12426,
+        "end": 12563,
+        "fromLine": 211,
+        "toLine": 213,
+        "lines": 3,
+        "record": "record",
+        "field": "foeHpHalf",
+        "source": "if (record.foeHpHalf !== undefined && record.foeHpHalf !== true) {\r\n    error(`${path}.foeHpHalf`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 12567,
+        "end": 12704,
+        "fromLine": 214,
+        "toLine": 216,
+        "lines": 3,
+        "record": "record",
+        "field": "foeFullHp",
+        "source": "if (record.foeFullHp !== undefined && record.foeFullHp !== true) {\r\n    error(`${path}.foeFullHp`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 12902,
+        "end": 13036,
+        "fromLine": 220,
+        "toLine": 222,
+        "lines": 3,
+        "record": "record",
+        "field": "anyCurse",
+        "source": "if (record.anyCurse !== undefined && record.anyCurse !== true) {\r\n    error(`${path}.anyCurse`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 13806,
+        "end": 13964,
+        "fromLine": 236,
+        "toLine": 238,
+        "lines": 3,
+        "record": "operation",
+        "field": "perTargetPrice",
+        "source": "if (operation.perTargetPrice !== undefined && operation.perTargetPrice !== true) {\r\n    error(`${path}.perTargetPrice`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 18587,
+        "end": 18730,
+        "fromLine": 323,
+        "toLine": 325,
+        "lines": 3,
+        "record": "operation",
+        "field": "lifesteal",
+        "source": "if (operation.lifesteal !== undefined && operation.lifesteal !== true) {\r\n    error(`${path}.lifesteal`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 24239,
+        "end": 24373,
+        "fromLine": 428,
+        "toLine": 430,
+        "lines": 3,
+        "record": "operation",
+        "field": "double",
+        "source": "if (operation.double !== undefined && operation.double !== true) {\r\n    error(`${path}.double`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 27580,
+        "end": 27736,
+        "fromLine": 495,
+        "toLine": 497,
+        "lines": 3,
+        "record": "operation",
+        "field": "consumeEquip",
+        "source": "if (operation.consumeEquip !== undefined && operation.consumeEquip !== true) {\r\n      error(`${path}.consumeEquip`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 27808,
+        "end": 27943,
+        "fromLine": 499,
+        "toLine": 501,
+        "lines": 3,
+        "record": "operation",
+        "field": "guard",
+        "source": "if (operation.guard !== undefined && operation.guard !== true) {\r\n      error(`${path}.guard`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 28565,
+        "end": 28720,
+        "fromLine": 513,
+        "toLine": 515,
+        "lines": 3,
+        "record": "operation",
+        "field": "perCurseKinds",
+        "source": "if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {\r\n    error(`${path}.perCurseKinds`, 'must equal true when provided');\r\n  }"
+      },
+      {
+        "start": 34142,
+        "end": 34301,
+        "fromLine": 616,
+        "toLine": 618,
+        "lines": 3,
+        "record": "operation",
+        "field": "perCurseKinds",
+        "source": "if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {\r\n      error(`${path}.perCurseKinds`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 34307,
+        "end": 34469,
+        "fromLine": 619,
+        "toLine": 621,
+        "lines": 3,
+        "record": "operation",
+        "field": "perCurseStacks",
+        "source": "if (operation.perCurseStacks !== undefined && operation.perCurseStacks !== true) {\r\n      error(`${path}.perCurseStacks`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 35364,
+        "end": 35508,
+        "fromLine": 641,
+        "toLine": 643,
+        "lines": 3,
+        "record": "operation",
+        "field": "statless",
+        "source": "if (operation.statless !== undefined && operation.statless !== true) {\r\n      error(`${path}.statless`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 35514,
+        "end": 35649,
+        "fromLine": 644,
+        "toLine": 646,
+        "lines": 3,
+        "record": "operation",
+        "field": "taunt",
+        "source": "if (operation.taunt !== undefined && operation.taunt !== true) {\r\n      error(`${path}.taunt`, 'must equal true when provided');\r\n    }"
+      },
+      {
+        "start": 36139,
+        "end": 36289,
+        "fromLine": 659,
+        "toLine": 661,
+        "lines": 3,
+        "record": "operation",
+        "field": "keepInHand",
+        "source": "if (operation.keepInHand !== undefined && operation.keepInHand !== true) {\r\n      error(`${path}.keepInHand`, 'must equal true when provided');\r\n    }"
+      }
+    ],
+    "unknownKeys": [
+      {
+        "fromLine": 227,
+        "toLine": 229,
+        "source": "for (const key of Object.keys(operation)) {\r\n    if (!DAMAGE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for damage operations');\r\n  }"
+      },
+      {
+        "fromLine": 368,
+        "toLine": 370,
+        "source": "for (const key of Object.keys(operation)) {\r\n    if (!CURSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for curse operations');\r\n  }"
+      },
+      {
+        "fromLine": 460,
+        "toLine": 462,
+        "source": "for (const key of Object.keys(operation)) {\r\n    if (!allowed.has(key)) error(`${path}.${key}`, `is not accepted for ${op} operations`);\r\n  }"
+      },
+      {
+        "fromLine": 542,
+        "toLine": 544,
+        "source": "for (const key of Object.keys(operation)) {\r\n    if (!allowed.has(key)) error(`${path}.${key}`, `is not accepted for ${op} operations`);\r\n  }"
+      },
+      {
+        "fromLine": 700,
+        "toLine": 702,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!CLEANSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for cleanse operations');\r\n    }"
+      },
+      {
+        "fromLine": 709,
+        "toLine": 711,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!STEAL_ATK_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for stealAtk operations');\r\n    }"
+      },
+      {
+        "fromLine": 727,
+        "toLine": 729,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (key !== 'op') error(`${path}.${key}`, 'is not accepted for noDrawNext operations');\r\n    }"
+      },
+      {
+        "fromLine": 732,
+        "toLine": 734,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!FOE_FIGHT_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for foeFight operations');\r\n    }"
+      },
+      {
+        "fromLine": 738,
+        "toLine": 740,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!COPY_RANDOM_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for copyRandom operations');\r\n    }"
+      },
+      {
+        "fromLine": 742,
+        "toLine": 744,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!STATUS_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for status operations');\r\n    }"
+      },
+      {
+        "fromLine": 751,
+        "toLine": 753,
+        "source": "for (const key of Object.keys(operation)) {\r\n      if (!DISCOVER_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for discover operations');\r\n    }"
+      },
+      {
+        "fromLine": 892,
+        "toLine": 911,
+        "source": "for (const triggerKey of Object.keys(triggers)) {\r\n        if (triggerKey === 'duration') {\r\n          // M2：容器级 duration——非 onPlay trigger 持续 N 次触发后过期（花瓣法阵「持续 3 回合」）\r\n          if (!isPositiveInteger(triggers.duration)) error('rules.triggers.duration', 'must be a positive integer');\r\n          continue;\r\n        }\r\n        if (triggerKey === 'replay') {\r\n          // M3：容器级 replay——打出后整卡重跑（急行军「效果触发 2 次」规则化）\r\n          const replay = triggers.replay;\r\n          if (!isRecord(replay) || !hasOnlyKeys(replay, new Set(['on', 'times'])) ||\r\n              !['lastHand'].includes(replay.on) || !isPositiveInteger(replay.times)) {\r\n            error('rules.triggers.replay', \"must be { on: 'lastHand', times: positive integer }\");\r\n          }\r\n          continue;\r\n        }\r\n        if (triggerKey !== 'onPlay') {\r\n          // G13 时点触发器：op 形状先校验，运行时由 battle.triggers.m2.js runner 结算\r\n          validateOperationArray(triggers[triggerKey], card, `rules.triggers.${triggerKey}`, error);\r\n        }\r\n      }"
+      },
+      {
+        "fromLine": 1076,
+        "toLine": 1078,
+        "source": "for (const key of Object.keys(base)) {\r\n        if (!BASE_KEYS.has(key)) error(`rules.base.${key}`, 'unknown base field');\r\n      }"
+      },
+      {
+        "fromLine": 1084,
+        "toLine": 1086,
+        "source": "for (const key of Object.keys(material)) {\r\n            if (!BASE_MATERIAL_KEYS.has(key)) error(`rules.base.material.${key}`, 'unknown material field');\r\n          }"
+      },
+      {
+        "fromLine": 1126,
+        "toLine": 1128,
+        "source": "for (const key of Object.keys(operation)) {\r\n            if (!BAG_OP_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for bag use operations');\r\n          }"
+      }
+    ]
+  }
+}

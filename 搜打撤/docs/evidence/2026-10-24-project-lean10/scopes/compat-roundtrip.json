@@ -1,0 +1,320 @@
+{
+  "status": "passed",
+  "helper": "scripts/css-component-scopes.mjs",
+  "helperSha256": "f214a19b30349642fe296052156d473321666ec718b1952b720d76e256989b96",
+  "method": "Expand both cached original and current output; compare canonical selectors plus complete declaration/comment bytes and at-rule structure/order",
+  "files": [
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "equal": true,
+      "beforeExpandedBytes": 23891,
+      "afterExpandedBytes": 23891
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "equal": true,
+      "beforeExpandedBytes": 14060,
+      "afterExpandedBytes": 14059
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "equal": true,
+      "beforeExpandedBytes": 26107,
+      "afterExpandedBytes": 26106
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "equal": true,
+      "beforeExpandedBytes": 25873,
+      "afterExpandedBytes": 25873
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "equal": true,
+      "beforeExpandedBytes": 20484,
+      "afterExpandedBytes": 20482
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "equal": true,
+      "beforeExpandedBytes": 11688,
+      "afterExpandedBytes": 11688
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "equal": true,
+      "beforeExpandedBytes": 5323,
+      "afterExpandedBytes": 5323
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "equal": true,
+      "beforeExpandedBytes": 6662,
+      "afterExpandedBytes": 6662
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "equal": true,
+      "beforeExpandedBytes": 7695,
+      "afterExpandedBytes": 7694
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "equal": true,
+      "beforeExpandedBytes": 8061,
+      "afterExpandedBytes": 8061
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "equal": true,
+      "beforeExpandedBytes": 26452,
+      "afterExpandedBytes": 26461
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "equal": true,
+      "beforeExpandedBytes": 12141,
+      "afterExpandedBytes": 12141
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "equal": true,
+      "beforeExpandedBytes": 10604,
+      "afterExpandedBytes": 10604
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "equal": true,
+      "beforeExpandedBytes": 12340,
+      "afterExpandedBytes": 12338
+    },
+    {
+      "file": "game/css/battle-pile-view.css",
+      "equal": true,
+      "beforeExpandedBytes": 6194,
+      "afterExpandedBytes": 6194
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "equal": true,
+      "beforeExpandedBytes": 9428,
+      "afterExpandedBytes": 9428
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "equal": true,
+      "beforeExpandedBytes": 36383,
+      "afterExpandedBytes": 36383
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "equal": true,
+      "beforeExpandedBytes": 13242,
+      "afterExpandedBytes": 13240
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "equal": true,
+      "beforeExpandedBytes": 17939,
+      "afterExpandedBytes": 17935
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "equal": true,
+      "beforeExpandedBytes": 4962,
+      "afterExpandedBytes": 4962
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "equal": true,
+      "beforeExpandedBytes": 23245,
+      "afterExpandedBytes": 23245
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "equal": true,
+      "beforeExpandedBytes": 8263,
+      "afterExpandedBytes": 8263
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "equal": true,
+      "beforeExpandedBytes": 27629,
+      "afterExpandedBytes": 27625
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "equal": true,
+      "beforeExpandedBytes": 20489,
+      "afterExpandedBytes": 20489
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "equal": true,
+      "beforeExpandedBytes": 14749,
+      "afterExpandedBytes": 14749
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "equal": true,
+      "beforeExpandedBytes": 23856,
+      "afterExpandedBytes": 23855
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "equal": true,
+      "beforeExpandedBytes": 15132,
+      "afterExpandedBytes": 15131
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "equal": true,
+      "beforeExpandedBytes": 22905,
+      "afterExpandedBytes": 22905
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "equal": true,
+      "beforeExpandedBytes": 20543,
+      "afterExpandedBytes": 20542
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "equal": true,
+      "beforeExpandedBytes": 25042,
+      "afterExpandedBytes": 25041
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "equal": true,
+      "beforeExpandedBytes": 23609,
+      "afterExpandedBytes": 23609
+    },
+    {
+      "file": "game/css/extraction-rewards.css",
+      "equal": true,
+      "beforeExpandedBytes": 15423,
+      "afterExpandedBytes": 15423
+    },
+    {
+      "file": "game/css/fire-rest.css",
+      "equal": true,
+      "beforeExpandedBytes": 5467,
+      "afterExpandedBytes": 5467
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "equal": true,
+      "beforeExpandedBytes": 8414,
+      "afterExpandedBytes": 8414
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "equal": true,
+      "beforeExpandedBytes": 38371,
+      "afterExpandedBytes": 38361
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "equal": true,
+      "beforeExpandedBytes": 5217,
+      "afterExpandedBytes": 5217
+    },
+    {
+      "file": "game/css/overlays.css",
+      "equal": true,
+      "beforeExpandedBytes": 35711,
+      "afterExpandedBytes": 35628
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "equal": true,
+      "beforeExpandedBytes": 16337,
+      "afterExpandedBytes": 16335
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "equal": true,
+      "beforeExpandedBytes": 9884,
+      "afterExpandedBytes": 9885
+    },
+    {
+      "file": "game/css/page-events.css",
+      "equal": true,
+      "beforeExpandedBytes": 12891,
+      "afterExpandedBytes": 12889
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "equal": true,
+      "beforeExpandedBytes": 23088,
+      "afterExpandedBytes": 23078
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "equal": true,
+      "beforeExpandedBytes": 26348,
+      "afterExpandedBytes": 26348
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "equal": true,
+      "beforeExpandedBytes": 24855,
+      "afterExpandedBytes": 24851
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "equal": true,
+      "beforeExpandedBytes": 20665,
+      "afterExpandedBytes": 20665
+    },
+    {
+      "file": "game/css/room-rewards.css",
+      "equal": true,
+      "beforeExpandedBytes": 7633,
+      "afterExpandedBytes": 7636
+    },
+    {
+      "file": "game/css/scenes.css",
+      "equal": true,
+      "beforeExpandedBytes": 43967,
+      "afterExpandedBytes": 43876
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "equal": true,
+      "beforeExpandedBytes": 16333,
+      "afterExpandedBytes": 16333
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "equal": true,
+      "beforeExpandedBytes": 19484,
+      "afterExpandedBytes": 19478
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "equal": true,
+      "beforeExpandedBytes": 7317,
+      "afterExpandedBytes": 7315
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "equal": true,
+      "beforeExpandedBytes": 17207,
+      "afterExpandedBytes": 17207
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "equal": true,
+      "beforeExpandedBytes": 7209,
+      "afterExpandedBytes": 7207
+    },
+    {
+      "file": "game/css/winter.css",
+      "equal": true,
+      "beforeExpandedBytes": 90867,
+      "afterExpandedBytes": 90884
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "status": "generated",
+  "recipeVersion": "3.4",
+  "request": {
+    "input": "no humans, scenery, interior, a quiet frontier waystation supply room, a few stacked canvas supply cases and a narrow metal shelf at the far side edges, matte blue grey walls, a high frosted window with pale morning light, calm enclosed space\n\nAn original atmospheric reward screen background for a fantasy anime card game. No interface or text. Keep the broad central area visually quiet for card overlays.\n\nWide level camera, simple asymmetrical composition, large coherent forms, low contrast wall planes and soft light across the center, the few props stay near the left and right edges. No table or furniture in the central foreground.\n\nCool slate, faded teal and ivory, a tiny muted amber reflection near the far edge. Soft diffused daylight, matte material, economical painterly background detail, gentle quiet atmosphere.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 251025071,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, photorealistic, realistic rendering, 3d, ruined cathedral, gothic arches, rubble, dense clutter, abandoned dungeon, cobwebs, neon, people, furniture in center, central pedestal, readable text, UI, buttons, cards, borders",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "no humans, scenery, interior, a quiet frontier waystation supply room, a few stacked canvas supply cases and a narrow metal shelf at the far side edges, matte blue grey walls, a high frosted window with pale morning light, calm enclosed space\n\nAn original atmospheric reward screen background for a fantasy anime card game. No interface or text. Keep the broad central area visually quiet for card overlays.\n\nWide level camera, simple asymmetrical composition, large coherent forms, low contrast wall planes and soft light across the center, the few props stay near the left and right edges. No table or furniture in the central foreground.\n\nCool slate, faded teal and ivory, a tiny muted amber reflection near the far edge. Soft diffused daylight, matte material, economical painterly background detail, gentle quiet atmosphere.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, photorealistic, realistic rendering, 3d, ruined cathedral, gothic arches, rubble, dense clutter, abandoned dungeon, cobwebs, neon, people, furniture in center, central pedestal, readable text, UI, buttons, cards, borders",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\reward-redesign-1025\\nai5-draft.png",
+  "references": [],
+  "ucException": "Remove negative space because the UI needs a quiet central area.",
+  "sha256": "7d5ce7fb43343620290d8f69bf212d6ab12c08344dd6cfe342972d4349281aa9"
+}

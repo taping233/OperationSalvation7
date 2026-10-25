@@ -1,0 +1,34 @@
+{
+  "method": "In-memory replacement of this batch source snapshots and original registry; shared sources never restored or rewritten",
+  "baseline": {
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "after": {
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "identical": true,
+  "battleLayerMismatchAlreadyPresent": true,
+  "failedTests": [
+    {
+      "file": "tests/runtime-asset-redundancy.test.js",
+      "line": 69,
+      "reason": "Pre-existing battle.layers opaque-consumer fingerprint mismatch retains all reviewed assets"
+    },
+    {
+      "file": "tests/runtime-asset-redundancy.test.js",
+      "line": 152,
+      "reason": "Pre-existing battle.layers opaque-consumer fingerprint mismatch retains all reviewed assets"
+    },
+    {
+      "file": "tests/runtime-asset-redundancy.test.js",
+      "line": 189,
+      "reason": "Pre-existing battle.layers opaque-consumer fingerprint mismatch retains all reviewed assets"
+    }
+  ]
+}

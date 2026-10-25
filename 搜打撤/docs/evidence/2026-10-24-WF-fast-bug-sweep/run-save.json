@@ -1,0 +1,49 @@
+{
+  "task": "WF-fast-bug-sweep-1024/run-save",
+  "status": "three-fixes-source-frozen-targeted-passed",
+  "fixedRootCauses": 3,
+  "sourceFiles": [
+    "game/src/hub/base-departure.commands.js",
+    "game/src/hub/base-state.js"
+  ],
+  "fixes": [
+    {
+      "id": "FAST-RS-1",
+      "summary": "仓库外层variantKey在出征时丢失，同ID不同变体变为同一张身份。",
+      "change": "选取出征卡时将外层变体复制到独立卡牌快照，沿用现行外层优先身份规则；原仓库卡不变，正常卡和无ID旧卡不变。",
+      "test": "tests/fast-bug-sweep-departure-variant.test.js",
+      "red": {"failed": 2, "passed": 1},
+      "green": {"files": 5, "passed": 55}
+    },
+    {
+      "id": "FAST-RS-2",
+      "summary": "合法JSON中的_m01数组未被规范化；数组附属revision/requests在JSON克隆后丢失，命令读取无有效版本及收据。",
+      "change": "数组型提交元数据沿既有坏字段策略回落为正常对象，版本及幂等记录能够序列化。",
+      "test": "tests/fast-bug-sweep-base-metadata.test.js",
+      "red": {"failed": 1, "passed": 5},
+      "integration": "真实Base.use/readBase/commitBase/重载/readBaseReceipt验证仅扣一次、版本1与同一收据保留。"
+    },
+    {
+      "id": "FAST-RS-3",
+      "summary": "人物/旧职业进度字典内部坏条目可阻断战后结算，数组条目的经验在序列化时消失。",
+      "change": "规范化只清退非对象/数组的坏人物进度，旧classes的良好进度可回填；对象内非法等级/经验回落默认，其他人物与资源保持。",
+      "test": "tests/fast-bug-sweep-character-progress.test.js",
+      "red": {"failed": 6, "passed": 0},
+      "integration": "真实prepareBattleVictoryProgress与保存JSON再读覆盖字符串/数字/布尔/数组、字段损坏、良好人物与旧职业迁移。"
+    }
+  ],
+  "validation": {
+    "finalCommand": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-base-metadata.test.js tests/fast-bug-sweep-character-progress.test.js tests/fast-bug-sweep-departure-variant.test.js tests/base-corrupt-field.test.js tests/base-mutation.test.js tests/m01-base-commit.test.js tests/base-write-lock.test.js tests/storage-review-remediation.test.js tests/departure-persistence.test.js tests/project-bug-sweep-round2-pocket-identity.test.js --maxWorkers=2 --minWorkers=1 --reporter=dot --silent",
+    "files": 10,
+    "passed": 104,
+    "exitCode": 0,
+    "eslintOwnPaths": "passed",
+    "diffCheckOwnPaths": "passed",
+    "initialBroadSweep": {"files": 174, "passedFiles": 166, "failedFiles": 8, "passedTests": 1745, "failedTests": 42, "exitCode": 1, "report": "run-save-tests.json"}
+  },
+  "unresolvedBroadSweep": {
+    "note": "大批UI更新后的既有夹具失配仅记录，不计作本次修复；相关源码在其他活跃重构/冻结任务中。",
+    "files": ["tests/bag-page-lifecycle-review.test.js", "tests/bag-render-derivation.test.js", "tests/base-subpage-header-readability.test.js", "tests/event-callback-lifecycle-audit.test.js", "tests/map-decoration-budget.test.js", "tests/run-architecture.test.js", "tests/run-top-bar-consistency.test.js", "tests/sys03-loot-shop-txn.test.js"]
+  },
+  "boundaries": "未build/全量/服务/浏览器/提交/推送；父集中当前内置实页。避开其他重构及round2冻结源码，保留原未提交增量。"
+}

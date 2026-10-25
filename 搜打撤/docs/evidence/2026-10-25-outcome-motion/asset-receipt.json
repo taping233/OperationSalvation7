@@ -1,0 +1,13 @@
+{
+  "tool": "built-in imagegen",
+  "date": "2026-10-25",
+  "purpose": "shared painted alpha halo for healing/restoration/sacrifice/activation",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a172a0-8f35-7543-8f16-76a8259aafe5\\exec-c8ded7bb-2a28-45f1-a838-919896497983.png",
+  "sourceSha256": "1fcd01d8d71db6e1a0e5addce44ad294819e427c95beb43398804f3354f90d35",
+  "output": "game/assets/ui/outcome/outcome-halo-v1.webp",
+  "sha256": "a6b66b24714d6c94ef4e636780cd1cb42869a43b70f467fa968780f137b83a06",
+  "bytes": 92340,
+  "alpha": true,
+  "processing": "Resize 1254x1254 to 512x512 and WebP encode; preserve alpha. No creative alteration.",
+  "prompt": "One transparent pale ivory dry-gouache circular energy halo with hollow center, fragmented concentric arcs and tapered shards; shared silhouette tinted mint for healing, gold for restoration, violet for sacrifice. No text/runes/objects/background."
+}

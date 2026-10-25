@@ -1,0 +1,34 @@
+{
+  "status": "integrated-independent-template-candidate",
+  "pipeline": "NAI5 draft + built-in panel refinement; built-in confirmation seal",
+  "reference": "docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/event.png",
+  "prompts": "builtin-v3-prompts.txt",
+  "files": [
+    {
+      "path": "D:/素材/代号柒/.tmp/nai/event-option-art-1025/v3/option-draft.png",
+      "sha256": "42d30d85fa419085cef846c149e2480801a4570ae41c875b6007b806e259f20e",
+      "bytes": 565159
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-243126dc-e5a2-48ce-8988-a3ac1abb46a1.png",
+      "sha256": "c2be19306ef07123234a2c96326effaa3535246f893d8f041a930f8a777ce1f8",
+      "bytes": 1217487
+    },
+    {
+      "path": "C:/Users/太平/.codex/generated_images/01a171e7-bda0-79a0-96b6-1e63247d13cd/exec-5596dc51-73d8-4278-85cc-2686a8945e22.png",
+      "sha256": "b8871500b8b6322957ad7b495ad5ffef4788835bed03f9aff183de504433a5fc",
+      "bytes": 1983667
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-option-ink-v3.webp",
+      "sha256": "2caa63a8a71593ee6ef1a79b704c7dc11d7eab5aff7a0ec8b74ff02851b97549",
+      "bytes": 78886
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/game/dev/assets/event-confirm-seal-v3.webp",
+      "sha256": "596a1e0eb49702254e842deb389ffcedcb87d491df216d9ddb46a79f470b2154",
+      "bytes": 78478
+    }
+  ],
+  "alpha": "Both exported WebP have RGBA, range 0..255; only resized/encoded, no crop"
+}

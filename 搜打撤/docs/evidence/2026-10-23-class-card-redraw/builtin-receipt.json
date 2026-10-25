@@ -1,0 +1,179 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-4a4851bd-3161-45ae-b519-cb975586616a.png",
+      "prompt": "Create ONE square game-card painting. Input 1 is the NAI5 composition draft to repaint; input 2 is Wu's current identity only, not pose or background. Input 3 is brushwork only, never its red hair or identity. Preserve Wu's silver-white high ponytail, blue eyes and fang smile, subtle small round face. Accessories optional. Half-length side view, close face and one hand. She holds a black sword upright beside her cheek, utterly still. One incoming pale crescent slash bends across the sword reflection and emerges as a matching reversed crescent. One real woman, no duplicate bodies. The copied curve and calm eye share the central focal zone. Muted navy and warm-grey background planes, two pale directional strokes only. Fix the draft: the slash must be two matching opposing broken crescents crossing the blade reflection, not one complete glowing circle. Calm woman against changing reflected attack. Her fingers grip the wrapped handle below the guard, never bare sharp blade. Central close composition, no background scenery. Recompose as intentional square. Hand-painted anime opaque layered color planes and broad directional strokes, coherent large hair locks, matte dark cloth shaped by hard shadows and restrained warm/cool overpainting. Selective hand-drawn contours with varied weight; clear anime face and readable hands more resolved than secondary areas. Quiet large planes alternate with focused small details. No thin hair networks, uniform grain, random tiny facets, airbrushed plastic, text, frame or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-imitate.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-9090739f-8d52-4520-87ec-9b77a1102eb7.png",
+      "prompt": "Input1 is NAI5 draft but it MISSED the specified storytelling: RECOMPOSE as extreme close-up through a very narrow black shadow seam, huge dagger tip near lens, only part of Wu's blue eye and cheek behind it. No raised knees, no full sitting body, no frontal girl presenting dagger. Extreme close-up, oblique perspective. A short black blade emerges from a narrow seam of deep shadow, its tip huge in the near foreground. Behind it only one cyan eye, part of her cheek and a coherent silver ponytail curve catch cold light. Hand and grip readable. A single bright nick on the blade is the focal point. No glowing white full-body ghost. Nearly black and blue-grey planes. Input2 is Wu current identity only: silver-white high ponytail, blue eyes, small round face and fang smile, black dress; optional accessories. Input3 brushwork only, never its red hair, clothes or identity. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-ghostblade.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-ccce78bf-24d2-4886-bec9-4e08158d7476.png",
+      "prompt": "Input1 is NAI5 flying-sword draft. Keep the asymmetrical full-body low-angle flying sword idea. Correct the draft's excessive spread-leg lunge: one boot planted on sword flat, other leg softly bent at knee with foot hovering nearby; natural hips and two readable legs, dress remains short and opaque. One giant sword near tip toward viewer, do not add the draft's strange ring around ankle. Full-body low-angle three-quarter view, asymmetrical floating pose. She balances one boot lightly on the flat of one enormous hovering black sword; the tip projects toward lower foreground, handle recedes behind her. One knee softly bent, torso and hips legible, arms relaxed, ponytail streams upward. Pale thin cloud band behind ankles. Simple blue-grey and ivory color fields, no radial sword halo. Input2 is Wu current identity only: silver-white high ponytail, blue eyes, small round face and fang smile, black dress; optional accessories. Input3 brushwork only, never its red hair, clothes or identity. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-swordimmortal.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-949f360b-c725-439f-a2a9-173744a7303e.png",
+      "prompt": "Input1 NAI5 draft for storyboard. The draft misread the concept: remove the woman holding up cloth and REMOVE the rectangular hole. Main foreground subject is an EMPTY three-dimensional discarded cloak, its open neck and hollow folds reveal empty space, pinned by two blades; only one small escaped Wu turns away behind it. No second torso or ghost woman. Narrative close-up with two time layers. An empty black travel cloak still holds a human shoulder silhouette at center, pierced and pinned by two thin blades from offscreen. The cloak opens onto empty pale space. At back-right a glimpse of the escaped woman, blue eye and sweeping silver ponytail, already turning away. One living woman, empty cloak is not a second body. No straw dummy, no insect. Warm grey void, black cloth, cold-blue accent. Input2 Wu identity only, silver high ponytail, blue eyes, small fang smile, accessories optional. Input3 brushwork only, no copying its red hair or character. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-goldencicada.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-26b36d9e-8f3a-4460-8435-9da5a7557b5e.png",
+      "prompt": "Input1 NAI5 draft for storyboard. The draft arrow became a sword: make the near object a DETACHED flying arrowhead, no sword hilt, no hand gripping it. Wu's hand directs it from behind; her other hand out of view. Arrow shaft continues backward and outside the frame, three depth levels. Radical low-angle upward view. One oversized luminous arrowhead rushes toward viewer through lower-center foreground, shaft cropped; two smaller receding streaks establish depth. Woman is active waist-up figure behind it, raised hand sharply directing the falling diagonal current, focused blue eyes. One coherent flow from high background to near foreground. Three large slate-blue planes, few pale streaks. No scenery or dense tiny arrow grid. Input2 Wu identity only, silver high ponytail, blue eyes, small fang smile, accessories optional. Input3 brushwork only, no copying its red hair or character. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-meteorrain.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-stealth",
+      "name": "潜匿",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-6c8886e3-a1ad-4017-b348-da384cc4f5c8.png",
+      "prompt": "Repaint input1 NAI5 draft. The draft is too brightly lit: change the central dark cover into a nearly black overlapping CLOTH SHADOW shape, conceal most of the face, leave only one small clear blue eye slit and a sliver of smile. Hair fades into dark, avoid displaying the whole face. Tight three-quarter face and shoulder close-up, off-center. Her body merges with one opaque charcoal shadow plane. Opening between overlapping dark cloth reveals one clear cyan eye and corner of a knowing smile. One silver ponytail lock curves from light into shadow and disappears. Viewer discovers face through negative shapes. No particles, no translucent body, no upright figure. Muted grey-blue backdrop. Input2 Wu identity only, silver high ponytail blue eyes, optional accessories; input3 brushwork only, not its identity. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-stealth.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-sneak",
+      "name": "偷袭",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-ca891dc1-ceda-4984-ac32-5b65c25f0c83.png",
+      "prompt": "Repaint input1 NAI5 draft. Correct draft's dagger floating across face: put a clearly gripped short blade in her lower forward hand, its point entering the foreground armor seam from behind the occluding shoulder. Keep her mouth empty. Faceless target only an armor fragment. Over-the-shoulder ambush. A dark faceless armored shoulder fills close lower-left foreground, cropped simple silhouette. Behind this occlusion her black dagger slides through a narrow gap toward armor seam, stopping before contact. Her focused blue eye and face appear beyond the guard at middle depth, torso crouched, ponytail follows move. One attacking woman and one target fragment. No blood or wooden post. Three grey-black planes, one steel glint. Input2 Wu identity only, silver high ponytail blue eyes, optional accessories; input3 brushwork only, not its identity. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-sneak.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-armup",
+      "name": "武装",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-ac4c97fc-d2eb-4a8b-aabf-16e6705f3d53.png",
+      "prompt": "Repaint input1 NAI5 storyboard, input2 Heixiang identity only (dark brown skin, huge muscular man, slick black hair/exposed forehead, amber eyes, left cheek stitched scar), input3 brushwork only, not its red hair or girl. Keep draft buckle close-up but correct anatomy: exactly two gloves, one left forearm crosses chest, right hand pinches and pulls a strap end through that bracer's buckle. Remove extra duplicate knuckles and any unconnected fingers. Keep skin deeply brown and build as identity reference. Extreme torso-and-hands close-up, low tilted camera. One large gloved hand pulls locking strap of heavy shield bracer firmly into place across other forearm; chest armor fills middle plane. His dark face and exposed forehead enter upper corner, looking down. A sheathed sword is only a cropped diagonal behind. Focus on tension at buckle, overlapping glove shield chest. No weapon rows or open coat. Charcoal backdrop, burnt-orange wedge. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-armup.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-b094ae22-9069-4a9b-92c4-adaf2f25294e.png",
+      "prompt": "Repaint input1 NAI5 storyboard, input2 Heixiang identity only (dark brown skin, huge muscular man, slick black hair/exposed forehead, amber eyes, left cheek stitched scar), input3 brushwork only, not its red hair or girl. Recompose draft to show one planted pivot boot and rear leg, real hips and shoulders twist. His gloved hands clearly grip the giant sword handle; the near BLADE is a foreshortened steel mass sweeping close to lens before exiting edge. Scarf is CLOTH, never fire. One broken slash, no complete ring. Low-angle oblique full action. He pivots on one planted boot, hips turning ahead of shoulders, giant sword sweeping out of very near lower foreground and exiting upper-right edge. One broad broken pale slash follows arc, incomplete and cropped, never a full circle. Rear leg and scarf trail behind rotation. Clear twist and readable legs, blade partly cropped. Three simple blue-grey planes, no landscape. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-whirlwind.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "name": "血毒双镖",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-0e8f11ce-baa0-48d0-881f-c11ac8798516.png",
+      "prompt": "Repaint input1 NAI5 storyboard. Major storyboard correction: REMOVE both daggers from his hands and remove the scarf ring. Make the crimson-marked dagger DETACHED, huge and close at lower-left, its hilt behind its point; make green dagger DETACHED, small and far upper-right. His rear hand has just released it with fingers opening; body twists. Two different moments, no mirrored weapon display. Close-up of two dagger throws at different depths and moments. One large steel throwing dagger with dark crimson mark tumbles toward lower-left foreground, point foreshortened. A second smaller green-coated dagger just left rear gloved hand toward upper-right. Waist-up body twists between trajectories, face upper-middle. Unequal lengths and depths. No symmetrical red-green circle or long ribbons. Charcoal, rusty red, tiny green accent. Input2 current heixiang identity only, not its pose/background. Accessories optional. Input3 paint handling only, never its red hair or character. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bloodpoison.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-bladebloom",
+      "name": "永恒绽放",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-b987fd7f-7fa6-4d36-8468-0007fba8d15f.png",
+      "prompt": "Repaint input1 NAI5 storyboard. Preserve close palm and half-face but grow one continuous CURVING LOOP stem across the palm with bud, open blossom and one fallen petal curling into a sprout. Remove the flower stuck like a hairpin on her forehead. Exactly one natural open palm with five fingers. Thick brown side fringe hides viewer-right eye; visible green viewer-left eye, quiet thoughtful expression. Poetic close-up, open palm in near foreground. One curved living stem loops back toward its root across palm; a tight bud, a single open flower and falling petal dissolving into new sprout occupy points on same continuous stem. Thoughtful half face behind, one green eye visible, other hidden by thick side fringe. Plant and palm dominate. No frontal symmetrical flower presentation. Warm ivory, forest-green planes, pale-gold accent. Input2 current baita identity only, not its pose/background. Accessories optional. Input3 paint handling only, never its red hair or character. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bladebloom.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\baita.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-arcanescroll",
+      "name": "奥术残卷",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-d36adc15-933b-4e29-b8ac-bac4f0f9ec1b.png",
+      "prompt": "Repaint input1 NAI5 storyboard. REMOVE the unwanted human hand and bracelet in the draft. No person, hand, limb or face. The fragments of scorched parchment alone hang separated by large missing gaps, one impossible teal rune curve bridges the absent paper. At least one torn roll edge visible. Sparse marks only, no fake long handwriting. No human figure. Partially burned ancient scroll unrolls diagonally toward viewer; large missing sections break silhouette. Three separated torn parchment fragments align into one impossible luminous curve across gap; sparse abstract marks, not readable text. Near roll large, far edge thin. Rough ivory parchment, violet shadow, one teal accent. Background only two quiet broad color fields, no library or lettering. Input2 is paint handling only, never copy its person. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-arcanescroll.png",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-burnharvest",
+      "name": "爆燃火球",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-bbda59ce-4fa2-4e5c-94bc-4419a18ee551.png",
+      "prompt": "Repaint input1 NAI5 storyboard. Reframe the draft so the dark ember shell cracking and explosive flame occupy TWO THIRDS of foreground. Sorcerer is only a small oblique profile along upper edge, hand recoils BEHIND burst. No full portrait presenting fire, no flame shaped like a flower held gently. Impact close-up. Compressed orange ember breaks its dark shell at center, tiny white-hot core drives huge asymmetrical burst through near foreground. Only sorcerer profile and recoiling gloved hand at upper edge behind blast. Three ragged flame masses, not many sparks. Split shell and violent expansion are subject. Purple-grey and charcoal flat backdrop, no realistic landscape. Input2 is Changwuyu current male identity: silver-grey low bun, long side locks, amber eyes, pointed ears, thin round glasses. Preserve adult masculine face, no change to woman; hat optional. Input3 paint handling only, never its girl or red hair. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-burnharvest.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "name": "风暴火球",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-82053e0e-842f-440c-a26e-0d6eb3712aeb.png",
+      "prompt": "Repaint input1 NAI5 storyboard. Push the draft to a HIGH OBLIQUE camera and asymmetrical spiral at three depths. Near upper-left flame is cropped huge, rear lower-right flame much smaller; cloak body and hand TURN with vortex. Avoid static front portrait with two equally important balls. Fire has clear broad opaque shape, not glossy volumetric-render noise. High oblique half-length view, sorcerer at eye of broken spiral. Huge near fire mass enters cropped upper-left, much smaller fire mass recedes behind far shoulder lower-right. Cloak and extended hand turn with flow. Fire travels at different depths around him, not evenly displayed balls or closed flat ring. Black-violet, muted orange broad planes, few sparks, no landscape. Input2 is Changwuyu current male identity: silver-grey low bun, long side locks, amber eyes, pointed ears, thin round glasses. Preserve adult masculine face, no change to woman; hat optional. Input3 paint handling only, never its girl or red hair. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-flame-storm.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt7-twinfireball",
+      "name": "三重火球",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-fed56ae6-f9f2-440a-b28a-05802cfe21f2.png",
+      "prompt": "Repaint input1 NAI5 storyboard using corrected composition below. Draft lobes look like toy balloons: REPLACE with one molten ember actively TEARING into three ragged fiery cores, near core huge, far one small, thin glowing bridges stretching between. No smooth white egg/balloon shapes and no string triangle. Fingers and one amber eye are secondary, no portrait filling frame. Extreme close-up on gloved fingertips and one orange ember. Ember splits into three unequal white-orange lobes along diagonal, linked by thin hot bridges: one large near lobe, medium behind, small receding. Amber eye and thin round glasses emerge from dark at upper edge, not a standing body. Charcoal and violet abstract backdrop, three clear masses, no evenly spaced vertical balls. Input2 Changwuyu adult male identity only: silver-grey low bun, long side locks, amber eyes, pointed ears, thin round glasses, black gloves. Optional hat. Input3 brushwork only, not its character or palette. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-twinfireball.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "name": "致命射线",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-492c85fc-9d3c-4ca4-a204-6c50bc80a842.png",
+      "prompt": "Repaint input1 NAI5 storyboard using corrected composition below. The NAI draft MISSED the armor plate entirely. Major recompose: foreground is a HUGE thick dark steel plate cut into TWO offset slabs, cut surfaces dominate the square. One hair-thin diagonal red-gold beam burns through the narrow slit, glowing edge only. Through the gap show a small glimpse of his amber eye and two black gloved fingertips BEHIND the plate. No crosshair lines across a face, no large head portrait, no hat as central object. Conceptual close-up, nearly edge-on. Extremely thin straight red-gold ray passes diagonally through thick dark armor plate in foreground. Plate cut into two massive offset halves, tiny incandescent slit between. Beyond split, one amber eye and two sorcerer fingertips visible, everything else merges into purple-black plane. Enormous consequence of tiny ray. No gore or standing figure pointing into empty space. Few broad shapes. Input2 Changwuyu adult male identity only: silver-grey low bun, long side locks, amber eyes, pointed ears, thin round glasses, black gloves. Optional hat. Input3 brushwork only, not its character or palette. Hand-painted Japanese anime, layered opaque color masses, broad directional strokes, grouped hard shadows and warm/cool overpainting. Hair in coherent substantial locks, dark cloth in clear fold planes, variable selective contours. Anime eyes and hands clearly resolved; calm large surfaces with selective focal details, matte skin and cloth. No thin strand networks, all-over grain, plastic polish or random triangular confetti. Keep two or three simple abstract background color planes, no realistic complex scenery. One square illustration, no text, borders or watermark.",
+      "references": [
+        "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-nuke-ray.png",
+        "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+        "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-20-default-style-fusion\\reference-09.jpg"
+      ]
+    }
+  ]
+}

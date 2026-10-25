@@ -1,0 +1,123 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/node-retrigger.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at processTimers (node:internal/timers:538:9)
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:482:15
+    at async Promise.all (index 2)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 商店关闭不消耗，离开所在格才变普通
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > wood满包可暂离、真实存读档与离开重进保留未领奖；腾格领取只结算一次
+[SDT.Art] missing asset mapping: class:武
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+······························································································································································································································································
+
+ Test Files  18 passed (18)
+      Tests  254 passed (254)
+   Start at  18:47:32
+   Duration  15.41s (transform 1.97s, setup 0ms, collect 7.42s, tests 14.31s, environment 26.89s, prepare 2.95s)
+

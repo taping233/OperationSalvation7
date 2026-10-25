@@ -1,0 +1,744 @@
+{
+  "entries": [
+    "game/css/base.css",
+    "game/css/cards.css",
+    "game/css/overlays.css",
+    "game/css/hub.css",
+    "game/css/battle.css",
+    "game/css/scenes.css",
+    "game/css/lab-ending.css",
+    "game/css/winter.css",
+    "game/css/expedition.css",
+    "game/css/expedition-map.css",
+    "game/css/map-edge-light.css",
+    "game/css/expedition-hub.css",
+    "game/css/expedition-inventory.css",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-battle.css",
+    "game/css/expedition-library.css",
+    "game/css/card-v3.css",
+    "game/css/expedition-roster.css",
+    "game/css/expedition-shop.css",
+    "game/css/ui-scale.css",
+    "game/css/page-slot-select.css",
+    "game/css/page-settings.css",
+    "game/css/page-datapage.css",
+    "game/css/page-ach.css",
+    "game/css/page-cardforge.css",
+    "game/css/page-expedition-hud.css",
+    "game/css/feedback-oct12.css",
+    "game/css/roster-departure-v2.css",
+    "game/css/experience-loot.css",
+    "game/css/page-events.css",
+    "game/css/page-rewards-bag-help.css",
+    "game/css/page-battle-ui.css",
+    "game/css/character-idle.css",
+    "game/css/page-transitions.css",
+    "game/css/ak-skin.css",
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/card-layout-selected.css",
+    "game/css/battle-stage.css",
+    "game/css/transition-illustrations.css",
+    "game/src/main.js"
+  ],
+  "unreachableBytes": 681812,
+  "unreachable": [
+    {
+      "file": "game/css/base-camp-roster.css",
+      "bytes": 25873,
+      "normalizedBytes": 25873,
+      "lines": 313,
+      "tokens": null,
+      "sha256": "8439fe546e95d44a4ac68a44df7696bf6bb412d311c0987fa75d2666e996810f"
+    },
+    {
+      "file": "game/css/card-frames/career/frames.css",
+      "bytes": 118,
+      "normalizedBytes": 118,
+      "lines": 1,
+      "tokens": null,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-frames/rose/frames.css",
+      "bytes": 118,
+      "normalizedBytes": 118,
+      "lines": 1,
+      "tokens": null,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "bytes": 4806,
+      "normalizedBytes": 4806,
+      "lines": 31,
+      "tokens": null,
+      "sha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62"
+    },
+    {
+      "file": "game/css/character-cover.css",
+      "bytes": 8698,
+      "normalizedBytes": 8561,
+      "lines": 137,
+      "tokens": null,
+      "sha256": "61818a124319d8ac763d8ac3e1892b385e3ce38b0614133f56db1bc663e8f9f0"
+    },
+    {
+      "file": "game/css/character-pool-cover.css",
+      "bytes": 9605,
+      "normalizedBytes": 9517,
+      "lines": 88,
+      "tokens": null,
+      "sha256": "c065174f8e97dfa07522d101e0f885b1718d395df712fa566954dc9c5fe3000a"
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "bytes": 2866,
+      "normalizedBytes": 2830,
+      "lines": 37,
+      "tokens": null,
+      "sha256": "dc428cdd0de15da338bdf534b9cd211c78b407bc5af1f304857c601c970198fa"
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "bytes": 23245,
+      "normalizedBytes": 23007,
+      "lines": 238,
+      "tokens": null,
+      "sha256": "32118ed7a28fc3bd5e7fafb5add6f16a134786a9716b676a346693a8fc260fa6"
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "bytes": 8263,
+      "normalizedBytes": 8190,
+      "lines": 73,
+      "tokens": null,
+      "sha256": "597fcfb99f6dbda2dff71abf767a0e1a95019784a5ceda9430d3d31510e2dca4"
+    },
+    {
+      "file": "game/css/cover-hub.css",
+      "bytes": 16093,
+      "normalizedBytes": 15846,
+      "lines": 247,
+      "tokens": null,
+      "sha256": "471d6ec4d4689a1de92979eccf75666c59b171a123be6d27a4db12b3c532759c"
+    },
+    {
+      "file": "game/css/cover-remaining.css",
+      "bytes": 449,
+      "normalizedBytes": 449,
+      "lines": 9,
+      "tokens": null,
+      "sha256": "2a9b9b804595b23dd7ade4c02982a4ae870eeccb4d8e8dacd1066f7295100458"
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "bytes": 27629,
+      "normalizedBytes": 27333,
+      "lines": 296,
+      "tokens": null,
+      "sha256": "5124c4401812e37b2c86803a014662ed40dfadefb0b574ccf9c81a2335d3ee2d"
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "bytes": 20489,
+      "normalizedBytes": 20215,
+      "lines": 274,
+      "tokens": null,
+      "sha256": "ec0b266a157f71957b97e8ef985ffb09e8332c4b71cac35773ee526fbe17a98c"
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "bytes": 14749,
+      "normalizedBytes": 14657,
+      "lines": 92,
+      "tokens": null,
+      "sha256": "a130e9a316e20ab766bb0719dafd052fe633193f385d22aeb4c497433ee927fa"
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "bytes": 14347,
+      "normalizedBytes": 14148,
+      "lines": 199,
+      "tokens": null,
+      "sha256": "e159ab6a68ff71fd703b7c9e21df5221a018c73a2bf86ca4cf9a863c84452b38"
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "bytes": 8414,
+      "normalizedBytes": 8326,
+      "lines": 112,
+      "tokens": null,
+      "sha256": "68007f8cd76c541a887f5b4c7fdd9b21f3a72b7c1002ef75eed739c5abfed9df"
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "bytes": 6563,
+      "normalizedBytes": 6563,
+      "lines": 91,
+      "tokens": null,
+      "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "bytes": 38371,
+      "normalizedBytes": 38371,
+      "lines": 531,
+      "tokens": null,
+      "sha256": "c23101afc2d0bda0e6feae59a1e53a649340965b2056906b5d9212adb3503d51"
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "bytes": 6191,
+      "normalizedBytes": 6190,
+      "lines": 1,
+      "tokens": null,
+      "sha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7"
+    },
+    {
+      "file": "game/css/hub-arrival.css",
+      "bytes": 4067,
+      "normalizedBytes": 4012,
+      "lines": 55,
+      "tokens": null,
+      "sha256": "0183f10b98b63d455877999e205b89a1d8913edfc6fb8f9cfeccfea20bb4a906"
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "bytes": 10119,
+      "normalizedBytes": 10037,
+      "lines": 83,
+      "tokens": null,
+      "sha256": "c37a04f9be6c68d941939508046b844d4690a5b1829da09c402dc8e1ca67da18"
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "bytes": 7320,
+      "normalizedBytes": 7256,
+      "lines": 64,
+      "tokens": null,
+      "sha256": "5134a805cf126466d122c5672677b2fe7afe58ed55571b96e10adca768797923"
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "bytes": 2408,
+      "normalizedBytes": 2408,
+      "lines": 20,
+      "tokens": null,
+      "sha256": "f78f22021ca0890cdeb5d40381e36ac4b05a1b11ff1c5c0ea13d9e52c36deecf"
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "bytes": 9056,
+      "normalizedBytes": 8954,
+      "lines": 102,
+      "tokens": null,
+      "sha256": "f6a8e7336f0183099f8e00dcf210e0cc55e3d79990e994993fcd49b6cef7e9ed"
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "bytes": 5671,
+      "normalizedBytes": 5620,
+      "lines": 51,
+      "tokens": null,
+      "sha256": "cb0914a69eda1555283263a4aaa3f30d7c745bcd4fbc59f75b9252dd366f6e0f"
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "bytes": 8858,
+      "normalizedBytes": 8784,
+      "lines": 74,
+      "tokens": null,
+      "sha256": "fe95acabeb9b8946ec30cd80d10c0bee3cae473b93b8d5ef8609953fa6d16ae2"
+    },
+    {
+      "file": "game/css/inbox-cover.css",
+      "bytes": 12512,
+      "normalizedBytes": 12339,
+      "lines": 173,
+      "tokens": null,
+      "sha256": "cda8a577c9a24622fcf6a6ecb0f37035540112168f36ea9400dbe018282b319c"
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "bytes": 7450,
+      "normalizedBytes": 7450,
+      "lines": 105,
+      "tokens": null,
+      "sha256": "0b243f07250634d1818ec0b31385304d6e9040c3a51ede7366fdd6f27c2d8cb3"
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "bytes": 16422,
+      "normalizedBytes": 16199,
+      "lines": 223,
+      "tokens": null,
+      "sha256": "b567acc42ef7101a26792826a6113d3f9c8b7254343bbc30dd5170eefb2ee3cb"
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "bytes": 2003,
+      "normalizedBytes": 2003,
+      "lines": 27,
+      "tokens": null,
+      "sha256": "0cac57143aed4e1642690ab235722cccd2ad9968391b02ea9ebc297308144fb8"
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "bytes": 2351,
+      "normalizedBytes": 2293,
+      "lines": 58,
+      "tokens": null,
+      "sha256": "97a857b3b8be03321d61ebdac52109de9ba65d95ec80fcd6ba75eea8cb9eeeb5"
+    },
+    {
+      "file": "game/css/page-deploy.css",
+      "bytes": 21287,
+      "normalizedBytes": 21287,
+      "lines": 421,
+      "tokens": null,
+      "sha256": "d0fef5779be87237d4bd4d3010400eabdd1681f75d218e476b62705fdc1007c1"
+    },
+    {
+      "file": "game/css/page-hub.css",
+      "bytes": 18872,
+      "normalizedBytes": 18872,
+      "lines": 357,
+      "tokens": null,
+      "sha256": "5142814eab7187a732d83efdf65e84f1bd1424415bffea4e3762b5a6bbc14141"
+    },
+    {
+      "file": "game/css/page-stash.css",
+      "bytes": 6753,
+      "normalizedBytes": 6659,
+      "lines": 94,
+      "tokens": null,
+      "sha256": "2a071926885f28ecac13a32c4de8b6b37db1f0f455f89c85057a5eb518153ae1"
+    },
+    {
+      "file": "game/css/page-upgrade.css",
+      "bytes": 7966,
+      "normalizedBytes": 7834,
+      "lines": 132,
+      "tokens": null,
+      "sha256": "1976a2752dc6e7b7fd8fe50bec96251a841e44ab6c77c29cfa8883423bb2ef72"
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "bytes": 2782,
+      "normalizedBytes": 2782,
+      "lines": 43,
+      "tokens": null,
+      "sha256": "5f2d12fe1d78e0eac09240c9c8ab3409669c92a0b1dc4aef1abe2d647d8c64f5"
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "bytes": 13148,
+      "normalizedBytes": 13145,
+      "lines": 92,
+      "tokens": null,
+      "sha256": "e0bd41b271656dacd0a2f6ae1d11f5e4e9a98734a36130bec3d0089d6475c998"
+    },
+    {
+      "file": "game/css/secondary-ui-tokens.css",
+      "bytes": 1109,
+      "normalizedBytes": 1109,
+      "lines": 11,
+      "tokens": null,
+      "sha256": "a0d8478c68e9c54d60ba86d05f540c1dc8a0e20b1319384a25ccdbe78a465257"
+    },
+    {
+      "file": "game/css/settings-cover.css",
+      "bytes": 11962,
+      "normalizedBytes": 11798,
+      "lines": 164,
+      "tokens": null,
+      "sha256": "8ddcc119d9e4f2aa1b59c8fed7f2f5bfde97827828b58ad7cdbee541d980a8a7"
+    },
+    {
+      "file": "game/css/settings-transition.css",
+      "bytes": 89,
+      "normalizedBytes": 89,
+      "lines": 1,
+      "tokens": null,
+      "sha256": "7d46f61a0edced4b0d7e0ef274fc1af1b930e722e198d4edd96ae872354b461a"
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "bytes": 8282,
+      "normalizedBytes": 8278,
+      "lines": 4,
+      "tokens": null,
+      "sha256": "dca5290aaa40c9bc84534c161d9b08caea31780fb5495901cff4e83c4cd5ef37"
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "bytes": 7330,
+      "normalizedBytes": 7330,
+      "lines": 8,
+      "tokens": null,
+      "sha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa"
+    },
+    {
+      "file": "game/css/slots-cover.css",
+      "bytes": 9373,
+      "normalizedBytes": 9373,
+      "lines": 144,
+      "tokens": null,
+      "sha256": "85af97021be963725dc29bffc90d12c9d46e9832ac26b310c0e52acb4f5e1312"
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "bytes": 994,
+      "normalizedBytes": 975,
+      "lines": 19,
+      "tokens": null,
+      "sha256": "9ebd415d85a1c5d6ff1216abfde3c306ee4dd31c350bf5fd1a00f676aba4bbed"
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "bytes": 17207,
+      "normalizedBytes": 17207,
+      "lines": 271,
+      "tokens": null,
+      "sha256": "6c82b4b0ffe190f799f1f212fad7859edc6891cdff5f12131e8995485aaaa5ea"
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "bytes": 3894,
+      "normalizedBytes": 3894,
+      "lines": 5,
+      "tokens": null,
+      "sha256": "6673dc6b3c2d25066a87cbc797e5e22e2242105d2fb503b76d7e9843cccc9050"
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "bytes": 16990,
+      "normalizedBytes": 16990,
+      "lines": 264,
+      "tokens": 3695,
+      "sha256": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4"
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "bytes": 13423,
+      "normalizedBytes": 13423,
+      "lines": 167,
+      "tokens": 3458,
+      "sha256": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4"
+    },
+    {
+      "file": "game/src/audio/sfx-review.labels.js",
+      "bytes": 3107,
+      "normalizedBytes": 3107,
+      "lines": 30,
+      "tokens": 453,
+      "sha256": "8b77310ec212085db29fdd016acdd9af1be780fa7f742dc6effc2e53ae389218"
+    },
+    {
+      "file": "game/src/audio/sfx-review.sources.js",
+      "bytes": 13771,
+      "normalizedBytes": 13771,
+      "lines": 69,
+      "tokens": 1563,
+      "sha256": "b1cca4f0fac5ab496ea314d8a6e08c2ecb7eb8b290a3ee1a4b540d2f5203a30b"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "bytes": 407,
+      "normalizedBytes": 401,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "a07855a9eaa6562f307e2787eb7622946e4fbda3b407fa66ccb547b4c975c75a"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "bytes": 443,
+      "normalizedBytes": 437,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "d7e2b9f7a48cf8a7d3632dd68b9db2548375909437d02a5899655acb5b1057a5"
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.js",
+      "bytes": 298,
+      "normalizedBytes": 294,
+      "lines": 4,
+      "tokens": 35,
+      "sha256": "487a16d5ce1fae72dca9f1d9c0b6b14dd6eab4fc185cda36e169d1a600305685"
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.js",
+      "bytes": 305,
+      "normalizedBytes": 300,
+      "lines": 5,
+      "tokens": 38,
+      "sha256": "94d22a8eae1830074f5b9cabb67521aa90f29cabf2cefbfda1c09e17fec8ec26"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "bytes": 408,
+      "normalizedBytes": 402,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "46696c97aaccc01f909600931b9aedbe497c4e78ecbddfffa0112c0fd4f1ed5b"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "bytes": 437,
+      "normalizedBytes": 431,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "b4258941a36216bb7131d0a23253d50c655552a7a3df8e7c446899951050a22a"
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "bytes": 459,
+      "normalizedBytes": 453,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "efd88f5879aeee977de9b6e3d28ab7e16505596c1b58a609b503490869b5abfd"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "bytes": 443,
+      "normalizedBytes": 437,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "78b7ef93711f16047d87586c414091cbb721168275fee70ffd803f69a0ce2d01"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "bytes": 497,
+      "normalizedBytes": 489,
+      "lines": 8,
+      "tokens": 70,
+      "sha256": "21349d5405aa56d6e82950db3cfe4e2eab28d06d694551d6a70cee8599ae22ae"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "bytes": 786,
+      "normalizedBytes": 775,
+      "lines": 11,
+      "tokens": 64,
+      "sha256": "64f6dca183fd6cafe8893df8e12d5a21df381e1c3560cf00f1bae9b574df2377"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "bytes": 389,
+      "normalizedBytes": 384,
+      "lines": 5,
+      "tokens": 33,
+      "sha256": "8c33c1c42f8734fe96728f2cef426933498595efe4e0244bae6c457d7884f0d3"
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "bytes": 442,
+      "normalizedBytes": 436,
+      "lines": 6,
+      "tokens": 36,
+      "sha256": "21a657c1d8108c3c82657b8830377cafbd9f73ae8f12d2dfdfa8b26d9284f2ff"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "bytes": 787,
+      "normalizedBytes": 777,
+      "lines": 10,
+      "tokens": 82,
+      "sha256": "448334987f85b9262515a24b8d98c2e7d9352d0ceefecf2e126de650b1289567"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "bytes": 3124,
+      "normalizedBytes": 3086,
+      "lines": 38,
+      "tokens": 390,
+      "sha256": "b08aa7747cbe686c5a84599f105a9dfb25adb329dbda3cf3bee1b89e4222aa3f"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.js",
+      "bytes": 2185,
+      "normalizedBytes": 2163,
+      "lines": 22,
+      "tokens": 212,
+      "sha256": "5e44b3e10d965f2d5a34f5080bcaa14a12af886667d944b68d2702cdc2a1eaaa"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "bytes": 529,
+      "normalizedBytes": 520,
+      "lines": 9,
+      "tokens": 54,
+      "sha256": "713bc4366ec1cca08785bca4915843ad5f35dd0a0428f339dc1617dd169a64ef"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-inspector.js",
+      "bytes": 8861,
+      "normalizedBytes": 8718,
+      "lines": 143,
+      "tokens": 1670,
+      "sha256": "7cf188272730a9f1b5740cc62432fb2dda0f3a696a019645ea3b187408af4de0"
+    },
+    {
+      "file": "game/src/boot-order.js",
+      "bytes": 1668,
+      "normalizedBytes": 1668,
+      "lines": 24,
+      "tokens": 89,
+      "sha256": "968914d24051c3de51357ce0d845f59599410c4bc9cbebde27c69404c31cf204"
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "bytes": 5104,
+      "normalizedBytes": 5104,
+      "lines": 54,
+      "tokens": 776,
+      "sha256": "4836f5d90427ba84645153a77f0801316f556c14e7b10667c6bef2f41597e77b"
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "bytes": 7987,
+      "normalizedBytes": 7987,
+      "lines": 112,
+      "tokens": 2024,
+      "sha256": "f8f0825f37ac8d23be92a88c9da4608ea15b6e51cb5df28bfa356925104e546a"
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "bytes": 2536,
+      "normalizedBytes": 2536,
+      "lines": 34,
+      "tokens": 652,
+      "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "bytes": 11358,
+      "normalizedBytes": 11358,
+      "lines": 185,
+      "tokens": 2519,
+      "sha256": "cafd000af5eaed9b34b8bd28f8b63b26b2a2442ca59fc44ced5cb5c90100eef1"
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "bytes": 1431,
+      "normalizedBytes": 1400,
+      "lines": 31,
+      "tokens": 232,
+      "sha256": "9216cf84b2f0e0091fa015b22ec3b875eb04cc35a5948e0e4ff6201bec7766d9"
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "bytes": 23904,
+      "normalizedBytes": 23904,
+      "lines": 664,
+      "tokens": 4918,
+      "sha256": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd"
+    },
+    {
+      "file": "game/src/home/home.visuals.js",
+      "bytes": 8816,
+      "normalizedBytes": 8816,
+      "lines": 330,
+      "tokens": 1663,
+      "sha256": "77894ef542f7caa05ab164959f45d45299a1e99b0fa0e8783e47d9abd5576b68"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "bytes": 14949,
+      "normalizedBytes": 14949,
+      "lines": 412,
+      "tokens": 3590,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "bytes": 17184,
+      "normalizedBytes": 17184,
+      "lines": 511,
+      "tokens": 4536,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "bytes": 133,
+      "normalizedBytes": 131,
+      "lines": 2,
+      "tokens": 7,
+      "sha256": "18a680c5829b730d75a9a1989fe11963205e5f4a51824387ffc72f4d43f523bc"
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "bytes": 4292,
+      "normalizedBytes": 4208,
+      "lines": 84,
+      "tokens": 856,
+      "sha256": "8f59196bda4fefb6e6f1f477a5b696b2a48db0032e49fcf04ed2bd63ffe1d184"
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "bytes": 5051,
+      "normalizedBytes": 5051,
+      "lines": 25,
+      "tokens": 1397,
+      "sha256": "6880ce65ff95488396a66bf3bbe13da471d5d5578ffe041d3feac22db5acc0cc"
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "bytes": 33920,
+      "normalizedBytes": 33920,
+      "lines": 214,
+      "tokens": 6871,
+      "sha256": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09"
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "bytes": 1964,
+      "normalizedBytes": 1964,
+      "lines": 35,
+      "tokens": 334,
+      "sha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72"
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "bytes": 2556,
+      "normalizedBytes": 2556,
+      "lines": 52,
+      "tokens": 403,
+      "sha256": "d1a3dd4b9391be795b24bc7832d48e9d1f303691ded76795fd2c18c4ff091715"
+    },
+    {
+      "file": "game/src/ui/base-design-preview-v7.js",
+      "bytes": 7823,
+      "normalizedBytes": 7752,
+      "lines": 71,
+      "tokens": 1340,
+      "sha256": "ebb623073ffc52be0534cba3b795bffdca7649dfa9f4fc84985e77c724fb13e4"
+    },
+    {
+      "file": "game/src/ui/base-preview-rooms-v7.js",
+      "bytes": 5795,
+      "normalizedBytes": 5758,
+      "lines": 37,
+      "tokens": 794,
+      "sha256": "7f791a9a8f479ec50ff93d46f5e21fe09bca8e059d04efddada564722052411d"
+    },
+    {
+      "file": "game/src/ui/card-tip-groups.js",
+      "bytes": 486,
+      "normalizedBytes": 486,
+      "lines": 8,
+      "tokens": 143,
+      "sha256": "c88e17c58bb82ab7b47480d9be0d72a9691efee7cb6f0c3609d771e0f05eba40"
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "bytes": 4181,
+      "normalizedBytes": 4181,
+      "lines": 22,
+      "tokens": 641,
+      "sha256": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892"
+    }
+  ]
+}

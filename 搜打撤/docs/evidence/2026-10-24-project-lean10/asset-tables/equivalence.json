@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "items": 966,
+      "sameOrderedValues": true,
+      "fullFilenamesAuditable": true
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "items": 329,
+      "sameOrderedValues": true,
+      "fullFilenamesAuditable": true
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "events": 106,
+      "sameObjectFieldsOrderAndValues": true,
+      "independentCueObjects": true,
+      "independentFileArrays": true,
+      "rootFrozen": true,
+      "sha256": "64753bbe0eeae4c2582b64e86d8e054622d4bd78d3b4522ae2167046ac99e861"
+    }
+  ],
+  "stats": [
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "beforeBytes": 40383,
+      "afterBytes": 26711,
+      "beforeTokens": 1936,
+      "afterTokens": 2461,
+      "beforeLines": 971,
+      "afterLines": 1084,
+      "sha256": "21f155079712b6774fb703185f293fd1c930a30fadaf72a42603897be36315d5"
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "beforeBytes": 12435,
+      "afterBytes": 10688,
+      "beforeTokens": 662,
+      "afterTokens": 782,
+      "beforeLines": 334,
+      "afterLines": 357,
+      "sha256": "52c659d7b8341a8b2a9366a64b6f211333359d5af2f82c9206fc2bbea0298f8d"
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "beforeBytes": 10237,
+      "afterBytes": 8032,
+      "beforeTokens": 2059,
+      "afterTokens": 1494,
+      "beforeLines": 114,
+      "afterLines": 174,
+      "sha256": "64753bbe0eeae4c2582b64e86d8e054622d4bd78d3b4522ae2167046ac99e861"
+    },
+    {
+      "file": "game/tools/bake-card-thumbs.cjs",
+      "beforeBytes": 7271,
+      "afterBytes": 7366,
+      "beforeTokens": 1319,
+      "afterTokens": 1324,
+      "beforeLines": 142,
+      "afterLines": 143,
+      "sha256": "3508124d9c23f084da292f229e6df83b34dec81131845fd4a48bd8d88982b5a7"
+    },
+    {
+      "file": "scripts/asset-manifest-source.mjs",
+      "beforeBytes": 0,
+      "afterBytes": 1073,
+      "beforeTokens": 0,
+      "afterTokens": 250,
+      "beforeLines": 1,
+      "afterLines": 23,
+      "sha256": "aa4144a28f56d42cb3715da133d46d5bf1b7d2150387a49843f8e181cf67ee00"
+    }
+  ],
+  "runtimeNetBytes": 17624,
+  "allChangedCodeNetBytes": 16456,
+  "runtimeNetTokens": -80
+}

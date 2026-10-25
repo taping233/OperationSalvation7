@@ -1,0 +1,98 @@
+[
+  {
+    "file": "scripts/perf-ledger-capture.mjs",
+    "lines": 993,
+    "bytes": 49981,
+    "sha256": "84e57be9bf83d7619568cb44020406713c51e942ec4ad707253584d5feffa424"
+  },
+  {
+    "file": "tests/perf-ledger-drive.test.js",
+    "lines": 79,
+    "bytes": 3831,
+    "sha256": "d63303d62b899f5dffe8dbf350f31b924fcdd1d601ba02f660641ad202d23559"
+  },
+  {
+    "file": "tests/perf-ledger-port-occupancy.test.js",
+    "lines": 138,
+    "bytes": 7236,
+    "sha256": "2be4683fbccec852e30097b193803bd2ae59501f1d578cb9961562b32d22e079"
+  },
+  {
+    "file": "scripts/perf-benchmark.cjs",
+    "lines": 401,
+    "bytes": 18775,
+    "sha256": "235c204bfa53f723542344744f73d5cb8083263f6486d1366fb15318e79be2a0"
+  },
+  {
+    "file": "scripts/electron-title-smoke.mjs",
+    "lines": 124,
+    "bytes": 5721,
+    "sha256": "3703d04d0fcfe69fe34555af8c1b3d1fb2832679e7d081482d322b5129a12431"
+  },
+  {
+    "file": "scripts/electron-gpu-info.cjs",
+    "lines": 21,
+    "bytes": 650,
+    "sha256": "d7d468acc01bff87500572be80f912f73d508d623fdd5372f94c275e39562975"
+  },
+  {
+    "file": "game/src/run/map-generator.js",
+    "lines": 325,
+    "bytes": 24363,
+    "sha256": "6857fab2f1a4f2a195d3e51703d4b2f92c54eb76b0ab5b190c9ed57c460f12a9"
+  },
+  {
+    "file": "game/src/run/map-generator-v4.js",
+    "lines": 178,
+    "bytes": 9881,
+    "sha256": "96940cef385015f30a9aaf00031da96a5eb53e964f8590d9861cd76fde7c04e3"
+  },
+  {
+    "file": "game/src/agent/agent.scenes.runtime.js",
+    "lines": 514,
+    "bytes": 24418,
+    "sha256": "9d728a7f548a2f656035358ac993cdddabba5a3567c1f38749bf44f818ee1749"
+  },
+  {
+    "file": "game/tools/agent-batch.mjs",
+    "lines": 621,
+    "bytes": 38243,
+    "sha256": "132a3b3f5791e46ad13289cf2dde1b37e78e168569d02986e4a9997eb1cb7454"
+  },
+  {
+    "file": "game/tools/agent-evolve.mjs",
+    "lines": 310,
+    "bytes": 19208,
+    "sha256": "adfa5803f8d8d44cc3f39577ad2af142cd1e80baed128a0d3b1e18cb70e8fda6"
+  },
+  {
+    "file": "game/tools/agent-supervise.mjs",
+    "lines": 219,
+    "bytes": 11678,
+    "sha256": "8dcf3f1cb34ac5b2292d23b72bef90210bb799169e747168855d32ed3adf39b8"
+  },
+  {
+    "file": "game/tools/agent-compare.mjs",
+    "lines": 204,
+    "bytes": 10257,
+    "sha256": "2816a25a3c39e93cc70bbe209ac877d813ac590623917514acf7a880461aab12"
+  },
+  {
+    "file": "game/tools/agent-ledger.mjs",
+    "lines": 123,
+    "bytes": 6381,
+    "sha256": "7706524eb3e292796153eea7441241561821551cc495b711c6ad8aa86022f076"
+  },
+  {
+    "file": "game/tools/agent-compare-provenance.mjs",
+    "lines": 117,
+    "bytes": 5863,
+    "sha256": "eba5998ac522fcd2616557f3108030579ce5a72cc8c36b639e20fdb605c5f56f"
+  },
+  {
+    "file": "game/tools/agent-run-provenance.mjs",
+    "lines": 119,
+    "bytes": 5098,
+    "sha256": "a55d72e3f9b4eb0bef992f6a6fa388beb32855f82ee7be276b7f025f16159f9a"
+  }
+]

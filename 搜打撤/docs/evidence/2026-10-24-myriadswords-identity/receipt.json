@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-8be942d8-d932-4be1-8388-3f5a2b5f626f.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-myriadswords-identity/cards-wu-myriadswords-source.png",
+        "bytes": 1937341,
+        "sha256": "5bb8c8b7e709e8dba1423ee74f3715bcaa723f9ec527c87ff90c209c052c504a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-myriadswords-identity/cards-wu-myriadswords-full-before.webp",
+          "bytes": 144382,
+          "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-myriadswords-identity/cards-wu-myriadswords-thumb-before.webp",
+          "bytes": 21532,
+          "sha256": "d6fc755c6861ddcbf54bfb96674e5dd9741f28741e44790700dab4211f0a1995"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/wu-myriadswords.webp",
+          "bytes": 149748,
+          "sha256": "627fb98aca4e6b88e9d75e753ea939c70c9600a6c6ca3ca830368aef3fe56281",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/wu-myriadswords.webp",
+          "bytes": 22592,
+          "sha256": "0f7ea62dea3d58a93c77dbc69567f762b963079400fe850f2e0e776f4e9cbba8",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "wu-myriadswords-rough-face-20261004",
+      "revision_after": "wu-myriadswords-current-identity-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 144382,
+            "sha256": "cc3fe1d9b39340e4d83dd3882395dff4e23a65cd5928be74c90ade9fb98164cc",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+          },
+          "after": {
+            "path": "cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 149748,
+            "sha256": "627fb98aca4e6b88e9d75e753ea939c70c9600a6c6ca3ca830368aef3fe56281",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 21532,
+            "sha256": "d6fc755c6861ddcbf54bfb96674e5dd9741f28741e44790700dab4211f0a1995",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-two-swords-rough/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/wu-myriadswords.webp",
+            "ext": "webp",
+            "bytes": 22592,
+            "sha256": "0f7ea62dea3d58a93c77dbc69567f762b963079400fe850f2e0e776f4e9cbba8",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-myriadswords-identity/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

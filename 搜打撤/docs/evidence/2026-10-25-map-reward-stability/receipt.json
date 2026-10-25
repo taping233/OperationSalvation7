@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-25",
+  "state": "complete-uncommitted",
+  "files": {
+    "game/src/run/expedition.view.js": "2f42b8193f552aad05766372cde46bb891dc477ede5ac1ca3d3569c1a78cbcd6",
+    "game/src/run/chests.js": "c9b132cdf6eddd65a2aeae4705ce5b849816c36c7c3f59153abcb96f7e460e47",
+    "game/src/ui/chest-reward-overview.js": "a31ffe34680c6c5c99e4c2be445713f6afc67160ff18ffa1f14b97576fb4d025",
+    "game/src/ui/reward-capacity-organizer.js": "10bfa33c1ca870d3ff2d4dfb6659f71ef20ffef08f82209604b9b60da73ea02e",
+    "game/src/run/game.run.altar.js": "f3b6fdfe2dc45dbdafb642dfa40ef96672c6fc7d3ca609545b9a435d6d255180",
+    "game/src/run/game.run.events.js": "60e21394ddd95ad36bb23ff720aa39bf6fb73f72cf56e7d7bc4e3cb3b800e2bd"
+  },
+  "consumerReview": {
+    "path": "game/src/run/chests.js",
+    "lfSha256": "c9b132cdf6eddd65a2aeae4705ce5b849816c36c7c3f59153abcb96f7e460e47",
+    "entriesUpdated": 2,
+    "scope": "Only overview DOM reconciliation, focus and view ownership changed. Existing chest/card image paths and exclusion lists retained."
+  },
+  "changes": [
+    "Node preview reserves panel space without panning the map",
+    "Overview keeps frame/scrollport/keyed box buttons and unchanged art; changes facts and controls only",
+    "Overview revision invalidates stale async callbacks; local updates preserve live scroll and restore focus without scrolling",
+    "Organizer entry/extraction confirmation/event return focus use preventScroll"
+  ],
+  "notRun": [
+    "tests",
+    "browser acceptance",
+    "lint",
+    "type check",
+    "asset audit",
+    "build"
+  ],
+  "servicesCreated": false,
+  "committed": false
+}

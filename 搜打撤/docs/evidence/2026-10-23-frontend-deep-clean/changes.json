@@ -1,0 +1,6035 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "beforeSha256": "46fbcb09643180213148e9a53e45bf4ffa83f584896a3a1a920ee1ac0faf605c",
+    "afterSha256": "5cc0954429c81291d59d78b2cee6d18f84ea459aa411986a8913a7e89b7dce2e",
+    "beforeBytes": 18271,
+    "afterBytes": 17878,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 70,
+        "selector": "[data-tip]:hover::after, .tooltip, #tooltip, .tip-pop",
+        "replacement": "[data-tip]:hover::after, .tooltip, #tooltip"
+      },
+      {
+        "kind": "branch",
+        "line": 71,
+        "selector": "#tooltip, .tooltip, .tip-pop",
+        "replacement": "#tooltip, .tooltip"
+      },
+      {
+        "kind": "branch",
+        "line": 85,
+        "selector": "#overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back)",
+        "replacement": "#overlay :is(.hub-back, .pg-back, .ag-back)"
+      },
+      {
+        "kind": "branch",
+        "line": 87,
+        "selector": "#overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back):hover",
+        "replacement": "#overlay :is(.hub-back, .pg-back, .ag-back):hover"
+      },
+      {
+        "kind": "branch",
+        "line": 100,
+        "selector": "#overlay :is(.hub-card, .dep-card, .settings-group, .class-dossier, .class-command, .slot-card, .node-panel, .shop-board, .library-inspector)",
+        "replacement": "#overlay :is(.hub-card, .dep-card, .settings-group, .slot-card, .node-panel, .shop-board, .library-inspector)"
+      },
+      {
+        "kind": "branch",
+        "line": 108,
+        "selector": "#overlay .set-en, #overlay .node-kicker, #overlay .cls2-eyebrow",
+        "replacement": " #overlay .node-kicker, #overlay .cls2-eyebrow"
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": "#overlay .shop-soldout",
+        "bytes": 179
+      },
+      {
+        "kind": "rule",
+        "line": 191,
+        "selector": ".scene-line p",
+        "bytes": 97
+      }
+    ]
+  },
+  {
+    "file": "game/css/archive-motion.css",
+    "beforeSha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873",
+    "afterSha256": "637211cf89b02a64c24a77ef7adff8e4657ac8c62f0ef6328c750e121934142e",
+    "beforeBytes": 5692,
+    "afterBytes": 5677,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 44,
+        "selector": "body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card :is(.slot-card-name,.slot-card-sub,.slot-card-status,.slot-card-desc,.slot-card-cta,.slot-card-ops)",
+        "replacement": "body:not(.reduce-motion) #overlay[data-archive-motion] .slot-card :is(.slot-card-name,.slot-card-status,.slot-card-desc,.slot-card-cta,.slot-card-ops)"
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-archive-v3.css",
+    "beforeSha256": "a29b4338dcefba350ab4f6150a6529155641cdb13e79a6482b6b3ad46dab80b7",
+    "afterSha256": "a9f334172a8ea29ccdec92bbf6559ae1f23b3b047a8d0c1a4633a261355e2560",
+    "beforeBytes": 17414,
+    "afterBytes": 14096,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 13,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-sections",
+        "bytes": 112
+      },
+      {
+        "kind": "rule",
+        "line": 14,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-sections button",
+        "bytes": 206
+      },
+      {
+        "kind": "rule",
+        "line": 15,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-sections button.on",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 16,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-sections button.on::after",
+        "bytes": 189
+      },
+      {
+        "kind": "branch",
+        "line": 23,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 :is(.av3-honours-heading,.av3-collection-total) strong small",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 :is(.av3-honours-heading) strong small"
+      },
+      {
+        "kind": "rule",
+        "line": 60,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-progress",
+        "bytes": 241
+      },
+      {
+        "kind": "rule",
+        "line": 61,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-total",
+        "bytes": 183
+      },
+      {
+        "kind": "rule",
+        "line": 62,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-total > span",
+        "bytes": 123
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-total strong",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 64,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-total strong small",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 65,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-total .av3-progress",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 66,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestones",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 67,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone",
+        "bytes": 300
+      },
+      {
+        "kind": "rule",
+        "line": 68,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone-number",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 69,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone.ready",
+        "bytes": 111
+      },
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone.ready .av3-milestone-number",
+        "bytes": 122
+      },
+      {
+        "kind": "rule",
+        "line": 71,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone b",
+        "bytes": 148
+      },
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone-reward",
+        "bytes": 165
+      },
+      {
+        "kind": "rule",
+        "line": 73,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-reward-state",
+        "bytes": 186
+      },
+      {
+        "kind": "rule",
+        "line": 74,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone .mini-btn",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 109,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-actions",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-collection-actions .mini-btn",
+        "bytes": 111
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "beforeSha256": "99121d9bd99b40bff5c348bc58de96c891a30f5710c953bf9ff6207e65077ed1",
+    "afterSha256": "c00a4d10a798bd6ad245d7a5dce9629764cad93e577a84664abaf0e8766a287c",
+    "beforeBytes": 37478,
+    "afterBytes": 34761,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 103,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .person-growth-actions",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-layout",
+        "bytes": 120
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-roster",
+        "bytes": 100
+      },
+      {
+        "kind": "rule",
+        "line": 112,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-person",
+        "bytes": 236
+      },
+      {
+        "kind": "rule",
+        "line": 113,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-person.on",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 114,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-person :is(img,.art-avatar)",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 115,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-person b",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 116,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-content",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 117,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-heading",
+        "bytes": 212
+      },
+      {
+        "kind": "rule",
+        "line": 118,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-heading h3",
+        "bytes": 126
+      },
+      {
+        "kind": "rule",
+        "line": 119,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-heading span",
+        "bytes": 100
+      },
+      {
+        "kind": "rule",
+        "line": 121,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-head",
+        "bytes": 71
+      },
+      {
+        "kind": "rule",
+        "line": 122,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-controls",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 124,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-controls :is(input,select)",
+        "bytes": 240
+      },
+      {
+        "kind": "rule",
+        "line": 125,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-controls > input",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 126,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-controls > span",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 127,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-skills .card-browser",
+        "bytes": 121
+      },
+      {
+        "kind": "branch",
+        "line": 173,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.person-groups,.person-sections,.pool-type-tabs,.skills-heading,.companion-toolbar,.person-details) .mini-btn",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.person-groups,.person-sections,.pool-type-tabs,.companion-toolbar,.person-details) .mini-btn"
+      },
+      {
+        "kind": "rule",
+        "line": 175,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .skills-heading .mini-btn",
+        "bytes": 99
+      },
+      {
+        "kind": "rule",
+        "line": 191,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-skills .skills-heading",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 192,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-skills .person-pool-toolbar",
+        "bytes": 97
+      },
+      {
+        "kind": "rule",
+        "line": 193,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-skills .card-browser-footer",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 243,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-skills",
+        "bytes": 71
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "beforeSha256": "a2ef25750df4b0ef5260d147866463c1834c6139a3fdacc496b9888b15b79608",
+    "afterSha256": "4c1e37ef89ee1eb0395c33e85f53f3871659f0e3cd1a0807af2f95109c1a9dee",
+    "beforeBytes": 27912,
+    "afterBytes": 27068,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 135,
+        "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-back",
+        "bytes": 385
+      },
+      {
+        "kind": "rule",
+        "line": 140,
+        "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-back::after",
+        "bytes": 196
+      },
+      {
+        "kind": "rule",
+        "line": 141,
+        "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-back .svg-ic",
+        "bytes": 111
+      },
+      {
+        "kind": "rule",
+        "line": 142,
+        "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-back:hover",
+        "bytes": 148
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "beforeSha256": "075f2144f6abd7b830c8e35090b80e417a79fd8d231b4e46a7891f707f3e96c1",
+    "afterSha256": "ba52ac81fbb5723170f1662552595679c2701075ab1f2b58d97b9b78e4801da1",
+    "beforeBytes": 36149,
+    "afterBytes": 27497,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .res-chip",
+        "bytes": 191
+      },
+      {
+        "kind": "rule",
+        "line": 32,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .res-chip b",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 33,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .res-chip .ic",
+        "bytes": 79
+      },
+      {
+        "kind": "branch",
+        "line": 62,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note, .set-tip, .dim, .hint, .base-line)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note, .set-tip, .dim, .hint)"
+      },
+      {
+        "kind": "branch",
+        "line": 63,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note b, .base-line b, .hint b)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note b, .hint b)"
+      },
+      {
+        "kind": "rule",
+        "line": 83,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .mode-info b",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 84,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .mode-info span",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 85,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .mode-ckpt",
+        "bytes": 64
+      },
+      {
+        "kind": "rule",
+        "line": 93,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .gate-strip",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 96,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.stash-workspace)",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 101,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.stash-material-strip, .stash-res, .stash-toolbar)",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 102,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-heading",
+        "bytes": 157
+      },
+      {
+        "kind": "rule",
+        "line": 103,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-heading h3",
+        "bytes": 128
+      },
+      {
+        "kind": "rule",
+        "line": 104,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-heading p",
+        "bytes": 70
+      },
+      {
+        "kind": "rule",
+        "line": 105,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-heading > .mini-btn",
+        "bytes": 94
+      },
+      {
+        "kind": "rule",
+        "line": 106,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-materials",
+        "bytes": 85
+      },
+      {
+        "kind": "rule",
+        "line": 107,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .material-cell",
+        "bytes": 222
+      },
+      {
+        "kind": "rule",
+        "line": 108,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .material-cell b",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 109,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .material-cell .ic",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .stash-cardgrid",
+        "bytes": 176
+      },
+      {
+        "kind": "rule",
+        "line": 115,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .stash-meta",
+        "bytes": 130
+      },
+      {
+        "kind": "rule",
+        "line": 116,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .stash-meter",
+        "bytes": 99
+      },
+      {
+        "kind": "rule",
+        "line": 117,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .stash-meter i",
+        "bytes": 104
+      },
+      {
+        "kind": "branch",
+        "line": 118,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.camp-empty, .stash-placeholder, .stash-empty)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.camp-empty)"
+      },
+      {
+        "kind": "branch",
+        "line": 119,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.camp-empty, .stash-placeholder, .stash-empty) b",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.camp-empty) b"
+      },
+      {
+        "kind": "rule",
+        "line": 121,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .stash-list",
+        "bytes": 137
+      },
+      {
+        "kind": "rule",
+        "line": 122,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pk-row",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 123,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-row",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 124,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-thumb",
+        "bytes": 80
+      },
+      {
+        "kind": "rule",
+        "line": 125,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-thumb .hs-card",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 126,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-info",
+        "bytes": 89
+      },
+      {
+        "kind": "rule",
+        "line": 127,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-info b",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 128,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-sec",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 129,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-sec-head",
+        "bytes": 99
+      },
+      {
+        "kind": "rule",
+        "line": 130,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-help",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 131,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-help summary",
+        "bytes": 106
+      },
+      {
+        "kind": "rule",
+        "line": 132,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-help p",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 133,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-egg-art",
+        "bytes": 148
+      },
+      {
+        "kind": "rule",
+        "line": 134,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-row",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 135,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-row.on",
+        "bytes": 122
+      },
+      {
+        "kind": "rule",
+        "line": 136,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-row.locked",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 137,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-row b",
+        "bytes": 82
+      },
+      {
+        "kind": "rule",
+        "line": 138,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-desc",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 139,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .pet-ops",
+        "bytes": 94
+      },
+      {
+        "kind": "rule",
+        "line": 140,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-identity",
+        "bytes": 104
+      },
+      {
+        "kind": "rule",
+        "line": 141,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-identity small",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 142,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-list",
+        "bytes": 162
+      },
+      {
+        "kind": "rule",
+        "line": 143,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-list .pet-row",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 144,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-list .pet-desc",
+        "bytes": 95
+      },
+      {
+        "kind": "rule",
+        "line": 145,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch",
+        "bytes": 127
+      },
+      {
+        "kind": "rule",
+        "line": 146,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch h4",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 147,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch p",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 148,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-icon .ic",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 149,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-progress",
+        "bytes": 82
+      },
+      {
+        "kind": "rule",
+        "line": 150,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-progress i",
+        "bytes": 106
+      },
+      {
+        "kind": "rule",
+        "line": 151,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-progress .filled",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 153,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-layout",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 154,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 155,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro :is(b, h3)",
+        "bytes": 82
+      },
+      {
+        "kind": "rule",
+        "line": 156,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro :is(p, .ov-note, .base-line)",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 157,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro .mini-btn",
+        "bytes": 133
+      },
+      {
+        "kind": "rule",
+        "line": 158,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-shop-intro > small",
+        "bytes": 112
+      },
+      {
+        "kind": "rule",
+        "line": 159,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value",
+        "bytes": 75
+      },
+      {
+        "kind": "rule",
+        "line": 160,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value b",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 161,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-reserve-value span",
+        "bytes": 79
+      },
+      {
+        "kind": "rule",
+        "line": 163,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-product",
+        "bytes": 220
+      },
+      {
+        "kind": "rule",
+        "line": 164,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .poor-why",
+        "bytes": 81
+      },
+      {
+        "kind": "rule",
+        "line": 169,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .base-bar",
+        "bytes": 145
+      },
+      {
+        "kind": "rule",
+        "line": 170,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .base-bar i",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 172,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .camp-pet-locked-note",
+        "bytes": 112
+      },
+      {
+        "kind": "rule",
+        "line": 192,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .ach-list",
+        "bytes": 124
+      },
+      {
+        "kind": "rule",
+        "line": 195,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .ach-ico",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 196,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .ach-info b",
+        "bytes": 83
+      },
+      {
+        "kind": "rule",
+        "line": 197,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .ach-info span",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 198,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .ach-ops :is(.rw, .got)",
+        "bytes": 95
+      },
+      {
+        "kind": "rule",
+        "line": 199,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .coll-cards",
+        "bytes": 153
+      },
+      {
+        "kind": "rule",
+        "line": 208,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .res-chip",
+        "bytes": 131
+      },
+      {
+        "kind": "rule",
+        "line": 209,
+        "selector": "#overlay #depMain.pg.hub.camp-detail .res-chip b",
+        "bytes": 85
+      },
+      {
+        "kind": "rule",
+        "line": 284,
+        "selector": "#cardZoom:has(.camp-card-actions) .cz-hint",
+        "bytes": 102
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-cohesion-v5.css",
+    "beforeSha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926",
+    "afterSha256": "349714d80ff3a6352a64b05c49f737ca537de9dfcea253cdfc90e1d623d59bcd",
+    "beforeBytes": 16207,
+    "afterBytes": 16092,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 26,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button,.av3-utilities button)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button)"
+      },
+      {
+        "kind": "branch",
+        "line": 29,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button,.av3-utilities button):hover:not(:disabled)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button):hover:not(:disabled)"
+      },
+      {
+        "kind": "branch",
+        "line": 32,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.warehouse-toolbar,.pool-toolbar-controls,.collection-browse-tools) :is(input,select)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.warehouse-toolbar,.collection-browse-tools) :is(input,select)"
+      },
+      {
+        "kind": "branch",
+        "line": 39,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.skills-person,.facility-tile)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.facility-tile)"
+      },
+      {
+        "kind": "branch",
+        "line": 42,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.skills-person,.facility-tile):hover:not(:disabled):not(.selected):not(.on)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.facility-tile):hover:not(:disabled):not(.selected):not(.on)"
+      },
+      {
+        "kind": "branch",
+        "line": 45,
+        "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell.selected,.person-pool-card.on,.av3-back.on,.skills-person.on,.facility-tile.on)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell.selected,.person-pool-card.on,.av3-back.on,.facility-tile.on)"
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-collection-v4.css",
+    "beforeSha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c",
+    "afterSha256": "cf83e6c45eecd6f4fba4dd804a5cb1594a2699a484956937b5871e51b71be3aa",
+    "beforeBytes": 3290,
+    "afterBytes": 2906,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 2,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .av3-utilities",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 3,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .av3-utilities button",
+        "bytes": 174
+      },
+      {
+        "kind": "rule",
+        "line": 4,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .av3-utilities button:hover",
+        "bytes": 92
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "beforeSha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a",
+    "afterSha256": "0225427a0f852f0aa52fc4cad96f1860cd659b0082769b275b96c2f6a890c69a",
+    "beforeBytes": 6029,
+    "afterBytes": 5865,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 40,
+        "selector": "#overlay #hubMain.pg.hub.base-camp .person-growth-actions .base-command",
+        "bytes": 103
+      },
+      {
+        "kind": "branch",
+        "line": 42,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.person-face,.skills-person,.facility-tile,.av3-back,.av3-medal > button)",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.person-face,.facility-tile,.av3-back,.av3-medal > button)"
+      },
+      {
+        "kind": "branch",
+        "line": 48,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.person-face,.skills-person,.facility-tile,.av3-back):hover",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.person-face,.facility-tile,.av3-back):hover"
+      },
+      {
+        "kind": "branch",
+        "line": 49,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.person-face,.skills-person,.facility-tile).on:hover",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.person-face,.facility-tile).on:hover"
+      },
+      {
+        "kind": "branch",
+        "line": 51,
+        "selector": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.base-link,.facility-tile,.person-face,.skills-person,.warehouse-more-filters summary):focus-visible",
+        "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.base-link,.facility-tile,.person-face,.warehouse-more-filters summary):focus-visible"
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "beforeSha256": "e40b03289f3fc7c27aede39b3728bf394d25439b4a2018b703d69ca917cc4659",
+    "afterSha256": "9b0f2546910e78e8de87126cd16534ac0336056d171cc88149286692e1e6b0d9",
+    "beforeBytes": 32401,
+    "afterBytes": 31440,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 41,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .person-growth-actions",
+        "bytes": 179
+      },
+      {
+        "kind": "rule",
+        "line": 48,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-detail",
+        "bytes": 174
+      },
+      {
+        "kind": "rule",
+        "line": 49,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card",
+        "bytes": 165
+      },
+      {
+        "kind": "rule",
+        "line": 50,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-card > *",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 51,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy small",
+        "bytes": 150
+      },
+      {
+        "kind": "rule",
+        "line": 52,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-skill-copy p",
+        "bytes": 149
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-rooms-v7.css",
+    "beforeSha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399",
+    "afterSha256": "3ef6762133d5c2290b898a1afc5e4bb8abef7e8940f6232e139cc06b92e819c6",
+    "beforeBytes": 33335,
+    "afterBytes": 32397,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 24,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-utilities,.av3-utilities,.warehouse-header-actions)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-utilities,.warehouse-header-actions)"
+      },
+      {
+        "kind": "branch",
+        "line": 27,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button,.av3-utilities button)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button)"
+      },
+      {
+        "kind": "branch",
+        "line": 31,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button,.av3-utilities button):hover:not(:disabled)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) :is(.base-link,.person-utilities button):hover:not(:disabled)"
+      },
+      {
+        "kind": "branch",
+        "line": 77,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-skills,.collection-cards-v4) .card-browser",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.collection-cards-v4) .card-browser"
+      },
+      {
+        "kind": "branch",
+        "line": 120,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-roster,.skills-roster)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-roster)"
+      },
+      {
+        "kind": "branch",
+        "line": 124,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face,.skills-person)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face)"
+      },
+      {
+        "kind": "branch",
+        "line": 129,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face.on,.skills-person.on)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face.on)"
+      },
+      {
+        "kind": "branch",
+        "line": 130,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face-art,.skills-person > img,.skills-person > .art-avatar,.person-face > .companion-art)",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face-art,.person-face > .companion-art)"
+      },
+      {
+        "kind": "branch",
+        "line": 131,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face,.skills-person) b",
+        "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.person-face) b"
+      },
+      {
+        "kind": "rule",
+        "line": 180,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-layout",
+        "bytes": 149
+      },
+      {
+        "kind": "rule",
+        "line": 181,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-heading",
+        "bytes": 166
+      },
+      {
+        "kind": "rule",
+        "line": 182,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .skills-heading h3",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 224,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-milestones",
+        "bytes": 178
+      },
+      {
+        "kind": "rule",
+        "line": 225,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-archive-v3 .av3-collection-progress",
+        "bytes": 142
+      }
+    ]
+  },
+  {
+    "file": "game/css/base.css",
+    "beforeSha256": "735432dafba7215f9c6d743de4b6e0f46a31c52bb4b776dcca47efe384219ad1",
+    "afterSha256": "ed2770cc8997e62e7fa08773b07984c0f7244557fff4a38c92225e461ecc9105",
+    "beforeBytes": 30409,
+    "afterBytes": 28636,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 176,
+        "selector": "body.no-hintbar #hintBar",
+        "bytes": 43
+      },
+      {
+        "kind": "rule",
+        "line": 257,
+        "selector": "#charRow",
+        "bytes": 68
+      },
+      {
+        "kind": "rule",
+        "line": 377,
+        "selector": "#title .ak-pillrow",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 378,
+        "selector": "#title .ak-pillrow .ak-quickref",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 388,
+        "selector": ".ak-tag",
+        "bytes": 213
+      },
+      {
+        "kind": "rule",
+        "line": 391,
+        "selector": ".ak-tag.blue",
+        "bytes": 60
+      },
+      {
+        "kind": "rule",
+        "line": 392,
+        "selector": ".ak-tag.yellow",
+        "bytes": 48
+      },
+      {
+        "kind": "rule",
+        "line": 393,
+        "selector": ".ak-tag.red",
+        "bytes": 55
+      },
+      {
+        "kind": "rule",
+        "line": 394,
+        "selector": ".ak-title",
+        "bytes": 185
+      },
+      {
+        "kind": "rule",
+        "line": 396,
+        "selector": ".ak-title small",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 398,
+        "selector": ".ak-hazard",
+        "bytes": 89
+      },
+      {
+        "kind": "rule",
+        "line": 399,
+        "selector": ".ak-barcode",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 400,
+        "selector": ".ak-frame",
+        "bytes": 33
+      },
+      {
+        "kind": "rule",
+        "line": 401,
+        "selector": ".ak-frame::before",
+        "bytes": 167
+      },
+      {
+        "kind": "keyframes",
+        "name": "akScanIn",
+        "line": 384
+      },
+      {
+        "kind": "keyframes",
+        "name": "akSlideUp",
+        "line": 385
+      },
+      {
+        "kind": "keyframes",
+        "name": "akBlink",
+        "line": 386
+      }
+    ]
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "beforeSha256": "4357d60288fa58fa1e70587d11be2d4c6e8a11b422725932c974e6c119a1b19b",
+    "afterSha256": "8c0190e2e55dbe039faa23edfafd0f5af875ba8e92dbc42be56a1cc40481835b",
+    "beforeBytes": 12607,
+    "afterBytes": 12564,
+    "changes": [
+      {
+        "kind": "empty-condition",
+        "line": 46,
+        "name": "media"
+      }
+    ]
+  },
+  {
+    "file": "game/css/battle-secondary-overlay.css",
+    "beforeSha256": "8bf1b6e15c566c801089ad5d94e95a6b6fe249c2ab9c9563481838e00cc191d2",
+    "afterSha256": "fc25e60a50be955d8d10ca9ae7bdc82469b64485b325ac77d199b82e8d5146bb",
+    "beforeBytes": 9431,
+    "afterBytes": 9351,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 69,
+        "selector": "body #overlay .battle-secondary-panel .infusion-materials",
+        "bytes": 79
+      }
+    ]
+  },
+  {
+    "file": "game/css/battle-stage.css",
+    "beforeSha256": "8e5db7debd678a9aa161586a369922da40744ac0d364661b05410e873ff59894",
+    "afterSha256": "6d9c959d626366b9624fc0653dacc256ac02323233672bf4936d3500b1aa3930",
+    "beforeBytes": 36509,
+    "afterBytes": 36104,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 56,
+        "selector": "#overlay .battle-stage.sts .sts-you,#overlay .battle-stage.sts .bt-affix",
+        "replacement": "#overlay .battle-stage.sts .bt-affix"
+      },
+      {
+        "kind": "rule",
+        "line": 94,
+        "selector": "#overlay .battle-stage.sts .battle-energy-label",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 176,
+        "selector": "#overlay .battle-stage.sts .bt-potion-tip b",
+        "bytes": 55
+      },
+      {
+        "kind": "rule",
+        "line": 177,
+        "selector": "#overlay .battle-stage.sts .bt-potion-tip",
+        "bytes": 209
+      },
+      {
+        "kind": "branch",
+        "line": 196,
+        "selector": "body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.battle-control-label,.bt-pile-cap)",
+        "replacement": "body #overlay .card.battle .battle-stage.sts .sts-resource-dock :is(.bt-pile-cap)"
+      }
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "beforeSha256": "4864b787aa938499608e170aeb210cdb6f59896687a2f3032a41aa9b9a08f919",
+    "afterSha256": "3cb8074a056c49067c86a99b3015ef3876df9821b54d246cfb9a019ed34f45d2",
+    "beforeBytes": 35642,
+    "afterBytes": 31907,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 115,
+        "selector": ".bt-potion-tip",
+        "bytes": 504
+      },
+      {
+        "kind": "rule",
+        "line": 121,
+        "selector": ".bt-potion-tip b",
+        "bytes": 35
+      },
+      {
+        "kind": "rule",
+        "line": 122,
+        "selector": ".bt-potion-tip img, .bt-potion-tip svg",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 123,
+        "selector": ".bt-potion-tip[hidden]",
+        "bytes": 40
+      },
+      {
+        "kind": "rule",
+        "line": 225,
+        "selector": ".sts-hurtflash",
+        "bytes": 216
+      },
+      {
+        "kind": "rule",
+        "line": 230,
+        "selector": ".sts-healflash",
+        "bytes": 216
+      },
+      {
+        "kind": "rule",
+        "line": 303,
+        "selector": ".surge-wave",
+        "bytes": 453
+      },
+      {
+        "kind": "rule",
+        "line": 309,
+        "selector": ".surge-wave b",
+        "bytes": 50
+      },
+      {
+        "kind": "rule",
+        "line": 310,
+        "selector": ".surge-wave span",
+        "bytes": 53
+      },
+      {
+        "kind": "rule",
+        "line": 363,
+        "selector": ".sts-cardfly.pile-fly",
+        "bytes": 212
+      },
+      {
+        "kind": "rule",
+        "line": 366,
+        "selector": ".sts-cardfly.pile-fly::after",
+        "bytes": 230
+      },
+      {
+        "kind": "empty-condition",
+        "line": 173,
+        "name": "media"
+      },
+      {
+        "kind": "empty-condition",
+        "line": 422,
+        "name": "media"
+      },
+      {
+        "kind": "keyframes",
+        "name": "btFoeIdle",
+        "line": 82
+      },
+      {
+        "kind": "keyframes",
+        "name": "handPageGlow",
+        "line": 163
+      },
+      {
+        "kind": "keyframes",
+        "name": "cardHoverFlash",
+        "line": 179
+      },
+      {
+        "kind": "keyframes",
+        "name": "stsHurtFlash",
+        "line": 215
+      },
+      {
+        "kind": "keyframes",
+        "name": "stsHealFlash",
+        "line": 217
+      },
+      {
+        "kind": "keyframes",
+        "name": "handDescIn",
+        "line": 270
+      },
+      {
+        "kind": "keyframes",
+        "name": "surgeWaveIn",
+        "line": 287
+      },
+      {
+        "kind": "keyframes",
+        "name": "pilePulseKf",
+        "line": 329
+      },
+      {
+        "kind": "keyframes",
+        "name": "pileShuffleKf",
+        "line": 333
+      },
+      {
+        "kind": "keyframes",
+        "name": "btUnitInFoe",
+        "line": 390
+      },
+      {
+        "kind": "keyframes",
+        "name": "btUnitInSelf",
+        "line": 391
+      }
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "beforeSha256": "034d32e1d5ee0c3b0318c3241cf2aedbc17abb4e9b2803c9ed2efbef1d4abf09",
+    "afterSha256": "eb3880a0f65efcc0867b9b0c58a3ff85661e5b53cdf419ba72a330204ec939de",
+    "beforeBytes": 17740,
+    "afterBytes": 17646,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 5,
+        "selector": "body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,\n  .battle-pile-card,.entry-card-preview,.infusion-card-face,.card-tile,\n  .lib-cardwrap:not(.studio-photo),.reward-acquisition-arrival,\n  :has(> .hs-card[data-card-layout=\"split\"]))",
+        "replacement": "body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,\n  .battle-pile-card,.infusion-card-face,\n  .lib-cardwrap:not(.studio-photo),.reward-acquisition-arrival,\n  :has(> .hs-card[data-card-layout=\"split\"]))"
+      },
+      {
+        "kind": "branch",
+        "line": 11,
+        "selector": "body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,\n  .battle-pile-card,.entry-card-preview,.infusion-card-face,.card-tile,\n  .lib-cardwrap:not(.studio-photo),:has(> .hs-card[data-card-layout=\"split\"])):focus-visible",
+        "replacement": "body :is(.hs-card,.bt-card,.bag-tile.card-face,.reward-card,.sac-card,.dep-card,\n  .battle-pile-card,.infusion-card-face,\n  .lib-cardwrap:not(.studio-photo),:has(> .hs-card[data-card-layout=\"split\"])):focus-visible"
+      },
+      {
+        "kind": "branch",
+        "line": 260,
+        "selector": ":is(#overlay,#cardZoom,#cardPreview) :is(.pk-card,.shop-slot,.stash-cell,.shelf-visual,.pocket-thumb,.cz-card):has(.hs-card)",
+        "replacement": ":is(#overlay,#cardZoom,#cardPreview) :is(.shop-slot,.stash-cell,.shelf-visual,.cz-card):has(.hs-card)"
+      },
+      {
+        "kind": "branch",
+        "line": 261,
+        "selector": "#overlay :is(.pk-card,.shop-slot,.stash-cell) > .hs-card",
+        "replacement": "#overlay :is(.shop-slot,.stash-cell) > .hs-card"
+      }
+    ]
+  },
+  {
+    "file": "game/css/character-cover.css",
+    "beforeSha256": "217e3a0699f5c26d5fc00c2e63ed917a16c2fe2df24042f3c10b261cef9fd974",
+    "afterSha256": "e1b994f0b56d3623cb99e337d0ec13b9958f870809b789fdca724bc2975015bc",
+    "beforeBytes": 9470,
+    "afterBytes": 8787,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 123,
+        "selector": "#overlay .cls2-page .cls2-back",
+        "bytes": 358
+      },
+      {
+        "kind": "rule",
+        "line": 129,
+        "selector": "#overlay .cls2-page .cls2-back::after",
+        "bytes": 171
+      },
+      {
+        "kind": "rule",
+        "line": 133,
+        "selector": "#overlay .cls2-page .cls2-back .svg-ic",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 134,
+        "selector": "#overlay .cls2-page .cls2-back:hover",
+        "bytes": 77
+      }
+    ]
+  },
+  {
+    "file": "game/css/chest-opening.css",
+    "beforeSha256": "c85630875fd682d24b50c13f31803fd0f9ffff9dd6a6f3fb8f6687eb97adda2d",
+    "afterSha256": "f3b6d0a71c0304aff8eb5453e44e2b8c8e62604275f0c49b4519f06e74748030",
+    "beforeBytes": 3869,
+    "afterBytes": 3737,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 13,
+        "selector": "body #overlay .card.chest:has(.safe-opening) .evt-sts-desc",
+        "bytes": 131
+      }
+    ]
+  },
+  {
+    "file": "game/css/cover-battle-shell.css",
+    "beforeSha256": "7c54b581f28af0fa80697c1135f520145352863343341889b0742d6407e71011",
+    "afterSha256": "f7690fc2cb7880a4a5f2da3015c64dc0d90a9ab506cbd96aab37f478757164ea",
+    "beforeBytes": 24263,
+    "afterBytes": 23505,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 218,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row",
+        "bytes": 358
+      },
+      {
+        "kind": "rule",
+        "line": 223,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row b",
+        "bytes": 149
+      },
+      {
+        "kind": "rule",
+        "line": 224,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-row .bt-gy-meta",
+        "bytes": 245
+      }
+    ]
+  },
+  {
+    "file": "game/css/cover-details.css",
+    "beforeSha256": "52acbface99d829bbeccb75e956c87b6a01ef04b221488fb0160cf888f2a1f7b",
+    "afterSha256": "1a3f838be2f3f1bb7859ec913425a0e176da9fad8010ad631130209dc66c4a65",
+    "beforeBytes": 10181,
+    "afterBytes": 9063,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 19,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .fc-chip",
+        "bytes": 214
+      },
+      {
+        "kind": "rule",
+        "line": 20,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .fc-chip b",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-slot.empty.pearl-empty",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .pk-list",
+        "bytes": 128
+      },
+      {
+        "kind": "rule",
+        "line": 32,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .pk-tag",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 65,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #cardZoom:not(.cz-photo) .cz-hint",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .stash-shell .stash-pop-card",
+        "bytes": 242
+      }
+    ]
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "beforeSha256": "00b696739e6069e635462d141d8667795c4e2b7df62f10f3de7bfcc3e6b1d0cc",
+    "afterSha256": "43cac6d86f9bafd1e5dfe3761220354b791851d3f17b44fba36edcc5c00f993b",
+    "beforeBytes": 31032,
+    "afterBytes": 27776,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 229,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) :is(.evt-sts-desc, .loot-footer-note, .ps-tip, .ov-empty), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) :is(.ov-note, .ov-empty)",
+        "replacement": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) :is( .loot-footer-note, .ps-tip, .ov-empty), :where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.discover:has(.sac-hand) :is(.ov-note, .ov-empty)"
+      },
+      {
+        "kind": "rule",
+        "line": 233,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-warn",
+        "bytes": 194
+      },
+      {
+        "kind": "rule",
+        "line": 252,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card.page:has(#exMain.result-pg)",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 253,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 254,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .hub-head",
+        "bytes": 180
+      },
+      {
+        "kind": "rule",
+        "line": 258,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .hub-head h2",
+        "bytes": 183
+      },
+      {
+        "kind": "rule",
+        "line": 259,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .hub-head .sub",
+        "bytes": 143
+      },
+      {
+        "kind": "rule",
+        "line": 260,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .res-chip",
+        "bytes": 169
+      },
+      {
+        "kind": "rule",
+        "line": 261,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .res-chip b",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 262,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .res-chip b.fulled",
+        "bytes": 112
+      },
+      {
+        "kind": "rule",
+        "line": 263,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .result-summary",
+        "bytes": 224
+      },
+      {
+        "kind": "rule",
+        "line": 267,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .result-summary b",
+        "bytes": 128
+      },
+      {
+        "kind": "rule",
+        "line": 268,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .result-summary span",
+        "bytes": 131
+      },
+      {
+        "kind": "rule",
+        "line": 269,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .result-summary .result-kicker",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 270,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .result-columns",
+        "bytes": 161
+      },
+      {
+        "kind": "rule",
+        "line": 271,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .hub-card",
+        "bytes": 201
+      },
+      {
+        "kind": "rule",
+        "line": 272,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .hub-card h3",
+        "bytes": 146
+      },
+      {
+        "kind": "rule",
+        "line": 273,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg :is(.dim, .hub-card-tip, .ov-note)",
+        "bytes": 165
+      },
+      {
+        "kind": "rule",
+        "line": 274,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg :is(.pk-row, .dep-row)",
+        "bytes": 140
+      },
+      {
+        "kind": "rule",
+        "line": 275,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .ext-cards",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 276,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .ext-card",
+        "bytes": 168
+      },
+      {
+        "kind": "rule",
+        "line": 277,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay #exMain.result-pg .dep-foot",
+        "bytes": 127
+      }
+    ]
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "beforeSha256": "47ff03f8a2dc3097b2535956a7a04d64a067b0c296bd0987170ad4133ca4f894",
+    "afterSha256": "45cc4b140683f4fc85b0bf92b214ecaa64d112023e921c8a04d448c667ea6087",
+    "beforeBytes": 14725,
+    "afterBytes": 14485,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 32,
+        "selector": "#overlay .card.page #depMain.departure-cover .hub-res .res-chip",
+        "bytes": 238
+      }
+    ]
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "beforeSha256": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
+    "afterSha256": "392c7ce09d3f575bbe3dccccf8fe52cf799e021cfe989c5f7a6c2e0fcdf71133",
+    "beforeBytes": 25614,
+    "afterBytes": 23658,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 23,
+        "selector": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .node-summary > :is(p,.ov-note,.ov-empty),\n#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .reward-notice,\n#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .extraction-outcome :is(.result-line,.ov-note)",
+        "replacement": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .node-summary > :is(p,.ov-note,.ov-empty),\n#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .reward-notice"
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": "#overlay .card.page .event-scene .extraction-outcome",
+        "bytes": 80
+      },
+      {
+        "kind": "rule",
+        "line": 32,
+        "selector": "#overlay .card.page .event-scene .extraction-outcome :is(.result-line,.ov-note)",
+        "bytes": 197
+      },
+      {
+        "kind": "rule",
+        "line": 33,
+        "selector": "#overlay .card.page .event-scene .extraction-outcome .result-line",
+        "bytes": 125
+      },
+      {
+        "kind": "rule",
+        "line": 34,
+        "selector": "#overlay .card.page .event-scene:has(.extraction-outcome) .node-foot",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": "#overlay .card.page .event-scene:has(.extraction-outcome) .node-foot .ov-btn",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 154,
+        "selector": "#overlay .card.page .entry-scene .entry-character-line",
+        "bytes": 89
+      },
+      {
+        "kind": "rule",
+        "line": 161,
+        "selector": "#overlay .card.page .entry-reward-scene .entry-cards",
+        "bytes": 267
+      },
+      {
+        "kind": "rule",
+        "line": 162,
+        "selector": "#overlay .card.page .entry-card-preview",
+        "bytes": 133
+      },
+      {
+        "kind": "rule",
+        "line": 163,
+        "selector": "#overlay .card.page .entry-card-preview .hs-card",
+        "bytes": 68
+      },
+      {
+        "kind": "rule",
+        "line": 164,
+        "selector": "#overlay .card.page .entry-card-preview:focus-visible",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 165,
+        "selector": "#overlay .card.page .entry-reward-foot",
+        "bytes": 134
+      },
+      {
+        "kind": "rule",
+        "line": 166,
+        "selector": "#overlay .card.page .entry-reward-foot p",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 167,
+        "selector": "#overlay .card.page .entry-reward-foot .entry-save-warning",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 168,
+        "selector": "#overlay .card.page .entry-reward-foot .ov-btn",
+        "bytes": 175
+      },
+      {
+        "kind": "rule",
+        "line": 169,
+        "selector": "#overlay .card.page .entry-reward-foot .ov-btn:hover",
+        "bytes": 76
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "beforeSha256": "0c2a18b053ce459938b08f2d5a91852eabe0ca9c0148671a7255dc6294421e4b",
+    "afterSha256": "d5464945a5009d251bf4e2e819d70f6db81ee75dcd58ab4ca5131f947c92aac2",
+    "beforeBytes": 15391,
+    "afterBytes": 15348,
+    "changes": [
+      {
+        "kind": "empty-condition",
+        "line": 13,
+        "name": "media"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-hub.css",
+    "beforeSha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123",
+    "afterSha256": "5a45927e13496933149ff0af4244eda396aecc81f20572ca2e5cbb36fb3c7820",
+    "beforeBytes": 6824,
+    "afterBytes": 3998,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 16,
+        "selector": ".brief-status",
+        "bytes": 126
+      },
+      {
+        "kind": "rule",
+        "line": 17,
+        "selector": ".brief-mode",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 18,
+        "selector": ".brief-mode span",
+        "bytes": 71
+      },
+      {
+        "kind": "rule",
+        "line": 19,
+        "selector": ".brief-mode b",
+        "bytes": 48
+      },
+      {
+        "kind": "rule",
+        "line": 20,
+        "selector": ".brief-mode small",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 21,
+        "selector": ".brief-pet",
+        "bytes": 74
+      },
+      {
+        "kind": "rule",
+        "line": 22,
+        "selector": ".brief-pet-icon",
+        "bytes": 151
+      },
+      {
+        "kind": "rule",
+        "line": 23,
+        "selector": ".brief-pet > span:nth-child(2)",
+        "bytes": 57
+      },
+      {
+        "kind": "rule",
+        "line": 24,
+        "selector": ".brief-pet small",
+        "bytes": 51
+      },
+      {
+        "kind": "rule",
+        "line": 25,
+        "selector": ".brief-pet b",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 26,
+        "selector": ".brief-pet em",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": "#overlay .hub-deploy .gate-strip",
+        "bytes": 53
+      },
+      {
+        "kind": "rule",
+        "line": 34,
+        "selector": ".class-command",
+        "bytes": 318
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".class-command-copy",
+        "bytes": 40
+      },
+      {
+        "kind": "rule",
+        "line": 36,
+        "selector": ".class-command h3",
+        "bytes": 169
+      },
+      {
+        "kind": "rule",
+        "line": 37,
+        "selector": ".class-command p",
+        "bytes": 78
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": ".class-command-stats",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 39,
+        "selector": ".class-command-stats > span",
+        "bytes": 137
+      },
+      {
+        "kind": "rule",
+        "line": 40,
+        "selector": ".class-command-stats small",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 41,
+        "selector": ".class-command-stats b",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 42,
+        "selector": ".class-skins",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 43,
+        "selector": ".class-skins .mini-btn",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 52,
+        "selector": "#overlay .hub-ach .ach-info b",
+        "bytes": 48
+      },
+      {
+        "kind": "rule",
+        "line": 53,
+        "selector": "#overlay .hub-ach .ach-info span",
+        "bytes": 51
+      },
+      {
+        "kind": "rule",
+        "line": 54,
+        "selector": "#overlay .hub-ach .back-lock",
+        "bytes": 219
+      },
+      {
+        "kind": "rule",
+        "line": 55,
+        "selector": "#overlay .hub-ach .back-lock .ic",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 62,
+        "selector": "#overlay .pk-row.stash-row.poor",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "#overlay .pk-row.stash-row .poor-why",
+        "bytes": 74
+      },
+      {
+        "kind": "empty-condition",
+        "line": 28,
+        "name": "media"
+      },
+      {
+        "kind": "empty-condition",
+        "line": 56,
+        "name": "media"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "beforeSha256": "b0c09fd01e2a4e6894f698353bae09f614fda71edfe9ef2783b0fc30920ab902",
+    "afterSha256": "006275cb073cfe35cf9a484d7b241a0a9aa9ea552da14434776dcd1c6090971a",
+    "beforeBytes": 32298,
+    "afterBytes": 26883,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 75,
+        "selector": "body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip",
+        "bytes": 227
+      },
+      {
+        "kind": "rule",
+        "line": 76,
+        "selector": "body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip b",
+        "bytes": 112
+      },
+      {
+        "kind": "rule",
+        "line": 77,
+        "selector": "body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip small",
+        "bytes": 100
+      },
+      {
+        "kind": "branch",
+        "line": 178,
+        "selector": "#overlay .hub-page .hub-card, #overlay .hub-page .base-bar",
+        "replacement": "#overlay .hub-page .hub-card"
+      },
+      {
+        "kind": "branch",
+        "line": 181,
+        "selector": "#overlay .hub-page .mode-card .mode-info b, #overlay .hub-page .mode-card .mode-info span, #overlay .hub-page .cls-info",
+        "replacement": " #overlay .hub-page .cls-info"
+      },
+      {
+        "kind": "rule",
+        "line": 185,
+        "selector": "#overlay .bag-head .fc-chip, #overlay .bag-view .fc-chip",
+        "bytes": 136
+      },
+      {
+        "kind": "rule",
+        "line": 186,
+        "selector": "#overlay .bag-head .fc-chip b, #overlay .bag-view .fc-chip b",
+        "bytes": 79
+      },
+      {
+        "kind": "branch",
+        "line": 191,
+        "selector": "#overlay .stash-row, #overlay .ach-row",
+        "replacement": " #overlay .ach-row"
+      },
+      {
+        "kind": "branch",
+        "line": 192,
+        "selector": "#overlay .stash-row:hover, #overlay .ach-row:hover",
+        "replacement": " #overlay .ach-row:hover"
+      },
+      {
+        "kind": "branch",
+        "line": 193,
+        "selector": "#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list",
+        "replacement": " #overlay .dep-list"
+      },
+      {
+        "kind": "branch",
+        "line": 219,
+        "selector": "#overlay .hub-page .hub-card > h3, #overlay .hub-page .hub-card .base-line, #overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .ov-note, #overlay .hub-page .hub-card .ov-empty, #overlay .hub-page .hub-card .dim, #overlay .hub-page .hub-card .ach-info span, #overlay .hub-page .hub-card .ach-info b, #overlay .hub-page .hub-card .pet-row div, #overlay .hub-page .hub-card .si-line",
+        "replacement": "#overlay .hub-page .hub-card > h3, #overlay .hub-page .hub-card .ov-note, #overlay .hub-page .hub-card .ov-empty, #overlay .hub-page .hub-card .dim, #overlay .hub-page .hub-card .si-line"
+      },
+      {
+        "kind": "rule",
+        "line": 220,
+        "selector": "#overlay .hub-page .hub-card .base-line b, #overlay .hub-page .hub-card .pk-row b,\n#overlay .hub-page .hub-card .ach-info b",
+        "bytes": 142
+      },
+      {
+        "kind": "branch",
+        "line": 222,
+        "selector": "#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .stash-row, #overlay .hub-page .hub-card .ach-row",
+        "replacement": " #overlay .hub-page .hub-card .ach-row"
+      },
+      {
+        "kind": "branch",
+        "line": 223,
+        "selector": "#overlay .hub-page .hub-card .stash-row:hover, #overlay .hub-page .hub-card .ach-row:hover",
+        "replacement": " #overlay .hub-page .hub-card .ach-row:hover"
+      },
+      {
+        "kind": "rule",
+        "line": 230,
+        "selector": "#overlay .hub-page .hub-card .gate-strip .ic",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 236,
+        "selector": "#overlay .hub-page .hub-card .hint.ok-hint",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 249,
+        "selector": "#overlay .hub-page .stash-scroll",
+        "bytes": 173
+      },
+      {
+        "kind": "rule",
+        "line": 250,
+        "selector": "#overlay .hub-page .stash-cardgrid",
+        "bytes": 123
+      },
+      {
+        "kind": "rule",
+        "line": 260,
+        "selector": "#overlay .hub-page .stash-empty",
+        "bytes": 212
+      },
+      {
+        "kind": "rule",
+        "line": 261,
+        "selector": "#overlay .hub-page .stash-empty .empty-ico .ic",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 262,
+        "selector": "#overlay .hub-page .stash-empty b",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 263,
+        "selector": "#overlay .hub-page .stash-empty span",
+        "bytes": 92
+      },
+      {
+        "kind": "rule",
+        "line": 265,
+        "selector": "#overlay .hub-page .pk-row.pocket-row",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 266,
+        "selector": "#overlay .hub-page .pocket-thumb",
+        "bytes": 130
+      },
+      {
+        "kind": "rule",
+        "line": 267,
+        "selector": "#overlay .hub-page .pocket-thumb .hs-card",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 268,
+        "selector": "#overlay .hub-page .pocket-info",
+        "bytes": 134
+      },
+      {
+        "kind": "rule",
+        "line": 270,
+        "selector": "#overlay .hub-page .material-grid",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 271,
+        "selector": "#overlay .hub-page .material-cell",
+        "bytes": 240
+      },
+      {
+        "kind": "rule",
+        "line": 272,
+        "selector": "#overlay .hub-page .material-cell:hover",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 273,
+        "selector": "#overlay .hub-page .material-cell .mat-ico .ic",
+        "bytes": 75
+      },
+      {
+        "kind": "rule",
+        "line": 274,
+        "selector": "#overlay .hub-page .material-cell b",
+        "bytes": 120
+      },
+      {
+        "kind": "rule",
+        "line": 275,
+        "selector": "#overlay .hub-page .material-cell .mat-use",
+        "bytes": 97
+      },
+      {
+        "kind": "rule",
+        "line": 277,
+        "selector": "#overlay .hub-page .pet-row",
+        "bytes": 49
+      },
+      {
+        "kind": "rule",
+        "line": 278,
+        "selector": "#overlay .hub-page .pet-row > span:first-child .ic",
+        "bytes": 103
+      },
+      {
+        "kind": "rule",
+        "line": 280,
+        "selector": "#overlay .hub-page .pet-row.locked .mini-btn",
+        "bytes": 63
+      },
+      {
+        "kind": "rule",
+        "line": 284,
+        "selector": "#overlay #hubMain .stash-placeholder,\n#overlay #hubMain .stash-empty",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 286,
+        "selector": "#overlay #hubMain .stash-placeholder::after,\n#overlay #hubMain .stash-empty::after",
+        "bytes": 401
+      },
+      {
+        "kind": "rule",
+        "line": 299,
+        "selector": "#overlay .hub-shop .hub-two",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 300,
+        "selector": "#overlay .hub-shop .hub-two > .hub-card,\n#overlay .hub-upgrade .hub-upgrade-layout > .hub-card",
+        "bytes": 165
+      },
+      {
+        "kind": "rule",
+        "line": 306,
+        "selector": "#overlay .hub-page .hub-upgrade-layout",
+        "bytes": 213
+      },
+      {
+        "kind": "rule",
+        "line": 307,
+        "selector": "#overlay .hub-page .up-card",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 308,
+        "selector": "#overlay .hub-page .up-cap",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 309,
+        "selector": "#overlay .hub-page .up-cap b",
+        "bytes": 152
+      },
+      {
+        "kind": "rule",
+        "line": 310,
+        "selector": "#overlay .hub-page .up-cap small",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 311,
+        "selector": "#overlay .hub-page .up-card .base-bar",
+        "bytes": 59
+      },
+      {
+        "kind": "rule",
+        "line": 312,
+        "selector": "#overlay .hub-page .up-card .ov-btn",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 313,
+        "selector": "#overlay .hub-page .up-card .ov-btn:disabled,\n#overlay .hub-page .up-pets .mini-btn:disabled",
+        "bytes": 164
+      },
+      {
+        "kind": "rule",
+        "line": 315,
+        "selector": "#overlay .hub-page .up-pets",
+        "bytes": 51
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-library.css",
+    "beforeSha256": "42ce454fb53cdf3a1c65ad980f4af2b54e4467d87da06e459e927a70780fe8d5",
+    "afterSha256": "20e80f195b0e837f6bfec11c4d41c5510a2ab6ba7cdbdbc9aa3f7aecee6d212d",
+    "beforeBytes": 11469,
+    "afterBytes": 11383,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 94,
+        "selector": "body.cardlib-open #cardZoom .cz-hint",
+        "bytes": 84
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "beforeSha256": "8843aceffa68fad712bf3fa7e3065793114bed3a9883341357170168b91329cb",
+    "afterSha256": "96561775ef8a5d131d936e28d169fba576c7ad88b53a5bacc232e0cedd33cb32",
+    "beforeBytes": 26297,
+    "afterBytes": 20543,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 44,
+        "selector": "#overlay .node-pg, #overlay .result-pg",
+        "replacement": "#overlay .node-pg"
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "#overlay .result-pg",
+        "bytes": 38
+      },
+      {
+        "kind": "rule",
+        "line": 64,
+        "selector": "#overlay .result-pg .hub-head",
+        "bytes": 100
+      },
+      {
+        "kind": "rule",
+        "line": 65,
+        "selector": "#overlay .result-pg .hub-head h2",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 66,
+        "selector": "#overlay .result-summary",
+        "bytes": 168
+      },
+      {
+        "kind": "rule",
+        "line": 67,
+        "selector": "#overlay .result-kicker",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 68,
+        "selector": "#overlay .result-summary b",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 69,
+        "selector": "#overlay .result-summary span:last-child",
+        "bytes": 75
+      },
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": "#overlay .result-columns",
+        "bytes": 65
+      },
+      {
+        "kind": "rule",
+        "line": 71,
+        "selector": "#overlay .result-pg .hub-card",
+        "bytes": 127
+      },
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": "#overlay .result-pg .hub-card h3",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 73,
+        "selector": "#overlay .result-line",
+        "bytes": 110
+      },
+      {
+        "kind": "rule",
+        "line": 74,
+        "selector": "#overlay .result-pg .dep-foot",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 75,
+        "selector": "#overlay .result-pg #btnDeploy",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 77,
+        "selector": "body #overlay .card.page .result-pg",
+        "bytes": 204
+      },
+      {
+        "kind": "rule",
+        "line": 78,
+        "selector": "body #overlay .result-pg .hub-head",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 79,
+        "selector": "body #overlay .result-pg .hub-head h2",
+        "bytes": 97
+      },
+      {
+        "kind": "rule",
+        "line": 80,
+        "selector": "body #overlay .result-pg .hub-head .hub-res",
+        "bytes": 57
+      },
+      {
+        "kind": "rule",
+        "line": 81,
+        "selector": "body #overlay .result-pg .res-chip",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 82,
+        "selector": "body #overlay .result-pg .result-summary",
+        "bytes": 191
+      },
+      {
+        "kind": "rule",
+        "line": 83,
+        "selector": "body #overlay .result-pg .result-summary b",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 84,
+        "selector": "body #overlay .result-pg .result-summary span:last-child",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 85,
+        "selector": "body #overlay .result-pg .result-kicker",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 86,
+        "selector": "body #overlay .result-pg .result-columns",
+        "bytes": 215
+      },
+      {
+        "kind": "rule",
+        "line": 87,
+        "selector": "body #overlay .result-pg .hub-card",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 88,
+        "selector": "body #overlay .result-pg .hub-card h3",
+        "bytes": 107
+      },
+      {
+        "kind": "rule",
+        "line": 89,
+        "selector": "body #overlay .result-pg .hub-card-tip",
+        "bytes": 58
+      },
+      {
+        "kind": "rule",
+        "line": 90,
+        "selector": "body #overlay .result-pg .ext-cards",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 91,
+        "selector": "body #overlay .result-pg .ext-card",
+        "bytes": 166
+      },
+      {
+        "kind": "rule",
+        "line": 92,
+        "selector": "body:has(#viewport) #overlay .result-pg .ext-cards .hs-card",
+        "bytes": 92
+      },
+      {
+        "kind": "rule",
+        "line": 93,
+        "selector": "body #overlay .result-pg .pk-row",
+        "bytes": 95
+      },
+      {
+        "kind": "rule",
+        "line": 94,
+        "selector": "body #overlay .result-pg .dep-foot",
+        "bytes": 178
+      },
+      {
+        "kind": "rule",
+        "line": 95,
+        "selector": "body #overlay .result-pg :is(.ov-btn,#btnDeploy)",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 96,
+        "selector": "body #overlay .result-pg [data-act=\"exSmart\"]",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 97,
+        "selector": "body #overlay .result-pg[data-unclaimed-cards]:not([data-unclaimed-cards=\"0\"]) #btnDeploy[data-act=\"exFinish\"]",
+        "bytes": 177
+      },
+      {
+        "kind": "rule",
+        "line": 99,
+        "selector": "body #overlay .card.page #exMain.result-pg",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 100,
+        "selector": "body #overlay #exMain.result-pg .result-columns",
+        "bytes": 232
+      },
+      {
+        "kind": "rule",
+        "line": 101,
+        "selector": "body #overlay #exMain.result-pg .hub-card",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 102,
+        "selector": "body #overlay #exMain.result-pg .hub-card:has(.dep-foot)",
+        "bytes": 99
+      },
+      {
+        "kind": "rule",
+        "line": 103,
+        "selector": "body #overlay #exMain.result-pg :is(.res-chip,.result-summary span:last-child,.hub-card-tip,.pk-row,.dim,.ov-note,.ov-empty)",
+        "bytes": 185
+      },
+      {
+        "kind": "rule",
+        "line": 104,
+        "selector": "body #overlay #exMain.result-pg .result-kicker",
+        "bytes": 66
+      },
+      {
+        "kind": "rule",
+        "line": 105,
+        "selector": "body #overlay #exMain.result-pg .hub-card h3",
+        "bytes": 64
+      },
+      {
+        "kind": "rule",
+        "line": 106,
+        "selector": "body #overlay #exMain.result-pg .dep-foot",
+        "bytes": 279
+      },
+      {
+        "kind": "rule",
+        "line": 107,
+        "selector": "body #overlay #exMain.result-pg :is(.ov-btn,#btnDeploy)",
+        "bytes": 130
+      },
+      {
+        "kind": "rule",
+        "line": 109,
+        "selector": "body #overlay #exMain.result-pg .pk-row:not(.dep-row)",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": "body #overlay #exMain.result-pg .pk-row:not(.dep-row) > span:first-child",
+        "bytes": 118
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": "body #overlay #exMain.result-pg .pk-row:not(.dep-row) > span:last-child",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 146,
+        "selector": "#overlay .card.chest .evt-sts-desc",
+        "bytes": 85
+      },
+      {
+        "kind": "keyframes",
+        "name": "rewardUnitEnter",
+        "line": 137
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "beforeSha256": "6c3b1d0e25e4d00b356840fc318ff66ddd87dfb0b799eb1e6b3387179fdd1440",
+    "afterSha256": "937600ac94ceec0b8073c6fd25f34a059f05ca9b40c97cc54ce6dc4a669053fb",
+    "beforeBytes": 27527,
+    "afterBytes": 27378,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 53,
+        "selector": "#overlay .cls2-back",
+        "bytes": 121
+      },
+      {
+        "kind": "branch",
+        "line": 56,
+        "selector": "#overlay .cls2-face:hover, #overlay .cls2-confirm:hover, #overlay .cls2-back:hover",
+        "replacement": "#overlay .cls2-face:hover, #overlay .cls2-confirm:hover"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-transitions.css",
+    "beforeSha256": "dc372c8bbd34a3cd035da6531bf92cfb1613af83c45b61f5aeac0048ebf7f9ba",
+    "afterSha256": "38f5b918b282e5aab735598e655175d2424a7ef0d2988a88ccc111c5ea33ab2a",
+    "beforeBytes": 4715,
+    "afterBytes": 4031,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 7,
+        "selector": "#overlay .city-run-transition.resume-hold.resume-reveal",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 8,
+        "selector": "#overlay .city-run-transition.resume-hold.resume-reveal .camp-entry-cut",
+        "bytes": 150
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": "#overlay .city-run-transition.resume-reveal .transition-heading",
+        "bytes": 113
+      },
+      {
+        "kind": "keyframes",
+        "name": "resumeCutReveal",
+        "line": 8
+      },
+      {
+        "kind": "keyframes",
+        "name": "expeditionCutTitle",
+        "line": 27
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition.css",
+    "beforeSha256": "fbb072dcae23c07a8164b9e2095b1fc945884cb49480365d640fbf571ff201cc",
+    "afterSha256": "6aea233376bfb6b7a67615ff700e8a299d22b167831fb6eb8336a37a34410ece",
+    "beforeBytes": 18993,
+    "afterBytes": 18544,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 61,
+        "selector": "#title .winter-wordmark",
+        "bytes": 290
+      },
+      {
+        "kind": "rule",
+        "line": 67,
+        "selector": "#title .winter-wordmark small",
+        "bytes": 48
+      },
+      {
+        "kind": "rule",
+        "line": 318,
+        "selector": ".route-empty",
+        "bytes": 73
+      },
+      {
+        "kind": "branch",
+        "line": 345,
+        "selector": "body.reduce-motion .sts-impact, body.reduce-motion .sts-hurtflash",
+        "replacement": "body.reduce-motion .sts-impact"
+      }
+    ]
+  },
+  {
+    "file": "game/css/experience-loot.css",
+    "beforeSha256": "6546a67bd9510552c1c3955566a362e099fbf2eacc506845374285e37dd3aa4c",
+    "afterSha256": "a3a76a6617fb6b97ab861472d45ccfd47c59a15ac019c81666bc329bcd96b338",
+    "beforeBytes": 4134,
+    "afterBytes": 4096,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 10,
+        "selector": ".chest-fly",
+        "bytes": 34
+      }
+    ]
+  },
+  {
+    "file": "game/css/home-linked-interactions.css",
+    "beforeSha256": "609c2d3d93247102bea930fc9e21e9851e6284ef4618f23a7ee126f956ae135f",
+    "afterSha256": "79404ef5a45655631439d27c339a00c23e7dcdf71cf47e6298c32eed1108638f",
+    "beforeBytes": 7529,
+    "afterBytes": 7419,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 39,
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-detail-art",
+        "bytes": 109
+      }
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "beforeSha256": "0ac985425c30b82bfa9662243dcf05ee548b090838dbf41ae6f1bbc985dd941e",
+    "afterSha256": "d06768cd2a697704a5ce099cad9f8a0420f875aee6514a7f35bedcee5f6bd496",
+    "beforeBytes": 21874,
+    "afterBytes": 16003,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 56,
+        "selector": ".mode-info",
+        "bytes": 37
+      },
+      {
+        "kind": "rule",
+        "line": 57,
+        "selector": ".mode-info b",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 58,
+        "selector": ".mode-info span",
+        "bytes": 106
+      },
+      {
+        "kind": "rule",
+        "line": 59,
+        "selector": ".mode-ckpt",
+        "bytes": 70
+      },
+      {
+        "kind": "rule",
+        "line": 60,
+        "selector": ".mode-card.on .mode-ckpt",
+        "bytes": 44
+      },
+      {
+        "kind": "rule",
+        "line": 67,
+        "selector": ".deploy-forecast",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 68,
+        "selector": ".fc-chip",
+        "bytes": 145
+      },
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": ".fc-chip b",
+        "bytes": 30
+      },
+      {
+        "kind": "rule",
+        "line": 77,
+        "selector": ".hub-two",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 78,
+        "selector": ".stash-grid",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 79,
+        "selector": ".stash-list",
+        "bytes": 141
+      },
+      {
+        "kind": "branch",
+        "line": 81,
+        "selector": ".stash-row:focus-visible, .dep-card[role=\"button\"]:focus-visible, .bag-cell[role=\"button\"]:focus-visible",
+        "replacement": " .dep-card[role=\"button\"]:focus-visible, .bag-cell[role=\"button\"]:focus-visible"
+      },
+      {
+        "kind": "rule",
+        "line": 87,
+        "selector": ".dep-row.locked",
+        "bytes": 32
+      },
+      {
+        "kind": "rule",
+        "line": 88,
+        "selector": ".dep-row",
+        "bytes": 80
+      },
+      {
+        "kind": "rule",
+        "line": 95,
+        "selector": ".dep-back",
+        "bytes": 333
+      },
+      {
+        "kind": "rule",
+        "line": 99,
+        "selector": ".dep-back:hover",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 100,
+        "selector": ".dep-back:active",
+        "bytes": 43
+      },
+      {
+        "kind": "rule",
+        "line": 108,
+        "selector": ".stash-pop-card",
+        "bytes": 79
+      },
+      {
+        "kind": "rule",
+        "line": 109,
+        "selector": ".stash-pop-card .hs-card",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": ".base-line b",
+        "bytes": 36
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": ".ach-list",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 115,
+        "selector": ".ach-ico",
+        "bytes": 313
+      },
+      {
+        "kind": "rule",
+        "line": 118,
+        "selector": ".ach-row.done .ach-ico",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 119,
+        "selector": ".ach-info",
+        "bytes": 36
+      },
+      {
+        "kind": "rule",
+        "line": 120,
+        "selector": ".ach-info b",
+        "bytes": 66
+      },
+      {
+        "kind": "rule",
+        "line": 121,
+        "selector": ".ach-row.done .ach-info b",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 122,
+        "selector": ".ach-info span",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 123,
+        "selector": ".ach-ops",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 124,
+        "selector": ".ach-ops .rw",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 125,
+        "selector": ".ach-ops .rw .ic",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 126,
+        "selector": ".ach-ops .got",
+        "bytes": 52
+      },
+      {
+        "kind": "rule",
+        "line": 130,
+        "selector": "#overlay .card .ach-list .ach-row",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 131,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(2)",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 132,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(3)",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 133,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(4)",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 134,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(5)",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 135,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(6)",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 136,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(7)",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 137,
+        "selector": "#overlay .card .ach-list .ach-row:nth-child(8)",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 138,
+        "selector": ".cls-stat-row",
+        "bytes": 59
+      },
+      {
+        "kind": "rule",
+        "line": 139,
+        "selector": ".cls-detail",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 142,
+        "selector": ".coll-cards",
+        "bytes": 82
+      },
+      {
+        "kind": "rule",
+        "line": 144,
+        "selector": ".coll-cards .hs-card",
+        "bytes": 40
+      },
+      {
+        "kind": "rule",
+        "line": 151,
+        "selector": ".cls-hub-art",
+        "bytes": 169
+      },
+      {
+        "kind": "rule",
+        "line": 207,
+        "selector": ".cls-hub-art img.art-figure, .cls-pick-art img.art-figure",
+        "bytes": 136
+      },
+      {
+        "kind": "branch",
+        "line": 209,
+        "selector": ".cls2-back, .cls2-confirm",
+        "replacement": " .cls2-confirm"
+      },
+      {
+        "kind": "rule",
+        "line": 212,
+        "selector": ".cls2-back",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 215,
+        "selector": ".cls2-back::after",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 216,
+        "selector": ".cls2-back:hover",
+        "bytes": 113
+      },
+      {
+        "kind": "branch",
+        "line": 223,
+        "selector": ".cls2-back .svg-ic, .cls2-confirm .svg-ic",
+        "replacement": " .cls2-confirm .svg-ic"
+      },
+      {
+        "kind": "rule",
+        "line": 225,
+        "selector": ".scene-foes",
+        "bytes": 106
+      },
+      {
+        "kind": "rule",
+        "line": 226,
+        "selector": ".scene-foe-art",
+        "bytes": 233
+      },
+      {
+        "kind": "rule",
+        "line": 229,
+        "selector": ".scene-foes .scene-foe-art:nth-child(2)",
+        "bytes": 56
+      },
+      {
+        "kind": "rule",
+        "line": 233,
+        "selector": ".hub .pk-row.pet-row",
+        "bytes": 164
+      },
+      {
+        "kind": "rule",
+        "line": 235,
+        "selector": ".hub .pk-row.pet-row.on",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 236,
+        "selector": ".hub .pk-row.pet-row.locked",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 237,
+        "selector": ".hub .pk-row.pet-row .pet-desc",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 238,
+        "selector": ".hub .pk-row.pet-row .pet-ops",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 239,
+        "selector": ".hub .pk-row.pet-row .got",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 242,
+        "selector": ".pet-sec-head",
+        "bytes": 68
+      },
+      {
+        "kind": "rule",
+        "line": 243,
+        "selector": ".pet-sec-head .ov-note",
+        "bytes": 49
+      },
+      {
+        "kind": "rule",
+        "line": 244,
+        "selector": ".pet-sec .pet-egg-art",
+        "bytes": 293
+      },
+      {
+        "kind": "rule",
+        "line": 248,
+        "selector": ".hint.econ-line",
+        "bytes": 53
+      },
+      {
+        "kind": "rule",
+        "line": 249,
+        "selector": ".hint.econ-line b",
+        "bytes": 37
+      }
+    ]
+  },
+  {
+    "file": "game/css/inbox-cover.css",
+    "beforeSha256": "5b2af3607a4888a950017ff4b3d4a9efd63db5c67b8b2ddbac07d5df76397125",
+    "afterSha256": "cda8a577c9a24622fcf6a6ecb0f37035540112168f36ea9400dbe018282b319c",
+    "beforeBytes": 12723,
+    "afterBytes": 12512,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 59,
+        "selector": "#overlay .pg.settings-page.sugin-page .set-en",
+        "bytes": 209
+      }
+    ]
+  },
+  {
+    "file": "game/css/interface-motion.css",
+    "beforeSha256": "e6ea3d7028ddc3b6b9e195638178772d7f204776eef6b40c616a82d6146036ab",
+    "afterSha256": "0b243f07250634d1818ec0b31385304d6e9040c3a51ede7366fdd6f27c2d8cb3",
+    "beforeBytes": 7459,
+    "afterBytes": 7450,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 77,
+        "selector": "body.interface-motion #cardZoom.cz-out :is(.cz-card,.cz-foot,.cz-note,.cz-hint)",
+        "replacement": "body.interface-motion #cardZoom.cz-out :is(.cz-card,.cz-foot,.cz-note)"
+      }
+    ]
+  },
+  {
+    "file": "game/css/inventory-zoom.css",
+    "beforeSha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20",
+    "afterSha256": "0136be1b939f82c2ed039ba52a1d7f61da41120795460350fd32ad0b3ea4e020",
+    "beforeBytes": 4908,
+    "afterBytes": 4853,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 28,
+        "selector": "body:has(#viewport) #cardZoom.inventory-zoom .cz-note:not(.has), body:has(#viewport) #cardZoom.inventory-zoom .cz-hint, body:has(#viewport) #cardZoom.inventory-zoom .cz-flash",
+        "replacement": "body:has(#viewport) #cardZoom.inventory-zoom .cz-note:not(.has), body:has(#viewport) #cardZoom.inventory-zoom .cz-flash"
+      }
+    ]
+  },
+  {
+    "file": "game/css/map-cover.css",
+    "beforeSha256": "18207169b4f262d12e6e5aa5eb6accb57cdb6a07299d38dcc56330ebe568c09c",
+    "afterSha256": "6a5d015a3d69e7b45bbeba55c18ee919f8ef74ce1b9d7512230279ccafc2ecba",
+    "beforeBytes": 9324,
+    "afterBytes": 7171,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-heading",
+        "bytes": 157
+      },
+      {
+        "kind": "rule",
+        "line": 34,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-objective",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-objective[data-tone='danger']",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 36,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-objective[data-tone='safe']",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 37,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-options",
+        "bytes": 189
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-option",
+        "bytes": 483
+      },
+      {
+        "kind": "rule",
+        "line": 45,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-option:hover:not(:disabled),\r\nbody:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-option.selected",
+        "bytes": 297
+      },
+      {
+        "kind": "rule",
+        "line": 47,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-option[data-door='1']",
+        "bytes": 175
+      },
+      {
+        "kind": "rule",
+        "line": 48,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-copy b",
+        "bytes": 128
+      },
+      {
+        "kind": "rule",
+        "line": 49,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-copy small",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 50,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar #routePanel .route-arrow",
+        "bytes": 92
+      },
+      {
+        "kind": "rule",
+        "line": 58,
+        "selector": "body:not(.lobby):not(.scene-battle-3d) #expeditionChapter .chapter-kicker",
+        "bytes": 151
+      }
+    ]
+  },
+  {
+    "file": "game/css/motion-transitions.css",
+    "beforeSha256": "e22a1c9391009ed780aca7146137c4329117d27f4a343ce6571bdf232825af97",
+    "afterSha256": "5b107d9f5924f7873575e2450695cffe61dd451ae634b39ae2d345aa6d03e77a",
+    "beforeBytes": 16943,
+    "afterBytes": 16662,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 107,
+        "selector": "#overlay .bt-potion-tip",
+        "bytes": 202
+      },
+      {
+        "kind": "rule",
+        "line": 112,
+        "selector": "#overlay .bt-potion-tip[hidden]",
+        "bytes": 75
+      }
+    ]
+  },
+  {
+    "file": "game/css/navigation-feedback.css",
+    "beforeSha256": "c5ba8e6e3d19e66b97f03398138b7c6dddd15bbdb25ffb4836b9fa73e1f9f01e",
+    "afterSha256": "0cac57143aed4e1642690ab235722cccd2ad9968391b02ea9ebc297308144fb8",
+    "beforeBytes": 2095,
+    "afterBytes": 2003,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 8,
+        "selector": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled=\"true\"])",
+        "replacement": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled=\"true\"])"
+      },
+      {
+        "kind": "branch",
+        "line": 14,
+        "selector": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled=\"true\"]):is(:hover, :focus-visible)",
+        "replacement": ":is(#overlay#overlay#overlay, #topBtns#topBtns#topBtns, #cardZoom#cardZoom#cardZoom, #homeCredits#homeCredits#homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute):not(:disabled):not([aria-disabled=\"true\"]):is(:hover, :focus-visible)"
+      },
+      {
+        "kind": "branch",
+        "line": 22,
+        "selector": "body.reduce-motion :is(#overlay, #topBtns, #cardZoom, #homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute)",
+        "replacement": "body.reduce-motion :is(#overlay, #topBtns, #cardZoom, #homeCredits)\n:is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute)"
+      },
+      {
+        "kind": "branch",
+        "line": 25,
+        "selector": ":is(#overlay, #topBtns, #cardZoom, #homeCredits)\n  :is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .cls2-back, .dep-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute)",
+        "replacement": ":is(#overlay, #topBtns, #cardZoom, #homeCredits)\n  :is(.archive-back, .ak-back-tl, .ag-back, .bg-back, .hub-back, .pg-back, .sugin-exit, .studio-exit, .home-credits-back, .ag-detail-close, .cz-close, .ov-x, .pg-close, #btnHelp, #btnMute)"
+      }
+    ]
+  },
+  {
+    "file": "game/css/ordinary-polish.css",
+    "beforeSha256": "48aa008f533478bc5a1d74a2c6684d9834ca7921a93b031aec8841466345f021",
+    "afterSha256": "97a857b3b8be03321d61ebdac52109de9ba65d95ec80fcd6ba75eea8cb9eeeb5",
+    "beforeBytes": 4859,
+    "afterBytes": 2351,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 28,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell",
+        "bytes": 190
+      },
+      {
+        "kind": "rule",
+        "line": 34,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell :is(.ov-stats, .ov-note)",
+        "bytes": 241
+      },
+      {
+        "kind": "rule",
+        "line": 41,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell .ov-stats b",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 44,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row,\r\nbody[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line",
+        "bytes": 316
+      },
+      {
+        "kind": "rule",
+        "line": 52,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line .ov-note",
+        "bytes": 131
+      },
+      {
+        "kind": "rule",
+        "line": 55,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line .ov-note b",
+        "bytes": 131
+      },
+      {
+        "kind": "rule",
+        "line": 60,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .result-columns > .hub-card",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .hub-head > h2",
+        "bytes": 104
+      },
+      {
+        "kind": "rule",
+        "line": 66,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row",
+        "bytes": 157
+      },
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row > span",
+        "bytes": 174
+      },
+      {
+        "kind": "rule",
+        "line": 78,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .dep-foot",
+        "bytes": 154
+      },
+      {
+        "kind": "rule",
+        "line": 83,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .dep-foot :is(.ov-btn, #btnDeploy)",
+        "bytes": 321
+      },
+      {
+        "kind": "rule",
+        "line": 95,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards:has(> .ov-empty)",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 98,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards > .ov-empty",
+        "bytes": 214
+      }
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "beforeSha256": "5c39daae42aa53b3d6bd7309896e1bf2181b8d209f38390fa4dd5e5a62dcbee1",
+    "afterSha256": "3bdfd24d41af1c41ab977de8d52bdc5af400c269ddf97be7384aabc5e037dfbd",
+    "beforeBytes": 41292,
+    "afterBytes": 35882,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 11,
+        "selector": ".card-slot, .safe-slot",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 12,
+        "selector": ".bag-grid.safe-grid .bag-slot.empty.safe-empty",
+        "bytes": 108
+      },
+      {
+        "kind": "rule",
+        "line": 14,
+        "selector": ".bag-grid .bag-slot.empty.pearl-empty",
+        "bytes": 183
+      },
+      {
+        "kind": "rule",
+        "line": 16,
+        "selector": ".pk-list",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 17,
+        "selector": ".pk-row",
+        "bytes": 217
+      },
+      {
+        "kind": "branch",
+        "line": 20,
+        "selector": ".pk-row .dim, .dim",
+        "replacement": " .dim"
+      },
+      {
+        "kind": "rule",
+        "line": 21,
+        "selector": ".pk-row .ic",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 23,
+        "selector": ".pk-list.pk-cards",
+        "bytes": 182
+      },
+      {
+        "kind": "rule",
+        "line": 25,
+        "selector": ".pk-card",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 26,
+        "selector": ".pk-card .hs-card",
+        "bytes": 142
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": ".pk-card .pk-tag",
+        "bytes": 297
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".res-chip",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 33,
+        "selector": ".res-chip .ic",
+        "bytes": 68
+      },
+      {
+        "kind": "rule",
+        "line": 34,
+        "selector": ".res-chip b",
+        "bytes": 35
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".base-card",
+        "bytes": 186
+      },
+      {
+        "kind": "rule",
+        "line": 37,
+        "selector": ".base-card h3",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": ".base-card h3 .ic",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 39,
+        "selector": ".base-line",
+        "bytes": 66
+      },
+      {
+        "kind": "rule",
+        "line": 40,
+        "selector": ".base-line b",
+        "bytes": 36
+      },
+      {
+        "kind": "rule",
+        "line": 41,
+        "selector": ".base-bar",
+        "bytes": 154
+      },
+      {
+        "kind": "rule",
+        "line": 43,
+        "selector": ".base-bar i",
+        "bytes": 97
+      },
+      {
+        "kind": "rule",
+        "line": 44,
+        "selector": ".base-bar.green i",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 45,
+        "selector": ".pet-row",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 46,
+        "selector": ".ok-hint",
+        "bytes": 28
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": ".bt-gy-row",
+        "bytes": 178
+      },
+      {
+        "kind": "rule",
+        "line": 65,
+        "selector": ".bt-gy-row b",
+        "bytes": 32
+      },
+      {
+        "kind": "rule",
+        "line": 66,
+        "selector": ".bt-gy-row .bt-gy-meta",
+        "bytes": 80
+      },
+      {
+        "kind": "rule",
+        "line": 106,
+        "selector": ".bt-cost1",
+        "bytes": 433
+      },
+      {
+        "kind": "rule",
+        "line": 112,
+        "selector": ".bt-cost1.cost-mod.mod-down",
+        "bytes": 181
+      },
+      {
+        "kind": "rule",
+        "line": 114,
+        "selector": ".bt-cost1.cost-mod.mod-up",
+        "bytes": 181
+      },
+      {
+        "kind": "rule",
+        "line": 200,
+        "selector": ".slot-page-en",
+        "bytes": 150
+      },
+      {
+        "kind": "rule",
+        "line": 209,
+        "selector": ".slot-page-help",
+        "bytes": 198
+      },
+      {
+        "kind": "rule",
+        "line": 242,
+        "selector": ".slot-page .slot-card-sub",
+        "bytes": 163
+      },
+      {
+        "kind": "rule",
+        "line": 290,
+        "selector": "#invList li b",
+        "bytes": 70
+      },
+      {
+        "kind": "rule",
+        "line": 318,
+        "selector": "#pixiFx",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 319,
+        "selector": "#pixiFx canvas",
+        "bytes": 83
+      },
+      {
+        "kind": "rule",
+        "line": 350,
+        "selector": "#overlay.room-view .card.room.scene .scene-line p",
+        "bytes": 71
+      },
+      {
+        "kind": "rule",
+        "line": 428,
+        "selector": ".cls-chest-note",
+        "bytes": 35
+      },
+      {
+        "kind": "rule",
+        "line": 429,
+        "selector": ".cls-chest-note b",
+        "bytes": 37
+      },
+      {
+        "kind": "rule",
+        "line": 520,
+        "selector": ".ov-shell",
+        "bytes": 255
+      },
+      {
+        "kind": "rule",
+        "line": 525,
+        "selector": ".ov-shell::before",
+        "bytes": 183
+      },
+      {
+        "kind": "rule",
+        "line": 527,
+        "selector": ".ov-shell::after",
+        "bytes": 183
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "beforeSha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a",
+    "afterSha256": "ad80a3fc9a213bd96a996867b2df81d637978399e2bfa7eaa9ca73b81c2e162f",
+    "beforeBytes": 18399,
+    "afterBytes": 16654,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 139,
+        "selector": "#overlay #hubMain.hub-ach .ach-list",
+        "bytes": 49
+      },
+      {
+        "kind": "rule",
+        "line": 151,
+        "selector": "#overlay #hubMain.hub-ach .ach-row.done .ach-ico",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 155,
+        "selector": "#overlay #hubMain.hub-ach .ach-row.done .ach-info b",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 158,
+        "selector": "#overlay #hubMain.hub-ach .ach-ops .got",
+        "bytes": 82
+      },
+      {
+        "kind": "rule",
+        "line": 175,
+        "selector": "#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ops .rw",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 176,
+        "selector": "#overlay #hubMain.hub-ach .ach-row.done:has(.mini-btn.ok) .ach-ico",
+        "bytes": 155
+      },
+      {
+        "kind": "rule",
+        "line": 181,
+        "selector": "#overlay #hubMain.hub-ach .ach-row:not(.done) .ach-info b",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 182,
+        "selector": "#overlay #hubMain.hub-ach .ach-info span",
+        "bytes": 60
+      },
+      {
+        "kind": "rule",
+        "line": 183,
+        "selector": "#overlay #hubMain.hub-ach .ach-ops .rw",
+        "bytes": 81
+      },
+      {
+        "kind": "rule",
+        "line": 186,
+        "selector": "#overlay #hubMain.hub-ach .ach-ico",
+        "bytes": 241
+      },
+      {
+        "kind": "rule",
+        "line": 256,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row",
+        "bytes": 133
+      },
+      {
+        "kind": "rule",
+        "line": 259,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(2)",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 260,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(3)",
+        "bytes": 101
+      },
+      {
+        "kind": "rule",
+        "line": 261,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(4)",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 262,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(5)",
+        "bytes": 101
+      },
+      {
+        "kind": "rule",
+        "line": 263,
+        "selector": "#overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(6)",
+        "bytes": 102
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-battle-ui.css",
+    "beforeSha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea",
+    "afterSha256": "f07391b3fcddb2c37075b55d7a7fa0b8fd935ba3a35770345b693e312fcbf7da",
+    "beforeBytes": 10886,
+    "afterBytes": 10716,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": ".bt-gy-row",
+        "bytes": 57
+      },
+      {
+        "kind": "rule",
+        "line": 73,
+        "selector": ".bt-gy-row b",
+        "bytes": 32
+      },
+      {
+        "kind": "rule",
+        "line": 74,
+        "selector": ".bt-gy-row .bt-gy-meta",
+        "bytes": 78
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-classes.css",
+    "beforeSha256": "ab5341af371c2f7a62ca092493fc98f54facfb6067bd48fb724f9ff212181a1c",
+    "afterSha256": "d866838e14cb81d13afdf816be2eb206f80dafc590adf1320b4f0cff27a8dbc7",
+    "beforeBytes": 11179,
+    "afterBytes": 5120,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 17,
+        "selector": "#overlay #hubMain.hub-classes .class-command",
+        "bytes": 151
+      },
+      {
+        "kind": "rule",
+        "line": 23,
+        "selector": "#overlay #hubMain.hub-classes .class-command::after",
+        "bytes": 313
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": "#overlay #hubMain.hub-classes .class-command::before",
+        "bytes": 342
+      },
+      {
+        "kind": "rule",
+        "line": 40,
+        "selector": "#overlay #hubMain.hub-classes .class-command .section-kicker",
+        "bytes": 142
+      },
+      {
+        "kind": "rule",
+        "line": 44,
+        "selector": "#overlay #hubMain.hub-classes .class-command .section-kicker::before",
+        "bytes": 244
+      },
+      {
+        "kind": "rule",
+        "line": 50,
+        "selector": "#overlay #hubMain.hub-classes .class-command h3",
+        "bytes": 127
+      },
+      {
+        "kind": "rule",
+        "line": 53,
+        "selector": "#overlay #hubMain.hub-classes .class-command p",
+        "bytes": 66
+      },
+      {
+        "kind": "rule",
+        "line": 56,
+        "selector": "#overlay #hubMain.hub-classes .class-command-stats > span",
+        "bytes": 156
+      },
+      {
+        "kind": "rule",
+        "line": 60,
+        "selector": "#overlay #hubMain.hub-classes .class-command-stats > span::before",
+        "bytes": 251
+      },
+      {
+        "kind": "rule",
+        "line": 65,
+        "selector": "#overlay #hubMain.hub-classes .class-command-stats small",
+        "bytes": 97
+      },
+      {
+        "kind": "rule",
+        "line": 66,
+        "selector": "#overlay #hubMain.hub-classes .class-command-stats b",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 73,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier",
+        "bytes": 264
+      },
+      {
+        "kind": "rule",
+        "line": 78,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier:hover",
+        "bytes": 203
+      },
+      {
+        "kind": "rule",
+        "line": 83,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier:active",
+        "bytes": 202
+      },
+      {
+        "kind": "rule",
+        "line": 88,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier:focus-within",
+        "bytes": 177
+      },
+      {
+        "kind": "rule",
+        "line": 94,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier::before",
+        "bytes": 342
+      },
+      {
+        "kind": "rule",
+        "line": 101,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier.trained::before",
+        "bytes": 77
+      },
+      {
+        "kind": "rule",
+        "line": 102,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier:hover::before",
+        "bytes": 76
+      },
+      {
+        "kind": "rule",
+        "line": 120,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier h3",
+        "bytes": 127
+      },
+      {
+        "kind": "rule",
+        "line": 123,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier p",
+        "bytes": 66
+      },
+      {
+        "kind": "rule",
+        "line": 136,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier .xp-bar",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 140,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier .xp-bar i",
+        "bytes": 194
+      },
+      {
+        "kind": "rule",
+        "line": 145,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier.trained .xp-bar i::after",
+        "bytes": 286
+      },
+      {
+        "kind": "rule",
+        "line": 151,
+        "selector": "#overlay #hubMain.hub-classes .class-dossier .xp-txt",
+        "bytes": 95
+      },
+      {
+        "kind": "rule",
+        "line": 155,
+        "selector": "#overlay #hubMain.hub-classes .class-skins",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 156,
+        "selector": "#overlay #hubMain.hub-classes .class-skins .mini-btn",
+        "bytes": 172
+      },
+      {
+        "kind": "rule",
+        "line": 161,
+        "selector": "#overlay #hubMain.hub-classes .class-skins .mini-btn:hover",
+        "bytes": 201
+      },
+      {
+        "kind": "rule",
+        "line": 168,
+        "selector": "#overlay #hubMain.hub-classes .class-skins .mini-btn.ok",
+        "bytes": 255
+      },
+      {
+        "kind": "rule",
+        "line": 174,
+        "selector": "#overlay #hubMain.hub-classes .class-skins .mini-btn.ok:hover",
+        "bytes": 252
+      },
+      {
+        "kind": "rule",
+        "line": 184,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-command",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 191,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-dossier",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 194,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-dossier:nth-child(2)",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 195,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-dossier:nth-child(3)",
+        "bytes": 101
+      },
+      {
+        "kind": "rule",
+        "line": 196,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-dossier:nth-child(4)",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 197,
+        "selector": "#overlay #hubMain.hub-classes .hub-page.page-in .class-dossier:nth-child(5)",
+        "bytes": 101
+      },
+      {
+        "kind": "rule",
+        "line": 211,
+        "selector": "#overlay #hubMain.hub-classes .class-skins",
+        "bytes": 86
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-deploy.css",
+    "beforeSha256": "d54a76f8df3e412c8e7256279f4be1e7961bc68e19bf7b2ac38e85c93bb5bacb",
+    "afterSha256": "dc88eea2ab49f2333f025d125745c1e4f07b721fa5ec3b9ace54ba37ca10ded1",
+    "beforeBytes": 22746,
+    "afterBytes": 21512,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 90,
+        "selector": "#overlay #depMain .hub-res .res-chip",
+        "bytes": 188
+      },
+      {
+        "kind": "rule",
+        "line": 95,
+        "selector": "#overlay #depMain .hub-res .res-chip b",
+        "bytes": 94
+      },
+      {
+        "kind": "rule",
+        "line": 286,
+        "selector": "#overlay #depMain .dep-back",
+        "bytes": 474
+      },
+      {
+        "kind": "rule",
+        "line": 295,
+        "selector": "#overlay #depMain .dep-back:hover",
+        "bytes": 281
+      },
+      {
+        "kind": "rule",
+        "line": 302,
+        "selector": "#overlay #depMain .dep-back:active",
+        "bytes": 181
+      },
+      {
+        "kind": "branch",
+        "line": 335,
+        "selector": "#overlay #depMain :is(.dep-card, .bag-cell[role=\"button\"], .pet-chip, .dep-back, #btnDeploy, .help-btn):focus-visible",
+        "replacement": "#overlay #depMain :is(.dep-card, .bag-cell[role=\"button\"], .pet-chip, #btnDeploy, .help-btn):focus-visible"
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "beforeSha256": "d5e8422a36b26ff6f5cf1cc55369e3c1e01cfa5d179b8c687f2390e2bcec38ec",
+    "afterSha256": "5317cb9b8ea28ffe17250029cd8feee95a1e898370aee0288a2af633dd17e9a3",
+    "beforeBytes": 23797,
+    "afterBytes": 23338,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".expedition-feedback-cards",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 36,
+        "selector": ".expedition-feedback-cards .hs-card",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 37,
+        "selector": ".expedition-feedback .expedition-feedback-continue",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": ".expedition-feedback-entry",
+        "bytes": 44
+      },
+      {
+        "kind": "rule",
+        "line": 167,
+        "selector": "#expeditionChapter .chapter-kicker",
+        "bytes": 89
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-hub.css",
+    "beforeSha256": "4d49435258d920ff81fb429b32bf5d5ec2b9f33934b449d6520eee4efae3f20b",
+    "afterSha256": "46ea351e3e4d13b15175a6186a49b7de7b59651ed352d51a7d534ab9bd684047",
+    "beforeBytes": 21078,
+    "afterBytes": 19793,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 131,
+        "selector": "#overlay #hubMain .res-chip",
+        "bytes": 199
+      },
+      {
+        "kind": "rule",
+        "line": 135,
+        "selector": "#overlay #hubMain .res-chip .ic",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 136,
+        "selector": "#overlay #hubMain .res-chip b",
+        "bytes": 150
+      },
+      {
+        "kind": "rule",
+        "line": 262,
+        "selector": "#overlay #hubMain .brief-mode b",
+        "bytes": 51
+      },
+      {
+        "kind": "rule",
+        "line": 263,
+        "selector": "#overlay #hubMain .brief-status",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 268,
+        "selector": "#overlay #hubMain .gate-strip",
+        "bytes": 220
+      },
+      {
+        "kind": "rule",
+        "line": 273,
+        "selector": "#overlay #hubMain .gate-strip:hover",
+        "bytes": 179
+      },
+      {
+        "kind": "rule",
+        "line": 277,
+        "selector": "#overlay #hubMain .gate-strip:active",
+        "bytes": 104
+      },
+      {
+        "kind": "rule",
+        "line": 278,
+        "selector": "#overlay #hubMain .gate-strip.gate-ready",
+        "bytes": 81
+      },
+      {
+        "kind": "branch",
+        "line": 297,
+        "selector": "#overlay #hubMain .stash-cell,\n#overlay #hubMain .material-cell",
+        "replacement": "#overlay #hubMain .stash-cell"
+      },
+      {
+        "kind": "branch",
+        "line": 302,
+        "selector": "#overlay #hubMain .stash-cell:active,\n#overlay #hubMain .material-cell:active",
+        "replacement": "#overlay #hubMain .stash-cell:active"
+      },
+      {
+        "kind": "rule",
+        "line": 375,
+        "selector": "#overlay #hubMain .gate-strip",
+        "bytes": 65
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "beforeSha256": "9b7cf42a2881bc982fc854504584b56470fd0bbadb7f3e205132328195b640c6",
+    "afterSha256": "c6d250eb9c8e767fb219759ba9e8a3815ed2b2400dd9f90a390975a3362b1381",
+    "beforeBytes": 30861,
+    "afterBytes": 27352,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": "#overlay .card.chest .evt-sts-desc",
+        "bytes": 54
+      },
+      {
+        "kind": "rule",
+        "line": 71,
+        "selector": "#overlay .card.chest .evt-sts-desc b",
+        "bytes": 56
+      },
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": "#overlay .card.chest .evt-sts-desc b.gold",
+        "bytes": 106
+      },
+      {
+        "kind": "rule",
+        "line": 83,
+        "selector": "#overlay .card.chest .chest-warn",
+        "bytes": 157
+      },
+      {
+        "kind": "rule",
+        "line": 131,
+        "selector": "#overlay .card.chest:has(.bt-hand:not(.no-anim)) .evt-sts-desc",
+        "bytes": 137
+      },
+      {
+        "kind": "rule",
+        "line": 194,
+        "selector": "#overlay .card.bag-page .bag-slot.filled.card-slot",
+        "bytes": 246
+      },
+      {
+        "kind": "rule",
+        "line": 199,
+        "selector": "#overlay .card.bag-page .bag-slot.filled.card-slot:hover",
+        "bytes": 183
+      },
+      {
+        "kind": "rule",
+        "line": 206,
+        "selector": "#overlay .card.bag-page .bag-slot.empty.pearl-empty",
+        "bytes": 189
+      },
+      {
+        "kind": "rule",
+        "line": 211,
+        "selector": "#overlay .card.bag-page .bag-slot.safe-slot",
+        "bytes": 218
+      },
+      {
+        "kind": "rule",
+        "line": 216,
+        "selector": "#overlay .card.bag-page .bag-slot.safe-slot:hover",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 220,
+        "selector": "#overlay .card.bag-page .bag-grid.safe-grid",
+        "bytes": 83
+      },
+      {
+        "kind": "rule",
+        "line": 221,
+        "selector": "#overlay .card.bag-page .bag-grid.safe-grid .bag-slot.empty.safe-empty",
+        "bytes": 150
+      },
+      {
+        "kind": "rule",
+        "line": 234,
+        "selector": "#overlay .card.bag-page .pk-card .pk-tag",
+        "bytes": 134
+      },
+      {
+        "kind": "rule",
+        "line": 239,
+        "selector": "#overlay .card.bag-page .pk-list .ov-empty",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 412,
+        "selector": "#overlay .card.chest:has(.battle-banner) .evt-sts-desc:not(.battle-loot-summary)",
+        "bytes": 145
+      },
+      {
+        "kind": "rule",
+        "line": 413,
+        "selector": "#overlay .card.chest:has(.battle-banner) .evt-sts-desc.battle-loot-summary",
+        "bytes": 175
+      },
+      {
+        "kind": "branch",
+        "line": 418,
+        "selector": "#overlay .doom-panel .doom-sub, #overlay .doom-panel .doom-stats, #overlay .doom-panel .doom-stat, #overlay .doom-panel .doom-xp, #overlay .doom-panel .doom-xp-bar i, #overlay .doom-panel .doom-loot, #overlay .doom-panel .doom-card, #overlay .doom-panel .doom-btns, #overlay .card.chest:has(.battle-banner) .evt-sts-desc, #overlay .card.chest:has(.battle-banner) .loot-footer-note",
+        "replacement": "#overlay .doom-panel .doom-sub, #overlay .doom-panel .doom-stats, #overlay .doom-panel .doom-stat, #overlay .doom-panel .doom-xp, #overlay .doom-panel .doom-xp-bar i, #overlay .doom-panel .doom-loot, #overlay .doom-panel .doom-card, #overlay .doom-panel .doom-btns, #overlay .card.chest:has(.battle-banner) .loot-footer-note"
+      },
+      {
+        "kind": "rule",
+        "line": 446,
+        "selector": "#overlay .ach-list",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 460,
+        "selector": "#overlay .ach-row .ach-ico",
+        "bytes": 253
+      },
+      {
+        "kind": "rule",
+        "line": 467,
+        "selector": "#overlay .ach-row.done .ach-ico",
+        "bytes": 127
+      },
+      {
+        "kind": "rule",
+        "line": 468,
+        "selector": "#overlay .ach-row .ach-info",
+        "bytes": 94
+      },
+      {
+        "kind": "rule",
+        "line": 469,
+        "selector": "#overlay .ach-row .ach-info b",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 470,
+        "selector": "#overlay .ach-row.done .ach-info b",
+        "bytes": 54
+      },
+      {
+        "kind": "rule",
+        "line": 471,
+        "selector": "#overlay .ach-row .ach-info span",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 472,
+        "selector": "#overlay .ach-row .ach-ops",
+        "bytes": 65
+      },
+      {
+        "kind": "rule",
+        "line": 473,
+        "selector": "#overlay .ach-row .ach-ops .rw",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 474,
+        "selector": "#overlay .ach-row.done .ach-ops .rw",
+        "bytes": 55
+      },
+      {
+        "kind": "rule",
+        "line": 528,
+        "selector": ".res-chip b, .fc-chip b, .ach-ops .rw, .ach-ops .got, .result-summary b",
+        "bytes": 111
+      },
+      {
+        "kind": "rule",
+        "line": 532,
+        "selector": ".mode-ckpt",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 537,
+        "selector": ".mode-info span, .ach-info span, .pk-row .dim",
+        "bytes": 67
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "beforeSha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a",
+    "afterSha256": "dbe2ddc225bb71522e646fc7eb90838cf077522ac7822fbe586aef2c8d79e7a9",
+    "beforeBytes": 25799,
+    "afterBytes": 25365,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 127,
+        "selector": ".pg.settings-page .set-h .set-en",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 170,
+        "selector": ".pg.settings-page .chk .set-en",
+        "bytes": 131
+      },
+      {
+        "kind": "rule",
+        "line": 174,
+        "selector": ".pg.settings-page .chk > span:first-child .set-en",
+        "bytes": 92
+      },
+      {
+        "kind": "rule",
+        "line": 176,
+        "selector": ".pg.settings-page .chk.vol .set-en",
+        "bytes": 94
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-shop.css",
+    "beforeSha256": "ad559010709f6cd9e98feb7d82b2904474754ae3a819e83051124318cc2446bb",
+    "afterSha256": "2708ff907377f1884834059c83174832a30db526b186b707307deaec843ba0bf",
+    "beforeBytes": 18875,
+    "afterBytes": 15271,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card",
+        "bytes": 275
+      },
+      {
+        "kind": "rule",
+        "line": 33,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card:first-child",
+        "bytes": 221
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child",
+        "bytes": 143
+      },
+      {
+        "kind": "rule",
+        "line": 42,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card::before",
+        "bytes": 270
+      },
+      {
+        "kind": "rule",
+        "line": 48,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card:first-child::before",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 70,
+        "selector": "#overlay #hubMain.hub-shop .base-line",
+        "bytes": 268
+      },
+      {
+        "kind": "rule",
+        "line": 76,
+        "selector": "#overlay #hubMain.hub-shop .base-line b",
+        "bytes": 146
+      },
+      {
+        "kind": "rule",
+        "line": 167,
+        "selector": "#overlay #hubMain.hub-shop .shelf-item .poor-why",
+        "bytes": 71
+      },
+      {
+        "kind": "rule",
+        "line": 198,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child .ov-note",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 199,
+        "selector": "#overlay #hubMain.hub-shop .hub-two > .hub-card:last-child .ov-note + .ov-note",
+        "bytes": 169
+      },
+      {
+        "kind": "rule",
+        "line": 215,
+        "selector": "#overlay #hubMain.hub-shop .hub-page.page-in .hub-two > .hub-card",
+        "bytes": 139
+      },
+      {
+        "kind": "rule",
+        "line": 218,
+        "selector": "#overlay #hubMain.hub-shop .hub-page.page-in .hub-two > .hub-card:last-child",
+        "bytes": 103
+      },
+      {
+        "kind": "rule",
+        "line": 280,
+        "selector": "#overlay #hubMain.hub-shop .shelf-item .poor-why",
+        "bytes": 193
+      },
+      {
+        "kind": "rule",
+        "line": 285,
+        "selector": "#overlay #hubMain.hub-shop .shelf-item .poor-why img,\r\n#overlay #hubMain.hub-shop .shelf-item .poor-why .ic",
+        "bytes": 199
+      },
+      {
+        "kind": "rule",
+        "line": 292,
+        "selector": "#overlay #hubMain.hub-shop .shop-soldout",
+        "bytes": 423
+      },
+      {
+        "kind": "rule",
+        "line": 302,
+        "selector": "#overlay #hubMain.hub-shop .shop-soldout .so-seal",
+        "bytes": 504
+      },
+      {
+        "kind": "rule",
+        "line": 312,
+        "selector": "#overlay #hubMain.hub-shop .shop-soldout .so-seal .ic",
+        "bytes": 124
+      },
+      {
+        "kind": "rule",
+        "line": 313,
+        "selector": "#overlay #hubMain.hub-shop .shop-soldout .so-en",
+        "bytes": 145
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-slot-select.css",
+    "beforeSha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97",
+    "afterSha256": "f794f2ba99b86c25effdf18f2d3a2783a285333d8f4282cca649eeb517fe5452",
+    "beforeBytes": 21459,
+    "afterBytes": 20758,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 160,
+        "selector": ".slot-page .slot-card-sub",
+        "bytes": 120
+      },
+      {
+        "kind": "rule",
+        "line": 164,
+        "selector": ".slot-page .slot-card-sub::before,\n.slot-page .slot-card-sub::after",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 170,
+        "selector": ".slot-page .slot-card-sub::after",
+        "bytes": 59
+      },
+      {
+        "kind": "rule",
+        "line": 319,
+        "selector": ".slot-page .slot-page-help .help-btn",
+        "bytes": 164
+      },
+      {
+        "kind": "rule",
+        "line": 320,
+        "selector": ".slot-page .slot-page-help .help-btn:active",
+        "bytes": 69
+      },
+      {
+        "kind": "branch",
+        "line": 323,
+        "selector": "#overlay .slot-page .slot-card-cta:focus-visible,\n#overlay .slot-page .slot-card-ops .mini-btn:focus-visible,\n#overlay .pg.slot-page .pg-back:focus-visible,\n#overlay .slot-page .slot-page-help .help-btn:focus-visible",
+        "replacement": "#overlay .slot-page .slot-card-cta:focus-visible,\n#overlay .slot-page .slot-card-ops .mini-btn:focus-visible,\n#overlay .pg.slot-page .pg-back:focus-visible"
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-stash.css",
+    "beforeSha256": "7ee2237165f5568914475d7ecd4e39bbf31b64707baacb4f1c5c162c5f93475d",
+    "afterSha256": "758eabe113ee13ce77dc0f3ddc859c4bf1e6d58ceaf8116d4664295c6d3f3196",
+    "beforeBytes": 19807,
+    "afterBytes": 6994,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 20,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll)",
+        "bytes": 255
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card",
+        "bytes": 285
+      },
+      {
+        "kind": "rule",
+        "line": 36,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card::before",
+        "bytes": 304
+      },
+      {
+        "kind": "rule",
+        "line": 42,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-two > .hub-card:first-child::before",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 46,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3",
+        "bytes": 197
+      },
+      {
+        "kind": "rule",
+        "line": 51,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3::before",
+        "bytes": 306
+      },
+      {
+        "kind": "rule",
+        "line": 57,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3::after",
+        "bytes": 293
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card > h3 .set-tip",
+        "bytes": 270
+      },
+      {
+        "kind": "rule",
+        "line": 72,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-line",
+        "bytes": 146
+      },
+      {
+        "kind": "rule",
+        "line": 75,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-line b",
+        "bytes": 191
+      },
+      {
+        "kind": "rule",
+        "line": 81,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-bar",
+        "bytes": 208
+      },
+      {
+        "kind": "rule",
+        "line": 86,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .base-bar i",
+        "bytes": 212
+      },
+      {
+        "kind": "rule",
+        "line": 93,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-scroll",
+        "bytes": 187
+      },
+      {
+        "kind": "rule",
+        "line": 98,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-list",
+        "bytes": 133
+      },
+      {
+        "kind": "rule",
+        "line": 103,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell::before",
+        "bytes": 346
+      },
+      {
+        "kind": "rule",
+        "line": 110,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell.is-material::before",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell.collected::before",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 112,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell:hover::before",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 115,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell",
+        "bytes": 217
+      },
+      {
+        "kind": "rule",
+        "line": 119,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell:hover",
+        "bytes": 208
+      },
+      {
+        "kind": "rule",
+        "line": 124,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell:active",
+        "bytes": 280
+      },
+      {
+        "kind": "rule",
+        "line": 131,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell.collected",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 137,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .stack-count",
+        "bytes": 241
+      },
+      {
+        "kind": "rule",
+        "line": 147,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .cell-tag",
+        "bytes": 244
+      },
+      {
+        "kind": "rule",
+        "line": 154,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-empty",
+        "bytes": 163
+      },
+      {
+        "kind": "rule",
+        "line": 158,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-empty .empty-ico",
+        "bytes": 159
+      },
+      {
+        "kind": "rule",
+        "line": 162,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-empty b",
+        "bytes": 132
+      },
+      {
+        "kind": "rule",
+        "line": 165,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-empty span",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 171,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pocket-row",
+        "bytes": 316
+      },
+      {
+        "kind": "rule",
+        "line": 177,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pocket-row:hover",
+        "bytes": 225
+      },
+      {
+        "kind": "rule",
+        "line": 182,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pocket-thumb",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 186,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row b",
+        "bytes": 105
+      },
+      {
+        "kind": "rule",
+        "line": 189,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-list .ov-empty",
+        "bytes": 140
+      },
+      {
+        "kind": "rule",
+        "line": 195,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell",
+        "bytes": 418
+      },
+      {
+        "kind": "rule",
+        "line": 203,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell::after",
+        "bytes": 336
+      },
+      {
+        "kind": "rule",
+        "line": 210,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell:hover",
+        "bytes": 323
+      },
+      {
+        "kind": "rule",
+        "line": 216,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell:hover::after",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 217,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell:active",
+        "bytes": 283
+      },
+      {
+        "kind": "rule",
+        "line": 222,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell .mat-ico .ic",
+        "bytes": 143
+      },
+      {
+        "kind": "rule",
+        "line": 225,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell:hover .mat-ico .ic",
+        "bytes": 182
+      },
+      {
+        "kind": "rule",
+        "line": 228,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell b",
+        "bytes": 171
+      },
+      {
+        "kind": "rule",
+        "line": 231,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell .mat-use",
+        "bytes": 159
+      },
+      {
+        "kind": "rule",
+        "line": 237,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row",
+        "bytes": 312
+      },
+      {
+        "kind": "rule",
+        "line": 243,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row.on",
+        "bytes": 284
+      },
+      {
+        "kind": "rule",
+        "line": 249,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pk-row.pet-row.locked",
+        "bytes": 164
+      },
+      {
+        "kind": "rule",
+        "line": 254,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pet-row .got",
+        "bytes": 109
+      },
+      {
+        "kind": "rule",
+        "line": 257,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .pet-row .pet-desc",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 263,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card .ov-note",
+        "bytes": 156
+      },
+      {
+        "kind": "rule",
+        "line": 266,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .hub-card .ov-note b",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 272,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .mini-btn.ok:not(:disabled)",
+        "bytes": 258
+      },
+      {
+        "kind": "rule",
+        "line": 278,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .mini-btn.ok:hover:not(:disabled)",
+        "bytes": 221
+      },
+      {
+        "kind": "rule",
+        "line": 286,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll).page-in > .hub-two > .hub-card,\r\n#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll).page-in > .hub-card",
+        "bytes": 269
+      },
+      {
+        "kind": "rule",
+        "line": 290,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll).page-in > .hub-two > .hub-card:nth-child(2)",
+        "bytes": 142
+      },
+      {
+        "kind": "rule",
+        "line": 291,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll).page-in > .hub-card",
+        "bytes": 118
+      },
+      {
+        "kind": "rule",
+        "line": 320,
+        "selector": ".ov-shell.stash-shell",
+        "bytes": 140
+      },
+      {
+        "kind": "rule",
+        "line": 328,
+        "selector": "#overlay #hubMain .stash-placeholder",
+        "bytes": 393
+      },
+      {
+        "kind": "rule",
+        "line": 338,
+        "selector": "#overlay #hubMain .stash-placeholder .sp-ico .ic",
+        "bytes": 140
+      },
+      {
+        "kind": "rule",
+        "line": 342,
+        "selector": "#overlay #hubMain .stash-placeholder b",
+        "bytes": 118
+      },
+      {
+        "kind": "rule",
+        "line": 345,
+        "selector": "#overlay #hubMain .stash-placeholder span:last-child",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 348,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero",
+        "bytes": 290
+      },
+      {
+        "kind": "rule",
+        "line": 355,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero b",
+        "bytes": 111
+      },
+      {
+        "kind": "rule",
+        "line": 356,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero .mat-ico",
+        "bytes": 118
+      },
+      {
+        "kind": "rule",
+        "line": 357,
+        "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .material-cell.zero:hover",
+        "bytes": 137
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-upgrade.css",
+    "beforeSha256": "c29334f34826245b68400baf9db5205fb44d8eccbbc0386c5782d41b3c20b9fb",
+    "afterSha256": "c9765f8dbc8062159548ee3518eef39dc0dd05bff01d0a26e4be5063b8592500",
+    "beforeBytes": 14898,
+    "afterBytes": 8273,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout",
+        "bytes": 78
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card",
+        "bytes": 391
+      },
+      {
+        "kind": "rule",
+        "line": 39,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card::before",
+        "bytes": 324
+      },
+      {
+        "kind": "rule",
+        "line": 46,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .up-card::before",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 48,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card::after",
+        "bytes": 447
+      },
+      {
+        "kind": "rule",
+        "line": 57,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover",
+        "bytes": 230
+      },
+      {
+        "kind": "rule",
+        "line": 62,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover::before",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 63,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout > .hub-card:hover::after",
+        "bytes": 107
+      },
+      {
+        "kind": "rule",
+        "line": 99,
+        "selector": "#overlay #hubMain.hub-upgrade .up-cap b",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 103,
+        "selector": "#overlay #hubMain.hub-upgrade .up-cap small",
+        "bytes": 63
+      },
+      {
+        "kind": "rule",
+        "line": 106,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .base-bar",
+        "bytes": 179
+      },
+      {
+        "kind": "rule",
+        "line": 111,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .base-bar i",
+        "bytes": 220
+      },
+      {
+        "kind": "rule",
+        "line": 116,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .base-bar i::after",
+        "bytes": 334
+      },
+      {
+        "kind": "rule",
+        "line": 129,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:not(:disabled)",
+        "bytes": 440
+      },
+      {
+        "kind": "rule",
+        "line": 137,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:hover:not(:disabled)",
+        "bytes": 252
+      },
+      {
+        "kind": "rule",
+        "line": 144,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .ov-btn.ok:active:not(:disabled)",
+        "bytes": 244
+      },
+      {
+        "kind": "rule",
+        "line": 151,
+        "selector": "#overlay #hubMain.hub-upgrade .up-card .hint.ok-hint",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 158,
+        "selector": "#overlay #hubMain.hub-upgrade .up-pets .ov-note",
+        "bytes": 109
+      },
+      {
+        "kind": "rule",
+        "line": 159,
+        "selector": "#overlay #hubMain.hub-upgrade .up-pets .ov-note b",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 161,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row",
+        "bytes": 287
+      },
+      {
+        "kind": "rule",
+        "line": 167,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row:hover",
+        "bytes": 146
+      },
+      {
+        "kind": "rule",
+        "line": 172,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row.on",
+        "bytes": 242
+      },
+      {
+        "kind": "rule",
+        "line": 178,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row.locked",
+        "bytes": 158
+      },
+      {
+        "kind": "rule",
+        "line": 182,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row.locked:hover",
+        "bytes": 121
+      },
+      {
+        "kind": "rule",
+        "line": 186,
+        "selector": "#overlay #hubMain.hub-upgrade .pet-row .got",
+        "bytes": 63
+      },
+      {
+        "kind": "rule",
+        "line": 187,
+        "selector": "#overlay #hubMain.hub-upgrade .pet-row .pet-desc",
+        "bytes": 68
+      },
+      {
+        "kind": "rule",
+        "line": 188,
+        "selector": "#overlay #hubMain.hub-upgrade .pet-row .pet-ops .dim",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 191,
+        "selector": "#overlay #hubMain.hub-upgrade .pk-row.pet-row b",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 214,
+        "selector": "#overlay #hubMain.hub-upgrade .up-pets .stash-list",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 226,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card",
+        "bytes": 152
+      },
+      {
+        "kind": "rule",
+        "line": 229,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card:nth-child(2)",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 230,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .hub-upgrade-layout > .hub-card:nth-child(3)",
+        "bytes": 119
+      },
+      {
+        "kind": "rule",
+        "line": 235,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .pk-row",
+        "bytes": 137
+      },
+      {
+        "kind": "rule",
+        "line": 238,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets > .pk-row",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 239,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(1)",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 240,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(2)",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 241,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(3)",
+        "bytes": 116
+      },
+      {
+        "kind": "rule",
+        "line": 242,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-page.page-in .up-pets .stash-list .pk-row:nth-child(4)",
+        "bytes": 115
+      },
+      {
+        "kind": "rule",
+        "line": 262,
+        "selector": "#overlay #hubMain.hub-upgrade .hub-upgrade-layout",
+        "bytes": 128
+      }
+    ]
+  },
+  {
+    "file": "game/css/photo-studio-unified.css",
+    "beforeSha256": "6e3b5ed7bb1062b756f1f91e188e3fa5a647521187ae3d12be4498ee9ad36fec",
+    "afterSha256": "15c38bfc513255542fa7c6dc785ff8e437efbc1e2aa83e415a450d7d5f18c141",
+    "beforeBytes": 66249,
+    "afterBytes": 65978,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 182,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing :is(.cz-hint,.cz-close)",
+        "replacement": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing :is(.cz-close)"
+      },
+      {
+        "kind": "rule",
+        "line": 192,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint",
+        "bytes": 148
+      },
+      {
+        "kind": "rule",
+        "line": 780,
+        "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint",
+        "bytes": 110
+      }
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "beforeSha256": "bb87e6d5fd99ca87fb597859a226845829d682fd7651325768504f40c1f175ad",
+    "afterSha256": "89fa2779b77f5ab977b282560b94b5f30f2f95ab7523023d2921f09a8d13db40",
+    "beforeBytes": 46357,
+    "afterBytes": 44773,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 19,
+        "selector": ".scene-title",
+        "bytes": 250
+      },
+      {
+        "kind": "rule",
+        "line": 22,
+        "selector": ".scene-line",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 23,
+        "selector": ".scene-line p",
+        "bytes": 326
+      },
+      {
+        "kind": "branch",
+        "line": 32,
+        "selector": ".scene .scene-foes, .scene .scene-title, .scene .scene-gain,\n  .scene .scene-line, .scene .scene-ops, .scene .scene-hint",
+        "replacement": " .scene .scene-gain, .scene .scene-ops, .scene .scene-hint"
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".scene .scene-foes",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 36,
+        "selector": ".scene .scene-title",
+        "bytes": 46
+      },
+      {
+        "kind": "rule",
+        "line": 38,
+        "selector": ".scene .scene-line",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 106,
+        "selector": ".bag-slot.card-slot",
+        "bytes": 37
+      },
+      {
+        "kind": "rule",
+        "line": 107,
+        "selector": ".bag-slot.card-slot:active",
+        "bytes": 48
+      },
+      {
+        "kind": "rule",
+        "line": 171,
+        "selector": ".chest-fly",
+        "bytes": 79
+      },
+      {
+        "kind": "rule",
+        "line": 181,
+        "selector": "#overlay .card.chest .evt-sts-desc .ic",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 189,
+        "selector": ".evt-sts-desc",
+        "bytes": 168
+      },
+      {
+        "kind": "rule",
+        "line": 408,
+        "selector": ".gate-strip",
+        "bytes": 123
+      },
+      {
+        "kind": "rule",
+        "line": 410,
+        "selector": ".gate-strip:hover",
+        "bytes": 76
+      },
+      {
+        "kind": "branch",
+        "line": 425,
+        "selector": "#overlay.closing, #overlay .card.swap,\n    .scene .scene-art, .scene .scene-foes, .scene .scene-title, .scene .scene-gain,\n    .scene .scene-line, .scene .scene-ops, .scene .scene-hint",
+        "replacement": "#overlay.closing, #overlay .card.swap,\n    .scene .scene-art, .scene .scene-gain, .scene .scene-ops, .scene .scene-hint"
+      }
+    ]
+  },
+  {
+    "file": "game/css/settings-cover.css",
+    "beforeSha256": "656f0fe1381400e364541ed67fbeb4ba06666dc44e2421bbabd8d02ad1d38f0a",
+    "afterSha256": "3dac9ff21e72de5729cae2e7e33339c9740a5d155c3f47fba6370c46f55ed9c4",
+    "beforeBytes": 12099,
+    "afterBytes": 12045,
+    "changes": [
+      {
+        "kind": "branch",
+        "line": 31,
+        "selector": "#overlay .pg.settings-page:not(.sugin-page) .settings-gear-r2,\r\n#overlay .pg.settings-page:not(.sugin-page) .set-en,\r\n#overlay .pg.settings-page:not(.sugin-page) .set-h .ic",
+        "replacement": "#overlay .pg.settings-page:not(.sugin-page) .settings-gear-r2,\r\n#overlay .pg.settings-page:not(.sugin-page) .set-h .ic"
+      }
+    ]
+  },
+  {
+    "file": "game/css/settings-navigation.css",
+    "beforeSha256": "d19457ac2ec0487ebc18862b01cf797d55f96fc871d8d2b8fe437623b5f8bf38",
+    "afterSha256": "f99d2c22f569ed4a3089fc2001bf323e71b7b727aa793105f209baae247fe9d3",
+    "beforeBytes": 15347,
+    "afterBytes": 15021,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 124,
+        "selector": "#overlay .settings-tabbed .set-en",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 155,
+        "selector": "#overlay .settings-tabbed .chk .set-en",
+        "bytes": 193
+      }
+    ]
+  },
+  {
+    "file": "game/css/slots-cover.css",
+    "beforeSha256": "b9a214f2e6ccd50e1d170d85cb4f94fc12f4ef9a4c42d296aba1ee01ef1dd5f5",
+    "afterSha256": "fedb0f0be7fdee438d03ccb23742e6e4af51dbc5b6e99741d0fb638cada9bf65",
+    "beforeBytes": 9659,
+    "afterBytes": 9428,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 26,
+        "selector": "#overlay .pg.slot-page .slot-page-en",
+        "bytes": 191
+      },
+      {
+        "kind": "branch",
+        "line": 69,
+        "selector": "#overlay .pg.slot-page .slot-card-light,\n#overlay .pg.slot-page .slot-card-flakes,\n#overlay .pg.slot-page .slot-card-spark,\n#overlay .pg.slot-page .slot-card-sub,\n#overlay .pg.slot-page .slot-card-rule,\n#overlay .pg.slot-page .slot-card-cta .en,\n#overlay .pg.slot-page .slot-card-desc em",
+        "replacement": "#overlay .pg.slot-page .slot-card-light,\n#overlay .pg.slot-page .slot-card-flakes,\n#overlay .pg.slot-page .slot-card-spark,\n#overlay .pg.slot-page .slot-card-rule,\n#overlay .pg.slot-page .slot-card-cta .en,\n#overlay .pg.slot-page .slot-card-desc em"
+      }
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "beforeSha256": "b1ae2d169ad8aed79d1e4d1737d27abd848e735ac6c7e06150e1e8c34e7805aa",
+    "afterSha256": "177a1ef7cec3888598194951e796226c774c96cfa12a500b6a953a90425e34c8",
+    "beforeBytes": 100696,
+    "afterBytes": 91483,
+    "changes": [
+      {
+        "kind": "rule",
+        "line": 9,
+        "selector": ".ak-utag",
+        "bytes": 95
+      },
+      {
+        "kind": "rule",
+        "line": 11,
+        "selector": ".ak-hex",
+        "bytes": 155
+      },
+      {
+        "kind": "rule",
+        "line": 11,
+        "selector": ".ak-hex .hex-in",
+        "bytes": 214
+      },
+      {
+        "kind": "rule",
+        "line": 11,
+        "selector": ".ak-hex b",
+        "bytes": 43
+      },
+      {
+        "kind": "rule",
+        "line": 11,
+        "selector": ".ak-hex span",
+        "bytes": 70
+      },
+      {
+        "kind": "rule",
+        "line": 12,
+        "selector": ".ak-invest",
+        "bytes": 89
+      },
+      {
+        "kind": "rule",
+        "line": 12,
+        "selector": ".ak-invest .inv-ico",
+        "bytes": 159
+      },
+      {
+        "kind": "rule",
+        "line": 12,
+        "selector": ".ak-invest .inv-label",
+        "bytes": 173
+      },
+      {
+        "kind": "rule",
+        "line": 12,
+        "selector": ".ak-invest .inv-num",
+        "bytes": 181
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": "#mapLabels",
+        "bytes": 83
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": "#mapLabels[hidden]",
+        "bytes": 32
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": ".map-label",
+        "bytes": 214
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": ".map-label.current",
+        "bytes": 85
+      },
+      {
+        "kind": "rule",
+        "line": 27,
+        "selector": ".map-label.destination",
+        "bytes": 58
+      },
+      {
+        "kind": "rule",
+        "line": 28,
+        "selector": "#sceneTools",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 28,
+        "selector": "#sceneTools button",
+        "bytes": 111
+      },
+      {
+        "kind": "rule",
+        "line": 28,
+        "selector": "body.lobby #sceneTools,body.scene-battle-3d #sceneTools",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".res-chip,.fc-chip",
+        "bytes": 93
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".res-chip b,.fc-chip b",
+        "bytes": 37
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".mode-card .mode-info b",
+        "bytes": 74
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".mode-card .mode-info span",
+        "bytes": 41
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".mode-card .mode-ckpt",
+        "bytes": 36
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".deploy-forecast",
+        "bytes": 26
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": ".gate-strip",
+        "bytes": 56
+      },
+      {
+        "kind": "rule",
+        "line": 29,
+        "selector": "#overlay #hubMain .gate-strip:focus-visible",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-grid",
+        "bytes": 65
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-pick",
+        "bytes": 102
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-pick.sel",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-pick b",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-pick-art",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-detail",
+        "bytes": 96
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-story",
+        "bytes": 41
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-detail-name",
+        "bytes": 67
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-detail-tag",
+        "bytes": 30
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-pick-art .roster-portrait",
+        "bytes": 54
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-figure .roster-portrait",
+        "bytes": 64
+      },
+      {
+        "kind": "rule",
+        "line": 30,
+        "selector": ".cls-hub-art .roster-portrait",
+        "bytes": 53
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ".pk-row,.dep-row",
+        "bytes": 49
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ".bag-slot.safe-slot",
+        "bytes": 60
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ".lib-filters,.bag-toolbar",
+        "bytes": 66
+      },
+      {
+        "kind": "branch",
+        "line": 31,
+        "selector": ".hs-card,.card-tile",
+        "replacement": ".hs-card"
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ".scene-line p",
+        "bytes": 90
+      },
+      {
+        "kind": "rule",
+        "line": 31,
+        "selector": ".scene-title",
+        "bytes": 56
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".guide-list",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".guide-row",
+        "bytes": 117
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".guide-row b",
+        "bytes": 88
+      },
+      {
+        "kind": "rule",
+        "line": 35,
+        "selector": ".guide-row span",
+        "bytes": 47
+      },
+      {
+        "kind": "rule",
+        "line": 171,
+        "selector": ".slot-page .slot-page-en",
+        "bytes": 103
+      },
+      {
+        "kind": "rule",
+        "line": 204,
+        "selector": ".sac-list",
+        "bytes": 138
+      },
+      {
+        "kind": "rule",
+        "line": 205,
+        "selector": ".sac-row",
+        "bytes": 193
+      },
+      {
+        "kind": "rule",
+        "line": 206,
+        "selector": ".sac-row.sac-sel",
+        "bytes": 57
+      },
+      {
+        "kind": "rule",
+        "line": 220,
+        "selector": ".blank-safe-gain .bsq-icon",
+        "bytes": 61
+      },
+      {
+        "kind": "rule",
+        "line": 259,
+        "selector": ".ov-btns-corner",
+        "bytes": 69
+      },
+      {
+        "kind": "rule",
+        "line": 304,
+        "selector": ".pg.settings-page .set-h .set-en",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 307,
+        "selector": ".pg.settings-page .chk .set-en",
+        "bytes": 98
+      },
+      {
+        "kind": "rule",
+        "line": 319,
+        "selector": ".lib-pager",
+        "bytes": 141
+      },
+      {
+        "kind": "rule",
+        "line": 320,
+        "selector": ".lib-pager .lib-pageinfo",
+        "bytes": 107
+      },
+      {
+        "kind": "rule",
+        "line": 321,
+        "selector": ".lib-pager .hs-btn:disabled",
+        "bytes": 74
+      },
+      {
+        "kind": "rule",
+        "line": 446,
+        "selector": "#overlay .cls-hub-art",
+        "bytes": 45
+      },
+      {
+        "kind": "rule",
+        "line": 447,
+        "selector": "#overlay .cls-hub-art img.art-figure",
+        "bytes": 104
+      },
+      {
+        "kind": "rule",
+        "line": 448,
+        "selector": "#overlay .cls-hub-art .roster-portrait",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 473,
+        "selector": "#cardZoom .cz-hint",
+        "bytes": 130
+      },
+      {
+        "kind": "branch",
+        "line": 476,
+        "selector": "#cardZoom.cz-out .cz-note,#cardZoom.cz-out .cz-hint",
+        "replacement": "#cardZoom.cz-out .cz-note"
+      },
+      {
+        "kind": "rule",
+        "line": 597,
+        "selector": "#overlay .card.chest .evt-sts-desc",
+        "bytes": 70
+      },
+      {
+        "kind": "rule",
+        "line": 598,
+        "selector": "#overlay .card.chest .cls-chest-note",
+        "bytes": 54
+      },
+      {
+        "kind": "rule",
+        "line": 615,
+        "selector": ".chest-warn",
+        "bytes": 244
+      },
+      {
+        "kind": "rule",
+        "line": 618,
+        "selector": ".chest-warn b",
+        "bytes": 28
+      },
+      {
+        "kind": "rule",
+        "line": 621,
+        "selector": "#overlay .card.chest .bt-hand.no-anim .chest-fly",
+        "bytes": 64
+      },
+      {
+        "kind": "rule",
+        "line": 672,
+        "selector": "#overlay .bag-view .bag-grid.safe-grid",
+        "bytes": 74
+      },
+      {
+        "kind": "rule",
+        "line": 673,
+        "selector": "#overlay .bag-view .bag-grid.safe-grid .bag-slot.empty.safe-empty",
+        "bytes": 133
+      },
+      {
+        "kind": "rule",
+        "line": 676,
+        "selector": "#overlay .bag-view .bag-slot.filled.card-slot",
+        "bytes": 103
+      },
+      {
+        "kind": "rule",
+        "line": 677,
+        "selector": "#overlay .bag-view .bag-slot.filled.card-slot:hover",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 858,
+        "selector": ".winter-wordmark.wm-jolt",
+        "bytes": 81
+      },
+      {
+        "kind": "rule",
+        "line": 868,
+        "selector": "#bagBtnFloat",
+        "bytes": 337
+      },
+      {
+        "kind": "rule",
+        "line": 872,
+        "selector": "#bagBtnFloat:hover",
+        "bytes": 73
+      },
+      {
+        "kind": "rule",
+        "line": 873,
+        "selector": "#bagBtnFloat .bbf-label",
+        "bytes": 43
+      },
+      {
+        "kind": "rule",
+        "line": 874,
+        "selector": "#bagBtnFloat #bagCountFloat",
+        "bytes": 65
+      },
+      {
+        "kind": "rule",
+        "line": 875,
+        "selector": "#bagBtnFloat[hidden]",
+        "bytes": 34
+      },
+      {
+        "kind": "rule",
+        "line": 887,
+        "selector": ".devc-row",
+        "bytes": 46
+      },
+      {
+        "kind": "rule",
+        "line": 909,
+        "selector": "#overlay .result-pg .ext-cards",
+        "bytes": 129
+      },
+      {
+        "kind": "rule",
+        "line": 910,
+        "selector": "#overlay .result-pg .ext-card",
+        "bytes": 214
+      },
+      {
+        "kind": "rule",
+        "line": 912,
+        "selector": "#overlay .result-pg .ext-card:hover",
+        "bytes": 84
+      },
+      {
+        "kind": "rule",
+        "line": 913,
+        "selector": "#overlay .result-pg .ext-card:focus-visible",
+        "bytes": 91
+      },
+      {
+        "kind": "rule",
+        "line": 914,
+        "selector": "#overlay .result-pg .ext-card:active",
+        "bytes": 72
+      },
+      {
+        "kind": "rule",
+        "line": 915,
+        "selector": "#overlay .result-pg .ext-card.off",
+        "bytes": 86
+      },
+      {
+        "kind": "rule",
+        "line": 916,
+        "selector": "#overlay .result-pg .ext-card .hs-card",
+        "bytes": 54
+      },
+      {
+        "kind": "rule",
+        "line": 917,
+        "selector": "#overlay .result-pg .ext-brought",
+        "bytes": 223
+      },
+      {
+        "kind": "rule",
+        "line": 919,
+        "selector": "#overlay .result-pg .ext-noroom",
+        "bytes": 273
+      },
+      {
+        "kind": "rule",
+        "line": 922,
+        "selector": "#overlay .result-pg .hub-card-tip",
+        "bytes": 114
+      },
+      {
+        "kind": "rule",
+        "line": 925,
+        "selector": "#bagBtn .bag-btn-art",
+        "bytes": 135
+      },
+      {
+        "kind": "rule",
+        "line": 926,
+        "selector": "#bagBtnFloat .bbf-art",
+        "bytes": 87
+      },
+      {
+        "kind": "rule",
+        "line": 948,
+        "selector": "#bagBtnFloat",
+        "bytes": 113
+      },
+      {
+        "kind": "rule",
+        "line": 950,
+        "selector": "#bagBtnFloat .bbf-art",
+        "bytes": 65
+      },
+      {
+        "kind": "rule",
+        "line": 951,
+        "selector": "#bagBtnFloat .bbf-label",
+        "bytes": 49
+      },
+      {
+        "kind": "rule",
+        "line": 974,
+        "selector": "#overlay .card:has(.ach-list) #ovTitle",
+        "bytes": 62
+      },
+      {
+        "kind": "rule",
+        "line": 1002,
+        "selector": ".devc-row kbd",
+        "bytes": 258
+      },
+      {
+        "kind": "keyframes",
+        "name": "wmJolt",
+        "line": 826
+      }
+    ]
+  }
+]

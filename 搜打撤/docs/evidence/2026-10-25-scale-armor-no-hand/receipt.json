@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-scale-armor",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-c759566e-6221-453b-bb00-5cb7f5a09a51.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-25-scale-armor-no-hand/cards-equip-tt13-scale-armor-source.png",
+        "bytes": 1817908,
+        "sha256": "86a7cdb9fcdc3844645a41ecbb874922329b4aceb5349c28a3b640a56c221557"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-25-scale-armor-no-hand/cards-equip-tt13-scale-armor-full-before.webp",
+          "bytes": 129202,
+          "sha256": "db13aa50dcef0a6f7d50b65db0abe0a0a5c030bd6e79f05d9625785ab5a9c708"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-25-scale-armor-no-hand/cards-equip-tt13-scale-armor-thumb-before.webp",
+          "bytes": 21356,
+          "sha256": "3b86654fc81a03e3d53441e2c93b17441923bfb6a0d2162dbf468690e5d04189"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/equip-tt13-scale-armor.webp",
+          "bytes": 128480,
+          "sha256": "c8bd879c6c020b427a2f0a661a046ff801731487b18d7b6404e76162f76383f6",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/equip-tt13-scale-armor.webp",
+          "bytes": 21590,
+          "sha256": "766b80bd98ecd71c7653d5af90676a4a9b58b4764c2d9f7cdae2e400e0031d0c",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "square-20261020",
+      "revision_after": "scale-armor-no-hand-20261025",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 129202,
+            "sha256": "db13aa50dcef0a6f7d50b65db0abe0a0a5c030bd6e79f05d9625785ab5a9c708",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 128480,
+            "sha256": "c8bd879c6c020b427a2f0a661a046ff801731487b18d7b6404e76162f76383f6",
+            "source": "docs/evidence/2026-10-25-scale-armor-no-hand/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 21356,
+            "sha256": "3b86654fc81a03e3d53441e2c93b17441923bfb6a0d2162dbf468690e5d04189",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/equip-tt13-scale-armor.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 21590,
+            "sha256": "766b80bd98ecd71c7653d5af90676a4a9b58b4764c2d9f7cdae2e400e0031d0c",
+            "source": "docs/evidence/2026-10-25-scale-armor-no-hand/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

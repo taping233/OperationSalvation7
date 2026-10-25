@@ -1,0 +1,104 @@
+{
+  "status": "complete_uncommitted",
+  "scope": "Cards historical and canonical hosted-rule constructor normalization; VM integration owned by parent and excluded from these counts",
+  "sourceFiles": [
+    {
+      "path": "game/src/cards/builtin-card-previous-rules.js",
+      "baseSha256": "ea2488dc18215aacb0318d4f896fe52e68532fbd49574d631d6d1e7aee41f865",
+      "finalSha256": "0dbb3147f178db0147a7965f2eea0e091ed2a874b5954490b3b8450030a2bcb6",
+      "bytesBefore": 7355,
+      "bytesAfter": 4114,
+      "linesBefore": 475,
+      "linesAfter": 111,
+      "insertions": 48,
+      "deletions": 412,
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.before.txt"
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-previous-rules.js",
+      "baseSha256": "63d6ebcae494d3b9a221c1f345408d4e1e10c4ec468dbae5b72a455af5d47804",
+      "finalSha256": "3b5ed9499f7a6e2dffb37ed051eeffcea628adfaf141d5289c331018b54519fd",
+      "bytesBefore": 2650,
+      "bytesAfter": 1374,
+      "linesBefore": 171,
+      "linesAfter": 23,
+      "insertions": 20,
+      "deletions": 168,
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-equipment-previous-rules.js.before.txt"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "baseSha256": "c57c25a898d3fa2c6dd9538cff489d5c8e4bbeb2f4c27815c278bffb5bf77088",
+      "finalSha256": "ce4fdc8f5bd9a79ff2846c8acefd673917c7eec47aded78ba47028d3f76c9d8f",
+      "bytesBefore": 104812,
+      "bytesAfter": 103175,
+      "linesBefore": 924,
+      "linesAfter": 793,
+      "insertions": 14,
+      "deletions": 145,
+      "backup": "docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-before.txt"
+    },
+    {
+      "path": "game/src/cards/hosted-rule-snapshot.js",
+      "baseSha256": null,
+      "finalSha256": "adfdd49264abaee85c4bfe780201983416b790b9b03bdacd0e41ecdea0a70a7a",
+      "bytesBefore": 0,
+      "bytesAfter": 413,
+      "linesBefore": 0,
+      "linesAfter": 10,
+      "insertions": 10,
+      "deletions": 0,
+      "backup": null
+    }
+  ],
+  "insertions": 92,
+  "deletions": 725,
+  "netLinesRemoved": 633,
+  "netBytesRemoved": 5741,
+  "constructorCalls": {
+    "basic": 53,
+    "targeted": 26,
+    "total": 79
+  },
+  "historicalRuleEntries": 70,
+  "retainedExceptionalHistoricalRules": 4,
+  "proof": {
+    "firstStage": "receipt.json",
+    "secondStage": "targeted-receipt.json",
+    "completeFirstStageHistoricalSerializedTablesIdentical": true,
+    "completeSecondStageModuleAstIdenticalAfterConstructorExpansion": true,
+    "independentMutableObjectGraphPreserved": true,
+    "importConsumersFreezeCallsUnchanged": {
+      "game/src/cards/builtin-card-execution.js": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+      "game/src/cards/builtin-equipment-execution.js": "f81507183473f84573d91c8eed0293fe85f6a9929b7023d4c715a457cdd7cd9e",
+      "game/src/cards/cards.sync.builtin.js": "45fc8507901f4f73bf8c843b97d1215fdf66b05f49bcd01d69bbfcdf70d5b27a",
+      "game/src/battle/effects/battle.hosted.js": "cb22da88233c45b09d0857c44ab8d9be617a9e904c636a270ed137c0264cc180"
+    }
+  },
+  "verification": {
+    "syntax": [
+      {
+        "path": "game/src/cards/builtin-card-previous-rules.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/cards/builtin-equipment-previous-rules.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/cards/cards.data.js",
+        "exitCode": 0
+      },
+      {
+        "path": "game/src/cards/hosted-rule-snapshot.js",
+        "exitCode": 0
+      }
+    ],
+    "diffCheckExitCode": 0,
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  },
+  "filesDeleted": [],
+  "sourceChangesAfterFingerprinting": false
+}

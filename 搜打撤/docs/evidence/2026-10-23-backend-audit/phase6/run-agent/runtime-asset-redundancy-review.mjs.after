@@ -1,0 +1,321 @@
+// 2026-10-23 card zoom split: current paths/templates/probe sources reviewed; omission rules unchanged.
+// Evidence: docs/evidence/2026-10-23-WF-module-boundaries-1023/asset-review.json
+// 2026-10-23 reviewed consumer paths and audio file sources unchanged; 286 candidates retained.
+// Evidence: docs/evidence/2026-10-23-WF-review-remediation-1023/asset-review.json
+// 2026-10-21 performance integration: retained-source hashes and current selectors reviewed.
+// Evidence: docs/evidence/2026-10-21-WF-github-perf-integrate-1021/asset-review.json
+// 2026-10-21 type rollout consumer re-review: exact asset-constructor ASTs retained;
+// approved battle/boss v2 cuts remain published. Full LF hashes and fail-closed tests:
+// docs/evidence/2026-10-21-WF-types-full-1021/I02-asset-review.json
+// 2026-10-20 portable re-review: 195 approved retired paths remain unreferenced;
+// mapping changes add only tt13 art/revision entries. Full scan and replacement hashes:
+// docs/evidence/2026-10-20-WF-portable-clean-1020/assets/review.json
+// 2026-10-19 background timers: only visibility/cleanup scheduling changed; asset paths and selectors unchanged.
+// Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
+// 2026-10-23 module consolidation: menu slots retain inline SLOT_EMBLEMS/SVG;
+// settings retains the same literal audio-source link. Art mapping changes only
+// cardArtRevisions. Manual source review: WF-module-consolidation-1023/README.md;
+// this registration does not claim that the asset audit has been executed.
+// Approved historical sources were deleted under docs/evidence/2026-10-19-unused-cleanup/.
+// Historical path protections remain: an unreviewed/changed selector preserves its assets.
+// Submission uses the reviewed committed consumer versions; concurrent edits remain unstaged.
+// The uncommitted consumer review remains historical evidence, not the committed snapshot fingerprint.
+// Current consumer reviews: docs/evidence/2026-10-16-WF-integration-ship-1016/asset-contracts.md
+// Retired scenes: docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md
+// Shadowed card art: docs/evidence/2026-10-16-shadowed-card-audit/README.md
+// 2026-10-19 re-review: chests changes only closing guards and DOM scroll/focus; asset selection unchanged.
+// 2026-10-20 battle re-review: HUD, impact profiles and contact-frame timing do not change
+// dynamic asset constructors, role/catalog inputs or excluded candidates. Evidence:
+// docs/evidence/2026-10-20-WF-battle-flow-1020/effects.md (including the preceding sts-polish patch).
+// Retired chest rigs: docs/evidence/2026-10-16-WF-cloud-performance-review/README.md
+const retiredChest640Frames = ['small', 'medium', 'large', 'class', 'boss'].flatMap(kind =>
+  Array.from({ length: 18 }, (_, index) => ({
+    path: `scenes/chests/${kind}-rig-640-v1/frame-${String(index).padStart(2, '0')}.webp`,
+    category: 'chests',
+  })));
+
+const shadowedCardArt = [
+  'spell-tt8-curse1',
+  'spell-tt8-curse2',
+  'spell-tt8-curse3',
+  'spell-tt8-curse4',
+  'equip-tt3-staff',
+  'equip-tt3-fate-wheel',
+  'equip-tt3-wolf-bow',
+  'equip-tt3-twinwater-mail',
+  'equip-tt3-grass-armor',
+  'equip-tt3-blooddrinker',
+  'equip-tt8-demonslay',
+  'equip-tt8-archdemon',
+  'equip-tt8-heavensword',
+  'equip-tt7-arcanescroll',
+  'equip-tt12-raygun',
+].flatMap(name => ['cards/', 'thumbs/cards/'].map(prefix => ({
+  path: `${prefix}${name}.webp`,
+  category: 'shadowed-card-art',
+})));
+
+export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
+  candidates: [
+    ...retiredChest640Frames,
+    {"path":"portraits/frames/wu/atk-hit-1.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/atk-hit.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/atk-wind-1.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/atk-wind-2.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/atk-wind.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/cast-1.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/cast.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/hurt-1.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/hurt.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/idle-1.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/idle-breathe.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/wu/idle.webp","category":"frames","role":"wu"},
+    {"path":"portraits/frames/changwuyu/atk-hit-1.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/atk-hit.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/atk-wind-1.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/atk-wind.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/cast-1.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/cast-2.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/cast.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/hurt-1.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/hurt.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/idle-1.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/idle-breathe.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/changwuyu/idle.webp","category":"frames","role":"changwuyu"},
+    {"path":"portraits/frames/baita/atk-hit-1.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/atk-hit.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/atk-wind-1.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/atk-wind.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast-1.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast-2.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast-3.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast-4.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast-5.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/cast.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/hurt-1.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/hurt.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/idle-1.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/idle-breathe.webp","category":"frames","role":"baita"},
+    {"path":"portraits/frames/baita/idle.webp","category":"frames","role":"baita"},
+    {"path":"scenes/map-nodes/battle-security-shard-1011.webp","category":"map"},
+    {"path":"scenes/map-nodes/battle-security-shard-style-1012-v2.webp","category":"map"},
+    {"path":"scenes/map-nodes/event-record-fragments-1011.webp","category":"map"},
+    {"path":"scenes/map-nodes/event-record-fragments-style-1012-v2.webp","category":"map"},
+    {"path":"scenes/map-nodes/passage-transit-core-1011.webp","category":"map"},
+    {"path":"scenes/map-nodes/passage-transit-core-palette-1012-v3.webp","category":"map"},
+    {"path":"scenes/map-nodes/passage-transit-core-style-1012-v2.webp","category":"map"},
+    {"path":"scenes/map-nodes/rest-heat-cell-1011.webp","category":"map"},
+    {"path":"scenes/map-nodes/rest-heat-cell-style-1012-v2.webp","category":"map"},
+    {"path":"scenes/map-nodes/shop-exchange-token-1011.webp","category":"map"},
+    {"path":"scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp","category":"map"},
+    {"path":"scenes/map-nodes/shop-exchange-token-style-1012-v2.webp","category":"map"},
+    {"path":"scenes/transition-battle-v1.webp","category":"transitions"},
+    {"path":"scenes/transition-boss-v1.webp","category":"transitions"},
+    {"path":"scenes/transition-camp-v1.webp","category":"transitions"},
+    {"path":"scenes/transition-field-v1.webp","category":"transitions"},
+    {"path":"scenes/transition-photo-v1.webp","category":"transitions"},
+    {"path":"scenes/base-home-v4.webp","category":"retired-scenes"},
+    {"path":"scenes/battle-street-amber-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/entry/winter-arrival-1011-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/entry/winter-arrival-1011-v2.webp","category":"retired-scenes"},
+    {"path":"scenes/rewards/chest-small-1011-v2.webp","category":"retired-scenes"},
+    {"path":"scenes/rewards/chest-small-cardstyle-1011-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/scene-chest-boss-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/scene-chest-class-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/scene-chest-large-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/scene-chest-medium-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/scene-chest-small-anime-v1.webp","category":"retired-scenes"},
+    {"path":"scenes/ui-loop-0925/expedition-banner.webp","category":"retired-scenes"},
+    {"path":"scenes/ui-loop-0925/rewards-convoy-success.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/battle-street-amber-anime-v1.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/scene-chest-boss-anime-v1.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/scene-chest-class-anime-v1.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/scene-chest-large-anime-v1.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/scene-chest-medium-anime-v1.webp","category":"retired-scenes"},
+    {"path":"thumbs/scenes/scene-chest-small-anime-v1.webp","category":"retired-scenes"},
+    ...shadowedCardArt,
+    // Retained source assets: fixed bytes reviewed for production-only omission.
+    {"path":"scenes/chests/boss-rig-v1/frame-00.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
+    {"path":"scenes/chests/boss-rig-v1/frame-01.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
+    {"path":"scenes/chests/boss-rig-v1/frame-02.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
+    {"path":"scenes/chests/boss-rig-v1/frame-03.webp","category":"chests","sourceBytes":750080,"sourceSha256":"94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af"},
+    {"path":"scenes/chests/boss-rig-v1/frame-04.webp","category":"chests","sourceBytes":748088,"sourceSha256":"85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693"},
+    {"path":"scenes/chests/boss-rig-v1/frame-05.webp","category":"chests","sourceBytes":740294,"sourceSha256":"76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c"},
+    {"path":"scenes/chests/boss-rig-v1/frame-06.webp","category":"chests","sourceBytes":721984,"sourceSha256":"afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163"},
+    {"path":"scenes/chests/boss-rig-v1/frame-07.webp","category":"chests","sourceBytes":704586,"sourceSha256":"be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa"},
+    {"path":"scenes/chests/boss-rig-v1/frame-08.webp","category":"chests","sourceBytes":672068,"sourceSha256":"15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26"},
+    {"path":"scenes/chests/boss-rig-v1/frame-09.webp","category":"chests","sourceBytes":732554,"sourceSha256":"e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8"},
+    {"path":"scenes/chests/boss-rig-v1/frame-10.webp","category":"chests","sourceBytes":817668,"sourceSha256":"e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603"},
+    {"path":"scenes/chests/boss-rig-v1/frame-11.webp","category":"chests","sourceBytes":869646,"sourceSha256":"502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8"},
+    {"path":"scenes/chests/boss-rig-v1/frame-12.webp","category":"chests","sourceBytes":910658,"sourceSha256":"054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2"},
+    {"path":"scenes/chests/boss-rig-v1/frame-13.webp","category":"chests","sourceBytes":940500,"sourceSha256":"d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32"},
+    {"path":"scenes/chests/boss-rig-v1/frame-14.webp","category":"chests","sourceBytes":954970,"sourceSha256":"6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c"},
+    {"path":"scenes/chests/boss-rig-v1/frame-15.webp","category":"chests","sourceBytes":966790,"sourceSha256":"9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e"},
+    {"path":"scenes/chests/boss-rig-v1/frame-16.webp","category":"chests","sourceBytes":972700,"sourceSha256":"2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d"},
+    {"path":"scenes/chests/boss-rig-v1/frame-17.webp","category":"chests","sourceBytes":972700,"sourceSha256":"2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d"},
+    {"path":"scenes/chests/class-rig-v1/frame-00.webp","category":"chests","sourceBytes":648016,"sourceSha256":"01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576"},
+    {"path":"scenes/chests/class-rig-v1/frame-01.webp","category":"chests","sourceBytes":648016,"sourceSha256":"01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576"},
+    {"path":"scenes/chests/class-rig-v1/frame-02.webp","category":"chests","sourceBytes":648016,"sourceSha256":"01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576"},
+    {"path":"scenes/chests/class-rig-v1/frame-03.webp","category":"chests","sourceBytes":639192,"sourceSha256":"b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4"},
+    {"path":"scenes/chests/class-rig-v1/frame-04.webp","category":"chests","sourceBytes":633806,"sourceSha256":"68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df"},
+    {"path":"scenes/chests/class-rig-v1/frame-05.webp","category":"chests","sourceBytes":620352,"sourceSha256":"c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13"},
+    {"path":"scenes/chests/class-rig-v1/frame-06.webp","category":"chests","sourceBytes":610920,"sourceSha256":"70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a"},
+    {"path":"scenes/chests/class-rig-v1/frame-07.webp","category":"chests","sourceBytes":591430,"sourceSha256":"fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f"},
+    {"path":"scenes/chests/class-rig-v1/frame-08.webp","category":"chests","sourceBytes":626874,"sourceSha256":"f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0"},
+    {"path":"scenes/chests/class-rig-v1/frame-09.webp","category":"chests","sourceBytes":711226,"sourceSha256":"bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c"},
+    {"path":"scenes/chests/class-rig-v1/frame-10.webp","category":"chests","sourceBytes":783548,"sourceSha256":"fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088"},
+    {"path":"scenes/chests/class-rig-v1/frame-11.webp","category":"chests","sourceBytes":835788,"sourceSha256":"c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15"},
+    {"path":"scenes/chests/class-rig-v1/frame-12.webp","category":"chests","sourceBytes":872292,"sourceSha256":"58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb"},
+    {"path":"scenes/chests/class-rig-v1/frame-13.webp","category":"chests","sourceBytes":891564,"sourceSha256":"e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8"},
+    {"path":"scenes/chests/class-rig-v1/frame-14.webp","category":"chests","sourceBytes":907492,"sourceSha256":"d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab"},
+    {"path":"scenes/chests/class-rig-v1/frame-15.webp","category":"chests","sourceBytes":914936,"sourceSha256":"93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94"},
+    {"path":"scenes/chests/class-rig-v1/frame-16.webp","category":"chests","sourceBytes":917980,"sourceSha256":"cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8"},
+    {"path":"scenes/chests/class-rig-v1/frame-17.webp","category":"chests","sourceBytes":917980,"sourceSha256":"cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8"},
+    {"path":"scenes/chests/large-rig-v1/frame-00.webp","category":"chests","sourceBytes":766072,"sourceSha256":"302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889"},
+    {"path":"scenes/chests/large-rig-v1/frame-01.webp","category":"chests","sourceBytes":766072,"sourceSha256":"302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889"},
+    {"path":"scenes/chests/large-rig-v1/frame-02.webp","category":"chests","sourceBytes":766072,"sourceSha256":"302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889"},
+    {"path":"scenes/chests/large-rig-v1/frame-03.webp","category":"chests","sourceBytes":765548,"sourceSha256":"acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa"},
+    {"path":"scenes/chests/large-rig-v1/frame-04.webp","category":"chests","sourceBytes":762668,"sourceSha256":"62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4"},
+    {"path":"scenes/chests/large-rig-v1/frame-05.webp","category":"chests","sourceBytes":754590,"sourceSha256":"d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0"},
+    {"path":"scenes/chests/large-rig-v1/frame-06.webp","category":"chests","sourceBytes":747762,"sourceSha256":"6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b"},
+    {"path":"scenes/chests/large-rig-v1/frame-07.webp","category":"chests","sourceBytes":729294,"sourceSha256":"fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380"},
+    {"path":"scenes/chests/large-rig-v1/frame-08.webp","category":"chests","sourceBytes":711808,"sourceSha256":"f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3"},
+    {"path":"scenes/chests/large-rig-v1/frame-09.webp","category":"chests","sourceBytes":779662,"sourceSha256":"a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff"},
+    {"path":"scenes/chests/large-rig-v1/frame-10.webp","category":"chests","sourceBytes":861496,"sourceSha256":"c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603"},
+    {"path":"scenes/chests/large-rig-v1/frame-11.webp","category":"chests","sourceBytes":922416,"sourceSha256":"defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976"},
+    {"path":"scenes/chests/large-rig-v1/frame-12.webp","category":"chests","sourceBytes":969988,"sourceSha256":"2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12"},
+    {"path":"scenes/chests/large-rig-v1/frame-13.webp","category":"chests","sourceBytes":997556,"sourceSha256":"6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea"},
+    {"path":"scenes/chests/medium-rig-v1/frame-00.webp","category":"chests","sourceBytes":643182,"sourceSha256":"ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763"},
+    {"path":"scenes/chests/medium-rig-v1/frame-01.webp","category":"chests","sourceBytes":643182,"sourceSha256":"ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763"},
+    {"path":"scenes/chests/medium-rig-v1/frame-02.webp","category":"chests","sourceBytes":643182,"sourceSha256":"ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763"},
+    {"path":"scenes/chests/medium-rig-v1/frame-03.webp","category":"chests","sourceBytes":643518,"sourceSha256":"e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b"},
+    {"path":"scenes/chests/medium-rig-v1/frame-04.webp","category":"chests","sourceBytes":646744,"sourceSha256":"06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b"},
+    {"path":"scenes/chests/medium-rig-v1/frame-05.webp","category":"chests","sourceBytes":629792,"sourceSha256":"1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03"},
+    {"path":"scenes/chests/medium-rig-v1/frame-06.webp","category":"chests","sourceBytes":612078,"sourceSha256":"be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06"},
+    {"path":"scenes/chests/medium-rig-v1/frame-07.webp","category":"chests","sourceBytes":589424,"sourceSha256":"bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34"},
+    {"path":"scenes/chests/medium-rig-v1/frame-08.webp","category":"chests","sourceBytes":631424,"sourceSha256":"47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea"},
+    {"path":"scenes/chests/medium-rig-v1/frame-09.webp","category":"chests","sourceBytes":721898,"sourceSha256":"d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37"},
+    {"path":"scenes/chests/medium-rig-v1/frame-10.webp","category":"chests","sourceBytes":801686,"sourceSha256":"9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd"},
+    {"path":"scenes/chests/medium-rig-v1/frame-11.webp","category":"chests","sourceBytes":859722,"sourceSha256":"c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798"},
+    {"path":"scenes/chests/medium-rig-v1/frame-12.webp","category":"chests","sourceBytes":903232,"sourceSha256":"360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1"},
+    {"path":"scenes/chests/medium-rig-v1/frame-13.webp","category":"chests","sourceBytes":924400,"sourceSha256":"ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353"},
+    {"path":"scenes/chests/medium-rig-v1/frame-14.webp","category":"chests","sourceBytes":944076,"sourceSha256":"13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3"},
+    {"path":"scenes/chests/medium-rig-v1/frame-15.webp","category":"chests","sourceBytes":954854,"sourceSha256":"dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061"},
+    {"path":"scenes/chests/medium-rig-v1/frame-16.webp","category":"chests","sourceBytes":958186,"sourceSha256":"8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73"},
+    {"path":"scenes/chests/medium-rig-v1/frame-17.webp","category":"chests","sourceBytes":958186,"sourceSha256":"8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73"},
+    {"path":"scenes/chests/small-rig-v1/frame-00.webp","category":"chests","sourceBytes":487716,"sourceSha256":"d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61"},
+    {"path":"scenes/chests/small-rig-v1/frame-01.webp","category":"chests","sourceBytes":487716,"sourceSha256":"d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61"},
+    {"path":"scenes/chests/small-rig-v1/frame-02.webp","category":"chests","sourceBytes":487716,"sourceSha256":"d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61"},
+    {"path":"scenes/chests/small-rig-v1/frame-03.webp","category":"chests","sourceBytes":494282,"sourceSha256":"5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af"},
+    {"path":"scenes/chests/small-rig-v1/frame-04.webp","category":"chests","sourceBytes":496444,"sourceSha256":"b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1"},
+    {"path":"scenes/chests/small-rig-v1/frame-05.webp","category":"chests","sourceBytes":488200,"sourceSha256":"21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a"},
+    {"path":"scenes/chests/small-rig-v1/frame-06.webp","category":"chests","sourceBytes":475914,"sourceSha256":"875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0"},
+    {"path":"scenes/chests/small-rig-v1/frame-07.webp","category":"chests","sourceBytes":448244,"sourceSha256":"19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de"},
+    {"path":"scenes/chests/small-rig-v1/frame-08.webp","category":"chests","sourceBytes":492662,"sourceSha256":"5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af"},
+    {"path":"scenes/chests/small-rig-v1/frame-09.webp","category":"chests","sourceBytes":592628,"sourceSha256":"4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f"},
+    {"path":"scenes/chests/small-rig-v1/frame-10.webp","category":"chests","sourceBytes":675322,"sourceSha256":"7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39"},
+    {"path":"scenes/chests/small-rig-v1/frame-11.webp","category":"chests","sourceBytes":742316,"sourceSha256":"4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37"},
+    {"path":"scenes/chests/small-rig-v1/frame-12.webp","category":"chests","sourceBytes":785162,"sourceSha256":"0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09"},
+    {"path":"scenes/chests/small-rig-v1/frame-13.webp","category":"chests","sourceBytes":813230,"sourceSha256":"d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4"},
+    {"path":"scenes/chests/small-rig-v1/frame-14.webp","category":"chests","sourceBytes":828056,"sourceSha256":"1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6"},
+    {"path":"scenes/chests/small-rig-v1/frame-15.webp","category":"chests","sourceBytes":840346,"sourceSha256":"3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424"},
+    {"path":"scenes/chests/small-rig-v1/frame-16.webp","category":"chests","sourceBytes":843574,"sourceSha256":"d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa"},
+    {"path":"scenes/chests/small-rig-v1/frame-17.webp","category":"chests","sourceBytes":843574,"sourceSha256":"d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa"},
+    {"path":"ui/slot-weather/partly-cloudy-v1.webp","category":"slot-weather","sourceBytes":64090,"sourceSha256":"ae0a4016512b06daf7a1ff43bcf7f26cd834f7b0a893171b309d91e413e3521c"},
+    {"path":"ui/slot-weather/rain-v1.webp","category":"slot-weather","sourceBytes":47544,"sourceSha256":"c9d49a6786b0914a1e4174285f9cd2b37cc6096049608afad93d88452f0e44f0"},
+    {"path":"ui/slot-weather/snow-v1.webp","category":"slot-weather","sourceBytes":60878,"sourceSha256":"e5756c78c6b6bc3dc6bc3495e6568507fa5c4d49b1e08c63a439bf23e1cf72b7"},
+    {"path":"ui/slot-weather/sunny-v1.webp","category":"slot-weather","sourceBytes":68902,"sourceSha256":"fa4831a614e8445460734dceb52c054bed22c6b01370c1aacb9292bfdb3746c2"},
+    {"path":"ui/slot-weather/thunder-v1.webp","category":"slot-weather","sourceBytes":75124,"sourceSha256":"fa3fc896250f12eb54e8d52ca7a0ab80fb6b115194a5293c046103152765e96b"},
+  ],
+  consumerFingerprints: {
+    "slot-weather": {
+      "game/src/ui/slot-emblems.js": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a",
+      "game/src/ui/game.menu.pages.js": "af0ee347c6a64d597d70d49dee62d3b6b2575904f3a387e7bf5780350c98eb31",
+      "game/src/ui/menu-slots.js": "ad64597bb52922c3a0b6f6efc72fbba625ae59ebca83c58b4c743e63b8548d8c",
+      "game/src/ui/menu-slot-view.js": "6c4a5e7462e51032e6ffb1444a19feb656fe3506ffc13b66edab2c8acf3371bc"
+    },
+    "shadowed-card-art": {
+      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd",
+      "game/data/art-mapping.json": "32ccc923bbdef1c383d3f4974416a5056d8f9a596571b0ad5a796b6576eea446"
+    },
+    "retired-scenes": {
+      "game/data/art-mapping.json": "32ccc923bbdef1c383d3f4974416a5056d8f9a596571b0ad5a796b6576eea446",
+      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/run/chests.js": "8893625dd70c9547e74c1b75a73c508d66a728a48a9bc11eb91295cc5d0ee96c",
+      "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300",
+      "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
+      "game/src/run/game.run.scenes.js": "4ee1fbac6bf95ab91df56d10c7e35e835bf2b2a737fe9b37cf435b2dd66116ef",
+      "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
+      "game/src/run/game.session.death.js": "3f6c1730a96401615a6b19d059a210f2ac8ec9a821bfde85cce6c49c428dcadc",
+      "game/css/entry-events.css": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
+      "game/css/scenes.css": "73f3fff72ac854241af55a9a21a3694a6a7f97ccb9f8684c5c48862341eb8bd9"
+    },
+    "chests": {
+      "game/src/run/chests.js": "8893625dd70c9547e74c1b75a73c508d66a728a48a9bc11eb91295cc5d0ee96c",
+      "game/src/run/chest-opening-art.js": "52a385710f39ee8fa20b49612bb34cddf11730821a5e5351b07c2316c0717300"
+    },
+    "frames": {
+      "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+      "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
+      "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
+      "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
+    },
+    "map": {
+      "game/src/core/map-node-art.js": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609",
+      "game/src/core/renderer.js": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7",
+      "game/src/core/map-city-atmosphere.js": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02",
+      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
+    },
+    "transitions": {
+      "game/src/ui/camp-entry.js": "e2e93537b0345a1eda5a382d3548ef04980927bead0fbea19fd7bf4dbd8ddc55",
+      "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+      "game/src/core/data-loader.js": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
+    }
+  },
+  // Reviewed callback inputs to sound.js's assetUrl(url), not inferred approvals.
+  // See docs/evidence/2026-10-17-audio-asset-guard/REPORT.md.
+  opaqueConsumerDependencies: {
+    'game/src/ui/card-zoom-controller.js': {
+      'game/src/ui/ui.js': '925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb',
+      'game/src/ui/card-zoom-content.js': '000ba43d57fb645266db9156170b1c8420e6a3383b12e1b21bcec2f2a4807ee4',
+      'game/src/ui/card-zoom-photo-source.js': 'd95d88a1500de9484ce1a77106a8dce744cde61090c8c6e99dcfe7b84a193e99',
+    },
+    'game/src/audio/sfx-review.js': {
+      'game/src/audio/sound.samples.catalog.js': "1c49c79ebd1babd7e9213c890328a4159860c2200ca69643fba1ca6379d91726",
+    },
+    'game/src/audio/sound.js': {
+      'game/src/audio/sound.samples.player.js': "4a12567daad60a2ddf2aca90372b97ef11c147a24a1d302a16fe2248c554e81a",
+      'game/src/audio/sound.samples.catalog.js': "1c49c79ebd1babd7e9213c890328a4159860c2200ca69643fba1ca6379d91726",
+    },
+  },
+  opaqueConsumers: {
+    "game/src/audio/sfx-review.js": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4",
+    "game/src/ui/game.menu.pages.js": "af0ee347c6a64d597d70d49dee62d3b6b2575904f3a387e7bf5780350c98eb31",
+    "game/src/ui/menu-settings.js": "bc31239636575c0a9ff7296c2a4e1cdea49f0526eae52a4b1a63b26af4df50da",
+    "game/src/hub/hub.personnel.js": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e",
+    "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
+    "game/src/hub/game.bag.view2.js": "39a44f1467d79fa18141e7045e0c6a36bf2e608fb19866b20d6c775fb2af4e58",
+    "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
+    "game/src/audio/sfx-audition.js": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4",
+    "game/src/audio/sound.js": "57bf9ba9d65743d8dc9dfdd6e1956b49fbce19b75e33dbc2107f8abc412ec0f4",
+    "game/src/battle/view/battle.frames.js": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989",
+    "game/src/battle/view/battle.layers.js": "a808bc7ceca4fa5324886ffbbf2f66ffbfb6213b386dad606408216f92298bd1",
+    "game/src/battle/view/battle.vfx.js": "3adca0a12f969e89e6a9580909a3d212ad7e213dec94d5ab6ab62f1184c5fc64",
+    "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
+    "game/src/core/art.js": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6",
+    "game/src/core/icons-bitmap.js": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+    "game/src/home/home.scene.js": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd",
+    "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
+    "game/src/hub/hub.presentation.js": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+    "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+    "game/src/rarity-design-lab.js": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09",
+    "game/src/run/lab.ending.js": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809",
+    "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
+    "game/src/ui/game.menu.js": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
+    "game/src/ui/ui.js": "925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb",
+    "game/src/ui/card-zoom-controller.js": "8e075bfe29e06c5077b648a92d104e737bd3471ea8615dfe0e965df7b2ee346c",
+    "game/src/wu-career-frame-preview.js": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892"
+  },
+});

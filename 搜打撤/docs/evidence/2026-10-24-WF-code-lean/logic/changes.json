@@ -1,0 +1,172 @@
+{
+  "total": {
+    "files": 9,
+    "removedBytes": 30940,
+    "removedLines": 406,
+    "beforeTokens": 7175,
+    "afterTokens": 6425
+  },
+  "changes": [
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m1.js",
+        "bytes": 4083,
+        "lines": 66,
+        "sha256": "e05ab9d7484406e4328f2bd8e8c88681e1431f62a9a6b0a2bfd4965c6b75cf8b"
+      },
+      "after": {
+        "bytes": 1656,
+        "lines": 36,
+        "sha256": "202723511b62a523019414d39b1ae231512d43621be741f87312aee55f35d88a"
+      },
+      "removedBytes": 2427,
+      "removedLines": 30,
+      "beforeTokens": 305,
+      "afterTokens": 265
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m2.js",
+        "bytes": 8427,
+        "lines": 131,
+        "sha256": "415e666451e5d006c748dcf6432775360d9b05ec86f4a9daf200c5ff63c31639"
+      },
+      "after": {
+        "bytes": 3560,
+        "lines": 71,
+        "sha256": "b491417aa4941a904e68ae78fcfde60c9510f218a3935975907b1701d2009888"
+      },
+      "removedBytes": 4867,
+      "removedLines": 60,
+      "beforeTokens": 812,
+      "afterTokens": 697
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m3.js",
+        "bytes": 12420,
+        "lines": 177,
+        "sha256": "dbf6b6364a2443a771fb1eda01db1a887fe615148bb7585add5bca6e0b9ad63d"
+      },
+      "after": {
+        "bytes": 5289,
+        "lines": 97,
+        "sha256": "6772824a0a25a7dee62002ae4a4460dccbf326574d6864b8aecf67c7ba454f64"
+      },
+      "removedBytes": 7131,
+      "removedLines": 80,
+      "beforeTokens": 1193,
+      "afterTokens": 1061
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m4.js",
+        "bytes": 5057,
+        "lines": 78,
+        "sha256": "13eb6767b010d64ca1db098bffd048e9a9a1f52244f6955c2d39d7055f3ab105"
+      },
+      "after": {
+        "bytes": 772,
+        "lines": 22,
+        "sha256": "508c5e1cdb1aa050b651400e2d11c5f4ec25c4711a12c986b7aa9366ac6cfbb7"
+      },
+      "removedBytes": 4285,
+      "removedLines": 56,
+      "beforeTokens": 120,
+      "afterTokens": 101
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m5.js",
+        "bytes": 8936,
+        "lines": 161,
+        "sha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+      },
+      "after": {
+        "bytes": 1998,
+        "lines": 46,
+        "sha256": "73629bb4ca1abc967dae49f1c7b6f7721774ef6b6dd0f70c3e99f94c22861851"
+      },
+      "removedBytes": 6938,
+      "removedLines": 115,
+      "beforeTokens": 461,
+      "afterTokens": 356
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m6.js",
+        "bytes": 6144,
+        "lines": 93,
+        "sha256": "e9c39b6adeb0316af4f0956bfac4691bf62804ff33b8c5e821c3408a92225ecc"
+      },
+      "after": {
+        "bytes": 2055,
+        "lines": 45,
+        "sha256": "4a8ab68304ad6d5b2624dc1812dc76e9f960bc6cbafc8a8a1678cdfe82b358c9"
+      },
+      "removedBytes": 4089,
+      "removedLines": 48,
+      "beforeTokens": 518,
+      "afterTokens": 449
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "before": {
+        "file": "game/src/cards/cards.sync.m8.js",
+        "bytes": 3389,
+        "lines": 75,
+        "sha256": "fedeca1fd65cb45d5d93379d7d987d916ee230a2ae088262f5942be007806e3b"
+      },
+      "after": {
+        "bytes": 2383,
+        "lines": 54,
+        "sha256": "d9c5aaeff7960a2ffeb0741f8a33c0872c20ed952fc83a31bf3db31806472bed"
+      },
+      "removedBytes": 1006,
+      "removedLines": 21,
+      "beforeTokens": 633,
+      "afterTokens": 465
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "before": {
+        "file": "game/src/battle/bag/battle.equipment.domain.js",
+        "bytes": 17903,
+        "lines": 305,
+        "sha256": "d35fd1df5dd2bf8c0ba34f7d56b7972aeb8521700bcb31acd285ad0532a85e8c"
+      },
+      "after": {
+        "bytes": 17121,
+        "lines": 294,
+        "sha256": "bdce9a777b92d3199384044fae43bcde7b414c7e2e645e49abcf526f1d08a5fb"
+      },
+      "removedBytes": 782,
+      "removedLines": 11,
+      "beforeTokens": 3133,
+      "afterTokens": 2927
+    },
+    {
+      "file": "game/src/cards/card-rule-definitions.js",
+      "before": {
+        "bytes": 0,
+        "lines": 0,
+        "sha256": null
+      },
+      "after": {
+        "bytes": 585,
+        "lines": 15,
+        "sha256": "883f81032a360fefe5c785c44c6cbb4e51245e7730045a65caf1176a5514580a"
+      },
+      "removedBytes": -585,
+      "removedLines": -15,
+      "beforeTokens": 0,
+      "afterTokens": 104
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "method": "Acorn AST comparison and constant-parameter source specialization only; no business module or test execution",
+  "bag": {
+    "originalHealBlocks": 3,
+    "helperBodyMatchesAllOriginalBlocks": true,
+    "completeCreateBattleBagBodyEqualAfterExpansion": true,
+    "expandedCalls": 3
+  },
+  "schema": {
+    "fields": [
+      "heal",
+      "armor",
+      "draw"
+    ],
+    "specializedHelperBodyMatchesEachOriginal": true,
+    "completeValidatorBodyEqualAfterExpansion": true,
+    "expandedCalls": 3,
+    "originalErrorOrderAndPropertyReadTreePreserved": true
+  },
+  "snapshot": {
+    "originalComparatorBodies": 2,
+    "sharedComparatorBodyMatchesBoth": true,
+    "leafHasNoImportsOrTopLevelExecution": true
+  },
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false
+}

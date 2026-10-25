@@ -1,0 +1,29 @@
+{
+  "status": "complete-uncommitted",
+  "summary": {
+    "files": 49,
+    "existing": 46,
+    "added": 3,
+    "removedLines": 936,
+    "removedBytes": 53860,
+    "removedNormalizedBytes": 53767,
+    "removedJsTokens": 7094
+  },
+  "sourceSha256Matched": 49,
+  "evidenceLinksReachable": true,
+  "syntax": {
+    "files": 680,
+    "exitCode": 0
+  },
+  "docs": {
+    "relativeLinks": 733,
+    "exitCode": 0
+  },
+  "typeCompilation": "Initial 10 configs clean; runtime after union narrowing repair exit 0",
+  "typeCommand": "Initial overall typecheck failed; coverage 618/619 due to untouched active battle.view.js",
+  "knownTestFailures": 3,
+  "baselineReproduced": 3,
+  "browser": "Isolated-memory pouch/pearl real clicks and achievement detail; no player save written; own tab closed",
+  "commit": false,
+  "build": false
+}

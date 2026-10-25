@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-summoner",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-5daf54f6-cb0e-408d-af09-442589dea285.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-baita-one-eye-fix/cards-hero-summoner-source.png",
+        "bytes": 1919126,
+        "sha256": "d7cf0d71c5dad313a7a33f89f112b9b72228774cc471692bb5fb1930b865f766"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-baita-one-eye-fix/cards-hero-summoner-full-before.webp",
+          "bytes": 141580,
+          "sha256": "a0030120c47bd1f5482d62b7747c3c5636acbf6832196703674f6e295a1f4c9e"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-baita-one-eye-fix/cards-hero-summoner-thumb-before.webp",
+          "bytes": 21912,
+          "sha256": "338b6819b752452ad144227498f9b3fb3b44ae1926eb6efbd9cb24f6fb6cb640"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-summoner.webp",
+          "bytes": 159064,
+          "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-summoner.webp",
+          "bytes": 23148,
+          "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-two-blooms-original-rough-20261010",
+      "revision_after": "baita-one-eye-twin-gold-bars-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 177550,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 159064,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "e3725554a628f96c4e3b10460aa8e05e7254d307338c4bc2a9c9dc2cf0b876cc",
+            "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23364,
+            "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23148,
+            "sha256": "dcd6b61941c5943f5d1fcfba37df2e1857021592792211f2a8362548e474faf2",
+            "source": "docs/evidence/2026-10-24-baita-one-eye-fix/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

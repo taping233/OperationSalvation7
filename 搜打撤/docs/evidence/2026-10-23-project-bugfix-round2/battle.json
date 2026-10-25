@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-24",
+  "scope": "battle round2",
+  "fixedRootCauses": 7,
+  "productionFiles": [
+    "game/src/battle/effects/card-semantic-operations.js",
+    "game/src/battle/core/battle.effect-assembly.domain.js",
+    "game/src/battle/core/battle.enemy-phase.domain.js",
+    "game/src/battle/core/battle.exec-play.domain.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/battle/core/battle.resolution.domain.js"
+  ],
+  "newTests": ["tests/project-bugfix-round2-battle.test.js"],
+  "fixes": [
+    "语义毒爆绕过共用伤害钩子，且连续中毒在死亡结算前继续攻击尸体；统一钩子并逐次即时处理死亡。",
+    "狂暴连续攻击未在受击反应冻结后中断；每击和等待后重查行动资格。",
+    "招募敌人后临时偷攻/降攻到期不恢复；到期恢复同时覆盖有属性友军。",
+    "按材料费用治疗误用售价；改用材料现行有效卡面费用。",
+    "实际零伤害消耗闪避；计算攻击修正后仅正伤检查闪避，保持先于护卫/减伤/防御。",
+    "双材料注能首张消耗反应终结战斗时第二张丢失；先完整提交材料消费，再依原顺序运行反应。",
+    "同一伤害操作重施放造成的伤害未计吸血；完成重施放后按总实际伤害治疗。"
+  ],
+  "validation": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/project-bugfix-round2-battle.test.js tests/battle-trigger-lifecycle-unification.test.js tests/battle-effect-damage-boundary.test.js tests/requested-card-integration.test.js tests/sts2-consumed-rules.test.js tests/battle-execution-continuation.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+    "exitCode": 0,
+    "filesPassed": 6,
+    "testsPassed": 108,
+    "newTestsPassed": 13,
+    "existingTestsPassed": 95,
+    "durationSeconds": 19.55,
+    "diffCheckExitCode": 0,
+    "specificChecks": ["逐次毒伤即时死亡与回声仅一次", "正伤闪避先于护卫、减伤和防御吸收", "首材料终战时两张材料精确消费一次"]
+  },
+  "notRun": ["浏览器实页", "全库测试", "build"],
+  "finalTypeAndStaticChecks": "父会话统一执行",
+  "status": "源码与本域专测冻结，保留共享工作树既有改动，未提交"
+}

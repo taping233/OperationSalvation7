@@ -1,0 +1,25 @@
+{
+  "file": "scripts/runtime-asset-redundancy-review.mjs",
+  "lineStart": 33,
+  "lineEnd": 122,
+  "rows": 90,
+  "totalRows": 286,
+  "sourceBytes": 7284,
+  "sourceSha256": "8c4f3fe0631bdd96cd315a7e34a139e0a51bd4156683bdc363650fa4fe66516d",
+  "directoryOrder": [
+    "small",
+    "medium",
+    "large",
+    "class",
+    "boss"
+  ],
+  "frameIndices": [
+    0,
+    17
+  ],
+  "originalExpandedSha256": "4a3d5f9217c2c452fca7c0fc9ea6a5848460d1c61d973b322454bb2dff9f4b37",
+  "proposedExpandedSha256": "4a3d5f9217c2c452fca7c0fc9ea6a5848460d1c61d973b322454bb2dff9f4b37",
+  "exactExpandedDataAndOrderEqual": true,
+  "status": "read-only candidate; no target edit",
+  "potentialNetSourceLines": "about 80-84 lines; depends on final helper formatting"
+}

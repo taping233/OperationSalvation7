@@ -1,0 +1,46 @@
+{
+  "status": "targeted checks complete; browser pending parent",
+  "sourceSyntax": "5 files pass",
+  "eslint": "5 source files and standalone test passed before pause; no later runtime changes",
+  "untouched": {
+    "altarEmergencyAndExtractionTail": true,
+    "shopCommands": true
+  },
+  "regression": {
+    "files": 29,
+    "tests": 306,
+    "passed": 304,
+    "failed": 2,
+    "failures": [
+      {
+        "file": "D:/素材/代号柒/搜打撤/tests/altar-node-art.test.js",
+        "name": "祭坛原创图标接入 图标注册与富文本使用同源图且保留资源水晶语义",
+        "messages": [
+          "AssertionError: expected 'assets/ui/semantic-icons/crystal.svg?…' to contain 'ui/icons/crystal.png'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\altar-node-art.test.js:24:45\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        ]
+      },
+      {
+        "file": "D:/素材/代号柒/搜打撤/tests/altar-node-art.test.js",
+        "name": "祭坛原创图标接入 祭坛页面使用专用图标，共用撤离献祭不变",
+        "messages": [
+          "AssertionError: expected 'import { roomFooterHTML } from \\'../u…' to contain '[[icon:crystal]] 确认献祭'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\altar-node-art.test.js:32:20\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        ]
+      }
+    ]
+  },
+  "differential": {
+    "tests": 47,
+    "passed": 47,
+    "failed": 0,
+    "tradeScenarios": 43,
+    "markupCombinations": 384,
+    "existingFailureProofs": 3,
+    "cache": "node_modules/.cache/lean-refactor-1024/rooms-oracle-closeout.json"
+  },
+  "classification": "Both public failures predate this change: icon source plus its five dependencies are byte-identical to frozen input, and frozen altar source lacks the literal expected by the assertion. Evidence-only expected-failure tests reproduce both original assertions; public tests unchanged.",
+  "browser": "not run by this subagent",
+  "notRun": [
+    "full test suite",
+    "build"
+  ]
+}

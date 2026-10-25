@@ -1,0 +1,108 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman, sacred invocation, singing softly, composed majestic expression, looking slightly down toward the viewer, one open hand reaching toward the camera, other hand lifted near her sternum\n\nPremium legendary ability card illustration, a monumental blessing carried by wind, strong iconic silhouette.\n\nExtreme low three-quarter camera, close medium shot cropped at upper thighs. Woman dominates center-right, foreground open palm enlarged on lower left with natural foreshortening. Long braid and deep teal cape sweep toward upper right. A huge luminous curved current rises from the lower left foreground, wraps behind her, and opens toward the upper left like a vast breaking wave. Keep her face and hands unobstructed. Dark negative space above left, asymmetrical grand composition, only one character.\n\nDeep midnight teal and blue-black backdrop, one immense warm ivory-gold opening behind her silhouette, pale turquoise wind and sparse golden falling light. Strong chiaroscuro, narrow gold rim along cape and hair, gold eyes and face remain focal. Broad sculptural cloth folds and large luminous shapes, a few geometric flecks, high complexity, no buildings.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1869443024,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, split screen, lantern, floating hair ornament, circular head halo, crown, wings, angry face, evil grin, purple eyes, sword, microphone, musical instrument, dense particle field, cluttered background, printed playing cards",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale blonde very long hair in one thick low braid, neat straight bangs, golden eyes, quiet detached expression, white crescent moon hairpin clipped flat just above bangs slightly to viewers right, tilted against hair, white high-neck priestess dress with gold edging, deep teal short shoulder cape with gold trim, dark wrist cuffs, natural bare hands",
+          "uc": "",
+          "center": {
+            "x": 0.61,
+            "y": 0.52
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, sacred invocation, singing softly, composed majestic expression, looking slightly down toward the viewer, one open hand reaching toward the camera, other hand lifted near her sternum\n\nPremium legendary ability card illustration, a monumental blessing carried by wind, strong iconic silhouette.\n\nExtreme low three-quarter camera, close medium shot cropped at upper thighs. Woman dominates center-right, foreground open palm enlarged on lower left with natural foreshortening. Long braid and deep teal cape sweep toward upper right. A huge luminous curved current rises from the lower left foreground, wraps behind her, and opens toward the upper left like a vast breaking wave. Keep her face and hands unobstructed. Dark negative space above left, asymmetrical grand composition, only one character.\n\nDeep midnight teal and blue-black backdrop, one immense warm ivory-gold opening behind her silhouette, pale turquoise wind and sparse golden falling light. Strong chiaroscuro, narrow gold rim along cape and hair, gold eyes and face remain focal. Broad sculptural cloth folds and large luminous shapes, a few geometric flecks, high complexity, no buildings.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale blonde very long hair in one thick low braid, neat straight bangs, golden eyes, quiet detached expression, white crescent moon hairpin clipped flat just above bangs slightly to viewers right, tilted against hair, white high-neck priestess dress with gold edging, deep teal short shoulder cape with gold trim, dark wrist cuffs, natural bare hands",
+              "centers": [
+                {
+                  "x": 0.61,
+                  "y": 0.52
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, split screen, lantern, floating hair ornament, circular head halo, crown, wings, angry face, evil grin, purple eyes, sword, microphone, musical instrument, dense particle field, cluttered background, printed playing cards",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.61,
+                  "y": 0.52
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\sacredrain-reset-1024\\nai5-draft.png",
+  "references": [
+    {
+      "path": "game/assets/cards/hero-sacredrain.webp",
+      "sha256": "0dd009f3006ad7875800bef91a33d64d2d6cd0b0c4d5251cded6ad6414954f70",
+      "role": "existing card theme only; composition reset",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "role": "current light priest identity",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "docs/character-bible/xingyue.md",
+      "sha256": "c935f36af51f667476354a6c0bcb846b5d7d1ab33ed683bc1ebb599bec06f94e",
+      "role": "current identity description",
+      "uploaded_to_nai": false
+    }
+  ],
+  "seed": 1869443024,
+  "sha256": "3eeb0a9660dde2688ca719d45096a539d78a854e6972d4ea77fa15a12bf40ba5"
+}

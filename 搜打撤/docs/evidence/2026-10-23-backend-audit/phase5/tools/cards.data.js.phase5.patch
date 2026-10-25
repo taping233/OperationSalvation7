@@ -1,0 +1,258 @@
+diff --git a/docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-before.txt b/game/src/cards/cards.data.js
+index 8bfaa31c..4d8bf565 100644
+--- a/docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-before.txt
++++ b/game/src/cards/cards.data.js
+@@ -1,3 +1,4 @@
++import { targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+ /* 由 cards.js 拆出（2026-09-22 六文件重构批2）：卡池数据（EVENTS_0919 + TABLETOP/TT2-TT8 + BESTIARY + TT10/TT11）。
+  * 逐字搬迁，属性顺序=原文件顺序；在壳 cards.js 中展开装配为 SDT.Cards，键面与数据字节不变。 */
+ import { resolveCardCatalog } from './cards.catalog.js';
+@@ -639,7 +640,7 @@ export const dataSlice = {
+     TABLETOP13: [
+   { id: 'tt13-poor-meal', name: '穷鬼套餐', cost: 0, rarity: '古朴', type: '装备', value: 2,
+     desc: '如果你的手牌数小于等于3，你的英雄技能变为0费。',
+-    rules: { version: 1, battle: { target: { side: 'self', area: false }, hosted: ['batch13-poor-meal'] } } },
++    rules: targetedHostedRuleSnapshot("batch13-poor-meal", "self") },
+   {
+     "id": "tt13-spring",
+     "name": "源头活水",
+@@ -647,18 +648,7 @@ export const dataSlice = {
+     "rarity": "古朴",
+     "type": "法术",
+     "desc": "复原你的英雄技能并抽1张牌。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-spring"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-spring", "self")
+   },
+   {
+     "id": "tt13-magazine",
+@@ -667,18 +657,7 @@ export const dataSlice = {
+     "rarity": "古朴",
+     "type": "装备",
+     "desc": "主动技能：随机获取两张枪术招式。本局对战只能使用一次。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-magazine"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-magazine", "self")
+   },
+   {
+     "id": "tt13-snipe",
+@@ -687,18 +666,7 @@ export const dataSlice = {
+     "rarity": "古朴",
+     "type": "武术",
+     "desc": "造成9点固定伤害，击杀敌人回复1点能量。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "enemy",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-snipe"
+-        ]
+-      }
+-    },
++    "rules": targetedHostedRuleSnapshot("batch13-snipe", "enemy"),
+     "dmg": 9,
+     "dmgType": "fixed"
+   },
+@@ -709,18 +677,7 @@ export const dataSlice = {
+     "rarity": "稀有",
+     "type": "武术",
+     "desc": "获得6点护甲，如果你本回合没有造成任何伤害，额外获得4点护甲。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-guard"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-guard", "self")
+   },
+   {
+     "id": "tt13-bitter-rain",
+@@ -729,18 +686,7 @@ export const dataSlice = {
+     "rarity": "稀有",
+     "type": "法术",
+     "desc": "对一名敌人附加2层中毒，如果其已有诅咒，额外附加1项其他诅咒。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "enemy",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-bitter-rain"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-bitter-rain", "enemy")
+   },
+   {
+     "id": "tt13-mind-control",
+@@ -749,18 +695,7 @@ export const dataSlice = {
+     "rarity": "职业",
+     "type": "法术",
+     "desc": "选择一名受伤的非BOSS敌人，使其变为己方随从。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "enemy",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-mind-control"
+-        ]
+-      }
+-    },
++    "rules": targetedHostedRuleSnapshot("batch13-mind-control", "enemy"),
+     "cls": "牧师",
+     "unrandom": true
+   },
+@@ -800,18 +735,7 @@ export const dataSlice = {
+     "rarity": "史诗",
+     "type": "装备",
+     "desc": "每次受到伤害后，对随机敌人造成3点固定伤害，并有50%概率抽1张牌。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-scale-armor"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-scale-armor", "self")
+   },
+   {
+     "id": "tt13-astrolabe",
+@@ -820,18 +744,7 @@ export const dataSlice = {
+     "rarity": "传说",
+     "type": "装备",
+     "desc": "在你本回合打出第一张武术招式后回复1点能量；下回合切换为法术，逐回合交替。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-astrolabe"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-astrolabe", "self")
+   },
+   {
+     "id": "tt13-soul-contract",
+@@ -840,18 +753,7 @@ export const dataSlice = {
+     "rarity": "职业",
+     "type": "法术",
+     "desc": "选择1名敌人并标记；其受到伤害后，对随机一名其他敌人造成2点真实伤害。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "enemy",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-soul-contract"
+-        ]
+-      }
+-    },
++    "rules": targetedHostedRuleSnapshot("batch13-soul-contract", "enemy"),
+     "cls": "降临者",
+     "unrandom": true
+   },
+@@ -862,18 +764,7 @@ export const dataSlice = {
+     "rarity": "职业",
+     "type": "法术",
+     "desc": "发现1张法术牌，并将其具有抽到时施放的2张复制洗入牌库。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-stellar-divination"
+-        ]
+-      }
+-    },
++    "rules": targetedHostedRuleSnapshot("batch13-stellar-divination", "self"),
+     "cls": "牧师",
+     "unrandom": true
+   },
+@@ -884,18 +775,7 @@ export const dataSlice = {
+     "rarity": "传说",
+     "type": "法术",
+     "desc": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "self",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-chaos-deck"
+-        ]
+-      }
+-    }
++    "rules": targetedHostedRuleSnapshot("batch13-chaos-deck", "self")
+   },
+   {
+     "id": "tt13-mercy",
+@@ -904,18 +784,7 @@ export const dataSlice = {
+     "rarity": "稀有",
+     "type": "武术",
+     "desc": "攻（+3），无法致死（至少保留1点生命）。",
+-    "rules": {
+-      "version": 1,
+-      "battle": {
+-        "target": {
+-          "side": "enemy",
+-          "area": false
+-        },
+-        "hosted": [
+-          "batch13-mercy"
+-        ]
+-      }
+-    },
++    "rules": targetedHostedRuleSnapshot("batch13-mercy", "enemy"),
+     "dmg": 3,
+     "dmgType": "attack"
+   }

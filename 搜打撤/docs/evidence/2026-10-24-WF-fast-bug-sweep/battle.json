@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-24",
+  "status": "implemented and frozen for parent integration; uncommitted",
+  "fixedRootCauses": 3,
+  "productionFiles": [
+    "game/src/battle/core/battle.selection-flow.domain.js",
+    "game/src/battle/core/battle.lifecycle.domain.js"
+  ],
+  "newTests": [
+    "tests/fast-bug-sweep-battle-selection.test.js",
+    "tests/fast-bug-sweep-battle-deck.test.js",
+    "tests/fast-bug-sweep-battle-integration.test.js"
+  ],
+  "fixes": [
+    {
+      "id": "fast-battle-01",
+      "title": "选择N张手牌免费施放只结算第一张",
+      "evidence": "effect-steps.recovery.js reads numeric N from HAND_COST_SELECT_RE; original pickHandSelect(play) clears handSelecting and discards N after the first selected UID.",
+      "change": "Child completion schedules the remaining N-1 picks and preserves a child-owned nested selection. Completion callback and tail effect run after the final pick.",
+      "red": "fast-bug-sweep-battle-selection.test.js: 2 failed; expected null to match object { n: 1, act: 'play' }",
+      "realEngine": "Text card '选择手牌中 2 张武术施放' releases both original UIDs at zero energy cost; two attack cards cause 12 damage."
+    },
+    {
+      "id": "fast-battle-02",
+      "title": "混沌之眼编入后未即时扩容，移除后未收回上限",
+      "evidence": "toggleDeckCard tested stale selDeckMax before mutating selection and never recalculated capacity afterward.",
+      "change": "Check the proposed selection's capacity, update the live limit after every toggle, and reject oversized confirmation after capacity equipment is removed. Keep the chosen cards visible for manual adjustment.",
+      "red": "fast-bug-sweep-battle-deck.test.js: 2 failed; eye selected=false instead of true; max=20 instead of 15 after removal",
+      "realEngine": "Real chaos-eye card expands the configured 3-card limit to 8; removing it restores 3; 7 selected cards cannot start until reduced to 3."
+    },
+    {
+      "id": "fast-battle-03",
+      "title": "陈旧确认编组命令重置已经开始的战斗",
+      "evidence": "Public confirmDeck forwarded directly to internal beginBoss without selectingDeck guard.",
+      "change": "Public confirmation requires the live deck-selection phase; internal automatic/nest/restart entry retains its existing beginBoss path.",
+      "red": "fast-bug-sweep-battle-integration.test.js: expected runtime.energy 1, received 9 after second confirmDeck",
+      "realEngine": "After real boss start, a stale confirmDeck preserves turn 4, energy 1 and current hand."
+    }
+  ],
+  "validation": {
+    "command": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-battle-integration.test.js tests/fast-bug-sweep-battle-deck.test.js tests/fast-bug-sweep-battle-selection.test.js tests/boss-equip-select.test.js tests/battle-restart.test.js tests/battle-restore-boundaries.test.js tests/battle-lifecycle.test.js tests/battle-selection-consumer.test.js tests/battle-end-turn-selection.test.js tests/battle-selection-flow-boundary.test.js tests/tt7-hand-payment.test.js tests/contracts.test.js tests/architecture-boundaries.test.js --reporter=dot",
+    "exitCode": 0,
+    "filesPassed": 13,
+    "testsPassed": 131,
+    "newRegressionTests": 7,
+    "durationSeconds": 9.59,
+    "eslint": { "exitCode": 0, "scope": "two production files and three new test files" },
+    "diffCheck": { "exitCode": 0, "scope": "same five paths" },
+    "baseline": { "filesPassed": 8, "testsPassed": 58, "exitCode": 0 },
+    "observedExistingFixtureWarning": "battle-lifecycle.test.js emits Missing necessary battle settlement port from its fixture while its assertions pass; no fixture or guard was changed.",
+    "notRun": ["browser: parent owns current-window validation", "full suite", "build", "commit", "push"]
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "path": "game/src/battle/bag/battle.bag.domain.js",
+    "sha256Before": "7389de0255e523d6574f2f51087c576c804bb97abf4f27001879216d1e47acad",
+    "bytesBefore": 37276,
+    "linesBefore": 615,
+    "originalSnapshot": "battle.bag.domain.js.before.txt"
+  },
+  {
+    "path": "game/src/cards/card-rules.schema.js",
+    "sha256Before": "06a608f2dcd14e2c0d1845df2403efeb9c1871d7e30a354beef1d56901f27b63",
+    "bytesBefore": 78493,
+    "linesBefore": 1330,
+    "originalSnapshot": "card-rules.schema.js.before.txt"
+  },
+  {
+    "path": "game/src/cards/cards.sync.backfiller.js",
+    "sha256Before": "0db90c778b4b86b8e2d17b58f14f12d20a0d72004a0f4643b79bb7b82043f999",
+    "bytesBefore": 8414,
+    "linesBefore": 160,
+    "originalSnapshot": "cards.sync.backfiller.js.before.txt"
+  },
+  {
+    "path": "game/src/cards/cards.sync.rule-backfill.js",
+    "sha256Before": "937d202f99bb1f83ea4dbf0dfae63f985a283a076b238b749ba4f94addba1f83",
+    "bytesBefore": 25252,
+    "linesBefore": 478,
+    "originalSnapshot": "cards.sync.rule-backfill.js.before.txt"
+  },
+  {
+    "path": "game/src/cards/card-snapshot.js",
+    "sha256Before": null,
+    "bytesBefore": 0,
+    "linesBefore": 0,
+    "originalSnapshot": null,
+    "requireTargetAbsent": true
+  }
+]

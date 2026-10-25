@@ -1,0 +1,41 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const cp = require('node:child_process');
+const assert = require('node:assert/strict');
+const out = 'docs/evidence/2026-10-23-backend-audit/phase5/battle';
+const stage1 = JSON.parse(fs.readFileSync(out + '/receipt.json', 'utf8'));
+const stage2 = JSON.parse(fs.readFileSync(out + '/targeted-receipt.json', 'utf8'));
+const sha = data => crypto.createHash('sha256').update(data).digest('hex');
+const baselines = [
+  ...stage1.sourceFiles.map(file => ({ path: file.path, backup: file.backup, sha256: file.baseSha256 })),
+  { path: stage2.files[2].path, backup: stage2.files[2].backup, sha256: stage2.files[2].baseSha256 },
+];
+const files = [];
+let patch = '';
+for (const baseline of baselines) {
+  const before = fs.readFileSync(baseline.backup), after = fs.readFileSync(baseline.path);
+  assert.equal(sha(before), baseline.sha256);
+  const diff = cp.spawnSync('git', ['diff', '--no-index', '--no-ext-diff', '--numstat', '--', baseline.backup, baseline.path], { encoding: 'utf8' });
+  assert.equal(diff.status, 1); const counts = diff.stdout.match(/^(\d+)\s+(\d+)\s+/); assert.ok(counts);
+  const codeDiff = cp.spawnSync('git', ['diff', '--no-index', '--no-ext-diff', '--', baseline.backup, baseline.path], { encoding: 'utf8' });
+  assert.equal(codeDiff.status, 1);
+  patch += codeDiff.stdout.replace(/^diff --git .*$/m, `diff --git a/${baseline.path} b/${baseline.path}`).replace(/^--- .*$/m, `--- a/${baseline.path}`).replace(/^\+\+\+ .*$/m, `+++ b/${baseline.path}`);
+  files.push({ path: baseline.path, baseSha256: baseline.sha256, finalSha256: sha(after), bytesBefore: before.length, bytesAfter: after.length, linesBefore: before.toString('utf8').split(/\r?\n/).length - 1, linesAfter: after.toString('utf8').split(/\r?\n/).length - 1, insertions: Number(counts[1]), deletions: Number(counts[2]), backup: baseline.backup });
+}
+const helperPath = stage1.helper.path, helper = fs.readFileSync(helperPath), helperLines = helper.toString('utf8').split(/\r?\n/).length - 1;
+assert.equal(sha(helper), stage2.helper.afterSha256);
+patch += `diff --git a/${helperPath} b/${helperPath}\nnew file mode 100644\n--- /dev/null\n+++ b/${helperPath}\n@@ -0,0 +1,${helperLines} @@\n` + helper.toString('utf8').split('\n').slice(0, -1).map(line => '+' + line + '\n').join('');
+fs.writeFileSync(out + '/changes.patch', patch);
+files.push({ path: helperPath, baseSha256: null, finalSha256: sha(helper), bytesBefore: 0, bytesAfter: helper.length, linesBefore: 0, linesAfter: helperLines, insertions: helperLines, deletions: 0, backup: null });
+const syntax = files.map(file => {
+  const result = cp.spawnSync(process.execPath, ['--check', file.path], { encoding: 'utf8' }); assert.equal(result.status, 0, result.stderr);
+  return { path: file.path, exitCode: result.status };
+});
+const diffCheck = cp.spawnSync('git', ['diff', '--check', '--', ...files.map(file => file.path)], { encoding: 'utf8' }); assert.equal(diffCheck.status, 0, diffCheck.stderr + diffCheck.stdout);
+const allReferences = cp.spawnSync('rg', ['-n', 'BUILTIN_PREVIOUS_RULES|BUILTIN_EQUIPMENT_PREVIOUS_RULES|hosted-rule-snapshot|migrateBuiltinExecutionCard|replayPiles|replayEffects|replayInteraction', 'game/src', 'tests', 'scripts', 'tools'], { encoding: 'utf8' }); assert.equal(allReferences.status, 0);
+fs.writeFileSync(out + '/references.txt', allReferences.stdout);
+const receipt = { status: 'complete_uncommitted', scope: 'Cards historical and canonical hosted-rule constructor normalization; VM integration owned by parent and excluded from these counts', sourceFiles: files, insertions: files.reduce((total, file) => total + file.insertions, 0), deletions: files.reduce((total, file) => total + file.deletions, 0), netLinesRemoved: files.reduce((total, file) => total + file.deletions - file.insertions, 0), netBytesRemoved: files.reduce((total, file) => total + file.bytesBefore - file.bytesAfter, 0), constructorCalls: { basic: 53, targeted: 26, total: 79 }, historicalRuleEntries: 70, retainedExceptionalHistoricalRules: 4, proof: { firstStage: 'receipt.json', secondStage: 'targeted-receipt.json', completeFirstStageHistoricalSerializedTablesIdentical: true, completeSecondStageModuleAstIdenticalAfterConstructorExpansion: true, independentMutableObjectGraphPreserved: true, importConsumersFreezeCallsUnchanged: stage1.consumersUnchanged }, verification: { syntax, diffCheckExitCode: diffCheck.status, testsRun: false, buildRun: false, browserRun: false }, filesDeleted: [], sourceChangesAfterFingerprinting: false };
+fs.writeFileSync(out + '/final-receipt.json', JSON.stringify(receipt, null, 2) + '\n');
+for (const script of ['classify-snapshots.cjs', 'prove-and-apply-snapshots.cjs', 'targeted-snapshots.cjs', 'finalize.cjs']) fs.writeFileSync(out + '/' + script + '.txt', fs.readFileSync('.tmp/backend-phase5/battle/' + script));
+process.stdout.write(JSON.stringify({ insertions: receipt.insertions, deletions: receipt.deletions, netLinesRemoved: receipt.netLinesRemoved, netBytesRemoved: receipt.netBytesRemoved, files: files.map(file => ({ path: file.path, linesBefore: file.linesBefore, linesAfter: file.linesAfter, finalSha256: file.finalSha256 })) }, null, 2) + '\n');

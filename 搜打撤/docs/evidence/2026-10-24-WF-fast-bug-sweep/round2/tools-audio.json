@@ -1,0 +1,48 @@
+{
+  "owner": "Friday / tools_audio_bugs",
+  "status": "complete-uncommitted; source frozen for parent integration",
+  "newIndependentRootCauses": 3,
+  "previousRoundRootCausesNotRecounted": 3,
+  "fixes": [
+    {
+      "id": "FAST2-T1",
+      "title": "Windows依赖诊断无法启动npm",
+      "impact": "spawnSync('npm')在当前Windows现场直接ENOENT，诊断尚未联网就失败",
+      "sources": ["scripts/dependency-audit-diagnostics.mjs"],
+      "tests": ["tests/project-fast-round2-tools-audio-1024.test.js", "tests/tools/dependency-audit-diagnostics.test.mjs"],
+      "red": { "failed": 1, "error": "ENOENT" },
+      "change": "仅Windows用cmd.exe /d /c启动固定npm审计参数并隐藏窗口，其他平台保持直接npm；没有路径或调用者数据拼入shell"
+    },
+    {
+      "id": "FAST2-T2",
+      "title": "未知音效名命中Object原型后抛错",
+      "impact": "constructor/toString/__proto__/hasOwnProperty没有配置音源却被当作音效并访问files.map抛错，违反未知事件静默契约",
+      "sources": ["game/src/audio/sound.samples.player.js"],
+      "tests": ["tests/project-fast-round2-tools-audio-1024.test.js"],
+      "red": { "failed": 4 },
+      "change": "只接受采样目录自有键，其他事件返回false且不创建音源节点"
+    },
+    {
+      "id": "FAST2-T3",
+      "title": "坏移动坐标被隐式转换成真实节点",
+      "impact": "Agent动作的null、false、空字符串或数组经Number转换成为0，true成为1，错误JSON动作可真的移动；含遮蔽转换方法的对象还会抛异常",
+      "sources": ["game/src/agent/agent.protocol.js"],
+      "tests": ["tests/project-fast-round2-agent-move-1024.test.js"],
+      "red": { "failed": 7, "passed": 4 },
+      "change": "只转换明确数字或非空数字字符串；真实act到moveTo路径拒绝坏参不调用；NaN/Infinity/小数/负数继续拒绝"
+    }
+  ],
+  "checks": [
+    { "kind": "final-targeted", "files": 7, "passed": 194, "exitCode": 0,
+      "tests": ["project-fast-round2-agent-move-1024", "project-fast-round2-tools-audio-1024", "agent-command-results", "project-bug-sweep-llm-1024", "dependency-audit-diagnostics", "sound-sample-only", "audio-review-remediation-1023"] },
+    { "kind": "actual-LLM-and-battle-replay-regression", "files": 5, "passed": 75, "exitCode": 0,
+      "note": "includes initial 11-case move regression before adding object/finite-value cases; latest 17-case move regression is included in final-targeted" },
+    { "kind": "targeted-eslint-and-diff-check", "exitCode": 0 },
+    { "kind": "offline-native-launcher", "command": "same platform launcher prefix with npm --version only", "exitCode": 0 }
+  ],
+  "limits": [
+    "本轮未联网执行npm audit；保持原有诊断成功/失败与公开字段清洗验证，不改变漏洞阈值",
+    "额外未覆盖脚本/回放检查122通过/1失败：scripts-contract指出活跃重构新增asset-manifest-source.mjs、css-component-scopes.mjs缺测试映射，已报告父会话，未覆盖其属地",
+    "未运行build、未提交推送、未新建服务；音效未知名守卫未改变正常音效参数，不代表听感或浏览器实页验收"
+  ]
+}

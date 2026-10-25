@@ -1,0 +1,59 @@
+{
+  "scope": "源码排查，不代表运行时验收",
+  "files": [
+    "game/css/base-framework-v7.css",
+    "game/src/ui/surface-motion.js",
+    "game/css/interface-motion.css",
+    "game/css/ak-skin.css",
+    "game/css/winter.css",
+    "game/css/motion-transitions.css",
+    "game/src/ui/achievement-motion.js",
+    "game/src/ui/transitions-director.js"
+  ],
+  "issues": [
+    {
+      "kind": "基地外层与组件动画叠加",
+      "sources": [
+        "base-camp.css: camp-page-in",
+        "motion-transitions.css: t4TabIn / t4PageIn"
+      ],
+      "fix": "基地共用外壳及hub-page.page-in停用旧CSS入场；保留区域编排"
+    },
+    {
+      "kind": "公共展示区域被缩放",
+      "sources": [
+        "surface-motion.js: portrait 1.025 / shell .992 / surfacePageIn"
+      ],
+      "fix": "公共容器仅平移，目标式与CSS路径一致"
+    },
+    {
+      "kind": "旧兜底容器变形",
+      "sources": [
+        "ak-skin.css: akCardIn scaleY(.96) + clip",
+        "winter.css: pgIn / pgOut",
+        "motion-transitions.css: t4容器缩放 / gateSqueeze"
+      ],
+      "fix": "去掉尺寸缩放、纵向裁切及闸门挤压，保留平移与淡变"
+    },
+    {
+      "kind": "成就分类高亮非等比缩放",
+      "sources": [
+        "achievement-motion.js: moveCategory"
+      ],
+      "fix": "只平移，不以宽高比缩放"
+    }
+  ],
+  "preserved": [
+    "卡牌放大/翻面/获得与飞行动效",
+    "玩家要求的大金币比例",
+    "人物专属呼吸/伙伴点击互动",
+    "装饰线条生长和镜像图标",
+    "设置选中线高度变化（仅3px装饰线，不变形内容）"
+  ],
+  "notRun": [
+    "测试",
+    "lint/类型检查",
+    "浏览器验收",
+    "构建"
+  ]
+}

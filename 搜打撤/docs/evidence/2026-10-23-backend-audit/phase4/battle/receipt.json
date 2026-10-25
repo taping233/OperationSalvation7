@@ -1,0 +1,96 @@
+{
+  "status": "complete_uncommitted",
+  "sourceChanges": [
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256Before": "7389de0255e523d6574f2f51087c576c804bb97abf4f27001879216d1e47acad",
+      "bytesBefore": 37276,
+      "linesBefore": 615,
+      "originalSnapshot": "battle.bag.domain.js.before.txt",
+      "sha256After": "17a3a1d917dc579e4da244b59a017d83e9129e99dad525e3cd597747a2692dd8",
+      "bytesAfter": 36542,
+      "linesAfter": 605,
+      "added": 11,
+      "removed": 21,
+      "netRemoved": 10,
+      "netBytesRemoved": 734,
+      "ownBaselinePatch": "battle.bag.domain.js.diff.patch"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "sha256Before": "06a608f2dcd14e2c0d1845df2403efeb9c1871d7e30a354beef1d56901f27b63",
+      "bytesBefore": 78493,
+      "linesBefore": 1330,
+      "originalSnapshot": "card-rules.schema.js.before.txt",
+      "sha256After": "653dd808f5799bf8548fe38c024ed5ea4700ad99fa46b7e9557f2047e4c45e3f",
+      "bytesAfter": 77161,
+      "linesAfter": 1304,
+      "added": 22,
+      "removed": 48,
+      "netRemoved": 26,
+      "netBytesRemoved": 1332,
+      "ownBaselinePatch": "card-rules.schema.js.diff.patch"
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "sha256Before": "0db90c778b4b86b8e2d17b58f14f12d20a0d72004a0f4643b79bb7b82043f999",
+      "bytesBefore": 8414,
+      "linesBefore": 160,
+      "originalSnapshot": "cards.sync.backfiller.js.before.txt",
+      "sha256After": "3e9a3616a15bc21b13a3ec0f236757f4affe3ac1bca694dcd8c4295a2b00b80f",
+      "bytesAfter": 7869,
+      "linesAfter": 150,
+      "added": 1,
+      "removed": 11,
+      "netRemoved": 10,
+      "netBytesRemoved": 545,
+      "ownBaselinePatch": "cards.sync.backfiller.js.diff.patch"
+    },
+    {
+      "path": "game/src/cards/cards.sync.rule-backfill.js",
+      "sha256Before": "937d202f99bb1f83ea4dbf0dfae63f985a283a076b238b749ba4f94addba1f83",
+      "bytesBefore": 25252,
+      "linesBefore": 478,
+      "originalSnapshot": "cards.sync.rule-backfill.js.before.txt",
+      "sha256After": "0d582a3fc532ca8acc7fd9dc156b5710801f44922532afc9dc0ddc60804232bb",
+      "bytesAfter": 24732,
+      "linesAfter": 470,
+      "added": 1,
+      "removed": 9,
+      "netRemoved": 8,
+      "netBytesRemoved": 520,
+      "ownBaselinePatch": "cards.sync.rule-backfill.js.diff.patch"
+    },
+    {
+      "path": "game/src/cards/card-snapshot.js",
+      "sha256Before": null,
+      "bytesBefore": 0,
+      "linesBefore": 0,
+      "originalSnapshot": null,
+      "requireTargetAbsent": true,
+      "sha256After": "42a4606311dd655f35c9567d3c6b2c7bf3a173361c296eebebddf9741b0c5f9c",
+      "bytesAfter": 597,
+      "linesAfter": 10,
+      "added": 10,
+      "removed": 0,
+      "netRemoved": -10,
+      "netBytesRemoved": -597,
+      "ownBaselinePatch": "card-snapshot.js.diff.patch"
+    }
+  ],
+  "totals": {
+    "added": 45,
+    "removed": 89,
+    "netRemoved": 44,
+    "netBytesRemoved": 2534
+  },
+  "verification": {
+    "syntax": "node --check all five modified/new source files; exit 0",
+    "diff": "git diff --check source paths; exit 0",
+    "staticEquivalence": "static-equivalence.json; helper specialization and expansion preserve original AST",
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  },
+  "ownershipBoundary": "Excluded active WF-project-bugfix-1023 battle core/effects paths and WF-live-repair-1023 UI/HUD paths; root approved the exact bag/schema/snapshot-helper scope."
+}

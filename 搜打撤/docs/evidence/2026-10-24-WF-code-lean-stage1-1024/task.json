@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-code-lean-stage1-1024",
+  "date": "2026-10-24",
+  "owner": "Friday",
+  "goal": "以全项目净减50%为架构收益标准，实施统一卡牌程序、集合页面族与最终样式体系；保持现行功能与兼容行为",
+  "paths": [
+    "game/src/cards",
+    "game/src/battle/core/battle.resolution.domain.js",
+    "game/src/battle/effects/card-semantic-operations.js",
+    "game/src/battle/effects/effect-steps.recovery.js",
+    "game/src/battle/effects/effect-steps.deck.js",
+    "game/src/ui/card-browser.js",
+    "game/src/ui/card-browser-state.js",
+    "game/src/hub/hub.collection-v4.js",
+    "game/src/hub/game.container-store.view.js",
+    "game/src/hub/game.hub.preparation.js",
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/hub/game.cardslib.designer.js",
+    "game/src/run/game.run.shop.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/run/chests.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/ui/room-actions.js",
+    "game/css/card-browser.css",
+    "game/css/container-store.css",
+    "game/css/base-collection-v4.css",
+    "game/css/hub-cover-collections.css",
+    "game/css/bag-design-system.css",
+    "docs/evidence/2026-10-24-WF-code-lean-stage1-1024"
+  ],
+  "doneWhen": [
+    "以本轮当前字节为基线，净减重复运行实现并保留所有既有增量",
+    "相关差分与定向回归、静态检查通过；内置当前窗口代表实页完成或如实记录阻塞",
+    "源码净收益按行、规范化字节及非注释token分别汇报，不以删测试或搬运数据充数"
+  ],
+  "stage": "partial",
+  "checks": [],
+  "unverified": [
+    "2026-10-25老板确认无在途内容，现有改动由WF-full-submit-1025统一验收和提交；原50%净减目标未核实达成，历史局部证据不自动覆盖现码。"
+  ],
+  "updatedAt": "2026-10-25T11:59:58.165Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

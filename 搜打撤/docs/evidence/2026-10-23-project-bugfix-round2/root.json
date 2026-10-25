@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-24",
+  "fixedRootCauses": 7,
+  "fixes": [
+    "改键冲突确认晚返回会覆盖之后的重置/新监听；按修订号淘汰旧确认并处理弹窗拒绝。",
+    "本机存储拒绝写入/删除时，恢复默认及单字母快捷键开关未在当前会话生效；保留会话状态。",
+    "自动驱动只在步骤之间检查停止和期限，挂起决策/命令无限占用；在途等待同样响应停止、调用方signal和局级期限，迟到决策不派发。",
+    "同一局异步决策期间换页或打开特写，旧动作可能点击新页同名按钮；派发前核对操作面身份。",
+    "动作按钮文案/可访问标签原地更新后沿用永久缓存，策略读取旧价格/奖励；缓存同步核对原文。",
+    "旧跑局记录局部损坏导致统计崩溃或字符串数值污染均值；读时验证行/卡片/数值，未知原型同名结局按放弃计。",
+    "跑局CSV导出因旧记录缺失/损坏日期失败，回车破坏单元格边界；日期安全降级并完整转义。"
+  ],
+  "productionFiles": [
+    "game/src/core/input.js", "game/src/ui/settings-input.js",
+    "game/src/agent/agent.runner.js", "game/src/agent/agent.runner.runtime.js",
+    "game/src/agent/agent.action-router.js", "game/src/agent/agent.surface.js",
+    "game/src/agent/agent.recorder.js", "game/src/agent/agent.stats.js"
+  ],
+  "newTests": [
+    "tests/project-bugfix-round2-input.test.js",
+    "tests/project-bugfix-round2-agent-lifetime.test.js",
+    "tests/project-bugfix-round2-agent-surface.test.js",
+    "tests/project-bugfix-round2-records.test.js"
+  ],
+  "newTestCount": 23,
+  "validation": { "report": "root-tests.json", "filesPassed": 9, "testsPassed": 61, "success": true },
+  "browser": {
+    "source": "Codex in-app browser, current 1280x720 window, port 5200",
+    "confirmed": ["设置输入页显示改键入口", "冲突确认实际打开并取消，B/Q原绑定保留", "开发测试遭遇战进入第一回合"],
+    "limits": "共享主线并行源码热更新会重载页面，未完成完整战斗实页流程；特殊组合由定向逻辑回归覆盖。未改真实存档。"
+  },
+  "followupValidation": { "note": "独立复核补齐对象形状坏文本/日期字段的验证，计入同一坏记录根因；输入/自动驱动复核未发现新回归", "filesPassed": 4, "testsPassed": 30, "exitCode": 0 },
+  "status": "完成未提交、编辑释放；材料窗口与最终合并验证见checks.json；未build/推送"
+}

@@ -1,0 +1,12 @@
+{
+  "task": "WF-module-boundaries-1023",
+  "date": "2026-10-23",
+  "review": "Compared current card zoom split with the task-start ui.js. Photo/card templates, cardIcon arguments, original-image source extraction, URL comparison, decode and cancellation paths are retained. No asset or exclusion algorithm is changed. The new dynamic URL consumer pins its content, probe and service adapter inputs. Re-reviewed the existing uncommitted art-mapping delta against HEAD: only cardArtRevisions for 16 career cards changes to career-final-20261023; overrides, scene selectors and all other fields are identical. This mapping was already present at FULL start and was not edited by this task. Retired-scene and shadowed-original candidate selections remain unchanged.",
+  "normalizedSha256": {
+    "game/src/ui/ui.js": "925d1ff1c88ba58503f7380b16dad45de9c117deb2cc8e92d57c4fd94d0578eb",
+    "game/src/ui/card-zoom-controller.js": "8e075bfe29e06c5077b648a92d104e737bd3471ea8615dfe0e965df7b2ee346c",
+    "game/src/ui/card-zoom-content.js": "0edd9a113b5db253a1b54bb52172d462bc5be5f25dd2a9e279adf04ea6a0d13c",
+    "game/src/ui/card-zoom-photo-source.js": "d95d88a1500de9484ce1a77106a8dce744cde61090c8c6e99dcfe7b84a193e99",
+    "game/data/art-mapping.json": "d0d66f5e0d54d200ce64b632da0624ba698dac218f5961485d127a5e7ff3a120"
+  }
+}

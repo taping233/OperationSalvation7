@@ -1,0 +1,721 @@
+{
+  "kind": "manual-implementation-snapshot",
+  "task": "WF-module-consolidation-1023",
+  "createdAt": "2026-10-23T13:40:11.632Z",
+  "baseline": ".tmp/module-consolidation-1023/baseline",
+  "validation": {
+    "executed": false,
+    "reason": "老板要求先完成全部修改并汇报；测试、类型、lint、构建、资源审计及实页均未执行"
+  },
+  "files": [
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "sha256": "0868fbf79c7bf0ace313ddd671d1ef0eaf6d1168cfda4358e6d494327315b3bb",
+      "baselineSha256": "6f0622127e907737ca59e5eee0e56469cac0140305834805d92a5758b4dd7b34",
+      "baselineLines": 516,
+      "lines": 517,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.domain.js",
+      "sha256": "0d0086e137f5a0820a9117d6fd69d80cb8ffa4dcbe71157f9a3164a5bce5acd4",
+      "baselineSha256": "6935a5e3e8d19d5a4ad6a2265020a257b00dd56bff1fb0290683030dcf4afed2",
+      "baselineLines": 148,
+      "lines": 149,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.domain.js",
+      "sha256": "45fc35f1227c3213f27865ed97758fc934f6600edb36985b3cd32febfcedf9b3",
+      "baselineSha256": "5b23c4eb1e436140017596767f8e20c0d2821c17f00292bc0aae3b77c57b59f8",
+      "baselineLines": 226,
+      "lines": 227,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "5680c8778a8bf830e0fcf20de6d816c1dea97c3186e09460b171ba583a1174f0",
+      "baselineSha256": "cdb7af560e7065881b216fe57862dc4bd61cfd2de469c9af78f878a0d7787892",
+      "baselineLines": 833,
+      "lines": 833,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "5ff1db57e3f066227296806667333fb9aed2450abd01c979e3fd0fa6281fe8a6",
+      "baselineSha256": "67613e902b2e44c1fa3d3f1809116cfc3a8d25d28586512675b9221f7094ec9b",
+      "baselineLines": 452,
+      "lines": 453,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "sha256": "7741438a3a9d885dbff1194439dec4f333fc8a7e4c355558eec28462129cbb5c",
+      "baselineSha256": "b0d5264e0113a1397fd34bc92ab5be546afa08b8d6c5d44532160fcd3f5e5152",
+      "baselineLines": 86,
+      "lines": 91,
+      "ownership": "shared-file-legacy-policy-delta-only"
+    },
+    {
+      "file": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "sha256": "e61c01a174a28866ac95c0139126e68caa2ba3f89dff1585fa8ce88311521704",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 88,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "sha256": "e2c4ae0e3f2484ea1b65ac4088cdfa9a2c00e488d4de25bb46799e737d74912b",
+      "baselineSha256": "509fd6a0a6c17502fbb148397993234ad8aab556cd65b84884df8814e7f08b28",
+      "baselineLines": 929,
+      "lines": 863,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.setup-mechanics.domain.js",
+      "sha256": "6e06fb610f8dbc298b6bd98e61062f0832b35b95df2a02e337cc9907ab4c6c40",
+      "baselineSha256": "a64e732c3660c92f2be1cb5a9c74100fc6ce4a70ee27b9de15d4d2989907359f",
+      "baselineLines": 140,
+      "lines": 141,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-start.js",
+      "sha256": "c509d6ddae82fa332fe45992d4deac38ac5ca8436ff6016c1681ddb44b4292fe",
+      "baselineSha256": "f913556f4372c4576259dbb23d1afe9440e0597fa083ead8a917d9008130eaba",
+      "baselineLines": 122,
+      "lines": 123,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "sha256": "80ecc9168ea89d00de72fbb558d1a7c65d1841f03532d210aecd600d6de6005e",
+      "baselineSha256": "53adb3aa56a25b17793b2a58eda6815c9a298b89044ff1d3a02ef4bfe9806497",
+      "baselineLines": 168,
+      "lines": 168,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/battle.foe-fight.js",
+      "sha256": "94daf33b1b9ba6f1e7a96d2dcfe4d6d9c90648daf19781091dc0383a232ed17e",
+      "baselineSha256": "3cd92b415f618249635ad4765746fbf906096cad63cc79132cd2b89c61e17cd0",
+      "baselineLines": 9,
+      "lines": 10,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "sha256": "cb22da88233c45b09d0857c44ab8d9be617a9e904c636a270ed137c0264cc180",
+      "baselineSha256": "f5728904891dc5dbf65ad36c57b263f049b23090151eed35f98a470ae8beb2f0",
+      "baselineLines": 36,
+      "lines": 37,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "sha256": "7166adaaab5a9ce9c48611bc830073f7a3fad8bbfe807c8ab6935002fa70a5c7",
+      "baselineSha256": "20bf59954808b043353d44d0cf3dbe43b81857ba5b6a4288c410b699986e1e8f",
+      "baselineLines": 161,
+      "lines": 162,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.ctx.js",
+      "sha256": "b64b1a192d992a48436a9b8b9634022d53e74a4c90be72352615fd01fff6313d",
+      "baselineSha256": "d175ea69b135b1a173b0b3128ade6342474ffef100e9f443b8499cbed20c0ec9",
+      "baselineLines": 106,
+      "lines": 107,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "sha256": "06c7d8f567cb10ed859f16adefa6ea2205e4d70a5d532624ec011d912d55e691",
+      "baselineSha256": "b64ad17f36aa0424afebc4bed7c83c00a371f233087cd6d3f3384ea39e53bf3c",
+      "baselineLines": 127,
+      "lines": 128,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-shell.js",
+      "sha256": "06bdcc41c08830603bc6e2b1d71baebb43c462ce7ceab3d7998fec5b86b94bdd",
+      "baselineSha256": "eb3579acf7a372584404477dcb6ae0246cded649c301198bf147ce05e9fcae81",
+      "baselineLines": 58,
+      "lines": 84,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "2330469cbfadd40d6b165a831016bfd03fea278da6f30f3cabf22e294f4f61e6",
+      "baselineSha256": "8142326743fbff108db14a7416db673abeb36ac386bba51c961bc451d0a3345d",
+      "baselineLines": 16,
+      "lines": 17,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "e4c3293af451170eac93c918a375b1d7214d761e398fb5d5663019aa6b00242b",
+      "baselineSha256": "db7ce49e5f5746af273516e20b0b1b822dc865cd5f4317c3eb7ae5179caa0660",
+      "baselineLines": 21,
+      "lines": 20,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/battle/view/battle.stage-view.js",
+      "sha256": "0013ac375564988067ebb3c2d1f7022b764d6a892414c57e6d03312f322de077",
+      "baselineSha256": "d887235859e534e68cfac221fea94856727c9a704cd59ff6eaa759d0abf369dc",
+      "baselineLines": 277,
+      "lines": 276,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/card-legacy-battle-policy.js",
+      "sha256": "26238480e42874c6d8d08346ee405abc5b9aeac1de655886b208be03570dfa29",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 41,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "sha256": "8e906e37f44bf9a4577241450f14cd021becdf218f0b9198b000282821a663ce",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 251,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "sha256": "bbfe19768151d4dd9bcad924dfa440b95796a7d300ae288ad3881f63747bf6ce",
+      "baselineSha256": "a0a8ce39b7f4f9b80d7f993c9c59840e37800892880a2bd1a5fe1fed84e77322",
+      "baselineLines": 1100,
+      "lines": 17,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.numeric.js",
+      "sha256": "dea07ba6cf5017fce91966e401f70fe93b784f9f30ab423bdb0a2a8dc928de8d",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 60,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.persistence.js",
+      "sha256": "671eedf6b1059a1de2a46ec3a162cca86af2e59f8bbfcfd8dba357dffa1027ba",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 9,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.renames.js",
+      "sha256": "11e375b28a5f14c31031e171e2c28d4bfe1e73c80835fa6d57e0a422d635a2c5",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 329,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "sha256": "937d202f99bb1f83ea4dbf0dfae63f985a283a076b238b749ba4f94addba1f83",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 478,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/core/game-boot-input.js",
+      "sha256": "932f24dd9c041c0083e0cd6e2a1b56a420eae5d32972295cb1273e7f9fded19d",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 216,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/core/game-boot-loop.js",
+      "sha256": "bcd7867639e002ed24d89ca9588e91d5f897ea2fc490e60345a5029733168bbb",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 145,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/core/game-map-selection.js",
+      "sha256": "b87bf12f61a5ab66ab07eacb7cb0e9d9cfa7708cd340e50994543e2091a7eeac",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 167,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "sha256": "22e221cfa4c6a98e338ddccacdfb7646a0005a8f81086600792a58ab4259d8f8",
+      "baselineSha256": "292b8135444c944a7f3735f89720e1d122bb1e8644b99c994b8b922b747dbd3b",
+      "baselineLines": 859,
+      "lines": 192,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "sha256": "56798c6feff1a2d222b38198c9564e87250422655958f81f448083f0df404797",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 175,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/bag-legacy-use.js",
+      "sha256": "7e6e505e82281bc24c61353a45e568ab5d2e440cd8ced8d77877b06d87254a99",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 156,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/bag-use-compatibility.js",
+      "sha256": "3fb692c45d86084f60d7f3fae79e4b78c73b785088b6b476f53a8f606ba5bad2",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 25,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "9790d7d134d036beb122a3753afe879b306a2d6cdd01fe2e3d1c7fbdd8f7119f",
+      "baselineSha256": "e2514aa43c56d7e8727a3c2dde339b987bc8e4454fb40f1869115bbc2defec64",
+      "baselineLines": 728,
+      "lines": 417,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "sha256": "73ec61fc3f279e6508239f7af270226bc9a01a1063fc9d43c6d5bd00b51721e2",
+      "baselineSha256": "5bcffb03a076d6e1d550f68d6e6e402478b4618bbb039bb3a8ef5b94a2e419b4",
+      "baselineLines": 229,
+      "lines": 243,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/hub/game.bag.safe-transfer.js",
+      "sha256": "1b78522c77d76fad0f2f259696ccf2e6d5a6296b6f1696a877f2f9e375506909",
+      "baselineSha256": "01c40c611d0fadc2ce2580ee1ae878dab6228f8b6299e98860e206555aec2b77",
+      "baselineLines": 109,
+      "lines": 112,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/README.md",
+      "sha256": "fbc13afdfecfcbdcf1a2ea64c3bbef655ac6afb0ffe17ea95dd439c1fd38c8ca",
+      "baselineSha256": "b0703fa080b279debd0e08342557313d780c8261ec85b750c04dacfb0be4cded",
+      "baselineLines": 71,
+      "lines": 74,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/run/game-session-departure.js",
+      "sha256": "ffb6d90b2b7c026fe38947cfcc18fb2d07de933ce144f1bbcbcb10c301fea099",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 207,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/run/game-session-persistence.js",
+      "sha256": "2bcc5916a06156f42242ce050545a90e03b1b16d190395cf0eeb47451bc8f051",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 272,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/run/game-session-restoration.js",
+      "sha256": "fc589e71e5bd25e0641a4152f5e6fbb0de14bf7150cf7faf2bfc8d5075e9825b",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 192,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "sha256": "b4cf3d4a99afdbf4c188b92f7eb40551e5bf22ccfd68bf4936b07cbf69a02249",
+      "baselineSha256": "1d5f57911335045aa309dbefc73f0e7dc02992c1e6d3eadb5498daa8c2e210c3",
+      "baselineLines": 906,
+      "lines": 905,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "sha256": "7876f5d10918c12de24044cefdec1abe2ad777581e4ddecf045b012ef91cbec5",
+      "baselineSha256": "cb6ab0a28bbf301fd002d36895edef647710dc346e9f03f6b92f78eff46aace9",
+      "baselineLines": 780,
+      "lines": 180,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/discovery-selection.js",
+      "sha256": "622227bdc16b1463e20a69ae43c8e680b7fec1455255c5ec249634cb8a65bdd8",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 104,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/game-map-controls.js",
+      "sha256": "b852d9b4f666bbfb55c6691b03481c1d5e0337ebf4e748d37c9e34c668555852",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 108,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/game-title-controller.js",
+      "sha256": "907cd5910c8baaef70586a3ee2bed141cbcad54b0117fc4af45d4548d9c9255a",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 104,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/game.menu.pages.js",
+      "sha256": "a6e227ebae044586ae68921437498baabaa298e5abb88c0e84dd7122ab0159a3",
+      "baselineSha256": "ebc71d5ce00897e3b7a62ad5bada36138b3562a96003f7d078be9f4b33a61eca",
+      "baselineLines": 1056,
+      "lines": 107,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-data.js",
+      "sha256": "d42cc11991472383172372483c007517b6aee7f5f70a6a6d98c21e3336c0178c",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 57,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-feedback.js",
+      "sha256": "e5f9e3a6bab9f0fc1ed560f69b22bd7dd85f73c937aa2b9e3a68d68d0fe1b17b",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 246,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-guide.js",
+      "sha256": "5d509805fe3d074572d366d5f0fe9361f3591a055c581721e99117d6183bf531",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 72,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-leave.js",
+      "sha256": "fc89452490164d08d2269cc5c05f06c1d01fe00ab9151377579a5c8672ecdf2b",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 160,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-settings.js",
+      "sha256": "cf7546273919b4bf2993a52e24a14bfca44ce2d9cc67dc33ff8d30679c923c4e",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 180,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-slot-view.js",
+      "sha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 58,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/menu-slots.js",
+      "sha256": "67a93f353b7c1c0fadcc236156d03029ced478915c725a210c1840d808777967",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 325,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "sha256": "dadc2134aa400abe19674d4c785344a6bf8b6da95d069f17fe05eab62eb965cd",
+      "baselineSha256": "7c0423bd4caded968e375daba69cbf93d49e2c39648a3a45fd7fc66e2a56c2ec",
+      "baselineLines": 75,
+      "lines": 75,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/src/ui/transition-handoff.js",
+      "sha256": "5515eb7d5ff94c2a68bffd999f42ee79cb6968d88eda92f71f17e073362b3815",
+      "baselineSha256": "682ced044dd90ea5eee0d5fd7a9be865c77f64b206859d8984062e458d34f786",
+      "baselineLines": 83,
+      "lines": 87,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-container-pages.test.js",
+      "sha256": "2034c00c0db0107ba275d25c08b3605b4b7acf7fae03fb69ea5c4a5583f977ed",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 54,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-item-rule-baseline.test.js",
+      "sha256": "fc2182ab05d5a4d2710d4ff6b7dfa68a4a93c0d2c038acf92c102230a7dae810",
+      "baselineSha256": "03ca325510251d2cb679b2c79f73f5181b2cdfcd1387623ae330a03e031b8c0c",
+      "baselineLines": 278,
+      "lines": 279,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-legacy-use-live-ports.test.js",
+      "sha256": "38ba7c5d5c74875a21141d709e9d43dd37f8309661cfbc34a25cffb89649c648",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 25,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-safe-transfer.test.js",
+      "sha256": "b3edac0f60aafdff300ba40411bad6113f0f723f16f05ac299ae7b43f4ac4c5e",
+      "baselineSha256": "8e98d1871ef43d9a2d2b2a82bb104417e3977766882d4df533076326df7e0eb4",
+      "baselineLines": 153,
+      "lines": 177,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-token-discover.test.js",
+      "sha256": "7ff2ae575028ff64d1713d69371a63f5b79e3ff9a4887c5ba02eb0af76a2f4e5",
+      "baselineSha256": "59245b4c61c0d0c2406d6535898039cfbac690faa1002054368522d96d056027",
+      "baselineLines": 97,
+      "lines": 115,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/bag-use-compatibility.test.js",
+      "sha256": "a430730a7c9be9a6971205bb95efe105fe8a575b854dc84f631695a958bad698",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 57,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "sha256": "84c2520583c6c091152ac4995f011cbf43f0e8a113dd2f8d2dba960370cbf40b",
+      "baselineSha256": "e0338f2e48704f31c5ced8144cbb1040e163713ab4aafd43d3fb8a7e136e876a",
+      "baselineLines": 136,
+      "lines": 136,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/battle-hud-info.test.js",
+      "sha256": "0e40f0305e9a7241f36aed9019e64df29672caf7dd4b46e45a5ab52e16fbe7b8",
+      "baselineSha256": "d4e1644ea47f19b54cdecf473e9c9a28de2975fe3debc821b8f5d8c4c9270407",
+      "baselineLines": 73,
+      "lines": 85,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/battle-persistent-stage.test.js",
+      "sha256": "7c215cd0ad1bafca7ed90784066e44ee7a0a93905beac6403e26c9ef3789f872",
+      "baselineSha256": "a2e4eca934bcb8cd9ebfedbe4bdc5e17675e92fcd551628adfd3e19f2c9ad534",
+      "baselineLines": 511,
+      "lines": 515,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "sha256": "48d96365f9080828a9a3f06ed31230d9ec2b362520321b5650a0e42c96e193c5",
+      "baselineSha256": "4e4ef6a202eff3656e21b190cb0e3e4d8b0d951524fb84437f0f95177af89e62",
+      "baselineLines": 273,
+      "lines": 274,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/card-sync-slices.test.js",
+      "sha256": "87915f4e230d3ed40973c95e5a7646e6b5e730081dad3dbf3daad284f0641e5f",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 102,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/dev-tools-lazy-entry.test.js",
+      "sha256": "05da3d2986807e5fe0c85bc6efa2c59e5f2fcaf2ccc6ec2b814471278477bb20",
+      "baselineSha256": "39c01a6f1277283e90e6246b97609c1b3c97c1c5660319c55a8f1541d9c30653",
+      "baselineLines": 258,
+      "lines": 259,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/discovery-selection.test.js",
+      "sha256": "683fa3aa90c5a5229ab22f13cb3d03d9fb59fae0644b167378b6d6ec4f4c3cd8",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 112,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/exp003-extraction-pocket-copy.test.js",
+      "sha256": "e909ad617b5774190e0529c7c306777594bb985cbbedf7debfc3a42d483ec8cb",
+      "baselineSha256": "ec80653b15540610fbf0f4aa2cef25f31ce83540ec4fa1e6bbd19112c88c5fc4",
+      "baselineLines": 80,
+      "lines": 80,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/game-boot-slices.test.js",
+      "sha256": "72248af23b36ada0b03cde6f408fcc97a4aeb784d32f44f5639c86259d14ded2",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 98,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/game-session-slices.test.js",
+      "sha256": "2ba1fbc9eaf8f9294a323d9c90cc693f058d65edc3f13193f9888e4c39ca8a8c",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 124,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/held-scene-handoff.test.js",
+      "sha256": "4c4e6b019f7fe290822b39f8d72f7fd464e0fd5b3a462bfe5add8bbeb41e9100",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 103,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/hub-flow-regression.test.js",
+      "sha256": "69892fd915ac5e7152e7185630ce30743aaf8f570d26a2de8aa3888834734bac",
+      "baselineSha256": "053200d842e7d21e0ec974b73e876b3e6dc812f2559e96ba8385a74fe5ce6515",
+      "baselineLines": 325,
+      "lines": 325,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/hub-lazy-entry.test.js",
+      "sha256": "c4cbf7d110a3d90f73920f02736657bc09be537545c02684cba9176ccb733fb8",
+      "baselineSha256": "85ee042a4fe94b50c86cc2c3cad80920fa856738f8f6e4e6200460bce09d9f91",
+      "baselineLines": 283,
+      "lines": 283,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/item15-18-fixes.test.js",
+      "sha256": "86ff4bacca1c85cbe5a73dce19157cf66c36942b4329b3a89c8002c3e5b5ca7e",
+      "baselineSha256": "11a8ce3993683a8c0548dfa98b8b8b8f1f0da72188a6821a40d051b5faef19fe",
+      "baselineLines": 96,
+      "lines": 96,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/legacy-battle-policy.test.js",
+      "sha256": "d4828ef6714e3edebe618a9e791d2718f9e2dd5250d840e2008a04df6894e1bd",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 93,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/menu-pages-slices.test.js",
+      "sha256": "1e32281dd4edf7bec8c46d8c5b9c917fba1b7f58f8fb3f0a6106e6ddc883ecee",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 101,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/partner-interaction.test.js",
+      "sha256": "c20d9bd9fa6a03a2bab8b81361f66fadcc2c458dd558f106ce2ede199f084926",
+      "baselineSha256": "b5c3da8eda5ec94076a70ed613227494f2f599453a9503f7cefd5a453f3ae26d",
+      "baselineLines": 236,
+      "lines": 236,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/random.test.js",
+      "sha256": "1ab385571945b1ccf4286a2926703e4ec5c2fe7502161781176e847eae6e9ddf",
+      "baselineSha256": "ad2fbae1682d5cb7a9c2a0d3f256b22f21a79aeec4a12f565b41ea80fa623078",
+      "baselineLines": 59,
+      "lines": 60,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "sha256": "04ba91b949121c6ae4907a023342daa8e5c4892c936096e9d7187b222446152f",
+      "baselineSha256": "ac0ae1c70b0bfae7533b94d34af47f6ff3f90674581d2dabdb48fe2c3a9cbfd2",
+      "baselineLines": 83,
+      "lines": 83,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "tests/xart-z1-batch2.test.js",
+      "sha256": "0c0282132e54eaa78b92a6c5a1c8bc3f48f392f8d944fc9f8c05c0db894cf030",
+      "baselineSha256": "f11feb7841eeac804dfc9814c53916bf93e0094f5e2ddb1e0ae2ebae3a6a7d4c",
+      "baselineLines": 98,
+      "lines": 98,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "ec889ef0c0c0af00a9fa88a577af54801bd56aaf76598f098ed0e4ad99103c52",
+      "baselineSha256": "bdd0a3a143a81bc78ea970c4f44c77105e7c685424e55b2b82ab4bbab8f43f0a",
+      "baselineLines": 405,
+      "lines": 412,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "sha256": "56e0f5ded2099db139e4850588dd64901598be629b8ae76f060cd1961735afe1",
+      "baselineSha256": "b70224f4eb61868497a2ef789f6304be39b7e2e8ec2c800c4d41b6b16abd6c06",
+      "baselineLines": 305,
+      "lines": 310,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "game/css/discovery-selection.css",
+      "sha256": "7e04025d227096397f0f266a5aaf0ca0bce08b2311de962aab5a8212ef07bd0c",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 20,
+      "ownership": "this-batch-delta"
+    },
+    {
+      "file": "docs/save-format.md",
+      "sha256": "aacafb8e1588553b8561601755d0d9e1c070d1e95e00306b41fe16ab46a93f4e",
+      "baselineSha256": null,
+      "baselineLines": null,
+      "lines": 167,
+      "ownership": "this-batch-delta"
+    }
+  ],
+  "foreignObserved": [
+    "game/src/battle/effects/battle.card-inspection.domain.js",
+    "game/src/battle/view/battle.hand-inspector.js",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/cards/card-description-text.js",
+    "game/src/cards/card-instance-fields.js",
+    "game/src/cards/card-state-presentation.js",
+    "game/src/cards/cards.view.js",
+    "game/src/ui/equipment-info.js"
+  ],
+  "sharedFiles": [
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "note": "Only legacy card-policy delta belongs to this batch; card-state presentation delta is separately owned."
+    }
+  ],
+  "resourceReview": {
+    "kind": "manual-source-review-only",
+    "assetAuditExecuted": false,
+    "mappingChange": "cardArtRevisions only; runtime asset paths retained"
+  }
+}

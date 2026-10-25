@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt8-hero-mage",
+      "generated_source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\lore-raving-1024\\revision-2.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-lore-raving/cards-lore-raving-source.png",
+        "bytes": 1947225,
+        "sha256": "4d89e8e0a85de250ca633da6a423eae0ad46a93bb7341f9f07d9903ca7abde6f"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-lore-raving/cards-lore-raving-full-before.webp",
+          "bytes": 168346,
+          "sha256": "01dd5ea11686c5e1d75a48c2d19d761772f9c3a837455a7bed10b938e5aec3f3"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-lore-raving/cards-lore-raving-thumb-before.webp",
+          "bytes": 22718,
+          "sha256": "250de1125caa2da3d86bfae114296a675293cd450ba296aff23b00348cbd9ba1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/lore-raving.webp",
+          "bytes": 167302,
+          "sha256": "5060e62a5ee87235ac051aad194db3f5a57045d20fa8e74918b3bf23cf517bc5",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/lore-raving.webp",
+          "bytes": 25796,
+          "sha256": "de216249df97ad74791e1f8d485d990b00f708f67095d8ce9d9a584f1e5b3d3e",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-lore-raving-original-composition-v6-20261004",
+      "revision_after": "lore-raving-nohat-ice-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/lore-raving.webp",
+            "ext": "webp",
+            "bytes": 168346,
+            "sha256": "01dd5ea11686c5e1d75a48c2d19d761772f9c3a837455a7bed10b938e5aec3f3",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+          },
+          "after": {
+            "path": "cards/lore-raving.webp",
+            "ext": "webp",
+            "bytes": 167302,
+            "sha256": "5060e62a5ee87235ac051aad194db3f5a57045d20fa8e74918b3bf23cf517bc5",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-lore-raving/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/lore-raving.webp",
+            "ext": "webp",
+            "bytes": 22718,
+            "sha256": "250de1125caa2da3d86bfae114296a675293cd450ba296aff23b00348cbd9ba1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-baita-lore-raving/images-v6.json"
+          },
+          "after": {
+            "path": "thumbs/cards/lore-raving.webp",
+            "ext": "webp",
+            "bytes": 25796,
+            "sha256": "de216249df97ad74791e1f8d485d990b00f708f67095d8ce9d9a584f1e5b3d3e",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-lore-raving/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

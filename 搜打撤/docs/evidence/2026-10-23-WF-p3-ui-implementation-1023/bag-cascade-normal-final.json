@@ -1,0 +1,13 @@
+{
+  "card": {
+    "label": "查看初始攻击，2张",
+    "motion": "true",
+    "transform": "matrix(1.01128, 0, 0, 1.01128, 0, -3.38482)",
+    "transition": "opacity, filter, box-shadow"
+  },
+  "rail": {
+    "hover": true,
+    "transform": "none",
+    "transition": "background, color, border-color, box-shadow"
+  }
+}

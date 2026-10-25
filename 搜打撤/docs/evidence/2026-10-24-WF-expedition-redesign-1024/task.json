@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-expedition-redesign-1024",
+  "date": "2026-10-24",
+  "owner": "Friday",
+  "goal": "完整整改地图至房间奖励背包连续操作及公共UI美术动效",
+  "paths": [
+    "game/src/ui",
+    "game/src/run/chests.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/run/game.run.resources.js",
+    "game/src/run/game.run.flow.js",
+    "game/src/battle",
+    "game/src/core/rule-config.js",
+    "game/css",
+    "game/data/beginner-guide.json",
+    "tests",
+    "scripts/generate-compendium.mjs",
+    "docs/rules.md",
+    "docs/requested-card-batch.md",
+    "docs/single-reward-flow.md",
+    "docs/modules/secondary-ui-style.md",
+    "docs/game-compendium.md"
+  ],
+  "doneWhen": [
+    "连续操作链及相关公共界面实现并在内置浏览器复核"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "11项类型检查与覆盖审计、修改JS/CSS静态检查通过；定向回归与实际连续流程见README",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "battle-entry-view既有三项支付代价入场测试失败，改动前主目录复测相同；未运行build与远端CI，未自然游玩全部随机事件和首脑"
+  ],
+  "updatedAt": "2026-10-24T07:22:47.567Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

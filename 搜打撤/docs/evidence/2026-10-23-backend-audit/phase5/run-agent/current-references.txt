@@ -1,0 +1,13 @@
+.\搜打撤\game\src\hub\game.cardslib.page.js:13:// 供 perf-ledger-capture --base-url "...?libPerfDiag=X" 做同口径滚动栅格化分层 A/B。
+.\搜打撤\scripts\gate-plan.mjs:74:  'scripts/perf-ledger-capture.mjs',    // 手动性能台账采集
+.\搜打撤\scripts\perf-ledger-capture.mjs:2: * perf-ledger-capture.mjs —— 全场景性能账本采集脚本（夜班 B 线 2026-09-29）
+.\搜打撤\scripts\perf-ledger-capture.mjs:16: *   node scripts/perf-ledger-capture.mjs
+.\搜打撤\scripts\perf-ledger-capture.mjs:76:  fs.writeFileSync(cfg, `// perf-ledger-capture 自动生成的隔离配置（cacheDir 独立，避免与主区并发写）\nimport base from ${JSON.stringify(wtFileUrl)};\nexport default { ...base, cacheDir: ${JSON.stringify(cacheDir)} };\n`);
+.\搜打撤\tests\perf-ledger-port-occupancy.test.js:1:/* INFRA-06 回归：perf-ledger-capture.mjs 在 CDP 端口被外部占用时必须报错退出，
+.\搜打撤\tests\perf-ledger-port-occupancy.test.js:76:  const captureUrl = new URL('../scripts/perf-ledger-capture.mjs', import.meta.url).href;
+.\搜打撤\tests\perf-ledger-port-occupancy.test.js:78:    + 'process.argv = [process.execPath, "perf-ledger-capture.mjs", ...process.argv.slice(1)]; '
+.\搜打撤\tests\perf-ledger-drive.test.js:8:const source = readFileSync(new URL('../scripts/perf-ledger-capture.mjs', import.meta.url), 'utf8');
+.\搜打撤\docs\PERF-LEDGER-2026-09-29.md:25:node scripts/perf-ledger-capture.mjs --rounds 3 --duration 6000 --out docs/evidence/perf-ledger-2026-09-29
+.\搜打撤\docs\PERF-LEDGER-2026-09-29.md:82:- 采集脚本（共享区，一条命令可重跑）：`搜打撤/scripts/perf-ledger-capture.mjs`
+.\搜打撤\docs\PHOTOLIB-PERF-TASK-2026-09-29.md:44:测量口径：`node scripts/perf-ledger-capture.mjs --only photo --rounds 3 --duration 6000 --wt "D:/素材/代号柒/搜打撤" --out docs/evidence/photolib-perf-task-2026-09-29/<baseline|after>`；打开耗时用独立探针 `docs/evidence/photolib-perf-task-2026-09-29/open-probe.mjs`（DEV + `?photoFps=1` 口径，标题态开门，量同步渲染 ms + 双 rAF 首帧 ms + 打开窗口 LoAF）。
+.\搜打撤\eslint.config.js:285:    files: ['game/tools/**/*.{js,mjs,cjs}', 'scripts/workflow-browser.mjs', 'scripts/perf-ledger-capture.mjs'],

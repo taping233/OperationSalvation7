@@ -1,0 +1,210 @@
+{
+  "status": "passed",
+  "method": "Matcher expected-argument AST and it/test/describe registration/skip calls unchanged",
+  "files": [
+    {
+      "file": "tests/backpack-layout.test.js",
+      "matchers": 34,
+      "testRegistrations": 6,
+      "unchanged": true
+    },
+    {
+      "file": "tests/backpack-rail-alignment.test.js",
+      "matchers": 12,
+      "testRegistrations": 4,
+      "unchanged": true
+    },
+    {
+      "file": "tests/base-subpage-header-readability.test.js",
+      "matchers": 9,
+      "testRegistrations": 3,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-card-results.test.js",
+      "matchers": 53,
+      "testRegistrations": 9,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-decision-lifecycle.test.js",
+      "matchers": 23,
+      "testRegistrations": 5,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-decision-readability.test.js",
+      "matchers": 80,
+      "testRegistrations": 12,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "matchers": 58,
+      "testRegistrations": 12,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-decision-shell-review.test.js",
+      "matchers": 16,
+      "testRegistrations": 4,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-effect-feedback.test.js",
+      "matchers": 122,
+      "testRegistrations": 30,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "matchers": 219,
+      "testRegistrations": 43,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-infusion-chip-bounds.test.js",
+      "matchers": 3,
+      "testRegistrations": 1,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-pile-readability.test.js",
+      "matchers": 32,
+      "testRegistrations": 6,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-potion-bar-layout.test.js",
+      "matchers": 10,
+      "testRegistrations": 4,
+      "unchanged": true
+    },
+    {
+      "file": "tests/battle-secondary-overlay.test.js",
+      "matchers": 113,
+      "testRegistrations": 23,
+      "unchanged": true
+    },
+    {
+      "file": "tests/card-face-presentation.test.js",
+      "matchers": 47,
+      "testRegistrations": 11,
+      "unchanged": true
+    },
+    {
+      "file": "tests/card-reading-typography.test.js",
+      "matchers": 26,
+      "testRegistrations": 5,
+      "unchanged": true
+    },
+    {
+      "file": "tests/compact-reward-layout.test.js",
+      "matchers": 9,
+      "testRegistrations": 3,
+      "unchanged": true
+    },
+    {
+      "file": "tests/css-dead-dom-budget.test.js",
+      "matchers": 16,
+      "testRegistrations": 6,
+      "unchanged": true
+    },
+    {
+      "file": "tests/event-reward-layout.test.js",
+      "matchers": 26,
+      "testRegistrations": 3,
+      "unchanged": true
+    },
+    {
+      "file": "tests/event-scene-readability.test.js",
+      "matchers": 50,
+      "testRegistrations": 12,
+      "unchanged": true
+    },
+    {
+      "file": "tests/extraction-rewards-view.test.js",
+      "matchers": 69,
+      "testRegistrations": 13,
+      "unchanged": true
+    },
+    {
+      "file": "tests/hub-personnel-portrait.test.js",
+      "matchers": 44,
+      "testRegistrations": 10,
+      "unchanged": true
+    },
+    {
+      "file": "tests/map-health-hud.test.js",
+      "matchers": 60,
+      "testRegistrations": 13,
+      "unchanged": true
+    },
+    {
+      "file": "tests/partner-interaction.test.js",
+      "matchers": 64,
+      "testRegistrations": 16,
+      "unchanged": true
+    },
+    {
+      "file": "tests/pocket-restore-interface.test.js",
+      "matchers": 88,
+      "testRegistrations": 14,
+      "unchanged": true
+    },
+    {
+      "file": "tests/reward-action-clipping.test.js",
+      "matchers": 15,
+      "testRegistrations": 5,
+      "unchanged": true
+    },
+    {
+      "file": "tests/reward-frame-review.test.js",
+      "matchers": 41,
+      "testRegistrations": 6,
+      "unchanged": true
+    },
+    {
+      "file": "tests/reward-receipt-clarity.test.js",
+      "matchers": 19,
+      "testRegistrations": 7,
+      "unchanged": true
+    },
+    {
+      "file": "tests/sacrifice-layout-readability.test.js",
+      "matchers": 25,
+      "testRegistrations": 5,
+      "unchanged": true
+    },
+    {
+      "file": "tests/sts2-cast-layout-1021.test.js",
+      "matchers": 30,
+      "testRegistrations": 10,
+      "unchanged": true
+    },
+    {
+      "file": "tests/terminal-result-readability.test.js",
+      "matchers": 27,
+      "testRegistrations": 7,
+      "unchanged": true
+    },
+    {
+      "file": "tests/ui-design-system.test.js",
+      "matchers": 27,
+      "testRegistrations": 7,
+      "unchanged": true
+    },
+    {
+      "file": "tests/wf-feedback1021-c-hand-select-grid.test.js",
+      "matchers": 24,
+      "testRegistrations": 5,
+      "unchanged": true
+    },
+    {
+      "file": "tests/wf-feedback1021-c-return-map.test.js",
+      "matchers": 13,
+      "testRegistrations": 4,
+      "unchanged": true
+    }
+  ]
+}

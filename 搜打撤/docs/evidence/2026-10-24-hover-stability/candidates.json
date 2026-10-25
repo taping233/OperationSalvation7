@@ -1,0 +1,658 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 57,
+    "selector": ".ov-btn:hover:not(:disabled), .hs-btn:hover:not(:disabled), .menu-btn:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateX(3px)"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 88,
+    "selector": "#overlay :is(.hub-back, .pg-back, .ag-back) -> &:hover",
+    "declarations": [
+      "transform:translateX(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 95,
+    "selector": "#overlay .hub-tab -> &:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 109,
+    "selector": "#overlay -> & :is(.slot-card, .shop-slot, .evt-opt):hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 126,
+    "selector": "#overlay -> & .cls2-confirm:hover",
+    "declarations": [
+      "transform:translateX(6px)"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 128,
+    "selector": "#overlay -> & .cls2-strip > *:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/archive-motion.css",
+    "line": 62,
+    "selector": "body:not(.reduce-motion) #overlay -> &#overlay[data-archive-motion] .slot-card:is(:hover,:focus-within)",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 113,
+    "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] -> & .cls2-pool-btn:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 134,
+    "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-face -> &:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 144,
+    "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-confirm -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 165,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .pool-back:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 210,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .pool-card-button.lib-cardwrap:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 223,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .cls-foot .hs-btn:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 224,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] -> & .cls-foot .ov-btn.ok:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/base-collection-v4.css",
+    "line": 20,
+    "selector": "#overlay #hubMain .collection-workspace[data-collection-variant=\"owned\"] -> & .collection-item:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "line": 19,
+    "selector": "#overlay #hubMain.pg.hub.base-camp button.base-command[data-act] -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "line": 46,
+    "selector": "#overlay #hubMain.pg.hub.base-camp -> & .facility-tile:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "line": 55,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .base-home-launch #btnDeploy -> &:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/base-home-v7.css",
+    "line": 27,
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 -> & #btnDeploy:hover",
+    "declarations": [
+      "transform:translateX(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/base-page-motion-v7.css",
+    "line": 35,
+    "selector": "#overlay#overlay #hubMain.base-frame-v7 -> & .base-home-v7 :is(\r\n  .base-home-utility button, .base-home-launch button\r\n):hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/base.css",
+    "line": 270,
+    "selector": "#bagBtn -> &:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/base.css",
+    "line": 371,
+    "selector": ".mini-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "line": 76,
+    "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-card.bt-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-6px)"
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "line": 26,
+    "selector": ".bt-foe -> &.can-target:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "line": 107,
+    "selector": ".bt-potion -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 44,
+    "selector": ".hs-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 71,
+    "selector": ".lib-cardwrap:where(:not(.studio-photo)) -> &:hover",
+    "declarations": [
+      "transform:scale(1.17) rotate(-1.2deg)"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 87,
+    "selector": ".shop-slot -> &:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/collection-workspace.css",
+    "line": 25,
+    "selector": "#overlay #hubMain .collection-workspace -> & .card-browser-page:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "line": 114,
+    "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay -> & :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), & .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 150,
+    "selector": "#overlay .cls2-face -> &:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 211,
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button -> &:hover,\n&:focus-visible",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition.css",
+    "line": 179,
+    "selector": "#title -> & .ak-circle:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition.css",
+    "line": 247,
+    "selector": "#title .ak-start -> &:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 46,
+    "selector": ".mode-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 49,
+    "selector": "#btnDeploy -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 71,
+    "selector": ".dep-foot #btnDeploy -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 133,
+    "selector": ".cls2-face -> &:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 156,
+    "selector": ".cls2-confirm -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 174,
+    "selector": ".pet-chip -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 27,
+    "selector": ".bt-pile -> &.clickable:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 34,
+    "selector": ".bt-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-6px) scale(1.04)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 81,
+    "selector": ".bt-infchip -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px) scale(1.05)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 98,
+    "selector": ".menu-btn -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 184,
+    "selector": ".slot-page .slot-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-4px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 246,
+    "selector": "#btnHome:hover, #btnMute:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 253,
+    "selector": "#btnHome.exit-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 365,
+    "selector": ".ov-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 151,
+    "selector": "#overlay #hubMain.hub-ach .mini-btn.ok -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-battle-ui.css",
+    "line": 83,
+    "selector": "#overlay .card.discover .choice-list .ov-btn -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-datapage.css",
+    "line": 140,
+    "selector": "#overlay .pg.data-tuned -> & .ov-btn:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-events.css",
+    "line": 106,
+    "selector": "#overlay .node-pg:not(.event-themed) .evt-opt -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateX(5px)"
+    ]
+  },
+  {
+    "file": "game/css/page-events.css",
+    "line": 159,
+    "selector": "#overlay .node-pg:not(.event-themed) .node-foot .ov-btn -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-events.css",
+    "line": 205,
+    "selector": "#overlay .card.scene .scene-ops .ov-btn -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "line": 106,
+    "selector": "#topBtns -> & #btnHelp:hover,\r\n& #btnMute:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "line": 129,
+    "selector": "#topBtns #btnLocate -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "line": 83,
+    "selector": "#overlay .card.chest -> & .bt-card:hover",
+    "declarations": [
+      "transform:translateY(-8px)"
+    ]
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "line": 267,
+    "selector": "#overlay .card:has(.help-body) .ov-btn.ok -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "line": 253,
+    "selector": "#overlay .pg.settings-page -> & .mini-btn:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/page-slot-select.css",
+    "line": 407,
+    "selector": "#overlay .slot-page .slot-card-ops .mini-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/preparation.css",
+    "line": 56,
+    "selector": ".prep-preset -> &:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/rarity-design-lab.css",
+    "line": 9,
+    "selector": ".card-button -> &:hover",
+    "declarations": [
+      "transform:translateY(-5px)"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 29,
+    "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout=\"map\"] -> .expedition-toolbar button:hover:not(:disabled)",
+    "declarations": [
+      "translate:0 -2px"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 84,
+    "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout=\"map\"] .expedition-map-preview -> .expedition-preview-enter:hover:not(:disabled)",
+    "declarations": [
+      "translate:2px 0"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 125,
+    "selector": "#overlay .node-pg:not(.event-themed) -> .evt-opt:hover:not(:disabled)",
+    "declarations": [
+      "translate:4px 0"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 154,
+    "selector": "#overlay .battle-stage.sts -> .sts-end-turn:hover:not(:disabled)",
+    "declarations": [
+      "translate:0 -2px"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 182,
+    "selector": "body #overlay .card .room-reward.reward-replica -> .reward-unit:not(.got):not(.dropped):hover",
+    "declarations": [
+      "translate:0 -5px"
+    ]
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "line": 184,
+    "selector": "body #overlay .card .room-reward.reward-replica -> .reward-claim:hover:not(:disabled)",
+    "declarations": [
+      "translate:0 -2px"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 161,
+    "selector": ".evt-opt -> &:hover",
+    "declarations": [
+      "transform:translateX(5px)"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 294,
+    "selector": ".node-pg .fire-restore-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-6px) scale(1.04)"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 321,
+    "selector": ".shop-slot -> &:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 344,
+    "selector": ".shop-back -> &:hover",
+    "declarations": [
+      "transform:translateY(-50%) translateX(3px)"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 403,
+    "selector": "#resHud .chip-mini -> &:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 521,
+    "selector": "button.event-choice-card -> &:hover,\n  &:focus-visible",
+    "declarations": [
+      "transform:translateY(-5px)"
+    ]
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 269,
+    "selector": "#title.home-composed -> & .home-tool:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 419,
+    "selector": ".dep-card -> &:hover",
+    "declarations": [
+      "transform:translateY(-3px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 439,
+    "selector": ".bag-cell -> &.filled:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 612,
+    "selector": "#overlay .card.chest -> & .bt-card:hover",
+    "declarations": [
+      "transform:translateY(-8px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 667,
+    "selector": "#overlay .sc-shop .shop-slot -> &.buy:hover",
+    "declarations": [
+      "translate:0 -3px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 736,
+    "selector": "#overlay .card.battle-bag -> & .battle-bag-slot:hover",
+    "declarations": [
+      "transform:translateY(-2px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 1060,
+    "selector": ".devc-stop -> &:hover:not(:disabled)",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 1083,
+    "selector": ".devc-danger-btn -> &:hover",
+    "declarations": [
+      "transform:translateY(-1px)"
+    ]
+  }
+]

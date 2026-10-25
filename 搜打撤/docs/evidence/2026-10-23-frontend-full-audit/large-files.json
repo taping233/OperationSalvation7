@@ -1,0 +1,7 @@
+[
+  {
+    "path": "cross-file-consumer-review.json",
+    "sha256": "4c901480291b505eb026ebfc5987b9db757c24bf89560ca2f235831826a5b449",
+    "acquisition": "node .tmp/frontend-full-audit-1023.cjs，依据初次入口候选报告与静态消费者盘点生成；扫描时输入指纹见inventory.json"
+  }
+]

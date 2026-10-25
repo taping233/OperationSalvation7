@@ -1,0 +1,111 @@
+/* Home cover composition layers: diagonal slab, corner brackets, outlined ghost word, side rail, beams, plate index and sweep.
+   Loaded by src/ui/home-layers.js after home-polish.css. */
+
+/* Gold segment travels along the diagonal divider. */
+body #title.home-composed .home-slash { position: absolute; top: 0; right: 0; width: 38%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; animation: hlSlashIn 1.1s var(--ease-entrance) .35s both; }
+body #title.home-composed .home-slash .hs-edge { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hlDraw 1.6s var(--ease-entrance) .6s forwards; }
+body #title.home-composed .home-slash .hs-accent {
+  transform-box: view-box;
+  animation: hlAccentTravel 18s ease-in-out infinite alternate;
+  stroke: #d9c18a; opacity: .5;
+  transition: opacity var(--home-ui-region) var(--home-ui-ease);
+}
+@keyframes hlAccentTravel {
+  from { transform: translate(0%, 0%); }
+  to { transform: translate(-18.96%, 79%); }
+}
+body #title.home-composed[data-home-attention="collection"] { --home-frame-x: -5.7%; --home-frame-y: 23.75%; --home-rail-mark: 44%; }
+body #title.home-composed[data-home-attention="system"] { --home-frame-x: -12.3%; --home-frame-y: 51.25%; --home-rail-mark: 76%; }
+body #title.home-composed:is([data-home-attention="collection"],[data-home-attention="system"]) .home-slash .hs-accent { opacity: 1; }
+@keyframes hlSlashIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes hlDraw { to { stroke-dashoffset: 0; } }
+
+/* Corner brackets framing the viewport. */
+body #title.home-composed .home-corner { position: absolute; z-index: 3; width: 26px; height: 26px; pointer-events: none; opacity: 0; animation: hlCornerIn .8s var(--ease-entrance) 1.1s both; }
+body #title.home-composed .home-corner::before { content: ''; position: absolute; inset: 0; border: 0 solid #ffffff73; }
+body #title.home-composed .home-corner-tl { left: 18px; top: 46px; }
+body #title.home-composed .home-corner-tl::before { border-width: 1px 0 0 1px; }
+body #title.home-composed .home-corner-tr { right: 18px; top: 46px; }
+body #title.home-composed .home-corner-tr::before { border-width: 1px 1px 0 0; }
+body #title.home-composed .home-corner-bl { left: 18px; bottom: 18px; }
+body #title.home-composed .home-corner-bl::before { border-width: 0 0 1px 1px; }
+body #title.home-composed .home-corner-br { right: 18px; bottom: 18px; }
+body #title.home-composed .home-corner-br::before { border-width: 0 1px 1px 0; }
+body #title.home-composed .home-corner-tl::after { content: ''; position: absolute; left: -1px; top: -1px; width: 7px; height: 7px; background: var(--ak-yellow); }
+@keyframes hlCornerIn { from { opacity: 0; transform: scale(1.8); } to { opacity: 1; transform: none; } }
+
+/* Giant outlined word sliding very slowly; the static outer layer masks it out behind the portrait. */
+body #title.home-composed .home-ghost {
+  position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 30%, transparent 42%, transparent 64%, #000 76%, #000 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 30%, transparent 42%, transparent 64%, #000 76%, #000 100%);
+  animation: hlFade 2.4s ease-out 1.2s both;
+}
+body #title.home-composed .home-ghost-track {
+  position: absolute; left: 0; bottom: -3%; display: flex; width: max-content; white-space: nowrap;
+  font: 800 clamp(120px, calc(var(--game-layout-width, 100vw) * 0.21), 290px)/1 var(--font-label); letter-spacing: .04em; color: transparent; -webkit-text-stroke: 1px #c7d4df1a;
+  animation: hlGhost 180s linear infinite;
+}
+body #title.home-composed .home-ghost-track span { padding-right: .5em; }
+@keyframes hlGhost { to { transform: translateX(-50%); } }
+@keyframes hlFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Left rail: the ruler marks scene attention instead of running its own perpetual scan. */
+body #title.home-composed .home-rail { position: absolute; left: 20px; top: 34%; height: 34%; width: 14px; z-index: 3; pointer-events: none; animation: hlFade 1.2s ease-out 1.5s both; }
+body #title.home-composed .home-rail-text {
+  position: absolute; left: 0; top: 0; writing-mode: vertical-rl; font: 700 10px/1 var(--font-label); letter-spacing: .5em; text-transform: uppercase; color: #ffffff73; white-space: nowrap;
+}
+body #title.home-composed .home-rail-ruler {
+  position: absolute; left: 12px; top: 0; bottom: 0; width: 5px;
+  background: repeating-linear-gradient(180deg, #ffffff4d 0 1px, transparent 1px 8px), linear-gradient(90deg, #ffffff33 0 1px, transparent 1px);
+}
+body #title.home-composed .home-rail-ruler::after {
+  content: ''; position: absolute; left: -2px; width: 11px; height: 2px; top: var(--home-rail-mark,20%);
+  background: #d9c18a; opacity: .55;
+  transition: top var(--home-ui-region) var(--home-ui-ease), opacity var(--home-ui-region) var(--home-ui-ease);
+}
+body #title.home-composed[data-home-attention="primary"] .home-rail-ruler::after { opacity: 1; }
+
+/* Slow volumetric beams from above. */
+body #title.home-composed .home-beams {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen;
+  background: conic-gradient(from 168deg at 52% -12%, transparent 0 4deg, #cfe0ff26 7deg, transparent 11deg, transparent 17deg, #cfe0ff1c 20deg, transparent 25deg, transparent 31deg, #cfe0ff20 34deg, transparent 38deg, transparent 360deg);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 70%); mask-image: linear-gradient(180deg, #000, transparent 70%);
+  animation: hlBeams 14s ease-in-out infinite alternate;
+}
+@keyframes hlBeams { from { opacity: .24; } to { opacity: .5; } }
+
+/* Menu plates: index numbers, hover sweep, letter-spacing breath. */
+body #title.home-composed .home-index { position: absolute; z-index: 1; top: 8px; font: 700 10px/1 var(--font-label); letter-spacing: .24em; color: #ffffff66; transition: color var(--home-touch-time,480ms) var(--home-touch-ease,ease); }
+body #title.home-composed .home-primary .home-index { right: 38px; }
+body #title.home-composed .home-start .home-index { right: 70px; top: 14px; color: #14120a99; }
+body #title.home-composed .home-secondary .home-index { left: 72px; }
+body #title.home-composed .home-system .home-index { left: 64px; top: 6px; }
+body #title.home-composed .home-plate:hover .home-index,
+body #title.home-composed .home-plate:focus-visible .home-index { color: var(--ak-blue-hi); }
+body #title.home-composed .home-start:hover .home-index { color: #14120a; }
+body #title.home-composed .home-sweep {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; clip-path: var(--plate-shape);
+  background: linear-gradient(105deg, transparent 40%, #bfe6ff40 50%, transparent 60%) 170% 0 / 260% 100% no-repeat; transition: background-position .8s var(--ease-entrance);
+}
+body #title.home-composed .home-plate:hover .home-sweep,
+body #title.home-composed .home-plate:focus-visible .home-sweep { background-position: -70% 0; }
+/* Text keeps its width while the plate glides; the highlight and sweep give feedback. */
+
+/* Motion safety: paused under a covering page; static end states when motion is reduced. */
+body.page-covered #title.home-composed .home-ghost-track,
+body.page-covered #title.home-composed .home-slash .hs-accent,
+body.page-covered #title.home-composed .home-beams { animation-play-state: paused !important; }
+body.reduce-motion #title.home-composed .home-slash .hs-accent { animation: none; }
+body.reduce-motion #title.home-composed .home-beams,
+body.reduce-motion #title.home-composed .home-ghost { display: none; }
+body.reduce-motion #title.home-composed .home-corner { opacity: 1; }
+body.reduce-motion #title.home-composed .home-slash .hs-edge { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  body #title.home-composed .home-slash .hs-accent { animation: none; }
+  body #title.home-composed .home-beams, body #title.home-composed .home-ghost { display: none; }
+  body #title.home-composed .home-corner { opacity: 1; }
+  body #title.home-composed .home-slash .hs-edge { stroke-dashoffset: 0; }
+  body #title.home-composed .home-slash, body #title.home-composed .home-rail, body #title.home-composed .home-corner, body #title.home-composed .home-ghost, body #title.home-composed .home-ghost-track,
+  body #title.home-composed .home-rail-ruler::after, body #title.home-composed .home-sweep { animation: none !important; transition: none !important; }
+}

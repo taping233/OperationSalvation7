@@ -1,0 +1,61 @@
+{
+  "task": "WF-live-repair-1023 / battle discovery cancellation",
+  "agent": "sol_battle_boundaries",
+  "status": "source-frozen; targeted verification complete",
+  "pathBase": "搜打撤",
+  "sourceFiles": [
+    { "path": "game/src/battle/effects/battle.discover-preview.js", "change": "新增纯发现来源识别及一次性固定候选凭据；区分战斗规则、C 道具 bag use 与锦囊存牌来源。" },
+    { "path": "game/src/battle/effects/battle.acquire-operation.domain.js", "change": "增加可选 prepareDiscoverJob 显式端口；原 acquire 池解析与队列语义保留，确认预览后复用固定候选。" },
+    { "path": "game/src/battle/core/battle.resolution.domain.js", "change": "结构化 discover/acquire 结算认领已确认候选，避免重复抽取。" },
+    { "path": "game/src/battle/effects/battle.discover-flow.js", "change": "发现轮次标识、已提交状态标签、固定候选结算及当前 job 取消；归还未选底牌 UID，保留其他 job 和已确认临时牌清理。" },
+    { "path": "game/src/battle/effects/battle.discover-state.js", "change": "补充固定候选和取消元数据类型；纯状态构建器继续返回原最小形状，由交互领域添加标签。" },
+    { "path": "game/src/battle/core/battle.selection-flow.domain.js", "change": "付款前预览控制、同战斗同回合同来源及执行计划的候选缓存、来源有效性与旧轮次隔离；公开 Boolean cancelDiscover。" },
+    { "path": "game/src/battle/core/battle.exec-play.domain.js", "change": "纯发现来源在能量、源牌、注能材料及手牌代价提交前等待确认；取消不触发出牌计数或 onResolved，确认后重走原校验和完整结算。" },
+    { "path": "game/src/battle/core/battle.engine.factory.domain.js", "change": "装配预览和取消端口、生命周期缓存清理、锦囊确认候选续接；直接锦囊交互添加已提交取消标签及轮次。" },
+    { "path": "game/src/battle/core/battle.engine.js", "change": "公开 cancelDiscover 引擎 facade。" },
+    { "path": "game/src/battle/core/battle.core.js", "change": "BattleSession commands 转发 cancelDiscover(roundId)。" },
+    { "path": "game/src/battle/core/battle.core-ports.types.d.ts", "change": "queuePouchCast 端口允许携带当前执行卡，用于传递已确认候选凭据。" },
+    { "path": "game/src/battle/bag/battle.bag.domain.js", "change": "C 等纯发现战斗道具在消耗 owned 来源前共用预览；取消由 finally 释放预留，确认后重读来源并正常付款。" },
+    { "path": "game/src/battle/effects/card-semantic-operations.js", "change": "castStored 向 queuePouchCast 传递执行卡，保留锦囊确认凭据。" }
+  ],
+  "testFiles": [
+    { "path": "tests/battle-discovery-cancellation.test.js", "change": "新增 8 项真实取消回归：exec 成本、C 道具预留、锦囊母牌、候选缓存和计划变更、凭据穿透、异步中断、纯发现边界及已提交 job 取消。" },
+    { "path": "tests/battle-engine-facade.test.js", "change": "完整 facade 清单纳入 cancelDiscover；保留导出一致性断言。" },
+    { "path": "tests/battle-discover-result-source.test.js", "change": "付款前预览等待阶段断言 busy 与未出牌状态；保留原最终来源、效果及费用断言。" },
+    { "path": "tests/battle-bloom-discovery.test.js", "change": "付款前预览等待阶段断言 busy 与未出牌状态；保留原确认收益及防重复断言。" }
+  ],
+  "behaviorSummary": [
+    "纯发现首次取消保留本次尚未提交的牌、能量、注能材料与手牌代价；同来源同回合重开复用候选，执行计划变化使缓存失效。",
+    "首次确认进入原完整结算；后续或混合/自动触发发现取消只结束当前未确认收益，已支付费用及已发生效果保留。",
+    "取消通过 roundId 校验当前交互，旧页面与来源失效不能确认或取消替换后的交互；不吞其他发现 job 或回合续接。",
+    "预览显示取消使用；已提交显示结束发现。公共 API 返回明确 Boolean，UI 接线由父负责。"
+  ],
+  "verification": {
+    "kind": "targeted Vitest only",
+    "exitCode": 0,
+    "passedFiles": 11,
+    "passedTests": 70,
+    "log": "docs/evidence/2026-10-23-WF-live-repair-1023/discovery-domain-final.log",
+    "testedFiles": [
+      "tests/battle-discovery-cancellation.test.js",
+      "tests/discovery-selection.test.js",
+      "tests/bag-token-discover.test.js",
+      "tests/battle-discover-state.test.js",
+      "tests/battle-discover-retained-feedback.test.js",
+      "tests/battle-discover-result-source.test.js",
+      "tests/battle-bloom-discovery.test.js",
+      "tests/discover-infusion-feedback.test.js",
+      "tests/battle-engine-facade.test.js",
+      "tests/battle-turn-start-discover.test.js",
+      "tests/battle-discover-candidates.test.js"
+    ],
+    "limitations": "未运行 full、build 或浏览器；父负责实机验证。本清单写入后没有再运行测试。"
+  },
+  "handoffBoundaries": [
+    { "path": "game/src/battle/core/combat.factory.js", "modifiedByThisDiscoveryWork": false, "activelyOccupied": false },
+    { "path": "game/src/battle/core/combat.js", "modifiedByThisDiscoveryWork": false, "activelyOccupied": false },
+    { "path": "game/src/battle/effects/battle.acquire-operation.domain.js", "modifiedByThisDiscoveryWork": true, "activelyOccupied": false, "preserveContract": "prepareDiscoverJob(card, job) optional port and queueDiscoverTracked decorated job; no reverse import into acquire." },
+    { "path": "game/src/hub/base.js", "modifiedByThisDiscoveryWork": false, "activelyOccupied": false }
+  ],
+  "ownershipNote": "仅列本代理发现领域修改；共享工作树中的其他改动不归入本清单。源码冻结，四个询问文件均已释放继续编辑占用。"
+}

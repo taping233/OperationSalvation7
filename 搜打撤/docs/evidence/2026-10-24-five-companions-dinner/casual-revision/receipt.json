@@ -1,0 +1,21 @@
+{
+  "toolchain": [
+    "NAI5 original composition draft",
+    "built-in imagegen first repaint",
+    "built-in imagegen casual-clothes revision"
+  ],
+  "asset": "game/assets/slot-bg-knight-fantasy.webp",
+  "bytes": 529976,
+  "sha256": "64090ccde10f8cdf196cea2b599fab7ec252672de492b2a480f7d5deafb3b4cc",
+  "oldSha256": "0b20dd0e76d58a8034e803a675282e2223bcdf16daf029f3f66b9a86b000cd9f",
+  "size": [
+    1672,
+    941
+  ],
+  "backup": ".tmp/nai/slot-dinner-20261024/casual-revision/previous-slot-bg.webp",
+  "finalSource": ".tmp/nai/slot-dinner-20261024/casual-revision/final-source.png",
+  "finalSourceSha256": "f6691784c90dc0a9b7312602b5ea79577f5611810fe4babbcae299ef339d575d",
+  "draftSource": ".tmp/nai/slot-dinner-20261024/draft.png",
+  "obtainedBy": "NAI5 one request, then built-in imagegen repaint with identity references",
+  "verification": "Generated artwork viewed only; no tests, lint, asset audit, browser acceptance or build"
+}

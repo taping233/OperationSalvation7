@@ -1,0 +1,4274 @@
+{
+  "capturedAt": "2026-10-23T14:35:45.652Z",
+  "source": "D:\\素材\\代号柒\\搜打撤",
+  "snapshot": "C:/Users/太平/.codex/visualizations/2026/10/23/01a1690b-b6ec-7bf3-83c2-80eaabf7c9eb/p3-ui-runtime-snapshot",
+  "port": 5318,
+  "assets": "junction-read-only-use-original",
+  "files": [
+    {
+      "file": "game/css/ak-skin.css",
+      "bytes": 18271,
+      "sha256": "46fbcb09643180213148e9a53e45bf4ffa83f584896a3a1a920ee1ac0faf605c"
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "bytes": 2039,
+      "sha256": "7c12f096414c097deedd0cf3bb42dcd1a2345318ad5352fe8ad97330189d9b54"
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "bytes": 5692,
+      "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+    },
+    {
+      "file": "game/css/bag-design-system.css",
+      "bytes": 8828,
+      "sha256": "82564ec7f3da42825fedda0fb103e7b66c0562dcded2a949eb3914383c5fb6a9"
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "bytes": 29387,
+      "sha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62"
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "bytes": 17414,
+      "sha256": "a29b4338dcefba350ab4f6150a6529155641cdb13e79a6482b6b3ad46dab80b7"
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "bytes": 73,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "bytes": 37478,
+      "sha256": "99121d9bd99b40bff5c348bc58de96c891a30f5710c953bf9ff6207e65077ed1"
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "bytes": 27912,
+      "sha256": "a2ef25750df4b0ef5260d147866463c1834c6139a3fdacc496b9888b15b79608"
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "bytes": 36149,
+      "sha256": "075f2144f6abd7b830c8e35090b80e417a79fd8d231b4e46a7891f707f3e96c1"
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "bytes": 16207,
+      "sha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926"
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "bytes": 3290,
+      "sha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c"
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "bytes": 6029,
+      "sha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a"
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "bytes": 6711,
+      "sha256": "a920e6276c3485f068c351489f7ed90d57c087c3506fa2d785fecf65ae7a1096"
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "bytes": 7934,
+      "sha256": "f4990e874741248d2ad481d97c9312ac78a3aba2d6e28bf142f87fc870e5962f"
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "bytes": 8429,
+      "sha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8"
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "bytes": 15035,
+      "sha256": "c52679781be0aa6ec92735bc12cf0c6a9420152f17678ab0ecab69e43ec32624"
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "bytes": 3377,
+      "sha256": "ef0d10c5e05afa9ae27f1879fe23a31ea65240f9b20ec3acfc12ac8f1c451e8c"
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "bytes": 73,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "bytes": 32435,
+      "sha256": "17fc507e954c5e29769e98e94740555b48de28fed2cf3dbb0dccc23a0b58779b"
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "bytes": 1538,
+      "sha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b"
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "bytes": 33335,
+      "sha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399"
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "bytes": 6727,
+      "sha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d"
+    },
+    {
+      "file": "game/css/base.css",
+      "bytes": 30409,
+      "sha256": "735432dafba7215f9c6d743de4b6e0f46a31c52bb4b776dcca47efe384219ad1"
+    },
+    {
+      "file": "game/css/battle-attack-profiles.css",
+      "bytes": 809,
+      "sha256": "7b679f96604cee9971c2958827909b7860f85e9c2773569a2666dd0af04aabf8"
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "bytes": 12463,
+      "sha256": "da089cbe783b893af732e6b9d03e3f718f035ab62111c3fe1c5f514b17d742ca"
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "bytes": 9869,
+      "sha256": "dd5d291924b8b045d1309861945a644bae4fb36b4d62f2c387cff0e384ded75a"
+    },
+    {
+      "file": "game/css/battle-equipment.css",
+      "bytes": 3455,
+      "sha256": "14a9e77ad81624de014445a82df9166f237f26bb5985ef1b2c1582c5fb3fec51"
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "bytes": 12607,
+      "sha256": "4357d60288fa58fa1e70587d11be2d4c6e8a11b422725932c974e6c119a1b19b"
+    },
+    {
+      "file": "game/css/battle-hud-clarity.css",
+      "bytes": 227,
+      "sha256": "32ff566e278be0f7303a60f25b73d518234e28abb9f4137ef5ed9826bfbb29ab"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "bytes": 6140,
+      "sha256": "8d5d18fcebb2b3d5bca820e92d2ac152350a094d84bf3dc00c46784b17d47a9b"
+    },
+    {
+      "file": "game/css/battle-pile-view.css",
+      "bytes": 5554,
+      "sha256": "b89677dc79e74fce243a204d67ab416b69aebd595d4367795e694b1b9e23dbcd"
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "bytes": 2029,
+      "sha256": "aedd8c0de3c16258576cedf0a6ace750b27c8534984fca41632c0231d4708ec9"
+    },
+    {
+      "file": "game/css/battle-scene-polish.css",
+      "bytes": 1006,
+      "sha256": "13dd201743c2a80a436542c5a1520c152daebd21ec9cf5b0766019ca0a1e130f"
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "bytes": 9431,
+      "sha256": "8bf1b6e15c566c801089ad5d94e95a6b6fe249c2ab9c9563481838e00cc191d2"
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "bytes": 36509,
+      "sha256": "8e5db7debd678a9aa161586a369922da40744ac0d364661b05410e873ff59894"
+    },
+    {
+      "file": "game/css/battle.css",
+      "bytes": 35642,
+      "sha256": "4864b787aa938499608e170aeb210cdb6f59896687a2f3032a41aa9b9a08f919"
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "bytes": 7957,
+      "sha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f"
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "bytes": 13670,
+      "sha256": "0e25b8c0cf1cc11530876b8bb3570717df6723ba896d93c5cf97f472ffa4989e"
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "bytes": 1405,
+      "sha256": "0e02ffab223eebda8009a153ba6169683d545a0a62a992f2537c18359c8285d5"
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "bytes": 1441,
+      "sha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25"
+    },
+    {
+      "file": "game/css/card-frames/career/baita.svg",
+      "bytes": 2412,
+      "sha256": "3d6eafed8d9974b958cffc85d573922371af3468c8303aca4227198262fc6e04"
+    },
+    {
+      "file": "game/css/card-frames/career/changwuyu.svg",
+      "bytes": 2651,
+      "sha256": "fdcab13e06cb4a306aafed85135c51c1b33963d3c387a3725f498aa6042b3b67"
+    },
+    {
+      "file": "game/css/card-frames/career/frames.css",
+      "bytes": 118,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-frames/career/geometry.json",
+      "bytes": 379,
+      "sha256": "4189d8e1f0e9cbfb0852512377d4599fd14d87f53dc27f10500d6356971f755f"
+    },
+    {
+      "file": "game/css/card-frames/career/heixiang.svg",
+      "bytes": 2337,
+      "sha256": "58bb6492339cfed4ffd4f931a9a3a34b4388375924026c938aec67c118013ed6"
+    },
+    {
+      "file": "game/css/card-frames/career/neutral.svg",
+      "bytes": 1634,
+      "sha256": "17cf6ea54b56ac4f054b1a3db87e8ff39a82386ccb34383fc379168929bce3b2"
+    },
+    {
+      "file": "game/css/card-frames/career/wu.svg",
+      "bytes": 5139,
+      "sha256": "83fc8315b14f0b8e5cff9df01aa593ede1bc0439c70ae37e5d1b24afe5a97053"
+    },
+    {
+      "file": "game/css/card-frames/career/xingyue.svg",
+      "bytes": 2352,
+      "sha256": "29cc2e5be3f6f1779011b88d2b538367eacc71e26dc6379cc7a726ea2ae7b127"
+    },
+    {
+      "file": "game/css/card-frames/rose/class.svg",
+      "bytes": 4024,
+      "sha256": "4c5c9d9987b629fac5b462a699f03ad37307f1da198ba4de64b5bb24f0fd4a87"
+    },
+    {
+      "file": "game/css/card-frames/rose/common.svg",
+      "bytes": 4024,
+      "sha256": "b13fea9b24e20322bf67674ae197bd95593788d44459b8969bc5d9323177ad54"
+    },
+    {
+      "file": "game/css/card-frames/rose/epic.svg",
+      "bytes": 9444,
+      "sha256": "47f62371b5fa00e7bfcfeca5fd52cca7afe7640632eecd07cede14f257e0eaf6"
+    },
+    {
+      "file": "game/css/card-frames/rose/frames.css",
+      "bytes": 118,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-frames/rose/initial.svg",
+      "bytes": 4024,
+      "sha256": "62e119764f14808d031905c24600063c02c3614122e0e7b6fba26830ce27a1f6"
+    },
+    {
+      "file": "game/css/card-frames/rose/legendary.svg",
+      "bytes": 11310,
+      "sha256": "c09663fd4136c8bad2dfbcf8fcbdc39a8f2422546e92f06d2a361a64d7356aa2"
+    },
+    {
+      "file": "game/css/card-frames/rose/prism.svg",
+      "bytes": 11774,
+      "sha256": "dccd2ee0c4a33a54a6210ccdea69eaadad7fa7fb5866e6926f20d4c765d470e3"
+    },
+    {
+      "file": "game/css/card-frames/rose/rare.svg",
+      "bytes": 5888,
+      "sha256": "4467dffae4d5bc1837d5dfefe4a0ed87e4f0641d23cf2afbff1414d006621164"
+    },
+    {
+      "file": "game/css/card-frames/rose/token.svg",
+      "bytes": 4024,
+      "sha256": "7667fc5bc3d635c6ea6a0d3c1395dba6b17450e1a1006f97d8edb56787195ee3"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/common-source.png",
+      "bytes": 488745,
+      "sha256": "4cd91bd6eabefc104c7cfe6dfce92ef5f39cb97a06eab99f46e739f8b94f1ff1"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/common.webp",
+      "bytes": 274842,
+      "sha256": "7bfa2dc165756e36c4e766dee06fd80fcd8d90e2e599d91d9bdab82a4b818d0c"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/epic-source.png",
+      "bytes": 694124,
+      "sha256": "16e9856e09c49bf295d0f828b332aed09a9ef6fe8743288543d43120b7489d42"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/epic.webp",
+      "bytes": 423400,
+      "sha256": "7358996898a5ce5905a09dfb7a1fb19708a6dd556f79fd4a5d22fe9b1885e731"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/geometry.json",
+      "bytes": 2463,
+      "sha256": "eb458609446a7e8e1637fd07b36307b4b11f52443fdc49561b1c9583a5cc4b40"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/legendary-source.png",
+      "bytes": 806634,
+      "sha256": "4ef7328588745e89a169be0004e6b844fea333cbde877f07ee5abd503584c9ee"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/legendary.webp",
+      "bytes": 547886,
+      "sha256": "1ba82f21eb3f8c1296f6c0c3fdca6f74cd2957bab2da0b1325913769eea30545"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/prism-source.png",
+      "bytes": 929312,
+      "sha256": "ec47f3f89fb309e4aeae94b8491767c29609cec13ad36c8ef7dcc7d11f20c2bc"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/prism.webp",
+      "bytes": 609740,
+      "sha256": "f36abea239f333ab1a5dceb29f36db927976d15410876ed9cebcd139e40bbd58"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/rare-source.png",
+      "bytes": 576145,
+      "sha256": "c942c3038ce73471e9fdbcb8fa4748a54f167f4d3e3d6454a4d7fb4638cb51f3"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/rare.webp",
+      "bytes": 361118,
+      "sha256": "e4ff55556c5f4f488f7c88c00aba609d9413ada3dc25abf56bd7d493c2bdcc91"
+    },
+    {
+      "file": "game/css/card-frames/wu-career-preview/frame.svg",
+      "bytes": 5139,
+      "sha256": "83fc8315b14f0b8e5cff9df01aa593ede1bc0439c70ae37e5d1b24afe5a97053"
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "bytes": 17740,
+      "sha256": "034d32e1d5ee0c3b0318c3241cf2aedbc17abb4e9b2803c9ed2efbef1d4abf09"
+    },
+    {
+      "file": "game/css/card-ornaments/epic.svg",
+      "bytes": 3050,
+      "sha256": "4161d50de6866f370a2439a9bc71f5f1c87971d99f1d400da427433b009988cf"
+    },
+    {
+      "file": "game/css/card-ornaments/legendary.svg",
+      "bytes": 3702,
+      "sha256": "8332f5bb82f76d081788e9a92f523f31854e41066bc4e685d7ea36b1eff3fcb7"
+    },
+    {
+      "file": "game/css/card-ornaments/prism.svg",
+      "bytes": 3931,
+      "sha256": "c6c12a919aab1e973771f29203c3180a02a9fd00bfd75755424d92062c76dc60"
+    },
+    {
+      "file": "game/css/card-ornaments/rare.svg",
+      "bytes": 2338,
+      "sha256": "18a5e73777730b6b23f6f022460e4b95c458a8699c6c4d50dea2c270b7954e09"
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "bytes": 4806,
+      "sha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62"
+    },
+    {
+      "file": "game/css/card-state-motion.css",
+      "bytes": 1772,
+      "sha256": "27d599cbb514596a50f69c6e7e1e917b8e30a7acd0cf66f48895d1f06b0ceab0"
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "bytes": 1448,
+      "sha256": "032ba33a9cb836febc92c74feb9d758b8d32b187d4947c840979f6b35da413dd"
+    },
+    {
+      "file": "game/css/cards.css",
+      "bytes": 12017,
+      "sha256": "429bc798bc9c7d0ea2ad933579cc5a5608daa3127a0421dd4a8aa6befcd36567"
+    },
+    {
+      "file": "game/css/character-cover.css",
+      "bytes": 9470,
+      "sha256": "217e3a0699f5c26d5fc00c2e63ed917a16c2fe2df24042f3c10b261cef9fd974"
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "bytes": 1872,
+      "sha256": "2604a44fbfdc0576e68f6c6a8e532570375132628a83c752fca07df18a41e663"
+    },
+    {
+      "file": "game/css/character-pool-cover.css",
+      "bytes": 10200,
+      "sha256": "337e8d2db02f0779ca3c883d176558a72512490ba596ff65d12681d993c680be"
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "bytes": 3777,
+      "sha256": "97c30a22d03bbc92046fef8c158fec21575dcd194c8dc70a1b7adb5c194913db"
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "bytes": 3869,
+      "sha256": "c85630875fd682d24b50c13f31803fd0f9ffff9dd6a6f3fb8f6687eb97adda2d"
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "bytes": 5171,
+      "sha256": "94ab241df96f934c61b0488617821e7e7cc9e9f221f927fa1bfdc6c18ea52f3c"
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "bytes": 1393,
+      "sha256": "f12f332c9572883fc0f2d626df966341d3596b9724e4ea9089e3364c70e814a8"
+    },
+    {
+      "file": "game/css/container-store.css",
+      "bytes": 4725,
+      "sha256": "007bd1a95ada36878f4b1689400a8fbe7261e40ae4352a19b6fb205af654225f"
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "bytes": 24263,
+      "sha256": "7c54b581f28af0fa80697c1135f520145352863343341889b0742d6407e71011"
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "bytes": 10181,
+      "sha256": "52acbface99d829bbeccb75e956c87b6a01ef04b221488fb0160cf888f2a1f7b"
+    },
+    {
+      "file": "game/css/cover-hub.css",
+      "bytes": 16093,
+      "sha256": "471d6ec4d4689a1de92979eccf75666c59b171a123be6d27a4db12b3c532759c"
+    },
+    {
+      "file": "game/css/cover-remaining.css",
+      "bytes": 449,
+      "sha256": "2a9b9b804595b23dd7ade4c02982a4ae870eeccb4d8e8dacd1066f7295100458"
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "bytes": 31032,
+      "sha256": "00b696739e6069e635462d141d8667795c4e2b7df62f10f3de7bfcc3e6b1d0cc"
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "bytes": 20499,
+      "sha256": "a2ef3f622a30786777ed3303c462db5272c0abde19b474fff439d5660d3cfd27"
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "bytes": 14758,
+      "sha256": "a7b690ae27cd6902e7512ec921d340b629d0f3e8bb0c83287de993c65e94e7db"
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "bytes": 14725,
+      "sha256": "47ff03f8a2dc3097b2535956a7a04d64a067b0c296bd0987170ad4133ca4f894"
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "bytes": 10598,
+      "sha256": "ace63c4720dc366e2c3d317d5941632cc0e879e5477bffc7a9de3bb6cc40baf7"
+    },
+    {
+      "file": "game/css/discovery-selection.css",
+      "bytes": 2931,
+      "sha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523"
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "bytes": 25614,
+      "sha256": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66"
+    },
+    {
+      "file": "game/css/event-choice-feedback.css",
+      "bytes": 2102,
+      "sha256": "ae02ece0bf5088b268687d71fb2e1cb7a2d28925714afee2afe80aaf8441db0e"
+    },
+    {
+      "file": "game/css/event-dice.css",
+      "bytes": 1277,
+      "sha256": "41c29ad6927dd61ecc8c512b82333aa3684277ec8b79498ca5c9c2ff18c9a667"
+    },
+    {
+      "file": "game/css/event-option-state.css",
+      "bytes": 436,
+      "sha256": "e53ded4f4404c9e2c708fbfa22efde626bb5ea6b0262fd72735c71d1c65099e5"
+    },
+    {
+      "file": "game/css/event-recode-result.css",
+      "bytes": 788,
+      "sha256": "4950073c2b3bb49676d03a2bb8b3c6f62db8cb18c29734aeb101f3f0ff3fe02d"
+    },
+    {
+      "file": "game/css/event-signal-puzzle.css",
+      "bytes": 4716,
+      "sha256": "8eb3a4929dee4df620767d09d48f9e1028ec4c7b07961d3e0c355ddf2972eaf3"
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "bytes": 15391,
+      "sha256": "0c2a18b053ce459938b08f2d5a91852eabe0ca9c0148671a7255dc6294421e4b"
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "bytes": 6824,
+      "sha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123"
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "bytes": 32298,
+      "sha256": "b0c09fd01e2a4e6894f698353bae09f614fda71edfe9ef2783b0fc30920ab902"
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "bytes": 11469,
+      "sha256": "42ce454fb53cdf3a1c65ad980f4af2b54e4467d87da06e459e927a70780fe8d5"
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "bytes": 8371,
+      "sha256": "1fe8955dde58766e6856d172cde5a1413b369f88c6caa0c66a82f6730d71bf58"
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "bytes": 26297,
+      "sha256": "8843aceffa68fad712bf3fa7e3065793114bed3a9883341357170168b91329cb"
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "bytes": 27527,
+      "sha256": "6c3b1d0e25e4d00b356840fc318ff66ddd87dfb0b799eb1e6b3387179fdd1440"
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "bytes": 23609,
+      "sha256": "03b7a1fea206fe39c9ea854d7f1fc724559b2a2a255096fcbade453e66ee6fbb"
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "bytes": 4715,
+      "sha256": "dc372c8bbd34a3cd035da6531bf92cfb1613af83c45b61f5aeac0048ebf7f9ba"
+    },
+    {
+      "file": "game/css/expedition.css",
+      "bytes": 18993,
+      "sha256": "fbb072dcae23c07a8164b9e2095b1fc945884cb49480365d640fbf571ff201cc"
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "bytes": 4134,
+      "sha256": "6546a67bd9510552c1c3955566a362e099fbf2eacc506845374285e37dd3aa4c"
+    },
+    {
+      "file": "game/css/extraction-rewards.css",
+      "bytes": 15599,
+      "sha256": "3a9014e1397eea279a54ccd33cbfdca55adadf183c26104aba656d86512501af"
+    },
+    {
+      "file": "game/css/feedback-1018.css",
+      "bytes": 4233,
+      "sha256": "16acd75b33f97aa6554e7162670bb5e9747c233c50427244c40699b3f023c218"
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "bytes": 4862,
+      "sha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503"
+    },
+    {
+      "file": "game/css/feedback-theme.css",
+      "bytes": 2163,
+      "sha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7"
+    },
+    {
+      "file": "game/css/fire-rest.css",
+      "bytes": 5467,
+      "sha256": "839b83cac225e10e8606a74ac193dd19186c1446b41b9499811463c4c6fc2d24"
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "bytes": 8551,
+      "sha256": "42712c197023754dfaa1a63545de7cfae2468ffe95c305152bb96e96587d8144"
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "bytes": 7529,
+      "sha256": "609c2d3d93247102bea930fc9e21e9851e6284ef4618f23a7ee126f956ae135f"
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "bytes": 6563,
+      "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "bytes": 40869,
+      "sha256": "d9656aa635d85e8b00417644e0746d04ff1c096f716b257ac314e7e7053eb3e2"
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "bytes": 6191,
+      "sha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7"
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "bytes": 590,
+      "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+    },
+    {
+      "file": "game/css/hub-arrival.css",
+      "bytes": 4067,
+      "sha256": "0183f10b98b63d455877999e205b89a1d8913edfc6fb8f9cfeccfea20bb4a906"
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "bytes": 10139,
+      "sha256": "96c9e41bab3d2cc0760f0d689c3b875603e1b63ded3c99f58dcebee7d08a1606"
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "bytes": 7320,
+      "sha256": "5134a805cf126466d122c5672677b2fe7afe58ed55571b96e10adca768797923"
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "bytes": 2408,
+      "sha256": "f78f22021ca0890cdeb5d40381e36ac4b05a1b11ff1c5c0ea13d9e52c36deecf"
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "bytes": 9056,
+      "sha256": "f6a8e7336f0183099f8e00dcf210e0cc55e3d79990e994993fcd49b6cef7e9ed"
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "bytes": 5671,
+      "sha256": "cb0914a69eda1555283263a4aaa3f30d7c745bcd4fbc59f75b9252dd366f6e0f"
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "bytes": 8858,
+      "sha256": "fe95acabeb9b8946ec30cd80d10c0bee3cae473b93b8d5ef8609953fa6d16ae2"
+    },
+    {
+      "file": "game/css/hub.css",
+      "bytes": 21874,
+      "sha256": "0ac985425c30b82bfa9662243dcf05ee548b090838dbf41ae6f1bbc985dd941e"
+    },
+    {
+      "file": "game/css/inbox-cover.css",
+      "bytes": 12723,
+      "sha256": "5b2af3607a4888a950017ff4b3d4a9efd63db5c67b8b2ddbac07d5df76397125"
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "bytes": 7459,
+      "sha256": "e6ea3d7028ddc3b6b9e195638178772d7f204776eef6b40c616a82d6146036ab"
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "bytes": 4908,
+      "sha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20"
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "bytes": 5708,
+      "sha256": "0b937142ad367f92ce6a0fc7a9a82695c5eb74c84255da29a841abe5c16bbe78"
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "bytes": 5387,
+      "sha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78"
+    },
+    {
+      "file": "game/css/map-cover.css",
+      "bytes": 9324,
+      "sha256": "18207169b4f262d12e6e5aa5eb6accb57cdb6a07299d38dcc56330ebe568c09c"
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "bytes": 2709,
+      "sha256": "03672ff89af18eeec9af34842ef4468d55684f307e94352cd4fd7438066cc86d"
+    },
+    {
+      "file": "game/css/map-floating-tools.css",
+      "bytes": 4377,
+      "sha256": "d3097cd2c4d9c90f0b01d6ee5f529d0a2e3fcd00602d637ca6108a4491cb35a6"
+    },
+    {
+      "file": "game/css/map-node-status.css",
+      "bytes": 1298,
+      "sha256": "9efde1e426fb5479f58c966020317d88bf380b4f38b697a071c754f91730d160"
+    },
+    {
+      "file": "game/css/map-passage.css",
+      "bytes": 1235,
+      "sha256": "a80f33f37cc9ddb539bd3ba8a33aae47d94d48de9b260cad836844b7990c58dc"
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "bytes": 16943,
+      "sha256": "e22a1c9391009ed780aca7146137c4329117d27f4a343ce6571bdf232825af97"
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "bytes": 2095,
+      "sha256": "c5ba8e6e3d19e66b97f03398138b7c6dddd15bbdb25ffb4836b9fa73e1f9f01e"
+    },
+    {
+      "file": "game/css/operation-notice.css",
+      "bytes": 814,
+      "sha256": "08860a1c2e6040de6fd6817655a804c82d5e4162e280c5ddd0ad06545b74e21d"
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "bytes": 4859,
+      "sha256": "48aa008f533478bc5a1d74a2c6684d9834ca7921a93b031aec8841466345f021"
+    },
+    {
+      "file": "game/css/overlays.css",
+      "bytes": 41292,
+      "sha256": "5c39daae42aa53b3d6bd7309896e1bf2181b8d209f38390fa4dd5e5a62dcbee1"
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "bytes": 18399,
+      "sha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a"
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "bytes": 10886,
+      "sha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea"
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "bytes": 15365,
+      "sha256": "eb7852e1e995bec623451043966681d93917b5cc58fea558c5a9ce2fed359885"
+    },
+    {
+      "file": "game/css/page-classes.css",
+      "bytes": 11179,
+      "sha256": "ab5341af371c2f7a62ca092493fc98f54facfb6067bd48fb724f9ff212181a1c"
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "bytes": 9884,
+      "sha256": "21cc5a744245759ed3c174e140db1621515bbc41e3c8bd4830b2de273928239b"
+    },
+    {
+      "file": "game/css/page-deploy.css",
+      "bytes": 22746,
+      "sha256": "d54a76f8df3e412c8e7256279f4be1e7961bc68e19bf7b2ac38e85c93bb5bacb"
+    },
+    {
+      "file": "game/css/page-events.css",
+      "bytes": 12891,
+      "sha256": "6b135d0e63facf563b69d2fd9166a3cdd600016455f9edfaf2e0f7c0ff245bac"
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "bytes": 23326,
+      "sha256": "c24d8526c6a67a3c907b0b617109d07f5657271826d965b9250beaecba97beee"
+    },
+    {
+      "file": "game/css/page-hub.css",
+      "bytes": 21078,
+      "sha256": "4d49435258d920ff81fb429b32bf5d5ec2b9f33934b449d6520eee4efae3f20b"
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "bytes": 2864,
+      "sha256": "71615c17478171acae72aa0f184ebde0d0751af86f7f287cac4b1313fec9dcfd"
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "bytes": 30861,
+      "sha256": "9b7cf42a2881bc982fc854504584b56470fd0bbadb7f3e205132328195b640c6"
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "bytes": 25799,
+      "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+    },
+    {
+      "file": "game/css/page-shop.css",
+      "bytes": 18875,
+      "sha256": "ad559010709f6cd9e98feb7d82b2904474754ae3a819e83051124318cc2446bb"
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "bytes": 21459,
+      "sha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97"
+    },
+    {
+      "file": "game/css/page-stash.css",
+      "bytes": 19807,
+      "sha256": "7ee2237165f5568914475d7ecd4e39bbf31b64707baacb4f1c5c162c5f93475d"
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "bytes": 1906,
+      "sha256": "5f3b292e6d2cd3584351e13c6f0a5299f0efb55340437f9c3b37eb7ecc82623d"
+    },
+    {
+      "file": "game/css/page-upgrade.css",
+      "bytes": 14898,
+      "sha256": "c29334f34826245b68400baf9db5205fb44d8eccbbc0386c5782d41b3c20b9fb"
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "bytes": 1309,
+      "sha256": "610b3a1bdadd2fec822c245d61e28ab3360298738312b4cc93f9351ca4ec6302"
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "bytes": 3328,
+      "sha256": "a3bee6843a43cfb6a78fc99cc032e14cd2c81f17fc7892cd28e85305b353d330"
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "bytes": 6850,
+      "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe"
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "bytes": 4681,
+      "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "bytes": 66280,
+      "sha256": "b864e9334795093bdba0662bbb5695ab165ea0653b90bc8956d25ea36c9a0007"
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "bytes": 1565,
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "bytes": 4694,
+      "sha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78"
+    },
+    {
+      "file": "game/css/preparation.css",
+      "bytes": 7161,
+      "sha256": "1a62800153caeec783ea23fe0ed7f2658527f44c668fec8ff9a7efdc67a378a5"
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "bytes": 2029,
+      "sha256": "4ce72b9c521a2805b2bf994776311ec9a2cd7583d9a8d0f668f6bbe4e42bd210"
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "bytes": 13190,
+      "sha256": "7d75e95990f02cd99b17681b2d0a80369c344656a93b9fe5b1cc6b78349a20c6"
+    },
+    {
+      "file": "game/css/rarity-reveal.css",
+      "bytes": 2053,
+      "sha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464"
+    },
+    {
+      "file": "game/css/review-ui.css",
+      "bytes": 5401,
+      "sha256": "58c76e14980963a86134a6c9406573615d73ccc57de718327672a064f55c2792"
+    },
+    {
+      "file": "game/css/reward-completion-receipt.css",
+      "bytes": 301,
+      "sha256": "6e5ecf1d308f4995b733eda1bd6b0cdcb60395a2925adedb41195db1c521c85b"
+    },
+    {
+      "file": "game/css/room-footer.css",
+      "bytes": 1464,
+      "sha256": "9fc194fe25f0d48d725a8aaf9d2057ce62d08d059b5d18acfa42ca738d78fa61"
+    },
+    {
+      "file": "game/css/room-rewards.css",
+      "bytes": 6754,
+      "sha256": "dc830556c2ac51f1e80c9a2953f34a68a6ef870ba51105b69a384212614f2a15"
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "bytes": 7056,
+      "sha256": "38c0b7aa128ce384bc4fc4961cc522c5556532142fec4f1f61c31570e59d8fbd"
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "bytes": 3774,
+      "sha256": "668c7147c44824654b63d96f1c22feb41c9b1ce79068df8d73531bd159e69b25"
+    },
+    {
+      "file": "game/css/scenes.css",
+      "bytes": 46357,
+      "sha256": "bb87e6d5fd99ca87fb597859a226845829d682fd7651325768504f40c1f175ad"
+    },
+    {
+      "file": "game/css/secondary-ui-tokens.css",
+      "bytes": 1109,
+      "sha256": "a0d8478c68e9c54d60ba86d05f540c1dc8a0e20b1319384a25ccdbe78a465257"
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "bytes": 1824,
+      "sha256": "ec80b92f04ba733a3a51ecc392c30755730a24297f4e823b0b0d45a0677fb39b"
+    },
+    {
+      "file": "game/css/settings-audio.css",
+      "bytes": 232,
+      "sha256": "eafaeb3129261709e33c88e1543e3e660f6b40d16f4f310faa7ec5924c414f9c"
+    },
+    {
+      "file": "game/css/settings-cover.css",
+      "bytes": 12120,
+      "sha256": "35db0837a6cbccb96048d79c60a951719a313c211b83eadc79e1c2a3f5fb0a9f"
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "bytes": 15358,
+      "sha256": "f9bcdf65b0771ff103462864892cc4f9f2fd4e37e45ae23856eaeeae75cfc1bf"
+    },
+    {
+      "file": "game/css/settings-transition.css",
+      "bytes": 89,
+      "sha256": "7d46f61a0edced4b0d7e0ef274fc1af1b930e722e198d4edd96ae872354b461a"
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "bytes": 8282,
+      "sha256": "dca5290aaa40c9bc84534c161d9b08caea31780fb5495901cff4e83c4cd5ef37"
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "bytes": 7330,
+      "sha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa"
+    },
+    {
+      "file": "game/css/slots-cover.css",
+      "bytes": 9659,
+      "sha256": "b9a214f2e6ccd50e1d170d85cb4f94fc12f4ef9a4c42d296aba1ee01ef1dd5f5"
+    },
+    {
+      "file": "game/css/startup-transition.css",
+      "bytes": 529,
+      "sha256": "77c728d7b1141be2907cd8612888d74f11dd010c75db6ae40929a8a90882f8ac"
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "bytes": 994,
+      "sha256": "9ebd415d85a1c5d6ff1216abfde3c306ee4dd31c350bf5fd1a00f676aba4bbed"
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "bytes": 19855,
+      "sha256": "04872641102ac41d1085c4cf017ca7cc3558d2b250b9234c818efffa2ff6d91b"
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "bytes": 7317,
+      "sha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62"
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "bytes": 17269,
+      "sha256": "0459c08492d3dba156f5c42c96f98396d2fbfe1dfde714b1035fa2ad868d793e"
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "bytes": 4598,
+      "sha256": "6a026291d0e0979092e185f7a4de047ffdfa2156937c9df7181b6de25b1fbec9"
+    },
+    {
+      "file": "game/css/transition-heading.css",
+      "bytes": 1713,
+      "sha256": "b8f75fc597bf073db59c2366c369b557e93915024e94406080c09d2562aad52d"
+    },
+    {
+      "file": "game/css/transition-illustrations.css",
+      "bytes": 786,
+      "sha256": "4ca55c66d407fb86dcabe673cc58136a538d9216cc52e802a2524909561c7f99"
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "bytes": 7209,
+      "sha256": "dff95cc3d8975e9c9f0db4690083d4c3a053c1c4d2d62ec1d02e1be613c3e71c"
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "bytes": 421,
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "file": "game/css/winter.css",
+      "bytes": 100696,
+      "sha256": "b1ae2d169ad8aed79d1e4d1737d27abd848e735ac6c7e06150e1e8c34e7805aa"
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "bytes": 3894,
+      "sha256": "6673dc6b3c2d25066a87cbc797e5e22e2242105d2fb503b76d7e9843cccc9050"
+    },
+    {
+      "file": "game/data/achievements.json",
+      "bytes": 5840,
+      "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "bytes": 22089,
+      "sha256": "32ccc923bbdef1c383d3f4974416a5056d8f9a596571b0ad5a796b6576eea446"
+    },
+    {
+      "file": "game/data/beginner-guide.json",
+      "bytes": 6840,
+      "sha256": "a852b340aa31c8f915e8816bc5e838481631e72594731a6faa5f8501e268faf9"
+    },
+    {
+      "file": "game/data/card-frame-layout.json",
+      "bytes": 2501,
+      "sha256": "5a393973bd9975f0956f7e1e5e3b0041376318949bab25f4d597ee7dacb15682"
+    },
+    {
+      "file": "game/data/card-notes.json",
+      "bytes": 379,
+      "sha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4"
+    },
+    {
+      "file": "game/data/cards-sync.json",
+      "bytes": 24941,
+      "sha256": "1ae95746a9f5037142737efedb32aa451441ec56fe570c6ab15ec7f4cfb715df"
+    },
+    {
+      "file": "game/data/map.json",
+      "bytes": 9749,
+      "sha256": "26697f5cd8915023e19ba8444c335a15e4b972a59c5bf2166756218bff31e389"
+    },
+    {
+      "file": "game/data/pets.json",
+      "bytes": 1086,
+      "sha256": "f0e5ea2a57a9ec16b1f708f0763ed1b4d5704f58619bcf7bc4308b7c43477591"
+    },
+    {
+      "file": "game/data/scenes.json",
+      "bytes": 11102,
+      "sha256": "bd50f72f5e4fbed923ebea709fc496cd0449a28f4ae1fb92fb779e955ecf083b"
+    },
+    {
+      "file": "game/dev-shims/howler.js",
+      "bytes": 570,
+      "sha256": "902ebc1c1e3497a066ade842a41716d8fab2bc79eea29bb0580ad4caece4baa6"
+    },
+    {
+      "file": "game/dev-shims/motion-mini.js",
+      "bytes": 1762,
+      "sha256": "7f50a9b4a3db2402f42f44a08ab5449908796cf986e5ee7838052b3bbffc2a12"
+    },
+    {
+      "file": "game/index.html",
+      "bytes": 25496,
+      "sha256": "f98908772ff80f2505d5363155c86b9dffa1faa51c0446b2fa512041503c633a"
+    },
+    {
+      "file": "game/src/agent/agent.action-router.js",
+      "bytes": 9998,
+      "sha256": "7005c4405808792c8e15cf1890d2b32cb84f1e06fb9a621795db92d068d5a4e5"
+    },
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "bytes": 3158,
+      "sha256": "ad18c1b9deb1adf637a873e3670a02633997a659414fc891c24eed7b2d4f8e41"
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "bytes": 8184,
+      "sha256": "66eaf40168b7baa5acfd63109b59b5e1ab617745ca9253c54398f804e71b62ac"
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "bytes": 7965,
+      "sha256": "18cc4f36d8d1929b92da8174d213b8eeab174964f3c4e003732fd06372d239c7"
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "bytes": 3143,
+      "sha256": "b0ca752afe3736f836d110a2f6a88258434cd70476f85700a86e05bbee55209a"
+    },
+    {
+      "file": "game/src/agent/agent.llm-parser.js",
+      "bytes": 794,
+      "sha256": "b8ed44164563a32fbe992db8f635a9cdd35060a413380aea7722aef1099cab66"
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "bytes": 4087,
+      "sha256": "faeda3851bc623593dd7e8a365604711b56a48c78140e7955a62c50acf876051"
+    },
+    {
+      "file": "game/src/agent/agent.llm.runtime.js",
+      "bytes": 5224,
+      "sha256": "042111e0260eac3bae985153971384396708d647dda7592f7eeea6e7ea766134"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "bytes": 56540,
+      "sha256": "6317e381b290a95f7232ff15f2700577910da495dfce222f69adda0114252037"
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "bytes": 5175,
+      "sha256": "8398f0bbe8fc1cccd619b52b96b3c06c4d341673210b790e85bf6f7c796cde84"
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "bytes": 16007,
+      "sha256": "ad2c7fc9267233c46fcdd7e2b98c1948817263ad768169a8ee8e6cf32ba05054"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "bytes": 5264,
+      "sha256": "4a3a23bdafa028c078ed8a60dbf4db7c886d8054d879995662ff19ef17c9e19c"
+    },
+    {
+      "file": "game/src/agent/agent.replay.js",
+      "bytes": 958,
+      "sha256": "914c3a32b29ba9c961b026af3eeb18fb6d8752865192055fd8467850e8d99b1a"
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "bytes": 8210,
+      "sha256": "6397b2353723321832e644d5ae7c2c1f75db69b27740b5c626547a2ca5cb29d9"
+    },
+    {
+      "file": "game/src/agent/agent.run-control.js",
+      "bytes": 333,
+      "sha256": "058844378a342aca1e4591870f8082643bdcff4a2895898eb82e80c7c0a9837d"
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "bytes": 5647,
+      "sha256": "0359d986e2220e3832e8be4774fe1d8f3dd04674327e04eb15fbd67e46e078b1"
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "bytes": 22270,
+      "sha256": "a617dc1b6dedbb84f83308be17738fdb06402a0e62f1dc0dad590f7a90260ae8"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "bytes": 973,
+      "sha256": "00982b021d18f18aa93e78b6dd9de4a1f612dd6a05819b05b9e7c79f01c751b9"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "bytes": 3455,
+      "sha256": "c2af5756d1be19c607ea639c1ea363b1672cc162b6e7f22852ed816fff6841d8"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.runtime.js",
+      "bytes": 24418,
+      "sha256": "9d728a7f548a2f656035358ac993cdddabba5a3567c1f38749bf44f818ee1749"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "bytes": 22181,
+      "sha256": "71414ec7dbaeb2a3ddf7524697b0e7cb3313ec11962428d84cc54d642d7bfce5"
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "bytes": 4173,
+      "sha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5"
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "bytes": 6333,
+      "sha256": "f3d08f0eb093a89e00dd6c4a189ff494e1dca11f8cf81d2701be03aa03c4ed87"
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "bytes": 6702,
+      "sha256": "2a2944dbd969cb05074e5e3fc0c479b05801d868791feb1a8f7ce77bb34b550c"
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "bytes": 16990,
+      "sha256": "498052cc8d781e8df1d3ffd22238c48c768974cee1809b9dc45d661db65f0eb4"
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "bytes": 13423,
+      "sha256": "91922e0a75469d116682c1815a91e7bd50594194eb41b8c25edd138cb9c7fbf4"
+    },
+    {
+      "file": "game/src/audio/sfx-review.labels.js",
+      "bytes": 3107,
+      "sha256": "8b77310ec212085db29fdd016acdd9af1be780fa7f742dc6effc2e53ae389218"
+    },
+    {
+      "file": "game/src/audio/sfx-review.sources.js",
+      "bytes": 13771,
+      "sha256": "b1cca4f0fac5ab496ea314d8a6e08c2ecb7eb8b290a3ee1a4b540d2f5203a30b"
+    },
+    {
+      "file": "game/src/audio/sound.decode.js",
+      "bytes": 1415,
+      "sha256": "0347ca4d05c72fdfb07ce37961eba758a7afe608e1b12d527f912b37ebb317b2"
+    },
+    {
+      "file": "game/src/audio/sound.diagnostic-policy.js",
+      "bytes": 298,
+      "sha256": "f77ae4cefa87828b0c3a2cac5895aecfb97972d328da2fbc2ebe017d44921cb5"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "bytes": 15972,
+      "sha256": "dc341ee12d094b76fab95b10428bb15c957b82997bb0a70adb662269682e0924"
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "bytes": 1410,
+      "sha256": "0689bc715d3bc51e88684b500a1b04cf988e16a747cc3b47b02b9ed21e9a7f86"
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "bytes": 9565,
+      "sha256": "1d9ee6efc1bbd63657507d166a1f590d34ba95c204634c62bf05a0f1ef47ccad"
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "bytes": 2607,
+      "sha256": "28039b53fa1e3b11e7cf7b6399da588339c3546f8de04c6d78cd4deeced5fb47"
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "bytes": 10350,
+      "sha256": "8b2fbaa45c5827c610c7063899704f55074435be4edd10edf995604e86a4848b"
+    },
+    {
+      "file": "game/src/audio/sound.samples.player.js",
+      "bytes": 6168,
+      "sha256": "77d0dc9a45b30124728cc3725102e1155eca11e33eef1a8c3234a54486872933"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "bytes": 37276,
+      "sha256": "7389de0255e523d6574f2f51087c576c804bb97abf4f27001879216d1e47acad"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "bytes": 407,
+      "sha256": "a07855a9eaa6562f307e2787eb7622946e4fbda3b407fa66ccb547b4c975c75a"
+    },
+    {
+      "file": "game/src/battle/bag/battle.consumed-pile.js",
+      "bytes": 1959,
+      "sha256": "9ee5a989806293af534bba10d60570ebfb8e975fed69c734cca480bc44d7b292"
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.factory.js",
+      "bytes": 919,
+      "sha256": "0cda91ebadbee94caae3bc7dd97766741f21ac704df44626828aaadad3dc48e8"
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.js",
+      "bytes": 280,
+      "sha256": "03c194a6130f001421291b16e317977f6f31050a860a6969d62d1793b78cd329"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "bytes": 17903,
+      "sha256": "d35fd1df5dd2bf8c0ba34f7d56b7972aeb8521700bcb31acd285ad0532a85e8c"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "bytes": 443,
+      "sha256": "d7e2b9f7a48cf8a7d3632dd68b9db2548375909437d02a5899655acb5b1057a5"
+    },
+    {
+      "file": "game/src/battle/bag/battle.piles.js",
+      "bytes": 863,
+      "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "bytes": 2890,
+      "sha256": "135773c98f1f961bb5b71fe94e2fad6038bd7f191ad7d9d222643d622174a1cb"
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "bytes": 4199,
+      "sha256": "18947e60bdde7e7e0c82aacfeb08e466f4c52924633bbb0563bf4a8fc01d5203"
+    },
+    {
+      "file": "game/src/battle/battle.play-submission.types.d.ts",
+      "bytes": 987,
+      "sha256": "ea763bcf232d21df404f0f70fd434bf92c35dd1f39d1a793a109cf750fbe11ff"
+    },
+    {
+      "file": "game/src/battle/battle.snapshot.types.d.ts",
+      "bytes": 12614,
+      "sha256": "a1ccceb7c65b45ae687bf1f3f4c159ed9506a3a5fbe9a3168a3aabe51ed9f2c9"
+    },
+    {
+      "file": "game/src/battle/core/battle.actions.js",
+      "bytes": 2555,
+      "sha256": "33f65da721449a95fe9eb9969865b730fdbb2cbc785a154f64e43d37f1c8f938"
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.domain.js",
+      "bytes": 22932,
+      "sha256": "9a227ef9b36cffbd766b9a81844927a83b5ffc2c5c81cf854660af39255c1d15"
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.js",
+      "bytes": 298,
+      "sha256": "487a16d5ce1fae72dca9f1d9c0b6b14dd6eab4fc185cda36e169d1a600305685"
+    },
+    {
+      "file": "game/src/battle/core/battle.card-presentation.js",
+      "bytes": 358,
+      "sha256": "c48c02e066d695a8e4a7f138b9880e0f167c341e6656c204f1543775f6a1e6ac"
+    },
+    {
+      "file": "game/src/battle/core/battle.core-ports.types.d.ts",
+      "bytes": 20118,
+      "sha256": "cb2704573859b84fa990dfa962076be868767caa88587efaa3669b0ce082c641"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "bytes": 27363,
+      "sha256": "c56632a7eb1bb614abe0bab3052577672e042b2483e131e37eff3396e9ebebfd"
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.domain.js",
+      "bytes": 9158,
+      "sha256": "0d0086e137f5a0820a9117d6fd69d80cb8ffa4dcbe71157f9a3164a5bce5acd4"
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.js",
+      "bytes": 305,
+      "sha256": "94d22a8eae1830074f5b9cabb67521aa90f29cabf2cefbfda1c09e17fec8ec26"
+    },
+    {
+      "file": "game/src/battle/core/battle.default-context.js",
+      "bytes": 1985,
+      "sha256": "c3b51debacc3ccc29def6e61cb134cc7f4cf5a6e20500c2ad30611c6def55108"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.domain.js",
+      "bytes": 13365,
+      "sha256": "45fc35f1227c3213f27865ed97758fc934f6600edb36985b3cd32febfcedf9b3"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "bytes": 408,
+      "sha256": "46696c97aaccc01f909600931b9aedbe497c4e78ecbddfffa0112c0fd4f1ed5b"
+    },
+    {
+      "file": "game/src/battle/core/battle.effect-assembly.domain.js",
+      "bytes": 18271,
+      "sha256": "7e7aaa2ebbae7169f6ef150248e1a4e59f894cfcdab8413dba441a2b67c87967"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "bytes": 1638,
+      "sha256": "50120bbc31490cd54d8274f5b64f191554ff477028ea62ab41c97cccd633d26f"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "bytes": 32964,
+      "sha256": "d60696d0c1e007d74af237e6095ba943ec71792b13419490e8f771a88d19d679"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "bytes": 656,
+      "sha256": "64238c77c15ecd27c336537113ccbd3f899e9dfb223e13da31633ffb0e4a71b6"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-plan.js",
+      "bytes": 652,
+      "sha256": "a61c016a9a7743c040f7d4e21dbc654811b946420b670c4680e0130765ce5d9c"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.domain.js",
+      "bytes": 58450,
+      "sha256": "9a6cc8bc0b327571a36b5ab46e22253ba4f15fe6c7141a075274103abeababfa"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.factory.js",
+      "bytes": 672,
+      "sha256": "99e5b71d26af68d1b5d4c23453dd4fce18195718a7021fd4d1f2b6a2c75b63aa"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.instance.js",
+      "bytes": 4286,
+      "sha256": "c68c65a33f214bc9e950a5eca0bb96045de932667cd879d9ab364b59cb383373"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "bytes": 13437,
+      "sha256": "c641d820f244171dc47d3587e12c00032c6ed6a7072df992fb48932f91d35f2c"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.domain.js",
+      "bytes": 32174,
+      "sha256": "5e7f182b333682e75e887bb74fbf5776389747eacf7d9e2df90967d2d2368711"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "bytes": 437,
+      "sha256": "b4258941a36216bb7131d0a23253d50c655552a7a3df8e7c446899951050a22a"
+    },
+    {
+      "file": "game/src/battle/core/battle.facts.js",
+      "bytes": 1637,
+      "sha256": "8bd6835579e604039e2340a26c65b0d1b4325bea55cda7404bbb2cab8fb726c0"
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "bytes": 5913,
+      "sha256": "6eaaf393f67cf784181f6cd423d711522dfe1948d4d9c01080bb424e9b756b5a"
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "bytes": 459,
+      "sha256": "efd88f5879aeee977de9b6e3d28ab7e16505596c1b58a609b503490869b5abfd"
+    },
+    {
+      "file": "game/src/battle/core/battle.hand-selection.js",
+      "bytes": 4110,
+      "sha256": "09a7d47356c8f34afe73eeb5095310f019037c998e1db53f855ef1c4397bc5e5"
+    },
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "bytes": 5343,
+      "sha256": "7741438a3a9d885dbff1194439dec4f333fc8a7e4c355558eec28462129cbb5c"
+    },
+    {
+      "file": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "bytes": 5161,
+      "sha256": "e61c01a174a28866ac95c0139126e68caa2ba3f89dff1585fa8ce88311521704"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.domain.js",
+      "bytes": 28314,
+      "sha256": "a7f9e800f0f4bbeb1cef45ab92ccb6769ef3f2c1af48c59f494a0125b9453bb3"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "bytes": 443,
+      "sha256": "78b7ef93711f16047d87586c414091cbb721168275fee70ffd803f69a0ce2d01"
+    },
+    {
+      "file": "game/src/battle/core/battle.measured-damage.js",
+      "bytes": 780,
+      "sha256": "6e76b22c47754df04ad77bc8a19b209ee9f6550572b55de93f14bcb4ab060b82"
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation-events.js",
+      "bytes": 887,
+      "sha256": "406e24b9860f723c2f22d064c47ce9fc5f7ab9acec383d905a82efddf16aad39"
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation.js",
+      "bytes": 297,
+      "sha256": "fe56fae89db0b55b2fc96920fc1da69c3f289ddf1cef3090489483e3370911ac"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "bytes": 58958,
+      "sha256": "f98af8f3b3f4afe7391f5b44e9347453ff70b1619f24a72cdb167386dbae9a8b"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "bytes": 497,
+      "sha256": "21349d5405aa56d6e82950db3cfe4e2eab28d06d694551d6a70cee8599ae22ae"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.domain.js",
+      "bytes": 20502,
+      "sha256": "379570baf17b1dd787d8e7b015b4da0a2dedd552d784828ea8e1abe821ccf49f"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "bytes": 786,
+      "sha256": "64f6dca183fd6cafe8893df8e12d5a21df381e1c3560cf00f1bae9b574df2377"
+    },
+    {
+      "file": "game/src/battle/core/battle.setup-mechanics.domain.js",
+      "bytes": 8904,
+      "sha256": "6e06fb610f8dbc298b6bd98e61062f0832b35b95df2a02e337cc9907ab4c6c40"
+    },
+    {
+      "file": "game/src/battle/core/battle.snapshot-projection.domain.js",
+      "bytes": 8028,
+      "sha256": "501d3723eba1c8e12323c796b3e012ef84736015837d55e55b3aeb48f49285b6"
+    },
+    {
+      "file": "game/src/battle/core/battle.summary.factory.js",
+      "bytes": 829,
+      "sha256": "8732f55f0b19aef602b9ab6b25ec176a0fe1669da8053d5dfe1efb7d94885265"
+    },
+    {
+      "file": "game/src/battle/core/battle.summary.js",
+      "bytes": 329,
+      "sha256": "fddc33529ce3fef670d2316245bdf12342351220c5a82b60b63270d4e91eba56"
+    },
+    {
+      "file": "game/src/battle/core/battle.target-session.js",
+      "bytes": 3385,
+      "sha256": "e48aec5982171d093fb644dd95f0b63707bd95094ab434c2512685d460a0350a"
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-continuation.js",
+      "bytes": 3239,
+      "sha256": "7366753fd7c7b45634dc62af8bf8cec82ce254ac1fc8bf22313d04646743d687"
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-effects.domain.js",
+      "bytes": 3877,
+      "sha256": "079a7bf2cb4aaeeb198d2d30718be817efc0c62bf2db579aaddc2ed18c95575e"
+    },
+    {
+      "file": "game/src/battle/core/battle.turn-start.js",
+      "bytes": 7459,
+      "sha256": "c509d6ddae82fa332fe45992d4deac38ac5ca8436ff6016c1681ddb44b4292fe"
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "bytes": 24113,
+      "sha256": "d78cf107ccb180de54d81cc214ed8517b3c42a2e2c6ba11687e6dbd97aa8cf70"
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "bytes": 695,
+      "sha256": "f9214408a586ea648157f489f4e78942e9518688d7055dd9fdc3efa97bd6ac14"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "bytes": 12000,
+      "sha256": "b4425b75b8f9f291c33af5db24c23a104a2eca7115c19fb1b7ab64890f1e0b7e"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-cost.js",
+      "bytes": 4490,
+      "sha256": "64e87d0d072325310eb2dff076d2090429dd42d070459c30175f8904be86d00d"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "bytes": 10690,
+      "sha256": "aff4affd7416dcf985966ead9765330daf015c7f27b7a4baf1ec062f833d5d8b"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "bytes": 389,
+      "sha256": "8c33c1c42f8734fe96728f2cef426933498595efe4e0244bae6c457d7884f0d3"
+    },
+    {
+      "file": "game/src/battle/effects/battle.cost-modifiers.js",
+      "bytes": 2306,
+      "sha256": "faa42426d507011f063664ca628a2c4e52c99c4a6bd6ae37bcf51bab556fe3c4"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-candidates.js",
+      "bytes": 3110,
+      "sha256": "abcc087ab4ad8b2bc380e2e9f2d21c4e29d8f91e945d23cd48124a09d9f3fb39"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-flow.js",
+      "bytes": 17727,
+      "sha256": "baa23d7aa6f0ca1fc61bdab076266e09dff63b8e32d8310fcee0c5e37c04de5f"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-preview.js",
+      "bytes": 2604,
+      "sha256": "a259c521c49417cba114bb5eb253c242938714a57986a2877e7ce2a7335aa581"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-state.js",
+      "bytes": 5217,
+      "sha256": "5fc0a5de4602446a08d51e454edea75945cbc618d9eb909d55ab82568e1ec3c8"
+    },
+    {
+      "file": "game/src/battle/effects/battle.effect-clauses.js",
+      "bytes": 1796,
+      "sha256": "30bceef190d20768e50d0e982358d267d37c8790acce5268427f1cdb0eb5ad53"
+    },
+    {
+      "file": "game/src/battle/effects/battle.effects.js",
+      "bytes": 784,
+      "sha256": "3b114ea04c52edb13245ae16909840f8eadd4907a9a48b3f242abaab7d09cbc4"
+    },
+    {
+      "file": "game/src/battle/effects/battle.foe-fight.js",
+      "bytes": 840,
+      "sha256": "94daf33b1b9ba6f1e7a96d2dcfe4d6d9c90648daf19781091dc0383a232ed17e"
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "bytes": 2223,
+      "sha256": "cb22da88233c45b09d0857c44ab8d9be617a9e904c636a270ed137c0264cc180"
+    },
+    {
+      "file": "game/src/battle/effects/battle.infusion.domain.js",
+      "bytes": 499,
+      "sha256": "b2d505d99ec714f9c39c89a7f2b007a24556816bae5255ad94f0d56c12bbe713"
+    },
+    {
+      "file": "game/src/battle/effects/battle.infusion.js",
+      "bytes": 2064,
+      "sha256": "ca82006bf49735ee9319ef8b08b00e579d245371f6d3d44d43975d67f36b49cd"
+    },
+    {
+      "file": "game/src/battle/effects/battle.rule-guard.js",
+      "bytes": 2222,
+      "sha256": "f0d191b6c4f1db48e00f3b45c583cf86de818a8a866f3ef5aee98370eff220e1"
+    },
+    {
+      "file": "game/src/battle/effects/battle.status-operations.domain.js",
+      "bytes": 16446,
+      "sha256": "aa4e92ded3bb0a2243bbdd4b1e127e27259e8514ea309b975ba10c97fa03e69f"
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "bytes": 9072,
+      "sha256": "7166adaaab5a9ce9c48611bc830073f7a3fad8bbfe807c8ab6935002fa70a5c7"
+    },
+    {
+      "file": "game/src/battle/effects/battle.trigger-source.js",
+      "bytes": 1759,
+      "sha256": "14bb1888f306b0e6192ff19600484423496edfe817363ec28525541b14311d5b"
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.domain.js",
+      "bytes": 8050,
+      "sha256": "f31b978937d7db8919631a50c8a74220cd1b62ba555df56e9fd90f72c354cb98"
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "bytes": 442,
+      "sha256": "21a657c1d8108c3c82657b8830377cafbd9f73ae8f12d2dfdfa8b26d9284f2ff"
+    },
+    {
+      "file": "game/src/battle/effects/card-semantic-operations.js",
+      "bytes": 11710,
+      "sha256": "bc272a8938bf8e22b22bdf70497664ed33c3642acfb30c0b540f631c0d3f1f71"
+    },
+    {
+      "file": "game/src/battle/effects/choice-semantic-operations.js",
+      "bytes": 2928,
+      "sha256": "13b669baa9b34209c912c94e3edd7404ffee4e228baf170166b0b9252b9638cd"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "bytes": 8242,
+      "sha256": "48f049dc3cad2b3cb8fd6013a3ffb988c218bd84985252f8d61c62c27c54c880"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.ctx.js",
+      "bytes": 7937,
+      "sha256": "b64b1a192d992a48436a9b8b9634022d53e74a4c90be72352615fd01fff6313d"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "bytes": 13443,
+      "sha256": "6ddc4f0d890b84c6afe1697b308072d1086c9f467ca845a8ad3506eb15e0acc1"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "bytes": 20034,
+      "sha256": "eaa729a90900f1c8f8a89b8c40e39857fc607831a20518c1262f8447e25a8aa5"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "bytes": 6247,
+      "sha256": "3a5cc87894786afd5ecdc294be5363da1d414551019920f1f2987d6e98cd7cc3"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.gates.js",
+      "bytes": 6783,
+      "sha256": "f6f801f0ed33baf49b80ac106e977c098bd5235e0a2ae41701d1d82b5e40756b"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "bytes": 6370,
+      "sha256": "c122fa3a63301eff92eefb50f1272edaeea296f2c24cf2f058015f123a59834a"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "bytes": 18678,
+      "sha256": "09b93a5d1f6f317007aad4fea35536ce693aeadb572d48696fb5ba8892666658"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "bytes": 7466,
+      "sha256": "05bdcbbc847fb29ab3787fefec81ad0d6a74f15f19f848beb4dd588b4a247e99"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "bytes": 787,
+      "sha256": "448334987f85b9262515a24b8d98c2e7d9352d0ceefecf2e126de650b1289567"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "bytes": 22832,
+      "sha256": "5cf7047975ea50351f1f9716b64699a4b638746ddcb9874420c6939e7f772b7b"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "bytes": 3124,
+      "sha256": "b08aa7747cbe686c5a84599f105a9dfb25adb329dbda3cf3bee1b89e4222aa3f"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "bytes": 9677,
+      "sha256": "d393c86629afc2ddbcdfc7895f5e853347b13cc7b499eaca5e20c10745042416"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "bytes": 5032,
+      "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.tail.js",
+      "bytes": 2186,
+      "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+    },
+    {
+      "file": "game/src/battle/effects/effect-verbs.js",
+      "bytes": 22188,
+      "sha256": "532f0d7aee24026fed07d5e157d82472967bc2fc2df80b7e5de742457d154d12"
+    },
+    {
+      "file": "game/src/battle/effects/equipment-semantic-operations.js",
+      "bytes": 3710,
+      "sha256": "9b62b72b6536942f8b08b69b23d7c9687d7872f9a8a3085f32bf9411b6a13507"
+    },
+    {
+      "file": "game/src/battle/effects/hand-cost-patterns.js",
+      "bytes": 1347,
+      "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+    },
+    {
+      "file": "game/src/battle/effects/hosted-catalog-index.js",
+      "bytes": 421,
+      "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+    },
+    {
+      "file": "game/src/battle/effects/random-blessings.js",
+      "bytes": 2199,
+      "sha256": "1daecbad48c2d445cb0756fe83b2d21ad6dacaa44ddca1323125ddacc5dcaf59"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-batch.js",
+      "bytes": 3862,
+      "sha256": "266ec856b963931eadc37406ef036984a07add9d00bf775ac69ae827a4d322b5"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "bytes": 7874,
+      "sha256": "06c7d8f567cb10ed859f16adefa6ea2205e4d70a5d532624ec011d912d55e691"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.js",
+      "bytes": 2185,
+      "sha256": "5e44b3e10d965f2d5a34f5080bcaa14a12af886667d944b68d2702cdc2a1eaaa"
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "bytes": 6770,
+      "sha256": "20bc5bfb9b0ee96f84c4c9655195342530b644f9ee6daf4214aac2b06ee55bd8"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "bytes": 4072,
+      "sha256": "03816eb0496933b4c0322de664c6a7980cd3168c46e1c08109bf26eac919d47d"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.browser-presentation.js",
+      "bytes": 1120,
+      "sha256": "bede0f462aa14c44fabae762a0ddbb5e4cf0f131abb6a01059c0cb358cf109cb"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.clock.js",
+      "bytes": 4294,
+      "sha256": "9585369c4c7ed858a11582f25283d8043b11dc937373822c25710cc4b39b4303"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.execution-session.js",
+      "bytes": 2108,
+      "sha256": "4a23677464ecd1b83b9d136013d6329d652482326d538ff1c393221362eda674"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.host-scheduling.js",
+      "bytes": 303,
+      "sha256": "739d02ce0504c1968e50f0aa9a24b0c6081883a2a2200cb26a21f78e9303ed99"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.pace.js",
+      "bytes": 1181,
+      "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.playback.js",
+      "bytes": 5117,
+      "sha256": "1a5e61b9f9bd91870b47f5e5a5bcbf062ff70829db71793501a90ea81b5a7af4"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.player-effects.js",
+      "bytes": 3175,
+      "sha256": "1d4dc6d37735cff1fafdc2256dbf59be56dbafd2cedf7f589044e26af7bd82b8"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.presentation-ports.js",
+      "bytes": 1061,
+      "sha256": "2e43d880b19c911c0a961bfb4ce0f37be8a039c0f703d3276e31845d72819124"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.default.js",
+      "bytes": 186,
+      "sha256": "b80c6bc51bdaa7348fa216b623a6148814c390fc0dcaa4e0e07067b007778672"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "bytes": 6189,
+      "sha256": "e55724ef8f60a214e0a553f83b6925b33cefb37ae8bb24d35a52f8b85a200289"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.factory.js",
+      "bytes": 26415,
+      "sha256": "3a059a39f9ab1753bc18d5bbd9a315a9fe970848b60275455d9bf103c0c823ef"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "bytes": 2992,
+      "sha256": "2dcbfb41f750fde156881ab7c47147fb1ae584a5104f9e8a27bd3303fdb25dff"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.js",
+      "bytes": 521,
+      "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "bytes": 2437,
+      "sha256": "d48fa40d03f12496150551ca7a9aa6a7f7c36ff35994936644ceb0120852d0f3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "bytes": 1540,
+      "sha256": "d2ff7a283d056d2bf2989b94c860854ef0759c7fa0198e69851ee47926f8fbf8"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "bytes": 3391,
+      "sha256": "07c125a0f8e6003e89a9a890c4cdeef351bf9fe9c9c881e8f0144d745d45b3d5"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "bytes": 10023,
+      "sha256": "1ee689ddcb297a37a15a8e3bb403bf50105a41710b7e4f71e794becd87c18bb3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "bytes": 529,
+      "sha256": "713bc4366ec1cca08785bca4915843ad5f35dd0a0428f339dc1617dd169a64ef"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "bytes": 2623,
+      "sha256": "1b742d48b5ec01b1bf2a4b8b331b422d446a9a6853776c885323090c67fd23d0"
+    },
+    {
+      "file": "game/src/battle/view/battle.action-timing.js",
+      "bytes": 1478,
+      "sha256": "c5064de1c284a1541cab9952999fdbc4c931829ce2f913371719c8fe33d0886d"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "bytes": 50709,
+      "sha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087"
+    },
+    {
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "bytes": 17195,
+      "sha256": "cc5b661989ae3fbb423b097beb719e46b3f1e7837a71bd58742c4477bae0ad88"
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-cues.js",
+      "bytes": 1988,
+      "sha256": "4c4ea40164130a310b5f4e1a31e91ab695abb989f8418243e2bc4af32c7912d5"
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-profiles.js",
+      "bytes": 1139,
+      "sha256": "42684b5b01bc2f46b51839eba75c2919098f886c723c31aae799afeca24110b5"
+    },
+    {
+      "file": "game/src/battle/view/battle.card-feedback.js",
+      "bytes": 514,
+      "sha256": "4d659306614ec86d4421e78bb96fe0e02ca60d11ce7241c1f417fedba67f3046"
+    },
+    {
+      "file": "game/src/battle/view/battle.card-results.js",
+      "bytes": 3178,
+      "sha256": "da0df8baf5468f71f68ee28eea5ab6f0c42e5a340ff646da572bb4f22f8947e9"
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-content.js",
+      "bytes": 5238,
+      "sha256": "25074a2f38d3be92a8644a713c7435d5b6f0920681a28a64ae23a1dd380003b6"
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-shell.js",
+      "bytes": 8213,
+      "sha256": "3733a72daadeefcb0fcdceca7b46ab186ffe13ff09e74f0376e997eb5aa306f2"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-infusion.js",
+      "bytes": 633,
+      "sha256": "5bcc0dd0fbbeb646b68b7c88496ebb8108a10a65e477e8f3c55bc3fa2c17523f"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-input.js",
+      "bytes": 1809,
+      "sha256": "80b469fdcf4dcb33d522e1b29abae0ca08b3bd521ed4b707a02082bb12f3f5db"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "bytes": 1844,
+      "sha256": "2330469cbfadd40d6b165a831016bfd03fea278da6f30f3cabf22e294f4f61e6"
+    },
+    {
+      "file": "game/src/battle/view/battle.dom.types.d.ts",
+      "bytes": 435,
+      "sha256": "eb77aff9a33c23d3c28a1cdf1077f1cfea41fe8bdd1055c7a4591de76adabfcf"
+    },
+    {
+      "file": "game/src/battle/view/battle.effect-feedback.js",
+      "bytes": 10738,
+      "sha256": "facfdaa9ecc4ab55c7188026f70eb8f9870a67613191ade9ba5d64f9ca79fc32"
+    },
+    {
+      "file": "game/src/battle/view/battle.enemy-motion.js",
+      "bytes": 2494,
+      "sha256": "17b9c393595f60a090ff1dab10ec3342b4a2573714eafb6019611dde54a4b5ab"
+    },
+    {
+      "file": "game/src/battle/view/battle.feedback.js",
+      "bytes": 4043,
+      "sha256": "ea791d0770669db304c912d5ddf0e19640fd90be4639d9a2bb2a4ffba76f4e9a"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-assets.js",
+      "bytes": 3064,
+      "sha256": "51f478960b6cc289b03384026a19d9c0910c0506466057c0887246dbeaac3d60"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "bytes": 569,
+      "sha256": "ba7f531eae515cb888e9f34f89c76eb55a1d82bcb76b5920fcbd4bba600dd224"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "bytes": 883,
+      "sha256": "efbdf272a28617f60c61cc114dc4481d81a9d90576adb4832a395c89884d0a6d"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog.js",
+      "bytes": 499,
+      "sha256": "3699b292b5e1620f1ca5cc51775a4a213a02a95c3fab7f7f14d16f883c879727"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-renderer.js",
+      "bytes": 370,
+      "sha256": "0beacfbf0505a5c33ef52b5b4405004d8022d4a7b1bb6167710d9927bf7629ba"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-resolution.js",
+      "bytes": 1204,
+      "sha256": "b5ec03ee48254c2e3bf32c80c4f83dbc5fcde1f63465e598a8c97388360350a0"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "bytes": 1270,
+      "sha256": "74df2f6466b8e1524a6b29770202267d7339e767cf885a06b66288fe8e907ffe"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "bytes": 42170,
+      "sha256": "173e4142ce0951057df4132d5f485d19fcdc4ed1de6e96f68efd165ba51a5989"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-hit.js",
+      "bytes": 8043,
+      "sha256": "e0977072ba0d53329187c9ffffe15c82006082d7d8f1fadeb0976dc02ffe2991"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-inspector.js",
+      "bytes": 8861,
+      "sha256": "7cf188272730a9f1b5740cc62432fb2dda0f3a696a019645ea3b187408af4de0"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-layout.js",
+      "bytes": 818,
+      "sha256": "341c75ac4471c910a920ac58789efc3fde2c73256f543e4a9dffacb92686e0ff"
+    },
+    {
+      "file": "game/src/battle/view/battle.hover.js",
+      "bytes": 6899,
+      "sha256": "ff4e92291df6ad08f0a59eb2e28f05dbc603293c04625f29e15eda3a9dcb390e"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-material-state.js",
+      "bytes": 1717,
+      "sha256": "48aa3386323df7da2d4d12e2af0a19fd1ec28a30c0bfd3de8b39935c222548ab"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "bytes": 12957,
+      "sha256": "63a01a9a706f6c75b11cbc0568030079381ab24a237cf93435b4af12a203ec87"
+    },
+    {
+      "file": "game/src/battle/view/battle.intent.view.js",
+      "bytes": 1718,
+      "sha256": "3f398eacc534379deab608e6e284734079076d99c41ee05917d3c2614f3664cb"
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "bytes": 65201,
+      "sha256": "ab4708626ffadb1f51d12407a7a15dc4bae393f451943fd6e0a79517f9b5ffdf"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "bytes": 13913,
+      "sha256": "d75a029d6fd44cae3428189dc76ddb3e05044e35461dbde539c22bdc061aabb3"
+    },
+    {
+      "file": "game/src/battle/view/battle.page-activity.js",
+      "bytes": 759,
+      "sha256": "32547de2b844fd2ff3ce914850bd4d60c45228e1b3e04b944431a2b4ab272931"
+    },
+    {
+      "file": "game/src/battle/view/battle.pile-view.js",
+      "bytes": 2683,
+      "sha256": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7"
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "bytes": 1768,
+      "sha256": "e4c3293af451170eac93c918a375b1d7214d761e398fb5d5663019aa6b00242b"
+    },
+    {
+      "file": "game/src/battle/view/battle.potion-use.js",
+      "bytes": 12553,
+      "sha256": "a7ad3dd93e32d591c79cedc48b54d1df7a3a51a23e3634f7021e04c2da4047d7"
+    },
+    {
+      "file": "game/src/battle/view/battle.presentation-ready.js",
+      "bytes": 8687,
+      "sha256": "2e4e90fd5ff3c2368c10b55f3fbf0c20a80b2c189d490c52cbb42acc9929602d"
+    },
+    {
+      "file": "game/src/battle/view/battle.preview.js",
+      "bytes": 19212,
+      "sha256": "d47d7006e786b76cbcd716fd2a0690aa223122ef2b21705e628cf40ac1fe63f9"
+    },
+    {
+      "file": "game/src/battle/view/battle.scenery.js",
+      "bytes": 1302,
+      "sha256": "5d4ba879cec6b82778fc414f84141d8696491e809c08a1517bcab945a29101ad"
+    },
+    {
+      "file": "game/src/battle/view/battle.secondary-overlay.js",
+      "bytes": 4562,
+      "sha256": "5977103aa9818fdf2603b21f53c6c42ced76d35f0a11214c81a8ad4ce31cdcee"
+    },
+    {
+      "file": "game/src/battle/view/battle.selection-ui.js",
+      "bytes": 5028,
+      "sha256": "763b39865202c5c86a972ffbd4eb2c5bde54e3f32e8dbb002334fb3225914b55"
+    },
+    {
+      "file": "game/src/battle/view/battle.skill-view.js",
+      "bytes": 2091,
+      "sha256": "a98229b6f08264f4e110ed168ecf4287752bc3ad619c0418b4c78dd0b6bbc611"
+    },
+    {
+      "file": "game/src/battle/view/battle.stage-view.js",
+      "bytes": 18477,
+      "sha256": "0013ac375564988067ebb3c2d1f7022b764d6a892414c57e6d03312f322de077"
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-feedback.js",
+      "bytes": 5131,
+      "sha256": "ddc1ac90461fcd91f17e91a50b830a76d1933a157617b2d0802196b0e8d76ef3"
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-forecast.js",
+      "bytes": 2050,
+      "sha256": "52b5e6a05add8318457a37b48e51e58fb059b177479f4146d60895060a473f4e"
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "bytes": 26723,
+      "sha256": "0ccb1621ff0fa5919775924f643a967d3c33d3ebe211e1c0897e2679d1d18858"
+    },
+    {
+      "file": "game/src/battle/view/battle.victory.js",
+      "bytes": 4126,
+      "sha256": "49969d507d0d5c8ed6c64e4b8df867fc43bf65095324857b2c8b597694bbdd10"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "bytes": 59507,
+      "sha256": "7337167f3380e85b4e21e018e9b2f7fb0817c6e9f85d8832e17dcf9ce7720e22"
+    },
+    {
+      "file": "game/src/boot-order.js",
+      "bytes": 1668,
+      "sha256": "968914d24051c3de51357ce0d845f59599410c4bc9cbebde27c69404c31cf204"
+    },
+    {
+      "file": "game/src/cards/battle-value-context.js",
+      "bytes": 1830,
+      "sha256": "ead5ae039e02ec40012e381c3189b8abbc2404149e9d36af1cf47572f624c890"
+    },
+    {
+      "file": "game/src/cards/builtin-card-execution.js",
+      "bytes": 12402,
+      "sha256": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15"
+    },
+    {
+      "file": "game/src/cards/builtin-card-field-defaults.js",
+      "bytes": 8988,
+      "sha256": "46688fbf9965876423a9dab043b21a4abfc3937d2ffe8eec75b13670ee2a444f"
+    },
+    {
+      "file": "game/src/cards/builtin-card-identities.js",
+      "bytes": 4417,
+      "sha256": "72a87c8bfc9c06109ac72122d94eb1a4fc0cb3397b99183781fc1ed7ba87a9e7"
+    },
+    {
+      "file": "game/src/cards/builtin-card-numeric-fields.js",
+      "bytes": 1585,
+      "sha256": "dd1ab6c51ec3f51f854081111f09a6096ee1f5e441a08bcc2e1ae4e96f239ce9"
+    },
+    {
+      "file": "game/src/cards/builtin-card-previous-rules.js",
+      "bytes": 7355,
+      "sha256": "ea2488dc18215aacb0318d4f896fe52e68532fbd49574d631d6d1e7aee41f865"
+    },
+    {
+      "file": "game/src/cards/builtin-card-previous-variants.js",
+      "bytes": 1329,
+      "sha256": "6066fe36ee67899781c9fe93f4deec4adc496e109601d017cf1556ae9ecc28c3"
+    },
+    {
+      "file": "game/src/cards/builtin-choice-execution.js",
+      "bytes": 1529,
+      "sha256": "eb8f2dd391776f25cd429b3571068ae2866712c90ab061e680d4a0f329b30233"
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-execution.js",
+      "bytes": 2982,
+      "sha256": "f81507183473f84573d91c8eed0293fe85f6a9929b7023d4c715a457cdd7cd9e"
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-previous-rules.js",
+      "bytes": 2650,
+      "sha256": "63d6ebcae494d3b9a221c1f345408d4e1e10c4ec468dbae5b72a455af5d47804"
+    },
+    {
+      "file": "game/src/cards/card-battle-start-explanation.js",
+      "bytes": 523,
+      "sha256": "5df8903a56a6303afa97c7875e2bcd94ced0297d21a98c94d1f8236ad3d157b8"
+    },
+    {
+      "file": "game/src/cards/card-compatibility.js",
+      "bytes": 797,
+      "sha256": "57b7d4ebc93ca79ddc27a669901ce9fbeb89c7edfcd66321dc5f52b4c5fa4501"
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "bytes": 4593,
+      "sha256": "ba4a5e14494d5a482ba57b970626032f8320ce5c23ab21d3d38d7590695afce1"
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "bytes": 38197,
+      "sha256": "8fbf05ff899b9834f23da9b1a004710a7e620d3368bc1942f6c975bf15f2bbf6"
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "bytes": 444,
+      "sha256": "5201ee0193fccc780e88dd4508e13507d9d76a5a70025f70141f1e697a3b713e"
+    },
+    {
+      "file": "game/src/cards/card-execution-plan.js",
+      "bytes": 8432,
+      "sha256": "1cab5a326f9779b294ab1eca49358566adf8b0470af644ccf8a301bdd4806b85"
+    },
+    {
+      "file": "game/src/cards/card-execution-plan.types.d.ts",
+      "bytes": 2152,
+      "sha256": "01332855c52f57e05539f507e988eadbc90338a04cf1077562365822adadffe1"
+    },
+    {
+      "file": "game/src/cards/card-frame-presentation.js",
+      "bytes": 1517,
+      "sha256": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196"
+    },
+    {
+      "file": "game/src/cards/card-instance-fields.js",
+      "bytes": 992,
+      "sha256": "fd765dad63debb472819aad9363147243b66d76ff8d2f7a9642f8d050b90deb1"
+    },
+    {
+      "file": "game/src/cards/card-instance.js",
+      "bytes": 1302,
+      "sha256": "ccb896a459443513daf3057c8adf647f81b6dce6af23dc132030ad9014f9335e"
+    },
+    {
+      "file": "game/src/cards/card-legacy-battle-policy.js",
+      "bytes": 3564,
+      "sha256": "26238480e42874c6d8d08346ee405abc5b9aeac1de655886b208be03570dfa29"
+    },
+    {
+      "file": "game/src/cards/card-migrations.js",
+      "bytes": 7670,
+      "sha256": "616c25e074d690e994e68613be57a97438c7a53f164d6b1bba7dcc19fe156a70"
+    },
+    {
+      "file": "game/src/cards/card-photo-notes.js",
+      "bytes": 3288,
+      "sha256": "e5b584cc493c1beebc5918f6920c0434a8cd8711886c4cd4c1c8b22a71a2435d"
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "bytes": 2486,
+      "sha256": "ab0a8963d3df7103da067757935907f799d3752667900ddc3c0bbc1909e6f722"
+    },
+    {
+      "file": "game/src/cards/card-render-context.js",
+      "bytes": 857,
+      "sha256": "5520443debdf12b82befc015e04765052642a6b9af99a0a502992c4e3de9ad4b"
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "bytes": 12600,
+      "sha256": "2c0225c9b117cf132e2f769a42abeeb7f549694ab6f8d72db222932cbd844963"
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.types.d.ts",
+      "bytes": 2718,
+      "sha256": "31cdbbf49718027d2716ef2469acba8bb15940ee207ce385d45e547e1a3f6727"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "bytes": 78493,
+      "sha256": "06a608f2dcd14e2c0d1845df2403efeb9c1871d7e30a354beef1d56901f27b63"
+    },
+    {
+      "file": "game/src/cards/card-semantic-contract.js",
+      "bytes": 12094,
+      "sha256": "df0e971299f5f5aa4eea2175090787135d207b8bdf2a49d4b80dd966152451ce"
+    },
+    {
+      "file": "game/src/cards/card-state-presentation.js",
+      "bytes": 1671,
+      "sha256": "91722a0c5f8cee404fc43dc8e23924126a30eee93e9c6f6fca863f8178f1ce48"
+    },
+    {
+      "file": "game/src/cards/card-trigger-contract.js",
+      "bytes": 1842,
+      "sha256": "239ce5c1b1e66eca67dcf3303c3b341cbe7819a52d13a27604010625691871ee"
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "bytes": 1750,
+      "sha256": "8be4bec49c82b5e3bb023be7fbe623fcdbb82ace680100ae477cb917b981a823"
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "bytes": 6103,
+      "sha256": "93afe56ef8ba05e4ec72a976241973e89f54a1254b5f36178d73d33a265810ad"
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "bytes": 104812,
+      "sha256": "c57c25a898d3fa2c6dd9538cff489d5c8e4bbeb2f4c27815c278bffb5bf77088"
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "bytes": 13719,
+      "sha256": "701483224360e67cb14a0f855c5077c056b41566069e0ea586802bf68f5c847c"
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "bytes": 19034,
+      "sha256": "43c076914e491dd340cfbd746bcef15b46b732cbcf3ad81f2daca0ea962a2098"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "bytes": 8414,
+      "sha256": "0db90c778b4b86b8e2d17b58f14f12d20a0d72004a0f4643b79bb7b82043f999"
+    },
+    {
+      "file": "game/src/cards/cards.sync.builtin.js",
+      "bytes": 844,
+      "sha256": "45fc8507901f4f73bf8c843b97d1215fdf66b05f49bcd01d69bbfcdf70d5b27a"
+    },
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "bytes": 13998,
+      "sha256": "8e906e37f44bf9a4577241450f14cd021becdf218f0b9198b000282821a663ce"
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "bytes": 3302,
+      "sha256": "9075f98cee37f00453af98a33cfca8b8b7cbb5ff78a7c4739539a6102216f190"
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "bytes": 935,
+      "sha256": "bbfe19768151d4dd9bcad924dfa440b95796a7d300ae288ad3881f63747bf6ce"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "bytes": 4083,
+      "sha256": "e05ab9d7484406e4328f2bd8e8c88681e1431f62a9a6b0a2bfd4965c6b75cf8b"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "bytes": 1843,
+      "sha256": "08d4bae0c89973beed5a544c54c7d95092f7447f2eb4750e5986a9f207c6e756"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "bytes": 2157,
+      "sha256": "7bd8a10fde163f5bd54673bf604449659cf3ab50457efb5144056d3938f1cad1"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "bytes": 8427,
+      "sha256": "415e666451e5d006c748dcf6432775360d9b05ec86f4a9daf200c5ff63c31639"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "bytes": 12420,
+      "sha256": "dbf6b6364a2443a771fb1eda01db1a887fe615148bb7585add5bca6e0b9ad63d"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "bytes": 5057,
+      "sha256": "13eb6767b010d64ca1db098bffd048e9a9a1f52244f6955c2d39d7055f3ab105"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "bytes": 8936,
+      "sha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "bytes": 6144,
+      "sha256": "e9c39b6adeb0316af4f0956bfac4691bf62804ff33b8c5e821c3408a92225ecc"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "bytes": 4007,
+      "sha256": "c3a6e7d6729e176f45e1805b779b86e922649611115d630ff09f867e676b5cb8"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "bytes": 3389,
+      "sha256": "fedeca1fd65cb45d5d93379d7d987d916ee230a2ae088262f5942be007806e3b"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "bytes": 3150,
+      "sha256": "e09cb23daed059252a79ed53b29598000cdeb7b63453be2f276edbae58d06792"
+    },
+    {
+      "file": "game/src/cards/cards.sync.numeric.js",
+      "bytes": 2613,
+      "sha256": "dea07ba6cf5017fce91966e401f70fe93b784f9f30ab423bdb0a2a8dc928de8d"
+    },
+    {
+      "file": "game/src/cards/cards.sync.persistence.js",
+      "bytes": 358,
+      "sha256": "671eedf6b1059a1de2a46ec3a162cca86af2e59f8bbfcfd8dba357dffa1027ba"
+    },
+    {
+      "file": "game/src/cards/cards.sync.renames.js",
+      "bytes": 19793,
+      "sha256": "11e375b28a5f14c31031e171e2c28d4bfe1e73c80835fa6d57e0a422d635a2c5"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "bytes": 25252,
+      "sha256": "937d202f99bb1f83ea4dbf0dfae63f985a283a076b238b749ba4f94addba1f83"
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "bytes": 14197,
+      "sha256": "7b74cd8785986a97a85367b3885479b82149fcc0142d6283fd2401b4a00f5fce"
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "bytes": 4921,
+      "sha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+    },
+    {
+      "file": "game/src/cards/pierce-arrow-revision.js",
+      "bytes": 1614,
+      "sha256": "09fe12b26290f3c57605d876f4f9f30184c45c768f560a8bdb571bd2a8d67200"
+    },
+    {
+      "file": "game/src/cards/rot-seed-revision.js",
+      "bytes": 909,
+      "sha256": "b4edbaa03d12f4a7c71240c3fa40cc0d7e09c576c8842bc66c2289632e02ae07"
+    },
+    {
+      "file": "game/src/cards/structured-card-description.js",
+      "bytes": 2976,
+      "sha256": "3d2db82a6d8e9c73c91ce8ee3b532003cf637d81743cb7cddc6171a851c217db"
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "bytes": 2241,
+      "sha256": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe"
+    },
+    {
+      "file": "game/src/core/art.js",
+      "bytes": 33053,
+      "sha256": "ae665faadd8b2ba0403de4eb040d0611be39d7e6c8dad49c87b1ac082f9ba7d6"
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "bytes": 2342,
+      "sha256": "9b9e28dfa50112e780a39dc66ee2765efab513190139b6b8f16ca185c36b1308"
+    },
+    {
+      "file": "game/src/core/bag-render-derivation.js",
+      "bytes": 3239,
+      "sha256": "9a832c3e4fc60b410c2d599f1a7002735024690893c795e6bfb60dbffa7e9dad"
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "bytes": 12216,
+      "sha256": "9a6bca6ec2c0be39f5a769590bad7962ae8559b48b52a3f36b1200757da469ba"
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "bytes": 3122,
+      "sha256": "fbd1f13e1fb8b358714efd698203cdf530c01cb284395f8c59bb8ebd81561128"
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "bytes": 3191,
+      "sha256": "3a7a6b89737ce5068f26fb09c95b9cee3d137f1a187c864c2025f4f63c436d7d"
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "bytes": 1853,
+      "sha256": "ee64a9d61e53f0ed33c0f328c4ba0419c788dae42ed049c6c1e5386b9c3aefcd"
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "bytes": 7556,
+      "sha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da"
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "bytes": 2627,
+      "sha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740"
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "bytes": 10530,
+      "sha256": "b5f4e585cedec3831227e8ace93df73f4ef1f31410cd3fe9dd93fbc9a5fb1d54"
+    },
+    {
+      "file": "game/src/core/game-boot-input.js",
+      "bytes": 11039,
+      "sha256": "932f24dd9c041c0083e0cd6e2a1b56a420eae5d32972295cb1273e7f9fded19d"
+    },
+    {
+      "file": "game/src/core/game-boot-loop.js",
+      "bytes": 8504,
+      "sha256": "bcd7867639e002ed24d89ca9588e91d5f897ea2fc490e60345a5029733168bbb"
+    },
+    {
+      "file": "game/src/core/game-map-selection.js",
+      "bytes": 8426,
+      "sha256": "b87bf12f61a5ab66ab07eacb7cb0e9d9cfa7708cd340e50994543e2091a7eeac"
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "bytes": 1778,
+      "sha256": "fbff9be537fe946251556b750fb715bc386117d18e54c98da00ed921ff8a90de"
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "bytes": 8289,
+      "sha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a"
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "bytes": 1992,
+      "sha256": "5d2cab3cf14e1a20d04d418f18266d52e8d8aa5c0f5341f1a8c300556258d97d"
+    },
+    {
+      "file": "game/src/core/input.js",
+      "bytes": 3978,
+      "sha256": "7c1c6e795d3266780add6881bfc4992fc5d25ea7207f9f27c36a7a28b4dc4975"
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "bytes": 4562,
+      "sha256": "dfa393942e759d805d3daff1cefc79dda0c22e9a77e23d9d21536050b1866dc7"
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "bytes": 3921,
+      "sha256": "4c024fe3be5539e4a942c5c1a71c73f141698ccad9bd79c6f84424054f2aaa02"
+    },
+    {
+      "file": "game/src/core/map-drag-motion.js",
+      "bytes": 5356,
+      "sha256": "df9581556cc7dce38defcc307fabe4b4737c34694e2651979d314e27ed0fb7fd"
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "bytes": 1221,
+      "sha256": "cab9a768d6d0a9aa19e3f0c3fa9c959c3e5803b79e6733a6560273d159de62ac"
+    },
+    {
+      "file": "game/src/core/map-layer-atmosphere.js",
+      "bytes": 2656,
+      "sha256": "9c598e8d971a224415e1e41ce5dc1f8055bb70c9a96d715762f493650eed9cd5"
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "bytes": 15227,
+      "sha256": "2ae15c7523db9e8c65780db75362df394bab0aca00c710208ee482c826c71609"
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "bytes": 1901,
+      "sha256": "41aa314b19f475d695e658d06ebcb858ce6a13d6aa5f8a4ba2a137a933998ba6"
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "bytes": 4805,
+      "sha256": "032eba7b02895dad9650c5fa72377ecd70eac2a47bc57199bc0aa067b4f2f944"
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "bytes": 1889,
+      "sha256": "6c124920061defc3146402404201bbbe191cacb3d86dd30dddc75e09aa6c3d45"
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "bytes": 1540,
+      "sha256": "39a17de50df0ded90b56f1e828ebd6f9beeab1f91a78cf15a3d1f82d0230ca83"
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "bytes": 3287,
+      "sha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7"
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "bytes": 3550,
+      "sha256": "2752612c611c4259cb26d1049098c414b3f35ab5f8f37f3bb098c159f54ad1ab"
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "bytes": 2246,
+      "sha256": "1dbd68c4c3f3a7b33941b4ab1820bade37a83939f4be7a03f3ef537b52975a4a"
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "bytes": 6049,
+      "sha256": "1b0dacfaa1cd7ebe8c83c93dfd4101a2034d96325e791d31deb0986471c2a3e6"
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "bytes": 20852,
+      "sha256": "381909db0e242f9b552ab4d4d6f0d46ff8a8de73849198be88f538cc3c02d6d7"
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "bytes": 1195,
+      "sha256": "19882d112172c606cabcc23a6b522f2103717cb283233d7a7344bf1b1ebdd283"
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "bytes": 2616,
+      "sha256": "736b80fce4cac19c7e2e722775da048f175bef7d8dcffd0ce61cc9fafe501432"
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "bytes": 1529,
+      "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+    },
+    {
+      "file": "game/src/core/random-service.js",
+      "bytes": 1848,
+      "sha256": "d7c4481c5673646ac055c83483ad5304d1ce61cb102892b17a0bbb32a66bdeca"
+    },
+    {
+      "file": "game/src/core/random-streams.js",
+      "bytes": 773,
+      "sha256": "af4e4cac02117d5e37cd239889bcc97356c2ba6a9dcee36cd05e847846dd9897"
+    },
+    {
+      "file": "game/src/core/random.js",
+      "bytes": 1223,
+      "sha256": "48eb8bbd1917c977bfa59960e5379ab71078e62dc312c73f4386bd61e6dfa233"
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "bytes": 2808,
+      "sha256": "0cc97ec24921c7e58f877ff6d972578a0863b659c03da2d97fee59bae847ac73"
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "bytes": 1708,
+      "sha256": "279e855b8cd2c0e363b78542f717f84e92f3ef636d19441c4955f6227f4e55b6"
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "bytes": 2933,
+      "sha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07"
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "bytes": 30985,
+      "sha256": "0420bb53acab8b2967b1e873349802d4e12aa00b2a1ee09465764feb62b4eff7"
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "bytes": 1563,
+      "sha256": "7860c4e2ad5469ab17a1e4d1800dc69a5914633710b808157d14ef105966fce7"
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "bytes": 5550,
+      "sha256": "72ef0c629608fbf2f790ad7d767ddf3bc0e9cd49070cb8a63ebfdc266b83e815"
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "bytes": 1351,
+      "sha256": "ab76d311c8428e045a2219ef2c294492ea31c514046744e6c571e37384e611d5"
+    },
+    {
+      "file": "game/src/core/run-checkpoint.js",
+      "bytes": 389,
+      "sha256": "95a76419654f9fe299af1389c23ef16efdaeba1253035fbb97d9e920bc1cdab8"
+    },
+    {
+      "file": "game/src/core/runtime-env.d.ts",
+      "bytes": 3100,
+      "sha256": "476cdba27d5084a1759a2a4253eb440fe8508f5fb68d22a916d12fcbf217c01d"
+    },
+    {
+      "file": "game/src/core/runtime-trace-panel.local.js",
+      "bytes": 1030,
+      "sha256": "49e06eeae73b04ebb64deb8e08e93ed8f46c787d58c7ecb16bf2ac0dfe444ec3"
+    },
+    {
+      "file": "game/src/core/runtime-trace-stages.local.js",
+      "bytes": 1047,
+      "sha256": "987f709e1f51dd9d0023e4aface0e5e390850e08a1ac9b5af2dac6bc6a481d4e"
+    },
+    {
+      "file": "game/src/core/runtime-trace.local.js",
+      "bytes": 13568,
+      "sha256": "cf7d855112ce65278c54e9aa9d79bf28d30b286c32dabadbc4084e9afea86378"
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "bytes": 1130,
+      "sha256": "eb8e15901830011d94eaa98ff647daa6f2435336b80ab01d976140cf936131b8"
+    },
+    {
+      "file": "game/src/core/sdt-facade.typecheck.d.ts",
+      "bytes": 341,
+      "sha256": "a89226c7b268150096b6aa9b889458077744616e5265e7e6b9283088fd76ca9b"
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "bytes": 2064,
+      "sha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad"
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "bytes": 1025,
+      "sha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc"
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "bytes": 1383,
+      "sha256": "576dbe1bd94981696971a4fe65a8b81c3755b128f15be8dc36842b44f9ad25ff"
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "bytes": 7987,
+      "sha256": "f8f0825f37ac8d23be92a88c9da4608ea15b6e51cb5df28bfa356925104e546a"
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "bytes": 3619,
+      "sha256": "3923840a81444f1b488a44f3335b880bfa3b8f0010fb4e5029f8647ce8d172d5"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "bytes": 12743,
+      "sha256": "22e221cfa4c6a98e338ddccacdfb7646a0005a8f81086600792a58ab4259d8f8"
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "bytes": 40383,
+      "sha256": "fce7ff6407be53c1d530c6dd36306d881d068232c2f9e553fe55eae1f38d990b"
+    },
+    {
+      "file": "game/src/generated/narrative-events.js",
+      "bytes": 8031,
+      "sha256": "267c6e719f2ecaab3e75f48ed7b9e716a3a9b704ce9d649317964392e110e3e9"
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "bytes": 12435,
+      "sha256": "16a57337292f59096ef3eebfe9ff6d9c7256f71f4cb91c11d25dfa2eadd2175f"
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "bytes": 2536,
+      "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "bytes": 11358,
+      "sha256": "cafd000af5eaed9b34b8bd28f8b63b26b2a2442ca59fc44ced5cb5c90100eef1"
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "bytes": 1431,
+      "sha256": "9216cf84b2f0e0091fa015b22ec3b875eb04cc35a5948e0e4ff6201bec7766d9"
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "bytes": 23904,
+      "sha256": "d87d3ff2394d7022b0ead06485af881ccb4bbd07f4b6f76f36a964aa8d957cdd"
+    },
+    {
+      "file": "game/src/home/home.visuals.js",
+      "bytes": 8816,
+      "sha256": "77894ef542f7caa05ab164959f45d45299a1e99b0fa0e8783e47d9abd5576b68"
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "bytes": 2775,
+      "sha256": "de497a1dd57cccaeeb7da97af2d27a6c84ea3a6eb11cc435110003e52e9647f2"
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "bytes": 1713,
+      "sha256": "9e191850b9df6507b08641f7fdc7e1f3726413b8c1ffffff7b8dcb3049cc8474"
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "bytes": 7046,
+      "sha256": "5c2de19fb2a568d6cf427f75c9f3d095c7e9c6c1a486c01345a412844bf43ccc"
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "bytes": 9230,
+      "sha256": "56798c6feff1a2d222b38198c9564e87250422655958f81f448083f0df404797"
+    },
+    {
+      "file": "game/src/hub/bag-inventory-commands.js",
+      "bytes": 5729,
+      "sha256": "72d58af2a06c9b0e0dfbb7a4d578a23506b6fc9aed52b11034c170c89c038330"
+    },
+    {
+      "file": "game/src/hub/bag-legacy-use.js",
+      "bytes": 10056,
+      "sha256": "6c4c95c787c514eb575f97e80e755b5963956e6728d74302c897f85d9fa8ef8f"
+    },
+    {
+      "file": "game/src/hub/bag-pane-view.js",
+      "bytes": 7777,
+      "sha256": "e472fb48e3f0844f7f3eb7dd65f22709bf86d8dd1c319809fb3bbbb481784ecc"
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "bytes": 762,
+      "sha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9"
+    },
+    {
+      "file": "game/src/hub/bag-token-craft-plan.js",
+      "bytes": 1607,
+      "sha256": "8bc9a03324ae8cdaf447a0c04e461c07559609b027d73cb727934d11472f0f30"
+    },
+    {
+      "file": "game/src/hub/bag-use-compatibility.js",
+      "bytes": 1797,
+      "sha256": "3fb692c45d86084f60d7f3fae79e4b78c73b785088b6b476f53a8f606ba5bad2"
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "bytes": 4486,
+      "sha256": "b5449abcd58cc740485fd45852b463031f6d2312a2cb4736eff0d07222b0fd77"
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "bytes": 4722,
+      "sha256": "3accdc9c14cd96d99b3f7d0fa38809357ca6880fc1deea9e6ff23e069fbda2e8"
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "bytes": 2417,
+      "sha256": "c3b041e1da9c8f4ae39e2b1fe5ab0b2e200f07a5f31039ba3a2d4d62322d28c3"
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "bytes": 6780,
+      "sha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+    },
+    {
+      "file": "game/src/hub/base-motion-v4.js",
+      "bytes": 2110,
+      "sha256": "08e0fb6ca7a5a8f5333f68a3d22a0708e0880880002e882882641856846b6720"
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "bytes": 1915,
+      "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+    },
+    {
+      "file": "game/src/hub/base-page-motion-v7.js",
+      "bytes": 8062,
+      "sha256": "60b95779622f977afdbd6add457ec381582b006d27fc5fc0dad204b941e54575"
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "bytes": 2407,
+      "sha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79"
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "bytes": 2327,
+      "sha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf"
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "bytes": 6881,
+      "sha256": "1748b60ce6eb115fbb41ffdec91921ac5cbabb6662d8d4ab5dcaa3acb513e69e"
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "bytes": 7461,
+      "sha256": "58ea50dc7dbc0b1647e11036c37efe348089ae159b342a1e0041210adbca503a"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "bytes": 45630,
+      "sha256": "79d0e3749f7b0095df791987f627bb5001267f367cbcfb8ca9576a4825e927eb"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "bytes": 16478,
+      "sha256": "7360ebd06f139c8e43510c1cd9d9556471f6532185c265618df8603fa289584e"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.types.d.ts",
+      "bytes": 5411,
+      "sha256": "269bd17f625fb6a47d834a054c1ddc735d681ecc71f87ac0e83117955b299fb2"
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "bytes": 2960,
+      "sha256": "042797a9cf64528b6d29b2afbf6e302bf345df6093474899993a066c6b4b1ac9"
+    },
+    {
+      "file": "game/src/hub/collection-conversion-view.js",
+      "bytes": 1379,
+      "sha256": "fab4442d5ce15457c8ed7e113734333c054dfef33d5314a4f1efb600374282e3"
+    },
+    {
+      "file": "game/src/hub/collection-conversion.js",
+      "bytes": 3496,
+      "sha256": "c012dd7653d63ec0d7898242195a88aa7fb4ca2997a6deb1fdeaa34cd061fbd7"
+    },
+    {
+      "file": "game/src/hub/collection-protection.js",
+      "bytes": 259,
+      "sha256": "3c1fc2d49c87a920328ce67acd5789aaa0078a04a854a1ffd384342da15213a4"
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "bytes": 11889,
+      "sha256": "714833ad765c69b79d96c7c317cd7696cffbdf51ea78bbc6ed3d4a3c7bb2dc91"
+    },
+    {
+      "file": "game/src/hub/command-errors.js",
+      "bytes": 542,
+      "sha256": "d48b188f48493043cfdf14d6c3f15472787ec2c990fe7cf7354448e5eb199da8"
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "bytes": 2782,
+      "sha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/koi-LICENSE.txt",
+      "bytes": 1096,
+      "sha256": "15a83f8e244e2a44dfa15894abaa92466f8f8b21097b70e8b428ba2ab0b88c2e"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "bytes": 11956,
+      "sha256": "845c5a45e6e607125e6a9bfca1de30283db8f2bc14a775ec4f5bc2008b463c7f"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/rain-LICENSE.txt",
+      "bytes": 1090,
+      "sha256": "6bdcb699eff100a57a113d22adcc393c80ca6a384efc86479ac13d2752010bde"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "bytes": 14949,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "bytes": 17184,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/SOURCE.md",
+      "bytes": 1983,
+      "sha256": "e32e37950a2eb35a1e55431caaf07708dcdffee4381e583fa5bbb0c1b8d0810a"
+    },
+    {
+      "file": "game/src/hub/courtyard.rain-tableau.js",
+      "bytes": 10795,
+      "sha256": "51baef07821ad53def47fe397974da70348aa7bbdb1e80e7c17846dfe697e32b"
+    },
+    {
+      "file": "game/src/hub/departure-persistence.js",
+      "bytes": 6571,
+      "sha256": "7ff8046ba4f485b44fac9b8c987a134b2fc79fe9420f8d60598eeb206684c04b"
+    },
+    {
+      "file": "game/src/hub/departure.drag.js",
+      "bytes": 3428,
+      "sha256": "ce271515794670e761b766a3884646a3be274244cea466e7cfff17060befe1da"
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "bytes": 284,
+      "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4"
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "bytes": 3844,
+      "sha256": "744e5db733f236e9c7f1a2bc030685322afdec50d92d716c41c9366d2f49c5ca"
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "bytes": 12126,
+      "sha256": "d02abc62eaa11f222348c2c3ccb0609eba60a7df0fc8f240ef5dee4a9e545780"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "bytes": 27075,
+      "sha256": "c10cf5fc8c22e2d2b5c3469420c51416f08cd7d425ea1bb731b7fba06f32b215"
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "bytes": 514,
+      "sha256": "cb117388a75f9e47d9803da31be7912dae443c586abbd6dcec096491061c6cf5"
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "bytes": 11032,
+      "sha256": "7d03e4e8975e703301d92d2a8cfe98b6e2b63ea418c7ca7a119e7b146615830b"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "bytes": 27517,
+      "sha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36"
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "bytes": 15299,
+      "sha256": "73ec61fc3f279e6508239f7af270226bc9a01a1063fc9d43c6d5bd00b51721e2"
+    },
+    {
+      "file": "game/src/hub/game.bag.safe-transfer.js",
+      "bytes": 9129,
+      "sha256": "1b78522c77d76fad0f2f259696ccf2e6d5a6296b6f1696a877f2f9e375506909"
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "bytes": 29025,
+      "sha256": "e029ca93d70ea873f90dfc3b160dc8755e1268dc4e036bd0041a3aff4759f669"
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "bytes": 133,
+      "sha256": "18a680c5829b730d75a9a1989fe11963205e5f4a51824387ffc72f4d43f523bc"
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "bytes": 11074,
+      "sha256": "39a44f1467d79fa18141e7045e0c6a36bf2e608fb19866b20d6c775fb2af4e58"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "bytes": 4755,
+      "sha256": "0e749cec6b54eeda4feff81fbc317a2a03686bafea8cc4dffaa7b8f1ae1a481e"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "bytes": 2819,
+      "sha256": "1273361e2324cbde2dc7098da6caa34825a2571137f54bb271d5b010987da6a0"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "bytes": 24243,
+      "sha256": "2a7f4c4119802158df74d48b5395b611ab48f223c0947a0301bc245dc9c73e74"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "bytes": 6530,
+      "sha256": "744486dda776d5c59f8bf734322a03416339f61f6631939b132c7bfda222fcf1"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "bytes": 69700,
+      "sha256": "eb06d14b45cb4d4ac9529b05d960918caf248bb8b1809b54abe7e0ee2190ae32"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "bytes": 4162,
+      "sha256": "452df01d5fe6c40051cf1cc06677dd48af418f8afd57c7f5b03798e3d2a97a66"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "bytes": 3241,
+      "sha256": "d9658c6c529d1f88879d071da692ab92b6742d95a0f46c1ae04d1f32f76b4971"
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "bytes": 4314,
+      "sha256": "bfcc3fdf77197325ff1c7b8b88ddb16a75a1bdc1a502a5ab53ba3604c5811593"
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "bytes": 619,
+      "sha256": "8f0bd3e9a736841bca9623fda2a9e0c4ed8045cbb482523e093c0fe3d7d737e5"
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "bytes": 30093,
+      "sha256": "ef542e6720b3f2d80d0309479830f582b41d93702232671fbf9ec2ddf7c9f7ff"
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "bytes": 4292,
+      "sha256": "8f59196bda4fefb6e6f1f477a5b696b2a48db0032e49fcf04ed2bd63ffe1d184"
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "bytes": 5661,
+      "sha256": "b387a1c1affa5c42526d5c8b4c03a79f774af003740cd6487228b631effc06db"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "bytes": 21721,
+      "sha256": "27440bd886950658e3b6ad42107eaef73a2efb71febadd9ebe4d131306e1a75f"
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation-ports.js",
+      "bytes": 1641,
+      "sha256": "d796ec4088c302208d0adf49f5262dcfc54c484781de903ae9631212fbafa6f4"
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "bytes": 8090,
+      "sha256": "8f13e650c675b5e579bf611fdbfcb536964c37c3ab74de2112f2baa4a37a23bb"
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "bytes": 28418,
+      "sha256": "835f81869bc9f416cd9baeb792727a1b49c74f09d7802ae8ac99529dd46e7059"
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "bytes": 11630,
+      "sha256": "b5fa676ea25d416ca53d364add472309d03a94a614001ef677c3a578e51dccd3"
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "bytes": 1721,
+      "sha256": "23ddb7addbe503ae82bc30d3510dc481153b9e0f7adcd602859ceeafbbfb132f"
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "bytes": 16141,
+      "sha256": "c98f8370e78b89b664e79e30ee2432b4ade377c8bb8d312ebd0658cf69d7b93e"
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "bytes": 3752,
+      "sha256": "943e61ce889937dea82d56dc2eff7a604b3f6b1f5fe6fdca73d22aafa1298d4f"
+    },
+    {
+      "file": "game/src/hub/game.store.types.d.ts",
+      "bytes": 12126,
+      "sha256": "212ee1dd5a764f1116ac9d6960afab4431392a4ec54ba2fb0c1d5aa51ede293c"
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "bytes": 19460,
+      "sha256": "b15173796eef4065432a8697ad6d978200a9b1f0bd912e8e8dce40100f2e5ec6"
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "bytes": 7012,
+      "sha256": "602e508a31f37b8da2ef69a26b8f67ae69bcc30be4a27d790d3d621dffbaaf46"
+    },
+    {
+      "file": "game/src/hub/hub.collection-v4.js",
+      "bytes": 7487,
+      "sha256": "5c0fb2ff3b4d79e328f54e5a2f50020156be940bc88c2a5c64889c532e59a177"
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-runtime.js",
+      "bytes": 12675,
+      "sha256": "b61e185d8b0eb5c5c049f15e0ea7dab1547170c0b1e6838c6936491ee0e51e26"
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "bytes": 4841,
+      "sha256": "17e6634c53a68ff04b70886035ed0692b0fc719def955fcdf9bc9627d816034f"
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "bytes": 3995,
+      "sha256": "bb5db39d25dd631920a3e85141ebc2f1fcf500e071a20a1c03942c939c9831d2"
+    },
+    {
+      "file": "game/src/hub/hub.home-icons-v10.js",
+      "bytes": 1082,
+      "sha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4"
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "bytes": 4781,
+      "sha256": "2961b80be2df98066fbf0bfbe5945a2a9f61ee9ec1628b32ea4e44d5bd8b980c"
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "bytes": 941,
+      "sha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8"
+    },
+    {
+      "file": "game/src/hub/hub.navigation-v7.js",
+      "bytes": 1018,
+      "sha256": "cf765d6e69039d5a1e48d90c8282894cc6b2e34ecd65ce79a59756beba4af3e3"
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "bytes": 23588,
+      "sha256": "3880141149fac7eddc13e0eceafe944555a174cd995445356d40308e69b0c33c"
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "bytes": 22728,
+      "sha256": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6"
+    },
+    {
+      "file": "game/src/hub/hub.reward-feedback.js",
+      "bytes": 8588,
+      "sha256": "7e30580cd43c9841c36cdac519e4189915c090ef6ad73a136c50a04793bb7b9e"
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "bytes": 3720,
+      "sha256": "30b22c68212b8ce3e82c02690c1cbb1b7ec837202d70fc44747cc8052e37f38e"
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "bytes": 15798,
+      "sha256": "f091ed8e8fb2ec5f676b60587a834b2066fe875125257f8c4a7ddba2595effae"
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "bytes": 4634,
+      "sha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse-categories-v7.js",
+      "bytes": 543,
+      "sha256": "209aebf8e4d64faa0b234614a4725f17d5dcbd2121ff9b4e720f4972065a6b2d"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "bytes": 18843,
+      "sha256": "84182633661c0855c821b199c3df213c44af6d9d6ee71198accb38eccc39a9d9"
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "bytes": 1870,
+      "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "bytes": 19837,
+      "sha256": "5d0e5ae22c96bb9d77adcef5136d79dd771c8934094b9f9e573aba551ec0bd67"
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "bytes": 10330,
+      "sha256": "efc6bc99aecda6eb7f835ca4cbc5da5238ce7e1e2e0c97777ceb41c7b01ccf5b"
+    },
+    {
+      "file": "game/src/hub/photo-studio-catalog-cache.js",
+      "bytes": 464,
+      "sha256": "45cb473fc2782137374c8c9caa2a16f85c7a5890d0b06d153f3c9281acac82a9"
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "bytes": 7978,
+      "sha256": "b2a582cad98fd758f0ad2601b30c8ac656eb29dd83618e6bfa84bcedf112619f"
+    },
+    {
+      "file": "game/src/hub/photo-studio-navigation.js",
+      "bytes": 6135,
+      "sha256": "b1c23f153cb8f2097647e4e8c3c834c412806af735c479ec53a780a3ab94254e"
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "bytes": 770,
+      "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "bytes": 3261,
+      "sha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22"
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "bytes": 10348,
+      "sha256": "e09f808d8045c3d90a910d9c472b15d6546b5ad32c15e3861a98ced2f2f545be"
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "bytes": 2697,
+      "sha256": "980eeff5ae6b929b751dd60fa2a592726dda26fc21bd59b87bcf32287ea21e80"
+    },
+    {
+      "file": "game/src/hub/preparation.types.d.ts",
+      "bytes": 1203,
+      "sha256": "193d889bcc3ea37ea160b2a7d968eb45bd6b82767dc31d766b6af5b0d58a6e30"
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "bytes": 8960,
+      "sha256": "064d7119f527271d0cd358c9fd3f8984cfba88aeec4a12642360180816b09627"
+    },
+    {
+      "file": "game/src/hub/receipt-retention.js",
+      "bytes": 935,
+      "sha256": "346fa6acbecd1f8296263809285ae11e3b4a79163b2d45c6c348ffa2e4c3d606"
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "bytes": 8790,
+      "sha256": "687b373e331dba534e31e929cad26991dbaf95d72472bbb914d95b94b3b51568"
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "bytes": 13208,
+      "sha256": "75bf8d36fc3052657ec8d07d025450fd895750434ae1b484f1c69f9b828ece23"
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "bytes": 5202,
+      "sha256": "6eb3fd36a3a7326092a14d9f4b50d320cd85ac69849ef5117a3cc0e3ca365800"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "bytes": 12158,
+      "sha256": "fc8eab678b1cba4943587aca4afc4f01127b609fe4767dfddc9cfb51afe82e63"
+    },
+    {
+      "file": "game/src/hub/slot-write-lock.js",
+      "bytes": 2173,
+      "sha256": "9c59fd4985ce1efb433a057d1cd2579ffe75c50aad7ac32272448ecae6c120cc"
+    },
+    {
+      "file": "game/src/hub/stash-sale-price.js",
+      "bytes": 386,
+      "sha256": "2ba63a9a490bdef064804821fc307c120eb294c8208edb6b651b018b3ce0f1fa"
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "bytes": 7775,
+      "sha256": "718c5a57f4c570055d973e9917ecb9af1efdbb70d4efeb23d11e2aae0c9aecb3"
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "bytes": 7091,
+      "sha256": "9d8725a88ee0251f7da12abff822b8331ae400530a43b3fb15a25093464ec97b"
+    },
+    {
+      "file": "game/src/main.js",
+      "bytes": 2390,
+      "sha256": "72a166bbf09103e148afbc92286d343713d3135e909d5d22783b8c72aefca810"
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "bytes": 5051,
+      "sha256": "6880ce65ff95488396a66bf3bbe13da471d5d5578ffe041d3feac22db5acc0cc"
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "bytes": 33920,
+      "sha256": "c08b5825430c4fff3c69dec6bb556d918aa05afe05134c3875dad4d6013d2c09"
+    },
+    {
+      "file": "game/src/README.md",
+      "bytes": 12051,
+      "sha256": "0f1954ef54ea96cae91b8cfa0ca7ce3f3732f52e1da430ea24155ada45dd8f18"
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "bytes": 4129,
+      "sha256": "e96bb5e851656d954294d434f475d304cc33a9accd83e9f249fd377b1254ad4f"
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "bytes": 7129,
+      "sha256": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "bytes": 53337,
+      "sha256": "8893625dd70c9547e74c1b75a73c508d66a728a48a9bc11eb91295cc5d0ee96c"
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "bytes": 1964,
+      "sha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72"
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "bytes": 3591,
+      "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "bytes": 12500,
+      "sha256": "758d693d73e698e7cc0f6051df502984bbaa38b9a935ac02385e127134cbc8da"
+    },
+    {
+      "file": "game/src/run/event-commands.js",
+      "bytes": 6792,
+      "sha256": "dfbf880ed4af39e48f6f319208fdf56777d937ead059ba7333734371afd58654"
+    },
+    {
+      "file": "game/src/run/event-lifecycle.js",
+      "bytes": 8894,
+      "sha256": "605735d842b3c23253bbb859b2e6903766f53695affe04422c141f80c9898d1f"
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "bytes": 2129,
+      "sha256": "f83df7ff6bc31d822213d7eaea0a7b0ad608b42772228a07907ec1f90e21ab64"
+    },
+    {
+      "file": "game/src/run/event-runtime.js",
+      "bytes": 1084,
+      "sha256": "62937b968877acdba00bce84e5b5344303b5e89f617cd3d0a104da29af651b75"
+    },
+    {
+      "file": "game/src/run/expedition-tool-art.js",
+      "bytes": 699,
+      "sha256": "eb37cdb594cc82537aacc9dbd629b505b434ab640d2e6e79fd4659cb0f9d64a2"
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "bytes": 17348,
+      "sha256": "d718191babe5f0fd452bcb535023963a5e088ef6ac5a5bf0553aa13caf22db38"
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "bytes": 2427,
+      "sha256": "0e486fdbe0f7e72cdb10e8bdfe763712aa4d879feed9c2cb61779f55ff043441"
+    },
+    {
+      "file": "game/src/run/game-session-departure.js",
+      "bytes": 12237,
+      "sha256": "ffb6d90b2b7c026fe38947cfcc18fb2d07de933ce144f1bbcbcb10c301fea099"
+    },
+    {
+      "file": "game/src/run/game-session-persistence.js",
+      "bytes": 16975,
+      "sha256": "0eb69da73de76f0ac02670b941024c083f0aab58694fe229b6113b97ba9d4c24"
+    },
+    {
+      "file": "game/src/run/game-session-restoration.js",
+      "bytes": 12940,
+      "sha256": "69ba1e1d26199d0b067b9b09c7b348753386235077fce6b49a7cc3eb17431665"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "bytes": 43566,
+      "sha256": "23d8a2a7911cfeb8dde39d40508e08cb7a6c9f088650627d07421ddf0b657d1d"
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "bytes": 54680,
+      "sha256": "b4cf3d4a99afdbf4c188b92f7eb40551e5bf22ccfd68bf4936b07cbf69a02249"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "bytes": 5252,
+      "sha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "bytes": 26905,
+      "sha256": "0caec3718031720e1cf4ff4b2a638ce54f466da75e7e8012bb38ab496b8029ec"
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "bytes": 3142,
+      "sha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8"
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "bytes": 5051,
+      "sha256": "63bc91f9be199b49531268e4ada83e8a49843c73d0bbe4d72da6a59743ea51ba"
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "bytes": 15421,
+      "sha256": "04f409d1f4f1db68215ccfd7c5df04612ba75e5daa9f437e28139f0cab32714d"
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "bytes": 50621,
+      "sha256": "351a55e265e7a94d009a0c771f89466ad4a97349372b8eeb9f06c5951a11416e"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "bytes": 19565,
+      "sha256": "3e917600e4685bf589378201c9efa3d53ce077ba1eadb8e5c25916ab8d2bbb30"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "bytes": 1332,
+      "sha256": "1dccec8b53629abf11266a86f69781b1fb1d2fd779ff327848a01e146cd2b16b"
+    },
+    {
+      "file": "game/src/run/game.run.resources.js",
+      "bytes": 6460,
+      "sha256": "82d3c2c5febd088fd889234696c024275abdf8ce19bc9738668c79b226a19a2d"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "bytes": 39443,
+      "sha256": "b8d5b9876dc673ca5bdb0c500a73e8fbf4f3e6e373c1e188f9ac53084ff7f55e"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "bytes": 48050,
+      "sha256": "9ca504daf7b10a69254c37aa066ed10ddae802546ae1f9fa06d198dc24ed8b52"
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "bytes": 6003,
+      "sha256": "8e339392184e1883d0ae2b43b411815dd6a5714caf8622b6acdc5cf9cdc9cc05"
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "bytes": 5530,
+      "sha256": "8d4c5ccfff913aa57fba4aa7f0d14ccbc90d9560761ba263c45af9d9f62c265d"
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "bytes": 540,
+      "sha256": "6990f34b05c0b1fe119723999171b6713c69b868d3fcb58d6b7f10bc57b7d34c"
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "bytes": 17272,
+      "sha256": "3f6c1730a96401615a6b19d059a210f2ac8ec9a821bfde85cce6c49c428dcadc"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "bytes": 11741,
+      "sha256": "7876f5d10918c12de24044cefdec1abe2ad777581e4ddecf045b012ef91cbec5"
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "bytes": 4200,
+      "sha256": "f4eeb71b4322b3561f81572a6b618b357d46561c74af3fd160ebbe3595861d1f"
+    },
+    {
+      "file": "game/src/run/game.session.kernel.types.d.ts",
+      "bytes": 559,
+      "sha256": "7032eb2cf439b46b73e9b4642c7e585155ed496c4968fb6484c13feb21308c32"
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "bytes": 5913,
+      "sha256": "c6bd6b6f6637f14d7cdcd141fd31b55817bf8c1ec6021446dc3dc09be216243b"
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "bytes": 1594,
+      "sha256": "0255417a37c9e6106c3bc29e6f34415033a29d481a644367733265b64199d93c"
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "bytes": 4731,
+      "sha256": "d2e3f0158200b1b722a852f6221078b9c3ccac7074740f535310a7e3a9729809"
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "bytes": 2895,
+      "sha256": "79fff9baa207243dd4dc9156f90409ca9f897ea906227840d0153f440067d83f"
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "bytes": 6297,
+      "sha256": "1f90ec484c147edd2398d14bee7f2ef4356825e57d4a5c693e4407a72f383734"
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "bytes": 9881,
+      "sha256": "96940cef385015f30a9aaf00031da96a5eb53e964f8590d9861cd76fde7c04e3"
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "bytes": 24363,
+      "sha256": "6857fab2f1a4f2a195d3e51703d4b2f92c54eb76b0ab5b190c9ed57c460f12a9"
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "bytes": 4206,
+      "sha256": "ef3fd0d85f9c36dce50aeb8d0bc155a83224bca54cd4f232def3baba4e21cb0f"
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "bytes": 15393,
+      "sha256": "b9bc0ced62c5e62f142a3300f08d5e37d5dcc1510fc3cfb6c50f6c17fc55d203"
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "bytes": 17539,
+      "sha256": "b68e24b447c403512344c9ebebf505a1b242d285af17cffa84d42eaa756a3b73"
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "bytes": 2936,
+      "sha256": "c2184dba1b6afb1f33a8a9cc03b99c95f729e14d546db0659d89f1eb210c5b22"
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "bytes": 3851,
+      "sha256": "409ac7761a003388d3328ac692edc74709b5cd3369093af8648742e1fc3a9f8d"
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "bytes": 2890,
+      "sha256": "ee362370aba4d198aaa82bfddde1ebc7f900936307af9ac6dafc4d516a93e3f3"
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "bytes": 6282,
+      "sha256": "ef1d82d140e07ad6f6c6bfe23fcdddf60253479aa424db0c30697082ff6a3365"
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "bytes": 1291,
+      "sha256": "0a05a0af46c7f95be20f9578a1b3caae9d7359fa0a0d0967d20ea4a0c4328583"
+    },
+    {
+      "file": "game/src/run/run-domain-commands.types.d.ts",
+      "bytes": 2811,
+      "sha256": "abe0c0a47bbec48fdae9267bb62a4cbb980271e0e95bedeeb49d1a9905222a38"
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "bytes": 2903,
+      "sha256": "a4f9c30a1aa03e9594500143220a767ac3b24abf5a65c33d150d909303bcf6eb"
+    },
+    {
+      "file": "game/src/run/shop-commands.js",
+      "bytes": 6052,
+      "sha256": "45d95df0de656bc127079a398f5b29adfa5768bf496e5c6814f105ed6cb9f7ac"
+    },
+    {
+      "file": "game/src/run/shop-commission.js",
+      "bytes": 7615,
+      "sha256": "a44d5aef97dea714f27429b5dbebc67b2ad1e9d8b32cdf548588d92d4dde28eb"
+    },
+    {
+      "file": "game/src/ui/achievement-gallery.js",
+      "bytes": 15524,
+      "sha256": "ccfc7e4ac7c3d0d98bdb5e4c0def1c44eb802457eb300351b249bf1dc9a402c7"
+    },
+    {
+      "file": "game/src/ui/achievement-medals.js",
+      "bytes": 2483,
+      "sha256": "d47fee5b4c8400219108370bd26f915615bc4d216e51121f083874884bb5eb41"
+    },
+    {
+      "file": "game/src/ui/achievement-motion.js",
+      "bytes": 10502,
+      "sha256": "c8d86de5c594387a56215e3f13d9203e180b448d41e5ab670caf242f0ed022e7"
+    },
+    {
+      "file": "game/src/ui/action-dispatch.js",
+      "bytes": 3051,
+      "sha256": "d5430b83c07606b39d3dbb2c1b6aeb8522d14620114e476f23b2bc4c631a293d"
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "bytes": 1636,
+      "sha256": "701b3f7149bf64f375b7a8159bbae4f670698423a329a9c6062e492d68a5be76"
+    },
+    {
+      "file": "game/src/ui/base-design-preview-v7.js",
+      "bytes": 7823,
+      "sha256": "ebb623073ffc52be0534cba3b795bffdca7649dfa9f4fc84985e77c724fb13e4"
+    },
+    {
+      "file": "game/src/ui/base-preview-rooms-v7.js",
+      "bytes": 5792,
+      "sha256": "75b9785ef61cdc758c2b35ad79250805373f5409716743799edb2190be510651"
+    },
+    {
+      "file": "game/src/ui/battle-hud-info.js",
+      "bytes": 1658,
+      "sha256": "372ab5490e4b5e9fcd356441a4f0069154cbb92f5e43a42ecc7ae22cc6772048"
+    },
+    {
+      "file": "game/src/ui/beginner-guide-diagrams.js",
+      "bytes": 4525,
+      "sha256": "6c1004249b3fed721e8d6718dbea7efad031948b2d0fe4cfcaff3b79712ca0a2"
+    },
+    {
+      "file": "game/src/ui/beginner-guide.js",
+      "bytes": 5726,
+      "sha256": "f700a8774ad59751756aff8e88196d4e3a5fa9bcd457b76d6ddee28ef024a006"
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "bytes": 13305,
+      "sha256": "4e5fe0e25e54ab76a231e71958bbea5de3fc963a20454e3ccfbc94aac0de6606"
+    },
+    {
+      "file": "game/src/ui/card-browser-state.js",
+      "bytes": 1587,
+      "sha256": "483b7cc2371b4159536193f4e95a43bc1d875ea04237b97d8780d7902d87e52b"
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "bytes": 8845,
+      "sha256": "3f6a9c82153a129201a1a542203744456b7b98b9cb0144ae2468273af395a47f"
+    },
+    {
+      "file": "game/src/ui/card-result-feedback.js",
+      "bytes": 11730,
+      "sha256": "312e425d51ccb40dcbd7aeca8e2ef56102f5afdb7d1143dae0a110aafe349554"
+    },
+    {
+      "file": "game/src/ui/card-state-motion.js",
+      "bytes": 4556,
+      "sha256": "f5f18549b89ed68fefd75b2363a8b804e87d75ee9ad684d108734e42a1b2e499"
+    },
+    {
+      "file": "game/src/ui/card-tip-groups.js",
+      "bytes": 486,
+      "sha256": "c88e17c58bb82ab7b47480d9be0d72a9691efee7cb6f0c3609d771e0f05eba40"
+    },
+    {
+      "file": "game/src/ui/card-zoom-content.js",
+      "bytes": 5721,
+      "sha256": "a6142c92f8d9b9f4ec4f47439d89b4e521b0e92299dc1c7c310e713630680da5"
+    },
+    {
+      "file": "game/src/ui/card-zoom-controller.js",
+      "bytes": 22535,
+      "sha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185"
+    },
+    {
+      "file": "game/src/ui/card-zoom-photo-source.js",
+      "bytes": 1479,
+      "sha256": "1513540636a15d26507348cb57a3114b7302a626ace74ac54eb641429058f14d"
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "bytes": 2591,
+      "sha256": "06231dde2bbd104f9bbef0eeb62ce7830de2bb478dbdc12b808a2beca1dad417"
+    },
+    {
+      "file": "game/src/ui/character-view-motion.js",
+      "bytes": 7849,
+      "sha256": "2282315e897c56ae790baf08093af42d9c3c3516cf6b9d662024f6d96867b05e"
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "bytes": 5120,
+      "sha256": "c6ebee39cb3f2fa2524d69ba17651f4e833447ccbc18336a0e5c7b7632ea5a4d"
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "bytes": 8835,
+      "sha256": "139077d8fe0c3be7bed252f0542258748da84979442486f1bd4f94b38aac13f5"
+    },
+    {
+      "file": "game/src/ui/comm-feed.js",
+      "bytes": 7350,
+      "sha256": "9d51674cb6a3b01e5a2805bcdd0b6bc8585bbda5548fc17878e1bf39f3d3374b"
+    },
+    {
+      "file": "game/src/ui/confirm-dialog.js",
+      "bytes": 3395,
+      "sha256": "f295103281ab1167956cc21faa985f3dace02a54e36a23eee92bf5ff72ab0e75"
+    },
+    {
+      "file": "game/src/ui/cover-context.js",
+      "bytes": 2835,
+      "sha256": "2497d39f1a48c774e3fdf1ffea35d9f1489afa406617d7fa11b3f6f6c84e6e48"
+    },
+    {
+      "file": "game/src/ui/departure-transition.js",
+      "bytes": 2627,
+      "sha256": "e709a77ba7f861f91ea21eaf1378fee8ae0c360c3ac1bffa78cffcc2a983afba"
+    },
+    {
+      "file": "game/src/ui/discovery-selection.js",
+      "bytes": 8838,
+      "sha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0"
+    },
+    {
+      "file": "game/src/ui/end-turn-hold.js",
+      "bytes": 1476,
+      "sha256": "a7b36fee0ed35567a4949d5de474d9a0d6f3f4c4aca4c5306939102a9ee8d4b5"
+    },
+    {
+      "file": "game/src/ui/equipment-info.js",
+      "bytes": 2252,
+      "sha256": "a37fc7af91140e9a47890a52614b03b630e31f8ff0b8abe038747d0d20bef2eb"
+    },
+    {
+      "file": "game/src/ui/event-dice.js",
+      "bytes": 5488,
+      "sha256": "f7f6f40425f314ff6fd9c82dd2b6ee72d340141d98b9d088397c11962cd918ac"
+    },
+    {
+      "file": "game/src/ui/event-option-state.js",
+      "bytes": 1976,
+      "sha256": "cf274d7034c629f961fa94c303358ba8f9214c938cd75351944d9d02b91a1eda"
+    },
+    {
+      "file": "game/src/ui/event-recode-result.js",
+      "bytes": 1908,
+      "sha256": "d8a99f3ef2fb4bf87aa39142abffe5d11656e927e96d17fdf7dea10355111cc5"
+    },
+    {
+      "file": "game/src/ui/event-signal-puzzle.js",
+      "bytes": 7933,
+      "sha256": "b4b9c536d19f9e4df64192faee22dfe32e13023340daa7bea730327ece1adace"
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "bytes": 2212,
+      "sha256": "9d4c217f449b89437532d509c78483e516d15c2bd1696ad3f04a9adb5b7ecd4c"
+    },
+    {
+      "file": "game/src/ui/extraction-rewards-view.js",
+      "bytes": 15070,
+      "sha256": "fd5132989dc5682cfaec82960ec7de965a80b8a9b062b32c310d66d4464d5c39"
+    },
+    {
+      "file": "game/src/ui/feedback-theme.js",
+      "bytes": 477,
+      "sha256": "a03b36afc583c8b8e6c977612ca6d30f65bf36756d6d658c2342e43902c9ad79"
+    },
+    {
+      "file": "game/src/ui/feedback.local.js",
+      "bytes": 10531,
+      "sha256": "da6f9ef8c50031a560ac88bf4b56b41013248167fb034d94036361d9c96af865"
+    },
+    {
+      "file": "game/src/ui/fire-rest-view.js",
+      "bytes": 3336,
+      "sha256": "d0f63e8b7631cf404121b56525dd71a7a58af1b5005fb39ea7364d48f4e66457"
+    },
+    {
+      "file": "game/src/ui/game-map-controls.js",
+      "bytes": 5853,
+      "sha256": "9eedaedcb96445776078dfbdc50988c2bfd8b4a82d4ee78786cb6d7922b117fc"
+    },
+    {
+      "file": "game/src/ui/game-title-controller.js",
+      "bytes": 5450,
+      "sha256": "929c75b774785f5766ef99d75d19658fd255cc281bab928bbd5c90d4baccb5e1"
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "bytes": 20151,
+      "sha256": "ec0b161821bfd9b78253b2212db806de1c4dd25688d258dd35f54ec3fa4a984a"
+    },
+    {
+      "file": "game/src/ui/game.menu.pages.js",
+      "bytes": 3361,
+      "sha256": "a6e227ebae044586ae68921437498baabaa298e5abb88c0e84dd7122ab0159a3"
+    },
+    {
+      "file": "game/src/ui/general-transition.js",
+      "bytes": 232,
+      "sha256": "342ea9667c1146de5bfb299a865369b0f6a83b6040f3b98eff746d0b259435f4"
+    },
+    {
+      "file": "game/src/ui/home-fx.js",
+      "bytes": 10406,
+      "sha256": "23598ecb22f3ff1c1c75fe8d4ed81f06749c604424fe1253567447fdf7058a38"
+    },
+    {
+      "file": "game/src/ui/home-layers.js",
+      "bytes": 2650,
+      "sha256": "60f092ea0f10df4b5f96f3ea3363d98c65b19e93e820ec7a4567847d8aa06aa5"
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "bytes": 3314,
+      "sha256": "bb80f9dc66b26526a77653207b65d14d131aa86d4e6cd4f83e57b644e9ccb890"
+    },
+    {
+      "file": "game/src/ui/home-menu-motion.js",
+      "bytes": 10599,
+      "sha256": "412b5d6f64b5c15427023dfb7f72725206d7318bf38eecce3d5d86813bd11816"
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "bytes": 9303,
+      "sha256": "699ea5c1100f70301e6944de3861a63ce7916055b71df91e789ebabe6a6631d3"
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "bytes": 15332,
+      "sha256": "e280d279fc3db1119f1fd26e822b495839fe99c743f6fc9432b8c5f43e46c410"
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "bytes": 1985,
+      "sha256": "9300ec44d807f99cf3c69b79889526f9db7596eee1df7aac44d19cc102361541"
+    },
+    {
+      "file": "game/src/ui/lucide-acquisition-icon.js",
+      "bytes": 915,
+      "sha256": "5b158a641780babd8c9eb31139c18581c1472e2934b68e6848409500674f2c9d"
+    },
+    {
+      "file": "game/src/ui/map-health-hud.js",
+      "bytes": 4516,
+      "sha256": "c538c658c747f086ae680783a7e21e8969f78f1a720db048bda7e88c8eddd037"
+    },
+    {
+      "file": "game/src/ui/map-passage.js",
+      "bytes": 3858,
+      "sha256": "4e8a06c457bfefe4dfdc99dd308d7576465911546a595ef268ba4fa325c28633"
+    },
+    {
+      "file": "game/src/ui/menu-data.js",
+      "bytes": 3450,
+      "sha256": "e3b469842223887418f3646b9a80c5f37db35cfc071fd1fe94ac6b89d3f827ec"
+    },
+    {
+      "file": "game/src/ui/menu-feedback.js",
+      "bytes": 14120,
+      "sha256": "2f33876c8116ec196820afd1dae4a5f004b438d0efa4afd34a76f74a4b883794"
+    },
+    {
+      "file": "game/src/ui/menu-guide.js",
+      "bytes": 4097,
+      "sha256": "5d509805fe3d074572d366d5f0fe9361f3591a055c581721e99117d6183bf531"
+    },
+    {
+      "file": "game/src/ui/menu-leave.js",
+      "bytes": 9853,
+      "sha256": "fc89452490164d08d2269cc5c05f06c1d01fe00ab9151377579a5c8672ecdf2b"
+    },
+    {
+      "file": "game/src/ui/menu-settings.js",
+      "bytes": 14767,
+      "sha256": "c68a5fff9726fad91b8c492bb72d118505cd8a4a0af361c52ae748375c32756f"
+    },
+    {
+      "file": "game/src/ui/menu-slot-view.js",
+      "bytes": 3580,
+      "sha256": "25c1e9e00f245ac38c3b6e37446f5b8fbe7cb3a241e4a191c08dc2dee88346c6"
+    },
+    {
+      "file": "game/src/ui/menu-slots.js",
+      "bytes": 19769,
+      "sha256": "a4764f6416658fa85c21d5576fb03d5c5e256e8a3bc74c510148cd1edaf741bf"
+    },
+    {
+      "file": "game/src/ui/motion-completion.js",
+      "bytes": 1132,
+      "sha256": "0ee84ec36b4ce5b1df030c44e6617112f232285439f227d4d4c32edcefd90f09"
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "bytes": 1631,
+      "sha256": "0ce68b2d607c292e5393747198dca4622473594284a4e170302893a60293367e"
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "bytes": 1131,
+      "sha256": "24db1c42f93a1727291d3c4a40c00fa0b5f43618dcbfe3bd987e36a87e100e27"
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "bytes": 1471,
+      "sha256": "03906d0b1ea52475722f68b27cfea3eb29ae8b95b032d7b8909971e2acbfce26"
+    },
+    {
+      "file": "game/src/ui/node-decision-view.js",
+      "bytes": 3973,
+      "sha256": "a61ffd1a658e93df8bfa40f7f455179acf96bfa7be5e937f08a480c18b66ec9b"
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "bytes": 5125,
+      "sha256": "c61f02de009926f2f58c637de36991f2cf1d999fae5c03b0cb260a3e6a46f8e3"
+    },
+    {
+      "file": "game/src/ui/operation-notice.js",
+      "bytes": 1527,
+      "sha256": "80ee168f7db31c1b81cbfa990f739cb74336108961c95b21b3783c0234ae7825"
+    },
+    {
+      "file": "game/src/ui/overlay-return-state.js",
+      "bytes": 2875,
+      "sha256": "b6bbba8b981c424bf2416f13c43bc2a4ac802afa57c29d6a008bfbb504fddf96"
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "bytes": 31342,
+      "sha256": "73f8d66a3282f6b8d1c813386ff539ed86b407260a0822bdf7bda158ab0dd5e4"
+    },
+    {
+      "file": "game/src/ui/page-entry-cancellation.js",
+      "bytes": 627,
+      "sha256": "0ded9af70313732065bf22a54084290a7cc7f2bc5fb2caa99bca86c08647f157"
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "bytes": 6370,
+      "sha256": "31602b1121c8579d0076a04793a28981316f2b5e5c8aad188c24268ebbe8b910"
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "bytes": 6747,
+      "sha256": "af39664ba123b7293da0a8260ffb9273e885ea507b696647f2942547f4954516"
+    },
+    {
+      "file": "game/src/ui/page-surface-lifetime.js",
+      "bytes": 1486,
+      "sha256": "d4a56dcddc4571f1a778f3473bc81d3a7d7520d2c70969e835af5efaa73e85c0"
+    },
+    {
+      "file": "game/src/ui/page-visual-readiness-sharing.js",
+      "bytes": 2867,
+      "sha256": "a3b27d084f6bda3a521049e52d75318bdfe7faadf54da443c5ca84c355369073"
+    },
+    {
+      "file": "game/src/ui/page-visual-ready.js",
+      "bytes": 8705,
+      "sha256": "af1ce83479f48b5b9d035d6b17557e9a0e9689e044c2bfff070a4459ca85a3ac"
+    },
+    {
+      "file": "game/src/ui/partner-interaction.js",
+      "bytes": 3039,
+      "sha256": "0d305e3fc6663cf5b3d899064d948d3b37b813a541e78f9bff6d7ff8fca76cea"
+    },
+    {
+      "file": "game/src/ui/performance-settings.js",
+      "bytes": 3038,
+      "sha256": "fc9afd76c425bc7de38c77b6db821f9d50ee3e9e5c6b8251bd3e8ddc91c21a69"
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "bytes": 4018,
+      "sha256": "d8f8fb6a9d675a5478343df0550b092d1cc4851e71bb094d3fc54bb686bf0737"
+    },
+    {
+      "file": "game/src/ui/rarity-reveal.js",
+      "bytes": 250,
+      "sha256": "f33cef9f756b69c8acc38b9fd39675dfaec5a6964a51418aeb9877981bdfbbe8"
+    },
+    {
+      "file": "game/src/ui/reward-acquisition-motion.js",
+      "bytes": 8063,
+      "sha256": "df06881c5f68c0a2ab02632e51912fb63f143b175def55a837701a0e1f634a0b"
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "bytes": 6118,
+      "sha256": "dadc2134aa400abe19674d4c785344a6bf8b6da95d069f17fe05eab62eb965cd"
+    },
+    {
+      "file": "game/src/ui/reward-card-feedback.js",
+      "bytes": 2131,
+      "sha256": "4645685cd23efb79edc46c3939426d5b30b47601d1ec22b663bccab14e488bc4"
+    },
+    {
+      "file": "game/src/ui/reward-interaction.js",
+      "bytes": 2063,
+      "sha256": "b12792d8326a43d0ea6176852f8d39b985a5b6a5d95d7f07f8c385b37205071a"
+    },
+    {
+      "file": "game/src/ui/reward-picker-heading.js",
+      "bytes": 501,
+      "sha256": "e0153a5eee1a255e5e4900b473f4da38dc95eea4c7ecf71c39f7993c64ed32bd"
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "bytes": 12072,
+      "sha256": "10e71d3f7e036f0e168b22fcbda4c90baccbb50e12a3e63e367f97ec5aebaed2"
+    },
+    {
+      "file": "game/src/ui/reward-state.js",
+      "bytes": 1635,
+      "sha256": "cc0ab11d338b6421d2e139416e5979fa1280d59c53b94622802535dc2b0ef088"
+    },
+    {
+      "file": "game/src/ui/room-footer.js",
+      "bytes": 1499,
+      "sha256": "5fed91fa8e771a871e7da98df8ff342fa5656330059e2003bb7056a7daab0deb"
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "bytes": 8410,
+      "sha256": "8c04f36198cd940c7d19f1283b2f07ab6f3564c475e20d3fc1271982746ab25e"
+    },
+    {
+      "file": "game/src/ui/run-top-bar.css",
+      "bytes": 4025,
+      "sha256": "5153833e971da2f8746f8baeae46d4ebe8cb43745105a84ed5be53ad7894113c"
+    },
+    {
+      "file": "game/src/ui/run-top-bar.js",
+      "bytes": 9522,
+      "sha256": "dd88ccc2a89fa911e86c41f256ba189d7fd5267fcef0b8a1147c975b743b23ce"
+    },
+    {
+      "file": "game/src/ui/save-management.js",
+      "bytes": 3617,
+      "sha256": "0ee4518e638db5378171506150ba820db845433bce064bc682ffddc02b7cd09a"
+    },
+    {
+      "file": "game/src/ui/screen-owner.js",
+      "bytes": 1617,
+      "sha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b"
+    },
+    {
+      "file": "game/src/ui/selection-state-motion.js",
+      "bytes": 5426,
+      "sha256": "93b676ae16744f11cd92d763c80fe44fe8b1e6a0b6e627cdaa9b8dc279f97c5d"
+    },
+    {
+      "file": "game/src/ui/settings-audio.js",
+      "bytes": 3216,
+      "sha256": "3541c1f986d78ca8ee4f5ade1e5a0825083bed64915b6c572245a05221667322"
+    },
+    {
+      "file": "game/src/ui/settings-battle-restart.js",
+      "bytes": 3301,
+      "sha256": "7881e729164224548b332429c70472b09ab9a896afe8277513b3d4b01731f514"
+    },
+    {
+      "file": "game/src/ui/settings-input.js",
+      "bytes": 3250,
+      "sha256": "6af60727223a5c73b6c9c2ee77504478a65569d31b1f7be37d86634218dfb7b3"
+    },
+    {
+      "file": "game/src/ui/settings-navigation.js",
+      "bytes": 4074,
+      "sha256": "f3459d9616dbf7fa5d59e4cc1ee6e24d4adde92a188254513ef44f654b12434b"
+    },
+    {
+      "file": "game/src/ui/settings-transition.js",
+      "bytes": 1098,
+      "sha256": "7c74e9c0f80dd7d30592bbf420ec20b59c47b200714b0294bd922e23ea4cb1cb"
+    },
+    {
+      "file": "game/src/ui/slot-emblems.js",
+      "bytes": 3323,
+      "sha256": "0bf838627ed112f4590f8d99d033fa75ca9ffa38757ef2081fb0bdbdd1ed9cd8"
+    },
+    {
+      "file": "game/src/ui/startup-transition.js",
+      "bytes": 3227,
+      "sha256": "f1245f76e30dcc6f296d222a7f0244129bc91111b3280386840d5080e935f5d3"
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "bytes": 23280,
+      "sha256": "544340387d874b17cd81f2eb5812d7ec1b16564f1f0101608a228efba12fa892"
+    },
+    {
+      "file": "game/src/ui/target-motion.js",
+      "bytes": 8431,
+      "sha256": "24a15e91f35328eeb78282df18f91f92d338fa97d336461af10878c9863ba095"
+    },
+    {
+      "file": "game/src/ui/term-definitions.js",
+      "bytes": 5614,
+      "sha256": "b0dde292074583097058965102cf97917126ae4c5c06de52f56098bf30df8deb"
+    },
+    {
+      "file": "game/src/ui/term-tip-policy.js",
+      "bytes": 332,
+      "sha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3"
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "bytes": 8782,
+      "sha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2"
+    },
+    {
+      "file": "game/src/ui/term-tips.runtime.js",
+      "bytes": 6932,
+      "sha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21"
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "bytes": 6062,
+      "sha256": "06eb98d178cba39e92f7023f70306b5ea3bf4c06109111525c99f49da4954e1d"
+    },
+    {
+      "file": "game/src/ui/title-credits.js",
+      "bytes": 1625,
+      "sha256": "93b238bf0d726eb6c37e3803125c7f735df8a2d0ad6bee316a2aa84c7d48ece5"
+    },
+    {
+      "file": "game/src/ui/title-wallpaper.js",
+      "bytes": 1928,
+      "sha256": "6027e95d9f9270b7d030c3ecb49c6127ec452bd718bcca710682ce0489ae8982"
+    },
+    {
+      "file": "game/src/ui/transition-art.js",
+      "bytes": 785,
+      "sha256": "a87387a47e08d87e19f591e78c2468bd1fe18edc67eec523ac426b3a66c2567b"
+    },
+    {
+      "file": "game/src/ui/transition-diagnostic-policy.js",
+      "bytes": 575,
+      "sha256": "37b904a7802b6eb20a43f05374ca601483627a34756d7614a801edd646be14ed"
+    },
+    {
+      "file": "game/src/ui/transition-handoff.js",
+      "bytes": 4074,
+      "sha256": "5515eb7d5ff94c2a68bffd999f42ee79cb6968d88eda92f71f17e073362b3815"
+    },
+    {
+      "file": "game/src/ui/transition-heading.js",
+      "bytes": 375,
+      "sha256": "7240b2827cc91005fbc2cc3e0fa7e23c18fe00c9ea3063e5d99dba9c7f9d1348"
+    },
+    {
+      "file": "game/src/ui/transition-preparation.js",
+      "bytes": 1067,
+      "sha256": "2a70bdfaddbb69acbce000662eb7c4f6d8b6e0569c6fdad0c69fb770bb975a78"
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "bytes": 6377,
+      "sha256": "76a59faa01633565c4996e9e71cbb992175fda77fbf16494b01f681d5587e998"
+    },
+    {
+      "file": "game/src/ui/ui-decision.js",
+      "bytes": 689,
+      "sha256": "a025c37ae7bda843bf83b51ee5b5a923f7b8435d389d701db72246cbb6883af4"
+    },
+    {
+      "file": "game/src/ui/ui-disclosure.js",
+      "bytes": 443,
+      "sha256": "35863a8b9879a048af9b360bf5aed471cee6224744444a2f7bcbccf71af6cbcb"
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "bytes": 3114,
+      "sha256": "bc07cbf42305e549dede660cc8abc0646ee579c3ecbf4e6f8afa571cfa92c2bc"
+    },
+    {
+      "file": "game/src/ui/ui.dom.types.d.ts",
+      "bytes": 3151,
+      "sha256": "eff045ed838cef97e34b3021388c14515b4d50004fcd8de5024b0f36f2bc076b"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "bytes": 6879,
+      "sha256": "6fa3cc5b3bf3e37f7b321a7b318afc995102cf56b09d4367640e5ef27ac059a9"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/layers-plus.svg",
+      "bytes": 540,
+      "sha256": "96fb0cc0a8ceb75aab8316d42622527d923d3a96658cc2932fe628dc22671530"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/LICENSE.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/README.md",
+      "bytes": 1511,
+      "sha256": "051cffc993dc7915e6d065d98ad2096453644d37efae9c144dca11b43c657e91"
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "bytes": 4181,
+      "sha256": "44545a9f6bc8763e097cc6bea8f191007702ad89192307d8842f8abfffa94892"
+    },
+    {
+      "file": "game/version.json",
+      "bytes": 26,
+      "sha256": "94665dfeec69a32b128efa8162829561b99873d5bddd2fd79116ed1189aa5316"
+    }
+  ]
+}

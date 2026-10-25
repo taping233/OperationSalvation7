@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-thundergrudge",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a168e9-3303-7231-bf93-a56fd7b7c7f3\\exec-6854ea18-bf63-4823-8d34-4c6f0ce7782a.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-23-thundergrudge-redraw/cards-martial-tt7-thundergrudge-source.png",
+        "bytes": 2071211,
+        "sha256": "478a3d1bcd550cc76032e67ec2db74768cb7e390f0e0de8e88a861a6402683dc"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-23-thundergrudge-redraw/cards-martial-tt7-thundergrudge-full-before.webp",
+          "bytes": 53486,
+          "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-23-thundergrudge-redraw/cards-martial-tt7-thundergrudge-thumb-before.webp",
+          "bytes": 13462,
+          "sha256": "e123fe387860836e0220e6c48af8e40787bdc80e3876588df50de28dae90b116"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-thundergrudge.webp",
+          "bytes": 152508,
+          "sha256": "68c34e1010ba6963205db8e965a33cde3ef6fd1006d271f1bb68502df1920be2",
+          "size": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-thundergrudge.webp",
+          "bytes": 18320,
+          "sha256": "c204cdf9da91b4f59d701ec2d92b14dc14a00c7454d56c05b8cf3b5d37dbe8e4",
+          "size": [
+            448,
+            336
+          ]
+        }
+      ],
+      "revision_before": "wu-class-final-20261004",
+      "revision_after": "wu-thundergrudge-20261023",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-thundergrudge.webp",
+            "ext": "webp",
+            "bytes": 53486,
+            "sha256": "9b222502ad6aab6373747e977eb40d856ac6302c03e469dfa1ea7a085def2e38",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-thundergrudge.webp",
+            "ext": "webp",
+            "bytes": 152508,
+            "sha256": "68c34e1010ba6963205db8e965a33cde3ef6fd1006d271f1bb68502df1920be2",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-thundergrudge-redraw/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+            "ext": "webp",
+            "bytes": 13462,
+            "sha256": "e123fe387860836e0220e6c48af8e40787bdc80e3876588df50de28dae90b116",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-04-WF-wu-cards-integrate/images.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+            "ext": "webp",
+            "bytes": 18320,
+            "sha256": "c204cdf9da91b4f59d701ec2d92b14dc14a00c7454d56c05b8cf3b5d37dbe8e4",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-thundergrudge-redraw/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1610,
+  "manifest_count_after": 1610
+}

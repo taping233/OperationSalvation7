@@ -1,0 +1,24 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/preparation-adapter-review.test.js (5 tests) 255ms
+ ✓ tests/architecture-boundaries.test.js (44 tests) 703ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  670ms
+ ✓ tests/achievement-gallery.test.js (8 tests) 555ms
+ ✓ tests/contracts.test.js (18 tests) 958ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  806ms
+ ✓ tests/achievement-gallery-entry.test.js (6 tests) 258ms
+ ✓ tests/photo-studio-tabs.test.js (6 tests) 32ms
+ ✓ tests/achievement-gallery-close.test.js (4 tests) 248ms
+ ✓ tests/collection-browsing-layout.test.js (3 tests) 211ms
+ ✓ tests/game-hub-preparation-feature.test.js (8 tests) 14ms
+ ✓ tests/preparation-slot-review.test.js (6 tests) 10ms
+ ✓ tests/photo-studio-presentation.test.js (3 tests) 4ms
+ ✓ tests/m06-preparation.test.js (6 tests) 9ms
+
+ Test Files  12 passed (12)
+      Tests  117 passed (117)
+   Start at  12:39:23
+   Duration  5.46s (transform 747ms, setup 0ms, collect 3.76s, tests 3.26s, environment 8.55s, prepare 1.38s)
+

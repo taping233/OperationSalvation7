@@ -1,0 +1,80 @@
+{
+  "url": "http://localhost:5200/",
+  "results": [
+    {
+      "character": "heixiang",
+      "heading": "黑像",
+      "images": [
+        {
+          "src": "assets/portraits/full/heixiang.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        },
+        {
+          "src": "assets/portraits/full/heixiang.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        },
+        {
+          "src": "assets/portraits/full/baita.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1037
+        },
+        {
+          "src": "assets/portraits/full/baita.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1037
+        }
+      ]
+    },
+    {
+      "character": "xingyue",
+      "heading": "星月",
+      "images": [
+        {
+          "src": "assets/portraits/full/xingyue.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        },
+        {
+          "src": "assets/portraits/full/xingyue.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        }
+      ]
+    },
+    {
+      "character": "wu",
+      "heading": "无",
+      "images": [
+        {
+          "src": "assets/portraits/full/wu.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        },
+        {
+          "src": "assets/portraits/full/wu.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1024
+        }
+      ]
+    },
+    {
+      "character": "wu",
+      "images": [
+        {
+          "src": "assets/portraits/full/wu-spring-v15.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1422
+        },
+        {
+          "src": "assets/portraits/full/wu-spring-v15.webp?v=0.60.0",
+          "state": "ready",
+          "width": 1422
+        }
+      ],
+      "skin": "spring"
+    }
+  ],
+  "logs": []
+}

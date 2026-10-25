@@ -1,0 +1,25 @@
+{
+  "source": "Current game assets JSON imported as ESM; images/audio use read-only middleware",
+  "metadata": [
+    {
+      "file": "game\\assets\\portraits\\frames\\changwuyu\\sprite-v1\\animations.json",
+      "sha256": "4506cb85b506e943436513a14e2d3c4d298df4637591740b839c41e7a266bfe0"
+    },
+    {
+      "file": "game\\assets\\portraits\\frames\\baita\\sprite-v1\\animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303"
+    },
+    {
+      "file": "game\\assets\\portraits\\frames\\heixiang\\sprite-v1\\animations.json",
+      "sha256": "f3354a16a949a5c3d4b93a19e1c5b0da17dc7f8f86573819c09c0743eaab6567"
+    },
+    {
+      "file": "game\\assets\\portraits\\frames\\xingyue\\sprite-v1\\animations.json",
+      "sha256": "e834fc26969fdc44d15be767a8d2739c2c1c6dd92fd087621edde6acd071f303"
+    },
+    {
+      "file": "game\\assets\\portraits\\frames\\wu\\sprite-v1\\animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "character": "heixiang",
+    "id": "last-seat",
+    "name": "终站留席",
+    "source_sha256": "e09bc01e29c15fde727415bee184d447389ac186adffa2df995f691bff1908d8",
+    "asset": "portraits/full/heixiang-last-seat.webp",
+    "quality": 94
+  },
+  "source": "C:\\Users\\太平\\Documents\\Codex\\2026-10-25\\new-chat\\outputs\\heixiang-last-seat-builtin.png",
+  "source_size": [
+    1660,
+    948
+  ],
+  "default_sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
+  "asset": {
+    "path": "portraits/full/heixiang-last-seat.webp",
+    "ext": "webp",
+    "bytes": 362424,
+    "sha256": "f258bfeef3cba80047aac00cdfaf588701dc7fd177dfd44ed6e4d9388dbfd9c6",
+    "license": "项目自有（AI 生成）",
+    "source": "docs/evidence/2026-10-25-heixiang-last-seat/skin-import.json"
+  },
+  "operations": [
+    "game\\assets\\portraits\\full\\heixiang-last-seat.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ],
+  "status": "imported",
+  "default_unchanged": true,
+  "git_mutation": false,
+  "processing": "RGB WebP; full canvas, no crop or resize"
+}

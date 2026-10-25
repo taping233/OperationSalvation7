@@ -1,0 +1,337 @@
+/* Winter expedition: shared shell and navigation. Card art and rule colours retain their own roles. */
+:root {
+  --exp-ink: #131416;
+  --exp-panel: #1d1f21;
+  --exp-line: #595f6666;
+  --exp-gold: #ead282;
+  --exp-text: #ececec;
+  --exp-muted: #adb2b5;
+}
+
+/* Preserve the illustration's midtones; concentrate contrast behind the controls. */
+#title::after {
+  background: linear-gradient(90deg, #0e0f100a 18%, #12131512 48%, #0f101180 100%),
+    linear-gradient(0deg, #12131472, transparent 37%);
+}
+#title::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 10% 14% at 47% 41%, #ffe59133, transparent 74%);
+  mix-blend-mode: screen; animation: titleRoseBreath 5.6s ease-in-out infinite alternate;
+}
+@keyframes titleRoseBreath { from { opacity: .35; } to { opacity: .78; } }
+/* The wallpaper is a single image, so use restrained local light to separate its focal points. */
+#title .title-bg::before, #title .title-bg::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+}
+#title .title-bg::before {
+  background: radial-gradient(ellipse 24% 34% at 12% 28%, #15171838, transparent 78%),
+    radial-gradient(ellipse 27% 29% at 67% 22%, #15171832, transparent 78%);
+}
+#title .title-bg::after {
+  background: radial-gradient(ellipse 17% 24% at 36% 24%, #e9ecee30, transparent 72%),
+    radial-gradient(ellipse 11% 13% at 46% 39%, #ffecaf29, transparent 72%),
+    radial-gradient(ellipse 33% 19% at 45% 78%, #adb5bb24, transparent 75%);
+  mix-blend-mode: screen;
+}
+/* Two loose paper corners cross the illustration at the bottom without blocking controls. */
+#title .title-foreground-paper {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden;
+}
+#title .title-foreground-paper::before, #title .title-foreground-paper::after {
+  content: ''; position: absolute; display: block;
+  background: linear-gradient(145deg, #bebfc0c9, #888d90c2 66%, #545a61ab),
+    url('../assets/ui/photo-studio/paper-grain.png') center / 96px;
+  background-blend-mode: multiply; filter: drop-shadow(0 -5px 8px #0e0f10b8);
+}
+#title .title-foreground-paper::before {
+  left: 33%; bottom: -7%; width: 11%; height: 11%; transform: rotate(-13deg);
+  clip-path: polygon(4% 0, 98% 5%, 100% 92%, 13% 100%, 0 84%);
+}
+#title .title-foreground-paper::after {
+  left: 43%; bottom: -8%; width: 9%; height: 12%; transform: rotate(12deg);
+  clip-path: polygon(2% 8%, 96% 0, 100% 93%, 8% 100%, 0 77%);
+  opacity: .68;
+}
+#title .title-inner::before {
+  content: ''; position: absolute; inset: 0 0 0 auto; width: 54%;
+  background: radial-gradient(ellipse 95% 78% at 100% 52%, #111214b8, #11121480 48%, transparent 83%);
+  pointer-events: none;
+}
+#title .title-heading { left: auto; right: 3.6%; top: 9.5%; width: clamp(380px, calc(var(--game-layout-width, 100vw) * 0.35), 500px); transform: none; }
+#title .ak-tl { left: 28px; top: 20px; gap: 4px; }
+#title .ak-quickref { left: 162px; top: 20px; height: 58px; transform: none; }
+#title .ak-user { right: 5%; top: 30px; transform: none; }
+#title .ak-user .ak-ava { width: 40px; height: 40px; }
+#title .ak-lv em { font-style: normal; letter-spacing: 2px; color: var(--exp-muted); }
+/* Metal plaques remain on the destinations and archive; the three top-left controls float over the scene. */
+#title .ak-user, #title .ak-circle {
+  background: linear-gradient(90deg, #131416df, #181a1cbd),
+    url('../assets/ui/title-plaque-metal-v1.png') center / cover;
+  border: 1px solid #bec0c16b;
+  box-shadow: inset 0 0 0 2px #131516a8, inset 0 1px #eaebeb26, 0 4px 18px #0e0f1055;
+}
+#title .ak-sq, #title .ak-quickref,
+#title .ak-sq:hover, #title .ak-quickref:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+#title .ak-sq, #title .ak-quickref {
+  color: #f5f6f6;
+  text-shadow: 0 1px 3px #111214, 0 0 8px #111214;
+  filter: drop-shadow(0 1px 2px #111214);
+}
+#title .ak-sq::after { display: none; }
+#title .ak-sq:hover, #title .ak-quickref:hover { color: #ffffff; filter: drop-shadow(0 1px 2px #111214) drop-shadow(0 0 5px #e4e6e79c); }
+#title .ak-quickref { padding-inline: 16px 21px; letter-spacing: 2px; }
+#title .ak-user { padding: 6px 10px; }
+/* A faint rail sits behind the icon tabs and ends at the primary action. */
+#title .ak-hud::before {
+  content: ''; position: absolute; top: 36%; bottom: 11%;
+  right: calc(5% + clamp(280px, calc(var(--game-layout-width, 100vw) * 0.27), 390px) + 4px); width: 2px;
+  background: linear-gradient(180deg, transparent, #e2cf9063 12%, #b3b8bb50 72%, transparent);
+  box-shadow: 2px 0 10px #111214a8; pointer-events: none;
+}
+#title .ak-circle {
+  left: auto; right: 5%; grid-template-columns: 59px minmax(0, 1fr) auto; grid-template-rows: 1fr 1fr;
+  color: var(--exp-text);
+}
+#title .ak-circle .c-ring {
+  grid-column: 1; grid-row: 1 / 3; border-radius: 0;
+  color: var(--exp-gold);
+}
+#title .c-ring::after { display: none; }
+#title .c-ring img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 5px #080909b8); }
+/* Shared ink-dark vignette behind each painted cutout; the small brass orbit is varied per entry. */
+#title .ak-circle .c-ring {
+  isolation: isolate; overflow: visible;
+}
+#title .ak-circle .c-ring svg { display: none; }
+/* 2026-09-25 老板：各入口的图标盘缩小一点（transform 缩放不动布局，文字位置不变） */
+#title .ak-circle .c-ring { transform: scale(.85); }
+#title .ak-circle .c-ring::before {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  background: var(--home-icon) center / var(--home-icon-size, 54px) no-repeat,
+    radial-gradient(ellipse 68% 61% at 49% 52%, #060607f5 18%, #080909e8 49%, #08090999 66%, transparent 86%);
+}
+#title .ak-circle .c-ring::after {
+  content: ''; display: block; position: absolute; z-index: 1; pointer-events: none;
+  left: -2px; top: -4px; width: 18px; height: 18px; border: 1px solid #dabd5e9c;
+  border-radius: 50%; box-shadow: inset 0 0 0 3px #0c0d0e80, 8px 9px 0 -8px #e6ca6e;
+}
+#title .ak-ach .c-ring { --home-icon: url('../assets/ui/home-icons-v12/achievement-shield.webp'); }
+#title .ak-lib .c-ring { --home-icon: url('../assets/ui/home-icons-v12/photo-orb-book.webp'); }
+#title .ak-set .c-ring { --home-icon: url('../assets/ui/home-icons-v12/settings-gear.webp'); }
+#title .ak-ach .c-ring::after { left: auto; right: -8px; top: 4px; }
+#title .ak-lib .c-ring::after { left: -8px; top: 24px; width: 13px; height: 13px; }
+#title .ak-set .c-ring::after { left: auto; right: -7px; top: -6px; width: 14px; height: 14px; }
+#title .ak-circle .c-cn { white-space: nowrap;
+}
+#title .ak-circle .c-tag { border: 0; background: none; padding: 0; }
+#title .ak-start {
+  color: var(--exp-ink);
+  border-radius:0;
+}
+#title .ak-start::before {
+  content: ''; position: absolute; top: -35%; bottom: auto; left: -35%; right: auto;
+  width: 28%; height: 170%; background: linear-gradient(90deg, transparent, #f1f0ec99, transparent);
+  filter: blur(10px); z-index: 0; pointer-events: none;
+  animation: titleStartGleam 8s ease-in-out infinite;
+}
+@keyframes titleStartGleam {
+  0%, 54% { transform: translateX(0) skewX(-18deg); opacity: 0; }
+  59% { opacity: .35; }
+  76% { transform: translateX(470%) skewX(-18deg); opacity: .42; }
+  82%, 100% { transform: translateX(470%) skewX(-18deg); opacity: 0; }
+}
+#title .ak-start .st-row, #title .ak-start .st-en { position: relative; z-index: 1; }
+#title .ak-start .st-orn { display: none; }
+#title .ak-start .st-row::before {
+  content: ''; display: block;
+  filter: drop-shadow(0 2px 3px #181a1c88);
+}
+#title .ak-start::after { content: ''; position: absolute; inset: 4px; border: 1px solid #7b6a445c; pointer-events: none; }
+#title .ak-start .st-orn { color: #596158; filter: none; width: 27px; }
+#title .ak-sec { top: auto; color: var(--exp-muted); gap: 6px; }
+#title .ak-sec span { color: var(--exp-muted); font-size: 11px; letter-spacing: 1px; }
+#title .ak-sec b { padding: 2px 6px; color: var(--exp-gold); border: 0; background: none; font-size: 15px; }
+#title .ak-bp, #title .ak-plus, #title .ak-line1 { display: none; }
+#title .title-quote { bottom: 3.5%; left: 5.4%; color: #b1b5b87a; font-size: 9px; letter-spacing: 2px; border: 0; padding: 0; }
+
+/* Home destinations are standalone painted emblems with labels, not framed rows. */
+#title .ak-hud::before { display: none; }
+#title .ak-hud::after {
+  content: ''; position: absolute; inset: 27% 2% 12% 65%; pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, #ffecadca 0 1px, transparent 3px),
+    radial-gradient(circle at 63% 11%, #fad764ab 0 1px, transparent 3px),
+    radial-gradient(circle at 84% 37%, #fce6a0ae 0 1px, transparent 3px),
+    radial-gradient(circle at 40% 68%, #e1c464b0 0 1px, transparent 3px),
+    radial-gradient(circle at 73% 86%, #ffeaa4c9 0 1px, transparent 3px);
+  filter: drop-shadow(0 0 5px #f1d062b0); opacity: .65;
+  animation: homeDustDrift 8s ease-in-out infinite alternate;
+}
+@keyframes homeDustDrift { from { transform: translateY(4px); opacity: .4; } to { transform: translateY(-8px); opacity: .8; } }
+#title .ak-circle {
+  width: 170px; height: 150px; padding: 0; border: 0; border-radius: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  gap: 0; background: transparent; box-shadow: none; text-align: center;
+  transform: none; overflow: visible;
+}
+#title .ak-lib { top: 35%; right: 4%; }
+#title .ak-ach { top: 57%; right: 21%; }
+#title .ak-set { top: 57%; right: 4%; }
+#title .ak-circle:hover {
+  background: transparent; border: 0; box-shadow: none; transform: translateY(-4px);
+  filter: drop-shadow(0 0 9px #efd68268);
+}
+/* P1：基态铺垫 hover 辉光的 25% 透明版 + 显式过渡，弱化 hover 亮牌/位移的突跳感 */
+#title .ak-banner, #title .ak-circle {
+  filter: drop-shadow(0 0 5px #efd6821a);
+  transition: opacity .2s, transform .2s, filter .2s;
+}
+#title .ak-circle .c-ring {
+  position: relative; left: auto; width: 112px; height: 112px; flex: 0 0 112px;
+  background: transparent; border: 0; box-shadow: none;
+}
+#title .ak-circle .c-ring::before {
+  inset: -27px -30px; background-size: var(--home-icon-size, 108px), 100% 100%;
+  filter: drop-shadow(0 4px 6px #050606aa) drop-shadow(0 0 7px var(--home-glow, #e6cb7652));
+  animation: homeEmblemFloat 6.2s ease-in-out infinite;
+}
+#title .ak-lib .c-ring::before { animation-delay: -1.7s; animation-duration: 5.7s; }
+#title .ak-ach .c-ring::before { animation-delay: -3.1s; animation-duration: 6.8s; }
+#title .ak-set .c-ring::before { animation-delay: -2.2s; animation-duration: 5.9s; }
+#title .ak-circle .c-ring::after {
+  animation: homeOrbitGleam 4.8s ease-in-out infinite alternate;
+}
+#title .ak-lib .c-ring::after { animation-delay: -1.9s; }
+#title .ak-ach .c-ring::after { animation-delay: -3.2s; }
+#title .ak-set .c-ring::after { animation-delay: -1.1s; }
+@keyframes homeEmblemFloat {
+  0%, 100% { transform: translateY(1px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.025); }
+}
+@keyframes homeOrbitGleam { from { opacity: .4; } to { opacity: .95; } }
+#title .ak-ach .c-ring { --home-icon-size: 120px; --home-glow: #f7cf4b70; }
+#title .ak-lib .c-ring { --home-icon-size: 108px; --home-glow: #b4bec573; }
+#title .ak-set .c-ring { --home-icon-size: 104px; --home-glow: #bfc3c671; }
+#title .ak-circle .c-cn {
+  position: relative; grid-column: auto; grid-row: auto; align-self: auto;
+  margin: 0; color: #e7e5e1; font: 700 24px/1.08 var(--font-handwriting);
+  font-family: var(--font-handwriting) !important;
+  letter-spacing: 3px; text-shadow: 0 2px 5px #000000, 0 0 15px #0a0b0c, 0 -1px #f2f1ed4d;
+}
+#title .ak-circle .c-en {
+  position: relative; grid-column: auto; grid-row: auto; align-self: auto;
+  margin: 4px 0 0; color: #ecd075; font: italic 11px/1.2 Georgia, serif;
+  font-family: Georgia, serif !important;
+  letter-spacing: 1px; text-shadow: 0 1px 5px #000000, 0 0 7px #c9aa4570;
+}
+#title .ak-circle .c-en::after {
+  content: ''; display: block; width: 34px; height: 1px; margin: 6px auto 0;
+  background: linear-gradient(90deg, transparent, #e6cb76b3, transparent);
+  box-shadow: 0 0 5px #e6cb7675;
+}
+#title .ak-circle .c-tag {
+  order: 4; position: relative; grid-column: auto; grid-row: auto;
+  margin: 3px 0 0; font-size: 12px; color: #efdb9a;
+}
+#title .ak-start {
+  right: 8%; bottom: 1%; width: 260px; min-height: 125px; height: 125px;
+  padding: 0; gap: 0; border: 0; background: transparent; box-shadow: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: visible;
+}
+#title .ak-start::before, #title .ak-start::after { display: none; }
+#title .ak-start:hover {
+  background: transparent; border: 0; box-shadow: none; transform: translateY(-4px);
+  filter: drop-shadow(0 0 12px #f5d15c80);
+}
+#title .ak-start .st-row { display: flex; flex-direction: column; align-items: center; gap: 0; }
+#title .ak-start .st-row::before {
+  flex: 0 0 66px; width: 250px; height: 66px;
+  background: url('../assets/ui/home-icons-v12/explore-sword.webp') center / contain no-repeat,
+    radial-gradient(ellipse 67% 39% at 50% 55%, #050606ef 18%, #050606a8 57%, transparent 85%);
+  animation: homeEmblemFloat 7.4s ease-in-out infinite;
+}
+#title .ak-start .st-cn {
+  color: var(--gold-bright); font: 700 34px/1.05 var(--font-handwriting);
+  font-family: var(--font-handwriting) !important;
+  letter-spacing: 6px; text-shadow: 0 2px 7px #000000, 0 0 16px #e5c14ba8;
+  animation: homeGoldLetter 5.8s ease-in-out infinite alternate;
+}
+#title .ak-start .st-en { margin-top: 5px; color: #e5ca71; font: italic 11px/1.1 Georgia, serif; font-family: Georgia, serif !important; letter-spacing: 1px; text-shadow: 0 1px 5px #000000; }
+@keyframes homeGoldLetter {
+  from { text-shadow: 0 2px 7px #000000, 0 0 10px #e5c14b70; }
+  to { text-shadow: 0 2px 7px #000000, 0 0 21px #f4d775c9; }
+}
+#title .ak-sec { bottom: 1.5%; right: 30%; }
+
+/* 开发者节点测试面板（标题页左侧、快速参考下方；仅开发者模式可见，显隐见 notes.syncDevVisibility）。
+   位置避开右列菜单轴与底部「开始探索」，窄窗口下依旧落在左侧空白区。 */
+#title .title-dev {
+  position: absolute; z-index: 5; width: 306px;
+  padding: 12px 12px 10px; border: 1px solid #ead28255; border-radius:0;
+  background: #101112e0; color: var(--exp-text); font: 12px var(--font-ui);
+}
+#title .title-dev[hidden] { display: none; }
+/* P0：大屏字标移到左上（title-p0 P1 布局），原 left:28px/top:96px 会盖住字标上半；
+   大屏移到中部空白带，右缘避开右列设置入口 ak-set（right:5%）。 */
+#title .title-dev { left: auto; right: 24%; top: 22%; }
+.title-dev .td-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.title-dev .td-head span:first-child { color: var(--exp-gold); font-size: 12px; letter-spacing: 2px; }
+.title-dev .td-en { font: 9px 'Cascadia Code', monospace; letter-spacing: 1px; color: var(--exp-muted); }
+.title-dev .td-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.title-dev .td-grid button {
+  padding: 7px 4px; border: 1px solid #595f66a8; border-radius:0;
+  background: #1d1f21c9; color: var(--exp-text); font: 12px var(--font-ui); letter-spacing: 1px;
+  cursor: pointer; transition: background .16s, border-color .16s;
+}
+.title-dev .td-grid button:hover { background: #2f3337; border-color: var(--exp-gold); }
+.title-dev .td-tip { margin: 8px 0 0; font-size: 10px; letter-spacing: 1px; color: var(--exp-muted); }
+body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
+
+/* Compact expedition dashboard, with actual legal routes as the primary action. */
+#sidebar {
+  display: grid; grid-template-columns: 176px 186px minmax(0, 1fr);
+  height: 142px; min-height: 142px; gap: 18px; padding: 14px 24px; border-top: 1px solid #7f848766;
+  overflow: visible; box-shadow: 0 -10px 35px #0a0b0c55;
+}
+#sidebar .panel { min-width: 0; width: auto; padding: 0; border: 0; background: none; box-shadow: none; }
+#sidebar #charPanel { display: flex; align-items: flex-end; }
+/* 头像尺寸统一由 winter.css 底栏重设计（118×118 出血版）定义，此处不再覆盖（2026-09-19） */
+#sidebar #statsPanel { display: flex; justify-content: center; gap: 5px; border-right: 1px solid var(--exp-line); padding-right: 16px; }
+#sidebar #miniMap { width: 100%; height: auto; max-height: 66px; object-fit: contain; max-width: none; border-radius: var(--radius-panel); background: #10111280; } /* 09-25 P2：画布本征 560×112，原强制 height:66px 纵向拉伸 1.8 倍——改随宽等比 + 66px 封顶 contain */
+#sidebar #statsPanel .stat-duo { display: flex; justify-content: space-between; gap: 5px; margin: 0; font-size: 10px; color: var(--exp-muted); }
+#sidebar .stat-duo b { font-size: 12px; }
+#sidebar .stat-duo .duo-sep { padding: 0 6px; opacity: .5; }
+/* 09-25 P2：上下留 6px 给路线卡 hover translateY(-2px) 的位移空间（overflow-x:auto 会把纵向
+   也折算成裁切，无留白则上浮被剪）；两侧 16px 渐隐提示横向可滚（mask 不随内容滚动） */
+#topBtns { gap: 7px; }
+#hpHud { min-width: 126px; }
+#hpHud .hp-hud-label { color: #ced0d1; background: #313438; font-size: 10px; }
+#hpText { color: #f3f3f4; }
+#layerBanner { background: #191a1cdb; border: 1px solid #9a9c9e2e; border-bottom-color: #d0b76799; }
+#layerBanner .lb-en { color: #bbbec0; }
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+  animation-duration: .001ms !important; animation-delay: 0ms !important;
+  transition-duration: .001ms !important; scroll-behavior: auto !important;
+}
+body.reduce-motion #title::before { animation: none; opacity: .45; }
+body.reduce-motion #title .ak-start::before { display: none; }
+body.reduce-motion #title .ak-hud::after { animation: none; }
+body.reduce-motion #title .ak-circle .c-ring::before,
+body.reduce-motion #title .ak-circle .c-ring::after,
+body.reduce-motion #title .ak-start .st-row::before,
+body.reduce-motion #title .ak-start .st-cn { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  #title::before { animation: none; opacity: .45; }
+  #title .ak-start::before { display: none; }
+  #title .ak-hud::after { animation: none; }
+  #title .ak-circle .c-ring::before,
+  #title .ak-circle .c-ring::after,
+  #title .ak-start .st-row::before, #title .ak-start .st-cn { animation: none; }
+}
+body.reduce-motion .sts-float { animation: none !important; opacity: 1; }
+body.reduce-motion .sts-impact { display: none; }

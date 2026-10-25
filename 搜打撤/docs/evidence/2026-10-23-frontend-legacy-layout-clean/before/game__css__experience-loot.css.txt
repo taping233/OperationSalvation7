@@ -1,0 +1,89 @@
+/* experience-loot.css —— 切片2：搜刮/火堆情境信息（体验线建结构，01:2x 视觉面移交美术 UI 线）
+ * 归属：css 视觉面=美术 UI 线（art-status.md 登记）；类名契约=.eps-*（js 侧体验线，改名需双方同步）。
+ * 挂载：game/index.html link（01:2x 由美术线补上——此前登记的 link 实际缺失，样式未生效）。
+ * .eps-card-val —— 宝箱卡牌角上的收购价币标（SDT.Cards.sellPrice 口径，体验线定）
+ * .eps-fate     —— 「打出即散失/撤离 1/3 带回」命运提示行
+ * 视觉语言：与 pocket-strip 同族的冷青档案章（深青渐变底/细边/2px 直角/金值/tabular-nums），
+ * 圆角 999px 药丸非本项目语言，改 2px。
+ */
+
+.eps-card-val {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius:0;
+  background: linear-gradient(180deg, rgba(17,18,20,.9), rgba(13,14,15,.94));
+  border: 1px solid rgba(230,203,118,.42);
+  box-shadow: inset 0 1px 0 rgba(223,224,226,.06), 0 2px 6px rgba(7,7,8,.35);
+  color: #f4e2a5;
+  text-shadow: 0 0 8px rgba(230,203,118,.2);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  pointer-events: none;
+}
+
+.eps-card-val img, .eps-card-val svg { width: 12px; height: 12px; }
+
+/* 命运行：档案注记，弱化为规则提示（与 .eps-hint 同族灰青） */
+.eps-fate {
+  color: #92979a;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
+.eps-fate img, .eps-fate svg { width: 12px; height: 12px; vertical-align: -2px; }
+
+/* ═══ 章节导航层级风险徽标（01:4x 美术线正式化）
+   契约：li 行尾 i.eps-lyr[data-tier=低|中|高|极高]（js 在 pocket-strip.js，仅挂当前层之后的层）。
+   js 侧 v1 内联样式未删——本节用 !important 压内联保证生效；体验线删内联时有一次微小跳变
+   （字号 10→10.5、字距 .04→.08em、极高色 #f08a7a→#ff8d7e），终值以本 css 为准（02:4x 复核修正注释）。
+   布局：徽标独占一行右对齐（inline 会让窄导航项的层名竖排断裂——01:5x 实测修正）。 */
+#expeditionChapter li .eps-lyr {
+  display: block !important;
+  margin: 3px 0 2px auto !important;
+  padding: 0 6px !important;
+  width: fit-content;
+  border-radius:0 !important;
+  font-style: normal;
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+}
+#expeditionChapter li .eps-lyr[data-tier="低"],
+#expeditionChapter li .eps-lyr[data-tier="中"] {
+  color: #aaaeb1 !important;
+  background: rgba(170,174,177,.1) !important;
+  border: 1px solid rgba(170,174,177,.22) !important;
+}
+#expeditionChapter li .eps-lyr[data-tier="高"] {
+  color: #f9cf43 !important;
+  background: rgba(249,207,67,.1) !important;
+  border: 1px solid rgba(249,207,67,.32) !important;
+}
+#expeditionChapter li .eps-lyr[data-tier="极高"] {
+  color: #ff8d7e !important;
+  background: rgba(255,107,94,.12) !important;
+  border: 1px solid rgba(255,107,94,.38) !important;
+  text-shadow: 0 0 8px rgba(255,107,94,.18);
+}
+
+/* ═══ 收购价档位编码（02:2x 体验线切片4：PoE loot filter 多通道编码模式）
+   契约：.eps-card-val 追加 .eps-val-S|A|B|C（js 在 chests.js，口径 SDT.Cards.sellPrice：
+   S≥6 / A 3-5 / B 2 / C 1）。档位规则=体验线信息编码；色值美术线可调，
+   关键是相对量级一眼可辨（S 最亮金+微光，C 最淡）。 */
+.eps-card-val.eps-val-S {
+  border-color: rgba(255,214,81,.95);
+  box-shadow: 0 0 8px rgba(255,214,81,.45), inset 0 1px 0 rgba(223,224,226,.06);
+  color: #ffeba8;
+}
+.eps-card-val.eps-val-A { border-color: rgba(230,203,118,.75); color: #f4e2a5; }
+.eps-card-val.eps-val-B { border-color: rgba(170,174,177,.5); color: #d9dbdc; text-shadow: none; }
+.eps-card-val.eps-val-C { border-color: rgba(170,174,177,.25); color: #9a9fa2; opacity: .85; text-shadow: none; }

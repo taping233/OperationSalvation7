@@ -1,0 +1,93 @@
+{
+  "input": "当前窗口、标题开发遭遇战真实点击、不写存档；仅几何观察，未进行战斗功能测试",
+  "units": [
+    {
+      "actorFootInset": "",
+      "actorHeight": "",
+      "bottom": "0px",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".battle-stage.sts"
+    },
+    {
+      "actorFootInset": "16.28px",
+      "actorHeight": "227.9px",
+      "bottom": "412.387px",
+      "rect": {
+        "height": 233.3249969482422,
+        "width": 293.32501220703125,
+        "x": 198.9375,
+        "y": 211.75
+      },
+      "selector": ".sts-me"
+    },
+    {
+      "actorFootInset": "",
+      "actorHeight": "",
+      "bottom": "412.387px",
+      "rect": {
+        "height": 142.66250610351562,
+        "width": 422.3999938964844,
+        "x": 704,
+        "y": 302.4125061035156
+      },
+      "selector": ".sts-foes"
+    },
+    {
+      "actorFootInset": "",
+      "actorHeight": "",
+      "bottom": "0px",
+      "rect": {
+        "height": 142.66250610351562,
+        "width": 129.25,
+        "x": 704,
+        "y": 302.4125061035156
+      },
+      "selector": ".sts-foe"
+    },
+    {
+      "actorFootInset": "",
+      "actorHeight": "",
+      "bottom": "0px",
+      "rect": {
+        "height": 142.66250610351562,
+        "width": 129.25,
+        "x": 850.5750122070312,
+        "y": 302.4125061035156
+      },
+      "selector": ".sts-foe"
+    },
+    {
+      "actorFootInset": "",
+      "actorHeight": "",
+      "bottom": "0px",
+      "rect": {
+        "height": 142.66250610351562,
+        "width": 129.25,
+        "x": 997.1500244140624,
+        "y": 302.4125061035156
+      },
+      "selector": ".sts-foe"
+    },
+    {
+      "actorFootInset": "16.28px",
+      "actorHeight": "227.9px",
+      "bottom": "262.18px",
+      "rect": {
+        "height": 17.337499618530273,
+        "width": 43.1875,
+        "x": 324.0062561035156,
+        "y": 252.96250915527344
+      },
+      "selector": ".sts-me>.sts-nameplate"
+    }
+  ],
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "mode": "built-in image_gen precise-object-edit",
+  "prompt": "prompt.txt",
+  "source": {
+    "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1723b-4be4-75a3-ac0c-f9c09c70f7d4\\exec-200d6bc1-9a6e-40f5-9bfe-47e0c314d29b.png",
+    "bytes": 1038395,
+    "sha256": "ecaeadc5e87e8cee31f6a8b1ac29a1c6bbdb952bb8003cb8fc584ae39e77bea9",
+    "acquisition": "Built-in imagegen edit using original ground.webp; source >1MB retained outside Git."
+  },
+  "asset": {
+    "path": "game/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+    "width": 1659,
+    "height": 948,
+    "mode": "RGBA",
+    "encoding": "WebP quality94 method6; no resize/crop/filter",
+    "beforeBytes": 121902,
+    "beforeSha256": "1745ba35497c047d8fbde33555fcfa12e45b835df6e43fe2905fc814389d1169",
+    "afterBytes": 198696,
+    "afterSha256": "f19e7c79b5047d6494c2331f005575f3edf2834f75b40753e26c84e11dfe2baa",
+    "backup": ".tmp/battle-ground-depth-1025/before/ground.webp"
+  },
+  "preservedLayers": {
+    "far.webp": "050d9ec2fd7ffe566b576ee937d232c5cef7806a76fd9c112d0f14470996d75e",
+    "mid.webp": "440a84fa89866250bac5211613cb1c7eebbf80bb5d48beefdb3c8cce8e72ec09",
+    "foreground.webp": "66f512b3a2e18083861107c3b12430e831434c09ef34446e99b8675c51d3e679"
+  }
+}

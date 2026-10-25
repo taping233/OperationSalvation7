@@ -1,0 +1,57 @@
+/* October feedback: scoped to the requested pages. */
+body #overlay#overlay#overlay #hubMain .base-navigation-v7 .hub-tab.on .base-home-icon { color:#43b9ff; fill:currentColor; }
+.courtyard-v3-rain-layer { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.departure-drag-card { position:fixed; z-index:10000; pointer-events:none; opacity:1; filter:drop-shadow(0 10px 12px #122b4466); }
+.departure-drag-card .hs-card { width:100%; }
+.departure-drag-card .dep-quantity { display:flex; justify-content:space-between; color:#203945; background:#f6f8f9; }
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar { padding-left:24px; padding-right:24px; }
+#depMain .dep-drag-source { visibility:hidden; }
+#depMain [draggable="true"] { touch-action:none; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12[data-section="pool"] {
+  & .pv12-agent-workspace { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  & .pv12-pool-catalog { grid-column:1/-1; }
+  & .pv12-agent-strip { grid-column:2; }
+  & .pv12-sections { grid-column:2; }
+  & .card-browser-track { align-content:center; align-items:start; overflow:visible; gap:28px; padding:32px 12px 16px; container-type:size; }
+  & .person-pool-card { padding:0; gap:8px; max-width:285px; }
+  & .person-pool-card > span:last-child { top:0; margin-top:26px; }
+  /* 2026-10-15 老板指令：招式卡放大——.78 档且框比随 272/406 自适应（原 height 钉 224px 会随宽变形），字号同步 15px */
+  & .pool-card-art { width:min(100%,calc((100cqh - 100px) * .78)); height:auto; aspect-ratio:272/406; }
+  & .person-pool-card .hs-card { font-size:15px; }
+  & .card-browser-footer { margin:0; }
+}
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-image-stage { background:#e0e5e4; margin:12px; border:1px solid #ffffff80; border-radius:12px; box-shadow:0 12px 30px #101d2440; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-image-stage > img { mix-blend-mode:multiply; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .person-face :is(b,small) { display:none; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .person-face .companion-art { height:86px; }
+body #overlay#overlay#overlay #hubMain .hub-archive-v3 button[data-act="hubTab"] { display:flex; justify-content:center; align-items:center; text-align:center; }
+body #overlay#overlay#overlay #depMain.departure-cover:not(.departure-glass) {
+  background:#e9edf0; color:#243945;
+  & .dep-body { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; background:#e9edf0; }
+  & :is(.hub-head,.dep-foot) { background:#dfe7ec; color:#243945; }
+  & :is(.hub-head h2,.dep-storage h3,.dep-pack h3,.dep-filters,.dep-capacity) { color:#243945; }
+  & .camp-steps :is(button,b) { color:#4b6472; }
+  & .ak-back-tl { color:#243945; }
+  & #btnDeploy { color:#193746; background:#9edce7; }
+  & .camp-depart-person { display:none; }
+  & .dep-body > :is(.dep-storage,.dep-pack) { background:#f6f8f9; padding:14px; color:#243945; }
+  & :is(#depPool,#depBag) { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-auto-rows:max-content; gap:24px; align-content:start; overflow:auto; flex:1; }
+  & #depBag::after { content:none; }
+  & :is(#depPool .dep-card,#depBag .bag-cell) { width:100%; height:auto; min-width:0; min-height:0; }
+  & #depPool .dep-card-face { flex:none; height:auto; width:100%; }
+  & :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card) { width:100%!important; max-width:100%!important; min-width:0!important; margin:0 auto; box-sizing:border-box; font-size:12px; }
+  & .dep-quantity { display:flex; justify-content:space-between; margin-top:20px; font-size:13px; color:#526772; gap:4px; }
+  & .dep-quantity b { font:700 18px/1.2 var(--font-num); }
+  & .dep-own { color:#246783; }
+  & .dep-picked-count { color:#a44d22; }
+  & :is(.camp-pack-note,#depSummary,.set-tip,.camp-detail-heading small) { display:none; }
+  & .dep-pack > h3 { margin-bottom:12px; }
+}
+body #overlay#overlay#overlay .cls2-page .cls2-panel { background:transparent; border:0; clip-path:none; }
+body #overlay#overlay#overlay .cls2-page .cls2-panel::after { content:none; }
+body #overlay#overlay#overlay .cls2-page .cls2-fullart::after { background:none; }
+body #overlay#overlay#overlay .cls2-page .cls2-fullart { mix-blend-mode:normal; }
+/* Map preview and toolbar are maintained in page-expedition-hud.css. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome { background:transparent!important; border:0; box-shadow:none; }
+body #overlay#overlay#overlay .sts-float.sticker { z-index:120; overflow:visible; }
+body #overlay#overlay#overlay .sts-float.sticker img { display:block; width:46px; height:46px; max-width:none; }

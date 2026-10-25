@@ -1,0 +1,102 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl focus, adult woman walking up a railway station staircase toward the camera, high angle view looking down the stairs, quiet thoughtful expression, holding a small paper train ticket in her right hand, left hand holding the strap of her brown shoulder bag, a few distant commuters walking away across the concourse behind her\n\nWide game homepage wallpaper, a winter morning commute in a modern city station.\n\nLandscape composition, young adult woman centered between two gray metal-and-tile stairwell walls, symmetrical brass handrails receding toward the station concourse at the top of the image. Camera looks down from the upper landing. The woman faces upward toward the camera, ascending from the background toward the foreground. One loafer is planted flat on a horizontal stair tread, the other foot is raised only one normal stair above it, modest natural walking stride. Uniform realistic stair risers and deep treads, consistent single perspective. Her ticket is held by thumb and index finger at one short edge, the rest of the ticket is visible. Full figure and shoes inside the frame. Keep blurred commuters secondary, no foreground face obscuring her, no interface.\n\nPale warm winter daylight from the concourse, cool blue-gray reflected light on tiled stairwell walls, warm brass rails and beige coat, chestnut brown curls, muted blue-gray knit dress, soft rich green eye, clean silver stair-edge strips, controlled light-shadow planes, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1067444622,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, multiple main characters, both eyes visible, parted fringe, short hair, hair over both eyes, extra legs, extra feet, giant stairs, steep ladder, floating foot, foot through stairs, broken railing, distorted ticket, text on ticket, floating books, cake, magic circle",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, very long dark chestnut brown wavy curly hair, thick side swept fringe covering her eye on the viewers right, only the green eye on the viewers left visible, two slender gold hairpins on the visible-eye side, small gold earrings, muted dark green beret, calm bookish demeanor, beige knee length open winter coat over a blue gray ribbed turtleneck knit dress, opaque charcoal tights, brown leather loafers, brown leather shoulder bag, natural bare hands",
+          "uc": "both eyes visible, short hair",
+          "center": {
+            "x": 0.5,
+            "y": 0.56
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl focus, adult woman walking up a railway station staircase toward the camera, high angle view looking down the stairs, quiet thoughtful expression, holding a small paper train ticket in her right hand, left hand holding the strap of her brown shoulder bag, a few distant commuters walking away across the concourse behind her\n\nWide game homepage wallpaper, a winter morning commute in a modern city station.\n\nLandscape composition, young adult woman centered between two gray metal-and-tile stairwell walls, symmetrical brass handrails receding toward the station concourse at the top of the image. Camera looks down from the upper landing. The woman faces upward toward the camera, ascending from the background toward the foreground. One loafer is planted flat on a horizontal stair tread, the other foot is raised only one normal stair above it, modest natural walking stride. Uniform realistic stair risers and deep treads, consistent single perspective. Her ticket is held by thumb and index finger at one short edge, the rest of the ticket is visible. Full figure and shoes inside the frame. Keep blurred commuters secondary, no foreground face obscuring her, no interface.\n\nPale warm winter daylight from the concourse, cool blue-gray reflected light on tiled stairwell walls, warm brass rails and beige coat, chestnut brown curls, muted blue-gray knit dress, soft rich green eye, clean silver stair-edge strips, controlled light-shadow planes, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, very long dark chestnut brown wavy curly hair, thick side swept fringe covering her eye on the viewers right, only the green eye on the viewers left visible, two slender gold hairpins on the visible-eye side, small gold earrings, muted dark green beret, calm bookish demeanor, beige knee length open winter coat over a blue gray ribbed turtleneck knit dress, opaque charcoal tights, brown leather loafers, brown leather shoulder bag, natural bare hands",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.56
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, multiple main characters, both eyes visible, parted fringe, short hair, hair over both eyes, extra legs, extra feet, giant stairs, steep ladder, floating foot, foot through stairs, broken railing, distorted ticket, text on ticket, floating books, cake, magic circle",
+          "char_captions": [
+            {
+              "char_caption": "both eyes visible, short hair",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.56
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "game/assets/reconstruction/wallpaper-baita-station-1020.webp",
+      "sha256": "a93b0c9c35b3a73536b27d106f0ef6148b6b2dcb09071f2c4d9fc925ed4d261f",
+      "role": "theme and station stair composition",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "game/assets/portraits/full/baita.webp",
+      "sha256": "8a82b130be3fa5cc953c060f7c3861144acc5844c255416a65f37e843ed85057",
+      "role": "current character identity only",
+      "uploaded_to_nai": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\baita-station-reset-1024\\nai5-draft.png",
+  "seed": 1067444622,
+  "sha256": "3769bc77e470f156b639727f2d6bc1ecbcbef0a6c81263be9e6ebc6dfc72fa6e"
+}

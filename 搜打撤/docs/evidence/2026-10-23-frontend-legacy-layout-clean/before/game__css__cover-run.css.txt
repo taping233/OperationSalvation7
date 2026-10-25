@@ -1,0 +1,297 @@
+/* 2026-10-05 · exploration paper dossiers.
+   Load after expedition-rewards/shop and winter; scoped to renderer-owned roots.
+   No card-face rules, scene-art replacement, gameplay, or battle-stage styling. */
+
+/* Scene illustrations remain full screen; choices live on a generous paper sheet. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene):has(> .node-panel) {
+  color: var(--cover-ink, #26292c);
+  background-color: #1c1e20;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene):has(> .node-panel)::before {
+  background: linear-gradient(90deg, #1d202212 20%, #1d202240 64%, #1d202266);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel {
+  --run-ink: var(--cover-ink, #26292c);
+  --run-muted: var(--cover-muted, #555b61);
+  position: absolute; top: 24px; right: 26px; bottom: 24px;
+  width: min(650px, 48%); min-height: 0;
+  display: flex; flex-direction: column; gap: 20px;
+  padding: clamp(24px, 4vh, 40px) clamp(22px, 3vw, 38px) 28px;
+  color: var(--run-ink); background: #ebecedf2;
+  border: 1px solid #a4a7a9; border-top: 3px solid var(--cover-gold, #ceb66b);
+  border-radius: 0; box-shadow: 7px 7px 0 #1b1d1f55;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene).sc-fire > .node-panel { border-top-color: #ceb66b; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene).sc-event > .node-panel,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene).sc-safe > .node-panel { border-top-color: #90969a; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene).sc-altar > .node-panel { border-top-color: #a1a5a8; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .node-kicker {
+  flex: none; color: #6e7478; font: 600 10px/1.5 var(--font-ui);
+  letter-spacing: .14em; padding-bottom: 12px; border-bottom: 1px solid #b3b5b666;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.page .node-pg:not(.event-scene) > .node-panel .pg-head {
+  flex: none; align-items: flex-start; gap: 14px; margin: 0; padding: 0 0 20px;
+  text-align: left; border: 0; border-bottom: 1px solid #b8b9ba;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.page .node-pg:not(.event-scene) > .node-panel .pg-head::before,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.page .node-pg:not(.event-scene) > .node-panel .pg-head::after { content: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.page .node-pg:not(.event-scene) > .node-panel .pg-head h2 {
+  display: block; margin: 0; color: var(--run-ink);
+  font: 700 clamp(26px, 2.2vw, 34px)/1.35 var(--font-ui);
+  letter-spacing: .06em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.page .node-pg:not(.event-scene) > .node-panel .pg-head .sub {
+  margin: 0; color: var(--run-muted); font: 400 15px/1.85 var(--font-ui);
+  letter-spacing: .02em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .node-main {
+  flex: 1; min-height: 0; overflow-y: auto; padding: 0 4px 4px 0;
+  justify-content: flex-start; scrollbar-color: #959799 #e2e2e3;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .node-summary { gap: 16px; max-width: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt {
+  position: relative; width: 100%; min-height: 82px;
+  margin: 0; padding: 18px 36px 18px 20px; gap: 8px;
+  border: 1px solid #abadaf; border-left: 3px solid #90969a;
+  border-radius: 0; background: #f3f3f3; color: var(--run-ink);
+  box-shadow: 3px 3px 0 #2d313421; text-shadow: none;
+  transition: background .16s, border-color .16s;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt b {
+  color: var(--run-ink); font: 700 17px/1.5 var(--font-ui);
+  letter-spacing: .04em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt span {
+  color: var(--run-muted); font: 400 13px/1.8 var(--font-ui); text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt::after { color: #7b8185; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt.ok { border-left-color: #c5ac58; background: #ebeae7; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt.danger { border-left-color: #a36e5f; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt.danger b { color: #8b5146; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt:hover:not(:disabled) {
+  background: #e7e8e9; border-color: #7a8186;
+  transform: none; box-shadow: 3px 3px 0 #2d313433;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt:hover:not(:disabled) b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt:disabled,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt:disabled:hover {
+  opacity: .6; color: #76797b; background: #e2e2e3;
+  border-color: #bcbdbe; transform: none; box-shadow: none; cursor: not-allowed;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .evt-opt:disabled b { color: #5c636a; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .node-foot {
+  flex: none; flex-wrap: wrap; justify-content: flex-start;
+  margin: 0; padding: 20px 0 0; gap: 14px; border-top: 1px solid #b8b9ba;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel :is(.blank-safe-gain, .event-choice-hand, .fire-restore-hand) {
+  background: #f3f3f3; border: 1px solid #b7b9bb; border-radius: 0;
+  padding: 20px 14px; gap: 18px; box-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel :is(.gain-big, .gold) { color: #8e7740; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .gain-big { font: 700 28px/1.5 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel :is(.ov-note, .ov-empty, .loot-footer-note, .ps-tip, .eps-fate) {
+  color: var(--run-muted); font-size: 14px; line-height: 1.85; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel :is(.warn, .danger) { color: #945849; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel .scene-ops { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+
+/* Shared action language, strictly limited to these exploration-owned presentations. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn, :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn {
+  min-height: 44px; padding: 10px 22px; margin: 0;
+  border: 1px solid #2a2d30; border-radius: 0; background: #2a2d30;
+  color: #f1f0ee; font: 600 14px/1.5 var(--font-ui); letter-spacing: .04em;
+  box-shadow: 3px 3px 0 #a3a5a7; text-shadow: none;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn.ok, .mini-btn.ok), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok, :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn.ok {
+  background: #ceb66b; border-color: #ceb66b; color: #26292c;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:hover:not(:disabled), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled) {
+  filter: none; transform: translateY(-1px); background: #3c4045;
+  color: #f4f2ef; border-color: #3c4045; box-shadow: 3px 3px 0 #a3a5a7;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):disabled, :where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:disabled, :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .scene-ops .ov-btn:disabled {
+  opacity: .55; filter: none; transform: none; box-shadow: none; cursor: not-allowed;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel, .card.chest:not(:has(.reward-v14)), .card.discover:has(.sac-hand)) :is(button, [tabindex]):focus-visible {
+  outline: 2px solid #848a8e; outline-offset: 3px;
+}
+
+/* Supply station: keep the room photo; paper header, stock sleeves and price slips. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) {
+  --shop-ink: #26292c; --shop-muted: #555b61; --shop-gold: #8e7740; --shop-line: #aeb0b2;
+  padding: 28px clamp(24px, 4vw, 60px) !important; gap: 22px !important;
+  min-height: 100%; justify-content: flex-start !important; color: #26292c !important;
+  border: 0 !important; box-shadow: none !important;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .pg-head {
+  flex: none; align-items: center !important; gap: 22px !important;
+  padding: 22px 26px !important; border-bottom: 3px solid #ceb66b !important;
+  background: #ebecedf5; box-shadow: 4px 4px 0 #1c1e204d;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-heading h2 {
+  color: #26292c !important; font: 700 clamp(24px, 2vw, 32px)/1.4 var(--font-ui);
+  letter-spacing: .06em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-kicker { color: #6e7478; font-size: 10px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-bag-btn,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-back {
+  min-height: 44px; padding: 10px 22px; border: 0 !important; border-radius: 0;
+  background: #2a2d30 !important; color: #f1f0ee !important;
+  box-shadow: 3px 3px 0 #a3a5a7;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-back { position: relative; bottom: auto; margin: 0; flex: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-resource {
+  min-width: 98px; padding: 12px 14px; background: #f3f3f3;
+  border: 1px solid #b0b2b4; box-shadow: 2px 2px 0 #2d31341a;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-resource b { color: #26292c; font-size: 23px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-resource.coin b { color: #8e7740; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-resource :is(small, em) { color: #555b61; font-size: 12px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-toolbar {
+  flex: none; padding: 18px 24px; gap: 22px; background: #ebecedf2;
+  border-left: 3px solid #90969a;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-toolbar b { color: #26292c; font-size: 18px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-toolbar span,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-live { color: #555b61; font-size: 13px; line-height: 1.7; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-board { padding: 0 !important; background: none; border: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-board-grid { gap: 22px !important; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-slot {
+  padding: 18px 12px 14px; background: #f3f3f3f5 !important;
+  border: 1px solid #adb0b2 !important; border-radius: 0; box-shadow: 3px 3px 0 #1b1d1f55;
+  align-items: center; gap: 12px;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-slot.buy:not([data-short]):hover { border-color: #8b9093 !important; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-price {
+  top: -10px; right: 10px; padding: 5px 11px; border-radius: 0;
+  background: #f1e3b4 !important; color: #26292c !important;
+  border: 1px solid #b9a256 !important; box-shadow: 2px 2px 0 #2d313426;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-price em { color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-price.short {
+  background: #e5e2e0 !important; color: #955446 !important; border-color: #bb8472 !important;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-empty,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-slot.sold .shop-empty { color: #555b61 !important; border-color: #a2a5a7; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-card-mystery { background: #e3e3e4; color: #51585e; border-color: #adb0b2; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-sellpost {
+  padding: 22px 16px; gap: 14px; border-radius: 0;
+  background: #2a2d30 !important; color: #f1f0ee !important;
+  box-shadow: 3px 3px 0 #1b1d1f55;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sellpost-index, .sellpost-hint) { color: #c1c3c5; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sellpost-coin { color: #e1c97c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sellpost-enter { color: #e9d79b; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sell-desk { gap: 24px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sell-ledger, .sell-catalog) {
+  padding: 22px; background: #ebecedf5; border: 1px solid #adb0b2;
+  border-radius: 0; box-shadow: 3px 3px 0 #1b1d1f55;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sell-ledger h3, .sell-catalog-head h3, .sell-ledger-total b) { color: #26292c; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sell-ledger-kicker, .sell-ledger-rule p, .sell-catalog-head span, .sell-ledger-total small) { color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-sell { gap: 20px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-sell .sell-item {
+  padding: 16px !important; background: #f3f3f3 !important; border: 1px solid #adb0b2;
+  border-radius: 0; box-shadow: 2px 2px 0 #2d313421;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sell-item-offer { color: #555b61; border-color: #b5b7b9; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sell-item-offer b { color: #8e7740; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sell-ledger dt, .sell-item-offer span) { color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) :is(.sell-ledger dd, .sell-ledger-rule b, .sell-catalog-head > b) { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sell-ledger :is(dl > div, .sell-ledger-total) { border-color: #b5b7b9; }
+
+/* Chest search/reveal and sacrifice: outer sleeves only; rarity/card faces unchanged. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)),
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) {
+  width: min(1200px, 94%); max-width: none; max-height: 94%; padding: 28px 34px;
+  background: var(--cover-paper, #ebeced) !important; color: var(--cover-ink, #26292c);
+  border: 2px solid #2d3134 !important; border-radius: 0;
+  box-shadow: 7px 7px 0 #0e0f1080 !important; overflow-y: auto;
+  backdrop-filter: none;
+  scrollbar-color: #959799 #e2e2e3;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) > h2,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) > h2 {
+  margin: 0 0 20px; padding: 0 0 18px; border-bottom: 2px solid #ceb66b;
+  color: #26292c; font: 700 25px/1.5 var(--font-ui); letter-spacing: .05em; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-manifest {
+  gap: 24px; margin: 0 0 20px; padding: 18px 20px; background: #f3f3f3;
+  border: 1px solid #b2b4b6; border-left: 3px solid #90969a;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-manifest span { color: #6e7478; font-size: 10px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-manifest > div:first-child > b { color: #26292c; font: 700 24px/1.5 var(--font-ui); letter-spacing: .04em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-capacity b { color: #8e7740; font-size: 26px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-capacity :is(small, em) { color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) :is( .loot-footer-note, .ps-tip, .ov-empty), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) :is(.ov-note, .ov-empty) {
+  color: #555b61; font-size: 14px; line-height: 1.8; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .eps-fate { color: #555b61; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-reveal { margin: 12px 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .bt-hand,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .sac-hand {
+  min-height: 0; gap: 24px !important; padding: 22px 12px !important;
+  background: #f3f3f3 !important; border: 1px solid #b7b9bb;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops,
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .scene-ops {
+  display: flex; justify-content: flex-end; flex-wrap: wrap;
+  gap: 16px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #b5b7b9;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .loot-footer-note { margin: 16px 0 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok.warn { border-color: #b29842; background: #e9d697; color: #704538; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand) .sac-card.sel { outline: 3px solid #c5ac58; outline-offset: 5px; }
+
+/* Extraction packing report: light ledgers; card sleeves preserve off/no-room states. */
+
+/* Failed run: calm report hierarchy, restrained loss color, existing banner/cards. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.doom-panel),
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-doom .card.room:has(.doom-panel) {
+  width: min(1040px, 94%); max-width: none; max-height: 94%; padding: 30px 38px;
+  height: auto; justify-content: flex-start;
+  background: #ebeced !important; color: #26292c;
+  border: 2px solid #2d3134; border-top-color: #a87563; border-radius: 0;
+  box-shadow: 7px 7px 0 #0e0f1080; overflow-y: auto;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.doom-panel) > h2,
+:where(body[data-ui-cover-context="ordinary"]) #overlay.fx-doom .card.room:has(.doom-panel) > h2 { color: #895448; font: 700 30px/1.4 var(--font-ui); text-shadow: none; border-bottom: 1px solid #c6bc99; padding-bottom: 18px; letter-spacing: .08em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel { width: 100%; padding: 0; color: #26292c; background: none; border: 0; border-radius: 0; box-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel :is(.doom-sub, .ov-note, .doom-xp-note, .doom-more) { color: #555b61; font-size: 14px; line-height: 1.8; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-stats { gap: 20px; margin: 24px 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-stat { padding: 22px 16px; background: #f3f3f3; border: 1px solid #b5b7b9; border-radius: 0; box-shadow: 3px 3px 0 #2d313421; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .ds-k { color: #555b61; font-size: 13px; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .ds-v { color: #26292c; font-size: 30px; text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .ds-v.bad { color: #965b4b; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .ds-v.good { color: #51575d; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel :is(.doom-xp, .doom-loot) { margin: 22px 0; padding: 20px 24px; background: #f3f3f3; border: 1px solid #b5b7b9; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel :is(.doom-xp-h, .doom-loot-h) { color: #26292c; font: 700 18px/1.5 var(--font-ui); text-shadow: none; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-xp-bar { height: 6px; background: #dadbdb; border: 0; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-xp-bar i { background: #90969a; border-radius: 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .gold { color: #8e7740; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .ov-note b { color: #26292c; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-cards { gap: 18px; padding: 12px 0; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .doom-panel .doom-btns { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px; margin-top: 24px; padding-top: 22px; border-top: 1px solid #b5b7b9; }
+
+/* Ordinary exploration arrivals remain cinematic. Institute pages and ending are frozen. */
+:where(body[data-ui-cover-context="ordinary"]) #overlay .flow-transition:not([data-presentation="base-arrival"]) .flow-eyebrow { color: #decc8f; letter-spacing: .2em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .flow-transition:not([data-presentation="base-arrival"]) .flow-title { color: #f1f0ee; font-family: var(--font-ui); font-weight: 700; letter-spacing: .1em; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .flow-transition:not([data-presentation="base-arrival"]) .flow-detail {
+  max-width: 80%; padding: 12px 24px; color: #f1f0ee; background: #2a2d30d9;
+  border-left: 3px solid #ceb66b; line-height: 1.8; text-shadow: none;
+}
+:where(body[data-ui-cover-context="ordinary"]) #overlay .flow-transition:not([data-presentation="base-arrival"]) .flow-line i { background: #ceb66b; }
+:where(body[data-ui-cover-context="ordinary"]) #overlay .flow-transition:not([data-presentation="base-arrival"]) .flow-hint { color: #cccccd; }
+
+/* Overflow accommodation only; no extra viewport/browser acceptance claimed. */
+@media (max-width: 900px) {
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel { width: 60%; right: 18px; top: 18px; bottom: 18px; padding: 24px; }
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .pg-head { gap: 16px !important; }
+}
+@media (max-width: 620px) {
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .node-pg:not(.event-scene) > .node-panel { left: 14px; right: 14px; width: auto; padding: 22px; }
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .card.chest:not(:has(.reward-v14)), :where(body[data-ui-cover-context="ordinary"]) #overlay .card.discover:has(.sac-hand), :where(body[data-ui-cover-context="ordinary"]) #overlay .card:has(.doom-panel) { padding: 22px; }
+  :where(body[data-ui-cover-context="ordinary"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .shop-board-grid { gap: 18px !important; }
+}

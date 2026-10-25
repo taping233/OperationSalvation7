@@ -1,0 +1,60 @@
+[
+  {
+    "file": "game/css/base-framework-v7.css",
+    "changes": [
+      {
+        "kind": "dead-rule",
+        "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .camp-navigation-indicator",
+        "line": 49
+      }
+    ]
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "changes": [
+      {
+        "kind": "dead-rule",
+        "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .pv12-agent-image-stage > img[data-portrait-fit=\"body\"]",
+        "line": 13
+      }
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "changes": [
+      {
+        "kind": "dead-rule",
+        "selector": ".sts-note",
+        "line": 183
+      }
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "changes": [
+      {
+        "kind": "dead-rule",
+        "selector": "body.scene-battle-3d #sidebar,body.scene-battle-3d #layerBanner,body.scene-battle-3d #topBtns,body.scene-battle-3d #resHud",
+        "replacement": "",
+        "line": 27
+      },
+      {
+        "kind": "dead-rule",
+        "selector": "body.scene-battle-3d #overlay,body.scene-battle-3d #overlay .card,body.scene-battle-3d #ovBody",
+        "replacement": "",
+        "line": 27
+      }
+    ]
+  },
+  {
+    "file": "game/css/map-edge-light.css",
+    "changes": [
+      {
+        "kind": "dead-branch",
+        "selector": "body:has(#overlay:not([hidden])) .map-edge-light i,\nbody:has(#title:not([hidden])) .map-edge-light i,\nbody:has(#exitScr:not([hidden])) .map-edge-light i,\nbody.lobby .map-edge-light i,\nbody.page-opaque .map-edge-light i,\nbody.scene-battle-3d .map-edge-light i",
+        "replacement": "body:has(#overlay:not([hidden])) .map-edge-light i, body:has(#title:not([hidden])) .map-edge-light i, body:has(#exitScr:not([hidden])) .map-edge-light i, body.lobby .map-edge-light i, body.page-opaque .map-edge-light i",
+        "line": 60
+      }
+    ]
+  }
+]

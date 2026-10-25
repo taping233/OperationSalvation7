@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt13-scale-armor",
+      "asset": "cards/equip-tt13-scale-armor.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e6f-fb4d-7340-ad3d-6655366550f7/exec-c759566e-6221-453b-bb00-5cb7f5a09a51.png",
+      "revision": "scale-armor-no-hand-20261025",
+      "prompt": "Precise local object removal. Edit this existing square reverse-scale armor card: REMOVE THE ENTIRE HUMAN HAND AND FOREARM entering from the upper-right, including every finger, palm and all visible skin. Fill only the vacated area by continuing the same blue-gray layered dragon scale armor underneath and the small white background region at the top edge according to the surrounding geometry. Reconstruct the red reverse scale where the hand previously overlapped it. Preserve the original close-up composition, diagonal scale layering, broad hard-edged blue-gray light and navy shadows, the single long crimson reverse scale, the thin curved red light streak, existing colors, painterly anime rendering and exact crop. No human anatomy anywhere, no replacement object, no added armor pieces or changes elsewhere. One square image, no text, frame or watermark.",
+      "references": [
+        "game/assets/cards/equip-tt13-scale-armor.webp"
+      ]
+    }
+  ]
+}

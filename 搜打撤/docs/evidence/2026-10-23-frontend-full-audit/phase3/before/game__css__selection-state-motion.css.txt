@@ -1,0 +1,39 @@
+/* Move only the selected control's paint; layout, hit targets and glass stay authored. */
+[data-selection-motion] { position: relative; isolation: isolate; }
+[data-selection-motion] > .selection-state-plate {
+  position: absolute; top: 0; left: 0; z-index: -1; pointer-events: none;
+  border-radius: 6px; opacity: 0;
+  background: linear-gradient(140deg, color-mix(in srgb, currentColor 45%, transparent), #2c616da3);
+  box-shadow: inset 0 1px 0 #d9f5ec40, inset 0 -2px #c9b477a6, 0 4px 12px #071a2526;
+}
+[data-selection-motion="zone"] > .selection-state-plate {
+  background: linear-gradient(140deg, #669aa96b, #30616ba3);
+  box-shadow: inset 2px 0 var(--bag-gold), inset 0 1px 0 #d5f5ef38, 0 4px 12px #061b2533;
+}
+[data-selection-motion="settings"] > .selection-state-plate {
+  border-radius: 2px;
+  background: linear-gradient(100deg, color-mix(in srgb, currentColor 23%, transparent), color-mix(in srgb, currentColor 6%, transparent));
+  box-shadow: inset 3px 0 currentColor, inset 0 1px 0 #e8f3ff21, inset 0 -1px 0 #03080e33, 0 8px 22px #0205094d;
+}
+body #overlay [data-selection-motion] > :is(.bag-rz.on,.bag-pill.on,.settings-tab[aria-selected="true"]) {
+  background: transparent !important; box-shadow: none !important;
+}
+body #overlay [data-selection-motion="settings"]::before { display: none; }
+body #overlay [data-selection-motion="settings"] > .settings-tab small {
+  color: rgba(var(--settings-category-tint,var(--settings-tint)),.68);
+}
+body #overlay [data-selection-motion="settings"] > .settings-tab[aria-selected="true"] small {
+  color: rgb(var(--settings-category-tint,var(--settings-tint)));
+}
+body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
+body #overlay [data-selection-motion] > .settings-tab small {
+  transition-property: color, border-color;
+  transition-duration: var(--motion-change,160ms);
+  transition-timing-function: var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
+}
+body.reduce-motion #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
+body.reduce-motion #overlay [data-selection-motion] > .settings-tab small { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),
+  body #overlay [data-selection-motion] > .settings-tab small { transition: none; }
+}

@@ -1,0 +1,67 @@
+{
+  "status": "complete-source-frozen",
+  "sourceManifest": "measurement.json",
+  "sourceBefore": "node_modules/.cache/project-lean10-round2-before",
+  "runtimeSource": {
+    "files": 6,
+    "beforeBytes": 17973,
+    "afterBytes": 11114,
+    "savedBytes": 6859,
+    "savedNormalizedBytes": 6736,
+    "savedNonCommentTokens": 1032,
+    "includedHelperAddedBytes": 605
+  },
+  "testSource": {
+    "countedInRuntimeReduction": false,
+    "existingGuardBeforeBytes": 6105,
+    "existingGuardAfterBytes": 6919,
+    "newCompatibilityTestBytes": 6394,
+    "addedBytes": 7208,
+    "guardSha256": "881a55a79a2aaa1e395531ff87881f722087fd75846cc0469b4d50dc3578bfc1",
+    "compatibilityTestSha256": "1915c6f36d8f3f6f9951e14106e7ad6b761c312e401e87c8303bf04ca01ebbf7",
+    "newCompatibilityTestReadsCacheOrEvidence": false,
+    "originalWhitelistAndExemptionsUnchanged": true,
+    "originalGuardAssertionsUnchanged": true
+  },
+  "tests": {
+    "files": 10,
+    "passed": 86,
+    "failed": 0,
+    "skipped": 0,
+    "paths": [
+      "tests/battle-runtime-compatibility.test.js",
+      "tests/battle-runtime-state-guard.test.js",
+      "tests/battle-bindings-equivalence.test.js",
+      "tests/framework-runtime-instances.test.js",
+      "tests/framework-independent-battles.test.js",
+      "tests/battle-engine-facade.test.js",
+      "tests/framework-core-ports-types.test.js",
+      "tests/battle-modules.test.js",
+      "tests/battle-architecture.test.js",
+      "tests/architecture-boundaries.test.js"
+    ]
+  },
+  "typechecks": [
+    { "config": "jsconfig.runtime.json", "exitCode": 0 },
+    { "config": "jsconfig.framework-ports.json", "exitCode": 0 },
+    { "config": "jsconfig.framework-boundaries.json", "exitCode": 0 }
+  ],
+  "eslintExitCode": 0,
+  "diffCheckExitCode": 0,
+  "oldNewSourceOracle": {
+    "summary": "differential-summary.json",
+    "exitCode": 0,
+    "fields": 91,
+    "fieldPublications": 182,
+    "exports": 188,
+    "strictMethodAliases": 97,
+    "compatibilitySubscribers": 5,
+    "interleavedExternalSubscribers": 5,
+    "unknownKeysWithoutStateRead": 7,
+    "sameInitialReadOrder": true,
+    "sameReentrantTrace": true
+  },
+  "buildRun": false,
+  "filesDeleted": false,
+  "sharedRegistryEdited": false
+}

@@ -1,0 +1,20 @@
+{
+  "cache": "node_modules/.cache/project-lean10-1024/ui-chain-before",
+  "manifests": [
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "keys": 966,
+      "sha256": "916fcfdcbc876cf81bb72d267c155a97b92bf7e5c07f7e7cd4ea6aaef8b71c25"
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "keys": 329,
+      "sha256": "d48887229d8cd3356b6f5b3dd3a78fc0d722cb89fd5ed5d0057531896cb3d565"
+    }
+  ],
+  "cues": {
+    "count": 106,
+    "profiles": 49,
+    "sha256": "f22c67a149affd7f8d637380101ef06f2bab727f3a044ea27df71179f813bbf5"
+  }
+}

@@ -1,0 +1,145 @@
+/* 基地房间：墨绿空间退后，暖纸承托说明与结算，黄铜只定位当前选择。
+   原画与卡牌工艺保持原色；主页场景、庭院、照相馆及特写操作由各自模块维护。 */
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) {
+  --camp-bg:#1c2821; --camp-paper:#1c2821; --camp-sheet:#e7dfce;
+  --camp-ink:#e8e0d0; --camp-muted:#b2b7aa; --camp-sub:#b2b7aa;
+  --camp-line:#d9d0b52b; --camp-accent:#b49a6a; --camp-brass:#b49a6a;
+  --camp-dark:#25382d; --camp-blue:#b49a6a; --camp-action:#96573d;
+  --camp-action-hover:#a05d40; --camp-room-hover:#e5dbbd0c; --camp-room-selected:#c8b08014;
+  --camp-title-size:38px; --camp-object-size:28px; --archive-back-color:#e8e0d0;
+  color:var(--camp-ink); background:var(--camp-bg);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .hub-head {
+  background:#16221c; border-bottom:1px solid var(--camp-line);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .hub-slot-label { color:#a4ae9f; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .hub-page {
+  background:radial-gradient(ellipse at 12% 0%,#c4c7a00a,transparent 58%),var(--camp-bg);
+  scrollbar-color:#9c9b785c transparent;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.camp-section-head,.av3-header) {
+  border-bottom:1px solid var(--camp-line);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.camp-section-head,.av3-header) h2 {
+  font-size:var(--camp-title-size); font-weight:500; border-left-width:2px; letter-spacing:.06em;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button,.av3-utilities button) {
+  color:var(--camp-muted);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.base-link,.person-utilities button,.av3-utilities button):hover:not(:disabled) {
+  color:var(--camp-ink);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.warehouse-toolbar,.pool-toolbar-controls,.collection-browse-tools) :is(input,select) {
+  color:var(--camp-ink); border-color:var(--camp-line); background:#101a151c;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) input::placeholder { color:var(--camp-muted); opacity:.7; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) select option { background:var(--camp-bg); color:var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters summary { background:transparent; color:var(--camp-muted); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters[open] summary { color:var(--camp-ink); border-color:var(--camp-accent); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.skills-person,.facility-tile) {
+  background:transparent; color:var(--camp-ink); box-shadow:none;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.skills-person,.facility-tile):hover:not(:disabled):not(.selected):not(.on) {
+  background:var(--camp-room-hover); transform:none;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell.selected,.person-pool-card.on,.av3-back.on,.skills-person.on,.facility-tile.on) {
+  background:var(--camp-room-selected); border-color:var(--camp-accent);
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-face { background:#e5dbbd08; box-shadow:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-face:not(.on):hover:not(:disabled) { background:var(--camp-room-hover); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-face.on { background:#364534; color:#f0e7d5; box-shadow:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.warehouse-card-art,.pool-card-art,.collection-card-art) { filter:drop-shadow(0 3px 3px #080e0b40); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .stack-count { background:#2c3b30; color:#f0e7d5; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.person-hero,.partner-display,.companion-hatch-art) {
+  background:#303b31; border:1px solid var(--camp-line); box-shadow:none;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-hero figcaption {
+  background:#243329; color:#f0e7d5; border-left-width:2px;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-skin { background:transparent; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .person-skin.on { background:var(--camp-room-selected); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .facility-art { color:#c9cfbb; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.person-details,.facility-details,.av3-medal-detail,.av3-back-detail,.companion-hatch,.story-reader,.warehouse-more-filters > div,.trade-v5-desk) {
+  --camp-bg:#e7dfce; --camp-paper:#e7dfce; --camp-sheet:#e7dfce;
+  --camp-ink:#30382e; --camp-muted:#5d6154; --camp-sub:#5d6154;
+  --camp-line:#7b7c673d; --camp-accent:#856a3d; --camp-dark:#25382d;
+  --av3-ink:#30382e; --av3-muted:#5d6154; --av3-line:#7b7c673d; --av3-accent:#856a3d;
+  color:var(--camp-ink); background:linear-gradient(120deg,#ece5d7,#e3dbc9);
+  border:1px solid #8f8d7270; border-top:2px solid #b49a6a;
+  box-shadow:0 2px 0 #857c61,0 8px 16px #0b140d24; border-radius:0;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.person-details,.facility-details,.av3-medal-detail,.av3-back-detail,.companion-hatch,.story-reader,.trade-v5-desk) :is(h3,h4) {
+  color:var(--camp-ink); font-weight:500;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.person-perk-value,.camp-costs .missing) { color:#865736; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-purpose { background:var(--camp-room-hover); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.av3-medal.selected,.story-entry.on) { background:var(--camp-room-selected); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .av3-inbox-reward { background:#2a392e; border-color:var(--camp-line); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .card-browser-footer .card-browser-page { background:transparent; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .mini-btn { background:transparent; color:var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .mini-btn:not(.base-command):not(.ok):hover:not(:disabled) { background:var(--camp-room-hover); color:var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .pool-type-tabs .mini-btn.ok { background:var(--camp-room-selected); color:var(--camp-ink); box-shadow:inset 0 -2px 0 var(--camp-accent); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act] {
+  border-color:var(--camp-line); background:transparent; color:var(--camp-ink);
+  box-shadow:none; clip-path:none; transform:none; transition:background 180ms ease,border-color 180ms ease,color 180ms ease;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]::after { content:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act].base-command-primary {
+  background:var(--camp-action); border-color:transparent; color:#fff0de;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]:hover:not(:disabled) { background:var(--camp-room-hover); border-color:var(--camp-accent); box-shadow:none; transform:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act].base-command-primary:hover:not(:disabled) { background:var(--camp-action-hover); border-color:transparent; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]:active:not(:disabled) { background:#8d543b; color:#fff0de; transform:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]:disabled {
+  background:#7e857619; color:var(--camp-muted); border-color:var(--camp-line); box-shadow:none; opacity:.55;
+}
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]:focus-visible { outline:2px solid var(--camp-accent); outline-offset:3px; box-shadow:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act].base-command-primary:focus-visible { outline-color:#b49a6a; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .camp-notice { background:#16231c; color:#ece3d0; border-left-color:#b49a6a; box-shadow:0 4px 12px #06100840; }
+
+/* 交易：目录、原画与结算保持同一对象；购入/出售只换任务语义。 */
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5 { width:100%; max-width:1500px; margin:0 auto; min-width:0; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:28px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-heading h2 { margin:0; font:500 var(--camp-title-size)/1.25 var(--font-ui); letter-spacing:.06em; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-wallet { display:flex; align-items:baseline; gap:18px; color:var(--camp-muted); font:18px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-wallet b { color:var(--camp-ink); font:500 30px/1.25 var(--font-num); white-space:nowrap; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-modes { display:flex; align-items:center; gap:36px; margin-bottom:28px; border-bottom:1px solid var(--camp-line); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-modes .base-link { padding:10px 2px 14px; min-width:64px; font-size:23px; border-bottom:2px solid transparent; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-modes .base-link.is-selected { color:var(--camp-ink); border-bottom-color:var(--camp-accent); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-workspace { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,430px); gap:48px; align-items:start; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-rail { min-width:0; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:24px 20px; align-content:start; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:210px auto auto; gap:10px 8px; min-width:0; padding:12px 12px 16px; text-align:left; background:transparent; border:1px solid transparent; border-bottom-color:var(--camp-line); border-radius:0; color:var(--camp-ink); cursor:pointer; transition:background 180ms ease,border-color 180ms ease; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-thumb { display:block; grid-column:1/-1; width:100%; height:100%; min-height:0; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item-label { display:flex; flex-direction:column; gap:6px; grid-column:1/-1; min-width:0; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item-label b { font:500 21px/1.35 var(--font-ui); overflow-wrap:anywhere; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item-label > span { color:var(--camp-muted); font:17px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item-price { grid-column:1/-1; color:#d6bf89; font:500 22px/1.35 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item-price .ic { width:20px; height:20px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item:hover { background:var(--camp-room-hover); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item.is-selected { background:var(--camp-room-selected); border-color:var(--camp-accent); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item.is-selected:hover { background:#c8b0801f; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item.is-protected .trade-v5-item-label > span { color:#d6bf89; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-item:focus-visible { outline:2px solid var(--camp-accent); outline-offset:3px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-desk { position:sticky; top:0; min-width:0; padding:28px 30px 30px; box-sizing:border-box; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-desk-heading { margin-bottom:20px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-desk-heading > span { color:var(--camp-muted); font:17px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-desk-heading h3 { margin:8px 0 0; font:500 30px/1.35 var(--font-ui); overflow-wrap:anywhere; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-art { position:relative; display:block; width:100%; height:270px; margin:0 0 20px; padding:0 0 14px; border:0; border-bottom:1px solid var(--camp-line); background:transparent; color:var(--camp-ink); cursor:zoom-in; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-desk--material .trade-v5-art { width:min(100%,270px); height:auto; aspect-ratio:1; margin-inline:auto; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-enlarge { position:absolute; right:0; bottom:15px; color:var(--camp-accent); font:22px/1 var(--font-ui); pointer-events:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-art:hover .trade-v5-enlarge { color:var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-art:focus-visible { outline:2px solid var(--camp-accent); outline-offset:4px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-description { margin:0 0 20px; font:20px/1.65 var(--font-ui); color:var(--camp-ink); overflow-wrap:anywhere; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-description:empty { display:none; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-balance { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; padding:16px 0; margin-bottom:16px; border-block:1px solid var(--camp-line); color:var(--camp-muted); font:18px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-balance b { color:var(--camp-ink); font:500 28px/1.3 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage :is(.trade-v5-shortfall,.trade-v5-protection) { margin:0 0 18px; padding-left:12px; border-left:2px solid #a66143; color:#805839; font:18px/1.5 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-checkout { display:flex; flex-direction:column; gap:12px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-checkout .base-command { width:100%; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-checkout .base-command.is-confirming { background:#864b32; border-color:#864b32; color:#fff0de; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-checkout button.base-command[data-act].is-confirming:hover:not(:disabled) { background:#864b32; border-color:#864b32; color:#fff0de; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-capacity { display:flex; flex-wrap:wrap; gap:24px; margin-top:20px; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-empty { position:static; display:flex; min-height:350px; flex-direction:column; align-items:center; justify-content:center; gap:22px; text-align:center; }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-empty h3 { margin:0; font:500 26px/1.45 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-no-art { display:grid; place-items:center; height:100%; color:var(--camp-muted); font:18px/1.4 var(--font-ui); }

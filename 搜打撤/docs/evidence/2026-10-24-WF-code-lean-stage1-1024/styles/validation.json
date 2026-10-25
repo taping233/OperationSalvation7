@@ -1,0 +1,330 @@
+{
+  "time": "2026-10-24T08:15:02.475Z",
+  "status": "pass for static and targeted checks; browser pending parent",
+  "syntax": {
+    "status": "pass",
+    "files": 169,
+    "parser": "postcss"
+  },
+  "proof": {
+    "status": "pass",
+    "files": [
+      {
+        "file": "game/css/ak-skin.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "d5c8cfcf8687452b493df0a86b372307d52bded65158a220a87b1bfaacedaa4e",
+        "afterDigest": "d5c8cfcf8687452b493df0a86b372307d52bded65158a220a87b1bfaacedaa4e",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/base-camp-rework.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "f67c563c64629841b7c3437518185b74281dcbffea5c23b7da6004f67d000f0c",
+        "afterDigest": "f67c563c64629841b7c3437518185b74281dcbffea5c23b7da6004f67d000f0c",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/base-camp.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "02f217d517558b0eac273ce13eae62d22971af2b35cdb5545cc140f7a223f5ad",
+        "afterDigest": "02f217d517558b0eac273ce13eae62d22971af2b35cdb5545cc140f7a223f5ad",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/base.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "faa0dfff2e52063809cf739fec865e408a2b9d9c8c0bcf0520ad02e89ff9977d",
+        "afterDigest": "faa0dfff2e52063809cf739fec865e408a2b9d9c8c0bcf0520ad02e89ff9977d",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/camp-entry.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "5f8818fc91a527c0c7a7aa3d3c32bd4ef4e57c185f80f0575b9bcbf2a3281bdc",
+        "afterDigest": "5f8818fc91a527c0c7a7aa3d3c32bd4ef4e57c185f80f0575b9bcbf2a3281bdc",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/character-view-motion.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "72020a191b65dfc6d5d0f5f6ae6a62be17d3ff175a1b8fbe377d813e90816edd",
+        "afterDigest": "72020a191b65dfc6d5d0f5f6ae6a62be17d3ff175a1b8fbe377d813e90816edd",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/chest-reward-overview.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "103647fbd8795c8089498c047e00b6759f6d1a79a0bb271235fbdb6a8307d0b5",
+        "afterDigest": "103647fbd8795c8089498c047e00b6759f6d1a79a0bb271235fbdb6a8307d0b5",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/expedition-map.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "c31b72e77ba022c7375e53015d1610e04c59234c22ea4b4c918b8126005287d4",
+        "afterDigest": "c31b72e77ba022c7375e53015d1610e04c59234c22ea4b4c918b8126005287d4",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/expedition-roster.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "4cf2f99ec49c48a967bd77385eb08efdc5b1959e3caba630e4f61fc99983a684",
+        "afterDigest": "4cf2f99ec49c48a967bd77385eb08efdc5b1959e3caba630e4f61fc99983a684",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/expedition.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "41d7f029f1dc8091bad6a4e20d32c8baa1e8fc591f13c732c6cba80c0a4daa78",
+        "afterDigest": "41d7f029f1dc8091bad6a4e20d32c8baa1e8fc591f13c732c6cba80c0a4daa78",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/home-linked-interactions.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "204a811bd225b8ce9c47f4b8bffaaefb723ceb4eafb0d64c5e40b92f9002e9e1",
+        "afterDigest": "204a811bd225b8ce9c47f4b8bffaaefb723ceb4eafb0d64c5e40b92f9002e9e1",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/home-polish.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "01a15fb2ea534333c86d052bc4750eae3b9fadd893e467436a47600c80e328ed",
+        "afterDigest": "01a15fb2ea534333c86d052bc4750eae3b9fadd893e467436a47600c80e328ed",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/hub-cover-collections.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "51dfe1cd707ab8b4d2d53ae5ae91121c46cb320ba6ed5bf68cfadd355dec52f6",
+        "afterDigest": "51dfe1cd707ab8b4d2d53ae5ae91121c46cb320ba6ed5bf68cfadd355dec52f6",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/page-rewards-bag-help.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "8df143f50d2c6edf4ea21cd2d5257e7a109289b3d1f6d943ce2e1e76e11fb98a",
+        "afterDigest": "8df143f50d2c6edf4ea21cd2d5257e7a109289b3d1f6d943ce2e1e76e11fb98a",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/page-settings.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "4ce42013a9a13800c7d799beb3b7a0f1574aeb893bf57e6599e2f90e8a3956ff",
+        "afterDigest": "4ce42013a9a13800c7d799beb3b7a0f1574aeb893bf57e6599e2f90e8a3956ff",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/page-slot-select.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "c80ed7f4a35d9a0aea06ad6421e4c13f8b3d87d79e52b767cd64912f5612feb2",
+        "afterDigest": "c80ed7f4a35d9a0aea06ad6421e4c13f8b3d87d79e52b767cd64912f5612feb2",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/page-visual-ready.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "c1fb13938573ef38c69faa4309ab485036818819877f544d79d61e5aed90f565",
+        "afterDigest": "c1fb13938573ef38c69faa4309ab485036818819877f544d79d61e5aed90f565",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/performance-settings.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "096f8148572537a23f8264984124affe563b66ded18f4c3ad8371a884f51ab14",
+        "afterDigest": "096f8148572537a23f8264984124affe563b66ded18f4c3ad8371a884f51ab14",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/rarity-design-lab.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "474690e871c975b66f7f42643fc3057e77e9673cf709e6b9c9acd50e5eac4c0d",
+        "afterDigest": "474690e871c975b66f7f42643fc3057e77e9673cf709e6b9c9acd50e5eac4c0d",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/scenes.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "8ba378d9b100b8a2cd9194b7c8d1bf32a29dbd7b9463d9dd4a82dde5512a2723",
+        "afterDigest": "8ba378d9b100b8a2cd9194b7c8d1bf32a29dbd7b9463d9dd4a82dde5512a2723",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/settings-navigation.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "614c5b622d4d44c180eb23f7134f4cdeef9bf06d2078c3be3399e8002b09c674",
+        "afterDigest": "614c5b622d4d44c180eb23f7134f4cdeef9bf06d2078c3be3399e8002b09c674",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/title-p0.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "90ba142e432eeb58e6004e399059f4f3055be9463d485122aa7f9eb6b5020a99",
+        "afterDigest": "90ba142e432eeb58e6004e399059f4f3055be9463d485122aa7f9eb6b5020a99",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/transition-handoff.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "f7e1a51a060b4065e9cd0797495e2e7720e9669677ce617b2d3c19055fa4e53d",
+        "afterDigest": "f7e1a51a060b4065e9cd0797495e2e7720e9669677ce617b2d3c19055fa4e53d",
+        "factoringCommutation": "pass"
+      },
+      {
+        "file": "game/css/winter.css",
+        "syntax": "pass",
+        "expandedPropertyOrder": "identical",
+        "beforeDigest": "71cfff9baf9c2a7f582d2a6902a94783a4a86806f964bd7908847000f6bc688b",
+        "afterDigest": "71cfff9baf9c2a7f582d2a6902a94783a4a86806f964bd7908847000f6bc688b",
+        "factoringCommutation": "pass"
+      }
+    ],
+    "method": "Property order within unchanged at-rule boundaries; comment equality; selector support equality; explicit independent longhand proofs for the two factoring sites"
+  },
+  "reduction": {
+    "bytes": 1647,
+    "normalizedBytes": 1643,
+    "lines": 3,
+    "rules": 36,
+    "declarations": 56
+  },
+  "tests": {
+    "command": "node node_modules/vitest/vitest.mjs run <16 listed files> --maxWorkers=1 --minWorkers=1 --reporter=json",
+    "initial": {
+      "fileCount": 16,
+      "tests": 139,
+      "passed": 138,
+      "failed": 1,
+      "cache": "node_modules/.cache/lean-stage1-1024/css-tests.json"
+    },
+    "correction": "Restored only own settings-audio.css grouping to frozen input; existing independent-rule regex contract retained.",
+    "recheck": {
+      "file": "tests/settings-audio.test.js",
+      "passed": 6,
+      "failed": 0,
+      "exitCode": 0,
+      "cache": "node_modules/.cache/lean-stage1-1024/css-tests-audio-recheck.json"
+    },
+    "currentCoveredTests": 139,
+    "files": [
+      {
+        "file": "tests/camp-entry-readiness.test.js",
+        "tests": 14,
+        "status": "passed"
+      },
+      {
+        "file": "tests/canvas-resource-review.test.js",
+        "tests": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/character-view-motion.test.js",
+        "tests": 3,
+        "status": "passed"
+      },
+      {
+        "file": "tests/compact-reward-layout.test.js",
+        "tests": 3,
+        "status": "passed"
+      },
+      {
+        "file": "tests/css-asset-minification.test.js",
+        "tests": 7,
+        "status": "passed"
+      },
+      {
+        "file": "tests/css-dead-dom-budget.test.js",
+        "tests": 30,
+        "status": "passed"
+      },
+      {
+        "file": "tests/css-redundancy-audit.test.js",
+        "tests": 3,
+        "status": "passed"
+      },
+      {
+        "file": "tests/home-menu-motion.test.js",
+        "tests": 3,
+        "status": "passed"
+      },
+      {
+        "file": "tests/home-slot-lifecycle-review.test.js",
+        "tests": 6,
+        "status": "passed"
+      },
+      {
+        "file": "tests/page-visual-readiness-sharing.test.js",
+        "tests": 19,
+        "status": "passed"
+      },
+      {
+        "file": "tests/reward-frame-review.test.js",
+        "tests": 13,
+        "status": "passed"
+      },
+      {
+        "file": "tests/secondary-glass-style.test.js",
+        "tests": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/settings-audio.test.js",
+        "tests": 6,
+        "status": "pass after restoring frozen CSS and recheck"
+      },
+      {
+        "file": "tests/settings-page.test.js",
+        "tests": 9,
+        "status": "passed"
+      },
+      {
+        "file": "tests/title-resource-review.test.js",
+        "tests": 5,
+        "status": "passed"
+      },
+      {
+        "file": "tests/ui-motion-cascade.test.js",
+        "tests": 7,
+        "status": "passed"
+      }
+    ]
+  },
+  "browser": {
+    "status": "pending parent",
+    "scope": "current-window in-app browser A/B; no subagent service/browser operations"
+  },
+  "notRun": [
+    "build",
+    "full test suite",
+    "external browser"
+  ],
+  "scope": {
+    "runtimeAddedBytes": 0,
+    "testAddedBytes": 0,
+    "changedCSSFiles": 24,
+    "fullFileDeletions": 0
+  }
+}

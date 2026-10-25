@@ -1,0 +1,123 @@
+{
+  "schemaDifferential": {
+    "status": "passed",
+    "cases": 2664,
+    "comparison": "Entire validateCardRules output, including errors and pending order",
+    "oracle": "Frozen original module evaluated with unchanged imported dependencies",
+    "values": "undefined/null/NaN/Infinity/-Infinity/negative/zero/fraction/positive/safeInteger/booleans/strings/arrays/objects/unknown keys",
+    "scopes": [
+      "cost modifier kind/amount/type matrix",
+      "damage cond/onKill/hits/bonus",
+      "acquire filter",
+      "execute cap",
+      "draw filter",
+      "optional nonnegative fields",
+      "equip/passive/aura/cond"
+    ]
+  },
+  "migrationDefinitionDifferential": {
+    "status": "passed",
+    "capturedBatches": 73,
+    "sourceModes": [
+      "full",
+      "missing",
+      "duplicate",
+      "undefined",
+      "empty"
+    ],
+    "comparison": "Deep strict comparison of before/after specifications passed to the unchanged backfill function; actual persistence separately covered by existing regressions",
+    "m7": {
+      "definitions": 15,
+      "canonicalMappings": 15,
+      "comparison": "Deep strict specification equality; Map insertion order differs but backfiller uses canonicalTableById.get(id) only"
+    }
+  },
+  "syntax": {
+    "status": "passed",
+    "files": [
+      "game/src/cards/card-rules.schema.js",
+      "game/src/cards/cards.sync.rule-backfill.js",
+      "game/src/cards/cards.sync.m7.js"
+    ]
+  },
+  "eslint": {
+    "status": "passed",
+    "files": [
+      "game/src/cards/card-rules.schema.js",
+      "game/src/cards/cards.sync.rule-backfill.js",
+      "game/src/cards/cards.sync.m7.js",
+      "tests/code-lean-stage1-cards-schema.test.js",
+      "tests/code-lean-stage1-cards-m7.test.js"
+    ]
+  },
+  "testRuns": [
+    {
+      "status": "passed",
+      "files": [
+        "code-lean-stage1-cards-schema",
+        "card-rules-schema",
+        "card-rules-bag-boundary",
+        "card-rules-per-foe-boundary",
+        "e6-card-rules-types",
+        "e6-card-rules-execution"
+      ],
+      "passed": 52,
+      "failed": 0
+    },
+    {
+      "status": "failed-existing-baseline",
+      "files": [
+        "card-sync-slices",
+        "cards-migration-commit-guard",
+        "card-migrations-boundary",
+        "tt12-structured-preplay",
+        "tt12-hitechrd-structured",
+        "tt7-sneak-structured",
+        "a3-battle-rules",
+        "bag-structured-rule-migration",
+        "m7-data"
+      ],
+      "passed": 99,
+      "failed": 2,
+      "failedAssertions": [
+        "card-sync-slices: reads replacement libraries lazily and leaves unrelated custom fields intact",
+        "card-sync-slices: backfills rules without replacing explicit zero amounts and retries rejected persistence"
+      ],
+      "baselineReproduction": {
+        "status": "same-two-failures",
+        "passed": 4,
+        "failed": 2,
+        "method": "Isolated Vite pre-load plugin reads original frozen bytes for all three changed runtime modules, without replacing workspace source",
+        "config": "node_modules/.cache/lean-stage1-1024/cards-baseline.vitest.config.mjs"
+      }
+    },
+    {
+      "status": "passed",
+      "files": [
+        "code-lean-stage1-cards-m7",
+        "m7-data",
+        "m7-battle"
+      ],
+      "passed": 21,
+      "failed": 0
+    }
+  ],
+  "initialNewTestFailure": {
+    "status": "corrected-fixture",
+    "reason": "Draw-only test card incorrectly declared dmg:2 and omitted self target; frozen original returned same three errors. Fixture now declares only draw and explicit self target; retains full empty-errors assertion."
+  },
+  "unverified": [
+    "No game browser run by child; parent owns current-window smoke test",
+    "Global type gate and sentinels delegated to parent",
+    "Remote CI does not cover uncommitted changes"
+  ],
+  "m7PrototypeRegression": {
+    "status": "passed",
+    "fix": "Only M7 passes an exceptions object with __proto__: null; shared canonicalTables and other callers unchanged",
+    "test": "tests/code-lean-stage1-cards-m7.test.js",
+    "method": "Mocks the real createRuleBackfiller import and inspects the actual M7 module specification under an Object.prototype card-id getter; verifies all four overrides, default mapping and zero inherited reads; finally restores the original descriptor and module mock",
+    "files": 3,
+    "passed": 21,
+    "failed": 0
+  }
+}

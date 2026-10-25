@@ -1,0 +1,139 @@
+{
+  "status": "Authorized six-file replacement matches current source bytes",
+  "currentMatchesDraft": true,
+  "generatedAt": "2026-10-24T12:03:07.773Z",
+  "rows": [
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "sha256": "07c125a0f8e6003e89a9a890c4cdeef351bf9fe9c9c881e8f0144d745d45b3d5",
+      "mutableFields": 18,
+      "methodAliases": 24,
+      "afterSha256": "cf925408175f1dffa1f1b1439378b1985788abc1f8085f2494d857a2acee7c5e",
+      "before": {
+        "bytes": 3391,
+        "normalizedBytes": 3324,
+        "tokens": 563
+      },
+      "draft": {
+        "bytes": 1794,
+        "normalizedBytes": 1755,
+        "tokens": 318
+      }
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "sha256": "d48fa40d03f12496150551ca7a9aa6a7f7c36ff35994936644ceb0120852d0f3",
+      "mutableFields": 14,
+      "methodAliases": 15,
+      "afterSha256": "b106eae62f194d890c0ca3f9d0b26d9fae429c5d58fb8425d40f1adc6fdb8ef6",
+      "before": {
+        "bytes": 2437,
+        "normalizedBytes": 2387,
+        "tokens": 415
+      },
+      "draft": {
+        "bytes": 1380,
+        "normalizedBytes": 1348,
+        "tokens": 248
+      }
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "sha256": "2dcbfb41f750fde156881ab7c47147fb1ae584a5104f9e8a27bd3303fdb25dff",
+      "mutableFields": 16,
+      "methodAliases": 19,
+      "afterSha256": "d5958d23f3174920ebf87a102f36f319a3a019fede343527905d8e96170572a0",
+      "before": {
+        "bytes": 2992,
+        "normalizedBytes": 2934,
+        "tokens": 485
+      },
+      "draft": {
+        "bytes": 1641,
+        "normalizedBytes": 1606,
+        "tokens": 282
+      }
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "sha256": "e55724ef8f60a214e0a553f83b6925b33cefb37ae8bb24d35a52f8b85a200289",
+      "mutableFields": 36,
+      "methodAliases": 30,
+      "afterSha256": "4e3d4a4b3f503cb7be216da7032b90e4c00496d0b50c3462c3987bac829ff5e3",
+      "before": {
+        "bytes": 6189,
+        "normalizedBytes": 6080,
+        "tokens": 953
+      },
+      "draft": {
+        "bytes": 3317,
+        "normalizedBytes": 3254,
+        "tokens": 564
+      }
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "sha256": "d2ff7a283d056d2bf2989b94c860854ef0759c7fa0198e69851ee47926f8fbf8",
+      "mutableFields": 7,
+      "methodAliases": 9,
+      "afterSha256": "fb6780dbfe26e5c202a6f7543db2c0f9b456d5b6ac95103a05156972bd8d26d8",
+      "before": {
+        "bytes": 1540,
+        "normalizedBytes": 1510,
+        "tokens": 234
+      },
+      "draft": {
+        "bytes": 953,
+        "normalizedBytes": 931,
+        "tokens": 145
+      }
+    },
+    {
+      "file": "game/src/core/live-bindings.js",
+      "sha256": "b47305dd7459e461cd45965833f68840c4d462afd32ee9f84ea6a5099fd9f219",
+      "before": {
+        "bytes": 1424,
+        "normalizedBytes": 1424,
+        "tokens": 164
+      },
+      "afterSha256": "4b3aeaf0ea96ae783bbaea6b4d897252a1147fc5b0e12a83180802beccdcba22",
+      "draft": {
+        "bytes": 2029,
+        "normalizedBytes": 2029,
+        "tokens": 225
+      }
+    }
+  ],
+  "totals": {
+    "before": {
+      "bytes": 17973,
+      "normalizedBytes": 17659,
+      "tokens": 2814
+    },
+    "draft": {
+      "bytes": 11114,
+      "normalizedBytes": 10923,
+      "tokens": 1782
+    }
+  },
+  "saved": {
+    "bytes": 6859,
+    "normalizedBytes": 6736,
+    "tokens": 1032
+  },
+  "observedUpperBounds": {
+    "remainingPureRestForwarderBodiesAcrossGame": {
+      "functions": 140,
+      "bytes": 7799
+    },
+    "enginePureRestForwarderBodies": {
+      "functions": 60,
+      "bytes": 2254
+    },
+    "fourPureRuntimeProjectionBodies": {
+      "functions": 4,
+      "bytes": 1851
+    },
+    "warning": "Upper bounds overlap the candidate chain and exclude helper costs; never add these as proven savings."
+  }
+}

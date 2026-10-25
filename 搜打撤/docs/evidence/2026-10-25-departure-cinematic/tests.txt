@@ -1,0 +1,52 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+xxx·····························································································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选
+TypeError: Cannot read properties of null (reading 'disabled')
+ ❯ tests/departure-stack-lifecycle-review.test.js:43:68
+     41|   it('真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选', async () => {
+     42|     base.data.stash = [defense, attack, third].map(card => ({ card, co…
+     43|     expect(document.querySelector('[data-act="depRecommendApply"]').di…
+       |                                                                    ^
+     44|     expect(document.querySelector('[data-act="depRecommendUndo"]').dis…
+     45|     expect(document.querySelector('[data-act="depRecommendPreview"]').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 机器人额外初始牌也计占格，预留三格且禁带职业卡
+TypeError: Cannot read properties of null (reading 'click')
+ ❯ preview tests/departure-stack-lifecycle-review.test.js:40:91
+     38|   const attack = { id: 'attack', name: '试探', type: '武术', rarity: '古朴',…
+     39|   const third = { id: 'third', name: '援手', type: '生物', rarity: '古朴', c…
+     40|   const preview = async () => { document.querySelector('[data-act="dep…
+       |                                                                                           ^
+     41|   it('真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选', async () => {
+     42|     base.data.stash = [defense, attack, third].map(card => ({ card, co…
+ ❯ tests/departure-stack-lifecycle-review.test.js:64:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/departure-stack-lifecycle-review.test.js > 新手可调整推荐装配 > 预览后库存变化必须重新预览，继续手调后撤销不覆盖手选
+TypeError: Cannot read properties of null (reading 'click')
+ ❯ preview tests/departure-stack-lifecycle-review.test.js:40:91
+     38|   const attack = { id: 'attack', name: '试探', type: '武术', rarity: '古朴',…
+     39|   const third = { id: 'third', name: '援手', type: '生物', rarity: '古朴', c…
+     40|   const preview = async () => { document.querySelector('[data-act="dep…
+       |                                                                                           ^
+     41|   it('真实预览按钮不改已选、不扣仓；应用补充并可撤销到原手选', async () => {
+     42|     base.data.stash = [defense, attack, third].map(card => ({ card, co…
+ ❯ tests/departure-stack-lifecycle-review.test.js:70:97
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  3 failed | 93 passed (96)
+   Start at  15:28:58
+   Duration  3.84s (transform 615ms, setup 0ms, collect 982ms, tests 4.19s, environment 4.18s, prepare 625ms)
+

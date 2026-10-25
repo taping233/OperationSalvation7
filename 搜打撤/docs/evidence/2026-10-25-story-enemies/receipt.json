@@ -1,0 +1,223 @@
+{
+  "status": "installed-uncommitted",
+  "method": "Four independent built-in imagegen portraits, followed by alpha-cleanup edits; transparent RGBA WebP quality92/method6; existing 448px thumbnails updated. No NAI requests in this batch.",
+  "storySource": "docs/production/design/STORY-PART-ONE.md: city sealed by military, several factions, bodily pollution turns people into unconscious mutants; no hidden source identity disclosed.",
+  "items": [
+    {
+      "id": "archer",
+      "oldName": "联邦射手",
+      "newName": "封锁线枪手",
+      "draftSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-8038bdca-f4ca-46ab-9daf-ecbcb912d1c7.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-bbc73b99-fbf5-41fb-9f66-631c956bd2e6.png",
+      "sourceSha256": "fdd41fc6dcbce6428353cf87b35654b5bb5a3560582b7539c5440a9d6a779372",
+      "mechanics": {
+        "id": "archer",
+        "atk": 5,
+        "hp": 3,
+        "behavior": "volley"
+      },
+      "assets": [
+        {
+          "path": "game/assets/portraits/enemies/archer.webp",
+          "bytes": 130500,
+          "sha256": "4b983d5d95ef5113c47e5a55f9086a1b6a2a5685c2c2ed5c30b98b5459235fa2",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            254
+          ],
+          "previousSha256": "8ac95823ba07360aade16d773607083a95fd93c3876ea2d7ae221d2f84bcaa8f",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\archer-full-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\archer-full-new.webp"
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/archer.webp",
+          "bytes": 39798,
+          "sha256": "7e119037d84e58b1558983e66508b929121628d7cdb3ce988a32301af8bf8e76",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "previousSha256": "64503c1a85f2ef1a50617a74a96d86b89e6d8b8183e5bb02099f179bb40e5620",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\archer-thumb-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\archer-thumb-new.webp"
+        }
+      ]
+    },
+    {
+      "id": "bandit",
+      "oldName": "反抗组织拾荒者",
+      "newName": "截道拾荒者",
+      "draftSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-37c7c03f-19b4-4975-a804-269cc5342325.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-f6d8051d-4b7d-4638-8f30-b00c37a14d46.png",
+      "sourceSha256": "6360327b779580c4c74eb37c35f3184165988353451e5c907183abb083d929a3",
+      "mechanics": {
+        "id": "bandit",
+        "atk": 3,
+        "hp": 3,
+        "behavior": "strike"
+      },
+      "assets": [
+        {
+          "path": "game/assets/portraits/enemies/bandit.webp",
+          "bytes": 136062,
+          "sha256": "1190606f545b2336c400d1ca2ec6e8937f4a086e0b7cfc7220a744deebdd726a",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            254
+          ],
+          "previousSha256": "4676bb8bb067bfb85dda17f22577e30e41968488f54b723ec8823f8c42eca247",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\bandit-full-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\bandit-full-new.webp"
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/bandit.webp",
+          "bytes": 40678,
+          "sha256": "958c3f5ea85870e71f61514995e73b8c111741dfbb91168dd188c26485e977c7",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "previousSha256": "0790006ebaee9c08130440d4f296466863874d33599481416452345136102840",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\bandit-thumb-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\bandit-thumb-new.webp"
+        }
+      ]
+    },
+    {
+      "id": "orc_axe",
+      "oldName": "甲壳变异体",
+      "newName": "硬化感染者",
+      "draftSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-0ca636ea-032c-4915-adce-679cac765fe1.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-d7009edd-598d-406b-9bd9-f9c90c5132b8.png",
+      "sourceSha256": "4ad715b83aaece66029c8edf6025628f8c86e410e6df033ab450c42748848e8a",
+      "mechanics": {
+        "id": "orc_axe",
+        "atk": 4,
+        "hp": 7,
+        "behavior": "guard"
+      },
+      "assets": [
+        {
+          "path": "game/assets/portraits/enemies/orc_axe.webp",
+          "bytes": 158636,
+          "sha256": "26c313b336d762dcfa0324c4f89365a42215547de6f9c058e95b87374554e607",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            254
+          ],
+          "previousSha256": "45efb9493e2881a6f95d2bb62a27bef8cd8d6d2c7f5150f01255800be7235fcf",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\orc_axe-full-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\orc_axe-full-new.webp"
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/orc_axe.webp",
+          "bytes": 47764,
+          "sha256": "5a49a16948a46ad3978ceb8ea9bab5600455f8bb3cedbc09df1758b3a45af671",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "previousSha256": "fa7b43df37bf4d0b301b8b884f3b5dc9f6d592286ae69ea6a81ec28f83955cde",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\orc_axe-thumb-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\orc_axe-thumb-new.webp"
+        }
+      ]
+    },
+    {
+      "id": "grass_el",
+      "oldName": "滋生异变体",
+      "newName": "增生感染者",
+      "draftSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-bbef475b-afdb-4f97-acf5-28a8548c714f.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-dad98af1-fc9a-405d-8fe3-5e8087645e0b.png",
+      "sourceSha256": "c4e17700cc49f54dfbe9ad02e69b359f56e8ed3b1f996d89760ab6f0c42e9715",
+      "mechanics": {
+        "id": "grass_el",
+        "atk": 5,
+        "hp": 12,
+        "behavior": "curse"
+      },
+      "assets": [
+        {
+          "path": "game/assets/portraits/enemies/grass_el.webp",
+          "bytes": 138618,
+          "sha256": "1ec24e8ed1a3025fab280fef0bffc48a287ad409d21c278246c92ab5b5dc767b",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            254
+          ],
+          "previousSha256": "ae06aa09c4713ae7521fc795e05e4995fde99ead52669fc63fa27a52aa7f62fe",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\grass_el-full-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\grass_el-full-new.webp"
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/grass_el.webp",
+          "bytes": 41128,
+          "sha256": "b47dccb4da4c13dd4acb4a22f772b461fa88a3e83b2900279cac829ab447a7df",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "previousSha256": "d36395bee205c3a2221304e2e6b1a3a11df71a67663ec38647ed1c6fbbfb26fe",
+          "backup": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\grass_el-thumb-before.webp",
+          "prepared": "D:\\素材\\代号柒\\搜打撤\\.tmp\\imagegen\\story-enemies-20261025\\grass_el-thumb-new.webp"
+        }
+      ]
+    }
+  ],
+  "changedTextSources": [
+    "game/data/map.json",
+    "game/src/cards/cards.data.js",
+    "game/src/run/game.run.events.js",
+    "narrative/events.ink",
+    "docs/production/design/EVENT-ENCOUNTERS.md",
+    "game/src/battle/view/battle.layers.js"
+  ],
+  "compatibility": "Keep all monster IDs, hp/atk/behavior/elite fields, pools, spawn counts and rewards. Existing ensureFoeRename synchronizes BESTIARY labels to old catalogs; existing event description backfill retains old label as migration input. cards-sync.json untouched. Four new ally name aliases use existing enemy assets; legacy aliases remain.",
+  "consumerReview": {
+    "path": "game/src/battle/view/battle.layers.js",
+    "oldRegisteredLfSha256": "df40e89651ea0831a6f8b0e65eea8daac7e751f962797db92297b679547221be",
+    "lfSha256": "7ffb99547bf972bd4bdc5dd984945905f3043d137cca306ce4fc71f0843429ae",
+    "scope": "Only four explicit existing enemy-image aliases added; no dynamic constructors, frame catalog or exclusion list changed."
+  },
+  "verification": "No automated tests, asset audits, lint, typecheck, browser acceptance or build; narrative compilation is the required source generation step, not gameplay verification."
+}

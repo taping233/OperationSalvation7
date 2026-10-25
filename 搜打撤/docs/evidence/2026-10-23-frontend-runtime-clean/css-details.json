@@ -1,0 +1,631 @@
+{
+  "cssChanges": [
+    {
+      "file": "game/css/ak-skin.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fc2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-crimson-deep"
+        }
+      ]
+    },
+    {
+      "file": "game/css/bag-design-system.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--bag-deep"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--bag-light"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--av3-paper"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v3 .warehouse-more-filters"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v3 .warehouse-more-filters summary"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v3 .warehouse-more-filters > div"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters summary"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters[open] summary"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--camp-object-size"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-more-filters"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-more-filters select"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--base-v7-bg"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--base-v7-sub"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters summary"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters[open] summary"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div :is(button,select)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--ak-raise"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-yellow-deep"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-yellow-glow"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-red-deep"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-orange"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-r6"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-r5"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-r4"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-r3"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-tex-hazard"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-mark"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-barcode"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-frame"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-shadow"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ak-shadow-lift"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--desk1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--desk2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ember-hi"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ok"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--arcane"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--radius-btn"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--radius-pill"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fx-hit"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fx-curse"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fx-blood"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--fx-vital"
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "body #overlay .battle-decision.battle-decision-unified[data-decision-kind=\"pile\"] .bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "body #overlay .battle-decision[data-decision-kind=\"pile\"] .bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has([data-act='btGraveBack'], [data-act='btDeckBack']) .bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .card.page .entry-reward-head"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .card.page .entry-reward-head > span"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .card.page .entry-reward-head h2"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .card.page .entry-reward-head p"
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .battle-decision-content .bt-gy-list"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "body #overlay .battle-decision-content :is(.bt-hand,.bt-gy-list,.battle-bag-grid)",
+          "replacement": "body #overlay .battle-decision-content :is(.bt-hand,.battle-bag-grid)"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "body #overlay .battle-decision[data-decision-kind=\"formation\"] .bt-hand,\nbody #overlay .battle-decision[data-decision-kind=\"hand-select\"] .bt-hand,\nbody #overlay .battle-decision[data-decision-kind=\"pile\"] .bt-gy-list",
+          "replacement": "body #overlay .battle-decision[data-decision-kind=\"formation\"] .bt-hand,\nbody #overlay .battle-decision[data-decision-kind=\"hand-select\"] .bt-hand"
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--home-frame-x"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--home-frame-y"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--home-frame-x"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--home-frame-y"
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .home-scene-light"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed:has(.home-start:is(:hover,:focus-visible)) .home-scene-light"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .home-start .home-city-current"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-beam"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-beam-soft"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-signal"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .signal-b"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-emitter"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-guide-line"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .city-mote"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed .mote-b"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "body.page-covered #title.home-composed .home-city-current *,\nbody:has(#homeCredits[open]) #title.home-composed .home-city-current *,\nbody.page-covered #title.home-composed .home-collection .home-line-icon,\nbody:has(#homeCredits[open]) #title.home-composed .home-collection .home-line-icon",
+          "replacement": "\nbody.page-covered #title.home-composed .home-collection .home-line-icon,\nbody:has(#homeCredits[open]) #title.home-composed .home-collection .home-line-icon"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body #title.home-composed[data-home-wallpaper=\"ensemble\"] .home-scene-light"
+        },
+        {
+          "kind": "dead-rule",
+          "selector": "body.page-covered #title.home-composed .home-scene-light,\nbody:has(#homeCredits[open]) #title.home-composed .home-scene-light"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "body #title.home-composed.wallpaper-only :is(.home-depth,.home-scene-light,.home-near-snow,.home-mist,.home-grain,.home-flash,.home-slash,.home-ghost,.home-beams,.home-corner,#titleDev)",
+          "replacement": "body #title.home-composed.wallpaper-only :is(.home-depth,.home-near-snow,.home-mist,.home-grain,.home-flash,.home-slash,.home-ghost,.home-beams,.home-corner,#titleDev)"
+        },
+        {
+          "kind": "dead-animation",
+          "name": "citySignal"
+        },
+        {
+          "kind": "dead-animation",
+          "name": "citySnow"
+        }
+      ]
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "changes": [
+        {
+          "kind": "dead-selector",
+          "selector": "#overlay .card.discover,\r\n#overlay .card.discover.swap,\r\n#overlay .card.room:has(.bt-gy-list),\r\n#overlay .card.room:has(.bt-settings),\r\n#overlay .card.room:has(.bt-gy-list).swap,\r\n#overlay .card.room:has(.bt-settings).swap",
+          "replacement": "#overlay .card.discover,\r\n#overlay .card.discover.swap,\r\n#overlay .card.room:has(.bt-settings),\r\n#overlay .card.room:has(.bt-settings).swap"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "#overlay.closing .card.discover,\r\n#overlay.closing .card.room:has(.bt-gy-list),\r\n#overlay.closing .card.room:has(.bt-settings)",
+          "replacement": "#overlay.closing .card.discover,\r\n#overlay.closing .card.room:has(.bt-settings)"
+        },
+        {
+          "kind": "dead-selector",
+          "selector": "#overlay.room-view.closing:has(.bt-gy-list),\r\n#overlay.room-view.closing:has(.bt-settings),\r\n#overlay.room-view.closing:has(.glass-panel)",
+          "replacement": "\r\n#overlay.room-view.closing:has(.bt-settings),\r\n#overlay.room-view.closing:has(.glass-panel)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/overlays.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": ".bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": ".bt-gy-list"
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .pg.settings-page .pg-head h2 .settings-gear-r2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--set-press"
+        }
+      ]
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--studio-paper"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--studio-paper-light"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--studio-paper-edge"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-line"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-wall"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-night"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-paper"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-controls"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-pane"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--su-accent"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--sa-unit"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--sa-stock"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--sa-stock-inset"
+        }
+      ]
+    },
+    {
+      "file": "game/css/settings-cover.css",
+      "changes": [
+        {
+          "kind": "dead-selector",
+          "selector": "#overlay .pg.settings-page:not(.sugin-page) .settings-gear-r2,\r\n#overlay .pg.settings-page:not(.sugin-page) .set-h .ic",
+          "replacement": "\r\n#overlay .pg.settings-page:not(.sugin-page) .set-h .ic"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--set-rule"
+        }
+      ]
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "selector": "#overlay .settings-tabbed .settings-gear-r2"
+        }
+      ]
+    },
+    {
+      "file": "game/css/winter.css",
+      "changes": [
+        {
+          "kind": "unused-variable",
+          "name": "--desk1"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--desk2"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--ok"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--arcane"
+        },
+        {
+          "kind": "unused-variable",
+          "name": "--akb2"
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.person-details,.facility-details,.av3-medal-detail,.av3-back-detail,.companion-hatch,.story-reader,.warehouse-more-filters > div,.trade-v5-desk)"
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "selector": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.base-link,.facility-tile,.person-face,.warehouse-more-filters summary):focus-visible"
+    }
+  ]
+}

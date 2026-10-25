@@ -1,0 +1,1552 @@
+{
+  "details": [
+    {
+      "file": "game/css/ak-skin.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay .node-kicker, #overlay .cls2-eyebrow",
+          "replacement": "#overlay .node-kicker"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 27,
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-pack-note",
+          "bytes": 87
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.stash-sections,.logistics-sections)",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.stash-sections)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 72,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v3 .stash-pocket-note",
+          "bytes": 208
+        },
+        {
+          "kind": "dead-rule",
+          "line": 246,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example",
+          "bytes": 407
+        },
+        {
+          "kind": "dead-rule",
+          "line": 253,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example > span",
+          "bytes": 166
+        },
+        {
+          "kind": "dead-rule",
+          "line": 256,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example > b",
+          "bytes": 157
+        },
+        {
+          "kind": "dead-rule",
+          "line": 259,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example > small",
+          "bytes": 166
+        },
+        {
+          "kind": "dead-rule",
+          "line": 262,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example:hover",
+          "bytes": 138
+        },
+        {
+          "kind": "dead-rule",
+          "line": 265,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-example:focus-visible",
+          "bytes": 151
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay:has(.cls2-page[data-base-departure=\"true\"], .cls-pool-page[data-base-departure=\"true\"]) :is(#ovCloseX, .ov-title)",
+          "replacement": "#overlay:has(.cls2-page[data-base-departure=\"true\"], .cls-pool-page[data-base-departure=\"true\"]) :is(#ovCloseX)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 69,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-eyebrow",
+          "bytes": 187
+        },
+        {
+          "kind": "dead-rule",
+          "line": 89,
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=\"true\"] .cls2-palette",
+          "bytes": 94
+        },
+        {
+          "kind": "dead-rule",
+          "line": 182,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pv-row",
+          "bytes": 262
+        },
+        {
+          "kind": "dead-rule",
+          "line": 183,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pv-row span",
+          "bytes": 137
+        },
+        {
+          "kind": "dead-rule",
+          "line": 184,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pv-row b",
+          "bytes": 138
+        },
+        {
+          "kind": "dead-rule",
+          "line": 186,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pv-rule",
+          "bytes": 181
+        },
+        {
+          "kind": "dead-rule",
+          "line": 193,
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pool-catalog-kicker",
+          "bytes": 162
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #depMain.camp-detail.departure-cover :is(.dep-summary,.dep-filters,.camp-pack-note,.pet-strip)",
+          "replacement": "#overlay#overlay #depMain.camp-detail.departure-cover :is(.dep-summary,.dep-filters,.pet-strip)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay:has(.base-camp, .camp-depart-detail) :is(#ovCloseX, .ov-title)",
+          "replacement": "#overlay:has(.base-camp, .camp-depart-detail) :is(#ovCloseX)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 33,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-nav-caption",
+          "bytes": 166
+        },
+        {
+          "kind": "dead-rule",
+          "line": 41,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .tab-ico",
+          "bytes": 174
+        },
+        {
+          "kind": "dead-rule",
+          "line": 42,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .tab-ico .ic",
+          "bytes": 101
+        },
+        {
+          "kind": "dead-rule",
+          "line": 43,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .tab-txt",
+          "bytes": 144
+        },
+        {
+          "kind": "dead-rule",
+          "line": 44,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .tab-txt b",
+          "bytes": 121
+        },
+        {
+          "kind": "dead-rule",
+          "line": 45,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .tab-txt small",
+          "bytes": 124
+        },
+        {
+          "kind": "dead-rule",
+          "line": 46,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-nav-index",
+          "bytes": 120
+        },
+        {
+          "kind": "dead-rule",
+          "line": 48,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-nav-foot",
+          "bytes": 157
+        },
+        {
+          "kind": "dead-rule",
+          "line": 49,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-nav-foot small",
+          "bytes": 165
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note, .set-tip, .dim, .hint)",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.ov-note, .dim, .hint)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 61,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .set-tip",
+          "bytes": 143
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::before,\n#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::after",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission)::before,\n#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission)::after"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 75,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .dock-label",
+          "bytes": 131
+        },
+        {
+          "kind": "dead-rule",
+          "line": 76,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .mode-list",
+          "bytes": 99
+        },
+        {
+          "kind": "dead-rule",
+          "line": 79,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .mode-card .mode-ico",
+          "bytes": 172
+        },
+        {
+          "kind": "dead-rule",
+          "line": 80,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-mode-mark",
+          "bytes": 87
+        },
+        {
+          "kind": "dead-rule",
+          "line": 81,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-depart-readiness",
+          "bytes": 138
+        },
+        {
+          "kind": "dead-rule",
+          "line": 82,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-depart-readiness b",
+          "bytes": 87
+        },
+        {
+          "kind": "dead-rule",
+          "line": 83,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-depart-actions",
+          "bytes": 109
+        },
+        {
+          "kind": "dead-rule",
+          "line": 85,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-action-step",
+          "bytes": 100
+        },
+        {
+          "kind": "dead-rule",
+          "line": 86,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-depart-secondary",
+          "bytes": 162
+        },
+        {
+          "kind": "dead-rule",
+          "line": 104,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-glyph",
+          "bytes": 91
+        },
+        {
+          "kind": "dead-rule",
+          "line": 105,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-glyph .ic",
+          "bytes": 103
+        },
+        {
+          "kind": "dead-rule",
+          "line": 106,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-upgrade-reserve",
+          "bytes": 140
+        },
+        {
+          "kind": "dead-rule",
+          "line": 115,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card",
+          "bytes": 170
+        },
+        {
+          "kind": "dead-rule",
+          "line": 116,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::before,\n#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::after,\n#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3::before,\n#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3::after",
+          "bytes": 321
+        },
+        {
+          "kind": "dead-rule",
+          "line": 120,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3",
+          "bytes": 147
+        },
+        {
+          "kind": "dead-rule",
+          "line": 121,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3 .set-tip",
+          "bytes": 129
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page.page-in :is(.ach-row, .coll-group, .back-card, .coll-ms)",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page.page-in :is(.ach-row, .coll-group, .coll-ms)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 123,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-collection-summary",
+          "bytes": 114
+        },
+        {
+          "kind": "dead-rule",
+          "line": 124,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .story-strip",
+          "bytes": 157
+        },
+        {
+          "kind": "dead-rule",
+          "line": 125,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .story-strip .ss-tag",
+          "bytes": 75
+        },
+        {
+          "kind": "dead-rule",
+          "line": 146,
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-panel-index",
+          "bytes": 125
+        },
+        {
+          "kind": "dead-rule",
+          "line": 147,
+          "selector": "#overlay #depMain.pg.hub.camp-detail .set-tip",
+          "bytes": 82
+        },
+        {
+          "kind": "dead-rule",
+          "line": 168,
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-pack-note",
+          "bytes": 107
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay .card:has(.stash-shell.camp-detail), #overlay .card:has(.preparation-shell.camp-detail)",
+          "replacement": " #overlay .card:has(.preparation-shell.camp-detail)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 177,
+          "selector": "#overlay .card:has(.stash-shell.camp-detail)",
+          "bytes": 133
+        },
+        {
+          "kind": "dead-rule",
+          "line": 178,
+          "selector": "#overlay .card:has(.stash-shell.camp-detail) #ovTitle",
+          "bytes": 126
+        },
+        {
+          "kind": "dead-rule",
+          "line": 179,
+          "selector": "#overlay .stash-shell.camp-detail",
+          "bytes": 153
+        },
+        {
+          "kind": "dead-rule",
+          "line": 180,
+          "selector": "#overlay .stash-shell.camp-detail::before, #overlay .stash-shell.camp-detail::after",
+          "bytes": 102
+        },
+        {
+          "kind": "dead-rule",
+          "line": 181,
+          "selector": "#overlay .stash-shell.camp-detail .camp-upgrade-glyph",
+          "bytes": 86
+        },
+        {
+          "kind": "dead-rule",
+          "line": 182,
+          "selector": "#overlay .stash-shell.camp-detail .camp-upgrade-glyph .ic",
+          "bytes": 88
+        },
+        {
+          "kind": "dead-rule",
+          "line": 183,
+          "selector": "#overlay .stash-shell.camp-detail small",
+          "bytes": 92
+        },
+        {
+          "kind": "dead-rule",
+          "line": 184,
+          "selector": "#overlay .stash-shell.camp-detail .ov-btns",
+          "bytes": 85
+        },
+        {
+          "kind": "dead-rule",
+          "line": 185,
+          "selector": "#overlay .stash-shell.camp-detail .ov-btn",
+          "bytes": 76
+        },
+        {
+          "kind": "dead-rule",
+          "line": 186,
+          "selector": "#overlay .stash-shell.camp-detail :is(.ov-note, .ov-stats)",
+          "bytes": 113
+        },
+        {
+          "kind": "dead-rule",
+          "line": 187,
+          "selector": "#overlay .stash-shell.camp-detail .ov-stats b",
+          "bytes": 101
+        },
+        {
+          "kind": "dead-rule",
+          "line": 199,
+          "selector": "#cardZoom .camp-card-actions .inspect-price",
+          "bytes": 96
+        },
+        {
+          "kind": "dead-rule",
+          "line": 200,
+          "selector": "#cardZoom .camp-card-actions .inspect-price small",
+          "bytes": 86
+        },
+        {
+          "kind": "dead-rule",
+          "line": 201,
+          "selector": "#cardZoom .camp-card-actions .inspect-price strong",
+          "bytes": 106
+        },
+        {
+          "kind": "dead-rule",
+          "line": 202,
+          "selector": "#cardZoom .camp-card-actions .inspect-price strong span",
+          "bytes": 110
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#cardZoom .camp-card-actions :is(.inspect-count, .inspect-unavailable)",
+          "replacement": "#cardZoom .camp-card-actions :is(.inspect-count)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 213,
+          "selector": "#cardZoom:has(.camp-detail) .camp-detail-copy h3",
+          "bytes": 105
+        },
+        {
+          "kind": "dead-rule",
+          "line": 214,
+          "selector": "#cardZoom:has(.camp-detail) .camp-detail-copy small",
+          "bytes": 126
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 128,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-enlarge",
+          "bytes": 185
+        },
+        {
+          "kind": "dead-rule",
+          "line": 129,
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-art:hover .trade-v5-enlarge",
+          "bytes": 112
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.person-face,.facility-tile,.av3-back,.av3-medal > button)",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.person-face,.facility-tile,.av3-back,.av3-medal > button)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 42,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .base-home-place",
+          "bytes": 97
+        },
+        {
+          "kind": "dead-rule",
+          "line": 43,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .base-home-place i",
+          "bytes": 127
+        },
+        {
+          "kind": "dead-rule",
+          "line": 44,
+          "selector": "#overlay #hubMain.pg.hub.base-camp .base-home-place:hover i",
+          "bytes": 109
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.base-home-place,.base-link,.facility-tile,.person-face,.warehouse-more-filters summary):focus-visible",
+          "replacement": "#overlay #hubMain.pg.hub.base-camp :is(.base-link,.facility-tile,.person-face,.warehouse-more-filters summary):focus-visible"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 18,
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-affair-track",
+          "bytes": 159
+        },
+        {
+          "kind": "dead-rule",
+          "line": 19,
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-home-affair-track i",
+          "bytes": 124
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 24,
+          "selector": "& .stash-pocket-note",
+          "bytes": 216
+        },
+        {
+          "kind": "dead-rule",
+          "line": 76,
+          "selector": "& .trade-v12-item-quality",
+          "bytes": 106
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n  .base-home-title, .base-home-launch, .base-home-menu > button,\r\n  .base-home-mode, .base-home-services > button\r\n)",
+          "replacement": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n  .base-home-title, .base-home-launch,\r\n  .base-home-mode, .base-home-services > button\r\n)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(\r\n  .base-home-menu button, .base-home-utility button, .base-home-launch button\r\n)",
+          "replacement": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is( .base-home-utility button, .base-home-launch button\r\n)"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 35,
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-menu button:hover:not(:disabled)",
+          "bytes": 120
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(\r\n  .base-home-menu button, .base-home-utility button, .base-home-launch button\r\n):active:not(:disabled)",
+          "replacement": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is( .base-home-utility button, .base-home-launch button\r\n):active:not(:disabled)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(\r\n  .base-home-menu button, .base-home-utility button, .base-home-launch button\r\n)",
+          "replacement": "body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is( .base-home-utility button, .base-home-launch button\r\n)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n  .base-home-title, .base-home-launch, .base-home-menu > button,\r\n  .base-home-mode, .base-home-services > button\r\n)",
+          "replacement": "body.reduce-motion #overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n  .base-home-title, .base-home-launch,\r\n  .base-home-mode, .base-home-services > button\r\n)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n    .base-home-title, .base-home-launch, .base-home-menu > button,\r\n    .base-home-mode, .base-home-services > button\r\n  )",
+          "replacement": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7[data-base-motion-pending=\"1\"] :is(\r\n    .base-home-title, .base-home-launch,\r\n    .base-home-mode, .base-home-services > button\r\n  )"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is(\r\n    .base-home-menu button, .base-home-utility button, .base-home-launch button\r\n  )",
+          "replacement": "#overlay#overlay #hubMain.base-frame-v7 .base-home-v7 :is( .base-home-utility button, .base-home-launch button\r\n  )"
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes)",
+          "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.archive-status,.trade-v5-modes)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes) :is(button,.mini-btn)",
+          "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.archive-status,.trade-v5-modes) :is(button,.mini-btn)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.warehouse-use-tabs,.archive-status,.trade-v5-modes) :is(.on,.ok,.is-selected)",
+          "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.pool-type-tabs,.archive-status,.trade-v5-modes) :is(.on,.ok,.is-selected)"
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > :is(.warehouse-purpose,.stash-pocket-note)",
+          "replacement": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) > :is(.warehouse-purpose)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 42,
+          "selector": "#overlay[data-camp-entry] #hubMain.base-camp :is(.camp-nav-caption, .camp-nav-foot)",
+          "bytes": 159
+        },
+        {
+          "kind": "dead-rule",
+          "line": 53,
+          "selector": "#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-readiness",
+          "bytes": 94
+        },
+        {
+          "kind": "dead-rule",
+          "line": 54,
+          "selector": "#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-actions",
+          "bytes": 92
+        }
+      ]
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": ":is(#overlay,#cardZoom,#cardPreview) :is(.shop-slot,.stash-cell,.shelf-visual,.cz-card):has(.hs-card)",
+          "replacement": ":is(#overlay,#cardZoom,#cardPreview) :is(.shop-slot,.stash-cell,.cz-card):has(.hs-card)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/cards.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 169,
+          "selector": ".set-h .set-tip",
+          "bytes": 91
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-cover.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 60,
+          "selector": "#overlay .cls2-page .cls2-eyebrow, #overlay .cls2-page .cls2-palette",
+          "bytes": 87
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-pool-cover.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 48,
+          "selector": "#overlay .card.page .pg.cls-pool-page .pv-row",
+          "bytes": 168
+        },
+        {
+          "kind": "dead-rule",
+          "line": 49,
+          "selector": "#overlay .card.page .pg.cls-pool-page .pv-row span",
+          "bytes": 138
+        },
+        {
+          "kind": "dead-rule",
+          "line": 50,
+          "selector": "#overlay .card.page .pg.cls-pool-page .pv-row b",
+          "bytes": 110
+        },
+        {
+          "kind": "dead-rule",
+          "line": 52,
+          "selector": "#overlay .card.page .pg.cls-pool-page .pv-rule",
+          "bytes": 171
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 10,
+          "selector": "#overlay .cls2-page .cls2-fullart img.skin-swap",
+          "bytes": 115
+        },
+        {
+          "kind": "dead-rule",
+          "line": 11,
+          "selector": "#overlay .cls2-page .cls2-fullart img.art-figure-back.skin-swap",
+          "bytes": 104
+        },
+        {
+          "kind": "dead-rule",
+          "line": 33,
+          "selector": "#overlay .cls2-page .cls2-example",
+          "bytes": 168
+        },
+        {
+          "kind": "dead-rule",
+          "line": 34,
+          "selector": "#overlay .cls2-page .cls2-example small",
+          "bytes": 111
+        },
+        {
+          "kind": "dead-rule",
+          "line": 45,
+          "selector": "#overlay .cls2-page .cls2-example:focus-visible",
+          "bytes": 100
+        },
+        {
+          "kind": "dead-rule",
+          "line": 46,
+          "selector": "#overlay .cls2-page .cls2-example:hover",
+          "bytes": 87
+        }
+      ]
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 16,
+          "selector": "body #overlay .card .cqo-frame .cqo-progress",
+          "bytes": 89
+        },
+        {
+          "kind": "dead-rule",
+          "line": 17,
+          "selector": "body #overlay .card .cqo-frame .cqo-progress small",
+          "bytes": 67
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 22,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .set-tip",
+          "bytes": 129
+        },
+        {
+          "kind": "dead-rule",
+          "line": 23,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-sort",
+          "bytes": 140
+        },
+        {
+          "kind": "dead-rule",
+          "line": 62,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has(.stash-shell)",
+          "bytes": 161
+        },
+        {
+          "kind": "dead-rule",
+          "line": 63,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .stash-shell",
+          "bytes": 116
+        },
+        {
+          "kind": "dead-rule",
+          "line": 64,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .stash-shell :is(.ov-note,.ov-stats)",
+          "bytes": 148
+        },
+        {
+          "kind": "dead-rule",
+          "line": 65,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .stash-shell .gold",
+          "bytes": 94
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 186,
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange) .sellpost-coin",
+          "bytes": 145
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has(.devc-topbar) :is(.ov-note, .ov-stats, .dim, .set-tip)",
+          "replacement": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:has(.devc-topbar) :is(.ov-note, .ov-stats, .dim)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act=\"labBack\"],[data-act=\"nestGo\"],[data-act^=\"nestCell\"],[data-act=\"rcBack\"],[data-act=\"naBack\"],[data-act=\"nsBack\"],[data-act=\"nestExtractRetry\"],[data-act=\"labScoreBack\"]))) :is(.ov-note,.ov-stats,.ov-empty,.set-tip)",
+          "replacement": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card:not(.page):where(:not(.bag-page):not(.battle):not(.room):not(.chest):not(.discover):not(.scene):not(:has(.doom-panel)):not(:has([data-act=\"labBack\"],[data-act=\"nestGo\"],[data-act^=\"nestCell\"],[data-act=\"rcBack\"],[data-act=\"naBack\"],[data-act=\"nsBack\"],[data-act=\"nestExtractRetry\"],[data-act=\"labScoreBack\"]))) :is(.ov-note,.ov-stats,.ov-empty)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 65,
+          "selector": "#overlay .card.page #depMain.departure-cover .set-tip",
+          "bytes": 136
+        }
+      ]
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 28,
+          "selector": "& .set-tip",
+          "bytes": 80
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "& #depSummary, & .camp-pack-note",
+          "replacement": "& #depSummary"
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 13,
+          "selector": ".dock-label",
+          "bytes": 103
+        },
+        {
+          "kind": "dead-rule",
+          "line": 20,
+          "selector": ".section-kicker",
+          "bytes": 119
+        },
+        {
+          "kind": "dead-rule",
+          "line": 43,
+          "selector": ".section-kicker",
+          "bytes": 44
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 171,
+          "selector": "#overlay .hub-tab .tab-ico",
+          "bytes": 106
+        },
+        {
+          "kind": "dead-rule",
+          "line": 173,
+          "selector": "#overlay .hub-tab.on .tab-ico",
+          "bytes": 60
+        },
+        {
+          "kind": "dead-rule",
+          "line": 183,
+          "selector": ".bag-sort",
+          "bytes": 59
+        },
+        {
+          "kind": "dead-rule",
+          "line": 184,
+          "selector": ".bag-sort .mini-btn",
+          "bytes": 116
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay .hub-page .hub-card .ic,\n#overlay .hub-page .hub-card h3 .ic,\n#overlay .hub-page .mode-card .mode-ico .ic",
+          "replacement": "#overlay .hub-page .hub-card .ic,\n#overlay .hub-page .hub-card h3 .ic"
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 13,
+          "selector": "#overlay .cls2-eyebrow",
+          "bytes": 139
+        },
+        {
+          "kind": "dead-rule",
+          "line": 24,
+          "selector": "#overlay .cls2-palette",
+          "bytes": 66
+        },
+        {
+          "kind": "dead-rule",
+          "line": 25,
+          "selector": "#overlay .cls2-palette i",
+          "bytes": 97
+        },
+        {
+          "kind": "dead-rule",
+          "line": 42,
+          "selector": "#overlay .cls2-fullart img.art-figure.skin-swap",
+          "bytes": 113
+        },
+        {
+          "kind": "dead-rule",
+          "line": 43,
+          "selector": "#overlay .cls2-fullart img.art-figure-back.skin-swap",
+          "bytes": 99
+        },
+        {
+          "kind": "dead-rule",
+          "line": 69,
+          "selector": "#overlay .pg.cls-pool-page .pool-archive-title .section-kicker",
+          "bytes": 157
+        },
+        {
+          "kind": "dead-rule",
+          "line": 80,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-kicker",
+          "bytes": 86
+        },
+        {
+          "kind": "dead-rule",
+          "line": 83,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row",
+          "bytes": 124
+        },
+        {
+          "kind": "dead-rule",
+          "line": 84,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row .dmg-num",
+          "bytes": 73
+        },
+        {
+          "kind": "dead-rule",
+          "line": 139,
+          "selector": "#overlay .cls2-eyebrow",
+          "bytes": 92
+        },
+        {
+          "kind": "dead-rule",
+          "line": 140,
+          "selector": "#overlay .cls2-eyebrow::before",
+          "bytes": 116
+        },
+        {
+          "kind": "dead-rule",
+          "line": 161,
+          "selector": "#overlay .pg.cls-pool-page .pool-archive-title .section-kicker",
+          "bytes": 164
+        },
+        {
+          "kind": "dead-rule",
+          "line": 171,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-kicker",
+          "bytes": 132
+        },
+        {
+          "kind": "dead-rule",
+          "line": 175,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-rule",
+          "bytes": 177
+        },
+        {
+          "kind": "dead-rule",
+          "line": 177,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row",
+          "bytes": 171
+        },
+        {
+          "kind": "dead-rule",
+          "line": 178,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row span",
+          "bytes": 107
+        },
+        {
+          "kind": "dead-rule",
+          "line": 179,
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row b",
+          "bytes": 82
+        },
+        {
+          "kind": "dead-rule",
+          "line": 184,
+          "selector": "#overlay .pg.cls-pool-page .pool-catalog-kicker",
+          "bytes": 130
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 37,
+          "selector": "#title .title-foreground-paper",
+          "bytes": 118
+        },
+        {
+          "kind": "dead-rule",
+          "line": 40,
+          "selector": "#title .title-foreground-paper::before, #title .title-foreground-paper::after",
+          "bytes": 354
+        },
+        {
+          "kind": "dead-rule",
+          "line": 46,
+          "selector": "#title .title-foreground-paper::before",
+          "bytes": 183
+        },
+        {
+          "kind": "dead-rule",
+          "line": 50,
+          "selector": "#title .title-foreground-paper::after",
+          "bytes": 195
+        }
+      ]
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 10,
+          "selector": ".eps-card-val",
+          "bytes": 588
+        },
+        {
+          "kind": "dead-rule",
+          "line": 32,
+          "selector": ".eps-card-val img, .eps-card-val svg",
+          "bytes": 67
+        },
+        {
+          "kind": "dead-rule",
+          "line": 48,
+          "selector": "#expeditionChapter li .eps-lyr",
+          "bytes": 319
+        },
+        {
+          "kind": "dead-rule",
+          "line": 60,
+          "selector": "#expeditionChapter li .eps-lyr[data-tier=\"低\"],\r\n#expeditionChapter li .eps-lyr[data-tier=\"中\"]",
+          "bytes": 235
+        },
+        {
+          "kind": "dead-rule",
+          "line": 66,
+          "selector": "#expeditionChapter li .eps-lyr[data-tier=\"高\"]",
+          "bytes": 183
+        },
+        {
+          "kind": "dead-rule",
+          "line": 71,
+          "selector": "#expeditionChapter li .eps-lyr[data-tier=\"极高\"]",
+          "bytes": 233
+        },
+        {
+          "kind": "dead-rule",
+          "line": 82,
+          "selector": ".eps-card-val.eps-val-S",
+          "bytes": 168
+        },
+        {
+          "kind": "dead-rule",
+          "line": 87,
+          "selector": ".eps-card-val.eps-val-A",
+          "bytes": 80
+        },
+        {
+          "kind": "dead-rule",
+          "line": 88,
+          "selector": ".eps-card-val.eps-val-B",
+          "bytes": 98
+        },
+        {
+          "kind": "dead-rule",
+          "line": 89,
+          "selector": ".eps-card-val.eps-val-C",
+          "bytes": 113
+        }
+      ]
+    },
+    {
+      "file": "game/css/extraction-rewards.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 27,
+          "selector": "#overlay .exr-page .exr-overline",
+          "bytes": 89
+        },
+        {
+          "kind": "dead-rule",
+          "line": 70,
+          "selector": "#overlay .exr-page .exr-bulk-note",
+          "bytes": 85
+        }
+      ]
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "& :is(.camp-pack-note,#depSummary,.set-tip,.camp-detail-heading small)",
+          "replacement": "& :is(#depSummary,.camp-detail-heading small)"
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 20,
+          "selector": ".hub-tab .tab-ico",
+          "bytes": 322
+        },
+        {
+          "kind": "dead-rule",
+          "line": 23,
+          "selector": ".hub-tab .tab-ico .ic",
+          "bytes": 52
+        },
+        {
+          "kind": "dead-rule",
+          "line": 24,
+          "selector": ".hub-tab .tab-txt",
+          "bytes": 113
+        },
+        {
+          "kind": "dead-rule",
+          "line": 26,
+          "selector": ".hub-tab:hover .tab-ico",
+          "bytes": 79
+        },
+        {
+          "kind": "dead-rule",
+          "line": 28,
+          "selector": ".hub-tab.on .tab-ico",
+          "bytes": 145
+        },
+        {
+          "kind": "dead-rule",
+          "line": 49,
+          "selector": ".mode-list",
+          "bytes": 63
+        },
+        {
+          "kind": "dead-rule",
+          "line": 53,
+          "selector": ".mode-ico",
+          "bytes": 277
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 100,
+          "selector": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip",
+          "bytes": 232
+        },
+        {
+          "kind": "dead-rule",
+          "line": 105,
+          "selector": "#overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip b",
+          "bytes": 83
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-deploy.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 131,
+          "selector": "#overlay #depMain .dep-body > .hub-card > h3 .set-tip",
+          "bytes": 224
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 163,
+          "selector": "#expeditionChapter ol",
+          "bytes": 67
+        },
+        {
+          "kind": "dead-rule",
+          "line": 164,
+          "selector": "#expeditionChapter li",
+          "bytes": 118
+        },
+        {
+          "kind": "dead-rule",
+          "line": 165,
+          "selector": "#expeditionChapter li.current",
+          "bytes": 61
+        },
+        {
+          "kind": "dead-rule",
+          "line": 166,
+          "selector": "#expeditionChapter li.current span",
+          "bytes": 66
+        },
+        {
+          "kind": "dead-rule",
+          "line": 167,
+          "selector": "#expeditionChapter li.passed",
+          "bytes": 48
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-hub.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 173,
+          "selector": "#overlay #hubMain .hub-tab .tab-ico .ic",
+          "bytes": 106
+        },
+        {
+          "kind": "dead-rule",
+          "line": 176,
+          "selector": "#overlay #hubMain .hub-tab:not(.on) .tab-ico",
+          "bytes": 160
+        },
+        {
+          "kind": "dead-rule",
+          "line": 183,
+          "selector": "#overlay #hubMain .hub-tab:hover .tab-ico .ic",
+          "bytes": 119
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay #hubMain .deploy-mission-copy .eyebrow,\n#overlay #hubMain .deploy-readiness-panel .eyebrow",
+          "replacement": "\n#overlay #hubMain .deploy-readiness-panel .eyebrow"
+        },
+        {
+          "kind": "dead-rule",
+          "line": 206,
+          "selector": "#overlay #hubMain .deploy-mission-copy h3",
+          "bytes": 142
+        },
+        {
+          "kind": "dead-rule",
+          "line": 286,
+          "selector": "#overlay #hubMain .back-card",
+          "bytes": 163
+        },
+        {
+          "kind": "dead-rule",
+          "line": 290,
+          "selector": "#overlay #hubMain .back-card:active:not(.locked)",
+          "bytes": 116
+        },
+        {
+          "kind": "dead-rule",
+          "line": 322,
+          "selector": "#overlay #hubMain .hub-tab .tab-txt",
+          "bytes": 60
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 70,
+          "selector": "#overlay .card.chest .battle-loot-summary",
+          "bytes": 325
+        },
+        {
+          "kind": "dead-rule",
+          "line": 79,
+          "selector": "#overlay .card.chest .battle-loot-summary b",
+          "bytes": 63
+        },
+        {
+          "kind": "dead-rule",
+          "line": 203,
+          "selector": "#overlay .card.bag-page .bag-sort .mini-btn",
+          "bytes": 201
+        },
+        {
+          "kind": "dead-rule",
+          "line": 207,
+          "selector": "#overlay .card.bag-page .bag-sort .mini-btn:hover",
+          "bytes": 217
+        },
+        {
+          "kind": "dead-rule",
+          "line": 213,
+          "selector": "#overlay .card.bag-page .bag-sort .mini-btn:active",
+          "bytes": 116
+        },
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay .card.bag-page .bag-sort .mini-btn:focus-visible,\n#overlay .card.bag-page .bag-head .help-btn:focus-visible",
+          "replacement": "\n#overlay .card.bag-page .bag-head .help-btn:focus-visible"
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-stash.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 91,
+          "selector": "#overlay .card:has(> .stash-shell)",
+          "bytes": 176
+        },
+        {
+          "kind": "dead-rule",
+          "line": 98,
+          "selector": "#overlay .card:has(> .stash-shell)::before",
+          "bytes": 61
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-upgrade.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 56,
+          "selector": "#overlay #hubMain.hub-upgrade .hub-card > h3 .set-tip",
+          "bytes": 228
+        },
+        {
+          "kind": "dead-rule",
+          "line": 61,
+          "selector": "#overlay #hubMain.hub-upgrade .hub-card > h3 .set-tip b",
+          "bytes": 75
+        }
+      ]
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 32,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example",
+          "bytes": 279
+        },
+        {
+          "kind": "dead-rule",
+          "line": 37,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-art",
+          "bytes": 85
+        },
+        {
+          "kind": "dead-rule",
+          "line": 38,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-art .hs-card",
+          "bytes": 138
+        },
+        {
+          "kind": "dead-rule",
+          "line": 41,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy",
+          "bytes": 137
+        },
+        {
+          "kind": "dead-rule",
+          "line": 44,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy > span",
+          "bytes": 96
+        },
+        {
+          "kind": "dead-rule",
+          "line": 45,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-copy small",
+          "bytes": 112
+        },
+        {
+          "kind": "dead-rule",
+          "line": 46,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example:focus-visible",
+          "bytes": 131
+        },
+        {
+          "kind": "dead-rule",
+          "line": 51,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example",
+          "bytes": 201
+        },
+        {
+          "kind": "dead-rule",
+          "line": 55,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example > .cls2-example-art",
+          "bytes": 151
+        },
+        {
+          "kind": "dead-rule",
+          "line": 58,
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference[data-base-departure] .cls2-example > .cls2-example-copy",
+          "bytes": 152
+        }
+      ]
+    },
+    {
+      "file": "game/css/scenes.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 357,
+          "selector": ".sellpost-coin",
+          "bytes": 434
+        },
+        {
+          "kind": "dead-rule",
+          "line": 363,
+          "selector": ".sellpost-coin .ic",
+          "bytes": 85
+        },
+        {
+          "kind": "dead-rule",
+          "line": 364,
+          "selector": ".shop-sellpost:hover .sellpost-coin",
+          "bytes": 187
+        }
+      ]
+    },
+    {
+      "file": "game/css/slots-cover.css",
+      "changes": [
+        {
+          "kind": "dead-branch",
+          "selector": "#overlay .pg.slot-page .slot-page-head .section-kicker,\n#overlay .pg.slot-page .slot-page-rule",
+          "replacement": "\n#overlay .pg.slot-page .slot-page-rule"
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "changes": [
+        {
+          "kind": "dead-rule",
+          "line": 109,
+          "selector": ".achievement-gallery .ag-badge-fill",
+          "bytes": 56
+        },
+        {
+          "kind": "dead-rule",
+          "line": 110,
+          "selector": ".achievement-gallery .ag-badge-lines",
+          "bytes": 81
+        },
+        {
+          "kind": "dead-rule",
+          "line": 111,
+          "selector": ".achievement-gallery .ag-badge text",
+          "bytes": 141
+        },
+        {
+          "kind": "dead-rule",
+          "line": 112,
+          "selector": ".achievement-gallery .ag-badge .ag-badge-number",
+          "bytes": 89
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "changes": [
+        {
+          "kind": "dead-keyframes",
+          "name": "characterSkinIn"
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "changes": [
+        {
+          "kind": "dead-keyframes",
+          "name": "characterSkinBackIn"
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "file": "game/css/base-camp-rework.css",
+      "line": 51,
+      "selector": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab,.logistics-sections button)",
+      "reason": "Would alter surviving specificity"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "line": 52,
+      "selector": "#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab.on,.logistics-sections button.on)",
+      "reason": "Would alter surviving specificity"
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "line": 60,
+      "selector": "#overlay #hubMain.pg.hub.base-camp :is(button,summary,.base-home-place i),\n  #overlay #hubMain.pg.hub.base-camp button::after",
+      "reason": "Would alter surviving specificity"
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "line": 63,
+      "selector": ".reduce-motion #overlay #hubMain.pg.hub.base-camp :is(button,summary,.base-home-place i),\n.reduce-motion #overlay #hubMain.pg.hub.base-camp button::after",
+      "reason": "Would alter surviving specificity"
+    }
+  ]
+}

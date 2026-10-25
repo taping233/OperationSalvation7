@@ -1,0 +1,14 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/sts2-agent-replay.test.js > battle-entry replay through the real Agent and BattleSession commands > stops recording immediately on an ACTION_THREW receipt
+[agent.act] battle:playCard 抛错: injected command failure
+
+·························································
+
+ Test Files  7 passed (7)
+      Tests  57 passed (57)
+   Start at  18:57:38
+   Duration  39.96s (transform 1.51s, setup 0ms, collect 4.91s, tests 34.97s, environment 12.23s, prepare 1.50s)
+

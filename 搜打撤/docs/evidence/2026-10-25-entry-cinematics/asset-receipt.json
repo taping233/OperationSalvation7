@@ -1,0 +1,18 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a172a6-8b07-7d41-91f8-570fabf91554\\exec-055aea73-d765-4f63-98f4-3db9c2c4bd27.png",
+  "nai": "nai-request.json",
+  "asset": "game\\assets\\scenes\\cinematic\\layer-descent-v1.webp",
+  "size": [
+    1344,
+    768
+  ],
+  "bytes": 36804,
+  "sha256": "4f11d26a1377b909829a77c30b6841151c683ba138255e426a567ee238ceafc1",
+  "method": "NAI5 base then built-in imagegen repaint",
+  "style_references": [
+    "game/assets/scenes/departure/city-reflection-v1.webp",
+    "game/assets/scenes/cinematic/camp-shelter-v1.webp",
+    "game/assets/scenes/cinematic/gate-cleft-v1.webp"
+  ],
+  "rejected": "First detailed winter-city repaint rejected; retained outside Git."
+}

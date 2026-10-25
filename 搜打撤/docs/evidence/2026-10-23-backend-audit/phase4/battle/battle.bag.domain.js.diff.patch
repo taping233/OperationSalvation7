@@ -1,0 +1,62 @@
+--- game/src/battle/bag/battle.bag.domain.js (before phase4)
++++ game/src/battle/bag/battle.bag.domain.js (after phase4)
+@@ -35,6 +35,14 @@
+   const sameBattle = marker => marker?.game === instanceRuntime.G && marker?.token === instanceRuntime.battleState.token;
+   const pendingItem = uid => sameBattle(pendingItems.get(uid)) ? pendingItems.get(uid) : null;
+   const getConsumedPile = () => readConsumed().filter(uid => !pendingItem(uid));
++  function healPlayer(n) {
++    if ((instanceRuntime.pstat.status.healban || 0) > 0) {
++      instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
++    } else {
++      instanceRuntime.G.heal(n);
++      instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
++    }
++  }
+   function restoreConsumed(n) {
+     let cnt = 0;
+     const available = getConsumedPile().slice().reverse();
+@@ -135,15 +143,7 @@
+     if (!marker) return;
+     try {
+     instanceRuntime.G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】`, 'sys');
+-    if (healM) {
+-      const n = +healM[1];
+-      if ((instanceRuntime.pstat.status.healban || 0) > 0) {
+-        instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
+-      } else {
+-        instanceRuntime.G.heal(n);
+-        instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+-      }
+-    }
++    if (healM) healPlayer(+healM[1]);
+     if (isCrystal) {
+       if (!restoreConsumed(3)) instanceRuntime.G.log('消耗牌堆是空的，没有可复原的卡牌', 'dim');
+     }
+@@ -213,12 +213,7 @@
+         return true;
+       }
+       if (op.op === 'heal') {
+-        if ((instanceRuntime.pstat.status.healban || 0) > 0) {
+-          instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${amount}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
+-        } else {
+-          instanceRuntime.G.heal(amount);
+-          instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+-        }
++        healPlayer(amount);
+       } else if (op.op === 'restoreConsumed') {
+         if (!restoreConsumed(amount)) instanceRuntime.G.log('消耗牌堆是空的，没有可复原的卡牌', 'dim');
+       } else if (op.op === 'energy') {
+@@ -552,12 +547,7 @@
+   function resolveSlamHeal(skill) {
+     instanceRuntime.set$energy(instanceRuntime.energy - skill.cost);
+     const n = skill.heal || 0;
+-    if ((instanceRuntime.pstat.status.healban || 0) > 0) {
+-      instanceRuntime.G.log(`[[icon:heart]] 禁疗中：回复 <b>${n}</b> 点生命无效（还剩 ${instanceRuntime.pstat.status.healban} 回合）`, 'warn');
+-    } else {
+-      instanceRuntime.G.heal(n);
+-      instanceRuntime.floats.push({ unit: 'self', text: '', cls: 'stk sticker-heal', warm: true });
+-    }
++    healPlayer(n);
+     instanceRuntime.G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：回复 <b>${n}</b> 点生命（-${skill.cost} 能量）`, 'sys');
+     switchSlamSkill(skill);
+   }

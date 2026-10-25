@@ -1,0 +1,31 @@
+{
+  "url": "http://127.0.0.1:5358/",
+  "port": 5358,
+  "pid": 48220,
+  "session_id": 90293,
+  "cwd": "D:\\素材\\代号柒",
+  "source": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\review",
+  "status": "running-retained-for-owner-review",
+  "initial_checks": {
+    "current_window": "1617x956, Codex built-in browser",
+    "catalog_cards": 16,
+    "current_images_loaded": true,
+    "persisted_card_records": 4,
+    "test_input": "No agent test input: user started entering actual feedback; agent stopped UI interaction."
+  },
+  "revision_checks": {
+    "current_window": "1296x956, Codex built-in browser",
+    "catalog_cards": 16,
+    "revised": 12,
+    "preserved": 4,
+    "persisted_card_records": 16,
+    "visible_card": "tt7-swordimmortal",
+    "version_label": "内置修订 · 第 2 版",
+    "screenshot": "round2/review-page.png",
+    "owner_is_entering_new_feedback": true,
+    "agent_test_input": false
+  },
+  "runtime_card_art_changed": true,
+  "final_runtime_selection": "round3/final-selection.json",
+  "page_retained_at_v2_by_owner_request": true
+}

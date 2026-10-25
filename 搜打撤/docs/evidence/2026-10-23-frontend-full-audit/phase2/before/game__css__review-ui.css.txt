@@ -1,0 +1,47 @@
+/* Shared glass surfaces and reading controls; scene illustrations stay visible. */
+:root{--surface-panel:#192b33b8;--surface-raised:#233942b8;--surface-edge:#a7c1cb66;--surface-copy:#e8e9de;--surface-label:#d5c89d;--surface-focus:#e9d48b}
+.action-confirmation{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:#071117b8;color:var(--surface-copy);font:18px/1.65 "Microsoft YaHei",sans-serif}
+.confirmation-panel{box-sizing:border-box;width:min(680px,calc(100vw - 48px));padding:32px;background:var(--surface-panel);border:1px solid var(--surface-edge);box-shadow:0 20px 70px #0009;backdrop-filter:blur(20px) saturate(115%)}
+.confirmation-panel h2{margin:0 0 18px;color:var(--surface-label);font-size:26px}
+.confirmation-panel p{white-space:pre-line;margin:12px 0}
+.confirmation-actions{display:flex;justify-content:flex-end;gap:18px;margin-top:24px}
+.confirmation-actions button,.setting-binding-row button,.settings-input>button{border:1px solid var(--surface-edge);padding:12px 22px;background:var(--surface-raised);color:var(--surface-copy);font:inherit;cursor:pointer}
+.confirmation-actions .danger{border-color:#d89478;color:#ffd2bc;background:#573833}
+.confirmation-actions :focus-visible,.settings-input :focus-visible{outline:3px solid var(--surface-focus);outline-offset:4px}
+.confirmation-status{min-height:1.5em;color:#f2c49e}
+#sdt-term-tip{background:var(--surface-panel);border:1px solid var(--surface-edge);color:var(--surface-copy);backdrop-filter:blur(16px) saturate(115%)}
+#sdt-term-tip[hidden]{display:none!important}
+#cardZoom .cz-reading-layout{display:flex;align-items:center;gap:32px;position:relative;z-index:1;max-width:calc(100% - 64px)}
+body :is(.hs-card,.card-rules-copy,.cz-photo-info,.pv-desc) [data-term],body .d-term[data-term]{cursor:inherit;}
+#cardZoom .cz-list-nav{display:flex;align-items:center;justify-content:center;gap:32px;position:relative;z-index:2;color:var(--surface-copy);font-size:22px}
+#cardZoom .cz-list-nav button{background:var(--surface-panel);border:1px solid var(--surface-edge);color:var(--surface-label);font-size:36px;width:64px;height:54px;cursor:pointer}
+#cardZoom .cz-list-nav [hidden]{visibility:hidden;display:inline-block}
+#cardZoom .cz-list-nav :focus-visible{outline:3px solid var(--surface-focus)}
+.setting-binding-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,auto);align-items:center;gap:24px;min-height:64px;border-bottom:1px solid var(--surface-edge);font-size:22px}
+.setting-binding-row button{min-width:180px;padding:9px 20px}
+.settings-secondary{margin:10px 0;border-top:1px solid var(--surface-edge);padding-top:6px}
+.settings-secondary>summary{font-size:22px;line-height:1.6;padding:10px 0;cursor:pointer;color:var(--surface-copy)}
+.slot-card-archive{font-size:18px;line-height:1.6}
+.slot-archive-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 0}
+.save-status{display:flex;align-items:center;gap:8px;color:var(--surface-copy);font:18px/1.4 "Microsoft YaHei",sans-serif}
+.save-status[data-state="failed"]{color:#ffd09b}
+.save-status button{background:transparent;color:inherit;border:1px solid currentColor;padding:5px 10px;font:inherit}
+.reading-large .card-rule-tip p,.reading-large #sdt-term-tip,.reading-large #log,.reading-large .confirmation-panel p{font-size:26px!important;line-height:1.7}
+#runTopBar{position:fixed;top:0;left:0;right:0;height:80px;z-index:210;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:0 32px;box-sizing:border-box;background:#12242d99;border-bottom:1px solid var(--surface-edge);color:var(--surface-copy);pointer-events:none;backdrop-filter:blur(18px) saturate(115%)}
+#runTopBar[hidden]{display:none!important}
+#topBtns>.save-status:not([data-state="failed"]){display:none}
+#topBtns>.save-status[data-state="failed"]{padding:8px 12px;background:var(--surface-panel);border:1px solid var(--surface-edge);backdrop-filter:blur(16px)}
+#runTopBar>*{pointer-events:auto}
+.run-top-resources,.run-top-actions{display:flex;align-items:center;gap:24px;min-width:0}
+#runTopBar #heroAva{position:relative;width:52px!important;min-width:52px!important;height:60px!important;overflow:hidden;flex:0 0 52px!important}
+#runTopBar #resHud,#runTopBar #hpHud{position:static!important;display:flex!important;transform:none!important;margin:0!important;inset:auto!important}
+#runTopBar #resHud{order:2;gap:24px;background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+#runTopBar #hpHud{order:1;width:200px;height:52px}
+#runTopBar #expeditionChapter{position:static!important;transform:none!important;inset:auto!important;flex:1;min-width:0;display:flex!important;align-items:center;justify-content:center;gap:12px;pointer-events:none}
+#runTopBar #hpHud .map-health-orb{display:none}
+#runTopBar button{position:relative;inset:auto;transform:none;width:48px;height:48px;border:1px solid var(--surface-edge);background:var(--surface-panel);color:var(--surface-copy);border-radius:3px;cursor:pointer}
+#runTopBar .save-status button{width:auto;height:auto}
+body.lobby #runTopBar,body:has(#cardZoom) #runTopBar,body:has(#actionConfirmation) #runTopBar{display:none}
+#overlay:has(.node-pg,.reward-scene,.battle-stage) .pg-head{padding-top:90px}
+.slot-card-archive{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-size:15px}
+.slot-state-error .slot-card-status{color:#f0bf8f}

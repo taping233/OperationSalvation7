@@ -1,0 +1,42 @@
+[
+  {
+    "check": "base-syntax",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "check": "battle-syntax",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "check": "archive-syntax",
+    "exit_code": 0,
+    "output": ""
+  },
+  {
+    "check": "whitespace",
+    "exit_code": 0,
+    "output": "warning: in the working copy of '搜打撤/game/src/hub/base.js', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '搜打撤/game/src/hub/battle-settlement.commands.js', CRLF will be replaced by LF the next time Git touches it\n"
+  },
+  {
+    "check": "base-numstat",
+    "exit_code": 1,
+    "output": "warning: in the working copy of '搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/storage/pending-applied/base.js.before.txt', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '搜打撤/game/src/hub/base.js', CRLF will be replaced by LF the next time Git touches it\n12\t22\tdocs/evidence/2026-10-23-backend-audit/phase3/storage/pending-applied/base.js.before.txt => game/src/hub/base.js\n"
+  },
+  {
+    "check": "battle-numstat",
+    "exit_code": 1,
+    "output": "warning: in the working copy of '搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/storage/pending-applied/battle-settlement.commands.js.before.txt', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '搜打撤/game/src/hub/battle-settlement.commands.js', CRLF will be replaced by LF the next time Git touches it\n2\t2\tdocs/evidence/2026-10-23-backend-audit/phase3/storage/pending-applied/battle-settlement.commands.js.before.txt => game/src/hub/battle-settlement.commands.js\n"
+  },
+  {
+    "check": "archive-numstat",
+    "exit_code": 1,
+    "output": "1\t1\tdocs/evidence/2026-10-23-backend-audit/phase3/storage/pending-applied/save-archive.js.before.txt => game/src/hub/save-archive.js\n"
+  },
+  {
+    "check": "references",
+    "exit_code": 0,
+    "output": "game/src/hub/save-archive.js:7:import { validSlot } from './commands.shared.js';\ngame/src/hub/save-archive.js:95:      if (!validSlot(slot)) return failure('INVALID_SLOT', '请选择 1～5 档位');\ngame/src/hub/save-archive.js:108:      if (!validSlot(slot) || typeof text !== 'string' || text.length > 20_000_000) return failure('INVALID_ARCHIVE', '存档包或目标档位无效');\ngame/src/hub/save-archive.js:111:      if (!plain(parsed) || parsed.format !== FORMAT || parsed.version !== 1 || !validSlot(parsed.sourceSlot) || typeof parsed.checksum !== 'string') return failure('INVALID_ARCHIVE', '存档包格式不支持');\ngame/src/hub/save-archive.js:155:      if (!validSlot(slot) || !confirm) return failure('CONFIRM_REQUIRED', '请明确确认恢复导入前的原档位');\ngame/src/hub/battle-settlement.commands.js:2:import { clone, fail, freezeDeep, validSlot } from './commands.shared.js';\ngame/src/hub/battle-settlement.commands.js:63:    if (!validSlot(slotId)) return fail('INVALID_ARGUMENT', 'slotId 必须为 1～5');\r\ngame/src/hub/battle-settlement.commands.js:193:    const baseSnapshot = base.value;\ngame/src/hub/battle-settlement.commands.js:212:      afterBase, afterRun: snapshot, output: { eggBattles, ...(progression ? { progression } : {}) },\ngame/src/hub/battle-settlement.commands.js:229:    if (!validSlot(slotId) || getActiveSlot() !== slotId || getBase().slot !== slotId) return fail('STALE_SLOT', '档位已切换，旧结算已取消');\r\ngame/src/hub/commands.shared.js:3: * 八个命令文件此前各自手抄 clone / fail / stable / validSlot / freezeDeep，\ngame/src/hub/commands.shared.js:32:export const validSlot = slotId => Number.isInteger(slotId) && slotId >= 1 && slotId <= 5;\ngame/src/hub/base.js:252:  function persistEggCounter(field, next) {\r\ngame/src/hub/base.js:264:    persistPity: next => persistEggCounter('eggPity', next),\r\ngame/src/hub/base.js:265:    persistBattles: next => persistEggCounter('eggBattles', next),\r\n"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "path": ".tmp/floor-elite-art-1024/layer-2.png",
+      "bytes": 91087,
+      "sha256": "7b29e8596807a64c592405180ca1f86d7cfd9b095a750ec15208d0fa8f551326",
+      "acquisition": "当前Codex内置浏览器、当前窗口截图，devMode三人美术构造场景"
+    },
+    {
+      "path": ".tmp/floor-elite-art-1024/layer-3.png",
+      "bytes": 90366,
+      "sha256": "f71f78e31a85745bfb7c92df10f8a58923fd7b9869e07b17c9a4f31661645c16",
+      "acquisition": "当前Codex内置浏览器、当前窗口截图，devMode三人美术构造场景"
+    },
+    {
+      "path": ".tmp/floor-elite-art-1024/layer-4.png",
+      "bytes": 85407,
+      "sha256": "dbd0b507b5f423e4b1578fbf0158d2a38278df44772962e97ec2c2758134bb40",
+      "acquisition": "当前Codex内置浏览器、当前窗口截图，devMode三人美术构造场景"
+    }
+  ],
+  "excluded": "final-battle.png被共享树热更新重载至标题，不作为验收图；先前已保存的三组战场截图和9张加载回读有效"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "installed",
+  "tool": "built-in image_gen",
+  "asset": "game\\assets\\reconstruction\\wallpaper-xingyue-reeds-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 383466,
+  "sha256": "dea7e99b31a961ea1c9a74d96bc1c90b0ac186baa744597ba04e9188155ea8bf",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-af28e8f8-d796-461e-98ae-1045e9a0640b.png",
+  "source_sha256": "3f865d1047cf415024d79136068a717c41cb15f5a9a6c5f1027617336f4c9d85",
+  "previous_receipt": "receipt.json",
+  "before": ".tmp\\nai\\xingyue-reeds-reset-1024\\before-button-cloud.webp",
+  "before_sha256": "2705a082ab551cb8cdfb63cc9dd752f88624a4b06c6c14d9ac3712f368af169b",
+  "generated_copy": ".tmp\\nai\\xingyue-reeds-reset-1024\\builtin-button-cloud.png",
+  "prompt_file": "button-cloud-prompt.txt",
+  "reference_roles": [
+    "本轮已实装换装图为编辑目标",
+    "原NAI5底稿为云层质感权威"
+  ],
+  "changes": "开襟外套改为一侧三颗单排扣、对侧三个对应扣眼；云层改回柔和蓝灰大块层次，收掉细碎金边和强烈光束；保留人物、衣色、姿态与芦苇构图",
+  "verification": "按老板要求未测试、未游戏实页；生成画面目视后转换WebP并登记尺寸/SHA；原PNG在根.tmp不进Git"
+}

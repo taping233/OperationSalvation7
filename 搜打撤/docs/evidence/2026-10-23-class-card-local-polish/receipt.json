@@ -1,0 +1,503 @@
+{
+  "count": 31,
+  "runtimeInstalled": true,
+  "items": [
+    {
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "who": "无",
+      "original": "game/assets/cards/martial-cmtn1i64j7y7.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-175fa13e-3c4d-4e35-b227-5564a5ac19b1.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/cmtn1i64j7y7.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "2dd1c22236e269037e1c4454a57de7c05d8fc761d2e22690abbe8c44be2c2bc2",
+      "rawSha256": "6a1e8222173ec7b09f3bdca86e80bec41e8d39943c4af90af9ba128982534a40",
+      "bytes": 180138,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急-改",
+      "who": "无",
+      "original": "game/assets/cards/martial-cmtn1wnhhym.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b16c9f53-2b27-4584-bd93-b2d3a56453f7.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/cmtn1wnhhym.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "637aa8c7b538e036206716ccfe11f9a1ada493cac1bd482c358814d9e4bc3945",
+      "rawSha256": "ef6c52b4449ff79987270f94f39cb7c27c8849c9a113f201f51f3660dd4a17bf",
+      "bytes": 281912,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-marchrush",
+      "name": "急行军",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-marchrush.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-775ee708-2ad4-4704-b2a5-e966d4e2a913.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-marchrush.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "a0c05d9752687e4ce1367f388e944f01b4cd75994cab41c0e953c33a8b62b314",
+      "rawSha256": "9ac1c3f5b77c93a3019b63817bde12dafe720e18bf0c83b28e7d310cfc82249a",
+      "bytes": 187160,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-bulwark",
+      "name": "坚盾",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-bulwark.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-74a7c87f-0d4e-4e73-a1d9-3d24690a534b.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-bulwark.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "9223b7e13f19cf79eeca4ec992d70902eda5e73177135b7421521b53584cf864",
+      "rawSha256": "064b742f9d04ad2f8b31fa19fa5f003a9878d409ae4290871a63acab6f5f0cdd",
+      "bytes": 334784,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-ironcharge.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-faceff6d-630c-4379-bead-3e6eb5f22c4e.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-ironcharge.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "77cdb564b1d933bca87f21d143d5fee8e27e5af80c056f38cd3be0e441d6b54c",
+      "rawSha256": "429933ca9d772cb971c46eb30eef1fe7af25ddf5ac11947666b4a1718dd13756",
+      "bytes": 188932,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-fullstrike",
+      "name": "全力一击",
+      "who": "黑像",
+      "original": "game/assets/cards/martial-tt7-fullstrike.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-dadc75e6-a289-4034-9e9c-b146bb8f590c.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-fullstrike.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "da97c061bb035cd14aa9785465fd9b67e2aee1a7cd3d97555657c75e884ed425",
+      "rawSha256": "50ed885f3d53c10cf2e66c0f11fd7cd3590c5cfbc700c80e892c162f653e0840",
+      "bytes": 180322,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-arcanebolt",
+      "name": "奥术弹",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-arcanebolt.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-9618cdb2-247a-4cdc-9a87-da16355307c0.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-arcanebolt.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "06b39f2ce31ad1f77ff18973497965939f8b75c94296dff232ecf364d1ad87f6",
+      "rawSha256": "473d2026c8113545969f4e0e8dab0362071af43d0d4f39389121b5c685f4c510",
+      "bytes": 238644,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-frozenight",
+      "name": "冰封千里",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-frozenight.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-894da6d5-0a95-4694-8d03-661bfd54b9b3.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-frozenight.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "ebe3f978cf777c13b7741a6f39db8065f6e2818ffe71eaff1476c8e8391a8c66",
+      "rawSha256": "eea18a7fd6f373730808728e95044e88eb0811331d9b35c28c028d44735bf38e",
+      "bytes": 298846,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-maxsupply",
+      "name": "法力补给",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-maxsupply.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-fbe82dcf-0914-4bb9-bcc8-5e699bf7af00.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-maxsupply.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "948d830ed5a8513d0fcf93a08b96a12f6cd4dc19e5add59f992e805be015a1b0",
+      "rawSha256": "e4108187399214407771498fa2e2a53105f8cab07974cec38f049e98cc910a4e",
+      "bytes": 267486,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-stratagem",
+      "name": "法师锦囊",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-stratagem.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bc3acb24-b9d9-4200-bd99-14b631163a67.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-stratagem.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "574ccd94663674e0429e6f73a36e03eaf6e88b0d2fe3f0699f03b7ed01da22b8",
+      "rawSha256": "16b538101b4ef91c09312a1010c1c766cc44a64c152487b9032846de81ac314d",
+      "bytes": 241870,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt3-firm-barrier",
+      "name": "坚冰结界",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt3-firm-barrier.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-35ec9f8b-019a-414f-ad3a-a25d5287791d.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt3-firm-barrier.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "4e2de45814daf8e9ad234b3d3f4191e6a50dbc062657b1a274dde21b5f7466a8",
+      "rawSha256": "af3cc766f504336b19168fc4d6f7461d172f7e2a5d790eefb49c85115bed7fe1",
+      "bytes": 175762,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-energize",
+      "name": "聚能",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-energize.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-209b60df-d44e-422f-8b58-9be283626a31.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-energize.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "4088e02b34a04a9b0e59a2dce156e926ee9b0dbc3f4c03c068c2254f6d678fc3",
+      "rawSha256": "e8457831e8dab0745d2a212691a5fdf04511dbb8cb50809b3aa288b46f13d841",
+      "bytes": 199854,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "cmtn1p9vb5au",
+      "name": "千变万化",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-cmtn1p9vb5au.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2a17cd25-ce4e-4eca-a232-1b6ac955c9c0.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/cmtn1p9vb5au.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "7c0128ce71d20e4e74dbdbfcd713dc90b65c88ce6c37384f964bb64d1cb58dc1",
+      "rawSha256": "05ad47f6e23ad3c4309dc2f7797c6b06c859bfef9de65a599384a8536ade8830",
+      "bytes": 251200,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-elementstorm",
+      "name": "元素风暴",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-elementstorm.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-15eed2f8-e052-4242-970c-2a21287e8b78.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-elementstorm.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "528bbbf60fc842271b6e0049657c046fdabbecf6bc9fd842d2aa21f81d651515",
+      "rawSha256": "e36e36df30471cfb6ed739c28db2049178b653af7f3419d5123e5022c9532c87",
+      "bytes": 189666,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-recruit",
+      "name": "征召",
+      "who": "白塔",
+      "original": "game/assets/cards/spell-tt7-recruit.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-2572003f-c3db-4ee2-ad4d-f84539837527.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-recruit.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "5159f269526aaaeef83bd31df637da043b02f4542da43259ca57cb4ea5ce1125",
+      "rawSha256": "5d697c884805de7ffc3ccfcf01000e79e56d3d0a1135915b6ceb97de27f970ca",
+      "bytes": 151934,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt3-petal",
+      "name": "花瓣法阵",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-petal.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-efc43242-c010-4eac-b0e3-9c24085b20af.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt3-petal.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "9182940dc8e0f801dcfa4bb984ec80689233d317d0d119606ba42e95657d2a99",
+      "rawSha256": "8f4f4148ec6119bbda4373e0b0e663673e9d749b981be08aa909ad681a0a7101",
+      "bytes": 307526,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-silence",
+      "name": "禁言术",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-silence.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-7a342e42-27fc-476e-ae11-da49661a3160.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-silence.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "0ee17312ceaf081020548c653f575a1739c29ce9ae08fda32a578a33e44484f9",
+      "rawSha256": "0f5d442167920617955d99e50bf1ae77c63b9f7caad88a04104e89550dee9684",
+      "bytes": 141476,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt13-mind-control",
+      "name": "精神控制",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt13-mind-control.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-61f2106e-c8c1-49a2-956a-29579d716d96.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt13-mind-control.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "1a79509a574760a818a778fe2392236a84e71591a5e738cfb1b0a44d7df75748",
+      "rawSha256": "73c78885fc8934adcca403f65bc244781e88c0837bb88ac09659a3fab8ef0df8",
+      "bytes": 147748,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt3-nature-form",
+      "name": "满月形态",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-nature-form.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-773a9462-373e-4b85-b6d7-4704dcf621fd.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt3-nature-form.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "f3bad3c9900c70c713a1460827ca13b98a8b5a3a1fa2e3efed10d441a59e473c",
+      "rawSha256": "ca731926b38ceb47cc38e00860ec62514f611641e94122e962b94c8292b54560",
+      "bytes": 226380,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-provoke",
+      "name": "扰敌",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-provoke.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-98af7f79-8825-4acf-b4e5-ad9c94958510.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-provoke.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "c6c6f3b2bbab63b7a385399a6d69dbaaff2d2c2609e5c5cd0c0739bc2af93beb",
+      "rawSha256": "bc74fc818f593d8b00469ff56c32316438d30588eb30fc158f1400af10aced3f",
+      "bytes": 160790,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt3-holy-shield",
+      "name": "圣盾",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt3-holy-shield.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-34f9554e-6b63-4c18-856c-396f7a7aabad.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt3-holy-shield.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "03754f5250cd74fba6d22196542d755c6bedf034571958e166b0a60d6f2482ba",
+      "rawSha256": "539929d026998b8f18d1dc86c24ddc6a42d6e262e67b061de303a8f9c92c1fe8",
+      "bytes": 296024,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-holyheal",
+      "name": "圣光治愈",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-holyheal.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-27e8c786-585d-4346-b15a-f754b5f83676.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-holyheal.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "f692742dba3e4b8c3678d5f62222d7bb05ef58a43b37a68be637582aee636987",
+      "rawSha256": "e020f06d2835ac001977d88fe3c149700b674a13c5f11a8315ec0e88f8e94789",
+      "bytes": 221294,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-bloodpotion",
+      "name": "噬血术",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt7-bloodpotion.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-814cc127-8b6d-4ceb-860e-ee5de4eab21b.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-bloodpotion.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "fff556b9a8fc0339a3dbeb70968f3cd8915c2b133b33124e267cb97203f765dc",
+      "rawSha256": "93e30e1b123f25aaa8916410e8b19162cf684322a742a60b1b13853653dad0a0",
+      "bytes": 156104,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt13-stellar-divination",
+      "name": "星辰占卜",
+      "who": "星月",
+      "original": "game/assets/cards/spell-tt13-stellar-divination.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-c9764ac2-5549-4158-89e9-7beba647707d.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt13-stellar-divination.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "11492a2f0b4c5293352639c4845f87afbbbfe45eb5ee2f7978e316445ef06cbe",
+      "rawSha256": "351ecf50f6da603077f6e16dba128ebcc1326038bc55b67f6d514541f79cf22e",
+      "bytes": 262666,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt3sp-shadowshot",
+      "name": "暗影射击",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt3sp-shadowshot.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-693a5c83-8c95-4793-b537-8ac9b91d31ba.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt3sp-shadowshot.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "c239926d574763c5f4efa7b85972f624aa7c735e9f789318e4fcad894a2b9d09",
+      "rawSha256": "64cd3db5f556611ca5afdaa70eda66dbbd07f79d42661a8f408419e9728db6a8",
+      "bytes": 175908,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "cmtn1gfhczzj",
+      "name": "厄运",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-cmtn1gfhczzj.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-b4ec291a-7ed1-4791-a69d-b9ba678659a1.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/cmtn1gfhczzj.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "7254a778439a29bd2bb2192636511cc6d5ae698fb8a317bdded0d48a3d607520",
+      "rawSha256": "a1098cf1b1461cf37342482e08d205ae9f13a50a206ebc6ec61d432ce766a9db",
+      "bytes": 161552,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "cmtn1ntxzoc4",
+      "name": "火焰形态",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-cmtn1ntxzoc4.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-8201d62f-5f6c-4c3c-a0da-9a36ad57eb94.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/cmtn1ntxzoc4.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "b7815d7fa34b49f46ca8c1d3bfc62ac505cdb87fc25a81246edffaef4766ecbf",
+      "rawSha256": "bbf41454c25e3d9cf08edeebbff2e7e0590e8999a14d1434215e3b997ec13078",
+      "bytes": 307502,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt13-soul-contract",
+      "name": "灵魂契约",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt13-soul-contract.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-903a1854-0093-4d40-b4db-583f24a6b0d3.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt13-soul-contract.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "3004cbb99a88d5efe28c63ad184fff7c2de4dd8bb5cf0f099eab506187a1c613",
+      "rawSha256": "569369ce81f3c3c5061ee94d8e9faefc9cc0fdea86c1019f81012029b41f6b29",
+      "bytes": 300548,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-abysscurse",
+      "name": "深渊诅咒",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt7-abysscurse.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-3f778f62-45f2-4d50-9cc2-8292f4a3706b.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-abysscurse.webp",
+      "size": [
+        1440,
+        1092
+      ],
+      "sha256": "c3610cb98b2c774ba6b7f5e4a7041e114ef6a24bdcb542268d18efae09b29a6e",
+      "rawSha256": "6f5658f644caf7ffe0de36b8a92e791d54796e4b33203c1712606957bbad0f7c",
+      "bytes": 190666,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-meteorstrong",
+      "name": "星陨之力",
+      "who": "常无欲",
+      "original": "game/assets/cards/spell-tt7-meteorstrong.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-bb58f1f7-75ac-44b3-9b8c-50ccde785293.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-meteorstrong.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "sha256": "925b3b13954a199489898807f9673c8d1fc733955c268b7247007e911fc3dee7",
+      "rawSha256": "99fb2179d2f5310f7e63f8812a60b1f4e354ed078aab25e55571a89ae4f23b8c",
+      "bytes": 277716,
+      "status": "老板授权，已实装"
+    },
+    {
+      "id": "tt7-darkfort",
+      "name": "黑暗吊坠",
+      "who": "常无欲",
+      "original": "game/assets/cards/equip-tt7-darkfort.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16883-69e5-77f2-94fb-0c823676537a\\exec-018c5c80-7f73-4a50-aa0e-a42d1e39642f.png",
+      "candidate": "game/art-source/class-card-local-polish-20261023/tt7-darkfort.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "f84075b35a2f685b8997429761eda057b870c570bf846ed22d2b80359893c8f0",
+      "rawSha256": "d6ad429048bebd082a38776fb70f08011fd7ce09768d128ea90f06ca1baa141d",
+      "bytes": 60524,
+      "status": "老板授权，已实装"
+    }
+  ],
+  "installationReceipt": "docs/evidence/2026-10-23-class-card-local-polish/install-31-20261023/receipt.json"
+}

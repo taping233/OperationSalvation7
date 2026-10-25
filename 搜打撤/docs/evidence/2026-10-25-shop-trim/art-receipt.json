@@ -1,0 +1,9 @@
+{
+  "asset": "game/assets/cards/shop-mystery-parcel-1025.webp",
+  "bytes": 78934,
+  "sha256": "07f914a4752efe17ff49d8a020defa519f2a35c759cb930c6130961e022f2734",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a172b6-ea7d-7a42-8583-72f75f7717b8\\exec-6574d785-061d-4c27-b2e9-274fb43f9594.png",
+  "sourceSha256": "87f266fd563dcbfbd6bb6d951703a7f786897a838445c15c02e82ac954fec7f9",
+  "method": "Built-in ImageGen; Pillow resize/WebP encoding only",
+  "verification": "Art generation visually reviewed; no art tests/browser/build per game-card-art-fast"
+}

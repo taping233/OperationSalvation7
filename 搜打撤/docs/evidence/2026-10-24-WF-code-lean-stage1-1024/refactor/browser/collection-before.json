@@ -1,0 +1,77 @@
+{
+  "scope": "Actual modules and real IAB input on isolated memory collection; no gameplay save",
+  "initial": {
+    "count": "48 张已收藏",
+    "detail": "应急绷带",
+    "page": "1 / 4",
+    "rects": [
+      {
+        "height": 720,
+        "selector": "#hubMain",
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "height": 527.5125122070312,
+        "selector": ".collection-cards-v4",
+        "width": 1048.2750244140625,
+        "x": 169.3249969482422,
+        "y": 127.4625015258789
+      },
+      {
+        "height": 266.2375183105469,
+        "selector": ".collection-v12-stage",
+        "width": 1048.2750244140625,
+        "x": 169.3249969482422,
+        "y": 183.71250915527344
+      },
+      {
+        "height": 195.6999969482422,
+        "selector": "[data-card-browser]",
+        "width": 1048.2750244140625,
+        "x": 169.3249969482422,
+        "y": 459.2749938964844
+      }
+    ],
+    "selected": [
+      "starter-emergency-bandage"
+    ]
+  },
+  "search": {
+    "count": "匹配 3 / 已收藏 48",
+    "detail": "两把钥匙",
+    "page": "1 / 1",
+    "visible": [
+      "选择两把钥匙",
+      "选择一把钥匙",
+      "选择三把钥匙"
+    ]
+  },
+  "empty": {
+    "count": "匹配 0 / 已收藏 48",
+    "detail": "",
+    "empty": "没有匹配的收藏卡牌显示全部收藏"
+  },
+  "page2": {
+    "count": "48 张已收藏",
+    "detail": "应急绷带",
+    "focus": "下一页卡牌",
+    "page": "1 / 4",
+    "visible": [
+      "选择应急绷带",
+      "选择初始攻击",
+      "选择铜币",
+      "选择两把钥匙",
+      "选择口粮",
+      "选择金币",
+      "选择经济卡包",
+      "选择银币",
+      "选择一把钥匙",
+      "选择能源结晶",
+      "选择三把钥匙",
+      "选择员工通行证B"
+    ]
+  },
+  "errors": []
+}

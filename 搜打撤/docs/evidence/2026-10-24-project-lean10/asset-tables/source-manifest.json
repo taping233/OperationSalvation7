@@ -1,0 +1,119 @@
+{
+  "cache": "node_modules/.cache/project-lean10-1024/ui-chain-before",
+  "files": [
+    {
+      "file": "scripts/asset-manifest-source.mjs",
+      "kind": "tool",
+      "before": null,
+      "after": {
+        "sha256": "aa4144a28f56d42cb3715da133d46d5bf1b7d2150387a49843f8e181cf67ee00",
+        "bytes": 1073,
+        "normalizedBytes": 1073,
+        "lines": 22,
+        "tokens": 250
+      }
+    },
+    {
+      "file": "game/tools/bake-card-thumbs.cjs",
+      "kind": "tool",
+      "before": {
+        "sha256": "fd06f7c20cae1a2a69ced871d1045b2ba2a0e00a5ef290eaeb083417f23e3b9e",
+        "bytes": 7271,
+        "normalizedBytes": 7271,
+        "lines": 141,
+        "tokens": 1319
+      },
+      "after": {
+        "sha256": "3508124d9c23f084da292f229e6df83b34dec81131845fd4a48bd8d88982b5a7",
+        "bytes": 7366,
+        "normalizedBytes": 7366,
+        "lines": 142,
+        "tokens": 1324
+      }
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "kind": "runtime",
+      "before": {
+        "sha256": "fce7ff6407be53c1d530c6dd36306d881d068232c2f9e553fe55eae1f38d990b",
+        "bytes": 40383,
+        "normalizedBytes": 40383,
+        "lines": 970,
+        "tokens": 1936
+      },
+      "after": {
+        "sha256": "21f155079712b6774fb703185f293fd1c930a30fadaf72a42603897be36315d5",
+        "bytes": 26711,
+        "normalizedBytes": 26711,
+        "lines": 1083,
+        "tokens": 2461
+      }
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "kind": "runtime",
+      "before": {
+        "sha256": "16a57337292f59096ef3eebfe9ff6d9c7256f71f4cb91c11d25dfa2eadd2175f",
+        "bytes": 12435,
+        "normalizedBytes": 12435,
+        "lines": 333,
+        "tokens": 662
+      },
+      "after": {
+        "sha256": "52c659d7b8341a8b2a9366a64b6f211333359d5af2f82c9206fc2bbea0298f8d",
+        "bytes": 10688,
+        "normalizedBytes": 10688,
+        "lines": 356,
+        "tokens": 782
+      }
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "kind": "runtime",
+      "before": {
+        "sha256": "8b2fbaa45c5827c610c7063899704f55074435be4edd10edf995604e86a4848b",
+        "bytes": 10350,
+        "normalizedBytes": 10237,
+        "lines": 113,
+        "tokens": 2059
+      },
+      "after": {
+        "sha256": "64753bbe0eeae4c2582b64e86d8e054622d4bd78d3b4522ae2167046ac99e861",
+        "bytes": 8032,
+        "normalizedBytes": 8032,
+        "lines": 173,
+        "tokens": 1494
+      }
+    },
+    {
+      "file": "tests/asset-manifest-source.test.js",
+      "kind": "test",
+      "before": null,
+      "after": {
+        "sha256": "0d6ae76ec98aab3a1054d66a7aaff54931a2ac4a05fbcf30d9b5ee68c9d7c93c",
+        "bytes": 1428,
+        "normalizedBytes": 1428,
+        "lines": 27,
+        "tokens": 297
+      }
+    },
+    {
+      "file": "tests/runtime-asset-aliases.test.js",
+      "kind": "test",
+      "before": {
+        "sha256": "c65b25fd165f777ebe833022a1a605410e3831e4e79fe8b0e0fadb532486f55b",
+        "bytes": 22496,
+        "normalizedBytes": 22496,
+        "lines": 382,
+        "tokens": 4575
+      },
+      "after": {
+        "sha256": "bb2de51f1f99d5242d36cebdda2e596b987ddd9552704e6d3854eaaa6671790d",
+        "bytes": 22786,
+        "normalizedBytes": 22786,
+        "lines": 384,
+        "tokens": 4632
+      }
+    }
+  ]
+}

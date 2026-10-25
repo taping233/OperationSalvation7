@@ -1,0 +1,45 @@
+{
+  "comparison": "Same 10 failures with new shared event/reward layout wrappers disabled in an in-memory transform. No working-tree files were reverted. Entry supply CSS tests read only pre-existing CSS sources unchanged by this task.",
+  "failed": [
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "test": "真实小/中宝箱的基础候选与附赠边界 large 保持全部领取，宠物蛋与原有附赠不受选择边界影响"
+    },
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "test": "真实小/中宝箱的基础候选与附赠边界 旧小箱one快照保留三张及原领取模式，不按单卡配置裁剪"
+    },
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "test": "真实小/中宝箱的基础候选与附赠边界 旧小箱all快照保留三张及原领取模式，不按单卡配置裁剪"
+    },
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "test": "真实小/中宝箱的基础候选与附赠边界 旧小箱undefined快照保留三张及原领取模式，不按单卡配置裁剪"
+    },
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "test": "三选一与附赠的总览状态连续性 尚未选择时总览只陈述选择规则，不提前宣布放弃"
+    },
+    {
+      "file": "entry-supply-presentation.test.js",
+      "test": "入城补给独占呈现边界 入城补给使用统一居中卡列，卡面宽度不因奖励计数改变"
+    },
+    {
+      "file": "entry-supply-presentation.test.js",
+      "test": "入城补给独占呈现边界 1188宽当前窗口的提示正文至少13px，收下和整理按钮至少36px高"
+    },
+    {
+      "file": "entry-supply-presentation.test.js",
+      "test": "入城补给独占呈现边界 进度锚点与完成态只属于入城补给，离开动作和固定页脚共用"
+    },
+    {
+      "file": "node-cancel-semantics.test.js",
+      "test": "节点取消语义：关闭不能跨层或开始撤离 显式点击终局撤离仍调用原撤离事务"
+    },
+    {
+      "file": "node-retrigger.test.js",
+      "test": "节点完成/离开后的消耗时机（2026-09-20 定版） F38 真实新局保存/读取保留轮换开关，缺轮换字段的快照与旧种子档均继续旧遭遇"
+    }
+  ]
+}

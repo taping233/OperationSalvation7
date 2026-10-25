@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T09:08:27.685Z",
+  "inputKind": "real-input",
+  "detail": "真实点击开发遭遇战并等待场景解码可见；本次捕获与目视在同一调用内，当前窗口，不写存档。",
+  "screenshot": {
+    "path": "after-stable.png",
+    "bytes": 89584,
+    "sha256": "924ed77e048411930daa42904cb33b81cdbe0ca58a7dee68cb611661f7374547"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

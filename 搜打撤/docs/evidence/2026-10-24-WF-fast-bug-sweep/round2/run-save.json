@@ -1,0 +1,46 @@
+{
+  "task": "WF-fast-bug-sweep-r2-1024/run-save",
+  "status": "three-new-fixes-source-frozen-targeted-passed",
+  "newRootCauses": 3,
+  "priorRoundFixesNotCountedAgain": 3,
+  "sourceFiles": ["game/src/hub/base-state.js", "game/src/hub/recoverable-pair.js", "game/src/ui/game.menu.js"],
+  "fixes": [
+    {
+      "id": "FAST-RS-R2-1",
+      "summary": "宠物字典内部坏条目导致真实升级失败，数组型记录升级后扣除口粮却无法持久保存等级。",
+      "change": "只忽略非对象/数组宠物记录，对有效对象内非法等级回落1；旺财沿现有Base.use的默认拥有逻辑重建，其他坏宠物不免费发放；良好宠物进度不变。",
+      "test": "tests/fast-bug-sweep-round2-pet-state.test.js",
+      "red": {"failed": 6},
+      "integration": "真实Base.use→canUpgradePet→upgradePet→再use，验证仅扣2口粮、等级2持久化、其他宠物保持；覆盖字符串、数字、布尔、数组及坏等级。"
+    },
+    {
+      "id": "FAST-RS-R2-2",
+      "summary": "过期或读取失败的成对事务在判断无法执行前已创建恢复日志，给未发生的提交留下阻塞。",
+      "change": "写恢复日志前核对当前Base/Run对，拒绝时零写入；写日志后仍复检，保留对真实竞争第三值的保全和中断恢复契约。",
+      "test": "tests/fast-bug-sweep-round2-pair-preflight.test.js",
+      "red": {"failed": 3},
+      "integration": "Base/Run任一已过期均无日志、无数据改写；重新准备后重建事务模块正常提交；初读失败零写入。原四阶段重启恢复、成对结算、出征与终局恢复用例继续通过。"
+    },
+    {
+      "id": "FAST-RS-R2-3",
+      "summary": "研究所或战斗保存回标题后保留旧活动标志，换入只有基地的另一个档位被基地守卫拒绝，无法进入。",
+      "change": "showTitle在已有保存完成之后清除nestActive及battleActive，切割旧运行态；不改保存串、不放宽基地对活动对局的守卫。两种模式属于同一标题边界根因，只计1项。",
+      "test": "tests/fast-bug-sweep-round2-title-slot-context.test.js",
+      "red": {"failed":2,"passed":2},
+      "green": {"files":5,"passed":80,"exitCode":0},
+      "command": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-round2-title-slot-context.test.js tests/leave-run-menu.test.js tests/menu-recovery-entry.test.js tests/hub-lazy-entry.test.js tests/menu-pages-lazy-entry.test.js --maxWorkers=2 --minWorkers=1 --reporter=dot --silent",
+      "integration": "真实menu facade→menu-leave保存→showTitle→menu-slots选2档→game.hub.js守卫；两种模式保存快照仍true、目标基地实际呈现端口被调用且DOM出现，原保存串不变；失败保存保持活动标志及原档位。仅替换持久化端口、加载演出、基地runtime呈现，不冒充实页或真实RunStorage读档。"
+    }
+  ],
+  "validation": {
+    "firstGreen": {"files": 9, "passed": 83, "exitCode": 0},
+    "finalCommand": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-round2-pet-state.test.js tests/fast-bug-sweep-round2-pair-preflight.test.js tests/recoverable-pair-types.test.js tests/base-meta.test.js tests/base-pet-egg.test.js tests/base-save-snapshot.test.js tests/base-write-lock.test.js tests/project-bug-sweep-round2-base-context.test.js tests/extraction-recovery.test.js tests/battle-settlement-recovery.test.js tests/terminal-recovery-matrix.test.js tests/departure-persistence.test.js tests/fast-bug-sweep-base-metadata.test.js tests/fast-bug-sweep-character-progress.test.js --maxWorkers=2 --minWorkers=1 --reporter=dot --silent",
+    "files": 14,
+    "passed": 192,
+    "exitCode": 0,
+    "eslintOwnPaths": "passed",
+    "diffCheckOwnPaths": "passed"
+  },
+  "handoffCandidate": "研究所切档候选经父扩展game.menu.js属地后已完成复现与最小修复，见FAST-RS-R2-3；该源码现冻结，父集中实页。",
+  "boundaries": "不build、不删除、不提交、不安装、无服务；避开其他冻结源码。父集中当前平台内置实页。第一轮广扫失败与证据沿用，不重复计数。"
+}

@@ -1,0 +1,12 @@
+{
+  "event_id": "tt6-demondeal",
+  "status": "preview-only",
+  "feedback": "反复重绘太多，脸上出现扭曲色块。",
+  "source": "../.tmp/nai/event-transport-preview-1025/nai45-draft.png",
+  "output": "../.tmp/nai/event-transport-preview-1025/builtin-from-nai-clean-face.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-4621fd57-e4a7-43b7-8adb-52982225e8c8.png",
+  "prompt_summary": "直接从NAI4.5原稿重新一次整合，不使用后续重绘图。脸部保持原稿五官与干净连续肤色，不叠块面、灰斑；背景保留低对比抽象虚化环境，简化车厢与补给箱。",
+  "sha256": "ab48ad7fe28ed08cf8ba5210331284c0ee148b35dcdb2bb38efd04ee2ec96919",
+  "runtime_replaced": false,
+  "checks_run": []
+}

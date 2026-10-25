@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-24",
+  "change": "支付代价和手选消耗复用注能材料窗口；本地草稿选取/撤回/确认，实际提交仍走pickHandSelect，保持真实注能与支付时序。",
+  "productionFiles": [
+    "game/src/battle/core/battle.hand-selection.js",
+    "game/src/battle/core/battle.exec-play.domain.js",
+    "game/src/battle/core/battle.selection-flow.domain.js",
+    "game/src/battle/view/battle.hand-material-selection.js",
+    "game/src/battle/view/battle.infusion-view.js",
+    "game/src/battle/view/battle.view.js"
+  ],
+  "newTest": "tests/hand-material-selection-window.test.js",
+  "validation": {
+    "newTests": { "command": "node node_modules/vitest/vitest.mjs run tests/hand-material-selection-window.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot", "passed": 9, "exitCode": 0 },
+    "oldTests": { "sourceCommand": "node node_modules/vitest/vitest.mjs run tests/hand-material-selection-window.test.js tests/battle-infusion-action-layout.test.js tests/sts2-infusion-flow-1021.test.js tests/tt7-hand-payment.test.js tests/sts2-hand-selection-contract.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot", "passed": 82, "filesPassed": 4, "runExitCode": 1, "note": "该次唯一失败为新夹具对排队消耗反应的断言，已修正并由后续9/9通过覆盖；旧82条输入未变，复用其通过证据。" },
+    "syntax": { "filesPassed": 7, "command": "node --check <上述6生产文件及新增测试，逐一执行>", "exitCode": 0 },
+    "eslint": { "command": "node node_modules/eslint/bin/eslint.js game/src/battle/core/battle.hand-selection.js game/src/battle/core/battle.exec-play.domain.js game/src/battle/core/battle.selection-flow.domain.js game/src/battle/view/battle.hand-material-selection.js game/src/battle/view/battle.infusion-view.js game/src/battle/view/battle.view.js tests/hand-material-selection-window.test.js", "exitCode": 0 },
+    "diffCheck": { "command": "git diff --check -- <上述6生产文件及新增测试>", "exitCode": 0 }
+  },
+  "browser": "父会话内置浏览器已验快意恩仇选取/撤回/确认、铸甲装备限制与10甲、普通血蝠注能取消/确认。",
+  "lineEndingProof": "material-window-eol.json；归一前正文与归一后全文SHA256均为23eef4d8356f6649999ae5c48c98278cb400682a5323f71fb5ba4a0561f6a699。",
+  "status": "冻结释放；未提交、未build。"
+}

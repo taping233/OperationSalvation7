@@ -1,0 +1,14 @@
+[
+  {
+    "level": "error",
+    "message": "TypeError: Cannot set properties of undefined (setting 'textContent')\n    at Object.refresh (http://localhost:5200/src/ui/hud.js?t=1792913011584:68:35)\n    at showTitle (http://localhost:5200/src/ui/game.menu.js?t=1792913011584:135:8)\n    at window.addEventListener.once (http://localhost:5200/src/game.boot.js?t=1792913010550:139:5)",
+    "timestamp": "2026-10-25T07:23:38.056Z",
+    "url": "http://localhost:5200/src/ui/hud.js?t=1792913011584"
+  },
+  {
+    "level": "warn",
+    "message": "HTML5 Audio pool exhausted, returning potentially locked audio object.",
+    "timestamp": "2026-10-25T07:27:36.976Z",
+    "url": "http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/howler.js?v=dd3bbbcd"
+  }
+]

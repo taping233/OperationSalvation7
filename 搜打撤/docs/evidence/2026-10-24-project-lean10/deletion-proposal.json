@@ -1,0 +1,178 @@
+{
+  "status": "approved-by-user-2026-10-24",
+  "preserve": "All existing current game, Agent, data, replay, preview, design, audition, and retired Home compatibility functionality. Pause-stage1 collection source is excluded.",
+  "rationale": "Files have no current executable consumer. Commented EXP CSS links are removed with deletion; surviving courtyard implementation and original MIT license retained.",
+  "normalizedBytes": 208320,
+  "percent": 3.184102475765009,
+  "files": [
+    {
+      "file": "game/css/page-deploy.css",
+      "bytes": 21287,
+      "normalizedBytes": 21287,
+      "lines": 421,
+      "tokens": null,
+      "sha256": "d0fef5779be87237d4bd4d3010400eabdd1681f75d218e476b62705fdc1007c1"
+    },
+    {
+      "file": "game/css/page-hub.css",
+      "bytes": 18872,
+      "normalizedBytes": 18872,
+      "lines": 357,
+      "tokens": null,
+      "sha256": "5142814eab7187a732d83efdf65e84f1bd1424415bffea4e3762b5a6bbc14141"
+    },
+    {
+      "file": "game/css/page-stash.css",
+      "bytes": 6753,
+      "normalizedBytes": 6659,
+      "lines": 94,
+      "tokens": null,
+      "sha256": "2a071926885f28ecac13a32c4de8b6b37db1f0f455f89c85057a5eb518153ae1"
+    },
+    {
+      "file": "game/css/page-upgrade.css",
+      "bytes": 7966,
+      "normalizedBytes": 7834,
+      "lines": 132,
+      "tokens": null,
+      "sha256": "1976a2752dc6e7b7fd8fe50bec96251a841e44ab6c77c29cfa8883423bb2ef72"
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "bytes": 14347,
+      "normalizedBytes": 14148,
+      "lines": 199,
+      "tokens": null,
+      "sha256": "e159ab6a68ff71fd703b7c9e21df5221a018c73a2bf86ca4cf9a863c84452b38"
+    },
+    {
+      "file": "game/css/settings-cover.css",
+      "bytes": 11962,
+      "normalizedBytes": 11798,
+      "lines": 164,
+      "tokens": null,
+      "sha256": "8ddcc119d9e4f2aa1b59c8fed7f2f5bfde97827828b58ad7cdbee541d980a8a7"
+    },
+    {
+      "file": "game/css/inbox-cover.css",
+      "bytes": 12512,
+      "normalizedBytes": 12339,
+      "lines": 173,
+      "tokens": null,
+      "sha256": "cda8a577c9a24622fcf6a6ecb0f37035540112168f36ea9400dbe018282b319c"
+    },
+    {
+      "file": "game/css/slots-cover.css",
+      "bytes": 9373,
+      "normalizedBytes": 9373,
+      "lines": 144,
+      "tokens": null,
+      "sha256": "85af97021be963725dc29bffc90d12c9d46e9832ac26b310c0e52acb4f5e1312"
+    },
+    {
+      "file": "game/css/character-cover.css",
+      "bytes": 8698,
+      "normalizedBytes": 8561,
+      "lines": 137,
+      "tokens": null,
+      "sha256": "61818a124319d8ac763d8ac3e1892b385e3ce38b0614133f56db1bc663e8f9f0"
+    },
+    {
+      "file": "game/css/character-pool-cover.css",
+      "bytes": 9605,
+      "normalizedBytes": 9517,
+      "lines": 88,
+      "tokens": null,
+      "sha256": "c065174f8e97dfa07522d101e0f885b1718d395df712fa566954dc9c5fe3000a"
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "bytes": 2866,
+      "normalizedBytes": 2830,
+      "lines": 37,
+      "tokens": null,
+      "sha256": "dc428cdd0de15da338bdf534b9cd211c78b407bc5af1f304857c601c970198fa"
+    },
+    {
+      "file": "game/css/settings-transition.css",
+      "bytes": 89,
+      "normalizedBytes": 89,
+      "lines": 1,
+      "tokens": null,
+      "sha256": "7d46f61a0edced4b0d7e0ef274fc1af1b930e722e198d4edd96ae872354b461a"
+    },
+    {
+      "file": "game/css/cover-hub.css",
+      "bytes": 16093,
+      "normalizedBytes": 15846,
+      "lines": 247,
+      "tokens": null,
+      "sha256": "471d6ec4d4689a1de92979eccf75666c59b171a123be6d27a4db12b3c532759c"
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "bytes": 9056,
+      "normalizedBytes": 8954,
+      "lines": 102,
+      "tokens": null,
+      "sha256": "f6a8e7336f0183099f8e00dcf210e0cc55e3d79990e994993fcd49b6cef7e9ed"
+    },
+    {
+      "file": "game/css/hub-arrival.css",
+      "bytes": 4067,
+      "normalizedBytes": 4012,
+      "lines": 55,
+      "tokens": null,
+      "sha256": "0183f10b98b63d455877999e205b89a1d8913edfc6fb8f9cfeccfea20bb4a906"
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "bytes": 7320,
+      "normalizedBytes": 7256,
+      "lines": 64,
+      "tokens": null,
+      "sha256": "5134a805cf126466d122c5672677b2fe7afe58ed55571b96e10adca768797923"
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "bytes": 2408,
+      "normalizedBytes": 2408,
+      "lines": 20,
+      "tokens": null,
+      "sha256": "f78f22021ca0890cdeb5d40381e36ac4b05a1b11ff1c5c0ea13d9e52c36deecf"
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "bytes": 5671,
+      "normalizedBytes": 5620,
+      "lines": 51,
+      "tokens": null,
+      "sha256": "cb0914a69eda1555283263a4aaa3f30d7c745bcd4fbc59f75b9252dd366f6e0f"
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "bytes": 8858,
+      "normalizedBytes": 8784,
+      "lines": 74,
+      "tokens": null,
+      "sha256": "fe95acabeb9b8946ec30cd80d10c0bee3cae473b93b8d5ef8609953fa6d16ae2"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "bytes": 17184,
+      "normalizedBytes": 17184,
+      "lines": 511,
+      "tokens": 4536,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "bytes": 14949,
+      "normalizedBytes": 14949,
+      "lines": 412,
+      "tokens": 3590,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+    }
+  ],
+  "approval": "批准删除清单中的21个文件"
+}

@@ -1,0 +1,70 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.before b/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.after
+index 036cd75b..77a034f0 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.before
++++ b/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.after
+@@ -34,6 +34,27 @@ const retiredChest640Frames = ['small', 'medium', 'large', 'class', 'boss'].flat
+     category: 'chests',
+   })));
+ 
++const shadowedCardArt = [
++  'spell-tt8-curse1',
++  'spell-tt8-curse2',
++  'spell-tt8-curse3',
++  'spell-tt8-curse4',
++  'equip-tt3-staff',
++  'equip-tt3-fate-wheel',
++  'equip-tt3-wolf-bow',
++  'equip-tt3-twinwater-mail',
++  'equip-tt3-grass-armor',
++  'equip-tt3-blooddrinker',
++  'equip-tt8-demonslay',
++  'equip-tt8-archdemon',
++  'equip-tt8-heavensword',
++  'equip-tt7-arcanescroll',
++  'equip-tt12-raygun',
++].flatMap(name => ['cards/', 'thumbs/cards/'].map(prefix => ({
++  path: `${prefix}${name}.webp`,
++  category: 'shadowed-card-art',
++})));
++
+ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
+   candidates: [
+     ...retiredChest640Frames,
+@@ -112,36 +133,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
+     {"path":"thumbs/scenes/scene-chest-large-anime-v1.webp","category":"retired-scenes"},
+     {"path":"thumbs/scenes/scene-chest-medium-anime-v1.webp","category":"retired-scenes"},
+     {"path":"thumbs/scenes/scene-chest-small-anime-v1.webp","category":"retired-scenes"},
+-    {"path":"cards/spell-tt8-curse1.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/spell-tt8-curse1.webp","category":"shadowed-card-art"},
+-    {"path":"cards/spell-tt8-curse2.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/spell-tt8-curse2.webp","category":"shadowed-card-art"},
+-    {"path":"cards/spell-tt8-curse3.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/spell-tt8-curse3.webp","category":"shadowed-card-art"},
+-    {"path":"cards/spell-tt8-curse4.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/spell-tt8-curse4.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-staff.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-staff.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-fate-wheel.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-fate-wheel.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-wolf-bow.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-wolf-bow.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-twinwater-mail.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-twinwater-mail.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-grass-armor.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-grass-armor.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt3-blooddrinker.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt3-blooddrinker.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt8-demonslay.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt8-demonslay.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt8-archdemon.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt8-archdemon.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt8-heavensword.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt8-heavensword.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt7-arcanescroll.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt7-arcanescroll.webp","category":"shadowed-card-art"},
+-    {"path":"cards/equip-tt12-raygun.webp","category":"shadowed-card-art"},
+-    {"path":"thumbs/cards/equip-tt12-raygun.webp","category":"shadowed-card-art"},
++    ...shadowedCardArt,
+     // Retained source assets: fixed bytes reviewed for production-only omission.
+     {"path":"scenes/chests/boss-rig-v1/frame-00.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},
+     {"path":"scenes/chests/boss-rig-v1/frame-01.webp","category":"chests","sourceBytes":751734,"sourceSha256":"03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb"},

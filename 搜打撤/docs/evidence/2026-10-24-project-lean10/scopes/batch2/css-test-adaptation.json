@@ -1,0 +1,54 @@
+{
+  "status": "verified-CSS-readers-only",
+  "cache": "node_modules/.cache/project-lean10-css-test-before-batch2",
+  "files": [
+    {
+      "file": "tests/battle-entry-readiness.test.js",
+      "beforeSha256": "52fc4c9e20038e0aeb366066dc01a30c6fa2d4b8d0310aaf254726d0fcfa18a6",
+      "afterSha256": "40af8871dfa3dfcecd788188affc5bbba2b0a0c0dfe891061022056391cc6593"
+    },
+    {
+      "file": "tests/battle-status-presentation.test.js",
+      "beforeSha256": "03a9407973401f91c2a7592edf2891c50c9c4e14d01d642f460a95d7c5f4eaae",
+      "afterSha256": "432b3b80b60ae41df218ff5822201d22e93ab1336ea7b7644fde70f8764f83ec"
+    },
+    {
+      "file": "tests/battle-turn-feedback.test.js",
+      "beforeSha256": "b1bc1a5b3519d67029a943032f331d2a4d986dbc955c0e261006895a299a7acf",
+      "afterSha256": "1d4f7a1b8246365180554aad741ab4d8fb27adac608c4868ccb31acdd63808df"
+    },
+    {
+      "file": "tests/beginner-guide-readability.test.js",
+      "beforeSha256": "d2d35e06869b90a94591999556406a20e0bd82798a261819fba083900f3d9476",
+      "afterSha256": "acf14b598cbd326ab8d211a3147018b6dd136d742e904feff2479c4e6b9d19bb"
+    },
+    {
+      "file": "tests/event-signal-puzzle.test.js",
+      "beforeSha256": "593b9583915cf7d0c78476bf57ef0321f2d39ea860fb4db489940d3a5cf304c9",
+      "afterSha256": "3231b022083df177c57480ea64dd52e414792f86ba62e300295054f2e401b797"
+    },
+    {
+      "file": "tests/m05-home-scene.test.js",
+      "beforeSha256": "727594bff52f35944e7906dc50269057b8f7b03989253fb85b227dac3884afa2",
+      "afterSha256": "8b49e08b5730fdf15de812134a6aa8e5984bc340ddc941109130052d0550e9b3"
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "beforeSha256": "5d5f9b9f70519c47c58dd50659d0de908b8aaee2ad135f8217e1a2045bfba2c6",
+      "afterSha256": "9ceafe3ac71716a2ec2629b7df7efda82583950bbc06c67e8eda74fa35a50048"
+    },
+    {
+      "file": "tests/settings-audio.test.js",
+      "beforeSha256": "32efdea19b0c76205a1a56701940b3a6b41c7594a2d699c6d93ad20b10953ce6",
+      "afterSha256": "6cf46b09eafeebde9070016438f4968016fa498b6e1604ed32833f32ff94bbe6"
+    }
+  ],
+  "result": {
+    "files": 22,
+    "total": 244,
+    "passed": 243,
+    "baselineMatchedFailures": 1,
+    "proof": "css-test-assertions-proof.json",
+    "baseline": "css-test-baseline-comparison.json"
+  }
+}

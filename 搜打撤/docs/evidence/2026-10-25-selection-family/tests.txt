@@ -1,0 +1,182 @@
+
+> codename7-soudache-game@0.60.0 test:target
+> node scripts/acceptance-gate.mjs --target-tests tests/battle-decision-lifecycle.test.js tests/battle-formation-reading.test.js tests/discovery-selection.test.js tests/battle-decision-shell-review.test.js tests/battle-discovery-cancellation.test.js tests/battle-discover-retained-feedback.test.js tests/hand-material-selection-window.test.js tests/sacrifice-layout-readability.test.js tests/pocket-restore-interface.test.js tests/contracts.test.js tests/architecture-boundaries.test.js
+
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > payment stages and withdraws exact copies, then pays only on confirmation
+[battle] 渲染异常已兜底： ReferenceError: ResizeObserver is not defined
+    at renderInfusionSelection (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.infusion-view.js:191:22)
+    at Object.render (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.view.js:765:28)
+    at flushBattleRender (D:\素材\代号柒\搜打撤\game\src\battle\core\battle.engine.factory.domain.js:107:30)
+    at flush (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:39:80)
+    at D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:82:53
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)
+
+stderr | tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > canonical armor payment offers equipment including cards forbidden as infusion fuel
+[battle] 渲染异常已兜底： ReferenceError: ResizeObserver is not defined
+    at renderInfusionSelection (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.infusion-view.js:191:22)
+    at Object.render (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.view.js:765:28)
+    at flushBattleRender (D:\素材\代号柒\搜打撤\game\src\battle\core\battle.engine.factory.domain.js:107:30)
+    at flush (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:39:80)
+    at D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:107:58
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)
+
+stderr | tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > effect consume uses a draft and queued lethal reactions settle each selected UID once
+[battle] 渲染异常已兜底： ReferenceError: ResizeObserver is not defined
+    at renderInfusionSelection (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.infusion-view.js:191:22)
+    at Object.render (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.view.js:765:28)
+    at flushBattleRender (D:\素材\代号柒\搜打撤\game\src\battle\core\battle.engine.factory.domain.js:107:30)
+    at flush (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:39:80)
+    at settle (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:42:5)
+    at D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:121:64
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+
+stderr | tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > effect consume uses a draft and queued lethal reactions settle each selected UID once
+[battle] 渲染异常已兜底： ReferenceError: ResizeObserver is not defined
+    at renderInfusionSelection (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.infusion-view.js:191:22)
+    at Object.render (D:\素材\代号柒\搜打撤\game\src\battle\view\battle.view.js:765:28)
+    at flushBattleRender (D:\素材\代号柒\搜打撤\game\src\battle\core\battle.engine.factory.domain.js:107:30)
+    at flush (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:39:80)
+    at settle (D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:43:62)
+    at D:\素材\代号柒\搜打撤\tests\hand-material-selection-window.test.js:121:58
+    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+··············································································x····················xxx·················x···········x·············
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-decision-shell-review.test.js > 首脑规则短面板限定字号及滚动高度，设置专属规则仍独立
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/battle-decision-shell-review.test.js:56:94
+     54|   expect(text?.declarations['line-height']).toBe('1.55');
+     55|   expect(rules.find(rule => rule.selector === '#overlay .battle-decisi…
+     56|   expect(rules.some(rule => rule.selector.includes('[data-decision-kin…
+       |                                                                                              ^
+     57| });
+     58| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/battle-discovery-cancellation.test.js > battle discovery cancellation boundaries > reuses cancelled candidates in the same turn and invalidates after a plan change
+AssertionError: expected [ { id: 'option-1', …(4) }, …(2) ] to be [ { id: 'option-1', …(4) }, …(2) ] // Object.is equality
+
+If it should pass with deep equality, replace "toBe" with "toStrictEqual"
+
+Expected: [ { id: 'option-1', …(4) }, …(2) ]
+Received: serializes to the same string
+
+
+Compared values have no visual difference.
+
+ ❯ tests/battle-discovery-cancellation.test.js:94:43
+     92|     h.selection.cancelDiscover(h.runtime.discovering.roundId); expect(…
+     93|     const second = h.selection.previewDiscovery(h.source, 'source', ne…
+     94|     expect(h.runtime.discovering.options).toBe(options); expect(h.rand…
+       |                                           ^
+     95|     h.selection.cancelDiscover(h.runtime.discovering.roundId); await s…
+     96|     h.source.rules.triggers.onPlay[0].count = 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > payment stages and withdraws exact copies, then pays only on confirmation
+AssertionError: expected  to have a length of 2 but got +0
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ tests/hand-material-selection-window.test.js:91:63
+     89|     expect(snapshot().energy).toBe(before.energy); expect(snapshot().h…
+     90|     expect(snapshot().handSelecting.selectedUids).toEqual([]);
+     91|     expect(bar().querySelectorAll('.infusion-selected-card')).toHaveLe…
+       |                                                               ^
+     92|     bar().querySelector('[data-act="btInfuseRemove"][data-uid="fuel-a"…
+     93|     expect(bar().querySelectorAll('.infusion-selected-card')).toHaveLe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > canonical armor payment offers equipment including cards forbidden as infusion fuel
+AssertionError: expected +0 to be 10 // Object.is equality
+
+- Expected
++ Received
+
+- 10
++ 0
+
+ ❯ tests/hand-material-selection-window.test.js:113:35
+    111|     expect(snapshot().pdef.armor).toBe(0);
+    112|     bar().querySelector('[data-act="btInfuseGo"]').click(); await sett…
+    113|     expect(snapshot().pdef.armor).toBe(10); expect(snapshot().hand).to…
+       |                                   ^
+    114|   });
+    115| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/hand-material-selection-window.test.js > hand consumption uses the shared material workspace > effect consume uses a draft and queued lethal reactions settle each selected UID once
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/hand-material-selection-window.test.js:128:31
+    126|     game.onBattleEnd = vi.fn();
+    127|     bar().querySelector('[data-act="btInfuseGo"]').click(); await sett…
+    128|     expect(game.battleActive).toBe(false);
+       |                               ^
+    129|     const consumed = game.onBattleEnd.mock.calls[0][3];
+    130|     expect(consumed).toEqual(['fuel-a', 'fuel-b']);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/pocket-restore-interface.test.js > 消耗卡复原公共选择界面 > 公共CSS只限定复原域，五列240卡/共用滚动区/固定动作栏和可读字号有明确契约
+AssertionError: expected 'repeat(auto-fit,minmax(240px,280px))' to be 'repeat(5,minmax(0,240px))' // Object.is equality
+
+Expected: "repeat(5,minmax(0,240px))"
+Received: "repeat(auto-fit,minmax(240px,280px))"
+
+ ❯ tests/pocket-restore-interface.test.js:202:100
+    200|     css.walkRules(rule => expect(rule.selector).toContain('.pocket-res…
+    201|     const scope = 'body #overlay .pocket-restore';
+    202|     expect(values(`${scope} .pocket-restore-content .fire-restore-hand…
+       |                                                                                                    ^
+    203|     expect(values(`${scope} .pocket-restore-content`).flex).toBe('1 1 …
+    204|     expect(values(`${scope} .pocket-restore-content .pocket-restore-ar…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  4 failed | 7 passed (11)
+      Tests  6 failed | 139 passed (145)
+   Start at  19:37:17
+   Duration  12.77s (transform 2.85s, setup 0ms, collect 13.50s, tests 6.82s, environment 14.67s, prepare 2.33s)
+
+[gate] FAIL：指定 Vitest 失败（exit 1）

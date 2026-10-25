@@ -1,0 +1,834 @@
+{
+  "method": "Built-in ImageGen; preserve source RGBA alpha; WebP94; 760h battle cut and 448w thumb, proportional resize only",
+  "request": "docs/evidence/2026-10-24-floor-elite-art/final-request.json",
+  "items": [
+    {
+      "id": "rager",
+      "name": "暴怒者",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/rager.png",
+        "bytes": 1672521,
+        "sha256": "97872dfa3089581d16580ded13f23561eb1186a487162342cb324f707190b34b",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1105028,
+        "alpha_bbox": [
+          41,
+          16,
+          1002,
+          1520
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/rager.webp",
+          "bytes": 212850,
+          "sha256": "aa4431ea0b89e7041a8f341a5cc703cd817dc4d34f0f1b145d4dc6b24cf4ad9a",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1105028,
+          "alpha_bbox": [
+            41,
+            16,
+            1002,
+            1520
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/rager.webp",
+          "bytes": 64696,
+          "sha256": "ae35bbec46717d448e85b0e113c48ff75e21d1e0d23ffbeb39146a21730b7999",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 270656,
+          "alpha_bbox": [
+            112,
+            6,
+            494,
+            753
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/rager.webp",
+          "bytes": 52660,
+          "sha256": "0a8f50d42cf465564a52d3f9f19ceb858d27da73136d00f71e3de682d3ccc26f",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 211223,
+          "alpha_bbox": [
+            101,
+            5,
+            408,
+            666
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "deserter",
+      "name": "落难逃兵",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/deserter.png",
+        "bytes": 1764970,
+        "sha256": "9f4674cd78a4201558d6654112d467232a9b2b60cc45e6d13ea96e69a731cb31",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1132975,
+        "alpha_bbox": [
+          33,
+          15,
+          994,
+          1508
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/deserter.webp",
+          "bytes": 249986,
+          "sha256": "c3069dacc4b1421cc9b16e6035cc71f6f44f646a08d0939e6796a9e2fc554697",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1132975,
+          "alpha_bbox": [
+            33,
+            15,
+            994,
+            1508
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/deserter.webp",
+          "bytes": 71922,
+          "sha256": "1d929f09a7f8155ceb6112e3e7e038559bbc6e9b84ef9e6e6c31f83c903e11ae",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 277802,
+          "alpha_bbox": [
+            25,
+            6,
+            492,
+            746
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/deserter.webp",
+          "bytes": 57800,
+          "sha256": "7ad7b207a81221a23f561980a9ca2e9368bfa58a2df3aa3713895759f16a1460",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 216838,
+          "alpha_bbox": [
+            43,
+            5,
+            435,
+            660
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "greedy_imp",
+      "name": "贪财小鬼",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/greedy_imp.png",
+        "bytes": 1698194,
+        "sha256": "43c52cf65611cddbded21b2b1deb5e0eeb6cb566671ee6ea7831714df8812565",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1104866,
+        "alpha_bbox": [
+          25,
+          10,
+          996,
+          1525
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/greedy_imp.webp",
+          "bytes": 224652,
+          "sha256": "5bb13d0ff7cc285ca45b38539e343a786562a0f4d49cac34917396e6d9f109d1",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1104866,
+          "alpha_bbox": [
+            25,
+            10,
+            996,
+            1525
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/greedy_imp.webp",
+          "bytes": 74160,
+          "sha256": "eabbe90690111acca21d3fdabf63e96760f3f17eb5b9708a9e061f39d39460aa",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 271105,
+          "alpha_bbox": [
+            42,
+            5,
+            442,
+            756
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/greedy_imp.webp",
+          "bytes": 61030,
+          "sha256": "47d7ae870de93f41126eff237ae9a35ed2fe26d705d672db3b2d195e014639c2",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 211564,
+          "alpha_bbox": [
+            38,
+            5,
+            391,
+            669
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "swaggerer",
+      "name": "招摇过客",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/swaggerer.png",
+        "bytes": 1762537,
+        "sha256": "7edddd6ea111633b05933f90419af5a388906a40f1590086a1bd10d5c20f8576",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1029359,
+        "alpha_bbox": [
+          39,
+          10,
+          994,
+          1502
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/swaggerer.webp",
+          "bytes": 225596,
+          "sha256": "2062f70ca59e86135e4e0a3d6821cc5f655e34b7672c411c434a9e5f42d6650e",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1029359,
+          "alpha_bbox": [
+            39,
+            10,
+            994,
+            1502
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/swaggerer.webp",
+          "bytes": 72334,
+          "sha256": "e8bad8479cbf811d96ddcc2d815dae3404514911fb9c7a9026a5cb9ac3fab672",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 252695,
+          "alpha_bbox": [
+            40,
+            3,
+            492,
+            740
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/swaggerer.webp",
+          "bytes": 58904,
+          "sha256": "bb427c2f2fa1c364be6e3d651e098c4cc5155fdebda139504fd24b39dd593839",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 197128,
+          "alpha_bbox": [
+            36,
+            3,
+            435,
+            655
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "tin_mute",
+      "name": "铁皮哑人",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/tin_mute.png",
+        "bytes": 2068051,
+        "sha256": "5fb86fd0c19e2a86ab55f2880740ba27e45530ec443db895643e56ea8033b431",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 980073,
+        "alpha_bbox": [
+          0,
+          11,
+          1002,
+          1504
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/tin_mute.webp",
+          "bytes": 283762,
+          "sha256": "094d8d3bd44a62a4e4e53a5d5896a7dfe7dfc307956b2208fdbf060888bf6e73",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 980073,
+          "alpha_bbox": [
+            0,
+            11,
+            1002,
+            1504
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/tin_mute.webp",
+          "bytes": 85138,
+          "sha256": "29db5791306cc22d0399cce90b3cc22df28e4be2e8b4636b5ed71ca88a94268a",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 239956,
+          "alpha_bbox": [
+            56,
+            4,
+            489,
+            744
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/tin_mute.webp",
+          "bytes": 71230,
+          "sha256": "a220c010025d4a0d1df07c2c6109d9784c98f408191bccf7d808a2de208faabf",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 187215,
+          "alpha_bbox": [
+            50,
+            4,
+            432,
+            658
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "heavy_hammer",
+      "name": "笨重锤手",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/heavy_hammer.png",
+        "bytes": 2035423,
+        "sha256": "60541351d62f141b3d6c3cecfab0c2535e7d642ec2b21c4833a147786be2f2f8",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 966078,
+        "alpha_bbox": [
+          0,
+          1,
+          980,
+          1520
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/heavy_hammer.webp",
+          "bytes": 307692,
+          "sha256": "da9e7d99ee47da90f86e2573b9d4ba41737534689834c9f10113b038ae32ab3a",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 966078,
+          "alpha_bbox": [
+            0,
+            1,
+            980,
+            1520
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/heavy_hammer.webp",
+          "bytes": 97254,
+          "sha256": "90e3859111c3c9c015107d88dcff975ab1fceee7098979fa16935ddd6a125db7",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 236669,
+          "alpha_bbox": [
+            56,
+            0,
+            465,
+            751
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/heavy_hammer.webp",
+          "bytes": 77198,
+          "sha256": "16c71e601b16e07edb43c36e113f9285d496d426b412f6000d9ff3ed72510dc4",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 184601,
+          "alpha_bbox": [
+            49,
+            0,
+            411,
+            664
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "cultist",
+      "name": "邪教徒",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/cultist.png",
+        "bytes": 1180632,
+        "sha256": "391f388d2efccc084ae1dfe80816ce5f0f4693f624d1751afef443f930debd27",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1177721,
+        "alpha_bbox": [
+          63,
+          10,
+          1004,
+          1521
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/cultist.webp",
+          "bytes": 115244,
+          "sha256": "e9a74067f0f3c931dfed05696d804677037701d89c1efaaa07f1e31d165935c9",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1177721,
+          "alpha_bbox": [
+            63,
+            10,
+            1004,
+            1521
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/cultist.webp",
+          "bytes": 37362,
+          "sha256": "8ea3fa5996501efe5aa77cfd0214565d7694b78d68bac273e7d4c6322a5e63e2",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 288101,
+          "alpha_bbox": [
+            58,
+            4,
+            445,
+            754
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/cultist.webp",
+          "bytes": 31008,
+          "sha256": "a2eb489fb23943e8e5815fbabd625ee5527faa0cbbcdca4680ccf6965eee51c7",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 224817,
+          "alpha_bbox": [
+            52,
+            3,
+            394,
+            667
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "fake_apothecary",
+      "name": "假药贩子",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/fake_apothecary.png",
+        "bytes": 1452638,
+        "sha256": "2b0de1587dcb1e19e70667561f8deac487874623505c2261a5f9001d5fa61d0f",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1140373,
+        "alpha_bbox": [
+          0,
+          13,
+          1000,
+          1523
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/fake_apothecary.webp",
+          "bytes": 165218,
+          "sha256": "854dae1a0455c3d62f7cbd6dbbde81b3b5fa5d3ac0990ffc4f9c769338e85b07",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1140373,
+          "alpha_bbox": [
+            0,
+            13,
+            1000,
+            1523
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/fake_apothecary.webp",
+          "bytes": 51710,
+          "sha256": "a3d1d3b96e28af37d82a31a3f79f384025805618a5ab41c14dffbdca93fb27a7",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 279742,
+          "alpha_bbox": [
+            17,
+            5,
+            471,
+            755
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/fake_apothecary.webp",
+          "bytes": 42578,
+          "sha256": "6e4de098efb6d67bbfddee7aa75dc87f5254314ec8f680edd6f6d2dd5e6e6235",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 218367,
+          "alpha_bbox": [
+            18,
+            4,
+            415,
+            668
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    },
+    {
+      "id": "camo_sniper",
+      "name": "迷彩狙击手",
+      "raw": {
+        "path": ".tmp/imagegen/floor-elite-art-1024/sources/camo_sniper.png",
+        "bytes": 1460474,
+        "sha256": "495f93e7e1fe9a51f981b3e37ef497bc83067a67dbf4a1a78140a311676eb512",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA",
+        "alpha_range": [
+          0,
+          254
+        ],
+        "transparent_pixels": 1180823,
+        "alpha_bbox": [
+          0,
+          12,
+          1012,
+          1536
+        ]
+      },
+      "outputs": [
+        {
+          "path": "game/assets/portraits/enemies/camo_sniper.webp",
+          "bytes": 162276,
+          "sha256": "ecdac04fc416c24e416a25ea2bcbaa7291e7f8fd62210870b3085492faa3e46f",
+          "size": [
+            1024,
+            1536
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            254
+          ],
+          "transparent_pixels": 1180823,
+          "alpha_bbox": [
+            0,
+            12,
+            1012,
+            1536
+          ]
+        },
+        {
+          "path": "game/assets/portraits/cut/enemies/camo_sniper.webp",
+          "bytes": 52026,
+          "sha256": "3ddce2f923b19137ea4e8c96168cff16f46068527b9846b2b9dda960a142761f",
+          "size": [
+            507,
+            760
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 289599,
+          "alpha_bbox": [
+            14,
+            5,
+            501,
+            751
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/portraits/enemies/camo_sniper.webp",
+          "bytes": 42662,
+          "sha256": "adcda1d7790898e1903502d6891bc42505fcb7e3690a72157fc37f98979be975",
+          "size": [
+            448,
+            672
+          ],
+          "mode": "RGBA",
+          "alpha_range": [
+            0,
+            255
+          ],
+          "transparent_pixels": 225974,
+          "alpha_bbox": [
+            12,
+            4,
+            443,
+            664
+          ]
+        }
+      ],
+      "direction": "left",
+      "pose": "normal upright standing, no exaggerated perspective"
+    }
+  ]
+}

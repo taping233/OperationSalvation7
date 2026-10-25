@@ -1,0 +1,223 @@
+/* Archive view: large cards, stable filter rail, no white surfaces. */
+
+/* Override the former compact paper catalogue, within the archive only. */
+
+/* 第三色调：空态图标、危险操作悬停、关闭按钮悬停 */
+
+/* 控件过渡复位（被去动画禁令一并停用，这里按元素逐个开回来，仍只跑颜色/位移） */
+
+/* 入场：卡格错峰上浮。只放前 24 格（首屏 5 列约 5 行），越界卡不跑动画 */
+/* 每次重绘（换筛选/搜索）卡格整体淡入，给「列表换了」一个即时反馈 */
+
+/* 命中数脉冲：只在数字真的变化时由 renderLibGrid 挂 .bump */
+
+/* 卡面悬停光泽：只动 opacity（伪元素斜向扫光），不做滤镜重绘 */
+
+/* 彩蛋 2：稀有度筛到「棱彩」→ 首屏卡面依次过一道幻彩扫光（libHoloEgg 挂 .lib-holo，2300ms 后摘） */
+
+/* 空态图标：常驻缓浮（空页面上唯一在动的东西，克制） */
+
+/* ---- 展头：海报式排版，标题吃字距，计数当展品编号 ---- */
+/* 藏品总数=白，当前命中数=青玉：筛选结果一眼分辨（第二色调的常驻落点） */
+
+/* ---- 工具条：无填充线框，聚焦时青玉点亮 ---- */
+/* ---- 工具条：不透明深底 + 青玉焦点。
+   底色必须不透明：Chrome 的原生下拉弹层底跟着 select 走，透明底会把弹层渲染成
+   白底浅字（老板 09-13 留言：稀有度/职业那儿白底白字看不清）；option 再单独写死底色，
+   免得被页面级 background:transparent 归一化规则清掉。color-scheme:dark 让弹层与
+   滚动条一起走深色，双保险。 ---- */
+/* 稀有度=青玉 / 职业=紫晶：两个筛选下拉各带一条左侧色条，第二三色调常驻可见 */
+
+/* ---- 主体：侧栏去盒子，选中项改金色竖线指示 ---- */
+/* 2026-09-19 留言 #10：原 background:transparent!important 压制声明已摘除（让位 winter 尾部亮色光晕），布局参数不动 */
+/* 展柜高度随卡面实际尺寸走（旧版写死 min-height:280px 才把侧栏撑破） */
+
+/* ---- 展廊网格：取消网格线，卡面各自悬浮，六列固定（老板 09-12 口径）---- */
+/* 卡格底部预留 38px 展签位：抽屉走常规流（不是绝对定位浮层）才稳定可点，
+   空间常驻所以悬停弹出时不推挤整行；卡面与展签之间留 10px，让卡面四角的
+   费用/伤害/币值浮球（负偏移浮出卡缘 ~8px）有落脚处，不被展签压住。
+   padding 10px 是必需的裁剪余量：lib-item 带 content-visibility:auto（滚动性能），
+   自带 paint 裁剪，卡格无内边距时浮球一出卡缘就被切（老板 09-13 留言：费用和价格被裁切）。 */
+/* 抬升做在卡格上（不是卡面）：操作抽屉是它的兄弟节点，这样抽屉跟着卡面一起动，不会错位。
+   悬停放开 content-visibility（=关掉 paint 裁剪）让 46px 辉光不被卡格边界硬切，
+   但 09-29 三期起带 120ms 延迟：滚动扫过（每格停留 <120ms）不再反复开关裁剪，
+   每格一次重栅格化只发生在「停留悬停」时——与 JS 侧预览 90ms 去抖同一语义。
+   移开时走 :563 的 0s 无延迟立即收回裁剪。transition 离散属性 delay 兼容 Chromium 105+；
+   不支持的环境退化为立即放开（=旧行为），安全。 */
+/* 关掉 cards.css 里给旧版留的通用悬停放大：缩放会让操作抽屉与卡面错位，抬升改由卡格承担 */
+
+/* ---- 空态与响应式收尾 ---- */
+/* 页签图标随 09-23「先撤图标只留文字+计数」拍板移除，待图标重绘批落库后统一挂回 */
+/* 选中页签：金色线框（不再用实底色块），金字金计数 */
+/* 09-29 二期：合成层只给已挂载瓦片，占位壳不占层预算 */
+/* 占位壳：与瓦片等高的空格子（高度吃 --lib-tile-h 实测值），内容由 IO 就近注入/卸出
+   （game.cardslib.page.js mountLibTile/unmountLibTile） */
+/* 09-29 三期删除 .lib-mount-sentinel 死规则：二期壳常驻重构后哨兵机制已从 JS 退场，
+   DOM 无此元素（原注释指向的 libMountMore 已不存在） */
+/* 冲印质感：暖纱+暗角罩层（::after，静态一次绘制）。轻做口径——不改变卡面画风定版，
+   只把高饱和原画往"银盐冲印"方向拢半步（09-23 暗卡提亮：暗角 .2→.12） */
+/* 选中=射灯打亮：金线框+暖光晕（静态样式，不碰 09-08 禁动画） */
+#overlay .lib-cardwrap:where(:not(.studio-photo)) { display:flex; justify-content:center; padding:8px; background:rgba(28,30,32,.55); border:1px solid rgba(194,199,202,.14); border-radius:0; cursor:zoom-in; }
+#overlay .lib-cardwrap:where(:not(.studio-photo)):hover { border-color:#ead282; background:#232628; }
+
+#cardZoom .cz-close {
+  position:absolute;
+  z-index:6;
+  top:max(18px,env(safe-area-inset-top));
+  right:max(18px,env(safe-area-inset-right));
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(227,228,229,.32);
+  border-radius:50%;
+  color:#f1f1f1;
+  background:rgba(14,15,16,.82);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  cursor:pointer;
+}
+body.cardlib-open #cardZoom .cz-backdrop {
+  background:
+    radial-gradient(110% 62% at 50% -12%, rgba(255,235,170,.10), transparent 56%),
+    radial-gradient(120% 78% at 50% 114%, rgba(90,28,36,.38), transparent 62%),
+    rgba(16,8,6,.84);
+}
+body.cardlib-open #cardZoom:not(.cz-photo) .cz-backdrop { background:#1008062e; backdrop-filter:blur(18px); }
+body.cardlib-open #cardZoom .cz-close {
+  border-color:rgba(225,198,109,.45);
+  color:var(--studio-gold-soft,#f4e2a8);
+  background:rgba(29,21,18,.82);
+}
+body.cardlib-open #cardZoom .cz-close .ic {
+  filter:grayscale(1) brightness(1.55) sepia(1) saturate(2.6) hue-rotate(-8deg);
+}
+body.cardlib-open #cardZoom .cz-hint {
+  color:#beb080;
+  letter-spacing:2.4px;
+}
+/* 快门白闪（批次四，09-20 老板反馈收敛）：从全屏近纯白降到中心轻微曝光感，
+   峰值合成透明度 ~0.4 且快速向边缘衰减，只动 opacity。
+   cz-flash span 是 ui.js 无条件渲染的，其他入口无本段样式=透明无感 */
+@keyframes czFlash { 0% { opacity:0; } 14% { opacity:.85; } 100% { opacity:0; } }
+body.cardlib-open #cardZoom .cz-flash {
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  background:radial-gradient(circle at 50% 40%, rgba(238,236,231,.45), rgba(234,231,225,.24) 32%, transparent 60%);
+  animation:czFlash .42s ease-out .05s 1 both;
+}
+/* 长按大图 600ms 看底片（批次四彩蛋）：负片是一次性 class 切换（cz-neg，ui.js 挂），
+   非逐帧 filter 动画，不碰性能铁律 */
+body.cardlib-open #cardZoom.cz-neg .cz-card .hsc-art img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12);
+}
+/* 背签存档章（批次四）：有馆方记录的背签右下角盖一枚斜红章（纯装饰，不挡输入） */
+body.cardlib-open #cardZoom .cz-note.has {
+  position:relative;
+}
+body.cardlib-open #cardZoom .cz-note.has::after {
+  content:'存档';
+  position:absolute;
+  right:16px;
+  bottom:12px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:2px solid rgba(174,54,44,.55);
+  border-radius:50%;
+  color:rgba(174,54,44,.66);
+  font:700 12px/1 var(--serif);
+  letter-spacing:3px;
+  text-indent:3px;
+  transform:rotate(-9deg);
+  box-shadow:inset 0 0 0 1.5px rgba(174,54,44,.3);
+  pointer-events:none;
+}
+#cardZoom .cz-close:hover,
+#cardZoom .cz-close:focus-visible {
+  color:#e0dcd6;
+  border-color:rgba(225,198,109,.7);
+  outline:2px solid rgba(225,198,109,.8);
+  outline-offset:3px;
+}
+#cardZoom .cz-note.has,
+#cardZoom .cz-note.editable {
+  width:min(620px,90%)!important;
+  box-sizing:border-box;
+  display:block!important;
+  padding:13px 18px 15px!important;
+  border:1px solid rgba(91,79,50,.72)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(180deg, rgba(231,230,229,.35), rgba(222,215,192,.5)),
+    url('../assets/ui/photo-studio/back.webp') center/cover no-repeat,
+    linear-gradient(165deg,rgba(237,226,192,.98),rgba(193,182,145,.98))!important;
+  color:#302d25!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.48),inset 0 0 22px rgba(88,74,43,.08)!important;
+  transform:rotate(-.35deg);
+}
+#cardZoom .cz-note.has .cz-note-tag,
+#cardZoom .cz-note.editable .cz-note-tag {
+  display:flex;
+  padding:0 0 7px!important;
+  margin:0 0 7px;
+  border-bottom:1px solid rgba(91,79,50,.24);
+  color:#75602f!important;
+  font-size:12px!important;
+  letter-spacing:.18em!important;
+}
+#cardZoom .cz-note.editable {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  gap:8px!important;
+  cursor:text;
+}
+#cardZoom .cz-note-input {
+  width:100%;
+  min-height:88px;
+  box-sizing:border-box;
+  resize:vertical;
+  padding:10px 12px;
+  border:1px dashed rgba(91,79,50,.36);
+  border-radius:0;
+  background:rgba(248,247,245,.28);
+  color:#302d25;
+  outline:none;
+  font:16px/1.75 var(--font-ui); /* 09-25 小字场景弃 serif：栈尾 SimSun 点阵化发虚 */
+}
+#cardZoom .cz-note-input:focus {
+  border-style:solid;
+  border-color:rgba(117,96,47,.75);
+  background:rgba(248,247,245,.46);
+  box-shadow:0 0 0 3px rgba(117,96,47,.1);
+}
+#cardZoom .cz-note-status {
+  justify-self:end;
+  color:rgba(70,63,48,.58);
+  font:10px/1.2 var(--font-ui);
+  letter-spacing:.12em;
+}
+
+/* ---- 旧版段落（档案馆/画廊版）遗留青色规则缝隙收编：同名属性后者胜，逐点覆盖 ---- */
+/* ④ 冷色锚点：全页唯一冰蓝——费用数字（炉石蓝水晶的同位角色） */
+/* 按钮贴底：文字重心压住右栏下半的空 */
+/* —— ② 工具行：搜索放大镜（纯 CSS 画）+ 下拉自绘箭头 —— */
+/* —— ⑦ 页签区浅内衬：把文字页签"框"进结构里 —— */
+/* —— ② 筛选栏平铺：稀有度/人物两下拉直接可见，弃 details 折叠 —— */
+/* —— 翻看导航：上一片 / 位置 / 下一片（主按钮上方一行） —— */
+/* —— 主操作实底黄铜：全页唯一实底按钮 —— */
+/* 编号降权：小字靠边，不与效果文案抢 */
+/* —— 类型徽章恢复（瓦片名字下方，09-23「起码保留类型标注」） —— */
+/* A 卡墙外框：内缘金双线（在原投影列表上追加，暗部保留） */
+/* A 四角 L 角标：::before 八笔线性渐变画四角（::after 已被底部渐隐占用） */
+/* E8 筛选栏两端收头：左右各一条金竖线（box-shadow 追加不掀原投影） */
+/* F 名字压印：白纸上凸字（纸面反向高光） */
+/* 顶部收敛：下拉组加内衬底板，与左侧页签区形成对称两组（不再是散控件） */
+/* ① 插画窗画框感：微圆角 + 内衬金双线（炉石画窗对位） */
+/* ② 控件高光顶线：页签/下拉/按钮上缘 1px 亮线（立体感）；选中态 border 优先级更高不受影响 */
+/* ③ 计数/页签数字 tabular 对齐：跳数不抖 */
+/* 09-24 改回上下滚动浏览：不开入场动画（库页滚动不做整墙入场重播）。
+   不在此处再压 content-visibility——:711 的 auto（窗口挂载后恢复）负责跳过态，
+   09-25 实测这里遗留的 visible!important 会把 auto 整体压制，滚动预热失效。 */

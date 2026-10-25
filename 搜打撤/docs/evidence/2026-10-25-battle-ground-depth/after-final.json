@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T09:09:01.422Z",
+  "inputKind": "real-input",
+  "detail": "真实开发遭遇战、场景解码和回合横幅结束后；当前窗口黑像与2名联邦巡防兵，地面连至底部、血条和操作区可见，不写存档。",
+  "screenshot": {
+    "path": "after-final.png",
+    "bytes": 88221,
+    "sha256": "c3efedf430ef21085716ab02f8476e43af6c0d5c8a7adbd5ed83a1b877660743"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

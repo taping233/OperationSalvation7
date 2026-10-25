@@ -1,0 +1,63 @@
+{
+  "status": "matched-existing-failures",
+  "current": {
+    "files": 34,
+    "total": 404,
+    "passed": 395,
+    "failed": 9
+  },
+  "originalTextComparison": {
+    "files": 6,
+    "total": 96,
+    "passed": 87,
+    "failed": 9
+  },
+  "method": "Vitest pre-load supplies original test text from project-lean10-css-test-before; mocked fs returns game files from project-lean10-1024/before when present; shared tree unchanged. Imported runtime modules otherwise remain current.",
+  "failures": [
+    {
+      "file": "base-subpage-header-readability.test.js",
+      "name": "base subpage header contrast places the current .courtyard-zzz > .courtyard-v3-heading header on the shared reading surface",
+      "diagnostic": "AssertionError: expected '#161e24' to be 'rgba(22,29,35,.90)' // Object.is equality"
+    },
+    {
+      "file": "base-subpage-header-readability.test.js",
+      "name": "base subpage header contrast places the current .personnel-v12[data-section=\"companions\"] > .pv12-page-head header on the shared reading surface",
+      "diagnostic": "AssertionError: expected '#161e24' to be 'rgba(22,29,35,.90)' // Object.is equality"
+    },
+    {
+      "file": "battle-decision-redesign.test.js",
+      "name": "统一战斗二级界面展示契约 deck按有效卡面分组、稳定展示数量和只读返回",
+      "diagnostic": "AssertionError: expected { same: 1, other: 1 } to deeply equal { same: 2, other: 1 }"
+    },
+    {
+      "file": "card-face-presentation.test.js",
+      "name": "shared card presentation keeps card-face layout and materials out of individual page stylesheets",
+      "diagnostic": "AssertionError: expected [ Array(1) ] to deeply equal []"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 没有把共享 is/where/not 规则整条移除",
+      "diagnostic": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 仍保留活着的仓库、成就和出征人物声明",
+      "diagnostic": "TypeError: Cannot read properties of undefined (reading 'nodes')"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 game/src/hub/hub.warehouse.js 使用当前界面且不再生成旧作用域",
+      "diagnostic": "AssertionError: expected 'import { isCardBrowserCurrent, cardBr…' to contain 'warehouse-workspace-v12'"
+    },
+    {
+      "file": "partner-interaction.test.js",
+      "name": "伙伴页接线与数值隔离 scopes motion and focus styles to the portrait and disables it for both reduced-motion paths",
+      "diagnostic": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "wf-feedback1021-c-return-map.test.js",
+      "name": "各页返回键钉为页脚行内最右一枚（order:9 覆盖全部返回键 act）",
+      "diagnostic": "AssertionError: expected '/* ==================================…' to contain '返回地图'"
+    }
+  ]
+}

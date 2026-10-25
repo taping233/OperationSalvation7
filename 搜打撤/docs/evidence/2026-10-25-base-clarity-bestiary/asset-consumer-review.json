@@ -1,0 +1,22 @@
+{
+  "changedConsumers": [
+    {
+      "path": "game/src/cards/cards.data.js",
+      "sha256": "e920a223dc252a18527a5d244076299bb8c91c476e1b184f5c45038e246990e6"
+    },
+    {
+      "path": "game/src/cards/elite-bestiary.js",
+      "sha256": "34f43b343788825b2cf2e87f087e1d598f4c3b0b9483b1d1a260fbb66a9b699a"
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "sha256": "07110ceeb31e68b2ff6c33999438e270ae265a0dc970e7482681d5aa42353f1c"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "e591011b39c072b2a86925df78297a55e1917f47038a5840a51fff3e24c66071"
+    }
+  ],
+  "conclusion": "首页背景URL、人物原画URL与既有皮肤选择器未变；精英图鉴仅使用已登记monsterIds对应的正式立绘，27条路径均不在286个排除候选内。保留混合工作树既有fail-closed指纹，不替其它增量重签。",
+  "newExcluded": []
+}

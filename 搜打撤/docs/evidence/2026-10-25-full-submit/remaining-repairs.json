@@ -1,0 +1,38 @@
+{
+  "testsPassed": 67,
+  "testsFailed": 0,
+  "files": [
+    {
+      "file": "battle-restore-boundaries.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "card-rules-schema.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "chest-extra-rewards-choice.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "four-player-event-regressions.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "node-retrigger.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "page-perf-shared.test.js",
+      "status": "passed"
+    },
+    {
+      "file": "surface-activity-owner-document.test.js",
+      "status": "passed"
+    }
+  ],
+  "changes": [
+    "旧档载入与相同随机状态的现行非轮换遭遇完整相等，明确保证一只当层精英",
+    "保留页面的活动回调与动效偏好都读取ownerDocument，回归覆盖无全局document、降低动态、隐藏/恢复和销毁"
+  ]
+}

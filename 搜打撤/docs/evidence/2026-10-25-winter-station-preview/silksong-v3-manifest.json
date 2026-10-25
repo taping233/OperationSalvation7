@@ -1,0 +1,81 @@
+[
+  {
+    "layer": "far",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\far.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-3aa746e4-6fba-44ef-add3-694875adbc9c.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGB",
+    "alpha_extrema": null,
+    "bytes": 1803777,
+    "sha256": "ed593d556cdc4b7eedf1d49a299ed056a1bf482e2c9fdfed064acc4f09929ff3"
+  },
+  {
+    "layer": "mid",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\mid.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-c4a843b1-76df-428c-85e3-e305be9e7729.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 549851,
+    "sha256": "bb0b61cd35a737a11f0f90cdaaba4cd85303cb8c608020f3c8294970b105de08"
+  },
+  {
+    "layer": "ground",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\ground.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-a1535ebc-798e-43b8-82f3-9ee245391a58.png",
+    "size": [
+      1660,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 890782,
+    "sha256": "f7fb404d51c5354079a560bfb0383d05a4d1985f41fc3c9897c17d1cd5121b28"
+  },
+  {
+    "layer": "foreground",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\foreground.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-06cace59-93b2-412d-a115-ba1b0230f10e.png",
+    "size": [
+      1659,
+      948
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "bytes": 745136,
+    "sha256": "fca76037ebb215a51205b098101178786febf5c0ac7ec0dfc5dea70cf205358b"
+  },
+  {
+    "artifact": "composite.png",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\composite.png",
+    "bytes": 3053110,
+    "sha256": "3bd3076f1de788960094dc1224f226daf1dc2a97a4ae2435e1beaa08cfa22846"
+  },
+  {
+    "artifact": "portable.html",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\portable.html",
+    "bytes": 5322372,
+    "sha256": "262a68f1e4c03cf8a6dfe5ddb4c1898a4d464808f01b1468e3c8737bebd46e9f"
+  },
+  {
+    "artifact": "browser-preview.png",
+    "path": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\browser-preview.png",
+    "bytes": 151780,
+    "sha256": "aa66161a6db919fb9db45f5f1881af9dbd8449e882333ae13bf83a018a9601d2"
+  }
+]

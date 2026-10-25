@@ -1,0 +1,185 @@
+{
+  "recipe": "3.4",
+  "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::",
+  "scope": "two new NAI5 storyboards followed by built-in repaint",
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "concept": "Sword-riding immortal. Fresh waist-up three-quarter rear close shot: woman seated on the flat of one flying black sword, turning her face back over her shoulder toward viewer. One hand rests on the sword beneath her hip. Sword crosses lower frame diagonally and exits left; legs and boots outside crop. Face is focal point in upper middle-right, one broad ponytail sweeps left. Calm airborne poise, strong simple silhouette, no sword halo.",
+      "nai_path": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-swordimmortal.png",
+      "nai_payload": {
+        "input": "Fantasy game-card illustration, one woman.\n\nNew storyboard, readable main event. Keep face, hand and event inside central square-safe area of wide image.\n\nSword-riding immortal. Fresh waist-up three-quarter rear close shot: woman seated on the flat of one flying black sword, turning her face back over her shoulder toward viewer. One hand rests on the sword beneath her hip. Sword crosses lower frame diagonally and exits left; legs and boots outside crop. Face is focal point in upper middle-right, one broad ponytail sweeps left. Calm airborne poise, strong simple silhouette, no sword halo.\n\nQuiet blue-grey and warm ivory abstract fields. Strong face focus, clean shapes and generous breathing room, restrained metal light, no detailed scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1344,
+          "height": 768,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 23231901,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate decoration, dense hair strands, dense ruffles, particles, detailed scenery, multiple swords, extra jewelry, cloth puncture, cloth tunnel, blood",
+          "characterPrompts": [
+            {
+              "prompt": "One adult young woman, silver-white high ponytail, swept-aside front locks, exposed forehead, bright blue eyes, small fang smile, fair skin. Black rose beside blue ponytail ribbon, ordinary black round sunglasses resting on hair. Black off-shoulder short dress, bare legs, black ankle boots, no additional jewelry.",
+              "uc": "child, chibi, wrong eye color, goggles, necklace, earrings",
+              "center": {
+                "x": 0.62,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "Fantasy game-card illustration, one woman.\n\nNew storyboard, readable main event. Keep face, hand and event inside central square-safe area of wide image.\n\nSword-riding immortal. Fresh waist-up three-quarter rear close shot: woman seated on the flat of one flying black sword, turning her face back over her shoulder toward viewer. One hand rests on the sword beneath her hip. Sword crosses lower frame diagonally and exits left; legs and boots outside crop. Face is focal point in upper middle-right, one broad ponytail sweeps left. Calm airborne poise, strong simple silhouette, no sword halo.\n\nQuiet blue-grey and warm ivory abstract fields. Strong face focus, clean shapes and generous breathing room, restrained metal light, no detailed scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "One adult young woman, silver-white high ponytail, swept-aside front locks, exposed forehead, bright blue eyes, small fang smile, fair skin. Black rose beside blue ponytail ribbon, ordinary black round sunglasses resting on hair. Black off-shoulder short dress, bare legs, black ankle boots, no additional jewelry.",
+                  "centers": [
+                    {
+                      "x": 0.62,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate decoration, dense hair strands, dense ruffles, particles, detailed scenery, multiple swords, extra jewelry, cloth puncture, cloth tunnel, blood",
+              "char_captions": [
+                {
+                  "char_caption": "child, chibi, wrong eye color, goggles, necklace, earrings",
+                  "centers": [
+                    {
+                      "x": 0.62,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "sha256": "c345574b3ae8c3906da5bc10475fc031eedc22c3f9529e775ffea694ce70b4f0",
+      "actual_seed": 23231901
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "concept": "A sword thrust misses an evasive woman. Side three-quarter waist-up shot: one straight broad blade enters from left at chest height, visible point stops left of center. Woman leans backward into the right third, chest clearly beyond the point with visible empty gap. An intact discarded dark jacket falls at lower left, below the blade, with one sleeve hanging downward; her open hand has just released it. Blade, jacket and woman are separate silhouettes. No piercing, cloth hole, wound or weapon contact.",
+      "nai_path": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-goldencicada.png",
+      "nai_payload": {
+        "input": "Fantasy game-card illustration, one woman.\n\nNew storyboard, readable main event. Keep face, hand and event inside central square-safe area of wide image.\n\nA sword thrust misses an evasive woman. Side three-quarter waist-up shot: one straight broad blade enters from left at chest height, visible point stops left of center. Woman leans backward into the right third, chest clearly beyond the point with visible empty gap. An intact discarded dark jacket falls at lower left, below the blade, with one sleeve hanging downward; her open hand has just released it. Blade, jacket and woman are separate silhouettes. No piercing, cloth hole, wound or weapon contact.\n\nQuiet blue-grey and warm ivory abstract fields. Strong face focus, clean shapes and generous breathing room, restrained metal light, no detailed scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1344,
+          "height": 768,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 23231902,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate decoration, dense hair strands, dense ruffles, particles, detailed scenery, multiple swords, extra jewelry, cloth puncture, cloth tunnel, blood",
+          "characterPrompts": [
+            {
+              "prompt": "One adult young woman, silver-white high ponytail, swept-aside front locks, exposed forehead, bright blue eyes, small fang smile, fair skin. Black rose beside blue ponytail ribbon, ordinary black round sunglasses resting on hair. Black off-shoulder short dress, bare legs, black ankle boots, no additional jewelry.",
+              "uc": "child, chibi, wrong eye color, goggles, necklace, earrings",
+              "center": {
+                "x": 0.62,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "Fantasy game-card illustration, one woman.\n\nNew storyboard, readable main event. Keep face, hand and event inside central square-safe area of wide image.\n\nA sword thrust misses an evasive woman. Side three-quarter waist-up shot: one straight broad blade enters from left at chest height, visible point stops left of center. Woman leans backward into the right third, chest clearly beyond the point with visible empty gap. An intact discarded dark jacket falls at lower left, below the blade, with one sleeve hanging downward; her open hand has just released it. Blade, jacket and woman are separate silhouettes. No piercing, cloth hole, wound or weapon contact.\n\nQuiet blue-grey and warm ivory abstract fields. Strong face focus, clean shapes and generous breathing room, restrained metal light, no detailed scenery.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "One adult young woman, silver-white high ponytail, swept-aside front locks, exposed forehead, bright blue eyes, small fang smile, fair skin. Black rose beside blue ponytail ribbon, ordinary black round sunglasses resting on hair. Black off-shoulder short dress, bare legs, black ankle boots, no additional jewelry.",
+                  "centers": [
+                    {
+                      "x": 0.62,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate decoration, dense hair strands, dense ruffles, particles, detailed scenery, multiple swords, extra jewelry, cloth puncture, cloth tunnel, blood",
+              "char_captions": [
+                {
+                  "char_caption": "child, chibi, wrong eye color, goggles, necklace, earrings",
+                  "centers": [
+                    {
+                      "x": 0.62,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "sha256": "cb157985f49b518e5a11e1e1eed5d8fff54be125f54656a1e1cd56048134263c",
+      "actual_seed": 23231902
+    }
+  ]
+}

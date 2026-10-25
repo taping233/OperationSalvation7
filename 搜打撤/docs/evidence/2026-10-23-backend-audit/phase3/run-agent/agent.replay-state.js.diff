@@ -1,0 +1,24 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/run-agent/agent.replay-state.js.before b/D:/素材/代号柒/搜打撤/game/src/agent/agent.replay-state.js
+index 09d1be42..39233477 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase3/run-agent/agent.replay-state.js.before
++++ b/D:/素材/代号柒/搜打撤/game/src/agent/agent.replay-state.js
+@@ -37,10 +37,6 @@ function plainData(value, callbacks = false, ancestors = new WeakSet()) {
+   } finally { ancestors.delete(value); }
+ }
+ 
+-function rulesRng(snapshot) {
+-  return rulesRandomSnapshot(snapshot);
+-}
+-
+ // Rebuilt fixtures have fresh interaction identities. Keep current/stale battle
+ // membership and every rule field, without comparing process-local sequence IDs.
+ function replayInteraction(value, currentToken) {
+@@ -65,7 +61,7 @@ function readReplayState(obs = observe()) {
+   return plainData({ phase: obs.phase, turbo: isTurbo(), battle,
+     battleRules,
+     run: Object.fromEntries(RUN_KEYS.filter(key => game[key] !== undefined).map(key => [key, game[key]])),
+-    rules: window.SDT?.MAP?.rules || {}, rng: rulesRng(Random.snapshot()) }, true);
++    rules: window.SDT?.MAP?.rules || {}, rng: rulesRandomSnapshot(Random.snapshot()) }, true);
+ }
+ 
+ function firstDifference(expected, actual, path = '$') {

@@ -1,0 +1,1651 @@
+{
+  "status": "batch-complete-uncommitted-task-paused-by-user",
+  "unit": "UTF-8 bytes after CRLF to LF normalization",
+  "gameBaseline": 6542503,
+  "testsBaseline": 7129745,
+  "combinedBaseline": 13672248,
+  "target": 1367225,
+  "carriedGameStructuralNet": 430222,
+  "gameRound2Net": 39470,
+  "testsNet": 12064,
+  "round2CombinedNet": 51534,
+  "gameRuntimeNet": 477258,
+  "gameStructuralNet": 469692,
+  "gameStructuralPercent": 7.179087269810958,
+  "combinedStructuralNet": 481756,
+  "combinedStructuralPercent": 3.523604896575896,
+  "remainingToTenPercent": 885469,
+  "existingEngineeringCostDeducted": 7132,
+  "existingFormatAndCommentReductionExcluded": {
+    "formatOnly": 144,
+    "disabledImportCommentCleanup": 290
+  },
+  "gameRows": [
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "before": 3324,
+      "after": 1755,
+      "saved": 1569,
+      "sha256": "cf925408175f1dffa1f1b1439378b1985788abc1f8085f2494d857a2acee7c5e"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "before": 2387,
+      "after": 1348,
+      "saved": 1039,
+      "sha256": "b106eae62f194d890c0ca3f9d0b26d9fae429c5d58fb8425d40f1adc6fdb8ef6"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "before": 2934,
+      "after": 1606,
+      "saved": 1328,
+      "sha256": "d5958d23f3174920ebf87a102f36f319a3a019fede343527905d8e96170572a0"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "before": 6080,
+      "after": 3254,
+      "saved": 2826,
+      "sha256": "4e3d4a4b3f503cb7be216da7032b90e4c00496d0b50c3462c3987bac829ff5e3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "before": 1510,
+      "after": 931,
+      "saved": 579,
+      "sha256": "fb6780dbfe26e5c202a6f7543db2c0f9b456d5b6ac95103a05156972bd8d26d8"
+    },
+    {
+      "file": "game/src/core/live-bindings.js",
+      "before": 1424,
+      "after": 2029,
+      "saved": -605,
+      "sha256": "4b3aeaf0ea96ae783bbaea6b4d897252a1147fc5b0e12a83180802beccdcba22"
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "before": 14203,
+      "after": 7003,
+      "saved": 7200,
+      "sha256": "23e059a41a6122d6965d1adb45a26648296e855c7c42165613042e70fb79af70"
+    },
+    {
+      "file": "game/css/cards.css",
+      "before": 11343,
+      "after": 5871,
+      "saved": 5472,
+      "sha256": "fcbeb362ee3ce9c0a609d3eb0d9838d82d09a9fdf9dc641bef69d5dcdc49d504"
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "before": 10037,
+      "after": 4921,
+      "saved": 5116,
+      "sha256": "6c83a572d584a45beade5f247a60ab4e651662f46459cdef9670072cfa2fcdf9"
+    },
+    {
+      "file": "game/css/scenes.css",
+      "before": 41898,
+      "after": 37714,
+      "saved": 4184,
+      "sha256": "97453acbd3c5071d02f90b10faad2df520e5b0e5df3e97c77ad5f781084c0d1f"
+    },
+    {
+      "file": "game/css/winter.css",
+      "before": 85860,
+      "after": 82650,
+      "saved": 3210,
+      "sha256": "92e4104e4928fd0f7928bd5faafeada50dcb5e1d457ca1472489a8a302d3bffb"
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "before": 15221,
+      "after": 13226,
+      "saved": 1995,
+      "sha256": "1519b5833220879488ce0488657d37a90d2a8c5faf7bc095c38b135bdc67a1d0"
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "before": 16654,
+      "after": 15581,
+      "saved": 1073,
+      "sha256": "23ccdb460a75afb262be608d3a2898ba3d40b7ffc40b26c6e9da1ed364794fce"
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "before": 3633,
+      "after": 2602,
+      "saved": 1031,
+      "sha256": "1976256b6c04f60ca573b021fee9eb142de6fbbd9946252db06b180b1e85a163"
+    },
+    {
+      "file": "game/css/hub.css",
+      "before": 14557,
+      "after": 13726,
+      "saved": 831,
+      "sha256": "804f7f57072cdfa2255e91cb5d4208a40352110643329c7a1fb3ccf3d3e20fbb"
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "before": 16738,
+      "after": 16046,
+      "saved": 692,
+      "sha256": "85efa262c301fddfbf3cb8911c5f311dd8d7ece82a6e7baf79e6c3418e702a34"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "before": 19604,
+      "after": 19011,
+      "saved": 593,
+      "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47"
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "before": 19431,
+      "after": 18890,
+      "saved": 541,
+      "sha256": "e58576e00ddf1b43ceef3533b2862b119429ff901a4bd7f95d923cce292a294a"
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "before": 5929,
+      "after": 5709,
+      "saved": 220,
+      "sha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d"
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "before": 11743,
+      "after": 11577,
+      "saved": 166,
+      "sha256": "6b1d8c8ea0ebfd298940395bf834a8f51c2c8f00fa780f1c3b5ea29985a66d40"
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "before": 17298,
+      "after": 17191,
+      "saved": 107,
+      "sha256": "8cd4aa9c3ac1fbe7d116c84c244ce35d44634fe80c2ed734a5e2acd8043b0929"
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "before": 25119,
+      "after": 25017,
+      "saved": 102,
+      "sha256": "ad07375d0a19fa28817efa35d52264227b9e15f74f3ae158c63bc39ddf175b37"
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "before": 19894,
+      "after": 19805,
+      "saved": 89,
+      "sha256": "990d43f34cf601e4ad4f2ac1fe11d41523db1227252685351ed6cced608f8871"
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "before": 3036,
+      "after": 2960,
+      "saved": 76,
+      "sha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96"
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "before": 14923,
+      "after": 14887,
+      "saved": 36,
+      "sha256": "f5e77a20058950b1f002117cde60cb6a06168e3763a06ba54a50cbf1980fb59b"
+    }
+  ],
+  "testRows": [
+    {
+      "file": "tests/a3-battle-rules.test.js",
+      "before": 20564,
+      "after": 19568,
+      "saved": 996,
+      "sha256": "0081131b4b766ada6fb5a28ce2c6a29e33dfcffa35bdd7e03cf30a0141cce867"
+    },
+    {
+      "file": "tests/abyss-sovereign.test.js",
+      "before": 8844,
+      "after": 8823,
+      "saved": 21,
+      "sha256": "8f3bcf68d7d8b1b83707937aab051dc53d553e8b7c4fcf14ad8e21360ce7a764"
+    },
+    {
+      "file": "tests/agent-console-jump.test.js",
+      "before": 10663,
+      "after": 10572,
+      "saved": 91,
+      "sha256": "f8e465accdcc550cba72e4925394e340c913eb86fbb9e4734876e5a49cf62de4"
+    },
+    {
+      "file": "tests/agent-scenes.test.js",
+      "before": 6028,
+      "after": 5587,
+      "saved": 441,
+      "sha256": "c3ae1fdb7b8573884466e4dee9f6b617331fc1a7f2965ff9385049f50bf73b14"
+    },
+    {
+      "file": "tests/altar-sacrifice-zones-cloud.test.js",
+      "before": 12714,
+      "after": 11728,
+      "saved": 986,
+      "sha256": "0eb22a3f684faed89ffb54196bb700c3eb96ca951196399b01c8d20567d97b8a"
+    },
+    {
+      "file": "tests/armup-mode.test.js",
+      "before": 4088,
+      "after": 4067,
+      "saved": 21,
+      "sha256": "5c1032138f8e00029b4d6db89c9af1c7dd1d9b7618c98a200e3127f638480a23"
+    },
+    {
+      "file": "tests/bag-pouch-capacity.test.js",
+      "before": 19925,
+      "after": 19817,
+      "saved": 108,
+      "sha256": "3944bc13044c861fea9a30b026cc24bb19e2bf09b38c148f5bcc50d0f221600c"
+    },
+    {
+      "file": "tests/bag-slam-button.test.js",
+      "before": 12602,
+      "after": 12581,
+      "saved": 21,
+      "sha256": "c0796f2a70699a5ad17e906bc854dba0ccd3d00276d9f5ac4c3a2e3dfbf35067"
+    },
+    {
+      "file": "tests/battle-all-cards.test.js",
+      "before": 18631,
+      "after": 18610,
+      "saved": 21,
+      "sha256": "18826d3b110fc92e125d294d260be772a811e9a74c89d73da9200cbb1c191918"
+    },
+    {
+      "file": "tests/battle-ally-dom-order.test.js",
+      "before": 11504,
+      "after": 10609,
+      "saved": 895,
+      "sha256": "51258688e6db0914ff1955cde7b8bbe8f2a9bb59a5cf239c44540ae8d3166fa1"
+    },
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "before": 16677,
+      "after": 15995,
+      "saved": 682,
+      "sha256": "e62cde2ef1d1bae9c3be3c0df367c48aaf6298b41645e250388a1e40bd7e9389"
+    },
+    {
+      "file": "tests/battle-art-warm-scope.test.js",
+      "before": 2306,
+      "after": 2289,
+      "saved": 17,
+      "sha256": "8e4b5c21039adc3daada1d3bc257dac9f5213f143f2848d981522f4275e9f314"
+    },
+    {
+      "file": "tests/battle-bloom-discovery.test.js",
+      "before": 4315,
+      "after": 4225,
+      "saved": 90,
+      "sha256": "d00249308992ae2cf1d10b8d38ba244adf513efbd361512da926ae57e9040bde"
+    },
+    {
+      "file": "tests/battle-curse-immunity-lifetime.test.js",
+      "before": 4299,
+      "after": 4278,
+      "saved": 21,
+      "sha256": "5c009164e2fd3a6d56fbfe0113e54d45eccd1505645250be96007413b1cb37b8"
+    },
+    {
+      "file": "tests/battle-dev-grant-card.test.js",
+      "before": 1846,
+      "after": 1836,
+      "saved": 10,
+      "sha256": "0afb2b98fdbd0b715bf78b05fd0bb8ca6fed5edbf3dcaf2fe2e93c980b7d8b44"
+    },
+    {
+      "file": "tests/battle-direct-trigger-source.test.js",
+      "before": 4865,
+      "after": 4840,
+      "saved": 25,
+      "sha256": "01a3b5b1b8d26e346eff48c4f23225eb74784d0767a273b1adab458147b607f7"
+    },
+    {
+      "file": "tests/battle-discover-result-source.test.js",
+      "before": 5479,
+      "after": 5389,
+      "saved": 90,
+      "sha256": "255d9b50066a6935bc7fc6523920331e2f543f4d319ffbc3ffdf91b63621bcbb"
+    },
+    {
+      "file": "tests/battle-effect-damage-boundary.test.js",
+      "before": 2976,
+      "after": 2953,
+      "saved": 23,
+      "sha256": "59b12f8b5c9bc4ae5d73fd8385f975c098044c10d07bdbe072aa05fb9326fe5d"
+    },
+    {
+      "file": "tests/battle-end-turn-selection.test.js",
+      "before": 16366,
+      "after": 16270,
+      "saved": 96,
+      "sha256": "a63c55371c710118a978e43345ef08c9917c9719772cad394148d6e29ff47305"
+    },
+    {
+      "file": "tests/battle-entry-view.test.js",
+      "before": 20860,
+      "after": 20514,
+      "saved": 346,
+      "sha256": "607f79ba28f5d28c4318f10bd1319a3da6a81a56a4888fa1622ca6c2bdabbca2"
+    },
+    {
+      "file": "tests/battle-equipment-skill-synthesis.test.js",
+      "before": 10081,
+      "after": 9989,
+      "saved": 92,
+      "sha256": "2a40fea299aa5471d1a60b96b32d861987d5adf0060e4051fde717acbe39af4c"
+    },
+    {
+      "file": "tests/battle-frames-lifecycle.test.js",
+      "before": 36445,
+      "after": 35313,
+      "saved": 1132,
+      "sha256": "851925aca54d24685bce02d9ed7135818d1c0c8396fee0199cb862bb2569e0a6"
+    },
+    {
+      "file": "tests/battle-frames-ownership.test.js",
+      "before": 36513,
+      "after": 35381,
+      "saved": 1132,
+      "sha256": "e1b3f76311e4cd6ddc3efc8d7ffff5a324e5110ae72adbfd3ee7f75ad3f934a5"
+    },
+    {
+      "file": "tests/battle-hand-content-diff.test.js",
+      "before": 10094,
+      "after": 9600,
+      "saved": 494,
+      "sha256": "e630064109ffbd6edd3d23df3484b58d69fe547ab8c205c6b17fa390e067b87f"
+    },
+    {
+      "file": "tests/battle-hand-inspector.test.js",
+      "before": 80779,
+      "after": 80339,
+      "saved": 440,
+      "sha256": "16b44154fa75407a3190ff7511dce6726c2cac93f9fa37c6f5d62b740c85406e"
+    },
+    {
+      "file": "tests/battle-imitate-unplayable.test.js",
+      "before": 6276,
+      "after": 6184,
+      "saved": 92,
+      "sha256": "a660c0b73397dbb84dca92fc1c2903bc9a5987691250deb219bad4d346a22e72"
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "before": 36867,
+      "after": 36343,
+      "saved": 524,
+      "sha256": "d517a1e7167750d65a73353308d33afcd135518a485e29dfdcd1666b3b6b860e"
+    },
+    {
+      "file": "tests/battle-pouch-entry.test.js",
+      "before": 4346,
+      "after": 4325,
+      "saved": 21,
+      "sha256": "352bad77b9a5291c11f16cfdedca75a8e66f53653cb88b13a084d0fb0864eced"
+    },
+    {
+      "file": "tests/battle-render-derivation.test.js",
+      "before": 7955,
+      "after": 7515,
+      "saved": 440,
+      "sha256": "7692b8f13e0619c6e1ea265f71edc14836ac7203671c832e1eaf068cce1210ef"
+    },
+    {
+      "file": "tests/battle-render-runtime-trace.test.js",
+      "before": 13128,
+      "after": 12444,
+      "saved": 684,
+      "sha256": "f887945593621fb574d473becb5944d327bbbb8c8dea0a5eda1f3fa20afcd0d9"
+    },
+    {
+      "file": "tests/battle-resolution.test.js",
+      "before": 74825,
+      "after": 74683,
+      "saved": 142,
+      "sha256": "d96c68a5b72f51996384e393183c5ffd76fc684fa49e57520da25e9b12679b3c"
+    },
+    {
+      "file": "tests/battle-review-remediation-1023.test.js",
+      "before": 7709,
+      "after": 7683,
+      "saved": 26,
+      "sha256": "65a8350218afc5796b2d90720272a56b2d515dffbf6a6f42a029c75e295f6a46"
+    },
+    {
+      "file": "tests/battle-round-recording.test.js",
+      "before": 5345,
+      "after": 5320,
+      "saved": 25,
+      "sha256": "441ae1ab5f007ddd7e415dba486a43a988fc3603e2461e6026643ba543550cb6"
+    },
+    {
+      "file": "tests/battle-rule-audit-1014.test.js",
+      "before": 14263,
+      "after": 14238,
+      "saved": 25,
+      "sha256": "a757815f6ea1feabbbec3ae68fb85e827705da94392c358a106717206315b9b1"
+    },
+    {
+      "file": "tests/battle-runtime-compatibility.test.js",
+      "before": 0,
+      "after": 6394,
+      "saved": -6394,
+      "sha256": "1915c6f36d8f3f6f9951e14106e7ad6b761c312e401e87c8303bf04ca01ebbf7"
+    },
+    {
+      "file": "tests/battle-runtime-completion-1014.test.js",
+      "before": 12242,
+      "after": 12221,
+      "saved": 21,
+      "sha256": "39f4c02876916fabf92072ac804160a45fc246c86f5a873cc6c7205d65abd218"
+    },
+    {
+      "file": "tests/battle-runtime-state-guard.test.js",
+      "before": 5982,
+      "after": 6785,
+      "saved": -803,
+      "sha256": "881a55a79a2aaa1e395531ff87881f722087fd75846cc0469b4d50dc3578bfc1"
+    },
+    {
+      "file": "tests/battle-scenery-secondary-ready.test.js",
+      "before": 8480,
+      "after": 8134,
+      "saved": 346,
+      "sha256": "de4414afc6b726e9ab1404c1e2edf73edb95556c5e0842555572ab5be721524b"
+    },
+    {
+      "file": "tests/battle-semantic-feedback.test.js",
+      "before": 12046,
+      "after": 12025,
+      "saved": 21,
+      "sha256": "9b344512a4a1d575bd370d2c8bbcc4d0c47314beeface055c30b61c0f0fed37d"
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "before": 35854,
+      "after": 35635,
+      "saved": 219,
+      "sha256": "d554da2f5e893b773e6284eac9dbf77911d54d48f7c380b206cc106bf2c05cde"
+    },
+    {
+      "file": "tests/battle-snapshot-phase-cost.test.js",
+      "before": 8701,
+      "after": 8498,
+      "saved": 203,
+      "sha256": "3304c0cc1a16df7f2fdb91fbd519793d63f7e78ad3910c50d6ef598757a0cc78"
+    },
+    {
+      "file": "tests/battle-target-dom.test.js",
+      "before": 11350,
+      "after": 10455,
+      "saved": 895,
+      "sha256": "daab925913630981b9e029263f6c6fba9e01e013c8349623beb6041897ba0250"
+    },
+    {
+      "file": "tests/battle-temp-item-destination.test.js",
+      "before": 7302,
+      "after": 7212,
+      "saved": 90,
+      "sha256": "a802e669bc1f9a57acde7480c8af1bcb2e63ca238f1170721d93aa677eb872c5"
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "before": 15406,
+      "after": 14722,
+      "saved": 684,
+      "sha256": "720b91146ef4d19d6c94068e78ac53e58855e4753f6f31cf08776b6468060090"
+    },
+    {
+      "file": "tests/battle-trigger-lifecycle-unification.test.js",
+      "before": 14052,
+      "after": 14029,
+      "saved": 23,
+      "sha256": "65d9a1534e5225256d83dd626abec629bc6ef5749fab8a40f2f8338e7034ee6a"
+    },
+    {
+      "file": "tests/battle-turn-start-discover.test.js",
+      "before": 7320,
+      "after": 7299,
+      "saved": 21,
+      "sha256": "8542a745456429f4fd67b4205c5b9ad83e0e274308dbd55e79214797474f840f"
+    },
+    {
+      "file": "tests/battle-unit-metadata.test.js",
+      "before": 12850,
+      "after": 11955,
+      "saved": 895,
+      "sha256": "eb5261999ad69732cf25db4ab67b9c2fb19b1ef1270ecdff59fd95e48e674405"
+    },
+    {
+      "file": "tests/blackmarket-card-preview.test.js",
+      "before": 11165,
+      "after": 10296,
+      "saved": 869,
+      "sha256": "8c3f9e5575141315aa9ffd1af6cc6d779feca635ab1cb79a89dfe2ee8eed9ae5"
+    },
+    {
+      "file": "tests/boot.test.js",
+      "before": 51200,
+      "after": 50603,
+      "saved": 597,
+      "sha256": "db145eb8870d5689f3ec5887ad7bf343475c793ec301c1e71858362c79291f72"
+    },
+    {
+      "file": "tests/boss-equip-select.test.js",
+      "before": 10340,
+      "after": 10319,
+      "saved": 21,
+      "sha256": "d099e8888e3b962eab8f057a5229174b3fd61b4783327e1d8e4b4cf4aa85d667"
+    },
+    {
+      "file": "tests/boss-rescue-pool.test.js",
+      "before": 4253,
+      "after": 4232,
+      "saved": 21,
+      "sha256": "b0f2c00e0536a30e39834c90684f2d634aa84c34dcd614c50c9d8b0a30f7903d"
+    },
+    {
+      "file": "tests/builtin-card-execution-battle.test.js",
+      "before": 5785,
+      "after": 5762,
+      "saved": 23,
+      "sha256": "37536882dc4b90c0f4c18eb12285d9abeb095c1645daad0feee23d508808557c"
+    },
+    {
+      "file": "tests/builtin-migration-lookup.test.js",
+      "before": 11801,
+      "after": 11774,
+      "saved": 27,
+      "sha256": "c421fe22b12c1a8daa91ac39693ca3f9432d6ec2cd540aba622ce5c7da75fcd0"
+    },
+    {
+      "file": "tests/card-description-audit-battle.test.js",
+      "before": 20590,
+      "after": 20565,
+      "saved": 25,
+      "sha256": "91ff0367e1c44d2d0409ce775ad6fdd64a018f830a2238b7dbf51cf1479b3542"
+    },
+    {
+      "file": "tests/card-description-fix-auxiliary.test.js",
+      "before": 6148,
+      "after": 6123,
+      "saved": 25,
+      "sha256": "0a91fd68f475f11c747b771660a4cdac2287e6151a8e3f3f8fa1b9a4f4c2c71f"
+    },
+    {
+      "file": "tests/card-description-fix-lifecycle.test.js",
+      "before": 8726,
+      "after": 8701,
+      "saved": 25,
+      "sha256": "6074afcb5dd1c9ec25497cab4291cc6fe430b730efff6fd218807387265ac6b4"
+    },
+    {
+      "file": "tests/card-description-fix-pools.test.js",
+      "before": 8167,
+      "after": 8142,
+      "saved": 25,
+      "sha256": "79eee3296187c8e320411ff6647303007fe189397e2eea0d1849c63b153a7941"
+    },
+    {
+      "file": "tests/card-description-fix-target-effects.test.js",
+      "before": 8061,
+      "after": 8036,
+      "saved": 25,
+      "sha256": "7f5b57398b40fc8ed81cdaf38ef0a1977ff5b30580a41de28e88f8b54aa45b12"
+    },
+    {
+      "file": "tests/card-effect-semantics.test.js",
+      "before": 4978,
+      "after": 4888,
+      "saved": 90,
+      "sha256": "3c238072052cb2b649bfdeb88031019727790c670f3c56fa550f46c4e163f689"
+    },
+    {
+      "file": "tests/card-rules-per-foe-boundary.test.js",
+      "before": 4926,
+      "after": 4832,
+      "saved": 94,
+      "sha256": "59edeba69f422111c8ae865897c4ee4cf62a08011e134ab022e0e80d5cf5c56e"
+    },
+    {
+      "file": "tests/card-rules-schema.test.js",
+      "before": 20076,
+      "after": 20040,
+      "saved": 36,
+      "sha256": "84f42e72b0f06ae82e5bbd77835c85257d6f5a96530afc6b7e735a980c951294"
+    },
+    {
+      "file": "tests/cards-choice-armor-guard.test.js",
+      "before": 7155,
+      "after": 7059,
+      "saved": 96,
+      "sha256": "dd06658565d74774b0eca73deaffce4b6b2d639fdf6c2777707c6a9d130a235a"
+    },
+    {
+      "file": "tests/chase-slash.test.js",
+      "before": 4229,
+      "after": 4208,
+      "saved": 21,
+      "sha256": "67a494346759ede882e620f8ffbc4b7c58ca72be57256eba545ecc9b9196e50a"
+    },
+    {
+      "file": "tests/chest-acquired-gift-cloud.test.js",
+      "before": 15182,
+      "after": 15143,
+      "saved": 39,
+      "sha256": "02fc1e06a46b0244501f807b0dc35076349e5ce0361ff75bed2b535f0cf8a854"
+    },
+    {
+      "file": "tests/chest-batch-receipt.test.js",
+      "before": 3478,
+      "after": 3361,
+      "saved": 117,
+      "sha256": "40143c89199aa4490250b7fc701297897cb4b777660715b99ce6e19dc0a55b4d"
+    },
+    {
+      "file": "tests/chest-callback-lifecycle-audit.test.js",
+      "before": 13573,
+      "after": 13049,
+      "saved": 524,
+      "sha256": "0c0abc5bf01ccdd883a1917c6436b244879ca7201ef913df071ca2476fb889aa"
+    },
+    {
+      "file": "tests/chest-click-flow.test.js",
+      "before": 5925,
+      "after": 5752,
+      "saved": 173,
+      "sha256": "e15a823d45e622ee57e7c1bca7e405ca5bad7ed7d2a9aeb59a6b1a6524ad34e2"
+    },
+    {
+      "file": "tests/chest-coins-summary.test.js",
+      "before": 3730,
+      "after": 3206,
+      "saved": 524,
+      "sha256": "92340f0fd1294032cee2f0434a9af9b44b9cb8559a7b9b2754f7810ed939785b"
+    },
+    {
+      "file": "tests/chest-multi-queue-regression.test.js",
+      "before": 4128,
+      "after": 4011,
+      "saved": 117,
+      "sha256": "90bd3dec5a98a5473cd911d1de38159db9676c77cd16a34117aa3c48b041acb7"
+    },
+    {
+      "file": "tests/chest-receive-animation.test.js",
+      "before": 3764,
+      "after": 3647,
+      "saved": 117,
+      "sha256": "9b6a558d28e867dcf27e5496647be149b017feb0d8a0f892f9aaf9f8c8b84772"
+    },
+    {
+      "file": "tests/chests-reward-capacity-notice.test.js",
+      "before": 17871,
+      "after": 17832,
+      "saved": 39,
+      "sha256": "afbb63f4a031c9137292089e48159639ecaff05682eaabba9e2065ef2a8ed96c"
+    },
+    {
+      "file": "tests/compendium.test.js",
+      "before": 5630,
+      "after": 5609,
+      "saved": 21,
+      "sha256": "820f0a3ea9513e2185d2427a6938977dab29d14c6cb7dea43aae1d10650a2d41"
+    },
+    {
+      "file": "tests/css-dead-dom-reachability.test.js",
+      "before": 0,
+      "after": 3532,
+      "saved": -3532,
+      "sha256": "cae2d5daf77df6a03ba7eda4a38a1e030f19dafd13fc4ccf6e9a3b8a4663326f"
+    },
+    {
+      "file": "tests/cursed-blade.test.js",
+      "before": 4975,
+      "after": 4954,
+      "saved": 21,
+      "sha256": "df7819b806751ba506cfa19fbf6e364d0e381988fa4833ffb5642f002adce701"
+    },
+    {
+      "file": "tests/custom-cards.test.js",
+      "before": 3459,
+      "after": 3438,
+      "saved": 21,
+      "sha256": "ab0f64dfceb552396fe371109eaccfcce39ea5fd8bd7e79ad3b8295be015f84d"
+    },
+    {
+      "file": "tests/departure-real-session-review.test.js",
+      "before": 4043,
+      "after": 3988,
+      "saved": 55,
+      "sha256": "c544979191368cae987263dd9a4014d9536c929a42ac33cde59698827fc7af78"
+    },
+    {
+      "file": "tests/dev-console-lifecycle.test.js",
+      "before": 8379,
+      "after": 8340,
+      "saved": 39,
+      "sha256": "784036e3e999df6cd0bb39eb04fd05564dfacdd20ea66ee3fc94ef3800f663b5"
+    },
+    {
+      "file": "tests/dev-tools-lazy-entry.test.js",
+      "before": 15190,
+      "after": 15151,
+      "saved": 39,
+      "sha256": "d151fa9dfb7c5ffd73da53e201b6aa0672bcd6990176998fd58253aa1c466736"
+    },
+    {
+      "file": "tests/direct-cast.test.js",
+      "before": 20077,
+      "after": 20056,
+      "saved": 21,
+      "sha256": "28224d8b66286d48fc0944b06c41d252bd56e0965ec42c3afc6f7ed15350ed2b"
+    },
+    {
+      "file": "tests/discover-infusion-feedback.test.js",
+      "before": 4216,
+      "after": 4195,
+      "saved": 21,
+      "sha256": "730e92a6bae7baa99e0f18e5167f66d3b911f92e1dbc28add4896f30da50c38d"
+    },
+    {
+      "file": "tests/dual-wield.test.js",
+      "before": 3178,
+      "after": 3157,
+      "saved": 21,
+      "sha256": "4f8058ea3780cad3b880fd91992463bdc333428c4af00a4f252e254e21d51ba1"
+    },
+    {
+      "file": "tests/e2-view-hp.test.js",
+      "before": 4989,
+      "after": 4972,
+      "saved": 17,
+      "sha256": "03b63ca37dc90b6c2ccffb72f6001d5ab0c39621aaec2a3923af4c886d4d8ca9"
+    },
+    {
+      "file": "tests/e5-session-recovery.test.js",
+      "before": 23965,
+      "after": 23944,
+      "saved": 21,
+      "sha256": "7b45860117df645f728dc3c7b48a3bbdb568d1096d0f408b61bc075e3c0be3e7"
+    },
+    {
+      "file": "tests/e6-card-rules-execution.test.js",
+      "before": 10164,
+      "after": 10074,
+      "saved": 90,
+      "sha256": "fe77393d4cac6dfea57fbd65cfa3142addca5b56343cbb23d5cc606f4a7d596e"
+    },
+    {
+      "file": "tests/e7-rule-warning-view.test.js",
+      "before": 11435,
+      "after": 11345,
+      "saved": 90,
+      "sha256": "5e6837db8213bbb4164465346a928f6ed05a36ee5b96d28d509072a02ff005dc"
+    },
+    {
+      "file": "tests/e8-card-migration.test.js",
+      "before": 23096,
+      "after": 23004,
+      "saved": 92,
+      "sha256": "8a5cb477dd8e684ba94705fb2a88707a4525b994e3c0931b3a4ab5358185d380"
+    },
+    {
+      "file": "tests/ember-burst-rot-seed.test.js",
+      "before": 6174,
+      "after": 6153,
+      "saved": 21,
+      "sha256": "6bd17e4532c22bc1161b443cb9fc7ceff2ad1b096a9a06a0747604f9a05c2fd6"
+    },
+    {
+      "file": "tests/energy-crystal-restoration.test.js",
+      "before": 7639,
+      "after": 7618,
+      "saved": 21,
+      "sha256": "01081c4902251ffc0ce396e791472dfc332d4c916d3ccc6c1dd4558735883468"
+    },
+    {
+      "file": "tests/environment-fixtures.test.js",
+      "before": 0,
+      "after": 4548,
+      "saved": -4548,
+      "sha256": "f6af14317aa75cdba82404f7c6933527e0a79d7dc397a1f5ecdc38880ded0f1c"
+    },
+    {
+      "file": "tests/event-callback-lifecycle-audit.test.js",
+      "before": 47408,
+      "after": 46007,
+      "saved": 1401,
+      "sha256": "376fffa5e2167d0d225c604eed669938fa89e2ad319ba31e1db9028a48078771"
+    },
+    {
+      "file": "tests/event-choice-acquired-gift-cloud.test.js",
+      "before": 13868,
+      "after": 13831,
+      "saved": 37,
+      "sha256": "ad0499b7279dfd2e3fda8680097bc90e23c7cbcda3c68141d17d0fe9ec038937"
+    },
+    {
+      "file": "tests/event-choice-recovery-cloud.test.js",
+      "before": 32560,
+      "after": 30644,
+      "saved": 1916,
+      "sha256": "b933d3e8e4eb0abe4411fb9884cc8b524af25885755a0a62d3afd2c9effc1e36"
+    },
+    {
+      "file": "tests/event-choice-session-resume-cloud.test.js",
+      "before": 4795,
+      "after": 4665,
+      "saved": 130,
+      "sha256": "5fdfc261c16c5cfcc7aece5059507543d6a2d401c4ada4191d4393e615e8e5e6"
+    },
+    {
+      "file": "tests/event-node-binding-cloud.test.js",
+      "before": 13135,
+      "after": 12008,
+      "saved": 1127,
+      "sha256": "0f482b5aab155a925879bfbeca4a70fce3dec88044e1caac47b3e59fc2e305a2"
+    },
+    {
+      "file": "tests/event-recode-selection-continuity.test.js",
+      "before": 8695,
+      "after": 6505,
+      "saved": 2190,
+      "sha256": "bfae69de110aaef3b435b03af2ec5ad79f5991a82bde1881a9da51dc398af25d"
+    },
+    {
+      "file": "tests/event-settlement-unification.test.js",
+      "before": 20601,
+      "after": 19856,
+      "saved": 745,
+      "sha256": "baf29b26978cf754872d376fe1ce124d3683d6d36db60cc1eb05efb4045c01de"
+    },
+    {
+      "file": "tests/event-signal-puzzle-integration.test.js",
+      "before": 11527,
+      "after": 9337,
+      "saved": 2190,
+      "sha256": "0158153772f1cb67c6edff07db31d5c608a3035519c16fa3d79d0544bf5b4615"
+    },
+    {
+      "file": "tests/expedition-battle-presentation.test.js",
+      "before": 9437,
+      "after": 9405,
+      "saved": 32,
+      "sha256": "c8f575beac92daf6b9cea230ef7eb981a9697e850b16c1c103f8db401fe4eeda"
+    },
+    {
+      "file": "tests/expedition-page-lifecycle.test.js",
+      "before": 5008,
+      "after": 4966,
+      "saved": 42,
+      "sha256": "02db1e12d6261f1d86ad9be18bd07795feebf68bab1d4c0a1a9d37e8b5e78a04"
+    },
+    {
+      "file": "tests/extraction-first-explore-xp.test.js",
+      "before": 7232,
+      "after": 6956,
+      "saved": 276,
+      "sha256": "c445000dd210b5e8f6e709fbd3eae923c85928f9e7f2ccd3b9cb4bf132783b51"
+    },
+    {
+      "file": "tests/extraction-flow.test.js",
+      "before": 13885,
+      "after": 13609,
+      "saved": 276,
+      "sha256": "a9322f6a65e57a58965b7905c33dcbc37561380dd7c20942eb16be3ffdd02054"
+    },
+    {
+      "file": "tests/extraction-receipt-idempotency.test.js",
+      "before": 8749,
+      "after": 8724,
+      "saved": 25,
+      "sha256": "fa67f8fdef2c81f43f66cf216b8ec5c2876f6895a54f4c56be7d498ed53bd2de"
+    },
+    {
+      "file": "tests/extraction-record-saved-cards-cloud.test.js",
+      "before": 11275,
+      "after": 11250,
+      "saved": 25,
+      "sha256": "6bdedb5854d86b50ba4f22ec9d5bdcc2be4a99a73b5103ea78b0c33166524e70"
+    },
+    {
+      "file": "tests/extraction-recovery-ui.test.js",
+      "before": 10526,
+      "after": 10244,
+      "saved": 282,
+      "sha256": "e8d763d8ddf97473044b070a00f00fe2b0490c19c0a8e0bb98fdf2e83dad073f"
+    },
+    {
+      "file": "tests/extraction-recovery.test.js",
+      "before": 19913,
+      "after": 19888,
+      "saved": 25,
+      "sha256": "c64aa20786414d76adfc28ad48ad339a8acd89980e5ee6be2a7bef84feca98ee"
+    },
+    {
+      "file": "tests/extraction-session-resume.test.js",
+      "before": 6434,
+      "after": 6304,
+      "saved": 130,
+      "sha256": "c78af5182c45d4dc57d1983e5fa4bfbd9bea82128d6999d48c384348973dd139"
+    },
+    {
+      "file": "tests/extraction-settlement.test.js",
+      "before": 6103,
+      "after": 5827,
+      "saved": 276,
+      "sha256": "272420eec9fa2e4e385e2d2e9fabc764fd1ad48028e8f76d9ab8067ba2a9ca69"
+    },
+    {
+      "file": "tests/first-explore-marking.test.js",
+      "before": 8288,
+      "after": 7847,
+      "saved": 441,
+      "sha256": "bb8f17c04d23190d26d5d208e6b82bc9190051af21a3db29437932f1558fe869"
+    },
+    {
+      "file": "tests/four-player-capacity-text.test.js",
+      "before": 2370,
+      "after": 2262,
+      "saved": 108,
+      "sha256": "8a8c43fa3bafa247347568669469b44facee63b960d840e43b3a9ea2443c4e07"
+    },
+    {
+      "file": "tests/four-player-event-regressions.test.js",
+      "before": 8811,
+      "after": 8370,
+      "saved": 441,
+      "sha256": "8f8295a13211ba380ced962248be930e768c83e9362d7ef38e10d9056a5f3372"
+    },
+    {
+      "file": "tests/framework-independent-battles.test.js",
+      "before": 8033,
+      "after": 7985,
+      "saved": 48,
+      "sha256": "f51bfdee77cd520c761b1f703b12aca79c996351f66facfadc2c5ce55549b0ad"
+    },
+    {
+      "file": "tests/full-review-regressions-battle.test.js",
+      "before": 10684,
+      "after": 10506,
+      "saved": 178,
+      "sha256": "c7e4e9eeb5705d7a21a5919301919b33e5574c3cebcef6b28f0a0f2cbb5d033a"
+    },
+    {
+      "file": "tests/full-review-regressions-hub.test.js",
+      "before": 6542,
+      "after": 6438,
+      "saved": 104,
+      "sha256": "57f07fd702445e55f067372767eb60f186a5aeb6a68a93a13fef7bdbaa7672ae"
+    },
+    {
+      "file": "tests/full-review-regressions-world.test.js",
+      "before": 13876,
+      "after": 13435,
+      "saved": 441,
+      "sha256": "0a60591249b159ea84ced6066e5e6a862b00e4311dd157991ee611073a52b6f4"
+    },
+    {
+      "file": "tests/game-session-elapsed.test.js",
+      "before": 3916,
+      "after": 3859,
+      "saved": 57,
+      "sha256": "5e7ad83a21c8c78f8bf3b171456e703f6acedc752c0dd8b694cc31b28d8fe6ac"
+    },
+    {
+      "file": "tests/ghostblade-stealth-break.test.js",
+      "before": 7084,
+      "after": 7063,
+      "saved": 21,
+      "sha256": "0691e182602bf4456dec0ffa23914cf746e8b58dfe5da62573b9738f3c028f9f"
+    },
+    {
+      "file": "tests/hand-material-selection-window.test.js",
+      "before": 11236,
+      "after": 10712,
+      "saved": 524,
+      "sha256": "93e6b489769da716dda46f7099737737e9d5a014cd87b3d6038573174f34fd8d"
+    },
+    {
+      "file": "tests/helpers/css-reachability.js",
+      "before": 0,
+      "after": 5460,
+      "saved": -5460,
+      "sha256": "6fca705b1684cf73dddef16eb40694cfbdb35dc595c5168277a4688d5aef59a0"
+    },
+    {
+      "file": "tests/helpers/environment-fixtures.js",
+      "before": 0,
+      "after": 10805,
+      "saved": -10805,
+      "sha256": "8f824f0ade81e773dd1e08b8aac6ea508dc31077afe670fb503c6a5e4c84ee5f"
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "before": 23778,
+      "after": 23688,
+      "saved": 90,
+      "sha256": "cfb1b0d94b9f1363ae5c87bd665cff95d80f19a3721c9af8745dd9c3edb0e10a"
+    },
+    {
+      "file": "tests/infuse-free-paths.test.js",
+      "before": 8019,
+      "after": 7822,
+      "saved": 197,
+      "sha256": "0ae8ff884d3061925b35022d9e2795daeb623fc34d6b780ee1e20df38e73dc5d"
+    },
+    {
+      "file": "tests/infuse-free-play.test.js",
+      "before": 4388,
+      "after": 4369,
+      "saved": 19,
+      "sha256": "af831b18f7e37d1205435c47aab6f4d99545108d271621cfc1e39a2d67bb1713"
+    },
+    {
+      "file": "tests/item15-18-fixes.test.js",
+      "before": 5020,
+      "after": 4999,
+      "saved": 21,
+      "sha256": "1d3ed2d7fc0a4a46b012b72cb249999c24176afd4fc1d646c550e3244ed260b0"
+    },
+    {
+      "file": "tests/last-stand-poison-burst.test.js",
+      "before": 5155,
+      "after": 5134,
+      "saved": 21,
+      "sha256": "b01d0f15df0ff53c300fca6441f6726a1b043795b79067ce8588251c9470d9a6"
+    },
+    {
+      "file": "tests/lava-blast.test.js",
+      "before": 4373,
+      "after": 4352,
+      "saved": 21,
+      "sha256": "bb01433af74c0cd3286aff884418c2eeb740b230a401c0a680ec3103d2b2475b"
+    },
+    {
+      "file": "tests/m-batch-behavior.test.js",
+      "before": 5282,
+      "after": 5190,
+      "saved": 92,
+      "sha256": "f89493708ed28fc46ca09f3302006f4b68a6b41bc989d1cbe872816f73a4af03"
+    },
+    {
+      "file": "tests/m1-contract.test.js",
+      "before": 21709,
+      "after": 21619,
+      "saved": 90,
+      "sha256": "d76e95e77537f78afdffdde5560c3ded8a9c4e486f7ed1a7777dbb3241682ff5"
+    },
+    {
+      "file": "tests/m1-data.test.js",
+      "before": 9446,
+      "after": 9402,
+      "saved": 44,
+      "sha256": "5486896d505fa24c5868899c4cd546b7e9d90e1ff5a965999eb1dbac461485d9"
+    },
+    {
+      "file": "tests/m10-data.test.js",
+      "before": 5040,
+      "after": 5017,
+      "saved": 23,
+      "sha256": "02117ab85da1379008c66d5df68436dcce8e33c4317f0f73f46fdecd47df6061"
+    },
+    {
+      "file": "tests/m2-contract.test.js",
+      "before": 27564,
+      "after": 27474,
+      "saved": 90,
+      "sha256": "71b85be01dc9881a0342a0d2858d0225620ecf56d77e6f11a1e90b47260422c4"
+    },
+    {
+      "file": "tests/m3-contract.test.js",
+      "before": 22379,
+      "after": 22186,
+      "saved": 193,
+      "sha256": "3b1a6e7b0cd0143a289e3889ac3633d7a7985c23316d1d5ceb2b13b341db756e"
+    },
+    {
+      "file": "tests/m3-data.test.js",
+      "before": 22118,
+      "after": 21405,
+      "saved": 713,
+      "sha256": "f33951d9a2b3d813cd775e7a818f1bc1df896d9f410e4799deba0308287a28bf"
+    },
+    {
+      "file": "tests/m5-data.test.js",
+      "before": 14826,
+      "after": 14783,
+      "saved": 43,
+      "sha256": "4496a047ec44129209485236e18329385299f56d8ee2305e8ca2191ede9dfc33"
+    },
+    {
+      "file": "tests/m7-battle.test.js",
+      "before": 4414,
+      "after": 4320,
+      "saved": 94,
+      "sha256": "4deb4a28fed93fb7333bdcace20b1765988ba58c49fc75cd5e464c0f8d597c58"
+    },
+    {
+      "file": "tests/mana-surge.test.js",
+      "before": 4482,
+      "after": 4461,
+      "saved": 21,
+      "sha256": "5ade771e63ce3c9db525b0cea7186817be8de4b731f3247fde4725f1043045f5"
+    },
+    {
+      "file": "tests/message-batch-0917.test.js",
+      "before": 8782,
+      "after": 8692,
+      "saved": 90,
+      "sha256": "6190c3f212deade503abe382ccfbb3ac8b548c2571d37035a26d1606ae73cbd3"
+    },
+    {
+      "file": "tests/message-batch-0920-late.test.js",
+      "before": 5380,
+      "after": 5359,
+      "saved": 21,
+      "sha256": "5def4485efd1d1dd74df30f4f78a73bcbf2f4d2b9d7b6dafe5fd58972bcbd15d"
+    },
+    {
+      "file": "tests/message-fixes.test.js",
+      "before": 6342,
+      "after": 6252,
+      "saved": 90,
+      "sha256": "7a9cf34c68ef05ad056f8631f40b97d676f0004e1a7f6c3078ecf44febaf6b63"
+    },
+    {
+      "file": "tests/mistbox.test.js",
+      "before": 3664,
+      "after": 3643,
+      "saved": 21,
+      "sha256": "bf52553fabbc008cc4db264fac159277a1f2332691bbad198abee87f49b1186a"
+    },
+    {
+      "file": "tests/mystery-potion-observation.test.js",
+      "before": 10616,
+      "after": 10595,
+      "saved": 21,
+      "sha256": "b91c87a81d6e98bac78cc09d57abe5f5af5bc1b4047c91fc2f72b22c683e67ab"
+    },
+    {
+      "file": "tests/n1-infuse-uid-toggle.test.js",
+      "before": 5984,
+      "after": 5894,
+      "saved": 90,
+      "sha256": "e91b8f7701e118626dfafa8b4a2c3e00ea5f4d04a7277f933226111e26a98a3b"
+    },
+    {
+      "file": "tests/nest-hearts.test.js",
+      "before": 2869,
+      "after": 2779,
+      "saved": 90,
+      "sha256": "1a08ecdd6d0c12922a10f9c009d5444620129e6732aea97ed0ccce71a2c70d5d"
+    },
+    {
+      "file": "tests/nest-regression.test.js",
+      "before": 9198,
+      "after": 9177,
+      "saved": 21,
+      "sha256": "4d7f4d1dec01452bb5843283105a1ab9ea55a22298cffa75344c2e9a5a123efb"
+    },
+    {
+      "file": "tests/nightshift-u10-teardown-guards.test.js",
+      "before": 7591,
+      "after": 7459,
+      "saved": 132,
+      "sha256": "4acb13519aed6c361209581c39cedeb37e76331da1a4be849ecf0089decbf184"
+    },
+    {
+      "file": "tests/node-cancel-semantics.test.js",
+      "before": 9329,
+      "after": 7305,
+      "saved": 2024,
+      "sha256": "56e1b5a041144d3d3dd161ee1a88837dd8af8b85f80a9786e2165c7841f83427"
+    },
+    {
+      "file": "tests/node-retrigger.test.js",
+      "before": 20859,
+      "after": 20418,
+      "saved": 441,
+      "sha256": "5d0c545fdb958a110fb57c2d7146828a98ad1ccd940707dda714bdcbee70aa0b"
+    },
+    {
+      "file": "tests/normal-effects-deck-regression.test.js",
+      "before": 3064,
+      "after": 3039,
+      "saved": 25,
+      "sha256": "bb7f66704ef3351d0b14a7834e9da0dce18cd62b632980c3b22dee3df8ffe7cf"
+    },
+    {
+      "file": "tests/normal-starter-deck.test.js",
+      "before": 10621,
+      "after": 10596,
+      "saved": 25,
+      "sha256": "9504dd361af3242f399509461673b420d4380ef4415ef18d36e5811619c84691"
+    },
+    {
+      "file": "tests/page-perf-battle.test.js",
+      "before": 14325,
+      "after": 14199,
+      "saved": 126,
+      "sha256": "1aa44ecd21a0e11dd42866deeacc7f058240e0dcaf04078beb84621b27386f77"
+    },
+    {
+      "file": "tests/pearl-storage-interface.test.js",
+      "before": 10921,
+      "after": 10817,
+      "saved": 104,
+      "sha256": "e1e4942f9e60ecf40d235b43cb072cf10c2d6dec233441a0f923a9c04ddfae24"
+    },
+    {
+      "file": "tests/playthrough-bot.test.js",
+      "before": 5928,
+      "after": 5907,
+      "saved": 21,
+      "sha256": "3f36d4048c6624192c5808c2b5c585a1bcb26becc3ebc673b584e1bc5e15dcad"
+    },
+    {
+      "file": "tests/potion-tip-lifecycle.test.js",
+      "before": 10231,
+      "after": 9885,
+      "saved": 346,
+      "sha256": "51d273eda405a86908e79a654b02bcbfffacf9892dd38aa4ed7e907e4c29736f"
+    },
+    {
+      "file": "tests/potion-tip.test.js",
+      "before": 8484,
+      "after": 7972,
+      "saved": 512,
+      "sha256": "927949455d7d65d9c7523bcf221860641fd43cc17bae6fa13b88fb3e86ce7ce5"
+    },
+    {
+      "file": "tests/provoke-target-contract.test.js",
+      "before": 6366,
+      "after": 6345,
+      "saved": 21,
+      "sha256": "b6b998b8765e16d3b28dbd4ede9a785f026a6168c06e55d218a809da01cc6ee7"
+    },
+    {
+      "file": "tests/r3-0-command-guards.test.js",
+      "before": 7297,
+      "after": 7280,
+      "saved": 17,
+      "sha256": "83952325772b5095bd9b2dfe8d6c609637d239ddd2b26bed589aad9e217f581d"
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "before": 22511,
+      "after": 22394,
+      "saved": 117,
+      "sha256": "f094d0804051ceb65fc007c50957238aaa20aeaf92e81f3014f875dd1ece0585"
+    },
+    {
+      "file": "tests/r3-b-action-boundary.repro.test.js",
+      "before": 7035,
+      "after": 7018,
+      "saved": 17,
+      "sha256": "0ac425f1147569ef93c83c9f0085a409559d705ee648a4a7abe03733e8791cbb"
+    },
+    {
+      "file": "tests/r5a-session-menu.test.js",
+      "before": 11232,
+      "after": 11195,
+      "saved": 37,
+      "sha256": "2328084f22a5fc697e43e9a0954ebf646e21fe698501ea7b3972d2547098d1a8"
+    },
+    {
+      "file": "tests/rapid-fire.test.js",
+      "before": 5725,
+      "after": 5704,
+      "saved": 21,
+      "sha256": "0da018c982c00882bf58a19a64d5188e1a5352fc7d8945662b92d16607d2e350"
+    },
+    {
+      "file": "tests/reactive-draw-cast-continuation.test.js",
+      "before": 7787,
+      "after": 7766,
+      "saved": 21,
+      "sha256": "5d6a70d66c20e9fe366d1c86add824147225f9a3e14a3221511a1e765c6d041d"
+    },
+    {
+      "file": "tests/requested-card-integration.test.js",
+      "before": 14290,
+      "after": 14200,
+      "saved": 90,
+      "sha256": "978a88876c313592be888af498723ac53a54d706d81aaf05718a25beff24272d"
+    },
+    {
+      "file": "tests/requested-equipment-effects.test.js",
+      "before": 9635,
+      "after": 9614,
+      "saved": 21,
+      "sha256": "899bbb63f350367ee3d7ba9a07c002d8d788dff339b70825526b11edec8dfcda"
+    },
+    {
+      "file": "tests/reserved-card-id-regression.test.js",
+      "before": 5611,
+      "after": 5525,
+      "saved": 86,
+      "sha256": "b4f9c60d96a194bc6f87460c75735228f0cabd1736c3c574eade2a4395a0f34f"
+    },
+    {
+      "file": "tests/restoration-potion-observation.test.js",
+      "before": 8047,
+      "after": 8026,
+      "saved": 21,
+      "sha256": "fcea0cb977237e557f647fad740f7b7f43fd7f17ff7edd5eb49cd0d3b46e5e79"
+    },
+    {
+      "file": "tests/reward-capacity-preview.test.js",
+      "before": 12911,
+      "after": 12874,
+      "saved": 37,
+      "sha256": "f27a59b6410c651e1d593c98fb79c73ee33fe523b69924969a4e486b6ae63e9a"
+    },
+    {
+      "file": "tests/reward-settlement-unification.test.js",
+      "before": 7563,
+      "after": 7524,
+      "saved": 39,
+      "sha256": "3eae564fb461de66efaacb53535f455a1cfe78dbf6b9a002feb708514eaf7136"
+    },
+    {
+      "file": "tests/safe-pearl-access.test.js",
+      "before": 11255,
+      "after": 11151,
+      "saved": 104,
+      "sha256": "4baabb689316e7053755753f9c9929ef467845bc9121e3d3bec30cc14eceac09"
+    },
+    {
+      "file": "tests/save-recovery-session-feedback.test.js",
+      "before": 4223,
+      "after": 4202,
+      "saved": 21,
+      "sha256": "f593017c040e551b9f485427541108e6e96a49fcb98deafe9b7ea9f819830d66"
+    },
+    {
+      "file": "tests/save-slot-delete-results.test.js",
+      "before": 9104,
+      "after": 9083,
+      "saved": 21,
+      "sha256": "2d18f9876679e63daf287ba00cf9fc0e32db4e6d62ec9d5ac04352415b46b779"
+    },
+    {
+      "file": "tests/scavenge-mode-feedback.test.js",
+      "before": 4451,
+      "after": 4430,
+      "saved": 21,
+      "sha256": "6b95db58d4cb56c7c6b7e1d8668bc700f3518e867f63ef25872321b2e97fdf7e"
+    },
+    {
+      "file": "tests/session-base-persistence.test.js",
+      "before": 5590,
+      "after": 5535,
+      "saved": 55,
+      "sha256": "3afb4855a3848f28bc30f1163c960064bee04273c10ffbeaf4eb03a74a5cf8fc"
+    },
+    {
+      "file": "tests/skull-sword-effective-session.test.js",
+      "before": 32117,
+      "after": 31593,
+      "saved": 524,
+      "sha256": "7ce0c7ec1cdab3d4910ad2a4ac207f9ee9f4c7f9de5b1523bf732f2c8af373b9"
+    },
+    {
+      "file": "tests/stellar-divination.test.js",
+      "before": 8021,
+      "after": 7931,
+      "saved": 90,
+      "sha256": "0378151cdc3e8bf651173ac01052a114d4fd62f735b5019997a789a5a7d278cd"
+    },
+    {
+      "file": "tests/structured-backupcell.test.js",
+      "before": 4686,
+      "after": 4663,
+      "saved": 23,
+      "sha256": "aab74d080f1ee865e1d161e9d534e72e85a0f7a7cad420a45b781809fd30d559"
+    },
+    {
+      "file": "tests/structured-effect-authority.test.js",
+      "before": 8458,
+      "after": 8368,
+      "saved": 90,
+      "sha256": "ff9e4c5d1e25fbecb27baafeece9ab537420eb183d3188da57bd0b98240d917b"
+    },
+    {
+      "file": "tests/structured-onplay-battle.test.js",
+      "before": 10447,
+      "after": 10149,
+      "saved": 298,
+      "sha256": "c2ca8fa05098e2a84f1a4be25e8e908e8988cfbe711783b181eb299aaa300b2d"
+    },
+    {
+      "file": "tests/sts-attack-presentation.test.js",
+      "before": 6018,
+      "after": 5839,
+      "saved": 179,
+      "sha256": "cbf08759313724c0ac312488bb350083db5b5163324d3ef047ba76e93dfdfa66"
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "before": 11985,
+      "after": 11960,
+      "saved": 25,
+      "sha256": "9d9f8fb8bcee40869eecc46665111ee13ad2d3a2ef1ccd1ec3c56e21f35b3486"
+    },
+    {
+      "file": "tests/sts2-agent-replay.test.js",
+      "before": 13078,
+      "after": 13053,
+      "saved": 25,
+      "sha256": "baa15bd910cc87471d850e24cd2444625c39daa60e0dc38060d7b9777ef3ed47"
+    },
+    {
+      "file": "tests/sts2-battle-settings-restart.test.js",
+      "before": 10620,
+      "after": 10405,
+      "saved": 215,
+      "sha256": "4b30acc30d4acde2b63add9dfae99b001187a3e8e3c3a2bd4828956d105c23f0"
+    },
+    {
+      "file": "tests/sts2-combat-facts.test.js",
+      "before": 9745,
+      "after": 9651,
+      "saved": 94,
+      "sha256": "9d69eeaaa5f69a99a7878ee9554e88024f7613c3305705c6a90b880e38fe269b"
+    },
+    {
+      "file": "tests/sts2-consumed-items.test.js",
+      "before": 10059,
+      "after": 9942,
+      "saved": 117,
+      "sha256": "54d37ba6bf30fc9c52ebd860a1fb1f1a513b6ec8be1837a8b8794726dd38d622"
+    },
+    {
+      "file": "tests/sts2-consumed-pile.test.js",
+      "before": 7271,
+      "after": 7154,
+      "saved": 117,
+      "sha256": "5c3b83301818bad0dd57a96a1ffe3c83a90ec9a081437775a573aff0ea7f0446"
+    },
+    {
+      "file": "tests/sts2-consumed-rules.test.js",
+      "before": 13066,
+      "after": 12974,
+      "saved": 92,
+      "sha256": "1cdb6b738c4eab7818bd77b514bd901c5c113fc6de1ffbcdfc5bcaa8d899dcbe"
+    },
+    {
+      "file": "tests/sts2-enemy-plan.test.js",
+      "before": 6380,
+      "after": 6357,
+      "saved": 23,
+      "sha256": "2584f0088d0505ecfd249424b6b1375d9c52a98eea31d87d75092529d2acb7ae"
+    },
+    {
+      "file": "tests/sts2-hand-selection-contract.test.js",
+      "before": 10126,
+      "after": 10101,
+      "saved": 25,
+      "sha256": "ffc45d61f4bbf76ba143b5b601b178c51b140a49fca87ad0c9307d543f0b8bbe"
+    },
+    {
+      "file": "tests/sts2-infusion-flow-1021.test.js",
+      "before": 15962,
+      "after": 15937,
+      "saved": 25,
+      "sha256": "821e0108a71ef5ee0e5fc7925a0a131dc758e73f661231b1f38890b92c3e7175"
+    },
+    {
+      "file": "tests/sts2-unified-consumed-pile.test.js",
+      "before": 12028,
+      "after": 11911,
+      "saved": 117,
+      "sha256": "5ed93dde79cf056fdc637a19a8ef09e382c457791caf956fb69e6cbc2b6d4c2f"
+    },
+    {
+      "file": "tests/sword-consume-trigger.test.js",
+      "before": 7624,
+      "after": 7603,
+      "saved": 21,
+      "sha256": "eaae0bf15af3013d42307fdae20d685c2b6a2c8f3cdf7d38580da51d4ae62d7d"
+    },
+    {
+      "file": "tests/sys03-altar-restore-txn.test.js",
+      "before": 29842,
+      "after": 28856,
+      "saved": 986,
+      "sha256": "4dc27a80edb0c3f155d4ac518faa57a1d1366e6a13b780b0107b2b33764780db"
+    },
+    {
+      "file": "tests/sys03-loot-shop-txn.test.js",
+      "before": 33478,
+      "after": 33319,
+      "saved": 159,
+      "sha256": "3982cb96b5cd7d82b3ab12c704eaa2be8e98435c1ba64b25bba3f1f5f5e2d971"
+    },
+    {
+      "file": "tests/terminal-death.test.js",
+      "before": 6711,
+      "after": 6682,
+      "saved": 29,
+      "sha256": "defdc0c634edb9896af7ce982654f28c54f287572fb57b92254dd339ba34e472"
+    },
+    {
+      "file": "tests/terminal-persistence.test.js",
+      "before": 8513,
+      "after": 8488,
+      "saved": 25,
+      "sha256": "2de797a3888ce602d671acf1446d26a63a825ebafb11ac7db3ac10db93a3f4e6"
+    },
+    {
+      "file": "tests/terminal-retry-copy.test.js",
+      "before": 5957,
+      "after": 5928,
+      "saved": 29,
+      "sha256": "15805dbbe5fb9ea2d25cee404348e9c20580384175008f0038101f4f8475af56"
+    },
+    {
+      "file": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "before": 6445,
+      "after": 6355,
+      "saved": 90,
+      "sha256": "f3715298ac72a71e222a2b7b97b7b9472482d7cbec1770fcf1519d1c147b6c55"
+    },
+    {
+      "file": "tests/tt12-hitechrd-structured.test.js",
+      "before": 8601,
+      "after": 8511,
+      "saved": 90,
+      "sha256": "15f382fe98a8af343c2685a315234732ae515995867fcfd1ec04b96b2097df27"
+    },
+    {
+      "file": "tests/tt12-structured-battle.test.js",
+      "before": 7763,
+      "after": 7746,
+      "saved": 17,
+      "sha256": "c573b32be623570d9d4860fcecb6fec728f2f1f949cdec503c537fd50b80f5c4"
+    },
+    {
+      "file": "tests/tt7-frozenight-structured-battle.test.js",
+      "before": 5767,
+      "after": 5677,
+      "saved": 90,
+      "sha256": "15c269068516c4b18f4b34d3659638c1a2794b1ed92ebf0e11a92160b47accac"
+    },
+    {
+      "file": "tests/tt7-hand-payment.test.js",
+      "before": 10342,
+      "after": 10325,
+      "saved": 17,
+      "sha256": "b02d5afff19d6bcdc42cac55838d0cd11723a0c69c6074d02ec2c83ac088c45b"
+    },
+    {
+      "file": "tests/tt7-sneak-structured.test.js",
+      "before": 4258,
+      "after": 4063,
+      "saved": 195,
+      "sha256": "5376093cdef2d75ce2efceb385c35b1a39ab8651238ce8098d93958dcf50788e"
+    },
+    {
+      "file": "tests/u18-negative-hp-death.test.js",
+      "before": 7264,
+      "after": 7243,
+      "saved": 21,
+      "sha256": "3f25c89c698b1586c07c99c123aee908d4fa0b1e6a3ea1a29fdede666cc76d78"
+    },
+    {
+      "file": "tests/venom-staff-passive.test.js",
+      "before": 4181,
+      "after": 4160,
+      "saved": 21,
+      "sha256": "06f329d3cd8f4bccf33c5dc98b5faefbba853a2eeee8f145f9e12b2cba454cbb"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "before": 6013,
+      "after": 5921,
+      "saved": 92,
+      "sha256": "fc43e08beefb7856e10be712ab769dcdb392aece200cd6c5ab8ef4709a7fbafe"
+    },
+    {
+      "file": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "before": 11431,
+      "after": 11410,
+      "saved": 21,
+      "sha256": "9082202186ad5c0560befdf0b954a61486ffd41d0e1f3790ff48e8be2981a8f1"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-chain.test.js",
+      "before": 5942,
+      "after": 5921,
+      "saved": 21,
+      "sha256": "40b6508335244386a9c9d0bc2410c6d866c64ac0c3240c38542319aebbd97dec"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-potion-targeting.test.js",
+      "before": 9043,
+      "after": 8531,
+      "saved": 512,
+      "sha256": "7ac095abe8c955957a337575b9cd388e6ed1d2720771ba298802176a605df3ad"
+    },
+    {
+      "file": "tests/wf-feedback1021-b-status-icons.test.js",
+      "before": 7848,
+      "after": 6953,
+      "saved": 895,
+      "sha256": "4db0f47c1cb499e2da8a1242f42287adc08d01a329983ec42445078e571b73f7"
+    }
+  ]
+}

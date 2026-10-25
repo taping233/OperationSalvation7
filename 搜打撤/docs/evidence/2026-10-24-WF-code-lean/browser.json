@@ -1,0 +1,32 @@
+{
+  "platform": "Codex IAB",
+  "url": "http://127.0.0.1:5200/",
+  "tabId": "1",
+  "date": "2026-10-24",
+  "source": "independent memory fixture with actual modules and delegated DOM click",
+  "actualInput": [
+    "pouch put",
+    "pouch take",
+    "pearl put",
+    "pearl take",
+    "achievement entry",
+    "achievement detail"
+  ],
+  "constructed": [
+    "isolated memory inventory",
+    "saveGame counts only"
+  ],
+  "result": {
+    "result": {
+      "type": "object",
+      "value": {
+        "saves": 4,
+        "spellStored": false,
+        "totalCards": 4,
+        "woodStored": false
+      }
+    }
+  },
+  "errors": [],
+  "snapshot": "- main:\n  - button \"只看壁纸\":\n    - generic: 只看壁纸\n  - generic: 冬日猜想 / CODE NAME 7\n  - generic: CODE NAME 7\n  - generic: CODE NAME 7\n  - generic: CODE NAME 7\n  - generic: CODE NAME 7\n  - region \"主菜单\":\n    - heading \"升格会的冬日猜想\" [level=1]:\n      - img \"升格会的冬日猜想\"\n    - navigation \"开始与指南\":\n      - button \"进入城市\":\n        - generic: 进入城市\n        - generic: \"01\"\n      - button \"打开生存指南\":\n        - generic: 生存指南\n        - generic: \"02\"\n  - complementary \"收藏与系统\":\n    - navigation \"收藏\":\n      - button \"成就总览\":\n        - generic: 成就总览\n        - generic: \"03\"\n      - button \"照相馆\":\n        - generic: 照相馆\n        - generic: \"04\"\n    - navigation \"系统工具\":\n      - button \"设置\":\n        - generic: 设置\n      - button \"制作名单\":\n        - generic: 制作名单\n      - button \"退出游戏\":\n        - generic: 退出游戏\n  - button \"音效 / 背景乐开关\":\n  - button \"留言信箱\":\n    - generic: 留言信箱\n  - button \"切换壁纸，当前第1张，共6张\":\n    - generic: 壁纸 1/6\n  - generic: LOCAL 00:46:25\n  - generic: ASCENSION COUNCIL v0.60.0\n  - generic: Winter Speculation · Ascension Council · 2026\n  - img \"tools\"\n  - text: 节点测试\n  - button \"遭遇战\"\n  - button \"BOSS 战\"\n  - button \"商店\"\n  - button \"事件\"\n  - button \"小宝箱\"\n  - button \"中宝箱\"\n  - button \"大宝箱\"\n  - button \"火堆\"\n  - button \"祭坛\"\n  - paragraph: 开发者模式专属 · 测试局不写入存档\n- heading \"pearl-box 珍珠盒\" [level=3]:\n  - img \"pearl-box\"\n  - text: 珍珠盒\n- status: 0/ 9\n- paragraph: 整叠存取 · 存入后不占背包格\n- heading \"珍珠盒中\" [level=4]\n- paragraph: 珍珠盒是空的\n- heading \"随身背包\" [level=4]\n- button \"测试木材，1 张，整叠存入珍珠盒\":\n  - generic: 资源\n  - generic: ·古朴\n  - generic: 测试木材\n  - generic: \"1\"\n  - generic: 整叠存入 · 1 张\n- button \"查看测试木材详情\": 查看详情\n- generic \"收纳说明\"\n- button \"收好珍珠盒，返回背包\" [active]:\n  - img \"arrow\"\n  - text: 返回背包"
+}

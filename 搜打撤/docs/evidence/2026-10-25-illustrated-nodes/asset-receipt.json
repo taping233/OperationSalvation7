@@ -1,0 +1,17 @@
+{
+  "asset": "game/assets/ui/illustrated-node/choice-winter-v1.webp",
+  "sha256": "1a8e7b34e8ecfc80cc39e3b9049979f9ebc20afb5ddbff513d60927129dcbc92",
+  "bytes": 58660,
+  "source": "docs/evidence/2026-10-25-event-option-art/asset-v4-receipt.json",
+  "method": "Approved v4 panel copied losslessly from game/dev/assets/event-option-winter-v4.webp; built-in imagegen graphite/gray paper treatment. Abstract option ghosts remain native inline SVG.",
+  "consumerReview": {
+    "game/src/run/chests.js": {
+      "sha256LF": "1d315789d041f46e09868857dd7882d39c5ac9e6bd9516bf43af853a2e68308c",
+      "review": "Only presentation frame wiring and extraction of event selection binding changed in this task; asset selectors, asset constructors and omission rules retained."
+    },
+    "game/src/run/game.run.scenes.js": {
+      "sha256LF": "a38feb44988dd32fe36045b94c8b4461b00f8864d916fe9eea837dfbcf6a246b",
+      "review": "Only presentation frame wiring and extraction of event selection binding changed in this task; asset selectors, asset constructors and omission rules retained."
+    }
+  }
+}

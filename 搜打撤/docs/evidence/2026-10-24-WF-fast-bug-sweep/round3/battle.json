@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-24",
+  "status": "implemented and frozen for parent integration; uncommitted",
+  "fixedRootCauses": 1,
+  "productionFiles": ["game/src/battle/bag/battle.bag.domain.js"],
+  "newTests": ["tests/fast-bug-sweep-round3-battle.test.js"],
+  "fixes": [
+    {
+      "id": "fast-battle-round3-01",
+      "title": "已结束战斗的残留道具命令仍能吞永久卡并回血",
+      "red": "真实普通战撤退后，useItem/usePotion各自仍从结束场景G.ownedCards找到旧版治疗道具并同步消费；两个回归均失败：expected [] to include source UID。",
+      "cause": "两公开入口未核对battleActive，旧版同步治疗绕过动作队列的在场检查；结构化旧命令也会先尝试非法终局阶段迁移。",
+      "change": "useItem与usePotion仅在真实战斗仍活动时接收命令；保留合法战斗中的发现预览、药水队列、消耗区取回与结算路径。",
+      "realEngineTests": [
+        "撤退后旧版useItem不消费源UID、不治疗、不追加played账本",
+        "撤退后旧版usePotion不消费源UID、不治疗、不追加played账本",
+        "胜利后真实结构化金疮药usePotion不抛阶段错误、不消费源UID、不治疗"
+      ]
+    }
+  ],
+  "validation": {
+    "targetCommand": "node node_modules/vitest/vitest.mjs run tests/fast-bug-sweep-round3-battle.test.js tests/sts2-consumed-items.test.js tests/energy-crystal-restoration.test.js tests/restoration-potion-observation.test.js tests/battle-discovery-cancellation.test.js --reporter=dot",
+    "target": { "exitCode": 0, "filesPassed": 5, "testsPassed": 45, "newTestsPassed": 3, "durationSeconds": 4.22 },
+    "additionalAuditCommand": "node node_modules/vitest/vitest.mjs run tests/battle-equipment-skill-synthesis.test.js tests/battle-nature-staff-cost.test.js tests/equipment-semantic-operations.test.js tests/requested-equipment-effects.test.js tests/cov-target-session.test.js tests/bag-slam-button.test.js tests/battle-action-runner-readiness.test.js tests/battle-queue-direct-release-forwarding.test.js tests/battle-temp-item-destination.test.js tests/battle-temp-item-settlement.test.js --reporter=dot",
+    "additionalAudit": { "exitCode": 0, "filesPassed": 10, "testsPassed": 100, "durationSeconds": 6.05 },
+    "eslint": { "exitCode": 0, "scope": "one production file and one new test file" },
+    "diffCheck": { "exitCode": 0, "scope": "same two paths" },
+    "notRun": ["browser: parent owns current-window integration", "build", "full suite", "commit", "push"]
+  }
+}

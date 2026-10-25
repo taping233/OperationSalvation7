@@ -1,0 +1,68 @@
+{
+  "status": "applied_after_ownership_release",
+  "sharedSourcesModified": true,
+  "candidate": "acquire",
+  "patch": "candidate.patch",
+  "patchPathsRelativeTo": "D:/素材/代号柒",
+  "files": [
+    {
+      "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "baseSha256": "b4425b75b8f9f291c33af5db24c23a104a2eca7115c19fb1b7ab64890f1e0b7e",
+      "requireTargetAbsent": false,
+      "candidateSha256": "9179b553b4c680334a04251b2cf1c76b74bd9cc0b9642d6ed6a6c3257585f870",
+      "beforeSnapshot": "before/game/src/battle/effects/battle.acquire-operation.domain.js",
+      "afterSnapshot": "after/game/src/battle/effects/battle.acquire-operation.domain.js",
+      "bytesBefore": 12000,
+      "bytesAfter": 11107,
+      "added": 11,
+      "removed": 29,
+      "netRemoved": 18,
+      "appliedSha256": "abb0bf09ee2f4ffe562c6710b47ec347060cbbe0a1c6cb1b6c833aeefd12771e",
+      "appliedTextEqualsCandidate": true,
+      "onlyByteDifferenceIsCRLFtoLF": true,
+      "appliedBytes": 10957,
+      "evidenceBeforeSnapshot": "before/game/src/battle/effects/battle.acquire-operation.domain.js.before.txt"
+    }
+  ],
+  "productionSourceLineChanges": {
+    "added": 11,
+    "removed": 29,
+    "netRemoved": 18
+  },
+  "wholeRepositoryLineChanges": {
+    "added": 11,
+    "removed": 29,
+    "netRemoved": 18
+  },
+  "applicationPrecondition": "Wait for ownership release, then require all source SHA256 values to match and every new target to remain absent before applying.",
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "staticVerification": {
+    "currentBaseShaMatches": true,
+    "newTargetsAbsent": true,
+    "syntax": [
+      {
+        "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "exitCode": 0
+      }
+    ],
+    "gitApplyCheckExitCode": 0,
+    "testsExecuted": false,
+    "sharedSourcesModified": false
+  },
+  "ownershipAuthorization": "Root confirmed WF-live-repair-1023 no longer owns the exact combat/acquire source paths.",
+  "lineEndingNote": "git apply used repository LF line endings; original prepared snapshots preserve their prior CRLF. Applied text is identical after CRLF normalization, and applied SHA256 values are recorded separately.",
+  "finalVerification": {
+    "syntax": [
+      {
+        "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+        "exitCode": 0
+      }
+    ],
+    "gitDiffCheckExitCode": 0,
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  }
+}

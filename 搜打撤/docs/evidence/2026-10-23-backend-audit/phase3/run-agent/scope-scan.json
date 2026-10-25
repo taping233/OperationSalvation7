@@ -1,0 +1,1218 @@
+{
+  "method": "Acorn parse + eslint-scope lexical read-reference scan; no modules executed; exported bindings and callback parameters excluded from deletion candidates",
+  "files": [
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "lines": 65,
+      "publicExports": [
+        "SAFE_BURST",
+        "SAFE_CLOSED",
+        "createChestFrameSets",
+        "safeOpeningHTML"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/chests.js:17"
+      ]
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "lines": 106,
+      "publicExports": [
+        "matchingChestRewards",
+        "nodeChestRewardAt",
+        "restoreChestReward",
+        "serializeChestReward",
+        "validBattleRewardContinuation",
+        "validNodeChestRewards"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/chests.js:15",
+        "game/src/run/game.run.flow.js:23"
+      ]
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "lines": 915,
+      "publicExports": [
+        "Chests",
+        "SDT"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "lines": 36,
+      "publicExports": [
+        "encounterPoolMeta",
+        "layerEncounterMeta"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "lines": 52,
+      "publicExports": [
+        "resolveEncounterGroup",
+        "selectEncounterSpec"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.scenes.js:24"
+      ]
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "lines": 215,
+      "publicExports": [
+        "createEventCardChoiceController"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.flow.js:21"
+      ]
+    },
+    {
+      "file": "game/src/run/event-commands.js",
+      "lines": 132,
+      "publicExports": [
+        "createEventCommands",
+        "settleEventCommand"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/event-card-choice.js:6",
+        "game/src/run/event-runtime.js:2",
+        "game/src/run/game.run.events.js:10"
+      ]
+    },
+    {
+      "file": "game/src/run/event-lifecycle.js",
+      "lines": 200,
+      "publicExports": [
+        "createEventLifecycle",
+        "createLazyEventEntry"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.events.js:11",
+        "game/src/run/game.run.flow.js:22"
+      ]
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "lines": 36,
+      "publicExports": [
+        "recodeEligibleCards",
+        "recodeSourceMatches",
+        "recodeSourceSnapshot"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/event-commands.js:1",
+        "game/src/run/game.run.events.js:8"
+      ]
+    },
+    {
+      "file": "game/src/run/event-runtime.js",
+      "lines": 20,
+      "publicExports": [
+        "createRunEventRuntime"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.flow.js:368"
+      ]
+    },
+    {
+      "file": "game/src/run/expedition-tool-art.js",
+      "lines": 13,
+      "publicExports": [
+        "expeditionToolArt"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/expedition.view.js:2"
+      ]
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "lines": 232,
+      "publicExports": [
+        "clearExpeditionPanel",
+        "expeditionObjective",
+        "expeditionRoutes",
+        "findMapTravelPath",
+        "getExpeditionPreview",
+        "getMapTravelPresentation",
+        "mapTravelCurve",
+        "mapTravelPoint",
+        "renderExpeditionPanel",
+        "setExpeditionPreview"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "lines": 52,
+      "publicExports": [
+        "isExtractNode",
+        "previewExtraction"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/game-session-departure.js",
+      "lines": 208,
+      "publicExports": [
+        "createSessionDeparture"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:3"
+      ]
+    },
+    {
+      "file": "game/src/run/game-session-persistence.js",
+      "lines": 284,
+      "publicExports": [
+        "createSessionPersistence"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:1"
+      ]
+    },
+    {
+      "file": "game/src/run/game-session-restoration.js",
+      "lines": 190,
+      "publicExports": [
+        "createSessionRestoration"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:2"
+      ]
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "lines": 760,
+      "publicExports": [
+        "Nest",
+        "bindBattleStart",
+        "openNestPrep",
+        "renderNestMap",
+        "unlockNest"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "lines": 906,
+      "publicExports": [
+        "doExtract",
+        "emergencyExitPaymentState",
+        "openAltarRitual",
+        "openBossGate",
+        "openClassChoice",
+        "openDoorModal",
+        "openEmergencyModal",
+        "openEntrySupply",
+        "openFireRest",
+        "resumeExtraction",
+        "resumeNodeRestore"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.dev.js:4",
+        "game/src/run/game.run.flow.js:19",
+        "game/src/run/game.run.js:4"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "lines": 105,
+      "publicExports": [
+        "openClassChoice"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.altar.js:14"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "lines": 451,
+      "publicExports": [
+        "openClassChoice"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.class-choice.js:12"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "lines": 50,
+      "publicExports": [
+        "CLASS_STORY",
+        "EVENT_SCENE_META",
+        "IMMEDIATE_SCENES",
+        "NODE_BG",
+        "PICKUP_BG",
+        "PRELOAD_SCENES",
+        "SCENES",
+        "WINTER_BATTLE_LAYERS"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.events.js:5",
+        "game/src/run/game.run.scenes.js:14"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "lines": 112,
+      "publicExports": [
+        "cancelPendingDevTools",
+        "devForceBattle",
+        "devJumpNode",
+        "devToolsLoading",
+        "openDevConsole"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.js:6"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "lines": 266,
+      "publicExports": [
+        "devForceBattle",
+        "devJumpNode",
+        "openDevConsole"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.dev-loader.js:14",
+        "game/src/agent/agent.scenes.runtime.js:20"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.events.js",
+      "lines": 871,
+      "publicExports": [
+        "createRunEventController"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/event-runtime.js:1"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "lines": 374,
+      "publicExports": [
+        "moveTo",
+        "reenterCell",
+        "resumeEventCardChoice",
+        "runEventDeck"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.dev.js:5",
+        "game/src/run/game.run.js:5",
+        "game/src/agent/agent.action-router.js:6"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "lines": 14,
+      "publicExports": [
+        "bindRunMixins",
+        "devForceBattle",
+        "devJumpNode",
+        "moveTo",
+        "openClassChoice",
+        "openDevConsole",
+        "openShop",
+        "reenterCell",
+        "resumeChestsOnCell",
+        "resumeEventCardChoice",
+        "showRunTransition"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/game.run.resources.js",
+      "lines": 105,
+      "publicExports": [
+        "createRunResourceController"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.flow.js:24"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "lines": 664,
+      "publicExports": [
+        "FIRE_RESTORABLE",
+        "buildEncounter",
+        "cancelLegacyChainMove",
+        "consumeCell",
+        "consumeCurrentCell",
+        "enterNode",
+        "finishInstant",
+        "grantEventCard",
+        "nodeOpt",
+        "nodeShell",
+        "openBattleCell",
+        "openBlankSafePage",
+        "openChestsOnCell",
+        "openFixedRewardsOnCell",
+        "openPickupPage",
+        "openPocketRestore",
+        "openShop",
+        "preloadAllNodeShellBgs",
+        "preloadCellScene",
+        "resumeChestsOnCell",
+        "showRunTransition"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.altar.js:32",
+        "game/src/run/game.run.class-choice.page.js:11",
+        "game/src/run/game.run.dev.js:3",
+        "game/src/run/game.run.flow.js:18",
+        "game/src/run/game.run.js:3"
+      ]
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "lines": 782,
+      "publicExports": [
+        "configureShopRuntime",
+        "createShopController"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.scenes.js:18"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "lines": 111,
+      "publicExports": [
+        "PEARL_BOX_ID",
+        "assertZones",
+        "bagCap",
+        "bagCapacityText",
+        "canAcceptCard",
+        "cardStacks",
+        "gainCoins",
+        "refreshCardClones",
+        "safeCap",
+        "safeUsed",
+        "stackCapOf",
+        "usedSlots"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:40",
+        "game/src/run/game.session.js:177"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "lines": 109,
+      "publicExports": [
+        "markSeen",
+        "renderMiniMap"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:43",
+        "game/src/run/game.session.js:179"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "lines": 10,
+      "publicExports": [
+        "createGameCanvas"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "lines": 243,
+      "publicExports": [
+        "buildDeathReceipt",
+        "createDeathSettlement"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:44"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "lines": 181,
+      "publicExports": [
+        "MAP",
+        "MODES",
+        "SLOT_COUNT",
+        "_set_active_slot",
+        "_set_cam",
+        "_set_dpr",
+        "bagCap",
+        "buildDerived",
+        "cam",
+        "canvas",
+        "cardStacks",
+        "cellCenter",
+        "clearBattleSettlementPending",
+        "clearSave",
+        "clearSlot",
+        "configureGameRuntime",
+        "createRunSavePayload",
+        "ctx",
+        "curLayer",
+        "doDeath",
+        "dpr",
+        "enterLayer",
+        "exitToTitle",
+        "gainCoins",
+        "game",
+        "getActiveSlot",
+        "hasRun",
+        "loadGame",
+        "markSeen",
+        "migrateOldSave",
+        "modeCfg",
+        "newRun",
+        "newUid",
+        "openDataPageUi",
+        "openLeaveMenu",
+        "openSettings",
+        "openSuggestionInbox",
+        "openTitleGuide",
+        "pick",
+        "preflightRunMap",
+        "previewRunBackup",
+        "quitGame",
+        "renderMiniMap",
+        "requestClassChoice",
+        "restoreRunBackup",
+        "safeCap",
+        "safeUsed",
+        "saveArchive",
+        "saveGame",
+        "saveSession",
+        "scaledEnemy",
+        "setBattleSettlementPending",
+        "setLobby",
+        "showTitle",
+        "startNewGame",
+        "syncPlayTime",
+        "usedSlots",
+        "weighted"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.nest.js:16",
+        "game/src/run/game.run.altar.js:24",
+        "game/src/run/game.run.class-choice.js:2",
+        "game/src/run/game.run.class-choice.page.js:4",
+        "game/src/run/game.run.dev-loader.js:2",
+        "game/src/run/game.run.dev.js:2",
+        "game/src/run/game.run.flow.js:6",
+        "game/src/run/game.run.js:2",
+        "game/src/run/game.run.scenes.js:12",
+        "game/src/agent/agent.action-router.js:7",
+        "game/src/agent/agent.replay-state.js:3",
+        "game/src/agent/agent.runner.runtime.js:6",
+        "game/src/agent/agent.scenes.runtime.js:19",
+        "game/src/agent/agent.state.js:11"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "lines": 87,
+      "publicExports": [
+        "FX",
+        "MAP",
+        "_set_cam",
+        "_set_dpr",
+        "cam",
+        "canvas",
+        "cellCenter",
+        "configureGameRuntime",
+        "ctx",
+        "curLayer",
+        "dpr",
+        "game",
+        "pick",
+        "requestClassChoice",
+        "runtime",
+        "weighted"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.bag.js:7",
+        "game/src/run/game.session.board.js:4",
+        "game/src/run/game.session.js:38",
+        "game/src/run/game.session.js:175",
+        "game/src/run/game.session.map.js:12",
+        "game/src/run/game.session.modes.js:5"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "lines": 103,
+      "publicExports": [
+        "buildDerived",
+        "buildNewRunDerived",
+        "clampIndex",
+        "installDerived"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:42",
+        "game/src/run/game.session.js:178"
+      ]
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "lines": 28,
+      "publicExports": [
+        "MODES",
+        "applyModeRules",
+        "modeCfg",
+        "scaledEnemy"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.bag.js:8",
+        "game/src/run/game.session.js:39",
+        "game/src/run/game.session.js:176"
+      ]
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "lines": 108,
+      "publicExports": [
+        "playLabEnding"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.nest.js:24"
+      ]
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "lines": 46,
+      "publicExports": [
+        "createCurrentLayeredMap",
+        "createLayeredMap"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.map.js:7",
+        "game/src/run/map-snapshot.js:7"
+      ]
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "lines": 119,
+      "publicExports": [
+        "CURRENT_GENERATOR_VERSION",
+        "CURRENT_LAYOUT_VERSION",
+        "FIRE_BATTLE_LIMIT",
+        "MAP_TYPE_BUDGETS",
+        "PREVIOUS_MAP_TYPE_BUDGETS",
+        "V4_MAP_TYPE_BUDGETS",
+        "finaleOrderOk",
+        "graphDistances",
+        "layerNeighbors",
+        "minimumBattlesTo",
+        "validateCurrentGeneratedMap"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.map.js:9",
+        "game/src/run/map-generator-v4.js:6",
+        "game/src/run/map-route-v2.js:4",
+        "game/src/run/map-snapshot.js:9"
+      ]
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "lines": 179,
+      "publicExports": [
+        "MAX_CURRENT_MAP_ATTEMPTS",
+        "generateCurrentLayeredMap"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/layeredMap.js:3"
+      ]
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "lines": 326,
+      "publicExports": [
+        "GENERATOR_VERSION",
+        "LAYOUT_VERSION",
+        "generateLayeredMap",
+        "quality"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:36",
+        "game/src/run/game.session.map.js:8",
+        "game/src/run/layeredMap.js:2",
+        "game/src/run/map-generation-rules.js:2",
+        "game/src/run/map-generator-v4.js:3"
+      ]
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "lines": 88,
+      "publicExports": [
+        "checkConnectivity"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.map.js:6"
+      ]
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "lines": 209,
+      "publicExports": [
+        "GUARDED_ROUTE_VERSION",
+        "MAX_ROUTE_ASSIGNMENTS",
+        "MAX_ROUTE_WITNESSES",
+        "applyGuardedRoute",
+        "routeBaseFingerprint",
+        "validateGuardedRoute"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.map.js:11",
+        "game/src/run/map-snapshot.js:8",
+        "game/src/run/route-choice-preview.js:2"
+      ]
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "lines": 208,
+      "publicExports": [
+        "createMapSnapshot",
+        "hydrateMapSnapshot",
+        "planMapRestore",
+        "validateMapSnapshot"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:37"
+      ]
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "lines": 59,
+      "publicExports": [
+        "createArrivalFeedback",
+        "createTravelMotion"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.flow.js:16"
+      ]
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "lines": 77,
+      "publicExports": [
+        "findMapTravelPath",
+        "getMapTravelPresentation",
+        "mapTravelCurve",
+        "mapTravelPoint",
+        "setMapTravelPresentation"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/expedition.view.js:9",
+        "game/src/run/expedition.view.js:10",
+        "game/src/run/game.run.flow.js:15",
+        "game/src/run/map-travel-motion.js:1"
+      ]
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "lines": 59,
+      "publicExports": [
+        "beginNodeRestore",
+        "claimNodeRestore",
+        "finishNodeRestore",
+        "nodeRestoreAt",
+        "validNodeRestore"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.altar.js:20",
+        "game/src/run/game.run.scenes.js:23",
+        "game/src/run/node-reward-state.js:1"
+      ]
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "lines": 126,
+      "publicExports": [
+        "bindNodeEvent",
+        "claimEntrySupply",
+        "claimResourceReward",
+        "createEntrySupply",
+        "entrySupplyAt",
+        "entrySupplyGate",
+        "eventChoiceRewardAt",
+        "nodeActionBinding",
+        "nodeEventAt",
+        "resourceRewardAt",
+        "validEntrySupply",
+        "validEventChoiceReward",
+        "validNodeRewards"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/event-card-choice.js:2",
+        "game/src/run/event-lifecycle.js:2",
+        "game/src/run/game.run.altar.js:19",
+        "game/src/run/game.run.class-choice.page.js:6",
+        "game/src/run/game.run.events.js:6",
+        "game/src/run/game.run.flow.js:20",
+        "game/src/run/game.run.resources.js:5",
+        "game/src/run/game.run.scenes.js:22",
+        "game/src/run/game.session.js:45",
+        "game/src/run/map-travel-path.js:2",
+        "game/src/agent/agent.state.js:12"
+      ]
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "lines": 19,
+      "publicExports": [
+        "previousRoutePlan",
+        "routeChoicePreview"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/expedition.view.js:4"
+      ]
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "lines": 62,
+      "publicExports": [
+        "captureShopBrowseState",
+        "restoreShopBrowseState"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.shop.js:12"
+      ]
+    },
+    {
+      "file": "game/src/run/shop-commands.js",
+      "lines": 99,
+      "publicExports": [
+        "applyCommissionDiscount",
+        "commissionEligibleSlots",
+        "createShopCommands"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.shop.js:15",
+        "game/src/run/shop-commission.js:5",
+        "game/src/run/shop-commission.js:6"
+      ]
+    },
+    {
+      "file": "game/src/run/shop-commission.js",
+      "lines": 121,
+      "publicExports": [
+        "commissionEligibleSlots",
+        "openShopCommission"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.shop.js:13"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.action-router.js",
+      "lines": 181,
+      "publicExports": [
+        "act",
+        "awaitCommand",
+        "commandContext",
+        "completions",
+        "sameContext"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.runner.js:2",
+        "game/src/agent/agent.runner.runtime.js:7"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "lines": 56,
+      "publicExports": [
+        "BATTLE_LOG_CAP",
+        "createRunBattleStats"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.recorder.js:23"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "lines": 143,
+      "publicExports": [
+        "agentTabHTML",
+        "bindAgentTab",
+        "bindKeysTab",
+        "keysTabHTML"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.dev.js:7"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "lines": 141,
+      "publicExports": [
+        "bindDataActions",
+        "dataPanelHTML",
+        "download",
+        "openDataPage"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.run.dev.js:8",
+        "game/src/run/game.session.js:32",
+        "game/src/agent/agent.js:24"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "lines": 62,
+      "publicExports": [
+        "Agent"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": []
+    },
+    {
+      "file": "game/src/agent/agent.llm-parser.js",
+      "lines": 20,
+      "publicExports": [
+        "parseActionReply"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.llm.js:11",
+        "game/src/agent/agent.llm.runtime.js:3"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "lines": 103,
+      "publicExports": [
+        "decide",
+        "isEnabled",
+        "loadConfig",
+        "parseActionReply",
+        "saveConfig"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.js:20"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.llm.runtime.js",
+      "lines": 108,
+      "publicExports": [
+        "decideConfigured"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.llm.js:57"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "lines": 893,
+      "publicExports": [
+        "greedyPolicy",
+        "randomPolicy",
+        "strategicPolicy"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.js:19",
+        "game/src/agent/agent.llm.js:12",
+        "game/src/agent/agent.scenes.runtime.js:17"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "lines": 95,
+      "publicExports": [
+        "actionId",
+        "normalizeAction"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.action-router.js:2",
+        "game/src/agent/agent.js:17",
+        "game/src/agent/agent.llm.runtime.js:2",
+        "game/src/agent/agent.replay.runtime.js:6",
+        "game/src/agent/agent.state.js:14"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "lines": 295,
+      "publicExports": [
+        "battleActionTick",
+        "battleEnd",
+        "battleTick",
+        "classifyStop",
+        "clearRuns",
+        "exportCSV",
+        "exportJSON",
+        "getBattleCount",
+        "getDriver",
+        "listRuns",
+        "noteBattle",
+        "noteIntervention",
+        "noteStopReason",
+        "recordRun",
+        "resetRunCounters",
+        "restoreRunBattles",
+        "setDriver",
+        "snapshotRunBattles"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/run/game.session.js:33",
+        "game/src/agent/agent.data.js:9",
+        "game/src/agent/agent.js:21",
+        "game/src/agent/agent.runner.js:4",
+        "game/src/agent/agent.runner.runtime.js:5",
+        "game/src/agent/agent.scenes.runtime.js:21",
+        "game/src/agent/agent.state.js:15"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "lines": 99,
+      "publicExports": [
+        "fingerprintOf",
+        "firstDifference",
+        "plainData",
+        "readReplayState",
+        "stateSummary"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.replay.runtime.js:7"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.replay.js",
+      "lines": 25,
+      "publicExports": [
+        "capture",
+        "play"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.js:25"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "lines": 132,
+      "publicExports": [
+        "capture",
+        "play"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.replay.js:5"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.run-control.js",
+      "lines": 8,
+      "publicExports": [
+        "runState",
+        "stopRun"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.runner.js:5",
+        "game/src/agent/agent.runner.runtime.js:8"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "lines": 123,
+      "publicExports": [
+        "act",
+        "autoRun",
+        "step",
+        "stopRun",
+        "waitSettle"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.js:16",
+        "game/src/agent/agent.replay.runtime.js:5",
+        "game/src/agent/agent.scenes.runtime.js:16"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "lines": 364,
+      "publicExports": [
+        "autoRun",
+        "step",
+        "waitSettle"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.runner.js:14"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "lines": 14,
+      "publicExports": [
+        "SCENE_CATALOG"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.scenes.js:15",
+        "game/src/agent/agent.scenes.runtime.js:22"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "lines": 78,
+      "publicExports": [
+        "listScenes",
+        "runScene",
+        "sceneStatus",
+        "startScene"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.js:23"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.scenes.runtime.js",
+      "lines": 515,
+      "publicExports": [
+        "executeScene"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.scenes.js:24"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "lines": 426,
+      "publicExports": [
+        "bustSigCache",
+        "markUiFailure",
+        "observe",
+        "phaseOf",
+        "settleSignature"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.action-router.js:5",
+        "game/src/agent/agent.js:15",
+        "game/src/agent/agent.replay-state.js:7",
+        "game/src/agent/agent.runner.js:3",
+        "game/src/agent/agent.runner.runtime.js:3",
+        "game/src/agent/agent.scenes.runtime.js:15"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "lines": 103,
+      "publicExports": [
+        "aggregate",
+        "brief",
+        "provenanceDriver",
+        "rate"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.data.js:10",
+        "game/src/agent/agent.js:22"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "lines": 125,
+      "publicExports": [
+        "collectActionKeys",
+        "collectUiActions",
+        "findUiElement",
+        "overlayBody",
+        "overlayVisible"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.action-router.js:3",
+        "game/src/agent/agent.runner.runtime.js:2",
+        "game/src/agent/agent.state.js:13"
+      ]
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "lines": 115,
+      "publicExports": [
+        "DEFAULT_WEIGHTS",
+        "resolveWeights"
+      ],
+      "unconsumedPrivateBindings": [],
+      "scopedImportConsumers": [
+        "game/src/agent/agent.policy.js:10"
+      ]
+    }
+  ]
+}

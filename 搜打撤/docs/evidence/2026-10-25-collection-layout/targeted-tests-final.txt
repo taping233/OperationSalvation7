@@ -1,0 +1,19 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/preparation-adapter-review.test.js (5 tests) 258ms
+ ✓ tests/achievement-gallery-entry.test.js (6 tests) 303ms
+ ✓ tests/achievement-gallery.test.js (8 tests) 605ms
+ ✓ tests/achievement-gallery-close.test.js (4 tests) 331ms
+ ✓ tests/game-hub-preparation-feature.test.js (8 tests) 14ms
+ ✓ tests/photo-studio-tabs.test.js (6 tests) 28ms
+ ✓ tests/photo-studio-presentation.test.js (3 tests) 6ms
+ ✓ tests/preparation-slot-review.test.js (6 tests) 11ms
+ ✓ tests/m06-preparation.test.js (6 tests) 10ms
+
+ Test Files  9 passed (9)
+      Tests  52 passed (52)
+   Start at  12:24:55
+   Duration  3.89s (transform 596ms, setup 0ms, collect 2.85s, tests 1.57s, environment 5.40s, prepare 1.13s)
+

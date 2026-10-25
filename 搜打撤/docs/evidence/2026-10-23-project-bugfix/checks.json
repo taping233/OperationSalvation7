@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-23",
+  "status": "complete-uncommitted",
+  "fixedBugs": 26,
+  "groups": {
+    "battle": ["定向抽牌漏onDraw", "复活残留偷攻归还记录", "不同持续时间偷攻互相覆盖", "随机伤害与诅咒重复选靶", "铸甲漏消费钩子", "消灭按尝试计击杀", "闪避来源到期重复扣层"],
+    "expedition": ["入城补给迟到保存抢页", "营火迟到保存抢页", "祭坛奖励承接失败丢待领", "神秘货箱越过随机池禁令", "阿猫随机获取漏附赠", "资源领取后通知异常重复发卡"],
+    "storage": ["身份读取异常逸出", "空档导入后旧资产回写", "战后累计时长重复", "旧排队操作改动新导入档", "坏皮肤子结构通过导入预检"],
+    "agent": ["旧分类影响选牌丢牌", "出售读取错误稀有度字段", "撤退后非战斗死亡误归因", "按名字丢弃同名错误实例", "一个丢弃失败排除全部候选", "多个JSON块使动作提取失败"],
+    "archiveUI": ["整档导出导入恢复没有可达入口", "导出异常未捕获且缺少失败提示"]
+  },
+  "newRegressionAssertions": 70,
+  "checks": {
+    "mainInitial": {"files": 10, "passed": 87, "exit": 0},
+    "mainAdditional": {"passed": 158, "collectedFixtureFailure": "boot-frame-readiness mock lacked eager saveSession export; restored lazy zero-argument wrapper"},
+    "bootRecheck": {"files": 1, "passed": 5, "exit": 0},
+    "battleIntegration": {"files": 10, "passed": 123, "exit": 0, "report": "battle-integration.json"},
+    "expeditionFinal": {"files": 5, "passed": 107, "exit": 0},
+    "storageInitial": {"files": 6, "passed": 91, "exit": 0},
+    "storageArchive": {"files": 6, "passed": 57, "exit": 0},
+    "agentFailure": {"files": 5, "passed": 63, "exit": 0},
+    "syntax": {"files": 672, "exit": 0},
+    "typecheck": {"coverage": "613/613", "strict": "51/613", "exit": 0},
+    "eslint": {"files": 1551, "errors": 0, "warnings": 0, "exit": 0, "report": "lint.json"},
+    "eslintChangedAfterFullCheck": {"errors": 0, "warnings": 0, "exit": 0, "report": "lint-final.json"},
+    "docs": {"exit": 0},
+    "browser": "当前窗口内置浏览器：真实选档展开3个档案入口、恢复确认/取消/返回首页通过；不写档测试战斗首屏已挂载。完整战斗流程未验收。"
+  },
+  "limits": ["各批次含重叠，不累加声称独立测试总数", "未运行全量测试或生产构建", "未提交或推送", "未操作玩家持久档案或其他会话服务"]
+}

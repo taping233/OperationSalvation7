@@ -1,0 +1,9 @@
+{
+  "status": "reverted",
+  "reason": "老板要求改回去",
+  "groundSha256": "1745ba35497c047d8fbde33555fcfa12e45b835df6e43fe2905fc814389d1169",
+  "groundMatchesOriginal": true,
+  "cssMatchesBeforeTask": true,
+  "manifestGroundRestored": true,
+  "scope": "Only this task ground bytes, floor extension CSS block and ground manifest fields restored; no file deleted."
+}

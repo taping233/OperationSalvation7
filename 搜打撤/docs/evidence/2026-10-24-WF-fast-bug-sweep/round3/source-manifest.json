@@ -1,0 +1,45 @@
+{
+  "task": "WF-fast-bug-sweep-r3-1024",
+  "files": [
+    {
+      "sha256": "15e867fad80cca1ae0350f554c608a8098cb374e57d176215806e75db201ca26",
+      "path": "game/src/core/game-boot-input.js"
+    },
+    {
+      "sha256": "28cd269d40b9997580146c9c4fae8a3998307b80c736780acf28abeb0fdccea0",
+      "path": "game/src/battle/bag/battle.bag.domain.js"
+    },
+    {
+      "sha256": "e6629d6dd732df57df2f815d74c21f535886581825d5760eedbbaab6fa9e3a03",
+      "path": "game/src/hub/collection.commands.js"
+    },
+    {
+      "sha256": "ee57217bde436fea4455c78e3343d17c66b9a6160ecfb61fd44235f89c66bb1f",
+      "path": "game/src/agent/agent.action-router.js"
+    },
+    {
+      "sha256": "3d1f158dbcaff240304a2d50e83b4fae09e65d24eb86a6396ce864e2d0a43133",
+      "path": "game/src/agent/agent.llm.runtime.js"
+    },
+    {
+      "sha256": "4e1f0db237b7a31d10328df66d4d47dec399ea5641ba331080f17242fbad5b42",
+      "path": "game/src/agent/agent.protocol.js"
+    },
+    {
+      "sha256": "193c095dff352750bd2a1c8d2e3c9e004d267be36a2b93ab9f10dbcc7f76e3a9",
+      "path": "tests/fast-bug-sweep-round3-battle.test.js"
+    },
+    {
+      "sha256": "46dae4cec0dc2654707612e210438be18e65c1729755bbdadb2d031751b94f5f",
+      "path": "tests/fast-bug-sweep-round3-map-wheel.test.js"
+    },
+    {
+      "sha256": "1fb344d09c19097fd800c4ef7db7a637468baafdcd9c9cb8fe6a29c0ded7aaf9",
+      "path": "tests/fast-bug-sweep-round3-skin-replay.test.js"
+    },
+    {
+      "sha256": "6bd3504032f35f808b8c1065f4029036cce5e25f6663d6d82aa4b1efe9b64ed8",
+      "path": "tests/project-fast-round3-agent-boundary-1024.test.js"
+    }
+  ]
+}

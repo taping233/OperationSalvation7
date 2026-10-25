@@ -1,0 +1,115 @@
+{
+  "status": "imported-uncommitted",
+  "encoding": {
+    "format": "WebP",
+    "quality": 92,
+    "method": 6,
+    "canvas": [
+      1659,
+      948
+    ],
+    "alpha": "preserved",
+    "groundNormalization": "1660px to1659px full-canvas resize"
+  },
+  "assets": [
+    {
+      "layer": "far",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\far.png",
+      "sourceSha256": "ed593d556cdc4b7eedf1d49a299ed056a1bf482e2c9fdfed064acc4f09929ff3",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGB",
+      "alphaExtrema": null,
+      "bytes": 104916,
+      "sha256": "6c58a944803516fd108d84287868b509cd763e58511c1ba8a8852baca53c81a0"
+    },
+    {
+      "layer": "mid",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\mid.png",
+      "sourceSha256": "bb0b61cd35a737a11f0f90cdaaba4cd85303cb8c608020f3c8294970b105de08",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 110428,
+      "sha256": "825aeaceec6a27e7c557eafdcd7abee2d7d86fbb5d163f86cacb730daa7177ae"
+    },
+    {
+      "layer": "ground",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\ground.png",
+      "sourceSha256": "f7fb404d51c5354079a560bfb0383d05a4d1985f41fc3c9897c17d1cd5121b28",
+      "sourceSize": [
+        1660,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 113498,
+      "sha256": "264908b045e6d08f3f290549c224caf7b6521166a232d53d3ab7e47929b4a35f"
+    },
+    {
+      "layer": "foreground",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\silksong-v3\\foreground.png",
+      "sourceSha256": "fca76037ebb215a51205b098101178786febf5c0ac7ec0dfc5dea70cf205358b",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 133642,
+      "sha256": "a79820b6472288ede24c47188d4aff9179c011ad1b530aa4c330ee4b92c4b387"
+    }
+  ],
+  "totalBytes": 462484,
+  "sourcePngTotalBytes": 3989546,
+  "consumers": {
+    "game/src/battle/view/battle.scenery.js": {
+      "beforeLfSha256": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
+      "afterLfSha256": "29dec8cdb1a41665d5ccf5dbec4c86f1666aaeb12b796ce30c6c7664db051607"
+    },
+    "game/src/run/game.run.data.js": {
+      "beforeLfSha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
+      "afterLfSha256": "546f69520dd17e04b8b8fc8cb0a37433cb55f46a03827477462cea178399dab2"
+    },
+    "game/css/scenes.css": {
+      "beforeLfSha256": "35070cd4240652070e6563e964724067e38e8a8122c26fe1489272a675a0b236",
+      "afterLfSha256": "afbe3dea432fce58ed6a4dd3be65a0cb35c18c302de6be3b56aa3c68edb598a7"
+    }
+  },
+  "consumerReview": "配置、预载、预战CSS统一转为四个新显式WebP路径；仍沿用stageLayers、68%站位线及同一场景key。未增加动态路径构造，保留旧资源与全部排除清单。仅刷新上述三消费者指纹，未运行资产审计。",
+  "verification": "仅编码过程回读尺寸/透明通道及记录字节与SHA256；按老板要求未运行测试、资产审计、lint、类型检查、build或游戏实页。"
+}

@@ -1,0 +1,206 @@
+[
+  {
+    "file": "game/css/title-p0.css",
+    "line": 86,
+    "selector": "#title.home-composed .home-brand",
+    "declaration": "width: 100%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 105,
+    "selector": "#title.home-composed .home-command",
+    "declaration": "left: var(--home-edge)"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 105,
+    "selector": "#title.home-composed .home-command",
+    "declaration": "top: 12%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 105,
+    "selector": "#title.home-composed .home-command",
+    "declaration": "width: 29%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 105,
+    "selector": "#title.home-composed .home-command",
+    "declaration": "padding: 24px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 106,
+    "selector": "#title.home-composed .home-support",
+    "declaration": "right: var(--home-edge)"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 106,
+    "selector": "#title.home-composed .home-support",
+    "declaration": "top: 30%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 106,
+    "selector": "#title.home-composed .home-support",
+    "declaration": "width: 25.5%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 106,
+    "selector": "#title.home-composed .home-support",
+    "declaration": "padding: 22px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 138,
+    "selector": "#title.home-composed .home-start",
+    "declaration": "height: 118px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 228,
+    "selector": "body.reduce-motion #title.home-composed *,\nbody.reduce-motion #title.home-composed *::before,\nbody.reduce-motion #title.home-composed *::after",
+    "declaration": "animation: none"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 228,
+    "selector": "body.reduce-motion #title.home-composed *,\nbody.reduce-motion #title.home-composed *::before,\nbody.reduce-motion #title.home-composed *::after",
+    "declaration": "transition: none"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 257,
+    "selector": "#title.home-composed .home-start",
+    "declaration": "color: #14120a"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 267,
+    "selector": "#title.home-composed .home-tool::after",
+    "declaration": "background: linear-gradient(90deg, var(--ak-white) 0 3px, transparent 3px), rgba(12,14,17,.86)"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 142,
+    "selector": "#title.home-composed .home-guide",
+    "declaration": "--plate-accent: #969fa5"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 144,
+    "selector": "#title.home-composed .home-guide",
+    "declaration": "width: 78%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 144,
+    "selector": "#title.home-composed .home-guide",
+    "declaration": "height: 90px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 147,
+    "selector": "#title.home-composed .home-ach",
+    "declaration": "width: 97%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 147,
+    "selector": "#title.home-composed .home-ach",
+    "declaration": "margin-left: 3%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 148,
+    "selector": "#title.home-composed .home-ach .home-line-icon",
+    "declaration": "width: 42px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 148,
+    "selector": "#title.home-composed .home-ach .home-line-icon",
+    "declaration": "height: 42px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 148,
+    "selector": "#title.home-composed .home-ach .home-line-icon",
+    "declaration": "flex-basis: 42px"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 149,
+    "selector": "#title.home-composed .home-library",
+    "declaration": "--plate-accent: #a4acb1"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 150,
+    "selector": "#title.home-composed .home-settings",
+    "declaration": "width: 94%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 150,
+    "selector": "#title.home-composed .home-settings",
+    "declaration": "margin-left: 6%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 150,
+    "selector": "#title.home-composed .home-settings",
+    "declaration": "--plate-accent: #babec0"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 151,
+    "selector": "#title.home-composed .home-makers",
+    "declaration": "width: 98%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 151,
+    "selector": "#title.home-composed .home-makers",
+    "declaration": "margin-left: 2%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 151,
+    "selector": "#title.home-composed .home-makers",
+    "declaration": "--plate-accent: #d9cb9e"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 152,
+    "selector": "#title.home-composed .home-exit",
+    "declaration": "width: 96%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 152,
+    "selector": "#title.home-composed .home-exit",
+    "declaration": "margin-left: 4%"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 260,
+    "selector": "#title.home-composed .home-exit",
+    "declaration": "--plate-accent: var(--ak-red)"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 260,
+    "selector": "#title.home-composed .home-exit",
+    "declaration": "--plate-fill: rgba(30,14,14,.84)"
+  },
+  {
+    "file": "game/css/title-p0.css",
+    "line": 261,
+    "selector": "#title.home-composed .home-ach",
+    "declaration": "--plate-accent: var(--ak-yellow)"
+  }
+]

@@ -1,0 +1,534 @@
+{
+  "mode": "builtin-local-edit",
+  "runtimeInstall": false,
+  "scope": "原26张局部优化加冰封千里、聚能、花瓣法阵、圣盾、满月形态，共31张；保留原构图，修现行人设。",
+  "items": [
+    {
+      "who": "无",
+      "id": "cmtn1i64j7y7",
+      "name": "盗宝",
+      "asset": "cards/martial-cmtn1i64j7y7.webp",
+      "size": [
+        896,
+        679
+      ],
+      "kind": "职业",
+      "sha256": "8b79b85c3ed7f3f7f058bfe69aa2c9b832f84640fc5a4f428f23ae14be6166ab",
+      "grade": "B",
+      "why": "抱发光宝物直接说明卡名，画面完成度尚可，但缺少偷取过程、风险和人物机智。",
+      "direction": "保留侧身构图，可把焦点改成手已取物、目光还在观察来人的瞬间。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "无",
+      "id": "cmtn1wnhhym",
+      "name": "江湖救急-改",
+      "asset": "cards/martial-cmtn1wnhhym.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "3e10c60073b98739f29549501f1d8220916c9841fb57144b8a32c3085a8ff077",
+      "grade": "B",
+      "why": "伸手递出三张空白牌，与获取卡牌的联系清楚，叙事较薄；脸、手与背景色面较完整。",
+      "direction": "保留主体结构，可将救急改成出手相助或交换物件的瞬间；不必整张推翻。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "黑像",
+      "id": "tt7-marchrush",
+      "name": "急行军",
+      "asset": "cards/martial-tt7-marchrush.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "3069f04dd87b888a4bbac0e1a9ef7a39842c249be22b48ff442bcea130566ef1",
+      "grade": "B",
+      "why": "扑向镜头的身体与前脚有动势，后腿缩小属于透视；背景放射笔触较通用。",
+      "direction": "加强前后腿分离与脚底朝向，减少用速度底纹代替具体运动。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "黑像",
+      "id": "tt7-bulwark",
+      "name": "坚盾",
+      "asset": "cards/martial-tt7-bulwark.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "e1a9184ac32876d9141d58ce3bc661aa8962b057808f504ce01e9265127f381b",
+      "grade": "B",
+      "why": "盾牌主形清楚，但人物、盾和碎石的交叠使受击点不够突出；属于可靠但常见的盾战士图。",
+      "direction": "集中一个撞击点，可保留当前盾牌与人物位置。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "黑像",
+      "id": "tt7-ironcharge",
+      "name": "厉兵秣马",
+      "asset": "cards/martial-tt7-ironcharge.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "1ed7125314d23bcb3e35c2ea0d1f1b8b1405b47ceb473784faf90611be042caf",
+      "grade": "B",
+      "why": "磨剑准备动作成立；画面横向长剑在方形取景中被裁，脸与磨刃点偏小。",
+      "direction": "优先调整方形取景和磨剑接触点的明暗；有条件再换更贴近准备过程的近景。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "黑像",
+      "id": "tt7-fullstrike",
+      "name": "全力一击",
+      "asset": "cards/martial-tt7-fullstrike.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "ceeb4e2e189d2bcf484af11d6aee0611f30c8d8979b0b779ad84e3d332d2812c",
+      "grade": "B",
+      "why": "腾空劈斩有冲势；右下屈腿的膝、小腿和脚叠成较大的暗块，关节读形弱，不能仅凭短缩判定畸形。",
+      "direction": "先局部调整腿脚轮廓与剑柄握持区；不要求推翻整个分镜。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-arcanebolt",
+      "name": "奥术弹",
+      "asset": "cards/spell-tt7-arcanebolt.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "fa42362ea3fb39b4752196e4b671bd0ae1c0c2634077a01c6912dc1b152cedb9",
+      "grade": "B",
+      "why": "近手与指尖亮点有效，画风基本可用；刘海露出眼部，眨眼不等于现行厚侧刘海遮一眼。",
+      "direction": "保留分镜，局部调整刘海覆盖、发束和脸部一致性。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-frozenight",
+      "name": "冰封千里",
+      "asset": "cards/spell-tt7-frozenight.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "a55f14a60da6d4d07f461a1bc1a66ee76f35a81b81486cb361f1a3701224f669",
+      "grade": "B",
+      "why": "前景人物站着施法，远处一排等距冰块像效果清单；缺少空间延展与冻结蔓延。",
+      "direction": "改成冰线由近向远侵入地面、物体或敌群，建立明确深度；同时对齐侧刘海。",
+      "status": "pending",
+      "originalGrade": "A"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-maxsupply",
+      "name": "法力补给",
+      "asset": "cards/spell-tt7-maxsupply.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "889780cc936f8f9474e00fdb7b1dbdf24e284e5256f521368d1ed6520abe0f5d",
+      "grade": "B",
+      "why": "坐姿、古书、手边暖光构成完整场景，画面质量较好；仍沿用旧刘海露眼。",
+      "direction": "保留构图，修现行发型；必要时加强书与补给能量的连接。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-stratagem",
+      "name": "法师锦囊",
+      "asset": "cards/spell-tt7-stratagem.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "cba5b895b8a6c2d05ee3bd27c58dae821d23ab88adcbe7722dbbf7630e3d4e5e",
+      "grade": "B",
+      "why": "从小袋牵出长条金色形体，线条引导较好；人物仍为旧发型。",
+      "direction": "优先局部改刘海；金色形体可强调为被展开或取出的法术，不必整张重画。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt3-firm-barrier",
+      "name": "坚冰结界",
+      "asset": "cards/spell-tt3-firm-barrier.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "ae3cb69855afb01730f88ed82d09ca77ace0cc101e354a1b553cc8c5f52d9cc8",
+      "grade": "B",
+      "why": "冰墙大面与人物分区清楚，能表现阻隔；旧刘海不符合现行遮眼方向，冰墙略像普通冰台。",
+      "direction": "修刘海，并局部加强墙体厚度、外侧受力与内侧安全空间。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-energize",
+      "name": "聚能",
+      "asset": "cards/spell-tt7-energize.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "22a0d4a71d82b4ca132493a3d76d008ce4c31ba4d14b6b65e5eff676a996e5d7",
+      "grade": "B",
+      "why": "人物抱着均匀发光的大蓝球，和奥术弹、法力补给同属人物加亮点；球体遮掉胸臂，聚集过程弱。",
+      "direction": "让散开的能量被压向一个明确位置，以手势、衣发和色块方向表现聚集；同步修刘海。",
+      "status": "pending",
+      "originalGrade": "A"
+    },
+    {
+      "who": "白塔",
+      "id": "cmtn1p9vb5au",
+      "name": "千变万化",
+      "asset": "cards/spell-cmtn1p9vb5au.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "52460c035f922f33b75ee61ddcbf10eac703b284c7efde411cfc3a851c5ebe70",
+      "grade": "B",
+      "why": "白色碎片与手臂交织，构图尚可，但碎片缺少变化前后的关系；刘海沿旧版。",
+      "direction": "可保留斜向分镜，把一种形体正在转成另一种形体画清，并局部修发型。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-elementstorm",
+      "name": "元素风暴",
+      "asset": "cards/spell-tt7-elementstorm.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "1983e655465fec9cd4fb6679d2aebb6917aac6c0a97817ed410b408cd6de48ae",
+      "grade": "B",
+      "why": "俯视悬空有变化，但红蓝绿细线像外贴彩带，元素相互作用不明确；人物沿旧刘海。",
+      "direction": "保留机位，改为少数有体积且相互作用的色面，局部修发型。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "白塔",
+      "id": "tt7-recruit",
+      "name": "征召",
+      "asset": "cards/spell-tt7-recruit.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "8fb149a60dd256494f947be67bbd0ef537d272525c8e7e58c61a496ef114a383",
+      "grade": "B",
+      "why": "喝茶与两名小步兵有反差，是有想法的一张；士兵偏小且像贴在旁边的小图标，人物沿旧刘海。",
+      "direction": "保留反差创意，强化小兵与地面/人物的空间关系，局部修发型。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt3-petal",
+      "name": "花瓣法阵",
+      "asset": "cards/spell-tt3-petal.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "cfb9d7a503f291ce6062d8404eb60c27b751179729cca183aa333092c4335d94",
+      "grade": "B",
+      "why": "俯视人物被花环围在中间，主要读到装饰性花圈；细小花瓣均匀铺满圆周，法阵作用与空间较弱。",
+      "direction": "保留俯视的可能性，让花瓣沿明确轨迹流转，并通过少数符号或受保护区域说明法阵结构。",
+      "status": "pending",
+      "originalGrade": "A"
+    },
+    {
+      "who": "星月",
+      "id": "tt7-silence",
+      "name": "禁言术",
+      "asset": "cards/spell-tt7-silence.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "3b61af3f98e5be1fe76c995a8cb4371ca63205362a57a6ef1b6608e3aeb26d21",
+      "grade": "B",
+      "why": "伸臂、紫色长条与背景剪影的因果不够清楚；与其他暗牧伸手卡的造型相近。",
+      "direction": "局部集中到声音被截断的关系，可用断开的声纹、闭合的负形等，不必强制画捂嘴。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt13-mind-control",
+      "name": "精神控制",
+      "asset": "cards/spell-tt13-mind-control.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783",
+      "grade": "B",
+      "why": "提线操纵头盔的意象清楚，缩略辨识度高；硬亮头盔、鲜粉玻璃和干净提线较像科幻示意图，与人物厚涂组材质距离较大。",
+      "direction": "保留提线创意，调整手套/头盔的笔触和材质，增加被控制者的姿态或抵抗感；无完整人物，不判为星月脸错。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt3-nature-form",
+      "name": "满月形态",
+      "asset": "cards/spell-tt3-nature-form.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "aa204293c9336ee0cbbc7936a090a0b84ccac523e7e4ab4e726c6820a883156a",
+      "grade": "B",
+      "why": "人物举手加一轮满月，主要是卡名直译；身体姿态与月亮缺少联系，变化后的状态不明显。",
+      "direction": "以月影、衣发、地面光区或身体状态变化建立联系，避免只在头旁加圆月。",
+      "status": "pending",
+      "originalGrade": "A"
+    },
+    {
+      "who": "星月",
+      "id": "tt7-provoke",
+      "name": "扰敌",
+      "asset": "cards/spell-tt7-provoke.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "15ee8d0be46eaa7c4da99e92118beab710669e14352ea65ebc627b74fd1c6e13",
+      "grade": "B",
+      "why": "丝线连接远处两个小剪影，表达有基础；小剪影太小，缩略图容易只剩暗牧伸手。",
+      "direction": "放大正在互相冲突的两个目标或其交叠影子，降低人物占比。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt3-holy-shield",
+      "name": "圣盾",
+      "asset": "cards/spell-tt3-holy-shield.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "4fa2977dcc97c355fb05b13694eb54ac6373fa131323de9ecccca10f7596b5a2",
+      "grade": "B",
+      "why": "发光蜂巢横板盖住胸部，盾面与手势缺少受力关系；均匀六边形和满亮黄光偏通用游戏特效。",
+      "direction": "选择一处被挡住的撞击、弯曲光面或盾后保护对象，重做光色主次。",
+      "status": "pending",
+      "originalGrade": "A"
+    },
+    {
+      "who": "星月",
+      "id": "tt7-holyheal",
+      "name": "圣光治愈",
+      "asset": "cards/spell-tt7-holyheal.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "e8dcae276b9883a2c505acff6633d7a672f97e58286fa5f89117d5853636e801",
+      "grade": "B",
+      "why": "双手、胸前暖光与脸部层次完整；左右两条明显垂辫使发型更像双辫，和现行侧编发/低处长辫有差异。",
+      "direction": "优先局部对齐发型，保留手与暖光；不把常规治愈手势单独判为必须重绘。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt7-bloodpotion",
+      "name": "噬血术",
+      "asset": "cards/spell-tt7-bloodpotion.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "086bbfc19fe32c16fa4790fed0dbce533b1044807408346f6333de4a633d5d7a",
+      "grade": "B",
+      "why": "红色带状线从人物胸前向外展开，吸收方向不清楚；与禁咒I的红线胸像相近。",
+      "direction": "让红色能量由目标明确回流，减少平均放射线；保留沉静神态。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "星月",
+      "id": "tt13-stellar-divination",
+      "name": "星辰占卜",
+      "asset": "cards/spell-tt13-stellar-divination.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+      "grade": "B",
+      "why": "三张星纹牌围着手指，清楚但偏直接；脸部较细，左右垂辫的发型与默认图有差异。",
+      "direction": "局部对齐辫子结构，能量关系可从卡牌延伸成被读取的星象；不要求恢复所有配饰。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "tt3sp-shadowshot",
+      "name": "暗影射击",
+      "asset": "cards/spell-tt3sp-shadowshot.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "kind": "职业",
+      "sha256": "d374417a94af440d50759110201f1b1341cf94b259ce8e9f502335c90b6008d6",
+      "grade": "B",
+      "why": "射线从人物前横穿，箭尖读形清楚，和致命射线的伸手发射分镜接近。",
+      "direction": "可保留，增加射击的来源、前后层次或目标关系，与细直射线分开。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "cmtn1gfhczzj",
+      "name": "厄运",
+      "asset": "cards/spell-cmtn1gfhczzj.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "26c4af70afb2fe09ea60223a0542505fad0cd0ef3fbbf020a5a13574580831fa",
+      "grade": "B",
+      "why": "方块、指向手势、地面小人及长影有概念，但重点分成几处，小人和影子缩略后易丢。",
+      "direction": "保留不祥方块的想法，简化背景，把异常影子与人物关系做大。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "cmtn1ntxzoc4",
+      "name": "火焰形态",
+      "asset": "cards/spell-cmtn1ntxzoc4.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "6377efde882f646ab6df32a107d7c3febc52c219084450c161224e931cb2dc21",
+      "grade": "B",
+      "why": "前景火墙有亮暗层次，人物仍像站在火焰后，变化感略弱。",
+      "direction": "可保留，局部让衣摆、轮廓或影子与火焰发生联系；不改已确认男性身份。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "tt13-soul-contract",
+      "name": "灵魂契约",
+      "asset": "cards/spell-tt13-soul-contract.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031",
+      "grade": "B",
+      "why": "人物近景完成度较高；小瓶与一根红线不太能说明双方约束，信息重点仍在脸。",
+      "direction": "保留脸和机位，强化两个被绑定端点、影子或交换的代价；不是配饰缺失问题。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "tt7-abysscurse",
+      "name": "深渊诅咒",
+      "asset": "cards/spell-tt7-abysscurse.webp",
+      "size": [
+        1440,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "af8047027ae6c5082269ceae1bfdeb7a48bad083c52d053cbc9adf82fec4948a",
+      "grade": "B",
+      "why": "人物手势、黑色拖迹与小目标具备因果，但目标挤在边角且偏小，诅咒的结果不鲜明。",
+      "direction": "放大被影响的形体或阴影，让诅咒过程成为主事件。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "tt7-meteorstrong",
+      "name": "星陨之力",
+      "asset": "cards/spell-tt7-meteorstrong.webp",
+      "size": [
+        1441,
+        1092
+      ],
+      "kind": "职业",
+      "sha256": "d611963142a6ecb46053c9daed51ff0845dbc1dc3bfdc19e70dccf60249c05c4",
+      "grade": "B",
+      "why": "斜向坠落的橙色轨迹有冲击，人物身体与轨迹同时倾斜，焦点偏散。",
+      "direction": "优先重排取景与一条主坠落线，人物脸和小爆点二选一作为焦点。",
+      "status": "pending",
+      "originalGrade": "B"
+    },
+    {
+      "who": "常无欲",
+      "id": "tt7-darkfort",
+      "name": "黑暗吊坠",
+      "asset": "cards/equip-tt7-darkfort.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "kind": "职业",
+      "sha256": "cb9071cd2ed8768fc69a7be122d2898b2666c969a21413b977e8a651f00f7b12",
+      "grade": "B",
+      "why": "紫色宝石轮廓明确，但居中悬挂加大面积深紫空底较像普通物品图。",
+      "direction": "可先保留；若升级表现，用坠影、封存空间或内部异常提高独特性。",
+      "status": "pending",
+      "originalGrade": "B"
+    }
+  ]
+}

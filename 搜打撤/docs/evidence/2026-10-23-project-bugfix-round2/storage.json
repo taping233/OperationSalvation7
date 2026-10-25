@@ -1,0 +1,40 @@
+{
+  "owner": "persistence_audit",
+  "status": "complete-uncommitted-released",
+  "fixedRootCauses": 6,
+  "sourceFiles": [
+    "game/src/hub/bag-inventory-commands.js",
+    "game/src/hub/game.bag.rules.js",
+    "game/src/hub/bag-legacy-use.js",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.safe-transfer.js"
+  ],
+  "findings": [
+    {"id":"R2-STORAGE-1","root":"复原按剩余格数而非逐张收卡规则判断容量","location":"game/src/hub/game.bag.rules.js:22","before":"已有未满同名叠在满包时被拒；普通牌可进入珍珠盒资源扩展格；复原一张后提前停止","after":"预览和每张接收共用三张叠及基础/资源容量规则，保留单遍渲染快照"},
+    {"id":"R2-STORAGE-2","root":"无UID丢弃路径遗漏容器区域过滤","location":"game/src/hub/bag-inventory-commands.js:28","before":"仓库/锦囊同名牌在数组前时被当作可见背包牌丢弃","after":"UID和名称路径均先限定可见来源区域"},
+    {"id":"R2-STORAGE-3","root":"结构化纯复原绕过保存事务；展示异常可误触已提交事务回滚","location":"game/src/hub/bag-legacy-use.js:11","before":"保存false/拒绝后道具和消耗区仍已扣除；保存成功但log/回执/刷新异常会退回可重用道具","after":"复用等待保存及按原局回滚；提交成功后展示失败不回滚，入口回传Promise并保留回执"},
+    {"id":"R2-STORAGE-4","root":"安全盒直接移动只刷新未保存","location":"game/src/hub/game.bag.safe-transfer.js:78","before":"直接移入/移出save调用0次，刷新或退出丢失新区域","after":"直接移动与交换均保存且只保存一次，保持同步布尔接口"},
+    {"id":"R2-STORAGE-5","root":"以缺失/重复UID反查卡叠导致跨区或多叠选取","location":"game/src/hub/bag-inventory-commands.js:77;game/src/hub/game.bag.safe-transfer.js:8","before":"旧档单叠3张实际存入6张并波及安全格；安全盒合法交换候选被错误拒绝","after":"按所属区域的实际卡对象及叠大小定位，不依赖UID唯一性"},
+    {"id":"R2-STORAGE-6","root":"发现奖励保存失败回滚缺少局次/数组及索引有效性保护","location":"game/src/hub/game.bag.rules.js:140","before":"奖励被移走时splice(-1)删除后来无关卡；换局后旧失败会填回旧通行证","after":"只回滚原局原数组，索引存在才删除奖励，源牌不重复插入"}
+  ],
+  "regressionFile": "tests/project-bugfix-round2-storage-bag.test.js",
+  "newCases": 22,
+  "reproductions": {"command":"node node_modules/vitest/vitest.mjs run tests/project-bugfix-round2-storage-bag.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot --silent","beforeFixExitCode":1,"observedFailingCases":18},
+  "validation": {
+    "commandPrefix":"node node_modules/vitest/vitest.mjs run",
+    "flags":"--maxWorkers=1 --minWorkers=1 --reporter=dot --silent",
+    "batches":[
+      {"files":["project-bugfix-round2-storage-bag","bag-safe-transfer","bag-item-rule-baseline","bag-structured-use","bag-render-snapshot","bag-legacy-use-live-ports","bag-use-compatibility"],"directory":"tests/","suffix":".test.js","passed":86,"exitCode":0,"note":"新增最后3条展示异常前"},
+      {"files":["bag-inventory-commands","bag-token-discover","bag-container-pages","bag-structured-rule-migration"],"directory":"tests/","suffix":".test.js","passed":32,"exitCode":0},
+      {"files":["project-bugfix-round2-storage-bag","bag-use-compatibility","bag-structured-use","bag-legacy-use-live-ports"],"directory":"tests/","suffix":".test.js","passed":43,"exitCode":0,"note":"最后事务边界修复后"}
+    ],
+    "uniqueFiles":11,
+    "uniquePassedCases":121,
+    "lint":{"command":"node node_modules/eslint/bin/eslint.js","files":"sourceFiles + regressionFile + tests/bag-item-rule-baseline.test.js + tests/bag-structured-use.test.js","count":8,"exitCode":0}
+  },
+  "existingTestsAdjusted": {
+    "tests/bag-item-rule-baseline.test.js":"三处原断言把一张新卡占满的格视作无法再并同名卡；按core/card-capacity.js:4,33-36非装备三张叠，分别改复原1剩2为3剩0、1剩2为3剩0、1剩1为2剩0。",
+    "tests/bag-structured-use.test.js":"使用入口返回Promise后等待完成，保存mock明确true；一处同名叠场景改复原1剩2为2剩1，保留成功提示和回执断言。"
+  },
+  "boundaries":"仅本轮hub五处源码；nest字段由expedition负责。本组未运行build/全量/浏览器、未提交；原有他人增量保留。"
+}

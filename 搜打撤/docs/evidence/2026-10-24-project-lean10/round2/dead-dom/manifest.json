@@ -1,0 +1,4765 @@
+{
+  "status": "complete-uncommitted",
+  "scope": "19 explicitly authorised CSS paths; dead DOM rules only; no file deletion",
+  "cache": "node_modules/.cache/project-lean10-dead-dom-before",
+  "sourceSetSha256": "bed408441da722dbd50c9786f29e33b012c44f65da4f9fc8605dd2f7eae9ffd6",
+  "preserved": [
+    "xl",
+    "routePanel",
+    "route-title",
+    "route-help"
+  ],
+  "normalizedBytesSaved": 32734,
+  "files": [
+    {
+      "file": "game/css/page-cardforge.css",
+      "beforeSha256": "e47fdc341dc0323ff2f20f7bb445fffbaf271bc8e42ca40f140cfd6304c317ff",
+      "afterSha256": "23e059a41a6122d6965d1adb45a26648296e855c7c42165613042e70fb79af70",
+      "beforeNormalizedBytes": 14203,
+      "afterNormalizedBytes": 7003,
+      "normalizedBytesSaved": 7200,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 23,
+          "endLine": 27,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 32,
+          "endLine": 36,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 38,
+          "endLine": 44,
+          "oldSelector": "&::before",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes)::before"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 11
+        },
+        {
+          "kind": "remove-rule",
+          "line": 46,
+          "endLine": 49,
+          "oldSelector": "& .cdes-main",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-main"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 53,
+          "endLine": 57,
+          "oldSelector": "& .cdes-stage",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 59,
+          "endLine": 65,
+          "oldSelector": "& .cdes-stage::before",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage::before"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 10
+        },
+        {
+          "kind": "remove-rule",
+          "line": 67,
+          "endLine": 72,
+          "oldSelector": "& .cdes-stage::after",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage::after"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 74,
+          "endLine": 74,
+          "oldSelector": "& #cardTilt",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) #cardTilt"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cardTilt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 75,
+          "endLine": 78,
+          "oldSelector": "& .stage-hint",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .stage-hint"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "stage-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 79,
+          "endLine": 79,
+          "oldSelector": "& .stage-hint .ic",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .stage-hint .ic"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "stage-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 83,
+          "endLine": 85,
+          "oldSelector": "& .pg-head",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-head"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 22,
+          "endLine": 85,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 90,
+          "endLine": 97,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .pg-head .hs-btn.gold)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 98,
+          "endLine": 103,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .pg-head .hs-btn.gold):hover"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 104,
+          "endLine": 108,
+          "oldSelector": "&:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .pg-head .hs-btn.gold):active"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 89,
+          "endLine": 108,
+          "oldSelector": "#overlay .pg.cdes .pg-head .hs-btn.gold",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .pg-head .hs-btn.gold"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 113,
+          "endLine": 118,
+          "oldSelector": "& .cdes-sec > span::before",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-sec > span::before"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 120,
+          "endLine": 120,
+          "oldSelector": "& .cdes-sec",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-sec"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 122,
+          "endLine": 123,
+          "oldSelector": "& .dmg-ctl input[type=\"number\"],\r\n& .desc-count",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .dmg-ctl input[type=\"number\"]",
+            ":is(#overlay .pg.cdes) .desc-count"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "dmg-ctl",
+            "desc-count"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 125,
+          "endLine": 125,
+          "oldSelector": "& .cdes-form",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-form"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 128,
+          "endLine": 128,
+          "oldSelector": "& .cdes-stage",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 131,
+          "endLine": 131,
+          "oldSelector": "& .sellable-tgl",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .sellable-tgl"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "sellable-tgl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 134,
+          "endLine": 138,
+          "oldSelector": "& .cdes-row input[type=\"text\"],\r\n& .cdes-row textarea,\r\n& .dmg-ctl input[type=\"number\"]",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-row input[type=\"text\"]",
+            ":is(#overlay .pg.cdes) .cdes-row textarea",
+            ":is(#overlay .pg.cdes) .dmg-ctl input[type=\"number\"]"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 139,
+          "endLine": 141,
+          "oldSelector": "& .cdes-row input[type=\"text\"]:hover:not(:focus),\r\n& .cdes-row textarea:hover:not(:focus),\r\n& .dmg-ctl input[type=\"number\"]:hover:not(:focus)",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-row input[type=\"text\"]:hover:not(:focus)",
+            ":is(#overlay .pg.cdes) .cdes-row textarea:hover:not(:focus)",
+            ":is(#overlay .pg.cdes) .dmg-ctl input[type=\"number\"]:hover:not(:focus)"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 142,
+          "endLine": 147,
+          "oldSelector": "& .cdes-row input[type=\"text\"]:focus,\r\n& .cdes-row textarea:focus,\r\n& .dmg-ctl input[type=\"number\"]:focus",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-row input[type=\"text\"]:focus",
+            ":is(#overlay .pg.cdes) .cdes-row textarea:focus",
+            ":is(#overlay .pg.cdes) .dmg-ctl input[type=\"number\"]:focus"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 151,
+          "endLine": 156,
+          "oldSelector": "& .seg button,\r\n& .mech-chip",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button",
+            ":is(#overlay .pg.cdes) .mech-chip"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 158,
+          "endLine": 162,
+          "oldSelector": "& .seg button:hover,\r\n& .mech-chip:hover",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button:hover",
+            ":is(#overlay .pg.cdes) .mech-chip:hover"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 164,
+          "endLine": 167,
+          "oldSelector": "& .seg button.on,\r\n& .mech-chip.on",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button.on",
+            ":is(#overlay .pg.cdes) .mech-chip.on"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 169,
+          "endLine": 174,
+          "oldSelector": "& .seg button:active,\r\n& .mech-chip:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button:active",
+            ":is(#overlay .pg.cdes) .mech-chip:active"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 112,
+          "endLine": 174,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 180,
+          "endLine": 182,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cost-gem)"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 183,
+          "endLine": 183,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cost-gem):hover"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 184,
+          "endLine": 189,
+          "oldSelector": "&.on",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cost-gem).on"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 190,
+          "endLine": 193,
+          "oldSelector": "&:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cost-gem):active"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 179,
+          "endLine": 193,
+          "oldSelector": "#overlay .pg.cdes .cost-gem",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .cost-gem"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 197,
+          "endLine": 200,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .pg-head .hs-btn:not(.gold))"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 201,
+          "endLine": 204,
+          "oldSelector": "&:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .pg-head .hs-btn:not(.gold)):active"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 196,
+          "endLine": 204,
+          "oldSelector": "#overlay .pg.cdes .pg-head .hs-btn:not(.gold)",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .pg-head .hs-btn:not(.gold)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 206,
+          "endLine": 209,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .dmg-ctl .hs-btn.round)"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 210,
+          "endLine": 213,
+          "oldSelector": "&:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .dmg-ctl .hs-btn.round):active"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 205,
+          "endLine": 213,
+          "oldSelector": "#overlay .pg.cdes .dmg-ctl .hs-btn.round",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .dmg-ctl .hs-btn.round"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 215,
+          "endLine": 218,
+          "oldSelector": "& .pg-close",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-close"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 219,
+          "endLine": 222,
+          "oldSelector": "& .pg-close:active",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-close:active"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 226,
+          "endLine": 231,
+          "oldSelector": "& .pg-head .hs-btn:focus-visible,\r\n& .pg-close:focus-visible",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-head .hs-btn:focus-visible",
+            ":is(#overlay .pg.cdes) .pg-close:focus-visible"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 233,
+          "endLine": 237,
+          "oldSelector": "& .pg-head .hs-btn.gold:focus-visible",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-head .hs-btn.gold:focus-visible"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 240,
+          "endLine": 243,
+          "oldSelector": "& .cdes-form button:focus-visible",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-form button:focus-visible"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 245,
+          "endLine": 248,
+          "oldSelector": "& .cost-gem:focus-visible",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cost-gem:focus-visible"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 214,
+          "endLine": 248,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 255,
+          "endLine": 257,
+          "oldSelector": "#overlay .card.page:has(.pg.cdes)",
+          "effectiveSelectors": [
+            "#overlay .card.page:has(.pg.cdes)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 262,
+          "endLine": 265,
+          "oldSelector": "#overlay .pg.cdes::before",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes::before"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 270,
+          "endLine": 270,
+          "oldSelector": "#overlay .pg.cdes .pg-head",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .pg-head"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 276,
+          "endLine": 279,
+          "oldSelector": "& .cdes-stage,\r\n& .cdes-form",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage",
+            ":is(#overlay .pg.cdes) .cdes-form"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage",
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 280,
+          "endLine": 280,
+          "oldSelector": "& .cdes-stage",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 281,
+          "endLine": 281,
+          "oldSelector": "& .cdes-form",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-form"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 275,
+          "endLine": 281,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 286,
+          "endLine": 286,
+          "oldSelector": "#overlay .pg.cdes .stage-hint",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .stage-hint"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "stage-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 293,
+          "endLine": 293,
+          "oldSelector": "#overlay .pg.cdes button:not(:disabled)",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes button:not(:disabled)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        }
+      ],
+      "liveDeclarations": 18,
+      "preservedComments": 34
+    },
+    {
+      "file": "game/css/cards.css",
+      "beforeSha256": "18fe64d5b5b22a68305100be30c2b841141eb02cebb2acd99f53416f97f6c331",
+      "afterSha256": "fcbeb362ee3ce9c0a609d3eb0d9838d82d09a9fdf9dc641bef69d5dcdc49d504",
+      "beforeNormalizedBytes": 11343,
+      "afterNormalizedBytes": 5871,
+      "normalizedBytesSaved": 5472,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 10,
+          "endLine": 10,
+          "oldSelector": ".dmg-num",
+          "effectiveSelectors": [
+            ".dmg-num"
+          ],
+          "requiredMissingTokens": [
+            "dmg-num"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 12,
+          "endLine": 13,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.sellable-tgl)"
+          ],
+          "requiredMissingTokens": [
+            "sellable-tgl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 14,
+          "endLine": 14,
+          "oldSelector": "& input",
+          "effectiveSelectors": [
+            ":is(.sellable-tgl) input"
+          ],
+          "requiredMissingTokens": [
+            "sellable-tgl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 11,
+          "endLine": 14,
+          "oldSelector": ".sellable-tgl",
+          "effectiveSelectors": [
+            ".sellable-tgl"
+          ],
+          "requiredMissingTokens": [
+            "sellable-tgl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 31,
+          "endLine": 33,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.pg-close)"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 15
+        },
+        {
+          "kind": "remove-rule",
+          "line": 34,
+          "endLine": 34,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.pg-close) .ic"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 35,
+          "endLine": 36,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(.pg-close):hover"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 30,
+          "endLine": 36,
+          "oldSelector": ".pg-close",
+          "effectiveSelectors": [
+            ".pg-close"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 89,
+          "endLine": 91,
+          "oldSelector": ".cdes-stage",
+          "effectiveSelectors": [
+            ".cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 92,
+          "endLine": 92,
+          "oldSelector": "#cardTilt",
+          "effectiveSelectors": [
+            "#cardTilt"
+          ],
+          "requiredMissingTokens": [
+            "cardTilt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 93,
+          "endLine": 94,
+          "oldSelector": ".stage-hint",
+          "effectiveSelectors": [
+            ".stage-hint"
+          ],
+          "requiredMissingTokens": [
+            "stage-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 95,
+          "endLine": 95,
+          "oldSelector": ".cdes-form",
+          "effectiveSelectors": [
+            ".cdes-form"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 97,
+          "endLine": 97,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.cdes-row)"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 98,
+          "endLine": 99,
+          "oldSelector": "& > label",
+          "effectiveSelectors": [
+            ":is(.cdes-row) > label"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 100,
+          "endLine": 100,
+          "oldSelector": "& .row-tip",
+          "effectiveSelectors": [
+            ":is(.cdes-row) .row-tip"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row",
+            "row-tip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 101,
+          "endLine": 103,
+          "oldSelector": "& input[type=\"text\"], & textarea",
+          "effectiveSelectors": [
+            ":is(.cdes-row) input[type=\"text\"]",
+            ":is(.cdes-row) textarea"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 10
+        },
+        {
+          "kind": "remove-rule",
+          "line": 104,
+          "endLine": 105,
+          "oldSelector": "& input[type=\"text\"]:focus, & textarea:focus,\r\n  & input[type=\"number\"]:focus",
+          "effectiveSelectors": [
+            ":is(.cdes-row) input[type=\"text\"]:focus",
+            ":is(.cdes-row) textarea:focus",
+            ":is(.cdes-row) input[type=\"number\"]:focus"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 106,
+          "endLine": 106,
+          "oldSelector": "& textarea",
+          "effectiveSelectors": [
+            ":is(.cdes-row) textarea"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 96,
+          "endLine": 106,
+          "oldSelector": ".cdes-row",
+          "effectiveSelectors": [
+            ".cdes-row"
+          ],
+          "requiredMissingTokens": [
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 107,
+          "endLine": 107,
+          "oldSelector": ".seg",
+          "effectiveSelectors": [
+            ".seg"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 109,
+          "endLine": 110,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.seg button)"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 111,
+          "endLine": 111,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(.seg button):hover"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 112,
+          "endLine": 113,
+          "oldSelector": "&.on",
+          "effectiveSelectors": [
+            ":is(.seg button).on"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 114,
+          "endLine": 114,
+          "oldSelector": "& i",
+          "effectiveSelectors": [
+            ":is(.seg button) i"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 108,
+          "endLine": 114,
+          "oldSelector": ".seg button",
+          "effectiveSelectors": [
+            ".seg button"
+          ],
+          "requiredMissingTokens": [
+            "seg"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 117,
+          "endLine": 122,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.cost-gem)"
+          ],
+          "requiredMissingTokens": [
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 15
+        },
+        {
+          "kind": "remove-rule",
+          "line": 123,
+          "endLine": 123,
+          "oldSelector": "&.on",
+          "effectiveSelectors": [
+            ":is(.cost-gem).on"
+          ],
+          "requiredMissingTokens": [
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 116,
+          "endLine": 123,
+          "oldSelector": ".cost-gem",
+          "effectiveSelectors": [
+            ".cost-gem"
+          ],
+          "requiredMissingTokens": [
+            "cost-gem"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 125,
+          "endLine": 127,
+          "oldSelector": ".rar-dot i",
+          "effectiveSelectors": [
+            ".rar-dot i"
+          ],
+          "requiredMissingTokens": [
+            "rar-dot"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 129,
+          "endLine": 129,
+          "oldSelector": ".dmg-ctl",
+          "effectiveSelectors": [
+            ".dmg-ctl"
+          ],
+          "requiredMissingTokens": [
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 131,
+          "endLine": 133,
+          "oldSelector": "&[type=\"number\"]",
+          "effectiveSelectors": [
+            ":is(.dmg-ctl input)[type=\"number\"]"
+          ],
+          "requiredMissingTokens": [
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 12
+        },
+        {
+          "kind": "remove-rule",
+          "line": 134,
+          "endLine": 135,
+          "oldSelector": "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button",
+          "effectiveSelectors": [
+            ":is(.dmg-ctl input)::-webkit-outer-spin-button",
+            ":is(.dmg-ctl input)::-webkit-inner-spin-button"
+          ],
+          "requiredMissingTokens": [
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 130,
+          "endLine": 135,
+          "oldSelector": ".dmg-ctl input",
+          "effectiveSelectors": [
+            ".dmg-ctl input"
+          ],
+          "requiredMissingTokens": [
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 136,
+          "endLine": 136,
+          "oldSelector": ".dmg-hint",
+          "effectiveSelectors": [
+            ".dmg-hint"
+          ],
+          "requiredMissingTokens": [
+            "dmg-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 137,
+          "endLine": 137,
+          "oldSelector": ".cdes-form > .dmg-hint",
+          "effectiveSelectors": [
+            ".cdes-form > .dmg-hint"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form",
+            "dmg-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 139,
+          "endLine": 140,
+          "oldSelector": ".cdes-sec",
+          "effectiveSelectors": [
+            ".cdes-sec"
+          ],
+          "requiredMissingTokens": [
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 141,
+          "endLine": 141,
+          "oldSelector": ".cdes-form > .cdes-sec:first-child",
+          "effectiveSelectors": [
+            ".cdes-form > .cdes-sec:first-child"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 143,
+          "endLine": 143,
+          "oldSelector": "& > span",
+          "effectiveSelectors": [
+            ":is(.cdes-sec) > span"
+          ],
+          "requiredMissingTokens": [
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 144,
+          "endLine": 144,
+          "oldSelector": "& > em",
+          "effectiveSelectors": [
+            ":is(.cdes-sec) > em"
+          ],
+          "requiredMissingTokens": [
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 142,
+          "endLine": 144,
+          "oldSelector": ".cdes-sec",
+          "effectiveSelectors": [
+            ".cdes-sec"
+          ],
+          "requiredMissingTokens": [
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 146,
+          "endLine": 146,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.cdes-duo)"
+          ],
+          "requiredMissingTokens": [
+            "cdes-duo"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 147,
+          "endLine": 147,
+          "oldSelector": "& > .cdes-row",
+          "effectiveSelectors": [
+            ":is(.cdes-duo) > .cdes-row"
+          ],
+          "requiredMissingTokens": [
+            "cdes-duo",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 145,
+          "endLine": 147,
+          "oldSelector": ".cdes-duo",
+          "effectiveSelectors": [
+            ".cdes-duo"
+          ],
+          "requiredMissingTokens": [
+            "cdes-duo"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 149,
+          "endLine": 149,
+          "oldSelector": ".mech-group",
+          "effectiveSelectors": [
+            ".mech-group"
+          ],
+          "requiredMissingTokens": [
+            "mech-group"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 150,
+          "endLine": 150,
+          "oldSelector": ".mech-group-name",
+          "effectiveSelectors": [
+            ".mech-group-name"
+          ],
+          "requiredMissingTokens": [
+            "mech-group-name"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 151,
+          "endLine": 151,
+          "oldSelector": ".mech-chips",
+          "effectiveSelectors": [
+            ".mech-chips"
+          ],
+          "requiredMissingTokens": [
+            "mech-chips"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 153,
+          "endLine": 155,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.mech-chip)"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 12
+        },
+        {
+          "kind": "remove-rule",
+          "line": 156,
+          "endLine": 156,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.mech-chip) .ic"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 157,
+          "endLine": 158,
+          "oldSelector": "& em",
+          "effectiveSelectors": [
+            ":is(.mech-chip) em"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 159,
+          "endLine": 159,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(.mech-chip):hover"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 160,
+          "endLine": 161,
+          "oldSelector": "&.on",
+          "effectiveSelectors": [
+            ":is(.mech-chip).on"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 162,
+          "endLine": 162,
+          "oldSelector": "&.on em",
+          "effectiveSelectors": [
+            ":is(.mech-chip).on em"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 152,
+          "endLine": 162,
+          "oldSelector": ".mech-chip",
+          "effectiveSelectors": [
+            ".mech-chip"
+          ],
+          "requiredMissingTokens": [
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 164,
+          "endLine": 164,
+          "oldSelector": ".desc-count",
+          "effectiveSelectors": [
+            ".desc-count"
+          ],
+          "requiredMissingTokens": [
+            "desc-count"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        }
+      ],
+      "liveDeclarations": 177,
+      "preservedComments": 19
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "beforeSha256": "c37a04f9be6c68d941939508046b844d4690a5b1829da09c402dc8e1ca67da18",
+      "afterSha256": "6c83a572d584a45beade5f247a60ab4e651662f46459cdef9670072cfa2fcdf9",
+      "beforeNormalizedBytes": 10037,
+      "afterNormalizedBytes": 4921,
+      "normalizedBytesSaved": 5116,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 3,
+          "endLine": 3,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.pk-row b, .pet-row b, .ach-info b)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.pk-row b, .pet-row b, .ach-info b)"
+          ],
+          "requiredMissingTokens": [
+            "pk-row",
+            "pet-row",
+            "ach-info"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 4,
+          "endLine": 4,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.pet-desc, .ach-info span, .set-tip, .pet-row .dim)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.pet-desc, .ach-info span, .set-tip, .pet-row .dim)"
+          ],
+          "requiredMissingTokens": [
+            "pet-desc",
+            "ach-info",
+            "set-tip",
+            "pet-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 5,
+          "endLine": 5,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty, .stash-placeholder)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty, .stash-placeholder)"
+          ],
+          "requiredMissingTokens": [
+            "stash-empty",
+            "stash-placeholder"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 6,
+          "endLine": 6,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty p, .stash-placeholder span, .stash-empty .se-sub)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty p, .stash-placeholder span, .stash-empty .se-sub)"
+          ],
+          "requiredMissingTokens": [
+            "stash-empty",
+            "stash-placeholder",
+            "se-sub"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 7,
+          "endLine": 7,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty, .stash-placeholder) b",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover :is(.stash-empty, .stash-placeholder) b"
+          ],
+          "requiredMissingTokens": [
+            "stash-empty",
+            "stash-placeholder"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 14,
+          "endLine": 14,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .mat-use",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .mat-use"
+          ],
+          "requiredMissingTokens": [
+            "mat-use"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 15,
+          "endLine": 15,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .pet-sec .pet-sec-head",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .pet-sec .pet-sec-head"
+          ],
+          "requiredMissingTokens": [
+            "pet-sec",
+            "pet-sec-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 17,
+          "endLine": 17,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .pet-row",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .pet-row"
+          ],
+          "requiredMissingTokens": [
+            "pet-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 18,
+          "endLine": 18,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .pet-row.locked",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .hub-page .hub-card .pet-row.locked"
+          ],
+          "requiredMissingTokens": [
+            "pet-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 26,
+          "endLine": 26,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .shelf-item .poor-why",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .shelf-item .poor-why"
+          ],
+          "requiredMissingTokens": [
+            "poor-why"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 28,
+          "endLine": 28,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .up-card",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .up-card"
+          ],
+          "requiredMissingTokens": [
+            "up-card"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 29,
+          "endLine": 29,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap"
+          ],
+          "requiredMissingTokens": [
+            "up-cap"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 30,
+          "endLine": 30,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap b",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap b"
+          ],
+          "requiredMissingTokens": [
+            "up-cap"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 31,
+          "endLine": 31,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap small",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .up-cap small"
+          ],
+          "requiredMissingTokens": [
+            "up-cap"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 53,
+          "endLine": 53,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-bar",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-bar"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 54,
+          "endLine": 54,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-bar i",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-bar i"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 55,
+          "endLine": 55,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-txt",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .class-dossier-grid .class-dossier .xp-txt"
+          ],
+          "requiredMissingTokens": [
+            "xp-txt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 58,
+          "endLine": 58,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 59,
+          "endLine": 59,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs button",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs button"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 60,
+          "endLine": 60,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs button.on",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .collection-tabs button.on"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 61,
+          "endLine": 61,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card"
+          ],
+          "requiredMissingTokens": [
+            "back-card"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 62,
+          "endLine": 62,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card b",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card b"
+          ],
+          "requiredMissingTokens": [
+            "back-card"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 63,
+          "endLine": 63,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card small",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card small"
+          ],
+          "requiredMissingTokens": [
+            "back-card"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 64,
+          "endLine": 64,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card.on",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .back-card.on"
+          ],
+          "requiredMissingTokens": [
+            "back-card"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 66,
+          "endLine": 66,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .ach-ico",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .ach-ico"
+          ],
+          "requiredMissingTokens": [
+            "ach-ico"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 67,
+          "endLine": 67,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .ach-sil",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .ach-sil"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 68,
+          "endLine": 68,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-head",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-head"
+          ],
+          "requiredMissingTokens": [
+            "coll-group-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 69,
+          "endLine": 69,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-identity b, #overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-count",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-identity b",
+            " #overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-count"
+          ],
+          "requiredMissingTokens": [
+            "coll-group-identity",
+            "coll-group-count"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 70,
+          "endLine": 71,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-identity small,\n#overlay .card.page #hubMain.pg.hub.hub-cover .coll-ms",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-identity small",
+            "\n#overlay .card.page #hubMain.pg.hub.hub-cover .coll-ms"
+          ],
+          "requiredMissingTokens": [
+            "coll-group-identity",
+            "coll-ms"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 72,
+          "endLine": 72,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-ms :is(b, .rw, .dim)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-ms :is(b, .rw, .dim)"
+          ],
+          "requiredMissingTokens": [
+            "coll-ms"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 73,
+          "endLine": 73,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group"
+          ],
+          "requiredMissingTokens": [
+            "coll-group"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 74,
+          "endLine": 74,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group-head",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group-head"
+          ],
+          "requiredMissingTokens": [
+            "coll-group-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 75,
+          "endLine": 75,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group-head :is(.dim, .coll-group-count small)",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-group-head :is(.dim, .coll-group-count small)"
+          ],
+          "requiredMissingTokens": [
+            "coll-group-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 76,
+          "endLine": 76,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off"
+          ],
+          "requiredMissingTokens": [
+            "coll-slot"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 77,
+          "endLine": 78,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off::before,\r\n#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off::after",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off::before",
+            "\r\n#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off::after"
+          ],
+          "requiredMissingTokens": [
+            "coll-slot"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 79,
+          "endLine": 79,
+          "oldSelector": "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off span",
+          "effectiveSelectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-room .coll-slot.off span"
+          ],
+          "requiredMissingTokens": [
+            "coll-slot"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 80,
+          "endLine": 80,
+          "oldSelector": "#overlay .card:has(.stash-shell)",
+          "effectiveSelectors": [
+            "#overlay .card:has(.stash-shell)"
+          ],
+          "requiredMissingTokens": [
+            "stash-shell"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 81,
+          "endLine": 81,
+          "oldSelector": "#overlay .stash-shell :is(.ov-stats, .ov-note, .ov-empty, .hint)",
+          "effectiveSelectors": [
+            "#overlay .stash-shell :is(.ov-stats, .ov-note, .ov-empty, .hint)"
+          ],
+          "requiredMissingTokens": [
+            "stash-shell"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 82,
+          "endLine": 82,
+          "oldSelector": "#overlay .stash-shell .ov-btn",
+          "effectiveSelectors": [
+            "#overlay .stash-shell .ov-btn"
+          ],
+          "requiredMissingTokens": [
+            "stash-shell"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 83,
+          "endLine": 83,
+          "oldSelector": "#overlay .stash-shell .ov-btn.ok",
+          "effectiveSelectors": [
+            "#overlay .stash-shell .ov-btn.ok"
+          ],
+          "requiredMissingTokens": [
+            "stash-shell"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 81,
+      "preservedComments": 1
+    },
+    {
+      "file": "game/css/scenes.css",
+      "beforeSha256": "c5dadc3e0aabf89031aa76c260f15b4ebdd03c0f9909e86216f92d636a6534a4",
+      "afterSha256": "97453acbd3c5071d02f90b10faad2df520e5b0e5df3e97c77ad5f781084c0d1f",
+      "beforeNormalizedBytes": 41898,
+      "afterNormalizedBytes": 37714,
+      "normalizedBytesSaved": 4184,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 91,
+          "endLine": 91,
+          "oldSelector": "&.flip3d",
+          "effectiveSelectors": [
+            ":is(.bag-slot).flip3d"
+          ],
+          "requiredMissingTokens": [
+            "flip3d"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 92,
+          "endLine": 93,
+          "oldSelector": "& .flip-inner",
+          "effectiveSelectors": [
+            ":is(.bag-slot) .flip-inner"
+          ],
+          "requiredMissingTokens": [
+            "flip-inner"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 97,
+          "endLine": 97,
+          "oldSelector": "& .flip-back",
+          "effectiveSelectors": [
+            ":is(.bag-slot) .flip-back"
+          ],
+          "requiredMissingTokens": [
+            "flip-back"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 98,
+          "endLine": 98,
+          "oldSelector": "& .flip-back .hs-back",
+          "effectiveSelectors": [
+            ":is(.bag-slot) .flip-back .hs-back"
+          ],
+          "requiredMissingTokens": [
+            "flip-back"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 99,
+          "endLine": 99,
+          "oldSelector": "& .flip-back .hsb-emblem",
+          "effectiveSelectors": [
+            ":is(.bag-slot) .flip-back .hsb-emblem"
+          ],
+          "requiredMissingTokens": [
+            "flip-back"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 134,
+          "endLine": 135,
+          "oldSelector": ".bt-self",
+          "effectiveSelectors": [
+            ".bt-self"
+          ],
+          "requiredMissingTokens": [
+            "bt-self"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 138,
+          "endLine": 139,
+          "oldSelector": ".bt-foe.bt-boss",
+          "effectiveSelectors": [
+            ".bt-foe.bt-boss"
+          ],
+          "requiredMissingTokens": [
+            "bt-boss"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 141,
+          "endLine": 142,
+          "oldSelector": "&.can-target",
+          "effectiveSelectors": [
+            ":is(.bt-self).can-target"
+          ],
+          "requiredMissingTokens": [
+            "bt-self"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 143,
+          "endLine": 143,
+          "oldSelector": "&.drop-here",
+          "effectiveSelectors": [
+            ":is(.bt-self).drop-here"
+          ],
+          "requiredMissingTokens": [
+            "bt-self"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 140,
+          "endLine": 143,
+          "oldSelector": ".bt-self",
+          "effectiveSelectors": [
+            ".bt-self"
+          ],
+          "requiredMissingTokens": [
+            "bt-self"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 146,
+          "endLine": 148,
+          "oldSelector": ".bt-self-tag",
+          "effectiveSelectors": [
+            ".bt-self-tag"
+          ],
+          "requiredMissingTokens": [
+            "bt-self-tag"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 10
+        },
+        {
+          "kind": "remove-rule",
+          "line": 149,
+          "endLine": 149,
+          "oldSelector": ".bt-hint-warn",
+          "effectiveSelectors": [
+            ".bt-hint-warn"
+          ],
+          "requiredMissingTokens": [
+            "bt-hint-warn"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 152,
+          "endLine": 152,
+          "oldSelector": ".chest-stage",
+          "effectiveSelectors": [
+            ".chest-stage"
+          ],
+          "requiredMissingTokens": [
+            "chest-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 153,
+          "endLine": 155,
+          "oldSelector": ".chest-glow",
+          "effectiveSelectors": [
+            ".chest-glow"
+          ],
+          "requiredMissingTokens": [
+            "chest-glow"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 158,
+          "endLine": 159,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.chest-box)"
+          ],
+          "requiredMissingTokens": [
+            "chest-box"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 160,
+          "endLine": 160,
+          "oldSelector": "&.shake-1",
+          "effectiveSelectors": [
+            ":is(.chest-box).shake-1"
+          ],
+          "requiredMissingTokens": [
+            "chest-box",
+            "shake-1"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 161,
+          "endLine": 161,
+          "oldSelector": "&.shake-2",
+          "effectiveSelectors": [
+            ":is(.chest-box).shake-2"
+          ],
+          "requiredMissingTokens": [
+            "chest-box",
+            "shake-2"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 162,
+          "endLine": 162,
+          "oldSelector": "&.shake-3",
+          "effectiveSelectors": [
+            ":is(.chest-box).shake-3"
+          ],
+          "requiredMissingTokens": [
+            "chest-box",
+            "shake-3"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 157,
+          "endLine": 162,
+          "oldSelector": ".chest-box",
+          "effectiveSelectors": [
+            ".chest-box"
+          ],
+          "requiredMissingTokens": [
+            "chest-box"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 166,
+          "endLine": 166,
+          "oldSelector": ".chest-hint",
+          "effectiveSelectors": [
+            ".chest-hint"
+          ],
+          "requiredMissingTokens": [
+            "chest-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 170,
+          "endLine": 170,
+          "oldSelector": "&.rl-3",
+          "effectiveSelectors": [
+            ":is(.bt-card).rl-3"
+          ],
+          "requiredMissingTokens": [
+            "rl-3"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 171,
+          "endLine": 172,
+          "oldSelector": "&.rl-4",
+          "effectiveSelectors": [
+            ":is(.bt-card).rl-4"
+          ],
+          "requiredMissingTokens": [
+            "rl-4"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 179,
+          "endLine": 179,
+          "oldSelector": ".evt-sts",
+          "effectiveSelectors": [
+            ".evt-sts"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 181,
+          "endLine": 183,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.evt-sts-title)"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-title"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 184,
+          "endLine": 184,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.evt-sts-title) .ic"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-title"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 180,
+          "endLine": 184,
+          "oldSelector": ".evt-sts-title",
+          "effectiveSelectors": [
+            ".evt-sts-title"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-title"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 185,
+          "endLine": 187,
+          "oldSelector": ".evt-sts-main",
+          "effectiveSelectors": [
+            ".evt-sts-main"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-main"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 189,
+          "endLine": 193,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.evt-sts-art)"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 194,
+          "endLine": 194,
+          "oldSelector": "& img",
+          "effectiveSelectors": [
+            ":is(.evt-sts-art) img"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 188,
+          "endLine": 194,
+          "oldSelector": ".evt-sts-art",
+          "effectiveSelectors": [
+            ".evt-sts-art"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 195,
+          "endLine": 195,
+          "oldSelector": ".evt-sts-opts",
+          "effectiveSelectors": [
+            ".evt-sts-opts"
+          ],
+          "requiredMissingTokens": [
+            "evt-sts-opts"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 228,
+          "endLine": 228,
+          "oldSelector": "&.withart",
+          "effectiveSelectors": [
+            ":is(.evt-opt).withart"
+          ],
+          "requiredMissingTokens": [
+            "withart"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 230,
+          "endLine": 231,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.evt-opt-art)"
+          ],
+          "requiredMissingTokens": [
+            "evt-opt-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        },
+        {
+          "kind": "remove-rule",
+          "line": 232,
+          "endLine": 232,
+          "oldSelector": "& img",
+          "effectiveSelectors": [
+            ":is(.evt-opt-art) img"
+          ],
+          "requiredMissingTokens": [
+            "evt-opt-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 229,
+          "endLine": 232,
+          "oldSelector": ".evt-opt-art",
+          "effectiveSelectors": [
+            ".evt-opt-art"
+          ],
+          "requiredMissingTokens": [
+            "evt-opt-art"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 233,
+          "endLine": 233,
+          "oldSelector": ".evt-opt-txt",
+          "effectiveSelectors": [
+            ".evt-opt-txt"
+          ],
+          "requiredMissingTokens": [
+            "evt-opt-txt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 403,
+          "endLine": 404,
+          "oldSelector": ".sell-tip",
+          "effectiveSelectors": [
+            ".sell-tip"
+          ],
+          "requiredMissingTokens": [
+            "sell-tip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 408,
+          "endLine": 408,
+          "oldSelector": ".sell-no",
+          "effectiveSelectors": [
+            ".sell-no"
+          ],
+          "requiredMissingTokens": [
+            "sell-no"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        }
+      ],
+      "liveDeclarations": 758,
+      "preservedComments": 61
+    },
+    {
+      "file": "game/css/winter.css",
+      "beforeSha256": "743b8760a6dc61caabd2cf9f88d0186b1cf12064dc7b9857fdd547bebd803a8e",
+      "afterSha256": "92e4104e4928fd0f7928bd5faafeada50dcb5e1d457ca1472489a8a302d3bffb",
+      "beforeNormalizedBytes": 85860,
+      "afterNormalizedBytes": 82650,
+      "normalizedBytesSaved": 3210,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 11,
+          "endLine": 11,
+          "oldSelector": ".ak-back",
+          "effectiveSelectors": [
+            ".ak-back"
+          ],
+          "requiredMissingTokens": [
+            "ak-back"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 49,
+          "endLine": 49,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.pg-close)"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 49,
+          "endLine": 49,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(.pg-close):hover"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 49,
+          "endLine": 49,
+          "oldSelector": ".pg-close",
+          "effectiveSelectors": [
+            ".pg-close"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 49,
+          "oldSelector": ".ov-btn,.mini-btn,.hub-tab,.step-btn",
+          "newSelector": ".ov-btn,.mini-btn,.hub-tab",
+          "removed": [
+            {
+              "oldSelector": ".step-btn",
+              "effectiveSelector": ".step-btn",
+              "requiredMissingTokens": [
+                "step-btn"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "remove-rule",
+          "line": 54,
+          "endLine": 54,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.xp-bar)"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 54,
+          "endLine": 54,
+          "oldSelector": "& i",
+          "effectiveSelectors": [
+            ":is(.xp-bar) i"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 54,
+          "endLine": 54,
+          "oldSelector": ".xp-bar",
+          "effectiveSelectors": [
+            ".xp-bar"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 112,
+          "endLine": 116,
+          "oldSelector": ".pg.slot-page > .pg-close,#overlay.opaque .pg > .pg-close",
+          "effectiveSelectors": [
+            ".pg.slot-page > .pg-close",
+            "#overlay.opaque .pg > .pg-close"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 13
+        },
+        {
+          "kind": "remove-rule",
+          "line": 117,
+          "endLine": 117,
+          "oldSelector": ".pg.slot-page > .pg-close:hover,#overlay.opaque .pg > .pg-close:hover",
+          "effectiveSelectors": [
+            ".pg.slot-page > .pg-close:hover",
+            "#overlay.opaque .pg > .pg-close:hover"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 118,
+          "endLine": 118,
+          "oldSelector": ".pg.slot-page > .pg-close:active,#overlay.opaque .pg > .pg-close:active",
+          "effectiveSelectors": [
+            ".pg.slot-page > .pg-close:active",
+            "#overlay.opaque .pg > .pg-close:active"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 119,
+          "endLine": 119,
+          "oldSelector": ".pg.slot-page > .pg-close .ic,#overlay.opaque .pg > .pg-close .ic",
+          "effectiveSelectors": [
+            ".pg.slot-page > .pg-close .ic",
+            "#overlay.opaque .pg > .pg-close .ic"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 127,
+          "endLine": 127,
+          "oldSelector": "#cdesStage #cardTilt",
+          "effectiveSelectors": [
+            "#cdesStage #cardTilt"
+          ],
+          "requiredMissingTokens": [
+            "cardTilt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 128,
+          "endLine": 128,
+          "oldSelector": "#cardPreview .hs-card",
+          "effectiveSelectors": [
+            "#cardPreview .hs-card"
+          ],
+          "requiredMissingTokens": [
+            "cardPreview"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 239,
+          "endLine": 239,
+          "oldSelector": "#overlay .card.page:has(.cdes)",
+          "effectiveSelectors": [
+            "#overlay .card.page:has(.cdes)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 269,
+          "endLine": 269,
+          "oldSelector": ".cdes-stage",
+          "effectiveSelectors": [
+            ".cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 302,
+          "endLine": 302,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.pg-close) .ic"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 303,
+          "endLine": 303,
+          "oldSelector": "&:hover .ic",
+          "effectiveSelectors": [
+            ":is(.pg-close):hover .ic"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 301,
+          "endLine": 303,
+          "oldSelector": ".pg-close",
+          "effectiveSelectors": [
+            ".pg-close"
+          ],
+          "requiredMissingTokens": [
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 363,
+          "endLine": 363,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.pg.cdes)"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 364,
+          "endLine": 364,
+          "oldSelector": "& .cdes-main",
+          "effectiveSelectors": [
+            ":is(.pg.cdes) .cdes-main"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 365,
+          "endLine": 365,
+          "oldSelector": "& .cdes-stage",
+          "effectiveSelectors": [
+            ":is(.pg.cdes) .cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 362,
+          "endLine": 365,
+          "oldSelector": ".pg.cdes",
+          "effectiveSelectors": [
+            ".pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 416,
+          "endLine": 416,
+          "oldSelector": "#cardPreview .hs-card",
+          "effectiveSelectors": [
+            "#cardPreview .hs-card"
+          ],
+          "requiredMissingTokens": [
+            "cardPreview"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 417,
+          "endLine": 417,
+          "oldSelector": ".cdes-stage",
+          "effectiveSelectors": [
+            ".cdes-stage"
+          ],
+          "requiredMissingTokens": [
+            "cdes-stage"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 420,
+          "endLine": 420,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.cdes-form .dmg-ctl input[type=\"number\"])"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 421,
+          "endLine": 421,
+          "oldSelector": "&:focus",
+          "effectiveSelectors": [
+            ":is(.cdes-form .dmg-ctl input[type=\"number\"]):focus"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 419,
+          "endLine": 421,
+          "oldSelector": ".cdes-form .dmg-ctl input[type=\"number\"]",
+          "effectiveSelectors": [
+            ".cdes-form .dmg-ctl input[type=\"number\"]"
+          ],
+          "requiredMissingTokens": [
+            "cdes-form",
+            "dmg-ctl"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 478,
+          "oldSelector": "#depMain .dep-cards,#exMain .dep-list",
+          "newSelector": "#depMain .dep-cards",
+          "removed": [
+            {
+              "oldSelector": "#exMain .dep-list",
+              "effectiveSelector": "#exMain .dep-list",
+              "requiredMissingTokens": [
+                "dep-list"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "remove-rule",
+          "line": 535,
+          "endLine": 535,
+          "oldSelector": "& .pg-close",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-close"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "pg-close"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 536,
+          "endLine": 536,
+          "oldSelector": "& .pg-head",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .pg-head"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 534,
+          "endLine": 536,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 583,
+          "endLine": 583,
+          "oldSelector": "#overlay .pg.cdes .cdes-form",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .cdes-form"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-form"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 585,
+          "endLine": 585,
+          "oldSelector": "& > label",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cdes-row) > label"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 586,
+          "endLine": 586,
+          "oldSelector": "& .row-tip",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cdes-row) .row-tip"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row",
+            "row-tip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 587,
+          "endLine": 588,
+          "oldSelector": "& input[type=\"text\"],\n& textarea",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cdes-row) input[type=\"text\"]",
+            ":is(#overlay .pg.cdes .cdes-row) textarea"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 589,
+          "endLine": 591,
+          "oldSelector": "& input[type=\"text\"]:focus,\n& textarea:focus,\n& input[type=\"number\"]:focus",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cdes-row) input[type=\"text\"]:focus",
+            ":is(#overlay .pg.cdes .cdes-row) textarea:focus",
+            ":is(#overlay .pg.cdes .cdes-row) input[type=\"number\"]:focus"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 592,
+          "endLine": 593,
+          "oldSelector": "& input::placeholder,\n& textarea::placeholder",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes .cdes-row) input::placeholder",
+            ":is(#overlay .pg.cdes .cdes-row) textarea::placeholder"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 584,
+          "endLine": 593,
+          "oldSelector": "#overlay .pg.cdes .cdes-row",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes .cdes-row"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-row"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 595,
+          "endLine": 596,
+          "oldSelector": "& .seg button,\n& .mech-chip",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button",
+            ":is(#overlay .pg.cdes) .mech-chip"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 597,
+          "endLine": 598,
+          "oldSelector": "& .seg button:hover,\n& .mech-chip:hover",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button:hover",
+            ":is(#overlay .pg.cdes) .mech-chip:hover"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 599,
+          "endLine": 600,
+          "oldSelector": "& .seg button.on,\n& .mech-chip.on",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .seg button.on",
+            ":is(#overlay .pg.cdes) .mech-chip.on"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "seg",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 601,
+          "endLine": 601,
+          "oldSelector": "& .mech-chip.on em",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .mech-chip.on em"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "mech-chip"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 602,
+          "endLine": 602,
+          "oldSelector": "& .cdes-sec > span",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-sec > span"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 603,
+          "endLine": 603,
+          "oldSelector": "& .cdes-sec > em",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-sec > em"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 604,
+          "endLine": 604,
+          "oldSelector": "& .cdes-sec",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .cdes-sec"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "cdes-sec"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 605,
+          "endLine": 605,
+          "oldSelector": "& .dmg-hint",
+          "effectiveSelectors": [
+            ":is(#overlay .pg.cdes) .dmg-hint"
+          ],
+          "requiredMissingTokens": [
+            "cdes",
+            "dmg-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 594,
+          "endLine": 605,
+          "oldSelector": "#overlay .pg.cdes",
+          "effectiveSelectors": [
+            "#overlay .pg.cdes"
+          ],
+          "requiredMissingTokens": [
+            "cdes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 736,
+          "endLine": 736,
+          "oldSelector": "& .flip-face.flip-front",
+          "effectiveSelectors": [
+            ":is(#overlay .bag-view .bag-slot) .flip-face.flip-front"
+          ],
+          "requiredMissingTokens": [
+            "flip-front"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 737,
+          "endLine": 737,
+          "oldSelector": "& .flip-face.flip-front .hs-card",
+          "effectiveSelectors": [
+            ":is(#overlay .bag-view .bag-slot) .flip-face.flip-front .hs-card"
+          ],
+          "requiredMissingTokens": [
+            "flip-front"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        }
+      ],
+      "liveDeclarations": 2070,
+      "preservedComments": 197
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "beforeSha256": "b7ac0b865ade4c19c20e7dde5db7ddd4c011ee8944e88620bc0eb3a8bbf5a316",
+      "afterSha256": "1519b5833220879488ce0488657d37a90d2a8c5faf7bc095c38b135bdc67a1d0",
+      "beforeNormalizedBytes": 15221,
+      "afterNormalizedBytes": 13226,
+      "normalizedBytesSaved": 1995,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 109,
+          "endLine": 111,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .collection-tabs)"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 112,
+          "endLine": 116,
+          "oldSelector": "& button",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .collection-tabs) button"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 117,
+          "endLine": 120,
+          "oldSelector": "& button:hover",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .collection-tabs) button:hover"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 121,
+          "endLine": 125,
+          "oldSelector": "& button.on",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .collection-tabs) button.on"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 127,
+          "endLine": 132,
+          "oldSelector": "& button.on::after",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .collection-tabs) button.on::after"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 12
+        },
+        {
+          "kind": "remove-rule",
+          "line": 107,
+          "endLine": 132,
+          "oldSelector": "#overlay #hubMain.hub-ach .collection-tabs",
+          "effectiveSelectors": [
+            "#overlay #hubMain.hub-ach .collection-tabs"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 263,
+          "endLine": 266,
+          "oldSelector": "& .ach-silhouettes",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach) .ach-silhouettes"
+          ],
+          "requiredMissingTokens": [
+            "ach-silhouettes"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 268,
+          "endLine": 278,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil)"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 10
+        },
+        {
+          "kind": "remove-rule",
+          "line": 280,
+          "endLine": 284,
+          "oldSelector": "&::before",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil)::before"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 285,
+          "endLine": 285,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil) .ic"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 286,
+          "endLine": 286,
+          "oldSelector": "&:nth-child(3n)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil):nth-child(3n)"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 287,
+          "endLine": 287,
+          "oldSelector": "&:nth-child(4n+1)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil):nth-child(4n+1)"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 288,
+          "endLine": 291,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.hub-ach .ach-sil):hover"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 267,
+          "endLine": 291,
+          "oldSelector": "#overlay #hubMain.hub-ach .ach-sil",
+          "effectiveSelectors": [
+            "#overlay #hubMain.hub-ach .ach-sil"
+          ],
+          "requiredMissingTokens": [
+            "ach-sil"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        }
+      ],
+      "liveDeclarations": 117,
+      "preservedComments": 39
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "beforeSha256": "5a05d6d1db45e0b60ab39dc733ec4604ae441f7560874e3ec6223719f5b2f44a",
+      "afterSha256": "23ccdb460a75afb262be608d3a2898ba3d40b7ffc40b26c6e9da1ed364794fce",
+      "beforeNormalizedBytes": 16654,
+      "afterNormalizedBytes": 15581,
+      "normalizedBytesSaved": 1073,
+      "operations": [
+        {
+          "kind": "prune-top-level-branches",
+          "line": 104,
+          "oldSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn), & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn, & .card.discover:has(.sac-hand) .scene-ops .ov-btn",
+          "newSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn), & .card.discover:has(.sac-hand) .scene-ops .ov-btn",
+          "removed": [
+            {
+              "oldSelector": " & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn",
+              "effectiveSelector": ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay) .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn",
+              "requiredMissingTokens": [
+                "chest-ops"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 111,
+          "oldSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn.ok, .mini-btn.ok), & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok, & .card.discover:has(.sac-hand) .scene-ops .ov-btn.ok",
+          "newSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn.ok, .mini-btn.ok), & .card.discover:has(.sac-hand) .scene-ops .ov-btn.ok",
+          "removed": [
+            {
+              "oldSelector": " & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok",
+              "effectiveSelector": ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay) .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok",
+              "requiredMissingTokens": [
+                "chest-ops"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 114,
+          "oldSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:hover:not(:disabled), & .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled)",
+          "newSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):hover:not(:disabled), & .card.discover:has(.sac-hand) .scene-ops .ov-btn:hover:not(:disabled)",
+          "removed": [
+            {
+              "oldSelector": " & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:hover:not(:disabled)",
+              "effectiveSelector": ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay) .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:hover:not(:disabled)",
+              "requiredMissingTokens": [
+                "chest-ops"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 118,
+          "oldSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):disabled, & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:disabled, & .card.discover:has(.sac-hand) .scene-ops .ov-btn:disabled",
+          "newSelector": "& :is(.node-pg:not(.event-scene):has(> .node-panel), .shop-pg.sc-shop:not(.shop-market):not(.shop-exchange), #exMain.result-pg, .doom-panel) :is(.ov-btn, .mini-btn):disabled, & .card.discover:has(.sac-hand) .scene-ops .ov-btn:disabled",
+          "removed": [
+            {
+              "oldSelector": " & .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:disabled",
+              "effectiveSelector": ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay) .card.chest:not(:has(.reward-v14)) .chest-ops .ov-btn:disabled",
+              "requiredMissingTokens": [
+                "chest-ops"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "remove-rule",
+          "line": 226,
+          "endLine": 229,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .loot-manifest",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .loot-manifest"
+          ],
+          "requiredMissingTokens": [
+            "loot-manifest"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 230,
+          "endLine": 230,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .loot-manifest span",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .loot-manifest span"
+          ],
+          "requiredMissingTokens": [
+            "loot-manifest"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 231,
+          "endLine": 231,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .loot-manifest > div:first-child > b",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .loot-manifest > div:first-child > b"
+          ],
+          "requiredMissingTokens": [
+            "loot-manifest"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 232,
+          "endLine": 232,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .loot-capacity b",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .loot-capacity b"
+          ],
+          "requiredMissingTokens": [
+            "loot-capacity"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 233,
+          "endLine": 233,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .loot-capacity :is(small, em)",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .loot-capacity :is(small, em)"
+          ],
+          "requiredMissingTokens": [
+            "loot-capacity"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 238,
+          "endLine": 238,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .chest-reveal",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .chest-reveal"
+          ],
+          "requiredMissingTokens": [
+            "chest-reveal"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 244,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .chest-ops,\r\n&.discover:has(.sac-hand) .scene-ops",
+          "newSelector": "\r\n&.discover:has(.sac-hand) .scene-ops",
+          "removed": [
+            {
+              "oldSelector": "&.chest:not(:has(.reward-v14)) .chest-ops",
+              "effectiveSelector": ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .chest-ops",
+              "requiredMissingTokens": [
+                "chest-ops"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "remove-rule",
+          "line": 250,
+          "endLine": 250,
+          "oldSelector": "&.chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok.warn",
+          "effectiveSelectors": [
+            ":is(:where(body[data-ui-cover-context=\"ordinary\"]) #overlay .card).chest:not(:has(.reward-v14)) .chest-ops .ov-btn.ok.warn"
+          ],
+          "requiredMissingTokens": [
+            "chest-ops"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        }
+      ],
+      "liveDeclarations": 401,
+      "preservedComments": 9
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "beforeSha256": "8e565fd7ad385328d45ce2c14934f2a5cf388a4365b34cd52d6c2f73557c158d",
+      "afterSha256": "1976256b6c04f60ca573b021fee9eb142de6fbbd9946252db06b180b1e85a163",
+      "beforeNormalizedBytes": 3633,
+      "afterNormalizedBytes": 2602,
+      "normalizedBytesSaved": 1031,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 15,
+          "endLine": 15,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.readiness-head)"
+          ],
+          "requiredMissingTokens": [
+            "readiness-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 16,
+          "endLine": 16,
+          "oldSelector": "& > b",
+          "effectiveSelectors": [
+            ":is(.readiness-head) > b"
+          ],
+          "requiredMissingTokens": [
+            "readiness-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 14,
+          "endLine": 16,
+          "oldSelector": ".readiness-head",
+          "effectiveSelectors": [
+            ".readiness-head"
+          ],
+          "requiredMissingTokens": [
+            "readiness-head"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 22,
+          "endLine": 22,
+          "oldSelector": ".collection-tabs",
+          "effectiveSelectors": [
+            ".collection-tabs"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 11
+        },
+        {
+          "kind": "remove-rule",
+          "line": 24,
+          "endLine": 24,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.collection-tabs button)"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 25,
+          "endLine": 25,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.collection-tabs button) .ic"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 26,
+          "endLine": 26,
+          "oldSelector": "&:hover",
+          "effectiveSelectors": [
+            ":is(.collection-tabs button):hover"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 27,
+          "endLine": 27,
+          "oldSelector": "&.on",
+          "effectiveSelectors": [
+            ":is(.collection-tabs button).on"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 23,
+          "endLine": 27,
+          "oldSelector": ".collection-tabs button",
+          "effectiveSelectors": [
+            ".collection-tabs button"
+          ],
+          "requiredMissingTokens": [
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 45,
+          "endLine": 45,
+          "oldSelector": "#overlay #depMain .hub-head .dep-kicker",
+          "effectiveSelectors": [
+            "#overlay #depMain .hub-head .dep-kicker"
+          ],
+          "requiredMissingTokens": [
+            "dep-kicker"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 15,
+      "preservedComments": 11
+    },
+    {
+      "file": "game/css/hub.css",
+      "beforeSha256": "8c0dfc98db546db435c0aa18633a56759b962ff32564e6746c019c6087039fb9",
+      "afterSha256": "804f7f57072cdfa2255e91cb5d4208a40352110643329c7a1fb3ccf3d3e20fbb",
+      "beforeNormalizedBytes": 14557,
+      "afterNormalizedBytes": 13726,
+      "normalizedBytesSaved": 831,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 37,
+          "endLine": 37,
+          "oldSelector": ".deploy-grid",
+          "effectiveSelectors": [
+            ".deploy-grid"
+          ],
+          "requiredMissingTokens": [
+            "deploy-grid"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 50,
+          "endLine": 51,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.xp-bar)"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 52,
+          "endLine": 52,
+          "oldSelector": "& i",
+          "effectiveSelectors": [
+            ":is(.xp-bar) i"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 48,
+          "endLine": 52,
+          "oldSelector": ".xp-bar",
+          "effectiveSelectors": [
+            ".xp-bar"
+          ],
+          "requiredMissingTokens": [
+            "xp-bar"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        },
+        {
+          "kind": "remove-rule",
+          "line": 53,
+          "endLine": 53,
+          "oldSelector": ".xp-txt",
+          "effectiveSelectors": [
+            ".xp-txt"
+          ],
+          "requiredMissingTokens": [
+            "xp-txt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 54,
+          "endLine": 54,
+          "oldSelector": ".deploy-foot",
+          "effectiveSelectors": [
+            ".deploy-foot"
+          ],
+          "requiredMissingTokens": [
+            "deploy-foot"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 68,
+          "endLine": 68,
+          "oldSelector": ".dep-list",
+          "effectiveSelectors": [
+            ".dep-list"
+          ],
+          "requiredMissingTokens": [
+            "dep-list"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 72,
+          "endLine": 72,
+          "oldSelector": ".warn-hint",
+          "effectiveSelectors": [
+            ".warn-hint"
+          ],
+          "requiredMissingTokens": [
+            "warn-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 122,
+          "endLine": 122,
+          "oldSelector": ".cls2-tag",
+          "effectiveSelectors": [
+            ".cls2-tag"
+          ],
+          "requiredMissingTokens": [
+            "cls2-tag"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 124,
+          "endLine": 124,
+          "oldSelector": "&",
+          "effectiveSelectors": [
+            ":is(.cls2-lv)"
+          ],
+          "requiredMissingTokens": [
+            "cls2-lv"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 125,
+          "endLine": 125,
+          "oldSelector": "& .ic",
+          "effectiveSelectors": [
+            ":is(.cls2-lv) .ic"
+          ],
+          "requiredMissingTokens": [
+            "cls2-lv"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 123,
+          "endLine": 125,
+          "oldSelector": ".cls2-lv",
+          "effectiveSelectors": [
+            ".cls2-lv"
+          ],
+          "requiredMissingTokens": [
+            "cls2-lv"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 0
+        }
+      ],
+      "liveDeclarations": 369,
+      "preservedComments": 28
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "beforeSha256": "b611c9fb6872d99ce4ea314310835c9ac98679204093821f22182ed01223d3aa",
+      "afterSha256": "85efa262c301fddfbf3cb8911c5f311dd8d7ece82a6e7baf79e6c3418e702a34",
+      "beforeNormalizedBytes": 16738,
+      "afterNormalizedBytes": 16046,
+      "normalizedBytesSaved": 692,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 78,
+          "endLine": 78,
+          "oldSelector": "& :is(.stash-sections, .collection-tabs)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-sections, .collection-tabs)"
+          ],
+          "requiredMissingTokens": [
+            "stash-sections",
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 7
+        },
+        {
+          "kind": "remove-rule",
+          "line": 79,
+          "endLine": 79,
+          "oldSelector": "& :is(.stash-section-tab, .collection-tabs button)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-section-tab, .collection-tabs button)"
+          ],
+          "requiredMissingTokens": [
+            "stash-section-tab",
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 13
+        },
+        {
+          "kind": "remove-rule",
+          "line": 80,
+          "endLine": 80,
+          "oldSelector": "& :is(.stash-section-tab.on, .collection-tabs button.on)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-section-tab.on, .collection-tabs button.on)"
+          ],
+          "requiredMissingTokens": [
+            "stash-section-tab",
+            "collection-tabs"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 81,
+          "endLine": 81,
+          "oldSelector": "& :is(.stash-section-tab small)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-section-tab small)"
+          ],
+          "requiredMissingTokens": [
+            "stash-section-tab"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 562,
+      "preservedComments": 7
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "beforeSha256": "a3a4c84a5d85cf5c13fa146d4b8ea6bb49f08f6908e7bb25916ea8419e688035",
+      "afterSha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+      "beforeNormalizedBytes": 19604,
+      "afterNormalizedBytes": 19011,
+      "normalizedBytesSaved": 593,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 50,
+          "endLine": 50,
+          "oldSelector": "& :is(.stash-sections)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-sections)"
+          ],
+          "requiredMissingTokens": [
+            "stash-sections"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 4
+        },
+        {
+          "kind": "remove-rule",
+          "line": 51,
+          "endLine": 51,
+          "oldSelector": "& :is(.stash-section-tab,.logistics-sections button)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-section-tab,.logistics-sections button)"
+          ],
+          "requiredMissingTokens": [
+            "stash-section-tab",
+            "logistics-sections"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 9
+        },
+        {
+          "kind": "remove-rule",
+          "line": 52,
+          "endLine": 52,
+          "oldSelector": "& :is(.stash-section-tab.on,.logistics-sections button.on)",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) :is(.stash-section-tab.on,.logistics-sections button.on)"
+          ],
+          "requiredMissingTokens": [
+            "stash-section-tab",
+            "logistics-sections"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 132,
+          "endLine": 132,
+          "oldSelector": "& .camp-section-head .person-groups",
+          "effectiveSelectors": [
+            ":is(#overlay #hubMain.pg.hub.base-camp) .camp-section-head .person-groups"
+          ],
+          "requiredMissingTokens": [
+            "person-groups"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        }
+      ],
+      "liveDeclarations": 632,
+      "preservedComments": 4
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "beforeSha256": "95bf0b3ae155f19ee1c5f726fdca0023e2ff3d54fc0691e4f91c5904111e5485",
+      "afterSha256": "e58576e00ddf1b43ceef3533b2862b119429ff901a4bd7f95d923cce292a294a",
+      "beforeNormalizedBytes": 19431,
+      "afterNormalizedBytes": 18890,
+      "normalizedBytesSaved": 541,
+      "operations": [
+        {
+          "kind": "prune-top-level-branches",
+          "line": 161,
+          "oldSelector": "& .hub, & .bag-view, & .cardlib-page, & .settings-page",
+          "newSelector": "& .hub, & .bag-view, & .settings-page",
+          "removed": [
+            {
+              "oldSelector": " & .cardlib-page",
+              "effectiveSelector": ":is(#overlay) .cardlib-page",
+              "requiredMissingTokens": [
+                "cardlib-page"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "prune-top-level-branches",
+          "line": 162,
+          "oldSelector": "& .hub-head, & .bag-head, & .cardlib-head, & .pg-head",
+          "newSelector": "& .hub-head, & .bag-head, & .pg-head",
+          "removed": [
+            {
+              "oldSelector": " & .cardlib-head",
+              "effectiveSelector": ":is(#overlay) .cardlib-head",
+              "requiredMissingTokens": [
+                "cardlib-head"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        },
+        {
+          "kind": "remove-rule",
+          "line": 174,
+          "endLine": 174,
+          "oldSelector": "& .cls-info",
+          "effectiveSelectors": [
+            ":is(#overlay .hub-page) .cls-info"
+          ],
+          "requiredMissingTokens": [
+            "cls-info"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 182,
+          "endLine": 182,
+          "oldSelector": "& .dep-list",
+          "effectiveSelectors": [
+            ":is(#overlay) .dep-list"
+          ],
+          "requiredMissingTokens": [
+            "dep-list"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        },
+        {
+          "kind": "remove-rule",
+          "line": 238,
+          "endLine": 238,
+          "oldSelector": "& .cell-mark",
+          "effectiveSelectors": [
+            ":is(#overlay .hub-page .stash-cell) .cell-mark"
+          ],
+          "requiredMissingTokens": [
+            "cell-mark"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 6
+        },
+        {
+          "kind": "remove-rule",
+          "line": 239,
+          "endLine": 239,
+          "oldSelector": "& .cell-mark .ic",
+          "effectiveSelectors": [
+            ":is(#overlay .hub-page .stash-cell) .cell-mark .ic"
+          ],
+          "requiredMissingTokens": [
+            "cell-mark"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        },
+        {
+          "kind": "remove-rule",
+          "line": 240,
+          "endLine": 240,
+          "oldSelector": "& .cell-tag",
+          "effectiveSelectors": [
+            ":is(#overlay .hub-page .stash-cell) .cell-tag"
+          ],
+          "requiredMissingTokens": [
+            "cell-tag"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 11
+        }
+      ],
+      "liveDeclarations": 519,
+      "preservedComments": 29
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "beforeSha256": "676996862db5483f7710cf7a92f918b7d89557c667de45d953f7ff98a2762e53",
+      "afterSha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d",
+      "beforeNormalizedBytes": 5929,
+      "afterNormalizedBytes": 5709,
+      "normalizedBytesSaved": 220,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 28,
+          "endLine": 28,
+          "oldSelector": "& .fire-rest-capacity",
+          "effectiveSelectors": [
+            ":is(#overlay .card.page .sc-fire) .fire-rest-capacity"
+          ],
+          "requiredMissingTokens": [
+            "fire-rest-capacity"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 5
+        },
+        {
+          "kind": "remove-rule",
+          "line": 29,
+          "endLine": 29,
+          "oldSelector": "& .fire-rest-capacity b",
+          "effectiveSelectors": [
+            ":is(#overlay .card.page .sc-fire) .fire-rest-capacity b"
+          ],
+          "requiredMissingTokens": [
+            "fire-rest-capacity"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 141,
+      "preservedComments": 3
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "beforeSha256": "302df889bc80a7c4dcbb42c5e979aa50290ea47bc38af8f494cf1cb07cffbf24",
+      "afterSha256": "6b1d8c8ea0ebfd298940395bf834a8f51c2c8f00fa780f1c3b5ea29985a66d40",
+      "beforeNormalizedBytes": 11743,
+      "afterNormalizedBytes": 11577,
+      "normalizedBytesSaved": 166,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 239,
+          "endLine": 242,
+          "oldSelector": "& .city-run-hint",
+          "effectiveSelectors": [
+            ":is(#overlay .city-run-transition) .city-run-hint"
+          ],
+          "requiredMissingTokens": [
+            "city-run-hint"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 8
+        }
+      ],
+      "liveDeclarations": 278,
+      "preservedComments": 7
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "beforeSha256": "37353dd63891973b1533089d35addace8316a918144f1c56907f578f98c9cfe1",
+      "afterSha256": "8cd4aa9c3ac1fbe7d116c84c244ce35d44634fe80c2ed734a5e2acd8043b0929",
+      "beforeNormalizedBytes": 17298,
+      "afterNormalizedBytes": 17191,
+      "normalizedBytesSaved": 107,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 159,
+          "endLine": 159,
+          "oldSelector": "& .entry-reward-label",
+          "effectiveSelectors": [
+            ":is(body #overlay .entry-supply-strips) .entry-reward-label"
+          ],
+          "requiredMissingTokens": [
+            "entry-reward-label"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 160,
+          "endLine": 160,
+          "oldSelector": "& .entry-reward-amount",
+          "effectiveSelectors": [
+            ":is(body #overlay .entry-supply-strips) .entry-reward-amount"
+          ],
+          "requiredMissingTokens": [
+            "entry-reward-amount"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 562,
+      "preservedComments": 18
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "beforeSha256": "66aba164535f1b3d99ec1058361f31a5dad3dfd4ec5fc5bfde0a6bb3fb4745b5",
+      "afterSha256": "ad07375d0a19fa28817efa35d52264227b9e15f74f3ae158c63bc39ddf175b37",
+      "beforeNormalizedBytes": 25119,
+      "afterNormalizedBytes": 25017,
+      "normalizedBytesSaved": 102,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 462,
+          "endLine": 462,
+          "oldSelector": "& .sc-shop .so-en",
+          "effectiveSelectors": [
+            ":is(#overlay) .sc-shop .so-en"
+          ],
+          "requiredMissingTokens": [
+            "so-en"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        },
+        {
+          "kind": "remove-rule",
+          "line": 464,
+          "endLine": 464,
+          "oldSelector": ".xp-txt",
+          "effectiveSelectors": [
+            ".xp-txt"
+          ],
+          "requiredMissingTokens": [
+            "xp-txt"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 2
+        }
+      ],
+      "liveDeclarations": 243,
+      "preservedComments": 69
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "beforeSha256": "f989f724c5472c6c3065104cd8f0c429eeab92c00d60d740bbac786f9d8c3351",
+      "afterSha256": "990d43f34cf601e4ad4f2ac1fe11d41523db1227252685351ed6cced608f8871",
+      "beforeNormalizedBytes": 19894,
+      "afterNormalizedBytes": 19805,
+      "normalizedBytesSaved": 89,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 162,
+          "endLine": 162,
+          "oldSelector": "& .sell-ledger-kicker",
+          "effectiveSelectors": [
+            ":is(#overlay .shop-pg.shop-exchange) .sell-ledger-kicker"
+          ],
+          "requiredMissingTokens": [
+            "sell-ledger-kicker"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 3
+        }
+      ],
+      "liveDeclarations": 709,
+      "preservedComments": 8
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "beforeSha256": "ff378ae35acb317b8dbb1f25e70396a474e26ad989b32d4d4fd3a263493516af",
+      "afterSha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96",
+      "beforeNormalizedBytes": 3036,
+      "afterNormalizedBytes": 2960,
+      "normalizedBytesSaved": 76,
+      "operations": [
+        {
+          "kind": "prune-top-level-branches",
+          "line": 26,
+          "oldSelector": "&[data-render-quality=\"balanced\"] #overlay .pg.settings-page .pg-head::before,\n&[data-render-quality=\"balanced\"] #overlay #hubMain .deploy-primary::after",
+          "newSelector": "&[data-render-quality=\"balanced\"] #overlay .pg.settings-page .pg-head::before",
+          "removed": [
+            {
+              "oldSelector": "\n&[data-render-quality=\"balanced\"] #overlay #hubMain .deploy-primary::after",
+              "effectiveSelector": ":is(body)[data-render-quality=\"balanced\"] #overlay #hubMain .deploy-primary::after",
+              "requiredMissingTokens": [
+                "deploy-primary"
+              ],
+              "producerProof": "consumer-proof.json"
+            }
+          ],
+          "liveSpecificity": "Verified by strict complete live projection"
+        }
+      ],
+      "liveDeclarations": 60,
+      "preservedComments": 3
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "beforeSha256": "f967575e06cc8943430cc3cfa3488e15605f7f7b274b95822db53dd8932460be",
+      "afterSha256": "f5e77a20058950b1f002117cde60cb6a06168e3763a06ba54a50cbf1980fb59b",
+      "beforeNormalizedBytes": 14923,
+      "afterNormalizedBytes": 14887,
+      "normalizedBytesSaved": 36,
+      "operations": [
+        {
+          "kind": "remove-rule",
+          "line": 272,
+          "endLine": 272,
+          "oldSelector": "#cardPreview",
+          "effectiveSelectors": [
+            "#cardPreview"
+          ],
+          "requiredMissingTokens": [
+            "cardPreview"
+          ],
+          "producerProof": "consumer-proof.json tokens: no current HTML/JS/JSON production or dynamic prefix",
+          "declarations": 1
+        }
+      ],
+      "liveDeclarations": 437,
+      "preservedComments": 3
+    }
+  ]
+}

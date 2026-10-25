@@ -1,0 +1,34 @@
+{
+  "files": 78,
+  "productionFiles": 70,
+  "cssFiles": 46,
+  "productionRemovedBytesLf": 65458,
+  "cssRemovedBytesLf": 60419,
+  "testRemovedBytesLf": 898,
+  "approvedDeletedFiles": [
+    "game/css/page-shop.css",
+    "game/css/page-classes.css",
+    "game/css/map-cover.css",
+    "game/css/pocket-strip.css",
+    "game/src/experience/pocket-strip.js"
+  ],
+  "browser": "not run by user instruction",
+  "commit": false,
+  "cumulativeCssRemovedBytesLf": 213105,
+  "cumulativeCssRemovedPercent": 10.853229180088587,
+  "tests": {
+    "files": 20,
+    "passed": 216,
+    "retiredTimerTests": 1,
+    "initialStaleGuardFailures": 2,
+    "staleGuardFailuresResolved": true
+  },
+  "verification": {
+    "stylelint": "42 surviving edited styles passed",
+    "eslint": "edited JS/tests passed",
+    "sourceHashes": "matched",
+    "browser": "not run",
+    "build": "not run",
+    "committed": false
+  }
+}

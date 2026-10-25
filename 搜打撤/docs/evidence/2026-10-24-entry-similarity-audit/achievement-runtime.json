@@ -1,0 +1,105 @@
+{
+  "source": "Codex in-app browser, current window, real achievement button input; CDP reads only",
+  "date": "2026-10-24",
+  "observation": {
+    "after600ms": {
+      "activeEntry": [],
+      "cut": "camp-entry-cut"
+    },
+    "before": {
+      "activeEntry": [
+        {
+          "end": 380,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 51
+        },
+        {
+          "end": 380,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 51
+        },
+        {
+          "end": 380,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 51
+        },
+        {
+          "end": 380,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 51
+        },
+        {
+          "end": 380,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 51
+        },
+        {
+          "end": 260,
+          "state": "running",
+          "target": "",
+          "time": 44
+        },
+        {
+          "end": 290,
+          "state": "running",
+          "target": "ag-summary",
+          "time": 44
+        },
+        {
+          "end": 295,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 330,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 365,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 400,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 400,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 400,
+          "state": "running",
+          "target": "ag-medal ag-locked",
+          "time": 44
+        },
+        {
+          "end": 365,
+          "state": "running",
+          "target": "",
+          "time": 44
+        },
+        {
+          "end": 330,
+          "state": "running",
+          "target": "ag-total",
+          "time": 44
+        }
+      ],
+      "cut": "camp-entry-cut page-cut-waiting"
+    }
+  }
+}

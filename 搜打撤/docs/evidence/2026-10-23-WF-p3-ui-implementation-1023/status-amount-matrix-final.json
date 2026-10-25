@@ -1,0 +1,190 @@
+[
+  {
+    "values": [
+      {
+        "amountWidth": 14.412500381469728,
+        "label": "攻击强化 1",
+        "value": "1"
+      },
+      {
+        "amountWidth": 14.412500381469728,
+        "label": "法术强化 1",
+        "value": "1"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "潜行 1回合",
+        "unit": "回合",
+        "value": "1"
+      },
+      {
+        "label": "剑仙形态 · 生效中"
+      },
+      {
+        "amountWidth": 19.212499618530273,
+        "label": "流血 1层",
+        "unit": "层",
+        "value": "1"
+      },
+      {
+        "amountWidth": 19.212499618530273,
+        "label": "中毒 1层",
+        "unit": "层",
+        "value": "1"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "冰冻 1回合",
+        "unit": "回合",
+        "value": "1"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "禁疗 1回合",
+        "unit": "回合",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "values": [
+      {
+        "amountWidth": 14.412500381469728,
+        "label": "攻击强化 9",
+        "value": "9"
+      },
+      {
+        "amountWidth": 14.412500381469728,
+        "label": "法术强化 9",
+        "value": "9"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "潜行 9回合",
+        "unit": "回合",
+        "value": "9"
+      },
+      {
+        "label": "剑仙形态 · 生效中"
+      },
+      {
+        "amountWidth": 19.212499618530273,
+        "label": "流血 9层",
+        "unit": "层",
+        "value": "9"
+      },
+      {
+        "amountWidth": 19.212499618530273,
+        "label": "中毒 9层",
+        "unit": "层",
+        "value": "9"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "冰冻 9回合",
+        "unit": "回合",
+        "value": "9"
+      },
+      {
+        "amountWidth": 31.212499618530273,
+        "label": "禁疗 9回合",
+        "unit": "回合",
+        "value": "9"
+      }
+    ]
+  },
+  {
+    "values": [
+      {
+        "amountWidth": 14.425000190734863,
+        "label": "攻击强化 10",
+        "value": "10"
+      },
+      {
+        "amountWidth": 14.425000190734863,
+        "label": "法术强化 10",
+        "value": "10"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "潜行 10回合",
+        "unit": "回合",
+        "value": "10"
+      },
+      {
+        "label": "剑仙形态 · 生效中"
+      },
+      {
+        "amountWidth": 26.42500114440918,
+        "label": "流血 10层",
+        "unit": "层",
+        "value": "10"
+      },
+      {
+        "amountWidth": 26.42500114440918,
+        "label": "中毒 10层",
+        "unit": "层",
+        "value": "10"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "冰冻 10回合",
+        "unit": "回合",
+        "value": "10"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "禁疗 10回合",
+        "unit": "回合",
+        "value": "10"
+      }
+    ]
+  },
+  {
+    "values": [
+      {
+        "amountWidth": 14.425000190734863,
+        "label": "攻击强化 99",
+        "value": "99"
+      },
+      {
+        "amountWidth": 14.425000190734863,
+        "label": "法术强化 99",
+        "value": "99"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "潜行 99回合",
+        "unit": "回合",
+        "value": "99"
+      },
+      {
+        "label": "剑仙形态 · 生效中"
+      },
+      {
+        "amountWidth": 26.42500114440918,
+        "label": "流血 99层",
+        "unit": "层",
+        "value": "99"
+      },
+      {
+        "amountWidth": 26.42500114440918,
+        "label": "中毒 99层",
+        "unit": "层",
+        "value": "99"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "冰冻 99回合",
+        "unit": "回合",
+        "value": "99"
+      },
+      {
+        "amountWidth": 38.42499923706055,
+        "label": "禁疗 99回合",
+        "unit": "回合",
+        "value": "99"
+      }
+    ]
+  }
+]

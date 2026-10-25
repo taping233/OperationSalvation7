@@ -1,0 +1,116 @@
+{
+  "task": "WF-base-clarity-bestiary-1025",
+  "note": "Mixed working tree; these hashes identify inspected final inputs, not sole ownership of each full file. Earlier other-session increments preserved.",
+  "files": [
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "sha256": "07110ceeb31e68b2ff6c33999438e270ae265a0dc970e7482681d5aa42353f1c"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "sha256": "0818e88d05fa484bfa360d265812661dcbc0fd96c1d7f305029693556e2b95ce"
+    },
+    {
+      "path": "game/src/hub/hub.navigation-v7.js",
+      "sha256": "680d504ab77677ed6eaa55af85a3f4f14b6fe00012fb2d8e335246dd0e7070b1"
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "sha256": "920d082feec1fbc2a3b4b4b3597cdda416f504be658445db9a97dc09307fb848"
+    },
+    {
+      "path": "game/src/hub/base-page-motion-v7.js",
+      "sha256": "ef339821c57ca7f94b5f56ba515c2463dcf5640deda940ca3a305c6c97151e5d"
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "sha256": "127454619dfc026a0c246de6ca1c7e84e23c2f3a5e062af541bfc5c9d5966e67"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "sha256": "e920a223dc252a18527a5d244076299bb8c91c476e1b184f5c45038e246990e6"
+    },
+    {
+      "path": "game/src/cards/elite-bestiary.js",
+      "sha256": "34f43b343788825b2cf2e87f087e1d598f4c3b0b9483b1d1a260fbb66a9b699a"
+    },
+    {
+      "path": "game/css/base-home-v7.css",
+      "sha256": "3234dc9cdb7f85b8a0c71abe26a17f22a1ade42d82908da6e3648fe9b06eefa3"
+    },
+    {
+      "path": "game/css/base-framework-v7.css",
+      "sha256": "ee7e36a7609fffaac9cef148c2d970ad76e7fc9e781f239f04ea1440a2b72265"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "sha256": "0653d908591ff41a6a8d8456c9c92e17abbb1c8dba551f0d2fe05336e00d774c"
+    },
+    {
+      "path": "game/css/base-logistics-trade-v12.css",
+      "sha256": "dc10e10d0f8e975f6c85d109871d23375ac324c7224a68ca8a076085c02be1c5"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "sha256": "cee0a6b1395a6aaf48007491b4c3a9f1894bc6c544fe401ca59277b180191fb2"
+    },
+    {
+      "path": "tests/elite-bestiary.test.js",
+      "sha256": "451b4c9b411c1f368d661d02201adca718fcaa23859b1a86f91874cbe362d761"
+    },
+    {
+      "path": "tests/base-home-preparation.test.js",
+      "sha256": "bf0c20e763c8c395366d04d846b81cb69bb92bfddf6066d3c2eadd0169d71eb3"
+    },
+    {
+      "path": "tests/fresh-run-onboarding-copy.test.js",
+      "sha256": "4ae53e23ac013e2035edb68f2ea251ec9c7e282725c02f78530e38db6261b61c"
+    },
+    {
+      "path": "tests/base-motion-v4.test.js",
+      "sha256": "795d0bd2156eca46ea064ad1389d4cd90bb50412bc7283844fe9f64e1b9751eb"
+    },
+    {
+      "path": "tests/hub-personnel-portrait.test.js",
+      "sha256": "41f053c368759963c0d70a09c780a142320d1cad2aba9a24856da1244fea4661"
+    },
+    {
+      "path": "tests/base-subpage-header-readability.test.js",
+      "sha256": "66d22ba63f5ea4bf37bb32646c36f410d0d257d4dddc76e465f6ae2ab3311745"
+    },
+    {
+      "path": "docs/card-browser-rendering.md",
+      "sha256": "7df2eef99a456fad1b880c6369b11a779d44335739c526cc56c2155600f9d868"
+    },
+    {
+      "path": "docs/game-compendium.md",
+      "sha256": "44a46d0553942a0b3e87066c525020274a9bfb19cf7e640ea45ccf2ead278717"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/home-verified.png",
+      "sha256": "d7c03888dab3492f3010120b6f3f52fab35e4751acf4b9f920015fb44ed87903"
+    },
+    {
+      "path": "screenshots/personnel-final.png",
+      "sha256": "22fe489caa28c3c9191aad2d4c76dea4f27e558578e17a5dfb6bc0ae890006f9"
+    },
+    {
+      "path": "screenshots/warehouse-final.png",
+      "sha256": "e1dad8d5ac4dec96a2fc1d5bd7b52595b2f33b6ca85b9a4f2df53a5bec97d21d"
+    },
+    {
+      "path": "screenshots/trade-final.png",
+      "sha256": "c327913727b74f5304d21c8d20d297097bf195f718f01f80d4e2de6051539970"
+    },
+    {
+      "path": "screenshots/facilities-final.png",
+      "sha256": "7ddc4adc713e1d9735b4808a18396ef17977b14da9c6f8f007158dea2ce69af4"
+    },
+    {
+      "path": "screenshots/photo-elites.png",
+      "sha256": "4d87ad78610c6beb2b16b8b829dff37a6ef746bbbcd0db80ba83071ee777a038"
+    }
+  ]
+}

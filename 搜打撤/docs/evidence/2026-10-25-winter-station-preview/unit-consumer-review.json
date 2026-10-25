@@ -1,0 +1,9 @@
+{
+  "source": "game/src/battle/view/battle.frames.js",
+  "lfSha256": "e6085807665c6fb0e12b059e5a15fb89d7a97425b66b3389d4d106d1909bbf9a",
+  "registrations": [
+    "consumerFingerprints.frames",
+    "opaqueConsumers"
+  ],
+  "review": "Only publish existing visible-character height and foot inset to two CSS variables, with value guards. Asset URL constructors, frame catalog, loading, fallbacks, timing, and exclusion lists are unchanged. No asset audit or automated tests executed."
+}

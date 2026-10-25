@@ -1,0 +1,114 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "beforeSHA256": "d152beac61a525c69187fddd6e02d7326ed23df451ed674afaac6e507ace5dff",
+    "afterSHA256": "ff54a1a823e8a12ddd407d8db9097591df32c0abcc0d927328ff05b368d7dbd7",
+    "beforeLines": 207,
+    "afterLines": 205
+  },
+  {
+    "file": "game/css/base.css",
+    "beforeSHA256": "853d76e9f320aca1d9f551ddd8aa220e64ff972170384fe4389c370ca61d0c4d",
+    "afterSHA256": "95c1e46455ca22235e95494608ff3f81dec0ecfb2b84f2ee1e68631bd7d20c64",
+    "beforeLines": 399,
+    "afterLines": 391
+  },
+  {
+    "file": "game/css/beginner-guide.css",
+    "beforeSHA256": "89773a5c861f91befad6e66c54d272c66db2067a23f39ce88f5006acc4493a0e",
+    "afterSHA256": "7f13db4d6da3fbc5a5635e9f4f0003d657c54ad9edba8cef73f6675b63d7c7dc",
+    "beforeLines": 109,
+    "afterLines": 111
+  },
+  {
+    "file": "game/css/cover-system.css",
+    "beforeSHA256": "dfdf35d6834b4845efbf080e8be00e678595195712454dfa4b31c6cbca1037ff",
+    "afterSHA256": "afcc14099b815146fa1b1122e6814edf498cda7aca5651b7cd93c028d47aa2f5",
+    "beforeLines": 100,
+    "afterLines": 100
+  },
+  {
+    "file": "game/css/interface-components.css",
+    "beforeSHA256": "8d26105a4081a6875ff0960f80656cffd4f5451c1db9cb42cdd9f79f01603e8a",
+    "afterSHA256": "2a357555348e1f9f388605952a70585d249be1cc8221005b4d51dff8908db8a8",
+    "beforeLines": 111,
+    "afterLines": 81
+  },
+  {
+    "file": "game/css/motion-transitions.css",
+    "beforeSHA256": "817d57d8caaaa819e91fa669be4fbe423ad7a02cd5473a2e86fc9312153beb19",
+    "afterSHA256": "f9e2f6c0fbf92972d5c5d6904f958d61daf02f0a6fb531a968eb6f16e4b2b5f5",
+    "beforeLines": 227,
+    "afterLines": 223
+  },
+  {
+    "file": "game/css/overlays.css",
+    "beforeSHA256": "283f8373619e871921524de49cab4c17b1a584d8ca4d2027c1103ff6999c7ae6",
+    "afterSHA256": "4b1935583793471ff3f510c66959938d354f39468ff0b4ea18637e5661c5c15a",
+    "beforeLines": 503,
+    "afterLines": 450
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "beforeSHA256": "02d1931e8deb5621e5fc109b3174e42ce7111697e74b7620052fc1df088e02af",
+    "afterSHA256": "573c6c61e4af0feab1b3e7bd1f36ad10fc74f3f8886ba9fb6b375be3be8d2272",
+    "beforeLines": 517,
+    "afterLines": 62
+  },
+  {
+    "file": "game/css/public-controls.css",
+    "beforeSHA256": "384b308ad9968b3e729581440378d227e5dbad73df740092d5984191b900152f",
+    "afterSHA256": "27183c8b0187db8e2e4b8d132880fcf84a2853081b2136d9b63abd177437864d",
+    "beforeLines": 50,
+    "afterLines": 59
+  },
+  {
+    "file": "game/css/review-ui.css",
+    "beforeSHA256": "17c87c995d17818e9c76f509a849412c56dcd7615aea37f1bf9c78a00addc60a",
+    "afterSHA256": "911bd4c7a4d50faeefe08ab3babdea46f5c91dbf18accb6e68ccb465590d9fc9",
+    "beforeLines": 35,
+    "afterLines": 27
+  },
+  {
+    "file": "game/css/run-experience.css",
+    "beforeSHA256": "d494ad823c71d0e2212e297f872d814dca4c37d457f2e5a474d38812119784fe",
+    "afterSHA256": "2dec2747659c20e6ff52ba041b829aab62667c8fde37f6b57e44823faf56c653",
+    "beforeLines": 193,
+    "afterLines": 186
+  },
+  {
+    "file": "game/css/selection-state-motion.css",
+    "beforeSHA256": "46d9f2ad96bcdf817d32ba7b431f1c332cca694a780b85f9287eeec39f76114d",
+    "afterSHA256": "644ecefdc63aef1165277de39ab9a6f049fb72e97eab65b56674b006944f5884",
+    "beforeLines": 60,
+    "afterLines": 60
+  },
+  {
+    "file": "game/css/settings-navigation.css",
+    "beforeSHA256": "7b3301d5bca2a43c02e55df55cb3fd6de72ccf82cd37614803c39941cfd2d35a",
+    "afterSHA256": "888574a0861171e1dc41aae3832b5d9fde7af8d6dfbc3c8ab6ad457066456e29",
+    "beforeLines": 284,
+    "afterLines": 231
+  },
+  {
+    "file": "game/css/winter.css",
+    "beforeSHA256": "193dd310a48418b1ed39e1045421aaaaf33da70093ba8f29e56a91bbecbbb11b",
+    "afterSHA256": "8d8260dc595403b3bcd0878bf48fa84d80e63017b5c39635a5e59f757720346e",
+    "beforeLines": 1090,
+    "afterLines": 1042
+  },
+  {
+    "file": "game/src/ui/settings-navigation.js",
+    "beforeSHA256": "44960f9f7a42337297533d8b0d21da81f81aeae48bb4e5dfeaf19966b5361cd8",
+    "afterSHA256": "53382bc468f9f40e41994a77fa9f331578cafaf75b9ffaf92523ca1195e454ea",
+    "beforeLines": 87,
+    "afterLines": 87
+  },
+  {
+    "file": "tests/settings-return-disclosures.test.js",
+    "beforeSHA256": null,
+    "afterSHA256": "fc1cb01790cdb2e59876e683675fc3ae99cf0ed30e327439f88bf0536941fb31",
+    "beforeLines": 0,
+    "afterLines": 31
+  }
+]

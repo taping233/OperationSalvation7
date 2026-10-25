@@ -1,0 +1,102 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const cp = require('node:child_process');
+const assert = require('node:assert/strict');
+const acorn = require('acorn');
+const out = 'docs/evidence/2026-10-23-backend-audit/phase5/battle';
+const analysis = JSON.parse(fs.readFileSync(out + '/snapshot-candidate-analysis.json', 'utf8'));
+const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const parse = source => acorn.parse(source, { ecmaVersion: 'latest', sourceType: 'module' });
+const helperPath = 'game/src/cards/hosted-rule-snapshot.js';
+const helper = fs.readFileSync(out + '/hosted-rule-snapshot.js.candidate.txt', 'utf8');
+const helperAst = parse(helper);
+assert.equal(helperAst.body.length, 1);
+const helperNode = helperAst.body[0].declaration;
+assert.equal(helperAst.body[0].type, 'ExportNamedDeclaration');
+assert.equal(helperNode.type, 'FunctionDeclaration');
+assert.equal(helperNode.id.name, 'hostedRuleSnapshot');
+assert.deepEqual(helperNode.params.map(node => node.name), ['name']);
+assert.equal(helperNode.body.body.length, 1);
+assert.equal(helperNode.body.body[0].type, 'ReturnStatement');
+// A literal AST interpreter: no business module, migration, or helper is executed.
+function value(node, parameters = {}, allowFactory = false) {
+  if (node.type === 'Literal') return node.value;
+  if (node.type === 'Identifier' && Object.hasOwn(parameters, node.name)) return parameters[node.name];
+  if (node.type === 'UnaryExpression' && node.operator === '-') return -value(node.argument, parameters, allowFactory);
+  if (node.type === 'ArrayExpression') return node.elements.map(element => value(element, parameters, allowFactory));
+  if (node.type === 'ObjectExpression') {
+    const object = {};
+    for (const property of node.properties) {
+      assert.equal(property.type, 'Property'); assert.equal(property.computed, false); assert.equal(property.kind, 'init'); assert.equal(property.method, false);
+      const key = property.key.type === 'Identifier' ? property.key.name : property.key.value;
+      assert.equal(Object.hasOwn(object, key), false, 'No duplicate snapshot property');
+      Object.defineProperty(object, key, { value: value(property.value, parameters, allowFactory), writable: true, enumerable: true, configurable: true });
+    }
+    return object;
+  }
+  if (allowFactory && node.type === 'CallExpression') {
+    assert.equal(node.callee.type, 'Identifier'); assert.equal(node.callee.name, 'hostedRuleSnapshot'); assert.equal(node.arguments.length, 1);
+    const name = value(node.arguments[0]); assert.equal(typeof name, 'string');
+    return value(helperNode.body.body[0].argument, { name });
+  }
+  throw new Error('Nonliteral or unsupported AST ' + node.type);
+}
+assert.equal(JSON.stringify(value(helperNode.body.body[0].argument, { name: 'example' })), '{"version":1,"battle":{"hosted":["example"]}}');
+function allUniqueObjects(object) {
+  const seen = new Set();
+  function visit(value) {
+    if (!value || typeof value !== 'object') return;
+    assert.equal(seen.has(value), false, 'Every snapshot subtree must own its objects'); seen.add(value);
+    for (const key of Object.keys(value)) visit(value[key]);
+  }
+  visit(object); return seen.size;
+}
+const consumerPaths = ['game/src/cards/builtin-card-execution.js', 'game/src/cards/builtin-equipment-execution.js', 'game/src/cards/cards.sync.builtin.js', 'game/src/battle/effects/battle.hosted.js'];
+const consumerHashes = Object.fromEntries(consumerPaths.map(file => [file, sha(fs.readFileSync(file))]));
+assert.equal(fs.existsSync(helperPath), false);
+const receipt = { status: 'applied', method: 'Static AST interpretation of declarations; no game modules or tests executed', exactScope: [...analysis.files.map(file => file.path), helperPath], sourceFiles: [], helper: { path: helperPath, lines: helper.trimEnd().split('\n').length, pureFunctionDefinitionOnly: true }, consumersUnchanged: consumerHashes, guards: { idAndPropertyEnumerationOrder: true, identicalSerializedWholeTable: true, allObjectsFreshAndUnaliased: true, seventeenExceptionalValuesTextUnchanged: true, exportNamesAndConstBindingsUnchanged: true, freezeCallsAndImportConsumersUnchanged: true, noSourceDatabaseOrCallbacksOrRandomReads: true, noSourceFileDeleted: true }, testsRun: false, buildRun: false, browserRun: false };
+for (const file of analysis.files) {
+  const base = fs.readFileSync(file.path); assert.equal(sha(base), file.baseSha256, 'Source changed since candidate');
+  const before = base.toString('utf8'); const after = fs.readFileSync(out + '/' + file.candidate, 'utf8');
+  const oldAst = parse(before), newAst = parse(after);
+  assert.equal(newAst.body.length, oldAst.body.length + 1);
+  const importNode = newAst.body[0]; assert.equal(importNode.type, 'ImportDeclaration'); assert.equal(importNode.source.value, './hosted-rule-snapshot.js');
+  assert.equal(importNode.specifiers.length, 1); assert.equal(importNode.specifiers[0].imported.name, 'hostedRuleSnapshot');
+  const oldDeclaration = oldAst.body[0].declaration, newDeclaration = newAst.body[1].declaration;
+  assert.equal(oldDeclaration.kind, newDeclaration.kind); assert.equal(oldDeclaration.declarations[0].id.name, newDeclaration.declarations[0].id.name);
+  const oldLiteral = oldDeclaration.declarations[0].init, newLiteral = newDeclaration.declarations[0].init;
+  const oldValue = value(oldLiteral), newValue = value(newLiteral, {}, true);
+  assert.equal(JSON.stringify(oldValue), JSON.stringify(newValue), 'Whole table values and property ordering must match exactly');
+  assert.deepEqual(Object.keys(oldValue), Object.keys(newValue)); assert.deepEqual(Object.getOwnPropertyDescriptors(oldValue), Object.getOwnPropertyDescriptors(newValue));
+  const objectCount = allUniqueObjects(oldValue); assert.equal(allUniqueObjects(newValue), objectCount);
+  for (const id of file.retained.map(entry => entry.id)) {
+    const get = literal => literal.properties.find(property => property.key.value === id || property.key.name === id).value;
+    const oldNode = get(oldLiteral), newNode = get(newLiteral);
+    assert.equal(before.slice(oldNode.start, oldNode.end), after.slice(newNode.start, newNode.end));
+  }
+  for (const entry of file.eligible) {
+    assert.notEqual(newValue[entry.id], oldValue[entry.id]);
+    assert.notEqual(newValue[entry.id].battle, oldValue[entry.id].battle);
+    assert.notEqual(newValue[entry.id].battle.hosted, oldValue[entry.id].battle.hosted);
+  }
+  const backup = out + '/' + path.basename(file.path) + '.before.txt'; fs.writeFileSync(backup, base);
+  const diff = cp.spawnSync('git', ['diff', '--no-index', '--numstat', '--', backup, out + '/' + file.candidate], { encoding: 'utf8' });
+  assert.ok(diff.status === 0 || diff.status === 1); const counts = diff.stdout.match(/^(\d+)\s+(\d+)\s+/); assert.ok(counts);
+  receipt.sourceFiles.push({ path: file.path, baseSha256: file.baseSha256, afterSha256: sha(Buffer.from(after)), bytesBefore: base.length, bytesAfter: Buffer.byteLength(after), linesBefore: file.linesBefore, linesAfter: file.linesCandidate, insertions: Number(counts[1]), deletions: Number(counts[2]), entries: file.entries, sharedConstructorCalls: file.eligible.length, exceptionalLiteralEntriesRetained: file.retained.length, uniqueObjectCountPreserved: objectCount, backup, preview: out + '/' + file.candidate });
+}
+receipt.insertions = receipt.sourceFiles.reduce((total, file) => total + file.insertions, 0) + receipt.helper.lines;
+receipt.deletions = receipt.sourceFiles.reduce((total, file) => total + file.deletions, 0);
+receipt.netLinesRemoved = receipt.deletions - receipt.insertions;
+receipt.netBytesRemoved = receipt.sourceFiles.reduce((total, file) => total + file.bytesBefore - file.bytesAfter, 0) - Buffer.byteLength(helper);
+// All dependent static checks finish before the first source mutation.
+if (process.argv.includes('--apply')) {
+  for (const file of receipt.sourceFiles) assert.equal(sha(fs.readFileSync(file.path)), file.baseSha256);
+  for (const file of receipt.sourceFiles) fs.writeFileSync(file.path, fs.readFileSync(file.preview));
+  fs.writeFileSync(helperPath, helper);
+  for (const file of receipt.sourceFiles) assert.equal(sha(fs.readFileSync(file.path)), file.afterSha256);
+  receipt.helper.sha256 = sha(fs.readFileSync(helperPath));
+  for (const [file, hash] of Object.entries(consumerHashes)) assert.equal(sha(fs.readFileSync(file)), hash);
+} else receipt.status = 'ready_not_applied';
+fs.writeFileSync(out + '/receipt.json', JSON.stringify(receipt, null, 2) + '\n');
+process.stdout.write(JSON.stringify(receipt, null, 2) + '\n');

@@ -1,0 +1,115 @@
+/* 首页直连界面的通用交互；页面布局、主题与入场动画由各页保留。 */
+:root { --linked-touch-time: .38s; --linked-touch-ease: cubic-bezier(.37,0,.63,1); }
+#overlay :is(.achievement-gallery, .beginner-guide, .cls-pool-page) { --archive-back-color: #303735; }
+#overlay .cls-pool-page[data-base-departure='true'] { --archive-back-color: #e7eee4; }
+#overlay .achievement-gallery .ag-title-group { padding-left: 76px; min-height: 58px; }
+
+/* 可点击外层保持原位；奖章、文字和装饰层仍可播放各自的小反馈。 */
+#overlay#overlay#overlay :is(.achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive)
+button:not(:disabled):not([aria-disabled='true']):is(:hover, :active, :focus-visible) {
+  transform: none; translate: none; scale: none;
+}
+#overlay#overlay#overlay .slot-page .slot-card:is(:hover, :active, :focus-within) {
+  transform: none; translate: none; scale: none;
+}
+/* 照片外层是带键盘语义的选片区，内部纸面承担抬升，点击边界保持固定。 */
+body.cardlib-open #overlay#overlay#overlay .studio-archive .lib-item .lib-cardwrap:is(:hover, :active, :focus-visible) {
+  transform: none !important; translate: none !important; scale: none !important;
+}
+body.cardlib-open #overlay#overlay#overlay .studio-archive .lib-cardwrap .studio-photo-paper {
+  transition: translate var(--linked-touch-time) var(--linked-touch-ease);
+}
+body.cardlib-open #overlay#overlay#overlay .studio-archive .lib-cardwrap:is(:hover, :focus-visible) .studio-photo-paper { translate: 0 -2px; }
+body.cardlib-open #overlay#overlay#overlay .studio-archive .lib-cardwrap:active .studio-photo-paper { translate: 0 0; }
+body.cardlib-open #overlay#overlay#overlay .studio-archive .studio-exit-anchor {
+  position: absolute !important; left: 18px !important; top: 16px !important;
+  transform: none !important; grid-area: auto;
+}
+body.cardlib-open #overlay#overlay#overlay .studio-archive .studio-exit {
+  position: static !important; width: 64px !important; height: 58px !important;
+}
+/* 浅色照片关闭键使用深色图标；悬停/键盘聚焦的石墨底继续沿用亮图标。 */
+body.cardlib-open #cardZoom#cardZoom.cz-photo .cz-close:not(:hover):not(:focus-visible) .ic {
+  filter: brightness(0) !important; opacity: .7;
+}
+/* 仓库沿用共用全幅比例，数量留在卡外，避让右上品质徽记。 */
+#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-card-art {
+  aspect-ratio: 272 / 406;
+}
+#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-detail-art {
+  height: auto; aspect-ratio: 272 / 406;
+}
+#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-card-caption {
+  padding-right: 60px; box-sizing: border-box;
+}
+#overlay#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stack-count {
+  top: auto; bottom: 22px; right: 14px;
+}
+/* 共用返回键保留窄窗口的既有比例，按压不再改变点击区域。 */
+#overlay#overlay#overlay .archive-back:is(:hover, :active, :focus-visible) {
+  transform: scale(1);
+}
+#title#title #homeCredits .archive-back:is(:hover, :active, :focus-visible) { transform: scale(1); }
+#title#title #homeCredits > form { position: absolute; left: 18px; top: 16px; margin: 0; }
+#title#title #homeCredits > form .archive-back { position: static; }
+
+/* 整备沿用自身页头的点击范围，公共返回件只提供图标与输入反馈。 */
+#overlay #depMain.camp-depart-detail {
+  --archive-back-left: 36px; --archive-back-top: 24px;
+  --archive-back-width: 46px; --archive-back-height: 46px;
+}
+/* 卡池的带字返回留在页头流中，两种入口继续使用各自宽度。 */
+#overlay#overlay#overlay .cls-pool-page .pool-back.archive-back {
+  position: static; inset: auto; flex: none; gap: 9px;
+  width: 104px; height: 44px;
+}
+#overlay#overlay#overlay .cls-pool-page[data-base-departure='true'] .pool-back.archive-back { width: 128px; }
+
+/* Same return control inside the merchant's existing footer layout. */
+#overlay#overlay#overlay .shop-market-footer .shop-back.archive-back {
+  position:static; inset:auto; width:auto; height:auto; min-width:208px;
+  display:flex; gap:14px; padding:12px 28px; margin:0;
+  clip-path:none; border-radius:0;
+}
+#overlay#overlay#overlay .shop-market-footer .shop-back.archive-back svg { flex:none; width:24px; height:24px; }
+
+/* 双向使用同一过渡，避免离开时突然恢复；只接管视觉属性。 */
+#overlay#overlay#overlay :is(.achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive)
+button:not(:disabled):not([aria-disabled='true']) {
+  transition-property: color, background-color, border-color, box-shadow, filter;
+  transition-duration: var(--linked-touch-time) !important;
+  transition-timing-function: var(--linked-touch-ease) !important;
+}
+#overlay#overlay#overlay .slot-page .slot-card {
+  transition-property: border-color, box-shadow, filter;
+  transition-duration: var(--linked-touch-time);
+  transition-timing-function: var(--linked-touch-ease);
+}
+
+/* 选中反馈除颜色外还有边缘标记，页面自己的分类色仍然有效。 */
+#overlay#overlay#overlay :is(.ag-filters, .ag-view, .bg-nav)
+button:is([aria-pressed='true'], [aria-current='step']) {
+  box-shadow: inset 3px 0 0 var(--linked-selection, #b89c50);
+}
+
+/* 内置浏览器在后台时暂停直连页面动画，回来后继续原进度。 */
+body.linked-backgrounded :is(#title, #homeCredits, .achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive),
+body.linked-backgrounded :is(#title, #homeCredits, .achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive) *,
+body.linked-backgrounded :is(#title, #homeCredits, .achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive) *::before,
+body.linked-backgrounded :is(#title, #homeCredits, .achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive) *::after {
+  animation-play-state: paused !important;
+}
+#overlay:has(.ag-detail:not([hidden])) .achievement-gallery :is(.ag-watermark, .ag-ambient-specks i),
+#overlay:has(.ag-detail:not([hidden])) .achievement-gallery .ag-summary::before,
+#overlay:has(.ag-detail:not([hidden])) .achievement-gallery .ag-progress::after { animation-play-state: paused !important; }
+body:has(#homeCredits[open]) #title :is(.title-bg, .title-wallpaper-extension, .home-grain, .home-mist, .home-spark, .home-wordmark, .home-ghost-track, .home-beams, .hs-accent, .home-readout-dot),
+body:has(#homeCredits[open]) #title .title-inner::after,
+body:has(#homeCredits[open]) #title .home-brand::before,
+body:has(#homeCredits[open]) #title .home-rail-ruler::after { animation-play-state: paused !important; }
+
+body.reduce-motion #overlay#overlay#overlay :is(.achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive) button { transition-duration: 0s !important; }
+body.reduce-motion #overlay#overlay#overlay .studio-archive .studio-photo-paper { transition: none; translate: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #overlay#overlay#overlay .studio-archive .studio-photo-paper { transition: none; translate: none !important; }
+  #overlay#overlay#overlay :is(.achievement-gallery, .slot-page, .beginner-guide, .settings-page, .base-camp, .camp-detail, .studio-archive) button { transition-duration: 0s !important; }
+}

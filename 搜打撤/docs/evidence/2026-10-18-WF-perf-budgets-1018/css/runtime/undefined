@@ -1,0 +1,18 @@
+{
+  "variant": "shared",
+  "firstCalls": 1,
+  "reentryCalls": 1,
+  "stableHoverFrameCalls": 0,
+  "initial": [
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:question]] 伤害预览：无法精算</b><span>费1 · 这张牌的伤害流程暂不支持预览</span><span class=\"bt-fpreview-tip\">—— 松手打出 ——</span></div>",
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:question]] 伤害预览：无法精算</b><span>费1 · 这张牌的伤害流程暂不支持预览</span><span class=\"bt-fpreview-tip\">—— 松手打出 ——</span></div>",
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:question]] 伤害预览：无法精算</b><span>费1 · 这张牌的伤害流程暂不支持预览</span><span class=\"bt-fpreview-tip\">—— 松手打出 ——</span></div>",
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:question]] 伤害预览：无法精算</b><span>费1 · 这张牌的伤害流程暂不支持预览</span><span class=\"bt-fpreview-tip\">—— 松手打出 ——</span></div>"
+  ],
+  "refreshed": [
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:cross]] 当前无法打出</b><span>费1 · 能量不足</span><span class=\"bt-fpreview-tip\">—— 先解决出牌条件 ——</span></div>",
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:cross]] 当前无法打出</b><span>费1 · 能量不足</span><span class=\"bt-fpreview-tip\">—— 先解决出牌条件 ——</span></div>",
+    "<div class=\"bt-fpreview\" data-preview-mode=\"drag\"><b>[[icon:cross]] 当前无法打出</b><span>费1 · 能量不足</span><span class=\"bt-fpreview-tip\">—— 先解决出牌条件 ——</span></div>"
+  ],
+  "submitted": 0
+}

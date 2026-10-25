@@ -1,0 +1,73 @@
+{
+  "gameBaseline": "node_modules/.cache/project-lean10-1024/before",
+  "verifiedGameFiles": 794,
+  "gameReads": "scopes/baseline.setup.mjs fs read mapping",
+  "gameImports": "integration-baseline.config.mjs Vite resolve/load in-memory source override",
+  "tests": [
+    {
+      "file": "tests/battle-area-hover-hand-context.test.js",
+      "source": "tests/battle-area-hover-hand-context.test.js",
+      "sha256": "c74c2b48e1eaf5e0d8c4f0ff178a0887b1ebe9609c72604b6a3e2c8aa3ec2f3b"
+    },
+    {
+      "file": "tests/battle-card-inspection.test.js",
+      "source": "tests/battle-card-inspection.test.js",
+      "sha256": "95f53efe6705be95c3c14b384a0ae61130a3811489da3ee898e41f97d0229be2"
+    },
+    {
+      "file": "tests/battle-decision-redesign.test.js",
+      "source": "node_modules\\.cache\\project-lean10-css-test-before\\tests\\battle-decision-redesign.test.js",
+      "sha256": "84c2520583c6c091152ac4995f011cbf43f0e8a113dd2f8d2dba960370cbf40b"
+    },
+    {
+      "file": "tests/battle-effective-card.test.js",
+      "source": "tests/battle-effective-card.test.js",
+      "sha256": "6c0947212ad77bcf009e2b3f0e1746266b79101c6b2ee11483f9d3f1e9dcdcf0"
+    },
+    {
+      "file": "tests/battle-entry-view.test.js",
+      "source": "tests/battle-entry-view.test.js",
+      "sha256": "0c123223eba68ec5f698beb0d7fe5c808d386c1bbcb4e1eb3736a99ae5933524"
+    },
+    {
+      "file": "tests/battle-hand-group-index.test.js",
+      "source": "tests/battle-hand-group-index.test.js",
+      "sha256": "3c6fbfeb7343e537aaad2c5f1ba53c247770e005f11f9f5d24f68366e747748d"
+    },
+    {
+      "file": "tests/battle-preview-hand-context.test.js",
+      "source": "tests/battle-preview-hand-context.test.js",
+      "sha256": "71b86f2ba36f2b88082361f7141252ddd1a278fea058b8aa888676754013f651"
+    },
+    {
+      "file": "tests/battle-query-cost-benchmark.test.js",
+      "source": "tests/battle-query-cost-benchmark.test.js",
+      "sha256": "835510aae7021d20516e956d0c30acb6de04091cf86d5b85b830af74a80c69a2"
+    },
+    {
+      "file": "tests/battle-render-derivation.test.js",
+      "source": "tests/battle-render-derivation.test.js",
+      "sha256": "07b3304a87dac92071fdf66972336ccbc5b400ff1dea655488eed02646e9cb66"
+    },
+    {
+      "file": "tests/battle-settlement-retry.test.js",
+      "source": "tests/battle-settlement-retry.test.js",
+      "sha256": "1dc169e761cbfeaaaa00fe071222f299ea392a7fe210c2eb2246a5b73bb90dc8"
+    },
+    {
+      "file": "tests/battle-tools-lifecycle.test.js",
+      "source": "tests/battle-tools-lifecycle.test.js",
+      "sha256": "48d96365f9080828a9a3f06ed31230d9ec2b362520321b5650a0e42c96e193c5"
+    },
+    {
+      "file": "tests/framework-battle-engine-services.test.js",
+      "source": "tests/framework-battle-engine-services.test.js",
+      "sha256": "50e3f2f452fded49bda396241aed3224cbc529d88ee45a069947e1b758fe06de"
+    },
+    {
+      "file": "tests/sts2-agent-infusion-1021.test.js",
+      "source": "tests/sts2-agent-infusion-1021.test.js",
+      "sha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c"
+    }
+  ]
+}

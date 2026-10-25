@@ -1,0 +1,179 @@
+import { Base } from './base.js';
+import { RunStorage, SAVE_VERSION, TX_KEY } from './game.storage.js';
+import { validateRunSave } from './run-save-validation.js';
+import { planMapRestore } from '../run/map-snapshot.js';
+import { validatePendingExtraction } from './extraction.commands.js';
+import { withSlotWriteLock } from './slot-write-lock.js';
+
+const FORMAT = 'sdt-slot-archive';
+const IMPORT_KEY = slot => `sdt-import-v1-slot${slot}`;
+const validSlot = slot => Number.isInteger(slot) && slot >= 1 && slot <= 5;
+const failure = (code, message) => ({ ok: false, code, message });
+const keysFor = slot => ({ base: Base.SLOT_KEY(slot), run: RunStorage.key(slot), journal: TX_KEY(slot),
+  previousRun: `sdt-run-${slot}-prev`, corruptRun: RunStorage.corruptKey(slot),
+  corruptBase: Base.CORRUPT_KEY(slot), preservedBase: Base.PRESERVED_KEY(slot),
+  preservedRun: `sdt-run-${slot}-preserved`, importRecovery: IMPORT_KEY(slot) });
+const readKeys = (storage, keys) => Object.fromEntries(Object.entries(keys).map(([role, key]) => [role, storage.getItem(key)]));
+const applyKeys = (storage, keys, values) => Object.entries(keys).forEach(([role, key]) => {
+  if (values[role] === null) storage.removeItem(key); else storage.setItem(key, values[role]);
+});
+const plain = value => value && typeof value === 'object' && !Array.isArray(value);
+
+export function validateArchivedRun(run) {
+  const shape = validateRunSave(run);
+  if (!shape.ok) return shape;
+  if (run.pendingExtraction != null) {
+    const pending = validatePendingExtraction(run.pendingExtraction);
+    if (!pending.ok) return pending;
+    if (run.pendingExtraction.runId !== run._r2?.runId) return failure('INVALID_EXTRACTION_IDENTITY', '撤离记录与对局身份不一致');
+  }
+  return planMapRestore(run);
+}
+
+function validateBase(raw) {
+  if (raw === null) return { ok: true };
+  let base;
+  try { base = JSON.parse(raw); } catch { return failure('INVALID_BASE_ARCHIVE', '基地主档损坏，请先保留导出并恢复原档'); }
+  if (/(?::|\{|,)\s*"(?:__proto__|prototype|constructor)"\s*:/.test(raw)) return failure('INVALID_BASE_ARCHIVE', '基地主档含不支持的结构键');
+  if (!plain(base) || !Number.isInteger(Number(base.version || 0)) || Number(base.version || 0) < 0 || Number(base.version || 0) > Base.BASE_VERSION) {
+    return failure('INVALID_BASE_ARCHIVE', '基地版本或结构无法由当前版本读取');
+  }
+  for (const zone of ['stash', 'pocket']) {
+    if (base[zone] != null && (!Array.isArray(base[zone]) || base[zone].some(entry => !plain(entry) || !plain(entry.card) ||
+      typeof entry.card.id !== 'string' || !Number.isInteger(entry.count) || entry.count < 0))) return failure('INVALID_BASE_ARCHIVE', `基地 ${zone} 结构损坏`);
+  }
+  for (const key of ['stats', 'pets', 'characters', 'classes', 'home', 'appearance', 'goals', 'story', '_m01', 'collection', 'collClaimed', 'collXp', 'backs', 'achClaimed']) {
+    if (base[key] != null && !plain(base[key])) return failure('INVALID_BASE_ARCHIVE', `基地 ${key} 结构损坏`);
+  }
+  if (base.runes != null && (!Array.isArray(base.runes) || base.runes.some(rune => !plain(rune) || !Array.isArray(rune.attrs)))) return failure('INVALID_BASE_ARCHIVE', '基地符文结构损坏');
+  if (base._m01 && (!Number.isInteger(base._m01.revision) || base._m01.revision < 0 || !plain(base._m01.requests) ||
+    Object.values(base._m01.requests).some(receipt => !plain(receipt) || typeof receipt.fingerprint !== 'string' || !plain(receipt.result)))) return failure('INVALID_BASE_ARCHIVE', '基地提交记录结构损坏');
+  const groups = {
+    home: { arrays: ['placements', 'displays'], records: ['owned'] }, goals: { arrays: ['tracked'], records: ['presets'] },
+    appearance: { arrays: [], records: ['characterSkins', 'selectedSkins'] }, story: { arrays: [], records: ['flags', 'outcomes'] },
+    stats: { arrays: ['bossKills', 'nestBossKills'], records: [] },
+  };
+  for (const [group, { arrays, records }] of Object.entries(groups)) {
+    if (!base[group]) continue;
+    if (arrays.some(key => base[group][key] != null && !Array.isArray(base[group][key])) ||
+      records.some(key => base[group][key] != null && !plain(base[group][key]))) return failure('INVALID_BASE_ARCHIVE', `基地 ${group} 的子结构损坏`);
+  }
+  return { ok: true };
+}
+
+export function createSaveArchive({ storage = globalThis.localStorage, lockManager = globalThis.navigator?.locks,
+  digest = async text => {
+    if (!globalThis.crypto?.subtle) throw new Error('SHA-256 unavailable');
+    const bytes = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(bytes), value => value.toString(16).padStart(2, '0')).join('');
+  }, validateRun = validateArchivedRun } = {}) {
+  const previews = new WeakMap();
+  const locked = async (slot, work) => {
+    const result = await withSlotWriteLock(slot, work, { lockManager });
+    return result.ok ? result.value : result;
+  };
+  const validateValues = values => {
+    if (!plain(values) || Object.keys(values).length !== Object.keys(keysFor(1)).length ||
+      Object.keys(keysFor(1)).some(role => !Object.hasOwn(values, role) || (values[role] !== null && typeof values[role] !== 'string'))) {
+      return failure('INVALID_ARCHIVE', '存档包字段不完整');
+    }
+    if (values.journal !== null || values.importRecovery !== null) return failure('RECOVERY_REQUIRED', '存档包含未完成事务；请在来源档位完成恢复后重新导出');
+    const base = validateBase(values.base);
+    if (!base.ok) return base;
+    for (const role of ['run', 'previousRun']) {
+      if (values[role] === null) continue;
+      let run;
+      try { run = JSON.parse(values[role]); } catch { return failure('INVALID_RUN_ARCHIVE', `${role} 无法解析`); }
+      if (!plain(run) || !Number.isInteger(run.version) || run.version < 0 || run.version > SAVE_VERSION) return failure('INVALID_RUN_ARCHIVE', `${role} 版本无效或来自更新版本`);
+      const checked = validateRun(run);
+      if (!checked.ok) return checked;
+    }
+    return { ok: true };
+  };
+  return Object.freeze({
+    async exportSlot(slot) {
+      if (!validSlot(slot)) return failure('INVALID_SLOT', '请选择 1～5 档位');
+      const captured = await locked(slot, () => {
+        try { return { ok: true, value: readKeys(storage, keysFor(slot)) }; }
+        catch { return failure('STORAGE_READ_FAILED', '存档读取失败，未生成不完整导出'); }
+      });
+      if (!captured.ok) return captured;
+      const payload = { format: FORMAT, version: 1, sourceSlot: slot, exportedAt: Date.now(), values: captured.value };
+      try {
+        const checksum = await digest(JSON.stringify(payload));
+        return { ok: true, value: { text: JSON.stringify({ ...payload, checksum }, null, 2), fileName: `代号柒-档位${slot}-${payload.exportedAt}.json` } };
+      } catch { return failure('CHECKSUM_UNAVAILABLE', '无法生成存档校验，未交付不完整导出'); }
+    },
+    async previewImport(text, slot) {
+      if (!validSlot(slot) || typeof text !== 'string' || text.length > 20_000_000) return failure('INVALID_ARCHIVE', '存档包或目标档位无效');
+      let parsed;
+      try { parsed = JSON.parse(text); } catch { return failure('INVALID_ARCHIVE', '文件不是有效存档包'); }
+      if (!plain(parsed) || parsed.format !== FORMAT || parsed.version !== 1 || !validSlot(parsed.sourceSlot) || typeof parsed.checksum !== 'string') return failure('INVALID_ARCHIVE', '存档包格式不支持');
+      const { checksum, ...payload } = parsed;
+      try { if (await digest(JSON.stringify(payload)) !== checksum) return failure('CHECKSUM_MISMATCH', '存档包校验不符，文件可能不完整'); }
+      catch { return failure('CHECKSUM_UNAVAILABLE', '当前环境无法校验存档包'); }
+      const checked = validateValues(parsed.values);
+      if (!checked.ok) return checked;
+      try {
+        const before = readKeys(storage, keysFor(slot));
+        if (before.journal !== null || before.importRecovery !== null) return failure('RECOVERY_REQUIRED', '目标档位有未完成事务，请先恢复');
+        const run = parsed.values.run ? JSON.parse(parsed.values.run) : null;
+        const preview = Object.freeze({ slot, sourceSlot: parsed.sourceSlot, exportedAt: parsed.exportedAt,
+          savedAt: run?.savedAt || 0, elapsed: run?.elapsed || 0, overwrites: Object.values(before).some(value => value !== null) });
+        previews.set(preview, { before, values: structuredClone(parsed.values) });
+        return { ok: true, value: preview };
+      } catch { return failure('STORAGE_READ_FAILED', '目标档位无法读取，未覆盖存档'); }
+    },
+    async importSlot(preview, { confirm = false } = {}) {
+      const planned = previews.get(preview);
+      if (!confirm || !planned) return failure('CONFIRM_REQUIRED', '请先预检文件并明确确认覆盖目标档位');
+      return locked(preview.slot, () => {
+        const keys = keysFor(preview.slot);
+        let journalWritten = false;
+        try {
+          if (JSON.stringify(readKeys(storage, keys)) !== JSON.stringify(planned.before)) return failure('STALE_SLOT', '预览后目标档位已变化，请重新预检');
+          const checked = validateValues(planned.values);
+          if (!checked.ok) return checked;
+          // Keep the overwritten complete slot and target bytes until every key succeeds.
+          storage.setItem(IMPORT_KEY(preview.slot), JSON.stringify({ version: 1, before: planned.before, after: planned.values }));
+          journalWritten = true;
+          applyKeys(storage, { ...keys, importRecovery: IMPORT_KEY(preview.slot) }, { ...planned.values,
+            importRecovery: storage.getItem(IMPORT_KEY(preview.slot)) });
+          storage.removeItem(IMPORT_KEY(preview.slot));
+          previews.delete(preview);
+          Base._refreshExternal(preview.slot); RunStorage.invalidateForReplacement(preview.slot);
+          return { ok: true };
+        } catch {
+          if (!journalWritten) return failure('IMPORT_WRITE_FAILED', '无法写入导入恢复记录，原档位未修改；请检查空间后重试');
+          try { applyKeys(storage, keys, planned.before); }
+          catch { return failure('IMPORT_RECOVERY_REQUIRED', '导入未完成；恢复记录保留，请导出保全后重试恢复'); }
+          return failure('IMPORT_WRITE_FAILED', '导入未完成，已恢复原档位，请检查空间后重试');
+        }
+      });
+    },
+    async recoverImport(slot, { confirm = false } = {}) {
+      if (!validSlot(slot) || !confirm) return failure('CONFIRM_REQUIRED', '请明确确认恢复导入前的原档位');
+      return locked(slot, () => {
+        const keys = keysFor(slot);
+        try {
+          const raw = storage.getItem(IMPORT_KEY(slot));
+          if (raw === null) return { ok: true };
+          const journal = JSON.parse(raw);
+          const roles = Object.keys(keys).filter(role => role !== 'importRecovery');
+          if (journal.version !== 1 || !plain(journal.before) || !plain(journal.after) || roles.some(role =>
+            !Object.hasOwn(journal.before, role) || !Object.hasOwn(journal.after, role) ||
+            [journal.before[role], journal.after[role]].some(value => value !== null && typeof value !== 'string') ||
+            ![journal.before[role], journal.after[role]].includes(storage.getItem(keys[role])))) {
+            return failure('IMPORT_RECOVERY_BLOCKED', '导入记录与当前档位不符，已保留原串');
+          }
+          // The pre-import slot may itself be corrupt or too new; restoring
+          // its exact bytes is preservation, not accepting it as a playable save.
+          applyKeys(storage, Object.fromEntries(Object.entries(keys).filter(([role]) => role !== 'importRecovery')), journal.before);
+          storage.removeItem(IMPORT_KEY(slot));
+          Base._refreshExternal(slot); RunStorage.invalidateForReplacement(slot);
+          return { ok: true };
+        } catch { return failure('IMPORT_RECOVERY_REQUIRED', '导入前原档尚未恢复，保留恢复记录供重试'); }
+      });
+    },
+  });
+}

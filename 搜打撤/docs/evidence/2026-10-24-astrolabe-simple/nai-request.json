@@ -1,0 +1,58 @@
+{
+  "status": "generated",
+  "card_id": "tt13-astrolabe",
+  "request": {
+    "input": "no humans, single equipment item, a simple handheld circular astrolabe, one thick brass outer rim, one flat disk divided into two broad halves of dull gold and dark cobalt blue, one short broad two-ended pointer with a plain center pin, only four widely spaced short marks\n\nFantasy game equipment illustration, clear economical silhouette, ordinary useful magical instrument, simple enough to read as a tiny card image.\n\nEntire isolated object centered with wide empty margins, slight three-quarter overhead view showing modest disk thickness. Object occupies about sixty percent of canvas height. Solid uniform muted dark teal background with exactly one flat color edge to edge; no environment, no ground, no backdrop brush strokes, no gradients, no halo, no cast shadow.\n\nMuted matte metal with just two broad light planes and one shadow plane, sparse confident painted marks, quiet flat dial surfaces, a single small pale star mark on the blue half. Minimal details, no shine effects.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3075149682,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate, filigree, elaborate, complex mechanism, gears, overlapping rings, armillary sphere, double disks, orbit, lettering, numbers, dense tick marks, gemstone, particles, starfield, texture background, gradient background, spotlight, halo, glowing, polished metal, photorealistic, cast shadow",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "no humans, single equipment item, a simple handheld circular astrolabe, one thick brass outer rim, one flat disk divided into two broad halves of dull gold and dark cobalt blue, one short broad two-ended pointer with a plain center pin, only four widely spaced short marks\n\nFantasy game equipment illustration, clear economical silhouette, ordinary useful magical instrument, simple enough to read as a tiny card image.\n\nEntire isolated object centered with wide empty margins, slight three-quarter overhead view showing modest disk thickness. Object occupies about sixty percent of canvas height. Solid uniform muted dark teal background with exactly one flat color edge to edge; no environment, no ground, no backdrop brush strokes, no gradients, no halo, no cast shadow.\n\nMuted matte metal with just two broad light planes and one shadow plane, sparse confident painted marks, quiet flat dial surfaces, a single small pale star mark on the blue half. Minimal details, no shine effects.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, ornate, filigree, elaborate, complex mechanism, gears, overlapping rings, armillary sphere, double disks, orbit, lettering, numbers, dense tick marks, gemstone, particles, starfield, texture background, gradient background, spotlight, halo, glowing, polished metal, photorealistic, cast shadow",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\astrolabe-simple-1024\\nai.png",
+  "feedback": "老板否定内部首版，改NAI加内置；背景纯色凸显主体",
+  "sha256": "2248e378ec3c1d2503dd2c6e7c2a8aa7b82ee359b2acd22d58dda73a74297590"
+}

@@ -1,0 +1,18 @@
+{
+  "file": "scripts/sync-cards-from-live.mjs",
+  "beforeSha256": "56e0f5ded2099db139e4850588dd64901598be629b8ae76f060cd1961735afe1",
+  "afterSha256": "a2da160ce980731c6c12c1b573563856dae42a10ddced98e9ec7cba151570f20",
+  "beforeBytes": 17946,
+  "afterBytes": 18400,
+  "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/tools/sync-cards-from-live.mjs.before.txt",
+  "eol": "CRLF",
+  "changes": [
+    "hosted-rule-snapshot registered before previous rule modules",
+    "card-snapshot registered before migration factories",
+    "sameSnapshot import alias preserved in manually assembled source",
+    "pre-existing missing rarity predicates and pierce-arrow revision are loaded from their existing source modules"
+  ],
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false
+}

@@ -1,0 +1,58 @@
+{
+  "channel": "built-in imagegen",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a172b4-d437-7e13-8647-7de8603afbd6\\exec-629b0c04-5d25-434f-be3f-e0da40c9e3bb.png",
+  "sourceSha256": "29760d2bb655f50c346adf2e92ab22c93d14d6196a693685a25453a1594b95d0",
+  "referenceRoles": [
+    "bandit current identity/pose",
+    "heixiang neutral frame technique only"
+  ],
+  "assets": [
+    {
+      "path": "portraits/enemies/bandit.webp",
+      "width": 1050,
+      "height": 1536,
+      "bytes": 143278,
+      "sha256": "f0a10ceda4ae0cc20e266142d9e0274fe8b0ee492eda2c2edd0c2c61c2ae6b94",
+      "alphaBounds": [
+        195,
+        107,
+        886,
+        1497
+      ]
+    },
+    {
+      "path": "portraits/cut/enemies/bandit.webp",
+      "width": 520,
+      "height": 760,
+      "bytes": 51658,
+      "sha256": "9e880cbc4feeac41d52232fc66fa79fd9444e9eb5a74f1a23b950ec3d4aafd23",
+      "alphaBounds": [
+        96,
+        53,
+        439,
+        740
+      ]
+    },
+    {
+      "path": "thumbs/portraits/enemies/bandit.webp",
+      "width": 175,
+      "height": 256,
+      "bytes": 12982,
+      "sha256": "b5431b0e49644f7b508638ddab4e36c966aa2dd17dd8c57b9512d069c9c908aa",
+      "alphaBounds": [
+        32,
+        18,
+        148,
+        250
+      ]
+    }
+  ],
+  "profile": {
+    "height": 264,
+    "aspect": 0.499272,
+    "imageScale": 1.106259,
+    "bottom": -0.029112,
+    "x": -51.442308,
+    "revision": "9e880cbc4fee"
+  }
+}

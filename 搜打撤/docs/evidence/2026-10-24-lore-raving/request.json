@@ -1,0 +1,17 @@
+{
+  "card_id": "tt8-hero-mage",
+  "status": "candidate-not-installed",
+  "source": "C:/Users/太平/.codex/generated_images/01a169da-f333-72e3-b2ac-f5304e282b81/exec-ea4f818b-15d1-4bf2-9f42-54469954ff32.png",
+  "initial": "C:/Users/太平/.codex/generated_images/01a169da-f333-72e3-b2ac-f5304e282b81/exec-ca143ad2-e4f1-41ed-8aa8-25eefc3f6964.png",
+  "prompt": "局部修正图1《博览者的狂语》的衣服正面。图2是现行白塔《奥术弹》，只借衣服和蓝宝石胸针款式，不借脸、姿势、光色或背景。图1的脸、刘海遮住观众右眼、左侧一只绿眼、两枚金色细长发夹、帽子、卷发、举书动作、燃烧巨书、两本浮书、金色环绕轨迹、暗蓝背景和正方形画幅全部保留。只将图1胸前衬衫改为图2的白色长袖高领衬衫：小巧翻领、简洁前襟，领口正中一枚竖椭圆深蓝宝石胸针，简洁金色椭圆托边，颜色与形状严格参考图2。深绿双宽背带配小金色矩形扣，替换当前圆按钮式背带扣。蓝宝石是佩戴在胸前领口的实体胸针，不悬浮、不放在书上，不做星形托，不加领带和大花边围兜。保持图1手绘二次元块面厚涂笔触，其他内容尽量不动，不重新设计五官和发型。无可读文字、卡框、水印或UI。",
+  "references": [
+    "initial",
+    "game/assets/cards/spell-tt7-arcanebolt.webp"
+  ],
+  "initial_references": [
+    "game/assets/cards/lore-raving.webp",
+    "game/assets/portraits/full/baita.webp"
+  ],
+  "identity_update": "docs/character-bible/baita.md; 老板确认胸前蓝宝石服装",
+  "observation": "观众右眼遮住，左侧两金夹，领口金托蓝宝石，背带矩形扣；生成额外腰侧矩形扣，未将其写为人设。"
+}

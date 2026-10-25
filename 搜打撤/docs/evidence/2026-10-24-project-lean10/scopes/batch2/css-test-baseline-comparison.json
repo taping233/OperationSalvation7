@@ -1,0 +1,21 @@
+{
+  "status": "matched-existing-failure",
+  "current": {
+    "total": 244,
+    "passed": 243,
+    "failed": 1
+  },
+  "baseline": {
+    "total": 9,
+    "passed": 8,
+    "failed": 1
+  },
+  "method": "Original test source plus frozen game text read in memory; runtime imports remain current; shared tree not replaced",
+  "failures": [
+    {
+      "file": "premium-ui-pages.test.js",
+      "name": "照相馆陈列交互 筛选横置、桌面保留选片台，并将编辑工具隔离到编辑模式",
+      "diagnostic": "AssertionError: expected '/* 照相馆（卡牌收藏页）：筛选/窗口挂载网格/选片台/放大查看（拆分自原…' to contain 'game.devMode && libEditMode'"
+    }
+  ]
+}

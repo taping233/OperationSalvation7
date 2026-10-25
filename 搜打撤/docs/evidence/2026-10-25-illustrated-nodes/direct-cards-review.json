@@ -1,0 +1,26 @@
+{
+  "consumer": "game/src/run/chests.js",
+  "sha256LF": "4f196b98137b04f6b8354cb5c52b648e0a81e1b66abca8419ca203ed5cd3ccb7",
+  "assetReview": "Removed opening-frame renderer and image decoding from reward flow; static overview art selectors and asset omission rules retained.",
+  "verification": {
+    "core": {
+      "files": 10,
+      "passed": 133
+    },
+    "extendedFinalBatches": {
+      "unaffectedPassingFiles": 4,
+      "passed": 35,
+      "battleSettlementPassed": 25,
+      "transactionPassed": 26
+    },
+    "eslint": "passed",
+    "browser": {
+      "platform": "Codex IAB",
+      "viewport": "1280x720",
+      "source": "real chest controller with isolated memory save",
+      "input": "native locator clicks: multi, pick first card",
+      "group1": "medium 1/2",
+      "group2": "small 2/2, no opening DOM"
+    }
+  }
+}

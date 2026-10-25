@@ -1,0 +1,53 @@
+{
+  "scope": "60 prior failed files and 6 adjacent guards; not a second full suite",
+  "files": 66,
+  "passedFiles": 66,
+  "passedTests": 1041,
+  "failedTests": 0,
+  "success": true,
+  "browser": "Canceled at user request; final visuals not accepted",
+  "reports": [
+    {
+      "path": ".tmp/review-remediation-1023/full-validation.json",
+      "bytes": 3262269,
+      "sha256": "a370782934a7f79bb70321018f1d3560d245352fb70dd27691265c732fbdcba4",
+      "retainedInEvidence": false
+    },
+    {
+      "path": "failure-rerun.json",
+      "bytes": 393173,
+      "sha256": "53eb8b7b214584ae04337c10e56809ad02fc2fc96f7208237c5262aaa9a6bd85",
+      "retainedInEvidence": true
+    },
+    {
+      "path": "failure-rerun-input.json",
+      "bytes": 4833,
+      "sha256": "2e2b362454a74f76a407d7b43428960d0bea64a957be0df0e883c3f444f640c2",
+      "retainedInEvidence": true
+    },
+    {
+      "path": "lint-all-final.log",
+      "bytes": 326,
+      "sha256": "895be94ed8d4d081ee5bd73dc6cbf920a812af79e324af28610cea3408ad6bd9",
+      "retainedInEvidence": true
+    },
+    {
+      "path": "types-final.log",
+      "bytes": 828,
+      "sha256": "feaabc16dbc701355b61b8aefa542601a4781ea010d0ad7eeadcdd47104447c0",
+      "retainedInEvidence": true
+    },
+    {
+      "path": "docs-closeout.json",
+      "bytes": 2767,
+      "sha256": "353854ee120d61b6742602a63a48f28a3ca2803a5493aca772d34f885264a9cc",
+      "retainedInEvidence": true
+    },
+    {
+      "path": "root-final.log",
+      "bytes": 671,
+      "sha256": "791d489900f48863508e697143610a3531a6f40e97982a2776f1ff36e1c038dc",
+      "retainedInEvidence": true
+    }
+  ]
+}

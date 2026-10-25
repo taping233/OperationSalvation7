@@ -1,0 +1,118 @@
+{
+  "task": "2026-10-24-project-bug-sweep-expedition",
+  "status": "completed-uncommitted",
+  "fixCount": 6,
+  "newTestCount": 24,
+  "files": [
+    "game/src/run/game.run.resources.js",
+    "game/src/run/game.run.shop.js",
+    "game/src/run/game.run.events.js",
+    "tests/project-bug-sweep-expedition-1024.test.js",
+    "tests/project-bug-sweep-events-1024.test.js",
+    "game/src/run/game.run.altar.js",
+    "game/src/run/event-card-choice.js",
+    "tests/project-bug-sweep-extraction-entry-1024.test.js",
+    "tests/project-bug-sweep-event-choice-1024.test.js"
+  ],
+  "fixes": [
+    {
+      "id": "SWEEP-E1",
+      "summary": "物资点首次检查点保存迟到时，不再覆盖已经打开的系统菜单。",
+      "reproduction": "延迟 openResourcePick 首次保存，在同一对局同一坐标打开系统菜单；保存成功或失败均曾重绘资源奖励页。",
+      "change": "保存后同时复核原页面、遮幕和显示代次；保留正常过场退出清空旧内容的承接。",
+      "tests": 2
+    },
+    {
+      "id": "SWEEP-E2",
+      "summary": "局内商店重试保存并离开时，不再关闭或重绘已经接管的系统菜单。",
+      "reproduction": "购买一次并制造未保存状态，离店保存延迟期间打开系统菜单；旧保存成功曾关新页并调用商店收尾，失败曾重绘商店。",
+      "change": "保存事实仍写回原会话，所有离店显示和收尾动作先复核原商店页面。",
+      "tests": 2
+    },
+    {
+      "id": "SWEEP-E3",
+      "summary": "同一家商店的固定能量饮料不再与随机货架重复。",
+      "reproduction": "真实现行卡库与 SeededRandomService(17) 可生成重复商品；固定栏此前没有进入 panelTaken。",
+      "change": "生成随机货架前预留固定补给名称，六个普通商品及神秘货箱都沿同一去重池。",
+      "tests": 1,
+      "seedCoverage": 150
+    },
+    {
+      "id": "SWEEP-E4",
+      "summary": "事件首次抽取与投骰选择保存等待结束后，不再覆盖或关闭新打开的系统菜单。",
+      "reproduction": "首次抽事件或确认投骰选项后延迟保存，期间打开系统菜单；旧保存成功曾关闭菜单进入投骰，失败曾重绘旧事件。",
+      "change": "首次抽取复用现有表现归属检查；投骰选择在成功或失败回调均复核原页。成功写入的 actionChoice 保留，节点重入可继续。",
+      "tests": 4,
+      "counting": "两条保存入口共享页面归属缺口，只计一个根因。",
+      "extension": "同根因补齐event-card-choice.js的打开、领取、重试保存后页面归属检查；新增6用例通过，奖励和保存事实不回滚。"
+    },
+    {
+      "id": "SWEEP-E5",
+      "summary": "无专属选项的旧事件结算失败后恢复重试按钮。",
+      "reproduction": "自定义旧事件在执行效果前出现临时表现端异常，settleEventAction 正确返回 Promise<false>，旧 evtNext 将 Promise 当布尔值，永远不恢复事件页且 evtSettled 一直锁定。",
+      "change": "evtNext 等待真实结算返回值；未发奖失败恢复原事件重试，并保护等待间接管的新页面。",
+      "tests": 2,
+      "boundary": "异常复现为表现端临时抛错，未宣称普通无异常事件必然失败。"
+    },
+    {
+      "id": "SWEEP-E6",
+      "summary": "撤离前首次保存未防重入/校验归属，迟到会影响新局或系统菜单，异常无法进入重试；现在先锁定并在保存后核对原局原页。",
+      "sources": [
+        "game/src/run/game.run.altar.js"
+      ],
+      "validation": "7个新增撤离入口用例通过，覆盖切局、菜单、保存false/throw/reject及连点。"
+    }
+  ],
+  "verification": [
+    {
+      "command": "vitest run tests/project-bug-sweep-expedition-1024.test.js",
+      "phase": "before-fix",
+      "exit": 1,
+      "failed": 5,
+      "expected": "五个新增复现用例全部命中对应原缺陷。"
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-expedition-1024.test.js tests/shop-transaction-lifecycle.test.js tests/node-retrigger.test.js tests/project-bugfix-expedition-shop-1023.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "phase": "after-fix",
+      "exit": 0,
+      "files": 4,
+      "passed": 45
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-events-1024.test.js",
+      "phase": "before-event-choice-and-retry-fix",
+      "exit": 1,
+      "failed": 3
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-events-1024.test.js tests/event-callback-lifecycle-audit.test.js tests/event-save-page-ownership.test.js tests/project-bugfix-round2-expedition-story.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "phase": "after-event-choice-and-retry-fix",
+      "exit": 0,
+      "files": 4,
+      "passed": 69
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-events-1024.test.js",
+      "phase": "before-initial-event-save-fix",
+      "exit": 1,
+      "failed": 2,
+      "passed": 4
+    },
+    {
+      "command": "vitest run tests/project-bug-sweep-events-1024.test.js tests/event-callback-lifecycle-audit.test.js tests/run-event-controller-ownership.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+      "phase": "final-event-state",
+      "exit": 0,
+      "files": 3,
+      "passed": 65
+    },
+    {
+      "phase": "final-followup",
+      "report": ".tmp/bug-sweep-1024/event-final.json",
+      "passed": 19,
+      "failed": 0,
+      "note": "首次失败为新fixture未渲染标题，补齐真实nodeShell标题后通过；其余首批回归见final-regressions.json。"
+    }
+  ],
+  "actualReachability": "game/src/ui/menu-leave.js 的 openLeaveMenu 在跑局 modal 可打开系统菜单，leaveSettings 可进入设置；同局替换页面是现行功能。新测试直接调用这些入口最终执行的 showOverlay 表现替换，不宣称真实鼠标实页验收。",
+  "notes": "保留三份源文件此前未提交增量；未修改在途战斗UI/P3/卡图、规则待决或地图设施硬约束。未build、全量测试、服务、提交或推送。父代理统一静态检查；实页仅允许当前平台内置浏览器，由父代理统一处理。"
+}

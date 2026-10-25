@@ -1,0 +1,114 @@
+- main:
+  - dialog:
+    - button "返回基地":
+    - heading "后勤" [level=2]
+    - generic: 档案 / 02
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 0":
+        - generic: "0"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - navigation "战利品用途":
+        - button "全部" [pressed]:
+          - generic: ▦
+          - generic: 全部
+        - button "战斗卡牌":
+          - generic: ✦
+          - generic: 战斗卡牌
+        - button "消耗物品":
+          - generic: ▣
+          - generic: 消耗物品
+        - button "归档培养":
+          - generic: ◈
+          - generic: 归档培养
+      - textbox "搜索仓库卡牌":
+        - /placeholder: 搜索卡牌
+      - combobox "筛选卡牌类型":
+        - option "全部类型" [selected]
+        - option "武术"
+        - option "法术"
+      - combobox "筛选卡牌品质":
+        - option "全部品质" [selected]
+        - option "古朴"
+        - option "稀有"
+      - generic: 5 种
+      - region "战利品卡牌":
+        - generic "向下滚动浏览卡牌":
+          - button "选择破甲箭，持有1张" [pressed]:
+            - generic: "1"
+            - img "破甲箭"
+            - generic: 武术
+            - generic: ·古朴
+            - generic: 破甲箭
+            - generic: 造成（你的攻击力 - 1）点攻击伤害，你获得 3 点护甲。
+            - img "coin"
+            - generic: "2"
+            - strong: ×1
+          - button "选择挖宝，持有1张":
+            - generic: "1"
+            - img "挖宝"
+            - generic: 武术
+            - generic: ·古朴
+            - generic: 挖宝
+            - generic: 从你的牌库底发现 1 张牌；你获得等同于所选卡牌价格的护甲。
+            - img "coin"
+            - generic: "2"
+            - strong: ×1
+          - button "选择二刀流，持有1张":
+            - generic: "1"
+            - img "二刀流"
+            - generic: 武术
+            - generic: ·稀有
+            - generic: 二刀流
+            - generic: 发现 1 张武术牌，并额外获得该牌的 1 张复制。
+            - img "coin"
+            - generic: "2"
+            - strong: ×1
+          - button "选择影噬，持有1张":
+            - generic: "1"
+            - img "影噬"
+            - generic: 武术
+            - generic: ·稀有
+            - generic: 影噬
+            - generic: 本回合，你偷取 1 名敌人的攻击力，直到该敌人的攻击力降至 1 点。
+            - img "coin"
+            - generic: "3"
+            - strong: ×1
+          - button "选择魔法新发现，持有1张":
+            - generic: "1"
+            - img "魔法新发现"
+            - generic: 法术
+            - generic: ·古朴
+            - generic: 魔法新发现
+            - generic: 发现 1 张 1 费招式，并使该牌变为 0 费。
+            - img "coin"
+            - generic: "1"
+            - strong: ×1
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "人物":
+        - generic: 人物
+      - button "后勤" [active] [pressed]:
+        - generic: 后勤
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室":
+        - generic: 收藏室
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

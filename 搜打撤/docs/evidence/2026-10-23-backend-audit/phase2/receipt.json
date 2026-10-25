@@ -1,0 +1,402 @@
+{
+  "at": "2026-10-23T14:47:25.269Z",
+  "kind": "static-only",
+  "changedSources": [
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "expected": "36F78F9CCECC6ACDEAC2342EF604D7371F70ABD4306E595C436FE7704E69B7EF",
+      "actual": "36F78F9CCECC6ACDEAC2342EF604D7371F70ABD4306E595C436FE7704E69B7EF"
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "expected": "5E31E48661C1EA0753F88FF87CB24EB84F8BFD5060FF3D02554F8AB7250DB84E",
+      "actual": "5E31E48661C1EA0753F88FF87CB24EB84F8BFD5060FF3D02554F8AB7250DB84E"
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "expected": "2301C06C4F455C0E421EA06AD238E4BE009A7A8AC82E68B45BA28E5106CAF7A5",
+      "actual": "2301C06C4F455C0E421EA06AD238E4BE009A7A8AC82E68B45BA28E5106CAF7A5"
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "expected": "755C136DFE53338DDA2375E741B9E7A483488B624DAC7B1647C47107C74CFDDC",
+      "actual": "755C136DFE53338DDA2375E741B9E7A483488B624DAC7B1647C47107C74CFDDC"
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "expected": "AF4272A7C47E4ED15293AF3BE7F91F8AAC6ECC223FB1315056D0516C5ABD3500",
+      "actual": "AF4272A7C47E4ED15293AF3BE7F91F8AAC6ECC223FB1315056D0516C5ABD3500"
+    }
+  ],
+  "rootSources": [
+    {
+      "file": "scripts/gate-plan.mjs",
+      "sha256": "F608B6244E2E6AA857351D97F21CF214B1D5E89E075F51CE86D694CECFB054FC"
+    },
+    {
+      "file": "game/src/main.js",
+      "sha256": "F4BB40999B217C7C170CDE55EE77FBBAAC434365AFF90DC9EEB1A0489403EBDE"
+    }
+  ],
+  "syntax": [
+    {
+      "file": "scripts/gate-plan.mjs",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "file": "game/src/main.js",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "imports": [
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "ref": "../core/shared.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "ref": "../core/random-core.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "ref": "./map-generation-rules.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "./agent.surface.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "./agent.state.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "../core/turbo.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "./agent.recorder.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "../run/game.session.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "./agent.action-router.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.runner.runtime.js",
+      "ref": "./agent.run-control.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "ref": "../core/random.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "ref": "../core/random-streams.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "ref": "./agent.runner.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "ref": "./agent.protocol.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/agent/agent.replay.runtime.js",
+      "ref": "./agent.replay-state.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "ref": "../core/characters.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "ref": "./meta-progression.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "ref": "../core/characters.js",
+      "exists": true
+    },
+    {
+      "file": "scripts/gate-plan.mjs",
+      "ref": "./architecture-graph.mjs",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/title-credits.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/title-wallpaper.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/ui-scale.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/random.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/rules.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/mapData.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/art.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/icons-bitmap.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./audio/sound.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/camera.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/motion.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/input.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/event-bus.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/notes.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./cards/cards.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./battle/core/combat.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/base.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/meta.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/render-scheduler.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/renderer.fx.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/renderer.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/ui.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/term-tips.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/character-idle.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./core/shared.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./battle/battle-loader.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./run/chests.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.storage.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.store.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./run/game.session.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./run/game.nest.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./run/game.run.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.hub.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.bag.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.notes.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./hub/game.cardslib.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./game.boot.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/startup-transition.js",
+      "exists": true
+    },
+    {
+      "file": "game/src/main.js",
+      "ref": "./ui/cover-context.js",
+      "exists": true
+    }
+  ],
+  "lint": [
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\scripts\\gate-plan.mjs",
+      "errorCount": 0,
+      "warningCount": 0
+    },
+    {
+      "file": "D:\\素材\\代号柒\\搜打撤\\game\\src\\main.js",
+      "errorCount": 0,
+      "warningCount": 0
+    }
+  ],
+  "diffCheck": {
+    "exitCode": 0,
+    "output": "warning: in the working copy of '搜打撤/game/src/main.js', CRLF will be replaced by LF the next time Git touches it"
+  },
+  "lines": {
+    "runAgent": {
+      "added": 1,
+      "removed": 16,
+      "net": 15
+    },
+    "storage": {
+      "added": 15,
+      "removed": 29,
+      "net": 14
+    },
+    "retiredScripts": {
+      "added": 0,
+      "removed": 389,
+      "net": 389
+    },
+    "oldReferences": {
+      "added": 1,
+      "removed": 3,
+      "net": 2
+    },
+    "total": {
+      "added": 17,
+      "removed": 437,
+      "net": 420
+    }
+  },
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "sourceFilesDeleted": [
+    "scripts/esm-convert.mjs",
+    "scripts/esm-fix-setters.mjs"
+  ],
+  "blocked": [
+    "combat selfTest relocation",
+    "acquire-operation duplicate loops",
+    "base.js egg persistence helpers"
+  ],
+  "firstPhaseNet": 27,
+  "cumulativeNet": 447
+}

@@ -1,0 +1,12 @@
+{
+  "cases": 37,
+  "passed": 37,
+  "sequence": "false,true,true,false,false,true,false",
+  "compared": [
+    "blessing calls",
+    "logs",
+    "status",
+    "applied bonus bookkeeping",
+    "skill text"
+  ]
+}

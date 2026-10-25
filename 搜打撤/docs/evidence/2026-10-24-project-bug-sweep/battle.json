@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-24",
+  "scope": "Battle rule bug sweep",
+  "status": "completed-uncommitted; production/test edits frozen; parent owns registry and static checks",
+  "fixedRootCauses": 5,
+  "productionFiles": [
+    "game/src/battle/core/battle.foe-lifecycle.domain.js",
+    "game/src/battle/effects/effect-steps.m2.domain.js",
+    "game/src/battle/effects/effect-steps.kills.js",
+    "game/src/battle/core/combat.factory.js",
+    "game/src/battle/core/battle.enemy-phase.domain.js"
+  ],
+  "newTests": [
+    "tests/project-bug-sweep-battle-1024.test.js"
+  ],
+  "fixes": [
+    {
+      "id": "battle-1024-01",
+      "title": "复活后腐化之种死亡标记未清除",
+      "reproduction": "真实引擎施加现行 deathBurst，打倒复活单位后标记仍存在；新形态再次中毒死亡会错误爆炸。",
+      "source": "docs/rules.md:85",
+      "change": "nestRevive 同步清理现行 deathBurst 与原有 rotSeedMarked。",
+      "before": "1 regression failure",
+      "after": "现行标记在复活后消失，后续新形态死亡不伤及其他敌人。"
+    },
+    {
+      "id": "battle-1024-02",
+      "title": "非 BOSS 消灭效果误杀没有词缀的首脑",
+      "reproduction": "现行远古龙尊 boss:true 且无 affix，受伤后可被非BOSS消灭；仅 controlBoss 首脑也漏检。结构化与文本路径均复现。",
+      "source": "game/src/run/game.nest.js:93; builtin-choice-execution.js 魔法神灯非BOSS选项",
+      "change": "两路径同时排除 affix/boss/controlBoss；预检拒绝理由同步。",
+      "before": "3 regression failures",
+      "after": "首脑保持存活，正常小怪仍可消灭，execute.what 生成火球仍能伤害首脑。"
+    },
+    {
+      "id": "battle-1024-03",
+      "title": "净化清除减攻诅咒却未立即归还攻击力",
+      "reproduction": "先割蚀后招募，再由天国门净化。atkDown归零但攻击仍低于原值，直到回合末才恢复。",
+      "source": "docs/rules.md:87",
+      "change": "统一 Combat.purify 归还实际 _atkDownPending 并清理两记账字段；文本/结构化/天国门/legacy随机祝福均沿同一入口。",
+      "before": "1 regression failure",
+      "after": "真实招募友军净化后立即按原攻击自动攻击；减攻高于基础攻击仅还实际扣除值；回合结束不重复归还。"
+    },
+    {
+      "id": "battle-1024-04",
+      "title": "被控制的心数友军承伤误按普通生命扣除",
+      "reproduction": "控制现行沙暴元素，剩余7心时替玩家承伤，4点攻击扣4心，8点攻击直接阵亡。",
+      "source": "game/src/run/game.nest.js:82; battle.measured-damage.js 心数换算",
+      "change": "友军承伤复用已有 dealMeasuredDamage，保留普通生命与防御处理。",
+      "before": "2 regression failures",
+      "after": "4点/8点攻击分别扣1心/2心，玩家生命保持不变。"
+    },
+    {
+      "id": "battle-1024-05",
+      "title": "潜行友军错误被选为守卫，使玩家额外免伤",
+      "reproduction": "先冰冻后控制敌人，天国门给玩家攻击祝福、友军潜行；冰冻友军未攻击破隐，敌人仍错误指定潜行守卫，玩家也被免伤。",
+      "source": "combat.factory.js 潜行无法成为被攻击对象",
+      "change": "守卫选择排除潜行单位，继续寻找可指定友军或攻击可见玩家。",
+      "before": "1 regression failure",
+      "after": "潜行友军不受伤，攻击者正常伤害可见玩家。"
+    }
+  ],
+  "validation": {
+    "finalCommand": "node node_modules/vitest/vitest.mjs run tests/project-bug-sweep-battle-1024.test.js tests/project-bugfix-round2-battle.test.js tests/project-bugfix-battle-1023.test.js tests/battle-effect-damage-boundary.test.js tests/requested-card-integration.test.js tests/battle-player-effects.test.js --maxWorkers=1 --minWorkers=1 --reporter=dot",
+    "exitCode": 0,
+    "filesPassed": 6,
+    "testsPassed": 85,
+    "newTestsPassed": 10,
+    "durationSeconds": 16.85,
+    "firstBatchValidation": {"filesPassed": 7, "testsPassed": 74, "newTestsPassed": 7, "durationSeconds": 16.67, "exitCode": 0},
+    "diffCheckExitCode": 0,
+    "initialReadOnlyBaseline": {
+      "filesPassed": 9,
+      "testsPassed": 101
+    },
+    "notRun": [
+      "browser game page",
+      "build",
+      "commit",
+      "push",
+      "full-suite"
+    ]
+  }
+}

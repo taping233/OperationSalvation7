@@ -1,0 +1,166 @@
+{
+  "at": "2026-10-23T15:47:30.370Z",
+  "status": "complete_uncommitted",
+  "kind": "static-only",
+  "changes": [
+    {
+      "file": "game/src/cards/builtin-card-previous-rules.js",
+      "before": "ea2488dc18215aacb0318d4f896fe52e68532fbd49574d631d6d1e7aee41f865",
+      "expected": "0dbb3147f178db0147a7965f2eea0e091ed2a874b5954490b3b8450030a2bcb6",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-card-previous-rules.js.before.txt",
+      "actual": "0dbb3147f178db0147a7965f2eea0e091ed2a874b5954490b3b8450030a2bcb6",
+      "bytesAfter": 4114,
+      "bytesBefore": 7355,
+      "added": 48,
+      "removed": 412
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-previous-rules.js",
+      "before": "63d6ebcae494d3b9a221c1f345408d4e1e10c4ec468dbae5b72a455af5d47804",
+      "expected": "3b5ed9499f7a6e2dffb37ed051eeffcea628adfaf141d5289c331018b54519fd",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/battle/builtin-equipment-previous-rules.js.before.txt",
+      "actual": "3b5ed9499f7a6e2dffb37ed051eeffcea628adfaf141d5289c331018b54519fd",
+      "bytesAfter": 1374,
+      "bytesBefore": 2650,
+      "added": 20,
+      "removed": 168
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "before": "c57c25a898d3fa2c6dd9538cff489d5c8e4bbeb2f4c27815c278bffb5bf77088",
+      "expected": "ce4fdc8f5bd9a79ff2846c8acefd673917c7eec47aded78ba47028d3f76c9d8f",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/battle/cards.data.js.targeted-before.txt",
+      "actual": "ce4fdc8f5bd9a79ff2846c8acefd673917c7eec47aded78ba47028d3f76c9d8f",
+      "bytesAfter": 103175,
+      "bytesBefore": 104812,
+      "added": 14,
+      "removed": 145
+    },
+    {
+      "file": "game/src/cards/hosted-rule-snapshot.js",
+      "before": null,
+      "expected": "adfdd49264abaee85c4bfe780201983416b790b9b03bdacd0e41ecdea0a70a7a",
+      "baseline": null,
+      "actual": "adfdd49264abaee85c4bfe780201983416b790b9b03bdacd0e41ecdea0a70a7a",
+      "bytesAfter": 413,
+      "bytesBefore": 0,
+      "added": 10,
+      "removed": 0
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy-review.mjs",
+      "before": "8c4f3fe0631bdd96cd315a7e34a139e0a51bd4156683bdc363650fa4fe66516d",
+      "expected": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/run-agent/runtime-asset-redundancy-review.mjs.before",
+      "actual": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83",
+      "bytesAfter": 35680,
+      "bytesBefore": 42678,
+      "added": 7,
+      "removed": 90
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "before": "56e0f5ded2099db139e4850588dd64901598be629b8ae76f060cd1961735afe1",
+      "expected": "a2da160ce980731c6c12c1b573563856dae42a10ddced98e9ec7cba151570f20",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase5/tools/sync-cards-from-live.mjs.before.txt",
+      "actual": "a2da160ce980731c6c12c1b573563856dae42a10ddced98e9ec7cba151570f20",
+      "bytesAfter": 18400,
+      "bytesBefore": 17946,
+      "added": 7,
+      "removed": 1
+    }
+  ],
+  "totals": {
+    "added": 106,
+    "removed": 816,
+    "netBytesRemoved": 12285,
+    "netRemoved": 710
+  },
+  "previousActualNet": 560,
+  "cumulativeActualNet": 1270,
+  "previousProductionNet": 755,
+  "cumulativeProductionNet": 1465,
+  "codeMovedThisRound": 0,
+  "filesDeleted": [],
+  "retainedPerformancePackage": [
+    {
+      "file": "scripts/perf-ledger-capture.mjs",
+      "unchanged": true
+    },
+    {
+      "file": "tests/perf-ledger-drive.test.js",
+      "unchanged": true
+    },
+    {
+      "file": "tests/perf-ledger-port-occupancy.test.js",
+      "unchanged": true
+    }
+  ],
+  "consumerFingerprints": [
+    {
+      "file": "game/src/cards/builtin-card-execution.js",
+      "unchanged": true
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-execution.js",
+      "unchanged": true
+    },
+    {
+      "file": "game/src/cards/cards.sync.builtin.js",
+      "unchanged": true
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "unchanged": true
+    }
+  ],
+  "relativeImports": [
+    {
+      "file": "game/src/cards/builtin-card-previous-rules.js",
+      "ref": "./hosted-rule-snapshot.js"
+    },
+    {
+      "file": "game/src/cards/builtin-equipment-previous-rules.js",
+      "ref": "./hosted-rule-snapshot.js"
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "ref": "./hosted-rule-snapshot.js"
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "ref": "./cards.catalog.js"
+    }
+  ],
+  "verification": {
+    "allSixModulesParse": true,
+    "currentSourceAndBaselineFingerprintsMatch": true,
+    "relativeImportsResolve": true,
+    "diffCheckExitCode": 0,
+    "cardTemplates": {
+      "firstStage": "receipt.json",
+      "secondStage": "targeted-receipt.json",
+      "completeFirstStageHistoricalSerializedTablesIdentical": true,
+      "completeSecondStageModuleAstIdenticalAfterConstructorExpansion": true,
+      "independentMutableObjectGraphPreserved": true,
+      "importConsumersFreezeCallsUnchanged": {
+        "game/src/cards/builtin-card-execution.js": "59d14c68c8b9b0895834ac762f0a0f49c3c69fdf1865ff62748859e4bf5bff15",
+        "game/src/cards/builtin-equipment-execution.js": "f81507183473f84573d91c8eed0293fe85f6a9929b7023d4c715a457cdd7cd9e",
+        "game/src/cards/cards.sync.builtin.js": "45fc8507901f4f73bf8c843b97d1215fdf66b05f49bcd01d69bbfcdf70d5b27a",
+        "game/src/battle/effects/battle.hosted.js": "cb22da88233c45b09d0857c44ab8d9be617a9e904c636a270ed137c0264cc180"
+      }
+    },
+    "pathTemplates": "run-agent/template-equivalence.json",
+    "manualAssembly": {
+      "sourceParses": true,
+      "allNamesResolve": true,
+      "before": "tools/sync-assembly-before-static.json",
+      "after": "tools/sync-assembly-static.json"
+    },
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false,
+    "sourceScriptsExecuted": false
+  },
+  "limits": "Static equivalence and exact changed source only; no claim of all-repository completeness; live repair ownership excluded"
+}

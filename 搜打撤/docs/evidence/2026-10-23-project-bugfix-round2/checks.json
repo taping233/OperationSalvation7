@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-24",
+  "task": "WF-project-bugfix-round2-1023",
+  "status": "complete-uncommitted-released",
+  "newFixedRootCauses": 25,
+  "domains": { "battle": 7, "storageAndBag": 6, "expedition": 5, "inputAgentRecords": 7 },
+  "exactFileAndFixManifests": ["battle.json", "storage.json", "expedition.json", "root.json", "material-window.json"],
+  "additionalUserRequest": "消耗选牌与注能共用材料窗口，支持payment和consume，保留各自候选、支付与取消契约。",
+  "finalVerification": {
+    "newRegressionReport": "combined-tests.json",
+    "filesPassed": 11,
+    "newTestsPassed": 88,
+    "failed": 0,
+    "typecheck": { "exitCode": 0, "implementationChecked": 619, "implementationTotal": 619 },
+    "syntax": { "exitCode": 0, "files": 680 },
+    "changedSourceAndTestEslint": { "exitCode": 0 },
+    "docsCheck": { "exitCode": 0 }
+  },
+  "browser": {
+    "source": "Codex in-app browser, current 1280x720 window, 5200",
+    "fixture": "game/tools/material-window-round2.html",
+    "isolation": "真实index/main及真实战斗入口，加载前隔离localStorage/sessionStorage为内存；仅用可见控件操作。",
+    "passed": [
+      "快意恩仇0→1→2材料，撤回后确认禁用，重选确认；木桩200→188，能量2→1，精确消耗两张初始攻击且来源牌结算一次。",
+      "铸甲只列装备；选一张矿工炸药后确认获得10甲，剩余一张装备与初始攻击保留。",
+      "血蝠风暴普通注能选材后返回，三张材料完整保留；重选两张确认后木桩200→194、能量0，精确消费。",
+      "设置改键冲突确认实际打开并取消，B/Q原绑定保持。"
+    ],
+    "limits": "未进行全项目完整实玩；其他特殊状态由定向回归覆盖。共享源码热更新曾中断中间试验，最终三条材料流程已完成。",
+    "cleanup": "仅关闭本会话临时tab4/tab5，无新服务或端口，既有服务保留。"
+  },
+  "notes": [
+    "独立复核发现的坏文本对象及提交后展示异常遗漏已补齐，归并原根因，不重复计数。",
+    "旧三张叠容量断言与异步保存夹具修订依据见storage.json。",
+    "battle.view.js只规范既有异常行尾，归一后全文SHA一致，见material-window-eol.json。",
+    "最终bag-container-pages显式code收窄由其他会话更新，保留其增量；先前在途类型错误已在最终检查消失。"
+  ],
+  "notRun": ["全库测试", "build", "提交", "推送"]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "wolf_rider",
+  "name": "裂颚匍行体",
+  "recipeVersion": "3.4",
+  "payload": {
+    "input": "3::nonhuman biological mutant, human-origin quadrupedal body deformation, no humanoid::, a compact hunch-backed creature with a high arched shoulder mass, four thick elongated jointed supporting limbs folded beneath its body, blunt long closed jaw pointing left, little dark sensing slit, pale gray skin with broad slate-blue hardened patches. A small remnant of a dark civilian coat trapped over its high back suggests infected human origin. Calm idle standing on four feet, not crawling forward, no attack. Tall compact silhouette, not a long low wolf. No fur, no animal ears, no ice crystals, no spikes, no gore, no open mouth.\n\nOne complete full-body battle character illustration on a truly transparent background.\n\n2::single subject, full body, side view, facing left, looking left, orthographic projection, eye-level camera, no perspective, neutral idle standing pose::, entire head and all feet visible, supporting feet on one horizontal line, no action, no movement, no attack, plain pale gray background, character isolated with generous margins, centered in portrait canvas.\n\nHand painted Japanese anime game enemy sprite, strong readable silhouette, large coherent matte color masses, selective expressive linework, restrained chromatic grays with small vivid accents. Not photorealistic, not 3D, no airbrushed haze.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 10252505,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, photorealistic, realistic face, 3d, render, shiny plastic, airbrush, crowded details, perspective, foreshortening, from above, from below, three-quarter view, looking at viewer, running, jumping, lunging, kneeling, crouching, attacking, dynamic pose, weapon aimed at viewer, extreme close-up, cropped feet, scenery, room, landscape, border, multiple characters, human, humanoid, 1girl, 1boy, male focus, female focus, attractive woman, human face, man standing, warrior, knight, armor suit",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "3::nonhuman biological mutant, human-origin quadrupedal body deformation, no humanoid::, a compact hunch-backed creature with a high arched shoulder mass, four thick elongated jointed supporting limbs folded beneath its body, blunt long closed jaw pointing left, little dark sensing slit, pale gray skin with broad slate-blue hardened patches. A small remnant of a dark civilian coat trapped over its high back suggests infected human origin. Calm idle standing on four feet, not crawling forward, no attack. Tall compact silhouette, not a long low wolf. No fur, no animal ears, no ice crystals, no spikes, no gore, no open mouth.\n\nOne complete full-body battle character illustration on a truly transparent background.\n\n2::single subject, full body, side view, facing left, looking left, orthographic projection, eye-level camera, no perspective, neutral idle standing pose::, entire head and all feet visible, supporting feet on one horizontal line, no action, no movement, no attack, plain pale gray background, character isolated with generous margins, centered in portrait canvas.\n\nHand painted Japanese anime game enemy sprite, strong readable silhouette, large coherent matte color masses, selective expressive linework, restrained chromatic grays with small vivid accents. Not photorealistic, not 3D, no airbrushed haze.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, photorealistic, realistic face, 3d, render, shiny plastic, airbrush, crowded details, perspective, foreshortening, from above, from below, three-quarter view, looking at viewer, running, jumping, lunging, kneeling, crouching, attacking, dynamic pose, weapon aimed at viewer, extreme close-up, cropped feet, scenery, room, landscape, border, multiple characters, human, humanoid, 1girl, 1boy, male focus, female focus, attractive woman, human face, man standing, warrior, knight, armor suit",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  }
+}

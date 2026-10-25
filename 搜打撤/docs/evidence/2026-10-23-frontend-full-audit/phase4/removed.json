@@ -1,0 +1,33 @@
+[
+  {
+    "file": "game/css/battle-stage.css",
+    "changes": [
+      {
+        "line": 79,
+        "selector": "#overlay .battle-stage.sts .bt-intent-condition",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 155,
+        "selector": "#overlay .battle-stage.sts .bt-forecast-note",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 249,
+        "selector": "#overlay .battle-stage.sts .bt-turn-forecast .bt-forecast-note",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 250,
+        "selector": "#overlay .battle-stage.sts .bt-turn-forecast:is(:hover,:focus-within) .bt-forecast-note",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "35e713f6faadcf69ce62f630106a93f393a51398729fd0d24e09ef77fc4f8fdf",
+    "afterSha256": "8e5db7debd678a9aa161586a369922da40744ac0d364661b05410e873ff59894"
+  }
+]

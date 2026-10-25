@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "asset": "cards/martial-tt7-swordimmortal.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e6f-fb4d-7340-ad3d-6655366550f7/exec-257541bd-43a0-4ce9-af77-e28e1d5558d5.png",
+      "revision": "sword-seat-tip-hilt-fix-20261024",
+      "prompt": "Use case: precise-object-edit. Edit target: the provided sword immortal card. Correct only the giant sword she is sitting on; retain the same character, face, silver ponytail, black dress, seated pose, camera, blue and sand abstract background, palette, and existing rendering style. The sword must read as ONE coherent straight double-edged flying sword, not a steel rail: a continuous tapered blade with two clean cutting edges and a single shallow central ridge, becoming narrower toward a clearly visible pointed tip at the lower left, and a correctly aligned guard, short grip and pommel toward the lower right. Place the pointed tip a little inside the left edge and the short hilt inside the bottom-right edge. Keep the blade directly under her seated hips and palms. Both blade edges converge consistently toward the point; no extra parallel rails, split blades, dislocated sections, bent centerline, or intersecting handle. Correct sword geometry and its occlusion at her hands and dress, preserve all other areas as closely as possible. Square card illustration, no text, no border or watermark.",
+      "references": [
+        "game/assets/cards/martial-tt7-swordimmortal.webp"
+      ]
+    },
+    {
+      "card_id": "tt8-hero-summoner",
+      "asset": "cards/hero-summoner.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e6f-fb4d-7340-ad3d-6655366550f7/exec-7768a3c5-69b1-4b0e-9e7b-5c4c70923907.png",
+      "revision": "baita-covered-eyes-gold-clip-20261024",
+      "prompt": "Use case: precise-object-edit. Edit target: the provided flower card, brown-haired woman holding the two-tone blossom. Change only her bangs and add a clearly visible gold hair clip. Extend thick brown bangs down over BOTH eyes until the eyes are fully hidden behind opaque substantial hair locks; do not draw eyes through the hair, do not leave a visible eye peeking out. Keep nose and small mouth visible. Add one simple polished GOLD HAIR CLIP attached at one side of the bangs near the temple, distinct warm gold and easy to read; retain the existing braided side hair and long curly brown hair. Preserve face shape, expression, gold hoop earrings, ivory blouse, dark green dress, blue brooch, hands, central flower with its light/dark opposing petal colors, split gold-and-green backdrop, and exact composition. Match the original matte hand-painted anime block-brush artwork and economical marks; no global restyle. Square card illustration, no text, no frame or watermark.",
+      "references": [
+        "game/assets/cards/hero-summoner.webp"
+      ]
+    }
+  ]
+}

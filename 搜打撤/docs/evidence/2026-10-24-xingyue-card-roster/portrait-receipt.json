@@ -1,0 +1,56 @@
+{
+  "method": "Built-in ImageGen redraw using existing Xingyue cards; user selected version before clothing/boots correction",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-39c7a839-f9a3-4388-bde7-c5a6d1335690.png",
+  "raw": {
+    "path": ".tmp/imagegen/2026-10-24-xingyue-card-roster/xingyue-selected-source.png",
+    "bytes": 1927458,
+    "sha256": "b15b57cc7e50c2eebdabca4b4221ebe48156903fd7e5b082dcf6cfc0e16b7c7d"
+  },
+  "backups": [
+    {
+      "path": ".tmp/imagegen/2026-10-24-xingyue-card-roster/xingyue-before.webp",
+      "bytes": 180912,
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3"
+    },
+    {
+      "path": ".tmp/imagegen/2026-10-24-xingyue-card-roster/xingyue-ref-before.webp",
+      "bytes": 180912,
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "bytes": 153604,
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "path": "docs/character-bible/ref-images/xingyue.webp",
+      "bytes": 153604,
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d"
+    }
+  ],
+  "manifest_patch": {
+    "before": {
+      "path": "portraits/full/xingyue.webp",
+      "ext": "webp",
+      "bytes": 180912,
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "license": "项目自有（自制/AI 生成）",
+      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
+    },
+    "after": {
+      "path": "portraits/full/xingyue.webp",
+      "ext": "webp",
+      "bytes": 153604,
+      "sha256": "99d6c6d040b5e9698caec8539c745d4ed170897edac824a37a00a3447bca0f1d",
+      "license": "项目自有（自制/AI 生成）",
+      "source": "docs/evidence/2026-10-24-xingyue-card-roster/portrait-receipt.json"
+    }
+  },
+  "verification": "Not run: user requested no tests/audits/browser/build"
+}

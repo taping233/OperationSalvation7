@@ -1,0 +1,84 @@
+--- game/src/cards/cards.sync.catalog.js (before phase3)
++++ game/src/cards/cards.sync.catalog.js (after phase3)
+@@ -13,6 +13,19 @@
+     if (cardsSyncRetired.has(snapshot.id)) return null;
+     const current = cardsSyncById.get(snapshot.id);
+     return current ? { ...snapshot, ...current } : snapshot;
++  };
++  const synchronizeCatalog = (markerKey, shouldRetire, readDefinitions) => {
++    if (storage().getItem(markerKey)) return;
++    const cards = library().all();
++    for (let i = cards.length - 1; i >= 0; i--) {
++      if (shouldRetire(cards[i])) cards.splice(i, 1);
++    }
++    readDefinitions().forEach(d => {
++      const i = cards.findIndex(c => c.id === d.id);
++      if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
++    });
++    if (!library().saveAll(cards)) return;
++    markCardMigration(markerKey, cards);
+   };
+   return {
+     // 播入初始牌「初始攻击」（只播一次，之后删改都尊重玩家）
+@@ -152,17 +165,9 @@
+     // 并移除同设计重复 id（RETIRE，设计者已在旧 id 上定版同名卡）。
+     ensureTabletopSync() {
+       try {
+-        if (storage().getItem(TT10_KEY)) return;
+-        const cards = library().all();
+-        for (let i = cards.length - 1; i >= 0; i--) {
+-          if (RETIRE_TT10.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id)) cards.splice(i, 1);
+-        }
+-        library().TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
+-          const i = cards.findIndex(c => c.id === d.id);
+-          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+-        });
+-        if (!library().saveAll(cards)) return;
+-        markCardMigration(TT10_KEY, cards);
++        synchronizeCatalog(TT10_KEY,
++          card => RETIRE_TT10.includes(card.id) || cardsSyncRetired.has(card.id),
++          () => library().TABLETOP10.map(canonicalTabletopSnapshot).filter(Boolean));
+       } catch { /* 隐私模式等场景静默跳过 */ }
+     },
+ 
+@@ -178,17 +183,9 @@
+     // 初始牌只剩初始攻击与应急绷带（设计者稿）。
+     ensureTabletopSync11() {
+       try {
+-        if (storage().getItem(TT11_KEY)) return;
+-        const cards = library().all();
+-        for (let i = cards.length - 1; i >= 0; i--) {
+-          if (RETIRE_TT11.includes(cards[i].id) || cardsSyncRetired.has(cards[i].id) || cards[i].name === '新兵操典') cards.splice(i, 1);
+-        }
+-        library().TABLETOP11.map(canonicalTabletopSnapshot).filter(Boolean).forEach(d => {
+-          const i = cards.findIndex(c => c.id === d.id);
+-          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+-        });
+-        if (!library().saveAll(cards)) return;
+-        markCardMigration(TT11_KEY, cards);
++        synchronizeCatalog(TT11_KEY,
++          card => RETIRE_TT11.includes(card.id) || cardsSyncRetired.has(card.id) || card.name === '新兵操典',
++          () => library().TABLETOP11.map(canonicalTabletopSnapshot).filter(Boolean));
+       } catch { /* 隐私模式等场景静默跳过 */ }
+     },
+ 
+@@ -199,17 +196,8 @@
+     ensureCardsSyncLive() {
+       try {
+         const seedKey = `sdt-cards-sync-v${data.cardsSync.version}-seeded`;
+-        if (storage().getItem(seedKey)) return;
+-        const cards = library().all();
+-        for (let i = cards.length - 1; i >= 0; i--) {
+-          if (this.RETIRE_CARDS_SYNC.includes(cards[i].id)) cards.splice(i, 1);
+-        }
+-        this.CARDS_SYNC.forEach(d => {
+-          const i = cards.findIndex(c => c.id === d.id);
+-          if (i >= 0) cards[i] = { ...d }; else cards.push({ ...d });
+-        });
+-        if (!library().saveAll(cards)) return;
+-        markCardMigration(seedKey, cards);
++        synchronizeCatalog(seedKey,
++          card => this.RETIRE_CARDS_SYNC.includes(card.id), () => this.CARDS_SYNC);
+       } catch { /* 隐私模式等场景静默跳过 */ }
+     },
+     ensureEvents0919() {

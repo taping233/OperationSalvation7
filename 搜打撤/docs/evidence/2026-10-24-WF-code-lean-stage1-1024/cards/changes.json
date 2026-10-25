@@ -1,0 +1,104 @@
+{
+  "baseline": "../baseline.json; frozen current working-tree bytes, not HEAD",
+  "files": [
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "before": {
+        "sha256": "fc4a5b4fa65194db88779dff8fac6233353bc24773be987b97f88c92681830ff",
+        "bytes": 74260,
+        "normalizedBytes": 73028,
+        "lines": 1238,
+        "tokens": 11909
+      },
+      "after": {
+        "sha256": "7c55ac03b71acab3fc5ec6e424691a4fc7e75daf1816474ca79352243e34f587",
+        "bytes": 73037,
+        "normalizedBytes": 71813,
+        "lines": 1224,
+        "tokens": 11641
+      },
+      "delta": {
+        "bytes": -1223,
+        "normalizedBytes": -1215,
+        "lines": -14,
+        "tokens": -268
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "before": {
+        "sha256": "0d582a3fc532ca8acc7fd9dc156b5710801f44922532afc9dc0ddc60804232bb",
+        "bytes": 24732,
+        "normalizedBytes": 24262,
+        "lines": 470,
+        "tokens": 4099
+      },
+      "after": {
+        "sha256": "acfc032614270bb8493fec57234a8b241886333d9da7091c1fc306e47347e44b",
+        "bytes": 24088,
+        "normalizedBytes": 23644,
+        "lines": 444,
+        "tokens": 3896
+      },
+      "delta": {
+        "bytes": -644,
+        "normalizedBytes": -618,
+        "lines": -26,
+        "tokens": -203
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "before": {
+        "sha256": "161869441c50aedf397ff260a1ade8ba57390a831f088ada13b7a25678fedf92",
+        "bytes": 3974,
+        "normalizedBytes": 3974,
+        "lines": 68,
+        "tokens": 700
+      },
+      "after": {
+        "sha256": "ff51b7ba268ba8053ed301a61f3ab43cf0bcd8fa4b077687bf01679a05f9e805",
+        "bytes": 3705,
+        "normalizedBytes": 3705,
+        "lines": 65,
+        "tokens": 640
+      },
+      "delta": {
+        "bytes": -269,
+        "normalizedBytes": -269,
+        "lines": -3,
+        "tokens": -60
+      }
+    }
+  ],
+  "addedTests": [
+    {
+      "file": "tests/code-lean-stage1-cards-schema.test.js",
+      "after": {
+        "sha256": "c1fb256ad3641603f65064e64c247cb56f89157b6337bc4a661d801cb721a753",
+        "bytes": 3777,
+        "normalizedBytes": 3777,
+        "lines": 72,
+        "tokens": 937
+      }
+    },
+    {
+      "file": "tests/code-lean-stage1-cards-m7.test.js",
+      "after": {
+        "sha256": "ff125291202fce049ce2a55d81e5e10b26462ee4c2cdba9ea8bdb56fbe9a6ab5",
+        "bytes": 1372,
+        "normalizedBytes": 1372,
+        "lines": 29,
+        "tokens": 288
+      }
+    }
+  ],
+  "newRuntimeModules": [],
+  "helpersIncludedInAfter": true,
+  "runtimeDelta": {
+    "bytes": -2136,
+    "normalizedBytes": -2102,
+    "lines": -43,
+    "tokens": -531
+  }
+}

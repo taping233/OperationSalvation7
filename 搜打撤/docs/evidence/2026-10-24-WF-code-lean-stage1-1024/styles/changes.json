@@ -1,0 +1,1194 @@
+{
+  "baseline": "node_modules/.cache/lean-stage1-1024/before",
+  "files": [
+    {
+      "file": "game/css/ak-skin.css",
+      "before": {
+        "sha256": "8d9606f77c8965b66354e4ab581e0de6a2e41c0be029e7fd213ea0938b503eb8",
+        "bytes": 17498,
+        "normalizedBytes": 17498,
+        "lines": 192,
+        "rules": 113,
+        "declarations": 369
+      },
+      "after": {
+        "sha256": "f71637e0d990a221e72a3adf566fe0dd1efad8610cc33b0a426e3b4121e6d76f",
+        "bytes": 17435,
+        "normalizedBytes": 17435,
+        "lines": 192,
+        "rules": 111,
+        "declarations": 367
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 13,
+          "selectors": [
+            "input[type=\"range\"]",
+            "input[type=\"checkbox\"], input[type=\"radio\"]"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "accent-color",
+              "var(--ak-blue)",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 24,
+          "selectors": [
+            "#overlay.opaque",
+            "#overlay.room-view, #overlay.bag-full"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "background",
+              "var(--ak-ink)",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "before": {
+        "sha256": "6eaa1659b0e25e7520d78d6aca22c62df6eee15cbc8e38618971edde6d58907c",
+        "bytes": 32595,
+        "normalizedBytes": 32595,
+        "lines": 270,
+        "rules": 238,
+        "declarations": 805
+      },
+      "after": {
+        "sha256": "bd490b91bad6afc4bd61373f39e6e6821d79a2dfe2c6e5525514d12b15659357",
+        "bytes": 32560,
+        "normalizedBytes": 32560,
+        "lines": 270,
+        "rules": 237,
+        "declarations": 803
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 164,
+          "selectors": [
+            "#overlay #hubMain.pg.hub.base-camp .person-details > .mini-btn",
+            "#overlay #hubMain.pg.hub.base-camp .companion-toolbar .mini-btn"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "flex",
+              "0 0 auto",
+              false
+            ],
+            [
+              "decl",
+              "min-height",
+              "48px",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "before": {
+        "sha256": "f349b8117da669d03eed3ffdb8652212a1a36f412eb7a53f6d1ac9e758dad92a",
+        "bytes": 21259,
+        "normalizedBytes": 21259,
+        "lines": 171,
+        "rules": 138,
+        "declarations": 613
+      },
+      "after": {
+        "sha256": "de5d361e10ce689b05e53214cea65f0e1d3445af6df8dbbe73095e20569e9524",
+        "bytes": 21228,
+        "normalizedBytes": 21228,
+        "lines": 171,
+        "rules": 137,
+        "declarations": 612
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 9,
+          "selectors": [
+            "#overlay:has(.card.page.hub-refresh #hubMain.base-camp)",
+            "#overlay .card.page.hub-refresh:has(#hubMain.base-camp)"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              true
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/base.css",
+      "before": {
+        "sha256": "7e5b5507e827ff0044dc9ec9681755f21e44975b26bcf33e5f5d39ac5d20f1d0",
+        "bytes": 27632,
+        "normalizedBytes": 27632,
+        "lines": 373,
+        "rules": 152,
+        "declarations": 779
+      },
+      "after": {
+        "sha256": "62110160321bfaf1f82b077a8eab64263913c3fdfe2b1925b7d48edaae32be6b",
+        "bytes": 27573,
+        "normalizedBytes": 27573,
+        "lines": 373,
+        "rules": 149,
+        "declarations": 776
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 114,
+          "selectors": [
+            "body.lobby #sidebar",
+            "body.lobby #topBtns"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 170,
+          "selectors": [
+            "#btnMute .ic-sound-off",
+            "#btnMute.muted .ic-sound-on"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 173,
+          "selectors": [
+            "#topBtns #btnHome.exit-btn",
+            "#topBtns #btnHome.exit-btn:hover"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "border",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "before": {
+        "sha256": "993af55c329af935f8afc050b3f8f107ad4594015bd325d3877ca129a74244ff",
+        "bytes": 13322,
+        "normalizedBytes": 13322,
+        "lines": 249,
+        "rules": 88,
+        "declarations": 290
+      },
+      "after": {
+        "sha256": "91d816271182cb95cc92a859c7e0f647fb302a93ea5b64ca48bf5e28b0bf84b0",
+        "bytes": 13242,
+        "normalizedBytes": 13242,
+        "lines": 249,
+        "rules": 84,
+        "declarations": 286
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 234,
+          "selectors": [
+            "body.reduce-motion #overlay .camp-entry-ghost",
+            "body.reduce-motion .camp-entry-identity"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 237,
+          "selectors": [
+            "body.reduce-motion :is(#overlay, .page-loading--city) .camp-entry-caption::after",
+            "body.reduce-motion :is(#overlay, .page-loading--city) :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),\nbody.reduce-motion :is(#overlay, .page-loading--city) .camp-entry-register::after"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 242,
+          "selectors": [
+            "#overlay .camp-entry-ghost",
+            ".camp-entry-identity"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 245,
+          "selectors": [
+            ":is(#overlay, .page-loading--city) .camp-entry-caption::after",
+            ":is(#overlay, .page-loading--city) :is(.camp-entry-register, .camp-entry-scenery, .camp-entry-caption strong),\n  :is(#overlay, .page-loading--city) .camp-entry-register::after"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "before": {
+        "sha256": "a53d0f6e0767e0aa2ba8b586059bfc08ed49d02ef0341f01cee81727d2b60b3c",
+        "bytes": 2892,
+        "normalizedBytes": 2855,
+        "lines": 38,
+        "rules": 26,
+        "declarations": 41
+      },
+      "after": {
+        "sha256": "dc428cdd0de15da338bdf534b9cd211c78b407bc5af1f304857c601c970198fa",
+        "bytes": 2866,
+        "normalizedBytes": 2830,
+        "lines": 38,
+        "rules": 25,
+        "declarations": 40
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 33,
+          "selectors": [
+            "#overlay .cls2-page .cls2-fullart[data-character=\"changwuyu\"]",
+            "#overlay .cls2-page .cls2-fullart[data-character=\"baita\"]"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "--roster-anchor",
+              "50%",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "before": {
+        "sha256": "68d4b33ccc17328c2d2248b62056fd73c8236398083b58a51a7941e7419cc142",
+        "bytes": 5013,
+        "normalizedBytes": 5013,
+        "lines": 44,
+        "rules": 41,
+        "declarations": 186
+      },
+      "after": {
+        "sha256": "da66ec8abac28ad573c45fcc89a55957b617c8cdd132e53c0243bc23a429ec17",
+        "bytes": 4962,
+        "normalizedBytes": 4962,
+        "lines": 44,
+        "rules": 40,
+        "declarations": 183
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 24,
+          "selectors": [
+            "body #overlay .card .cqo-frame .cqo-box-art > *",
+            "body #overlay .card .cqo-frame .cqo-box-art img"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "max-width",
+              "100%",
+              false
+            ],
+            [
+              "decl",
+              "max-height",
+              "100%",
+              false
+            ],
+            [
+              "decl",
+              "object-fit",
+              "contain",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "before": {
+        "sha256": "fd4749286b658a4b21e64b1fdb9d97191ab83404029e9dbe6be8c4df46bb6506",
+        "bytes": 8601,
+        "normalizedBytes": 8471,
+        "lines": 131,
+        "rules": 49,
+        "declarations": 152
+      },
+      "after": {
+        "sha256": "9e54ae5eda40ebe63325bf9f124470dc790dc7b0c37c6f377c325a384e4a948d",
+        "bytes": 8583,
+        "normalizedBytes": 8454,
+        "lines": 131,
+        "rules": 48,
+        "declarations": 151
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 78,
+          "selectors": [
+            "body #layerBanner",
+            "body.lobby #expeditionChapter,body.page-opaque #expeditionChapter"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "before": {
+        "sha256": "87116be7e988d000555adead9ce85f07362bfe0d082726db63c898de0743d232",
+        "bytes": 25235,
+        "normalizedBytes": 25235,
+        "lines": 212,
+        "rules": 151,
+        "declarations": 532
+      },
+      "after": {
+        "sha256": "3cab7daf39cd5dc81e1fe4e838d348b2425af9b2bdbdd935ee3a37feb17b80ef",
+        "bytes": 25197,
+        "normalizedBytes": 25197,
+        "lines": 212,
+        "rules": 150,
+        "declarations": 531
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 201,
+          "selectors": [
+            "body #overlay:has(.cls-pool-page)",
+            "body #overlay .card.page:has(.cls-pool-page),\nbody #overlay .card.page .pg.cls-pool-page"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "background",
+              "transparent",
+              true
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/expedition.css",
+      "before": {
+        "sha256": "00f305267758277c46ab03ba1cb02aa0e587c4f0cc8c68065532123365f63e5e",
+        "bytes": 17690,
+        "normalizedBytes": 17690,
+        "lines": 320,
+        "rules": 132,
+        "declarations": 443
+      },
+      "after": {
+        "sha256": "fbb47c3be1cfa4670fd9104d75a6943e2e9f3dfe1a6be7ca9a70941925707391",
+        "bytes": 17648,
+        "normalizedBytes": 17648,
+        "lines": 320,
+        "rules": 130,
+        "declarations": 441
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 305,
+          "selectors": [
+            "body.reduce-motion #title .ak-hud::after",
+            "body.reduce-motion #title .ak-circle .c-ring::before,\nbody.reduce-motion #title .ak-circle .c-ring::after,\nbody.reduce-motion #title .ak-start .st-row::before,\nbody.reduce-motion #title .ak-start .st-cn"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 313,
+          "selectors": [
+            "#title .ak-hud::after",
+            "#title .ak-circle .c-ring::before,\n  #title .ak-circle .c-ring::after,\n  #title .ak-start .st-row::before, #title .ak-start .st-cn"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "before": {
+        "sha256": "79404ef5a45655631439d27c339a00c23e7dcdf71cf47e6298c32eed1108638f",
+        "bytes": 7419,
+        "normalizedBytes": 7419,
+        "lines": 113,
+        "rules": 35,
+        "declarations": 82
+      },
+      "after": {
+        "sha256": "ffdc3bb0ebc1ec8fe1773407b707101707f51c953803af789ae351ef43a8e5fd",
+        "bytes": 7395,
+        "normalizedBytes": 7395,
+        "lines": 113,
+        "rules": 34,
+        "declarations": 81
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 46,
+          "selectors": [
+            "#overlay#overlay#overlay .archive-back:is(:hover, :active, :focus-visible)",
+            "#title#title #homeCredits .archive-back:is(:hover, :active, :focus-visible)"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "transform",
+              "scale(1)",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "before": {
+        "sha256": "43449f52d9fbd5878eec0dc15796876fbb7c8608fcef484d103c511ab17a8eb8",
+        "bytes": 38545,
+        "normalizedBytes": 38545,
+        "lines": 532,
+        "rules": 236,
+        "declarations": 568
+      },
+      "after": {
+        "sha256": "c23101afc2d0bda0e6feae59a1e53a649340965b2056906b5d9212adb3503d51",
+        "bytes": 38371,
+        "normalizedBytes": 38371,
+        "lines": 532,
+        "rules": 231,
+        "declarations": 563
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 259,
+          "selectors": [
+            "body #title.home-composed .home-start::before",
+            "body #title.home-composed .home-start:hover::before"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "background",
+              "none",
+              true
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 261,
+          "selectors": [
+            "body #title.home-composed .home-start::after",
+            "body #title.home-composed .home-start:hover::after"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "background",
+              "linear-gradient(105deg,#bbcbd2,#e1d6b2 72%)",
+              true
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 442,
+          "selectors": [
+            "body.page-covered #title.home-composed .home-near-snow i,\nbody:has(#homeCredits[open]) #title.home-composed .home-near-snow i",
+            "body:has(#homeCredits[open]) #title.home-composed .home-scene"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation-play-state",
+              "paused",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 454,
+          "selectors": [
+            "body.reduce-motion #title.home-composed .home-grain,\nbody.reduce-motion #title.home-composed .home-spark",
+            "body.reduce-motion #title.home-composed .home-near-snow"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 461,
+          "selectors": [
+            "body #title.home-composed .home-grain, body #title.home-composed .home-spark",
+            "body #title.home-composed .home-near-snow"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "before": {
+        "sha256": "96c9e41bab3d2cc0760f0d689c3b875603e1b63ded3c99f58dcebee7d08a1606",
+        "bytes": 10139,
+        "normalizedBytes": 10056,
+        "lines": 84,
+        "rules": 77,
+        "declarations": 180
+      },
+      "after": {
+        "sha256": "c37a04f9be6c68d941939508046b844d4690a5b1829da09c402dc8e1ca67da18",
+        "bytes": 10119,
+        "normalizedBytes": 10037,
+        "lines": 84,
+        "rules": 76,
+        "declarations": 179
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 70,
+          "selectors": [
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-group-identity small",
+            "#overlay .card.page #hubMain.pg.hub.hub-cover .coll-ms"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "color",
+              "#717679",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "before": {
+        "sha256": "3897d2970c06b1f05a3db9b6fb6751eb9b22b0c49ec8e447832798c848c088c9",
+        "bytes": 26367,
+        "normalizedBytes": 26367,
+        "lines": 457,
+        "rules": 95,
+        "declarations": 248
+      },
+      "after": {
+        "sha256": "6eeeca80708ab843b17aeffefc8eec962489f96dc70f4809cb6ceb44a4b4a0c8",
+        "bytes": 26348,
+        "normalizedBytes": 26348,
+        "lines": 457,
+        "rules": 94,
+        "declarations": 247
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 325,
+          "selectors": [
+            ".doom-xp .doom-xp-note b",
+            ".doom-xp .doom-xp-note .gold"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "color",
+              "#f4e2a5",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "before": {
+        "sha256": "f37522093038af2e44ad82ff5fb2732640c93d290dd73484d37f077c4888a069",
+        "bytes": 25076,
+        "normalizedBytes": 25076,
+        "lines": 500,
+        "rules": 132,
+        "declarations": 392
+      },
+      "after": {
+        "sha256": "9dc1ee786652e8b3e11771ac0c8ba6be0f1fccb21e1dfe6958fd7536940905e3",
+        "bytes": 24946,
+        "normalizedBytes": 24946,
+        "lines": 496,
+        "rules": 131,
+        "declarations": 389
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 449,
+          "selectors": [
+            "#overlay .pg.settings-page .chk:has(input:focus-visible)",
+            "#overlay .sugin-page .sugin-exit:focus-visible,\n#overlay .card.page:has(.pg.settings-page) .ov-x:focus-visible"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "outline",
+              "1px solid #e6cb76cc",
+              false
+            ],
+            [
+              "decl",
+              "outline-offset",
+              "2px",
+              false
+            ],
+            [
+              "decl",
+              "box-shadow",
+              "0 0 0 1px var(--bg-deep), 0 0 12px rgba(230,203,118,.35)",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "before": {
+        "sha256": "e0a96589498528969f5abafaf675043b2af50e8d8f6095cfef26476572bc3fbf",
+        "bytes": 21033,
+        "normalizedBytes": 21033,
+        "lines": 440,
+        "rules": 98,
+        "declarations": 244
+      },
+      "after": {
+        "sha256": "910c277d32a4858ed32b0e1e53117c3cf11ea4a278298fc3986b07900dfb3f00",
+        "bytes": 20709,
+        "normalizedBytes": 20709,
+        "lines": 435,
+        "rules": 98,
+        "declarations": 242
+      },
+      "operations": [
+        {
+          "kind": "shared-pseudo-ornament",
+          "selectors": [
+            ".slot-page .slot-deck::before,\n.slot-page .slot-deck::after"
+          ],
+          "properties": [
+            "background",
+            "filter"
+          ],
+          "independentProperties": [
+            "left",
+            "right",
+            "transform",
+            "animation-delay"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "before": {
+        "sha256": "610b3a1bdadd2fec822c245d61e28ab3360298738312b4cc93f9351ca4ec6302",
+        "bytes": 1309,
+        "normalizedBytes": 1309,
+        "lines": 17,
+        "rules": 12,
+        "declarations": 25
+      },
+      "after": {
+        "sha256": "68ff398ca13450f90147fafababccead62426faba994eb20e45e5969fce85acb",
+        "bytes": 1267,
+        "normalizedBytes": 1267,
+        "lines": 17,
+        "rules": 11,
+        "declarations": 24
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 10,
+          "selectors": [
+            ".camp-entry-cut.page-cut-waiting,\n.camp-entry-cut.page-cut-waiting *",
+            "#overlay[data-camp-entry=\"preparing\"] #hubMain *,\n#overlay[data-camp-entry=\"preparing\"] .camp-entry-ghost,\n#overlay[data-camp-entry=\"preparing\"] > .card::after"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation-play-state",
+              "paused",
+              true
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "before": {
+        "sha256": "a3bee6843a43cfb6a78fc99cc032e14cd2c81f17fc7892cd28e85305b353d330",
+        "bytes": 3328,
+        "normalizedBytes": 3328,
+        "lines": 30,
+        "rules": 17,
+        "declarations": 61
+      },
+      "after": {
+        "sha256": "f994f918d02dde18af180fcbd831491750e716774af98b66ec56c980869dc844",
+        "bytes": 3299,
+        "normalizedBytes": 3299,
+        "lines": 30,
+        "rules": 16,
+        "declarations": 60
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 16,
+          "selectors": [
+            "body[data-render-quality=\"low\"] #title :is(.home-snow,.home-near-snow,.home-mist,.home-grain,.home-spark,.home-beams)",
+            "body[data-render-quality=\"balanced\"] #title :is(.home-near-snow,.home-mist,.home-grain)"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              true
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "before": {
+        "sha256": "08f821034291c7d648150139a51b95cdd9b8c4e67821fe3aec19cb3e14a5ea3c",
+        "bytes": 13172,
+        "normalizedBytes": 13169,
+        "lines": 91,
+        "rules": 185,
+        "declarations": 505
+      },
+      "after": {
+        "sha256": "e0bd41b271656dacd0a2f6ae1d11f5e4e9a98734a36130bec3d0089d6475c998",
+        "bytes": 13148,
+        "normalizedBytes": 13145,
+        "lines": 93,
+        "rules": 183,
+        "declarations": 503
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 3,
+          "selectors": [
+            ".tier-0 .extra,.tier-1 .extra",
+            ".tier-0 .higher,.tier-1 .higher,.tier-2 .higher"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 3,
+          "selectors": [
+            ".tier-0 .extra,.tier-1 .extra,\n.tier-0 .higher,.tier-1 .higher,.tier-2 .higher",
+            ".no-decoration .ornament"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/scenes.css",
+      "before": {
+        "sha256": "3e36930fa3131fc37d2c353ca5b04535e7fbaa7bf1f1133fa1ceaa6352aa3e66",
+        "bytes": 44058,
+        "normalizedBytes": 44058,
+        "lines": 543,
+        "rules": 322,
+        "declarations": 889
+      },
+      "after": {
+        "sha256": "873869ef097c8a8247f7c598648cdffb0647b608ec7dbc617abe89ce024b90d5",
+        "bytes": 43967,
+        "normalizedBytes": 43967,
+        "lines": 543,
+        "rules": 320,
+        "declarations": 887
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 4,
+          "selectors": [
+            "#overlay .card.scene::before",
+            "#overlay .card.scene > h2"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 541,
+          "selectors": [
+            "#overlay .scene[data-asset-key=\"scene-event-cobbler\"]",
+            "#overlay .node-pg[data-asset-key=\"scene-event-cobbler\"]"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "background-image",
+              "url('../assets/scenes/event-cmtn7qttxqo4.webp')",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "before": {
+        "sha256": "3b5fc456c2ee146b35645e71a57814ac3a6ffad8b4f0c51b3db8d7fe956cd827",
+        "bytes": 16352,
+        "normalizedBytes": 16079,
+        "lines": 274,
+        "rules": 80,
+        "declarations": 331
+      },
+      "after": {
+        "sha256": "173fa51a8d22255684557884af306059dd962f51b54e112092194932636bdcfe",
+        "bytes": 16333,
+        "normalizedBytes": 16061,
+        "lines": 274,
+        "rules": 79,
+        "declarations": 330
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 121,
+          "selectors": [
+            "#overlay .settings-tabbed .set-h::before,\r\n#overlay .settings-tabbed .set-h::after",
+            "#overlay .settings-tabbed .set-h .ic"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "before": {
+        "sha256": "0459c08492d3dba156f5c42c96f98396d2fbfe1dfde714b1035fa2ad868d793e",
+        "bytes": 17269,
+        "normalizedBytes": 17269,
+        "lines": 272,
+        "rules": 122,
+        "declarations": 387
+      },
+      "after": {
+        "sha256": "6c82b4b0ffe190f799f1f212fad7859edc6891cdff5f12131e8995485aaaa5ea",
+        "bytes": 17207,
+        "normalizedBytes": 17207,
+        "lines": 272,
+        "rules": 121,
+        "declarations": 384
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 237,
+          "selectors": [
+            "#title.home-composed .home-primary .home-plate::before",
+            "#title.home-composed .home-secondary .home-plate::before"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "inset",
+              "0",
+              false
+            ],
+            [
+              "decl",
+              "background",
+              "rgba(255,255,255,.14)",
+              false
+            ],
+            [
+              "decl",
+              "filter",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "before": {
+        "sha256": "6a026291d0e0979092e185f7a4de047ffdfa2156937c9df7181b6de25b1fbec9",
+        "bytes": 4598,
+        "normalizedBytes": 4598,
+        "lines": 72,
+        "rules": 30,
+        "declarations": 59
+      },
+      "after": {
+        "sha256": "7c04d98f82516d34ac07b8f8b40599ba0928fe003fe8bb698b59fc25e7a49dff",
+        "bytes": 4540,
+        "normalizedBytes": 4540,
+        "lines": 70,
+        "rules": 29,
+        "declarations": 56
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 44,
+          "selectors": [
+            "#overlay .city-run-transition.resume-hold .camp-entry-scenery",
+            "#overlay .city-run-transition.resume-hold .transition-heading *"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "animation",
+              "none",
+              true
+            ],
+            [
+              "decl",
+              "opacity",
+              "1",
+              false
+            ],
+            [
+              "decl",
+              "transform",
+              "none",
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "game/css/winter.css",
+      "before": {
+        "sha256": "47ce218ea036de4b71a5dfcc7db92fcfac2eb3e07e044402933e39f709f0748d",
+        "bytes": 91055,
+        "normalizedBytes": 91055,
+        "lines": 1022,
+        "rules": 708,
+        "declarations": 2165
+      },
+      "after": {
+        "sha256": "6f6658d43f30b96b53f15e74f91867c3b2becac11b31a3d7a0dd83883b606fee",
+        "bytes": 90867,
+        "normalizedBytes": 90867,
+        "lines": 1028,
+        "rules": 707,
+        "declarations": 2155
+      },
+      "operations": [
+        {
+          "kind": "adjacent-equal-block",
+          "line": 7,
+          "selectors": [
+            "#btnTitleMute .ic-sound-off",
+            "#btnTitleMute.muted .ic-sound-on"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "display",
+              "none",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "adjacent-equal-block",
+          "line": 65,
+          "selectors": [
+            ".ak-tl",
+            ".ak-quickref"
+          ],
+          "declarations": [
+            [
+              "decl",
+              "top",
+              "16px",
+              false
+            ]
+          ]
+        },
+        {
+          "kind": "shared-slot-art",
+          "selectors": [
+            ".slot-card.slot-art-1 .slot-card-bg",
+            ".slot-card.slot-art-2 .slot-card-bg",
+            ".slot-card.slot-art-3 .slot-card-bg",
+            ".slot-card.slot-art-4 .slot-card-bg",
+            ".slot-card.slot-art-5 .slot-card-bg"
+          ],
+          "properties": [
+            "background-image",
+            "background-size"
+          ],
+          "independentProperties": [
+            "background-position"
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "file": "game/css/settings-audio.css",
+      "reason": "Existing audio retry test requires the two explicit standalone hidden-state rules; retained unchanged."
+    }
+  ]
+}

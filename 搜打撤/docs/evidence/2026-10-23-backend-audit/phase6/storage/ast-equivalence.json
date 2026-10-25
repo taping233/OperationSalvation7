@@ -1,0 +1,61 @@
+{
+  "source": "game/src/hub/base.js",
+  "before": {
+    "bytes": 45266,
+    "lines": 879,
+    "crlf": 879,
+    "bareLf": 0,
+    "sha256": "6C81008034E007C142377A7B31A3D460CCB6AD892DAFF6CCB6467E7C1B396237"
+  },
+  "after": {
+    "bytes": 45126,
+    "lines": 870,
+    "crlf": 870,
+    "bareLf": 0,
+    "sha256": "D3652CA05F8835770C7E1D6AF8EEDA1598E4C26354EC97733BDD02D1B00980DF"
+  },
+  "delta": {
+    "added": 11,
+    "removed": 20,
+    "netRemoved": 9
+  },
+  "checks": {
+    "helperAstMatchesDeclaredSkeleton": true,
+    "functions": [
+      {
+        "function": "upgradeBag",
+        "fullExpandedFunctionAstEqual": true,
+        "eligibility": "same expression, once, before mutate",
+        "preparation": "same complete ordered statement list inside mutate callback",
+        "failure": "returns false before mutate or preparation",
+        "success": "same ok truthiness, level-up sound, returned value"
+      },
+      {
+        "function": "upgradePet",
+        "fullExpandedFunctionAstEqual": true,
+        "eligibility": "same expression, once, before mutate",
+        "preparation": "same complete ordered statement list inside mutate callback",
+        "failure": "returns false before mutate or preparation",
+        "success": "same ok truthiness, level-up sound, returned value"
+      },
+      {
+        "function": "upgradeStash",
+        "fullExpandedFunctionAstEqual": true,
+        "eligibility": "same expression, once, before mutate",
+        "preparation": "same complete ordered statement list inside mutate callback",
+        "failure": "returns false before mutate or preparation",
+        "success": "same ok truthiness, level-up sound, returned value"
+      },
+      {
+        "function": "upgradeNestBag",
+        "fullExpandedFunctionAstEqual": true,
+        "eligibility": "same expression, once, before mutate",
+        "preparation": "same complete ordered statement list inside mutate callback",
+        "failure": "returns false before mutate or preparation",
+        "success": "same ok truthiness, level-up sound, returned value"
+      }
+    ],
+    "wholeFileAstEqualAfterInliningHelper": true,
+    "scope": "Static syntax/AST/diff only; game source was not imported or executed."
+  }
+}

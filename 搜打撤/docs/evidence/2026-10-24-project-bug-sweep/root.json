@@ -1,0 +1,39 @@
+{
+  "owner": "Friday / 01a16995",
+  "fixedRootCauses": 3,
+  "fixes": [
+    {
+      "id": "ROOT-1",
+      "summary": "LLM只校验动作形状而接受不在当前清单的商品、卡牌或移动目标；现在逐参数匹配，失败重试并回退。",
+      "sources": [
+        "game/src/agent/agent.llm.runtime.js"
+      ],
+      "newTest": "tests/project-bug-sweep-llm-1024.test.js",
+      "before": "6 failing reproductions",
+      "after": "5 related files / 25 passed; subsequent source-identity binding validated by agent.json"
+    },
+    {
+      "id": "ROOT-2",
+      "summary": "追加跑局或导出JSON会把统计归一化字段写入历史记录；分开原始存储读取与统计安全视图，旧记录保持原字段。",
+      "sources": [
+        "game/src/agent/agent.recorder.js"
+      ],
+      "newTest": "tests/project-bug-sweep-records-1024.test.js",
+      "before": "2 failing reproductions",
+      "after": "5 related files / 27 passed including legacy corrupt-record and extraction receipt contracts"
+    },
+    {
+      "id": "ROOT-3",
+      "summary": "卡库同步沙箱遗漏迁移规则构造器及R别名，导致同步与依赖它的审计无法启动；接回生产共享实现与导入别名。",
+      "sources": [
+        "scripts/sync-cards-from-live.mjs"
+      ],
+      "validation": "catalog-regressions.json中五个相关测试文件通过；card-sync-slices的两个既有夹具失败独立保留。"
+    }
+  ],
+  "fixturesUpdated": {
+    "tests/agent-llm.test.js": "纠错后的回复改成实际在观测清单中的动作，保留原重试次数断言。",
+    "tests/agent-llm-abort.test.js": "正常取消链fixture加入回复所用noop动作，取消/超时断言不变。"
+  },
+  "scope": "Vite only; preserve previous uncommitted changes; no build, commit or push"
+}

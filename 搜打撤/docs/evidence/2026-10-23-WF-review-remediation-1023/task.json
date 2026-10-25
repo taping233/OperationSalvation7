@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-review-remediation-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "落实两份10月23日审阅意见；保留横向手牌，奖励布局统一重做；地图恢复原版并移除当前目标，公共控件使用透明玻璃；冻结地图往返代价及节点数量",
+  "paths": [
+    "game/src",
+    "game/css",
+    "game/index.html",
+    "tests",
+    "docs/evidence/2026-10-23-WF-review-remediation-1023",
+    "docs/rules.md",
+    "docs/save-format.md",
+    "docs/architecture.md",
+    "docs/audio-system.md",
+    "docs/production/art/VISUAL-BIBLE.md",
+    "scripts/runtime-asset-redundancy-review.mjs"
+  ],
+  "doneWhen": [
+    "已授权建议有实现与定向验证，排除项保持原规则",
+    "按老板最新指令取消后续实页验证，未验范围如实记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原60失败文件加6近邻守卫共1041项通过；语法类型完整ESLint及文档检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "老板取消后续实页验证，最终外观与完整交互未验收；未构建提交推送，远端CI未覆盖本轮"
+  ],
+  "updatedAt": "2026-10-23T11:39:42.031Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

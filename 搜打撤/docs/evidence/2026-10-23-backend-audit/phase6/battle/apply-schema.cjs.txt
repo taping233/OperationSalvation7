@@ -1,0 +1,128 @@
+const fs = require('node:fs');
+const crypto = require('node:crypto');
+const cp = require('node:child_process');
+const assert = require('node:assert/strict');
+const acorn = require('acorn');
+const out = 'docs/evidence/2026-10-23-backend-audit/phase6/battle';
+const file = 'game/src/cards/card-rules.schema.js';
+const bytes = fs.readFileSync(file), before = bytes.toString('utf8');
+const sha = data => crypto.createHash('sha256').update(data).digest('hex');
+const baseSha256 = sha(bytes);
+const parse = source => acorn.parse(source, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
+const ast = parse(before), eol = before.includes('\r\n') ? '\r\n' : '\n';
+const groups = JSON.parse(fs.readFileSync(out + '/schema-candidates.json', 'utf8')).groups;
+const helperText = `function validateOptionalPositiveInteger(record, field, path, error) {
+  if (record[field] !== undefined && !isPositiveInteger(record[field])) {
+    error(\`\${path}.\${field}\`, 'must be a positive integer');
+  }
+}
+
+function validateOptionalTrue(record, field, path, error) {
+  if (record[field] !== undefined && record[field] !== true) {
+    error(\`\${path}.\${field}\`, 'must equal true when provided');
+  }
+}
+
+function validateOperationKeys(operation, allowed, path, op, error) {
+  for (const key of Object.keys(operation)) {
+    if (!allowed.has(key)) error(\`\${path}.\${key}\`, \`is not accepted for \${op} operations\`);
+  }
+}
+
+`.replace(/\n/g, eol);
+const helperAst = parse(helperText);
+const helpers = Object.fromEntries(helperAst.body.map(node => [node.id.name, node]));
+const changes = [];
+for (const [group, name] of [['positiveInteger', 'validateOptionalPositiveInteger'], ['trueWhenProvided', 'validateOptionalTrue']]) {
+  for (const item of groups[group]) {
+    assert.equal(before.slice(item.start, item.end), item.source, 'Candidate source changed');
+    changes.push({ start: item.start, end: item.end, fromLine: item.fromLine, toLine: item.toLine, kind: group, helper: name, record: item.record, field: item.field, source: `${name}(${item.record}, ${JSON.stringify(item.field)}, path, error);` });
+  }
+}
+function visit(node, callback) {
+  if (!node || typeof node !== 'object') return;
+  if (node.type) callback(node);
+  for (const [key, value] of Object.entries(node)) if (!['start', 'end', 'loc'].includes(key)) {
+    if (Array.isArray(value)) value.forEach(child => visit(child, callback)); else if (value && typeof value === 'object') visit(value, callback);
+  }
+}
+visit(ast, node => {
+  if (node.type !== 'ForOfStatement' || node.await || node.left.declarations?.[0]?.id.name !== 'key') return;
+  if (node.right.type !== 'CallExpression' || node.right.callee.object?.name !== 'Object' || node.right.callee.property?.name !== 'keys' || node.right.arguments[0]?.name !== 'operation') return;
+  if (node.body.type !== 'BlockStatement' || node.body.body.length !== 1) return;
+  const conditional = node.body.body[0], check = conditional.test?.argument;
+  if (conditional.type !== 'IfStatement' || conditional.alternate || conditional.test.type !== 'UnaryExpression' || conditional.test.operator !== '!' || check?.type !== 'CallExpression' || check.callee.property?.name !== 'has' || check.arguments.length !== 1 || check.arguments[0]?.name !== 'key') return;
+  const allowed = check.callee.object;
+  if (allowed.type !== 'Identifier') return;
+  const statement = conditional.consequent, call = statement.expression;
+  if (statement.type !== 'ExpressionStatement' || call?.type !== 'CallExpression' || call.callee.name !== 'error' || call.arguments.length !== 2) return;
+  const [target, message] = call.arguments;
+  if (target.type !== 'TemplateLiteral' || target.expressions.length !== 2 || target.expressions[0].name !== 'path' || target.expressions[1].name !== 'key' || target.quasis.map(quasi => quasi.value.cooked).join('|') !== '|.|') return;
+  let label;
+  if (message.type === 'Literal' && typeof message.value === 'string') {
+    const match = message.value.match(/^is not accepted for (.+) operations$/); if (!match) return;
+    label = JSON.stringify(match[1]);
+  } else if (message.type === 'TemplateLiteral' && message.expressions.length === 1 && message.expressions[0].name === 'op' && message.quasis.map(quasi => quasi.value.cooked).join('|') === 'is not accepted for | operations') label = 'op';
+  else return;
+  changes.push({ start: node.start, end: node.end, fromLine: node.loc.start.line, toLine: node.loc.end.line, kind: 'operationKeys', helper: 'validateOperationKeys', allowed: allowed.name, label, source: `validateOperationKeys(operation, ${allowed.name}, path, ${label}, error);` });
+});
+assert.equal(changes.filter(change => change.kind === 'positiveInteger').length, 17);
+assert.equal(changes.filter(change => change.kind === 'trueWhenProvided').length, 14);
+assert.equal(changes.filter(change => change.kind === 'operationKeys').length, 11);
+for (const name of Object.keys(helpers)) assert.equal(ast.body.some(node => node.id?.name === name), false);
+let after = before;
+for (const change of [...changes].sort((a, b) => b.start - a.start)) after = after.slice(0, change.start) + change.source + after.slice(change.end);
+const insertion = '// v2 —— 条件对象'; const index = after.indexOf(insertion); assert.ok(index >= 0);
+after = after.slice(0, index) + helperText + after.slice(index);
+const afterAst = parse(after);
+// Substitute only value identifiers; dot-property identifiers are names, not reads.
+function substitute(node, parameters, noncomputedProperty = false) {
+  if (!node || typeof node !== 'object') return node;
+  if (Array.isArray(node)) return node.map(child => substitute(child, parameters));
+  if (node.type === 'Identifier' && !noncomputedProperty && Object.hasOwn(parameters, node.name)) return parameters[node.name];
+  return Object.fromEntries(Object.entries(node).map(([key, child]) => [key, substitute(child, parameters, node.type === 'MemberExpression' && key === 'property' && !node.computed)]));
+}
+function normalize(node, expand = false) {
+  if (!node || typeof node !== 'object') return node;
+  if (Array.isArray(node)) return node.map(child => normalize(child, expand)).filter(child => child !== null);
+  if (expand && node.type === 'FunctionDeclaration' && Object.hasOwn(helpers, node.id.name)) return null;
+  if (expand && node.type === 'ExpressionStatement' && node.expression.type === 'CallExpression' && Object.hasOwn(helpers, node.expression.callee.name)) {
+    const fn = helpers[node.expression.callee.name], args = node.expression.arguments;
+    assert.equal(fn.body.body.length, 1); assert.equal(fn.params.length, args.length);
+    return normalize(substitute(fn.body.body[0], Object.fromEntries(fn.params.map((parameter, index) => [parameter.name, args[index]]))), false);
+  }
+  if (node.type === 'MemberExpression') {
+    const staticKey = !node.computed && node.property.type === 'Identifier' ? node.property.name : node.computed && node.property.type === 'Literal' && typeof node.property.value === 'string' ? node.property.value : null;
+    if (staticKey !== null) return { type: 'MemberExpression', object: normalize(node.object, expand), key: staticKey, optional: node.optional };
+  }
+  if (node.type === 'TemplateLiteral') {
+    let text = node.quasis[0].value.cooked; const quasis = [], expressions = [];
+    for (let index = 0; index < node.expressions.length; index++) {
+      const expression = node.expressions[index];
+      if (expression.type === 'Literal' && typeof expression.value === 'string') text += expression.value + node.quasis[index + 1].value.cooked;
+      else { quasis.push(text); expressions.push(normalize(expression, expand)); text = node.quasis[index + 1].value.cooked; }
+    }
+    quasis.push(text);
+    if (!expressions.length) return { type: 'Literal', value: text };
+    return { type: 'TemplateLiteral', quasis, expressions };
+  }
+  return Object.fromEntries(Object.entries(node).filter(([key]) => !['start', 'end', 'loc', 'raw'].includes(key)).map(([key, value]) => [key, normalize(value, expand)]));
+}
+assert.deepEqual(normalize(ast), normalize(afterAst, true), 'Complete module expanded AST must remain equivalent');
+const backup = out + '/card-rules.schema.js.before.txt', preview = out + '/card-rules.schema.js.candidate.txt';
+fs.writeFileSync(backup, bytes); fs.writeFileSync(preview, after);
+const counts = cp.spawnSync('git', ['diff', '--no-index', '--numstat', '--', backup, preview], { encoding: 'utf8' });
+assert.equal(counts.status, 1); const match = counts.stdout.match(/^(\d+)\s+(\d+)\s+/); assert.ok(match);
+const patch = cp.spawnSync('git', ['diff', '--no-index', '--no-ext-diff', '--', backup, preview], { encoding: 'utf8' }); assert.equal(patch.status, 1);
+fs.writeFileSync(out + '/changes.patch', patch.stdout.replace(/^diff --git .*$/m, `diff --git a/${file} b/${file}`).replace(/^--- .*$/m, `--- a/${file}`).replace(/^\+\+\+ .*$/m, `+++ b/${file}`));
+const receipt = { status: 'ready_not_applied', scope: [file], baseSha256, finalSha256: sha(Buffer.from(after)), baseline: backup, candidate: preview, insertions: Number(match[1]), deletions: Number(match[2]), netLinesRemoved: Number(match[2]) - Number(match[1]), netBytesRemoved: bytes.length - Buffer.byteLength(after), sourceLinesBefore: before.split(/\r?\n/).length - 1, sourceLinesAfter: after.split(/\r?\n/).length - 1, helperFunctions: Object.keys(helpers), replacements: changes.map(({ source, start, end, ...change }) => change), staticProof: { completeModuleAstEqualAfterHelperExpansion: true, memberReadsShortCircuitAndCallbackOrderPreserved: true, dynamicOpMessageCoercionRemainsInsidePerUnknownKeyError: true, exceptionPredicatesAndMessagesRetained: true, noImportsOrExportsChanged: true, noModuleOrGameExecution: true }, testsRun: false, buildRun: false, browserRun: false };
+if (process.argv.includes('--apply')) {
+  assert.equal(sha(fs.readFileSync(file)), baseSha256, 'Source changed during proof');
+  fs.writeFileSync(file, after); assert.equal(sha(fs.readFileSync(file)), receipt.finalSha256);
+  const syntax = cp.spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' }); assert.equal(syntax.status, 0, syntax.stderr);
+  const diff = cp.spawnSync('git', ['diff', '--check', '--', file], { encoding: 'utf8' }); assert.equal(diff.status, 0, diff.stdout + diff.stderr);
+  receipt.status = 'applied_complete_uncommitted'; receipt.syntaxExitCode = syntax.status; receipt.diffCheckExitCode = diff.status;
+}
+fs.writeFileSync(out + '/receipt.json', JSON.stringify(receipt, null, 2) + '\n');
+fs.writeFileSync(out + '/apply-schema.cjs.txt', fs.readFileSync(__filename));
+process.stdout.write(JSON.stringify({ ...receipt, replacements: { positiveInteger: 17, trueWhenProvided: 14, operationKeys: 11 } }, null, 2) + '\n');

@@ -1,0 +1,84 @@
+{
+  "recipe_version": "3.4",
+  "payload": {
+    "input": "Distant backdrop only: expansive pale winter sky, a very distant ruined elevated railway bridge spanning the width, a few quiet city silhouettes submerged in blue gray fog. Horizon around 48 percent height. Lower third uninterrupted pale cold atmospheric haze. Broad calm value masses. No foreground framing.\n\nIndependent 2D game environment layer. Snowbound abandoned railway station, side-on horizontal camera, no vanishing-point tilt. Entire canvas 1344 by 768. Matte painterly anime background with broad deliberate brush shapes, selective broken edges, slate blue and muted teal with restrained amber light. No characters, no lettering, no interface. Consistent station floor registration at y=522 (68 percent height).\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 10250101,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, animal, photorealistic, 3d render, glossy plastic, excessive tiny details, symmetrical composition, nearby buildings, train, platform, floor, tracks, lamp, pillar, foreground objects",
+      "characterPrompts": [
+        {
+          "prompt": "",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "Distant backdrop only: expansive pale winter sky, a very distant ruined elevated railway bridge spanning the width, a few quiet city silhouettes submerged in blue gray fog. Horizon around 48 percent height. Lower third uninterrupted pale cold atmospheric haze. Broad calm value masses. No foreground framing.\n\nIndependent 2D game environment layer. Snowbound abandoned railway station, side-on horizontal camera, no vanishing-point tilt. Entire canvas 1344 by 768. Matte painterly anime background with broad deliberate brush shapes, selective broken edges, slate blue and muted teal with restrained amber light. No characters, no lettering, no interface. Consistent station floor registration at y=522 (68 percent height).\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, person, character, animal, photorealistic, 3d render, glossy plastic, excessive tiny details, symmetrical composition, nearby buildings, train, platform, floor, tracks, lamp, pillar, foreground objects",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  }
+}

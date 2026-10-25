@@ -1,0 +1,77 @@
+
+> codename7-soudache-game@0.60.0 test:target
+> node scripts/acceptance-gate.mjs --target-tests tests/card-audit.test.js tests/card-description-audit-battle.test.js tests/card-effect-semantics.test.js tests/card-description-text.test.js tests/card-description-fix-target-effects.test.js tests/card-description-fix-pools.test.js tests/card-description-fix-lifecycle.test.js tests/card-description-fix-auxiliary.test.js
+
+[gate] 指定 Vitest
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+·····························································x·································x·······························stdout | tests/card-audit.test.js > 全卡库描述实装审计 > 未识别项必须是有明确原因的已知例外
+
+===== 未识别句式的战斗卡：21 张 =====
+【能源结晶】(道具) => 对应消耗区为空时不可使用
+【破甲箭】(武术) => 造成（你的攻击力 - 1）点攻击伤害
+【镭射】(法术) => 注能(1)：伤害+3
+【影噬】(武术) => 本回合偷取 1 名敌人的攻击力至1点
+【圣光治愈】(法术) => 注能（1）：回复 2 倍于被注能卡牌价格的血量
+【星陨之力】(法术) => 注能(2)：施放 3 次火球
+【受缚之残影】(能力卡) => 深海封印：对战开始时，将本牌与四张「封印肢体」洗入牌库
+【火焰形态】(法术) => 此后每注能2点，法伤额外+1
+【复原药水】(道具) => 对应消耗区为空时不可使用
+【诅咒之刃】(武术) => 攻（+3），附加手牌中的招式所具有的全部诅咒效果
+【余烬爆裂】(法术) => 若击杀敌人，再施放一次
+【法力奔涌】(法术) => 对随机敌人释放4个随机法术（这些随机法术默认已注能）
+【腐化之种】(法术) => 被标记的敌人死亡时，对所有敌人造成等同于其死亡时中毒层数的真实伤害
+【龙焰射线】(法术) => 注能（1）：造成11点法伤
+【饱和打击】(法术) => 造成7点法伤，如果消灭敌人，额外释放一次
+【邪能护体】(法术) => 注能（2）：抽3张牌，本回合免疫所有伤害和诅咒效果
+【充能射线】(法术) => 造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2
+【冷冻射线】(法术) => 造成4点法伤
+【穷鬼套餐】(装备) => 如果你的手牌数小于等于3，你的英雄技能变为0费
+【精神控制】(法术) => 选择一名受伤的非BOSS敌人，使其变为己方随从
+【混乱套牌】(法术) => 将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌
+
+
+stdout | tests/card-audit.test.js > 结构化词条与描述一致性（合并残留检查） > draw/heal/armor/infuse 字段必须在描述中有依据
+
+===== 词条与描述不一致：
+
+
+········································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/card-description-audit-battle.test.js > 全卡描述修复回归：卡面正确结果与待裁定边界 > 高端研发：实际发现流程2费moves池同时包含武术与法术
+TypeError: Cannot read properties of null (reading 'options')
+ ❯ tests/card-description-audit-battle.test.js:155:18
+    153|     });
+    154|     flow.processDiscoverQueue();
+    155|     expect(state.options.map(c => c.type).sort()).toEqual(['武术', '法术']…
+       |                  ^
+    156|     record('tt12-hitechrd', '实际发现流程，2费武术与2费法术各1张输入', state.options.map…
+    157|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/card-description-text.test.js > 卡牌展示文案与结算文本隔离 > 共同入口使用同一文案，源卡、费用、规则与卡库存储保持原字节
+Error: [sync-cards] 卡库源码沙箱求值失败: eliteBestiaryCards is not defined
+ ❯ fail scripts/sync-cards-from-live.mjs:108:32
+    106| const MIGRATION_MANIFEST = 'card-migrations.js';
+    107| 
+    108| function fail(message) { throw new Error(`[sync-cards] ${message}`); }
+       |                                ^
+    109| function arg(name, argv) { const i = argv.indexOf(name); return i >= 0…
+    110| 
+ ❯ sourceCardLibrary scripts/sync-cards-from-live.mjs:199:17
+ ❯ tests/card-description-text.test.js:72:38
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 6 passed (8)
+      Tests  2 failed | 165 passed (167)
+   Start at  19:28:28
+   Duration  9.06s (transform 838ms, setup 0ms, collect 8.87s, tests 7.27s, environment 7.91s, prepare 1.06s)
+
+[gate] FAIL：指定 Vitest 失败（exit 1）

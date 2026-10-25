@@ -1,0 +1,29 @@
+{
+  "status": "installed",
+  "channels": [
+    "NAI V5 Full",
+    "built-in image_gen: repaint and local fringe correction"
+  ],
+  "asset": "game\\assets\\reconstruction\\wallpaper-baita-station-1020.webp",
+  "size": [
+    1673,
+    940
+  ],
+  "bytes": 369988,
+  "sha256": "ef45420901f59620c401dad7bcf5aff0a83e084270407ac5da764a1c0a54a712",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-ec3ac202-f8b9-4838-9fa1-f77b26f31c6c.png",
+  "source_sha256": "77562a370776fa6a91031317866ad4b25dc3c9e8f39890c5dad14e580e2218f7",
+  "before": ".tmp\\nai\\baita-station-reset-1024\\before-wallpaper.webp",
+  "before_sha256": "a93b0c9c35b3a73536b27d106f0ef6148b6b2dcb09071f2c4d9fc925ed4d261f",
+  "draft": ".tmp\\nai\\baita-station-reset-1024\\nai5-draft.png",
+  "nai_seed": 1067444622,
+  "builtin_first": ".tmp\\nai\\baita-station-reset-1024\\builtin-first.png",
+  "builtin_final": ".tmp\\nai\\baita-station-reset-1024\\builtin-final.png",
+  "prompt_files": [
+    "builtin-prompt.txt",
+    "fringe-correction-prompt.txt"
+  ],
+  "review": "目视保留冬装、持票上台阶、背景人流；重绘台阶、落脚与持票动作；追加局部修正为观众左侧绿眼可见、右侧眼被刘海遮住，金夹在露眼侧，保留绿色贝雷帽",
+  "verification": "按老板要求不测试、不打开游戏实页；只执行图片转换、尺寸与哈希登记",
+  "large_binary_policy": "原始PNG均在根.tmp，不进Git；获取方式为本次NAI请求及内置ImageGen，路径/哈希见本记录与nai-request.json"
+}

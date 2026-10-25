@@ -1,0 +1,20 @@
+[
+  {
+    "path": "game/src/run/map-route-v2.js",
+    "sha256": "36F78F9CCECC6ACDEAC2342EF604D7371F70ABD4306E595C436FE7704E69B7EF",
+    "added": 1,
+    "removed": 10
+  },
+  {
+    "path": "game/src/agent/agent.runner.runtime.js",
+    "sha256": "5E31E48661C1EA0753F88FF87CB24EB84F8BFD5060FF3D02554F8AB7250DB84E",
+    "added": 0,
+    "removed": 2
+  },
+  {
+    "path": "game/src/agent/agent.replay.runtime.js",
+    "sha256": "2301C06C4F455C0E421EA06AD238E4BE009A7A8AC82E68B45BA28E5106CAF7A5",
+    "added": 0,
+    "removed": 4
+  }
+]

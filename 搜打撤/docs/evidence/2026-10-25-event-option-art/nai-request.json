@@ -1,0 +1,59 @@
+{
+  "status": "generated",
+  "purpose": "event option material only; retain scene background",
+  "recipe_version": "3.4",
+  "payload": {
+    "input": "no humans, a single blank wide horizontal game decision banner, mineral-white coated archival paper laminated over dark slate-blue ink, front orthographic view, isolated graphic design material\n\nOriginal painted interface material for a winter-city exploration event choice. The center is an uninterrupted pale ivory writing area; no text, no symbols, no scenery.\n\nOne continuous horizontal banner spanning almost the full canvas width, centered vertically, approximately five times wider than tall. Straight left edge with a narrow dark registration tab, subtly irregular dry-brush feathered right edge, calm blank central 80 percent. Plain neutral dark background around the banner.\n\nMatte chalk white, very pale gray-green, desaturated charcoal blue. Delicate edge fibers and layered painted ink only at the perimeter, broad clean central color, no glossy bevel, no glow, no metal frame.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1382502257,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, landscape, people, architecture, multiple panels, letters, numbers, rounded rectangle, neon, ornate border",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "no humans, a single blank wide horizontal game decision banner, mineral-white coated archival paper laminated over dark slate-blue ink, front orthographic view, isolated graphic design material\n\nOriginal painted interface material for a winter-city exploration event choice. The center is an uninterrupted pale ivory writing area; no text, no symbols, no scenery.\n\nOne continuous horizontal banner spanning almost the full canvas width, centered vertically, approximately five times wider than tall. Straight left edge with a narrow dark registration tab, subtly irregular dry-brush feathered right edge, calm blank central 80 percent. Plain neutral dark background around the banner.\n\nMatte chalk white, very pale gray-green, desaturated charcoal blue. Delicate edge fibers and layered painted ink only at the perimeter, broad clean central color, no glossy bevel, no glow, no metal frame.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, landscape, people, architecture, multiple panels, letters, numbers, rounded rectangle, neon, ornate border",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\event-option-art-1025\\option-draft.png",
+  "seed": 1382502257,
+  "sha256": "cb33523827056484de45ef020798871bb9a48ecef06faef07fb72861c95a4b22"
+}

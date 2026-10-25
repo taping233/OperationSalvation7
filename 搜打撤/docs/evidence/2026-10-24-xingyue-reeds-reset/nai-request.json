@@ -1,0 +1,102 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman standing among a field of tall silver reed plumes at sunset, calm quiet expression, looking gently toward the viewer, her long thick braid and warm scarf carried sideways by the wind, right hand lightly gathering her scarf at her upper chest, left hand lowered beside her hip brushing a few reed plumes\n\nWide game homepage wallpaper, a quiet winter sunset walk through silver reeds, completely redesigned warm contemporary outdoor outfit.\n\nLandscape composition, woman on the left-center at about forty percent of image width, head and both hands visible above the reeds, body below the upper thighs mostly occluded naturally by grasses. Layered reed plumes in the foreground sweep toward the right, spectacular deep blue cloud formations and honey-gold sunset on the right. A few thin wooden path-marker stakes with narrow red ribbons recede through the reeds. Her braid and scarf flow toward the right with the same wind as the reeds and ribbons. Keep distant scenery and outer edges economical for a game-menu overlay, artwork only.\n\nCold silver-blue winter light in reed shadows, warm amber rim light along her face, braid and wool coat, richly colored but controlled dusk sky. Matte deep petrol teal wool overcoat, oatmeal knitted high collar, warm ochre scarf, charcoal skirt, fine clean warm skin, quiet fabric planes and coherent long hair locks, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 562224166,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, priestess dress, cleric robe, shoulder cape, off shoulder jacket, bare shoulders, sleeveless, detached sleeves, short skirt, swimsuit, armor, floating hairpin, halo, lantern, garment logos",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale blonde very long hair in one thick low braid, straight bangs, gold eyes, quiet reserved face, white crescent moon hairpin clipped flat above the bangs slightly to the viewers right, warm contemporary winter clothing, long deep petrol teal double-breasted wool overcoat with modest dark buttons and sleeves to the wrists, oatmeal high neck cable knit sweater, warm ochre wool scarf wrapped once around the neck, charcoal pleated midi skirt, brown ankle boots, natural bare hands",
+          "uc": "bare shoulders, shoulder cape, cleric robe",
+          "center": {
+            "x": 0.4,
+            "y": 0.55
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman standing among a field of tall silver reed plumes at sunset, calm quiet expression, looking gently toward the viewer, her long thick braid and warm scarf carried sideways by the wind, right hand lightly gathering her scarf at her upper chest, left hand lowered beside her hip brushing a few reed plumes\n\nWide game homepage wallpaper, a quiet winter sunset walk through silver reeds, completely redesigned warm contemporary outdoor outfit.\n\nLandscape composition, woman on the left-center at about forty percent of image width, head and both hands visible above the reeds, body below the upper thighs mostly occluded naturally by grasses. Layered reed plumes in the foreground sweep toward the right, spectacular deep blue cloud formations and honey-gold sunset on the right. A few thin wooden path-marker stakes with narrow red ribbons recede through the reeds. Her braid and scarf flow toward the right with the same wind as the reeds and ribbons. Keep distant scenery and outer edges economical for a game-menu overlay, artwork only.\n\nCold silver-blue winter light in reed shadows, warm amber rim light along her face, braid and wool coat, richly colored but controlled dusk sky. Matte deep petrol teal wool overcoat, oatmeal knitted high collar, warm ochre scarf, charcoal skirt, fine clean warm skin, quiet fabric planes and coherent long hair locks, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale blonde very long hair in one thick low braid, straight bangs, gold eyes, quiet reserved face, white crescent moon hairpin clipped flat above the bangs slightly to the viewers right, warm contemporary winter clothing, long deep petrol teal double-breasted wool overcoat with modest dark buttons and sleeves to the wrists, oatmeal high neck cable knit sweater, warm ochre wool scarf wrapped once around the neck, charcoal pleated midi skirt, brown ankle boots, natural bare hands",
+              "centers": [
+                {
+                  "x": 0.4,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, priestess dress, cleric robe, shoulder cape, off shoulder jacket, bare shoulders, sleeveless, detached sleeves, short skirt, swimsuit, armor, floating hairpin, halo, lantern, garment logos",
+          "char_captions": [
+            {
+              "char_caption": "bare shoulders, shoulder cape, cleric robe",
+              "centers": [
+                {
+                  "x": 0.4,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "game/assets/reconstruction/wallpaper-xingyue-reeds-1020.webp",
+      "sha256": "a0a603507f5b11c20fc74a57e34641bf0faf631bac036dd0c8bdb5cd715d53b5",
+      "role": "reeds sunset scene and composition; old clothes explicitly replaced",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "role": "current identity only",
+      "uploaded_to_nai": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\xingyue-reeds-reset-1024\\nai5-draft.png",
+  "seed": 562224166,
+  "sha256": "4e46e27ff59c9f7b756b0ea5190b1ef38357c2e17f0887f7cd1c8074804fca50"
+}

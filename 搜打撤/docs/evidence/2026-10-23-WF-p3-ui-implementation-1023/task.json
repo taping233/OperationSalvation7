@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-p3-ui-implementation-1023",
+  "date": "2026-10-23",
+  "owner": "Friday",
+  "goal": "实施修订后的P3细节计划：设置与卡片状态、稳定BUFF栏、重复占位图标重设计及用途迁移，当前窗口实页验证",
+  "paths": [
+    "docs/evidence/2026-10-23-WF-p3-ui-implementation-1023",
+    "game/src/ui",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.overlays.js",
+    "game/src/battle/view/battle.piles.view.js",
+    "game/src/core/icons-bitmap.js",
+    "game/src/core/semantic-icons.js",
+    "game/assets/ui/semantic-icons",
+    "game/css",
+    "game/src/ui/run-top-bar.js",
+    "game/src/ui/run-top-bar.css",
+    "game/src/ui/map-health-hud.js",
+    "game/src/ui/hud.js",
+    "tests/ui-motion-cascade.test.js",
+    "docs/production/art/VISUAL-BIBLE.md",
+    "docs/production/art/UI-PAGE-COVERAGE.md",
+    "docs/modules/secondary-ui-style.md"
+  ],
+  "doneWhen": [
+    "11项确定整改完成对应真实消费者；6项约束随批验证，9项条件优化有证据才改，2项暂缓不扩展",
+    "重复占位组与单键多义按用途迁移，有真实页面与必要定向验证；保留卡背/地图原画/玩法存档规则",
+    "按当前窗口内置浏览器验证代表页面和差异场景，覆盖与未覆盖分别记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "原28单元覆盖表、P3代码参考与当前消费者已落实；条件未触发/延后项明确；68SVG及21源码107图标token与主代理3参数分义接入。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "各自输入下87组合、7级联、25生命数字、17生命外观/actions、12图标hydrate、75状态结算近邻通过；详见FINAL-ACCEPTANCE，不相加为全量。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex当前自然窗口实页完成状态矩阵/阅读隔离、发现3选1/详情/单发、领奖/背包筛选与减动效、15次生命顶栏切换；真实HP30到23上下相同，背包/设置/发现隐藏与返回恢复。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "20份视觉入口与冻结副本字节一致，交付135相关文件指纹可查；定向ESLint/CSS与docs:check 739链接无发现，交付入口68链接可达。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "未运行脏树build、本地全量或远端CI；前批R沙箱和外属地selector指纹失败未扩修或放宽，未作为全绿。",
+      "result": "unverified"
+    }
+  ],
+  "unverified": [
+    "真实状态施加/到期/死亡全组合、触屏、全部满容量和拖拽、所有首脑/特殊单位与逐帧性能未覆盖；原8条件优化未触发、2扩展延后。",
+    "实页为隔离快照；共享核心与部分消费者另有他人改动，以delivery-inputs的字节比较和分片token保护/主树定向结果为边界。"
+  ],
+  "updatedAt": "2026-10-23T18:36:19.584Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "files": 15,
+  "passed": 266,
+  "failed": 4,
+  "originalRun": "target-tests.json",
+  "refreshedBagRun": "bag-current-tests.json",
+  "comparisonRun": "bag-before-with-concurrent-tests.json",
+  "failures": [
+    {
+      "name": "背包旧详情/页面回调与正常返回 唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常",
+      "file": "D:/素材/代号柒/搜打撤/tests/bag-page-lifecycle-review.test.js",
+      "error": "AssertionError: expected undefined to be true // Object.is equality"
+    },
+    {
+      "name": "新号背包真实入口反馈 结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则",
+      "file": "D:/素材/代号柒/搜打撤/tests/bag-page-lifecycle-review.test.js",
+      "error": "TypeError: Cannot read properties of null (reading 'textContent')"
+    },
+    {
+      "name": "背包单次渲染堆快照 main 每次一次遍历派生两区与容量，动作仍实时查询",
+      "file": "D:/素材/代号柒/搜打撤/tests/bag-render-snapshot.test.js",
+      "error": "AssertionError: expected \"filter\" to not be called at all, but actually been called 2 times"
+    },
+    {
+      "name": "ROOT-06 零依赖自测入口（域目录路径） node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT",
+      "file": "D:/素材/代号柒/搜打撤/tests/selftest-paths.test.js",
+      "error": "AssertionError: 自测未通过："
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "baseline": "node_modules/.cache/lean-refactor-1024/before/",
+  "files": [
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "before": {
+        "sha256": "7c55ac03b71acab3fc5ec6e424691a4fc7e75daf1816474ca79352243e34f587",
+        "lines": 1224,
+        "normalizedBytes": 71813,
+        "tokens": 11641
+      },
+      "after": {
+        "sha256": "fec9731ccaf3bf1914f749345c9f3da28d26f369fec6fcb16378c0b45391f6af",
+        "lines": 1135,
+        "normalizedBytes": 66182,
+        "tokens": 10541
+      },
+      "delta": {
+        "lines": -89,
+        "normalizedBytes": -5631,
+        "tokens": -1100
+      }
+    },
+    {
+      "file": "game/src/cards/card-healing-program.js",
+      "before": {
+        "sha256": null,
+        "lines": 0,
+        "normalizedBytes": 0,
+        "tokens": 0
+      },
+      "after": {
+        "sha256": "1076480cc915fd6901ea1cc6d85dcdd2daf0d32d2199d28bd08f18b5140f1105",
+        "lines": 7,
+        "normalizedBytes": 622,
+        "tokens": 102
+      },
+      "delta": {
+        "lines": 7,
+        "normalizedBytes": 622,
+        "tokens": 102
+      }
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "before": {
+        "sha256": "57c66852c3c3967c0ea149fba583ae5436e7bcb019f9d00504c58c40f1b65c31",
+        "lines": 317,
+        "normalizedBytes": 18231,
+        "tokens": 2468
+      },
+      "after": {
+        "sha256": "68ea343fab43648db80dc962028f9870770c231903c29a69b04e2d8743402b46",
+        "lines": 318,
+        "normalizedBytes": 18319,
+        "tokens": 2470
+      },
+      "delta": {
+        "lines": 1,
+        "normalizedBytes": 88,
+        "tokens": 2
+      },
+      "beforeSource": {
+        "path": "node_modules/.cache/lean-refactor-1024/added-scope-before/scripts/sync-cards-from-live.mjs",
+        "kind": "reconstructed-current-minus-single-owned-module-list-line",
+        "reason": "Parent before caches excluded scripts; this task only added that one module-list item"
+      }
+    }
+  ],
+  "delta": {
+    "lines": -81,
+    "normalizedBytes": -4921,
+    "tokens": -996
+  },
+  "wholeProjectBaseline": {
+    "normalizedBytes": 6601166,
+    "tokens": 836141
+  },
+  "wholeProjectContributionPercentagePoints": {
+    "tokens": 0.11911866539255939,
+    "normalizedBytes": 0.074547436013577
+  },
+  "cardsSubsystemBaselineTokens": 71958,
+  "cardsSubsystemReductionPercent": 1.3869201478640318,
+  "schemaEntryReductionPercent": 9.449360020616785,
+  "cumulativeOwnedChangesFromOriginal": {
+    "tokens": -1527,
+    "normalizedBytes": -7023
+  },
+  "allNewRuntimeFilesIncluded": true,
+  "unusedTrialFiles": [],
+  "restoredTrialConsumers": [
+    {
+      "file": "game/src/battle/core/battle.resolution.domain.js",
+      "normalizedEqual": true
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "normalizedEqual": true
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "normalizedEqual": true
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "normalizedEqual": true
+    },
+    {
+      "file": "game/src/cards/structured-card-description.js",
+      "normalizedEqual": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "event_id": "ev19-potions",
+  "status": "preview-only",
+  "feedback": "上一版太简单，缺少高级感。",
+  "pipeline": [
+    "NAI4.5新构图",
+    "一次内置精修"
+  ],
+  "nai_request": "../.tmp/nai/event-potions-composition-1025/request.json",
+  "builtin_prompt": "../.tmp/nai/event-potions-composition-1025/builtin-prompt.txt",
+  "final": "../.tmp/nai/event-potions-composition-1025/builtin-preview.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-41981e51-8484-41f6-ae1b-1e7fe3b0b0f5.png",
+  "sha256": "671b0c31c402526d7e5bcb659fbc879633cb9f874ebcd8328f325f72ec3b11fb",
+  "runtime_replaced": true,
+  "checks_run": [],
+  "user_review": "2026-10-25老板评价：这个可以。认可本张近景递药构图与光色方向，未授权替换运行图。"
+}

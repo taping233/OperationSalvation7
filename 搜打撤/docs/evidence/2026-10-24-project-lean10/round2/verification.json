@@ -1,0 +1,51 @@
+{
+  "status": "batch-complete-uncommitted-task-paused-by-explicit-user-request",
+  "userInstruction": "弄完这批就暂停吧",
+  "scope": "Current runtime compatibility, 19 dead-DOM CSS files, and 28 test fixture families only. No further candidate work.",
+  "measurement": "measurement.json",
+  "sourceFreeze": "final-owned-paths.json",
+  "sourceShaChecked": 232,
+  "sourceShaMismatches": 0,
+  "runtime": "runtime-plan/verification.json",
+  "css": "dead-dom/README.md",
+  "fixtures": "fixtures/verification.json",
+  "independentFixtureReview": "fixtures/independent-review.json",
+  "finalProducerProof": {
+    "file": "dead-dom/consumer-proof-final.json",
+    "sources": 1947,
+    "shaMismatches": 0,
+    "cssFiles": 19,
+    "retiredTokenChecks": 108
+  },
+  "finalChecks": {
+    "docsExitCode": 0,
+    "diffCheckExitCode": 0,
+    "logs": [
+      {
+        "file": "node_modules/.cache/lean10-round2-docs-final.log",
+        "sha256": "1eb447db93fb6a0589f5d5d8afff9d400bde3dba22c732eebc845c509b3098e5",
+        "bytes": 3362
+      },
+      {
+        "file": "node_modules/.cache/lean10-round2-diff-final.log",
+        "sha256": "d14a888774f49158195b79ce078b228ecc63f4432a7954c3dfb2e493537f9458",
+        "bytes": 10319
+      },
+      {
+        "file": "node_modules/.cache/lean10-round2-css-final.log",
+        "sha256": "a092d65e6a8f815f445fccb58b1659a37504c726397c67273c0214ce16760181",
+        "bytes": 49
+      }
+    ]
+  },
+  "browser": "browser.json",
+  "existingFailuresPreserved": true,
+  "fullSuiteRun": false,
+  "buildRun": false,
+  "commitRun": false,
+  "pushRun": false,
+  "newFilesDeleted": false,
+  "temporaryBrowserTabsClosed": true,
+  "servicesCreated": false,
+  "editingReleased": true
+}

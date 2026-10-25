@@ -1,0 +1,13 @@
+{
+  "platform": "Codex in-app browser",
+  "url": "http://127.0.0.1:5200/dev/transition-reveal-review.html",
+  "input": "真实点击，构造目的页背景；生产控制器",
+  "viewport": "当前窗口，未调整尺寸",
+  "results": [
+    { "scene": "photo", "intermediateFrames": 79, "first": 0.999799, "last": 0, "removed": true },
+    { "scene": "camp", "intermediateFrames": 79, "first": 0.999799, "last": 0, "removed": true },
+    { "scene": "held", "intermediateFrames": 79, "first": 0.999801, "last": 0, "removed": true },
+    { "scene": "departure", "intermediateFrames": 79, "first": 1, "last": 0.000708487, "removed": true }
+  ],
+  "consoleErrorsAndWarnings": []
+}

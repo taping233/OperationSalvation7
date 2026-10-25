@@ -1,0 +1,61 @@
+diff --git a/搜打撤/game/src/battle/effects/battle.acquire-operation.domain.js b/搜打撤/game/src/battle/effects/battle.acquire-operation.domain.js
+--- a/搜打撤/game/src/battle/effects/battle.acquire-operation.domain.js
++++ b/搜打撤/game/src/battle/effects/battle.acquire-operation.domain.js
+@@ -118,46 +118,28 @@
+       return true;
+     }
+ 
+-    if (dest === 'deck') {
+-      // 所有模式都洗入真实牌库，不改变为直接入手。
+-      const gained = [];
+-      for (let k = 0; k < operation.n; k++) {
+-        const c = drawOne();
+-        if (!c) break;
+-        const tpl = decorate(c);
+-        for (let copy = 0; copy < (act === 'dup' ? 2 : 1); copy++) {
+-          addDeckCard(act === 'dup' && copy === 1 ? { ...tpl } : tpl);
+-        }
+-        gained.push(c.name);
+-      }
+-      if (gained.length) {
+-        const counts = {};
+-        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+-        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+-        const deckSize = shuffleDeck();
+-        log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
+-      } else {
+-        log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+-      }
+-      return true;
+-    }
+-
+-    // dest:'hand'——随机/指定直发置入手牌（同名可重复：三重火球「2 张火球」必需）
++    // 直发逐张取卡并立即入区；dup 副本在首份入区后克隆，保持获取触发顺序。
++    const toDeck = dest === 'deck';
++    const addCard = toDeck ? addDeckCard : addTempCard;
+     const gained = [];
+     for (let k = 0; k < operation.n; k++) {
+       const c = drawOne();
+       if (!c) break;
+-      // dup 复制体同样基于 decorate 后的模板（与 deck 路径对齐）：否则 zeroCost/noInfuse 修饰只在首张生效
+       const tpl = decorate(c);
+-      addTempCard(tpl);
+-      if (act === 'dup') addTempCard({ ...tpl });
++      addCard(tpl);
++      if (act === 'dup') addCard({ ...tpl });
+       gained.push(c.name);
+     }
+     if (gained.length) {
+       const counts = {};
+       gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });
+       const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');
+-      log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
++      if (toDeck) {
++        const deckSize = shuffleDeck();
++        log(`[[icon:recycle]] <b>${esc(card.name)}</b>：将 ${detail} 洗入牌库（牌库 ${deckSize} 张，已洗混）`, 'sys');
++      } else {
++        log(`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? `（${esc(label)}池）` : ''}（战斗内临时卡，战后消散）`, 'loot');
++      }
+     } else {
+       log(`[[icon:question]] <b>${esc(card.name)}</b>：卡池里没有符合条件的卡牌`, 'dim');
+     }

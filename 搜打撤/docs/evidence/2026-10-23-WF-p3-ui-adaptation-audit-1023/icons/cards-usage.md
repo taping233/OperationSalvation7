@@ -1,0 +1,95 @@
+# cards icon static consumers
+
+91 matched lines in 44 files. Full dynamic consumer coverage is not claimed.
+
+- `game/src/e2.snapshot.qa.js:53` [property] CARD_BACKS: [{ id: 'classic', name: '行囊粗布', icon: 'cards', from: '默认卡背' }] });
+- `game/src/battle/bag/battle.bag.domain.js:245` [token] instanceRuntime.G.log(\`[[icon:cards]] 抽了 ${got} 张牌\`, 'sys');
+- `game/src/battle/bag/battle.bag.domain.js:288` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>${esc(card.name)}</b>：抽取传说卡【<b>${esc(got.name)}</b>】${got.type === '道具' ? '置入道具栏' : '置入手牌'}\`, 'loot');
+- `game/src/battle/bag/battle.equipment.domain.js:192` [token] instanceRuntime.G.log(\`[[icon:cards]] 【${esc(e.card.name)}】需要先有一张手牌可选，技能次数未消耗\`, 'warn');
+- `game/src/battle/bag/battle.equipment.domain.js:217` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>${esc(e.card.name)}</b>：随机获取 ${got.length} 张卡牌${got.length ? \`（${got.map(esc).join('、')}）\` : ''}\`, 'loot');
+- `game/src/battle/bag/battle.slam-skill.js:13` [property] '法师': { kind: 'acquire',  name: '搜刮', icon: 'cards',  cost: 1, needsTarget: false,
+- `game/src/battle/core/battle.core.js:403` [token] G.log(\`[[icon:cards]] 开发者：获得【${esc(card.name)}】（当前战斗临时卡）\`, 'sys');
+- `game/src/battle/core/battle.core.js:419` [token] G.log(\`[[icon:cards]] 开发者：抽了 <b>${n}</b> 张牌\`, 'sys');
+- `game/src/battle/core/battle.draw.domain.js:46` [token] instanceRuntime.G.log(\`[[icon:cards]] 【${esc(card.name)}】尚未满足施放条件，保留在手牌中\`, 'warn');
+- `game/src/battle/core/battle.draw.domain.js:183` [token] if (moved && instanceRuntime.G?.battleActive) instanceRuntime.G.log(\`[[icon:cards]] 从牌库抽取 ${moved} 张【${esc(type)}】牌\`, 'sys');
+- `game/src/battle/core/battle.engine.factory.domain.js:191` [token] if (n > 0 && instanceRuntime.unyieldRune) { const g = drawCards(1); instanceRuntime.G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }
+- `game/src/battle/core/battle.engine.factory.domain.js:509` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>阿猫的礼物</b>：获得【<b>${esc(o ? o.card.name : '?')}</b>】置入手牌（战斗内临时卡，战后消散）\`, 'loot');
+- `game/src/battle/core/battle.engine.factory.domain.js:598` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>法师锦囊</b>：从背包 pouch 载入 ${entry.card._pouch.length} 张法术\`, 'sys');
+- `game/src/battle/core/battle.exec-play.domain.js:341` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 ${recastTimes} 次\`, 'sys');
+- `game/src/battle/core/battle.exec-play.domain.js:350` [token] instanceRuntime.G.log(\`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果再触发 ${replay.times} 次\`, 'sys');
+- `game/src/battle/core/battle.exec-play.domain.js:428` [token] instanceRuntime.G.log(\`[[icon:cards]] 【${esc(card.name)}】保留在手牌中（无法用于注能）\`, 'sys');
+- `game/src/battle/core/battle.exec-play.domain.js:432` [token] instanceRuntime.G.log(\`[[icon:cards]] 手牌已满，【${esc(card.name)}】回到弃牌堆\`, 'sys');
+- `game/src/battle/core/battle.legacy-resolution.domain.js:42` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${handSize}/6）${spells ? \`，其中 ${spells} 张法术回复 ${healAmount} 血\` : ''}\`, 'loot');
+- `game/src/battle/core/battle.legacy-resolution.domain.js:56` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：当前没有符合本场战斗规则的随机卡牌\`, 'warn');
+- `game/src/battle/core/battle.legacy-resolution.domain.js:66` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：随机获得 ${uids.length} 张临时卡牌（下个回合开始时消耗）\`, 'loot');
+- `game/src/battle/core/battle.lifecycle.domain.js:317` [token] instanceRuntime.G.log(\`[[icon:cards]] 随身 <b>${instanceRuntime.hand.length}</b> 张战斗卡直接入手；另有 <b>99</b> 张本场临时初始攻击牌库，仅由抽牌效果取牌，开局与每回合不固定抽牌 · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费\`, 'sys');
+- `game/src/battle/core/battle.lifecycle.domain.js:437` [token] ? \`[[icon:cards]] <b>牌盒即牌库</b>：${instanceRuntime.drawPile.length} 张 · 开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 每回合固定 <b>${instanceRuntime.maxEnergy}</b> 费\`
+- `game/src/battle/core/battle.lifecycle.domain.js:438` [token] : \`[[icon:cards]] 牌库编成：${instanceRuntime.opts.directBossStart ? '自动编入' : '自选'} ${instanceRuntime.sel.size} 张非道具卡 + 初始攻击 ×${shas.length} = <b>${instanceRuntime.drawPile.length}</b> 张 ·
+- `game/src/battle/core/battle.resolution.domain.js:652` [token] ? \`[[icon:cards]] <b>${esc(card.name)}</b>：牌库上限在开战前编组阶段生效，战斗中 +${operation.n} 不追溯扩容\`
+- `game/src/battle/core/battle.resolution.domain.js:653` [token] : \`[[icon:cards]] <b>${esc(card.name)}</b>：普通战斗不使用 BOSS 编组上限，牌库上限 +${operation.n} 不改变本场牌数\`, 'dim');
+- `game/src/battle/core/battle.resolution.domain.js:691` [token] log(\`[[icon:cards]] 本次入手 ${spellsGained} 张法术 → 回复 ${amount} 点生命\`, 'sys');
+- `game/src/battle/core/battle.resolution.domain.js:760` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：目标身负 ${kinds} 种诅咒，抽 ${kinds} 张牌\`, 'sys');
+- `game/src/battle/core/battle.resolution.domain.js:766` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：从牌库抽取 ${got} 张【${esc(want)}】牌\`, 'sys');
+- `game/src/battle/core/battle.resolution.domain.js:770` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌\`, 'sys');
+- `game/src/battle/core/battle.resolution.domain.js:826` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：抽了 ${got} 张牌\`, 'sys');
+- `game/src/battle/core/battle.selection-flow.domain.js:175` [token] instanceRuntime.G.log(\`[[icon:cards]] 手牌中没有${job.type ? \`「${esc(job.type)}」\` : ''}卡牌可选，该效果跳过\`, 'warn');
+- `game/src/battle/core/battle.selection-flow.domain.js:190` [token] instanceRuntime.G.log('[[icon:cards]] 跳过手牌选择，该效果未结算', 'warn');
+- `game/src/battle/core/battle.selection-flow.domain.js:267` [token] instanceRuntime.G.log(\`[[icon:cards]] 复制了手牌中的【<b>${esc(entry.card.name)}</b>】（置入手牌，原牌保留）\`, 'loot');
+- `game/src/battle/effects/battle.acquire-operation.domain.js:68` [token] else log(\`[[icon:cards]] <b>${esc(card.name)}</b>：牌库底没有可取的卡牌\`, 'dim');
+- `game/src/battle/effects/battle.acquire-operation.domain.js:141` [token] log(\`[[icon:cards]] <b>${esc(card.name)}</b>：获得 ${detail}${poolSuffix ? \`（${esc(label)}池）\` : ''}（战斗内临时卡，战后消散）\`, 'loot');
+- `game/src/battle/effects/battle.discover-flow.js:216` [token] output.log(\`[[icon:cards]] 其余的【<b>${esc(option.name)}</b>】置入手牌\`, 'loot');
+- `game/src/battle/effects/card-semantic-operations.js:88` [token] ports.log('[[icon:cards]] 当前没有符合本场战斗规则的随机卡牌', 'sys');
+- `game/src/battle/effects/card-semantic-operations.js:95` [token] ports.log('[[icon:cards]] 当前没有符合本场战斗规则的随机卡牌', 'sys');
+- `game/src/battle/effects/card-semantic-operations.js:102` [token] ports.log(\`[[icon:cards]] <b>${ports.esc(card.name)}</b>：获得【${ports.esc(selected.name)}】${operation.act === 'zeroCost' ? '（0 费）' : ''}\`, 'loot');
+- `game/src/battle/effects/card-semantic-operations.js:162` [token] ports.log(\`[[icon:cards]] <b>${ports.esc(card.name)}</b>：置入 ${put} 张随机卡牌（手牌 ${ports.getHandSize()}/${operation.untilHandN}）\`, 'loot');
+- `game/src/battle/effects/effect-steps.audit.js:20` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）\`, 'sys');
+- `game/src/battle/effects/effect-steps.audit.js:76` [token] log(\`[[icon:cards]] 牌库上限 +${m[1]}（BOSS 编组时生效）\`, 'sys');
+- `game/src/battle/effects/effect-steps.damage.js:221` [token] log(\`[[icon:cards]] 获得【<b>${esc(c.name)}</b>】，其费用已变为 0\`, 'loot');
+- `game/src/battle/effects/effect-steps.deck.js:59` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：洗入后抽了 ${got} 张牌\`, 'sys');
+- `game/src/battle/effects/effect-steps.deck.js:74` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：将 ${count} 张【${esc(tpl.name)}】置入手牌（战斗内临时卡，战后消散）\`, 'loot');
+- `game/src/battle/effects/effect-steps.deck.js:93` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：获得 ${count} 张【${esc(tpl.name)}】（置入手牌）\`, 'loot');
+- `game/src/battle/effects/effect-steps.kills.js:193` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张），其中 ${spells} 张法术 → 回复 ${healedN * spells} 血\`, 'loot');
+- `game/src/battle/effects/effect-steps.kills.js:195` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：置入 ${put} 张随机卡牌（手牌达到 ${getHandSize()} 张）\`, 'loot');
+- `game/src/battle/effects/effect-steps.kills.js:209` [token] log(\`[[icon:cards]] 复制了手牌中的【<b>${esc(tpl.card.name)}</b>】（置入手牌）\`, 'loot');
+- `game/src/battle/effects/effect-steps.kills.js:288` [token] if (got.length) log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：随机获取 ${got.length} 张招式（${got.map(esc).join('、')}）\`, 'loot');
+- `game/src/battle/effects/effect-steps.m1.domain.js:88` [token] ? \`[[icon:cards]] ${name}：抽了 ${drawn} 张牌（直到手牌有 ${target} 张，当前 ${instanceRuntime.hand.length} 张）\`
+- `game/src/battle/effects/effect-steps.m1.domain.js:89` [token] : \`[[icon:cards]] ${name}：无牌可抽（目标手牌 ${target} 张，当前 ${instanceRuntime.hand.length} 张）\`, 'sys');
+- `game/src/battle/effects/effect-steps.m2.domain.js:423` [token] deps.log(\`[[icon:cards]] <b>${deps.esc(card.name)}</b>：复制了手牌中的【<b>${deps.esc(entry.card.name)}</b>】\`, 'loot');
+- `game/src/battle/effects/effect-steps.recovery.js:40` [token] log(\`[[icon:cards]] 从手牌选择 <b>${n}</b> 张${m.m[2] && m.m[2] !== '牌' ? m.m[2] : ''}牌打出\`, 'sys');
+- `game/src/battle/effects/effect-steps.recovery.js:47` [token] log(\`[[icon:cards]] 从手牌选择 <b>1</b> 张复制（原牌保留）\`, 'sys');
+- `game/src/battle/effects/effect-steps.recovery.js:145` [token] log(\`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${got} 张牌\`, 'sys');
+- `game/src/battle/effects/effect-steps.rules.js:66` [token] log('[[icon:cards]] 最后一张手牌条件：手牌已空时整卡效果触发 2 次（出牌结算判定）', 'sys');
+- `game/src/battle/view/battle.overlays.js:90` [token] showBattleDecision('[[icon:cards]] 剩余牌库', html, true, snapshot);
+- `game/src/battle/view/battle.view.js:348` [token] showBattleDecision(\`[[icon:cards]] ${paymentLabel}\`, battleHandSelectBodyHTML({ pool, handSelecting, cardHTML:(card,size) => SDT.Cards.cardHTML(card,size) }), 'discover', snapshot);
+- `game/src/battle/view/battle.view.js:531` [token] <div class="battle-hand-page-position" role="status" aria-live="polite"><span class="battle-control-icon" aria-hidden="true">[[icon:cards]]</span><span class="battle-control-value"><b>${handPage + 1}</b><span>/${handPages}</span></span></div>
+- `game/src/cards/cards.js:204` [property] { id: 'classic', name: '行囊粗布', icon: 'cards',   from: '默认卡背' },
+- `game/src/cards/cards.view.js:146` [call] if (drawN > 0) kwArr.push(\`<span class="kw-draw" title="从本场牌库抽 ${drawN} 张牌">${SDT.Icons.img('cards')}抽 ${drawN}</span>\`);
+- `game/src/cards/mech-sentences.js:43` [property] { k: 'drawTxt', label: '抽牌', icon: 'cards',  tpl: n => \`抽 ${n} 张牌。\`, sen: /抽\s*\d+\s*张牌[^。；;]*。?/, cnt: /抽\s*(\d+)\s*张牌/, max: 5 },
+- `game/src/generated/art-manifest.js:862` [bitmap] "ui/icons/cards.png",
+- `game/src/hub/bag-container-pages.js:51` [property] UI.showOverlay('法师锦囊', containerStoreHTML({ title: '法师锦囊', icon: 'cards', prefix: 'pouch',
+- `game/src/hub/bag-container-pages.js:71` [token] UI.log(\`[[icon:cards]] 锦囊装不下整叠：已有 ${result.storedCount}/${result.capacity} 张，本次 ${result.count} 张\`, 'warn');
+- `game/src/hub/bag-container-pages.js:77` [token] UI.log(\`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】存入法师锦囊\`, 'ok');
+- `game/src/hub/bag-container-pages.js:91` [token] UI.log(\`[[icon:cards]] 【<b>${esc(stack.card.name)}</b>】已从锦囊取出\`, 'ok');
+- `game/src/hub/game.bag.js:197` [token] ${o.card.id === 'tt7-stratagem' ? '<button class="ov-btn ok" data-act="pouchStore">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>' : ''}
+- `game/src/hub/game.bag.js:286` [token] if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');
+- `game/src/hub/game.bag.settle.js:151` [token] UI.showOverlay('[[icon:cards]] 卡牌是消耗品', \`
+- `game/src/hub/game.cardslib.designer.js:108` [token] <h2>[[icon:cards]] 卡牌制作坊</h2>
+- `game/src/hub/game.cardslib.designer.js:294` [token] UI.log(\`[[icon:cards]] 卡牌【<b>${esc(card.name)}</b>】已${wasEditing ? '更新' : '收入照相馆'}\`, 'ok');
+- `game/src/hub/game.hub.pages.js:267` [token] if (!pool.length) { UI.log('[[icon:cards]] 卡牌库是空的，没有可获得的卡牌', 'warn'); return; }
+- `game/src/hub/game.hub.pages.js:275` [token] UI.log('[[icon:cards]] <b>经济卡包</b>：拆开获得 5 张随机卡牌（入卡牌仓库）', 'loot');
+- `game/src/hub/game.hub.runtime.js:324` [token] else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
+- `game/src/hub/game.hub.runtime.js:350` [token] UI.log(\`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效\`, 'ok');
+- `game/src/hub/hub.archive-v3.js:22` [token] return [reward.wood ? \`[[icon:wood]] 木材 ×${reward.wood}\` : '', reward.rations ? \`[[icon:bread]] 口粮 ×${reward.rations}\` : '', reward.keys ? \`[[icon:key]] 钥匙 ×${reward.keys}\` : '', reward.card ? \`[[icon:cards]] ${esc(card?.name || '稀有卡牌')}\` : '', back ? \`[[icon:cards]] 卡背 · ${esc(back.name)}\` : ''].filter(Boolean).map(item => \`<span>${item}</span>\`).join('') || '<span>成就纪念</span>';
+- `game/src/hub/meta.js:268` [token] cards.forEach(c => parts.push(\`[[icon:cards]] 【${c.card.name}】\`));
+- `game/src/hub/meta.js:271` [token] parts.push(\`[[icon:cards]] 卡背【${bd ? bd.name : a.back}】\`);
+- `game/src/run/event-card-choice.js:43` [token] nodeShell({ tone:'event', asset:PRESENTATIONS[record.eventId].asset, icon:'[[icon:cards]]', title:'已领取，尚未保存',
+- `game/src/run/event-card-choice.js:76` [token] tone:'event', asset:spec.asset, icon:'[[icon:cards]]', title:spec.title, sub:spec.sub,
+- `game/src/run/game-session-departure.js:172` [token] log(\`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）\`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
+- `game/src/run/game.nest.js:183` [token] ${on ? '[[icon:check]]' : '[[icon:cards]]'} ${esc(s2.card.name)} ×${s2.count}${on ? '（已选）' : ''}</button>\`;
+- `game/src/run/game.nest.js:449` [token] if (pool.length) { const c = pool[ri(pool.length)]; game.cardBox.push({ ...c }); UI.log(\`[[icon:cards]] 宝箱开出【${esc(c.name)}】入牌盒\`, 'loot'); }
+- `game/src/run/game.run.class-choice.page.js:110` [token] <button class="ov-btn cls2-pool-btn" data-act="clsPool" ${sel ? '' : 'disabled'}>[[icon:cards]] 完整人物卡池（${poolCount(displaySel)} 张）</button>\`
+- `game/src/run/game.run.class-choice.page.js:191` [token] if (!c) return '<div class="pv-empty">[[icon:cards]]</div><p class="pv-hint">选择卡牌查看</p>';
+- `game/src/run/game.run.dev.js:16` [token] if (!game.ownedCards?.length) { UI.log('[[icon:cards]] 还没有随身卡牌，先开一局再试', 'warn'); return; }
+- `game/src/run/game.run.events.js:519` [token] UI.log('[[icon:cards]] 背包中没有可转换的招式或装备卡', 'warn');
+- `game/src/run/game.run.events.js:658` [token] UI.log('[[icon:cards]] 黑市货架无法生成完整的三张奖品', 'warn');
+- `game/src/run/game.run.shop.js:466` [token] <div class="shop-heading"><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2></div>

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T09:02:53.515Z",
+  "inputKind": "real-input",
+  "detail": "真实点击开发遭遇战并等待结束回合可见；不写存档，当前窗口黑像与3拾荒者；地面修改前。",
+  "screenshot": {
+    "path": "before-battle.png",
+    "bytes": 29218,
+    "sha256": "71112774f2dc3d5b01014a506154f2a98255a7d1ca04255a87970df4b5af27ef"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

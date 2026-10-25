@@ -1,0 +1,41 @@
+{
+  "task": "WF-fast-bug-sweep-r2-1024",
+  "date": "2026-10-24",
+  "status": "complete-uncommitted",
+  "newRootCauses": 11,
+  "previousRoundNotRecounted": 10,
+  "cumulativeRootCauses": 21,
+  "parts": { "parent": 3, "battle": 2, "run-save": 3, "tools-audio": 3 },
+  "parentFixes": [
+    { "title": "异步订阅返回thenable时被误当同步失败", "source": "game/src/core/event-bus.js", "change": "用Promise.resolve统一接住异步结果，保留同步派发计数和异步错误隔离", "redCases": 2 },
+    { "title": "派发中reset后旧订阅仍继续执行", "source": "game/src/core/event-bus.js", "change": "同时清空当前订阅集合，重置后新增订阅从下次派发生效", "redCases": 1, "scope": "internal/test-only reset contract" },
+    { "title": "按住Enter选中候选后自动连发确认", "source": "game/src/ui/discovery-selection.js", "change": "取消识别操作的重复keydown默认行为，阻止新聚焦确认按钮被原生连发点击，保留独立控件与编辑输入", "redCases": 1, "testMethod": "DOM events plus explicitly modelled native button activation; no browser pass claimed for this special branch" }
+  ],
+  "sliceEvidence": ["battle.json", "run-save.json", "tools-audio.json"],
+  "sourceManifest": "source-manifest.json",
+  "checks": {
+    "integrated": { "files": 12, "passed": 128, "exitCode": 0, "log": "integrated-tests.log" },
+    "auditFixtures": { "passed": 8, "exitCode": 0, "log": "audit-fixtures.log" },
+    "typecheck": { "coverage": "622/622", "exitCode": 0, "log": "typecheck.log" },
+    "parentRegressions": ["event-bus: 4 files / 72 passed", "discovery: 3 files / 27 passed"],
+    "eslintAndDiffCheck": "all own source/test paths passed per slice and parent",
+    "network": "No dependency audit network request; native npm --version launch and offline fixtures only"
+  },
+  "browser": {
+    "platform": "Codex current in-app browser; current window only",
+    "url": "http://127.0.0.1:5358/",
+    "input": "real clicks only, no hidden game state injection",
+    "passed": ["reload previous test battle save", "battle save and exit to title", "slot picker still displays unfinished first save", "select empty second slot", "enter second slot hub normally"],
+    "consoleErrors": 0,
+    "screenshot": "browser-slot-switch.png",
+    "notCovered": ["nest-specific exit branch", "scheduled custom/legacy item", "duplicate seal transformation", "damaged pet data", "recovery log race", "repeated Enter default activation", "unknown audio event names"],
+    "notCoveredNote": "Direct regression/integration tests cover these special branches; the browser result is limited to actual battle exit and cross-slot hub entry.",
+    "service": "own PID49284 / exec96184; command identity checked before stopping; port5358 released; shared services untouched"
+  },
+  "remaining": [
+    "Previous broad-scan fixture failures remain outside this batch; no full-project green claim.",
+    "Extra-turn end-phase bypass is only a static candidate in another active task's frozen battle.enemy-phase.domain.js; unverified and unmodified.",
+    "scripts-contract still identifies missing mappings for another active refactor's new scripts; not modified.",
+    "No full suite, build, commit or push."
+  ]
+}

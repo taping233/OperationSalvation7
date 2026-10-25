@@ -1,0 +1,50 @@
+{
+  "sourceChanges": [
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "sha256Before": "8e906e37f44bf9a4577241450f14cd021becdf218f0b9198b000282821a663ce",
+      "bytesBefore": 13998,
+      "linesBefore": 251,
+      "originalSnapshot": "cards.sync.catalog.js.before.txt",
+      "sha256After": "dbd7407a54c1dec67436d349f0a41ff5c7b76ac7545c78be1de49ef292e2ea8f",
+      "bytesAfter": 13376,
+      "bytesRemovedNet": 622,
+      "linesAfter": 239,
+      "diffAgainstOwnBaseline": "catalog.diff.patch",
+      "added": 21,
+      "removed": 33,
+      "netRemoved": 12
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "sha256Before": "c3a6e7d6729e176f45e1805b779b86e922649611115d630ff09f867e676b5cb8",
+      "bytesBefore": 4007,
+      "linesBefore": 68,
+      "originalSnapshot": "cards.sync.m7.js.before.txt",
+      "sha256After": "161869441c50aedf397ff260a1ade8ba57390a831f088ada13b7a25678fedf92",
+      "bytesAfter": 3974,
+      "bytesRemovedNet": 33,
+      "linesAfter": 68,
+      "diffAgainstOwnBaseline": "m7.diff.patch",
+      "added": 2,
+      "removed": 2,
+      "netRemoved": 0
+    }
+  ],
+  "totals": {
+    "added": 23,
+    "removed": 35,
+    "netRemoved": 12,
+    "bytesRemovedNet": 655
+  },
+  "verification": {
+    "syntax": "node --check both modified source files; exit 0",
+    "diff": "git diff --check each modified source file; exit 0",
+    "staticAST": "47 pure-card files parsed, no duplicate object/map keys or statements after unconditional block exits in current source",
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  },
+  "totalsScope": "Initial cards-only batch; follow-up combat/acquire results are counted separately.",
+  "followUpAppliedReceipt": "pending-applied/receipt.json"
+}

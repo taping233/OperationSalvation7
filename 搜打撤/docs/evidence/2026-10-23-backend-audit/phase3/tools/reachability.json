@@ -1,0 +1,157 @@
+{
+  "entry": "game/src/main.js",
+  "modules": 614,
+  "reachable": 574,
+  "unknownDynamicImports": [],
+  "candidates": [
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.card-play.js",
+      "lines": 4,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.damage.js",
+      "lines": 5,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "lines": 8,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "lines": 11,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "lines": 5,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "lines": 6,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "lines": 10,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "lines": 38,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.js",
+      "lines": 22,
+      "importers": []
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "lines": 9,
+      "importers": []
+    },
+    {
+      "file": "game/src/boot-order.js",
+      "lines": 24,
+      "importers": []
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "lines": 112,
+      "importers": []
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "lines": 34,
+      "importers": [
+        "game/src/home/home.commands.js",
+        "game/src/home/home.visuals.js"
+      ]
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "lines": 185,
+      "importers": [
+        "game/src/home/home.presenter.js",
+        "game/src/home/home.scene.js",
+        "game/src/hub/game.hub.home-scene.js"
+      ]
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "lines": 31,
+      "importers": [
+        "game/src/hub/game.hub.home-scene.js"
+      ]
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "lines": 664,
+      "importers": [
+        "game/src/hub/game.hub.home-scene.js"
+      ]
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "lines": 511,
+      "importers": []
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "lines": 2,
+      "importers": []
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "lines": 84,
+      "importers": []
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "lines": 25,
+      "importers": []
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "lines": 214,
+      "importers": []
+    }
+  ],
+  "limits": [
+    "主入口未达不等于冗余，需另核dev/QA/HTML入口和公开契约。"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "file": "game/src/battle/runtime/battle.runtime.factory.js",
+      "beforeBytes": 26415,
+      "afterBytes": 19750,
+      "beforeNormalized": 25869,
+      "afterNormalized": 19297,
+      "beforeTokens": 4472,
+      "afterTokens": 2880,
+      "sha256": "c5b6090e5ecd7d97a6993cddc2c8385af9d1ba42f8ee2f354387efd7ec683b14"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "beforeBytes": 13437,
+      "afterBytes": 6306,
+      "beforeNormalized": 13251,
+      "afterNormalized": 6198,
+      "beforeTokens": 1714,
+      "afterTokens": 951,
+      "sha256": "8fa982da14365ed1d4f9a017c60e02552912614f2f8307d322b5b1d866c62420"
+    },
+    {
+      "file": "game/src/core/live-bindings.js",
+      "beforeBytes": 0,
+      "afterBytes": 1424,
+      "beforeNormalized": 0,
+      "afterNormalized": 1424,
+      "beforeTokens": 0,
+      "afterTokens": 164,
+      "sha256": "b47305dd7459e461cd45965833f68840c4d462afd32ee9f84ea6a5099fd9f219"
+    }
+  ],
+  "netBytes": 12372,
+  "netNormalized": 12201,
+  "netTokens": 2191
+}

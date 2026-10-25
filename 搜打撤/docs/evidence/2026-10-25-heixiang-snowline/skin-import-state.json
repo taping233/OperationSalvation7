@@ -1,0 +1,16 @@
+{
+  "identity": {
+    "character": "heixiang",
+    "id": "snowline-vigil",
+    "name": "雪线未眠",
+    "source_sha256": "7a38e9e0a54ef2da23c7485268891c90187d21081b8b7102996f11b8cda3b936",
+    "asset": "portraits/full/heixiang-snowline-vigil.webp",
+    "quality": 94
+  },
+  "status": "complete",
+  "completed": [
+    "game\\assets\\portraits\\full\\heixiang-snowline-vigil.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ]
+}

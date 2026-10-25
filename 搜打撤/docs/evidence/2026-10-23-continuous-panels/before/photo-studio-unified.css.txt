@@ -1,0 +1,815 @@
+/* Gallery and photo-view presentation owner. Mount geometry and zoom motion stay separate. */
+body.cardlib-open #overlay .studio-archive .studio-draw-explanation,
+body.cardlib-open #cardZoom.cz-photo .studio-draw-explanation { margin:14px 0 16px; padding:10px 0 0; border-top:1px solid #9b8e7540; color:#526255; font:16px/1.75 var(--font-ui); text-shadow:none; }
+body.reduce-motion.cardlib-open #overlay.closing .card.page:has(.studio-archive) { animation:none!important; transform:none!important; }
+@media(prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay.closing .card.page:has(.studio-archive) { animation:none!important; transform:none!important; }
+}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo {
+  --font-ui:'HarmonyOS Sans SC','HarmonyOS Sans','Noto Sans SC Sub','Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun','STSong',serif;
+  --studio-paper:#dddbd8;
+  --studio-paper-light:#e8e7e4;
+  --studio-paper-edge:rgba(104,92,64,.38);
+  font-family:var(--font-ui);
+  cursor:default;
+  gap:12px;
+  padding:28px 24px 22px;
+  box-sizing:border-box}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close {
+  position:absolute; top:12px; right:12px; width:44px; height:44px; z-index:6;
+  border-radius:0;
+  border:0!important; box-shadow:none!important;
+  background:transparent!important; color:#74684f!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close .ic {
+  filter:grayscale(1) brightness(1.35) sepia(.6)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close:hover,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close:focus-visible {
+  color:#934529!important;
+  outline:1px solid #98744e;
+  outline-offset:1px;
+  background:#ad97761c!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-backdrop {
+  background:linear-gradient(180deg,#101813 0 18%,#0c1410ed 38% 100%),var(--studio-room-image) center calc(100% + 140px)/cover no-repeat,#101813}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-layout {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);
+  align-items:center;
+  width:min(1600px,calc(var(--game-layout-width, 100vw) * 0.94));
+  max-height:calc(var(--game-layout-height, 100vh) - 92px);
+  min-height:0; gap:clamp(24px,calc(var(--game-layout-width, 100vw) * 0.03),52px)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-main {
+  min-width:0;
+  min-height:0;
+  display:grid;
+  place-items:center}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-paper {
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:100%;
+  border-radius:0;
+  transform-origin:center;
+  transition:transform var(--cz-photo-motion-ms,420ms) cubic-bezier(.22,.72,.22,1),
+    opacity var(--cz-photo-motion-ms,420ms) ease;
+  width:min(100%,calc((var(--game-layout-height, 100vh) - 190px) * var(--cz-photo-ratio,1) + 82px));
+  padding:7px;
+  gap:0;
+  max-height:calc(var(--game-layout-height, 100vh) - 104px);
+  background:#dddbd8;
+  box-shadow:0 28px 70px rgba(0,0,0,.56)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-image {
+  display:grid;
+  place-items:center;
+  min-width:0;
+  position:relative;
+  z-index:1;
+  background:var(--studio-art-matte,#252527);
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
+  min-height:0;
+  aspect-ratio:var(--cz-photo-ratio,1)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-image.cz-flip {
+  animation:none;
+  transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-image img {
+  display:block;
+  max-width:100%!important;
+  object-fit:contain!important;
+  border-radius:0;
+  box-shadow:none;
+  width:100%!important;
+  height:100%!important;
+  max-height:100%!important;
+  min-height:0}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-caption {
+  display:none;
+  max-width:100%;
+  color:#342e20;
+  font:700 15px/1.35 var(--serif);
+  text-align:center;
+  overflow-wrap:anywhere}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-info {
+  box-sizing:border-box;
+  min-width:0;
+  max-height:calc(var(--game-layout-height, 100vh) - 104px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:24px 22px;
+  color:#eae1c4;
+  scrollbar-color:#75684a #242017;
+  position:relative;
+  border-radius:0;
+  transition:opacity 180ms ease,transform 180ms cubic-bezier(.22,.72,.22,1)!important;
+  outline:none;
+  background:radial-gradient(ellipse at 8% 0%,#fff1d07a,transparent 68%),radial-gradient(ellipse at 100% 100%,#7e9aaf24,transparent 66%),linear-gradient(125deg,#eee6d3a6,#b9ac98a6),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#f3e8d4,#dac9ad)!important; background-blend-mode:normal,normal,normal,multiply,normal!important; border:1px solid #c6bba4!important; border-left:2px solid #a56a49!important;
+  box-shadow:inset 0 2px 0 #fff4d6,inset -2px -3px 0 #78604499,0 2px 0 #9b8e75,3px 5px 4px #050a0880,12px 26px 24px #020503b3!important; border-image:none!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title {
+  margin:0 0 18px;
+  font:700 26px/1.25 var(--serif);
+  overflow-wrap:anywhere;
+  padding-bottom:16px;
+  padding-right:42px;
+  margin-bottom:16px;
+  border-bottom:1px solid rgba(210,189,117,.25); border-bottom-color:var(--sa-rule)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-details {
+  margin:0 0 18px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail {
+  align-items:baseline;
+  border-radius:0;
+  border-right:1px solid rgba(210,189,117,.24);
+  font-size:14px;
+  display:inline-flex; flex-direction:row; justify-content:flex-start; gap:6px; min-width:0;
+  padding:4px 0; background:transparent!important; border:0!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail span { color:#756b58!important; font:15px/1.5 var(--font-ui)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail:nth-child(-n+2)>span { display:none}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail b { color:#f6e8b9; font:600 18px/1.35 var(--sa-serif); overflow-wrap:anywhere}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules {
+  margin:0 0 16px;
+  color:#eae1c4;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere; font:18px/1.8 var(--sa-serif)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-kw { color:#4a5980 !important; font-weight:700}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note.has,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note.editable {
+  width:100%!important;
+  max-width:100%;
+  margin:0!important;
+  padding:16px 0 0!important;
+  border:0!important; border-top:1px solid #ab9e834d!important; border-image:none!important;
+  background:transparent!important; box-shadow:none!important; transform:none}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note::before,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note::after { display:none!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note.editable .cz-note-tag { padding-right:0!important; border:0!important; font:500 14px/1.5 var(--font-ui); color:#756b58}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note-status {
+  color:#554c38;
+  opacity:1;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.06em}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note-input { min-height:76px;
+  border:0;
+  border-bottom:0;
+  border-radius:0;
+  padding:5px 2px;
+  background:repeating-linear-gradient(transparent 0 29px,#a3947733 29px 30px)!important;
+  color:#39352b;
+  font:17px/30px var(--font-ui)!important; resize:vertical}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note-input::placeholder { color:#787160; opacity:1}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-neg .cz-photo-image img {
+  filter:invert(1) hue-rotate(180deg) sepia(.12)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-entering .cz-photo-paper {
+  transform:var(--cz-photo-from-transform,scale(.92));
+  opacity:.25}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-entering .cz-photo-info {
+  opacity:0;
+  transform:translateX(14px)}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing-to-source .cz-photo-paper {
+  transform:var(--cz-photo-to-transform,scale(.92));
+  opacity:.15}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing-fallback .cz-photo-paper {
+  transform:translateY(16px) scale(.94);
+  opacity:0}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing .cz-photo-info {
+  opacity:0;
+  transform:translateX(10px);
+  transition-delay:0ms;
+  transition-duration:180ms}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo:is(.cz-out,.cz-photo-closing) .cz-backdrop {
+  animation:czFadeOut var(--cz-photo-close-ms,320ms) ease both}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-closing :is(.cz-hint,.cz-close) {
+  opacity:0;
+  transition:opacity 140ms ease}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-out :is(.cz-photo-layout,.cz-photo-paper,.cz-photo-info,.cz-note) {
+  animation:none}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-flash { display:none}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo.cz-photo-reduced :is(.cz-photo-paper,.cz-photo-info) {
+  transition:none}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-close:active {
+  background:#ad977630!important}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint {
+  color:#c9c1a5;
+  font:400 16px/1.5 var(--font-ui);
+  letter-spacing:.08em}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-index {
+  margin:0 0 10px;
+  font:500 14px/1.5 var(--font-ui);
+  font-variant-numeric:tabular-nums; color:#796e5b!important; letter-spacing:.04em}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail:last-child { border-right:0}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-note-input:focus-visible {
+  outline:1px solid #98744e;
+  outline-offset:3px;
+  border-bottom-color:transparent;
+  box-shadow:none;
+  background-color:#f1e9d830!important}
+@media (prefers-reduced-motion:reduce) {
+  body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo :is(.cz-photo-paper,.cz-photo-info) { transition:none!important}}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title span {
+  font-family:var(--sa-serif)!important; color:#30302e!important; font-size:30px; line-height:1.35; letter-spacing:.03em}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity] { --rarity-ink:#4a4c4d; --rarity-bright:#cbcccd}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="稀有"] { --rarity-ink:#4d5359; --rarity-bright:#8dd0f2}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="史诗"] { --rarity-ink:#793a9f; --rarity-bright:#cda0ef}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="传说"] { --rarity-ink:#946d11; --rarity-bright:#fed85e}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="衍生"] { --rarity-ink:#3b3f43; --rarity-bright:#9eabb4}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="职业"] { --rarity-ink:#a02e32; --rarity-bright:#ed9897}
+body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="棱彩"] { --rarity-ink:#78377c; --rarity-bright:#e8b4e7}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo [data-studio-rarity] { color:var(--rarity-bright)!important}
+/* Sole gallery layout and presentation owner; mount assets and zoom lifecycle stay separate. */
+body.cardlib-open #overlay .studio-archive { --su-line:#abadae; font-family:var(--font-ui);
+  --su-wall:#252527; --su-night:#1b1b1e; --su-paper:#e9e1d3;
+  --su-controls:transparent; --su-pane:transparent; --su-ink:#e5ddcd;
+  --su-muted:#b1a99b; --su-accent:#bd6240;
+  --sa-paper-ink:#30302e; --sa-unit:8px; --sa-control-height:42px
+;
+  position:relative; display:flex; flex-direction:column; width:100%; height:100%;
+  min-height:0; min-width:0; margin:0; padding:0!important; overflow:hidden; color:var(--su-ink); background:radial-gradient(ellipse at 16% 0%,#edca8847,transparent 62%),radial-gradient(ellipse at 10% 94%,#6c91b43b,transparent 53%),radial-gradient(ellipse at 79% 80%,#d4aa6436,transparent 34%),linear-gradient(90deg,#121b17db 0%,#121b179e 46%,#121b1755 78%,#121b17b0),linear-gradient(180deg,#151d19 0 18%,#151d19a0 34%,transparent 56%,#0b141045),var(--studio-room-image) center calc(100% + 140px)/cover no-repeat,#151d19!important; --studio-selection-ink:#d1ac78}
+/* Static lamp spill stays behind the page contents. */
+body.cardlib-open #overlay .studio-archive::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:conic-gradient(from 155deg at 15% -8%,transparent 0deg,#f8dda824 7deg,#f8dda80b 22deg,transparent 40deg,transparent 360deg); mix-blend-mode:screen }
+body.cardlib-open #overlay .studio-archive .library-head {
+  display:grid; z-index:1; flex:0 0 auto; align-items:center; min-height:90px; backdrop-filter:blur(18px) saturate(.8); position:relative; border:0 !important; border-bottom:0 !important; box-shadow:none !important; grid-template-areas:'photos tools' !important; margin:0; width:100%; box-sizing:border-box; padding:0 80px !important; background:linear-gradient(90deg,#0f1916a0,#23302570 48%,#121b1778) !important; grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important; gap:132px !important
+}
+body.cardlib-open #overlay .studio-archive .library-head::before { display:none!important; }
+body.cardlib-open #overlay .studio-archive .studio-exit {
+  position:static!important; background:transparent!important;
+  border:0!important; color:#ebebeb!important; box-shadow:none!important; clip-path:none!important; display:grid; place-items:center
+}
+body.cardlib-open #overlay .studio-archive .studio-exit::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-exit:hover { background:transparent!important; color:#fff!important
+}
+body.cardlib-open #overlay .studio-archive .studio-exit-anchor { z-index:20; justify-self:center; align-self:center; display:grid; place-items:center; position:absolute !important; top:50% !important; left:110px !important; transform:translateY(-50%)
+}
+body.cardlib-open #overlay .studio-archive .clib-main {
+  display:grid; position:relative; z-index:1;
+  grid-template-rows:minmax(0,1fr); min-height:0; overflow:hidden;
+  box-shadow:none!important;
+  flex:1; min-width:0; align-items:stretch;
+  background:transparent !important;
+  padding:80px 80px 48px !important;
+  grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important;
+  gap:132px !important
+}
+body.cardlib-open #overlay .studio-archive .clib-main::before,
+body.cardlib-open #overlay .studio-archive .clib-main::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-catalog { display:flex; flex-direction:column; min-width:0; min-height:0; overflow:visible!important; position:relative; gap:20px
+}
+/* A quiet felt receiver gives the clips a physical support without boxing each photo. */
+body.cardlib-open #overlay .studio-archive .studio-catalog::before { content:none; display:none; }
+body.cardlib-open #overlay .studio-archive .studio-filterbar {
+  position:relative; z-index:12; flex:0 0 auto; overflow:visible!important; gap:12px;
+  border-image:none!important; border-radius:0; outline:none!important; border:0!important;
+  background:transparent!important; box-shadow:none!important; display:block; color:var(--su-ink); padding:0 !important; border-bottom:0 !important; margin-top:-24px; margin-bottom:0
+}
+body.cardlib-open #overlay .studio-archive .studio-filterbar::before,
+body.cardlib-open #overlay .studio-archive .studio-filterbar::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-index-heading {
+  display:flex; align-items:center; color:var(--su-muted)!important; flex:0 0 auto; min-height:38px; margin:0; margin-left:auto; gap:18px
+}
+body.cardlib-open #overlay .studio-archive .studio-index-heading>span:first-child {
+  padding:0!important; background:none!important; border:0!important;
+  letter-spacing:.03em; box-shadow:none!important; -webkit-text-fill-color:currentColor;
+  align-items:baseline; gap:6px; color:#b1a99b!important; font:20px/1.4 var(--font-ui)!important; white-space:nowrap
+}
+body.cardlib-open #overlay .studio-archive .studio-clear {
+  margin-left:auto;
+  border-radius:0;
+  font:20px/1.3 var(--font-ui)!important; box-shadow:none!important; border-color:#8e7d68!important; color:#d2c7b1!important; border:0 !important; background:transparent !important; font-size:20px !important; min-height:32px; padding:6px 8px !important
+}
+body.cardlib-open #overlay .studio-archive .clib-tabs { display:flex; overflow:visible!important; min-width:0; border-bottom:0!important; flex-wrap:nowrap; white-space:nowrap; flex:0 1 auto; gap:10px !important; padding:0 !important; grid-area:photos; position:static; left:auto; top:auto; transform:none; justify-self:center
+}
+body.cardlib-open #overlay .studio-archive .type-tab {
+  min-height:35px!important; border:1px solid transparent!important;
+  border-radius:0; background:transparent!important; box-shadow:none!important; flex:0 0 auto; cursor:pointer; font:500 20px/1.4 var(--sa-serif) !important; font-size:20px !important; padding:10px 18px !important; color:#acae9e !important; display:inline-flex; align-items:center; justify-content:center; gap:8px
+}
+body.cardlib-open #overlay .studio-archive .type-tab:hover { background:#dde4cf0a !important
+}
+body.cardlib-open #overlay .studio-archive .type-tab.on,
+body.cardlib-open #overlay .studio-archive .type-tab.on:hover { box-shadow:none !important; background:transparent !important; border-color:transparent !important; color:#ead4af !important
+}
+body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after {
+  content:''; position:absolute; left:0; top:0; width:1px; height:2px; pointer-events:none;
+  background:#d4b85c; transform-origin:left center;
+  transform:translate(var(--studio-tab-x),var(--studio-tab-y)) scaleX(var(--studio-tab-width));
+  transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
+}
+body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready'] .type-tab.on { box-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-search-row { display:flex; align-items:center; grid-template-columns:none; margin-top:0; padding-left:2px; gap:14px
+}
+body.cardlib-open #overlay .studio-archive .studio-field { display:flex; flex-direction:column; min-width:0; gap:5px
+}
+body.cardlib-open #overlay .studio-archive .studio-search,
+body.cardlib-open #overlay .studio-archive .studio-select-shell {
+  position:relative; display:block; min-width:0; border-radius:0; box-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-select-shell::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-search::before { position:absolute; font-size:22px; pointer-events:none;
+  color:#b4a98f; left:12px; top:50%; transform:translateY(-50%); line-height:1; border:0; border-radius:0; content:''; width:14px; height:14px; background:#b4a98f; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10' cy='10' r='6' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='m15 15 6 6' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat
+}
+body.cardlib-open #overlay .studio-archive #cardSearch {
+  width:100%!important; height:44px!important; min-width:0; padding:10px 12px 10px 40px!important;
+  border:0!important; border-radius:0; outline:none; background:none!important;
+  color:var(--su-ink)!important; font:21px/1.5 var(--font-ui)!important; box-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive #cardSearch::placeholder { color:#b6ab99!important; opacity:1
+}
+body.cardlib-open #overlay .studio-archive .studio-search:focus-within { outline:2px solid #545a61; outline-offset:2px
+}
+body.cardlib-open #overlay .studio-archive .studio-select-shell > select.studio-native-select[hidden] { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-choice { position:relative; margin:0; padding:0; border:0
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-trigger {
+  display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:44px;
+  padding:10px 13px; color:var(--su-ink); font:21px/1.5 var(--font-ui); list-style:none; cursor:pointer
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-trigger::-webkit-details-marker { display:none
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-trigger>span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-trigger::after {
+  content:''; width:6px; height:6px; flex:0 0 6px; border-right:2px solid #75787b; border-bottom:2px solid #75787b;
+  transform:rotate(45deg); margin-top:-4px; border-color:#b4a98f; transition:transform var(--motion-feedback,180ms) var(--motion-ease-enter)
+}
+body.cardlib-open #overlay .studio-archive .studio-choice[open] .studio-choice-trigger::after { transform:rotate(225deg); margin-top:3px
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-menu {
+  position:absolute; z-index:40; top:calc(100% + 7px); left:-1px; right:-1px;
+  display:grid; max-height:300px; overflow-y:auto; border-radius:0; scrollbar-width:thin; padding:8px; gap:0; border:1px solid #cbd3be30; background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c2925ed; color:#e0dfcd; backdrop-filter:blur(16px) saturate(.75); box-shadow:inset 0 1px 0 #d8dec218,0 8px 18px #080e0960
+}
+body.cardlib-open #overlay .studio-archive .studio-choice:not([open]) .studio-choice-menu { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-choice.opens-up .studio-choice-menu { top:auto; bottom:calc(100% + 7px)
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-option {
+  display:flex; align-items:center; gap:9px; width:100%;
+  border:0!important; border-radius:0; background:transparent!important; text-align:left; cursor:pointer; box-shadow:none!important; min-height:40px; font:21px/1.4 var(--sa-serif) !important; padding:10px 9px !important; color:#e0dfcd !important; border-bottom:1px solid #c5ccb716 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-option:hover,
+body.cardlib-open #overlay .studio-archive .studio-choice-option:focus-visible { background:#d0d8bc16 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected="true"] { background:#d0d8bc20 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected="true"]::after { content:'✓'; margin-left:auto; color:#dab890
+}
+body.cardlib-open #overlay .studio-archive .studio-choice-option[data-rarity]::before {
+  content:''; width:7px; height:7px; flex:0 0 7px; background:var(--su-rarity,#929395); transform:rotate(45deg)
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="初始"] { --su-rarity:#829085
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="古朴"] { --su-rarity:#a89b6e
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="稀有"] { --su-rarity:#8c949a
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="史诗"] { --su-rarity:#a28ab3
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="传说"] { --su-rarity:#d0b047
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="衍生"] { --su-rarity:#8b9297
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="职业"] { --su-rarity:#b57872
+}
+body.cardlib-open #overlay .studio-archive [data-rarity="棱彩"] { --su-rarity:#9aa0a4
+}
+body.cardlib-open #overlay .studio-archive .studio-active-filters { display:flex; flex-wrap:wrap; align-items:center; padding-top:8px; min-height:0!important; color:var(--su-muted); font-size:12px; padding:10px 0 0; gap:8px
+}
+body.cardlib-open #overlay .studio-archive .studio-active-filters button {
+  padding:5px 9px!important; border:1px solid #babbbc!important; border-radius:0; box-shadow:none!important; min-height:28px; background:#ded1b6!important; border-color:#9b8b6e!important; color:#38352e!important
+}
+body.cardlib-open #overlay .studio-archive #libGrid {
+  flex:1 1 auto; min-height:0; overflow-y:auto; background:none!important;
+  scrollbar-color:#767d6355 transparent;
+  gap:56px 48px !important;
+  padding:24px 0 40px !important;
+  width:calc(100% + 24px);
+  margin-right:-24px;
+  padding-right:24px !important;
+  --studio-scroll-perf:#cfbd941c}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap { box-shadow:none!important;
+  display:block; position:relative; width:100%; min-width:0; margin:0; padding:0; border:0;
+  border-radius:0; background:transparent; color:inherit; text-align:left; cursor:pointer
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] { border-radius:0;
+  padding:calc(var(--mount-space) - var(--mount-border))!important;
+  background:#f2efe7!important; box-shadow:var(--paper-shadow)!important
+}
+/* 大图装饰独立压在照片上方；纸底不再绘制一份底层相框。 */
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-main .cz-photo-paper[data-photo-mount] {
+  isolation:isolate;
+  border:0 !important;
+  border-image:none !important;
+  padding:var(--mount-space) !important
+}
+body.cardlib-open #overlay .studio-archive .studio-photo-paper[data-photo-mount]::after { opacity:1 !important; background:none !important; z-index:4 !important; content:''; display:block!important; position:absolute; inset:0; box-sizing:border-box; pointer-events:none; border:var(--mount-border) solid transparent; border-image:var(--mount-thumbnail-art,var(--mount-art)) var(--mount-slice) stretch; border-image-outset:0; filter:saturate(.8) brightness(.9)
+}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current='true'] .studio-photo-paper::after,
+body.cardlib-open #overlay .studio-archive .lib-cardwrap:is(:hover,:focus-visible) .studio-photo-paper::after { border-image-source:var(--mount-art); filter:saturate(.86) brightness(1.12) }
+body.cardlib-open #overlay .studio-archive .studio-photo-art { border:1px solid #4d525844!important; box-shadow:none!important;
+  display:block; position:relative; width:100%; aspect-ratio:1; overflow:hidden;
+  background:var(--studio-art-matte,#252527)
+}
+body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-art img { object-position:var(--photo-focus,50% 50%)!important
+}
+body.cardlib-open #overlay .studio-archive .studio-photo-art::before { display:none!important }
+/* The same restrained glass reflection applies to thumbnail and full photograph. */
+body.cardlib-open #overlay .studio-archive .studio-photo-art::after,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-image::after { content:''; display:block!important; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(122deg,transparent 0 13%,#fff8e912 20%,#e6f0fa18 23%,transparent 31%,transparent 100%); }
+
+body.cardlib-open #overlay .studio-archive .studio-photo-caption { min-height:47px; padding:9px 3px 2px!important; position:relative
+}
+body.cardlib-open #overlay .studio-archive .studio-photo-caption b { font-size:21px!important; line-height:1.55!important; text-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive .studio-photo-caption .type-badge { color:#716a5d!important; letter-spacing:.04em; font-size:19px !important
+}
+body.cardlib-open #overlay .studio-archive .studio-mount-mark { box-shadow:0 2px 2px #26282b44!important
+}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current="true"] .studio-photo-paper {
+  outline:2px solid #8a7130!important; outline-offset:4px!important
+}
+body.cardlib-open #overlay .studio-archive .library-inspector {
+  --studio-grain-size:220px; display:flex; flex-direction:column; min-width:0; min-height:0; border-image:none!important; border-radius:0; border:0!important;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 8% 0%,#fff1d07a,transparent 68%),radial-gradient(ellipse at 100% 100%,#7e9aaf24,transparent 66%),linear-gradient(125deg,#eee6d3a6,#b9ac98a6),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#f3e8d4,#dac9ad)!important; background-blend-mode:normal,normal,normal,multiply,normal !important;
+  color:#373b32 !important;
+  box-shadow:inset 0 2px 0 #fff4d6,inset -2px -3px 0 #78604499,0 2px 0 #9b8e75,3px 5px 4px #050a0880,12px 26px 24px #020503b3 !important;
+  align-self:start;
+  padding:30px 28px 24px !important;
+  height:396px;
+  max-height:100%;
+  position:relative
+}
+body.cardlib-open #overlay .studio-archive .library-inspector::before,
+body.cardlib-open #overlay .studio-archive .library-inspector::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive .library-inspector:has(.studio-preview-empty) { display:none!important }
+body.cardlib-open #overlay .studio-archive .pv-meta { border:0!important; flex-wrap:wrap; grid-template-columns:repeat(3,minmax(0,1fr)); border-bottom:0 !important; display:flex; align-items:baseline; gap:10px 18px !important; padding:0 !important; margin:0 0 24px !important
+}
+body.cardlib-open #overlay .studio-archive .pv-label { color:#737475!important; font-size:20px!important
+}
+body.cardlib-open #overlay .studio-archive .pv-cost { font-size:22px!important; text-shadow:none!important; color:#934529 !important
+}
+body.cardlib-open #overlay .studio-archive .pv-chip { padding:4px 7px!important; border:1px solid #bcbebf!important; background:#e1e2e3!important; border-radius:0
+}
+body.cardlib-open #overlay .studio-archive .pv-chip:not([data-studio-rarity]) { color:#4a4f55!important
+}
+body.cardlib-open #overlay .studio-archive .pv-desc { border:0!important; background:transparent!important; padding:0!important; color:var(--sa-paper-ink)!important; overflow-wrap:anywhere; font:23px/1.8 var(--sa-serif) !important; font-size:23px !important; line-height:1.85 !important; margin:0 !important
+}
+body.cardlib-open #overlay .studio-archive .pv-desc :is(.d-num,.d-kw,.d-term) { text-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive .pv-desc .d-num { color:#934529 !important; font-weight:700; font-variant-numeric:tabular-nums
+}
+body.cardlib-open #overlay .studio-archive .pv-desc .d-kw { color:#4a5980 !important; font-weight:700
+}
+body.cardlib-open #overlay .studio-archive .pv-desc .d-term { border-bottom-color:#2d656166 !important; font-style:normal; color:var(--sa-paper-ink) !important; font-weight:400; border-bottom:0 !important
+}
+body.cardlib-open #overlay .studio-archive .pv-terms { border:0!important; border-radius:0; background:transparent!important; color:#635946!important; margin:0 0 8px !important; padding:0 0 8px !important; border-bottom:0 !important
+}
+body.cardlib-open #overlay .studio-archive .pv-note { margin:0!important; background:transparent!important; border:0!important; color:#635946!important; font-size:14px; line-height:1.75; overflow-wrap:anywhere; margin-top:20px !important; border-top:0 !important; padding:0 !important
+}
+body.cardlib-open #overlay .studio-archive .pv-nav { padding:0!important; display:grid; align-items:center; gap:8px; margin-top:0!important; grid-template-columns:1fr 32px auto 1fr
+}
+body.cardlib-open #overlay .studio-archive .pv-navbtn,
+body.cardlib-open #overlay .studio-archive .studio-zoom,
+body.cardlib-open #overlay .studio-archive .library-tools .hs-btn {
+  min-height:39px; padding:10px 12px!important; border:1px solid #a7a8a9!important; border-image:none!important;
+  border-radius:0; background:#e1e2e2!important; color:#3d4247!important;
+  font:14px/1.4 var(--font-ui)!important; text-shadow:none!important; box-shadow:none!important; cursor:pointer
+}
+body.cardlib-open #overlay .studio-archive .pv-pos { color:#766b58!important; font-variant-numeric:tabular-nums; font-size:20px!important; white-space:nowrap
+}
+body.cardlib-open #overlay .studio-archive .studio-zoom { margin-top:10px!important; border-color:#34383c!important;
+  display:flex; align-items:stretch; justify-content:space-between; min-height:44px; padding:0!important;
+  width:100%; border:0!important; color:#fff0d9 !important; letter-spacing:.08em; background:linear-gradient(180deg,#edbd8628 0 1px,transparent 1px),linear-gradient(105deg,#b3734beb,#945b3afa),url('../assets/ui/photo-studio/paper-grain.png') center/180px !important
+}
+body.cardlib-open #overlay .studio-archive .pv-navbtn:disabled { opacity:.4; cursor:default
+}
+body.cardlib-open #overlay .studio-archive :is(button,summary):focus-visible { outline:2px solid #545a61!important; outline-offset:3px
+}
+body.cardlib-open #overlay .studio-archive .pv-navbtn:hover:not(:disabled) { background:#d4c7b1!important
+}
+body.cardlib-open #overlay .studio-archive .studio-zoom:hover { background:linear-gradient(105deg,#bc8055eb,#a66a46fa),url('../assets/ui/photo-studio/paper-grain.png') center/180px !important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity] { text-shadow:none!important; -webkit-text-fill-color:currentColor!important; background-image:none!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="初始"] { color:#4f555b!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="古朴"] { color:#6d644e!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="稀有"] { color:#52585f!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="史诗"] { color:#755989!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="传说"] { color:#88713b!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="衍生"] { color:#4d5258!important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity="职业"] { color:#994d47!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info {
+  border:1px solid #a7a8aa!important; border-image:none!important; border-radius:0;
+  color:#30302e!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-rules { color:#303438!important; text-shadow:none!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-index { color:#868889!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail { border-color:#bcbdbe!important; background:#dfe0e2!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail span { color:#737475!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-detail b:not([data-studio-rarity]) { color:#373b40!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info textarea {
+  border:0!important; color:#34302c!important; box-shadow:none!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity] { text-shadow:none!important; -webkit-text-fill-color:currentColor!important; background-image:none!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="初始"] { color:#4f555b!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="古朴"] { color:#6d644e!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="稀有"] { color:#52585f!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="史诗"] { color:#755989!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="传说"] { color:#88713b!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="衍生"] { color:#4d5258!important
+}
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="职业"] { color:#994d47!important
+}
+body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap { transition:transform 140ms ease-out!important
+}
+body.cardlib-open #overlay .studio-archive .lib-item.selected { outline:none!important
+}
+body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap[aria-current='true']:not(:focus-visible) { outline:none!important; box-shadow:none!important
+}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current='true'] .studio-mount-mark {
+  box-shadow:inset 0 1px 0 #fff9,0 2px 2px #26282b44!important
+}
+body.reduce-motion.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap { transition:none!important; transform:none!important
+}
+@media (prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap,
+  body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap:is(:hover,:active) { transition:none!important; transform:none!important
+  }
+  body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after { transition:none!important
+  }
+}
+body.cardlib-open #overlay .studio-archive,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo {
+  --sa-serif:'Noto Serif SC','Source Han Serif SC','SimSun',serif;
+  --sa-stock:#e4dccd; --sa-stock-inset:#d8cfbe; --sa-rule:#b7ad9b;
+  --studio-art-matte:#252527;
+  --studio-room-image:url('../assets/scenes/transition-photo-v2.webp')
+}
+body.cardlib-open #overlay .studio-archive .lib-show { color:#b1a99b!important
+}
+body.cardlib-open #overlay .studio-archive .studio-clear:hover:not(:disabled) { background:#393b32!important
+}
+body.cardlib-open #overlay .studio-archive .studio-clear:disabled { opacity:.35; cursor:default; display:none
+}
+body.cardlib-open #overlay .studio-archive:has(.lib-grid.is-empty) .studio-clear { display:none }
+body.cardlib-open #overlay .studio-archive .clib-tabs::after { background:#bd6240!important; transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
+}
+body.cardlib-open #overlay .studio-archive .studio-search {
+  min-height:var(--sa-control-height); background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c292540!important; border:1px solid #cbd3be30!important; box-shadow:inset 0 1px 0 #d8dec218!important
+}
+body.cardlib-open #overlay .studio-archive .studio-select-shell {
+  min-height:var(--sa-control-height); background:transparent!important; border:0!important; border-left:1px solid #dbe2cf20!important
+}
+body.cardlib-open #overlay .studio-archive :is(#cardSearch,.studio-choice-trigger) { min-height:var(--sa-control-height); color:#e8dfcb!important; font-size:18px !important
+}
+body.cardlib-open #overlay .studio-archive :is(.studio-search,.studio-select-shell):hover { border-color:#a99a82!important
+}
+body.cardlib-open #overlay .studio-archive .studio-search::after { display:none!important
+}
+body.cardlib-open #overlay .studio-archive :is(.studio-choice[open],.studio-choice.has-condition) .studio-choice-trigger { background:#d1ac7815; color:#f4e4c6!important; box-shadow:inset 0 -1px 0 #d1ac78aa
+}
+body.cardlib-open #overlay .studio-archive :is(.studio-choice[open],.studio-choice.has-condition) .studio-choice-trigger::after { border-color:#d1ac78 }
+body.cardlib-open #overlay .studio-archive .studio-choice-option[aria-selected='true'] { background:#d0d8bc20 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-active-filters:empty { display:none
+}
+body.cardlib-open #overlay .studio-archive .lib-grid { scroll-behavior:auto;
+  position:relative; z-index:1;
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); flex:1;
+  min-width:0; align-content:start; align-items:start;
+  overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:thin
+}
+body.cardlib-open #overlay .studio-archive .studio-photo-paper[data-photo-mount] {
+  --studio-grain-size:96px; background:radial-gradient(ellipse at 8% 0%,rgb(255 241 208 / var(--photo-light-warm,.4)),transparent 68%),radial-gradient(ellipse at 100% 100%,rgb(126 154 175 / var(--photo-light-cool,.1)),transparent 66%),linear-gradient(125deg,#eee6d3bf,#b9ac98bf),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#f3e8d4,#dac9ad)!important; background-blend-mode:normal,normal,normal,multiply,normal!important;
+  --paper-shadow:inset 0 1px 0 #fff4d6cc,inset -1px -1px 0 #78604480,0 1px 0 #9b8e75,1px 2px 2px #050a0870,var(--photo-shadow-x,2px) var(--photo-shadow-y,5px) var(--photo-shadow-blur,7px) #020503a0
+;
+  display:block; min-width:0;
+  --mount-border:calc(var(--mount-stroke) * var(--mount-scale));
+  --mount-space:max(12px,calc(var(--mount-border) + 4px)); isolation:isolate; border:0!important; border-image:none!important; padding:var(--mount-space)!important}
+body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-caption {
+  display:flex; flex-direction:column; align-items:flex-start; text-align:left; gap:5px; padding:12px 4px 5px !important; min-height:58px
+}
+body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-caption b {
+  display:block; width:100%; margin-inline:0; font-family:var(--sa-serif)!important; line-height:1.4!important;
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-height:21px; padding-right:0; font-size:21px !important; font-weight:600; color:var(--sa-paper-ink) !important
+}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current='true'] .studio-photo-paper { outline-offset:4px !important; outline:3px solid var(--studio-selection-ink) !important
+}
+body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current='true'] .studio-photo-caption b { font-weight:700 }
+body.cardlib-open #overlay .studio-archive .library-preview {
+  display:flex; flex-direction:column; flex:1 1 auto!important; min-height:0; gap:0;
+  overflow:hidden; overscroll-behavior:contain;
+  scrollbar-width:thin; scrollbar-color:#777168 #252527; padding:0 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-preview-empty {
+  padding:24px 16px; display:grid; place-content:center; flex:1; text-align:center; color:#746b58; border:0
+}
+body.cardlib-open #overlay .studio-archive .studio-preview-empty .pv-empty { margin:0 0 12px; line-height:1
+}
+body.cardlib-open #overlay .studio-archive .studio-preview-empty .ic { width:32px!important; height:32px!important
+}
+body.cardlib-open #overlay .studio-archive .studio-preview-empty .pv-hint { margin:0; font:15px/1.8 var(--font-ui)!important; color:#746b58
+}
+body.cardlib-open #overlay .studio-archive .studio-preview-copy {
+  --su-ink:var(--sa-paper-ink); display:flex; flex-direction:column; flex:1 1 auto!important; min-height:0; color:var(--sa-paper-ink)!important; text-align:left; overflow:hidden; background:transparent !important; border:0; border-left:0; box-shadow:none; border-top:0; margin:0; padding:0 !important
+}
+body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { min-height:0; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; padding-right:5px; scrollbar-width:thin; scrollbar-color:#a79880 transparent; scroll-padding-block:8px}
+body.cardlib-open #overlay .studio-archive .studio-preview-actions { flex:0 0 auto; border-top:0; margin-top:28px; padding-top:0
+}
+body.cardlib-open #overlay .studio-archive .studio-dossier-title { background:transparent;
+  border:0; border-bottom:0; margin:0 0 18px; padding:0
+}
+body.cardlib-open #overlay .studio-archive .studio-dossier-name {
+  display:block!important; padding:0!important; border:0; text-align:left; text-shadow:none; overflow-wrap:anywhere; font:500 30px/1.35 var(--sa-serif) !important; color:#30382e; letter-spacing:.06em; margin:0 !important; font-size:32px !important
+}
+body.cardlib-open #overlay .studio-archive .studio-file-field {
+  display:flex; min-height:0; min-width:0;
+  padding:0; background:transparent; border:0; flex-direction:row; align-items:baseline; gap:6px
+}
+body.cardlib-open #overlay .studio-archive .studio-file-field .pv-label { color:#7a705e!important; font:20px/1.3 var(--font-ui)!important; letter-spacing:.08em; font-size:20px !important
+}
+body.cardlib-open #overlay .studio-archive .studio-file-field :is(.pv-chip,.pv-cost) {
+  min-width:0; max-width:100%; overflow-wrap:anywhere;
+  padding:0!important; border:0!important; background:none!important; font:500 17px/1.35 var(--sa-serif) !important; font-size:18px !important
+}
+body.cardlib-open #overlay .studio-archive .pv-note>b { display:block; margin-bottom:4px; font-size:12px; letter-spacing:.06em
+}
+body.cardlib-open #overlay .studio-archive .pv-navbtn { min-height:36px; color:#4b4337!important; border:0 !important; background:transparent !important; border-color:transparent !important; font-size:26px !important; line-height:1 !important; padding:2px 8px !important
+}
+body.cardlib-open #overlay .studio-archive .studio-zoom>span { align-self:center; min-width:0; text-align:left; overflow-wrap:anywhere; font-size:16px; font-family:var(--sa-serif); padding:12px 16px; letter-spacing:.08em
+}
+body.cardlib-open #overlay .studio-archive .studio-zoom>i { display:grid; place-items:center; color:#fff0da; font:22px/1 var(--font-ui); font-style:normal; background:transparent; flex:0 0 48px
+}
+body.cardlib-open #overlay .studio-archive .studio-shutter { width:24px; height:24px; flex:0 0 auto }
+body.cardlib-open #overlay .studio-archive .clib-empty .studio-shutter { width:48px; height:48px; color:#d1ac78; opacity:.8 }
+body.cardlib-open #overlay .studio-archive .studio-zoom:hover>i { background:transparent
+}
+body.cardlib-open #overlay .studio-archive :is(button,summary):focus-visible,
+body.cardlib-open #overlay .studio-archive .studio-search:focus-within { outline-color:#c78b56!important
+}
+body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom) { transition:background-color var(--motion-feedback,180ms) var(--motion-ease-enter),color var(--motion-feedback,180ms) var(--motion-ease-enter),border-color var(--motion-feedback,180ms) var(--motion-ease-enter)!important
+}
+body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.pv-navbtn,.studio-zoom):active:not(:disabled) { filter:brightness(.94)
+}
+body.reduce-motion.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
+body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
+}
+@media (prefers-reduced-motion:reduce) {
+  body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
+  body.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
+  }
+}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] { background:radial-gradient(ellipse at 8% 0%,#fff1d065,transparent 68%),radial-gradient(ellipse at 100% 100%,#7e9aaf24,transparent 66%),linear-gradient(125deg,#e4e5d9a6,#aab3a5a6),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#dde1d3,#c7cebd)!important; background-blend-mode:normal,normal,normal,multiply,normal
+}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules :is(.d-kw,.d-term) { text-shadow:none!important
+}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term { border-bottom-color:#2d656166 !important; font-style:normal; color:#30302e !important; font-weight:400; border-bottom:0 !important
+}
+body.cardlib-open #overlay .studio-archive [data-studio-rarity='传说'],
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-info [data-studio-rarity='传说'] { color:#705826!important
+}
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-cardwrap { overflow:hidden; }
+body.cardlib-open #overlay .lib-grid.lib-holo .lib-item:nth-child(-n+24) .lib-cardwrap::before {
+  content:''; position:absolute; top:-12%; bottom:-12%; left:0; width:40%; pointer-events:none; opacity:0;
+  background:linear-gradient(105deg, transparent, rgba(199,155,255,.58), rgba(135,150,161,.52), transparent);
+  animation:libHoloSweep .95s ease-in-out!important;
+  animation-delay:calc(var(--i,0) * 40ms)!important; }
+@keyframes libHoloSweep {
+  0% { opacity:0; transform:translateX(-130%) skewX(-18deg); }
+  16% { opacity:.92; }
+  100% { opacity:0; transform:translateX(150%) skewX(-18deg); } }
+/* Complete gallery structure: no dependency on retired cabinet layouts. */
+body.cardlib-open #overlay .card.page:has(.studio-archive) {
+  width:100%; height:100%; max-width:none; max-height:none; padding:0!important;
+  border:0!important; border-radius:0; background:#1b1b1e; overflow:hidden;
+}
+body.cardlib-open #overlay .studio-archive .library-tools { grid-area:tools; display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; min-width:0; gap:8px; }
+body.cardlib-open #overlay .studio-archive .studio-head-summary { display:flex; align-items:baseline; gap:14px; white-space:nowrap; }
+body.cardlib-open #overlay .studio-archive .studio-head-summary h2 { margin:0; color:#f1e6d1; font:600 25px/1.25 var(--sa-serif); letter-spacing:.04em; }
+body.cardlib-open #overlay .studio-archive .studio-head-total { color:#b9b09d; font:15px/1.4 var(--font-ui); }
+body.cardlib-open #overlay .studio-archive .studio-head-total b { color:#e8d4aa; font:600 21px/1 var(--sa-serif); font-variant-numeric:tabular-nums; }
+body.cardlib-open #overlay .studio-archive .clib-search { width:100%; padding:10px 12px 10px 34px; border:0; outline:0; background:transparent; font-family:var(--font-ui); }
+body.cardlib-open #overlay .studio-archive .lib-grid.is-empty { grid-template-columns:1fr; place-items:center; align-content:center; }
+body.cardlib-open #overlay .studio-archive .lib-item {
+  margin:0;
+  display:block; position:relative; min-width:0; padding:12px 2px 4px; border:0;
+  contain:layout style; content-visibility:visible;
+}
+body.cardlib-open #overlay .studio-archive .lib-item.lib-ph { height:var(--lib-tile-h,321px); pointer-events:none; }
+body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-paper { --mount-scale:.85; }
+body.cardlib-open #overlay .studio-archive .studio-photo-art img {
+  display:block; width:100%; height:100%; max-width:none; object-fit:var(--photo-fit,cover)!important; filter:none;
+}
+body.cardlib-open #overlay .studio-archive .clib-empty {
+  grid-column:1/-1; width:min(100%,560px); padding:40px 32px; border:0;
+  background:transparent; text-align:center; color:var(--su-ink);
+}
+body.cardlib-open #overlay .studio-archive .clib-empty-icon .ic { width:42px; height:42px; opacity:.6; }
+body.cardlib-open #overlay .studio-archive .clib-empty p { font-size:17px; line-height:1.7; }
+body.cardlib-open #overlay .studio-archive .clib-empty .hs-btn { border:1px solid #8e7d68; background:transparent; color:var(--su-ink); }
+body.cardlib-open #overlay.closing .card.page:has(.studio-archive) { animation:studioArchiveLeave var(--motion-exit,180ms) var(--motion-ease-exit) both; }
+@keyframes studioArchiveLeave { from {opacity:1;transform:translateY(0);} to {opacity:0;transform:translateY(8px);} }
+/* Data and navigation use real card values and the current filtered order. */
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(86px,1fr)); gap:10px; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics>div { min-width:0; padding-left:10px; border-left:0; padding:0; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics dt { font:600 16px/1.4 var(--sa-serif); letter-spacing:.03em; color:#2d6561; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics dd { display:flex; align-items:baseline; gap:8px; margin:3px 0 0; flex-wrap:wrap; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics dd b { font:500 27px/1.15 var(--sa-serif); font-variant-numeric:tabular-nums; color:#934529; font-size:25px; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics dd small { font:12px/1.3 var(--sa-serif); color:#2d6561; }
+body.cardlib-open #overlay .studio-archive .studio-photo:focus-visible .studio-photo-paper { outline:2px solid #e3c094!important; outline-offset:5px!important; }
+@media (prefers-reduced-motion:reduce) { body.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; } }
+body.reduce-motion.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; }
+body.cardlib-open #overlay .studio-archive .library-head::after { content:''; display:block!important; position:absolute; left:0; right:0; bottom:0; height:1px; pointer-events:none; background:linear-gradient(90deg,transparent,#bdc3ac30 28%,#bdc3ac18 72%,transparent); }
+body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-choice-menu) { --studio-scroll-top:#d7bf94dd; --studio-scroll-bottom:#ae8d5bbf; --studio-scroll-rail:#d7c8a10d; --studio-scroll-hover-top:#efd4a9e6; --studio-scroll-hover-bottom:#bea06ed9; }
+body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { flex:1 1 auto; --studio-scroll-top:#927744cc; --studio-scroll-bottom:#705d45aa; --studio-scroll-rail:#8b77551a; --studio-scroll-hover-top:#80633ce6; --studio-scroll-hover-bottom:#6b5038d9; }
+body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu) { scrollbar-gutter:stable; scrollbar-width:thin; scrollbar-color:var(--studio-scroll-top) transparent; }
+@supports selector(::-webkit-scrollbar) {
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu) { scrollbar-color:auto; scrollbar-width:auto; }
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar { width:12px; height:12px; }
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar-track { background:repeating-linear-gradient(180deg,var(--studio-scroll-perf,transparent) 0 4px,transparent 4px 14px) 1px 0/2px 100% no-repeat,repeating-linear-gradient(180deg,var(--studio-scroll-perf,transparent) 0 4px,transparent 4px 14px) right 1px top 0/2px 100% no-repeat,linear-gradient(var(--studio-scroll-rail),var(--studio-scroll-rail)) center/1px 100% no-repeat; border-left:0; }
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar-thumb { min-height:54px; background:linear-gradient(180deg,transparent 0 46%,#44341c55 46% 48%,transparent 48% 52%,#44341c55 52% 54%,transparent 54%),linear-gradient(90deg,#fff3,transparent 45% 70%,#38291333),linear-gradient(180deg,var(--studio-scroll-top),var(--studio-scroll-bottom)); background-clip:padding-box; border-radius:1px; border:2px solid transparent; }
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar-thumb:hover { background:linear-gradient(180deg,transparent 0 46%,#44341c55 46% 48%,transparent 48% 52%,#44341c55 52% 54%,transparent 54%),linear-gradient(90deg,#fff3,transparent 45% 70%,#38291333),linear-gradient(180deg,var(--studio-scroll-hover-top),var(--studio-scroll-hover-bottom)); background-clip:padding-box; }
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar-button { display:none; }
+}
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-num { color:#934529!important; font-weight:700; font-variant-numeric:tabular-nums; text-shadow:none!important; }
+body.cardlib-open #overlay .studio-archive .studio-browse-controls[hidden] { display:none!important; }
+body.cardlib-open #overlay .studio-archive .studio-quick-rarity { flex:0 0 180px; }
+body.cardlib-open #overlay .studio-archive .studio-quick-sort { flex:0 0 200px; }
+body.cardlib-open #overlay .studio-archive .pv-desc .d-term[data-term], body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561!important; font-weight:600; border-bottom:1px dotted #2d656166!important; }
+body.cardlib-open #overlay .studio-archive .studio-quick-person { flex:0 0 200px; }
+body.cardlib-open #overlay .studio-archive .pv-desc .d-term, body.cardlib-open #overlay .studio-archive .pv-desc .d-num, body.cardlib-open #overlay .studio-archive .studio-value,
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules :is(.d-term,.d-num) { white-space:nowrap; }
+/* The film rail is decorative; the scrollbar retains its native input contract. */
+@supports selector(::-webkit-scrollbar) {
+  body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu)::-webkit-scrollbar-thumb:active { background:linear-gradient(180deg,transparent 0 46%,#44341c55 46% 48%,transparent 48% 52%,#44341c55 52% 54%,transparent 54%),linear-gradient(90deg,#fff3,transparent 45% 70%,#38291333),linear-gradient(180deg,#d7af74,#9b754c); background-clip:padding-box; }
+}
+body.cardlib-open #overlay .studio-archive.studio-single-type .lib-grid .type-badge { display:none!important; }
+body.cardlib-open #overlay .studio-archive.studio-single-type .lib-grid .studio-photo-caption { min-height:0; padding:10px 4px 5px!important; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics.is-single { display:block; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics.is-single>div { display:flex; align-items:baseline; gap:12px; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics.is-single dt { font-size:18px; }
+body.cardlib-open #overlay .studio-archive .studio-effect-metrics.is-single dd { margin:0; }
+/* The existing ornament asset is a foreground layer, never beneath the photograph. */
+body.cardlib-open #overlay .studio-archive .lib-grid .studio-photo-art { z-index:1; margin:calc(var(--mount-border) * -.35); width:calc(100% + var(--mount-border) * .7); }
+body.cardlib-open #overlay .studio-archive .studio-photo-caption { z-index:1; }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-main .cz-photo-image { z-index:1!important; max-width:none !important; width:calc(100% + (var(--mount-space) - var(--mount-border) * .7) * 2) !important; margin-inline:calc(var(--mount-border) * .7 - var(--mount-space)); margin-block:calc((var(--mount-border) * .7 - var(--mount-space)) / var(--cz-photo-ratio,1)); max-height:calc(var(--game-layout-height, 100vh) - 190px + (var(--mount-space) - var(--mount-border) * .7) * 2 / var(--cz-photo-ratio,1)) !important; }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-hint { z-index:6!important; position:relative; }
+/* Printed identity replaces the existing rarity label; it is not a numeric grade. */
+body.cardlib-open #overlay .studio-archive #libPreview .studio-file-field .studio-rarity-stamp[data-studio-rarity] { display:inline-block; border:1px solid currentColor!important; padding:3px 8px!important; background:none!important; font:600 14px/1.3 var(--sa-serif)!important; letter-spacing:.08em; transform:rotate(-2deg); white-space:nowrap; outline:none; }
+body.cardlib-open #overlay .studio-archive #libPreview .studio-rarity-stamp:is([data-studio-rarity="职业"],[data-studio-rarity="衍生"]) { transform:none; border-style:dashed!important; outline:0; }
+body.cardlib-open #overlay .studio-archive .studio-tab-badge { display:none; flex:0 0 18px; width:18px; height:18px; }
+body.cardlib-open #overlay .studio-archive .type-tab.on .studio-tab-badge { display:inline-flex; }
+body.cardlib-open #overlay .studio-archive .studio-tab-badge svg { display:block; width:100%; height:100%; }
+/* Thumbnail identity sits on the paper caption, never over illustration pixels. */
+body.cardlib-open #overlay .studio-archive .studio-photo-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; width:100%; min-height:23px; padding:2px 2px 0; }
+body.cardlib-open #overlay .studio-archive .studio-thumbnail-stamp[data-studio-rarity] { display:inline-block; flex:0 0 auto; margin-left:auto; padding:2px 7px; border:1px solid currentColor; font:600 16px/1.35 var(--sa-serif); letter-spacing:.08em; transform:rotate(var(--stamp-tilt,-2deg)); opacity:var(--stamp-ink-opacity,.92); white-space:nowrap; background:none!important; background-clip:border-box!important; -webkit-background-clip:border-box!important; -webkit-text-fill-color:currentColor!important; position:relative; isolation:isolate; }
+body.cardlib-open #overlay .studio-archive .studio-thumbnail-stamp::after { content:''; position:absolute; inset:-1px; pointer-events:none; background:linear-gradient(115deg,transparent 0 17%,#e1d8c7 17% 19%,transparent 19% 71%,#ded5c4 71% 73%,transparent 73%) top/100% 1px no-repeat,linear-gradient(115deg,transparent 0 36%,#ded5c4 36% 39%,transparent 39%) bottom/100% 1px no-repeat; }
+body.cardlib-open #overlay .studio-archive .studio-thumbnail-stamp:is([data-studio-rarity="职业"],[data-studio-rarity="衍生"]) { transform:none; border-style:dashed; }
+body.cardlib-open #overlay .studio-archive :is(.studio-thumbnail-stamp,.studio-rarity-stamp)[data-studio-rarity="稀有"] { color:#356b99!important; }
+/* Prismatic identity uses coloured ink on the paper in every photo presentation. */
+body.cardlib-open #overlay .studio-archive #libPreview .studio-file-field .studio-rarity-stamp[data-studio-rarity="棱彩"],
+body.cardlib-open #overlay .studio-archive .studio-thumbnail-stamp[data-studio-rarity="棱彩"],
+body.cardlib-open #cardZoom.cz-photo .cz-photo-info :is(span,b)[data-studio-rarity="棱彩"] {
+  color:#775292!important; background-color:transparent!important;
+  background-image:linear-gradient(105deg,#a0446e,#9c681a 25%,#2d7468 45%,#3d65a0 68%,#785292 85%,#a0446e)!important;
+  background-clip:text!important; -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important; text-shadow:none!important;
+}
+/* Same selection ink binds the current photograph to its text dossier. */
+body.cardlib-open #overlay .studio-archive .library-inspector:has(.library-preview.has-preview)::before { content:''; display:block!important; position:absolute; left:9px; top:28px; bottom:28px; width:2px; background:var(--studio-selection-ink); opacity:.8; pointer-events:none; }
+/* The shared tooltip keeps its own interaction and text; only this room changes its stock. */
+body.cardlib-open:has(.studio-archive) .term-tip { width:340px; max-width:calc(var(--game-layout-width, 100vw) - 32px); padding:18px 20px; border:1px solid #b8aa90; border-radius:0; background:linear-gradient(#e8dfcef5,#e8dfcef5),url('../assets/ui/photo-studio/paper-grain.png') center/220px; color:#30382e; box-shadow:0 2px 0 #a79778,0 8px 20px #080c0940; font:17px/1.8 'Noto Serif SC','SimSun',serif; text-shadow:none; }
+body.cardlib-open:has(.studio-archive) .term-tip>b { display:block; margin:0 0 8px; padding:0 0 8px; border-bottom:1px solid #b8aa9066; color:#2d6561; font:600 20px/1.4 'Noto Serif SC','SimSun',serif; letter-spacing:.05em; }
+body.cardlib-open:has(.studio-archive) .term-tip :is(.term-tip-sep,.ic) { display:none; }
+/* One real foreground ornament. The image grows into it instead of stopping at its edge. */
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .studio-photo-ornament { position:absolute; inset:0; display:block; box-sizing:border-box; z-index:4; pointer-events:none; border:var(--mount-border) solid transparent; border-image:var(--mount-overlay-art,var(--mount-art)) var(--mount-slice) / .8 stretch; border-image-outset:0; filter:saturate(.76) brightness(.96); }
+/* Corners use the original transparent carved groups at their own size, not the rail width. */
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .studio-photo-corner { position:absolute; display:block; z-index:1; background:var(--mount-corner-art,none) center/contain no-repeat; pointer-events:none; width:calc(var(--mount-border) * var(--mount-corner-scale,2.2) * 1.2); height:calc(var(--mount-border) * var(--mount-corner-scale,2.2) * 1.2); filter:drop-shadow(1px 2px 1px #10191466); }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .corner-tl { left:calc(var(--mount-border) * -1); top:calc(var(--mount-border) * -1); }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .corner-tr { right:calc(var(--mount-border) * -1); top:calc(var(--mount-border) * -1); transform:rotate(90deg); }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .corner-br { right:calc(var(--mount-border) * -1); bottom:calc(var(--mount-border) * -1); transform:rotate(180deg); }
+body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .corner-bl { left:calc(var(--mount-border) * -1); bottom:calc(var(--mount-border) * -1); transform:rotate(270deg); }

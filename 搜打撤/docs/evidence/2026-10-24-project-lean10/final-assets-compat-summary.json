@@ -1,0 +1,23 @@
+{
+  "status": 1,
+  "total": 117,
+  "passed": 114,
+  "failed": 3,
+  "failures": [
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "name": "reviewed production-only asset omissions preserves 195 historical exclusions and adds exactly 91 source-retained images",
+      "error": "AssertionError: expected [ …(4) ] to deeply equal []"
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "name": "reviewed production-only asset omissions omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs",
+      "error": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "name": "reviewed production-only asset omissions retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references",
+      "error": "AssertionError: expected +0 to be 30 // Object.is equality"
+    }
+  ]
+}

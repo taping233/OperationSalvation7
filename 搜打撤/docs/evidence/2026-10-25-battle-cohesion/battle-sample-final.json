@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T11:45:20.121Z",
+  "inputKind": "real-input",
+  "detail": "禁用HMR的本会话5317预览，真实点击固定生产战斗入口并等待结束回合可见；黑像与3名拾荒者，独立内存存储、当前窗口，无玩家存档写入。",
+  "screenshot": {
+    "path": "battle-sample-final.png",
+    "bytes": 112101,
+    "sha256": "9c4f398cc37773d817b9f4d937973dcc22b84f01f46ad58bffc0597fb6ab0cc9"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5317/dev/battle-cohesion-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 342,
+      "src": "http://127.0.0.1:5317/assets/portraits/frames/heixiang/sprite-v1/neutral.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://127.0.0.1:5317/assets/portraits/cut/enemies/bandit.webp?art=9e880cbc4fee&v=0.60.0",
+      "width": 520
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://127.0.0.1:5317/assets/portraits/cut/enemies/bandit.webp?art=9e880cbc4fee&v=0.60.0",
+      "width": 520
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://127.0.0.1:5317/assets/portraits/cut/enemies/bandit.webp?art=9e880cbc4fee&v=0.60.0",
+      "width": 520
+    }
+  ],
+  "console": []
+}

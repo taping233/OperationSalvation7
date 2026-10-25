@@ -1,0 +1,3859 @@
+{
+  "classification": "test-source-only",
+  "totals": {
+    "before": {
+      "normalized": 2319536,
+      "commentIndependent": 2214142,
+      "tokens": 560041
+    },
+    "after": {
+      "normalized": 2291283,
+      "commentIndependent": 2186052,
+      "tokens": 549504
+    }
+  },
+  "net": {
+    "normalized": 28253,
+    "commentIndependent": 28090,
+    "tokens": 10537
+  },
+  "files": [
+    {
+      "path": "tests/a3-battle-rules.test.js",
+      "beforeSha256": "41a3939a9136575e5ba6bdbb8929ea917330c3b875a5743f94f2960eb28d1515",
+      "afterSha256": "0081131b4b766ada6fb5a28ce2c6a29e33dfcffa35bdd7e03cf30a0141cce867",
+      "before": {
+        "normalized": 20564,
+        "commentIndependent": 19078,
+        "tokens": 4551
+      },
+      "after": {
+        "normalized": 19568,
+        "commentIndependent": 18082,
+        "tokens": 4126
+      },
+      "assertionNodes": 112,
+      "registrationNodes": 24,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/abyss-sovereign.test.js",
+      "beforeSha256": "33c63cbcf37e6fbc4659bf5219a8a3bd4fd1e7fecd4ca91e2a45cef136a410e4",
+      "afterSha256": "8f3bcf68d7d8b1b83707937aab051dc53d553e8b7c4fcf14ad8e21360ce7a764",
+      "before": {
+        "normalized": 8844,
+        "commentIndependent": 7564,
+        "tokens": 1917
+      },
+      "after": {
+        "normalized": 8823,
+        "commentIndependent": 7543,
+        "tokens": 1912
+      },
+      "assertionNodes": 80,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/agent-console-jump.test.js",
+      "beforeSha256": "84a383dc161fb18a6dc2387543827d3c179abde634d83f1d1a6519140d56da36",
+      "afterSha256": "f8e465accdcc550cba72e4925394e340c913eb86fbb9e4734876e5a49cf62de4",
+      "before": {
+        "normalized": 10663,
+        "commentIndependent": 9255,
+        "tokens": 2077
+      },
+      "after": {
+        "normalized": 10572,
+        "commentIndependent": 9164,
+        "tokens": 2033
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/agent-scenes.test.js",
+      "beforeSha256": "c93a845dde49cdfc6abcc979e02c4e99fedbef6525c5bffd92e2b08052ee8d2d",
+      "afterSha256": "c3ae1fdb7b8573884466e4dee9f6b617331fc1a7f2965ff9385049f50bf73b14",
+      "before": {
+        "normalized": 6028,
+        "commentIndependent": 5262,
+        "tokens": 1420
+      },
+      "after": {
+        "normalized": 5587,
+        "commentIndependent": 4821,
+        "tokens": 1283
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/altar-sacrifice-zones-cloud.test.js",
+      "beforeSha256": "5994fe63d9c853b35d37dddd2212cc15b3f72320f12b5c44ce9539743cf4997f",
+      "afterSha256": "0eb22a3f684faed89ffb54196bb700c3eb96ca951196399b01c8d20567d97b8a",
+      "before": {
+        "normalized": 12714,
+        "commentIndependent": 10958,
+        "tokens": 2829
+      },
+      "after": {
+        "normalized": 11728,
+        "commentIndependent": 10135,
+        "tokens": 2604
+      },
+      "assertionNodes": 74,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/armup-mode.test.js",
+      "beforeSha256": "46b9554e7cf495da362363d6e0e5e4bf37997ddb252ba38d59a11e84dd376823",
+      "afterSha256": "5c1032138f8e00029b4d6db89c9af1c7dd1d9b7618c98a200e3127f638480a23",
+      "before": {
+        "normalized": 4088,
+        "commentIndependent": 4005,
+        "tokens": 1164
+      },
+      "after": {
+        "normalized": 4067,
+        "commentIndependent": 3984,
+        "tokens": 1159
+      },
+      "assertionNodes": 42,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/bag-pouch-capacity.test.js",
+      "beforeSha256": "a8666139783edca155f59abd22802113d5f3ee5de7aa559cf6e0d4e9a0da34f2",
+      "afterSha256": "3944bc13044c861fea9a30b026cc24bb19e2bf09b38c148f5bcc50d0f221600c",
+      "before": {
+        "normalized": 19925,
+        "commentIndependent": 19892,
+        "tokens": 5621
+      },
+      "after": {
+        "normalized": 19817,
+        "commentIndependent": 19784,
+        "tokens": 5587
+      },
+      "assertionNodes": 208,
+      "registrationNodes": 24,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/bag-slam-button.test.js",
+      "beforeSha256": "9087dede7b158ef82f9edb8542fddf866379b2a5c58e783f850e4efcf53c2082",
+      "afterSha256": "c0796f2a70699a5ad17e906bc854dba0ccd3d00276d9f5ac4c3a2e3dfbf35067",
+      "before": {
+        "normalized": 12602,
+        "commentIndependent": 11375,
+        "tokens": 3077
+      },
+      "after": {
+        "normalized": 12581,
+        "commentIndependent": 11354,
+        "tokens": 3072
+      },
+      "assertionNodes": 126,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-all-cards.test.js",
+      "beforeSha256": "786d8b02cc0095679dd61a4c86d5ded36de8be124117a98c63897794067fc446",
+      "afterSha256": "18826d3b110fc92e125d294d260be772a811e9a74c89d73da9200cbb1c191918",
+      "before": {
+        "normalized": 18631,
+        "commentIndependent": 15642,
+        "tokens": 3959
+      },
+      "after": {
+        "normalized": 18610,
+        "commentIndependent": 15621,
+        "tokens": 3954
+      },
+      "assertionNodes": 68,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-ally-dom-order.test.js",
+      "beforeSha256": "5d047c338ca608a47d000edcbba464288bfb40890cca7ffc43024266d130ed0b",
+      "afterSha256": "51258688e6db0914ff1955cde7b8bbe8f2a9bb59a5cf239c44540ae8d3166fa1",
+      "before": {
+        "normalized": 11504,
+        "commentIndependent": 11504,
+        "tokens": 3126
+      },
+      "after": {
+        "normalized": 10609,
+        "commentIndependent": 10609,
+        "tokens": 2851
+      },
+      "assertionNodes": 82,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-area-hover-hand-context.test.js",
+      "beforeSha256": "c74c2b48e1eaf5e0d8c4f0ff178a0887b1ebe9609c72604b6a3e2c8aa3ec2f3b",
+      "afterSha256": "e62cde2ef1d1bae9c3be3c0df367c48aaf6298b41645e250388a1e40bd7e9389",
+      "before": {
+        "normalized": 16677,
+        "commentIndependent": 16008,
+        "tokens": 4248
+      },
+      "after": {
+        "normalized": 15995,
+        "commentIndependent": 15326,
+        "tokens": 4015
+      },
+      "assertionNodes": 118,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-art-warm-scope.test.js",
+      "beforeSha256": "e14a09fff698d5e4625a3ce51734eb35b8d6e6a0db5aa74a4e2af7d2557baf94",
+      "afterSha256": "8e4b5c21039adc3daada1d3bc257dac9f5213f143f2848d981522f4275e9f314",
+      "before": {
+        "normalized": 2306,
+        "commentIndependent": 2306,
+        "tokens": 642
+      },
+      "after": {
+        "normalized": 2289,
+        "commentIndependent": 2289,
+        "tokens": 629
+      },
+      "assertionNodes": 16,
+      "registrationNodes": 2,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-bloom-discovery.test.js",
+      "beforeSha256": "de37b73ca1285dc12bc3727773df5d544becdf097fa35b2c2a74965e099dc799",
+      "afterSha256": "d00249308992ae2cf1d10b8d38ba244adf513efbd361512da926ae57e9040bde",
+      "before": {
+        "normalized": 4315,
+        "commentIndependent": 4232,
+        "tokens": 1171
+      },
+      "after": {
+        "normalized": 4225,
+        "commentIndependent": 4142,
+        "tokens": 1148
+      },
+      "assertionNodes": 36,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-curse-immunity-lifetime.test.js",
+      "beforeSha256": "d08e2f1c575e4c49f14290a3d1ceaffc9a243a3dd2d6038fb6967f2c9114e071",
+      "afterSha256": "5c009164e2fd3a6d56fbfe0113e54d45eccd1505645250be96007413b1cb37b8",
+      "before": {
+        "normalized": 4299,
+        "commentIndependent": 4138,
+        "tokens": 1156
+      },
+      "after": {
+        "normalized": 4278,
+        "commentIndependent": 4117,
+        "tokens": 1151
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-dev-grant-card.test.js",
+      "beforeSha256": "c89eb26c58a0a11125d11353fd8ccd9203e589b84a141af680e442e8228841b6",
+      "afterSha256": "0afb2b98fdbd0b715bf78b05fd0bb8ca6fed5edbf3dcaf2fe2e93c980b7d8b44",
+      "before": {
+        "normalized": 1846,
+        "commentIndependent": 1846,
+        "tokens": 497
+      },
+      "after": {
+        "normalized": 1836,
+        "commentIndependent": 1836,
+        "tokens": 484
+      },
+      "assertionNodes": 12,
+      "registrationNodes": 1,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-direct-trigger-source.test.js",
+      "beforeSha256": "e9346f38b11a80e3cfa7265eb7de9d487d984cf23641b15ac294aca1616227d8",
+      "afterSha256": "01a3b5b1b8d26e346eff48c4f23225eb74784d0767a273b1adab458147b607f7",
+      "before": {
+        "normalized": 4865,
+        "commentIndependent": 4865,
+        "tokens": 1241
+      },
+      "after": {
+        "normalized": 4840,
+        "commentIndependent": 4840,
+        "tokens": 1236
+      },
+      "assertionNodes": 58,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-discover-result-source.test.js",
+      "beforeSha256": "dccb1fd911cef0a00ddbecac48ae4089721dd0ddffd669c4c5e7aa9b8c652344",
+      "afterSha256": "255d9b50066a6935bc7fc6523920331e2f543f4d319ffbc3ffdf91b63621bcbb",
+      "before": {
+        "normalized": 5479,
+        "commentIndependent": 5396,
+        "tokens": 1565
+      },
+      "after": {
+        "normalized": 5389,
+        "commentIndependent": 5306,
+        "tokens": 1542
+      },
+      "assertionNodes": 54,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-effect-damage-boundary.test.js",
+      "beforeSha256": "e5b106bd6388817269b5ae95b451d2fd47aa72a42e5651be582f1261daf045c7",
+      "afterSha256": "59b12f8b5c9bc4ae5d73fd8385f975c098044c10d07bdbe072aa05fb9326fe5d",
+      "before": {
+        "normalized": 2976,
+        "commentIndependent": 2976,
+        "tokens": 815
+      },
+      "after": {
+        "normalized": 2953,
+        "commentIndependent": 2953,
+        "tokens": 810
+      },
+      "assertionNodes": 12,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-end-turn-selection.test.js",
+      "beforeSha256": "a0304a4b08f93d03fc038c276e24ecb3ab6cdafbd868c1af5ab3ebf1ca1a8c5c",
+      "afterSha256": "a63c55371c710118a978e43345ef08c9917c9719772cad394148d6e29ff47305",
+      "before": {
+        "normalized": 16366,
+        "commentIndependent": 15739,
+        "tokens": 3641
+      },
+      "after": {
+        "normalized": 16270,
+        "commentIndependent": 15643,
+        "tokens": 3618
+      },
+      "assertionNodes": 148,
+      "registrationNodes": 20,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-entry-view.test.js",
+      "beforeSha256": "0c123223eba68ec5f698beb0d7fe5c808d386c1bbcb4e1eb3736a99ae5933524",
+      "afterSha256": "607f79ba28f5d28c4318f10bd1319a3da6a81a56a4888fa1622ca6c2bdabbca2",
+      "before": {
+        "normalized": 20860,
+        "commentIndependent": 20860,
+        "tokens": 5079
+      },
+      "after": {
+        "normalized": 20514,
+        "commentIndependent": 20514,
+        "tokens": 4947
+      },
+      "assertionNodes": 294,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-equipment-skill-synthesis.test.js",
+      "beforeSha256": "9d58d34c3e1d8ec99be8f06e34e6636cc3fcd450fac5f1e87582872e5b8380a3",
+      "afterSha256": "2a40fea299aa5471d1a60b96b32d861987d5adf0060e4051fde717acbe39af4c",
+      "before": {
+        "normalized": 10081,
+        "commentIndependent": 9776,
+        "tokens": 2328
+      },
+      "after": {
+        "normalized": 9989,
+        "commentIndependent": 9684,
+        "tokens": 2305
+      },
+      "assertionNodes": 84,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-frames-lifecycle.test.js",
+      "beforeSha256": "7aaec09cc3c219df90e1d394f73a667424ddfa7c376835e9f9b80a6231544f39",
+      "afterSha256": "851925aca54d24685bce02d9ed7135818d1c0c8396fee0199cb862bb2569e0a6",
+      "before": {
+        "normalized": 36445,
+        "commentIndependent": 34859,
+        "tokens": 7975
+      },
+      "after": {
+        "normalized": 35313,
+        "commentIndependent": 33727,
+        "tokens": 7697
+      },
+      "assertionNodes": 333,
+      "registrationNodes": 45,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-frames-ownership.test.js",
+      "beforeSha256": "132425542a6ef7ab2dd36cc464ddf5b011cec5f827fe90bcaa7dee8ca6efa8a0",
+      "afterSha256": "e1b3f76311e4cd6ddc3efc8d7ffff5a324e5110ae72adbfd3ee7f75ad3f934a5",
+      "before": {
+        "normalized": 36513,
+        "commentIndependent": 35771,
+        "tokens": 8657
+      },
+      "after": {
+        "normalized": 35381,
+        "commentIndependent": 34639,
+        "tokens": 8379
+      },
+      "assertionNodes": 418,
+      "registrationNodes": 43,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-hand-content-diff.test.js",
+      "beforeSha256": "b4aafeed2e4a16015898a5592ef87fc13d5407a05b0bf8dd4ac8af5f6bd69a19",
+      "afterSha256": "e630064109ffbd6edd3d23df3484b58d69fe547ab8c205c6b17fa390e067b87f",
+      "before": {
+        "normalized": 10094,
+        "commentIndependent": 10094,
+        "tokens": 2642
+      },
+      "after": {
+        "normalized": 9600,
+        "commentIndependent": 9600,
+        "tokens": 2437
+      },
+      "assertionNodes": 102,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-hand-inspector.test.js",
+      "beforeSha256": "6e71d3dea3375307cba431a96e4637b427279ec252ac08b4a2a043a8ff67452b",
+      "afterSha256": "16b44154fa75407a3190ff7511dce6726c2cac93f9fa37c6f5d62b740c85406e",
+      "before": {
+        "normalized": 80779,
+        "commentIndependent": 79692,
+        "tokens": 19296
+      },
+      "after": {
+        "normalized": 80339,
+        "commentIndependent": 79252,
+        "tokens": 19144
+      },
+      "assertionNodes": 1005,
+      "registrationNodes": 85,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-imitate-unplayable.test.js",
+      "beforeSha256": "08c68068bf1877d9e941d3e1baf911e9ce428d18db29a7772096904f0690c7e6",
+      "afterSha256": "a660c0b73397dbb84dca92fc1c2903bc9a5987691250deb219bad4d346a22e72",
+      "before": {
+        "normalized": 6276,
+        "commentIndependent": 6201,
+        "tokens": 1530
+      },
+      "after": {
+        "normalized": 6184,
+        "commentIndependent": 6109,
+        "tokens": 1507
+      },
+      "assertionNodes": 64,
+      "registrationNodes": 9,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-infusion-action-layout.test.js",
+      "beforeSha256": "4b9e4e269fd628f56ab1cab0945fd36ae5f7fe02e03dd6d043fc5f4a73732661",
+      "afterSha256": "d517a1e7167750d65a73353308d33afcd135518a485e29dfdcd1666b3b6b860e",
+      "before": {
+        "normalized": 36867,
+        "commentIndependent": 36867,
+        "tokens": 8441
+      },
+      "after": {
+        "normalized": 36343,
+        "commentIndependent": 36343,
+        "tokens": 8261
+      },
+      "assertionNodes": 443,
+      "registrationNodes": 49,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-pouch-entry.test.js",
+      "beforeSha256": "4715d5baa2cbb8469a68874323a085f95d2a0b95d3097ce3c1ce4961f4e680c8",
+      "afterSha256": "352bad77b9a5291c11f16cfdedca75a8e66f53653cb88b13a084d0fb0864eced",
+      "before": {
+        "normalized": 4346,
+        "commentIndependent": 4101,
+        "tokens": 1067
+      },
+      "after": {
+        "normalized": 4325,
+        "commentIndependent": 4080,
+        "tokens": 1062
+      },
+      "assertionNodes": 36,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-render-derivation.test.js",
+      "beforeSha256": "07b3304a87dac92071fdf66972336ccbc5b400ff1dea655488eed02646e9cb66",
+      "afterSha256": "7692b8f13e0619c6e1ea265f71edc14836ac7203671c832e1eaf068cce1210ef",
+      "before": {
+        "normalized": 7955,
+        "commentIndependent": 7468,
+        "tokens": 1936
+      },
+      "after": {
+        "normalized": 7515,
+        "commentIndependent": 7028,
+        "tokens": 1784
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-render-runtime-trace.test.js",
+      "beforeSha256": "b3cb8ad18a9e6a5fce1ca62cb2b527e9989a1de643207367925e6cd152cff776",
+      "afterSha256": "f887945593621fb574d473becb5944d327bbbb8c8dea0a5eda1f3fa20afcd0d9",
+      "before": {
+        "normalized": 13128,
+        "commentIndependent": 13128,
+        "tokens": 3172
+      },
+      "after": {
+        "normalized": 12444,
+        "commentIndependent": 12444,
+        "tokens": 2939
+      },
+      "assertionNodes": 84,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-resolution.test.js",
+      "beforeSha256": "8aa933aeb3b0e26abb8d2554122f80cb90a5ec1eb660225ae52299b7c78f6db5",
+      "afterSha256": "d96c68a5b72f51996384e393183c5ffd76fc684fa49e57520da25e9b12679b3c",
+      "before": {
+        "normalized": 74825,
+        "commentIndependent": 69690,
+        "tokens": 17783
+      },
+      "after": {
+        "normalized": 74683,
+        "commentIndependent": 69548,
+        "tokens": 17722
+      },
+      "assertionNodes": 424,
+      "registrationNodes": 62,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-review-remediation-1023.test.js",
+      "beforeSha256": "68d1696ba61494272a3fb2a4e1109fecc55e04a21d958279315621b00fe14c83",
+      "afterSha256": "65a8350218afc5796b2d90720272a56b2d515dffbf6a6f42a029c75e295f6a46",
+      "before": {
+        "normalized": 7709,
+        "commentIndependent": 7682,
+        "tokens": 2366
+      },
+      "after": {
+        "normalized": 7683,
+        "commentIndependent": 7656,
+        "tokens": 2339
+      },
+      "assertionNodes": 72,
+      "registrationNodes": 16,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-round-recording.test.js",
+      "beforeSha256": "9bfb0471312ec06a46134d73f8faf618d729f19f946ff650228f63de93183b5f",
+      "afterSha256": "441ae1ab5f007ddd7e415dba486a43a988fc3603e2461e6026643ba543550cb6",
+      "before": {
+        "normalized": 5345,
+        "commentIndependent": 5249,
+        "tokens": 1246
+      },
+      "after": {
+        "normalized": 5320,
+        "commentIndependent": 5224,
+        "tokens": 1241
+      },
+      "assertionNodes": 26,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-rule-audit-1014.test.js",
+      "beforeSha256": "b36ded6babdff22382e263d1d7c578506ae0ccf86086be3a9e28faaf8dd065ed",
+      "afterSha256": "a757815f6ea1feabbbec3ae68fb85e827705da94392c358a106717206315b9b1",
+      "before": {
+        "normalized": 14263,
+        "commentIndependent": 14193,
+        "tokens": 3730
+      },
+      "after": {
+        "normalized": 14238,
+        "commentIndependent": 14168,
+        "tokens": 3725
+      },
+      "assertionNodes": 144,
+      "registrationNodes": 27,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-runtime-completion-1014.test.js",
+      "beforeSha256": "9dd7bd8106634c1f6e7293822674c314b917df266d45f8818c34503e7dcdd5a8",
+      "afterSha256": "39f4c02876916fabf92072ac804160a45fc246c86f5a873cc6c7205d65abd218",
+      "before": {
+        "normalized": 12242,
+        "commentIndependent": 12242,
+        "tokens": 3042
+      },
+      "after": {
+        "normalized": 12221,
+        "commentIndependent": 12221,
+        "tokens": 3037
+      },
+      "assertionNodes": 131,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-scenery-secondary-ready.test.js",
+      "beforeSha256": "4b9fc74a7bc181b8b82c72a8bdbdd47c8d084890fed68f7c7e243662cc952549",
+      "afterSha256": "de4414afc6b726e9ab1404c1e2edf73edb95556c5e0842555572ab5be721524b",
+      "before": {
+        "normalized": 8480,
+        "commentIndependent": 8480,
+        "tokens": 2086
+      },
+      "after": {
+        "normalized": 8134,
+        "commentIndependent": 8134,
+        "tokens": 1954
+      },
+      "assertionNodes": 46,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-semantic-feedback.test.js",
+      "beforeSha256": "bbc21aaf106aa7dda3d127f5d5328ab83b1a0f96688ef413c0d5bcb04e202b10",
+      "afterSha256": "9b344512a4a1d575bd370d2c8bbcc4d0c47314beeface055c30b61c0f0fed37d",
+      "before": {
+        "normalized": 12046,
+        "commentIndependent": 11963,
+        "tokens": 3176
+      },
+      "after": {
+        "normalized": 12025,
+        "commentIndependent": 11942,
+        "tokens": 3171
+      },
+      "assertionNodes": 120,
+      "registrationNodes": 17,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-settlement-retry.test.js",
+      "beforeSha256": "1dc169e761cbfeaaaa00fe071222f299ea392a7fe210c2eb2246a5b73bb90dc8",
+      "afterSha256": "d554da2f5e893b773e6284eac9dbf77911d54d48f7c380b206cc106bf2c05cde",
+      "before": {
+        "normalized": 35854,
+        "commentIndependent": 35479,
+        "tokens": 8561
+      },
+      "after": {
+        "normalized": 35635,
+        "commentIndependent": 35260,
+        "tokens": 8492
+      },
+      "assertionNodes": 332,
+      "registrationNodes": 29,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-snapshot-phase-cost.test.js",
+      "beforeSha256": "71fddfd8d26519a18521f3753fafc2927785bbc7f2a1da2d846e680bf1203e14",
+      "afterSha256": "3304c0cc1a16df7f2fdb91fbd519793d63f7e78ad3910c50d6ef598757a0cc78",
+      "before": {
+        "normalized": 8701,
+        "commentIndependent": 8396,
+        "tokens": 2105
+      },
+      "after": {
+        "normalized": 8498,
+        "commentIndependent": 8193,
+        "tokens": 2040
+      },
+      "assertionNodes": 68,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-target-dom.test.js",
+      "beforeSha256": "7ee470112d3e1a49b1d1d85af4768ef61076c3ade008c529058134a522d7b1ff",
+      "afterSha256": "daab925913630981b9e029263f6c6fba9e01e013c8349623beb6041897ba0250",
+      "before": {
+        "normalized": 11350,
+        "commentIndependent": 11350,
+        "tokens": 3002
+      },
+      "after": {
+        "normalized": 10455,
+        "commentIndependent": 10455,
+        "tokens": 2727
+      },
+      "assertionNodes": 104,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-temp-item-destination.test.js",
+      "beforeSha256": "0a1d1b3e7880576fbe7748446d2bf2aa749c589f2244c6bb87292ed82925015b",
+      "afterSha256": "a802e669bc1f9a57acde7480c8af1bcb2e63ca238f1170721d93aa677eb872c5",
+      "before": {
+        "normalized": 7302,
+        "commentIndependent": 7302,
+        "tokens": 1996
+      },
+      "after": {
+        "normalized": 7212,
+        "commentIndependent": 7212,
+        "tokens": 1973
+      },
+      "assertionNodes": 74,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-tools-lifecycle.test.js",
+      "beforeSha256": "48d96365f9080828a9a3f06ed31230d9ec2b362520321b5650a0e42c96e193c5",
+      "afterSha256": "720b91146ef4d19d6c94068e78ac53e58855e4753f6f31cf08776b6468060090",
+      "before": {
+        "normalized": 15406,
+        "commentIndependent": 15106,
+        "tokens": 3797
+      },
+      "after": {
+        "normalized": 14722,
+        "commentIndependent": 14422,
+        "tokens": 3564
+      },
+      "assertionNodes": 144,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-trigger-lifecycle-unification.test.js",
+      "beforeSha256": "be772c695f964aa0fac3b18309ecabc5f5918192cd3d53991fa38c92ab259abe",
+      "afterSha256": "65d9a1534e5225256d83dd626abec629bc6ef5749fab8a40f2f8338e7034ee6a",
+      "before": {
+        "normalized": 14052,
+        "commentIndependent": 13960,
+        "tokens": 3473
+      },
+      "after": {
+        "normalized": 14029,
+        "commentIndependent": 13937,
+        "tokens": 3468
+      },
+      "assertionNodes": 88,
+      "registrationNodes": 28,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-turn-start-discover.test.js",
+      "beforeSha256": "d3bd37b16e24fcc08c9b0e179402979da00c38fba274fbecb6a31803247d86f3",
+      "afterSha256": "8542a745456429f4fd67b4205c5b9ad83e0e274308dbd55e79214797474f840f",
+      "before": {
+        "normalized": 7320,
+        "commentIndependent": 7039,
+        "tokens": 1790
+      },
+      "after": {
+        "normalized": 7299,
+        "commentIndependent": 7018,
+        "tokens": 1785
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/battle-unit-metadata.test.js",
+      "beforeSha256": "9435c053a9ab960b2f02332451487ceb84f6b51cf78a9be3f40fef0e436d22cf",
+      "afterSha256": "eb5261999ad69732cf25db4ab67b9c2fb19b1ef1270ecdff59fd95e48e674405",
+      "before": {
+        "normalized": 12850,
+        "commentIndependent": 12796,
+        "tokens": 3436
+      },
+      "after": {
+        "normalized": 11955,
+        "commentIndependent": 11901,
+        "tokens": 3161
+      },
+      "assertionNodes": 104,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/blackmarket-card-preview.test.js",
+      "beforeSha256": "c7b173014629fd973b9e8026fd1be3b1ba48feb77c9c29029811b884ce8f1d68",
+      "afterSha256": "8c3f9e5575141315aa9ffd1af6cc6d779feca635ab1cb79a89dfe2ee8eed9ae5",
+      "before": {
+        "normalized": 11165,
+        "commentIndependent": 11165,
+        "tokens": 2976
+      },
+      "after": {
+        "normalized": 10296,
+        "commentIndependent": 10296,
+        "tokens": 2650
+      },
+      "assertionNodes": 100,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/boot.test.js",
+      "beforeSha256": "12b335d73cd961eae195ee9e223b94205d57ffdbb30a7048eefc51ffdccb2a2e",
+      "afterSha256": "db145eb8870d5689f3ec5887ad7bf343475c793ec301c1e71858362c79291f72",
+      "before": {
+        "normalized": 51200,
+        "commentIndependent": 45742,
+        "tokens": 10596
+      },
+      "after": {
+        "normalized": 50603,
+        "commentIndependent": 45145,
+        "tokens": 10421
+      },
+      "assertionNodes": 474,
+      "registrationNodes": 26,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/boss-equip-select.test.js",
+      "beforeSha256": "f5d59b46d687658a76a9f84b1a19a95d4cc1acfdf7c46a23a8106149d72301b3",
+      "afterSha256": "d099e8888e3b962eab8f057a5229174b3fd61b4783327e1d8e4b4cf4aa85d667",
+      "before": {
+        "normalized": 10340,
+        "commentIndependent": 9839,
+        "tokens": 2605
+      },
+      "after": {
+        "normalized": 10319,
+        "commentIndependent": 9818,
+        "tokens": 2600
+      },
+      "assertionNodes": 84,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/boss-rescue-pool.test.js",
+      "beforeSha256": "1bc23e261c5801b812c4b0f8b4f66ed1986ed67668bb957cb8173851f77063ab",
+      "afterSha256": "b0f2c00e0536a30e39834c90684f2d634aa84c34dcd614c50c9d8b0a30f7903d",
+      "before": {
+        "normalized": 4253,
+        "commentIndependent": 4170,
+        "tokens": 1097
+      },
+      "after": {
+        "normalized": 4232,
+        "commentIndependent": 4149,
+        "tokens": 1092
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 9,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/builtin-card-execution-battle.test.js",
+      "beforeSha256": "fe181b7844ed457d953eaac317371c255c3fd950e668bdd679d26187b774e27d",
+      "afterSha256": "37536882dc4b90c0f4c18eb12285d9abeb095c1645daad0feee23d508808557c",
+      "before": {
+        "normalized": 5785,
+        "commentIndependent": 5785,
+        "tokens": 1380
+      },
+      "after": {
+        "normalized": 5762,
+        "commentIndependent": 5762,
+        "tokens": 1375
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/builtin-migration-lookup.test.js",
+      "beforeSha256": "d6b726c8227d93a7fc88b35291c2a5f327b08fbedf39b9667c6891aa1d9b2bcb",
+      "afterSha256": "c421fe22b12c1a8daa91ac39693ca3f9432d6ec2cd540aba622ce5c7da75fcd0",
+      "before": {
+        "normalized": 11801,
+        "commentIndependent": 11654,
+        "tokens": 2515
+      },
+      "after": {
+        "normalized": 11774,
+        "commentIndependent": 11627,
+        "tokens": 2510
+      },
+      "assertionNodes": 90,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-description-audit-battle.test.js",
+      "beforeSha256": "272db01561863bd9bcdc422a0aec11e1b9a839799041137d389c0486796df13c",
+      "afterSha256": "91ff0367e1c44d2d0409ce775ad6fdd64a018f830a2238b7dbf51cf1479b3542",
+      "before": {
+        "normalized": 20590,
+        "commentIndependent": 19646,
+        "tokens": 4906
+      },
+      "after": {
+        "normalized": 20565,
+        "commentIndependent": 19621,
+        "tokens": 4901
+      },
+      "assertionNodes": 80,
+      "registrationNodes": 24,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-description-fix-auxiliary.test.js",
+      "beforeSha256": "c821a93dfd6e13b61fe01d8e0bfac94797456c0b75c2c1c52b625d9a18944deb",
+      "afterSha256": "0a91fd68f475f11c747b771660a4cdac2287e6151a8e3f3f8fa1b9a4f4c2c71f",
+      "before": {
+        "normalized": 6148,
+        "commentIndependent": 5726,
+        "tokens": 1483
+      },
+      "after": {
+        "normalized": 6123,
+        "commentIndependent": 5701,
+        "tokens": 1478
+      },
+      "assertionNodes": 32,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-description-fix-lifecycle.test.js",
+      "beforeSha256": "708427d926ba3eadd9c9dfab5cc5a6579cccef8b2e6427f68ea2cf635961f261",
+      "afterSha256": "6074afcb5dd1c9ec25497cab4291cc6fe430b730efff6fd218807387265ac6b4",
+      "before": {
+        "normalized": 8726,
+        "commentIndependent": 8471,
+        "tokens": 2077
+      },
+      "after": {
+        "normalized": 8701,
+        "commentIndependent": 8446,
+        "tokens": 2072
+      },
+      "assertionNodes": 58,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-description-fix-pools.test.js",
+      "beforeSha256": "eab0db464e75a4d332790a2816c8083413c9cb3b7e24774d175b5c3a0a716ead",
+      "afterSha256": "79eee3296187c8e320411ff6647303007fe189397e2eea0d1849c63b153a7941",
+      "before": {
+        "normalized": 8167,
+        "commentIndependent": 8052,
+        "tokens": 2117
+      },
+      "after": {
+        "normalized": 8142,
+        "commentIndependent": 8027,
+        "tokens": 2112
+      },
+      "assertionNodes": 50,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-description-fix-target-effects.test.js",
+      "beforeSha256": "99a75377b6cd557b26150cce17bbe71b292b3e4a97b3bb24080393704d15eb41",
+      "afterSha256": "7f5b57398b40fc8ed81cdaf38ef0a1977ff5b30580a41de28e88f8b54aa45b12",
+      "before": {
+        "normalized": 8061,
+        "commentIndependent": 8061,
+        "tokens": 1920
+      },
+      "after": {
+        "normalized": 8036,
+        "commentIndependent": 8036,
+        "tokens": 1915
+      },
+      "assertionNodes": 48,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-effect-semantics.test.js",
+      "beforeSha256": "fbb32a2b4722d731d8b6a4c0c889b252a1fa3a1913b19bc3551f5dfb92c8e404",
+      "afterSha256": "3c238072052cb2b649bfdeb88031019727790c670f3c56fa550f46c4e163f689",
+      "before": {
+        "normalized": 4978,
+        "commentIndependent": 4840,
+        "tokens": 1257
+      },
+      "after": {
+        "normalized": 4888,
+        "commentIndependent": 4750,
+        "tokens": 1234
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-rules-per-foe-boundary.test.js",
+      "beforeSha256": "b3a50063effc798b4390c173613247200dbe8913c49016487f612ed41b72dedf",
+      "afterSha256": "59edeba69f422111c8ae865897c4ee4cf62a08011e134ab022e0e80d5cf5c56e",
+      "before": {
+        "normalized": 4926,
+        "commentIndependent": 4926,
+        "tokens": 1195
+      },
+      "after": {
+        "normalized": 4832,
+        "commentIndependent": 4832,
+        "tokens": 1172
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/card-rules-schema.test.js",
+      "beforeSha256": "110cea8869aa91a9caa13a18ac04b08b7d898419a4545ed423a3f0555cc683db",
+      "afterSha256": "84f42e72b0f06ae82e5bbd77835c85257d6f5a96530afc6b7e735a980c951294",
+      "before": {
+        "normalized": 20076,
+        "commentIndependent": 19572,
+        "tokens": 4484
+      },
+      "after": {
+        "normalized": 20040,
+        "commentIndependent": 19536,
+        "tokens": 4457
+      },
+      "assertionNodes": 93,
+      "registrationNodes": 17,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/cards-choice-armor-guard.test.js",
+      "beforeSha256": "040bdcc93a2d382b347903d3ca640b46f37f49a5b06b0e6898c3079257b53bb6",
+      "afterSha256": "dd06658565d74774b0eca73deaffce4b6b2d639fdf6c2777707c6a9d130a235a",
+      "before": {
+        "normalized": 7155,
+        "commentIndependent": 6916,
+        "tokens": 1766
+      },
+      "after": {
+        "normalized": 7059,
+        "commentIndependent": 6820,
+        "tokens": 1743
+      },
+      "assertionNodes": 60,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chase-slash.test.js",
+      "beforeSha256": "3e96fd6fc792b857dd4aeb3fedb6357408e5e5ad42aac5e998a483f2594849bd",
+      "afterSha256": "67a494346759ede882e620f8ffbc4b7c58ca72be57256eba545ecc9b9196e50a",
+      "before": {
+        "normalized": 4229,
+        "commentIndependent": 3416,
+        "tokens": 928
+      },
+      "after": {
+        "normalized": 4208,
+        "commentIndependent": 3395,
+        "tokens": 923
+      },
+      "assertionNodes": 36,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "beforeSha256": "36bf8098ed9daad59ad2a5893ef6c3a8ae90fee3506b4ab6198ba6d59353805c",
+      "afterSha256": "02fc1e06a46b0244501f807b0dc35076349e5ce0361ff75bed2b535f0cf8a854",
+      "before": {
+        "normalized": 15182,
+        "commentIndependent": 14935,
+        "tokens": 4421
+      },
+      "after": {
+        "normalized": 15143,
+        "commentIndependent": 14896,
+        "tokens": 4406
+      },
+      "assertionNodes": 174,
+      "registrationNodes": 21,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-batch-receipt.test.js",
+      "beforeSha256": "af6763d5182d79bab3b1af4e2dc847f111bf1043bd8c8d7f12285807b2622fe4",
+      "afterSha256": "40143c89199aa4490250b7fc701297897cb4b777660715b99ce6e19dc0a55b4d",
+      "before": {
+        "normalized": 3478,
+        "commentIndependent": 3478,
+        "tokens": 868
+      },
+      "after": {
+        "normalized": 3361,
+        "commentIndependent": 3361,
+        "tokens": 809
+      },
+      "assertionNodes": 14,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-callback-lifecycle-audit.test.js",
+      "beforeSha256": "70d8536f3f9af0be35317b8a248eb0c044cc66f993968b838a17a13cfb576cef",
+      "afterSha256": "0c0abc5bf01ccdd883a1917c6436b244879ca7201ef913df071ca2476fb889aa",
+      "before": {
+        "normalized": 13573,
+        "commentIndependent": 13490,
+        "tokens": 3413
+      },
+      "after": {
+        "normalized": 13049,
+        "commentIndependent": 12966,
+        "tokens": 3246
+      },
+      "assertionNodes": 166,
+      "registrationNodes": 21,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-click-flow.test.js",
+      "beforeSha256": "711220284284e772c9d5c144a4537d463837001bbe1ce01b268177c1e43cf6d5",
+      "afterSha256": "e15a823d45e622ee57e7c1bca7e405ca5bad7ed7d2a9aeb59a6b1a6524ad34e2",
+      "before": {
+        "normalized": 5925,
+        "commentIndependent": 5837,
+        "tokens": 1324
+      },
+      "after": {
+        "normalized": 5752,
+        "commentIndependent": 5664,
+        "tokens": 1262
+      },
+      "assertionNodes": 59,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-coins-summary.test.js",
+      "beforeSha256": "755aca0d8f224dc42f5539f330e9ab7d5df2bf178ecb655adb73615e84869b87",
+      "afterSha256": "92340f0fd1294032cee2f0434a9af9b44b9cb8559a7b9b2754f7810ed939785b",
+      "before": {
+        "normalized": 3730,
+        "commentIndependent": 3682,
+        "tokens": 1082
+      },
+      "after": {
+        "normalized": 3206,
+        "commentIndependent": 3158,
+        "tokens": 915
+      },
+      "assertionNodes": 30,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-multi-queue-regression.test.js",
+      "beforeSha256": "a1320ae74f7cb8817bb261f8dcc69187f5ae2ea5abb31cd5d6a01b4512ad94b2",
+      "afterSha256": "90bd3dec5a98a5473cd911d1de38159db9676c77cd16a34117aa3c48b041acb7",
+      "before": {
+        "normalized": 4128,
+        "commentIndependent": 4128,
+        "tokens": 1027
+      },
+      "after": {
+        "normalized": 4011,
+        "commentIndependent": 4011,
+        "tokens": 968
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 2,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chest-receive-animation.test.js",
+      "beforeSha256": "b51732cbb6576d6379f20f13b9dfc4db50008ec5ad6950c2f5b0f6d43b06a2ec",
+      "afterSha256": "9b6a558d28e867dcf27e5496647be149b017feb0d8a0f892f9aaf9f8c8b84772",
+      "before": {
+        "normalized": 3764,
+        "commentIndependent": 3764,
+        "tokens": 1025
+      },
+      "after": {
+        "normalized": 3647,
+        "commentIndependent": 3647,
+        "tokens": 966
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/chests-reward-capacity-notice.test.js",
+      "beforeSha256": "247440b779e137a66fac9b5076bdacff6518703a78682632c6fe9ac951c39fd5",
+      "afterSha256": "afbb63f4a031c9137292089e48159639ecaff05682eaabba9e2065ef2a8ed96c",
+      "before": {
+        "normalized": 17871,
+        "commentIndependent": 17523,
+        "tokens": 4631
+      },
+      "after": {
+        "normalized": 17832,
+        "commentIndependent": 17484,
+        "tokens": 4616
+      },
+      "assertionNodes": 208,
+      "registrationNodes": 25,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/compendium.test.js",
+      "beforeSha256": "7343a709b27da6c4d46056d1c3d163bb1bc5a732ba195a740c447ac93200e883",
+      "afterSha256": "820f0a3ea9513e2185d2427a6938977dab29d14c6cb7dea43aae1d10650a2d41",
+      "before": {
+        "normalized": 5630,
+        "commentIndependent": 5185,
+        "tokens": 1176
+      },
+      "after": {
+        "normalized": 5609,
+        "commentIndependent": 5164,
+        "tokens": 1171
+      },
+      "assertionNodes": 66,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/cursed-blade.test.js",
+      "beforeSha256": "3cb2fe0a4b55316f1d2f40be1371d038f29720a545bb1d82e10cdebf52169214",
+      "afterSha256": "df7819b806751ba506cfa19fbf6e364d0e381988fa4833ffb5642f002adce701",
+      "before": {
+        "normalized": 4975,
+        "commentIndependent": 4259,
+        "tokens": 1155
+      },
+      "after": {
+        "normalized": 4954,
+        "commentIndependent": 4238,
+        "tokens": 1150
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/custom-cards.test.js",
+      "beforeSha256": "a0c5f6c018a3719fb6e223989af5dddaa40b8a36aa80b2c0d01b81b5ed44ccec",
+      "afterSha256": "ab0f64dfceb552396fe371109eaccfcce39ea5fd8bd7e79ad3b8295be015f84d",
+      "before": {
+        "normalized": 3459,
+        "commentIndependent": 3134,
+        "tokens": 835
+      },
+      "after": {
+        "normalized": 3438,
+        "commentIndependent": 3113,
+        "tokens": 830
+      },
+      "assertionNodes": 42,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/departure-real-session-review.test.js",
+      "beforeSha256": "3a579f2a7973f8bc8bcff8278800e74314dd3ef83bb9ab592a06d33de6c12776",
+      "afterSha256": "c544979191368cae987263dd9a4014d9536c929a42ac33cde59698827fc7af78",
+      "before": {
+        "normalized": 4043,
+        "commentIndependent": 4043,
+        "tokens": 1102
+      },
+      "after": {
+        "normalized": 3988,
+        "commentIndependent": 3988,
+        "tokens": 1063
+      },
+      "assertionNodes": 32,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/dev-console-lifecycle.test.js",
+      "beforeSha256": "cd21cc76364bd2faefbf14a749c5482bd6329d1d401aa49d1a99b794d111bdee",
+      "afterSha256": "784036e3e999df6cd0bb39eb04fd05564dfacdd20ea66ee3fc94ef3800f663b5",
+      "before": {
+        "normalized": 8379,
+        "commentIndependent": 8379,
+        "tokens": 1944
+      },
+      "after": {
+        "normalized": 8340,
+        "commentIndependent": 8340,
+        "tokens": 1929
+      },
+      "assertionNodes": 70,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/dev-tools-lazy-entry.test.js",
+      "beforeSha256": "05da3d2986807e5fe0c85bc6efa2c59e5f2fcaf2ccc6ec2b814471278477bb20",
+      "afterSha256": "d151fa9dfb7c5ffd73da53e201b6aa0672bcd6990176998fd58253aa1c466736",
+      "before": {
+        "normalized": 15190,
+        "commentIndependent": 15190,
+        "tokens": 3541
+      },
+      "after": {
+        "normalized": 15151,
+        "commentIndependent": 15151,
+        "tokens": 3526
+      },
+      "assertionNodes": 147,
+      "registrationNodes": 16,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/direct-cast.test.js",
+      "beforeSha256": "615042dbec1be015887ccfced7ffddae8de5905b694b5f05e145aea8c01d8729",
+      "afterSha256": "28224d8b66286d48fc0944b06c41d252bd56e0965ec42c3afc6f7ed15350ed2b",
+      "before": {
+        "normalized": 20077,
+        "commentIndependent": 15693,
+        "tokens": 4079
+      },
+      "after": {
+        "normalized": 20056,
+        "commentIndependent": 15672,
+        "tokens": 4074
+      },
+      "assertionNodes": 137,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/discover-infusion-feedback.test.js",
+      "beforeSha256": "835dd93e13f0097c5e94f21ceb63332f450a787fa8f86addba43bf193c4c9d04",
+      "afterSha256": "730e92a6bae7baa99e0f18e5167f66d3b911f92e1dbc28add4896f30da50c38d",
+      "before": {
+        "normalized": 4216,
+        "commentIndependent": 4015,
+        "tokens": 1013
+      },
+      "after": {
+        "normalized": 4195,
+        "commentIndependent": 3994,
+        "tokens": 1008
+      },
+      "assertionNodes": 48,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/dual-wield.test.js",
+      "beforeSha256": "c03eda9f86b143c5899ada9a021d4b8a270699289a0e3f37c5b6d8469dfa9a86",
+      "afterSha256": "4f8058ea3780cad3b880fd91992463bdc333428c4af00a4f252e254e21d51ba1",
+      "before": {
+        "normalized": 3178,
+        "commentIndependent": 2486,
+        "tokens": 659
+      },
+      "after": {
+        "normalized": 3157,
+        "commentIndependent": 2465,
+        "tokens": 654
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/e2-view-hp.test.js",
+      "beforeSha256": "c6892529724943984db8dd85cc548f8ea4c5a3c8e488ee31853bf817f35d3a03",
+      "afterSha256": "03b63ca37dc90b6c2ccffb72f6001d5ab0c39621aaec2a3923af4c886d4d8ca9",
+      "before": {
+        "normalized": 4989,
+        "commentIndependent": 4769,
+        "tokens": 1177
+      },
+      "after": {
+        "normalized": 4972,
+        "commentIndependent": 4752,
+        "tokens": 1164
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "beforeSha256": "bf7b444813a6ccfad2239ef0898d0bccaf53f05bd8bc6fcdc7614d42359715a9",
+      "afterSha256": "7b45860117df645f728dc3c7b48a3bbdb568d1096d0f408b61bc075e3c0be3e7",
+      "before": {
+        "normalized": 23965,
+        "commentIndependent": 23898,
+        "tokens": 5773
+      },
+      "after": {
+        "normalized": 23944,
+        "commentIndependent": 23877,
+        "tokens": 5768
+      },
+      "assertionNodes": 282,
+      "registrationNodes": 35,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/e6-card-rules-execution.test.js",
+      "beforeSha256": "6623fd52074b53fa16d99dc5042f8da717578da241e6b928bd1cc3a3bb59c2d8",
+      "afterSha256": "fe77393d4cac6dfea57fbd65cfa3142addca5b56343cbb23d5cc606f4a7d596e",
+      "before": {
+        "normalized": 10164,
+        "commentIndependent": 9867,
+        "tokens": 2376
+      },
+      "after": {
+        "normalized": 10074,
+        "commentIndependent": 9777,
+        "tokens": 2353
+      },
+      "assertionNodes": 74,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/e7-rule-warning-view.test.js",
+      "beforeSha256": "1dd76636ca613a84456041a51252b1e3b177eefa91d63dcb05f86d5f062b0bfa",
+      "afterSha256": "5e6837db8213bbb4164465346a928f6ed05a36ee5b96d28d509072a02ff005dc",
+      "before": {
+        "normalized": 11435,
+        "commentIndependent": 11215,
+        "tokens": 2765
+      },
+      "after": {
+        "normalized": 11345,
+        "commentIndependent": 11125,
+        "tokens": 2742
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/e8-card-migration.test.js",
+      "beforeSha256": "174ccea0eaae46f3de114291c7429f8c66d1250d5d2c314feb1b9e42d1ff59be",
+      "afterSha256": "8a5cb477dd8e684ba94705fb2a88707a4525b994e3c0931b3a4ab5358185d380",
+      "before": {
+        "normalized": 23096,
+        "commentIndependent": 22875,
+        "tokens": 5761
+      },
+      "after": {
+        "normalized": 23004,
+        "commentIndependent": 22783,
+        "tokens": 5738
+      },
+      "assertionNodes": 200,
+      "registrationNodes": 38,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/ember-burst-rot-seed.test.js",
+      "beforeSha256": "67e8fff0571eea78ec48bdd684cdff6a55eb5527df1c185f889503125c4dee35",
+      "afterSha256": "6bd17e4532c22bc1161b443cb9fc7ceff2ad1b096a9a06a0747604f9a05c2fd6",
+      "before": {
+        "normalized": 6174,
+        "commentIndependent": 4969,
+        "tokens": 1348
+      },
+      "after": {
+        "normalized": 6153,
+        "commentIndependent": 4948,
+        "tokens": 1343
+      },
+      "assertionNodes": 58,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/energy-crystal-restoration.test.js",
+      "beforeSha256": "60683e5fcd2918197d64d520407cad095c3b57eaa4697b91f8501480615ab255",
+      "afterSha256": "01081c4902251ffc0ce396e791472dfc332d4c916d3ccc6c1dd4558735883468",
+      "before": {
+        "normalized": 7639,
+        "commentIndependent": 7270,
+        "tokens": 1807
+      },
+      "after": {
+        "normalized": 7618,
+        "commentIndependent": 7249,
+        "tokens": 1802
+      },
+      "assertionNodes": 70,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "beforeSha256": "44990b473e5343a769ac5cdc63d067a027705aae8a1b6e6ab2a1e6df63985b90",
+      "afterSha256": "376fffa5e2167d0d225c604eed669938fa89e2ad319ba31e1db9028a48078771",
+      "before": {
+        "normalized": 47408,
+        "commentIndependent": 47329,
+        "tokens": 12168
+      },
+      "after": {
+        "normalized": 46007,
+        "commentIndependent": 45928,
+        "tokens": 11663
+      },
+      "assertionNodes": 428,
+      "registrationNodes": 56,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-choice-acquired-gift-cloud.test.js",
+      "beforeSha256": "f0b5fa2aded6d590da5f33f3d366e827c855314711f56b686fed8fd228854ea1",
+      "afterSha256": "ad0499b7279dfd2e3fda8680097bc90e23c7cbcda3c68141d17d0fe9ec038937",
+      "before": {
+        "normalized": 13868,
+        "commentIndependent": 13705,
+        "tokens": 3809
+      },
+      "after": {
+        "normalized": 13831,
+        "commentIndependent": 13668,
+        "tokens": 3794
+      },
+      "assertionNodes": 144,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-choice-recovery-cloud.test.js",
+      "beforeSha256": "2f4cb83f1477de95f9e67d09f8456e68fbe4af633c4f10d4350a8202112de5a4",
+      "afterSha256": "b933d3e8e4eb0abe4411fb9884cc8b524af25885755a0a62d3afd2c9effc1e36",
+      "before": {
+        "normalized": 32560,
+        "commentIndependent": 32481,
+        "tokens": 8256
+      },
+      "after": {
+        "normalized": 30644,
+        "commentIndependent": 30565,
+        "tokens": 7585
+      },
+      "assertionNodes": 316,
+      "registrationNodes": 29,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-choice-session-resume-cloud.test.js",
+      "beforeSha256": "46fdd508cfb36ddfc29f7fb821e06747d2db5aa6fbb7dd5af407e6d78fd30e71",
+      "afterSha256": "5fdfc261c16c5cfcc7aece5059507543d6a2d401c4ada4191d4393e615e8e5e6",
+      "before": {
+        "normalized": 4795,
+        "commentIndependent": 4795,
+        "tokens": 1223
+      },
+      "after": {
+        "normalized": 4665,
+        "commentIndependent": 4665,
+        "tokens": 1174
+      },
+      "assertionNodes": 40,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-node-binding-cloud.test.js",
+      "beforeSha256": "9e80942d0c6ee7c3cdd8850c6e37f5cf9c0d410581d7bca8b9b35b5d73ea22d3",
+      "afterSha256": "0f482b5aab155a925879bfbeca4a70fce3dec88044e1caac47b3e59fc2e305a2",
+      "before": {
+        "normalized": 13135,
+        "commentIndependent": 13135,
+        "tokens": 3568
+      },
+      "after": {
+        "normalized": 12008,
+        "commentIndependent": 12008,
+        "tokens": 3167
+      },
+      "assertionNodes": 122,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-recode-selection-continuity.test.js",
+      "beforeSha256": "aa5fdb2066e13cb15d033a7b14149edd684a84d4c4a980f655dd5f13333e1ac5",
+      "afterSha256": "bfae69de110aaef3b435b03af2ec5ad79f5991a82bde1881a9da51dc398af25d",
+      "before": {
+        "normalized": 8695,
+        "commentIndependent": 8695,
+        "tokens": 2373
+      },
+      "after": {
+        "normalized": 6505,
+        "commentIndependent": 6505,
+        "tokens": 1598
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-settlement-unification.test.js",
+      "beforeSha256": "c6e4aaafed02c9596e2be3413e9fefc6f636471ef021e10bc2cdd355be402b9e",
+      "afterSha256": "baf29b26978cf754872d376fe1ce124d3683d6d36db60cc1eb05efb4045c01de",
+      "before": {
+        "normalized": 20601,
+        "commentIndependent": 20492,
+        "tokens": 5445
+      },
+      "after": {
+        "normalized": 19856,
+        "commentIndependent": 19747,
+        "tokens": 5174
+      },
+      "assertionNodes": 182,
+      "registrationNodes": 30,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/event-signal-puzzle-integration.test.js",
+      "beforeSha256": "78bc150bf66f25ff542c4c2ffc49672652d13e7429f9514a7c1bf5fdb5dff674",
+      "afterSha256": "0158153772f1cb67c6edff07db31d5c608a3035519c16fa3d79d0544bf5b4615",
+      "before": {
+        "normalized": 11527,
+        "commentIndependent": 11428,
+        "tokens": 3028
+      },
+      "after": {
+        "normalized": 9337,
+        "commentIndependent": 9238,
+        "tokens": 2253
+      },
+      "assertionNodes": 88,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/expedition-battle-presentation.test.js",
+      "beforeSha256": "9f0ba2ab2d68f7b5fb8be36eb328dd3cbae687b8b82579a766eb929c8670a068",
+      "afterSha256": "c8f575beac92daf6b9cea230ef7eb981a9697e850b16c1c103f8db401fe4eeda",
+      "before": {
+        "normalized": 9437,
+        "commentIndependent": 9437,
+        "tokens": 2194
+      },
+      "after": {
+        "normalized": 9405,
+        "commentIndependent": 9405,
+        "tokens": 2171
+      },
+      "assertionNodes": 73,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/expedition-page-lifecycle.test.js",
+      "beforeSha256": "9958f0998869a09d5217e8fb912c30958c6fc9b6184341c2eba73e50e58008ca",
+      "afterSha256": "02db1e12d6261f1d86ad9be18bd07795feebf68bab1d4c0a1a9d37e8b5e78a04",
+      "before": {
+        "normalized": 5008,
+        "commentIndependent": 5008,
+        "tokens": 1078
+      },
+      "after": {
+        "normalized": 4966,
+        "commentIndependent": 4966,
+        "tokens": 1063
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-first-explore-xp.test.js",
+      "beforeSha256": "2c7556e2fecfb1618008e78e3cbb1b620256572b1bffd098022bc1fc055c9c04",
+      "afterSha256": "c445000dd210b5e8f6e709fbd3eae923c85928f9e7f2ccd3b9cb4bf132783b51",
+      "before": {
+        "normalized": 7232,
+        "commentIndependent": 5828,
+        "tokens": 1695
+      },
+      "after": {
+        "normalized": 6956,
+        "commentIndependent": 5552,
+        "tokens": 1593
+      },
+      "assertionNodes": 32,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-flow.test.js",
+      "beforeSha256": "9556d34ab3792e0bad4882ab6446a75049f7628658895c365ed1122c5ca06336",
+      "afterSha256": "a9322f6a65e57a58965b7905c33dcbc37561380dd7c20942eb16be3ffdd02054",
+      "before": {
+        "normalized": 13885,
+        "commentIndependent": 13732,
+        "tokens": 3768
+      },
+      "after": {
+        "normalized": 13609,
+        "commentIndependent": 13456,
+        "tokens": 3666
+      },
+      "assertionNodes": 118,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-receipt-idempotency.test.js",
+      "beforeSha256": "8bd08442e3bc5c3f8bb2b527a8476fc0d030e5d4672908bef657c5eec4d25dda",
+      "afterSha256": "fa67f8fdef2c81f43f66cf216b8ec5c2876f6895a54f4c56be7d498ed53bd2de",
+      "before": {
+        "normalized": 8749,
+        "commentIndependent": 7764,
+        "tokens": 2034
+      },
+      "after": {
+        "normalized": 8724,
+        "commentIndependent": 7739,
+        "tokens": 2029
+      },
+      "assertionNodes": 68,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-record-saved-cards-cloud.test.js",
+      "beforeSha256": "49fc4139672d71d9d4a2ba8f39a6f970dd64602ef567d792ac61d089c8c046d2",
+      "afterSha256": "6bdedb5854d86b50ba4f22ec9d5bdcc2be4a99a73b5103ea78b0c33166524e70",
+      "before": {
+        "normalized": 11275,
+        "commentIndependent": 11002,
+        "tokens": 3004
+      },
+      "after": {
+        "normalized": 11250,
+        "commentIndependent": 10977,
+        "tokens": 2999
+      },
+      "assertionNodes": 92,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-recovery-ui.test.js",
+      "beforeSha256": "04a66d5cf55b1d37fe75a8edfcc13043dd23b6224d1cf6876913cf2f9b4b5ef5",
+      "afterSha256": "e8d763d8ddf97473044b070a00f00fe2b0490c19c0a8e0bb98fdf2e83dad073f",
+      "before": {
+        "normalized": 10526,
+        "commentIndependent": 10469,
+        "tokens": 2576
+      },
+      "after": {
+        "normalized": 10244,
+        "commentIndependent": 10187,
+        "tokens": 2474
+      },
+      "assertionNodes": 83,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-recovery.test.js",
+      "beforeSha256": "77b1ade5bf27464d2b220a95f7a22ed581fcf2be2a43bca6f28a5813cfc4cb89",
+      "afterSha256": "c64aa20786414d76adfc28ad48ad339a8acd89980e5ee6be2a7bef84feca98ee",
+      "before": {
+        "normalized": 19913,
+        "commentIndependent": 19673,
+        "tokens": 5186
+      },
+      "after": {
+        "normalized": 19888,
+        "commentIndependent": 19648,
+        "tokens": 5181
+      },
+      "assertionNodes": 204,
+      "registrationNodes": 20,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-session-resume.test.js",
+      "beforeSha256": "3485c6e9b0274a0b78b92f86342b9a542e8719c481e63c2d8e2c12785337dc3e",
+      "afterSha256": "c78af5182c45d4dc57d1983e5fa4bfbd9bea82128d6999d48c384348973dd139",
+      "before": {
+        "normalized": 6434,
+        "commentIndependent": 6379,
+        "tokens": 1549
+      },
+      "after": {
+        "normalized": 6304,
+        "commentIndependent": 6249,
+        "tokens": 1500
+      },
+      "assertionNodes": 52,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/extraction-settlement.test.js",
+      "beforeSha256": "7283157f122baf076aaef3231943b92455a8da997a5d10e11b5a97020015956f",
+      "afterSha256": "272420eec9fa2e4e385e2d2e9fabc764fd1ad48028e8f76d9ab8067ba2a9ca69",
+      "before": {
+        "normalized": 6103,
+        "commentIndependent": 5924,
+        "tokens": 1652
+      },
+      "after": {
+        "normalized": 5827,
+        "commentIndependent": 5648,
+        "tokens": 1550
+      },
+      "assertionNodes": 56,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/first-explore-marking.test.js",
+      "beforeSha256": "7d1afc17b85ee90bba86570c1c815bbafa2e23222946e602b9a40b9a4d4757e2",
+      "afterSha256": "bb8f17c04d23190d26d5d208e6b82bc9190051af21a3db29437932f1558fe869",
+      "before": {
+        "normalized": 8288,
+        "commentIndependent": 6723,
+        "tokens": 1801
+      },
+      "after": {
+        "normalized": 7847,
+        "commentIndependent": 6282,
+        "tokens": 1664
+      },
+      "assertionNodes": 34,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/four-player-capacity-text.test.js",
+      "beforeSha256": "6f74fa153b1dc2d21b20a826d62483475da2bee5bfd0cf67a50efdf9ec5d86a3",
+      "afterSha256": "8a8c43fa3bafa247347568669469b44facee63b960d840e43b3a9ea2443c4e07",
+      "before": {
+        "normalized": 2370,
+        "commentIndependent": 2370,
+        "tokens": 615
+      },
+      "after": {
+        "normalized": 2262,
+        "commentIndependent": 2262,
+        "tokens": 581
+      },
+      "assertionNodes": 12,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/four-player-event-regressions.test.js",
+      "beforeSha256": "9dd7c78daf7707e7b08bac395bfa08d343d1a76564ca2dc0fa748707d02fc085",
+      "afterSha256": "8f8295a13211ba380ced962248be930e768c83e9362d7ef38e10d9056a5f3372",
+      "before": {
+        "normalized": 8811,
+        "commentIndependent": 8472,
+        "tokens": 2197
+      },
+      "after": {
+        "normalized": 8370,
+        "commentIndependent": 8031,
+        "tokens": 2009
+      },
+      "assertionNodes": 54,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/framework-independent-battles.test.js",
+      "beforeSha256": "2dee879c77f33b957df1269501b2db66e90338f7ed1edbf6c1292df586896f39",
+      "afterSha256": "f51bfdee77cd520c761b1f703b12aca79c996351f66facfadc2c5ce55549b0ad",
+      "before": {
+        "normalized": 8033,
+        "commentIndependent": 7860,
+        "tokens": 2143
+      },
+      "after": {
+        "normalized": 7985,
+        "commentIndependent": 7812,
+        "tokens": 2116
+      },
+      "assertionNodes": 72,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/full-review-regressions-battle.test.js",
+      "beforeSha256": "f8d2d57e8dc10914d83642a48a7febfb392324a06cb07aef699c11edbd4ad601",
+      "afterSha256": "c7e4e9eeb5705d7a21a5919301919b33e5574c3cebcef6b28f0a0f2cbb5d033a",
+      "before": {
+        "normalized": 10684,
+        "commentIndependent": 9176,
+        "tokens": 2459
+      },
+      "after": {
+        "normalized": 10506,
+        "commentIndependent": 8998,
+        "tokens": 2404
+      },
+      "assertionNodes": 66,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/full-review-regressions-hub.test.js",
+      "beforeSha256": "79d1c15e720c8f9945f36c5b8d7b6ab5f765e9d92d8bccc2e698d52c0ac20434",
+      "afterSha256": "57f07fd702445e55f067372767eb60f186a5aeb6a68a93a13fef7bdbaa7672ae",
+      "before": {
+        "normalized": 6542,
+        "commentIndependent": 6081,
+        "tokens": 1567
+      },
+      "after": {
+        "normalized": 6438,
+        "commentIndependent": 5977,
+        "tokens": 1533
+      },
+      "assertionNodes": 28,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/full-review-regressions-world.test.js",
+      "beforeSha256": "55f5ab6e33a3ea8e77b290ed4369d534fca06b7c4d5a6bfd8f4d3260c37c8fa6",
+      "afterSha256": "0a60591249b159ea84ced6066e5e6a862b00e4311dd157991ee611073a52b6f4",
+      "before": {
+        "normalized": 13876,
+        "commentIndependent": 12602,
+        "tokens": 3287
+      },
+      "after": {
+        "normalized": 13435,
+        "commentIndependent": 12161,
+        "tokens": 3099
+      },
+      "assertionNodes": 120,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/game-session-elapsed.test.js",
+      "beforeSha256": "acd4e9d2eff091e15385baef8a38ed2ddc465b98345bb3ab9c646c4a2706dc2b",
+      "afterSha256": "5e7ad83a21c8c78f8bf3b171456e703f6acedc752c0dd8b694cc31b28d8fe6ac",
+      "before": {
+        "normalized": 3916,
+        "commentIndependent": 3916,
+        "tokens": 988
+      },
+      "after": {
+        "normalized": 3859,
+        "commentIndependent": 3859,
+        "tokens": 949
+      },
+      "assertionNodes": 34,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/ghostblade-stealth-break.test.js",
+      "beforeSha256": "dfa2426078ef9a36ef8c55e62ea8bd80d60bd7d9ad4e92ef88c4a018bb814236",
+      "afterSha256": "0691e182602bf4456dec0ffa23914cf746e8b58dfe5da62573b9738f3c028f9f",
+      "before": {
+        "normalized": 7084,
+        "commentIndependent": 6840,
+        "tokens": 1930
+      },
+      "after": {
+        "normalized": 7063,
+        "commentIndependent": 6819,
+        "tokens": 1925
+      },
+      "assertionNodes": 84,
+      "registrationNodes": 18,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/hand-material-selection-window.test.js",
+      "beforeSha256": "c1cdc1e856f34e64a24c66788e8080f1d5265a3f0dde270b8c973b112da1069c",
+      "afterSha256": "93e6b489769da716dda46f7099737737e9d5a014cd87b3d6038573174f34fd8d",
+      "before": {
+        "normalized": 11236,
+        "commentIndependent": 11236,
+        "tokens": 2875
+      },
+      "after": {
+        "normalized": 10712,
+        "commentIndependent": 10712,
+        "tokens": 2695
+      },
+      "assertionNodes": 64,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/hero-cards.test.js",
+      "beforeSha256": "19d4de811c8fe322540fe1d7599f274b2ebf8f5d2d11d0b8a99f329a06d5ad6a",
+      "afterSha256": "cfb1b0d94b9f1363ae5c87bd665cff95d80f19a3721c9af8745dd9c3edb0e10a",
+      "before": {
+        "normalized": 23778,
+        "commentIndependent": 19517,
+        "tokens": 5121
+      },
+      "after": {
+        "normalized": 23688,
+        "commentIndependent": 19427,
+        "tokens": 5098
+      },
+      "assertionNodes": 130,
+      "registrationNodes": 20,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/infuse-free-paths.test.js",
+      "beforeSha256": "a7f1a3fd755cf83c68da940df2abc6a83f9e349b51c2e38542f3ecf91464cf50",
+      "afterSha256": "0ae8ff884d3061925b35022d9e2795daeb623fc34d6b780ee1e20df38e73dc5d",
+      "before": {
+        "normalized": 8019,
+        "commentIndependent": 7716,
+        "tokens": 2045
+      },
+      "after": {
+        "normalized": 7822,
+        "commentIndependent": 7519,
+        "tokens": 1982
+      },
+      "assertionNodes": 72,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/infuse-free-play.test.js",
+      "beforeSha256": "85ba4864f9a5a177e977ff0dd6d162123d0decdb033cf2914c18f26d61219e8f",
+      "afterSha256": "af831b18f7e37d1205435c47aab6f4d99545108d271621cfc1e39a2d67bb1713",
+      "before": {
+        "normalized": 4388,
+        "commentIndependent": 4229,
+        "tokens": 1072
+      },
+      "after": {
+        "normalized": 4369,
+        "commentIndependent": 4210,
+        "tokens": 1059
+      },
+      "assertionNodes": 28,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/item15-18-fixes.test.js",
+      "beforeSha256": "86ff4bacca1c85cbe5a73dce19157cf66c36942b4329b3a89c8002c3e5b5ca7e",
+      "afterSha256": "1d3ed2d7fc0a4a46b012b72cb249999c24176afd4fc1d646c550e3244ed260b0",
+      "before": {
+        "normalized": 5020,
+        "commentIndependent": 4094,
+        "tokens": 1012
+      },
+      "after": {
+        "normalized": 4999,
+        "commentIndependent": 4073,
+        "tokens": 1007
+      },
+      "assertionNodes": 42,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/last-stand-poison-burst.test.js",
+      "beforeSha256": "1d32b08f0453e7dac53196dcbb339c80325376afa3d122e7204b3ac54b4faa04",
+      "afterSha256": "b01d0f15df0ff53c300fca6441f6726a1b043795b79067ce8588251c9470d9a6",
+      "before": {
+        "normalized": 5155,
+        "commentIndependent": 4122,
+        "tokens": 1121
+      },
+      "after": {
+        "normalized": 5134,
+        "commentIndependent": 4101,
+        "tokens": 1116
+      },
+      "assertionNodes": 46,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/lava-blast.test.js",
+      "beforeSha256": "77faf35ff067799914f3d0446a22bf48c497a2a723a785d7251612dbbdf14a02",
+      "afterSha256": "bb01433af74c0cd3286aff884418c2eeb740b230a401c0a680ec3103d2b2475b",
+      "before": {
+        "normalized": 4373,
+        "commentIndependent": 3558,
+        "tokens": 992
+      },
+      "after": {
+        "normalized": 4352,
+        "commentIndependent": 3537,
+        "tokens": 987
+      },
+      "assertionNodes": 50,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m-batch-behavior.test.js",
+      "beforeSha256": "1dcb8ec0b6060a97bea981e1ee62bf53b117c5b3177d49a225734599284566fb",
+      "afterSha256": "f89493708ed28fc46ca09f3302006f4b68a6b41bc989d1cbe872816f73a4af03",
+      "before": {
+        "normalized": 5282,
+        "commentIndependent": 5171,
+        "tokens": 1295
+      },
+      "after": {
+        "normalized": 5190,
+        "commentIndependent": 5079,
+        "tokens": 1272
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m1-contract.test.js",
+      "beforeSha256": "18a33d60337fa6bd9f1e0b6c30a79dcacea2b57efdb174629f51ddadcab1569e",
+      "afterSha256": "d76e95e77537f78afdffdde5560c3ded8a9c4e486f7ed1a7777dbb3241682ff5",
+      "before": {
+        "normalized": 21709,
+        "commentIndependent": 20244,
+        "tokens": 5005
+      },
+      "after": {
+        "normalized": 21619,
+        "commentIndependent": 20154,
+        "tokens": 4982
+      },
+      "assertionNodes": 116,
+      "registrationNodes": 28,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m1-data.test.js",
+      "beforeSha256": "76b2a520d7805cc396b92babe15e81c84515e2156173ff0c0adb23516c4cf0d4",
+      "afterSha256": "5486896d505fa24c5868899c4cd546b7e9d90e1ff5a965999eb1dbac461485d9",
+      "before": {
+        "normalized": 9446,
+        "commentIndependent": 7687,
+        "tokens": 1717
+      },
+      "after": {
+        "normalized": 9402,
+        "commentIndependent": 7643,
+        "tokens": 1690
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m10-data.test.js",
+      "beforeSha256": "0cddbe45c789adc77baba22d53d43c6596826944d09708fcd573798c2bacc0c4",
+      "afterSha256": "02117ab85da1379008c66d5df68436dcce8e33c4317f0f73f46fdecd47df6061",
+      "before": {
+        "normalized": 5040,
+        "commentIndependent": 5040,
+        "tokens": 1183
+      },
+      "after": {
+        "normalized": 5017,
+        "commentIndependent": 5017,
+        "tokens": 1178
+      },
+      "assertionNodes": 34,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m2-contract.test.js",
+      "beforeSha256": "e10e7be8891444b6b8457946c0794de0e105bfd04fd812b2e2ee48189f28a48f",
+      "afterSha256": "71b85be01dc9881a0342a0d2858d0225620ecf56d77e6f11a1e90b47260422c4",
+      "before": {
+        "normalized": 27564,
+        "commentIndependent": 26353,
+        "tokens": 6509
+      },
+      "after": {
+        "normalized": 27474,
+        "commentIndependent": 26263,
+        "tokens": 6486
+      },
+      "assertionNodes": 156,
+      "registrationNodes": 32,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m3-contract.test.js",
+      "beforeSha256": "e76ced94191206e270ba64deb7331a08f0fcb5d8ae53b834cbeae10e3c890bd8",
+      "afterSha256": "3b1a6e7b0cd0143a289e3889ac3633d7a7985c23316d1d5ceb2b13b341db756e",
+      "before": {
+        "normalized": 22379,
+        "commentIndependent": 20773,
+        "tokens": 4990
+      },
+      "after": {
+        "normalized": 22186,
+        "commentIndependent": 20580,
+        "tokens": 4934
+      },
+      "assertionNodes": 68,
+      "registrationNodes": 29,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m3-data.test.js",
+      "beforeSha256": "8fbe4d01b2395084c3c182b08cbba2b2983bbcc3adf4e82f63ce37455eb98061",
+      "afterSha256": "f33951d9a2b3d813cd775e7a818f1bc1df896d9f410e4799deba0308287a28bf",
+      "before": {
+        "normalized": 22118,
+        "commentIndependent": 19796,
+        "tokens": 4603
+      },
+      "after": {
+        "normalized": 21405,
+        "commentIndependent": 19083,
+        "tokens": 4362
+      },
+      "assertionNodes": 104,
+      "registrationNodes": 27,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m5-data.test.js",
+      "beforeSha256": "2a400d074627c86a46b294f126a0f64173da7cc39985f130bdd52597f9acfb07",
+      "afterSha256": "4496a047ec44129209485236e18329385299f56d8ee2305e8ca2191ede9dfc33",
+      "before": {
+        "normalized": 14826,
+        "commentIndependent": 12122,
+        "tokens": 2697
+      },
+      "after": {
+        "normalized": 14783,
+        "commentIndependent": 12079,
+        "tokens": 2662
+      },
+      "assertionNodes": 68,
+      "registrationNodes": 23,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/m7-battle.test.js",
+      "beforeSha256": "c776b280cb82cad4cb6c35ddc2dd6f788ced19fcef23ed1cd0d645b3de10aab9",
+      "afterSha256": "4deb4a28fed93fb7333bdcace20b1765988ba58c49fc75cd5e464c0f8d597c58",
+      "before": {
+        "normalized": 4414,
+        "commentIndependent": 4308,
+        "tokens": 1024
+      },
+      "after": {
+        "normalized": 4320,
+        "commentIndependent": 4214,
+        "tokens": 1001
+      },
+      "assertionNodes": 8,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/mana-surge.test.js",
+      "beforeSha256": "1e09154f3bdb411a8f79e8b64b20a94140b07f15e1c139db66bdab3e1c8cd412",
+      "afterSha256": "5ade771e63ce3c9db525b0cea7186817be8de4b731f3247fde4725f1043045f5",
+      "before": {
+        "normalized": 4482,
+        "commentIndependent": 3291,
+        "tokens": 852
+      },
+      "after": {
+        "normalized": 4461,
+        "commentIndependent": 3270,
+        "tokens": 847
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/message-batch-0917.test.js",
+      "beforeSha256": "5819a7b144e92262f5af791a44319204035f3135599371a44297d9f428500d1b",
+      "afterSha256": "6190c3f212deade503abe382ccfbb3ac8b548c2571d37035a26d1606ae73cbd3",
+      "before": {
+        "normalized": 8782,
+        "commentIndependent": 7764,
+        "tokens": 2027
+      },
+      "after": {
+        "normalized": 8692,
+        "commentIndependent": 7674,
+        "tokens": 2004
+      },
+      "assertionNodes": 66,
+      "registrationNodes": 15,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/message-batch-0920-late.test.js",
+      "beforeSha256": "a865fd16be6df5d704ba82f9116d3f9e6fe0bfeace90cc1d46bea5a79ecf9b1f",
+      "afterSha256": "5def4485efd1d1dd74df30f4f78a73bcbf2f4d2b9d7b6dafe5fd58972bcbd15d",
+      "before": {
+        "normalized": 5380,
+        "commentIndependent": 5108,
+        "tokens": 1211
+      },
+      "after": {
+        "normalized": 5359,
+        "commentIndependent": 5087,
+        "tokens": 1206
+      },
+      "assertionNodes": 32,
+      "registrationNodes": 9,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/message-fixes.test.js",
+      "beforeSha256": "41822e49870c3e936680abe11ea47d1199ada48e800554b3ef62f0a6b3b9e3b9",
+      "afterSha256": "7a9cf34c68ef05ad056f8631f40b97d676f0004e1a7f6c3078ecf44febaf6b63",
+      "before": {
+        "normalized": 6342,
+        "commentIndependent": 5692,
+        "tokens": 1503
+      },
+      "after": {
+        "normalized": 6252,
+        "commentIndependent": 5602,
+        "tokens": 1480
+      },
+      "assertionNodes": 24,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/mistbox.test.js",
+      "beforeSha256": "a0d53f33a3757b64631665dce274faec4c5f73968af82555a3d5e43bd1ccac86",
+      "afterSha256": "bf52553fabbc008cc4db264fac159277a1f2332691bbad198abee87f49b1186a",
+      "before": {
+        "normalized": 3664,
+        "commentIndependent": 2969,
+        "tokens": 782
+      },
+      "after": {
+        "normalized": 3643,
+        "commentIndependent": 2948,
+        "tokens": 777
+      },
+      "assertionNodes": 30,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/mystery-potion-observation.test.js",
+      "beforeSha256": "30d0040926a8659bd05496a9598295e17376fe56f4f9018da2af12982d90fe6c",
+      "afterSha256": "b91c87a81d6e98bac78cc09d57abe5f5af5bc1b4047c91fc2f72b22c683e67ab",
+      "before": {
+        "normalized": 10616,
+        "commentIndependent": 10428,
+        "tokens": 2605
+      },
+      "after": {
+        "normalized": 10595,
+        "commentIndependent": 10407,
+        "tokens": 2600
+      },
+      "assertionNodes": 85,
+      "registrationNodes": 19,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/n1-infuse-uid-toggle.test.js",
+      "beforeSha256": "7a9599826e90523f5a4cfac04f8bcb0254dd089db1be5455ddc07c67ab1c4718",
+      "afterSha256": "e91b8f7701e118626dfafa8b4a2c3e00ea5f4d04a7277f933226111e26a98a3b",
+      "before": {
+        "normalized": 5984,
+        "commentIndependent": 4875,
+        "tokens": 1241
+      },
+      "after": {
+        "normalized": 5894,
+        "commentIndependent": 4785,
+        "tokens": 1218
+      },
+      "assertionNodes": 40,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/nest-hearts.test.js",
+      "beforeSha256": "943d825bbb035a3d58ca37ff8c38da272936e462f90511257d517e99453547d9",
+      "afterSha256": "1a08ecdd6d0c12922a10f9c009d5444620129e6732aea97ed0ccce71a2c70d5d",
+      "before": {
+        "normalized": 2869,
+        "commentIndependent": 2678,
+        "tokens": 762
+      },
+      "after": {
+        "normalized": 2779,
+        "commentIndependent": 2588,
+        "tokens": 739
+      },
+      "assertionNodes": 6,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/nest-regression.test.js",
+      "beforeSha256": "eef73ce9f6a4f552067f7a0c44159c22f909c429051f01f60facc1b77cfb9079",
+      "afterSha256": "4d7f4d1dec01452bb5843283105a1ab9ea55a22298cffa75344c2e9a5a123efb",
+      "before": {
+        "normalized": 9198,
+        "commentIndependent": 7753,
+        "tokens": 1965
+      },
+      "after": {
+        "normalized": 9177,
+        "commentIndependent": 7732,
+        "tokens": 1960
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/nightshift-u10-teardown-guards.test.js",
+      "beforeSha256": "8de9728e91799763c985b16d1ca6f014ae6191c279a0087081f820efac4638d1",
+      "afterSha256": "4acb13519aed6c361209581c39cedeb37e76331da1a4be849ecf0089decbf184",
+      "before": {
+        "normalized": 7591,
+        "commentIndependent": 6106,
+        "tokens": 1400
+      },
+      "after": {
+        "normalized": 7459,
+        "commentIndependent": 5974,
+        "tokens": 1341
+      },
+      "assertionNodes": 24,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/node-cancel-semantics.test.js",
+      "beforeSha256": "f96c7c2455c40cd6c123b56600b2a4e276b08cb3b39ab4967a822e2ff9f6b6c1",
+      "afterSha256": "56e1b5a041144d3d3dd161ee1a88837dd8af8b85f80a9786e2165c7841f83427",
+      "before": {
+        "normalized": 9329,
+        "commentIndependent": 9329,
+        "tokens": 2550
+      },
+      "after": {
+        "normalized": 7305,
+        "commentIndependent": 7305,
+        "tokens": 1844
+      },
+      "assertionNodes": 56,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/node-retrigger.test.js",
+      "beforeSha256": "d632fa130ff27b41c2710c9931f725832d35842651fa20506de8c7e043fc1d97",
+      "afterSha256": "5d0c545fdb958a110fb57c2d7146828a98ad1ccd940707dda714bdcbee70aa0b",
+      "before": {
+        "normalized": 20859,
+        "commentIndependent": 17311,
+        "tokens": 4505
+      },
+      "after": {
+        "normalized": 20418,
+        "commentIndependent": 16870,
+        "tokens": 4368
+      },
+      "assertionNodes": 166,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/normal-effects-deck-regression.test.js",
+      "beforeSha256": "7cc5076ef9947ce8538596a9b1226712af29aa145b896a698a03f785d71348d2",
+      "afterSha256": "bb7f66704ef3351d0b14a7834e9da0dce18cd62b632980c3b22dee3df8ffe7cf",
+      "before": {
+        "normalized": 3064,
+        "commentIndependent": 3064,
+        "tokens": 805
+      },
+      "after": {
+        "normalized": 3039,
+        "commentIndependent": 3039,
+        "tokens": 800
+      },
+      "assertionNodes": 36,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/normal-starter-deck.test.js",
+      "beforeSha256": "18943d9281cd69359d944c77e72fd0541e107c245fffd19768f7754dd5e80475",
+      "afterSha256": "9504dd361af3242f399509461673b420d4380ef4415ef18d36e5811619c84691",
+      "before": {
+        "normalized": 10621,
+        "commentIndependent": 10555,
+        "tokens": 3082
+      },
+      "after": {
+        "normalized": 10596,
+        "commentIndependent": 10530,
+        "tokens": 3077
+      },
+      "assertionNodes": 176,
+      "registrationNodes": 19,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/page-perf-battle.test.js",
+      "beforeSha256": "87f753f9c26eb7a29ee049f3519a327b00cfffe63be15970540b58ecf4e92c7e",
+      "afterSha256": "1aa44ecd21a0e11dd42866deeacc7f058240e0dcaf04078beb84621b27386f77",
+      "before": {
+        "normalized": 14325,
+        "commentIndependent": 14217,
+        "tokens": 3445
+      },
+      "after": {
+        "normalized": 14199,
+        "commentIndependent": 14091,
+        "tokens": 3402
+      },
+      "assertionNodes": 106,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/pearl-storage-interface.test.js",
+      "beforeSha256": "dadcced289ec6890e57af1f1890bab487c890b62d7c073c972c940f126f9c4ba",
+      "afterSha256": "e1e4942f9e60ecf40d235b43cb072cf10c2d6dec233441a0f923a9c04ddfae24",
+      "before": {
+        "normalized": 10921,
+        "commentIndependent": 10750,
+        "tokens": 2673
+      },
+      "after": {
+        "normalized": 10817,
+        "commentIndependent": 10646,
+        "tokens": 2639
+      },
+      "assertionNodes": 133,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/playthrough-bot.test.js",
+      "beforeSha256": "93412cda7502f93a4fe6a6a75180b810b77858d820c6231a57cbe3ffa17e524d",
+      "afterSha256": "3f36d4048c6624192c5808c2b5c585a1bcb26becc3ebc673b584e1bc5e15dcad",
+      "before": {
+        "normalized": 5928,
+        "commentIndependent": 5585,
+        "tokens": 1638
+      },
+      "after": {
+        "normalized": 5907,
+        "commentIndependent": 5564,
+        "tokens": 1633
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/potion-tip-lifecycle.test.js",
+      "beforeSha256": "43f5f8e67a4449602730418f7f3f558c35fd54a2c2a010bc16c89db7c558f517",
+      "afterSha256": "51d273eda405a86908e79a654b02bcbfffacf9892dd38aa4ed7e907e4c29736f",
+      "before": {
+        "normalized": 10231,
+        "commentIndependent": 10231,
+        "tokens": 2568
+      },
+      "after": {
+        "normalized": 9885,
+        "commentIndependent": 9885,
+        "tokens": 2436
+      },
+      "assertionNodes": 98,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "beforeSha256": "fb72c6a283b0c28ebb8e3a3f6be92b3256a0b0eb83f0582d66f4ad6d01eae02b",
+      "afterSha256": "927949455d7d65d9c7523bcf221860641fd43cc17bae6fa13b88fb3e86ce7ce5",
+      "before": {
+        "normalized": 8484,
+        "commentIndependent": 7419,
+        "tokens": 1885
+      },
+      "after": {
+        "normalized": 7972,
+        "commentIndependent": 6907,
+        "tokens": 1730
+      },
+      "assertionNodes": 50,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/provoke-target-contract.test.js",
+      "beforeSha256": "f1f10b51f562b95606dd4386ebcd579d1e206acf1593c77d8d594248210935f1",
+      "afterSha256": "b6b998b8765e16d3b28dbd4ede9a785f026a6168c06e55d218a809da01cc6ee7",
+      "before": {
+        "normalized": 6366,
+        "commentIndependent": 6271,
+        "tokens": 1829
+      },
+      "after": {
+        "normalized": 6345,
+        "commentIndependent": 6250,
+        "tokens": 1824
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/r3-0-command-guards.test.js",
+      "beforeSha256": "1b6421ed820f2fbb7335bbdc9d7717e6bbfbb3388dc955cc7b254a0f13d36761",
+      "afterSha256": "83952325772b5095bd9b2dfe8d6c609637d239ddd2b26bed589aad9e217f581d",
+      "before": {
+        "normalized": 7297,
+        "commentIndependent": 6716,
+        "tokens": 1875
+      },
+      "after": {
+        "normalized": 7280,
+        "commentIndependent": 6699,
+        "tokens": 1862
+      },
+      "assertionNodes": 62,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "beforeSha256": "9ceafe3ac71716a2ec2629b7df7efda82583950bbc06c67e8eda74fa35a50048",
+      "afterSha256": "f094d0804051ceb65fc007c50957238aaa20aeaf92e81f3014f875dd1ece0585",
+      "before": {
+        "normalized": 22511,
+        "commentIndependent": 22075,
+        "tokens": 5560
+      },
+      "after": {
+        "normalized": 22394,
+        "commentIndependent": 21958,
+        "tokens": 5523
+      },
+      "assertionNodes": 181,
+      "registrationNodes": 29,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/r3-b-action-boundary.repro.test.js",
+      "beforeSha256": "0e33bd4a7d88f72f345359a3db818c0fd51fc09442ce6e2eaf642414126556e9",
+      "afterSha256": "0ac425f1147569ef93c83c9f0085a409559d705ee648a4a7abe03733e8791cbb",
+      "before": {
+        "normalized": 7035,
+        "commentIndependent": 6679,
+        "tokens": 1806
+      },
+      "after": {
+        "normalized": 7018,
+        "commentIndependent": 6662,
+        "tokens": 1793
+      },
+      "assertionNodes": 64,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/r5a-session-menu.test.js",
+      "beforeSha256": "166f5bc149813dd619db17b6dfc32f5b1b86f8249bb738ebf6e66e6d73c97f1c",
+      "afterSha256": "2328084f22a5fc697e43e9a0954ebf646e21fe698501ea7b3972d2547098d1a8",
+      "before": {
+        "normalized": 11232,
+        "commentIndependent": 11232,
+        "tokens": 3097
+      },
+      "after": {
+        "normalized": 11195,
+        "commentIndependent": 11195,
+        "tokens": 3058
+      },
+      "assertionNodes": 102,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/rapid-fire.test.js",
+      "beforeSha256": "f34f4458b876a6d419581a1ddc32d99958688df252584fdc058e7a64fd352220",
+      "afterSha256": "0da018c982c00882bf58a19a64d5188e1a5352fc7d8945662b92d16607d2e350",
+      "before": {
+        "normalized": 5725,
+        "commentIndependent": 5027,
+        "tokens": 1339
+      },
+      "after": {
+        "normalized": 5704,
+        "commentIndependent": 5006,
+        "tokens": 1334
+      },
+      "assertionNodes": 48,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/reactive-draw-cast-continuation.test.js",
+      "beforeSha256": "28dbe5ec89f44477dfa8b7417d186ec1f0037ac5c88ca2ecdb59bb4ede08a912",
+      "afterSha256": "5d6a70d66c20e9fe366d1c86add824147225f9a3e14a3221511a1e765c6d041d",
+      "before": {
+        "normalized": 7787,
+        "commentIndependent": 7579,
+        "tokens": 2267
+      },
+      "after": {
+        "normalized": 7766,
+        "commentIndependent": 7558,
+        "tokens": 2262
+      },
+      "assertionNodes": 88,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/requested-card-integration.test.js",
+      "beforeSha256": "a1aa1b89705397da79a5e33972a316fe30216b6a6efb72b7faee80c2674cd23b",
+      "afterSha256": "978a88876c313592be888af498723ac53a54d706d81aaf05718a25beff24272d",
+      "before": {
+        "normalized": 14290,
+        "commentIndependent": 14207,
+        "tokens": 3624
+      },
+      "after": {
+        "normalized": 14200,
+        "commentIndependent": 14117,
+        "tokens": 3601
+      },
+      "assertionNodes": 152,
+      "registrationNodes": 26,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/requested-equipment-effects.test.js",
+      "beforeSha256": "47dee7f62c39fca0fae23c72f9a179e5c09751e365d2fd4b2182f0647e3be6fb",
+      "afterSha256": "899bbb63f350367ee3d7ba9a07c002d8d788dff339b70825526b11edec8dfcda",
+      "before": {
+        "normalized": 9635,
+        "commentIndependent": 9557,
+        "tokens": 2711
+      },
+      "after": {
+        "normalized": 9614,
+        "commentIndependent": 9536,
+        "tokens": 2706
+      },
+      "assertionNodes": 102,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/reserved-card-id-regression.test.js",
+      "beforeSha256": "0d4557d0e6b73c13fac2d003791c14df74c2b549a85515059d4eab0981a043c0",
+      "afterSha256": "b4f9c60d96a194bc6f87460c75735228f0cabd1736c3c574eade2a4395a0f34f",
+      "before": {
+        "normalized": 5611,
+        "commentIndependent": 5453,
+        "tokens": 1292
+      },
+      "after": {
+        "normalized": 5525,
+        "commentIndependent": 5367,
+        "tokens": 1269
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 9,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "beforeSha256": "a239d5414f8f2f923436f05f27b9d7563b839ec53b012c106bf7f5504c4babbc",
+      "afterSha256": "fcea0cb977237e557f647fad740f7b7f43fd7f17ff7edd5eb49cd0d3b46e5e79",
+      "before": {
+        "normalized": 8047,
+        "commentIndependent": 7764,
+        "tokens": 1890
+      },
+      "after": {
+        "normalized": 8026,
+        "commentIndependent": 7743,
+        "tokens": 1885
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/reward-capacity-preview.test.js",
+      "beforeSha256": "e4d1036694120fe5700dd446361eb31770c51a496424ac2c504557798d2aa39a",
+      "afterSha256": "f27a59b6410c651e1d593c98fb79c73ee33fe523b69924969a4e486b6ae63e9a",
+      "before": {
+        "normalized": 12911,
+        "commentIndependent": 12624,
+        "tokens": 3801
+      },
+      "after": {
+        "normalized": 12874,
+        "commentIndependent": 12587,
+        "tokens": 3786
+      },
+      "assertionNodes": 86,
+      "registrationNodes": 24,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/reward-settlement-unification.test.js",
+      "beforeSha256": "28e306d76774d8d216394848e4a18484d6ab58ebd7cee444c7a5a583a87c904d",
+      "afterSha256": "3eae564fb461de66efaacb53535f455a1cfe78dbf6b9a002feb708514eaf7136",
+      "before": {
+        "normalized": 7563,
+        "commentIndependent": 7563,
+        "tokens": 1922
+      },
+      "after": {
+        "normalized": 7524,
+        "commentIndependent": 7524,
+        "tokens": 1907
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/safe-pearl-access.test.js",
+      "beforeSha256": "f0bcf7a67ad31f73defee46d0ef3533175dddf336e2d9a76734fe05023374297",
+      "afterSha256": "4baabb689316e7053755753f9c9929ef467845bc9121e3d3bec30cc14eceac09",
+      "before": {
+        "normalized": 11255,
+        "commentIndependent": 11255,
+        "tokens": 2934
+      },
+      "after": {
+        "normalized": 11151,
+        "commentIndependent": 11151,
+        "tokens": 2900
+      },
+      "assertionNodes": 143,
+      "registrationNodes": 17,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/save-recovery-session-feedback.test.js",
+      "beforeSha256": "eea840ba71ff1bc2d0bf6c7e0e206b5798b44f7e97ee0425d436cdae218e6c9f",
+      "afterSha256": "f593017c040e551b9f485427541108e6e96a49fcb98deafe9b7ea9f819830d66",
+      "before": {
+        "normalized": 4223,
+        "commentIndependent": 4223,
+        "tokens": 1047
+      },
+      "after": {
+        "normalized": 4202,
+        "commentIndependent": 4202,
+        "tokens": 1042
+      },
+      "assertionNodes": 20,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/save-slot-delete-results.test.js",
+      "beforeSha256": "f247e620c28012cb289e3ae2b96e0760f935b90f96ed9274220b8e18755fa2e4",
+      "afterSha256": "2d18f9876679e63daf287ba00cf9fc0e32db4e6d62ec9d5ac04352415b46b779",
+      "before": {
+        "normalized": 9104,
+        "commentIndependent": 9104,
+        "tokens": 2251
+      },
+      "after": {
+        "normalized": 9083,
+        "commentIndependent": 9083,
+        "tokens": 2246
+      },
+      "assertionNodes": 88,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/scavenge-mode-feedback.test.js",
+      "beforeSha256": "50e9bbcc31e7edf7f5e7407de17fe2f30356004adbc942c873a858c3a5e8cf20",
+      "afterSha256": "6b95db58d4cb56c7c6b7e1d8668bc700f3518e867f63ef25872321b2e97fdf7e",
+      "before": {
+        "normalized": 4451,
+        "commentIndependent": 4368,
+        "tokens": 1195
+      },
+      "after": {
+        "normalized": 4430,
+        "commentIndependent": 4347,
+        "tokens": 1190
+      },
+      "assertionNodes": 42,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/session-base-persistence.test.js",
+      "beforeSha256": "5d0e2a796bf07c97936102f641c9209360bd685b1b25d768cc2f736e1ede1358",
+      "afterSha256": "3afb4855a3848f28bc30f1163c960064bee04273c10ffbeaf4eb03a74a5cf8fc",
+      "before": {
+        "normalized": 5590,
+        "commentIndependent": 5590,
+        "tokens": 1412
+      },
+      "after": {
+        "normalized": 5535,
+        "commentIndependent": 5535,
+        "tokens": 1373
+      },
+      "assertionNodes": 60,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/skull-sword-effective-session.test.js",
+      "beforeSha256": "9f34a1c4f276cd1736d3d99a9e61e73d51618486e59a2e2de08aaa1e83b081b6",
+      "afterSha256": "7ce0c7ec1cdab3d4910ad2a4ac207f9ee9f4c7f9de5b1523bf732f2c8af373b9",
+      "before": {
+        "normalized": 32117,
+        "commentIndependent": 31274,
+        "tokens": 7767
+      },
+      "after": {
+        "normalized": 31593,
+        "commentIndependent": 30750,
+        "tokens": 7587
+      },
+      "assertionNodes": 324,
+      "registrationNodes": 29,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/stellar-divination.test.js",
+      "beforeSha256": "772381eb5c872eac7003edd5094ff172bc3f1d7db319469c1cba2c340e1abda1",
+      "afterSha256": "0378151cdc3e8bf651173ac01052a114d4fd62f735b5019997a789a5a7d278cd",
+      "before": {
+        "normalized": 8021,
+        "commentIndependent": 7856,
+        "tokens": 2258
+      },
+      "after": {
+        "normalized": 7931,
+        "commentIndependent": 7766,
+        "tokens": 2235
+      },
+      "assertionNodes": 98,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/structured-backupcell.test.js",
+      "beforeSha256": "96a215c267bc337b1572d779709800fd00e0187f65abc83f20cf6436f1633043",
+      "afterSha256": "aab74d080f1ee865e1d161e9d534e72e85a0f7a7cad420a45b781809fd30d559",
+      "before": {
+        "normalized": 4686,
+        "commentIndependent": 4542,
+        "tokens": 1063
+      },
+      "after": {
+        "normalized": 4663,
+        "commentIndependent": 4519,
+        "tokens": 1058
+      },
+      "assertionNodes": 22,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/structured-effect-authority.test.js",
+      "beforeSha256": "b41268a48c6f2d157f6b94b36106cfa6e30a837e8db309050422e8540fb2922c",
+      "afterSha256": "ff9e4c5d1e25fbecb27baafeece9ab537420eb183d3188da57bd0b98240d917b",
+      "before": {
+        "normalized": 8458,
+        "commentIndependent": 8458,
+        "tokens": 2131
+      },
+      "after": {
+        "normalized": 8368,
+        "commentIndependent": 8368,
+        "tokens": 2108
+      },
+      "assertionNodes": 44,
+      "registrationNodes": 13,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/structured-onplay-battle.test.js",
+      "beforeSha256": "8359a1f1c9a04d30ecf174503780ebae8cecc6acd173d38df01535387d18acff",
+      "afterSha256": "c2ca8fa05098e2a84f1a4be25e8e908e8988cfbe711783b181eb299aaa300b2d",
+      "before": {
+        "normalized": 10447,
+        "commentIndependent": 10296,
+        "tokens": 2546
+      },
+      "after": {
+        "normalized": 10149,
+        "commentIndependent": 9998,
+        "tokens": 2455
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts-attack-presentation.test.js",
+      "beforeSha256": "1c8858b9b2e0c5a7cb3ae04d90733769b77977bcb0f60daeeb9db457a1104697",
+      "afterSha256": "cbf08759313724c0ac312488bb350083db5b5163324d3ef047ba76e93dfdfa66",
+      "before": {
+        "normalized": 6018,
+        "commentIndependent": 6018,
+        "tokens": 1575
+      },
+      "after": {
+        "normalized": 5839,
+        "commentIndependent": 5839,
+        "tokens": 1532
+      },
+      "assertionNodes": 56,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-agent-infusion-1021.test.js",
+      "beforeSha256": "5409235de3fead3a129af5ce7626bde23a4b4c09db7d3b526ed994979a9c374c",
+      "afterSha256": "9d9f8fb8bcee40869eecc46665111ee13ad2d3a2ef1ccd1ec3c56e21f35b3486",
+      "before": {
+        "normalized": 11985,
+        "commentIndependent": 11985,
+        "tokens": 3027
+      },
+      "after": {
+        "normalized": 11960,
+        "commentIndependent": 11960,
+        "tokens": 3022
+      },
+      "assertionNodes": 124,
+      "registrationNodes": 14,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-agent-replay.test.js",
+      "beforeSha256": "e73a3ae9479e41391ab3e6ba7d5e77356b8345d1815d28e9d5bddb1edf2de3ec",
+      "afterSha256": "baa15bd910cc87471d850e24cd2444625c39daa60e0dc38060d7b9777ef3ed47",
+      "before": {
+        "normalized": 13078,
+        "commentIndependent": 12796,
+        "tokens": 3079
+      },
+      "after": {
+        "normalized": 13053,
+        "commentIndependent": 12771,
+        "tokens": 3074
+      },
+      "assertionNodes": 109,
+      "registrationNodes": 16,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-battle-settings-restart.test.js",
+      "beforeSha256": "a2ca36e2cc1d1d751e1fac80910b0790b8109ad1f5c2c9040767676f36c2ad35",
+      "afterSha256": "4b30acc30d4acde2b63add9dfae99b001187a3e8e3c3a2bd4828956d105c23f0",
+      "before": {
+        "normalized": 10620,
+        "commentIndependent": 10620,
+        "tokens": 2535
+      },
+      "after": {
+        "normalized": 10405,
+        "commentIndependent": 10405,
+        "tokens": 2478
+      },
+      "assertionNodes": 102,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-combat-facts.test.js",
+      "beforeSha256": "6f1428e2b557fb4600a8d50e17e9c3caaa58648bc54c90be91447577dbd44da7",
+      "afterSha256": "9d69eeaaa5f69a99a7878ee9554e88024f7613c3305705c6a90b880e38fe269b",
+      "before": {
+        "normalized": 9745,
+        "commentIndependent": 9745,
+        "tokens": 2516
+      },
+      "after": {
+        "normalized": 9651,
+        "commentIndependent": 9651,
+        "tokens": 2493
+      },
+      "assertionNodes": 80,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-consumed-items.test.js",
+      "beforeSha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab",
+      "afterSha256": "54d37ba6bf30fc9c52ebd860a1fb1f1a513b6ec8be1837a8b8794726dd38d622",
+      "before": {
+        "normalized": 10059,
+        "commentIndependent": 10059,
+        "tokens": 2607
+      },
+      "after": {
+        "normalized": 9942,
+        "commentIndependent": 9942,
+        "tokens": 2570
+      },
+      "assertionNodes": 114,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-consumed-pile.test.js",
+      "beforeSha256": "8e247a5a189eaf02f27efc1d29e28cfd379bfed4d9801ba4851c50533baca73a",
+      "afterSha256": "5c3b83301818bad0dd57a96a1ffe3c83a90ec9a081437775a573aff0ea7f0446",
+      "before": {
+        "normalized": 7271,
+        "commentIndependent": 7209,
+        "tokens": 1747
+      },
+      "after": {
+        "normalized": 7154,
+        "commentIndependent": 7092,
+        "tokens": 1710
+      },
+      "assertionNodes": 76,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-consumed-rules.test.js",
+      "beforeSha256": "fb868064404ffa8ae9b2e9b400ade880ffc50db0cf3b0c8e566806238814f7d0",
+      "afterSha256": "1cdb6b738c4eab7818bd77b514bd901c5c113fc6de1ffbcdfc5bcaa8d899dcbe",
+      "before": {
+        "normalized": 13066,
+        "commentIndependent": 12796,
+        "tokens": 3459
+      },
+      "after": {
+        "normalized": 12974,
+        "commentIndependent": 12704,
+        "tokens": 3436
+      },
+      "assertionNodes": 138,
+      "registrationNodes": 18,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-enemy-plan.test.js",
+      "beforeSha256": "808eb4f0c5bb783016480580c0fd18939fb7ec6192559a2d3fb184016aafcb52",
+      "afterSha256": "2584f0088d0505ecfd249424b6b1375d9c52a98eea31d87d75092529d2acb7ae",
+      "before": {
+        "normalized": 6380,
+        "commentIndependent": 6149,
+        "tokens": 1461
+      },
+      "after": {
+        "normalized": 6357,
+        "commentIndependent": 6126,
+        "tokens": 1456
+      },
+      "assertionNodes": 66,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-hand-selection-contract.test.js",
+      "beforeSha256": "1a61542b605a289e3336ff7a88778975fb50cf3a0ebdc14f33cf22e6607fe8bb",
+      "afterSha256": "ffc45d61f4bbf76ba143b5b601b178c51b140a49fca87ad0c9307d543f0b8bbe",
+      "before": {
+        "normalized": 10126,
+        "commentIndependent": 10126,
+        "tokens": 2578
+      },
+      "after": {
+        "normalized": 10101,
+        "commentIndependent": 10101,
+        "tokens": 2573
+      },
+      "assertionNodes": 96,
+      "registrationNodes": 11,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-infusion-flow-1021.test.js",
+      "beforeSha256": "f14b94dde55968f196dd829277c830a466409641b03b5eb8ce96a8197a424299",
+      "afterSha256": "821e0108a71ef5ee0e5fc7925a0a131dc758e73f661231b1f38890b92c3e7175",
+      "before": {
+        "normalized": 15962,
+        "commentIndependent": 15962,
+        "tokens": 4000
+      },
+      "after": {
+        "normalized": 15937,
+        "commentIndependent": 15937,
+        "tokens": 3995
+      },
+      "assertionNodes": 221,
+      "registrationNodes": 26,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sts2-unified-consumed-pile.test.js",
+      "beforeSha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161",
+      "afterSha256": "5ed93dde79cf056fdc637a19a8ef09e382c457791caf956fb69e6cbc2b6d4c2f",
+      "before": {
+        "normalized": 12028,
+        "commentIndependent": 12028,
+        "tokens": 3000
+      },
+      "after": {
+        "normalized": 11911,
+        "commentIndependent": 11911,
+        "tokens": 2963
+      },
+      "assertionNodes": 146,
+      "registrationNodes": 20,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sword-consume-trigger.test.js",
+      "beforeSha256": "f5e0d30af504767cc87b138a70e39916ad022a63c886dede89ddba0a9e8baefe",
+      "afterSha256": "eaae0bf15af3013d42307fdae20d685c2b6a2c8f3cdf7d38580da51d4ae62d7d",
+      "before": {
+        "normalized": 7624,
+        "commentIndependent": 7380,
+        "tokens": 2140
+      },
+      "after": {
+        "normalized": 7603,
+        "commentIndependent": 7359,
+        "tokens": 2135
+      },
+      "assertionNodes": 84,
+      "registrationNodes": 12,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "beforeSha256": "b9e64ddc9e9d414779806b6ef30f50e36c174d58bd8b04df795dc5e0b5f301be",
+      "afterSha256": "4dc27a80edb0c3f155d4ac518faa57a1d1366e6a13b780b0107b2b33764780db",
+      "before": {
+        "normalized": 29842,
+        "commentIndependent": 26263,
+        "tokens": 6594
+      },
+      "after": {
+        "normalized": 28856,
+        "commentIndependent": 25440,
+        "tokens": 6369
+      },
+      "assertionNodes": 374,
+      "registrationNodes": 23,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/sys03-loot-shop-txn.test.js",
+      "beforeSha256": "8ccb24e94fa5678cb4295471cb31fc6022eb77e03ee4ffa83aab73220e1412f8",
+      "afterSha256": "3982cb96b5cd7d82b3ab12c704eaa2be8e98435c1ba64b25bba3f1f5f5e2d971",
+      "before": {
+        "normalized": 33478,
+        "commentIndependent": 31099,
+        "tokens": 7200
+      },
+      "after": {
+        "normalized": 33319,
+        "commentIndependent": 30940,
+        "tokens": 7138
+      },
+      "assertionNodes": 340,
+      "registrationNodes": 30,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/terminal-death.test.js",
+      "beforeSha256": "0999bec5c0f156d248988a8a35bd5961b0721d72212fb430b58a223931b045ed",
+      "afterSha256": "defdc0c634edb9896af7ce982654f28c54f287572fb57b92254dd339ba34e472",
+      "before": {
+        "normalized": 6711,
+        "commentIndependent": 6711,
+        "tokens": 1736
+      },
+      "after": {
+        "normalized": 6682,
+        "commentIndependent": 6682,
+        "tokens": 1731
+      },
+      "assertionNodes": 69,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/terminal-persistence.test.js",
+      "beforeSha256": "0ce4867799ab9334220f2804d380c43ba2348d6fa4ef3a739870a19e54104726",
+      "afterSha256": "2de797a3888ce602d671acf1446d26a63a825ebafb11ac7db3ac10db93a3f4e6",
+      "before": {
+        "normalized": 8513,
+        "commentIndependent": 8513,
+        "tokens": 2228
+      },
+      "after": {
+        "normalized": 8488,
+        "commentIndependent": 8488,
+        "tokens": 2223
+      },
+      "assertionNodes": 82,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/terminal-retry-copy.test.js",
+      "beforeSha256": "d31da9855a9fc694e4d247a1d2bba161575b6bf15a07cae8290d7d8461db3072",
+      "afterSha256": "15805dbbe5fb9ea2d25cee404348e9c20580384175008f0038101f4f8475af56",
+      "before": {
+        "normalized": 5957,
+        "commentIndependent": 5247,
+        "tokens": 1179
+      },
+      "after": {
+        "normalized": 5928,
+        "commentIndependent": 5218,
+        "tokens": 1174
+      },
+      "assertionNodes": 34,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "beforeSha256": "9693a4c8a0780f16fa094de57a9a2e859570b6e880385ce43b9b1b1595165835",
+      "afterSha256": "f3715298ac72a71e222a2b7b97b7b9472482d7cbec1770fcf1519d1c147b6c55",
+      "before": {
+        "normalized": 6445,
+        "commentIndependent": 6138,
+        "tokens": 1512
+      },
+      "after": {
+        "normalized": 6355,
+        "commentIndependent": 6048,
+        "tokens": 1489
+      },
+      "assertionNodes": 56,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt12-hitechrd-structured.test.js",
+      "beforeSha256": "d36f5692cd598472bca2e3dfd56b06e10083ff948f2483a1c28f6c8d4955c2f7",
+      "afterSha256": "15f382fe98a8af343c2685a315234732ae515995867fcfd1ec04b96b2097df27",
+      "before": {
+        "normalized": 8601,
+        "commentIndependent": 8253,
+        "tokens": 1873
+      },
+      "after": {
+        "normalized": 8511,
+        "commentIndependent": 8163,
+        "tokens": 1850
+      },
+      "assertionNodes": 70,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt12-structured-battle.test.js",
+      "beforeSha256": "0f47d74d58f836f55605b13791377da249158b75f0cfeed3f015ad1797f8b04c",
+      "afterSha256": "c573b32be623570d9d4860fcecb6fec728f2f1f949cdec503c537fd50b80f5c4",
+      "before": {
+        "normalized": 7763,
+        "commentIndependent": 7349,
+        "tokens": 1753
+      },
+      "after": {
+        "normalized": 7746,
+        "commentIndependent": 7332,
+        "tokens": 1740
+      },
+      "assertionNodes": 67,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt7-frozenight-structured-battle.test.js",
+      "beforeSha256": "1b95ec00086f21d6fadfb3d51548bb58d5108f71367a1cb5cfd1e760e0aec503",
+      "afterSha256": "15c269068516c4b18f4b34d3659638c1a2794b1ed92ebf0e11a92160b47accac",
+      "before": {
+        "normalized": 5767,
+        "commentIndependent": 5685,
+        "tokens": 1364
+      },
+      "after": {
+        "normalized": 5677,
+        "commentIndependent": 5595,
+        "tokens": 1341
+      },
+      "assertionNodes": 16,
+      "registrationNodes": 6,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt7-hand-payment.test.js",
+      "beforeSha256": "88e8a491b1dbb4df1cdc86b9158dfe9a87adcf562fb2904c3ad4e43e4410fb85",
+      "afterSha256": "b02d5afff19d6bcdc42cac55838d0cd11723a0c69c6074d02ec2c83ac088c45b",
+      "before": {
+        "normalized": 10342,
+        "commentIndependent": 10244,
+        "tokens": 2507
+      },
+      "after": {
+        "normalized": 10325,
+        "commentIndependent": 10227,
+        "tokens": 2494
+      },
+      "assertionNodes": 86,
+      "registrationNodes": 10,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/tt7-sneak-structured.test.js",
+      "beforeSha256": "8e304712e1e8a730685adadea0df2f03835828ef791daa2040e4ac94ba248f31",
+      "afterSha256": "5376093cdef2d75ce2efceb385c35b1a39ab8651238ce8098d93958dcf50788e",
+      "before": {
+        "normalized": 4258,
+        "commentIndependent": 4258,
+        "tokens": 1041
+      },
+      "after": {
+        "normalized": 4063,
+        "commentIndependent": 4063,
+        "tokens": 985
+      },
+      "assertionNodes": 12,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/u18-negative-hp-death.test.js",
+      "beforeSha256": "0212b65f2d5028376fa273ab136595258cd7ca9189a756eec53ce1d0f1446628",
+      "afterSha256": "3f25c89c698b1586c07c99c123aee908d4fa0b1e6a3ea1a29fdede666cc76d78",
+      "before": {
+        "normalized": 7264,
+        "commentIndependent": 6110,
+        "tokens": 1529
+      },
+      "after": {
+        "normalized": 7243,
+        "commentIndependent": 6089,
+        "tokens": 1524
+      },
+      "assertionNodes": 46,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/venom-staff-passive.test.js",
+      "beforeSha256": "27a55ae6699ec514cdf398e46b203388f8fa14a81aa08adf7fd17307c1142628",
+      "afterSha256": "06f329d3cd8f4bccf33c5dc98b5faefbba853a2eeee8f145f9e12b2cba454cbb",
+      "before": {
+        "normalized": 4181,
+        "commentIndependent": 4098,
+        "tokens": 1133
+      },
+      "after": {
+        "normalized": 4160,
+        "commentIndependent": 4077,
+        "tokens": 1128
+      },
+      "assertionNodes": 42,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/wf-feedback1021-a-battle-dynamic-values.test.js",
+      "beforeSha256": "ba60715174ecc39a9f8e9baecc1617442e75f0e6e0e6bd9aa8fd5a325f9a251e",
+      "afterSha256": "fc43e08beefb7856e10be712ab769dcdb392aece200cd6c5ab8ef4709a7fbafe",
+      "before": {
+        "normalized": 6013,
+        "commentIndependent": 5149,
+        "tokens": 1007
+      },
+      "after": {
+        "normalized": 5921,
+        "commentIndependent": 5057,
+        "tokens": 984
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 7,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/wf-feedback1021-a-lamp-direct-cast-infusion.test.js",
+      "beforeSha256": "d22a9cd363146501dd1981e4670692e701b628fa3e9012b0258102ef53c39b2d",
+      "afterSha256": "9082202186ad5c0560befdf0b954a61486ffd41d0e1f3790ff48e8be2981a8f1",
+      "before": {
+        "normalized": 11431,
+        "commentIndependent": 9888,
+        "tokens": 2255
+      },
+      "after": {
+        "normalized": 11410,
+        "commentIndependent": 9867,
+        "tokens": 2250
+      },
+      "assertionNodes": 58,
+      "registrationNodes": 8,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/wf-feedback1021-b-potion-chain.test.js",
+      "beforeSha256": "c8b36d18487b3c85af7c7e856d1ba250436c6d2fa61904a4336bdbf74b31a2ce",
+      "afterSha256": "40b6508335244386a9c9d0bc2410c6d866c64ac0c3240c38542319aebbd97dec",
+      "before": {
+        "normalized": 5942,
+        "commentIndependent": 5485,
+        "tokens": 1529
+      },
+      "after": {
+        "normalized": 5921,
+        "commentIndependent": 5464,
+        "tokens": 1524
+      },
+      "assertionNodes": 33,
+      "registrationNodes": 5,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/wf-feedback1021-b-potion-targeting.test.js",
+      "beforeSha256": "a6b56f338e8c2647f739eb9be2cdac47128241663c01a38e67083241eccf805d",
+      "afterSha256": "7ac095abe8c955957a337575b9cd388e6ed1d2720771ba298802176a605df3ad",
+      "before": {
+        "normalized": 9043,
+        "commentIndependent": 7561,
+        "tokens": 1944
+      },
+      "after": {
+        "normalized": 8531,
+        "commentIndependent": 7049,
+        "tokens": 1789
+      },
+      "assertionNodes": 38,
+      "registrationNodes": 3,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/wf-feedback1021-b-status-icons.test.js",
+      "beforeSha256": "8ac8a233fbced6753a0077047a029547fc826782f89e5be8a3b344db4eaefd6f",
+      "afterSha256": "4db0f47c1cb499e2da8a1242f42287adc08d01a329983ec42445078e571b73f7",
+      "before": {
+        "normalized": 7848,
+        "commentIndependent": 7248,
+        "tokens": 1930
+      },
+      "after": {
+        "normalized": 6953,
+        "commentIndependent": 6353,
+        "tokens": 1655
+      },
+      "assertionNodes": 26,
+      "registrationNodes": 4,
+      "assertionsEqual": true,
+      "registrationsEqual": true
+    },
+    {
+      "path": "tests/helpers/environment-fixtures.js",
+      "afterSha256": "8f824f0ade81e773dd1e08b8aac6ea508dc31077afe670fb503c6a5e4c84ee5f",
+      "after": {
+        "normalized": 10805,
+        "commentIndependent": 10642,
+        "tokens": 2918
+      }
+    },
+    {
+      "path": "tests/environment-fixtures.test.js",
+      "afterSha256": "f6af14317aa75cdba82404f7c6933527e0a79d7dc397a1f5ecdc38880ded0f1c",
+      "after": {
+        "normalized": 4548,
+        "commentIndependent": 4548,
+        "tokens": 998
+      }
+    }
+  ]
+}

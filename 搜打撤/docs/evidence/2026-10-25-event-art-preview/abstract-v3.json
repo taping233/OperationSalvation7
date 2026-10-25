@@ -1,0 +1,12 @@
+{
+  "event_id": "tt6-demondeal",
+  "status": "preview-only",
+  "feedback": "背景可以有些抽象虚化的表达，不要完全放弃。",
+  "source": "../.tmp/nai/event-transport-preview-1025/builtin-minimal-v2.png",
+  "output": "../.tmp/nai/event-transport-preview-1025/builtin-abstract-v3.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-af2f535e-499a-4098-9f8d-f8cdea2909cf.png",
+  "prompt_summary": "保留人物、车辆与补给箱，只调整背景；低对比灰蓝灰青色块含蓄提示城市与装卸区域纵深，软边虚化、少细节；无新增怪物与故事道具，地面用宽色面衔接主体。",
+  "sha256": "b6d05a325f32b5c638abc8c85959ec5bacc82b7a275be7ccbb5a2d6c9af1ed36",
+  "runtime_replaced": false,
+  "checks_run": []
+}

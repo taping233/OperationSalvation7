@@ -1,0 +1,29 @@
+{
+  "status": "installed",
+  "channels": [
+    "NAI V5 Full",
+    "built-in image_gen: repaint and piano/hands correction"
+  ],
+  "asset": "game\\assets\\reconstruction\\wallpaper-xingyue-piano-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 370092,
+  "sha256": "2ae951b2ff94ddd75d6314d006f218a7983b56dfb542ab1da4aa507e13f97161",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-d3e54298-af72-476d-a3d6-298e9075f718.png",
+  "source_sha256": "a5dc594c346c61c0ccd06622c54b3fb1c495622d1fe78da12c6317564fcaa1e5",
+  "before": ".tmp\\nai\\xingyue-piano-reset-1024\\before-wallpaper.webp",
+  "before_sha256": "5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393",
+  "draft": ".tmp\\nai\\xingyue-piano-reset-1024\\nai5-draft.png",
+  "nai_seed": 1235857615,
+  "builtin_first": ".tmp\\nai\\xingyue-piano-reset-1024\\builtin-first.png",
+  "builtin_final": ".tmp\\nai\\xingyue-piano-reset-1024\\builtin-piano-hands.png",
+  "prompt_files": [
+    "builtin-prompt.txt",
+    "piano-hands-prompt.txt"
+  ],
+  "review": "生成画面目视：双手手指弧度、手腕和触键姿势已调整，键盘黑键重新分组；未作乐器专业验收",
+  "verification": "按老板此前要求，不运行测试、不打开游戏实页；只执行图片转换、尺寸和哈希登记",
+  "large_binary_policy": "原始PNG保存在根.tmp，不进Git；获取方式为本次NAI请求及内置生成；路径与SHA见本记录及nai-request.json"
+}

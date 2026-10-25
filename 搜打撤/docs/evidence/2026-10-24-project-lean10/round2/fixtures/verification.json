@@ -1,0 +1,98 @@
+{
+  "status": "complete; owned code frozen; no further task expansion",
+  "scope": {
+    "models": 28,
+    "sites": 383,
+    "existingTests": 201,
+    "newFiles": [
+      "tests/helpers/environment-fixtures.js",
+      "tests/environment-fixtures.test.js"
+    ],
+    "excludedFiles": [
+      "tests/battle-persistent-stage.test.js",
+      "tests/project-bug-sweep-battle-1024.test.js",
+      "tests/project-bug-sweep-round2-agent-confirm.test.js",
+      "tests/project-bug-sweep-round2-battle-1024.test.js",
+      "tests/project-bug-sweep-round2-nest-progress.test.js",
+      "tests/project-bug-sweep-round2-nest-shop.test.js",
+      "tests/project-bugfix-battle-1023.test.js",
+      "tests/project-bugfix-expedition-1023.test.js",
+      "tests/project-bugfix-round2-battle.test.js",
+      "tests/project-bugfix-round2-expedition-chests.test.js",
+      "tests/project-bugfix-round2-expedition-nest.test.js"
+    ]
+  },
+  "net": {
+    "normalized": 28253,
+    "commentIndependent": 28090,
+    "tokens": 10537
+  },
+  "static": {
+    "assertionAstNodes": 19507,
+    "registrationSkipHookTimeoutRecords": 2629,
+    "allOriginalAssertionsEqual": true,
+    "allRegistrationRecordsEqual": true,
+    "helperOnlyTopLevelFunctionExports": true,
+    "viHoistedReferences": 0,
+    "helperUnresolvedGlobals": [
+      "Element",
+      "Error",
+      "JSON",
+      "Math",
+      "Object",
+      "Promise",
+      "Set",
+      "document",
+      "localStorage",
+      "setTimeout",
+      "undefined",
+      "window"
+    ],
+    "fragmentOracle": {
+      "passedGroups": 28,
+      "passedInstances": 383,
+      "failed": [],
+      "budgets": []
+    }
+  },
+  "tests": {
+    "target": {
+      "files": 201,
+      "passedFiles": 430,
+      "failedFiles": 30,
+      "total": 2536,
+      "passed": 2485,
+      "failed": 51
+    },
+    "newShapeContracts": {
+      "file": "tests/environment-fixtures.test.js",
+      "total": 26,
+      "passed": 26,
+      "failed": 0,
+      "source": "实际独立Vitest工具回执；26项通过，3.16s"
+    },
+    "frozenOriginalComparison": {
+      "files": 17,
+      "injected": 17,
+      "comparedCases": 263,
+      "oldFailed": 51,
+      "currentFailed": 51,
+      "differences": [],
+      "baselineRunRuntimeChanged": []
+    }
+  },
+  "lint": {
+    "targetFiles": 203,
+    "newHelperAndShapeTest": "passed",
+    "allTargets": "1 existing no-unused-vars error: chest-batch-receipt index",
+    "frozenOriginalStdin": "same no-unused-vars error reproduced at original line 46 (current line 45)",
+    "newErrors": 0
+  },
+  "boundaries": [
+    "仅测试夹具/测试源码；本片运行代码净减0，不冒充游戏运行源码收益",
+    "不改原有断言、注册、skip、hooks或timeout；51项原有失败未弱化/修复",
+    "没有build、安装、新服务、浏览器、提交或删除",
+    "新helper与正式专测不读取cache；cache只保存一次性原稿差分和原始输出",
+    "未命中匿名函数推断name变化：battleViewMocks的16处rich实参均为原有Identifier"
+  ]
+}

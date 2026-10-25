@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════════════════════════════════
+   基地·仓库页签美术升级（2026-09-24）——对标 page-hub.css / page-deploy.css /
+   page-slot-select.css 定稿语言：
+     ① 冷青统一调色（卡底分级/暗部层次）② var(--gold-main) 暖金装饰（封条顶线/
+        端点光点/金短线引导）③ 信息排版层级（卡题金标/发丝分隔/数值暖米金）
+     ④ 交互三档节奏：hover 抬升 / :active 快按慢弹（lift 过冲曲线）/
+        :focus-visible 金线焦点环（沿用 page-hub.css T2 全局环）+
+        页签切入时卡片错峰上浮 ⑤ 光标自查
+   作用域：全部规则限定仓库页签内容区——根选择器
+     .hub-page:has(> .hub-two > .hub-card > .stash-scroll)
+   （.stash-scroll 仅 hubStashHTML 生成，其他页签不匹配；宠物卡虽由
+   hubPetsHTML 被「升级」页复用 .pk-row.pet-row，但升级页无 .stash-scroll
+   祖先，不受影响。与 expedition-inventory.css 的远征背包 .bag-view 无关。）
+   约束：只新建本文件，不改任何现有样式；新增动画仅 transform/opacity
+   （reduced-motion 由 winter.css 全局兜底）；节奏变量自持（带回退）。
+   卡牌本体（hs-card / card-v3.css）与道具图标一律不动，只做包裹层。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=抬升+过冲回弹，press=按下快进 ── */
+
+/* ═════════ W1 内容卡容器：冷青分级 + 封条顶线 ═════════ */
+
+/* W1a 三张内容卡（卡牌仓库 / 消耗区+物资 / 宠物）：深冷青渐变 + 落影 */
+
+/* W1b 卡顶"封条"金线：仓库主卡常亮，其余极淡（主次标识，对标 page-deploy W3） */
+
+/* ═════════ W2 卡题仪式感：金短线引导 + 左缘端点光点 + 发丝分隔注记 ═════════ */
+/* h3 内计数小字（共 N 张 / N 只）：降级为发丝线分隔的注记（对标 page-deploy） */
+
+/* ═════════ W3 卡牌仓库（左卡）：容量档案行 / 金量槽 / 卡格封条 ═════════ */
+
+/* W3a 容量行：标签灰青小字拉开字距，数值暖米金 + 表格数字（档案语言） */
+
+/* W3b 容量槽：暗槽 + var(--gold-main) 金量（旧银灰填充 retint） */
+
+/* W3c 滚动区：收掉卡值徽标外溢造成的假横向滚动条（右侧留 6px 吸收悬出），
+   滚动条 retint 冷青 */
+
+/* W3d 卡格封条顶线：默认极淡，hover / 可使用 / 已收藏点亮（对标选档页 W2d） */
+
+/* W3e 卡格交互：统一 lift 过冲节奏 + hover 金边金晕（叠加 page-hub W5b 的抬升） */
+/* 快按慢弹：按下 .09s 缩放（保持悬停位移避免跳变），松手沿过冲曲线回位 */
+
+/* W3f 已收藏格：金环 + 内圈细金线（旧 #ead282 retint 到 var(--gold-main) 族） */
+
+/* W3g 堆叠角标 ×N：暖金数字 + 冷青暗底金描边（同出发页 dep-n 语言） */
+/* W3g-补 卡值徽标（卡面币值金币 .hsc-val 右下角悬出 -.48em）是 .stash-scroll
+   假横向滚动的源头：内缩到 right:2px（配合 W3c 的右侧吸收垫片） */
+
+/* W3h 「可使用」章：金渐变收口到 var(--gold-main) 族 + 字距 */
+
+/* W3i 空仓占位：冷青虚线界 + 图标呼吸（仅 opacity）+ 仪式感字距 */
+@keyframes stxBreath { from { opacity: .55; } to { opacity: 1; } }
+
+/* ═════════ W4 消耗区（右卡）：行卡冷青化 + hover 金线 ═════════ */
+/* 行体不可点（热区在行内按钮）：hover 只给金线与左缘金标，不做整行抬升误导 */
+
+/* ═════════ W5 物资格：冷青面 + 封条线 + hover 金边上浮 ═════════ */
+
+/* ═════════ W6 宠物卡：行卡冷青化，携带中=金线点亮 ═════════ */
+/* 携带中：左缘金标 + 金字渐变（同 mode-card.on 语言；旧 255,202,91 retint） */
+/* 未孵化：虚线界弱化（透明度沿用原 locked 规则） */
+/* 「携带中」状态字：冷青绿（同 ok-hint 族） */
+
+/* ═════════ W7 说明文字层级：注记灰青收暗，重点 b 微暖提亮 ═════════ */
+
+/* ═════════ W8 金色行动钮（复原/携带）：retint 到 var(--gold-main) 族 ═════════ */
+
+/* ═════════ T4 出入场：页签切入时三卡错峰上浮（只挂 page-in 首帧；
+   页内操作重绘不重播——renderHub 仅在 tabChanged 时加 page-in） ═════════ */
+@keyframes stxCardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═════════ 交互收尾备注（无需新规则，核查记录）：
+   · 焦点环：page-hub.css T2 已覆盖 #hubMain 全部 button（stash-cell /
+     material-cell / mini-btn 均为 button），金线焦点环直接生效。
+   · 光标：stash-cell / material-cell 由 expedition-inventory.css 给
+     cursor:pointer；其余按钮由 page-hub.css T6 兜底；空仓占位与行卡
+     本体不可点，保持默认光标以如实反映热区。
+   · 热区：封条线 / 端点光点均 pointer-events:none，不遮挡卡格点击。 ═════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   W8 第二波补件（2026-09-25 A 组·审查计划项4）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* W8a 物品弹层壳迁移到统一 .ov-shell（中心壳类）：内容包裹层挂
+   ov-shell（弹层标记 JS 里挂类，随 ovBody 重建自然销毁、不外泄到别的弹层）；
+   本文件负责用 :has 把外层旧素描卡壳（灰底灰边灰顶线）让位收口 */
+#overlay .card:has(> .stash-shell) {
+  background: none;
+  border: 0;
+  border-radius: var(--radius-panel, 2px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.6);
+  padding: 0;
+}
+#overlay .card:has(> .stash-shell)::before { display: none; }   /* 旧灰顶线退役 */
+
+/* W8b 消耗区空数据牌：虚线占位纹（旧 ov-empty 一行小字 → 占位框） */
+
+/* W8c 物资空数据牌（数量 0）：虚线占位 + 内容降调（JS 挂 .zero） */

@@ -1,0 +1,43 @@
+{
+  "entries": [
+    {
+      "file": "vite.config.js",
+      "beforeNormalizedBytes": 22122,
+      "afterNormalizedBytes": 22318,
+      "delta": 196,
+      "preimageMethod": "reconstructed by reversing only the exact in-session patch; normalized LF",
+      "beforeNormalizedSha256": "5c10484b2c22fd0d60454dcd83c89ab224ae89001111239fd2625f4c7e85a6e4",
+      "afterNormalizedSha256": "ff6254e50f8769d60fa493885fceae9f9340b7f5bb845be1fec7735c27635105"
+    },
+    {
+      "file": "scripts/css-asset-minification.mjs",
+      "beforeNormalizedBytes": 2226,
+      "afterNormalizedBytes": 3832,
+      "delta": 1606,
+      "preimageMethod": "reconstructed by reversing only the exact in-session patch; normalized LF",
+      "beforeNormalizedSha256": "aabdb61fd4bb63416e4e0584cac75a918a92e5f0fca67182ec676773196f3217",
+      "afterNormalizedSha256": "6f301578400888481532aaecdcca1894e5e40bf423bff0853892b6bcef6f0be7"
+    },
+    {
+      "file": "scripts/css-component-scopes.mjs",
+      "beforeNormalizedBytes": 0,
+      "afterNormalizedBytes": 4162,
+      "delta": 4162,
+      "preimageMethod": "new file",
+      "beforeNormalizedSha256": null,
+      "afterNormalizedSha256": "89a9f2959f25ca1e6d984adbe45033695140c782bf8fbe37cc16667e752e5f32"
+    },
+    {
+      "file": "scripts/asset-manifest-source.mjs",
+      "beforeNormalizedBytes": 0,
+      "afterNormalizedBytes": 1073,
+      "delta": 1073,
+      "preimageMethod": "new file",
+      "beforeNormalizedSha256": null,
+      "afterNormalizedSha256": "aa4144a28f56d42cb3715da133d46d5bf1b7d2150387a49843f8e181cf67ee00"
+    }
+  ],
+  "additionalBakeDelta": 95,
+  "bakeDeltaSource": "asset-tables verification: serializer 1073 + bake95 =1168 additional source bytes",
+  "engineeringNetAdded": 7132
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+    "sha256": "b2c1faacb71767ba34663de155ae617cb84ebc59d25f79103b5630a1f31f6082",
+    "backup": ".tmp\\station-local-unify-1025\\before\\mid.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen分层重绘）",
+      "bytes": 33106,
+      "sha256": "b2c1faacb71767ba34663de155ae617cb84ebc59d25f79103b5630a1f31f6082",
+      "source": "docs/evidence/2026-10-25-winter-station-preview/declutter-import.json"
+    }
+  },
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+    "sha256": "c0793fa2d86e5d87ea669238a10697581509ae39d68a546b626109d8ad138144",
+    "backup": ".tmp\\station-local-unify-1025\\before\\foreground.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen分层重绘）",
+      "bytes": 73686,
+      "sha256": "c0793fa2d86e5d87ea669238a10697581509ae39d68a546b626109d8ad138144",
+      "source": "docs/evidence/2026-10-25-winter-station-preview/declutter-import.json"
+    }
+  }
+]

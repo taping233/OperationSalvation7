@@ -13,7 +13,7 @@
 |---|---|---|---|---|
 | 43 | 研究所牌盒满容量玩法需确定：现行说明为容量 30（混沌之眼为 35）且满时一换一，领取/商店等实现尚未提供完整换牌流程；确认换牌交互与取消时奖励/付款保留方式后实施 | 10-14 | WF-cloud-deep-review-1014；game/src/run/game.nest.js 牌盒说明与写入路径 | 本轮仅修复已明确的符文容量扣牌/扣币前预检；未以直接丢弃奖励代替换牌。普通 bug 修复与联合验收继续，不受本条阻塞 |
 | 44 | 地图设施不相邻与战斗聚集约束是否升级为硬约束：现生成器在无候选时存在软回退，修正规则会改变同种子的布局；需确定新地图生成版本及旧 v3/v9 存档重建兼容策略 | 10-14 | WF-cloud-deep-review-1014；地图 1000 种子审查与 game/src/core 地图生成链 | 本轮已修复地图图连接缺陷；未擅改随机流或旧版本地图重建规则。需先确定兼容策略再实施布局语义变更 |
-| 40 | 「天启剑」与「诛魔剑」的后半效果：集齐两剑后发生什么，以及「以天启诛魔剑覆盖所有武器」如何结算，需定义牌区、数量与替换时点；原规格明确为设计留白 | 10-11 | docs/cards/M-BATCH-HOSTED-DESIGN-2026-09-27.md §2.13/2.14/五；docs/evidence/2026-10-11-card-description-unification/README.md | WF-card-copy-1011 已完成文字整理；展示明确“合成效果尚未定稿”，保留原结算。本条仅为玩法定义，不阻塞文案收官 |
+| 40 | 「天启剑」与「诛魔剑」合并结算的牌区与时点尚待定义；2026-10-24老板已确定集齐两张后合并为「天启诛魔剑」，原有抽牌/全体攻击保留，替代原“覆盖所有武器”的留白方向 | 10-24 | docs/cards/M-BATCH-HOSTED-DESIGN-2026-09-27.md §2.13/2.14/五；docs/evidence/2026-10-24-sword-merge-copy/README.md | 本轮按老板要求仅改两卡展示描述的后半段，合并结算未实现；已确定的合并结果不再重复请示 |
 | 38 | 方舟衍生休眠音效保留还是删除 | 10-04 | docs/evidence/2026-10-04-sfx-opensource/README.md；docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md | 主链路已换开源；alternatives/arknights 与 arknights-runtime 目录本轮仍存在。原188件是历史数量，10-14获批清理后不可沿用；删除前重新列剩余精确清单，不与已批历史媒体混同 |
 | 9 | 照相馆 `?libPerfDiag` DEV 诊断钩子（game.cardslib.page.js）去留：保留=可随时复跑滚动归因五连测，删=一句话即清 | 09-29 | docs/PHOTOLIB-PERF-TASK-2026-09-29.md 遗留3 | 生产构建零开销 |
 | 10 | `game/src/e2.snapshot.qa.js` 删留单议（E2 验收宿主遗产，E 批已归档；knip A 类批其余项已执行销账：renderer.icons 位图管线 289→57 行、getHomeForSlot、openAltarRitual re-export、三个无人 default+matchBlank 死导出词、run-architecture 断言清单腐坏项同步修正；dev-shims 改判误报=dev.html importmap 依赖） | 09-29 深夜 | knip 首跑甄别（09-29 深夜会话） | 其余已执行，本条仅剩 e2.snapshot |

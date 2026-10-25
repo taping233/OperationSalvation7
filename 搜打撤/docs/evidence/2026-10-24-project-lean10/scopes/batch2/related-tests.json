@@ -1,0 +1,137 @@
+{
+  "tests": [
+    {
+      "file": "tests/backpack-rail-alignment.test.js",
+      "css": [
+        "archive-back.css",
+        "feedback-1018.css"
+      ]
+    },
+    {
+      "file": "tests/battle-card-results.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/battle-decision-shell-review.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/battle-entry-readiness.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/battle-infusion-action-layout.test.js",
+      "css": [
+        "battle-infusion.css"
+      ]
+    },
+    {
+      "file": "tests/battle-potion-bar-layout.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/battle-status-presentation.test.js",
+      "css": [
+        "battle-status-chips.css"
+      ]
+    },
+    {
+      "file": "tests/battle-turn-feedback.test.js",
+      "css": [
+        "feedback-theme.css"
+      ]
+    },
+    {
+      "file": "tests/beginner-guide-readability.test.js",
+      "css": [
+        "beginner-guide.css"
+      ]
+    },
+    {
+      "file": "tests/canvas-resource-review.test.js",
+      "css": [
+        "expedition-map.css"
+      ]
+    },
+    {
+      "file": "tests/character-idle.test.js",
+      "css": [
+        "character-idle.css"
+      ]
+    },
+    {
+      "file": "tests/compact-reward-layout.test.js",
+      "css": [
+        "base.css"
+      ]
+    },
+    {
+      "file": "tests/event-signal-puzzle.test.js",
+      "css": [
+        "event-signal-puzzle.css"
+      ]
+    },
+    {
+      "file": "tests/hub-flow-regression.test.js",
+      "css": [
+        "hub.css"
+      ]
+    },
+    {
+      "file": "tests/m05-home-scene.test.js",
+      "css": [
+        "home-scene.css"
+      ]
+    },
+    {
+      "file": "tests/message-batch-0920-late.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/premium-ui-pages.test.js",
+      "css": [
+        "expedition-library.css"
+      ]
+    },
+    {
+      "file": "tests/public-controls-equipment.test.js",
+      "css": [
+        "battle-equipment.css"
+      ]
+    },
+    {
+      "file": "tests/r3-a-preview.test.js",
+      "css": [
+        "battle.css"
+      ]
+    },
+    {
+      "file": "tests/runtime-asset-publication.test.js",
+      "css": [
+        "base.css"
+      ]
+    },
+    {
+      "file": "tests/settings-audio.test.js",
+      "css": [
+        "settings-audio.css"
+      ]
+    },
+    {
+      "file": "tests/title-resource-review.test.js",
+      "css": [
+        "base.css"
+      ]
+    }
+  ]
+}

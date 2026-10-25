@@ -1,0 +1,24 @@
+{
+  "platform": "Codex IAB",
+  "origin": "http://127.0.0.1:5200",
+  "viewport": [
+    1280,
+    720
+  ],
+  "input": "Playwright DOM-backed locators and snapshots, current window only; no evaluated state injection",
+  "verified": [
+    "achievement overview fully loaded, 26 medals and return control",
+    "photo library fully loaded, 282 cards and details",
+    "built-in temporary developer encounter, no save slot",
+    "initial attack: energy 2→1, hand 5→4, consumed 0→1, live enemies 3→2",
+    "real end turn: round 1→2, health 30→20, energy 1→2, player input restored"
+  ],
+  "limits": [
+    "not a full campaign or every page",
+    "initial native AX actions/snapshots and premature screenshots excluded; DOM locators and final loaded screenshots used for successful inputs",
+    "two HTML5 audio pool warnings observed during initial startup; no page errors observed"
+  ],
+  "errors": [],
+  "tabsClosed": true,
+  "servicesCreated": false
+}

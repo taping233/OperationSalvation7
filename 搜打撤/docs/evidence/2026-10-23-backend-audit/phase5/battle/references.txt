@@ -1,0 +1,65 @@
+game/src\agent\agent.replay-state.js:42:function replayInteraction(value, currentToken) {
+game/src\agent\agent.replay-state.js:55:    pendingTarget: replayInteraction(diagnostics.battle.pendingTarget, currentToken),
+game/src\agent\agent.replay-state.js:56:    infusing: replayInteraction(diagnostics.battle.infusing, currentToken) };
+game/src\agent\agent.replay-state.js:59:    interaction: replayInteraction(interaction.interaction, currentToken),
+game/src\agent\agent.replay-state.js:60:    infusing: replayInteraction(interaction.infusing, currentToken) } };
+game/src\cards\builtin-card-previous-rules.js:1:import { hostedRuleSnapshot, targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+game/src\cards\builtin-card-previous-rules.js:3:export const BUILTIN_PREVIOUS_RULES = {
+game/src\cards\builtin-card-execution.js:2:import { BUILTIN_PREVIOUS_RULES } from './builtin-card-previous-rules.js';
+game/src\cards\builtin-card-execution.js:3:import { BUILTIN_EQUIPMENT_REVISIONS, BUILTIN_EQUIPMENT_PREVIOUS_RULES } from './builtin-equipment-execution.js';
+game/src\cards\builtin-card-execution.js:179:freezeBuiltinData(BUILTIN_PREVIOUS_RULES);
+game/src\cards\builtin-card-execution.js:180:freezeBuiltinData(BUILTIN_EQUIPMENT_PREVIOUS_RULES);
+game/src\cards\builtin-card-execution.js:186:  ...BUILTIN_PREVIOUS_RULES, ...BUILTIN_EQUIPMENT_PREVIOUS_RULES, ...BUILTIN_CHOICE_PREVIOUS_RULES,
+game/src\cards\builtin-card-execution.js:198:export function migrateBuiltinExecutionCard(card) {
+game/src\cards\builtin-equipment-execution.js:1:export { BUILTIN_EQUIPMENT_PREVIOUS_RULES } from './builtin-equipment-previous-rules.js';
+game/src\cards\builtin-equipment-previous-rules.js:1:import { hostedRuleSnapshot, targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+game/src\cards\builtin-equipment-previous-rules.js:3:export const BUILTIN_EQUIPMENT_PREVIOUS_RULES = {
+game/src\battle\core\battle.core.js:10:import * as replayPiles from '../runtime/battle.runtime.piles.js';
+game/src\battle\core\battle.core.js:11:import * as replayEffects from '../runtime/battle.runtime.effects.js';
+game/src\battle\core\battle.core.js:12:import * as replayInteraction from '../runtime/battle.runtime.interaction.js';
+game/src\battle\core\battle.core.js:269:    return copy({ battle: snapshot, rules: { piles: data(replayPiles), effects: data(replayEffects),
+game/src\battle\core\battle.core.js:270:      interaction: data(replayInteraction), triggers: getTriggerSnapshot(), history: pstat?.requestedCards?.history, generatedCardSequence: tmpSeq } });
+game/src\cards\cards.sync.builtin.js:1:import { migrateBuiltinExecutionCard } from './builtin-card-execution.js';
+game/src\cards\cards.sync.builtin.js:10:    const migrated = migrateBuiltinExecutionCard(card);
+game/src\cards\cards.data.js:1:import { targetedHostedRuleSnapshot } from './hosted-rule-snapshot.js';
+game/src\battle\effects\battle.hosted.js:7:import { migrateBuiltinExecutionCard } from '../../cards/builtin-card-execution.js';
+game/src\battle\effects\battle.hosted.js:28:  const migrated = migrateBuiltinExecutionCard(card);
+scripts\sync-cards-from-live.mjs:47:  'hosted-rule-snapshot.js', // 共享历史/定版规则构造
+tests\builtin-card-execution.test.js:3:import { BUILTIN_EXECUTION_REVISIONS, migrateBuiltinExecutionCard } from '../game/src/cards/builtin-card-execution.js';
+tests\builtin-card-execution.test.js:4:import { BUILTIN_PREVIOUS_RULES } from '../game/src/cards/builtin-card-previous-rules.js';
+tests\builtin-card-execution.test.js:63:    const old = { ...native, name: '玩家改名', desc: '展示文字不再说明任何规则', rules: structuredClone(BUILTIN_PREVIOUS_RULES[native.id]) };
+tests\builtin-card-execution.test.js:64:    const next = migrateBuiltinExecutionCard(old);
+tests\builtin-card-execution.test.js:67:    expect(migrateBuiltinExecutionCard(next)).toBe(next);
+tests\builtin-card-execution.test.js:69:    expect(migrateBuiltinExecutionCard(explicit)).toBe(explicit);
+tests\builtin-card-execution.test.js:74:    let cards = [{ ...native, rules: structuredClone(BUILTIN_PREVIOUS_RULES[native.id]) }];
+tests\builtin-card-execution.test.js:79:    expect(original[0].rules).toEqual(BUILTIN_PREVIOUS_RULES[native.id]);
+tests\builtin-card-execution-battle.test.js:4:import { BUILTIN_PREVIOUS_RULES } from '../game/src/cards/builtin-card-previous-rules.js';
+tests\builtin-card-execution-battle.test.js:60:    const saved = { ...card, desc: '玩家编辑的卡面', rules: structuredClone(BUILTIN_PREVIOUS_RULES[card.id]) };
+tests\builtin-card-execution-battle.test.js:62:    expect(saved.rules).toEqual(BUILTIN_PREVIOUS_RULES[card.id]);
+tests\builtin-card-execution-battle.test.js:81:      const previous = { ...native, rules: structuredClone(BUILTIN_PREVIOUS_RULES[id]) };
+tests\builtin-migration-lookup.test.js:11:  return { ...actual, BUILTIN_PREVIOUS_RULES: counted(actual.BUILTIN_PREVIOUS_RULES) };
+tests\builtin-migration-lookup.test.js:15:  return { ...actual, BUILTIN_EQUIPMENT_PREVIOUS_RULES: counted(actual.BUILTIN_EQUIPMENT_PREVIOUS_RULES) };
+tests\builtin-migration-lookup.test.js:22:import { BUILTIN_EXECUTION_REVISIONS, migrateBuiltinExecutionCard } from '../game/src/cards/builtin-card-execution.js';
+tests\builtin-migration-lookup.test.js:23:import { BUILTIN_PREVIOUS_RULES } from '../game/src/cards/builtin-card-previous-rules.js';
+tests\builtin-migration-lookup.test.js:24:import { BUILTIN_EQUIPMENT_PREVIOUS_RULES } from '../game/src/cards/builtin-equipment-previous-rules.js';
+tests\builtin-migration-lookup.test.js:30:const tables = [BUILTIN_PREVIOUS_RULES, BUILTIN_EQUIPMENT_PREVIOUS_RULES, BUILTIN_CHOICE_PREVIOUS_RULES];
+tests\builtin-migration-lookup.test.js:31:const previous = { ...BUILTIN_PREVIOUS_RULES, ...BUILTIN_EQUIPMENT_PREVIOUS_RULES, ...BUILTIN_CHOICE_PREVIOUS_RULES };
+tests\builtin-migration-lookup.test.js:106:        const result = migrateBuiltinExecutionCard(card);
+tests\builtin-migration-lookup.test.js:111:        expect(migrateBuiltinExecutionCard(result), id).toBe(result);
+tests\builtin-migration-lookup.test.js:120:    expect(migrateBuiltinExecutionCard(oldTreasure).rules.triggers.onPlay[0].n).toBe(3);
+tests\builtin-migration-lookup.test.js:125:    const migrated = migrateBuiltinExecutionCard(card);
+tests\builtin-migration-lookup.test.js:128:    expect(migrateBuiltinExecutionCard(card)).toBe(card);
+tests\builtin-migration-lookup.test.js:130:    expect(migrateBuiltinExecutionCard(card)).toBe(card);
+tests\builtin-migration-lookup.test.js:132:    expect(migrateBuiltinExecutionCard(card).rules).toEqual(BUILTIN_EXECUTION_REVISIONS['tt3-magic-lamp'].rules);
+tests\builtin-migration-lookup.test.js:134:    expect(migrateBuiltinExecutionCard(card)).toBe(card);
+tests\builtin-migration-lookup.test.js:139:    const first = migrateBuiltinExecutionCard(card), second = migrateBuiltinExecutionCard(card);
+tests\builtin-migration-lookup.test.js:143:    expect(migrateBuiltinExecutionCard(card).rules.triggers.onPlay[0].options[0].ops[0].pool.kind).toBe('招式');
+tests\builtin-migration-lookup.test.js:150:    expect(migrateBuiltinExecutionCard(card)).toBe(card);
+tests\builtin-migration-lookup.test.js:153:      expect(migrateBuiltinExecutionCard(custom)).toBe(custom);
+tests\builtin-migration-lookup.test.js:159:    expect(() => migrateBuiltinExecutionCard(null)).toThrow(TypeError);
+tests\builtin-migration-lookup.test.js:160:    expect(() => migrateBuiltinExecutionCard(undefined)).toThrow(TypeError);
+tests\builtin-migration-lookup.test.js:164:      expect(migrateBuiltinExecutionCard(card)).toBe(card);
+tests\builtin-migration-lookup.test.js:182:    outer.rules = { toJSON() { nested = migrateBuiltinExecutionCard(inner); return previous[outer.id]; } };
+tests\builtin-migration-lookup.test.js:183:    const result = migrateBuiltinExecutionCard(outer);
+tests\ghostblade-stealth-break.test.js:26:import { BUILTIN_PREVIOUS_RULES } from '../game/src/cards/builtin-card-previous-rules.js';
+tests\ghostblade-stealth-break.test.js:101:  const game = start(true, { id:'fake-ghost', rules: structuredClone(BUILTIN_PREVIOUS_RULES['tt7-ghostblade']) }); await play();

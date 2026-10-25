@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "radial-gradient(62% 44% at 56% 54%, rgba(8, 17, 26, 0.05) 0%, rgba(8, 17, 26, 0.12) 46%, rgba(5, 11, 18, 0.56) 76%, rgba(3, 7, 13, 0.88) 100%), linear-gradient(rgba(6, 13, 22, 0.25) 0%, rgba(8, 17, 26, 0.14) 35%, rgba(8, 17, 26, 0.14) 64%, rgba(5, 11, 18, 0.5) 82%, rgba(3, 7, 13, 0.9) 100%)",
+  "maskImage": "linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 54%, rgb(0, 0, 0) 62%)",
+  "pointerEvents": "none",
+  "present": true,
+  "stageRect": {
+    "height": 1080,
+    "width": 1920
+  }
+}

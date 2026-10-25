@@ -1,0 +1,62 @@
+[
+  {
+    "path": "scripts/build-artifact-manifest.mjs",
+    "beforeBytes": 6655,
+    "afterBytes": 6469,
+    "byteDelta": -186,
+    "beforeLines": 95,
+    "afterLines": 89,
+    "lineDelta": -6,
+    "sha256": "f09aa1a08aef4da6508c1d28db92a1ca8ae5c81540de8652d371ba1104c1da43"
+  },
+  {
+    "path": "scripts/runtime-asset-aliases.mjs",
+    "beforeBytes": 2541,
+    "afterBytes": 2223,
+    "byteDelta": -318,
+    "beforeLines": 47,
+    "afterLines": 42,
+    "lineDelta": -5,
+    "sha256": "3273db17c4782d05ab9371388725afc1ea608b8f51728aedceb73680c0284a41"
+  },
+  {
+    "path": "scripts/perf-budget.cjs",
+    "beforeBytes": 9475,
+    "afterBytes": 9277,
+    "byteDelta": -198,
+    "beforeLines": 175,
+    "afterLines": 176,
+    "lineDelta": 1,
+    "sha256": "fa5a342c1f002f2383444ed7ead94d7465842b5b8c98fe66494bd1e896bf9455"
+  },
+  {
+    "path": "scripts/vectorize_node_icons.py",
+    "beforeBytes": 7503,
+    "afterBytes": 6641,
+    "byteDelta": -862,
+    "beforeLines": 182,
+    "afterLines": 165,
+    "lineDelta": -17,
+    "sha256": "b22e483d53303ca7a565eb5bd182893395f45c0d6c442dec82f753619d1ef77a"
+  },
+  {
+    "path": "scripts/vectorize_winter_ui.py",
+    "beforeBytes": 4386,
+    "afterBytes": 3546,
+    "byteDelta": -840,
+    "beforeLines": 112,
+    "afterLines": 96,
+    "lineDelta": -16,
+    "sha256": "61c765fdf96fa3f6f0ddf9eedc901e254bc39b8614e6c430cc91b351b61eea01"
+  },
+  {
+    "path": "scripts/vectorize_common.py",
+    "beforeBytes": 0,
+    "afterBytes": 1334,
+    "byteDelta": 1334,
+    "beforeLines": 0,
+    "afterLines": 35,
+    "lineDelta": 35,
+    "sha256": "2938a20b7a4b53dfc7beca0e8621213d22fc9eb196791bbc86663fe07b21571d"
+  }
+]

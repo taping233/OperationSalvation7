@@ -1,0 +1,50 @@
+[
+  {
+    "length": 54680,
+    "mtime": "2026-10-23T21:19:41.2685924+08:00",
+    "sha256": "B4CF3D4A99AFDBF4C188B92F7EB40551E5BF22CCFD68BF4936B07CBF69A02249",
+    "path": "game/src/run/game.run.altar.js"
+  },
+  {
+    "length": 6460,
+    "mtime": "2026-10-23T19:00:19.1274750+08:00",
+    "sha256": "82D3C2C5FEBD088FD889234696C024275ABDF8CE19BC9738668C79B226A19A2D",
+    "path": "game/src/run/game.run.resources.js"
+  },
+  {
+    "length": 6052,
+    "mtime": "2026-10-23T18:33:01.5623867+08:00",
+    "sha256": "45D95DF0DE656BC127079A398F5B29ADFA5768BF496E5C6814F105ED6CB9F7AC",
+    "path": "game/src/run/shop-commands.js"
+  },
+  {
+    "length": 48050,
+    "mtime": "2026-10-23T19:00:40.8042641+08:00",
+    "sha256": "9CA504DAF7B10A69254C37AA066ED10DDAE802546AE1F9FA06D198DC24ED8B52",
+    "path": "game/src/run/game.run.shop.js"
+  },
+  {
+    "length": 6282,
+    "mtime": "2026-10-21T18:06:04.6842537+08:00",
+    "sha256": "EF1D82D140E07AD6F6C6BFE23FCDDDF60253479AA424DB0C30697082FF6A3365",
+    "path": "game/src/run/node-reward-state.js"
+  },
+  {
+    "length": 39443,
+    "mtime": "2026-10-23T18:56:05.9307408+08:00",
+    "sha256": "B8D5B9876DC673CA5BDB0C500A73E8FBF4F3E6E373C1E188F9AC53084FF7F55E",
+    "path": "game/src/run/game.run.scenes.js"
+  },
+  {
+    "length": 9740,
+    "mtime": "2026-10-23T23:00:28.0636333+08:00",
+    "sha256": "4BC965196A608B0C6909F5B84CD9CF3BEB49B2237E216C11F0B6ACC75FE919B6",
+    "path": "docs/evidence/2026-10-23-project-bug-audit/expedition/altar-entry-fire.audit.test.js"
+  },
+  {
+    "length": 3258,
+    "mtime": "2026-10-23T22:56:36.8178675+08:00",
+    "sha256": "186E0E4E91DCB8B4AB817E42888B2BE8DCFED6EE76FCC4F471AAE3938325E6A5",
+    "path": "docs/evidence/2026-10-23-project-bug-audit/expedition/shop-pools.audit.test.js"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "pipeline": [
+    "nai-diffusion-5-full",
+    "built-in imagegen repaint",
+    "WebP conversion only"
+  ],
+  "draft": ".tmp/nai/reward-redesign-1025/nai5-draft.png",
+  "repaintSource": "C:\\Users\\太平\\.codex\\generated_images\\01a17113-c3e5-7582-91bf-a4cbb71c3078\\exec-192ffeb7-b728-4114-ac5c-11c0248614e6.png",
+  "repaintSha256": "f37570457fb5f71657cd7c0d6282b575ba2267a34ba4df7d3c403676cadbefe4",
+  "dimensions": [
+    1659,
+    948
+  ],
+  "asset": {
+    "path": "scenes/reward-salvage-v1.webp",
+    "ext": "webp",
+    "license": "项目原创（NAI5起稿＋内置imagegen重绘）",
+    "bytes": 108782,
+    "sha256": "00fe6a8244e98c610ff61c03316ea2e34887e97fbc89bc3d6a4f7fd3fe460a5b",
+    "source": "docs/evidence/2026-10-25-reward-glass/backdrop-source.json"
+  },
+  "rejected": "Earlier direct built-in ruined warehouse draft was rejected and was not imported."
+}

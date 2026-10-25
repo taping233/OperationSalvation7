@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-sword",
+      "asset": "cards/wu-myriadswords.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e6f-fb4d-7340-ad3d-6655366550f7/exec-8be942d8-d932-4be1-8388-3f5a2b5f626f.png",
+      "revision": "wu-myriadswords-current-identity-20261024",
+      "prompt": "Use case: identity-preserve, localized character design correction. Image 1 is the EDIT TARGET, the overhead flying-sword card. Image 2 is Wu's CURRENT approved character design, controlling identity only. Preserve image 1's exact overhead camera, diagonal foreshortened body, forward two-finger sword-command gesture, other hand gripping the black sword, circular array of airborne swords, blue arc, abstract gray-blue background, framing, and rough hand-painted anime block-brush style. Correct her identity to image 2: sweep the silver-white front hair apart and toward the sides so her FOREHEAD is clearly exposed with eyebrows and BOTH cyan-blue eyes readable; eliminate the old thick center forehead-covering bangs. Retain the high silver-white ponytail and blue satin bow. Black rose sits at the character's left temple, VIEWER RIGHT. Keep exactly two separate dark round sunglasses lenses in thin ordinary black frames connected by one bridge, pushed up onto her head as in reference, with gray-white reflections, not goggles. Give the same confident mischievous small-fang smile and face identity as the reference, interpreted in the target's painted style. Fix clothing to current design: charcoal-black off-shoulder long-sleeved short ruffled dress, layered ruffles at neckline and cuffs, black tied waist, ALL skirt hems above the knees, bare thighs and knees, black ankle boots. REMOVE ALL BLUE STAR MOTIFS AND BLUE STAR-PRINT LINING from skirt; replace that trim with natural charcoal-black ruffled fabric matching the rest. No long back hem or train. Blue accents belong to hair ribbon and existing energy arc. Preserve her action and the held sword; do not copy the reference standing pose or add another back sword. Retain target aspect ratio and crop, no text, no frame, no watermark.",
+      "references": [
+        "game/assets/cards/wu-myriadswords.webp",
+        "game/assets/portraits/full/wu.webp",
+        "docs/character-bible/wu.md"
+      ]
+    }
+  ]
+}

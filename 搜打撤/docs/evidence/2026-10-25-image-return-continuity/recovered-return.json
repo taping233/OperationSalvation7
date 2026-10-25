@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T11:48:05.539Z",
+  "inputKind": "real-input",
+  "detail": "隔离页真实点击局部重试、选择装备/第4页、滚动阅读区、详情往返；使用正式恢复和返回模块，非玩家真实存档路径。",
+  "screenshot": {
+    "path": "recovered-return.png",
+    "bytes": 43935,
+    "sha256": "2ea2e70f3e15bab79fdb6f51f6d7c22495a5444b99e73a3340ed19e11bd074f7"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/dev/image-return-continuity-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/portraits/avatars/heixiang.webp",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/portraits/avatars/baita.webp",
+      "width": 1024
+    }
+  ],
+  "console": []
+}

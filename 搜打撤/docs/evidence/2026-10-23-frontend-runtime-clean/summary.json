@@ -1,0 +1,43 @@
+{
+  "files": 57,
+  "productionFiles": 49,
+  "cssFiles": 29,
+  "productionRemovedBytesLf": 32739,
+  "cssRemovedBytesLf": 15816,
+  "testRemovedBytesLf": 7964,
+  "cumulativeCssRemovedBytesLf": 152686,
+  "cumulativeCssRemovedPercent": 7.77614861495979,
+  "tests": {
+    "files": 18,
+    "passed": 150,
+    "retiredImplementationTests": 9,
+    "replacementRegressionTests": 1,
+    "retiredOldShopTests": 4,
+    "mainBatchIncludesRetiredOldShopTests": true,
+    "survivingMainBatch": {
+      "files": 17,
+      "passed": 146
+    },
+    "finalBatch": {
+      "passed": 124,
+      "failed": 3,
+      "baselineFailureVerified": true
+    }
+  },
+  "browser": "not run by user instruction",
+  "commit": false,
+  "approvedDeletedFiles": [
+    "game/src/ui/settings-transition.js",
+    "game/src/hub/hub.shop-v3.js",
+    "game/css/base-shop-v3.css",
+    "tests/hub-shop-v3.test.js"
+  ],
+  "verification": {
+    "stylelint": "28 surviving edited CSS passed",
+    "eslint": "all edited JS/tests passed",
+    "sourceHashes": "all matched",
+    "frozenCandidates": "7 unchanged",
+    "browser": "not run",
+    "build": "not run"
+  }
+}

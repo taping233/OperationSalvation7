@@ -1,0 +1,24 @@
+{
+  "status": "implemented-unverified-uncommitted",
+  "scene": "platform-minimal-1016",
+  "preserved": "Current actors, layout, battle logic and all unrelated changes",
+  "consumerPathReview": "Only three old explicit scene paths restored, mid path removed; exclusion list unchanged",
+  "changes": [
+    {
+      "path": "game/src/battle/view/battle.scenery.js",
+      "previousConsumerLfSha256": "29dec8cdb1a41665d5ccf5dbec4c86f1666aaeb12b796ce30c6c7664db051607",
+      "consumerLfSha256": "6094ec54ba82accd0a0cd86383de9d36ef6147f2f8201daac3e1a66b2f572bd7"
+    },
+    {
+      "path": "game/src/run/game.run.data.js",
+      "previousConsumerLfSha256": "546f69520dd17e04b8b8fc8cb0a37433cb55f46a03827477462cea178399dab2",
+      "consumerLfSha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "previousConsumerLfSha256": "afbe3dea432fce58ed6a4dd3be65a0cb35c18c302de6be3b56aa3c68edb598a7",
+      "consumerLfSha256": "9b6b5b9d20a9a6fb4c80d94db3fe880fc9ed07e5c10188ee33a95432a2585cad"
+    }
+  ],
+  "checks": "Not run at user request"
+}

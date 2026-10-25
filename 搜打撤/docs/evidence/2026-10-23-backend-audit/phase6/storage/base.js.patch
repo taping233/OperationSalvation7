@@ -1,0 +1,70 @@
+diff --git a/搜打撤/game/src/hub/base.js b/搜打撤/game/src/hub/base.js
+--- a/搜打撤/game/src/hub/base.js
++++ b/搜打撤/game/src/hub/base.js
+@@ -492,55 +492,46 @@ import { assertSlotWriteLease, withSlotWriteLock } from './slot-write-lock.js';
+     (stashCap() < (rules().stashRuneSlotFrom || 50) ||
+       (data.runes || []).length >= (rules().stashRuneSlotCost || 2));
+ 
++  function commitUpgrade(allowed, prepare) {
++    if (!allowed) return false;
++    const ok = mutate(draft => { prepare(draft); return true; });
++    if (ok) sfxLevelup();
++    return ok;
++  }
++
+   function upgradeBag() {
+-    if (!canUpgradeBag()) return false;
+-    const ok = mutate(draft => {
++    return commitUpgrade(canUpgradeBag(), draft => {
+       draft.wood -= rules().bagUpgradeWood;
+       draft.bagUp++;
+-      return true;
+     });
+-    if (ok) sfxLevelup();
+-    return ok;
+   }
+ 
+   function upgradePet(id) {
+-    if (!canUpgradePet(id)) return false;
+-    const ok = mutate(draft => {
++    return commitUpgrade(canUpgradePet(id), draft => {
+       draft.rations -= petUpCost(id);
+       draft.pets[id].lv = petLevel(id) + 1;
+-      return true;
+     });
+-    if (ok) sfxLevelup();
+-    return ok;
+   }
+ 
+   function upgradeStash() {
+-    if (!canUpgradeStash()) return false;
+-    const ok = mutate(draft => {
++    return commitUpgrade(canUpgradeStash(), draft => {
+       draft.wood -= rules().stashUpgradeWood;
+       if (stashCap() >= (rules().stashRuneSlotFrom || 50)) {
+         draft.runes.splice(0, rules().stashRuneSlotCost || 2);
+       }
+       draft.stashUp++;
+-      return true;
+     });
+-    if (ok) sfxLevelup();
+-    return ok;
+   }
+ 
+   // 龙巢：符文背包升级（2 符文 + 5 币升级 1 格，10 → 25）
+   function nestBagCap() { return 10 + (data.nestBagUp || 0); }
+   function canUpgradeNestBag() { return nestBagCap() < 25 && (data.runes || []).length >= 2 && data.coins >= 5; }
+   function upgradeNestBag() {
+-    if (!canUpgradeNestBag()) return false;
+-    const ok = mutate(draft => {
++    return commitUpgrade(canUpgradeNestBag(), draft => {
+       draft.runes.splice(0, 2);
+       draft.coins -= 5;
+       draft.nestBagUp = (draft.nestBagUp || 0) + 1;
+-      return true;
+     });
+-    if (ok) sfxLevelup();
+-    return ok;
+   }
+ 
+   // ---------- 运回结算 ----------

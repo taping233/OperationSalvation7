@@ -1,0 +1,297 @@
+@import url('./base-camp-roster.css');
+/* 冬日远征档案室。所有规则限于基地及其详情，卡面保留原工艺与稀有度。 */
+#overlay:has(.base-camp, .camp-depart-detail) { background: #161f25; backdrop-filter: none; padding: 0; }
+#overlay .card.page:has(.base-camp, .camp-depart-detail) {
+  width: 100%; height: 100%; max-width: none; max-height: none; padding: 0;
+  border: 0; border-radius: 0; background: #eeece5; box-shadow: none; overflow: hidden;
+}
+#overlay .card.page:has(.base-camp, .camp-depart-detail) #ovBody { height: 100%; padding: 0; overflow: hidden; }
+#overlay:has(.card.page.hub-refresh #hubMain.base-camp) { animation: none !important; }
+#overlay .card.page.hub-refresh:has(#hubMain.base-camp) { animation: none !important; }
+#overlay:has(.base-camp, .camp-depart-detail) :is(#ovCloseX, .ov-title) { display: none; }
+#overlay #hubMain.pg.hub.base-camp, #overlay #depMain.pg.hub.camp-detail {
+  --camp-ink: #25363e; --camp-sub: #657176; --camp-paper: #eeece5;
+  --camp-sheet: #faf8f1; --camp-line: #cdd0c8; --camp-blue: #307d8d;
+  --camp-brass: #bb9d58; --camp-ease: cubic-bezier(.16, 1, .3, 1);
+  display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0;
+  padding: 0; margin: 0; color: var(--camp-ink); background: var(--camp-paper);
+  border: 0; font: 18px/1.6 var(--font-ui); text-align: left;
+}
+#overlay #hubMain.pg.hub.base-camp::before, #overlay #hubMain.pg.hub.base-camp::after { content: none; }
+#overlay #hubMain.pg.hub.base-camp .hub-head {
+  display: flex; align-items: center; gap: 24px; flex: none; border: 0; border-bottom: 1px solid #445159;
+  background: #1c2a32; color: #f5f1e6;
+}
+#overlay #hubMain.pg.hub.base-camp .hub-head::before, #overlay #hubMain.pg.hub.base-camp .hub-head::after { content: none; }
+#overlay #hubMain.pg.hub.base-camp .camp-brand { display: flex; flex-direction: column; gap: 3px; }
+#overlay #hubMain.pg.hub.base-camp .camp-brand small { color: #b5c3c5; font: 11px/1.4 var(--font-mono); letter-spacing: .2em; }
+#overlay #hubMain.pg.hub.base-camp .camp-brand h2 { margin: 0; padding: 0; font: 700 29px/1.3 var(--font-ui); letter-spacing: .16em; color: #f7f2e6; text-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .hub-slot-label { padding-left: 24px; border-left: 1px solid #4f5e65; color: #b5c2c5; font: 13px/1.5 var(--font-mono); }
+#overlay #hubMain.pg.hub.base-camp .hub-res { display: flex; margin-left: auto; gap: 25px; }
+#overlay #hubMain.pg.hub.base-camp .res-chip { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 4px 0; font-size: 15px; color: #c3c9c7; border-radius: 0; }
+#overlay #hubMain.pg.hub.base-camp .res-chip b { color: #f3efe3; font: 700 24px/1.3 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp .res-chip .ic { width: 23px; height: 23px; }
+#overlay #hubMain.pg.hub.base-camp .hub-body { display: grid; flex: 1; min-height: 0; margin: 0; overflow: hidden; }
+#overlay #hubMain.pg.hub.base-camp .hub-tabs { display: flex; flex-direction: column; border: 0; background: #1c2a32; }
+#overlay #hubMain.pg.hub.base-camp .camp-nav-caption { display: block; padding: 0 18px 18px; font: 12px/1.5 var(--font-mono); letter-spacing: .13em; color: #99afb6; }
+#overlay #hubMain.pg.hub.base-camp .hub-tab {
+  position: relative; display: flex; flex-direction: row; align-items: center; flex: none; border: 0; border-radius: 2px;
+  background: transparent; color: #bdc9c9; box-shadow: none; clip-path: none; text-align: left;
+}
+#overlay #hubMain.pg.hub.base-camp .hub-tab::before { content: ''; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; background: transparent; }
+#overlay #hubMain.pg.hub.base-camp .hub-tab:hover { background: #293e47; color: #fff9e9; }
+#overlay #hubMain.pg.hub.base-camp .hub-tab.on { color: #f3f2e8; }
+#overlay #hubMain.pg.hub.base-camp .tab-ico { display: grid; place-items: center; width: 30px; height: 30px; border: 0; background: none; box-shadow: none; transform: none; }
+#overlay #hubMain.pg.hub.base-camp .tab-ico .ic { width: 26px; height: 26px; filter: saturate(.65); }
+#overlay #hubMain.pg.hub.base-camp .tab-txt { display: flex; flex-direction: column; gap: 4px; font-family: var(--font-ui); letter-spacing: 0; }
+#overlay #hubMain.pg.hub.base-camp .tab-txt b { font-size: 19px; font-weight: 600; color: inherit; white-space: nowrap; }
+#overlay #hubMain.pg.hub.base-camp .tab-txt small { color: #9aafb3; font: 10px/1.3 var(--font-mono); letter-spacing: .1em; }
+#overlay #hubMain.pg.hub.base-camp .camp-nav-index { margin-left: auto; font: 12px/1 var(--font-mono); color: #8b9f9f; }
+#overlay #hubMain.pg.hub.base-camp .hub-tab .dot { top: 12px; right: 12px; width: 6px; height: 6px; box-shadow: none; background: #e3c985; }
+#overlay #hubMain.pg.hub.base-camp .camp-nav-foot { margin-top: auto; padding: 32px 18px 0; border-top: 1px solid #43545b; color: #b4c2c1; font-size: 13px; }
+#overlay #hubMain.pg.hub.base-camp .camp-nav-foot small { display: block; margin-top: 12px; color: #809a9e; font: 10px/1.5 var(--font-mono); letter-spacing: .08em; }
+#overlay #hubMain.pg.hub.base-camp .hub-page { position: relative; display: block; width: auto; max-width: none; margin: 0; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; scrollbar-color: #96a7a6 #e3e3db; }
+#overlay #hubMain.pg.hub.base-camp .hub-page.page-in { animation: camp-page-in .2s var(--camp-ease) both; }
+#overlay #hubMain.pg.hub.base-camp .camp-section-head { display: flex; flex-direction: column; }
+#overlay #hubMain.pg.hub.base-camp .camp-section-head small { font: 12px/1.3 var(--font-mono); letter-spacing: .16em; }
+#overlay #hubMain.pg.hub.base-camp .camp-section-head h2 { display: block; color: var(--camp-ink); margin: 0; font: 700 38px/1.3 var(--font-ui); letter-spacing: .04em; text-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .camp-section-head p { color: var(--camp-sub); }
+#overlay #hubMain.pg.hub.base-camp :is(.hub-card, .collection-panel) { background: var(--camp-sheet); border: 1px solid var(--camp-line); box-shadow: 0 5px 14px #1c303708; padding: 27px; border-radius: 2px; color: var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp .hub-card > h3 { color: var(--camp-ink); font: 700 22px/1.5 var(--font-ui); margin: 0 0 20px; letter-spacing: .02em; text-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .hub-card > h3 .ic { width: 22px; height: 22px; }
+#overlay #hubMain.pg.hub.base-camp :is(.ov-note, .set-tip, .dim, .hint, .base-line) { color: var(--camp-sub); text-shadow: none; font: 16px/1.8 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp :is(.ov-note b, .base-line b, .hint b) { color: var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp .set-tip { display: inline-block; font-size: 14px; font-weight: 400; margin-left: 12px; letter-spacing: 0; }
+#overlay #hubMain.pg.hub.base-camp :is(.ov-btn, .mini-btn), #overlay .camp-detail :is(.ov-btn, .mini-btn) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 17px; border: 1px solid #98a6a6; border-radius: 2px; background: transparent; color: #34474d; text-shadow: none; box-shadow: none; font: 600 16px/1.4 var(--font-ui); letter-spacing: 0; clip-path: none; }
+#overlay #hubMain.pg.hub.base-camp :is(.ov-btn.ok, .mini-btn.ok), #overlay .camp-detail :is(.ov-btn.ok, .mini-btn.ok) { color: #fffaf0; background: #2e606b; border-color: #2e606b; }
+#overlay #hubMain.pg.hub.base-camp button:disabled, #overlay .camp-detail button:disabled { opacity: .55; cursor: not-allowed; filter: none; transform: none; }
+#overlay #hubMain.pg.hub.base-camp button, #overlay .camp-detail button { transition: transform .14s var(--camp-ease), background-color .15s, border-color .15s, box-shadow .15s; cursor: pointer; }
+#overlay #hubMain.pg.hub.base-camp button:active:not(:disabled), #overlay .camp-detail button:active:not(:disabled) { box-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp :is(button, summary):focus-visible, #overlay .camp-detail button:focus-visible { outline: 3px solid #4b9eb0; outline-offset: 4px; }
+#overlay #hubMain.pg.hub.base-camp .camp-notice { position: absolute; z-index: 12; bottom: 24px; right: 32px; display: flex; gap: 12px; align-items: center; padding: 16px 24px; color: #f8f5e9; background: #28505b; border-left: 4px solid #d5ba74; box-shadow: 0 8px 24px #192d3630; font-size: 17px; animation: camp-page-in .24s var(--camp-ease) both; pointer-events: none; }
+
+/* 主行动：一张人物大画与一份行动档案。 */
+#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::before,
+#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::after { content: none; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-wrap { width: 100%; height: 100%; position: absolute; inset: 0; transform: none; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-back { display: none; }
+#overlay #hubMain.pg.hub.base-camp .dock-label { display: block; margin: 0 0 12px; color: #6a7775; font: 13px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp .mode-list { display: flex; flex-direction: column; gap: 12px; }
+#overlay #hubMain.pg.hub.base-camp .mode-card { display: flex; flex-direction: row; align-items: center; gap: 14px; padding: 20px; min-height: 110px; border: 1px solid #ccd1c8; border-radius: 2px; background: #f3f2ea; box-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .mode-card.on { border-color: #54828a; background: #e1ece6; box-shadow: inset 4px 0 #307d8d; }
+#overlay #hubMain.pg.hub.base-camp .mode-card .mode-ico { display: grid; place-items: center; width: 35px; min-width: 35px; background: none; border: 0; border-radius: 0; }
+#overlay #hubMain.pg.hub.base-camp .mode-info b { color: var(--camp-ink); font: 700 21px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp .mode-info span { color: #61716e; font: 15px/1.65 var(--font-ui); margin-top: 6px; }
+#overlay #hubMain.pg.hub.base-camp .mode-ckpt { display: none; }
+#overlay #hubMain.pg.hub.base-camp .camp-mode-mark { font-size: 23px; color: #2b7988; }
+#overlay #hubMain.pg.hub.base-camp .camp-depart-readiness { display: flex; gap: 30px; margin-top: auto; color: #61716e; font-size: 15px; }
+#overlay #hubMain.pg.hub.base-camp .camp-depart-readiness b { color: var(--camp-ink); }
+#overlay #hubMain.pg.hub.base-camp .camp-depart-actions { display: flex; flex-direction: column; gap: 12px; }
+#overlay #depMain.pg.hub.camp-detail #btnDeploy { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 69px; padding: 17px 24px; margin: 0; border: 1px solid #ccb16a; background: #dcc27e; color: #28373b; border-radius: 2px; box-shadow: 0 4px 0 #ad9451; clip-path: none; font: 700 23px/1.4 var(--font-ui); letter-spacing: .08em; text-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .camp-action-step { font: 18px/1 var(--font-mono); opacity: .6; }
+#overlay #hubMain.pg.hub.base-camp .camp-depart-secondary { min-height: 45px; background: transparent; border-color: #bac6bc; box-shadow: none; font-size: 16px; }
+#overlay #hubMain.pg.hub.base-camp .gate-strip { margin-top: 24px; display: flex; gap: 20px; align-items: center; }
+
+/* 仓库与补给：物品的画幅优先，规则靠近动作。 */
+#overlay #hubMain.pg.hub.base-camp :is(.stash-workspace) { display: flex; flex-direction: column; gap: 0; height: auto; min-height: 0; }
+#overlay #hubMain.pg.hub.base-camp :is(.stash-sections, .collection-tabs) { display: flex; gap: 0; margin: 0 0 26px; border: 0; border-bottom: 1px solid #bfc8c0; padding: 0; background: none; }
+#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab, .collection-tabs button) { display: flex; align-items: center; gap: 14px; min-height: 61px; padding: 15px 25px; background: transparent; color: #637777; border: 0; border-bottom: 3px solid transparent; border-radius: 0; box-shadow: none; clip-path: none; font: 600 18px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab.on, .collection-tabs button.on) { color: #245b65; border-bottom-color: #307d8d; background: #dce7e0; }
+#overlay #hubMain.pg.hub.base-camp :is(.stash-section-tab small) { font: 12px/1.5 var(--font-mono); color: #6e8481; }
+#overlay #hubMain.pg.hub.base-camp :is(.stash-material-strip, .stash-res, .stash-toolbar) { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 0; margin: 0 0 24px; background: transparent; border: 0; }
+#overlay #hubMain.pg.hub.base-camp .warehouse-heading { display: flex; align-items: center; justify-content: space-between; gap: 25px; margin-bottom: 22px; }
+#overlay #hubMain.pg.hub.base-camp .warehouse-heading h3 { margin: 0 0 7px; color: #344d53; font: 700 25px/1.4 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp .warehouse-heading p { margin: 0; }
+#overlay #hubMain.pg.hub.base-camp .warehouse-heading > .mini-btn { flex: none; width: auto; }
+#overlay #hubMain.pg.hub.base-camp .warehouse-materials { display: flex; gap: 12px; }
+#overlay #hubMain.pg.hub.base-camp .material-cell { display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 12px 18px; border: 1px solid #bac7b7; background: #e6eadf; color: #5c7365; font-size: 15px; }
+#overlay #hubMain.pg.hub.base-camp .material-cell b { color: #3b645d; font: 700 24px/1 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp .material-cell .ic { width: 24px; height: 24px; }
+#overlay #hubMain.pg.hub.base-camp .stash-cardgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 25px; max-height: none; padding: 8px 0; }
+#overlay #hubMain.pg.hub.base-camp .stash-cell { position: relative; display: flex; align-items: center; justify-content: center; padding: 10px 12px; background: #e3e5dc; border: 1px solid #cad0c5; border-radius: 2px; min-width: 0; box-shadow: 0 5px 0 #c1c9bf; }
+#overlay #hubMain.pg.hub.base-camp .stash-cell:hover { background: #d9e5dd; border-color: #62929a; box-shadow: 0 8px 13px #24414b20; }
+#overlay #hubMain.pg.hub.base-camp .stash-cell .hs-card { font-size: 14px; }
+#overlay #hubMain.pg.hub.base-camp .stash-cell .stack-count { position: absolute; z-index: 5; top: 8px; right: 8px; background: #2b4b54; color: #fff8e6; border: 1px solid #d1be89; min-width: 35px; text-align: center; font: 700 18px/1.4 var(--font-num); padding: 5px; }
+#overlay #hubMain.pg.hub.base-camp .stash-meta { display: flex; gap: 18px; align-items: center; font-size: 14px; color: #5c716e; }
+#overlay #hubMain.pg.hub.base-camp .stash-meter { width: 140px; background: #d5ddd3; height: 5px; }
+#overlay #hubMain.pg.hub.base-camp .stash-meter i { display: block; height: 100%; background: #41818a; }
+#overlay #hubMain.pg.hub.base-camp :is(.camp-empty, .stash-placeholder, .stash-empty) { min-height: 330px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 17px; padding: 40px; border: 1px dashed #b5c5ba; background: #e6e9df; text-align: center; color: #637572; }
+#overlay #hubMain.pg.hub.base-camp :is(.camp-empty, .stash-placeholder, .stash-empty) b { color: #374f55; font-size: 26px; }
+#overlay #hubMain.pg.hub.base-camp .camp-empty > .ic { width: 60px; height: 60px; opacity: .6; }
+#overlay #hubMain.pg.hub.base-camp .stash-list { display: flex; flex-direction: column; max-height: none; gap: 14px; overflow: visible; }
+#overlay #hubMain.pg.hub.base-camp .pk-row { padding: 23px; border: 1px solid #c8d0c5; background: #f7f6ef; margin: 0; color: #344d51; }
+#overlay #hubMain.pg.hub.base-camp .pocket-row { display: grid; grid-template-columns: 90px 1fr auto; align-items: center; gap: 25px; }
+#overlay #hubMain.pg.hub.base-camp .pocket-thumb { width: 82px; height: 116px; }
+#overlay #hubMain.pg.hub.base-camp .pocket-thumb .hs-card { font-size: 8px; }
+#overlay #hubMain.pg.hub.base-camp .pocket-info { white-space: normal; font-size: 20px; }
+#overlay #hubMain.pg.hub.base-camp .pocket-info b { color: #2d4e55; }
+#overlay #hubMain.pg.hub.base-camp .pet-sec { padding: 28px; }
+#overlay #hubMain.pg.hub.base-camp .pet-sec-head { display: flex; gap: 20px; margin-bottom: 24px; }
+#overlay #hubMain.pg.hub.base-camp .pet-help { border: 0; padding: 0; background: transparent; }
+#overlay #hubMain.pg.hub.base-camp .pet-help summary { cursor: pointer; font-size: 16px; color: #557573; }
+#overlay #hubMain.pg.hub.base-camp .pet-help p { max-width: 800px; color: #60736c; font-size: 15px; line-height: 1.8; }
+#overlay #hubMain.pg.hub.base-camp .pet-egg-art { width: 100px; height: 100px; object-fit: contain; border: 0; border-radius: 0; box-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .pet-row { display: flex; justify-content: space-between; align-items: center; gap: 25px; border-left: 3px solid #a4b5ad; }
+#overlay #hubMain.pg.hub.base-camp .pet-row.on { background: #e0eae1; border-color: #85a49d; border-left-color: #307d8d; }
+#overlay #hubMain.pg.hub.base-camp .pet-row.locked { opacity: 1; background: #e6e7df; }
+#overlay #hubMain.pg.hub.base-camp .pet-row b { color: #344c53; font-size: 21px; }
+#overlay #hubMain.pg.hub.base-camp .pet-desc { display: block; font-size: 15px; margin-top: 6px; }
+#overlay #hubMain.pg.hub.base-camp .pet-ops { display: flex; align-items: center; gap: 16px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-identity { display: flex; align-items: center; gap: 20px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-identity small { display: block; margin-top: 8px; font-size: 15px; color: #687e6c; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; margin-bottom: 30px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-list .pet-row { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 27px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-list .pet-desc { grid-column: 1 / -1; margin: 0; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch { flex: 1; padding: 22px 0; border-top: 1px solid #c1cfb9; color: #658066; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch h4 { margin: 0 0 10px; color: #3b655d; font-size: 21px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-hatch p { margin: 0 0 12px; font-size: 16px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-icon .ic { width: 58px; height: 58px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-progress { display: flex; gap: 5px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-progress i { width: 17px; height: 5px; background: #cdd7ce; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-progress .filled { background: #52818a; }
+#overlay #hubMain.pg.hub.base-camp .got { color: #32737b; text-shadow: none; font-size: 14px; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-layout { grid-template-columns: 290px 1fr; align-items: start; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-intro { border-top: 4px solid #c5ad70; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-intro :is(b, h3) { color: #f8efd6; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-intro :is(p, .ov-note, .base-line) { color: var(--camp-sub); font-size: 22px; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-intro .mini-btn { color: #e8eddc; border-color: #819b90; width: 100%; margin: 22px 0; }
+#overlay #hubMain.pg.hub.base-camp .camp-shop-intro > small { display: block; color: #a5bdae; font-size: 13px; }
+#overlay #hubMain.pg.hub.base-camp .camp-reserve-value { flex-wrap: wrap; }
+#overlay #hubMain.pg.hub.base-camp .camp-reserve-value b { font: 700 62px/1.2 var(--font-num); }
+#overlay #hubMain.pg.hub.base-camp .camp-reserve-value span { color: #b1c8ba; }
+#overlay #hubMain.pg.hub.base-camp .shop-shelf { padding: 0; }
+#overlay #hubMain.pg.hub.base-camp .camp-product { display: flex; flex-direction: column; align-items: stretch; margin: 0; min-width: 0; border: 1px solid #cdd0c0; opacity: 1; filter: none; box-shadow: 0 5px 0 #ced2c7; }
+#overlay #hubMain.pg.hub.base-camp .poor-why { color: #856d47; font-size: 14px; }
+
+/* 工坊与人物：容量是主数字，立绘是人物档案的主角。 */
+#overlay #hubMain.pg.hub.base-camp .camp-upgrade-glyph { float: right; margin-left: 25px; }
+#overlay #hubMain.pg.hub.base-camp .camp-upgrade-glyph .ic { width: 76px; height: 76px; opacity: .65; }
+#overlay #hubMain.pg.hub.base-camp .base-bar { height: 6px; margin: 20px 0; background: #d5dfd4; border: 0; border-radius: 0; box-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp .base-bar i { height: 100%; display: block; background: #49818a; border-radius: 0; }
+#overlay #hubMain.pg.hub.base-camp .camp-upgrade-reserve { display: flex; gap: 28px; color: #617672; font-size: 15px; margin: 15px 0 24px; }
+#overlay #hubMain.pg.hub.base-camp .camp-pet-locked-note { padding: 20px 0 0; color: #7c8062; font-size: 15px; }
+#overlay #hubMain.pg.hub.base-camp .person-details { background: #faf8ef; border: 1px solid #c9ccbc; padding: 32px 36px; overflow: visible; color: #334a50; }
+#overlay #hubMain.pg.hub.base-camp .person-details h4 { color: #334a50; }
+#overlay #hubMain.pg.hub.base-camp .person-details p { color: #5b736c; }
+#overlay #hubMain.pg.hub.base-camp .person-details small { color: #70827c; font-size: 14px; }
+#overlay #hubMain.pg.hub.base-camp .person-progress-track { height: 6px; background: #d5ded1; margin-bottom: 12px; }
+#overlay #hubMain.pg.hub.base-camp .person-progress-track i { height: 100%; display: block; background: #528793; }
+
+/* 档案：未解锁时仍可读目标，长卡墙按人物折叠。 */
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card { background: #faf8f1; color: #344f54; border: 1px solid #c7cebe; border-radius: 2px; box-shadow: none; }
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::before,
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::after,
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3::before,
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3::after { content: none; }
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3 { color: #344f54; font: 700 23px/1.5 var(--font-ui); letter-spacing: .02em; }
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3 .set-tip { color: #6a806f; font: 14px/1.5 var(--font-ui); }
+#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page.page-in :is(.ach-row, .coll-group, .back-card, .coll-ms) { animation: none; }
+#overlay #hubMain.pg.hub.base-camp .camp-collection-summary { color: #56766e; font-size: 15px; margin-top: 18px; }
+#overlay #hubMain.pg.hub.base-camp .story-strip { font-size: 15px; background: #e0e8dc; border-left: 3px solid #8a9e76; color: #5f7469; padding: 14px 18px; }
+#overlay #hubMain.pg.hub.base-camp .story-strip .ss-tag { color: #3c6159; }
+#overlay #hubMain.pg.hub.base-camp .ach-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+#overlay #hubMain.pg.hub.base-camp .ach-row { display: flex; gap: 18px; min-height: 116px; border: 1px solid #cbd2c2; background: #edeee3; }
+#overlay #hubMain.pg.hub.base-camp .ach-row.done { background: #e1ebdd; border-color: #97b8a3; }
+#overlay #hubMain.pg.hub.base-camp .ach-ico { background: none; border: 0; width: 40px; height: 40px; opacity: .55; }
+#overlay #hubMain.pg.hub.base-camp .ach-info b { color: #344e53; font-size: 19px; }
+#overlay #hubMain.pg.hub.base-camp .ach-info span { color: #6a7c73; font-size: 14px; margin-top: 7px; line-height: 1.6; }
+#overlay #hubMain.pg.hub.base-camp .ach-ops :is(.rw, .got) { color: #758152; font-size: 13px; }
+#overlay #hubMain.pg.hub.base-camp .coll-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; padding: 25px; }
+
+/* 出征二级整备与三级详情，沿用同一张纸与返回动作。 */
+#overlay #depMain.pg.hub.camp-detail { position: relative; }
+#overlay #depMain.pg.hub.camp-detail::before, #overlay #depMain.pg.hub.camp-detail::after { content: none; }
+#overlay #depMain.pg.hub.camp-detail .hub-head { display: flex; align-items: center; flex: none; padding: 24px 40px 24px 112px; min-height: 100px; background: #1c2a32; border-bottom: 1px solid #495e63; color: #e8eedf; }
+#overlay #depMain.pg.hub.camp-detail .camp-detail-heading small { display: block; font: 11px/1.3 var(--font-mono); letter-spacing: .16em; color: #a6bfc0; }
+#overlay #depMain.pg.hub.camp-detail .camp-detail-heading h2 { margin: 6px 0 0; font-size: 30px; color: #f0eedf; }
+#overlay #depMain.pg.hub.camp-detail .ak-back-tl { position: absolute; left: 36px; top: 30px; width: 46px; height: 46px; background: transparent; border: 1px solid #80908d; color: #edf2e8; border-radius: 2px; box-shadow: none; }
+#overlay #depMain.pg.hub.camp-detail .res-chip { background: transparent; border: 0; color: #b7cac4; padding: 0; font-size: 17px; }
+#overlay #depMain.pg.hub.camp-detail .res-chip b { color: #f3eacb; font-size: 25px; }
+#overlay #depMain.pg.hub.camp-detail .dep-body { display: grid; grid-template-columns: 230px minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; flex: 1; min-height: 0; padding: 30px 38px; overflow: auto; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person { display: flex; flex-direction: column; background: #d9e2d7; overflow: hidden; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art { position: relative; height: 430px; flex: 1; min-height: 300px; overflow: hidden; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; filter: none; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy { padding: 22px; background: #294750; color: #d9e5db; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy small { font: 10px/1.5 var(--font-mono); color: #c9b778; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy h3 { font-size: 22px; color: #f0efdf; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy p { font-size: 15px; line-height: 1.8; color: #c5d7cc; }
+#overlay #depMain.pg.hub.camp-detail :is(.dep-storage, .dep-pack) { display: flex; flex-direction: column; min-height: 0; background: #f9f8ee; border: 1px solid #c4cec0; padding: 24px; border-radius: 2px; box-shadow: none; }
+#overlay #depMain.pg.hub.camp-detail .hub-card > h3 { color: #2e4d55; font-size: 22px; margin: 0 0 20px; }
+#overlay #depMain.pg.hub.camp-detail .camp-panel-index { color: #648581; font: 18px/1.3 var(--font-num); margin-right: 8px; }
+#overlay #depMain.pg.hub.camp-detail .set-tip { color: #7b8c7d; font-size: 13px; }
+#overlay #depMain.pg.hub.camp-detail .dep-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid #c3ceba; background: transparent; padding: 0 0 17px; margin-bottom: 20px; color: #58766b; }
+#overlay #depMain.pg.hub.camp-detail .dep-filters label { display: flex; align-items: center; gap: 7px; font-size: 14px; }
+#overlay #depMain.pg.hub.camp-detail .dep-filters :is(select, button) { background: #eeeee2; color: #405d56; border: 1px solid #afc0ad; padding: 8px 9px; font-size: 14px; border-radius: 2px; }
+#overlay #depMain.pg.hub.camp-detail .dep-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; max-height: none; overflow: auto; padding: 6px; align-content: start; }
+#overlay #depMain.pg.hub.camp-detail .dep-card { position: relative; border: 1px solid #b4c8b4; border-radius: 2px; background: #e0e6d9; padding: 8px; display: flex; flex-direction: column; gap: 7px; align-items: center; box-shadow: none; cursor: pointer; }
+#overlay #depMain.pg.hub.camp-detail .dep-card[hidden] { display: none; }
+#overlay #depMain.pg.hub.camp-detail .dep-card .hs-card { font-size: 12px; transform: none; }
+#overlay #depMain.pg.hub.camp-detail .dep-card.picked { border-color: #417d8b; box-shadow: inset 0 0 0 2px #417d8b; background: #d3e4d8; }
+#overlay #depMain.pg.hub.camp-detail .dep-card.drained { opacity: .5; }
+#overlay #depMain.pg.hub.camp-detail .dep-quantity { display: flex; justify-content: space-between; width: 100%; padding: 4px; font-size: 13px; color: #66836c; }
+#overlay #depMain.pg.hub.camp-detail .dep-quantity b { display: inline; position: static; color: #3f6d62; background: none; border: 0; border-radius: 0; box-shadow: none; min-width: 0; padding: 0; font-size: 16px; }
+#overlay #depMain.pg.hub.camp-detail .bag-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 0; min-height: 0; background: none; }
+#overlay #depMain.pg.hub.camp-detail .bag-cell { position: relative; min-width: 0; height: auto; aspect-ratio: 5/7; display: flex; align-items: center; justify-content: center; background: #e1e6d8; border: 1px dashed #aabd9f; padding: 8px; border-radius: 2px; }
+#overlay #depMain.pg.hub.camp-detail .bag-cell.filled, #overlay #depMain.pg.hub.camp-detail .bag-cell.fixed { border: 1px solid #839f88; }
+#overlay #depMain.pg.hub.camp-detail .bag-cell .hs-card { position: relative; inset: auto; margin: 0; font-size: 12px; transform: none; }
+#overlay #depMain.pg.hub.camp-detail .dep-n { position: absolute; top: auto; bottom: 4px; right: 8px; padding: 3px 8px; background: #2c5c60; color: #f0e5b7; font-size: 16px; }
+#overlay #depMain.pg.hub.camp-detail .pet-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px; }
+#overlay #depMain.pg.hub.camp-detail .pet-strip-label { color: #55796e; font-size: 14px; width: 100%; }
+#overlay #depMain.pg.hub.camp-detail .pet-chip { padding: 9px 12px; color: #597964; background: #e2e9d8; border: 1px solid #abbfa0; border-radius: 2px; font-size: 14px; box-shadow: none; }
+#overlay #depMain.pg.hub.camp-detail .pet-chip.on { background: #ccdccc; color: #255960; border-color: #4e8b83; }
+#overlay #depMain.pg.hub.camp-detail .camp-pack-note { color: #6e846e; font-size: 14px; line-height: 1.8; }
+#overlay #depMain.pg.hub.camp-detail .dep-foot { display: flex; align-items: center; gap: 24px; flex: none; margin: 0; padding: 24px 38px; background: #e2e7db; border-top: 1px solid #b6c4b0; }
+#overlay #depMain.pg.hub.camp-detail .dep-capacity { color: #4d7269; font-size: 17px; }
+#overlay #depMain.pg.hub.camp-detail .dep-capacity b { color: #2e5d66; }
+#overlay #depMain.pg.hub.camp-detail .camp-depart-next { margin-left: auto; color: #71836c; font-size: 14px; }
+#overlay #depMain.pg.hub.camp-detail #btnDeploy { width: 300px; min-height: 58px; flex: none; padding: 14px 25px; font-size: 21px; }
+#overlay #depMain.pg.hub.camp-detail :is(.dep-status, .ov-empty, .dep-no-results) { color: #6d816b; font-size: 16px; line-height: 1.8; }
+#overlay #depMain.pg.hub.camp-detail .dep-status { margin: 0; padding: 12px 40px; background: #e9dcc3; color: #795b35; }
+#overlay .card:has(.stash-shell.camp-detail), #overlay .card:has(.preparation-shell.camp-detail) { background: #efeee4; border: 1px solid #b6c4b4; color: #36574f; }
+#overlay .card:has(.stash-shell.camp-detail) { width: 660px; max-width: 94%; padding: 30px 34px; box-shadow: 0 20px 60px #081b2740; }
+#overlay .card:has(.stash-shell.camp-detail) #ovTitle { color: #36574f; font: 700 28px/1.4 var(--font-ui); margin: 0 0 20px; }
+#overlay .stash-shell.camp-detail { display: flex; flex-direction: column; gap: 20px; padding: 0; border: 0; background: transparent; box-shadow: none; }
+#overlay .stash-shell.camp-detail::before, #overlay .stash-shell.camp-detail::after { content: none; }
+#overlay .stash-shell.camp-detail .camp-upgrade-glyph { float: none; display: block; }
+#overlay .stash-shell.camp-detail .camp-upgrade-glyph .ic { width: 75px; height: 75px; }
+#overlay .stash-shell.camp-detail small { color: #7b8e74; font: 12px/1.5 var(--font-mono); }
+#overlay .stash-shell.camp-detail .ov-btns { display: flex; width: 100%; margin: 0; }
+#overlay .stash-shell.camp-detail .ov-btn { width: 100%; min-height: 48px; }
+#overlay .stash-shell.camp-detail :is(.ov-note, .ov-stats) { color: #587865; font-size: 18px; line-height: 1.8; }
+#overlay .stash-shell.camp-detail .ov-stats b { color: #3b645d; font: 700 42px/1.3 var(--font-num); }
+#cardZoom:has(.camp-detail), body:has(#depMain.camp-detail) #cardZoom { background: transparent; }
+#cardZoom:has(.camp-detail) .cz-foot, body:has(#depMain.camp-detail) #cardZoom .cz-foot { position: relative; max-width: 950px; width: calc(100% - 80px); margin: 20px auto; background: #f1efe1; color: #365b50; padding: 22px 30px; border: 1px solid #c8d4bd; border-radius: 2px; text-align: left; }
+#cardZoom:has(.camp-detail) :is(.ov-note, .gold), body:has(#depMain.camp-detail) #cardZoom .dep-n { color: #496c5a; font-size: 16px; text-shadow: none; }
+#cardZoom:has(.camp-detail) .ov-btn { background: #e4e9d7; color: #3b6653; border: 1px solid #aabc9f; border-radius: 2px; min-height: 42px; padding: 10px 16px; font-size: 16px; box-shadow: none; }
+#cardZoom:has(.camp-detail) .ov-btn.ok { background: #356d70; color: #fff8df; }
+#cardZoom:has(.camp-detail) .cz-note { display: none; }
+#cardZoom:has(.camp-card-actions) .cz-foot { background: transparent; border: 0; box-shadow: none; padding: 0; }
+#cardZoom:has(.camp-card-actions) { background: transparent; }
+#cardZoom:has(.camp-card-actions) .cz-foot { width: min(440px, calc(100% - 48px)); max-width: none; margin: 14px auto 0; color: #d5e1e6; }
+#cardZoom .camp-card-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+#cardZoom .camp-card-actions .inspect-meta { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: min(340px, 100%); padding: 0 0 12px; border-bottom: 1px solid #a8bfcd26; }
+#cardZoom .camp-card-actions .inspect-price { display: flex; align-items: baseline; gap: 10px; }
+#cardZoom .camp-card-actions .inspect-price small { color: #a2b5bf; font-size: 12px; }
+#cardZoom .camp-card-actions .inspect-price strong { color: #e0cf9b; font: 700 24px/1.2 var(--font-num); }
+#cardZoom .camp-card-actions .inspect-price strong span { color: #b3c2c9; font: 400 12px/1.4 var(--font-ui); }
+#cardZoom .camp-card-actions :is(.inspect-count, .inspect-unavailable) { color: #a2b5bf; font-size: 12px; }
+#cardZoom .camp-card-actions .ov-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: auto; margin: 0; }
+#cardZoom .camp-card-actions .ov-btn { flex: 0 0 auto; width: auto; min-width: 100px; min-height: 36px; padding: 8px 14px; border: 1px solid #748b985c; border-radius: 3px; clip-path: none; background: #25343f; color: #d7e2e9; font: 600 14px/1.4 var(--font-ui); letter-spacing: .04em; box-shadow: none; }
+#cardZoom .camp-card-actions .ov-btn.ok { background: #31545e; border-color: #5c8f9d99; color: #edf7fa; }
+#cardZoom .camp-card-actions .ov-btn:hover { background: #3a4e5c; transform: none; }
+#cardZoom .camp-card-actions .ov-btn.ok:hover { background: #406e79; }
+#cardZoom:has(.camp-card-actions) .cz-close { width: 36px; height: 36px; background: #17232ed9; border: 1px solid #96adbb52; color: #cbdbe5; }
+#cardZoom:has(.camp-card-actions) .cz-hint { color: #8299a7; font-size: 11px; letter-spacing: .08em; }
+body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom { background: transparent; }
+body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom .cz-note { background: #f1efe1; border: 1px solid #c1cfba; color: #496f61; padding: 18px 24px; border-radius: 2px; }
+body:has(#hubMain.base-camp, .cls-pool-page[data-base-departure="true"]) #cardZoom :is(.cz-note-tag, .cz-note-text) { color: #496f61; font: 15px/1.6 var(--font-ui); }
+#cardZoom:has(.camp-detail) .camp-detail-copy h3 { margin: 5px 0 12px; color: #365c52; font-size: 24px; }
+#cardZoom:has(.camp-detail) .camp-detail-copy small { color: #778a70; font: 11px/1.4 var(--font-mono); letter-spacing: .1em; }
+
+/* 基地的外壳/内容归属由页面动效配置决定，通用导演不覆盖页内动画。 */
+@keyframes camp-page-in { from { opacity: .4; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+body.reduce-motion #overlay #hubMain.pg.hub.base-camp *, body.reduce-motion #overlay #depMain.pg.hub.camp-detail * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #overlay #hubMain.pg.hub.base-camp *, #overlay #depMain.pg.hub.camp-detail * { animation: none; transition: none; }
+  #overlay #hubMain.pg.hub.base-camp .hub-page.page-in { animation: none; }
+}

@@ -1,0 +1,181 @@
+{
+  "authorization": "Owner: 16 cards all installed; no review-page update",
+  "items": [
+    {
+      "card_id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "asset": "cards/martial-tt7-imitate.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-imitate.png",
+      "source_sha256": "946b7629faefb4bb57302cfe9299f9933e899f3f4d2deed1d597a00c5d48e0b0",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-imitate.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-imitate.png"
+    },
+    {
+      "card_id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "asset": "cards/martial-tt7-ghostblade.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-ghostblade.png",
+      "source_sha256": "108193497253bdb56d45ca68aa88bac0fec312f58d918859ad2231d89268e9f0",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-ghostblade.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-ghostblade.png"
+    },
+    {
+      "card_id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "asset": "cards/martial-tt7-swordimmortal.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-swordimmortal.png",
+      "source_sha256": "8f4c767d557c8aa543ca2fe5b0c44a16320fd81f16202988bba34ebeb4e04b82",
+      "revision": "career-final-20261023",
+      "selected_revision": 3,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v3\\tt7-swordimmortal.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-swordimmortal.png"
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "asset": "cards/martial-tt7-goldencicada.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-goldencicada.png",
+      "source_sha256": "f30f337d6b6737d6f8489de315f7ff635ee2f4048c9050e9de5175f6a82a58e9",
+      "revision": "career-final-20261023",
+      "selected_revision": 3,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v3\\tt7-goldencicada.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-feedback-v3-1023\\tt7-goldencicada.png"
+    },
+    {
+      "card_id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "asset": "cards/martial-tt7-meteorrain.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-meteorrain.png",
+      "source_sha256": "658bb5b148d5dd9e22c215bf3d9c8eadf386fa3f76df220738472318279a51e5",
+      "revision": "career-final-20261023",
+      "selected_revision": 3,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v3\\tt7-meteorrain.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-meteorrain.png"
+    },
+    {
+      "card_id": "tt7-stealth",
+      "name": "潜匿",
+      "asset": "cards/martial-tt7-stealth.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-stealth.png",
+      "source_sha256": "8d081debff40082f3eba2fe356a91c86998bfc1f370387ebccaeb103372aed3a",
+      "revision": "career-final-20261023",
+      "selected_revision": 1,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-stealth.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-stealth.png"
+    },
+    {
+      "card_id": "tt7-sneak",
+      "name": "偷袭",
+      "asset": "cards/martial-tt7-sneak.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-sneak.png",
+      "source_sha256": "0544c9435b6e69f2767621f01cda761aab0b1bd710b3bdeec3265dd2f9742f6c",
+      "revision": "career-final-20261023",
+      "selected_revision": 3,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v3\\tt7-sneak.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-sneak.png"
+    },
+    {
+      "card_id": "tt7-armup",
+      "name": "武装",
+      "asset": "cards/martial-tt7-armup.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-armup.png",
+      "source_sha256": "99c42e0d1e3bcd34801907c2baebd77a8a82ebdbb8462df79d7d88d28d778d0f",
+      "revision": "career-final-20261023",
+      "selected_revision": 1,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-armup.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-armup.png"
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "asset": "cards/martial-tt7-whirlwind.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v3-1023\\tt7-whirlwind.png",
+      "source_sha256": "8b71ce0e5282218f15e58c84d1a665a16b76be160941f7cfd75047a5b849efad",
+      "revision": "career-final-20261023",
+      "selected_revision": 3,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v3\\tt7-whirlwind.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-whirlwind.png"
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "name": "血毒双镖",
+      "asset": "cards/martial-tt7-bloodpoison.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-bloodpoison.png",
+      "source_sha256": "0069cf1ccaf1592e1de9a7a7c65d6ab9f3619efed7fcb49bf029b09fb8e49bc1",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-bloodpoison.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bloodpoison.png"
+    },
+    {
+      "card_id": "tt7-bladebloom",
+      "name": "永恒绽放",
+      "asset": "cards/spell-tt7-bladebloom.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-bladebloom.png",
+      "source_sha256": "14355a1fdf76cad6a7230ecc32a3007cbdbd3e291fb3738d3f7bf4df4c875361",
+      "revision": "career-final-20261023",
+      "selected_revision": 1,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-bladebloom.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bladebloom.png"
+    },
+    {
+      "card_id": "tt7-arcanescroll",
+      "name": "奥术残卷",
+      "asset": "cards/studio-expanded/tt7-arcanescroll.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-arcanescroll.png",
+      "source_sha256": "146d89a8853ce2b5b5e18c833865a237470a9842c32cb9ef99fd706e9caecbcf",
+      "revision": "career-final-20261023",
+      "selected_revision": 1,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-arcanescroll.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-arcanescroll.png"
+    },
+    {
+      "card_id": "tt7-burnharvest",
+      "name": "爆燃火球",
+      "asset": "cards/spell-tt7-burnharvest.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-burnharvest.png",
+      "source_sha256": "42bc4418a0a9f5357b672ca3a15c3ee92d82ab2e51fb16da800269f672c3edb6",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-burnharvest.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-burnharvest.png"
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "name": "风暴火球",
+      "asset": "cards/spell-tt3-flame-storm.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-flame-storm.png",
+      "source_sha256": "40b4d11fef25ef4b20aa5e1e9d98c26903d1081b69e34392c8e83933cfca8dd3",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt3-flame-storm.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-flame-storm.png"
+    },
+    {
+      "card_id": "tt7-twinfireball",
+      "name": "三重火球",
+      "asset": "cards/spell-tt7-twinfireball.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-twinfireball.png",
+      "source_sha256": "05491ae2bff0e7cdf13975aaca8410b072cb303e9617362c6c9ca7a886d0e0de",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-twinfireball.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-twinfireball.png"
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "name": "致命射线",
+      "asset": "cards/spell-tt3-nuke-ray.webp",
+      "source": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-nuke-ray.png",
+      "source_sha256": "e3976dee4fa6dba17101568679ca37b7114aedb7ae7de20c39c2b96851495918",
+      "revision": "career-final-20261023",
+      "selected_revision": 2,
+      "candidate_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt3-nuke-ray.webp",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-nuke-ray.png"
+    }
+  ]
+}

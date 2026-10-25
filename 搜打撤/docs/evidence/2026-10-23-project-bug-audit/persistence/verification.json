@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-23",
+  "source": "current working tree, read-only audit",
+  "baselineBatch1": { "exitCode": 0, "filesPassed": 10, "testsPassed": 173, "durationSeconds": 40.95 },
+  "baselineBatch2": { "exitCode": 0, "filesPassed": 12, "testsPassed": 230, "durationSeconds": 51.30 },
+  "probes": {
+    "exitCode": 1, "filesFailed": 1, "testsFailed": 3,
+    "S1": { "known": true, "actual": "throws SecurityError", "expected": "structured STORAGE_READ_FAILED" },
+    "PERSIST-1": { "memoryCoinsAfterImport": 999, "memoryCardCountAfterImport": 7, "subsequentSave": true, "durableCoins": 999, "durableCardCount": 7, "expectedOldAssets": 0 },
+    "PERSIST-2": { "initialSeconds": 100, "initialCheckpoint": 10, "settledSeconds": 120, "settledCheckpoint": 10, "nextElapsed": 31, "nextDelta": 21, "finalSeconds": 141, "expectedNextDelta": 1, "expectedFinalSeconds": 121 }
+  },
+  "sourceSha256": {
+    "game/src/hub/base.js": "79D0E3749F7B0095DF791987F627BB5001267F367CBCFB8CA9576A4825E927EB",
+    "game/src/hub/save-archive.js": "FC8EAB678B1CBA4943587ACA4AFC4F01127B609FE4767DFDDC9CFB51AFE82E63",
+    "game/src/hub/battle-settlement.commands.js": "7360EBD06F139C8E43510C1CD9D9556471F6532185C265618DF8603FA289584E",
+    "game/src/hub/base-elapsed.commands.js": "C3B041E1DA9C8F4AE39E2B1FE5AB0B2E200F07A5F31039BA3A2D4D62322D28C3",
+    "game/src/hub/game.storage.js": "C98F8370E78B89B664E79E30EE2432B4ADE377C8BB8D312EBD0658CF69D7B93E",
+    "game/src/run/game-session-persistence.js": "0EB69DA73DE76F0AC02670B941024C083F0AAB58694FE229B6113B97BA9D4C24"
+  }
+}

@@ -1,0 +1,146 @@
+- main:
+  - button "只看壁纸":
+    - generic: 只看壁纸
+  - generic: 冬日猜想 / CODE NAME 7
+  - generic: CODE NAME 7
+  - generic: CODE NAME 7
+  - generic: CODE NAME 7
+  - generic: CODE NAME 7
+  - region "主菜单":
+    - heading "升格会的冬日猜想" [level=1]:
+      - img "升格会的冬日猜想"
+    - navigation "开始与指南":
+      - button "进入城市":
+        - generic: 进入城市
+        - generic: "01"
+      - button "打开生存指南":
+        - generic: 生存指南
+        - generic: "02"
+  - complementary "收藏与系统":
+    - navigation "收藏":
+      - button "成就总览":
+        - generic: 成就总览
+        - generic: "03"
+      - button "照相馆":
+        - generic: 照相馆
+        - generic: "04"
+    - navigation "系统工具":
+      - button "设置":
+        - generic: 设置
+      - button "制作名单":
+        - generic: 制作名单
+      - button "退出游戏":
+        - generic: 退出游戏
+  - button "音效 / 背景乐开关":
+  - button "留言信箱":
+    - generic: 留言信箱
+  - button "切换壁纸，当前第1张，共7张":
+    - generic: 壁纸 1/7
+  - generic: LOCAL 01:40:59
+  - generic: ASCENSION COUNCIL v0.60.0
+  - generic: Winter Speculation · Ascension Council · 2026
+  - img "tools"
+  - text: 节点测试
+  - button "遭遇战"
+  - button "BOSS 战"
+  - button "商店"
+  - button "事件"
+  - button "小宝箱"
+  - button "中宝箱"
+  - button "大宝箱"
+  - button "火堆"
+  - button "祭坛"
+  - paragraph: 开发者模式专属 · 测试局不写入存档
+  - dialog:
+    - button "关闭照相馆":
+    - tablist "照片分类":
+      - tab "全部，10张": 全部
+      - tab "武术，0张": 武术
+      - tab "法术，0张": 法术
+      - tab "生物，10张" [selected]:
+        - text: 生物
+      - tab "道具，0张": 道具
+      - tab "装备，0张": 装备
+      - tab "事件，0张": 事件
+      - tab "能力，0张": 能力
+      - tab "资源，0张": 资源
+    - heading "照相馆" [level=2]
+    - generic "馆藏 291 张照片"
+    - button "导出工具"
+    - region "馆藏照片":
+      - region "照片搜索与筛选":
+        - textbox "搜索卡牌" [active]:
+          - /placeholder: 名称、效果或关键词
+          - text: 精英
+        - generic "按稀有度筛选，不限稀有度":
+          - generic: 稀有度 · 全部
+        - text: ✓
+        - generic "照片排序，稀有度":
+          - generic: 排序 · 稀有度
+        - text: ✓
+        - generic "按人物筛选，不限人物":
+          - generic: 人物 · 全部
+        - text: ✓
+        - generic: 10 张
+        - button "重置"
+        - button "移除筛选：“精英”": “精英” ×
+      - tabpanel "生物，10张":
+        - button "查看照片：暴怒者，衍生":
+          - img "暴怒者"
+          - generic: 暴怒者
+          - generic: 衍生
+        - button "查看照片：笨重锤手，衍生":
+          - img "笨重锤手"
+          - generic: 笨重锤手
+          - generic: 衍生
+        - button "查看照片：假药贩子，衍生":
+          - img "假药贩子"
+          - generic: 假药贩子
+          - generic: 衍生
+        - button "查看照片：巨兽「荒渊」，衍生":
+          - img "巨兽「荒渊」"
+          - generic: 巨兽「荒渊」
+          - generic: 衍生
+        - button "查看照片：落难逃兵，衍生":
+          - img "落难逃兵"
+          - generic: 落难逃兵
+          - generic: 衍生
+        - button "查看照片：迷彩狙击手，衍生":
+          - img "迷彩狙击手"
+          - generic: 迷彩狙击手
+          - generic: 衍生
+        - button "查看照片：贪财小鬼，衍生":
+          - img "贪财小鬼"
+          - generic: 贪财小鬼
+          - generic: 衍生
+        - button "查看照片：铁皮哑人，衍生":
+          - img "铁皮哑人"
+          - generic: 铁皮哑人
+          - generic: 衍生
+        - button "查看照片：邪教徒，衍生":
+          - img "邪教徒"
+          - generic: 邪教徒
+          - generic: 衍生
+        - button "查看照片：招摇过客，衍生":
+          - img "招摇过客"
+          - generic: 招摇过客
+          - generic: 衍生
+    - complementary "选中卡牌详情":
+      - heading "暴怒者" [level=3]
+      - paragraph:
+        - generic: 生物
+        - generic "藏品类别：衍生": 衍生
+        - generic: 费用
+        - generic: "0"
+      - paragraph:
+        - text: 攻击 2 / 生命 5。
+        - text: 第
+        - generic: 2层
+        - text: 精英。
+        - text: 一个友方角色死亡后，自身攻击力 +2。
+      - button "上一片" [disabled]: ‹
+      - button "定位当前照片":
+      - generic "当前筛选结果中的第1张，共10张": 1 / 10
+      - button "下一片": ›
+      - button "查看大图与背签":
+        - generic: 查看照片

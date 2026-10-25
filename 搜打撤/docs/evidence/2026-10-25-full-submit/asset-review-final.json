@@ -1,0 +1,60 @@
+{
+  "reviewed": [
+    {
+      "section": "consumerFingerprints.retired-scenes",
+      "path": "game/src/run/game.run.scenes.js",
+      "before": "e99fa639a89618badc4bb33a9dc1933d967c02060c7f27c73465711d2061acd2",
+      "after": "8491c20c3e47ccf1d8d1f3687b4aa63a0e1d68323d20b9d231b24dc5825b8f6e"
+    },
+    {
+      "section": "consumerFingerprints.frames",
+      "path": "game/src/battle/view/battle.frames.js",
+      "before": "e6085807665c6fb0e12b059e5a15fb89d7a97425b66b3389d4d106d1909bbf9a",
+      "after": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/ui/game.menu.pages.js",
+      "before": "af0ee347c6a64d597d70d49dee62d3b6b2575904f3a387e7bf5780350c98eb31",
+      "after": "d90af2be5ac4478e1af7d73a04ecc26c35dc48c4492f3c68a36633ecc48ce36c"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/ui/menu-settings.js",
+      "before": "bc31239636575c0a9ff7296c2a4e1cdea49f0526eae52a4b1a63b26af4df50da",
+      "after": "39eb16b7fd1c2e57644396d8636eaea1e6c7b8640dad0a48614f7ecc772d8125"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/hub/hub.personnel.js",
+      "before": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e",
+      "after": "c1c826e3ff6f69b532f71ea01e0069e5d4651c3d0d672babd3d20ef59527be2d"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/battle/view/battle.frames.js",
+      "before": "e6085807665c6fb0e12b059e5a15fb89d7a97425b66b3389d4d106d1909bbf9a",
+      "after": "17fbfa29a5f8cd562e01c053473aa7a2a7c45facb87615141a4601940b417bf9"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/battle/view/battle.layers.js",
+      "before": "589b32f65e88255ad4107194bad0f6b305bc636f392e71236f19ba282748f330",
+      "after": "bf4990129b51f54c1f82b49e55d27f59a6ecd60cd58bf689e23994a178dcd6e4"
+    },
+    {
+      "section": "opaqueConsumers",
+      "path": "game/src/ui/game.menu.js",
+      "before": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
+      "after": "a78f7fc24bcab247c1c7e473367f10a44b2c329233f60e5007b92a84ca8e8392"
+    },
+    {
+      "section": "opaqueConsumerDependencies.game/src/ui/card-zoom-controller.js",
+      "path": "game/src/ui/card-zoom-content.js",
+      "before": "000ba43d57fb645266db9156170b1c8420e6a3383b12e1b21bcec2f2a4807ee4",
+      "after": "619bc55c32b0a455fe380cb0205b4dcfb37c4134cb6da306ebc03ca6d0475f94",
+      "reason": "Removed a visible unresolved pen marker from the note heading; asset URL construction and paths unchanged."
+    }
+  ],
+  "reason": "Reviewed current source: run selection ownership, local settings pause, intent/status accessibility, lazy menu/collection composition. Asset URL construction, approved candidate list and exclusion budgets are unchanged."
+}

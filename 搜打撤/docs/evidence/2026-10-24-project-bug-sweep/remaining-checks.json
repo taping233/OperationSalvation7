@@ -1,0 +1,345 @@
+{
+  "status": "候选复查输入，非已确认bug清单；运行期间共享源码有并行改动",
+  "candidates": [
+    {
+      "file": "altar-node-art.test.js",
+      "tests": [
+        "祭坛原创图标接入 图标注册与富文本使用同源图且保留资源水晶语义",
+        "祭坛原创图标接入 祭坛页面使用专用图标，共用撤离献祭不变"
+      ],
+      "message": ""
+    },
+    {
+      "file": "bag-page-lifecycle-review.test.js",
+      "tests": [
+        "背包旧详情/页面回调与正常返回 唯一合法安全格自动整格交换后，详情退出与背包关闭仍正常",
+        "新号背包真实入口反馈 结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则"
+      ],
+      "message": ""
+    },
+    {
+      "file": "bag-render-derivation.test.js",
+      "tests": [
+        "背包单 render 派生 UID 与显示顺序保留首次命中，缺失 UID 不借用另一张牌"
+      ],
+      "message": ""
+    },
+    {
+      "file": "bag-ui-language.test.js",
+      "tests": [
+        "backpack winter UI facts limits v3 artwork to opted-in backpack surfaces and decorative tile properties"
+      ],
+      "message": ""
+    },
+    {
+      "file": "base-subpage-header-readability.test.js",
+      "tests": [
+        "base subpage header contrast places the current .courtyard-zzz > .courtyard-v3-heading header on the shared reading surface",
+        "base subpage header contrast places the current .personnel-v12[data-section=\"companions\"] > .pv12-page-head header on the shared reading surface"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-area-hover-hand-context.test.js",
+      "tests": [
+        "one real empty-field pointer hover resolves 9 raw hand entries once, not per target",
+        "one real empty-field pointer hover resolves 30 raw hand entries once, not per target",
+        "one real empty-field pointer hover resolves 60 raw hand entries once, not per target",
+        "uses the current catalog 风暴火球 with unchanged damage, cost and play wording"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-card-inspection.test.js",
+      "tests": [
+        "reuses one live ownership scan per effective query without stale array or override caches"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-effective-card.test.js",
+      "tests": [
+        "approved effective-card contract returns unavailable target reason and does not mutate original card when template is missing",
+        "captured effective faces retain live UID provenance through normalization without swallowing custom candidates",
+        "a confirmed live raw capture follows a later override while an explicit raw-like custom candidate does not"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-entry-view.test.js",
+      "tests": [
+        "keeps the ready stage during payment and charges once only after both choices",
+        "keeps the degraded stage during payment and charges once only after both choices",
+        "cleans up the retained stage on real departure without charging an incomplete payment"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-hand-group-index.test.js",
+      "tests": [
+        "preserves first-face identity, order, live cost/description splits and infusion main isolation"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-hand-keyword-interaction.test.js",
+      "tests": [
+        "loads the real first cold tooltip while a keyword hold stays outside aiming",
+        "holds the term explanation without aiming or submitting, then hides on release",
+        "holds the nested child explanation without aiming or submitting, then hides on release",
+        "ends a keyword press on pointercancel and permits the next real card drag",
+        "keeps pointerover and keyboard focus explanations readable without selecting a card",
+        "keeps dynamic button actions outside aiming",
+        "does not preselect infusion material on either keyword reading or ordinary pointerdown"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-pouch-entry.test.js",
+      "tests": [
+        "存囊法术不进入普通初手，不能绕过锦囊直接释放，锦囊仍可正常施放"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-preview-hand-context.test.js",
+      "tests": [
+        "single-hover raw-hand context at the command boundary excludes duplicate raw self references and missing UIDs in command availability",
+        "single-hover raw-hand context at the command boundary keeps transformed execution faces separate from raw hand payment identity",
+        "single-hover raw-hand context at the command boundary does not cache current energy, cost, capability, or mode with the raw hand",
+        "single-hover raw-hand context at the command boundary does not carry selected infusion fuel, waivers, or free-cast state in the hand context"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-query-cost-benchmark.test.js",
+      "tests": [
+        "reports same-input effective-face and pocket-cost lookup work"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-render-derivation.test.js",
+      "tests": [
+        "compares real mixed combat inputs without keeping derived rules across renders"
+      ],
+      "message": ""
+    },
+    {
+      "file": "battle-tools-lifecycle.test.js",
+      "tests": [
+        "battle tools template ownership returns from real discovery with one current set and preserves subsequent updates"
+      ],
+      "message": ""
+    },
+    {
+      "file": "builtin-card-execution.test.js",
+      "tests": [],
+      "message": "[sync-cards] 卡库源码沙箱求值失败: R is not defined"
+    },
+    {
+      "file": "card-description-text.test.js",
+      "tests": [
+        "卡牌展示文案与结算文本隔离 共同入口使用同一文案，源卡、费用、规则与卡库存储保持原字节"
+      ],
+      "message": ""
+    },
+    {
+      "file": "card-effect-semantics.test.js",
+      "tests": [
+        "已知效果条目的真实战斗语义 tt7-holyheal：按燃料价格 3（费用 2）回复 6 点生命"
+      ],
+      "message": ""
+    },
+    {
+      "file": "card-feedback-fixture.test.js",
+      "tests": [
+        "card-feedback-review.html keeps controls inside the modal boundary and outside replaceable content",
+        "infusion-review.html keeps controls inside the modal boundary and outside replaceable content"
+      ],
+      "message": ""
+    },
+    {
+      "file": "card-fixes-1010.test.js",
+      "tests": [],
+      "message": "[sync-cards] 卡库源码沙箱求值失败: R is not defined"
+    },
+    {
+      "file": "card-sync-slices.test.js",
+      "tests": [
+        "explicit card migration family ports reads replacement libraries lazily and leaves unrelated custom fields intact",
+        "explicit card migration family ports backfills rules without replacing explicit zero amounts and retries rejected persistence"
+      ],
+      "message": ""
+    },
+    {
+      "file": "event-scene-readability.test.js",
+      "tests": [
+        "非themed节点的长规则阅读边界 与事件同用22px正文和26px标题，结算嵌套提示也不回落到小字"
+      ],
+      "message": ""
+    },
+    {
+      "file": "framework-battle-engine-services.test.js",
+      "tests": [
+        "battle engine explicit composition uses replacement service ports through real factories without consulting browser facades"
+      ],
+      "message": ""
+    },
+    {
+      "file": "full-review-regressions-battle.test.js",
+      "tests": [
+        "09-30 深审 BC 组修复回归 BC-07 黑暗形态：发现只选 1 张（此前误把选择次数 +1 多获得一张）"
+      ],
+      "message": ""
+    },
+    {
+      "file": "hero-cards.test.js",
+      "tests": [
+        "直接释放家族实打 药水魔法：精神药水直接施放，从牌库抽出原有的两张 UID"
+      ],
+      "message": ""
+    },
+    {
+      "file": "infuse-free-play.test.js",
+      "tests": [
+        "灵能召唤获得的免注能牌：真实出牌结算 '纯注能治疗'：免材料触发效果，正常扣费且不计入材料消耗",
+        "灵能召唤获得的免注能牌：真实出牌结算 '可选注能加伤'：免材料触发效果，正常扣费且不计入材料消耗",
+        "灵能召唤获得的免注能牌：真实出牌结算 '注能重复施放'：免材料触发效果，正常扣费且不计入材料消耗"
+      ],
+      "message": ""
+    },
+    {
+      "file": "map-health-hud.test.js",
+      "tests": [
+        "地图生命展示 真实 HUD 刷新链更新数值、伤害、重载基线；不读取或写入存档"
+      ],
+      "message": ""
+    },
+    {
+      "file": "page-perf-shared.test.js",
+      "tests": [
+        "shared page performance budgets bounds dynamic card variants while retaining exact results and repeated-hit reuse"
+      ],
+      "message": ""
+    },
+    {
+      "file": "potion-tip-lifecycle.test.js",
+      "tests": [
+        "药水说明与确认生命周期 pointerup收起只读说明，后续终止事件不触碰旧面板",
+        "药水说明与确认生命周期 pointercancel收起只读说明，后续终止事件不触碰旧面板",
+        "药水说明与确认生命周期 mouseleave收起只读说明，后续终止事件不触碰旧面板",
+        "药水说明与确认生命周期 replace在未松手时清理说明，旧节点不能提交或重新打开",
+        "药水说明与确认生命周期 mode在未松手时清理说明，旧节点不能提交或重新打开",
+        "药水说明与确认生命周期 close在未松手时清理说明，旧节点不能提交或重新打开",
+        "药水说明与确认生命周期 new-stage在未松手时清理说明，旧节点不能提交或重新打开",
+        "药水说明与确认生命周期 100次普通按下/松开及药水栏替换不保留旧cancel回调",
+        "药水说明与确认生命周期 同UID数量更新保留当前入口，旧确认失效，新说明使用当前数量且不消费",
+        "药水说明与确认生命周期 被替换UID的已打开确认与入口都失效，当前入口仍可读取",
+        "药水说明与确认生命周期 同一药水栏重复渲染保留节点，悬停/移开仍可使用",
+        "药水说明与确认生命周期 确认多敌道具后进入公共选靶，取消保持原UID和槽位"
+      ],
+      "message": ""
+    },
+    {
+      "file": "r6-story.test.js",
+      "tests": [
+        "R6-a 最后一盏引路灯 事件接线先提交 Base，再消费节点；保存失败路径撤销 visited 并保留重试页"
+      ],
+      "message": ""
+    },
+    {
+      "file": "retired-scenes-publication.test.js",
+      "tests": [
+        "exact retired scene publication review fingerprints the scene constructors and DATA mapping, preserving all current scene variants"
+      ],
+      "message": ""
+    },
+    {
+      "file": "run-architecture.test.js",
+      "tests": [
+        "局内流程模块分层（批次 4） 壳只做装配：不再定义任何被拆走的流程入口"
+      ],
+      "message": ""
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "tests": [
+        "reviewed production-only asset omissions preserves 195 historical exclusions and adds exactly 91 source-retained images"
+      ],
+      "message": ""
+    },
+    {
+      "file": "runtime-trace-modal.test.js",
+      "tests": [
+        "explicit local diagnostic controls within the modal boundary does not count diagnostic subtree updates or relocation as gameplay mutations, but keeps mixed app changes"
+      ],
+      "message": ""
+    },
+    {
+      "file": "schema-op-coverage.test.js",
+      "tests": [],
+      "message": "[sync-cards] 卡库源码沙箱求值失败: R is not defined"
+    },
+    {
+      "file": "selftest-paths.test.js",
+      "tests": [
+        "ROOT-06 零依赖自测入口（域目录路径） node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT"
+      ],
+      "message": ""
+    },
+    {
+      "file": "skull-sword-effective-session.test.js",
+      "tests": [
+        "其他手牌支付保持原有初始攻击资格，同时选牌面显示有效不朽斩",
+        "BOSS牌库与统一消耗牌堆摘要按有效卡计数，打开查看不改UID"
+      ],
+      "message": ""
+    },
+    {
+      "file": "stealth-term.test.js",
+      "tests": [
+        "潜行卡面词条 潜匿与破隐说明都接入独立讲解，点击词条不触发卡牌"
+      ],
+      "message": ""
+    },
+    {
+      "file": "stellar-divination.test.js",
+      "tests": [
+        "type-targeted deck draw also releases a copy through the queue despite a full hand"
+      ],
+      "message": ""
+    },
+    {
+      "file": "structured-backupcell.test.js",
+      "tests": [
+        "后备能源的结构化打出合同 preserves legacy draw and refill order in normal mode when display text changes",
+        "后备能源的结构化打出合同 preserves legacy draw and refill order in boss mode when display text changes"
+      ],
+      "message": ""
+    },
+    {
+      "file": "sts2-agent-infusion-1021.test.js",
+      "tests": [
+        "Agent uses the current domain infusion candidates a selected card that becomes forbidden is removed before cancellation, without resource payment"
+      ],
+      "message": ""
+    },
+    {
+      "file": "sts2-structured-description.test.js",
+      "tests": [],
+      "message": "[sync-cards] 卡库源码沙箱求值失败: R is not defined"
+    },
+    {
+      "file": "sync-cards-from-live.test.js",
+      "tests": [
+        "sync-cards-from-live 源码有效卡库（六文件沙箱） 沙箱求值建出完整现役卡库，关键卡在位",
+        "sync-cards-from-live 源码有效卡库（六文件沙箱） 同步沙箱执行腐化之种修订，保留单体标记和死亡群体真伤规则",
+        "sync-cards-from-live 源码有效卡库（六文件沙箱） 每次从隔离空库执行生产迁移清单，包含末尾补种且结果稳定",
+        "sync-cards-from-live 源码有效卡库（六文件沙箱） diff 对齐口径：完全一致的输入零差异"
+      ],
+      "message": ""
+    }
+  ],
+  "superseded": "R未定义及extraction-record历史字段保留已由本轮后续定向结果覆盖；其他候选不可据此认定已修。"
+}

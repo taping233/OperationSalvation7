@@ -1,0 +1,101 @@
+{
+  "status": "generated",
+  "previewOnly": true,
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman, seated sideways on a parked dark blue black classic motorcycle beneath spring cherry blossoms, confident relaxed smile, small fang, casual spring skin illustration\n\nComposition-preserving image-to-image repaint of the supplied skin. Preserve close side-view framing, camera and figure scale, motorcycle facing left with front wheel cropped at left and rear wheel at lower-right.\n\nThe woman sits on the motorcycle seat at center-right, one knee raised over the fuel tank toward left with its black lace-up ankle boot clearly beside the tank, other leg descends toward bottom edge. Exactly two natural legs. Both hands remain in the original relaxed positions near her shirt and hips, not holding handlebars. High silver ponytail and blue bow flow behind toward right. Round low sunglasses with cyan eyes clearly visible above the lenses. Oversized cobalt-blue rolled-sleeve collared casual shirt, black shorts, bare legs, black ankle boots. Preserve motorcycle tank, round headlight at left, handlebars, round mirror and coherent engine frame. Pink blossom canopy at upper-left, modern park trees, gray paved walkway and simple distant buildings.\n\nBright clear spring daylight, warm skin and gentle cool tree shadows, blue sky, soft pink cherry blossoms, cool green trees, dark painted metal and restrained chrome glints, fabric matte blue, natural hands and coherent mechanical perspective.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "img2img",
+    "parameters": {
+      "params_version": 3,
+      "width": 1152,
+      "height": 896,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": false,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 2026102513,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra people, duplicate girl, extra legs, fused legs, missing leg, distorted motorcycle, extra wheels, floating boot, winter, snow, weapon, black dress, long skirt, goggles, ski goggles, eyes hidden by glasses, opaque glasses covering eyes, thick forehead-covering bangs",
+      "characterPrompts": [
+        {
+          "prompt": "1girl, adult Wu, silver-white long high ponytail, blue ribbon bow at ponytail root, black rose near her own left temple viewer-right, parted swept-aside front hair exposed forehead, cyan blue eyes, ordinary thin black round sunglasses low on nose, playful relaxed confident smile with one small fang, slender adult body natural thighs, cobalt blue oversized rolled-sleeve collared shirt black shorts bare legs black lace-up ankle boots",
+          "uc": "goggles, dress, sword, child, chibi, huge head",
+          "center": {
+            "x": 0.55,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, seated sideways on a parked dark blue black classic motorcycle beneath spring cherry blossoms, confident relaxed smile, small fang, casual spring skin illustration\n\nComposition-preserving image-to-image repaint of the supplied skin. Preserve close side-view framing, camera and figure scale, motorcycle facing left with front wheel cropped at left and rear wheel at lower-right.\n\nThe woman sits on the motorcycle seat at center-right, one knee raised over the fuel tank toward left with its black lace-up ankle boot clearly beside the tank, other leg descends toward bottom edge. Exactly two natural legs. Both hands remain in the original relaxed positions near her shirt and hips, not holding handlebars. High silver ponytail and blue bow flow behind toward right. Round low sunglasses with cyan eyes clearly visible above the lenses. Oversized cobalt-blue rolled-sleeve collared casual shirt, black shorts, bare legs, black ankle boots. Preserve motorcycle tank, round headlight at left, handlebars, round mirror and coherent engine frame. Pink blossom canopy at upper-left, modern park trees, gray paved walkway and simple distant buildings.\n\nBright clear spring daylight, warm skin and gentle cool tree shadows, blue sky, soft pink cherry blossoms, cool green trees, dark painted metal and restrained chrome glints, fabric matte blue, natural hands and coherent mechanical perspective.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "1girl, adult Wu, silver-white long high ponytail, blue ribbon bow at ponytail root, black rose near her own left temple viewer-right, parted swept-aside front hair exposed forehead, cyan blue eyes, ordinary thin black round sunglasses low on nose, playful relaxed confident smile with one small fang, slender adult body natural thighs, cobalt blue oversized rolled-sleeve collared shirt black shorts bare legs black lace-up ankle boots",
+              "centers": [
+                {
+                  "x": 0.55,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra people, duplicate girl, extra legs, fused legs, missing leg, distorted motorcycle, extra wheels, floating boot, winter, snow, weapon, black dress, long skirt, goggles, ski goggles, eyes hidden by glasses, opaque glasses covering eyes, thick forehead-covering bangs",
+          "char_captions": [
+            {
+              "char_caption": "goggles, dress, sword, child, chibi, huge head",
+              "centers": [
+                {
+                  "x": 0.55,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true,
+      "image": {
+        "omitted_base64": true,
+        "file": ".tmp\\nai\\wu-motorcycle-reset-20261025\\input.png",
+        "sha256": "9e8a2dea09ee6703fef52583fe2f6315f1ff258ceba72ab6a828306a9fd48762"
+      },
+      "strength": 0.48,
+      "noise": 0.02,
+      "extra_noise_seed": 2026102513
+    }
+  },
+  "source": "game\\assets\\portraits\\full\\wu-casual-v14.webp",
+  "sourceSha256": "c53156d2038291935fba357e7a04d9d31371e27be759662937deb0804db5ccb3",
+  "output": ".tmp\\nai\\wu-motorcycle-reset-20261025\\nai5-img2img.png",
+  "sizeReason": "1152x896 preserves approximately 13:10 source framing within existing free pixel cap",
+  "transport": "existing nai_gen/nai_guard with img2img payload adapter; shared client unchanged",
+  "seed": 2026102513,
+  "sha256": "688a1acaf8ddbf5518d9e2071208a6e289bef0436e7487ee08a00b2696623609"
+}

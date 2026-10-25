@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-23",
+  "sources": {
+    "core/battle.draw.domain.js": "45fc35f1227c3213f27865ed97758fc934f6600edb36985b3cd32febfcedf9b3",
+    "core/battle.resolution.domain.js": "f98af8f3b3f4afe7391f5b44e9347453ff70b1619f24a72cdb167386dbae9a8b",
+    "core/combat.factory.js": "d78cf107ccb180de54d81cc214ed8517b3c42a2e2c6ba11687e6dbd97aa8cf70",
+    "effects/effect-steps.m2.domain.js": "5cf7047975ea50351f1f9716b64699a4b638746ddcb9874420c6939e7f772b7b",
+    "core/battle.foe-lifecycle.domain.js": "6eaaf393f67cf784181f6cd423d711522dfe1948d4d9c01080bb424e9b756b5a",
+    "core/battle.enemy-phase.domain.js": "d60696d0c1e007d74af237e6095ba943ec71792b13419490e8f771a88d19d679"
+  },
+  "results": [
+    {
+      "id": "B-NEW-01",
+      "description": "定向抽牌绕过抽到触发",
+      "actual": {
+        "count": 1,
+        "triggers": 0,
+        "hand": [
+          "drawn"
+        ],
+        "discard": []
+      },
+      "expected": {
+        "count": 1,
+        "triggers": 1,
+        "hand": [],
+        "discard": [
+          "drawn"
+        ]
+      }
+    },
+    {
+      "id": "B-NEW-01-NATIVE",
+      "description": "实际天启剑被武装同型过滤抽到时漏额外抽牌",
+      "actual": {
+        "hand": [
+          "sword"
+        ],
+        "drawPile": [
+          "filler"
+        ],
+        "discard": []
+      },
+      "expected": {
+        "hand": [
+          "filler"
+        ],
+        "drawPile": [],
+        "discard": [
+          "sword"
+        ]
+      }
+    },
+    {
+      "id": "B-NEW-02",
+      "description": "随机伤害在同段演出与命中两次选靶",
+      "actual": {
+        "windup": [
+          "a"
+        ],
+        "damaged": [
+          "b"
+        ],
+        "rolls": 2
+      },
+      "expected": {
+        "windup": [
+          "a"
+        ],
+        "damaged": [
+          "a"
+        ],
+        "rolls": 1
+      }
+    },
+    {
+      "id": "B-NEW-03",
+      "description": "已消耗闪避的过期记录扣除后加闪避",
+      "actual": {
+        "dodge": 0,
+        "timed": [
+          {
+            "key": "dodge",
+            "amount": 1,
+            "turns": 1
+          }
+        ]
+      },
+      "expected": {
+        "dodge": 1,
+        "remainingTurns": 1
+      }
+    },
+    {
+      "id": "B-NEW-04",
+      "description": "复活形态继续归还旧形态被偷攻击",
+      "actual": {
+        "turn": 2,
+        "atk": 15,
+        "revived": true
+      },
+      "expected": {
+        "turn": 2,
+        "atk": 8,
+        "revived": true
+      }
+    },
+    {
+      "id": "B-NEW-05",
+      "description": "多次偷取的归还日期互相覆盖",
+      "actual": {
+        "turn": 2,
+        "foeAttack": 6,
+        "playerAttackBonus": 2
+      },
+      "expected": {
+        "turn": 2,
+        "foeAttack": 8,
+        "playerAttackBonus": 2
+      }
+    },
+    {
+      "id": "B-CONTROL-06",
+      "description": "排除候选：同步首脑击杀可以获得伤害段奖励",
+      "actual": {
+        "battleActive": false,
+        "bossDead": true,
+        "coins": 2,
+        "error": null
+      },
+      "expected": {
+        "coins": 2
+      }
+    },
+    {
+      "id": "B-KNOWN-01",
+      "description": "既有：铸甲消耗装备漏掉onConsume",
+      "actual": {
+        "energy": 8,
+        "armor": 10,
+        "consumed": [
+          "equip"
+        ]
+      },
+      "expected": {
+        "energy": 10,
+        "armor": 10
+      }
+    },
+    {
+      "id": "B-KNOWN-02",
+      "description": "既有：execute按尝试计击杀，免疫者占用count",
+      "actual": {
+        "dead": [
+          false,
+          false
+        ],
+        "claimedKill": true
+      },
+      "expected": {
+        "dead": [
+          false,
+          true
+        ],
+        "claimedKill": true
+      }
+    }
+  ]
+}

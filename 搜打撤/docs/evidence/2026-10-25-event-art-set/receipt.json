@@ -1,0 +1,761 @@
+{
+  "status": "complete-uncommitted",
+  "pipeline": "NAI4.5 Full + one built-in refinement; two accepted previews reused",
+  "checks": "Not run: user requested no validation/tests/browser/build",
+  "items": [
+    {
+      "event_id": "tt6-demondeal",
+      "name": "受困运输队",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-demondeal\\builtin.png",
+      "source_sha256": "27964c86869d424e31f599d3dbb974ccf4438cd709c9915e4973ba30a372b113",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-demondeal-full.webp",
+          "sha256": "17d09b78747805a1197e0e7b79520999c9079b87bcee8ccbe09cb8e7b27f6c5b"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-demondeal-thumb.webp",
+          "sha256": "7e9960ad6f4bd1d7cf0923514dd753de32692660b9fb215e2f39f9ed26d701db"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-demondeal.webp",
+          "size": [
+            1660,
+            948
+          ],
+          "bytes": 122478,
+          "sha256": "e4405f040be571c225d5f98386b225643ebf1e12995f27c50d1a7485ab64c18b"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-demondeal.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 12664,
+          "sha256": "545cd5fb9e92a541e3918521d6a040fd6c12ea53cd003eb2cf62079c82e76e75"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-demondeal\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-demondeal\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-bandits",
+      "name": "武装截查",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-bandits\\builtin.png",
+      "source_sha256": "4ab25e5faf100764f743b3d93722fb9d7e61f0bd8ffdbf4da8aaa408f00f081d",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-bandits-anime-v2-full.webp",
+          "sha256": "cab87e94b210462de724cd372aad53e1e8faefa27db5a1d365c64ccee5471844"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-bandits-anime-v2-thumb.webp",
+          "sha256": "27821a77c3d446668e031a79853e222a8839a953b427f8f68c0729abfccbacbc"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-bandits-anime-v2.webp",
+          "size": [
+            1660,
+            948
+          ],
+          "bytes": 154130,
+          "sha256": "a7e7edb9958f70ab3f1b19c9ebec346484c8868bb2bdcba539c18d1f88e9df90"
+        },
+        {
+          "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 18162,
+          "sha256": "5ce1b0cc8af595d77bb0febf14187fd1237dcd8052d7278cc678dd82fad38619"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-bandits\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-bandits\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-mystery",
+      "name": "失联配给柜",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-mystery\\builtin.png",
+      "source_sha256": "c9226f1d11f9e464594dc94a9c34dda81ef7ee24116500d801203b5bf7051b33",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-mystery-full.webp",
+          "sha256": "f7ddd7b58ad238d24d716cee4a60a93c504c95c8ca7b2c0b73ec1ee7d6c70c2c"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-mystery-thumb.webp",
+          "sha256": "1cd86ea38ad534502341ff9d575e1be7bddb6c03e5ae9e1f321aa9d4f42bec40"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-mystery.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 148652,
+          "sha256": "5de72ea13dcbd012e3cf92ca083bd2320ca9626f8ce34c21648d68d0ea97b96e"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-mystery.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 14454,
+          "sha256": "53f1f2c708e729d98e49e2b4676722c736275cc30a3d34e2157305bcf1f0a77b"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-mystery\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-mystery\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-goldmine",
+      "name": "塌陷地下库",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-goldmine\\builtin.png",
+      "source_sha256": "025ce523c1fe7e6efae8fccdaada57aa34d7ac1c54bc9f3ff7e34d52dada73b8",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-goldmine-1013-v2-full.webp",
+          "sha256": "63dd597b66143e46d11ec6f00c62d33ec10d468e8db45dd04fb6c63d9da8ad62"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-goldmine-1013-v2.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 238132,
+          "sha256": "c7f856070df3157b0cf37ae289e716599f30d61f2d515718b291e0d4cf139a3e"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-goldmine-1013-v2.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 18358,
+          "sha256": "e9055c2566e22b63d9632985e5cf6dca400ddf795b3e8e87a1c9afd042d1df6e"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-goldmine\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-goldmine\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-relief",
+      "name": "隔离线急救",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-relief\\builtin.png",
+      "source_sha256": "a32bb332932847bdecdec2206ae38167401d4541c1a2440105edc7985c73609f",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-relief-full.webp",
+          "sha256": "015bb2ee85e8d4cfebd4f40d845e9686d1ae62d0dc9d83dc5fda371583866d33"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-relief-thumb.webp",
+          "sha256": "7c6f4f378decb9e36eea81c7176a2c623913c974324de5c510cd266806af2566"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-relief.webp",
+          "size": [
+            1660,
+            948
+          ],
+          "bytes": 161752,
+          "sha256": "52cf46cfe64c1488500983dd55ec1d5c3525f75bbfb93079666e6813e456c6a3"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-relief.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 16114,
+          "sha256": "5d048774abaa4e9f9418b36f04086c15c32c2e1e101babbbf5bb83c13fc09d76"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-relief\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-relief\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-airdrop",
+      "name": "封锁区投送",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-airdrop\\builtin.png",
+      "source_sha256": "b63050a665fc0d9f0d318da1b80bbce982e123b13031393404548e86a8c46f71",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-airdrop-full.webp",
+          "sha256": "45696509c54403824c47c326a1ee235f79a812a5f1243c9a42490aa44ae588ae"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-airdrop-thumb.webp",
+          "sha256": "773b909967d40d6d7050762850a74ea609b30a7e3d7f5f87760dbbe10ac9563a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-airdrop.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 137914,
+          "sha256": "323e2127a446886f373ae3c895a99a262ab1602dd00a4922fa242921035c81a7"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-airdrop.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 16164,
+          "sha256": "961e633f9abec92a3fa76269186da964abf4510506ac47e0834b04eb2005f3a1"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-airdrop\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-airdrop\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-chestdraw",
+      "name": "封存储备库",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-chestdraw\\builtin.png",
+      "source_sha256": "47aab2e811309717c075e0191d910fb43cd517062b3f587b8060ee257e29e8e3",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-chestdraw-full.webp",
+          "sha256": "08e1f8dfa0ebaeeb5a852dc05fce660c27585161872c4dbee77be608f473dde4"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-chestdraw-thumb.webp",
+          "sha256": "d5852d60fa19e6d6bf0f15388186bee21000186ea4dce459fb27a2b97cb08f52"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-chestdraw.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 104882,
+          "sha256": "7d3204a3aba6cc81b76db29cb8422dd77fac0368f549d43b98f94527b382515b"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 13778,
+          "sha256": "ad2b88a5cfd446865ef86eb336806a603b25747eecf80de0ec280248d3138d35"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-chestdraw\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-chestdraw\\builtin-request.json"
+    },
+    {
+      "event_id": "tt6-systemsupply",
+      "name": "撤离登记台",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\tt6-systemsupply\\builtin.png",
+      "source_sha256": "69b73b9010e661c499ba0c63dc09aa165342840845f5442f7e378ec1a891ed68",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-systemsupply-full.webp",
+          "sha256": "b1e3e4c01f75b5d30e87bc9660cbaa33e9f43dc3470d3970e11325454f092c4f"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-systemsupply-thumb.webp",
+          "sha256": "77c33dfdb8dce8e8db5cb4382248d710244a26bef57a6bc7fda8602d1d895e27"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-systemsupply.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 150596,
+          "sha256": "bac1d4425809467f9e5a9930edf658384ae5b83eff273511a441045cad641059"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 13462,
+          "sha256": "531d353f8bd69623321ae0848d0eb37f652562e15d2c0e1b1a5f81922d78fd6a"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\tt6-systemsupply\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\tt6-systemsupply\\builtin-request.json"
+    },
+    {
+      "event_id": "cmtn7qttxqo4",
+      "name": "战地整备",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\cmtn7qttxqo4\\builtin.png",
+      "source_sha256": "5986c2fab7d710cca5420014f1ecd2b3abce7bb1705cd7a86874b0dd56eca8f6",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-cmtn7qttxqo4-full.webp",
+          "sha256": "d0b671aff6b533deceb518df56ba100ff84efac923fdea1ab7d69a525cc57cff"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-cmtn7qttxqo4-thumb.webp",
+          "sha256": "015ba5473a75b4ebe4f0862d54938d59dfa2fc08e4d8462031ae4b76a642f2be"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-cmtn7qttxqo4.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 168704,
+          "sha256": "a3618cfd8dc5c405abe719fa072660c2925ffce9ae145f705b27741bd5ed8152"
+        },
+        {
+          "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 17470,
+          "sha256": "2bb708e7d2c89e60b8a8a714108920bea1ce0e1a4d05cd3bd7727864f0a9665a"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\cmtn7qttxqo4\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\cmtn7qttxqo4\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-vital",
+      "name": "封存针剂",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-vital\\builtin.png",
+      "source_sha256": "e2e98d3c178baddc6f749c3fb9dbc23059a2796255678a97dfde2b07e9760cf1",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-vital-full.webp",
+          "sha256": "fbdc1bcb61869311e4335788f76b080f51d2c98a1f49fc9f97f917d767f69a71"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-vital-thumb.webp",
+          "sha256": "dfdd8a97a4aade1e56a0d150f5eda2f9dbfaddff957307b4b364ad931542daa3"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-vital.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 96816,
+          "sha256": "63b267d2ef13be04fc62b12e4bad0a76c77983d3a07569f71c0aa2b6ff8bf4ed"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-vital.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 11190,
+          "sha256": "492e73322a2d9f23198deb4dc0ae1291e95c4f720acfa5c363098cb54c66cef7"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-vital\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-vital\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-pearlbox",
+      "name": "撤离遗存",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-pearlbox\\builtin.png",
+      "source_sha256": "13f53b109ca8a7312245da077a993a214bc6693a11e8a44f9b6d234728c90cbe",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-pearlbox-full.webp",
+          "sha256": "9e8a641d84eac0d452413b75794b263f6c8f136510d342fcc478ad2e8603f937"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-pearlbox-thumb.webp",
+          "sha256": "9ae765e15000c664011ce2a5d7b8c0c3e90b6d311f228657787a613ad80e597c"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-pearlbox.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 142490,
+          "sha256": "a629a5ec1583811e254ccb4bd467ec8263d40319f0524a9193b049d22d2d94dd"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 15140,
+          "sha256": "97c4a1fd47c5b07695795b901068193c1808299456346591d486b372a7ca6329"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-pearlbox\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-pearlbox\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-fireballs",
+      "name": "封装火种",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-fireballs\\builtin.png",
+      "source_sha256": "fc382ca05a0299fff9fad0b6dafd38a3f6db6d6ec56fdefc0ad1a46a789639ea",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-fireballs-full.webp",
+          "sha256": "3994e66373d42bf13555b92a82bb82692e58100569da70d3bc69c8e8e36391f7"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-fireballs-thumb.webp",
+          "sha256": "f0ec35c7bbe1e395cfc26caa0890b1923d7d13dbdfc89deec83e7643eb1ac0ef"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-fireballs.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 136950,
+          "sha256": "c6e6f7f1e21d653af399829ee0cc04bea2e96467981cb04875718a32c1cf310b"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-fireballs.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 11304,
+          "sha256": "efc5e2a8f4aaa2de615c7ab4546af8e80b5081ced2b8b3902e5ac14d25c0ce95"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-fireballs\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-fireballs\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-classchest",
+      "name": "无署名封条",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-classchest\\builtin.png",
+      "source_sha256": "03fd48a8fb7d62860c8ab06d34d60c3360365cace067ab709e6858975d88d6ea",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-classchest-full.webp",
+          "sha256": "cccd3da544d73d2a10744fb57330e13fd0770e300c292ab6d0308ed1302f995e"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-classchest-thumb.webp",
+          "sha256": "f323edcb1d42ff2297a1a2e322edb9e8c23b50387ab916d233de4ad4f8124f1a"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-classchest.webp",
+          "size": [
+            1660,
+            948
+          ],
+          "bytes": 124022,
+          "sha256": "5731b9d9ea3731714e66552d8153e54a24e7d9641fd117c2f713855b03fbf267"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-classchest.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 12442,
+          "sha256": "716f241fd788a94ba082a6dfa3b61ed346724144924a69012cd6a5fd77774d5e"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-classchest\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-classchest\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-recode",
+      "name": "异常改装台",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-recode\\builtin.png",
+      "source_sha256": "d2612852fb4ba007ee56d92b90a94ff20eb5159ba74fd05812c82befb2fbbb94",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-recode-full.webp",
+          "sha256": "67858a535e18eef2470756487c38c86073f50ba802731803805b4caa4fd02cf5"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-recode-thumb.webp",
+          "sha256": "4d1924cf72ed69f1f80ea55dea005e5fadbeb8d776af29a228b1bc874ba39b01"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-recode.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 119816,
+          "sha256": "bc1a87d48cfbccc9ad6717b44cef5817f73b7025bf4dd3e1f9692bf8d8bc98c1"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-recode.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 14490,
+          "sha256": "f549db7d8ea61adc78ba569a8509d7d0562129818c6825483bf7e2ec0afefeeb"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-recode\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-recode\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-arrows",
+      "name": "撤防射击位",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-arrows\\builtin.png",
+      "source_sha256": "559ee48c3c1ed2a5d6ec336bc1f4b232816554e593efaa57db6957dd85dc1222",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-arrows-full.webp",
+          "sha256": "914c8b626622dca32cdd4f13e91f3f031cbb2d17339959afe7a28ee86b2c7d28"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-arrows-thumb.webp",
+          "sha256": "34fd3169708695110489e5681714684061398fc0a934149b5298eb0a72028363"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-arrows.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 139546,
+          "sha256": "83f0bc7e0b1014ea0567e4994e29d6cc45a58af1fdb62e0dc177a042595e9fb6"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-arrows.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 12164,
+          "sha256": "8548d54e4eae74e18cac30b8bf81322bad0abb5e8565311ee50e0fdfe4ccebeb"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-arrows\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-arrows\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-gamble",
+      "name": "暗巷赌约",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-gamble\\builtin.png",
+      "source_sha256": "f0b23b30ddf06fe702ae2470479e1e937771c77bf3d918cfe39352cb7ceaf4b1",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-gamble-full.webp",
+          "sha256": "5b6eceee56ed9e726b6ae16a2801921350c774110671c00941e137d087b9283f"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-gamble-thumb.webp",
+          "sha256": "74d1c0669a9bcf2cf8739af87fbf57839e749accc27a58369943f17d3ed1d0d9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-gamble.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 147714,
+          "sha256": "d4105df1f4bf897c94d3b7d5d8910232e2b44fd3f009c073bb11c82664d52df9"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-gamble.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 12738,
+          "sha256": "90cba164fb18dc927074711ea6b2c239158bc20b7f53a08bbf16731870933c4a"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-gamble\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-gamble\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-quartermaster",
+      "name": "转运军需",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\ev19-quartermaster\\builtin.png",
+      "source_sha256": "e14f6492ed031101df395ba410f6c3c68441eef123f47a133022b95909a2fc0b",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-quartermaster-full.webp",
+          "sha256": "c9bc1f839033a81c66afec43daa9bb05dda8c5ff6dcc0286e3a4c82d31f3a787"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-quartermaster-thumb.webp",
+          "sha256": "f44ec2f5717918967bbda5f3f16180c1d5fb159ee5e42b3b514117900decc4ac"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-quartermaster.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 143094,
+          "sha256": "b091918413b125ad4ad9d671f9a8b956ad967c18fc840a0a8864a932dcd5c4ce"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 15546,
+          "sha256": "30e016975243654589450c563103530f40625f11143e0d147b45efd74efe1bfa"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\ev19-quartermaster\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\ev19-quartermaster\\builtin-request.json"
+    },
+    {
+      "event_id": "story-last-lamp",
+      "name": "北门灯标",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-set-1025\\story-last-lamp\\builtin.png",
+      "source_sha256": "57ed8a442a6272705514d95f45ae5731aa0d81079e83320ea006d4b38e78b41e",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-last-lamp-1013-v1-full.webp",
+          "sha256": "d31d167fc46e6e48eaa73626ca63893eb7d168942845dd0b3e8759854a2ab630"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-last-lamp-1013-v1.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 145094,
+          "sha256": "690c1a393de21d4d54e31e4b585185c70c2edf30974105bfceb2727f4e513351"
+        },
+        {
+          "path": "thumbs/scenes/event-last-lamp-1013-v1.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 9524,
+          "sha256": "4893d306105caa3c0c3cd63f8d12a844edce787d082b6fa79a703ba959de79d1"
+        }
+      ],
+      "nai_request": ".tmp\\nai\\event-set-1025\\story-last-lamp\\request.json",
+      "builtin_request": ".tmp\\nai\\event-set-1025\\story-last-lamp\\builtin-request.json"
+    },
+    {
+      "event_id": "ev19-potions",
+      "name": "应急药品站",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-potions-composition-1025\\builtin-preview.png",
+      "source_sha256": "671b0c31c402526d7e5bcb659fbc879633cb9f874ebcd8328f325f72ec3b11fb",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-potions-full.webp",
+          "sha256": "dae236dec42588dd3683d0a917cc76e044d886253ff37490bd86bec523118f2c"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-ev19-potions-thumb.webp",
+          "sha256": "60d5640e81b707320c1a2386237d7835a1842fa7a0ae494eddf95b1733174463"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-ev19-potions.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 149028,
+          "sha256": "1ce1ce8d5754bb7771734b92ce4335d77f11559a32cf4aed5cb30d57dfdc369b"
+        },
+        {
+          "path": "thumbs/scenes/event-ev19-potions.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 16332,
+          "sha256": "256e92d0361dfac2ee205e3b9a68f880c04eca7d6693faf87df1a050d31afa68"
+        }
+      ],
+      "nai_request": "accepted preview; original request retained beside source",
+      "builtin_request": "accepted preview; original prompt retained beside source"
+    },
+    {
+      "event_id": "tt6-goldhammer",
+      "name": "中断的接应",
+      "generated_source": "D:\\素材\\代号柒\\.tmp\\nai\\event-handoff-preview-1025\\builtin-preview.png",
+      "source_sha256": "9814e6978e45327965909b6f3def91163872bcb9b8d75aa58f9c5a45d32212d6",
+      "backups": [
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-goldhammer-full.webp",
+          "sha256": "80b980d111f6c3dae8f8355c3dbbbe722839cba76d049b6bf07b2f4f75f16ecc"
+        },
+        {
+          "path": ".tmp\\nai\\event-set-1025\\before-runtime\\event-tt6-goldhammer-thumb.webp",
+          "sha256": "e96e8e8185600d3f5883c286827e1ae28ea8c672bf2eb2107bf0bf8e5686bd61"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "scenes/event-tt6-goldhammer.webp",
+          "size": [
+            1659,
+            948
+          ],
+          "bytes": 133546,
+          "sha256": "4c105cbe5243a80e0c2c45625739b5375c72a58b2c9162630271ebee5ca45f3d"
+        },
+        {
+          "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+          "size": [
+            448,
+            256
+          ],
+          "bytes": 15796,
+          "sha256": "0b25460f0f300b16a783ec7f51903eb4a940431a874086a2c14f998621f7bd12"
+        }
+      ],
+      "nai_request": "accepted preview; original request retained beside source",
+      "builtin_request": "accepted preview; original prompt retained beside source"
+    }
+  ],
+  "installed": 20,
+  "runtime_validation": "not-run"
+}

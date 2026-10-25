@@ -1,0 +1,39 @@
+{
+  "status": "installed",
+  "channels": [
+    "NAI V5 Full",
+    "built-in image_gen"
+  ],
+  "asset": "game\\assets\\reconstruction\\wallpaper-wu-bass-1020.webp",
+  "size": [
+    1672,
+    941
+  ],
+  "bytes": 484158,
+  "sha256": "477f6088a9106517d8a90ea1f1599e59b2442e2c3d56f7f489b5ec74e0d548a8",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e5a-25e4-7923-9d72-cca7f40d01d0\\exec-11748e63-17dd-464d-a1a0-2ec8604c4d4f.png",
+  "source_sha256": "607841ad9dae5d3851eb4414eb240c6acbfc391db2599e22e6c4fa3ef3549b0d",
+  "before": ".tmp\\nai\\wu-bass-reset-1024\\before-wallpaper.webp",
+  "before_sha256": "a01ec7e5a298f173decbc72b9b83999dda1ba72012f265f949803603de55d9b3",
+  "draft": ".tmp\\nai\\wu-bass-reset-1024\\nai5-draft.png",
+  "nai_seed": 1069096999,
+  "builtin_final": ".tmp\\nai\\wu-bass-reset-1024\\builtin-final.png",
+  "prompt_file": "builtin-prompt.txt",
+  "references": [
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-reset-1024\\nai5-draft.png",
+      "role": "NAI5 color, identity and painting draft"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-reset-1024\\before-wallpaper.webp",
+      "role": "lying composition and home scene"
+    },
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "role": "current identity only; no sword or dress inheritance"
+    }
+  ],
+  "review": "目视保留倒躺夜景、家居服和露额头身份；琴头完整、四个弦钮，双手按弦与拨弦姿势已重绘；未作乐器专业验收",
+  "verification": "按老板要求不测试、不打开游戏实页；只执行图片转换、尺寸及哈希登记",
+  "large_binary_policy": "原始PNG保存在根.tmp，不进Git；获取方式为本次NAI请求与内置ImageGen，路径/哈希见本记录及nai-request.json"
+}

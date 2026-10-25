@@ -1,0 +1,1151 @@
+{
+  "reviewedAt": "2026-10-23T15:36:19.674107+00:00",
+  "kind": "read-only source and design-plan review",
+  "snapshotComparison": [
+    {
+      "id": "R01",
+      "file": "P3Makoto.Scenes/StatusButton.cs",
+      "originalSha256": "431023d07fd61986cbdfb4abad83776cc6b4d86b64b9e5bc50b57ee2c7418a84",
+      "currentSha256": "431023d07fd61986cbdfb4abad83776cc6b4d86b64b9e5bc50b57ee2c7418a84",
+      "same": true
+    },
+    {
+      "id": "R02",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "originalSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "currentSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "same": true
+    },
+    {
+      "id": "R03",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "originalSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "currentSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "same": true
+    },
+    {
+      "id": "R04",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "originalSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "currentSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "same": true
+    },
+    {
+      "id": "R05",
+      "file": "P3Makoto.Scenes/TipList.cs",
+      "originalSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "currentSha256": "0f062665fd88a2f23df96720974ca36749b7ba32da4520a3a55ee80c621f08b8",
+      "same": true
+    },
+    {
+      "id": "R06",
+      "file": "P3Makoto.Vfx/PileFx.cs",
+      "originalSha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "currentSha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "same": true
+    },
+    {
+      "id": "R07",
+      "file": "P3Makoto.Vfx/PileFx.cs",
+      "originalSha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "currentSha256": "f3a0e5f27a7eadba51a4f551569e0a63e8657ba360e715fedd8e7067c81312f1",
+      "same": true
+    },
+    {
+      "id": "R08",
+      "file": "P3Makoto.Scenes/SettingsSkin.cs",
+      "originalSha256": "237e20566bdf286e72b38f9749aacbf41ade7564477e65eb877660259bca6d95",
+      "currentSha256": "237e20566bdf286e72b38f9749aacbf41ade7564477e65eb877660259bca6d95",
+      "same": true
+    },
+    {
+      "id": "R09",
+      "file": "P3MusicBox/MusicBox.cs",
+      "originalSha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "currentSha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "same": true
+    },
+    {
+      "id": "R10",
+      "file": "P3MusicBox/MusicBox.cs",
+      "originalSha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "currentSha256": "1bcd4fce443487c6563aae41e2f227af3b5c13883e7b9dc095393fad3ae94ceb",
+      "same": true
+    },
+    {
+      "id": "R11",
+      "file": "P3MusicBox/IconDrag.cs",
+      "originalSha256": "90ac95ebdfb1d15022cb138723293b7faf0ee0111d45f64c43f5d875271e21c1",
+      "currentSha256": "90ac95ebdfb1d15022cb138723293b7faf0ee0111d45f64c43f5d875271e21c1",
+      "same": true
+    },
+    {
+      "id": "R12",
+      "file": "P3Makoto.Vfx/Popups.cs",
+      "originalSha256": "907fa06e45a152b882036ea617befe4699f7ac819d0e4e7c1f4a22aa717464fa",
+      "currentSha256": "907fa06e45a152b882036ea617befe4699f7ac819d0e4e7c1f4a22aa717464fa",
+      "same": true
+    },
+    {
+      "id": "R13",
+      "file": "P3Makoto.Vfx/Preload.cs",
+      "originalSha256": "74f5925213640d75ee297fedcf9d9f5983d5d230b6e197b9ccbcd06c509a8deb",
+      "currentSha256": "74f5925213640d75ee297fedcf9d9f5983d5d230b6e197b9ccbcd06c509a8deb",
+      "same": true
+    },
+    {
+      "id": "R14",
+      "file": "P3Makoto.Vfx/IdleWarmup.cs",
+      "originalSha256": "be75d0ecee44e68bd33a46f5c1eb2b4bbc308c38b075212ffef7c8db03dac48a",
+      "currentSha256": "be75d0ecee44e68bd33a46f5c1eb2b4bbc308c38b075212ffef7c8db03dac48a",
+      "same": true
+    },
+    {
+      "id": "P01",
+      "file": "game/src/ui/target-motion.js",
+      "originalSha256": "24a15e91f35328eeb78282df18f91f92d338fa97d336461af10878c9863ba095",
+      "currentSha256": "24a15e91f35328eeb78282df18f91f92d338fa97d336461af10878c9863ba095",
+      "same": true
+    },
+    {
+      "id": "P02",
+      "file": "game/src/ui/selection-state-motion.js",
+      "originalSha256": "93b676ae16744f11cd92d763c80fe44fe8b1e6a0b6e627cdaa9b8dc279f97c5d",
+      "currentSha256": "93b676ae16744f11cd92d763c80fe44fe8b1e6a0b6e627cdaa9b8dc279f97c5d",
+      "same": true
+    },
+    {
+      "id": "P03",
+      "file": "game/src/ui/card-state-motion.js",
+      "originalSha256": "f5f18549b89ed68fefd75b2363a8b804e87d75ee9ad684d108734e42a1b2e499",
+      "currentSha256": "f5f18549b89ed68fefd75b2363a8b804e87d75ee9ad684d108734e42a1b2e499",
+      "same": true
+    },
+    {
+      "id": "P04",
+      "file": "game/css/settings-navigation.css",
+      "originalSha256": "f9bcdf65b0771ff103462864892cc4f9f2fd4e37e45ae23856eaeeae75cfc1bf",
+      "currentSha256": "68943d0e4a3f8465f749055fad40d01d997de41a7a8195fb57e79472a92afb53",
+      "same": false
+    },
+    {
+      "id": "P05",
+      "file": "game/src/ui/discovery-selection.js",
+      "originalSha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0",
+      "currentSha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0",
+      "same": true
+    },
+    {
+      "id": "P06",
+      "file": "game/css/discovery-selection.css",
+      "originalSha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523",
+      "currentSha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523",
+      "same": true
+    },
+    {
+      "id": "P07",
+      "file": "game/src/battle/view/battle.aim.js",
+      "originalSha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087",
+      "currentSha256": "d58df8312df233a28e6febce010a132adb79e1d0a09eda8139a3cbaa64ee8e8b",
+      "same": false
+    },
+    {
+      "id": "P08",
+      "file": "game/src/battle/view/battle.hand-hit.js",
+      "originalSha256": "e0977072ba0d53329187c9ffffe15c82006082d7d8f1fadeb0976dc02ffe2991",
+      "currentSha256": "e0977072ba0d53329187c9ffffe15c82006082d7d8f1fadeb0976dc02ffe2991",
+      "same": true
+    },
+    {
+      "id": "P09",
+      "file": "game/src/battle/view/battle.layers.js",
+      "originalSha256": "ab4708626ffadb1f51d12407a7a15dc4bae393f451943fd6e0a79517f9b5ffdf",
+      "currentSha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157",
+      "same": false
+    },
+    {
+      "id": "P10",
+      "file": "game/css/battle-stage.css",
+      "originalSha256": "8e5db7debd678a9aa161586a369922da40744ac0d364661b05410e873ff59894",
+      "currentSha256": "c0d2aa6aa74b7d0a62ca83e8e2adbae94b41b55bb138253add89e0443a4161df",
+      "same": false
+    },
+    {
+      "id": "P11",
+      "file": "game/css/card-layout-selected.css",
+      "originalSha256": "034d32e1d5ee0c3b0318c3241cf2aedbc17abb4e9b2803c9ed2efbef1d4abf09",
+      "currentSha256": "6e862d463e31292e1fff586f5ac5f50d13a344683ab38452bafe7d79c1835cef",
+      "same": false
+    },
+    {
+      "id": "P12",
+      "file": "game/src/ui/term-tips.js",
+      "originalSha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2",
+      "currentSha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2",
+      "same": true
+    },
+    {
+      "id": "P13",
+      "file": "game/src/ui/term-tips.runtime.js",
+      "originalSha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21",
+      "currentSha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21",
+      "same": true
+    },
+    {
+      "id": "P14",
+      "file": "game/src/ui/term-tip-policy.js",
+      "originalSha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3",
+      "currentSha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3",
+      "same": true
+    },
+    {
+      "id": "P15",
+      "file": "game/src/battle/view/battle.pile-view.js",
+      "originalSha256": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7",
+      "currentSha256": "ba210a433a4a6c578f7be65524c50a506b3b2ba429308b3bfe6ec338fd9b7ed7",
+      "same": true
+    },
+    {
+      "id": "P16",
+      "file": "game/css/battle-pile-view.css",
+      "originalSha256": "b89677dc79e74fce243a204d67ab416b69aebd595d4367795e694b1b9e23dbcd",
+      "currentSha256": "b89677dc79e74fce243a204d67ab416b69aebd595d4367795e694b1b9e23dbcd",
+      "same": true
+    },
+    {
+      "id": "P17",
+      "file": "game/src/ui/card-zoom-controller.js",
+      "originalSha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185",
+      "currentSha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185",
+      "same": true
+    },
+    {
+      "id": "P18",
+      "file": "game/src/ui/reward-interaction.js",
+      "originalSha256": "b12792d8326a43d0ea6176852f8d39b985a5b6a5d95d7f07f8c385b37205071a",
+      "currentSha256": "b12792d8326a43d0ea6176852f8d39b985a5b6a5d95d7f07f8c385b37205071a",
+      "same": true
+    },
+    {
+      "id": "P19",
+      "file": "game/src/ui/reward-acquisition-motion.js",
+      "originalSha256": "df06881c5f68c0a2ab02632e51912fb63f143b175def55a837701a0e1f634a0b",
+      "currentSha256": "df06881c5f68c0a2ab02632e51912fb63f143b175def55a837701a0e1f634a0b",
+      "same": true
+    },
+    {
+      "id": "P20",
+      "file": "game/src/ui/reward-card-feedback.js",
+      "originalSha256": "4645685cd23efb79edc46c3939426d5b30b47601d1ec22b663bccab14e488bc4",
+      "currentSha256": "4645685cd23efb79edc46c3939426d5b30b47601d1ec22b663bccab14e488bc4",
+      "same": true
+    },
+    {
+      "id": "P21",
+      "file": "game/src/ui/motion-presets.js",
+      "originalSha256": "0ce68b2d607c292e5393747198dca4622473594284a4e170302893a60293367e",
+      "currentSha256": "0ce68b2d607c292e5393747198dca4622473594284a4e170302893a60293367e",
+      "same": true
+    },
+    {
+      "id": "P22",
+      "file": "game/src/ui/screen-owner.js",
+      "originalSha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b",
+      "currentSha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b",
+      "same": true
+    },
+    {
+      "id": "P23",
+      "file": "game/src/ui/settings-audio.js",
+      "originalSha256": "3541c1f986d78ca8ee4f5ade1e5a0825083bed64915b6c572245a05221667322",
+      "currentSha256": "3541c1f986d78ca8ee4f5ade1e5a0825083bed64915b6c572245a05221667322",
+      "same": true
+    },
+    {
+      "id": "P24",
+      "file": "game/src/core/icons-bitmap.js",
+      "originalSha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "currentSha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "same": true
+    },
+    {
+      "id": "P25",
+      "file": "game/src/ui/reward-scene-view.js",
+      "originalSha256": "10e71d3f7e036f0e168b22fcbda4c90baccbb50e12a3e63e367f97ec5aebaed2",
+      "currentSha256": "10e71d3f7e036f0e168b22fcbda4c90baccbb50e12a3e63e367f97ec5aebaed2",
+      "same": true
+    },
+    {
+      "id": "P26",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "originalSha256": "0ccb1621ff0fa5919775924f643a967d3c33d3ebe211e1c0897e2679d1d18858",
+      "currentSha256": "63173629e67355a31031b512b4bae2969f13cba3f7b53f4466644d3bb31fc12b",
+      "same": false
+    },
+    {
+      "id": "P27",
+      "file": "game/src/ui/run-top-bar.js",
+      "originalSha256": "dd88ccc2a89fa911e86c41f256ba189d7fd5267fcef0b8a1147c975b743b23ce",
+      "currentSha256": "e8f8bf130135dd1d20f872f4c948e2c8a944d392780f544ebd20c872468e973f",
+      "same": false
+    },
+    {
+      "id": "P28",
+      "file": "game/src/core/renderer.icons.js",
+      "originalSha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07",
+      "currentSha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07",
+      "same": true
+    },
+    {
+      "id": "P29",
+      "file": "game/css/card-state-motion.css",
+      "originalSha256": "27d599cbb514596a50f69c6e7e1e917b8e30a7acd0cf66f48895d1f06b0ceab0",
+      "currentSha256": "27d599cbb514596a50f69c6e7e1e917b8e30a7acd0cf66f48895d1f06b0ceab0",
+      "same": true
+    },
+    {
+      "id": "P30",
+      "file": "game/css/selection-state-motion.css",
+      "originalSha256": "ec80b92f04ba733a3a51ecc392c30755730a24297f4e823b0b0d45a0677fb39b",
+      "currentSha256": "ec80b92f04ba733a3a51ecc392c30755730a24297f4e823b0b0d45a0677fb39b",
+      "same": true
+    }
+  ],
+  "currentExcerpts": [
+    {
+      "id": "D01",
+      "priorSnapshot": "P04",
+      "file": "game/css/settings-navigation.css",
+      "sha256": "68943d0e4a3f8465f749055fad40d01d997de41a7a8195fb57e79472a92afb53",
+      "lineCount": 263,
+      "ranges": [
+        [
+          125,
+          153
+        ],
+        [
+          190,
+          206
+        ],
+        [
+          239,
+          260
+        ]
+      ]
+    },
+    {
+      "id": "D02",
+      "priorSnapshot": "P07",
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "d58df8312df233a28e6febce010a132adb79e1d0a09eda8139a3cbaa64ee8e8b",
+      "lineCount": 925,
+      "ranges": [
+        [
+          245,
+          269
+        ],
+        [
+          494,
+          555
+        ],
+        [
+          627,
+          660
+        ],
+        [
+          873,
+          891
+        ]
+      ]
+    },
+    {
+      "id": "D03",
+      "priorSnapshot": "P09",
+      "file": "game/src/battle/view/battle.layers.js",
+      "sha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157",
+      "lineCount": 1020,
+      "ranges": [
+        [
+          114,
+          137
+        ],
+        [
+          741,
+          750
+        ],
+        [
+          797,
+          807
+        ],
+        [
+          992,
+          1004
+        ]
+      ]
+    },
+    {
+      "id": "D04",
+      "priorSnapshot": "P10",
+      "file": "game/css/battle-stage.css",
+      "sha256": "c0d2aa6aa74b7d0a62ca83e8e2adbae94b41b55bb138253add89e0443a4161df",
+      "lineCount": 247,
+      "ranges": [
+        [
+          66,
+          85
+        ],
+        [
+          170,
+          202
+        ]
+      ]
+    },
+    {
+      "id": "D05",
+      "priorSnapshot": "P11",
+      "file": "game/css/card-layout-selected.css",
+      "sha256": "6e862d463e31292e1fff586f5ac5f50d13a344683ab38452bafe7d79c1835cef",
+      "lineCount": 265,
+      "ranges": [
+        [
+          1,
+          20
+        ],
+        [
+          114,
+          122
+        ]
+      ]
+    },
+    {
+      "id": "D06",
+      "priorSnapshot": "P26",
+      "file": "game/src/battle/view/battle.vfx.js",
+      "sha256": "63173629e67355a31031b512b4bae2969f13cba3f7b53f4466644d3bb31fc12b",
+      "lineCount": 436,
+      "ranges": [
+        [
+          248,
+          263
+        ],
+        [
+          379,
+          413
+        ]
+      ]
+    },
+    {
+      "id": "D07",
+      "priorSnapshot": "P27",
+      "file": "game/src/ui/run-top-bar.js",
+      "sha256": "e8f8bf130135dd1d20f872f4c948e2c8a944d392780f544ebd20c872468e973f",
+      "lineCount": 217,
+      "ranges": [
+        [
+          11,
+          33
+        ],
+        [
+          72,
+          101
+        ]
+      ]
+    },
+    {
+      "id": "D08",
+      "priorSnapshot": "P24",
+      "file": "game/src/core/icons-bitmap.js",
+      "sha256": "f25ed965369102f88a84e11bcb4fa751c8e369944f97933580ef8396a04db37a",
+      "lineCount": 105,
+      "ranges": [
+        [
+          8,
+          53
+        ]
+      ]
+    },
+    {
+      "id": "D09",
+      "priorSnapshot": null,
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "e4c3293af451170eac93c918a375b1d7214d761e398fb5d5663019aa6b00242b",
+      "lineCount": 21,
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "D10",
+      "priorSnapshot": null,
+      "file": "game/src/battle/view/battle.overlays.js",
+      "sha256": "d75a029d6fd44cae3428189dc76ddb3e05044e35461dbde539c22bdc061aabb3",
+      "lineCount": 172,
+      "ranges": [
+        [
+          78,
+          95
+        ]
+      ]
+    },
+    {
+      "id": "D11",
+      "priorSnapshot": null,
+      "file": "game/css/base.css",
+      "sha256": "7e5b5507e827ff0044dc9ec9681755f21e44975b26bcf33e5f5d39ac5d20f1d0",
+      "lineCount": 373,
+      "ranges": [
+        [
+          114,
+          120
+        ],
+        [
+          167,
+          173
+        ],
+        [
+          244,
+          247
+        ]
+      ]
+    },
+    {
+      "id": "D12",
+      "priorSnapshot": null,
+      "file": "game/src/battle/core/combat.factory.js",
+      "sha256": "6316fc05cee543aec9d7bcf204252f77fb7a4d16ddbecb0e10769ade7d6a7825",
+      "lineCount": 296,
+      "ranges": [
+        [
+          7,
+          35
+        ]
+      ]
+    },
+    {
+      "id": "D13",
+      "priorSnapshot": null,
+      "file": "game/src/ui/battle-hud-info.js",
+      "sha256": "c34fd0b9534c99d539fe3a830018f1a2b2863d640d3477c5a508f4ea049a53b2",
+      "lineCount": 23,
+      "ranges": [
+        [
+          1,
+          21
+        ]
+      ]
+    }
+  ],
+  "currentIconAssets": [
+    {
+      "file": "game/assets/ui/icons/archive.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "b58ed17588cfb2c8394c78ab4fbf916c3e6240d67547fa528c8e3774a434f588"
+    },
+    {
+      "file": "game/assets/ui/icons/arrow.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "1fd408c66e1361afbd66a4f70f9558f21b7b321c5063846d024dce875e64da68"
+    },
+    {
+      "file": "game/assets/ui/icons/bag.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "650bb3de826edadad7352755c3f777beedb0119921d5d7a437de06e9d5e846b9"
+    },
+    {
+      "file": "game/assets/ui/icons/blood.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "6ddba11e7853e51c3da6f886618da4372c5c74cc00369644f3e649093ed97b9d",
+      "pixelSha256": "c23efdaae0a0dc293423e4fe1841efeac4a6eb6a63c9e2d85ed74b548ac08f14"
+    },
+    {
+      "file": "game/assets/ui/icons/bolt.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "0ca5191ee356ee03cc8dd07abd1bc494e51ea946cd3fa2ba8471a69600412da0",
+      "pixelSha256": "c1f324bb5ac9e968a446f3f0f556cd52f17cb7ed10ff2416e5e4d02b6695187d"
+    },
+    {
+      "file": "game/assets/ui/icons/book.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "4143e61b371302efeed51b0ffce28363332f89af1e43508065f586644a64cb35"
+    },
+    {
+      "file": "game/assets/ui/icons/bread.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "7cdddae2a97fdaed625152758fd52223729e7f5f588347b1a7dde4fcd5a6a177",
+      "pixelSha256": "c3c5da602d7af266f7a4778181789da304aee8eade7cd2d11eeaf3598f2bfa18"
+    },
+    {
+      "file": "game/assets/ui/icons/broken.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "b393bf324f5754ef776b1079437212d48193e7d1d11eb7590f3bc4a1fa7dc2ce",
+      "pixelSha256": "0fca0d92d464d99ecf44a8eb590a95beb9661a4ac28bcfdda1c8fc93fe0bbe1f"
+    },
+    {
+      "file": "game/assets/ui/icons/broom.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "2c5efe056a5e490d1101062734660f5485faad7ee850a11460dcd1724688e979"
+    },
+    {
+      "file": "game/assets/ui/icons/cards.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "4143e61b371302efeed51b0ffce28363332f89af1e43508065f586644a64cb35"
+    },
+    {
+      "file": "game/assets/ui/icons/check.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "199b401c7cb96fc8b1e701facc8bcbc79ad9cd1965dea0b359eb838c35886bb7",
+      "pixelSha256": "9a6b56b77e1e354b859b89cccd399624de8dc2875bcdad5f290db365a8bed61c"
+    },
+    {
+      "file": "game/assets/ui/icons/coin.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "39b56fb0c48547b69733cdb3ddf3be052c9b770e481c7a241f028e6fa3c6c996",
+      "pixelSha256": "4b1ab33fae0421d2e2a156d77eff1184edcd7f970fc6b6ae13f88d9aeb3b4311"
+    },
+    {
+      "file": "game/assets/ui/icons/cross.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e1c88cd7a202f77ddc6c44a84ec5a281e83fc7afc44c246895fa817d3a568451",
+      "pixelSha256": "158cd005b0c19c3b95a886f596ee017aba3c32ed94039a800e0acd9c010aaa8c"
+    },
+    {
+      "file": "game/assets/ui/icons/crystal.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "pixelSha256": "46180fc561af44b16a7b381c0597576bd5d2af5b3d03bf296c6cb688d0104d03"
+    },
+    {
+      "file": "game/assets/ui/icons/demon.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a9f278ec0a763ee77157b17227b8b28cccd8beb6c6dd220f0b874c7c2d031cc4",
+      "pixelSha256": "30a128e4d7afd4f9d26a6c43c75c38091310e75d030a6fc5ac81efba0e32bc42"
+    },
+    {
+      "file": "game/assets/ui/icons/dice.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "adb3ccdfa1ea9379646f6831607464b6e61937519055bb4fafdc63323a6ca5dd",
+      "pixelSha256": "93bcb184295e51e3fa8a3d79dece59c047afafa49a89b7daf2e4c1be02d85c33"
+    },
+    {
+      "file": "game/assets/ui/icons/door.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "pixelSha256": "ed1882e0406a69fa8772da95af1cf1340f49cbc06671c3c1540abd57a1850bc6"
+    },
+    {
+      "file": "game/assets/ui/icons/download.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a14c5e985f06e9ac82adb533aa952112d1ca7ce8bfc07f2e61d1cc837886ec6d",
+      "pixelSha256": "44977642228744e7792a515adf7c05265033be287cc3a1bb2c4537bc3c8e2c70"
+    },
+    {
+      "file": "game/assets/ui/icons/exit.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "1fd408c66e1361afbd66a4f70f9558f21b7b321c5063846d024dce875e64da68"
+    },
+    {
+      "file": "game/assets/ui/icons/fire.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "dfb7af696cfd2a889279feb682f13cc865b06a3c8a000828c7945207ee7246a1",
+      "pixelSha256": "194be7df520a3f0a9f2044d72f60d865c7bb0ab9bbd50623046c772bbb1fb7d4"
+    },
+    {
+      "file": "game/assets/ui/icons/flag.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "920a0ba3bace2c9bb540710819bfa977dec33f36e9e91be526e4a4a71aeb5e96",
+      "pixelSha256": "7807f3779fb59d2625cfed4be42d92b919faf67bab1a6af90d683af26362085a"
+    },
+    {
+      "file": "game/assets/ui/icons/flask.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "f31ac7bac8befa5e3c6a2d677388a487a77b43116e1885d6098ae03a5e315372",
+      "pixelSha256": "75121a0e12acd684ea7e9cb6c7a744a8f8a15e554bc481720b627986a0dfaba6"
+    },
+    {
+      "file": "game/assets/ui/icons/folder.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "b58ed17588cfb2c8394c78ab4fbf916c3e6240d67547fa528c8e3774a434f588"
+    },
+    {
+      "file": "game/assets/ui/icons/gear.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "7fbef9f84edbc9e948e6a7a4779c835954002da3603a5bc00e80c74a0b951473",
+      "pixelSha256": "78126e99fb3fcae3f44635e26f1feecf28f6ca02c1243a95efa37a2b18b52910"
+    },
+    {
+      "file": "game/assets/ui/icons/gem.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "pixelSha256": "46180fc561af44b16a7b381c0597576bd5d2af5b3d03bf296c6cb688d0104d03"
+    },
+    {
+      "file": "game/assets/ui/icons/heart.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3698053f2689d511a0f63db8e1a4aad7582d0cdebfe8c2597d4396f59adef6eb",
+      "pixelSha256": "0106eb4ac3e4d626000fdea7877abe56521662a79eae5a125487e7f01a265903"
+    },
+    {
+      "file": "game/assets/ui/icons/helmet.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "c3ed500a767645a351a07b862c1f4a82a90100da952150282096774ca0ff4161"
+    },
+    {
+      "file": "game/assets/ui/icons/home.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "pixelSha256": "ed1882e0406a69fa8772da95af1cf1340f49cbc06671c3c1540abd57a1850bc6"
+    },
+    {
+      "file": "game/assets/ui/icons/hourglass.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "pixelSha256": "3c61526dcc69066f8cdd7826e69223a13b06317be63dfe2f5bb52c87ced8f4e8"
+    },
+    {
+      "file": "game/assets/ui/icons/key.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9ed823ab9b14bfd1b0a1c12f6fe8bae1cf6683e345e3df024e138a86dce13e31",
+      "pixelSha256": "721f13930eb24bbfdf63ece7d14c7447c9b06b04f653c3e9832839d421781a13"
+    },
+    {
+      "file": "game/assets/ui/icons/lantern.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "pixelSha256": "d4850e8d7518d707341398c30734174abda195a350cc14cf181c2a6d4fd2d05d"
+    },
+    {
+      "file": "game/assets/ui/icons/lock.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "691b10a542e041ff97d5ddf9e39742a5d33feef8485a3ac5d8a273458f9e3ab6",
+      "pixelSha256": "ce48ecce227bc8e12f190c0d56960a6ad9f47f7e0ec2c95681adffe7d80b87ed"
+    },
+    {
+      "file": "game/assets/ui/icons/map.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "8c24b879b817db55351ee7b89b11f7b5df81deaf579c2ead8c0d5dcc5afeac4e",
+      "pixelSha256": "9d786f7d0d59bc0d073f0bb9f3805b0e53e7d3ab07906263ac653eb7c6f0a51e"
+    },
+    {
+      "file": "game/assets/ui/icons/medal.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "007d3e0fa06dbff5b9ea0ea92893aa72d01ee70881b01b8f3c23c17f78b57d38",
+      "pixelSha256": "0226e8a5b5682989c0af52212534f8320fdf7dc79d600f6b12b2887b7019bf0b"
+    },
+    {
+      "file": "game/assets/ui/icons/mouse.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "pixelSha256": "3c61526dcc69066f8cdd7826e69223a13b06317be63dfe2f5bb52c87ced8f4e8"
+    },
+    {
+      "file": "game/assets/ui/icons/notes.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "4143e61b371302efeed51b0ffce28363332f89af1e43508065f586644a64cb35"
+    },
+    {
+      "file": "game/assets/ui/icons/paw.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "29264104d179f63a43a42a8f00f81f490c015f4d7c0cf755a6e439499d98483e",
+      "pixelSha256": "620ea5fd84c9e0d7ebac80391f49689a600a8dcc5b1049770524fcdd1cacba61"
+    },
+    {
+      "file": "game/assets/ui/icons/pen.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "2c5efe056a5e490d1101062734660f5485faad7ee850a11460dcd1724688e979"
+    },
+    {
+      "file": "game/assets/ui/icons/plate.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "c3ed500a767645a351a07b862c1f4a82a90100da952150282096774ca0ff4161"
+    },
+    {
+      "file": "game/assets/ui/icons/play.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "pixelSha256": "40997c7510527ccf8e44d6aceb214ff741b4351911270f9c1a6331dcf27ec6db"
+    },
+    {
+      "file": "game/assets/ui/icons/pocket.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "650bb3de826edadad7352755c3f777beedb0119921d5d7a437de06e9d5e846b9"
+    },
+    {
+      "file": "game/assets/ui/icons/pouch.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "pixelSha256": "650bb3de826edadad7352755c3f777beedb0119921d5d7a437de06e9d5e846b9"
+    },
+    {
+      "file": "game/assets/ui/icons/question.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "b266bc5695dec96b9d3805f59bae79b2fa49ea2c8aab037b804099cc66b5a604",
+      "pixelSha256": "9e6a099d9de95d41bdb7f0082ffb6539e95fd5367cf683a3c1ba5a82d4b6192e"
+    },
+    {
+      "file": "game/assets/ui/icons/recycle.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "bb1bd84ed2927f5567c70b415838308c8e6ef0423ac67a77fcb2092952015084",
+      "pixelSha256": "ce0aab719674039b04f8a52f7fa350f29072689af77a80a6d866bc4c23aff495"
+    },
+    {
+      "file": "game/assets/ui/icons/runner.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a9ca3f1a55cc1618f003075647a9198fe0e94f4c973716b490eedf6b2bded7db",
+      "pixelSha256": "3737c9eb86402c58ea4e19d234282a96a710bef2e3e0262288f314278498c7ef"
+    },
+    {
+      "file": "game/assets/ui/icons/save.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "4143e61b371302efeed51b0ffce28363332f89af1e43508065f586644a64cb35"
+    },
+    {
+      "file": "game/assets/ui/icons/scroll.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "pixelSha256": "4143e61b371302efeed51b0ffce28363332f89af1e43508065f586644a64cb35"
+    },
+    {
+      "file": "game/assets/ui/icons/settings-gear-r2.webp",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a05f9465286915b601a17e4a87db5bef78f4372d634d62da37ecebc4e412c462",
+      "pixelSha256": "4d54761f7d5b23cc18875460f0f11bef013e2c541c3ceaa0abfd809c7e2378f0"
+    },
+    {
+      "file": "game/assets/ui/icons/shield.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "pixelSha256": "c3ed500a767645a351a07b862c1f4a82a90100da952150282096774ca0ff4161"
+    },
+    {
+      "file": "game/assets/ui/icons/skip.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "pixelSha256": "40997c7510527ccf8e44d6aceb214ff741b4351911270f9c1a6331dcf27ec6db"
+    },
+    {
+      "file": "game/assets/ui/icons/skull.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "cdf7e473530e9b693431dee7b86f440e4d7396c670b7be1b909550b73aad3fd2",
+      "pixelSha256": "9e12c8ada81ed9512e7194146fd25fb3324df06655771b85bb75a3e9ccc82ddc"
+    },
+    {
+      "file": "game/assets/ui/icons/slime.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "8d0c614cea2b06ec28ee55124c37dcad8c72f40e4b26eda3bd18dd9d18e356fb",
+      "pixelSha256": "c6b5fd78c71cd521bc8c9bb52fd8c60317eef96f0bcc8ac8408fa181e51f7e38"
+    },
+    {
+      "file": "game/assets/ui/icons/sparkles.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "pixelSha256": "d4850e8d7518d707341398c30734174abda195a350cc14cf181c2a6d4fd2d05d"
+    },
+    {
+      "file": "game/assets/ui/icons/sword.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a1639b937b924d9e8bddf1e0a759b5965617570b756eee40c72b7bda81957eee",
+      "pixelSha256": "3a1378731e618ea27b96c70803f2884b563d13be92e0bb45d66848656872c683"
+    },
+    {
+      "file": "game/assets/ui/icons/swords.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a187cc96e25f34c4e5508681a798fbb59e239f7638e23b56d201dbc2bf6b8e06",
+      "pixelSha256": "114f228a2ca242a838b9f46f5af9bb4d7aa7aefbc460757e077721b37d6aefc1"
+    },
+    {
+      "file": "game/assets/ui/icons/tools.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "pixelSha256": "2c5efe056a5e490d1101062734660f5485faad7ee850a11460dcd1724688e979"
+    },
+    {
+      "file": "game/assets/ui/icons/trash.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "pixelSha256": "b58ed17588cfb2c8394c78ab4fbf916c3e6240d67547fa528c8e3774a434f588"
+    },
+    {
+      "file": "game/assets/ui/icons/trophy.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "97fe3b2c1ad22125565320b198a87c0feb9ed64ff069df7f64380bbb829b066c",
+      "pixelSha256": "83331d20e1adc75511f34e5f75820bf45a5d2e9f6053209772f486ab547e6a97"
+    },
+    {
+      "file": "game/assets/ui/icons/unlock.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "12aede0159feb6de705befbe8e6497df3e7389025e76151b6aa5639ebcf3bffa",
+      "pixelSha256": "93d06597a96ac492fd8d591526ff995fba4feae7a2479d998bb99ed598e318c8"
+    },
+    {
+      "file": "game/assets/ui/icons/upload.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "pixelSha256": "1fd408c66e1361afbd66a4f70f9558f21b7b321c5063846d024dce875e64da68"
+    },
+    {
+      "file": "game/assets/ui/icons/wood.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "ca93425aa9cf18f6b53272d1cccf288ac558ee31352783a479738d6213c94791",
+      "pixelSha256": "b2b3481deaee06bc98e43b6c13da6f979bf9c099713a7db4d5e5dfa1ab49e266"
+    }
+  ],
+  "identicalPngGroups": [
+    [
+      "archive",
+      "folder",
+      "trash"
+    ],
+    [
+      "arrow",
+      "exit",
+      "upload"
+    ],
+    [
+      "bag",
+      "pocket",
+      "pouch"
+    ],
+    [
+      "book",
+      "cards",
+      "notes",
+      "save",
+      "scroll"
+    ],
+    [
+      "broom",
+      "pen",
+      "tools"
+    ],
+    [
+      "crystal",
+      "gem"
+    ],
+    [
+      "door",
+      "home"
+    ],
+    [
+      "helmet",
+      "plate",
+      "shield"
+    ],
+    [
+      "hourglass",
+      "mouse"
+    ],
+    [
+      "lantern",
+      "sparkles"
+    ],
+    [
+      "play",
+      "skip"
+    ]
+  ],
+  "limitations": [
+    "No new game effects or icon assets implemented",
+    "No new runtime or multi-status scene acceptance",
+    "Static candidate hit totals retained from earlier capture; not a live-consumer count"
+  ]
+}

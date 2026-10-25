@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-25T09:03:22.513Z",
+  "inputKind": "real-input",
+  "detail": "入场结束后目视确认黑像与2名封锁线枪手；当前窗口开发遭遇战，不写存档。",
+  "screenshot": {
+    "path": "before-stable.png",
+    "bytes": 82602,
+    "sha256": "7fd697d625ed21c2f0c0db739b1cefb98097ff66de2367db1d9bbfb10f03b6dc"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "width": 1659
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://127.0.0.1:5200/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

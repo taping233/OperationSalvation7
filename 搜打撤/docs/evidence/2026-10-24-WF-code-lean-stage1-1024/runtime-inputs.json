@@ -1,0 +1,40 @@
+{
+  "source": "before snapshot plus exact current changed files",
+  "changed": [
+    "game/src/cards/card-rules.schema.js",
+    "game/src/cards/cards.sync.m7.js",
+    "game/src/cards/cards.sync.rule-backfill.js",
+    "game/src/hub/hub.archive-v3.js",
+    "game/src/ui/menu-settings.js",
+    "game/css/ak-skin.css",
+    "game/css/base-camp-rework.css",
+    "game/css/base-camp.css",
+    "game/css/base.css",
+    "game/css/camp-entry.css",
+    "game/css/character-view-motion.css",
+    "game/css/chest-reward-overview.css",
+    "game/css/expedition-map.css",
+    "game/css/expedition-roster.css",
+    "game/css/expedition.css",
+    "game/css/home-linked-interactions.css",
+    "game/css/home-polish.css",
+    "game/css/hub-cover-collections.css",
+    "game/css/page-rewards-bag-help.css",
+    "game/css/page-settings.css",
+    "game/css/page-slot-select.css",
+    "game/css/page-visual-ready.css",
+    "game/css/performance-settings.css",
+    "game/css/rarity-design-lab.css",
+    "game/css/scenes.css",
+    "game/css/settings-navigation.css",
+    "game/css/title-p0.css",
+    "game/css/transition-handoff.css",
+    "game/css/winter.css"
+  ],
+  "root": "D:\\素材\\代号柒\\搜打撤\\node_modules\\.cache\\lean-stage1-1024\\after-runtime",
+  "ports": [
+    5334,
+    5335
+  ],
+  "assets": "Read-only middleware serves original game/assets; no source watcher; no build"
+}

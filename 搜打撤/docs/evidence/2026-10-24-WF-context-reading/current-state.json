@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-24",
+  "files": [
+    {
+      "file": "../AGENTS.md",
+      "bytes": 5176,
+      "sha256": "0e9de9cd750393966eaa213cb1a538161956652ab9766989cb7fbcab39a79f4a"
+    },
+    {
+      "file": "docs/README.md",
+      "bytes": 8486,
+      "sha256": "eb10d9541588e35a8e98d6940df6604a58f63467e501d126c71605f71806cec5"
+    },
+    {
+      "file": "docs/QUICKSTART.md",
+      "bytes": 1838,
+      "sha256": "65a74dfa5fdb9364cbe7c8a5d39beeb2ffada21e807f9c5f858380bbe254b1a6"
+    },
+    {
+      "file": "docs/WORKFLOW-TOOLS.md",
+      "bytes": 12490,
+      "sha256": "b7cf169f438b15b806ec2174b43e215a6a0ec995a92645306dd44b4eefc689b6"
+    },
+    {
+      "file": "docs/AGENT-TOOLBOX.md",
+      "bytes": 8896,
+      "sha256": "45f7f2711c03388d9fc49ad27bc0eaae4334f23c5605b76d96d28051a661bd50"
+    },
+    {
+      "file": "docs/quality-gates.md",
+      "bytes": 11161,
+      "sha256": "1223015aa12c91d59dd5cdb2be1701aaae32eb737c9480002c0bbdc3cee5447a"
+    },
+    {
+      "file": "docs/UI-ART-OVERHAUL-GUIDE.md",
+      "bytes": 3108,
+      "sha256": "10ecbf3f8c26cf1a4efe594edf24d070df1749a55d22ceeb0cf0c03c1732d4d2"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\agents\\openai.yaml",
+      "bytes": 357,
+      "sha256": "c5bb7ec3f87b5bed34327cd1bc66663bdbd428496e0a44097a1aac2ac5f118d2"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\references\\diagnosis.md",
+      "bytes": 8099,
+      "sha256": "5f2c612b978bf9c66bfec450c0c906cf323532f793823007f6e15a3802a5f284"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\references\\implementation.md",
+      "bytes": 11196,
+      "sha256": "b2abc1e04998ae93d0ff8cf5690898c22b59e638afba740d1197fd289c98b99d"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\references\\templates.md",
+      "bytes": 7335,
+      "sha256": "a4b205b718d81954b6989e328ae2804543653416b57a8fc78621f7693019eff0"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\references\\verification.md",
+      "bytes": 12225,
+      "sha256": "3d1e158768547c21ae7e4e75fc84f51156bf83d66037d235f65d9613fc00e5a7"
+    },
+    {
+      "file": "docs\\ui-art-overhaul\\SKILL.md",
+      "bytes": 3918,
+      "sha256": "b0d2ac20ab20a5c674484c429bc47e75481726f89af24cd00e17f868d41f4e7e"
+    },
+    {
+      "file": "C:/Users/太平/.codex/AGENTS.md",
+      "bytes": 2890,
+      "sha256": "9af3758b83308593b3e5a19b14ca652d7ee11d64c4dd984e1a6bea80c69f4570"
+    },
+    {
+      "file": "C:/Users/太平/.codex/memories/memory_summary.md",
+      "bytes": 5004,
+      "sha256": "2e764d1399030574ce5a010ee20947c8ef61faa7b40d0bc922c686e36bdf39c8"
+    }
+  ],
+  "skillCopiesIdentical": true,
+  "injectedDifference": {
+    "latestInjectedProjectUsesOldClauses": true,
+    "oldClausesPresentInHead": true,
+    "oldClausesAbsentFromCurrentFile": true,
+    "cause": "not-established",
+    "newChatInjection": "verified-selected-global-and-project-clauses"
+  },
+  "validation": "Reuse second/third/fourth-pass evidence; matching relevant file hashes. No repeated game checks.",
+  "delivery": "complete-uncommitted; no services; no commit/push",
+  "newChatCheck": {
+    "threadId": "01a16c68-d349-7ec2-bc14-19f71217100d",
+    "scope": "selected global/project AGENTS clauses, recorded before file reads",
+    "result": "matched",
+    "evidence": "new-chat-check.md"
+  }
+}

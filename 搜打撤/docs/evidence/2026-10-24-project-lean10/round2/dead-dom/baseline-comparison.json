@@ -1,0 +1,36 @@
+{
+  "status": "matched-existing-failures",
+  "baseline": {
+    "total": 63,
+    "passed": 58,
+    "failed": 5
+  },
+  "method": "Original test text in memory and frozen game text reads; runtime imports otherwise current; shared tree unchanged",
+  "failures": [
+    {
+      "file": "card-face-presentation.test.js",
+      "name": "shared card presentation keeps card-face layout and materials out of individual page stylesheets",
+      "diagnostic": "AssertionError: expected [ Array(1) ] to deeply equal []"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 没有把共享 is/where/not 规则整条移除",
+      "diagnostic": "AssertionError: expected false to be true // Object.is equality"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 仍保留活着的仓库、成就和出征人物声明",
+      "diagnostic": "TypeError: Cannot read properties of undefined (reading 'nodes')"
+    },
+    {
+      "file": "css-dead-dom-budget.test.js",
+      "name": "只清退已有替代界面的死 DOM 样式 game/src/hub/hub.warehouse.js 使用当前界面且不再生成旧作用域",
+      "diagnostic": "AssertionError: expected 'import { isCardBrowserCurrent, cardBr…' to contain 'warehouse-workspace-v12'"
+    },
+    {
+      "file": "wf-feedback1021-c-return-map.test.js",
+      "name": "各页返回键钉为页脚行内最右一枚（order:9 覆盖全部返回键 act）",
+      "diagnostic": "AssertionError: expected '/* ==================================…' to contain '返回地图'"
+    }
+  ]
+}

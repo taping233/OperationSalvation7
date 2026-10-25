@@ -1,0 +1,127 @@
+{
+  "task": "WF-collection-layout-1025",
+  "date": "2026-10-25",
+  "comparison": "Session-start runtime snapshots, not HEAD; null before hash means no captured snapshot, not proof of file absence.",
+  "entries": [
+    {
+      "path": "game/src/ui/collection-chrome.js",
+      "status": "added",
+      "beforeSha256": null,
+      "afterSha256": "6060bae086fb9302005142819a48c2276783e50847400efac0734d049737421d"
+    },
+    {
+      "path": "game/src/ui/decision-summary.js",
+      "status": "added",
+      "beforeSha256": null,
+      "afterSha256": "095ead53151a98be5155c8d03235d67aca42f675d19520460061af258e11ad0d"
+    },
+    {
+      "path": "game/src/ui/achievement-gallery.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "908c4255a9e000540ce7532bf9fe6d0157180b5c225df4019993761985b1dbc4",
+      "afterSha256": "0f8ec59b656702abfcf903fd02eb3cfa6fa3fb5768073bdbb11cc64a9f08ea3d"
+    },
+    {
+      "path": "game/src/ui/achievement-motion.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "722c74392a436b66f70b53dba9d8bfc734ee72d250a1b19a936956d8435345a4",
+      "afterSha256": "2c5e23e8d9f3e76d6fb79532b1f1d4214212a4f18fcff92fab343e9689fff3e7"
+    },
+    {
+      "path": "game/src/ui/menu-guide.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "3d88e9d29ca30cc97955e8d8560d3fb2e25477435b69dc11aa9ccef06ed4e2f2",
+      "afterSha256": "5b37b900997d2c826fd42e526885c4063121c85b8aebf13152f1c4b5f6acd891"
+    },
+    {
+      "path": "game/src/ui/page-motion-profiles.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "ba2e94452762b8cb7ae05e37c0d0716907aa726dda47b1728c5ddc085c2b973b",
+      "afterSha256": "b6c5a01f9c7a198388970484f97578d5e1d2f7955b8c984e6a30f0b9e5343cf3"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "3b6c0523ec2a9379604892d9b8d9f05cd648a6e90938d7d9e94ee4ff373032fb",
+      "afterSha256": "64fea5cc27d68e326d927d7e7dca84732d49f23a2ebdd621359720491bec2298"
+    },
+    {
+      "path": "game/src/hub/preparation.view.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "08d2dff1e7fbb9e5937d56df06785f1fd121af2a79f3a1deb126b2976eaf62ab",
+      "afterSha256": "bd9fce7a247f10d0d728e201420d7f12fa9b2c0f2caaf7dc4e80250ac83bab9b"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation-ports.js",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "d796ec4088c302208d0adf49f5262dcfc54c484781de903ae9631212fbafa6f4",
+      "afterSha256": "1e207715b0e18385567d9e4c3611c4c053633239ae3c0e607d3118bd51e9875e"
+    },
+    {
+      "path": "game/css/collection-chrome.css",
+      "status": "added",
+      "beforeSha256": null,
+      "afterSha256": "cf505c19c5af054ed564b49cd9158413c4a50ba526c064bf2a84fb49d2a32b43"
+    },
+    {
+      "path": "game/css/decision-summary.css",
+      "status": "added",
+      "beforeSha256": null,
+      "afterSha256": "9300e09ac0b329c621544202266bbd7f77aaf371249b4d2cadc8789b242bf5dc"
+    },
+    {
+      "path": "game/css/title-achievements.css",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "037a14260624e2d7ffc115fb60f8f319e4527ddd870bb9dad83c0ffba15fd438",
+      "afterSha256": "0c5cea585fad848f40889f638f7bcb90b0413f0fd0a23e86b83b64cc2f5223c6"
+    },
+    {
+      "path": "game/css/photo-studio-unified.css",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "7cbc274f6484aad08e6cd8118c2b7b93426620361ab864171027774acc9842ce",
+      "afterSha256": "33ac55b7d9bf7eeb901b3956912a69be245564fb8be9ef055fab2afbf67d1cfb"
+    },
+    {
+      "path": "game/css/preparation.css",
+      "status": "modified-from-session-snapshot",
+      "beforeSha256": "b890c912df67025eb5042224b04ef033b9ae67f49183e135a64a11049b7d8cb7",
+      "afterSha256": "747833fb2330d700bf065c0104f0f3fb9f32ba2b5809592e3a4737a22e70af84"
+    },
+    {
+      "path": "tests/achievement-gallery-close.test.js",
+      "status": "modified-without-initial-snapshot",
+      "beforeSha256": null,
+      "afterSha256": "a22fa6af32c60d3ec5a32a980c5b234ef2ff0c0acaf9ffcd4e7a303699605e72"
+    },
+    {
+      "path": "tests/achievement-gallery.test.js",
+      "status": "modified-without-initial-snapshot",
+      "beforeSha256": null,
+      "afterSha256": "5a0bfd334f123d07dac468959efed76ebeb97aad81b1593552a0c388f09d0095"
+    },
+    {
+      "path": "tests/achievement-gallery-entry.test.js",
+      "status": "modified-without-initial-snapshot",
+      "beforeSha256": null,
+      "afterSha256": "ac2dd887f08d22a7677eeb9acddfbda76c2556d77a8a93dcd396e1d6eaed3130"
+    },
+    {
+      "path": "tests/collection-browsing-layout.test.js",
+      "status": "added",
+      "beforeSha256": null,
+      "afterSha256": "89034dc3060d05c4a287690d5a3c700cb4f229a9365fe8bb1ea0e46e2301cf21"
+    },
+    {
+      "path": "docs/ui/shared-interface-components.md",
+      "status": "modified-without-initial-snapshot",
+      "beforeSha256": null,
+      "afterSha256": "54cec90a3549aa7efe39438fa69b7a96944ead40113ec71625ef4e52c755c19e"
+    },
+    {
+      "path": "docs/production/art/UI-PAGE-COVERAGE.md",
+      "status": "modified-without-initial-snapshot",
+      "beforeSha256": null,
+      "afterSha256": "081a63670b4149f052351b2047cf73282146ec21d04a6d3ef0caeb277d78238c"
+    }
+  ]
+}

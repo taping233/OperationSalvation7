@@ -1,0 +1,796 @@
+{
+  "preChangeScannedFiles": 157,
+  "addedLeafFiles": 1,
+  "files": [
+    {
+      "path": "game/src/cards/builtin-card-execution.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-card-field-defaults.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-card-identities.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-card-numeric-fields.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-card-previous-rules.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-card-previous-variants.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-choice-execution.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-execution.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-previous-rules.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-compatibility.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-execution-plan.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-instance-fields.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-instance.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-legacy-battle-policy.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-migrations.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-rarity.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "changed_with_original_AST_equivalence_proof"
+    },
+    {
+      "path": "game/src/cards/card-semantic-contract.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-trigger-contract.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.catalog.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.consts.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "changed_with_original_AST_equivalence_proof"
+    },
+    {
+      "path": "game/src/cards/cards.sync.builtin.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.catalog.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.face-refresh.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m1.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m10.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m4.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m6.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m7.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m8.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m9.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.numeric.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.persistence.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.renames.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/cards.sync.rule-backfill.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "changed_with_original_AST_equivalence_proof"
+    },
+    {
+      "path": "game/src/cards/pierce-arrow-revision.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/rot-seed-revision.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.actions.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.default-context.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.effect-assembly.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-plan.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "retained_distinct_state_fields_and_explicit_ports_not_duplicate_behavior"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.instance.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.facts.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand-selection.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.legacy-resolution.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.measured-damage.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.setup-mechanics.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.factory.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.target-session.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-continuation.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-effects.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-start.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.cost-modifiers.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-candidates.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-preview.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effect-clauses.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effects.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.foe-fight.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.hosted.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.status-operations.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/effects/battle.target-rules.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.trigger-source.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/card-semantic-operations.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/choice-semantic-operations.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.audit.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.ctx.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.curse.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.deck.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.gates.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.kills.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_active_WF-project-bugfix-1023_ownership"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.recovery.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.rules.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.tail.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/effect-verbs.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/equipment-semantic-operations.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/hand-cost-patterns.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/hosted-catalog-index.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/random-blessings.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-batch.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "changed_with_original_AST_equivalence_proof"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.consumed-pile.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.factory.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.domain.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.piles.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.clock.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.host-scheduling.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.pace.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.playback.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.default.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.factory.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "retained_distinct_state_fields_and_explicit_ports_not_duplicate_behavior"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.state.js",
+      "coverage": "function_body_exact_and_identifier_normalized_token_scan",
+      "status": "read_only_token_scan_no_approved_behavior_equivalent_deletion"
+    },
+    {
+      "path": "game/src/cards/card-snapshot.js",
+      "coverage": "new_leaf_syntax_AST_and_no_top_level_execution_check",
+      "status": "new_shared_algorithm_counted_in_added_lines"
+    }
+  ]
+}

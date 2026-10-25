@@ -1,0 +1,120 @@
+{
+  "consumers": [
+    {
+      "file": "game/src/ui/game.menu.js",
+      "beforeSha256": "8cd0773be57e909dcaf518e684f2d07e6466c6a595784747defdf7ae870eef6a",
+      "afterSha256": "ededfc1b576bf40d8a61eae2641ae0f7ce5658f1fd4a187146b419a4bd7366b8",
+      "registered": [
+        {
+          "file": "game/src/ui/game.menu.js",
+          "hash": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
+          "path": "opaqueConsumers.game/src/ui/game.menu.js"
+        }
+      ],
+      "beforeMatched": false,
+      "exactDeletionReviewed": true,
+      "assetConstructorsChanged": false
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "beforeSha256": "86729e4818b4f266816cb2ab79a4a443b7d6021242407e8280cddd2197930d95",
+      "afterSha256": "674748a4d87ebdc15d5c326821199fe4b05b29d95b3a4bed8d039ffd3e29b08c",
+      "registered": [
+        {
+          "file": "game/src/hub/hub.personnel.js",
+          "hash": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e",
+          "path": "opaqueConsumers.game/src/hub/hub.personnel.js"
+        }
+      ],
+      "beforeMatched": false,
+      "exactDeletionReviewed": true,
+      "assetConstructorsChanged": false
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "beforeSha256": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
+      "afterSha256": "3adca0a12f969e89e6a9580909a3d212ad7e213dec94d5ab6ab62f1184c5fc64",
+      "registered": [
+        {
+          "file": "game/src/battle/view/battle.vfx.js",
+          "hash": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
+          "path": "opaqueConsumers.game/src/battle/view/battle.vfx.js"
+        }
+      ],
+      "beforeMatched": true,
+      "exactDeletionReviewed": true,
+      "assetConstructorsChanged": false
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "beforeSha256": "d5bcb7b218eb390db278f038dd4c7044ea72cbffa2522709a26916945883d2c4",
+      "afterSha256": "c2c8874be738d25135bfa14b85d241db8cbb5ca5bd32c711da9c51e579f96166",
+      "registered": [
+        {
+          "file": "game/src/battle/view/battle.layers.js",
+          "hash": "a808bc7ceca4fa5324886ffbbf2f66ffbfb6213b386dad606408216f92298bd1",
+          "path": "opaqueConsumers.game/src/battle/view/battle.layers.js"
+        }
+      ],
+      "beforeMatched": false,
+      "exactDeletionReviewed": true,
+      "assetConstructorsChanged": false
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "beforeSha256": "392c7ce09d3f575bbe3dccccf8fe52cf799e021cfe989c5f7a6c2e0fcdf71133",
+      "afterSha256": "03ab0226f9936d9f3f137f6a69ee07ab3858d5877320e82d851724a0fb9e5a5b",
+      "registered": [
+        {
+          "file": "game/css/entry-events.css",
+          "hash": "ee51cbc68d981d15a32b088ba1334ce6ff84982f1ddc658eabb7e81a79273d66",
+          "path": "consumerFingerprints.retired-scenes.game/css/entry-events.css"
+        }
+      ],
+      "beforeMatched": false,
+      "exactDeletionReviewed": true,
+      "assetConstructorsChanged": false
+    }
+  ],
+  "exclusionCandidatesChanged": false,
+  "fingerprintRegistryChanged": true,
+  "reason": "Only exact no-resource UI deletions reviewed. Pre-existing registry mismatches retain fail-closed asset publication.",
+  "frozenChecks": [
+    {
+      "file": "game/css/cover-hub.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "unchanged": true
+    }
+  ],
+  "updatedFingerprint": {
+    "file": "game/src/battle/view/battle.vfx.js",
+    "before": "2eb08c4b872952f377e369749e73dad86058a45b015a247e7a82ef7902dc6b12",
+    "after": "3adca0a12f969e89e6a9580909a3d212ad7e213dec94d5ab6ab62f1184c5fc64",
+    "registry": "scripts/runtime-asset-redundancy-review.mjs"
+  },
+  "registryBeforeSha256": "27d77256eb2649163cc94fb0b3f8829aceef35c3d4ba8b22fd243b7db1afe15e",
+  "registryAfterSha256": "8c4f3fe0631bdd96cd315a7e34a139e0a51bd4156683bdc363650fa4fe66516d"
+}

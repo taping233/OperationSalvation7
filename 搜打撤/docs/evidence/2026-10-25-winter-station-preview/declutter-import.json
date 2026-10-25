@@ -1,0 +1,110 @@
+{
+  "status": "replaced-uncommitted",
+  "assets": [
+    {
+      "layer": "far",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/far.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-3020891b-9998-4cd3-956d-eedf43ed0dab.png",
+      "sourceSha256": "d6d398a01e76053d6f23fd25acf905e630a9d69c113b311c807b4f00d928ee42",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGB",
+      "alphaExtrema": null,
+      "bytes": 51890,
+      "sha256": "a10a5e7a7f831b130126791cf2f2bf57e6bdc08b314691070705edb7d4aba859",
+      "previousSha256": "6c58a944803516fd108d84287868b509cd763e58511c1ba8a8852baca53c81a0",
+      "previousBytes": 104916,
+      "backup": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\declutter-v4\\runtime-v3-backup\\far.webp"
+    },
+    {
+      "layer": "mid",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-7abbebac-99db-44e2-937d-17b31b81f8db.png",
+      "sourceSha256": "2dca025266389fa90c45a801d59f7902a7cd016641bac90c6d661907a88bf485",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 33106,
+      "sha256": "b2c1faacb71767ba34663de155ae617cb84ebc59d25f79103b5630a1f31f6082",
+      "previousSha256": "825aeaceec6a27e7c557eafdcd7abee2d7d86fbb5d163f86cacb730daa7177ae",
+      "previousBytes": 110428,
+      "backup": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\declutter-v4\\runtime-v3-backup\\mid.webp"
+    },
+    {
+      "layer": "ground",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-174a1dcb-8b43-4c5e-be91-55e3b21a20ef.png",
+      "sourceSha256": "02012c74d5304fc02b2e670568b28fe1e90b90ec0df41a9c99e94d5e557ead5f",
+      "sourceSize": [
+        1660,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 72030,
+      "sha256": "a240d9357643026ce973a7ccae0f29c51a02ee487711c16a0bd33f415416f4ec",
+      "previousSha256": "264908b045e6d08f3f290549c224caf7b6521166a232d53d3ab7e47929b4a35f",
+      "previousBytes": 113498,
+      "backup": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\declutter-v4\\runtime-v3-backup\\ground.webp"
+    },
+    {
+      "layer": "foreground",
+      "path": "game/assets/scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a17111-77e5-7e83-893e-2786d8fc0113\\exec-abdf442b-901f-4082-8947-4585676bd155.png",
+      "sourceSha256": "d635287bf559ad4af9cf3c04ce087119d6e6a9a0f1409a12dd4a8100d3916a93",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bytes": 73686,
+      "sha256": "c0793fa2d86e5d87ea669238a10697581509ae39d68a546b626109d8ad138144",
+      "previousSha256": "a79820b6472288ede24c47188d4aff9179c011ad1b530aa4c330ee4b92c4b387",
+      "previousBytes": 133642,
+      "backup": "D:\\素材\\代号柒\\.tmp\\nai\\winter-station-layered-20261025\\declutter-v4\\runtime-v3-backup\\foreground.webp"
+    }
+  ],
+  "totalBytes": 230712,
+  "previousTotalBytes": 462484,
+  "encoding": {
+    "format": "WebP",
+    "quality": 92,
+    "method": 6,
+    "canvas": [
+      1659,
+      948
+    ]
+  },
+  "scope": "Four independent internal imagegen redraws of existing NAI4.5-origin layers. Delete train and signal posts visually, quiet distant bridge and city, simplify platform and canopy, reduce lamp halo. Runtime URLs, consumer source code and character geometry unchanged. No files deleted. Old runtime bytes backed up. No tests, asset audit or build."
+}

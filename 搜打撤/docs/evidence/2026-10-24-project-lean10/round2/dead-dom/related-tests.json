@@ -1,0 +1,19 @@
+{
+  "tests": [
+    "tests/acceptance-gate.test.js",
+    "tests/backpack-layout.test.js",
+    "tests/backpack-rail-alignment.test.js",
+    "tests/battle-decision-readability.test.js",
+    "tests/card-face-presentation.test.js",
+    "tests/card-reading-typography.test.js",
+    "tests/css-dead-dom-budget.test.js",
+    "tests/css-dead-dom-reachability.test.js",
+    "tests/hub-flow-regression.test.js",
+    "tests/pocket-restore-interface.test.js",
+    "tests/sacrifice-layout-readability.test.js",
+    "tests/terminal-result-readability.test.js",
+    "tests/ui-design-system.test.js",
+    "tests/wf-feedback1021-c-return-map.test.js",
+    "tests/workflow-change-review.test.js"
+  ]
+}

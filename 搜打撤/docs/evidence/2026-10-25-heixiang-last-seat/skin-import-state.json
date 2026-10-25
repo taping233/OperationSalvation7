@@ -1,0 +1,16 @@
+{
+  "identity": {
+    "character": "heixiang",
+    "id": "last-seat",
+    "name": "终站留席",
+    "source_sha256": "e09bc01e29c15fde727415bee184d447389ac186adffa2df995f691bff1908d8",
+    "asset": "portraits/full/heixiang-last-seat.webp",
+    "quality": 94
+  },
+  "status": "complete",
+  "completed": [
+    "game\\assets\\portraits\\full\\heixiang-last-seat.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ]
+}

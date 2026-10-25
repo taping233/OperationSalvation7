@@ -1,0 +1,170 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-257541bd-43a0-4ce9-af77-e28e1d5558d5.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-martial-tt7-swordimmortal-source.png",
+        "bytes": 2053293,
+        "sha256": "23b41e454981786ea21f371332a98459a40a8623a4d1e991bb4a482f38ebb03d"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-martial-tt7-swordimmortal-full-before.webp",
+          "bytes": 173996,
+          "sha256": "1fa18a81cfcae4ead5197f9831a1890fc052cb96c55027750f1c80b26066c2e1"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-martial-tt7-swordimmortal-thumb-before.webp",
+          "bytes": 28342,
+          "sha256": "5e1bf4eda0ccfded3824b981f4b3cee31759166aa98e774812fb6e4a8149ba55"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 169632,
+          "sha256": "8c9366b0ef14f06660cb3d52db17c18dcae4030ed95f7c7680405eb324933129",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 27780,
+          "sha256": "f5610520466fb07f99cbcadb1be981fa1b81d257123620ad357632b8838f7c5d",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "sword-seat-fix-20261024",
+      "revision_after": "sword-seat-tip-hilt-fix-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 173996,
+            "sha256": "1fa18a81cfcae4ead5197f9831a1890fc052cb96c55027750f1c80b26066c2e1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-sword-seat-fix/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 169632,
+            "sha256": "8c9366b0ef14f06660cb3d52db17c18dcae4030ed95f7c7680405eb324933129",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 28342,
+            "sha256": "5e1bf4eda0ccfded3824b981f4b3cee31759166aa98e774812fb6e4a8149ba55",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-sword-seat-fix/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 27780,
+            "sha256": "f5610520466fb07f99cbcadb1be981fa1b81d257123620ad357632b8838f7c5d",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
+          }
+        }
+      ]
+    },
+    {
+      "card_id": "tt8-hero-summoner",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e6f-fb4d-7340-ad3d-6655366550f7\\exec-7768a3c5-69b1-4b0e-9e7b-5c4c70923907.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-hero-summoner-source.png",
+        "bytes": 1854762,
+        "sha256": "2d528b77e2305bc3da1059392cd674914630ad02fe48524a8ed39a9eca41b6ee"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-hero-summoner-full-before.webp",
+          "bytes": 177550,
+          "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-card-local-fix/cards-hero-summoner-thumb-before.webp",
+          "bytes": 23364,
+          "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/hero-summoner.webp",
+          "bytes": 141580,
+          "sha256": "a0030120c47bd1f5482d62b7747c3c5636acbf6832196703674f6e295a1f4c9e",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/hero-summoner.webp",
+          "bytes": 21912,
+          "sha256": "338b6819b752452ad144227498f9b3fb3b44ae1926eb6efbd9cb24f6fb6cb640",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "baita-two-blooms-original-rough-20261010",
+      "revision_after": "baita-covered-eyes-gold-clip-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 177550,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "e80166824800f37c1ccc96364683e691e152717345094383ce0c39445dc28f45",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          },
+          "after": {
+            "path": "cards/hero-summoner.webp",
+            "ext": "webp",
+            "bytes": 141580,
+            "license": "项目自有（自制/AI 生成）",
+            "sha256": "a0030120c47bd1f5482d62b7747c3c5636acbf6832196703674f6e295a1f4c9e",
+            "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 23364,
+            "sha256": "666e4f919b795f5606bdfc17fbdf60ed559f211976c2f78ca006d3e4d478c88b",
+            "source": "docs/evidence/2026-10-10-two-blooms/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/hero-summoner.webp",
+            "ext": "webp",
+            "license": "项目自有（自制/AI 生成）",
+            "bytes": 21912,
+            "sha256": "338b6819b752452ad144227498f9b3fb3b44ae1926eb6efbd9cb24f6fb6cb640",
+            "source": "docs/evidence/2026-10-24-card-local-fix/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

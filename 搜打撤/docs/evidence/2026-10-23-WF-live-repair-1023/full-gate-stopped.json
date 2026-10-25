@@ -1,0 +1,41 @@
+{
+  "reason": "老板要求关闭承伤悬停后尽快结束，不继续等待本轮完整测试；定向152项通过，全套不计通过",
+  "stoppedAt": "2026-10-23T23:38:35.1723049+08:00",
+  "processes": [
+    {
+      "ProcessId": 38448,
+      "ParentProcessId": 39104,
+      "CreationDate": "2026-10-23T23:31:39.55519+08:00"
+    },
+    {
+      "ProcessId": 42756,
+      "ParentProcessId": 38448,
+      "CreationDate": "2026-10-23T23:32:00.480229+08:00"
+    },
+    {
+      "ProcessId": 30700,
+      "ParentProcessId": 42756,
+      "CreationDate": "2026-10-23T23:32:01.087771+08:00"
+    },
+    {
+      "ProcessId": 30204,
+      "ParentProcessId": 42756,
+      "CreationDate": "2026-10-23T23:38:33.291081+08:00"
+    },
+    {
+      "ProcessId": 41568,
+      "ParentProcessId": 42756,
+      "CreationDate": "2026-10-23T23:38:33.583326+08:00"
+    },
+    {
+      "ProcessId": 10904,
+      "ParentProcessId": 42756,
+      "CreationDate": "2026-10-23T23:38:33.878065+08:00"
+    },
+    {
+      "ProcessId": 47840,
+      "ParentProcessId": 42756,
+      "CreationDate": "2026-10-23T23:38:33.973767+08:00"
+    }
+  ]
+}

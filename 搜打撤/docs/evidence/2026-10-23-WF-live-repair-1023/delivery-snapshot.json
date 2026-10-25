@@ -1,0 +1,376 @@
+{
+  "capturedAt": "2026-10-23T15:39:47.265Z",
+  "note": "当前逐文件收据，不是整树原子冻结；其他会话完成增量受保护。固定浏览器副本与主线不同的非本轮文件不据此验收。",
+  "files": [
+    {
+      "path": "game/css/battle-equipment.css",
+      "sha256": "14a9e77ad81624de014445a82df9166f237f26bb5985ef1b2c1582c5fb3fec51",
+      "browserCopySha256": "14a9e77ad81624de014445a82df9166f237f26bb5985ef1b2c1582c5fb3fec51",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/css/battle-hud-clarity.css",
+      "sha256": "afbd98ba0ea3b4dc95724020e31958d2cfe43ce834c3543587e9fdfcb05ef5dd",
+      "browserCopySha256": "afbd98ba0ea3b4dc95724020e31958d2cfe43ce834c3543587e9fdfcb05ef5dd",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "c0d2aa6aa74b7d0a62ca83e8e2adbae94b41b55bb138253add89e0443a4161df",
+      "browserCopySha256": "c0d2aa6aa74b7d0a62ca83e8e2adbae94b41b55bb138253add89e0443a4161df",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/css/discovery-selection.css",
+      "sha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523",
+      "browserCopySha256": "a64aa836b63f243dfcf619bfc094e7188d6507e05adaeb6cbcf224fe75a7f523",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "sha256": "fd4749286b658a4b21e64b1fdb9d97191ab83404029e9dbe6be8c4df46bb6506",
+      "browserCopySha256": "fd4749286b658a4b21e64b1fdb9d97191ab83404029e9dbe6be8c4df46bb6506",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "sha256": "e51c103b3c07580dd2f99d90996b7b16d6efc9616b9cd87f7df50891778764d3",
+      "browserCopySha256": "5317cb9b8ea28ffe17250029cd8feee95a1e898370aee0288a2af633dd17e9a3",
+      "browserCopyMatches": false
+    },
+    {
+      "path": "game/css/review-ui.css",
+      "sha256": "61e02da04a9e1a970fac58b6b292b69b56daa3a51898ecfcf523595a65c4ff3a",
+      "browserCopySha256": "61e02da04a9e1a970fac58b6b292b69b56daa3a51898ecfcf523595a65c4ff3a",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/index.html",
+      "sha256": "ae3f4b0d3bd2017ce2fe91fc1c58e9417d79a2a4bc202f1b7e1455e45578d85a",
+      "browserCopySha256": "7dc3827e4ecce3ec505b4d53fa4d4e30906da8712d919c1c476e11e0d5a6228d",
+      "browserCopyMatches": false
+    },
+    {
+      "path": "game/src/README.md",
+      "sha256": "0f1954ef54ea96cae91b8cfa0ca7ce3f3732f52e1da430ea24155ada45dd8f18",
+      "browserCopySha256": "0f1954ef54ea96cae91b8cfa0ca7ce3f3732f52e1da430ea24155ada45dd8f18",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256": "17a3a1d917dc579e4da244b59a017d83e9129e99dad525e3cd597747a2692dd8",
+      "browserCopySha256": "7389de0255e523d6574f2f51087c576c804bb97abf4f27001879216d1e47acad",
+      "browserCopyMatches": false
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "a1ccceb7c65b45ae687bf1f3f4c159ed9506a3a5fbe9a3168a3aabe51ed9f2c9",
+      "browserCopySha256": "a1ccceb7c65b45ae687bf1f3f4c159ed9506a3a5fbe9a3168a3aabe51ed9f2c9",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.core-ports.types.d.ts",
+      "sha256": "cb2704573859b84fa990dfa962076be868767caa88587efaa3669b0ce082c641",
+      "browserCopySha256": "cb2704573859b84fa990dfa962076be868767caa88587efaa3669b0ce082c641",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "c56632a7eb1bb614abe0bab3052577672e042b2483e131e37eff3396e9ebebfd",
+      "browserCopySha256": "c56632a7eb1bb614abe0bab3052577672e042b2483e131e37eff3396e9ebebfd",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "137d4f30586bd6674ca95b573e59441f90c9a353b5940712f78c1c6cd998061a",
+      "browserCopySha256": "137d4f30586bd6674ca95b573e59441f90c9a353b5940712f78c1c6cd998061a",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "c641d820f244171dc47d3587e12c00032c6ed6a7072df992fb48932f91d35f2c",
+      "browserCopySha256": "c641d820f244171dc47d3587e12c00032c6ed6a7072df992fb48932f91d35f2c",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "5e7f182b333682e75e887bb74fbf5776389747eacf7d9e2df90967d2d2368711",
+      "browserCopySha256": "5e7f182b333682e75e887bb74fbf5776389747eacf7d9e2df90967d2d2368711",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.domain.js",
+      "sha256": "89144093276617b23a9ffe169cfee2b17efb29f8dc0a09a63ae0cc13888ffd35",
+      "browserCopySha256": "89144093276617b23a9ffe169cfee2b17efb29f8dc0a09a63ae0cc13888ffd35",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.domain.js",
+      "sha256": "379570baf17b1dd787d8e7b015b4da0a2dedd552d784828ea8e1abe821ccf49f",
+      "browserCopySha256": "379570baf17b1dd787d8e7b015b4da0a2dedd552d784828ea8e1abe821ccf49f",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "sha256": "abb0bf09ee2f4ffe562c6710b47ec347060cbbe0a1c6cb1b6c833aeefd12771e",
+      "browserCopySha256": "abb0bf09ee2f4ffe562c6710b47ec347060cbbe0a1c6cb1b6c833aeefd12771e",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "11c4dc6cb60df752d4b649ae8ace500e3c74b6697c7e3bf1ea06c99ca106a28b",
+      "browserCopySha256": "11c4dc6cb60df752d4b649ae8ace500e3c74b6697c7e3bf1ea06c99ca106a28b",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-preview.js",
+      "sha256": "7b89b75c83e2dff95a5a6e734b68875e2469cc6eed53ce06a0d7b4d7a236b0b3",
+      "browserCopySha256": "7b89b75c83e2dff95a5a6e734b68875e2469cc6eed53ce06a0d7b4d7a236b0b3",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "sha256": "e839c04e47aac8d2786a2b0dc3f72577a937d1480db0e1ffa04e054b2b6bc27b",
+      "browserCopySha256": "e839c04e47aac8d2786a2b0dc3f72577a937d1480db0e1ffa04e054b2b6bc27b",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "bc272a8938bf8e22b22bdf70497664ed33c3642acfb30c0b540f631c0d3f1f71",
+      "browserCopySha256": "bc272a8938bf8e22b22bdf70497664ed33c3642acfb30c0b540f631c0d3f1f71",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-shell.js",
+      "sha256": "3733a72daadeefcb0fcdceca7b46ab186ffe13ff09e74f0376e997eb5aa306f2",
+      "browserCopySha256": "3733a72daadeefcb0fcdceca7b46ab186ffe13ff09e74f0376e997eb5aa306f2",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157",
+      "browserCopySha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.potion-use.js",
+      "sha256": "fd3d9f06d40be07d77b4d2e513a4ffbab7723916cf7a499f6b088814f21fa1df",
+      "browserCopySha256": "fd3d9f06d40be07d77b4d2e513a4ffbab7723916cf7a499f6b088814f21fa1df",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.presentation-ready.js",
+      "sha256": "447426c0e2990e0f1bc0e56004199ad6d10f3e8df099fc408a240a1f21be73c7",
+      "browserCopySha256": "447426c0e2990e0f1bc0e56004199ad6d10f3e8df099fc408a240a1f21be73c7",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.secondary-overlay.js",
+      "sha256": "ccaae7053e733c366effc04c2f0fef2926f49db8f9edd227bf0c52a42840e108",
+      "browserCopySha256": "ccaae7053e733c366effc04c2f0fef2926f49db8f9edd227bf0c52a42840e108",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.stage-view.js",
+      "sha256": "ce06bcfc983f1a9cc4fd3c43df9c8b40743123dacbe53a90bb3cedbb76799863",
+      "browserCopySha256": "ce06bcfc983f1a9cc4fd3c43df9c8b40743123dacbe53a90bb3cedbb76799863",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/cards/card-state-presentation.js",
+      "sha256": "6d3505a80681ce0233f764af9edc0d278612614cdf20b5997aff10f0c9cdd791",
+      "browserCopySha256": "6d3505a80681ce0233f764af9edc0d278612614cdf20b5997aff10f0c9cdd791",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/hub/bag-legacy-use.js",
+      "sha256": "6c4c95c787c514eb575f97e80e755b5963956e6728d74302c897f85d9fa8ef8f",
+      "browserCopySha256": "6c4c95c787c514eb575f97e80e755b5963956e6728d74302c897f85d9fa8ef8f",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36",
+      "browserCopySha256": "fa3b7a613bc30053018b8230f12b5bb1061a5a7d96df7dc1c83df5b478174a36",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/run/game-session-persistence.js",
+      "sha256": "0eb69da73de76f0ac02670b941024c083f0aab58694fe229b6113b97ba9d4c24",
+      "browserCopySha256": "0eb69da73de76f0ac02670b941024c083f0aab58694fe229b6113b97ba9d4c24",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/battle-hud-info.js",
+      "sha256": "c34fd0b9534c99d539fe3a830018f1a2b2863d640d3477c5a508f4ea049a53b2",
+      "browserCopySha256": "c34fd0b9534c99d539fe3a830018f1a2b2863d640d3477c5a508f4ea049a53b2",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/card-tip-groups.js",
+      "sha256": "c88e17c58bb82ab7b47480d9be0d72a9691efee7cb6f0c3609d771e0f05eba40",
+      "browserCopySha256": "c88e17c58bb82ab7b47480d9be0d72a9691efee7cb6f0c3609d771e0f05eba40",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/card-zoom-content.js",
+      "sha256": "a6142c92f8d9b9f4ec4f47439d89b4e521b0e92299dc1c7c310e713630680da5",
+      "browserCopySha256": "a6142c92f8d9b9f4ec4f47439d89b4e521b0e92299dc1c7c310e713630680da5",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/discovery-selection.js",
+      "sha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0",
+      "browserCopySha256": "8c759748c54033078c21d10b16c06327c08175f103a5cf924af8c2531d5182d0",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/game-map-controls.js",
+      "sha256": "9eedaedcb96445776078dfbdc50988c2bfd8b4a82d4ee78786cb6d7922b117fc",
+      "browserCopySha256": "9eedaedcb96445776078dfbdc50988c2bfd8b4a82d4ee78786cb6d7922b117fc",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/game-title-controller.js",
+      "sha256": "929c75b774785f5766ef99d75d19658fd255cc281bab928bbd5c90d4baccb5e1",
+      "browserCopySha256": "929c75b774785f5766ef99d75d19658fd255cc281bab928bbd5c90d4baccb5e1",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/hud.js",
+      "sha256": "699ea5c1100f70301e6944de3861a63ce7916055b71df91e789ebabe6a6631d3",
+      "browserCopySha256": "699ea5c1100f70301e6944de3861a63ce7916055b71df91e789ebabe6a6631d3",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/menu-data.js",
+      "sha256": "e3b469842223887418f3646b9a80c5f37db35cfc071fd1fe94ac6b89d3f827ec",
+      "browserCopySha256": "e3b469842223887418f3646b9a80c5f37db35cfc071fd1fe94ac6b89d3f827ec",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/menu-feedback.js",
+      "sha256": "2f33876c8116ec196820afd1dae4a5f004b438d0efa4afd34a76f74a4b883794",
+      "browserCopySha256": "2f33876c8116ec196820afd1dae4a5f004b438d0efa4afd34a76f74a4b883794",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/menu-leave.js",
+      "sha256": "c2c56ef3bf3c81662abfb4030e9cdb68f3fa0d26c019f622892366b6be602e8b",
+      "browserCopySha256": "c2c56ef3bf3c81662abfb4030e9cdb68f3fa0d26c019f622892366b6be602e8b",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/menu-settings.js",
+      "sha256": "c68a5fff9726fad91b8c492bb72d118505cd8a4a0af361c52ae748375c32756f",
+      "browserCopySha256": "c68a5fff9726fad91b8c492bb72d118505cd8a4a0af361c52ae748375c32756f",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "sha256": "8ed87f79e78c71109b4ac88fd88de5841230aa5c047d5de488ca81dbdbfed9b0",
+      "browserCopySha256": "8ed87f79e78c71109b4ac88fd88de5841230aa5c047d5de488ca81dbdbfed9b0",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/run-top-bar.css",
+      "sha256": "4290ffc4b602713f9d726ef0cb6ea6adf0a1446aa14296249fc210cdca5d86df",
+      "browserCopySha256": "4290ffc4b602713f9d726ef0cb6ea6adf0a1446aa14296249fc210cdca5d86df",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/run-top-bar.js",
+      "sha256": "e8f8bf130135dd1d20f872f4c948e2c8a944d392780f544ebd20c872468e973f",
+      "browserCopySha256": "e8f8bf130135dd1d20f872f4c948e2c8a944d392780f544ebd20c872468e973f",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/screen-owner.js",
+      "sha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b",
+      "browserCopySha256": "dc4828a565037b8c5c4492c1db9746a0148c42815172045ca2e3ad2ceaf9664b",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/term-tip-policy.js",
+      "sha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3",
+      "browserCopySha256": "2366d745f27f3e82b413acdac73ad84628ebd9c3819007d05d8d3213e4038dc3",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "sha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2",
+      "browserCopySha256": "508422160b49f54699ffc5a537489f970ea3bc93d366cc4eac41cdbe6caf19e2",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "game/src/ui/term-tips.runtime.js",
+      "sha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21",
+      "browserCopySha256": "9384d0d173d1fd67a4d26b65a6b98ce29067d06f22aa23670f9ec43023560c21",
+      "browserCopyMatches": true
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "8c4f3fe0631bdd96cd315a7e34a139e0a51bd4156683bdc363650fa4fe66516d"
+    },
+    {
+      "path": "tests/bag-use-compatibility.test.js",
+      "sha256": "780b6d0b5cff3205973da70dd2e7282e6eee9b1bfba7fa2dfc99b07fd2165f4b"
+    },
+    {
+      "path": "tests/battle-discovery-cancellation.test.js",
+      "sha256": "485ff7394082d176ed70b1b850b36690e5be5e7df6b8dc07c67d7e0d387399a1"
+    },
+    {
+      "path": "tests/battle-entry-readiness.test.js",
+      "sha256": "52fc4c9e20038e0aeb366066dc01a30c6fa2d4b8d0310aaf254726d0fcfa18a6"
+    },
+    {
+      "path": "tests/battle-hand-inspector.test.js",
+      "sha256": "6e71d3dea3375307cba431a96e4637b427279ec252ac08b4a2a043a8ff67452b"
+    },
+    {
+      "path": "tests/battle-hud-info.test.js",
+      "sha256": "b0db26a9009d1caf6ba262c2680bcd950093feb26741f636dfae2f7c7807812b"
+    },
+    {
+      "path": "tests/battle-infusion-action-layout.test.js",
+      "sha256": "9e5e10b8a61f3eea21024f0d1ab2dd81d0f48747061b517ccd1e8aa3454039e6"
+    },
+    {
+      "path": "tests/card-term-passive.test.js",
+      "sha256": "f7eded82f77b8858acdbcbdbd6e99dc11e4c6aad61f64ac2b7d53f94d1d636cf"
+    },
+    {
+      "path": "tests/discovery-selection.test.js",
+      "sha256": "40f5321cd5a390c0fbc71994e9314ecb30dd94ff9e2b7530223d5777890db071"
+    },
+    {
+      "path": "tests/game-session-slices.test.js",
+      "sha256": "04d53d94eb50756a76dabd44af976bd15a59ef47fda263a5c68687bfe4690cb5"
+    },
+    {
+      "path": "tests/menu-return-chain.test.js",
+      "sha256": "6ed4019494395950e07485e3cd9ff8e0d9e12e537ee8ede3efd15e0e539f2563"
+    },
+    {
+      "path": "tests/overlay-dialog.test.js",
+      "sha256": "438d1f2d93a6f35f69dca27957465225ba44237ed1c32919c109bd0f5e172e27"
+    },
+    {
+      "path": "tests/public-controls-equipment.test.js",
+      "sha256": "465d18dc6a9ac242d2a068c93201b70da7924828bdedb3b962b3d1bad36b971e"
+    },
+    {
+      "path": "tests/run-top-bar-actions.test.js",
+      "sha256": "6a98f199b8b5040fe7e80b67c80cc4126f30adfb7649a115552efff7789bc73c"
+    },
+    {
+      "path": "tests/sts2-potion-use-1021.test.js",
+      "sha256": "47185bf524ceb149664d4f611454b3ab7d674819fcc78e3f20abe930fbaf3417"
+    },
+    {
+      "path": "tests/ui-review-remediation.test.js",
+      "sha256": "232a08b0c9fb57876a442c152c60eeb9897317bfb9d1321db5fbb360b55de557"
+    }
+  ]
+}

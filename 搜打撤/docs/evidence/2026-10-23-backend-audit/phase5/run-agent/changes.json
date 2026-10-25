@@ -1,0 +1,13 @@
+{
+  "file": "scripts/runtime-asset-redundancy-review.mjs",
+  "added": 7,
+  "removed": 90,
+  "bytesBefore": 42678,
+  "bytesAfter": 35680,
+  "bytesReduced": 6998,
+  "sourceAfterSha256": "49555694DE08DDAAE990AB4D3AC2DB950726F41F34F52A8716A9AABC0E54BE83",
+  "perfLedgerDecision": "老板本轮重新决定保留",
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false
+}

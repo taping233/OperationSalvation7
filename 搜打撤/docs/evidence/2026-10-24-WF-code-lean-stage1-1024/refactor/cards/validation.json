@@ -1,0 +1,144 @@
+{
+  "finalSource": {
+    "status": "stable-uncommitted",
+    "runtimeFiles": [
+      "game/src/cards/card-rules.schema.js",
+      "game/src/cards/card-healing-program.js",
+      "scripts/sync-cards-from-live.mjs"
+    ],
+    "unusedTrialFiles": [],
+    "wholeFileDeletes": 0
+  },
+  "differential": {
+    "status": "passed",
+    "command": "node docs/evidence/2026-10-24-WF-code-lean-stage1-1024/refactor/cards/schema-differential.mjs",
+    "oracle": "First-phase-complete bytes in node_modules/.cache/lean-refactor-1024/before; pure validator evaluated with unchanged imported dependencies",
+    "total": 14351,
+    "counts": {
+      "operationFields": 4760,
+      "costModifiers": 2800,
+      "requirements": 2400,
+      "nestedRecords": 200,
+      "equipment": 80,
+      "nestedFields": 120,
+      "builtinCards": 523,
+      "builtinDeclarations": 3138,
+      "migratedBuiltinCards": 282,
+      "mixedTargets": 48
+    },
+    "globalKeySetEquivalent": true,
+    "pendingSetEquivalent": true,
+    "expectedThrows": 0,
+    "compared": "Entire result including ok/errors/pending and error order; NaN/undefined/null/boundaries/unknown keys and blank declarations included",
+    "notInDefaultCI": true
+  },
+  "finalTests": {
+    "status": "passed",
+    "files": 17,
+    "total": 212,
+    "passed": 212,
+    "failed": 0,
+    "pending": 0,
+    "raw": {
+      "path": "node_modules/.cache/lean-refactor-1024/cards-final-tests.json",
+      "bytes": 81388,
+      "sha256": "51d0715ca8243332d5428e3e40dec944f43bf7b379c1786ea0321129167ae4d6"
+    },
+    "testFiles": [
+      "tests/battle-resolution.test.js",
+      "tests/card-description-text.test.js",
+      "tests/card-effect-semantics.test.js",
+      "tests/card-rules-bag-boundary.test.js",
+      "tests/card-rules-per-foe-boundary.test.js",
+      "tests/card-rules-schema.test.js",
+      "tests/cards-rules-runtime-boundary.test.js",
+      "tests/cards-sync-snapshot-guard.test.js",
+      "tests/code-lean-stage1-cards-schema.test.js",
+      "tests/e6-card-rules-execution.test.js",
+      "tests/e6-card-rules-types.test.js",
+      "tests/effect-verbs.test.js",
+      "tests/normal-effects-deck-regression.test.js",
+      "tests/schema-op-coverage.test.js",
+      "tests/structured-effect-authority.test.js",
+      "tests/sts2-structured-description.test.js",
+      "tests/tt3-effect-baseline.test.js"
+    ]
+  },
+  "knownFailingTests": {
+    "status": "baseline-reproduced-not-passed",
+    "file": "tests/card-sync-slices.test.js",
+    "passed": 4,
+    "failed": 2,
+    "assertions": [
+      "reads replacement libraries lazily and leaves unrelated custom fields intact",
+      "backfills rules without replacing explicit zero amounts and retries rejected persistence"
+    ],
+    "beforeReproduction": {
+      "config": "node_modules/.cache/lean-refactor-1024/cards-baseline.vitest.config.mjs",
+      "method": "Read-only Vite loader injects phase-before source for the previously modified three runtime files; workspace sources remain untouched",
+      "passed": 4,
+      "failed": 2
+    }
+  },
+  "static": {
+    "syntax": {
+      "status": "passed",
+      "method": "Acorn parse latest/module on all final runtime files"
+    },
+    "eslint": {
+      "status": "passed",
+      "files": [
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-healing-program.js",
+        "scripts/sync-cards-from-live.mjs"
+      ]
+    },
+    "runtimeTypes": {
+      "ownScopeDiagnostics": 0,
+      "globalStatus": "blocked-by-concurrent-ui-scope-diagnostics",
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p jsconfig.runtime.json --pretty false",
+      "remainingFiles": [
+        "game/src/hub/hub.personnel.js",
+        "game/src/hub/hub.warehouse.js",
+        "game/src/ui/card-browser.js",
+        "game/src/ui/collection-view.js"
+      ],
+      "communicatedTo": "lean_ui_sol and parent; no modifications made"
+    }
+  },
+  "abandonedTrial": {
+    "status": "removed-by-scoped-source-edits",
+    "reason": "Three-family execution model added 2106 tokens but retired only 1493; net +613 before schema gains. Parent ordered stopping it.",
+    "originalProgramFile": "game/src/cards/card-healing-program.js",
+    "retainedFileNow": "7-line schema metadata only, 102 tokens; no VM or unused experimental runtime files",
+    "restoredConsumers": [
+      {
+        "file": "game/src/battle/core/battle.resolution.domain.js",
+        "normalizedEqual": true
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.recovery.js",
+        "normalizedEqual": true
+      },
+      {
+        "file": "game/src/battle/effects/effect-steps.kills.js",
+        "normalizedEqual": true
+      },
+      {
+        "file": "game/src/cards/cards.rules.js",
+        "normalizedEqual": true
+      },
+      {
+        "file": "game/src/cards/structured-card-description.js",
+        "normalizedEqual": true
+      }
+    ],
+    "experimentalTestFailure": "Intermediate field-profile healing parser was incomplete and caused six suites to fail; that program and all its consumer changes were removed, final suites pass. No claim that the abandoned program was validated."
+  },
+  "unverified": [
+    "Parent owns game current-window smoke checks",
+    "Global type/CI completion remains parent-owned",
+    "Arbitrary side-effecting Proxy/getter behavior is outside the JSON/plain-record parity matrix; parent explicitly instructed not to add framework cost for hypothetical accessor behavior",
+    "No build, commit, push or external writes performed"
+  ]
+}

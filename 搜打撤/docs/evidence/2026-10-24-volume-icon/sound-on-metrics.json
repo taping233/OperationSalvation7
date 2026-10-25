@@ -1,0 +1,33 @@
+[
+  {
+    "height": 48.875,
+    "icons": [
+      {
+        "display": "block",
+        "height": "24px",
+        "width": "24px"
+      }
+    ],
+    "id": "btnHome",
+    "muted": false,
+    "width": 53.92499923706055
+  },
+  {
+    "height": 48.875,
+    "icons": [
+      {
+        "display": "block",
+        "height": "24px",
+        "width": "24px"
+      },
+      {
+        "display": "none",
+        "height": "24px",
+        "width": "24px"
+      }
+    ],
+    "id": "btnMute",
+    "muted": false,
+    "width": 53.92499923706055
+  }
+]

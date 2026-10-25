@@ -1,0 +1,22 @@
+[
+  {
+    "path": "game/src/hub/courtyard-vendor/RainSimulation.js",
+    "bytes": 17184,
+    "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+  },
+  {
+    "path": "game/assets/vendor/base-courtyard/RainSimulation.js",
+    "bytes": 17184,
+    "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+  },
+  {
+    "path": "game/src/hub/courtyard-vendor/RainRenderer.js",
+    "bytes": 14949,
+    "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+  },
+  {
+    "path": "game/assets/vendor/base-courtyard/RainRenderer.js",
+    "bytes": 14949,
+    "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+  }
+]

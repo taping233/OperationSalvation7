@@ -1,0 +1,429 @@
+{
+  "status": "12-revised-4-preserved",
+  "runtime_replaced": false,
+  "edited_unique": 12,
+  "generation_attempts": 15,
+  "feedback_sha256": "2912f376dccc2791bdd4c9e7d6ac955b81abe648071aa85bdf4d39a7db0a99ba",
+  "items": [
+    {
+      "card_id": "tt7-imitate",
+      "name": "不变应万变-改",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-imitate.png",
+      "nai_sha256": "580925e0e54ab3f7a0d2978ee1321d9372725fb2e92aebc39f9ec1a3a9f6bae8",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-8d530852-9ba2-4d7e-b48c-ce57e1c1b56a.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-imitate.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-imitate.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "946b7629faefb4bb57302cfe9299f9933e899f3f4d2deed1d597a00c5d48e0b0",
+      "webp_sha256": "97e9cc8a9d5aa35f6ab84a17084923163c58b6de4d7108031c2d79974373ce46",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-imitate.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "946b7629faefb4bb57302cfe9299f9933e899f3f4d2deed1d597a00c5d48e0b0",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-ghostblade",
+      "name": "鬼魅之刃",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-ghostblade.png",
+      "nai_sha256": "f978b878874a60f2313206bee99bdc5ff0729393f952c3a42017afe8bac8e9c1",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-033b31df-c1b0-43e1-bca7-7a1da6f1efa2.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-ghostblade.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-ghostblade.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "108193497253bdb56d45ca68aa88bac0fec312f58d918859ad2231d89268e9f0",
+      "webp_sha256": "60c3a2f58c66106889fa68dffdc514b8f6502757a055bf67fcbc3c50caa4f3cf",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-ghostblade.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "108193497253bdb56d45ca68aa88bac0fec312f58d918859ad2231d89268e9f0",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-swordimmortal",
+      "name": "剑仙形态",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-swordimmortal.png",
+      "nai_sha256": "d832ca5e74ab4c5c09d6c826f39a6c00457fb1e3ce67cedf4ea2fcf8f0f9471c",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-493aab69-f374-4a63-a61c-a2324fb3dc94.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-swordimmortal.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-swordimmortal.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "09a503f93365ddb1aa7a3e6bfd7ba655e8b3b849b06d5077cf3e5b7f39feffe4",
+      "webp_sha256": "550f79773dca4255cfe5e34bc23f8421e099978e38d330e47ad47969514e20ca",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-swordimmortal.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "09a503f93365ddb1aa7a3e6bfd7ba655e8b3b849b06d5077cf3e5b7f39feffe4",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-goldencicada",
+      "name": "金蝉脱壳",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-goldencicada.png",
+      "nai_sha256": "5a588142675cd4ae39b63f5f9a94110235e20d2a91e44ca9851a377f95fbab06",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-3f0c78b7-b8df-4fef-be2e-4ce0bc334083.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-goldencicada.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-goldencicada.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "d7c406051da468c03fb5178fe0b07b983b3f74a043b2ed9bd20e8eb78f6d206f",
+      "webp_sha256": "cb12d9b5ed21da8aa15fea33572e66116ba224f27c79fac07f79f64c76b2400c",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-goldencicada.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "d7c406051da468c03fb5178fe0b07b983b3f74a043b2ed9bd20e8eb78f6d206f",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-meteorrain",
+      "name": "流星箭雨",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-meteorrain.png",
+      "nai_sha256": "655af5f0ea1c88e1cd496d33713cd39f2b9dff60c549ac344fdc8448e335bde8",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-e5412d8b-f7c8-45d8-aa32-2f44da5e5ed2.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-meteorrain.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-meteorrain.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "47f4ba9e6ce2b4882309ca4b252d38bb0251c90406d817521821a1581951255a",
+      "webp_sha256": "b6f0e0da84e7836a63139b2538900776f3460014c7101f535542e0857dd23ce1",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-meteorrain.webp",
+      "source_size": [
+        1263,
+        1246
+      ],
+      "crop_box": [
+        8,
+        0,
+        1254,
+        1246
+      ],
+      "source_sha256": "47f4ba9e6ce2b4882309ca4b252d38bb0251c90406d817521821a1581951255a",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-stealth",
+      "name": "潜匿",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-stealth.png",
+      "nai_sha256": "0077b16c0ca8b8bbf3ff8d56c0a8a425500d3519b06291444bb176bb254ef306",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-6c8886e3-a1ad-4017-b348-da384cc4f5c8.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-stealth.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-stealth.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "8d081debff40082f3eba2fe356a91c86998bfc1f370387ebccaeb103372aed3a",
+      "webp_sha256": "0a0f90e2889d05a0de3342bc7a95ab3cd369184bb4ae0393185ed3722fea51e5",
+      "status": "owner-approved-preserved",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-stealth.webp",
+      "revision": 1
+    },
+    {
+      "card_id": "tt7-sneak",
+      "name": "偷袭",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-sneak.png",
+      "nai_sha256": "2fc4b88a83056feefc28b1c8b73f6100bf0903a1da5206e381f474902c9ff12e",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-dcda80f8-ac2c-40ea-9d95-7aba8c6d4ee5.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-sneak.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-sneak.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "2177cad98f1b98457178c0c059047040e2c5d6650d9094704fee1837309cac40",
+      "webp_sha256": "25406c66c577c815aa24014bafc708a40709f848b5fd1406b5be9f689d900a0f",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-sneak.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "2177cad98f1b98457178c0c059047040e2c5d6650d9094704fee1837309cac40",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-armup",
+      "name": "武装",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-armup.png",
+      "nai_sha256": "d5025104f6c061e9695cf1882c9f90bdb68def9a7c11e6a51bef846a7431f068",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-ac4c97fc-d2eb-4a8b-aabf-16e6705f3d53.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-armup.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-armup.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "99c42e0d1e3bcd34801907c2baebd77a8a82ebdbb8462df79d7d88d28d778d0f",
+      "webp_sha256": "f7aa0757b6d28bb2c070076503ea2eff556c146cba6d10295f335218da8ba922",
+      "status": "owner-approved-preserved",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-armup.webp",
+      "revision": 1
+    },
+    {
+      "card_id": "tt7-whirlwind",
+      "name": "旋风斩",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-whirlwind.png",
+      "nai_sha256": "df6c96598c0045d423ba095e749f2a93f23f680649cb0a89329682e3fcf4e7b5",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-a36a7ee2-1948-4f68-ae7f-d9596bb9f1ea.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-whirlwind.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-whirlwind.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "0f6bf93d848559b8faf66d03e67fa0266af2bf884fc45ba885af1cd6bf21042a",
+      "webp_sha256": "fad2b32c4a7407b518c8a727bcb564f18d0f7841d7556891e57631972d5739c5",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-whirlwind.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "0f6bf93d848559b8faf66d03e67fa0266af2bf884fc45ba885af1cd6bf21042a",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-bloodpoison",
+      "name": "血毒双镖",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bloodpoison.png",
+      "nai_sha256": "a3d52cedcf082ab6bec8cafb01f1aa64ab306fbc26cae7e4cad6eea3d688f559",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-ef35f693-3110-4296-8384-f111ad0833de.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-bloodpoison.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-bloodpoison.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "0069cf1ccaf1592e1de9a7a7c65d6ab9f3619efed7fcb49bf029b09fb8e49bc1",
+      "webp_sha256": "74daa3114e1a0420f0313367c9537317e3eafb206cde0f9085e2db7f127772ff",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-bloodpoison.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "0069cf1ccaf1592e1de9a7a7c65d6ab9f3619efed7fcb49bf029b09fb8e49bc1",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-bladebloom",
+      "name": "永恒绽放",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-bladebloom.png",
+      "nai_sha256": "2f7969e3db65cfb7bcf66a92054b9a9a1384f012d16c928177810af937caa6f6",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-b987fd7f-7fa6-4d36-8468-0007fba8d15f.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-bladebloom.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-bladebloom.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "14355a1fdf76cad6a7230ecc32a3007cbdbd3e291fb3738d3f7bf4df4c875361",
+      "webp_sha256": "ce93d5953c9f466b58f65eb3add0e605ec690b544379d5c2bcf219e52810700e",
+      "status": "owner-approved-preserved",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-bladebloom.webp",
+      "revision": 1
+    },
+    {
+      "card_id": "tt7-arcanescroll",
+      "name": "奥术残卷",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-arcanescroll.png",
+      "nai_sha256": "2ac69de1aee922c0ea6e45c6e6ad906865b5009046ea92b25e09d17f979aaeaf",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-d36adc15-933b-4e29-b8ac-bac4f0f9ec1b.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-redraw-1023\\tt7-arcanescroll.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-arcanescroll.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "146d89a8853ce2b5b5e18c833865a237470a9842c32cb9ef99fd706e9caecbcf",
+      "webp_sha256": "36582256195a8694f532ebf4278fceb86d7adaca085bc10e0e3c1b4bc32311fb",
+      "status": "owner-approved-preserved",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-arcanescroll.webp",
+      "revision": 1
+    },
+    {
+      "card_id": "tt7-burnharvest",
+      "name": "爆燃火球",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-burnharvest.png",
+      "nai_sha256": "b69777e024cf3fd0e61c53540376d0e38929a2b6b07e83b37d5fa05738b60a60",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-6da91117-71d4-4827-9a0c-cd33011473d8.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-burnharvest.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-burnharvest.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "42bc4418a0a9f5357b672ca3a15c3ee92d82ab2e51fb16da800269f672c3edb6",
+      "webp_sha256": "714150d3f7d4d524fc39520a8909d01ac81bb3767005261f2e5c16bf8c49475c",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-burnharvest.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "42bc4418a0a9f5357b672ca3a15c3ee92d82ab2e51fb16da800269f672c3edb6",
+      "revision": 2
+    },
+    {
+      "card_id": "tt3-flame-storm",
+      "name": "风暴火球",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-flame-storm.png",
+      "nai_sha256": "ca79b7ad14993a7c391a1554fff504b94a355d394386599883b9d4c03be5c43d",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-f720e20e-0e9b-48f5-875f-7880ca82c5d6.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-flame-storm.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt3-flame-storm.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "40b4d11fef25ef4b20aa5e1e9d98c26903d1081b69e34392c8e83933cfca8dd3",
+      "webp_sha256": "b4086eeaaac28936fa0a5c0a413ed4193f4af569f9d5734ac3563097d4f7a21e",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt3-flame-storm.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "40b4d11fef25ef4b20aa5e1e9d98c26903d1081b69e34392c8e83933cfca8dd3",
+      "revision": 2
+    },
+    {
+      "card_id": "tt7-twinfireball",
+      "name": "三重火球",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt7-twinfireball.png",
+      "nai_sha256": "55e66167d02981fba103823f41c93b50207fb6865bc35ac1f85d60e232582391",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-9fc9ea7c-3989-4240-b446-514bd87c5206.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt7-twinfireball.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt7-twinfireball.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "05491ae2bff0e7cdf13975aaca8410b072cb303e9617362c6c9ca7a886d0e0de",
+      "webp_sha256": "8927431fb511d6fd90654b41be129778e301d5f7eec6dbb913bf31f7d6b501c2",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt7-twinfireball.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "05491ae2bff0e7cdf13975aaca8410b072cb303e9617362c6c9ca7a886d0e0de",
+      "revision": 2
+    },
+    {
+      "card_id": "tt3-nuke-ray",
+      "name": "致命射线",
+      "nai": "D:\\素材\\代号柒\\.tmp\\nai\\class-card-redraw-1023\\tt3-nuke-ray.png",
+      "nai_sha256": "603f21aece0726678c8a661d14ef3b0d2b5c23162f33ec6019788b7b875e1c96",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16808-bd31-7bc0-babf-17987b82d779\\exec-069e3fb2-bbdb-4ca8-a0d6-232d92d768d7.png",
+      "png": "D:\\素材\\代号柒\\.tmp\\imagegen\\class-card-feedback-v2-1023\\tt3-nuke-ray.png",
+      "webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\v2\\tt3-nuke-ray.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "png_sha256": "e3976dee4fa6dba17101568679ca37b7114aedb7ae7de20c39c2b96851495918",
+      "webp_sha256": "ba7b56ab9508373c9a6b2b2cd495a26447f0bcdaee8ebd37a71a33fa884329e1",
+      "status": "revised-candidate-not-installed",
+      "previous_webp": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\class-card-redraw-20261023\\tt3-nuke-ray.webp",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "crop_box": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source_sha256": "e3976dee4fa6dba17101568679ca37b7114aedb7ae7de20c39c2b96851495918",
+      "revision": 2
+    }
+  ]
+}

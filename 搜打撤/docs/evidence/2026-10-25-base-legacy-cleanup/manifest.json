@@ -1,0 +1,111 @@
+[
+  {
+    "path": "game/css/base-controls-v4.css",
+    "sha256": "1FECE298187DE8A0F7B6325E95AE33936318C6D0D258C5E4212A80225D7C3EE6"
+  },
+  {
+    "path": "game/css/base-rooms-v7.css",
+    "sha256": "39A0E8821703FF054CBACE2BEF3B63F5FBD71BAF702CEC7E32FAB9417AFFB462"
+  },
+  {
+    "path": "game/css/base-personnel-v12.css",
+    "sha256": "55B4EE0A9D2472295AE0ECC9C20CF2EED920E8F6360B2C6D06EF3C8A29329CFF"
+  },
+  {
+    "path": "game/css/base-camp.css",
+    "sha256": "88A102B31CB212262DF2716DE097B6B70818FA86E06507640423ABBA09D69E88"
+  },
+  {
+    "path": "game/src/hub/base-motion-v4.js",
+    "sha256": "949C0CF3F102DC7AE164CE7E3B221B9C6B9036D13B49C308B340681F7272E821"
+  },
+  {
+    "path": "tests/base-motion-v4.test.js",
+    "sha256": "BE293FDD67677D6B80A9DF5169C02C727459C261BC4136EED36C7C56A0C2F0D7"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/before-sha256.json",
+    "bytes": 831,
+    "sha256": "4EFF643A3DF9EEF1CA1D94E9F5FC2C209EAD8F7D40FD6AB096EABD7DEC637FEE"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/browser.json",
+    "bytes": 1592,
+    "sha256": "6C2DD7ADA755FF0FE8ACDEE2C36E2A9216BA0D032A24472C75F2EB3503251FD2"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/collection-hover.png",
+    "bytes": 115098,
+    "sha256": "774EFA047A855D7CEBFE75B91D3CA14F913BAAB841593A00B8C7FCBFEF04E4BC"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/collection.png",
+    "bytes": 114041,
+    "sha256": "017B4CE1FBC19F6E36CB0849F6E758B55A1EC93B6F64B3C19E7E3A7879A42473"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/courtyard.png",
+    "bytes": 133922,
+    "sha256": "D28B8C248D8035344C28DAF0F8A325C144006FF3BA83CC23DDB3A77747EDF90D"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/facilities-warehouse.png",
+    "bytes": 85687,
+    "sha256": "4C8C2BC8CE2C9D50D97EF2830DA8C792254AA775A918FB5256C2701AD5CC960F"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/facilities.png",
+    "bytes": 85771,
+    "sha256": "BD955CC60A8223E63B7B0C18279590E03ACA82D5B9C23CB262E7CFE40F5AF8A0"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/hatch.png",
+    "bytes": 104078,
+    "sha256": "14CDECAE8FB421E22849FACFD123B9E4311AE2A56AE3FEC3DB17BA0E75E27430"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/home.png",
+    "bytes": 109706,
+    "sha256": "B615F7401607C6C7D753962C3882DBEB34A9D0B1BD843EA3001F960CCC25E1BD"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/own-delta.patch",
+    "bytes": 18238,
+    "sha256": "7F20D0D3DD9EFFBF2E6CF62BD137224E212FA3A0A9DAAB4814F90E890CD7F570"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/partners.png",
+    "bytes": 118358,
+    "sha256": "E96B602D310A07ED7CFDFCFEA7A66884E2CF0E08242459EB5818FD6156C6F882"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/personnel.png",
+    "bytes": 110131,
+    "sha256": "F63AF0EDC61FAB769F6BC03CEE58398CCA8DEC3328C6E710E74F5E84253EB783"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/README.md",
+    "bytes": 2966,
+    "sha256": "35BE03CF1CC9A8CD34A44239E1A020E7D109B677C90AD43DFB92235C9DD6CF3C"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/reload-title.png",
+    "bytes": 154787,
+    "sha256": "A46EB929C4E5A1E3BA89C1ADF073096F83EF9EB4E0B9D744BE820F009D991C51"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/trade-sell.png",
+    "bytes": 160786,
+    "sha256": "9CFCCE98887DD9518039A30ED3ECAA9256D4BCF0667E7C291D32C02D0863FB27"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/trade.png",
+    "bytes": 149488,
+    "sha256": "C49D0B951F03B9FA116DAE67AD97D6E64D2858EC15BFAECB801F1CB58F891495"
+  },
+  {
+    "path": "docs/evidence/2026-10-25-base-legacy-cleanup/warehouse.png",
+    "bytes": 158213,
+    "sha256": "04F227CA5E7487E04CB3CD8B169D317736C5E5B9A44A36D41F9783CED1173A21"
+  }
+]

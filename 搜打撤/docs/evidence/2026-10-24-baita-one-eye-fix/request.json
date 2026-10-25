@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "card_id": "tt8-hero-summoner",
+      "asset": "cards/hero-summoner.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a16e6f-fb4d-7340-ad3d-6655366550f7/exec-5daf54f6-cb0e-408d-af09-442589dea285.png",
+      "revision": "baita-one-eye-twin-gold-bars-20261024",
+      "prompt": "Use case: precise-object-edit. Image 1 is the original flower card to edit. Image 2 is the CURRENT APPROVED Baita character reference: use ONLY its asymmetric eye-covering bangs and EXACT paired golden barrette design. Retain image 1's composition, pose, matte block-brush rendering, flower, clothing, long brown curls, split ochre/dark green background. Correct hairstyle to match image 2: from the VIEWER'S perspective the eye on the RIGHT is completely hidden by thick side-swept brown bangs; the eye on the LEFT remains clearly visible and green. Sweep the bangs diagonally, not a straight fringe across both eyes. On the VIEWER'S LEFT temple, the side of the exposed green eye, attach EXACTLY TWO separate slim SOLID STRAIGHT GOLD RECTANGULAR BAR hairpins, closely spaced and approximately parallel, diagonally slanted like the two bars visible in image 2. Copy their simple narrow straight metallic bar shape and paired arrangement. No single teardrop clip, no hollow oval snap clip, no loops, no X-shaped crossed pins. Keep nose and mouth visible. Do not add the reference's hat, books, cake or seated pose: image 2 controls ONLY hairstyle and two hairpins. Preserve original blouse, blue brooch, green dress, gold earrings, flower and hands. No text or watermark.",
+      "references": [
+        ".tmp/imagegen/2026-10-24-card-local-fix/cards-hero-summoner-full-before.webp",
+        "game/assets/portraits/full/baita.webp",
+        "docs/character-bible/baita.md"
+      ]
+    }
+  ]
+}

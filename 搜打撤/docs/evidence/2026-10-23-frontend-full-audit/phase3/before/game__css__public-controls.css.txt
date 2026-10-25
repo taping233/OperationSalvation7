@@ -1,0 +1,35 @@
+/* Shared state cues for ordinary action and icon buttons. Keep each surface's
+   existing colour, size and transform/selection animation. */
+:root {
+  --public-control-ring: var(--ak-blue-hi, #7fd5ff);
+  --public-control-press: var(--ak-white, #f5f6f3);
+}
+body :is(.ov-btn.ok, .hs-btn.ok, .menu-btn.primary) { --public-control-ring: var(--ak-yellow, #ffd23c); }
+body .mini-btn.danger { --public-control-ring: var(--ak-red, #ec4b3f); }
+
+body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:hover, :focus-visible):not(:disabled):not([aria-disabled="true"]) {
+  outline: 2px solid var(--public-control-ring);
+  outline-offset: 2px;
+}
+body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):active:not(:disabled):not([aria-disabled="true"]) {
+  outline-color: var(--public-control-press);
+  outline-offset: 0;
+}
+body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:disabled, [aria-disabled="true"]) {
+  cursor: default;
+  outline: none;
+}
+
+/* The shared body-mounted explanation can be read and scrolled independently
+   without forwarding pointer actions into its original button. */
+body .term-tip:not([hidden]) { pointer-events: auto; overscroll-behavior: contain; }
+body .term-tip.is-action-tip { background: rgba(22,32,41,.96); }
+
+@media (prefers-reduced-motion: reduce) {
+  body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close) {
+    transition-duration: 0s;
+  }
+}
+body.reduce-motion :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close) {
+  transition-duration: 0s;
+}

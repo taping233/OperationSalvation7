@@ -1,0 +1,982 @@
+{
+  "scope": "Only this task delta; includes shared helpers; excludes evidence and registry",
+  "summary": {
+    "files": 49,
+    "existing": 46,
+    "added": 3,
+    "removedLines": 936,
+    "removedBytes": 53860,
+    "removedNormalizedBytes": 53767,
+    "removedJsTokens": 7094
+  },
+  "files": [
+    {
+      "file": "tests/abyss-sovereign.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 10181,
+        "normalizedBytes": 9981,
+        "lines": 200,
+        "sha256": "b2cf786b92cecb440b35b46f873dc130f85d359b5c0612fe43a02b34d76fa8f0"
+      },
+      "after": {
+        "bytes": 9014,
+        "normalizedBytes": 8844,
+        "lines": 170,
+        "sha256": "33c63cbcf37e6fbc4659bf5219a8a3bd4fd1e7fecd4ca91e2a45cef136a410e4"
+      },
+      "nonCommentTokens": {
+        "before": 2230,
+        "after": 1917
+      }
+    },
+    {
+      "file": "tests/armup-mode.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4436,
+        "normalizedBytes": 4436,
+        "lines": 69,
+        "sha256": "2c1e16e52d7923a91b34926ddf54a5a54c27764c46ba146cfa71e526c3ccebb9"
+      },
+      "after": {
+        "bytes": 4088,
+        "normalizedBytes": 4088,
+        "lines": 58,
+        "sha256": "60fc2f115315411a47f57cad014bcb80c1b53d69b14e35cdb3707259edfa9b22"
+      },
+      "nonCommentTokens": {
+        "before": 1299,
+        "after": 1164
+      }
+    },
+    {
+      "file": "tests/bag-slam-button.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 13230,
+        "normalizedBytes": 13230,
+        "lines": 316,
+        "sha256": "16837ba73869766f3c9f4fc729b325e72d01aa8076b40afc38ec81eecb04d637"
+      },
+      "after": {
+        "bytes": 12602,
+        "normalizedBytes": 12602,
+        "lines": 301,
+        "sha256": "9087dede7b158ef82f9edb8542fddf866379b2a5c58e783f850e4efcf53c2082"
+      },
+      "nonCommentTokens": {
+        "before": 3219,
+        "after": 3077
+      }
+    },
+    {
+      "file": "tests/battle-curse-immunity-lifetime.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4641,
+        "normalizedBytes": 4641,
+        "lines": 84,
+        "sha256": "5e7e4760c1c62a9bf84fc50aa6d8477ea5deda72c6459ffc4c1086c729069e91"
+      },
+      "after": {
+        "bytes": 4299,
+        "normalizedBytes": 4299,
+        "lines": 79,
+        "sha256": "d08e2f1c575e4c49f14290a3d1ceaffc9a243a3dd2d6038fb6967f2c9114e071"
+      },
+      "nonCommentTokens": {
+        "before": 1291,
+        "after": 1156
+      }
+    },
+    {
+      "file": "tests/battle-pouch-entry.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4583,
+        "normalizedBytes": 4583,
+        "lines": 74,
+        "sha256": "55d265f11a21910e94dbc4a4b7c7d2c02b10fa31d70586dbcb2a18f941ae8446"
+      },
+      "after": {
+        "bytes": 4240,
+        "normalizedBytes": 4240,
+        "lines": 68,
+        "sha256": "14df77861030d0b75d79441430463871d1985a4a684e3a5fae83ab0b8fec36cf"
+      },
+      "nonCommentTokens": {
+        "before": 1194,
+        "after": 1059
+      }
+    },
+    {
+      "file": "tests/battle-runtime-completion-1014.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 12584,
+        "normalizedBytes": 12584,
+        "lines": 246,
+        "sha256": "04c3929d7dcdce6cad760d12fbc0cd22bd5f9d1248e01fac7b9b7815c1e590d9"
+      },
+      "after": {
+        "bytes": 12242,
+        "normalizedBytes": 12242,
+        "lines": 241,
+        "sha256": "9dd7bd8106634c1f6e7293822674c314b917df266d45f8818c34503e7dcdd5a8"
+      },
+      "nonCommentTokens": {
+        "before": 3177,
+        "after": 3042
+      }
+    },
+    {
+      "file": "tests/battle-semantic-feedback.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 12392,
+        "normalizedBytes": 12392,
+        "lines": 184,
+        "sha256": "168c9c4048c623002f033da54ba111b6c0d411ae12fe2897fcf4c09bf4d3ca44"
+      },
+      "after": {
+        "bytes": 12046,
+        "normalizedBytes": 12046,
+        "lines": 175,
+        "sha256": "bbc21aaf106aa7dda3d127f5d5328ab83b1a0f96688ef413c0d5bcb04e202b10"
+      },
+      "nonCommentTokens": {
+        "before": 3311,
+        "after": 3176
+      }
+    },
+    {
+      "file": "tests/battle-turn-start-discover.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 7817,
+        "normalizedBytes": 7665,
+        "lines": 152,
+        "sha256": "804ce27824048a2600a54a3cc2c31bb41605263adc194af1bc03c80dcf30b49d"
+      },
+      "after": {
+        "bytes": 7464,
+        "normalizedBytes": 7320,
+        "lines": 144,
+        "sha256": "d3bd37b16e24fcc08c9b0e179402979da00c38fba274fbecb6a31803247d86f3"
+      },
+      "nonCommentTokens": {
+        "before": 1925,
+        "after": 1790
+      }
+    },
+    {
+      "file": "tests/boss-equip-select.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 11477,
+        "normalizedBytes": 11477,
+        "lines": 261,
+        "sha256": "a57f698f2a8ea67a28aa2d3d244a28a46873f823bd83c8e0511a90432d3e89b5"
+      },
+      "after": {
+        "bytes": 10340,
+        "normalizedBytes": 10340,
+        "lines": 231,
+        "sha256": "f5d59b46d687658a76a9f84b1a19a95d4cc1acfdf7c46a23a8106149d72301b3"
+      },
+      "nonCommentTokens": {
+        "before": 2918,
+        "after": 2605
+      }
+    },
+    {
+      "file": "tests/boss-rescue-pool.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4664,
+        "normalizedBytes": 4595,
+        "lines": 69,
+        "sha256": "7bbed474cd4eadaa4ae05591d19dce1be25d9ca5bb0248001273c5b2ee97597b"
+      },
+      "after": {
+        "bytes": 4317,
+        "normalizedBytes": 4253,
+        "lines": 64,
+        "sha256": "49ad0ce80b53fb923b728cf32a20c3ed6191bdcde5a10d79d0f044f58e1b09b8"
+      },
+      "nonCommentTokens": {
+        "before": 1232,
+        "after": 1097
+      }
+    },
+    {
+      "file": "tests/chase-slash.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 5502,
+        "normalizedBytes": 5366,
+        "lines": 136,
+        "sha256": "bbf10a0989e302fe906e0f70648cce11cfe25f6e1cb21bb42436cff8136374e6"
+      },
+      "after": {
+        "bytes": 4335,
+        "normalizedBytes": 4229,
+        "lines": 106,
+        "sha256": "3e96fd6fc792b857dd4aeb3fedb6357408e5e5ad42aac5e998a483f2594849bd"
+      },
+      "nonCommentTokens": {
+        "before": 1241,
+        "after": 928
+      }
+    },
+    {
+      "file": "tests/cursed-blade.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 6243,
+        "normalizedBytes": 6112,
+        "lines": 131,
+        "sha256": "801ef7c91fab4d80e785b66d8ccae7eeed2fa59159b7f90e46c985de1fd90b29"
+      },
+      "after": {
+        "bytes": 5076,
+        "normalizedBytes": 4975,
+        "lines": 101,
+        "sha256": "3cb2fe0a4b55316f1d2f40be1371d038f29720a545bb1d82e10cdebf52169214"
+      },
+      "nonCommentTokens": {
+        "before": 1468,
+        "after": 1155
+      }
+    },
+    {
+      "file": "tests/discover-infusion-feedback.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4562,
+        "normalizedBytes": 4562,
+        "lines": 70,
+        "sha256": "a2ba2dd953a6e689ceca94c4a90b2763a2db2080844bc45d29dc48bcbc60acf2"
+      },
+      "after": {
+        "bytes": 4216,
+        "normalizedBytes": 4216,
+        "lines": 61,
+        "sha256": "835dd93e13f0097c5e94f21ceb63332f450a787fa8f86addba43bf193c4c9d04"
+      },
+      "nonCommentTokens": {
+        "before": 1148,
+        "after": 1013
+      }
+    },
+    {
+      "file": "tests/dual-wield.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4411,
+        "normalizedBytes": 4315,
+        "lines": 96,
+        "sha256": "5dc3fcb0f238dda98ce183a54b8a9a725ceaf58ecd9bcfe61ab56e5b05387757"
+      },
+      "after": {
+        "bytes": 3244,
+        "normalizedBytes": 3178,
+        "lines": 66,
+        "sha256": "c03eda9f86b143c5899ada9a021d4b8a270699289a0e3f37c5b6d8469dfa9a86"
+      },
+      "nonCommentTokens": {
+        "before": 972,
+        "after": 659
+      }
+    },
+    {
+      "file": "tests/ember-burst-rot-seed.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 7468,
+        "normalizedBytes": 7311,
+        "lines": 157,
+        "sha256": "d5e27d7beffdd4404aef9886ee5018629c55c131d6976ec0c584382096744ce0"
+      },
+      "after": {
+        "bytes": 6301,
+        "normalizedBytes": 6174,
+        "lines": 127,
+        "sha256": "67e8fff0571eea78ec48bdd684cdff6a55eb5527df1c185f889503125c4dee35"
+      },
+      "nonCommentTokens": {
+        "before": 1661,
+        "after": 1348
+      }
+    },
+    {
+      "file": "tests/energy-crystal-restoration.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 7981,
+        "normalizedBytes": 7981,
+        "lines": 136,
+        "sha256": "94f5467a79eeba6e5ac36d754943613de9b36830c85f93c81638539103b60464"
+      },
+      "after": {
+        "bytes": 7639,
+        "normalizedBytes": 7639,
+        "lines": 131,
+        "sha256": "60683e5fcd2918197d64d520407cad095c3b57eaa4697b91f8501480615ab255"
+      },
+      "nonCommentTokens": {
+        "before": 1942,
+        "after": 1807
+      }
+    },
+    {
+      "file": "tests/ghostblade-stealth-break.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 7547,
+        "normalizedBytes": 7426,
+        "lines": 121,
+        "sha256": "05da6910ac0aca06329bcea7788566b5a9558eda51975c4f280714e70a89d0b6"
+      },
+      "after": {
+        "bytes": 7200,
+        "normalizedBytes": 7084,
+        "lines": 116,
+        "sha256": "dfa2426078ef9a36ef8c55e62ea8bd80d60bd7d9ad4e92ef88c4a018bb814236"
+      },
+      "nonCommentTokens": {
+        "before": 2065,
+        "after": 1930
+      }
+    },
+    {
+      "file": "tests/last-stand-poison-burst.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 6430,
+        "normalizedBytes": 6292,
+        "lines": 138,
+        "sha256": "2ebed9acc36319a9a38723e44426c09e96d72bdd3bd6b41f3318b8251f453421"
+      },
+      "after": {
+        "bytes": 5263,
+        "normalizedBytes": 5155,
+        "lines": 108,
+        "sha256": "1d32b08f0453e7dac53196dcbb339c80325376afa3d122e7204b3ac54b4faa04"
+      },
+      "nonCommentTokens": {
+        "before": 1434,
+        "after": 1121
+      }
+    },
+    {
+      "file": "tests/lava-blast.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 5638,
+        "normalizedBytes": 5510,
+        "lines": 128,
+        "sha256": "479ba343873f243ad95f7a3d9249094c8e38099ccd3d2bbb4fff0a73889b967e"
+      },
+      "after": {
+        "bytes": 4471,
+        "normalizedBytes": 4373,
+        "lines": 98,
+        "sha256": "77faf35ff067799914f3d0446a22bf48c497a2a723a785d7251612dbbdf14a02"
+      },
+      "nonCommentTokens": {
+        "before": 1305,
+        "after": 992
+      }
+    },
+    {
+      "file": "tests/mana-surge.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 5740,
+        "normalizedBytes": 5619,
+        "lines": 121,
+        "sha256": "fed22c9b770653c518cf9855666d6f32612226b1b65561f762dc2c90135b336a"
+      },
+      "after": {
+        "bytes": 4573,
+        "normalizedBytes": 4482,
+        "lines": 91,
+        "sha256": "1e09154f3bdb411a8f79e8b64b20a94140b07f15e1c139db66bdab3e1c8cd412"
+      },
+      "nonCommentTokens": {
+        "before": 1165,
+        "after": 852
+      }
+    },
+    {
+      "file": "tests/mistbox.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4913,
+        "normalizedBytes": 4801,
+        "lines": 112,
+        "sha256": "d38e84fa18eadf8898dd0500b765203c3413cb7af2a8abda97795651b35c06e2"
+      },
+      "after": {
+        "bytes": 3746,
+        "normalizedBytes": 3664,
+        "lines": 82,
+        "sha256": "a0d53f33a3757b64631665dce274faec4c5f73968af82555a3d5e43bd1ccac86"
+      },
+      "nonCommentTokens": {
+        "before": 1095,
+        "after": 782
+      }
+    },
+    {
+      "file": "tests/mystery-potion-observation.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 11141,
+        "normalizedBytes": 10959,
+        "lines": 182,
+        "sha256": "96a62e7159d482d9f2df05a7dbcd6ecebcb2ae78ce461a505a51adc73cbe4196"
+      },
+      "after": {
+        "bytes": 10792,
+        "normalizedBytes": 10616,
+        "lines": 176,
+        "sha256": "30d0040926a8659bd05496a9598295e17376fe56f4f9018da2af12982d90fe6c"
+      },
+      "nonCommentTokens": {
+        "before": 2740,
+        "after": 2605
+      }
+    },
+    {
+      "file": "tests/nest-hearts.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 3602,
+        "normalizedBytes": 3542,
+        "lines": 60,
+        "sha256": "71c0a00ae9deb94132fd50c98f871e856839d9d08a3c0ebeda45605470090bd2"
+      },
+      "after": {
+        "bytes": 2916,
+        "normalizedBytes": 2869,
+        "lines": 47,
+        "sha256": "943d825bbb035a3d58ca37ff8c38da272936e462f90511257d517e99453547d9"
+      },
+      "nonCommentTokens": {
+        "before": 923,
+        "after": 762
+      }
+    },
+    {
+      "file": "tests/playthrough-bot.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 6705,
+        "normalizedBytes": 6601,
+        "lines": 104,
+        "sha256": "3f96696f623d8addf7ec7166e2a9129eccc50daa483d76a5ce661afca5d1a321"
+      },
+      "after": {
+        "bytes": 6019,
+        "normalizedBytes": 5928,
+        "lines": 91,
+        "sha256": "93412cda7502f93a4fe6a6a75180b810b77858d820c6231a57cbe3ffa17e524d"
+      },
+      "nonCommentTokens": {
+        "before": 1799,
+        "after": 1638
+      }
+    },
+    {
+      "file": "tests/provoke-target-contract.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 6708,
+        "normalizedBytes": 6708,
+        "lines": 124,
+        "sha256": "9ddff3ea8e20482de3158836a1ee250e8b7b023563bb078c9392be75d4a2f1ad"
+      },
+      "after": {
+        "bytes": 6366,
+        "normalizedBytes": 6366,
+        "lines": 119,
+        "sha256": "f1f10b51f562b95606dd4386ebcd579d1e206acf1593c77d8d594248210935f1"
+      },
+      "nonCommentTokens": {
+        "before": 1964,
+        "after": 1829
+      }
+    },
+    {
+      "file": "tests/rapid-fire.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 6969,
+        "normalizedBytes": 6807,
+        "lines": 162,
+        "sha256": "599ef13b43e0b1eb1c1b61946efc2bdf4e1cad5351faec9a06e5f5c2812704e2"
+      },
+      "after": {
+        "bytes": 5858,
+        "normalizedBytes": 5725,
+        "lines": 133,
+        "sha256": "f34f4458b876a6d419581a1ddc32d99958688df252584fdc058e7a64fd352220"
+      },
+      "nonCommentTokens": {
+        "before": 1633,
+        "after": 1339
+      }
+    },
+    {
+      "file": "tests/restoration-potion-observation.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 8389,
+        "normalizedBytes": 8389,
+        "lines": 141,
+        "sha256": "5c75a64e1d9ab493be0b40a51d86074eac63de81d413bb29aa455884919dd87b"
+      },
+      "after": {
+        "bytes": 8047,
+        "normalizedBytes": 8047,
+        "lines": 136,
+        "sha256": "a239d5414f8f2f923436f05f27b9d7563b839ec53b012c106bf7f5504c4babbc"
+      },
+      "nonCommentTokens": {
+        "before": 2025,
+        "after": 1890
+      }
+    },
+    {
+      "file": "tests/scavenge-mode-feedback.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4798,
+        "normalizedBytes": 4798,
+        "lines": 66,
+        "sha256": "465aaf314e5791c656df7bd3572b2e37be184d3b2d772fb9b9299c00f8420878"
+      },
+      "after": {
+        "bytes": 4451,
+        "normalizedBytes": 4451,
+        "lines": 56,
+        "sha256": "50e9bbcc31e7edf7f5e7407de17fe2f30356004adbc942c873a858c3a5e8cf20"
+      },
+      "nonCommentTokens": {
+        "before": 1330,
+        "after": 1195
+      }
+    },
+    {
+      "file": "tests/sword-consume-trigger.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 8076,
+        "normalizedBytes": 7974,
+        "lines": 102,
+        "sha256": "581e505abf7de8a011950f3d8c1af47a724f688a29c68df085397096316467f6"
+      },
+      "after": {
+        "bytes": 7713,
+        "normalizedBytes": 7624,
+        "lines": 89,
+        "sha256": "f5e0d30af504767cc87b138a70e39916ad022a63c886dede89ddba0a9e8baefe"
+      },
+      "nonCommentTokens": {
+        "before": 2275,
+        "after": 2140
+      }
+    },
+    {
+      "file": "tests/venom-staff-passive.test.js",
+      "group": "tests",
+      "before": {
+        "bytes": 4523,
+        "normalizedBytes": 4523,
+        "lines": 71,
+        "sha256": "0cc3f78dd46f48cf6411f4c955d119c8f8115a85646cdc8197d32d1b3a806703"
+      },
+      "after": {
+        "bytes": 4181,
+        "normalizedBytes": 4181,
+        "lines": 66,
+        "sha256": "27a55ae6699ec514cdf398e46b203388f8fa14a81aa08adf7fd17307c1142628"
+      },
+      "nonCommentTokens": {
+        "before": 1268,
+        "after": 1133
+      }
+    },
+    {
+      "file": "tests/helpers/battle-fixtures.js",
+      "group": "tests",
+      "before": {
+        "bytes": 0,
+        "normalizedBytes": 0,
+        "lines": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "after": {
+        "bytes": 1913,
+        "normalizedBytes": 1913,
+        "lines": 45,
+        "sha256": "975b80ddb4d6d3bc18918a0b0b828af314e3e228d728671850afe5e88ac69d41"
+      },
+      "nonCommentTokens": {
+        "before": 0,
+        "after": 477
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "group": "logic",
+      "before": {
+        "bytes": 4083,
+        "normalizedBytes": 4083,
+        "lines": 65,
+        "sha256": "e05ab9d7484406e4328f2bd8e8c88681e1431f62a9a6b0a2bfd4965c6b75cf8b"
+      },
+      "after": {
+        "bytes": 1656,
+        "normalizedBytes": 1621,
+        "lines": 35,
+        "sha256": "202723511b62a523019414d39b1ae231512d43621be741f87312aee55f35d88a"
+      },
+      "nonCommentTokens": {
+        "before": 305,
+        "after": 265
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "group": "logic",
+      "before": {
+        "bytes": 8427,
+        "normalizedBytes": 8427,
+        "lines": 130,
+        "sha256": "415e666451e5d006c748dcf6432775360d9b05ec86f4a9daf200c5ff63c31639"
+      },
+      "after": {
+        "bytes": 3560,
+        "normalizedBytes": 3490,
+        "lines": 70,
+        "sha256": "b491417aa4941a904e68ae78fcfde60c9510f218a3935975907b1701d2009888"
+      },
+      "nonCommentTokens": {
+        "before": 812,
+        "after": 697
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "group": "logic",
+      "before": {
+        "bytes": 12420,
+        "normalizedBytes": 12420,
+        "lines": 176,
+        "sha256": "dbf6b6364a2443a771fb1eda01db1a887fe615148bb7585add5bca6e0b9ad63d"
+      },
+      "after": {
+        "bytes": 5289,
+        "normalizedBytes": 5193,
+        "lines": 96,
+        "sha256": "6772824a0a25a7dee62002ae4a4460dccbf326574d6864b8aecf67c7ba454f64"
+      },
+      "nonCommentTokens": {
+        "before": 1193,
+        "after": 1061
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "group": "logic",
+      "before": {
+        "bytes": 5057,
+        "normalizedBytes": 5057,
+        "lines": 77,
+        "sha256": "13eb6767b010d64ca1db098bffd048e9a9a1f52244f6955c2d39d7055f3ab105"
+      },
+      "after": {
+        "bytes": 772,
+        "normalizedBytes": 751,
+        "lines": 21,
+        "sha256": "508c5e1cdb1aa050b651400e2d11c5f4ec25c4711a12c986b7aa9366ac6cfbb7"
+      },
+      "nonCommentTokens": {
+        "before": 120,
+        "after": 101
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "group": "logic",
+      "before": {
+        "bytes": 8936,
+        "normalizedBytes": 8936,
+        "lines": 160,
+        "sha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+      },
+      "after": {
+        "bytes": 1998,
+        "normalizedBytes": 1953,
+        "lines": 45,
+        "sha256": "73629bb4ca1abc967dae49f1c7b6f7721774ef6b6dd0f70c3e99f94c22861851"
+      },
+      "nonCommentTokens": {
+        "before": 461,
+        "after": 356
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "group": "logic",
+      "before": {
+        "bytes": 6144,
+        "normalizedBytes": 6144,
+        "lines": 92,
+        "sha256": "e9c39b6adeb0316af4f0956bfac4691bf62804ff33b8c5e821c3408a92225ecc"
+      },
+      "after": {
+        "bytes": 2055,
+        "normalizedBytes": 2011,
+        "lines": 44,
+        "sha256": "4a8ab68304ad6d5b2624dc1812dc76e9f960bc6cbafc8a8a1678cdfe82b358c9"
+      },
+      "nonCommentTokens": {
+        "before": 518,
+        "after": 449
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "group": "logic",
+      "before": {
+        "bytes": 3389,
+        "normalizedBytes": 3389,
+        "lines": 74,
+        "sha256": "fedeca1fd65cb45d5d93379d7d987d916ee230a2ae088262f5942be007806e3b"
+      },
+      "after": {
+        "bytes": 2383,
+        "normalizedBytes": 2330,
+        "lines": 53,
+        "sha256": "d9c5aaeff7960a2ffeb0741f8a33c0872c20ed952fc83a31bf3db31806472bed"
+      },
+      "nonCommentTokens": {
+        "before": 633,
+        "after": 465
+      }
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.domain.js",
+      "group": "logic",
+      "before": {
+        "bytes": 17903,
+        "normalizedBytes": 17599,
+        "lines": 304,
+        "sha256": "d35fd1df5dd2bf8c0ba34f7d56b7972aeb8521700bcb31acd285ad0532a85e8c"
+      },
+      "after": {
+        "bytes": 17121,
+        "normalizedBytes": 16828,
+        "lines": 293,
+        "sha256": "bdce9a777b92d3199384044fae43bcde7b414c7e2e645e49abcf526f1d08a5fb"
+      },
+      "nonCommentTokens": {
+        "before": 3133,
+        "after": 2927
+      }
+    },
+    {
+      "file": "game/src/cards/card-rule-definitions.js",
+      "group": "logic",
+      "before": {
+        "bytes": 0,
+        "normalizedBytes": 0,
+        "lines": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "after": {
+        "bytes": 585,
+        "normalizedBytes": 585,
+        "lines": 14,
+        "sha256": "883f81032a360fefe5c785c44c6cbb4e51245e7730045a65caf1176a5514580a"
+      },
+      "nonCommentTokens": {
+        "before": 0,
+        "after": 104
+      }
+    },
+    {
+      "file": "scripts/build-artifact-manifest.mjs",
+      "group": "tools",
+      "before": {
+        "bytes": 6655,
+        "normalizedBytes": 6655,
+        "lines": 95,
+        "sha256": "09ab048c5ad7d4cad3b638513ab00cf98a1e8c92ef35c16c4a06e961b1257f26"
+      },
+      "after": {
+        "bytes": 6469,
+        "normalizedBytes": 6469,
+        "lines": 89,
+        "sha256": "f09aa1a08aef4da6508c1d28db92a1ca8ae5c81540de8652d371ba1104c1da43"
+      },
+      "nonCommentTokens": {
+        "before": 1441,
+        "after": 1375
+      }
+    },
+    {
+      "file": "scripts/runtime-asset-aliases.mjs",
+      "group": "tools",
+      "before": {
+        "bytes": 2541,
+        "normalizedBytes": 2541,
+        "lines": 47,
+        "sha256": "ec4b5c7b4f1065201937f3a1a1d6c0a2cd9d3eb30a4211336576e58dc01d5ccc"
+      },
+      "after": {
+        "bytes": 2223,
+        "normalizedBytes": 2223,
+        "lines": 42,
+        "sha256": "3273db17c4782d05ab9371388725afc1ea608b8f51728aedceb73680c0284a41"
+      },
+      "nonCommentTokens": {
+        "before": 366,
+        "after": 296
+      }
+    },
+    {
+      "file": "scripts/perf-budget.cjs",
+      "group": "tools",
+      "before": {
+        "bytes": 9475,
+        "normalizedBytes": 9475,
+        "lines": 175,
+        "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+      },
+      "after": {
+        "bytes": 9277,
+        "normalizedBytes": 9277,
+        "lines": 176,
+        "sha256": "fa5a342c1f002f2383444ed7ead94d7465842b5b8c98fe66494bd1e896bf9455"
+      },
+      "nonCommentTokens": {
+        "before": 2130,
+        "after": 2109
+      }
+    },
+    {
+      "file": "scripts/vectorize_node_icons.py",
+      "group": "tools",
+      "before": {
+        "bytes": 7503,
+        "normalizedBytes": 7503,
+        "lines": 182,
+        "sha256": "ede949ae24828d034a8e1fb66f92d22203189604cd38b0562484a6a64b1c4bcd"
+      },
+      "after": {
+        "bytes": 6641,
+        "normalizedBytes": 6641,
+        "lines": 165,
+        "sha256": "b22e483d53303ca7a565eb5bd182893395f45c0d6c442dec82f753619d1ef77a"
+      }
+    },
+    {
+      "file": "scripts/vectorize_winter_ui.py",
+      "group": "tools",
+      "before": {
+        "bytes": 4386,
+        "normalizedBytes": 4386,
+        "lines": 112,
+        "sha256": "e8fa547c10983d5394d4b22697beb7b46f23790de2113dbcfd615acee949e0fc"
+      },
+      "after": {
+        "bytes": 3546,
+        "normalizedBytes": 3546,
+        "lines": 96,
+        "sha256": "61c765fdf96fa3f6f0ddf9eedc901e254bc39b8614e6c430cc91b351b61eea01"
+      }
+    },
+    {
+      "file": "scripts/vectorize_common.py",
+      "group": "tools",
+      "before": {
+        "bytes": 0,
+        "normalizedBytes": 0,
+        "lines": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "after": {
+        "bytes": 1334,
+        "normalizedBytes": 1334,
+        "lines": 35,
+        "sha256": "2938a20b7a4b53dfc7beca0e8621213d22fc9eb196791bbc86663fe07b21571d"
+      }
+    },
+    {
+      "file": "game/src/hub/bag-container-pages.js",
+      "group": "game",
+      "before": {
+        "bytes": 9272,
+        "normalizedBytes": 9097,
+        "lines": 175,
+        "sha256": "df03fba6900798b5d10360c6bb227e970a40bead872e8fd82db91420543be864"
+      },
+      "after": {
+        "bytes": 6057,
+        "normalizedBytes": 5960,
+        "lines": 97,
+        "sha256": "d1a50072beb39e11ab3df71a8f509e3767258adb9416ac511b25d6421f07d9fd"
+      },
+      "nonCommentTokens": {
+        "before": 1770,
+        "after": 1204
+      }
+    },
+    {
+      "file": "game/src/ui/achievement-motion.js",
+      "group": "game",
+      "before": {
+        "bytes": 10502,
+        "normalizedBytes": 10317,
+        "lines": 185,
+        "sha256": "c8d86de5c594387a56215e3f13d9203e180b448d41e5ab670caf242f0ed022e7"
+      },
+      "after": {
+        "bytes": 10380,
+        "normalizedBytes": 10198,
+        "lines": 182,
+        "sha256": "73d6c7763cf9f0e9d7dcea624602a9360dce4b8906709b3fea143d624e77f27b"
+      },
+      "nonCommentTokens": {
+        "before": 2253,
+        "after": 2228
+      }
+    },
+    {
+      "file": "game/src/ui/character-view-motion.js",
+      "group": "game",
+      "before": {
+        "bytes": 7849,
+        "normalizedBytes": 7704,
+        "lines": 145,
+        "sha256": "2282315e897c56ae790baf08093af42d9c3c3516cf6b9d662024f6d96867b05e"
+      },
+      "after": {
+        "bytes": 7715,
+        "normalizedBytes": 7573,
+        "lines": 142,
+        "sha256": "cf2af93b41e1efef7822dbf4fa6aef1876ba8abfece956270e8756af25d48627"
+      },
+      "nonCommentTokens": {
+        "before": 1480,
+        "after": 1455
+      }
+    }
+  ]
+}

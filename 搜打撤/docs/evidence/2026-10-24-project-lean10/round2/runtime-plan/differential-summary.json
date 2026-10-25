@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "frozenSource": "node_modules/.cache/project-lean10-round2-before",
+  "fields": 91,
+  "fieldPublications": 182,
+  "methodAliases": 97,
+  "compatibilitySubscribers": 5,
+  "interleavedExternalSubscribers": 5,
+  "unknownKeyChecks": 7,
+  "exports": 188,
+  "reentrantTraceEntries": 10,
+  "oracleSha256": "dbdd0374af325bd16852dea2de4937057f3cf5da13e07fb5e722e81c58c29927",
+  "files": [
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "beforeSha256": "07c125a0f8e6003e89a9a890c4cdeef351bf9fe9c9c881e8f0144d745d45b3d5",
+      "afterSha256": "cf925408175f1dffa1f1b1439378b1985788abc1f8085f2494d857a2acee7c5e"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "beforeSha256": "d48fa40d03f12496150551ca7a9aa6a7f7c36ff35994936644ceb0120852d0f3",
+      "afterSha256": "b106eae62f194d890c0ca3f9d0b26d9fae429c5d58fb8425d40f1adc6fdb8ef6"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "beforeSha256": "2dcbfb41f750fde156881ab7c47147fb1ae584a5104f9e8a27bd3303fdb25dff",
+      "afterSha256": "d5958d23f3174920ebf87a102f36f319a3a019fede343527905d8e96170572a0"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "beforeSha256": "e55724ef8f60a214e0a553f83b6925b33cefb37ae8bb24d35a52f8b85a200289",
+      "afterSha256": "4e3d4a4b3f503cb7be216da7032b90e4c00496d0b50c3462c3987bac829ff5e3"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "beforeSha256": "d2ff7a283d056d2bf2989b94c860854ef0759c7fa0198e69851ee47926f8fbf8",
+      "afterSha256": "fb6780dbfe26e5c202a6f7543db2c0f9b456d5b6ac95103a05156972bd8d26d8"
+    },
+    {
+      "file": "game/src/core/live-bindings.js",
+      "beforeSha256": "b47305dd7459e461cd45965833f68840c4d462afd32ee9f84ea6a5099fd9f219",
+      "afterSha256": "4b3aeaf0ea96ae783bbaea6b4d897252a1147fc5b0e12a83180802beccdcba22"
+    }
+  ]
+}

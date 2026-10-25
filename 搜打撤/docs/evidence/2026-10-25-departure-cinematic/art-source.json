@@ -1,0 +1,18 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a171ea-9b41-7662-988e-09e280e38f57\\exec-a38ec752-963d-4ca7-9a42-c34127967736.png",
+  "sourceSha256": "bb74f7cd99f740f0102357d458c47b30954bdc067eb4da2d4a29ccc1d3a15577",
+  "asset": "game\\assets\\scenes\\departure\\city-reflection-v1.webp",
+  "sha256": "0d31cb35f13fa9fb5853c80f134ff761b5344524a89d881ab7fbaaf9ea5e9a3c",
+  "bytes": 59218,
+  "dimensions": [
+    1659,
+    948
+  ],
+  "providers": [
+    "NAI5",
+    "built-in imagegen"
+  ],
+  "concept": "黑场中的破裂城市倒影；冬日封城意象，无人物、无原初剧透",
+  "naiSource": ".tmp/nai/departure-cinematic-1025/departure-abstract-nai5.png",
+  "rejected": "首张雪原草稿未接入；抽象NAI5草稿出现人物，内置重绘移除全部人物后采用"
+}

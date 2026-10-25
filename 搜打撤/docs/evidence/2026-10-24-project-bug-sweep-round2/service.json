@@ -1,0 +1,11 @@
+{
+  "pid": 5284,
+  "port": 5328,
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "configFile": "D:\\素材\\代号柒\\搜打撤\\.tmp\\bug-sweep-round2-1024\\runtime\\vite.config.mjs",
+  "createdBy": "01a16995",
+  "createdAt": "2026-10-23T18:27:07.684Z",
+  "status": "stopped",
+  "checkedAt": "2026-10-24T15:24:08.845Z",
+  "cleanup": "收尾只读核验：原PID5284已不存在，5328无监听；无需发送停止信号，未终止任何其他进程。"
+}

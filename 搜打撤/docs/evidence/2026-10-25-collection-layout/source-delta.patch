@@ -1,0 +1,1048 @@
+diff --git a/.tmp/collection-layout-baseline/game/src/ui/achievement-gallery.js b/game/src/ui/achievement-gallery.js
+index 00e67b7f..49dfc134 100644
+--- a/.tmp/collection-layout-baseline/game/src/ui/achievement-gallery.js
++++ b/game/src/ui/achievement-gallery.js
+@@ -2,6 +2,8 @@
+ import { achievementMedalHTML, pickAchievementMedalStyle } from './achievement-medals.js';
+ import { createAchievementMotion } from './achievement-motion.js';
+ import { linkedBackHTML } from './home-linked-interactions.js';
++import { collectionHeaderHTML, collectionToolbarHTML } from './collection-chrome.js';
++import { transitionRegion, cancelRegionTransition } from './region-transition.js';
+ const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+ }[char]));
+@@ -37,23 +39,24 @@ export function achievementGalleryHTML({ achievements, base, slot, isUnlocked, b
+     ].filter(Boolean).join(' / ') || '远征纪念';
+     const state = entry.claimed ? 'claimed' : entry.unlocked ? 'unlocked' : 'locked';
+     const label = entry.claimed ? '已领取' : entry.unlocked ? '已获得 · 待领取' : '未获得';
+-    return `<button type="button" class="ag-medal ag-${state}" data-gallery-item data-medal-id="${esc(entry.id)}" data-number="${entry.number}" data-rewards="${esc(rewards)}" data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
++    return `<button type="button" class="ag-medal ag-${state}" aria-pressed="false" data-gallery-item data-medal-id="${esc(entry.id)}" data-number="${entry.number}" data-rewards="${esc(rewards)}" data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
+       <span class="ag-emblem">${achievementMedalHTML(entry.id, 'tile', medalStyle)}</span>
+       <span class="ag-medal-copy"><span class="ag-item-heading"><strong>${esc(entry.name)}</strong><span class="ag-state"><i>${entry.unlocked ? '✓' : '◇'}</i>${label}</span></span>
+       <span class="ag-description">${esc(entry.desc)}</span>
+-      <span class="ag-item-footer"><span>${entry.category.name} / NO. ${entry.number}</span><span>查看详情 ↗</span></span></span>
++      <span class="ag-item-footer">${entry.category.name}</span></span>
+     </button>`;
+   }).join('');
++  const categories = `<nav class="ag-categories" aria-label="奖章分类">${CATEGORIES.map(category => `<button type="button" data-gallery-category="${category.id}" aria-pressed="${category.id === 'all'}">${category.name}<small>${category.id === 'all' ? entries.length : entries.filter(entry => entry.category.id === category.id).length}</small></button>`).join('')}</nav>`;
++  const summary = `<div class="ag-summary"><span class="ag-total">已获得 <strong>${done}</strong><span>/ ${entries.length}</span></span><div class="ag-progress" role="progressbar" aria-label="成就收集进度" aria-valuemin="0" aria-valuemax="${entries.length}" aria-valuenow="${done}"><span style="width:${percentage}%"></span><i class="ag-cabinet-glint" aria-hidden="true"></i></div><span class="ag-archive">${slot ? `档案 ${String(slot).padStart(2,'0')}` : '尚无远征档案'}</span></div>`;
++  const filters = `<nav class="ag-filters" aria-label="获得状态"><button type="button" data-gallery-filter="all" aria-pressed="true">全部</button><button type="button" data-gallery-filter="unlocked" aria-pressed="false">已获得</button><button type="button" data-gallery-filter="locked" aria-pressed="false">未获得</button><button type="button" data-gallery-filter="pending" aria-pressed="false">待领取 <b>${pending}</b></button><button type="button" data-gallery-filter="claimed" aria-pressed="false">已领取 <b>${claimed}</b></button></nav>`;
++  const actions = `<details class="ag-display-menu"><summary>展柜灯光</summary><div class="ag-display-options"><button type="button" data-gallery-ambient aria-pressed="true">微光 · 开</button><button type="button" data-gallery-polish>擦亮展柜</button></div></details>`;
+   return `<section class="achievement-gallery" aria-label="成就陈列室" data-medal-style="${medalStyle}">
+-    <header class="ag-header"><div class="ag-title-group">${linkedBackHTML('achBack', '返回', 'ag-back')}<div><h2>成就陈列室</h2></div></div>
+-    <div class="ag-header-tools"><nav class="ag-filters" aria-label="获得状态"><button type="button" data-gallery-filter="all" aria-pressed="true">全部</button><button type="button" data-gallery-filter="unlocked" aria-pressed="false">已获得</button><button type="button" data-gallery-filter="locked" aria-pressed="false">未获得</button></nav><nav class="ag-view" aria-label="陈列方式"><button type="button" data-gallery-view="list" aria-pressed="true">☷ 分列</button><button type="button" data-gallery-view="grid" aria-pressed="false">▦ 集中</button></nav></div></header>
++    ${collectionHeaderHTML({title:'成就陈列室',back:linkedBackHTML('achBack','返回','ag-back'),navigation:categories,summary,actions,className:'ag-header'})}
++    <div class="ag-tools">${collectionToolbarHTML({search:'<label class="ag-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="搜索成就" placeholder="搜索奖章或获得条件" autocomplete="off"/></label>',filters,results:`<span class="ag-result-count" aria-live="polite">${entries.length} 枚奖章</span><nav class="ag-view" aria-label="陈列方式"><button type="button" data-gallery-view="list" aria-pressed="true">列表</button><button type="button" data-gallery-view="grid" aria-pressed="false">网格</button></nav>`,className:'ag-list-heading',label:'成就搜索与筛选'})}</div>
+     <div class="ag-body">
+-      <aside class="ag-summary"><div class="ag-watermark" aria-hidden="true">${achievementMedalHTML('collectLegend', 'watermark', medalStyle)}<i class="ag-cabinet-glint"></i></div><div class="ag-ambient-specks" aria-hidden="true"><i></i><i></i><i></i></div><span class="ag-summary-label">总收集数</span><div class="ag-total"><strong>${done}</strong><span>/ ${entries.length}</span></div><div class="ag-progress" role="progressbar" aria-label="成就收集进度" aria-valuemin="0" aria-valuemax="${entries.length}" aria-valuenow="${done}"><span style="width:${percentage}%"></span></div><p class="ag-collection-rate">收集率 <b>${percentage}%</b></p><div class="ag-counts"><span><i class="ag-dot earned"></i>已获得<b>${done}</b></span><span><i class="ag-dot pending"></i>待领取<b>${pending}</b></span><span><i class="ag-dot claimed"></i>已领取<b>${claimed}</b></span></div><p class="ag-archive">${slot ? `档案 0${slot} · 最近游玩` : '尚无远征档案'}</p><details class="ag-display-menu"><summary>展柜灯光<span aria-hidden="true">⌄</span></summary><div class="ag-display-options"><button type="button" data-gallery-ambient aria-pressed="true">微光 · 开</button><button type="button" data-gallery-polish>擦亮展柜 ✦</button></div></details></aside>
+-      <main class="ag-content"><div class="ag-list-heading"><label class="ag-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="搜索成就" placeholder="搜索奖章或获得条件" autocomplete="off"/></label><span class="ag-result-count" aria-live="polite">${entries.length} 枚奖章</span></div><div class="ag-scroll"><div class="ag-grid" data-view="list">${tiles}</div><div class="ag-empty" hidden><span aria-hidden="true">◇</span><h3>暂无符合条件的奖章</h3><p class="ag-empty-copy">试试其他分类或搜索词。</p><button type="button" data-gallery-reset>查看全部奖章</button></div></div></main>
+-      <nav class="ag-categories" aria-label="奖章分类">${CATEGORIES.map(category => `<button type="button" data-gallery-category="${category.id}" aria-pressed="${category.id === 'all'}">${category.name}<small>${category.id === 'all' ? entries.length : entries.filter(entry => entry.category.id === category.id).length}</small></button>`).join('')}</nav>
++      <main class="ag-content"><div class="ag-scroll"><div class="ag-grid" data-view="list">${tiles}</div><div class="ag-empty" hidden><h3>暂无符合条件的奖章</h3><p class="ag-empty-copy">试试其他分类或搜索词。</p><button type="button" data-gallery-reset>查看全部奖章</button></div></div></main>
++      <aside class="ag-inspector" aria-label="奖章浏览详情"><div class="ag-detail-empty"><span aria-hidden="true">◇</span><h3>选择一枚奖章</h3><p>查看获得方式与奖励，可连续切换比较。</p></div><section class="ag-detail" hidden role="region" aria-label="奖章详情"><div class="ag-detail-toolbar"><button type="button" data-gallery-prev aria-label="上一枚奖章">←</button><button type="button" data-gallery-next aria-label="下一枚奖章">→</button><button type="button" class="ag-detail-close" data-gallery-dismiss data-cancel="true" aria-label="收起奖章详情">收起详情</button></div><div class="ag-detail-content"></div></section></aside>
+     </div>
+-    <div class="ag-detail-backdrop" hidden data-gallery-dismiss aria-hidden="true"></div>
+-    <section class="ag-detail" hidden role="dialog" aria-modal="true" aria-label="奖章详情" tabindex="-1"><div class="ag-detail-toolbar"><button type="button" class="ag-detail-close" data-gallery-dismiss data-cancel="true" aria-label="关闭奖章详情">收回奖章 <span aria-hidden="true">×</span></button></div><div class="ag-detail-content"></div></section>
+   </section>`;
+ }
+ // Detail content is built only for the selected medal, not for every tile at entry.
+@@ -71,33 +74,50 @@ export function bindAchievementGallery(root, { deferEntry = false } = {}) {
+   const filters = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-filter]'))];
+   const categories = [.../** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-gallery-category]'))];
+   const detail = /** @type {HTMLElement} */ (root.querySelector('.ag-detail'));
+-  const backdrop = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-backdrop'));
+-  const body = /** @type {HTMLElement} */ (root.querySelector('.ag-body'));
+-  const header = /** @type {HTMLElement} */ (root.querySelector('.ag-header'));
++  const detailEmpty = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-empty'));
++  const detailContent = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-content'));
+   const motion = createAchievementMotion(root);
+   let cancelEntryWait = () => {};
+   let selected = 'all', category = 'all', openedTile = null;
+-  let detailClosing = false;
+   let polishAnimation = null;
+-  const closeDetail = () => {
++  const visibleTiles = () => tiles.filter(tile => !tile.hidden);
++  const syncDetailNavigation = () => {
++    const visible = visibleTiles(), index = visible.indexOf(openedTile);
++    /** @type {HTMLButtonElement} */ (root.querySelector('[data-gallery-prev]')).disabled = index <= 0;
++    /** @type {HTMLButtonElement} */ (root.querySelector('[data-gallery-next]')).disabled = index < 0 || index >= visible.length - 1;
++  };
++  const closeDetail = ({restoreFocus = true} = {}) => {
+     if (detail.hidden) return false;
+-    if (detailClosing) return true;
+-    detailClosing = true;
+-    motion.closeDetail(() => {
+-      detail.hidden = true; backdrop.hidden = true; body.inert = false;
+-      header.inert = false;
+-      detailClosing = false;
+-      if (openedTile?.isConnected && !openedTile.hidden) openedTile.focus({ preventScroll: true });
+-    });
++    cancelRegionTransition(detailContent);
++    motion.closeDetail(() => { detail.hidden = true; detailEmpty.hidden = false; });
++    tiles.forEach(tile => tile.setAttribute('aria-pressed','false'));
++    if (restoreFocus && openedTile?.isConnected && !openedTile.hidden) openedTile.focus({preventScroll:true});
+     return true;
+   };
++  const selectDetail = button => {
++    cancelEntryWait();
++    const changed = detailContent.dataset.medalId !== button.dataset.medalId;
++    const initial = detail.hidden;
++    cancelRegionTransition(detailContent);
++    openedTile = button;
++    detail.hidden = false; detailEmpty.hidden = true;
++    tiles.forEach(tile => tile.setAttribute('aria-pressed', String(tile === button)));
++    if (changed) {
++      const html = achievementDetailHTML(button, root.dataset.medalStyle);
++      const commit = () => { detailContent.innerHTML = html; detailContent.dataset.medalId = button.dataset.medalId; };
++      if (initial) commit();
++      else void transitionRegion(detailContent, commit, {direction:0,isCurrent:() => root.isConnected && !detail.hidden && openedTile === button});
++    }
++    motion.openDetail(button);
++    syncDetailNavigation();
++  };
+   const refresh = (reason = 'search') => {
+     cancelEntryWait();
+     const anchor = motion.captureAnchor();
+     const query = input.value.trim().toLocaleLowerCase();
+     let visible = 0;
+     for (const tile of tiles) {
+-      const matchesState = selected === 'all' || (tile.dataset.unlocked === 'true') === (selected === 'unlocked');
++      const matchesState = selected === 'all' || selected === 'pending' && tile.classList.contains('ag-unlocked') || selected === 'claimed' && tile.classList.contains('ag-claimed') || selected === 'unlocked' && tile.dataset.unlocked === 'true' || selected === 'locked' && tile.dataset.unlocked !== 'true';
+       tile.hidden = !matchesState || (category !== 'all' && tile.dataset.category !== category) || !tile.dataset.search.toLocaleLowerCase().includes(query);
+       if (!tile.hidden) visible++;
+     }
+@@ -106,10 +126,12 @@ export function bindAchievementGallery(root, { deferEntry = false } = {}) {
+     /** @type {HTMLElement} */ (root.querySelector('.ag-empty')).hidden = visible > 0;
+     /** @type {HTMLElement} */ (root.querySelector('.ag-empty')).dataset.emptyState = selected === 'unlocked' && !query ? 'earned' : 'filtered';
+     /** @type {HTMLElement} */ (root.querySelector('.ag-empty-copy')).textContent = selected === 'unlocked' && !query
+-      ? '尚未获得奖章。' : '试试其他分类、名称或获得条件。';
++      ? '尚未获得奖章。' : selected === 'pending' ? '当前范围没有待领取奖励。' : selected === 'claimed' ? '当前范围没有已领取的奖章。' : '试试其他分类、名称或获得条件。';
+     /** @type {HTMLElement} */ (root.querySelector('.ag-result-count')).textContent = `${visible} 枚奖章`;
+     if (reason === 'category' || reason === 'reset') /** @type {HTMLElement} */ (root.querySelector('.ag-scroll')).scrollTop = 0;
+     else motion.restoreAnchor(anchor);
++    if (openedTile?.hidden) closeDetail({restoreFocus:false});
++    syncDetailNavigation();
+     motion.revealList(reason);
+   };
+   input.addEventListener('input', () => refresh('search'));
+@@ -124,14 +146,6 @@ export function bindAchievementGallery(root, { deferEntry = false } = {}) {
+       }
+       return;
+     }
+-    if (event.key !== 'Tab') return;
+-    const controls = [.../** @type {NodeListOf<HTMLButtonElement>} */ (detail.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]'))];
+-    if (!controls.length) { event.preventDefault(); detail.focus(); return; }
+-    const index = controls.indexOf(/** @type {HTMLButtonElement} */ (document.activeElement));
+-    const next = event.shiftKey ? (index <= 0 ? controls.length - 1 : index - 1) : (index + 1) % controls.length;
+-    event.preventDefault();
+-    event.stopPropagation();
+-    controls[next].focus({ preventScroll: true });
+   });
+   root.addEventListener('click', event => {
+       if (!(event.target instanceof Element)) return;
+@@ -173,17 +187,12 @@ export function bindAchievementGallery(root, { deferEntry = false } = {}) {
+       motion.revealList('layout');
+     }
+     if (button.hasAttribute('data-gallery-reset')) { selected = 'all'; category = 'all'; input.value = ''; refresh('reset'); input.focus(); }
+-    if (button.hasAttribute('data-gallery-item')) {
+-      cancelEntryWait();
+-      if (openedTile !== button) {
+-        /** @type {HTMLElement} */ (root.querySelector('.ag-detail-content')).innerHTML = achievementDetailHTML(button, root.dataset.medalStyle);
+-      }
+-      openedTile = button;
+-      detail.hidden = false; backdrop.hidden = false; body.inert = true; detail.focus();
+-      header.inert = true;
+-      detailClosing = false;
+-      motion.openDetail(button);
++    if (button.hasAttribute('data-gallery-prev') || button.hasAttribute('data-gallery-next')) {
++      const visible = visibleTiles(), index = visible.indexOf(openedTile);
++      const next = visible[index + (button.hasAttribute('data-gallery-prev') ? -1 : 1)];
++      if (next) { selectDetail(next); next.scrollIntoView?.({block:'nearest'}); }
+     }
++    if (button.hasAttribute('data-gallery-item')) selectDetail(button);
+   });
+   if (!deferEntry) motion.enterGallery();
+   else {
+diff --git a/.tmp/collection-layout-baseline/game/src/ui/achievement-motion.js b/game/src/ui/achievement-motion.js
+index c11e1b92..e6b84ff1 100644
+--- a/.tmp/collection-layout-baseline/game/src/ui/achievement-motion.js
++++ b/game/src/ui/achievement-motion.js
+@@ -7,13 +7,8 @@ export function createAchievementMotion(root) {
+   const scroll = /** @type {HTMLElement} */ (root.querySelector('.ag-scroll'));
+   const grid = /** @type {HTMLElement} */ (root.querySelector('.ag-grid'));
+   const empty = /** @type {HTMLElement} */ (root.querySelector('.ag-empty'));
+-  const detail = /** @type {HTMLElement} */ (root.querySelector('.ag-detail'));
+-  const backdrop = /** @type {HTMLElement} */ (root.querySelector('.ag-detail-backdrop'));
+   let listAnimation = null;
+-  let detailAnimations = [];
+-  let detailEpoch = 0;
+   let source = null;
+-  let detailOrigin = { x: 0, y: 0 };
+   let tileAnimations = [];
+   let categoryAnimation = null;
+   let categoryMarker = null;
+@@ -25,10 +20,6 @@ export function createAchievementMotion(root) {
+     if (!el?.isConnected || reduced() || typeof el.animate !== 'function') return null;
+     return trackLinkedAnimation(el.animate(frames, { easing: motionEasing.enter, fill: 'backwards', ...options }));
+   };
+-  const cancelDetail = () => {
+-    detailAnimations.forEach(animation => animation?.cancel());
+-    detailAnimations = [];
+-  };
+   const settleEntry = () => {
+     /** @type {NodeListOf<HTMLElement>} */ (root.querySelectorAll('[data-surface-role]')).forEach(el => {
+       el.getAnimations?.().forEach(animation => {
+@@ -125,49 +116,14 @@ export function createAchievementMotion(root) {
+     scroll.scrollTop += rect(target).top - rect(scroll).top - (target === anchor.tile ? anchor.offset : 0);
+   };
+   const openDetail = tile => {
+-    settleEntry();
+-    cancelTiles();
+-    listAnimation?.cancel();
+-    detailEpoch++;
+-    cancelDetail();
+     source?.classList.remove('is-detail-source');
+     source = tile;
+     source.classList.add('is-detail-source');
+-    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
+-    const from = rect(/** @type {HTMLElement} */ (tile.querySelector('.ag-emblem')) || tile);
+-    const to = rect(art);
+-    detailOrigin = {
+-      x: Math.max(-24, Math.min(24, (from.left + from.width / 2 - to.left - to.width / 2) * .12)),
+-      y: Math.max(-12, Math.min(12, (from.top + from.height / 2 - to.top - to.height / 2) * .08)),
+-    };
+-    detailAnimations = [
+-      animate(backdrop, [{ opacity: 0 }, { opacity: 1 }], { duration: motionTiming.feedback }),
+-      animate(detail, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
+-      animate(art, [{ opacity: 0, transform: `translate(${detailOrigin.x}px,${detailOrigin.y}px) scale(.95)` }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter }),
+-      animate(/** @type {HTMLElement} */ (detail.querySelector('.ag-detail-copy')), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: motionTiming.detailEnter, delay: motionTiming.stagger }),
+-    ];
+   };
+   const closeDetail = finish => {
+-    const epoch = ++detailEpoch;
+-    // 快速关闭从当前进度收回，不能先取消入场再跳到完全展开状态。
+-    const current = { opacity: getComputedStyle(detail).opacity, transform: getComputedStyle(detail).transform };
+-    const shadeOpacity = getComputedStyle(backdrop).opacity;
+-    const art = /** @type {HTMLElement} */ (detail.querySelector('.ag-detail-art'));
+-    const artCurrent = { opacity: getComputedStyle(art).opacity, transform: getComputedStyle(art).transform };
+-    cancelDetail();
+-    const animation = animate(detail, [current, { opacity: 0, transform: 'translateY(5px)' }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
+-    const shade = animate(backdrop, [{ opacity: shadeOpacity }, { opacity: 0 }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
+-    const medal = animate(art, [artCurrent, { opacity: 0, transform: `translate(${detailOrigin.x * .5}px,${detailOrigin.y * .5}px) scale(.98)` }], { duration: motionTiming.exit, easing: motionEasing.exit, fill: 'forwards' });
+-    detailAnimations = [animation, shade, medal];
+-    const complete = () => {
+-      if (epoch !== detailEpoch) return;
+-      finish();
+-      source?.classList.remove('is-detail-source');
+-      source = null;
+-      cancelDetail();
+-    };
+-    if (!animation) complete();
+-    else animation.finished.then(complete).catch(() => {});
++    source?.classList.remove('is-detail-source');
++    source = null;
++    finish();
+   };
+   const enterGallery = () => {
+     revealTiles(true);
+diff --git a/.tmp/collection-layout-baseline/game/src/ui/menu-guide.js b/game/src/ui/menu-guide.js
+index 62118b3b..ee8a0c75 100644
+--- a/.tmp/collection-layout-baseline/game/src/ui/menu-guide.js
++++ b/game/src/ui/menu-guide.js
+@@ -79,10 +79,9 @@ export function createMenuGuidePages({ UI, game, pickLatestSlot, document, readM
+       backs: readCards().CARD_BACKS || [], cards: readCards().all(),
+     }), 'page');
+     const page = /** @type {import("./ui.dom.types.js").UIElement} */ (UI.el.ovBody.querySelector('.achievement-gallery'));
+-    const gallery = bindAchievementGallery(page, { deferEntry:true });
++    bindAchievementGallery(page, { deferEntry:true });
+     const clearCut = enterAchievementCut(page, reduceMotion());
+     UI.act('achBack', () => {
+-      if (gallery.closeDetail()) return;
+       clearCut();
+       UI.hideOverlay(); game.state = 'title';
+     });
+diff --git a/.tmp/collection-layout-baseline/game/src/ui/page-motion-profiles.js b/game/src/ui/page-motion-profiles.js
+index 38b942cb..69f2ccd0 100644
+--- a/.tmp/collection-layout-baseline/game/src/ui/page-motion-profiles.js
++++ b/game/src/ui/page-motion-profiles.js
+@@ -22,7 +22,7 @@ const profiles = [
+     ['.bg-copy', 'content', 160], ['.bg-pager', 'actions', 220],
+   ] },
+   { key: 'achievements', root: '.achievement-gallery', duration: motionTiming.regionEnter, rise: 6, groups: [
+-    ['.ag-title-group > div', 'heading', 0],
++    ['.collection-page-identity', 'heading', 0],
+     ['.ag-summary', 'content', 30],
+   ] },
+   { key: 'data', root: '.data-tuned, .pg.hub:not(#hubMain):has(.dt-grid)', groups: [
+diff --git a/.tmp/collection-layout-baseline/game/src/hub/game.cardslib.page.js b/game/src/hub/game.cardslib.page.js
+index 80a516f4..c432de4b 100644
+--- a/.tmp/collection-layout-baseline/game/src/hub/game.cardslib.page.js
++++ b/game/src/hub/game.cardslib.page.js
+@@ -8,6 +8,7 @@ const SDT = window.SDT;
+ const UI = window.SDT.UI;
+ import { createCollectionModel } from '../ui/collection-view.js';
+ import { linkedBackHTML } from '../ui/home-linked-interactions.js';
++import { collectionHeaderHTML, collectionToolbarHTML } from '../ui/collection-chrome.js';
+ import { syncViewChildren } from '../ui/view-children-sync.js';
+ 
+ // DEV 诊断钩子（照相馆性能专项 09-29，与 ?photoFps 同款 DEV 门，生产构建零开销）：
+@@ -529,7 +530,7 @@ function replayStudioMotion(node, options = {}) {
+   libMotion.play(node, options);
+ }
+ function syncStudioTabMarker() {
+-  updatePhotoStudioTabMarker(document.querySelector('.studio-unified .clib-tabs'));
++  updatePhotoStudioTabMarker(document.querySelector('.studio-unified .studio-category-tabs'));
+ }
+ function setLibSelection(id, playSound = false, refreshPreview = false, motion = { reason: 'hover' }) {
+   const card = libModel.get(id) || null;
+@@ -712,7 +713,7 @@ function syncLibFilterUI() {
+     if (input) input.value = libFilter[field];
+   }
+   const counts = libCategoryCounts();
+-  document.querySelectorAll('.clib-tabs .type-tab').forEach(b => {
++  document.querySelectorAll('.studio-category-tabs .type-tab').forEach(b => {
+     const active = /** @type {HTMLElement} */ (b).dataset.t === libFilter.tab;
+     b.classList.toggle('on', active);
+     b.setAttribute('aria-pressed', String(active));
+@@ -763,11 +764,7 @@ function renderCardLibrary() {
+   const selectedPreview = libModel.get(libSelectedId) || first;
+   UI.showOverlay('', `
+     <div class="pg card-library-page photo-studio-v3 studio-index-layout studio-unified studio-archive${libEditMode ? ' edit-mode' : ''}${libFilter.tab !== '全部' ? ' studio-single-type' : ''}">
+-      <div class="studio-exit-anchor">${linkedBackHTML('closeCardPage', '关闭照相馆', 'studio-exit')}</div>
+-      <header class="pg-head library-head">
+-        <div class="clib-tabs" role="tablist" aria-label="照片分类">${tabs}</div>
+-        <div class="library-tools"><div class="studio-head-summary"><h2>照相馆</h2><span class="studio-head-total" aria-label="馆藏 ${libCards.length} 张照片">馆藏 <b>${libCards.length}</b> 张照片</span></div>${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}</div>
+-      </header>
++      ${collectionHeaderHTML({title:'照相馆',back:linkedBackHTML('closeCardPage','关闭照相馆','studio-exit'),navigation:`<nav class="studio-category-tabs" role="tablist" aria-label="照片分类">${tabs}</nav>`,summary:`<span class="studio-head-total" aria-label="馆藏 ${libCards.length} 张照片">馆藏 <b>${libCards.length}</b> 张照片</span>`,actions:`${libEditMode ? '<button class="hs-btn" data-act="exportNotes" aria-label="导出全部照片备注">[[icon:download]] 导出备注</button>' : ''}${editorTools}`})}
+       <div class="clib-main">
+         <div class="studio-room-scene" aria-hidden="true">
+           <i class="room-gantry"></i><i class="room-beam"></i><i class="room-beam second"></i>
+@@ -775,12 +772,8 @@ function renderCardLibrary() {
+           ${Array.from({ length: 12 }, (_, i) => `<i class="room-dust" style="--dust-x:${19 + (i * 13) % 57}%;--dust-y:${21 + (i * 19) % 62}%;--dust-duration:${18 + i % 7}s;--dust-delay:-${i * 2.3}s"></i>`).join('')}
+         </div>
+         <section class="studio-catalog" aria-label="馆藏照片">
+-          <section class="studio-filterbar" aria-label="照片搜索与筛选">
+-            <div class="studio-search-row"><label class="studio-field studio-query"><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="模糊搜索名称或效果，空格分隔关键词" value="${escAttr(libFilter.q)}"></span></label>
+-              <label class="studio-field studio-quick studio-quick-rarity"><span class="studio-select-shell"><select id="libRar" class="pg-select library-select" aria-label="按稀有度筛选"><option value="全部">不限稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select></span></label><label class="studio-field studio-quick studio-quick-sort"><span class="studio-select-shell"><select id="libSort" class="pg-select" aria-label="照片排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>稀有度</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>费用</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>名称</option></select></span></label><label class="studio-field studio-quick studio-quick-person"><span class="studio-select-shell"><select id="libCls" class="pg-select library-select" aria-label="按人物筛选"><option value="全部">不限人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(c => c && c !== '通用'))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></span></label>
+-              <div class="studio-index-heading"><span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}><b id="libResultCount">${libFiltered().length}</b> 张</span><button type="button" class="studio-clear" data-act="libClearFilter">重置</button></div>
+-            </div><div class="studio-active-filters" id="libActiveFilters">${libActiveFiltersHTML()}</div>
+-          </section>
++          ${collectionToolbarHTML({search:`<label class="studio-field studio-query"><span class="studio-search"><input id="cardSearch" class="clib-search" aria-label="搜索卡牌" placeholder="模糊搜索名称或效果，空格分隔关键词" value="${escAttr(libFilter.q)}"></span></label>`,filters:`<label class="studio-field studio-quick studio-quick-rarity"><span class="studio-select-shell"><select id="libRar" class="pg-select library-select" aria-label="按稀有度筛选"><option value="全部">不限稀有度</option>${RARITIES.map(r => `<option value="${r}"${libFilter.rar === r ? ' selected' : ''}>${r}</option>`).join('')}</select></span></label><label class="studio-field studio-quick studio-quick-sort"><span class="studio-select-shell"><select id="libSort" class="pg-select" aria-label="照片排序"><option value="rarity"${libFilter.sort === 'rarity' ? ' selected' : ''}>稀有度</option><option value="cost"${libFilter.sort === 'cost' ? ' selected' : ''}>费用</option><option value="name"${libFilter.sort === 'name' ? ' selected' : ''}>名称</option></select></span></label><label class="studio-field studio-quick studio-quick-person"><span class="studio-select-shell"><select id="libCls" class="pg-select library-select" aria-label="按人物筛选"><option value="全部">不限人物</option><option value="通用"${libFilter.cls === '通用' ? ' selected' : ''}>通用</option>${[...new Set(libCards.map(c => c.cls).filter(c => c && c !== '通用'))].sort().map(c => `<option value="${escAttr(c)}"${libFilter.cls === c ? ' selected' : ''}>${esc(characterName(c))}</option>`).join('')}</select></span></label>`,results:`<span class="lib-show"${libFiltered().length === libCards.length ? ' hidden' : ''}><b id="libResultCount">${libFiltered().length}</b> 张</span><button type="button" class="studio-clear" data-act="libClearFilter">重置</button>`,className:'studio-filterbar',label:'照片搜索与筛选'})}
++          <div class="studio-active-filters" id="libActiveFilters">${libActiveFiltersHTML()}</div>
+           ${libGridHTML()}
+         </section>
+         <aside class="library-inspector" aria-label="选中卡牌详情"><div class="library-preview${selectedPreview ? ' has-preview' : ''}" id="libPreview" aria-live="polite">${libPreviewHTML(selectedPreview)}</div></aside>
+@@ -795,7 +788,7 @@ function renderCardLibrary() {
+   }, { signal });
+   document.addEventListener('sdt-overlay-close', () => releaseLibPageResources(true), { signal });
+   bindPhotoStudioControls(document.querySelector('.studio-unified'));
+-  releaseLibTabMarker = bindPhotoStudioTabMarker(document.querySelector('.studio-unified .clib-tabs'));
++  releaseLibTabMarker = bindPhotoStudioTabMarker(document.querySelector('.studio-unified .studio-category-tabs'));
+   // 整页重建的网格同样走窗口挂载：还有剩余就挂上哨兵观察
+   const libGrid = document.getElementById('libGrid');
+   rebuildLibNodeMap(libGrid);
+diff --git a/.tmp/collection-layout-baseline/game/src/hub/preparation.view.js b/game/src/hub/preparation.view.js
+index f4c4b801..28749918 100644
+--- a/.tmp/collection-layout-baseline/game/src/hub/preparation.view.js
++++ b/game/src/hub/preparation.view.js
+@@ -2,6 +2,7 @@ import { esc as escRaw } from '../core/shared.js';
+ import { previewDeployment } from './preparation.commands.js';
+ import { getSources } from './preparation.sources.js';
+ import { syncViewChildren } from '../ui/view-children-sync.js';
++import { decisionSummaryHTML } from '../ui/decision-summary.js';
+ 
+ // 空值容错（?? ''）是本域展示策略，叠在 core/shared.js 权威转义之上
+ const esc = value => escRaw(value ?? '');
+@@ -27,20 +28,26 @@ function qualificationHints(q) {
+ 
+ function renderPreset(preset, model) {
+   const preview = preset.preview;
++  const character = model.characterOptions?.find(item => item.id === preset.characterId)?.name || '未选择人物';
++  const pet = model.petOptions?.find(item => item.id === preset.petId)?.name || '无伙伴';
++  const facts = preview ? [`带入 ${preview.costs.stashCards} 张`, `占 ${preview.costs.slotsUsed}${Number.isFinite(preview.costs.bagCapacity) ? `/${preview.costs.bagCapacity}` : ''} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''}`, `${preview.missing.length} 缺失`, `${preview.forbidden.length} 禁带`] : ['请先预览方案'];
+   return `<section class="prep-preset" data-preset="${esc(preset.id)}">
+-    <div class="prep-preset-head"><label>方案名<input maxlength="24" data-field="name" value="${esc(preset.name)}"></label><span>${esc(preset.id)}</span></div>
++    <header class="prep-preset-head"><div><h3>${esc(preset.name || '出征方案')}</h3><p>${esc(character)} · ${esc(pet)} · ${preset.picks.length} 种卡牌</p></div></header>
++    <details class="prep-preset-editor" data-preset-editor="${esc(preset.id)}"><summary>编辑人物与卡牌</summary><div class="prep-editor-body"><label class="prep-name">方案名<input maxlength="24" data-field="name" value="${esc(preset.name)}"></label>
+     <div class="prep-fields"><label>人物<select data-field="characterId">${optionList(model.characterOptions, preset.characterId, '未选择人物')}</select></label><label>宠物<select data-field="petId">${optionList(model.petOptions, preset.petId, '未选择宠物')}</select></label></div>
+     <div class="prep-picks">${preset.picks.length ? preset.picks.map(pick => { const hit = preview?.resolvedPicks?.find(item => item.card.cardId === pick.card.cardId && (item.card.variantKey || '') === (pick.card.variantKey || '')); return `<div class="prep-pick ${esc(hit?.status || '')}"><span><b>${esc(hit?.name || pick.name || pick.card.cardId)}</b> ×${pick.count}</span><small>${hit ? esc(statusText(hit)) : '尚未预览'}</small><button data-action="preset-pick-remove" data-card-id="${esc(pick.card.cardId)}" aria-label="移除 ${esc(hit?.name || pick.card.cardId)}">移除</button></div>`; }).join('') : '<p class="prep-empty">还没有选择带入卡牌。</p>'}</div>
+     <div class="prep-add"><select data-role="card-add">${optionList(model.cardOptions, null, '选择仓库卡牌')}</select><input data-role="count-add" type="number" min="1" max="99" value="1" aria-label="数量"><button data-action="preset-pick-add">加入愿望清单</button></div>
+-    ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · 占 ${preview.costs.slotsUsed}${Number.isFinite(preview.costs.bagCapacity) ? `/${preview.costs.bagCapacity}` : ''} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''} · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span>${qualificationHints(preview.qualification)}${preview.errors?.includes('BAG_CAPACITY_EXCEEDED') ? '<small class="prep-qual-hint">背包容量不足，请减少携带卡牌或扩建背包。</small>' : ''}</div>` : ''}
+-    <div class="prep-actions"><button data-action="preset-preview">重新预览</button><button data-action="preset-apply"${preview?.canStart ? '' : ' disabled'}>应用到整备</button></div>
+-    <p class="prep-empty">应用后，在整备页确认人物、伙伴与卡牌。</p>
++    </div></details>
++    ${decisionSummaryHTML({status:preview?.canStart ? '可以应用' : preview ? '需要处理' : '尚未预览',facts,ready:!!preview?.canStart,className:'prep-summary',actions:`<button class="ui-control" data-action="preset-preview"${model.busy ? ' disabled' : ''}>重新预览</button><button class="ui-control prep-apply" data-action="preset-apply"${preview?.canStart && !model.busy ? '' : ' disabled'}>应用到整备</button>`})}
++    ${preview ? qualificationHints(preview.qualification) : ''}
++    ${preview?.errors?.includes('BAG_CAPACITY_EXCEEDED') ? '<p class="prep-qual-hint">背包容量不足，请减少携带卡牌或扩建背包。</p>' : ''}
++    <p class="prep-empty prep-next-step">应用后，在整备页确认人物、伙伴与卡牌。</p>
+   </section>`;
+ }
+ 
+ function render(model) {
+   return `<section class="preparation-module" aria-label="收藏目标与出征预设">
+-    <header><div><h2>目标与预设</h2></div><span class="prep-count">追踪 ${(model.goals || []).length}/3</span></header>
++    <header class="prep-goals-head"><h3>收藏目标</h3><span class="prep-count">追踪 ${(model.goals || []).length}/3</span></header>
+     ${model.error ? `<p class="prep-error" role="alert">${esc(model.error)}</p>` : ''}
+     <div class="prep-goals">${(model.goals || []).map(goal => `<article><div><b>${esc(goal.name || goal.id)}</b><p>${esc(goal.sourceLabel || '来源未确认')}</p></div><button data-action="goal-remove" data-target-id="${esc(goal.id)}">取消追踪</button></article>`).join('') || '<p class="prep-empty">未追踪目标</p>'}</div>
+     <div class="prep-goal-add"><select data-role="goal-add">${optionList(model.targetOptions, null, '选择收藏目标')}</select><button data-action="goal-add"${(model.goals || []).length >= 3 ? ' disabled' : ''}>加入追踪</button></div>
+@@ -81,9 +88,11 @@ export function mountPreparationView(root, { model, onIntent = () => {} } = {})
+   };
+   const change = event => { const field = event.target.dataset?.field; const presetId = event.target.closest?.('[data-preset]')?.dataset.preset; if (field && presetId) emit('preset-field', { presetId, field, value: event.target.value }); };
+   const paint = () => {
++    const expanded = new Set([...root.querySelectorAll('details[data-preset-editor][open]')].map(item => item.getAttribute('data-preset-editor')));
+     const template = root.ownerDocument.createElement('template');
+     template.innerHTML = render(current);
+     syncViewChildren(root, template.content, { preserveValue: element => element.hasAttribute('data-role') || element === root.ownerDocument.activeElement });
++    for (const item of /** @type {NodeListOf<HTMLDetailsElement>} */ (root.querySelectorAll('details[data-preset-editor]'))) item.open = expanded.has(item.getAttribute('data-preset-editor'));
+     root.setAttribute('aria-busy', /** @type {typeof current & {busy?:boolean}} */ (current).busy ? 'true' : 'false');
+   };
+   root.addEventListener('click', click); root.addEventListener('change', change); paint();
+diff --git a/.tmp/collection-layout-baseline/game/src/hub/game.hub.preparation-ports.js b/game/src/hub/game.hub.preparation-ports.js
+index 20358e42..46c28d26 100644
+--- a/.tmp/collection-layout-baseline/game/src/hub/game.hub.preparation-ports.js
++++ b/game/src/hub/game.hub.preparation-ports.js
+@@ -4,6 +4,8 @@ import { homeErrorMessage } from './command-errors.js';
+ import { homeRequestId } from './game.hub.bridge.js';
+ import { createHubPreparationFeature } from './game.hub.preparation.js';
+ import '../../css/preparation.css';
++import { collectionHeaderHTML } from '../ui/collection-chrome.js';
++import { linkedBackHTML } from '../ui/home-linked-interactions.js';
+ 
+ // The hub owns navigation and the singleton; this adapter only assembles preparation ports.
+ export function createHubPreparationAdapter({ SDT, UI, returnToBase, applyPicks, openDeparture }) {
+@@ -22,7 +24,7 @@ export function createHubPreparationAdapter({ SDT, UI, returnToBase, applyPicks,
+     },
+     view: {
+       openPanel: () => {
+-        UI.showOverlay('', '<div class="preparation-shell camp-detail"><button class="ov-btn" data-act="preparationBack">← 返回基地出发页</button><div id="preparationRoot"></div></div>', 'page');
++        UI.showOverlay('', `<div class="preparation-shell camp-detail">${collectionHeaderHTML({title:'目标与预设',back:linkedBackHTML('preparationBack','返回基地出发页')})}<div id="preparationRoot"></div></div>`, 'page');
+         UI.act('preparationBack', () => feature.returnToBase());
+         return document.getElementById('preparationRoot');
+       },
+diff --git a/.tmp/collection-layout-baseline/game/css/title-achievements.css b/game/css/title-achievements.css
+index d6e12b10..113fa81a 100644
+--- a/.tmp/collection-layout-baseline/game/css/title-achievements.css
++++ b/game/css/title-achievements.css
+@@ -1,197 +1,84 @@
+-/* Reference: paper, graphite medal mounts, orange state tags. Title only. */
+-.achievement-gallery[data-gallery-entry="waiting"] :is([data-gallery-item],.ag-total,.ag-progress>span){visibility:hidden;animation-play-state:paused!important}
+-#overlay:has(.achievement-gallery) { background: #dbdcdc; backdrop-filter: none; }
+-#overlay .card:has(.achievement-gallery){
+-& {
+-  width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0;
+-  border: 0; border-radius: 0; overflow: hidden; background: #e0e3e0; box-shadow: none; text-align: left;
++/* Collection layout owner. Medal artwork and domain state keep their original sources. */
++#overlay:has(.achievement-gallery) { background:#e5e7e2; backdrop-filter:none; }
++#overlay .card:has(.achievement-gallery) { width:100%; height:100%; max-width:none; max-height:none; margin:0; padding:0; border:0; border-radius:0; overflow:hidden; background:#e5e7e2; box-shadow:none; text-align:left; }
++#overlay .card:has(.achievement-gallery) > #ovTitle { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); }
++#overlay:has(.achievement-gallery) #ovCloseX { display:none; }
++#overlay .card:has(.achievement-gallery) #ovBody { height:100%; padding:0; overflow:hidden; }
++#overlay .achievement-gallery { --collection-header-bg:#f7f8f5; --collection-ink:#303735; --collection-muted:#637068; --collection-line:#c5cdc5; --collection-accent:#a68b48; --public-control-ring:#a68b48; --control-focus:#7a693e;
++  position:relative; display:flex; flex-direction:column; width:100%; height:100%; min-width:0; color:#303735; background:#e5e7e2; font-family:var(--font-ui); }
++.achievement-gallery {
++  & * { box-sizing:border-box; }
++  & button { font-family:inherit; cursor:pointer; }
++  & button:focus-visible { outline:2px solid #9b7b37; outline-offset:2px; }
++  & .ag-summary { display:flex; align-items:center; flex-wrap:wrap; gap:18px; color:#637068; font-size:17px; }
++  & .ag-total { display:flex; align-items:baseline; gap:5px; white-space:nowrap; }
++  & .ag-total strong { color:#303735; font-size:24px; font-weight:600; font-variant-numeric:tabular-nums; }
++  & .ag-progress { position:relative; width:100px; height:3px; background:#c5cdc5; overflow:hidden; }
++  & .ag-progress > span { display:block; height:100%; background:#a68b48; transform-origin:left; }
++  & .ag-cabinet-glint { position:absolute; inset:0; pointer-events:none; opacity:0; background:linear-gradient(90deg,transparent,#fff4c5,transparent); }
++  & .ag-archive { border-left:1px solid #c5cdc5; padding-left:18px; }
++  & .ag-display-menu { position:relative; font-size:16px; color:#637068; }
++  & .ag-display-menu summary { min-height:44px; display:flex; align-items:center; cursor:pointer; }
++  & .ag-display-options { position:absolute; right:0; top:100%; width:200px; z-index:5; display:grid; gap:10px; padding:16px; background:#f7f8f5; border:1px solid #c5cdc5; box-shadow:0 8px 24px #101a1926; }
++  & .ag-display-options button { min-height:40px; border:1px solid #c5cdc5; background:transparent; color:inherit; font:inherit; }
++  & .ag-tools { flex:none; padding:20px 32px 0; }
++  & .ag-search { display:flex; align-items:center; gap:10px; padding:8px 12px; border:1px solid #bdc7bf; border-radius:3px; background:#f7f8f5; }
++  & .ag-search input { width:100%; min-width:0; border:0; padding:0; border-radius:0; background:transparent; color:#303735; font:20px/1.5 var(--font-ui); }
++  & .ag-search input::placeholder { color:#637068; }
++  & .ag-search:focus-within { outline:2px solid #9b7b37; outline-offset:2px; }
++  & :is(.ag-filters,.ag-view) { display:flex; align-items:center; gap:6px; }
++  & :is(.ag-filters,.ag-view) button { min-height:44px; padding:8px 12px; border:1px solid transparent; border-radius:3px; background:transparent; color:#637068; font:500 18px/1.4 var(--font-ui); }
++  & :is(.ag-filters,.ag-view) button:hover { background:#3037350a; }
++  & :is(.ag-filters,.ag-view) button[aria-pressed="true"] { color:#f7f8f5; border-color:#607164; background:#35493d; }
++  & .ag-filters button[data-gallery-filter="pending"] b { color:#89682a; }
++  & .ag-filters button[data-gallery-filter="pending"][aria-pressed="true"] b { color:#ead49a; }
++  & .ag-body { flex:1; min-height:0; min-width:0; display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,420px); gap:28px; padding:24px 32px 32px; }
++  & .ag-content { min-width:0; min-height:0; display:flex; flex-direction:column; }
++  & .ag-scroll { flex:1; min-height:0; overflow-y:auto; overflow-x:hidden; scrollbar-gutter:stable; scrollbar-width:thin; scrollbar-color:#89968a transparent; padding:2px 10px 16px 2px; }
++  & .ag-grid { display:grid; gap:10px; }
++  & .ag-medal { position:relative; display:flex; align-items:center; gap:18px; width:100%; min-width:0; min-height:112px; padding:14px 20px; text-align:left; border:1px solid #c9d0c7; border-radius:3px; background:#f7f8f5; color:#303735;
++    transition:background-color 180ms,border-color 180ms; }
++  & .ag-medal:hover { border-color:#9caa9e; background:#fff; }
++  & .ag-medal.is-detail-source { border-color:#b9aa80; box-shadow:inset 3px 0 #a68b48; background:#eee9da; }
++  & .ag-emblem { flex:0 0 76px; display:grid; place-items:center; }
++  & .ag-badge { width:76px; height:76px; }
++  & .ag-medal-copy { flex:1; min-width:0; display:flex; flex-direction:column; gap:8px; }
++  & .ag-item-heading { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
++  & .ag-item-heading strong { font-size:22px; line-height:1.4; }
++  & .ag-state { display:inline-flex; align-items:center; gap:6px; color:#637068; font-size:16px; white-space:nowrap; }
++  & .ag-state i { font-style:normal; }
++  & .ag-unlocked .ag-state { color:#89682a; }
++  & .ag-claimed .ag-state { color:#466c52; }
++  & .ag-description { color:#59675d; font-size:19px; line-height:1.5; overflow-wrap:anywhere; }
++  & .ag-item-footer { color:#748077; font-size:14px; line-height:1.4; }
++  & .ag-grid[data-view="grid"] { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
++  & .ag-grid[data-view="grid"] .ag-medal { flex-direction:column; align-items:stretch; }
++  & .ag-grid[data-view="grid"] .ag-emblem { flex-basis:auto; }
++  & .ag-grid[data-view="grid"] .ag-item-heading { flex-direction:column; align-items:flex-start; }
++  & .ag-category-marker { position:absolute; pointer-events:none; border-bottom:2px solid #a68b48; z-index:1; }
++  & .ag-empty { padding:60px 24px; text-align:center; color:#637068; }
++  & .ag-empty h3 { margin:0 0 16px; font-size:26px; color:#303735; }
++  & .ag-empty button { margin-top:16px; min-height:44px; padding:10px 18px; border:1px solid #bdc7bf; background:#f7f8f5; color:#303735; font-size:18px; }
++  & .ag-inspector { min-width:0; min-height:0; overflow:hidden; border:1px solid #c5cdc5; border-radius:3px; background:#f7f8f5; }
++  & .ag-detail-empty { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; padding:32px; text-align:center; color:#637068; }
++  & .ag-detail-empty > span { font-size:44px; color:#a68b48; }
++  & .ag-detail-empty h3 { font-size:24px; color:#303735; }
++  & .ag-detail-empty p { font-size:19px; line-height:1.7; }
++  & .ag-detail { display:flex; flex-direction:column; height:100%; min-height:0; }
++  & .ag-detail-toolbar { flex:none; display:flex; gap:10px; align-items:center; padding:14px 18px; border-bottom:1px solid #d5dbd3; }
++  & .ag-detail-toolbar button { min-height:42px; min-width:42px; padding:8px 12px; border:1px solid #bdc7bf; border-radius:3px; background:transparent; color:#46554a; font-size:18px; }
++  & .ag-detail-toolbar button:disabled { opacity:.4; cursor:default; }
++  & .ag-detail-close { margin-left:auto; }
++  & .ag-detail-content { flex:1; min-height:0; overflow-y:auto; scrollbar-width:thin; }
++  & .ag-detail-art { display:grid; place-items:center; padding:28px; background:#e8ebe3; }
++  & .ag-detail-art .ag-badge { width:160px; height:160px; }
++  & .ag-detail-copy { display:flex; flex-direction:column; gap:16px; padding:24px; }
++  & .ag-detail-category { color:#748077; font-size:15px; }
++  & .ag-detail-copy h3 { margin:0; font-size:28px; line-height:1.4; color:#303735; }
++  & .ag-detail-copy p { margin:0; font-size:20px; line-height:1.65; }
++  & .ag-detail-copy p b { display:block; margin-bottom:6px; font-size:16px; color:#637068; }
++  & .ag-detail-note { border-top:1px solid #d5dbd3; padding-top:18px; color:#637068; }
++  &.ag-ambient-off .ag-progress { opacity:.6; }
+ }
+-& > #ovTitle { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); }}
+-#overlay{
+-&:has(.achievement-gallery) #ovCloseX { display: none !important; }
+-& .card:has(.achievement-gallery) #ovBody { height: 100%; padding: 0; overflow: hidden; }
+-& .card.page .achievement-gallery .ag-header h2 { display: block !important; }
+-& .achievement-gallery {
+-  position: relative; width: 100%; min-width: 0; height: 100%; display: flex; flex-direction: column;
+-  color: #303735; font-family: 'HarmonyOS Sans SC', sans-serif;
+-  background: radial-gradient(ellipse at 25% 30%, #ffffffba, transparent 65%),
+-    repeating-linear-gradient(115deg, #5a616804 0 1px, transparent 1px 5px), #dedede;
+-}}
+-.achievement-gallery{
+-& * { box-sizing: border-box; }
+-& [hidden] { display: none !important; }
+-& button { font-family: inherit; cursor: pointer; }
+-& button:focus-visible { outline: 3px solid #eab403; outline-offset: 3px; }
+-& .ag-header {
+-  z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+-  gap: 16px; padding: 18px 24px; background: #fafafa; border-bottom: 1px solid #a0a8a2;
+-  box-shadow: 0 4px 9px #23262826;
+-}
+-& .ag-title-group { display: flex; align-items: center; gap: 17px; }
+-& .ag-kicker { font-size: 10px; letter-spacing: .14em; color: #717a74; }}
+-#overlay .achievement-gallery .ag-title-group h2 { margin: 3px 0 0; padding: 0; color: #303735; font-size: 24px; font-weight: 700; letter-spacing: .1em; line-height: 1.2; }
+-.achievement-gallery{
+-& .ag-header-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; }
+-& .ag-filters, & .ag-view { display: flex; gap: 5px; }
+-& .ag-filters button { position: relative; padding: 10px 17px; background: #ececec; border: 0; border-bottom: 3px solid #c5cac5; color: #333a36; font-size: 16px; }
+-& .ag-filters button[aria-pressed="true"] { background: #353936; color: #ffcb21; border-bottom-color: #ffc60b; }
+-& .ag-filters button[aria-pressed="true"]::after { content: ''; position: absolute; bottom: 0; left: calc(50% - 4px); border-bottom: 5px solid #ffc60b; border-left: 4px solid transparent; border-right: 4px solid transparent; }
+-& .ag-view { gap: 0; background: #d9dada; border-radius: 25px; }
+-& .ag-view button { padding: 9px 14px; border: 0; border-radius: 25px; background: transparent; color: #697069; font-size: 14px; }
+-& .ag-view button[aria-pressed="true"] { background: #393d39; color: #ffffff; box-shadow: 0 2px 4px #0003; }
+-& .ag-body { flex: 1; min-height: 0; display: grid; grid-template-columns: 230px minmax(0,1fr) 140px; gap: 28px; padding: 24px 24px 0; }
+-& .ag-summary { position: relative; min-width: 0; padding-top: 14px; }
+-& .ag-summary::before { content: ''; position: absolute; pointer-events: none; top: 5px; left: -55px; width: 290px; height: 320px; background: radial-gradient(ellipse, #edc46824, transparent 68%); }
+-& .ag-watermark { position: absolute; top: 35px; left: -110px; width: 360px; opacity: .07; pointer-events: none; transform: rotate(-15deg); }
+-& .ag-watermark .ag-badge { width: 100%; height: auto; }
+-& .ag-summary-label { position: relative; display: inline-block; padding: 7px 22px 7px 10px; background: #555e57; color: #ffffff; font-size: 16px; clip-path: polygon(0 0,88% 0,100% 50%,88% 100%,0 100%); }
+-& .ag-total { position: relative; display: flex; align-items: baseline; gap: 9px; margin: 18px 0 12px; }
+-& .ag-total strong { font-size: 86px; font-weight: 400; color: #222427; font-variant-numeric: tabular-nums; line-height: 1; letter-spacing: -.05em; }
+-& .ag-total > span { font-size: 21px; color: #747e77; }
+-& .ag-progress { position: relative; height: 4px; background: #8d998c44; max-width: 185px; }
+-& .ag-progress > span { display: block; height: 100%; background: #ebb80f; transform-origin: left center; }
+-& .ag-collection-rate { position: relative; margin: 12px 0 24px; font-size: 14px; color: #636e66; }
+-& .ag-collection-rate b { margin-left: 10px; color: #343536; }
+-& .ag-counts { position: relative; display: grid; gap: 10px; max-width: 195px; }
+-& .ag-counts > span { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: #f7f8f855; font-size: 15px; border-left: 3px solid #8e9091; }
+-& .ag-counts b { margin-left: auto; font-size: 22px; font-weight: 400; }
+-& .ag-dot { width: 9px; height: 9px; display: inline-block; transform: rotate(45deg); background: #8c8f92; }
+-& .ag-dot.pending { background: #e5bd3b; }
+-& .ag-dot.claimed { background: #5a6168; }
+-& .ag-archive { position: relative; width: fit-content; max-width: 100%; margin-top: 26px; padding: 10px 14px; border-left: 4px solid #b88b1b; background: #eedda6; color: #353025; font-size: 18px; font-weight: 700; line-height: 1.6; box-shadow: 0 2px 6px #35302516; }}
+-/* 展柜小菜单与轻量常驻光效；不改变成就或领奖状态。 */
+-.achievement-gallery .ag-display-menu{
+-& { position: relative; margin: 16px 0 20px; max-width: 220px; border-top: 1px solid #b8a67766; color: #635b49; font-size: 13px; }
+-& summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 2px; cursor: pointer; list-style: none; }
+-& summary::-webkit-details-marker { display: none; }
+-& summary > span { transition: rotate .2s; }
+-&[open] summary > span { rotate: 180deg; }}
+-.achievement-gallery .ag-display-options{
+-& { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 10px; }
+-& button { min-height: 32px; padding: 6px 9px; border: 1px solid #b4aa9159; border-radius: 0; background: #f9f4e3; color: #5b5038; font: inherit; font-size: 12px; cursor: pointer; transition: background-color .18s, border-color .18s; }
+-& button:hover { background: #eddfa9; border-color: #b89c50; }
+-& button[aria-pressed='false'] { background: #e4e5e2; color: #71766d; }}
+-.achievement-gallery{
+-& .ag-display-menu :is(summary,button):focus-visible { outline: 2px solid #a48635; outline-offset: 3px; }
+-& .ag-progress { overflow: hidden; }
+-& .ag-progress::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(90deg, transparent 35%, #fff4c5b3 50%, transparent 65%); }}
+-.achievement-gallery .ag-ambient-specks{
+-& { position: absolute; top: 45px; left: 0; width: 190px; height: 160px; pointer-events: none; }
+-& i { position: absolute; width: 3px; height: 3px; background: #c6a34e; opacity: 0; border-radius: 50%; }
+-& i:nth-child(1) { left: 8%; top: 48%; --ag-speck-delay: -1s; }
+-& i:nth-child(2) { left: 82%; top: 12%; --ag-speck-delay: -4s; }
+-& i:nth-child(3) { left: 67%; top: 78%; --ag-speck-delay: -7s; }}
+-.achievement-gallery{
+-& .ag-watermark { overflow: hidden; }
+-& .ag-cabinet-glint { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(110deg, transparent 25%, #fff6bf 50%, transparent 75%); }}
+-@media (prefers-reduced-motion: no-preference) {
+-body:not(.reduce-motion) .achievement-gallery{
+-  & .ag-progress::after { animation: ag-cabinet-flow 9s ease-in-out infinite; }
+-  & .ag-ambient-specks i { animation: ag-cabinet-speck 8s ease-in-out var(--ag-speck-delay) infinite; }}
+-}
+-@keyframes ag-cabinet-flow { 0%, 15% { opacity: 0; transform: translateX(-100%); } 35%, 65% { opacity: .6; } 85%, 100% { opacity: 0; transform: translateX(100%); } }
+-@keyframes ag-cabinet-speck { 0%, 100% { opacity: 0; transform: translateY(7px); } 45% { opacity: .65; } 80% { opacity: 0; transform: translateY(-9px); } }
+-body .achievement-gallery.ag-ambient-off .ag-summary::before,
+-body .achievement-gallery.ag-ambient-off .ag-watermark,
+-body .achievement-gallery.ag-ambient-off .ag-progress::after,
+-body .achievement-gallery.ag-ambient-off .ag-ambient-specks i { animation-play-state: paused !important; }
+-.achievement-gallery{
+-&.ag-ambient-off .ag-progress::after,
+-&.ag-ambient-off .ag-ambient-specks { visibility: hidden; }
+-& .ag-content { min-height: 0; min-width: 0; display: flex; flex-direction: column; }
+-& .ag-list-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 0 3px 14px; color: #636465; font-size: 13px; }
+-& .ag-search { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: #f8f8f8ba; border-bottom: 1px solid #8f9092; max-width: 340px; flex: 1; }
+-& .ag-search > span { color: #5e5f61; font-size: 23px; line-height: 1; }
+-& .ag-search input { min-width: 0; width: 100%; border: 0; border-radius: 0; background: transparent; color: #313335; font: inherit; font-size: 14px; outline: none; }
+-& .ag-search input::placeholder { color: #707273; }
+-& .ag-search:focus-within { border-color: #daaa0c; box-shadow: 0 1px #daaa0c; }
+-& .ag-result-count { white-space: nowrap; }
+-& .ag-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 3px 9px 18px 3px; scrollbar-color: #7c7e80 #cdcecf; scrollbar-width: thin; }
+-/* 入场横移/悬停阴影不得临时开启横向滚动条，纵向滚动槽保持稳定。 */
+-& .ag-scroll { overflow-x: hidden; scrollbar-gutter: stable; }
+-& .ag-grid { display: grid; gap: 18px; }
+-& .ag-medal {
+-  display: flex; position: relative; min-width: 0; width: 100%; padding: 0; border: 1px solid #e8e9e9; border-radius: 0;
+-  background: #fcfcfc; color: #333435; text-align: left;
+-  box-shadow: 0 5px 8px #2a2c2d26; transition: box-shadow .15s, border-color .15s;
+-}
+-& .ag-medal:hover { border-color: #c1a139; box-shadow: 0 7px 12px #2a2c2d3b; }
+-& .ag-emblem { flex: 0 0 128px; width: 128px; min-height: 145px; display: grid; place-items: center; padding: 7px; background: #eeeae2; }
+-& .ag-badge { width: 110px; height: 110px; overflow: hidden; }
+-& .ag-locked .ag-badge { opacity: .9; }
+-& .ag-medal-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 16px 16px 12px; }
+-& .ag-item-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap-reverse; gap: 9px; }
+-& .ag-item-heading strong { font-size: 19px; font-weight: 700; line-height: 1.3; }
+-& .ag-state { display: inline-flex; align-items: center; flex: 0 0 auto; gap: 7px; padding: 4px 8px; background: #e6e6e6; color: #647066; font-size: 12px; line-height: 1.3; }
+-& .ag-state i { font-style: normal; font-weight: 700; }
+-& .ag-unlocked .ag-state, & .ag-claimed .ag-state { background: #ffc508; color: #2b2b2b; }
+-& .ag-claimed .ag-state { background: #717274; color: #ffffff; }
+-& .ag-description { position: relative; flex: 1; margin: 14px 0 10px; padding-left: 12px; border-left: 3px solid #bec0c14d; font-size: 16px; line-height: 1.65; color: #6b786b; }
+-& .ag-item-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px; color: #6b786e; font-size: 10px; letter-spacing: .04em; }
+-& .ag-item-footer > span:last-child { color: #897442; }
+-& .ag-categories { display: flex; flex-direction: column; gap: 12px; padding-top: 46px; }
+-& .ag-categories { position: relative; }
+-& .ag-category-marker { position: absolute; z-index: 1; pointer-events: none; border: 2px solid #d8b34a; background: #e6be4814; box-shadow: 0 0 14px #e5bf4738; transform-origin: left top; }}
+-.achievement-gallery .ag-categories{
+-& button[aria-pressed="true"] { box-shadow: inset 3px 0 #d4ad42, 0 4px 12px #353b3520; }
+-& button { position: relative; padding: 14px 10px; border: 1px solid #cccdce; border-radius: 0; background: #444c45; color: #ffffff; font-size: 16px; box-shadow: 0 4px 6px #0002; }
+-& small { margin-left: 5px; opacity: .65; font-size: 11px; }
+-& button[aria-pressed="true"] { background: #ffffff; color: #363738; border-color: #ffffff; }
+-& button[aria-pressed="true"]::after { content: ''; position: absolute; left: 50%; bottom: -7px; width: 11px; height: 11px; border-right: 1px solid #a4a4a5; border-bottom: 1px solid #a4a4a5; background: #ffffff; transform: rotate(45deg); }}
+-.achievement-gallery .ag-grid[data-view="grid"]{
+-& { grid-template-columns: repeat(auto-fill,minmax(205px,1fr)); gap: 14px; }
+-& .ag-medal { flex-direction: column; }
+-& .ag-emblem { width: 100%; flex-basis: 125px; min-height: 125px; }
+-& .ag-medal-copy { min-height: 170px; }}
+-.achievement-gallery .ag-empty{
+-& {
+-  display: grid; justify-items: center; align-content: center; gap: 13px;
+-  min-height: 100%; padding: clamp(34px, calc(var(--game-layout-height, 100vh) * 0.06), 72px) 24px;
+-  text-align: center; color: #656668;
+-}
+-& > span { font-size: 55px; line-height: 1; color: #919294; }
+-& h3 { max-width: 30ch; font-size: 22px; line-height: 1.5; margin: 2px 0 0; }
+-& p { max-width: 38ch; margin: 0; font-size: 16px; line-height: 1.9; }
+-&[data-empty-state="earned"] .ag-empty-copy { max-width: 46ch; line-height: 2; margin: 3px 0 6px; }
+-& button { margin-top: 2px; padding: 12px 20px; background: #484849; border: 0; color: #ffffff; font-size: 15px; }}
+-.achievement-gallery{
+-& .ag-detail-backdrop { position: absolute; z-index: 3; inset: 0; background: #17201b2e; }
+-& .ag-detail { position: absolute; z-index: 4; top: 100px; left: 12%; right: 12%; max-height: calc(100% - 145px); overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; background: #fafcf8; color: #3c3c3d; box-shadow: 0 20px 50px #282b2e66; border: 1px solid #d7d8d9; }
+-/* Keep the dismissal control visible while a long detail scrolls. */
+-& .ag-detail-toolbar { position: sticky; top: 0; z-index: 1; display: flex; justify-content: flex-end; padding: 10px 14px; background: #fafcf8; border-bottom: 1px solid #d7d8d9; }
+-& .ag-detail-close { display: inline-flex; align-items: center; gap: 12px; min-height: 36px; padding: 5px 12px; color: #3c3c3d; background: #eeeae2; border: 1px solid #bcbdbb; cursor: pointer; }
+-& .ag-detail-close:focus-visible { outline: 2px solid #485d4f; outline-offset: 2px; }
+-& .ag-detail-content { display: flex; min-height: 360px; }}
+-/* 内部动效只由 achievement-motion.js 编排，避免通用 starting-style 再播一层。 */
+-body.interface-motion #overlay .achievement-gallery .ag-detail{
+-& { transition: none; }
+-&:not([hidden]) { opacity: 1; transform: none; }}
+-.achievement-gallery{
+-
+-
+-& .ag-medal.is-detail-source { border-color: #d3ad43; box-shadow: 0 0 0 2px #d3ad4355, 0 5px 14px #2a2c2d26; }
+-& .ag-emblem { position: relative; overflow: hidden; }
+-& .ag-emblem::after { content: ''; position: absolute; pointer-events: none; inset: -25% -70%; background: linear-gradient(110deg, transparent 40%, #fff3c559 50%, transparent 60%); opacity: 0; transform: translateX(-45%); }}
+-@media (prefers-reduced-motion: no-preference) {
+-body:not(.reduce-motion) .achievement-gallery{
+-  & .ag-summary::before { animation: ag-summary-glow 6s ease-in-out infinite alternate; }
+-  & .ag-watermark { animation: ag-watermark-drift 9s ease-in-out infinite alternate; }
+-  & .ag-medal { transition: transform .22s cubic-bezier(.16,1,.3,1), box-shadow .22s, border-color .18s; }
+-  & .ag-medal:not(.ag-locked):hover { border-color: #c6ae72; box-shadow: 0 12px 22px #29312b24; }
+-  & .ag-medal.ag-locked:hover { border-color: #aab0a9; }
+-  & .ag-badge { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+-  & .ag-medal:not(.ag-locked):hover .ag-badge { transform: translateY(-3px) rotate(-2deg) scale(1.06); }
+-  & .ag-medal:not(.ag-locked):hover .ag-emblem::after { animation: ag-medal-glint .7s ease-out; }}
+-}
+-@keyframes ag-summary-glow { from { opacity: .35; transform: translateY(5px) scale(.96); } to { opacity: .85; transform: translateY(-6px) scale(1.04); } }
+-@keyframes ag-watermark-drift { from { opacity: .065; transform: rotate(-17deg) translateY(4px); } to { opacity: .12; transform: rotate(-12deg) translateY(-5px); } }
+-@keyframes ag-medal-glint { 0% { opacity: 0; transform: translateX(-45%); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateX(45%); } }
+-.achievement-gallery{
+-& .ag-detail-art { flex: 0 0 38%; display: grid; place-items: center; background: #eeeae2; padding: 18px; }
+-& .ag-detail-art .ag-badge { width: 100%; max-width: 230px; height: auto; }
+-& .ag-detail-copy { flex: 1; min-width: 0; padding: 42px 30px 30px; }
+-& .ag-detail-category { color: #78797a; font-size: 12px; }
+-& .ag-detail-copy h3 { margin: 14px 0 12px; font-size: 29px; line-height: 1.4; }
+-& .ag-detail-copy p { font-size: 16px; line-height: 1.75; }
+-& .ag-detail-copy p b { display: inline-block; margin-right: 8px; padding: 1px 10px; background: #e1e2e3; font-size: 13px; font-weight: 400; white-space: nowrap; }
+-& .ag-detail-note { color: #717274; border-top: 1px solid #dcdcdd; padding-top: 13px; }}
++.achievement-gallery[data-gallery-entry="waiting"] :is([data-gallery-item],.ag-total,.ag-progress>span) { visibility:hidden; }
++.achievement-gallery [hidden] { display:none; }
+diff --git a/.tmp/collection-layout-baseline/game/css/photo-studio-unified.css b/game/css/photo-studio-unified.css
+index b3d6a62b..ce5fba1b 100644
+--- a/.tmp/collection-layout-baseline/game/css/photo-studio-unified.css
++++ b/game/css/photo-studio-unified.css
+@@ -211,7 +211,7 @@ body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo)
+ body.cardlib-open:has(.studio-archive) :is(.photo-studio-v3,#cardZoom.cz-photo) [data-studio-rarity="棱彩"] { --rarity-ink:#78377c; --rarity-bright:#e8b4e7}
+ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo [data-studio-rarity] { color:var(--rarity-bright)!important}
+ /* Sole gallery layout and presentation owner; mount assets and zoom lifecycle stay separate. */
+-body.cardlib-open #overlay .studio-archive { font-family:var(--font-ui); --su-ink:#e5ddcd;
++body.cardlib-open #overlay .studio-archive { --collection-header-bg:#17251fe8; --collection-ink:#f1e6d1; --collection-muted:#b9b09d; --collection-line:#bdc3ac30; --collection-accent:#d1ac78; --collection-hover:#f1e6d10a; font-family:var(--font-ui); --su-ink:#e5ddcd;
+   --su-muted:#b1a99b;
+   --sa-paper-ink:#30302e; --sa-control-height:42px
+ ;
+@@ -219,29 +219,15 @@ body.cardlib-open #overlay .studio-archive { font-family:var(--font-ui); --su-in
+   min-height:0; min-width:0; margin:0; padding:0!important; overflow:hidden; color:var(--su-ink); background:radial-gradient(ellipse at 16% 0%,#edca8847,transparent 62%),radial-gradient(ellipse at 10% 94%,#6c91b43b,transparent 53%),radial-gradient(ellipse at 79% 80%,#d4aa6436,transparent 34%),linear-gradient(90deg,#121b17db 0%,#121b179e 46%,#121b1755 78%,#121b17b0),linear-gradient(180deg,#151d19 0 18%,#151d19a0 34%,transparent 56%,#0b141045),var(--studio-room-image) center calc(100% + 140px)/cover no-repeat,#151d19!important; --studio-selection-ink:#d1ac78}
+ /* Static lamp spill stays behind the page contents. */
+ body.cardlib-open #overlay .studio-archive::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:conic-gradient(from 155deg at 15% -8%,transparent 0deg,#f8dda824 7deg,#f8dda80b 22deg,transparent 40deg,transparent 360deg); mix-blend-mode:screen }
+-body.cardlib-open #overlay .studio-archive .library-head {
+-  display:grid; z-index:1; flex:0 0 auto; align-items:center; min-height:90px; backdrop-filter:none; position:relative; border:0 !important; border-bottom:0 !important; box-shadow:none !important; grid-template-areas:'photos tools' !important; margin:0; width:100%; box-sizing:border-box; padding:0 80px !important; background:linear-gradient(90deg,#0f1916a0,#23302570 48%,#121b1778), #18251e !important; grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important; gap:132px !important
+-}
+-body.cardlib-open #overlay .studio-archive .library-head::before { display:none!important; }
+-body.cardlib-open #overlay .studio-archive .studio-exit {
+-  position:static!important; background:transparent!important;
+-  border:0!important; color:#ebebeb!important; box-shadow:none!important; clip-path:none!important; display:grid; place-items:center
+-}
+-body.cardlib-open #overlay .studio-archive .studio-exit::after { display:none!important
+-}
+-body.cardlib-open #overlay .studio-archive .studio-exit:hover { background:transparent!important; color:#fff!important
+-}
+-body.cardlib-open #overlay .studio-archive .studio-exit-anchor { z-index:20; justify-self:center; align-self:center; display:grid; place-items:center; position:absolute !important; top:50% !important; left:110px !important; transform:translateY(-50%)
+-}
+ body.cardlib-open #overlay .studio-archive .clib-main {
+   display:grid; position:relative; z-index:1;
+   grid-template-rows:minmax(0,1fr); min-height:0; overflow:hidden;
+   box-shadow:none!important;
+   flex:1; min-width:0; align-items:stretch;
+   background:transparent !important;
+-  padding:80px 80px 48px !important;
++  padding:32px 56px 36px !important;
+   grid-template-columns:minmax(0,7fr) minmax(0,2.6fr) !important;
+-  gap:132px !important
++  gap:40px !important
+ }
+ body.cardlib-open #overlay .studio-archive .clib-main::before,
+ body.cardlib-open #overlay .studio-archive .clib-main::after { display:none!important
+@@ -250,48 +236,11 @@ body.cardlib-open #overlay .studio-archive .studio-catalog { display:flex; flex-
+ }
+ /* A quiet felt receiver gives the clips a physical support without boxing each photo. */
+ body.cardlib-open #overlay .studio-archive .studio-catalog::before { content:none; display:none; }
+-body.cardlib-open #overlay .studio-archive .studio-filterbar {
+-  position:relative; z-index:12; flex:0 0 auto; overflow:visible!important; gap:12px;
+-  border-image:none!important; border-radius:0; outline:none!important; border:0!important;
+-  background:transparent!important; box-shadow:none!important; display:block; color:var(--su-ink); padding:0 !important; border-bottom:0 !important; margin-top:-24px; margin-bottom:0
+-}
+-body.cardlib-open #overlay .studio-archive .studio-filterbar::before,
+-body.cardlib-open #overlay .studio-archive .studio-filterbar::after { display:none!important
+-}
+-body.cardlib-open #overlay .studio-archive .studio-index-heading {
+-  display:flex; align-items:center; color:var(--su-muted)!important; flex:0 0 auto; min-height:38px; margin:0; margin-left:auto; gap:18px
+-}
+-body.cardlib-open #overlay .studio-archive .studio-index-heading>span:first-child {
+-  padding:0!important; background:none!important; border:0!important;
+-  letter-spacing:.03em; box-shadow:none!important; -webkit-text-fill-color:currentColor;
+-  align-items:baseline; gap:6px; color:#b1a99b!important; font:20px/1.4 var(--font-ui)!important; white-space:nowrap
+-}
+ body.cardlib-open #overlay .studio-archive .studio-clear {
+   margin-left:auto;
+   border-radius:0;
+   font:20px/1.3 var(--font-ui)!important; box-shadow:none!important; border-color:#8e7d68!important; color:#d2c7b1!important; border:0 !important; background:transparent !important; font-size:20px !important; min-height:32px; padding:6px 8px !important
+ }
+-body.cardlib-open #overlay .studio-archive .clib-tabs { display:flex; overflow:visible!important; min-width:0; border-bottom:0!important; flex-wrap:nowrap; white-space:nowrap; flex:0 1 auto; gap:10px !important; padding:0 !important; grid-area:photos; position:static; left:auto; top:auto; transform:none; justify-self:center
+-}
+-body.cardlib-open #overlay .studio-archive .type-tab {
+-  min-height:35px!important; border:1px solid transparent!important;
+-  border-radius:0; background:transparent!important; box-shadow:none!important; flex:0 0 auto; cursor:pointer; font:500 20px/1.4 var(--sa-serif) !important; font-size:20px !important; padding:10px 18px !important; color:#acae9e !important; display:inline-flex; align-items:center; justify-content:center; gap:8px
+-}
+-body.cardlib-open #overlay .studio-archive .type-tab:hover { background:#dde4cf0a !important
+-}
+-body.cardlib-open #overlay .studio-archive .type-tab.on,
+-body.cardlib-open #overlay .studio-archive .type-tab.on:hover { box-shadow:none !important; background:transparent !important; border-color:transparent !important; color:#ead4af !important
+-}
+-body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after {
+-  content:''; position:absolute; left:0; top:0; width:1px; height:2px; pointer-events:none;
+-  background:#d4b85c; transform-origin:left center;
+-  transform:translate(var(--studio-tab-x),var(--studio-tab-y)) scaleX(var(--studio-tab-width));
+-  transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
+-}
+-body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready'] .type-tab.on { box-shadow:none!important
+-}
+-body.cardlib-open #overlay .studio-archive .studio-search-row { display:flex; align-items:center; grid-template-columns:none; margin-top:0; padding-left:2px; gap:14px
+-}
+ body.cardlib-open #overlay .studio-archive .studio-field { display:flex; flex-direction:column; min-width:0; gap:5px
+ }
+ body.cardlib-open #overlay .studio-archive .studio-search,
+@@ -466,8 +415,7 @@ body.cardlib-open #overlay .studio-archive .pv-note { margin:0!important; backgr
+ body.cardlib-open #overlay .studio-archive .pv-nav { padding:0!important; display:grid; align-items:center; gap:8px; margin-top:0!important; grid-template-columns:1fr 32px auto 1fr
+ }
+ body.cardlib-open #overlay .studio-archive .pv-navbtn,
+-body.cardlib-open #overlay .studio-archive .studio-zoom,
+-body.cardlib-open #overlay .studio-archive .library-tools .hs-btn {
++body.cardlib-open #overlay .studio-archive .studio-zoom {
+   min-height:39px; padding:10px 12px!important; border:1px solid #a7a8a9!important; border-image:none!important;
+   border-radius:0; background:#e1e2e2!important; color:#3d4247!important;
+   font:14px/1.4 var(--font-ui)!important; text-shadow:none!important; box-shadow:none!important; cursor:pointer
+@@ -548,9 +496,7 @@ body.reduce-motion.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap
+ }
+ @media (prefers-reduced-motion:reduce) {
+   body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap,
+-  body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap:is(:hover,:active) { transition:none!important; transform:none!important
+-  }
+-  body.cardlib-open #overlay .studio-archive .clib-tabs[data-studio-marker='ready']::after { transition:none!important
++body.cardlib-open #overlay .studio-archive .lib-item .lib-cardwrap:is(:hover,:active) { transition:none!important; transform:none!important
+   }
+ }
+ body.cardlib-open #overlay .studio-archive,
+@@ -566,8 +512,6 @@ body.cardlib-open #overlay .studio-archive .studio-clear:hover:not(:disabled) {
+ body.cardlib-open #overlay .studio-archive .studio-clear:disabled { opacity:.35; cursor:default; display:none
+ }
+ body.cardlib-open #overlay .studio-archive:has(.lib-grid.is-empty) .studio-clear { display:none }
+-body.cardlib-open #overlay .studio-archive .clib-tabs::after { background:#bd6240!important; transition:transform var(--motion-change,280ms) var(--motion-ease-enter)!important
+-}
+ body.cardlib-open #overlay .studio-archive .studio-search {
+   min-height:var(--sa-control-height); background:linear-gradient(135deg,#d8dec211,transparent 48%),#1c292540!important; border:1px solid #cbd3be30!important; box-shadow:inset 0 1px 0 #d8dec218!important
+ }
+@@ -661,17 +605,7 @@ body.cardlib-open #overlay .studio-archive .studio-zoom:hover>i { background:tra
+ body.cardlib-open #overlay .studio-archive :is(button,summary):focus-visible,
+ body.cardlib-open #overlay .studio-archive .studio-search:focus-within { outline-color:#c78b56!important
+ }
+-body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom) { transition:background-color var(--motion-feedback,180ms) var(--motion-ease-enter),color var(--motion-feedback,180ms) var(--motion-ease-enter),border-color var(--motion-feedback,180ms) var(--motion-ease-enter)!important
+-}
+-body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.pv-navbtn,.studio-zoom):active:not(:disabled) { filter:brightness(.94)
+-}
+-body.reduce-motion.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
+-body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
+-}
+ @media (prefers-reduced-motion:reduce) {
+-  body.cardlib-open #overlay .studio-archive :is(.type-tab,.studio-clear,.studio-choice-trigger,.pv-navbtn,.studio-zoom),
+-  body.cardlib-open #overlay .studio-archive .clib-tabs::after { transition:none!important
+-  }
+ }
+ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-paper[data-photo-mount] { background:radial-gradient(ellipse at 8% 0%,#fff1d065,transparent 68%),radial-gradient(ellipse at 100% 100%,#7e9aaf24,transparent 66%),linear-gradient(125deg,#e4e5d9a6,#aab3a5a6),url('../assets/ui/photo-studio/paper-grain.png') center/var(--studio-grain-size,160px) repeat,linear-gradient(125deg,#dde1d3,#c7cebd)!important; background-blend-mode:normal,normal,normal,multiply,normal
+ }
+@@ -697,9 +631,6 @@ body.cardlib-open #overlay .card.page:has(.studio-archive) {
+   width:100%; height:100%; max-width:none; max-height:none; padding:0!important;
+   border:0!important; border-radius:0; background:#1b1b1e; overflow:hidden;
+ }
+-body.cardlib-open #overlay .studio-archive .library-tools { grid-area:tools; display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; min-width:0; gap:8px; }
+-body.cardlib-open #overlay .studio-archive .studio-head-summary { display:flex; align-items:baseline; gap:14px; white-space:nowrap; }
+-body.cardlib-open #overlay .studio-archive .studio-head-summary h2 { margin:0; color:#f1e6d1; font:600 25px/1.25 var(--sa-serif); letter-spacing:.04em; }
+ body.cardlib-open #overlay .studio-archive .studio-head-total { color:#b9b09d; font:15px/1.4 var(--font-ui); }
+ body.cardlib-open #overlay .studio-archive .studio-head-total b { color:#e8d4aa; font:600 21px/1 var(--sa-serif); font-variant-numeric:tabular-nums; }
+ body.cardlib-open #overlay .studio-archive .clib-search { width:100%; padding:10px 12px 10px 34px; border:0; outline:0; background:transparent; font-family:var(--font-ui); }
+@@ -733,7 +664,6 @@ body.cardlib-open #overlay .studio-archive .studio-effect-metrics dd small { fon
+ body.cardlib-open #overlay .studio-archive .studio-photo:focus-visible .studio-photo-paper { outline:2px solid #e3c094!important; outline-offset:5px!important; }
+ @media (prefers-reduced-motion:reduce) { body.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; } }
+ body.reduce-motion.cardlib-open #overlay .studio-archive .studio-choice-trigger::after { transition:none; }
+-body.cardlib-open #overlay .studio-archive .library-head::after { content:''; display:block!important; position:absolute; left:0; right:0; bottom:0; height:1px; pointer-events:none; background:linear-gradient(90deg,transparent,#bdc3ac30 28%,#bdc3ac18 72%,transparent); }
+ body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-choice-menu) { --studio-scroll-top:#d7bf94dd; --studio-scroll-bottom:#ae8d5bbf; --studio-scroll-rail:#d7c8a10d; --studio-scroll-hover-top:#efd4a9e6; --studio-scroll-hover-bottom:#bea06ed9; }
+ body.cardlib-open #overlay .studio-archive .studio-dossier-scroll { flex:1 1 auto; --studio-scroll-top:#927744cc; --studio-scroll-bottom:#705d45aa; --studio-scroll-rail:#8b77551a; --studio-scroll-hover-top:#80633ce6; --studio-scroll-hover-bottom:#6b5038d9; }
+ body.cardlib-open #overlay .studio-archive :is(#libGrid,.studio-dossier-scroll,.studio-choice-menu) { scrollbar-gutter:stable; scrollbar-width:thin; scrollbar-color:var(--studio-scroll-top) transparent; }
+@@ -749,9 +679,12 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-num
+ body.cardlib-open #overlay .studio-archive .studio-browse-controls[hidden] { display:none!important; }
+ body.cardlib-open #overlay .studio-archive .studio-quick-rarity { flex:0 0 180px; }
+ body.cardlib-open #overlay .studio-archive .studio-quick-sort { flex:0 0 200px; }
+-body.cardlib-open #overlay .studio-archive .pv-desc .d-term[data-term], body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561!important; font-weight:600; border-bottom:1px dotted #2d656166!important; }
++body.cardlib-open #overlay .studio-archive .pv-desc .d-term[data-term],
++body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term] { color:#2d6561!important; font-weight:600; border-bottom:1px dotted #2d656166!important; }
+ body.cardlib-open #overlay .studio-archive .studio-quick-person { flex:0 0 200px; }
+-body.cardlib-open #overlay .studio-archive .pv-desc .d-term, body.cardlib-open #overlay .studio-archive .pv-desc .d-num, body.cardlib-open #overlay .studio-archive .studio-value,
++body.cardlib-open #overlay .studio-archive .pv-desc .d-term,
++body.cardlib-open #overlay .studio-archive .pv-desc .d-num,
++body.cardlib-open #overlay .studio-archive .studio-value,
+ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules :is(.d-term,.d-num) { white-space:nowrap; }
+ /* The film rail is decorative; the scrollbar retains its native input contract. */
+ @supports selector(::-webkit-scrollbar) {
+@@ -771,7 +704,6 @@ body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-main .cz-pho
+ body.cardlib-open #overlay .studio-archive #libPreview .studio-file-field .studio-rarity-stamp[data-studio-rarity] { display:inline-block; border:1px solid currentColor!important; padding:3px 8px!important; background:none!important; font:600 14px/1.3 var(--sa-serif)!important; letter-spacing:.08em; transform:rotate(-2deg); white-space:nowrap; outline:none; }
+ body.cardlib-open #overlay .studio-archive #libPreview .studio-rarity-stamp:is([data-studio-rarity="职业"],[data-studio-rarity="衍生"]) { transform:none; border-style:dashed!important; outline:0; }
+ body.cardlib-open #overlay .studio-archive .studio-tab-badge { display:none; flex:0 0 18px; width:18px; height:18px; }
+-body.cardlib-open #overlay .studio-archive .type-tab.on .studio-tab-badge { display:inline-flex; }
+ body.cardlib-open #overlay .studio-archive .studio-tab-badge svg { display:block; width:100%; height:100%; }
+ /* Thumbnail identity sits on the paper caption, never over illustration pixels. */
+ body.cardlib-open #overlay .studio-archive .studio-photo-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; width:100%; min-height:23px; padding:2px 2px 0; }
+diff --git a/.tmp/collection-layout-baseline/game/css/preparation.css b/game/css/preparation.css
+index 483249cc..6e3d4336 100644
+--- a/.tmp/collection-layout-baseline/game/css/preparation.css
++++ b/game/css/preparation.css
+@@ -1,108 +1,48 @@
+-
+-.preparation-module{&{--prep-line:rgba(170,174,177,.26);--prep-accent:var(--gold-main);color:#e2e0dc;display:grid;gap:14px}&>header{display:flex;align-items:end;justify-content:space-between}& h2{margin:2px 0}& small{color:#cdb461;letter-spacing:.12em}}.prep-count{padding:7px 10px;border:1px solid var(--prep-line);border-radius:999px}.prep-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.prep-goals article,.prep-preset{background:#181a1c;border:1px solid var(--prep-line);border-radius:0;padding:14px}
+-.prep-goals{& article{display:flex;justify-content:space-between;gap:10px}& p{color:#b7ab83;margin:5px 0}}.prep-goal-add,.prep-add,.prep-actions,.prep-fields,.prep-preset-head{display:flex;gap:9px;align-items:end}.prep-goal-add select,.prep-add select{flex:1}
+-.preparation-module{& select,& input,& button{min-height:42px;border:1px solid rgba(170,174,177,.26);border-radius:0;background:#1f2123;color:inherit;padding:8px 10px}& button:focus-visible,& select:focus-visible,& input:focus-visible{outline:1px solid #e6cb76cc;outline-offset:2px}& button[disabled]{opacity:.4}}.prep-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.prep-preset{display:grid;gap:11px}.prep-preset-head{justify-content:space-between}.prep-preset-head label,.prep-fields label{display:grid;gap:4px;flex:1}.prep-picks{display:grid;gap:7px}
+-.prep-pick{&{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:center;padding:9px;border-left:3px solid #8e9498;background:#121315}&.missing,&.forbidden{border-left-color:#c96a5e}& small{color:#c4b687}}
+-.prep-summary{&{display:flex;justify-content:space-between;padding:9px 11px;border-left:3px solid #8e9498;background:#1a1c1e}&.blocked{border-color:#c96a5e}}.prep-error{padding:10px;border-left:4px solid #c96a5e;background:#2a1c1c}.prep-empty{color:#b5a87d}.prep-add input{width:76px}.prep-actions{justify-content:flex-end}
+-
+-/* ═══════════════════════════════════════════════════════════════════
+-   备战页美术大修（2026-09-25 二波 B 组·P0）——套用 page-slot-select W1
+-   背景配方 + page-deploy .hub-card 面板语言：
+-   ① W1 冷青底色（radial 家族，与选档页同一族）+ prep-desk 桌面底图压暗铺底
+-      （图未落盘时渐变层独立成立，视觉不断）
+-   ② 四角暗角视线收束
+-   ③ 预设卡 = hub-card 语言：冷青渐变面板 + 顶缘封条发丝线 + 眉题金化 + 金 hover
+-   ④ 摘要条金/青双色语义（ready=金=可行动；blocked=青=待处理，硬错误仍走红）
+-   ⑤ prep-goals 空态占位框
+-   动画仅 transform/opacity/border-color 过渡，零逐帧重绘。
+-   ═══════════════════════════════════════════════════════════════════ */
+-.preparation-shell{
+-
+-& {
+-  position: relative; isolation: isolate;
+-  min-height: 100%;
+-  padding: 20px clamp(16px, calc(var(--game-layout-width, 100vw) * 0.03), 42px) 36px;
++/* Preset page owns its presentation; persistent commands remain in preparation.commands. */
++.preparation-shell { --collection-header-bg:#15222b; --collection-ink:#e4ecec; --collection-muted:#b7c6cc; --collection-line:#a8bbc92e; --collection-accent:#ccb57e;
++  position:relative; isolation:isolate; display:flex; flex-direction:column; width:100%; height:100%; min-height:0; padding:0; overflow:hidden;
++  background:linear-gradient(135deg,#14212ceb,#18232bf2),url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover; color:#e4ecec; }
++#preparationRoot { flex:1; min-height:0; overflow-y:auto; width:100%; padding:32px; scrollbar-width:thin; scrollbar-color:#647b88 transparent; }
++.preparation-module { --prep-line:#a8bbc92e; --decision-fill:#ffffff08; --decision-accent:#ccb57e;
++  max-width:1500px; margin:0 auto; display:flex; flex-direction:column; gap:24px; color:#e4ecec;
++  & * { box-sizing:border-box; }
++  & :is(h3,p) { margin:0; }
++  & .prep-goals-head { display:flex; align-items:center; justify-content:space-between; gap:24px; }
++  & .prep-goals-head h3 { font-size:26px; }
++  & .prep-count { font-size:18px; color:#b7c6cc; }
++  & :is(select,input,button) { min-height:44px; padding:10px 14px; border:1px solid #a8bbc940; border-radius:3px; background:#1d303b; color:inherit; font:18px/1.5 var(--font-ui); }
++  & select { color-scheme:dark; min-width:0; max-width:100%; }
++  & input { min-width:0; max-width:100%; }
++  & button { cursor:pointer; }
++  & button:disabled { opacity:.45; cursor:not-allowed; }
++  & :is(button,select,input,summary):focus-visible { outline:2px solid #ccb57e; outline-offset:3px; }
++  & .prep-goals { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
++  & .prep-goals article { display:flex; align-items:start; justify-content:space-between; gap:16px; padding:18px 20px; border:1px solid var(--prep-line); border-radius:3px; background:#ffffff05; }
++  & .prep-goals article b { font-size:21px; }
++  & .prep-goals article p { margin-top:8px; color:#b7c6cc; font-size:18px; line-height:1.6; }
++  & .prep-goal-add { display:flex; gap:16px; }
++  & .prep-goal-add select { flex:1; }
++  & .prep-goals .prep-empty { grid-column:1/-1; padding:24px; border:1px dashed var(--prep-line); text-align:center; }
++  & .prep-presets { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:start; }
++  & .prep-preset { min-width:0; display:flex; flex-direction:column; gap:20px; padding:24px; border:1px solid var(--prep-line); border-radius:3px; background:#182932db; }
++  & .prep-preset-head h3 { font-size:26px; line-height:1.4; }
++  & .prep-preset-head p { margin-top:8px; font-size:18px; color:#b7c6cc; }
++  & .prep-preset-editor { border-top:1px solid var(--prep-line); border-bottom:1px solid var(--prep-line); }
++  & .prep-preset-editor > summary { padding:16px 0; color:#c6d5dc; font-size:20px; cursor:pointer; }
++  & .prep-editor-body { display:flex; flex-direction:column; gap:18px; padding:8px 0 20px; }
++  & :is(.prep-name,.prep-fields label) { min-width:0; display:flex; flex:1; flex-direction:column; gap:8px; font-size:18px; color:#b7c6cc; }
++  & .prep-fields { display:flex; gap:16px; }
++  & .prep-add { display:flex; flex-wrap:wrap; gap:12px; }
++  & .prep-add select { flex:1 1 220px; }
++  & .prep-add input { width:84px; }
++  & .prep-picks { display:flex; flex-direction:column; gap:10px; }
++  & .prep-pick { display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px; padding:12px 14px; border-left:2px solid #91a5ad; background:#0b17224a; font-size:18px; }
++  & .prep-pick > span { flex:1; min-width:120px; }
++  & .prep-pick small { color:#b7c6cc; font-size:17px; }
++  & .prep-pick:is(.missing,.forbidden) { border-left-color:#d6a79d; }
++  & .prep-apply { background:#ccb57e; border-color:#ccb57e; color:#19272e; font-weight:600; }
++  & .prep-empty { color:#b7c6cc; font-size:18px; line-height:1.6; }
++  & .prep-next-step { font-size:17px; }
++  & .prep-qual-hint { color:#d6a79d; font-size:18px; line-height:1.6; }
++  & .prep-error { padding:16px 20px; border-left:3px solid #d6a79d; background:#6c34332b; font-size:20px; line-height:1.6; }
+ }
+-
+-/* W1 底：桌面底图（压暗但可辨）+ 冷青 radial 渐变族 + W1c 四角暗角，同挂 ::before/::after */
+-&::before {
+-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+-  background:
+-    radial-gradient(ellipse 120% 90% at 50% 24%, rgba(52,56,60,.6) 0%, rgba(41,44,47,.74) 36%, rgba(29,32,34,.86) 64%, rgba(17,18,20,.94) 100%),
+-    linear-gradient(180deg, rgba(14,15,16,.68), rgba(11,12,13,.84)),
+-    url('../assets/scenes/ui-loop-0925/prep-desk.webp') center / cover no-repeat;
+-}
+-&::after {
+-  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+-  background:
+-    radial-gradient(120% 90% at 50% 38%, transparent 52%, rgba(8,9,9,.44) 88%, rgba(7,7,8,.6) 100%),
+-    linear-gradient(90deg, rgba(11,12,13,.4) 0%, transparent 20%, transparent 80%, rgba(11,12,13,.4) 100%);
+-}}
+-
+-/* ── 预设卡：page-deploy .hub-card 面板语言移植 ── */
+-.prep-preset{
+-& {
+-  position: relative; overflow: hidden;
+-  background: linear-gradient(180deg, rgba(26,28,30,.93), rgba(20,22,23,.95));
+-  border-color: rgba(194,199,202,.2);
+-  box-shadow: 0 14px 34px rgba(7,7,8,.35), inset 0 1px 0 rgba(223,224,226,.05);
+-  transition: border-color .18s cubic-bezier(.33,1,.68,1), transform .18s cubic-bezier(.33,1,.68,1), box-shadow .18s cubic-bezier(.33,1,.68,1);
+-}
+-&::before {
+-  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; z-index: 2; pointer-events: none;
+-  background: linear-gradient(90deg, transparent, #e6cb76b8, transparent);
+-  opacity: .35; transition: opacity .18s cubic-bezier(.33,1,.68,1);
+-}
+-&:hover {
+-  border-color: rgba(230,203,118,.5);
+-  box-shadow: 0 16px 38px rgba(7,7,8,.42), 0 0 14px rgba(230,203,118,.09),
+-    inset 0 1px 0 rgba(232,229,223,.06);
+-}
+-&:hover::before { opacity: .8; }}
+-/* 眉题（preset-1/preset-2 编号）：金色字距批注 */
+-.prep-preset-head span {
+-  color: var(--gold-main); font-size: 10.5px; font-weight: 700; letter-spacing: .26em;
+-  padding-left: 9px; border-left: 1px solid rgba(230,203,118,.45);
+-  text-transform: uppercase; align-self: center;
+-}
+-
+-/* ── 摘要条：金/青双色语义 ── */
+-.prep-summary{
+-& { flex-wrap: wrap; gap: 6px 10px; border-left-width: 3px; border-radius:0; font-variant-numeric: tabular-nums; }
+-& > b { flex-shrink: 0; }
+-& > span { flex: 1 1 200px; min-width: 0; }
+-&.ready {
+-  border-left-color: var(--gold-main);
+-  background: linear-gradient(90deg, rgba(84,65,22,.45), rgba(30,25,12,.55) 72%);
+-  color: #dfdcd6;
+-}
+-&.ready b { color: var(--gold-bright); }
+-&.blocked {
+-  border-left-color: #8e9498;
+-  background: rgba(21,22,24,.8);
+-  color: #c2c5c7;
+-}
+-&.blocked b { color: #d1d2d4; }}
+-
+-/* ── prep-goals 空态占位框 ── */
+-.prep-goals .prep-empty {
+-  grid-column: 1 / -1; margin: 0; padding: 18px 14px; text-align: center;
+-  border: 1px dashed rgba(170,174,177,.32); border-radius:0;
+-  background:
+-    repeating-linear-gradient(0deg, rgba(170,174,177,.04) 0 1px, transparent 1px 26px),
+-    repeating-linear-gradient(90deg, rgba(170,174,177,.04) 0 1px, transparent 1px 26px),
+-    rgba(170,174,177,.02);
+-  color: #888c8e; letter-spacing: .06em;
+-}
+-@media (prefers-reduced-motion: reduce) {
+-.prep-preset{
+-  &, &::before { transition: none; }
+-  &:hover { transform: none; }}
+-}
+-
+-/* ── prep-summary 资格提示（预设人物/宠物未收录或未拥有时给出一行原因） ── */
+-.prep-summary{
+-& .prep-qual-hint {
+-  flex-basis: 100%; margin-top: 4px; color: #d0a394; font-size: 12px;
+-}
+-&.ready .prep-qual-hint { color: #c4b687; }}

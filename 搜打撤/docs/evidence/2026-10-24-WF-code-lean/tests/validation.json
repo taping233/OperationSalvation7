@@ -1,0 +1,22 @@
+{
+  "files": 30,
+  "passed": 223,
+  "failed": 1,
+  "skipped": 0,
+  "baseline": {
+    "file": "tests/battle-pouch-entry.test.js",
+    "passed": 6,
+    "failed": 1,
+    "method": "pre-transform original test source with original module path; no shared files reverted",
+    "sameFailure": "busy expected false after 1000ms"
+  },
+  "ast": {
+    "files": 30,
+    "unchanged": "All non-fixture top-level AST statements and assertions",
+    "review": "independent read-only review passed"
+  },
+  "eslint": {
+    "files": 31,
+    "exitCode": 0
+  }
+}

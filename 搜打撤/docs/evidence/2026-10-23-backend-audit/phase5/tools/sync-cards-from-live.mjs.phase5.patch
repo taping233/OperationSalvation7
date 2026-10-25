@@ -1,0 +1,42 @@
+diff --git a/docs/evidence/2026-10-23-backend-audit/phase5/tools/sync-cards-from-live.mjs.before.txt b/scripts/sync-cards-from-live.mjs
+index 795ed866..0b769231 100644
+--- a/docs/evidence/2026-10-23-backend-audit/phase5/tools/sync-cards-from-live.mjs.before.txt
++++ b/scripts/sync-cards-from-live.mjs
+@@ -41,8 +41,10 @@ const SYNC_JSON = path.join(ROOT, 'game', 'data', 'cards-sync.json');
+ // 六文件重构（2026-09-22）后的拼接顺序：被依赖者在前；cards.js 是壳（引用其余全部）。
+ const CARDS_MODULE_ORDER = [
+   'cards.consts.js',       // 键/常量，无依赖
++  'card-rarity.js',        // rulesSlice 的稀有度/职业判定依赖
+   'cards.catalog.js',      // resolveCardCatalog（依赖 DATA.cardsSync）
+   'builtin-card-identities.js',
++  'hosted-rule-snapshot.js', // 共享历史/定版规则构造
+   'builtin-card-previous-rules.js',
+   'builtin-card-previous-variants.js',
+   'builtin-equipment-previous-rules.js',
+@@ -58,6 +60,7 @@ const CARDS_MODULE_ORDER = [
+   'card-rules.schema.js',  // validateCardRules（依赖时点契约）
+   'cards.data.js',         // dataSlice（依赖 catalog）
+   'cards.rules.js',        // rulesSlice（依赖 consts/Random/DATA/window.SDT）
++  'card-snapshot.js',     // 比较器函数先于使用它的迁移族
+   'cards.sync.persistence.js', // marker 确认助手，读取注入的沙箱 storage
+   'cards.sync.catalog.js',
+   'cards.sync.renames.js',
+@@ -70,6 +73,7 @@ const CARDS_MODULE_ORDER = [
+ // MARKER/definitions 等同名常量，故逐模块 IIFE 隔离；只把被 cards.js 调用的函数
+ // 作为全局桥接导出，模拟 ESM import，而不是把模块源码直接拼进同一词法作用域。
+ const MIGRATION_MODULES = [
++  ['pierce-arrow-revision.js', 'ensurePierceArrowRevision'],
+   ['cards.sync.m1.js', 'ensureM1OnplayRules'],
+   ['cards.sync.m2.js', 'ensureM2OnplayRules'],
+   ['cards.sync.m3.js', 'ensureM3OnplayRules'],
+@@ -147,7 +151,9 @@ function sourceCardLibrary() {
+   const baseBody = CARDS_MODULE_ORDER.map(name => {
+     const file = path.join(CARDS_DIR, name);
+     if (!fs.existsSync(file)) fail(`卡库模块缺失: ${name}（六文件重构后的卡库真源在 game/src/cards/）`);
+-    return stripModule(fs.readFileSync(file, 'utf8'), seenLines);
++    const source = stripModule(fs.readFileSync(file, 'utf8'), seenLines);
++    // 手动装配保留迁移模块使用的 ESM 导入别名。
++    return name === 'card-snapshot.js' ? `${source}\nconst sameSnapshot = sameCardSnapshot;` : source;
+   });
+   const migrationBody = MIGRATION_MODULES.map(([name, exportName]) => {
+     const file = path.join(CARDS_DIR, name);

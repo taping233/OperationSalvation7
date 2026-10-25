@@ -1,0 +1,85 @@
+{
+  "task": "WF-fast-bug-sweep-1024",
+  "files": [
+    {
+      "sha256": "cec92b465917a499088ba2fc674dd053af46abecdd0dc98941404750e34aaf2a",
+      "path": "game/src/ui/end-turn-hold.js"
+    },
+    {
+      "sha256": "e8bba7b0ccc43ad5f1d38fc1481b020ae1a9cbdf849b96b6117375ae389d63e0",
+      "path": "game/src/battle/core/battle.selection-flow.domain.js"
+    },
+    {
+      "sha256": "01fad36fef204b5510613b224abe72335888e8f53410741172aa9e5b530571a9",
+      "path": "game/src/battle/core/battle.lifecycle.domain.js"
+    },
+    {
+      "sha256": "58ba0cbb8a807a6e65cc0e430ffacde8348728f135852cc0f9a01af4820d9b06",
+      "path": "game/src/hub/base-departure.commands.js"
+    },
+    {
+      "sha256": "579b2d3c5eb80095540aaf5fea25d25e2b23ed147e1df6a5f8d535f82b408676",
+      "path": "game/src/hub/base-state.js"
+    },
+    {
+      "sha256": "b02bfd82b906e01919dc5d7a711c8d90aeb7233adde31c2c3e008f8654012b34",
+      "path": "game/src/agent/agent.recorder.js"
+    },
+    {
+      "sha256": "98bb2122ce140e44a1707bc8494ad4844cccd84454407c780b8f5863bcf2cade",
+      "path": "game/src/agent/agent.runner.runtime.js"
+    },
+    {
+      "sha256": "0edf59381e71bb7a2c19b82275745499cf2119d31a495309ee19995df0aeab09",
+      "path": "scripts/workflow-ledger.mjs"
+    },
+    {
+      "sha256": "86f069d1dee620b1152435dd5055ba665d115e1e846f47bfd2547366ddc17451",
+      "path": "scripts/registry-paths.mjs"
+    },
+    {
+      "sha256": "8fd18986e1209f7539cd4d151c2cf0f627983ecffe5124e25ab94a3e115d1520",
+      "path": "docs/rules.md"
+    },
+    {
+      "sha256": "dacc355b16f621f439efc7ffa324d91d681c5104fa01f9bbeba86bc0e670b1c7",
+      "path": "tests/fast-bug-sweep-base-metadata.test.js"
+    },
+    {
+      "sha256": "2f0a676aebd88b821af4c1bb1aee42ada3cebf4af873b0336d9aef124ba2a676",
+      "path": "tests/fast-bug-sweep-battle-deck.test.js"
+    },
+    {
+      "sha256": "f363e2bc130f31e93cfb67ae645d4a746ea779450397a714798f58485dcdd57b",
+      "path": "tests/fast-bug-sweep-battle-integration.test.js"
+    },
+    {
+      "sha256": "f465118bfbe70225ac3ee464858463383018377aad789661ee535743f43ff0eb",
+      "path": "tests/fast-bug-sweep-battle-selection.test.js"
+    },
+    {
+      "sha256": "93034764e45f693085250afe7f345ef0626ff336c453740e84c4d266a8dbb6d7",
+      "path": "tests/fast-bug-sweep-character-progress.test.js"
+    },
+    {
+      "sha256": "54a275c0e38c548687b21c0f7d829957450a168276bccfdaf0d7419497a6317a",
+      "path": "tests/fast-bug-sweep-departure-variant.test.js"
+    },
+    {
+      "sha256": "1262e409ba443c995df4511c0858b5bff84f0e21f6c87acc1eac3b925991c44b",
+      "path": "tests/fast-bug-sweep-end-turn-hold.test.js"
+    },
+    {
+      "sha256": "37117349cfc8e83f5962b9e2596166ea06af439aa0d8a41102305a5cc53813ca",
+      "path": "tests/project-fast-agent-rejected-stats-1024.test.js"
+    },
+    {
+      "sha256": "2f9990df0b26d933c23b8dc54ff588184efa14dd3a4a6995c59a43aa909084b7",
+      "path": "tests/project-fast-agent-stop-kind-1024.test.js"
+    },
+    {
+      "sha256": "df410d551527dbfb4942e6c05b022882671e6d53c8d61a7f69e60ae795015f6a",
+      "path": "tests/project-fast-registry-prose-1024.test.js"
+    }
+  ]
+}

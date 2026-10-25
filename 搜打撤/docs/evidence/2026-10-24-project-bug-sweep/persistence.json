@@ -1,0 +1,111 @@
+{
+  "owner": "persistence_audit",
+  "status": "complete-uncommitted-released",
+  "date": "2026-10-24",
+  "fixedRootCauses": 5,
+  "sourceFiles": [
+    "game/src/hub/stored-card-identity.js",
+    "game/src/hub/base.js",
+    "game/src/hub/terminal.commands.js",
+    "game/src/hub/extraction.commands.js",
+    "game/src/hub/preparation.commands.js",
+    "game/src/hub/bag-inventory-commands.js",
+    "game/src/hub/bag-token-craft-plan.js",
+    "game/src/hub/game.bag.js"
+  ],
+  "findings": [
+    {
+      "id": "SWEEP-PERSIST-1",
+      "root": "基地目的库存按名称合并，覆盖同名不同ID或variant的实际身份",
+      "before": "直接入库、消耗区复原、死亡/放弃抢运及成功撤离均会把新卡合并为已有卡；堆级variant在新建堆时丢失",
+      "after": "共用稳定card.id与堆级/卡级variant匹配；新建库存保留堆级variant；旧无ID卡只与同名无ID卡合并",
+      "boundaries": "不改背包同名占格及撤离remainingCards按名称选择的既有协议，不改旧存档，不升级schema"
+    },
+    {
+      "id": "SWEEP-PERSIST-2",
+      "root": "预设只检查单项数量，合并重复CardRef后没有再次限制99上限",
+      "before": "60+40保存成功后形成count=100，随后读取normalizePicks拒绝，预设携带项变空",
+      "after": "合并时限制总量，超99拒绝且保持原预设与原串；恰好99可保存并完整读回"
+    },
+    {
+      "id": "SWEEP-PERSIST-3",
+      "root": "基地升级及孵化保存后的音效异常逸出同槽锁，使已提交结果变成保存失败",
+      "before": "升级返回false，孵化返回why:save，但实际资源/等级/宠物已落盘，页面可误导玩家再次付费",
+      "after": "仅隔离提交后的可选音效异常；升级和孵化继续返回已确认成功，每次只提交一次"
+    },
+    {
+      "id": "SWEEP-PERSIST-4",
+      "root": "合成按源UID集合过滤全部ownedCards，旧档缺UID或重复UID导致过量删除",
+      "before": "三张无UID或同UID的B合成后，安全格/珍珠盒/锦囊中的同UID无关卡和第4张B一起消失；碎片合成同样可一次删除多张A",
+      "after": "配方计划保留sourceUids兼容接口并给出准确sourceIndices，命令只删除本次计划的实际条目"
+    },
+    {
+      "id": "SWEEP-PERSIST-5",
+      "root": "合成无条件把产物加入普通背包，没有检查去除原料后的容量",
+      "before": "安全格中的三张B或A+碎片可在通用背包已满时合成，普通背包used从1变2但cap仍1",
+      "after": "实际入口传实时基础容量，使用共用背包派生与收卡API检查去源后的投影；可并同名未满叠和原料释放格，资源扩展格不收普通产物，满则原料/碎片不动"
+    }
+  ],
+  "regressionFile": "tests/project-bug-sweep-persistence.test.js",
+  "additionalRegressionFile": "tests/project-bug-sweep-token-craft.test.js",
+  "newCases": 24,
+  "reproductions": [
+    { "stage": "base-terminal-identity-and-preset", "exitCode": 1, "failed": 7, "passed": 1 },
+    { "stage": "extraction-destination-identity", "exitCode": 1, "failed": 2, "passed": 10, "note": "先修复测试夹具跨用例RunStorage写基线重置后，两条均在真实目标库存身份断言失败" },
+    { "stage": "post-commit-audio", "exitCode": 1, "failed": 4, "passed": 12 },
+    { "stage": "followup-token-consumption-and-capacity", "exitCode": 1, "failed": 6, "passed": 2 }
+  ],
+  "validation": {
+    "commandPrefix": "node node_modules/vitest/vitest.mjs run",
+    "flags": "--maxWorkers=1 --minWorkers=1 --reporter=dot --silent",
+    "batches": [
+      {
+        "files": ["project-bug-sweep-persistence", "base-mutation", "terminal-persistence", "m06-preparation", "base-departure", "base-save-snapshot"],
+        "passed": 59,
+        "exitCode": 0,
+        "note": "身份与预设首轮修复后，新测试当时8条"
+      },
+      {
+        "files": ["project-bug-sweep-persistence", "base-key-count", "base-material-rule-baseline", "base-hub-business-lifecycle-audit", "base-inventory-lifecycle-audit", "collection-conversion", "preparation-adapter-review"],
+        "passed": 97,
+        "exitCode": 0,
+        "note": "增加旧无ID与数量99边界后，新测试当时10条"
+      },
+      {
+        "files": ["project-bug-sweep-persistence", "base-mutation", "terminal-persistence", "m06-preparation", "base-departure", "base-save-snapshot", "extraction-recovery", "extraction-pocket-truth"],
+        "passed": 146,
+        "exitCode": 0,
+        "note": "全部生产修复完成后的最终回归，新测试16条"
+      },
+      {
+        "files": ["extraction-record-saved-cards-cloud"],
+        "testNamePattern": "groups same-name",
+        "passed": 2,
+        "skipped": 8,
+        "exitCode": 0,
+        "note": "仅定向验证调整的两条目的仓库身份断言，不代表整个文件通过"
+      }
+    ],
+    "followupBatch": {
+      "files": ["project-bug-sweep-token-craft", "bag-token-craft", "bag-inventory-commands", "project-bugfix-round2-storage-bag", "bag-use-compatibility"],
+      "passed": 60,
+      "exitCode": 0,
+      "note": "8条新增回归覆盖缺失/重复UID、安全/珍珠盒/锦囊无关条目、额外原料、正常及不足配方、去源后容量、同名合堆及资源格边界"
+    },
+    "uniqueFullyPassedFiles": 19,
+    "uniqueFullyPassedCases": 293,
+    "additionalFocusedPassedCases": 2,
+    "broaderFailure": {
+      "files": ["project-bug-sweep-persistence", "extraction-recovery", "extraction-pocket-truth", "extraction-record-saved-cards-cloud"],
+      "exitCode": 1,
+      "passed": 98,
+      "failed": 3,
+      "disposition": "2条原断言固化了目的仓库吞身份缺陷，经父代理确认后改为原堆2、新堆2、同名总数4；另1条exportJSON历史记录严格整对象相等失败来自此前recorder规范化，由父代理处理，本代理未修改该断言"
+    },
+    "static": "由父代理集中执行"
+  },
+  "existingTestsAdjusted": {
+    "tests/extraction-record-saved-cards-cloud.test.js": "同一个参数化用例的两条执行：旧目的仓库old-a从预期4改为保留原2；新增new-a-first明确2，同名合计仍4。候选名称整理协议、回执与估值预期不变。"
+  },
+  "boundaries": "保留所有原有未提交增量；未运行build、全量测试、服务、浏览器、提交、推送；未改UI美术或活跃设置/P3文件。"
+}

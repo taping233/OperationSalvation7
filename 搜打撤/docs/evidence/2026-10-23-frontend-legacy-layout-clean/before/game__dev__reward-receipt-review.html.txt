@@ -1,0 +1,90 @@
+<!doctype html><html lang="zh-CN"><head><base href="/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>收获摘要与四项奖励 · 隔离视觉夹具</title><link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/cards.css">
+<link rel="stylesheet" href="/css/overlays.css">
+<link rel="stylesheet" href="/css/hub.css">
+<link rel="stylesheet" href="/css/battle.css">
+<link rel="stylesheet" href="/css/scenes.css">
+<link rel="stylesheet" href="/css/lab-ending.css">
+<link rel="stylesheet" href="/css/winter.css">
+<link rel="stylesheet" href="/css/expedition.css">
+<link rel="stylesheet" href="/css/expedition-map.css">
+<link rel="stylesheet" href="/css/map-edge-light.css">
+<link rel="stylesheet" href="/css/expedition-hub.css">
+<link rel="stylesheet" href="/css/expedition-inventory.css">
+<link rel="stylesheet" href="/css/expedition-rewards.css">
+<link rel="stylesheet" href="/css/expedition-battle.css">
+<link rel="stylesheet" href="/css/expedition-library.css">
+<link rel="stylesheet" href="/css/card-v3.css">
+<link rel="stylesheet" href="/css/expedition-roster.css">
+<link rel="stylesheet" href="/css/expedition-shop.css">
+<link rel="stylesheet" href="/css/ui-scale.css">
+<link rel="stylesheet" href="/css/page-slot-select.css">
+<link rel="stylesheet" href="/css/page-settings.css">
+<link rel="stylesheet" href="/css/page-datapage.css">
+<link rel="stylesheet" href="/css/page-ach.css">
+<link rel="stylesheet" href="/css/page-cardforge.css">
+<link rel="stylesheet" href="/css/page-expedition-hud.css">
+<link rel="stylesheet" href="/css/feedback-oct12.css">
+<link rel="stylesheet" href="/css/roster-departure-v2.css">
+<link rel="stylesheet" href="/css/pocket-strip.css">
+<link rel="stylesheet" href="/css/experience-loot.css">
+<link rel="stylesheet" href="/css/page-events.css">
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css">
+<link rel="stylesheet" href="/css/page-battle-ui.css">
+<link rel="stylesheet" href="/css/character-idle.css">
+<link rel="stylesheet" href="/css/cover-remaining.css">
+<link rel="stylesheet" href="/css/page-transitions.css">
+<link rel="stylesheet" href="/css/ak-skin.css">
+<link rel="stylesheet" href="/css/base-camp.css">
+<link rel="stylesheet" href="/css/base-camp-compact.css">
+<link rel="stylesheet" href="/css/card-layout-selected.css">
+<link rel="stylesheet" href="/css/battle-stage.css"><link rel="stylesheet" href="/css/chest-reward-overview.css?review=multi-chest-receipt-r1"><style>
+.fixture-controls{position:absolute;left:30px;top:20px;z-index:10000;background:#111e30;color:white;padding:10px 16px;font:22px sans-serif;display:flex;gap:12px;align-items:center}.fixture-controls button{font:inherit;padding:6px 12px}.fixture-result{padding:50px;font-size:26px;color:#e5f1ff}body{background:#111c2c}
+</style></head><body><div class="fixture-controls">隔离组件夹具 · 不读写游戏存档 <button id="four">4项奖励</button><button id="six">6项奖励</button><button id="receipt">领取完成</button><button id="safe">满安全格</button><button id="two-box">双箱各领1张</button></div>
+<div id="app"><main id="viewport"><div id="overlay" class="pick-veil" role="dialog" aria-modal="true" aria-labelledby="ovTitle"><div class="card wide chest"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import '/src/ui/ui-scale.js';
+import SDT from '/src/core/sdt-facade.js';
+import {cardHTML} from '/src/cards/cards.view.js';
+import {createRewardOrganizer} from '/src/hub/game.reward-organizer.js';
+const body=document.querySelector('#ovBody'),overlay=document.querySelector('#overlay'),acts={};
+const UI={el:{ovBody:body,overlay,ovTitle:document.querySelector('#ovTitle')},showOverlay(title,html){this.el.ovTitle.textContent=title;body.innerHTML=html;overlay.hidden=false;SDT.Icons?.hydrate(body);},hideOverlay(){overlay.hidden=true;},act:(name,fn)=>acts[name]=fn,refresh(){},log(){}};
+const cards=['冰刺','冰封千里','极寒长夜中的远行者珍藏护甲','宠物蛋','百炼青虹剑','火球'].map((name,i)=>({id:'fixture'+i,name,type:'法术',rarity:i===3?'史诗':'稀有',cost:1,desc:'静态夹具卡面：冻结目标1回合。',value:2}));
+Object.assign(SDT,{UI,Icons:{rich:html=>html,img:()=>'<span aria-hidden="true">❄</span>',TYPE_ART:{}},Sound:{sfx(){}},Cards:{cardHTML,all:()=>cards,RARITIES:['古朴','稀有','史诗','传说'],TYPES:['法术'],NO_COST_TYPES:[],DMG_TYPES:[],rarityOf:c=>c.rarity,isSellable:()=>true,sellPrice:()=>2,infuseAlt:()=>false},Base:{slot:null,data:{},bagCap:()=>16,isSha:()=>false},MAP:{chestKinds:{small:{name:'密封物资箱',pickFrom:3,coins:[2,2]}}}});
+const game={seed:1,layerIdx:0,trackPos:1,discoveredPairs:new Set(),state:'modal',ownedCards:[],coins:0,usedSlots:()=>8,bagCap:()=>16,canReceiveCard:()=>true,grantCard(card){this.ownedCards.push({card});return true;},gainCoins(n){this.coins+=n;},persistSave(){}};
+SDT.game=game;
+await import('/src/core/icons-bitmap.js');
+await import('/src/core/art.js');
+// The running play session may intentionally disable file watching. Fetch this
+// isolated controller fresh and version only its changed presenter dependency.
+// All other imports keep their canonical URLs and singleton identity.
+const controllerURL = new URL('/src/run/chests.js', location.origin);
+const controllerResponse = await fetch(controllerURL + '?review=multi-chest-receipt-r1');
+if (!controllerResponse.ok) throw new Error('Reward fixture controller failed to load');
+const controllerSource = (await controllerResponse.text()).replace(/(from\s*['"])((?:\.{1,2}\/|\/)[^'"]+)(['"])/g, (_, prefix, path, suffix) => {
+ const url = new URL(path, controllerURL);
+ if (url.pathname.endsWith('/reward-scene-view.js')) url.searchParams.set('review', 'multi-chest-receipt-r1');
+ return prefix + url.href + suffix;
+});
+const controllerBlob = URL.createObjectURL(new Blob([controllerSource], {type:'text/javascript'}));
+try { await import(/* @vite-ignore */ controllerBlob); } finally { URL.revokeObjectURL(controllerBlob); }
+body.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b&&!b.disabled)acts[b.dataset.act]?.(b.dataset);});
+function show(count,complete=false){
+ game.state='modal';game.ownedCards=[];
+ const list=complete?[cards[0],cards[0],cards[3]]:cards.slice(0,count);
+ const reward={kind:'small',cards:list,coins:2,coinsReceived:true,rewardStage:'cards',claimMode:complete?'all':'one',choiceCount:3,selected:1,taken:complete?[0,1,2]:[],lost:[]};
+ SDT.Chests.restore(game,{version:1,seed:1,layerIdx:0,trackPos:1,queue:[{kind:'small',reward,completed:complete}],index:1,current:reward,context:{onCell:true},screen:complete?'overview':'cards'},()=>{body.innerHTML='<p class="fixture-result">已模拟继续探索</p>';});
+}
+document.querySelector('#four').onclick=()=>show(4);document.querySelector('#six').onclick=()=>show(6);document.querySelector('#receipt').onclick=()=>show(3,true);
+function showTwoBoxes(){
+ game.state='modal';game.ownedCards=[{card:cards[0]},{card:cards[5]}];game.coins=3;
+ const rewards=[cards[0],cards[5]].map((card,index)=>({kind:'small',cards:[card,cards[1],cards[3]],coins:index+1,coinsReceived:true,rewardStage:'cards',claimMode:'one',choiceCount:3,selected:0,taken:[0],lost:[1,2],notice:'已入背包'}));
+ SDT.Chests.restore(game,{version:1,seed:1,layerIdx:0,trackPos:1,queue:rewards.map((reward,index)=>({kind:'small',isClass:index===1,reward,completed:true})),index:2,current:rewards[1],context:{onCell:true},screen:'overview'},()=>{body.innerHTML='<p class="fixture-result">已模拟继续探索</p>';});
+}
+document.querySelector('#two-box').onclick=showTwoBoxes;
+document.querySelector('#safe').onclick=()=>{
+ const bag={battleActive:false,ownedCards:[{uid:'s',safe:true,card:{name:'木材'}},{uid:'s2',safe:true,card:{name:'钥匙'}},{uid:'m',card:{name:'木材'}},{uid:'x',card:{name:'长剑'}}],stackCapOf:()=>3,canReceiveCard:()=>false};
+ createRewardOrganizer({UI,game:bag,shaName:'初始攻击',usedSlots:()=>16,bagCap:()=>16,safeUsed:()=>2,safeCap:()=>2,moveStackSafe:()=>false,discardOwnedCard:()=>false})({card:cards[1],current:()=>true,onReturn:()=>show(4),onClaim:()=>{},onFullBag:()=>show(4)});
+};
+if(new URLSearchParams(location.search).get('scene')==='two-box')showTwoBoxes();else show(4);
+</script></body></html>

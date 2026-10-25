@@ -1,0 +1,19 @@
+{
+  "after": {
+    "removed": true
+  },
+  "entering": {
+    "animation": "rewardReceiptLife",
+    "opacity": "1",
+    "time": 247
+  },
+  "exiting": {
+    "removed": true
+  },
+  "fireRemaining": false,
+  "holding": {
+    "animation": "rewardReceiptLife",
+    "opacity": "1",
+    "time": 1507
+  }
+}

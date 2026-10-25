@@ -1,0 +1,88 @@
+{
+  "baseline": "node_modules/.cache/lean-refactor-1024/before/",
+  "normalization": "CRLF/CR to LF; UTF-8 byte counts; Acorn latest module tokens exclude comments.",
+  "changes": [
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "category": "runtime",
+      "before": {
+        "sha256": "eb06d14b45cb4d4ac9529b05d960918caf248bb8b1809b54abe7e0ee2190ae32",
+        "lines": 1152,
+        "bytes": 69700,
+        "normalizedBytes": 68549,
+        "nonCommentTokens": 10694
+      },
+      "after": {
+        "sha256": "91b8302f8ad731250f3db236526e78d4f220c20231f457812fba5cfdd5090172",
+        "lines": 1123,
+        "bytes": 66488,
+        "normalizedBytes": 65396,
+        "nonCommentTokens": 10187
+      }
+    },
+    {
+      "path": "game/src/hub/game.cardslib.designer.js",
+      "category": "runtime",
+      "before": {
+        "sha256": "a92fbd36e958d7a61dacdfdfbd08e7fb9994f9e9038cd4ab28003120cfe8f9fa",
+        "lines": 374,
+        "bytes": 24247,
+        "normalizedBytes": 23874,
+        "nonCommentTokens": 3780
+      },
+      "after": {
+        "sha256": "924391c092d6ab5bf55e2b35f723516c78826f04390381756a83d5f7b71a785a",
+        "lines": 42,
+        "bytes": 1881,
+        "normalizedBytes": 1855,
+        "nonCommentTokens": 282
+      }
+    },
+    {
+      "path": "tests/code-lean-refactor-library.test.js",
+      "category": "regression-test",
+      "before": null,
+      "after": {
+        "sha256": "603f22efbb1bb93c86ae6cbb8899248559451c98c70f07b11f557409d8362a6b",
+        "lines": 53,
+        "bytes": 3044,
+        "normalizedBytes": 3044,
+        "nonCommentTokens": 736
+      }
+    }
+  ],
+  "runtimeDelta": {
+    "lines": -361,
+    "bytes": -25578,
+    "normalizedBytes": -25172,
+    "nonCommentTokens": -4005
+  },
+  "testDelta": {
+    "lines": 53,
+    "bytes": 3044,
+    "normalizedBytes": 3044,
+    "nonCommentTokens": 736
+  },
+  "subsystem": {
+    "files": [
+      "game/src/hub/game.cardslib.art-warm.js",
+      "game/src/hub/game.cardslib.common.js",
+      "game/src/hub/game.cardslib.designer.js",
+      "game/src/hub/game.cardslib.js",
+      "game/src/hub/game.cardslib.page.js",
+      "game/src/hub/game.cardslib.photo-fps.js",
+      "game/src/hub/game.cardslib.photo-props.js",
+      "game/src/hub/photo-studio-catalog-cache.js",
+      "game/src/hub/photo-studio-controls.js",
+      "game/src/hub/photo-studio-navigation.js",
+      "game/src/hub/photo-studio-presentation.js",
+      "game/src/hub/photo-studio-tabs.js",
+      "game/src/ui/card-browser.js",
+      "game/src/ui/card-browser-state.js"
+    ],
+    "beforeTokens": 24162,
+    "afterTokens": 20157,
+    "netTokens": -4005,
+    "reductionPercent": 16.57561460144028
+  }
+}

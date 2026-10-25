@@ -1,0 +1,193 @@
+{
+  "at": "2026-10-23T15:29:48.949Z",
+  "status": "complete_uncommitted",
+  "kind": "static-only",
+  "changes": [
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "expected": "17a3a1d917dc579e4da244b59a017d83e9129e99dad525e3cd597747a2692dd8",
+      "before": "7389de0255e523d6574f2f51087c576c804bb97abf4f27001879216d1e47acad",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase4/battle/battle.bag.domain.js.before.txt",
+      "added": 11,
+      "removed": 21,
+      "actual": "17a3a1d917dc579e4da244b59a017d83e9129e99dad525e3cd597747a2692dd8",
+      "bytesAfter": 36542,
+      "bytesBefore": 37276
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "expected": "653dd808f5799bf8548fe38c024ed5ea4700ad99fa46b7e9557f2047e4c45e3f",
+      "before": "06a608f2dcd14e2c0d1845df2403efeb9c1871d7e30a354beef1d56901f27b63",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase4/battle/card-rules.schema.js.before.txt",
+      "added": 22,
+      "removed": 48,
+      "actual": "653dd808f5799bf8548fe38c024ed5ea4700ad99fa46b7e9557f2047e4c45e3f",
+      "bytesAfter": 77161,
+      "bytesBefore": 78493
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "expected": "3e9a3616a15bc21b13a3ec0f236757f4affe3ac1bca694dcd8c4295a2b00b80f",
+      "before": "0db90c778b4b86b8e2d17b58f14f12d20a0d72004a0f4643b79bb7b82043f999",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase4/battle/cards.sync.backfiller.js.before.txt",
+      "added": 1,
+      "removed": 11,
+      "actual": "3e9a3616a15bc21b13a3ec0f236757f4affe3ac1bca694dcd8c4295a2b00b80f",
+      "bytesAfter": 7869,
+      "bytesBefore": 8414
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "expected": "0d582a3fc532ca8acc7fd9dc156b5710801f44922532afc9dc0ddc60804232bb",
+      "before": "937d202f99bb1f83ea4dbf0dfae63f985a283a076b238b749ba4f94addba1f83",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase4/battle/cards.sync.rule-backfill.js.before.txt",
+      "added": 1,
+      "removed": 9,
+      "actual": "0d582a3fc532ca8acc7fd9dc156b5710801f44922532afc9dc0ddc60804232bb",
+      "bytesAfter": 24732,
+      "bytesBefore": 25252
+    },
+    {
+      "file": "game/src/cards/card-snapshot.js",
+      "expected": "42a4606311dd655f35c9567d3c6b2c7bf3a173361c296eebebddf9741b0c5f9c",
+      "before": null,
+      "baseline": null,
+      "added": 10,
+      "removed": 0,
+      "actual": "42a4606311dd655f35c9567d3c6b2c7bf3a173361c296eebebddf9741b0c5f9c",
+      "bytesAfter": 597,
+      "bytesBefore": 0
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "expected": "0d3bec91fd924926e8cc2674aaa0a6d3e2cacba782559d1ceee1367ac2f716d2",
+      "before": "c10cf5fc8c22e2d2b5c3469420c51416f08cd7d425ea1bb731b7fba06f32b215",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase4/storage/extraction.commands.js.before.txt",
+      "added": 35,
+      "removed": 48,
+      "actual": "0d3bec91fd924926e8cc2674aaa0a6d3e2cacba782559d1ceee1367ac2f716d2",
+      "bytesAfter": 25938,
+      "bytesBefore": 27075
+    }
+  ],
+  "totals": {
+    "added": 80,
+    "removed": 137,
+    "netBytesRemoved": 3671,
+    "netRemoved": 57
+  },
+  "previousNet": 503,
+  "cumulativeNet": 560,
+  "previousProductionNet": 698,
+  "cumulativeProductionNet": 755,
+  "codeMovedThisRound": 0,
+  "staticImports": [
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../effects/battle.discover-preview.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../../core/shared.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../effects/battle.target-rules.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../effects/effect-steps.m2.domain.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "./battle.slam-skill.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "./battle.consumed-pile.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../../cards/card-execution-plan.js"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.domain.js",
+      "ref": "../effects/battle.rule-guard.js"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-trigger-contract.js"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-semantic-contract.js"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-execution-plan.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "ref": "./cards.consts.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "ref": "./card-rules.schema.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "ref": "./card-rules.capability.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "ref": "./card-snapshot.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "ref": "./cards.consts.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "ref": "./card-rules.schema.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "ref": "../core/shared.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "ref": "./card-snapshot.js"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "ref": "./commands.shared.js"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "ref": "../core/rule-config.js"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "ref": "./meta-progression.js"
+    }
+  ],
+  "verification": {
+    "allCurrentFingerprintsMatch": true,
+    "allExistingBaselinesMatch": true,
+    "allSixModulesParse": true,
+    "relativeImportsResolve": true,
+    "sourceSyntaxAndDiff": "Agent static checks passed; battle/receipt.json and storage/README.md",
+    "staticEquivalence": "battle/static-equivalence.json; extraction state-machine correspondence in storage/README.md",
+    "candidateTriage": "tools/triage.json",
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  },
+  "scope": {
+    "frontendChanged": false,
+    "wholeFilesDeleted": false,
+    "excludedActiveWork": "WF-project-bugfix-1023 and WF-live-repair-1023 occupied files; no edits to those paths",
+    "coverage": "399-file clone candidate discovery plus targeted parallel review; not a proof that every redundancy was removed"
+  },
+  "cloneCandidateCount": 38
+}

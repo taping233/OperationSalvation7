@@ -1,0 +1,26 @@
+[
+  {
+    "path": "game/css/base-controls-v4.css",
+    "sha256": "368563AAB7EF7F7509AA20AD354FDB160E1F3EAC662FF351D04EFA46F35E4B88"
+  },
+  {
+    "path": "game/css/base-rooms-v7.css",
+    "sha256": "F349733B40C5C1EA97321176883AE32B7FDEC017731094E3CAD386041532459A"
+  },
+  {
+    "path": "game/css/base-personnel-v12.css",
+    "sha256": "ECEB8D7D3CD4E8FB99D4AB066E789DA418D397128D5AF70A39526C26FADECEC9"
+  },
+  {
+    "path": "game/css/base-camp.css",
+    "sha256": "85EFA262C301FDDFBF3CB8911C5F311DD8D7ECE82A6E7BAF79E6C3418E702A34"
+  },
+  {
+    "path": "game/src/hub/base-motion-v4.js",
+    "sha256": "12BD4B7C08938F4B77EFE62B0499213315712268F52414DB6AE1E9A4755AEA8C"
+  },
+  {
+    "path": "tests/base-motion-v4.test.js",
+    "sha256": "3E0CA724272C4C6B44E28B135E51238B8BF9BB84F64DD5131AF558655E215889"
+  }
+]

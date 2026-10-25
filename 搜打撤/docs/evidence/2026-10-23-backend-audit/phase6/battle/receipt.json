@@ -1,0 +1,372 @@
+{
+  "status": "applied_complete_uncommitted",
+  "scope": [
+    "game/src/cards/card-rules.schema.js"
+  ],
+  "baseSha256": "653dd808f5799bf8548fe38c024ed5ea4700ad99fa46b7e9557f2047e4c45e3f",
+  "finalSha256": "fc4a5b4fa65194db88779dff8fac6233353bc24773be987b97f88c92681830ff",
+  "baseline": "docs/evidence/2026-10-23-backend-audit/phase6/battle/card-rules.schema.js.before.txt",
+  "candidate": "docs/evidence/2026-10-23-backend-audit/phase6/battle/card-rules.schema.js.candidate.txt",
+  "insertions": 60,
+  "deletions": 126,
+  "netLinesRemoved": 66,
+  "netBytesRemoved": 2901,
+  "sourceLinesBefore": 1304,
+  "sourceLinesAfter": 1238,
+  "helperFunctions": [
+    "validateOptionalPositiveInteger",
+    "validateOptionalTrue",
+    "validateOperationKeys"
+  ],
+  "replacements": [
+    {
+      "fromLine": 208,
+      "toLine": 210,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "record",
+      "field": "foeHpBelow"
+    },
+    {
+      "fromLine": 346,
+      "toLine": 348,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "perInfusedInHand"
+    },
+    {
+      "fromLine": 349,
+      "toLine": 351,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "infuseBonus"
+    },
+    {
+      "fromLine": 431,
+      "toLine": 433,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "burst"
+    },
+    {
+      "fromLine": 434,
+      "toLine": 436,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "extend"
+    },
+    {
+      "fromLine": 470,
+      "toLine": 472,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "upTo"
+    },
+    {
+      "fromLine": 473,
+      "toLine": 475,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "selfDamage"
+    },
+    {
+      "fromLine": 476,
+      "toLine": 478,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "perFuelCost"
+    },
+    {
+      "fromLine": 479,
+      "toLine": 481,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "perSpellHeal"
+    },
+    {
+      "fromLine": 502,
+      "toLine": 504,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "decayAtTurnEnd"
+    },
+    {
+      "fromLine": 525,
+      "toLine": 527,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "untilHandN"
+    },
+    {
+      "fromLine": 585,
+      "toLine": 587,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "stacks"
+    },
+    {
+      "fromLine": 588,
+      "toLine": 590,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "duration"
+    },
+    {
+      "fromLine": 612,
+      "toLine": 614,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "count"
+    },
+    {
+      "fromLine": 638,
+      "toLine": 640,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "hp"
+    },
+    {
+      "fromLine": 716,
+      "toLine": 718,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "amount"
+    },
+    {
+      "fromLine": 722,
+      "toLine": 724,
+      "kind": "positiveInteger",
+      "helper": "validateOptionalPositiveInteger",
+      "record": "operation",
+      "field": "duration"
+    },
+    {
+      "fromLine": 211,
+      "toLine": 213,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "record",
+      "field": "foeHpHalf"
+    },
+    {
+      "fromLine": 214,
+      "toLine": 216,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "record",
+      "field": "foeFullHp"
+    },
+    {
+      "fromLine": 220,
+      "toLine": 222,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "record",
+      "field": "anyCurse"
+    },
+    {
+      "fromLine": 236,
+      "toLine": 238,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "perTargetPrice"
+    },
+    {
+      "fromLine": 323,
+      "toLine": 325,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "lifesteal"
+    },
+    {
+      "fromLine": 428,
+      "toLine": 430,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "double"
+    },
+    {
+      "fromLine": 495,
+      "toLine": 497,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "consumeEquip"
+    },
+    {
+      "fromLine": 499,
+      "toLine": 501,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "guard"
+    },
+    {
+      "fromLine": 513,
+      "toLine": 515,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "perCurseKinds"
+    },
+    {
+      "fromLine": 616,
+      "toLine": 618,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "perCurseKinds"
+    },
+    {
+      "fromLine": 619,
+      "toLine": 621,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "perCurseStacks"
+    },
+    {
+      "fromLine": 641,
+      "toLine": 643,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "statless"
+    },
+    {
+      "fromLine": 644,
+      "toLine": 646,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "taunt"
+    },
+    {
+      "fromLine": 659,
+      "toLine": 661,
+      "kind": "trueWhenProvided",
+      "helper": "validateOptionalTrue",
+      "record": "operation",
+      "field": "keepInHand"
+    },
+    {
+      "fromLine": 227,
+      "toLine": 229,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "DAMAGE_ALLOWED_KEYS",
+      "label": "\"damage\""
+    },
+    {
+      "fromLine": 368,
+      "toLine": 370,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "CURSE_ALLOWED_KEYS",
+      "label": "\"curse\""
+    },
+    {
+      "fromLine": 460,
+      "toLine": 462,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "allowed",
+      "label": "op"
+    },
+    {
+      "fromLine": 542,
+      "toLine": 544,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "allowed",
+      "label": "op"
+    },
+    {
+      "fromLine": 700,
+      "toLine": 702,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "CLEANSE_ALLOWED_KEYS",
+      "label": "\"cleanse\""
+    },
+    {
+      "fromLine": 709,
+      "toLine": 711,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "STEAL_ATK_ALLOWED_KEYS",
+      "label": "\"stealAtk\""
+    },
+    {
+      "fromLine": 732,
+      "toLine": 734,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "FOE_FIGHT_ALLOWED_KEYS",
+      "label": "\"foeFight\""
+    },
+    {
+      "fromLine": 738,
+      "toLine": 740,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "COPY_RANDOM_ALLOWED_KEYS",
+      "label": "\"copyRandom\""
+    },
+    {
+      "fromLine": 742,
+      "toLine": 744,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "STATUS_ALLOWED_KEYS",
+      "label": "\"status\""
+    },
+    {
+      "fromLine": 751,
+      "toLine": 753,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "DISCOVER_ALLOWED_KEYS",
+      "label": "\"discover\""
+    },
+    {
+      "fromLine": 1126,
+      "toLine": 1128,
+      "kind": "operationKeys",
+      "helper": "validateOperationKeys",
+      "allowed": "BAG_OP_KEYS",
+      "label": "\"bag use\""
+    }
+  ],
+  "staticProof": {
+    "completeModuleAstEqualAfterHelperExpansion": true,
+    "memberReadsShortCircuitAndCallbackOrderPreserved": true,
+    "dynamicOpMessageCoercionRemainsInsidePerUnknownKeyError": true,
+    "exceptionPredicatesAndMessagesRetained": true,
+    "noImportsOrExportsChanged": true,
+    "noModuleOrGameExecution": true
+  },
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false,
+  "syntaxExitCode": 0,
+  "diffCheckExitCode": 0
+}

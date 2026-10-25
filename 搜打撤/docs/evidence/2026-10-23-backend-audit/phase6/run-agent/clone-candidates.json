@@ -1,0 +1,162 @@
+{
+  "method": "50-token windows, local identifier alpha-normalization, properties/literals retained; source reading only",
+  "scanned": 129,
+  "candidates": [
+    {
+      "tokenLength": 106,
+      "a": {
+        "file": "game/src/run/game.run.dev-loader.js",
+        "line": 40,
+        "index": 224
+      },
+      "b": {
+        "file": "game/src/run/game.run.dev.js",
+        "line": 100,
+        "index": 953
+      }
+    },
+    {
+      "tokenLength": 68,
+      "a": {
+        "file": "scripts/workflow-evidence.mjs",
+        "line": 237,
+        "index": 3358
+      },
+      "b": {
+        "file": "scripts/workflow-staged.mjs",
+        "line": 188,
+        "index": 2699
+      }
+    },
+    {
+      "tokenLength": 64,
+      "a": {
+        "file": "scripts/asset-audit.cjs",
+        "line": 12,
+        "index": 170
+      },
+      "b": {
+        "file": "scripts/perf-budget.cjs",
+        "line": 10,
+        "index": 66
+      }
+    },
+    {
+      "tokenLength": 63,
+      "a": {
+        "file": "game/src/run/map-generation-rules.js",
+        "line": 61,
+        "index": 780
+      },
+      "b": {
+        "file": "game/src/run/map-route-v2.js",
+        "line": 53,
+        "index": 1038
+      }
+    },
+    {
+      "tokenLength": 62,
+      "a": {
+        "file": "scripts/architecture-graph.mjs",
+        "line": 144,
+        "index": 1077
+      },
+      "b": {
+        "file": "scripts/workflow-dependencies.mjs",
+        "line": 8,
+        "index": 72
+      }
+    },
+    {
+      "tokenLength": 57,
+      "a": {
+        "file": "scripts/index-validation.mjs",
+        "line": 69,
+        "index": 936
+      },
+      "b": {
+        "file": "scripts/workflow-evidence.mjs",
+        "line": 74,
+        "index": 987
+      }
+    },
+    {
+      "tokenLength": 57,
+      "a": {
+        "file": "scripts/workflow-ledger.mjs",
+        "line": 104,
+        "index": 1401
+      },
+      "b": {
+        "file": "scripts/workflow-task.mjs",
+        "line": 153,
+        "index": 2182
+      }
+    },
+    {
+      "tokenLength": 55,
+      "a": {
+        "file": "scripts/acceptance-gate.mjs",
+        "line": 137,
+        "index": 1295
+      },
+      "b": {
+        "file": "scripts/check-types.mjs",
+        "line": 13,
+        "index": 99
+      }
+    },
+    {
+      "tokenLength": 53,
+      "a": {
+        "file": "scripts/index-validation.mjs",
+        "line": 31,
+        "index": 305
+      },
+      "b": {
+        "file": "scripts/workflow-dependencies.mjs",
+        "line": 62,
+        "index": 783
+      }
+    },
+    {
+      "tokenLength": 53,
+      "a": {
+        "file": "scripts/workflow-evidence.mjs",
+        "line": 75,
+        "index": 995
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "line": 21,
+        "index": 200
+      }
+    },
+    {
+      "tokenLength": 52,
+      "a": {
+        "file": "scripts/architecture-graph.mjs",
+        "line": 123,
+        "index": 896
+      },
+      "b": {
+        "file": "scripts/workflow-status.mjs",
+        "line": 118,
+        "index": 1330
+      }
+    },
+    {
+      "tokenLength": 52,
+      "a": {
+        "file": "game/src/run/game.run.events.js",
+        "line": 16,
+        "index": 95
+      },
+      "b": {
+        "file": "game/src/run/game.session.js",
+        "line": 187,
+        "index": 1528
+      }
+    }
+  ]
+}

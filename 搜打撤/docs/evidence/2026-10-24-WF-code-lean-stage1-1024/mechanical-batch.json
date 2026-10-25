@@ -1,0 +1,95 @@
+{
+  "status": "implemented-and-frozen-before-structural-refactor",
+  "runtime": {
+    "files": 29,
+    "jsFiles": 5,
+    "cssFiles": 24,
+    "bytes": -6284,
+    "normalizedBytes": -6211,
+    "lines": -43,
+    "nonCommentJsTokens": -647
+  },
+  "newTests": {
+    "files": 4,
+    "bytes": 19418,
+    "lines": 318
+  },
+  "checks": [
+    {
+      "command": "npm run check:syntax",
+      "exitCode": 0,
+      "files": 680
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "configs": 11,
+      "coverage": "619/619"
+    },
+    {
+      "command": "tsc -p jsconfig.runtime.json --noEmit after final UI correction",
+      "exitCode": 0
+    },
+    {
+      "command": "Vitest contracts + architecture-boundaries",
+      "exitCode": 0,
+      "files": 2,
+      "tests": 62,
+      "report": "sentinels.json"
+    },
+    {
+      "command": "Vitest four self-contained new regression files",
+      "exitCode": 0,
+      "files": 4,
+      "tests": 20,
+      "report": "final-regressions.json"
+    },
+    {
+      "command": "CSS expanded property order proof",
+      "exitCode": 0,
+      "files": 24,
+      "report": "styles-proof-parent.json"
+    }
+  ],
+  "knownBaselineFailures": [
+    "Two card-sync-slices assertions reproduce on isolated frozen original source"
+  ],
+  "browser": {
+    "platform": "Codex IAB",
+    "scope": [
+      "Title + settings computed-style A/B",
+      "Audio controls through real checkbox/keyboard input",
+      "Slot ornaments and five image background properties A/B"
+    ],
+    "limitations": [
+      "Existing records differ between two port origins; unchanged empty/filled filter is not treated as equal-state A/B",
+      "Final metadata re-read correction has direct regression coverage; temporary tabs closed when new user message arrived",
+      "Isolated asset middleware did not supply physical JSON imports to Vite; final refactor runtime will also copy imported animation metadata"
+    ]
+  },
+  "refactor": {
+    "authorizedByUser": "太少了 建议你可以做重构 不用保留原有的结构",
+    "baseline": "refactor/baseline.json",
+    "status": "in-progress",
+    "areas": [
+      "cards schema",
+      "photo library controller",
+      "shop/altar/chest common flows"
+    ]
+  },
+  "resources": {
+    "stopped": [
+      {
+        "port": 5334,
+        "pid": 15728
+      },
+      {
+        "port": 5335,
+        "pid": 33364
+      }
+    ],
+    "portsRecheckedFree": true
+  },
+  "commit": false,
+  "build": false
+}

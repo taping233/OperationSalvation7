@@ -1,0 +1,91 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "userFinalConstraint": "人物不要有透视，正常站姿，朝左",
+  "items": [
+    {
+      "id": "rager",
+      "name": "暴怒者",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-47081b5d-efdc-4a9e-a3f2-dbe2aa7e78c5.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-9f3bc306-8f5b-4d1f-9bee-b275fd34bd69.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "deserter",
+      "name": "落难逃兵",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-38297bca-8ea5-4724-9c02-af2f1d40c702.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-4fed7973-561f-4211-9af0-d77a5bb66a7d.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "greedy_imp",
+      "name": "贪财小鬼",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-3d1cef02-e769-4759-b3ee-c6d574d16d9c.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-d5fed32f-babe-4872-bb7c-5d851f9ae624.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "swaggerer",
+      "name": "招摇过客",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-d13be42e-f0b8-434a-b71e-ab504912e4c6.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame. Lower the extended arm. Scarf hangs down naturally with no wind.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-cc7a7266-56d6-4cc0-bc48-56f4f7622977.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "tin_mute",
+      "name": "铁皮哑人",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-59db1050-feca-4845-affa-386bf0c2e32c.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame. Arms naturally down, legs upright.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-18dbcf3a-a678-4114-9570-8b31439a5a1c.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "heavy_hammer",
+      "name": "笨重锤手",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-7d0f4b30-9248-4720-984f-4f64c0243354.png",
+      "prompt": "Repose this SAME character into a NORMAL QUIET UPRIGHT STANDING pose, looking and facing entirely toward screen LEFT. Flat 2D game sprite, eye-level orthographic side view: absolutely no perspective, no near/far size difference or foreshortening. Keep the character's recognizable face, hair, clothing design, colors, body type, and signature held items. Straighten the torso, align shoulders and hips toward LEFT, bring feet to a normal hip-width standing distance on ONE horizontal baseline; both boots point LEFT. Arms rest naturally near the torso, items held close at waist/side, no fighting, crouching, forward lean, pointing or reaching. No chest facing front while head turns separately. Full body from hair to soles and complete equipment inside frame, same anime drawing style. Completely empty transparent alpha background; no floor, shadow, glow, halo, smoke, vignette, lettering or frame. Hammer held vertically with head resting beside the boots, no diagonal foreground weapon.",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-14a4da79-010a-462c-9ba7-5e472418156a.png"
+      ],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "cultist",
+      "name": "邪教徒",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-f39c6d71-b641-42d8-9f9b-15d4764cd760.png",
+      "prompt": "Draw ONE full-body left-facing 2D enemy standing portrait. This is a flat character sprite, neutral eye-level ORTHOGRAPHIC SIDE VIEW, no perspective and no foreshortening. Head, face, chest, hips, knees, both feet all face the LEFT edge. Upright natural standing posture, relaxed shoulders, legs straight with only natural slight knee softness, feet close to hip width on one horizontal baseline. No action pose, running, lunge, crouching, leaning, reaching, attacking, aiming, twisting, spread-leg stance or wind-blown fabric. Hands naturally at waist or sides holding signature items close to the torso. All body parts and items fit inside the portrait with safe transparent padding. Clean economical anime outlines and matte broad cel-shaded planes, subdued colors, readable character design. Truly transparent alpha background, no floor, cast shadow, halo, vignette, scenery, text or UI. A thin adult fictional occultist in black hood and muted violet long robes, smooth dark mask with small pale violet eyes, silver chain belt, dark boots. Calm upright left-facing standing. Both arms relaxed, one closed ironbound book held at waist against chest, no raised spellcasting hand or magical effect.",
+      "references": [],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "fake_apothecary",
+      "name": "假药贩子",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-02e6a0f3-95d3-40f1-acec-339025b8bf3b.png",
+      "prompt": "Draw ONE full-body left-facing 2D enemy standing portrait. This is a flat character sprite, neutral eye-level ORTHOGRAPHIC SIDE VIEW, no perspective and no foreshortening. Head, face, chest, hips, knees, both feet all face the LEFT edge. Upright natural standing posture, relaxed shoulders, legs straight with only natural slight knee softness, feet close to hip width on one horizontal baseline. No action pose, running, lunge, crouching, leaning, reaching, attacking, aiming, twisting, spread-leg stance or wind-blown fabric. Hands naturally at waist or sides holding signature items close to the torso. All body parts and items fit inside the portrait with safe transparent padding. Clean economical anime outlines and matte broad cel-shaded planes, subdued colors, readable character design. Truly transparent alpha background, no floor, cast shadow, halo, vignette, scenery, text or UI. A sly middle-aged adult male counterfeit medicine merchant, slick green-black hair, small round glasses, thin mustache, a shabby teal long coat, burgundy vest and beige apron, dark trousers and brown boots. Upright left-facing standing. A bandolier with three green glass vials; one hand loosely holds one vial near waist, the other holds a compact medical case beside thigh. No offering/reaching gesture, no smoke, no text label.",
+      "references": [],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    },
+    {
+      "id": "camo_sniper",
+      "name": "迷彩狙击手",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e7d-b500-7f20-bc31-d6ecfa49b50c\\exec-b8c8b324-5d9d-45ca-84e7-41360a3ad928.png",
+      "prompt": "Draw ONE full-body left-facing 2D enemy standing portrait. This is a flat character sprite, neutral eye-level ORTHOGRAPHIC SIDE VIEW, no perspective and no foreshortening. Head, face, chest, hips, knees, both feet all face the LEFT edge. Upright natural standing posture, relaxed shoulders, legs straight with only natural slight knee softness, feet close to hip width on one horizontal baseline. No action pose, running, lunge, crouching, leaning, reaching, attacking, aiming, twisting, spread-leg stance or wind-blown fabric. Hands naturally at waist or sides holding signature items close to the torso. All body parts and items fit inside the portrait with safe transparent padding. Clean economical anime outlines and matte broad cel-shaded planes, subdued colors, readable character design. Truly transparent alpha background, no floor, cast shadow, halo, vignette, scenery, text or UI. A lean adult human sniper wearing olive-gray urban camouflage hood, face scarf, short camo poncho, simple tactical chest rig, fitted pants and combat boots. Upright left-facing standing. One long modest bolt-action rifle with one scope held naturally down beside body, muzzle points downward-left, stock near waist. NOT aiming or shouldering the rifle, no crouching, no ghillie bush, no eye-level gun, no oversized foreground gun.",
+      "references": [],
+      "review": "已目视：正常直立、朝屏幕左、无夸张透视，完整头脚与道具"
+    }
+  ]
+}

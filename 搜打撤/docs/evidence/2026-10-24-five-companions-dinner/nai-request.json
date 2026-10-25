@@ -1,0 +1,227 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "3girls, 2boys, five adult adventurers sharing dinner after returning home, communal dining table, steaming stew, bread, small cake, intimate candid ensemble, all five faces clear\n\nOne continuous wide story illustration for five adjacent save-slot windows, not five separate panels.\n\nLeft to right: silver ponytail woman sitting and secretly reaching for the central woman's cake; bespectacled silver-haired man standing behind the table pouring tea; brown-haired woman sitting with a fork raised to stop the theft; muscular dark-skinned man standing carrying a steaming stew pot; blonde woman sitting sideways and offering her empty bowl to him. Alternating seated and standing heights, lively connected eye-lines and hands. Slightly elevated medium-wide camera, long table diagonals lead inward. Faces near horizontal positions 10%,30%,50%,70%,90%; keep faces out of the seams. No spectators.\n\nWarm hanging amber lamp and low hearth illuminate faces, fingers, ceramic bowls and rising steam; deep cool blue winter night behind a closed window with a few snowflakes. Warm light against cool shadow, focused face planes, foreground cutlery and a folded map, lived-in safehouse dining room, clear depth.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 2026102407,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra people, duplicated person, cloned face, five standing portraits, lineup, split screen, panel borders, chibi, white streak in black hair, hair over both eyes",
+      "characterPrompts": [
+        {
+          "prompt": "1girl, adult, silver-white high ponytail, swept-aside front hair, exposed forehead, cyan blue eyes, small fang smile, black round sunglasses on head, blue bow and black rose, charcoal off-shoulder ruffle dress, seated leaning toward cake",
+          "uc": "goggles, bangs covering forehead",
+          "center": {
+            "x": 0.1,
+            "y": 0.47
+          },
+          "enabled": true
+        },
+        {
+          "prompt": "1boy, adult male elf, silver-gray long sidelocks and low bun, pointed ears, golden eyes, thin round glasses, bent black witch hat with purple underside, black high-collar robe purple lining gold trim, white feather blue gem brooch, standing pouring tea amused",
+          "uc": "female, staff",
+          "center": {
+            "x": 0.3,
+            "y": 0.3
+          },
+          "enabled": true
+        },
+        {
+          "prompt": "1girl, adult, deep brown long wavy hair, thick side fringe completely covering viewer-right eye, one visible green eye on viewer-left, two gold hairclips on exposed-eye side, gold earrings, green beret, white high-collar blouse deep green pinafore and oval blue jewel, seated raising fork mildly reproachful",
+          "uc": "two visible eyes, uncovered right eye",
+          "center": {
+            "x": 0.5,
+            "y": 0.46
+          },
+          "enabled": true
+        },
+        {
+          "prompt": "1boy, adult muscular dark-skinned man, pure black short slicked-back hair, fully exposed forehead, amber eyes, stitched scar on viewer-right cheek, confident grin, dark fitted rolled-sleeve shirt, burnt-orange neck scarf, standing carrying stew pot",
+          "uc": "white hair, white forelock, gray hair, silver hair, hair streak",
+          "center": {
+            "x": 0.7,
+            "y": 0.3
+          },
+          "enabled": true
+        },
+        {
+          "prompt": "1girl, adult, pale blonde long low side braid, neat straight bangs, gold eyes, white crescent hair ornament, white priest dress deep teal mantle gold trim, quietly attentive, seated sideways holding an empty bowl toward the stew",
+          "uc": "purple eyes, purple mantle, black crescent",
+          "center": {
+            "x": 0.9,
+            "y": 0.47
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "3girls, 2boys, five adult adventurers sharing dinner after returning home, communal dining table, steaming stew, bread, small cake, intimate candid ensemble, all five faces clear\n\nOne continuous wide story illustration for five adjacent save-slot windows, not five separate panels.\n\nLeft to right: silver ponytail woman sitting and secretly reaching for the central woman's cake; bespectacled silver-haired man standing behind the table pouring tea; brown-haired woman sitting with a fork raised to stop the theft; muscular dark-skinned man standing carrying a steaming stew pot; blonde woman sitting sideways and offering her empty bowl to him. Alternating seated and standing heights, lively connected eye-lines and hands. Slightly elevated medium-wide camera, long table diagonals lead inward. Faces near horizontal positions 10%,30%,50%,70%,90%; keep faces out of the seams. No spectators.\n\nWarm hanging amber lamp and low hearth illuminate faces, fingers, ceramic bowls and rising steam; deep cool blue winter night behind a closed window with a few snowflakes. Warm light against cool shadow, focused face planes, foreground cutlery and a folded map, lived-in safehouse dining room, clear depth.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "1girl, adult, silver-white high ponytail, swept-aside front hair, exposed forehead, cyan blue eyes, small fang smile, black round sunglasses on head, blue bow and black rose, charcoal off-shoulder ruffle dress, seated leaning toward cake",
+              "centers": [
+                {
+                  "x": 0.1,
+                  "y": 0.47
+                }
+              ]
+            },
+            {
+              "char_caption": "1boy, adult male elf, silver-gray long sidelocks and low bun, pointed ears, golden eyes, thin round glasses, bent black witch hat with purple underside, black high-collar robe purple lining gold trim, white feather blue gem brooch, standing pouring tea amused",
+              "centers": [
+                {
+                  "x": 0.3,
+                  "y": 0.3
+                }
+              ]
+            },
+            {
+              "char_caption": "1girl, adult, deep brown long wavy hair, thick side fringe completely covering viewer-right eye, one visible green eye on viewer-left, two gold hairclips on exposed-eye side, gold earrings, green beret, white high-collar blouse deep green pinafore and oval blue jewel, seated raising fork mildly reproachful",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.46
+                }
+              ]
+            },
+            {
+              "char_caption": "1boy, adult muscular dark-skinned man, pure black short slicked-back hair, fully exposed forehead, amber eyes, stitched scar on viewer-right cheek, confident grin, dark fitted rolled-sleeve shirt, burnt-orange neck scarf, standing carrying stew pot",
+              "centers": [
+                {
+                  "x": 0.7,
+                  "y": 0.3
+                }
+              ]
+            },
+            {
+              "char_caption": "1girl, adult, pale blonde long low side braid, neat straight bangs, gold eyes, white crescent hair ornament, white priest dress deep teal mantle gold trim, quietly attentive, seated sideways holding an empty bowl toward the stew",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.47
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, extra people, duplicated person, cloned face, five standing portraits, lineup, split screen, panel borders, chibi, white streak in black hair, hair over both eyes",
+          "char_captions": [
+            {
+              "char_caption": "goggles, bangs covering forehead",
+              "centers": [
+                {
+                  "x": 0.1,
+                  "y": 0.47
+                }
+              ]
+            },
+            {
+              "char_caption": "female, staff",
+              "centers": [
+                {
+                  "x": 0.3,
+                  "y": 0.3
+                }
+              ]
+            },
+            {
+              "char_caption": "two visible eyes, uncovered right eye",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.46
+                }
+              ]
+            },
+            {
+              "char_caption": "white hair, white forelock, gray hair, silver hair, hair streak",
+              "centers": [
+                {
+                  "x": 0.7,
+                  "y": 0.3
+                }
+              ]
+            },
+            {
+              "char_caption": "purple eyes, purple mantle, black crescent",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.47
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/slot-dinner-20261024/draft.png",
+  "references": [
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "uploaded_to_nai": false,
+      "role": "identity only; text description used"
+    },
+    {
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "uploaded_to_nai": false,
+      "role": "identity only; text description used"
+    },
+    {
+      "path": "game/assets/portraits/full/baita.webp",
+      "uploaded_to_nai": false,
+      "role": "identity only; text description used"
+    },
+    {
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "uploaded_to_nai": false,
+      "role": "identity only; text description used"
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "uploaded_to_nai": false,
+      "role": "identity only; text description used"
+    }
+  ],
+  "character_overrides": {
+    "heixiang": "pure black hair; no white forelock",
+    "baita": "thick fringe fully covers viewer-right eye"
+  },
+  "seed": 2026102407,
+  "sha256": "e01be29e98bf20e5e0d8fa113359c1410c2208c8f8bf6b69d6f7b9a6f5a88e43"
+}

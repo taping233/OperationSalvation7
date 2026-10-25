@@ -1,0 +1,54 @@
+[
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/far.webp",
+    "sha256": "a10a5e7a7f831b130126791cf2f2bf57e6bdc08b314691070705edb7d4aba859",
+    "backup": ".tmp\\station-default-brush-1025\\before\\far.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/far.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen分层重绘）",
+      "bytes": 51890,
+      "sha256": "a10a5e7a7f831b130126791cf2f2bf57e6bdc08b314691070705edb7d4aba859",
+      "source": "docs/evidence/2026-10-25-winter-station-preview/declutter-import.json"
+    }
+  },
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+    "sha256": "4497e6eda563c105e73647f1b7cbb74ed556e920db516beae3d83ec3bd25798f",
+    "backup": ".tmp\\station-default-brush-1025\\before\\mid.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层素材，内置imagegen局部删减重绘）",
+      "bytes": 34798,
+      "sha256": "4497e6eda563c105e73647f1b7cbb74ed556e920db516beae3d83ec3bd25798f",
+      "source": "docs/evidence/2026-10-25-station-local-unify/import.json"
+    }
+  },
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/ground.webp",
+    "sha256": "a240d9357643026ce973a7ccae0f29c51a02ee487711c16a0bd33f415416f4ec",
+    "backup": ".tmp\\station-default-brush-1025\\before\\ground.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "ext": "webp",
+      "license": "项目原创（NAI4.5起稿＋内置imagegen分层重绘）",
+      "bytes": 72030,
+      "sha256": "a240d9357643026ce973a7ccae0f29c51a02ee487711c16a0bd33f415416f4ec",
+      "source": "docs/evidence/2026-10-25-winter-station-preview/declutter-import.json"
+    }
+  },
+  {
+    "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+    "sha256": "cb7b40125c1709aff23759747c84abea24855a9e3ec27211df0ed35551baa574",
+    "backup": ".tmp\\station-default-brush-1025\\before\\foreground.webp",
+    "manifestEntry": {
+      "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "ext": "webp",
+      "license": "项目原创（沿现行NAI4.5分层素材，内置imagegen局部删减重绘）",
+      "bytes": 75372,
+      "sha256": "cb7b40125c1709aff23759747c84abea24855a9e3ec27211df0ed35551baa574",
+      "source": "docs/evidence/2026-10-25-station-local-unify/import.json"
+    }
+  }
+]

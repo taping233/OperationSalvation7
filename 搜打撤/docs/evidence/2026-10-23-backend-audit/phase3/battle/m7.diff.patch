@@ -1,0 +1,13 @@
+--- game/src/cards/cards.sync.m7.js (before phase3)
++++ game/src/cards/cards.sync.m7.js (after phase3)
+@@ -51,8 +51,8 @@
+ const CANONICAL_TABLE_BY_ID = new Map([
+   ['tt3-longsword', 'TABLETOP10'], ['tt3-staff', 'TABLETOP10'],
+   ['tt3-grass-armor', 'TABLETOP10'], ['tt3-light-mail', 'TABLETOP10'],
+-  ['tt3-holy-staff', 'TABLETOP10'], ['tt8-archdemon', 'TABLETOP11'],
+-  ['tt8-archdemon', 'TABLETOP10'], ['tt2-treasuremap', 'TABLETOP11'],
++  ['tt3-holy-staff', 'TABLETOP10'], ['tt8-archdemon', 'TABLETOP10'],
++  ['tt2-treasuremap', 'TABLETOP11'],
+   ['tt7-arcanescroll', 'TABLETOP11'], ['tt7-talisman', 'TABLETOP11'],
+   ['tt3-blooddrinker', 'TABLETOP10'], ['tt3-master-staff', 'TABLETOP10'],
+   ['tt3-twinwater-mail', 'TABLETOP10'],

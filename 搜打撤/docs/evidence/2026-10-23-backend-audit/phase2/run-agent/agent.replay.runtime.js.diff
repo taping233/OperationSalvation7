@@ -1,0 +1,15 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase2/run-agent/agent.replay.runtime.js.before b/D:/素材/代号柒/搜打撤/game/src/agent/agent.replay.runtime.js
+index ca4a25fe..95d4f9aa 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-23-backend-audit/phase2/run-agent/agent.replay.runtime.js.before
++++ b/D:/素材/代号柒/搜打撤/game/src/agent/agent.replay.runtime.js
+@@ -116,10 +116,6 @@ async function play(input, { prepare, fingerprint, stepOptions = {} } = {}) {
+       if (difference) return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'before', difference });
+       const result = await step(() => entry.action, { ...stepOptions });
+       executed++;
+-      if (result.res?.ok !== true || result.res?.completed === false || result.stopReason || result.error || result.settleStalled) {
+-        return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'result',
+-          difference: firstDifference(entry.result, resultState(result)) });
+-      }
+       difference = firstDifference(entry.result, resultState(result));
+       if (difference) return fail('REPLAY_DIVERGED', { executed, index: entry.index, stage: 'result', difference });
+       actual = readReplayState();

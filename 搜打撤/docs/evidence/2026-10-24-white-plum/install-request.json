@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "generation_request": "docs/evidence/2026-10-24-white-plum/request.json",
+      "asset": "cards/wu-void.webp",
+      "revision": "white-plum-nai-internal-20261024",
+      "references": [
+        ".tmp/nai/white-plum-1024/nai.png",
+        "game/assets/portraits/full/wu.webp"
+      ],
+      "source": "D:\\素材\\代号柒\\搜打撤\\.tmp\\nai\\white-plum-1024\\internal.png",
+      "card_id": "tt8-hero-assassin"
+    }
+  ]
+}

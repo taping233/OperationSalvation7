@@ -1,0 +1,553 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "beforeSha256": "685f6603a9b6bc28a6006c23a711ffe16c4bc81c99f436b4cfdc9fb83a82afb0",
+    "afterSha256": "8d9606f77c8965b66354e4ab581e0de6a2e41c0be029e7fd213ea0938b503eb8",
+    "beforeBytes": 17522,
+    "afterBytes": 17498
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "beforeSha256": "8b48b18ec6f54a2b605dd094e69f34b10e87f5683c60cf321998ea3e5cfdca52",
+    "afterSha256": "6eaa1659b0e25e7520d78d6aca22c62df6eee15cbc8e38618971edde6d58907c",
+    "beforeBytes": 34103,
+    "afterBytes": 32595
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "beforeSha256": "4c1e37ef89ee1eb0395c33e85f53f3871659f0e3cd1a0807af2f95109c1a9dee",
+    "afterSha256": "8439fe546e95d44a4ac68a44df7696bf6bb412d311c0987fa75d2666e996810f",
+    "beforeBytes": 27068,
+    "afterBytes": 25873
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "beforeSha256": "ba52ac81fbb5723170f1662552595679c2701075ab1f2b58d97b9b78e4801da1",
+    "afterSha256": "f349b8117da669d03eed3ffdb8652212a1a36f412eb7a53f6d1ac9e758dad92a",
+    "beforeBytes": 27497,
+    "afterBytes": 21259
+  },
+  {
+    "file": "game/css/base-cohesion-v5.css",
+    "beforeSha256": "0cbc9f1c40bf007b9cca1e318aa633c728b012cc4275b4148bece2ad91f5c1f4",
+    "afterSha256": "d1454253257c68a726f727d43ace5d0153f579230c5722b733293f00767f40ff",
+    "beforeBytes": 15748,
+    "afterBytes": 15449
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "beforeSha256": "e809b50a24f3321d743bd537f3fb6ca3b2b29ee53f58dae508c66a975b438797",
+    "afterSha256": "046c07e6a54e51b0fafc00c5fdc42c8ce40cfd86317b515eef3f437c27398b0d",
+    "beforeBytes": 5693,
+    "afterBytes": 5323
+  },
+  {
+    "file": "game/css/base-home-v7.css",
+    "beforeSha256": "f79fe2f7d110a2c58e38103f3c84196547820dc1c318e913294a313fa9aadf78",
+    "afterSha256": "5304c59d1026205d5abb64fe82148078a70266132be6b25473cdc7927589d15f",
+    "beforeBytes": 8346,
+    "afterBytes": 8061
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "beforeSha256": "c52679781be0aa6ec92735bc12cf0c6a9420152f17678ab0ecab69e43ec32624",
+    "afterSha256": "0912c04837d1136450b8757417ec85d0b51036195490c34ce35ae68f28481d61",
+    "beforeBytes": 15035,
+    "afterBytes": 14703
+  },
+  {
+    "file": "game/css/base-page-motion-v7.css",
+    "beforeSha256": "ef0d10c5e05afa9ae27f1879fe23a31ea65240f9b20ec3acfc12ac8f1c451e8c",
+    "afterSha256": "18b602c3ed6acd96d9f1b91905a382d7e4234d22a4cbadc922a8125ac4ddaf96",
+    "beforeBytes": 3295,
+    "afterBytes": 2991
+  },
+  {
+    "file": "game/css/base-rooms-v7.css",
+    "beforeSha256": "36b87bb40f04ccb3f9d83a8cd2a40d3c8b4b60d2047ea822f6e1f5f1c288c39e",
+    "afterSha256": "6e2ebcc2e18784fe0a58a4d3bd0b2a97775adf2fdb5ff528bb779a28489ae53c",
+    "beforeBytes": 31266,
+    "afterBytes": 31187
+  },
+  {
+    "file": "game/css/camp-entry.css",
+    "beforeSha256": "0e25b8c0cf1cc11530876b8bb3570717df6723ba896d93c5cf97f472ffa4989e",
+    "afterSha256": "993af55c329af935f8afc050b3f8f107ad4594015bd325d3877ca129a74244ff",
+    "beforeBytes": 13670,
+    "afterBytes": 13322
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "beforeSha256": "eb3880a0f65efcc0867b9b0c58a3ff85661e5b53cdf419ba72a330204ec939de",
+    "afterSha256": "6e862d463e31292e1fff586f5ac5f50d13a344683ab38452bafe7d79c1835cef",
+    "beforeBytes": 17646,
+    "afterBytes": 17632
+  },
+  {
+    "file": "game/css/cards.css",
+    "beforeSha256": "429bc798bc9c7d0ea2ad933579cc5a5608daa3127a0421dd4a8aa6befcd36567",
+    "afterSha256": "ab33f554311ee309411afb2a839b53ae5d99500032f3aa4cbfe41a2e25c92568",
+    "beforeBytes": 11852,
+    "afterBytes": 11758
+  },
+  {
+    "file": "game/css/character-cover.css",
+    "beforeSha256": "e1b994f0b56d3623cb99e337d0ec13b9958f870809b789fdca724bc2975015bc",
+    "afterSha256": "61818a124319d8ac763d8ac3e1892b385e3ce38b0614133f56db1bc663e8f9f0",
+    "beforeBytes": 8649,
+    "afterBytes": 8561
+  },
+  {
+    "file": "game/css/character-pool-cover.css",
+    "beforeSha256": "337e8d2db02f0779ca3c883d176558a72512490ba596ff65d12681d993c680be",
+    "afterSha256": "c065174f8e97dfa07522d101e0f885b1718d395df712fa566954dc9c5fe3000a",
+    "beforeBytes": 10108,
+    "afterBytes": 9517
+  },
+  {
+    "file": "game/css/character-view-motion.css",
+    "beforeSha256": "97c30a22d03bbc92046fef8c158fec21575dcd194c8dc70a1b7adb5c194913db",
+    "afterSha256": "a53d0f6e0767e0aa2ba8b586059bfc08ed49d02ef0341f01cee81727d2b60b3c",
+    "beforeBytes": 3731,
+    "afterBytes": 2855
+  },
+  {
+    "file": "game/css/chest-reward-overview.css",
+    "beforeSha256": "94ab241df96f934c61b0488617821e7e7cc9e9f221f927fa1bfdc6c18ea52f3c",
+    "afterSha256": "68d4b33ccc17328c2d2248b62056fd73c8236398083b58a51a7941e7419cc142",
+    "beforeBytes": 5171,
+    "afterBytes": 5013
+  },
+  {
+    "file": "game/css/cover-details.css",
+    "beforeSha256": "1a3f838be2f3f1bb7859ec913425a0e176da9fad8010ad631130209dc66c4a65",
+    "afterSha256": "597fcfb99f6dbda2dff71abf767a0e1a95019784a5ceda9430d3d31510e2dca4",
+    "beforeBytes": 8984,
+    "afterBytes": 8190
+  },
+  {
+    "file": "game/css/cover-run.css",
+    "beforeSha256": "43cac6d86f9bafd1e5dfe3761220354b791851d3f17b44fba36edcc5c00f993b",
+    "afterSha256": "5124c4401812e37b2c86803a014662ed40dfadefb0b574ccf9c81a2335d3ee2d",
+    "beforeBytes": 27479,
+    "afterBytes": 27333
+  },
+  {
+    "file": "game/css/cover-secondary.css",
+    "beforeSha256": "a2ef3f622a30786777ed3303c462db5272c0abde19b474fff439d5660d3cfd27",
+    "afterSha256": "ec0b266a157f71957b97e8ef985ffb09e8332c4b71cac35773ee526fbe17a98c",
+    "beforeBytes": 20225,
+    "afterBytes": 20215
+  },
+  {
+    "file": "game/css/cover-system.css",
+    "beforeSha256": "a7b690ae27cd6902e7512ec921d340b629d0f3e8bb0c83287de993c65e94e7db",
+    "afterSha256": "a130e9a316e20ab766bb0719dafd052fe633193f385d22aeb4c497433ee927fa",
+    "beforeBytes": 14666,
+    "afterBytes": 14657
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "beforeSha256": "45cc4b140683f4fc85b0bf92b214ecaa64d112023e921c8a04d448c667ea6087",
+    "afterSha256": "e159ab6a68ff71fd703b7c9e21df5221a018c73a2bf86ca4cf9a863c84452b38",
+    "beforeBytes": 14285,
+    "afterBytes": 14148
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "beforeSha256": "ace63c4720dc366e2c3d317d5941632cc0e879e5477bffc7a9de3bb6cc40baf7",
+    "afterSha256": "c7d79ffa86c68c87b3ae743fbb3edd6eadd4ddcc58d150b25b9e787201e5159c",
+    "beforeBytes": 10597,
+    "afterBytes": 10495
+  },
+  {
+    "file": "game/css/expedition-hub.css",
+    "beforeSha256": "5a45927e13496933149ff0af4244eda396aecc81f20572ca2e5cbb36fb3c7820",
+    "afterSha256": "429c614c09c15568f0711d4438fd9d95382b02ad8bd05a7b312f65d11ee354d5",
+    "beforeBytes": 3998,
+    "afterBytes": 3729
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "beforeSha256": "e7e8c0f765b9d4c216e9e84f4b19d04ae080d9f49f67f53b8140e89d5af8c50c",
+    "afterSha256": "3e063e24adc6750600e7f7b318fabe6ccced5eec7ef77e4a81f5562fe63fd989",
+    "beforeBytes": 26852,
+    "afterBytes": 26462
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "beforeSha256": "937600ac94ceec0b8073c6fd25f34a059f05ca9b40c97cc54ce6dc4a669053fb",
+    "afterSha256": "87116be7e988d000555adead9ce85f07362bfe0d082726db63c898de0743d232",
+    "beforeBytes": 27378,
+    "afterBytes": 25235
+  },
+  {
+    "file": "game/css/expedition.css",
+    "beforeSha256": "6aea233376bfb6b7a67615ff700e8a299d22b167831fb6eb8336a37a34410ece",
+    "afterSha256": "00f305267758277c46ab03ba1cb02aa0e587c4f0cc8c68065532123365f63e5e",
+    "beforeBytes": 18544,
+    "afterBytes": 17690
+  },
+  {
+    "file": "game/css/experience-loot.css",
+    "beforeSha256": "a3a76a6617fb6b97ab861472d45ccfd47c59a15ac019c81666bc329bcd96b338",
+    "afterSha256": "c9e3a746099acbe27d305f9c45fad76a413a610f37e12cae1899f11918409ad6",
+    "beforeBytes": 4007,
+    "afterBytes": 228
+  },
+  {
+    "file": "game/css/extraction-rewards.css",
+    "beforeSha256": "3a9014e1397eea279a54ccd33cbfdca55adadf183c26104aba656d86512501af",
+    "afterSha256": "102a6d90e975aa6be6745ee3bb23fb5678a907fce7a4b328759fb40f6baef590",
+    "beforeBytes": 15599,
+    "afterBytes": 15423
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "beforeSha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503",
+    "afterSha256": "4e4799d80ed206964e974bff1b94f730a5f8af34b3379e66239b5778ccf130ce",
+    "beforeBytes": 4862,
+    "afterBytes": 4837
+  },
+  {
+    "file": "game/css/hub.css",
+    "beforeSha256": "52e7091359322dae9f874abed4394c2708377c4ad2fd154c5876b2926edcc679",
+    "afterSha256": "3b73dfc1cc8eac665bfb97028bc6b8bf3b40f9fb48b2aa434781f089a65654f0",
+    "beforeBytes": 15962,
+    "afterBytes": 14890
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "beforeSha256": "ad80a3fc9a213bd96a996867b2df81d637978399e2bfa7eaa9ca73b81c2e162f",
+    "afterSha256": "331bc6e3e97c50ecfe29f2711e5442e9620fd3e0ce988ffaa937215995cdb506",
+    "beforeBytes": 16654,
+    "afterBytes": 16337
+  },
+  {
+    "file": "game/css/page-deploy.css",
+    "beforeSha256": "dc88eea2ab49f2333f025d125745c1e4f07b721fa5ec3b9ace54ba37ca10ded1",
+    "afterSha256": "d0fef5779be87237d4bd4d3010400eabdd1681f75d218e476b62705fdc1007c1",
+    "beforeBytes": 21512,
+    "afterBytes": 21287
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "beforeSha256": "5317cb9b8ea28ffe17250029cd8feee95a1e898370aee0288a2af633dd17e9a3",
+    "afterSha256": "e51c103b3c07580dd2f99d90996b7b16d6efc9616b9cd87f7df50891778764d3",
+    "beforeBytes": 23003,
+    "afterBytes": 22638
+  },
+  {
+    "file": "game/css/page-hub.css",
+    "beforeSha256": "46ea351e3e4d13b15175a6186a49b7de7b59651ed352d51a7d534ab9bd684047",
+    "afterSha256": "5142814eab7187a732d83efdf65e84f1bd1424415bffea4e3762b5a6bbc14141",
+    "beforeBytes": 19793,
+    "afterBytes": 18872
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "beforeSha256": "c6d250eb9c8e767fb219759ba9e8a3815ed2b2400dd9f90a390975a3362b1381",
+    "afterSha256": "3897d2970c06b1f05a3db9b6fb6751eb9b22b0c49ec8e447832798c848c088c9",
+    "beforeBytes": 27352,
+    "afterBytes": 26367
+  },
+  {
+    "file": "game/css/page-stash.css",
+    "beforeSha256": "758eabe113ee13ce77dc0f3ddc859c4bf1e6d58ceaf8116d4664295c6d3f3196",
+    "afterSha256": "2a071926885f28ecac13a32c4de8b6b37db1f0f455f89c85057a5eb518153ae1",
+    "beforeBytes": 6892,
+    "afterBytes": 6659
+  },
+  {
+    "file": "game/css/page-upgrade.css",
+    "beforeSha256": "c9765f8dbc8062159548ee3518eef39dc0dd05bff01d0a26e4be5063b8592500",
+    "afterSha256": "1976a2752dc6e7b7fd8fe50bec96251a841e44ab6c77c29cfa8883423bb2ef72",
+    "beforeBytes": 8135,
+    "afterBytes": 7834
+  },
+  {
+    "file": "game/css/roster-reference.css",
+    "beforeSha256": "668c7147c44824654b63d96f1c22feb41c9b1ce79068df8d73531bd159e69b25",
+    "afterSha256": "e713351b78b84cd49226150d5703064a05ae53fdd7a5ef64b6c2907779549086",
+    "beforeBytes": 3774,
+    "afterBytes": 2282
+  },
+  {
+    "file": "game/css/scenes.css",
+    "beforeSha256": "89fa2779b77f5ab977b282560b94b5f30f2f95ab7523023d2921f09a8d13db40",
+    "afterSha256": "3e36930fa3131fc37d2c353ca5b04535e7fbaa7bf1f1133fa1ceaa6352aa3e66",
+    "beforeBytes": 44773,
+    "afterBytes": 44058
+  },
+  {
+    "file": "game/css/slots-cover.css",
+    "beforeSha256": "fedb0f0be7fdee438d03ccb23742e6e4af51dbc5b6e99741d0fb638cada9bf65",
+    "afterSha256": "85af97021be963725dc29bffc90d12c9d46e9832ac26b310c0e52acb4f5e1312",
+    "beforeBytes": 9428,
+    "afterBytes": 9373
+  },
+  {
+    "file": "game/css/title-achievements.css",
+    "beforeSha256": "04872641102ac41d1085c4cf017ca7cc3558d2b250b9234c818efffa2ff6d91b",
+    "afterSha256": "2d3917fd9fcf5d1c2da180421bb71ba62e64da9ad3cdc47f39da73bfb781cd17",
+    "beforeBytes": 19855,
+    "afterBytes": 19484
+  },
+  {
+    "file": "game/src/game.boot.js",
+    "beforeSha256": "5040e558d213c03d94a97e3c394d9e848dd7eb213ccbda4f5f58bf6241541195",
+    "afterSha256": "12f6f72913b3bbaa3f57fce9ff8e7b9cff812be9fc02dcf58b5bc64eb833d37c",
+    "beforeBytes": 12537,
+    "afterBytes": 12282
+  },
+  {
+    "file": "game/dev/battle-decision-review.html",
+    "beforeSha256": "0cd7e152acf8f7dcbdb51c98bd10be59895f8aa587f388b854df00150b182dec",
+    "afterSha256": "a801110ff9040b2a4c6ed879b03c9089669e2b0e4eb203ad8e81b7801c714b0f",
+    "beforeBytes": 8474,
+    "afterBytes": 8419
+  },
+  {
+    "file": "game/dev/canvas-resource-review.html",
+    "beforeSha256": "4de99bb99f46845c49b455a243683f1185e7070c2fc968ef9aae3d1ad1e90370",
+    "afterSha256": "75b11aa6f200c38eb0be05266c6b9f2e32bdbcbabe321684f102dc005eb408b5",
+    "beforeBytes": 5734,
+    "afterBytes": 5710
+  },
+  {
+    "file": "game/dev/card-feedback-review.html",
+    "beforeSha256": "bf5edd284a4d933cab779eab5913575d2edfac05865c1b802dd9c612e7836188",
+    "afterSha256": "3f0c635cf98cb8a0a9ca72e9cc014ecee339c32c6572344a66a6ec2b7709074b",
+    "beforeBytes": 8914,
+    "afterBytes": 8859
+  },
+  {
+    "file": "game/dev/chest-no-pity-review.html",
+    "beforeSha256": "d1dbb5440e62c5ff1885a16fc6bd1b4fba7b65d2a9dd79c6ca5270827f65f661",
+    "afterSha256": "bb6a3d58202de08fbbb412787dea0c5806a42f96ad28abe40ef22f98cd927862",
+    "beforeBytes": 8043,
+    "afterBytes": 7990
+  },
+  {
+    "file": "game/dev/combat-overlay-review.html",
+    "beforeSha256": "d19cf154ea885def0a1c4ab307af0ee60b8518ba793adf8bd492426b27a6010a",
+    "afterSha256": "0ac9efe791b96674f738611b9d84797f038d63774de2e3772948989aaa1c0e5f",
+    "beforeBytes": 12539,
+    "afterBytes": 12484
+  },
+  {
+    "file": "game/dev/extraction-rewards-review.html",
+    "beforeSha256": "535ac9ea349ac7fbe565a2cb6a155d9164aeff8ce7a477a65373ece0245dbd8c",
+    "afterSha256": "b56f597d7238215766cd4fe468803aef7907fee0b77ad1d9df8abd62f6071567",
+    "beforeBytes": 10965,
+    "afterBytes": 10910
+  },
+  {
+    "file": "game/dev/hand-draw-review.html",
+    "beforeSha256": "f341a44bc1347f1cf98a28855776b6494abfba18fc95cd03c77ee6a03543d680",
+    "afterSha256": "f526ca58bb69b056111660ee9f424255a15e4f5c0fb9c37f5b48d0e9ff80eeda",
+    "beforeBytes": 4076,
+    "afterBytes": 4021
+  },
+  {
+    "file": "game/dev/hand-pointer-review.html",
+    "beforeSha256": "5685f9fc28898c9090583d5256615aa48fd338e46faf811ad4934154fe5030ee",
+    "afterSha256": "bd47efd32f55778364c2bb90f33b6ee5a4bfb1d8530db7cf77eec1ae0e82f13d",
+    "beforeBytes": 4671,
+    "afterBytes": 4617
+  },
+  {
+    "file": "game/dev/infusion-review.html",
+    "beforeSha256": "72480559675185b8ed686579fd8f8a39c16f24102f998e9d1f1a69c6727d76cf",
+    "afterSha256": "0f9d74b4bab5b517d9345bf8825470ba6bd6a31e7bb616d25d12bdc853f5649e",
+    "beforeBytes": 6741,
+    "afterBytes": 6686
+  },
+  {
+    "file": "game/dev/map-health-review.html",
+    "beforeSha256": "183573521ea43505627e89410c97dca46123e9a4fa4da269acd6fa9be37f85e5",
+    "afterSha256": "82b21f7e5bcadac61d116a97fc7dd720e93b3c75a9b0cf3ad02f5291bb773eb1",
+    "beforeBytes": 5271,
+    "afterBytes": 5216
+  },
+  {
+    "file": "game/dev/map-overview-review.html",
+    "beforeSha256": "05b25bda4cf4a87d66e129c3fca6067172d076b297eccd11c3b212a6bbfc52e8",
+    "afterSha256": "0898b9eb83c0af798e29ffc31147a01cdc5d1a5f6795e7c5c7e15e049ad4a9c3",
+    "beforeBytes": 4032,
+    "afterBytes": 3978
+  },
+  {
+    "file": "game/dev/node-design-review.html",
+    "beforeSha256": "8083de9eac9d8c00a1399a4c5c440bd584a027988de39eb22d2160a2e64175e7",
+    "afterSha256": "f3b3d6c61759a061b34306422f33c16def3a96c0138187f8c0d691988774117d",
+    "beforeBytes": 4083,
+    "afterBytes": 4029
+  },
+  {
+    "file": "game/dev/partner-interaction-review.html",
+    "beforeSha256": "b6a65b09c9990f516803670ce4514154e849d6418c7481b93eebc563363a2c41",
+    "afterSha256": "45beddedc0b44ac6405d223cca361833297350f3f920bbda4b82b5667bf9bb09",
+    "beforeBytes": 8904,
+    "afterBytes": 8849
+  },
+  {
+    "file": "game/dev/reward-card-feedback-review.html",
+    "beforeSha256": "025c32473a089c6832eb50a48d9b4bde49269152a70ae08c85e8565a684e168b",
+    "afterSha256": "3c5bb9810cece3df9bca3e1e0494784fcb4df797ed17f1bd2b48414740d4b60e",
+    "beforeBytes": 8956,
+    "afterBytes": 8903
+  },
+  {
+    "file": "game/dev/reward-hierarchy-review.html",
+    "beforeSha256": "380cb56840befb2d543b7e8e57b09b82f2ee08848332753cc0a460aa4d929224",
+    "afterSha256": "b3106db052a64935f96f3644b2586203e6c578d51c5ad3d2dbbb76032c4fc4e8",
+    "beforeBytes": 4604,
+    "afterBytes": 4550
+  },
+  {
+    "file": "game/dev/reward-organizer-review.html",
+    "beforeSha256": "817bd190fd093942330ebeb98c981675831104e855f1a8ddceaae92f0b5d2404",
+    "afterSha256": "567904fa7b580bd71a4c18b6696c3b5ef1f1b59817ff16cd0e9f2c7d431c7c8e",
+    "beforeBytes": 5102,
+    "afterBytes": 5047
+  },
+  {
+    "file": "game/dev/reward-receipt-review.html",
+    "beforeSha256": "aee898375ce23fb9c24666301d5a0713f699e0726ef6599f09ecbad72c9e4dd5",
+    "afterSha256": "f31cc536922b6e08b53cffe77fc99e54484dcbb1f8bd32a98f92bbd928bc7312",
+    "beforeBytes": 8335,
+    "afterBytes": 8282
+  },
+  {
+    "file": "game/dev/shop-currency-review.html",
+    "beforeSha256": "67eaeb01acd0ccdbd97180dfafa2397010788833a05f7fc015430bfbd23582d0",
+    "afterSha256": "d40fc51a32ccd33369313bc071d45c4b82087a96ad8921d6fd4e8feeb4f6dacd",
+    "beforeBytes": 6627,
+    "afterBytes": 6572
+  },
+  {
+    "file": "game/dev/small-chest-review.html",
+    "beforeSha256": "745dc67eef8120caeef23a2996f65dc5f0a27839edc169fdbf41c1ff525b703f",
+    "afterSha256": "37e57d8dc93cd948c30db43d683f2bc708002a70ab689c9bf4850e64e5291580",
+    "beforeBytes": 7800,
+    "afterBytes": 7747
+  },
+  {
+    "file": "game/dev/title-resource-review.html",
+    "beforeSha256": "955f971e5db50de356cd9d8af7feb929dbe5d43d5a572420adbcbfe86f4ccbcd",
+    "afterSha256": "37443f362da977a43e8e11117b027f0e185905c69fccd29776ca92fbbdd36c90",
+    "beforeBytes": 17666,
+    "afterBytes": 17612
+  },
+  {
+    "file": "game/dev/turn-feedback-review.html",
+    "beforeSha256": "0f46f669610658b2c887be8392245e89951c75ff4250cf87dd54b6eee98d15a3",
+    "afterSha256": "810fbe6a3d4a66d12cc150513c1ac8f72424306bd97381894af0c3b890ef92e6",
+    "beforeBytes": 10016,
+    "afterBytes": 9961
+  },
+  {
+    "file": "game/index.html",
+    "beforeSha256": "7dc3827e4ecce3ec505b4d53fa4d4e30906da8712d919c1c476e11e0d5a6228d",
+    "afterSha256": "ae3f4b0d3bd2017ce2fe91fc1c58e9417d79a2a4bc202f1b7e1455e45578d85a",
+    "beforeBytes": 23150,
+    "afterBytes": 23096
+  },
+  {
+    "file": "docs/previews/card-split-20261014/runtime-acceptance.html",
+    "beforeSha256": "b141cf85d3b2fb900c25cd0c71b66c94f9d1b64269e8404ac82770f91bf0d0c8",
+    "afterSha256": "e9a7862a88e2e8944dccb8b3976450001a76d882da5ee349c2831d5147469d84",
+    "beforeBytes": 30269,
+    "afterBytes": 30215
+  },
+  {
+    "file": "tests/boot-frame-readiness.test.js",
+    "beforeSha256": "d4976d301f5db49137432af4cc5e896928b324381084e4481a7dee503449735c",
+    "afterSha256": "0c95f5ea079cf3728a14d145a78b94108b8a01acf58f31b694bcb6c0fd2645c4",
+    "beforeBytes": 8778,
+    "afterBytes": 8688
+  },
+  {
+    "file": "tests/game-canvas-resize.test.js",
+    "beforeSha256": "6dac040dfc80f58e8f866e7a54702adc4afee2a2eb24206fca55c2f039dd5d4f",
+    "afterSha256": "babd9682ff449c234e23245a0683fa83bc27cceb76033a20109bbed80454e745",
+    "beforeBytes": 5523,
+    "afterBytes": 5433
+  },
+  {
+    "file": "tests/global-boot-pointer-lifecycle.test.js",
+    "beforeSha256": "5d41ce01444e28ece4f1e590a4d61965bf86d0207b3c4e7ec58b9145faefd895",
+    "afterSha256": "64a3c7ddfac29848cf1919e28bf6dc46313bcfb1cc44fc428e502ea46077b7b7",
+    "beforeBytes": 8392,
+    "afterBytes": 8302
+  },
+  {
+    "file": "tests/light-startup-boot.test.js",
+    "beforeSha256": "05c72d96db5273d715d7ebbd2532ccae39fefac7f49f290c2e9f0e405bd6a9ad",
+    "afterSha256": "4966971ff8bc752fe2c7f57db7b4af6b12580b98295e84343dab2691db20ba20",
+    "beforeBytes": 7659,
+    "afterBytes": 7569
+  },
+  {
+    "file": "tests/nightshift-u10-teardown-guards.test.js",
+    "beforeSha256": "81196d66f6119814ecfb94b234bf55c1a3fa1eefc02afe82a3974861116672b5",
+    "afterSha256": "8de9728e91799763c985b16d1ca6f014ae6191c279a0087081f820efac4638d1",
+    "beforeBytes": 8360,
+    "afterBytes": 7591
+  },
+  {
+    "file": "tests/reward-frame-review.test.js",
+    "beforeSha256": "edd18643ccafc480c03a58048a1b38ec2c7c2547bfb74886aeead301497c8bf7",
+    "afterSha256": "b058a78e8f2974ae955a897ba8114a328d19ad39f223807fabb3c06ba96dc909",
+    "beforeBytes": 7513,
+    "afterBytes": 7448
+  },
+  {
+    "file": "tests/css-dead-dom-budget.test.js",
+    "beforeSha256": "a31437108d3604e7174a4116484ecd2662f353230c07ed5715dfad9e166b577c",
+    "afterSha256": "80090ded452ea1396ce2edc8906d5902c1dab30049332f5e37c4c0927fb67106",
+    "beforeBytes": 5780,
+    "afterBytes": 6076
+  },
+  {
+    "file": "game/css/page-shop.css",
+    "action": "delete-approved-file",
+    "beforeSha256": "2708ff907377f1884834059c83174832a30db526b186b707307deaec843ba0bf",
+    "afterSha256": null,
+    "beforeBytes": 15012,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/css/page-classes.css",
+    "action": "delete-approved-file",
+    "beforeSha256": "d866838e14cb81d13afdf816be2eb206f80dafc590adf1320b4f0cff27a8dbc7",
+    "afterSha256": null,
+    "beforeBytes": 5038,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/css/map-cover.css",
+    "action": "delete-approved-file",
+    "beforeSha256": "6a5d015a3d69e7b45bbeba55c18ee919f8ef74ce1b9d7512230279ccafc2ecba",
+    "afterSha256": null,
+    "beforeBytes": 7089,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/css/pocket-strip.css",
+    "action": "delete-approved-file",
+    "beforeSha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78",
+    "afterSha256": null,
+    "beforeBytes": 4591,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/src/experience/pocket-strip.js",
+    "action": "delete-approved-file",
+    "beforeSha256": "3923840a81444f1b488a44f3335b880bfa3b8f0010fb4e5029f8647ce8d172d5",
+    "afterSha256": null,
+    "beforeBytes": 3619,
+    "afterBytes": 0
+  }
+]

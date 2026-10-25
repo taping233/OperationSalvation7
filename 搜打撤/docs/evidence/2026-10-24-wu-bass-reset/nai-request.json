@@ -1,0 +1,102 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, adult woman, lying on her back on a soft living room rug, playing a four-string electric bass guitar resting across her torso, knees loosely bent, head near the lower right foreground, playful relaxed smile, looking toward the viewer\n\nWide game homepage wallpaper, a comfortable intimate late-night home music practice moment.\n\nWide low camera close to the rug. Her body extends diagonally from her head at the lower right toward her bent legs at the upper left. Her silver ponytail fans over the rug beside her head. One black electric bass with a cream pickguard lies across her torso, its long neck points diagonally toward the lower left foreground. Include the entire bass headstock and all four tuning pegs inside the frame. Her LEFT hand wraps naturally around the neck and presses strings just behind frets, her RIGHT index and middle fingertips pluck strings above the body pickups. Both hands are visible. Only four strings from four bridge saddles along the neck to four tuning pegs. A dark sofa, a softly lit desk, plants and a small bass amplifier sit in the background. A blue nighttime city skyline is visible through the large window. Artwork only, no actual interface.\n\nWarm amber desk lamp on the left and cool cobalt blue city window light behind the sofa. Muted charcoal upholstery, lavender pajama trousers, wool sweater, silver-white hair with coherent clean flowing locks, pale warm skin, black lacquer bass body and brushed metal frets, cozy chromatic shadows, controlled detail, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1069096999,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, thick bangs, covered forehead, goggles, sword, armor, standing, guitar with six strings, six tuning pegs, extra instrument, floating instrument, detached hands, missing bass headstock, text on paper, sheet music notation",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, silver-white very long high ponytail tied with a blue satin bow, swept-aside parted front hair, visibly exposed forehead, both blue eyes and eyebrows readable, small black rose at her left temple, black round sunglasses resting on top of her head, relaxed confident smile with a tiny fang, loose black long sleeved sweater, lavender striped pajama trousers, white socks, natural bare hands",
+          "uc": "goggles, thick bangs, hair over eyes",
+          "center": {
+            "x": 0.67,
+            "y": 0.66
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, lying on her back on a soft living room rug, playing a four-string electric bass guitar resting across her torso, knees loosely bent, head near the lower right foreground, playful relaxed smile, looking toward the viewer\n\nWide game homepage wallpaper, a comfortable intimate late-night home music practice moment.\n\nWide low camera close to the rug. Her body extends diagonally from her head at the lower right toward her bent legs at the upper left. Her silver ponytail fans over the rug beside her head. One black electric bass with a cream pickguard lies across her torso, its long neck points diagonally toward the lower left foreground. Include the entire bass headstock and all four tuning pegs inside the frame. Her LEFT hand wraps naturally around the neck and presses strings just behind frets, her RIGHT index and middle fingertips pluck strings above the body pickups. Both hands are visible. Only four strings from four bridge saddles along the neck to four tuning pegs. A dark sofa, a softly lit desk, plants and a small bass amplifier sit in the background. A blue nighttime city skyline is visible through the large window. Artwork only, no actual interface.\n\nWarm amber desk lamp on the left and cool cobalt blue city window light behind the sofa. Muted charcoal upholstery, lavender pajama trousers, wool sweater, silver-white hair with coherent clean flowing locks, pale warm skin, black lacquer bass body and brushed metal frets, cozy chromatic shadows, controlled detail, high complexity\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, silver-white very long high ponytail tied with a blue satin bow, swept-aside parted front hair, visibly exposed forehead, both blue eyes and eyebrows readable, small black rose at her left temple, black round sunglasses resting on top of her head, relaxed confident smile with a tiny fang, loose black long sleeved sweater, lavender striped pajama trousers, white socks, natural bare hands",
+              "centers": [
+                {
+                  "x": 0.67,
+                  "y": 0.66
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, child, loli, extra person, thick bangs, covered forehead, goggles, sword, armor, standing, guitar with six strings, six tuning pegs, extra instrument, floating instrument, detached hands, missing bass headstock, text on paper, sheet music notation",
+          "char_captions": [
+            {
+              "char_caption": "goggles, thick bangs, hair over eyes",
+              "centers": [
+                {
+                  "x": 0.67,
+                  "y": 0.66
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "game/assets/reconstruction/wallpaper-wu-bass-1020.webp",
+      "sha256": "a01ec7e5a298f173decbc72b9b83999dda1ba72012f265f949803603de55d9b3",
+      "role": "theme and lying composition",
+      "uploaded_to_nai": false
+    },
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "sha256": "8d976e04f8382b100ca110ab15908ae9f78f0894c7b73fd88373d47745467de5",
+      "role": "current character identity only",
+      "uploaded_to_nai": false
+    }
+  ],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-bass-reset-1024\\nai5-draft.png",
+  "seed": 1069096999,
+  "sha256": "7a8bc9facd57ce1a5c16535b097eec5e50cdc13b887af6670e892dd169aa2c2f"
+}

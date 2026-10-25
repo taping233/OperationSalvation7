@@ -1,0 +1,13 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/selection-state-motion.test.js (5 tests) 121ms
+ ✓ tests/settings-return-disclosures.test.js (1 test) 38ms
+ ✓ tests/beginner-guide-readability.test.js (3 tests) 73ms
+
+ Test Files  3 passed (3)
+      Tests  9 passed (9)
+   Start at  11:50:55
+   Duration  2.29s (transform 215ms, setup 0ms, collect 1.28s, tests 232ms, environment 3.09s, prepare 532ms)
+

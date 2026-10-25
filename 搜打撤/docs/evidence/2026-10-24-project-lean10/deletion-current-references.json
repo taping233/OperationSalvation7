@@ -1,0 +1,179 @@
+[
+  {
+    "file": "game/css/cover-remaining.css",
+    "line": 2,
+    "hits": [
+      "cover-hub.css"
+    ],
+    "text": "   cover-hub.css is an excluded, unmounted candidate under the latest freeze instruction. */"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 1,
+    "hits": [
+      "character-cover.css"
+    ],
+    "text": "/* EXP @import url('./character-cover.css'); */"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 2,
+    "hits": [
+      "character-pool-cover.css"
+    ],
+    "text": "/* EXP @import url('./character-pool-cover.css'); */"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 3,
+    "hits": [
+      "character-view-motion.css"
+    ],
+    "text": "/* EXP @import url('./character-view-motion.css'); */"
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 26,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "     2026-09-25 与 page-hub.css:31 的 page-in 入场双动画并存，此处改 none 让位 */"
+  },
+  {
+    "file": "game/css/motion-transitions.css",
+    "line": 120,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "   本文件只把 page-hub.css:31 的 hubPageIn(.34s y12) 换参数为附录 B 页签档。 */"
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 2,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "   基地·成就·收藏室页签美术升级（2026-09-24）——对标 page-hub.css /"
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 3,
+    "hits": [
+      "page-upgrade.css"
+    ],
+    "text": "   page-upgrade.css / page-slot-select.css 定稿语言："
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 13,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "     page-hub.css，本文件不碰。标题页成就总览弹层（game.menu.js"
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 205,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "/* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，"
+  },
+  {
+    "file": "game/css/page-ach.css",
+    "line": 236,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "     selBack / collZoom），本文件 T2 与 page-hub.css T2 双保险覆盖。"
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "line": 13,
+    "hits": [
+      "page-stash.css"
+    ],
+    "text": "                                B 键远征背包。基地仓库页签走 page-stash.css"
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "line": 1,
+    "hits": [
+      "settings-cover.css"
+    ],
+    "text": "/* EXP @import url('./settings-cover.css'); */"
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "line": 2,
+    "hits": [
+      "inbox-cover.css"
+    ],
+    "text": "/* EXP @import url('./inbox-cover.css'); */"
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "line": 6,
+    "hits": [
+      "page-hub.css"
+    ],
+    "text": "   选档页 page-slot-select.css、基地页 page-hub.css 的定稿语言："
+  },
+  {
+    "file": "game/css/page-slot-select.css",
+    "line": 1,
+    "hits": [
+      "slots-cover.css"
+    ],
+    "text": "/* EXP @import url('./slots-cover.css'); */"
+  },
+  {
+    "file": "game/src/hub/courtyard-vendor/SOURCE.md",
+    "line": 3,
+    "hits": [
+      "RainSimulation.js",
+      "RainRenderer.js"
+    ],
+    "text": "此目录保存锦鲤庭院运行时正本，由相邻 `hub.courtyard-v3.js` 相对导入。首次迁入与资产目录的审核副本逐文件 SHA256 一致；原始 MIT 许可证随代码保存。观雨改用项目自有 `courtyard.rain-tableau.js`；本目录的 `RainSimulation.js` 与 `RainRenderer.js` 保留为历史 MIT 审核源码，不再由庭院导入。"
+  },
+  {
+    "file": "tests/random.test.js",
+    "line": 44,
+    "hits": [
+      "RainSimulation.js"
+    ],
+    "text": "      resolve(root, 'hub/courtyard-vendor/RainSimulation.js'),"
+  },
+  {
+    "file": "tests/random.test.js",
+    "line": 45,
+    "hits": [
+      "RainRenderer.js"
+    ],
+    "text": "      resolve(root, 'hub/courtyard-vendor/RainRenderer.js'),"
+  },
+  {
+    "file": "docs/PARALLEL-REGISTRY.md",
+    "line": 56,
+    "hits": [
+      "settings-cover.css"
+    ],
+    "text": "| Friday（连续面板底色 WF-continuous-panels-1023） | `game/css/settings-navigation.css`、`game/css/settings-cover.css`、`game/css/bag-design-system.css`、`game/css/base-framework-v7.css`、`game/css/base-archive-facilities-v12.css`、`game/css/base-courty"
+  },
+  {
+    "file": "docs/PARALLEL-REGISTRY.md",
+    "line": 1321,
+    "hits": [
+      "slots-cover.css"
+    ],
+    "text": "Friday（Codex 选档天气图标 WF-slot-weather-1015），2026-10-15：`game/src/ui/slot-emblems.js`、`game/css/slots-cover.css`、`game/assets/ui/slot-weather/`五图、`game/art-source/slot-weather-20261015/`原稿及忽略项、`game/assets/asset-manifest.json`仅五项增量与count、`docs"
+  },
+  {
+    "file": "docs/PARALLEL-REGISTRY.md",
+    "line": 1413,
+    "hits": [
+      "slots-cover.css"
+    ],
+    "text": "| Friday（选档界面今日改动回退 WF-slot-weather-revert-1015） | `game/css/page-slot-select.css`、`game/css/slots-cover.css`、`game/src/ui/slot-emblems.js` 还原至 HEAD 3d02437e；`game/src/ui/game.menu.js` 仅摘除档位信息注释与「基地待命」行（保留他属读档揭幕/预热改动）；`game/assets/asset-man"
+  }
+]

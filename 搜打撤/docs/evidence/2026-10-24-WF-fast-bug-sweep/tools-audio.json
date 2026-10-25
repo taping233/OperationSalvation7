@@ -1,0 +1,45 @@
+{
+  "owner": "Friday / tools_audio_bugs",
+  "status": "complete-uncommitted",
+  "independentRootCauses": 3,
+  "fixes": [
+    {
+      "id": "FAST-T1",
+      "title": "活跃节段落登记被handoff与impact忽略",
+      "impact": "接手摘要漏掉冻结中业务占用，路径查询漏掉明确段落属地，新增登记可重复同任务编号",
+      "sources": ["scripts/workflow-ledger.mjs", "scripts/registry-paths.mjs"],
+      "tests": ["tests/project-fast-registry-prose-1024.test.js"],
+      "red": { "failed": 3 },
+      "change": "只读识别活跃节WF段落，末次明确生命周期优先，冻结/待验收继续占用；表格写入拒绝重复或覆盖段落；原表格契约保留"
+    },
+    {
+      "id": "FAST-T2",
+      "title": "驱动加载超时与失败的停止分类丢失",
+      "impact": "runner-load-timeout和runner-load-failed记录成unknown，无法按卡死和错误归因",
+      "sources": ["game/src/agent/agent.recorder.js"],
+      "tests": ["tests/project-fast-agent-stop-kind-1024.test.js"],
+      "red": { "failed": 2 },
+      "change": "对应停止码分别归stalled/error，并回归真实记录落盘字段"
+    },
+    {
+      "id": "FAST-T3",
+      "title": "被拒绝的喝药和逃跑仍记为成功操作",
+      "impact": "自动驱动战斗统计虚增喝药次数、错误记录逃跑回合",
+      "sources": ["game/src/agent/agent.runner.runtime.js"],
+      "tests": ["tests/project-fast-agent-rejected-stats-1024.test.js"],
+      "red": { "failed": 2, "passed": 2 },
+      "change": "仅受理完成成功的动作进入使用统计；true/void旧返回契约仍计数"
+    }
+  ],
+  "checks": [
+    { "kind": "existing-audio-agent-baseline", "files": 33, "passed": 350, "exitCode": 0 },
+    { "kind": "final-targeted-regression", "files": 12, "passed": 144, "exitCode": 0,
+      "tests": ["project-fast-registry-prose-1024", "project-fast-agent-stop-kind-1024", "project-fast-agent-rejected-stats-1024", "workflow-handoff", "workflow-tools", "agent-provenance-stopreason", "agent-run-provenance", "agent-recorder", "agent-runner-lazy-boundary", "agent-runner-abort", "agent-command-results", "project-bugfix-round2-agent-lifetime"] },
+    { "kind": "eslint-and-diff-check", "exitCode": 0 },
+    { "kind": "actual-registry-read", "round2": "editing", "currentSweep": "editing", "exitCode": 0 }
+  ],
+  "limits": [
+    "impact-query附加回归61通过/3失败；失败来自tests/battle-runtime-compatibility.test.js第6行动态import无法静态解析，未编辑他人文件或据此计bug",
+    "未改音频行为，未运行build、未提交推送；此批为内部工具与记录统计，不代表游戏实页通过"
+  ]
+}

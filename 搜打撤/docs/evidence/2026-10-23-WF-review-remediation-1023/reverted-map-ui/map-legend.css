@@ -1,0 +1,20 @@
+body #sidebar[data-expedition-layout="map"] .map-legend{position:absolute;right:0;bottom:calc(100% + 20px);pointer-events:auto;}
+body #sidebar .map-legend-toggle{min-height:48px;padding:10px 22px;border:1px solid #9ebbb467;background:#172a30;color:#dfebe2;font:500 22px var(--font-ui);cursor:pointer;}
+body #sidebar .map-legend-panel{width:330px;max-height:760px;box-sizing:border-box;padding:18px;overflow:auto;border:1px solid #aac5b95c;background:#17282ff5;color:#e0e9e2;}
+body #sidebar .map-legend-panel[hidden]{display:none;}
+body #sidebar .map-legend-panel header{display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:24px;}
+body #sidebar .map-legend-close{width:44px;height:44px;border:0;background:#294047;color:#e6efe9;font-size:26px;}
+body #sidebar .map-legend-panel p{font-size:18px;color:#b6ccc3;}
+body #sidebar .map-legend-item{display:flex;align-items:center;gap:16px;width:100%;min-height:65px;padding:10px 6px;border:0;border-top:1px solid #abc8bb20;background:none;color:#e6eee7;text-align:left;cursor:pointer;}
+body #sidebar .map-legend-item span:last-child{display:flex;flex-direction:column;gap:5px;}
+body #sidebar .map-legend-item b{font-size:21px;}
+body #sidebar .map-legend-item small{font-size:17px;color:#acbeb8;}
+body #sidebar .map-legend-item:is(:hover,:focus-visible){background:#36514e;outline:2px solid #c7e8d9;outline-offset:1px;}
+body #sidebar[data-map-legend-open] .expedition-map-preview{visibility:hidden;pointer-events:none;}
+body #sidebar .expedition-route-summary{position:absolute;left:0;bottom:calc(100% + 20px);width:470px;pointer-events:auto;box-sizing:border-box;padding:16px 20px;background:#15282fed;border:1px solid #9ebdb443;color:#d6e6dc;}
+body #sidebar .expedition-current-objective{display:grid;gap:8px;margin:0 0 14px;font-size:20px;line-height:1.45;}
+body #sidebar .expedition-current-objective b{color:#d7c18c;font-size:18px;}
+body #sidebar .expedition-route-summary nav{display:flex;flex-direction:column;max-height:225px;overflow:auto;gap:8px;}
+body #sidebar .expedition-route-summary button{display:flex;justify-content:space-between;gap:16px;min-height:45px;padding:10px 12px;border:1px solid #89a69e47;background:#243c40;color:#deeee1;text-align:left;font-size:20px;cursor:pointer;}
+body #sidebar .expedition-route-summary small,.map-no-routes{font-size:17px;color:#aec5bc;}
+body #sidebar .expedition-route-summary button:focus-visible{outline:2px solid #c7e8d9;outline-offset:1px;}

@@ -1,0 +1,347 @@
+{
+  "at": "2026-10-23T15:13:41.574Z",
+  "kind": "static-only",
+  "changes": [
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "expected": "dbd7407a54c1dec67436d349f0a41ff5c7b76ac7545c78be1de49ef292e2ea8f",
+      "added": 21,
+      "removed": 33,
+      "actual": "dbd7407a54c1dec67436d349f0a41ff5c7b76ac7545c78be1de49ef292e2ea8f"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "expected": "161869441c50aedf397ff260a1ade8ba57390a831f088ada13b7a25678fedf92",
+      "added": 2,
+      "removed": 2,
+      "actual": "161869441c50aedf397ff260a1ade8ba57390a831f088ada13b7a25678fedf92"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "expected": "BAA849CA5A850201C5704620911439811D27C4BC84ABDE493853B739CF9A9726",
+      "added": 1,
+      "removed": 5,
+      "actual": "baa849ca5a850201c5704620911439811d27c4bc84abde493853b739cf9a9726"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "expected": "0334AC2BF2F2065B033A683A7DC86635340170BAF5852D329249F1FD93E4D98B",
+      "added": 22,
+      "removed": 25,
+      "actual": "0334ac2bf2f2065b033a683a7dc86635340170baf5852d329249f1fd93e4d98b"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "expected": "45EDA386150581E6FFD3B90AC319CF10BBA37E12CCF1095DF5C8662807164266",
+      "added": 1,
+      "removed": 10,
+      "actual": "45eda386150581e6ffd3b90ac319cf10bba37e12ccf1095df5c8662807164266"
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "expected": "BFBEFCF92562C5864902E3901CFE18A09AA79FF0E0C285850B62576F34BAF2C5",
+      "added": 1,
+      "removed": 1,
+      "actual": "bfbefcf92562c5864902e3901cfe18a09aa79ff0e0c285850b62576f34baf2c5"
+    },
+    {
+      "file": "game/src/battle/core/combat.factory.js",
+      "expected": "9de4896aab80c55e7358d7844a7faa56211eead63efea276583c61dc520f1b21",
+      "added": 1,
+      "removed": 196,
+      "actual": "9de4896aab80c55e7358d7844a7faa56211eead63efea276583c61dc520f1b21"
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "expected": "ed3a6607e0d4ac44ea1a4873ac011d85ed4f17e28a8e829a42b3e139fab2abcc",
+      "added": 2,
+      "removed": 2,
+      "actual": "ed3a6607e0d4ac44ea1a4873ac011d85ed4f17e28a8e829a42b3e139fab2abcc"
+    },
+    {
+      "file": "tests/combat.test.js",
+      "expected": "2d7263c3680ddb51b0dc8263b9d0430ceab1db2f8118f2a9fb99a89cf66d8c3e",
+      "added": 3,
+      "removed": 2,
+      "actual": "2d7263c3680ddb51b0dc8263b9d0430ceab1db2f8118f2a9fb99a89cf66d8c3e"
+    },
+    {
+      "file": "tests/helpers/combat-self-test.js",
+      "expected": "3f79d3472ace74d164454a196ccafe591997ebafc6e17e11aafb134d43129da9",
+      "added": 194,
+      "removed": 0,
+      "actual": "3f79d3472ace74d164454a196ccafe591997ebafc6e17e11aafb134d43129da9"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "expected": "abb0bf09ee2f4ffe562c6710b47ec347060cbbe0a1c6cb1b6c833aeefd12771e",
+      "added": 11,
+      "removed": 29,
+      "actual": "abb0bf09ee2f4ffe562c6710b47ec347060cbbe0a1c6cb1b6c833aeefd12771e"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "expected": "31e628004143c9c1b3d9fa24a7514bb8ff1bcb5bdf65d7d05f5586f12ee8f05d",
+      "added": 12,
+      "removed": 22,
+      "actual": "31e628004143c9c1b3d9fa24a7514bb8ff1bcb5bdf65d7d05f5586f12ee8f05d"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "expected": "5b8d8dbded70cdb32caa6f47149e63a1330f9a2530a152cae7d874061e6383f2",
+      "added": 2,
+      "removed": 2,
+      "actual": "5b8d8dbded70cdb32caa6f47149e63a1330f9a2530a152cae7d874061e6383f2"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "expected": "e43f24cbd99136888eaeb392f39c00d17e3cddedeb2c8af17cce0096b8a6b443",
+      "added": 1,
+      "removed": 1,
+      "actual": "e43f24cbd99136888eaeb392f39c00d17e3cddedeb2c8af17cce0096b8a6b443"
+    }
+  ],
+  "totals": {
+    "added": 274,
+    "removed": 330,
+    "netRemoved": 56
+  },
+  "productionTotals": {
+    "added": 77,
+    "removed": 328,
+    "netRemoved": 251
+  },
+  "previousNet": 447,
+  "cumulativeNet": 503,
+  "cumulativeProductionNet": 698,
+  "staticImports": [
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "ref": "./cards.consts.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.catalog.js",
+      "ref": "./cards.sync.persistence.js"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "ref": "./cards.sync.backfiller.js"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "ref": "../run/game.session.js"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "ref": "../core/random.js"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "ref": "../core/turbo.js"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "ref": "../core/random-streams.js"
+    },
+    {
+      "file": "game/src/agent/agent.replay-state.js",
+      "ref": "./agent.state.js"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "ref": "../core/random.js"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "ref": "./agent.weights.js"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "ref": "../battle/bag/battle.slam-skill.js"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "ref": "./game.session.js"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "ref": "./game.run.scenes.js"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "ref": "./game.run.altar.js"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "ref": "./game.run.flow.js"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "ref": "./game.run.dev-loader.js"
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "ref": "./commands.shared.js"
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "ref": "./combat.factory.js"
+    },
+    {
+      "file": "tests/combat.test.js",
+      "ref": "../game/src/battle/core/combat.js"
+    },
+    {
+      "file": "tests/combat.test.js",
+      "ref": "./helpers/combat-self-test.js"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "ref": "../../cards/card-legacy-battle-policy.js"
+    },
+    {
+      "file": "game/src/battle/effects/battle.acquire-operation.domain.js",
+      "ref": "./effect-steps.ctx.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/sdt-facade.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-state.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/random.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/data-loader.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./game.storage.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./versioned-slot-reader.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-mutation.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-economy.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-progression.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-departure.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-pet-egg.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-elapsed.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-meta.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./collection-protection.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./stash-sale-price.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./slot-write-lock.js"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "ref": "./commands.shared.js"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "ref": "./battle-victory-progress.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./base.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./game.storage.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./run-save-validation.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "../run/map-snapshot.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./extraction.commands.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./slot-write-lock.js"
+    },
+    {
+      "file": "game/src/hub/save-archive.js",
+      "ref": "./commands.shared.js"
+    }
+  ],
+  "verification": {
+    "agentSyntaxAndDiff": "See battle/receipt.json, battle/pending-applied/receipt.json, run-agent/report.md, storage/README.md and storage/pending-applied/static-checks.json; passed static-only",
+    "currentFingerprintsMatch": true,
+    "newRelativeImportsResolve": true,
+    "selfTestRelocation": {
+      "originalBodyAstEqual": true,
+      "originalEqCallCount": 67,
+      "candidateEqCallCount": 67,
+      "capturedNames": [
+        "TYPES",
+        "addBleed",
+        "addBlessing",
+        "addCurse",
+        "breakStealth",
+        "canAct",
+        "clearBleed",
+        "dealDamage",
+        "hasCurse",
+        "isStealthed",
+        "parseNotation",
+        "purify",
+        "tickDurations",
+        "tickPoison"
+      ],
+      "allDependenciesRemainExportedByFacade": true,
+      "originalAssertionsExecuted": false
+    },
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false
+  },
+  "coordination": {
+    "threadId": "01a16894-cd23-7773-9f1b-a8995f1697f6",
+    "userAuthorized": true,
+    "sent": true,
+    "replyReceived": true,
+    "replySource": "docs/PARALLEL-REGISTRY.md WF-live-repair-1023精确属地与显式释放记录",
+    "appliedAfterBaseShaChecks": true,
+    "blocked": []
+  }
+}

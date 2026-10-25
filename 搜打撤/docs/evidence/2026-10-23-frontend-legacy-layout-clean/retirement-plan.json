@@ -1,0 +1,27 @@
+[
+  {
+    "file": "game/css/page-shop.css",
+    "sha256": "2708ff907377f1884834059c83174832a30db526b186b707307deaec843ba0bf",
+    "bytes": 15012
+  },
+  {
+    "file": "game/css/page-classes.css",
+    "sha256": "d866838e14cb81d13afdf816be2eb206f80dafc590adf1320b4f0cff27a8dbc7",
+    "bytes": 5038
+  },
+  {
+    "file": "game/css/map-cover.css",
+    "sha256": "6a5d015a3d69e7b45bbeba55c18ee919f8ef74ce1b9d7512230279ccafc2ecba",
+    "bytes": 7089
+  },
+  {
+    "file": "game/css/pocket-strip.css",
+    "sha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78",
+    "bytes": 4591
+  },
+  {
+    "file": "game/src/experience/pocket-strip.js",
+    "sha256": "3923840a81444f1b488a44f3335b880bfa3b8f0010fb4e5029f8647ce8d172d5",
+    "bytes": 3619
+  }
+]

@@ -1,0 +1,189 @@
+{
+  "date": "2026-10-25",
+  "scope": "Frontend source-only cleanup; no tests, lint, browser acceptance or build",
+  "removedKeyframeCount": 24,
+  "removedKeyframeLines": 53,
+  "removedKeyframeBytes": 2639,
+  "rules": [
+    {
+      "path": "game/css/camp-entry.css",
+      "name": "campPortraitSettle",
+      "lines": 4,
+      "bytes": 138,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/camp-entry.css",
+      "name": "campCopySettle",
+      "lines": 4,
+      "bytes": 136,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/cards.css",
+      "name": "savedGlow",
+      "lines": 1,
+      "bytes": 97,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "name": "cls2SkinSwap",
+      "lines": 1,
+      "bytes": 160,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "name": "cls2SkinFade",
+      "lines": 1,
+      "bytes": 66,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/home-polish.css",
+      "name": "homeSheen",
+      "lines": 1,
+      "bytes": 104,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/home-polish.css",
+      "name": "homeOrbitTrace",
+      "lines": 1,
+      "bytes": 93,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/home-polish.css",
+      "name": "homeOrbitSpark",
+      "lines": 1,
+      "bytes": 93,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-ach.css",
+      "name": "achSweep",
+      "lines": 4,
+      "bytes": 103,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "name": "forgePanelIn",
+      "lines": 4,
+      "bytes": 118,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "name": "forgeSealIn",
+      "lines": 4,
+      "bytes": 117,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "name": "forgeHeadIn",
+      "lines": 4,
+      "bytes": 117,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "name": "forgeRiseIn",
+      "lines": 4,
+      "bytes": 117,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "name": "forgeHintIn",
+      "lines": 4,
+      "bytes": 71,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "name": "rbhPoolBreath",
+      "lines": 1,
+      "bytes": 70,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "name": "w3-flash-gold",
+      "lines": 1,
+      "bytes": 93,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "selfPulse",
+      "lines": 2,
+      "bytes": 98,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "chestGlowPulse",
+      "lines": 1,
+      "bytes": 74,
+      "reason": "Earlier root definition overridden by later definition in the same file"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "chestShake1",
+      "lines": 1,
+      "bytes": 129,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "chestShake2",
+      "lines": 1,
+      "bytes": 153,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "chestShake3",
+      "lines": 1,
+      "bytes": 157,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "legendGlow",
+      "lines": 1,
+      "bytes": 70,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "name": "chestOpenPop",
+      "lines": 5,
+      "bytes": 217,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    },
+    {
+      "path": "game/css/winter.css",
+      "name": "czFade",
+      "lines": 1,
+      "bytes": 48,
+      "reason": "No references across runtime JS/CSS/HTML, data, dev previews, project scripts or tests"
+    }
+  ],
+  "otherChanges": [
+    "Removed unused pickLatestSlot argument from createMenuSlotPicker assembly",
+    "Removed comments belonging only to removed animation definitions",
+    "Restricted new home departure rules to non-reduced-motion preferences"
+  ],
+  "retained": [
+    "entrySupplyIntroHTML: dev preview and test imports",
+    "rewardCardStatus: test import",
+    "collectCardTips: test import"
+  ],
+  "filesDeleted": [],
+  "verification": "Not run, per user instruction; reference searches only"
+}

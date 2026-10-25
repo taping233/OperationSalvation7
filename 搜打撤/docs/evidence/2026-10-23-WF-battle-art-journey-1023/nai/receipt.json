@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "startedAt": "2026-10-23T21:37:05.962525+08:00",
+  "model": "nai-diffusion-5-full",
+  "recipeVersion": "3.4",
+  "seed": 10232301,
+  "size": [
+    1344,
+    768
+  ],
+  "referenceUploads": [],
+  "request": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-23-WF-battle-art-journey-1023\\nai\\request.json",
+  "requestSha256": "78d77342168407764f2aec649a2526b018ca103eb4df3b7500ce15f70c652289",
+  "output": "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\battle-journey-1023\\nai-winter-transit-draft.png",
+  "singleCall": true,
+  "client": "tools/nai_gen.py",
+  "guard": "tools/nai_guard.py",
+  "error": "NAI HTTP 429：冷却 15 分钟后重跑",
+  "finishedAt": "2026-10-23T21:37:06.826630+08:00"
+}

@@ -1,0 +1,513 @@
+{
+  "status": "read_only_candidate_not_applied",
+  "method": "Acorn literal-only evaluation; no game modules, migrations, or tests were executed",
+  "helperCandidate": "hosted-rule-snapshot.js.candidate.txt",
+  "helperLines": 5,
+  "files": [
+    {
+      "path": "game/src/cards/builtin-card-previous-rules.js",
+      "baseSha256": "ea2488dc18215aacb0318d4f896fe52e68532fbd49574d631d6d1e7aee41f865",
+      "exportedName": "BUILTIN_PREVIOUS_RULES",
+      "entries": 51,
+      "eligible": [
+        {
+          "id": "tt3-qi-wave",
+          "hosted": "draw-and-price-damage",
+          "start": 18,
+          "end": 25,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-chaos-eye",
+          "hosted": "chaos-eye",
+          "start": 26,
+          "end": 33,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-silver-runesword",
+          "hosted": "silver-runesword",
+          "start": 34,
+          "end": 41,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-marchrush",
+          "hosted": "last-hand-repeat-all",
+          "start": 42,
+          "end": 49,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-provoke",
+          "hosted": "foe-fight-select",
+          "start": 50,
+          "end": 57,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-arcanebolt",
+          "hosted": "damage-and-draw",
+          "start": 58,
+          "end": 65,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-assassin",
+          "hosted": "assassin",
+          "start": 66,
+          "end": 73,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-mage",
+          "hosted": "mage",
+          "start": 74,
+          "end": 81,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-descender",
+          "hosted": "consume-fireball",
+          "start": 82,
+          "end": 89,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-fatal-pierce",
+          "hosted": "bleed-gated-armor-break",
+          "start": 90,
+          "end": 97,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-frostfall",
+          "hosted": "choose-and-cast-melee",
+          "start": 98,
+          "end": 105,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-mystery-potion",
+          "hosted": "mystery-potion",
+          "start": 106,
+          "end": 113,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-magic-lamp",
+          "hosted": "three-choice-lamp",
+          "start": 114,
+          "end": 121,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3sp-silverthorn",
+          "hosted": "infused-damage-bonus",
+          "start": 122,
+          "end": 129,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3sp-flowerzhen",
+          "hosted": "double-and-burst-poison",
+          "start": 130,
+          "end": 137,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3sp-bloodstorm",
+          "hosted": "infused-repeating-lifesteal",
+          "start": 138,
+          "end": 145,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-ghostblade",
+          "hosted": "stealth-break-bonus",
+          "start": 146,
+          "end": 153,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-bloodpoison",
+          "hosted": "double-target-poison-daggers",
+          "start": 154,
+          "end": 161,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-holyheal",
+          "hosted": "infused-price-heal",
+          "start": 162,
+          "end": 169,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-stratagem",
+          "hosted": "pouch-container",
+          "start": 170,
+          "end": 177,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-meteorstrong",
+          "hosted": "infused-fireball-burst",
+          "start": 178,
+          "end": 185,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-sword",
+          "hosted": "sword",
+          "start": 186,
+          "end": 193,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-ranger",
+          "hosted": "ranger",
+          "start": 194,
+          "end": 201,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-warrior",
+          "hosted": "kill-transform",
+          "start": 202,
+          "end": 209,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-guardian",
+          "hosted": "guardian",
+          "start": 210,
+          "end": 217,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-priest",
+          "hosted": "priest",
+          "start": 218,
+          "end": 225,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-warlock",
+          "hosted": "warlock",
+          "start": 226,
+          "end": 233,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-hero-summoner",
+          "hosted": "gate-choices",
+          "start": 234,
+          "end": 241,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "cmtn233trmeg",
+          "hosted": "keep-self-in-hand",
+          "start": 255,
+          "end": 262,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-imitate",
+          "hosted": "imitate",
+          "start": 263,
+          "end": 270,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "cmtn1lbhbqi4",
+          "hosted": "charge-fireball",
+          "start": 271,
+          "end": 278,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "cmtn1wnhhym",
+          "hosted": "temporary-hand-cards",
+          "start": 299,
+          "end": 306,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "cc-mana-surge",
+          "hosted": "mana-surge",
+          "start": 307,
+          "end": 314,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "cc-poison-burst",
+          "hosted": "burst-existing-poison",
+          "start": 315,
+          "end": 322,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-abyss-sovereign",
+          "hosted": "sovereign",
+          "start": 335,
+          "end": 342,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt12-raydragon",
+          "hosted": "infused-ray",
+          "start": 343,
+          "end": 350,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt12-felguard",
+          "hosted": "infused-immune-spell",
+          "start": 351,
+          "end": 358,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt12-freezeray",
+          "hosted": "untouched-target-freeze",
+          "start": 359,
+          "end": 366,
+          "propertyOrderPreserved": true
+        }
+      ],
+      "retained": [
+        {
+          "id": "tt2-frostsword",
+          "start": 3,
+          "end": 17,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt8-hero-sealer",
+          "start": 242,
+          "end": 254,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "cmtn1ntxzoc4",
+          "start": 279,
+          "end": 298,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "cc-rot-seed",
+          "start": 323,
+          "end": 334,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-spring",
+          "start": 367,
+          "end": 378,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-snipe",
+          "start": 379,
+          "end": 390,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-guard",
+          "start": 391,
+          "end": 402,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-bitter-rain",
+          "start": 403,
+          "end": 414,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-mind-control",
+          "start": 415,
+          "end": 426,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-soul-contract",
+          "start": 427,
+          "end": 438,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-stellar-divination",
+          "start": 439,
+          "end": 450,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-chaos-deck",
+          "start": 451,
+          "end": 462,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-mercy",
+          "start": 463,
+          "end": 474,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        }
+      ],
+      "linesBefore": 475,
+      "linesCandidate": 210,
+      "netLinesRemoved": 265,
+      "candidate": "builtin-card-previous-rules.js.candidate.txt",
+      "exactSerializedValueAndKeyOrderEqualForEveryReplacedEntry": true
+    },
+    {
+      "path": "game/src/cards/builtin-equipment-previous-rules.js",
+      "baseSha256": "63d6ebcae494d3b9a221c1f345408d4e1e10c4ec468dbae5b72a455af5d47804",
+      "exportedName": "BUILTIN_EQUIPMENT_PREVIOUS_RULES",
+      "entries": 19,
+      "eligible": [
+        {
+          "id": "tt2-pearlbox",
+          "hosted": "pearl-container",
+          "start": 3,
+          "end": 10,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt2-venomstaff",
+          "hosted": "venom-staff",
+          "start": 11,
+          "end": 18,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-immortal-blade",
+          "hosted": "immortal-blade",
+          "start": 19,
+          "end": 26,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-azure-sword",
+          "hosted": "azure-sword",
+          "start": 27,
+          "end": 34,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-fate-wheel",
+          "hosted": "fate-wheel",
+          "start": 35,
+          "end": 42,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-crimson-pouch",
+          "hosted": "crimson-pouch",
+          "start": 43,
+          "end": 50,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-wolf-bow",
+          "hosted": "wolf-bow",
+          "start": 51,
+          "end": 58,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-sapper-bomb",
+          "hosted": "sapper-bomb",
+          "start": 59,
+          "end": 66,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-element-seal",
+          "hosted": "element-seal",
+          "start": 67,
+          "end": 74,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3-reverse-bow",
+          "hosted": "reverse-bow",
+          "start": 75,
+          "end": 82,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt3eq-mistbox",
+          "hosted": "cost-swap",
+          "start": 83,
+          "end": 90,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-demonslay",
+          "hosted": "ranger-chain",
+          "start": 91,
+          "end": 98,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt8-heavensword",
+          "hosted": "ranger-chain",
+          "start": 99,
+          "end": 106,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-naturestaff",
+          "hosted": "nature-staff",
+          "start": 107,
+          "end": 114,
+          "propertyOrderPreserved": true
+        },
+        {
+          "id": "tt7-darkfort",
+          "hosted": "dark-fort",
+          "start": 115,
+          "end": 122,
+          "propertyOrderPreserved": true
+        }
+      ],
+      "retained": [
+        {
+          "id": "tt13-poor-meal",
+          "start": 123,
+          "end": 134,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-magazine",
+          "start": 135,
+          "end": 146,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-scale-armor",
+          "start": 147,
+          "end": 158,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        },
+        {
+          "id": "tt13-astrolabe",
+          "start": 159,
+          "end": 170,
+          "reason": "Additional fields, structured points, or nonmatching property order; leave literal unchanged"
+        }
+      ],
+      "linesBefore": 171,
+      "linesCandidate": 67,
+      "netLinesRemoved": 104,
+      "candidate": "builtin-equipment-previous-rules.js.candidate.txt",
+      "exactSerializedValueAndKeyOrderEqualForEveryReplacedEntry": true
+    }
+  ],
+  "potentialNetLinesRemoved": 364,
+  "sharedSourceFilesModified": false
+}

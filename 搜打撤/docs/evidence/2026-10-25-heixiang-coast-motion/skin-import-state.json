@@ -1,0 +1,16 @@
+{
+  "identity": {
+    "character": "heixiang",
+    "id": "coast-half-day",
+    "name": "离岸半日",
+    "source_sha256": "b52d4b49f29eaec9a35151fb7f6cd797036c5f34094ab9d95739ee6310a41130",
+    "asset": "portraits/full/heixiang-coast-half-day.webp",
+    "quality": 94
+  },
+  "status": "complete",
+  "completed": [
+    "game\\assets\\portraits\\full\\heixiang-coast-half-day.webp",
+    "game\\src\\core\\art.js",
+    "game\\assets\\asset-manifest.json"
+  ]
+}

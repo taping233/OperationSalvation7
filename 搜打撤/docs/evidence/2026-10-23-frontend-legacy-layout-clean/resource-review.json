@@ -1,0 +1,61 @@
+{
+  "baseline": {
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "after": {
+    "warnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets."
+    ],
+    "excludedAssets": 0
+  },
+  "publicationUnchanged": true,
+  "registryChanged": false,
+  "consumers": [
+    {
+      "file": "game/css/scenes.css",
+      "beforeMatched": false,
+      "urlDeclarationsIdentical": true,
+      "beforeSha256": "89fa2779b77f5ab977b282560b94b5f30f2f95ab7523023d2921f09a8d13db40",
+      "afterSha256": "3e36930fa3131fc37d2c353ca5b04535e7fbaa7bf1f1133fa1ceaa6352aa3e66"
+    }
+  ],
+  "frozen": [
+    {
+      "file": "game/css/cover-hub.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "unchanged": true
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "unchanged": true
+    }
+  ],
+  "staleAssertions": {
+    "oldDossierAssertionExisted": true,
+    "oldDossierSelectorAlreadyAbsent": true,
+    "oldStashBranchAlreadyAbsent": true,
+    "currentWarehouseAndAchievementAssertionsRetained": true
+  }
+}

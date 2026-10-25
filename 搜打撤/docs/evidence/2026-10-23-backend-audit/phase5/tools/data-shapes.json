@@ -1,0 +1,1476 @@
+{
+  "at": "2026-10-23T15:40:10.092Z",
+  "missingSinceEntryGraph": [
+    "game/src/experience/pocket-strip.js"
+  ],
+  "groups": [
+    {
+      "shape": {
+        "object": [
+          [
+            "version",
+            {
+              "literal": "number"
+            }
+          ],
+          [
+            "battle",
+            {
+              "object": [
+                [
+                  "hosted",
+                  {
+                    "array": [
+                      {
+                        "literal": "string"
+                      }
+                    ]
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "occurrences": [
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 18,
+          "end": 25,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"draw-and-price-damage\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 26,
+          "end": 33,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"chaos-eye\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 34,
+          "end": 41,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"silver-runesword\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 42,
+          "end": 49,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"last-hand-repeat-all\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 50,
+          "end": 57,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"foe-fight-select\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 58,
+          "end": 65,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"damage-and-draw\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 66,
+          "end": 73,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"assassin\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 74,
+          "end": 81,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"mage\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 82,
+          "end": 89,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"consume-fireball\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 90,
+          "end": 97,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"bleed-gated-armor-break\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 98,
+          "end": 105,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"choose-and-cast-melee\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 106,
+          "end": 113,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"mystery-potion\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 114,
+          "end": 121,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"three-choice-lamp\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 122,
+          "end": 129,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-damage-bonus\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 130,
+          "end": 137,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"double-and-burst-poison\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 138,
+          "end": 145,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-repeating-lifesteal\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 146,
+          "end": 153,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"stealth-break-bonus\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 154,
+          "end": 161,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"double-target-poison-daggers\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 162,
+          "end": 169,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-price-heal\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 170,
+          "end": 177,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"pouch-container\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 178,
+          "end": 185,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-fireball-burst\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 186,
+          "end": 193,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"sword\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 194,
+          "end": 201,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"ranger\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 202,
+          "end": 209,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"kill-transform\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 210,
+          "end": 217,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"guardian\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 218,
+          "end": 225,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"priest\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 226,
+          "end": 233,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"warlock\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 234,
+          "end": 241,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"gate-choices\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 255,
+          "end": 262,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"keep-self-in-hand\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 263,
+          "end": 270,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"imitate\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 271,
+          "end": 278,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"charge-fireball\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 299,
+          "end": 306,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"temporary-hand-cards\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 307,
+          "end": 314,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"mana-surge\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 315,
+          "end": 322,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"burst-existing-poison\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 335,
+          "end": 342,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"sovereign\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 343,
+          "end": 350,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-ray\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 351,
+          "end": 358,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"infused-immune-spell\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 359,
+          "end": 366,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"untouched-target-freeze\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 3,
+          "end": 10,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"pearl-container\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 11,
+          "end": 18,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"venom-staff\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 19,
+          "end": 26,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"immortal-blade\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 27,
+          "end": 34,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"azure-sword\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 35,
+          "end": 42,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"fate-wheel\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 43,
+          "end": 50,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"crimson-pouch\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 51,
+          "end": 58,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"wolf-bow\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 59,
+          "end": 66,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"sapper-bomb\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 67,
+          "end": 74,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"element-seal\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 75,
+          "end": 82,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"reverse-bow\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 83,
+          "end": 90,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"cost-swap\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 91,
+          "end": 98,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"ranger-chain\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 99,
+          "end": 106,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"ranger-chain\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 107,
+          "end": 114,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"nature-staff\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 115,
+          "end": 122,
+          "lines": 8,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"hosted\": [\n        \"dark-fort\"\n      ]\n    }\n  }"
+        }
+      ],
+      "count": 53,
+      "totalLines": 424
+    },
+    {
+      "shape": {
+        "object": [
+          [
+            "version",
+            {
+              "literal": "number"
+            }
+          ],
+          [
+            "battle",
+            {
+              "object": [
+                [
+                  "target",
+                  {
+                    "object": [
+                      [
+                        "side",
+                        {
+                          "literal": "string"
+                        }
+                      ],
+                      [
+                        "area",
+                        {
+                          "literal": "boolean"
+                        }
+                      ]
+                    ]
+                  }
+                ],
+                [
+                  "hosted",
+                  {
+                    "array": [
+                      {
+                        "literal": "string"
+                      }
+                    ]
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "occurrences": [
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 367,
+          "end": 378,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-spring\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 379,
+          "end": 390,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-snipe\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 391,
+          "end": 402,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-guard\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 403,
+          "end": 414,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-bitter-rain\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 415,
+          "end": 426,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-mind-control\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 427,
+          "end": 438,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-soul-contract\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 439,
+          "end": 450,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-stellar-divination\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 451,
+          "end": 462,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-chaos-deck\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 463,
+          "end": 474,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-mercy\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 123,
+          "end": 134,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-poor-meal\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 135,
+          "end": 146,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-magazine\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 147,
+          "end": 158,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-scale-armor\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 159,
+          "end": 170,
+          "lines": 12,
+          "sample": "{\n    \"version\": 1,\n    \"battle\": {\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-astrolabe\"\n      ]\n    }\n  }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 650,
+          "end": 661,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-spring\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 670,
+          "end": 681,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-magazine\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 690,
+          "end": 701,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-snipe\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 712,
+          "end": 723,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-guard\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 732,
+          "end": 743,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-bitter-rain\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 752,
+          "end": 763,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-mind-control\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 803,
+          "end": 814,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-scale-armor\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 823,
+          "end": 834,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-astrolabe\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 843,
+          "end": 854,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-soul-contract\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 865,
+          "end": 876,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-stellar-divination\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 887,
+          "end": 898,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-chaos-deck\"\n        ]\n      }\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 907,
+          "end": 918,
+          "lines": 12,
+          "sample": "{\n      \"version\": 1,\n      \"battle\": {\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-mercy\"\n        ]\n      }\n    }"
+        }
+      ],
+      "count": 25,
+      "totalLines": 300
+    },
+    {
+      "shape": {
+        "object": [
+          [
+            "hosted",
+            {
+              "array": [
+                {
+                  "literal": "string"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "occurrences": [
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 5,
+          "end": 9,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"frost-sword\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 20,
+          "end": 24,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"draw-and-price-damage\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 28,
+          "end": 32,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"chaos-eye\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 36,
+          "end": 40,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"silver-runesword\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 44,
+          "end": 48,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"last-hand-repeat-all\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 52,
+          "end": 56,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"foe-fight-select\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 60,
+          "end": 64,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"damage-and-draw\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 68,
+          "end": 72,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"assassin\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 76,
+          "end": 80,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"mage\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 84,
+          "end": 88,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"consume-fireball\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 92,
+          "end": 96,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"bleed-gated-armor-break\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 100,
+          "end": 104,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"choose-and-cast-melee\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 108,
+          "end": 112,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"mystery-potion\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 116,
+          "end": 120,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"three-choice-lamp\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 124,
+          "end": 128,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-damage-bonus\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 132,
+          "end": 136,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"double-and-burst-poison\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 140,
+          "end": 144,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-repeating-lifesteal\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 148,
+          "end": 152,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"stealth-break-bonus\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 156,
+          "end": 160,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"double-target-poison-daggers\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 164,
+          "end": 168,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-price-heal\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 172,
+          "end": 176,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"pouch-container\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 180,
+          "end": 184,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-fireball-burst\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 188,
+          "end": 192,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"sword\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 196,
+          "end": 200,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"ranger\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 204,
+          "end": 208,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"kill-transform\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 212,
+          "end": 216,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"guardian\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 220,
+          "end": 224,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"priest\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 228,
+          "end": 232,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"warlock\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 236,
+          "end": 240,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"gate-choices\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 257,
+          "end": 261,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"keep-self-in-hand\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 265,
+          "end": 269,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"imitate\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 273,
+          "end": 277,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"charge-fireball\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 301,
+          "end": 305,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"temporary-hand-cards\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 309,
+          "end": 313,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"mana-surge\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 317,
+          "end": 321,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"burst-existing-poison\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 337,
+          "end": 341,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"sovereign\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 345,
+          "end": 349,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-ray\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 353,
+          "end": 357,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"infused-immune-spell\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 361,
+          "end": 365,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"untouched-target-freeze\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 5,
+          "end": 9,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"pearl-container\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 13,
+          "end": 17,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"venom-staff\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 21,
+          "end": 25,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"immortal-blade\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 29,
+          "end": 33,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"azure-sword\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 37,
+          "end": 41,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"fate-wheel\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 45,
+          "end": 49,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"crimson-pouch\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 53,
+          "end": 57,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"wolf-bow\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 61,
+          "end": 65,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"sapper-bomb\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 69,
+          "end": 73,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"element-seal\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 77,
+          "end": 81,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"reverse-bow\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 85,
+          "end": 89,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"cost-swap\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 93,
+          "end": 97,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"ranger-chain\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 101,
+          "end": 105,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"ranger-chain\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 109,
+          "end": 113,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"nature-staff\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 117,
+          "end": 121,
+          "lines": 5,
+          "sample": "{\n      \"hosted\": [\n        \"dark-fort\"\n      ]\n    }"
+        }
+      ],
+      "count": 54,
+      "totalLines": 270
+    },
+    {
+      "shape": {
+        "object": [
+          [
+            "target",
+            {
+              "object": [
+                [
+                  "side",
+                  {
+                    "literal": "string"
+                  }
+                ],
+                [
+                  "area",
+                  {
+                    "literal": "boolean"
+                  }
+                ]
+              ]
+            }
+          ],
+          [
+            "hosted",
+            {
+              "array": [
+                {
+                  "literal": "string"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "occurrences": [
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 281,
+          "end": 289,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-flame-form\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 369,
+          "end": 377,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-spring\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 381,
+          "end": 389,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-snipe\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 393,
+          "end": 401,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-guard\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 405,
+          "end": 413,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-bitter-rain\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 417,
+          "end": 425,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-mind-control\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 429,
+          "end": 437,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-soul-contract\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 441,
+          "end": 449,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-stellar-divination\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 453,
+          "end": 461,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-chaos-deck\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 465,
+          "end": 473,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"enemy\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-mercy\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 125,
+          "end": 133,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-poor-meal\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 137,
+          "end": 145,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-magazine\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 149,
+          "end": 157,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-scale-armor\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 161,
+          "end": 169,
+          "lines": 9,
+          "sample": "{\n      \"target\": {\n        \"side\": \"self\",\n        \"area\": false\n      },\n      \"hosted\": [\n        \"batch13-astrolabe\"\n      ]\n    }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 652,
+          "end": 660,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-spring\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 672,
+          "end": 680,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-magazine\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 692,
+          "end": 700,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-snipe\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 714,
+          "end": 722,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-guard\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 734,
+          "end": 742,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-bitter-rain\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 754,
+          "end": 762,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-mind-control\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 805,
+          "end": 813,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-scale-armor\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 825,
+          "end": 833,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-astrolabe\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 845,
+          "end": 853,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-soul-contract\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 867,
+          "end": 875,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-stellar-divination\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 889,
+          "end": 897,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"self\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-chaos-deck\"\n        ]\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 909,
+          "end": 917,
+          "lines": 9,
+          "sample": "{\n        \"target\": {\n          \"side\": \"enemy\",\n          \"area\": false\n        },\n        \"hosted\": [\n          \"batch13-mercy\"\n        ]\n      }"
+        }
+      ],
+      "count": 26,
+      "totalLines": 234
+    },
+    {
+      "shape": {
+        "object": [
+          [
+            "side",
+            {
+              "literal": "string"
+            }
+          ],
+          [
+            "area",
+            {
+              "literal": "boolean"
+            }
+          ]
+        ]
+      },
+      "occurrences": [
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 282,
+          "end": 285,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 329,
+          "end": 332,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 370,
+          "end": 373,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 382,
+          "end": 385,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 394,
+          "end": 397,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 406,
+          "end": 409,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 418,
+          "end": 421,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 430,
+          "end": 433,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 442,
+          "end": 445,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 454,
+          "end": 457,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-card-previous-rules.js",
+          "line": 466,
+          "end": 469,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"enemy\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 126,
+          "end": 129,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 138,
+          "end": 141,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 150,
+          "end": 153,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/builtin-equipment-previous-rules.js",
+          "line": 162,
+          "end": 165,
+          "lines": 4,
+          "sample": "{\n        \"side\": \"self\",\n        \"area\": false\n      }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 653,
+          "end": 656,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 673,
+          "end": 676,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 693,
+          "end": 696,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"enemy\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 715,
+          "end": 718,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 735,
+          "end": 738,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"enemy\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 755,
+          "end": 758,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"enemy\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 777,
+          "end": 780,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 806,
+          "end": 809,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 826,
+          "end": 829,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 846,
+          "end": 849,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"enemy\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 868,
+          "end": 871,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 890,
+          "end": 893,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"self\",\n          \"area\": false\n        }"
+        },
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 910,
+          "end": 913,
+          "lines": 4,
+          "sample": "{\n          \"side\": \"enemy\",\n          \"area\": false\n        }"
+        }
+      ],
+      "count": 28,
+      "totalLines": 112
+    }
+  ]
+}

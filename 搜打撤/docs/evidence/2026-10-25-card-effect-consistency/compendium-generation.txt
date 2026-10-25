@@ -1,0 +1,19 @@
+
+> codename7-soudache-game@0.60.0 docs:compendium
+> vitest run tests/compendium.test.js
+
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/compendium.test.js (13 tests) 2496ms
+   ✓ 游戏全书与运行时数据一一对应 > 对象 场景集合计数，内存生成不写文档  373ms
+   ✓ 游戏全书与运行时数据一一对应 > 数组 场景集合计数，内存生成不写文档  330ms
+   ✓ 游戏全书与运行时数据一一对应 > 封装数组 场景集合计数，内存生成不写文档  315ms
+   ✓ 游戏全书与运行时数据一一对应 > 空对象 场景集合计数，内存生成不写文档  343ms
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Start at  19:41:39
+   Duration  5.56s (transform 562ms, setup 0ms, collect 1.18s, tests 2.50s, environment 1.28s, prepare 204ms)
+

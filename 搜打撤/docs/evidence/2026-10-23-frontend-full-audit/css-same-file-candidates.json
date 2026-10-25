@@ -1,0 +1,502 @@
+{
+  "files": 171,
+  "candidates": [
+    {
+      "file": "css/wu-career-frame-preview.css",
+      "bytes": 3959,
+      "saved": 34,
+      "redundant": [
+        {
+          "selector": ".wu-preview-dialog",
+          "property": "width",
+          "value": "510px",
+          "line": 1,
+          "start": 2346,
+          "end": 2358,
+          "survivor": {
+            "file": "css/wu-career-frame-preview.css",
+            "line": 3,
+            "value": "560px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": ".wu-preview-dialog .wu-card",
+          "property": "width",
+          "value": "272px",
+          "line": 1,
+          "start": 2624,
+          "end": 2636,
+          "survivor": {
+            "file": "css/wu-career-frame-preview.css",
+            "line": 3,
+            "value": "360px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": ".wu-preview-dialog .wu-card",
+          "property": "height",
+          "value": "406px",
+          "line": 1,
+          "start": 2636,
+          "end": 2648,
+          "survivor": {
+            "file": "css/wu-career-frame-preview.css",
+            "line": 3,
+            "value": "537px"
+          },
+          "bytes": 12
+        }
+      ]
+    },
+    {
+      "file": "css/review-ui.css",
+      "bytes": 5416,
+      "saved": 14,
+      "redundant": [
+        {
+          "selector": ".slot-card-archive",
+          "property": "font-size",
+          "value": "18px",
+          "line": 24,
+          "start": 2775,
+          "end": 2790,
+          "survivor": {
+            "file": "css/review-ui.css",
+            "line": 46,
+            "value": "15px"
+          },
+          "bytes": 14
+        }
+      ]
+    },
+    {
+      "file": "css/rarity-design-lab.css",
+      "bytes": 13589,
+      "saved": 271,
+      "redundant": [
+        {
+          "selector": ".masthead",
+          "property": "height",
+          "value": "58px",
+          "line": 1,
+          "start": 468,
+          "end": 480,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 21,
+            "value": "46px"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": ".intro",
+          "property": "padding",
+          "value": "31px 0 27px",
+          "line": 1,
+          "start": 896,
+          "end": 915,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 22,
+            "value": "22px 0 20px"
+          },
+          "bytes": 19
+        },
+        {
+          "selector": ".tier-heading",
+          "property": "margin-bottom",
+          "value": "19px",
+          "line": 1,
+          "start": 2654,
+          "end": 2672,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 27,
+            "value": "14px"
+          },
+          "bytes": 18
+        },
+        {
+          "selector": ".ornament",
+          "property": "z-index",
+          "value": "4",
+          "line": 3,
+          "start": 4768,
+          "end": 4778,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 6,
+            "value": "0"
+          },
+          "bytes": 9
+        },
+        {
+          "selector": ".ornament .line",
+          "property": "stroke-width",
+          "value": "1",
+          "line": 3,
+          "start": 4898,
+          "end": 4913,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 6,
+            "value": "1.35"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": ".ornament .bold",
+          "property": "stroke-width",
+          "value": "1.5",
+          "line": 3,
+          "start": 4972,
+          "end": 4988,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 6,
+            "value": "2"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".ornament .accent",
+          "property": "fill",
+          "value": "var(--tone)",
+          "line": 3,
+          "start": 5036,
+          "end": 5053,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 9,
+            "value": "var(--paint-fill,var(--tone))"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": ".ornament .accent",
+          "property": "stroke-width",
+          "value": ".5",
+          "line": 3,
+          "start": 5073,
+          "end": 5088,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 6,
+            "value": ".7"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": ".ornament .ink",
+          "property": "fill",
+          "value": "#d7e1e5",
+          "line": 3,
+          "start": 5104,
+          "end": 5117,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 15,
+            "value": "#e8ecdf"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".ornament .ink",
+          "property": "opacity",
+          "value": ".65",
+          "line": 3,
+          "start": 5117,
+          "end": 5128,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 15,
+            "value": ".82"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": ".ornament .dark",
+          "property": "fill",
+          "value": "#162532",
+          "line": 3,
+          "start": 5145,
+          "end": 5158,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 14,
+            "value": "#172633"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": ".ornament .dark",
+          "property": "opacity",
+          "value": ".8",
+          "line": 3,
+          "start": 5158,
+          "end": 5168,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 14,
+            "value": ".88"
+          },
+          "bytes": 10
+        },
+        {
+          "selector": ".tier-1",
+          "property": "--ornament-opacity",
+          "value": ".46",
+          "line": 3,
+          "start": 5242,
+          "end": 5264,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 7,
+            "value": ".8"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": ".tier-2",
+          "property": "--ornament-opacity",
+          "value": ".6",
+          "line": 3,
+          "start": 5273,
+          "end": 5294,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 7,
+            "value": ".9"
+          },
+          "bytes": 21
+        },
+        {
+          "selector": ".tier-3",
+          "property": "--ornament-opacity",
+          "value": ".78",
+          "line": 3,
+          "start": 5303,
+          "end": 5325,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 7,
+            "value": ".96"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": ".tier-4",
+          "property": "--ornament-opacity",
+          "value": ".86",
+          "line": 3,
+          "start": 5334,
+          "end": 5356,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 7,
+            "value": "1"
+          },
+          "bytes": 22
+        },
+        {
+          "selector": ".ornament .dark",
+          "property": "opacity",
+          "value": ".96",
+          "line": 6,
+          "start": 7060,
+          "end": 7071,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 14,
+            "value": ".88"
+          },
+          "bytes": 11
+        },
+        {
+          "selector": ".ornament .ink",
+          "property": "opacity",
+          "value": ".9",
+          "line": 6,
+          "start": 7121,
+          "end": 7131,
+          "survivor": {
+            "file": "css/rarity-design-lab.css",
+            "line": 15,
+            "value": ".82"
+          },
+          "bytes": 10
+        }
+      ]
+    },
+    {
+      "file": "css/expedition-rewards.css",
+      "bytes": 26351,
+      "saved": 26,
+      "redundant": [
+        {
+          "selector": "#overlay .node-main",
+          "property": "justify-content",
+          "value": "flex-start",
+          "line": 136,
+          "start": 16686,
+          "end": 16713,
+          "survivor": {
+            "file": "css/expedition-rewards.css",
+            "line": 136,
+            "value": "safe center"
+          },
+          "bytes": 26
+        }
+      ]
+    },
+    {
+      "file": "css/cover-details.css",
+      "bytes": 11101,
+      "saved": 27,
+      "redundant": [
+        {
+          "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #cardZoom:not(.cz-photo)",
+          "property": "justify-content",
+          "value": "flex-start",
+          "line": 47,
+          "start": 5081,
+          "end": 5109,
+          "survivor": {
+            "file": "css/cover-details.css",
+            "line": 47,
+            "value": "safe center"
+          },
+          "bytes": 27
+        }
+      ]
+    },
+    {
+      "file": "css/battle-stage.css",
+      "bytes": 37350,
+      "saved": 33,
+      "redundant": [
+        {
+          "selector": "#overlay .battle-stage.sts .sts-headrow",
+          "property": "display",
+          "value": "flex",
+          "line": 54,
+          "start": 7869,
+          "end": 7882,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 249,
+            "value": "none"
+          },
+          "bytes": 12
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-headrow",
+          "property": "font-size",
+          "value": "24px",
+          "line": 54,
+          "start": 7958,
+          "end": 7973,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 249,
+            "value": "20px"
+          },
+          "bytes": 14
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .bt-infchip",
+          "property": "top",
+          "value": "8px",
+          "line": 141,
+          "start": 21744,
+          "end": 21752,
+          "survivor": {
+            "file": "css/battle-stage.css",
+            "line": 142,
+            "value": "56px"
+          },
+          "bytes": 7
+        }
+      ]
+    },
+    {
+      "file": "css/battle-discover.css",
+      "bytes": 11974,
+      "saved": 78,
+      "redundant": [
+        {
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+          "property": "min-height",
+          "value": "38px",
+          "line": 114,
+          "start": 10155,
+          "end": 10171,
+          "survivor": {
+            "file": "css/battle-discover.css",
+            "line": 127,
+            "value": "38px"
+          },
+          "bytes": 15
+        },
+        {
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+          "property": "padding",
+          "value": "5px 14px",
+          "line": 114,
+          "start": 10172,
+          "end": 10189,
+          "survivor": {
+            "file": "css/battle-discover.css",
+            "line": 127,
+            "value": "0"
+          },
+          "bytes": 16
+        },
+        {
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+          "property": "border",
+          "value": "0",
+          "line": 114,
+          "start": 10190,
+          "end": 10199,
+          "survivor": {
+            "file": "css/battle-discover.css",
+            "line": 127,
+            "value": "1px solid #9cb5c55e"
+          },
+          "bytes": 8
+        },
+        {
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+          "property": "text-decoration",
+          "value": "underline",
+          "line": 114,
+          "start": 10200,
+          "end": 10226,
+          "survivor": {
+            "file": "css/battle-discover.css",
+            "line": 127,
+            "value": "none"
+          },
+          "bytes": 25
+        },
+        {
+          "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-card-inspect",
+          "property": "font-size",
+          "value": "18px",
+          "line": 114,
+          "start": 10242,
+          "end": 10257,
+          "survivor": {
+            "file": "css/battle-discover.css",
+            "line": 127,
+            "value": "27px"
+          },
+          "bytes": 14
+        }
+      ]
+    }
+  ]
+}

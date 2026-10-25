@@ -1,0 +1,51 @@
+{
+  "mode": "built-in image_gen edit",
+  "scope": "mid and foreground only",
+  "assets": [
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-44a24631-f4af-44eb-84a8-27f8dd447c58.png",
+      "sourceSha256": "8986e9ce09f1c6a09ee6c0f640cf7391262d0b093dcdd3b06bf9b226f109ddc8",
+      "previousSha256": "b2c1faacb71767ba34663de155ae617cb84ebc59d25f79103b5630a1f31f6082",
+      "sha256": "4497e6eda563c105e73647f1b7cbb74ed556e920db516beae3d83ec3bd25798f",
+      "bytes": 34798,
+      "size": [
+        1659,
+        948
+      ],
+      "sourceSize": [
+        1658,
+        949
+      ],
+      "alpha": true,
+      "processing": "RGBA WebP quality94; full canvas; no crop; 1px generated size drift normalized when needed",
+      "backup": ".tmp\\station-local-unify-1025\\before\\mid.webp"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-60a70391-430e-46f2-9ccc-caa3d0de72a6.png",
+      "sourceSha256": "92913ae847a16d6ad58665c270574dc26e4cd4dcf9638df2f9f0ef01b9a90d73",
+      "previousSha256": "c0793fa2d86e5d87ea669238a10697581509ae39d68a546b626109d8ad138144",
+      "sha256": "cb7b40125c1709aff23759747c84abea24855a9e3ec27211df0ed35551baa574",
+      "bytes": 75372,
+      "size": [
+        1659,
+        948
+      ],
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "alpha": true,
+      "processing": "RGBA WebP quality94; full canvas; no crop; 1px generated size drift normalized when needed",
+      "backup": ".tmp\\station-local-unify-1025\\before\\foreground.webp"
+    }
+  ],
+  "unchanged": [
+    "far.webp",
+    "ground.webp",
+    "battle.scenery.js",
+    "人物、UI与站脚线"
+  ],
+  "verification": "No tests, browser acceptance or build; implementation only"
+}

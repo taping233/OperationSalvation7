@@ -1,0 +1,73 @@
+@import url('./ui-design-system.css');
+/* Continuous teal surfaces retain the existing map scene and card identity.
+   Preserve five-column geometry, real card faces, drag hit areas and all input layers. */
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 {
+  --bag-stage:#10272e; --bag-deep:#17313b; --bag-paper:#e3ece8; --bag-glass:#162f38;
+  --bag-light:rgba(49,79,87,.44); --bag-edge:#91c2c6; --bag-gold:#c9b477; --bag-type-title:var(--ui-text-title); --bag-type-number:38px;
+  --ui-ink:var(--bag-paper); --ui-muted:#9fb9bd; --ui-line:#91c2c638;
+  --ui-blue:#9fc7cb; --ui-on-primary:#163239; --ui-panel:var(--bag-glass);
+  --ui-gold:var(--bag-gold); --archive-back-color:var(--bag-paper);
+  background:var(--bag-stage); color:var(--ui-ink); font-size:var(--ui-text-body);
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-bg { opacity:.94; filter:blur(9px) brightness(.8) saturate(.85); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-shell { background:linear-gradient(145deg,#20505b35,#16494026 58%,#133d522e); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rail {
+  border:1px solid var(--ui-line); border-radius:14px;
+  background:linear-gradient(160deg,#436f7b70,#21475299 58%,#17313ba3), #17313b;
+  box-shadow:inset 0 1px 0 #d9f5ec33,inset 1px 0 0 #d9f5ec0d,0 12px 28px #03121b4d;
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rz {
+  border-radius:8px; border-color:transparent; background:transparent; color:var(--ui-muted);
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rz:hover:not(.on) { background:#91c2c626; color:var(--bag-paper); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rz.on { background:linear-gradient(140deg,#669aa96b,#30616ba3); color:var(--bag-paper); box-shadow:inset 2px 0 var(--bag-gold),inset 0 1px 0 #d5f5ef38,0 4px 12px #061b2533; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rz .bag-bdg { border-radius:6px; background:#18323bd9; color:var(--bag-paper); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-rz.on .bag-bdg { background:#b1a67d40; color:#e6d6a7; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-head2 {
+  gap:var(--ui-space-6); align-items:stretch; padding:0 0 var(--ui-space-6); border-color:var(--ui-line);
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title {
+  display:flex; flex-direction:column; justify-content:center; box-sizing:border-box; min-width:400px;
+  padding:var(--ui-space-4) var(--ui-space-6); border:1px solid #91c2c62b; border-left:2px solid #c9b47799; border-radius:10px;
+  background:linear-gradient(135deg,#436b7659,#244d5433); box-shadow:inset 0 1px 0 #d9f5ec26,0 6px 18px #061b2526;
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-head2 h2 { margin:0; color:var(--bag-paper); font-size:var(--bag-type-title); font-weight:700; letter-spacing:.02em; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title .bag-guide-trigger { border-color:var(--ui-line); border-radius:6px; background:#264f5c4d; color:var(--bag-paper); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-title .bag-guide-trigger:hover { background:#527e8a59; border-color:var(--bag-edge); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capchip { align-self:center; flex-wrap:wrap; justify-content:flex-end; gap:var(--ui-space-2) var(--ui-space-3); max-width:760px; padding:var(--ui-space-2) 0; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 :is(.bag-capk,.bag-capchip small) { color:var(--ui-muted); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capchip b { color:var(--bag-paper); font-size:var(--bag-type-number); line-height:1.15; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capbar { order:4; flex-basis:100%; width:100%; max-width:360px; height:3px; margin-left:auto; border-radius:2px; background:#91c2c62b; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-capbar i { border-radius:0; background:var(--bag-gold); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-count-summary { flex-basis:100%; color:var(--ui-muted); text-align:right; font:400 var(--ui-text-label)/1.4 var(--font-ui); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-count-summary strong { color:var(--bag-paper); font-weight:600; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tools { flex-wrap:wrap; gap:0 var(--ui-space-2); padding:var(--ui-space-4) 0; border-color:var(--ui-line); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-pill { min-height:var(--ui-control-height); padding:var(--ui-space-3) var(--ui-space-6); border:1px solid #91c2c61a; border-radius:6px; background:#234b5426; color:var(--ui-muted); font-size:var(--ui-text-body); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-pill:hover:not(.on) { background:#527e8a40; color:var(--bag-paper); border-color:#91c2c666; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-pill.on { border-color:#91c2c66b; background:linear-gradient(140deg,#6c9ba973,#2c616da3); color:var(--bag-paper); box-shadow:inset 0 1px 0 #d9f5ec40,inset 0 -2px #c9b477a6,0 4px 12px #071a2526; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn { border-color:var(--ui-line); border-radius:6px; background:#244b5659; color:var(--ui-muted); box-shadow:inset 0 1px 0 #d9f5ec1a,0 3px 8px #061b2526; width:var(--ui-control-compact); height:var(--ui-control-compact); min-height:var(--ui-control-compact); padding:0; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn.gold { background:#344e4b73; color:#dccb99; border-color:#c9b4774d; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn:hover { background:#527e8a66; color:var(--bag-paper); border-color:var(--bag-edge); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-board {
+  margin-top:var(--ui-space-4); padding:var(--ui-space-6) 20px;
+  border-color:#91c2c62b; border-radius:12px;
+  background:linear-gradient(145deg,rgba(29,65,73,.34),rgba(20,44,54,.52)), #17313b;
+  box-shadow:inset 0 1px 0 #d9f5ec26,0 12px 30px #03121b40;
+  backdrop-filter:none; -webkit-backdrop-filter:none; scrollbar-color:#91c2c666 transparent;
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile { border-radius:0; background:transparent; }
+/* Card artwork supplies its own frame; suppress the slot and motion outline. */
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.card-face {
+  border-color:transparent; box-shadow:none; outline:none !important;
+}
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.card-face:focus-visible .hs-card { filter:brightness(1.08); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile::before { border-radius:0; background:none; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile:not(.card-face) { background:#244c5659; border-bottom-color:var(--ui-line); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile.sel { border-color:var(--bag-gold); box-shadow:0 0 0 1.5px var(--bag-gold),0 10px 30px #00000059; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tile:focus-visible { outline:var(--ui-focus-width) solid var(--bag-gold); outline-offset:2px; }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-tnm { color:var(--bag-paper); font-size:var(--ui-text-body); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-receipt { margin:0 0 var(--ui-space-3); padding:var(--ui-space-3) var(--ui-space-4); border:0; border-left:2px solid var(--bag-gold); border-radius:6px; background:#244c566b; color:var(--ui-ink); font:400 var(--ui-text-label)/1.5 var(--font-ui); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-empty2 { display:flex; align-items:center; justify-content:center; gap:var(--ui-space-6); min-height:280px; border-bottom:1px solid var(--ui-line); color:var(--ui-muted); font-size:var(--ui-text-body); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 button:focus-visible { outline:var(--ui-focus-width) solid var(--bag-gold); outline-offset:var(--ui-focus-offset); }
+body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 :is(.bag-rail,.bag-title) button:focus-visible { outline-color:var(--bag-edge); }

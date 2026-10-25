@@ -1,0 +1,11 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+··········································································································
+
+ Test Files  7 passed (7)
+      Tests  106 passed (106)
+   Start at  18:49:14
+   Duration  10.43s (transform 704ms, setup 0ms, collect 2.32s, tests 9.04s, environment 16.43s, prepare 1.62s)
+

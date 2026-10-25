@@ -1,0 +1,99 @@
+{
+  "mode": "built-in image_gen edit",
+  "scope": "same four scene layers repainted in default block-brush style",
+  "styleAuthority": "docs/production/art/ART-STYLE-V1.md",
+  "references": [
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+      "sha256": "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+      "bytes": 1445565,
+      "role": "Technique only; no identity, props, text or palette copied"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+      "sha256": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985",
+      "bytes": 1879478,
+      "role": "Technique only; no identity, props, text or palette copied"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-07.jpg",
+      "sha256": "23eedd926340a1f84082a40ea78d9c30116d3bbf8b865c251964b30f65ee7b72",
+      "bytes": 643441,
+      "role": "Technique only; no identity, props, text or palette copied"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg",
+      "sha256": "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985",
+      "bytes": 843256,
+      "role": "Technique only; no identity, props, text or palette copied"
+    }
+  ],
+  "assets": [
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/far.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-6e410a29-b97c-4b37-9ac7-fcee1e124851.png",
+      "sourceSha256": "fa0df6cc6f40510d9b180c31035f2c46af90fe13292aaebb3ce6f6c9080881b7",
+      "previousSha256": "a10a5e7a7f831b130126791cf2f2bf57e6bdc08b314691070705edb7d4aba859",
+      "sha256": "050d9ec2fd7ffe566b576ee937d232c5cef7806a76fd9c112d0f14470996d75e",
+      "bytes": 183246,
+      "size": [
+        1659,
+        948
+      ],
+      "alpha": false,
+      "backup": ".tmp\\station-default-brush-1025\\before\\far.webp",
+      "processing": "WebP quality94; full original canvas; no resize, crop, filter or compositing"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/mid.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-e2a19e12-0eb0-4181-b8ff-7b4e6e2772dd.png",
+      "sourceSha256": "14bd3e236b0cd3c6d03656e46629ebeafbf2e41bda839b102330d0d4a97c940d",
+      "previousSha256": "4497e6eda563c105e73647f1b7cbb74ed556e920db516beae3d83ec3bd25798f",
+      "sha256": "440a84fa89866250bac5211613cb1c7eebbf80bb5d48beefdb3c8cce8e72ec09",
+      "bytes": 51562,
+      "size": [
+        1659,
+        948
+      ],
+      "alpha": true,
+      "backup": ".tmp\\station-default-brush-1025\\before\\mid.webp",
+      "processing": "WebP quality94; full original canvas; no resize, crop, filter or compositing"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/ground.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-26298394-e0ba-4210-85c4-f58a53555761.png",
+      "sourceSha256": "e8e0259f7437606b60240a2225dd999902010a298942978d90ab883a4dd8d838",
+      "previousSha256": "a240d9357643026ce973a7ccae0f29c51a02ee487711c16a0bd33f415416f4ec",
+      "sha256": "1745ba35497c047d8fbde33555fcfa12e45b835df6e43fe2905fc814389d1169",
+      "bytes": 121902,
+      "size": [
+        1659,
+        948
+      ],
+      "alpha": true,
+      "backup": ".tmp\\station-default-brush-1025\\before\\ground.webp",
+      "processing": "WebP quality94; full original canvas; no resize, crop, filter or compositing"
+    },
+    {
+      "path": "scenes/battle/platform-painterly-1025-v3/foreground.webp",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1721e-ce36-7c13-ac09-feb39c7bf159\\exec-b00849ac-7c87-4b6a-8fa3-f7ef9d6b5c97.png",
+      "sourceSha256": "4768a459e52f31348d16d12eefc362bc7937f756776f440b70e767bd343012a6",
+      "previousSha256": "cb7b40125c1709aff23759747c84abea24855a9e3ec27211df0ed35551baa574",
+      "sha256": "66f512b3a2e18083861107c3b12430e831434c09ef34446e99b8675c51d3e679",
+      "bytes": 151640,
+      "size": [
+        1659,
+        948
+      ],
+      "alpha": true,
+      "backup": ".tmp\\station-default-brush-1025\\before\\foreground.webp",
+      "processing": "WebP quality94; full original canvas; no resize, crop, filter or compositing"
+    }
+  ],
+  "unchanged": [
+    "battle.scenery.js and consumers",
+    "人物、UI、站位与站脚线",
+    "玩法与存档"
+  ],
+  "verification": "No tests, browser acceptance or build; generated layers visually reviewed only"
+}

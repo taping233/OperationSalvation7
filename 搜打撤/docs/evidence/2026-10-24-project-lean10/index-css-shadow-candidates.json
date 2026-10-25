@@ -1,0 +1,2177 @@
+{
+  "note": "Candidate declarations only; same exact selector at root in fixed index stylesheet order. Needs fallback/value and external file-consumer review before applying.",
+  "files": [
+    "game/css/base.css",
+    "game/css/cards.css",
+    "game/css/overlays.css",
+    "game/css/hub.css",
+    "game/css/battle.css",
+    "game/css/scenes.css",
+    "game/css/lab-ending.css",
+    "game/css/winter.css",
+    "game/css/expedition.css",
+    "game/css/expedition-map.css",
+    "game/css/map-edge-light.css",
+    "game/css/expedition-hub.css",
+    "game/css/expedition-inventory.css",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-battle.css",
+    "game/css/expedition-library.css",
+    "game/css/card-v3.css",
+    "game/css/expedition-roster.css",
+    "game/css/expedition-shop.css",
+    "game/css/ui-scale.css",
+    "game/css/page-slot-select.css",
+    "game/css/page-settings.css",
+    "game/css/page-datapage.css",
+    "game/css/page-ach.css",
+    "game/css/page-cardforge.css",
+    "game/css/page-expedition-hud.css",
+    "game/css/feedback-oct12.css",
+    "game/css/roster-departure-v2.css",
+    "game/css/experience-loot.css",
+    "game/css/page-events.css",
+    "game/css/page-rewards-bag-help.css",
+    "game/css/page-battle-ui.css",
+    "game/css/character-idle.css",
+    "game/css/page-transitions.css",
+    "game/css/ak-skin.css",
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/card-layout-selected.css",
+    "game/css/battle-stage.css",
+    "game/css/transition-illustrations.css"
+  ],
+  "records": 266,
+  "bytes": 7556,
+  "declarations": [
+    {
+      "file": "game/css/cards.css",
+      "line": 151,
+      "prop": "display",
+      "selector": ".shop-slot",
+      "supersededBy": "game/css/scenes.css:345",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 151,
+      "prop": "flex-direction",
+      "selector": ".shop-slot",
+      "supersededBy": "game/css/scenes.css:345",
+      "bytes": 22
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 151,
+      "prop": "align-items",
+      "selector": ".shop-slot",
+      "supersededBy": "game/css/scenes.css:345",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 151,
+      "prop": "gap",
+      "selector": ".shop-slot",
+      "supersededBy": "game/css/scenes.css:345",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 152,
+      "prop": "transition",
+      "selector": ".shop-slot",
+      "supersededBy": "game/css/scenes.css:346",
+      "bytes": 31
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 153,
+      "prop": "transform",
+      "selector": ".shop-slot:hover",
+      "supersededBy": "game/css/scenes.css:347",
+      "bytes": 27
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 159,
+      "prop": "text-shadow",
+      "selector": "#layerBanner .lb-zh",
+      "supersededBy": "game/css/scenes.css:443",
+      "bytes": 37
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 105,
+      "prop": "background",
+      "selector": "::selection",
+      "supersededBy": "game/css/winter.css:3",
+      "bytes": 32
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 108,
+      "prop": "background",
+      "selector": "::-webkit-scrollbar-thumb",
+      "supersededBy": "game/css/winter.css:3",
+      "bytes": 27
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 108,
+      "prop": "border-radius",
+      "selector": "::-webkit-scrollbar-thumb",
+      "supersededBy": "game/css/winter.css:3",
+      "bytes": 31
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 96,
+      "prop": "letter-spacing",
+      "selector": ".title-ver",
+      "supersededBy": "game/css/winter.css:17",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 96,
+      "prop": "color",
+      "selector": ".title-ver",
+      "supersededBy": "game/css/winter.css:17",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 97,
+      "prop": "font-size",
+      "selector": ".exit-msg",
+      "supersededBy": "game/css/winter.css:20",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 97,
+      "prop": "letter-spacing",
+      "selector": ".exit-msg",
+      "supersededBy": "game/css/winter.css:20",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 127,
+      "prop": "padding",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 127,
+      "prop": "gap",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 125,
+      "prop": "border-top",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 36
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 122,
+      "prop": "background",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 101
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 126,
+      "prop": "box-shadow",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 76
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 216,
+      "prop": "display",
+      "selector": "#charPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 216,
+      "prop": "align-items",
+      "selector": "#charPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 216,
+      "prop": "min-width",
+      "selector": "#charPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 216,
+      "prop": "padding",
+      "selector": "#charPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 218,
+      "prop": "width",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 218,
+      "prop": "min-width",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 218,
+      "prop": "height",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 218,
+      "prop": "border-radius",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 221,
+      "prop": "border",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 223,
+      "prop": "box-shadow",
+      "selector": ".hero-ava",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 69
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 251,
+      "prop": "background",
+      "selector": "#bagBtn",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 74
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 252,
+      "prop": "border",
+      "selector": "#bagBtn",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 32
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 250,
+      "prop": "padding",
+      "selector": "#bagBtn",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 130,
+      "prop": "min-width",
+      "selector": "#statsPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 130,
+      "prop": "flex",
+      "selector": "#statsPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 202,
+      "prop": "display",
+      "selector": "#statsPanel",
+      "supersededBy": "game/css/winter.css:21",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 131,
+      "prop": "min-width",
+      "selector": "#devPanel",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 155,
+      "prop": "top",
+      "selector": "#layerBanner",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 157,
+      "prop": "padding",
+      "selector": "#layerBanner",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 159,
+      "prop": "letter-spacing",
+      "selector": "#layerBanner .lb-zh",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 134,
+      "prop": "left",
+      "selector": "#topBtns",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 134,
+      "prop": "top",
+      "selector": "#topBtns",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 137,
+      "prop": "top",
+      "selector": "#resHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 137,
+      "prop": "right",
+      "selector": "#resHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 178,
+      "prop": "background",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 74
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 178,
+      "prop": "border",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 178,
+      "prop": "box-shadow",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 73
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 178,
+      "prop": "clip-path",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 63
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 184,
+      "prop": "font-weight",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 184,
+      "prop": "letter-spacing",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/winter.css:24",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 140,
+      "prop": "background",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 74
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 140,
+      "prop": "border",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 143,
+      "prop": "box-shadow",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 76
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 139,
+      "prop": "min-width",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 139,
+      "prop": "height",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 150,
+      "prop": "color",
+      "selector": "#resHud .res-gold b",
+      "supersededBy": "game/css/winter.css:25",
+      "bytes": 23
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 271,
+      "prop": "background",
+      "selector": "#overlay",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 27
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 271,
+      "prop": "backdrop-filter",
+      "selector": "#overlay",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 293,
+      "prop": "background",
+      "selector": "#overlay.opaque",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 293,
+      "prop": "backdrop-filter",
+      "selector": "#overlay.opaque",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 312,
+      "prop": "border",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 311,
+      "prop": "background",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 53
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 313,
+      "prop": "box-shadow",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 78
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 312,
+      "prop": "border-radius",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 28,
+      "prop": "background",
+      "selector": ".pg-close",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 28,
+      "prop": "border",
+      "selector": ".pg-close",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 31,
+      "prop": "background",
+      "selector": ".pg-close:hover",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 254,
+      "prop": "background",
+      "selector": ".ov-btn.danger",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 254,
+      "prop": "color",
+      "selector": ".ov-btn.danger",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 254,
+      "prop": "border-color",
+      "selector": ".ov-btn.danger",
+      "supersededBy": "game/css/winter.css:26",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 167,
+      "prop": "background",
+      "selector": ".slot-card",
+      "supersededBy": "game/css/winter.css:27",
+      "bytes": 74
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 168,
+      "prop": "box-shadow",
+      "selector": ".slot-card",
+      "supersededBy": "game/css/winter.css:27",
+      "bytes": 76
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 270,
+      "prop": "background",
+      "selector": ".bag-slot",
+      "supersededBy": "game/css/winter.css:27",
+      "bytes": 31
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 270,
+      "prop": "border-radius",
+      "selector": ".bag-slot",
+      "supersededBy": "game/css/winter.css:27",
+      "bytes": 34
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 40,
+      "prop": "letter-spacing",
+      "selector": ".flow-title",
+      "supersededBy": "game/css/winter.css:27",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 196,
+      "prop": "font-size",
+      "selector": ".slot-card-desc .si-line em",
+      "supersededBy": "game/css/winter.css:60",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 200,
+      "prop": "font-size",
+      "selector": ".slot-card-desc .si-sub",
+      "supersededBy": "game/css/winter.css:62",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 201,
+      "prop": "font-size",
+      "selector": ".slot-page .slot-empty",
+      "supersededBy": "game/css/winter.css:63",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 169,
+      "prop": "transition",
+      "selector": ".slot-card",
+      "supersededBy": "game/css/winter.css:70",
+      "bytes": 62
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 194,
+      "prop": "font-size",
+      "selector": ".slot-page .slot-card-desc",
+      "supersededBy": "game/css/winter.css:268",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 194,
+      "prop": "line-height",
+      "selector": ".slot-page .slot-card-desc",
+      "supersededBy": "game/css/winter.css:268",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 194,
+      "prop": "color",
+      "selector": ".slot-page .slot-card-desc",
+      "supersededBy": "game/css/winter.css:268",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 269,
+      "prop": "display",
+      "selector": ".bag-grid",
+      "supersededBy": "game/css/winter.css:392",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 269,
+      "prop": "gap",
+      "selector": ".bag-grid",
+      "supersededBy": "game/css/winter.css:392",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 269,
+      "prop": "grid-template-columns",
+      "selector": ".bag-grid",
+      "supersededBy": "game/css/winter.css:441",
+      "bytes": 37
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 157,
+      "prop": "background",
+      "selector": "#layerBanner",
+      "supersededBy": "game/css/winter.css:470",
+      "bytes": 106
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 286,
+      "prop": "background",
+      "selector": "#overlay .card.bag-page",
+      "supersededBy": "game/css/winter.css:495",
+      "bytes": 142
+    },
+    {
+      "file": "game/css/cards.css",
+      "line": 16,
+      "prop": "width",
+      "selector": "#overlay .card.wide",
+      "supersededBy": "game/css/winter.css:578",
+      "bytes": 22
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 160,
+      "prop": "font-family",
+      "selector": "#layerBanner .lb-en",
+      "supersededBy": "game/css/winter.css:890",
+      "bytes": 30
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 160,
+      "prop": "font-size",
+      "selector": "#layerBanner .lb-en",
+      "supersededBy": "game/css/winter.css:890",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 160,
+      "prop": "letter-spacing",
+      "selector": "#layerBanner .lb-en",
+      "supersededBy": "game/css/winter.css:890",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 160,
+      "prop": "color",
+      "selector": "#layerBanner .lb-en",
+      "supersededBy": "game/css/winter.css:890",
+      "bytes": 23
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 160,
+      "prop": "text-shadow",
+      "selector": "#layerBanner .lb-en",
+      "supersededBy": "game/css/winter.css:890",
+      "bytes": 37
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 4,
+      "prop": "background",
+      "selector": "#title::after",
+      "supersededBy": "game/css/expedition.css:13",
+      "bytes": 117
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 127,
+      "prop": "display",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:279",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "height",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:280",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "min-height",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:280",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "gap",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:280",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "padding",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:280",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "border-top",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:280",
+      "bytes": 28
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "overflow",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:281",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "box-shadow",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/expedition.css:281",
+      "bytes": 32
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "padding",
+      "selector": "#sidebar .panel",
+      "supersededBy": "game/css/expedition.css:283",
+      "bytes": 22
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "border",
+      "selector": "#sidebar .panel",
+      "supersededBy": "game/css/expedition.css:283",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "background",
+      "selector": "#sidebar .panel",
+      "supersededBy": "game/css/expedition.css:283",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "box-shadow",
+      "selector": "#sidebar .panel",
+      "supersededBy": "game/css/expedition.css:283",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 134,
+      "prop": "gap",
+      "selector": "#topBtns",
+      "supersededBy": "game/css/expedition.css:293",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 238,
+      "prop": "color",
+      "selector": "#hpText",
+      "supersededBy": "game/css/expedition.css:296",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 470,
+      "prop": "background",
+      "selector": "#layerBanner",
+      "supersededBy": "game/css/expedition.css:297",
+      "bytes": 22
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 487,
+      "prop": "position",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/expedition-map.css:96",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 894,
+      "prop": "bottom",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/expedition-map.css:96",
+      "bytes": 42
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 487,
+      "prop": "right",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/expedition-map.css:96",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 489,
+      "prop": "width",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/expedition-map.css:96",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 489,
+      "prop": "height",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/expedition-map.css:96",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 247,
+      "prop": "letter-spacing",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+      "supersededBy": "game/css/expedition-rewards.css:88",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 247,
+      "prop": "text-shadow",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+      "supersededBy": "game/css/expedition-rewards.css:88",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 249,
+      "prop": "color",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+      "supersededBy": "game/css/expedition-rewards.css:89",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 249,
+      "prop": "font-size",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+      "supersededBy": "game/css/expedition-rewards.css:89",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 250,
+      "prop": "letter-spacing",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+      "supersededBy": "game/css/expedition-rewards.css:89",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 250,
+      "prop": "text-shadow",
+      "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+      "supersededBy": "game/css/expedition-rewards.css:89",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "line": 90,
+      "prop": "justify-content",
+      "selector": "#overlay .node-main",
+      "supersededBy": "game/css/expedition-rewards.css:90",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 304,
+      "prop": "padding",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 303,
+      "prop": "align-items",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 23
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 303,
+      "prop": "text-align",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 304,
+      "prop": "border-radius",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 304,
+      "prop": "border",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 38
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 305,
+      "prop": "background",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 305,
+      "prop": "box-shadow",
+      "selector": "#overlay .node-pg .evt-opt",
+      "supersededBy": "game/css/expedition-rewards.css:91",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 307,
+      "prop": "text-shadow",
+      "selector": "#overlay .node-pg .evt-opt b",
+      "supersededBy": "game/css/expedition-rewards.css:92",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 308,
+      "prop": "color",
+      "selector": "#overlay .node-pg .evt-opt span",
+      "supersededBy": "game/css/expedition-rewards.css:93",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 308,
+      "prop": "text-shadow",
+      "selector": "#overlay .node-pg .evt-opt span",
+      "supersededBy": "game/css/expedition-rewards.css:93",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 309,
+      "prop": "background",
+      "selector": "#overlay .node-pg .evt-opt:hover",
+      "supersededBy": "game/css/expedition-rewards.css:94",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 309,
+      "prop": "border-color",
+      "selector": "#overlay .node-pg .evt-opt:hover",
+      "supersededBy": "game/css/expedition-rewards.css:94",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 579,
+      "prop": "width",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/expedition-rewards.css:97",
+      "bytes": 62
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 580,
+      "prop": "font-size",
+      "selector": "#overlay .card.chest > h2",
+      "supersededBy": "game/css/expedition-rewards.css:98",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 583,
+      "prop": "padding",
+      "selector": "#overlay .card.chest .bt-hand",
+      "supersededBy": "game/css/expedition-rewards.css:99",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 111,
+      "prop": "animation",
+      "selector": ".slot-page::before",
+      "supersededBy": "game/css/page-slot-select.css:89",
+      "bytes": 54
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 104,
+      "prop": "background",
+      "selector": "#overlay .card .pg.slot-page",
+      "supersededBy": "game/css/page-slot-select.css:117",
+      "bytes": 112
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 107,
+      "prop": "background",
+      "selector": ".slot-page::before",
+      "supersededBy": "game/css/page-slot-select.css:123",
+      "bytes": 280
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 113,
+      "prop": "background",
+      "selector": ".slot-page::after",
+      "supersededBy": "game/css/page-slot-select.css:131",
+      "bytes": 216
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 190,
+      "prop": "text-shadow",
+      "selector": ".slot-page .slot-card-name",
+      "supersededBy": "game/css/page-slot-select.css:198",
+      "bytes": 42
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 193,
+      "prop": "flex",
+      "selector": ".slot-page .slot-card-desc",
+      "supersededBy": "game/css/page-slot-select.css:202",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 269,
+      "prop": "letter-spacing",
+      "selector": ".slot-page .slot-card-desc .si-line em",
+      "supersededBy": "game/css/page-slot-select.css:216",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 269,
+      "prop": "color",
+      "selector": ".slot-page .slot-card-desc .si-line em",
+      "supersededBy": "game/css/page-slot-select.css:216",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 201,
+      "prop": "color",
+      "selector": ".slot-page .slot-empty",
+      "supersededBy": "game/css/page-slot-select.css:223",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 281,
+      "prop": "letter-spacing",
+      "selector": "#overlay .slot-page .slot-card-cta",
+      "supersededBy": "game/css/page-slot-select.css:236",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 170,
+      "prop": "border-color",
+      "selector": ".slot-page .slot-card:hover",
+      "supersededBy": "game/css/page-slot-select.css:249",
+      "bytes": 35
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 171,
+      "prop": "box-shadow",
+      "selector": ".slot-page .slot-card:hover",
+      "supersededBy": "game/css/page-slot-select.css:250",
+      "bytes": 71
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 172,
+      "prop": "transform",
+      "selector": ".slot-page .slot-card:active",
+      "supersededBy": "game/css/page-slot-select.css:283",
+      "bytes": 21
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 265,
+      "prop": "transition",
+      "selector": "#overlay .pg.slot-page .pg-back",
+      "supersededBy": "game/css/page-slot-select.css:300",
+      "bytes": 51
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 208,
+      "prop": "transition",
+      "selector": ".slot-page .slot-card-ops",
+      "supersededBy": "game/css/page-slot-select.css:318",
+      "bytes": 40
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 3,
+      "prop": "animation",
+      "selector": "#overlay .card.page:has(.pg.settings-page)",
+      "supersededBy": "game/css/page-settings.css:26",
+      "bytes": 51
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 294,
+      "prop": "gap",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:103",
+      "bytes": 7
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 295,
+      "prop": "margin",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:104",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 294,
+      "prop": "font-size",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:105",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 294,
+      "prop": "letter-spacing",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:105",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 294,
+      "prop": "color",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:105",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 295,
+      "prop": "border-bottom",
+      "selector": ".pg.settings-page .set-h",
+      "supersededBy": "game/css/page-settings.css:106",
+      "bytes": 33
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 296,
+      "prop": "margin-top",
+      "selector": ".pg.settings-page .set-h:first-child",
+      "supersededBy": "game/css/page-settings.css:119",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "font-size",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:136",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "padding",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:137",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "border-radius",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:137",
+      "bytes": 34
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "background",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:138",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "border",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:139",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "margin-bottom",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:140",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 297,
+      "prop": "transition",
+      "selector": ".pg.settings-page .chk",
+      "supersededBy": "game/css/page-settings.css:141",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 298,
+      "prop": "background",
+      "selector": ".pg.settings-page .chk:hover",
+      "supersededBy": "game/css/page-settings.css:145",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 300,
+      "prop": "padding",
+      "selector": ".pg.settings-page .chk.vol",
+      "supersededBy": "game/css/page-settings.css:201",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 301,
+      "prop": "color",
+      "selector": ".pg.settings-page .hint",
+      "supersededBy": "game/css/page-settings.css:232",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 301,
+      "prop": "font-size",
+      "selector": ".pg.settings-page .hint",
+      "supersededBy": "game/css/page-settings.css:232",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 301,
+      "prop": "line-height",
+      "selector": ".pg.settings-page .hint",
+      "supersededBy": "game/css/page-settings.css:232",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 301,
+      "prop": "margin",
+      "selector": ".pg.settings-page .hint",
+      "supersededBy": "game/css/page-settings.css:232",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 899,
+      "prop": "background",
+      "selector": "#overlay .sugin-page .sugin-exit",
+      "supersededBy": "game/css/page-settings.css:321",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 899,
+      "prop": "border",
+      "selector": "#overlay .sugin-page .sugin-exit",
+      "supersededBy": "game/css/page-settings.css:321",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 900,
+      "prop": "content",
+      "selector": "#overlay .sugin-page .sugin-exit::after",
+      "supersededBy": "game/css/page-settings.css:324",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 528,
+      "prop": "border-bottom-color",
+      "selector": "#overlay .pg.cdes .cdes-sec",
+      "supersededBy": "game/css/page-cardforge.css:117",
+      "bytes": 29
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 524,
+      "prop": "box-shadow",
+      "selector": "#overlay .pg.cdes .seg button.on, #overlay .pg.cdes .mech-chip.on",
+      "supersededBy": "game/css/page-cardforge.css:163",
+      "bytes": 39
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 561,
+      "prop": "border-color",
+      "selector": "#sidebar .hero-ava",
+      "supersededBy": "game/css/page-expedition-hud.css:48",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 488,
+      "prop": "background",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/page-expedition-hud.css:114",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 488,
+      "prop": "color",
+      "selector": "#topBtns #btnLocate",
+      "supersededBy": "game/css/page-expedition-hud.css:116",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 490,
+      "prop": "color",
+      "selector": "#topBtns #btnLocate:hover",
+      "supersededBy": "game/css/page-expedition-hud.css:121",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 490,
+      "prop": "background",
+      "selector": "#topBtns #btnLocate:hover",
+      "supersededBy": "game/css/page-expedition-hud.css:122",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 24,
+      "prop": "box-shadow",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/page-expedition-hud.css:131",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 24,
+      "prop": "letter-spacing",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/page-expedition-hud.css:134",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 25,
+      "prop": "border",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/page-expedition-hud.css:140",
+      "bytes": 24
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 138,
+      "prop": "border-radius",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/page-expedition-hud.css:140",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 25,
+      "prop": "box-shadow",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/page-expedition-hud.css:141",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 25,
+      "prop": "color",
+      "selector": "#resHud .res-gold b",
+      "supersededBy": "game/css/page-expedition-hud.css:145",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 151,
+      "prop": "color",
+      "selector": "#resHud .res-atk b",
+      "supersededBy": "game/css/page-expedition-hud.css:146",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 147,
+      "prop": "font-variant-numeric",
+      "selector": "#resHud .chip-mini b",
+      "supersededBy": "game/css/page-expedition-hud.css:147",
+      "bytes": 34
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 147,
+      "prop": "letter-spacing",
+      "selector": "#resHud .chip-mini b",
+      "supersededBy": "game/css/page-expedition-hud.css:147",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 24,
+      "prop": "letter-spacing",
+      "selector": "#layerBanner .lb-zh",
+      "supersededBy": "game/css/page-expedition-hud.css:153",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/scenes.css",
+      "line": 443,
+      "prop": "text-shadow",
+      "selector": "#layerBanner .lb-zh",
+      "supersededBy": "game/css/page-expedition-hud.css:154",
+      "bytes": 69
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 791,
+      "prop": "background",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:42",
+      "bytes": 32
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 792,
+      "prop": "border",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:43",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 780,
+      "prop": "border-radius",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:44",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 793,
+      "prop": "box-shadow",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:45",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 794,
+      "prop": "backdrop-filter",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:47",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 579,
+      "prop": "padding",
+      "selector": "#overlay .card.chest",
+      "supersededBy": "game/css/page-rewards-bag-help.css:48",
+      "bytes": 22
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 797,
+      "prop": "display",
+      "selector": "#overlay .card.chest::before",
+      "supersededBy": "game/css/page-rewards-bag-help.css:52",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 580,
+      "prop": "letter-spacing",
+      "selector": "#overlay .card.chest > h2",
+      "supersededBy": "game/css/page-rewards-bag-help.css:62",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 584,
+      "prop": "transition",
+      "selector": "#overlay .card.chest .bt-card",
+      "supersededBy": "game/css/page-rewards-bag-help.css:79",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 585,
+      "prop": "transform",
+      "selector": "#overlay .card.chest .bt-card:hover",
+      "supersededBy": "game/css/page-rewards-bag-help.css:82",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 592,
+      "prop": "filter",
+      "selector": "#overlay .card.chest .bt-card.got",
+      "supersededBy": "game/css/page-rewards-bag-help.css:89",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 593,
+      "prop": "transform",
+      "selector": "#overlay .card.chest .bt-card.got:hover",
+      "supersededBy": "game/css/page-rewards-bag-help.css:90",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 591,
+      "prop": "outline",
+      "selector": "#overlay .card.chest button.bt-card:focus-visible",
+      "supersededBy": "game/css/page-rewards-bag-help.css:100",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 591,
+      "prop": "outline-offset",
+      "selector": "#overlay .card.chest button.bt-card:focus-visible",
+      "supersededBy": "game/css/page-rewards-bag-help.css:101",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 591,
+      "prop": "border-radius",
+      "selector": "#overlay .card.chest button.bt-card:focus-visible",
+      "supersededBy": "game/css/page-rewards-bag-help.css:102",
+      "bytes": 34
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 283,
+      "prop": "background",
+      "selector": "#overlay.bag-full",
+      "supersededBy": "game/css/page-rewards-bag-help.css:126",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 495,
+      "prop": "background",
+      "selector": "#overlay .card.bag-page",
+      "supersededBy": "game/css/page-rewards-bag-help.css:133",
+      "bytes": 72
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "line": 174,
+      "prop": "background",
+      "selector": "#overlay .ach-row",
+      "supersededBy": "game/css/page-rewards-bag-help.css:385",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "line": 174,
+      "prop": "border-radius",
+      "selector": "#overlay .ach-row",
+      "supersededBy": "game/css/page-rewards-bag-help.css:387",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/hub.css",
+      "line": 48,
+      "prop": "font-size",
+      "selector": ".xp-txt",
+      "supersededBy": "game/css/page-rewards-bag-help.css:451",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/hub.css",
+      "line": 48,
+      "prop": "color",
+      "selector": ".xp-txt",
+      "supersededBy": "game/css/page-rewards-bag-help.css:451",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 338,
+      "prop": "font-size",
+      "selector": ".ov-note",
+      "supersededBy": "game/css/page-rewards-bag-help.css:453",
+      "bytes": 17
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 338,
+      "prop": "color",
+      "selector": ".ov-note",
+      "supersededBy": "game/css/page-rewards-bag-help.css:453",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/battle.css",
+      "line": 336,
+      "prop": "transition",
+      "selector": ".bt-settings .chk",
+      "supersededBy": "game/css/page-battle-ui.css:73",
+      "bytes": 27
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 273,
+      "prop": "outline",
+      "selector": "#overlay:focus",
+      "supersededBy": "game/css/ak-skin.css:12",
+      "bytes": 26
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 273,
+      "prop": "outline-offset",
+      "selector": "#overlay:focus",
+      "supersededBy": "game/css/ak-skin.css:12",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "background",
+      "selector": "#overlay",
+      "supersededBy": "game/css/ak-skin.css:23",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "backdrop-filter",
+      "selector": "#overlay",
+      "supersededBy": "game/css/ak-skin.css:23",
+      "bytes": 25
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "background",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/ak-skin.css:27",
+      "bytes": 50
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "border",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/ak-skin.css:28",
+      "bytes": 24
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "border-radius",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/ak-skin.css:28",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 26,
+      "prop": "box-shadow",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/ak-skin.css:29",
+      "bytes": 33
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 314,
+      "prop": "animation",
+      "selector": "#overlay .card",
+      "supersededBy": "game/css/ak-skin.css:29",
+      "bytes": 48
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "content",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "position",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "top",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 6
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "left",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "right",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 315,
+      "prop": "height",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:30",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 316,
+      "prop": "background",
+      "selector": "#overlay .card::before",
+      "supersededBy": "game/css/ak-skin.css:31",
+      "bytes": 104
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 318,
+      "prop": "color",
+      "selector": "#overlay h2",
+      "supersededBy": "game/css/ak-skin.css:39",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 318,
+      "prop": "font-size",
+      "selector": "#overlay h2",
+      "supersededBy": "game/css/ak-skin.css:39",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 318,
+      "prop": "letter-spacing",
+      "selector": "#overlay h2",
+      "supersededBy": "game/css/ak-skin.css:39",
+      "bytes": 19
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 320,
+      "prop": "text-shadow",
+      "selector": "#overlay h2",
+      "supersededBy": "game/css/ak-skin.css:39",
+      "bytes": 68
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 322,
+      "prop": "color",
+      "selector": "#overlay h2.bad",
+      "supersededBy": "game/css/ak-skin.css:41",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/overlays.css",
+      "line": 322,
+      "prop": "text-shadow",
+      "selector": "#overlay h2.bad",
+      "supersededBy": "game/css/ak-skin.css:41",
+      "bytes": 43
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "line": 161,
+      "prop": "border-bottom",
+      "selector": "#overlay .hub-tabs",
+      "supersededBy": "game/css/ak-skin.css:86",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "line": 162,
+      "prop": "color",
+      "selector": "#overlay .hub-tab",
+      "supersededBy": "game/css/ak-skin.css:87",
+      "bytes": 13
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "line": 123,
+      "prop": "background",
+      "selector": ".slot-page::before",
+      "supersededBy": "game/css/ak-skin.css:109",
+      "bytes": 274
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "line": 7,
+      "prop": "background",
+      "selector": "#overlay .cls2-page",
+      "supersededBy": "game/css/ak-skin.css:113",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "line": 43,
+      "prop": "background",
+      "selector": "#overlay .cls2-confirm",
+      "supersededBy": "game/css/ak-skin.css:116",
+      "bytes": 71
+    },
+    {
+      "file": "game/css/page-events.css",
+      "line": 38,
+      "prop": "background",
+      "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+      "supersededBy": "game/css/ak-skin.css:128",
+      "bytes": 105
+    },
+    {
+      "file": "game/css/page-events.css",
+      "line": 36,
+      "prop": "height",
+      "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+      "supersededBy": "game/css/ak-skin.css:128",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/page-events.css",
+      "line": 36,
+      "prop": "left",
+      "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+      "supersededBy": "game/css/ak-skin.css:128",
+      "bytes": 9
+    },
+    {
+      "file": "game/css/page-events.css",
+      "line": 36,
+      "prop": "right",
+      "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+      "supersededBy": "game/css/ak-skin.css:128",
+      "bytes": 10
+    },
+    {
+      "file": "game/css/page-events.css",
+      "line": 36,
+      "prop": "top",
+      "selector": "#overlay .node-pg:not(.event-themed) .node-panel::before",
+      "supersededBy": "game/css/ak-skin.css:128",
+      "bytes": 6
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 25,
+      "prop": "height",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/ak-skin.css:151",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 141,
+      "prop": "border-left",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/ak-skin.css:151",
+      "bytes": 38
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 25,
+      "prop": "background",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/ak-skin.css:151",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 139,
+      "prop": "gap",
+      "selector": "#resHud .chip-mini",
+      "supersededBy": "game/css/ak-skin.css:151",
+      "bytes": 8
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 144,
+      "prop": "width",
+      "selector": "#resHud .chip-mini .res-ic",
+      "supersededBy": "game/css/ak-skin.css:152",
+      "bytes": 11
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 144,
+      "prop": "height",
+      "selector": "#resHud .chip-mini .res-ic",
+      "supersededBy": "game/css/ak-skin.css:152",
+      "bytes": 12
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 144,
+      "prop": "flex",
+      "selector": "#resHud .chip-mini .res-ic",
+      "supersededBy": "game/css/ak-skin.css:152",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 145,
+      "prop": "filter",
+      "selector": "#resHud .chip-mini .res-ic",
+      "supersededBy": "game/css/ak-skin.css:152",
+      "bytes": 45
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 146,
+      "prop": "font-size",
+      "selector": "#resHud .chip-mini b",
+      "supersededBy": "game/css/ak-skin.css:155",
+      "bytes": 15
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 24,
+      "prop": "clip-path",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/ak-skin.css:156",
+      "bytes": 14
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 24,
+      "prop": "background",
+      "selector": "#hpHud",
+      "supersededBy": "game/css/ak-skin.css:156",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 184,
+      "prop": "color",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/ak-skin.css:157",
+      "bytes": 20
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 184,
+      "prop": "background",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/ak-skin.css:157",
+      "bytes": 16
+    },
+    {
+      "file": "game/css/base.css",
+      "line": 184,
+      "prop": "padding",
+      "selector": ".hp-hud-label",
+      "supersededBy": "game/css/ak-skin.css:157",
+      "bytes": 18
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "background",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/ak-skin.css:161",
+      "bytes": 50
+    },
+    {
+      "file": "game/css/expedition.css",
+      "line": 280,
+      "prop": "border-top",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/ak-skin.css:161",
+      "bytes": 31
+    },
+    {
+      "file": "game/css/expedition.css",
+      "line": 281,
+      "prop": "box-shadow",
+      "selector": "#sidebar",
+      "supersededBy": "game/css/ak-skin.css:161",
+      "bytes": 34
+    },
+    {
+      "file": "game/css/winter.css",
+      "line": 21,
+      "prop": "background",
+      "selector": "#bagBtn",
+      "supersededBy": "game/css/ak-skin.css:164",
+      "bytes": 18
+    }
+  ]
+}

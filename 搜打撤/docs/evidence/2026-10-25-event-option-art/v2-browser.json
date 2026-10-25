@@ -1,0 +1,42 @@
+{
+  "url": "http://localhost:5200/event-template.html",
+  "choices": [
+    {
+      "bounds": "{\"bottom\":266,\"height\":126,\"left\":1087.3250732421875,\"right\":1575.6000671386719,\"top\":140,\"width\":488.2749938964844,\"x\":1087.3250732421875,\"y\":140}",
+      "label": "在外侧搜寻，获得 3 币",
+      "selected": "false",
+      "titleHeight": 44
+    },
+    {
+      "bounds": "{\"bottom\":416,\"height\":126,\"left\":1083.3250732421875,\"right\":1571.6000671386719,\"top\":290,\"width\":488.2749938964844,\"x\":1083.3250732421875,\"y\":290}",
+      "label": "冒险挖深，获得 6 币，损失 3 生命",
+      "selected": "true",
+      "titleHeight": 44
+    }
+  ],
+  "confirmations": [
+    {
+      "hidden": true,
+      "label": "确认在外侧搜寻",
+      "rect": "{\"bottom\":0,\"height\":0,\"left\":0,\"right\":0,\"top\":0,\"width\":0,\"x\":0,\"y\":0}"
+    },
+    {
+      "hidden": false,
+      "label": "确认冒险挖深",
+      "rect": "{\"bottom\":409,\"height\":68,\"left\":1493.5999755859375,\"right\":1559.5999755859375,\"top\":341,\"width\":66,\"x\":1493.5999755859375,\"y\":341}"
+    }
+  ],
+  "noOverflow": true,
+  "window": [
+    1618,
+    956
+  ],
+  "logs": [],
+  "checks": [
+    "点击同项取消",
+    "Enter选择并就地确认",
+    "结算后禁用选项并显示结果",
+    "重新预览恢复",
+    "Escape取消"
+  ]
+}

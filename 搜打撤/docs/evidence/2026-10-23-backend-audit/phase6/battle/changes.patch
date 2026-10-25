@@ -1,0 +1,360 @@
+diff --git a/game/src/cards/card-rules.schema.js b/game/src/cards/card-rules.schema.js
+index 5bf19bb1..466c7e2d 100644
+--- a/game/src/cards/card-rules.schema.js
++++ b/game/src/cards/card-rules.schema.js
+@@ -199,43 +199,49 @@ function cardLabel(card) {
+   return String(card?.id ?? '<missing id>');
+ }
+ 
++function validateOptionalPositiveInteger(record, field, path, error) {
++  if (record[field] !== undefined && !isPositiveInteger(record[field])) {
++    error(`${path}.${field}`, 'must be a positive integer');
++  }
++}
++
++function validateOptionalTrue(record, field, path, error) {
++  if (record[field] !== undefined && record[field] !== true) {
++    error(`${path}.${field}`, 'must equal true when provided');
++  }
++}
++
++function validateOperationKeys(operation, allowed, path, op, error) {
++  for (const key of Object.keys(operation)) {
++    if (!allowed.has(key)) error(`${path}.${key}`, `is not accepted for ${op} operations`);
++  }
++}
++
+ // v2 —— 条件对象（damage.cond / bonus.if 共用形状）：键集与取值逐键校验
+ function validateCondition(record, path, error) {
+   if (!isRecord(record) || !hasOnlyKeys(record, CONDITION_KEYS) || Object.keys(record).length === 0) {
+     error(path, "must be a non-empty object with keys among 'foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp'");
+     return;
+   }
+-  if (record.foeHpBelow !== undefined && !isPositiveInteger(record.foeHpBelow)) {
+-    error(`${path}.foeHpBelow`, 'must be a positive integer');
+-  }
+-  if (record.foeHpHalf !== undefined && record.foeHpHalf !== true) {
+-    error(`${path}.foeHpHalf`, 'must equal true when provided');
+-  }
+-  if (record.foeFullHp !== undefined && record.foeFullHp !== true) {
+-    error(`${path}.foeFullHp`, 'must equal true when provided');
+-  }
++  validateOptionalPositiveInteger(record, "foeHpBelow", path, error);
++  validateOptionalTrue(record, "foeHpHalf", path, error);
++  validateOptionalTrue(record, "foeFullHp", path, error);
+   if (record.foeStatus !== undefined && !CURSE_KEYS.has(record.foeStatus)) {
+     error(`${path}.foeStatus`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban'");
+   }
+-  if (record.anyCurse !== undefined && record.anyCurse !== true) {
+-    error(`${path}.anyCurse`, 'must equal true when provided');
+-  }
++  validateOptionalTrue(record, "anyCurse", path, error);
+   if (record.playerStealthed !== undefined && record.playerStealthed !== true) error(`${path}.playerStealthed`, 'must equal true');
+ }
+ 
+ function validateDamageOperation(operation, card, path, error) {
+-  for (const key of Object.keys(operation)) {
+-    if (!DAMAGE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for damage operations');
+-  }
++  validateOperationKeys(operation, DAMAGE_ALLOWED_KEYS, path, "damage", error);
+   // M2：perTargetPrice——伤害动态锚定参照牌价格（气功波「抽 1 张牌，对全体敌人造成等同于其价格的固定伤害」，
+   // 参照=同一 onPlay 中前一获取段入手的牌；engine getPriceOfLastDrawn 口径）
+   const sources = ['amountField', 'amount', 'range', 'perTargetPrice'].filter(field => operation[field] !== undefined);
+   if (sources.length !== 1) {
+     error(path, "must specify exactly one damage source among 'amountField', 'amount', 'range', 'perTargetPrice'");
+   }
+-  if (operation.perTargetPrice !== undefined && operation.perTargetPrice !== true) {
+-    error(`${path}.perTargetPrice`, 'must equal true when provided');
+-  }
++  validateOptionalTrue(operation, "perTargetPrice", path, error);
+   if (operation.amountField !== undefined) {
+     if (operation.amountField !== 'dmg') {
+       error(`${path}.amountField`, "must reference card field 'dmg'");
+@@ -320,9 +326,7 @@ function validateDamageOperation(operation, card, path, error) {
+       if (bonus.if !== undefined) validateCondition(bonus.if, `${path}.bonus.if`, error);
+     }
+   }
+-  if (operation.lifesteal !== undefined && operation.lifesteal !== true) {
+-    error(`${path}.lifesteal`, 'must equal true when provided');
+-  }
++  validateOptionalTrue(operation, "lifesteal", path, error);
+   if (operation.graveyard !== undefined) {
+     const grave = operation.graveyard;
+     if (!isRecord(grave) || !hasOnlyKeys(grave, new Set(['type', 'perCard'])) ||
+@@ -343,12 +347,8 @@ function validateDamageOperation(operation, card, path, error) {
+     error(`${path}.schedule`, "must equal 'nextTurn' or 'nextTurnStart' (deferred to the next turn start)");
+   }
+   // —— M2 动态加成与奖励键 ——
+-  if (operation.perInfusedInHand !== undefined && !isPositiveInteger(operation.perInfusedInHand)) {
+-    error(`${path}.perInfusedInHand`, 'must be a positive integer');
+-  }
+-  if (operation.infuseBonus !== undefined && !isPositiveInteger(operation.infuseBonus)) {
+-    error(`${path}.infuseBonus`, 'must be a positive integer');
+-  }
++  validateOptionalPositiveInteger(operation, "perInfusedInHand", path, error);
++  validateOptionalPositiveInteger(operation, "infuseBonus", path, error);
+   if (operation.spellPowerMul !== undefined && (!Number.isInteger(operation.spellPowerMul) || operation.spellPowerMul < 2)) {
+     error(`${path}.spellPowerMul`, 'must be an integer >= 2');
+   }
+@@ -365,9 +365,7 @@ function validateDamageOperation(operation, card, path, error) {
+ }
+ 
+ function validateCurseOperation(operation, path, error) {
+-  for (const key of Object.keys(operation)) {
+-    if (!CURSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for curse operations');
+-  }
++  validateOperationKeys(operation, CURSE_ALLOWED_KEYS, path, "curse", error);
+   // M2：source:'handMoves'——聚合手牌中招式自带的全部诅咒（诅咒之刃），与具名/随机三选一
+   const hasCurseKey = operation.curse !== undefined;
+   const hasRandomKinds = operation.randomKinds !== undefined;
+@@ -425,15 +423,9 @@ function validateCurseOperation(operation, path, error) {
+   if (!hasSource && operation.bindTarget === undefined && !CURSE_TARGET_KEYS.has(operation.target)) {
+     error(`${path}.target`, "must be 'chosenEnemy', 'allEnemies', 'randomEnemy', or 'self'");
+   }
+-  if (operation.double !== undefined && operation.double !== true) {
+-    error(`${path}.double`, 'must equal true when provided');
+-  }
+-  if (operation.burst !== undefined && !isPositiveInteger(operation.burst)) {
+-    error(`${path}.burst`, 'must be a positive integer');
+-  }
+-  if (operation.extend !== undefined && !isPositiveInteger(operation.extend)) {
+-    error(`${path}.extend`, 'must be a positive integer');
+-  }
++  validateOptionalTrue(operation, "double", path, error);
++  validateOptionalPositiveInteger(operation, "burst", path, error);
++  validateOptionalPositiveInteger(operation, "extend", path, error);
+ }
+ 
+ function validateEffectAmount(operation, card, path, field, error) {
+@@ -457,9 +449,7 @@ function validateEffectAmount(operation, card, path, field, error) {
+ 
+ function validateEffectOperation(operation, card, path, op, error) {
+   const allowed = op === 'heal' ? HEAL_ALLOWED_KEYS : op === 'armor' ? ARMOR_ALLOWED_KEYS : DRAW_ALLOWED_KEYS;
+-  for (const key of Object.keys(operation)) {
+-    if (!allowed.has(key)) error(`${path}.${key}`, `is not accepted for ${op} operations`);
+-  }
++  validateOperationKeys(operation, allowed, path, op, error);
+   if (op === 'heal') {
+     const sources = ['amountField', 'amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal']
+       .filter(field => operation[field] !== undefined);
+@@ -467,18 +457,10 @@ function validateEffectOperation(operation, card, path, op, error) {
+       error(path, "must specify exactly one source among 'amountField', 'amount', 'upTo', 'selfDamage', 'perFuelCost', 'perSpellHeal'");
+     }
+     validateEffectAmount(operation, card, path, 'heal', error);
+-    if (operation.upTo !== undefined && !isPositiveInteger(operation.upTo)) {
+-      error(`${path}.upTo`, 'must be a positive integer');
+-    }
+-    if (operation.selfDamage !== undefined && !isPositiveInteger(operation.selfDamage)) {
+-      error(`${path}.selfDamage`, 'must be a positive integer');
+-    }
+-    if (operation.perFuelCost !== undefined && !isPositiveInteger(operation.perFuelCost)) {
+-      error(`${path}.perFuelCost`, 'must be a positive integer');
+-    }
+-    if (operation.perSpellHeal !== undefined && !isPositiveInteger(operation.perSpellHeal)) {
+-      error(`${path}.perSpellHeal`, 'must be a positive integer');
+-    }
++    validateOptionalPositiveInteger(operation, "upTo", path, error);
++    validateOptionalPositiveInteger(operation, "selfDamage", path, error);
++    validateOptionalPositiveInteger(operation, "perFuelCost", path, error);
++    validateOptionalPositiveInteger(operation, "perSpellHeal", path, error);
+     return;
+   }
+   if (op === 'armor') {
+@@ -492,16 +474,10 @@ function validateEffectOperation(operation, card, path, op, error) {
+     if (operation.priceOf !== undefined && operation.priceOf !== 'discovered') {
+       error(`${path}.priceOf`, "must equal 'discovered' (armor equals the discovered card's price)");
+     }
+-    if (operation.consumeEquip !== undefined && operation.consumeEquip !== true) {
+-      error(`${path}.consumeEquip`, 'must equal true when provided');
+-    }
++    validateOptionalTrue(operation, "consumeEquip", path, error);
+     validateEffectAmount(operation, card, path, 'armor', error);
+-    if (operation.guard !== undefined && operation.guard !== true) {
+-      error(`${path}.guard`, 'must equal true when provided');
+-    }
+-    if (operation.decayAtTurnEnd !== undefined && !isPositiveInteger(operation.decayAtTurnEnd)) {
+-      error(`${path}.decayAtTurnEnd`, 'must be a positive integer');
+-    }
++    validateOptionalTrue(operation, "guard", path, error);
++    validateOptionalPositiveInteger(operation, "decayAtTurnEnd", path, error);
+     return;
+   }
+   // draw：M1 起四源选一（amountField / amount / untilHandN / range 区间随机张数）
+@@ -510,9 +486,7 @@ function validateEffectOperation(operation, card, path, op, error) {
+   if (sources.length !== 1) {
+     error(path, "must specify exactly one source among 'amountField', 'amount', 'untilHandN', 'range', 'perCurseKinds'");
+   }
+-  if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {
+-    error(`${path}.perCurseKinds`, 'must equal true when provided');
+-  }
++  validateOptionalTrue(operation, "perCurseKinds", path, error);
+   if (operation.filter !== undefined) {
+     // M2：draw.filter——牌库定向抽取（武装「从牌库中抽取 2 张装备牌」，deckDraw type 口径）
+     const drawFilter = operation.filter;
+@@ -522,9 +496,7 @@ function validateEffectOperation(operation, card, path, op, error) {
+     }
+   }
+   validateEffectAmount(operation, card, path, 'draw', error);
+-  if (operation.untilHandN !== undefined && !isPositiveInteger(operation.untilHandN)) {
+-    error(`${path}.untilHandN`, 'must be a positive integer');
+-  }
++  validateOptionalPositiveInteger(operation, "untilHandN", path, error);
+   if (operation.range !== undefined && !isRangePair(operation.range)) {
+     error(`${path}.range`, 'must be a two-element [min, max] pair of nonnegative integers with min <= max');
+   }
+@@ -539,9 +511,7 @@ function validateEffectOperation(operation, card, path, op, error) {
+ 
+ function validatePendingOperation(operation, path, op, error) {
+   const allowed = PENDING_OP_ALLOWED_KEYS.get(op);
+-  for (const key of Object.keys(operation)) {
+-    if (!allowed.has(key)) error(`${path}.${key}`, `is not accepted for ${op} operations`);
+-  }
++  validateOperationKeys(operation, allowed, path, op, error);
+   if (op === 'acquire') {
+     if (!isPositiveInteger(operation.n)) error(`${path}.n`, 'must be a positive integer');
+     if (!isRecord(operation.pool) || typeof operation.pool.kind !== 'string' || !operation.pool.kind.trim()) {
+@@ -582,12 +552,8 @@ function validatePendingOperation(operation, path, op, error) {
+     if (!BLESSING_KEYS.has(operation.key)) {
+       error(`${path}.key`, "must be one of 'atkUp', 'spellUp', 'stealth', 'immune', 'dodge', 'reduce'");
+     }
+-    if (operation.stacks !== undefined && !isPositiveInteger(operation.stacks)) {
+-      error(`${path}.stacks`, 'must be a positive integer');
+-    }
+-    if (operation.duration !== undefined && !isPositiveInteger(operation.duration)) {
+-      error(`${path}.duration`, 'must be a positive integer');
+-    }
++    validateOptionalPositiveInteger(operation, "stacks", path, error);
++    validateOptionalPositiveInteger(operation, "duration", path, error);
+     return;
+   }
+   if (op === 'refillEnergy') return;
+@@ -609,16 +575,10 @@ function validatePendingOperation(operation, path, op, error) {
+         error(`${path}.cap`, "must be a non-empty object with positive integer 'atk' and/or 'maxHpBelow'");
+       }
+     }
+-    if (operation.count !== undefined && !isPositiveInteger(operation.count)) {
+-      error(`${path}.count`, 'must be a positive integer');
+-    }
++    validateOptionalPositiveInteger(operation, "count", path, error);
+     // M2：perCurseKinds——消灭数量动态锚定目标诅咒种类数（深渊诅咒同款计数口径）
+-    if (operation.perCurseKinds !== undefined && operation.perCurseKinds !== true) {
+-      error(`${path}.perCurseKinds`, 'must equal true when provided');
+-    }
+-    if (operation.perCurseStacks !== undefined && operation.perCurseStacks !== true) {
+-      error(`${path}.perCurseStacks`, 'must equal true when provided');
+-    }
++    validateOptionalTrue(operation, "perCurseKinds", path, error);
++    validateOptionalTrue(operation, "perCurseStacks", path, error);
+     if (operation.perCurseKinds === true && operation.perCurseStacks === true) {
+       error(path, 'perCurseKinds and perCurseStacks are mutually exclusive');
+     }
+@@ -635,15 +595,9 @@ function validatePendingOperation(operation, path, op, error) {
+     if (operation.atk !== undefined && !isNonnegativeInteger(operation.atk)) {
+       error(`${path}.atk`, 'must be a nonnegative integer');
+     }
+-    if (operation.hp !== undefined && !isPositiveInteger(operation.hp)) {
+-      error(`${path}.hp`, 'must be a positive integer');
+-    }
+-    if (operation.statless !== undefined && operation.statless !== true) {
+-      error(`${path}.statless`, 'must equal true when provided');
+-    }
+-    if (operation.taunt !== undefined && operation.taunt !== true) {
+-      error(`${path}.taunt`, 'must equal true when provided');
+-    }
++    validateOptionalPositiveInteger(operation, "hp", path, error);
++    validateOptionalTrue(operation, "statless", path, error);
++    validateOptionalTrue(operation, "taunt", path, error);
+     return;
+   }
+   if (op === 'transform') {
+@@ -656,9 +610,7 @@ function validatePendingOperation(operation, path, op, error) {
+     if (operation.cost !== undefined && !isNonnegativeInteger(operation.cost)) {
+       error(`${path}.cost`, 'must be a nonnegative integer');
+     }
+-    if (operation.keepInHand !== undefined && operation.keepInHand !== true) {
+-      error(`${path}.keepInHand`, 'must equal true when provided');
+-    }
++    validateOptionalTrue(operation, "keepInHand", path, error);
+     return;
+   }
+   if (op === 'registerRule') {
+@@ -697,31 +649,23 @@ function validateOperation(operation, card, path, error) {
+   else if (operation.op === 'curse') validateCurseOperation(operation, path, error);
+   else if (operation.op === 'cleanse') {
+     // M1：净化——Wave1 仅支持 target:'self'（清除自身全部诅咒；净化敌方无卡面需求）
+-    for (const key of Object.keys(operation)) {
+-      if (!CLEANSE_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for cleanse operations');
+-    }
++    validateOperationKeys(operation, CLEANSE_ALLOWED_KEYS, path, "cleanse", error);
+     if (operation.target !== 'self') {
+       error(`${path}.target`, "must be 'self' (cleanse only supports purifying yourself in wave 1)");
+     }
+   } else if (operation.op === 'stealAtk') {
+     // M2：偷取攻击——amount 固定夺取量 / capTo 压至阈值（影噬「偷取攻击力至 1 点」）二选一；
+     // duration 缺省 1（1 回合后归还，enemy-phase 既有偷取归还管线）
+-    for (const key of Object.keys(operation)) {
+-      if (!STEAL_ATK_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for stealAtk operations');
+-    }
++    validateOperationKeys(operation, STEAL_ATK_ALLOWED_KEYS, path, "stealAtk", error);
+     const stealSources = ['amount', 'capTo'].filter(field => operation[field] !== undefined);
+     if (stealSources.length !== 1) {
+       error(path, "must specify exactly one of 'amount' (flat steal) or 'capTo' (reduce to threshold)");
+     }
+-    if (operation.amount !== undefined && !isPositiveInteger(operation.amount)) {
+-      error(`${path}.amount`, 'must be a positive integer');
+-    }
++    validateOptionalPositiveInteger(operation, "amount", path, error);
+     if (operation.capTo !== undefined && !isNonnegativeInteger(operation.capTo)) {
+       error(`${path}.capTo`, 'must be a nonnegative integer');
+     }
+-    if (operation.duration !== undefined && !isPositiveInteger(operation.duration)) {
+-      error(`${path}.duration`, 'must be a positive integer');
+-    }
++    validateOptionalPositiveInteger(operation, "duration", path, error);
+   } else if (operation.op === 'noDrawNext') {
+     // M2：下回合无法抽牌（破浪斩）——无参
+     for (const key of Object.keys(operation)) {
+@@ -729,28 +673,20 @@ function validateOperation(operation, card, path, error) {
+     }
+   } else if (operation.op === 'foeFight') {
+     // M3：敌对敌互殴（扰敌）——可选 count（默认 2 名敌人参战）
+-    for (const key of Object.keys(operation)) {
+-      if (!FOE_FIGHT_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for foeFight operations');
+-    }
++    validateOperationKeys(operation, FOE_FIGHT_ALLOWED_KEYS, path, "foeFight", error);
+     if (operation.pick !== undefined && operation.pick !== 'two') error(`${path}.pick`, 'must be two');
+   } else if (operation.op === 'copyRandom') {
+     // M3：随机复制一张手牌（刀剑形态「回合开始时获得一张随机手牌的复制」）
+-    for (const key of Object.keys(operation)) {
+-      if (!COPY_RANDOM_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for copyRandom operations');
+-    }
++    validateOperationKeys(operation, COPY_RANDOM_ALLOWED_KEYS, path, "copyRandom", error);
+   } else if (operation.op === 'status') {
+-    for (const key of Object.keys(operation)) {
+-      if (!STATUS_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for status operations');
+-    }
++    validateOperationKeys(operation, STATUS_ALLOWED_KEYS, path, "status", error);
+     if (operation.status !== 'freeze') error(`${path}.status`, "must equal 'freeze'");
+     if (operation.target !== 'allEnemies') error(`${path}.target`, "must equal 'allEnemies'");
+     if (!Number.isInteger(operation.duration) || operation.duration < 1) {
+       error(`${path}.duration`, 'must be a positive integer');
+     }
+   } else if (operation.op === 'discover') {
+-    for (const key of Object.keys(operation)) {
+-      if (!DISCOVER_ALLOWED_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for discover operations');
+-    }
++    validateOperationKeys(operation, DISCOVER_ALLOWED_KEYS, path, "discover", error);
+     if (!Number.isInteger(operation.count) || operation.count < 1) error(`${path}.count`, 'must be a positive integer');
+     if (!isRecord(operation.pool) || !hasOnlyKeys(operation.pool, DISCOVER_POOL_KEYS) ||
+         operation.pool.kind !== 'moves' || !Number.isInteger(operation.pool.cost) || operation.pool.cost < 0) {
+@@ -1123,9 +1059,7 @@ export function validateCardRules(card) {
+             error(`${path}.op`, `unknown bag use operation (supported: ${[...BAG_SUPPORTED_OPS].join(', ')})`);
+             return;
+           }
+-          for (const key of Object.keys(operation)) {
+-            if (!BAG_OP_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for bag use operations');
+-          }
++          validateOperationKeys(operation, BAG_OP_KEYS, path, "bag use", error);
+           if (operation.dmgType !== undefined && (operation.op !== 'damage' || !SUPPORTED_DAMAGE_TYPES.has(operation.dmgType))) {
+             error(`${path}.dmgType`, 'requires a damage operation and a supported damage type');
+           }

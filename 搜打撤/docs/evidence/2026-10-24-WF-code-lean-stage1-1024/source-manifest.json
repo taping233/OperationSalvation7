@@ -1,0 +1,502 @@
+{
+  "baseline": "Exact bytes at task start; no HEAD restoration; includes all helper costs",
+  "runtimeDelta": {
+    "files": 29,
+    "jsFiles": 5,
+    "cssFiles": 24,
+    "bytes": -6284,
+    "normalizedBytes": -6211,
+    "lines": -43,
+    "nonCommentJsTokens": -647
+  },
+  "totalBeforeNormalizedBytes": 6601166,
+  "normalizedByteReductionPercentage": 0.09408943813865611,
+  "totalBeforeJsTokens": 836141,
+  "jsTokenReductionPercentage": 0.0773792936837208,
+  "newTests": {
+    "files": 4,
+    "bytes": 19418,
+    "lines": 318
+  },
+  "files": [
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "before": {
+        "sha256": "fc4a5b4fa65194db88779dff8fac6233353bc24773be987b97f88c92681830ff",
+        "bytes": 74260,
+        "normalizedBytes": 73028,
+        "lines": 1238,
+        "nonCommentTokens": 11909
+      },
+      "after": {
+        "sha256": "7c55ac03b71acab3fc5ec6e424691a4fc7e75daf1816474ca79352243e34f587",
+        "bytes": 73037,
+        "normalizedBytes": 71813,
+        "lines": 1224,
+        "nonCommentTokens": 11641
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "before": {
+        "sha256": "161869441c50aedf397ff260a1ade8ba57390a831f088ada13b7a25678fedf92",
+        "bytes": 3974,
+        "normalizedBytes": 3974,
+        "lines": 68,
+        "nonCommentTokens": 700
+      },
+      "after": {
+        "sha256": "ff51b7ba268ba8053ed301a61f3ab43cf0bcd8fa4b077687bf01679a05f9e805",
+        "bytes": 3705,
+        "normalizedBytes": 3705,
+        "lines": 65,
+        "nonCommentTokens": 640
+      }
+    },
+    {
+      "file": "game/src/cards/cards.sync.rule-backfill.js",
+      "before": {
+        "sha256": "0d582a3fc532ca8acc7fd9dc156b5710801f44922532afc9dc0ddc60804232bb",
+        "bytes": 24732,
+        "normalizedBytes": 24262,
+        "lines": 470,
+        "nonCommentTokens": 4099
+      },
+      "after": {
+        "sha256": "acfc032614270bb8493fec57234a8b241886333d9da7091c1fc306e47347e44b",
+        "bytes": 24088,
+        "normalizedBytes": 23644,
+        "lines": 444,
+        "nonCommentTokens": 3896
+      }
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "before": {
+        "sha256": "a71d6a58ea1c8db8c6bdde3a9124f4052bfca8ea3ad133acfcb1959c0ea5466a",
+        "bytes": 19464,
+        "normalizedBytes": 19289,
+        "lines": 175,
+        "nonCommentTokens": 3302
+      },
+      "after": {
+        "sha256": "e6b018f4b880fea3520da5453ab1cd191cf0796555f3d24e26e50884c243412f",
+        "bytes": 19243,
+        "normalizedBytes": 19069,
+        "lines": 183,
+        "nonCommentTokens": 3347
+      }
+    },
+    {
+      "file": "game/src/ui/menu-settings.js",
+      "before": {
+        "sha256": "c68a5fff9726fad91b8c492bb72d118505cd8a4a0af361c52ae748375c32756f",
+        "bytes": 14767,
+        "normalizedBytes": 14585,
+        "lines": 182,
+        "nonCommentTokens": 1752
+      },
+      "after": {
+        "sha256": "0b5c50b6ceab8978da056158c66e03d46d950cb9fc5897960c04855ff8821fe2",
+        "bytes": 12487,
+        "normalizedBytes": 12339,
+        "lines": 177,
+        "nonCommentTokens": 1591
+      }
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "before": {
+        "sha256": "8d9606f77c8965b66354e4ab581e0de6a2e41c0be029e7fd213ea0938b503eb8",
+        "bytes": 17498,
+        "normalizedBytes": 17498,
+        "lines": 191
+      },
+      "after": {
+        "sha256": "f71637e0d990a221e72a3adf566fe0dd1efad8610cc33b0a426e3b4121e6d76f",
+        "bytes": 17435,
+        "normalizedBytes": 17435,
+        "lines": 191
+      }
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "before": {
+        "sha256": "6eaa1659b0e25e7520d78d6aca22c62df6eee15cbc8e38618971edde6d58907c",
+        "bytes": 32595,
+        "normalizedBytes": 32595,
+        "lines": 269
+      },
+      "after": {
+        "sha256": "bd490b91bad6afc4bd61373f39e6e6821d79a2dfe2c6e5525514d12b15659357",
+        "bytes": 32560,
+        "normalizedBytes": 32560,
+        "lines": 269
+      }
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "before": {
+        "sha256": "f349b8117da669d03eed3ffdb8652212a1a36f412eb7a53f6d1ac9e758dad92a",
+        "bytes": 21259,
+        "normalizedBytes": 21259,
+        "lines": 170
+      },
+      "after": {
+        "sha256": "de5d361e10ce689b05e53214cea65f0e1d3445af6df8dbbe73095e20569e9524",
+        "bytes": 21228,
+        "normalizedBytes": 21228,
+        "lines": 170
+      }
+    },
+    {
+      "file": "game/css/base.css",
+      "before": {
+        "sha256": "7e5b5507e827ff0044dc9ec9681755f21e44975b26bcf33e5f5d39ac5d20f1d0",
+        "bytes": 27632,
+        "normalizedBytes": 27632,
+        "lines": 372
+      },
+      "after": {
+        "sha256": "62110160321bfaf1f82b077a8eab64263913c3fdfe2b1925b7d48edaae32be6b",
+        "bytes": 27573,
+        "normalizedBytes": 27573,
+        "lines": 372
+      }
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "before": {
+        "sha256": "993af55c329af935f8afc050b3f8f107ad4594015bd325d3877ca129a74244ff",
+        "bytes": 13322,
+        "normalizedBytes": 13322,
+        "lines": 248
+      },
+      "after": {
+        "sha256": "91d816271182cb95cc92a859c7e0f647fb302a93ea5b64ca48bf5e28b0bf84b0",
+        "bytes": 13242,
+        "normalizedBytes": 13242,
+        "lines": 248
+      }
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "before": {
+        "sha256": "a53d0f6e0767e0aa2ba8b586059bfc08ed49d02ef0341f01cee81727d2b60b3c",
+        "bytes": 2892,
+        "normalizedBytes": 2855,
+        "lines": 37
+      },
+      "after": {
+        "sha256": "dc428cdd0de15da338bdf534b9cd211c78b407bc5af1f304857c601c970198fa",
+        "bytes": 2866,
+        "normalizedBytes": 2830,
+        "lines": 37
+      }
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "before": {
+        "sha256": "68d4b33ccc17328c2d2248b62056fd73c8236398083b58a51a7941e7419cc142",
+        "bytes": 5013,
+        "normalizedBytes": 5013,
+        "lines": 44
+      },
+      "after": {
+        "sha256": "da66ec8abac28ad573c45fcc89a55957b617c8cdd132e53c0243bc23a429ec17",
+        "bytes": 4962,
+        "normalizedBytes": 4962,
+        "lines": 44
+      }
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "before": {
+        "sha256": "fd4749286b658a4b21e64b1fdb9d97191ab83404029e9dbe6be8c4df46bb6506",
+        "bytes": 8601,
+        "normalizedBytes": 8471,
+        "lines": 130
+      },
+      "after": {
+        "sha256": "9e54ae5eda40ebe63325bf9f124470dc790dc7b0c37c6f377c325a384e4a948d",
+        "bytes": 8583,
+        "normalizedBytes": 8454,
+        "lines": 130
+      }
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "before": {
+        "sha256": "87116be7e988d000555adead9ce85f07362bfe0d082726db63c898de0743d232",
+        "bytes": 25235,
+        "normalizedBytes": 25235,
+        "lines": 211
+      },
+      "after": {
+        "sha256": "3cab7daf39cd5dc81e1fe4e838d348b2425af9b2bdbdd935ee3a37feb17b80ef",
+        "bytes": 25197,
+        "normalizedBytes": 25197,
+        "lines": 211
+      }
+    },
+    {
+      "file": "game/css/expedition.css",
+      "before": {
+        "sha256": "00f305267758277c46ab03ba1cb02aa0e587c4f0cc8c68065532123365f63e5e",
+        "bytes": 17690,
+        "normalizedBytes": 17690,
+        "lines": 319
+      },
+      "after": {
+        "sha256": "fbb47c3be1cfa4670fd9104d75a6943e2e9f3dfe1a6be7ca9a70941925707391",
+        "bytes": 17648,
+        "normalizedBytes": 17648,
+        "lines": 319
+      }
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "before": {
+        "sha256": "79404ef5a45655631439d27c339a00c23e7dcdf71cf47e6298c32eed1108638f",
+        "bytes": 7419,
+        "normalizedBytes": 7419,
+        "lines": 112
+      },
+      "after": {
+        "sha256": "ffdc3bb0ebc1ec8fe1773407b707101707f51c953803af789ae351ef43a8e5fd",
+        "bytes": 7395,
+        "normalizedBytes": 7395,
+        "lines": 112
+      }
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "before": {
+        "sha256": "43449f52d9fbd5878eec0dc15796876fbb7c8608fcef484d103c511ab17a8eb8",
+        "bytes": 38545,
+        "normalizedBytes": 38545,
+        "lines": 531
+      },
+      "after": {
+        "sha256": "c23101afc2d0bda0e6feae59a1e53a649340965b2056906b5d9212adb3503d51",
+        "bytes": 38371,
+        "normalizedBytes": 38371,
+        "lines": 531
+      }
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "before": {
+        "sha256": "96c9e41bab3d2cc0760f0d689c3b875603e1b63ded3c99f58dcebee7d08a1606",
+        "bytes": 10139,
+        "normalizedBytes": 10056,
+        "lines": 83
+      },
+      "after": {
+        "sha256": "c37a04f9be6c68d941939508046b844d4690a5b1829da09c402dc8e1ca67da18",
+        "bytes": 10119,
+        "normalizedBytes": 10037,
+        "lines": 83
+      }
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "before": {
+        "sha256": "3897d2970c06b1f05a3db9b6fb6751eb9b22b0c49ec8e447832798c848c088c9",
+        "bytes": 26367,
+        "normalizedBytes": 26367,
+        "lines": 456
+      },
+      "after": {
+        "sha256": "6eeeca80708ab843b17aeffefc8eec962489f96dc70f4809cb6ceb44a4b4a0c8",
+        "bytes": 26348,
+        "normalizedBytes": 26348,
+        "lines": 456
+      }
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "before": {
+        "sha256": "f37522093038af2e44ad82ff5fb2732640c93d290dd73484d37f077c4888a069",
+        "bytes": 25076,
+        "normalizedBytes": 25076,
+        "lines": 499
+      },
+      "after": {
+        "sha256": "9dc1ee786652e8b3e11771ac0c8ba6be0f1fccb21e1dfe6958fd7536940905e3",
+        "bytes": 24946,
+        "normalizedBytes": 24946,
+        "lines": 495
+      }
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "before": {
+        "sha256": "e0a96589498528969f5abafaf675043b2af50e8d8f6095cfef26476572bc3fbf",
+        "bytes": 21033,
+        "normalizedBytes": 21033,
+        "lines": 439
+      },
+      "after": {
+        "sha256": "910c277d32a4858ed32b0e1e53117c3cf11ea4a278298fc3986b07900dfb3f00",
+        "bytes": 20709,
+        "normalizedBytes": 20709,
+        "lines": 434
+      }
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "before": {
+        "sha256": "610b3a1bdadd2fec822c245d61e28ab3360298738312b4cc93f9351ca4ec6302",
+        "bytes": 1309,
+        "normalizedBytes": 1309,
+        "lines": 16
+      },
+      "after": {
+        "sha256": "68ff398ca13450f90147fafababccead62426faba994eb20e45e5969fce85acb",
+        "bytes": 1267,
+        "normalizedBytes": 1267,
+        "lines": 16
+      }
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "before": {
+        "sha256": "a3bee6843a43cfb6a78fc99cc032e14cd2c81f17fc7892cd28e85305b353d330",
+        "bytes": 3328,
+        "normalizedBytes": 3328,
+        "lines": 29
+      },
+      "after": {
+        "sha256": "f994f918d02dde18af180fcbd831491750e716774af98b66ec56c980869dc844",
+        "bytes": 3299,
+        "normalizedBytes": 3299,
+        "lines": 29
+      }
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "before": {
+        "sha256": "08f821034291c7d648150139a51b95cdd9b8c4e67821fe3aec19cb3e14a5ea3c",
+        "bytes": 13172,
+        "normalizedBytes": 13169,
+        "lines": 90
+      },
+      "after": {
+        "sha256": "e0bd41b271656dacd0a2f6ae1d11f5e4e9a98734a36130bec3d0089d6475c998",
+        "bytes": 13148,
+        "normalizedBytes": 13145,
+        "lines": 92
+      }
+    },
+    {
+      "file": "game/css/scenes.css",
+      "before": {
+        "sha256": "3e36930fa3131fc37d2c353ca5b04535e7fbaa7bf1f1133fa1ceaa6352aa3e66",
+        "bytes": 44058,
+        "normalizedBytes": 44058,
+        "lines": 542
+      },
+      "after": {
+        "sha256": "873869ef097c8a8247f7c598648cdffb0647b608ec7dbc617abe89ce024b90d5",
+        "bytes": 43967,
+        "normalizedBytes": 43967,
+        "lines": 542
+      }
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "before": {
+        "sha256": "3b5fc456c2ee146b35645e71a57814ac3a6ffad8b4f0c51b3db8d7fe956cd827",
+        "bytes": 16352,
+        "normalizedBytes": 16079,
+        "lines": 273
+      },
+      "after": {
+        "sha256": "173fa51a8d22255684557884af306059dd962f51b54e112092194932636bdcfe",
+        "bytes": 16333,
+        "normalizedBytes": 16061,
+        "lines": 273
+      }
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "before": {
+        "sha256": "0459c08492d3dba156f5c42c96f98396d2fbfe1dfde714b1035fa2ad868d793e",
+        "bytes": 17269,
+        "normalizedBytes": 17269,
+        "lines": 271
+      },
+      "after": {
+        "sha256": "6c82b4b0ffe190f799f1f212fad7859edc6891cdff5f12131e8995485aaaa5ea",
+        "bytes": 17207,
+        "normalizedBytes": 17207,
+        "lines": 271
+      }
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "before": {
+        "sha256": "6a026291d0e0979092e185f7a4de047ffdfa2156937c9df7181b6de25b1fbec9",
+        "bytes": 4598,
+        "normalizedBytes": 4598,
+        "lines": 71
+      },
+      "after": {
+        "sha256": "7c04d98f82516d34ac07b8f8b40599ba0928fe003fe8bb698b59fc25e7a49dff",
+        "bytes": 4540,
+        "normalizedBytes": 4540,
+        "lines": 69
+      }
+    },
+    {
+      "file": "game/css/winter.css",
+      "before": {
+        "sha256": "47ce218ea036de4b71a5dfcc7db92fcfac2eb3e07e044402933e39f709f0748d",
+        "bytes": 91055,
+        "normalizedBytes": 91055,
+        "lines": 1021
+      },
+      "after": {
+        "sha256": "6f6658d43f30b96b53f15e74f91867c3b2becac11b31a3d7a0dd83883b606fee",
+        "bytes": 90867,
+        "normalizedBytes": 90867,
+        "lines": 1027
+      }
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/code-lean-stage1-cards-schema.test.js",
+      "sha256": "c1fb256ad3641603f65064e64c247cb56f89157b6337bc4a661d801cb721a753",
+      "bytes": 3777,
+      "normalizedBytes": 3777,
+      "lines": 72,
+      "nonCommentTokens": 937
+    },
+    {
+      "file": "tests/code-lean-stage1-cards-m7.test.js",
+      "sha256": "ff125291202fce049ce2a55d81e5e10b26462ee4c2cdba9ea8bdb56fbe9a6ab5",
+      "bytes": 1372,
+      "normalizedBytes": 1372,
+      "lines": 29,
+      "nonCommentTokens": 288
+    },
+    {
+      "file": "tests/code-lean-stage1-ui-settings.test.js",
+      "sha256": "5dbad11fc79f4532193e720434ace6561a3123f78f56e5f675ebb71335f9204a",
+      "bytes": 8772,
+      "normalizedBytes": 8772,
+      "lines": 134,
+      "nonCommentTokens": 2102
+    },
+    {
+      "file": "tests/code-lean-stage1-ui-archive.test.js",
+      "sha256": "d9d614e54a5b35c503fb5079d507877b13ff83fd8c2f2242e0eed5ad83eda890",
+      "bytes": 5497,
+      "normalizedBytes": 5497,
+      "lines": 83,
+      "nonCommentTokens": 1307
+    }
+  ]
+}

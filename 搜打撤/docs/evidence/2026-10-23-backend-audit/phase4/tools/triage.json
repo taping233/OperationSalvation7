@@ -1,0 +1,665 @@
+{
+  "at": "2026-10-23T15:27:24.460Z",
+  "scanner": "Existing local jscpd 5.4.1; no installs, model downloads or network",
+  "filesScanned": 399,
+  "reportedCandidates": 38,
+  "kinds": {
+    "renamed": 35,
+    "exact": 2,
+    "similar": 1
+  },
+  "reportedDuplicatedLines": 939,
+  "reportedPercent": 1.51,
+  "limits": [
+    "候选含重叠窗口、不同字段和公开转发，不代表可删除939行。",
+    "扫描非冻结共享输入；只用于定位候选，实施以各文件独立基线和等价证据为准。"
+  ],
+  "decisions": [
+    {
+      "i": 0,
+      "kind": "renamed",
+      "lines": 16,
+      "first": {
+        "file": "agent.js",
+        "start": 36,
+        "end": 51
+      },
+      "second": {
+        "file": "battle.engine.factory.domain.js",
+        "start": 264,
+        "end": 265
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 1,
+      "kind": "renamed",
+      "lines": 15,
+      "first": {
+        "file": "agent.js",
+        "start": 37,
+        "end": 51
+      },
+      "second": {
+        "file": "battle.engine.factory.domain.js",
+        "start": 143,
+        "end": 145
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 2,
+      "kind": "renamed",
+      "lines": 14,
+      "first": {
+        "file": "battle.enemy-phase.domain.js",
+        "start": 111,
+        "end": 124
+      },
+      "second": {
+        "file": "battle.enemy-phase.domain.js",
+        "start": 441,
+        "end": 456
+      },
+      "decision": "defer-active-owner",
+      "reason": "新bugfix持有相应结算/敌方回合/状态操作，或片段跨越其端口；本轮不编辑。"
+    },
+    {
+      "i": 3,
+      "kind": "renamed",
+      "lines": 42,
+      "first": {
+        "file": "battle.engine.factory.domain.js",
+        "start": 207,
+        "end": 248
+      },
+      "second": {
+        "file": "battle.engine.factory.domain.js",
+        "start": 208,
+        "end": 249
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 4,
+      "kind": "renamed",
+      "lines": 153,
+      "first": {
+        "file": "battle.engine.js",
+        "start": 12,
+        "end": 164
+      },
+      "second": {
+        "file": "battle.engine.js",
+        "start": 14,
+        "end": 166
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 5,
+      "kind": "renamed",
+      "lines": 17,
+      "first": {
+        "file": "battle.resolution.domain.js",
+        "start": 40,
+        "end": 56
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 542,
+        "end": 543
+      },
+      "decision": "defer-active-owner",
+      "reason": "新bugfix持有相应结算/敌方回合/状态操作，或片段跨越其端口；本轮不编辑。"
+    },
+    {
+      "i": 6,
+      "kind": "renamed",
+      "lines": 35,
+      "first": {
+        "file": "effect-steps.m2.js",
+        "start": 2,
+        "end": 36
+      },
+      "second": {
+        "file": "effect-steps.m2.js",
+        "start": 6,
+        "end": 38
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 7,
+      "kind": "renamed",
+      "lines": 19,
+      "first": {
+        "file": "requested-card-runtime.js",
+        "start": 2,
+        "end": 20
+      },
+      "second": {
+        "file": "requested-card-runtime.js",
+        "start": 6,
+        "end": 22
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 8,
+      "kind": "renamed",
+      "lines": 38,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 1,
+        "end": 38
+      },
+      "second": {
+        "file": "battle.runtime.effects.js",
+        "start": 4,
+        "end": 39
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 9,
+      "kind": "renamed",
+      "lines": 19,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 1,
+        "end": 19
+      },
+      "second": {
+        "file": "battle.runtime.interaction.js",
+        "start": 1,
+        "end": 19
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 10,
+      "kind": "renamed",
+      "lines": 17,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 1,
+        "end": 17
+      },
+      "second": {
+        "file": "battle.runtime.piles.js",
+        "start": 1,
+        "end": 17
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 11,
+      "kind": "renamed",
+      "lines": 21,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 1,
+        "end": 21
+      },
+      "second": {
+        "file": "battle.runtime.session.js",
+        "start": 1,
+        "end": 21
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 12,
+      "kind": "renamed",
+      "lines": 13,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 30,
+        "end": 42
+      },
+      "second": {
+        "file": "battle.runtime.interaction.js",
+        "start": 10,
+        "end": 22
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 13,
+      "kind": "renamed",
+      "lines": 13,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 30,
+        "end": 42
+      },
+      "second": {
+        "file": "battle.runtime.piles.js",
+        "start": 8,
+        "end": 20
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 14,
+      "kind": "renamed",
+      "lines": 13,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 30,
+        "end": 42
+      },
+      "second": {
+        "file": "battle.runtime.session.js",
+        "start": 12,
+        "end": 24
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 15,
+      "kind": "renamed",
+      "lines": 22,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 77,
+        "end": 98
+      },
+      "second": {
+        "file": "battle.runtime.interaction.js",
+        "start": 37,
+        "end": 58
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 16,
+      "kind": "renamed",
+      "lines": 18,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 77,
+        "end": 94
+      },
+      "second": {
+        "file": "battle.runtime.piles.js",
+        "start": 33,
+        "end": 50
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 17,
+      "kind": "renamed",
+      "lines": 27,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 77,
+        "end": 103
+      },
+      "second": {
+        "file": "battle.runtime.session.js",
+        "start": 41,
+        "end": 67
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 18,
+      "kind": "renamed",
+      "lines": 30,
+      "first": {
+        "file": "battle.runtime.effects.js",
+        "start": 79,
+        "end": 108
+      },
+      "second": {
+        "file": "battle.runtime.effects.js",
+        "start": 80,
+        "end": 109
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 19,
+      "kind": "renamed",
+      "lines": 20,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 127,
+        "end": 146
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 128,
+        "end": 153
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 20,
+      "kind": "renamed",
+      "lines": 15,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 127,
+        "end": 141
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 21,
+      "kind": "renamed",
+      "lines": 16,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 127,
+        "end": 142
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 281,
+        "end": 296
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 22,
+      "kind": "renamed",
+      "lines": 27,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 127,
+        "end": 153
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 323,
+        "end": 365
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 23,
+      "kind": "renamed",
+      "lines": 16,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 127,
+        "end": 142
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 359,
+        "end": 375
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 24,
+      "kind": "renamed",
+      "lines": 29,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 205,
+        "end": 233
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 256,
+        "end": 287
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 25,
+      "kind": "renamed",
+      "lines": 11,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 224,
+        "end": 234
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 287,
+        "end": 297
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 26,
+      "kind": "renamed",
+      "lines": 91,
+      "first": {
+        "file": "battle.runtime.factory.js",
+        "start": 451,
+        "end": 541
+      },
+      "second": {
+        "file": "battle.runtime.factory.js",
+        "start": 452,
+        "end": 542
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 27,
+      "kind": "renamed",
+      "lines": 14,
+      "first": {
+        "file": "card-rules.schema.js",
+        "start": 1241,
+        "end": 1254
+      },
+      "second": {
+        "file": "card-rules.schema.js",
+        "start": 1280,
+        "end": 1295
+      },
+      "decision": "retain-specific-validation",
+      "reason": "不同规范域的校验形状相似，保留其字段和错误语义；另三处金额校验的严格等价提取由battle组独立证据证明。"
+    },
+    {
+      "i": 28,
+      "kind": "exact",
+      "lines": 30,
+      "first": {
+        "file": "cards.sync.backfiller.js",
+        "start": 15,
+        "end": 44
+      },
+      "second": {
+        "file": "cards.sync.rule-backfill.js",
+        "start": 118,
+        "end": 126
+      },
+      "decision": "deduplicate-comparator",
+      "reason": "相同递归快照比较器的共享实现，见battle组补丁与AST证据。"
+    },
+    {
+      "i": 29,
+      "kind": "renamed",
+      "lines": 11,
+      "first": {
+        "file": "art.js",
+        "start": 399,
+        "end": 409
+      },
+      "second": {
+        "file": "art.js",
+        "start": 450,
+        "end": 459
+      },
+      "decision": "exclude-presentation",
+      "reason": "图像/DOM采样或页面按需装配，属于前端及前端验收范围。"
+    },
+    {
+      "i": 30,
+      "kind": "renamed",
+      "lines": 11,
+      "first": {
+        "file": "perf-probe.local.js",
+        "start": 364,
+        "end": 374
+      },
+      "second": {
+        "file": "perf-ledger-capture.mjs",
+        "start": 334,
+        "end": 343
+      },
+      "decision": "exclude-presentation",
+      "reason": "图像/DOM采样或页面按需装配，属于前端及前端验收范围。"
+    },
+    {
+      "i": 31,
+      "kind": "renamed",
+      "lines": 22,
+      "first": {
+        "file": "rules.js",
+        "start": 8,
+        "end": 29
+      },
+      "second": {
+        "file": "rules.js",
+        "start": 9,
+        "end": 30
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 32,
+      "kind": "renamed",
+      "lines": 12,
+      "first": {
+        "file": "battle-settlement.commands.js",
+        "start": 122,
+        "end": 133
+      },
+      "second": {
+        "file": "battle-settlement.commands.js",
+        "start": 167,
+        "end": 180
+      },
+      "decision": "defer-active-owner",
+      "reason": "新bugfix持有相应结算/敌方回合/状态操作，或片段跨越其端口；本轮不编辑。"
+    },
+    {
+      "i": 33,
+      "kind": "renamed",
+      "lines": 13,
+      "first": {
+        "file": "battle-settlement.commands.js",
+        "start": 134,
+        "end": 146
+      },
+      "second": {
+        "file": "battle-settlement.commands.js",
+        "start": 181,
+        "end": 193
+      },
+      "decision": "defer-active-owner",
+      "reason": "新bugfix持有相应结算/敌方回合/状态操作，或片段跨越其端口；本轮不编辑。"
+    },
+    {
+      "i": 34,
+      "kind": "renamed",
+      "lines": 19,
+      "first": {
+        "file": "game.session.js",
+        "start": 87,
+        "end": 105
+      },
+      "second": {
+        "file": "game.session.js",
+        "start": 88,
+        "end": 106
+      },
+      "decision": "retain-distinct-bindings",
+      "reason": "重命名后相似的独立字段/不同端口或同文件重叠窗口；分别服务不同API/状态，非两份相同业务实现。"
+    },
+    {
+      "i": 35,
+      "kind": "renamed",
+      "lines": 16,
+      "first": {
+        "file": "layeredMap.js",
+        "start": 12,
+        "end": 27
+      },
+      "second": {
+        "file": "layeredMap.js",
+        "start": 31,
+        "end": 45
+      },
+      "decision": "retain-version-contract",
+      "reason": "旧3/9与新层图的坐标映射具有版本冻结/布局契约，未认定可互换。"
+    },
+    {
+      "i": 36,
+      "kind": "exact",
+      "lines": 13,
+      "first": {
+        "file": "perf-ledger-capture.mjs",
+        "start": 542,
+        "end": 554
+      },
+      "second": {
+        "file": "perf-ledger-capture.mjs",
+        "start": 599,
+        "end": 607
+      },
+      "decision": "exclude-presentation",
+      "reason": "图像/DOM采样或页面按需装配，属于前端及前端验收范围。"
+    },
+    {
+      "i": 37,
+      "kind": "similar",
+      "lines": 11,
+      "first": {
+        "file": "game.hub.js",
+        "start": 36,
+        "end": 46
+      },
+      "second": {
+        "file": "game.run.dev-loader.js",
+        "start": 12,
+        "end": 22
+      },
+      "decision": "exclude-presentation",
+      "reason": "图像/DOM采样或页面按需装配，属于前端及前端验收范围。"
+    }
+  ]
+}

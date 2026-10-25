@@ -1,0 +1,43 @@
+{
+  "scope": "battle/core,effects,bag,runtime and cards pure rules; phase 5 large-block review",
+  "scopeExclusions": ["UI and presentation implementation", "active project-bugfix source editing", "tests/build/browser execution", "file deletion"],
+  "coverageMeaning": "Focused dependency, declaration-shape, ownership, and actual-consumer review; not a claim of exhaustive function-by-function correctness audit",
+  "reusedEvidence": ["../tools/entry-graph.json", "../../phase4/battle/duplicates-exact.json", "../../phase4/battle/duplicates-alpha.json"],
+  "groups": [
+    {
+      "files": ["game/src/cards/builtin-card-previous-rules.js", "game/src/cards/builtin-equipment-previous-rules.js", "game/src/cards/cards.data.js", "game/src/cards/hosted-rule-snapshot.js"],
+      "coverage": "Complete source AST, exact eligible literal shapes, property order, literal values, object ownership, complete module expansion equivalence, original/final byte fingerprints",
+      "result": "79 templates normalized; net 633 source lines removed; all other AST nodes retained"
+    },
+    {
+      "files": ["game/src/cards/builtin-card-execution.js", "game/src/cards/builtin-equipment-execution.js", "game/src/cards/builtin-choice-execution.js", "game/src/cards/builtin-card-previous-variants.js", "game/src/cards/cards.sync.builtin.js", "game/src/cards/cards.js", "game/src/cards/card-migrations.js"],
+      "coverage": "Migration entry registration, historical fingerprints, freeze range/order, persistence aliasing, actual declaration consumers; targeted source and reference reads",
+      "result": "Historical compatibility still used; migration order and consumers preserved"
+    },
+    {
+      "files": ["game/src/cards/cards.sync.m1.js", "game/src/cards/cards.sync.m2.js", "game/src/cards/cards.sync.m3.js", "game/src/cards/cards.sync.m4.js", "game/src/cards/cards.sync.m5.js", "game/src/cards/cards.sync.m6.js", "game/src/cards/cards.sync.m7.js", "game/src/cards/cards.sync.m8.js", "game/src/cards/cards.sync.m9.js", "game/src/cards/cards.sync.m10.js", "game/src/cards/cards.sync.m11.js", "game/src/cards/cards.sync.backfiller.js", "game/src/cards/cards.sync.rule-backfill.js", "game/src/cards/card-snapshot.js"],
+      "coverage": "Shared backfiller registration, marker/configuration and data-generation structure; reference scan and representative sections, not all operation semantics re-audited",
+      "result": "Execution skeleton already shared; per-batch markers/data/canonical priorities remain required; no hundreds-of-lines retired implementation proven"
+    },
+    {
+      "files": ["game/src/battle/effects/battle.hosted.js", "game/src/cards/card-execution-plan.js", "game/src/cards/card-compatibility.js"],
+      "coverage": "Exact native migration before hosted fallback, custom-card ownership guards, structured/text dispatch authority",
+      "result": "Text compatibility remains reachable for supported customized/legacy cards; not deleted"
+    },
+    {
+      "files": ["game/src/battle/runtime/battle.runtime.default.js", "game/src/battle/runtime/battle.runtime.js", "game/src/battle/runtime/battle.runtime.session.js", "game/src/battle/runtime/battle.runtime.piles.js", "game/src/battle/runtime/battle.runtime.effects.js", "game/src/battle/runtime/battle.runtime.interaction.js", "game/src/battle/runtime/battle.runtime.factory.js", "game/src/battle/runtime/battle.state.js", "game/src/battle/core/battle.default-context.js", "game/src/battle/core/battle.engine.js", "game/src/battle/core/battle.engine.factory.js", "game/src/battle/core/battle.engine.instance.js", "game/src/battle/core/battle.core.js", "game/src/battle/battle-loader.js"],
+      "coverage": "Default-instance dependency identity, live-binding subscriber facade and actual production readers, state machine calls, lazy browser entry; no owned/active gameplay source edited",
+      "result": "Same underlying default runtime is used by current browser engine/core and replay API; whole singleton slice cannot be removed"
+    },
+    {
+      "files": ["scripts/sync-cards-from-live.mjs", "tests/cards-sync-snapshot-guard.test.js", "tests/bag-structured-rule-migration.test.js", "game/src/battle/view/battle.view.js", "game/src/agent/agent.replay-state.js"],
+      "coverage": "Integration boundary/reference reads only: VM manual module order, source-extraction constraints, actual browser/replay consumers",
+      "result": "Parent owns sync-script dependency/alias integration; no test or view source modified by child"
+    }
+  ],
+  "productionSourceFilesEdited": ["game/src/cards/builtin-card-previous-rules.js", "game/src/cards/builtin-equipment-previous-rules.js", "game/src/cards/cards.data.js", "game/src/cards/hosted-rule-snapshot.js"],
+  "productionSourceFilesDeleted": [],
+  "testsRun": false,
+  "buildRun": false,
+  "browserRun": false
+}

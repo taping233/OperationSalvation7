@@ -1,0 +1,168 @@
+{
+  "at": "2026-10-23T16:03:10.615Z",
+  "status": "complete_uncommitted",
+  "kind": "static-only",
+  "changes": [
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase6/battle/card-rules.schema.js.before.txt",
+      "before": "653dd808f5799bf8548fe38c024ed5ea4700ad99fa46b7e9557f2047e4c45e3f",
+      "expected": "fc4a5b4fa65194db88779dff8fac6233353bc24773be987b97f88c92681830ff",
+      "currentSha256": "fc4a5b4fa65194db88779dff8fac6233353bc24773be987b97f88c92681830ff",
+      "bytesBefore": 77161,
+      "bytesAfter": 74260,
+      "added": 60,
+      "removed": 126
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase6/storage/base.js.before.txt",
+      "before": "6c81008034e007c142377a7b31a3d460ccb6ad892daff6ccb6467e7c1b396237",
+      "expected": "d3652ca05f8835770c7e1d6af8eeda1598e4c26354ec97733bdd02d1b00980df",
+      "currentSha256": "d3652ca05f8835770c7e1d6af8eeda1598e4c26354ec97733bdd02d1b00980df",
+      "bytesBefore": 45266,
+      "bytesAfter": 45126,
+      "added": 11,
+      "removed": 20
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy-review.mjs",
+      "baseline": "docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.before",
+      "ownAfter": "docs/evidence/2026-10-23-backend-audit/phase6/run-agent/runtime-asset-redundancy-review.mjs.after",
+      "before": "49555694de08ddaae990ab4d3ac2db950726f41f34f52a8716a9aabc0e54be83",
+      "expected": "3d16b41f173ec4640dc93f6d1f39ac2d7033e4b42b5296b24ff40b3843cb8db4",
+      "currentSha256": "0a45bd61b688dc9b9fde685fdcacac46d66d6cd59c492ea5963212c99e7a4901",
+      "currentMatchesOwnAfterPlusDeclaredExternalFields": true,
+      "bytesBefore": 35680,
+      "bytesAfter": 33799,
+      "added": 22,
+      "removed": 30
+    }
+  ],
+  "totals": {
+    "added": 93,
+    "removed": 176,
+    "netBytesRemoved": 4922,
+    "netRemoved": 83
+  },
+  "previousActualNet": 1270,
+  "cumulativeActualNet": 1353,
+  "previousProductionNet": 1465,
+  "cumulativeProductionNet": 1548,
+  "codeMovedThisRound": 0,
+  "filesDeleted": [],
+  "relativeImports": [
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-trigger-contract.js"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-semantic-contract.js"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "ref": "./card-execution-plan.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/sdt-facade.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-state.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/random.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "../core/data-loader.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./game.storage.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./versioned-slot-reader.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-mutation.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-economy.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-progression.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-departure.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-pet-egg.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-elapsed.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./base-meta.commands.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./collection-protection.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./stash-sale-price.js"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "ref": "./slot-write-lock.js"
+    }
+  ],
+  "excludedConcurrentChanges": {
+    "owner": "WF-frontend-six-residuals-clean-1023",
+    "basis": "Current PARALLEL-REGISTRY active row explicitly claims the two fingerprint refreshes",
+    "fields": [
+      {
+        "file": "game/src/hub/hub.presentation.js",
+        "before": "5369090da31cb1a3f6de2691abaf4dbd57b13b3faa1de20bd3b46120389fe7f6",
+        "current": "ffaa4754f7e865539119332bc55ae8843c3100f558ea1c1ccc03db339e09a859"
+      },
+      {
+        "file": "game/src/ui/card-zoom-controller.js",
+        "before": "8e075bfe29e06c5077b648a92d104e737bd3471ea8615dfe0e965df7b2ee346c",
+        "current": "d479b379a74e26534dba289b13e2d565dae25a74f0ec7ded11a0df72af6d3de8"
+      }
+    ],
+    "notCountedAsOwnChanges": true,
+    "preserved": true,
+    "scope": "Only current source bytes outside our exact template patch; not an approval of the other thread implementation"
+  },
+  "verification": {
+    "allThreeCurrentModulesParse": true,
+    "ownBaselinesAndAfterFingerprintsMatch": true,
+    "externalFieldDeltaExactlyMatchesDeclaredTwoFields": true,
+    "directRelativeImportsExist": true,
+    "sourceLintExitCode": 0,
+    "diffCheckExitCode": 0,
+    "cardSchema": "battle/receipt.json; complete module AST equal after helper expansion",
+    "baseUpgrades": "storage/ast-equivalence.json; complete module AST equal after helper expansion",
+    "pairedPaths": "run-agent/template-equivalence.json; complete 286-row data and all own protection fields equal",
+    "manualAssembly": "tools/sync-assembly-static.json; syntax/no-undef/no-redeclare static analysis passed",
+    "testsRun": false,
+    "buildRun": false,
+    "browserRun": false,
+    "sourceScriptsExecuted": false
+  },
+  "limits": "No whole-repository completeness or runtime verification claim; other active ownership preserved"
+}

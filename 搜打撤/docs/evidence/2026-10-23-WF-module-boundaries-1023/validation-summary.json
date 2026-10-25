@@ -1,0 +1,151 @@
+{
+  "task": "WF-module-boundaries-1023",
+  "outcome": "passed",
+  "command": "node scripts/acceptance-gate.mjs --full --run",
+  "exitCode": 0,
+  "tests": {
+    "passed": 8728,
+    "skipped": 38,
+    "total": 8766
+  },
+  "files": {
+    "passed": 831,
+    "skipped": 1,
+    "total": 832
+  },
+  "typeCoverage": {
+    "checked": 585,
+    "total": 585,
+    "strict": 51
+  },
+  "staticChecks": [
+    "syntax",
+    "data",
+    "11 type configurations",
+    "ESLint",
+    "asset audit"
+  ],
+  "historicalAssetWarnings": 570,
+  "inputFilesChecked": 1756,
+  "inputDrift": [],
+  "newInputFiles": [],
+  "log": "full-gate-final.log",
+  "logSha256": "7b4dfea2f82ce396f63ef69d08fc3d73b716ae5b98cd5dd000b86e323e6ed81c",
+  "documentation": "docs-check.json",
+  "browser": "browser-check.json",
+  "limits": [
+    "Full worktree validation is not a staged receipt or remote CI result",
+    "Production build and full game playthrough not executed"
+  ],
+  "earlierAttempts": [
+    "full-gate-first.log: initial inventory return types failed before Vitest",
+    "full-gate-types-second.log: request JSDoc mapping failed before Vitest",
+    "full-gate-runtime-first.log: first complete Vitest had 10 failed tests and 4 failed suites; retained unchanged"
+  ],
+  "ownedFiles": [
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "cdb7af560e7065881b216fe57862dc4bd61cfd2de469c9af78f878a0d7787892"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-effects.domain.js",
+      "sha256": "079a7bf2cb4aaeeb198d2d30718be817efc0c62bf2db579aaddc2ed18c95575e"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "e2514aa43c56d7e8727a3c2dde339b987bc8e4454fb40f1869115bbc2defec64"
+    },
+    {
+      "path": "game/src/hub/bag-inventory-commands.js",
+      "sha256": "72d58af2a06c9b0e0dfbb7a4d578a23506b6fc9aed52b11034c170c89c038330"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "sha256": "701483224360e67cb14a0f855c5077c056b41566069e0ea586802bf68f5c847c"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "sha256": "43c076914e491dd340cfbd746bcef15b46b732cbcf3ad81f2daca0ea962a2098"
+    },
+    {
+      "path": "game/src/cards/card-execution-plan.js",
+      "sha256": "1cab5a326f9779b294ab1eca49358566adf8b0470af644ccf8a301bdd4806b85"
+    },
+    {
+      "path": "game/src/cards/card-compatibility.js",
+      "sha256": "57b7d4ebc93ca79ddc27a669901ce9fbeb89c7edfcd66321dc5f52b4c5fa4501"
+    },
+    {
+      "path": "game/src/cards/card-migrations.js",
+      "sha256": "616c25e074d690e994e68613be57a97438c7a53f164d6b1bba7dcc19fe156a70"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "sha256": "6fa3cc5b3bf3e37f7b321a7b318afc995102cf56b09d4367640e5ef27ac059a9"
+    },
+    {
+      "path": "game/src/ui/card-zoom-controller.js",
+      "sha256": "6c433db08a7ccdb4b2939f6a7ccc41ca8a2f0b0b289bfd542af31ee6e81a8185"
+    },
+    {
+      "path": "game/src/ui/card-zoom-content.js",
+      "sha256": "aaf3833f9ad78dd9c4a0cccce2cf9040d1fba7dc8013776b1ffaaa78274f282e"
+    },
+    {
+      "path": "game/src/ui/card-zoom-photo-source.js",
+      "sha256": "1513540636a15d26507348cb57a3114b7302a626ace74ac54eb641429058f14d"
+    },
+    {
+      "path": "game/src/README.md",
+      "sha256": "b0703fa080b279debd0e08342557313d780c8261ec85b750c04dacfb0be4cded"
+    },
+    {
+      "path": "tests/premium-ui-pages.test.js",
+      "sha256": "c7d070527795a606f62f956c6fb8d57f91bc84a5cf87d2adf45f2f5788d783fe"
+    },
+    {
+      "path": "tests/battle-turn-effects-domain.test.js",
+      "sha256": "24d46d8561dc7e0dd97a41049f684a653d5aa77369d9f57ff9fb5c1f5afee5e1"
+    },
+    {
+      "path": "tests/bag-inventory-commands.test.js",
+      "sha256": "c94b117eb963dc86bafb50e0c3a0a8c14318af889abaded541ce47d5761bb29f"
+    },
+    {
+      "path": "tests/card-compatibility-boundary.test.js",
+      "sha256": "7afd535d2ad120db89881350ce3a014247eee8572fcd393a9346e09be0683b28"
+    },
+    {
+      "path": "tests/card-migrations-boundary.test.js",
+      "sha256": "09468258d3353cf42cc40f242697eee639e13602cc988ad5d0823077c8671f2d"
+    },
+    {
+      "path": "tests/card-zoom-controller.test.js",
+      "sha256": "29c0c072fa93a2ffe830d209b5ede9f7c7f8fb3a790599e86324d2446a746626"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "bdd0a3a143a81bc78ea970c4f44c77105e7c685424e55b2b82ab4bbab8f43f0a"
+    },
+    {
+      "path": "game/src/hub/game.bag.token-craft.js",
+      "sha256": "18a680c5829b730d75a9a1989fe11963205e5f4a51824387ffc72f4d43f523bc"
+    },
+    {
+      "path": "game/src/hub/bag-token-craft-plan.js",
+      "sha256": "8bc9a03324ae8cdaf447a0c04e461c07559609b027d73cb727934d11472f0f30"
+    },
+    {
+      "path": "scripts/sync-cards-from-live.mjs",
+      "sha256": "b70224f4eb61868497a2ef789f6304be39b7e2e8ec2c800c4d41b6b16abd6c06"
+    },
+    {
+      "path": "tests/sync-cards-from-live.test.js",
+      "sha256": "e9204123030c43dcdda792545d9f4fd5808eb3acd73aa83a21e480ca7246ff52"
+    },
+    {
+      "path": "tests/reward-action-clipping.test.js",
+      "sha256": "f55d87a02aee2c4a8224802a8b7f3e87d16fd4ea821c23aec6162390037426cc"
+    }
+  ]
+}

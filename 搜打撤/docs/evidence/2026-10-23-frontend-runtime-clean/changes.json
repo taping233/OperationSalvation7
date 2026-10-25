@@ -1,0 +1,405 @@
+[
+  {
+    "file": "game/src/battle/view/battle.anim.view.js",
+    "beforeSha256": "cc5b661989ae3fbb423b097beb719e46b3f1e7837a71bd58742c4477bae0ad88",
+    "afterSha256": "33ee3286781233b418bc3a5c5f2876076d5700755cbe7d5842a7467a412855bd",
+    "beforeBytes": 16916,
+    "afterBytes": 14358
+  },
+  {
+    "file": "game/src/ui/game.menu.js",
+    "beforeSha256": "4c2b1d8d9db7ab098c44a4768b7a129fd1fbcb80c8a0dc896801b626a8f49283",
+    "afterSha256": "b3a33ea8a7d3305f697fdf86b50948d757ece1bc18b4eb206ffb110cf5951429",
+    "beforeBytes": 19663,
+    "afterBytes": 19246
+  },
+  {
+    "file": "game/src/ui/home-fx.js",
+    "beforeSha256": "23598ecb22f3ff1c1c75fe8d4ed81f06749c604424fe1253567447fdf7058a38",
+    "afterSha256": "380dcb135e29303296398c3bd5345776b74254822158ee2f03c176a98f418f83",
+    "beforeBytes": 10183,
+    "afterBytes": 10121
+  },
+  {
+    "file": "game/index.html",
+    "beforeSha256": "f98908772ff80f2505d5363155c86b9dffa1faa51c0446b2fa512041503c633a",
+    "afterSha256": "7dc3827e4ecce3ec505b4d53fa4d4e30906da8712d919c1c476e11e0d5a6228d",
+    "beforeBytes": 25095,
+    "afterBytes": 23150
+  },
+  {
+    "file": "game/dev/title-resource-review.html",
+    "beforeSha256": "06456f486284d2bd7506202a09f9138976d71cf89c380db42a4474610d1cd78e",
+    "afterSha256": "955f971e5db50de356cd9d8af7feb929dbe5d43d5a572420adbcbfe86f4ccbcd",
+    "beforeBytes": 19784,
+    "afterBytes": 17666
+  },
+  {
+    "file": "game/src/hub/base-motion-v4.js",
+    "beforeSha256": "08e0fb6ca7a5a8f5333f68a3d22a0708e0880880002e882882641856846b6720",
+    "afterSha256": "6e989f3ede646eb00ba1f17afaa9055448b1e0c2eac4f4147ee5c0362780fb6e",
+    "beforeBytes": 2067,
+    "afterBytes": 1855
+  },
+  {
+    "file": "game/src/hub/hub.warehouse.js",
+    "beforeSha256": "84182633661c0855c821b199c3df213c44af6d9d6ee71198accb38eccc39a9d9",
+    "afterSha256": "a2cf24de593f627a037380e24419bc92338bb742c99a66c0580ac91118c8e2b2",
+    "beforeBytes": 18615,
+    "afterBytes": 18145
+  },
+  {
+    "file": "game/src/hub/hub.personnel.js",
+    "beforeSha256": "3880141149fac7eddc13e0eceafe944555a174cd995445356d40308e69b0c33c",
+    "afterSha256": "7bd8b26f98e417c36d97d93be8c273547f2d7d903514cd41e0e02ebaa52d5ad7",
+    "beforeBytes": 23386,
+    "afterBytes": 22462
+  },
+  {
+    "file": "game/src/ui/settings-navigation.js",
+    "beforeSha256": "f3459d9616dbf7fa5d59e4cc1ee6e24d4adde92a188254513ef44f654b12434b",
+    "afterSha256": "e21f441451583c7ecba885713733d6789a5105062c43fce667cdb56482d3ed15",
+    "beforeBytes": 4000,
+    "afterBytes": 3893
+  },
+  {
+    "file": "game/src/ui/page-motion-profiles.js",
+    "beforeSha256": "af39664ba123b7293da0a8260ffb9273e885ea507b696647f2942547f4954516",
+    "afterSha256": "328eae77a31c68f147827768568b144d7cffec486ae37687c679954cc4acbb41",
+    "beforeBytes": 6632,
+    "afterBytes": 6484
+  },
+  {
+    "file": "game/src/hub/game.hub.pages.js",
+    "beforeSha256": "27440bd886950658e3b6ad42107eaef73a2efb71febadd9ebe4d131306e1a75f",
+    "afterSha256": "1c285a3f41bbf11a5f7edeb57031752680b07d0cd7aae4cba9db5795a0c48bae",
+    "beforeBytes": 21403,
+    "afterBytes": 21035
+  },
+  {
+    "file": "game/src/hub/game.hub.runtime.js",
+    "beforeSha256": "835f81869bc9f416cd9baeb792727a1b49c74f09d7802ae8ac99529dd46e7059",
+    "afterSha256": "03f7254b6687527f7d3650655e5095c14cc0498e2a0d99489f556a8cd44be2cb",
+    "beforeBytes": 27981,
+    "afterBytes": 26146
+  },
+  {
+    "file": "game/src/hub/game.hub.js",
+    "beforeSha256": "b387a1c1affa5c42526d5c8b4c03a79f774af003740cd6487228b631effc06db",
+    "afterSha256": "fa1300e44a29b31363ddff5acfcd3750607a2105bb041a89ac36e66dbf075fe2",
+    "beforeBytes": 5529,
+    "afterBytes": 5492
+  },
+  {
+    "file": "game/dev/partner-interaction-review.html",
+    "beforeSha256": "64bae0a04d3532bb974efe3bec177725d5e04f7a8271061db0ed2ad33bbfb871",
+    "afterSha256": "b6a65b09c9990f516803670ce4514154e849d6418c7481b93eebc563363a2c41",
+    "beforeBytes": 8959,
+    "afterBytes": 8904
+  },
+  {
+    "file": "game/src/battle/view/battle.vfx.js",
+    "beforeSha256": "0ccb1621ff0fa5919775924f643a967d3c33d3ebe211e1c0897e2679d1d18858",
+    "afterSha256": "63173629e67355a31031b512b4bae2969f13cba3f7b53f4466644d3bb31fc12b",
+    "beforeBytes": 26277,
+    "afterBytes": 25695
+  },
+  {
+    "file": "game/src/battle/view/battle.aim.js",
+    "beforeSha256": "dc28067c13309fb8f054f780f0e4c97dd4192c5edf781bd6be344a3d40685087",
+    "afterSha256": "d58df8312df233a28e6febce010a132adb79e1d0a09eda8139a3cbaa64ee8e8b",
+    "beforeBytes": 50709,
+    "afterBytes": 50560
+  },
+  {
+    "file": "game/src/battle/view/battle.layers.js",
+    "beforeSha256": "0e49621747a3b4c8c74c7aba9308846585e7f7ba8894b00c6f1a85df564aaaa4",
+    "afterSha256": "8ec40bace4cc9e5d9786c52ea40ea30c8e432a4bea77a00f49e7dac9aa414157",
+    "beforeBytes": 64198,
+    "afterBytes": 64131
+  },
+  {
+    "file": "game/src/battle/view/battle.victory.js",
+    "beforeSha256": "49969d507d0d5c8ed6c64e4b8df867fc43bf65095324857b2c8b597694bbdd10",
+    "afterSha256": "0eab3af7f03217ae2bff8ca276687dfa49b31fcaed0c2f42205ef7e499505ef6",
+    "beforeBytes": 4053,
+    "afterBytes": 3980
+  },
+  {
+    "file": "tests/card-browser-state.test.js",
+    "beforeSha256": "4b90ea0ab950d94d27a4e3ec31f0dc3297d3cd73ed15baf99e2c27c1bbdc4d97",
+    "afterSha256": "69226a3b68304bebe36ad0b1ef9f4c8313c7916634a4f9d1e27e3c3d84ebe44d",
+    "beforeBytes": 13295,
+    "afterBytes": 13315
+  },
+  {
+    "file": "tests/base-motion-v4.test.js",
+    "beforeSha256": "ad1c05f1a3312ca21090428d053d81a43e2b462053f5055e3e9e026b858a95bb",
+    "afterSha256": "28ac9f59938c6f0c3bfb3887d9b4250a4f683bc61898488a8a96a43d234039d6",
+    "beforeBytes": 2834,
+    "afterBytes": 2509
+  },
+  {
+    "file": "tests/title-resource-review.test.js",
+    "beforeSha256": "b8f7bac3c5d1eb6c0c60f82c1960edfc667f0b4db95b2f12b03190570e3cb3fe",
+    "afterSha256": "eded78f8b4cadb0c9cf926f046b31fbf668a636a9aff79ad111989fa5fcf6790",
+    "beforeBytes": 5816,
+    "afterBytes": 5796
+  },
+  {
+    "file": "tests/target-surface.test.js",
+    "beforeSha256": "a1e220e89b5d31a7564d2eb8bcf20a183c6de3f13984c3fcafef38bee19c84ad",
+    "afterSha256": "a89c3f862dac74aa41366abe40da6da12727ff173d7c9eba4896b0c5283d9d75",
+    "beforeBytes": 10935,
+    "afterBytes": 10898
+  },
+  {
+    "file": "tests/navigation-motion.test.js",
+    "beforeSha256": "de83aa7a748f68ac7fa78f66ed19d9dea5674a2d1f4514a0d688e066093150c7",
+    "afterSha256": "3704407f3a100ec7ff2aa7a7b5d40963c691a4d22f8a07998563976ae6c0782f",
+    "beforeBytes": 2822,
+    "afterBytes": 2802
+  },
+  {
+    "file": "tests/home-async-lifecycle.test.js",
+    "beforeSha256": "93e043e67f41889a5a1aef139dad6a0c3820d88718923d04b9ee5472aa4b5116",
+    "afterSha256": "593d5e697771b402278be4a089bb140ecf6708905ced1ab0154b6229d0599b48",
+    "beforeBytes": 5849,
+    "afterBytes": 5799
+  },
+  {
+    "file": "tests/battle-pile-timers.test.js",
+    "beforeSha256": "f64925cf11de76d94b4f00958f95fd4519ab2c8d5918cd8e810fd8c1bd91ec7f",
+    "afterSha256": "035efeb728cf87271ea13e56de2430e28886a46863eb68c444cf80be052e2bf1",
+    "beforeBytes": 4386,
+    "afterBytes": 1901
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "beforeSha256": "5cc0954429c81291d59d78b2cee6d18f84ea459aa411986a8913a7e89b7dce2e",
+    "afterSha256": "685f6603a9b6bc28a6006c23a711ffe16c4bc81c99f436b4cfdc9fb83a82afb0",
+    "beforeBytes": 17878,
+    "afterBytes": 17522
+  },
+  {
+    "file": "game/css/bag-design-system.css",
+    "beforeSha256": "82dc11d63de18b5c7707e9b1b2300201e9c7d8f59de34a6ade4ee890993c720b",
+    "afterSha256": "386cc25afb099b8619f67e1c90564efbbda0d3dba1f9d691a0ed06b20546d726",
+    "beforeBytes": 8739,
+    "afterBytes": 8685
+  },
+  {
+    "file": "game/css/base-archive-v3.css",
+    "beforeSha256": "a9f334172a8ea29ccdec92bbf6559ae1f23b3b047a8d0c1a4633a261355e2560",
+    "afterSha256": "eb34c19b4e3027c52a1c79d43f16d057f291745b09c5b6f3db1687beb3b2f577",
+    "beforeBytes": 14007,
+    "afterBytes": 13971
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "beforeSha256": "c00a4d10a798bd6ad245d7a5dce9629764cad93e577a84664abaf0e8766a287c",
+    "afterSha256": "8b48b18ec6f54a2b605dd094e69f34b10e87f5683c60cf321998ea3e5cfdca52",
+    "beforeBytes": 34761,
+    "afterBytes": 34103
+  },
+  {
+    "file": "game/css/base-cohesion-v5.css",
+    "beforeSha256": "349714d80ff3a6352a64b05c49f737ca537de9dfcea253cdfc90e1d623d59bcd",
+    "afterSha256": "0cbc9f1c40bf007b9cca1e318aa633c728b012cc4275b4148bece2ad91f5c1f4",
+    "beforeBytes": 16092,
+    "afterBytes": 15748
+  },
+  {
+    "file": "game/css/base-controls-v4.css",
+    "beforeSha256": "0225427a0f852f0aa52fc4cad96f1860cd659b0082769b275b96c2f6a890c69a",
+    "afterSha256": "e809b50a24f3321d743bd537f3fb6ca3b2b29ee53f58dae508c66a975b438797",
+    "beforeBytes": 5865,
+    "afterBytes": 5693
+  },
+  {
+    "file": "game/css/base-framework-v7.css",
+    "beforeSha256": "9f4c45c33dc5d5375fd6128151557632310b2911008c9138e79e6a5dc9af9e7b",
+    "afterSha256": "4c00c87e888459c029b3ad7928718c35e6d3d714cb11610455ae2ae6c983cc06",
+    "beforeBytes": 7842,
+    "afterBytes": 7795
+  },
+  {
+    "file": "game/css/base-rooms-v7.css",
+    "beforeSha256": "3ef6762133d5c2290b898a1afc5e4bb8abef7e8940f6232e139cc06b92e819c6",
+    "afterSha256": "36b87bb40f04ccb3f9d83a8cd2a40d3c8b4b60d2047ea822f6e1f5f1c288c39e",
+    "beforeBytes": 32397,
+    "afterBytes": 31266
+  },
+  {
+    "file": "game/css/base.css",
+    "beforeSha256": "ed2770cc8997e62e7fa08773b07984c0f7244557fff4a38c92225e461ecc9105",
+    "afterSha256": "7e5b5507e827ff0044dc9ec9681755f21e44975b26bcf33e5f5d39ac5d20f1d0",
+    "beforeBytes": 28636,
+    "afterBytes": 27632
+  },
+  {
+    "file": "game/css/battle-decision.css",
+    "beforeSha256": "da089cbe783b893af732e6b9d03e3f718f035ab62111c3fe1c5f514b17d742ca",
+    "afterSha256": "21dc093d62864d454dc166089fc32f7cea787003bc857ddd1c40b80d4cac2353",
+    "beforeBytes": 12463,
+    "afterBytes": 12141
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "beforeSha256": "8c0190e2e55dbe039faa23edfafd0f5af875ba8e92dbc42be56a1cc40481835b",
+    "afterSha256": "5f470572560f9539cafcdceb6c24d95ffdd36715929b905953f3564386e715d6",
+    "beforeBytes": 12564,
+    "afterBytes": 12340
+  },
+  {
+    "file": "game/css/battle-secondary-overlay.css",
+    "beforeSha256": "fc25e60a50be955d8d10ca9ae7bdc82469b64485b325ac77d199b82e8d5146bb",
+    "afterSha256": "ada9db98c7cda187aa6dfc628e96191d6682cd2187ae58eca3b678474938fc32",
+    "beforeBytes": 9351,
+    "afterBytes": 9201
+  },
+  {
+    "file": "game/css/cover-battle-shell.css",
+    "beforeSha256": "f7690fc2cb7880a4a5f2da3015c64dc0d90a9ab506cbd96aab37f478757164ea",
+    "afterSha256": "32118ed7a28fc3bd5e7fafb5add6f16a134786a9716b676a346693a8fc260fa6",
+    "beforeBytes": 23263,
+    "afterBytes": 23007
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "beforeSha256": "392c7ce09d3f575bbe3dccccf8fe52cf799e021cfe989c5f7a6c2e0fcdf71133",
+    "afterSha256": "03ab0226f9936d9f3f137f6a69ee07ab3858d5877320e82d851724a0fb9e5a5b",
+    "beforeBytes": 23658,
+    "afterBytes": 23198
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "beforeSha256": "d5464945a5009d251bf4e2e819d70f6db81ee75dcd58ab4ca5131f947c92aac2",
+    "afterSha256": "e60e55533169aaa18ad3a84789777ac00bca42afdd37b04555c144c69c62bab7",
+    "beforeBytes": 15348,
+    "afterBytes": 15132
+  },
+  {
+    "file": "game/css/home-layers.css",
+    "beforeSha256": "42712c197023754dfaa1a63545de7cfae2468ffe95c305152bb96e96587d8144",
+    "afterSha256": "e43d7ffff02554d286e9904e9821a1fed4e71f22970f00328803d194dfa7f0aa",
+    "beforeBytes": 8465,
+    "afterBytes": 8370
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "beforeSha256": "d9656aa635d85e8b00417644e0746d04ff1c096f716b257ac314e7e7053eb3e2",
+    "afterSha256": "4b94dc0aa7e0f5b65425324156fad25e518969cef81419985855b2e13b7914f7",
+    "beforeBytes": 40869,
+    "afterBytes": 38715
+  },
+  {
+    "file": "game/css/motion-transitions.css",
+    "beforeSha256": "5b107d9f5924f7873575e2450695cffe61dd451ae634b39ae2d345aa6d03e77a",
+    "afterSha256": "b567acc42ef7101a26792826a6113d3f9c8b7254343bbc30dd5170eefb2ee3cb",
+    "beforeBytes": 16436,
+    "afterBytes": 16199
+  },
+  {
+    "file": "game/css/overlays.css",
+    "beforeSha256": "3bdfd24d41af1c41ab977de8d52bdc5af400c269ddf97be7384aabc5e037dfbd",
+    "afterSha256": "7b70ebae9228ef5e2534a186fcd72047824c6884668db77599a2159d5708511c",
+    "beforeBytes": 35882,
+    "afterBytes": 35711
+  },
+  {
+    "file": "game/css/page-battle-ui.css",
+    "beforeSha256": "f07391b3fcddb2c37075b55d7a7fa0b8fd935ba3a35770345b693e312fcbf7da",
+    "afterSha256": "12b6aac85aeedd59723bb715b852f0b932ee056b7a5fb66c4fa059a2157c02ec",
+    "beforeBytes": 10716,
+    "afterBytes": 10659
+  },
+  {
+    "file": "game/css/page-settings.css",
+    "beforeSha256": "dbe2ddc225bb71522e646fc7eb90838cf077522ac7822fbe586aef2c8d79e7a9",
+    "afterSha256": "f37522093038af2e44ad82ff5fb2732640c93d290dd73484d37f077c4888a069",
+    "beforeBytes": 25365,
+    "afterBytes": 25076
+  },
+  {
+    "file": "game/css/photo-studio-unified.css",
+    "beforeSha256": "15c38bfc513255542fa7c6dc785ff8e437efbc1e2aa83e415a450d7d5f18c141",
+    "afterSha256": "7cbc274f6484aad08e6cd8118c2b7b93426620361ab864171027774acc9842ce",
+    "beforeBytes": 65189,
+    "afterBytes": 64872
+  },
+  {
+    "file": "game/css/settings-cover.css",
+    "beforeSha256": "3dac9ff21e72de5729cae2e7e33339c9740a5d155c3f47fba6370c46f55ed9c4",
+    "afterSha256": "8ddcc119d9e4f2aa1b59c8fed7f2f5bfde97827828b58ad7cdbee541d980a8a7",
+    "beforeBytes": 11881,
+    "afterBytes": 11798
+  },
+  {
+    "file": "game/css/settings-navigation.css",
+    "beforeSha256": "f99d2c22f569ed4a3089fc2001bf323e71b7b727aa793105f209baae247fe9d3",
+    "afterSha256": "68943d0e4a3f8465f749055fad40d01d997de41a7a8195fb57e79472a92afb53",
+    "beforeBytes": 14758,
+    "afterBytes": 14688
+  },
+  {
+    "file": "game/css/winter.css",
+    "beforeSha256": "177a1ef7cec3888598194951e796226c774c96cfa12a500b6a953a90425e34c8",
+    "afterSha256": "cdb77fdc6bcf7d0af596eb83414c2fbce643fa9c2b43e73570fa18f2ac7e4746",
+    "beforeBytes": 91483,
+    "afterBytes": 91387
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "beforeSha256": "006275cb073cfe35cf9a484d7b241a0a9aa9ea552da14434776dcd1c6090971a",
+    "afterSha256": "e7e8c0f765b9d4c216e9e84f4b19d04ae080d9f49f67f53b8140e89d5af8c50c",
+    "beforeBytes": 26883,
+    "afterBytes": 26852
+  },
+  {
+    "file": "game/css/hub.css",
+    "beforeSha256": "d06768cd2a697704a5ce099cad9f8a0420f875aee6514a7f35bedcee5f6bd496",
+    "afterSha256": "52e7091359322dae9f874abed4394c2708377c4ad2fd154c5876b2926edcc679",
+    "beforeBytes": 16003,
+    "afterBytes": 15962
+  },
+  {
+    "file": "game/css/rarity-design-lab.css",
+    "beforeSha256": "7d75e95990f02cd99b17681b2d0a80369c344656a93b9fe5b1cc6b78349a20c6",
+    "afterSha256": "08f821034291c7d648150139a51b95cdd9b8c4e67821fe3aec19cb3e14a5ea3c",
+    "beforeBytes": 13187,
+    "afterBytes": 13169
+  },
+  {
+    "file": "game/src/ui/settings-transition.js",
+    "action": "delete-approved-file",
+    "beforeSha256": "7c74e9c0f80dd7d30592bbf420ec20b59c47b200714b0294bd922e23ea4cb1cb",
+    "afterSha256": null,
+    "beforeBytes": 1076,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/src/hub/hub.shop-v3.js",
+    "action": "delete-approved-file",
+    "beforeSha256": "30b22c68212b8ce3e82c02690c1cbb1b7ec837202d70fc44747cc8052e37f38e",
+    "afterSha256": null,
+    "beforeBytes": 3720,
+    "afterBytes": 0
+  },
+  {
+    "file": "game/css/base-shop-v3.css",
+    "action": "delete-approved-file",
+    "beforeSha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d",
+    "afterSha256": null,
+    "beforeBytes": 6727,
+    "afterBytes": 0
+  },
+  {
+    "file": "tests/hub-shop-v3.test.js",
+    "action": "delete-approved-file",
+    "beforeSha256": "580d845655aaea4eef0d98a532782be8f36c813210e9e181ad98fa91b22a73af",
+    "afterSha256": null,
+    "beforeBytes": 5047,
+    "afterBytes": 0
+  }
+]

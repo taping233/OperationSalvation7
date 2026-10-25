@@ -1,0 +1,4914 @@
+{
+  "summary": {
+    "status": "read-only in-memory audit; no CSS written; no browser or full cascade oracle run",
+    "generatedAt": "2026-10-24T12:15:23.636Z",
+    "files": 151,
+    "bytes": 1314969,
+    "affectedFiles": 3,
+    "savedBytes": 54,
+    "savedNormalizedBytes": 53,
+    "withVariableReadsRelaxedUpperBoundNormalizedBytes": 53,
+    "differentValueUnprovenUpperBoundNormalizedBytes": 110,
+    "allFilesLoadedTogetherUnprovenExactValueUpperBoundNormalizedBytes": 1904,
+    "allFilesLoadedTogetherUnprovenDifferentValueUpperBoundNormalizedBytes": 13725,
+    "phases": {
+      "duplicateDeclarations": {
+        "savedBytes": 15,
+        "savedNormalizedBytes": 15,
+        "operations": 1
+      },
+      "adjacentDeclarationBlocks": {
+        "savedBytes": 39,
+        "savedNormalizedBytes": 38,
+        "operations": 2
+      },
+      "adjacentMediaBlocks": {
+        "savedBytes": 0,
+        "savedNormalizedBytes": 0,
+        "operations": 0
+      },
+      "declarationBlocksAfterMedia": {
+        "savedBytes": 0,
+        "savedNormalizedBytes": 0,
+        "operations": 0
+      }
+    },
+    "meaningfulFilesAtLeast1KB": [],
+    "topFiles": [
+      {
+        "file": "game/css/feedback-oct12.css",
+        "savedNormalizedBytes": 20
+      },
+      {
+        "file": "game/css/settings-audio.css",
+        "savedNormalizedBytes": 18
+      },
+      {
+        "file": "game/css/battle-discover.css",
+        "savedNormalizedBytes": 15
+      }
+    ]
+  },
+  "rows": [
+    {
+      "file": "game/css/ak-skin.css",
+      "sha256": "d89db857d35eba669b916e6b14004fea809493ea43f0c4d9fb489097af537d96",
+      "bytes": 16700,
+      "afterBytes": 16700,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 23,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "sha256": "0afe19291a6e13e9fcf321d3b2114cb3f2e8db7d0264f04529df22792a1f2367",
+      "bytes": 1687,
+      "afterBytes": 1687,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "sha256": "1caeaf846cb914201dd7c2eea2c048349aca948fa48d06a7c825ebb709abe563",
+      "bytes": 4825,
+      "afterBytes": 4825,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/bag-design-system.css",
+      "sha256": "b5eb9cc77af31369a75e0be7f23ef01b4c9f544da792860ec06b63946ebb61f4",
+      "bytes": 8722,
+      "afterBytes": 8722,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "sha256": "4e41a7d70a4498bb471591a27d1a97082e3f56780685ed964555a2e32716a91a",
+      "bytes": 15256,
+      "afterBytes": 15256,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 5,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "sha256": "0ccce69b4ca46d31397abcb4f6455632f773c52381f47bb959adf48bb6a4e3db",
+      "bytes": 9642,
+      "afterBytes": 9642,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "bytes": 73,
+      "afterBytes": 73,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "sha256": "2d3d0a2c9926fc6a124aeab1b66e78cbe770fdb497b0921a552e9f65af2f8c47",
+      "bytes": 19011,
+      "afterBytes": 19011,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "sha256": "dc584f2ac62e092ff43b1e8472704de348b4a03b31227595616bb93c6ae1a50e",
+      "bytes": 17745,
+      "afterBytes": 17745,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "sha256": "85efa262c301fddfbf3cb8911c5f311dd8d7ece82a6e7baf79e6c3418e702a34",
+      "bytes": 16046,
+      "afterBytes": 16046,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "sha256": "54f4c89bdbdddf2997b70891890b138d34e34f098ea3db057147e30ec5320f2b",
+      "bytes": 8258,
+      "afterBytes": 8258,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "sha256": "41b9cb4e450c071c609edae2b9a8e33bef2eda952150d0c56d7f72ae3cf4470c",
+      "bytes": 4132,
+      "afterBytes": 4132,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "sha256": "89dc7d3c42aa3e79d3a09e54f885fff5a81330168421cec9fcc947dae8336e26",
+      "bytes": 3965,
+      "afterBytes": 3965,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "sha256": "5d01ebf3d8898f82019f6964cc58f986c9fc4361b36fdb48d3631b9db13406e7",
+      "bytes": 5182,
+      "afterBytes": 5182,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "sha256": "1d15d860c711767f9c66fae904d2192663309c7e8ed2fa7461b179a3cc69f5d9",
+      "bytes": 6050,
+      "afterBytes": 6050,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "sha256": "1cc99d3e45ab5f8db32581c6e3ec75a7419ce34956c4e209a193797fc8ba0d40",
+      "bytes": 6080,
+      "afterBytes": 6080,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "sha256": "f142ea0cd8c49b4b502c83cbe2f1f97217d82b4ef79b6c35180c67cbf54380ba",
+      "bytes": 9293,
+      "afterBytes": 9293,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "sha256": "8c07988e24f6b1e96e5ee211bc9cd8d6b59a35fef13154adeffd61152db9f636",
+      "bytes": 2662,
+      "afterBytes": 2662,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "bytes": 73,
+      "afterBytes": 73,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "sha256": "a17f2f854c58d0f1fa5e3ba6b37faf8ae64a536f98483a53a82ac646ed7f8520",
+      "bytes": 18380,
+      "afterBytes": 18380,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "sha256": "2b0c278f043aab3c23106fbffeecd149b143c7775ad8e4c4e74db0a1634e1819",
+      "bytes": 1122,
+      "afterBytes": 1122,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "sha256": "f349733b40c5c1ea97321176883ae32b7fdec017731094e3cad386041532459a",
+      "bytes": 24350,
+      "afterBytes": 24350,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 10,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/base.css",
+      "sha256": "95165b446626d72647791e10acfa0eeb6e6073ad4915fae57918d7532d764713",
+      "bytes": 27076,
+      "afterBytes": 27076,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 36,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-attack-profiles.css",
+      "sha256": "7b679f96604cee9971c2958827909b7860f85e9c2773569a2666dd0af04aabf8",
+      "bytes": 809,
+      "afterBytes": 809,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "sha256": "481bf5ab6011509b357afbb817437179403faf1bd3a36c1139e1099a38f976bb",
+      "bytes": 9328,
+      "afterBytes": 9328,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "sha256": "9714398fe760389960c0bb9ffde0ba4fb61ea761d2c6c8e786743af45410c7ee",
+      "bytes": 8036,
+      "afterBytes": 8021,
+      "savedBytes": 15,
+      "savedNormalizedBytes": 15,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 15,
+          "savedNormalizedBytes": 15,
+          "operations": 1
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": [
+        {
+          "type": "duplicateDeclaration",
+          "line": 106,
+          "laterLine": 121,
+          "selector": "& .battle-card-inspect",
+          "property": "color",
+          "value": "#d1e0e5",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/battle-equipment.css",
+      "sha256": "26b8d8c36a3ef2d1571ee6d70c9780a2a15a4a456ba9177a27730b5b6b420d1e",
+      "bytes": 2890,
+      "afterBytes": 2890,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "sha256": "c47880eea8dfd9444a68831cd71187e43c37a9ecd02e2605b1921cef042b1dd1",
+      "bytes": 9851,
+      "afterBytes": 9851,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 9,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-hud-clarity.css",
+      "sha256": "200ff80fbf46151ba16c2856f3e851aa027740594be24d5b11398d290b23ee2b",
+      "bytes": 541,
+      "afterBytes": 541,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "sha256": "bf2c9cdc37f535ca77db56e6eafc0f7aceb29f8197380a8ee4cf9305b415a1f4",
+      "bytes": 5218,
+      "afterBytes": 5218,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-pile-view.css",
+      "sha256": "9c1d3a5ffe8e9167d7abd997491889cb6dbd06aee765c7462a877948e5d1067a",
+      "bytes": 4922,
+      "afterBytes": 4922,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "sha256": "d4a0992d9b2ed38a0c58e8e85791b15047ef84398616f9671899324c86af7cf9",
+      "bytes": 1676,
+      "afterBytes": 1676,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-scene-polish.css",
+      "sha256": "93535301fd6d5ca74e990ed69a6f9026453b7219a6b90b6992ac067cdec2336d",
+      "bytes": 941,
+      "afterBytes": 941,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "sha256": "5c23ff86f3368e1ec00051f976e41e9ecf9b2635ad1ad3bb089c168d8472c5c0",
+      "bytes": 6804,
+      "afterBytes": 6804,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 6,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "sha256": "9107adc0c1b6abe54692546859e0bc7e540515bc1d1fe5d8e6f050ccfe8c0e13",
+      "bytes": 29845,
+      "afterBytes": 29845,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 9,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle-status-chips.css",
+      "sha256": "9a3aa8b338d95072d6950a5e0f29b3f5fac723667434b3125da331f4d947523e",
+      "bytes": 2552,
+      "afterBytes": 2552,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/battle.css",
+      "sha256": "d000be0413799a815978cb5ee198d0aa0159c8b51e63ba7032694ba3dc8f5724",
+      "bytes": 31100,
+      "afterBytes": 31100,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 97,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "sha256": "89773a5c861f91befad6e66c54d272c66db2067a23f39ce88f5006acc4493a0e",
+      "bytes": 7141,
+      "afterBytes": 7141,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "sha256": "6b1d8c8ea0ebfd298940395bf834a8f51c2c8f00fa780f1c3b5ea29985a66d40",
+      "bytes": 11577,
+      "afterBytes": 11577,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "sha256": "0e02ffab223eebda8009a153ba6169683d545a0a62a992f2537c18359c8285d5",
+      "bytes": 1405,
+      "afterBytes": 1405,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "sha256": "588a98eb76e941be6417afc5dfe2fbf6c936cbd5fbfa84cd0f758f50ddac5f84",
+      "bytes": 1367,
+      "afterBytes": 1367,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-frames/career/frames.css",
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b",
+      "bytes": 118,
+      "afterBytes": 118,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-frames/rose/frames.css",
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b",
+      "bytes": 118,
+      "afterBytes": 118,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "sha256": "f5e77a20058950b1f002117cde60cb6a06168e3763a06ba54a50cbf1980fb59b",
+      "bytes": 15158,
+      "afterBytes": 15158,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "sha256": "e0df25cc8d55e9116ad820597b9e67e7c31c91116dcb413445e0330006db6311",
+      "bytes": 4550,
+      "afterBytes": 4550,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-state-motion.css",
+      "sha256": "f483929d5d6085638711cb42e2cb35746f9a75f948af79391f33d47884947fe1",
+      "bytes": 2034,
+      "afterBytes": 2034,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "sha256": "c992a3f6e14e16e15c32ca97ac151bfa94ff7dfbe300c72b344c1e929c6269d8",
+      "bytes": 1435,
+      "afterBytes": 1435,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cards.css",
+      "sha256": "fcbeb362ee3ce9c0a609d3eb0d9838d82d09a9fdf9dc641bef69d5dcdc49d504",
+      "bytes": 5973,
+      "afterBytes": 5973,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 19,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "sha256": "df0be7a2c484833673af9d8c149f1c7deed8326546221dde1f5d8fca871ce40f",
+      "bytes": 1831,
+      "afterBytes": 1831,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 9,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "sha256": "63fc69406e86b1317402f34480ef80c9adc114c8af1a4a4376ff2f11e94a83fe",
+      "bytes": 3498,
+      "afterBytes": 3498,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "sha256": "daed950342385beb01554bd5c705444becf98b170a0bab821fc1f0ef7e182b03",
+      "bytes": 3806,
+      "afterBytes": 3806,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/collection-workspace.css",
+      "sha256": "706cb7b66fdfc61dd2003ab380483c4701291c7107d6a9829ae823ac018a667d",
+      "bytes": 11539,
+      "afterBytes": 11539,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 6,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "sha256": "53e1d5731389fb9c2d14317497484f5b9145ea2c320c242deea719e6b9f3f600",
+      "bytes": 1290,
+      "afterBytes": 1290,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/container-store.css",
+      "sha256": "3318d1e8f4de888925de17c47f5f8882d54c42299c5a4c486f3022050dbbf0a4",
+      "bytes": 5102,
+      "afterBytes": 5102,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "sha256": "ef5be4d8474c64eb0fcf0b89b3e5b532a74fe582dd131cb1fe1a9f582c696206",
+      "bytes": 13987,
+      "afterBytes": 13987,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "sha256": "d347fef8d8cbf9e666bfa3046581091e6354216f5be0fe0a34a3d6b15b411107",
+      "bytes": 5794,
+      "afterBytes": 5794,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 6,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-remaining.css",
+      "sha256": "2a9b9b804595b23dd7ade4c02982a4ae870eeccb4d8e8dacd1066f7295100458",
+      "bytes": 449,
+      "afterBytes": 449,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "sha256": "23ccdb460a75afb262be608d3a2898ba3d40b7ffc40b26c6e9da1ed364794fce",
+      "bytes": 15878,
+      "afterBytes": 15878,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 9,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "sha256": "fd53291b32408ebbaa24a9fa2d69491be40f81c421ae231d71858f7dfc7a18b6",
+      "bytes": 13527,
+      "afterBytes": 13527,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "sha256": "dfdf35d6834b4845efbf080e8be00e678595195712454dfa4b31c6cbca1037ff",
+      "bytes": 8141,
+      "afterBytes": 8141,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "sha256": "c7d79ffa86c68c87b3ae743fbb3edd6eadd4ddcc58d150b25b9e787201e5159c",
+      "bytes": 10496,
+      "afterBytes": 10496,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/discovery-selection.css",
+      "sha256": "545ee4112cb43330128320d1600a1cd4f4ea131ea599b3381a10609ea73f0cda",
+      "bytes": 2450,
+      "afterBytes": 2450,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "sha256": "3ef95b6f2dd58d385242fc66aebb76ad333f3e7ff6ec1c9470f47534bb032e9e",
+      "bytes": 18342,
+      "afterBytes": 18342,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/event-choice-feedback.css",
+      "sha256": "d1600173aab28423be0e13eb146b7d735fd564404a7669ec833323aaac5d5c6d",
+      "bytes": 1600,
+      "afterBytes": 1600,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/event-dice.css",
+      "sha256": "cc95fa7411b542e66706fbd9a77fb65375b142de922aec5e314962cfa67e0d1e",
+      "bytes": 1205,
+      "afterBytes": 1205,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/event-option-state.css",
+      "sha256": "bf062379e7b71bd3d816570a0aaae14949b6c8b31d2502ce00e1da98def19d0d",
+      "bytes": 338,
+      "afterBytes": 338,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/event-recode-result.css",
+      "sha256": "4e7f80828d38b7c7499a6f487859d6d831fdfcfb4892035e70aebd80670be82d",
+      "bytes": 691,
+      "afterBytes": 691,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/event-signal-puzzle.css",
+      "sha256": "fded3b908240cdbd785c36a9e04be1a7c6809a88c4111a7a515984d5c4cc57bd",
+      "bytes": 3977,
+      "afterBytes": 3977,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "sha256": "973ab0a1c29b0cb6bb67da4235e40949befce57fd4ce1985420bcd7730df136d",
+      "bytes": 12937,
+      "afterBytes": 12937,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 34,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "sha256": "1976256b6c04f60ca573b021fee9eb142de6fbbd9946252db06b180b1e85a163",
+      "bytes": 2602,
+      "afterBytes": 2602,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 11,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "sha256": "e58576e00ddf1b43ceef3533b2862b119429ff901a4bd7f95d923cce292a294a",
+      "bytes": 18890,
+      "afterBytes": 18890,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 29,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "sha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8",
+      "bytes": 11113,
+      "afterBytes": 11113,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 53,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "sha256": "539911f877804260954291110e7d619c35dfa733c43093d6c901ae8b1a66a3ac",
+      "bytes": 8250,
+      "afterBytes": 8250,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 10,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "sha256": "8cd4aa9c3ac1fbe7d116c84c244ce35d44634fe80c2ed734a5e2acd8043b0929",
+      "bytes": 17191,
+      "afterBytes": 17191,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 18,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "sha256": "ddda1c98df6aca1c7c031f1a3ba05fba37959a27cb61d3ab41d00401c5fb7037",
+      "bytes": 22370,
+      "afterBytes": 22370,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 23,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "sha256": "990d43f34cf601e4ad4f2ac1fe11d41523db1227252685351ed6cced608f8871",
+      "bytes": 19805,
+      "afterBytes": 19805,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "sha256": "b3f36cc9c553bbf7696dd4c686fd28ff48f3471daf57d1f84df4646ac92ca196",
+      "bytes": 3650,
+      "afterBytes": 3650,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/expedition.css",
+      "sha256": "2f21eafa4bf31e062fd97b8c36ff2c9c101a8bc872b3225499812e2a4938cd4e",
+      "bytes": 16683,
+      "afterBytes": 16683,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 16,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "sha256": "16e188c27b87086bd8d07e40dee70621b63ea8c476decad27b49bd843900258b",
+      "bytes": 223,
+      "afterBytes": 223,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/extraction-rewards.css",
+      "sha256": "1085f89bf794bd5597c5f7af0c4dfa9781d38f76f6ee5b748137b3292d6d13f5",
+      "bytes": 13195,
+      "afterBytes": 13195,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 5,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/feedback-1018.css",
+      "sha256": "ab549bd03c0f01570bbd843322c405d9b7bbbd92e3c1572ea4209efad86fab23",
+      "bytes": 3406,
+      "afterBytes": 3406,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "sha256": "a4496d9413b05ad1a99ff03f48132112546e1d04697025352829a7774ab330b4",
+      "bytes": 4325,
+      "afterBytes": 4305,
+      "savedBytes": 20,
+      "savedNormalizedBytes": 20,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 20,
+          "savedNormalizedBytes": 20,
+          "operations": 1
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": [
+        {
+          "type": "adjacentDeclarationBlocks",
+          "line": 12,
+          "laterLine": 13,
+          "firstSelector": "& .pv12-agent-strip",
+          "secondSelector": "& .pv12-sections",
+          "declarations": 1
+        }
+      ]
+    },
+    {
+      "file": "game/css/feedback-theme.css",
+      "sha256": "d8780b51edacd1a608688857cade85c096e838fcf86dee8f884ccb53bbbf4238",
+      "bytes": 1829,
+      "afterBytes": 1829,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/fire-rest.css",
+      "sha256": "0ba52bdafc030dd20d84a37f1b43623211834fb5b867ac399d0697135fabac14",
+      "bytes": 4315,
+      "afterBytes": 4315,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "sha256": "240209838f26c33beb62fb2712622226b641411c36311f8b8e30daa2aeb7cbcd",
+      "bytes": 7270,
+      "afterBytes": 7270,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 9,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "sha256": "709957293aa247c575d44294c299997f03e4637c43a7ad202b2cf4b366ba7667",
+      "bytes": 7059,
+      "afterBytes": 7059,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 12,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "sha256": "200f59aad2438c3c4a2e41cb1a9f31139b9f53ac44cbee7d63453bf497f4d828",
+      "bytes": 5743,
+      "afterBytes": 5743,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "sha256": "c4585b97edcf2d5f76724c40e0a869760e35bcd8cb2a38ec75c3b16e20e02140",
+      "bytes": 32864,
+      "afterBytes": 32864,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 45,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "sha256": "e2faf5af03621b8d78ebba0a25b569f6f9deef04be90ee16d6363b01378c1d70",
+      "bytes": 5910,
+      "afterBytes": 5910,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0",
+      "bytes": 590,
+      "afterBytes": 590,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "sha256": "6c83a572d584a45beade5f247a60ab4e651662f46459cdef9670072cfa2fcdf9",
+      "bytes": 4962,
+      "afterBytes": 4962,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/hub.css",
+      "sha256": "804f7f57072cdfa2255e91cb5d4208a40352110643329c7a1fb3ccf3d3e20fbb",
+      "bytes": 13726,
+      "afterBytes": 13726,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 28,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "sha256": "046bb4226dedf849732aa8503a07be08506d846bbd08a9a32c7de14f18a9f00b",
+      "bytes": 6737,
+      "afterBytes": 6737,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "sha256": "d030e7e16e3a072da59a17c54d2ea379ee197030907ce3234efb809280f955b0",
+      "bytes": 4017,
+      "afterBytes": 4017,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "sha256": "fe4b2062614bc9cddc39990806132c4a547c4d3c62d65a05ee0124b6f4db1087",
+      "bytes": 5459,
+      "afterBytes": 5459,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 6,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "sha256": "4d7bc494bdf51c80539ec246e6c83603247b1b5ccd77b5e0b2757a22edda1d7a",
+      "bytes": 4591,
+      "afterBytes": 4591,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "sha256": "facee275e50c4bc42880b4c828c9a27231c2a8837fdf0637e415789f273dc871",
+      "bytes": 2592,
+      "afterBytes": 2592,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/map-floating-tools.css",
+      "sha256": "f75c094073b6dd8a55b9bef657c4590d30a3209c0e3fa695326409a9d2bda4f1",
+      "bytes": 3397,
+      "afterBytes": 3397,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/map-node-status.css",
+      "sha256": "702b4b308c3f69b1c9cef190efa038c904cf44edbb02f1c36d07f050e9c2035e",
+      "bytes": 1092,
+      "afterBytes": 1092,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/map-passage.css",
+      "sha256": "fe2842e788eaad17fe53e4f1c78cba0221f89f12fb5ac246db41080bf210a478",
+      "bytes": 1138,
+      "afterBytes": 1138,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "sha256": "78883155d95796bae77cb4990f530765f6ea2d370679e3cf7104c542edf01171",
+      "bytes": 16218,
+      "afterBytes": 16218,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 25,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "sha256": "fc425ff7dfd98faa39831418677c2cf98ecdd907ea120f217cf72cf18dc9b8c2",
+      "bytes": 1656,
+      "afterBytes": 1656,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/operation-notice.css",
+      "sha256": "08860a1c2e6040de6fd6817655a804c82d5e4162e280c5ddd0ad06545b74e21d",
+      "bytes": 814,
+      "afterBytes": 814,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "sha256": "f56b78a2325f8bb2f8ae26237c4a267f3645c0af149460b6f6f141f44d10a0ce",
+      "bytes": 1822,
+      "afterBytes": 1822,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/overlays.css",
+      "sha256": "1f381b677abfee0934e0c8a0ae9d7f3af8a625b671953515433af41623c39b8a",
+      "bytes": 34324,
+      "afterBytes": 34324,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 44,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "sha256": "1519b5833220879488ce0488657d37a90d2a8c5faf7bc095c38b135bdc67a1d0",
+      "bytes": 13226,
+      "afterBytes": 13226,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 39,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "sha256": "5ef98944e1b7a75c5c9ecb28871ffaf1fea86c54b82c675b5c1728b8082f7cdb",
+      "bytes": 10565,
+      "afterBytes": 10565,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 45,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "sha256": "23e059a41a6122d6965d1adb45a26648296e855c7c42165613042e70fb79af70",
+      "bytes": 7095,
+      "afterBytes": 7095,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 34,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "sha256": "33863c70be740ea9400356f450ac9aa512beb8107caec027334613c664a499fd",
+      "bytes": 8276,
+      "afterBytes": 8276,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-events.css",
+      "sha256": "5b8e32085af514783540784412a8663df04f82997ce7432a458c5d17353ba18d",
+      "bytes": 11618,
+      "afterBytes": 11618,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 28,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "sha256": "456686c4ea3077667b816ffee8f1df783324257fb56325a43c255a719b57f1a5",
+      "bytes": 19401,
+      "afterBytes": 19401,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 35,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "sha256": "af9e4d9974bd739fb5d8ea5c84f656e8b9cc706b0c5edb480d7193b5f0a93eee",
+      "bytes": 2626,
+      "afterBytes": 2626,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "sha256": "ad07375d0a19fa28817efa35d52264227b9e15f74f3ae158c63bc39ddf175b37",
+      "bytes": 25017,
+      "afterBytes": 25017,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 69,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "sha256": "9fe54255c411c0518a5c949c3c236bcaaab4a5dbdb27fecbfb2ea9d4d40d9542",
+      "bytes": 22379,
+      "afterBytes": 22379,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 42,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "sha256": "abe3edfd0244ae764b387cd5dcee27b788f61b9b590039f137961f34124a617c",
+      "bytes": 19655,
+      "afterBytes": 19655,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 43,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "sha256": "c2f4d6cedf447062e8ac80de784c22987f595d133a9712079f457d0244c0b024",
+      "bytes": 1566,
+      "afterBytes": 1566,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "sha256": "fb40f9c45eb6d1bbb1bd8811ffa302fa9138720f0e399124b3155b9fbd4c8f85",
+      "bytes": 1181,
+      "afterBytes": 1181,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "sha256": "ca1d7281689dab575ddeb825e4dca716577a37233964eed0e957b6d22ceb9c96",
+      "bytes": 2960,
+      "afterBytes": 2960,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe",
+      "bytes": 6850,
+      "afterBytes": 6850,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630",
+      "bytes": 4681,
+      "afterBytes": 4681,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "sha256": "7cbc274f6484aad08e6cd8118c2b7b93426620361ab864171027774acc9842ce",
+      "bytes": 65655,
+      "afterBytes": 65655,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 17,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40",
+      "bytes": 1565,
+      "afterBytes": 1565,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/preparation.css",
+      "sha256": "7aea8c25679a580c68257b6ddbdc6f012ddb2667e1770caa122620d1585bb0f1",
+      "bytes": 6827,
+      "afterBytes": 6827,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 7,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "sha256": "8ea9a6951e1de0b8b8fa7e67e0cefb625aec3a34e121d2bbd4dc91316b916143",
+      "bytes": 2009,
+      "afterBytes": 2009,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "sha256": "abf5dac6b6c1a0e9ecdbdad31d89b401015453b9e5640259432434b9ccb92265",
+      "bytes": 12438,
+      "afterBytes": 12438,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 6,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/rarity-reveal.css",
+      "sha256": "4370218e76630c9ff48f893058e9843fc1225e721b14b5256e7881a7e251c6b0",
+      "bytes": 1948,
+      "afterBytes": 1948,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/review-ui.css",
+      "sha256": "30cc8400654c5cb94e98912f7c87b73b45b48b87c24633fdb626c9f7fe6b2fbe",
+      "bytes": 3681,
+      "afterBytes": 3681,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/reward-completion-receipt.css",
+      "sha256": "6e5ecf1d308f4995b733eda1bd6b0cdcb60395a2925adedb41195db1c521c85b",
+      "bytes": 301,
+      "afterBytes": 301,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/room-footer.css",
+      "sha256": "19fd1842edaa7e348e8c246aeb9569b703cd5408e9e229397f80f2079ff1e160",
+      "bytes": 1293,
+      "afterBytes": 1293,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/room-rewards.css",
+      "sha256": "0d8179d3764c6aca472752f7d3ae300821de62ce41a4a778ea91f0f70c9cfbc7",
+      "bytes": 6229,
+      "afterBytes": 6229,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "sha256": "38c0b7aa128ce384bc4fc4961cc522c5556532142fec4f1f61c31570e59d8fbd",
+      "bytes": 7056,
+      "afterBytes": 7056,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "sha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe",
+      "bytes": 1852,
+      "afterBytes": 1852,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/scenes.css",
+      "sha256": "97453acbd3c5071d02f90b10faad2df520e5b0e5df3e97c77ad5f781084c0d1f",
+      "bytes": 37714,
+      "afterBytes": 37714,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 61,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/secondary-ui-tokens.css",
+      "sha256": "a0d8478c68e9c54d60ba86d05f540c1dc8a0e20b1319384a25ccdbe78a465257",
+      "bytes": 1109,
+      "afterBytes": 1109,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "sha256": "f5b28b74a80d96865fe3eb8591171d748b7466bb35ef8739295d8719af9c315c",
+      "bytes": 3074,
+      "afterBytes": 3074,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/settings-audio.css",
+      "sha256": "57c2c3a75bb4c1ae1aeac8714985359d533672501acca874fe3685a2b2066129",
+      "bytes": 212,
+      "afterBytes": 193,
+      "savedBytes": 19,
+      "savedNormalizedBytes": 18,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 19,
+          "savedNormalizedBytes": 18,
+          "operations": 1
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": [
+        {
+          "type": "adjacentDeclarationBlocks",
+          "line": 3,
+          "laterLine": 4,
+          "firstSelector": "& #setMusicRetry[hidden]",
+          "secondSelector": "& #setSfxRetry[hidden]",
+          "declarations": 1
+        }
+      ]
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "sha256": "afa148a97c6c3b70b4592fe2a6ad21f4b1fc69a6584e1d956505227818ec7f10",
+      "bytes": 14401,
+      "afterBytes": 14401,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "sha256": "f2569b427f864d880c339d5f052eed070f2c446d20ee405f38e340cd075daaeb",
+      "bytes": 7909,
+      "afterBytes": 7909,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "sha256": "99dbfadb98fa3ecbe00e3fb6a89959d4dc41133bb802693f4b66f44e0630f685",
+      "bytes": 7148,
+      "afterBytes": 7148,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/startup-transition.css",
+      "sha256": "b105692bb95c01bfe686d25ffc92db165229bc3146b03fca436d11f95b9c42a4",
+      "bytes": 419,
+      "afterBytes": 419,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "sha256": "d18623aabaa84c004e12970948631a967992493826466a51e5fe03c6fb69490b",
+      "bytes": 861,
+      "afterBytes": 861,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "sha256": "9c78922cae4a491009d613a61275a89f4c67f7ea0d8655941789895bb76bca4f",
+      "bytes": 16697,
+      "afterBytes": 16697,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 5,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "sha256": "3c76c2fd6b88bf3689319884754eee4b6a25c03527bc71b6edc6e8d217b80dc4",
+      "bytes": 5932,
+      "afterBytes": 5932,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "sha256": "f8aad8dffb5c6700d4fcfc7b9dca76e12f1db073c99ee6db0842046c331e86d7",
+      "bytes": 14647,
+      "afterBytes": 14647,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 8,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "sha256": "7fb81f0644466ac552eb366f22c112a9e08cb6cf606aa5776dce36b364daeb1f",
+      "bytes": 3813,
+      "afterBytes": 3813,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 4,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/transition-heading.css",
+      "sha256": "dc39ba71f7f98745d43ddd419fba4374348448db105160ec35eff9eab67bc738",
+      "bytes": 1641,
+      "afterBytes": 1641,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/transition-illustrations.css",
+      "sha256": "7468547d4918d002a37f490df330778bb1acc1819c4e6df26a4bda65011988cb",
+      "bytes": 747,
+      "afterBytes": 747,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 1,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "sha256": "604ae07fae7b760abec43a63a6efb3054add47b9e2821ec711d391ea13a9eb0d",
+      "bytes": 5709,
+      "afterBytes": 5709,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 3,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1",
+      "bytes": 421,
+      "afterBytes": 421,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 2,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/winter.css",
+      "sha256": "92e4104e4928fd0f7928bd5faafeada50dcb5e1d457ca1472489a8a302d3bffb",
+      "bytes": 82650,
+      "afterBytes": 82650,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 197,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "sha256": "ef2e40dc7cdc87e9d63692b8d2ca97ac9bbbef14eabbb14e7ccd8f9abbbbaa97",
+      "bytes": 3490,
+      "afterBytes": 3490,
+      "savedBytes": 0,
+      "savedNormalizedBytes": 0,
+      "commentCount": 0,
+      "metrics": {
+        "duplicateDeclarations": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentDeclarationBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "adjacentMediaBlocks": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        },
+        "declarationBlocksAfterMedia": {
+          "savedBytes": 0,
+          "savedNormalizedBytes": 0,
+          "operations": 0
+        }
+      },
+      "operations": []
+    }
+  ]
+}

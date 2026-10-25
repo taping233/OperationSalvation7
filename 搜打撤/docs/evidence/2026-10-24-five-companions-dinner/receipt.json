@@ -1,0 +1,20 @@
+{
+  "toolchain": [
+    "NAI5 via tools/nai_gen.py and tools/nai_guard.py",
+    "built-in image_gen"
+  ],
+  "asset": "game/assets/slot-bg-knight-fantasy.webp",
+  "bytes": 594600,
+  "sha256": "0b20dd0e76d58a8034e803a675282e2223bcdf16daf029f3f66b9a86b000cd9f",
+  "oldSha256": "40e5a9573746bbf9c96eada0c1594b759298deccb7145d771dfbb9f865623aa0",
+  "size": [
+    1672,
+    941
+  ],
+  "backup": ".tmp/nai/slot-dinner-20261024/previous-slot-bg.webp",
+  "finalSource": ".tmp/nai/slot-dinner-20261024/final-source.png",
+  "finalSourceSha256": "084f08695bf33b6b8a8960727b80ce70f14cdade8c739e0597382cae95fc983e",
+  "draftSource": ".tmp/nai/slot-dinner-20261024/draft.png",
+  "obtainedBy": "NAI5 one request, then built-in imagegen repaint with identity references",
+  "verification": "Generated artwork viewed only; user requested no tests, asset audit, browser acceptance or build"
+}

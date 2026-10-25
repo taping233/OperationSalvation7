@@ -1,0 +1,306 @@
+18:29:36 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:29:36 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:29:37 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+18:30:02 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:02 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:02 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+18:30:02 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:02 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+18:30:02 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:03 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+18:30:08 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:08 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:08 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+18:30:09 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:09 [vite] (client) Pre-transform error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+18:30:09 [vite] Internal server error: Failed to resolve import "../../css/review-ui.css" from "game/src/ui/ui.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/ui.js:15:23
+  13 |  import { confirmAction } from './confirm-dialog.js';
+  14 |  import { registerScreenOwner } from './screen-owner.js';
+  15 |  import '../../css/review-ui.css';
+     |                        ^
+  16 |  import { cardTipsHTML } from './card-tip-groups.js';
+  17 |    /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+21:55:51 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:55:51 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:55:51 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:55:51 [vite] Internal server error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+21:55:54 [vite] Internal server error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+21:56:22 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:56:22 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:56:22 [vite] (client) Pre-transform error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+21:56:23 [vite] Internal server error: Failed to resolve import "./run-top-bar.css" from "game/src/ui/run-top-bar.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/素材/代号柒/搜打撤/game/src/ui/run-top-bar.js:3:9
+  1  |  import { characterFor, characterName } from '../core/characters.js';
+  2  |  import { registerScreenOwner } from './screen-owner.js';
+  3  |  import './run-top-bar.css';
+     |          ^
+  4  |  
+  5  |  const configurations = new WeakMap();
+      at TransformPluginContext._formatLog (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at async file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)

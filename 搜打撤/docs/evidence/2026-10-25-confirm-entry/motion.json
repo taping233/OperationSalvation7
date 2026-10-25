@@ -1,0 +1,26 @@
+{
+  "entering": {
+    "animations": [
+      {
+        "duration": 140,
+        "name": "confirmationVeilIn",
+        "time": 140
+      }
+    ],
+    "panelOpacity": "1",
+    "panelTransform": "none",
+    "veilOpacity": "1"
+  },
+  "settled": {
+    "animations": [
+      {
+        "duration": 140,
+        "name": "confirmationVeilIn",
+        "time": 140
+      }
+    ],
+    "panelOpacity": "1",
+    "panelTransform": "none",
+    "veilOpacity": "1"
+  }
+}

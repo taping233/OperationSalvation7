@@ -1,0 +1,18 @@
+{
+  "event_id": "tt6-goldhammer",
+  "name": "中断的接应",
+  "status": "preview-only",
+  "pipeline": [
+    "NAI4.5 Full",
+    "一次内置精修"
+  ],
+  "accepted_direction": "老板认可药品站近景递药版，本张沿用近景、冷暖与虚实组织",
+  "nai_request": "../.tmp/nai/event-handoff-preview-1025/request.json",
+  "builtin_prompt": "../.tmp/nai/event-handoff-preview-1025/builtin-prompt.txt",
+  "final": "../.tmp/nai/event-handoff-preview-1025/builtin-preview.png",
+  "builtin_source": "C:/Users/太平/.codex/generated_images/01a16e5a-25e4-7923-9d72-cca7f40d01d0/exec-e7784154-50be-4ec1-afb0-c01057516e74.png",
+  "sha256": "9814e6978e45327965909b6f3def91163872bcb9b8d75aa58f9c5a45d32212d6",
+  "runtime_replaced": true,
+  "checks_run": [],
+  "user_review": "2026-10-25老板评价：这个也还可以，依照这个势头把所有事件图重出了吧。认可后已纳入20张全套接入。"
+}

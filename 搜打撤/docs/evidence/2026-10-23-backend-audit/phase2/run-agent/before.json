@@ -1,0 +1,17 @@
+[
+  {
+    "path": "game/src/run/map-route-v2.js",
+    "sha256": "B9BC0CED62C5E62F142A3300F08D5E37D5DCC1510FC3CFB6C50F6C17FC55D203",
+    "backup": "map-route-v2.js.before"
+  },
+  {
+    "path": "game/src/agent/agent.runner.runtime.js",
+    "sha256": "A617DC1B6DEDBB84F83308BE17738FDB06402A0E62F1DC0DAD590F7A90260AE8",
+    "backup": "agent.runner.runtime.js.before"
+  },
+  {
+    "path": "game/src/agent/agent.replay.runtime.js",
+    "sha256": "6397B2353723321832E644D5AE7C2C1F75DB69B27740B5C626547A2CA5CB29D9",
+    "backup": "agent.replay.runtime.js.before"
+  }
+]

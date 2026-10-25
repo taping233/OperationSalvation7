@@ -1,0 +1,138 @@
+/* Ordinary run/detail refinements, 2026-10-05. Named recent hub/photo
+   surfaces and research retain their existing presentation. */
+body[data-ui-cover-context='ordinary'] {
+  --polish-ink: #26292c;
+  --polish-muted: #51575d;
+  --polish-paper: #ebeced;
+  --polish-sheet: #f3f3f3;
+  --polish-line: #b0b2b4;
+}
+
+/* I03: the map dock yields to an overlay, then returns without JS state. */
+body[data-ui-cover-context='ordinary']:has(#overlay:not([hidden]), #cardZoom) #sidebar,
+body[data-ui-cover-context='ordinary']:has(#overlay:not([hidden]), #cardZoom) #expeditionChapter,
+body[data-ui-cover-context='ordinary']:has(#overlay:not([hidden]), #cardZoom) #btnMapOverview {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* I01: outrank the older bag skin; colour and backing belong together. */
+body[data-ui-cover-context='ordinary'] #overlay .card.bag-page .bag-view .bag-head h2,
+body[data-ui-cover-context='ordinary'] #overlay .card.bag-page .bag-view .set-h,
+body[data-ui-cover-context='ordinary'] #overlay .card.chest #ovTitle {
+  color: var(--polish-ink) !important;
+  text-shadow: none;
+}
+body[data-ui-cover-context='ordinary'] #overlay .card.bag-page .bag-view .bag-side .bag-side-card {
+  background: var(--polish-sheet);
+  border: 1px solid var(--polish-line);
+  box-shadow: 3px 3px 0 #2d31341c;
+}
+
+/* I02: the tertiary shell previously retained a dark background. */
+body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell {
+  padding: 24px;
+  background: var(--polish-paper);
+  border: 1px solid var(--polish-line);
+  box-shadow: none;
+}
+body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell :is(.ov-stats, .ov-note) {
+  padding: 12px 16px;
+  background: var(--polish-sheet);
+  color: var(--polish-muted);
+  border: 1px solid #c1c3c4;
+  text-shadow: none;
+}
+body[data-ui-cover-context='ordinary'] #overlay .ov-shell.stash-shell .ov-stats b {
+  color: var(--polish-ink);
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row,
+body[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line {
+  background: var(--polish-sheet);
+  color: var(--polish-ink);
+  border: 1px solid var(--polish-line);
+  border-radius: 0;
+  text-shadow: none;
+}
+body[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line .ov-note {
+  color: var(--polish-muted);
+}
+body[data-ui-cover-context='ordinary'] #overlay :is(.card.page, .node-pg) .result-line .ov-note b {
+  color: var(--polish-ink);
+}
+
+/* I04: a single-column action group fits the report's actual side panel. */
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .result-columns > .hub-card {
+  min-width: 0;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .hub-head > h2 {
+  display: block;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .pk-row > span {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .dep-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .dep-foot :is(.ov-btn, #btnDeploy) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  padding: 12px 16px;
+  margin: 0;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards:has(> .ov-empty) {
+  display: block;
+}
+body[data-ui-cover-context='ordinary'] #overlay #exMain.result-pg .ext-cards > .ov-empty {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  background: #e9eaeb;
+  color: var(--polish-muted);
+}
+
+/* I05: disabled controls remain subdued while their reasons stay legible. */
+body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled,
+body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled:hover {
+  opacity: 1;
+  background: #e2e2e3;
+  color: var(--polish-muted);
+  border-style: dashed;
+}
+body[data-ui-cover-context='ordinary'] #overlay .node-pg > .node-panel .evt-opt:disabled b {
+  color: #44494e;
+}
+body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.sold {
+  opacity: 1;
+  background: #e2e3e4;
+}
+body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.sold .shop-empty {
+  color: #44494e !important;
+  background: #ebeced;
+  border: 1px dashed #939699;
+}
+body[data-ui-cover-context='ordinary'] #overlay .shop-pg.sc-shop .shop-slot.buy[data-short] {
+  opacity: 1;
+}
+
+/* I07: reuse the battle's existing transparent asset path. */
+body[data-ui-cover-context='ordinary'] #overlay .boss-intro-art.sts-figure::after {
+  display: none;
+}

@@ -1,0 +1,33 @@
+{
+  "url": "http://localhost:5200/event-template.html",
+  "choices": [
+    {
+      "bounds": "{\"bottom\":482.8999938964844,\"height\":134,\"left\":974.6875,\"right\":1550,\"top\":348.8999938964844,\"width\":575.3125,\"x\":974.6875,\"y\":348.8999938964844}",
+      "label": "收下 3 币，稳定收益",
+      "selected": "false",
+      "titleSize": "26px"
+    },
+    {
+      "bounds": "{\"bottom\":642.8999938964844,\"height\":134,\"left\":974.6875,\"right\":1550,\"top\":508.8999938964844,\"width\":575.3125,\"x\":974.6875,\"y\":508.8999938964844}",
+      "label": "冒险挖深，获得 6 币，损失 3 生命",
+      "selected": "true",
+      "titleSize": "26px"
+    }
+  ],
+  "confirm": false,
+  "narrative": "塌陷的矿井里仍有金属反光，但支撑梁正在呻吟。",
+  "overflow": false,
+  "selected": "冒险挖深，获得 6 币，损失 3 生命",
+  "window": [
+    1618,
+    956
+  ],
+  "logs": [],
+  "checks": [
+    "真实点击选择/取消",
+    "键盘Enter选择风险项",
+    "确认后叙事结果与禁用状态",
+    "重新预览恢复",
+    "Escape重置"
+  ]
+}

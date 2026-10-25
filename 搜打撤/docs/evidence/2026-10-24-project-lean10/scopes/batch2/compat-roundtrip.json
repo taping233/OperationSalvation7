@@ -1,0 +1,438 @@
+{
+  "status": "passed",
+  "helperSha256": "89a9f2959f25ca1e6d984adbe45033695140c782bf8fbe37cc16667e752e5f32",
+  "files": [
+    {
+      "file": "game/css/ak-skin.css",
+      "equal": true,
+      "beforeSha256": "f71637e0d990a221e72a3adf566fe0dd1efad8610cc33b0a426e3b4121e6d76f",
+      "afterSha256": "d89db857d35eba669b916e6b14004fea809493ea43f0c4d9fb489097af537d96"
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "equal": true,
+      "beforeSha256": "ee304d0bb204793120bcc2e93f842755f1855d62b88be291664ea00fefcfac25",
+      "afterSha256": "0afe19291a6e13e9fcf321d3b2114cb3f2e8db7d0264f04529df22792a1f2367"
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "equal": true,
+      "beforeSha256": "637211cf89b02a64c24a77ef7adff8e4657ac8c62f0ef6328c750e121934142e",
+      "afterSha256": "1caeaf846cb914201dd7c2eea2c048349aca948fa48d06a7c825ebb709abe563"
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "equal": true,
+      "beforeSha256": "18b602c3ed6acd96d9f1b91905a382d7e4234d22a4cbadc922a8125ac4ddaf96",
+      "afterSha256": "8c07988e24f6b1e96e5ee211bc9cd8d6b59a35fef13154adeffd61152db9f636"
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "equal": true,
+      "beforeSha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b",
+      "afterSha256": "2b0c278f043aab3c23106fbffeecd149b143c7775ad8e4c4e74db0a1634e1819"
+    },
+    {
+      "file": "game/css/base.css",
+      "equal": true,
+      "beforeSha256": "62110160321bfaf1f82b077a8eab64263913c3fdfe2b1925b7d48edaae32be6b",
+      "afterSha256": "95165b446626d72647791e10acfa0eeb6e6073ad4915fae57918d7532d764713"
+    },
+    {
+      "file": "game/css/battle-equipment.css",
+      "equal": true,
+      "beforeSha256": "14a9e77ad81624de014445a82df9166f237f26bb5985ef1b2c1582c5fb3fec51",
+      "afterSha256": "26b8d8c36a3ef2d1571ee6d70c9780a2a15a4a456ba9177a27730b5b6b420d1e"
+    },
+    {
+      "file": "game/css/battle-hud-clarity.css",
+      "equal": true,
+      "beforeSha256": "afbd98ba0ea3b4dc95724020e31958d2cfe43ce834c3543587e9fdfcb05ef5dd",
+      "afterSha256": "200ff80fbf46151ba16c2856f3e851aa027740594be24d5b11398d290b23ee2b"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "equal": true,
+      "beforeSha256": "8d5d18fcebb2b3d5bca820e92d2ac152350a094d84bf3dc00c46784b17d47a9b",
+      "afterSha256": "bf2c9cdc37f535ca77db56e6eafc0f7aceb29f8197380a8ee4cf9305b415a1f4"
+    },
+    {
+      "file": "game/css/battle-potion-use.css",
+      "equal": true,
+      "beforeSha256": "9743ce0a9822422a7349be0aecb9e1ddb64ce491a1a5426734d8b94bcd3d992e",
+      "afterSha256": "d4a0992d9b2ed38a0c58e8e85791b15047ef84398616f9671899324c86af7cf9"
+    },
+    {
+      "file": "game/css/battle-scene-polish.css",
+      "equal": true,
+      "beforeSha256": "13dd201743c2a80a436542c5a1520c152daebd21ec9cf5b0766019ca0a1e130f",
+      "afterSha256": "93535301fd6d5ca74e990ed69a6f9026453b7219a6b90b6992ac067cdec2336d"
+    },
+    {
+      "file": "game/css/battle-status-chips.css",
+      "equal": true,
+      "beforeSha256": "dbaf57077517e416df3343ef30b6e038db30b7e1675ded069c117396517f2097",
+      "afterSha256": "9a3aa8b338d95072d6950a5e0f29b3f5fac723667434b3125da331f4d947523e"
+    },
+    {
+      "file": "game/css/battle.css",
+      "equal": true,
+      "beforeSha256": "674058c37d2a494b2229733e2d222571313a30761e62797bb53959aeeb2a7d35",
+      "afterSha256": "d000be0413799a815978cb5ee198d0aa0159c8b51e63ba7032694ba3dc8f5724"
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "equal": true,
+      "beforeSha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f",
+      "afterSha256": "89773a5c861f91befad6e66c54d272c66db2067a23f39ce88f5006acc4493a0e"
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "equal": true,
+      "beforeSha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25",
+      "afterSha256": "588a98eb76e941be6417afc5dfe2fbf6c936cbd5fbfa84cd0f758f50ddac5f84"
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "equal": true,
+      "beforeSha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62",
+      "afterSha256": "e0df25cc8d55e9116ad820597b9e67e7c31c91116dcb413445e0330006db6311"
+    },
+    {
+      "file": "game/css/card-state-motion.css",
+      "equal": true,
+      "beforeSha256": "1f5dd9bc8f20b86f052838c0724371a19e657ff90bfe7b24e59d79fa3c4707c4",
+      "afterSha256": "f483929d5d6085638711cb42e2cb35746f9a75f948af79391f33d47884947fe1"
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "equal": true,
+      "beforeSha256": "032ba33a9cb836febc92c74feb9d758b8d32b187d4947c840979f6b35da413dd",
+      "afterSha256": "c992a3f6e14e16e15c32ca97ac151bfa94ff7dfbe300c72b344c1e929c6269d8"
+    },
+    {
+      "file": "game/css/cards.css",
+      "equal": true,
+      "beforeSha256": "ab33f554311ee309411afb2a839b53ae5d99500032f3aa4cbfe41a2e25c92568",
+      "afterSha256": "18fe64d5b5b22a68305100be30c2b841141eb02cebb2acd99f53416f97f6c331"
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "equal": true,
+      "beforeSha256": "2604a44fbfdc0576e68f6c6a8e532570375132628a83c752fca07df18a41e663",
+      "afterSha256": "df0be7a2c484833673af9d8c149f1c7deed8326546221dde1f5d8fca871ce40f"
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "equal": true,
+      "beforeSha256": "f3b6d0a71c0304aff8eb5453e44e2b8c8e62604275f0c49b4519f06e74748030",
+      "afterSha256": "63fc69406e86b1317402f34480ef80c9adc114c8af1a4a4376ff2f11e94a83fe"
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "equal": true,
+      "beforeSha256": "f12f332c9572883fc0f2d626df966341d3596b9724e4ea9089e3364c70e814a8",
+      "afterSha256": "53e1d5731389fb9c2d14317497484f5b9145ea2c320c242deea719e6b9f3f600"
+    },
+    {
+      "file": "game/css/discovery-selection.css",
+      "equal": true,
+      "beforeSha256": "24ea6bfb69277b4204713cccf112c460149c9b93ee73e8fa3fbef719872e29c0",
+      "afterSha256": "545ee4112cb43330128320d1600a1cd4f4ea131ea599b3381a10609ea73f0cda"
+    },
+    {
+      "file": "game/css/event-choice-feedback.css",
+      "equal": true,
+      "beforeSha256": "ae02ece0bf5088b268687d71fb2e1cb7a2d28925714afee2afe80aaf8441db0e",
+      "afterSha256": "d1600173aab28423be0e13eb146b7d735fd564404a7669ec833323aaac5d5c6d"
+    },
+    {
+      "file": "game/css/event-dice.css",
+      "equal": true,
+      "beforeSha256": "41c29ad6927dd61ecc8c512b82333aa3684277ec8b79498ca5c9c2ff18c9a667",
+      "afterSha256": "cc95fa7411b542e66706fbd9a77fb65375b142de922aec5e314962cfa67e0d1e"
+    },
+    {
+      "file": "game/css/event-option-state.css",
+      "equal": true,
+      "beforeSha256": "e53ded4f4404c9e2c708fbfa22efde626bb5ea6b0262fd72735c71d1c65099e5",
+      "afterSha256": "bf062379e7b71bd3d816570a0aaae14949b6c8b31d2502ce00e1da98def19d0d"
+    },
+    {
+      "file": "game/css/event-recode-result.css",
+      "equal": true,
+      "beforeSha256": "4950073c2b3bb49676d03a2bb8b3c6f62db8cb18c29734aeb101f3f0ff3fe02d",
+      "afterSha256": "4e7f80828d38b7c7499a6f487859d6d831fdfcfb4892035e70aebd80670be82d"
+    },
+    {
+      "file": "game/css/event-signal-puzzle.css",
+      "equal": true,
+      "beforeSha256": "8eb3a4929dee4df620767d09d48f9e1028ec4c7b07961d3e0c355ddf2972eaf3",
+      "afterSha256": "fded3b908240cdbd785c36a9e04be1a7c6809a88c4111a7a515984d5c4cc57bd"
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "equal": true,
+      "beforeSha256": "429c614c09c15568f0711d4438fd9d95382b02ad8bd05a7b312f65d11ee354d5",
+      "afterSha256": "8e565fd7ad385328d45ce2c14934f2a5cf388a4365b34cd52d6c2f73557c158d"
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "equal": true,
+      "beforeSha256": "20e80f195b0e837f6bfec11c4d41c5510a2ab6ba7cdbdbc9aa3f7aecee6d212d",
+      "afterSha256": "db8cac5f7f3a1656ac66a93bafbce6bb988b49dd91237c8db7ac61a89aba0ac8"
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "equal": true,
+      "beforeSha256": "9e54ae5eda40ebe63325bf9f124470dc790dc7b0c37c6f377c325a384e4a948d",
+      "afterSha256": "539911f877804260954291110e7d619c35dfa733c43093d6c901ae8b1a66a3ac"
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "equal": true,
+      "beforeSha256": "38f5b918b282e5aab735598e655175d2424a7ef0d2988a88ccc111c5ea33ab2a",
+      "afterSha256": "b3f36cc9c553bbf7696dd4c686fd28ff48f3471daf57d1f84df4646ac92ca196"
+    },
+    {
+      "file": "game/css/expedition.css",
+      "equal": true,
+      "beforeSha256": "fbb47c3be1cfa4670fd9104d75a6943e2e9f3dfe1a6be7ca9a70941925707391",
+      "afterSha256": "2f21eafa4bf31e062fd97b8c36ff2c9c101a8bc872b3225499812e2a4938cd4e"
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "equal": true,
+      "beforeSha256": "c9e3a746099acbe27d305f9c45fad76a413a610f37e12cae1899f11918409ad6",
+      "afterSha256": "16e188c27b87086bd8d07e40dee70621b63ea8c476decad27b49bd843900258b"
+    },
+    {
+      "file": "game/css/feedback-1018.css",
+      "equal": true,
+      "beforeSha256": "16acd75b33f97aa6554e7162670bb5e9747c233c50427244c40699b3f023c218",
+      "afterSha256": "ab549bd03c0f01570bbd843322c405d9b7bbbd92e3c1572ea4209efad86fab23"
+    },
+    {
+      "file": "game/css/feedback-theme.css",
+      "equal": true,
+      "beforeSha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7",
+      "afterSha256": "d8780b51edacd1a608688857cade85c096e838fcf86dee8f884ccb53bbbf4238"
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "equal": true,
+      "beforeSha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2",
+      "afterSha256": "200f59aad2438c3c4a2e41cb1a9f31139b9f53ac44cbee7d63453bf497f4d828"
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "equal": true,
+      "beforeSha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7",
+      "afterSha256": "e2faf5af03621b8d78ebba0a25b569f6f9deef04be90ee16d6363b01378c1d70"
+    },
+    {
+      "file": "game/css/hub.css",
+      "equal": true,
+      "beforeSha256": "3b73dfc1cc8eac665bfb97028bc6b8bf3b40f9fb48b2aa434781f089a65654f0",
+      "afterSha256": "8c0dfc98db546db435c0aa18633a56759b962ff32564e6746c019c6087039fb9"
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "equal": true,
+      "beforeSha256": "0b243f07250634d1818ec0b31385304d6e9040c3a51ede7366fdd6f27c2d8cb3",
+      "afterSha256": "046bb4226dedf849732aa8503a07be08506d846bbd08a9a32c7de14f18a9f00b"
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "equal": true,
+      "beforeSha256": "0b937142ad367f92ce6a0fc7a9a82695c5eb74c84255da29a841abe5c16bbe78",
+      "afterSha256": "fe4b2062614bc9cddc39990806132c4a547c4d3c62d65a05ee0124b6f4db1087"
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "equal": true,
+      "beforeSha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78",
+      "afterSha256": "4d7bc494bdf51c80539ec246e6c83603247b1b5ccd77b5e0b2757a22edda1d7a"
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "equal": true,
+      "beforeSha256": "8df0e504b5d193505695336bce81ddb4947175a3276e634ffb6240818a8412e5",
+      "afterSha256": "facee275e50c4bc42880b4c828c9a27231c2a8837fdf0637e415789f273dc871"
+    },
+    {
+      "file": "game/css/map-floating-tools.css",
+      "equal": true,
+      "beforeSha256": "417d20aa0ff36be2cf2a78c8bd98ed99d26bfb38894e1a33ebadd3349cf998f7",
+      "afterSha256": "f75c094073b6dd8a55b9bef657c4590d30a3209c0e3fa695326409a9d2bda4f1"
+    },
+    {
+      "file": "game/css/map-node-status.css",
+      "equal": true,
+      "beforeSha256": "9efde1e426fb5479f58c966020317d88bf380b4f38b697a071c754f91730d160",
+      "afterSha256": "702b4b308c3f69b1c9cef190efa038c904cf44edbb02f1c36d07f050e9c2035e"
+    },
+    {
+      "file": "game/css/map-passage.css",
+      "equal": true,
+      "beforeSha256": "a80f33f37cc9ddb539bd3ba8a33aae47d94d48de9b260cad836844b7990c58dc",
+      "afterSha256": "fe2842e788eaad17fe53e4f1c78cba0221f89f12fb5ac246db41080bf210a478"
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "equal": true,
+      "beforeSha256": "b567acc42ef7101a26792826a6113d3f9c8b7254343bbc30dd5170eefb2ee3cb",
+      "afterSha256": "78883155d95796bae77cb4990f530765f6ea2d370679e3cf7104c542edf01171"
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "equal": true,
+      "beforeSha256": "0cac57143aed4e1642690ab235722cccd2ad9968391b02ea9ebc297308144fb8",
+      "afterSha256": "fc425ff7dfd98faa39831418677c2cf98ecdd907ea120f217cf72cf18dc9b8c2"
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "equal": true,
+      "beforeSha256": "97a857b3b8be03321d61ebdac52109de9ba65d95ec80fcd6ba75eea8cb9eeeb5",
+      "afterSha256": "f56b78a2325f8bb2f8ae26237c4a267f3645c0af149460b6f6f141f44d10a0ce"
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "equal": true,
+      "beforeSha256": "12b6aac85aeedd59723bb715b852f0b932ee056b7a5fb66c4fa059a2157c02ec",
+      "afterSha256": "5ef98944e1b7a75c5c9ecb28871ffaf1fea86c54b82c675b5c1728b8082f7cdb"
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "equal": true,
+      "beforeSha256": "eb7852e1e995bec623451043966681d93917b5cc58fea558c5a9ce2fed359885",
+      "afterSha256": "e47fdc341dc0323ff2f20f7bb445fffbaf271bc8e42ca40f140cfd6304c317ff"
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "equal": true,
+      "beforeSha256": "71615c17478171acae72aa0f184ebde0d0751af86f7f287cac4b1313fec9dcfd",
+      "afterSha256": "af9e4d9974bd739fb5d8ea5c84f656e8b9cc706b0c5edb480d7193b5f0a93eee"
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "equal": true,
+      "beforeSha256": "5f3b292e6d2cd3584351e13c6f0a5299f0efb55340437f9c3b37eb7ecc82623d",
+      "afterSha256": "c2f4d6cedf447062e8ac80de784c22987f595d133a9712079f457d0244c0b024"
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "equal": true,
+      "beforeSha256": "68ff398ca13450f90147fafababccead62426faba994eb20e45e5969fce85acb",
+      "afterSha256": "fb40f9c45eb6d1bbb1bd8811ffa302fa9138720f0e399124b3155b9fbd4c8f85"
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "equal": true,
+      "beforeSha256": "f994f918d02dde18af180fcbd831491750e716774af98b66ec56c980869dc844",
+      "afterSha256": "ff378ae35acb317b8dbb1f25e70396a474e26ad989b32d4d4fd3a263493516af"
+    },
+    {
+      "file": "game/css/preparation.css",
+      "equal": true,
+      "beforeSha256": "1a62800153caeec783ea23fe0ed7f2658527f44c668fec8ff9a7efdc67a378a5",
+      "afterSha256": "7aea8c25679a580c68257b6ddbdc6f012ddb2667e1770caa122620d1585bb0f1"
+    },
+    {
+      "file": "game/css/public-controls.css",
+      "equal": true,
+      "beforeSha256": "5f2d12fe1d78e0eac09240c9c8ab3409669c92a0b1dc4aef1abe2d647d8c64f5",
+      "afterSha256": "8ea9a6951e1de0b8b8fa7e67e0cefb625aec3a34e121d2bbd4dc91316b916143"
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "equal": true,
+      "beforeSha256": "e0bd41b271656dacd0a2f6ae1d11f5e4e9a98734a36130bec3d0089d6475c998",
+      "afterSha256": "abf5dac6b6c1a0e9ecdbdad31d89b401015453b9e5640259432434b9ccb92265"
+    },
+    {
+      "file": "game/css/rarity-reveal.css",
+      "equal": true,
+      "beforeSha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464",
+      "afterSha256": "4370218e76630c9ff48f893058e9843fc1225e721b14b5256e7881a7e251c6b0"
+    },
+    {
+      "file": "game/css/review-ui.css",
+      "equal": true,
+      "beforeSha256": "7090cd0c98e5ae0785a91e2365d42d414e0552dd58c4695bb56199ce6687b02a",
+      "afterSha256": "30cc8400654c5cb94e98912f7c87b73b45b48b87c24633fdb626c9f7fe6b2fbe"
+    },
+    {
+      "file": "game/css/room-footer.css",
+      "equal": true,
+      "beforeSha256": "5bf7ba2222c7c108609b9cc3ebad641fdad990dbb895ff3ebea695fa11ab2cf6",
+      "afterSha256": "19fd1842edaa7e348e8c246aeb9569b703cd5408e9e229397f80f2079ff1e160"
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "equal": true,
+      "beforeSha256": "e713351b78b84cd49226150d5703064a05ae53fdd7a5ef64b6c2907779549086",
+      "afterSha256": "01bc6f688eab809fcc6e0e21194141fb612eca011364e6fcd1098b4f300000fe"
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "equal": true,
+      "beforeSha256": "5feda9f2aef191f3355e3871be367169b3c9a348ff0710faa650ed2e28a3f425",
+      "afterSha256": "f5b28b74a80d96865fe3eb8591171d748b7466bb35ef8739295d8719af9c315c"
+    },
+    {
+      "file": "game/css/settings-audio.css",
+      "equal": true,
+      "beforeSha256": "eafaeb3129261709e33c88e1543e3e660f6b40d16f4f310faa7ec5924c414f9c",
+      "afterSha256": "57c2c3a75bb4c1ae1aeac8714985359d533672501acca874fe3685a2b2066129"
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "equal": true,
+      "beforeSha256": "dca5290aaa40c9bc84534c161d9b08caea31780fb5495901cff4e83c4cd5ef37",
+      "afterSha256": "f2569b427f864d880c339d5f052eed070f2c446d20ee405f38e340cd075daaeb"
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "equal": true,
+      "beforeSha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa",
+      "afterSha256": "99dbfadb98fa3ecbe00e3fb6a89959d4dc41133bb802693f4b66f44e0630f685"
+    },
+    {
+      "file": "game/css/startup-transition.css",
+      "equal": true,
+      "beforeSha256": "77c728d7b1141be2907cd8612888d74f11dd010c75db6ae40929a8a90882f8ac",
+      "afterSha256": "b105692bb95c01bfe686d25ffc92db165229bc3146b03fca436d11f95b9c42a4"
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "equal": true,
+      "beforeSha256": "9ebd415d85a1c5d6ff1216abfde3c306ee4dd31c350bf5fd1a00f676aba4bbed",
+      "afterSha256": "d18623aabaa84c004e12970948631a967992493826466a51e5fe03c6fb69490b"
+    },
+    {
+      "file": "game/css/transition-handoff.css",
+      "equal": true,
+      "beforeSha256": "7c04d98f82516d34ac07b8f8b40599ba0928fe003fe8bb698b59fc25e7a49dff",
+      "afterSha256": "7fb81f0644466ac552eb366f22c112a9e08cb6cf606aa5776dce36b364daeb1f"
+    },
+    {
+      "file": "game/css/transition-heading.css",
+      "equal": true,
+      "beforeSha256": "b8f75fc597bf073db59c2366c369b557e93915024e94406080c09d2562aad52d",
+      "afterSha256": "dc39ba71f7f98745d43ddd419fba4374348448db105160ec35eff9eab67bc738"
+    },
+    {
+      "file": "game/css/transition-illustrations.css",
+      "equal": true,
+      "beforeSha256": "4ca55c66d407fb86dcabe673cc58136a538d9216cc52e802a2524909561c7f99",
+      "afterSha256": "7468547d4918d002a37f490df330778bb1acc1819c4e6df26a4bda65011988cb"
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "equal": true,
+      "beforeSha256": "6673dc6b3c2d25066a87cbc797e5e22e2242105d2fb503b76d7e9843cccc9050",
+      "afterSha256": "ef2e40dc7cdc87e9d63692b8d2ca97ac9bbbef14eabbb14e7ccd8f9abbbbaa97"
+    }
+  ]
+}

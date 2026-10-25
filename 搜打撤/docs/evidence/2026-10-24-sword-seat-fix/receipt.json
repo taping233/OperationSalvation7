@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt7-swordimmortal",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a16e65-684d-7800-845e-5943cd826978\\exec-493e4569-c195-4529-b7c4-ee14261897d8.png",
+      "raw": {
+        "path": ".tmp/imagegen/2026-10-24-sword-seat-fix/cards-martial-tt7-swordimmortal-source.png",
+        "bytes": 2063092,
+        "sha256": "0d22e5721e476216d4f3ce8c3cfb8ab1b76545e5a8e5688ab4f261d2a72c808a"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/2026-10-24-sword-seat-fix/cards-martial-tt7-swordimmortal-full-before.webp",
+          "bytes": 171396,
+          "sha256": "855ddd9b677b0eccccfd48d10f0c28564a680f082b1c175fc7b4aabfc41eb4ae"
+        },
+        {
+          "path": ".tmp/imagegen/2026-10-24-sword-seat-fix/cards-martial-tt7-swordimmortal-thumb-before.webp",
+          "bytes": 27328,
+          "sha256": "a6d57aa268669d1eb6f79e8c52430673bec219633ab252886445c6b2cf414c54"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 173996,
+          "sha256": "1fa18a81cfcae4ead5197f9831a1890fc052cb96c55027750f1c80b26066c2e1",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/martial-tt7-swordimmortal.webp",
+          "bytes": 28342,
+          "sha256": "5e1bf4eda0ccfded3824b981f4b3cee31759166aa98e774812fb6e4a8149ba55",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "career-final-20261023",
+      "revision_after": "sword-seat-fix-20261024",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 171396,
+            "sha256": "855ddd9b677b0eccccfd48d10f0c28564a680f082b1c175fc7b4aabfc41eb4ae",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          },
+          "after": {
+            "path": "cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 173996,
+            "sha256": "1fa18a81cfcae4ead5197f9831a1890fc052cb96c55027750f1c80b26066c2e1",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-sword-seat-fix/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 27328,
+            "sha256": "a6d57aa268669d1eb6f79e8c52430673bec219633ab252886445c6b2cf414c54",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-23-class-card-redraw/install-16-20261023/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+            "ext": "webp",
+            "bytes": 28342,
+            "sha256": "5e1bf4eda0ccfded3824b981f4b3cee31759166aa98e774812fb6e4a8149ba55",
+            "license": "项目自有（AI 生成）",
+            "source": "docs/evidence/2026-10-24-sword-seat-fix/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1678,
+  "manifest_count_after": 1678
+}

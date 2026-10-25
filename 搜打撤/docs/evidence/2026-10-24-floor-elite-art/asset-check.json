@@ -1,0 +1,177 @@
+{
+  "scope": "selected",
+  "ok": true,
+  "selected": [
+    "portraits/enemies/rager.webp",
+    "portraits/cut/enemies/rager.webp",
+    "thumbs/portraits/enemies/rager.webp",
+    "portraits/enemies/deserter.webp",
+    "portraits/cut/enemies/deserter.webp",
+    "thumbs/portraits/enemies/deserter.webp",
+    "portraits/enemies/greedy_imp.webp",
+    "portraits/cut/enemies/greedy_imp.webp",
+    "thumbs/portraits/enemies/greedy_imp.webp",
+    "portraits/enemies/swaggerer.webp",
+    "portraits/cut/enemies/swaggerer.webp",
+    "thumbs/portraits/enemies/swaggerer.webp",
+    "portraits/enemies/tin_mute.webp",
+    "portraits/cut/enemies/tin_mute.webp",
+    "thumbs/portraits/enemies/tin_mute.webp",
+    "portraits/enemies/heavy_hammer.webp",
+    "portraits/cut/enemies/heavy_hammer.webp",
+    "thumbs/portraits/enemies/heavy_hammer.webp",
+    "portraits/enemies/cultist.webp",
+    "portraits/cut/enemies/cultist.webp",
+    "thumbs/portraits/enemies/cultist.webp",
+    "portraits/enemies/fake_apothecary.webp",
+    "portraits/cut/enemies/fake_apothecary.webp",
+    "thumbs/portraits/enemies/fake_apothecary.webp",
+    "portraits/enemies/camo_sniper.webp",
+    "portraits/cut/enemies/camo_sniper.webp",
+    "thumbs/portraits/enemies/camo_sniper.webp"
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "path": "portraits/cut/enemies/camo_sniper.webp",
+      "bytes": 52026,
+      "sha256": "3ddce2f923b19137ea4e8c96168cff16f46068527b9846b2b9dda960a142761f"
+    },
+    {
+      "path": "portraits/cut/enemies/cultist.webp",
+      "bytes": 37362,
+      "sha256": "8ea3fa5996501efe5aa77cfd0214565d7694b78d68bac273e7d4c6322a5e63e2"
+    },
+    {
+      "path": "portraits/cut/enemies/deserter.webp",
+      "bytes": 71922,
+      "sha256": "1d929f09a7f8155ceb6112e3e7e038559bbc6e9b84ef9e6e6c31f83c903e11ae"
+    },
+    {
+      "path": "portraits/cut/enemies/fake_apothecary.webp",
+      "bytes": 51710,
+      "sha256": "a3d1d3b96e28af37d82a31a3f79f384025805618a5ab41c14dffbdca93fb27a7"
+    },
+    {
+      "path": "portraits/cut/enemies/greedy_imp.webp",
+      "bytes": 74160,
+      "sha256": "eabbe90690111acca21d3fdabf63e96760f3f17eb5b9708a9e061f39d39460aa"
+    },
+    {
+      "path": "portraits/cut/enemies/heavy_hammer.webp",
+      "bytes": 97254,
+      "sha256": "90e3859111c3c9c015107d88dcff975ab1fceee7098979fa16935ddd6a125db7"
+    },
+    {
+      "path": "portraits/cut/enemies/rager.webp",
+      "bytes": 64696,
+      "sha256": "ae35bbec46717d448e85b0e113c48ff75e21d1e0d23ffbeb39146a21730b7999"
+    },
+    {
+      "path": "portraits/cut/enemies/swaggerer.webp",
+      "bytes": 72334,
+      "sha256": "e8bad8479cbf811d96ddcc2d815dae3404514911fb9c7a9026a5cb9ac3fab672"
+    },
+    {
+      "path": "portraits/cut/enemies/tin_mute.webp",
+      "bytes": 85138,
+      "sha256": "29db5791306cc22d0399cce90b3cc22df28e4be2e8b4636b5ed71ca88a94268a"
+    },
+    {
+      "path": "portraits/enemies/camo_sniper.webp",
+      "bytes": 162276,
+      "sha256": "ecdac04fc416c24e416a25ea2bcbaa7291e7f8fd62210870b3085492faa3e46f"
+    },
+    {
+      "path": "portraits/enemies/cultist.webp",
+      "bytes": 115244,
+      "sha256": "e9a74067f0f3c931dfed05696d804677037701d89c1efaaa07f1e31d165935c9"
+    },
+    {
+      "path": "portraits/enemies/deserter.webp",
+      "bytes": 249986,
+      "sha256": "c3069dacc4b1421cc9b16e6035cc71f6f44f646a08d0939e6796a9e2fc554697"
+    },
+    {
+      "path": "portraits/enemies/fake_apothecary.webp",
+      "bytes": 165218,
+      "sha256": "854dae1a0455c3d62f7cbd6dbbde81b3b5fa5d3ac0990ffc4f9c769338e85b07"
+    },
+    {
+      "path": "portraits/enemies/greedy_imp.webp",
+      "bytes": 224652,
+      "sha256": "5bb13d0ff7cc285ca45b38539e343a786562a0f4d49cac34917396e6d9f109d1"
+    },
+    {
+      "path": "portraits/enemies/heavy_hammer.webp",
+      "bytes": 307692,
+      "sha256": "da9e7d99ee47da90f86e2573b9d4ba41737534689834c9f10113b038ae32ab3a"
+    },
+    {
+      "path": "portraits/enemies/rager.webp",
+      "bytes": 212850,
+      "sha256": "aa4431ea0b89e7041a8f341a5cc703cd817dc4d34f0f1b145d4dc6b24cf4ad9a"
+    },
+    {
+      "path": "portraits/enemies/swaggerer.webp",
+      "bytes": 225596,
+      "sha256": "2062f70ca59e86135e4e0a3d6821cc5f655e34b7672c411c434a9e5f42d6650e"
+    },
+    {
+      "path": "portraits/enemies/tin_mute.webp",
+      "bytes": 283762,
+      "sha256": "094d8d3bd44a62a4e4e53a5d5896a7dfe7dfc307956b2208fdbf060888bf6e73"
+    },
+    {
+      "path": "thumbs/portraits/enemies/camo_sniper.webp",
+      "bytes": 42662,
+      "sha256": "adcda1d7790898e1903502d6891bc42505fcb7e3690a72157fc37f98979be975"
+    },
+    {
+      "path": "thumbs/portraits/enemies/cultist.webp",
+      "bytes": 31008,
+      "sha256": "a2eb489fb23943e8e5815fbabd625ee5527faa0cbbcdca4680ccf6965eee51c7"
+    },
+    {
+      "path": "thumbs/portraits/enemies/deserter.webp",
+      "bytes": 57800,
+      "sha256": "7ad7b207a81221a23f561980a9ca2e9368bfa58a2df3aa3713895759f16a1460"
+    },
+    {
+      "path": "thumbs/portraits/enemies/fake_apothecary.webp",
+      "bytes": 42578,
+      "sha256": "6e4de098efb6d67bbfddee7aa75dc87f5254314ec8f680edd6f6d2dd5e6e6235"
+    },
+    {
+      "path": "thumbs/portraits/enemies/greedy_imp.webp",
+      "bytes": 61030,
+      "sha256": "47d7ae870de93f41126eff237ae9a35ed2fe26d705d672db3b2d195e014639c2"
+    },
+    {
+      "path": "thumbs/portraits/enemies/heavy_hammer.webp",
+      "bytes": 77198,
+      "sha256": "16c71e601b16e07edb43c36e113f9285d496d426b412f6000d9ff3ed72510dc4"
+    },
+    {
+      "path": "thumbs/portraits/enemies/rager.webp",
+      "bytes": 52660,
+      "sha256": "0a8f50d42cf465564a52d3f9f19ceb858d27da73136d00f71e3de682d3ccc26f"
+    },
+    {
+      "path": "thumbs/portraits/enemies/swaggerer.webp",
+      "bytes": 58904,
+      "sha256": "bb427c2f2fa1c364be6e3d651e098c4cc5155fdebda139504fd24b39dd593839"
+    },
+    {
+      "path": "thumbs/portraits/enemies/tin_mute.webp",
+      "bytes": 71230,
+      "sha256": "a220c010025d4a0d1df07c2c6109d9784c98f408191bccf7d808a2de208faabf"
+    }
+  ],
+  "global": {
+    "ok": true,
+    "errorCount": 0,
+    "historicalWarningCount": 570,
+    "manifestIssues": []
+  }
+}

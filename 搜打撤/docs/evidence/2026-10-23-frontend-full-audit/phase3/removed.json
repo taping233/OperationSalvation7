@@ -1,0 +1,969 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "changes": [
+      {
+        "line": 68,
+        "selector": ".ak-enter",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 69,
+        "selector": ".ak-enter > *",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 70,
+        "selector": ".ak-enter > *:nth-child(2)",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 70,
+        "selector": ".ak-enter > *:nth-child(3)",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 71,
+        "selector": ".ak-enter > *:nth-child(4)",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 71,
+        "selector": ".ak-enter > *:nth-child(5)",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "33bffc2f3cc066247b03b62d6c47a54efffc7fd0d7d7f4761a81be6ee005f25c",
+    "afterSha256": "46fbcb09643180213148e9a53e45bf4ffa83f584896a3a1a920ee1ac0faf605c"
+  },
+  {
+    "file": "game/css/base.css",
+    "changes": [
+      {
+        "line": 310,
+        "selector": ".bag-head-info",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 311,
+        "selector": ".bag-head-info h2",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 312,
+        "selector": ".bag-chips",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 313,
+        "selector": ".bag-close",
+        "declarations": 13,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 318,
+        "selector": ".bag-close:hover",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 319,
+        "selector": ".bag-close:active",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 320,
+        "selector": ".bag-layout",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 322,
+        "selector": ".bag-side-card",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 324,
+        "selector": ".bag-side-card .hint",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 325,
+        "selector": ".bag-side-card .pk-list",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 327,
+        "selector": ".bag-side-card .bag-grid.safe-grid",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "c6d3f9dfadb88c44c79e4f90b2479f3825ec113c3d8e278ec6b84fa52559268c",
+    "afterSha256": "735432dafba7215f9c6d743de4b6e0f46a31c52bb4b776dcca47efe384219ad1"
+  },
+  {
+    "file": "game/css/battle-decision.css",
+    "changes": [
+      {
+        "line": 45,
+        "selector": "body #overlay .battle-decision.battle-decision-unified :is(.battle-decision-source,.battle-decision-guidance,.battle-pile-context,.battle-pile-note)",
+        "replacement": "body #overlay .battle-decision.battle-decision-unified :is(.battle-decision-source,.battle-decision-guidance)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 48,
+        "selector": "body #overlay .battle-decision.battle-decision-unified :is(.battle-task-summary,.battle-pile-summary)",
+        "replacement": "body #overlay .battle-decision.battle-decision-unified :is(.battle-task-summary)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 49,
+        "selector": "body #overlay .battle-decision.battle-decision-unified :is(.battle-task-progress,.battle-pile-types)",
+        "replacement": "body #overlay .battle-decision.battle-decision-unified :is(.battle-task-progress)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 50,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-pile-types",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 51,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-pile-context",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 52,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-pile-layout",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 66,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-pile-note",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 67,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-decision-actions .battle-pile-note",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 68,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-decision-empty",
+        "declarations": 8,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 69,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-decision-empty b",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 111,
+        "selector": "body #overlay .battle-decision.battle-decision-unified[data-decision-kind=\"discover\"] .battle-discover-rules",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 119,
+        "selector": "body #overlay .battle-decision.battle-decision-unified .battle-pile-layout",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "3e8e5d3be9e3669cab82be1106fa3fa1a12ef221a7c85fa513872c2343ded09e",
+    "afterSha256": "da089cbe783b893af732e6b9d03e3f718f035ab62111c3fe1c5f514b17d742ca"
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "changes": [
+      {
+        "line": 56,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-meta",
+        "declarations": 9,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 60,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-count",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 80,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-card-caption",
+        "declarations": 7,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 83,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-index",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 84,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-pick-mark",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 85,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-equipment-note",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 86,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .battle-discover-rules",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 112,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-discover-card-notes",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 113,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-discover-equipment-note",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 115,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind=\"discover\"] .battle-discover-rules",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 116,
+        "selector": "body #overlay .battle-discover-rules p",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "3928418a32359ba82c20390369028c4fe8ebb652db8260d42c52b50f93fd1dad",
+    "afterSha256": "dd5d291924b8b045d1309861945a644bae4fb36b4d62f2c387cff0e384ded75a"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "changes": [
+      {
+        "line": 63,
+        "selector": "body #overlay .battle-decision .battle-pile-layout",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 64,
+        "selector": "body #overlay .battle-decision .battle-pile-layout .bt-gy-list",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 89,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"pile\"] .battle-pile-layout",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 119,
+        "selector": "body #overlay .battle-decision .battle-pile-layout",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 121,
+        "selector": "body #overlay .battle-decision[data-decision-kind=\"pile\"] .battle-pile-layout",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "1122518fbb52e695b6719106b155756780f5b7cb767fdb4e00ea4e9c334ef580",
+    "afterSha256": "4357d60288fa58fa1e70587d11be2d4c6e8a11b422725932c974e6c119a1b19b"
+  },
+  {
+    "file": "game/css/battle-secondary-overlay.css",
+    "changes": [
+      {
+        "line": 46,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-decision-source,.battle-decision-guidance,.battle-pile-context,.battle-pile-note)",
+        "replacement": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-decision-source,.battle-decision-guidance)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 57,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-discover-meta,.battle-discover-rules)",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 62,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-layout",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 68,
+        "selector": "body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-empty",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "7d73cb2c4d14dca4fe66c0574ed504ea246ed75a73bae3d89e20072fef847d02",
+    "afterSha256": "8bf1b6e15c566c801089ad5d94e95a6b6fe249c2ab9c9563481838e00cc191d2"
+  },
+  {
+    "file": "game/css/battle-stage.css",
+    "changes": [
+      {
+        "line": 143,
+        "selector": "#overlay .battle-stage.sts .bt-card:has(.bt-infchip) .bt-cursechips",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 144,
+        "selector": "#overlay .battle-stage.sts .bt-cursechips",
+        "declarations": 9,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 145,
+        "selector": "#overlay .battle-stage.sts .bt-cursechip-i",
+        "declarations": 4,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "f3aa16bbcf33bf1cbe75594ade9b2c77932980b2a638c26201082dd2b2fb6e82",
+    "afterSha256": "35e713f6faadcf69ce62f630106a93f393a51398729fd0d24e09ef77fc4f8fdf"
+  },
+  {
+    "file": "game/css/battle.css",
+    "changes": [
+      {
+        "line": 5,
+        "selector": ".bt-foes",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 20,
+        "selector": ".bt-fportrait",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 22,
+        "selector": ".bt-finfo",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 23,
+        "selector": ".bt-finfo b",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 25,
+        "selector": ".bt-deadmark",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 36,
+        "selector": ".bt-foe.aegis .bt-fportrait",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 37,
+        "selector": ".bt-ops-col",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 39,
+        "selector": ".bt-ops-col .ov-btn",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 211,
+        "selector": ".bt-cursechips",
+        "declarations": 10,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 213,
+        "selector": ".bt-cursechips .bt-cursechip-i",
+        "declarations": 12,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 217,
+        "selector": ".bt-cursechips .bt-cursechip-i img",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 218,
+        "selector": ".bt-cursechips.empty .bt-cursechip-i",
+        "declarations": 3,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "06b6c9381b79b3b0c2599654cd028802ad6258fa664ca109cbfc0fb6dda87e7a",
+    "afterSha256": "4864b787aa938499608e170aeb210cdb6f59896687a2f3032a41aa9b9a08f919"
+  },
+  {
+    "file": "game/css/cover-details.css",
+    "changes": [
+      {
+        "line": 19,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-chips",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 22,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-close",
+        "declarations": 8,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 26,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-layout",
+        "declarations": 8,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 32,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-side-card",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 95,
+        "selector": ":where(body[data-ui-cover-context=\"ordinary\"]) #overlay .bag-view .bag-layout",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "7ba9b532c2b8b97b1ee0de18ab55fbc1c6d6bc1dc63c52f3d0e6ef5547647291",
+    "afterSha256": "52acbface99d829bbeccb75e956c87b6a01ef04b221488fb0160cf888f2a1f7b"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "changes": [
+      {
+        "line": 178,
+        "selector": "#overlay .hub-page .hub-card, #overlay .hub-page .bag-side-card, #overlay .hub-page .base-bar",
+        "replacement": "#overlay .hub-page .hub-card, #overlay .hub-page .base-bar",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 182,
+        "selector": "#overlay .bag-layout",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 198,
+        "selector": "#overlay .hub-back, #overlay .bag-close, #overlay .pg-back",
+        "replacement": "#overlay .hub-back, #overlay .pg-back",
+        "kind": "dead-branch"
+      }
+    ],
+    "beforeSha256": "cc048038c5c15d095dbf92d144fbd1a2967a67e8c16ba57438c65e495d0e5984",
+    "afterSha256": "b0c09fd01e2a4e6894f698353bae09f614fda71edfe9ef2783b0fc30920ab902"
+  },
+  {
+    "file": "game/css/expedition.css",
+    "changes": [
+      {
+        "line": 61,
+        "selector": "#title .title-kicker",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "4b74c5d65ace598eaccc97804120ca3fbb9f5aa3bbf00f2ddacc01ed0af011dd",
+    "afterSha256": "fbb072dcae23c07a8164b9e2095b1fc945884cb49480365d640fbf571ff201cc"
+  },
+  {
+    "file": "game/css/hub.css",
+    "changes": [
+      {
+        "line": 207,
+        "selector": ".cls-hub-art img.art-figure, .cls-pick-art img.art-figure, .bt-fportrait img.art-figure",
+        "replacement": ".cls-hub-art img.art-figure, .cls-pick-art img.art-figure",
+        "kind": "dead-branch"
+      }
+    ],
+    "beforeSha256": "66f1ff91027fffbdef71d844b390e485238338a0c50e335b687b5443ba69eeb4",
+    "afterSha256": "0ac985425c30b82bfa9662243dcf05ee548b090838dbf41ae6f1bbc985dd941e"
+  },
+  {
+    "file": "game/css/ordinary-polish.css",
+    "changes": [
+      {
+        "line": 26,
+        "selector": "body[data-ui-cover-context='ordinary'] #overlay .card.bag-page .bag-view .bag-side .bag-side-card",
+        "declarations": 3,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "e0353d641a6e7a9b108d94a284b6c9e9704b986238f46d507655ea132d8f58e6",
+    "afterSha256": "48aa008f533478bc5a1d74a2c6684d9834ca7921a93b031aec8841466345f021"
+  },
+  {
+    "file": "game/css/page-datapage.css",
+    "changes": [
+      {
+        "line": 13,
+        "selector": "#overlay .pg.data-tuned .data-pg-head h2::before",
+        "kind": "suppressed-pseudo-rule",
+        "declarations": 8
+      },
+      {
+        "line": 21,
+        "selector": "#overlay .pg.data-tuned .data-pg-head .section-kicker",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 55,
+        "selector": "#overlay .pg.data-tuned .data-pg-head .section-kicker",
+        "declarations": 1,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "2034eb7d82dea276807f318359502361bc28767cc94103f121b6c6bfe464df3a",
+    "afterSha256": "21cc5a744245759ed3c174e140db1621515bbc41e3c8bd4830b2de273928239b"
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "changes": [
+      {
+        "line": 168,
+        "selector": "#overlay .card.bag-page .bag-chips .fc-chip",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 174,
+        "selector": "#overlay .card.bag-page .bag-chips .fc-chip b",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 178,
+        "selector": "#overlay .card.bag-page .bag-close",
+        "declarations": 12,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 187,
+        "selector": "#overlay .card.bag-page .bag-close:hover",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 193,
+        "selector": "#overlay .card.bag-page .bag-close:active",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 268,
+        "selector": "#overlay .card.bag-page .bag-side-card",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 274,
+        "selector": "#overlay .card.bag-page .bag-side-card::before",
+        "declarations": 9,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 295,
+        "selector": "#overlay .card.bag-page .bag-close:focus-visible,\n#overlay .card.bag-page .bag-sort .mini-btn:focus-visible,\n#overlay .card.bag-page .bag-head .help-btn:focus-visible",
+        "replacement": "\n#overlay .card.bag-page .bag-sort .mini-btn:focus-visible,\n#overlay .card.bag-page .bag-head .help-btn:focus-visible",
+        "kind": "dead-branch"
+      }
+    ],
+    "beforeSha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb",
+    "afterSha256": "9b7cf42a2881bc982fc854504584b56470fd0bbadb7f3e205132328195b640c6"
+  },
+  {
+    "file": "game/css/public-controls.css",
+    "changes": [
+      {
+        "line": 10,
+        "selector": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:hover, :focus-visible):not(:disabled):not([aria-disabled=\"true\"])",
+        "replacement": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:hover, :focus-visible):not(:disabled):not([aria-disabled=\"true\"])",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 14,
+        "selector": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):active:not(:disabled):not([aria-disabled=\"true\"])",
+        "replacement": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):active:not(:disabled):not([aria-disabled=\"true\"])",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 18,
+        "selector": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:disabled, [aria-disabled=\"true\"])",
+        "replacement": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn):not(:is(.battle-stage *, .bt-hand-detail-surface *, .battle-decision *)):is(:disabled, [aria-disabled=\"true\"])",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 29,
+        "selector": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close)",
+        "replacement": "body :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 33,
+        "selector": "body.reduce-motion :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn, .bag-close)",
+        "replacement": "body.reduce-motion :is(.ov-btn, .hs-btn, .menu-btn, .mini-btn, .help-btn, .ui-control, .ui-control-compact, .ui-control-icon, #bagBtn)",
+        "kind": "dead-branch"
+      }
+    ],
+    "beforeSha256": "710f79fa7a0fcd55c120a107c91d21a2b132fd8abaf264b7e90c1e1c32adc340",
+    "afterSha256": "4ce72b9c521a2805b2bf994776311ec9a2cd7583d9a8d0f668f6bbe4e42bd210"
+  },
+  {
+    "file": "game/css/scenes.css",
+    "changes": [
+      {
+        "line": 143,
+        "selector": ".bt-self .bt-fportrait",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 148,
+        "selector": ".bt-foe.bt-boss .bt-fportrait",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 150,
+        "selector": ".bt-foe.bt-boss .bt-finfo b",
+        "declarations": 2,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "73f3fff72ac854241af55a9a21a3694a6a7f97ccb9f8684c5c48862341eb8bd9",
+    "afterSha256": "bb87e6d5fd99ca87fb597859a226845829d682fd7651325768504f40c1f175ad"
+  },
+  {
+    "file": "game/css/selection-state-motion.css",
+    "changes": [
+      {
+        "line": 22,
+        "selector": "body #overlay [data-selection-motion=\"settings\"] > .settings-tab small",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 25,
+        "selector": "body #overlay [data-selection-motion=\"settings\"] > .settings-tab[aria-selected=\"true\"] small",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 28,
+        "selector": "body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),\nbody #overlay [data-selection-motion] > .settings-tab small",
+        "replacement": "body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 34,
+        "selector": "body.reduce-motion #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),\nbody.reduce-motion #overlay [data-selection-motion] > .settings-tab small",
+        "replacement": "body.reduce-motion #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab)",
+        "kind": "dead-branch"
+      },
+      {
+        "line": 37,
+        "selector": "body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab),\n  body #overlay [data-selection-motion] > .settings-tab small",
+        "replacement": "body #overlay [data-selection-motion] > :is(.bag-rz,.bag-pill,.settings-tab)",
+        "kind": "dead-branch"
+      }
+    ],
+    "beforeSha256": "0a13e0c5a3050aaa0ea3e62622f61b8c111c8963cc709130d2a2e39a6fb66c99",
+    "afterSha256": "ec80b92f04ba733a3a51ecc392c30755730a24297f4e823b0b0d45a0677fb39b"
+  },
+  {
+    "file": "game/css/settings-navigation.css",
+    "changes": [
+      {
+        "line": 26,
+        "selector": "#overlay .pg.settings-page.settings-tabbed[data-settings-category=\"data\"],\r\n#overlay .settings-tabbed #settings-tab-data",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 28,
+        "selector": "#overlay .pg.settings-page.settings-tabbed[data-settings-category=\"about\"],\r\n#overlay .settings-tabbed #settings-tab-about",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 62,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "position: absolute",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 62,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "left: 0",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 62,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "top: 0",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 62,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "z-index: 1",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 62,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "pointer-events: none",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 63,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "width: 3px",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 63,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "height: var(--settings-marker-height, 74px)",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 64,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "transform: translateY(var(--settings-marker-top, 28px))",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 65,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "background: linear-gradient(180deg, rgba(var(--settings-tint),1), rgba(var(--settings-tint),.55))",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 66,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "box-shadow: 2px 0 12px rgba(var(--settings-tint),.16)",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 67,
+        "selector": "#overlay .settings-tabbed .settings-nav::before",
+        "declaration": "transition: transform .32s var(--settings-ease), height .32s var(--settings-ease)",
+        "kind": "suppressed-pseudo"
+      },
+      {
+        "line": 78,
+        "selector": "#overlay .settings-tabbed .settings-tab small",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 94,
+        "selector": "#overlay .settings-tabbed .settings-tab[aria-selected=\"true\"] small",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 113,
+        "selector": "#overlay .settings-tabbed .settings-panel-head > small",
+        "declarations": 3,
+        "kind": "dead-dom"
+      }
+    ],
+    "beforeSha256": "64a16170ee00c4a27922546c53d77452f5b037fa68addde9aee99bfec1af7668",
+    "afterSha256": "f9bcdf65b0771ff103462864892cc4f9f2fd4e37e45ae23856eaeeae75cfc1bf"
+  },
+  {
+    "file": "game/css/winter.css",
+    "changes": [
+      {
+        "line": 4,
+        "selector": ".title-kicker",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 4,
+        "selector": ".cn-title",
+        "declarations": 8,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 4,
+        "selector": ".en-subtitle",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 37,
+        "selector": ".title-suggest",
+        "declarations": 12,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 38,
+        "selector": ".title-suggest:hover",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 229,
+        "selector": ".cn-title em.art-cn",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 650,
+        "selector": ".manual-lead",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 651,
+        "selector": ".manual-lead::before,.manual-lead::after",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 652,
+        "selector": ".manual-grid",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 653,
+        "selector": ".manual-step",
+        "declarations": 9,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 654,
+        "selector": ".manual-step:hover",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 655,
+        "selector": ".manual-index",
+        "declarations": 3,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 656,
+        "selector": ".manual-step h3",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 657,
+        "selector": ".manual-step h3::after",
+        "declarations": 6,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 658,
+        "selector": ".manual-step p",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 659,
+        "selector": ".manual-step p b",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 660,
+        "selector": ".manual-controls",
+        "declarations": 9,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 661,
+        "selector": ".manual-control-key",
+        "declarations": 10,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 662,
+        "selector": ".manual-controls>span:not(.manual-control-key)",
+        "declarations": 2,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 663,
+        "selector": ".manual-note",
+        "declarations": 5,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 710,
+        "selector": "#overlay .bag-view .bag-side-card",
+        "declarations": 4,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 884,
+        "selector": ".title-kicker.kick-blink",
+        "declarations": 1,
+        "kind": "dead-dom"
+      },
+      {
+        "line": 885,
+        "kind": "unused-keyframes",
+        "name": "kickBlink"
+      }
+    ],
+    "beforeSha256": "d75fd8d7dd450699b49123c2ce45da7e8124dd8db5551f305d020e8208b73d21",
+    "afterSha256": "b1ae2d169ad8aed79d1e4d1737d27abd848e735ac6c7e06150e1e8c34e7805aa"
+  }
+]
